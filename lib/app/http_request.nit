@@ -30,11 +30,12 @@ end
 
 # Thread executing an HTTP request asynchronously
 #
-# The request is sent to `rest_server_uri / rest_action`.
+# The request is sent to `uri`.
+# Either `uri`, or `uri_root` and `uri_tail`, must be set in subclasses.
 #
 # If `deserialize_json`, the default behavior, the response is deserialized from JSON
 #
-# If `delay > 0.0`, sending the reqest is delayed by the given `delay` in seconds.
+# If `delay > 0.0`, sending the request is delayed by the given `delay` in seconds.
 # It can be used to delay resending a request on error.
 #
 # Four callback methods act on the main/UI thread,
@@ -43,14 +44,17 @@ end
 # * `on_load`
 # * `on_fail`
 # * `after`
-class AsyncHttpRequest
+abstract class AsyncHttpRequest
 	super Thread
 
-	# Root URI of the remote server
-	fun rest_server_uri: String is abstract
+	# URI target of this request, by default it is composed of `uri_root / uri_tail`
+	fun uri: Text do return uri_root / uri_tail
 
-	# Action, or path, for this request within the `rest_server_uri`
-	fun rest_action: String is abstract
+	# Root URI of the remote server, usually the scheme and remote host
+	fun uri_root: String is abstract
+
+	# Right part of the URI, after `uri_root`, often the resource path and the query
+	fun uri_tail: String do return ""
 
 	# Should the response content be deserialized from JSON?
 	var deserialize_json = true is writable
@@ -69,7 +73,7 @@ class AsyncHttpRequest
 		var delay = delay
 		if delay > 0.0 then delay.sleep
 
-		var uri = rest_server_uri / rest_action
+		var uri = uri
 
 		# Execute REST request
 		var rep = uri.http_get
@@ -106,7 +110,7 @@ class AsyncHttpRequest
 	fun on_load(result: nullable Object) do end
 
 	# Invoked when the HTTP request has failed and no data was received or deserialization failed
-	fun on_fail(error: Error) do print_error "REST request '{rest_action}' failed with: {error}"
+	fun on_fail(error: Error) do print_error "HTTP request '{uri}' failed with: {error}"
 
 	# Complete this request whether it was a success or not
 	fun after do end
