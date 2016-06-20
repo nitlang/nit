@@ -163,7 +163,17 @@ class Connection
 	fun event_callback(events: Int): Bool
 	do
 		if events & bev_event_error != 0 or events & bev_event_eof != 0 then
-			if events & bev_event_error != 0 then print_error "Error from bufferevent"
+			if events & bev_event_error != 0 then
+				var sock_err = evutil_socket_error
+				# Ignore some normal errors and print the others for debugging
+				if sock_err == 110 then
+					# Connection timed out (ETIMEDOUT)
+				else if sock_err == 104 then
+					# Connection reset by peer (ECONNRESET)
+				else
+					print_error "libevent error event: {evutil_socket_error_to_string(sock_err)} ({sock_err})"
+				end
+			end
 			force_close
 			return true
 		end
