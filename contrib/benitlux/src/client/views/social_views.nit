@@ -160,7 +160,7 @@ class ListUsersAction
 
 	init do affected_views.add_all([window.but_search, window.but_followed, window.but_followers])
 
-	redef fun on_load(users)
+	redef fun on_load(users, status)
 	do
 		window.layout.remove window.list_search
 		window.list_search = new ListLayout(parent=window.layout)
@@ -179,7 +179,7 @@ class FollowAction
 	private var button: FollowButton
 	init do affected_views.add(button)
 
-	redef fun on_load(res)
+	redef fun on_load(res, status)
 	do
 		if intercept_error(res) then return
 	end

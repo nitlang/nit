@@ -150,7 +150,7 @@ class ListDiffAction
 
 	redef type W: HomeWindow
 
-	redef fun on_load(beers)
+	redef fun on_load(beers, status)
 	do
 		window.layout_beers.remove window.beer_list
 		window.beer_list = new VerticalLayout(parent=window.layout_beers)
@@ -181,7 +181,7 @@ class HomeListPeopleAction
 
 	redef type W: HomeWindow
 
-	redef fun on_load(users)
+	redef fun on_load(users, status)
 	do
 		window.layout_social.remove window.social_list
 		window.social_list = new VerticalLayout(parent=window.layout_social)
@@ -200,7 +200,7 @@ class CheckTokenAction
 
 	redef type W: HomeWindow
 
-	redef fun on_load(res) do intercept_error(res)
+	redef fun on_load(res, status) do intercept_error(res)
 end
 
 # Today's date as a `String`

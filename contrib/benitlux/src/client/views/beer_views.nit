@@ -219,7 +219,7 @@ end
 class ReviewAction
 	super WindowHttpRequest
 
-	redef fun on_load(res)
+	redef fun on_load(res, status)
 	do
 		if intercept_error(res) then return
 	end
@@ -231,7 +231,7 @@ class ListBeersAction
 
 	redef type W: BeersWindow
 
-	redef fun on_load(beers)
+	redef fun on_load(beers, status)
 	do
 		window.layout.remove window.list_beers
 		window.list_beers = new ListLayout(parent=window.layout)

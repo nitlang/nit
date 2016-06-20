@@ -90,9 +90,9 @@ end
 class BenitluxHttpRequest
 	super AsyncHttpRequest
 
-	redef fun rest_server_uri do return benitlux_rest_server_uri
+	redef fun uri_root do return benitlux_rest_server_uri
 
-	redef var rest_action
+	redef var uri_tail
 
 	redef fun on_fail(error)
 	do
@@ -104,7 +104,7 @@ class BenitluxHttpRequest
 			# This could be a deserialization error,
 			# it may be related to an outdated client.
 			# Report to user.
-			print_error "Request Error: {rest_server_uri / rest_action} with {error}"
+			print_error "Request Error: {uri} with {error}"
 			app.feedback "Request Error: {error}"
 		end
 	end
@@ -134,7 +134,7 @@ end
 class WindowHttpRequest
 	super BenitluxHttpRequest
 
-	autoinit window, rest_action
+	autoinit window, uri_tail
 
 	# Type of the related `window`
 	type W: Window

@@ -109,7 +109,7 @@ end
 class MenuHttpRequest
 	super BenitluxHttpRequest
 
-	redef fun on_load(data)
+	redef fun on_load(data, status)
 	do
 		if not data isa Array[BeerAndRatings] then
 			on_fail new Error("Server sent unexpected data {data or else "null"}")

@@ -194,7 +194,7 @@ class LoginOrSignupAction
 
 	init do affected_views.add_all([window.but_login, window.but_signup])
 
-	redef fun on_load(res)
+	redef fun on_load(res, status)
 	do
 		if intercept_error(res) then return
 
