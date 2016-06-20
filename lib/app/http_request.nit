@@ -122,6 +122,23 @@ abstract class AsyncHttpRequest
 	fun after do end
 end
 
+# Minimal implementation of `AsyncHttpRequest` where `uri` is an attribute
+#
+# Prints on communication errors and when the server returns an HTTP status code not in the 200s.
+#
+# ~~~
+# var request = new SimpleAsyncHttpRequest("http://example.com")
+# request.start
+# ~~~
+class SimpleAsyncHttpRequest
+	super AsyncHttpRequest
+
+	redef var uri
+
+	redef fun on_load(data, status) do if status < 200 or status >= 299
+	then print_error "HTTP request '{uri}' received HTTP status code: {status}"
+end
+
 redef class Text
 	# Execute an HTTP GET request synchronously at the URI `self`
 	#
