@@ -26,5 +26,5 @@
 # of your code.
 module java
 
-import base
+import ffi_support
 import collections

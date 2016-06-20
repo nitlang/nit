@@ -20,7 +20,7 @@
 # `Sys::create_default_jvm` and supply your own JVM object. You can manage
 # multiple java thread by switching the current environment in a redef
 # of `Sys::jni_env`, and multiple JVM using `Sys::jvm`.
-module base is
+module ffi_support is
 	cflags "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
 	ldflags "-L $(JNI_LIB_PATH) -ljvm"
 	new_annotation extra_java_files
