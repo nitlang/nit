@@ -43,11 +43,10 @@ builder.options.add "-Djava.class.path=."
 #alt1#builder.options.clear
 #alt1#builder.options.add "-Djava.class.path=/tmp/"
 var jvm = builder.create_jvm
-var env = builder.jni_env
-assert env != null
+assert jvm != null
 
-# Test JavaVM::env
-assert not jvm.env.address_is_null
+var env = jvm.env
+assert not env.address_is_null
 
 print "---------------------Test 1----------------------"
 # get the class
