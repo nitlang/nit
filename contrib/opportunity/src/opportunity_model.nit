@@ -32,25 +32,25 @@ class OpportunityDB
 	# Creates the tables and triggers for Opportunity (SQLite3 DB)
 	fun create_db do
 		assert create_table("IF NOT EXISTS meetups (id CHAR(40) PRIMARY KEY, name TEXT, date TEXT, place TEXT, answer_mode INTEGER DEFAULT 0);") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 		assert create_table("IF NOT EXISTS people(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, surname TEXT);") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 		assert create_table("IF NOT EXISTS answers(id INTEGER PRIMARY KEY AUTOINCREMENT, meetup_id CHAR(40), name TEXT, FOREIGN KEY(meetup_id) REFERENCES meetups(id));") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 		assert create_table("IF NOT EXISTS part_answers(id_part INTEGER, id_ans INTEGER, value INTEGER, FOREIGN KEY(id_part) REFERENCES people(id), FOREIGN KEY(id_ans) REFERENCES answers(id));") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 		#NOTE: The following triggers could be replaced by ON DELETE CASCADE clauses
 		# Thing is, SQLite does not seem to support those operations (well, not by default, it seems
 		# we must re-compile the lib to support it. So, well, let's just create triggers heh.
 		assert execute("CREATE TRIGGER IF NOT EXISTS answers_clean AFTER DELETE ON meetups BEGIN DELETE FROM answers WHERE answers.meetup_id=OLD.id;END;") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 		assert execute("CREATE TRIGGER IF NOT EXISTS ans_clean AFTER DELETE ON answers BEGIN DELETE FROM part_answers WHERE OLD.id=part_answers.id_ans;END;") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 		assert execute("CREATE TRIGGER IF NOT EXISTS ppl_clean AFTER DELETE ON people BEGIN DELETE FROM part_answers WHERE OLD.id=part_answers.id_part;END;")
 	end
@@ -88,12 +88,12 @@ class OpportunityDB
 	fun change_answer(pid: Int, ansid: Int, resp: Int): Bool do
 		var p = find_people_by_id(pid)
 		if p == null then
-			print "Error while updating answer {ansid}:{pid}"
+			print_error "Opportunity error while updating answer {ansid}:{pid}"
 			return false
 		end
 		var a = find_answer_by_id(ansid)
 		if a == null then
-			print "Error while updating answer {ansid}:{pid}"
+			print_error "Opportunity error while updating answer {ansid}:{pid}"
 			return false
 		end
 		p.answers[a] = resp
@@ -107,8 +107,8 @@ class OpportunityDB
 	fun remove_people_by_id(id: Int): Bool do
 		var rq = execute("DELETE FROM people WHERE id = {id};")
 		if not rq then
-			print "Cannot delete people {id}"
-			print error or else "Unknown error"
+			print_error "Opportunity error deleting people {id}"
+			print_error error or else "Unknown error"
 			return false
 		end
 		return true
@@ -166,15 +166,15 @@ class People
 	redef fun commit(db) do
 		if id == -1 then
 			if not db.execute("INSERT INTO people (name,surname) VALUES ({name.html_escape.to_sql_string}, {surname.html_escape.to_sql_string});") then
-				print "Error while adding people {self}"
-				print db.error or else "Unknown error"
+				print_error "Opportunity error while adding people {self}"
+				print_error db.error or else "Unknown error"
 				return false
 			end
 			id = db.last_insert_rowid
 		else
 			if not db.execute("UPDATE people SET name={name.html_escape.to_sql_string}, surname={surname.html_escape.to_sql_string} WHERE ID={id};") then
-				print "Error while updating people {self}"
-				print db.error or else "Unknown error"
+				print_error "Opportunity error while updating people {self}"
+				print_error db.error or else "Unknown error"
 				return false
 			end
 		end
@@ -184,15 +184,15 @@ class People
 			var s = db.select("* FROM part_answers WHERE id_part={id} AND id_ans={i.id}")
 			if s != null and s.iterator.is_ok then
 				if not db.execute("UPDATE part_answers SET value={j} WHERE id_part={id} AND id_ans={i.id};") then
-					print "Error while updating part_answers {id}|{i.id} = {j}"
-					print db.error or else "Unknown error"
+					print_error "Opportunity error while updating part_answers {id}|{i.id} = {j}"
+					print_error db.error or else "Unknown error"
 					return false
 				end
 				continue
 			end
 			if not db.execute("INSERT INTO part_answers(id_part, id_ans, value) VALUES ({id},{i.id},{val});") then
-				print("Error while adding part_answers {id}|{i.id}|{j}")
-				print db.error or else "Unknown error"
+				print_error "Opportunity error while adding part_answers {id}|{i.id}|{j}"
+				print_error db.error or else "Unknown error"
 				return false
 			end
 		end
@@ -249,8 +249,8 @@ class Meetup
 			var time = get_time
 			var tmpid = (name + date + place + time.to_s).sha1.hexdigest
 			if not db.execute("INSERT INTO meetups (id, name, date, place, answer_mode) VALUES({tmpid.to_sql_string}, {name.html_escape.to_sql_string}, {date.html_escape.to_sql_string}, {place.html_escape.to_sql_string}, {answer_mode});") then
-				print "Error recording entry Meetup {self}"
-				print db.error or else "Null error"
+				print_error "Opportunity error recording entry Meetup {self}"
+				print_error db.error or else "Unknown error"
 				return false
 			end
 			id = tmpid
@@ -260,9 +260,7 @@ class Meetup
 		end
 	end
 
-	redef fun to_s do
-		return "Event : {name}\nWhen : {date}\nWhere : {place}"
-	end
+	redef fun to_s do return "Event: {name}, date: {date}, place: {place}"
 end
 
 # An answer linked to a Meetup in the database
@@ -332,21 +330,21 @@ class Answer
 		if m == null then return false
 		if m.id == "" then
 			if not m.commit(db) then
-				print "Error when creating meetup {m}"
+				print_error "Opportunity error when creating meetup {m}"
 				return false
 			end
 		end
 		if id == -1 then
 			if not db.execute("INSERT INTO answers (name, meetup_id) VALUES({name.html_escape.to_sql_string}, {m.id.to_sql_string});") then
-				print "Cannot create {self} in database"
-				print db.error or else "Unknown error"
+				print_error "Opportunity error creating {self} in database"
+				print_error db.error or else "Unknown error"
 				return false
 			end
 			id = db.last_insert_rowid
 		else
 			if not db.execute("UPDATE answers SET name=({name.html_escape.to_sql_string}) WHERE meetup_id={m.id.to_sql_string};") then
-				print "Error updating {self} in database"
-				print db.error or else "Unknown error"
+				print_error "Opportunity error updating {self} in database"
+				print_error db.error or else "Unknown error"
 				return false
 			end
 		end
