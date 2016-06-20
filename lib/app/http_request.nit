@@ -97,6 +97,7 @@ abstract class AsyncHttpRequest
 			return null
 		end
 
+		app.run_on_ui_thread new RestRunnableJoin(self)
 
 		return null
 	end
@@ -180,4 +181,10 @@ private class RestRunnableOnFail
 		sender_thread.on_fail(error)
 		sender_thread.after
 	end
+end
+
+private class RestRunnableJoin
+	super HttpRequestTask
+
+	redef fun main do sender_thread.join
 end
