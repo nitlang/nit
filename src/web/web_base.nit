@@ -131,6 +131,16 @@ redef class MEntityRef
 			modifiers.add modifier
 		end
 		obj["modifiers"] = modifiers
+		var mentity = self.mentity
+		if mentity isa MMethod then
+			obj["msignature"] = mentity.intro.msignature
+		else if mentity isa MMethodDef then
+			obj["msignature"] = mentity.msignature
+		else if mentity isa MVirtualTypeProp then
+			obj["bound"] = to_mentity_ref(mentity.intro.bound)
+		else if mentity isa MVirtualTypeDef then
+			obj["bound"] = to_mentity_ref(mentity.bound)
+		end
 		return obj
 	end
 end
