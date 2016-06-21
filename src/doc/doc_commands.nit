@@ -19,8 +19,6 @@
 # * `nitdoc` wikilinks like `[[doc: MEntity::name]]`
 module doc_commands
 
-import doc_base
-
 # A command aimed at a documentation tool like `nitdoc` or `nitx`.
 #
 # `DocCommand` are generally of the form `command: args`.
