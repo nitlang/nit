@@ -93,6 +93,16 @@
 			};
 		})
 
+		.directive('entityNamespace', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/namespace.html'
+			};
+		})
+
 		.directive('entityTag', function() {
 			return {
 				restrict: 'E',
