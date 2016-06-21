@@ -9,6 +9,11 @@
 				<span class='glyphicon glyphicon-book'/> Doc
 			</a>
 		</li>
+		<li role='presentation'>
+			<a data-toggle='tab' data-target='#graph' ng-click="entityCtrl.loadEntityGraph()">
+				<span class='glyphicon glyphicon-object-align-vertical'/> Dependencies
+			</a>
+		</li>
 	</ul>
 
 	<div class='tab-content'>
@@ -17,6 +22,13 @@
 
 			<entity-list list-title='Groups' list-entities='mentity.mgroups'
 				list-object-filter='{}' />
+		</div>
+		<div role='tabpanel' class='tab-pane fade' id='graph'>
+			<div class='card'>
+				<div class='card-body text-center'>
+					<div class='graph' ng-bind-html='graph'></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

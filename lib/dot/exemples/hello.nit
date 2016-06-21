@@ -12,10 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Components required to build a web server about the nit model.
-module web
+# Example from http://www.graphviz.org/content/hello
 
-import web_actions
-import model_api
-import api_catalog
-import api_graph
+import dot
+
+var graph = new DotGraph("G", "digraph")
+
+var hello = graph.add_node("hello")
+var world = graph.add_node("world")
+graph.add_edge(hello, world)
+
+if args.is_empty then
+	print graph.to_dot
+else
+	graph.to_dot.write_to_file args.first
+end

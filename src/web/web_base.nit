@@ -188,8 +188,7 @@ redef class MClass
 		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
 		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
 		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
-		var poset = hierarchy_poset(handler.mainmodule, private_view)
-		obj["parents"] = to_mentity_refs(poset[self].direct_greaters)
+		obj["parents"] = to_mentity_refs(collect_parents(private_view))
 		return obj
 	end
 end
@@ -251,4 +250,21 @@ end
 
 redef class MVirtualType
 	redef var web_url = mproperty.web_url is lazy
+end
+
+redef class POSetElement[E]
+	super Jsonable
+
+	# Return JSON representation of `self`.
+	fun json: JsonObject do
+		assert self isa POSetElement[MEntity]
+		var obj = new JsonObject
+		obj["greaters"] = to_mentity_refs(greaters)
+		obj["direct_greaters"] = to_mentity_refs(direct_greaters)
+		obj["direct_smallers"] = to_mentity_refs(direct_smallers)
+		obj["smallers"] = to_mentity_refs(smallers)
+		return obj
+	end
+
+	redef fun to_json do return json.to_json
 end

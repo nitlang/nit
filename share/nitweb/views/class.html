@@ -11,6 +11,11 @@
 			</a>
 		</li>
 		<li role='presentation'>
+			<a data-toggle='tab' data-target='#graph' ng-click="entityCtrl.loadEntityGraph()">
+				<span class='glyphicon glyphicon-object-align-vertical'/> Inheritance
+			</a>
+		</li>
+		<li role='presentation'>
 			<a data-toggle='tab' data-target='#all_props'>
 				<span class='glyphicon glyphicon-tags'/> All properties
 			</a>
@@ -51,6 +56,13 @@
 				list-title='Class definitions'
 				list-entities='linearization'
 				list-focus='mentity.intro' />
+		</div>
+		<div role='tabpanel' class='tab-pane fade' id='graph'>
+			<div class='card'>
+				<div class='card-body text-center'>
+					<div class='graph' ng-bind-html='graph'></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -102,6 +102,8 @@ class APIRouter
 		use("/uml/:id", new APIEntityUML(model, mainmodule))
 		use("/linearization/:id", new APIEntityLinearization(model, mainmodule))
 		use("/defs/:id", new APIEntityDefs(model, mainmodule))
+		use("/inheritance/:id", new APIEntityInheritance(model, mainmodule))
+		use("/graph/", new APIGraphRouter(model, mainmodule))
 	end
 end
 

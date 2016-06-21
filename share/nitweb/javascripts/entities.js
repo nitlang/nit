@@ -16,9 +16,9 @@
 
 (function() {
 	angular
-		.module('entities', ['ui', 'model'])
+		.module('entities', ['ngSanitize', 'ui', 'model'])
 
-		.controller('EntityCtrl', ['Model', '$routeParams', '$scope', function(Model, $routeParams, $scope) {
+		.controller('EntityCtrl', ['Model', '$routeParams', '$scope', '$sce', function(Model, $routeParams, $scope, $sce) {
 			this.loadEntityLinearization = function() {
 				Model.loadEntityLinearization($routeParams.id,
 					function(data) {
@@ -43,6 +43,15 @@
 						$scope.code = data;
 					}, function(err) {
 						$scope.code = err;
+					});
+			};
+
+			this.loadEntityGraph = function(e) {
+				Model.loadEntityGraph($routeParams.id,
+					function(data) {
+						$scope.graph = $sce.trustAsHtml(data);
+					}, function(err) {
+						$scope.error = err;
 					});
 			};
 

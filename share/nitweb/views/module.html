@@ -11,6 +11,11 @@
 			</a>
 		</li>
 		<li role='presentation'>
+			<a data-toggle='tab' data-target='#graph' ng-click="entityCtrl.loadEntityGraph()">
+				<span class='glyphicon glyphicon-object-align-vertical'/> Imports
+			</a>
+		</li>
+		<li role='presentation'>
 			<a data-toggle='tab' data-target='#code' ng-click="entityCtrl.loadEntityCode()">
 				<span class='glyphicon glyphicon-console'/> Code
 			</a>
@@ -36,7 +41,7 @@
 				list-object-filter='{}' />
 
 		</div>
-		<div class='tab-pane fade' id='code'>
+		<div role='tabpanel' class='tab-pane fade' id='code'>
 			<div class='card'>
 				<div class='card-body'>
 					<pre ng-bind-html='code' />
@@ -47,6 +52,13 @@
 		<div role='tabpanel' class='tab-pane fade' id='defs'>
 			<entity-list list-title='Class definitions' list-entities='defs'
 				list-object-filter='{}' />
+		</div>
+		<div class='tab-pane fade' id='graph'>
+			<div class='card'>
+				<div class='card-body text-center'>
+					<div class='graph' ng-bind-html='graph'></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

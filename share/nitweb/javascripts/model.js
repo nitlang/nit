@@ -47,6 +47,12 @@
 						.error(cbErr);
 				},
 
+				loadEntityGraph: function(id, cb, cbErr) {
+					$http.get(apiUrl + '/graph/inheritance/' + id + '?cdepth=3')
+						.success(cb)
+						.error(cbErr);
+				},
+
 				search: function(q, n, cb, cbErr) {
 					$http.get(apiUrl + '/search?q=' + q + '&n=' + n)
 						.success(cb)
