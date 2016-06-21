@@ -17,12 +17,15 @@
 
 # Java Virtual Machine invocation API and others services from the JNI C API
 #
-# Users of this module and the Java FFI, on desktop computers, must define two environment variables:
+# Users of this module and the Java FFI, on desktop computers, must define three environment variables:
 # * `JAVA_HOME` points to the installation folder of the target Java VM.
 #   This folder should contain the JNI header file `include/jni.h`.
 #   e.g. `/usr/lib/jvm/default-java` on Debian Jessie.
 # * `JNI_LIB_PATH` points to the folder with `libjvm.so`.
 #   e.g. `/usr/lib/jvm/default-java/jre/lib/amd64/server/` on Debian Jessie.
+# * `LD_LIBRARY_PATH` has the path to the folder with `libjvm.so`.
+#   It's the same value as `JNI_LIB_PATH` but `LD_LIBRARY_PATH` is a colon separated list
+#   which may contain other paths.
 #
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 module jvm is
