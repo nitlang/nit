@@ -375,12 +375,14 @@ class Automaton
 	do
 		trim
 
+		# Graph of known distinct states.
 		var distincts = new HashMap[State, Set[State]]
 		for s in states do
 			distincts[s] = new HashSet[State]
 		end
 
-		# split accept states
+		# split accept states.
+		# An accept state is distinct with a non accept state.
 		for s1 in states do
 			for s2 in states do
 				if distincts[s1].has(s2) then continue
@@ -398,24 +400,36 @@ class Automaton
 			end
 		end
 
+		# Fixed point algorithm.
+		# * Get 2 states s1 and s2 not yet distinguished.
+		# * Get a symbol w.
+		# * If s1.trans(w) and s2.trans(w) are distinguished, then
+		#   distinguish s1 and s2.
 		var changed = true
-		var ints = new Array[Int]
+		var ints = new Array[Int] # List of symbols to check
 		while changed do
 			changed = false
 			for s1 in states do for s2 in states do
 				if distincts[s1].has(s2) then continue
+
+				# The transitions use intervals. Therefore, for the states s1 and s2,
+				# we need to check only the meaningful symbols. They are the `first`
+				# symbol of each interval and the first one after the interval (`last+1`).
 				ints.clear
+				# Check only `s1`; `s2` will be checked later when s1 and s2 are switched.
 				for t in s1.outs do
 					var sym = t.symbol
 					assert sym != null
 					ints.add sym.first
 					var l = sym.last
-					if l != null then ints.add l
+					if l != null then ints.add l + 1
 				end
+
+				# Check each symbol
 				for i in ints do
 					var ds1 = s1.trans(i)
 					var ds2 = s2.trans(i)
-					if ds1 == null and ds2 == null then continue
+					if ds1 == ds2 then continue
 					if ds1 != null and ds2 != null and not distincts[ds1].has(ds2) then continue
 					distincts[s1].add(s2)
 					distincts[s2].add(s1)
@@ -425,6 +439,8 @@ class Automaton
 			end
 		end
 
+		# We need to unify not-distinguished states.
+		# Just add an epsilon-transition and DFAize the automaton.
 		for s1 in states do for s2 in states do
 			if distincts[s1].has(s2) then continue
 			s1.add_trans(s2, null)
