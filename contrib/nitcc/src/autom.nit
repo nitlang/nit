@@ -373,6 +373,8 @@ class Automaton
 	# REQUIRE: self is a DFA
 	fun to_minimal_dfa: Automaton
 	do
+		assert_valid
+
 		trim
 
 		# Graph of known distinct states.
@@ -449,6 +451,21 @@ class Automaton
 		return to_dfa
 	end
 
+	# Assert that `self` is a valid automaton or abort
+	fun assert_valid
+	do
+		assert states.has(start)
+		assert states.has_all(accept)
+		for s in states do
+			for t in s.outs do assert states.has(t.to)
+			for t in s.ins do assert states.has(t.from)
+		end
+		assert states.has_all(tags.keys)
+		for t, ss in retrotags do
+			assert states.has_all(ss)
+		end
+	end
+
 	# Produce a graphvis file for the automaton
 	fun to_dot(filepath: String)
 	do
@@ -514,6 +531,8 @@ class Automaton
 	# note: the DFA is not minimized.
 	fun to_dfa: Automaton
 	do
+		assert_valid
+
 		trim
 
 		var dfa = new Automaton.empty
