@@ -12,15 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Supporting services for the FFI with Java
+# Core supporting services for the FFI with Java
 #
-# This modules relies on `Sys::jvm`, `Sys::jni_env` and
-# `Sys::create_default_jvm` to get a handle on a JVM. You can adapt the
-# behavior of the FFI and services in this module by redefing
-# `Sys::create_default_jvm` and supply your own JVM object. You can manage
-# multiple java thread by switching the current environment in a redef
-# of `Sys::jni_env`, and multiple JVM using `Sys::jvm`.
-module base is
+# This module *must* be imported by modules using the Java FFI.
+# Some might prefer to import the whole `java` package as it provides
+# other useful services.
+module ffi_support is
 	cflags "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
 	ldflags "-L $(JNI_LIB_PATH) -ljvm"
 	new_annotation extra_java_files
@@ -66,7 +63,9 @@ redef class Sys
 		assert jvm != null else print "JVM creation failed"
 
 		self.jvm = jvm
-		self.jni_env = builder.jni_env.as(not null)
+		assert not jvm.address_is_null
+		self.jni_env = jvm.env
+		assert not jni_env.address_is_null
 	end
 
 	# Get a Java class by its name from the current `jni_env`

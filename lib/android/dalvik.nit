@@ -29,11 +29,8 @@ redef class App
 	fun native_context: NativeContext do return native_activity
 end
 
-extern class JavaClassLoader in "Java" `{java.lang.ClassLoader`}
-	super JavaObject
-end
-
 redef class Sys
+
 	# We cannot create a JVM on Android
 	#
 	# This method is not reachable on this platform anyway.
@@ -43,7 +40,9 @@ redef class Sys
 	redef fun jni_env do return jvm.attach_current_thread
 
 	private var class_loader: nullable JavaObject = null
+
 	private var class_loader_method: nullable JMethodID = null
+
 	redef fun load_jclass(name)
 	do
 		var class_loader = self.class_loader
