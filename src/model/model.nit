@@ -388,8 +388,9 @@ class MClass
 	super MEntity
 
 	# The module that introduce the class
+	#
 	# While classes are not bound to a specific module,
-	# the introducing module is used for naming an visibility
+	# the introducing module is used for naming and visibility.
 	var intro_mmodule: MModule
 
 	# The short name of the class
