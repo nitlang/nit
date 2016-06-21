@@ -15,8 +15,10 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'entities', 'index'])
-
+	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'angular-loading-bar', 'entities', 'index'])
+	.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+		cfpLoadingBarProvider.includeSpinner = false;
+	}])
 	.config(function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', {

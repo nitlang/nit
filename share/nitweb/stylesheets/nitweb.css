@@ -164,6 +164,12 @@ entity-list:hover .btn-filter {
 	border-color: #eee;
 }
 
+/* loading bar */
+
+#loading-bar .bar {
+	background: #FF8100;
+}
+
 /* navs */
 
 .nav-tabs li { cursor: pointer; }
