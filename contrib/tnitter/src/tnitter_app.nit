@@ -100,9 +100,9 @@ abstract class AsyncTnitterRequest
 
 	private var window: TnitterWindow
 
-	redef fun rest_server_uri do return tnitter_server_uri
+	redef fun uri_root do return tnitter_server_uri
 
-	redef var rest_action
+	redef var uri_tail
 
 	# Should this request be delayed by `request_delay_on_error` seconds?
 	fun after_error(value: Bool) is autoinit do if value then delay = request_delay_on_error
@@ -120,11 +120,11 @@ end
 class ListPostRequest
 	super AsyncTnitterRequest
 
-	redef fun on_load(posts)
+	redef fun on_load(posts, status)
 	do
 		# Deal with server-side errors
 		if posts isa Error then
-			print_error "Server Error: '{posts.message}' from '{rest_server_uri / rest_action}'"
+			print_error "Server Error: '{posts.message}' from '{uri}'"
 			return
 		end
 
@@ -141,7 +141,7 @@ class ListPostRequest
 
 	redef fun on_fail(error)
 	do
-		print "Warning: Request {rest_server_uri/rest_action} failed with {error}"
+		print "Warning: Request {uri} failed with {error}"
 		window.request_full_list_on_error
 	end
 end

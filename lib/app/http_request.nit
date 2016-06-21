@@ -30,11 +30,12 @@ end
 
 # Thread executing an HTTP request asynchronously
 #
-# The request is sent to `rest_server_uri / rest_action`.
+# The request is sent to `uri`.
+# Either `uri`, or `uri_root` and `uri_tail`, must be set in subclasses.
 #
 # If `deserialize_json`, the default behavior, the response is deserialized from JSON
 #
-# If `delay > 0.0`, sending the reqest is delayed by the given `delay` in seconds.
+# If `delay > 0.0`, sending the request is delayed by the given `delay` in seconds.
 # It can be used to delay resending a request on error.
 #
 # Four callback methods act on the main/UI thread,
@@ -43,14 +44,19 @@ end
 # * `on_load`
 # * `on_fail`
 # * `after`
-class AsyncHttpRequest
+#
+# See full example at `examples/http_request_example.nit`.
+abstract class AsyncHttpRequest
 	super Thread
 
-	# Root URI of the remote server
-	fun rest_server_uri: String is abstract
+	# URI target of this request, by default it is composed of `uri_root / uri_tail`
+	fun uri: Text do return uri_root / uri_tail
 
-	# Action, or path, for this request within the `rest_server_uri`
-	fun rest_action: String is abstract
+	# Root URI of the remote server, usually the scheme and remote host
+	fun uri_root: String is abstract
+
+	# Right part of the URI, after `uri_root`, often the resource path and the query
+	fun uri_tail: String do return ""
 
 	# Should the response content be deserialized from JSON?
 	var deserialize_json = true is writable
@@ -69,7 +75,7 @@ class AsyncHttpRequest
 		var delay = delay
 		if delay > 0.0 then delay.sleep
 
-		var uri = rest_server_uri / rest_action
+		var uri = uri
 
 		# Execute REST request
 		var rep = uri.http_get
@@ -78,19 +84,23 @@ class AsyncHttpRequest
 			return null
 		end
 
-		if not deserialize_json then
-			app.run_on_ui_thread new RestRunnableOnLoad(self, rep)
+		if deserialize_json then
+			# Deserialize
+			var deserializer = new JsonDeserializer(rep.value)
+			var res = deserializer.deserialize
+			if deserializer.errors.not_empty then
+				app.run_on_ui_thread new RestRunnableOnFail(self, deserializer.errors.first)
+			else
+				app.run_on_ui_thread new RestRunnableOnLoad(self, res, rep.code)
+			end
+		else
+			# Return text data
+			app.run_on_ui_thread new RestRunnableOnLoad(self, rep.value, rep.code)
 			return null
 		end
 
-		# Deserialize
-		var deserializer = new JsonDeserializer(rep.value)
-		var res = deserializer.deserialize
-		if deserializer.errors.not_empty then
-			app.run_on_ui_thread new RestRunnableOnFail(self, deserializer.errors.first)
-		end
+		app.run_on_ui_thread new RestRunnableJoin(self)
 
-		app.run_on_ui_thread new RestRunnableOnLoad(self, res)
 		return null
 	end
 
@@ -103,13 +113,30 @@ class AsyncHttpRequest
 	# In this case, `result` may be any deserialized object.
 	#
 	# Otherwise, if `not deserialize_json`, `result` contains the content of the response as a `String`.
-	fun on_load(result: nullable Object) do end
+	fun on_load(result: nullable Object, http_status_code: Int) do end
 
 	# Invoked when the HTTP request has failed and no data was received or deserialization failed
-	fun on_fail(error: Error) do print_error "REST request '{rest_action}' failed with: {error}"
+	fun on_fail(error: Error) do print_error "HTTP request '{uri}' failed with: {error}"
 
 	# Complete this request whether it was a success or not
 	fun after do end
+end
+
+# Minimal implementation of `AsyncHttpRequest` where `uri` is an attribute
+#
+# Prints on communication errors and when the server returns an HTTP status code not in the 200s.
+#
+# ~~~
+# var request = new SimpleAsyncHttpRequest("http://example.com")
+# request.start
+# ~~~
+class SimpleAsyncHttpRequest
+	super AsyncHttpRequest
+
+	redef var uri
+
+	redef fun on_load(data, status) do if status < 200 or status >= 299
+	then print_error "HTTP request '{uri}' received HTTP status code: {status}"
 end
 
 redef class Text
@@ -139,6 +166,7 @@ class HttpRequestResult
 	var maybe_code: nullable Int
 
 	# The status code
+	#
 	# Require: `not is_error`
 	fun code: Int do return maybe_code.as(not null)
 end
@@ -155,9 +183,11 @@ private class RestRunnableOnLoad
 
 	var res: nullable Object
 
+	var code: Int
+
 	redef fun main
 	do
-		sender_thread.on_load(res)
+		sender_thread.on_load(res, code)
 		sender_thread.after
 	end
 end
@@ -172,4 +202,10 @@ private class RestRunnableOnFail
 		sender_thread.on_fail(error)
 		sender_thread.after
 	end
+end
+
+private class RestRunnableJoin
+	super HttpRequestTask
+
+	redef fun main do sender_thread.join
 end

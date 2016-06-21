@@ -68,7 +68,7 @@ class PushHttpRequest
 		t.start
 	end
 
-	redef fun on_load(data)
+	redef fun on_load(data, status)
 	do
 		if app.user == null then return
 
