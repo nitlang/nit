@@ -85,6 +85,7 @@ var t_and = new Token("and")
 var t_except = new Token("except")
 var t_shortest = new Token("shortest")
 var t_longest = new Token("longest")
+var t_prefixes = new Token("prefixes")
 var t_ch_dec = new Token("ch_dec")
 var t_ch_hex = new Token("ch_hex")
 g.tokens.add_all([t_opar,
@@ -111,6 +112,7 @@ g.tokens.add_all([t_opar,
 	t_except,
 	t_shortest,
 	t_longest,
+	t_prefixes,
 	t_ch_dec,
 	t_ch_hex])
 
@@ -139,6 +141,7 @@ p_re3.new_alt("re_ques", p_re3, t_ques)
 p_re3.new_alt("re_plus", p_re3, t_plus)
 p_re3.new_alt("re_shortest", t_shortest, t_opar, p_re, t_cpar)
 p_re3.new_alt("re_longest", t_longest, t_opar, p_re, t_cpar)
+p_re3.new_alt("re_prefixes", t_prefixes, t_opar, p_re, t_cpar)
 p_re3.new_alt("re_par", t_opar, p_re, t_cpar)
 p_re3.new_alt("re_class", p_text, t_dot, t_dot, p_text)
 p_re3.new_alt("re_openclass", p_text, t_dot, t_dot, t_dot)
