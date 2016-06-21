@@ -390,7 +390,7 @@ class Automaton
 					distincts[s2].add(s1)
 					continue
 				end
-				if tags[s1] != tags[s2] then
+				if tags.get_or_null(s1) != tags.get_or_null(s2) then
 					distincts[s1].add(s2)
 					distincts[s2].add(s1)
 					continue
