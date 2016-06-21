@@ -360,8 +360,8 @@ class Automaton
 
 		# Remove their transitions
 		for s in bads do
-			for t in s.ins do t.delete
-			for t in s.outs do t.delete
+			for t in s.ins.to_a do t.delete
+			for t in s.outs.to_a do t.delete
 		end
 
 		# Keep only the good stuff
