@@ -87,21 +87,10 @@ abstract class APIHandler
 	end
 end
 
-# A NitView is rendered by an action.
-interface NitView
-	# Renders this view and returns something that can be written to a HTTP response.
-	fun render: Writable is abstract
-end
-
-redef class HttpResponse
-	# Render a NitView as response.
-	fun send_view(view: NitView, status: nullable Int) do send(view.render, status)
-end
-
 redef class MEntity
 
 	# URL to `self` within the web interface.
-	fun web_url: String is abstract
+	fun web_url: String do return "/doc/" / full_name
 
 	# URL to `self` within the JSON api.
 	fun api_url: String do return "/api/entity/" / full_name
@@ -160,17 +149,7 @@ redef class MDoc
 	end
 end
 
-redef class MPackage
-	redef var web_url = "/package/{full_name}" is lazy
-end
-
-redef class MGroup
-	redef var web_url = "/group/{full_name}" is lazy
-end
-
 redef class MModule
-	redef var web_url = "/module/{full_name}" is lazy
-
 	redef fun api_json(handler) do
 		var obj = super
 		obj["intro_mclassdefs"] = to_mentity_refs(collect_intro_mclassdefs(private_view))
@@ -181,8 +160,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef var web_url = "/class/{full_name}" is lazy
-
 	redef fun api_json(handler) do
 		var obj = super
 		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
@@ -194,8 +171,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef var web_url = "/classdef/{full_name}" is lazy
-
 	redef fun json do
 		var obj = super
 		obj["intro"] = to_mentity_ref(mclass.intro)
@@ -212,8 +187,6 @@ redef class MClassDef
 end
 
 redef class MProperty
-	redef var web_url = "/property/{full_name}" is lazy
-
 	redef fun json do
 		var obj = super
 		obj["intro_mclass"] = to_mentity_ref(intro_mclassdef.mclass)
@@ -223,8 +196,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef var web_url = "/propdef/{full_name}" is lazy
-
 	redef fun json do
 		var obj = super
 		obj["intro"] = to_mentity_ref(mproperty.intro)

@@ -19,6 +19,8 @@
 		.module('entities', ['ngSanitize', 'ui', 'model'])
 
 		.controller('EntityCtrl', ['Model', '$routeParams', '$scope', '$sce', function(Model, $routeParams, $scope, $sce) {
+			$scope.entityId = $routeParams.id;
+
 			this.loadEntityLinearization = function() {
 				Model.loadEntityLinearization($routeParams.id,
 					function(data) {
@@ -58,8 +60,8 @@
 			Model.loadEntity($routeParams.id,
 				function(data) {
 					$scope.mentity = data;
-				}, function(err) {
-					$scope.error = err;
+				}, function(message, status) {
+					$scope.error = {message: message, status: status};
 				});
 		}])
 
@@ -90,6 +92,16 @@
 					mentity: '='
 				},
 				templateUrl: '/directives/entity/signature.html'
+			};
+		})
+
+		.directive('entityNamespace', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/namespace.html'
 			};
 		})
 
