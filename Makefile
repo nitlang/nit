@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITCOPT=
 
 # Additional program directories (contrib and examples) that are buildable
 PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
