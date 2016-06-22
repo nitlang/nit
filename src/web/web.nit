@@ -18,3 +18,4 @@ module web
 import model_api
 import api_catalog
 import api_graph
+import api_docdown
