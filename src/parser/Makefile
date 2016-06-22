@@ -31,7 +31,7 @@ parser.nit: .nit.sablecc3 xss/*.xss
 	./fact_parser.pl .parser-nofact.nit > parser.nit
 	perl -np -i.orig -e 's/([ (\[])P([A-Z])/\1A\2/g;' -e 's/"{"/"\\{"/g;' parser.nit parser_abs.nit parser_prod.nit lexer.nit
 
-clean:
+clean distclean mostlyclean:
 	rm -f -- .nit.sablecc3 .nit.sablecc3.dump .parser-nofact.nit || true
 
 maintainer-clean: clean

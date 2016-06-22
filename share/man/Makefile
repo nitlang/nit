@@ -47,5 +47,5 @@ pdf:
 	for x in nit*.md; do echo $$x; pandoc -V header-includes='\usepackage{savetrees}' $$x -o pdf.out/$$x.pdf; done
 	pdfjoin pdf.out/*.pdf -o man.pdf
 
-clean:
+clean distclean mostlyclean maintainer-clean:
 	rm -r www pdf.out || true

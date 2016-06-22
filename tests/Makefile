@@ -43,5 +43,5 @@ failed:
 store:
 	./store_save.sh *.nit
 
-clean:
+clean distclean mostlyclean maintainer-clean:
 	rm -r -f -- out/ alt nit_compile errlist errlist.bak *.xml 2> /dev/null || true
