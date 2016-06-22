@@ -55,6 +55,8 @@ interface DocCommand
 			return new CallCommand(command_string)
 		else if command_string.has_prefix("code:") then
 			return new CodeCommand(command_string)
+		else if command_string.has_prefix("graph:") then
+			return new GraphCommand(command_string)
 		end
 		return new UnknownCommand(command_string)
 	end
@@ -149,5 +151,13 @@ end
 # * `./src/file.nit` to include source code from a file.
 # * `./src/file.nit:1,2--3,4` to select code between positions.
 class CodeCommand
+	super AbstractDocCommand
+end
+
+# A `DocCommand` that display an graph for a `MEntity`.
+#
+# Syntax:
+# * `graph: MEntity::name`
+class GraphCommand
 	super AbstractDocCommand
 end
