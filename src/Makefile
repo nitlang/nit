@@ -46,11 +46,16 @@ ifdef peflags
 	$(peflags) --cygwin-heap=2048 $(srcdir)/nitc_0
 endif
 
+# Optimization over the `$(PROJECT_BINDIR)/%` rules when building all tools
+# together
 $(PROJECT_BINDIR): pre-build
 	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $(SRCS)
+
 $(OBJS): pre-build
 	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $@.nit
 
+$(PROJECT_BINDIR)/%: pre-build
+	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $*.nit
 
 $(PROJECT_CSRCDIR)/nitc: $(PROJECT_CSRCDIR)/*.c $(PROJECT_CSRCDIR)/*.h $(PROJECT_CSRCDIR)/Makefile
 	@echo '***************************************************************'
