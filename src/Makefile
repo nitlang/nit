@@ -29,8 +29,12 @@ peflags := $(shell which peflags 2>/dev/null)
 
 all: bin/nitc
 
-pre-build:
+pre-build: nitc_0
+	@echo '***************************************************************'
+	@echo '* Compile binaries from NIT source files                      *'
+	@echo '***************************************************************'
 	$(srcdir)/git-gen-version.sh
+	test -d $(PROJECT_BINDIR) || mkdir $(PROJECT_BINDIR)
 
 nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -42,17 +46,11 @@ ifdef peflags
 	$(peflags) --cygwin-heap=2048 $(srcdir)/nitc_0
 endif
 
-bin/nitc: nitc_0 parser/parser.nit
-	@echo '***************************************************************'
-	@echo '* Compile binaries from NIT source files                      *'
-	@echo '***************************************************************'
-	$(srcdir)/git-gen-version.sh
-	test -d $(PROJECT_BINDIR) || mkdir $(PROJECT_BINDIR)
-	$(srcdir)/nitc_0 $(NITFLAGS) -v --dir $(PROJECT_BINDIR) $(SRCS)
+bin/nitc: pre-build
+	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $(SRCS)
+$(OBJS): pre-build
+	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $@.nit
 
-$(OBJS): nitc_0 parser/parser.nit
-	./git-gen-version.sh
-	./nitc_0 ${NITCFLAGS} -v $@.nit
 
 $(PROJECT_CSRCDIR)/nitc: $(PROJECT_CSRCDIR)/*.c $(PROJECT_CSRCDIR)/*.h $(PROJECT_CSRCDIR)/Makefile
 	@echo '***************************************************************'
