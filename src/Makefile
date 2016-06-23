@@ -14,11 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+srcdir = .
+PROJECT_BINDIR = $(srcdir)/../bin
+PROJECT_CSRCDIR = $(srcdir)/../c_src
+
 NITCFLAGS = --semi-global
 OLDNITCFLAGS = --semi-global
-OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial nitrestful
-SRCS=$(patsubst %,%.nit,$(OBJS))
-BINS=$(patsubst %,../bin/%,$(OBJS))
+OBJS = nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial nitrestful
+SRCS = $(patsubst %,$(srcdir)/%.nit,$(OBJS))
+BINS = $(patsubst %,$(PROJECT_BINDIR)/%,$(OBJS))
 
 # Workaround: Cygwin requires peflags to bootstrap
 peflags := ${shell which peflags 2>/dev/null}
@@ -26,45 +30,45 @@ peflags := ${shell which peflags 2>/dev/null}
 all: bin/nitc
 
 pre-build:
-	./git-gen-version.sh
+	$(srcdir)/git-gen-version.sh
 
 nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
-	./git-gen-version.sh
-	../c_src/nitc ${OLDNITCFLAGS} -o nitc_0 -v nitc.nit
+	$(srcdir)/git-gen-version.sh
+	$(PROJECT_CSRCDIR)/nitc ${OLDNITCFLAGS} -o $(srcdir)/nitc_0 -v $(srcdir)/nitc.nit
 ifdef peflags
-	${peflags} --cygwin-heap=2048 nitc_0
+	${peflags} --cygwin-heap=2048 $(srcdir)/nitc_0
 endif
 
 bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
-	./git-gen-version.sh
-	test -d ../bin || mkdir ../bin
-	./nitc_0 ${NITCFLAGS} -v --dir ../bin $(SRCS)
+	$(srcdir)/git-gen-version.sh
+	test -d $(PROJECT_BINDIR) || mkdir $(PROJECT_BINDIR)
+	$(srcdir)/nitc_0 ${NITFLAGS} -v --dir $(PROJECT_BINDIR) $(SRCS)
 
 $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
 	./nitc_0 ${NITCFLAGS} -v $@.nit
 
-../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
+$(PROJECT_CSRCDIR)/nitc: $(PROJECT_CSRCDIR)/*.c $(PROJECT_CSRCDIR)/*.h $(PROJECT_CSRCDIR)/Makefile
 	@echo '***************************************************************'
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
-	cd ../c_src && $(MAKE)
-	rm ../c_src/*.o || true # to reduce disc used
+	cd $(PROJECT_CSRCDIR) && $(MAKE)
+	rm $(PROJECT_CSRCDIR)/*.o || true # to reduce disc used
 ifdef peflags
-	${peflags} --cygwin-heap=2048 ../c_src/nitc
+	${peflags} --cygwin-heap=2048 $(PROJECT_CSRCDIR)/nitc
 endif
 
-parser/parser.nit:
+$(srcdir)/parser/parser.nit:
 	@echo '***************************************************************'
 	@echo '* Generate nit parser                                         *'
 	@echo '***************************************************************'
-	cd parser && $(MAKE)
+	cd $(srcdir)/parser && $(MAKE)
 
 
 # `clean` `distclean` and `mostlyclean` avoid deleting files usually provided by
@@ -76,5 +80,5 @@ parser/parser.nit:
 #
 # See also: https://www.gnu.org/prep/standards/html_node/Standard-Targets.html
 clean distclean mostlyclean maintainer-clean:
-	rm -rf -- version.nit nitc_0 2> /dev/null || true
-	cd parser && $(MAKE) $@
+	rm -rf -- $(srcdir)/version.nit $(srcdir)/nitc_0 2> /dev/null || true
+	cd $(srcdir)/parser && $(MAKE) $@
