@@ -21,9 +21,10 @@ import frontend
 import highlight
 import nitcorn
 import nitcorn::log
+import template
 
 # Fully process a content as a nit source file.
-fun hightlightcode(hl: HighlightVisitor, content: String): SourceFile
+fun hightlightcode(hl: HighlightVisitor, content: String): HLCode
 do
 	# Prepare a stand-alone tool context
 	var tc = new ToolContext
@@ -39,17 +40,19 @@ do
 	var mb = new ModelBuilder(model, tc)
 
 	# Parse the code
-	var source = new SourceFile.from_string("", content)
+	var source = new SourceFile.from_string("", content + "\n")
 	var lexer = new Lexer(source)
 	var parser = new Parser(lexer)
 	var tree = parser.parse
+
+	var hlcode = new HLCode(hl, content, source)
 
 	# Check syntax error
 	var eof = tree.n_eof
 	if eof isa AError then
 		mb.error(eof, eof.message)
 		hl.hightlight_source(source)
-		return source
+		return hlcode
 	end
 	var amodule = tree.n_base.as(not null)
 
@@ -60,7 +63,45 @@ do
 
 	# Highlight the processed module
 	hl.enter_visit(amodule)
-	return source
+	return hlcode
+end
+
+# A standalone highlighted piece of code
+class HLCode
+	# The highlighter used
+	var hl: HighlightVisitor
+
+	# The raw code source
+	var content: String
+
+	# The pseudo source-file
+	var source: SourceFile
+
+	# JavaScript code to update an existing codemirror editor.
+	fun code_mirror_update: Template
+	do
+
+		var res = new Template
+		res.add """
+	function nitmessage() {
+		editor.operation(function(){
+			for (var i = 0; i < widgets.length; ++i)
+			      editor.removeLineWidget(widgets[i]);
+			widgets.length = 0;
+"""
+
+		for m in source.messages do
+			res.add """
+			var l = document.createElement("div");
+			l.className = "lint-error"
+			l.innerHTML = "<span class='glyphicon glyphicon-warning-sign lint-error-icon'></span> {{{m.text.html_escape}}}";
+			var w = editor.addLineWidget({{{m.location.line_start-1}}}, l);
+			widgets.push(w);
+"""
+		end
+		res.add """});}"""
+		return res
+	end
 end
 
 # Nitcorn service to hightlight code
@@ -71,37 +112,100 @@ class HighlightAction
 
 	redef fun answer(http_request, turi)
 	do
-		var code = http_request.post_args.get_or_null("code")
-
 		var hl = new HighlightVisitor
-		var page = "<doctype html><html><head>{hl.head_content}<style>{hl.css_content} textarea \{width:100%;\}</style></head><body>"
-		# Add the form+textarea
-		page += """
-		<form action="#light" method=post><textarea name=code rows=10>{{{code or else ""}}}</textarea><br><input type=submit></form>
-		"""
+		var page = new Template
 
-		if code != null then
-			# There is code? Process it
-			var source = hightlightcode(hl, code)
+		# There is code? Process it
+		var code = http_request.post_args.get_or_null("code")
+		var hlcode = null
+		if code != null then hlcode = hightlightcode(hl, code)
 
-			# Inject highlight
-			page += "<pre id=light><code>"
-			page += hl.html.write_to_string
-			page += "</code></pre><hr>"
-			page += "<ul>"
+		if http_request.post_args.get_or_null("ajax") == "true" and hlcode != null then
+			page.add hlcode.code_mirror_update
+			page.add """
+			document.getElementById("lightcode").innerHTML = "{{{hl.html.write_to_string.escape_to_c}}}";
+			nitmessage();
+			"""
 
-			# List messages
-			for m in source.messages do
-				page += "<li>{m.location.as(not null)}: {m.text}</li>"
-			end
-			page += "</ul>"
+			var response = new HttpResponse(200)
+			response.header["Content-Type"] = "application/javascript"
+			response.body = page.write_to_string
+			return response
 		end
 
-		page += hl.foot_content
+		page.add """
+		<!doctype html><html><head>{{{hl.head_content}}}
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.css">
+		<style>
+			{{{hl.css_content}}}
+			textarea {width:100%;}
+			.lint-error {font-family: arial; font-size: 70%; background: #ffa; color: #a00; padding: 2px 5px 3px; }
+			.lint-error-icon {color: red; padding: 0 3px; margin-right: 7px;}
+		</style></head><body>
+		"""
+		# Add the form+textarea
+		page.add """
+		<form action="#light" method=post><textarea id=code name=code rows=10>{{{code or else ""}}}</textarea><br><input type=submit></form>
+		"""
+
+		if hlcode != null then
+			# Inject highlight
+			page.add "<pre id=light><code id=lightcode>"
+			page.add hl.html.write_to_string
+			page.add "</code></pre><hr>"
+			page.add "<ul>"
+
+			# List messages
+			for m in hlcode.source.messages do
+				page.add "<li>{m.location.as(not null)}: {m.text}</li>"
+			end
+			page.add "</ul>"
+		else
+			page.add "<pre id=light><code id=lightcode></code></pre>"
+		end
+
+		page.add hl.foot_content
+
+		# Call codemirror
+		page.add """
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.js"></script>
+		<script>
+		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+			lineNumbers: true
+		});
+		"""
+
+		# Callback to update codemirror messages
+		if hlcode != null then
+			page.add hlcode.code_mirror_update
+		else
+			page.add "function nitmessage()\{\}"
+		end
+		page.add """
+		var widgets = [];
+		nitmessage();
+
+		function updatePage() {
+		$.post("", { ajax: true, code: editor.getValue()}, function(data) {
+			eval(data);
+			$(".popupable").popover({html:true, placement:'top'});
+		});
+		}
+
+		var waiting;
+		editor.on("change", function() {
+			clearTimeout(waiting);
+			waiting = setTimeout(updatePage, 500);
+		});
+		waiting = setTimeout(updatePage, 500);
+
+		</script>
+		</body></html>
+		"""
 
 		var response = new HttpResponse(200)
 		response.header["Content-Type"] = "text/html"
-		response.body = page
+		response.body = page.write_to_string
 		return response
 	end
 end

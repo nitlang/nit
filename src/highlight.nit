@@ -463,6 +463,7 @@ redef class MClassDef
 		if mdoc == null then mdoc = mclass.intro.mdoc
 		if mdoc != null then mdoc.fill_infobox(res)
 
+		var in_hierarchy = self.in_hierarchy
 		if in_hierarchy == null then return res
 
 		if in_hierarchy.greaters.length > 1 then
@@ -498,10 +499,13 @@ redef class MPropDef
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(self)
 		if self isa MMethodDef then
+			var msignature = self.msignature
 			if msignature != null then res.new_field("fun").append(mproperty.name).add msignature.linkto(v)
 		else if self isa MAttributeDef then
+			var static_mtype = self.static_mtype
 			if static_mtype != null then res.new_field("fun").append(mproperty.name).add static_mtype.linkto(v)
 		else if self isa MVirtualTypeDef then
+			var bound = self.bound
 			if bound != null then res.new_field("add").append(mproperty.name).add bound.linkto(v)
 		else
 			res.new_field("wat?").append(mproperty.name)
@@ -696,6 +700,8 @@ redef class AQclassid
 	redef fun decorate_tag(v, res, token)
 	do
 		if token != n_id then return null
+		var parent = self.parent
+		if parent == null then return null
 		return parent.decorate_tag(v, res, token)
 	end
 end
@@ -704,6 +710,8 @@ redef class AQid
 	redef fun decorate_tag(v, res, token)
 	do
 		if token != n_id then return null
+		var parent = self.parent
+		if parent == null then return null
 		return parent.decorate_tag(v, res, token)
 	end
 end
@@ -758,7 +766,7 @@ end
 redef class Token
 	# Produce an HTMLTag with the correct contents and CSS classes
 	# Subclasses can redefine it to decorate the tag
-	redef fun make_tag(v: HighlightVisitor): HTMLTag
+	redef fun make_tag(v): HTMLTag
 	do
 		var res = new HTMLTag("span")
 		res.text(text)
@@ -852,6 +860,7 @@ end
 redef class ASendExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		var callsite = self.callsite
 		if callsite == null then return null
 		return callsite.infobox(v)
 	end
@@ -860,6 +869,7 @@ end
 redef class ANewExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		var callsite = self.callsite
 		if callsite == null then return null
 		return callsite.infobox(v)
 	end
@@ -880,7 +890,9 @@ end
 redef class AModuleName
 	redef fun decorate_tag(v, res, token)
 	do
-		return parent.decorate_tag(v, res, token)
+		var p = parent
+		if p == null then return null
+		return p.decorate_tag(v, res, token)
 	end
 end
 
@@ -993,6 +1005,7 @@ redef class AFormaldef
 	do
 		if not token isa TClassid then return null
 		res.add_class("nc_vt")
+		var mtype = self.mtype
 		if mtype == null then return null
 		return mtype.infobox(v)
 	end
