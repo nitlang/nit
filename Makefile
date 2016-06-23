@@ -48,7 +48,7 @@ full: all
 
 docs: $(project_docdir)/stdlib/index.html $(project_docdir)/nitc/index.html
 
-tools:
+tools $(project_bindir):
 	cd $(srcdir) && $(MAKE)
 
 $(project_bindir)/%:
@@ -84,7 +84,7 @@ $(project_docdir)/nitc/index.html: $(project_bindir)/nitdoc $(project_bindir)/ni
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "3"
 
-man:
+man $(project_mandir):
 	# Setup PATH to find nitc
 	export PATH="$$(cd $(project_bindir) && pwd):$$PATH" && \
 	cd $(project_mandir) && $(MAKE)
