@@ -21,6 +21,7 @@ import frontend
 import highlight
 import nitcorn
 import nitcorn::log
+import template
 
 # Fully process a content as a nit source file.
 fun hightlightcode(hl: HighlightVisitor, content: String): SourceFile
@@ -71,13 +72,20 @@ class HighlightAction
 
 	redef fun answer(http_request, turi)
 	do
+		var hl = new HighlightVisitor
+		var page = new Template
 		var code = http_request.post_args.get_or_null("code")
 
-		var hl = new HighlightVisitor
-		var page = "<doctype html><html><head>{hl.head_content}<style>{hl.css_content} textarea \{width:100%;\}</style></head><body>"
+		page.add """
+		<!doctype html><html><head>{{{hl.head_content}}}
+		<style>
+			{{{hl.css_content}}}
+			textarea {width:100%;}
+		</style></head><body>
+		"""
 		# Add the form+textarea
-		page += """
-		<form action="#light" method=post><textarea name=code rows=10>{{{code or else ""}}}</textarea><br><input type=submit></form>
+		page.add """
+		<form action="#light" method=post><textarea id=code name=code rows=10>{{{code or else ""}}}</textarea><br><input type=submit></form>
 		"""
 
 		if code != null then
@@ -85,23 +93,26 @@ class HighlightAction
 			var source = hightlightcode(hl, code)
 
 			# Inject highlight
-			page += "<pre id=light><code>"
-			page += hl.html.write_to_string
-			page += "</code></pre><hr>"
-			page += "<ul>"
+			page.add "<pre id=light><code id=lightcode>"
+			page.add hl.html.write_to_string
+			page.add "</code></pre><hr>"
+			page.add "<ul>"
 
 			# List messages
 			for m in source.messages do
-				page += "<li>{m.location.as(not null)}: {m.text}</li>"
+				page.add "<li>{m.location.as(not null)}: {m.text}</li>"
 			end
-			page += "</ul>"
+			page.add "</ul>"
 		end
 
-		page += hl.foot_content
+		page.add hl.foot_content
+		page.add """
+		</body></html>
+		"""
 
 		var response = new HttpResponse(200)
 		response.header["Content-Type"] = "text/html"
-		response.body = page
+		response.body = page.write_to_string
 		return response
 	end
 end
