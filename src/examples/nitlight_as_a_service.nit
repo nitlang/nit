@@ -120,6 +120,19 @@ class HighlightAction
 		var hlcode = null
 		if code != null then hlcode = hightlightcode(hl, code)
 
+		if http_request.post_args.get_or_null("ajax") == "true" and hlcode != null then
+			page.add hlcode.code_mirror_update
+			page.add """
+			document.getElementById("lightcode").innerHTML = "{{{hl.html.write_to_string.escape_to_c}}}";
+			nitmessage();
+			"""
+
+			var response = new HttpResponse(200)
+			response.header["Content-Type"] = "application/javascript"
+			response.body = page.write_to_string
+			return response
+		end
+
 		page.add """
 		<!doctype html><html><head>{{{hl.head_content}}}
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.css">
@@ -147,6 +160,8 @@ class HighlightAction
 				page.add "<li>{m.location.as(not null)}: {m.text}</li>"
 			end
 			page.add "</ul>"
+		else
+			page.add "<pre id=light><code id=lightcode></code></pre>"
 		end
 
 		page.add hl.foot_content
@@ -169,6 +184,20 @@ class HighlightAction
 		page.add """
 		var widgets = [];
 		nitmessage();
+
+		function updatePage() {
+		$.post("", { ajax: true, code: editor.getValue()}, function(data) {
+			eval(data);
+			$(".popupable").popover({html:true, placement:'top'});
+		});
+		}
+
+		var waiting;
+		editor.on("change", function() {
+			clearTimeout(waiting);
+			waiting = setTimeout(updatePage, 500);
+		});
+		waiting = setTimeout(updatePage, 500);
 
 		</script>
 		</body></html>
