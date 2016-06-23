@@ -116,7 +116,7 @@ clean distclean mostlyclean maintainer-clean:
 	for directory in $(extras) $(libs); do \
 		(cd "$$directory" && { $(MAKE) $@ || $(MAKE) clean; }); \
 	done
-	cd ./c_src && $(MAKE) clean
+	cd ./c_src && $(MAKE) clean || true
 	cd $(srcdir) && $(MAKE) $@
 	cd ./tests && $(MAKE) $@
 	cd $(project_mandir) && $(MAKE) $@
