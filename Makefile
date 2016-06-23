@@ -51,7 +51,7 @@ docs: $(project_docdir)/stdlib/index.html $(project_docdir)/nitc/index.html
 tools:
 	cd $(srcdir) && $(MAKE)
 
-$(project_bindir)/nitdoc $(project_bindir)/nitls:
+$(project_bindir)/%:
 	cd $(srcdir) && $(MAKE) ../$@
 
 $(project_docdir)/stdlib/index.html: $(project_bindir)/nitdoc $(project_bindir)/nitls
