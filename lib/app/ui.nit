@@ -211,7 +211,7 @@ abstract class TextView
 	# depending on the customization options of each platform.
 	# For consistent results, it is recommended to use only on instances
 	# of `Label` and `size` should be either 0.0, 0.5 or 1.0.
-	fun align=(center: nullable Float) is autoinit do end
+	fun align=(align: nullable Float) is autoinit do end
 end
 
 # A control for the user to enter custom `text`
