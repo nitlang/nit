@@ -24,7 +24,7 @@ import nitcorn::log
 import template
 
 # Fully process a content as a nit source file.
-fun hightlightcode(hl: HighlightVisitor, content: String): SourceFile
+fun hightlightcode(hl: HighlightVisitor, content: String): HLCode
 do
 	# Prepare a stand-alone tool context
 	var tc = new ToolContext
@@ -45,12 +45,14 @@ do
 	var parser = new Parser(lexer)
 	var tree = parser.parse
 
+	var hlcode = new HLCode(hl, content, source)
+
 	# Check syntax error
 	var eof = tree.n_eof
 	if eof isa AError then
 		mb.error(eof, eof.message)
 		hl.hightlight_source(source)
-		return source
+		return hlcode
 	end
 	var amodule = tree.n_base.as(not null)
 
@@ -61,7 +63,19 @@ do
 
 	# Highlight the processed module
 	hl.enter_visit(amodule)
-	return source
+	return hlcode
+end
+
+# A standalone highlighted piece of code
+class HLCode
+	# The highlighter used
+	var hl: HighlightVisitor
+
+	# The raw code source
+	var content: String
+
+	# The pseudo source-file
+	var source: SourceFile
 end
 
 # Nitcorn service to hightlight code
@@ -90,7 +104,7 @@ class HighlightAction
 
 		if code != null then
 			# There is code? Process it
-			var source = hightlightcode(hl, code)
+			var hlcode = hightlightcode(hl, code)
 
 			# Inject highlight
 			page.add "<pre id=light><code id=lightcode>"
@@ -99,7 +113,7 @@ class HighlightAction
 			page.add "<ul>"
 
 			# List messages
-			for m in source.messages do
+			for m in hlcode.source.messages do
 				page.add "<li>{m.location.as(not null)}: {m.text}</li>"
 			end
 			page.add "</ul>"
