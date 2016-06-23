@@ -92,6 +92,7 @@ class HighlightAction
 
 		page.add """
 		<!doctype html><html><head>{{{hl.head_content}}}
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.css">
 		<style>
 			{{{hl.css_content}}}
 			textarea {width:100%;}
@@ -120,7 +121,15 @@ class HighlightAction
 		end
 
 		page.add hl.foot_content
+
+		# Call codemirror
 		page.add """
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.js"></script>
+		<script>
+		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+			lineNumbers: true
+		});
+		</script>
 		</body></html>
 		"""
 
