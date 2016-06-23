@@ -29,7 +29,7 @@ all: $(OUT)
 
 $(PROJECT_MAN1DIR)/%.1: $(PROJECT_MANDIR)/%.md $(NITMD)
 	mkdir -p $(PROJECT_MAN1DIR)
-	echo ".TH $* 1" > $@
+	printf '.TH %s 1\n' $* > $@
 	$(NITMD) $< -t man >> $@
 
 
@@ -50,7 +50,7 @@ publish: web
 
 pdf:
 	mkdir -p $(PROJECT_PDFDIR)
-	for x in $(PROJECT_MANDIR)/nit*.md; do echo $$x; pandoc -V header-includes='\usepackage{savetrees}' $$x -o $(PROJECT_PDFDIR)/$$x.pdf; done
+	for x in $(PROJECT_MANDIR)/nit*.md; do printf '%s\n' "$$x"; pandoc -V header-includes='\usepackage{savetrees}' "$$x" -o $(PROJECT_PDFDIR)/"$$x".pdf; done
 	pdfjoin pdf.out/*.pdf -o man.pdf
 
 clean distclean mostlyclean maintainer-clean:
