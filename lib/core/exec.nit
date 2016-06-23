@@ -67,21 +67,21 @@ class Process
 
 	# The executable run
 	# Is a filepath, or a executable found in PATH
-	var command: String
+	var command: Text
 
 	# The arguments of the command
 	# Starts with the first real arguments---ie. does not include the progname (`argv[0]`, in C)
-	var arguments: nullable Array[String]
+	var arguments: nullable Array[Text]
 
 	# Launch a command with some arguments
-	init(command: String, arguments: String...) is old_style_init do
+	init(command: Text, arguments: Text...) is old_style_init do
 		self.command = command
 		self.arguments = arguments
 		execute
 	end
 
 	# Launch a simple command with arguments passed as an array
-	init from_a(command: String, arguments: nullable Array[String])
+	init from_a(command: Text, arguments: nullable Array[Text])
 	do
 		self.command = command
 		self.arguments = arguments
@@ -321,7 +321,7 @@ end
 
 redef class Sys
 	# Execute a shell command and return its error code
-	fun system(command: String): Int
+	fun system(command: Text): Int
 	do
 		return command.to_cstring.system
 	end
