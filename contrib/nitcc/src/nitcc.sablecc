@@ -64,6 +64,7 @@ re3 {-> re} =
 	{plus:} re3 '+' |
 	{shortest:} 'Shortest' '(' re ')' |
 	{longest:} 'Longest' '(' re ')' |
+	{prefixes:} 'Prefixes' '(' re ')' |
 	{id:} id |
 	{par:} '(' re ')' |
 	{class:} text '.' '.' text |

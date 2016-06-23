@@ -360,8 +360,8 @@ class Automaton
 
 		# Remove their transitions
 		for s in bads do
-			for t in s.ins do t.delete
-			for t in s.outs do t.delete
+			for t in s.ins.to_a do t.delete
+			for t in s.outs.to_a do t.delete
 		end
 
 		# Keep only the good stuff
@@ -373,14 +373,18 @@ class Automaton
 	# REQUIRE: self is a DFA
 	fun to_minimal_dfa: Automaton
 	do
+		assert_valid
+
 		trim
 
+		# Graph of known distinct states.
 		var distincts = new HashMap[State, Set[State]]
 		for s in states do
 			distincts[s] = new HashSet[State]
 		end
 
-		# split accept states
+		# split accept states.
+		# An accept state is distinct with a non accept state.
 		for s1 in states do
 			for s2 in states do
 				if distincts[s1].has(s2) then continue
@@ -390,7 +394,7 @@ class Automaton
 					distincts[s2].add(s1)
 					continue
 				end
-				if tags[s1] != tags[s2] then
+				if tags.get_or_null(s1) != tags.get_or_null(s2) then
 					distincts[s1].add(s2)
 					distincts[s2].add(s1)
 					continue
@@ -398,24 +402,36 @@ class Automaton
 			end
 		end
 
+		# Fixed point algorithm.
+		# * Get 2 states s1 and s2 not yet distinguished.
+		# * Get a symbol w.
+		# * If s1.trans(w) and s2.trans(w) are distinguished, then
+		#   distinguish s1 and s2.
 		var changed = true
-		var ints = new Array[Int]
+		var ints = new Array[Int] # List of symbols to check
 		while changed do
 			changed = false
 			for s1 in states do for s2 in states do
 				if distincts[s1].has(s2) then continue
+
+				# The transitions use intervals. Therefore, for the states s1 and s2,
+				# we need to check only the meaningful symbols. They are the `first`
+				# symbol of each interval and the first one after the interval (`last+1`).
 				ints.clear
+				# Check only `s1`; `s2` will be checked later when s1 and s2 are switched.
 				for t in s1.outs do
 					var sym = t.symbol
 					assert sym != null
 					ints.add sym.first
 					var l = sym.last
-					if l != null then ints.add l
+					if l != null then ints.add l + 1
 				end
+
+				# Check each symbol
 				for i in ints do
 					var ds1 = s1.trans(i)
 					var ds2 = s2.trans(i)
-					if ds1 == null and ds2 == null then continue
+					if ds1 == ds2 then continue
 					if ds1 != null and ds2 != null and not distincts[ds1].has(ds2) then continue
 					distincts[s1].add(s2)
 					distincts[s2].add(s1)
@@ -425,12 +441,29 @@ class Automaton
 			end
 		end
 
+		# We need to unify not-distinguished states.
+		# Just add an epsilon-transition and DFAize the automaton.
 		for s1 in states do for s2 in states do
 			if distincts[s1].has(s2) then continue
 			s1.add_trans(s2, null)
 		end
 
 		return to_dfa
+	end
+
+	# Assert that `self` is a valid automaton or abort
+	fun assert_valid
+	do
+		assert states.has(start)
+		assert states.has_all(accept)
+		for s in states do
+			for t in s.outs do assert states.has(t.to)
+			for t in s.ins do assert states.has(t.from)
+		end
+		assert states.has_all(tags.keys)
+		for t, ss in retrotags do
+			assert states.has_all(ss)
+		end
 	end
 
 	# Produce a graphvis file for the automaton
@@ -498,6 +531,8 @@ class Automaton
 	# note: the DFA is not minimized.
 	fun to_dfa: Automaton
 	do
+		assert_valid
+
 		trim
 
 		var dfa = new Automaton.empty

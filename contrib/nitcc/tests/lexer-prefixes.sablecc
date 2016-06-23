@@ -1,0 +1,13 @@
+Grammar x;
+
+Lexer
+    m = 'abcd' | 'x'* 'y'+ 'z'?;
+    pm = Prefixes(m) Except '';
+    err = ('a'..'z') Except pm;
+
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+
+    s = p+;
+    p = pm | err;
