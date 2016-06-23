@@ -85,12 +85,18 @@ class HLCode
 		res.add """
 	function nitmessage() {
 		editor.operation(function(){
+			for (var i = 0; i < widgets.length; ++i)
+			      editor.removeLineWidget(widgets[i]);
+			widgets.length = 0;
+"""
+
 		for m in source.messages do
 			res.add """
 			var l = document.createElement("div");
 			l.className = "lint-error"
 			l.innerHTML = "<span class='glyphicon glyphicon-warning-sign lint-error-icon'></span> {{{m.text.html_escape}}}";
 			var w = editor.addLineWidget({{{m.location.line_start-1}}}, l);
+			widgets.push(w);
 """
 		end
 		res.add """});}"""
@@ -161,6 +167,7 @@ class HighlightAction
 			page.add "function nitmessage()\{\}"
 		end
 		page.add """
+		var widgets = [];
 		nitmessage();
 
 		</script>
