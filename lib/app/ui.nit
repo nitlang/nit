@@ -107,10 +107,16 @@ class Control
 
 	# Direct parent `Control` in the control tree
 	#
+	# The parents (direct and indirect) receive all events from `self`,
+	# like the `observers`.
+	#
 	# If `null` then `self` is at the root of the tree, or not yet attached.
 	var parent: nullable CompositeControl = null is private writable(set_parent)
 
 	# Direct parent `Control` in the control tree
+	#
+	# The parents (direct and indirect) receive all events from `self`,
+	# like the `observers`.
 	#
 	# Setting `parent` calls `remove` on the old parent and `add` on the new one.
 	fun parent=(parent: nullable CompositeControl)
@@ -124,12 +130,25 @@ class Control
 
 		set_parent parent
 	end
+
+	# Also notify the parents (both direct and indirect)
+	redef fun notify_observers(event)
+	do
+		super
+
+		var p = parent
+		while p != null do
+			p.on_event event
+			p = p.parent
+		end
+	end
 end
 
 # A `Control` grouping other controls
 class CompositeControl
 	super Control
 
+	# Child controls composing this control
 	protected var items = new Array[Control]
 
 	# Add `item` as a child of `self`
