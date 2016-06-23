@@ -1,3 +1,4 @@
+.POSIX:
 
 .PHONY: all
 all: niti nitcg nitcs
@@ -51,8 +52,8 @@ nitce-phand:
 
 .PHONY: failed
 failed:
-	@[ ! -s errlist ] && echo 'No failed tests to execute' ; true
-	@[ -s errlist ] && ./tests.sh `cat errlist | sort -u` ; true
+	@{ [ ! -s errlist ] && echo 'No failed tests to execute'; } || true
+	@{ [ -s errlist ] && ./tests.sh `cat errlist | sort -u`; } || true
 
 .PHONY: store
 store:
