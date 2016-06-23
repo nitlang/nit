@@ -14,9 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+project_bindir = ./bin
+project_docdir = ./doc
+project_mandir = ./share/man
 
 contrib_dir = ./contrib
 examples_dir = ./examples
+srcdir = ./src
 all_contribs = $(dir $(wildcard $(contrib_dir)/*/Makefile))
 
 # Additional program directories (contrib and examples) that are buildable
@@ -37,19 +41,19 @@ full: all
 		(cd "$${directory}" && $(MAKE)) || exit 1; \
 	done
 
-docs: doc/stdlib/index.html doc/nitc/index.html
+docs: $(project_docdir)/stdlib/index.html $(project_docdir)/nitc/index.html
 
 tools:
-	cd ./src && $(MAKE)
+	cd $(srcdir) && $(MAKE)
 
-bin/nitdoc bin/nitls:
-	cd ./src && $(MAKE) ../bin/$@
+$(project_bindir)/nitdoc $(project_bindir)/nitls:
+	cd $(srcdir) && $(MAKE) ../$@
 
-doc/stdlib/index.html: bin/nitdoc bin/nitls
+$(project_docdir)/stdlib/index.html: $(project_bindir)/nitdoc $(project_bindir)/nitls
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib -d doc/stdlib \
+	$(project_bindir)/nitdoc lib -d $(project_docdir)/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
@@ -61,8 +65,8 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "2" \
 
-doc/nitc/index.html: bin/nitdoc bin/nitls
-	bin/nitdoc lib src/nit*.nit src/test_*.nit -d doc/nitc \
+$(project_docdir)/nitc/index.html: $(project_bindir)/nitdoc $(project_bindir)/nitls
+	$(project_bindir)/nitdoc lib $(srcdir)/nit*.nit $(srcdir)/test_*.nit -d $(project_docdir)/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
@@ -77,8 +81,8 @@ doc/nitc/index.html: bin/nitdoc bin/nitls
 
 man:
 	# Setup PATH to find nitc
-	export PATH="$$(cd ./bin && pwd):$$PATH" && \
-	cd ./share/man && $(MAKE)
+	export PATH="$$(cd $(project_bindir) && pwd):$$PATH" && \
+	cd $(project_mandir) && $(MAKE)
 
 # `clean` `distclean` and `mostlyclean` avoid deleting files usually provided by
 # the maintainers.
@@ -89,11 +93,11 @@ man:
 #
 # See also: https://www.gnu.org/prep/standards/html_node/Standard-Targets.html
 clean distclean mostlyclean maintainer-clean:
-	rm -rf -- doc/stdlib doc/nitc || true
+	rm -rf -- $(project_docdir)/stdlib $(project_docdir)/nitc
 	cd ./c_src && $(MAKE) clean
-	cd ./src && $(MAKE) $@
+	cd $(srcdir) && $(MAKE) $@
 	cd ./tests && $(MAKE) $@
-	cd ./share/man && $(MAKE) $@
+	cd $(project_mandir) && $(MAKE) $@
 	for directory in $(extras); do \
 		(cd "$$directory" && { $(MAKE) $@ || $(MAKE) clean || true; }); \
 	done
