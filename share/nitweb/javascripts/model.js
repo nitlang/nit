@@ -94,4 +94,14 @@
 				},
 			}
 		}])
+
+		.factory('DocDown', [ '$http', function($http) {
+			return {
+				postMarkdown: function(md, cb, cbErr) {
+					$http.post(apiUrl + '/docdown', md)
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
 })();

@@ -1,0 +1,33 @@
+<div class='container-fluid'>
+	<div class='page-header'>
+		<h2>Docdown snippets</h2>
+		<p class='text-muted'>Sharable documentation snippets.</p>
+		<div class="input-group">
+			<span ng-if='edit' class="input-group-btn">
+				<button class='btn btn-success' ng-click='docdownCtrl.editMode(false)'>
+					<span class='glyphicon glyphicon-link' /> View
+				</button>
+			</span>
+			<span ng-if='!edit' class="input-group-btn">
+				<button class='btn btn-success' ng-click='docdownCtrl.editMode(true)'>
+					<span class='glyphicon glyphicon-edit' /> Edit
+				</button>
+			</span>
+			<input class='form-control' type='text' ng-model='link' />
+		</div>
+	</div>
+	<div class='row'>
+		<div ng-show='edit' class='col-xs-6'>
+			<div class='card'>
+				<textarea ng-model='markdown' ng-model-options='{ debounce: 100 }' ng-change='docdownCtrl.updateSnippet()' class='form-control' rows='20'></textarea>
+			</div>
+		</div>
+		<div ng-class='edit ? "col-xs-6" : "col-xs-12"'>
+			<div class='card'>
+				<div class='card-body nitdoc'>
+					<div ng-bind-html='html' />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

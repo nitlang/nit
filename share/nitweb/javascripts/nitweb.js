@@ -15,7 +15,7 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'angular-loading-bar', 'entities', 'index'])
+	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'angular-loading-bar', 'entities', 'docdown', 'index'])
 	.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeSpinner = false;
 	}])
@@ -25,6 +25,11 @@
 				templateUrl: 'views/index.html',
 				controller: 'IndexCtrl',
 				controllerAs: 'indexCtrl'
+			})
+			.when('/docdown', {
+				templateUrl: 'views/docdown.html',
+				controller: 'DocdownCtrl',
+				controllerAs: 'docdownCtrl'
 			})
 			.when('/doc/:id', {
 				templateUrl: 'views/doc.html',
