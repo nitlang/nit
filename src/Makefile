@@ -31,8 +31,10 @@ PEFLAGSFLAGS = --cygwin-heap=2048
 # To append to the end of a command to ignore if not available (e.g. `$(PEFLAGS)`).
 OPTIONAL = || [ "$$?" -eq 127 ]
 
+.PHONY: all
 all: $(PROJECT_BINDIR)
 
+.PHONY: pre-build
 pre-build: nitc_0
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
@@ -53,6 +55,7 @@ nitc_0: ../c_src/nitc parser/parser.nit
 $(PROJECT_BINDIR): pre-build
 	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $(SRCS)
 
+.PHONY: $(OBJS)
 $(OBJS): pre-build
 	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $@.nit
 
@@ -82,6 +85,7 @@ $(srcdir)/parser/parser.nit:
 # deletes files that may need special tools to rebuild.
 #
 # See also: https://www.gnu.org/prep/standards/html_node/Standard-Targets.html
+.PHONY: clean distclean mostlyclean maintainer-clean
 clean distclean mostlyclean maintainer-clean:
 	rm -rf -- $(srcdir)/version.nit $(srcdir)/nitc_0 2> /dev/null || true
 	cd $(srcdir)/parser && $(MAKE) $@
