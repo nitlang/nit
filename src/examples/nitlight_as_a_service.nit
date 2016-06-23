@@ -76,6 +76,26 @@ class HLCode
 
 	# The pseudo source-file
 	var source: SourceFile
+
+	# JavaScript code to update an existing codemirror editor.
+	fun code_mirror_update: Template
+	do
+
+		var res = new Template
+		res.add """
+	function nitmessage() {
+		editor.operation(function(){
+		for m in source.messages do
+			res.add """
+			var l = document.createElement("div");
+			l.className = "lint-error"
+			l.innerHTML = "<span class='glyphicon glyphicon-warning-sign lint-error-icon'></span> {{{m.text.html_escape}}}";
+			var w = editor.addLineWidget({{{m.location.line_start-1}}}, l);
+"""
+		end
+		res.add """});}"""
+		return res
+	end
 end
 
 # Nitcorn service to hightlight code
@@ -100,6 +120,8 @@ class HighlightAction
 		<style>
 			{{{hl.css_content}}}
 			textarea {width:100%;}
+			.lint-error {font-family: arial; font-size: 70%; background: #ffa; color: #a00; padding: 2px 5px 3px; }
+			.lint-error-icon {color: red; padding: 0 3px; margin-right: 7px;}
 		</style></head><body>
 		"""
 		# Add the form+textarea
@@ -130,6 +152,17 @@ class HighlightAction
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			lineNumbers: true
 		});
+		"""
+
+		# Callback to update codemirror messages
+		if hlcode != null then
+			page.add hlcode.code_mirror_update
+		else
+			page.add "function nitmessage()\{\}"
+		end
+		page.add """
+		nitmessage();
+
 		</script>
 		</body></html>
 		"""
