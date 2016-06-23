@@ -88,7 +88,11 @@ class HighlightAction
 	do
 		var hl = new HighlightVisitor
 		var page = new Template
+
+		# There is code? Process it
 		var code = http_request.post_args.get_or_null("code")
+		var hlcode = null
+		if code != null then hlcode = hightlightcode(hl, code)
 
 		page.add """
 		<!doctype html><html><head>{{{hl.head_content}}}
@@ -103,10 +107,7 @@ class HighlightAction
 		<form action="#light" method=post><textarea id=code name=code rows=10>{{{code or else ""}}}</textarea><br><input type=submit></form>
 		"""
 
-		if code != null then
-			# There is code? Process it
-			var hlcode = hightlightcode(hl, code)
-
+		if hlcode != null then
 			# Inject highlight
 			page.add "<pre id=light><code id=lightcode>"
 			page.add hl.html.write_to_string
