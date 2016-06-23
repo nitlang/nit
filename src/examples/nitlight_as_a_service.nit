@@ -40,7 +40,7 @@ do
 	var mb = new ModelBuilder(model, tc)
 
 	# Parse the code
-	var source = new SourceFile.from_string("", content)
+	var source = new SourceFile.from_string("", content + "\n")
 	var lexer = new Lexer(source)
 	var parser = new Parser(lexer)
 	var tree = parser.parse
