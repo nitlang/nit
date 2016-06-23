@@ -25,7 +25,7 @@ SRCS = $(patsubst %,$(srcdir)/%.nit,$(OBJS))
 BINS = $(patsubst %,$(PROJECT_BINDIR)/%,$(OBJS))
 
 # Workaround: Cygwin requires peflags to bootstrap
-peflags := ${shell which peflags 2>/dev/null}
+peflags := $(shell which peflags 2>/dev/null)
 
 all: bin/nitc
 
@@ -37,9 +37,9 @@ nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
 	$(srcdir)/git-gen-version.sh
-	$(PROJECT_CSRCDIR)/nitc ${OLDNITCFLAGS} -o $(srcdir)/nitc_0 -v $(srcdir)/nitc.nit
+	$(PROJECT_CSRCDIR)/nitc $(OLDNITCFLAGS) -o $(srcdir)/nitc_0 -v $(srcdir)/nitc.nit
 ifdef peflags
-	${peflags} --cygwin-heap=2048 $(srcdir)/nitc_0
+	$(peflags) --cygwin-heap=2048 $(srcdir)/nitc_0
 endif
 
 bin/nitc: nitc_0 parser/parser.nit
@@ -48,7 +48,7 @@ bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	$(srcdir)/git-gen-version.sh
 	test -d $(PROJECT_BINDIR) || mkdir $(PROJECT_BINDIR)
-	$(srcdir)/nitc_0 ${NITFLAGS} -v --dir $(PROJECT_BINDIR) $(SRCS)
+	$(srcdir)/nitc_0 $(NITFLAGS) -v --dir $(PROJECT_BINDIR) $(SRCS)
 
 $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
@@ -61,7 +61,7 @@ $(PROJECT_CSRCDIR)/nitc: $(PROJECT_CSRCDIR)/*.c $(PROJECT_CSRCDIR)/*.h $(PROJECT
 	cd $(PROJECT_CSRCDIR) && $(MAKE)
 	rm $(PROJECT_CSRCDIR)/*.o || true # to reduce disc used
 ifdef peflags
-	${peflags} --cygwin-heap=2048 $(PROJECT_CSRCDIR)/nitc
+	$(peflags) --cygwin-heap=2048 $(PROJECT_CSRCDIR)/nitc
 endif
 
 $(srcdir)/parser/parser.nit:
