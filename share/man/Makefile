@@ -12,17 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-IN=$(wildcard nit*.md)
-OUT=$(patsubst %.md,man1/%.1,$(IN))
 
-MARKDOWN=../../lib/markdown
-NITMD=$(MARKDOWN)/nitmd
+PROJECT_LIBDIR = ../../lib
+PROJECT_MANDIR = .
+PROJECT_MAN1DIR = $(PROJECT_MANDIR)/man1
+PROJECT_WEBDIR = $(PROJECT_MANDIR)/www
+PROJECT_PDFDIR = $(PROJECT_MANDIR)/pdf.out
 
+IN = $(wildcard $(PROJECT_MANDIR)/nit*.md)
+OUT = $(patsubst $(PROJECT_MANDIR)/%.md,$(PROJECT_MAN1DIR)/%.1,$(IN))
+
+MARKDOWN = $(PROJECT_LIBDIR)/markdown
+NITMD = $(MARKDOWN)/nitmd
 all: $(OUT)
 
 
-man1/%.1: %.md $(NITMD)
-	mkdir -p man1
+$(PROJECT_MAN1DIR)/%.1: $(PROJECT_MANDIR)/%.md $(NITMD)
+	mkdir -p $(PROJECT_MAN1DIR)
 	echo ".TH $* 1" > $@
 	$(NITMD) $< -t man >> $@
 
@@ -32,20 +38,20 @@ $(NITMD):
 
 # Rule to produce mdwn files for ikiwiki that will be used at http://nitlanguage.org/tools/
 web:
-	rm -r www 2>/dev/null || true
-	mkdir -p www
-	cp nit*.md www
-	rename '$$_ = "$${_}wn"' www/*.md
-	sed -i -e '/SEE ALSO/,$$d' www/*.mdwn
+	rm -r $(PROJECT_WEBDIR) 2>/dev/null || true
+	mkdir -p $(PROJECT_WEBDIR)
+	cp $(PROJECT_MANDIR)/nit*.md $(PROJECT_WEBDIR)
+	rename '$$_ = "$${_}wn"' $(PROJECT_WEBDIR)/*.md
+	sed -i -e '/SEE ALSO/,$$d' $(PROJECT_WEBDIR)/*.mdwn
 
 publish: web
-	rsync www/* asimov:wiki/nitlanguage/doc/tools/
+	rsync $(PROJECT_WEBDIR)/* asimov:wiki/nitlanguage/doc/tools/
 	ssh asimov make -C wiki/nitlanguage
 
 pdf:
-	mkdir -p pdf.out
-	for x in nit*.md; do echo $$x; pandoc -V header-includes='\usepackage{savetrees}' $$x -o pdf.out/$$x.pdf; done
+	mkdir -p $(PROJECT_PDFDIR)
+	for x in $(PROJECT_MANDIR)/nit*.md; do echo $$x; pandoc -V header-includes='\usepackage{savetrees}' $$x -o $(PROJECT_PDFDIR)/$$x.pdf; done
 	pdfjoin pdf.out/*.pdf -o man.pdf
 
 clean distclean mostlyclean maintainer-clean:
-	rm -r www pdf.out || true
+	rm -r $(PROJECT_WEBDIR) $(PROJECT_PDFDIR) || true
