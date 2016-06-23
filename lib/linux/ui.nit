@@ -343,3 +343,7 @@ redef class TextInput
 		super
 	end
 end
+
+redef class Text
+	redef fun open_in_browser do system("xdg-open '{self.escape_to_sh}' &")
+end

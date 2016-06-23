@@ -348,3 +348,18 @@ redef class Android_app_Fragment
 		};
 	`}
 end
+
+redef class Text
+	redef fun open_in_browser
+	do to_java_string.native_open_in_browser(app.native_activity)
+end
+
+redef class JavaString
+	private fun native_open_in_browser(context: NativeContext)
+	in "Java" `{
+		android.content.Intent intent = new android.content.Intent(
+			android.content.Intent.ACTION_VIEW,
+			android.net.Uri.parse(self));
+		context.startActivity(intent);
+	`}
+end
