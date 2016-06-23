@@ -16,6 +16,7 @@
 
 SABLECC3ALTGEN ?= sablecc3
 
+.PHONY: all
 all: parser.nit
 
 # Preprocess the extended sablecc gramar
@@ -31,14 +32,17 @@ parser.nit: .nit.sablecc3 xss/*.xss
 	./fact_parser.pl .parser-nofact.nit > parser.nit
 	perl -np -i.orig -e 's/([ (\[])P([A-Z])/\1A\2/g;' -e 's/"{"/"\\{"/g;' parser.nit parser_abs.nit parser_prod.nit lexer.nit
 
+.PHONY: clean distclean mostlyclean
 clean distclean mostlyclean:
 	rm -f -- .nit.sablecc3 .nit.sablecc3.dump .parser-nofact.nit || true
 
+.PHONY: maintainer-clean
 maintainer-clean: clean
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
 	rm -f -- parser.nit parser_abs.nit parser_prod.nit lexer.nit || true
 
+.PHONY: java
 java: .nit.sablecc3
 	rm -r org/nitlanguage/gen/analysis/ org/nitlanguage/gen/lexer/ org/nitlanguage/gen/node/ org/nitlanguage/gen/parser/
 	${SABLECC3ALTGEN} .nit.sablecc3 -c .nit.sablecc3.dump
