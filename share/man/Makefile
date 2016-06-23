@@ -54,4 +54,4 @@ pdf:
 	pdfjoin pdf.out/*.pdf -o man.pdf
 
 clean distclean mostlyclean maintainer-clean:
-	rm -r $(PROJECT_WEBDIR) $(PROJECT_PDFDIR) || true
+	rm -r $(PROJECT_WEBDIR) $(PROJECT_PDFDIR) $(PROJECT_MAN1DIR) || true
