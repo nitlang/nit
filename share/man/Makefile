@@ -24,6 +24,8 @@ OUT = $(patsubst $(PROJECT_MANDIR)/%.md,$(PROJECT_MAN1DIR)/%.1,$(IN))
 
 MARKDOWN = $(PROJECT_LIBDIR)/markdown
 NITMD = $(MARKDOWN)/nitmd
+
+.PHONY: all
 all: $(OUT)
 
 
@@ -37,6 +39,7 @@ $(NITMD):
 	cd $(MARKDOWN) && $(MAKE)
 
 # Rule to produce mdwn files for ikiwiki that will be used at http://nitlanguage.org/tools/
+.PHONY: web
 web:
 	rm -r $(PROJECT_WEBDIR) 2>/dev/null || true
 	mkdir -p $(PROJECT_WEBDIR)
@@ -44,14 +47,17 @@ web:
 	rename '$$_ = "$${_}wn"' $(PROJECT_WEBDIR)/*.md
 	sed -i -e '/SEE ALSO/,$$d' $(PROJECT_WEBDIR)/*.mdwn
 
+.PHONY: publish
 publish: web
 	rsync $(PROJECT_WEBDIR)/* asimov:wiki/nitlanguage/doc/tools/
 	ssh asimov make -C wiki/nitlanguage
 
+.PHONY: pdf
 pdf:
 	mkdir -p $(PROJECT_PDFDIR)
 	for x in $(PROJECT_MANDIR)/nit*.md; do printf '%s\n' "$$x"; pandoc -V header-includes='\usepackage{savetrees}' "$$x" -o $(PROJECT_PDFDIR)/"$$x".pdf; done
 	pdfjoin pdf.out/*.pdf -o man.pdf
 
+.PHONY: clean distclean mostlyclean maintainer-clean
 clean distclean mostlyclean maintainer-clean:
 	rm -r $(PROJECT_WEBDIR) $(PROJECT_PDFDIR) $(PROJECT_MAN1DIR) || true
