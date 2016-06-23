@@ -27,7 +27,7 @@ BINS = $(patsubst %,$(PROJECT_BINDIR)/%,$(OBJS))
 # Workaround: Cygwin requires peflags to bootstrap
 peflags := $(shell which peflags 2>/dev/null)
 
-all: bin/nitc
+all: $(PROJECT_BINDIR)
 
 pre-build: nitc_0
 	@echo '***************************************************************'
@@ -46,7 +46,7 @@ ifdef peflags
 	$(peflags) --cygwin-heap=2048 $(srcdir)/nitc_0
 endif
 
-bin/nitc: pre-build
+$(PROJECT_BINDIR): pre-build
 	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $(SRCS)
 $(OBJS): pre-build
 	$(srcdir)/nitc_0 $(NITCFLAGS) -v --dir $(PROJECT_BINDIR) -- $@.nit
