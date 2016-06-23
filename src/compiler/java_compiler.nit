@@ -173,7 +173,7 @@ redef class ModelBuilder
 		makefile.write("\t$(JC) {jfiles.join(" ")}\n\n")
 
 		makefile.write("clean:\n")
-		makefile.write("\trm {ofiles.join(" ")} 2>/dev/null\n\n")
+		makefile.write("\trm -f -- {ofiles.join(" ")} 2>/dev/null\n\n")
 
 		makefile.close
 		toolcontext.info("Generated makefile: {makename}", 2)
