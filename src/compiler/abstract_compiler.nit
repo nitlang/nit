@@ -3004,9 +3004,6 @@ redef class AMethPropdef
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
-		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
-			return true
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
 			return true
