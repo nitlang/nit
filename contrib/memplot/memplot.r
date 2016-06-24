@@ -12,15 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Compilation to C
-module compiler
+# R program to draw a nice plot diagram
 
-import separate_erasure_compiler
-import global_compiler
-import compiler_ffi
-import memory_logger
+mem <- read.csv("memory.csv")
 
-import platform::android
-import platform::pnacl
-import platform::emscripten
-import platform::ios
+library(ggplot2)
+
+order <- rev(unique(mem$class))
+
+ggplot(mem, aes(x=time, y=siztot, fill=class)) +
+	geom_area(color='black', size=0.02) +
+	scale_fill_brewer(palette="Spectral", breaks=order) +
+	theme(legend.text=element_text(size=7))
+
+ggsave("memory.pdf")
+ggsave("memory.png")

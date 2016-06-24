@@ -426,11 +426,6 @@ class GlobalCompilerVisitor
 		self.add("{recv}[{i}]={val};")
 	end
 
-	redef fun calloc_array(ret_type, arguments)
-	do
-		self.ret(self.new_expr("NEW_{ret_type.c_name}({arguments[1]})", ret_type))
-	end
-
 	redef fun send(m, args)
 	do
 		var types = self.collect_types(args.first)

@@ -1177,8 +1177,6 @@ redef class AMethPropdef
 			else if pname == "utf8_length" then
 				return v.int_instance(args[0].val.as(NativeString).utf8_length(args[1].to_i, args[2].to_i))
 			end
-		else if pname == "calloc_string" then
-			return v.native_string_instance_len(args[1].to_i)
 		else if cname == "NativeArray" then
 			if pname == "new" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)

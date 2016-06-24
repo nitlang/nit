@@ -779,6 +779,20 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add "\}"
 	end
 
+	# Hook to add specif piece of code before the the main C function.
+	#
+	# Is called by `compile_main_function`
+	fun compile_before_main(v: VISITOR)
+	do
+	end
+
+	# Hook to add specif piece of code at the begin on the main C function.
+	#
+	# Is called by `compile_main_function`
+	fun compile_begin_main(v: VISITOR)
+	do
+	end
+
 	# Generate the main C function.
 	#
 	# This function:
@@ -876,11 +890,15 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("exit(status);")
 		v.add_decl("\}")
 
+		compile_before_main(v)
+
 		if no_main then
 			v.add_decl("int nit_main(int argc, char** argv) \{")
 		else
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
+
+		compile_begin_main(v)
 
 		v.add "#if !defined(__ANDROID__) && !defined(TARGET_OS_IPHONE)"
 		v.add("signal(SIGABRT, sig_handler);")
@@ -1208,8 +1226,6 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
 
-	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
-
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]): Bool do return false
 
 	# Return an element of a native array.
@@ -1219,6 +1235,16 @@ abstract class AbstractCompilerVisitor
 	# Store an element in a native array.
 	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
+
+	# Allocate `size` bytes with the low_level `nit_alloc` C function
+	#
+	# This method can be redefined to inject statistic or tracing code.
+	#
+	# `tag` if any, is used to mark the class of the allocated object.
+	fun nit_alloc(size: String, tag: nullable String): String
+	do
+		return "nit_alloc({size})"
+	end
 
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
@@ -2551,7 +2577,8 @@ redef class AMethPropdef
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				var alloc = v.nit_alloc(arguments[1].to_s, "NativeString")
+				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
 				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
@@ -3003,12 +3030,6 @@ redef class AMethPropdef
 			return true
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
-			return true
-		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
-			return true
-		else if pname == "calloc_array" then
-			v.calloc_array(ret.as(not null), arguments)
 			return true
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))

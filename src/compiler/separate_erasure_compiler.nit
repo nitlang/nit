@@ -657,11 +657,4 @@ class SeparateErasureCompilerVisitor
 		self.add("{res} = NEW_{nclass.c_name}({length});")
 		return res
 	end
-
-	redef fun calloc_array(ret_type, arguments)
-	do
-		var ret = ret_type.as(MClassType)
-		self.require_declaration("NEW_{ret.mclass.c_name}")
-		self.ret(self.new_expr("NEW_{ret.mclass.c_name}({arguments[1]})", ret_type))
-	end
 end

@@ -877,7 +877,8 @@ class SeparateCompiler
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype_extern} value) \{")
-			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
+			var alloc = v.nit_alloc("sizeof(struct instance_{c_name})", mclass.full_name)
+			v.add("struct instance_{c_name}*res = {alloc};")
 			v.compiler.undead_types.add(mtype)
 			v.require_declaration("type_{c_name}")
 			v.add("res->type = &type_{c_name};")
@@ -899,7 +900,8 @@ class SeparateCompiler
 			else
 				var res = v.new_named_var(mtype, "self")
 				res.is_exact = true
-				v.add("{res} = nit_alloc(sizeof(struct instance_{mtype.c_name}));")
+				alloc = v.nit_alloc("sizeof(struct instance_{mtype.c_name})", mclass.full_name)
+				v.add("{res} = {alloc};")
 				v.add("{res}->type = type;")
 				hardening_live_type(v, "type")
 				v.require_declaration("class_{c_name}")
@@ -926,7 +928,8 @@ class SeparateCompiler
 			var res = v.get_name("self")
 			v.add_decl("struct instance_{c_name} *{res};")
 			var mtype_elt = mtype.arguments.first
-			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
+			var alloc = v.nit_alloc("sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype})", mclass.full_name)
+			v.add("{res} = {alloc};")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
@@ -949,7 +952,8 @@ class SeparateCompiler
 			else
 				var res = v.new_named_var(mtype, "self")
 				res.is_exact = true
-				v.add("{res} = nit_alloc(sizeof(struct instance_{pointer_type.c_name}));")
+				var alloc = v.nit_alloc("sizeof(struct instance_{pointer_type.c_name})", mclass.full_name)
+				v.add("{res} = {alloc};")
 				v.add("{res}->type = type;")
 				hardening_live_type(v, "type")
 				v.require_declaration("class_{c_name}")
@@ -972,9 +976,11 @@ class SeparateCompiler
 			res.is_exact = true
 			var attrs = self.attr_tables.get_or_null(mclass)
 			if attrs == null then
-				v.add("{res} = nit_alloc(sizeof(struct instance));")
+				var alloc = v.nit_alloc("sizeof(struct instance)", mclass.full_name)
+				v.add("{res} = {alloc};")
 			else
-				v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+				var alloc = v.nit_alloc("sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t)", mclass.full_name)
+				v.add("{res} = {alloc};")
 			end
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
