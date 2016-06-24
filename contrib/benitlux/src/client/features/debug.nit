@@ -24,7 +24,7 @@ redef class UserWindow
 	private var layout_debug = new VerticalLayout(parent=layout)
 
 	private var lbl_debug_title = new Label(parent=layout_debug,
-		text="Debug options".t)
+		text="Debug options".t, size=1.5)
 
 	private var but_test_notif = new Button(parent=layout_debug,
 		text="Test notifications".t)
@@ -37,15 +37,6 @@ redef class UserWindow
 
 	private var but_test_menu = new Button(parent=layout_debug,
 		text="Test menu diff".t)
-
-	init
-	do
-		lbl_debug_title.size = 1.5
-
-		for c in [but_test_notif, but_test_checkin, but_test_checkout, but_test_menu] do
-			c.observers.add self
-		end
-	end
 
 	redef fun on_event(event)
 	do

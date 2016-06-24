@@ -36,10 +36,6 @@ class SocialWindow
 
 	init
 	do
-		for c in [but_search, but_followed, but_followers] do
-			c.observers.add self
-		end
-
 		# Load friends and suggestions
 		(new ListUsersAction(self, "rest/friends?token={app.token}&n=16")).start
 	end
@@ -108,7 +104,6 @@ class PeopleView
 			# Show unfollow button if not on the home screen
 			if not home_window_mode or not user_and_following.following then
 				var but = new FollowButton(user.id, user_and_following.following, user_and_following.followed, parent=layout_top_line)
-				but.observers.add self
 			end
 		end
 

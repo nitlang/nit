@@ -75,7 +75,6 @@ class CalculatorWindow
 
 			for op in row do
 				var but = new Button(parent=row_layout, text=op)
-				but.observers.add self
 				buttons[op] = but
 			end
 		end

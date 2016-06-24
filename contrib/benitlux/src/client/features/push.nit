@@ -180,7 +180,7 @@ redef class UserWindow
 	private var layout_push_options = new VerticalLayout(parent=layout)
 
 	private var lbl_push_options_title = new Label(parent=layout_push_options,
-		text="Notifications options".t)
+		text="Notifications options".t, size=1.5)
 
 	private var chk_notify_on_new_beers = new CheckBox(parent=layout_push_options,
 		text="Notify when there are new beers".t)
@@ -194,14 +194,9 @@ redef class UserWindow
 
 	init
 	do
-		lbl_push_options_title.size = 1.5
 		chk_notify_on_new_beers.is_checked = app.notify_on_new_beers
 		chk_notify_menu_daily.is_checked = app.notify_menu_daily
 		chk_notify_on_checkins.is_checked = app.notify_on_checkins
-
-		for c in [chk_notify_menu_daily, chk_notify_on_new_beers, chk_notify_on_checkins] do
-			c.observers.add self
-		end
 	end
 
 	redef fun on_event(event)
