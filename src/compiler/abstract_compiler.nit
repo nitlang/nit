@@ -1218,6 +1218,16 @@ abstract class AbstractCompilerVisitor
 	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
 
+	# Allocate `size` bytes with the low_level `nit_alloc` C function
+	#
+	# This method can be redefined to inject statistic or tracing code.
+	#
+	# `tag` if any, is used to mark the class of the allocated object.
+	fun nit_alloc(size: String, tag: nullable String): String
+	do
+		return "nit_alloc({size})"
+	end
+
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
 	# of runtime variables to use in the call.
@@ -2549,7 +2559,8 @@ redef class AMethPropdef
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				var alloc = v.nit_alloc(arguments[1].to_s, "NativeString")
+				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
 				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
