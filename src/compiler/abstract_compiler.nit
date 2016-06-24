@@ -779,6 +779,20 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add "\}"
 	end
 
+	# Hook to add specif piece of code before the the main C function.
+	#
+	# Is called by `compile_main_function`
+	fun compile_before_main(v: VISITOR)
+	do
+	end
+
+	# Hook to add specif piece of code at the begin on the main C function.
+	#
+	# Is called by `compile_main_function`
+	fun compile_begin_main(v: VISITOR)
+	do
+	end
+
 	# Generate the main C function.
 	#
 	# This function:
@@ -876,11 +890,15 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("exit(status);")
 		v.add_decl("\}")
 
+		compile_before_main(v)
+
 		if no_main then
 			v.add_decl("int nit_main(int argc, char** argv) \{")
 		else
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
+
+		compile_begin_main(v)
 
 		v.add "#if !defined(__ANDROID__) && !defined(TARGET_OS_IPHONE)"
 		v.add("signal(SIGABRT, sig_handler);")
