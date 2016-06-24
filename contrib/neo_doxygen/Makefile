@@ -40,7 +40,7 @@ tests:
 	cd tests && $(MAKE)
 
 # Run the tests.
-run-tests:
+check:
 	cd ../../tests; \
 	./tests.sh ../contrib/neo_doxygen/src/tests/neo_doxygen_*.nit ; \
 	cd "${OLD_PWD}"
