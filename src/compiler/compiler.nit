@@ -18,6 +18,7 @@ module compiler
 import separate_erasure_compiler
 import global_compiler
 import compiler_ffi
+import memory_logger
 
 import platform::android
 import platform::pnacl
