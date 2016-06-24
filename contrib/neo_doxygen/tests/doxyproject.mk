@@ -13,6 +13,7 @@
 # limitations under the License.
 
 .SUFFIXES:
+SHELL = /bin/sh
 
 .PHONY: clean doxygen strip_paths xml
 

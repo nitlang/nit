@@ -13,6 +13,7 @@
 # limitations under the License.
 
 .SUFFIXES:
+SHELL = /bin/sh
 
 PROJECT_LIBDIR = ../../lib
 PROJECT_MANDIR = .

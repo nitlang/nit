@@ -13,6 +13,7 @@
 # limitations under the License.
 
 .SUFFIXES:
+SHELL = /bin/sh
 
 NITC=nitc
 NITC_FLAGS=--dir bin

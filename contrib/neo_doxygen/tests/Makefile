@@ -13,6 +13,7 @@
 # limitations under the License.
 
 .SUFFIXES:
+SHELL = /bin/sh
 
 # All the dummy projects.
 PROJECTS=$(dir $(wildcard ./*/Doxyfile))

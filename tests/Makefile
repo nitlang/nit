@@ -1,5 +1,6 @@
 .POSIX:
 .SUFFIXES:
+SHELL = /bin/sh
 
 .PHONY: all
 all: niti nitcg nitcs

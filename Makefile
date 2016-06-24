@@ -15,6 +15,7 @@
 # limitations under the License.
 
 .SUFFIXES:
+SHELL = /bin/sh
 
 project_bindir = ./bin
 project_docdir = ./doc

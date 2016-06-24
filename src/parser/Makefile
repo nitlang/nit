@@ -15,6 +15,7 @@
 # limitations under the License.
 
 .SUFFIXES:
+SHELL = /bin/sh
 
 SABLECC3ALTGEN ?= sablecc3
 
