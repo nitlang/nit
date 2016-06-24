@@ -23,7 +23,7 @@ all: parser.nit
 	#./prescc.sh $< $@
 
 # Note that parser_nodes is no more automatically synced with the grammar
-parser.nit: xss/*.xss
+parser.nit: xss/*.xss pep8.sablecc3
 	@${SABLECC3ALTGEN -license} >/dev/null 2>/dev/null || ( echo "***\n*** sablecc3 altgen version is needed.\n*** Set the environment variable SABLECC3ALTGEN to the executable.\n*** Aborting...\n***" ; exit 1 )
 	@${SABLECC3ALTGEN} | grep altgen >/dev/null 2>/dev/null || ( echo "***\n*** $$SABLECC3ALTGEN is not the sablecc3 altgen version.\n*** Set the environment variable SABLECC3ALTGEN to the executable.\n*** Aborting...\n***"; exit 1 )
 	${SABLECC3ALTGEN} -c pep8.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes pep8.sablecc3
@@ -32,7 +32,7 @@ parser.nit: xss/*.xss
 	perl -np -i.orig -e 's/([ \[])P([A-Z])/\1A\2/g;' -e 's/"{"/"\\{"/g;' parser.nit parser_abs.nit parser_prod.nit lexer.nit
 
 clean:
-	rm -f -- pep8.sablecc3 pep8.sablecc3.dump .parser-nofact.nit || true
+	rm -f -- pep8.sablecc3.dump .parser-nofact.nit || true
 
 distclean: clean
 
