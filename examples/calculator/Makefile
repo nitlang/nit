@@ -87,3 +87,9 @@ bin/test: $(shell ${NITLS} -M src/calculator_test.nit) ${NITC}
 
 check: bin/test
 	bin/test
+
+# ---
+# Clean
+
+clean:
+	rm -rf ./res ./ios

@@ -21,7 +21,8 @@ bin/jwrapper: src/javap_test_parser.nit src/serial.nit $(shell nitls -M src/jwra
 clean:
 	rm -f bin/javap_test_parser bin/jwrapper
 	rm -f gen/*
-	rm src/javap_lexer.nit src/javap_parser.nit src/javap_test_parser.nit
+	rm -f src/javap_lexer.nit src/javap_parser.nit src/javap_test_parser.nit
+	rm -f ./src/serial.nit
 
 check: bin/jwrapper tests/wildcards.javap
 	mkdir -p tmp

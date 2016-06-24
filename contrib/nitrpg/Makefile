@@ -33,4 +33,4 @@ check:
 	$(NITU) src/listener.nit
 
 clean:
-	rm listener web
+	rm -rf -- ./bin ./listener ./web

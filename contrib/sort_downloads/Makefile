@@ -4,3 +4,6 @@ build:
 
 install:
 	install bin/sort_downloads /usr/local/bin/
+
+clean:
+	rm -rf -- ./bin

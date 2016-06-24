@@ -43,13 +43,15 @@ check: tests
 tests:
 	cd ../tests && ./run
 
-clean:
-	rm -r \
+mostlyclean:
+	rm -rf \
 		*.dot *.out \
 		nitcc_lexer.nit nitcc_parser.nit nitcc_test_parser.nit nitcc_parser_gen \
 		nitcc0 nitcc1 \
 		calc minilang blob \
-		../examples/*.dot ../examples/*.out ../examples/*_lexer.nit ../examples/*_parser.nit ../examples/*_test_parser.nit \
-		2>/dev/null || true
+		../examples/*.dot ../examples/*.out ../examples/*_lexer.nit ../examples/*_parser.nit ../examples/*_test_parser.nit
+
+clean distclean maintainer-clean: mostlyclean
+	rm -f nitcc
 
 .PHONY: tests

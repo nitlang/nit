@@ -21,4 +21,4 @@ doc:
 	nitdoc -d doc/ src/friendz.nit src/friendz_linux.nit
 
 clean:
-	rm -rf bin/ doc/ android/
+	rm -rf bin/ doc/ android/res/drawable-*

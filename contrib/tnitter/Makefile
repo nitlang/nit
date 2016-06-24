@@ -46,4 +46,4 @@ ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
 # Misc
 
 clean:
-	rm -r res bin
+	rm -rf ./res ./bin

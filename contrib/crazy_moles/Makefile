@@ -37,4 +37,4 @@ check-android: bin/moles.apk
 	../../misc/jenkins/check_android.sh bin/moles.apk
 
 clean:
-	rm -rf bin android
+	rm -rf ./bin ./android ./assets ./src/drawing.nit

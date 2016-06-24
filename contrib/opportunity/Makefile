@@ -4,3 +4,7 @@ all: fr
 
 fr:
 	cd src/templates/languages/fr/LC_MESSAGES/ && $(MAKE)
+
+clean:
+	rm -rf -- ./bin ./src/templates/languages/*.pot
+	cd ./src/templates/languages/fr/LC_MESSAGES/ && $(MAKE) clean

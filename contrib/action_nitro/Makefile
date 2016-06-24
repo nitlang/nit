@@ -26,3 +26,6 @@ pre-build: src/gen/texts.nit src/gen/planes.nit
 
 check: bin/action_nitro
 	NIT_TESTING=true bin/action_nitro
+
+clean:
+	rm -rf -- ./bin/* ./assets/images/* ./src/gen/*

@@ -86,3 +86,6 @@ ios-release: $(shell nitls -M src/client/ios.nit) ios/AppIcon.appiconset/Content
 ios/AppIcon.appiconset/Contents.json: art/icon.svg
 	mkdir -p ios
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --ios --out ios/AppIcon.appiconset/
+
+clean:
+	rm -rf -- ./android/res/drawable* ./bin ./ios/* ./src/server/benitlux_restful.nit

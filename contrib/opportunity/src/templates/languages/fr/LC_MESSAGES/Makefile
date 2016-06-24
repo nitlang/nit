@@ -4,3 +4,7 @@ all:
 	msgfmt meetup.po -o meetup.mo
 	msgfmt meetup_creation.po -o meetup_creation.mo
 	msgfmt meetup_confirmation.po -o meetup_confirmation.mo
+
+.PHONY: clean
+clean:
+	rm -rf -- *.mo

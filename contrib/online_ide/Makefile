@@ -18,3 +18,7 @@ serve:
 	 $(HTTPD_PY) -C . --no-dir-check
 
 .PHONY: serve
+
+.PHONY: clean
+clean:
+	rm -rf -- ./bin ./www/src ./pnacl_nit ./pnacl_nit.pexe

@@ -48,3 +48,6 @@ android-release: assets/images/drawing.png android/res/ $(shell nitls -M src/cli
 
 android/res/: art/icon.svg
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
+
+clean:
+	rm -rf -- ./bin/* ./assets/images/drawing.png ./src/*/*_serialize.nit ./src/client/drawing.nit ./config.json

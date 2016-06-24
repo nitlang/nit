@@ -39,3 +39,13 @@ run-tests:
 	cd ../../tests; \
 	./tests.sh ../contrib/neo_doxygen/src/tests/neo_doxygen_*.nit ; \
 	cd "${OLD_PWD}"
+
+.PHONY: clean distclean mostlyclean
+clean distclean mostlyclean:
+	rm -rf -- ./bin
+
+.PHONY: maintainer-clean
+maintainer-clean:
+	@echo 'This command is intended for maintainers to use; it'
+	@echo 'deletes files that may need special tools to rebuild.'
+	$(MAKE) -C tests clean

@@ -18,3 +18,6 @@ simplan_parser.nit: ${NITCC} simplan.sablecc
 
 ${NITCC}:
 	cd ../nitcc && $(MAKE)
+
+clean:
+	rm -rf -- ./bin ./*_lexer.nit ./*_parser.nit ./*.dot ./*.out ./simplan

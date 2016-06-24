@@ -37,3 +37,6 @@ android/libs/cardboard.jar:
 	mkdir -p android/libs
 	curl --progress-bar -o android/libs/cardboard.jar \
 	https://raw.githubusercontent.com/googlevr/gvr-android-sdk/e226f15c/CardboardSample/libs/cardboard.jar
+
+clean:
+	rm -rf -- ./android ./bin/*

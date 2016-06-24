@@ -85,7 +85,12 @@ $(srcdir)/parser/parser.nit:
 # deletes files that may need special tools to rebuild.
 #
 # See also: https://www.gnu.org/prep/standards/html_node/Standard-Targets.html
-.PHONY: clean distclean mostlyclean maintainer-clean
-clean distclean mostlyclean maintainer-clean:
+# See also: https://www.gnu.org/software/automake/manual/html_node/Clean.html
+.PHONY: mostlyclean
+mostlyclean:
 	rm -rf -- $(srcdir)/version.nit $(srcdir)/nitc_0 2> /dev/null || true
+	cd $(srcdir)/parser && $(MAKE) $@
+.PHONY: clean distclean maintainer-clean
+clean distclean maintainer-clean:
+	rm -rf -- $(srcdir)/version.nit $(srcdir)/nitc_0 $(BINS)
 	cd $(srcdir)/parser && $(MAKE) $@

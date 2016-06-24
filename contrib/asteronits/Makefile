@@ -30,3 +30,6 @@ android-release: $(shell ${NITLS} -M src/asteronits.nit android) android/res/ pr
 android/res/: art/icon.svg
 	cd ../inkscape_tools/ && $(MAKE)
 	../inkscape_tools/bin/svg_to_icons --out android/res --android art/icon.svg
+
+clean:
+	rm -rf -- ./android/* ./bin/* ./assets/images/controls.png ./src/controls.nit ./src/spritesheet.nit
