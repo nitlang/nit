@@ -1,0 +1,8 @@
+test_prog/rpg/races.nit test_prog/rpg
+test_prog/test_prog.nit test_prog/test_prog test_prog test_prog::test_prog test_prog/
+test_prog::races test_prog::races:rpg test_prog::races::combat
+test_prog::fail::races test_prog::fail fail::fail
+/lib /fail sublib
+foo sublib/foo sublib/foo.nit foo.nit ./foo foo/ foo::foo -I sublib
+bar sublib/bar sublib/bar.nit sublib/bar/bar.nit bar.nit ./bar bar/ bar::bar -I sublib
+sublib/bar/foo.nit sublib/bar/foo bar/foo.nit bar::foo -I sublib

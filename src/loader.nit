@@ -154,7 +154,10 @@ redef class ModelBuilder
 
 			var mmodule = identify_module(a)
 			if mmodule == null then
-				if a.file_exists then
+				var le = last_loader_error
+				if le != null then
+					toolcontext.error(null, le)
+				else if a.file_exists then
 					toolcontext.error(null, "Error: `{a}` is not a Nit source file.")
 				else
 					toolcontext.error(null, "Error: cannot find module `{a}`.")
@@ -324,6 +327,14 @@ redef class ModelBuilder
 	# A parsed module exists in the model but might be not yet analysed (no importation).
 	var parsed_modules = new Array[MModule]
 
+	# Some `loader` services are silent and return `null` on error.
+	#
+	# Those services can set `last_loader_error` to precise an specific error message.
+	# if `last_loader_error == null` then a generic error message can be used.
+	#
+	# See `identified_modules` and `identify_group` for details.
+	var last_loader_error: nullable String = null
+
 	# Identify a source file and load the associated package and groups if required.
 	#
 	# This method does what the user expects when giving an argument to a Nit tool.
@@ -336,13 +347,16 @@ redef class ModelBuilder
 	#   then the main module of the package `digraph` is searched in `paths` and returned.
 	#
 	# Silently return `null` if `path` does not exists or cannot be identified.
+	# If `null` is returned, `last_loader_error` can be set to a specific error message.
 	#
 	# On success, it returns a module that is possibly not yet parsed (no AST), or not yet analysed (no importation).
 	# If the module was already identified, or loaded, it is returned.
 	fun identify_module(path: String): nullable MModule
 	do
+		last_loader_error = null
+
 		# special case for not a nit file
-		if not path.has_suffix(".nit") then
+		if not path.has_suffix(".nit") then do
 			# search dirless files in known -I paths
 			if not path.chars.has('/') then
 				var res = search_module_in_paths(null, path, self.paths)
@@ -350,19 +364,66 @@ redef class ModelBuilder
 			end
 
 			# Found nothing? maybe it is a group...
-			var candidate = null
 			if path.file_exists then
 				var mgroup = identify_group(path)
 				if mgroup != null then
 					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
-					if owner_path.file_exists then candidate = owner_path
+					if owner_path.file_exists then
+						path = owner_path
+						break
+					end
 				end
 			end
 
-			if candidate == null then
-				return null
+			# Found nothing? maybe it is a qualified name
+			if path.chars.has(':') then
+				var ids = path.split("::")
+				var g = identify_group(ids.first)
+				if g != null then
+					scan_group(g)
+					var ms = g.mmodules_by_name(ids.last)
+
+					# Return exact match
+					for m in ms do
+						if m.full_name == path then
+							return m
+						end
+					end
+
+					# Where there is only one or two names `foo::bar`
+					# then accept module that matches `foo::*::bar`
+					if ids.length <= 2 then
+						if ms.length == 1 then return ms.first
+						if ms.length > 1 then
+							var l = new Array[String]
+							for m in ms do
+								var fp = m.filepath
+								if fp != null then fp = " ({fp})" else fp = ""
+								l.add "`{m.full_name}`{fp}"
+							end
+							last_loader_error = "Error: conflicting module for `{path}`: {l.join(", ")} "
+							return null
+						end
+					end
+
+					var bests = new BestDistance[String](path.length / 2)
+					# We found nothing. But propose something in the package?
+					for sg in g.mpackage.mgroups do
+						for m in sg.mmodules do
+							var d = path.levenshtein_distance(m.full_name)
+							bests.update(d, m.full_name)
+						end
+					end
+					var last_loader_error = "Error: cannot find module `{path}`."
+					if bests.best_items.not_empty then
+						last_loader_error += " Did you mean " + bests.best_items.join(", ", " or ") + "?"
+					end
+					self.last_loader_error = last_loader_error
+					return null
+				end
 			end
-			path = candidate
+
+			return null
 		end
 
 		# Does the file exists?
@@ -419,12 +480,19 @@ redef class ModelBuilder
 	# Return the mgroup associated to a directory path.
 	# If the directory is not a group null is returned.
 	#
+	# Silently return `null` if `dirpath` does not exists, is not a directory,
+	# cannot be identified or cannot be attached to a mpackage.
+	# If `null` is returned, `last_loader_error` can be set to a specific error message.
+	#
 	# Note: `paths` is also used to look for mgroups
 	fun identify_group(dirpath: String): nullable MGroup
 	do
+		# Reset error
+		last_loader_error = null
+
 		var stat = dirpath.file_stat
 
-		if stat == null then do
+		if stat == null or not stat.is_dir then do
 			# search dirless directories in known -I paths
 			if dirpath.chars.has('/') then return null
 			for p in paths do
@@ -440,6 +508,7 @@ redef class ModelBuilder
 
 		# Filter out non-directories
 		if not stat.is_dir then
+			last_loader_error = "Error: `{dirpath}` is not a directory."
 			return null
 		end
 
@@ -466,6 +535,7 @@ redef class ModelBuilder
 			# The root of the directory hierarchy in the file system.
 			if rdp == "/" then
 				mgroups[rdp] = null
+				last_loader_error = "Error: `{dirpath}` is not a Nit package."
 				return null
 			end
 
@@ -473,6 +543,7 @@ redef class ModelBuilder
 			if (dirpath/"packages.ini").file_exists then
 				# dirpath cannot be a package since it is a package directory
 				mgroups[rdp] = null
+				last_loader_error = "Error: `{dirpath}` is not a Nit package."
 				return null
 			end
 
@@ -492,6 +563,7 @@ redef class ModelBuilder
 				if parent == null then
 					# Parent is not a group, thus we are not a group either
 					mgroups[rdp] = null
+					last_loader_error = "Error: `{dirpath}` is not a Nit package."
 					return null
 				end
 			end
@@ -653,7 +725,10 @@ redef class ModelBuilder
 		# Look for the module
 		var mmodule = identify_module(filename)
 		if mmodule == null then
-			if filename.file_exists then
+			var le = last_loader_error
+			if le != null then
+				toolcontext.error(null, le)
+			else if filename.file_exists then
 				toolcontext.error(null, "Error: `{filename}` is not a Nit source file.")
 			else
 				toolcontext.error(null, "Error: cannot find module `{filename}`.")
