@@ -34,6 +34,8 @@ reset-neo:
 	&& sudo -u neo4j "${NEO4J_DIR}/bin/neo4j" start
 
 # Regenerate the XML documents in `tests`.
+#
+# REQUIRES: doxygen
 tests:
 	cd tests && $(MAKE)
 
