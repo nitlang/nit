@@ -59,14 +59,16 @@ class Process
 	end
 
 	# The status once finished
+	#
+	# Require: `is_finished`
 	fun status: Int
 	do
 		assert is_finished
 		return data.status
 	end
 
-	# The executable run
-	# Is a filepath, or a executable found in PATH
+	# The target executable
+	# Either a file path or the name of an executable available in PATH.
 	var command: Text
 
 	# The arguments of the command
@@ -88,13 +90,13 @@ class Process
 		execute
 	end
 
-	# flags used internally to know whith pipe to open
+	# Flags used internally to know which pipe to open
 	private fun pipeflags: Int do return 0
 
 	# Internal code to handle execution
 	protected fun execute
 	do
-		# The pass the arguments as a big C string where elements are separated with '\0'
+		# Pass the arguments as a big C string where elements are separated with '\0'
 		var args = new FlatBuffer
 		var l = 1 # Number of elements in args
 		args.append(command)
@@ -102,7 +104,6 @@ class Process
 		if arguments != null then
 			for a in arguments do
 				args.add('\0')
-				#a.output_class_name
 				args.append(a)
 			end
 			l += arguments.length
@@ -292,7 +293,7 @@ class ProcessDuplex
 	# ~~~
 	fun write_and_read(input: Text): String
 	do
-		var read = new Buffer #new Array[String]
+		var read = new Buffer
 
 		# Main loop, read and write line by line
 		var prev = 0
