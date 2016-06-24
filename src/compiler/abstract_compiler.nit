@@ -1208,8 +1208,6 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
 
-	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
-
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]): Bool do return false
 
 	# Return an element of a native array.
@@ -3003,9 +3001,6 @@ redef class AMethPropdef
 			return true
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
-			return true
-		else if pname == "calloc_array" then
-			v.calloc_array(ret.as(not null), arguments)
 			return true
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
