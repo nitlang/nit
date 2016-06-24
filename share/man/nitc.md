@@ -425,6 +425,12 @@ and stack trace will be disabled.
 Note that the `--no-stacktrace` option (or this absence) can be toggled manually in the generated Makefile (search `NO_STACKTRACE` in the Makefile).
 Moreover, the environment variable `NIT_NO_STACK` (see bellow) can also be used at runtime to disable stack traces.
 
+### `--trace-memory`
+Enable dynamic measure of memory usage.
+
+Compiled programs will generate a large `memory.log` file that logs all memory allocations.
+This logs file can then be analyzed with the tool `memplot` from contrib.
+
 ### `--hardening`
 Generate contracts in the C code against bugs in the compiler.
 
