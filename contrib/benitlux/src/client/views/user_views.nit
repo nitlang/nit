@@ -60,11 +60,7 @@ class UserWindow
 		but_logout.enabled = app.user != null
 	end
 
-	init
-	do
-		but_logout.observers.add self
-		refresh
-	end
+	init do refresh
 
 	redef fun on_event(event)
 	do
@@ -127,13 +123,6 @@ class SignupWindow
 	private var txt_email = new TextInput(parent=email_line)
 
 	private var but_signup = new Button(parent=layout_register, text="Signup".t)
-
-	init
-	do
-		for c in [but_login, but_signup] do
-			c.observers.add self
-		end
-	end
 
 	redef fun on_event(event)
 	do

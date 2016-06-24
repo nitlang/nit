@@ -27,7 +27,6 @@ redef class HomeWindow
 	do
 		title = "Benitlux"
 		update_checkin_text
-		checkin_button.observers.add self
 	end
 
 	# TODO hide when not logged in

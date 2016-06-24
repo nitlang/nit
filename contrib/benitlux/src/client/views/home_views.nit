@@ -79,13 +79,6 @@ class HomeWindow
 	#private var news_button = new Button(parent=news_header, text="Open website") # TODO
 	private var news_label = new Label(parent=layout_news, text="Bière en cask le jeudi!")
 
-	init
-	do
-		for c in [but_login, but_preferences, beer_button, social_button] do
-			c.observers.add self
-		end
-	end
-
 	redef fun on_resume do refresh
 
 	# Refresh content of this page
