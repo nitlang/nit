@@ -98,8 +98,11 @@ redef class App
 		# Align on Y only
 		actor.center.y -= model.center.y
 
-		var height = model.mesh.dimensions.y
-		world_camera.reset_height(height * 2.5)
+		# Fit in viewport
+		var height = model.dimensions.x
+		height = height.max(model.dimensions.y)
+		height = height.max(model.dimensions.z)
+		world_camera.reset_height(height * 1.5)
 
 		actors.clear
 		actors.add actor
