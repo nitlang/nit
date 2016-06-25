@@ -95,10 +95,8 @@ redef class App
 
 		var actor = new Actor(model, new Point3d[Float](0.0, 0.0, 0.0))
 
-		model = model.leaves.first
-		actor.center.x -= model.mesh.center.x
-		actor.center.y -= model.mesh.center.y
-		actor.center.z -= model.mesh.center.z
+		# Align on Y only
+		actor.center.y -= model.center.y
 
 		var height = model.mesh.dimensions.y
 		world_camera.reset_height(height * 2.5)
