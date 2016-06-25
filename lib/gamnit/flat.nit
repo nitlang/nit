@@ -166,12 +166,11 @@ redef class App
 		# Prepare to draw
 		for tex in all_root_textures do
 			tex.load
+			gamnit_error = tex.error
+			if gamnit_error != null then print_error gamnit_error
 
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
-
-			gamnit_error = tex.error
-			assert gamnit_error == null else print_error gamnit_error
 		end
 	end
 
