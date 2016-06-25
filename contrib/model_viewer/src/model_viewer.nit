@@ -91,6 +91,8 @@ redef class App
 	# Set the currently displayed model
 	fun model=(model: Model)
 	do
+		if model isa ModelAsset then print "Model: {model.path}"
+
 		var actor = new Actor(model, new Point3d[Float](0.0, 0.0, 0.0))
 
 		model = model.leaves.first
