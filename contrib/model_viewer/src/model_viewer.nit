@@ -55,12 +55,11 @@ redef class App
 		var logo = new Texture("splash.png")
 		show_splash_screen logo
 
-		if args.length > 0 then
-			# Load a model passed as the first command line argument
-			var model_path = args.first
 			if model_path.has_prefix("assets/") then model_path = model_path.substring_from(7)
+		# Load all models passed as command line argument
+		for arg in args.to_a.reversed do
 
-			var model = new Model(model_path)
+			var model = new Model(arg)
 			models.unshift model
 		end
 
