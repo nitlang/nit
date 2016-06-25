@@ -35,5 +35,5 @@ bin/model_viewer_vr.apk: $(shell ${NITLS} -M src/model_viewer.nit android) andro
 
 android/libs/cardboard.jar:
 	mkdir -p android/libs
-	curl --progress-bar -o libs/cardboard.jar \
 	https://raw.githubusercontent.com/googlesamples/cardboard-java/master/CardboardSample/libs/cardboard.jar
+	curl --progress-bar -o android/libs/cardboard.jar \
