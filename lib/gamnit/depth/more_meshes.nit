@@ -17,6 +17,7 @@ module more_meshes
 
 import geometry
 import depth_core
+import model_dimensions
 
 # Simple flat mesh, sits on the axes X and Z, normal on Y
 class Plane

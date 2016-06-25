@@ -17,6 +17,7 @@ module depth
 
 intrude import more_materials
 import more_models
+import model_dimensions
 import particles
 
 redef class App
