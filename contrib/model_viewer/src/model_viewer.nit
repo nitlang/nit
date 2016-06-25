@@ -55,9 +55,10 @@ redef class App
 		var logo = new Texture("splash.png")
 		show_splash_screen logo
 
-			if model_path.has_prefix("assets/") then model_path = model_path.substring_from(7)
 		# Load all models passed as command line argument
 		for arg in args.to_a.reversed do
+			# Force an absolute path, this only works on desktop, but so does command args
+			arg = getcwd / arg
 
 			var model = new Model(arg)
 			models.unshift model
