@@ -61,7 +61,7 @@ class HttpRequestClientWindow
 	super Window
 
 	# Root layout
-	var layout = new VerticalLayout(parent=self)
+	var layout = new ListLayout(parent=self)
 
 	# Button to send request
 	var button_request = new Button(parent=layout, text="Press to send HTTP request")
