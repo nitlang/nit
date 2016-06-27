@@ -420,6 +420,17 @@ fun inf: Float do return 1.0 / 0.0
 # ~~~
 fun nan: Float do return 0.0 / 0.0
 
+redef class Comparable
+	# Constraint `self` within `[min..max]`
+	#
+	#     assert 1.clamp(5, 10) == 5
+	#     assert 7.clamp(5, 10) == 7
+	#     assert 15.clamp(5, 10) == 10
+	#     assert 1.5.clamp(1.0, 2.0) == 1.5
+	#     assert "a".clamp("b", "c") == "b"
+	fun clamp(min, max: OTHER): OTHER do return self.max(min).min(max)
+end
+
 redef class Collection[ E ]
 	# Return a random element form the collection
 	# There must be at least one element in the collection
