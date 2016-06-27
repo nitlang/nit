@@ -1,3 +1,4 @@
 http_request_example
-http_request_example.apk
-http_request_example.app
+ui_example
+*.apk
+*.app

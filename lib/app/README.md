@@ -68,8 +68,8 @@ So there is two ways  to customize the behavior on a given event:
 
 ## Usage Example
 
-The calculator example (at `../../examples/calculator/src/calculator.nit`) is a concrete,
-simple and complete use of the _app.nit_ portable UI.
+The example at `examples/ui_example.nit` shows off most features of `app::ui` in a minimal program.
+You can also take a look at the calculator (`../../examples/calculator/src/calculator.nit`) which is a concrete usage example.
 
 ## Platform-specific UI
 

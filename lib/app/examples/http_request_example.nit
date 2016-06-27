@@ -13,10 +13,15 @@
 # limitations under the License.
 
 # Example for the `app::http_request` main service `AsyncHttpRequest`
-module http_request_example
+module http_request_example is
+	app_name "app.nit HTTP"
+	app_namespace "org.nitlanguage.http_example"
+	android_api_target 15
+end
 
 import app::ui
 import app::http_request
+import android::aware # for android_api_target
 
 # Simple asynchronous HTTP request to http://example.com/ displaying feedback to the window
 class MyHttpRequest
@@ -56,7 +61,7 @@ class HttpRequestClientWindow
 	super Window
 
 	# Root layout
-	var layout = new VerticalLayout(parent=self)
+	var layout = new ListLayout(parent=self)
 
 	# Button to send request
 	var button_request = new Button(parent=layout, text="Press to send HTTP request")

@@ -305,3 +305,8 @@ class ListLayout
 	super View
 	super CompositeControl
 end
+
+redef class Text
+	# Open the URL `self` with the default browser
+	fun open_in_browser do print_error "Text::open_in_browser not implemented on this platform."
+end

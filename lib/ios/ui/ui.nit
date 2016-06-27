@@ -523,3 +523,15 @@ redef class UITableView
 		self.dataSource = objc_delegate;
 	`}
 end
+
+redef class Text
+	redef fun open_in_browser do to_nsstring.native_open_in_browser
+end
+
+redef class NSString
+	private fun native_open_in_browser
+	in "ObjC" `{
+		NSURL *nsurl = [NSURL URLWithString: self];
+		[[UIApplication sharedApplication] openURL: nsurl];
+	`}
+end
