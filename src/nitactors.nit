@@ -66,6 +66,7 @@ end
 			if p isa MMethodDef then
 				# TODO: find how to know if the method is a getter or a setter
 				if p.name.has("=") then continue
+				if p.name.has("async") then continue
 				# exclude constructors
 				if p.mproperty.is_init then continue
 				methods.add(p)
@@ -191,7 +192,7 @@ end
 		redef_classes.add(
 """
 redef class {{{classname}}}
-redef fun async do return new Proxy{{{classname}}}.proxy(self)
+redef var async is lazy do return new Proxy{{{classname}}}.proxy(self)
 end
 """)
 		

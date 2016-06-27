@@ -65,7 +65,7 @@ class Mailbox[E]
 
 	redef fun shift do
 		mutex.lock
-		if self.is_empty then self.cond.wait(mutex.native.as(not null))
+		while real_collection.is_empty do self.cond.wait(mutex.native.as(not null))
 		var r = real_collection.shift
 		mutex.unlock
 		return r

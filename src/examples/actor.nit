@@ -36,16 +36,18 @@ redef class ModelBuilder
 
 	redef fun build_properties(nclassdef)
 	do
+		if nclassdef.build_properties_is_done then return
 		super
 
 		# Get context information
 		var mclass = nclassdef.mclass
 		if mclass == null then return
-		var proxy_mclass = mclass.proxy
-		if proxy_mclass == null then return
 		var mclass_def = nclassdef.mclassdef
 		if mclass_def == null then return
-		var proxy_mclass_def = proxy_mclass.classdef
+		
+		var proxy_mclass = mclass.proxy
+		if proxy_mclass == null then return
+		var proxy_mclass_def = proxy_mclass.mclassdefs.first
 
 		# Adds an `async` attribute in the worker class which is the proxy class
 		if mclass_def.is_intro then
@@ -54,17 +56,18 @@ redef class ModelBuilder
 			async_def.msignature = new MSignature(new Array[MParameter], proxy_mclass.mclass_type)
 			async_def.is_abstract = true
 
-			nclassdef.debug("Added async!")
+			nclassdef.debug("Added async in {mclass.name}")
 		end
 		# For each introduced property
 		for method in mclass_def.mpropdefs do
 			if not method isa MMethodDef then continue
 			if not method.is_intro then continue
+			if method.name == "async" then continue
 
 			# Create a proxied method
 			var proxy_method = new MMethod(proxy_mclass_def, method.name, proxy_mclass.location, method.mproperty.visibility)
 			var proxy_method_def = new MMethodDef(proxy_mclass_def, proxy_method, proxy_mclass.location)
-			nclassdef.debug("added one proxied method!")
+			nclassdef.debug("added one proxied method: {method.name} from {mclass.name} to {proxy_mclass_def.name}")
 
 			# Get the signature of the method ( a Future if there is a return type)
 			var signature = method.msignature
