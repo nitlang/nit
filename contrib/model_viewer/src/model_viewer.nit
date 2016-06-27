@@ -55,12 +55,12 @@ redef class App
 		var logo = new Texture("splash.png")
 		show_splash_screen logo
 
-		if args.length > 0 then
-			# Load a model passed as the first command line argument
-			var model_path = args.first
-			if model_path.has_prefix("assets/") then model_path = model_path.substring_from(7)
+		# Load all models passed as command line argument
+		for arg in args.to_a.reversed do
+			# Force an absolute path, this only works on desktop, but so does command args
+			arg = getcwd / arg
 
-			var model = new Model(model_path)
+			var model = new Model(arg)
 			models.unshift model
 		end
 
@@ -91,15 +91,18 @@ redef class App
 	# Set the currently displayed model
 	fun model=(model: Model)
 	do
+		if model isa ModelAsset then print "Model: {model.path}"
+
 		var actor = new Actor(model, new Point3d[Float](0.0, 0.0, 0.0))
 
-		model = model.leaves.first
-		actor.center.x -= model.mesh.center.x
-		actor.center.y -= model.mesh.center.y
-		actor.center.z -= model.mesh.center.z
+		# Align on Y only
+		actor.center.y -= model.center.y
 
-		var height = model.mesh.dimensions.y
-		world_camera.reset_height(height * 2.5)
+		# Fit in viewport
+		var height = model.dimensions.x
+		height = height.max(model.dimensions.y)
+		height = height.max(model.dimensions.z)
+		world_camera.reset_height(height * 1.5)
 
 		actors.clear
 		actors.add actor
