@@ -216,7 +216,7 @@ redef class App
 		var p = altitude / world.boss_altitude
 		var ip = 1.0 - p
 		glClearColor(0.3*ip, 0.3*ip, ip, 1.0)
-		stars.alpha = (1.4*p-0.4).min(1.0).max(0.0)
+		stars.alpha = (1.4*p-0.4).clamp(0.0, 1.0)
 
 		# Randomly add smoke
 		var poss = [

@@ -163,7 +163,7 @@ abstract class SpacialObject
 		# Realistic rotation, kept for reference and reality minded individuals
 		#var r = applied_rotation * 0.2
 		#rotation_inertia += r
-		#rotation_inertia = rotation_inertia.min(2.0).max(-2.0)
+		#rotation_inertia = rotation_inertia.clamp(-2.0, 2.0)
 
 		# Inertia to position
 		rotation += rotation_inertia * dt

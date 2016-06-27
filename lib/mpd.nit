@@ -130,7 +130,7 @@ class MPDConnection
 			var vol = status.volume
 			if vol != null then
 				var new_vol = vol + diff
-				new_vol = new_vol.max(0).min(100)
+				new_vol = new_vol.clamp(0, 100)
 				volume = new_vol
 				return
 			end

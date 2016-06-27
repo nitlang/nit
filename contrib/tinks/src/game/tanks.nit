@@ -290,11 +290,11 @@ class TankDirectionOrder
 	do
 		# TODO use events
 		var direction_heading = direction_heading
-		direction_heading = direction_heading.min(1.0).max(-1.0)
+		direction_heading = direction_heading.clamp(-1.0, 1.0)
 		tank.direction_heading = direction_heading*tank.rule.max_direction
 
 		var direction_forwards = direction_forwards
-		direction_forwards = direction_forwards.min(1.0).max(-1.0)
+		direction_forwards = direction_forwards.clamp(-1.0, 1.0)
 		tank.direction_forwards = direction_forwards*tank.rule.max_speed
 	end
 end
