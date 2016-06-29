@@ -551,7 +551,7 @@ abstract class Text
 		var res = new Buffer
 		var underscore = false
 		var start = 0
-		var c = chars[0]
+		var c = self[0]
 
 		if c >= '0' and c <= '9' then
 			res.add('_')
@@ -560,7 +560,7 @@ abstract class Text
 			start = 1
 		end
 		for i in [start..length[ do
-			c = chars[i]
+			c = self[i]
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
@@ -1411,9 +1411,6 @@ abstract class Buffer
 
 	redef type SELFTYPE: Buffer is fixed
 
-	# Specific implementations MUST set this to `true` in order to invalidate caches
-	protected var is_dirty = true
-
 	# Copy-On-Write flag
 	#
 	# If the `Buffer` was to_s'd, the next in-place altering
@@ -1537,12 +1534,6 @@ abstract class Buffer
 				self[i] = c.to_upper
 			end
 		end
-	end
-
-	redef fun hash
-	do
-		if is_dirty then hash_cache = null
-		return super
 	end
 
 	# In Buffers, the internal sequence of character is mutable

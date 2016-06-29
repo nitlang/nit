@@ -450,7 +450,6 @@ redef class FlatBuffer
 			source, tag, new Comm.world, new Status.ignore)
 
 		length = capacity
-		is_dirty = true
 	end
 
 	redef fun recv_fill(mpi, dest, tag, comm) do recv(mpi, 0, capacity, dest, tag, comm)

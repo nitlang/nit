@@ -420,11 +420,11 @@ abstract class FlatString
 	# Index at which `self` begins in `_items`, inclusively
 	redef var first_byte is noinit
 
-	redef var chars = new FlatStringCharView(self) is lazy
+	redef fun chars do return new FlatStringCharView(self)
 
-	redef var bytes = new FlatStringByteView(self) is lazy
+	redef fun bytes do return new FlatStringByteView(self)
 
-	redef var to_cstring is lazy do
+	redef fun to_cstring do
 		var blen = _byte_length
 		var new_items = new NativeString(blen + 1)
 		_items.copy_to(new_items, blen, _first_byte, 0)
@@ -874,18 +874,11 @@ class FlatBuffer
 	super FlatText
 	super Buffer
 
-	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
+	redef fun chars do return new FlatBufferCharView(self)
 
-	redef var bytes = new FlatBufferByteView(self) is lazy
-
-	private var char_cache: Int = -1
-
-	private var byte_cache: Int = -1
+	redef fun bytes do return new FlatBufferByteView(self)
 
 	private var capacity = 0
-
-	# Real items, used as cache for when to_cstring is called
-	private var real_items: NativeString is noinit
 
 	redef fun fast_cstring do return _items.fast_cstring(0)
 
@@ -929,7 +922,6 @@ class FlatBuffer
 	do
 		assert index >= 0 and index <= _length
 		if written then reset
-		is_dirty = true
 		if index == _length then
 			add item
 			return
@@ -952,7 +944,6 @@ class FlatBuffer
 	redef fun add(c)
 	do
 		if written then reset
-		is_dirty = true
 		var clen = c.u8char_len
 		var bt = _byte_length
 		enlarge(bt + clen)
@@ -962,7 +953,6 @@ class FlatBuffer
 	end
 
 	redef fun clear do
-		is_dirty = true
 		_byte_length = 0
 		_length = 0
 		if written then
@@ -1002,15 +992,11 @@ class FlatBuffer
 
 	redef fun to_cstring
 	do
-		if is_dirty then
-			var bln = _byte_length
-			var new_native = new NativeString(bln + 1)
-			new_native[bln] = 0u8
-			if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
-			real_items = new_native
-			is_dirty = false
-		end
-		return real_items
+		var bln = _byte_length
+		var new_native = new NativeString(bln + 1)
+		new_native[bln] = 0u8
+		if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
+		return new_native
 	end
 
 	# Create a new empty string.
@@ -1053,7 +1039,6 @@ class FlatBuffer
 	redef fun append(s)
 	do
 		if s.is_empty then return
-		is_dirty = true
 		var sl = s.byte_length
 		var nln = _byte_length + sl
 		enlarge(nln)
@@ -1308,7 +1293,6 @@ redef class NativeString
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0)
 		new_self[length] = 0u8
-		str.to_cstring = new_self
 		return str
 	end
 

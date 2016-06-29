@@ -70,9 +70,9 @@ private class Concat
 	super Rope
 	super String
 
-	redef var chars is lazy do return new RopeChars(self)
+	redef fun chars do return new RopeChars(self)
 
-	redef var bytes is lazy do return new RopeBytes(self)
+	redef fun bytes do return new RopeBytes(self)
 
 	redef var length is noinit
 
@@ -86,11 +86,9 @@ private class Concat
 	var flat_cache: FlatString is noinit
 
 	# Position of the beginning of `flat_cache` in `self`
-	var flat_last_pos_start: Int = -1
+	var flat_last_pos_start: Int is noinit
 
-	var flat_last_pos_end: Int = -1
-
-	redef var to_cstring is lazy do
+	redef fun to_cstring do
 		var len = _byte_length
 		var ns = new NativeString(len + 1)
 		ns[len] = 0u8
@@ -111,8 +109,9 @@ private class Concat
 	init do
 		var l = _left
 		var r = _right
-		length = l.length + r.length
+		_length = l.length + r.length
 		_byte_length = l.byte_length + r.byte_length
+		_flat_last_pos_start = _length
 	end
 
 	redef fun is_empty do return _byte_length == 0
@@ -131,10 +130,11 @@ private class Concat
 	end
 
 	redef fun [](i) do
-		assert i >= 0 and i <= _length
+		assert i >= 0 and i < _length
 		var flps = _flat_last_pos_start
-		if flps != -1 and i >= flps and i <= _flat_last_pos_end then
-			return _flat_cache.fetch_char_at(i - flps)
+		if i >= flps then
+			var fc = _flat_cache
+			if i < flps + fc._length then return fc.fetch_char_at(i - flps)
 		end
 		var lf = get_leaf_at(i)
 		return lf.fetch_char_at(i - _flat_last_pos_start)
@@ -142,8 +142,9 @@ private class Concat
 
 	fun get_leaf_at(pos: Int): FlatString do
 		var flps = _flat_last_pos_start
-		if flps != -1 and pos >= flps and pos <= _flat_last_pos_end then
-			return _flat_cache
+		if pos >= flps then
+			var fc = _flat_cache
+			if pos < flps + fc._length then return fc
 		end
 		var s: String = self
 		var st = pos
@@ -160,7 +161,6 @@ private class Concat
 			end
 		end
 		_flat_last_pos_start = st - pos
-		_flat_last_pos_end = st - pos + s.length - 1
 		_flat_cache = s
 		return s
 	end
@@ -178,8 +178,11 @@ private class Concat
 		var end_index = from + count - 1
 
 		var flps = _flat_last_pos_start
-		if flps != -1 and from >= flps and end_index <= _flat_last_pos_end then
-			return _flat_cache.substring_impl(from - flps, count, end_index - flps)
+		if from >= flps then
+			var fc = _flat_cache
+			if end_index < flps + fc._length then
+				return fc.substring_impl(from - flps, count, end_index - flps)
+			end
 		end
 
 		var lft = _left
@@ -296,9 +299,9 @@ class RopeBuffer
 	super Rope
 	super Buffer
 
-	redef var chars: Sequence[Char] is lazy do return new RopeBufferChars(self)
+	redef fun chars do return new RopeBufferChars(self)
 
-	redef var bytes is lazy do return new RopeBufferBytes(self)
+	redef fun bytes do return new RopeBufferBytes(self)
 
 	# The final string being built on the fly
 	private var str: String = ""
