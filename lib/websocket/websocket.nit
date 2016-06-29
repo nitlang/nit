@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Lucas Bajolet <r4pass@hotmail.com>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -15,85 +13,72 @@
 # limitations under the License.
 
 # Adds support for a websocket connection in Nit
-# Uses standard sockets
 module websocket
 
 import socket
 import sha1
 import base64
 
-intrude import core::stream
-intrude import core::bytes
-
-# Websocket compatible listener
-#
-# Produces Websocket client-server connections
-class WebSocketListener
-	super Socket
-
-	# Socket listening to connections on a defined port
-	var listener: TCPServer
-
-	# Creates a new Websocket server listening on given port with `max_clients` slots available
-	init(port: Int, max_clients: Int)
-	do
-		listener = new TCPServer(port)
-		listener.listen max_clients
-	end
-
-	# Accepts an incoming connection
-	fun accept: WebsocketConnection
-	do
-		assert not listener.closed
-
-		var client = listener.accept
-		assert client != null
-
-		return new WebsocketConnection(listener.port, "", client)
-	end
-
-	# Stop listening for incoming connections
-	fun close
-	do
-		listener.close
-	end
-end
+intrude import socket
 
 # Connection to a websocket client
 #
 # Can be used to communicate with a client
 class WebsocketConnection
-	super TCPStream
+	super ProtocolDuplex
 
 	init do
-		_buffer = new NativeString(1024)
-		_buffer_pos = 0
-		_buffer_capacity = 1024
-		_buffer_length = 0
 		var headers = parse_handshake
+		if eof then
+			close
+			return
+		end
 		var resp = handshake_response(headers)
-
-		client.write(resp)
+		write_raw_bytes(resp.items, resp.length)
 	end
 
-	# Client connection to the server
-	var client: TCPStream
-
-	# Disconnect from a client
-	redef fun close
-	do
+	redef fun close do
+		if not client.eof then
+			write_raw_byte(0x88u8)
+			write_raw_byte(0x80u8)
+		end
 		client.close
 	end
+
+	redef fun ready(i) do return frame_remaining > 0 or super or client.ready(i)
+
+	# Mask used for a frame
+	private var mask = new NativeString(4)
+
+	# Position of the next byte in mask to use
+	private var mask_pos = 0
+
+	# Is the current frame's data masked ?
+	var masked_data = false
+
+	# How many bytes in current frame are to be read ?
+	private var frame_remaining = 0
 
 	# Parses the input handshake sent by the client
 	# See RFC 6455 for information
 	private fun parse_handshake: Map[String,String]
 	do
-		var recved = read_http_frame(new FlatBuffer)
-		var headers = recved.split("\r\n")
 		var headmap = new HashMap[String,String]
-		for i in headers do
+		var header_cnt = new Bytes.empty
+		var buf = new NativeString(100)
+		while ready do
+			var rd = read_raw_bytes(buf, 100)
+			header_cnt.append_ns(buf, rd)
+		end
+		var str = header_cnt.to_s
+		if not str.has_suffix("\r\n\r\n") then
+			last_error = new IOError("Bad HTTP request")
+			close
+		end
+		var cmpts = str.split("\r\n")
+		for i in cmpts do
 			var temp_head = i.split(" ")
+			if temp_head.is_empty then continue
 			var head = temp_head.shift
 			if head.is_empty or head.length == 1 then continue
 			if head.chars.last == ':' then
@@ -106,66 +91,36 @@ class WebsocketConnection
 	end
 
 	# Generates the handshake
-	private fun handshake_response(heads: Map[String,String]): String
+	private fun handshake_response(heads: Map[String,String]): Bytes
 	do
-		var resp_map = new HashMap[String,String]
-		resp_map["HTTP/1.1"] = "101 Switching Protocols"
-		resp_map["Upgrade:"] = "websocket"
-		resp_map["Connection:"] = "Upgrade"
+		var resp = new Bytes.empty
+		resp.append_text("HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n")
 		var key = heads["Sec-WebSocket-Key"]
 		key += "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 		key = key.sha1.encode_base64.to_s
-		resp_map["Sec-WebSocket-Accept:"] = key
-		var resp = resp_map.join("\r\n", " ")
-		resp += "\r\n\r\n"
+		resp.append_text("Sec-WebSocket-Accept: {key}\r\n\r\n")
 		return resp
 	end
 
-	# Frames a text message to be sent to a client
-	private fun frame_message(msg: String): Bytes
-	do
-		var ans_buffer = new Bytes.with_capacity(msg.length)
-		# Flag for final frame set to 1
-		# opcode set to 1 (for text)
-		ans_buffer.add(129u8)
-		if msg.length < 126 then
-			ans_buffer.add(msg.length.to_b)
-		end
-		if msg.length >= 126 and msg.length <= 65535 then
-			ans_buffer.add(126u8)
-			ans_buffer.add((msg.length >> 8).to_b)
-			ans_buffer.add(msg.length.to_b)
-		end
-		if msg isa FlatString then
-			ans_buffer.append_ns_from(msg.items, msg.length, msg.first_byte)
-		else
-			for i in msg.substrings do
-				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, i.as(FlatString).first_byte)
-			end
-		end
-		return ans_buffer
-	end
-
-	# Reads an HTTP frame
-	protected fun read_http_frame(buf: Buffer): String
-	do
-		var ln = client.read_line
-		buf.append ln
-		buf.append "\r\n"
-		if buf.has_suffix("\r\n\r\n") then return buf.to_s
-		return read_http_frame(buf)
-	end
-
-	# Gets the message from the client, unpads it and reconstitutes the message
-	private fun unpad_message do
+	# Use when a frame is being received
+	#
+	# NOTE: According to RFC 6455, when a frame is declared as text, it MUST:
+	#
+	# * Act as if the received text is UTF-8
+	# * If an invalid sequence is encountered, the connection must close
+	#
+	# As we clean up sequences of bytes received by a client, the content of the text
+	# will be properly escaped using the appropriate Codec.
+	# As such, our implementation will not close a connection if an invalid text
+	# sequence is received.
+	private fun parse_frame do
 		var fin = false
-		var bf = new Bytes.empty
 		while not fin do
-			var fst_byte = client.read_byte
-			var snd_byte = client.read_byte
+			var fst_byte = read_raw_byte
+			var snd_byte = read_raw_byte
 			if fst_byte == null or snd_byte == null then
 				last_error = new IOError("Error: bad frame")
-				client.close
+				close
 				return
 			end
 			# First byte in msg is formatted this way :
@@ -185,14 +140,13 @@ class WebsocketConnection
 			if fin_flag != 0 then fin = true
 			var opcode = fst_byte & 0b0000_1111u8
 			if opcode == 9 then
-				bf.add(138u8)
-				bf.add(0u8)
-				client.write(bf.to_s)
-				_buffer_pos = _buffer_length
+				write_raw_byte 0x89u8
+				write_raw_byte 0u8
 				return
-			end
-			if opcode == 8 then
-				self.client.close
+			else if opcode == 10 then
+				return
+			else if opcode == 8 then
+				close
 				return
 			end
 			# Second byte is formatted this way :
@@ -201,71 +155,110 @@ class WebsocketConnection
 			# The next 16 or 64 bits contain an extended payload length
 			var mask_flag = snd_byte & 0b1000_0000u8
 			var len = (snd_byte & 0b0111_1111u8).to_i
-			var payload_ext_len = 0
 			if len == 126 then
-				var tmp = client.read_bytes(2)
-				if tmp.length != 2 then
-					last_error = new IOError("Error: received interrupted frame")
-					client.close
+				var lnhi = read_byte
+				var lnlo = read_byte
+				if lnhi == null or lnlo == null then
+					last_error = new IOError("Websocket Error: Interrupted frame.")
+					close
 					return
 				end
-				payload_ext_len += tmp[0].to_i << 8
-				payload_ext_len += tmp[1].to_i
+				len = (lnhi.to_i << 8) + lnlo.to_i
 			else if len == 127 then
-				var tmp = client.read_bytes(8)
-				if tmp.length != 8 then
-					last_error = new IOError("Error: received interrupted frame")
-					client.close
-					return
-				end
-				for i in [0 .. 8[ do
-					payload_ext_len += tmp[i].to_i << (8 * (7 - i))
-				end
+				#TODO Support 64-bit long packets
+				last_error = new IOError("Missing support for 64-bit long integers")
+				close
+				return
 			end
 			if mask_flag != 0 then
-				var mask = client.read_bytes(4).items
-				if payload_ext_len != 0 then
-					len = payload_ext_len
-				end
-				var msg = client.read_bytes(len).items
-				bf.append_ns(unmask_message(mask, msg, len), len)
+				masked_data = true
+				read_raw_bytes(self.mask, 4)
+				self.mask_pos = 0
+			else
+				masked_data = false
 			end
+			frame_remaining = len
 		end
-		_buffer = bf.items
-		_buffer_length = bf.length
 	end
 
-	# Unmasks a message sent by a client
-	private fun unmask_message(key: NativeString, message: NativeString, len: Int): NativeString
-	do
-		var return_message = new NativeString(len)
-
-		for i in [0 .. len[ do
-			return_message[i] = message[i] ^ key[i % 4]
+	redef fun read_byte do
+		var b = super
+		if b != null then return b
+		if frame_remaining == 0 then parse_frame
+		if not ready then return null
+		b = read_raw_byte
+		if b == null then
+			last_error = new IOError("Websocket Error: Interrupted frame.")
+			close
+			return null
 		end
-
-		return return_message
+		if masked_data then
+			b ^= mask[mask_pos]
+			mask_pos += 1
+			if mask_pos >= 4 then mask_pos = 0
+		end
+		frame_remaining -= 1
+		return b
 	end
 
-	# Checks if a connection to a client is available
-	redef fun connected do return client.connected
-
-	redef fun write_bytes(s) do client.write_bytes(frame_message(s.to_s))
-
-	redef fun write(msg) do client.write(frame_message(msg.to_s).to_s)
-
-	redef fun is_writable do return client.connected
-
-	redef fun fill_buffer
-	do
-		buffer_reset
-		unpad_message
+	redef fun read_bytes(b, ln) do
+		var rd = super
+		if rd > 0 and not ready then return rd
+		b.fast_cstring(rd)
+		ln -= rd
+		if frame_remaining == 0 then parse_frame
+		var rd_frame = ln.min(frame_remaining)
+		read_raw_bytes(b, rd_frame)
+		if masked_data then
+			var mask_pos = self.mask_pos
+			for i in [0 .. rd_frame[ do
+				b[i] ^= mask[mask_pos]
+				mask_pos += 1
+				if mask_pos >= 4 then mask_pos = 0
+			end
+			self.mask_pos = mask_pos
+		end
+		ln -= rd_frame
+		rd += rd_frame
+		frame_remaining -= rd_frame
+		if ln <= 0 then return rd
+		if ready then return rd + read_bytes(b.fast_cstring(rd), ln)
+		return rd
 	end
 
-	redef fun end_reached do return client._buffer_pos >= client._buffer_length and client.end_reached
+	redef fun write_byte(b) do
+		write_raw_byte(0x82u8)
+		write_raw_byte(0x01u8)
+		write_raw_byte(b)
+	end
 
-	# Is there some data available to be read ?
-	fun can_read(timeout: Int): Bool do return client.ready_to_read(timeout)
+	redef fun write_bytes(s, ln) do
+		if ln <= 125 then
+			write_raw_byte(0x82u8)
+			var blen = ln.to_b
+			write_raw_byte(blen)
+			write_raw_bytes(s, ln)
+		else if ln <= 65535 then
+			write_raw_byte(0x82u8)
+			write_raw_byte(126u8)
+			write_raw_byte(((ln & 0xFF00) >> 8).to_b)
+			write_raw_byte((ln & 0xFF).to_b)
+			write_raw_bytes(s, ln)
+		else
+			var rem = ln
+			var str = s
+			while rem >= 65535 do
+				write_raw_byte(0x02u8)
+				write_raw_byte(126u8)
+				write_raw_byte(0xFFu8)
+				write_raw_byte(0xFFu8)
+				write_raw_bytes(s, ln)
+				str = str.fast_cstring(65535)
+				rem -= 65535
+			end
+			write_bytes(str, rem)
+		end
+	end
 
-	redef fun poll_in do return client.poll_in
+	redef fun eof do return frame_remaining <= 0 and super and client.eof
 end
