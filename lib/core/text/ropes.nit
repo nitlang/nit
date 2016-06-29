@@ -58,7 +58,7 @@ intrude import flat
 #
 # Its purpose is to limit the depth of the `Rope` (this
 # improves performance when accessing/iterating).
-fun maxlen: Int do return 64
+fun maxlen: Int do return 512
 
 # String using a tree-based representation with leaves as `FlatStrings`
 private abstract class Rope
