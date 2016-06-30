@@ -255,7 +255,7 @@ class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.read_line == "Hello"
 	# assert i.read_line == ""
 	# assert i.read_line == "World"
@@ -268,7 +268,7 @@ class Reader
 	#
 	# ~~~
 	# var txt2 = "Hello\r\n\n\rWorld"
-	# var i2 = new StringReader(txt2)
+	# var i2 = new MemoryReader.from_str(txt2)
 	# assert i2.read_line == "Hello"
 	# assert i2.read_line == ""
 	# assert i2.read_line == "\rWorld"
@@ -291,7 +291,7 @@ class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.read_all == txt
 	# ~~~
 	fun read_all: String do
@@ -306,7 +306,7 @@ class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.read_lines == ["Hello", "", "World"]
 	# ~~~
 	#
@@ -328,7 +328,7 @@ class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.each_line.to_a == ["Hello", "", "World"]
 	# ~~~
 	#
@@ -336,7 +336,7 @@ class Reader
 	# Therefore, the stream should no be closed until the end of the stream.
 	#
 	# ~~~
-	# i = new StringReader(txt)
+	# i = new MemoryReader.from_str(txt)
 	# var el = i.each_line
 	#
 	# assert el.item == "Hello"
@@ -360,7 +360,7 @@ class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# var b = new FlatBuffer
 	# i.append_line_to(b)
 	# assert b == "Hello\n"
@@ -375,7 +375,7 @@ class Reader
 	# a non-eol terminated last line was returned.
 	#
 	# ~~~
-	# var i2 = new StringReader("hello")
+	# var i2 = new MemoryReader.from_str("hello")
 	# assert not i2.eof
 	# var b2 = new FlatBuffer
 	# i2.append_line_to(b2)
@@ -427,7 +427,7 @@ class Reader
 	# An empty string is returned if the end of the file or an error is encounter.
 	#
 	# ~~~
-	# var w = new StringReader(" Hello, \n\t World!")
+	# var w = new MemoryReader.from_str(" Hello, \n\t World!")
 	# assert w.read_word == "Hello,"
 	# assert w.read_char == '\n'
 	# assert w.read_word == "World!"
@@ -460,7 +460,7 @@ class Reader
 	# In fact, this method works like `read_char` except it skips whitespace.
 	#
 	# ~~~
-	# var w = new StringReader(" \nab\tc")
+	# var w = new MemoryReader.from_str(" \nab\tc")
 	# assert w.read_nonwhitespace == 'a'
 	# assert w.read_nonwhitespace == 'b'
 	# assert w.read_nonwhitespace == 'c'
@@ -668,7 +668,7 @@ class MemoryReader
 
 	redef fun ready(timeout) do return eof
 
-	redef fun eof do return pos < src.length
+	redef fun eof do return pos >= src.length
 
 	redef fun read_byte do
 		var b = super
