@@ -214,6 +214,32 @@ entity-list:hover .btn-filter {
 	margin-top: 8px;
 	margin-bottom: 0px;
 }
+
+/*
+ * Ratings
+ */
+
+.card .stars {
+	visibility: hidden
+}
+
+.card:hover .stars {
+	visibility: visible
+}
+
+.star {
+	color: grey;
+	cursor: pointer;
+}
+
+.star:hover, .star.active:hover {
+	color: #FF8100
+}
+
+.star.active {
+	color: #FFC000
+}
+
 /*
  * Users
  */
