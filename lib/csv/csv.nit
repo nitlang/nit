@@ -174,7 +174,7 @@ end
 # delimiters by some parsers.
 #
 # ~~~nit
-# var out = new StringWriter
+# var out = new MemoryWriter
 # var writer = new CsvWriter(out)
 # writer.write_elements(1, 2.0, "foo\nbar")
 # writer.write_line([""])

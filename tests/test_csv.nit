@@ -37,12 +37,12 @@ for i in [0 .. 10000[ do
 	doc.records.add ln
 end
 
-var refst = new StringWriter
+var refst = new MemoryWriter
 doc.write_to(refst)
 
 var csvd = new CsvReader.from_string(refst.to_s).read_all
 
-var prodst = new StringWriter
+var prodst = new MemoryWriter
 csvd.write_to(prodst)
 
 assert refst.to_s.trim == prodst.to_s.trim
