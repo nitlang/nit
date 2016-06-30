@@ -25,7 +25,7 @@
 #
 # This is usefull for tools that need a global view of a model like `nitdoc`,
 # `nitx` or `nituml`.
-# It shoul not be used for compiling stuffs like computing VFT, where the listed
+# It should not be used for compiling stuffs like computing VFT, where the listed
 # entities could not be reachable depending on the modules really imported.
 module model_collect
 
