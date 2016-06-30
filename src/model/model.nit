@@ -519,12 +519,12 @@ class MClass
 
 	# The principal static type of the class.
 	#
-	# For non-generic class, mclass_type is the only `MClassType` based
+	# For non-generic class, `mclass_type` is the only `MClassType` based
 	# on self.
 	#
 	# For a generic class, the arguments are the formal parameters.
-	# i.e.: for the class Array[E:Object], the `mclass_type` is Array[E].
-	# If you want Array[Object] the see `MClassDef::bound_mtype`
+	# i.e.: for the class `Array[E:Object]`, the `mclass_type` is `Array[E]`.
+	# If you want `Array[Object]`, see `MClassDef::bound_mtype`.
 	#
 	# For generic classes, the mclass_type is also the way to get a formal
 	# generic parameter type.
