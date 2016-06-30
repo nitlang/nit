@@ -15,4 +15,7 @@
 # Components required to build a web server about the nit model.
 module web
 
-import web_actions
+import model_api
+import api_catalog
+import api_graph
+import api_docdown

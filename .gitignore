@@ -1,5 +1,6 @@
 *.bak
 *.swp
+*.swo
 *~
 .project
 EIFGENs
@@ -55,3 +56,4 @@ nitunit.xml
 
 .metadata/*
 .github_data
+.DS_Store

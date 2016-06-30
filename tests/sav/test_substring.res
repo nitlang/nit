@@ -43,3 +43,6 @@ test.has_suffix("test") => true
 test.has_suffix("bt") => false
 test.has_suffix("bat") => false
 test.has_suffix("foot") => false
+........
+
+........

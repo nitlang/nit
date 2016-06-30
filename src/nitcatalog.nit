@@ -131,7 +131,68 @@ g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 	end
 end
 
+redef class NitdocDecorator
+	redef fun add_image(v, link, name, comment)
+	do
+		# Keep absolute links as is
+		if link.has_prefix("http://") or link.has_prefix("https://") then
+			super
+			return
+		end
+
+		do
+			# Get the directory of the doc object to deal with the relative link
+			var mdoc = current_mdoc
+			if mdoc == null then break
+			var source = mdoc.location.file
+			if source == null then break
+			var path = source.filename
+			var stat = path.file_stat
+			if stat == null then break
+			if not stat.is_dir then path = path.dirname
+
+			# Get the full path to the local resource
+			var fulllink = path / link.to_s
+			stat = fulllink.file_stat
+			if stat == null then break
+
+			# Get a collision-free catalog name for the resource
+			var hash = fulllink.md5
+			var ext = fulllink.file_extension
+			if ext != null then hash = hash + "." + ext
+
+			# Copy the local resource in the resource directory of the catalog
+			var res = catalog.outdir / "res" / hash
+			fulllink.file_copy_to(res)
+
+			# Hijack the link in the html.
+			link = ".." / "res" / hash
+			super(v, link, name, comment)
+			return
+		end
+
+		# Something went bad
+		catalog.modelbuilder.toolcontext.error(current_mdoc.location, "Error: cannot find local image `{link}`")
+		super
+	end
+
+	# The registered catalog
+	#
+	# It is used to deal with relative links in images.
+	var catalog: Catalog is noautoinit
+end
+
 redef class Catalog
+	redef init
+	do
+		# Register `self` to the global NitdocDecorator
+		# FIXME this is ugly. But no better idea at the moment.
+		modelbuilder.model.nitdoc_md_processor.emitter.decorator.as(NitdocDecorator).catalog = self
+	end
+
+	# The output directory where to generate pages
+	var outdir: String is noautoinit
+
 	# Return a empty `CatalogPage`.
 	fun new_page(rootpath: String): CatalogPage
 	do
@@ -252,6 +313,15 @@ redef class Catalog
 		if commits != 0 then
 			res.add "<li>{commits} commits</li>\n"
 		end
+		res.add "</ul>\n"
+
+		res.add "<h3>Quality</h3>\n<ul class=\"box\">\n"
+		var errors = errors[mpackage]
+		if errors > 0 then
+			res.add "<li>{errors} errors</li>\n"
+		end
+		res.add "<li>{warnings[mpackage]} warnings ({warnings_per_kloc[mpackage]}/kloc)</li>\n"
+		res.add "<li>{documentation_score[mpackage]}% documented</li>\n"
 		res.add "</ul>\n"
 
 		res.add "<h3>Tags</h3>\n"
@@ -413,6 +483,10 @@ redef class Catalog
 		res.add "<th data-field=\"met\" data-sortable=\"true\">methods</th>\n"
 		res.add "<th data-field=\"loc\" data-sortable=\"true\">lines</th>\n"
 		res.add "<th data-field=\"score\" data-sortable=\"true\">score</th>\n"
+		res.add "<th data-field=\"errors\" data-sortable=\"true\">errors</th>\n"
+		res.add "<th data-field=\"warnings\" data-sortable=\"true\">warnings</th>\n"
+		res.add "<th data-field=\"warnings_per_kloc\" data-sortable=\"true\">w/kloc</th>\n"
+		res.add "<th data-field=\"doc\" data-sortable=\"true\">doc</th>\n"
 		res.add "</tr></thead>"
 		for p in mpackages do
 			res.add "<tr>"
@@ -432,6 +506,10 @@ redef class Catalog
 			res.add "<td>{mmethods[p]}</td>"
 			res.add "<td>{loc[p]}</td>"
 			res.add "<td>{score[p]}</td>"
+			res.add "<td>{errors[p]}</td>"
+			res.add "<td>{warnings[p]}</td>"
+			res.add "<td>{warnings_per_kloc[p]}</td>"
+			res.add "<td>{documentation_score[p]}</td>"
 			res.add "</tr>\n"
 		end
 		res.add "</table>\n"
@@ -483,10 +561,16 @@ end
 
 # Get files or groups
 var args = tc.option_context.rest
+var mmodules
 if opt_no_parse.value then
-	modelbuilder.scan_full(args)
+	mmodules = modelbuilder.scan_full(args)
 else
-	modelbuilder.parse_full(args)
+	mmodules = modelbuilder.parse_full(args)
+end
+var mpackages = new Set[MPackage]
+for m in mmodules do
+	var p = m.mpackage
+	if p != null then mpackages.add p
 end
 
 # Scan packages and compute information
@@ -508,7 +592,7 @@ for p in model.mpackages do
 	end
 end
 
-if not opt_no_git.value then for p in model.mpackages do
+if not opt_no_git.value then for p in mpackages do
 	catalog.git_info(p)
 end
 
@@ -519,6 +603,9 @@ end
 
 var out = opt_dir.value or else "catalog.out"
 (out/"p").mkdir
+(out/"res").mkdir
+
+catalog.outdir = out
 
 # Generate the css (hard coded)
 var css = """
@@ -622,7 +709,7 @@ css.write_to_file(out/"style.css")
 
 # PAGES
 
-for p in model.mpackages do
+for p in mpackages do
 	# print p
 	var f = "p/{p.name}.html"
 	catalog.package_page(p)
@@ -645,7 +732,7 @@ index.add catalog.list_best(catalog.score)
 if catalog.deps.not_empty then
 	index.add "<h2>Most Required</h2>\n"
 	var reqs = new Counter[MPackage]
-	for p in model.mpackages do
+	for p in mpackages do
 		reqs[p] = catalog.deps[p].smallers.length - 1
 	end
 	index.add catalog.list_best(reqs)
@@ -662,7 +749,7 @@ index.add """
 <div class="sidebar">
 <h3>Stats</h3>
 <ul class="box">
-<li>{{{model.mpackages.length}}} packages</li>
+<li>{{{mpackages.length}}} packages</li>
 <li>{{{catalog.maint2proj.length}}} maintainers</li>
 <li>{{{catalog.contrib2proj.length}}} contributors</li>
 <li>{{{catalog.tag2proj.length}}} tags</li>
@@ -694,6 +781,6 @@ page = catalog.new_page("")
 page.more_head.add "<title>Projets of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>Table of Projets</h2>\n"
-page.add catalog.table_packages(model.mpackages)
+page.add catalog.table_packages(mpackages.to_a)
 page.add "</div>\n"
 page.write_to_file(out/"table.html")

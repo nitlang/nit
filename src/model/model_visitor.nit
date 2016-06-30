@@ -144,7 +144,10 @@ redef class MEntity
 	# See the specific implementation in the subclasses.
 	fun visit_all(v: ModelVisitor) do end
 
-	private fun accept_visibility(min_visibility: nullable MVisibility): Bool do return true
+	private fun accept_visibility(min_visibility: nullable MVisibility): Bool do
+		if min_visibility == null then return true
+		return visibility >= min_visibility
+	end
 end
 
 redef class Model
@@ -183,13 +186,6 @@ redef class MModule
 	end
 end
 
-redef class MClass
-	redef fun accept_visibility(min_visibility) do
-		if min_visibility == null then return true
-		return visibility >= min_visibility
-	end
-end
-
 redef class MClassDef
 	# Visit all the classes and class definitions of the module.
 	#
@@ -201,24 +197,5 @@ redef class MClassDef
 			if x.is_intro then v.enter_visit(x.mproperty)
 			v.enter_visit(x)
 		end
-	end
-
-	redef fun accept_visibility(min_visibility) do
-		if min_visibility == null then return true
-		return mclass.visibility >= min_visibility
-	end
-end
-
-redef class MProperty
-	redef fun accept_visibility(min_visibility) do
-		if min_visibility == null then return true
-		return visibility >= min_visibility
-	end
-end
-
-redef class MPropDef
-	redef fun accept_visibility(min_visibility) do
-		if min_visibility == null then return true
-		return mproperty.visibility >= min_visibility
 	end
 end

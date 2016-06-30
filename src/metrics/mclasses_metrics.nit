@@ -71,7 +71,7 @@ private class MClassesMetricsPhase
 				mclasses.add_all(mod_mclasses)
 				metrics.collect(new HashSet[MClass].from(mod_mclasses))
 				metrics.to_console(1, not toolcontext.opt_nocolors.value)
-				if csv then metrics.to_csv.save("{out}/{mgroup}.csv")
+				if csv then metrics.to_csv.write_to_file("{out}/{mgroup}.csv")
 			end
 		end
 		if not mclasses.is_empty then
@@ -80,7 +80,7 @@ private class MClassesMetricsPhase
 			print toolcontext.format_h2("\n ## global metrics")
 			metrics.collect(mclasses)
 			metrics.to_console(1, not toolcontext.opt_nocolors.value)
-			if csv then metrics.to_csv.save("{out}/summary.csv")
+			if csv then metrics.to_csv.write_to_file("{out}/summary.csv")
 		end
 	end
 end

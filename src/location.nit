@@ -140,6 +140,15 @@ class Location
 		end
 	end
 
+	# Initialize a location corresponding to an opaque file.
+	#
+	# The path is used as is and is not open nor read.
+	init opaque_file(path: String)
+	do
+		var source = new SourceFile.from_string(path, "")
+		init(source, 0, 0, 0, 0)
+	end
+
 	# The index in the start character in the source
 	fun pstart: Int do return file.line_starts[line_start-1] + column_start-1
 

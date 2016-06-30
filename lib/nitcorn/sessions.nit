@@ -72,7 +72,7 @@ end
 
 redef class HttpRequest
 	# The `Session` associated to this request
-	var session: nullable Session = null
+	var session: nullable Session = null is writable
 end
 
 redef class HttpRequestParser

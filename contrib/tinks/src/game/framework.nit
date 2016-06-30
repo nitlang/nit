@@ -41,7 +41,7 @@ class TGame
 		var dt = clock.lapse
 		tick += 1
 
-		var turn = new TTurn(self, tick, dt.to_f, dt.millisec)
+		var turn = new TTurn(self, tick, dt, ((dt-dt.floor)*1000.0).to_i)
 		return turn
 	end
 

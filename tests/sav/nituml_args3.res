@@ -51,7 +51,7 @@ Float [
 Numeric -> Float [dir=back arrowtail=open style=dashed];
 
 Byte [
- label = "{Byte||+ %(i: Byte): Byte\l+ \<\<(i: Int): Byte\l+ \>\>(i: Int): Byte\l+ ascii(): Char\l+ autoinit()\l}"
+ label = "{Byte||+ %(i: Byte): Byte\l+ \<\<(i: Int): Byte\l+ \>\>(i: Int): Byte\l+ ascii(): Char\l+ is_whitespace(): Bool\l+ autoinit()\l}"
 ]
 Discrete -> Byte [dir=back arrowtail=open style=dashed];
 Numeric -> Byte [dir=back arrowtail=open style=dashed];

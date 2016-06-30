@@ -46,8 +46,11 @@ redef class ModelBuilder
 		var mvisibility: nullable MVisibility
 		var arity = 0
 		var names = new Array[String]
+		var mclass
 		if nclassdef isa AStdClassdef then
-			name = nclassdef.n_qid.n_id.text
+			var qid = nclassdef.n_qid
+			assert qid != null
+			name = qid.n_id.text
 			nkind = nclassdef.n_classkind
 			mkind = nkind.mkind
 			nvisibility = nclassdef.n_visibility
@@ -74,6 +77,12 @@ redef class ModelBuilder
 				end
 				names.add(ptname)
 			end
+			mclass = try_get_mclass_by_qid(qid, mmodule)
+			if mclass == null and (qid.n_qualified != null or nclassdef.n_kwredef != null) then
+				class_not_found(qid, mmodule)
+				nclassdef.is_broken = true
+				return
+			end
 
 		else if nclassdef isa ATopClassdef and nclassdef.n_propdefs.first.as(AMethPropdef).n_methid.collect_text == "sys" then
 			# Special case to keep `sys` in object.
@@ -84,15 +93,16 @@ redef class ModelBuilder
 			mkind = interface_kind
 			nvisibility = null
 			mvisibility = public_visibility
+			mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
 		else
 			name = "Sys"
 			nkind = null
 			mkind = concrete_kind
 			nvisibility = null
 			mvisibility = public_visibility
+			mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
 		end
 
-		var mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
 		if mclass == null then
 			if nclassdef isa AStdClassdef and nclassdef.n_kwredef != null then
 				error(nclassdef, "Redef Error: no imported class `{name}` to refine.")
@@ -112,7 +122,7 @@ redef class ModelBuilder
 				end
 			end
 
-			mclass = new MClass(mmodule, name, names, mkind, mvisibility)
+			mclass = new MClass(mmodule, name, nclassdef.location, names, mkind, mvisibility)
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
 			error(nclassdef, "Error: a class `{name}` is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
@@ -223,7 +233,7 @@ redef class ModelBuilder
 		if mclassdef.is_intro then
 			self.toolcontext.info("{mclassdef} introduces new {mclass.kind} {mclass.full_name}", 3)
 		else
-			self.toolcontext.info("{mclassdef} refine {mclass.kind} {mclass.full_name}", 3)
+			self.toolcontext.info("{mclassdef} refines {mclass.kind} {mclass.full_name}", 3)
 		end
 	end
 

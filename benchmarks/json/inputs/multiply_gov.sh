@@ -14,7 +14,7 @@
 # limitations under the License.
 
 echo "[" > big_gov_data.json
-for i in $(seq 10); do
+for i in $(seq 20); do
   test "$i" != "1" && echo "," >> big_gov_data.json
     cat gov_data.json >> big_gov_data.json
 done

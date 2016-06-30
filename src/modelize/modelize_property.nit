@@ -144,7 +144,7 @@ redef class ModelBuilder
 		# Look for the init in Object, or create it
 		if mclassdef.mclass.name == "Object" and the_root_init_mmethod == null then
 			# Create the implicit root-init method
-			var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
+			var mprop = new MMethod(mclassdef, "init", nclassdef.location, mclassdef.mclass.visibility)
 			mprop.is_root_init = true
 			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
 			var mparameters = new Array[MParameter]
@@ -355,7 +355,7 @@ redef class ModelBuilder
 
 		# Create a specific new autoinit constructor
 		do
-			var mprop = new MMethod(mclassdef, "autoinit", public_visibility)
+			var mprop = new MMethod(mclassdef, "autoinit", nclassdef.location, public_visibility)
 			mprop.is_init = true
 			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
 			mpropdef.initializers.add_all(initializers)
@@ -836,7 +836,7 @@ redef class AMethPropdef
 		end
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-			mprop = new MMethod(mclassdef, name, mvisibility)
+			mprop = new MMethod(mclassdef, name, self.location, mvisibility)
 			if look_like_a_root_init and modelbuilder.the_root_init_mmethod == null then
 				modelbuilder.the_root_init_mmethod = mprop
 				mprop.is_root_init = true
@@ -850,9 +850,7 @@ redef class AMethPropdef
 				return
 			end
 		else
-			if mprop.is_broken then
-				return
-			end
+			if mprop.is_broken then return
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
@@ -1207,7 +1205,7 @@ redef class AAttrPropdef
 				modelbuilder.error(self, "Error: attempt to define attribute `{name}` in the {mclass.kind} `{mclass}`.")
 			end
 
-			var mprop = new MAttribute(mclassdef, "_" + name, private_visibility)
+			var mprop = new MAttribute(mclassdef, "_" + name, self.location, private_visibility)
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
@@ -1217,9 +1215,13 @@ redef class AAttrPropdef
 		var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
 		if mreadprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-			mreadprop = new MMethod(mclassdef, readname, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
+			mreadprop = new MMethod(mclassdef, readname, self.location, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then
+				mreadprop.is_broken = true
+				return
+			end
 		else
+			if mreadprop.is_broken then return
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
 		end
@@ -1269,7 +1271,7 @@ redef class AAttrPropdef
 				return
 			end
 			is_lazy = true
-			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, none_visibility)
+			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, self.location, none_visibility)
 			mlazyprop.is_fictive = true
 			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
 			mlazypropdef.is_fictive = true
@@ -1316,10 +1318,14 @@ redef class AAttrPropdef
 				# By default, use protected visibility at most
 				if mvisibility > protected_visibility then mvisibility = protected_visibility
 			end
-			mwriteprop = new MMethod(mclassdef, writename, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
+			mwriteprop = new MMethod(mclassdef, writename, self.location, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then
+				mwriteprop.is_broken = true
+				return
+			end
 			mwriteprop.deprecation = mreadprop.deprecation
 		else
+			if mwriteprop.is_broken then return
 			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 			if atwritable != null then
 				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
@@ -1484,7 +1490,7 @@ redef class AAttrPropdef
 
 		var mlazypropdef = self.mlazypropdef
 		if mlazypropdef != null then
-			mlazypropdef.static_mtype = modelbuilder.model.get_mclasses_by_name("Bool").first.mclass_type
+			mlazypropdef.static_mtype = mmodule.bool_type
 		end
 		check_repeated_types(modelbuilder)
 	end
@@ -1623,12 +1629,13 @@ redef class ATypePropdef
 		var mprop = modelbuilder.try_get_mproperty_by_name(self.n_qid, mclassdef, name)
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
+			mprop = new MVirtualTypeProp(mclassdef, name, self.location, mvisibility)
 			for c in name.chars do if c >= 'a' and c<= 'z' then
 				modelbuilder.warning(n_qid, "bad-type-name", "Warning: lowercase in the virtual type `{name}`.")
 				break
 			end
 		else
+			if mprop.is_broken then return
 			assert mprop isa MVirtualTypeProp
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end

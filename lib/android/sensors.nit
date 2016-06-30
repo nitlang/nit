@@ -14,28 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This module is used to manipulate android sensors
-# The sensor support is implemented in android_app module, so the user can enable the type of sensor he wants to use.
-# There is an example of how you can use the android sensors in nit/examples/mnit_ballz :
+# Access Android sensors
+#
+# Sensors are to be enabled when `App` is created.
+# The following example enables all sensors.
+# The events (`SensorEvent`, `ASensorAccelerometer`, `ASensorMagneticField`...)
+# are sent to the `input` callback of `App`
 #
 # ~~~~nitish
-# #FIXME rewrite the example
 # redef class App
-# 	sensors_support_enabled = true
-# 	accelerometer.enabled = true
-# 	accelerometer.eventrate = 10000
-# 	magnetic_field.enabled = true
-# 	gyroscope.enabled = true
-# 	light.enabled = true
-# 	proximity.enabled = true
+#     init
+#     do
+#         sensors_support_enabled = true
+#         accelerometer.enabled = true
+#         accelerometer.eventrate = 10000
+#         magnetic_field.enabled = true
+#         gyroscope.enabled = true
+#         light.enabled = true
+#         proximity.enabled = true
+#     end
 # end
 # ~~~~
-#
-# In this example, we enable the sensor support, then enable all types of sensors supported by the API, directly with `App` attributes
-# As a result, you get all type of SensorEvent (ASensorAccelerometer, ASensorMagneticField ...) in the `input` callback of `App`
 module sensors
 
-import android
+import game
 import mnit
 
 in "C header" `{

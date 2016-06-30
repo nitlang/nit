@@ -19,6 +19,7 @@ private import parser_util
 import testing_base
 import markdown
 import html
+import realtime
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor
@@ -36,11 +37,8 @@ class NitUnitExecutor
 	# The XML node associated to the module
 	var testsuite: HTMLTag
 
-	# All blocks of code from a same `ADoc`
-	var blocks = new Array[Buffer]
-
-	# All failures from a same `ADoc`
-	var failures = new Array[String]
+	# The name of the suite
+	var name: String
 
 	# Markdown processor used to parse markdown comments and extract code.
 	var mdproc = new MarkdownProcessor
@@ -55,56 +53,89 @@ class NitUnitExecutor
 	# used to generate distinct names
 	var cpt = 0
 
+	# The last docunit extracted from a mdoc.
+	#
+	# Is used because a new code-block might just be added to it.
+	var last_docunit: nullable DocUnit = null
+
+	var xml_classname: String is noautoinit
+
+	var xml_name: String is noautoinit
+
 	# The entry point for a new `ndoc` node
 	# Fill `docunits` with new discovered unit of tests.
-	#
-	# `tc` (testcase) is the pre-filled XML node
-	fun extract(mdoc: MDoc, tc: HTMLTag)
+	fun extract(mdoc: MDoc, xml_classname, xml_name: String)
 	do
-		blocks.clear
-		failures.clear
+		last_docunit = null
+		self.xml_classname = xml_classname
+		self.xml_name = xml_name
 
 		self.mdoc = mdoc
 
 		# Populate `blocks` from the markdown decorator
 		mdproc.process(mdoc.content.join("\n"))
-
-		toolcontext.check_errors
-
-		if not failures.is_empty then
-			for msg in failures do
-				var ne = new HTMLTag("failure")
-				ne.attr("message", msg)
-				tc.add ne
-				toolcontext.modelbuilder.unit_entities += 1
-				toolcontext.modelbuilder.failed_entities += 1
-			end
-			if blocks.is_empty then testsuite.add(tc)
-		end
-
-		if blocks.is_empty then return
-		for block in blocks do
-			docunits.add new DocUnit(mdoc, tc, block.write_to_string)
-		end
 	end
 
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
+	fun show_status
+	do
+		toolcontext.show_unit_status(name, docunits)
+	end
+
+	fun mark_done(du: DocUnit)
+	do
+		du.is_done = true
+		toolcontext.clear_progress_bar
+		toolcontext.show_unit(du)
+		show_status
+	end
+
 	# Execute all the docunits
 	fun run_tests
 	do
+		if docunits.is_empty then
+			return
+		end
+
+		# Try to group each nitunit into a single source file to fasten the compilation
 		var simple_du = new Array[DocUnit]
+		show_status
 		for du in docunits do
+			# Skip existing errors
+			if du.error != null then
+				continue
+			end
+
 			var ast = toolcontext.parse_something(du.block)
 			if ast isa AExpr then
 				simple_du.add du
-			else
-				test_single_docunit(du)
 			end
 		end
-
 		test_simple_docunits(simple_du)
+
+		# Now test them in order
+		for du in docunits do
+			if du.error != null then
+				# Nothing to execute. Conclude
+			else if du.test_file != null then
+				# Already compiled. Execute it.
+				execute_simple_docunit(du)
+			else
+				# Need to try to compile it, then execute it
+				test_single_docunit(du)
+			end
+			mark_done(du)
+		end
+
+		# Final status
+		show_status
+		print ""
+
+		for du in docunits do
+			testsuite.add du.to_xml
+		end
 	end
 
 	# Executes multiples doc-units in a shared program.
@@ -128,7 +159,7 @@ class NitUnitExecutor
 
 			i += 1
 			f.write("fun run_{i} do\n")
-			f.write("# {du.testcase.attrs["name"]}\n")
+			f.write("# {du.full_name}\n")
 			f.write(du.block)
 			f.write("end\n")
 		end
@@ -144,43 +175,37 @@ class NitUnitExecutor
 
 		if res != 0 then
 			# Compilation error.
-			# Fall-back to individual modes:
-			for du in dus do
-				test_single_docunit(du)
-			end
+			# They will be executed independently
 			return
 		end
 
+		# Compilation was a success.
+		# Store what need to be executed for each one.
 		i = 0
 		for du in dus do
-			var tc = du.testcase
-			toolcontext.modelbuilder.unit_entities += 1
 			i += 1
-			toolcontext.info("Execute doc-unit {du.testcase.attrs["name"]} in {file} {i}", 1)
-			var res2 = sys.system("{file.to_program_name}.bin {i} >>'{file}.out1' 2>&1 </dev/null")
+			du.test_file = file
+			du.test_arg = i
+		end
+	end
 
-			var msg
-			f = new FileReader.open("{file}.out1")
-			var n2
-			n2 = new HTMLTag("system-err")
-			tc.add n2
-			msg = f.read_all
-			f.close
+	# Execute a docunit compiled by `test_single_docunit`
+	fun execute_simple_docunit(du: DocUnit)
+	do
+		var file = du.test_file.as(not null)
+		var i = du.test_arg.as(not null)
+		toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
+		var clock = new Clock
+		var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
+		if not toolcontext.opt_no_time.value then du.real_time = clock.total
+		du.was_exec = true
 
-			n2 = new HTMLTag("system-out")
-			tc.add n2
-			n2.append(du.block)
+		var content = "{file}.out1".to_path.read_all
+		du.raw_output = content
 
-			if res2 != 0 then
-				var ne = new HTMLTag("error")
-				ne.attr("message", msg)
-				tc.add ne
-				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
-				toolcontext.modelbuilder.failed_entities += 1
-			end
-			toolcontext.check_errors
-
-			testsuite.add(tc)
+		if res2 != 0 then
+			du.error = "Runtime error in {file} with argument {i}"
+			toolcontext.modelbuilder.failed_entities += 1
 		end
 	end
 
@@ -188,13 +213,10 @@ class NitUnitExecutor
 	# Used for docunits larger than a single block of code (with modules, classes, functions etc.)
 	fun test_single_docunit(du: DocUnit)
 	do
-		var tc = du.testcase
-		toolcontext.modelbuilder.unit_entities += 1
-
 		cpt += 1
 		var file = "{prefix}-{cpt}.nit"
 
-		toolcontext.info("Execute doc-unit {tc.attrs["name"]} in {file}", 1)
+		toolcontext.info("Execute doc-unit {du.full_name} in {file}", 1)
 
 		var f
 		f = create_unitfile(file)
@@ -206,38 +228,22 @@ class NitUnitExecutor
 		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
-			res2 = sys.system("{file.to_program_name}.bin >>'{file}.out1' 2>&1 </dev/null")
+			var clock = new Clock
+			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
+			if not toolcontext.opt_no_time.value then du.real_time = clock.total
+			du.was_exec = true
 		end
 
-		var msg
-		f = new FileReader.open("{file}.out1")
-		var n2
-		n2 = new HTMLTag("system-err")
-		tc.add n2
-		msg = f.read_all
-		f.close
-
-		n2 = new HTMLTag("system-out")
-		tc.add n2
-		n2.append(du.block)
-
+		var content = "{file}.out1".to_path.read_all
+		du.raw_output = content
 
 		if res != 0 then
-			var ne = new HTMLTag("failure")
-			ne.attr("message", msg)
-			tc.add ne
-			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			du.error = "Compilation error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
-			var ne = new HTMLTag("error")
-			ne.attr("message", msg)
-			tc.add ne
-			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			du.error = "Runtime error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		end
-		toolcontext.check_errors
-
-		testsuite.add(tc)
 	end
 
 	# Create and fill the header of a unit file `file`.
@@ -268,18 +274,13 @@ class NitUnitExecutor
 	# Can terminate the program if the compiler is not found
 	private fun compile_unitfile(file: String): Int
 	do
-		var nit_dir = toolcontext.nit_dir
-		var nitc = nit_dir/"bin/nitc"
-		if not nitc.file_exists then
-			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
+		var nitc = toolcontext.find_nitc
 		var opts = new Array[String]
 		if mmodule != null then
 			opts.add "-I {mmodule.filepath.dirname}"
 		end
-		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var cmd = "{nitc} --ignore-visibility --no-color -q '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var res = toolcontext.safe_exec(cmd)
 		return res
 	end
 end
@@ -297,39 +298,174 @@ private class NitunitDecorator
 		# Try to parse code blocks
 		var ast = executor.toolcontext.parse_something(code)
 
+		var mdoc = executor.mdoc
+		assert mdoc != null
+
 		# Skip pure comments
 		if ast isa TComment then return
 
+		# The location is computed according to the starts of the mdoc and the block
+		# Note, the following assumes that all the comments of the mdoc are correctly aligned.
+		var loc = block.block.location
+		var line_offset = loc.line_start + mdoc.location.line_start - 2
+		var column_offset = loc.column_start + mdoc.location.column_start
+		# Hack to handle precise location in blocks
+		# TODO remove when markdown is more reliable
+		if block isa BlockFence then
+			# Skip the starting fence
+			line_offset += 1
+		else
+			# Account a standard 4 space indentation
+			column_offset += 4
+		end
+
 		# We want executable code
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
-			var message = ""
-			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			executor.toolcontext.warning(executor.mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
-			executor.failures.add("{executor.mdoc.location}: Invalid block of code.{message}")
+			var message
+			var l = ast.location
+			# Get real location of the node (or error)
+			var location = new Location(mdoc.location.file,
+				l.line_start + line_offset,
+				l.line_end + line_offset,
+				l.column_start + column_offset,
+				l.column_end + column_offset)
+			if ast isa AError then
+				message = ast.message
+			else
+				message = "Error: Invalid Nit code."
+			end
+
+			var du = new_docunit
+			du.block += code
+			du.error_location = location
+			du.error = message
+			executor.toolcontext.modelbuilder.failed_entities += 1
 			return
 		end
 
 		# Create a first block
 		# Or create a new block for modules that are more than a main part
-		if executor.blocks.is_empty or ast isa AModule then
-			executor.blocks.add(new Buffer)
+		var last_docunit = executor.last_docunit
+		if last_docunit == null or ast isa AModule then
+			last_docunit = new_docunit
+			executor.last_docunit = last_docunit
 		end
 
 		# Add it to the file
-		executor.blocks.last.append code
+		last_docunit.block += code
+
+		# In order to retrieve precise positions,
+		# the real position of each line of the raw_content is stored.
+		# See `DocUnit::real_location`
+		line_offset -= loc.line_start - 1
+		for i in [loc.line_start..loc.line_end] do
+			last_docunit.lines.add i + line_offset
+			last_docunit.columns.add column_offset
+		end
+	end
+
+	# Return and register a new empty docunit
+	fun new_docunit: DocUnit
+	do
+		var mdoc = executor.mdoc
+		assert mdoc != null
+
+		var next_number = 1
+		var name = executor.xml_name
+		if executor.docunits.not_empty and executor.docunits.last.mdoc == mdoc then
+			next_number = executor.docunits.last.number + 1
+			name += "#" + next_number.to_s
+		end
+
+		var res = new DocUnit(mdoc, next_number, "", executor.xml_classname, name)
+		executor.docunits.add res
+		executor.toolcontext.modelbuilder.unit_entities += 1
+		return res
 	end
 end
 
-# A unit-test to run
+# A unit-test extracted from some documentation.
+#
+# A docunit is extracted from the code-blocks of mdocs.
+# Each mdoc can contains more than one docunit, and a single docunit can be made of more that a single code-block.
 class DocUnit
+	super UnitTest
+
 	# The doc that contains self
 	var mdoc: MDoc
 
-	# The XML node that contains the information about the execution
-	var testcase: HTMLTag
+	# The numbering of self in mdoc (starting with 0)
+	var number: Int
 
-	# The text of the code to execute
+	# The generated Nit source file that contains the unit-test
+	#
+	# Note that a same generated file can be used for multiple tests.
+	# See `test_arg` that is used to distinguish them
+	var test_file: nullable String = null
+
+	# The command-line argument to use when executing the test, if any.
+	var test_arg: nullable Int = null
+
+	redef fun full_name do
+		var mentity = mdoc.original_mentity
+		if mentity != null then
+			var res = mentity.full_name
+			if number > 1 then
+				res += "#{number}"
+			end
+			return res
+		else
+			return xml_classname + "." + xml_name
+		end
+	end
+
+	# The text of the code to execute.
+	#
+	# This is the verbatim content on one, or more, code-blocks from `mdoc`
 	var block: String
+
+	# For each line in `block`, the associated line in the mdoc
+	#
+	# Is used to give precise locations
+	var lines = new Array[Int]
+
+	# For each line in `block`, the associated column in the mdoc
+	#
+	# Is used to give precise locations
+	var columns = new Array[Int]
+
+	# The location of the whole docunit.
+	#
+	# If `self` is made of multiple code-blocks, then the location
+	# starts at the first code-books and finish at the last one, thus includes anything between.
+	redef var location is lazy do
+		return new Location(mdoc.location.file, lines.first, lines.last+1, columns.first+1, 0)
+	end
+
+	# Compute the real location of a node on the `ast` based on `mdoc.location`
+	#
+	# The result is basically: ast_location + markdown location of the piece + mdoc.location
+	#
+	# The fun is that a single docunit can be made of various pieces of code blocks.
+	fun real_location(ast_location: Location): Location
+	do
+		var mdoc = self.mdoc
+		var res = new Location(mdoc.location.file, lines[ast_location.line_start-1],
+			lines[ast_location.line_end-1],
+			columns[ast_location.line_start-1] + ast_location.column_start,
+			columns[ast_location.line_end-1] + ast_location.column_end)
+		return res
+	end
+
+	redef fun to_xml
+	do
+		var res = super
+		res.open("system-out").append(block)
+		return res
+	end
+
+	redef var xml_classname
+	redef var xml_name
 end
 
 redef class ModelBuilder
@@ -368,9 +504,7 @@ redef class ModelBuilder
 
 		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mmodule.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
-
-		var tc
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts, "Docunits of module {mmodule.full_name}")
 
 		do
 			total_entities += 1
@@ -379,11 +513,8 @@ redef class ModelBuilder
 			var ndoc = nmoduledecl.n_doc
 			if ndoc == null then break label x
 			doc_entities += 1
-			tc = new HTMLTag("testcase")
 			# NOTE: jenkins expects a '.' in the classname attr
-			tc.attr("classname", "nitunit." + mmodule.full_name + ".<module>")
-			tc.attr("name", "<module>")
-			d2m.extract(ndoc.to_mdoc, tc)
+			d2m.extract(ndoc.to_mdoc, "nitunit." + mmodule.full_name + ".<module>", "<module>")
 		end label x
 		for nclassdef in nmodule.n_classdefs do
 			var mclassdef = nclassdef.mclassdef
@@ -393,10 +524,7 @@ redef class ModelBuilder
 				var ndoc = nclassdef.n_doc
 				if ndoc != null then
 					doc_entities += 1
-					tc = new HTMLTag("testcase")
-					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
-					tc.attr("name", "<class>")
-					d2m.extract(ndoc.to_mdoc, tc)
+					d2m.extract(ndoc.to_mdoc, "nitunit." + mclassdef.full_name.replace("$", "."), "<class>")
 				end
 			end
 			for npropdef in nclassdef.n_propdefs do
@@ -406,10 +534,8 @@ redef class ModelBuilder
 				var ndoc = npropdef.n_doc
 				if ndoc != null then
 					doc_entities += 1
-					tc = new HTMLTag("testcase")
-					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
-					tc.attr("name", mpropdef.mproperty.full_name)
-					d2m.extract(ndoc.to_mdoc, tc)
+					var a = mpropdef.full_name.split("$")
+					d2m.extract(ndoc.to_mdoc, "nitunit." + a[0] + "." + a[1], a[2])
 				end
 			end
 		end
@@ -433,20 +559,15 @@ redef class ModelBuilder
 
 		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mgroup.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
-
-		var tc
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts, "Docunits of group {mgroup.full_name}")
 
 		total_entities += 1
 		var mdoc = mgroup.mdoc
 		if mdoc == null then return ts
 
 		doc_entities += 1
-		tc = new HTMLTag("testcase")
 		# NOTE: jenkins expects a '.' in the classname attr
-		tc.attr("classname", "nitunit." + mgroup.full_name)
-		tc.attr("name", "<group>")
-		d2m.extract(mdoc, tc)
+		d2m.extract(mdoc, "nitunit." + mgroup.mpackage.name + "." + mgroup.name + ".<group>", "<group>")
 
 		d2m.run_tests
 
@@ -457,26 +578,20 @@ redef class ModelBuilder
 	fun test_mdoc(mdoc: MDoc): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")
-		var file = mdoc.location.to_s
+		var file = mdoc.location.file.filename
 
 		toolcontext.info("nitunit: doc-unit file {file}", 2)
 
 		ts.attr("package", file)
 
 		var prefix = toolcontext.test_dir / "file"
-		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts)
-
-		var tc
+		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts, "Docunits of file {file}")
 
 		total_entities += 1
 		doc_entities += 1
 
-		tc = new HTMLTag("testcase")
 		# NOTE: jenkins expects a '.' in the classname attr
-		tc.attr("classname", "nitunit.<file>")
-		tc.attr("name", file)
-
-		d2m.extract(mdoc, tc)
+		d2m.extract(mdoc, "nitunit.<file>", file)
 		d2m.run_tests
 
 		return ts

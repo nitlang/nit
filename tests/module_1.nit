@@ -17,56 +17,56 @@
 import module_0
 
 class A # class 1
-   fun a1 
-   do 
-	   print(1)
-	   print(1)
-   end
-   fun a12 
-   do
-	   print(12)
-	   print(1)
-   end
-   fun a13
-   do
-	   print(13) 
-	   print(1)
-   end
-   fun a123 
-   do
-	   print(123)
-	   print(1)
-   end
+	fun a1
+	do
+		print(1)
+		print(1)
+	end
+	fun a12
+	do
+		print(12)
+		print(1)
+	end
+	fun a13
+	do
+		print(13)
+		print(1)
+	end
+	fun a123
+	do
+		print(123)
+		print(1)
+	end
 end
 
 class B # class 2
 	super A
-   redef fun a12 
-   do
-	   print(12)
-	   print(2)
-   end
-   redef fun a123
-   do
-	   print(123)
-	   print(2)
-   end
-   fun all2
-   do
-	   a1
-	   a12
-	   a13
-	   a123
-   end
-   fun all25
-   do
-	   print(250)
-	   print(2)
-	   a1
-	   a12
-	   a13
-	   a123
-   end
+	redef fun a12
+	do
+		print(12)
+		print(2)
+	end
+	redef fun a123
+	do
+		print(123)
+		print(2)
+	end
+	fun all2
+	do
+		a1
+		a12
+		a13
+		a123
+	end
+	fun all25
+	do
+		print(250)
+		print(2)
+		a1
+		a12
+		a13
+		a123
+	end
 end
 
 var a = new A

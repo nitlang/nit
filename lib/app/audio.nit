@@ -27,7 +27,6 @@ import app_base
 import core::error
 
 # Platform variations
-# TODO: move on the platform once qualified names are understand in the condition
 import linux::audio is conditional(linux)
 import android::audio is conditional(android)
 

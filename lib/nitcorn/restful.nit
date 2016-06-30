@@ -35,11 +35,13 @@ class RestfulAction
 		if val == null then return null
 
 		var deserializer = new JsonDeserializer(val)
+		var obj = deserializer.deserialize
+
 		if deserializer.errors.not_empty then
 			print_error deserializer.errors.join("\n")
 			return null
 		end
 
-		return deserializer.deserialize
+		return obj
 	end
 end

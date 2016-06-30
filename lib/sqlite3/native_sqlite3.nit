@@ -22,9 +22,14 @@ in "C header" `{
 	#include <sqlite3.h>
 `}
 
+in "C" `{
+	// Return code of the last call to the constructor of `NativeSqlite3`
+	static int nit_sqlite_open_error = SQLITE_OK;
+`}
+
 redef class Sys
 	# Last error raised when calling `Sqlite3::open`
-	var sqlite_open_error: nullable Sqlite3Code = null
+	fun sqlite_open_error: Sqlite3Code `{ return nit_sqlite_open_error; `}
 end
 
 extern class Sqlite3Code `{int`}
@@ -75,11 +80,10 @@ extern class Sqlite3Code `{int`}
 
 	private fun native_to_s: NativeString `{
 #if SQLITE_VERSION_NUMBER >= 3007015
-		char *err = (char *)sqlite3_errstr(self);
+		return (char *)sqlite3_errstr(self);
 #else
-		char *err = "sqlite3_errstr supported only by version >= 3.7.15";
+		return "sqlite3_errstr is not supported in version < 3.7.15";
 #endif
-		return err;
 	`}
 end
 
@@ -91,13 +95,8 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return sqlite3_step(self);
 	`}
 
-	fun column_name(i: Int) : String import NativeString.to_s `{
-		const char * name = (sqlite3_column_name(self, i));
-		if(name == NULL){
-			name = "";
-		}
-		char * ret = (char *) name;
-		return NativeString_to_s(ret);
+	fun column_name(i: Int): NativeString `{
+		return (char *)sqlite3_column_name(self, i);
 	`}
 
 	# Number of bytes in the blob or string at row `i`
@@ -139,24 +138,17 @@ end
 extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
-	new open(filename: NativeString) import set_sys_sqlite_open_error `{
+	new open(filename: NativeString) `{
 		sqlite3 *self = NULL;
 		int err = sqlite3_open(filename, &self);
-		NativeSqlite3_set_sys_sqlite_open_error(self, (void*)(long)err);
-		// The previous cast is a hack, using non pointers in extern classes is not
-		// yet in the spec of the FFI.
+		nit_sqlite_open_error = err;
 		return self;
 	`}
-
-	# Utility method to set `Sys.sqlite_open_error`
-	private fun set_sys_sqlite_open_error(err: Sqlite3Code) do sys.sqlite_open_error = err
 
 	# Has this DB been correctly opened?
 	#
 	# To know if it has been closed or interrupted, you must check for errors with `error`.
 	fun is_valid: Bool do return not address_is_null
-
-	fun destroy do close
 
 	# Close this connection
 	fun close `{
@@ -171,18 +163,18 @@ extern class NativeSqlite3 `{sqlite3 *`}
 	`}
 
 	# Execute a SQL statement
-	fun exec(sql: String): Sqlite3Code import String.to_cstring `{
-		return sqlite3_exec(self, String_to_cstring(sql), 0, 0, 0);
+	fun exec(sql: NativeString): Sqlite3Code `{
+		return sqlite3_exec(self, sql, NULL, NULL, NULL);
 	`}
 
 	# Prepare a SQL statement
-	fun prepare(sql: String): nullable NativeStatement import String.to_cstring, NativeStatement.as nullable `{
+	fun prepare(sql: NativeString): NativeStatement `{
 		sqlite3_stmt *stmt;
-		int res = sqlite3_prepare_v2(self, String_to_cstring(sql), -1, &stmt, 0);
+		int res = sqlite3_prepare_v2(self, sql, -1, &stmt, 0);
 		if (res == SQLITE_OK)
-			return NativeStatement_as_nullable(stmt);
+			return stmt;
 		else
-			return null_NativeStatement();
+			return NULL;
 	`}
 
 	fun last_insert_rowid: Int `{

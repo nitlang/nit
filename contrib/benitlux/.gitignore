@@ -1,4 +1,4 @@
-src/benitlux_restful.nit
+src/server/benitlux_restful.nit
 *.db
 *.email
 benitlux_corrections.txt

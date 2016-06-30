@@ -1,0 +1,51 @@
+<span class='signature'>
+	<span ng-repeat='modifier in mentity.modifiers'>
+		<span ng-if='modifier != "public"' class='modifier'>{{modifier}}</span>
+	</span>
+	<span class='name'>
+		<entity-link mentity='mentity' />
+	</span>
+	<span ng-if='mentity.mparameters'>
+		<span ng-if='mentity.mparameters.length > 0'>
+			<span>[</span>
+			<span ng-repeat='mparam in mentity.mparameters'>
+				<span>
+					<span>{{mparam.name}}</span>
+					<span>: </span>
+					<entity-signature mentity='mparam.mtype' />
+				</span>
+				<span ng-if='$middle'>, </span>
+			</span>
+			<span>]</span>
+		</span>
+	</span>
+	<span ng-if='mentity.msignature'>
+		<span ng-if='mentity.msignature.arity > 0'>
+			<span>(</span>
+			<span ng-repeat='mparam in mentity.msignature.mparams'>
+				<span>
+					<span>{{mparam.name}}</span>
+					<span ng-if='mentity.is_intro !== false'>
+						<span>: </span>
+						<entity-signature mentity='mparam.mtype' />
+					</span>
+					<span ng-if='mparam.is_vararg'>...</span>
+				</span>
+				<span ng-if='!first && !$last'>, </span>
+			</span>
+			<span>)</span>
+		</span>
+		<span ng-if='mentity.is_intro !== false && mentity.msignature.return_mtype'>
+			<span>: </span>
+			<entity-signature mentity='mentity.msignature.return_mtype' />
+		</span>
+	</span>
+	<span ng-if='mentity.is_intro !== false && mentity.static_mtype'>
+		<span>: </span>
+		<entity-signature mentity='mentity.static_mtype' />
+	</span>
+	<span ng-if='mentity.bound'>
+		<span>: </span>
+		<entity-signature mentity='mentity.bound' />
+	</span>
+</span>

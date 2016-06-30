@@ -116,9 +116,23 @@ class Connection
 	redef fun close
 	do
 		if closed then return
-		var success = native_buffer_event.destroy
-		close_requested = true
-		closed = success
+
+		var i = native_buffer_event.input_buffer
+		var o = native_buffer_event.output_buffer
+		if i.length > 0 or o.length > 0 then
+			close_requested = true
+		else
+			force_close
+		end
+	end
+
+	# Force closing this connection and freeing `native_buffer_event`
+	fun force_close
+	do
+		if closed then return
+
+		native_buffer_event.free
+		closed = true
 	end
 
 	# Callback method on a write event
@@ -149,8 +163,18 @@ class Connection
 	fun event_callback(events: Int): Bool
 	do
 		if events & bev_event_error != 0 or events & bev_event_eof != 0 then
-			if events & bev_event_error != 0 then print_error "Error from bufferevent"
-			close
+			if events & bev_event_error != 0 then
+				var sock_err = evutil_socket_error
+				# Ignore some normal errors and print the others for debugging
+				if sock_err == 110 then
+					# Connection timed out (ETIMEDOUT)
+				else if sock_err == 104 then
+					# Connection reset by peer (ECONNRESET)
+				else
+					print_error "libevent error event: {evutil_socket_error_to_string(sock_err)} ({sock_err})"
+				end
+			end
+			force_close
 			return true
 		end
 
@@ -161,7 +185,7 @@ class Connection
 	redef fun write(str)
 	do
 		if close_requested then return
-		native_buffer_event.write(str.to_cstring, str.bytelen)
+		native_buffer_event.write(str.to_cstring, str.byte_length)
 	end
 
 	redef fun write_byte(byte)
@@ -228,6 +252,18 @@ fun bev_event_timeout: Int `{ return BEV_EVENT_TIMEOUT; `}
 # connect operation finished.
 fun bev_event_connected: Int `{ return BEV_EVENT_CONNECTED; `}
 
+# Global error code for the last socket operation on the calling thread
+#
+# Not idempotent on all platforms.
+fun evutil_socket_error: Int `{
+	return EVUTIL_SOCKET_ERROR();
+`}
+
+# Convert an error code from `evutil_socket_error` to a string
+fun evutil_socket_error_to_string(error_code: Int): NativeString `{
+	return evutil_socket_error_to_string(error_code);
+`}
+
 # ---
 # Options that can be specified when creating a `NativeBufferEvent`
 
@@ -288,18 +324,7 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 		return bufferevent_write(self, &byt, 1);
 	`}
 
-	# Check if we have anything left in our buffers. If so, we set our connection to be closed
-	# on a callback. Otherwise we close it and free it right away.
-	fun destroy: Bool `{
-		struct evbuffer* out = bufferevent_get_output(self);
-		struct evbuffer* in = bufferevent_get_input(self);
-		if(evbuffer_get_length(in) > 0 || evbuffer_get_length(out) > 0) {
-			return 0;
-		} else {
-			bufferevent_free(self);
-			return 1;
-		}
-	`}
+	redef fun free `{ bufferevent_free(self); `}
 
 	# The output buffer associated to `self`
 	fun output_buffer: OutputNativeEvBuffer `{ return bufferevent_get_output(self); `}
@@ -381,16 +406,9 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 
 	# Callback method on listening error
 	fun error_callback do
-		var cstr = socket_error
-		sys.stderr.write "libevent error: '{cstr}'"
+		var cstr = evutil_socket_error_to_string(evutil_socket_error)
+		print_error "libevent error: '{cstr}'"
 	end
-
-	# Error with sockets
-	fun socket_error: NativeString `{
-		// TODO move to Nit and maybe NativeEventBase
-		int err = EVUTIL_SOCKET_ERROR();
-		return evutil_socket_error_to_string(err);
-	`}
 end
 
 # Factory to listen on sockets and create new `Connection`

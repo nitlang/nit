@@ -43,7 +43,7 @@ redef class App
 		bar.title = "app.nit" # TODO offer a portable API to name windows
 		bar.show_close_button = true
 
-		# TODO add back button
+		bar.add back_button.native
 
 		return bar
 	end
@@ -55,6 +55,9 @@ redef class App
 		return stack
 	end
 
+	# Button on the header bar to go back
+	var back_button = new BackButton is lazy
+
 	# On GNU/Linux, we go through all the callbacks once,
 	# there is no complex life-cycle.
 	redef fun run
@@ -64,7 +67,6 @@ redef class App
 		app.on_start
 		app.on_resume
 
-		native_window.show_all
 		gtk_main
 
 		app.on_pause
@@ -88,7 +90,13 @@ redef class App
 		# improved with GTK 3.18 and interpolate_size.
 		native_window.resizable = false
 
+		native_window.show_all
+
 		super
+
+		if window.enable_back_button then
+			back_button.native.show
+		else back_button.native.hide
 	end
 end
 
@@ -243,6 +251,21 @@ redef class Button
 	init do native.signal_connect("clicked", self, null)
 end
 
+# Button to go back between windows
+class BackButton
+	super Button
+
+	# TODO i18n
+	redef fun text=(value) do super(value or else "Back")
+
+	redef fun signal(sender, data)
+	do
+		super
+
+		app.window.on_back_button
+	end
+end
+
 redef class Label
 	redef type NATIVE: GtkLabel
 	redef var native = new GtkLabel("")
@@ -294,6 +317,9 @@ redef class CheckBox
 	redef type NATIVE: GtkCheckButton
 	redef var native = new GtkCheckButton
 
+	redef fun signal(sender, data) do notify_observers new ToggleEvent(self)
+	init do native.signal_connect("toggled", self, null)
+
 	redef fun text do return native.text
 	redef fun text=(value) do native.text = (value or else "").to_s
 
@@ -316,4 +342,8 @@ redef class TextInput
 		native.visibility = value != true
 		super
 	end
+end
+
+redef class Text
+	redef fun open_in_browser do system("xdg-open '{self.escape_to_sh}' &")
 end

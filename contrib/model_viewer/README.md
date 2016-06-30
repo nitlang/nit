@@ -8,7 +8,15 @@ It renders the earth with an displaced surface, a cloud layer, city lights and P
 
 # Variations
 
-* The standard application is compiled to a desktop executable at `bin/model_viewer` and an Android package at `bin/model_viewer.apk`.
+* For the desktop, the application is compiled to `bin/model_viewer`.
+
+	This variation can show more models specified on the command line.
+
+	~~~
+	bin/model_viewer [path_to_model ...]
+	~~~
+
+* For Android, the standard application is compiled to `bin/model_viewer.apk`.
 * The virtual reality variant `bin/model_viewer_vr.apk` targets Android and uses Google Cardboard for head tracking.
 
 # Art

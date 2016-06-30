@@ -5,13 +5,14 @@ The framework provides services to manage common needs of modern mobile applicat
 * Life-cycle
 * User interface
 * Persistence
+* Async HTTP requests
 * Package metadata
 * Compilation and packaging
 
 The features offered by _app.nit_ are common to all platforms, but
 may not be available on all devices.
 
-## Application Life-Cycle
+# Application Life-Cycle
 
 The _app.nit_ application life-cycle is compatible with all target platforms.
 It relies on the following sequence of events, represented here by their callback method name:
@@ -44,7 +45,7 @@ The `App` instance is the first to be notified of these events.
 Other UI elements, from the `ui` submodule, are notified of the same events using a simple depth first visit.
 So all UI elements can react separately to live-cycle events.
 
-## User Interface
+# User Interface
 
 The `app::ui` module defines an abstract API to build a portable graphical application.
 The API is composed of interactive `Control`s, visible `View`s and an active `Window`.
@@ -65,21 +66,20 @@ So there is two ways  to customize the behavior on a given event:
 
 * Add an observer to a `Button` instance, and implement `on_event` in the observer.
 
-### Usage Example
+## Usage Example
 
-The calculator example (at `../../examples/calculator/src/calculator.nit`) is a concrete,
-simple and complete use of the _app.nit_ portable UI.
+The example at `examples/ui_example.nit` shows off most features of `app::ui` in a minimal program.
+You can also take a look at the calculator (`../../examples/calculator/src/calculator.nit`) which is a concrete usage example.
 
-### Platform-specific UI
+## Platform-specific UI
 
 You can go beyond the portable UI API of _app.nit_ by using the natives services of a platform.
 
 The suggested approach is to use platform specific modules to customize the application on a precise platform.
-This module redefine `Window::on_start` to call the native language of the platform and setup a native UI.
+See the calculator example for an adaptation of the UI on Android,
+the interesting module is in this repository at ../../examples/calculator/src/android_calculator.nit
 
-_TODO complete description and add concrete examples_
-
-## Persistent State with data\_store
+# Persistent State with data\_store
 
 _app.nit_ offers the submodule `app::data_store` to easily save the application state and user preferences.
 The service is accessible by the method `App::data_store`. The `DataStore` itself defines 2 methods:
@@ -90,7 +90,7 @@ Pass `null` to clear the value associated to a key.
 * `DataStore::[]` returns the object associated to a `String` key.
 It returns `null` if nothing is associated to the key.
 
-### Usage Example
+## Usage Example
 
 ~~~
 import app::data_store
@@ -123,7 +123,15 @@ redef class App
 end
 ~~~
 
-## Metadata annotations
+# Async HTTP request
+
+The module `app::http_request` provides services to execute asynchronous HTTP request.
+The class `AsyncHttpRequest` hides the complex parallel logic and
+lets the user implement methods acting only on the UI thread.
+See the documentation of `AsyncHttpRequest` for more information and
+the full example at `examples/http_request_example.nit`.
+
+# Metadata annotations
 
 The _app.nit_ framework defines three annotations to customize the application package.
 
@@ -142,7 +150,7 @@ The _app.nit_ framework defines three annotations to customize the application p
   The special function `git_revision` will use the prefix of the hash of the latest git commit.
   By default, the version is 0.1.
 
-### Usage Example
+## Usage Example
 
 ~~~
 module my_module is
@@ -152,33 +160,38 @@ module my_module is
 end
 ~~~
 
-## Compiling and Packaging an Application
+# Compiling and Packaging an Application
 
 The Nit compiler detects the target platform from the importations and generates the appropriate application format and package.
 
 Applications using only the portable services of _app.nit_ require some special care at compilation.
 Such an application, let's say `calculator.nit`, does not depend on a specific platform and use the portable UI.
-The target platform must be specifed to the compiler for it to produce the correct application package.
+The target platform must be specified to the compiler for it to produce the correct application package.
 There is two main ways to achieve this goal:
 
-* The the mixin option (`-m path`) loads an additionnal module before compiling.
+* The mixin option (`-m module`) imports an additional module before compiling.
   It can be used to load platform specific implementations of the _app.nit_ portable UI.
 
   ~~~
   # GNU/Linux version, using GTK
-  nitc calculator.nit -m NIT_DIR/lib/linux/ui.nit
+  nitc calculator.nit -m linux
 
   # Android version
-  nitc calculator.nit -m NIT_DIR/lib/android/ui/
+  nitc calculator.nit -m android
+
+  # iOS version
+  nitc calculator.nit -m ios
   ~~~
 
 * A common alternative for larger projects is to use platform specific modules.
-  Continuing with the `calculator.nit` example, it can be accompagnied by the module `calculator_linux.nit`.
-  This module imports both `calculator` and `linux::ui`, and can also use other GNU/Linux specific code.
+  Continuing with the calculator example, it is adapted for Android by the module `android_calculator.nit`.
+  This module imports both `calculator` and `android`, it can then use Android specific code.
 
   ~~~
-  module calculator_linux
+  module android_calculator
 
   import calculator
-  import linux::ui
+  import android
+
+  # ...
   ~~~

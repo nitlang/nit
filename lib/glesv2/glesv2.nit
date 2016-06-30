@@ -1195,26 +1195,28 @@ fun glPolygonOffset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
 # Specify the width of rasterized lines
 fun glLineWidth(width: Float) `{ glLineWidth(width); `}
 
-# Get the value of the parameter `pname`
-fun glGetBooleanv(pname: GLGetParameterName): Bool `{
-	GLboolean v;
-	glGetBooleanv(pname, &v);
-	return v;
+# Get the value of the parameter `pname` at `offset`
+fun glGetBooleanv(pname: GLGetParameterName, offset: Int): Bool `{
+	GLboolean v[4];
+	glGetBooleanv(pname, v);
+	return v[offset];
 `}
 
-# Get the value of the parameter `pname`
-fun glGetFloatv(pname: GLGetParameterName): Float `{
-	GLfloat v;
-	glGetFloatv(pname, &v);
-	return v;
+# Get the value of the parameter `pname` at `offset`
+fun glGetFloatv(pname: GLGetParameterName, offset: Int): Float `{
+	GLfloat v[4];
+	glGetFloatv(pname, v);
+	return v[offset];
 `}
 
-# Get the value of the parameter `pname`
-fun glGetIntegerv(pname: GLGetParameterName): Int `{
-	GLint v;
-	glGetIntegerv(pname, &v);
-	return v;
+# Get the value of the parameter `pname` at `offset`
+fun glGetIntegerv(pname: GLGetParameterName, offset: Int): Int `{
+	GLint v[4];
+	glGetIntegerv(pname, v);
+	return v[offset];
 `}
+
+fun gl_COLOR_CLEAR_VALUE: GLGetParameterName `{ return GL_COLOR_CLEAR_VALUE; `}
 
 fun gl_MAX_TEXTURE_SIZE: GLGetParameterName `{ return GL_MAX_TEXTURE_SIZE; `}
 fun gl_MAX_VIEWPORT_DIMS: GLGetParameterName `{ return GL_MAX_VIEWPORT_DIMS; `}

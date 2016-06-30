@@ -641,8 +641,7 @@ end
 class CallSite
 	super MEntity
 
-	# The associated location of the callsite
-	var location: Location
+	redef var location: Location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
@@ -1671,11 +1670,15 @@ redef class AIsaExpr
 
 		var variable = self.n_expr.its_variable
 		if variable != null then
-			#var orig = self.n_expr.mtype
+			var orig = self.n_expr.mtype
 			#var from = if orig != null then orig.to_s else "invalid"
 			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
-			self.after_flow_context.when_true.set_var(v, variable, mtype)
+
+			# Do not adapt if there is no information gain (i.e. adapt to a supertype)
+			if mtype == null or orig == null or not v.is_subtype(orig, mtype) then
+				self.after_flow_context.when_true.set_var(v, variable, mtype)
+			end
 		end
 
 		self.mtype = v.type_bool(self)

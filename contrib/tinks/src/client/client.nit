@@ -124,7 +124,7 @@ redef class App
 		var local_tank = local_tank
 		if local_tank != null then
 			var tank_speed = local_tank.direction_forwards*local_tank.rule.max_speed
-			tank_speed = tank_speed.min(0.5).max(-0.5)
+			tank_speed = tank_speed.clamp(-0.5, 0.5)
 
 			var prop_pos = local_tank.pos + local_tank.heading.to_vector(tank_speed * 16.0)
 			var old_pos = camera.center(display)
@@ -194,7 +194,7 @@ redef class App
 			var screen_pos = tank.pos.to_screen(camera)
 
 			var damage = tank.rule.max_health - tank.health
-			damage = damage.max(0).min(tank.rule.base_images.length)
+			damage = damage.clamp(0, tank.rule.base_images.length)
 
 			var base_image = tank.rule.base_images[damage]
 			display.blit_rotated(base_image, screen_pos.x, screen_pos.y, tank.heading)

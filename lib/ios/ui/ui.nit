@@ -25,16 +25,16 @@ in "ObjC" `{
 @interface NitCallbackReference: NSObject
 
 	// Nit object target of the callbacks from UI events
-	@property (nonatomic) Button nit_button;
+	@property (nonatomic) View nit_view;
 
 	// Actual callback method
-	-(void) nitOnEvent: (UIButton*) sender;
+	-(void) nitOnEvent: (UIView*) sender;
 @end
 
 @implementation NitCallbackReference
 
-	-(void) nitOnEvent: (UIButton*) sender {
-		Button_on_click(self.nit_button);
+	-(void) nitOnEvent: (UIView*) sender {
+		View_on_ios_event(self.nit_view);
 	}
 @end
 
@@ -112,6 +112,19 @@ redef class App
 		set_view_controller(app_delegate.window, window.native)
 		super
 	end
+
+	# Use iOS ` popViewControllerAnimated`
+	redef fun pop_window
+	do
+		window_stack.pop
+		pop_view_controller app_delegate.window
+		window.on_resume
+	end
+
+	private fun pop_view_controller(window: UIWindow) in "ObjC" `{
+		UINavigationController *navController = (UINavigationController*)window.rootViewController;
+		[navController popViewControllerAnimated: YES];
+	`}
 end
 
 redef class AppDelegate
@@ -136,6 +149,8 @@ redef class View
 	redef type NATIVE: UIView
 
 	redef var enabled = null is lazy
+
+	private fun on_ios_event do end
 end
 
 redef class CompositeControl
@@ -180,7 +195,6 @@ redef class Layout
 	init
 	do
 		native.alignment = new UIStackViewAlignment.fill
-		native.distribution = new UIStackViewDistribution.fill_equally
 
 		# TODO make customizable
 		native.spacing = 4.0
@@ -197,11 +211,19 @@ redef class Layout
 end
 
 redef class HorizontalLayout
-	redef init do native.axis = new UILayoutConstraintAxis.horizontal
+	redef init
+	do
+		native.axis = new UILayoutConstraintAxis.horizontal
+		native.distribution = new UIStackViewDistribution.fill_equally
+	end
 end
 
 redef class VerticalLayout
-	redef init do native.axis = new UILayoutConstraintAxis.vertical
+	redef init
+	do
+		native.axis = new UILayoutConstraintAxis.vertical
+		native.distribution = new UIStackViewDistribution.equal_spacing
+	end
 end
 
 redef class Label
@@ -253,15 +275,20 @@ redef class CheckBox
 	# `UISwitch` acting as the real check box
 	var ui_switch: UISwitch is noautoinit
 
-	init do
+	redef fun on_ios_event do notify_observers new ToggleEvent(self)
+
+	init
+	do
 		# Tweak the layout so it is centered
-		layout.native.distribution = new UIStackViewDistribution.fill_proportionally
-		layout.native.alignment = new UIStackViewAlignment.center
+		layout.native.distribution = new UIStackViewDistribution.equal_spacing
+		layout.native.alignment = new UIStackViewAlignment.fill
 		layout.native.layout_margins_relative_arrangement = true
 
 		var s = new UISwitch
 		native.add_arranged_subview s
 		ui_switch = s
+
+		ui_switch.set_callback self
 	end
 
 	redef fun text=(text) do lbl.text = text
@@ -269,6 +296,23 @@ redef class CheckBox
 
 	redef fun is_checked do return ui_switch.on
 	redef fun is_checked=(value) do ui_switch.set_on_animated(value, true)
+end
+
+redef class UISwitch
+	# Register callbacks on this switch to be relayed to `sender`
+	private fun set_callback(sender: View)
+	import View.on_ios_event in "ObjC" `{
+
+		NitCallbackReference *ncr = [[NitCallbackReference alloc] init];
+		ncr.nit_view = sender;
+
+		// Pin the objects in both Objective-C and Nit GC
+		View_incr_ref(sender);
+		ncr = (__bridge NitCallbackReference*)CFBridgingRetain(ncr);
+
+		[self addTarget:ncr action:@selector(nitOnEvent:)
+			forControlEvents:UIControlEventValueChanged];
+	`}
 end
 
 redef class TextInput
@@ -293,10 +337,10 @@ redef class Button
 
 	init do native.set_callback self
 
+	redef fun on_ios_event do notify_observers new ButtonPressEvent(self)
+
 	redef fun text=(text) do if text != null then native.title = text.to_nsstring
 	redef fun text do return native.current_title.to_s
-
-	private fun on_click do notify_observers new ButtonPressEvent(self)
 
 	redef fun enabled=(enabled) do native.enabled = enabled or else true
 	redef fun enabled do return native.enabled
@@ -304,14 +348,14 @@ end
 
 redef class UIButton
 	# Register callbacks on this button to be relayed to `sender`
-	private fun set_callback(sender: Button)
-	import Button.on_click in "ObjC" `{
+	private fun set_callback(sender: View)
+	import View.on_ios_event in "ObjC" `{
 
 		NitCallbackReference *ncr = [[NitCallbackReference alloc] init];
-		ncr.nit_button = sender;
+		ncr.nit_view = sender;
 
 		// Pin the objects in both Objective-C and Nit GC
-		Button_incr_ref(sender);
+		View_incr_ref(sender);
 		ncr = (__bridge NitCallbackReference*)CFBridgingRetain(ncr);
 
 		[self addTarget:ncr action:@selector(nitOnEvent:)
@@ -333,7 +377,7 @@ redef class ListLayout
 		native_stack_view.translates_autoresizing_mask_into_constraits = false
 		native_stack_view.axis = new UILayoutConstraintAxis.vertical
 		native_stack_view.alignment = new UIStackViewAlignment.fill
-		native_stack_view.distribution = new UIStackViewDistribution.fill_equally
+		native_stack_view.distribution = new UIStackViewDistribution.equal_spacing
 		native_stack_view.spacing = 4.0
 
 		native.add_subview native_stack_view
@@ -477,5 +521,17 @@ redef class UITableView
 		// Set our
 		self.delegate = objc_delegate;
 		self.dataSource = objc_delegate;
+	`}
+end
+
+redef class Text
+	redef fun open_in_browser do to_nsstring.native_open_in_browser
+end
+
+redef class NSString
+	private fun native_open_in_browser
+	in "ObjC" `{
+		NSURL *nsurl = [NSURL URLWithString: self];
+		[[UIApplication sharedApplication] openURL: nsurl];
 	`}
 end

@@ -23,10 +23,10 @@
 # Nit: <JsonObject i:123, s:hello, f:123.456, a:[one,two], o:<null>>
 
 # JSON: {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"], "o": "Not the right type"}
-# Errors: 'Deserialization Error: Wrong type on `MyClass::o` expected `nullable MyClass`, got `FlatString`'
+# Errors: 'Deserialization Error: Wrong type on `MyClass::o` expected `nullable MyClass`, got `ASCIIFlatString`'
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: not valid json
-# Errors: 'Error Parsing JSON: [1:1-1:2] Unexpected character 'n'; is acceptable instead: value'
+# Errors: 'Parsing error at line 1, position 1: Error: bad JSON entity'
 # Nit: null
 

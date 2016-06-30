@@ -21,21 +21,21 @@ class List[E]
 
 # Access
 
-	redef fun [](index) do return get_node(index).item
+	redef fun [](index) do return get_node(index).as(not null).item
 
-	redef fun []=(index, item) do get_node(index).item = item
-
-	# O(1)
-	redef fun first do return _head.item
+	redef fun []=(index, item) do get_node(index).as(not null).item = item
 
 	# O(1)
-	redef fun first=(e) do _head.item = e
+	redef fun first do return _head.as(not null).item
 
 	# O(1)
-	redef fun last do return _tail.item
+	redef fun first=(e) do _head.as(not null).item = e
 
 	# O(1)
-	redef fun last=(e) do _tail.item = e
+	redef fun last do return _tail.as(not null).item
+
+	# O(1)
+	redef fun last=(e) do _tail.as(not null).item = e
 
 # Queries
 
@@ -87,11 +87,12 @@ class List[E]
 	redef fun push(e)
 	do
 		var node = new ListNode[E](e)
-		if _tail == null then
+		var tail = _tail
+		if tail == null then
 			_head = node
 		else
-			_tail.next = node
-			node.prev = _tail
+			tail.next = node
+			node.prev = tail
 		end
 		_tail = node
 		length += 1
@@ -101,11 +102,12 @@ class List[E]
 	redef fun unshift(e)
 	do
 		var node = new ListNode[E](e)
-		if _head == null then
+		var head = _head
+		if head == null then
 			_tail = node
 		else
-			node.next = _head
-			_head.prev = node
+			node.next = head
+			head.prev = node
 		end
 		_head = node
 		length += 1
@@ -127,11 +129,12 @@ class List[E]
 	# O(1)
 	fun link(l: List[E])
 	do
-		if _tail == null then
+		var tail = _tail
+		if tail == null then
 			_head = l._head
 		else if l._head != null then
-			_tail.next = l._head
-			_tail.next.prev = _tail
+			tail.next = l._head
+			tail.next.as(not null).prev = tail
 		end
 		_tail = l._tail
 		length += l.length
@@ -143,13 +146,13 @@ class List[E]
 	# O(1)
 	redef fun pop
 	do
-		var node = _tail
+		var node = _tail.as(not null)
 		_tail = node.prev
 		node.prev = null
 		if _tail == null then
 			_head = null
 		else
-			_tail.next = null
+			_tail.as(not null).next = null
 		end
 		length -= 1
 		return node.item
@@ -158,13 +161,13 @@ class List[E]
 	# O(1)
 	redef fun shift
 	do
-		var node = _head
+		var node = _head.as(not null)
 		_head = node.next
 		node.next = null
 		if _head == null then
 			_tail = null
 		else
-			_head.prev = null
+			_head.as(not null).prev = null
 		end
 		length -= 1
 		return node.item
@@ -236,14 +239,14 @@ class List[E]
 			if node.next == null then
 				_tail = null
 			else
-				node.next.prev = null
+				node.next.as(not null).prev = null
 			end
 		else if node.next == null then
 			_tail = node.prev
-			node.prev.next = null
+			node.prev.as(not null).next = null
 		else
-			node.prev.next = node.next
-			node.next.prev = node.prev
+			node.prev.as(not null).next = node.next
+			node.next.as(not null).prev = node.prev
 		end
 	end
 
@@ -266,16 +269,16 @@ end
 # This is the iterator class of List
 class ListIterator[E]
 	super IndexedIterator[E]
-	redef fun item do return _node.item
+	redef fun item do return _node.as(not null).item
 
 	# Set item `e` at self `index`.
-	fun item=(e: E) do _node.item = e
+	fun item=(e: E) do _node.as(not null).item = e
 
 	redef fun is_ok do return not _node == null
 
 	redef fun next
 	do
-		_node = _node.next
+		_node = _node.as(not null).next
 		_index += 1
 	end
 
@@ -312,7 +315,7 @@ private class ListReverseIterator[E]
 
 	redef fun next
 	do
-		_node = _node.prev
+		_node = _node.as(not null).prev
 		_index -= 1
 	end
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='nitweb'>
+	<head>
+		<base href='/'>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<title>ng-doc</title>
+
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
+			integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7'
+			crossorigin='anonymous' rel='stylesheet'>
+
+		<link href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css'
+			type='text/css' rel='stylesheet' media='all'>
+
+
+		<link href='/stylesheets/nitweb_bootstrap.css' rel='stylesheet'>
+		<link href='/stylesheets/nitweb.css' rel='stylesheet'>
+	</head>
+	<body>
+		<nav class='navbar navbar-default navbar-fixed-top'>
+			<div class='container-fluid'>
+				<div class='col-xs-3'>
+					<div class='navbar-header'>
+						<a class='navbar-brand' ng-href='/'>Nitdoc</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a href="/docdown?edit=true">DocDown</a></li>
+					</ul>
+				</div>
+				<div class='col-xs-7'>
+					<form ng-controller='SearchCtrl as searchCtrl' >
+						<div class='form-group has-icon'>
+							<input placeholder='Search...' type='text' class='form-control search-input'
+								ng-model-options='{ debounce: 150 }' ng-model='query'
+								ng-keydown='update($event)' ng-change='search()'>
+							<span class='glyphicon glyphicon-search form-control-icon text-muted'></span>
+						</div>
+						<div ng-if='results.length > 0' class='search-results'>
+							<div class='card-list'>
+								<entity-card ng-click='reset()' ng-class='{active: activeItem == $index}' mentity='mentity' ng-repeat='mentity in results' />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<div ng-view></div>
+
+		<script src='https://code.jquery.com/jquery-1.12.4.min.js'
+			integrity='sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ='
+			crossorigin='anonymous''></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
+			integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS'
+			crossorigin='anonymous'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js'>
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js'>
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-sanitize.js'>
+		</script>
+		<script type='text/javascript'
+			src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'>
+		</script>
+
+		<script src='/javascripts/nitweb.js'></script>
+		<script src='/javascripts/model.js'></script>
+		<script src='/javascripts/entities.js'></script>
+		<script src='/javascripts/ui.js'></script>
+		<script src='/javascripts/index.js'></script>
+		<script src='/javascripts/docdown.js'></script>
+	</body>
+</html>

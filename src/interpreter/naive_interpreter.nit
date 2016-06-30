@@ -117,10 +117,6 @@ class NaiveInterpreter
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
 	var escapemark: nullable EscapeMark = null
 
-	# Is an abort being executed ?
-	# Set this mark to return to the last `catch` bloc or effectively aborting if there isn't any
-	var catch_mark = new EscapeMark
-
 	# The count of `catch` blocs that have been encountered and can catch an abort
 	var catch_count = 0
 
@@ -323,10 +319,10 @@ class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var instance = native_string_instance_len(txt.bytelen+1)
+		var instance = native_string_instance_len(txt.byte_length+1)
 		var val = instance.val
-		val[txt.bytelen] = 0u8
-		txt.to_cstring.copy_to(val, txt.bytelen, 0, 0)
+		val[txt.byte_length] = 0u8
+		txt.to_cstring.copy_to(val, txt.byte_length, 0, 0)
 
 		return instance
 	end
@@ -356,7 +352,7 @@ class NaiveInterpreter
 	fun string_instance(txt: String): Instance
 	do
 		var nat = native_string_instance(txt)
-		var res = self.send(self.force_get_primitive_method("to_s_full", nat.mtype), [nat, self.int_instance(txt.bytelen), self.int_instance(txt.length)])
+		var res = self.send(self.force_get_primitive_method("to_s_full", nat.mtype), [nat, self.int_instance(txt.byte_length), self.int_instance(txt.length)])
 		assert res != null
 		return res
 	end
@@ -1159,8 +1155,6 @@ redef class AMethPropdef
 			else if pname == "utf8_length" then
 				return v.int_instance(args[0].val.as(NativeString).utf8_length(args[1].to_i, args[2].to_i))
 			end
-		else if pname == "calloc_string" then
-			return v.native_string_instance_len(args[1].to_i)
 		else if cname == "NativeArray" then
 			if pname == "new" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
@@ -1496,7 +1490,7 @@ redef class AAttrPropdef
 	# Evaluate and set the default value of the attribute in `recv`
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
-		if is_lazy then return
+		if is_lazy or is_optional then return
 		if has_value then
 			var f = v.new_frame(self, mreadpropdef.as(not null), [recv])
 			evaluate_expr(v, recv, f)
@@ -1704,8 +1698,7 @@ redef class AAbortExpr
 			fatal(v, "Aborted")
 			exit(1)
 		else
-			# Abort mode, skipping everything until a `catch` bloc is reached
-			v.escapemark = v.catch_mark
+			abort
 		end
 	end
 end
@@ -1750,14 +1743,23 @@ end
 redef class ADoExpr
 	redef fun stmt(v)
 	do
-		# If this bloc has a catch, register it in the counter
-		if self.n_catch != null then v.catch_count += 1
-		v.stmt(self.n_block)
-		v.is_escape(self.break_mark) # Clear the break (if any)
+		# If this bloc has a catch, handle it with a do ... catch ... end
 		if self.n_catch != null then
-			v.catch_count -= 1
-			# Are we in abort mode? then this catch is executing
-			if v.is_escape(v.catch_mark) then v.stmt(self.n_catch)
+			var frame = v.frame
+			v.catch_count += 1
+			do
+				v.stmt(self.n_block)
+				v.is_escape(self.break_mark) # Clear the break (if any)
+				v.catch_count -= 1
+			catch
+				# Restore the current frame if needed
+				while v.frame != frame do v.frames.shift
+				v.catch_count -= 1
+				v.stmt(self.n_catch)
+			end
+		else
+			v.stmt(self.n_block)
+			v.is_escape(self.break_mark)
 		end
 	end
 end

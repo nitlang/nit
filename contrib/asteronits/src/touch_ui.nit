@@ -62,16 +62,16 @@ redef class App
 					if dy > 0.0 then
 						# Bottom part of the joystick, turns left or right
 						if dx < 0.0 then
-							ship.applied_rotation = -1.0
-						else
 							ship.applied_rotation = 1.0
+						else
+							ship.applied_rotation = -1.0
 						end
 					else
 						# Upper part of the joystick, detect action using 45d angles
 						if dx < dy then
-							ship.applied_rotation = -1.0
-						else if dx > -dy then
 							ship.applied_rotation = 1.0
+						else if dx > -dy then
+							ship.applied_rotation = -1.0
 						else
 							ship.applied_thrust = 1.0
 						end
@@ -98,20 +98,20 @@ redef class App
 
 		# Add the joystick to the UI
 		ui_sprites.add new Sprite(spritesheet_controls.forward,
-			ui_camera.bottom_left.offset(joystick_x, -200.0, 0.0))
+			ui_camera.bottom_left.offset(joystick_x, 200.0, 0.0))
 		ui_sprites.add new Sprite(spritesheet_controls.left,
-			ui_camera.bottom_left.offset(joystick_x-100.0, -joystick_y, 0.0))
+			ui_camera.bottom_left.offset(joystick_x-100.0, joystick_y, 0.0))
 		ui_sprites.add new Sprite(spritesheet_controls.right,
-			ui_camera.bottom_left.offset(joystick_x+100.0, -joystick_y, 0.0))
+			ui_camera.bottom_left.offset(joystick_x+100.0, joystick_y, 0.0))
 
 		# Purely cosmetic joystick background
 		ui_sprites.add new Sprite(spritesheet_controls.joystick_back,
-			ui_camera.bottom_left.offset(joystick_x, -joystick_y, -1.0)) # In the back
+			ui_camera.bottom_left.offset(joystick_x, joystick_y, -1.0)) # In the back
 		ui_sprites.add new Sprite(spritesheet_controls.joystick_down,
 			ui_camera.bottom_left.offset(joystick_x, 0.0, 1.0))
 
 		# Add the "open fire" button
 		ui_sprites.add new Sprite(spritesheet_controls.fire,
-			ui_camera.bottom_right.offset(-150.0, -150.0, 0.0))
+			ui_camera.bottom_right.offset(-150.0, 150.0, 0.0))
 	end
 end

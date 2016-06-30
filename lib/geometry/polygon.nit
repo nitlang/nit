@@ -441,31 +441,40 @@ fun turn_left(p1, p2, p3: Point[Float]): Bool do
 end
 
 # Split a polygon into triangles
-# Useful for converting a concave polygon into multiple convex ones
-fun triangulate(pts: Array[Point[Float]], results: Array[ConvexPolygon]) do
-	var poly = new Polygon(pts)
-	pts = poly.points
-	recursive_triangulate(pts, results)
+#
+# Useful for converting a concave polygon into multiple convex ones.
+#
+# See: the alternative `triangulate_recursive` uses arrays in-place.
+fun triangulate(points: Array[Point[Float]]): Array[ConvexPolygon]
+do
+	var results = new Array[ConvexPolygon]
+	triangulate_recursive(points.clone, results)
+	return results
 end
 
-private fun recursive_triangulate(pts: Array[Point[Float]], results: Array[ConvexPolygon]) do
-	if pts.length == 3 then
-		results.add(new ConvexPolygon(pts))
+# Split a polygon into triangles using arrays in-place
+#
+# Consumes the content of `points` and add the triangles to `results`.
+#
+# See: the alternative `triangulate` which does not modify `points` and returns a new array.
+fun triangulate_recursive(points: Array[Point[Float]], results: Array[ConvexPolygon]) do
+	if points.length == 3 then
+		results.add(new ConvexPolygon(points))
 		return
 	end
-	var prev = pts[pts.length - 1]
-	var curr = pts[0]
-	var next = pts[1]
-	for i in [1..pts.length[ do
+	var prev = points[points.length - 1]
+	var curr = points[0]
+	var next = points[1]
+	for i in [1..points.length[ do
 		if turn_left(prev, curr, next) then
-			prev = pts[i-1]
+			prev = points[i-1]
 			curr = next
-			if i+1 == pts.length then next = pts[pts.length - 1] else next = pts[i+1]
+			if i+1 == points.length then next = points[points.length - 1] else next = points[i+1]
 			continue
 		end
 		var contains = false
 		var triangle = new ConvexPolygon(new Array[Point[Float]].with_items(prev, curr, next))
-		for p in pts do
+		for p in points do
 			if p != prev and p != curr and p != next then
 				if triangle.contain(p) then
 					contains = true
@@ -475,12 +484,12 @@ private fun recursive_triangulate(pts: Array[Point[Float]], results: Array[Conve
 		end
 		if not contains then
 			results.add(triangle)
-			pts.remove(curr)
-			recursive_triangulate(pts, results)
+			points.remove(curr)
+			triangulate_recursive(points, results)
 			break
 		end
-		prev = pts[i-1]
+		prev = points[i-1]
 		curr = next
-		if i+1 == pts.length then next = pts[pts.length - 1] else next = pts[i+1]
+		if i+1 == points.length then next = points[points.length - 1] else next = points[i+1]
 	end
 end

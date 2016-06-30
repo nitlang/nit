@@ -173,6 +173,16 @@ redef class Nre_longest
 	end
 end
 
+redef class Nre_prefixes
+	redef fun make_rfa
+	do
+		var a = children[2].make_rfa
+		a.trim
+		a.accept.add_all a.states
+		return a
+	end
+end
+
 redef class Nre_conc
 	redef fun make_rfa
 	do

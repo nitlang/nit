@@ -19,7 +19,7 @@
 # This module is used by `android::assets_and_resources` and `android::audio`.
 module io
 
-import base
+import ffi_support
 
 in "Java" `{
 	import java.io.File;

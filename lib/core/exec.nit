@@ -59,49 +59,51 @@ class Process
 	end
 
 	# The status once finished
+	#
+	# Require: `is_finished`
 	fun status: Int
 	do
 		assert is_finished
 		return data.status
 	end
 
-	# The executable run
-	# Is a filepath, or a executable found in PATH
-	var command: String
+	# The target executable
+	# Either a file path or the name of an executable available in PATH.
+	var command: Text
 
 	# The arguments of the command
 	# Starts with the first real arguments---ie. does not include the progname (`argv[0]`, in C)
-	var arguments: nullable Array[String]
+	var arguments: nullable Array[Text]
 
 	# Launch a command with some arguments
-	init(command: String, arguments: String...) is old_style_init do
+	init(command: Text, arguments: Text...) is old_style_init do
 		self.command = command
 		self.arguments = arguments
 		execute
 	end
 
 	# Launch a simple command with arguments passed as an array
-	init from_a(command: String, arguments: nullable Array[String])
+	init from_a(command: Text, arguments: nullable Array[Text])
 	do
 		self.command = command
 		self.arguments = arguments
 		execute
 	end
 
-	# flags used internally to know whith pipe to open
+	# Flags used internally to know which pipe to open
 	private fun pipeflags: Int do return 0
 
 	# Internal code to handle execution
 	protected fun execute
 	do
-		# The pass the arguments as a big C string where elements are separated with '\0'
+		# Pass the arguments as a big C string where elements are separated with '\0'
 		var args = new FlatBuffer
 		var l = 1 # Number of elements in args
 		args.append(command)
+		var arguments = self.arguments
 		if arguments != null then
 			for a in arguments do
 				args.add('\0')
-				#a.output_class_name
 				args.append(a)
 			end
 			l += arguments.length
@@ -291,7 +293,7 @@ class ProcessDuplex
 	# ~~~
 	fun write_and_read(input: Text): String
 	do
-		var read = new Buffer #new Array[String]
+		var read = new Buffer
 
 		# Main loop, read and write line by line
 		var prev = 0
@@ -320,10 +322,13 @@ end
 
 redef class Sys
 	# Execute a shell command and return its error code
-	fun system(command: String): Int
+	fun system(command: Text): Int
 	do
 		return command.to_cstring.system
 	end
+
+	# The pid of the program
+	fun pid: Int `{ return getpid(); `}
 end
 
 redef class NativeString

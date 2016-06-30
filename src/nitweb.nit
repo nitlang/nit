@@ -43,19 +43,67 @@ private class NitwebPhase
 		var model = mainmodule.model
 		var modelbuilder = toolcontext.modelbuilder
 
+		# Build catalog
+		var catalog = new Catalog(modelbuilder)
+		for mpackage in model.mpackages do
+			catalog.deps.add_node(mpackage)
+			for mgroup in mpackage.mgroups do
+				for mmodule in mgroup.mmodules do
+					for imported in mmodule.in_importation.direct_greaters do
+						var ip = imported.mpackage
+						if ip == null or ip == mpackage then continue
+						catalog.deps.add_edge(mpackage, ip)
+					end
+				end
+			end
+			catalog.git_info(mpackage)
+			catalog.package_page(mpackage)
+		end
+
 		# Run the server
 		var host = toolcontext.opt_host.value or else "localhost"
 		var port = toolcontext.opt_port.value
 
-		var srv = new NitServer(host, port.to_i)
-		srv.routes.add new Route("/random", new RandomAction(srv, model))
-		srv.routes.add new Route("/doc/:namespace", new DocAction(srv, model, modelbuilder))
-		srv.routes.add new Route("/code/:namespace", new CodeAction(srv, model, modelbuilder))
-		srv.routes.add new Route("/search/:namespace", new SearchAction(srv, model))
-		srv.routes.add new Route("/uml/:namespace", new UMLDiagramAction(srv, model, mainmodule))
-		srv.routes.add new Route("/", new TreeAction(srv, model))
+		var app = new App
 
-		srv.listen
+		app.use_before("/*", new RequestClock)
+		app.use("/api", new APIRouter(model, modelbuilder, mainmodule, catalog))
+		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
+		app.use_after("/*", new ConsoleLog)
+
+		app.listen(host, port.to_i)
+	end
+end
+
+# Group all api handlers in one router.
+class APIRouter
+	super Router
+
+	# Model to pass to handlers.
+	var model: Model
+
+	# ModelBuilder to pass to handlers.
+	var modelbuilder: ModelBuilder
+
+	# Mainmodule to pass to handlers.
+	var mainmodule: MModule
+
+	# Catalog to pass to handlers.
+	var catalog: Catalog
+
+	init do
+		use("/catalog", new APICatalogRouter(model, mainmodule, catalog))
+		use("/list", new APIList(model, mainmodule))
+		use("/search", new APISearch(model, mainmodule))
+		use("/random", new APIRandom(model, mainmodule))
+		use("/entity/:id", new APIEntity(model, mainmodule))
+		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
+		use("/uml/:id", new APIEntityUML(model, mainmodule))
+		use("/linearization/:id", new APIEntityLinearization(model, mainmodule))
+		use("/defs/:id", new APIEntityDefs(model, mainmodule))
+		use("/inheritance/:id", new APIEntityInheritance(model, mainmodule))
+		use("/graph/", new APIGraphRouter(model, mainmodule))
+		use("/docdown/", new APIDocdown(model, mainmodule, modelbuilder))
 	end
 end
 

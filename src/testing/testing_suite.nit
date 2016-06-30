@@ -18,12 +18,13 @@ module testing_suite
 import testing_base
 import html
 private import annotation
+private import realtime
 
 redef class ToolContext
-	# -- target-file
-	var opt_file = new OptionString("Specify test suite location", "-t", "--target-file")
 	# --pattern
 	var opt_pattern = new OptionString("Only run test case with name that match pattern", "-p", "--pattern")
+	# --autosav
+	var opt_autosav = new OptionBool("Automatically create/update .res files for black box testing", "--autosav")
 end
 
 # Used to test nitunit test files.
@@ -32,20 +33,9 @@ class NitUnitTester
 	# `ModelBuilder` used to parse test files.
 	var mbuilder: ModelBuilder
 
-	# Parse a file and return the contained `MModule`.
-	private fun parse_module_unit(file: String): nullable MModule do
-		var mmodule = mbuilder.parse([file]).first
-		if mbuilder.get_mmodule_annotation("test_suite", mmodule) == null then return null
-		mbuilder.run_phases
-		return mmodule
-	end
-
-	# Compile and execute the test suite for a NitUnit `file`.
-	fun test_module_unit(file: String): nullable TestSuite do
+	# Compile and execute `mmodule` as a test suite.
+	fun test_module_unit(mmodule: MModule): TestSuite do
 		var toolcontext = mbuilder.toolcontext
-		var mmodule = parse_module_unit(file)
-		# is the module a test_suite?
-		if mmodule == null then return null
 		var suite = new TestSuite(mmodule, toolcontext)
 		# method to execute before all tests in the module
 		var before_module = mmodule.before_test
@@ -132,19 +122,47 @@ class TestSuite
 	# Test to be executed after the whole test suite.
 	var after_module: nullable TestCase = null
 
+	fun show_status
+	do
+		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
+	end
+
 	# Execute the test suite
 	fun run do
+		show_status
 		if not toolcontext.test_dir.file_exists then
 			toolcontext.test_dir.mkdir
 		end
 		write_to_nit
 		compile
+		if failure != null then
+			for case in test_cases do
+				case.is_done = true
+				case.error = "Compilation Error"
+				case.raw_output = failure
+				toolcontext.modelbuilder.failed_tests += 1
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+			end
+			show_status
+			print ""
+			return
+		end
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
 		var before_module = self.before_module
 		if not before_module == null then before_module.run
-		for case in test_cases do case.run
+		for case in test_cases do
+			case.run
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(case)
+			show_status
+		end
+
 		var after_module = self.after_module
 		if not after_module == null then after_module.run
+
+		show_status
+		print ""
 	end
 
 	# Write the test unit for `self` in a nit compilable file.
@@ -164,14 +182,7 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
-		var failure = self.failure
-		if failure != null then
-			var f = new HTMLTag("failure")
-			f.attr("message", failure.to_s)
-			n.add f
-		else
-			for test in test_cases do n.add test.to_xml
-		end
+		for test in test_cases do n.add test.to_xml
 		return n
 	end
 
@@ -183,12 +194,7 @@ class TestSuite
 	# Compile all `test_cases` cases in one file.
 	fun compile do
 		# find nitc
-		var nit_dir = toolcontext.nit_dir
-		var nitc = nit_dir/"bin/nitc"
-		if not nitc.file_exists then
-			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
+		var nitc = toolcontext.find_nitc
 		# compile test suite
 		var file = test_file
 		var module_file = mmodule.location.file
@@ -198,19 +204,14 @@ class TestSuite
 			return
 		end
 		var include_dir = module_file.filename.dirname
-		var cmd = "{nitc} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
-		var res = sys.system(cmd)
+		var cmd = "{nitc} --no-color -q '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
+		var res = toolcontext.safe_exec(cmd)
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
 		f.close
-		# set test case result
-		var loc = mmodule.location
 		if res != 0 then
 			failure = msg
-			toolcontext.warning(loc, "failure", "FAILURE: {mmodule.name} (in file {file}.nit): {msg}")
-			toolcontext.modelbuilder.failed_tests += 1
 		end
-		toolcontext.check_errors
 	end
 
 	# Error occured during test-suite compilation.
@@ -219,12 +220,17 @@ end
 
 # A test case is a unit test considering only a `MMethodDef`.
 class TestCase
+	super UnitTest
 
 	# Test suite wich `self` belongs to.
 	var test_suite: TestSuite
 
 	# Test method to be compiled and tested.
 	var test_method: MMethodDef
+
+	redef fun full_name do return test_method.full_name
+
+	redef fun location do return test_method.location
 
 	# `ToolContext` to use to display messages and find `nitc` bin.
 	var toolcontext: ToolContext
@@ -253,47 +259,65 @@ class TestCase
 		var method_name = test_method.name
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
-		var res = sys.system("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
-		var f = new FileReader.open("{res_name}.out1")
-		var msg = f.read_all
-		f.close
+		var clock = new Clock
+		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
+		if not toolcontext.opt_no_time.value then real_time = clock.total
+
+		var raw_output = "{res_name}.out1".to_path.read_all
+		self.raw_output = raw_output
 		# set test case result
-		var loc = test_method.location
 		if res != 0 then
-			error = msg
-			toolcontext.warning(loc, "failure",
-			   "ERROR: {method_name} (in file {test_file}.nit): {msg}")
+			error = "Runtime Error in file {test_file}.nit"
 			toolcontext.modelbuilder.failed_tests += 1
-		end
-		toolcontext.check_errors
-	end
-
-	# Error occured during test-case execution.
-	var error: nullable String = null
-
-	# Was the test case executed at least one?
-	var was_exec = false
-
-	# Return the `TestCase` in XML format compatible with Jenkins.
-	fun to_xml: HTMLTag do
-		var mclassdef = test_method.mclassdef
-		var tc = new HTMLTag("testcase")
-		# NOTE: jenkins expects a '.' in the classname attr
-		tc.attr("classname", "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name)
-		tc.attr("name", test_method.mproperty.full_name)
-		if was_exec then
-			tc.add  new HTMLTag("system-err")
-			var n = new HTMLTag("system-out")
-			n.append "out"
-			tc.add n
-			var error = self.error
-			if error != null then
-				n = new HTMLTag("error")
-				n.attr("message", error.to_s)
-				tc.add n
+		else
+			# no error, check with res file, if any.
+			var mmodule = test_method.mclassdef.mmodule
+			var file = mmodule.filepath
+			if file != null then
+				var tries = [ file.dirname / mmodule.name + ".sav" / test_method.name + ".res",
+					file.dirname / "sav" / test_method.name + ".res" ,
+					file.dirname / test_method.name + ".res" ]
+				var savs = [ for t in tries do if t.file_exists then t ]
+				if savs.length == 1 then
+					var sav = savs.first
+					toolcontext.info("Diff output with {sav}", 1)
+					res = toolcontext.safe_exec("diff -u --label 'expected:{sav}' --label 'got:{res_name}.out1' '{sav}' '{res_name}.out1' > '{res_name}.diff' 2>&1 </dev/null")
+					if res == 0 then
+						# OK
+					else if toolcontext.opt_autosav.value then
+						raw_output.write_to_file(sav)
+						info = "Expected output updated: {sav} (--autoupdate)"
+					else
+						self.raw_output = "Diff\n" + "{res_name}.diff".to_path.read_all
+						error = "Difference with expected output: diff -u {sav} {res_name}.out1"
+						toolcontext.modelbuilder.failed_tests += 1
+					end
+				else if savs.length > 1 then
+					toolcontext.info("Conflicting diffs: {savs.join(", ")}", 1)
+					error = "Conflicting expected output: {savs.join(", ", " and ")} all exist"
+					toolcontext.modelbuilder.failed_tests += 1
+				else if not raw_output.is_empty then
+					toolcontext.info("No diff: {tries.join(", ", " or ")} not found", 1)
+					if toolcontext.opt_autosav.value then
+						var sav = tries.first
+						sav.dirname.mkdir
+						raw_output.write_to_file(sav)
+						info = "Expected output saved: {sav} (--autoupdate)"
+					end
+				end
 			end
 		end
-		return tc
+		is_done = true
+	end
+
+	redef fun xml_classname do
+		var a = test_method.full_name.split("$")
+		return "nitunit.{a[0]}.{a[1]}"
+	end
+
+	redef fun xml_name do
+		var a = test_method.full_name.split("$")
+		return a[2]
 	end
 end
 
@@ -313,7 +337,7 @@ end
 
 redef class MClassDef
 	# Is the class a TestClass?
-	# i.e. begins with "Test"
+	# i.e. is a subclass of `TestSuite`
 	private fun is_test: Bool do
 		var in_hierarchy = self.in_hierarchy
 		if in_hierarchy == null then return false
@@ -358,33 +382,14 @@ redef class ModelBuilder
 	# Number of failed tests.
 	var failed_tests = 0
 
-	# Run NitUnit test file for mmodule (if exists).
-	fun test_unit(mmodule: MModule): HTMLTag do
-		var ts = new HTMLTag("testsuite")
-		toolcontext.info("nitunit: test-suite test_{mmodule}", 2)
-		var f = toolcontext.opt_file.value
-		var test_file = "test_{mmodule.name}.nit"
-		if f != null then
-			test_file = f
-		else if not test_file.file_exists then
-			var module_file = mmodule.location.file
-			if module_file == null then
-				toolcontext.info("Skip test for {mmodule}, no file found", 2)
-				return ts
-			end
-			var include_dir = module_file.filename.dirname
-			test_file = "{include_dir}/{test_file}"
-		end
-		if not test_file.file_exists then
-			toolcontext.info("Skip test for {mmodule}, no file {test_file} found", 2)
-			return ts
-		end
+	# Run NitUnit test suite for `mmodule` (if it is one).
+	fun test_unit(mmodule: MModule): nullable HTMLTag do
+		# is the module a test_suite?
+		if get_mmodule_annotation("test_suite", mmodule) == null then return null
+		toolcontext.info("nitunit: test-suite {mmodule}", 2)
+
 		var tester = new NitUnitTester(self)
-		var res = tester.test_module_unit(test_file)
-		if res == null then
-			toolcontext.info("Skip test for {mmodule}, no test suite found", 2)
-			return ts
-		end
+		var res = tester.test_module_unit(mmodule)
 		return res.to_xml
 	end
 end

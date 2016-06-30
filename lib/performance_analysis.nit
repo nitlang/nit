@@ -122,11 +122,8 @@ class PerfEntry
 	# Total execution time of this event
 	var sum = 0.0
 
-	# Register a new event execution time with a `Timespec`
-	fun add(lapse: Timespec) do add_float lapse.to_f
-
-	# Register a new event execution time in seconds using a `Float`
-	fun add_float(time: Float)
+	# Register a new event execution time in seconds
+	fun add(time: Float)
 	do
 		if time.to_f < min.to_f or count == 0 then min = time
 		if time.to_f > max.to_f then max = time

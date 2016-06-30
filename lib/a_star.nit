@@ -188,6 +188,14 @@ class Node
 		end
 	end
 
+	# Find the closest node accepted by `cond` under `max_cost`
+	fun find_closest(max_cost: Int, context: PathContext, cond: nullable TargetCondition[N]): nullable N
+	do
+		var path = path_to_alts(null, max_cost, context, cond)
+		if path == null then return null
+		return path.nodes.last
+	end
+
 	# We customize the serialization process to avoid problems with recursive
 	# serialization engines. These engines, such as `JsonSerializer`,
 	# are at danger to serialize the graph as a very deep tree.

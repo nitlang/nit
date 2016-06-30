@@ -17,6 +17,7 @@ module more_meshes
 
 import geometry
 import depth_core
+import model_dimensions
 
 # Simple flat mesh, sits on the axes X and Z, normal on Y
 class Plane
@@ -124,7 +125,8 @@ class Cube
 		var d = [1.0, 0.0]
 
 		var texture_coords = new Array[Float]
-		for v in [c, d, a, a, d, b] do for i in 6.times do texture_coords.add_all v
+		var face = [a, c, d, a, d, b]
+		for i in 6.times do for v in face do texture_coords.add_all v
 		return texture_coords
 	end
 

@@ -26,7 +26,8 @@ and the FFI enables calling services in different languages.
 A minimal example follows with a custom `Action` and using `FileServer`.
 
 More general examples are available at `lib/nitcorn/examples/`.
-It includes the configuration of `http://xymus.net/` which merges many other _nitcorn_ applications.
+For an example of a larger project merging many _nitcorn_ applications into one server,
+take a look at the configuration of `http://xymus.net/` at `../contrib/xymus_net/xymus_net.nit`.
 
 Larger projects using _nitcorn_ can be found in the `contrib/` folder:
 * _opportunity_ is a meetup planner heavily based on _nitcorn_.

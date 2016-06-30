@@ -229,6 +229,18 @@ class Catalog
 	# Number of line of code by package
 	var loc = new Counter[MPackage]
 
+	# Number of errors
+	var errors = new Counter[MPackage]
+
+	# Number of warnings and advices
+	var warnings = new Counter[MPackage]
+
+	# Number of warnings per 1000 lines of code (w/kloc)
+	var warnings_per_kloc = new Counter[MPackage]
+
+	# Documentation score (between 0 and 100)
+	var documentation_score = new Counter[MPackage]
+
 	# Number of commits by package
 	var commits = new Counter[MPackage]
 
@@ -245,8 +257,13 @@ class Catalog
 	do
 		var p = persons.get_or_null(person)
 		if p == null then
-			p = new Person.parse(person)
-			persons[person] = p
+			var new_p = new Person.parse(person)
+			# Maybe, we already have this person in fact?
+			p = persons.get_or_null(new_p.to_s)
+			if p == null then
+				p = new_p
+				persons[p.to_s] = p
+			end
 		end
 		var projs = contrib2proj[p]
 		if not projs.has(mpackage) then
@@ -338,9 +355,27 @@ class Catalog
 		var mclasses = 0
 		var mmethods = 0
 		var loc = 0
+		var errors = 0
+		var warnings = 0
+		# The documentation value of each entity is ad hoc.
+		var entity_score = 0.0
+		var doc_score = 0.0
 		for g in mpackage.mgroups do
 			mmodules += g.mmodules.length
+			var gs = 1.0
+			entity_score += gs
+			if g.mdoc != null then doc_score += gs
 			for m in g.mmodules do
+				var source = m.location.file
+				if source != null then
+					for msg in source.messages do
+						if msg.level == 2 then
+							errors += 1
+						else
+							warnings += 1
+						end
+					end
+				end
 				var am = modelbuilder.mmodule2node(m)
 				if am != null then
 					var file = am.location.file
@@ -348,9 +383,23 @@ class Catalog
 						loc += file.line_starts.length - 1
 					end
 				end
+				var ms = gs
+				if m.is_test_suite then ms /= 100.0
+				entity_score += ms
+				if m.mdoc != null then doc_score += ms else ms /= 10.0
 				for cd in m.mclassdefs do
+					var cs = ms * 0.2
+					if not cd.is_intro then cs /= 100.0
+					if not cd.mclass.visibility <= private_visibility then cs /= 100.0
+					entity_score += cs
+					if cd.mdoc != null then doc_score += cs
 					mclasses += 1
 					for pd in cd.mpropdefs do
+						var ps = ms * 0.1
+						if not pd.is_intro then ps /= 100.0
+						if not pd.mproperty.visibility <= private_visibility then ps /= 100.0
+						entity_score += ps
+						if pd.mdoc != null then doc_score += ps
 						if not pd isa MMethodDef then continue
 						mmethods += 1
 					end
@@ -361,11 +410,19 @@ class Catalog
 		self.mclasses[mpackage] = mclasses
 		self.mmethods[mpackage] = mmethods
 		self.loc[mpackage] = loc
+		self.errors[mpackage] = errors
+		self.warnings[mpackage] = warnings
+		if loc > 0 then
+			self.warnings_per_kloc[mpackage] = warnings * 1000 / loc
+		end
+		var documentation_score =  (100.0 * doc_score / entity_score).to_i
+		self.documentation_score[mpackage] = documentation_score
 
 		#score += mmodules.score
 		score += mclasses.score
 		score += mmethods.score
 		score += loc.score
+		score += documentation_score.score
 
 		self.score[mpackage] = score.to_i
 	end

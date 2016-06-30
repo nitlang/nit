@@ -50,9 +50,9 @@ abstract class Text
 
 	# Number of bytes in `self`
 	#
-	#     assert "12345".bytelen == 5
-	#     assert "あいうえお".bytelen == 15
-	fun bytelen: Int is abstract
+	#     assert "12345".byte_length == 5
+	#     assert "あいうえお".byte_length == 15
+	fun byte_length: Int is abstract
 
 	# Create a substring.
 	#
@@ -551,7 +551,7 @@ abstract class Text
 		var res = new Buffer
 		var underscore = false
 		var start = 0
-		var c = chars[0]
+		var c = self[0]
 
 		if c >= '0' and c <= '9' then
 			res.add('_')
@@ -560,7 +560,7 @@ abstract class Text
 			start = 1
 		end
 		for i in [start..length[ do
-			c = chars[i]
+			c = self[i]
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
@@ -590,10 +590,13 @@ abstract class Text
 		return res.to_s
 	end
 
-	# Escape " \ ' and non printable characters using the rules of literal C strings and characters
+	# Escape `"` `\` `'`, trigraphs and non printable characters using the rules of literal C strings and characters
 	#
-	#     assert "abAB12<>&".escape_to_c         == "abAB12<>&"
+	#     assert "abAB12<>&".escape_to_c       == "abAB12<>&"
 	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
+	#     assert "allo???!".escape_to_c        == "allo??\\?!"
+	#     assert "??=??/??'??(??)".escape_to_c == "?\\?=?\\?/??\\'?\\?(?\\?)"
+	#     assert "??!??<??>??-".escape_to_c    == "?\\?!?\\?<?\\?>?\\?-"
 	#
 	# Most non-printable characters (bellow ASCII 32) are escaped to an octal form `\nnn`.
 	# Three digits are always used to avoid following digits to be interpreted as an element
@@ -617,6 +620,24 @@ abstract class Text
 				b.append("\\\'")
 			else if c == '\\' then
 				b.append("\\\\")
+			else if c == '?' then
+				# Escape if it is the last question mark of a ANSI C trigraph.
+				var j = i + 1
+				if j < length then
+					var next = chars[j]
+					# We ignore `??'` because it will be escaped as `??\'`.
+					if
+						next == '!' or
+						next == '(' or
+						next == ')' or
+						next == '-' or
+						next == '/' or
+						next == '<' or
+						next == '=' or
+						next == '>'
+					then b.add('\\')
+				end
+				b.add('?')
 			else if c.code_point < 32 then
 				b.add('\\')
 				var oct = c.code_point.to_base(8)
@@ -640,6 +661,7 @@ abstract class Text
 	# The result might no be legal in C but be used in other languages
 	#
 	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
+	#     assert "allo???!".escape_more_to_c("")     == "allo??\\?!"
 	fun escape_more_to_c(chars: String): String
 	do
 		var b = new Buffer
@@ -822,7 +844,7 @@ abstract class Text
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
 	fun from_percent_encoding: String
 	do
-		var len = bytelen
+		var len = byte_length
 		var has_percent = false
 		for c in chars do
 			if c == '%' then
@@ -1159,7 +1181,7 @@ abstract class FlatText
 
 	redef var length = 0
 
-	redef var bytelen = 0
+	redef var byte_length = 0
 
 	redef fun output
 	do
@@ -1204,11 +1226,11 @@ private abstract class StringByteView
 
 	redef fun is_empty do return target.is_empty
 
-	redef fun length do return target.bytelen
+	redef fun length do return target.byte_length
 
 	redef fun iterator do return self.iterator_from(0)
 
-	redef fun reverse_iterator do return self.reverse_iterator_from(target.bytelen - 1)
+	redef fun reverse_iterator do return self.reverse_iterator_from(target.byte_length - 1)
 end
 
 # Immutable sequence of characters.
@@ -1360,30 +1382,19 @@ abstract class String
 	# Letters that follow a letter are lowercased
 	# Letters that follow a non-letter are upcased.
 	#
+	# If `keep_upper = true`, already uppercase letters are not lowercased.
+	#
 	# SEE : `Char::is_letter` for the definition of letter.
 	#
 	#     assert "jAVASCRIPT".capitalized == "Javascript"
 	#     assert "i am root".capitalized == "I Am Root"
 	#     assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
-	fun capitalized: SELFTYPE do
+	#     assert "preserve my ACRONYMS".capitalized(keep_upper=true) == "Preserve My ACRONYMS"
+	fun capitalized(keep_upper: nullable Bool): SELFTYPE do
 		if length == 0 then return self
 
 		var buf = new Buffer.with_cap(length)
-
-		var curr = chars[0].to_upper
-		var prev = curr
-		buf[0] = curr
-
-		for i in [1 .. length[ do
-			prev = curr
-			curr = self[i]
-			if prev.is_letter then
-				buf[i] = curr.to_lower
-			else
-				buf[i] = curr.to_upper
-			end
-		end
-
+		buf.capitalize(keep_upper=keep_upper, src=self)
 		return buf.to_s
 	end
 end
@@ -1399,9 +1410,6 @@ abstract class Buffer
 	new with_cap(i: Int) is abstract
 
 	redef type SELFTYPE: Buffer is fixed
-
-	# Specific implementations MUST set this to `true` in order to invalidate caches
-	protected var is_dirty = true
 
 	# Copy-On-Write flag
 	#
@@ -1478,6 +1486,13 @@ abstract class Buffer
 	# Letters that follow a letter are lowercased
 	# Letters that follow a non-letter are upcased.
 	#
+	# If `keep_upper = true`, uppercase letters are not lowercased.
+	#
+	# When `src` is specified, this method reads from `src` instead of `self`
+	# but it still writes the result to the beginning of `self`.
+	# This requires `self` to have the capacity to receive all of the
+	# capitalized content of `src`.
+	#
 	# SEE: `Char::is_letter` for the definition of a letter.
 	#
 	#     var b = new FlatBuffer.from("jAVAsCriPt")
@@ -1489,31 +1504,77 @@ abstract class Buffer
 	#     b = new FlatBuffer.from("ab_c -ab0c ab\nc")
 	#     b.capitalize
 	#     assert b == "Ab_C -Ab0C Ab\nC"
-	fun capitalize do
+	#
+	#     b = new FlatBuffer.from("12345")
+	#     b.capitalize(src="foo")
+	#     assert b == "Foo45"
+	#
+	#     b = new FlatBuffer.from("preserve my ACRONYMS")
+	#     b.capitalize(keep_upper=true)
+	#     assert b == "Preserve My ACRONYMS"
+	fun capitalize(keep_upper: nullable Bool, src: nullable Text) do
+		src = src or else self
+		var length = src.length
 		if length == 0 then return
-		var c = self[0].to_upper
+		keep_upper = keep_upper or else false
+
+		var c = src[0].to_upper
 		self[0] = c
 		var prev = c
 		for i in [1 .. length[ do
 			prev = c
-			c = self[i]
+			c = src[i]
 			if prev.is_letter then
-				self[i] = c.to_lower
+				if keep_upper then
+					self[i] = c
+				else
+					self[i] = c.to_lower
+				end
 			else
 				self[i] = c.to_upper
 			end
 		end
 	end
 
-	redef fun hash
-	do
-		if is_dirty then hash_cache = null
-		return super
-	end
-
 	# In Buffers, the internal sequence of character is mutable
 	# Thus, `chars` can be used to modify the buffer.
 	redef fun chars: Sequence[Char] is abstract
+
+	# Appends `length` chars from `s` starting at index `from`
+	#
+	# ~~~nit
+	#	var b = new Buffer
+	#	b.append_substring("abcde", 1, 2)
+	#	assert b == "bc"
+	#	b.append_substring("vwxyz", 2, 3)
+	#	assert b == "bcxyz"
+	#	b.append_substring("ABCDE", 4, 300)
+	#	assert b == "bcxyzE"
+	#	b.append_substring("VWXYZ", 400, 1)
+	#	assert b == "bcxyzE"
+	# ~~~
+	fun append_substring(s: Text, from, length: Int) do
+		if from < 0 then
+			length += from
+			from = 0
+		end
+		var ln = s.length
+		if (length + from) > ln then length = ln - from
+		if length <= 0 then return
+		append_substring_impl(s, from, length)
+	end
+
+	# Unsafe version of `append_substring` for performance
+	#
+	# NOTE: Use only if sure about `from` and `length`, no checks
+	# or bound recalculation is done
+	fun append_substring_impl(s: Text, from, length: Int) do
+		var pos = from
+		for i in [0 .. length[ do
+			self.add s[pos]
+			pos += 1
+		end
+	end
 end
 
 # View for chars on Buffer objects, extends Sequence
@@ -1755,8 +1816,20 @@ redef class Char
 		return cp >= 0xD800 and cp <= 0xDFFF
 	end
 
+	# Is `self` a UTF-16 high surrogate ?
+	fun is_hi_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xD800 and cp <= 0xDBFF
+	end
+
+	# Is `self` a UTF-16 low surrogate ?
+	fun is_lo_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xDC00 and cp <= 0xDFFF
+	end
+
 	# Length of `self` in a UTF-8 String
-	private fun u8char_len: Int do
+	fun u8char_len: Int do
 		var c = self.code_point
 		if c < 0x80 then return 1
 		if c <= 0x7FF then return 2
@@ -2054,7 +2127,12 @@ end
 # see `alpha_comparator`
 private class AlphaComparator
 	super Comparator
-	redef fun compare(a, b) do return a.to_s <=> b.to_s
+	redef fun compare(a, b) do
+		if a == b then return 0
+		if a == null then return -1
+		if b == null then return 1
+		return a.to_s <=> b.to_s
+	end
 end
 
 # Stateless comparator that naively use `to_s` to compare things.
@@ -2100,7 +2178,7 @@ redef class NativeString
 	# use only when the data has already been verified as valid UTF-8.
 	fun to_s_unsafe(length: nullable Int): String is abstract
 
-	# Get a `String` from the raw `bytelen` bytes at `self` with `unilen` Unicode characters
+	# Get a `String` from the raw `byte_length` bytes at `self` with `unilen` Unicode characters
 	#
 	# The created `String` points to the data at `self`.
 	# This method should be used when `self` was allocated by the Nit GC,
@@ -2110,8 +2188,13 @@ redef class NativeString
 	# use only when the data has already been verified as valid UTF-8.
 	#
 	# SEE: `abstract_text::Text` for more info on the difference
-	# between `Text::bytelen` and `Text::length`.
-	fun to_s_full(bytelen, unilen: Int): String is abstract
+	# between `Text::byte_length` and `Text::length`.
+	fun to_s_full(byte_length, unilen: Int): String is abstract
+
+	# Copies the content of `src` to `self`
+	#
+	# NOTE: `self` must be large enough to withold `self.byte_length` bytes
+	fun fill_from(src: Text) do src.copy_to_native(self, src.byte_length, 0, 0)
 end
 
 redef class NativeArray[E]

@@ -178,7 +178,10 @@ if opt_tree.value then
 		var pa = mp.mgroup
 		while pa != null and not pa.is_interesting do pa = pa.parent
 		ot.add(pa, mp)
-		if pa != null then mgroups.add pa
+		while pa != null do
+			mgroups.add pa
+			pa = pa.parent
+		end
 	end
 	for g in mgroups do
 		var pa = g.parent
@@ -196,7 +199,7 @@ if opt_source.value then
 		if opt_paths.value then
 			print mp.filepath.as(not null)
 		else
-			print "{mp.mgroup.full_name}/{ot.display(mp)}"
+			print "{mp.mgroup.full_name}{ot.display(mp)}"
 		end
 	end
 end

@@ -57,8 +57,8 @@ class Sqlite3DB
 	# Prepare and return a `Statement`, return `null` on error
 	fun prepare(sql: Text): nullable Statement
 	do
-		var native_stmt = native_connection.prepare(sql.to_s)
-		if native_stmt == null then return null
+		var native_stmt = native_connection.prepare(sql.to_cstring)
+		if native_stmt.address_is_null then return null
 
 		var stmt = new Statement(native_stmt)
 		open_statements.add stmt
@@ -68,7 +68,7 @@ class Sqlite3DB
 	# Execute the `sql` statement and return `true` on success
 	fun execute(sql: Text): Bool
 	do
-		var err = native_connection.exec(sql.to_s)
+		var err = native_connection.exec(sql.to_cstring)
 		return err.is_ok
 	end
 
@@ -99,7 +99,7 @@ class Sqlite3DB
 	do
 		if not native_connection.is_valid then
 			var err = sys.sqlite_open_error
-			if err == null then return null
+			if err.is_ok then return null
 			return err.to_s
 		end
 
@@ -182,7 +182,9 @@ class StatementEntry
 	var name: String is lazy do
 		assert statement_closed: statement.is_open
 
-		return statement.native_statement.column_name(index)
+		var cname = statement.native_statement.column_name(index)
+		assert not cname.address_is_null
+		return cname.to_s
 	end
 
 	# Get the value of this entry according to its Sqlite type
@@ -305,8 +307,9 @@ redef universal Int super Sqlite3Data end
 
 redef universal Float super Sqlite3Data end
 
-redef class String
-	super Sqlite3Data
+redef class String super Sqlite3Data end
+
+redef class Text
 
 	# Return `self` between `'`s, escaping `\` and `'`
 	#
@@ -314,6 +317,24 @@ redef class String
 	fun to_sql_string: String
 	do
 		return "'{self.replace('\\', "\\\\").replace('\'', "''")}'"
+	end
+
+	# Format the date represented by `self` into an escaped string for SQLite
+	#
+	# `self` must be composed of 1 to 3 integers separated by '-'.
+	# An incompatible format will result in an invalid date string.
+	#
+	#     assert "2016-5-1".to_sql_date_string == "'2016-05-01'"
+	#     assert "2016".to_sql_date_string == "'2016-01-01'"
+	fun to_sql_date_string: String
+	do
+		var parts = self.split("-")
+		for i in [parts.length .. 3[ do parts[i] = "1"
+
+		var year = parts[0].justify(4, 1.0, '0')
+		var month = parts[1].justify(2, 1.0, '0')
+		var day = parts[2].justify(2, 1.0, '0')
+		return "{year}-{month}-{day}".to_sql_string
 	end
 end
 

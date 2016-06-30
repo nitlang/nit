@@ -577,7 +577,7 @@ abstract class AbstractCompiler
 
 	# The list of all associated files
 	# Used to generate .c files
-	var files = new List[CodeFile]
+	var files = new Array[CodeFile]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
@@ -779,6 +779,20 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add "\}"
 	end
 
+	# Hook to add specif piece of code before the the main C function.
+	#
+	# Is called by `compile_main_function`
+	fun compile_before_main(v: VISITOR)
+	do
+	end
+
+	# Hook to add specif piece of code at the begin on the main C function.
+	#
+	# Is called by `compile_main_function`
+	fun compile_begin_main(v: VISITOR)
+	do
+	end
+
 	# Generate the main C function.
 	#
 	# This function:
@@ -876,11 +890,15 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("exit(status);")
 		v.add_decl("\}")
 
+		compile_before_main(v)
+
 		if no_main then
 			v.add_decl("int nit_main(int argc, char** argv) \{")
 		else
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
+
+		compile_begin_main(v)
 
 		v.add "#if !defined(__ANDROID__) && !defined(TARGET_OS_IPHONE)"
 		v.add("signal(SIGABRT, sig_handler);")
@@ -1127,8 +1145,8 @@ end
 # Where to store generated lines
 class CodeWriter
 	var file: CodeFile
-	var lines: List[String] = new List[String]
-	var decl_lines: List[String] = new List[String]
+	var lines = new Array[String]
+	var decl_lines = new Array[String]
 
 	# Add a line in the main part of the generated C
 	fun add(s: String) do self.lines.add(s)
@@ -1185,8 +1203,6 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable is abstract
 
-	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
-
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]): Bool do return false
 
 	# Return an element of a native array.
@@ -1196,6 +1212,16 @@ abstract class AbstractCompilerVisitor
 	# Store an element in a native array.
 	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
+
+	# Allocate `size` bytes with the low_level `nit_alloc` C function
+	#
+	# This method can be redefined to inject statistic or tracing code.
+	#
+	# `tag` if any, is used to mark the class of the allocated object.
+	fun nit_alloc(size: String, tag: nullable String): String
+	do
+		return "nit_alloc({size})"
+	end
 
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
@@ -1629,9 +1655,9 @@ abstract class AbstractCompilerVisitor
 		var native_mtype = mmodule.native_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var bytelen = self.int_instance(string.bytelen)
+		var byte_length = self.int_instance(string.byte_length)
 		var unilen = self.int_instance(string.length)
-		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, bytelen, unilen]).as(not null)};")
+		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, byte_length, unilen]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -2528,7 +2554,8 @@ redef class AMethPropdef
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				var alloc = v.nit_alloc(arguments[1].to_s, "NativeString")
+				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
 				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
@@ -2981,12 +3008,6 @@ redef class AMethPropdef
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
-		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
-			return true
-		else if pname == "calloc_array" then
-			v.calloc_array(ret.as(not null), arguments)
-			return true
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 			return true
@@ -3139,7 +3160,7 @@ redef class AAttrPropdef
 
 	fun init_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
 	do
-		if has_value and not is_lazy and not n_expr isa ANullExpr then evaluate_expr(v, recv)
+		if has_value and not is_lazy and not is_optional and not n_expr isa ANullExpr then evaluate_expr(v, recv)
 	end
 
 	# Evaluate, store and return the default value of the attribute
@@ -3948,11 +3969,35 @@ redef class ANewExpr
 			return v.native_array_instance(elttype, l)
 		end
 
-		var recv = v.init_instance_or_extern(mtype)
-
 		var callsite = self.callsite
-		if callsite == null then return recv
+		if callsite == null then return v.init_instance_or_extern(mtype)
 		if callsite.is_broken then return null
+
+		var recv
+		# new factories are badly implemented.
+		# They assume a stub temporary receiver exists.
+		# This temporary receiver is required because it
+		# currently holds the method and the formal types.
+		#
+		# However, this object could be reused if the formal types are the same.
+		# Therefore, the following code will `once` it in these case
+		if callsite.mproperty.is_new and not mtype.need_anchor then
+			var name = v.get_name("varoncenew")
+			var guard = v.get_name(name + "_guard")
+			v.add_decl("static {mtype.ctype} {name};")
+			v.add_decl("static int {guard};")
+			recv = v.new_var(mtype)
+			v.add("if (likely({guard})) \{")
+			v.add("{recv} = {name};")
+			v.add("\} else \{")
+			var i = v.init_instance_or_extern(mtype)
+			v.add("{recv} = {i};")
+			v.add("{name} = {recv};")
+			v.add("{guard} = 1;")
+			v.add("\}")
+		else
+			recv = v.init_instance_or_extern(mtype)
+		end
 
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
 		var res2 = v.compile_callsite(callsite, args)

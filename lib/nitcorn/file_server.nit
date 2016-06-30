@@ -71,6 +71,15 @@ class FileServer
 	# Caching attributes of served files, used as the `cache-control` field in response headers
 	var cache_control = "public, max-age=360" is writable
 
+	# Show directory listing?
+	var show_directory_listing = true is writable
+
+	# Default file returned when no static file matches the requested URI.
+	#
+	# If no `default_file` is provided, the FileServer responds 404 error to
+	# unmatched queries.
+	var default_file: nullable String = null is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -83,15 +92,14 @@ class FileServer
 		# This make sure that the requested file is within the root folder.
 		if (local_file + "/").has_prefix(root) then
 			# Does it exists?
-			if local_file.file_exists then
-				if local_file.file_stat.is_dir then
+			var file_stat = local_file.file_stat
+			if file_stat != null then
+				if file_stat.is_dir then
 					# If we target a directory without an ending `/`,
 					# redirect to the directory ending with `/`.
-					if not request.uri.is_empty and
-					   request.uri.chars.last != '/' then
-						response = new HttpResponse(303)
-						response.header["Location"] = request.uri + "/"
-						return response
+					var uri = request.uri
+					if not uri.is_empty and uri.chars.last != '/' then
+						return answer_redirection(request.uri + "/")
 					end
 
 					# Show index file instead of the directory listing
@@ -105,31 +113,94 @@ class FileServer
 					end
 				end
 
-				response = new HttpResponse(200)
-				if local_file.file_stat.is_dir then
-					# Show the directory listing
-					var title = turi
-					var files = local_file.files
+				file_stat = local_file.file_stat
+				if show_directory_listing and file_stat != null and file_stat.is_dir then
+					response = answer_directory_listing(request, turi, local_file)
+				else if file_stat != null and not file_stat.is_dir then # It's a single file
+					response = answer_file(local_file)
+				else response = answer_default
+			else response = answer_default
+		else response = new HttpResponse(403)
 
-					var links = new Array[String]
-					if turi.length > 1 then
-						var path = (request.uri + "/..").simplify_path
-						links.add "<a href=\"{path}/\">..</a>"
-					end
-					for file in files do
-						var local_path = local_file.join_path(file).simplify_path
-						var web_path = file.simplify_path
-						if local_path.file_stat.is_dir then web_path = web_path + "/"
-						links.add "<a href=\"{web_path}\">{file}</a>"
-					end
+		if response.status_code != 200 then
+			var tmpl = error_page(response.status_code)
+			if header != null and tmpl isa ErrorTemplate then tmpl.header = header
+			response.body = tmpl.to_s
+		end
 
-					var header = self.header
-					var header_code
-					if header != null then
-						header_code = header.write_to_string
-					else header_code = ""
+		return response
+	end
 
-					response.body = """
+	# Answer the `default_file` if any.
+	fun answer_default: HttpResponse do
+		var default_file = self.default_file
+		if default_file == null then
+			return new HttpResponse(404)
+		end
+
+		var local_file = (root / default_file).simplify_path
+		return answer_file(local_file)
+	end
+
+	# Answer a 303 redirection to `location`.
+	fun answer_redirection(location: String): HttpResponse do
+		var response = new HttpResponse(303)
+		response.header["Location"] = location
+		return response
+	end
+
+	# Build a reponse containing a single `local_file`.
+	#
+	# Returns a 404 error if local_file does not exists.
+	fun answer_file(local_file: String): HttpResponse do
+		if not local_file.file_exists then return new HttpResponse(404)
+
+		var response = new HttpResponse(200)
+		response.files.add local_file
+
+		# Set Content-Type depending on the file extension
+		var ext = local_file.file_extension
+		if ext != null then
+			var media_type = media_types[ext]
+			if media_type != null then
+				response.header["Content-Type"] = media_type
+			else response.header["Content-Type"] = "application/octet-stream"
+		end
+
+		# Cache control
+		response.header["cache-control"] = cache_control
+		return response
+	end
+
+	# Answer with a directory listing for files within `local_files`.
+	fun answer_directory_listing(request: HttpRequest, turi, local_file: String): HttpResponse do
+		# Show the directory listing
+		var title = turi
+		var files = local_file.files
+
+		alpha_comparator.sort files
+
+		var links = new Array[String]
+		if turi.length > 1 then
+			var path = (request.uri + "/..").simplify_path
+			links.add "<a href=\"{path}/\">..</a>"
+		end
+		for file in files do
+			var local_path = local_file.join_path(file).simplify_path
+			var web_path = file.simplify_path
+			var file_stat = local_path.file_stat
+			if file_stat != null and file_stat.is_dir then web_path = web_path + "/"
+			links.add "<a href=\"{web_path}\">{file}</a>"
+		end
+
+		var header = self.header
+		var header_code
+		if header != null then
+			header_code = header.write_to_string
+		else header_code = ""
+
+		var response = new HttpResponse(200)
+		response.body = """
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
@@ -151,32 +222,7 @@ class FileServer
 </body>
 </html>"""
 
-					response.header["Content-Type"] = media_types["html"].as(not null)
-				else
-					# It's a single file
-					response.files.add local_file
-
-					var ext = local_file.file_extension
-					if ext != null then
-						var media_type = media_types[ext]
-						if media_type != null then
-							response.header["Content-Type"] = media_type
-						else response.header["Content-Type"] = "application/octet-stream"
-					end
-
-					# Cache control
-					response.header["cache-control"] = cache_control
-				end
-
-			else response = new HttpResponse(404)
-		else response = new HttpResponse(403)
-
-		if response.status_code != 200 then
-			var tmpl = error_page(response.status_code)
-			if header != null and tmpl isa ErrorTemplate then tmpl.header = header
-			response.body = tmpl.to_s
-		end
-
+		response.header["Content-Type"] = media_types["html"].as(not null)
 		return response
 	end
 end

@@ -48,7 +48,7 @@ private class RTAMetricsPhase
 		mmetrics.register(new MNLDD(toolcontext.modelbuilder))
 		mmetrics.collect(new HashSet[MModule].from([mainmodule]))
 		mmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-		if csv then mmetrics.to_csv.save("{out}/{mainmodule}.csv")
+		if csv then mmetrics.to_csv.write_to_file("{out}/{mainmodule}.csv")
 
 		var mtypes = new HashSet[MType]
 		var analysis = new RapidTypeAnalysis(toolcontext.modelbuilder, mainmodule)
@@ -61,14 +61,14 @@ private class RTAMetricsPhase
 		cmetrics.register(analysis.cnli)
 		cmetrics.register(analysis.cnlc)
 		cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-		if csv then cmetrics.to_csv.save("{out}/mclasses.csv")
+		if csv then cmetrics.to_csv.write_to_file("{out}/mclasses.csv")
 
 		print toolcontext.format_h2("\n ## Total live instances by mtypes")
 		var tmetrics = new MetricSet
 		tmetrics.register(analysis.tnli)
 		tmetrics.register(analysis.tnlc)
 		tmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-		if csv then tmetrics.to_csv.save("{out}/mtypes.csv")
+		if csv then tmetrics.to_csv.write_to_file("{out}/mtypes.csv")
 
 		print toolcontext.format_h2("\n ## MType complexity")
 		var gmetrics = new MetricSet
@@ -76,13 +76,13 @@ private class RTAMetricsPhase
 		gmetrics.register(new TDGS)
 		gmetrics.collect(mtypes)
 		gmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-		if csv then gmetrics.to_csv.save("{out}/complexity.csv")
+		if csv then gmetrics.to_csv.write_to_file("{out}/complexity.csv")
 
 		callsite_info(analysis)
 
 		# dump type and method infos
 		if csv then
-			analysis.live_types_to_csv.save("{out}/rta_types.csv")
+			analysis.live_types_to_csv.write_to_file("{out}/rta_types.csv")
 			analysis.live_methods_to_tree.write_to_file("{out}/rta_methods.dat")
 		end
 	end

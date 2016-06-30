@@ -18,9 +18,8 @@ module ui
 import app_base
 
 # Platform variations
-# TODO: move on the platform once qualified names are understand in the condition
 import linux::ui is conditional(linux)
-import android::ui is conditional(android) # FIXME it should be conditional to `android::platform`
+import android::ui is conditional(android)
 import ios::ui is conditional(ios)
 
 redef class App
@@ -28,8 +27,32 @@ redef class App
 
 	# The current `Window` of this activity
 	#
-	# This attribute must be set by refinements of `App`.
-	var window: Window is writable
+	# This attribute is set by `push_window`.
+	var window: Window is noinit
+
+	# Make visible and push `window` on the top of `pop_window`
+	#
+	# This method must be called at least once within `App::on_create`.
+	# It can be called at any times while the app is active.
+	fun push_window(window: Window)
+	do
+		window_stack.add window
+		self.window = window
+	end
+
+	# Pop the current `window` from the stack and show the previous one
+	#
+	# Require: `window_stack.not_empty`
+	fun pop_window
+	do
+		assert window_stack.not_empty
+		window_stack.pop
+		window = window_stack.last
+		window.on_resume
+	end
+
+	# Stack of active windows
+	var window_stack = new Array[Window]
 
 	redef fun on_create do window.on_create
 
@@ -84,10 +107,16 @@ class Control
 
 	# Direct parent `Control` in the control tree
 	#
+	# The parents (direct and indirect) receive all events from `self`,
+	# like the `observers`.
+	#
 	# If `null` then `self` is at the root of the tree, or not yet attached.
 	var parent: nullable CompositeControl = null is private writable(set_parent)
 
 	# Direct parent `Control` in the control tree
+	#
+	# The parents (direct and indirect) receive all events from `self`,
+	# like the `observers`.
 	#
 	# Setting `parent` calls `remove` on the old parent and `add` on the new one.
 	fun parent=(parent: nullable CompositeControl)
@@ -101,12 +130,25 @@ class Control
 
 		set_parent parent
 	end
+
+	# Also notify the parents (both direct and indirect)
+	redef fun notify_observers(event)
+	do
+		super
+
+		var p = parent
+		while p != null do
+			p.on_event event
+			p = p.parent
+		end
+	end
 end
 
 # A `Control` grouping other controls
 class CompositeControl
 	super Control
 
+	# Child controls composing this control
 	protected var items = new Array[Control]
 
 	# Add `item` as a child of `self`
@@ -141,6 +183,12 @@ end
 # A window, root of the `Control` tree
 class Window
 	super CompositeControl
+
+	# Should the back button be shown and used to go back to a previous window?
+	fun enable_back_button: Bool do return app.window_stack.length > 1
+
+	# The back button has been pressed, usually to open the previous window
+	fun on_back_button do app.pop_window
 end
 
 # A viewable `Control`
@@ -182,7 +230,7 @@ abstract class TextView
 	# depending on the customization options of each platform.
 	# For consistent results, it is recommended to use only on instances
 	# of `Label` and `size` should be either 0.0, 0.5 or 1.0.
-	fun align=(center: nullable Float) is autoinit do end
+	fun align=(align: nullable Float) is autoinit do end
 end
 
 # A control for the user to enter custom `text`
@@ -211,12 +259,29 @@ class CheckBox
 	var is_checked = false is writable
 end
 
-# A `Button` press event
-class ButtonPressEvent
+# Event sent from a `VIEW`
+class ViewEvent
 	super AppEvent
 
-	# The `Button` that raised this event
-	var sender: Button
+	# The `VIEW` that raised this event
+	var sender: VIEW
+
+	# Type of the `sender`
+	type VIEW: View
+end
+
+# A `Button` press event
+class ButtonPressEvent
+	super ViewEvent
+
+	redef type VIEW: Button
+end
+
+# The `CheckBox` `sender` has been toggled
+class ToggleEvent
+	super ViewEvent
+
+	redef type VIEW: CheckBox
 end
 
 # A layout to visually organize `Control`s
@@ -239,4 +304,9 @@ end
 class ListLayout
 	super View
 	super CompositeControl
+end
+
+redef class Text
+	# Open the URL `self` with the default browser
+	fun open_in_browser do print_error "Text::open_in_browser not implemented on this platform."
 end

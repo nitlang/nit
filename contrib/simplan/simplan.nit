@@ -80,7 +80,7 @@ class PlanProblem
 			print n.message
 			exit 1
 		end
-		n = n.children.first.children.first.as(not null)
+		n = n.children.first.as(not null).children.first.as(not null)
 		if n isa Nplan then
 			print "Error: expected a problem, got a plan."
 			exit 1
@@ -88,7 +88,7 @@ class PlanProblem
 		assert n isa Nproblem
 
 		# Load all locations
-		for n2 in n.n_locations.n_list.children do
+		for n2 in n.n_locations.n_list.as(not null).children do
 			var e = new Location(locations.length, n2.n_name.text, n2.n_x.text.to_f, n2.n_y.text.to_f)
 			assert not locations.has_key(e.name)
 			locations[e.name] = e
@@ -97,7 +97,7 @@ class PlanProblem
 
 		# Load all roads
 		var nbr = 0
-		for n2 in n.n_roads.n_list.children do
+		for n2 in n.n_roads.n_list.as(not null).children do
 			var o = locations.get_or_null(n2.n_orig.text)
 			var d = locations.get_or_null(n2.n_dest.text)
 			assert o != null and d != null
@@ -132,7 +132,7 @@ class PlanProblem
 
 		# Load the robot
 		var robot = null
-		for n2 in n.n_robots.n_list.children do
+		for n2 in n.n_robots.n_list.as(not null).children do
 			var name = n2.n_name.text
 			robot = locations.get_or_null(n2.n_emplacement.text)
 			assert name == robot_name and robot != null
@@ -142,7 +142,7 @@ class PlanProblem
 
 		# Load the parcels
 		var parcel_locations = new Array[nullable Location]
-		for n2 in n.n_parcels.n_list.children do
+		for n2 in n.n_parcels.n_list.as(not null).children do
 			var name = n2.n_name.text
 			var e = locations.get_or_null(n2.n_emplacement.text)
 			assert e != null
@@ -155,7 +155,7 @@ class PlanProblem
 		print "# {parcels.length} parcels"
 
 		# Load the goal of parcels
-		for n2 in n.n_goal.n_list.children do
+		for n2 in n.n_goal.n_list.as(not null).children do
 			var parcel = parcel_by_name.get_or_null(n2.n_name.text)
 			var e = locations.get_or_null(n2.n_emplacement.text)
 			assert parcel != null and e != null
@@ -179,7 +179,7 @@ class PlanProblem
 			print n.message
 			exit 1
 		end
-		n = n.children.first.children.first.as(not null)
+		n = n.children.first.as(not null).children.first.as(not null)
 		if n isa Nproblem then
 			print "Error: expected a plan, got a problem."
 			exit 1
@@ -189,7 +189,7 @@ class PlanProblem
 		var res = new Plan(self)
 		var e = initial_state
 		var cost = 0.0
-		for n2 in n.n_actions.children do
+		for n2 in n.n_actions.as(not null).children do
 			if n2 isa Naction_load then
 				var parcel = parcel_by_name.get_or_null(n2.n_parcel.text)
 				assert parcel != null

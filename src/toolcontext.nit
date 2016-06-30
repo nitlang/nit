@@ -58,6 +58,13 @@ class Message
 	# * enclose identifiers, keywords and pieces of code with back-quotes.
 	var text: String
 
+	# The severity level
+	#
+	# * 0 is advices (see `ToolContext::advice`)
+	# * 1 is warnings (see `ToolContext::warning`)
+	# * 2 is errors (see `ToolContext::error`)
+	var level: Int
+
 	# Comparisons are made on message locations.
 	redef fun <(other: OTHER): Bool do
 		if location == null then return true
@@ -123,7 +130,14 @@ redef class Location
 			messages = ms
 		end
 		ms.add m
+		var s = file
+		if s != null then s.messages.add m
 	end
+end
+
+redef class SourceFile
+	# Errors and warnings associated to the whole source.
+	var messages = new Array[Message]
 end
 
 # Global context for tools
@@ -225,9 +239,10 @@ class ToolContext
 	# Return the message (to add information)
 	fun error(l: nullable Location, s: String): Message
 	do
-		var m = new Message(l,null,s)
+		var m = new Message(l, null, s, 2)
 		if messages.has(m) then return m
 		if l != null then l.add_message m
+		if opt_warn.value <= -1 then return m
 		messages.add m
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -257,12 +272,12 @@ class ToolContext
 	# Return the message (to add information) or null if the warning is disabled
 	fun warning(l: nullable Location, tag: String, text: String): nullable Message
 	do
-		if opt_warning.value.has("no-{tag}") then return null
-		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
 		if is_warning_blacklisted(l, tag) then return null
-		var m = new Message(l, tag, text)
+		var m = new Message(l, tag, text, 1)
 		if messages.has(m) then return null
 		if l != null then l.add_message m
+		if opt_warning.value.has("no-{tag}") then return null
+		if not opt_warning.value.has(tag) and opt_warn.value <= 0 then return null
 		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -286,12 +301,12 @@ class ToolContext
 	# Return the message (to add information) or null if the warning is disabled
 	fun advice(l: nullable Location, tag: String, text: String): nullable Message
 	do
-		if opt_warning.value.has("no-{tag}") then return null
-		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
 		if is_warning_blacklisted(l, tag) then return null
-		var m = new Message(l, tag, text)
+		var m = new Message(l, tag, text, 0)
 		if messages.has(m) then return null
 		if l != null then l.add_message m
+		if opt_warning.value.has("no-{tag}") then return null
+		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
 		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -359,6 +374,9 @@ class ToolContext
 
 	# Option --nit-dir
 	var opt_nit_dir = new OptionString("Base directory of the Nit installation", "--nit-dir")
+
+	# Option --share-dir
+	var opt_share_dir = new OptionString("Directory containing tools assets", "--share-dir")
 
 	# Option --help
 	var opt_help = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
@@ -484,7 +502,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 			exit 1
 		end
 
-		nit_dir = compute_nit_dir
+		nit_dir = locate_nit_dir
 
 		if option_context.rest.is_empty and not accept_no_arguments then
 			print tooldescription
@@ -526,9 +544,40 @@ The Nit language documentation and the source code of its tools and libraries ma
 	end
 
 	# The identified root directory of the Nit package
-	var nit_dir: String is noinit
+	#
+	# It is assignable but is automatically set by `process_options` with `locate_nit_dir`.
+	var nit_dir: nullable String = null is writable
 
-	private fun compute_nit_dir: String
+	# Shared files directory.
+	#
+	# Most often `nit/share/`.
+	var share_dir: String is lazy do
+		var sharedir = opt_share_dir.value
+		if sharedir == null then
+			sharedir = nit_dir / "share"
+			if not sharedir.file_exists then
+				fatal_error(null, "Fatal Error: cannot locate shared files directory in {sharedir}. Uses --share-dir to define it's location.")
+			end
+		end
+		return sharedir
+	end
+
+	# Guess a possible nit_dir.
+	#
+	# It uses, in order:
+	#
+	# * the option `opt_no_color`
+	# * the environment variable `NIT_DIR`
+	# * the runpath of the program from argv[0]
+	# * the runpath of the process from /proc
+	# * the search in PATH
+	#
+	# If there is errors (e.g. the indicated path is invalid) or if no
+	# path is found, then an error is displayed and the program exits.
+	#
+	# The result is returned without being assigned to `nit_dir`.
+	# This function is automatically called by `process_options`
+	fun locate_nit_dir: String
 	do
 		# the option has precedence
 		var res = opt_nit_dir.value

@@ -28,7 +28,7 @@
 # ~~~
 module collections
 
-import base
+import ffi_support
 
 # Java primitive array
 #

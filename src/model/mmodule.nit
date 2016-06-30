@@ -17,7 +17,6 @@
 # modules and module hierarchies in the metamodel
 module mmodule
 
-import location
 import mpackage
 private import more_collections
 
@@ -82,7 +81,13 @@ class MModule
 	var mgroup: nullable MGroup
 
 	# The path of the module source, if any
-	var filepath: nullable String = null is writable
+	#
+	# safe alias to `location.file.filepath`
+	fun filepath: nullable String do
+		var res = self.location.file
+		if res == null then return null
+		return res.filename
+	end
 
 	# The package of the module if any
 	# Safe alias for `mgroup.mpackage`
@@ -95,8 +100,7 @@ class MModule
 	# The short name of the module
 	redef var name: String
 
-	# The origin of the definition
-	var location: Location is writable
+	redef var location: Location is writable
 
 	# Alias for `name`
 	redef fun to_s do return self.name
@@ -109,11 +113,13 @@ class MModule
 	# It is usually the `name` prefixed by the package's name.
 	# Example: `"package::name"`
 	#
-	# If both names are the same (of if the module is package-less), then
-	# the short-name is used alone.
+	# Default modules use a doubled name to distinguish them from the package name.
+	# E.g.: `"core::core"`
+	#
+	# If the module is package-less, then the short-name is used alone.
 	redef var full_name is lazy do
 		var mgroup = self.mgroup
-		if mgroup == null or mgroup.mpackage.name == self.name then
+		if mgroup == null then
 			return self.name
 		else
 			return "{mgroup.mpackage.name}::{self.name}"

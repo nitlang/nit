@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Test tools for NitRPG.
-module test_helper is test_suite
+module test_helper
 
 import test_suite
 import game
@@ -57,7 +57,8 @@ abstract class NitrpgTestHelper
 
 	# Gen a test db with a random name (to avoid race conditions).
 	fun gen_test_db: MongoDb do
-		var db_name = "test_nitrpg_{get_time}_{1000.rand}"
+		var testid = "NIT_TESTING_ID".environ.to_i
+		var db_name = "test_nitrpg_{testid}"
 		var db = load_db(db_name)
 		test_dbs.add db
 		return db

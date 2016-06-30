@@ -18,7 +18,7 @@ all: refund
 
 refund:
 	mkdir -p bin
-	../../bin/nitc src/refund.nit -o bin/refund
+	nitc src/refund.nit -o bin/refund
 
 check: refund
 	cd tests; make

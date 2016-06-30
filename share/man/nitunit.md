@@ -118,20 +118,36 @@ Finally, standard markdown documents can be checked with:
 
     $ nitunit foo.md
 
+When testing, the environment variable `NIT_TESTING` is set to `true`.
+This flag can be used by libraries and program to prevent (or limit) the execution of dangerous pieces of code.
+
+~~~~~
+# NIT_TESTING is automatically set.
+#
+#     assert "NIT_TESTING".environ == "true"
+~~~~
+
 ## Working with `TestSuites`
 
-TestSuites are Nit files that define a set of TestCases for a particular module.
+TestSuites are Nit modules that define a set of TestCases.
 
-The test suite must be called `test_` followed by the name of the module to test.
-So for the module `foo.nit` the test suite will be called `test_foo.nit`.
+A test suite is a module that uses the annotation `is test_suite`.
+
+It is common that a test suite focuses on testing a single module.
+In this case, the name of the test_suite is often `test_foo.nit` where `foo.nit` is the tested module.
 
 The structure of a test suite is the following:
 
 ~~~~
 # test suite for module `foo`
-module test_foo
+module test_foo is test_suite
+
+import test_suite
 import foo # can be intrude to test private things
+
 class TestFoo
+	super TestSuite
+
     # test case for `foo::Foo::baz`
     fun test_baz do
         var subject = new Foo
@@ -144,11 +160,13 @@ Test suite can be executed using the same `nitunit` command:
 
     $ nitunit foo.nit
 
-`nitunit` will execute a test for each method named `test_*` in a class named `Test*`
-so multiple tests can be executed for a single method:
+`nitunit` will execute a test for each method named `test_*` in a class
+subclassing `TestSuite` so multiple tests can be executed for a single method:
 
 ~~~~
 class TestFoo
+	super TestSuite
+
     fun test_baz_1 do
         var subject = new Foo
         assert subject.baz(1, 2) == 3
@@ -160,13 +178,64 @@ class TestFoo
 end
 ~~~~
 
-`TestSuites` also provide methods to configure the test run:
+## Black Box Testing
+
+Sometimes, it is easier to validate a `TestCase` by comparing its output with a text file containing the expected result.
+
+For each TestCase `test_bar` of a TestSuite `test_mod.nit`, a corresponding file with the expected output is looked for:
+
+* "test_mod.sav/test_bar.res". I.e. test-cases grouped by test-suites.
+
+	This is the default and is useful if there is a lot of test-suites and test-cases in a directory
+
+* "sav/test_bar.res". I.e. all test-cases grouped in a common sub-directory.
+
+	Useful if there is a lot of test-suites OR test-cases in a directory.
+
+* "test_bar.res" raw in the directory.
+
+	Useful is there is a few test-suites and test-cases in a directory.
+
+All 3 are exclusive. If more than one exists, the test-case is failed.
+
+If a corresponding file then the output of the test-case is compared with the file.
+
+The `diff(1)` command is used to perform the comparison.
+The test is failed if non-zero is returned by `diff`.
+
+~~~
+module test_mod is test_suite
+
+class TestFoo
+	super TestSuite
+
+	fun test_bar do
+		print "Hello!"
+	end
+end
+~~~
+
+Where `test_mod.sav/test_bar.res` contains
+
+~~~raw
+Hello!
+~~~
+
+If no corresponding `.res` file exists, then the output of the TestCase is ignored.
+
+To helps the management of the expected results, the option `--autosav` can be used to automatically create and update them.
+
+
+## Configuring TestSuites
+
+`TestSuite`s also provide methods to configure the test run:
 
 `before_test` and `after_test`: methods called before/after each test case.
 They can be used to factorize repetitive tasks:
 
 ~~~~
 class TestFoo
+	super TestSuite
     var subject: Foo
     # Mandatory empty init
     init do end
@@ -228,12 +297,21 @@ With the `--full` option, all imported modules (even those in standard) are also
 ### `-o`, `--output`
 Output name (default is 'nitunit.xml').
 
-### `nitunit` produces a XML file comatible with JUnit.
+`nitunit` produces a XML file compatible with JUnit.
 
 ### `--dir`
-Working directory (default is '.nitunit').
+Working directory (default is 'nitunit.out').
 
 In order to execute the tests, nit files are generated then compiled and executed in the giver working directory.
+
+In case of success, the directory is removed.
+In case of failure, it is kept as is so files can be investigated.
+
+### `--nitc`
+nitc compiler to use.
+
+By default, nitunit tries to locate the `nitc` program with the environment variable `NITC` or heuristics.
+The option is used to indicate a specific nitc binary.
 
 ### `--no-act`
 Does not compile and run tests.
@@ -243,8 +321,22 @@ Only run test case with name that match pattern.
 
 Examples: `TestFoo`, `TestFoo*`, `TestFoo::test_foo`, `TestFoo::test_foo*`, `test_foo`, `test_foo*`
 
-### `-t`, `--target-file`
-Specify test suite location.
+### `--autosav`
+Automatically create/update .res files for black box testing.
+
+If a black block test fails because a difference between the expected result and the current result then the expected result file is updated (and the test is passed).
+
+If a test-case of a test-suite passes but that some output is generated, then an expected result file is created.
+
+It is expected that the created/updated files are checked since the tests are considered passed.
+A VCS like `git` is often a good tool to check the creation and modification of those files.
+
+### `--no-time`
+Disable time information in XML.
+
+This is used to have reproducible XML results.
+
+This option is automatically activated if `NIT_TESTING` is set.
 
 ## SUITE GENERATION
 
@@ -261,6 +353,36 @@ Also generate test case for private methods.
 
 ### `--only-show`
 Only display the skeleton, do not write any file.
+
+
+# ENVIRONMENT VARIABLES
+
+### `NITC`
+
+Indicate the specific Nit compiler executable to use. See `--nitc`.
+
+### `NIT_TESTING`
+
+The environment variable `NIT_TESTING` is set to `true` during the execution of program tests.
+Some libraries of programs can use it to produce specific reproducible results; or just to exit their executions.
+
+Unit-tests may unset this environment variable to retrieve the original behavior of such piece of software.
+
+### `SRAND`
+
+In order to maximize reproducibility, `SRAND` is set to 0.
+This make the pseudo-random generator no random at all.
+See `Sys::srand` for details.
+
+To retrieve the randomness, unit-tests may unset this environment variable then call `srand`.
+
+### `NIT_TESTING_ID`
+
+Parallel executions can cause some race collisions on named resources (e.g. DB table names).
+To solve this issue, `NIT_TESTING_ID` is initialized with a distinct integer identifier that can be used to give unique names to resources.
+
+Note: `rand` is not a recommended way to get a distinct identifier because its randomness is disabled by default. See `SRAND`.
+
 
 # SEE ALSO
 

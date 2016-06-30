@@ -18,7 +18,7 @@ Requirements:
  * gcc		http://gcc.gnu.org/ (or a compatible C compiler)
  * pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
  * ccache	http://ccache.samba.org/	to improve recompilation
- * libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
+ * libgc-dev	http://hboehm.info/gc/
  * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
  * libunwind	http://nongnu.org/libunwind
 
@@ -65,6 +65,11 @@ To have your environment automatically configured at login, just source it with 
 
     $ . misc/nit_env.sh install
 
+Contributing:
+
+To contribute to Nit, please see [CONTRIBUTING](CONTRIBUTING.md).
+
+The best way to ask the team for advice, submit bugs or request features, is through the use of Github issues, using the appropriate tag (`forum`, `feature-request`, `bug`).
 
 Information, contacts and help:
 

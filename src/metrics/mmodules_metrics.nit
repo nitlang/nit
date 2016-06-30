@@ -53,7 +53,7 @@ private class MModulesMetricsPhase
 				metrics.clear
 				metrics.collect(new HashSet[MModule].from(mgroup.mmodules))
 				metrics.to_console(1, not toolcontext.opt_nocolors.value)
-				if csv then metrics.to_csv.save("{out}/{mgroup}.csv")
+				if csv then metrics.to_csv.write_to_file("{out}/{mgroup}.csv")
 			end
 		end
 		if not mmodules.is_empty then
@@ -62,7 +62,7 @@ private class MModulesMetricsPhase
 			metrics.clear
 			metrics.collect(mmodules)
 			metrics.to_console(1, not toolcontext.opt_nocolors.value)
-			if csv then metrics.to_csv.save("{out}/summary.csv")
+			if csv then metrics.to_csv.write_to_file("{out}/summary.csv")
 		end
 	end
 end

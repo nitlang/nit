@@ -2,32 +2,33 @@
 <A: true a 0.123 1234 asdf false p4ssw0rd>
 
 # Json:
-{"b": true, "c": "a", "f": 0.123, "i": 1234, "serialization_specific_name": "asdf", "n": null}
+{"b": true,"c": "a","f": 0.123,"i": 1234,"serialization_specific_name": "asdf","n": null}
 
 # Nit:
 <B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>
 
 # Json:
-{"b": false, "c": "b", "f": 123.123, "i": 2345, "serialization_specific_name": "hjkl", "n": 12, "ii": 1111, "ss": "qwer"}
+{"b": false,"c": "b","f": 123.123,"i": 2345,"serialization_specific_name": "hjkl","n": 12,"ii": 1111,"ss": "qwer"}
 
 # Nit:
 <C: <A: true a 0.123 1234 asdf false p4ssw0rd> <B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>>
 
 # Json:
-{"a": {"b": true, "c": "a", "f": 0.123, "i": 1234, "serialization_specific_name": "asdf", "n": null}, "b": {"b": false, "c": "b", "f": 123.123, "i": 2345, "serialization_specific_name": "hjkl", "n": 12, "ii": 1111, "ss": "qwer"}, "aa": {"b": true, "c": "a", "f": 0.123, "i": 1234, "serialization_specific_name": "asdf", "n": null}}
+{"a": {"b": true,"c": "a","f": 0.123,"i": 1234,"serialization_specific_name": "asdf","n": null},"b": {"b": false,"c": "b","f": 123.123,"i": 2345,"serialization_specific_name": "hjkl","n": 12,"ii": 1111,"ss": "qwer"},"aa": {"b": true,"c": "a","f": 0.123,"i": 1234,"serialization_specific_name": "asdf","n": null}}
 
+Serialization warning: Cycle detected in serialized object, replacing reference with 'null'.
 # Nit:
 <D: <B: <A: false b 123.123 2345 new line ->
 <- false p4ssw0rd> 1111 	f"\/> true>
 
 # Json:
-{"b": false, "c": "b", "f": 123.123, "i": 2345, "serialization_specific_name": "new line ->\n<-", "n": null, "ii": 1111, "ss": "\tf\"\r\\/", "d": null}
+{"b": false,"c": "b","f": 123.123,"i": 2345,"serialization_specific_name": "new line ->\n<-","n": null,"ii": 1111,"ss": "\tf\"\r\\/","d": null}
 
 # Nit:
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 # Json:
-{"a": ["hello", 1234, 123.4], "b": ["hella", 2345, 234.5]}
+{"a": ["hello",1234,123.4],"b": ["hella",2345,234.5]}
 
 # Nit:
 <E: 2222>
@@ -45,5 +46,5 @@
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 
 # Json:
-{"hs": [-1, 0], "s": ["one", "two"], "hm": {"one": 1, "two": 2}, "am": {"three": "3", "four": "4"}}
+{"hs": [-1,0],"s": ["one","two"],"hm": {"one": 1,"two": 2},"am": {"three": "3","four": "4"}}
 

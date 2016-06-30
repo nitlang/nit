@@ -1,1 +1,1 @@
-alt/base_upcast2_alt10.nit:26,10: Error: class `T` not found in module `base_upcast2_alt10`.
+alt/base_upcast2_alt10.nit:26,10: Error: class `T` not found in module `base_upcast2_alt10`. Did you mean `base_upcast2_alt10::A`,`base_upcast2_alt10::B`,`base_upcast2_alt10::C` or `base_upcast2_alt10::X`?

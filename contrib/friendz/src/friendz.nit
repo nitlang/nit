@@ -1609,22 +1609,10 @@ redef class App
 		game.save
 	end
 
-	# Maximum wanted frame per second
-	var max_fps = 30
-
-	# clock used to track FPS
-	private var clock = new Clock
-
 	redef fun frame_core(display)
 	do
 		game.step
 		game.draw(display)
-		var dt = clock.lapse
-		var target_dt = 1000000000 / max_fps
-		if dt.sec == 0 and dt.nanosec < target_dt then
-			var sleep_t = target_dt - dt.nanosec
-			sys.nanosleep(0, sleep_t)
-		end
 	end
 
 	redef fun input(input_event)

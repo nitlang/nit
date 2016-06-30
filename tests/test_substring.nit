@@ -75,3 +75,6 @@ print("test.has_suffix(\"bt\") => {test.has_suffix("bt")}")
 print("test.has_suffix(\"bat\") => {test.has_suffix("bat")}")
 print("test.has_suffix(\"foot\") => {test.has_suffix("foot")}")
 
+print "........"
+print "/".substring(7, 1)
+print "........"

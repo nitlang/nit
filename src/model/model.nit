@@ -30,6 +30,15 @@ import mdoc
 import ordered_tree
 private import more_collections
 
+redef class MEntity
+	# The visibility of the MEntity.
+	#
+	# MPackages, MGroups and MModules are always public.
+	# The visibility of `MClass` and `MProperty` is defined by the keyword used.
+	# `MClassDef` and `MPropDef` return the visibility of `MClass` and `MProperty`.
+	fun visibility: MVisibility do return public_visibility
+end
+
 redef class Model
 	# All known classes
 	var mclasses = new Array[MClass]
@@ -285,8 +294,9 @@ redef class MModule
 			if name == "Bool" and self.model.get_mclasses_by_name("Object") != null then
 				# Bool is injected because it is needed by engine to code the result
 				# of the implicit casts.
-				var c = new MClass(self, name, null, enum_kind, public_visibility)
-				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0))
+				var loc = model.no_location
+				var c = new MClass(self, name, loc, null, enum_kind, public_visibility)
+				var cladef = new MClassDef(self, c.mclass_type, loc)
 				cladef.set_supertypes([object_type])
 				cladef.add_in_hierarchy
 				return c
@@ -378,13 +388,16 @@ class MClass
 	super MEntity
 
 	# The module that introduce the class
+	#
 	# While classes are not bound to a specific module,
-	# the introducing module is used for naming an visibility
+	# the introducing module is used for naming and visibility.
 	var intro_mmodule: MModule
 
 	# The short name of the class
 	# In Nit, the name of a class cannot evolve in refinements
 	redef var name
+
+	redef var location
 
 	# The canonical name of the class
 	#
@@ -462,7 +475,7 @@ class MClass
 
 	# The visibility of the class
 	# In Nit, the visibility of a class cannot evolve in refinements
-	var visibility: MVisibility
+	redef var visibility
 
 	init
 	do
@@ -506,12 +519,12 @@ class MClass
 
 	# The principal static type of the class.
 	#
-	# For non-generic class, mclass_type is the only `MClassType` based
+	# For non-generic class, `mclass_type` is the only `MClassType` based
 	# on self.
 	#
 	# For a generic class, the arguments are the formal parameters.
-	# i.e.: for the class Array[E:Object], the `mclass_type` is Array[E].
-	# If you want Array[Object] the see `MClassDef::bound_mtype`
+	# i.e.: for the class `Array[E:Object]`, the `mclass_type` is `Array[E]`.
+	# If you want `Array[Object]`, see `MClassDef::bound_mtype`.
 	#
 	# For generic classes, the mclass_type is also the way to get a formal
 	# generic parameter type.
@@ -552,6 +565,8 @@ class MClass
 
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
+
+	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
 end
 
 
@@ -588,11 +603,12 @@ class MClassDef
 	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
-	# The origin of the definition
-	var location: Location
+	redef var location: Location
+
+	redef fun visibility do return mclass.visibility
 
 	# Internal name combining the module and the class
-	# Example: "mymodule#MyClass"
+	# Example: "mymodule$MyClass"
 	redef var to_s is noinit
 
 	init
@@ -604,34 +620,34 @@ class MClassDef
 			assert not isset mclass._intro
 			mclass.intro = self
 		end
-		self.to_s = "{mmodule}#{mclass}"
+		self.to_s = "{mmodule}${mclass}"
 	end
 
 	# Actually the name of the `mclass`
 	redef fun name do return mclass.name
 
-	# The module and class name separated by a '#'.
+	# The module and class name separated by a '$'.
 	#
 	# The short-name of the class is used for introduction.
-	# Example: "my_module#MyClass"
+	# Example: "my_module$MyClass"
 	#
 	# The full-name of the class is used for refinement.
-	# Example: "my_module#intro_module::MyClass"
+	# Example: "my_module$intro_module::MyClass"
 	redef var full_name is lazy do
 		if is_intro then
-			# public gives 'p#A'
-			# private gives 'p::m#A'
-			return "{mmodule.namespace_for(mclass.visibility)}#{mclass.name}"
+			# public gives 'p$A'
+			# private gives 'p::m$A'
+			return "{mmodule.namespace_for(mclass.visibility)}${mclass.name}"
 		else if mclass.intro_mmodule.mpackage != mmodule.mpackage then
-			# public gives 'q::n#p::A'
-			# private gives 'q::n#p::m::A'
-			return "{mmodule.full_name}#{mclass.full_name}"
+			# public gives 'q::n$p::A'
+			# private gives 'q::n$p::m::A'
+			return "{mmodule.full_name}${mclass.full_name}"
 		else if mclass.visibility > private_visibility then
-			# public gives 'p::n#A'
-			return "{mmodule.full_name}#{mclass.name}"
+			# public gives 'p::n$A'
+			return "{mmodule.full_name}${mclass.name}"
 		else
-			# private gives 'p::n#::m::A' (redundant p is omitted)
-			return "{mmodule.full_name}#::{mclass.intro_mmodule.name}::{mclass.name}"
+			# private gives 'p::n$::m::A' (redundant p is omitted)
+			return "{mmodule.full_name}$::{mclass.intro_mmodule.name}::{mclass.name}"
 		end
 	end
 
@@ -1168,6 +1184,8 @@ class MClassType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
+	redef fun location do return mclass.location
+
 	# TODO: private init because strongly bounded to its mclass. see `mclass.mclass_type`
 
 	# The formal arguments of the type
@@ -1373,6 +1391,8 @@ class MVirtualType
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MVirtualTypeProp
 
+	redef fun location do return mproperty.location
+
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
@@ -1503,6 +1523,8 @@ class MParameterType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
+	redef fun location do return mclass.location
+
 	# The position of the parameter (0 for the first parameter)
 	# FIXME: is `position` a better name?
 	var rank: Int
@@ -1627,6 +1649,8 @@ abstract class MProxyType
 	super MType
 	# The base type
 	var mtype: MType
+
+	redef fun location do return mtype.location
 
 	redef fun model do return self.mtype.model
 	redef fun need_anchor do return mtype.need_anchor
@@ -1954,12 +1978,27 @@ abstract class MProperty
 	# The (short) name of the property
 	redef var name
 
+	redef var location
+
+	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+
 	# The canonical name of the property.
 	#
-	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
+	# It is currently the short-`name` prefixed by the short-name of the class and the full-name of the module.
 	# Example: "my_package::my_module::MyClass::my_method"
+	#
+	# The full-name of the module is needed because two distinct modules of the same package can
+	# still refine the same class and introduce homonym properties.
+	#
+	# For public properties not introduced by refinement, the module name is not used.
+	#
+	# Example: `my_package::MyClass::My_method`
 	redef var full_name is lazy do
-		return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
+		if intro_mclassdef.is_intro then
+			return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
+		else
+			return "{intro_mclassdef.mmodule.full_name}::{intro_mclassdef.mclass.name}::{name}"
+		end
 	end
 
 	redef var c_name is lazy do
@@ -1968,7 +2007,7 @@ abstract class MProperty
 	end
 
 	# The visibility of the property
-	var visibility: MVisibility
+	redef var visibility
 
 	# Is the property usable as an initializer?
 	var is_autoinit = false is writable
@@ -2233,8 +2272,9 @@ abstract class MPropDef
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	# The origin of the definition
-	var location: Location
+	redef var location: Location
+
+	redef fun visibility do return mproperty.visibility
 
 	init
 	do
@@ -2244,7 +2284,7 @@ abstract class MPropDef
 			assert not isset mproperty._intro
 			mproperty.intro = self
 		end
-		self.to_s = "{mclassdef}#{mproperty}"
+		self.to_s = "{mclassdef}${mproperty}"
 	end
 
 	# Actually the name of the `mproperty`
@@ -2258,17 +2298,17 @@ abstract class MPropDef
 	#  * a property "p::m::A::x"
 	#  * redefined in a refinement of a class "q::n::B"
 	#  * in a module "r::o"
-	#  * so "r::o#q::n::B#p::m::A::x"
+	#  * so "r::o$q::n::B$p::m::A::x"
 	#
 	# Fortunately, the full-name is simplified when entities are repeated.
-	# For the previous case, the simplest form is "p#A#x".
+	# For the previous case, the simplest form is "p$A$x".
 	redef var full_name is lazy do
 		var res = new FlatBuffer
 
-		# The first part is the mclassdef. Worst case is "r::o#q::n::B"
+		# The first part is the mclassdef. Worst case is "r::o$q::n::B"
 		res.append mclassdef.full_name
 
-		res.append "#"
+		res.append "$"
 
 		if mclassdef.mclass == mproperty.intro_mclassdef.mclass then
 			# intro are unambiguous in a class
@@ -2277,7 +2317,7 @@ abstract class MPropDef
 			# Just try to simplify each part
 			if mclassdef.mmodule.mpackage != mproperty.intro_mclassdef.mmodule.mpackage then
 				# precise "p::m" only if "p" != "r"
-				res.append mproperty.intro_mclassdef.mmodule.full_name
+				res.append mproperty.intro_mclassdef.mmodule.namespace_for(mproperty.visibility)
 				res.append "::"
 			else if mproperty.visibility <= private_visibility then
 				# Same package ("p"=="q"), but private visibility,
@@ -2322,7 +2362,7 @@ abstract class MPropDef
 	redef fun model do return mclassdef.model
 
 	# Internal name combining the module, the class and the property
-	# Example: "mymodule#MyClass#mymethod"
+	# Example: "mymodule$MyClass$mymethod"
 	redef var to_s is noinit
 
 	# Is self the definition that introduce the property?

@@ -37,7 +37,7 @@ extern class NSString in "ObjC" `{ NSString * `}
 	# Get an UTF8 encoded `char*` copy of `self`
 	fun utf8_string: NativeString in "ObjC" `{ return (char *)[self UTF8String]; `}
 
-	redef fun to_s do return utf8_string.to_s
+	redef fun to_s do return utf8_string.to_s_with_copy
 end
 
 redef class NativeString
@@ -51,7 +51,7 @@ end
 
 redef class Text
 	# Get a `NSString` from `self`
-	fun to_nsstring: NSString do return to_cstring.to_nsstring(bytelen)
+	fun to_nsstring: NSString do return to_cstring.to_nsstring(byte_length)
 end
 
 # Wrapper of byte buffers

@@ -15,7 +15,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Java Virtual Machine services
+# Java Virtual Machine invocation API and others services from the JNI C API
+#
+# Users of this module and the Java FFI, on desktop computers, must define three environment variables:
+# * `JAVA_HOME` points to the installation folder of the target Java VM.
+#   This folder should contain the JNI header file `include/jni.h`.
+#   e.g. `/usr/lib/jvm/default-java` on Debian Jessie.
+# * `JNI_LIB_PATH` points to the folder with `libjvm.so`.
+#   e.g. `/usr/lib/jvm/default-java/jre/lib/amd64/server/` on Debian Jessie.
+# * `LD_LIBRARY_PATH` has the path to the folder with `libjvm.so`.
+#   It's the same value as `JNI_LIB_PATH` but `LD_LIBRARY_PATH` is a colon separated list
+#   which may contain other paths.
 #
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 module jvm is
@@ -38,17 +48,16 @@ in "C Header" `{
 # var env = builder.jni_env
 # ~~~~
 class JavaVMBuilder
-	super JniEnvRef
 
 	# Version code of the JVM requested by `create_jvm`
 	#
-	# Default at 0x00010002
+	# Default at 0x00010002 for `JNI_VERSION_1_2`.
 	var version = 0x00010002 is writable
 
 	# Additional option strings
 	var options = new Array[String]
 
-	# Create the JVM and return it on success
+	# Create a JVM instance, or return `null` on error
 	fun create_jvm: nullable JavaVM
 	do
 		var args = new JavaVMInitArgs
@@ -65,7 +74,7 @@ class JavaVMBuilder
 
 		args.options = c_options
 
-		var jvm = new JavaVM(args, self)
+		var jvm = new JavaVM(args)
 
 		args.free
 		c_options.free
@@ -122,11 +131,12 @@ end
 
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
-	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
+	# Create the JVM
 	#
-	# Unavailable on Android, where you cannot instanciate a new JVM.
-	private new(args: JavaVMInitArgs, env_ref: JniEnvRef)
-	import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
+	# The corresponding `JniEnv` can be obtained by calling `env`.
+	#
+	# Unavailable on some platforms, including Android where you cannot instanciate a new JVM.
+	private new(args: JavaVMInitArgs) import jni_error `{
 
 	#ifdef ANDROID
 		JavaVM_jni_error(NULL, "JVM creation not supported on Android", 0);
@@ -139,14 +149,12 @@ extern class JavaVM `{JavaVM *`}
 
 		res = JNI_CreateJavaVM(&jvm, (void**)&env, args);
 
-		if (res != 0) {
+		if (res != JNI_OK) {
 			JavaVM_jni_error(NULL, "Could not create Java VM", res);
 			return NULL;
 		}
-		else {
-			JniEnvRef_jni_env__assign(env_ref, JniEnv_as_nullable_JniEnv(env));
-			return jvm;
-		}
+
+		return jvm;
 	`}
 
 	private fun jni_error(msg: NativeString, v: Int)
@@ -155,20 +163,29 @@ extern class JavaVM `{JavaVM *`}
 		abort
 	end
 
+	# Unload the Java VM when the calling thread is the only remaining non-daemon attached user thread
 	fun destroy `{
 		(*self)->DestroyJavaVM(self);
 	`}
 
+	# `JniEnv` attached to the calling thread
+	#
+	# A null pointer is returned if the calling thread is not attached to the JVM.
 	fun env: JniEnv import jni_error `{
 		JNIEnv *env;
 		int res = (*self)->GetEnv(self, (void **)&env, JNI_VERSION_1_6);
-		if (res != JNI_OK) {
+		if (res == JNI_EDETACHED) {
+			JavaVM_jni_error(NULL, "Requesting JNIEnv from an unattached thread", res);
+			return NULL;
+		}
+		else if (res != JNI_OK) {
 			JavaVM_jni_error(NULL, "Could not get JNIEnv from Java VM", res);
 			return NULL;
 		}
 		return env;
 	`}
 
+	# Attach the calling thread to the JVM and return its `JniEnv`
 	fun attach_current_thread: JniEnv import jni_error `{
 		JNIEnv *env;
 	#ifdef ANDROID
@@ -408,11 +425,6 @@ extern class JniEnv `{JNIEnv *`}
 	fun pop_local_frame `{
 		(*self)->PopLocalFrame(self, NULL);
 	`}
-end
-
-# used to initialize a JavaVM
-class JniEnvRef
-	var jni_env: nullable JniEnv = null
 end
 
 # Represents a jni jclass

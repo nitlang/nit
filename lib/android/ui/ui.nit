@@ -13,7 +13,10 @@
 # limitations under the License.
 
 # Views and services to use the Android native user interface
-module ui
+module ui is
+	# `adjustPan` allows to use EditText in a ListLayout
+	android_manifest_activity """android:windowSoftInputMode="adjustPan""""
+end
 
 # Implementation note:
 #
@@ -75,6 +78,19 @@ redef class App
 	do
 		native_activity.show_fragment(root_layout_id, window.native)
 		super
+	end
+end
+
+redef class Activity
+	redef fun on_back_pressed
+	do
+		var window = app.window
+		if window.enable_back_button then
+			window.on_back_button
+			return true
+		end
+
+		return false
 	end
 end
 
@@ -228,7 +244,7 @@ redef class TextView
 		else // if (align > 0.5d)
 			g = android.view.Gravity.RIGHT;
 
-		view.setGravity(g);
+		view.setGravity(g | android.view.Gravity.CENTER_VERTICAL);
 	`}
 end
 
@@ -240,9 +256,26 @@ end
 redef class CheckBox
 	redef type NATIVE: Android_widget_CompoundButton
 	redef var native do return (new Android_widget_CheckBox(app.native_activity)).new_global_ref
+	init do set_callback_on_toggle(native)
 
 	redef fun is_checked do return native.is_checked
 	redef fun is_checked=(value) do native.set_checked(value)
+
+	private fun on_toggle do notify_observers new ToggleEvent(self)
+
+	private fun set_callback_on_toggle(view: NATIVE)
+	import on_toggle in "Java" `{
+		final int final_sender_object = self;
+		CheckBox_incr_ref(final_sender_object);
+
+		view.setOnCheckedChangeListener(
+			new android.widget.CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(android.widget.CompoundButton buttonView, boolean isChecked) {
+					CheckBox_on_toggle(final_sender_object);
+				}
+			});
+	`}
 end
 
 redef class TextInput
@@ -313,5 +346,20 @@ redef class Android_app_Fragment
 				return Window_on_create_fragment(final_nit_window);
 			}
 		};
+	`}
+end
+
+redef class Text
+	redef fun open_in_browser
+	do to_java_string.native_open_in_browser(app.native_activity)
+end
+
+redef class JavaString
+	private fun native_open_in_browser(context: NativeContext)
+	in "Java" `{
+		android.content.Intent intent = new android.content.Intent(
+			android.content.Intent.ACTION_VIEW,
+			android.net.Uri.parse(self));
+		context.startActivity(intent);
 	`}
 end

@@ -374,9 +374,6 @@ Disable implicit casts on unsafe return with erasure-typing policy (dangerous).
 These options are used to debug or to bench the compilation results.
 Usually you do not need them since they make the generated code slower.
 
-### `--hardening`
-Generate contracts in the C code against bugs in the compiler.
-
 ### `--no-shortcut-range`
 Always instantiate a range and its iterator on 'for' loops.
 
@@ -386,7 +383,7 @@ Put primitive attributes in a box instead of an union.
 ### `--no-shortcut-equal`
 Always call == in a polymorphic way.
 
-### `--no-tag-primitive`
+### `--no-tag-primitives`
 Use only boxes for primitive types.
 
 The separate compiler uses tagged values to encode common primitive types like Int, Bool and Char.
@@ -408,10 +405,35 @@ Disable advanced gcc directives for optimization.
 ### `--trampoline-call`
 Use an indirection when calling.
 
-Just add the trampolines of `--substitute-monomorph` without doing any additionnal optimizations.
+Just add the trampolines of `--substitute-monomorph` without doing any additional optimizations.
 
-### `--no-tag-primitives`
-Use only boxes for primitive types.
+
+### DEBUGGING
+
+### `--no-stacktrace`
+Disable the generation of stack traces.
+
+With this option, the compiled program will not display stack traces on runtime errors.
+
+Because stack traces rely on libunwind, this option might be useful in order to generate more portable binaries
+since libunwind might be non available on the runtime system (or available with an ABI incompatible version).
+
+The generated C is API-portable and can be reused, distributed and compiled on any supported system.
+If the option `--no-stacktrace` is not used but the development files of the library `libunwind` are not available, then a warning will be displayed
+and stack trace will be disabled.
+
+Note that the `--no-stacktrace` option (or this absence) can be toggled manually in the generated Makefile (search `NO_STACKTRACE` in the Makefile).
+Moreover, the environment variable `NIT_NO_STACK` (see bellow) can also be used at runtime to disable stack traces.
+
+### `--trace-memory`
+Enable dynamic measure of memory usage.
+
+Compiled programs will generate a large `memory.log` file that logs all memory allocations.
+This logs file can then be analyzed with the tool `memplot` from contrib.
+
+### `--hardening`
+Generate contracts in the C code against bugs in the compiler.
+
 
 ## INTERNAL OPTIONS
 
@@ -432,21 +454,6 @@ Do not check, and produce errors, on visibility issues.
 
 ### `--no-main`
 Do not generate main entry point.
-
-### `--no-stacktrace`
-Disable the generation of stack traces.
-
-With this option, the compiled program will not display stack traces on runtime errors.
-
-Because stack traces rely on libunwind, this option might be useful in order to generate more portable binaries
-since libunwind might be non available on the runtime system (or available with an ABI incompatible version).
-
-The generated C is API-portable and can be reused, distributed and compiled on any supported system.
-If the option `--no-stacktrace` is not used but the development files of the library `libunwind` are not available, then a warning will be displayed
-and stack trace will be disabled.
-
-Note that the `--no-stacktrace` option (or this absence) can be toggled manually in the generated Makefile (search `NO_STACKTRACE` in the Makefile).
-Moreover, the environment variable `NIT_NO_STACK` (see bellow) can also be used at runtime to disable stack traces.
 
 ### `--max-c-lines`
 Maximum number of lines in generated C files. Use 0 for unlimited.

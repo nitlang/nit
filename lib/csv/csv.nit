@@ -15,127 +15,160 @@
 # CSV document handling.
 module csv
 
-# Specifies a CSV format.
-class CsvFormat
+redef class Text
+	# Escape the content of `self` for inclusion in a CSV document
+	private fun escape_to_csv(sep_char, delim_char: Char, eol: String): String do
+		var add_sp = chars_to_escape_csv(sep_char, delim_char, eol)
+		if add_sp == 0 then return to_s
+		var bf = new Buffer.with_cap(add_sp + byte_length)
+		bf.add '"'
+		for i in [0 .. length[ do
+			var c = self[i]
+			if c == delim_char then
+				bf.add c
+			end
+			bf.add c
+		end
+		bf.add '"'
+		return bf.to_s
+	end
+
+	# How many more bytes should be allocated for CSV escaping ?
+	private fun chars_to_escape_csv(sep_char, delim_char: Char, eol: String): Int do
+		var more_ln = 0
+		var ln = length
+		var need_esc = false
+		var fst_eol = eol.first
+		var i = 0
+		while i < ln do
+			var c = self[i]
+			if c == delim_char then more_ln += 1
+			if c == fst_eol then
+				need_esc = true
+				for j in [1 .. eol.length[ do
+					i += 1
+					c = self[i]
+					if c != eol[j] then
+						i -= j
+						need_esc = false
+						break
+					end
+				end
+			end
+			if c == sep_char then need_esc = true
+			i += 1
+		end
+		var more = more_ln * delim_char.u8char_len
+		if need_esc then more += 2
+		return more
+	end
+
+	# Unescape the content of `self` from CSV format to Nit String
+	private fun unescape_csv(delim_char: Char): String do
+		var to_un = chars_to_unescape_csv(delim_char)
+		if to_un == 0 then return to_s
+		var buf = new Buffer.with_cap(byte_length - to_un)
+		var pos = 0
+		var ln = length
+		while pos < ln do
+			var c = self[pos]
+			if c == delim_char then pos += 1
+			buf.add c
+			pos += 1
+		end
+		return buf.to_s
+	end
+
+	# How many bytes should be removed for CSV unescaping ?
+	private fun chars_to_unescape_csv(delim_char: Char): Int do
+		var pos = 0
+		var to_un = 0
+		var ln = length
+		while pos < ln do
+			var c = self[pos]
+			if c == delim_char then
+				pos += 1
+				to_un += 1
+			end
+			pos += 1
+		end
+		return to_un
+	end
+end
+
+# Shared properties by all CSV-related classes
+#
+# This class is basically only here for implementation purposes and should not be used
+# by clients for typing.
+abstract class CsvStream
 	# The character that delimits escaped value.
 	#
 	# The delimiter is escaped by doubling it.
-	var delimiter: Char
+	var delimiter = '"' is writable
 
-	# The character that split each cell in a row.
-	var separator: Char
+	# The character that split each cell in a record.
+	var separator = ',' is writable
 
-	# The character that ends a row (end of line).
-	var eol: String
-
-	# Escape sequence for the delimiter.
-	private var escaping = "{delimiter}{delimiter}" is lazy
-
-	# Escape the specified cell.
-	private fun escape_cell(cell: String): Text do
-		var result = new RopeBuffer
-		result.add delimiter
-		result.append cell.replace(delimiter, escaping)
-		result.add delimiter
-		return result
-	end
-
-	# Can the specified value be inserted without any escaping?
-	private fun is_value_clean(value: String): Bool do
-		for c in value.chars do
-			if c == delimiter then return false
-			if c == separator then return false
-			if eol.chars.has(c) then return false
-		end
-		return true
-	end
+	# The character that ends a record (end of line).
+	var eol = "\n" is writable
 end
 
 # A CSV document representation.
 class CsvDocument
 	super Writable
-
-	# The format to use.
-	#
-	# Defaults to `rfc4180`.
-	var format: CsvFormat = rfc4180 is writable
+	super CsvStream
 
 	# The header.
 	#
 	# Contains the name of all fields in this table.
-	var header: Array[String] = new Array[String] is writable
+	var header = new Array[String] is writable, optional
 
 	# The list of the records.
 	#
 	# All records must have the same length than `header`.
-	var records: Array[Array[String]] = new Array[Array[String]]
+	var records = new Array[Array[String]] is writable, optional
 
-	# Replace the header by the specified row.
-	fun set_header(values: Object...) do
-		header.clear
-		for value in values do header.add(value.to_s)
-	end
-
-	# Append the specfied record.
-	fun add_record(values: Object...) do
-		assert values.length == header.length else
-			sys.stderr.write "CSV error: Header declares {header.length} columns, record contains {values.length} values.\n"
-		end
-		var record = new Array[String]
-		for value in values do record.add(value.to_s)
-		records.add(record)
+	# Adds a new record to document containing the values in `objs`
+	fun add_record(objs: Object...) do
+		var ln = new Array[String].with_capacity(objs.length)
+		for i in objs do ln.add(i.to_s)
+		records.add ln
 	end
 
 	redef fun write_to(stream) do
-		var writer = new CsvWriter.with_format(stream, format)
-		writer.write_sequence(header)
-		for record in records do writer.write_sequence(record)
+		var s = new CsvWriter(stream)
+		s.separator = separator
+		s.eol = eol
+		s.delimiter = delimiter
+		if not header.is_empty then
+			s.write_line header
+		end
+		s.write_lines(records)
 	end
-
-	# Deprecated alias for `write_to_file`.
-	fun save(file: String) do write_to_file(file)
 
 	# Load from the specified stream.
 	#
 	# Parameters:
 	#
 	# * `stream`: Input stream.
-	# * `has_header`: Is the first row the header?
-	# * `skip_empty`: Do we skip the empty lines?
-	# For details, see `CsvReader.skip_empty`.
-	fun load_from(stream: Reader, has_header: Bool, skip_empty: Bool) do
-		var reader = new CsvReader.with_format(stream, format)
+	# * `has_header`: Is the first record the header? - defaults to true
+	# * `skip_empty`: Do we skip the empty lines? - defaults to true
+	fun load_from(stream: Reader, has_header: nullable Bool, skip_empty: nullable Bool) do
+		if has_header == null then has_header = true
+		if skip_empty == null then skip_empty = true
+		var reader = new CsvReader(stream)
+		reader.separator = separator
+		reader.eol = eol
+		reader.delimiter = delimiter
 		reader.skip_empty = skip_empty
-		if has_header then
-			if reader.is_ok then
-				header = reader.item
-			else
-				header.clear
-			end
-		end
-		records.clear
-		for record in reader do records.add(record)
-	end
-
-	# Load from the specified file.
-	#
-	# Parameters:
-	#
-	# * `path`: Path of the file.
-	# * `has_header`: Is the first row the header?
-	# * `skip_empty`: Do we skip the empty lines?
-	fun load(path: String, has_header: Bool, skip_empty: Bool) do
-		var istream = new FileReader.open(path)
-		load_from(istream, has_header, skip_empty)
-		istream.close
 	end
 end
 
-# Appends CSV rows to a file.
+# Appends CSV records to a file.
 #
 # By default, uses the format recommended by RFC 4180 (see `rfc4180`).
 #
-# Note: If a row contains only an empty cell, its representation is
+# Note: If a record contains only an empty cell, its representation is
 # undistinguishable from an empty line. This is because the empty values are
 # always written unescaped in order to avoid them to be interpreted as escaped
 # delimiters by some parsers.
@@ -143,240 +176,167 @@ end
 # ~~~nit
 # var out = new StringWriter
 # var writer = new CsvWriter(out)
-# writer.write_row(1, 2.0, "foo\nbar")
-# writer.write_sequence([""])
-# assert out.to_s == """1,2.0,"foo\nbar"\r\n\r\n"""
+# writer.write_elements(1, 2.0, "foo\nbar")
+# writer.write_line([""])
+# assert out.to_s == """1,2.0,"foo\nbar"\n\n"""
 # ~~~
 class CsvWriter
+	super CsvStream
 
 	# The output stream.
 	var ostream: Writer
 
-	# The format to use.
-	#
-	# Defaults to `rfc4180`.
-	var format: CsvFormat = rfc4180
+	# Write several lines to a stream
+	fun write_lines(lines: Array[Array[Object]]) do for i in lines do write_line i
 
-	# Do we escape all cells (except empty ones)?
-	#
-	# If `false` (the default), escape only cells that contain a metacharacter
-	# of the format. In all cases, empty cells are not escaped. This option
-	# permits to choose between the optimization of the performances (when
-	# `true`) and optimization of the size of the output (when `false`).
-	#
-	# Note: Escaping may not be correctly recognized by some parsers.
-	var always_escape = false is writable
-
-	# Create a new writer with the specified format.
-	init with_format(ostream:Writer, format: CsvFormat) do
-		init(ostream)
-		self.format = format
-	end
-
-	# Append the specified sequence as a row.
+	# Append the elements in `els` as a record.
 	#
 	# The representation of each cell is determined by `to_s`.
-	fun write_sequence(row: SequenceRead[Object]) do
-		if not row.is_empty then
-			var i = row.iterator
-			var separator = format.separator.to_s
-			write_cell i.item.to_s
-			i.next
-			for cell in i do
-				ostream.write separator
-				write_cell cell.to_s
-			end
+	fun write_elements(els: Object...) do
+		var os = ostream
+		var esc = delimiter
+		var sep = separator
+		var eol = eol
+		for i in [0 .. els.length - 1[ do
+			os.write(els[i].to_s.escape_to_csv(sep, esc, eol))
+			os.write_char(sep)
 		end
-		ostream.write format.eol
+		os.write(els.last.to_s.escape_to_csv(sep, esc, eol))
+		os.write(eol)
 	end
 
-	# Append the specified row.
+	# Append the specified record.
 	#
 	# The representation of each cell is determined by `to_s`.
-	fun write_row(row: Object...) do write_sequence(row)
-
-	# Close the output stream.
-	fun close do ostream.close
-
-	private fun write_cell(cell: String) do
-		if cell.is_empty then return
-		if not always_escape and format.is_value_clean(cell) then
-			ostream.write cell
-		else
-			ostream.write format.escape_cell(cell)
+	fun write_line(line: Array[Object]) do
+		var os = ostream
+		var esc = delimiter
+		var sep = separator
+		var eol = eol
+		for i in [0 .. line.length - 1[ do
+			os.write(line[i].to_s.escape_to_csv(sep, esc, eol))
+			os.write_char(sep)
 		end
+		os.write(line.last.to_s.escape_to_csv(sep, esc, eol))
+		os.write(eol)
 	end
 end
 
-# Reads rows from a CSV file.
+# Reads records from a CSV file.
 #
-# By default, uses the format recommended by RFC 4180 (see `rfc4180`).
+# By default, the format recognizes EOLs as `\n`
 #
 # ~~~nit
-# var example = new StringReader("""
-# foo,bar\r
-# "Hello, word!",1234.5 + 42\r
-# "Something\r
-# ""else""\", baz\r
-# """)
-# var reader = new CsvReader(example)
-# var table = new Array[Array[String]]
+# var example = """
+# foo,bar
+# "Hello, word!",1234.5 + 42
+# "Something
+# ""else""\", baz
+# """
+# var reader = new CsvReader.from_string(example)
+# var table = reader.read_all
 #
-# for row in reader do table.add row
-# assert table == [
-# 			["foo","bar"],
-# 			["Hello, word!","1234.5 + 42"],
-# 			["Something\r\n\"else\""," baz"]
-# 		]
+# assert table.header  == ["foo","bar"]
+# assert table.records == [["Hello, word!","1234.5 + 42"],
+# 			["Something\n\"else\""," baz"]]
 # ~~~
 class CsvReader
-	super Iterator[Array[String]]
+	super CsvStream
 
 	# The input stream.
 	var istream: Reader
 
-	# The format to use.
-	#
-	# Defaults to `rfc4180`.
-	var format: CsvFormat = rfc4180 is lazy
-
 	# Do we skip the empty lines?
 	#
 	# Note: Even if this attribute is `false`, the presence of an line ending at
-	# end of the last row does not change the number of returned rows.
+	# end of the last record does not change the number of returned record.
 	# This is because the line endings are processed as terminators, not as
 	# separators. Therefore, when there is more than one line ending at the end
-	# of the file, the additional lines are interpreted as empty rows that
+	# of the file, the additional lines are interpreted as empty records that
 	# are skipped only if `skip_empty` is set to `true`.
 	#
 	# `false` by default.
 	var skip_empty: Bool = false is writable
 
-	# The last read row.
-	private var row: nullable Array[String] = null
+	# Creates a new CSVReader from a `string` data
+	init from_string(s: String) do init(new StringReader(s))
 
-	# Did we read something?
-	private var started = false
-
-	# Create a new reader with the specified format.
-	init with_format(istream:Reader, format: CsvFormat) do
-		init(istream)
-		self.format = format
-	end
-
-	# Read the first row, if needed.
-	fun prepare do
-		if not started then
-			row = read_row
-			started = true
-		end
-	end
-
-	redef fun next do
-		prepare
-		assert is_ok else
-			sys.stderr.write "Already at the end of the stream.\n"
-		end
-		row = read_row
-	end
-
-	# Return the last read row.
-	redef fun item do
-		prepare
-		return row.as(not null)
-	end
-
-	redef fun is_ok do
-		prepare
-		return row != null
-	end
-
-	# Free some internal ressources and set `is_ok` to `false`.
+	# Reads the content of the Stream and interprets it as a CSV Document
 	#
-	# Do not close the input stream.
-	redef fun finish do row = null
-
-	# Close the input stream.
-	fun close do istream.close
-
-	private fun read_row: nullable Array[String] do
-		if istream.eof then return null
-		var row = new Array[String]
-		var value = new RopeBuffer
-
-		# Number of unescaped characters since the last delimiter or separator.
-		var unescaped = 0
-
-		# Do we read the start of a row?
-		var got_row = false
-
-		# Do we found a delimited string in the current cell?
-		var got_delimiter = false
-
-		loop
-			var c = istream.read_char
-
-			if c == null then
-				if got_row then
-					row.add value.to_s
-					return row
-				else
-					return null
-				end
-			end
-
-			if c == format.delimiter then
-				if got_delimiter and unescaped == 0 then
-					# Got an escaped delimiter.
-					value.add format.delimiter
-				end
-				# Read all bytes until the delimiter.
-				loop
-					c = istream.read_char
-					assert not_eof: c != null else
-						sys.stderr.write "Unexpected end of file before the end of a delimited value.\n"
+	# Optional parameter `has_header` determines whether the first line
+	# of the CSV Document is header data.
+	# Defaults to true
+	fun read_all(has_header: nullable Bool): CsvDocument do
+		var header: nullable Array[String] = null
+		if has_header == null then has_header = true
+		var iss = istream
+		var res_data = new Array[Array[String]]
+		var eol_st = eol.first
+		var line = new Array[String]
+		var esc = delimiter
+		var sep = separator
+		var eol = eol
+		var is_eol = false
+		var eol_buf = new Buffer.with_cap(eol.length)
+		var c = iss.read_char
+		var el = new Buffer
+		while not iss.eof do
+			if c == null then continue
+			loop
+				if c == esc then
+					c = iss.read_char
+					loop
+						if c == esc then
+							c = iss.read_char
+							if c != esc then break
+						end
+						if c == null then break
+						el.add c
+						c = iss.read_char
 					end
-					if c == format.delimiter then break
-					value.add c
 				end
-				unescaped = 0
-				got_row = true
-				got_delimiter = true
-			else if c == format.separator then
-				# Flush the value to the row.
-				row.add value.to_s
-				value.clear
-				unescaped = 0
-				got_delimiter = false
-			else
-				value.add c
-				unescaped += 1
-				if unescaped >= format.eol.length and
-						value.has_suffix(format.eol) then
-					var value_trimed = value.substring(0,
-							value.length - format.eol.length).to_s
-					if skip_empty and row.is_empty and
-							value_trimed.is_empty and
-							not got_delimiter then
-						# Skip the empty line.
-						value.clear
-						unescaped = 0
-						got_row = false
-					else
-						row.add value_trimed
-						return row
+				if c == sep then break
+				if c == eol_st then
+					eol_buf.add c.as(not null)
+					is_eol = true
+					for i in [1 .. eol.length[ do
+						c = iss.read_char
+						if c == null or c != eol[i] then
+							is_eol = false
+							el.append(eol_buf)
+							eol_buf.clear
+							break
+						end
+						eol_buf.add c
 					end
-				else
-					got_row = true
+					if not is_eol then continue
+					eol_buf.clear
+					break
 				end
+				if c == sep then break
+				el.add c.as(not null)
+				c = iss.read_char
+				if c == null then break
 			end
+			line.add el.to_s
+			el.clear
+			if is_eol or iss.eof then
+				c = iss.read_char
+				is_eol = false
+				if skip_empty and line.is_empty then
+					continue
+				end
+				if has_header and header == null then
+					header = line
+				else res_data.add line
+				line = new Array[String]
+			end
+			if c == sep then c = iss.read_char
 		end
+		if header == null then header = new Array[String]
+		var doc = new CsvDocument
+		doc.header = header
+		doc.records = res_data
+		return doc
 	end
 end
-
-# The CSV format recommended by [RFC 4180](https://tools.ietf.org/html/rfc4180).
-#
-# * `delimiter`: `'"'`
-# * `separator`: `','`
-# * `eol`: `"\r\n"`
-fun rfc4180: CsvFormat do return once new CsvFormat('"', ',', "\r\n")

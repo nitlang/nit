@@ -46,7 +46,7 @@ class HttpResponse
 		# Set the content length if not already set
 		if not header.keys.has("Content-Length") then
 			# Size of the body
-			var len = body.bytelen
+			var len = body.byte_length
 
 			# Size of included files
 			for path in files do
@@ -97,7 +97,8 @@ class HttpStatusCodes
 	# All know code and their message
 	var codes = new HashMap[Int, String]
 
-	protected init do insert_status_codes
+	# Init the status `codes` list.
+	protected init is old_style_init do insert_status_codes
 
 	# Get the message associated to the status `code`, return `null` in unknown
 	fun [](code: Int): nullable String

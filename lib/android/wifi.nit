@@ -146,13 +146,13 @@ extern class NativeScanResult in "Java" `{ android.net.wifi.ScanResult `}
 end
 
 # Java list of `NativeScanResult`
-extern class NativeListOfScanResult in "Java" `{ java.util.List `}
+extern class NativeListOfScanResult in "Java" `{ java.util.List<android.net.wifi.ScanResult> `}
 
 	# Number of elements in this list
 	fun length: Int in "Java" `{ return self.size();`}
 
 	# Element at `index`
 	fun [](index: Int): NativeScanResult in "Java" `{
-		return ((java.util.List<android.net.wifi.ScanResult>)self).get((int)index);
+		return self.get((int)index);
 	`}
 end

@@ -16,86 +16,29 @@
 module web_base
 
 import model::model_views
-import nitcorn
-import json
-
-# Nitcorn server runned by `nitweb`.
-#
-# Usage:
-#
-# ~~~nitish
-# var srv = new NitServer("localhost", 3000)
-# srv.routes.add new Route("/", new MyAction)
-# src.listen
-# ~~~
-class NitServer
-
-	# Host to bind.
-	var host: String
-
-	# Port to use.
-	var port: Int
-
-	# Routes knwon by the server.
-	var routes = new Array[Route]
-
-	# Start listen on `host:port`.
-	fun listen do
-		var iface = "{host}:{port}"
-		print "Launching server on http://{iface}/"
-
-		var vh = new VirtualHost(iface)
-		for route in routes do vh.routes.add route
-
-		var fac = new HttpFactory.and_libevent
-		fac.config.virtual_hosts.add vh
-		fac.run
-	end
-end
-
-# Specific nitcorn Action for nitweb.
-class NitAction
-	super Action
-
-	# Link to the NitServer that runs this action.
-	var srv: NitServer
-
-	# Build a custom http response for errors.
-	fun render_error(code: Int, message: String): HttpResponse do
-		var response = new HttpResponse(code)
-		var tpl = new Template
-		tpl.add "<h1>Error {code}</h1>"
-		tpl.add "<pre><code>{message.html_escape}</code></pre>"
-		response.body = tpl.write_to_string
-		return response
-	end
-
-	# Render a view as a HttpResponse 200.
-	fun render_view(view: NitView): HttpResponse do
-		var response = new HttpResponse(200)
-		response.body = view.render(srv).write_to_string
-		return response
-	end
-
-	# Return a HttpResponse containing `json`.
-	fun render_json(json: Jsonable): HttpResponse do
-		var response = new HttpResponse(200)
-		response.body = json.to_json
-		return response
-	end
-end
+import model::model_json
+import doc_down
+import popcorn
 
 # Specific nitcorn Action that uses a Model
-class ModelAction
-	super NitAction
+class ModelHandler
+	super Handler
 
 	# Model to use.
 	var model: Model
 
+	# MModule used to flatten model.
+	var mainmodule: MModule
+
+	# Find the MEntity ` with `full_name`.
+	fun find_mentity(model: ModelView, full_name: nullable String): nullable MEntity do
+		if full_name == null then return null
+		return model.mentity_by_full_name(full_name.from_percent_encoding)
+	end
+
 	# Init the model view from the `req` uri parameters.
 	fun init_model_view(req: HttpRequest): ModelView do
 		var view = new ModelView(model)
-
 		var show_private = req.bool_arg("private") or else false
 		if not show_private then view.min_visibility = protected_visibility
 
@@ -108,15 +51,191 @@ class ModelAction
 	end
 end
 
-# A NitView is rendered by an action.
-interface NitView
-	# Renders this view and returns something that can be written to a HTTP response.
-	fun render(srv: NitServer): Writable is abstract
+# Specific handler for nitweb API.
+abstract class APIHandler
+	super ModelHandler
+
+	# The JSON API does not filter anything by default.
+	#
+	# So we can cache the model view.
+	var view: ModelView is lazy do
+		var view = new ModelView(model)
+		view.min_visibility = private_visibility
+		view.include_fictive = true
+		view.include_empty_doc = true
+		view.include_attribute = true
+		view.include_test_suite = true
+		return view
+	end
+
+	# Try to load the mentity from uri with `/:id`.
+	#
+	# Send 400 if `:id` is null.
+	# Send 404 if no entity is found.
+	# Return null in both cases.
+	fun mentity_from_uri(req: HttpRequest, res: HttpResponse): nullable MEntity do
+		var id = req.param("id")
+		if id == null then
+			res.error 400
+			return null
+		end
+		var mentity = find_mentity(view, id)
+		if mentity == null then
+			res.error 404
+		end
+		return mentity
+	end
 end
 
-redef class HttpRequest
-	# Does the client asked for a json formatted response?
-	#
-	# Checks the URL get parameter `?json=true`.
-	fun is_json_asked: Bool do return bool_arg("json") or else false
+redef class MEntity
+
+	# URL to `self` within the web interface.
+	fun web_url: String do return "/doc/" / full_name
+
+	# URL to `self` within the JSON api.
+	fun api_url: String do return "/api/entity/" / full_name
+
+	redef fun json do
+		var obj = super
+		obj["web_url"] = web_url
+		obj["api_url"] = api_url
+		return obj
+	end
+
+	# Get the full json repesentation of `self` with MEntityRefs resolved.
+	fun api_json(handler: ModelHandler): JsonObject do return json
+end
+
+redef class MEntityRef
+	redef fun json do
+		var obj = super
+		obj["web_url"] = mentity.web_url
+		obj["api_url"] = mentity.api_url
+		obj["name"] = mentity.name
+		obj["mdoc"] = mentity.mdoc_or_fallback
+		obj["visibility"] = mentity.visibility
+		obj["location"] = mentity.location
+		var modifiers = new JsonArray
+		for modifier in mentity.collect_modifiers do
+			modifiers.add modifier
+		end
+		obj["modifiers"] = modifiers
+		var mentity = self.mentity
+		if mentity isa MMethod then
+			obj["msignature"] = mentity.intro.msignature
+		else if mentity isa MMethodDef then
+			obj["msignature"] = mentity.msignature
+		else if mentity isa MVirtualTypeProp then
+			obj["bound"] = to_mentity_ref(mentity.intro.bound)
+		else if mentity isa MVirtualTypeDef then
+			obj["bound"] = to_mentity_ref(mentity.bound)
+		end
+		return obj
+	end
+end
+
+redef class MDoc
+
+	# Add doc down processing
+	redef fun json do
+		var obj = super
+		obj["synopsis"] = synopsis
+		obj["documentation"] = documentation
+		obj["comment"] = comment
+		obj["html_synopsis"] = html_synopsis.write_to_string
+		obj["html_documentation"] = html_documentation.write_to_string
+		obj["html_comment"] = html_comment.write_to_string
+		return obj
+	end
+end
+
+redef class MModule
+	redef fun api_json(handler) do
+		var obj = super
+		obj["intro_mclassdefs"] = to_mentity_refs(collect_intro_mclassdefs(private_view))
+		obj["redef_mclassdefs"] = to_mentity_refs(collect_redef_mclassdefs(private_view))
+		obj["imports"] = to_mentity_refs(in_importation.direct_greaters)
+		return obj
+	end
+end
+
+redef class MClass
+	redef fun api_json(handler) do
+		var obj = super
+		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
+		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
+		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
+		obj["parents"] = to_mentity_refs(collect_parents(private_view))
+		return obj
+	end
+end
+
+redef class MClassDef
+	redef fun json do
+		var obj = super
+		obj["intro"] = to_mentity_ref(mclass.intro)
+		obj["mpackage"] = to_mentity_ref(mmodule.mpackage)
+		return obj
+	end
+
+	redef fun api_json(handler) do
+		var obj = super
+		obj["intro_mpropdefs"] = to_mentity_refs(collect_intro_mpropdefs(private_view))
+		obj["redef_mpropdefs"] = to_mentity_refs(collect_redef_mpropdefs(private_view))
+		return obj
+	end
+end
+
+redef class MProperty
+	redef fun json do
+		var obj = super
+		obj["intro_mclass"] = to_mentity_ref(intro_mclassdef.mclass)
+		obj["mpackage"] = to_mentity_ref(intro_mclassdef.mmodule.mpackage)
+		return obj
+	end
+end
+
+redef class MPropDef
+	redef fun json do
+		var obj = super
+		obj["intro"] = to_mentity_ref(mproperty.intro)
+		obj["intro_mclassdef"] = to_mentity_ref(mproperty.intro.mclassdef)
+		obj["mmodule"] = to_mentity_ref(mclassdef.mmodule)
+		obj["mgroup"] = to_mentity_ref(mclassdef.mmodule.mgroup)
+		obj["mpackage"] = to_mentity_ref(mclassdef.mmodule.mpackage)
+		return obj
+	end
+end
+
+redef class MClassType
+	redef var web_url = mclass.web_url is lazy
+end
+
+redef class MNullableType
+	redef var web_url = mtype.web_url is lazy
+end
+
+redef class MParameterType
+	redef var web_url = mclass.web_url is lazy
+end
+
+redef class MVirtualType
+	redef var web_url = mproperty.web_url is lazy
+end
+
+redef class POSetElement[E]
+	super Jsonable
+
+	# Return JSON representation of `self`.
+	fun json: JsonObject do
+		assert self isa POSetElement[MEntity]
+		var obj = new JsonObject
+		obj["greaters"] = to_mentity_refs(greaters)
+		obj["direct_greaters"] = to_mentity_refs(direct_greaters)
+		obj["direct_smallers"] = to_mentity_refs(direct_smallers)
+		obj["smallers"] = to_mentity_refs(smallers)
+		return obj
+	end
+
+	redef fun to_json do return json.to_json
 end

@@ -20,7 +20,7 @@ import testing
 
 var toolcontext = new ToolContext
 
-toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_file, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show)
+toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_autosav, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show, toolcontext.opt_nitc)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
 toolcontext.process_options(args)
@@ -29,10 +29,6 @@ var args = toolcontext.option_context.rest
 if toolcontext.opt_gen_unit.value then
 	if toolcontext.opt_pattern.value != null then
 		print "Option --pattern cannot be used with --gen-suite"
-		exit(0)
-	end
-	if toolcontext.opt_file.value != null then
-		print "Option --target-file cannot be used with --gen-suite"
 		exit(0)
 	end
 else
@@ -63,6 +59,19 @@ if toolcontext.opt_gen_unit.value then
 	exit(0)
 end
 
+# When testing `nitunit`, disable time.
+if "NIT_TESTING".environ != "" then
+	toolcontext.opt_no_time.value = true
+end
+
+"NIT_TESTING".setenv("true")
+"NIT_TESTING_ID".setenv(pid.to_s)
+"SRAND".setenv("0")
+
+var test_dir = toolcontext.test_dir
+test_dir.mkdir
+"# This file prevents the Nit modules of the directory to be part of the package".write_to_file(test_dir / "packages.ini")
+
 var page = new HTMLTag("testsuites")
 
 if toolcontext.opt_full.value then mmodules = model.mmodules
@@ -84,25 +93,69 @@ end
 
 for m in mmodules do
 	page.add modelbuilder.test_markdown(m)
-	page.add modelbuilder.test_unit(m)
+	var ts = modelbuilder.test_unit(m)
+	if ts != null then page.add ts
 end
 
 var file = toolcontext.opt_output.value
 if file == null then file = "nitunit.xml"
 page.write_to_file(file)
-# print docunits results
-print "DocUnits:"
-if modelbuilder.unit_entities == 0 then
-	print "No doc units found"
-else if modelbuilder.failed_entities == 0 and not toolcontext.opt_noact.value then
-	print "DocUnits Success"
+
+# Print results
+printn "Docunits: Entities: {modelbuilder.total_entities}; Documented ones: {modelbuilder.doc_entities}; With nitunits: {modelbuilder.unit_entities}"
+if modelbuilder.unit_entities == 0 or toolcontext.opt_noact.value then
+	print ""
+else
+	printn "; Failures: "
+	var cpt = modelbuilder.failed_entities
+	if toolcontext.opt_no_color.value then
+		print cpt
+	else if cpt == 0 then
+		print "0".green.bold
+	else
+		print cpt.to_s.red.bold
+	end
 end
-print "Entities: {modelbuilder.total_entities}; Documented ones: {modelbuilder.doc_entities}; With nitunits: {modelbuilder.unit_entities}; Failures: {modelbuilder.failed_entities}"
-# print testsuites results
-print "\nTestSuites:"
-if modelbuilder.total_tests == 0 then
-	print "No test cases found"
-else if modelbuilder.failed_tests == 0 and not toolcontext.opt_noact.value then
-	print "TestSuites Success"
+printn "Test suites: Classes: {modelbuilder.total_classes}; Test Cases: {modelbuilder.total_tests}"
+if modelbuilder.total_tests == 0 or toolcontext.opt_noact.value then
+	print ""
+else
+	printn "; Failures: "
+	var cpt = modelbuilder.failed_tests
+	if toolcontext.opt_no_color.value then
+		print cpt
+	else if cpt == 0 then
+		print "0".green.bold
+	else
+		print cpt.to_s.red.bold
+	end
 end
-print "Class suites: {modelbuilder.total_classes}; Test Cases: {modelbuilder.total_tests}; Failures: {modelbuilder.failed_tests}"
+
+var total = modelbuilder.unit_entities + modelbuilder.total_tests
+var fail = modelbuilder.failed_entities + modelbuilder.failed_tests
+if toolcontext.opt_noact.value then
+	# nothing
+else if total == 0 then
+	var head = "[NOTHING]"
+	if not toolcontext.opt_no_color.value then
+		head = head.yellow
+	end
+	print "{head} No unit tests to execute."
+else if fail == 0 then
+	var head = "[SUCCESS]"
+	if not toolcontext.opt_no_color.value then
+		head = head.green.bold
+	end
+	print "{head} All {total} tests passed."
+else
+	var head = "[FAILURE]"
+	if not toolcontext.opt_no_color.value then
+		head = head.red.bold
+	end
+	print "{head} {fail}/{total} tests failed."
+
+	print "`{test_dir}` is not removed for investigation."
+	exit 1
+end
+
+test_dir.rmdir

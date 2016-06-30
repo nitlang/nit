@@ -17,6 +17,71 @@ module nitlight
 
 import highlight
 
+class NitlightVisitor
+	super HighlightVisitor
+
+	# The current highlight module
+	#
+	# It is used to know when to use anchored local links
+	var current_module: MModule
+
+	# List of all highlighted modules
+	#
+	# It is used to have links that only targets highlighted entities
+	#
+	# Entities outside these modules will not be linked.
+	var mmodules: Collection[MModule]
+
+	redef fun hrefto(entitiy) do return entitiy.href(self)
+end
+
+redef class MEntity
+	private fun href(v: NitlightVisitor): nullable String do return null
+end
+
+redef class MModule
+	redef fun href(v)
+	do
+		if self == v.current_module then return ""
+		if not v.mmodules.has(self) then return null
+		return c_name + ".html"
+	end
+end
+
+redef class MClass
+	redef fun href(v)
+	do
+		# Because we only have code, just link to the introduction
+		return intro.href(v)
+	end
+end
+
+redef class MClassDef
+	redef fun href(v)
+	do
+		var m = mmodule.href(v)
+		if m == null then return null
+		return m + "#" + to_s
+	end
+end
+
+redef class MProperty
+	redef fun href(v)
+	do
+		# Because we only have code, just link to the introduction
+		return intro.href(v)
+	end
+end
+
+redef class MPropDef
+	redef fun href(v)
+	do
+		var m = mclassdef.mmodule.href(v)
+		if m == null then return null
+		return m + "#" + to_s
+	end
+end
+
 var toolcontext = new ToolContext
 
 # Try to colorize, even if programs are non valid
@@ -41,7 +106,7 @@ var args = toolcontext.option_context.rest
 var mmodules = modelbuilder.parse_full(args)
 modelbuilder.run_phases
 
-if opt_full.value then mmodules = model.mmodules
+if opt_full.value then mmodules = modelbuilder.parsed_modules
 
 var dir = opt_dir.value
 if dir != null then
@@ -54,7 +119,7 @@ end
 for mm in mmodules do
 	if dir != null then toolcontext.info("write {dir}/{mm.c_name}.html", 1)
 
-	var v = new HighlightVisitor
+	var v = new NitlightVisitor(mm, mmodules)
 	var prefix = opt_line_id_prefix.value
 	if prefix != null then
 		v.line_id_prefix = prefix.trim

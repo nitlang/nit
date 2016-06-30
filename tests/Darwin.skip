@@ -6,3 +6,4 @@ neo
 mpi
 emscripten
 ui_test
+readline

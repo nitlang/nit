@@ -169,6 +169,16 @@ redef class Int
 		end
 		return res
 	end
+
+	# Is `self` a power of two ?
+	#
+	# ~~~nit
+	# assert not 3.is_pow2
+	# assert 2.is_pow2
+	# assert 1.is_pow2
+	# assert not 0.is_pow2
+	# ~~~
+	fun is_pow2: Bool do return self != 0 and (self & self - 1) == 0
 end
 
 redef class Byte
@@ -409,6 +419,17 @@ fun inf: Float do return 1.0 / 0.0
 # assert (-1.0).sqrt.is_nan
 # ~~~
 fun nan: Float do return 0.0 / 0.0
+
+redef class Comparable
+	# Constraint `self` within `[min..max]`
+	#
+	#     assert 1.clamp(5, 10) == 5
+	#     assert 7.clamp(5, 10) == 7
+	#     assert 15.clamp(5, 10) == 10
+	#     assert 1.5.clamp(1.0, 2.0) == 1.5
+	#     assert "a".clamp("b", "c") == "b"
+	fun clamp(min, max: OTHER): OTHER do return self.max(min).min(max)
+end
 
 redef class Collection[ E ]
 	# Return a random element form the collection

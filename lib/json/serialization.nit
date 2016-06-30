@@ -16,22 +16,22 @@
 
 # Handles serialization and deserialization of objects to/from JSON
 #
-# ## Nity JSON
+# ## Writing JSON with metadata
 #
 # `JsonSerializer` write Nit objects that subclass `Serializable` to JSON,
-# and `JsonDeserializer` can read them. They both use meta-data added to the
+# and `JsonDeserializer` can read them. They both use metadata added to the
 # generated JSON to recreate the Nit instances with the exact original type.
 #
 # For more information on Nit serialization, see: ../serialization/README.md
 #
-# ## Plain JSON
+# ## Writing plain JSON
 #
 # The attribute `JsonSerializer::plain_json` triggers generating plain and
 # clean JSON. This format is easier to read for an human and a non-Nit program,
 # but it cannot be fully deserialized. It can still be read by services from
 # `json::static` and `json::dynamic`.
 #
-# A shortcut to this service is provided by `Serializable::to_plain_json`.
+# A shortcut to these writing services is provided by `Serializable::serialize_to_json`.
 #
 # ### Usage Example
 #
@@ -49,16 +49,28 @@
 # var bob = new Person("Bob", 1986)
 # var alice = new Person("Alice", 1978, bob)
 #
-# assert bob.to_plain_json == """
-# {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}"""
+# assert bob.serialize_to_json(pretty=true, plain=true) == """
+#{
+#	"name": "Bob",
+#	"year_of_birth": 1986,
+#	"next_of_kin": null
+#}"""
 #
-# assert alice.to_plain_json == """
-# {"name": "Alice", "year_of_birth": 1978, "next_of_kin": {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}}"""
+# assert alice.serialize_to_json(pretty=true, plain=true) == """
+#{
+#	"name": "Alice",
+#	"year_of_birth": 1978,
+#	"next_of_kin": {
+#		"name": "Bob",
+#		"year_of_birth": 1986,
+#		"next_of_kin": null
+#	}
+#}"""
 # ~~~
 #
 # ## JSON to Nit objects
 #
-# The `JsonDeserializer` support reading JSON code with minimal meta-data
+# The `JsonDeserializer` support reading JSON code with minimal metadata
 # to easily create Nit object from client-side code or configuration files.
 # Each JSON object must define the `__class` attribute with the corresponding
 # Nit class and the expected attributes with its name in Nit followed by its value.
@@ -81,6 +93,10 @@
 # var deserializer = new JsonDeserializer(json_code)
 #
 # var meet = deserializer.deserialize
+#
+# # Check for errors
+# assert deserializer.errors.is_empty
+#
 # assert meet isa MeetupConfig
 # assert meet.description == "My Awesome Meetup"
 # assert meet.max_participants == null
@@ -90,7 +106,8 @@ module serialization
 
 import ::serialization::caching
 private import ::serialization::engine_tools
-import static
+private import static
+private import string_parser
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
@@ -99,18 +116,18 @@ class JsonSerializer
 	# Target writing stream
 	var stream: Writer
 
-	# Write plain JSON? easier to read but does not support Nit deserialization
+	# Write plain JSON? Standard JSON without metadata for deserialization
 	#
 	# If `false`, the default, serialize to support deserialization:
 	#
-	# * Write meta-data, including the types of the serialized objects so they can
+	# * Write metadata, including the types of the serialized objects so they can
 	#   be deserialized to their original form using `JsonDeserializer`.
 	# * Use references when an object has already been serialized so to not duplicate it.
 	# * Support cycles in references.
 	# * Preserve the Nit `Char` type as an object because it does not exist in JSON.
 	# * The generated JSON is standard and can be read by non-Nit programs.
 	#   However, some Nit types are not represented by the simplest possible JSON representation.
-	#   With the added meta-data, it can be complex to read.
+	#   With the added metadata, it can be complex to read.
 	#
 	# If `true`, serialize for other programs:
 	#
@@ -119,10 +136,19 @@ class JsonSerializer
 	# * Nit objects are serialized for every references, so they can be duplicated.
 	#   It is easier to read but it creates a larger output.
 	# * Does not support cycles, will replace the problematic references by `null`.
-	# * Does not serialize the meta-data needed to deserialize the objects
+	# * Does not serialize the metadata needed to deserialize the objects
 	#   back to regular Nit objects.
-	# * Keys of Nit `HashMap` are converted to their string reprensentation using `to_s`.
+	# * Keys of Nit `HashMap` are converted to their string representation using `to_s`.
 	var plain_json = false is writable
+
+	# Write pretty JSON for human eyes?
+	#
+	# Toggles skipping lines between attributes of an object and
+	# properly indent the written JSON.
+	var pretty_json = false is writable
+
+	# Current indentation level used for writing `pretty_json`
+	private var indent_level = 0
 
 	# List of the current open objects, the first is the main target of the serialization
 	#
@@ -142,7 +168,8 @@ class JsonSerializer
 			if plain_json then
 				for o in open_objects do
 					if object.is_same_serialized(o) then
-						# Cycle detected
+						# Cycle, can't be managed in plain json
+						warn "Cycle detected in serialized object, replacing reference with 'null'."
 						stream.write "null"
 						return
 					end
@@ -152,7 +179,7 @@ class JsonSerializer
 			end
 
 			first_attribute = true
-			object.serialize_to_json self
+			object.accept_json_serializer self
 			first_attribute = false
 
 			if plain_json then open_objects.pop
@@ -162,10 +189,11 @@ class JsonSerializer
 	redef fun serialize_attribute(name, value)
 	do
 		if not plain_json or not first_attribute then
-			stream.write ", "
+			stream.write ","
 			first_attribute = false
 		end
 
+		new_line_and_indent
 		stream.write "\""
 		stream.write name
 		stream.write "\": "
@@ -177,12 +205,26 @@ class JsonSerializer
 		if not plain_json and cache.has_object(object) then
 			# if already serialized, add local reference
 			var id = cache.id_for(object)
-			stream.write "\{\"__kind\": \"ref\", \"__id\": "
+			stream.write "\{"
+			indent_level += 1
+			new_line_and_indent
+			stream.write "\"__kind\": \"ref\", \"__id\": "
 			stream.write id.to_s
+			indent_level -= 1
+			new_line_and_indent
 			stream.write "\}"
 		else
 			# serialize here
 			serialize object
+		end
+	end
+
+	# Write a new line and indent it, only if `pretty_json`
+	private fun new_line_and_indent
+	do
+		if pretty_json then
+			stream.write "\n"
+			for i in indent_level.times do stream.write "\t"
 		end
 	end
 end
@@ -195,10 +237,10 @@ class JsonDeserializer
 	private var text: Text
 
 	# Root json object parsed from input text.
-	private var root: nullable Jsonable is noinit
+	private var root: nullable Object is noinit
 
 	# Depth-first path in the serialized object tree.
-	private var path = new Array[JsonObject]
+	private var path = new Array[Map[String, nullable Object]]
 
 	# Last encountered object reference id.
 	#
@@ -207,7 +249,7 @@ class JsonDeserializer
 
 	init do
 		var root = text.parse_json
-		if root isa JsonObject then path.add(root)
+		if root isa Map[String, nullable Object] then path.add(root)
 		self.root = root
 	end
 
@@ -243,7 +285,7 @@ class JsonDeserializer
 			return null
 		end
 
-		if object isa JsonObject then
+		if object isa Map[String, nullable Object] then
 			var kind = null
 			if object.keys.has("__kind") then
 				kind = object["__kind"]
@@ -355,7 +397,7 @@ class JsonDeserializer
 				var array_type = types.first
 
 				var typed_array
-				if array_type == "FlatString" then
+				if array_type == "ASCIIFlatString" or array_type == "UnicodeFlatString" then
 					if has_nullable then
 						typed_array = new Array[nullable FlatString]
 					else typed_array = new Array[FlatString]
@@ -442,7 +484,7 @@ class JsonDeserializer
 	# deserialized = deserializer.deserialize
 	# assert deserialized isa MyError
 	# ~~~
-	protected fun class_name_heuristic(json_object: JsonObject): nullable String
+	protected fun class_name_heuristic(json_object: Map[String, nullable Object]): nullable String
 	do
 		return null
 	end
@@ -467,15 +509,50 @@ redef class Text
 		return res
 	end
 
-	redef fun serialize_to_json(v) do v.stream.write(to_json)
+	redef fun accept_json_serializer(v) do v.stream.write(to_json)
 end
 
 redef class Serializable
-	private fun serialize_to_json(v: JsonSerializer)
+
+	# Serialize `self` to JSON
+	#
+	# Set `plain = true` to generate standard JSON, without deserialization metadata.
+	# Use this option if the generated JSON will be read by other programs or humans.
+	# Use the default, `plain = false`, if the JSON is to be deserialized by a Nit program.
+	#
+	# Set `pretty = true` to generate pretty JSON for human eyes.
+	# Use the default, `pretty = false`, to generate minified JSON.
+	#
+	# This method should not be refined by subclasses,
+	# instead `accept_json_serializer` can customize the serialization of an object.
+	#
+	# See: `JsonSerializer`
+	fun serialize_to_json(plain, pretty: nullable Bool): String
+	do
+		var stream = new StringWriter
+		var serializer = new JsonSerializer(stream)
+		serializer.plain_json = plain or else false
+		serializer.pretty_json = pretty or else false
+		serializer.serialize self
+		stream.close
+		return stream.to_s
+	end
+
+	# Refinable service to customize the serialization of this class to JSON
+	#
+	# This method can be refined to customize the serialization by either
+	# writing pure JSON directly on the stream `v.stream` or
+	# by using other services of `JsonSerializer`.
+	#
+	# Most of the time, it is preferable to refine the method `core_serialize_to`
+	# which is used by all the serialization engines, not just JSON.
+	protected fun accept_json_serializer(v: JsonSerializer)
 	do
 		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
+		v.indent_level += 1
 		if not v.plain_json then
+			v.new_line_and_indent
 			v.stream.write "\"__kind\": \"obj\", \"__id\": "
 			v.stream.write id.to_s
 			v.stream.write ", \"__class\": \""
@@ -483,61 +560,40 @@ redef class Serializable
 			v.stream.write "\""
 		end
 		core_serialize_to(v)
+
+		v.indent_level -= 1
+		v.new_line_and_indent
 		v.stream.write "\}"
-	end
-
-	# Serialize this object to a JSON string with metadata for deserialization
-	fun to_json_string: String
-	do
-		var stream = new StringWriter
-		var serializer = new JsonSerializer(stream)
-		serializer.serialize self
-		stream.close
-		return stream.to_s
-	end
-
-	# Serialize this object to plain JSON
-	#
-	# This is a shortcut using `JsonSerializer::plain_json`,
-	# see its documentation for more information.
-	fun to_plain_json: String
-	do
-		var stream = new StringWriter
-		var serializer = new JsonSerializer(stream)
-		serializer.plain_json = true
-		serializer.serialize self
-		stream.close
-		return stream.to_s
 	end
 end
 
 redef class Int
-	redef fun serialize_to_json(v) do v.stream.write(to_s)
+	redef fun accept_json_serializer(v) do v.stream.write to_s
 end
 
 redef class Float
-	redef fun serialize_to_json(v) do v.stream.write(to_s)
+	redef fun accept_json_serializer(v) do v.stream.write to_s
 end
 
 redef class Bool
-	redef fun serialize_to_json(v) do v.stream.write(to_s)
+	redef fun accept_json_serializer(v) do v.stream.write to_s
 end
 
 redef class Char
-	redef fun serialize_to_json(v)
+	redef fun accept_json_serializer(v)
 	do
 		if v.plain_json then
-			v.stream.write to_s.to_json
+			to_s.accept_json_serializer v
 		else
 			v.stream.write "\{\"__kind\": \"char\", \"__val\": "
-			v.stream.write to_s.to_json
+			to_s.accept_json_serializer v
 			v.stream.write "\}"
 		end
 	end
 end
 
 redef class NativeString
-	redef fun serialize_to_json(v) do to_s.serialize_to_json(v)
+	redef fun accept_json_serializer(v) do to_s.accept_json_serializer(v)
 end
 
 redef class Collection[E]
@@ -545,36 +601,48 @@ redef class Collection[E]
 	private fun serialize_to_pure_json(v: JsonSerializer)
 	do
 			v.stream.write "["
+			v.indent_level += 1
 			var is_first = true
 			for e in self do
 				if is_first then
 					is_first = false
-				else v.stream.write ", "
+				else v.stream.write ","
+				v.new_line_and_indent
 
 				if not v.try_to_serialize(e) then
+					assert e != null # null would have been serialized
 					v.warn("element of type {e.class_name} is not serializable.")
 				end
 			end
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "]"
 	end
 end
 
 redef class SimpleCollection[E]
-	redef fun serialize_to_json(v)
+	redef fun accept_json_serializer(v)
 	do
 		# Register as pseudo object
 		if not v.plain_json then
 			var id = v.cache.new_id_for(self)
-			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write """{"""
+			v.indent_level += 1
+			v.new_line_and_indent
+			v.stream.write """"__kind": "obj", "__id": """
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
 			v.stream.write class_name
-			v.stream.write """", "__items": """
+			v.stream.write """","""
+			v.new_line_and_indent
+			v.stream.write """"__items": """
 		end
 
 		serialize_to_pure_json v
 
 		if not v.plain_json then
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "\}"
 		end
 	end
@@ -596,42 +664,56 @@ redef class SimpleCollection[E]
 end
 
 redef class Map[K, V]
-	redef fun serialize_to_json(v)
+	redef fun accept_json_serializer(v)
 	do
 		# Register as pseudo object
 		var id = v.cache.new_id_for(self)
 
 		if v.plain_json then
 			v.stream.write "\{"
+			v.indent_level += 1
 			var first = true
 			for key, val in self do
 				if not first then
-					v.stream.write ", "
+					v.stream.write ","
 				else first = false
+				v.new_line_and_indent
 
 				var k = key or else "null"
-				v.stream.write k.to_s.to_json
+				k.to_s.accept_json_serializer v
 				v.stream.write ": "
 				if not v.try_to_serialize(val) then
+					assert val != null # null would have been serialized
 					v.warn("element of type {val.class_name} is not serializable.")
 					v.stream.write "null"
 				end
 			end
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "\}"
 		else
-			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write "\{"
+			v.indent_level += 1
+			v.new_line_and_indent
+			v.stream.write """"__kind": "obj", "__id": """
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
 			v.stream.write class_name
 			v.stream.write """", "__length": """
 			v.stream.write length.to_s
 
-			v.stream.write """, "__keys": """
+			v.stream.write ","
+			v.new_line_and_indent
+			v.stream.write """"__keys": """
 			keys.serialize_to_pure_json v
 
-			v.stream.write """, "__values": """
+			v.stream.write ","
+			v.new_line_and_indent
+			v.stream.write """"__values": """
 			values.serialize_to_pure_json v
 
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "\}"
 		end
 	end

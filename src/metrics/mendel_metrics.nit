@@ -82,7 +82,7 @@ private class MendelMetricsPhase
 		var metrics = new MetricSet
 		metrics.register(cnblp, cnvi, cnvs)
 		metrics.collect(mclasses)
-		if csv then metrics.to_csv.save("{out}/mendel.csv")
+		if csv then metrics.to_csv.write_to_file("{out}/mendel.csv")
 
 		var threshold = cnblp.threshold
 		print toolcontext.format_h4("\tlarge mclasses (threshold: {threshold})")
@@ -110,7 +110,7 @@ private class MendelMetricsPhase
 
 		if csv then
 			var csvh = new CsvDocument
-			csvh.format = new CsvFormat('"', ';', "\n")
+			csvh.separator = ';'
 			csvh.header = ["povr", "ovr", "pext", "ext", "pspe", "spe", "prep", "rep", "eq"]
 			for mclass in mclasses do
 				var povr = mclass.is_pure_overrider(model_view).object_id
@@ -124,7 +124,7 @@ private class MendelMetricsPhase
 				var eq = mclass.is_equal(model_view).object_id
 				csvh.add_record(povr, ovr, pext, ext, pspe, spe, prep, rep, eq)
 			end
-			csvh.save("{out}/inheritance_behaviour.csv")
+			csvh.write_to_file("{out}/inheritance_behaviour.csv")
 		end
 	end
 end

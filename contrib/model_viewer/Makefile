@@ -1,9 +1,9 @@
-NITC=../../bin/nitc
-NITLS=../../bin/nitls
+NITC=nitc
+NITLS=nitls
 
 all: bin/model_viewer
 
-bin/model_viewer: $(shell ${NITLS} -M src/model_viewer.nit linux) ${NITC}
+bin/model_viewer: $(shell ${NITLS} -M src/model_viewer.nit linux)
 	${NITC} src/model_viewer.nit -m linux -o $@
 
 check: bin/model_viewer
@@ -13,10 +13,10 @@ check: bin/model_viewer
 # Android
 
 android: bin/model_viewer.apk
-bin/model_viewer.apk: $(shell ${NITLS} -M src/model_viewer.nit android) ${NITC} android/res/
+bin/model_viewer.apk: $(shell ${NITLS} -M src/model_viewer.nit android) android/res/
 	${NITC} src/model_viewer.nit -m android -o $@
 
-android-release: $(shell ${NITLS} -M src/model_viewer.nit android) ${NITC} android/res/
+android-release: $(shell ${NITLS} -M src/model_viewer.nit android) android/res/
 	${NITC} src/model_viewer.nit -m android -o bin/model_viewer.apk --release
 
 android/res/: art/icon.png
@@ -30,10 +30,10 @@ android/res/: art/icon.png
 	convert -resize 144x144 art/icon.png android/res/drawable-xxhdpi/icon.png
 	convert -resize 192x192 art/icon.png android/res/drawable-xxxhdpi/icon.png
 
-bin/model_viewer_vr.apk: $(shell ${NITLS} -M src/model_viewer.nit android) ${NITC} android/res/ android/libs/cardboard.jar
+bin/model_viewer_vr.apk: $(shell ${NITLS} -M src/model_viewer.nit android) android/res/ android/libs/cardboard.jar
 	${NITC} src/model_viewer.nit -m android -m ../../lib/gamnit/depth/vr.nit -o $@
 
 android/libs/cardboard.jar:
 	mkdir -p android/libs
-	curl --progress-bar -o libs/cardboard.jar \
-	https://raw.githubusercontent.com/googlesamples/cardboard-java/master/CardboardSample/libs/cardboard.jar
+	curl --progress-bar -o android/libs/cardboard.jar \
+	https://raw.githubusercontent.com/googlevr/gvr-android-sdk/e226f15c/CardboardSample/libs/cardboard.jar

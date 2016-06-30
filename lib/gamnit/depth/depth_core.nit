@@ -103,6 +103,9 @@ class Mesh
 	# Coordinates on the texture per vertex
 	var texture_coords = new Array[Float] is lazy, writable
 
+	# `GLDrawMode` used to display this mesh, defaults to `gl_TRIANGLES`
+	fun draw_mode: GLDrawMode do return gl_TRIANGLES
+
 	# Create an UV sphere of `radius` with `n_meridians` and `n_parallels`
 	init uv_sphere(radius: Float, n_meridians, n_parallels: Int)
 	do
@@ -153,74 +156,6 @@ class Mesh
 				indices.add a+1
 			end
 		end
-	end
-
-	# Dimensions of this geometry using the min and max of all points on each axis
-	var dimensions: Point3d[Float] is lazy, writable do
-		assert vertices.length % 3 == 0
-
-		var minx = inf
-		var miny = inf
-		var minz = inf
-		var maxx = -inf
-		var maxy = -inf
-		var maxz = -inf
-
-		var i = 0
-		while i < vertices.length do
-			var x = vertices[i]
-			i += 1
-			var y = vertices[i]
-			i += 1
-			var z = vertices[i]
-			i += 1
-
-			minx = minx.min(x)
-			miny = miny.min(y)
-			minz = minz.min(z)
-
-			maxx = maxx.max(x)
-			maxy = maxy.max(y)
-			maxz = maxz.max(z)
-		end
-
-		return new Point3d[Float](maxx-minx, maxy-miny, maxz-minz)
-	end
-
-	# Center of the geometry
-	var center: Point3d[Float] is lazy, writable do
-		assert vertices.length % 3 == 0
-
-		var minx = inf
-		var miny = inf
-		var minz = inf
-		var maxx = -inf
-		var maxy = -inf
-		var maxz = -inf
-
-		var i = 0
-		while i < vertices.length do
-			var x = vertices[i]
-			i += 1
-			var y = vertices[i]
-			i += 1
-			var z = vertices[i]
-			i += 1
-
-			minx = minx.min(x)
-			miny = miny.min(y)
-			minz = minz.min(z)
-
-			maxx = maxx.max(x)
-			maxy = maxy.max(y)
-			maxz = maxz.max(z)
-		end
-
-		var center = new Point3d[Float](
-			(minx+maxx)/2.0,
-			(miny+maxy)/2.0,
-			(minz+maxz)/2.0)
-		return center
 	end
 end
 

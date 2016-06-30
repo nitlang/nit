@@ -93,7 +93,7 @@ redef class NaiveInterpreter
 	end
 
 	# External compiler used to generate the foreign code library
-	private var c_compiler = "gcc"
+	private var c_compiler = "cc"
 end
 
 redef class AModule
@@ -128,11 +128,16 @@ redef class AModule
 		srcs.add_all mmodule.ffi_files
 
 		# Compiler options specific to this module
-		var ldflags = mmodule.ldflags[""].join(" ")
+		var ldflags_array = mmodule.ldflags[""]
+		if ldflags_array.has("-lrt") and system("sh -c 'uname -s 2>/dev/null || echo not' | grep Darwin >/dev/null") == 0 then
+			# Remove -lrt on OS X
+			ldflags_array.remove "-lrt"
+		end
+		var ldflags = ldflags_array.join(" ")
 
 		# Protect pkg-config
 		var pkgconfigs = mmodule.pkgconfigs
-		var pkg_command = ""
+		var pkg_cflags = ""
 		if not pkgconfigs.is_empty then
 			var cmd = "which pkg-config >/dev/null"
 			if system(cmd) != 0 then
@@ -148,17 +153,18 @@ redef class AModule
 				end
 			end
 
-			pkg_command = "`pkg-config --cflags --libs {pkgconfigs.join(" ")}`"
+			pkg_cflags = "`pkg-config --cflags {pkgconfigs.join(" ")}`"
+			ldflags += " `pkg-config --libs {pkgconfigs.join(" ")}`"
 		end
 
 		# Compile each source file to an object file (or equivalent)
 		var object_files = new Array[String]
 		for f in srcs do
-			f.compile(v, mmodule, object_files)
+			f.compile(v, mmodule, object_files, pkg_cflags)
 		end
 
 		# Link everything in a shared library
-		var cmd = "{v.c_compiler} -Wall -shared -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags} {pkg_command}"
+		var cmd = "{v.c_compiler} -Wall -shared -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags}"
 		if system(cmd) != 0 then
 			v.fatal "FFI Error: Failed to link native code using `{cmd}`"
 			return false
@@ -398,14 +404,14 @@ end
 redef class ExternFile
 	# Compile this source file
 	private fun compile(v: NaiveInterpreter, mmodule: MModule,
-		object_files: Array[String]): Bool is abstract
+		object_files: Array[String], pkg_cflags: String): Bool is abstract
 end
 
 redef class ExternCFile
-	redef fun compile(v, mmodule, object_files)
+	redef fun compile(v, mmodule, object_files, pkg_cflags)
 	do
 		var compile_dir = v.compile_dir
-		var cflags = mmodule.cflags[""].join(" ")
+		var cflags = mmodule.cflags[""].join(" ") + " " + pkg_cflags
 		var obj = compile_dir / filename.basename(".c") + ".o"
 
 		var cmd = "{v.c_compiler} -Wall -c -fPIC -I {compile_dir} -g -o {obj} {filename} {cflags}"

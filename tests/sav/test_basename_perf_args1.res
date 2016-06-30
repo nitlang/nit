@@ -1,13 +1,13 @@
  population: 3
  minimum value: 2
- maximum value: 11
- total value: 16
- average value: 5.33
+ maximum value: 12
+ total value: 22
+ average value: 7.33
  distribution:
-  <=2: sub-population=1 (33.33%); cumulated value=2 (12.50%)
-  <=4: sub-population=1 (33.33%); cumulated value=3 (18.75%)
-  <=16: sub-population=1 (33.33%); cumulated value=11 (68.75%)
+  <=2: sub-population=1 (33.33%); cumulated value=2 (9.09%)
+  <=8: sub-population=1 (33.33%); cumulated value=8 (36.36%)
+  <=16: sub-population=1 (33.33%); cumulated value=12 (54.54%)
  list:
-  nit: 11 (68.75%)
-  : 3 (18.75%)
-  ini: 2 (12.50%)
+  nit: 12 (54.54%)
+  : 8 (36.36%)
+  ini: 2 (9.09%)

@@ -70,7 +70,8 @@ end
 redef class WikiSection
 
 	# Output directory (where to ouput the HTML pages for this section).
-	redef fun out_path: String do
+	redef fun out_path do
+		var parent = self.parent
 		if parent == null then
 			return wiki.config.out_dir
 		else
@@ -104,7 +105,7 @@ redef class WikiSection
 	# Copy attached files from `src_path` to `out_path`.
 	private fun copy_files do
 		assert has_source
-		var dir = src_full_path.to_s
+		var dir = src_full_path.as(not null).to_s
 		for name in dir.files do
 			if name == wiki.config_filename then continue
 			if name.has_suffix(".md") then continue
@@ -167,7 +168,8 @@ end
 
 redef class WikiArticle
 
-	redef fun out_path: String do
+	redef fun out_path do
+		var parent = self.parent
 		if parent == null then
 			return wiki.expand_path(wiki.config.out_dir, "{name}.html")
 		else
