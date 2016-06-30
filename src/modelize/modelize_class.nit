@@ -233,7 +233,7 @@ redef class ModelBuilder
 		if mclassdef.is_intro then
 			self.toolcontext.info("{mclassdef} introduces new {mclass.kind} {mclass.full_name}", 3)
 		else
-			self.toolcontext.info("{mclassdef} refine {mclass.kind} {mclass.full_name}", 3)
+			self.toolcontext.info("{mclassdef} refines {mclass.kind} {mclass.full_name}", 3)
 		end
 	end
 
