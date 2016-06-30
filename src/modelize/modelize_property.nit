@@ -88,6 +88,8 @@ redef class ModelBuilder
 		nclassdef.build_properties_is_done = true
 		var mclassdef = nclassdef.mclassdef
 		if mclassdef == null then return # skip error
+		var mclass = mclassdef.mclass
+		var mmodule = mclassdef.mmodule
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
 			if not mclassdef2nclassdef.has_key(superclassdef) then continue
@@ -108,10 +110,10 @@ redef class ModelBuilder
 				var mpropdef = npropdef.mpropdef
 				if mpropdef == null then continue
 				if mpropdef.bound == null then continue
-				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
+				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mmodule) then
 					# Invalidate the bound
 					mpropdef.is_broken = true
-					mpropdef.bound = new MBottomType(mclassdef.mmodule.model)
+					mpropdef.bound = new MBottomType(mmodule.model)
 				end
 			end
 			for npropdef in nclassdef2.n_propdefs do
@@ -126,6 +128,28 @@ redef class ModelBuilder
 			end
 		end
 		process_default_constructors(nclassdef)
+
+		# Check problematic `abstract` methods
+		if mclassdef.is_intro then
+			if mclass.kind == concrete_kind then for s in mclassdef.in_hierarchy.greaters do
+				for p in s.intro_mproperties do
+					if not p isa MMethod or not p.intro.is_abstract then continue
+					if p.intro_mclassdef == mclassdef then
+						toolcontext.advice(nclassdef.hot_location, "abstract-method", "Warning: Concrete class `{mclassdef}` introduces an abstract method `{p.full_name}`.")
+					else
+						var sf = p.lookup_first_definition(mmodule, mclassdef.bound_mtype)
+						if sf.is_abstract then
+							toolcontext.advice(nclassdef.hot_location, "abstract-method", "Warning: Concrete class `{mclassdef}` does not redefine the abstract method `{p.full_name}`.")
+						end
+					end
+				end
+			end
+		else
+			for p in mclassdef.intro_mproperties do
+				if not p isa MMethod or not p.intro.is_abstract then continue
+				toolcontext.advice(nclassdef.hot_location, "abstract-method", "Warning: refinement of `{mclass}` in `{mmodule}` introduces an abstract method `{p.full_name}`.")
+			end
+		end
 	end
 
 	# the root init of the Object class
