@@ -836,7 +836,7 @@ abstract class MType
 			return true
 		end
 
-		assert sub isa MClassType else print "{sub} <? {sub}" # It is the only remaining type
+		assert sub isa MClassType else print "{sub} <? {sup}" # It is the only remaining type
 
 		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
 		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType then
