@@ -43,12 +43,12 @@ private class InheritanceMetricsPhase
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
 		var hmetrics = new MetricSet
-		hmetrics.register(new MDUI(mainmodule))
-		hmetrics.register(new MDUIC(mainmodule))
-		hmetrics.register(new MDUII(mainmodule))
-		hmetrics.register(new MIF(mainmodule))
-		hmetrics.register(new MIFC(mainmodule))
-		hmetrics.register(new MIFI(mainmodule))
+		hmetrics.register(new MDUI(mainmodule, model_view))
+		hmetrics.register(new MDUIC(mainmodule, model_view))
+		hmetrics.register(new MDUII(mainmodule, model_view))
+		hmetrics.register(new MIF(mainmodule, model_view))
+		hmetrics.register(new MIFC(mainmodule, model_view))
+		hmetrics.register(new MIFI(mainmodule, model_view))
 
 		var cmetrics = new MetricSet
 		cmetrics.register(new CNOAC(mainmodule, model_view))
@@ -112,9 +112,6 @@ class MDUI
 	redef fun name do return "mdui"
 	redef fun desc do return "proportion of mclass defined using inheritance (has other parent than Object)"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -138,9 +135,6 @@ class MDUIC
 	super FloatMetric
 	redef fun name do return "mduic"
 	redef fun desc do return "proportion of class_kind defined using inheritance"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -170,9 +164,6 @@ class MDUII
 	redef fun name do return "mduii"
 	redef fun desc do return "proportion of interface_kind defined using inheritance"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -201,9 +192,6 @@ class MIF
 	redef fun name do return "mif"
 	redef fun desc do return "proportion of mclass inherited from"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -227,9 +215,6 @@ class MIFC
 	super FloatMetric
 	redef fun name do return "mifc"
 	redef fun desc do return "proportion of class_kind inherited from"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -258,9 +243,6 @@ class MIFI
 	super FloatMetric
 	redef fun name do return "mifi"
 	redef fun desc do return "proportion of interface_kind inherited from"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -539,4 +521,3 @@ redef class MClass
 		return min
 	end
 end
-

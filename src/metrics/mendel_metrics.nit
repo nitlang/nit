@@ -156,8 +156,8 @@ class MBMS
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
-			var totc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-			totc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+			var totc = mmodule.collect_intro_mclassdefs(model_view).length
+			totc += mmodule.collect_redef_mclassdefs(model_view).length
 			var ditc = mmodule.in_importation.depth
 			values[mmodule] = totc.to_f / (ditc + 1).to_f
 		end
@@ -199,7 +199,7 @@ class MNVI
 	redef fun desc do return "module novelty index, contribution of the module to its branch in term of introductions"
 
 	redef fun collect(mmodules) do
-		var mbms = new MBMS
+		var mbms = new MBMS(mainmodule, model_view)
 		for mmodule in mmodules do
 			# compute branch mean size
 			var parents = mmodule.in_importation.direct_greaters
@@ -207,8 +207,8 @@ class MNVI
 				mbms.clear
 				mbms.collect(new HashSet[MModule].from(parents))
 				# compute module novelty index
-				var locc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-				locc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+				var locc = mmodule.collect_intro_mclassdefs(model_view).length
+				locc += mmodule.collect_redef_mclassdefs(model_view).length
 				values[mmodule] = locc.to_f / mbms.avg
 			else
 				values[mmodule] = 0.0
@@ -244,11 +244,11 @@ class MNVS
 	redef fun desc do return "module novelty score, importance of the contribution of the module to its branch"
 
 	redef fun collect(mmodules) do
-		var mnvi = new MNVI
+		var mnvi = new MNVI(mainmodule, model_view)
 		mnvi.collect(mmodules)
 		for mmodule in mmodules do
-			var locc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-			locc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+			var locc = mmodule.collect_intro_mclassdefs(model_view).length
+			locc += mmodule.collect_redef_mclassdefs(model_view).length
 			values[mmodule] = mnvi.values[mmodule] * locc.to_f
 		end
 	end
