@@ -359,9 +359,17 @@ end
 # rta redef
 
 redef class RapidTypeAnalysis
-	var cnli = new CNLI
-	var cnlc = new CNLC
+
+	# Class Live Instances
+	var cnli: CNLI is lazy do return new CNLI(mainmodule, modelbuilder.model.protected_view)
+
+	# Class Live Casts
+	var cnlc: CNLC is lazy do return new CNLC(mainmodule, modelbuilder.model.protected_view)
+
+	# Type Live Instances
 	var tnli = new TNLI
+
+	# Rtpe Live Casts
 	var tnlc = new TNLC
 
 	redef fun add_new(recv, mtype) do
@@ -396,4 +404,3 @@ redef class MType
 		return depth + 1
 	end
 end
-

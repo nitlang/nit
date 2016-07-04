@@ -22,6 +22,8 @@ import mmodules_metrics
 import mclasses_metrics
 
 redef class ToolContext
+
+	# Inheritance related metrics phase
 	var inheritance_metrics_phase: Phase = new InheritanceMetricsPhase(self, null)
 end
 
@@ -35,6 +37,9 @@ private class InheritanceMetricsPhase
 		var out = "{toolcontext.opt_dir.value or else "metrics"}/inheritance"
 		out.mkdir
 
+		var model = toolcontext.modelbuilder.model
+		var model_view = model.private_view
+
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
 		var hmetrics = new MetricSet
@@ -46,17 +51,16 @@ private class InheritanceMetricsPhase
 		hmetrics.register(new MIFI(mainmodule))
 
 		var cmetrics = new MetricSet
-		cmetrics.register(new CNOAC(mainmodule))
-		cmetrics.register(new CNOPC(mainmodule))
-		cmetrics.register(new CNOCC(mainmodule))
-		cmetrics.register(new CNODC(mainmodule))
-		cmetrics.register(new CNOPI(mainmodule))
-		cmetrics.register(new CNOCI(mainmodule))
-		cmetrics.register(new CNODI(mainmodule))
-		cmetrics.register(new CDITC(mainmodule))
-		cmetrics.register(new CDITI(mainmodule))
+		cmetrics.register(new CNOAC(mainmodule, model_view))
+		cmetrics.register(new CNOPC(mainmodule, model_view))
+		cmetrics.register(new CNOCC(mainmodule, model_view))
+		cmetrics.register(new CNODC(mainmodule, model_view))
+		cmetrics.register(new CNOPI(mainmodule, model_view))
+		cmetrics.register(new CNOCI(mainmodule, model_view))
+		cmetrics.register(new CNODI(mainmodule, model_view))
+		cmetrics.register(new CDITC(mainmodule, model_view))
+		cmetrics.register(new CDITI(mainmodule, model_view))
 
-		var model = toolcontext.modelbuilder.model
 		var mmodules = new HashSet[MModule]
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
@@ -286,9 +290,6 @@ class CNOAC
 	redef fun name do return "cnoac"
 	redef fun desc do return "number of class_kind ancestor"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -311,9 +312,6 @@ class CNOPC
 	super IntMetric
 	redef fun name do return "cnopc"
 	redef fun desc do return "number of class_kind parent"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -338,9 +336,6 @@ class CNOCC
 	redef fun name do return "cnocc"
 	redef fun desc do return "number of class_kind children"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -363,9 +358,6 @@ class CNODC
 	super IntMetric
 	redef fun name do return "cnodc"
 	redef fun desc do return "number of class_kind descendants"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -390,9 +382,6 @@ class CNOAI
 	redef fun name do return "cnoai"
 	redef fun desc do return "number of interface_kind ancestor"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -415,9 +404,6 @@ class CNOPI
 	super IntMetric
 	redef fun name do return "cnopi"
 	redef fun desc do return "number of interface_kind parent"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -442,9 +428,6 @@ class CNOCI
 	redef fun name do return "cnoci"
 	redef fun desc do return "number of interface_kind children"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -467,9 +450,6 @@ class CNODI
 	super IntMetric
 	redef fun name do return "cnodi"
 	redef fun desc do return "number of interface_kind descendants"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -494,9 +474,6 @@ class CDITC
 	redef fun name do return "cditc"
 	redef fun desc do return "depth in class tree following only class, abstract, extern kind"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.ditc(mainmodule)
@@ -513,9 +490,6 @@ class CDITI
 	redef fun name do return "cditi"
 	redef fun desc do return "depth in class tree following only interface_kind"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.diti(mainmodule)
@@ -526,7 +500,7 @@ end
 # model redef
 
 redef class MClass
-		
+
 	# Class Depth in Inheritance Tree
 	#
 	# Following the longest path composed only of extends edges from self to Object

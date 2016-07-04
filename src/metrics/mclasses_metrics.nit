@@ -21,6 +21,8 @@ import metrics_base
 import model::model_collect
 
 redef class ToolContext
+
+	# MClass related metrics phase
 	var mclasses_metrics_phase: Phase = new MClassesMetricsPhase(self, null)
 end
 
@@ -40,11 +42,11 @@ private class MClassesMetricsPhase
 		print toolcontext.format_h1("\n# MClasses metrics")
 
 		var metrics = new MetricSet
-		metrics.register(new CNOA(mainmodule))
-		metrics.register(new CNOP(mainmodule))
-		metrics.register(new CNOC(mainmodule))
-		metrics.register(new CNOD(mainmodule))
-		metrics.register(new CDIT(mainmodule))
+		metrics.register(new CNOA(mainmodule, model_view))
+		metrics.register(new CNOP(mainmodule, model_view))
+		metrics.register(new CNOC(mainmodule, model_view))
+		metrics.register(new CNOD(mainmodule, model_view))
+		metrics.register(new CDIT(mainmodule, model_view))
 		metrics.register(new CNBP(mainmodule, model_view))
 		metrics.register(new CNBA(mainmodule, model_view))
 		metrics.register(new CNBIP(mainmodule, model_view))
@@ -86,9 +88,15 @@ private class MClassesMetricsPhase
 end
 
 # A metric about MClass
-interface MClassMetric
+abstract class MClassMetric
 	super Metric
 	redef type ELM: MClass
+
+	# Main module used for class linearization
+	var mainmodule: MModule
+
+	# Model view used to collect and filter entities
+	var model_view: ModelView
 end
 
 # Class Metric: Number of Ancestors
@@ -97,9 +105,6 @@ class CNOA
 	super IntMetric
 	redef fun name do return "cnoa"
 	redef fun desc do return "number of ancestor classes"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -115,9 +120,6 @@ class CNOP
 	redef fun name do return "cnop"
 	redef fun desc do return "number of parent classes"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.in_hierarchy(mainmodule).direct_greaters.length
@@ -131,9 +133,6 @@ class CNOC
 	super IntMetric
 	redef fun name do return "cnoc"
 	redef fun desc do return "number of child classes"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -149,9 +148,6 @@ class CNOD
 	redef fun name do return "cnod"
 	redef fun desc do return "number of descendant classes"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.in_hierarchy(mainmodule).smallers.length - 1
@@ -165,9 +161,6 @@ class CDIT
 	super IntMetric
 	redef fun name do return "cdit"
 	redef fun desc do return "depth in class tree"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -183,14 +176,6 @@ class CNBP
 	redef fun name do return "cnbp"
 	redef fun desc do return "number of accessible properties (inherited + local)"
 
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.collect_accessible_mproperties(model_view).length
@@ -204,14 +189,6 @@ class CNBA
 	super IntMetric
 	redef fun name do return "cnba"
 	redef fun desc do return "number of accessible attributes (inherited + local)"
-
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -227,14 +204,6 @@ class CNBIP
 	redef fun name do return "cnbip"
 	redef fun desc do return "number of introduced properties"
 
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.collect_intro_mproperties(model_view).length
@@ -248,14 +217,6 @@ class CNBRP
 	super IntMetric
 	redef fun name do return "cnbrp"
 	redef fun desc do return "number of redefined properties"
-
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -271,14 +232,6 @@ class CNBHP
 	redef fun name do return "cnbhp"
 	redef fun desc do return "number of inherited properties"
 
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.collect_inherited_mproperties(model_view).length
@@ -292,14 +245,6 @@ class CNBLP
 	super IntMetric
 	redef fun name do return "cnblp"
 	redef fun desc do return "number of local properties (intro + redef)"
-
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do

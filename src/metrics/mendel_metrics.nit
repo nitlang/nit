@@ -76,8 +76,8 @@ private class MendelMetricsPhase
 		end
 
 		var cnblp = new CNBLP(mainmodule, model_view)
-		var cnvi = new CNVI(mainmodule)
-		var cnvs = new CNVS(mainmodule)
+		var cnvi = new CNVI(mainmodule, model_view)
+		var cnvs = new CNVS(mainmodule, model_view)
 
 		var metrics = new MetricSet
 		metrics.register(cnblp, cnvi, cnvs)
@@ -137,13 +137,9 @@ class CBMS
 	redef fun name do return "cbms"
 	redef fun desc do return "branch mean size, mean number of introduction available among ancestors"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var totc = mclass.collect_accessible_mproperties(protected_view).length
+			var totc = mclass.collect_accessible_mproperties(model_view).length
 			var ditc = mclass.in_hierarchy(mainmodule).depth
 			values[mclass] = totc.to_f / (ditc + 1).to_f
 		end
@@ -176,12 +172,8 @@ class CNVI
 	redef fun name do return "cnvi"
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
-		var cbms = new CBMS(mainmodule)
+		var cbms = new CBMS(mainmodule, model_view)
 		for mclass in mclasses do
 			# compute branch mean size
 			var parents = mclass.in_hierarchy(mainmodule).direct_greaters
@@ -189,7 +181,7 @@ class CNVI
 				cbms.clear
 				cbms.collect(new HashSet[MClass].from(parents))
 				# compute class novelty index
-				var locc = mclass.collect_accessible_mproperties(protected_view).length
+				var locc = mclass.collect_accessible_mproperties(model_view).length
 				values[mclass] = locc.to_f / cbms.avg
 			else
 				values[mclass] = 0.0
@@ -233,15 +225,11 @@ class CNVS
 	redef fun name do return "cnvs"
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
-		var cnvi = new CNVI(mainmodule)
+		var cnvi = new CNVI(mainmodule, model_view)
 		cnvi.collect(mclasses)
 		for mclass in mclasses do
-			var locc = mclass.collect_local_mproperties(protected_view).length
+			var locc = mclass.collect_local_mproperties(model_view).length
 			values[mclass] = cnvi.values[mclass] * locc.to_f
 		end
 	end
