@@ -113,6 +113,7 @@ class APIRouter
 		use("/inheritance/:id", new APIEntityInheritance(model, mainmodule))
 		use("/graph/", new APIGraphRouter(model, mainmodule))
 		use("/docdown/", new APIDocdown(model, mainmodule, modelbuilder))
+		use("/metrics/", new APIMetricsRouter(model, mainmodule))
 	end
 end
 
