@@ -159,7 +159,7 @@ redef class MModule
 		return self.in_importation <= mclass.intro_mmodule
 	end
 
-	# Full hierarchy of introduced ans imported classes.
+	# Full hierarchy of introduced and imported classes.
 	#
 	# Create a new hierarchy got by flattening the classes for the module
 	# and its imported modules.
