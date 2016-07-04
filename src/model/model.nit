@@ -301,14 +301,14 @@ redef class MModule
 				cladef.add_in_hierarchy
 				return c
 			end
-			print("Fatal Error: no primitive class {name} in {self}")
+			print_error("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
 			abort
 		end
 		if cla.length != 1 then
 			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
 			for c in cla do msg += " {c.full_name}"
-			print msg
+			print_error msg
 			#exit(1)
 		end
 		return cla.first
@@ -327,7 +327,7 @@ redef class MModule
 			if res == null then
 				res = mprop
 			else if res != mprop then
-				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
+				print_error("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
 				abort
 			end
 		end
@@ -836,7 +836,7 @@ abstract class MType
 			return true
 		end
 
-		assert sub isa MClassType else print "{sub} <? {sup}" # It is the only remaining type
+		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
 
 		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
 		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType then
@@ -844,7 +844,7 @@ abstract class MType
 			return false
 		end
 
-		assert sup isa MClassType else print "got {sup} {sub.inspect}" # It is the only remaining type
+		assert sup isa MClassType else print_error "got {sup} {sub.inspect}" # It is the only remaining type
 
 		# Now both are MClassType, we need to dig
 
@@ -2136,7 +2136,7 @@ abstract class MProperty
 			end
 		end
 		if res.is_empty then
-			print "All lost! {candidates.join(", ")}"
+			print_error "All lost! {candidates.join(", ")}"
 			# FIXME: should be abort!
 		end
 		return res
