@@ -355,6 +355,29 @@ class CNODC
 	end
 end
 
+# MClass metric: Number of Abstract Class Ancestors
+#
+# Count only absrtract classes
+class CNOAA
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnoaa"
+	redef fun desc do return "number of abstract class ancestors"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind then
+					count += 1
+				end
+			end
+			values[mclass] = count
+		end
+	end
+end
+
 # MClass metric: Number of Interface Ancestors
 #
 # Count only interfaces
