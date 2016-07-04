@@ -19,6 +19,11 @@
 			<span class='glyphicon glyphicon-asterisk'/> Class definitions
 		</a>
 	</li>
+	<li role='presentation'>
+		<a data-toggle='tab' role='tab' data-target='#metrics' aria-controls='metrics' ng-click='entityCtrl.loadStructuralMetrics()'>
+			<span class='glyphicon glyphicon-stats'/> Metrics
+		</a>
+	</li>
 </ul>
 
 <div class='tab-content'>
@@ -53,5 +58,71 @@
 				<div class='graph' ng-bind-html='graph'></div>
 			</div>
 		</div>
+	</div>
+	<div role='tabpanel' class='tab-pane fade' id='metrics'>
+		<div class='card'>
+			<div class='card-heading'>
+				<h3 class='card-title'>Module importation</h3>
+			</div>
+			<div class='card-body container-fluid'>
+				<div class='col-sm-6'>
+					<h4>
+						Importation metrics
+					</h4>
+					<dl class='dl-horizontal'>
+						<dt>{{metrics.mmodule.mnoa.values[mentity.full_name].value}}</dt>
+						<dd>ancestors</dd>
+						<dt>{{metrics.mmodule.mnop.values[mentity.full_name].value}}</dt>
+						<dd>direct parents</dd>
+						<dt>{{metrics.mmodule.mnoc.values[mentity.full_name].value}}</dt>
+						<dd>direct children</dd>
+						<dt>{{metrics.mmodule.mnod.values[mentity.full_name].value}}</dt>
+						<dd>descendants</dd>
+					</dl>
+					<dl class='dl-horizontal'>
+						<dt>{{metrics.mmodule.mdit.values[mentity.full_name].value}}</dt>
+						<dd>Depth in Inheritance Tree</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<div class='card'>
+			<div class='card-heading'>
+				<h3 class='card-title'>Module definitions</h3>
+			</div>
+			<div class='card-body container-fluid'>
+				<div class='col-sm-6'>
+					<h4>
+						Class definition kinds
+						<small>({{metrics.mmodule['mnbi'].values[mentity.full_name].value +
+							metrics.mclass['mnbc'].values[mentity.full_name].value}}
+						class definitions)</small>
+					</h4>
+					<chart-module-definitions-kind chart-id='chartDefinitionsKind'
+						chart-metrics='metrics.mmodule' />
+				</div>
+				<div class='col-sm-6'>
+					<h4>
+						Class definition inheritance
+						<small>({{metrics.mmodule['mnbd'].values[mentity.full_name].value}}
+						accessible definitions)</small>
+					</h4>
+					<chart-module-definitions-inh chart-id='chartDefinitionsInh'
+						chart-metrics='metrics.mmodule' />
+				</div>
+			</div>
+		</div>
+		<metrics-list
+			list-id='classes_inheritance'
+			list-title='Classes inheritance'
+			list-metrics='metrics.mclasses'
+			list-metrics-names='["cdit", "cnoa", "cnop", "cnoc", "cnod"]'
+			list-metrics-default='"cdit"' />
+		<metrics-list
+			list-id='classes_properties'
+			list-title='Classes properties'
+			list-metrics='metrics.mclasses'
+			list-metrics-names='["cnbp", "cnba", "cnbip", "cnbrp", "cnbhp", "cnblp"]'
+			list-metrics-default='"cnbp"' />
 	</div>
 </div>

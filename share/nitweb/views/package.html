@@ -9,6 +9,11 @@
 			<span class='glyphicon glyphicon-object-align-vertical'/> Dependencies
 		</a>
 	</li>
+	<li role='presentation'>
+		<a data-toggle='tab' role='tab' data-target='#metrics' aria-controls='metrics' ng-click='entityCtrl.loadStructuralMetrics()'>
+			<span class='glyphicon glyphicon-stats'/> Metrics
+		</a>
+	</li>
 </ul>
 
 <div class='tab-content'>
@@ -24,5 +29,31 @@
 				<div class='graph' ng-bind-html='graph'></div>
 			</div>
 		</div>
+	</div>
+	<div role='tabpanel' class='tab-pane fade' id='metrics'>
+		<metrics-list
+			list-id='modules_importation'
+			list-title='Modules importation'
+			list-metrics='metrics.mmodules'
+			list-metrics-names='["mdit", "mnoa", "mnop", "mnoc", "mnod"]'
+			list-metrics-default='"mdit"' />
+		<metrics-list
+			list-id='modules_definitions'
+			list-title='Modules content'
+			list-metrics='metrics.mmodules'
+			list-metrics-names='["mnbi", "mnbr", "mnbic", "mnbac", "mnbcc"]'
+			list-metrics-default='"mnbi"' />
+		<metrics-list
+			list-id='classes_inheritance'
+			list-title='Classes inheritance'
+			list-metrics='metrics.mclasses'
+			list-metrics-names='["cdit", "cnoa", "cnop", "cnoc", "cnod"]'
+			list-metrics-default='"cdit"' />
+		<metrics-list
+			list-id='classes_properties'
+			list-title='Classes properties'
+			list-metrics='metrics.mclasses'
+			list-metrics-names='["cnbp", "cnba", "cnbip", "cnbrp", "cnbhp", "cnblp"]'
+			list-metrics-default='"cnbp"' />
 	</div>
 </div>
