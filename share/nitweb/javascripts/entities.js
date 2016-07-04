@@ -210,4 +210,31 @@
 				}
 			};
 		}])
+
+		.directive('entityRating', ['Feedback', function(Feedback, Code) {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/stars.html',
+				link: function ($scope, element, attrs) {
+					$scope.postStar = function(rating) {
+						Feedback.postEntityStar($scope.mentity.full_name, rating,
+						function(data) {
+							$scope.ratings = data;
+						}, function(err) {
+							$scope.err = err;
+						});
+					}
+
+					Feedback.loadEntityStars($scope.mentity.full_name,
+						function(data) {
+							$scope.ratings = data;
+						}, function(err) {
+							$scope.err = err;
+						});
+				}
+			};
+		}])
 })();

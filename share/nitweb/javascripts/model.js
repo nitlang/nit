@@ -95,6 +95,21 @@
 			}
 		}])
 
+		.factory('Feedback', [ '$http', function($http) {
+			return {
+				loadEntityStars: function(id, cb, cbErr) {
+					$http.get(apiUrl + '/feedback/stars/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+				postEntityStar: function(id, rating, cb, cbErr) {
+					$http.post(apiUrl + '/feedback/stars/' + id, {rating: rating})
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
+
 		.factory('DocDown', [ '$http', function($http) {
 			return {
 				postMarkdown: function(md, cb, cbErr) {

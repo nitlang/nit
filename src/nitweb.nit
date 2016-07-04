@@ -60,6 +60,11 @@ private class NitwebPhase
 			catalog.package_page(mpackage)
 		end
 
+		# Prepare mongo connection
+		var mongo = new MongoClient("mongodb://localhost:27017/")
+		var db = mongo.database("nitweb")
+		var collection = db.collection("stars")
+
 		# Run the server
 		var host = toolcontext.opt_host.value or else "localhost"
 		var port = toolcontext.opt_port.value
@@ -67,7 +72,7 @@ private class NitwebPhase
 		var app = new App
 
 		app.use_before("/*", new RequestClock)
-		app.use("/api", new APIRouter(model, modelbuilder, mainmodule, catalog))
+		app.use("/api", new APIRouter(model, modelbuilder, mainmodule, catalog, collection))
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
 		app.use_after("/*", new ConsoleLog)
 
@@ -91,6 +96,9 @@ class APIRouter
 	# Catalog to pass to handlers.
 	var catalog: Catalog
 
+	# Mongo collection used to store ratings.
+	var collection: MongoCollection
+
 	init do
 		use("/catalog", new APICatalogRouter(model, mainmodule, catalog))
 		use("/list", new APIList(model, mainmodule))
@@ -101,6 +109,7 @@ class APIRouter
 		use("/uml/:id", new APIEntityUML(model, mainmodule))
 		use("/linearization/:id", new APIEntityLinearization(model, mainmodule))
 		use("/defs/:id", new APIEntityDefs(model, mainmodule))
+		use("/feedback/", new APIFeedbackRouter(model, mainmodule, collection))
 		use("/inheritance/:id", new APIEntityInheritance(model, mainmodule))
 		use("/graph/", new APIGraphRouter(model, mainmodule))
 		use("/docdown/", new APIDocdown(model, mainmodule, modelbuilder))
