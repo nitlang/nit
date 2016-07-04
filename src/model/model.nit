@@ -75,7 +75,7 @@ redef class Model
 	# Collections of classes grouped by their short name
 	private var mclasses_by_name = new MultiHashMap[String, MClass]
 
-	# Return all class named `name`.
+	# Return all classes named `name`.
 	#
 	# If such a class does not exist, null is returned
 	# (instead of an empty array)
