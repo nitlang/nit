@@ -162,6 +162,25 @@ class MDIT
 	end
 end
 
+# Module Metric: Number of Accessible Definitions (of all kind)
+#
+# count all mclasses accessible by the module
+class MNBD
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnbd"
+	redef fun desc do return "number of definition accessibles in module"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = 0
+			for a in mmodule.collect_ancestors(model_view) do
+				values[mmodule] += a.intro_mclasses.length
+			end
+		end
+	end
+end
+
 # Module Metric: Number of Introduction (of all kind)
 #
 # count all mclasses introduced by the module
