@@ -49,12 +49,12 @@ private class MClassesMetricsPhase
 		metrics.register(new CDIT(mainmodule, model_view))
 		metrics.register(new CNBP(mainmodule, model_view))
 		metrics.register(new CNBA(mainmodule, model_view))
+		metrics.register(new CNBI(mainmodule, model_view))
+		metrics.register(new CNBM(mainmodule, model_view))
+		metrics.register(new CNBV(mainmodule, model_view))
 		metrics.register(new CNBIP(mainmodule, model_view))
 		metrics.register(new CNBRP(mainmodule, model_view))
 		metrics.register(new CNBHP(mainmodule, model_view))
-		#TODO metrics.register(new CNBI) # nb init
-		#TODO metrics.register(new CNBM) # nb methods
-		#TODO metrics.register(new CNBV) # nb vtypes
 
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
@@ -193,6 +193,48 @@ class CNBA
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.collect_accessible_mattributes(model_view).length
+		end
+	end
+end
+
+# Class Metric: Number of MMethods
+class CNBM
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnbm"
+	redef fun desc do return "number of accessible methods (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_accessible_mmethods(model_view).length
+		end
+	end
+end
+
+# Class Metric: Number of Constructors
+class CNBI
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnbi"
+	redef fun desc do return "number of accessible constructors (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_accessible_inits(model_view).length
+		end
+	end
+end
+
+# Class Metric: Number of Virtual Types
+class CNBV
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnbv"
+	redef fun desc do return "number of accessible virtual types (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_accessible_vts(model_view).length
 		end
 	end
 end
