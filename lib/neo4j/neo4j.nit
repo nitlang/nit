@@ -289,7 +289,7 @@ class Neo4jClient
 		assert not labels.is_empty
 
 		# Build the query.
-		var buffer = new RopeBuffer
+		var buffer = new Buffer
 		buffer.append "match n where \{label_0\} in labels(n)"
 		for i in [1..labels.length[ do
 			buffer.append " and \{label_{i}\} in labels(n)"

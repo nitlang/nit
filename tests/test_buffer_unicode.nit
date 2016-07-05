@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var fb: Buffer = new RopeBuffer
-#alt1 fb = new FlatBuffer
+var fb = new FlatBuffer
 
 for i in [0 .. 64[ do fb.add 'A'
 
