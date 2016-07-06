@@ -80,16 +80,7 @@ abstract class ByteReader
 	fun read_byte: nullable Byte is abstract
 
 	# Reads up to `max` bytes from source and stores them in `bytes`
-	fun read_bytes(bytes: NativeString, max: Int): Int do
-		var rd = 0
-		while rd < max and ready(0) do
-			var b = read_byte
-			if b == null then break
-			bytes[rd] = b
-			rd += 1
-		end
-		return rd
-	end
+	fun read_bytes(bytes: NativeString, max: Int): Int is abstract
 
 	# Reads all the content from the source until `eof` is reached
 	#
@@ -150,6 +141,7 @@ class Reader
 	private var lookahead_length: Int = 0
 
 	redef fun read_byte do
+		if eof then return null
 		var llen = lookahead_length
 		if llen == 0 then return null
 		var lk = lookahead
@@ -164,6 +156,7 @@ class Reader
 	end
 
 	redef fun read_bytes(ns, max) do
+		if eof then return 0
 		var llen = lookahead_length
 		if llen == 0 then return 0
 		var rd = max.min(llen)
@@ -173,15 +166,6 @@ class Reader
 			lk.lshift(rd, llen - rd, rd)
 			lookahead_length -= rd
 		else
-			lookahead_length = 0
-		end
-		return rd
-	end
-
-	redef fun append_all_bytes(b) do
-		var rd = lookahead_length
-		if rd > 0 then
-			b.append_ns(lookahead, rd)
 			lookahead_length = 0
 		end
 		return rd
@@ -295,8 +279,7 @@ class Reader
 	# assert i.read_all == txt
 	# ~~~
 	fun read_all: String do
-		var b = new Bytes.empty
-		append_all_bytes(b)
+		var b = read_all_bytes
 		return codec.decode_string(b.items, b.length)
 	end
 
@@ -497,9 +480,7 @@ class LineIterator
 	redef fun item
 	do
 		var line = self.line
-		if line == null then
-			line = stream.read_line
-		end
+		if line == null then line = stream.read_line
 		self.line = line
 		return line
 	end
@@ -668,9 +649,10 @@ class MemoryReader
 
 	redef fun ready(timeout) do return eof
 
-	redef fun eof do return pos >= src.length
+	redef fun eof do return closed or pos >= src.length
 
 	redef fun read_byte do
+		if closed then return null
 		var b = super
 		if b != null then return b
 		if pos < src.length then
@@ -682,21 +664,21 @@ class MemoryReader
 	end
 
 	redef fun read_bytes(ns, ln) do
+		if closed then return 0
 		var rd = super
 		if rd >= ln then return rd
-		ns.fast_cstring(rd)
-		var nspos = 0
-		var ps = pos
-		var seq = src
-		var max = seq.length
-		while ps < max and rd < ln do
-			ns[nspos] = seq[ps]
-			ps += 1
-			rd += 1
-			nspos += 1
+		ln -= rd
+		var s = src
+		var rem_rd = ln.min(s.length - pos)
+		var opos = rd
+		var ipos = pos
+		for i in [0 .. rem_rd[ do
+			ns[opos] = s[ipos]
+			opos += 1
+			ipos += 1
 		end
-		pos = ps
-		return rd
+		pos = ipos
+		return rd + rem_rd
 	end
 
 	# Is `self` closed ?
