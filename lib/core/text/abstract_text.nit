@@ -83,6 +83,9 @@ abstract class Text
 	# implementation of an empty string.
 	protected fun empty: SELFTYPE is abstract
 
+	# Returns a copy of `self` as a Buffer
+	fun to_buffer: Buffer is abstract
+
 	# Gets the first char of the Text
 	#
 	# DEPRECATED : Use self.chars.first instead
@@ -1356,6 +1359,7 @@ abstract class String
 
 	redef fun clone do return self
 
+	redef fun to_buffer do return new Buffer.from_text(self)
 
 	redef fun to_camel_case do
 		if self.is_upper then return self
@@ -1400,6 +1404,8 @@ abstract class Buffer
 	#
 	# DEPRECATED : Use self.chars.[]= instead
 	fun []=(index: Int, item: Char) is abstract
+
+	redef fun to_buffer do return clone
 
 	#~~~nit
 	#	var b = new Buffer
