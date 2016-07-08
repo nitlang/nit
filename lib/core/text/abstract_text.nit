@@ -25,6 +25,7 @@ in "C" `{
 # High-level abstraction for all text representations
 abstract class Text
 	super Comparable
+	super Cloneable
 
 	redef type OTHER: Text
 
@@ -1245,6 +1246,7 @@ abstract class String
 
 	redef fun to_s do return self
 
+	redef fun clone do return self
 	# Concatenates `o` to `self`
 	#
 	#     assert "hello" + "world"  == "helloworld"
@@ -1423,6 +1425,18 @@ abstract class Buffer
 	#
 	# DEPRECATED : Use self.chars.[]= instead
 	fun []=(index: Int, item: Char) is abstract
+
+	#~~~nit
+	#	var b = new Buffer
+	#	b.append("Buffer!")
+	#	var c = b.clone
+	#	assert b == c
+	#~~~
+	redef fun clone do
+		var cln = new Buffer.with_cap(byte_length)
+		cln.append self
+		return cln
+	end
 
 	# Adds a char `c` at the end of self
 	#
