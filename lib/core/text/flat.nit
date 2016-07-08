@@ -1084,11 +1084,12 @@ class FlatBuffer
 			super
 			return
 		end
+		var sits = s._items
 		var bytest = s.char_to_byte_index(from)
 		var bytend = s.char_to_byte_index(from + length - 1)
-		var btln = bytend - bytest + 1
+		var btln = bytend - bytest + sits.char_at(bytend).u8char_len
 		enlarge(btln + _byte_length)
-		s._items.copy_to(_items, btln, bytest, _byte_length)
+		sits.copy_to(_items, btln, bytest, _byte_length)
 		_byte_length += btln
 		_length += length
 	end
