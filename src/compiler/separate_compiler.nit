@@ -256,7 +256,7 @@ class SeparateCompiler
 		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
 			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
 			if classes == null then continue
-			assert classes.length == 1 else print classes.join(", ")
+			assert classes.length == 1 else print_error classes.join(", ")
 			self.box_kinds[classes.first] = self.box_kinds.length + 1
 		end
 	end
