@@ -1390,6 +1390,13 @@ abstract class Buffer
 	# Returns an instance of a subclass of `Buffer` with `i` base capacity
 	new with_cap(i: Int) is abstract
 
+	# Returns an instance of a subclass of `Buffer` with `t` as content
+	new from_text(t: Text) do
+		var ret = new Buffer.with_cap(t.byte_length)
+		ret.append t
+		return ret
+	end
+
 	redef type SELFTYPE: Buffer is fixed
 
 	# Copy-On-Write flag
