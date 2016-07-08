@@ -151,7 +151,7 @@ class GlobalCompiler
 		if self.classids.has_key(mtype) then
 			return self.classids[mtype]
 		end
-		print "No classid for {mtype}"
+		print_error "No classid for {mtype}"
 		abort
 	end
 
@@ -523,7 +523,7 @@ class GlobalCompilerVisitor
 	fun check_valid_reciever(recvtype: MClassType)
 	do
 		if self.compiler.runtime_type_analysis.live_types.has(recvtype) or recvtype.mclass.name == "Object" then return
-		print "{recvtype} is not a live type"
+		print_error "{recvtype} is not a live type"
 		abort
 	end
 
