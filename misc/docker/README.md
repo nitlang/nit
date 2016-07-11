@@ -24,8 +24,8 @@ You can use these images to build then run your programs.
 
 ~~~
 host$ docker run -ti nitlang/nit
-root@ce9b671dd9fc:/root/nit# nitc examples/hello_world.nit
-root@ce9b671dd9fc:/root/nit# ./hello_world
+root@ce9b671dd9fc:/nit# nitc examples/hello_world.nit
+root@ce9b671dd9fc:/nit# ./hello_world
 hello world
 ~~~
 
@@ -37,11 +37,11 @@ In your Dockerfile, write something like:
 FROM nitlang/nit
 
 # Create a workdir
-RUN mkdir -p /root/work
-WORKDIR /root/work
+RUN mkdir -p /work
+WORKDIR /work
 
-# Copy the source code in /root/work/
-COPY . /root/work/
+# Copy the source code in /work/
+COPY . /work/
 
 # Compile
 RUN nitc src/hello.nit --dir . \

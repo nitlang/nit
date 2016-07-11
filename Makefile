@@ -71,7 +71,8 @@ doc/nitc/index.html: bin/nitdoc bin/nitls
 		--piwik-site-id "3"
 
 man:
-	$(MAKE) -C share/man
+	# Setup PATH to find nitc
+	PATH=$$PWD/bin:$$PATH $(MAKE) -C share/man
 
 clean:
 	rm -rf -- doc/stdlib doc/nitc || true
