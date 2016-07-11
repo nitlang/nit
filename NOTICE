@@ -4,8 +4,8 @@ project ( http://nitlanguage.org ).
 Files: *
 Copyright: 2004-2016 Jean Privat <jean@pryen.org>
            2006-2008 Floréal Morandat <morandat@lirmm.fr>
+           2008-2011 Jean-Sebastien Gelinas <calestar@gmail.com>
            2009      Julien Chevalier <chevjulien@gmail.com>
-           2009-2011 Jean-Sebastien Gelinas <calestar@gmail.com>
            2009-2016 Alexis Laferrière <alexis.laf@xymus.net>
            2011      Matthieu Auger <matthieu.auger@gmail.com>
            2011-2016 Alexandre Terrasa <alexandre@moz-code.org>
