@@ -21,8 +21,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 	&& rm -rf /var/lib/apt/lists/*
 
 # Clone and compile
-RUN git clone https://github.com/nitlang/nit.git /root/nit \
-	&& cd /root/nit \
+RUN git clone https://github.com/nitlang/nit.git /nit \
+	&& cd /nit \
 	&& make \
 	&& . misc/nit_env.sh install \
 	# Clean and reduce size
@@ -30,6 +30,6 @@ RUN git clone https://github.com/nitlang/nit.git /root/nit \
 	&& ccache -C \
 	&& rm -rf .git
 
-ENV NIT_DIR /root/nit
+ENV NIT_DIR /nit
 ENV PATH $NIT_DIR/bin:$PATH
 WORKDIR $NIT_DIR

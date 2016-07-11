@@ -63,7 +63,7 @@ ENV ANDROID_NDK /opt/android-ndk
 ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK
 
 # Run tests
-RUN cd /root/nit/tests \
+RUN cd /nit/tests \
 	# Basic tests
 	&& ./testfull.sh || true \
 	&& rm -rf out/ alt/*.nit \
@@ -71,6 +71,3 @@ RUN cd /root/nit/tests \
 	&& ../bin/nitunit ../lib ../contrib || true \
 	&& rm -rf .nitunit \
 	&& ccache -C
-
-WORKDIR /root/nit
-ENTRYPOINT [ "bash" ]

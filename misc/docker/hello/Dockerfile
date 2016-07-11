@@ -1,11 +1,11 @@
 FROM nitlang/nit
 
 # Create a workdir
-RUN mkdir -p /root/work
-WORKDIR /root/work
+RUN mkdir -p /work
+WORKDIR /work
 
-# Copy the source code in /root/work/
-COPY . /root/work/
+# Copy the source code in /work/
+COPY . /work/
 
 # Compile
 RUN nitc src/hello.nit --dir . \
