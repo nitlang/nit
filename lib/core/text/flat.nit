@@ -941,6 +941,38 @@ class FlatBuffer
 		it.set_char_at(ip, item)
 	end
 
+	redef fun insert(s, pos) do
+		assert pos >= 0 and pos <= length
+		if pos == length then
+			append s
+			return
+		end
+		var slen = s.byte_length
+		enlarge(byte_length + slen)
+		var it = _items
+		var shpos = it.char_to_byte_index(pos)
+		rshift_bytes(shpos, slen)
+		s.copy_to_native(it, slen, 0, shpos)
+		length += s.length
+		byte_length += slen
+	end
+
+	redef fun insert_char(c, pos) do
+		assert pos >= 0 and pos <= length
+		if pos == length then
+			add c
+			return
+		end
+		var clen = c.u8char_len
+		enlarge(byte_length + clen)
+		var it = _items
+		var shpos = it.char_to_byte_index(pos)
+		rshift_bytes(shpos, clen)
+		it.set_char_at(shpos, c)
+		length += 1
+		byte_length += clen
+	end
+
 	redef fun add(c)
 	do
 		if written then reset
@@ -1092,6 +1124,19 @@ class FlatBuffer
 		sits.copy_to(_items, btln, bytest, _byte_length)
 		_byte_length += btln
 		_length += length
+	end
+
+	redef fun remove_at(p, len) do
+		if len == null then len = 1
+		if len == 0 then return
+		var its = _items
+		var bst = char_to_byte_index(p)
+		var bend = char_to_byte_index(p + len - 1)
+		bend += its.char_at(bend).u8char_len
+		var blen = bend - bst
+		lshift_bytes(bend, bend - bst)
+		byte_length -= blen
+		length -= len
 	end
 
 	redef fun reverse

@@ -149,6 +149,12 @@ abstract class Text
 	# DEPRECATED : Use self.chars.last_index_of_from instead
 	fun last_index_of_from(item: Char, pos: Int): Int do return chars.last_index_of_from(item, pos)
 
+	# Concatenates `o` to `self`
+	#
+	#     assert "hello" + "world"  == "helloworld"
+	#     assert "" + "hello" + ""  == "hello"
+	fun +(o: Text): SELFTYPE is abstract
+
 	# Gets an iterator on the chars of self
 	#
 	# DEPRECATED : Use self.chars.iterator instead
@@ -1151,6 +1157,108 @@ abstract class Text
 		end
 		return retarr.reversed
 	end
+
+	# Concatenates self `i` times
+	#
+	#~~~nit
+	#	assert "abc" * 4 == "abcabcabcabc"
+	#	assert "abc" * 1 == "abc"
+	#	assert "abc" * 0 == ""
+	#	var b = new Buffer
+	#	b.append("天地")
+	#	b = b * 4
+	#	assert b == "天地天地天地天地"
+	#~~~
+	fun *(i: Int): SELFTYPE is abstract
+
+	# Insert `s` at `pos`.
+	#
+	#~~~nit
+	#	assert "helloworld".insert_at(" ", 5)	== "hello world"
+	#	var b = new Buffer
+	#	b.append("Hello世界")
+	#	b = b.insert_at(" beautiful ", 5)
+	#	assert b == "Hello beautiful 世界"
+	#~~~
+	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
+
+	# Returns a reversed version of self
+	#
+	#     assert "hello".reversed  == "olleh"
+	#     assert "bob".reversed    == "bob"
+	#     assert "".reversed       == ""
+	fun reversed: SELFTYPE is abstract
+
+	# A upper case version of `self`
+	#
+	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
+	fun to_upper: SELFTYPE is abstract
+
+	# A lower case version of `self`
+	#
+	#     assert "Hello World!".to_lower     == "hello world!"
+	fun to_lower : SELFTYPE is abstract
+
+	# Takes a camel case `self` and converts it to snake case
+	#
+	#     assert "randomMethodId".to_snake_case == "random_method_id"
+	#
+	# The rules are the following:
+	#
+	# An uppercase is always converted to a lowercase
+	#
+	#     assert "HELLO_WORLD".to_snake_case == "hello_world"
+	#
+	# An uppercase that follows a lowercase is prefixed with an underscore
+	#
+	#     assert "HelloTheWORLD".to_snake_case == "hello_the_world"
+	#
+	# An uppercase that follows an uppercase and is followed by a lowercase, is prefixed with an underscore
+	#
+	#     assert "HelloTHEWorld".to_snake_case == "hello_the_world"
+	#
+	# All other characters are kept as is; `self` does not need to be a proper CamelCased string.
+	#
+	#     assert "=-_H3ll0Th3W0rld_-=".to_snake_case == "=-_h3ll0th3w0rld_-="
+	fun to_snake_case: SELFTYPE is abstract
+
+	# Takes a snake case `self` and converts it to camel case
+	#
+	#     assert "random_method_id".to_camel_case == "randomMethodId"
+	#
+	# If the identifier is prefixed by an underscore, the underscore is ignored
+	#
+	#     assert "_private_field".to_camel_case == "_privateField"
+	#
+	# If `self` is upper, it is returned unchanged
+	#
+	#     assert "RANDOM_ID".to_camel_case == "RANDOM_ID"
+	#
+	# If there are several consecutive underscores, they are considered as a single one
+	#
+	#     assert "random__method_id".to_camel_case == "randomMethodId"
+	fun to_camel_case: SELFTYPE is abstract
+
+	# Returns a capitalized `self`
+	#
+	# Letters that follow a letter are lowercased
+	# Letters that follow a non-letter are upcased.
+	#
+	# If `keep_upper = true`, already uppercase letters are not lowercased.
+	#
+	# SEE : `Char::is_letter` for the definition of letter.
+	#
+	#     assert "jAVASCRIPT".capitalized == "Javascript"
+	#     assert "i am root".capitalized == "I Am Root"
+	#     assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
+	#     assert "preserve my ACRONYMS".capitalized(keep_upper=true) == "Preserve My ACRONYMS"
+	fun capitalized(keep_upper: nullable Bool): SELFTYPE do
+		if length == 0 then return self
+
+		var buf = new Buffer.with_cap(length)
+		buf.capitalize(keep_upper=keep_upper, src=self)
+		return buf.to_s
+	end
 end
 
 # All kinds of array-based text representations.
@@ -1247,157 +1355,24 @@ abstract class String
 	redef fun to_s do return self
 
 	redef fun clone do return self
-	# Concatenates `o` to `self`
-	#
-	#     assert "hello" + "world"  == "helloworld"
-	#     assert "" + "hello" + ""  == "hello"
-	fun +(o: Text): SELFTYPE is abstract
 
-	# Concatenates self `i` times
-	#
-	#     assert "abc" * 4 == "abcabcabcabc"
-	#     assert "abc" * 1 == "abc"
-	#     assert "abc" * 0 == ""
-	fun *(i: Int): SELFTYPE is abstract
 
-	# Insert `s` at `pos`.
-	#
-	#     assert "helloworld".insert_at(" ", 5)	== "hello world"
-	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
+	redef fun to_camel_case do
+		if self.is_upper then return self
 
-	redef fun substrings is abstract
+		var new_str = new Buffer.with_cap(length)
+		new_str.append self
+		new_str.camel_case
+		return new_str.to_s
+	end
 
-	# Returns a reversed version of self
-	#
-	#     assert "hello".reversed  == "olleh"
-	#     assert "bob".reversed    == "bob"
-	#     assert "".reversed       == ""
-	fun reversed: SELFTYPE is abstract
-
-	# A upper case version of `self`
-	#
-	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
-	fun to_upper: SELFTYPE is abstract
-
-	# A lower case version of `self`
-	#
-	#     assert "Hello World!".to_lower     == "hello world!"
-	fun to_lower : SELFTYPE is abstract
-
-	# Takes a camel case `self` and converts it to snake case
-	#
-	#     assert "randomMethodId".to_snake_case == "random_method_id"
-	#
-	# The rules are the following:
-	#
-	# An uppercase is always converted to a lowercase
-	#
-	#     assert "HELLO_WORLD".to_snake_case == "hello_world"
-	#
-	# An uppercase that follows a lowercase is prefixed with an underscore
-	#
-	#     assert "HelloTheWORLD".to_snake_case == "hello_the_world"
-	#
-	# An uppercase that follows an uppercase and is followed by a lowercase, is prefixed with an underscore
-	#
-	#     assert "HelloTHEWorld".to_snake_case == "hello_the_world"
-	#
-	# All other characters are kept as is; `self` does not need to be a proper CamelCased string.
-	#
-	#     assert "=-_H3ll0Th3W0rld_-=".to_snake_case == "=-_h3ll0th3w0rld_-="
-	fun to_snake_case: SELFTYPE
-	do
+	redef fun to_snake_case do
 		if self.is_lower then return self
 
 		var new_str = new Buffer.with_cap(self.length)
-		var prev_is_lower = false
-		var prev_is_upper = false
-
-		for i in [0..length[ do
-			var char = chars[i]
-			if char.is_lower then
-				new_str.add(char)
-				prev_is_lower = true
-				prev_is_upper = false
-			else if char.is_upper then
-				if prev_is_lower then
-					new_str.add('_')
-				else if prev_is_upper and i+1 < length and chars[i+1].is_lower then
-					new_str.add('_')
-				end
-				new_str.add(char.to_lower)
-				prev_is_lower = false
-				prev_is_upper = true
-			else
-				new_str.add(char)
-				prev_is_lower = false
-				prev_is_upper = false
-			end
-		end
-
+		new_str.append self
+		new_str.snake_case
 		return new_str.to_s
-	end
-
-	# Takes a snake case `self` and converts it to camel case
-	#
-	#     assert "random_method_id".to_camel_case == "randomMethodId"
-	#
-	# If the identifier is prefixed by an underscore, the underscore is ignored
-	#
-	#     assert "_private_field".to_camel_case == "_privateField"
-	#
-	# If `self` is upper, it is returned unchanged
-	#
-	#     assert "RANDOM_ID".to_camel_case == "RANDOM_ID"
-	#
-	# If there are several consecutive underscores, they are considered as a single one
-	#
-	#     assert "random__method_id".to_camel_case == "randomMethodId"
-	fun to_camel_case: SELFTYPE
-	do
-		if self.is_upper then return self
-
-		var new_str = new Buffer
-		var is_first_char = true
-		var follows_us = false
-
-		for i in [0..length[ do
-			var char = chars[i]
-			if is_first_char then
-				new_str.add(char)
-				is_first_char = false
-			else if char == '_' then
-				follows_us = true
-			else if follows_us then
-				new_str.add(char.to_upper)
-				follows_us = false
-			else
-				new_str.add(char)
-			end
-		end
-
-		return new_str.to_s
-	end
-
-	# Returns a capitalized `self`
-	#
-	# Letters that follow a letter are lowercased
-	# Letters that follow a non-letter are upcased.
-	#
-	# If `keep_upper = true`, already uppercase letters are not lowercased.
-	#
-	# SEE : `Char::is_letter` for the definition of letter.
-	#
-	#     assert "jAVASCRIPT".capitalized == "Javascript"
-	#     assert "i am root".capitalized == "I Am Root"
-	#     assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
-	#     assert "preserve my ACRONYMS".capitalized(keep_upper=true) == "Preserve My ACRONYMS"
-	fun capitalized(keep_upper: nullable Bool): SELFTYPE do
-		if length == 0 then return self
-
-		var buf = new Buffer.with_cap(length)
-		buf.capitalize(keep_upper=keep_upper, src=self)
-		return buf.to_s
 	end
 end
 
@@ -1583,11 +1558,152 @@ abstract class Buffer
 	# NOTE: Use only if sure about `from` and `length`, no checks
 	# or bound recalculation is done
 	fun append_substring_impl(s: Text, from, length: Int) do
-		var pos = from
-		for i in [0 .. length[ do
-			self.add s[pos]
+		var max = from + length
+		for i in [from .. max[ do add s[i]
+	end
+
+	redef fun *(i) do
+		var ret = new Buffer.with_cap(byte_length * i)
+		for its in [0 .. i[ do ret.append self
+		return ret
+	end
+
+	redef fun insert_at(s, pos) do
+		var obuf = new Buffer.with_cap(byte_length + s.byte_length)
+		obuf.append_substring(self, 0, pos)
+		obuf.append s
+		obuf.append_substring(self, pos, length - pos)
+		return obuf
+	end
+
+	# Inserts `s` at position `pos`
+	#
+	#~~~nit
+	#	var b = new Buffer
+	#	b.append "美しい世界"
+	#	b.insert(" nit ", 3)
+	#	assert b == "美しい nit 世界"
+	#~~~
+	fun insert(s: Text, pos: Int) is abstract
+
+	# Inserts `c` at position `pos`
+	#
+	#~~~nit
+	#	var b = new Buffer
+	#	b.append "美しい世界"
+	#	b.insert_char(' ', 3)
+	#	assert b == "美しい 世界"
+	#~~~
+	fun insert_char(c: Char, pos: Int) is abstract
+
+	# Removes a substring from `self` at position `pos`
+	#
+	# NOTE: `length` defaults to 1, expressed in chars
+	#
+	#~~~nit
+	#	var b = new Buffer
+	#	b.append("美しい 世界")
+	#	b.remove_at(3)
+	#	assert b == "美しい世界"
+	#	b.remove_at(1, 2)
+	#	assert b == "美世界"
+	#~~~
+	fun remove_at(pos: Int, length: nullable Int) is abstract
+
+	redef fun reversed do
+		var ret = clone
+		ret.reverse
+		return ret
+	end
+
+	redef fun to_upper do
+		var ret = clone
+		ret.upper
+		return ret
+	end
+
+	redef fun to_lower do
+		var ret = clone
+		ret.lower
+		return ret
+	end
+
+	redef fun to_snake_case do
+		var ret = clone
+		ret.snake_case
+		return ret
+	end
+
+	# Takes a camel case `self` and converts it to snake case
+	#
+	# SEE: `to_snake_case`
+	fun snake_case do
+		if self.is_lower then return
+		var prev_is_lower = false
+		var prev_is_upper = false
+
+		var i = 0
+		while i < length do
+			var char = chars[i]
+			if char.is_lower then
+				prev_is_lower = true
+				prev_is_upper = false
+			else if char.is_upper then
+				if prev_is_lower then
+					insert_char('_', i)
+					i += 1
+				else if prev_is_upper and i + 1 < length and self[i + 1].is_lower then
+					insert_char('_', i)
+					i += 1
+				end
+				self[i] = char.to_lower
+				prev_is_lower = false
+				prev_is_upper = true
+			else
+				prev_is_lower = false
+				prev_is_upper = false
+			end
+			i += 1
+		end
+	end
+
+	redef fun to_camel_case
+	do
+		var new_str = clone
+		new_str.camel_case
+		return new_str
+	end
+
+	# Takes a snake case `self` and converts it to camel case
+	#
+	# SEE: `to_camel_case`
+	fun camel_case do
+		if is_upper then return
+
+		var underscore_count = 0
+
+		var pos = 1
+		while pos < length do
+			var char = self[pos]
+			if char == '_' then
+				underscore_count += 1
+			else if underscore_count > 0 then
+				pos -= underscore_count
+				remove_at(pos, underscore_count)
+				self[pos] = char.to_upper
+				underscore_count = 0
+			end
 			pos += 1
 		end
+		if underscore_count > 0 then remove_at(pos - underscore_count - 1, underscore_count)
+	end
+
+	redef fun capitalized(keep_upper) do
+		if length == 0 then return self
+
+		var buf = new Buffer.with_cap(byte_length)
+		buf.capitalize(keep_upper=keep_upper, src=self)
+		return buf
 	end
 end
 
