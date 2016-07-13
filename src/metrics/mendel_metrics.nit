@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The mndel model helps to understand class hierarchies
+# The Mendel model helps to understand class hierarchies.
 #
 # It provides metrics to extract interesting classes:
 #
