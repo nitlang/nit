@@ -39,9 +39,13 @@ redef class MEntity
 
 	# The documentation associated to the entity or their main nested entity.
 	#
-	# MPackage fall-back to their root MGroup
-	# MGroup fall-back to their default_mmodule
-	# Other entities do not fall-back
+	# * `MPackage`s fall back to their root `MGroup`.
+	# * `MGroup`s fall back to their `default_mmodule`.
+	# * `MClass`es, `MClassDef`s, `MProperty`s and `MPropDef`s fall-back to
+	#   their introducing definition.
+	# * `MClassType`s fall back to their wrapped `MClass`.
+	# * `MVirtualType`s fall back to their wrapped `MProperty`.
+	# * Other entities do not fall back.
 	#
 	# One may use `MDoc::original_mentity` to retrieve the original
 	# source of the documentation.
