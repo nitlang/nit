@@ -87,133 +87,6 @@
   bivariants: 0 (na%)
   invariants: 0 (na%)
   total: 0
-
-# MModules metrics
-
- ## package base_simple3
-  `- group base_simple3>
-	mnoa: number of ancestor modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnop: number of parent modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnoc: number of child modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnod: number of descendant modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mdit: depth in module tree
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnbi: number of introduction in module
-	  avg: 7.0
-	  max: base_simple3 (7)
-	  min: base_simple3 (7)
-	  std: 0.0
-	  sum: 7
-	mnbr: number of refinement in module
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnbcc: number of concrete class in module (intro + redef)
-	  avg: 4.0
-	  max: base_simple3 (4)
-	  min: base_simple3 (4)
-	  std: 0.0
-	  sum: 4
-	mnbac: number of abstract class in module (intro + redef)
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnbic: number of interface in module (intro + redef)
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
-	  std: 0.0
-	  sum: 1
-
- ## global metrics
-	mnoa: number of ancestor modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnop: number of parent modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnoc: number of child modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnod: number of descendant modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mdit: depth in module tree
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnbi: number of introduction in module
-	  avg: 7.0
-	  max: base_simple3 (7)
-	  min: base_simple3 (7)
-	  std: 0.0
-	  sum: 7
-	mnbr: number of refinement in module
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnbcc: number of concrete class in module (intro + redef)
-	  avg: 4.0
-	  max: base_simple3 (4)
-	  min: base_simple3 (4)
-	  std: 0.0
-	  sum: 4
-	mnbac: number of abstract class in module (intro + redef)
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
-	  std: 0.0
-	  sum: 0
-	mnbic: number of interface in module (intro + redef)
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
-	  std: 0.0
-	  sum: 1
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 1
@@ -410,6 +283,24 @@ generating module_hierarchy.dot
 	  min: Object (0)
 	  std: 0.845
 	  sum: 3
+	cnbi: number of accessible constructors (inherited + local)
+	  avg: 1.0
+	  max: B (2)
+	  min: Object (1)
+	  std: 0.378
+	  sum: 8
+	cnbm: number of accessible methods (inherited + local)
+	  avg: 3.0
+	  max: B (5)
+	  min: Object (1)
+	  std: 1.773
+	  sum: 21
+	cnbv: number of accessible virtual types (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnbip: number of introduced properties
 	  avg: 2.0
 	  max: C (6)
@@ -472,6 +363,24 @@ generating module_hierarchy.dot
 	  min: Object (0)
 	  std: 0.845
 	  sum: 3
+	cnbi: number of accessible constructors (inherited + local)
+	  avg: 1.0
+	  max: B (2)
+	  min: Object (1)
+	  std: 0.378
+	  sum: 8
+	cnbm: number of accessible methods (inherited + local)
+	  avg: 3.0
+	  max: B (5)
+	  min: Object (1)
+	  std: 1.773
+	  sum: 21
+	cnbv: number of accessible virtual types (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
 	cnbip: number of introduced properties
 	  avg: 2.0
 	  max: C (6)
@@ -490,6 +399,133 @@ generating module_hierarchy.dot
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
+
+# MModules metrics
+
+ ## package base_simple3
+  `- group base_simple3>
+	mnoa: number of ancestor modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnop: number of parent modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnoc: number of child modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnod: number of descendant modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mdit: depth in module tree
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnbi: number of introduction in module
+	  avg: 7.0
+	  max: base_simple3 (7)
+	  min: base_simple3 (7)
+	  std: 0.0
+	  sum: 7
+	mnbr: number of refinement in module
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnbcc: number of concrete class in module (intro + redef)
+	  avg: 4.0
+	  max: base_simple3 (4)
+	  min: base_simple3 (4)
+	  std: 0.0
+	  sum: 4
+	mnbac: number of abstract class in module (intro + redef)
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnbic: number of interface in module (intro + redef)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
+
+ ## global metrics
+	mnoa: number of ancestor modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnop: number of parent modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnoc: number of child modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnod: number of descendant modules
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mdit: depth in module tree
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnbi: number of introduction in module
+	  avg: 7.0
+	  max: base_simple3 (7)
+	  min: base_simple3 (7)
+	  std: 0.0
+	  sum: 7
+	mnbr: number of refinement in module
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnbcc: number of concrete class in module (intro + redef)
+	  avg: 4.0
+	  max: base_simple3 (4)
+	  min: base_simple3 (4)
+	  std: 0.0
+	  sum: 4
+	mnbac: number of abstract class in module (intro + redef)
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	mnbic: number of interface in module (intro + redef)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
 
 # Inheritance metrics
 
