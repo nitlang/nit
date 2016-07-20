@@ -72,7 +72,7 @@ private class NitwebPhase
 		var app = new App
 
 		app.use_before("/*", new RequestClock)
-		app.use("/api", new APIRouter(model, modelbuilder, mainmodule, catalog, collection))
+		app.use("/api", new NitwebAPIRouter(model, mainmodule, modelbuilder, catalog, stars))
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
 		app.use_after("/*", new ConsoleLog)
 
@@ -81,17 +81,11 @@ private class NitwebPhase
 end
 
 # Group all api handlers in one router.
-class APIRouter
-	super Router
-
-	# Model to pass to handlers.
-	var model: Model
+class NitwebAPIRouter
+	super APIRouter
 
 	# ModelBuilder to pass to handlers.
 	var modelbuilder: ModelBuilder
-
-	# Mainmodule to pass to handlers.
-	var mainmodule: MModule
 
 	# Catalog to pass to handlers.
 	var catalog: Catalog

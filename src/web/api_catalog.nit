@@ -19,13 +19,7 @@ import catalog
 
 # Group all api handlers in one router.
 class APICatalogRouter
-	super Router
-
-	# Model to pass to handlers.
-	var model: Model
-
-	# Mainmodule to pass to handlers.
-	var mainmodule: MModule
+	super APIRouter
 
 	# Catalog to pass to handlers.
 	var catalog: Catalog

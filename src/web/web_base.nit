@@ -87,6 +87,17 @@ abstract class APIHandler
 	end
 end
 
+# A Rooter dedicated to APIHandlers.
+class APIRouter
+	super Router
+
+	# Model to use.
+	var model: Model
+
+	# MModule used to flatten model.
+	var mainmodule: MModule
+end
+
 redef class MEntity
 
 	# URL to `self` within the web interface.
