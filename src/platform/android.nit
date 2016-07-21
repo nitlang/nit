@@ -104,6 +104,12 @@ class AndroidToolchain
 		dir = compile_dir
 		if not dir.file_exists then dir.mkdir
 
+		# Insert an importation of the generated R class to all Java files from the FFI
+		for mod in compiler.mainmodule.in_importation.greaters do
+			var java_ffi_file = mod.java_file
+			if java_ffi_file != null then java_ffi_file.add "import {app_package}.R;"
+		end
+
 		# compile normal C files
 		super
 
@@ -240,7 +246,7 @@ $(call import-module,android/native_app_glue)
 
 		### Link to png sources
 		# libpng is not available on Android NDK
-		# FIXME make obtionnal when we have alternatives to mnit
+		# FIXME make optional when we have alternatives to mnit
 		var nit_dir = toolcontext.nit_dir
 		var share_dir =  nit_dir/"share/"
 		if not share_dir.file_exists then
