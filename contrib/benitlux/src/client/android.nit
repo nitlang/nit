@@ -126,8 +126,7 @@ redef class ItemView
 	init do set_backgroud(native, app.native_context)
 
 	private fun set_backgroud(view: NativeView, context: NativeContext) in "Java" `{
-		int color = context.getResources().getIdentifier("item_background", "color", context.getPackageName());
-		view.setBackgroundResource(color);
+		view.setBackgroundResource(R.color.item_background);
 	`}
 end
 
@@ -141,9 +140,6 @@ end
 
 private fun native_notify(context: NativeService, id: Int, title, content: JavaString)
 in "Java" `{
-	int icon = context.getResources().getIdentifier(
-		"notif", "drawable", context.getPackageName());
-
 	android.app.Notification.BigTextStyle style =
 		new android.app.Notification.BigTextStyle();
 	style.bigText(content);
@@ -156,7 +152,7 @@ in "Java" `{
 	android.app.Notification notif = new android.app.Notification.Builder(context)
 		.setContentTitle(title)
 		.setContentText(content)
-		.setSmallIcon(icon)
+		.setSmallIcon(R.drawable.notif)
 		.setAutoCancel(true)
 		.setOngoing(false)
 		.setStyle(style)
@@ -225,8 +221,7 @@ redef class BeerView
 				rating.setRating(final_rating);
 
 				// Header bar
-				int icon = final_context.getResources().getIdentifier("notif", "drawable", final_context.getPackageName());
-				dialog_builder.setIcon(icon);
+				dialog_builder.setIcon(R.drawable.notif);
 				dialog_builder.setTitle(final_title);
 
 				// Rating control
