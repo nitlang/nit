@@ -26,13 +26,14 @@ bin/scientific.apk: $(shell ${NITLS} -M src/scientific src/android_calculator.ni
 
 android-release: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
 	mkdir -p bin
-	${NITC} -o bin/calculator.apk src/scientific -m src/android_calculator.nit --release
+	${NITC} -o bin/calculator.apk src/android_calculator.nit --release
+	${NITC} -o bin/scientific.apk src/scientific -m src/android_calculator.nit --release
 
 android/res/drawable-hdpi/icon.png: art/icon.svg ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p android/res
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
-src/scientific/android/res/drawable-hdpi/icon.png: art/icon_sci.svg ../../contrib/inkscape_tools/bin/svg_to_icons
+src/scientific/android/res/drawable-hdpi/icon.png: art/icon-sci.svg ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p src/scientific/android/res
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-sci.svg --android --out src/scientific/android/res/
 
