@@ -193,8 +193,8 @@ end
 redef class MModule
 	private var callbacks_used_from_java = new ForeignCallbackSet
 
-	# Pure java class source file
-	private var java_file: nullable JavaClassTemplate = null
+	# Java source file extracted from user FFI code with generated structure
+	var java_file: nullable JavaClassTemplate = null
 
 	# Set up the templates of the Java implementation class
 	private fun ensure_java_files
