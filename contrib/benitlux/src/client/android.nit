@@ -123,9 +123,9 @@ redef class SectionTitle
 end
 
 redef class ItemView
-	init do set_backgroud(native, app.native_context)
+	init do set_background(native, app.native_context)
 
-	private fun set_backgroud(view: NativeView, context: NativeContext) in "Java" `{
+	private fun set_background(view: NativeView, context: NativeContext) in "Java" `{
 		view.setBackgroundResource(R.color.item_background);
 	`}
 end
