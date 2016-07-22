@@ -14,9 +14,13 @@ bin/scientific: $(shell ${NITLS} -M scientific linux) ${NITC}
 # ---
 # Android
 
-android: bin/calculator.apk
+android: bin/calculator.apk bin/scientific.apk
 
-bin/calculator.apk: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
+bin/calculator.apk: $(shell ${NITLS} -M src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
+	mkdir -p bin
+	${NITC} -o $@ src/android_calculator.nit -D debug
+
+bin/scientific.apk: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m src/android_calculator.nit -D debug
 
@@ -41,7 +45,13 @@ android-install: bin/calculator.apk
 # ---
 # iOS
 
-bin/calculator.app: $(shell ${NITLS} -M src/scientific src/ios_calculator.nit) ${NITC} ios/AppIcon.appiconset/Contents.json
+ios: bin/calculator.app bin/scientific.app
+
+bin/calculator.app: $(shell ${NITLS} -M src/ios_calculator.nit) ${NITC} ios/AppIcon.appiconset/Contents.json
+	mkdir -p bin
+	${NITC} -o $@ src/ios_calculator.nit -D debug
+
+bin/scientific.app: $(shell ${NITLS} -M src/scientific src/ios_calculator.nit) ${NITC} src/scientific/ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m src/ios_calculator.nit -D debug
 
