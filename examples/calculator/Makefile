@@ -28,6 +28,10 @@ android/res/drawable-hdpi/icon.png: art/icon.svg ../../contrib/inkscape_tools/bi
 	mkdir -p android/res
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
+src/scientific/android/res/drawable-hdpi/icon.png: art/icon_sci.svg ../../contrib/inkscape_tools/bin/svg_to_icons
+	mkdir -p src/scientific/android/res
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-sci.svg --android --out src/scientific/android/res/
+
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	make -C ../../contrib/inkscape_tools/
 
@@ -44,6 +48,10 @@ bin/calculator.app: $(shell ${NITLS} -M src/scientific src/ios_calculator.nit) $
 ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
 	mkdir -p ios
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-ios.svg --ios --out ios/AppIcon.appiconset/
+
+src/scientific/ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
+	mkdir -p ios
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-ios-sci.svg --ios --out src/scientific/ios/AppIcon.appiconset/
 
 # ---
 # Tests
