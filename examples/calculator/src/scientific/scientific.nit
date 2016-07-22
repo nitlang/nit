@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Extends the portable calculator app with scientific operations
-module scientific_calculator
+module scientific
 
 import calculator
 

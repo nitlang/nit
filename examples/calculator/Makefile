@@ -7,22 +7,22 @@ bin/calculator: $(shell ${NITLS} -M src/calculator.nit linux) ${NITC}
 	mkdir -p bin
 	${NITC} -o $@ src/calculator.nit -m linux
 
-bin/scientific_calculator: $(shell ${NITLS} -M src/scientific_calculator.nit linux) ${NITC}
+bin/scientific: $(shell ${NITLS} -M scientific linux) ${NITC}
 	mkdir -p bin
-	${NITC} -o $@ src/scientific_calculator.nit -m linux
+	${NITC} -o $@ src/scientific -m linux
 
 # ---
 # Android
 
 android: bin/calculator.apk
 
-bin/calculator.apk: $(shell ${NITLS} -M src/scientific_calculator.nit src/android_calculator.nit) ${NITC} android/res/
+bin/calculator.apk: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} android/res/
 	mkdir -p bin
-	${NITC} -o $@ src/scientific_calculator.nit -m src/android_calculator.nit -D debug
+	${NITC} -o $@ src/scientific -m src/android_calculator.nit -D debug
 
-android-release: $(shell ${NITLS} -M src/scientific_calculator.nit src/android_calculator.nit) ${NITC} android/res/
+android-release: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} android/res/
 	mkdir -p bin
-	${NITC} -o bin/calculator.apk src/scientific_calculator.nit -m src/android_calculator.nit --release
+	${NITC} -o bin/calculator.apk src/scientific -m src/android_calculator.nit --release
 
 android/res/: art/icon.svg ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p android/res
@@ -37,9 +37,9 @@ android-install: bin/calculator.apk
 # ---
 # iOS
 
-bin/calculator.app: $(shell ${NITLS} -M src/scientific_calculator.nit src/ios_calculator.nit) ${NITC} ios/AppIcon.appiconset/Contents.json
+bin/calculator.app: $(shell ${NITLS} -M src/scientific src/ios_calculator.nit) ${NITC} ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin
-	${NITC} -o $@ src/scientific_calculator.nit -m src/ios_calculator.nit -D debug
+	${NITC} -o $@ src/scientific -m src/ios_calculator.nit -D debug
 
 ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
 	mkdir -p ios
