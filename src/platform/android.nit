@@ -112,7 +112,6 @@ class AndroidToolchain
 			if f isa ExternCFile then cfiles.add(f.filename.basename)
 		end
 
-		# Is there an icon?
 		var project_root = "."
 		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
 		if mpackage != null then
@@ -125,6 +124,42 @@ class AndroidToolchain
 			end
 		end
 
+		# Copy assets, resources and libs where expected by the SDK
+
+		## Link to assets (for mnit and others)
+		var assets_dir = project_root / "assets"
+		if assets_dir.file_exists then
+			assets_dir = assets_dir.realpath
+			var target_assets_dir = "{android_project_root}/assets"
+			if not target_assets_dir.file_exists then
+				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
+			end
+		end
+
+		## Copy the res folder
+		var res_dir = project_root / "android/res"
+		if res_dir.file_exists then
+			# copy the res folder to the compile dir
+			res_dir = res_dir.realpath
+			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
+		end
+
+		## Copy the libs folder
+		var libs_dir = project_root / "android/libs"
+		if libs_dir.file_exists then
+			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
+		end
+
+		# Does the application has a name?
+		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
+			# Create our own custom `res/values/string.xml` with the App name
+"""<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">{{{app_name}}}</string>
+</resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
+		end
+
+		# Is there an icon?
 		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]
 		var icon_available = false
 		for res in resolutions do
@@ -264,40 +299,6 @@ $(call import-module,android/native_app_glue)
 
 		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/arm/include/gc/",
 			"{compile_dir}/gc"], "Android project error")
-
-		# Copy assets, resources and libs where expected by the SDK
-
-		# Link to assets (for mnit and others)
-		var assets_dir = project_root / "assets"
-		if assets_dir.file_exists then
-			assets_dir = assets_dir.realpath
-			var target_assets_dir = "{android_project_root}/assets"
-			if not target_assets_dir.file_exists then
-				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
-			end
-		end
-
-		# Copy the res folder
-		var res_dir = project_root / "android/res"
-		if res_dir.file_exists then
-			# copy the res folder to the compile dir
-			res_dir = res_dir.realpath
-			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
-		end
-
-		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
-			# Create our own custom `res/values/string.xml` with the App name
-"""<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">{{{app_name}}}</string>
-</resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
-		end
-
-		# Copy the libs folder
-		var libs_dir = project_root / "android/libs"
-		if libs_dir.file_exists then
-			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
-		end
 	end
 
 	redef fun write_makefile(compile_dir, cfiles)
