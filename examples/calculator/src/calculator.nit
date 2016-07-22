@@ -14,8 +14,8 @@
 
 # Portable calculator UI
 module calculator is
-	app_name "app.nit Calc."
-	app_version(0, 1, git_revision)
+	app_name "app.nit Calc"
+	app_version(0, 2, git_revision)
 	app_namespace "org.nitlanguage.calculator"
 
 	# Lock in portrait mode
