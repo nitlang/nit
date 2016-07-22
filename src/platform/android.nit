@@ -124,39 +124,32 @@ class AndroidToolchain
 			end
 		end
 
-		# Copy assets, resources and libs where expected by the SDK
-
-		## Link to assets (for mnit and others)
-		var assets_dir = project_root / "assets"
-		if assets_dir.file_exists then
-			assets_dir = assets_dir.realpath
-			var target_assets_dir = "{android_project_root}/assets"
-			if not target_assets_dir.file_exists then
-				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
-			end
-		end
-
-		## Copy the res folder
-		var res_dir = project_root / "android/res"
-		if res_dir.file_exists then
-			# copy the res folder to the compile dir
-			res_dir = res_dir.realpath
-			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
-		end
-
-		## Copy the libs folder
-		var libs_dir = project_root / "android/libs"
-		if libs_dir.file_exists then
-			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
-		end
-
-		# Does the application has a name?
-		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
-			# Create our own custom `res/values/string.xml` with the App name
+		# Set the default pretty application name
 """<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">{{{app_name}}}</string>
 </resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
+
+		# Copy assets, resources and libs where expected by the SDK
+
+		## Collect path to all possible folder where we can find the `android` folder
+		var app_files = [project_root]
+		app_files.add_all project.files
+
+		for path in app_files do
+			# Copy the assets folder
+			var assets_dir = path / "assets"
+			if assets_dir.file_exists then
+				assets_dir = assets_dir.realpath
+				toolcontext.exec_and_check(["cp", "-r", assets_dir, android_project_root], "Android project error")
+			end
+
+			# Copy the whole `android` folder
+			var android_dir = path / "android"
+			if android_dir.file_exists then
+				android_dir = android_dir.realpath
+				toolcontext.exec_and_check(["cp", "-r", android_dir, root_compile_dir], "Android project error")
+			end
 		end
 
 		# Is there an icon?
