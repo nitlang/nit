@@ -178,7 +178,7 @@ redef class App
 	# inactive state.
 	#
 	# Redef to undo changes made on entering the background.
-	fun will_enter_foreground do on_start
+	fun will_enter_foreground do on_restart
 
 	# The application just became active
 	#
@@ -196,7 +196,6 @@ redef class App
 		on_save_state
 		on_pause
 		on_stop
-		on_destroy
 	end
 end
 
