@@ -308,16 +308,11 @@ redef class App
 	# Elapsed time since program launch
 	var clock = new Clock
 
-	redef fun on_start
-	do
-		super
-		assets.load_all self
-	end
-
 	redef fun on_create
 	do
 		super
 
+		assets.load_all self
 		maximum_fps = 50.0
 	end
 
