@@ -52,9 +52,6 @@ abstract class AppComponent
 	# You should build the UI at this time.
 	fun on_create do end
 
-	# The application is starting or restarting, it is visible to the user
-	fun on_start do end
-
 	# The application enters the active state, it is in the foreground and interactive
 	fun on_resume do end
 
@@ -68,9 +65,6 @@ abstract class AppComponent
 	#
 	# It may then be destroyed (`on_destroy`) or go back to `on_start`.
 	fun on_stop do end
-
-	# The application is being destroyed
-	fun on_destroy do end
 
 	# The application may be destroyed soon, save its state for a future `on_restore_state`
 	fun on_save_state do end
