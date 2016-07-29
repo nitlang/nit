@@ -240,7 +240,7 @@ class Activity
 	# Notification from Android, the activity has been restarted
 	#
 	# Followed by `on_start`.
-	fun on_restart do end
+	fun on_restart do app.on_restart
 
 	# Notification from Android, the activity has been started
 	#
