@@ -32,7 +32,6 @@ redef class App
 
 		on_create
 		on_restore_state
-		on_start
 		on_resume
 	end
 
@@ -43,7 +42,6 @@ redef class App
 		on_pause
 		on_save_state
 		on_stop
-		on_destroy
 	end
 end
 
