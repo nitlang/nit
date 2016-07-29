@@ -63,8 +63,11 @@ abstract class AppComponent
 
 	# The application is completely hidden from the user
 	#
-	# It may then be destroyed (`on_destroy`) or go back to `on_start`.
+	# It may then be destroyed or go back to a paused state with `on_restart`.
 	fun on_stop do end
+
+	# The application returns to a visible state from a previous `on_stop`
+	fun on_restart do end
 
 	# The application may be destroyed soon, save its state for a future `on_restore_state`
 	fun on_save_state do end
