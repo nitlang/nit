@@ -18,25 +18,25 @@ The _app.nit_ application life-cycle is compatible with all target platforms.
 It relies on the following sequence of events, represented here by their callback method name:
 
 1. `on_create`: The application is being created.
-   You should build the UI at this time.
+   You should build the UI at this time and launch services.
 
-2. `on_start`: The app is starting or restarting, background activities may
+2. `on_resume`: The app enters the active state, it is in the foreground and interactive.
 
-3. `on_resume`: The app enters the active state, it is in the foreground.
-
-4. `on_pause`: The app leaves the active state and the foreground.
+3. `on_pause`: The app becomes inactive and it leaves the foreground.
    It may still be visible in the background.
-   It may then go back to `on_resume` or `on_stop`.
 
-5. `on_stop`: The app is completely hidden.
-   It may then be destroyed (`on_destroy`) or go back to `on_start`.
+4. `on_stop`: The app is completely hidden.
+   It may then be destroyed (without warning) or go back to the active state with `on_restart`.
 
-6. `on_destroy`: The app is being destroyed.
+5. `on_restart`: The app goes back to the inactive state.
+   You can revert what was done by `on_stop`.
+
+![_app.nit_ life-cycle](doc/app-nit-lifecycle.png)
 
 Life-cycle events related to saving and restoring the application state are provided by two special callback methods:
 
 * `on_save_state`: The app may be destroyed soon, save its state for a future `on_restore_state`.
-  More on how it can be done in the `app::data_store` section.
+  There is more on how it can be done in the `app::data_store` section.
 
 * `on_restore_state`: The app is launching, restore its state from a previous `on_save_state`.
 
