@@ -129,4 +129,14 @@
 				}
 			}
 		}])
+
+		.factory('User', [ '$http', function($http) {
+			return {
+				loadUser: function(cb, cbErr) {
+					$http.get(apiUrl + '/user')
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
 })();
