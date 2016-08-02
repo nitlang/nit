@@ -121,7 +121,7 @@ end
 var toolcontext = new ToolContext
 var tpl = new Template
 tpl.add "Usage: nitweb [OPTION]... <file.nit>...\n"
-tpl.add "Run a webserver based on nitcorn that serve pages about model."
+tpl.add "Run a webserver based on nitcorn that serves pages about model."
 toolcontext.tooldescription = tpl.write_to_string
 
 # process options
