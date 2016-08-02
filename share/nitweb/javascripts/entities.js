@@ -138,6 +138,18 @@
 			};
 		})
 
+		.directive('entityGraph', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '=',
+					graph: '='
+				},
+				replace: true,
+				templateUrl: '/directives/entity/graph.html'
+			};
+		})
+
 		.directive('entityCard', function() {
 			return {
 				restrict: 'E',
