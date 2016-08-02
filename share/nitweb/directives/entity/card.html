@@ -1,11 +1,42 @@
 <div class='card'>
-	<div class='card-left text-center'>
-		<entity-tag mentity='mentity' />
-	</div>
 	<div class='card-body'>
-		<h5 class='card-heading'>
-			<entity-signature mentity='mentity'/>
-		</h5>
-		<span class='synopsis' ng-bind-html='mentity.mdoc.html_synopsis' />
+		<div class='pull-right'>
+			<div class='dropdown'>
+				<button class='btn btn-link dropdown-toggle' type='button' data-toggle='dropdown'>
+					<span class='glyphicon glyphicon-chevron-down'></span>
+				</button>
+				<ul class='dropdown-menu dropdown-menu-right'>
+					<li ng-class='currentTab == "signature" ? "active" : ""'>
+						<a ng-click='currentTab = "signature"'>Signature</a>
+					</li>
+					<li ng-class='currentTab == "doc" ? "active" : ""'>
+						<a ng-click='currentTab = "doc"'>Doc</a>
+					</li>
+					<li ng-class='currentTab == "grade" ? "active" : ""'>
+						<a ng-click='currentTab = "grade"'>Grade</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class='tab-content'>
+			<div id='{{mentity.html_id}}-signature' class='tab-pane'
+			  ng-class='currentTab == "signature" ? "active" : ""'>
+				<div class='pull-left text-center'>
+					<entity-tag mentity='mentity' />
+				</div>
+				<h5 class='card-heading'>
+					<entity-signature mentity='mentity'/>
+				</h5>
+				<span class='synopsis' ng-bind-html='mentity.mdoc.html_synopsis' />
+			</div>
+			<div id='{{mentity.html_id}}-doc' class='tab-pane'
+			  ng-class='currentTab == "doc" ? "active" : ""'>
+				<entity-doc mentity='mentity' />
+			</div>
+			<div id='{{mentity.html_id}}-grade' class='tab-pane'
+			  ng-class='currentTab == "grade" ? "active" : ""'>
+				<entity-rating mentity='mentity'>
+			</div>
+		</div>
 	</div>
 </div>

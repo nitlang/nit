@@ -90,10 +90,7 @@
 				scope: {
 					mentity: '='
 				},
-				templateUrl: '/directives/entity/doc.html',
-				link: function ($scope, element, attrs) {
-					$scope.currentTab = 'doc';
-				}
+				templateUrl: '/directives/entity/doc.html'
 			};
 		})
 
@@ -154,10 +151,14 @@
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '='
+					mentity: '=',
+					defaultTab: '@'
 				},
 				replace: true,
-				templateUrl: '/directives/entity/card.html'
+				templateUrl: '/directives/entity/card.html',
+				link: function ($scope, element, attrs) {
+					$scope.currentTab = $scope.defaultTab ? $scope.defaultTab : 'signature';
+				}
 			};
 		})
 
