@@ -38,9 +38,9 @@
 # * replacers that have less redefinitions that call super than not calling it
 #
 # For more details see
-#  Mendel: A Model, Metrics and Rules to Understan Class Hierarchies
-#  S. Denier and Y. Gueheneuc
-#  in Proceedings of the 16th IEEE International Conference on Program Comprehension (OCPC'08)
+# “Mendel: A Model, Metrics and Rules to Understand Class Hierarchies,”
+# by S. Denier and Y. Gueheneuc,
+# in *Proceedings of the 16th IEEE International Conference on Program Comprehension* (OCPC'08).
 module mendel_metrics
 
 import metrics_base
