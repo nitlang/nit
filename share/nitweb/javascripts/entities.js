@@ -90,7 +90,10 @@
 				scope: {
 					mentity: '='
 				},
-				templateUrl: '/directives/entity/doc.html'
+				templateUrl: '/directives/entity/doc.html',
+				link: function ($scope, element, attrs) {
+					$scope.currentTab = 'doc';
+				}
 			};
 		})
 
