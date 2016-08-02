@@ -88,6 +88,7 @@ private class NitwebPhase
 
 		var app = new App
 
+		app.use_before("/*", new SessionInit)
 		app.use_before("/*", new RequestClock)
 		app.use("/api", new NitwebAPIRouter(config, catalog))
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
