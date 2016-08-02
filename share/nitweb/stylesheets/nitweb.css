@@ -29,8 +29,6 @@ a {
 	border: 1px solid #1E9431;
 }
 
-.card, .card-body { overflow: hidden; }
-
 .card-heading {
     margin-top: 0;
     margin-bottom: 5px;
@@ -43,23 +41,15 @@ a {
 	box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
 
-.card-body {
-    padding: 15px;
-    width: 10000px;
-}
-
-.card-body, .card-right, .card-left {
-    display: table-cell;
-    vertical-align: top;
+.card-body, .card-left, .card-right {
+	padding: 15px;
 }
 
 .card-left, .card>.pull-left {
-    padding: 15px;
-	padding-right: 0px;
+	float: left;
 }
 .card-right, .card>.pull-right {
-    padding: 15px;
-	padding-left: 0px;
+	float: right;
 }
 
 .card-list {
@@ -160,7 +150,8 @@ entity-list:hover .btn-filter {
 
 .search-results {
 	position: absolute;
-	right: 0;
+	right: 15px;
+	left: 15px;
 }
 
 .search-results .card.active {
