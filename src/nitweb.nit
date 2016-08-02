@@ -38,12 +38,9 @@ end
 # Phase that builds the model and wait for http request to serve pages.
 private class NitwebPhase
 	super Phase
-	redef fun process_mainmodule(mainmodule, mmodules)
-	do
-		var model = mainmodule.model
-		var modelbuilder = toolcontext.modelbuilder
 
-		# Build catalog
+	# Build the nit catalog used in homepage.
+	fun build_catalog(model: Model, modelbuilder: ModelBuilder): Catalog do
 		var catalog = new Catalog(modelbuilder)
 		for mpackage in model.mpackages do
 			catalog.deps.add_node(mpackage)
@@ -59,6 +56,14 @@ private class NitwebPhase
 			catalog.git_info(mpackage)
 			catalog.package_page(mpackage)
 		end
+		return catalog
+	end
+
+	redef fun process_mainmodule(mainmodule, mmodules)
+	do
+		var model = mainmodule.model
+		var modelbuilder = toolcontext.modelbuilder
+		var catalog = build_catalog(model, modelbuilder)
 
 		# Prepare mongo connection
 		var mongo = new MongoClient("mongodb://localhost:27017/")
