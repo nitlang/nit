@@ -56,15 +56,11 @@ redef class App
 
 	redef fun on_create do window.on_create
 
-	redef fun on_start do window.on_start
-
 	redef fun on_resume do window.on_resume
 
 	redef fun on_pause do window.on_pause
 
 	redef fun on_stop do window.on_stop
-
-	redef fun on_destroy do window.on_destroy
 
 	redef fun on_restore_state do window.on_restore_state
 
@@ -165,15 +161,11 @@ class CompositeControl
 
 	redef fun on_create do for i in items do i.on_create
 
-	redef fun on_start do for i in items do i.on_start
-
 	redef fun on_resume do for i in items do i.on_resume
 
 	redef fun on_pause do for i in items do i.on_pause
 
 	redef fun on_stop do for i in items do i.on_stop
-
-	redef fun on_destroy do for i in items do i.on_destroy
 
 	redef fun on_restore_state do for i in items do i.on_restore_state
 

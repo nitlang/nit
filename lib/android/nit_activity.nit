@@ -207,6 +207,14 @@ redef class App
 	end
 end
 
+redef class AppComponent
+	# The application is starting or restarting, it is visible to the user
+	fun on_start do end
+
+	# The application is being destroyed
+	fun on_destroy do end
+end
+
 # An Android activity
 #
 # You must implement the callbacks (prefixed with `on_`) to follow the
@@ -232,7 +240,7 @@ class Activity
 	# Notification from Android, the activity has been restarted
 	#
 	# Followed by `on_start`.
-	fun on_restart do end
+	fun on_restart do app.on_restart
 
 	# Notification from Android, the activity has been started
 	#

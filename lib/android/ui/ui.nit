@@ -79,6 +79,16 @@ redef class App
 		native_activity.show_fragment(root_layout_id, window.native)
 		super
 	end
+
+	redef fun on_start do window.on_start
+
+	redef fun on_destroy do window.on_destroy
+end
+
+redef class CompositeControl
+	redef fun on_start do for i in items do i.on_start
+
+	redef fun on_destroy do for i in items do i.on_destroy
 end
 
 redef class Activity

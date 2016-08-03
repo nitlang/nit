@@ -27,7 +27,6 @@ redef class App
 		super
 		on_create
 		on_restore_state
-		on_start
 	end
 
 	redef fun term_window
@@ -66,6 +65,4 @@ redef class App
 		paused = false
 		super
 	end
-
-	redef fun destroy do on_destroy
 end

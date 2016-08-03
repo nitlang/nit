@@ -29,7 +29,7 @@ redef class Game
 end
 
 redef class App
-	redef fun on_start
+	redef fun on_create
 	do
 		# We use as a reference the Moto X
 		var tw = 720

@@ -51,32 +51,57 @@ abstract class AppComponent
 	# The application is being created
 	#
 	# You should build the UI at this time.
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onCreate`
+	# * iOS: `UIApplicationDelegate application:didFinishLaunchingWithOptions`
 	fun on_create do end
 
-	# The application is starting or restarting, it is visible to the user
-	fun on_start do end
-
 	# The application enters the active state, it is in the foreground and interactive
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onResume`
+	# * iOS: `UIApplicationDelegate applicationDidBecomeActive`
 	fun on_resume do end
 
 	# The application leaves the active state but is still partially visible
 	#
-	# It may still be visible in the background.
 	# It may then go back to `on_resume` or `on_stop`.
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onPause`
+	# * iOS: `UIApplicationDelegate applicationWillResignActive`
 	fun on_pause do end
 
 	# The application is completely hidden from the user
 	#
-	# It may then be destroyed (`on_destroy`) or go back to `on_start`.
+	# It may then be destroyed or go back to a paused state with `on_restart`.
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onStop`
+	# * iOS: `UIApplicationDelegate applicationDidEnterBackground`
 	fun on_stop do end
 
-	# The application is being destroyed
-	fun on_destroy do end
+	# The application returns to a visible state from a previous `on_stop`
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onRestart`
+	# * iOS: `UIApplicationDelegate applicationWillEnterForeground`
+	fun on_restart do end
 
 	# The application may be destroyed soon, save its state for a future `on_restore_state`
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onSaveInstanceState`
+	# * iOS: `UIApplicationDelegate applicationDidEnterBackground`
 	fun on_save_state do end
 
 	# The application is launching, restore its state from a previous `on_save_state`
+	#
+	# Triggers are platform specific:
+	# * Android: `Activity.onCreate`, _not_ `Activity.onRestoreInstanceState`
+	#   as it is trigged only if there is a previous Android specific save state.
+	# * iOS: `UIApplicationDelegate applicationDidEnterBackground`
 	fun on_restore_state do end
 end
 
