@@ -95,15 +95,22 @@ private class IOSToolchain
 			end
 		end
 
-		var icon_dir = project_root / "ios" / "AppIcon.appiconset"
-		var icons_found = icon_dir.file_exists
-		if icons_found then
+		# Copy all resources
+		var app_files = [project_root]
+		app_files.add_all app_project.files
 
-			# Prepare the `Assets.xcassets` folder
-			var target_assets_dir = compile_dir / "Assets.xcassets"
-			if not target_assets_dir.file_exists then target_assets_dir.mkdir
+		var icons_found = false
 
-			"""
+		for path in app_files do
+			var icon_dir = path / "ios" / "AppIcon.appiconset"
+			if icon_dir.file_exists then
+				icons_found = true
+
+				# Prepare the `Assets.xcassets` folder
+				var target_assets_dir = compile_dir / "Assets.xcassets"
+				if not target_assets_dir.file_exists then target_assets_dir.mkdir
+
+				"""
 {
   "info" : {
 	"version" : 1,
@@ -111,9 +118,10 @@ private class IOSToolchain
   }
 }""".write_to_file target_assets_dir / "Contents.json"
 
-			# copy the res folder to the compile dir
-			icon_dir = icon_dir.realpath
-			toolcontext.exec_and_check(["cp", "-R", icon_dir, target_assets_dir], "iOS project error")
+				# copy the res folder to the compile dir
+				icon_dir = icon_dir.realpath
+				toolcontext.exec_and_check(["cp", "-R", icon_dir, target_assets_dir], "iOS project error")
+			end
 		end
 
 		# TODO Register asset files

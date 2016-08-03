@@ -13,7 +13,11 @@
 # limitations under the License.
 
 # Extends the portable calculator app with scientific operations
-module scientific_calculator
+module scientific is
+	app_name "app.nit Calc Sci"
+	app_namespace "org.nitlanguage.scientific_calculator"
+	app_files
+end
 
 import calculator
 

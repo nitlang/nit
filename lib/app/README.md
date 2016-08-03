@@ -150,6 +150,17 @@ The _app.nit_ framework defines three annotations to customize the application p
   The special function `git_revision` will use the prefix of the hash of the latest git commit.
   By default, the version is 0.1.
 
+* `app_files` tells the compiler where to find platform specific resource files associated to a module.
+  By default, only the root of the project is searched for the folders `android` and `ios`.
+  The `android` folder is used as base for the generated Android project,
+  it can be used to specify the resource files, libs and even Java source files.
+  The `ios` folder is searched for icons only.
+
+  Each argument of `app_files` is a relative path to a folder containing extra `android` or `ios` folders.
+  If there is no arguments, the parent folder of the annotated module is used.
+  In case of name conflicts in the resource files, the files from the project root have the lowest priority,
+  those associated to modules lower in the importation hierarchy have higher priority.
+
 ## Usage Example
 
 ~~~
