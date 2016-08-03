@@ -19,6 +19,11 @@
 			<span class='glyphicon glyphicon-arrow-down'/> Linearization
 		</a>
 	</li>
+	<li role='presentation'>
+		<a data-toggle='tab' role='tab' data-target='#metrics' aria-controls='metrics' ng-click='entityCtrl.loadStructuralMetrics(); entityCtrl.loadPieChart()'>
+			<span class='glyphicon glyphicon-stats'/> Metrics
+		</a>
+	</li>
 </ul>
 
 <div class='tab-content'>
@@ -55,6 +60,68 @@
 		<div class='card'>
 			<div class='card-body text-center'>
 				<div class='graph' ng-bind-html='graph'></div>
+			</div>
+		</div>
+	</div>
+	<div role='tabpanel' class='tab-pane fade' id='metrics'>
+		<div class='card'>
+			<div class='card-heading'>
+				<h3 class='card-title'>Class inheritance</h3>
+			</div>
+			<div class='card-body container-fluid'>
+				<div class='col-sm-6'>
+					<h4>
+						Inheritance kind
+						<small>({{metrics.mclass['cnoa'].values[mentity.full_name].value}}
+						ancestors)</small>
+					</h4>
+					<chart-class-inheritance-kind chart-id='chartInheritanceKind'
+						chart-metrics='metrics.mclass' />
+				</div>
+				<div class='col-sm-6'>
+					<h4>
+						Inheritance metrics
+					</h4>
+					<dl class='dl-horizontal'>
+						<dt>{{metrics.mclass.cnoa.values[mentity.full_name].value}}</dt>
+						<dd>ancestors</dd>
+						<dt>{{metrics.mclass.cnop.values[mentity.full_name].value}}</dt>
+						<dd>direct parents</dd>
+						<dt>{{metrics.mclass.cnoc.values[mentity.full_name].value}}</dt>
+						<dd>direct children</dd>
+						<dt>{{metrics.mclass.cnod.values[mentity.full_name].value}}</dt>
+						<dd>descendants</dd>
+					</dl>
+					<dl class='dl-horizontal'>
+						<dt>{{metrics.mclass.cdit.values[mentity.full_name].value}}</dt>
+						<dd>Depth in Inheritance Tree</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<div class='card'>
+			<div class='card-heading'>
+				<h3 class='card-title'>Class properties</h3>
+			</div>
+			<div class='card-body container-fluid'>
+				<div class='col-sm-6'>
+					<h4>
+						Properties kind
+						<small>({{metrics.mclass['cnbp'].values[mentity.full_name].value}}
+						accessible properties)</small>
+					</h4>
+					<chart-class-properties-kind chart-id='chartPropertiesKind'
+						chart-metrics='metrics.mclass' />
+				</div>
+				<div class='col-sm-6'>
+					<h4>
+						Properties inheritance
+						<small>({{metrics.mclass['cnbp'].values[mentity.full_name].value}}
+						accessible properties)</small>
+					</h4>
+					<chart-class-properties-inh chart-id='chartPropertiesInh'
+						chart-metrics='metrics.mclass' />
+				</div>
 			</div>
 		</div>
 	</div>

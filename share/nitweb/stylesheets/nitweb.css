@@ -75,6 +75,10 @@ a {
 	border-top: none;
 }
 
+.card-title {
+    padding-left: 15px;
+}
+
 /* ui */
 
 .btn-bar { margin-top: -5px; float: right }

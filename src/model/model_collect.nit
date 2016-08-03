@@ -424,6 +424,17 @@ redef class MClass
 		return res
 	end
 
+	# Collect all mmethods accessible by 'self' with `visibility >= min_visibility`.
+	#
+	# This include introduced, redefined, inherited mmethods.
+	fun collect_accessible_mmethods(view: ModelView): Set[MMethod] do
+		var set = new HashSet[MMethod]
+		set.add_all(collect_intro_mmethods(view))
+		set.add_all(collect_redef_mmethods(view))
+		set.add_all(collect_inherited_mmethods(view))
+		return set
+	end
+
 	# Collect mattributes introduced in 'self' with `visibility >= min_visibility`.
 	fun collect_intro_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
@@ -513,6 +524,17 @@ redef class MClass
 		set.add_all(collect_intro_inits(view))
 		set.add_all(collect_redef_inits(view))
 		set.add_all(collect_inherited_inits(view))
+		return set
+	end
+
+	# Collect all virtual types accessible by 'self'  if accepted by `view`.
+	#
+	# This include introduced, redefined, inherited virtual types.
+	fun collect_accessible_vts(view: ModelView): Set[MVirtualTypeProp] do
+		var set = new HashSet[MVirtualTypeProp]
+		for mproperty in collect_accessible_mproperties(view) do
+			if mproperty isa MVirtualTypeProp then set.add mproperty
+		end
 		return set
 	end
 end

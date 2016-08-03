@@ -76,8 +76,8 @@ private class MendelMetricsPhase
 		end
 
 		var cnblp = new CNBLP(mainmodule, model_view)
-		var cnvi = new CNVI(mainmodule)
-		var cnvs = new CNVS(mainmodule)
+		var cnvi = new CNVI(mainmodule, model_view)
+		var cnvs = new CNVS(mainmodule, model_view)
 
 		var metrics = new MetricSet
 		metrics.register(cnblp, cnvi, cnvs)
@@ -137,13 +137,9 @@ class CBMS
 	redef fun name do return "cbms"
 	redef fun desc do return "branch mean size, mean number of introduction available among ancestors"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var totc = mclass.collect_accessible_mproperties(protected_view).length
+			var totc = mclass.collect_accessible_mproperties(model_view).length
 			var ditc = mclass.in_hierarchy(mainmodule).depth
 			values[mclass] = totc.to_f / (ditc + 1).to_f
 		end
@@ -160,8 +156,8 @@ class MBMS
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
-			var totc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-			totc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+			var totc = mmodule.collect_intro_mclassdefs(model_view).length
+			totc += mmodule.collect_redef_mclassdefs(model_view).length
 			var ditc = mmodule.in_importation.depth
 			values[mmodule] = totc.to_f / (ditc + 1).to_f
 		end
@@ -176,12 +172,8 @@ class CNVI
 	redef fun name do return "cnvi"
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
-		var cbms = new CBMS(mainmodule)
+		var cbms = new CBMS(mainmodule, model_view)
 		for mclass in mclasses do
 			# compute branch mean size
 			var parents = mclass.in_hierarchy(mainmodule).direct_greaters
@@ -189,7 +181,7 @@ class CNVI
 				cbms.clear
 				cbms.collect(new HashSet[MClass].from(parents))
 				# compute class novelty index
-				var locc = mclass.collect_accessible_mproperties(protected_view).length
+				var locc = mclass.collect_accessible_mproperties(model_view).length
 				values[mclass] = locc.to_f / cbms.avg
 			else
 				values[mclass] = 0.0
@@ -207,7 +199,7 @@ class MNVI
 	redef fun desc do return "module novelty index, contribution of the module to its branch in term of introductions"
 
 	redef fun collect(mmodules) do
-		var mbms = new MBMS
+		var mbms = new MBMS(mainmodule, model_view)
 		for mmodule in mmodules do
 			# compute branch mean size
 			var parents = mmodule.in_importation.direct_greaters
@@ -215,8 +207,8 @@ class MNVI
 				mbms.clear
 				mbms.collect(new HashSet[MModule].from(parents))
 				# compute module novelty index
-				var locc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-				locc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+				var locc = mmodule.collect_intro_mclassdefs(model_view).length
+				locc += mmodule.collect_redef_mclassdefs(model_view).length
 				values[mmodule] = locc.to_f / mbms.avg
 			else
 				values[mmodule] = 0.0
@@ -233,15 +225,11 @@ class CNVS
 	redef fun name do return "cnvs"
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
-		var cnvi = new CNVI(mainmodule)
+		var cnvi = new CNVI(mainmodule, model_view)
 		cnvi.collect(mclasses)
 		for mclass in mclasses do
-			var locc = mclass.collect_local_mproperties(protected_view).length
+			var locc = mclass.collect_local_mproperties(model_view).length
 			values[mclass] = cnvi.values[mclass] * locc.to_f
 		end
 	end
@@ -256,11 +244,11 @@ class MNVS
 	redef fun desc do return "module novelty score, importance of the contribution of the module to its branch"
 
 	redef fun collect(mmodules) do
-		var mnvi = new MNVI
+		var mnvi = new MNVI(mainmodule, model_view)
 		mnvi.collect(mmodules)
 		for mmodule in mmodules do
-			var locc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-			locc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+			var locc = mmodule.collect_intro_mclassdefs(model_view).length
+			locc += mmodule.collect_redef_mclassdefs(model_view).length
 			values[mmodule] = mnvi.values[mmodule] * locc.to_f
 		end
 	end

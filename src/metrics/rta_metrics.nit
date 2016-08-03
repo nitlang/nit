@@ -23,6 +23,8 @@ import mmodules_metrics
 import mclasses_metrics
 
 redef class ToolContext
+
+	# RTA related metrics phase
 	var rta_metrics_phase: Phase = new RTAMetricsPhase(self, null)
 end
 
@@ -35,17 +37,20 @@ private class RTAMetricsPhase
 		var out = "{toolcontext.opt_dir.value or else "metrics"}/rta"
 		out.mkdir
 
+		var model = toolcontext.modelbuilder.model
+		var model_view = model.protected_view
+
 		print toolcontext.format_h1("\n# RTA metrics")
 
 		print toolcontext.format_h2("\n ## Live instances by mainmodules")
 		var mmetrics = new MetricSet
-		mmetrics.register(new MNLC(toolcontext.modelbuilder))
-		mmetrics.register(new MNLT(toolcontext.modelbuilder))
-		mmetrics.register(new MNCT(toolcontext.modelbuilder))
-		mmetrics.register(new MNLI(toolcontext.modelbuilder))
-		mmetrics.register(new MNLM(toolcontext.modelbuilder))
-		mmetrics.register(new MNLMD(toolcontext.modelbuilder))
-		mmetrics.register(new MNLDD(toolcontext.modelbuilder))
+		mmetrics.register(new MNLC(mainmodule, model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNLT(mainmodule, model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNCT(mainmodule, model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNLI(mainmodule, model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNLM(mainmodule, model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNLMD(mainmodule, model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNLDD(mainmodule, model_view, toolcontext.modelbuilder))
 		mmetrics.collect(new HashSet[MModule].from([mainmodule]))
 		mmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 		if csv then mmetrics.to_csv.write_to_file("{out}/{mainmodule}.csv")
@@ -116,15 +121,21 @@ end
 
 # Summary metrics
 
+# RTA related metric that needs a `modelbuilder`
+class RTAMetric
+	super MModuleMetric
+
+	# Modelbuilder used to access AST
+	var modelbuilder: ModelBuilder
+end
+
 # MModule Metric: Number of Live Types
 class MNLI
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnli"
 	redef fun desc do return "number of live instances in a mmodule"
 
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -137,13 +148,10 @@ end
 
 # MModule Metric: Number of Live Types
 class MNLT
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnlt"
 	redef fun desc do return "number of live mtypes in a mmodule"
-
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -156,13 +164,10 @@ end
 
 # MModule Metric: Number of Live Cast Types
 class MNCT
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnct"
 	redef fun desc do return "number of live cast mtypes in a mmodule"
-
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -175,13 +180,10 @@ end
 
 # MModule Metric: Number of Live Classes
 class MNLC
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnlc"
 	redef fun desc do return "number of live mclasses in a mmodule"
-
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -198,13 +200,10 @@ end
 
 # MModule Metric: Number of Live Methods
 class MNLM
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnlm"
 	redef fun desc do return "number of live methods in a mmodule"
-
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -217,13 +216,10 @@ end
 
 # MModule Metric: Number of Live MethodDefs
 class MNLMD
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnlmd"
 	redef fun desc do return "number of live method definitions in a mmodule"
-
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -236,13 +232,10 @@ end
 
 # MModule Metric: Number of Dead MethodDefs
 class MNLDD
-	super MModuleMetric
+	super RTAMetric
 	super IntMetric
 	redef fun name do return "mnldd"
 	redef fun desc do return "number of dead method definitions in a mmodule"
-
-	var modelbuilder: ModelBuilder
-	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
@@ -359,9 +352,17 @@ end
 # rta redef
 
 redef class RapidTypeAnalysis
-	var cnli = new CNLI
-	var cnlc = new CNLC
+
+	# Class Live Instances
+	var cnli: CNLI is lazy do return new CNLI(mainmodule, modelbuilder.model.protected_view)
+
+	# Class Live Casts
+	var cnlc: CNLC is lazy do return new CNLC(mainmodule, modelbuilder.model.protected_view)
+
+	# Type Live Instances
 	var tnli = new TNLI
+
+	# Rtpe Live Casts
 	var tnlc = new TNLC
 
 	redef fun add_new(recv, mtype) do
@@ -396,4 +397,3 @@ redef class MType
 		return depth + 1
 	end
 end
-
