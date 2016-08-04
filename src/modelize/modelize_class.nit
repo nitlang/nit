@@ -279,6 +279,10 @@ redef class ModelBuilder
 		if mclassdef.is_intro and objectclass != null then
 			if mclass.kind == extern_kind and mclass.name != "Pointer" then
 				# it is an extern class, but not a Pointer
+				if pointerclass == null then
+					error(nclassdef, "Error: `Pointer` must be defined first.")
+					return
+				end
 				if specpointer then supertypes.add pointerclass.mclass_type
 			else if specobject then
 				if mclass.name != "Object" then
