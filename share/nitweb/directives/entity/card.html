@@ -13,7 +13,7 @@
 						<a ng-click='currentTab = "doc"'>Doc</a>
 					</li>
 					<li ng-class='currentTab == "grade" ? "active" : ""'>
-						<a ng-click='currentTab = "grade"'>Grade</a>
+						<a ng-click='loadEntityStars(); currentTab = "grade"'>Grade</a>
 					</li>
 				</ul>
 			</div>
@@ -35,7 +35,7 @@
 			</div>
 			<div id='{{mentity.html_id}}-grade' class='tab-pane'
 			  ng-class='currentTab == "grade" ? "active" : ""'>
-				<entity-rating mentity='mentity'>
+				<entity-rating mentity='mentity' ratings='ratings'>
 			</div>
 		</div>
 	</div>
