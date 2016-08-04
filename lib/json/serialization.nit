@@ -656,10 +656,18 @@ redef class SimpleCollection[E]
 			v.notify_of_creation self
 			init
 
-			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
+			var arr = v.path.last.get_or_null("__items")
+			if not arr isa SequenceRead[nullable Object] then
+				# If there is nothing, we consider that it is an empty collection.
+				if arr != null then v.errors.add new Error("Deserialization Error: invalid format in {self.class_name}")
+				return
+			end
+
 			for o in arr do
 				var obj = v.convert_object(o)
-				self.add obj
+				if obj isa E then
+					add obj
+				else v.errors.add new AttributeTypeError(self, "items", obj, "E")
 			end
 		end
 	end
