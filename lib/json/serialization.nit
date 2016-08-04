@@ -669,9 +669,10 @@ redef class Map[K, V]
 		# Register as pseudo object
 		var id = v.cache.new_id_for(self)
 
+		v.stream.write "\{"
+		v.indent_level += 1
+
 		if v.plain_json then
-			v.stream.write "\{"
-			v.indent_level += 1
 			var first = true
 			for key, val in self do
 				if not first then
@@ -688,12 +689,7 @@ redef class Map[K, V]
 					v.stream.write "null"
 				end
 			end
-			v.indent_level -= 1
-			v.new_line_and_indent
-			v.stream.write "\}"
 		else
-			v.stream.write "\{"
-			v.indent_level += 1
 			v.new_line_and_indent
 			v.stream.write """"__kind": "obj", "__id": """
 			v.stream.write id.to_s
@@ -712,10 +708,11 @@ redef class Map[K, V]
 			v.stream.write """"__values": """
 			values.serialize_to_pure_json v
 
-			v.indent_level -= 1
-			v.new_line_and_indent
-			v.stream.write "\}"
 		end
+
+		v.indent_level -= 1
+		v.new_line_and_indent
+		v.stream.write "\}"
 	end
 
 	redef init from_deserializer(v)
