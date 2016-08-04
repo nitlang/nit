@@ -245,7 +245,12 @@ do
 			end
 			var name = attribute.name
 
-			code.add """
+			if type_name == "nullable Object" then
+				# Don't type check
+				code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
+"""
+			else code.add """
 	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
 	if not {{{name}}} isa {{{type_name}}} then
 		# Check if it was a subjectent error
