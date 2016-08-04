@@ -600,23 +600,23 @@ redef class Collection[E]
 	# Utility to serialize a normal Json array
 	private fun serialize_to_pure_json(v: JsonSerializer)
 	do
-			v.stream.write "["
-			v.indent_level += 1
-			var is_first = true
-			for e in self do
-				if is_first then
-					is_first = false
-				else v.stream.write ","
-				v.new_line_and_indent
-
-				if not v.try_to_serialize(e) then
-					assert e != null # null would have been serialized
-					v.warn("element of type {e.class_name} is not serializable.")
-				end
-			end
-			v.indent_level -= 1
+		v.stream.write "["
+		v.indent_level += 1
+		var is_first = true
+		for e in self do
+			if is_first then
+				is_first = false
+			else v.stream.write ","
 			v.new_line_and_indent
-			v.stream.write "]"
+
+			if not v.try_to_serialize(e) then
+				assert e != null # null would have been serialized
+				v.warn("element of type {e.class_name} is not serializable.")
+			end
+		end
+		v.indent_level -= 1
+		v.new_line_and_indent
+		v.stream.write "]"
 	end
 end
 
