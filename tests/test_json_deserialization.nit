@@ -40,4 +40,5 @@ for o in tests do
 	print "# Nit:\n{o}\n"
 	print "# Json:\n{stream}\n"
 	print "# Back in Nit:\n{deserialized or else "null"}\n"#alt2##alt4#
+	if deserializer.errors.not_empty then print deserializer.errors.join("\n")#alt2##alt4#
 end
