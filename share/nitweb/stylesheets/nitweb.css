@@ -228,20 +228,15 @@ entity-list:hover .btn-filter {
  * Ratings
  */
 
-.card .stars {
-	visibility: hidden
-}
-
-.card:hover .stars {
-	visibility: visible
-}
-
 .star {
 	color: grey;
+}
+
+.editable .star {
 	cursor: pointer;
 }
 
-.star:hover, .star.active:hover {
+.editable .star:hover, .editable .star.active:hover {
 	color: #FF8100
 }
 

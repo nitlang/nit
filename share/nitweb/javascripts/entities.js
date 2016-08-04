@@ -18,7 +18,7 @@
 	angular
 		.module('entities', ['ngSanitize', 'ui', 'model'])
 
-		.controller('EntityCtrl', ['Model', 'Metrics', '$routeParams', '$scope', '$sce', function(Model, Metrics, $routeParams, $scope, $sce) {
+		.controller('EntityCtrl', ['Model', 'Metrics', 'Feedback', '$routeParams', '$scope', '$sce', function(Model, Metrics, Feedback, $routeParams, $scope, $sce) {
 			$scope.entityId = $routeParams.id;
 
 			this.loadEntityLinearization = function() {
@@ -158,7 +158,7 @@
 			};
 		})
 
-		.directive('entityCard', function() {
+		.directive('entityCard', ['Feedback', function(Feedback) {
 			return {
 				restrict: 'E',
 				scope: {
@@ -170,9 +170,18 @@
 				templateUrl: '/directives/entity/card.html',
 				link: function ($scope, element, attrs) {
 					$scope.currentTab = $scope.defaultTab ? $scope.defaultTab : 'signature';
+
+					$scope.loadEntityStars = function() {
+						Feedback.loadEntityStars($scope.mentity.full_name,
+							function(data) {
+								$scope.ratings = data;
+							}, function(message, status) {
+								$scope.error = {message: message, status: status};
+							});
+					};
 				}
 			};
-		})
+		}])
 
 		.directive('entityList', function() {
 			return {
@@ -255,30 +264,60 @@
 			};
 		}])
 
-		.directive('entityRating', ['Feedback', function(Feedback, Code) {
+		.controller('StarsCtrl', ['Feedback', '$scope', function(Feedback, $scope) {
+			$ctrl = this;
+
+			this.postStar = function(rating) {
+				Feedback.postEntityStarDimension($scope.mentity.full_name,
+				$scope.dimension, rating,
+				function(data) {
+					$scope.mean = data.mean;
+					$scope.list = data.ratings;
+					$scope.user = data.user;
+					$ctrl.loadEntityStars($scope);
+				}, function(err) {
+					$scope.err = err;
+				});
+			}
+
+			this.loadEntityStars = function($scope) {
+				Feedback.loadEntityStars($scope.mentity.full_name,
+					function(data) {
+						$scope.ratings = data;
+					}, function(message, status) {
+						$scope.error = {message: message, status: status};
+					});
+			};
+		}])
+
+		.directive('entityRating', ['Feedback', function(Feedback) {
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '='
+					mentity: '=',
+					ratings: '='
 				},
-				templateUrl: '/directives/entity/stars.html',
-				link: function ($scope, element, attrs) {
-					$scope.postStar = function(rating) {
-						Feedback.postEntityStar($scope.mentity.full_name, rating,
-						function(data) {
-							$scope.ratings = data;
-						}, function(err) {
-							$scope.err = err;
-						});
-					}
+				controller: 'StarsCtrl',
+				controllerAs: 'ratingsCtrl',
+				templateUrl: '/directives/entity/rating.html'
+			};
+		}])
 
-					Feedback.loadEntityStars($scope.mentity.full_name,
-						function(data) {
-							$scope.ratings = data;
-						}, function(err) {
-							$scope.err = err;
-						});
-				}
+		.directive('entityStars', ['Feedback', function(Feedback) {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '=',
+					dimension: '@',
+					mean: '=',
+					list: '=',
+					user: '=',
+					refresh: '=',
+					ratings: '='
+				},
+				controller: 'StarsCtrl',
+				controllerAs: 'starsCtrl',
+				templateUrl: '/directives/entity/stars.html'
 			};
 		}])
 })();
