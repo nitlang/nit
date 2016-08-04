@@ -280,9 +280,14 @@ redef class ModelBuilder
 			if mclass.kind == extern_kind and mclass.name != "Pointer" then
 				# it is an extern class, but not a Pointer
 				if specpointer then supertypes.add pointerclass.mclass_type
-			else if specobject and mclass.name != "Object" then
-				# it is a standard class without super class (but is not Object)
-				supertypes.add objectclass.mclass_type
+			else if specobject then
+				if mclass.name != "Object" then
+					# it is a standard class without super class (but is not Object)
+					supertypes.add objectclass.mclass_type
+				else if mclass.kind != interface_kind then
+					error(nclassdef, "Error: `Object` must be an {interface_kind}.")
+					return
+				end
 			end
 		end
 
