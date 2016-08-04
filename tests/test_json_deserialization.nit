@@ -15,6 +15,7 @@
 import test_deserialization
 import json::serialization
 #alt1# import test_deserialization_serial
+#alt3# import test_deserialization_serial
 
 var entities = new TestEntities
 
