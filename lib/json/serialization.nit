@@ -768,6 +768,10 @@ redef class Map[K, V]
 					continue
 				end
 
+				if has_key(key) then
+					v.errors.add new Error("Deserialization Error: duplicated key '{key or else "null"}' in {self.class_name}, previous value overwritten")
+				end
+
 				self[key] = value
 			end
 		end
