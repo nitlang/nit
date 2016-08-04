@@ -27,8 +27,16 @@
 						$scope.error = err;
 					});
 			};
-
+			this.loadGrades = function() {
+				User.loadUserStars(
+					function(data) {
+						$scope.ratings = data;
+					}, function(err) {
+						$scope.error = err;
+					});
+			};
 			this.loadUser();
+			this.loadGrades();
 		}])
 
 		.directive('userMenu', ['User', function(User) {
