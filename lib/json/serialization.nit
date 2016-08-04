@@ -734,12 +734,40 @@ redef class Map[K, V]
 			v.notify_of_creation self
 			init
 
-			var length = v.deserialize_attribute("__length").as(Int)
-			var keys = v.path.last["__keys"].as(SequenceRead[nullable Object])
-			var values = v.path.last["__values"].as(SequenceRead[nullable Object])
+			var length = v.deserialize_attribute("__length")
+			var keys = v.path.last.get_or_null("__keys")
+			var values = v.path.last.get_or_null("__values")
+
+			# Length is optional
+			if length == null and keys isa SequenceRead[nullable Object] then length = keys.length
+
+			# Consistency check
+			if not length isa Int or length < 0 or
+			   not keys isa SequenceRead[nullable Object] or
+			   not values isa SequenceRead[nullable Object] or
+			   keys.length != values.length or length != keys.length then
+
+				# If there is nothing or length == 0, we consider that it is an empty Map.
+				if (length != null and length != 0) or keys != null or values != null then
+					v.errors.add new Error("Deserialization Error: invalid format in {self.class_name}")
+				end
+				return
+			end
+
 			for i in length.times do
 				var key = v.convert_object(keys[i])
 				var value = v.convert_object(values[i])
+
+				if not key isa K then
+					v.errors.add new AttributeTypeError(self, "keys", key, "K")
+					continue
+				end
+
+				if not value isa V then
+					v.errors.add new AttributeTypeError(self, "values", value, "V")
+					continue
+				end
+
 				self[key] = value
 			end
 		end
