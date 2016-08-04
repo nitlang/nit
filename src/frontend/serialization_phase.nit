@@ -237,11 +237,14 @@ do
 
 			var n_type = attribute.n_type
 			var type_name
+			var type_name_pretty
 			if n_type == null then
 				# Use a place holder, we will replace it with the inferred type after the model phases
 				type_name = toolcontext.place_holder_type_name
+				type_name_pretty = "Unknown type"
 			else
 				type_name = n_type.type_name
+				type_name_pretty = type_name
 			end
 			var name = attribute.name
 
@@ -254,7 +257,7 @@ do
 	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
 	if not {{{name}}} isa {{{type_name}}} then
 		# Check if it was a subjectent error
-		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
+		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name_pretty}}}")
 
 		# Clear subjacent error
 		if v.keep_going == false then return
