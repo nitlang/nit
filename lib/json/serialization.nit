@@ -636,6 +636,8 @@ redef class SimpleCollection[E]
 			v.stream.write """","""
 			v.new_line_and_indent
 			v.stream.write """"__items": """
+
+			core_serialize_to v
 		end
 
 		serialize_to_pure_json v
@@ -708,6 +710,7 @@ redef class Map[K, V]
 			v.stream.write """"__values": """
 			values.serialize_to_pure_json v
 
+			core_serialize_to v
 		end
 
 		v.indent_level -= 1
