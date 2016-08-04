@@ -458,6 +458,11 @@ redef class HttpResponse
 		end
 	end
 
+	# Write error as JSON and set the right content type header.
+	fun json_error(error: nullable Jsonable, status: nullable Int) do
+		json(error, status)
+	end
+
 	# Redirect response to `location`
 	fun redirect(location: String, status: nullable Int) do
 		header["Location"] = location
