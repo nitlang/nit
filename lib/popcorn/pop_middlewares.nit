@@ -69,9 +69,11 @@ end
 redef class HttpResponse
 	# Return `self` status colored for console.
 	fun color_status: String do
-		if status_code == 200 then return status_code.to_s.green
-		if status_code == 304 then return status_code.to_s.blue
-		if status_code == 404 then return status_code.to_s.yellow
-		return status_code.to_s.red
+		if status_code >= 100 and status_code < 200 then return status_code.to_s.gray
+		if status_code >= 200 and status_code < 300 then return status_code.to_s.green
+		if status_code >= 300 and status_code < 400 then return status_code.to_s.blue
+		if status_code >= 400 and status_code < 500 then return status_code.to_s.yellow
+		if status_code >= 500 and status_code < 600 then return status_code.to_s.red
+		return status_code.to_s
 	end
 end
