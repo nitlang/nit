@@ -43,6 +43,8 @@ import gamnit
 import gamnit::cameras
 import gamnit::limit_fps
 
+import android_two_fingers_motion is conditional(android)
+
 # Image to draw on screen
 class Sprite
 
