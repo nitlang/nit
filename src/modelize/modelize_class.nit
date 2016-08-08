@@ -104,11 +104,6 @@ redef class ModelBuilder
 		end
 
 		if mclass == null then
-			if nclassdef isa AStdClassdef and nclassdef.n_kwredef != null then
-				error(nclassdef, "Redef Error: no imported class `{name}` to refine.")
-				return
-			end
-
 			# Check for conflicting class full-names in the package
 			if mmodule.mgroup != null and mvisibility >= protected_visibility then
 				var mclasses = model.get_mclasses_by_name(name)
