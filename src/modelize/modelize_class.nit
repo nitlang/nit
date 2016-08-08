@@ -303,7 +303,6 @@ redef class ModelBuilder
 	end
 
 	# Build the classes of the module `nmodule`.
-	# REQUIRE: classes of imported modules are already build. (let `phase` do the job)
 	private fun build_classes(nmodule: AModule)
 	do
 		# Force building recursively
