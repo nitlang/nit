@@ -2056,14 +2056,27 @@ abstract class MProperty
 		#print "select prop {mproperty} for {mtype} in {self}"
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
-		for mpropdef in self.mpropdefs do
-			# If the definition is not imported by the module, then skip
-			if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
-			# If the definition is not inherited by the type, then skip
-			if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
-			# Else, we keep it
-			candidates.add(mpropdef)
+
+		# Here we have two strategies: iterate propdefs or iterate classdefs.
+		var mpropdefs = self.mpropdefs
+		if mpropdefs.length <= 1 or mpropdefs.length < mtype.collect_mclassdefs(mmodule).length then
+			# Iterate on all definitions of `self`, keep only those inherited by `mtype` in `mmodule`
+			for mpropdef in mpropdefs do
+				# If the definition is not imported by the module, then skip
+				if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
+				# If the definition is not inherited by the type, then skip
+				if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
+				# Else, we keep it
+				candidates.add(mpropdef)
+			end
+		else
+			# Iterate on all super-classdefs of `mtype`, keep only the definitions of `self`, if any.
+			for mclassdef in mtype.collect_mclassdefs(mmodule) do
+				var p = mclassdef.mpropdefs_by_property.get_or_null(self)
+				if p != null then candidates.add p
+			end
 		end
+
 		# Fast track for only one candidate
 		if candidates.length <= 1 then
 			self.lookup_definitions_cache[mmodule, mtype] = candidates
