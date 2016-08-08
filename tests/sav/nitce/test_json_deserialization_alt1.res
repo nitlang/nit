@@ -45,6 +45,10 @@
 # Back in Nit:
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
+Deserialization Error: Doesn't know how to deserialize class "Array"
+Deserialization Error: Wrong type on `E::a` expected `Unknown type`, got `null`
+Deserialization Error: Doesn't know how to deserialize class "Array"
+Deserialization Error: Wrong type on `E::b` expected `Unknown type`, got `null`
 # Nit:
 <E: 2222>
 
@@ -54,6 +58,7 @@
 # Back in Nit:
 null
 
+Deserialization Error: Doesn't know how to deserialize class "F"
 # Nit:
 <E: 33.33>
 
@@ -63,6 +68,7 @@ null
 # Back in Nit:
 null
 
+Deserialization Error: Doesn't know how to deserialize class "F"
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 
@@ -72,3 +78,11 @@ null
 # Back in Nit:
 <G: hs: ; s: ; hm: ; am: >
 
+Deserialization Error: Doesn't know how to deserialize class "HashSet"
+Deserialization Error: Wrong type on `G::hs` expected `Unknown type`, got `null`
+Deserialization Error: Doesn't know how to deserialize class "ArraySet"
+Deserialization Error: Wrong type on `G::s` expected `Set[String]`, got `null`
+Deserialization Error: Doesn't know how to deserialize class "HashMap"
+Deserialization Error: Wrong type on `G::hm` expected `Unknown type`, got `null`
+Deserialization Error: Doesn't know how to deserialize class "ArrayMap"
+Deserialization Error: Wrong type on `G::am` expected `Unknown type`, got `null`

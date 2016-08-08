@@ -143,6 +143,8 @@ end
 class AttributeTypeError
 	super Error
 
+	autoinit receiver, attribute_name, attribute, expected_type
+
 	# Parent object of the problematic attribute
 	var receiver: Object
 
@@ -155,8 +157,7 @@ class AttributeTypeError
 	# Name of the type expected for `attribute`
 	var expected_type: String
 
-	redef fun to_s
-	do
+	redef var message is lazy do
 		var attribute = attribute
 		var found_type = if attribute != null then attribute.class_name else "null"
 

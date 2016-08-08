@@ -600,23 +600,23 @@ redef class Collection[E]
 	# Utility to serialize a normal Json array
 	private fun serialize_to_pure_json(v: JsonSerializer)
 	do
-			v.stream.write "["
-			v.indent_level += 1
-			var is_first = true
-			for e in self do
-				if is_first then
-					is_first = false
-				else v.stream.write ","
-				v.new_line_and_indent
-
-				if not v.try_to_serialize(e) then
-					assert e != null # null would have been serialized
-					v.warn("element of type {e.class_name} is not serializable.")
-				end
-			end
-			v.indent_level -= 1
+		v.stream.write "["
+		v.indent_level += 1
+		var is_first = true
+		for e in self do
+			if is_first then
+				is_first = false
+			else v.stream.write ","
 			v.new_line_and_indent
-			v.stream.write "]"
+
+			if not v.try_to_serialize(e) then
+				assert e != null # null would have been serialized
+				v.warn("element of type {e.class_name} is not serializable.")
+			end
+		end
+		v.indent_level -= 1
+		v.new_line_and_indent
+		v.stream.write "]"
 	end
 end
 
@@ -636,6 +636,8 @@ redef class SimpleCollection[E]
 			v.stream.write """","""
 			v.new_line_and_indent
 			v.stream.write """"__items": """
+
+			core_serialize_to v
 		end
 
 		serialize_to_pure_json v
@@ -654,10 +656,18 @@ redef class SimpleCollection[E]
 			v.notify_of_creation self
 			init
 
-			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
+			var arr = v.path.last.get_or_null("__items")
+			if not arr isa SequenceRead[nullable Object] then
+				# If there is nothing, we consider that it is an empty collection.
+				if arr != null then v.errors.add new Error("Deserialization Error: invalid format in {self.class_name}")
+				return
+			end
+
 			for o in arr do
 				var obj = v.convert_object(o)
-				self.add obj
+				if obj isa E then
+					add obj
+				else v.errors.add new AttributeTypeError(self, "items", obj, "E")
 			end
 		end
 	end
@@ -669,9 +679,10 @@ redef class Map[K, V]
 		# Register as pseudo object
 		var id = v.cache.new_id_for(self)
 
+		v.stream.write "\{"
+		v.indent_level += 1
+
 		if v.plain_json then
-			v.stream.write "\{"
-			v.indent_level += 1
 			var first = true
 			for key, val in self do
 				if not first then
@@ -688,12 +699,7 @@ redef class Map[K, V]
 					v.stream.write "null"
 				end
 			end
-			v.indent_level -= 1
-			v.new_line_and_indent
-			v.stream.write "\}"
 		else
-			v.stream.write "\{"
-			v.indent_level += 1
 			v.new_line_and_indent
 			v.stream.write """"__kind": "obj", "__id": """
 			v.stream.write id.to_s
@@ -712,10 +718,12 @@ redef class Map[K, V]
 			v.stream.write """"__values": """
 			values.serialize_to_pure_json v
 
-			v.indent_level -= 1
-			v.new_line_and_indent
-			v.stream.write "\}"
+			core_serialize_to v
 		end
+
+		v.indent_level -= 1
+		v.new_line_and_indent
+		v.stream.write "\}"
 	end
 
 	redef init from_deserializer(v)
@@ -726,12 +734,44 @@ redef class Map[K, V]
 			v.notify_of_creation self
 			init
 
-			var length = v.deserialize_attribute("__length").as(Int)
-			var keys = v.path.last["__keys"].as(SequenceRead[nullable Object])
-			var values = v.path.last["__values"].as(SequenceRead[nullable Object])
+			var length = v.deserialize_attribute("__length")
+			var keys = v.path.last.get_or_null("__keys")
+			var values = v.path.last.get_or_null("__values")
+
+			# Length is optional
+			if length == null and keys isa SequenceRead[nullable Object] then length = keys.length
+
+			# Consistency check
+			if not length isa Int or length < 0 or
+			   not keys isa SequenceRead[nullable Object] or
+			   not values isa SequenceRead[nullable Object] or
+			   keys.length != values.length or length != keys.length then
+
+				# If there is nothing or length == 0, we consider that it is an empty Map.
+				if (length != null and length != 0) or keys != null or values != null then
+					v.errors.add new Error("Deserialization Error: invalid format in {self.class_name}")
+				end
+				return
+			end
+
 			for i in length.times do
 				var key = v.convert_object(keys[i])
 				var value = v.convert_object(values[i])
+
+				if not key isa K then
+					v.errors.add new AttributeTypeError(self, "keys", key, "K")
+					continue
+				end
+
+				if not value isa V then
+					v.errors.add new AttributeTypeError(self, "values", value, "V")
+					continue
+				end
+
+				if has_key(key) then
+					v.errors.add new Error("Deserialization Error: duplicated key '{key or else "null"}' in {self.class_name}, previous value overwritten")
+				end
+
 				self[key] = value
 			end
 		end

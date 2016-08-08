@@ -52,6 +52,9 @@ class NitModule
 	# The module's name
 	var name: Writable is writable
 
+	# Annotations on the module declaration
+	var annotations = new Array[Writable]
+
 	# Imports from this module
 	var imports = new Array[Writable]
 
@@ -64,7 +67,13 @@ class NitModule
 		if header != null then add header
 
 		var name = name
-		add "module {name}\n\n"
+		if annotations.is_empty then
+			add "module {name}\n\n"
+		else
+			add "module {name} is\n"
+			for annotation in annotations do add "\t{annotation}\n"
+			add "end\n\n"
+		end
 
 		for i in imports do add "import {i}\n"
 		add "\n"

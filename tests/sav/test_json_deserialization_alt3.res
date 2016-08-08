@@ -129,7 +129,7 @@
 }
 
 # Back in Nit:
-null
+<E: 2222>
 
 # Nit:
 <E: 33.33>
@@ -141,7 +141,7 @@ null
 }
 
 # Back in Nit:
-null
+<E: 33.33>
 
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
@@ -188,5 +188,5 @@ null
 }
 
 # Back in Nit:
-<G: hs: ; s: ; hm: ; am: >
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 
