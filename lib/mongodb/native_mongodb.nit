@@ -433,6 +433,24 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 		return NativeMongoCursor_as_nullable(cursor);
 	`}
 
+	# Wrapper for `mongoc_collection_aggregate()`.
+	#
+	# This function shall execute an aggregation `pipeline` on the underlying collection.
+	#
+	# The `pipeline` parameter should contain a field named `pipeline` containing
+	# a BSON array of pipeline stages.
+	fun aggregate(pipeline: NativeBSON): nullable NativeMongoCursor import
+		NativeMongoCursor.as nullable, set_mongoc_error `{
+		bson_error_t error;
+		mongoc_cursor_t	*cursor;
+		cursor = mongoc_collection_aggregate(self, MONGOC_QUERY_NONE, pipeline, NULL, NULL);
+		if (mongoc_cursor_error(cursor, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
+			return null_NativeMongoCursor();
+		}
+		return NativeMongoCursor_as_nullable(cursor);
+	`}
+
 	# Wrapper for `mongoc_collection_stats()`.
 	#
 	# This function is a helper to retrieve statistics about the collection.
