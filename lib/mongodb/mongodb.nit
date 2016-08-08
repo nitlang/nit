@@ -162,9 +162,13 @@ end
 # Since the MongoDB notation is not JSON complient, the mongoc wrapper uses
 # a JSON based notation like `{"$oid": "hash"}`.
 # This is the notation returned by the `to_json` service.
-private class MongoObjectId
+class MongoObjectId
 
-	var native: BSONObjectId
+	private var native: BSONObjectId = new BSONObjectId
+
+	private init with_native(native: BSONObjectId) do
+		self.native = native
+	end
 
 	# The unique ID as an MongoDB Object ID string.
 	fun id: String do return native.id
@@ -270,7 +274,7 @@ class MongoClient
 	private fun last_id: nullable MongoObjectId do
 		var last_id = sys.last_mongoc_id
 		if last_id == null then return null
-		return new MongoObjectId(last_id)
+		return new MongoObjectId.with_native(last_id)
 	end
 
 	# Set the last generated id or `null` to unset once used.
