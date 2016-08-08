@@ -720,8 +720,11 @@ class MClassDef
 	# All properties introduced by the classdef
 	var intro_mproperties = new Array[MProperty]
 
-	# All property definitions in the class (introductions and redefinitions)
+	# All property introductions and redefinitions in `self` (not inheritance).
 	var mpropdefs = new Array[MPropDef]
+
+	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
+	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
 end
 
 # A global static type
@@ -2277,6 +2280,7 @@ abstract class MPropDef
 	do
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
+		mclassdef.mpropdefs_by_property[mproperty] = self
 		if mproperty.intro_mclassdef == mclassdef then
 			assert not isset mproperty._intro
 			mproperty.intro = self
