@@ -1454,6 +1454,9 @@ class MVirtualType
 	do
 		if not cleanup_virtual then return self
 		assert can_resolve_for(mtype, anchor, mmodule)
+
+		if mproperty.is_selftype then return mtype
+
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
@@ -2263,6 +2266,9 @@ class MVirtualTypeProp
 
 	# The formal type associated to the virtual type property
 	var mvirtualtype = new MVirtualType(self)
+
+	# Is `self` the special virtual type `SELF`?
+	var is_selftype: Bool is lazy do return name == "SELF"
 end
 
 # A definition of a property (local property)
