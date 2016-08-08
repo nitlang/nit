@@ -114,12 +114,23 @@ end
 # * a 2-byte process id (Big Endian), and
 # * a 3-byte counter (Big Endian), starting with a random value.
 extern class BSONObjectId `{ bson_oid_t * `}
+
+	# Generates a new `bson_oid_t`.
+	new `{
+		bson_oid_t *self = malloc(sizeof(bson_oid_t));
+		bson_oid_init(self, NULL);
+		return self;
+	`}
+
 	# Object id.
 	fun id: String import NativeString.to_s_with_copy `{
 		char str[25];
 		bson_oid_to_string(self, str);
 		return NativeString_to_s_with_copy(str);
 	`}
+
+	# Destroy `self`.
+	fun destroy `{ free(self); `}
 end
 
 redef class Sys
