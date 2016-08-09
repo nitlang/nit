@@ -19,7 +19,6 @@ class TestText
 
 	private var factories: Collection[TextFactory] = [
 		new ConcatFactory,
-		new RopeBufferFactory,
 		new FlatBufferFactory
 	: TextFactory]
 
@@ -47,13 +46,6 @@ class ConcatFactory
 
 	redef fun create(s) do return new Concat("", s)
 end
-
-class RopeBufferFactory
-	super TextFactory
-
-	redef fun create(s) do return new RopeBuffer.from(s)
-end
-
 class FlatBufferFactory
 	super TextFactory
 

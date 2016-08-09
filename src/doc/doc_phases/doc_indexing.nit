@@ -64,7 +64,7 @@ class IndexingPhase
 	# Render the index content.
 	fun render: Template do
 		var tpl = new Template
-		var buffer = new RopeBuffer
+		var buffer = new Buffer
 		tpl.add buffer
 		buffer.append "var nitdocQuickSearchRawList="
 		table.append_json buffer

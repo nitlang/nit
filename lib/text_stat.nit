@@ -33,9 +33,6 @@ redef class Sys
 	# Counts the number of allocations of Concat
 	var concat_allocations = 0
 
-	# Counts the number of allocations of RopeBuffer
-	var ropebuf_allocations = 0
-
 	# Counts the number of calls to property length
 	var length_calls = new Counter[String]
 
@@ -83,7 +80,6 @@ Allocations, by type:
 		print "\t-ASCIIFlatString = {asciiflatstr_allocations}"
 		print "\t-FlatBuffer = {flatbuf_allocations}"
 		print "\t-Concat = {concat_allocations}"
-		print "\t-RopeBuffer = {ropebuf_allocations}"
 		print ""
 		print "Calls to length, by type:"
 		for k, v in length_calls do
@@ -213,22 +209,6 @@ redef class FlatText
 		bytepos = ns_i
 
 		return ns_i
-	end
-end
-
-redef class RopeBuffer
-	init do
-		sys.ropebuf_allocations += 1
-	end
-
-	redef fun byte_length do
-		sys.byte_length_call.inc "RopeBuffer"
-		return super
-	end
-
-	redef fun [](i) do
-		sys.index_call.inc "RopeBuffer"
-		return super
 	end
 end
 

@@ -20,7 +20,7 @@ var file = new FileCompound(graph)
 var root_ns = graph.by_id[""].as(Namespace)
 var ns = new Namespace(graph)
 var member = new Attribute(graph)
-var buffer = new RopeBuffer
+var buffer = new Buffer
 
 file.name = "foo.py"
 file.model_id = "_foo_8py"

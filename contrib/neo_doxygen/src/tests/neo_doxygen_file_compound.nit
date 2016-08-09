@@ -24,7 +24,7 @@ var a_ns = new Namespace(graph)
 var b_ns = new Namespace(graph)
 var c_ns = new Namespace(graph)
 var d_ns = new Namespace(graph)
-var buffer = new RopeBuffer
+var buffer = new Buffer
 var root_ns = graph.by_id[""].as(Namespace)
 var location: Location
 

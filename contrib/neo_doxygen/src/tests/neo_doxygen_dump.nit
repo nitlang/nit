@@ -48,7 +48,7 @@ class DebugStore
 		print ""
 		for n in neo_entities do
 			if n isa NeoEdge then
-				var buffer = new RopeBuffer
+				var buffer = new Buffer
 				n.debug buffer
 				print buffer
 			end

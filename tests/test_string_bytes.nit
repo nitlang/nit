@@ -30,8 +30,3 @@ var b = new FlatBuffer.from(x)
 
 print b.bytes.to_a
 print b.bytes.reverse_iterator.to_a
-
-var c = new RopeBuffer.from(x)
-
-print c.bytes
-print c.bytes.reverse_iterator.to_a

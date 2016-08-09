@@ -15,7 +15,7 @@
 import tests
 
 var graph = new ProjectGraph("foo")
-var buffer = new RopeBuffer
+var buffer = new Buffer
 
 graph.put_edges
 graph.debug buffer

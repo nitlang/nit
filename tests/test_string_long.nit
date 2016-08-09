@@ -14,14 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1 import core
-#alt1 import core::text::ropes
-
 var s = "Bonjour !\n"
 var r: Buffer = new FlatBuffer.with_capacity(50)
-#alt1 r = new RopeBuffer
 var r2: Buffer = new FlatBuffer
-#alt1 r2 = new RopeBuffer
 
 var i = 0
 while i < 1000 do

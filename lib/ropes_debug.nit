@@ -21,13 +21,14 @@ redef class Text
 	# Writes self as a dot file on the hard drive
 	private fun internal_to_dot: String is abstract
 
+	# Returns the graphviz-formatted content of `self`
 	fun to_dot: String do
 		return "digraph g \{\n" + internal_to_dot + "\}\n"
 	end
 end
 
 redef class Concat
-	redef fun internal_to_dot: String
+	redef fun internal_to_dot
 	do
 		var s = "n{object_id} [label = {length}];\n"
 		s += "n{object_id} -> n{left.object_id} [label = \"left\"];\n"
@@ -38,27 +39,15 @@ redef class Concat
 	end
 end
 
-redef class RopeBuffer
-	redef fun internal_to_dot: String
-	do
-		var s = "n{object_id} [label = {length}];\n"
-		s += "n{object_id} -> n{str.object_id} [label = \"str\"];\n"
-		s += str.internal_to_dot
-		s += "n{object_id} -> n{ns.object_id} [label = \"ns\"];\n"
-		s += "n{ns.object_id}[label = \"Items\", content=\"{ns}\"];\n"
-		return s
-	end
-end
-
 redef class FlatString
-	redef fun internal_to_dot: String
+	redef fun internal_to_dot
 	do
 		return "n{object_id} [label=\"FlatString\\nlength = {length}\\nbyte_length = {byte_length}\\nfirst_byte = {first_byte}\\nlast_byte = {last_byte}\\nText = {self.escape_to_dot}\"];\n"
 	end
 end
 
 redef class FlatBuffer
-	redef fun internal_to_dot: String
+	redef fun internal_to_dot
 	do
 		return "n{object_id} [label=\"FlatBuffer\\nbyte_length = {byte_length}\\nlength = {length}\\ncapacity = {capacity}\\nText = {escape_to_dot}\"];\n"
 	end
