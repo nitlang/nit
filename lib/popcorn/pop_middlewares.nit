@@ -42,23 +42,68 @@ end
 class ConsoleLog
 	super Handler
 
+	# Logger level
+	#
+	# * `0`: silent
+	# * `1`: errors
+	# * `2`: warnings
+	# * `3`: info
+	# * `4`: debug
+	#
+	# Request status are always logged, whatever the logger level is.
+	var level = 4 is writable
+
 	# Do we want colors in the console output?
-	var colors = true
+	var no_colors = false
 
 	redef fun all(req, res) do
 		var clock = req.clock
 		if clock != null then
-			print "{req.method} {req.uri} {status(res)} ({clock.total}s)"
+			log "{req.method} {req.uri} {status(res)} ({clock.total}s)"
 		else
-			print "{req.method} {req.uri} {status(res)}"
+			log "{req.method} {req.uri} {status(res)}"
 		end
 	end
 
 	# Colorize the request status.
 	private fun status(res: HttpResponse): String do
-		if colors then return res.color_status
-		return res.status_code.to_s
+		if no_colors then return res.status_code.to_s
+		return res.color_status
 	end
+
+	# Display a `message` with `level`.
+	#
+	# Message will only be displayed if `level <= self.level`.
+	# Colors will be used depending on `colors`.
+	#
+	# Use `0` for no coloration.
+	private fun display(level: Int, message: String) do
+		if level > self.level then return
+		if no_colors then
+			print message
+			return
+		end
+		if level == 0 then print message
+		if level == 1 then print message.red
+		if level == 2 then print message.yellow
+		if level == 3 then print message.blue
+		if level == 4 then print message.gray
+	end
+
+	# Display a message wathever the `level`
+	fun log(message: String) do display(0, message)
+
+	# Display a red error `message`.
+	fun error(message: String) do display(1, "[ERROR] {message}")
+
+	# Display a yellow warning `message`.
+	fun warning(message: String) do display(2, "[WARN] {message}")
+
+	# Display a blue info `message`.
+	fun info(message: String) do display(3, "[INFO] {message}")
+
+	# Display a gray debug `message`.
+	fun debug(message: String) do display(4, "[DEBUG] {message}")
 end
 
 redef class HttpRequest
