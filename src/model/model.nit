@@ -1407,8 +1407,10 @@ class MVirtualType
 
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
-	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	redef fun lookup_bound(mmodule, resolved_receiver)
 	do
+		# There is two possible invalid cases: the vt does not exists in resolved_receiver or the bound is broken
+		if not resolved_receiver.has_mproperty(mmodule, mproperty) then return new MErrorType(model)
 		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MErrorType(model)
 	end
 
@@ -1570,7 +1572,8 @@ class MParameterType
 				return res
 			end
 		end
-		abort
+		# Cannot found `self` in `resolved_receiver`
+		return new MErrorType(model)
 	end
 
 	# A PT is fixed when:
