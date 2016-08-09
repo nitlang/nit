@@ -1054,6 +1054,12 @@ abstract class MType
 	# In case of conflicts or inconsistencies in the model, the method returns a `MErrorType`.
 	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
 
+	# Is the type a `MErrorType` or contains an `MErrorType`?
+	#
+	# `MErrorType` are used in result with conflict or inconsistencies.
+	#
+	fun is_ok: Bool do return true
+
 	# Can the type be resolved?
 	#
 	# In order to resolve open types, the formal types must make sence.
@@ -1350,6 +1356,12 @@ class MGenericType
 			if not t.can_resolve_for(mtype, anchor, mmodule) then return false
 		end
 		return true
+	end
+
+	redef fun is_ok
+	do
+		for t in arguments do if not t.is_ok then return false
+		return super
 	end
 
 
@@ -1671,6 +1683,8 @@ abstract class MProxyType
 		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
 	end
 
+	redef fun is_ok do return mtype.is_ok
+
 	redef fun lookup_fixed(mmodule, resolved_receiver)
 	do
 		var t = mtype.lookup_fixed(mmodule, resolved_receiver)
@@ -1813,6 +1827,7 @@ end
 # The error type can de used to denote things that are conflicting or inconsistent.
 #
 # Some methods on types can return a `MErrorType` to denote a broken or a conflicting result.
+# Use `is_ok` to check if a type is (or contains) a `MErrorType` .
 class MErrorType
 	super MType
 	redef var model
@@ -1822,6 +1837,7 @@ class MErrorType
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+	redef fun is_ok do return false
 
 	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
 
