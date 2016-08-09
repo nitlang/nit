@@ -1058,7 +1058,16 @@ abstract class MType
 	#
 	# `MErrorType` are used in result with conflict or inconsistencies.
 	#
+	# See `is_legal_in` to check conformity with generic bounds.
 	fun is_ok: Bool do return true
+
+	# Is the type legal in a given `mmodule` (with an optional `anchor`)?
+	#
+	# A type is valid if:
+	#
+	# * it does not contain a `MErrorType` (see `is_ok`).
+	# * its generic formal arguments are within their bounds.
+	fun is_legal_in(mmodule: MModule, anchor: nullable MClassType): Bool do return is_ok
 
 	# Can the type be resolved?
 	#
@@ -1364,6 +1373,18 @@ class MGenericType
 		return super
 	end
 
+	redef fun is_legal_in(mmodule, anchor)
+	do
+		var mtype
+		if need_anchor then
+			assert anchor != null
+			mtype = anchor_to(mmodule, anchor)
+		else
+			mtype = self
+		end
+		if not mtype.is_ok then return false
+		return mtype.is_subtype(mmodule, null, mtype.mclass.intro.bound_mtype)
+	end
 
 	redef fun depth
 	do
@@ -1687,6 +1708,8 @@ abstract class MProxyType
 	end
 
 	redef fun is_ok do return mtype.is_ok
+
+	redef fun is_legal_in(mmodule, anchor) do return mtype.is_legal_in(mmodule, anchor)
 
 	redef fun lookup_fixed(mmodule, resolved_receiver)
 	do
