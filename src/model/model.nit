@@ -720,8 +720,11 @@ class MClassDef
 	# All properties introduced by the classdef
 	var intro_mproperties = new Array[MProperty]
 
-	# All property definitions in the class (introductions and redefinitions)
+	# All property introductions and redefinitions in `self` (not inheritance).
 	var mpropdefs = new Array[MPropDef]
+
+	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
+	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
 end
 
 # A global static type
@@ -1451,6 +1454,9 @@ class MVirtualType
 	do
 		if not cleanup_virtual then return self
 		assert can_resolve_for(mtype, anchor, mmodule)
+
+		if mproperty.is_selftype then return mtype
+
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
@@ -2053,14 +2059,27 @@ abstract class MProperty
 		#print "select prop {mproperty} for {mtype} in {self}"
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
-		for mpropdef in self.mpropdefs do
-			# If the definition is not imported by the module, then skip
-			if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
-			# If the definition is not inherited by the type, then skip
-			if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
-			# Else, we keep it
-			candidates.add(mpropdef)
+
+		# Here we have two strategies: iterate propdefs or iterate classdefs.
+		var mpropdefs = self.mpropdefs
+		if mpropdefs.length <= 1 or mpropdefs.length < mtype.collect_mclassdefs(mmodule).length then
+			# Iterate on all definitions of `self`, keep only those inherited by `mtype` in `mmodule`
+			for mpropdef in mpropdefs do
+				# If the definition is not imported by the module, then skip
+				if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
+				# If the definition is not inherited by the type, then skip
+				if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
+				# Else, we keep it
+				candidates.add(mpropdef)
+			end
+		else
+			# Iterate on all super-classdefs of `mtype`, keep only the definitions of `self`, if any.
+			for mclassdef in mtype.collect_mclassdefs(mmodule) do
+				var p = mclassdef.mpropdefs_by_property.get_or_null(self)
+				if p != null then candidates.add p
+			end
 		end
+
 		# Fast track for only one candidate
 		if candidates.length <= 1 then
 			self.lookup_definitions_cache[mmodule, mtype] = candidates
@@ -2247,6 +2266,9 @@ class MVirtualTypeProp
 
 	# The formal type associated to the virtual type property
 	var mvirtualtype = new MVirtualType(self)
+
+	# Is `self` the special virtual type `SELF`?
+	var is_selftype: Bool is lazy do return name == "SELF"
 end
 
 # A definition of a property (local property)
@@ -2277,6 +2299,7 @@ abstract class MPropDef
 	do
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
+		mclassdef.mpropdefs_by_property[mproperty] = self
 		if mproperty.intro_mclassdef == mclassdef then
 			assert not isset mproperty._intro
 			mproperty.intro = self

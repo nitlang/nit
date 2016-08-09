@@ -313,6 +313,7 @@ class RapidTypeAnalysis
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
 				if live_types.has(rt) then continue
+				if not is_valid_type(rt) then continue
 				if not check_depth(rt) then continue
 				#print "{ot}/{t} -> {rt}"
 				live_types.add(rt)
@@ -329,11 +330,22 @@ class RapidTypeAnalysis
 			for t in live_types do
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
+				if not is_valid_type(rt) then continue
 				live_cast_types.add(rt)
 				#print "  {ot}/{t} -> {rt}"
 			end
 		end
 		#print "cast MType {live_cast_types.length}: {live_cast_types.join(", ")}"
+	end
+
+	# Quick and dirty check that a forced type resolution gives a legal type
+	# TODO: move up in the model and kill `can_resolve_for`
+	private fun is_valid_type(mtype: MType): Bool
+	do
+		if mtype isa MGenericType then
+			return mtype.is_subtype(mainmodule, null, mtype.mclass.intro.bound_mtype)
+		end
+		return true
 	end
 
 	private fun check_depth(mtype: MClassType): Bool
