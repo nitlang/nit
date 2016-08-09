@@ -835,14 +835,14 @@ abstract class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
-		if sub isa MBottomType then
+		if sub isa MBottomType or sub isa MErrorType then
 			return true
 		end
 
 		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
 
 		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
-		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType then
+		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType or sup isa MErrorType then
 			# These types are not super-types of Class-based types.
 			return false
 		end
@@ -1036,7 +1036,7 @@ abstract class MType
 	# The result is returned exactly as declared in the "type" property (verbatim).
 	# So it could be another formal type.
 	#
-	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
+	# In case of conflicts or inconsistencies in the model, the method returns a `MErrorType`.
 	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Resolve the formal type to its simplest equivalent form.
@@ -1051,7 +1051,7 @@ abstract class MType
 	# By default, return self.
 	# See the redefinitions for specific behavior in each kind of type.
 	#
-	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
+	# In case of conflicts or inconsistencies in the model, the method returns a `MErrorType`.
 	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Can the type be resolved?
@@ -1397,7 +1397,7 @@ class MVirtualType
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
-		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MBottomType(model)
+		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MErrorType(model)
 	end
 
 	private fun lookup_single_definition(mmodule: MModule, resolved_receiver: MType): MVirtualTypeDef
@@ -1433,7 +1433,7 @@ class MVirtualType
 
 		var prop = lookup_single_definition(mmodule, resolved_receiver)
 		var res = prop.bound
-		if res == null then return new MBottomType(model)
+		if res == null then return new MErrorType(model)
 
 		# Recursively lookup the fixed result
 		res = res.lookup_fixed(mmodule, resolved_receiver)
@@ -1784,9 +1784,10 @@ end
 # The special universal most specific type.
 #
 # This type is intended to be only used internally for type computation or analysis and should not be exposed to the user.
-# The bottom type can de used to denote things that are absurd, dead, or the absence of knowledge.
+# The bottom type can de used to denote things that are dead (no instance).
 #
 # Semantically it is the singleton `null.as_notnull`.
+# Is also means that `self.as_nullable == null`.
 class MBottomType
 	super MType
 	redef var model
@@ -1795,6 +1796,29 @@ class MBottomType
 	redef fun c_name do return "bottom"
 	redef fun as_nullable do return model.null_type
 	redef fun as_notnull do return self
+	redef fun need_anchor do return false
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
+	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
+
+	redef fun collect_mclasses(mmodule) do return new HashSet[MClass]
+
+	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
+end
+
+# A special type used as a silent error marker when building types.
+#
+# This type is intended to be only used internally for type operation and should not be exposed to the user.
+# The error type can de used to denote things that are conflicting or inconsistent.
+#
+# Some methods on types can return a `MErrorType` to denote a broken or a conflicting result.
+class MErrorType
+	super MType
+	redef var model
+	redef fun to_s do return "error"
+	redef fun full_name do return "error"
+	redef fun c_name do return "error"
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true

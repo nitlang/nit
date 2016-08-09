@@ -111,7 +111,7 @@ redef class ModelBuilder
 				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
 					# Invalidate the bound
 					mpropdef.is_broken = true
-					mpropdef.bound = new MBottomType(mclassdef.mmodule.model)
+					mpropdef.bound = new MErrorType(mclassdef.mmodule.model)
 				end
 			end
 			for npropdef in nclassdef2.n_propdefs do
@@ -383,6 +383,8 @@ redef class ModelBuilder
 		else if mtype isa MNullType then
 			# nothing to do.
 		else if mtype isa MBottomType then
+			# nothing to do.
+		else if mtype isa MErrorType then
 			# nothing to do.
 		else
 			node.debug "Unexpected type {mtype}"
