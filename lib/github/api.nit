@@ -145,6 +145,21 @@ class GithubAPI
 		return res.as(JsonObject)
 	end
 
+	# Get the Github logged user from `auth` token.
+	#
+	# Loads the `User` from the API or returns `null` if the user cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var user = api.load_auth_user
+	# assert user.login == "Morriar"
+	# ~~~
+	fun load_auth_user: nullable User do
+		var json = load_from_github("user")
+		if was_error then return null
+		return new User.from_json(self, json)
+	end
+
 	# Get the Github user with `login`
 	#
 	# Loads the `User` from the API or returns `null` if the user cannot be found.
