@@ -148,7 +148,7 @@ class APIEntityLinearization
 			res.error 404
 			return
 		end
-		var lin = mentity.collect_linearization(mainmodule)
+		var lin = mentity.collect_linearization(config.mainmodule)
 		if lin == null then
 			res.error 404
 			return
@@ -206,7 +206,7 @@ class APIEntityUML
 		var dot
 		if mentity isa MClassDef then mentity = mentity.mclass
 		if mentity isa MClass then
-			var uml = new UMLModel(view, mainmodule)
+			var uml = new UMLModel(view, config.mainmodule)
 			dot = uml.generate_class_uml.write_to_string
 		else if mentity isa MModule then
 			var uml = new UMLModel(view, mentity)
@@ -225,9 +225,6 @@ end
 class APIEntityCode
 	super APIHandler
 
-	# Modelbuilder used to access sources.
-	var modelbuilder: ModelBuilder
-
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
@@ -241,7 +238,7 @@ class APIEntityCode
 
 	# Highlight `mentity` source code.
 	private fun render_source(mentity: MEntity): nullable HTMLTag do
-		var node = modelbuilder.mentity2node(mentity)
+		var node = config.modelbuilder.mentity2node(mentity)
 		if node == null then return null
 		var hl = new HighlightVisitor
 		hl.enter_visit node

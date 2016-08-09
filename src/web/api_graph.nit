@@ -24,7 +24,7 @@ class APIGraphRouter
 	super APIRouter
 
 	init do
-		use("/inheritance/:id", new APIInheritanceGraph(model, mainmodule))
+		use("/inheritance/:id", new APIInheritanceGraph(config))
 	end
 end
 

@@ -18,24 +18,44 @@ module api_feedback
 import web_base
 import mongodb
 
+redef class NitwebConfig
+
+	# MongoDB uri used for data persistence.
+	#
+	# * key: `mongo.uri`
+	# * default: `mongodb://localhost:27017/`
+	var mongo_uri: String is lazy do
+		return value_or_default("mongo.uri", "mongodb://localhost:27017/")
+	end
+
+	# MongoDB DB used for data persistence.
+	#
+	# * key: `mongo.db`
+	# * default: `nitweb`
+	var mongo_db: String is lazy do return value_or_default("mongo.db", "nitweb")
+
+	# Mongo instance
+	var mongo: MongoClient is lazy do return new MongoClient(mongo_uri)
+
+	# Database instance
+	var db: MongoDb is lazy do return mongo.database(mongo_db)
+
+	# MongoDB collection used to store stars.
+	var stars: MongoCollection is lazy do return db.collection("stars")
+end
+
 # Group all api handlers in one router
 class APIFeedbackRouter
 	super APIRouter
 
-	# Mongo collection used to store ratings
-	var collection: MongoCollection
-
 	init do
-		use("/stars/:id", new APIStars(model, mainmodule, collection))
+		use("/stars/:id", new APIStars(config))
 	end
 end
 
 # Stars attributed to mentities
 class APIStars
 	super APIHandler
-
-	# Collection used to store ratings
-	var collection: MongoCollection
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
@@ -65,7 +85,7 @@ class APIStars
 		end
 
 		var val = new MEntityRating(mentity.full_name, rating, get_time)
-		collection.insert(val.json)
+		config.stars.insert(val.json)
 
 		res.json mentity_ratings(mentity)
 	end
@@ -76,7 +96,7 @@ class APIStars
 
 		var req = new JsonObject
 		req["mentity"] = mentity.full_name
-		var rs = collection.find_all(req)
+		var rs = config.stars.find_all(req)
 		for r in rs do ratings.ratings.add new MEntityRating.from_json(r)
 		return ratings
 	end

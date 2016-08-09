@@ -19,16 +19,10 @@ import metrics
 
 # Group all api handlers in one router.
 class APIMetricsRouter
-	super Router
-
-	# Model to pass to handlers.
-	var model: Model
-
-	# Mainmodule to pass to handlers.
-	var mainmodule: MModule
+	super APIRouter
 
 	init do
-		use("/structural/:id", new APIStructuralMetrics(model, mainmodule))
+		use("/structural/:id", new APIStructuralMetrics(config))
 	end
 end
 
@@ -36,6 +30,7 @@ class APIStructuralMetrics
 	super APIHandler
 
 	private fun mclasses_metrics: MetricSet do
+		var mainmodule = config.mainmodule
 		var metrics = new MetricSet
 		metrics.register(new CNOA(mainmodule, view))
 		metrics.register(new CNOP(mainmodule, view))
@@ -58,6 +53,7 @@ class APIStructuralMetrics
 	end
 
 	private fun mmodules_metrics: MetricSet do
+		var mainmodule = config.mainmodule
 		var metrics = new MetricSet
 		metrics.register(new MNOA(mainmodule, view))
 		metrics.register(new MNOP(mainmodule, view))

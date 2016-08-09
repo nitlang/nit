@@ -15,29 +15,49 @@
 # Runs a webserver based on nitcorn that render things from model.
 module nitweb
 
+import popcorn::pop_config
 import frontend
 import web
 
 redef class ToolContext
 
-	# Host name to bind on.
+	# Path to app config file.
+	var opt_config = new OptionString("Path to app config file", "--config")
+
+	# Host name to bind on (will overwrite the config one).
 	var opt_host = new OptionString("Host to bind the server on", "--host")
 
-	# Port number to bind on.
-	var opt_port = new OptionInt("Port number to use", 3000, "--port")
+	# Port number to bind on (will overwrite the config one).
+	var opt_port = new OptionInt("Port number to use", -1, "--port")
 
 	# Web rendering phase.
 	var webphase: Phase = new NitwebPhase(self, null)
 
 	init do
 		super
-		option_context.add_option(opt_host, opt_port)
+		option_context.add_option(opt_config, opt_host, opt_port)
 	end
 end
 
 # Phase that builds the model and wait for http request to serve pages.
 private class NitwebPhase
 	super Phase
+
+	# Build the nitweb config from `toolcontext` options.
+	fun build_config(toolcontext: ToolContext, mainmodule: MModule): NitwebConfig do
+		var config_file = toolcontext.opt_config.value
+		if config_file == null then config_file = "nitweb.ini"
+		var config = new NitwebConfig(
+			config_file,
+			toolcontext.modelbuilder.model,
+			mainmodule,
+			toolcontext.modelbuilder)
+		var opt_host = toolcontext.opt_host.value
+		if opt_host != null then config["app.host"] = opt_host
+		var opt_port = toolcontext.opt_port.value
+		if opt_port >= 0 then config["app.port"] = opt_port.to_s
+		return config
+	end
 
 	# Build the nit catalog used in homepage.
 	fun build_catalog(model: Model, modelbuilder: ModelBuilder): Catalog do
@@ -63,25 +83,17 @@ private class NitwebPhase
 	do
 		var model = mainmodule.model
 		var modelbuilder = toolcontext.modelbuilder
+		var config = build_config(toolcontext, mainmodule)
 		var catalog = build_catalog(model, modelbuilder)
-
-		# Prepare mongo connection
-		var mongo = new MongoClient("mongodb://localhost:27017/")
-		var db = mongo.database("nitweb")
-		var collection = db.collection("stars")
-
-		# Run the server
-		var host = toolcontext.opt_host.value or else "localhost"
-		var port = toolcontext.opt_port.value
 
 		var app = new App
 
 		app.use_before("/*", new RequestClock)
-		app.use("/api", new NitwebAPIRouter(model, mainmodule, modelbuilder, catalog, stars))
+		app.use("/api", new NitwebAPIRouter(config, catalog))
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
 		app.use_after("/*", new ConsoleLog)
 
-		app.listen(host, port.to_i)
+		app.listen(config.app_host, config.app_port)
 	end
 end
 
@@ -89,30 +101,24 @@ end
 class NitwebAPIRouter
 	super APIRouter
 
-	# ModelBuilder to pass to handlers.
-	var modelbuilder: ModelBuilder
-
 	# Catalog to pass to handlers.
 	var catalog: Catalog
 
-	# Mongo collection used to store ratings.
-	var collection: MongoCollection
-
 	init do
-		use("/catalog", new APICatalogRouter(model, mainmodule, catalog))
-		use("/list", new APIList(model, mainmodule))
-		use("/search", new APISearch(model, mainmodule))
-		use("/random", new APIRandom(model, mainmodule))
-		use("/entity/:id", new APIEntity(model, mainmodule))
-		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
-		use("/uml/:id", new APIEntityUML(model, mainmodule))
-		use("/linearization/:id", new APIEntityLinearization(model, mainmodule))
-		use("/defs/:id", new APIEntityDefs(model, mainmodule))
-		use("/feedback/", new APIFeedbackRouter(model, mainmodule, collection))
-		use("/inheritance/:id", new APIEntityInheritance(model, mainmodule))
-		use("/graph/", new APIGraphRouter(model, mainmodule))
-		use("/docdown/", new APIDocdown(model, mainmodule, modelbuilder))
-		use("/metrics/", new APIMetricsRouter(model, mainmodule))
+		use("/catalog", new APICatalogRouter(config, catalog))
+		use("/list", new APIList(config))
+		use("/search", new APISearch(config))
+		use("/random", new APIRandom(config))
+		use("/entity/:id", new APIEntity(config))
+		use("/code/:id", new APIEntityCode(config))
+		use("/uml/:id", new APIEntityUML(config))
+		use("/linearization/:id", new APIEntityLinearization(config))
+		use("/defs/:id", new APIEntityDefs(config))
+		use("/feedback/", new APIFeedbackRouter(config))
+		use("/inheritance/:id", new APIEntityInheritance(config))
+		use("/graph/", new APIGraphRouter(config))
+		use("/docdown/", new APIDocdown(config))
+		use("/metrics/", new APIMetricsRouter(config))
 	end
 end
 
