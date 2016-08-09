@@ -57,17 +57,6 @@ RUN mkdir -p /opt \
 	&& printf "PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK\nexport PATH\n" >> "/etc/profile.d/android.sh"
 
 # Setup environment variables
-
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV ANDROID_NDK /opt/android-ndk
 ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK
-
-# Run tests
-RUN cd /nit/tests \
-	# Basic tests
-	&& ./testfull.sh || true \
-	&& rm -rf out/ alt/*.nit \
-	# Nitunits
-	&& ../bin/nitunit ../lib ../contrib || true \
-	&& rm -rf .nitunit \
-	&& ccache -C
