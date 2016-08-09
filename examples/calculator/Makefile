@@ -13,21 +13,35 @@ bin/scientific: $(shell ${NITLS} -M scientific linux) ${NITC}
 
 # ---
 # Android
+#
+# There are 4 versions, combining 2 variations:
+# * scientific vs non-scientific
+# * android API 21+ vs under 21
 
-android: bin/calculator.apk bin/scientific.apk
+android: bin/calculator.apk bin/scientific.apk bin/calculator21.apk bin/scientific21.apk
 
 bin/calculator.apk: $(shell ${NITLS} -M src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o $@ src/android_calculator.nit -D debug
 
+bin/calculator21.apk: $(shell ${NITLS} -M src/android21) ${NITC} android/res/drawable-hdpi/icon.png
+	mkdir -p bin
+	${NITC} -o $@ src/android21 -D debug
+
 bin/scientific.apk: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m src/android_calculator.nit -D debug
 
+bin/scientific21.apk: $(shell ${NITLS} -M src/scientific src/android21) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
+	mkdir -p bin
+	${NITC} -o $@ src/scientific -m src/android21 -D debug
+
 android-release: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o bin/calculator.apk src/android_calculator.nit --release
+	${NITC} -o bin/calculator21.apk src/android21 --release
 	${NITC} -o bin/scientific.apk src/scientific -m src/android_calculator.nit --release
+	${NITC} -o bin/scientific21.apk src/scientific -m src/android21 --release
 
 android/res/drawable-hdpi/icon.png: art/icon.svg ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p android/res
