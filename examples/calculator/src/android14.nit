@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Aesthetic adaptations for Android
-module android_calculator
+# Aesthetic adaptations for Android for API 14+
+module android14
 
 import calculator
 import android

@@ -20,7 +20,7 @@ module android21 is
 	app_files
 end
 
-import android_calculator
+import android14
 
 redef class TextInput
 	init do
