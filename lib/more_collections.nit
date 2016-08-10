@@ -35,7 +35,18 @@ class MultiHashMap[K, V]
 	super HashMap[K, Array[V]]
 
 	# Add `v` to the array associated with `k`.
+	#
 	# If there is no array associated, then create it.
+	#
+	# ```
+	# var m = new MultiHashMap[String, Char]
+	# m.add_one("four", 'i')
+	# m.add_one("four", 'i')
+	# m.add_one("four", 'i')
+	# m.add_one("four", 'i')
+	# assert m.has_key("four")
+	# assert m["four"] == ['i', 'i', 'i', 'i']
+	# ```
 	fun add_one(k: K, v: V)
 	do
 		var x = self.get_or_null(k)
