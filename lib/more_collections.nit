@@ -38,6 +38,8 @@ class MultiHashMap[K, V]
 	#
 	# If there is no array associated, then create it.
 	#
+	# For the inverse operation, see `remove_one`.
+	#
 	# ```
 	# var m = new MultiHashMap[String, Char]
 	# m.add_one("four", 'i')
@@ -61,6 +63,44 @@ class MultiHashMap[K, V]
 		var res = new Array[V]
 		self[key] = res
 		return res
+	end
+
+	# Remove an occurrence of `v` from the array associated with `k`.
+	#
+	# If the associated array does not contain `v`, do nothing. If the
+	# associated array only contain one element and this element is `v`, remove
+	# the key `k`.
+	#
+	# In a nutshell, does the inverse operation of `add_one`.
+	#
+	# ```
+	# var m = new MultiHashMap[String, Char]
+	# m["four"]        =  ['4', 'i', 'i', 'i', 'i']
+	# m.remove_one("four", 'i')
+	# assert m["four"] == ['4', 'i', 'i', 'i']
+	#
+	# m = new MultiHashMap[String, Char]
+	# m.add_one("one", '1')
+	# m.remove_one("one", '?')
+	# assert m["one"] == ['1']
+	# m.remove_one("one", '1')
+	# assert not m.has_key("one")
+	# assert m["one"] == new Array[Char]
+	#
+	# m = new MultiHashMap[String, Char]
+	# m.add_one("one", '1')
+	# m.remove_one("two", '2')
+	# assert not m.has_key("two")
+	# assert m["one"] == ['1']
+	# assert m["two"] == new Array[Char]
+	# ```
+	fun remove_one(k: K, v: V)
+	do
+		var x = get_or_null(k)
+		if x != null then
+			x.remove(v)
+			if x.is_empty then keys.remove(k)
+		end
 	end
 end
 
