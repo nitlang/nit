@@ -395,6 +395,23 @@ class JsonDeserializer
 
 		# Simple JSON array without serialization metadata
 		if object isa Array[nullable Object] then
+			# Can we use the static type?
+			if static_type != null then
+				var prefix = "nullable "
+				var class_name = if static_type.has(prefix) then
+						static_type.substring_from(prefix.length)
+					else static_type
+
+				opened_array = object
+				var value = deserialize_class(class_name)
+				opened_array = null
+				return value
+			end
+
+			# This branch should rarely be used:
+			# when an array is the root object which is accepted but illegal in standard JSON,
+			# or in strange custom deserialization hacks.
+
 			var array = new Array[nullable Object]
 			var types = new HashSet[String]
 			var has_nullable = false
@@ -448,6 +465,9 @@ class JsonDeserializer
 
 		return object
 	end
+
+	# Current array open for deserialization, used by `SimpleCollection::from_deserializer`
+	private var opened_array: nullable Array[nullable Object] = null
 
 	redef fun deserialize
 	do
@@ -684,14 +704,20 @@ redef class SimpleCollection[E]
 			v.notify_of_creation self
 			init
 
-			var arr = v.path.last.get_or_null("__items")
-			if not arr isa SequenceRead[nullable Object] then
-				# If there is nothing, we consider that it is an empty collection.
-				if arr != null then v.errors.add new Error("Deserialization Error: invalid format in {self.class_name}")
-				return
+			var open_array: nullable SequenceRead[nullable Object] = v.opened_array
+			if open_array == null then
+				# With metadata
+				var arr = v.path.last.get_or_null("__items")
+				if not arr isa SequenceRead[nullable Object] then
+					# If there is nothing, we consider that it is an empty collection.
+					if arr != null then v.errors.add new Error("Deserialization Error: invalid format in {self.class_name}")
+					return
+				end
+				open_array = arr
 			end
 
-			for o in arr do
+			# Fill array
+			for o in open_array do
 				var obj = v.convert_object(o)
 				if obj isa E then
 					add obj
