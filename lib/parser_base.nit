@@ -11,6 +11,8 @@
 # Simple base for hand-made parsers of all kinds
 module parser_base
 
+import serialization
+
 # Basic facilities for common parser operations on String sources
 class StringProcessor
 	# Source document to parse
@@ -114,6 +116,8 @@ end
 
 # Information about the location of an entity in a source document
 class Location
+	serialize
+
 	# Line in which the element is described
 	var line: Int
 	# Offset in the line at which the element is positioned
