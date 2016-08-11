@@ -121,7 +121,7 @@ private class SerializationPhasePreModel
 		if not node isa AModuledecl then
 			var up_serialize = false
 			var up: nullable ANode = node
-			loop
+			while up != null do
 				up = up.parent
 				if up == null then
 					break
@@ -299,7 +299,9 @@ do
 		end
 
 		for nclassdef in nclassdefs do
-			var name = nclassdef.n_qid.n_id.text
+			var n_qid = nclassdef.n_qid
+			if n_qid == null then continue
+			var name = n_qid.n_id.text
 			if nclassdef.n_formaldefs.is_empty and
 			   nclassdef.n_classkind isa AConcreteClasskind then
 
@@ -387,9 +389,9 @@ redef class AModule
 	private fun deserializer_nclassdef: nullable AStdClassdef
 	do
 		for nclassdef in n_classdefs do
-			if nclassdef isa AStdClassdef and nclassdef.n_qid.n_id.text == "Deserializer" then
-				return nclassdef
-			end
+			if not nclassdef isa AStdClassdef then continue
+			var n_qid = nclassdef.n_qid
+			if n_qid != null and n_qid.n_id.text == "Deserializer" then return nclassdef
 		end
 
 		return null
@@ -397,7 +399,11 @@ redef class AModule
 
 	private var inits_to_retype = new Array[AMethPropdef]
 
-	redef fun is_serialize do return n_moduledecl != null and n_moduledecl.is_serialize
+	redef fun is_serialize
+	do
+		var n_moduledecl = n_moduledecl
+		return n_moduledecl != null and n_moduledecl.is_serialize
+	end
 end
 
 redef class AStdClassdef
