@@ -626,6 +626,22 @@ class Path
 		return res
 	end
 
+	# Correctly join `self` with `subpath` using the directory separator.
+	#
+	# Using a standard "{self}/{path}" does not work in the following cases:
+	#
+	# * `self` is empty.
+	# * `path` starts with `'/'`.
+	#
+	# This method ensures that the join is valid.
+	#
+	#     var hello = "hello".to_path
+	#     assert (hello/"world").to_s   == "hello/world"
+	#     assert ("hel/lo".to_path / "wor/ld").to_s == "hel/lo/wor/ld"
+	#     assert ("".to_path / "world").to_s == "world"
+	#     assert (hello / "/world").to_s  == "/world"
+	#     assert ("hello/".to_path / "world").to_s  == "hello/world"
+	fun /(subpath: String): Path do return new Path(path / subpath)
 
 	# Lists the files contained within the directory at `path`.
 	#
@@ -657,7 +673,7 @@ class Path
 			end
 			var name = de.to_s_with_copy
 			if name == "." or name == ".." then continue
-			res.add new Path(path / name)
+			res.add self / name
 		end
 		d.closedir
 
