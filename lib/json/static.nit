@@ -28,6 +28,7 @@ private import json_lexer
 
 # Something that can be translated to JSON.
 interface Jsonable
+	super Serializable
 end
 
 redef class Text
