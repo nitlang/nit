@@ -292,7 +292,7 @@ private class SerializationPhasePostModel
 		end
 	end
 
-	# Add a constructor to the generated `init_npropdef` of `nclassdef`
+	# Fill the constructor to the generated `init_npropdef` of `nclassdef`
 	fun fill_deserialization_init(nclassdef: AClassdef, init_npropdef: AMethPropdef, per_attribute: Bool)
 	do
 		var code = new Array[String]
@@ -318,10 +318,10 @@ do
 			if type_name == "nullable Object" then
 				# Don't type check
 				code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
 """
 			else code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
 	if not {{{name}}} isa {{{type_name}}} then
 		# Check if it was a subjectent error
 		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
