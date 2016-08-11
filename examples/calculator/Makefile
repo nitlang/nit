@@ -13,34 +13,49 @@ bin/scientific: $(shell ${NITLS} -M scientific linux) ${NITC}
 
 # ---
 # Android
+#
+# There are 4 versions, combining 2 variations:
+# * scientific vs non-scientific
+# * android API 21+ vs under 21
 
-android: bin/calculator.apk bin/scientific.apk
+android: bin/calculator14.apk bin/scientific14.apk bin/calculator21.apk bin/scientific21.apk
 
-bin/calculator.apk: $(shell ${NITLS} -M src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
+bin/calculator14.apk: $(shell ${NITLS} -M src/android14.nit) ${NITC} android/res/drawable-hdpi/icon.png
 	mkdir -p bin
-	${NITC} -o $@ src/android_calculator.nit -D debug
+	${NITC} -o $@ src/android14.nit -D debug
 
-bin/scientific.apk: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
+bin/calculator21.apk: $(shell ${NITLS} -M src/android21) ${NITC} android/res/drawable-hdpi/icon.png
 	mkdir -p bin
-	${NITC} -o $@ src/scientific -m src/android_calculator.nit -D debug
+	${NITC} -o $@ src/android21 -D debug
 
-android-release: $(shell ${NITLS} -M src/scientific src/android_calculator.nit) ${NITC} android/res/drawable-hdpi/icon.png
+bin/scientific14.apk: $(shell ${NITLS} -M src/scientific src/android14.nit) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
 	mkdir -p bin
-	${NITC} -o bin/calculator.apk src/scientific -m src/android_calculator.nit --release
+	${NITC} -o $@ src/scientific -m src/android14.nit -D debug
+
+bin/scientific21.apk: $(shell ${NITLS} -M src/scientific src/android21) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
+	mkdir -p bin
+	${NITC} -o $@ src/scientific -m src/android21 -D debug
+
+android-release: $(shell ${NITLS} -M src/scientific src/android14.nit) ${NITC} android/res/drawable-hdpi/icon.png
+	mkdir -p bin
+	${NITC} -o bin/calculator14.apk src/android14.nit --release
+	${NITC} -o bin/calculator21.apk src/android21 --release
+	${NITC} -o bin/scientific14.apk src/scientific -m src/android14.nit --release
+	${NITC} -o bin/scientific21.apk src/scientific -m src/android21 --release
 
 android/res/drawable-hdpi/icon.png: art/icon.svg ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p android/res
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
-src/scientific/android/res/drawable-hdpi/icon.png: art/icon_sci.svg ../../contrib/inkscape_tools/bin/svg_to_icons
+src/scientific/android/res/drawable-hdpi/icon.png: art/icon-sci.svg ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p src/scientific/android/res
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-sci.svg --android --out src/scientific/android/res/
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	make -C ../../contrib/inkscape_tools/
 
-android-install: bin/calculator.apk
-	adb install -r bin/calculator.apk
+android-install: bin/calculator14.apk
+	adb install -r bin/calculator14.apk
 
 # ---
 # iOS
