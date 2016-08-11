@@ -165,16 +165,36 @@ abstract class Lexer
 	fun lex: CircularArray[NToken]
 	do
 		var res = new CircularArray[NToken]
+		loop
+			var t = next_token
+			if t != null then res.add t
+			if t isa NEof or t isa NError then break
+		end
+		return res
+	end
+
+	# Cursor current position (in chars, starting from 0)
+	var pos_start = 0
+
+	# Cursor current line (starting from 1)
+	var line_start = 1
+
+	# Cursor current column (in chars, starting from 1)
+	var col_start = 1
+
+	# Move the cursor and return the next token.
+	#
+	# Returns a `NEof` and the end.
+	# Returns `null` if the token is ignored.
+	fun next_token: nullable NToken
+	do
 		var state = start_state
-		var pos = 0
-		var pos_start = 0
-		var pos_end = 0
-		var line = 1
-		var line_start = 1
-		var line_end = 0
-		var col = 1
-		var col_start = 1
-		var col_end = 0
+		var pos = pos_start
+		var pos_end = pos_start - 1
+		var line = line_start
+		var line_end = line_start - 1
+		var col = col_start
+		var col_end = col_start - 1
 		var last_state: nullable DFAState = null
 		var text = stream
 		var length = text.length
@@ -195,39 +215,30 @@ abstract class Lexer
 				next = state.trans(c)
 			end
 			if next == null then
+				var token
 				if pos_start < length then
 					if last_state == null then
-						var token = new NLexerError
+						token = new NLexerError
 						var position = new Position(pos_start, pos, line_start, line, col_start, col)
 						token.position = position
 						token.text = text.substring(pos_start, pos-pos_start+1)
-						res.push token
-						break
-					end
-					if not last_state.is_ignored then
+					else if not last_state.is_ignored then
 						var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
-						var token = last_state.make_token(position, text)
-						if token != null then res.push(token)
+						token = last_state.make_token(position, text)
+					else
+						token = null
 					end
-				end
-				if pos >= length then
-					var token = new NEof
+				else
+					token = new NEof
 					var position = new Position(pos, pos, line, line, col, col)
 					token.position = position
 					token.text = ""
-					res.push token
-					break
 				end
-				state = start_state
 				pos_start = pos_end + 1
-				pos = pos_start
 				line_start = line_end
-				line = line_start
 				col_start = col_end
-				col = col_start
 
-				last_state = null
-				continue
+				return token
 			end
 			state = next
 			pos += 1
@@ -237,7 +248,6 @@ abstract class Lexer
 				col = 1
 			end
 		end
-		return res
 	end
 end
 
