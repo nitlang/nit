@@ -16,11 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Static interface to get Nit objects from a Json string.
+# Static interface to read Nit objects from JSON strings
 #
-# `Text::parse_json` returns an equivalent Nit object from
-# the Json source. This object can then be type checked by the usual
-# languages features (`isa` and `as`).
+# `Text::parse_json` returns a simple Nit object from the JSON source.
+# This object can then be type checked as usual with `isa` and `as`.
 module static
 
 import error
