@@ -256,7 +256,7 @@ class JsonDeserializer
 		self.root = root
 	end
 
-	redef fun deserialize_attribute(name)
+	redef fun deserialize_attribute(name, static_type)
 	do
 		assert not path.is_empty # This is an internal error, abort
 		var current = path.last
