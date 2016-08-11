@@ -88,21 +88,27 @@ end
 
 # Abstract deserialization service
 #
-# After initialization of one of its sub-classes, call `deserialize`
+# The main service is `deserialize`.
 abstract class Deserializer
-	# Main method of this class, returns a Nit object
+	# Deserialize and return an object, storing errors in the attribute `errors`
+	#
+	# This method behavior varies according to the implementation engines.
 	fun deserialize: nullable Object is abstract
 
-	# Internal method to be implemented by sub-classes
+	# Deserialize the attribute with `name` from the object open for deserialization
+	#
+	# Internal method to be implemented by the engines.
 	fun deserialize_attribute(name: String): nullable Object is abstract
 
-	# Internal method called by objects in creation,
-	# to be implemented by sub-classes
+	# Register a newly allocated object (even if not completely built)
+	#
+	# Internal method called by objects in creation, to be implemented by the engines.
 	fun notify_of_creation(new_object: Object) is abstract
 
 	# Deserialize the next available object as an instance of `class_name`
 	#
-	# Returns the deserialized object on success, aborts on error.
+	# Return the deserialized object on success and
+	# record in `errors` if `class_name` is unknown.
 	#
 	# This method should be redefined for each custom subclass of `Serializable`.
 	# All refinement should look for a precise `class_name` and call super
