@@ -269,7 +269,7 @@ class JsonDeserializer
 		var value = current[name]
 
 		attributes_path.add name
-		var res = convert_object(value)
+		var res = convert_object(value, static_type)
 		attributes_path.pop
 		return res
 	end
@@ -283,8 +283,8 @@ class JsonDeserializer
 		cache[id] = new_object
 	end
 
-	# Convert from simple Json object to Nit object
-	private fun convert_object(object: nullable Object): nullable Object
+	# Convert the simple JSON `object` to a Nit object
+	private fun convert_object(object: nullable Object, static_type: nullable String): nullable Object
 	do
 		if object isa JsonParseError then
 			errors.add object
@@ -339,6 +339,14 @@ class JsonDeserializer
 				if class_name == null then
 					# Fallback to custom heuristic
 					class_name = class_name_heuristic(object)
+
+					if class_name == null and static_type != null then
+						# Fallack to the static type, strip the `nullable` prefix
+						var prefix = "nullable "
+						if static_type.has(prefix) then
+							class_name = static_type.substring_from(prefix.length)
+						else class_name = static_type
+					end
 				end
 
 				if class_name == null then
