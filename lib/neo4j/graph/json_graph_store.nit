@@ -44,7 +44,7 @@ import graph
 # b.labels.add "Bar"
 # graph.edges.add new NeoEdge(a, "BAZ", b)
 #
-# var ostream = new StringWriter
+# var ostream = new MemoryWriter
 # var store = new JsonGraphStore(graph)
 # store.ostream = ostream
 # store.save
@@ -57,7 +57,7 @@ import graph
 #
 # graph.nodes.clear
 # graph.edges.clear
-# store.istream = new StringReader(ostream.to_s)
+# store.istream = new MemoryReader(ostream.to_s)
 # store.load
 # assert 1 == graph.edges.length
 # for edge in graph.edges do
@@ -88,7 +88,7 @@ class JsonGraphStore
 	# Use the specified string to load the graph.
 	init from_string(graph: NeoGraph, string: String) do
 		init(graph)
-		istream = new StringReader(string)
+		istream = new MemoryReader(string.bytes)
 	end
 
 	redef fun isolated_save do return true

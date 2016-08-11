@@ -529,7 +529,7 @@ redef class Serializable
 	# See: `JsonSerializer`
 	fun serialize_to_json(plain, pretty: nullable Bool): String
 	do
-		var stream = new StringWriter
+		var stream = new MemoryWriter
 		var serializer = new JsonSerializer(stream)
 		serializer.plain_json = plain or else false
 		serializer.pretty_json = pretty or else false

@@ -29,9 +29,12 @@ abstract class Socket
 	# Is this socket closed?
 	var closed = false
 
+	# Is `self` a blocking socket connection ?
+	fun blocking: Bool do return not native.non_blocking
+
 	# Set whether calls to `accept` are blocking
-	fun blocking=(value: Bool)
-	do
+	fun blocking=(value: nullable Bool) do
+		if value == null then value = true
 		# We use the opposite from the native version as the native API
 		# is closer to the C API. In the Nity API, we use a positive version
 		# of the name.
@@ -53,35 +56,27 @@ abstract class TCPSocket
 end
 
 # Simple communication stream with a remote socket
+#
+# NOTE: NON-THREAD SAFE
 class TCPStream
 	super TCPSocket
-	super BufferedReader
-	super Writer
-	super PollableReader
+	super Duplex
+	super FinalizableOnce
 
 	# Real canonical name of the host to which `self` is connected
 	var host: String
 
 	private var addrin: NativeSocketAddrIn is noinit
 
-	redef var end_reached = false
-
-	# TODO make init private
+	# Read Byte buffer, required by C-API
+	var read_buf: NativeString is lazy do return new NativeString(1)
 
 	# Creates a socket connection to host `host` on port `port`
-	init connect(host: String, port: Int)
+	init connect(host: String, port: Int, blocking: nullable Bool)
 	do
-		_buffer = new NativeString(1024)
-		_buffer_pos = 0
 		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
 		if native.address_is_null then
-			end_reached = true
-			closed = true
-			return
-		end
-		if not native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
-			end_reached = true
 			closed = true
 			return
 		end
@@ -92,8 +87,6 @@ class TCPStream
 			last_error = new IOError.from_h_errno
 
 			closed = true
-			end_reached = true
-
 			return
 		end
 
@@ -105,13 +98,10 @@ class TCPStream
 		init(addrin.port, hostent.h_name.to_s)
 
 		closed = not internal_connect
-		end_reached = closed
 		if closed then
 			# Connection failed
 			last_error = new IOError.from_errno
 		end
-
-		prepare_buffer(1024)
 	end
 
 	# Creates a client socket, this is meant to be used by accept only
@@ -122,11 +112,35 @@ class TCPStream
 		address = addrin.address.to_s
 
 		init(addrin.port, address)
-
-		prepare_buffer(1024)
 	end
 
-	redef fun poll_in do return ready_to_read(0)
+	redef fun finalize do
+		addrin.free
+	end
+
+	redef fun eof do return super and not connected
+
+	redef fun read_byte do
+		var b = super
+		if b != null then return b
+		if not blocking and not ready then return null
+		if native.read(read_buf, 1) > 0 then
+			#print "Read byte {read_buf[0]}"
+			return read_buf[0]
+		end
+		close
+		return null
+	end
+
+	redef fun read_bytes(bytes, max) do
+		var rd = super
+		if rd >= max then return rd
+		if rd != 0 and not ready then return rd
+		if not blocking and not ready then return rd
+		rd += native.read(bytes.fast_cstring(rd), max - rd)
+		if rd == 0 then close
+		return rd
+	end
 
 	# Returns an array containing an enum of the events ready to be read
 	#
@@ -134,113 +148,80 @@ class TCPStream
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	private fun pollin(event_types: Array[NativeSocketPollValues], timeout: Int): Array[NativeSocketPollValues] do
-		if end_reached then return new Array[NativeSocketPollValues]
 		return native.socket_poll(new PollFD(native.descriptor, event_types), timeout)
 	end
 
 	# Easier use of pollin to check for something to read on all channels of any priority
 	#
 	# timeout : Time in milliseconds before stopping to wait for events
-	fun ready_to_read(timeout: Int): Bool
+	redef fun ready(timeout)
 	do
-		if _buffer_pos < _buffer_length then return true
-		if end_reached then return false
+		if super then return true
+		if closed then return false
+		if not connected then return false
+		var t = if timeout == null then 0 else timeout
 		var events = [new NativeSocketPollValues.pollin]
-		return pollin(events, timeout).length != 0
+		return pollin(events, t).length != 0
+	end
+
+	redef fun is_writable do return not closed
+
+	redef fun write_byte(value)
+	do
+		if closed then
+			last_error = new IOError("Cannot write on a closed socket")
+			return
+		end
+		native.write_byte value
+	end
+
+	redef fun write_bytes(bytes, ln) do
+		if closed then
+			last_error = new IOError("Cannot write on a closed socket")
+			return
+		end
+		native.write(bytes, ln)
+	end
+
+	redef fun close
+	do
+		if closed then return
+		flush
+		if native.close >= 0 then
+			closed = true
+		end
 	end
 
 	# Is this socket still connected?
 	fun connected: Bool
 	do
+		if native.poll_hup_err != 0 then closed = true
 		if closed then return false
-		if native.poll_hup_err == 0 then
-			return true
-		else
-			closed = true
-			return false
-		end
+		return true
 	end
-
-	redef fun is_writable do return not end_reached
 
 	# Establishes a connection to socket addrin
 	#
-	# REQUIRES : not self.end_reached
+	# REQUIRES : not self.closed
 	private fun internal_connect: Bool
 	do
 		assert not closed
 		return native.connect(addrin) >= 0
 	end
 
-	# If socket.end_reached, nothing will happen
-	redef fun write(msg)
-	do
-		if closed then return
-		native.write(msg.to_cstring, msg.length)
-	end
-
-	redef fun write_byte(value)
-	do
-		if closed then return
-		native.write_byte value
-	end
-
-	redef fun write_bytes(bytes) do
-		if closed then return
-		var s = bytes.to_s
-		native.write(s.to_cstring, s.length)
-	end
-
-	fun write_ln(msg: Text)
-	do
-		if closed then return
-		write msg.to_s
-		write "\n"
-	end
-
-	redef fun fill_buffer
-	do
-		if not connected then return
-
-		var read = native.read(_buffer, _buffer_capacity)
-		if read == -1 then
-			close
-			end_reached = true
-		end
-
-		_buffer_length = read
-		_buffer_pos = 0
-	end
-
-	fun enlarge(len: Int) do
-		if _buffer_capacity >= len then return
-		_buffer_capacity = len
-
-		var ns = new NativeString(_buffer_capacity)
-		_buffer.copy_to(ns, _buffer_length - _buffer_pos, _buffer_pos, 0)
-		_buffer = ns
-	end
-
-	redef fun close
-	do
-		if closed then return
-		if native.close >= 0 then
-			closed = true
-			end_reached = true
-		end
-	end
-
 	# Send the data present in the socket buffer
 	fun flush
 	do
-		if not native.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1) or
-		   not native.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0) then
+		var nsol_tcp = new NativeSocketOptLevels.tcp
+		var nson_nodelay = new NativeSocketOptNames.tcp_nodelay
+		if not native.setsockopt(nsol_tcp, nson_nodelay, 1) or
+		   not native.setsockopt(nsol_tcp, nson_nodelay, 0) then
 			closed = true
 		end
 	end
 end
 
-# A socket listening on a given `port` for incomming connections
+# A socket listening on a given `port` for incoming connections
 #
 # Create streams to communicate with clients using `accept`.
 class TCPServer
@@ -249,8 +230,7 @@ class TCPServer
 	private var addrin: NativeSocketAddrIn is noinit
 
 	# Create and bind a listening server socket on port `port`
-	init
-	do
+	init do
 		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
 		assert not native.address_is_null

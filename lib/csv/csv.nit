@@ -174,7 +174,7 @@ end
 # delimiters by some parsers.
 #
 # ~~~nit
-# var out = new StringWriter
+# var out = new MemoryWriter
 # var writer = new CsvWriter(out)
 # writer.write_elements(1, 2.0, "foo\nbar")
 # writer.write_line([""])
@@ -259,7 +259,7 @@ class CsvReader
 	var skip_empty: Bool = false is writable
 
 	# Creates a new CSVReader from a `string` data
-	init from_string(s: String) do init(new StringReader(s))
+	init from_string(s: String) do init(new MemoryReader.from_str(s))
 
 	# Reads the content of the Stream and interprets it as a CSV Document
 	#

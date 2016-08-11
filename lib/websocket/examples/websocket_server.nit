@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Lucas Bajolet <r4pass@hotmail.com>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -19,28 +17,32 @@ module websocket_server
 
 import websocket
 
-var sock = new WebSocketListener(8088, 1)
+var sock = new TCPServer(8088)
+sock.blocking = true
+sock.listen(5)
 
 var msg: String
 
-if sock.listener.closed then
+if sock.closed then
 	print sys.errno.strerror
 end
 
-var cli: TCPStream
-
 while not sock.closed do
-	cli = sock.accept
-	while cli.connected do
-		if sys.stdin.poll_in then
+	0.1.sleep
+	var cli = sock.accept
+	print "Has connection ? {cli != null}"
+	if cli == null then continue
+	var wscli = new WebsocketConnection(cli)
+	while not wscli.eof do
+		0.0166.sleep
+		if sys.stdin.ready then
 			msg = gets
-			printn "Received message : {msg}"
-			if msg == "disconnect" then cli.close
-			cli.write(msg)
+			if msg == "disconnect" then wscli.close
+			wscli.write(msg)
 		end
-		if cli.can_read(10) then
+		if wscli.ready(0) then
 			msg = ""
-			while cli.can_read(0) do msg += cli.read(100)
+			while wscli.ready(0) do msg += wscli.read(100)
 			if msg != "" then print msg
 		end
 	end

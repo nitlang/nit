@@ -168,9 +168,10 @@ extern class NativeSocket `{ int* `}
 	#
 	# A return value of 0 means there is no errors.
 	fun poll_hup_err: Int `{
-		struct pollfd fd = {*self, POLLHUP|POLLERR, 0};
-		int res = poll(&fd, 1, 0);
-		return res;
+		int hupmask = POLLHUP|POLLERR;
+		struct pollfd fd = {*self, hupmask, 0};
+		if (poll(&fd, 1, 0) < 0) return 1;
+		return fd.revents;
 	`}
 
 	# Call to the poll function of the C socket
@@ -207,9 +208,17 @@ extern class NativeSocket `{ int* `}
 	do
 		var addrIn = new NativeSocketAddrIn
 		var s = native_accept(addrIn)
-		if s.address_is_null then return null
+		if s.address_is_null then
+			addrIn.free
+			return null
+		end
 		return new SocketAcceptResult(s, addrIn)
 	end
+
+	# Is `self` a non-blocking socket ?
+	fun non_blocking: Bool `{
+		return (fcntl(*self, F_GETFL, 0) & O_NONBLOCK) != 0;
+	`}
 
 	# Set whether this socket is non blocking
 	fun non_blocking=(value: Bool) `{

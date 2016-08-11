@@ -47,7 +47,7 @@ private class UserDefaultView
 		if value == null then
 			nsobject = new NSString.nil
 		else
-			var serialized_string = new StringWriter
+			var serialized_string = new MemoryWriter
 			var serializer = new JsonSerializer(serialized_string)
 			serializer.serialize(value)
 

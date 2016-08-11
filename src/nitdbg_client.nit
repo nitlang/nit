@@ -86,7 +86,10 @@ print "[PORT] : {debug.port}"
 print "Connecting ... {debug.connected}"
 
 while debug.connected do
-	if stdin.poll_in then debug.write_ln(gets)
-	while debug.ready_to_read(50) do printn debug.read(200)
+	if stdin.ready then
+		debug.write(gets)
+		debug.write_byte(0x0Au8)
+	end
+	while debug.ready(50) do printn debug.read(200)
 end
 

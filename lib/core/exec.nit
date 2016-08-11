@@ -301,7 +301,7 @@ class ProcessDuplex
 			write input.substring(prev, delimiter.after-prev)
 			prev = delimiter.after
 
-			while stream_in.poll_in do
+			while stream_in.ready do
 				read.append stream_in.read_line
 			end
 		end

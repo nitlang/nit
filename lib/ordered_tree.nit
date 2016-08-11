@@ -144,7 +144,7 @@ class OrderedTree[E: Object]
 
 	# print the full tree on `o`
 	# Write a ASCII-style tree and use the `display` method to label elements
-	redef fun write_to(stream: Writer)
+	redef fun write_to(stream)
 	do
 		for r in roots do
 			stream.write display(r)

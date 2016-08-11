@@ -60,7 +60,7 @@ private import lexer
 #     var reader = new XophonReader
 #     #
 #     reader.content_handler = text
-#     reader.parse(new InputSource.with_stream(new StringReader("<foo>bar baz <n>42</n>.</foo>")))
+#     reader.parse(new InputSource.with_stream(new MemoryReader("<foo>bar baz <n>42</n>.</foo>".bytes)))
 #     assert text.to_s == "bar baz 42."
 class XophonReader
 	super XMLReader

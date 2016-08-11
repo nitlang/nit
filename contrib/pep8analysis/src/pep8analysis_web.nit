@@ -95,7 +95,7 @@ redef class AnalysisManager
 		print_notes
 		if notes.is_empty then print "Success: Nothing wrong detected"
 
-		var of = new StringWriter
+		var of = new MemoryWriter
 		cfg.print_dot(of, false)
 		of.close
 		show_graph(of.to_s)

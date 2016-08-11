@@ -37,7 +37,7 @@ redef class Text
 		var gcc_proc = new ProcessReader("sh", "-c", cmd)
 
 		# header_keeper, to keep only the target file (path)
-		var o = new StringWriter
+		var o = new MemoryWriter
 		header_keeper(gcc_proc, o, path)
 
 		gcc_proc.wait
@@ -47,8 +47,8 @@ redef class Text
 		end
 
 		# header_static, strip lines unsupported by our parser
-		var i = new StringReader(o.to_s)
-		o = new StringWriter
+		var i = new MemoryReader(o.to_s.bytes)
+		o = new MemoryWriter
 		header_static(i, o)
 
 		return o.to_s
