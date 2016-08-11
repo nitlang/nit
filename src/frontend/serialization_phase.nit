@@ -22,6 +22,7 @@ module serialization_phase
 private import parser_util
 import modelize
 private import annotation
+intrude import literal
 
 redef class ToolContext
 
@@ -34,9 +35,7 @@ redef class ToolContext
 
 	# The second phase of the serialization
 	var serialization_phase_post_model: Phase = new SerializationPhasePostModel(self,
-		[modelize_class_phase, serialization_phase_pre_model])
-
-	private fun place_holder_type_name: String do return "PlaceHolderTypeWhichShouldNotExist"
+		[modelize_property_phase, serialization_phase_pre_model])
 end
 
 redef class ANode
@@ -45,8 +44,6 @@ redef class ANode
 
 	# Is this node annotated to not be made serializable?
 	private fun is_noserialize: Bool do return false
-
-	private fun accept_precise_type_visitor(v: PreciseTypeVisitor) do visit_all(v)
 end
 
 redef class ADefinition
@@ -160,7 +157,7 @@ private class SerializationPhasePreModel
 			# Add services
 			var per_attribute = not serialize_by_default
 			generate_serialization_method(nclassdef, per_attribute)
-			generate_deserialization_init(nclassdef, per_attribute)
+			generate_deserialization_init(nclassdef)
 		end
 	end
 
@@ -206,8 +203,10 @@ private class SerializationPhasePreModel
 		npropdefs.push(toolcontext.parse_propdef(code.join("\n")))
 	end
 
-	# Add a constructor to the automated nclassdef
-	fun generate_deserialization_init(nclassdef: AClassdef, per_attribute: Bool)
+	# Add an empty constructor to the automated nclassdef
+	#
+	# Will be filled by `SerializationPhasePostModel`.
+	fun generate_deserialization_init(nclassdef: AClassdef)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -221,55 +220,10 @@ private class SerializationPhasePreModel
 			end
 		end
 
-		var code = new Array[String]
-		code.add """
-redef init from_deserializer(v: Deserializer)
-do
-	super
-	v.notify_of_creation self
-"""
+		var code = """
+redef init from_deserializer(v: Deserializer) do abort"""
 
-		for attribute in npropdefs do if attribute isa AAttrPropdef then
-
-			# Is `attribute` to be skipped?
-			if (per_attribute and not attribute.is_serialize) or
-				attribute.is_noserialize then continue
-
-			var n_type = attribute.n_type
-			var type_name
-			var type_name_pretty
-			if n_type == null then
-				# Use a place holder, we will replace it with the inferred type after the model phases
-				type_name = toolcontext.place_holder_type_name
-				type_name_pretty = "Unknown type"
-			else
-				type_name = n_type.type_name
-				type_name_pretty = type_name
-			end
-			var name = attribute.name
-
-			if type_name == "nullable Object" then
-				# Don't type check
-				code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
-"""
-			else code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
-	if not {{{name}}} isa {{{type_name}}} then
-		# Check if it was a subjectent error
-		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name_pretty}}}")
-
-		# Clear subjacent error
-		if v.keep_going == false then return
-	else
-		self.{{{name}}} = {{{name}}}
-	end
-"""
-		end
-
-		code.add "end"
-
-		var npropdef = toolcontext.parse_propdef(code.join("\n")).as(AMethPropdef)
+		var npropdef = toolcontext.parse_propdef(code).as(AMethPropdef)
 		npropdefs.add npropdef
 		nclassdef.parent.as(AModule).inits_to_retype.add npropdef
 	end
@@ -327,38 +281,68 @@ private class SerializationPhasePostModel
 	redef fun process_nmodule(nmodule)
 	do
 		for npropdef in nmodule.inits_to_retype do
-			var mpropdef = npropdef.mpropdef
-			if mpropdef == null then continue # skip error
-			var v = new PreciseTypeVisitor(npropdef, mpropdef.mclassdef, toolcontext)
-			npropdef.accept_precise_type_visitor v
+			var nclassdef = npropdef.parent
+			assert nclassdef isa AStdClassdef
+
+			var serialize_by_default = nclassdef.how_serialize
+			assert serialize_by_default != null
+
+			var per_attribute = not serialize_by_default
+			fill_deserialization_init(nclassdef, npropdef, per_attribute)
 		end
 	end
-end
 
-# Visitor on generated constructors to replace the expected type of deserialized attributes
-private class PreciseTypeVisitor
-	super Visitor
-
-	var npropdef: AMethPropdef
-	var mclassdef: MClassDef
-	var toolcontext: ToolContext
-
-	redef fun visit(n) do n.accept_precise_type_visitor(self)
-end
-
-redef class AIsaExpr
-	redef fun accept_precise_type_visitor(v)
+	# Add a constructor to the generated `init_npropdef` of `nclassdef`
+	fun fill_deserialization_init(nclassdef: AClassdef, init_npropdef: AMethPropdef, per_attribute: Bool)
 	do
-		if n_type.collect_text != v.toolcontext.place_holder_type_name then return
+		var code = new Array[String]
+		code.add """
+redef init from_deserializer(v: Deserializer)
+do
+	super
+	v.notify_of_creation self
+"""
 
-		var attr_name = "_" + n_expr.collect_text
-		for mattrdef in v.mclassdef.mpropdefs do
-			if mattrdef isa MAttributeDef and mattrdef.name == attr_name then
-				var new_ntype = v.toolcontext.parse_something(mattrdef.static_mtype.to_s)
-				n_type.replace_with new_ntype
-				break
-			end
+		for attribute in nclassdef.n_propdefs do
+			if not attribute isa AAttrPropdef then continue
+
+			# Is `attribute` to be skipped?
+			if (per_attribute and not attribute.is_serialize) or
+				attribute.is_noserialize then continue
+
+			var mtype = attribute.mtype
+			if mtype == null then continue
+			var type_name = mtype.to_s
+			var name = attribute.name
+
+			if type_name == "nullable Object" then
+				# Don't type check
+				code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
+"""
+			else code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
+	if not {{{name}}} isa {{{type_name}}} then
+		# Check if it was a subjectent error
+		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
+
+		# Clear subjacent error
+		if v.keep_going == false then return
+	else
+		self.{{{name}}} = {{{name}}}
+	end
+"""
 		end
+
+		code.add "end"
+
+		# Replace the body of the constructor
+		var npropdef = toolcontext.parse_propdef(code.join("\n")).as(AMethPropdef)
+		init_npropdef.n_block = npropdef.n_block
+
+		# Run the literal phase on the generated code
+		var v = new LiteralVisitor(toolcontext)
+		v.enter_visit(npropdef.n_block)
 	end
 end
 
