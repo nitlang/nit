@@ -19,23 +19,17 @@ import catalog
 
 # Group all api handlers in one router.
 class APICatalogRouter
-	super Router
-
-	# Model to pass to handlers.
-	var model: Model
-
-	# Mainmodule to pass to handlers.
-	var mainmodule: MModule
+	super APIRouter
 
 	# Catalog to pass to handlers.
 	var catalog: Catalog
 
 	init do
-		use("/highlighted", new APICatalogHighLighted(model, mainmodule, catalog))
-		use("/required", new APICatalogMostRequired(model, mainmodule, catalog))
-		use("/bytags", new APICatalogByTags(model, mainmodule, catalog))
-		use("/contributors", new APICatalogContributors(model, mainmodule, catalog))
-		use("/stats", new APICatalogStats(model, mainmodule, catalog))
+		use("/highlighted", new APICatalogHighLighted(config, catalog))
+		use("/required", new APICatalogMostRequired(config, catalog))
+		use("/bytags", new APICatalogByTags(config, catalog))
+		use("/contributors", new APICatalogContributors(config, catalog))
+		use("/stats", new APICatalogStats(config, catalog))
 	end
 end
 
@@ -74,7 +68,7 @@ class APICatalogStats
 
 	redef fun get(req, res) do
 		var obj = new JsonObject
-		obj["packages"] = model.mpackages.length
+		obj["packages"] = config.model.mpackages.length
 		obj["maintainers"] = catalog.maint2proj.length
 		obj["contributors"] = catalog.contrib2proj.length
 		obj["modules"] = catalog.mmodules.sum
@@ -97,7 +91,7 @@ class APICatalogMostRequired
 	redef fun get(req, res) do
 		if catalog.deps.not_empty then
 			var reqs = new Counter[MPackage]
-			for p in model.mpackages do
+			for p in config.model.mpackages do
 				reqs[p] = catalog.deps[p].smallers.length - 1
 			end
 			res.json list_best(reqs)

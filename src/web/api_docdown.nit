@@ -24,13 +24,10 @@ import doc_commands
 class APIDocdown
 	super APIHandler
 
-	# Modelbuilder used by the commands
-	var modelbuilder: ModelBuilder
-
 	# Specific Markdown processor to use within Nitweb
 	var md_processor: MarkdownProcessor is lazy do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new NitwebDecorator(view, modelbuilder)
+		proc.emitter.decorator = new NitwebDecorator(view, config.modelbuilder)
 		return proc
 	end
 

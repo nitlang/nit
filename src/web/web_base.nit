@@ -19,16 +19,28 @@ import model::model_views
 import model::model_json
 import doc_down
 import popcorn
+import popcorn::pop_config
 
-# Specific nitcorn Action that uses a Model
-class ModelHandler
-	super Handler
+# Nitweb config file.
+class NitwebConfig
+	super AppConfig
 
 	# Model to use.
 	var model: Model
 
 	# MModule used to flatten model.
 	var mainmodule: MModule
+
+	# Modelbuilder used to access sources.
+	var modelbuilder: ModelBuilder
+end
+
+# Specific nitcorn Action that uses a Model
+class ModelHandler
+	super Handler
+
+	# App config.
+	var config: NitwebConfig
 
 	# Find the MEntity ` with `full_name`.
 	fun find_mentity(model: ModelView, full_name: nullable String): nullable MEntity do
@@ -38,7 +50,7 @@ class ModelHandler
 
 	# Init the model view from the `req` uri parameters.
 	fun init_model_view(req: HttpRequest): ModelView do
-		var view = new ModelView(model)
+		var view = new ModelView(config.model)
 		var show_private = req.bool_arg("private") or else false
 		if not show_private then view.min_visibility = protected_visibility
 
@@ -59,7 +71,7 @@ abstract class APIHandler
 	#
 	# So we can cache the model view.
 	var view: ModelView is lazy do
-		var view = new ModelView(model)
+		var view = new ModelView(config.model)
 		view.min_visibility = private_visibility
 		view.include_fictive = true
 		view.include_empty_doc = true
@@ -85,6 +97,14 @@ abstract class APIHandler
 		end
 		return mentity
 	end
+end
+
+# A Rooter dedicated to APIHandlers.
+class APIRouter
+	super Router
+
+	# App config.
+	var config: NitwebConfig
 end
 
 redef class MEntity
