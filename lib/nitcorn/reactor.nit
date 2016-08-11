@@ -201,8 +201,15 @@ redef class Interfaces
 	redef fun add(e)
 	do
 		super
-		var config = vh.server_config
-		if config != null then sys.listen_on(e, config.factory)
+		var config = virtual_host.server_config
+		if config != null then register_and_listen(e, config)
+	end
+
+	# Indirection to `listen_on` and check if this targets all addresses
+	private fun register_and_listen(e: Interface, config: ServerConfig)
+	do
+		listen_on(e, config.factory)
+		if e.name == "0.0.0.0" or e.name == "::0" then config.default_virtual_host = virtual_host
 	end
 
 	# TODO remove
@@ -212,7 +219,7 @@ redef class VirtualHosts
 	redef fun add(e)
 	do
 		super
-		for i in e.interfaces do sys.listen_on(i, config.factory)
+		for i in e.interfaces do e.interfaces.register_and_listen(i, config)
 	end
 
 	# TODO remove
