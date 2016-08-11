@@ -242,6 +242,9 @@ class JsonDeserializer
 	# Depth-first path in the serialized object tree.
 	private var path = new Array[Map[String, nullable Object]]
 
+	# Names of the attributes from the root to the object currently being deserialized
+	var attributes_path = new Array[String]
+
 	# Last encountered object reference id.
 	#
 	# See `id_to_object`.
@@ -265,7 +268,10 @@ class JsonDeserializer
 
 		var value = current[name]
 
-		return convert_object(value)
+		attributes_path.add name
+		var res = convert_object(value)
+		attributes_path.pop
+		return res
 	end
 
 	# This may be called multiple times by the same object from constructors
@@ -441,11 +447,16 @@ class JsonDeserializer
 		return convert_object(root)
 	end
 
-	# User customizable heuristic to get the name of the Nit class to deserialize `json_object`
+	# User customizable heuristic to infer the name of the Nit class to deserialize `json_object`
 	#
 	# This method is called only when deserializing an object without the metadata `__class`.
-	# Return the class name as a `String` when it can be inferred.
-	# Return `null` when the class name cannot be found.
+	# Use the content of `json_object` to identify what Nit class it should be deserialized into.
+	# Or use `self.attributes_path` indicating where the deserialized object will be stored,
+	# is is less reliable as some objects don't have an associated attribute:
+	# the root/first deserialized object and collection elements.
+	#
+	# Return the class name as a `String` when it can be inferred,
+	# or `null` when the class name cannot be found.
 	#
 	# If a valid class name is returned, `json_object` will then be deserialized normally.
 	# So it must contain the attributes of the corresponding class, as usual.
@@ -461,6 +472,7 @@ class JsonDeserializer
 	#     serialize
 	#
 	#     var error: String
+	#     var related_data: MyData
 	# end
 	#
 	# class MyJsonDeserializer
@@ -468,18 +480,26 @@ class JsonDeserializer
 	#
 	#     redef fun class_name_heuristic(json_object)
 	#     do
+	#         # Infer the Nit class from the content of the JSON object.
 	#         if json_object.keys.has("error") then return "MyError"
 	#         if json_object.keys.has("data") then return "MyData"
+	#
+	#         # Infer the Nit class from the attribute where it will be stored.
+	#         # This line duplicates a previous line, and would only apply when
+	#         # `MyData` is within a `MyError`.
+	#         if attributes_path.not_empty and attributes_path.last == "related_data" then return "MyData"
+	#
 	#         return null
 	#     end
 	# end
 	#
-	# var json = """{"data": "some other data"}"""
+	# var json = """{"data": "some data"}"""
 	# var deserializer = new MyJsonDeserializer(json)
 	# var deserialized = deserializer.deserialize
 	# assert deserialized isa MyData
 	#
-	# json = """{"error": "some error message"}"""
+	# json = """{"error": "some error message",
+	#            "related_data": {"data": "some other data"}"""
 	# deserializer = new MyJsonDeserializer(json)
 	# deserialized = deserializer.deserialize
 	# assert deserialized isa MyError
