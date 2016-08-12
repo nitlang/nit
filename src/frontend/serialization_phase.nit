@@ -173,6 +173,10 @@ private class SerializationPhasePreModel
 		end
 	end
 
+	# Implement `core_serialize_to` on `nclassdef`
+	#
+	# Are attributes serialized on demand `per_attribute` with `serialize`?
+	# Otherwise they are serialized by default, and we check instead for `noserialize`.
 	fun generate_serialization_method(nclassdef: AClassdef, per_attribute: Bool)
 	do
 		var npropdefs = nclassdef.n_propdefs
@@ -259,6 +263,7 @@ end
 private class SerializationPhasePostModel
 	super Phase
 
+	# Fill the deserialization init `from_deserializer` and `Deserializer.deserialize_class_intern`
 	redef fun process_nmodule(nmodule)
 	do
 		for npropdef in nmodule.inits_to_retype do
