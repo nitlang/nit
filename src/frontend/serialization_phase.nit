@@ -167,13 +167,7 @@ private class SerializationPhasePreModel
 		nmodule.inits_to_retype.clear
 
 		# collect all classes
-		var auto_serializable_nclassdefs = new Array[AStdClassdef]
-		for nclassdef in nmodule.n_classdefs do
-			if nclassdef isa AStdClassdef and nclassdef.how_serialize != null then
-				auto_serializable_nclassdefs.add nclassdef
-			end
-		end
-
+		var auto_serializable_nclassdefs = nmodule.auto_serializable_nclassdefs
 		if not auto_serializable_nclassdefs.is_empty then
 			generate_deserialization_method(nmodule, auto_serializable_nclassdefs)
 		end
@@ -228,7 +222,9 @@ redef init from_deserializer(v: Deserializer) do abort"""
 		nclassdef.parent.as(AModule).inits_to_retype.add npropdef
 	end
 
-	# Added to the abstract serialization service
+	# Add an empty `Deserializer::deserialize_class_intern`
+	#
+	# Will be filled by `SerializationPhasePostModel`.
 	fun generate_deserialization_method(nmodule: AModule, nclassdefs: Array[AStdClassdef])
 	do
 		var code = new Array[String]
@@ -245,26 +241,11 @@ redef init from_deserializer(v: Deserializer) do abort"""
 
 		if deserializer_npropdef == null then
 			# create the property
-			code.add "	redef fun deserialize_class_intern(name)"
-			code.add "	do"
+			code.add "	redef fun deserialize_class_intern(name) do abort"
 		else
 			toolcontext.error(deserializer_npropdef.location, "Error: `Deserializer::deserialize_class_intern` is generated and must not be defined, use `deserialize_class` instead.")
 			return
 		end
-
-		for nclassdef in nclassdefs do
-			var n_qid = nclassdef.n_qid
-			if n_qid == null then continue
-			var name = n_qid.n_id.text
-			if nclassdef.n_formaldefs.is_empty and
-			   nclassdef.n_classkind isa AConcreteClasskind then
-
-				code.add "		if name == \"{name}\" then return new {name}.from_deserializer(self)"
-			end
-		end
-
-		code.add "		return super"
-		code.add "	end"
 
 		if deserializer_nclassdef == null then
 			code.add "end"
@@ -289,6 +270,12 @@ private class SerializationPhasePostModel
 
 			var per_attribute = not serialize_by_default
 			fill_deserialization_init(nclassdef, npropdef, per_attribute)
+		end
+
+		# collect all classes
+		var auto_serializable_nclassdefs = nmodule.auto_serializable_nclassdefs
+		if not auto_serializable_nclassdefs.is_empty then
+			fill_deserialization_method(nmodule, auto_serializable_nclassdefs)
 		end
 	end
 
@@ -344,6 +331,86 @@ do
 		var v = new LiteralVisitor(toolcontext)
 		v.enter_visit(npropdef.n_block)
 	end
+
+	# Fill the abstract serialization service
+	fun fill_deserialization_method(nmodule: AModule, nclassdefs: Array[AStdClassdef])
+	do
+		var deserializer_nclassdef = nmodule.deserializer_nclassdef
+		if deserializer_nclassdef == null then return
+		var deserializer_npropdef = deserializer_nclassdef.deserializer_npropdef
+		if deserializer_npropdef == null then return
+
+		# Collect local types expected to be deserialized
+		var types_to_deserialize = new Set[String]
+
+		## Local serializable standard class without parameters
+		for nclassdef in nclassdefs do
+			var mclass = nclassdef.mclass
+			if mclass == null then continue
+
+			if mclass.arity == 0 and mclass.kind == concrete_kind then
+				types_to_deserialize.add mclass.name
+			end
+		end
+
+		## Static parametized types on serializable attributes
+		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+
+			for attribute in nclassdef.n_propdefs do
+				if not attribute isa AAttrPropdef then continue
+
+				var serialize_by_default = nclassdef.how_serialize
+				if serialize_by_default == null then continue
+				var per_attribute = not serialize_by_default
+
+				# Is `attribute` to be skipped?
+				if (per_attribute and not attribute.is_serialize) or
+					attribute.is_noserialize then continue
+
+				var mtype = attribute.mtype
+				if mtype == null then continue
+				if mtype isa MNullableType then mtype = mtype.mtype
+
+				if mtype isa MClassType and mtype.mclass.arity > 0 and
+				   mtype.mclass.kind == concrete_kind and not mtype.need_anchor then
+
+					# Check is a `Serializable`
+					var mmodule = nmodule.mmodule
+					if mmodule == null then continue
+
+					var greaters = mtype.mclass.in_hierarchy(mmodule).greaters
+					var is_serializable = false
+					for sup in greaters do if sup.name == "Serializable" then
+						is_serializable = true
+						break
+					end
+
+					if is_serializable then types_to_deserialize.add mtype.to_s
+				end
+			end
+		end
+
+		# Build implementation code
+		var code = new Array[String]
+		code.add "redef fun deserialize_class_intern(name)"
+		code.add "do"
+
+		for name in types_to_deserialize do
+			code.add "	if name == \"{name}\" then return new {name}.from_deserializer(self)"
+		end
+
+		code.add "	return super"
+		code.add "end"
+
+		# Replace the body of the constructor
+		var npropdef = toolcontext.parse_propdef(code.join("\n")).as(AMethPropdef)
+		deserializer_npropdef.n_block = npropdef.n_block
+
+		# Run the literal phase on the generated code
+		var v = new LiteralVisitor(toolcontext)
+		v.enter_visit(npropdef.n_block)
+	end
 end
 
 redef class AAttrPropdef
@@ -387,6 +454,17 @@ redef class AModule
 	do
 		var n_moduledecl = n_moduledecl
 		return n_moduledecl != null and n_moduledecl.is_serialize
+	end
+
+	# `AStdClassdef` marked as serializable, itself or one of theur attribute
+	private var auto_serializable_nclassdefs: Array[AStdClassdef] is lazy do
+		var array = new Array[AStdClassdef]
+		for nclassdef in n_classdefs do
+			if nclassdef isa AStdClassdef and nclassdef.how_serialize != null then
+				array.add nclassdef
+			end
+		end
+		return array
 	end
 end
 
