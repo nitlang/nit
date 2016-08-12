@@ -1,6 +1,6 @@
 NITC=../../../bin/nitc
 
-all: nitcc calc minilang
+all: nitcc calc minilang blob
 
 nitcc_parser_gen: nitcc_parser_gen.nit
 	@echo "*** Compile the nitcc bootstrap parser generator -- level 0"
@@ -33,6 +33,12 @@ minilang: nitcc ../examples/minilang.sablecc ../examples/minilang.nit
 	${NITC} ../examples/minilang.nit -v
 	printf "10\n42\n" | ./minilang ../examples/minilang.minilang
 
+blob: nitcc ../examples/blob.sablecc ../examples/blob.nit
+	@echo "*** Example program, blob"
+	cd ../examples && ../src/nitcc blob.sablecc
+	${NITC} ../examples/blob.nit -v
+	./blob -e "abc {{{ 1 }}} de {{{ 2 }}} { 3 }"
+
 check: tests
 tests:
 	cd ../tests && ./run
@@ -42,7 +48,7 @@ clean:
 		*.dot *.out \
 		nitcc_lexer.nit nitcc_parser.nit nitcc_test_parser.nit nitcc_parser_gen \
 		nitcc0 nitcc1 \
-		calc minilang \
+		calc minilang blob \
 		../examples/*.dot ../examples/*.out ../examples/*_lexer.nit ../examples/*_parser.nit ../examples/*_test_parser.nit \
 		2>/dev/null || true
 
