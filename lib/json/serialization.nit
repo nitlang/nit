@@ -716,9 +716,22 @@ redef class SimpleCollection[E]
 				open_array = arr
 			end
 
+			# Try to get the name of the single parameter type assuming it is E.
+			# This does not work in non-generic subclasses,
+			# when the first parameter is not E, or
+			# when there is more than one parameter. (The last one could be fixed)
+			var class_name = class_name
+			var items_type = null
+			var bracket_index = class_name.index_of('[')
+			if bracket_index != -1 then
+				var start = bracket_index + 1
+				var ending = class_name.last_index_of(']')
+				items_type = class_name.substring(start, ending-start)
+			end
+
 			# Fill array
 			for o in open_array do
-				var obj = v.convert_object(o)
+				var obj = v.convert_object(o, items_type)
 				if obj isa E then
 					add obj
 				else v.errors.add new AttributeTypeError(self, "items", obj, "E")
