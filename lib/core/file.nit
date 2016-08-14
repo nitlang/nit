@@ -1372,7 +1372,13 @@ redef class NativeString
 		return stat_element;
 	`}
 
-	private fun file_mkdir(mode: Int): Bool `{ return !mkdir(self, mode); `}
+	private fun file_mkdir(mode: Int): Bool `{
+#ifdef _WIN32
+		return !mkdir(self);
+#else
+		return !mkdir(self, mode);
+#endif
+	`}
 
 	private fun rmdir: Bool `{ return !rmdir(self); `}
 

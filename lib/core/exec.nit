@@ -337,10 +337,12 @@ redef class NativeString
 	# See the posix function system(3).
 	fun system: Int `{
 		int status = system(self);
+#ifndef _WIN32
 		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT) {
 			// system exited on SIGINT: in my opinion the user wants the main to be discontinued
 			kill(getpid(), SIGINT);
 		}
+#endif
 		return status;
 	`}
 end

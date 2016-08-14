@@ -58,7 +58,13 @@ end
 
 redef class NativeString
 	private fun get_environ: NativeString `{ return getenv(self); `}
-	private fun setenv(value: NativeString) `{ setenv(self, value, 1); `}
+	private fun setenv(value: NativeString) `{
+#ifdef _WIN32
+		_putenv_s(self, value);
+#else
+		setenv(self, value, 1);
+#endif
+	`}
 end
 
 redef class Sys

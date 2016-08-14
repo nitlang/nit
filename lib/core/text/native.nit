@@ -22,6 +22,9 @@ in "C" `{
 	#include <libkern/OSByteOrder.h>
 	#define be32toh(x) OSSwapBigToHostInt32(x)
 #endif
+#ifdef _WIN32
+	#define be32toh(val) _byteswap_ulong(val)
+#endif
 
 #ifdef __pnacl__
 	#define be16toh(val) (((val) >> 8) | ((val) << 8))
