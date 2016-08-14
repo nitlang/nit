@@ -252,6 +252,11 @@ entity-list:hover .btn-filter {
 	border-radius: 2px;
 }
 
+.avatar-icon {
+	width: 18px;
+	height: 18px;
+}
+
 /*
  * Code Highlighting
  */
