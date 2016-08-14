@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module pop_middlewares
+module pop_logging
 
 import pop_handlers
 import console
