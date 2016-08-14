@@ -288,7 +288,7 @@ class GithubUser
 			res.error 403
 			return
 		end
-		res.json user.json
+		res.json user
 	end
 end
 
