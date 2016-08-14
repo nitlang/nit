@@ -956,13 +956,24 @@ redef class String
 	#     assert "".basename("")                            == ""
 	fun basename(extension: nullable String): String
 	do
-		var l = length - 1 # Index of the last char
-		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
-		if l == 0 then return "/"
-		var pos = chars.last_index_of_from('/', l)
 		var n = self
-		if pos >= 0 then
-			n = substring(pos+1, l-pos)
+		if is_windows then
+			var l = length - 1 # Index of the last char
+			while l > 0 and (self.chars[l] == '/' or chars[l] == '\\') do l -= 1 # remove all trailing `/`
+			if l == 0 then return "/"
+			var pos = chars.last_index_of_from('/', l)
+			pos = pos.max(last_index_of_from('\\', l))
+			if pos >= 0 then
+				n = substring(pos+1, l-pos)
+			end
+		else
+			var l = length - 1 # Index of the last char
+			while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
+			if l == 0 then return "/"
+			var pos = chars.last_index_of_from('/', l)
+			if pos >= 0 then
+				n = substring(pos+1, l-pos)
+			end
 		end
 
 		if extension != null then
@@ -1325,15 +1336,29 @@ redef class FlatString
 	end
 
 	redef fun basename(extension) do
-		var l = last_byte
-		var its = _items
-		var min = _first_byte
-		var sl = '/'.ascii
-		while l > min and its[l] == sl do l -= 1
-		if l == min then return "/"
-		var ns = l
-		while ns >= min and its[ns] != sl do ns -= 1
-		var bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		var bname
+		if is_windows then
+			var l = last_byte
+			var its = _items
+			var min = _first_byte
+			var sl = '/'.ascii
+			var ls = '\\'.ascii
+			while l > min and (its[l] == sl or its[l] == ls) do l -= 1
+			if l == min then return "\\"
+			var ns = l
+			while ns >= min and its[ns] != sl and its[ns] != ls do ns -= 1
+			bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		else
+			var l = last_byte
+			var its = _items
+			var min = _first_byte
+			var sl = '/'.ascii
+			while l > min and its[l] == sl do l -= 1
+			if l == min then return "/"
+			var ns = l
+			while ns >= min and its[ns] != sl do ns -= 1
+			bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		end
 
 		return if extension != null then bname.strip_extension(extension) else bname
 	end
