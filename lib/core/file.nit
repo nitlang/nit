@@ -32,6 +32,12 @@ in "C Header" `{
 	#include <errno.h>
 `}
 
+in "C" `{
+#ifdef _WIN32
+	#include <windows.h>
+#endif
+`}
+
 # `Stream` used to interact with a File or FileDescriptor
 abstract class FileStream
 	super Stream
@@ -1335,11 +1341,16 @@ end
 
 redef class NativeString
 	private fun file_exists: Bool `{
+#ifdef _WIN32
+		DWORD attribs = GetFileAttributesA(self);
+		return attribs != INVALID_FILE_ATTRIBUTES;
+#else
 		FILE *hdl = fopen(self,"r");
 		if(hdl != NULL){
 			fclose(hdl);
 		}
 		return hdl != NULL;
+#endif
 	`}
 
 	private fun file_stat: NativeFileStat `{
@@ -1371,7 +1382,16 @@ redef class NativeString
 
 	private fun file_chdir: Bool `{ return !chdir(self); `}
 
-	private fun file_realpath: NativeString `{ return realpath(self, NULL); `}
+	private fun file_realpath: NativeString `{
+#ifdef _WIN32
+		DWORD len = GetFullPathName(self, 0, NULL, NULL);
+		char *buf = malloc(len+1); // FIXME don't leak memory
+		len = GetFullPathName(self, len+1, buf, NULL);
+		return buf;
+#else
+		return realpath(self, NULL);
+#endif
+	`}
 end
 
 # This class is system dependent ... must reify the vfs
