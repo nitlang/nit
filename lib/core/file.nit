@@ -28,8 +28,10 @@ in "C Header" `{
 	#include <sys/stat.h>
 	#include <unistd.h>
 	#include <stdio.h>
-	#include <poll.h>
 	#include <errno.h>
+#ifndef _WIN32
+	#include <poll.h>
+#endif
 `}
 
 in "C" `{
@@ -194,8 +196,12 @@ class FileReader
 	end
 
 	private fun native_poll_in(fd: Int): Int `{
+#ifndef _WIN32
 		struct pollfd fds = {(int)fd, POLLIN, 0};
 		return poll(&fds, 1, 0);
+#else
+		return 0;
+#endif
 	`}
 end
 
@@ -1389,12 +1395,17 @@ redef class NativeString
 	`}
 
 	private fun file_lstat: NativeFileStat `{
+#ifdef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+		return NULL;
+#else
 		struct stat* stat_element;
 		int res;
 		stat_element = malloc(sizeof(struct stat));
 		res = lstat(self, stat_element);
 		if (res == -1) return NULL;
 		return stat_element;
+#endif
 	`}
 
 	private fun file_mkdir(mode: Int): Bool `{
@@ -1459,10 +1470,22 @@ private extern class NativeFileStat `{ struct stat * `}
 	fun is_fifo: Bool `{ return S_ISFIFO(self->st_mode); `}
 
 	# Returns true if the type is a link
-	fun is_lnk: Bool `{ return S_ISLNK(self->st_mode); `}
+	fun is_lnk: Bool `{
+#ifdef _WIN32
+	return 0;
+#else
+	return S_ISLNK(self->st_mode);
+#endif
+	`}
 
 	# Returns true if the type is a socket
-	fun is_sock: Bool `{ return S_ISSOCK(self->st_mode); `}
+	fun is_sock: Bool `{
+#ifdef _WIN32
+	return 0;
+#else
+	return S_ISSOCK(self->st_mode);
+#endif
+	`}
 end
 
 # Instance of this class are standard FILE * pointers
@@ -1579,6 +1602,9 @@ redef class Sys
 
 	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int
 	import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+#ifndef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
 		int i;
@@ -1623,6 +1649,7 @@ redef class Sys
 		}
 		else if ( result < 0 )
 			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
+#endif
 
 		return null_Int();
 	`}

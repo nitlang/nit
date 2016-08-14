@@ -23,8 +23,10 @@ in "C" `{
 	#include <errno.h>
 	#include <stdio.h>
 	#include <unistd.h>
-	#include <sys/wait.h>
 	#include <signal.h>
+#ifndef _WIN32
+	#include <sys/wait.h>
+#endif
 `}
 
 in "C Header" `{
@@ -113,6 +115,10 @@ class Process
 
 	private var data: NativeProcess
 	private fun basic_exec_execute(prog, args: NativeString, argc: Int, pipeflag: Int): NativeProcess `{
+#ifdef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+		return -1;
+#else
 		se_exec_data_t* result = NULL;
 		int id;
 		int in_fd[2];
@@ -207,6 +213,7 @@ class Process
 		}
 
 		return result;
+#endif
 	`}
 end
 
@@ -356,6 +363,10 @@ private extern class NativeProcess `{ se_exec_data_t* `}
 	fun err_fd: Int `{ return self->err_fd; `}
 
 	fun is_finished: Bool `{
+#ifdef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+		return 0;
+#else
 		int result = (int)0;
 		int status;
 		if (self->running) {
@@ -371,14 +382,18 @@ private extern class NativeProcess `{ se_exec_data_t* `}
 			result = (int)1;
 		}
 		return result;
+#endif
 	`}
 
 	fun wait `{
+#ifndef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
 		int status;
 		if (self->running) {
 			waitpid(self->id, &status, 0);
 			self->status = WEXITSTATUS(status);
 			self->running = 0;
 		}
+#endif
 	`}
 end
