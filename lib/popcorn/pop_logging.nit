@@ -20,15 +20,6 @@ import pop_handlers
 import console
 import realtime
 
-# Initialize session in request if non existent.
-#
-# Should be called before any use of the session.
-class SessionInit
-	super Handler
-
-	redef fun all(req, res) do if req.session == null then req.session = new Session
-end
-
 # Initialize a clock for the resquest.
 #
 # Can be used to compute the time passed to respond that request.

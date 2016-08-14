@@ -18,6 +18,7 @@
 module popcorn
 
 import nitcorn
+import pop_sessions
 import pop_logging
 intrude import pop_handlers
 
