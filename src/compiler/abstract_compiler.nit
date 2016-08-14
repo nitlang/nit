@@ -665,6 +665,9 @@ abstract class AbstractCompiler
 		self.header.add_decl("	#include <libkern/OSByteOrder.h>")
 		self.header.add_decl("	#define be32toh(x) OSSwapBigToHostInt32(x)")
 		self.header.add_decl("#endif")
+		self.header.add_decl("#ifdef _WIN32")
+		self.header.add_decl("	#define be32toh(val) _byteswap_ulong(val)")
+		self.header.add_decl("#endif")
 		self.header.add_decl("#ifdef __pnacl__")
 		self.header.add_decl("	#define be16toh(val) (((val) >> 8) | ((val) << 8))")
 		self.header.add_decl("	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))")
@@ -878,11 +881,17 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("\}")
 
 		v.add_decl("void sig_handler(int signo)\{")
+		v.add_decl "#ifdef _WIN32"
+		v.add_decl "PRINT_ERROR(\"Caught signal : %s\\n\", signo);"
+		v.add_decl "#else"
 		v.add_decl("PRINT_ERROR(\"Caught signal : %s\\n\", strsignal(signo));")
+		v.add_decl "#endif"
 		v.add_decl("show_backtrace();")
 		# rethrows
 		v.add_decl("signal(signo, SIG_DFL);")
+		v.add_decl "#ifndef _WIN32"
 		v.add_decl("kill(getpid(), signo);")
+		v.add_decl "#endif"
 		v.add_decl("\}")
 
 		v.add_decl("void fatal_exit(int status) \{")
@@ -908,7 +917,9 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
 		v.add "#endif"
+		v.add "#ifndef _WIN32"
 		v.add("signal(SIGPIPE, SIG_IGN);")
+		v.add "#endif"
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("catchStack.cursor = -1;")
