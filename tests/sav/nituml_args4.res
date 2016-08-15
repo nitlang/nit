@@ -16,7 +16,7 @@ Object [
 ]
 
 Sys [
- label = "{Sys||+ main()\l+ run()\l+ errno(): Int\l+ exit(exit_value: Int)\l}"
+ label = "{Sys||+ main()\l+ run()\l+ errno(): Int\l+ exit(exit_value: Int)\l+ is_windows(): Bool\l}"
 ]
 Object -> Sys [dir=back arrowtail=open style=dashed];
 

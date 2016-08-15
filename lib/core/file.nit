@@ -28,8 +28,16 @@ in "C Header" `{
 	#include <sys/stat.h>
 	#include <unistd.h>
 	#include <stdio.h>
-	#include <poll.h>
 	#include <errno.h>
+#ifndef _WIN32
+	#include <poll.h>
+#endif
+`}
+
+in "C" `{
+#ifdef _WIN32
+	#include <windows.h>
+#endif
 `}
 
 # `Stream` used to interact with a File or FileDescriptor
@@ -188,8 +196,12 @@ class FileReader
 	end
 
 	private fun native_poll_in(fd: Int): Int `{
+#ifndef _WIN32
 		struct pollfd fds = {(int)fd, POLLIN, 0};
 		return poll(&fds, 1, 0);
+#else
+		return 0;
+#endif
 	`}
 end
 
@@ -950,13 +962,24 @@ redef class String
 	#     assert "".basename("")                            == ""
 	fun basename(extension: nullable String): String
 	do
-		var l = length - 1 # Index of the last char
-		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
-		if l == 0 then return "/"
-		var pos = chars.last_index_of_from('/', l)
 		var n = self
-		if pos >= 0 then
-			n = substring(pos+1, l-pos)
+		if is_windows then
+			var l = length - 1 # Index of the last char
+			while l > 0 and (self.chars[l] == '/' or chars[l] == '\\') do l -= 1 # remove all trailing `/`
+			if l == 0 then return "/"
+			var pos = chars.last_index_of_from('/', l)
+			pos = pos.max(last_index_of_from('\\', l))
+			if pos >= 0 then
+				n = substring(pos+1, l-pos)
+			end
+		else
+			var l = length - 1 # Index of the last char
+			while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
+			if l == 0 then return "/"
+			var pos = chars.last_index_of_from('/', l)
+			if pos >= 0 then
+				n = substring(pos+1, l-pos)
+			end
 		end
 
 		if extension != null then
@@ -1319,15 +1342,29 @@ redef class FlatString
 	end
 
 	redef fun basename(extension) do
-		var l = last_byte
-		var its = _items
-		var min = _first_byte
-		var sl = '/'.ascii
-		while l > min and its[l] == sl do l -= 1
-		if l == min then return "/"
-		var ns = l
-		while ns >= min and its[ns] != sl do ns -= 1
-		var bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		var bname
+		if is_windows then
+			var l = last_byte
+			var its = _items
+			var min = _first_byte
+			var sl = '/'.ascii
+			var ls = '\\'.ascii
+			while l > min and (its[l] == sl or its[l] == ls) do l -= 1
+			if l == min then return "\\"
+			var ns = l
+			while ns >= min and its[ns] != sl and its[ns] != ls do ns -= 1
+			bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		else
+			var l = last_byte
+			var its = _items
+			var min = _first_byte
+			var sl = '/'.ascii
+			while l > min and its[l] == sl do l -= 1
+			if l == min then return "/"
+			var ns = l
+			while ns >= min and its[ns] != sl do ns -= 1
+			bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		end
 
 		return if extension != null then bname.strip_extension(extension) else bname
 	end
@@ -1335,11 +1372,16 @@ end
 
 redef class NativeString
 	private fun file_exists: Bool `{
+#ifdef _WIN32
+		DWORD attribs = GetFileAttributesA(self);
+		return attribs != INVALID_FILE_ATTRIBUTES;
+#else
 		FILE *hdl = fopen(self,"r");
 		if(hdl != NULL){
 			fclose(hdl);
 		}
 		return hdl != NULL;
+#endif
 	`}
 
 	private fun file_stat: NativeFileStat `{
@@ -1353,15 +1395,26 @@ redef class NativeString
 	`}
 
 	private fun file_lstat: NativeFileStat `{
+#ifdef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+		return NULL;
+#else
 		struct stat* stat_element;
 		int res;
 		stat_element = malloc(sizeof(struct stat));
 		res = lstat(self, stat_element);
 		if (res == -1) return NULL;
 		return stat_element;
+#endif
 	`}
 
-	private fun file_mkdir(mode: Int): Bool `{ return !mkdir(self, mode); `}
+	private fun file_mkdir(mode: Int): Bool `{
+#ifdef _WIN32
+		return !mkdir(self);
+#else
+		return !mkdir(self, mode);
+#endif
+	`}
 
 	private fun rmdir: Bool `{ return !rmdir(self); `}
 
@@ -1371,7 +1424,16 @@ redef class NativeString
 
 	private fun file_chdir: Bool `{ return !chdir(self); `}
 
-	private fun file_realpath: NativeString `{ return realpath(self, NULL); `}
+	private fun file_realpath: NativeString `{
+#ifdef _WIN32
+		DWORD len = GetFullPathName(self, 0, NULL, NULL);
+		char *buf = malloc(len+1); // FIXME don't leak memory
+		len = GetFullPathName(self, len+1, buf, NULL);
+		return buf;
+#else
+		return realpath(self, NULL);
+#endif
+	`}
 end
 
 # This class is system dependent ... must reify the vfs
@@ -1408,10 +1470,22 @@ private extern class NativeFileStat `{ struct stat * `}
 	fun is_fifo: Bool `{ return S_ISFIFO(self->st_mode); `}
 
 	# Returns true if the type is a link
-	fun is_lnk: Bool `{ return S_ISLNK(self->st_mode); `}
+	fun is_lnk: Bool `{
+#ifdef _WIN32
+	return 0;
+#else
+	return S_ISLNK(self->st_mode);
+#endif
+	`}
 
 	# Returns true if the type is a socket
-	fun is_sock: Bool `{ return S_ISSOCK(self->st_mode); `}
+	fun is_sock: Bool `{
+#ifdef _WIN32
+	return 0;
+#else
+	return S_ISSOCK(self->st_mode);
+#endif
+	`}
 end
 
 # Instance of this class are standard FILE * pointers
@@ -1528,6 +1602,9 @@ redef class Sys
 
 	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int
 	import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+#ifndef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
 		int i;
@@ -1572,6 +1649,7 @@ redef class Sys
 		}
 		else if ( result < 0 )
 			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
+#endif
 
 		return null_Int();
 	`}

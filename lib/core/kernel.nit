@@ -1073,3 +1073,12 @@ interface Task
 	# Main method of this task
 	fun main do end
 end
+
+# Is this program currently running in a Windows OS?
+fun is_windows: Bool `{
+#ifdef _WIN32
+	return 1;
+#else
+	return 0;
+#endif
+`}
