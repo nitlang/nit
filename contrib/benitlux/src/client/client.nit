@@ -30,11 +30,6 @@ import user_views
 redef class Deserializer
 	redef fun deserialize_class(name)
 	do
-		if name == "Array[Beer]" then return new Array[Beer].from_deserializer(self)
-		if name == "Array[User]" then return new Array[User].from_deserializer(self)
-		if name == "Array[BeerBadge]" then return new Array[BeerBadge].from_deserializer(self)
-		if name == "Array[BeerAndRatings]" then return new Array[BeerAndRatings].from_deserializer(self)
-		if name == "Array[String]" then return new Array[String].from_deserializer(self)
 		if name == "Array[UserAndFollowing]" then return new Array[UserAndFollowing].from_deserializer(self)
 		return super
 	end

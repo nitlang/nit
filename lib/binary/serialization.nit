@@ -153,7 +153,7 @@ class BinaryDeserializer
 		return new Couple[String, nullable Object](next_attribute_name, next_object)
 	end
 
-	redef fun deserialize_attribute(name)
+	redef fun deserialize_attribute(name, static_type)
 	do
 		if unclaimed_attributes.last.keys.has(name) then
 			# Pick in already deserialized attributes

@@ -97,8 +97,11 @@ abstract class Deserializer
 
 	# Deserialize the attribute with `name` from the object open for deserialization
 	#
+	# The `static_type` can be used as last resort if the deserialized object
+	# desn't have any metadata declaring the dynamic type.
+	#
 	# Internal method to be implemented by the engines.
-	fun deserialize_attribute(name: String): nullable Object is abstract
+	fun deserialize_attribute(name: String, static_type: nullable String): nullable Object is abstract
 
 	# Register a newly allocated object (even if not completely built)
 	#

@@ -120,9 +120,9 @@
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 Deserialization Error: Doesn't know how to deserialize class "Array"
-Deserialization Error: Wrong type on `E::a` expected `Unknown type`, got `null`
+Deserialization Error: Wrong type on `E::a` expected `Array[Object]`, got `null`
 Deserialization Error: Doesn't know how to deserialize class "Array"
-Deserialization Error: Wrong type on `E::b` expected `Unknown type`, got `null`
+Deserialization Error: Wrong type on `E::b` expected `Array[nullable Serializable]`, got `null`
 # Nit:
 <E: 2222>
 
@@ -197,10 +197,10 @@ Deserialization Error: Doesn't know how to deserialize class "F"
 <G: hs: ; s: ; hm: ; am: >
 
 Deserialization Error: Doesn't know how to deserialize class "HashSet"
-Deserialization Error: Wrong type on `G::hs` expected `Unknown type`, got `null`
+Deserialization Error: Wrong type on `G::hs` expected `HashSet[Int]`, got `null`
 Deserialization Error: Doesn't know how to deserialize class "ArraySet"
 Deserialization Error: Wrong type on `G::s` expected `Set[String]`, got `null`
 Deserialization Error: Doesn't know how to deserialize class "HashMap"
-Deserialization Error: Wrong type on `G::hm` expected `Unknown type`, got `null`
+Deserialization Error: Wrong type on `G::hm` expected `HashMap[String, Int]`, got `null`
 Deserialization Error: Doesn't know how to deserialize class "ArrayMap"
-Deserialization Error: Wrong type on `G::am` expected `Unknown type`, got `null`
+Deserialization Error: Wrong type on `G::am` expected `ArrayMap[String, String]`, got `null`

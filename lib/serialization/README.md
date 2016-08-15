@@ -260,21 +260,11 @@ assert couple == deserialize_couple
 
 The serialization has some limitations:
 
-* Not enough classes from the standard library are supported.
-  This only requires someone to actually code the support.
-  It should not be especially hard for most classes, some can
-  simply declare the `serialize` annotation.
-
-* A limitation of the Json parser prevents deserializing from files
+* A limitation of the JSON parser prevents deserializing from files
   with more than one object.
   This could be improved in the future, but for now you should
-  serialize a single object to each filesand use different instances of
+  serialize a single object to each files and use different instances of
   serializer and deserializer each time.
-
-* The `serialize` annotation does not handle very well
-  complex constructors. This could be improved in the compiler.
-  For now, you may prefer to use `serialize` on simple classes,
-  of by using custom `Serializable`.
 
 * The serialization uses only the short name of a class, not its qualified name.
   This will cause problem when different classes using the same name.
@@ -283,7 +273,7 @@ The serialization has some limitations:
   the different programs sharing the serialized data.
 
 * The serialization support in the compiler need some help to
-  deal with generic types. The solution is to use `nitserial`,
+  deal with generic types. A solution is to use `nitserial`,
   the next section explores this subject.
 
 ## Dealing with generic types
