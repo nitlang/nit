@@ -121,7 +121,7 @@ module pop_repos
 
 import serialization
 import json::serialization
-import mongodb
+import mongodb::queries
 
 # A Repository is an object that can store serialized instances.
 #
@@ -186,12 +186,16 @@ interface RepositoryQuery end
 # Serialization from/to Json is used to translate from/to nit instances.
 #
 # See `MongoRepository` for a concrete implementation example.
-interface JsonRepository[E: Serializable]
+abstract class JsonRepository[E: Serializable]
 	super Repository[E]
 
 	redef fun serialize(item) do
 		if item == null then return null
-		return item.serialize_to_json
+		var stream = new StringWriter
+		var serializer = new RepoSerializer(stream)
+		serializer.serialize item
+		stream.close
+		return stream.to_s
 	end
 
 	redef fun deserialize(string) do
@@ -199,6 +203,13 @@ interface JsonRepository[E: Serializable]
 		var deserializer = new JsonDeserializer(string)
 		return deserializer.deserialize.as(E)
 	end
+end
+
+private class RepoSerializer
+	super JsonSerializer
+
+	# Remove caching when saving refs to db
+	redef fun serialize_reference(object) do serialize object
 end
 
 # A Repository that uses MongoDB as backend.
@@ -307,6 +318,17 @@ class MongoRepository[E: Serializable]
 	end
 
 	redef fun clear do return collection.drop
+
+	# Perform an aggregation query over the repo.
+	fun aggregate(pipeline: JsonArray): Array[E] do
+		var res = new Array[E]
+		for obj in collection.aggregate(pipeline) do
+			var instance = deserialize(obj.to_json)
+			if instance == null then continue
+			res.add instance
+		end
+		return res
+	end
 end
 
 # JsonObject can be used as a `RepositoryQuery`.
