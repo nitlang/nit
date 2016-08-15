@@ -16,8 +16,26 @@
 module nitweb
 
 import popcorn::pop_config
+import popcorn::pop_auth
 import frontend
 import web
+
+redef class NitwebConfig
+
+	# Github client id used for Github OAuth login.
+	#
+	# * key: `github.client_id`
+	# * default: ``
+	var github_client_id: String is lazy do return value_or_default("github.client.id", "")
+
+	# Github client secret used for Github OAuth login.
+	#
+	# * key: `github.client_secret`
+	# * default: ``
+	var github_client_secret: String is lazy do
+		return value_or_default("github.client.secret", "")
+	end
+end
 
 redef class ToolContext
 
@@ -88,8 +106,12 @@ private class NitwebPhase
 
 		var app = new App
 
+		app.use_before("/*", new SessionInit)
 		app.use_before("/*", new RequestClock)
 		app.use("/api", new NitwebAPIRouter(config, catalog))
+		app.use("/login", new GithubLogin(config.github_client_id))
+		app.use("/oauth", new GithubOAuthCallBack(config.github_client_id, config.github_client_secret))
+		app.use("/logout", new GithubLogout)
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
 		app.use_after("/*", new ConsoleLog)
 
@@ -119,6 +141,7 @@ class NitwebAPIRouter
 		use("/graph/", new APIGraphRouter(config))
 		use("/docdown/", new APIDocdown(config))
 		use("/metrics/", new APIMetricsRouter(config))
+		use("/user", new GithubUser)
 	end
 end
 
