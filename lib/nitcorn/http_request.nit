@@ -21,9 +21,12 @@
 module http_request
 
 import core
+import serialization
 
 # A request received over HTTP, is build by `HttpRequestParser`
 class HttpRequest
+	serialize
+
 	private init is old_style_init do end
 
 	# HTTP protocol version

@@ -19,8 +19,11 @@
 # Provides the `HttpResponse` class and `http_status_codes`
 module http_response
 
+import serialization
+
 # A response to send over HTTP
 class HttpResponse
+	serialize
 
 	# HTTP protocol version
 	var http_version = "HTTP/1.0" is writable
