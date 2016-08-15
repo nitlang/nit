@@ -146,7 +146,7 @@ class HttpRequestParser
 		end
 
 		# POST args
-		if http_request.method == "POST" then
+		if http_request.method == "POST" or http_request.method == "PUT" then
 			http_request.body = body
 			var lines = body.split_with('&')
 			for line in lines do if not line.trim.is_empty then
