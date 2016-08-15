@@ -217,7 +217,7 @@ class PlayerStatusPanel
 	redef fun render_title do
 		add "<a href=\"{player.url}\">"
 		add " <img class=\"img-circle\" style=\"width: 30px\""
-		add "   src=\"{player.user.avatar_url}\" alt=\"{player.name}\">"
+		add "   src=\"{player.user.avatar_url or else "#"}\" alt=\"{player.name}\">"
 		add "</a>&nbsp;&nbsp;{player.link}"
 	end
 
@@ -333,7 +333,7 @@ class PodiumPanel
 					<p>
 						<a href="{{{player.url}}}">
 							<img class="img-circle" style="width: 80px"
-								src="{{{player.user.avatar_url}}}" alt="{{{player.name}}}">
+								src="{{{player.user.avatar_url or else "#"}}}" alt="{{{player.name}}}">
 						</a>
 					</p>
 					<p>{{{player.link}}}</p>
@@ -371,10 +371,8 @@ class PlayerReviewsPanel
 			"-involves:{player.name}"
 
 		var issues = new ArraySet[Issue]
-		var rq = game.repo.search_issues(q)
-		if rq != null then issues.add_all rq
-		var rq2 = game.repo.search_issues(q2)
-		if rq2 != null then issues.add_all rq2
+		issues.add_all game.api.search_repo_issues(game.repo, q)
+		issues.add_all game.api.search_repo_issues(game.repo, q2)
 		if issues.is_empty then
 			add "<em>No pull request or issue to review yet...</em>"
 			return
@@ -385,7 +383,7 @@ class PlayerReviewsPanel
 			add """<div class="media">
 			        <a class="media-left" href="{{{uplay.url}}}">
 					 <img class=\"img-circle\" style="width:50px"
-					   src="{{{user.avatar_url}}}" alt="{{{uplay.name}}}">
+						 src="{{{user.avatar_url or else "#"}}}" alt="{{{uplay.name}}}">
 					</a>
 					<div class="media-body">
 					 <h4 class="media-heading">
@@ -419,10 +417,8 @@ class PlayerWorkPanel
 		var q2 = "is:open sort:updated-asc assignee:{player.name}"
 
 		var issues = new ArraySet[Issue]
-		var rq = game.repo.search_issues(q)
-		if rq != null then issues.add_all rq
-		var rq2 = game.repo.search_issues(q2)
-		if rq2 != null then issues.add_all rq2
+		issues.add_all game.api.search_repo_issues(game.repo, q)
+		issues.add_all game.api.search_repo_issues(game.repo, q2)
 		if issues.is_empty then
 			add "<em>No work to do yet...</em>"
 			return
@@ -433,7 +429,7 @@ class PlayerWorkPanel
 			add """<div class="media">
 			        <a class="media-left" href="{{{uplay.url}}}">
 					 <img class=\"img-circle\" style="width:50px"
-					   src="{{{user.avatar_url}}}" alt="{{{uplay.name}}}">
+						 src="{{{user.avatar_url or else "#"}}}" alt="{{{uplay.name}}}">
 					</a>
 					<div class="media-body">
 					 <h4 class="media-heading">
@@ -557,7 +553,7 @@ class AchievementPanel
 		        <a class="media-left" href="{{{player.url}}}">
 				 <span class="badge progress-bar-warning" style="position: absolute">#1</span>
 		         <img class=\"img-circle\" style="width:50px"
-		          src="{{{player.user.avatar_url}}}" alt="{{{player.name}}}">
+					 src="{{{player.user.avatar_url or else "#"}}}" alt="{{{player.name}}}">
 		        </a>
 				<div class="media-body">
 				 <h4 class="media-heading">Unlocked first by {{{player.link}}}</h4>

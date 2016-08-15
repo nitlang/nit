@@ -29,66 +29,65 @@ class EventsGenerator
 	# API client used to get github data.
 	var api: GithubAPI
 
+	# Gen a fake id for events
+	fun gen_event_id: String do return get_time.to_s
+
 	# Issues
 
 	# Generate a new IssuesEvent from an issue.
-	fun issues_event(action: String, issue: Issue): IssuesEvent do
-		var e = new IssuesEvent(api)
-		e.action = action
-		e.repo = issue.repo
-		e.issue = issue
-		return e
+	fun issues_event(repo: Repo, action: String, issue: Issue): IssuesEvent do
+		return new IssuesEvent(gen_event_id, action, repo, issue)
 	end
 
 	# Generate a new IssuesEvent with an `opened` action.
-	fun issue_open(issue: Issue): IssuesEvent do return issues_event("opened", issue)
+	fun issue_open(repo: Repo, issue: Issue): IssuesEvent do
+		return issues_event(repo, "opened", issue)
+	end
 
 	# Generate a new IssuesEvent with an `closed` action.
-	fun issue_close(issue: Issue): IssuesEvent do return issues_event("closed", issue)
+	fun issue_close(repo: Repo, issue: Issue): IssuesEvent do
+		return issues_event(repo, "closed", issue)
+	end
 
 	# Generate a new IssuesEvent with an `reopened` action.
-	fun issue_reopen(issue: Issue): IssuesEvent do return issues_event("reopened", issue)
+	fun issue_reopen(repo: Repo, issue: Issue): IssuesEvent do
+		return issues_event(repo, "reopened", issue)
+	end
 
 	# Generate a new IssuesEvent from a IssueEvent.
-	fun issue_raw_event(issue: Issue, event: IssueEvent): IssuesEvent do
-		var e = issues_event(event.event, issue)
-		e.lbl = event.labl
-		e.assignee = event.assignee
-		return e
+	fun issue_raw_event(repo: Repo, issue: Issue, event: IssueEvent): IssuesEvent do
+		return new IssuesEvent(event.id.to_s, event.event, repo, issue, event.labl, event.assignee)
+	end
+
+	# Generate a new IssueCommentEvent from a IssueComment.
+	fun issue_comment_event(repo: Repo, issue: Issue, comment: IssueComment): IssueCommentEvent do
+		return new IssueCommentEvent(gen_event_id, "created", repo, issue, comment)
 	end
 
 	# Pull requests
 
 	# Generate a new PullRequestEvent from a `pull` request.
-	fun pull_event(action: String, pull: PullRequest): PullRequestEvent do
-		var e = new PullRequestEvent(api)
-		e.action = action
-		e.repo = pull.repo
-		e.pull = pull
-		return e
+	fun pull_event(repo: Repo, action: String, pull: PullRequest): PullRequestEvent do
+		return new PullRequestEvent(gen_event_id, action, repo, pull.number, pull)
 	end
 
 	# Generate a new PullRequestEvent with an `opened` action.
-	fun pull_open(pull: PullRequest): PullRequestEvent do return pull_event("opened", pull)
-
-	# Generate a new PullRequestEvent with an `closed` action.
-	fun pull_close(pull: PullRequest): PullRequestEvent do return pull_event("closed", pull)
-
-	# Generate a new PullRequestEvent with an `reopened` action.
-	fun pull_reopen(pull: PullRequest): PullRequestEvent do return pull_event("reopened", pull)
-
-	# Generate a new PullRequestEvent from a IssueEvent.
-	fun pull_raw_event(pull: PullRequest, event: IssueEvent): PullRequestEvent do
-		return pull_event(event.event, pull)
+	fun pull_open(repo: Repo, pull: PullRequest): PullRequestEvent do
+		return pull_event(repo, "opened", pull)
 	end
 
-	# Generate a new IssueCommentEvent from a IssueComment.
-	fun issue_comment_event(issue: Issue, comment: IssueComment): IssueCommentEvent do
-		var e = new IssueCommentEvent(api)
-		e.action = "created"
-		e.repo = issue.repo
-		e.issue = issue
-		e.comment = comment
-		return e
+	# Generate a new PullRequestEvent with an `closed` action.
+	fun pull_close(repo: Repo, pull: PullRequest): PullRequestEvent do
+		return pull_event(repo, "closed", pull)
+	end
+
+	# Generate a new PullRequestEvent with an `reopened` action.
+	fun pull_reopen(repo: Repo, pull: PullRequest): PullRequestEvent do
+		return pull_event(repo, "reopened", pull)
+	end
+
+	# Generate a new PullRequestEvent from a IssueEvent.
+	fun pull_raw_event(repo: Repo, pull: PullRequest, event: IssueEvent): PullRequestEvent do
+		return new PullRequestEvent(event.id.to_s, event.event, repo, pull.number, pull)
 	end
 end
