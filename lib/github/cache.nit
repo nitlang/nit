@@ -60,17 +60,19 @@ redef class GithubAPI
 		if store.has_key(key) then
 			message(1, "Get {key} (cache)")
 			was_error = false
-			return store.load_object(key)
+			return deserialize(store.load_object(key).to_json).as(nullable GithubEntity)
 		end
 		var obj = super
-		if not was_error then cache(key, obj)
+		if not was_error then
+			cache(key, obj.as(not null))
+		end
 		return obj
 	end
 
 	# Save `json` data in cache under `key`.
-	private fun cache(key: String, json: JsonObject) do
+	private fun cache(key: String, obj: GithubEntity) do
 		message(2, "Cache key {key}")
-		store.store_object(key, json)
+		store.store_object(key, obj.to_json.parse_json.as(JsonObject))
 	end
 
 	# Check if a cache file exists for `key`.

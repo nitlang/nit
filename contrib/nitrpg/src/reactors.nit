@@ -47,7 +47,7 @@ redef class GithubEvent
 		var obj = new JsonObject
 		obj["player"] = player.name
 		obj["reward"] = reward
-		obj["github_event"] = json
+		obj["github_event"] = self
 		var event = new GameEvent(player.game, kind, obj)
 		player.game.add_event(event)
 		return event

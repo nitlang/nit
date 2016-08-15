@@ -52,15 +52,15 @@ class TestListener
 		var issue = api.load_issue(repo, 322)
 		assert issue != null
 
-		l.apply_event(generator.issue_open(issue), db)
+		l.apply_event(generator.issue_open(repo, issue), db)
 		var game = load_game("Morriar/nit", db)
 		assert game.stats.overall["issues"] == 1
 		assert game.stats.overall["issues_open"] == 1
-		l.apply_event(generator.issue_close(issue), db)
+		l.apply_event(generator.issue_close(repo, issue), db)
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["issues"] == 1
 		assert game.stats.overall["issues_open"] == 0
-		l.apply_event(generator.issue_reopen(issue), db)
+		l.apply_event(generator.issue_reopen(repo, issue), db)
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["issues"] == 1
 		assert game.stats.overall["issues_open"] == 1
@@ -75,15 +75,15 @@ class TestListener
 		var issue = api.load_issue(repo, 322)
 		assert issue != null
 
-		l.apply_event(generator.issue_open(issue), db)
+		l.apply_event(generator.issue_open(repo, issue), db)
 		var player = new Player(game, "Morriar")
 		assert player.stats.overall["issues"] == 1
 		assert player.stats.overall["issues_open"] == 1
-		l.apply_event(generator.issue_close(issue), db)
+		l.apply_event(generator.issue_close(repo, issue), db)
 		player = new Player(game, "Morriar")
 		assert player.stats.overall["issues"] == 1
 		assert player.stats.overall["issues_open"] == 0
-		l.apply_event(generator.issue_reopen(issue), db)
+		l.apply_event(generator.issue_reopen(repo, issue), db)
 		player = new Player(game, "Morriar")
 		assert player.stats.overall["issues"] == 1
 		assert player.stats.overall["issues_open"] == 1
@@ -97,24 +97,24 @@ class TestListener
 		var pr = api.load_pull(repo, 275)
 		assert pr != null
 
-		l.apply_event(generator.pull_open(pr), db)
+		l.apply_event(generator.pull_open(repo, pr), db)
 		var game = load_game("Morriar/nit", db)
 		assert game.stats.overall["pulls"] == 1
 		assert game.stats.overall["pulls_open"] == 1
 		assert game.stats.overall["commits"] == 0
 		pr.merged = false
-		l.apply_event(generator.pull_close(pr), db)
+		l.apply_event(generator.pull_close(repo, pr), db)
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["pulls"] == 1
 		assert game.stats.overall["pulls_open"] == 0
 		assert game.stats.overall["commits"] == 0
-		l.apply_event(generator.pull_reopen(pr), db)
+		l.apply_event(generator.pull_reopen(repo, pr), db)
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["pulls"] == 1
 		assert game.stats.overall["pulls_open"] == 1
 		assert game.stats.overall["commits"] == 0
 		pr.merged = true
-		l.apply_event(generator.pull_close(pr), db)
+		l.apply_event(generator.pull_close(repo, pr), db)
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["pulls"] == 1
 		assert game.stats.overall["pulls_open"] == 0
@@ -132,12 +132,12 @@ class TestListener
 		assert comment != null
 
 		comment.body = "foo bar"
-		l.apply_event(generator.issue_comment_event(issue, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, issue, comment), db)
 		var game = load_game("Morriar/nit", db)
 		assert game.stats.overall["comments"] == 1
 		assert game.stats.overall["reviews"] == 0
 		comment.body = "foo +1 bar"
-		l.apply_event(generator.issue_comment_event(issue, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, issue, comment), db)
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["comments"] == 2
 		assert game.stats.overall["reviews"] == 1
@@ -152,18 +152,18 @@ class TestListener
 		var pull = api.load_pull(repo, 275)
 		assert pull != null
 
-		l.apply_event(generator.pull_open(pull), db)
+		l.apply_event(generator.pull_open(repo, pull), db)
 		var player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 10
 		pull.merged = false
-		l.apply_event(generator.pull_close(pull), db)
+		l.apply_event(generator.pull_close(repo, pull), db)
 		player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 0
-		l.apply_event(generator.pull_reopen(pull), db)
+		l.apply_event(generator.pull_reopen(repo, pull), db)
 		player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 10
 		pull.merged = true
-		l.apply_event(generator.pull_close(pull), db)
+		l.apply_event(generator.pull_close(repo, pull), db)
 		player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 12
 	end
@@ -184,14 +184,14 @@ class TestListener
 		# no review in opened issue
 		pull.state = "open"
 		comment.body = "foo bar"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		var player = new Player(game, "Morriar")
 		assert player.stats.overall["nitcoins"] == 0
 
 		# review in opened issue
 		pull.state = "open"
 		comment.body = "foo +1 bar"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		player = new Player(game, "Morriar")
 		print player.stats.overall["nitcoins"]
 		assert player.stats.overall["nitcoins"] == 2
@@ -199,14 +199,14 @@ class TestListener
 		# review in closed issue
 		pull.state = "closed"
 		comment.body = "foo +1 bar"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		player = new Player(game, "Morriar")
 		assert player.stats.overall["nitcoins"] == 2
 
 		# review in reopened issue
 		pull.state = "open"
 		comment.body = "foo +1 bar"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		player = new Player(game, "Morriar")
 		assert player.stats.overall["nitcoins"] == 4
 	end
@@ -227,7 +227,7 @@ class TestListener
 			var player = new Player(game, "Morriar")
 			player.stats["issues"] = i
 			player.save
-			l.apply_event(generator.issue_open(issue), db)
+			l.apply_event(generator.issue_open(repo, issue), db)
 			assert player.load_achievements.has_key(id)
 		end
 		var player = new Player(game, "Morriar")
@@ -250,7 +250,7 @@ class TestListener
 			var player = new Player(game, "itch76")
 			player.stats["pulls"] = i
 			player.save
-			l.apply_event(generator.pull_open(pull), db)
+			l.apply_event(generator.pull_open(repo, pull), db)
 			assert player.load_achievements.has_key(id)
 		end
 		var player = new Player(game, "itch76")
@@ -276,7 +276,7 @@ class TestListener
 			var player = new Player(game, "itch76")
 			player.stats["commits"] = i
 			player.save
-			l.apply_event(generator.pull_close(pull), db)
+			l.apply_event(generator.pull_close(repo, pull), db)
 			assert player.load_achievements.has_key(id)
 		end
 		var player = new Player(game, "itch76")
@@ -301,7 +301,7 @@ class TestListener
 			var player = new Player(game, "Morriar")
 			player.stats["comments"] = i
 			player.save
-			l.apply_event(generator.issue_comment_event(pull, comment), db)
+			l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 			assert player.load_achievements.has_key(id)
 		end
 		var player = new Player(game, "Morriar")
@@ -318,7 +318,7 @@ class TestListener
 		assert issue != null
 
 		issue.title = "nitdoc ffi"
-		l.apply_event(generator.issue_open(issue), db)
+		l.apply_event(generator.issue_open(repo, issue), db)
 		var player = new Player(game, "Morriar")
 		assert player.load_achievements.has_key("issue_about_nitdoc")
 		assert player.load_achievements.has_key("issue_about_ffi")
@@ -337,19 +337,19 @@ class TestListener
 		assert comment != null
 
 		comment.body = "@{game.repo.owner.login}"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		var player = new Player(game, "Morriar")
 		assert player.load_achievements.has_key("player_ping_god")
 		assert player.stats.overall["nitcoins"] == 50
 
 		comment.body = "+1"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		player = new Player(game, "Morriar")
 		assert player.load_achievements.has_key("player_first_review")
 		assert player.stats.overall["nitcoins"] == 60
 
 		comment.body = "Nitcoins"
-		l.apply_event(generator.issue_comment_event(pull, comment), db)
+		l.apply_event(generator.issue_comment_event(repo, pull, comment), db)
 		player = new Player(game, "Morriar")
 		assert player.load_achievements.has_key("player_says_nitcoin")
 		assert player.stats.overall["nitcoins"] == 70

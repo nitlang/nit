@@ -156,7 +156,7 @@ redef class Player
 		obj["player"] = name
 		obj["reward"] = achievement.reward
 		obj["achievement"] = achievement.id
-		obj["github_event"] = event.json
+		obj["github_event"] = event
 		var ge = new GameEvent(game, "achievement_unlocked", obj)
 		add_event(ge)
 		game.add_event(ge)

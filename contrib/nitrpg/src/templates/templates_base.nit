@@ -48,13 +48,14 @@ end
 
 redef class Issue
 	# Return a HTML link to this Issue.
-	fun link: String do return "<a href=\"{html_url}\">#{number}</a>"
+	fun link: String do return "<a href=\"{html_url or else "#"}\">#{number}</a>"
 end
 
 redef class Achievement
 	# Return a HTML link to this Issue.
 	fun link: String do return "<a href=\"{url}\">{name}</a>"
 
+	# Render self as a media item.
 	fun list_item: String do
 		return """<div class="media">
 			       <div class="media-left" style="width: 50px">

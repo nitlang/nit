@@ -55,14 +55,12 @@ class TplEvent
 
 	# Load `github_event` data key as a PullRequestEvent.
 	var pull_event: PullRequestEvent is lazy do
-		var obj = event.data["github_event"].as(JsonObject)
-		return new PullRequestEvent.from_json(event.game.api, obj)
+		return event.game.api.deserialize(event.data["github_event"].as(JsonObject).to_json).as(PullRequestEvent)
 	end
 
 	# Load `github_event` data key as a IssueCommentEvent.
 	var issue_comment_event: IssueCommentEvent is lazy do
-		var obj = event.data["github_event"].as(JsonObject)
-		return new IssueCommentEvent.from_json(event.game.api, obj)
+		return event.game.api.deserialize(event.data["github_event"].as(JsonObject).to_json).as(IssueCommentEvent)
 	end
 
 	# Load `achievement` data key as an Achievement.
@@ -77,7 +75,7 @@ class TplEvent
 				 <span class="badge progress-bar-success"
 				  style=\"position: absolute\">+{{{reward}}}</span>
 				 <img class=\"img-circle\" style="width:50px"
-				   src="{{{player.user.avatar_url}}}" alt="{{{player.name}}}">
+				 src="{{{player.user.avatar_url or else "#"}}}" alt="{{{player.name}}}">
 				</a>
 				<div class="media-body">
 				 <h4 class="media-heading">{{{title}}}</h4>
