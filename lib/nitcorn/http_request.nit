@@ -155,8 +155,6 @@ class HttpRequestParser
 					var decoded = parts[1].replace('+', " ").from_percent_encoding
 					http_request.post_args[parts[0]] = decoded
 					http_request.all_args[parts[0]] = decoded
-				else
-					print "POST Error: {line} format error on {line}"
 				end
 			end
 		end
