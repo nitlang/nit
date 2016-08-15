@@ -1,0 +1,22 @@
+/* Special lexer that will be hijacked. See blob.nit */
+Grammar blob;
+
+Lexer
+// These tokens are recognized by the genuine lexer
+d = '0'..'9';
+int = d+;
+white = #9..#13 | ' ';
+// Need to name this token, we will use it to change context
+endmark = '}}}';
+
+// Special token that the genuine lexer is expect to not recognize.
+// But that muse be known by the parser or the application.
+// TODO: Maybe add a special keyword?
+//       blob = Phony;
+blob = #0;
+
+Parser
+Ignored white;
+ps = p*;
+// Parser do not know that `blob` is phony.
+p = blob | '{{{' int endmark;
