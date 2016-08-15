@@ -21,9 +21,12 @@
 module http_request
 
 import core
+import serialization
 
 # A request received over HTTP, is build by `HttpRequestParser`
 class HttpRequest
+	serialize
+
 	private init is old_style_init do end
 
 	# HTTP protocol version
@@ -31,9 +34,6 @@ class HttpRequest
 
 	# Method of this request (GET or POST)
 	var method: String
-
-	# The host targetter by this request (usually the server)
-	var host: String
 
 	# The full URL requested by the client (including the `query_string`)
 	var url: String
