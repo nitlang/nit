@@ -35,9 +35,6 @@ class HttpRequest
 	# Method of this request (GET or POST)
 	var method: String
 
-	# The host targetter by this request (usually the server)
-	var host: String
-
 	# The full URL requested by the client (including the `query_string`)
 	var url: String
 
