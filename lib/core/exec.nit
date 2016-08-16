@@ -220,9 +220,9 @@ class ProcessReader
 
 	redef fun close do stream_in.close
 
-	redef fun read_char do return stream_in.read_char
+	redef fun raw_read_byte do return stream_in.read_byte
 
-	redef fun read_byte do return stream_in.read_byte
+	redef fun raw_read_bytes(bytes, max) do return stream_in.read_bytes_native(bytes, max)
 
 	redef fun eof do return stream_in.eof
 
@@ -247,7 +247,9 @@ class ProcessWriter
 
 	redef fun is_writable do return stream_out.is_writable
 
-	redef fun write(s) do stream_out.write(s)
+	redef fun write_byte(b) do stream_out.write_byte(b)
+
+	redef fun write_bytes(ns, ln) do stream_out.write_bytes(ns, ln)
 
 	redef fun pipeflags do return 1
 
@@ -301,7 +303,7 @@ class ProcessDuplex
 			write input.substring(prev, delimiter.after-prev)
 			prev = delimiter.after
 
-			while stream_in.poll_in do
+			while stream_in.ready do
 				read.append stream_in.read_line
 			end
 		end

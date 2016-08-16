@@ -11,8 +11,8 @@
 # Input and output streams of characters
 module stream
 
-intrude import text::ropes
 import error
+intrude import text::ropes
 intrude import bytes
 import codecs
 
@@ -22,6 +22,9 @@ in "C" `{
 	#include <signal.h>
 `}
 
+# Size of a page (used as buffer for I/O)
+fun page_size: Int do return 4096
+
 # Any kind of error that could be produced by an operation on Streams
 class IOError
 	super Error
@@ -29,16 +32,17 @@ end
 
 # Any kind of stream to read/write/both to or from a source
 abstract class Stream
-	# Error produced by the file stream
+
+	# The last recorded error when using `self`
 	#
-	#     var ifs = new FileReader.open("donotmakethisfile.binx")
-	#     ifs.read_all
-	#     ifs.close
-	#     assert ifs.last_error != null
+	# `null` if none has been recorded
 	var last_error: nullable IOError = null
 
-	# close the stream
+	# Closes the stream
 	fun close is abstract
+
+	# Codes/decodes I/O when reading/writing textual data
+	var codec: Codec = utf8_codec is writable
 
 	# Pre-work hook.
 	#
@@ -61,36 +65,232 @@ abstract class Stream
 	fun finish do close
 end
 
-# A `Stream` that can be read from
+# Stream that supports reading bytes/chars from a source
 abstract class Reader
 	super Stream
 
-	# Decoder used to transform input bytes to UTF-8
-	var decoder: Codec = utf8_codec is writable
+	# Lookahead for the next char to read
+	protected var lookahead = new NativeString(page_size)
 
-	# Reads a character. Returns `null` on EOF or timeout
-	fun read_char: nullable Char is abstract
+	# Capacity of the lookahead
+	protected var lookahead_capacity: Int = page_size
 
-	# Reads a byte. Returns `null` on EOF or timeout
-	fun read_byte: nullable Byte is abstract
+	# Length currently occupied in the lookahead
+	protected var lookahead_length: Int = 0
 
-	# Reads a String of at most `i` length
-	fun read(i: Int): String do return read_bytes(i).to_s
+	# Position of the cursor in lookahead
+	protected var lookahead_position: Int = 0
 
-	# Read at most i bytes
-	fun read_bytes(i: Int): Bytes
-	do
-		if last_error != null then return new Bytes.empty
-		var s = new NativeString(i)
-		var buf = new Bytes(s, 0, 0)
-		while i > 0 and not eof do
-			var c = read_byte
-			if c != null then
-				buf.add c
-				i -= 1
-			end
+	# Reads up to `max` bytes directly from source and stores them in `bytes`
+	protected fun raw_read_bytes(bytes: NativeString, max: Int): Int is abstract
+
+	# Reads at most one byte directly from source
+	protected fun raw_read_byte: nullable Int is abstract
+
+	# Is the source ready to be read without blocking ?
+	#
+	# If timeout is left to `null`, function will return immediately
+	#
+	# NOTE: Default behaviour is supposed Non-blocking
+	fun ready(timeout: nullable Int): Bool do return lookahead_length != 0
+
+	# Has the stream reached the end ?
+	#
+	# NOTE: `eof` may block on continuous streams
+	fun eof: Bool do
+		if lookahead_length != 0 then return false
+		var b = raw_read_byte
+		if b == null then return true
+		lookahead[lookahead_position + lookahead_length] = b.to_b
+		lookahead_length += 1
+		return false
+	end
+
+	# Reads a byte from source
+	#
+	# NOTE: May block until a byte is read from source
+	# NOTE: For implementers of a new subclass of `Reader`, you must
+	# implement `raw_read_byte` to handle directly from the source.
+	# `read_byte` will take care of previous lookahead buffers and such.
+	fun read_byte: nullable Int do
+		if eof then return null
+		var b = lookahead[lookahead_position]
+		lookahead_length -= 1
+		if lookahead_length == 0 then
+			lookahead_position = 0
+		else
+			lookahead_position += 1
 		end
-		return buf
+		return b.to_i
+	end
+
+	# Reads at most `max` bytes from source
+	#
+	# NOTE: May block until at least one byte is read from source.
+	# NOTE: For implementers of a new subclass of `Reader`, you must
+	# implement `raw_read_bytes` to handle directly from the source.
+	# `read_bytes` will take care of previous lookahead buffers and such.
+	fun read_bytes(max_length: Int): Bytes do
+		var ret = new Bytes.with_capacity(max_length)
+		var rd = read_bytes_native(ret.items, max_length)
+		ret.length = rd
+		return ret
+	end
+
+	# Reads up to `max` bytes from source and stores them in `bytes`
+	#
+	# NOTE: May block until at least one byte is read from source.
+	# NOTE: For implementers of a new subclass of `Reader`, you must
+	# implement `raw_read_bytes` to handle directly from the source.
+	# `read_bytes_native` will take care of previous lookahead buffers
+	# and such.
+	fun read_bytes_native(bytes: NativeString, max: Int): Int do
+		if eof then return 0
+		var llen = lookahead_length
+		var rd = max.min(llen)
+		var lk = lookahead
+		lk.copy_to(bytes, rd, lookahead_position, 0)
+		lookahead_length -= rd
+		if lookahead_length == 0 then
+			lookahead_position = 0
+		else
+			lookahead_position += rd
+		end
+		if rd < max and ready then rd += raw_read_bytes(bytes.fast_cstring(rd), max - rd)
+		return rd
+	end
+
+	# Reads all the content from the source until `eof` is reached
+	#
+	# WARNING: This can hang if done on a non-finishable source (i.e. stdin)
+	# Take extra care when using this method.
+	fun read_all_bytes: Bytes do
+		var b = new Bytes.with_capacity(page_size)
+		append_all_bytes(b)
+		return b
+	end
+
+	# Appends all the next bytes from source to `b`
+	#
+	# WARNING: This can hang-up if done on a non-finishable source (i.e. stdin)
+	# Take extra care when using this method.
+	fun append_all_bytes(b: Bytes): Int do
+		var lk = lookahead
+		b.append_ns(lk.fast_cstring(lookahead_position), lookahead_length)
+		lookahead_length = 0
+		var rd = 0
+		var sz = page_size
+		while not eof do
+			# The +/-1 are necessary due to `eof` pre-emptively
+			# reading one byte and storing it in `lookahead`
+			rd = raw_read_bytes(lk.fast_cstring(1), sz - 1)
+			b.append_ns(lk, rd + 1)
+			lookahead_length = 0
+			lookahead_position = 0
+		end
+		return rd
+	end
+
+	# Appends at most `max` bytes from `self` to `b`
+	fun append_bytes(b: Bytes, max: Int): Int do
+		b.enlarge(b.length + max)
+		var ons = b.items.fast_cstring(b.length)
+		var rd = read_bytes_native(ons, max)
+		b.length += rd
+		return rd
+	end
+
+	# Reads a char from input source
+	#
+	# Returns unicode replacement character '�' if an
+	# invalid byte sequence is read.
+	fun read_char: nullable Char do
+		if eof then return null
+		var cod = codec
+		var codet_sz = cod.codet_size
+		var lk = lookahead.fast_cstring(lookahead_position)
+		var llen = lookahead_length
+		if llen < codet_sz then llen += raw_read_bytes(lk.fast_cstring(llen), codet_sz - llen)
+		if llen < codet_sz then
+			lookahead_length = 0
+			lookahead_position = 0
+			return 0xFFFD.code_point
+		end
+		var ret = cod.is_valid_char(lk, codet_sz)
+		var max_llen = cod.max_lookahead
+		while ret == 1 and llen < max_llen do
+			if not ready then
+				if llen >= codet_sz then
+					llen -= codet_sz
+				else
+					llen = 0
+				end
+				if llen == 0 then
+					lookahead_position = 0
+				else
+					lookahead_position += codet_sz
+				end
+				lookahead_length = llen
+				return 0xFFFD.code_point
+			end
+			var rd = raw_read_bytes(lk.fast_cstring(llen), codet_sz)
+			if rd < codet_sz then
+				llen -= codet_sz
+				if llen == 0 then
+					lookahead_position = 0
+				else
+					lookahead_position += codet_sz
+				end
+				lookahead_length = llen
+				return 0xFFFD.code_point
+			end
+			llen += codet_sz
+			ret = cod.is_valid_char(lk, llen)
+		end
+		if ret == 0 then
+			var c = cod.decode_char(lk)
+			var clen = c.u8char_len
+			if clen < llen then
+				llen -= codet_sz
+				if llen == 0 then
+					lookahead_position = 0
+				else
+					lookahead_position += codet_sz
+				end
+				lookahead_length = llen
+				return 0xFFFD.code_point
+			end
+			llen -= clen
+			if llen == 0 then
+				lookahead_position = 0
+			else
+				lookahead_position += clen
+			end
+			lookahead_length = llen
+			return c
+		end
+		if ret == 2 or ret == 1 then
+			llen -= codet_sz
+			if llen == 0 then
+				lookahead_position = 0
+			else
+				lookahead_position += codet_sz
+			end
+			lookahead_length = llen
+			return 0xFFFD.code_point
+		end
+		# Should not happen if the decoder works properly
+		var arr = new Array[Object]
+		arr.push "Decoder error: could not decode nor recover from byte sequence ["
+		for i in [0 .. llen[ do
+			arr.push lk[i]
+			arr.push ", "
+		end
+		arr.push "]"
+		var err = new IOError(arr.plain_to_s)
+		err.cause = last_error
+		last_error = err
+		return 0xFFFD.code_point
 	end
 
 	# Read a string until the end of the line.
@@ -99,7 +299,7 @@ abstract class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.read_line == "Hello"
 	# assert i.read_line == ""
 	# assert i.read_line == "World"
@@ -112,7 +312,7 @@ abstract class Reader
 	#
 	# ~~~
 	# var txt2 = "Hello\r\n\n\rWorld"
-	# var i2 = new StringReader(txt2)
+	# var i2 = new MemoryReader.from_str(txt2)
 	# assert i2.read_line == "Hello"
 	# assert i2.read_line == ""
 	# assert i2.read_line == "\rWorld"
@@ -120,13 +320,27 @@ abstract class Reader
 	# ~~~
 	#
 	# NOTE: Use `append_line_to` if the line terminator needs to be preserved.
-	fun read_line: String
-	do
-		if last_error != null then return ""
-		if eof then return ""
-		var s = new FlatBuffer
-		append_line_to(s)
+	fun read_line: String do
+		var s = new Buffer
+		var c = read_char
+		while c != null do
+			s.add c
+			if c == '\n' then break
+			c = read_char
+		end
 		return s.to_s.chomp
+	end
+
+	# Reads all the content of a stream as a String
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new MemoryReader.from_str(txt)
+	# assert i.read_all == txt
+	# ~~~
+	fun read_all: String do
+		var b = read_all_bytes
+		return codec.decode_string(b.items, b.length)
 	end
 
 	# Read all the lines until the eof.
@@ -135,7 +349,7 @@ abstract class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.read_lines == ["Hello", "", "World"]
 	# ~~~
 	#
@@ -146,9 +360,7 @@ abstract class Reader
 	fun read_lines: Array[String]
 	do
 		var res = new Array[String]
-		while not eof do
-			res.add read_line
-		end
+		for i in each_line do res.add i
 		return res
 	end
 
@@ -159,7 +371,7 @@ abstract class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# assert i.each_line.to_a == ["Hello", "", "World"]
 	# ~~~
 	#
@@ -167,7 +379,7 @@ abstract class Reader
 	# Therefore, the stream should no be closed until the end of the stream.
 	#
 	# ~~~
-	# i = new StringReader(txt)
+	# i = new MemoryReader.from_str(txt)
 	# var el = i.each_line
 	#
 	# assert el.item == "Hello"
@@ -180,59 +392,8 @@ abstract class Reader
 	# assert not el.is_ok
 	# # closed before "world" is read
 	# ~~~
+	# FIXME
 	fun each_line: LineIterator do return new LineIterator(self)
-
-	# Read all the stream until the eof.
-	#
-	# The content of the file is returned as a String.
-	#
-	# ~~~
-	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
-	# assert i.read_all == txt
-	# ~~~
-	fun read_all: String do
-		var s = read_all_bytes
-		var slen = s.length
-		if slen == 0 then return ""
-		var rets = ""
-		var pos = 0
-		var str = s.items.clean_utf8(slen)
-		slen = str.byte_length
-		var sits = str.items
-		var remsp = slen
-		while pos < slen do
-			# The 129 size was decided more or less arbitrarily
-			# It will require some more benchmarking to compute
-			# if this is the best size or not
-			var chunksz = 129
-			if chunksz > remsp then
-				rets += new FlatString.with_infos(sits, remsp, pos)
-				break
-			end
-			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
-			var byte_length = st - pos
-			rets += new FlatString.with_infos(sits, byte_length, pos)
-			pos = st
-			remsp -= byte_length
-		end
-		if rets isa Concat then return rets.balance
-		return rets
-	end
-
-	# Read all the stream until the eof.
-	#
-	# The content of the file is returned verbatim.
-	fun read_all_bytes: Bytes
-	do
-		if last_error != null then return new Bytes.empty
-		var s = new Bytes.empty
-		while not eof do
-			var c = read_byte
-			if c != null then s.add(c)
-		end
-		return s
-	end
 
 	# Read a string until the end of the line and append it to `s`.
 	#
@@ -242,7 +403,7 @@ abstract class Reader
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringReader(txt)
+	# var i = new MemoryReader.from_str(txt)
 	# var b = new FlatBuffer
 	# i.append_line_to(b)
 	# assert b == "Hello\n"
@@ -257,7 +418,7 @@ abstract class Reader
 	# a non-eol terminated last line was returned.
 	#
 	# ~~~
-	# var i2 = new StringReader("hello")
+	# var i2 = new MemoryReader.from_str("hello")
 	# assert not i2.eof
 	# var b2 = new FlatBuffer
 	# i2.append_line_to(b2)
@@ -269,7 +430,6 @@ abstract class Reader
 	# Therefore CARRIAGE RETURN & LINE FEED (`\r\n`) is also recognized.
 	fun append_line_to(s: Buffer)
 	do
-		if last_error != null then return
 		loop
 			var x = read_char
 			if x == null then
@@ -281,9 +441,22 @@ abstract class Reader
 		end
 	end
 
-	# Is there something to read.
-	# This function returns 'false' if there is something to read.
-	fun eof: Bool is abstract
+	# Reads a String of at most `i` length
+	fun read(i: Int): String do
+		var c = read_char
+		if c == null then return ""
+		var b = new FlatBuffer
+		b.add(c)
+		var ln = 1
+		while ln < i and ready do
+			c = read_char
+			if c == null then break
+			b.add c
+			ln += 1
+		end
+		return b.to_s
+	end
+
 
 	# Read the next sequence of non whitespace characters.
 	#
@@ -293,7 +466,7 @@ abstract class Reader
 	# An empty string is returned if the end of the file or an error is encounter.
 	#
 	# ~~~
-	# var w = new StringReader(" Hello, \n\t World!")
+	# var w = new MemoryReader.from_str(" Hello, \n\t World!")
 	# assert w.read_word == "Hello,"
 	# assert w.read_char == '\n'
 	# assert w.read_word == "World!"
@@ -326,7 +499,7 @@ abstract class Reader
 	# In fact, this method works like `read_char` except it skips whitespace.
 	#
 	# ~~~
-	# var w = new StringReader(" \nab\tc")
+	# var w = new MemoryReader.from_str(" \nab\tc")
 	# assert w.read_nonwhitespace == 'a'
 	# assert w.read_nonwhitespace == 'b'
 	# assert w.read_nonwhitespace == 'c'
@@ -363,9 +536,7 @@ class LineIterator
 	redef fun item
 	do
 		var line = self.line
-		if line == null then
-			line = stream.read_line
-		end
+		if line == null then line = stream.read_line
 		self.line = line
 		return line
 	end
@@ -392,36 +563,48 @@ class LineIterator
 	end
 end
 
-# `Reader` capable of declaring if readable without blocking
-abstract class PollableReader
-	super Reader
-
-	# Is there something to read? (without blocking)
-	fun poll_in: Bool is abstract
-
-end
-
-# A `Stream` that can be written to
+# Writer capable of writing bytes or text to a destination
 abstract class Writer
 	super Stream
 
-	# The coder from a nit UTF-8 String to the output file
-	var coder: Codec = utf8_codec is writable
+	# Write a byte to destination
+	fun write_byte(b: Byte) is abstract
 
-	# Writes bytes from `s`
-	fun write_bytes(s: Bytes) is abstract
-
-	# write a string
-	fun write(s: Text) is abstract
-
-	# Write a single byte
-	fun write_byte(value: Byte) is abstract
-
-	# Writes a single char
-	fun write_char(c: Char) do write(c.to_s)
+	# Write `ln` bytes from `ns` to a destination
+	fun write_bytes(ns: NativeString, ln: Int) do
+		for i in [0 .. ln[ do write_byte(ns[i])
+	end
 
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
+
+	# Buffer to write a char to output
+	private var char_buffer = new NativeString(20)
+
+	# Writes a char to destination
+	fun write_char(c: Char) do
+		var sz = codec.add_char_to(c, char_buffer)
+		write_bytes(char_buffer, sz)
+	end
+
+	# Writes a whole `text` to destination
+	fun write(s: Text) do
+		s.write_to self
+	end
+
+	# Fast track for `FlatTexts`
+	private fun write_flat(ss: FlatText) do
+		var len = once new Ref[Int](ss.byte_length)
+		len.item = ss.byte_length
+		var to_write = codec.fast_encode(ss, len)
+		write_bytes(to_write, len.item)
+	end
+
+	# Write `s` to destination with a `\n`
+	fun write_line(s: Text) do
+		write(s)
+		write_char('\n')
+	end
 end
 
 # Things that can be efficienlty written to a `Writer`
@@ -438,11 +621,10 @@ interface Writable
 	# Like `write_to` but return a new String (may be quite large)
 	#
 	# This funtionality is anectodical, since the point
-	# of streamable object to to be efficienlty written to a
+	# of streamable objects is to be efficienlty written to a
 	# stream without having to allocate and concatenate strings
-	fun write_to_string: String
-	do
-		var stream = new StringWriter
+	fun write_to_string: String do
+		var stream = new MemoryWriter
 		write_to(stream)
 		return stream.to_s
 	end
@@ -450,287 +632,107 @@ end
 
 redef class Bytes
 	super Writable
-	redef fun write_to(s) do s.write_bytes(self)
+	redef fun write_to(s) do s.write_bytes(items, length)
 
 	redef fun write_to_string do return to_s
 end
 
 redef class Text
 	super Writable
-	redef fun write_to(stream) do stream.write(self)
+	redef fun write_to(stream) do for i in substrings do stream.write_flat(i)
 end
 
-# Input streams with a buffered input for efficiency purposes
-abstract class BufferedReader
-	super Reader
-	redef fun read_char
-	do
-		if last_error != null then return null
-		if eof then
-			last_error = new IOError("Stream has reached eof")
-			return null
-		end
-		# TODO: Fix when supporting UTF-8
-		var c = _buffer[_buffer_pos].to_i.code_point
-		_buffer_pos += 1
-		return c
-	end
-
-	redef fun read_byte
-	do
-		if last_error != null then return null
-		if eof then
-			last_error = new IOError("Stream has reached eof")
-			return null
-		end
-		var c = _buffer[_buffer_pos]
-		_buffer_pos += 1
-		return c
-	end
-
-	# Resets the internal buffer
-	fun buffer_reset do
-		_buffer_length = 0
-		_buffer_pos = 0
-	end
-
-	# Peeks up to `n` bytes in the buffer
-	#
-	# The operation does not consume the buffer
-	#
-	# ~~~nitish
-	# var x = new FileReader.open("File.txt")
-	# assert x.peek(5) == x.read(5)
-	# ~~~
-	fun peek(i: Int): Bytes do
-		if eof then return new Bytes.empty
-		var remsp = _buffer_length - _buffer_pos
-		if i <= remsp then
-			var bf = new Bytes.with_capacity(i)
-			bf.append_ns_from(_buffer, i, _buffer_pos)
-			return bf
-		end
-		var bf = new Bytes.with_capacity(i)
-		bf.append_ns_from(_buffer, remsp, _buffer_pos)
-		_buffer_pos = _buffer_length
-		read_intern(i - bf.length, bf)
-		remsp = _buffer_length - _buffer_pos
-		var full_len = bf.length + remsp
-		if full_len > _buffer_capacity then
-			var c = _buffer_capacity
-			while c < full_len do c = c * 2 + 2
-			_buffer_capacity = c
-		end
-		var nns = new NativeString(_buffer_capacity)
-		bf.items.copy_to(nns, bf.length, 0, 0)
-		_buffer.copy_to(nns, remsp, _buffer_pos, bf.length)
-		_buffer = nns
-		_buffer_pos = 0
-		_buffer_length = full_len
-		return bf
-	end
-
-	redef fun read_bytes(i)
-	do
-		if last_error != null then return new Bytes.empty
-		var buf = new Bytes.with_capacity(i)
-		read_intern(i, buf)
-		return buf
-	end
-
-	# Fills `buf` with at most `i` bytes read from `self`
-	private fun read_intern(i: Int, buf: Bytes): Int do
-		if eof then return 0
-		var p = _buffer_pos
-		var bufsp = _buffer_length - p
-		if bufsp >= i then
-			_buffer_pos += i
-			buf.append_ns_from(_buffer, i, p)
-			return i
-		end
-		_buffer_pos = _buffer_length
-		var readln = _buffer_length - p
-		buf.append_ns_from(_buffer, readln, p)
-		var rd = read_intern(i - readln, buf)
-		return rd + readln
-	end
-
-	redef fun read_all_bytes
-	do
-		if last_error != null then return new Bytes.empty
-		var s = new Bytes.with_capacity(10)
-		var b = _buffer
-		while not eof do
-			var j = _buffer_pos
-			var k = _buffer_length
-			var rd_sz = k - j
-			s.append_ns_from(b, rd_sz, j)
-			_buffer_pos = k
-			fill_buffer
-		end
-		return s
-	end
-
-	redef fun append_line_to(s)
-	do
-		var lb = new Bytes.with_capacity(10)
-		loop
-			# First phase: look for a '\n'
-			var i = _buffer_pos
-			while i < _buffer_length and _buffer[i] != 0xAu8 do
-				i += 1
-			end
-
-			var eol
-			if i < _buffer_length then
-				assert _buffer[i] == 0xAu8
-				i += 1
-				eol = true
-			else
-				eol = false
-			end
-
-			# if there is something to append
-			if i > _buffer_pos then
-				# Copy from the buffer to the string
-				var j = _buffer_pos
-				while j < i do
-					lb.add(_buffer[j])
-					j += 1
-				end
-				_buffer_pos = i
-			else
-				assert end_reached
-				s.append lb.to_s
-				return
-			end
-
-			if eol then
-				# so \n is found
-				s.append lb.to_s
-				return
-			else
-				# so \n is not found
-				if end_reached then
-					s.append lb.to_s
-					return
-				end
-				fill_buffer
-			end
-		end
-	end
-
-	redef fun eof
-	do
-		if _buffer_pos < _buffer_length then return false
-		if end_reached then return true
-		fill_buffer
-		return _buffer_pos >= _buffer_length and end_reached
-	end
-
-	# The buffer
-	private var buffer: NativeString = new NativeString(0)
-
-	# The current position in the buffer
-	private var buffer_pos = 0
-
-	# Length of the current buffer (i.e. nuber of bytes in the buffer)
-	private var buffer_length = 0
-
-	# Capacity of the buffer
-	private var buffer_capacity = 0
-
-	# Fill the buffer
-	protected fun fill_buffer is abstract
-
-	# Has the last fill_buffer reached the end
-	protected fun end_reached: Bool is abstract
-
-	# Allocate a `_buffer` for a given `capacity`.
-	protected fun prepare_buffer(capacity: Int)
-	do
-		_buffer = new NativeString(capacity)
-		_buffer_pos = 0 # need to read
-		_buffer_length = 0
-		_buffer_capacity = capacity
+redef class Concat
+	redef fun write_to(stream) do
+		left.write_to(stream)
+		right.write_to(stream)
 	end
 end
 
-# A `Stream` that can be written to and read from
+redef class FlatText
+	redef fun write_to(stream) do stream.write_flat(self)
+end
+
+# A `Stream` that can read/write bytes or text from/to
 abstract class Duplex
 	super Reader
 	super Writer
 end
 
-# `Stream` that can be used to write to a `String`
+# `Stream` to write bytes or `Text` in memory
 #
 # Mainly used for compatibility with Writer type and tests.
-class StringWriter
+class MemoryWriter
 	super Writer
 
-	private var content = new Array[String]
-	redef fun to_s do return content.plain_to_s
-	redef fun is_writable do return not closed
+	# Where the bytes will be written
+	var src = new Bytes.empty
 
-	redef fun write_bytes(b) do
-		content.add(b.to_s)
+	# Create a new MemoryWriter with the content of a Text
+	init from(t: Text) do
+		src = new Bytes.with_capacity(t.byte_length)
+		src.append_text(t)
 	end
 
-	redef fun write(str)
-	do
-		assert not closed
-		content.add(str.to_s)
-	end
+	redef fun is_writable do return true
 
 	# Is the stream closed?
 	protected var closed = false
 
 	redef fun close do closed = true
+
+	redef fun write_byte(b) do src.add b
+
+	redef fun write_bytes(ns, ln) do src.append_ns(ns, ln)
+
+	# Returns the content of `self` as a `String`
+	redef fun to_s do return src.to_s
 end
 
 # `Stream` used to read from a `String`
 #
 # Mainly used for compatibility with Reader type and tests.
-class StringReader
+class MemoryReader
 	super Reader
 
-	# The string to read from.
-	var source: String
+	# Standard constructor with a `Text` object as only parameter
+	init from_str(s: Text) do init(s.bytes)
 
-	# The current position in the string (bytewise).
-	private var cursor: Int = 0
+	# Where the bytes will be read from
+	var src: SequenceRead[Byte]
 
-	redef fun read_char do
-		if cursor < source.length then
-			# Fix when supporting UTF-8
-			var c = source[cursor]
-			cursor += 1
-			return c
-		else
-			return null
+	# Position in source
+	private var pos = 0
+
+	redef fun ready(timeout) do return eof
+
+	redef fun eof do return closed or pos >= src.length
+
+	redef fun raw_read_byte do
+		if closed then return null
+		if pos < src.length then
+			var b = src[pos]
+			pos += 1
+			return b.to_i
 		end
+		return null
 	end
 
-	redef fun read_byte do
-		if cursor < source.length then
-			var c = source.bytes[cursor]
-			cursor += 1
-			return c
-		else
-			return null
+	redef fun raw_read_bytes(ns, ln) do
+		if closed then return 0
+		var s = src
+		var rd = ln.min(s.length - pos)
+		var ipos = pos
+		for i in [0 .. rd[ do
+			ns[i] = s[ipos]
+			ipos += 1
 		end
+		pos = ipos
+		return rd
 	end
 
-	redef fun close do
-		source = ""
-	end
+	# Is `self` closed ?
+	protected var closed = false
 
-	redef fun read_all_bytes do
-		var nslen = source.length - cursor
-		var nns = new NativeString(nslen)
-		source.copy_to_native(nns, nslen, cursor, 0)
-		return new Bytes(nns, nslen, nslen)
-	end
-
-	redef fun eof do return cursor >= source.byte_length
+	redef fun close do closed = true
 end

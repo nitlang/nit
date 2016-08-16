@@ -70,7 +70,9 @@ abstract class Codec
 	# * 2 if invalid
 	fun is_valid_char(ns: NativeString, position: Int): Int is abstract
 
-	# Decodes a char from `b` to a Unicode code-point
+	# Decodes the first char from `b` to a Unicode code-point
+	#
+	# NOTE: Unsafe is `b` is too short for decoding a char, will go out of bounds.
 	fun decode_char(b: NativeString): Char is abstract
 
 	# Decodes a string `b` to UTF-8

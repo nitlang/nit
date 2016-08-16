@@ -32,14 +32,26 @@ in "C Header" `{
 	#include <errno.h>
 `}
 
-# `Stream` used to interact with a File or FileDescriptor
-abstract class FileStream
+# Any FileStream capable of reading/writing from/to a file
+class FileStream
 	super Stream
-	# The path of the file.
-	var path: nullable String = null
 
-	# The FILE *.
-	private var file: nullable NativeFile = null
+	# The native file object to read from
+	private var file: nullable NativeFile
+
+	# Path to the file
+	var path: String
+
+	init do
+		var f = _file
+		if f == null then return
+		if f.address_is_null then _file = null
+	end
+
+	# File descriptor of this file
+	fun fd: Int do return if _file != null then _file.as(not null).fileno else -1
+
+	private fun open_file: NativeFile is abstract
 
 	# The status of a file. see POSIX stat(2).
 	#
@@ -49,33 +61,16 @@ abstract class FileStream
 	# Return null in case of error
 	fun file_stat: nullable FileStat
 	do
-		var stat = _file.as(not null).file_stat
+		var f = _file
+		if f == null then return null
+		var stat = f.file_stat
 		if stat.address_is_null then return null
 		return new FileStat(stat)
 	end
 
-	# File descriptor of this file
-	fun fd: Int do return _file.as(not null).fileno
-
-	redef fun close
-	do
-		var file = _file
-		if file == null then return
-		if file.address_is_null then
-			if last_error != null then return
-			last_error = new IOError("Cannot close unopened file")
-			return
-		end
-		var i = file.io_close
-		if i != 0 then
-			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
-		end
-		_file = null
-	end
-
 	# Sets the buffering mode for the current FileStream
 	#
-	# If the buf_size is <= 0, its value will be 512 by default
+	# If the buf_size is <= 0, its value will be 4096 by default
 	#
 	# The mode is any of the buffer_mode enumeration in `Sys`:
 	#
@@ -83,19 +78,20 @@ abstract class FileStream
 	# * `buffer_mode_line`
 	# * `buffer_mode_none`
 	fun set_buffering_mode(buf_size, mode: Int) do
-		if buf_size <= 0 then buf_size = 512
-		if _file.as(not null).set_buffering_type(buf_size, mode) != 0 then
-			last_error = new IOError("Error while changing buffering type for FileStream, returned error {sys.errno.strerror}")
+		var f = _file
+		if f == null then
+			var err = new IOError("Error, file stream is null")
+			err.cause = last_error
+			last_error = err
+			return
+		end
+		if buf_size <= 0 then buf_size = 4096
+		if f.set_buffering_type(buf_size, mode) != 0 then
+			var err = new IOError("Error while changing buffering type for FileStream, returned error {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 		end
 	end
-end
-
-# `Stream` that can read from a File
-class FileReader
-	super FileStream
-	super BufferedReader
-	super PollableReader
-	# Misc
 
 	# Open the same file again.
 	# The original path is reused, therefore the reopened file can be a different file.
@@ -106,186 +102,187 @@ class FileReader
 	#     assert l == f.read_line
 	fun reopen
 	do
-		if not eof and not _file.as(not null).address_is_null then close
+		close
 		last_error = null
-		_file = new NativeFile.io_open_read(path.as(not null).to_cstring)
-		if _file.as(not null).address_is_null then
-			last_error = new IOError("Cannot open `{path.as(not null)}`: {sys.errno.strerror}")
-			end_reached = true
+		var f = open_file
+		_file = f
+		if f.address_is_null then
+			var err = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
+			_file = null
 			return
 		end
-		end_reached = false
-		buffer_reset
 	end
 
-	redef fun close
-	do
-		super
-		buffer_reset
-		end_reached = true
-	end
-
-	redef fun fill_buffer
-	do
-		var nb = _file.as(not null).io_read(_buffer, _buffer_capacity)
-		if last_error == null and _file.as(not null).ferror then
-			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
-			end_reached = true
+	redef fun close do
+		var f = _file
+		if f == null then
+			var err = new IOError("Cannot close non-existing file handler")
+			err.cause = last_error
+			last_error = err
+			return
 		end
-		if nb <= 0 then
-			end_reached = true
-			nb = 0
-		end
-		_buffer_length = nb
-		_buffer_pos = 0
+		f.io_close
+		_file = null
 	end
 
-	# End of file?
-	redef var end_reached = false
-
-	# Open the file at `path` for reading.
-	#
-	#     var f = new FileReader.open("/etc/issue")
-	#     assert not f.end_reached
-	#     f.close
-	#
-	# In case of error, `last_error` is set
-	#
-	#     f = new FileReader.open("/fail/does not/exist")
-	#     assert f.end_reached
-	#     assert f.last_error != null
-	init open(path: String)
-	do
-		self.path = path
-		prepare_buffer(100)
-		_file = new NativeFile.io_open_read(path.to_cstring)
-		if _file.as(not null).address_is_null then
-			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
-			end_reached = true
-		end
-	end
-
-	# Creates a new File stream from a file descriptor
-	#
-	# This is a low-level method.
-	init from_fd(fd: Int) do
-		self.path = ""
-		prepare_buffer(1)
-		_file = fd.fd_to_stream(read_only)
-		if _file.as(not null).address_is_null then
-			last_error = new IOError("Error: Converting fd {fd} to stream failed with '{sys.errno.strerror}'")
-			end_reached = true
-		end
-	end
-
-	redef fun poll_in
-	do
-		var res = native_poll_in(fd)
-		if res == -1 then
-			last_error = new IOError(errno.to_s)
-			return false
-		else return res > 0
-	end
-
-	private fun native_poll_in(fd: Int): Int `{
-		struct pollfd fds = {(int)fd, POLLIN, 0};
-		return poll(&fds, 1, 0);
+	private fun native_poll_in(fd, timeout: Int): Int `{
+		struct pollfd fds = {fd, POLLIN, 0};
+		return poll(&fds, 1, timeout);
 	`}
 end
 
-# `Stream` that can write to a File
-class FileWriter
+# Reader capable of reading bytes from a file
+class FileReader
+	super Reader
 	super FileStream
-	super Writer
 
-	redef fun write_bytes(s) do
-		if last_error != null then return
-		if not _is_writable then
-			last_error = new IOError("cannot write to non-writable stream")
-			return
+	# Buffer used to read one character
+	private var char_buf = new NativeString(1)
+
+	# Open the file at `path` for reading.
+	init open(path: String)
+	do
+		var fl = new NativeFile.io_open_read(path.to_cstring)
+		if fl.address_is_null then
+			var err = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 		end
-		write_native(s.items, 0, s.length)
+		init(fl, path)
 	end
 
-	redef fun write(s)
-	do
-		if last_error != null then return
-		if not _is_writable then
-			last_error = new IOError("cannot write to non-writable stream")
-			return
+	# Creates a new File stream from a file descriptor
+	init from_fd(fd: Int) do
+		var fl = fd.fd_to_stream(read_only)
+		if fl.address_is_null then
+			var err = new IOError("Error: Opening stream from file descriptor {fd} failed with '{sys.errno.strerror}'")
+			err.cause = last_error
+			last_error = err
 		end
-		s.write_native_to(self)
+		init(fl, "")
 	end
 
-	redef fun write_byte(value)
-	do
-		if last_error != null then return
-		if not _is_writable then
-			last_error = new IOError("Cannot write to non-writable stream")
-			return
-		end
-		if _file.as(not null).address_is_null then
-			last_error = new IOError("Writing on a null stream")
-			_is_writable = false
-			return
-		end
+	redef fun open_file do return new NativeFile.io_open_read(path.to_cstring)
 
-		var err = _file.as(not null).write_byte(value)
-		if err != 1 then
-			# Big problem
-			last_error = new IOError("Problem writing a byte: {err}")
+	redef fun raw_read_byte do
+		var f = _file
+		if f == null then
+			var err = new IOError("Cannot read a byte from a closed file descriptor")
+			err.cause = last_error
+			last_error = err
+			return null
+		end
+		var r = f.io_read_byte
+		if r == -1 then return null
+		return r
+	end
+
+	redef fun raw_read_bytes(ns, l) do
+		var f = _file
+		if f == null then
+			var err = new IOError("Cannot read a byte from a closed file descriptor")
+			err.cause = last_error
+			last_error = err
+			return 0
+		end
+		var r = f.io_read(ns, l)
+		return r
+	end
+
+	redef fun ready(time) do
+		if super then return true
+		var t = if time == null then 0 else time
+		var res = native_poll_in(fd, t)
+		if res == -1 then
+			var err = new IOError(errno.to_s)
+			err.cause = last_error
+			last_error = err
+			return false
+		else
+			return res > 0
 		end
 	end
 
 	redef fun close
 	do
-		super
-		_is_writable = false
+		var f = _file
+		if f == null then return
+		if f.address_is_null then
+			if last_error != null then return
+			var err = new IOError("Cannot close unopened file")
+			err.cause = last_error
+			last_error = err
+			return
+		end
+		var i = f.io_close
+		if i != 0 then
+			var err = new IOError("Close failed due to error {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
+		end
+		_file = null
 	end
-	redef var is_writable = false
+end
 
-	# Write `len` bytes from `native`.
-	private fun write_native(native: NativeString, from, len: Int)
-	do
-		if last_error != null then return
-		if not _is_writable then
-			last_error = new IOError("Cannot write to non-writable stream")
-			return
-		end
-		if _file.as(not null).address_is_null then
-			last_error = new IOError("Writing on a null stream")
-			_is_writable = false
-			return
-		end
-		var err = _file.as(not null).io_write(native, from, len)
-		if err != len then
-			# Big problem
-			last_error = new IOError("Problem in writing : {err} {len} \n")
-		end
-	end
+# Reader capable of writing to a file
+class FileWriter
+	super Writer
+	super FileStream
 
 	# Open the file at `path` for writing.
 	init open(path: String)
 	do
-		_file = new NativeFile.io_open_write(path.to_cstring)
-		self.path = path
-		_is_writable = true
-		if _file.as(not null).address_is_null then
-			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
-			is_writable = false
+		var fl = new NativeFile.io_open_write(path.to_cstring)
+		if fl.address_is_null then
+			var err = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 		end
+		init(fl, path)
 	end
 
 	# Creates a new File stream from a file descriptor
 	init from_fd(fd: Int) do
-		self.path = ""
-		_file = fd.fd_to_stream(wipe_write)
-		_is_writable = true
-		 if _file.as(not null).address_is_null then
-			 last_error = new IOError("Error: Opening stream from file descriptor {fd} failed with '{sys.errno.strerror}'")
-			_is_writable = false
+		var fl = fd.fd_to_stream(wipe_write)
+		if fl.address_is_null then
+			var err = new IOError("Error: Opening stream from file descriptor {fd} failed with '{sys.errno.strerror}'")
+			err.cause = last_error
+			last_error = err
 		end
+		init(fl, "")
 	end
+
+	# Internal buffer used to write bytes
+	private var buf = new NativeString(1)
+
+	redef fun open_file do return new NativeFile.io_open_write(path.to_cstring)
+
+	redef fun write_byte(b) do
+		var f = _file
+		if f == null then
+			var err = new IOError("Cannot write a byte to a closed file descriptor")
+			err.cause = last_error
+			last_error = err
+			return
+		end
+		buf[0] = b
+		f.io_write(buf, 0, 1)
+	end
+
+	redef fun write_bytes(ns, ln) do
+		var f = _file
+		if f == null then
+			var err = new IOError("Cannot write a byte to a closed file descriptor")
+			err.cause = last_error
+			last_error = err
+			return
+		end
+		f.io_write(ns, 0, ln)
+	end
+
+	redef var is_writable = false
 end
 
 redef class Int
@@ -315,11 +312,8 @@ private fun wipe_write: NativeString do return once "w".to_cstring
 class Stdin
 	super FileReader
 
-	init do
-		_file = new NativeFile.native_stdin
-		path = "/dev/stdin"
-		prepare_buffer(1)
-	end
+	# Default constructor for `stdin`
+	init default do from_fd(0)
 end
 
 # Standard output stream.
@@ -327,12 +321,9 @@ end
 # The class of the default value of `sys.stdout`.
 class Stdout
 	super FileWriter
-	init do
-		_file = new NativeFile.native_stdout
-		path = "/dev/stdout"
-		_is_writable = true
-		set_buffering_mode(256, sys.buffer_mode_line)
-	end
+
+	# Default constructor for `stdout`
+	init default do from_fd(1)
 end
 
 # Standard error stream.
@@ -340,11 +331,9 @@ end
 # The class of the default value of `sys.stderr`.
 class Stderr
 	super FileWriter
-	init do
-		_file = new NativeFile.native_stderr
-		path = "/dev/stderr"
-		_is_writable = true
-	end
+
+	# Default constructor for `stderr`
+	init default do from_fd(2)
 end
 
 ###############################################################################
@@ -455,7 +444,9 @@ class Path
 	do
 		var stat = path.to_cstring.file_stat
 		if stat.address_is_null then
-			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			var err = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 			return null
 		end
 		last_error = null
@@ -469,7 +460,9 @@ class Path
 	do
 		var stat = path.to_cstring.file_lstat
 		if stat.address_is_null then
-			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			var err = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 			return null
 		end
 		last_error = null
@@ -483,7 +476,9 @@ class Path
 	do
 		var res = path.to_cstring.file_delete
 		if not res then
-			last_error = new IOError("Cannot delete `{path}`: {sys.errno.strerror}")
+			var err = new IOError("Cannot delete `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 		else
 			last_error = null
 		end
@@ -494,13 +489,15 @@ class Path
 	# `last_error` is updated to contains the error information on error, and null on success.
 	fun copy(dest: Path)
 	do
+		var sz = page_size
+		var tmp = new NativeString(sz)
 		last_error = null
 		var input = open_ro
 		var output = dest.open_wo
 
 		while not input.eof do
-			var buffer = input.read_bytes(1024)
-			output.write_bytes buffer
+			var rd = input.read_bytes_native(tmp, sz)
+			output.write_bytes(tmp, rd)
 		end
 
 		input.close
@@ -548,6 +545,9 @@ class Path
 
 	# Read all the content of the file as a string.
 	#
+	# Text is interpreted as UTF-8 by default and can be
+	# changed via the optional parameter `decoder`
+	#
 	# ~~~
 	# var content = "/etc/issue".to_path.read_all
 	# print content
@@ -557,7 +557,11 @@ class Path
 	# In case of error, the result might be empty or truncated.
 	#
 	# See `Reader::read_all` for details.
-	fun read_all: String do return read_all_bytes.to_s
+	fun read_all(decoder: nullable Codec): String do
+		var d = if decoder == null then utf8_codec else decoder
+		var b = read_all_bytes
+		return d.decode_string(b.items, b.length)
+	end
 
 	# Read all the content on the file as a raw sequence of bytes.
 	#
@@ -661,7 +665,9 @@ class Path
 		var res = new Array[Path]
 		var d = new NativeDir.opendir(path.to_cstring)
 		if d.address_is_null then
-			last_error = new IOError("Cannot list directory `{path}`: {sys.errno.strerror}")
+			var err = new IOError("Cannot list directory `{path}`: {sys.errno.strerror}")
+			err.cause = last_error
+			last_error = err
 			return res
 		end
 
@@ -872,9 +878,15 @@ redef class Text
 	# Access file system related services on the path at `self`
 	fun to_path: Path do return new Path(to_s)
 
-	private fun write_native_to(s: FileWriter)
-	do
-		for i in substrings do s.write_native(i.to_cstring, 0, i.byte_length)
+	private fun write_native_to(s: FileWriter) do
+		for i in substrings do s.write_bytes(i.fast_cstring, i.byte_length)
+	end
+end
+
+redef class Concat
+	redef fun write_native_to(s) do
+		left.write_native_to(s)
+		right.write_native_to(s)
 	end
 end
 
@@ -1301,7 +1313,7 @@ end
 redef class FlatString
 	redef fun write_native_to(s)
 	do
-		s.write_native(items, first_byte, byte_length)
+		s.write_bytes(items.fast_cstring(first_byte), byte_length)
 	end
 
 	redef fun file_extension do
@@ -1416,6 +1428,9 @@ end
 
 # Instance of this class are standard FILE * pointers
 private extern class NativeFile `{ FILE* `}
+
+	fun io_read_byte: Int `{ return fgetc(self); `}
+
 	fun io_read(buf: NativeString, len: Int): Int `{
 		return fread(buf, 1, len, self);
 	`}
@@ -1485,13 +1500,13 @@ end
 redef class Sys
 
 	# Standard input
-	var stdin: PollableReader = new Stdin is protected writable, lazy
+	var stdin: Reader = new Stdin.default is protected writable, lazy
 
 	# Standard output
-	var stdout: Writer = new Stdout is protected writable, lazy
+	var stdout: Writer = new Stdout.default is protected writable, lazy
 
 	# Standard output for errors
-	var stderr: Writer = new Stderr is protected writable, lazy
+	var stderr: Writer = new Stderr.default is protected writable, lazy
 
 	# Enumeration for buffer mode full (flushes when buffer is full)
 	fun buffer_mode_full: Int `{ return _IOFBF; `}
