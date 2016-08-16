@@ -510,8 +510,10 @@ endif
 		self.toolcontext.info(command, 2)
 
 		var res
-		if self.toolcontext.verbose_level >= 3 or is_windows then
+		if self.toolcontext.verbose_level >= 3 then
 			res = sys.system("{command} 2>&1")
+		else if is_windows then
+			res = sys.system("{command} 2>&1 >nul")
 		else
 			res = sys.system("{command} 2>&1 >/dev/null")
 		end
