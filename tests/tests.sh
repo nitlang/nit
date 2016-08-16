@@ -158,7 +158,7 @@ function compare_to_result()
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
 	test "`cat -- "$sav"`" = "UNDEFINED" && return 1
-	diff -u -- "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
+	diff -u --strip-trailing-cr -- "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
@@ -166,7 +166,7 @@ function compare_to_result()
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "$outdir/$pattern.sav2"
 	grep '[Ee]rror' "$outdir/$pattern.res" >/dev/null && echo "Error" >> "$outdir/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "$outdir/$pattern.sav2"
-	diff -u "$outdir/$pattern.sav2" "$outdir/$pattern.res2" > "$outdir/$pattern.diff.sav.log2"
+	diff -u --strip-trailing-cr "$outdir/$pattern.sav2" "$outdir/$pattern.res2" > "$outdir/$pattern.diff.sav.log2"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
