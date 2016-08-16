@@ -45,14 +45,24 @@ private class ISO88591Codec
 		return ns
 	end
 
+	redef fun fast_encode(str, ln) do
+		var nns = new NativeString(ln.item)
+		return nns
+	end
+
 	redef fun add_string_to(s, b) do
+		b.enlarge(b.length + s.byte_length)
+		return add_str_to_ns(s, b.items.fast_cstring(b.length))
+	end
+
+	redef fun add_str_to_ns(s, ns) do
 		var pos = 0
 		for i in s.chars do
 			var cp = i.code_point
 			if cp <= 255 then
-				b[pos] = cp.to_b
+				ns[pos] = cp.to_b
 			else
-				b[pos] = 0x3Fu8
+				ns[pos] = 0x3Fu8
 			end
 			pos += 1
 		end

@@ -41,14 +41,23 @@ private class UTF8Codec
 	end
 
 	redef fun encode_string(s) do
+		if s isa FlatText then return new Bytes(s.items.fast_cstring(s.first_byte), s.byte_length, s.byte_length)
 		var buf = new Bytes.with_capacity(s.byte_length)
 		add_string_to(s, buf)
 		return buf
 	end
 
+	redef fun fast_encode(str, ln) do return str.items.fast_cstring(str.first_byte)
+
 	redef fun add_string_to(s, b) do
 		s.append_to_bytes(b)
 		return s.byte_length
+	end
+
+	redef fun add_str_to_ns(s, ns) do
+		var blen = s.byte_length
+		s.copy_to_native(ns, blen, 0, 0)
+		return blen
 	end
 
 	redef fun is_valid_char(ns, len) do

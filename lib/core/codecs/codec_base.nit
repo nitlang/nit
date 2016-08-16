@@ -40,10 +40,21 @@ abstract class Codec
 	# Transforms `s` to the format of `self`
 	fun encode_string(s: Text): Bytes is abstract
 
+	# Encode a string using a fast path, used to avoid repeatedly instanciating
+	# `Bytes` objects when writing text.
+	fun fast_encode(str: FlatText, ln: Ref[Int]): NativeString is abstract
+
 	# Adds a string `s` coded as the supported encoding to `b`
 	#
-	# Returns the number of bytes written to `s`
+	# Returns the number of bytes written to `b`
 	fun add_string_to(s: Text, b: Bytes): Int is abstract
+
+	# Adds a string `s` coded as the supported encoding to `ns`
+	#
+	# Returns the number of bytes written to `ns`
+	#
+	# NOTE: `ns` must be large enough to contain the encoded `s`
+	fun add_str_to_ns(s: Text, ns: NativeString): Int is abstract
 
 	# Size of a codet for the target encoding
 	fun codet_size: Int is abstract
