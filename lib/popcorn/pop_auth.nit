@@ -270,24 +270,59 @@ class GithubLogout
 	end
 end
 
-# Get the currently logged in user from session.
-class GithubUser
+# AuthHandler allows access to session user
+#
+# Inherit this handler to access to session user from your custom handler.
+#
+# For example, you need a profile handler that checks if the user is logged
+# before returning it in json format.
+# ~~~
+# import popcorn::pop_auth
+#
+# class ProfileHandler
+#	super AuthHandler
+#
+#	redef fun get(req, res) do
+#		var user = check_session_user(req, res)
+#		if user == null then return
+#		res.json user
+#	end
+# end
+# ~~~
+#
+# By using `check_session_user`, we delegate to the `AuthHandler` the responsability
+# to set the HTTP 403 error.
+# We then check is the user is not null before pursuing.
+abstract class AuthHandler
 	super Handler
 
-	# Get user from session or null.
-	fun get_session_user(req: HttpRequest): nullable User do
+	# Returns `user` from `req.session` or null if no user is authenticated.
+	fun session_user(req: HttpRequest): nullable User do
 		var session = req.session
 		if session == null then return null
 		var user = session.user
 		return user
 	end
 
-	redef fun get(req, res) do
-		var user = get_session_user(req)
+	# Check the session for user and return it.
+	#
+	# If no `user` can be found in session, set res as a HTTP 403 error and return `null`.
+	fun check_session_user(req: HttpRequest, res: HttpResponse): nullable User do
+		var user = session_user(req)
 		if user == null then
 			res.error 403
-			return
 		end
+		return user
+	end
+end
+
+# Get the currently logged in user from session.
+class GithubUser
+	super AuthHandler
+
+	redef fun get(req, res) do
+		var user = check_session_user(req, res)
+		if user == null then return
 		res.json user
 	end
 end
