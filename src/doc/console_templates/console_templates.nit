@@ -102,7 +102,7 @@ end
 
 redef class ConcernsArticle
 	redef fun render_body do
-		var w = new StringWriter
+		var w = new MemoryWriter
 		concerns.write_to(w)
 		addn w.to_s
 	end

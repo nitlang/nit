@@ -28,7 +28,7 @@
 # var r = new FileReader.open("/tmp/data.bin")
 # assert r.read(5) == "hello"
 # assert r.read_int64 == 123456789
-# assert r.read_byte == 3u8
+# assert r.read_byte == 3
 # assert r.read_float == 1.25
 # assert r.read_double == 1.234567
 #
@@ -153,7 +153,10 @@ redef abstract class Reader
 	# Read a single byte and return `true` if its value is different than 0
 	#
 	# Returns `false` when an error is pending (`last_error != null`).
-	fun read_bool: Bool do return read_byte != 0u8
+	fun read_bool: Bool do
+		var b = read_byte
+		return b != null and b != 0
+	end
 
 	# Get an `Array` of 8 `Bool` by reading a single byte
 	#
@@ -166,7 +169,7 @@ redef abstract class Reader
 		if int == null then return new Array[Bool]
 		var arr = new Array[Bool]
 		for i in [7 .. 0].step(-1) do
-			arr.push(((int >> i) & 1u8) != 0u8)
+			arr.push(((int >> i) & 1) != 0)
 		end
 		return arr
 	end
@@ -181,10 +184,10 @@ redef abstract class Reader
 		var buf = new Bytes.empty
 		loop
 			var byte = read_byte
-			if byte == null or byte == 0u8 then
+			if byte == null or byte == 0 then
 				return buf.to_s
 			end
-			buf.add byte
+			buf.add byte.to_b
 		end
 	end
 
@@ -197,7 +200,8 @@ redef abstract class Reader
 	do
 		var length = read_int64
 		if length == 0 then return ""
-		return read_bytes(length).to_s
+		var ns = read_bytes(length)
+		return ns.to_s
 	end
 
 	# Read a floating point on 32 bits and return it as a `Float`
@@ -222,7 +226,7 @@ redef abstract class Reader
 	end
 
 	# Utility for `read_float`
-	private fun native_read_float(b0, b1, b2, b3: Byte, big_endian: Bool): Float `{
+	private fun native_read_float(b0, b1, b2, b3: Int, big_endian: Bool): Float `{
 		union {
 			unsigned char b[4];
 			float val;
@@ -265,7 +269,7 @@ redef abstract class Reader
 	end
 
 	# Utility for `read_double`
-	private fun native_read_double(b0, b1, b2, b3, b4, b5, b6, b7: Byte, big_endian: Bool): Float `{
+	private fun native_read_double(b0, b1, b2, b3, b4, b5, b6, b7: Int, big_endian: Bool): Float `{
 		union {
 			unsigned char b[8];
 			double val;
@@ -315,7 +319,7 @@ redef abstract class Reader
 	end
 
 	# Utility for `read_int64`
-	private fun native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7: Byte, big_endian: Bool): Int `{
+	private fun native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char b[8];
 			int64_t val;

@@ -377,7 +377,7 @@ class SharedPreferences
 	# Store `value` as a serialized Json string
 	fun []=(key: String, value: nullable Serializable)
 	do
-		var serialized_string = new StringWriter
+		var serialized_string = new MemoryWriter
 		var serializer = new JsonSerializer(serialized_string)
 		serializer.serialize(value)
 

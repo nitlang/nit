@@ -21,6 +21,9 @@
 # http://monkey.org/~provos/libevent/doxygen-2.0.1/
 module libevent is pkgconfig("libevent")
 
+import core
+intrude import core::text::ropes
+
 in "C header" `{
 	#include <event2/listener.h>
 	#include <event2/bufferevent.h>
@@ -185,7 +188,7 @@ class Connection
 	redef fun write(str)
 	do
 		if close_requested then return
-		native_buffer_event.write(str.to_cstring, str.byte_length)
+		str.write_to_buffer(native_buffer_event)
 	end
 
 	redef fun write_byte(byte)
@@ -194,10 +197,10 @@ class Connection
 		native_buffer_event.write_byte(byte)
 	end
 
-	redef fun write_bytes(bytes)
+	redef fun write_bytes(ns, len)
 	do
 		if close_requested then return
-		native_buffer_event.write(bytes.items, bytes.length)
+		native_buffer_event.write(ns, len)
 	end
 
 	# Write a file to the connection
@@ -228,6 +231,23 @@ class Connection
 			last_error = new IOError("Failed to add file at '{path}'")
 			file.close
 		end
+	end
+end
+
+redef class Text
+	private fun write_to_buffer(b: NativeBufferEvent) do
+		b.write(to_cstring, byte_length)
+	end
+end
+
+redef class FlatText
+	redef fun write_to_buffer(b) do b.write(fast_cstring, byte_length)
+end
+
+redef class Concat
+	redef fun write_to_buffer(b) do
+		left.write_to_buffer b
+		right.write_to_buffer b
 	end
 end
 

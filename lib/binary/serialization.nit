@@ -45,18 +45,18 @@ import more_collections
 # ---
 # Special bytes, marking the kind of objects in the stream and the end on an object
 
-private fun kind_null: Byte do return 0x01u8
-private fun kind_object_new: Byte do return 0x02u8
-private fun kind_object_ref: Byte do return 0x03u8
-private fun kind_int: Byte do return 0x04u8
-private fun kind_bool: Byte do return 0x05u8
-private fun kind_char: Byte do return 0x06u8
-private fun kind_float: Byte do return 0x07u8
-private fun kind_string: Byte do return 0x08u8
-private fun kind_native_string: Byte do return 0x09u8
-private fun kind_flat_array: Byte do return 0x0Au8
+private fun kind_null: Int do return 0x01
+private fun kind_object_new: Int do return 0x02
+private fun kind_object_ref: Int do return 0x03
+private fun kind_int: Int do return 0x04
+private fun kind_bool: Int do return 0x05
+private fun kind_char: Int do return 0x06
+private fun kind_float: Int do return 0x07
+private fun kind_string: Int do return 0x08
+private fun kind_native_string: Int do return 0x09
+private fun kind_flat_array: Int do return 0x0A
 
-private fun new_object_end: Byte do return 0x00u8
+private fun new_object_end: Int do return 0x00
 
 #---
 # Engines
@@ -73,7 +73,7 @@ class BinarySerializer
 	redef fun serialize(object)
 	do
 		if object == null then
-			stream.write_byte kind_null
+			stream.write_byte kind_null.to_b
 		else serialize_reference(object)
 	end
 
@@ -88,7 +88,7 @@ class BinarySerializer
 		if cache.has_object(object) then
 			# if already serialized, add local reference
 			var id = cache.id_for(object)
-			stream.write_byte kind_object_ref
+			stream.write_byte kind_object_ref.to_b
 			stream.write_int64 id
 		else
 			# serialize here
@@ -99,7 +99,7 @@ class BinarySerializer
 	# Write `collection` as a simple list of objects
 	private fun serialize_flat_array(collection: Collection[nullable Object])
 	do
-		stream.write_byte kind_flat_array
+		stream.write_byte kind_flat_array.to_b
 		stream.write_int64 collection.length
 		for e in collection do
 			if not try_to_serialize(e) then
@@ -136,7 +136,7 @@ class BinaryDeserializer
 	# A `peeked_char` can suffix the next attribute name.
 	#
 	# Returns `null` on error.
-	private fun deserialize_next_attribute(peeked_char: nullable Byte):
+	private fun deserialize_next_attribute(peeked_char: nullable Int):
 		nullable Couple[String, nullable Object]
 	do
 		# Try the next attribute
@@ -223,12 +223,12 @@ class BinaryDeserializer
 			var bf = char_buf
 			var b = stream.read_byte
 			if b == null then return '�'
-			var ln = b.u8len
-			bf[0] = b
+			var ln = b.to_b.u8len
+			bf[0] = b.to_b
 			for i in [1 .. ln[ do
 				b = stream.read_byte
 				if b == null then return '�'
-				bf[i] = b
+				bf[i] = b.to_b
 			end
 			return bf.to_s_with_length(ln)[0]
 		end
@@ -339,7 +339,7 @@ redef class Text
 
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_string
+		v.stream.write_byte kind_string.to_b
 		v.stream.write_block to_s
 	end
 end
@@ -357,7 +357,7 @@ redef class Serializable
 	private fun serialize_header_to_binary(v: BinarySerializer)
 	do
 		var id = v.cache.new_id_for(self)
-		v.stream.write_byte kind_object_new # is object intro
+		v.stream.write_byte kind_object_new.to_b # is object intro
 		v.stream.write_int64 id
 		v.stream.write_string class_name
 	end
@@ -367,14 +367,14 @@ redef class Serializable
 	do
 		serialize_header_to_binary v
 		core_serialize_to v
-		v.stream.write_byte new_object_end
+		v.stream.write_byte new_object_end.to_b
 	end
 end
 
 redef class Int
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_int
+		v.stream.write_byte kind_int.to_b
 		v.stream.write_int64 self
 	end
 end
@@ -382,7 +382,7 @@ end
 redef class Float
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_float
+		v.stream.write_byte kind_float.to_b
 		v.stream.write_double self
 	end
 end
@@ -390,7 +390,7 @@ end
 redef class Bool
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_bool
+		v.stream.write_byte kind_bool.to_b
 		v.stream.write_bool self
 	end
 end
@@ -398,7 +398,7 @@ end
 redef class Char
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_char
+		v.stream.write_byte kind_char.to_b
 		for i in bytes do v.stream.write_byte i
 	end
 end
@@ -406,7 +406,7 @@ end
 redef class NativeString
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_native_string
+		v.stream.write_byte kind_native_string.to_b
 		v.stream.write_block to_s
 	end
 end
@@ -420,7 +420,7 @@ redef class SimpleCollection[E]
 		v.stream.write_string "items"
 		v.serialize_flat_array self
 
-		v.stream.write_byte new_object_end
+		v.stream.write_byte new_object_end.to_b
 	end
 
 	redef init from_deserializer(v)
@@ -462,7 +462,7 @@ redef class Map[K, V]
 		v.stream.write_string "values"
 		v.serialize_flat_array values
 
-		v.stream.write_byte new_object_end
+		v.stream.write_byte new_object_end.to_b
 	end
 
 	# Instantiate a new `Array` from its serialized representation.
