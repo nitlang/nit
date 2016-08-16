@@ -36,7 +36,11 @@ class Error
 	# When displaying an error the end user, causes can be recursively displayed.
 	var cause: nullable Error = null is writable
 
-	redef fun to_s do return message
+	redef fun to_s do
+		var c = cause
+		if c == null then return message
+		return "{message}\n -> Preceded by: {c.message}"
+	end
 end
 
 # Helper class used as a return value of methods that may give errors instead of values.
