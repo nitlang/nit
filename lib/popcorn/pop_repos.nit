@@ -149,7 +149,10 @@ interface Repository[E: Serializable]
 	# Find all instances based on `query`
 	#
 	# Using `query` == null will retrieve all the document in the repository.
-	fun find_all(query: nullable QUERY): Array[E] is abstract
+	fun find_all(query: nullable QUERY, skip, limit: nullable Int): Array[E] is abstract
+
+	# Count instances that matches `query`
+	fun count(query: nullable QUERY): Int is abstract
 
 	# Save an `instance`
 	fun save(instance: E): Bool is abstract
@@ -290,12 +293,16 @@ class MongoRepository[E: Serializable]
 		return deserialize(res.to_json)
 	end
 
-	redef fun find_all(query) do
+	redef fun find_all(query, skip, limit) do
 		var res = new Array[E]
-		for e in collection.find_all(query or else new JsonObject) do
+		for e in collection.find_all(query or else new JsonObject, skip, limit) do
 			res.add deserialize(e.to_json).as(E)
 		end
 		return res
+	end
+
+	redef fun count(query) do
+		return collection.count(query or else new JsonObject)
 	end
 
 	redef fun save(item) do

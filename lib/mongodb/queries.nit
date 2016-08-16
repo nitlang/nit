@@ -289,7 +289,12 @@ class MongoPipeline
 	# ~~~json
 	# { $skip: { <number> } }
 	# ~~~
-	fun skip(number: Int): MongoPipeline do return add_stage("skip", number)
+	#
+	# If `number == null` then no skip stage is generated
+	fun skip(number: nullable Int): MongoPipeline do
+		if number == null then return self
+		return add_stage("skip", number)
+	end
 
 	# Apply limit
 	#
@@ -300,7 +305,12 @@ class MongoPipeline
 	# ~~~json
 	# { $limit: { <number> } }
 	# ~~~
-	fun limit(number: Int): MongoPipeline do return add_stage("limit", number)
+	#
+	# If `number == null` then no limit stage is generated
+	fun limit(number: nullable Int): MongoPipeline do
+		if number == null then return self
+		return add_stage("limit", number)
+	end
 
 	# Apply group
 	#
