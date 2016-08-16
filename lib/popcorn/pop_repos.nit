@@ -216,17 +216,14 @@ end
 #
 # ~~~
 # import popcorn
-# import popcorn::pop_routes
+# import popcorn::pop_repos
 #
 # # First, let's create a User abstraction:
 #
 # # Serializable user representation.
 # class User
+#	super RepoObject
 #	serialize
-#	super Jsonable
-#
-#	# User uniq ID
-#	var id: String = (new MongoObjectId).id is serialize_as "_id"
 #
 #	# User login
 #	var login: String
@@ -235,9 +232,6 @@ end
 #	var password: String is writable
 #
 #	redef fun to_s do return login
-#	redef fun ==(o) do return o isa SELF and id == o.id
-#	redef fun hash do return id.hash
-#	redef fun to_json do return serialize_to_json
 # end
 #
 # # We then need to subclass the `MongoRepository` to provide User specific services:
@@ -329,6 +323,62 @@ class MongoRepository[E: Serializable]
 		end
 		return res
 	end
+end
+
+# Base serializable entity that can go into a JsonRepository
+#
+# Provide boiler plate implementation of all object serializable to json.
+#
+# `id` is used as a primary key for `find_by_id`.
+#
+# Subclassing RepoObject makes it easy to create a serializable class:
+# ~~~
+# import popcorn::pop_repos
+#
+# class Album
+#	super RepoObject
+#	serialize
+#
+#	var title: String
+#	var price: Float
+# end
+# ~~~
+#
+# Do not forget the `serialize` annotation else the fields will not be serialized.
+#
+# It is also possible to redefine the `id` primary key to use your own:
+# ~~~
+# import popcorn::pop_repos
+#
+# class Order
+#	super RepoObject
+#	serialize
+#
+#	redef var id = "order-{get_time}"
+#
+#	# ...
+#
+# end
+# ~~~
+abstract class RepoObject
+	super Jsonable
+	serialize
+
+	# `self` unique id.
+	#
+	# This attribute is serialized under the key `_id` to be used
+	# as primary key by MongoDb
+	var id: String = (new MongoObjectId).id is writable, serialize_as "_id"
+
+	# Base object comparison on ID
+	#
+	# Because multiple deserialization can exists of the same instance,
+	# we use the ID to determine if two object are the same.
+	redef fun ==(o) do return o isa SELF and id == o.id
+
+	redef fun hash do return id.hash
+	redef fun to_s do return id
+	redef fun to_json do return serialize_to_json
 end
 
 # JsonObject can be used as a `RepositoryQuery`.
