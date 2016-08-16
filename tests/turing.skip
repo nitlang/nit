@@ -9,7 +9,6 @@ gtk
 nitcorn
 ffi_objc
 mpi
-pnacl
 emscipten
 nodejs
 nitunit
