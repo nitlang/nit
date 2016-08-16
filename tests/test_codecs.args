@@ -1,0 +1,5 @@
+example_objet.nit ISO8859-1 stdout UTF-8
+example_objet.nit stdout
+UTF-8-test.txt stdout
+UTF-8-test.txt ISO8859-1 stdout UTF-8
+UTF-8-test.txt UTF-8 stdout ISO8859-1
