@@ -160,6 +160,9 @@ interface Repository[E: Serializable]
 	# Remove the instance based on `query`
 	fun remove(query: nullable QUERY): Bool is abstract
 
+	# Remove all the instances matching on `query`
+	fun remove_all(query: nullable QUERY): Bool is abstract
+
 	# Remove all instances
 	fun clear: Bool is abstract
 
@@ -309,6 +312,10 @@ class MongoRepository[E: Serializable]
 
 	redef fun remove(query) do
 		return collection.remove(query or else new JsonObject)
+	end
+
+	redef fun remove_all(query) do
+		return collection.remove_all(query or else new JsonObject)
 	end
 
 	redef fun clear do return collection.drop
