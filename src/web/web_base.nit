@@ -20,10 +20,13 @@ import model::model_json
 import doc_down
 import popcorn
 import popcorn::pop_config
+import popcorn::pop_repos
 
 # Nitweb config file.
 class NitwebConfig
 	super AppConfig
+
+	redef var default_db_name = "nitweb"
 
 	# Model to use.
 	var model: Model
