@@ -28,7 +28,7 @@
 
 <div class='tab-content'>
 	<div role='tabpanel' class='tab-pane fade in active' id='doc'>
-		<entity-doc mentity='mentity'/>
+		<entity-card mentity='mentity' default-tab='doc'/>
 
 		<entity-list list-title='Parents'
 			list-entities='mentity.parents'
@@ -59,7 +59,7 @@
 	<div role='tabpanel' class='tab-pane fade' id='graph'>
 		<div class='card'>
 			<div class='card-body text-center'>
-				<div class='graph' ng-bind-html='graph'></div>
+				<entity-graph mentity='mentity' graph='graph' />
 			</div>
 		</div>
 	</div>

@@ -28,12 +28,19 @@
 		<nav class='navbar navbar-default navbar-fixed-top'>
 			<div class='container-fluid'>
 				<div class='col-xs-3'>
-					<div class='navbar-header'>
+					<ul class='nav navbar-nav'>
+						<li class='dropdown'>
+							<a class='btn btn-link dropdown-toggle' type='button' data-toggle='dropdown'>
+								<span class='glyphicon glyphicon-menu-hamburger' />
+							</a>
+							<ul class='dropdown-menu'>
+								<li><a href='/docdown'>DocDown</a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class='navbar-header dropdown'>
 						<a class='navbar-brand' ng-href='/'>Nitdoc</a>
 					</div>
-					<ul class="nav navbar-nav">
-						<li><a href="/docdown?edit=true">DocDown</a></li>
-					</ul>
 				</div>
 				<div class='col-xs-7'>
 					<form ng-controller='SearchCtrl as searchCtrl' >

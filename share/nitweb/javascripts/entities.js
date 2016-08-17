@@ -135,14 +135,30 @@
 			};
 		})
 
+		.directive('entityGraph', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '=',
+					graph: '='
+				},
+				replace: true,
+				templateUrl: '/directives/entity/graph.html'
+			};
+		})
+
 		.directive('entityCard', function() {
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '='
+					mentity: '=',
+					defaultTab: '@'
 				},
 				replace: true,
-				templateUrl: '/directives/entity/card.html'
+				templateUrl: '/directives/entity/card.html',
+				link: function ($scope, element, attrs) {
+					$scope.currentTab = $scope.defaultTab ? $scope.defaultTab : 'signature';
+				}
 			};
 		})
 

@@ -16,29 +16,8 @@
 module api_feedback
 
 import web_base
-import mongodb
 
 redef class NitwebConfig
-
-	# MongoDB uri used for data persistence.
-	#
-	# * key: `mongo.uri`
-	# * default: `mongodb://localhost:27017/`
-	var mongo_uri: String is lazy do
-		return value_or_default("mongo.uri", "mongodb://localhost:27017/")
-	end
-
-	# MongoDB DB used for data persistence.
-	#
-	# * key: `mongo.db`
-	# * default: `nitweb`
-	var mongo_db: String is lazy do return value_or_default("mongo.db", "nitweb")
-
-	# Mongo instance
-	var mongo: MongoClient is lazy do return new MongoClient(mongo_uri)
-
-	# Database instance
-	var db: MongoDb is lazy do return mongo.database(mongo_db)
 
 	# MongoDB collection used to store stars.
 	var stars: MongoCollection is lazy do return db.collection("stars")
