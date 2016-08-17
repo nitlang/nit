@@ -146,7 +146,7 @@ class HttpRequestParser
 		end
 
 		# POST args
-		if http_request.method == "POST" then
+		if http_request.method == "POST" or http_request.method == "PUT" then
 			http_request.body = body
 			var lines = body.split_with('&')
 			for line in lines do if not line.trim.is_empty then
@@ -155,8 +155,6 @@ class HttpRequestParser
 					var decoded = parts[1].replace('+', " ").from_percent_encoding
 					http_request.post_args[parts[0]] = decoded
 					http_request.all_args[parts[0]] = decoded
-				else
-					print "POST Error: {line} format error on {line}"
 				end
 			end
 		end
