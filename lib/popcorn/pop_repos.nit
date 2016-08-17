@@ -119,9 +119,53 @@
 # ~~~
 module pop_repos
 
+import popcorn::pop_config
 import serialization
 import json::serialization
 import mongodb::queries
+
+redef class AppConfig
+
+	# Default database host string for MongoDb
+	var default_db_host = "mongodb://localhost:27017/"
+
+	# Default database hostname
+	var default_db_name = "popcorn"
+
+	# MongoDB server used for data persistence
+	var db_host: String is lazy do return value_or_default("db.host", default_db_host)
+
+	# MongoDB DB used for data persistence
+	var db_name: String is lazy do return value_or_default("db.name", default_db_name)
+
+	# Mongo db client
+	var client = new MongoClient(db_host) is lazy
+
+	# Mongo db instance
+	var db: MongoDb = client.database(db_name) is lazy
+
+	redef init from_options(opts) do
+		super
+		var db_host = opts.opt_db_host.value
+		if db_host != null then self["db.host"] = db_host
+		var db_name = opts.opt_db_name.value
+		if db_name != null then self["db.name"] = db_name
+	end
+end
+
+redef class AppOptions
+
+	# MongoDb host name
+	var opt_db_host = new OptionString("MongoDb host", "--db-host")
+
+	# MongoDb database name
+	var opt_db_name = new OptionString("MongoDb database name", "--db-name")
+
+	init do
+		super
+		add_option(opt_db_host, opt_db_name)
+	end
+end
 
 # A Repository is an object that can store serialized instances.
 #

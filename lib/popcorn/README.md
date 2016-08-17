@@ -718,7 +718,7 @@ app.listen("localhost", 3000)
 
 ## Sessions
 
-**Sessions** can be used thanks to the built-in `SessionMiddleware`.
+**Sessions** can be used thanks to the built-in `SessionInit` middleware.
 
 Here a simple example of login button that define a value in the `req` session.
 
@@ -747,7 +747,7 @@ class AppLogin
 end
 
 var app = new App
-app.use("/*", new SessionInit)
+app.use_before("/*", new SessionInit)
 app.use("/", new AppLogin)
 app.listen("localhost", 3000)
 ~~~

@@ -77,7 +77,7 @@
 # ~~~
 module pop_auth
 
-import pop_handlers
+import pop_sessions
 import github
 
 # Github OAuth login handler.
