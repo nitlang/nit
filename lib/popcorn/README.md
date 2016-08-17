@@ -364,7 +364,7 @@ The app declared in this example will try to match the routes in this order:
 ### Route parameters
 
 **Route parameters** are variable parts of a route path. They can be used to path
-arguments within the URI.
+arguments within the URI.
 Parameters in a route are prefixed with a colon `:` like in `:userId`, `:year`.
 
 The following example declares a handler `UserHome` that responds with the `user`
