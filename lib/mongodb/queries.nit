@@ -181,6 +181,25 @@ class MongoMatch
 		return self
 	end
 
+	# Match documents where `field` matches `pattern`
+	#
+	# To read more about the available options, see:
+	# https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
+	#
+	# ~~~json
+	# {field: {$regex: 'pattern', $options: '<options>'} }
+	# ~~~
+	#
+	# Provides regular expression capabilities for pattern matching strings in queries.
+	# MongoDB uses Perl compatible regular expressions (i.e. "PCRE" ).
+	fun regex(field: String, pattern: String, options: nullable String): MongoMatch do
+		var q = new JsonObject
+		q["$regex"] = pattern
+		if options != null then q["$options"] = options
+		self[field] = q
+		return self
+	end
+
 	# Match documents where `field` is in `values`
 	#
 	# https://docs.mongodb.com/manual/reference/operator/query/in/
