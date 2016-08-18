@@ -70,10 +70,25 @@ import mongodb
 class MongoMatch
 	super JsonObject
 
-	private fun op(name: String, field: String, value: nullable Jsonable): MongoMatch do
-		var q = new JsonObject
-		q["${name}"] = value
-		self[field] = q
+	# Define a custom operaton for `field`
+	#
+	# If no `field` is specified, append the operator the the root object:
+	# ~~~json
+	# {$<name>: <value>}
+	# ~~~
+	#
+	# Else, append the operator to the field:
+	# ~~~json
+	# {field: {$<name>: <value>} }
+	# ~~~
+	fun op(name: String, field: nullable String, value: nullable Jsonable): MongoMatch do
+		if field != null then
+			var q = new JsonObject
+			q["${name}"] = value
+			self[field] = q
+		else
+			self[name] = value
+		end
 		return self
 	end
 
