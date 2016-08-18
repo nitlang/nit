@@ -230,6 +230,77 @@ class MongoMatch
 		op("$nin", field, new JsonArray.from(values))
 		return self
 	end
+
+	# Logical `or`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/or/#op._S_or
+	#
+	# The `$or` operator performs a logical OR operation on an array of two or
+	# more `expressions` and selects the documents that satisfy at least one of
+	# the `expressions`.
+	#
+	# The `$or` has the following syntax:
+	#
+	# ~~~json
+	# { field: { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
+	# ~~~
+	fun lor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+		op("$or", field, new JsonArray.from(expressions))
+		return self
+	end
+
+	# Logical `and`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/and/#op._S_and
+	#
+	# The `$and` operator performs a logical AND operation on an array of two or
+	# more `expressions` and selects the documents that satisfy all of the `expressions`.
+	#
+	# The `$and` has the following syntax:
+	#
+	# ~~~json
+	# { field: { $and: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
+	# ~~~
+	fun land(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+		op("$and", field, new JsonArray.from(expressions))
+		return self
+	end
+
+	# Logical `not`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/not/#op._S_not
+	#
+	# `$not` performs a logical NOT operation on the specified `expression` and
+	# selects the documents that do not match the `expression`.
+	# This includes documents that do not contain the field.
+	#
+	# The $not has the following syntax:
+	#
+	# ~~~json
+	# { field: { $not: { <expression> } } }
+	# ~~~
+	fun lnot(field: nullable String, expression: Jsonable): MongoMatch do
+		op("$not", field, expression)
+		return self
+	end
+
+	# Logical `nor`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/nor/#op._S_nor
+	#
+	# `$nor` performs a logical NOR operation on an array of one or more query
+	# expression and selects the documents that fail all the query expressions
+	# in the array.
+	#
+	# The $nor has the following syntax:
+	#
+	# ~~~json
+	# { field: { $nor: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
+	# ~~~
+	fun lnor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+		op("$nor", field, new JsonArray.from(expressions))
+		return self
+	end
 end
 
 # Mongo pipelines are arrays of aggregation stages
