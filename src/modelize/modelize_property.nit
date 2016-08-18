@@ -1686,8 +1686,7 @@ redef class ATypePropdef
 				break
 			end
 			if p.mclassdef.mclass == mclassdef.mclass then
-				# Still a warning to pass existing bad code
-				modelbuilder.warning(n_type, "refine-type", "Redef Error: a virtual type cannot be refined.")
+				modelbuilder.error(n_type, "Redef Error: a virtual type cannot be refined.")
 				break
 			end
 			if not modelbuilder.check_subtype(n_type, mmodule, anchor, bound, supbound) then
