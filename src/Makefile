@@ -54,7 +54,7 @@ $(OBJS): nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
-	cd ../c_src; make
+	cd ../c_src && $(MAKE)
 	rm ../c_src/*.o || true # to reduce disc used
 ifdef peflags
 	${peflags} --cygwin-heap=2048 ../c_src/nitc
@@ -64,8 +64,8 @@ parser/parser.nit:
 	@echo '***************************************************************'
 	@echo '* Generate nit parser                                         *'
 	@echo '***************************************************************'
-	cd parser; make
+	cd parser && $(MAKE)
 
 clean:
 	rm -rf -- version.nit nitc_0 2> /dev/null || true
-	cd parser; make clean
+	cd parser && $(MAKE) clean
