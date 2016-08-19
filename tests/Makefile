@@ -1,4 +1,5 @@
 .POSIX:
+.SUFFIXES:
 
 .PHONY: all
 all: niti nitcg nitcs

@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+.SUFFIXES:
+
 SABLECC3ALTGEN ?= sablecc3
 
 .PHONY: all
