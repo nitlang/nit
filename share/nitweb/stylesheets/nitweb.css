@@ -35,6 +35,8 @@ a {
 }
 
 .card {
+	display: table;
+	width: 100%;
 	background: #fff;
 	border: 1px solid #ccc;
 	margin-top: 10px;
@@ -42,16 +44,21 @@ a {
 }
 
 .card-body, .card-left, .card-right {
+	display: table-cell;
 	padding: 15px;
 }
 
-.card-left, .card .pull-left {
-	float: left;
-	padding: 0 15px 15px 0;
+.card-body {
+	padding: 15px 0;
+	width: 100%
 }
-.card-right, .card .pull-right {
-	float: right;
-	padding: 0 0 15px 15px;
+
+.card-body:first-child {
+	padding-left: 15px;
+}
+
+.card-body:last-child {
+	padding-right: 15px;
 }
 
 .card-list {
