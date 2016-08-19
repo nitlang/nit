@@ -21,9 +21,12 @@ module shibuqam
 
 import nitcorn
 private import md5
+import serialization
 
 # Information on a user from Shibboleth/UQAM
 class User
+	serialize
+
 	# The *code permanent* (or the uid for non student)
 	var id: String
 
