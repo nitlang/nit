@@ -365,9 +365,9 @@ class GithubAPI
 		var count = issue.comments or else 0
 		var page = 1
 		loop
-			var array = get("/repos/{repo.full_name}/comments?page={page}")
+			var array = get("/repos/{repo.full_name}/issues/{issue.number}/comments?page={page}")
 			if not array isa JsonArray then break
-			if array.is_empty or res.length < count then break
+			if array.is_empty then break
 			for obj in array do
 				if not obj isa JsonObject then continue
 				var id = obj["id"].as(Int)
@@ -375,6 +375,7 @@ class GithubAPI
 				if comment == null then continue
 				res.add(comment)
 			end
+			if res.length >= count then break
 			page += 1
 		end
 		return res
