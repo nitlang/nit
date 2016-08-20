@@ -70,10 +70,25 @@ import mongodb
 class MongoMatch
 	super JsonObject
 
-	private fun op(name: String, field: String, value: nullable Jsonable): MongoMatch do
-		var q = new JsonObject
-		q["${name}"] = value
-		self[field] = q
+	# Define a custom operaton for `field`
+	#
+	# If no `field` is specified, append the operator the the root object:
+	# ~~~json
+	# {$<name>: <value>}
+	# ~~~
+	#
+	# Else, append the operator to the field:
+	# ~~~json
+	# {field: {$<name>: <value>} }
+	# ~~~
+	fun op(name: String, field: nullable String, value: nullable Jsonable): MongoMatch do
+		if field != null then
+			var q = new JsonObject
+			q["${name}"] = value
+			self[field] = q
+		else
+			self[name] = value
+		end
 		return self
 	end
 
@@ -166,6 +181,25 @@ class MongoMatch
 		return self
 	end
 
+	# Match documents where `field` matches `pattern`
+	#
+	# To read more about the available options, see:
+	# https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex
+	#
+	# ~~~json
+	# {field: {$regex: 'pattern', $options: '<options>'} }
+	# ~~~
+	#
+	# Provides regular expression capabilities for pattern matching strings in queries.
+	# MongoDB uses Perl compatible regular expressions (i.e. "PCRE" ).
+	fun regex(field: String, pattern: String, options: nullable String): MongoMatch do
+		var q = new JsonObject
+		q["$regex"] = pattern
+		if options != null then q["$options"] = options
+		self[field] = q
+		return self
+	end
+
 	# Match documents where `field` is in `values`
 	#
 	# https://docs.mongodb.com/manual/reference/operator/query/in/
@@ -194,6 +228,77 @@ class MongoMatch
 	# * the field does not exist.
 	fun is_nin(field: String, values: Array[nullable Jsonable]): MongoMatch do
 		op("$nin", field, new JsonArray.from(values))
+		return self
+	end
+
+	# Logical `or`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/or/#op._S_or
+	#
+	# The `$or` operator performs a logical OR operation on an array of two or
+	# more `expressions` and selects the documents that satisfy at least one of
+	# the `expressions`.
+	#
+	# The `$or` has the following syntax:
+	#
+	# ~~~json
+	# { field: { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
+	# ~~~
+	fun lor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+		op("$or", field, new JsonArray.from(expressions))
+		return self
+	end
+
+	# Logical `and`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/and/#op._S_and
+	#
+	# The `$and` operator performs a logical AND operation on an array of two or
+	# more `expressions` and selects the documents that satisfy all of the `expressions`.
+	#
+	# The `$and` has the following syntax:
+	#
+	# ~~~json
+	# { field: { $and: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
+	# ~~~
+	fun land(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+		op("$and", field, new JsonArray.from(expressions))
+		return self
+	end
+
+	# Logical `not`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/not/#op._S_not
+	#
+	# `$not` performs a logical NOT operation on the specified `expression` and
+	# selects the documents that do not match the `expression`.
+	# This includes documents that do not contain the field.
+	#
+	# The $not has the following syntax:
+	#
+	# ~~~json
+	# { field: { $not: { <expression> } } }
+	# ~~~
+	fun lnot(field: nullable String, expression: Jsonable): MongoMatch do
+		op("$not", field, expression)
+		return self
+	end
+
+	# Logical `nor`
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/nor/#op._S_nor
+	#
+	# `$nor` performs a logical NOR operation on an array of one or more query
+	# expression and selects the documents that fail all the query expressions
+	# in the array.
+	#
+	# The $nor has the following syntax:
+	#
+	# ~~~json
+	# { field: { $nor: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
+	# ~~~
+	fun lnor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+		op("$nor", field, new JsonArray.from(expressions))
 		return self
 	end
 end
