@@ -50,9 +50,9 @@ class ConsoleLog
 	redef fun all(req, res) do
 		var clock = req.clock
 		if clock != null then
-			log "{req.method} {req.uri} {status(res)} ({clock.total}s)"
+			log "{req.method} {req.url} {status(res)} ({clock.total}s)"
 		else
-			log "{req.method} {req.uri} {status(res)}"
+			log "{req.method} {req.url} {status(res)}"
 		end
 	end
 
