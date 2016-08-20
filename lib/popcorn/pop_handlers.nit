@@ -464,12 +464,15 @@ redef class HttpResponse
 	end
 
 	# Redirect response to `location`
+	#
+	# Use by default 303 See Other as it is the RFC
+	# way to redirect web applications to a new URI.
 	fun redirect(location: String, status: nullable Int) do
 		header["Location"] = location
 		if status != null then
 			status_code = status
 		else
-			status_code = 302
+			status_code = 303
 		end
 		check_sent
 		sent = true
