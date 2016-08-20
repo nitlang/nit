@@ -365,9 +365,9 @@ class GithubAPI
 		var count = issue.comments or else 0
 		var page = 1
 		loop
-			var array = get("/repos/{repo.full_name}/comments?page={page}")
+			var array = get("/repos/{repo.full_name}/issues/{issue.number}/comments?page={page}")
 			if not array isa JsonArray then break
-			if array.is_empty or res.length < count then break
+			if array.is_empty then break
 			for obj in array do
 				if not obj isa JsonObject then continue
 				var id = obj["id"].as(Int)
@@ -375,6 +375,7 @@ class GithubAPI
 				if comment == null then continue
 				res.add(comment)
 			end
+			if res.length >= count then break
 			page += 1
 		end
 		return res
@@ -689,7 +690,7 @@ class Issue
 	var closed_by: nullable User is writable
 
 	# Is this issue linked to a pull request?
-	var is_pull_request: Bool is noserialize, writable
+	var is_pull_request: Bool = false is writable, noserialize
 end
 
 # A Github pull request.
@@ -1096,5 +1097,16 @@ class GithubDeserializer
 			return "IssueComment"
 		end
 		return null
+	end
+
+	redef fun deserialize_class(name) do
+		if name == "Issue" then
+			var issue = super.as(Issue)
+			if path.last.has_key("pull_request") then
+				issue.is_pull_request = true
+			end
+			return issue
+		end
+		return super
 	end
 end
