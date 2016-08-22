@@ -20,3 +20,6 @@ all:
 
 check:
 	$(NITUNIT) .
+
+clean:
+	rm -rf -- ./tests/out

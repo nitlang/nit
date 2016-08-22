@@ -7,3 +7,7 @@ glesv2_stub.nit:
 		-e "s/#define GL_\([^ ]*\) .*/fun gl_\1: Int \`{ return GL_\1; \`}/" | grep fun > $@
 
 .PHONY: glesv2_stub.nit
+
+.PHONY: clean
+clean:
+	rm -f glesv2_stub.nit
