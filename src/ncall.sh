@@ -19,7 +19,7 @@
 rm nitc nitc_? hello_world 2>/dev/null
 set -x
 set -e
-make -C ../c_src
+(cd ../c_src && make)
 sh git-gen-version.sh
 time ../c_src/nitc nitc.nit -v -o nitc_0
 time ./nitc_0 nitc.nit -v "$@" -o nitc_2
