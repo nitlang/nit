@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITCOPT=--semi-global
-OLDNITCOPT=--semi-global
-OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitserial nitrestful
+NITCFLAGS = --semi-global
+OLDNITCFLAGS = --semi-global
+OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial nitrestful
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
@@ -33,7 +33,7 @@ nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitc ${OLDNITCOPT} -o nitc_0 -v nitc.nit
+	../c_src/nitc ${OLDNITCFLAGS} -o nitc_0 -v nitc.nit
 ifdef peflags
 	${peflags} --cygwin-heap=2048 nitc_0
 endif
@@ -44,11 +44,11 @@ bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	test -d ../bin || mkdir ../bin
-	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
+	./nitc_0 ${NITCFLAGS} -v --dir ../bin $(SRCS)
 
 $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
-	./nitc_0 ${NITCOPT} -v $@.nit
+	./nitc_0 ${NITCFLAGS} -v $@.nit
 
 ../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
