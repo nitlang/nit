@@ -3,7 +3,7 @@ all: bin/jwrapper
 pre-build: src/javap_test_parser.nit src/serial.nit
 
 ../nitcc/src/nitcc:
-	make -C ../nitcc
+	cd ../nitcc && $(MAKE)
 
 src/javap_test_parser.nit: ../nitcc/src/nitcc grammar/javap.sablecc
 	../nitcc/src/nitcc grammar/javap.sablecc
@@ -39,8 +39,8 @@ check: bin/jwrapper tests/wildcards.javap
 	nitpick -q tests/many.nit
 	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
 	nitpick -q tests/wildcards.nit
-	make -C examples/queue/ check
-	make -C examples/java_api/ check
+	cd examples/queue/ && $(MAKE) check
+	cd examples/java_api/ && $(MAKE) check
 
 check-libs: bin/jwrapper
 	# This config dependent rule must be tweaked according to each system
@@ -67,4 +67,4 @@ check-libs: bin/jwrapper
 	echo "+ Disabled functions: `grep '#	fun' tests/sablecc.nit | wc -l` / `grep '^	fun' tests/sablecc.nit | wc -l`"
 	nitpick tests/sablecc.nit
 
-	make -C examples/android_api/ check
+	cd examples/android_api/ && $(MAKE) check

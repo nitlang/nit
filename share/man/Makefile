@@ -28,7 +28,7 @@ man1/%.1: %.md $(NITMD)
 
 
 $(NITMD):
-	$(MAKE) -C $(MARKDOWN)
+	cd $(MARKDOWN) && $(MAKE)
 
 # Rule to produce mdwn files for ikiwiki that will be used at http://nitlanguage.org/tools/
 web:

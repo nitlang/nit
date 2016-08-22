@@ -52,7 +52,7 @@ src/scientific/android/res/drawable-hdpi/icon.png: art/icon-sci.svg ../../contri
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-sci.svg --android --out src/scientific/android/res/
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
-	make -C ../../contrib/inkscape_tools/
+	cd ../../contrib/inkscape_tools/ && $(MAKE)
 
 android-install: bin/calculator14.apk
 	adb install -r bin/calculator14.apk

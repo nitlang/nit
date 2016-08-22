@@ -19,7 +19,7 @@ PROJECTS=$(dir $(wildcard ./*/Doxyfile))
 
 # Regenerate the XML documents.
 xml: bootstrap
-	for p in $(PROJECTS); do $(MAKE) -C "$$p" xml || exit; done
+	for p in $(PROJECTS); do (cd "$$p" && $(MAKE) xml) || exit; done
 
 # Generate the Makefiles in the sub-directories.
 bootstrap:

@@ -1,6 +1,6 @@
 all:
 %: FORCE
-	${MAKE} $@ ${MFLAGS} -C src/
+	cd ./src && ${MAKE} -- $@
 
 Makefile:
 	true

@@ -1,7 +1,7 @@
 default: linux
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
-	$(MAKE) -C ../../contrib/inkscape_tools
+	cd ../../contrib/inkscape_tools && $(MAKE)
 
 android: icon
 	mkdir -p bin

@@ -32,7 +32,7 @@ reset-neo:
 
 # Regenerate the XML documents in `tests`.
 tests:
-	$(MAKE) -C tests
+	cd tests && $(MAKE)
 
 # Run the tests.
 run-tests:

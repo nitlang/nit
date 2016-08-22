@@ -19,6 +19,6 @@ check:
 	./bench_markdown.sh -s 1 nit
 
 clean:
-	$(MAKE) clean -C benches
-	$(MAKE) clean -C engines
+	cd benches && $(MAKE) clean
+	cd engines && $(MAKE) clean
 	rm -rf out/

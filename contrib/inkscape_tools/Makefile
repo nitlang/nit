@@ -5,7 +5,7 @@ all:
 check: test-tinks test-app
 
 test-app: bin/svg_to_png_and_nit
-	make -C tests/app
+	cd tests/app && $(MAKE)
 
 test-tinks: bin/svg_to_png_and_nit
 	mkdir -p tests/tinks/images

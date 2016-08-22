@@ -3,7 +3,7 @@ all: bin/objcwrapper
 pre-build: src/objc_parser.nit
 
 ../nitcc/src/nitcc:
-	make -C ../nitcc
+	cd ../nitcc && $(MAKE)
 
 src/objc_parser.nit: ../nitcc/src/nitcc grammar/objc.sablecc
 	../nitcc/src/nitcc grammar/objc.sablecc

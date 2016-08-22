@@ -29,6 +29,6 @@ full_java_api.nit:
 	time -f "%E k:%S u:%U" ../../../../bin/nitc -v full_java_api.nit --no-cc
 
 	# Don't compile the C, only the Java
-	make -C nit_compile Nit_full_java_api.class
+	cd nit_compile && $(MAKE) Nit_full_java_api.class
 
 .PHONY: api_user java_api.nit

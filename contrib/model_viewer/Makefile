@@ -20,7 +20,7 @@ android-release: $(shell ${NITLS} -M src/model_viewer.nit android) android/res/
 	${NITC} src/model_viewer.nit -m android -o bin/model_viewer.apk --release
 
 android/res/: art/icon.png
-	make -C ../inkscape_tools/
+	cd ../inkscape_tools/ && $(MAKE)
 	mkdir -p android/res/drawable-ldpi/ android/res/drawable-mdpi/ android/res/drawable-hdpi/ \
 		android/res/drawable-xhdpi/ android/res/drawable-xxhdpi/ android/res/drawable-xxxhdpi/
 	convert -resize 36x36   art/icon.png android/res/drawable-ldpi/icon.png

@@ -17,19 +17,19 @@
 all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class pandoc/pandoc
 
 nitmd/nitmd:
-	make -C nitmd
+	cd nitmd && $(MAKE)
 
 txtmark/Txtmark.class:
-	make -C txtmark
+	cd txtmark && $(MAKE)
 
 markdown4j/Markdown4j.class:
-	make -C markdown4j
+	cd markdown4j && $(MAKE)
 
 pandoc/pandoc:
-	make -C pandoc
+	cd pandoc && $(MAKE)
 
 clean:
-	make -C nitmd clean
-	make -C txtmark clean
-	make -C markdown4j clean
-	make -C pandoc clean
+	cd nitmd && $(MAKE) clean
+	cd txtmark && $(MAKE) clean
+	cd markdown4j && $(MAKE) clean
+	cd pandoc && $(MAKE) clean

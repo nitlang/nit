@@ -28,5 +28,5 @@ android-release: $(shell ${NITLS} -M src/asteronits.nit android) android/res/ pr
 	${NITC} src/android.nit -m android -o bin/asteronits.apk --release
 
 android/res/: art/icon.svg
-	make -C ../inkscape_tools/
+	cd ../inkscape_tools/ && $(MAKE)
 	../inkscape_tools/bin/svg_to_icons --out android/res --android art/icon.svg

@@ -20,7 +20,7 @@ android-release: android/res/ $(shell nitls -M src/moles_android.nit) assets/ima
 	nitc -o bin/moles.apk src/moles_android.nit --release
 
 $(SVG2ICONS):
-	$(MAKE) -C ../inkscape_tools
+	cd ../inkscape_tools && $(MAKE)
 
 android/res/: $(SVG2ICONS) art/icon.svg
 	mkdir -p android/res

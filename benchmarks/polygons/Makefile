@@ -1,6 +1,6 @@
 all:
-	$(MAKE) all -C nit
-	$(MAKE) all -C java
+	cd nit && $(MAKE) all
+	cd java && $(MAKE) all
 
 check:
-	$(MAKE) check -C nit
+	cd nit && $(MAKE) check

@@ -17,4 +17,4 @@ simplan_parser.nit: ${NITCC} simplan.sablecc
 	${NITCC} simplan.sablecc
 
 ${NITCC}:
-	${MAKE} -C ../nitcc
+	cd ../nitcc && $(MAKE)

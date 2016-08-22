@@ -13,7 +13,7 @@ android-release: android/res/
 	../../bin/nitc -o bin/dino.apk src/dino_android.nit --release
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
-	$(MAKE) -C ../../contrib/inkscape_tools
+	cd ../../contrib/inkscape_tools && $(MAKE)
 
 android/res/: ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p android/res/
