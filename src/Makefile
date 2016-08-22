@@ -25,7 +25,11 @@ SRCS = $(patsubst %,$(srcdir)/%.nit,$(OBJS))
 BINS = $(patsubst %,$(PROJECT_BINDIR)/%,$(OBJS))
 
 # Workaround: Cygwin requires peflags to bootstrap
-peflags := $(shell which peflags 2>/dev/null)
+PEFLAGS = peflags
+PEFLAGSFLAGS = --cygwin-heap=2048
+
+# To append to the end of a command to ignore if not available (e.g. `$(PEFLAGS)`).
+OPTIONAL = || [ "$$?" -eq 127 ]
 
 all: $(PROJECT_BINDIR)
 
@@ -42,9 +46,7 @@ nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
 	$(srcdir)/git-gen-version.sh
 	$(PROJECT_CSRCDIR)/nitc $(OLDNITCFLAGS) -o $(srcdir)/nitc_0 -v $(srcdir)/nitc.nit
-ifdef peflags
-	$(peflags) --cygwin-heap=2048 $(srcdir)/nitc_0
-endif
+	$(PEFLAGS) $(PEFLAGSFLAGS) $(srcdir)/nitc_0 $(OPTIONAL)
 
 # Optimization over the `$(PROJECT_BINDIR)/%` rules when building all tools
 # together
@@ -63,9 +65,7 @@ $(PROJECT_CSRCDIR)/nitc: $(PROJECT_CSRCDIR)/*.c $(PROJECT_CSRCDIR)/*.h $(PROJECT
 	@echo '***************************************************************'
 	cd $(PROJECT_CSRCDIR) && $(MAKE)
 	rm $(PROJECT_CSRCDIR)/*.o || true # to reduce disc used
-ifdef peflags
-	$(peflags) --cygwin-heap=2048 $(PROJECT_CSRCDIR)/nitc
-endif
+	$(PEFLAGS) $(PEFLAGSFLAGS) $(PROJECT_CSRCDIR)/nitc $(OPTIONAL)
 
 $(srcdir)/parser/parser.nit:
 	@echo '***************************************************************'
