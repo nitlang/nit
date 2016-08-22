@@ -1,3 +1,4 @@
+test_nitunit4/test_bad_comp.nit:27,10--19: Error: method or variable `bad_method` unknown in `TestSuiteBadComp`.
 test_nitunit4/test_bad_comp2.nit:19,7--22: Error: a class named `test_nitunit4::TestSuiteBadComp` is already defined in module `test_bad_comp` at test_nitunit4/test_bad_comp.nit:19,1--29,3.
 ==== Test-suite of module test_nitunit4::test_bad_comp | tests: 2
 [KO] test_nitunit4$TestSuiteBadComp$test_good
