@@ -7,8 +7,8 @@ pre-build: src/objc_parser.nit
 
 src/objc_parser.nit: ../nitcc/src/nitcc grammar/objc.sablecc
 	../nitcc/src/nitcc grammar/objc.sablecc
-	mv *.nit src/
-	mv objc* gen/
+	mv -- ./*.nit ./src/
+	mv -- ./objc.* ./gen/
 
 bin/objcwrapper: $(shell nitls -M src/objcwrapper.nit) src/objc_parser.nit
 	nitc -o bin/objcwrapper src/objcwrapper.nit --semi-global
