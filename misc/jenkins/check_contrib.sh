@@ -32,7 +32,7 @@ for p in $projects; do
 	echo "### in $dir ###"
 	# Check each rules, if they exists
 	for rule in $rules; do
-		make -C "$dir" $rule -n >/dev/null 2>/dev/null || {
+		make -C "$dir" -n -- "$rule" >/dev/null 2>/dev/null || {
 			# Special case for `all` that falls back as the default target
 			if [ "$rule" = "all" ]; then
 				echo "*** make -C $dir ***"
@@ -42,7 +42,7 @@ for p in $projects; do
 			continue
 		}
 		echo "*** make $rule -C $dir ***"
-		misc/jenkins/unitrun.sh "cmd-$name-make$rule" make -C "$dir" $rule ||
+		misc/jenkins/unitrun.sh "cmd-$name-make$rule" make -C "$dir" -- "$rule" ||
 			failed="$failed $name-$rule"
 	done
 done
