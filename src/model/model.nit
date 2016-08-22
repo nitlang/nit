@@ -1297,6 +1297,7 @@ class MClassType
 	private var collect_mclasses_cache = new HashMap[MModule, Set[MClass]]
 	private var collect_mtypes_cache = new HashMap[MModule, Set[MClassType]]
 
+	redef fun mdoc_or_fallback do return mclass.mdoc_or_fallback
 end
 
 # A type based on a generic class.
@@ -1527,6 +1528,8 @@ class MVirtualType
 	redef fun full_name do return self.mproperty.full_name
 
 	redef fun c_name do return self.mproperty.c_name
+
+	redef fun mdoc_or_fallback do return mproperty.mdoc_or_fallback
 end
 
 # The type associated to a formal parameter generic type of a class

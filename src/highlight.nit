@@ -425,6 +425,13 @@ redef class MEntity
 		end
 		return (new HTMLTag("a")).attr("href", href).text(text)
 	end
+
+	# Append an entry for the doc in the given infobox
+	private fun add_doc_to_infobox(res: HInfoBox)
+	do
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then mdoc.fill_infobox(res)
+	end
 end
 
 redef class MModule
@@ -433,8 +440,7 @@ redef class MModule
 		var res = new HInfoBox(v, "module {name}")
 		res.href = v.hrefto(self)
 		res.new_field("module").add(linkto(v))
-		var mdoc = self.mdoc
-		if mdoc != null then mdoc.fill_infobox(res)
+		add_doc_to_infobox(res)
 		if in_importation.greaters.length > 1 then
 			var c = res.new_dropdown("imports", "{in_importation.greaters.length-1} modules")
 			for x in in_importation.greaters do
@@ -459,9 +465,7 @@ redef class MClassDef
 			res.new_field("redef class").text(mclass.name)
 			res.new_field("intro").add mclass.intro.linkto_text(v, "in {mclass.intro_mmodule.to_s}")
 		end
-		var mdoc = self.mdoc
-		if mdoc == null then mdoc = mclass.intro.mdoc
-		if mdoc != null then mdoc.fill_infobox(res)
+		add_doc_to_infobox(res)
 
 		var in_hierarchy = self.in_hierarchy
 		if in_hierarchy == null then return res
@@ -515,9 +519,7 @@ redef class MPropDef
 		else
 			res.new_field("intro").add mproperty.intro.linkto_text(v, "in {mproperty.intro.mclassdef}")
 		end
-		var mdoc = self.mdoc
-		if mdoc == null then mdoc = mproperty.intro.mdoc
-		if mdoc != null then mdoc.fill_infobox(res)
+		add_doc_to_infobox(res)
 		if mproperty.mpropdefs.length > 1 then
 			var c = res.new_dropdown("redef", "redefinitions")
 			for x in mproperty.mpropdefs do
@@ -535,9 +537,7 @@ redef class MClassType
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(self)
 		res.new_field("class").add mclass.intro.linkto(v)
-		var mdoc = mclass.mdoc
-		if mdoc == null then mdoc = mclass.intro.mdoc
-		if mdoc != null then mdoc.fill_infobox(res)
+		add_doc_to_infobox(res)
 		return res
 	end
 	redef fun linkto(v)
@@ -551,9 +551,7 @@ redef class MVirtualType
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(mproperty)
 		var p = mproperty
-		var pd = p.intro
-		res.new_field("virtual type").add pd.linkto(v)
-		var mdoc = pd.mdoc
+		add_doc_to_infobox(res)
 		if mdoc != null then mdoc.fill_infobox(res)
 		return res
 	end
@@ -649,9 +647,7 @@ redef class CallSite
 		else
 			res.new_field("intro").add mproperty.intro.linkto_text(v, "in {mproperty.intro.mclassdef}")
 		end
-		var mdoc = mpropdef.mdoc
-		if mdoc == null then mdoc = mproperty.intro.mdoc
-		if mdoc != null then mdoc.fill_infobox(res)
+		add_doc_to_infobox(res)
 
 		return res
 	end
