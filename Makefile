@@ -94,11 +94,13 @@ man:
 # See also: https://www.gnu.org/prep/standards/html_node/Standard-Targets.html
 clean distclean mostlyclean maintainer-clean:
 	rm -rf -- $(project_docdir)/stdlib $(project_docdir)/nitc
+	# Clean everything in `./contrib/` and `./examples/`,
+	# except `./contrib/nitc` (because `nitls` is required by some `Makefile`s)
+	for directory in $(extras); do \
+		(cd "$$directory" && { $(MAKE) $@ || $(MAKE) clean; }); \
+	done
 	cd ./c_src && $(MAKE) clean
 	cd $(srcdir) && $(MAKE) $@
 	cd ./tests && $(MAKE) $@
 	cd $(project_mandir) && $(MAKE) $@
-	for directory in $(extras); do \
-		(cd "$$directory" && { $(MAKE) $@ || $(MAKE) clean || true; }); \
-	done
 	if [ $@ '!=' mostlyclean ]; then rm -f ./c_src/nitc; fi
