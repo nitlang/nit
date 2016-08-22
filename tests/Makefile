@@ -61,4 +61,4 @@ store:
 
 .PHONY: clean distclean mostlyclean maintainer-clean
 clean distclean mostlyclean maintainer-clean:
-	rm -r -f -- out/ alt nit_compile errlist errlist.bak *.xml 2> /dev/null || true
+	rm -rf -- ./out/ ./alt/*alt* ./nit_compile ./errlist ./errlist.bak ./*.xml
