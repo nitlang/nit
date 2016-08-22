@@ -60,4 +60,4 @@ pdf:
 
 .PHONY: clean distclean mostlyclean maintainer-clean
 clean distclean mostlyclean maintainer-clean:
-	rm -r $(PROJECT_WEBDIR) $(PROJECT_PDFDIR) $(PROJECT_MAN1DIR) || true
+	rm -rf -- $(PROJECT_WEBDIR) $(PROJECT_PDFDIR) $(PROJECT_MAN1DIR)
