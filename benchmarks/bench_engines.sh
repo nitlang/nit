@@ -125,9 +125,9 @@ fi
 cp ../bin/nitc .
 
 if test -z "$fast"; then
-	make -C markdown/benches
-	make -C ../contrib/nitcc
-	make pre-build -C ../contrib/jwrapper
+	(cd markdown/benches && make)
+	(cd ../contrib/nitcc && make)
+	(cd ../contrib/jwrapper && make pre-build)
 fi
 
 ## EFFECTIVE BENCHS ##
