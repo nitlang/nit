@@ -566,7 +566,12 @@ class MClass
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
 
-	redef fun mdoc_or_fallback do return intro.mdoc
+	redef fun mdoc_or_fallback
+	do
+		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
+		# recursion.
+		return intro.mdoc
+	end
 end
 
 
@@ -2054,7 +2059,12 @@ abstract class MProperty
 
 	redef var location
 
-	redef fun mdoc_or_fallback do return intro.mdoc
+	redef fun mdoc_or_fallback
+	do
+		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
+		# recursion.
+		return intro.mdoc
+	end
 
 	# The canonical name of the property.
 	#
