@@ -566,7 +566,7 @@ class MClass
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
 
-	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+	redef fun mdoc_or_fallback do return intro.mdoc
 end
 
 
@@ -725,6 +725,8 @@ class MClassDef
 
 	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
 	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
+
+	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 end
 
 # A global static type
@@ -2049,7 +2051,7 @@ abstract class MProperty
 
 	redef var location
 
-	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+	redef fun mdoc_or_fallback do return intro.mdoc
 
 	# The canonical name of the property.
 	#
@@ -2471,6 +2473,8 @@ abstract class MPropDef
 		assert has_next_property: i.is_ok
 		return i.item
 	end
+
+	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
 end
 
 # A local definition of a method

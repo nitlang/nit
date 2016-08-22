@@ -155,8 +155,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef fun mdoc_or_fallback do return intro.mdoc
-
 	# Format: `Foo[E]`
 	redef var html_name is lazy do
 		var tpl = new Template
@@ -201,8 +199,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
-
 	# Depends if `self` is an intro or not.
 	#
 	# * If intro contains the visibility and kind.
@@ -303,7 +299,6 @@ redef class MClassDef
 end
 
 redef class MProperty
-	redef fun mdoc_or_fallback do return intro.mdoc
 	redef fun html_modifiers do return intro.html_modifiers
 	redef fun html_declaration do return intro.html_declaration
 
@@ -327,8 +322,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
-
 	# Depends if `self` is an intro or not.
 	#
 	# * If intro contains the visibility and kind.

@@ -208,7 +208,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef fun mdoc_or_fallback do return intro.mdoc
 	redef fun cs_icon do return intro.cs_icon
 
 	# Format: `Foo[E]`
@@ -258,7 +257,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 	redef fun cs_icon do return "C"
 
 	# Depends if `self` is an intro or not.
@@ -339,7 +337,6 @@ redef class MClassDef
 end
 
 redef class MProperty
-	redef fun mdoc_or_fallback do return intro.mdoc
 	redef fun cs_modifiers do return intro.cs_modifiers
 	redef fun cs_declaration do return intro.cs_declaration
 	redef fun cs_icon do return intro.cs_icon
@@ -373,8 +370,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
-
 	# Depends if `self` is an intro or not.
 	#
 	# * If intro contains the visibility and kind.
