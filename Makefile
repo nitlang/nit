@@ -20,12 +20,17 @@ project_mandir = ./share/man
 
 contrib_dir = ./contrib
 examples_dir = ./examples
+lib_dir = ./lib
 srcdir = ./src
 all_contribs = $(dir $(wildcard $(contrib_dir)/*/Makefile))
 
 # Additional program directories (contrib and examples) that are buildable
 extras = $(filter-out $(contrib_dir)/nitc/,$(all_contribs))
 extras += $(dir $(wildcard $(examples_dir)/*/Makefile))
+
+# Libraries with a `Makefile`.
+# Only used for cleaning.
+libs = $(dir $(wildcard $(lib_dir)/*/Makefile))
 
 all: tools man
 	@echo ""
@@ -96,7 +101,7 @@ clean distclean mostlyclean maintainer-clean:
 	rm -rf -- $(project_docdir)/stdlib $(project_docdir)/nitc
 	# Clean everything in `./contrib/` and `./examples/`,
 	# except `./contrib/nitc` (because `nitls` is required by some `Makefile`s)
-	for directory in $(extras); do \
+	for directory in $(extras) $(libs); do \
 		(cd "$$directory" && { $(MAKE) $@ || $(MAKE) clean; }); \
 	done
 	cd ./c_src && $(MAKE) clean
