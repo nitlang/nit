@@ -23,7 +23,7 @@
 #     check_contrib.sh check android
 
 projects=`ls -1 lib/*/Makefile examples/*/Makefile contrib/*/Makefile | grep -v contrib/nitc/`
-rules=$*
+rules=("$@")
 
 failed=
 for p in $projects; do
@@ -31,7 +31,7 @@ for p in $projects; do
 	name=`basename "$dir"`
 	echo "### in $dir ###"
 	# Check each rules, if they exists
-	for rule in $rules; do
+	for rule in "${rules[@]}"; do
 		make -C "$dir" -n -- "$rule" >/dev/null 2>/dev/null || {
 			# Special case for `all` that falls back as the default target
 			if [ "$rule" = "all" ]; then
