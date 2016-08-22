@@ -62,3 +62,8 @@ store:
 .PHONY: clean distclean mostlyclean maintainer-clean
 clean distclean mostlyclean maintainer-clean:
 	rm -rf -- ./out/ ./alt/*alt* ./nit_compile ./errlist ./errlist.bak ./*.xml
+	rm -rf -- ./fulltest ./.nitpretty/ ./nitunit ./nitunit.out ./modifs ./sometests
+	rm -f -- ./example.org ./listtest.sh ./nit.html ./test.db ./test_nity.db
+	rm -f -- ./nitcc0.lr.dot ./nitcc_lexer.nit ./nitcc_parser.nit
+	rm -f -- ./test_jvm/Queue.class ./test_jvm/Test2.class ./test_jvm/TestJvm.class
+	rm -f -- ../lib/gettext/examples/languages/langannot.pot
