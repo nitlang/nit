@@ -1,0 +1,39 @@
+This is the folder of the Nit online IDE project.
+
+-> CONTENT
+	- folder: nit-src: this folder contains the nit source file for the interpreter pnacl module,
+		if you recompile it, you need to replace the 'pnacl_nit.pexe' file in 'public/pnacl'
+		by the one you just regenerated.
+	
+	- folder: node_modules: this folder contains the modules required by Node.js to run the application.
+	
+	- folder: public: this folder contains all the elements required by the web application:
+			- css folder for css files,
+			- JS folder for JS files,
+			- pnacl folder for pnacl files,
+			- src folder for the Ace files required for the editor,
+			- favicon file.
+	
+	- folder: views: this folder contains the web page of the application.
+	
+	- file: package.json: a file that describes the application for Node.js.
+	
+	- file: server.js: the file that sets up the server for the application.
+
+-> GETTING STARTED
+	- Run the application with:
+		-> node server.js
+		
+	This will host the application at 'http://localhost:8080/'.
+	
+	NOTE: The application only works in Google Chrome or Chromium,
+	its better to open the Chrome console while using the application (to see what's going on),
+	the application is ready when the terminal appears in the page and when the message:
+	'Nit library loaded (... files), ready to go.' is diplayed in the console.
+
+-> FEATURES
+	- CTRL+E: this shortcut launches the interpretation of the code written in the editor.
+	- CTRL+S: this shortcut enables you to download the file you have been writting.
+	- By clicking on the file name you can change it.
+	- The editor has some auto-completion and research features.
+
