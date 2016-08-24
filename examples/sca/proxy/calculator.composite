@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+	name="calculator">
+
+	<component name="addition" >
+		<implementation.nit class="Addition" /> <!-- business class -->
+		<service name="addition_service" />
+	</component>
+
+	<component name="multiplication" >
+		<implementation.nit class="Multiplication" /> <!-- business class -->
+		<service name="multiplication_service" />
+	</component>
+
+	<component name="calculator" >
+		<implementation.nit class="Calculator" /> <!-- business class -->
+		<reference name="addition_reference" remote="addition_service" />
+		<reference name="multiplication_reference" remote="multiplication_service" />
+	</component>
+
+</composite>
