@@ -54,7 +54,7 @@ class CFG
 					ends.add(line.address)
 					if not instr isa ABrInstruction then
 						# next line is possible start
-						starts.add(line.address+4)
+						starts.add(line.address+line.size)
 					end
 				else if instr isa AStopInstruction or
 					 instr isa ARetInstruction then
@@ -166,7 +166,7 @@ class CFG
 				  not instr isa ACallInstruction and
 				  not instr isa ARetInstruction then
 					# next line is possible start
-					var dest = line.address+4
+					var dest = line.address+line.size
 					if addr_to_blocks.has_key(dest) then
 						var db = addr_to_blocks[dest]
 						b.successors.add(db)
@@ -179,7 +179,7 @@ class CFG
 
 				if instr isa ACallInstruction then
 					has_function_calls = true
-					var next_addr = line.address+4
+					var next_addr = line.address+line.size
 					if not addr_to_blocks.has_key(next_addr) then
 						manager.notes.add(new P8Error(line.location,
 							"this CALL is not followed by valide code as it should"))

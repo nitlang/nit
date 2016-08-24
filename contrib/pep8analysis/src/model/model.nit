@@ -91,9 +91,19 @@ redef class ALine
 		else return null
 	end
 end
+
 redef class AInstructionLine
-	redef fun size do return 4
+	redef fun size do return n_instruction.size
 end
+
+redef class AInstruction
+	# Number of bytes of machine code for this instruction
+	fun size: Int do return 1
+end
+redef class ABinaryInstruction
+	redef fun size do return 3
+end
+
 redef class ADirectiveLine
 	redef fun size do return n_directive.size
 end
