@@ -56,7 +56,7 @@ import trees
 # assert trie["foo"] == 1
 #
 # # Search by prefix
-# assert trie.find_by_prefix("") == [1, 2, 3]
+# assert trie.find_by_prefix("") == [1, 3, 2]
 # assert trie.find_by_prefix("foo") == [1, 2]
 # assert trie.find_by_prefix("baz").is_empty
 # ~~~
@@ -124,23 +124,20 @@ class Trie[E]
 	# trie["foooo"] = 3
 	# trie["bar"] = 4
 	#
-	# assert trie.find_by_prefix("") == [1, 2, 3, 4]
+	# assert trie.find_by_prefix("") == [1, 4, 2, 3]
 	# assert trie.find_by_prefix("foo") == [1, 2, 3]
 	# assert trie.find_by_prefix("bar") == [4]
 	# assert trie.find_by_prefix("baz").is_empty
 	# ~~~
 	fun find_by_prefix(prefix: String): Array[E] do
-		var res = new Array[E]
 		var node
 		if prefix == "" then
 			node = root
 		else
 			node = search_node(prefix)
 		end
-		if node != null then
-			node.collect_values(res)
-		end
-		return res
+		if node == null then return new Array[E]
+		return node.collect_values
 	end
 
 	# Find values stored under `prefix`
@@ -190,11 +187,19 @@ private class TrieNode[E]
 	var children = new HashMap[Char, TrieNode[E]]
 	var is_leaf: Bool = false
 
-	fun collect_values(values: Array[E]) do
-		var value = self.value
-		if value != null then values.add value
-		for child in children.values do
-			child.collect_values(values)
+	fun collect_values: Array[E] do
+		var values = new Array[E]
+
+		var todo = new List[TrieNode[E]]
+		todo.add self
+		while todo.not_empty do
+			var node = todo.shift
+			var value = node.value
+			if value != null then values.add value
+			for child in node.children.values do
+				todo.push child
+			end
 		end
+		return values
 	end
 end
