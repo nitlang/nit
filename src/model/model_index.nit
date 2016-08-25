@@ -130,6 +130,98 @@ module model_index
 import model::model_views
 import trees::trie
 
+redef class ModelView
+
+	# Keep a direct link to mentities by full name to speed up `mentity_from_uri`
+	var mentities_by_full_name: HashMap[String, MEntity] is lazy do
+		var mentities_by_full_name = new HashMap[String, MEntity]
+		for mentity in model.private_view.mentities do
+			mentities_by_full_name[mentity.full_name] = mentity
+		end
+		return mentities_by_full_name
+	end
+
+	# ModelIndex used to perform searches
+	var index: ModelIndex is lazy do
+		var index = new ModelIndex
+		for mentity in model.private_view.mentities do
+			if mentity isa MClassDef or mentity isa MPropDef then continue
+			index.index mentity
+		end
+		return index
+	end
+
+	# Find mentities by their `name`
+	fun mentities_by_name(name: String): Array[MEntity] do
+		if index.name_prefixes.has_key(name) then
+			return index.name_prefixes[name]
+		end
+		return new Array[MEntity]
+	end
+
+	redef fun mentity_by_full_name(full_name) do
+		if mentities_by_full_name.has_key(full_name) then
+			return mentities_by_full_name[full_name]
+		end
+		return null
+	end
+
+	private var score_sorter = new ScoreComparator
+	private var vis_sorter = new VisibilityComparator
+	private var kind_sorter = new MEntityComparator
+	private var name_sorter = new NameComparator
+	private var lname_sorter = new NameLengthComparator
+	private var fname_sorter = new FullNameComparator
+	private var lfname_sorter = new FullNameLengthComparator
+
+	# Search mentities based on a `query` string
+	#
+	# Lookup the view index for anything matching `query` and return `limit` results.
+	#
+	# The algorithm used is the following:
+	# 1- lookup by name prefix
+	# 2- lookup by full_name prefix
+	# 3- loopup by levenshtein distance
+	#
+	# At each step if the `limit` is reached, the algorithm stops and returns the results.
+	fun find(query: String, limit: nullable Int): Array[MEntity] do
+		# Find, lookup by name prefix
+		var matches = index.find_by_name_prefix(query).uniq.
+			sort(lname_sorter, name_sorter, kind_sorter)
+		if limit != null and matches.length >= limit then
+			return matches.limit(limit).rerank.sort(vis_sorter, score_sorter).mentities
+		end
+		matches = matches.rerank.sort(vis_sorter, score_sorter)
+
+		# If limit not reached, lookup by full_name prefix
+		var malus = matches.length
+		var full_matches = new IndexMatches
+		for match in index.find_by_full_name_prefix(query).
+			sort(kind_sorter, lfname_sorter, fname_sorter) do
+			match.score += malus
+			full_matches.add match
+		end
+		matches = matches.uniq
+		if limit != null and matches.length + full_matches.length >= limit then
+			matches.add_all full_matches
+			matches = matches.uniq.limit(limit).rerank.sort(vis_sorter, score_sorter)
+			return matches.mentities
+		end
+
+		# If limit not reached, lookup by similarity
+		malus = matches.length
+		var sim_matches = new IndexMatches
+		for match in index.find_by_similarity(query).sort(score_sorter, kind_sorter, lname_sorter, name_sorter) do
+			match.score += malus
+			sim_matches.add match
+		end
+		matches.add_all sim_matches
+		matches = matches.uniq
+		if limit != null then matches = matches.limit(limit)
+		return matches.rerank.sort(vis_sorter, score_sorter).mentities
+	end
+end
+
 # ModelIndex indexes mentities by their name and full name
 #
 # It provides methods to find mentities based on a prefix or string similarity.
