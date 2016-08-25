@@ -125,33 +125,12 @@ class ModelView
 		v.include_test_suite = self.include_test_suite
 	end
 
-	# Searches MEntities that match `name`.
-	fun mentities_by_name(name: String): Array[MEntity] do
-		var res = new Array[MEntity]
-		for mentity in mentities do if mentity.name == name then res.add mentity
-		return res
-	end
-
 	# Searches the MEntity that matches `full_name`.
 	fun mentity_by_full_name(full_name: String): nullable MEntity do
 		for mentity in mentities do
 			if mentity.full_name == full_name then return mentity
 		end
 		return null
-	end
-
-	# Looks up a MEntity by its full `namespace`.
-	#
-	# Usefull when `mentities_by_name` returns conflicts.
-	#
-	# Namespaces must be of the form `package::core::module::Class::prop`.
-	fun mentities_by_namespace(namespace: String): Array[MEntity] do
-		var v = new LookupNamespaceVisitor(namespace)
-		init_visitor(v)
-		for mpackage in mpackages do
-			v.enter_visit(mpackage)
-		end
-		return v.results
 	end
 
 	# Build an concerns tree with from `self`
