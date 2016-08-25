@@ -21,6 +21,15 @@ intrude import markdown::wikilinks
 import doc_commands
 import model::model_index
 
+redef class NitwebConfig
+	# Specific Markdown processor to use within Nitweb
+	var md_processor: MarkdownProcessor is lazy do
+		var proc = new MarkdownProcessor
+		proc.emitter.decorator = new NitwebDecorator(view, modelbuilder)
+		return proc
+	end
+end
+
 redef class APIRouter
 	redef init do
 		super
@@ -32,15 +41,8 @@ end
 class APIDocdown
 	super APIHandler
 
-	# Specific Markdown processor to use within Nitweb
-	var md_processor: MarkdownProcessor is lazy do
-		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new NitwebDecorator(config.view, config.modelbuilder)
-		return proc
-	end
-
 	redef fun post(req, res) do
-		res.html md_processor.process(req.body)
+		res.html config.md_processor.process(req.body)
 	end
 end
 
