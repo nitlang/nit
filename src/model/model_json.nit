@@ -51,8 +51,8 @@ redef class MEntity
 
 	# Return `self` as a JsonObject.
 	#
-	# By default, every reference to another MEntity is replaced by a pointer
-	# to the MEntity::json_id.
+	# By default, every reference to another MEntity is skipped.
+	# Use full_json for a full representation.
 	fun json: JsonObject do
 		var obj = new JsonObject
 		obj["name"] = name
@@ -60,7 +60,6 @@ redef class MEntity
 		obj["full_name"] = full_name
 		obj["mdoc"] = mdoc_or_fallback
 		obj["visibility"] = visibility
-		obj["location"] = location
 		var modifiers = new JsonArray
 		for modifier in collect_modifiers do
 			modifiers.add modifier
@@ -70,6 +69,19 @@ redef class MEntity
 	end
 
 	redef fun to_json do return json.to_json
+
+	# Return `self` as a JsonObject with references.
+	#
+	# By default, every reference to another MEntity is replaced by a pointer
+	# to the MEntity::json_id.
+	fun full_json: JsonObject do
+		var obj = json
+		obj["location"] = location
+		return obj
+	end
+
+	# Return `full_json` as a json string.
+	fun to_full_json: String do return full_json.to_json
 end
 
 redef class MDoc
@@ -114,7 +126,7 @@ end
 
 redef class MPackage
 
-	redef fun json do
+	redef fun full_json do
 		var obj = super
 		if ini != null then
 			obj["ini"] = new JsonObject.from(ini.as(not null).to_map)
@@ -129,6 +141,11 @@ redef class MGroup
 	redef fun json do
 		var obj = super
 		obj["is_root"] = is_root
+		return obj
+	end
+
+	redef fun full_json do
+		var obj = super
 		obj["mpackage"] = to_mentity_ref(mpackage)
 		obj["default_mmodule"] = to_mentity_ref(default_mmodule)
 		obj["parent"] = to_mentity_ref(parent)
@@ -139,12 +156,15 @@ redef class MGroup
 end
 
 redef class MModule
-	redef fun json do
+	redef fun full_json do
 		var obj = super
 		obj["mpackage"] = to_mentity_ref(mpackage)
 		obj["mgroup"] = to_mentity_ref(mgroup)
 		obj["intro_mclasses"] = to_mentity_refs(intro_mclasses)
 		obj["mclassdefs"] = to_mentity_refs(mclassdefs)
+		obj["intro_mclassdefs"] = to_mentity_refs(collect_intro_mclassdefs(private_view))
+		obj["redef_mclassdefs"] = to_mentity_refs(collect_redef_mclassdefs(private_view))
+		obj["imports"] = to_mentity_refs(in_importation.direct_greaters)
 		return obj
 	end
 end
@@ -152,13 +172,20 @@ end
 redef class MClass
 	redef fun json do
 		var obj = super
-		var arr = new JsonArray
-		for mparameter in mparameters do arr.add mparameter
-		obj["mparameters"] = arr
+		obj["mparameters"] = new JsonArray.from(mparameters)
+		return obj
+	end
+
+	redef fun full_json do
+		var obj = super
 		obj["intro"] = to_mentity_ref(intro)
 		obj["intro_mmodule"] = to_mentity_ref(intro_mmodule)
 		obj["mpackage"] = to_mentity_ref(intro_mmodule.mpackage)
 		obj["mclassdefs"] = to_mentity_refs(mclassdefs)
+		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
+		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
+		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
+		obj["parents"] = to_mentity_refs(collect_parents(private_view))
 		return obj
 	end
 end
@@ -167,23 +194,32 @@ redef class MClassDef
 	redef fun json do
 		var obj = super
 		obj["is_intro"] = is_intro
-		var arr = new JsonArray
-		for mparameter in mclass.mparameters do arr.add mparameter
-		obj["mparameters"] = arr
+		obj["mparameters"] = new JsonArray.from(mclass.mparameters)
+		return obj
+	end
+
+	redef fun full_json do
+		var obj = super
 		obj["mmodule"] = to_mentity_ref(mmodule)
 		obj["mclass"] = to_mentity_ref(mclass)
 		obj["mpropdefs"] = to_mentity_refs(mpropdefs)
 		obj["intro_mproperties"] = to_mentity_refs(intro_mproperties)
+		obj["intro"] = to_mentity_ref(mclass.intro)
+		obj["mpackage"] = to_mentity_ref(mmodule.mpackage)
+		obj["intro_mpropdefs"] = to_mentity_refs(collect_intro_mpropdefs(private_view))
+		obj["redef_mpropdefs"] = to_mentity_refs(collect_redef_mpropdefs(private_view))
 		return obj
 	end
 end
 
 redef class MProperty
-	redef fun json do
+	redef fun full_json do
 		var obj = super
 		obj["intro"] = to_mentity_ref(intro)
 		obj["intro_mclassdef"] = to_mentity_ref(intro_mclassdef)
 		obj["mpropdefs"] = to_mentity_refs(mpropdefs)
+		obj["intro_mclass"] = to_mentity_ref(intro_mclassdef.mclass)
+		obj["mpackage"] = to_mentity_ref(intro_mclassdef.mmodule.mpackage)
 		return obj
 	end
 end
@@ -218,8 +254,18 @@ redef class MPropDef
 	redef fun json do
 		var obj = super
 		obj["is_intro"] = is_intro
+		return obj
+	end
+
+	redef fun full_json do
+		var obj = super
 		obj["mclassdef"] = to_mentity_ref(mclassdef)
 		obj["mproperty"] = to_mentity_ref(mproperty)
+		obj["intro"] = to_mentity_ref(mproperty.intro)
+		obj["intro_mclassdef"] = to_mentity_ref(mproperty.intro.mclassdef)
+		obj["mmodule"] = to_mentity_ref(mclassdef.mmodule)
+		obj["mgroup"] = to_mentity_ref(mclassdef.mmodule.mgroup)
+		obj["mpackage"] = to_mentity_ref(mclassdef.mmodule.mpackage)
 		return obj
 	end
 end
