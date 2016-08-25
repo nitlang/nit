@@ -35,7 +35,7 @@ class APIDocdown
 	# Specific Markdown processor to use within Nitweb
 	var md_processor: MarkdownProcessor is lazy do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new NitwebDecorator(view, config.modelbuilder)
+		proc.emitter.decorator = new NitwebDecorator(config.view, config.modelbuilder)
 		return proc
 	end
 

@@ -30,40 +30,39 @@ class APIStructuralMetrics
 	private fun mclasses_metrics: MetricSet do
 		var mainmodule = config.mainmodule
 		var metrics = new MetricSet
-		metrics.register(new CNOA(mainmodule, view))
-		metrics.register(new CNOP(mainmodule, view))
-		metrics.register(new CNOC(mainmodule, view))
-		metrics.register(new CNOD(mainmodule, view))
-		metrics.register(new CNOAC(mainmodule, view))
-		metrics.register(new CNOAA(mainmodule, view))
-		metrics.register(new CNOAI(mainmodule, view))
-		metrics.register(new CDIT(mainmodule, view))
-		metrics.register(new CNBP(mainmodule, view))
-		metrics.register(new CNBA(mainmodule, view))
-		metrics.register(new CNBM(mainmodule, view))
-		metrics.register(new CNBI(mainmodule, view))
-		metrics.register(new CNBV(mainmodule, view))
-		metrics.register(new CNBIP(mainmodule, view))
-		metrics.register(new CNBRP(mainmodule, view))
-		metrics.register(new CNBHP(mainmodule, view))
-		metrics.register(new CNBLP(mainmodule, view))
+		metrics.register(new CNOA(mainmodule, config.view))
+		metrics.register(new CNOP(mainmodule, config.view))
+		metrics.register(new CNOC(mainmodule, config.view))
+		metrics.register(new CNOD(mainmodule, config.view))
+		metrics.register(new CNOAC(mainmodule, config.view))
+		metrics.register(new CNOAA(mainmodule, config.view))
+		metrics.register(new CNOAI(mainmodule, config.view))
+		metrics.register(new CDIT(mainmodule, config.view))
+		metrics.register(new CNBP(mainmodule, config.view))
+		metrics.register(new CNBA(mainmodule, config.view))
+		metrics.register(new CNBM(mainmodule, config.view))
+		metrics.register(new CNBI(mainmodule, config.view))
+		metrics.register(new CNBV(mainmodule, config.view))
+		metrics.register(new CNBIP(mainmodule, config.view))
+		metrics.register(new CNBRP(mainmodule, config.view))
+		metrics.register(new CNBHP(mainmodule, config.view))
+		metrics.register(new CNBLP(mainmodule, config.view))
 		return metrics
 	end
 
 	private fun mmodules_metrics: MetricSet do
 		var mainmodule = config.mainmodule
 		var metrics = new MetricSet
-		metrics.register(new MNOA(mainmodule, view))
-		metrics.register(new MNOP(mainmodule, view))
-		metrics.register(new MNOC(mainmodule, view))
-		metrics.register(new MNOD(mainmodule, view))
-		metrics.register(new MDIT(mainmodule, view))
-		metrics.register(new MNBD(mainmodule, view))
-		metrics.register(new MNBI(mainmodule, view))
-		metrics.register(new MNBR(mainmodule, view))
-		metrics.register(new MNBCC(mainmodule, view))
-		metrics.register(new MNBAC(mainmodule, view))
-		metrics.register(new MNBIC(mainmodule, view))
+		metrics.register(new MNOA(mainmodule, config.view))
+		metrics.register(new MNOP(mainmodule, config.view))
+		metrics.register(new MNOC(mainmodule, config.view))
+		metrics.register(new MNOD(mainmodule, config.view))
+		metrics.register(new MDIT(mainmodule, config.view))
+		metrics.register(new MNBD(mainmodule, config.view))
+		metrics.register(new MNBI(mainmodule, config.view))
+		metrics.register(new MNBR(mainmodule, config.view))
+		metrics.register(new MNBCC(mainmodule, config.view))
+		metrics.register(new MNBAC(mainmodule, config.view))
 		return metrics
 	end
 
