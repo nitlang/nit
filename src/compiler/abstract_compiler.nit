@@ -71,6 +71,8 @@ redef class ToolContext
 	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
 	# -g
 	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "-g", "--debug")
+	# --yolo
+	var compile_once = new OptionBool("Compile in write-once mode", "--yolo")
 
 	redef init
 	do
@@ -83,6 +85,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
 		self.option_context.add_option(self.opt_debug)
+		self.option_context.add_option(self.compile_once)
 
 		opt_no_main.hidden = true
 	end
@@ -201,6 +204,27 @@ class MakefileToolchain
 
 		time1 = get_time
 		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
+		# Do not take into account the as(not null), this cannot fail
+		if self.toolcontext.compile_once.value then
+			compiler.mainmodule.filepath.as(not null).to_path.delete
+			var quotes = ["Failures can only be attributable to human error.",
+			"Never let failure go to your heart.",
+			"Failure is a part of life, if you don't fail, you don't learn.",
+			"I have not failed. I've just found 10,000 ways that won't work.",
+			"Success is not final, failure is not fatal: it is the courage to continue that counts.",
+			"Pain is temporary. Quitting lasts forever.",
+			"Failure is the condiment that gives success its flavor.",
+			"It is hard to fail, but it is worse never to have tried to succeed.",
+			"Only those who dare to fail greatly can ever achieve greatly.",
+			"If you fell down yesterday, stand up today.",
+			"The phoenix must burn to emerge.",
+			"If at first you don't succeed, destroy all evidence that you tried.",
+			"There is no failure except in no longer trying.",
+			"Giving up is the only sure way to fail.",
+			"Defeat is not the worst of failures. Not to have tried is the true failure."]
+			var pr = quotes.rand
+			print pr
+		end
 	end
 
 	# Write all source files to the `compile_dir`
