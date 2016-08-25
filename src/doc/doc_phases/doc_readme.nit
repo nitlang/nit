@@ -20,6 +20,7 @@ intrude import markdown::wikilinks
 import doc_commands
 import doc_down
 import doc_intros_redefs
+import model::model_index
 
 # Generate content of `ReadmePage`.
 #
@@ -146,6 +147,37 @@ class ReadmeMdEmitter
 		context.pop
 		pop_buffer
 	end
+
+	# Find mentities matching `query`.
+	fun find_mentities(query: String): Array[MEntity] do
+		# search MEntities by full_name
+		var mentity = phase.doc.mentity_by_full_name(query)
+		if mentity != null then return [mentity]
+		# search MEntities by name
+		return phase.doc.mentities_by_name(query)
+	end
+
+	# Suggest mentities based on `query`.
+	fun suggest_mentities(query: String): Array[MEntity] do
+		return phase.doc.find(query, 3)
+	end
+
+	# Display a warning message with suggestions.
+	fun warn(token: TokenWikiLink, message: String, suggest: nullable Array[MEntity]) do
+		var msg = new Buffer
+		msg.append message
+		if suggest != null and suggest.not_empty then
+			msg.append " (suggestions: "
+			var i = 0
+			for s in suggest do
+				msg.append "`{s.full_name}`"
+				if i < suggest.length - 1 then msg.append ", "
+				i += 1
+			end
+			msg.append ")"
+		end
+		phase.warning(token.location, page, msg.write_to_string)
+	end
 end
 
 # MarkdownDecorator used to decorated the Readme file with links between doc entities.
@@ -173,10 +205,10 @@ class ReadmeDecorator
 		var cmd = new DocCommand(link)
 		if cmd isa UnknownCommand then
 			# search MEntities by name
-			var res = v.phase.doc.mentities_by_name(link.to_s)
+			var res = v.find_mentities(link.to_s)
 			# no match, print warning and display wikilink as is
 			if res.is_empty then
-				v.phase.warning(token.location, v.page, "Link to unknown entity `{link}`")
+				v.warn(token, "Link to unknown entity `{link}`", v.suggest_mentities(link.to_s))
 				super
 			else
 				add_mentity_link(v, res.first, token.name, token.comment)
@@ -202,57 +234,34 @@ redef interface DocCommand
 
 	# Render the content of the doc command.
 	fun render(v: ReadmeMdEmitter, token: TokenWikiLink) is abstract
-
-	# Search `doc` model for mentities match `string`.
-	fun search_model(doc: DocModel, string: String): Array[MEntity] do
-		var res
-		if string.has("::") then
-			res = doc.mentities_by_namespace(string).to_a
-		else
-			res = doc.mentities_by_name(string).to_a
-		end
-		return res
-	end
 end
 
 redef class ArticleCommand
 	redef fun render(v, token) do
 		var string = args.first
-		var res = search_model(v.phase.doc, string)
-		res = filter_results(res)
+		var res = v.find_mentities(string)
 		if res.is_empty then
-			v.phase.warning(
-				token.location, v.page,
-				"Try to include documentation of unknown entity `{args.first}`")
+			v.warn(token,
+				"Try to include documentation of unknown entity `{string}`",
+				v.suggest_mentities(string))
 			return
 		end
-		if res.length > 1 then
-			v.phase.warning(token.location, v.page, "conflicting article for `{args.first}` (choices : {res.join(", ")})")
-		end
 		v.add_article new DocumentationArticle("readme", "Readme", res.first)
-	end
-
-	private fun filter_results(res: Array[MEntity]): Array[MEntity] do
-		var out = new Array[MEntity]
-		for e in res do
-			if e isa MPackage then continue
-			if e isa MGroup then continue
-			out.add e
-		end
-		return out
 	end
 end
 
 redef class ListCommand
 	redef fun render(v, token) do
 		var string = args.first
-		var res = search_model(v.phase.doc, string)
+		var res = v.find_mentities(string)
 		if res.is_empty then
-			v.phase.warning(token.location, v.page, "include article for unknown entity `{args.first}`")
+			v.warn(token,
+				"Try to include article of unknown entity `{string}`",
+				v.suggest_mentities(string))
 			return
 		end
 		if res.length > 1 then
-			v.phase.warning(token.location, v.page, "conflicting article for `{args.first}` (choices : {res.join(", ")})")
+			v.warn(token, "Conflicting article for `{args.first}`", res)
 		end
 		var mentity = res.first
 		if mentity isa MModule then
