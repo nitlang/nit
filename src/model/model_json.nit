@@ -77,6 +77,14 @@ redef class MEntity
 
 	# Same as `to_full_json` but with pretty json.
 	fun to_pretty_full_json: String do return serialize_to_full_json(plain=true, pretty=true)
+
+	# Sort mentities by name
+	private fun sort_entities(mentities: Collection[MEntity]): Array[MEntity] do
+		var sorter = new MEntityNameSorter
+		var sorted = mentities.to_a
+		sorter.sort(sorted)
+		return sorted
+	end
 end
 
 redef class MDoc
@@ -111,7 +119,7 @@ redef class MPackage
 		super
 		if v isa FullJsonSerializer then
 			v.serialize_attribute("root", to_mentity_ref(root))
-			v.serialize_attribute("mgroups", to_mentity_refs(mgroups))
+			v.serialize_attribute("mgroups", to_mentity_refs(sort_entities(mgroups)))
 			var ini = self.ini
 			if ini != null then v.serialize_attribute("ini", ini.to_map)
 		end
@@ -126,8 +134,8 @@ redef class MGroup
 			v.serialize_attribute("mpackage", to_mentity_ref(mpackage))
 			v.serialize_attribute("default_mmodule", to_mentity_ref(default_mmodule))
 			v.serialize_attribute("parent", to_mentity_ref(parent))
-			v.serialize_attribute("mmodules", to_mentity_refs(mmodules))
-			v.serialize_attribute("mgroups", to_mentity_refs(in_nesting.direct_smallers))
+			v.serialize_attribute("mmodules", to_mentity_refs(sort_entities(mmodules)))
+			v.serialize_attribute("mgroups", to_mentity_refs(sort_entities(in_nesting.direct_smallers)))
 		end
 	end
 end
@@ -139,10 +147,10 @@ redef class MModule
 			var view = private_view
 			v.serialize_attribute("mpackage", to_mentity_ref(mpackage))
 			v.serialize_attribute("mgroup", to_mentity_ref(mgroup))
-			v.serialize_attribute("intro_mclasses", to_mentity_refs(intro_mclasses))
-			v.serialize_attribute("mclassdefs", to_mentity_refs(mclassdefs))
-			v.serialize_attribute("intro_mclassdefs", to_mentity_refs(collect_intro_mclassdefs(view)))
-			v.serialize_attribute("redef_mclassdefs", to_mentity_refs(collect_redef_mclassdefs(view)))
+			v.serialize_attribute("intro_mclasses", to_mentity_refs(sort_entities(intro_mclasses)))
+			v.serialize_attribute("mclassdefs", to_mentity_refs(sort_entities(mclassdefs)))
+			v.serialize_attribute("intro_mclassdefs", to_mentity_refs(sort_entities(collect_intro_mclassdefs(view))))
+			v.serialize_attribute("redef_mclassdefs", to_mentity_refs(sort_entities(collect_redef_mclassdefs(view))))
 			v.serialize_attribute("imports", to_mentity_refs(in_importation.direct_greaters))
 		end
 	end
@@ -158,10 +166,10 @@ redef class MClass
 			v.serialize_attribute("intro_mmodule", to_mentity_ref(intro_mmodule))
 			v.serialize_attribute("mpackage", to_mentity_ref(intro_mmodule.mpackage))
 			v.serialize_attribute("mclassdefs", to_mentity_refs(mclassdefs))
-			v.serialize_attribute("all_mproperties", to_mentity_refs(collect_accessible_mproperties(view)))
-			v.serialize_attribute("intro_mproperties", to_mentity_refs(collect_intro_mproperties(view)))
-			v.serialize_attribute("redef_mproperties", to_mentity_refs(collect_redef_mproperties(view)))
-			v.serialize_attribute("parents", to_mentity_refs(collect_parents(view)))
+			v.serialize_attribute("all_mproperties", to_mentity_refs(sort_entities(collect_accessible_mproperties(view))))
+			v.serialize_attribute("intro_mproperties", to_mentity_refs(sort_entities(collect_intro_mproperties(view))))
+			v.serialize_attribute("redef_mproperties", to_mentity_refs(sort_entities(collect_redef_mproperties(view))))
+			v.serialize_attribute("parents", to_mentity_refs(sort_entities(collect_parents(view))))
 		end
 	end
 end
@@ -175,12 +183,12 @@ redef class MClassDef
 			var view = private_view
 			v.serialize_attribute("mmodule", to_mentity_ref(mmodule))
 			v.serialize_attribute("mclass", to_mentity_ref(mclass))
-			v.serialize_attribute("mpropdefs", to_mentity_refs(mpropdefs))
-			v.serialize_attribute("intro_mproperties", to_mentity_refs(intro_mproperties))
+			v.serialize_attribute("mpropdefs", to_mentity_refs(sort_entities(mpropdefs)))
+			v.serialize_attribute("intro_mproperties", to_mentity_refs(sort_entities(intro_mproperties)))
 			v.serialize_attribute("intro", to_mentity_ref(mclass.intro))
 			v.serialize_attribute("mpackage", to_mentity_ref(mmodule.mpackage))
-			v.serialize_attribute("intro_mpropdefs", to_mentity_refs(collect_intro_mpropdefs(view)))
-			v.serialize_attribute("redef_mpropdefs", to_mentity_refs(collect_redef_mpropdefs(view)))
+			v.serialize_attribute("intro_mpropdefs", to_mentity_refs(sort_entities(collect_intro_mpropdefs(view))))
+			v.serialize_attribute("redef_mpropdefs", to_mentity_refs(sort_entities(collect_redef_mpropdefs(view))))
 		end
 	end
 end
@@ -191,7 +199,7 @@ redef class MProperty
 		if v isa FullJsonSerializer then
 			v.serialize_attribute("intro", to_mentity_ref(intro))
 			v.serialize_attribute("intro_mclassdef", to_mentity_ref(intro_mclassdef))
-			v.serialize_attribute("mpropdefs", to_mentity_refs(mpropdefs))
+			v.serialize_attribute("mpropdefs", to_mentity_refs(sort_entities(mpropdefs)))
 			v.serialize_attribute("intro_mclass", to_mentity_ref(intro_mclassdef.mclass))
 			v.serialize_attribute("mpackage", to_mentity_ref(intro_mclassdef.mmodule.mpackage))
 		end

@@ -69,6 +69,16 @@ class APIList
 		return mentities
 	end
 
+	# Sort mentities by lexicographic order
+	#
+	# TODO choose order from request
+	fun sort_mentities(req: HttpRequest, mentities: Array[MEntity]) : Array[MEntity] do
+		var sorted = mentities.to_a
+		var sorter = new MEntityNameSorter
+		sorter.sort(sorted)
+		return sorted
+	end
+
 	# Limit mentities depending on the `n` parameter.
 	fun limit_mentities(req: HttpRequest, mentities: Array[MEntity]): Array[MEntity] do
 		var n = req.int_arg("n")
@@ -80,6 +90,7 @@ class APIList
 
 	redef fun get(req, res) do
 		var mentities = list_mentities(req)
+		mentities = sort_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
 		res.json new JsonArray.from(mentities)
 	end
@@ -173,7 +184,7 @@ end
 #
 # Example: `GET /defs/core::Array`
 class APIEntityDefs
-	super APIHandler
+	super APIList
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
@@ -191,6 +202,8 @@ class APIEntityDefs
 			res.api_error(404, "No definition list for mentity `{mentity.full_name}`")
 			return
 		end
+		mentities = sort_mentities(req, mentities)
+		mentities = limit_mentities(req, mentities)
 		res.json new JsonArray.from(mentities)
 	end
 end
