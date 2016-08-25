@@ -54,7 +54,7 @@
 				controllerAs: 'entityCtrl'
 			})
 			.otherwise({
-				redirectTo: '/'
+				templateUrl: 'views/error.html'
 			});
 		$locationProvider.html5Mode(true);
 	});

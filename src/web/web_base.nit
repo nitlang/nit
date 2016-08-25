@@ -38,8 +38,8 @@ class NitwebConfig
 	var modelbuilder: ModelBuilder
 end
 
-# Specific nitcorn Action that uses a Model
-class ModelHandler
+# Specific handler for the nitweb API.
+abstract class APIHandler
 	super Handler
 
 	# App config.
@@ -50,25 +50,6 @@ class ModelHandler
 		if full_name == null then return null
 		return model.mentity_by_full_name(full_name.from_percent_encoding)
 	end
-
-	# Init the model view from the `req` uri parameters.
-	fun init_model_view(req: HttpRequest): ModelView do
-		var view = new ModelView(config.model)
-		var show_private = req.bool_arg("private") or else false
-		if not show_private then view.min_visibility = protected_visibility
-
-		view.include_fictive = req.bool_arg("fictive") or else false
-		view.include_empty_doc = req.bool_arg("empty-doc") or else true
-		view.include_test_suite = req.bool_arg("test-suite") or else false
-		view.include_attribute = req.bool_arg("attributes") or else true
-
-		return view
-	end
-end
-
-# Specific handler for nitweb API.
-abstract class APIHandler
-	super ModelHandler
 
 	# The JSON API does not filter anything by default.
 	#
@@ -91,12 +72,12 @@ abstract class APIHandler
 	fun mentity_from_uri(req: HttpRequest, res: HttpResponse): nullable MEntity do
 		var id = req.param("id")
 		if id == null then
-			res.error 400
+			res.api_error(400, "Expected mentity full name")
 			return null
 		end
 		var mentity = find_mentity(view, id)
 		if mentity == null then
-			res.error 404
+			res.api_error(404, "MEntity `{id}` not found")
 		end
 		return mentity
 	end
@@ -106,8 +87,44 @@ end
 class APIRouter
 	super Router
 
-	# App config.
+	# App config
 	var config: NitwebConfig
+end
+
+redef class HttpResponse
+
+	# Return an HTTP error response with `status`
+	#
+	# Like the rest of the API, errors are formated as JSON:
+	# ~~~json
+	# { "status": 404, "message": "Not found" }
+	# ~~~
+	fun api_error(status: Int, message: String) do
+		json(new APIError(status, message), status)
+	end
+end
+
+# An error returned by the API.
+#
+# Can be serialized to json.
+class APIError
+	super Jsonable
+
+	# Reponse status
+	var status: Int
+
+	# Response error message
+	var message: String
+
+	# Json Object for this error
+	var json: JsonObject is lazy do
+		var obj = new JsonObject
+		obj["status"] = status
+		obj["message"] = message
+		return obj
+	end
+
+	redef fun to_json do return json.to_json
 end
 
 redef class MEntity
@@ -126,7 +143,7 @@ redef class MEntity
 	end
 
 	# Get the full json repesentation of `self` with MEntityRefs resolved.
-	fun api_json(handler: ModelHandler): JsonObject do return json
+	fun api_json(handler: APIHandler): JsonObject do return json
 end
 
 redef class MEntityRef

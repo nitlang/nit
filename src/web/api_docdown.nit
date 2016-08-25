@@ -20,6 +20,13 @@ intrude import doc_down
 intrude import markdown::wikilinks
 import doc_commands
 
+redef class APIRouter
+	redef init do
+		super
+		use("/docdown/", new APIDocdown(config))
+	end
+end
+
 # Docdown handler accept docdown as POST data and render it as HTML
 class APIDocdown
 	super APIHandler
