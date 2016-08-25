@@ -28,11 +28,11 @@ redef class MDoc
 	var comment: String is lazy do
 		var lines = content.to_a
 		if not lines.is_empty then lines.shift
-		return content.join("\n").html_escape
+		return content.join("\n")
 	end
 
 	# Full comment HTML escaped.
-	var documentation: String is lazy do return content.join("\n").html_escape
+	var documentation: String is lazy do return content.join("\n")
 
 	private var markdown_proc: MarkdownProcessor is lazy, writable do
 		return original_mentity.as(not null).model.nitdoc_md_processor
