@@ -108,9 +108,20 @@
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '='
+					namespace: '='
 				},
-				templateUrl: '/directives/entity/namespace.html'
+				templateUrl: '/directives/entity/namespace.html',
+				link: function ($scope, element, attrs) {
+					$scope.isObject = function(obj) {
+						return typeof obj === 'object';
+					};
+					$scope.isArray = function(obj) {
+						return Array.isArray(obj);
+					};
+					$scope.isString = function(obj) {
+						return typeof obj === 'string';
+					};
+				}
 			};
 		})
 
@@ -213,6 +224,11 @@
 				templateUrl: '/directives/entity/defcard.html',
 				link: function ($scope, element, attrs) {
 					$scope.codeId = 'code_' + $scope.definition.full_name.replace(/[^a-zA-Z0-9]/g, '_');
+
+					$scope.isActive = function() {
+						return $scope.focus.full_name == $scope.definition.full_name;
+					}
+
 					$scope.loadCardCode = function() {
 						if(!$scope.code) {
 							Model.loadEntityCode($scope.definition.full_name,
