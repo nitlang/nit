@@ -77,38 +77,15 @@ private class NitwebPhase
 		return config
 	end
 
-	# Build the nit catalog used in homepage.
-	fun build_catalog(model: Model, modelbuilder: ModelBuilder): Catalog do
-		var catalog = new Catalog(modelbuilder)
-		for mpackage in model.mpackages do
-			catalog.deps.add_node(mpackage)
-			for mgroup in mpackage.mgroups do
-				for mmodule in mgroup.mmodules do
-					for imported in mmodule.in_importation.direct_greaters do
-						var ip = imported.mpackage
-						if ip == null or ip == mpackage then continue
-						catalog.deps.add_edge(mpackage, ip)
-					end
-				end
-			end
-			catalog.git_info(mpackage)
-			catalog.package_page(mpackage)
-		end
-		return catalog
-	end
-
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		var model = mainmodule.model
-		var modelbuilder = toolcontext.modelbuilder
 		var config = build_config(toolcontext, mainmodule)
-		var catalog = build_catalog(model, modelbuilder)
 
 		var app = new App
 
 		app.use_before("/*", new SessionInit)
 		app.use_before("/*", new RequestClock)
-		app.use("/api", new NitwebAPIRouter(config, catalog))
+		app.use("/api", new NitwebAPIRouter(config))
 		app.use("/login", new GithubLogin(config.github_client_id))
 		app.use("/oauth", new GithubOAuthCallBack(config.github_client_id, config.github_client_secret))
 		app.use("/logout", new GithubLogout)
@@ -123,11 +100,8 @@ end
 class NitwebAPIRouter
 	super APIRouter
 
-	# Catalog to pass to handlers.
-	var catalog: Catalog
-
 	init do
-		use("/catalog", new APICatalogRouter(config, catalog))
+		use("/catalog", new APICatalogRouter(config))
 		use("/list", new APIList(config))
 		use("/search", new APISearch(config))
 		use("/random", new APIRandom(config))

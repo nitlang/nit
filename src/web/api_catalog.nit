@@ -17,26 +17,44 @@ module api_catalog
 import web_base
 import catalog
 
+redef class NitwebConfig
+
+	# Catalog to pass to handlers.
+	var catalog: Catalog is lazy do
+		var catalog = new Catalog(modelbuilder)
+		for mpackage in model.mpackages do
+			catalog.deps.add_node(mpackage)
+			for mgroup in mpackage.mgroups do
+				for mmodule in mgroup.mmodules do
+					for imported in mmodule.in_importation.direct_greaters do
+						var ip = imported.mpackage
+						if ip == null or ip == mpackage then continue
+						catalog.deps.add_edge(mpackage, ip)
+					end
+				end
+			end
+			catalog.git_info(mpackage)
+			catalog.package_page(mpackage)
+		end
+		return catalog
+	end
+end
+
 # Group all api handlers in one router.
 class APICatalogRouter
 	super APIRouter
 
-	# Catalog to pass to handlers.
-	var catalog: Catalog
-
 	init do
-		use("/highlighted", new APICatalogHighLighted(config, catalog))
-		use("/required", new APICatalogMostRequired(config, catalog))
-		use("/bytags", new APICatalogByTags(config, catalog))
-		use("/contributors", new APICatalogContributors(config, catalog))
-		use("/stats", new APICatalogStats(config, catalog))
+		use("/highlighted", new APICatalogHighLighted(config))
+		use("/required", new APICatalogMostRequired(config))
+		use("/bytags", new APICatalogByTags(config))
+		use("/contributors", new APICatalogContributors(config))
+		use("/stats", new APICatalogStats(config))
 	end
 end
 
 abstract class APICatalogHandler
 	super APIHandler
-
-	var catalog: Catalog
 
 	# List the 10 best packages from `cpt`
 	fun list_best(cpt: Counter[MPackage]): JsonArray do
@@ -69,12 +87,12 @@ class APICatalogStats
 	redef fun get(req, res) do
 		var obj = new JsonObject
 		obj["packages"] = config.model.mpackages.length
-		obj["maintainers"] = catalog.maint2proj.length
-		obj["contributors"] = catalog.contrib2proj.length
-		obj["modules"] = catalog.mmodules.sum
-		obj["classes"] = catalog.mclasses.sum
-		obj["methods"] = catalog.mmethods.sum
-		obj["loc"] = catalog.loc.sum
+		obj["maintainers"] = config.catalog.maint2proj.length
+		obj["contributors"] = config.catalog.contrib2proj.length
+		obj["modules"] = config.catalog.mmodules.sum
+		obj["classes"] = config.catalog.mclasses.sum
+		obj["methods"] = config.catalog.mmethods.sum
+		obj["loc"] = config.catalog.loc.sum
 		res.json obj
 	end
 end
@@ -82,17 +100,17 @@ end
 class APICatalogHighLighted
 	super APICatalogHandler
 
-	redef fun get(req, res) do res.json list_best(catalog.score)
+	redef fun get(req, res) do res.json list_best(config.catalog.score)
 end
 
 class APICatalogMostRequired
 	super APICatalogHandler
 
 	redef fun get(req, res) do
-		if catalog.deps.not_empty then
+		if config.catalog.deps.not_empty then
 			var reqs = new Counter[MPackage]
 			for p in config.model.mpackages do
-				reqs[p] = catalog.deps[p].smallers.length - 1
+				reqs[p] = config.catalog.deps[p].smallers.length - 1
 			end
 			res.json list_best(reqs)
 			return
@@ -104,7 +122,7 @@ end
 class APICatalogByTags
 	super APICatalogHandler
 
-	redef fun get(req, res) do res.json list_by(catalog.tag2proj)
+	redef fun get(req, res) do res.json list_by(config.catalog.tag2proj)
 end
 
 class APICatalogContributors
@@ -112,8 +130,8 @@ class APICatalogContributors
 
 	redef fun get(req, res) do
 		var obj = new JsonObject
-		obj["maintainers"] = new JsonArray.from(catalog.maint2proj.keys)
-		obj["contributors"] = new JsonArray.from(catalog.contrib2proj.keys)
+		obj["maintainers"] = new JsonArray.from(config.catalog.maint2proj.keys)
+		obj["contributors"] = new JsonArray.from(config.catalog.contrib2proj.keys)
 		res.json obj
 	end
 end
