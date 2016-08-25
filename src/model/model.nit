@@ -603,7 +603,7 @@ class MClassDef
 	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
-	redef var location: Location
+	redef var location
 
 	redef fun visibility do return mclass.visibility
 
