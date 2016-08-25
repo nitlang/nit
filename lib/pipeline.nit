@@ -73,6 +73,8 @@ redef interface Iterator[E]
 	# When the first iterator is terminated, the second is started.
 	#
 	#     assert ([1..20[.iterator + [20..40[.iterator).to_a	     ==  ([1..40[).to_a
+	#
+	# SEE: `Iterator2`
 	fun +(other: Iterator[E]): Iterator[E]
 	do
 		return new PipeJoin[E](self, other)
@@ -156,6 +158,95 @@ redef interface Iterator[E]
 	fun select(predicate: Function[E, Bool]): Iterator[E]
 	do
 		return new PipeSelect[E](self, predicate)
+	end
+end
+
+# Concatenates a sequence of iterators.
+#
+# Wraps an iterator of sub-iterators and iterates over the elements of the
+# sub-iterators.
+#
+# ~~~nit
+# var i: Iterator[Int]
+# var empty = new Array[Int]
+#
+# i = new Iterator2[Int]([
+# 	[1, 2, 3].iterator,
+# 	empty.iterator,
+# 	[4, 5].iterator
+# ].iterator)
+# assert i.to_a == [1, 2, 3, 4, 5]
+#
+# i = new Iterator2[Int]([
+# 	empty.iterator,
+# 	[42].iterator,
+# 	empty.iterator
+# ].iterator)
+# assert i.to_a == [42]
+# ~~~
+#
+# SEE: `Iterator::+`
+class Iterator2[E]
+	super Iterator[E]
+
+	# The inner iterator over sub-iterators.
+	var inner: Iterator[Iterator[E]]
+
+	redef fun finish
+	do
+		var i = current_iterator
+		if i != null then i.finish
+	end
+
+	redef fun is_ok
+	do
+		var i = current_iterator
+		if i == null then return false
+		return i.is_ok
+	end
+
+	redef fun item
+	do
+		var i = current_iterator
+		assert i != null
+		return i.item
+	end
+
+	redef fun next
+	do
+		var i = current_iterator
+		assert i != null
+		i.next
+	end
+
+	redef fun start
+	do
+		var i = current_iterator
+		if i != null then i.start
+	end
+
+	private var previous_iterator: nullable Iterator[E] = null
+
+	private fun current_iterator: nullable Iterator[E]
+	do
+		if previous_iterator == null then
+			# Get the first sub-iterator.
+			if inner.is_ok then
+				previous_iterator = inner.item
+				previous_iterator.start
+				inner.next
+			else
+				return null
+			end
+		end
+		# Get the first sub-iterator that has a current item.
+		while inner.is_ok and not previous_iterator.is_ok do
+			previous_iterator.finish
+			previous_iterator = inner.item
+			previous_iterator.start
+			inner.next
+		end
+		return previous_iterator
 	end
 end
 
