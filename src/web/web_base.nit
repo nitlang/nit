@@ -38,8 +38,8 @@ class NitwebConfig
 	var modelbuilder: ModelBuilder
 end
 
-# Specific nitcorn Action that uses a Model
-class ModelHandler
+# Specific handler for the nitweb API.
+abstract class APIHandler
 	super Handler
 
 	# App config.
@@ -50,25 +50,6 @@ class ModelHandler
 		if full_name == null then return null
 		return model.mentity_by_full_name(full_name.from_percent_encoding)
 	end
-
-	# Init the model view from the `req` uri parameters.
-	fun init_model_view(req: HttpRequest): ModelView do
-		var view = new ModelView(config.model)
-		var show_private = req.bool_arg("private") or else false
-		if not show_private then view.min_visibility = protected_visibility
-
-		view.include_fictive = req.bool_arg("fictive") or else false
-		view.include_empty_doc = req.bool_arg("empty-doc") or else true
-		view.include_test_suite = req.bool_arg("test-suite") or else false
-		view.include_attribute = req.bool_arg("attributes") or else true
-
-		return view
-	end
-end
-
-# Specific handler for nitweb API.
-abstract class APIHandler
-	super ModelHandler
 
 	# The JSON API does not filter anything by default.
 	#
@@ -126,7 +107,7 @@ redef class MEntity
 	end
 
 	# Get the full json repesentation of `self` with MEntityRefs resolved.
-	fun api_json(handler: ModelHandler): JsonObject do return json
+	fun api_json(handler: APIHandler): JsonObject do return json
 end
 
 redef class MEntityRef
