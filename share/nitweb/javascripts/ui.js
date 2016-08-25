@@ -18,7 +18,7 @@
 	angular
 		.module('ui', [ 'model' ])
 
-		.controller('SearchCtrl', ['Model', '$routeParams', '$scope', '$window', function(Model, $routeParams, $scope, $window) {
+		.controller('SearchCtrl', ['Model', '$routeParams', '$scope', '$location', function(Model, $routeParams, $scope, $location) {
 			$scope.query = '';
 
 			$scope.reset = function() {
@@ -50,13 +50,17 @@
 				}
 			}
 
-			$scope.selectEnter = function() {
-				$window.location.href = $scope.results[$scope.activeItem].web_url;
+			$scope.selectEnter = function(e) {
+				$location.url($scope.results[$scope.activeItem].web_url);
 				$scope.reset();
 			}
 
 			$scope.selectEscape = function() {
 				$scope.reset();
+			}
+
+			$scope.setActive = function(index) {
+				$scope.activeItem = index;
 			}
 
 			$scope.search = function() {
@@ -76,6 +80,17 @@
 
 			$scope.reset();
 		}])
+
+		.directive('searchCard', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				replace: true,
+				templateUrl: '/directives/search/card.html'
+			};
+		})
 
 		.directive('uiFilters', function() {
 			return {
