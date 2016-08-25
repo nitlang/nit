@@ -31,13 +31,10 @@ class APIInheritanceGraph
 	super APIHandler
 
 	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
 		var pdepth = req.int_arg("pdepth")
 		var cdepth = req.int_arg("cdepth")
-		var mentity = mentity_from_uri(req, res)
-		if mentity == null then
-			res.error 404
-			return
-		end
 		var g = new InheritanceGraph(mentity, view)
 		res.send g.draw(pdepth, cdepth).to_svg
 	end

@@ -36,28 +36,21 @@ class APIStars
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
-		if mentity == null then
-			res.error 404
-			return
-		end
-
+		if mentity == null then return
 		res.json mentity_ratings(mentity)
 	end
 
 	redef fun post(req, res) do
 		var mentity = mentity_from_uri(req, res)
-		if mentity == null then
-			res.error 404
-			return
-		end
+		if mentity == null then return
 		var obj = req.body.parse_json
 		if not obj isa JsonObject then
-			res.error 400
+			res.api_error(400, "Expected a JSON object")
 			return
 		end
 		var rating = obj["rating"]
 		if not rating isa Int then
-			res.error 400
+			res.api_error(400, "Expected a key `rating`")
 			return
 		end
 

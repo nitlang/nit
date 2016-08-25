@@ -143,10 +143,7 @@ class APIEntityInheritance
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
-		if mentity == null then
-			res.error 404
-			return
-		end
+		if mentity == null then return
 		res.json mentity.hierarchy_poset(view)[mentity]
 	end
 end
@@ -159,13 +156,10 @@ class APIEntityLinearization
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
-		if mentity == null then
-			res.error 404
-			return
-		end
+		if mentity == null then return
 		var lin = mentity.collect_linearization(config.mainmodule)
 		if lin == null then
-			res.error 404
+			res.api_error(404, "No linearization for mentity `{mentity.full_name}`")
 			return
 		end
 		res.json new JsonArray.from(lin)
@@ -180,6 +174,7 @@ class APIEntityDefs
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
 		var arr = new JsonArray
 		if mentity isa MModule then
 			for mclassdef in mentity.mclassdefs do arr.add mclassdef
@@ -190,7 +185,7 @@ class APIEntityDefs
 		else if mentity isa MProperty then
 			for mpropdef in mentity.mpropdefs do arr.add mpropdef
 		else
-			res.error 404
+			res.api_error(404, "No definition list for mentity `{mentity.full_name}`")
 			return
 		end
 		res.json arr
@@ -218,6 +213,7 @@ class APIEntityUML
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
 		var dot
 		if mentity isa MClassDef then mentity = mentity.mclass
 		if mentity isa MClass then
@@ -227,7 +223,7 @@ class APIEntityUML
 			var uml = new UMLModel(view, mentity)
 			dot = uml.generate_package_uml.write_to_string
 		else
-			res.error 404
+			res.api_error(404, "No UML for mentity `{mentity.full_name}`")
 			return
 		end
 		res.send render_dot(dot)
@@ -245,7 +241,7 @@ class APIEntityCode
 		if mentity == null then return
 		var source = render_source(mentity)
 		if source == null then
-			res.error 404
+			res.api_error(404, "No code for mentity `{mentity.full_name}`")
 			return
 		end
 		res.send source

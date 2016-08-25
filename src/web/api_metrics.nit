@@ -69,13 +69,10 @@ class APIStructuralMetrics
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
-		if mentity == null then
-			res.error 404
-			return
-		end
+		if mentity == null then return
 		var metrics = mentity.collect_metrics(self)
 		if metrics == null then
-			res.error 404
+			res.api_error(404, "No metric for mentity `{mentity.full_name}`")
 			return
 		end
 		res.json metrics

@@ -72,12 +72,12 @@ abstract class APIHandler
 	fun mentity_from_uri(req: HttpRequest, res: HttpResponse): nullable MEntity do
 		var id = req.param("id")
 		if id == null then
-			res.error 400
+			res.api_error(400, "Expected mentity full name")
 			return null
 		end
 		var mentity = find_mentity(view, id)
 		if mentity == null then
-			res.error 404
+			res.api_error(404, "MEntity `{id}` not found")
 		end
 		return mentity
 	end
@@ -89,6 +89,42 @@ class APIRouter
 
 	# App config
 	var config: NitwebConfig
+end
+
+redef class HttpResponse
+
+	# Return an HTTP error response with `status`
+	#
+	# Like the rest of the API, errors are formated as JSON:
+	# ~~~json
+	# { "status": 404, "message": "Not found" }
+	# ~~~
+	fun api_error(status: Int, message: String) do
+		json(new APIError(status, message), status)
+	end
+end
+
+# An error returned by the API.
+#
+# Can be serialized to json.
+class APIError
+	super Jsonable
+
+	# Reponse status
+	var status: Int
+
+	# Response error message
+	var message: String
+
+	# Json Object for this error
+	var json: JsonObject is lazy do
+		var obj = new JsonObject
+		obj["status"] = status
+		obj["message"] = message
+		return obj
+	end
+
+	redef fun to_json do return json.to_json
 end
 
 redef class MEntity
