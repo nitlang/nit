@@ -133,6 +133,7 @@ redef class Label
 		end
 
 		var max_length = 50
+		var parent = self.parent
 		if parent isa HorizontalLayout and parent.parent isa BeerView then
 			# This is the name of a beer, remember its a hack
 			max_length = 20

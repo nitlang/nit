@@ -35,8 +35,7 @@ class WebSocketListener
 	var listener: TCPServer
 
 	# Creates a new Websocket server listening on given port with `max_clients` slots available
-	init(port: Int, max_clients: Int)
-	do
+	init(port: Int, max_clients: Int) is old_style_init do
 		listener = new TCPServer(port)
 		listener.listen max_clients
 	end

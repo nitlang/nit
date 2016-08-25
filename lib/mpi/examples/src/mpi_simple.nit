@@ -27,8 +27,7 @@ class ProcessorInfo
 	var name: String
 	var string_of_random_length: String
 
-	init(mpi: MPI)
-	do
+	init(mpi: MPI) is old_style_init do
 		self.rank = comm_world.rank.to_i
 		self.size = comm_world.size
 		self.name = mpi.processor_name

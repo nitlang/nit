@@ -173,7 +173,7 @@ DISTINCT day FROM daily WHERE beer=(SELECT ROWID FROM beers WHERE name="{{{beer.
 	fun subscribers: Array[String]
 	do
 		var subs = new Array[String]
-		for row in select("email FROM subscribers") do subs.add row[0].to_s
+		for row in select("email FROM subscribers").as(not null) do subs.add row[0].to_s
 		return subs
 	end
 

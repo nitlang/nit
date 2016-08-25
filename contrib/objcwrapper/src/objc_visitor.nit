@@ -77,7 +77,7 @@ redef class Nsignature_block_signature
 		assert c != null
 
 		var method = new ObjcMethod(c)
-		method.return_type = n_signature_return_type.to_type
+		method.return_type = n_signature_return_type.as(not null).to_type
 		method.is_class_property = n_scope.is_class_property
 
 		for n_param in n_parameter.children do

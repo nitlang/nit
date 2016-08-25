@@ -19,6 +19,7 @@ import opportunity_model
 
 redef class OpportunityDB
 
+	# Clear test database.
 	fun wipe do
 		execute("DROP TABLE people;")
 		execute("DROP TABLE meetups;")
