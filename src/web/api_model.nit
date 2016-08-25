@@ -17,6 +17,7 @@ module api_model
 import web_base
 import highlight
 import uml
+import model::model_index
 
 redef class APIRouter
 	redef init do
@@ -90,14 +91,14 @@ end
 class APISearch
 	super APIList
 
-	redef fun list_mentities(req) do
+	redef fun get(req, res) do
 		var q = req.string_arg("q")
-		var mentities = new Array[MEntity]
-		if q == null then return mentities
-		for mentity in view.mentities do
-			if mentity.name.has_prefix(q) then mentities.add mentity
+		if q == null then
+			res.json new JsonArray
+			return
 		end
-		return mentities
+		var n = req.int_arg("n")
+		res.json new JsonArray.from(config.view.find(q, n))
 	end
 end
 
