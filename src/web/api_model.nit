@@ -178,20 +178,20 @@ class APIEntityDefs
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		var arr = new JsonArray
+		var mentities: Array[MEntity]
 		if mentity isa MModule then
-			for mclassdef in mentity.mclassdefs do arr.add mclassdef
+			mentities = mentity.mclassdefs
 		else if mentity isa MClass then
-			for mclassdef in mentity.mclassdefs do arr.add mclassdef
+			mentities = mentity.mclassdefs
 		else if mentity isa MClassDef then
-			for mpropdef in mentity.mpropdefs do arr.add mpropdef
+			mentities = mentity.mpropdefs
 		else if mentity isa MProperty then
-			for mpropdef in mentity.mpropdefs do arr.add mpropdef
+			mentities = mentity.mpropdefs
 		else
 			res.api_error(404, "No definition list for mentity `{mentity.full_name}`")
 			return
 		end
-		res.json arr
+		res.json new JsonArray.from(mentities)
 	end
 end
 
