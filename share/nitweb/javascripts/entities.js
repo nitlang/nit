@@ -248,6 +248,8 @@
 							}
 						}
 					};
+
+					if($scope.isActive()) $scope.loadCardCode();
 				}
 			};
 		}])
