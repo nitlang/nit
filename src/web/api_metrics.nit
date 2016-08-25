@@ -17,12 +17,10 @@ module api_metrics
 import web_base
 import metrics
 
-# Group all api handlers in one router.
-class APIMetricsRouter
-	super APIRouter
-
-	init do
-		use("/structural/:id", new APIStructuralMetrics(config))
+redef class APIRouter
+	redef init do
+		super
+		use("/metrics/structural/:id", new APIStructuralMetrics(config))
 	end
 end
 

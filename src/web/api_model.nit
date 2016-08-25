@@ -18,6 +18,21 @@ import web_base
 import highlight
 import uml
 
+redef class APIRouter
+	redef init do
+		super
+		use("/list", new APIList(config))
+		use("/search", new APISearch(config))
+		use("/random", new APIRandom(config))
+		use("/entity/:id", new APIEntity(config))
+		use("/code/:id", new APIEntityCode(config))
+		use("/uml/:id", new APIEntityUML(config))
+		use("/linearization/:id", new APIEntityLinearization(config))
+		use("/defs/:id", new APIEntityDefs(config))
+		use("/inheritance/:id", new APIEntityInheritance(config))
+	end
+end
+
 # List all mentities.
 #
 # MEntities can be filtered on their kind using the `k` parameter.

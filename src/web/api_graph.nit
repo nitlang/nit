@@ -19,12 +19,10 @@ import web_base
 import dot
 import uml
 
-# Group all api handlers in one router.
-class APIGraphRouter
-	super APIRouter
-
+redef class APIRouter
 	init do
-		use("/inheritance/:id", new APIInheritanceGraph(config))
+		super
+		use("/graph/inheritance/:id", new APIInheritanceGraph(config))
 	end
 end
 

@@ -21,3 +21,7 @@ import api_graph
 import api_docdown
 import api_metrics
 import api_feedback
+
+redef class APIRouter
+	redef init do super
+end

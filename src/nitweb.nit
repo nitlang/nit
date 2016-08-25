@@ -85,7 +85,7 @@ private class NitwebPhase
 
 		app.use_before("/*", new SessionInit)
 		app.use_before("/*", new RequestClock)
-		app.use("/api", new NitwebAPIRouter(config))
+		app.use("/api", new APIRouter(config))
 		app.use("/login", new GithubLogin(config.github_client_id))
 		app.use("/oauth", new GithubOAuthCallBack(config.github_client_id, config.github_client_secret))
 		app.use("/logout", new GithubLogout)
@@ -93,29 +93,6 @@ private class NitwebPhase
 		app.use_after("/*", new ConsoleLog)
 
 		app.listen(config.app_host, config.app_port)
-	end
-end
-
-# Group all api handlers in one router.
-class NitwebAPIRouter
-	super APIRouter
-
-	init do
-		use("/catalog", new APICatalogRouter(config))
-		use("/list", new APIList(config))
-		use("/search", new APISearch(config))
-		use("/random", new APIRandom(config))
-		use("/entity/:id", new APIEntity(config))
-		use("/code/:id", new APIEntityCode(config))
-		use("/uml/:id", new APIEntityUML(config))
-		use("/linearization/:id", new APIEntityLinearization(config))
-		use("/defs/:id", new APIEntityDefs(config))
-		use("/feedback/", new APIFeedbackRouter(config))
-		use("/inheritance/:id", new APIEntityInheritance(config))
-		use("/graph/", new APIGraphRouter(config))
-		use("/docdown/", new APIDocdown(config))
-		use("/metrics/", new APIMetricsRouter(config))
-		use("/user", new GithubUser)
 	end
 end
 

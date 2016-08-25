@@ -40,16 +40,14 @@ redef class NitwebConfig
 	end
 end
 
-# Group all api handlers in one router.
-class APICatalogRouter
-	super APIRouter
-
-	init do
-		use("/highlighted", new APICatalogHighLighted(config))
-		use("/required", new APICatalogMostRequired(config))
-		use("/bytags", new APICatalogByTags(config))
-		use("/contributors", new APICatalogContributors(config))
-		use("/stats", new APICatalogStats(config))
+redef class APIRouter
+	redef init do
+		super
+		use("/catalog/highlighted", new APICatalogHighLighted(config))
+		use("/catalog/required", new APICatalogMostRequired(config))
+		use("/catalog/bytags", new APICatalogByTags(config))
+		use("/catalog/contributors", new APICatalogContributors(config))
+		use("/catalog/stats", new APICatalogStats(config))
 	end
 end
 

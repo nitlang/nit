@@ -23,12 +23,10 @@ redef class NitwebConfig
 	var stars: MongoCollection is lazy do return db.collection("stars")
 end
 
-# Group all api handlers in one router
-class APIFeedbackRouter
-	super APIRouter
-
-	init do
-		use("/stars/:id", new APIStars(config))
+redef class APIRouter
+	redef init do
+		super
+		use("/feedback/stars/:id", new APIStars(config))
 	end
 end
 

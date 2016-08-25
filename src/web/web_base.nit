@@ -106,7 +106,7 @@ end
 class APIRouter
 	super Router
 
-	# App config.
+	# App config
 	var config: NitwebConfig
 end
 
