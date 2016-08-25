@@ -768,8 +768,10 @@ class PullRef
 	# User pointed by `self`.
 	var user: User is writable
 
-	# Repo pointed by `self`.
-	var repo: Repo is writable
+	# Repo pointed by `self` (if any).
+	#
+	# A `null` value means the `repo` was deleted.
+	var repo: nullable Repo is writable
 end
 
 # A Github label.
