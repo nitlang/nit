@@ -34,11 +34,11 @@ redef class MDoc
 	# Full comment HTML escaped.
 	var documentation: String is lazy do return content.join("\n").html_escape
 
-	private var markdown_proc: MarkdownProcessor is lazy do
+	private var markdown_proc: MarkdownProcessor is lazy, writable do
 		return original_mentity.as(not null).model.nitdoc_md_processor
 	end
 
-	private var inline_proc: MarkdownProcessor is lazy do
+	private var inline_proc: MarkdownProcessor is lazy, writable do
 		return original_mentity.as(not null).model.nitdoc_inline_processor
 	end
 
@@ -197,7 +197,7 @@ end
 
 redef class Model
 	# Get a markdown processor for Nitdoc comments.
-	var nitdoc_md_processor: MarkdownProcessor is lazy do
+	var nitdoc_md_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
 		proc.emitter.decorator = new NitdocDecorator
 		return proc
@@ -206,7 +206,7 @@ redef class Model
 	# Get a markdown inline processor for Nitdoc comments.
 	#
 	# This processor is specificaly designed to inlinable doc elements like synopsys.
-	var nitdoc_inline_processor: MarkdownProcessor is lazy do
+	var nitdoc_inline_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
 		proc.emitter.decorator = new InlineDecorator
 		return proc
