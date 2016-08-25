@@ -23,5 +23,19 @@ import api_metrics
 import api_feedback
 
 redef class APIRouter
-	redef init do super
+	redef init do
+		super
+		use("/*", new APIErrorHandler(config)) # catch 404 errors
+	end
+end
+
+# Error handler user to catch non resolved request by the API
+#
+# Displays a JSON formatted 404 error.
+class APIErrorHandler
+	super APIHandler
+
+	redef fun all(req, res) do
+		res.api_error(404, "Not found")
+	end
 end
