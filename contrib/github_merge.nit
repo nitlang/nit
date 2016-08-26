@@ -92,16 +92,19 @@ end
 
 var curl = new GithubCurl(auth, "Merge-o-matic (nitlang/nit)")
 
-if args.length != 1 then
+if args.is_empty then
 	# Without args, list `ok_will_merge`
 	var x = curl.get_and_check("https://api.github.com/repos/nitlang/nit/issues?labels=ok_will_merge")
 	for y in x.json_as_a do
 		var number = y.json_as_map["number"].as(Int)
 		curl.getpr(number)
 	end
-else
+	return
+end
+
+for arg in args do
 	# With a arg, merge the PR
-	var number = args.first.to_i
+	var number = arg.to_i
 	var pr = curl.getpr(number)
 	var revs = curl.getrev(pr)
 
