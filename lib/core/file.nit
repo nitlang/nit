@@ -1216,14 +1216,20 @@ redef class String
 			path.add('/')
 		end
 		var error: nullable Error = null
-		for d in dirs do
+		for i in [0 .. dirs.length - 1[ do
+			var d = dirs[i]
 			if d.is_empty then continue
 			path.append(d)
 			path.add('/')
-			var res = path.to_s.to_cstring.file_mkdir(mode)
+			if path.file_exists then continue
+			var res = path.to_cstring.file_mkdir(mode)
 			if not res and error == null then
 				error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 			end
+		end
+		var res = self.to_cstring.file_mkdir(mode)
+		if not res and error == null then
+			error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 		end
 		return error
 	end
