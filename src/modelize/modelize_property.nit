@@ -1158,8 +1158,8 @@ redef class AAttrPropdef
 	# Is the node tagged optional?
 	var is_optional = false
 
-	# Has the node a default value?
-	# Could be through `n_expr` or `n_block`
+	# Does the node have a default value?
+	# Could be through `n_expr`, `n_block` or `is_lazy`
 	var has_value = false
 
 	# The guard associated to a lazy attribute.
