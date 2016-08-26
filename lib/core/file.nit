@@ -888,12 +888,12 @@ redef class Text
 	do
 		for i in substrings do s.write_native(i.to_cstring, 0, i.byte_length)
 	end
+
+	# return true if a file with this names exists
+	fun file_exists: Bool do return to_cstring.file_exists
 end
 
 redef class String
-	# return true if a file with this names exists
-	fun file_exists: Bool do return to_cstring.file_exists
-
 	# The status of a file. see POSIX stat(2).
 	fun file_stat: nullable FileStat
 	do
