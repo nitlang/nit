@@ -33,41 +33,41 @@ For ease of use, this wrapper introduce a Nit model to handle CoreNLP XML result
 
 [[doc: NLPDocument]]
 
-[[doc: NLPDocument::from_xml]]
-[[doc: NLPDocument::from_xml_file]]
-[[doc: NLPDocument::sentences]]
+[[doc: nlp::NLPDocument::from_xml]]
+[[doc: nlp::NLPDocument::from_xml_file]]
+[[doc: nlp::NLPDocument::sentences]]
 
 ### NLPSentence
 
 [[doc: NLPSentence]]
 
-[[doc: NLPSentence::tokens]]
+[[doc: nlp::NLPSentence::tokens]]
 
 ### NLPToken
 
 [[doc: NLPToken]]
 
-[[doc: NLPToken::word]]
-[[doc: NLPToken::lemma]]
-[[doc: NLPToken::pos]]
+[[doc: nlp::NLPToken::word]]
+[[doc: nlp::NLPToken::lemma]]
+[[doc: nlp::NLPToken::pos]]
 
 ### NLP Processor
 
 [[doc: NLPProcessor]]
 
-[[doc: NLPProcessor::java_cp]]
+[[doc: nlp::NLPProcessor::java_cp]]
 
-[[doc: NLPProcessor::process]]
-[[doc: NLPProcessor::process_file]]
-[[doc: NLPProcessor::process_files]]
+[[doc: nlp::NLPProcessor::process]]
+[[doc: nlp::NLPProcessor::process_file]]
+[[doc: nlp::NLPProcessor::process_files]]
 
 ## Vector Space Model
 
 [[doc: NLPVector]]
 
-[[doc: NLPDocument::vector]]
+[[doc: vector]]
 
-[[doc: NLPVector::cosine_similarity]]
+[[doc: nlp::NLPVector::cosine_similarity]]
 
 ## NitNLP binary
 

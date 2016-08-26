@@ -8,7 +8,7 @@ This module provides a Nit object oriented interface to access the Github api.
 
 ### Authentification
 
-[[doc: GithubAPI::auth]]
+[[doc: auth]]
 
 Token can also be recovered from user config with `get_github_oauth`.
 
@@ -28,7 +28,7 @@ Token can also be recovered from user config with `get_github_oauth`.
 
 ### Other data
 
-[[list: api]]
+[[list: github::api]]
 
 ### Advanced uses
 
@@ -38,11 +38,11 @@ Token can also be recovered from user config with `get_github_oauth`.
 
 #### Custom requests
 
-[[doc: GithubAPI::get]]
+[[doc: github::GithubAPI::get]]
 
 #### Change the user agent
 
-[[doc: GithubAPI::user_agent]]
+[[doc: github::GithubAPI::user_agent]]
 
 #### Debugging
 

@@ -22,6 +22,7 @@ import semantize
 import doc_commands
 import doc_poset
 import doc::console_templates
+import model::model_index
 
 # Nitx handles console I/O.
 #
@@ -95,7 +96,11 @@ class Nitx
 			return
 		end
 		var res = query.perform(self, doc)
-		var page = query.make_results(self, res)
+		var suggest = null
+		if res.is_empty then
+			suggest = query.suggest(self, doc)
+		end
+		var page = query.make_results(self, res, suggest)
 		print page.write_to_string
 	end
 end
@@ -118,11 +123,43 @@ redef interface DocCommand
 	# Looks up the `doc` model and returns possible matches.
 	fun perform(nitx: Nitx, doc: DocModel): Array[NitxMatch] is abstract
 
+	# Looks up the `doc` model and returns possible suggestions.
+	fun suggest(nitx: Nitx, doc: DocModel): nullable Array[MEntity] do
+		return find_suggestions(doc, args.first)
+	end
+
 	# Pretty prints the results for the console.
-	fun make_results(nitx: Nitx, results: Array[NitxMatch]): DocPage do
+	fun make_results(nitx: Nitx, results: Array[NitxMatch], suggest: nullable Array[MEntity]): DocPage do
 		var page = new DocPage("results", "Results")
-		page.root.add_child(new QueryResultArticle("results", "Results", self, results))
+		page.root.add_child(new QueryResultArticle("results", "Results", self, results, suggest))
 		return page
+	end
+
+	# Lookup mentities based on a `query` string.
+	#
+	# 1- lookup by first name (returns always one value)
+	# 2- lookup by name (can return conflicts)
+	fun find_mentities(doc: DocModel, query: String): Array[MEntityMatch] do
+		var res = new Array[MEntityMatch]
+
+		# First lookup by full_name
+		var mentity = doc.mentity_by_full_name(query)
+		if mentity != null then
+			res.add new MEntityMatch(self, mentity)
+			return res
+		end
+
+		# If no results, lookup by name
+		for m in doc.mentities_by_name(query) do
+			res.add new MEntityMatch(self, m)
+		end
+
+		return res
+	end
+
+	# Suggest some mentities based on a `query` string.
+	fun find_suggestions(doc: DocModel, query: String): Array[MEntity] do
+		return doc.find(query, 3)
 	end
 end
 
@@ -147,16 +184,9 @@ class MEntityMatch
 end
 
 redef class CommentCommand
-	redef fun perform(nitx, doc) do
-		var name = args.first
-		var res = new Array[NitxMatch]
-		for mentity in doc.mentities_by_name(name) do
-			res.add new MEntityMatch(self, mentity)
-		end
-		return res
-	end
+	redef fun perform(nitx, doc) do return find_mentities(doc, args.first)
 
-	redef fun make_results(nitx, results) do
+	redef fun make_results(nitx, results, suggest) do
 		var len = results.length
 		if len == 1 then
 			var res = results.first.as(MEntityMatch)
@@ -266,7 +296,7 @@ redef class ArticleCommand
 		return res
 	end
 
-	redef fun make_results(nitx, results) do
+	redef fun make_results(nitx, results, suggest) do
 		var len = results.length
 		# FIXME how to render the pager for one worded namespaces like "core"?
 		if len == 1 then
@@ -304,7 +334,7 @@ end
 abstract class HierarchiesQuery
 	super DocCommand
 
-	redef fun make_results(nitx, results) do
+	redef fun make_results(nitx, results, suggest) do
 		var page = new DocPage("hierarchy", "Hierarchy")
 		for result in results do
 			if not result isa PageMatch then continue
@@ -382,15 +412,15 @@ redef class CodeCommand
 			return res
 		end
 		# else, lookup the model by name
-		for mentity in doc.mentities_by_name(name) do
-			if mentity isa MClass then continue
-			if mentity isa MProperty then continue
-			res.add new CodeMatch(self, mentity.cs_location, mentity.cs_source_code)
+		for match in find_mentities(doc, name) do
+			if match.mentity isa MClass then continue
+			if match.mentity isa MProperty then continue
+			res.add new CodeMatch(self, match.mentity.cs_location, match.mentity.cs_source_code)
 		end
 		return res
 	end
 
-	redef fun make_results(nitx, results) do
+	redef fun make_results(nitx, results, suggest) do
 		var page = new DocPage("results", "Code Results")
 		for res in results do
 			page.add new CodeQueryArticle("results", "Results", self, res.as(CodeMatch))
@@ -487,10 +517,25 @@ private class QueryResultArticle
 	# Results to display.
 	var results: Array[NitxMatch]
 
+	# Optional suggestion when no matches where found
+	var suggest: nullable Array[MEntity] = null is optional
+
 	redef fun render_title do
 		var len = results.length
 		if len == 0 then
-			add "No result found for '{query.string}'..."
+			addn "No result found for '{query.string}'..."
+			var suggest = self.suggest
+			if suggest != null and suggest.not_empty then
+				add "\nDid you mean "
+				var i = 0
+				for s in suggest do
+					add "`{s.full_name}`"
+					if i == suggest.length - 2 then add ", "
+					if i == suggest.length - 1 then add " or "
+					i += 1
+				end
+				add "?"
+			end
 		else
 			add "# {len} result(s) for '{query.string}'".green.bold
 		end

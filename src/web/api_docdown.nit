@@ -19,6 +19,7 @@ import api_graph
 intrude import doc_down
 intrude import markdown::wikilinks
 import doc_commands
+import model::model_index
 
 redef class APIRouter
 	redef init do
@@ -88,10 +89,49 @@ redef interface DocCommand
 		write_error(v, "Not yet implemented command `{token.link or else "null"}`")
 	end
 
-	# Find the MEntity ` with `full_name`.
-	fun find_mentity(model: ModelView, full_name: nullable String): nullable MEntity do
-		if full_name == null then return null
-		return model.mentity_by_full_name(full_name.from_percent_encoding)
+	# Find the MEntity that matches `name`.
+	#
+	# Write an error if the entity is not found
+	fun find_mentity(v: MarkdownEmitter, model: ModelView, name: nullable String): nullable MEntity do
+		if name == null then
+			write_error(v, "No MEntity found")
+			return null
+		end
+		# Lookup by full name
+		var mentity = model.mentity_by_full_name(name)
+		if mentity != null then return mentity
+
+		var mentities = model.mentities_by_name(name)
+		if mentities.is_empty then
+			var suggest = model.find(name, 3)
+			var msg = new Buffer
+			msg.append "No MEntity found for name `{name}`"
+			if suggest.not_empty then
+				msg.append " (suggestions: "
+				var i = 0
+				for s in suggest do
+					msg.append "`{s.full_name}`"
+					if i < suggest.length - 1 then msg.append ", "
+					i += 1
+				end
+				msg.append ")"
+			end
+			write_error(v, msg.write_to_string)
+			return null
+		else if mentities.length > 1 then
+			var msg = new Buffer
+			msg.append "Conflicts for name `{name}`"
+			msg.append " (conflicts: "
+			var i = 0
+			for s in mentities do
+				msg.append "`{s.full_name}`"
+				if i < mentities.length - 1 then msg.append ", "
+				i += 1
+			end
+			msg.append ")"
+			write_warning(v, msg.write_to_string)
+		end
+		return mentities.first
 	end
 
 	# Write a warning in the output
@@ -123,11 +163,8 @@ redef class UnknownCommand
 			return
 		end
 		var full_name = link.write_to_string
-		var mentity = find_mentity(model, full_name)
-		if mentity == null then
-			write_error(v, "Unknown command `{link}`")
-			return
-		end
+		var mentity = find_mentity(v, model, full_name)
+		if mentity == null then return
 		write_mentity_link(v, mentity)
 	end
 end
@@ -139,11 +176,8 @@ redef class ArticleCommand
 			return
 		end
 		var name = args.first
-		var mentity = find_mentity(model, name)
-		if mentity == null then
-			write_error(v, "No MEntity found for name `{name}`")
-			return
-		end
+		var mentity = find_mentity(v, model, name)
+		if mentity == null then return
 		var mdoc = mentity.mdoc_or_fallback
 		if mdoc == null then
 			write_warning(v, "No MDoc for mentity `{name}`")
@@ -165,11 +199,8 @@ redef class CommentCommand
 			return
 		end
 		var name = args.first
-		var mentity = find_mentity(model, name)
-		if mentity == null then
-			write_error(v, "No MEntity found for name `{name}`")
-			return
-		end
+		var mentity = find_mentity(v, model, name)
+		if mentity == null then return
 		var mdoc = mentity.mdoc_or_fallback
 		if mdoc == null then
 			write_warning(v, "No MDoc for mentity `{name}`")
@@ -186,7 +217,8 @@ redef class ListCommand
 			return
 		end
 		var name = args.first
-		var mentity = find_mentity(model, name)
+		var mentity = find_mentity(v, model, name)
+		if mentity == null then return
 		if mentity isa MPackage then
 			write_list(v, mentity.mgroups)
 		else if mentity isa MGroup then
@@ -231,11 +263,8 @@ redef class CodeCommand
 			return
 		end
 		var name = args.first
-		var mentity = find_mentity(model, name)
-		if mentity == null then
-			write_error(v, "No MEntity found for name `{name}`")
-			return
-		end
+		var mentity = find_mentity(v, model, name)
+		if mentity == null then return
 		if mentity isa MClass then mentity = mentity.intro
 		if mentity isa MProperty then mentity = mentity.intro
 		var source = render_source(mentity, v.decorator.as(NitwebDecorator).modelbuilder)
@@ -265,11 +294,8 @@ redef class GraphCommand
 			return
 		end
 		var name = args.first
-		var mentity = find_mentity(model, name)
-		if mentity == null then
-			write_error(v, "No MEntity found for name `{name}`")
-			return
-		end
+		var mentity = find_mentity(v, model, name)
+		if mentity == null then return
 		var g = new InheritanceGraph(mentity, model)
 		v.add g.draw(3, 3).to_svg
 	end
