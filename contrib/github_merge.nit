@@ -28,8 +28,11 @@ end
 
 redef class GithubCurl
 	# Get a given pull request (PR)
-	fun getpr(repo: String, number: Int): JsonObject
+	fun getpr(repo: String, number: Int): nullable JsonObject
 	do
+		var ir = get_and_check("https://api.github.com/repos/{repo}/issues/{number}")
+		var irm = ir.json_as_map
+		if not irm.has_key("pull_request") then return null
 		var pr = get_and_check("https://api.github.com/repos/{repo}/pulls/{number}")
 		var prm = pr.json_as_map
 		var sha = prm["head"].json_as_map["sha"].to_s
@@ -121,6 +124,10 @@ for arg in args do
 	# With a arg, merge the PR
 	var number = arg.to_i
 	var pr = curl.getpr(repo, number)
+	if pr == null then
+		print "Not a PR: {number}"
+		return
+	end
 	var revs = curl.getrev(repo, pr)
 
 	var mergemsg = new Template
