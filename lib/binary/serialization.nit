@@ -178,7 +178,7 @@ class BinaryDeserializer
 
 			# An invalid attribute name is an heuristic for invalid data.
 			# Hitting an object end marker will result in an empty string.
-			assert next_attribute_name.is_valid_id else
+			if not next_attribute_name.is_valid_id then
 
 				var error
 				if next_attribute_name.is_empty then
