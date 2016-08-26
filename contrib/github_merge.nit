@@ -36,7 +36,8 @@ redef class GithubCurl
 		var pr = get_and_check("https://api.github.com/repos/{repo}/pulls/{number}")
 		var prm = pr.json_as_map
 		var sha = prm["head"].json_as_map["sha"].to_s
-		var statuses = get_and_check("https://api.github.com/repos/{repo}/statuses/{sha}")
+		var statuses = get_and_check("https://api.github.com/repos/{repo}/commits/{sha}/status")
+		statuses = statuses.json_as_map
 		prm["statuses"] = statuses
 		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
 		var mergeable = prm["mergeable"]
@@ -45,11 +46,18 @@ redef class GithubCurl
 		else
 			print "\tmergeable: unknown"
 		end
-		var st = prm["statuses"].json_as_a
-		if not st.is_empty then
-			print "\tstatus: {st[0].json_as_map["state"].to_s}"
-		else
+		var state = statuses["state"]
+		if state == null then
 			print "\tstatus: not tested"
+		else
+			print "\tstatus: {state}"
+			var sts = statuses["statuses"].json_as_a
+			for st in sts do
+				st = st.json_as_map
+				var ctx = st["context"].to_s
+				state = st["state"].to_s
+				print "\tstatus {ctx}: {state}"
+			end
 		end
 		return prm
 	end
