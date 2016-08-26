@@ -57,6 +57,7 @@ redef class GithubCurl
 				var ctx = st["context"].to_s
 				state = st["state"].to_s
 				print "\tstatus {ctx}: {state}"
+				prm["status-{ctx}"] = state
 			end
 		end
 		return prm
@@ -100,8 +101,9 @@ var opt_auth = new OptionString("OAuth token", "--auth")
 var opt_query = new OptionString("Query to get issues (e.g. label=ok_will_merge)", "-q", "--query")
 var opt_keepgoing = new OptionBool("Skip merge conflicts", "-k", "--keep-going")
 var opt_all = new OptionBool("Merge all", "-a", "--all")
+var opt_status = new OptionArray("A status context that must be \"success\" (e.g. default)", "--status")
 var opts = new OptionContext
-opts.add_option(opt_repo, opt_auth, opt_query, opt_all, opt_keepgoing)
+opts.add_option(opt_repo, opt_auth, opt_query, opt_status, opt_all, opt_keepgoing)
 
 opts.parse(sys.args)
 var args = opts.rest
@@ -127,8 +129,14 @@ if args.is_empty then
 		var number = y.json_as_map["number"].as(Int)
 		var pr = curl.getpr(repo, number)
 		if pr == null then continue
+		for ctx in opt_status.value do
+			if pr.get_or_null("status-{ctx}") != "success" then
+				print "No \"success\" for {ctx}. Skip."
+				continue label
+			end
+		end
 		list.add number.to_s
-	end
+	end label
 
 	if not opt_all.value then return
 	args = list
