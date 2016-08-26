@@ -310,7 +310,7 @@ do
 			if type_name == "nullable Object" then
 				# Don't type check
 				code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
+	self.{{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
 """
 			else code.add """
 	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
