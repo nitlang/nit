@@ -17,6 +17,7 @@ module github_merge
 
 import github::github_curl
 import template
+import opts
 
 redef class Object
 	# Factorize cast
@@ -27,12 +28,12 @@ end
 
 redef class GithubCurl
 	# Get a given pull request (PR)
-	fun getpr(number: Int): JsonObject
+	fun getpr(repo: String, number: Int): JsonObject
 	do
-		var pr = get_and_check("https://api.github.com/repos/nitlang/nit/pulls/{number}")
+		var pr = get_and_check("https://api.github.com/repos/{repo}/pulls/{number}")
 		var prm = pr.json_as_map
 		var sha = prm["head"].json_as_map["sha"].to_s
-		var statuses = get_and_check("https://api.github.com/repos/nitlang/nit/statuses/{sha}")
+		var statuses = get_and_check("https://api.github.com/repos/{repo}/statuses/{sha}")
 		prm["statuses"] = statuses
 		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
 		var mergeable = prm["mergeable"]
@@ -51,13 +52,13 @@ redef class GithubCurl
 	end
 
 	# Get reviewers of a PR
-	fun getrev(pr: JsonObject): Array[String]
+	fun getrev(repo: String, pr: JsonObject): Array[String]
 	do
 		var number = pr["number"].as(Int)
 		var user = pr["user"].json_as_map["login"].as(String)
 		var comments = new Array[nullable Object]
-		comments.add_all(get_and_check("https://api.github.com/repos/nitlang/nit/issues/{number}/comments").json_as_a)
-		comments.add_all(get_and_check("https://api.github.com/repos/nitlang/nit/pulls/{number}/comments").json_as_a)
+		comments.add_all(get_and_check("https://api.github.com/repos/{repo}/issues/{number}/comments").json_as_a)
+		comments.add_all(get_and_check("https://api.github.com/repos/{repo}/pulls/{number}/comments").json_as_a)
 		var logins = new Array[String]
 		for c in comments do
 			var cm = c.json_as_map
@@ -83,21 +84,35 @@ end
 
 if "NIT_TESTING".environ == "true" then exit 0
 
-var auth = get_github_oauth
+var opt_repo = new OptionString("Repository (e.g. nitlang/nit)", "-r", "--repo")
+var opt_auth = new OptionString("OAuth token", "--auth")
+var opt_query = new OptionString("Query to get issues (e.g. label=ok_will_merge)", "-q", "--query")
+var opt_keepgoing = new OptionBool("Skip merge conflicts", "-k", "--keep-going")
+var opts = new OptionContext
+opts.add_option(opt_repo, opt_auth, opt_query, opt_keepgoing)
 
+opts.parse(sys.args)
+var args = opts.rest
+
+var auth = opt_auth.value or else ""
+if auth == "" then auth = get_github_oauth
 if auth == "" then
 	print "Warning: no github oauth token, you can configure one with"
 	print "    git config --add github.oauthtoken MYOAUTHTOKEN"
 end
 
+var repo = opt_repo.value or else "nitlang/nit"
+
+var query = opt_query.value or else "labels=ok_will_merge"
+
 var curl = new GithubCurl(auth, "Merge-o-matic (nitlang/nit)")
 
 if args.is_empty then
 	# Without args, list `ok_will_merge`
-	var x = curl.get_and_check("https://api.github.com/repos/nitlang/nit/issues?labels=ok_will_merge")
+	var x = curl.get_and_check("https://api.github.com/repos/{repo}/issues?{query}")
 	for y in x.json_as_a do
 		var number = y.json_as_map["number"].as(Int)
-		curl.getpr(number)
+		curl.getpr(repo, number)
 	end
 	return
 end
@@ -105,8 +120,8 @@ end
 for arg in args do
 	# With a arg, merge the PR
 	var number = arg.to_i
-	var pr = curl.getpr(number)
-	var revs = curl.getrev(pr)
+	var pr = curl.getpr(repo, number)
+	var revs = curl.getrev(repo, pr)
 
 	var mergemsg = new Template
 	mergemsg.add "Merge: {pr["title"].to_s}\n\n"
@@ -127,6 +142,10 @@ for arg in args do
 		continue
 	end
 	if system("git merge --no-ff --no-commit {sha}") != 0 then
+		if opt_keepgoing.value then
+			 system("git reset --merge")
+			 continue
+		end
 		system("cp mergemsg `git rev-parse --git-dir`/MERGE_MSG")
 		print "Problem during merge... Let's do the commit manually."
 		return
