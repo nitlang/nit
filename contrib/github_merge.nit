@@ -122,6 +122,10 @@ for arg in args do
 		print "Commit {sha} not in local repository; did you fetch github?"
 		return
 	end
+	if system("git merge-base --is-ancestor {sha} HEAD") == 0 then
+		print "Is already merged."
+		continue
+	end
 	if system("git merge --no-ff --no-commit {sha}") != 0 then
 		system("cp mergemsg `git rev-parse --git-dir`/MERGE_MSG")
 		print "Problem during merge... Let's do the commit manually."
