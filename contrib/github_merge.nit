@@ -17,6 +17,7 @@ module github_merge
 
 import github::github_curl
 import template
+import opts
 
 redef class Object
 	# Factorize cast
@@ -27,12 +28,16 @@ end
 
 redef class GithubCurl
 	# Get a given pull request (PR)
-	fun getpr(number: Int): JsonObject
+	fun getpr(repo: String, number: Int): nullable JsonObject
 	do
-		var pr = get_and_check("https://api.github.com/repos/nitlang/nit/pulls/{number}")
+		var ir = get_and_check("https://api.github.com/repos/{repo}/issues/{number}")
+		var irm = ir.json_as_map
+		if not irm.has_key("pull_request") then return null
+		var pr = get_and_check("https://api.github.com/repos/{repo}/pulls/{number}")
 		var prm = pr.json_as_map
 		var sha = prm["head"].json_as_map["sha"].to_s
-		var statuses = get_and_check("https://api.github.com/repos/nitlang/nit/statuses/{sha}")
+		var statuses = get_and_check("https://api.github.com/repos/{repo}/commits/{sha}/status")
+		statuses = statuses.json_as_map
 		prm["statuses"] = statuses
 		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
 		var mergeable = prm["mergeable"]
@@ -41,23 +46,31 @@ redef class GithubCurl
 		else
 			print "\tmergeable: unknown"
 		end
-		var st = prm["statuses"].json_as_a
-		if not st.is_empty then
-			print "\tstatus: {st[0].json_as_map["state"].to_s}"
-		else
+		var state = statuses["state"]
+		if state == null then
 			print "\tstatus: not tested"
+		else
+			print "\tstatus: {state}"
+			var sts = statuses["statuses"].json_as_a
+			for st in sts do
+				st = st.json_as_map
+				var ctx = st["context"].to_s
+				state = st["state"].to_s
+				print "\tstatus {ctx}: {state}"
+				prm["status-{ctx}"] = state
+			end
 		end
 		return prm
 	end
 
 	# Get reviewers of a PR
-	fun getrev(pr: JsonObject): Array[String]
+	fun getrev(repo: String, pr: JsonObject): Array[String]
 	do
 		var number = pr["number"].as(Int)
 		var user = pr["user"].json_as_map["login"].as(String)
 		var comments = new Array[nullable Object]
-		comments.add_all(get_and_check("https://api.github.com/repos/nitlang/nit/issues/{number}/comments").json_as_a)
-		comments.add_all(get_and_check("https://api.github.com/repos/nitlang/nit/pulls/{number}/comments").json_as_a)
+		comments.add_all(get_and_check("https://api.github.com/repos/{repo}/issues/{number}/comments").json_as_a)
+		comments.add_all(get_and_check("https://api.github.com/repos/{repo}/pulls/{number}/comments").json_as_a)
 		var logins = new Array[String]
 		for c in comments do
 			var cm = c.json_as_map
@@ -83,27 +96,61 @@ end
 
 if "NIT_TESTING".environ == "true" then exit 0
 
-var auth = get_github_oauth
+var opt_repo = new OptionString("Repository (e.g. nitlang/nit)", "-r", "--repo")
+var opt_auth = new OptionString("OAuth token", "--auth")
+var opt_query = new OptionString("Query to get issues (e.g. label=ok_will_merge)", "-q", "--query")
+var opt_keepgoing = new OptionBool("Skip merge conflicts", "-k", "--keep-going")
+var opt_all = new OptionBool("Merge all", "-a", "--all")
+var opt_status = new OptionArray("A status context that must be \"success\" (e.g. default)", "--status")
+var opts = new OptionContext
+opts.add_option(opt_repo, opt_auth, opt_query, opt_status, opt_all, opt_keepgoing)
 
+opts.parse(sys.args)
+var args = opts.rest
+
+var auth = opt_auth.value or else ""
+if auth == "" then auth = get_github_oauth
 if auth == "" then
 	print "Warning: no github oauth token, you can configure one with"
 	print "    git config --add github.oauthtoken MYOAUTHTOKEN"
 end
 
+var repo = opt_repo.value or else "nitlang/nit"
+
+var query = opt_query.value or else "labels=ok_will_merge"
+
 var curl = new GithubCurl(auth, "Merge-o-matic (nitlang/nit)")
 
-if args.length != 1 then
+if args.is_empty then
 	# Without args, list `ok_will_merge`
-	var x = curl.get_and_check("https://api.github.com/repos/nitlang/nit/issues?labels=ok_will_merge")
+	var x = curl.get_and_check("https://api.github.com/repos/{repo}/issues?{query}")
+	var list = new Array[String]
 	for y in x.json_as_a do
 		var number = y.json_as_map["number"].as(Int)
-		curl.getpr(number)
-	end
-else
+		var pr = curl.getpr(repo, number)
+		if pr == null then continue
+		for ctx in opt_status.value do
+			if pr.get_or_null("status-{ctx}") != "success" then
+				print "No \"success\" for {ctx}. Skip."
+				continue label
+			end
+		end
+		list.add number.to_s
+	end label
+
+	if not opt_all.value then return
+	args = list
+end
+
+for arg in args do
 	# With a arg, merge the PR
-	var number = args.first.to_i
-	var pr = curl.getpr(number)
-	var revs = curl.getrev(pr)
+	var number = arg.to_i
+	var pr = curl.getpr(repo, number)
+	if pr == null then
+		print "Not a PR: {number}"
+		return
+	end
+	var revs = curl.getrev(repo, pr)
 
 	var mergemsg = new Template
 	mergemsg.add "Merge: {pr["title"].to_s}\n\n"
@@ -119,7 +166,15 @@ else
 		print "Commit {sha} not in local repository; did you fetch github?"
 		return
 	end
+	if system("git merge-base --is-ancestor {sha} HEAD") == 0 then
+		print "Is already merged."
+		continue
+	end
 	if system("git merge --no-ff --no-commit {sha}") != 0 then
+		if opt_keepgoing.value then
+			 system("git reset --merge")
+			 continue
+		end
 		system("cp mergemsg `git rev-parse --git-dir`/MERGE_MSG")
 		print "Problem during merge... Let's do the commit manually."
 		return
