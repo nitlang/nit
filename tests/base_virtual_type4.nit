@@ -21,6 +21,5 @@ redef class A
 end
 
 var c = new B
-#alt1# c.e = new T
 c.e = new U
 c.e.foo
