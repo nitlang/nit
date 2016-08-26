@@ -91,8 +91,9 @@ var opt_repo = new OptionString("Repository (e.g. nitlang/nit)", "-r", "--repo")
 var opt_auth = new OptionString("OAuth token", "--auth")
 var opt_query = new OptionString("Query to get issues (e.g. label=ok_will_merge)", "-q", "--query")
 var opt_keepgoing = new OptionBool("Skip merge conflicts", "-k", "--keep-going")
+var opt_all = new OptionBool("Merge all", "-a", "--all")
 var opts = new OptionContext
-opts.add_option(opt_repo, opt_auth, opt_query, opt_keepgoing)
+opts.add_option(opt_repo, opt_auth, opt_query, opt_all, opt_keepgoing)
 
 opts.parse(sys.args)
 var args = opts.rest
@@ -113,11 +114,16 @@ var curl = new GithubCurl(auth, "Merge-o-matic (nitlang/nit)")
 if args.is_empty then
 	# Without args, list `ok_will_merge`
 	var x = curl.get_and_check("https://api.github.com/repos/{repo}/issues?{query}")
+	var list = new Array[String]
 	for y in x.json_as_a do
 		var number = y.json_as_map["number"].as(Int)
-		curl.getpr(repo, number)
+		var pr = curl.getpr(repo, number)
+		if pr == null then continue
+		list.add number.to_s
 	end
-	return
+
+	if not opt_all.value then return
+	args = list
 end
 
 for arg in args do
