@@ -290,7 +290,14 @@ class JsonDeserializer
 
 	redef fun deserialize_attribute(name, static_type)
 	do
-		assert not path.is_empty # This is an internal error, abort
+		if path.is_empty then
+			# The was a parsing error or the root is not an object
+			if not root isa Error then
+				errors.add new Error("Deserialization Error: parsed JSON value is not an object.")
+			end
+			return null
+		end
+
 		var current = path.last
 
 		if not current.keys.has(name) then
