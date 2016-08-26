@@ -148,7 +148,7 @@ abstract class Deserializer
 	var errors = new Array[Error]
 end
 
-# Deserialization got wrong attribute names
+# Error on invalid dynamic type for a deserialized attribute
 class AttributeTypeError
 	super Error
 
