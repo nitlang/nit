@@ -293,12 +293,12 @@ class SoundPool
 		return nsoundpool.play(id, left_volume, right_volume, priority, looping, rate)
 	end
 
-	# Load a sound by its name in the resources, the sound must be in the `res/raw` folder
-	fun load_name(resource_manager: ResourcesManager, context: NativeActivity, sound: String): Sound do
-		var id = resource_manager.raw_id(sound)
+	# Load a sound by its `name` in the resources, the sound must be in the `res/raw` folder
+	fun load_name(resource_manager: ResourcesManager, context: NativeActivity, name: String): Sound do
+		var id = resource_manager.raw_id(name)
 		var resval = nsoundpool.load_id(context, id, priority)
 		if  resval == -1 then
-			self.error = new Error("Unable to load sound from resources : " + sound)
+			self.error = new Error("Unable to load sound from resources: " + name)
 			return new Sound.priv_init(null, -1, self, self.error)
 		else
 			return new Sound.priv_init(null, resval, self, null)
