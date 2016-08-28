@@ -69,7 +69,7 @@ private class GLSLValidationPhase
 			in_path = status == 0
 			tool_is_in_path = in_path
 			if not in_path then
-				toolcontext.warning(nat.location, "glslvalidator",
+				toolcontext.advice(nat.location, "glslvalidator",
 					"Warning: program `glslangValidator` not in PATH, cannot validate this shader.")
 				return
 			end
