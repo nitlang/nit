@@ -64,12 +64,3 @@ end
 class Music
 	super PlayableAudio
 end
-
-redef class App
-
-	# Load a sound
-	fun load_sound(name: String): Sound is abstract
-
-	# Load a music
-	fun load_music(name: String): Music is abstract
-end

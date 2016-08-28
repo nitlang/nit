@@ -658,30 +658,6 @@ redef class App
 		App_native_activity(self).setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
 
-	# Retrieves a sound with a soundpool in the `assets` folder using its name.
-	# Used to play short songs, can play multiple sounds simultaneously
-	redef fun load_sound(path) do
-		var fd = asset_manager.open_fd(path)
-		if not fd.is_java_null then
-			return add_to_sounds(default_soundpool.load_asset_fd(fd)).as(Sound)
-		else
-			var error = new Error("Failed to load Sound {path}")
-			return new Sound.priv_init(null, -1, default_soundpool, error)
-		end
-	end
-
-	# Retrieves a music with a media player in the `assets` folder using its name.
-	# Used to play long sounds or musics, can't play multiple sounds simultaneously
-	redef fun load_music(path) do
-		var fd = asset_manager.open_fd(path)
-		if not fd.is_java_null then
-			return add_to_sounds(default_mediaplayer.data_source_fd(fd)).as(Music)
-		else
-			var error = new Error("Failed to load music {path}")
-			return new Music.priv_init(null, default_mediaplayer, error)
-		end
-	end
-
 	# Same as `load_sound` but load the sound from the `res/raw` folder
 	fun load_sound_from_res(sound_name: String): Sound do
 		return add_to_sounds(default_soundpool.load_name(resource_manager,self.native_activity, sound_name)).as(Sound)

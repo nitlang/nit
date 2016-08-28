@@ -50,15 +50,3 @@ redef class Music
 	redef fun pause do end
 	redef fun resume do end
 end
-
-redef class App
-	redef fun load_sound(name)
-	do
-		return new Sound(name)
-	end
-
-	redef fun load_music(name)
-	do
-		return new Music(name)
-	end
-end
