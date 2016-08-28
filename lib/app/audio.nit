@@ -31,8 +31,8 @@ import android::audio is conditional(android)
 # Abstraction of a playable Audio
 abstract class PlayableAudio
 
-	# Name of this playable audio
-	var name: String
+	# Path to the audio file in the assets folder
+	var path: String
 
 	# Last error on this sound, if any
 	var error: nullable Error = null is writable

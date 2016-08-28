@@ -14,20 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Linux audio services
+# Linux audio implementation
 module audio
 
 import app::audio
 import linux
 
-# Simple audio asset
 redef class Sound
 
 	redef fun play do
-		if name.has_suffix(".wav") then
-			sys.system "aplay -q {app.assets_dir}{name} &"
-		else if name.has_suffix(".mp3") then
-			sys.system "mpg123 -q {app.assets_dir}{name} &"
+		if path.has_suffix(".wav") then
+			sys.system "aplay -q {app.assets_dir}{path} &"
+		else if path.has_suffix(".mp3") then
+			sys.system "mpg123 -q {app.assets_dir}{path} &"
 		end
 	end
 
@@ -39,10 +38,10 @@ end
 redef class Music
 
 	redef fun play do
-		if name.has_suffix(".wav") then
-			sys.system "aplay -q {app.assets_dir}{name} &"
-		else if name.has_suffix(".mp3") then
-			sys.system "mpg123 -q {app.assets_dir}{name} &"
+		if path.has_suffix(".wav") then
+			sys.system "aplay -q {app.assets_dir}{path} &"
+		else if path.has_suffix(".mp3") then
+			sys.system "mpg123 -q {app.assets_dir}{path} &"
 		end
 	end
 

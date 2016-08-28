@@ -280,7 +280,7 @@ class SoundPool
 		var resval = nsoundpool.load_path(path.to_java_string, priority)
 		sys.jni_env.pop_local_frame
 		if  resval == -1 then
-			self.error = new Error("Unable to load sound from path : " + path)
+			self.error = new Error("Unable to load sound from path: " + path)
 			return new Sound.priv_init(null, -1, self, self.error)
 		else
 			return new Sound.priv_init(null, resval, self, null)
@@ -525,16 +525,16 @@ redef class Sound
 
 	redef fun load do
 		if is_loaded then return
-		var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, self.name.strip_extension)
+		var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, path.strip_extension)
 		if retval_resources == -1 then
-			self.error = new Error("Failed to load " + self.name)
-			var nam = app.asset_manager.open_fd(self.name)
+			self.error = new Error("Failed to load " + path)
+			var nam = app.asset_manager.open_fd(path)
 			if nam.is_java_null then
-				self.error = new Error("Failed to get file descriptor for " + self.name)
+				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var retval_assets = app.default_soundpool.load_asset_fd_rid(nam)
 				if retval_assets == -1 then
-					self.error = new Error("Failed to load" + self.name)
+					self.error = new Error("Failed to load " + path)
 				else
 					self.soundpool_id = retval_assets
 					self.soundpool = app.default_soundpool
@@ -594,12 +594,12 @@ redef class Music
 
 	redef fun load do
 		if is_loaded then return
-		var mp_sound_resources = app.default_mediaplayer.load_sound(app.resource_manager.raw_id(self.name.strip_extension), app.native_activity)
+		var mp_sound_resources = app.default_mediaplayer.load_sound(app.resource_manager.raw_id(path.strip_extension), app.native_activity)
 		if mp_sound_resources.error != null then
 			self.error = mp_sound_resources.error
-			var nam = app.asset_manager.open_fd(self.name)
+			var nam = app.asset_manager.open_fd(path)
 			if nam.is_java_null then
-				self.error = new Error("Failed to get file descriptor for " + self.name)
+				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var mp_sound_assets = app.default_mediaplayer.data_source_fd(nam)
 				if mp_sound_assets.error != null then
