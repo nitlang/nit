@@ -498,7 +498,7 @@ redef class PlayableAudio
 	# Used when the app pause all sounds or resume all sounds
 	var paused: Bool = false
 
-	redef init do add_to_sounds(self)
+	redef init do sounds.add self
 end
 
 redef class Sound
@@ -666,12 +666,16 @@ redef class App
 
 	# Same as `load_sound` but load the sound from the `res/raw` folder
 	fun load_sound_from_res(sound_name: String): Sound do
-		return add_to_sounds(default_soundpool.load_name(resource_manager,self.native_activity, sound_name)).as(Sound)
+		var sound = default_soundpool.load_name(resource_manager,self.native_activity, sound_name)
+		sys.sounds.add sound
+		return sound
 	end
 
 	# Same as `load_music` but load the sound from the `res/raw` folder
 	fun load_music_from_res(music: String): Music do
-		return add_to_sounds(default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity)).as(Music)
+		var sound = default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity)
+		sys.sounds.add sound
+		return sound
 	end
 
 	redef fun on_pause do
@@ -710,10 +714,4 @@ redef class Sys
 	# Sounds handled by the application, when you load a sound, it's added to this list.
 	# This array is used in `pause` and `resume`
 	private var sounds = new Array[PlayableAudio]
-
-	# Factorizes `sounds.add` to use it in `load_music`, `load_sound`, `load_music_from_res` and `load_sound_from_res`
-	private fun add_to_sounds(sound: PlayableAudio): PlayableAudio do
-		sounds.add(sound)
-		return sound
-	end
 end
