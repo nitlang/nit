@@ -527,7 +527,7 @@ redef class Sound
 		if is_loaded then return
 		var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, self.name.strip_extension)
 		if retval_resources == -1 then
-			self.error = new Error("failed to load" + self.name)
+			self.error = new Error("Failed to load " + self.name)
 			var nam = app.asset_manager.open_fd(self.name)
 			if nam.is_java_null then
 				self.error = new Error("Failed to get file descriptor for " + self.name)
@@ -549,6 +549,9 @@ redef class Sound
 			self.soundpool.error = null
 		end
 		is_loaded = true
+
+		var error = error
+		if error != null then print_error error
 	end
 
 	redef fun play do
@@ -613,6 +616,9 @@ redef class Music
 			self.media_player.error = null
 		end
 		is_loaded = true
+
+		var error = error
+		if error != null then print_error error
 	end
 
 	redef fun play do
