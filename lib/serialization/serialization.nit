@@ -100,8 +100,14 @@ abstract class Deserializer
 	# The `static_type` can be used as last resort if the deserialized object
 	# desn't have any metadata declaring the dynamic type.
 	#
+	# Return the deserialized value or null on error, and set
+	# `deserialize_attribute_missing` to whether the attribute was missing.
+	#
 	# Internal method to be implemented by the engines.
 	fun deserialize_attribute(name: String, static_type: nullable String): nullable Object is abstract
+
+	# Was the attribute queried by the last call to `deserialize_attribute` missing?
+	var deserialize_attribute_missing = false
 
 	# Register a newly allocated object (even if not completely built)
 	#

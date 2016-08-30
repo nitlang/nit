@@ -295,6 +295,7 @@ class JsonDeserializer
 			if not root isa Error then
 				errors.add new Error("Deserialization Error: parsed JSON value is not an object.")
 			end
+			deserialize_attribute_missing = false
 			return null
 		end
 
@@ -302,6 +303,7 @@ class JsonDeserializer
 
 		if not current.keys.has(name) then
 			errors.add new Error("Deserialization Error: JSON object has not attribute '{name}'.")
+			deserialize_attribute_missing = true
 			return null
 		end
 
@@ -310,6 +312,8 @@ class JsonDeserializer
 		attributes_path.add name
 		var res = convert_object(value, static_type)
 		attributes_path.pop
+
+		deserialize_attribute_missing = false
 		return res
 	end
 
