@@ -315,10 +315,7 @@ do
 			else code.add """
 	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
 	if not {{{name}}} isa {{{type_name}}} then
-		# Check if it was a subjectent error
 		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
-
-		# Clear subjacent error
 		if v.keep_going == false then return
 	else
 		self.{{{name}}} = {{{name}}}
