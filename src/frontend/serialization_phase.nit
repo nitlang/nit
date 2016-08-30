@@ -312,9 +312,18 @@ do
 				code.add """
 	self.{{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
 """
-			else code.add """
+			else
+				code.add """
 	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
 	if v.deserialize_attribute_missing then
+"""
+				# What to do when an attribute is missing?
+				if attribute.has_value then
+					# Leave it to the default value
+				else code.add """
+		v.errors.add new Error("Deserialization Error: attribute `{class_name}::{{{name}}}` missing from JSON object")"""
+
+				code.add """
 	else if not {{{name}}} isa {{{type_name}}} then
 		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
 		if v.keep_going == false then return
@@ -322,6 +331,7 @@ do
 		self.{{{name}}} = {{{name}}}
 	end
 """
+			end
 		end
 
 		code.add "end"

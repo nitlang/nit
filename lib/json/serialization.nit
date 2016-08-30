@@ -302,7 +302,7 @@ class JsonDeserializer
 		var current = path.last
 
 		if not current.keys.has(name) then
-			errors.add new Error("Deserialization Error: JSON object has not attribute '{name}'.")
+			# Let the generated code / caller of `deserialize_attribute` raise the missing attribute error
 			deserialize_attribute_missing = true
 			return null
 		end
