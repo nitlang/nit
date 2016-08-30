@@ -320,6 +320,9 @@ do
 				# What to do when an attribute is missing?
 				if attribute.has_value then
 					# Leave it to the default value
+				else if mtype isa MNullableType then
+					code.add """
+		self.{{{name}}} = null"""
 				else code.add """
 		v.errors.add new Error("Deserialization Error: attribute `{class_name}::{{{name}}}` missing from JSON object")"""
 
