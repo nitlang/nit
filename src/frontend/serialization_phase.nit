@@ -314,7 +314,8 @@ do
 """
 			else code.add """
 	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
-	if not {{{name}}} isa {{{type_name}}} then
+	if v.deserialize_attribute_missing then
+	else if not {{{name}}} isa {{{type_name}}} then
 		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
 		if v.keep_going == false then return
 	else
