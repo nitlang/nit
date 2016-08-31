@@ -39,7 +39,7 @@
 			this.loadGrades();
 		}])
 
-		.directive('userMenu', ['User', function(User) {
+		.directive('userMenu', ['User', '$rootScope', function(User, $rootScope) {
 			return {
 				restrict: 'E',
 				templateUrl: '/directives/user/user-menu.html',
@@ -47,13 +47,20 @@
 					$scope.loadUser = function() {
 						User.loadUser(
 							function(data) {
-								$scope.user = data;
+								$rootScope.user = data;
 							}, function(err) {
 								//$scope.error = err;
 							});
 					}
 					$scope.loadUser();
 				}
+			};
+		}])
+
+		.directive('userSidebar', ['User', '$rootScope', function(User, $rootScope) {
+			return {
+				restrict: 'E',
+				templateUrl: '/directives/user/sidebar.html',
 			};
 		}])
 })();
