@@ -117,8 +117,8 @@ class APIRandom
 
 	redef fun get(req, res) do
 		var mentities = list_mentities(req)
-		mentities = limit_mentities(req, mentities)
 		mentities = randomize_mentities(req, mentities)
+		mentities = limit_mentities(req, mentities)
 		res.json new JsonArray.from(mentities)
 	end
 end
