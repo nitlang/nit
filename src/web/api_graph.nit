@@ -35,7 +35,7 @@ class APIInheritanceGraph
 		if mentity == null then return
 		var pdepth = req.int_arg("pdepth")
 		var cdepth = req.int_arg("cdepth")
-		var g = new InheritanceGraph(mentity, view)
+		var g = new InheritanceGraph(mentity, config.view)
 		res.send g.draw(pdepth, cdepth).to_svg
 	end
 end

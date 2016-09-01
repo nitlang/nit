@@ -36,6 +36,19 @@ class NitwebConfig
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
+
+	# The JSON API does not filter anything by default.
+	#
+	# So we can cache the model view.
+	var view: ModelView is lazy do
+		var view = new ModelView(model)
+		view.min_visibility = private_visibility
+		view.include_fictive = true
+		view.include_empty_doc = true
+		view.include_attribute = true
+		view.include_test_suite = true
+		return view
+	end
 end
 
 # Specific handler for the nitweb API.
@@ -51,19 +64,6 @@ abstract class APIHandler
 		return model.mentity_by_full_name(full_name.from_percent_encoding)
 	end
 
-	# The JSON API does not filter anything by default.
-	#
-	# So we can cache the model view.
-	var view: ModelView is lazy do
-		var view = new ModelView(config.model)
-		view.min_visibility = private_visibility
-		view.include_fictive = true
-		view.include_empty_doc = true
-		view.include_attribute = true
-		view.include_test_suite = true
-		return view
-	end
-
 	# Try to load the mentity from uri with `/:id`.
 	#
 	# Send 400 if `:id` is null.
@@ -75,7 +75,7 @@ abstract class APIHandler
 			res.api_error(400, "Expected mentity full name")
 			return null
 		end
-		var mentity = find_mentity(view, id)
+		var mentity = find_mentity(config.view, id)
 		if mentity == null then
 			res.api_error(404, "MEntity `{id}` not found")
 		end

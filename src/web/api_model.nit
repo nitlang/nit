@@ -17,6 +17,7 @@ module api_model
 import web_base
 import highlight
 import uml
+import model::model_index
 
 redef class APIRouter
 	redef init do
@@ -49,21 +50,21 @@ class APIList
 		var k = req.string_arg("k")
 		var mentities = new Array[MEntity]
 		if k == "package" then
-			for mentity in view.mpackages do mentities.add mentity
+			for mentity in config.view.mpackages do mentities.add mentity
 		else if k == "group" then
-			for mentity in view.mgroups do mentities.add mentity
+			for mentity in config.view.mgroups do mentities.add mentity
 		else if k == "module" then
-			for mentity in view.mmodules do mentities.add mentity
+			for mentity in config.view.mmodules do mentities.add mentity
 		else if k == "class" then
-			for mentity in view.mclasses do mentities.add mentity
+			for mentity in config.view.mclasses do mentities.add mentity
 		else if k == "classdef" then
-			for mentity in view.mclassdefs do mentities.add mentity
+			for mentity in config.view.mclassdefs do mentities.add mentity
 		else if k == "property" then
-			for mentity in view.mproperties do mentities.add mentity
+			for mentity in config.view.mproperties do mentities.add mentity
 		else if k == "propdef" then
-			for mentity in view.mpropdefs do mentities.add mentity
+			for mentity in config.view.mpropdefs do mentities.add mentity
 		else
-			for mentity in view.mentities do mentities.add mentity
+			for mentity in config.view.mentities do mentities.add mentity
 		end
 		return mentities
 	end
@@ -90,14 +91,14 @@ end
 class APISearch
 	super APIList
 
-	redef fun list_mentities(req) do
+	redef fun get(req, res) do
 		var q = req.string_arg("q")
-		var mentities = new Array[MEntity]
-		if q == null then return mentities
-		for mentity in view.mentities do
-			if mentity.name.has_prefix(q) then mentities.add mentity
+		if q == null then
+			res.json new JsonArray
+			return
 		end
-		return mentities
+		var n = req.int_arg("n")
+		res.json new JsonArray.from(config.view.find(q, n))
 	end
 end
 
@@ -144,7 +145,7 @@ class APIEntityInheritance
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.json mentity.hierarchy_poset(view)[mentity]
+		res.json mentity.hierarchy_poset(config.view)[mentity]
 	end
 end
 
@@ -219,10 +220,10 @@ class APIEntityUML
 		var dot
 		if mentity isa MClassDef then mentity = mentity.mclass
 		if mentity isa MClass then
-			var uml = new UMLModel(view, config.mainmodule)
+			var uml = new UMLModel(config.view, config.mainmodule)
 			dot = uml.generate_class_uml.write_to_string
 		else if mentity isa MModule then
-			var uml = new UMLModel(view, mentity)
+			var uml = new UMLModel(config.view, mentity)
 			dot = uml.generate_package_uml.write_to_string
 		else
 			res.api_error(404, "No UML for mentity `{mentity.full_name}`")

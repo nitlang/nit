@@ -46,13 +46,13 @@
 					<form ng-controller='SearchCtrl as searchCtrl' >
 						<div class='form-group has-icon'>
 							<input placeholder='Search...' type='text' class='form-control search-input'
-								ng-model-options='{ debounce: 150 }' ng-model='query'
+								ng-model-options='{ debounce: 300 }' ng-model='query'
 								ng-keydown='update($event)' ng-change='search()'>
 							<span class='glyphicon glyphicon-search form-control-icon text-muted'></span>
 						</div>
 						<div ng-if='results.length > 0' class='search-results'>
 							<div class='card-list'>
-								<entity-card ng-click='reset()' ng-class='{active: activeItem == $index}' mentity='mentity' ng-repeat='mentity in results' />
+								<search-card ng-click='selectEnter()' ng-class='{active: activeItem == $index}' ng-mouseover='setActive($index)' mentity='mentity' ng-repeat='mentity in results' />
 							</div>
 						</div>
 					</form>

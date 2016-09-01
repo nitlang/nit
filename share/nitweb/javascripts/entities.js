@@ -163,7 +163,8 @@
 				restrict: 'E',
 				scope: {
 					mentity: '=',
-					defaultTab: '@'
+					defaultTab: '@',
+					noSynopsis: '='
 				},
 				replace: true,
 				templateUrl: '/directives/entity/card.html',
