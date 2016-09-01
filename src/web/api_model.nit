@@ -162,7 +162,9 @@ class APIEntityLinearization
 			res.api_error(404, "No linearization for mentity `{mentity.full_name}`")
 			return
 		end
-		res.json new JsonArray.from(lin)
+		var mentities = new JsonArray
+		for e in lin do mentities.add e.full_json
+		res.json mentities
 	end
 end
 

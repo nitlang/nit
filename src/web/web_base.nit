@@ -143,7 +143,7 @@ redef class MEntity
 	end
 
 	# Get the full json repesentation of `self` with MEntityRefs resolved.
-	fun api_json(handler: APIHandler): JsonObject do return json
+	fun api_json(handler: APIHandler): JsonObject do return full_json
 end
 
 redef class MEntityRef
@@ -154,7 +154,6 @@ redef class MEntityRef
 		obj["name"] = mentity.name
 		obj["mdoc"] = mentity.mdoc_or_fallback
 		obj["visibility"] = mentity.visibility
-		obj["location"] = mentity.location
 		var modifiers = new JsonArray
 		for modifier in mentity.collect_modifiers do
 			modifiers.add modifier
@@ -172,77 +171,21 @@ redef class MEntityRef
 		end
 		return obj
 	end
+
+	redef fun full_json do
+		var obj = super
+		obj["location"] = mentity.location
+		return obj
+	end
 end
 
 redef class MDoc
 
 	# Add doc down processing
 	redef fun json do
-		var obj = super
-		obj["synopsis"] = synopsis
-		obj["documentation"] = documentation
-		obj["comment"] = comment
+		var obj = new JsonObject
 		obj["html_synopsis"] = html_synopsis.write_to_string
 		obj["html_documentation"] = html_documentation.write_to_string
-		obj["html_comment"] = html_comment.write_to_string
-		return obj
-	end
-end
-
-redef class MModule
-	redef fun api_json(handler) do
-		var obj = super
-		obj["intro_mclassdefs"] = to_mentity_refs(collect_intro_mclassdefs(private_view))
-		obj["redef_mclassdefs"] = to_mentity_refs(collect_redef_mclassdefs(private_view))
-		obj["imports"] = to_mentity_refs(in_importation.direct_greaters)
-		return obj
-	end
-end
-
-redef class MClass
-	redef fun api_json(handler) do
-		var obj = super
-		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
-		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
-		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
-		obj["parents"] = to_mentity_refs(collect_parents(private_view))
-		return obj
-	end
-end
-
-redef class MClassDef
-	redef fun json do
-		var obj = super
-		obj["intro"] = to_mentity_ref(mclass.intro)
-		obj["mpackage"] = to_mentity_ref(mmodule.mpackage)
-		return obj
-	end
-
-	redef fun api_json(handler) do
-		var obj = super
-		obj["intro_mpropdefs"] = to_mentity_refs(collect_intro_mpropdefs(private_view))
-		obj["redef_mpropdefs"] = to_mentity_refs(collect_redef_mpropdefs(private_view))
-		return obj
-	end
-end
-
-redef class MProperty
-	redef fun json do
-		var obj = super
-		obj["intro_mclass"] = to_mentity_ref(intro_mclassdef.mclass)
-		obj["mpackage"] = to_mentity_ref(intro_mclassdef.mmodule.mpackage)
-		return obj
-	end
-end
-
-redef class MPropDef
-	redef fun json do
-		var obj = super
-		obj["intro"] = to_mentity_ref(mproperty.intro)
-		obj["intro_mclassdef"] = to_mentity_ref(mproperty.intro.mclassdef)
-		obj["mmodule"] = to_mentity_ref(mclassdef.mmodule)
-		obj["mgroup"] = to_mentity_ref(mclassdef.mmodule.mgroup)
-		obj["mpackage"] = to_mentity_ref(mclassdef.mmodule.mpackage)
 		return obj
 	end
 end
