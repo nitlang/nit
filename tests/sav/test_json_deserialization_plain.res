@@ -11,7 +11,6 @@
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"]}
-# Errors: 'Deserialization Error: JSON object has not attribute 'o'.'
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"], "o":

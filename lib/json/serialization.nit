@@ -134,6 +134,85 @@
 # assert deserializer.errors.is_empty # If false, `obj` is invalid
 # print object
 # ~~~
+#
+# ### Missing attributes and default values
+#
+# When reading JSON, some attributes expected by Nit classes may be missing.
+# The JSON object may come from an external API using optional attributes or
+# from a previous version of your program without the attributes.
+# When an attribute is not found, the deserialization engine acts in one of three ways:
+#
+# 1. If the attribute has a default value or if it is annotated by `lazy`,
+#    the engine leave the attribute to the default value. No error is raised.
+# 2. If the static type of the attribute is nullable, the engine sets
+#    the attribute to `null`. No error is raised.
+# 3. Otherwise, the engine raises an error and does not set the attribute.
+#    The caller must check for `errors` and must not read from the attribute.
+#
+# ~~~nitish
+# import json::serialization
+#
+# class MyConfig
+#     serialize
+#
+#     var width: Int # Must be in JSON or an error is raised
+#     var height = 4
+#     var volume_level = 8 is lazy
+#     var player_name: nullable String
+#     var tmp_dir: nullable String = "/tmp" is lazy
+# end
+#
+# # ---
+# # JSON object with all expected attributes -> OK
+# var plain_json = """
+# {
+#     "width": 11,
+#     "height": 22,
+#     "volume_level": 33,
+#     "player_name": "Alice",
+#     "tmp_dir": null
+# }"""
+# var deserializer = new JsonDeserializer(plain_json)
+# var obj = new MyConfig.from_deserializer(deserializer)
+#
+# assert deserializer.errors.is_empty
+# assert obj.width == 11
+# assert obj.height == 22
+# assert obj.volume_level == 33
+# assert obj.player_name == "Alice"
+# assert obj.tmp_dir == null
+#
+# # ---
+# # JSON object missing optional attributes -> OK
+# plain_json = """
+# {
+#     "width": 11
+# }"""
+# deserializer = new JsonDeserializer(plain_json)
+# obj = new MyConfig.from_deserializer(deserializer)
+#
+# assert deserializer.errors.is_empty
+# assert obj.width == 11
+# assert obj.height == 4
+# assert obj.volume_level == 8
+# assert obj.player_name == null
+# assert obj.tmp_dir == "/tmp"
+#
+# # ---
+# # JSON object missing the mandatory attribute -> Error
+# plain_json = """
+# {
+#     "player_name": "Bob",
+# }"""
+# deserializer = new JsonDeserializer(plain_json)
+# obj = new MyConfig.from_deserializer(deserializer)
+#
+# # There's an error, `obj` is partial
+# assert deserializer.errors.length == 1
+#
+# # Still, we can access valid attributes
+# assert obj.player_name == "Bob"
+# ~~~
 module serialization
 
 import ::serialization::caching
@@ -295,13 +374,15 @@ class JsonDeserializer
 			if not root isa Error then
 				errors.add new Error("Deserialization Error: parsed JSON value is not an object.")
 			end
+			deserialize_attribute_missing = false
 			return null
 		end
 
 		var current = path.last
 
 		if not current.keys.has(name) then
-			errors.add new Error("Deserialization Error: JSON object has not attribute '{name}'.")
+			# Let the generated code / caller of `deserialize_attribute` raise the missing attribute error
+			deserialize_attribute_missing = true
 			return null
 		end
 
@@ -310,6 +391,8 @@ class JsonDeserializer
 		attributes_path.add name
 		var res = convert_object(value, static_type)
 		attributes_path.pop
+
+		deserialize_attribute_missing = false
 		return res
 	end
 
