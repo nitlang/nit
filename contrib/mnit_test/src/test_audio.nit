@@ -22,10 +22,10 @@ import android::audio
 
 redef class App
 	# Sound
-	var soundsp: Sound
+	var soundsp: Sound is noinit
 
 	# Music
-	var soundmp: Music
+	var soundmp: Music is noinit
 
 	# Sound
 	var easy_soundsp = new Sound("testsound")
@@ -47,8 +47,8 @@ redef class App
 		super
 		default_mediaplayer.looping = true
 		if test_assets then
-			soundsp = load_sound("testsound.og")
-			soundmp = load_music("xylofon.og")
+			soundsp = new Sound("testsound.og")
+			soundmp = new Music("xylofon.og")
 			soundmp.play
 		end
 		if test_ressources then
