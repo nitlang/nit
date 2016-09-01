@@ -102,9 +102,9 @@ private class TypeVisitor
 	end
 
 	# Check that `sub` is a subtype of `sup`.
-	# If `sub` is not a valid suptype, then display an error on `node` an return null.
-	# If `sub` is a safe subtype of `sup` then return `sub`.
-	# If `sub` is an unsafe subtype (ie an implicit cast is required), then return `sup`.
+	# If `sub` is not a valid suptype, then display an error on `node` and return `null`.
+	# If `sub` is a safe subtype of `sup`, then return `sub`.
+	# If `sub` is an unsafe subtype (i.e., an implicit cast is required), then return `sup`.
 	#
 	# The point of the return type is to determinate the usable type on an expression when `autocast` is true:
 	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
