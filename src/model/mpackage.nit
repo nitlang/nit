@@ -25,14 +25,14 @@ class MPackage
 	super MConcern
 
 	# The name of the package
-	redef var name: String
+	redef var name
 
 	redef fun full_name do return name
 
 	redef var c_name = name.to_cmangle is lazy
 
 	# The model of the package
-	redef var model: Model
+	redef var model
 
 	redef var location
 
@@ -55,8 +55,11 @@ class MPackage
 
 	redef fun mdoc_or_fallback
 	do
+		var mdoc = self.mdoc
 		if mdoc != null then return mdoc
-		return root.mdoc_or_fallback
+		var root = self.root
+		if root != null then return root.mdoc_or_fallback
+		return null
 	end
 end
 
@@ -66,7 +69,7 @@ class MGroup
 
 	# The name of the group
 	# empty name for a default group in a single-module package
-	redef var name: String
+	redef var name
 
 	redef var location
 

@@ -75,7 +75,7 @@ class MModule
 	super MConcern
 
 	# The model considered
-	redef var model: Model
+	redef var model
 
 	# The group of module in the package if any
 	var mgroup: nullable MGroup
@@ -98,9 +98,9 @@ class MModule
 	end
 
 	# The short name of the module
-	redef var name: String
+	redef var name
 
-	redef var location: Location is writable
+	redef var location is writable
 
 	# Alias for `name`
 	redef fun to_s do return self.name
@@ -144,7 +144,7 @@ class MModule
 
 	# Return the name of the global C identifier associated to `self`.
 	# This name is used to prefix files and other C identifiers associated with `self`.
-	redef var c_name: String is lazy do
+	redef var c_name is lazy do
 		var g = mgroup
 		var res
 		if g != null and g.mpackage.name != name then

@@ -127,6 +127,53 @@ class APIError
 	redef fun to_json do return json.to_json
 end
 
+# Fullname representation that can be used to build decorated links
+#
+# * MPackage: `mpackage_name`
+# * MGroup: `(mpackage_name::)mgroup_name`
+class Namespace
+	super Array[nullable NSEntity]
+	super NSEntity
+
+	redef fun to_s do return self.join("")
+	redef fun to_json do return (new JsonArray.from(self)).to_json
+end
+
+# Something that goes in a Namespace
+#
+# Can be either:
+# * a `NSToken` for tokens like `::`, `>` and `$`
+# * a `MSRef` for references to mentities
+interface NSEntity
+	super Jsonable
+end
+
+# A reference to a MEntity that can be rendered as a link.
+#
+# We do not reuse `MEntityRef` ref since NSRef can be found in a ref and create
+# an infinite loop.
+class NSRef
+	super NSEntity
+
+	# The mentity to link to/
+	var mentity: MEntity
+
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["web_url"] = mentity.web_url
+		obj["api_url"] = mentity.api_url
+		obj["name"] = mentity.name
+		return obj.to_json
+	end
+end
+
+# A namespace token representation
+#
+# Used for namespace tokens like `::`, `>` and `$`
+redef class String
+	super NSEntity
+end
+
 redef class MEntity
 
 	# URL to `self` within the web interface.
@@ -137,6 +184,7 @@ redef class MEntity
 
 	redef fun json do
 		var obj = super
+		obj["namespace"] = namespace
 		obj["web_url"] = web_url
 		obj["api_url"] = api_url
 		return obj
@@ -144,11 +192,18 @@ redef class MEntity
 
 	# Get the full json repesentation of `self` with MEntityRefs resolved.
 	fun api_json(handler: APIHandler): JsonObject do return full_json
+
+	# Return `self.full_name` as an object that can be serialized to json.
+	fun namespace: nullable Namespace do return null
+
+	# Return a new NSRef to `self`.
+	fun to_ns_ref: NSRef do return new NSRef(self)
 end
 
 redef class MEntityRef
 	redef fun json do
 		var obj = super
+		obj["namespace"] = mentity.namespace
 		obj["web_url"] = mentity.web_url
 		obj["api_url"] = mentity.api_url
 		obj["name"] = mentity.name
@@ -187,6 +242,95 @@ redef class MDoc
 		obj["html_synopsis"] = html_synopsis.write_to_string
 		obj["html_documentation"] = html_documentation.write_to_string
 		return obj
+	end
+end
+
+redef class MPackage
+	redef fun namespace do return new Namespace.from([to_ns_ref])
+end
+
+redef class MGroup
+	redef fun namespace do
+		var p = parent
+		if p == null then
+			return new Namespace.from([to_ns_ref, ">": nullable NSEntity])
+		end
+		return new Namespace.from([p.namespace, to_ns_ref, ">": nullable NSEntity])
+	end
+end
+
+redef class MModule
+	redef fun namespace do
+		var mgroup = self.mgroup
+		if mgroup == null then
+			return new Namespace.from([to_ns_ref])
+		end
+		return new Namespace.from([mgroup.mpackage.to_ns_ref, "::", to_ns_ref: nullable NSEntity])
+	end
+
+	private fun ns_for(visibility: MVisibility): nullable Namespace do
+		if visibility <= private_visibility then return namespace
+		var mgroup = self.mgroup
+		if mgroup == null then return namespace
+		return mgroup.mpackage.namespace
+	end
+end
+
+redef class MClass
+	redef fun namespace do
+		return new Namespace.from([intro_mmodule.ns_for(visibility), "::", to_ns_ref: nullable NSEntity])
+	end
+end
+
+redef class MClassDef
+	redef fun namespace do
+		if is_intro then
+			return new Namespace.from([mmodule.ns_for(mclass.visibility), "$", to_ns_ref: nullable NSEntity])
+		else if mclass.intro_mmodule.mpackage != mmodule.mpackage then
+			return new Namespace.from([mmodule.namespace, "$", mclass.namespace: nullable NSEntity])
+		else if mclass.visibility > private_visibility then
+			return new Namespace.from([mmodule.namespace, "$", mclass.to_ns_ref: nullable NSEntity])
+		end
+		return new Namespace.from([mmodule.full_name, "$::", mclass.intro_mmodule.to_ns_ref: nullable NSEntity])
+	end
+end
+
+redef class MProperty
+	redef fun namespace do
+		if intro_mclassdef.is_intro then
+			return new Namespace.from([intro_mclassdef.mmodule.ns_for(visibility), "::", intro_mclassdef.mclass.to_ns_ref, "::", to_ns_ref: nullable NSEntity])
+		else
+			return new Namespace.from([intro_mclassdef.mmodule.namespace, "::", intro_mclassdef.mclass.to_ns_ref, "::", to_ns_ref: nullable NSEntity])
+		end
+	end
+end
+
+redef class MPropDef
+	redef fun namespace do
+		var res = new Namespace
+		res.add mclassdef.namespace
+		res.add "$"
+
+		if mclassdef.mclass == mproperty.intro_mclassdef.mclass then
+			res.add to_ns_ref
+		else
+			if mclassdef.mmodule.mpackage != mproperty.intro_mclassdef.mmodule.mpackage then
+				res.add mproperty.intro_mclassdef.mmodule.ns_for(mproperty.visibility)
+				res.add "::"
+			else if mproperty.visibility <= private_visibility then
+				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mpackage then
+					res.add "::"
+					res.add mproperty.intro_mclassdef.mmodule.to_ns_ref
+					res.add "::"
+				end
+			end
+			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
+				res.add mproperty.intro_mclassdef.to_ns_ref
+				res.add "::"
+			end
+			res.add to_ns_ref
+		end
+		return res
 	end
 end
 
