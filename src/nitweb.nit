@@ -19,6 +19,7 @@ import popcorn::pop_config
 import popcorn::pop_auth
 import frontend
 import web
+import doc::doc_down
 
 redef class NitwebConfig
 
@@ -80,6 +81,7 @@ private class NitwebPhase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
 		var config = build_config(toolcontext, mainmodule)
+		config.model.nitdoc_md_processor = config.md_processor
 
 		var app = new App
 
