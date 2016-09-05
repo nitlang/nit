@@ -133,7 +133,7 @@ class EulerCamera
 		view = view * rotation_matrix
 
 		# Use a projection matrix with a depth
-		var projection = new Matrix.perspective(pi*field_of_view_y/2.0,
+		var projection = new Matrix.perspective(field_of_view_y,
 			display.aspect_ratio, near, far)
 
 		return view * projection
