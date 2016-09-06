@@ -58,6 +58,17 @@ for row in db.select("* FROM users") do
 	print row[3].to_f
 end
 
+print "\nMap test:\n"
+
+for row in db.select("* FROM users") do
+	var m = row.map
+	print "####"
+	for k, v in m do
+		print "{k} = {v or else "nil"}"
+	end
+end
+print ""
+
 print db.is_open
 db.close
 print db.is_open
