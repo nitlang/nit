@@ -133,7 +133,7 @@ class EulerCamera
 		view = view * rotation_matrix
 
 		# Use a projection matrix with a depth
-		var projection = new Matrix.perspective(pi*field_of_view_y/2.0,
+		var projection = new Matrix.perspective(field_of_view_y,
 			display.aspect_ratio, near, far)
 
 		return view * projection
@@ -185,7 +185,7 @@ class EulerCamera
 		var near_height = (field_of_view_y/2.0).tan * near
 		var cross_screen_to_near = near_height / (display.height.to_f/2.0)
 		var cross_near_to_target = (position.z - target_z) / near
-		var mod = cross_screen_to_near * cross_near_to_target * 1.72 # FIXME drop the magic number
+		var mod = cross_screen_to_near * cross_near_to_target
 
 		var wx = position.x + (x.to_f-display.width.to_f/2.0) * mod
 		var wy = position.y - (y.to_f-display.height.to_f/2.0) * mod

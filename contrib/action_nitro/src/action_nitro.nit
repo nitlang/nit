@@ -132,7 +132,7 @@ redef class App
 		iss_model.load
 
 		# Setup cameras
-		world_camera.reset_height 40.0
+		world_camera.reset_height 60.0
 		ui_camera.reset_height 1080.0
 
 		# Register particle systems
