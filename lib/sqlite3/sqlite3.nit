@@ -155,6 +155,17 @@ class StatementRow
 	# Statement linked to `self`
 	var statement: Statement
 
+	# Maps the column name to its value
+	fun map: Map[String, nullable Sqlite3Data]
+	do
+		var ret = new ArrayMap[String, nullable Sqlite3Data]
+		for i in [0 .. length[ do
+			var st = self[i]
+			ret[st.name] = st.value
+		end
+		return ret
+	end
+
 	# Number of entries in this row
 	#
 	# require: `self.statement.is_open`
