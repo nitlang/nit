@@ -22,6 +22,7 @@ import semantize
 private import parser::tables
 import mixin
 import primitive_types
+private import model::serialize_model
 
 redef class ToolContext
 	# --discover-call-trace
@@ -950,6 +951,8 @@ redef class AMethPropdef
 			return v.bool_instance(args[0].mtype == args[1].mtype)
 		else if pname == "is_same_instance" then
 			return v.bool_instance(args[0].eq_is(args[1]))
+		else if pname == "class_inheritance_metamodel_json" then
+			return v.native_string_instance(v.mainmodule.flatten_mclass_hierarchy.to_thin_json)
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort
