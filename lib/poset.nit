@@ -254,7 +254,7 @@ class POSet[E]
 			ids[x] = ids.length
 		end
 		for x in elements.keys do
-			var xstr = x.to_s.escape_to_dot
+			var xstr = (x or else "null").to_s.escape_to_dot
 			var nx = "n{ids[x]}"
 			f.write "{nx}[label=\"{xstr}\"];\n"
 			var xe = self.elements[x]
@@ -309,7 +309,7 @@ class POSet[E]
 	# ~~~~
 	#
 	# Note that the linear extension is stable, unless a new node or a new edge is added.
-	redef fun compare(a, b: E): Int
+	redef fun compare(a, b)
 	do
 		var ae = self.elements[a]
 		var be = self.elements[b]
@@ -486,7 +486,7 @@ class POSet[E]
 	end
 end
 
-# View of an objet in a poset
+# View of an object in a poset
 # This class is a helper to handle specific queries on a same object
 #
 # For instance, one common usage is to add a specific attribute for each poset a class belong.
