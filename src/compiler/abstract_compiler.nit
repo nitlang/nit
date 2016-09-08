@@ -1149,25 +1149,41 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 	fun finalize_ffi_for_module(mmodule: MModule) do mmodule.finalize_ffi(self)
 end
 
-# A file unit (may be more than one file if
-# A file unit aim to be autonomous and is made or one or more `CodeWriter`s
+# C code file generated from the `writers` and the `required_declarations`
+#
+# A file unit aims to be autonomous and is made or one or more `CodeWriter`s.
 class CodeFile
+	# Basename of the file, will be appended by `.h` and `.c`
 	var name: String
+
+	# `CodeWriter` used in sequence to fill the top of the body, then the bottom
 	var writers = new Array[CodeWriter]
+
+	# Required declarations keys
+	#
+	# See: `provide_declaration`
 	var required_declarations = new HashSet[String]
 end
 
-# Where to store generated lines
+# Store generated lines
+#
+# Instances are added to `file.writers` at construction.
 class CodeWriter
+	# Parent `CodeFile`
 	var file: CodeFile
+
+	# Main lines of code (written at the bottom of the body)
 	var lines = new Array[String]
+
+	# Lines of code for declarations (written at the top of the body)
 	var decl_lines = new Array[String]
 
-	# Add a line in the main part of the generated C
+	# Add a line in the main lines of code (to `lines`)
 	fun add(s: String) do self.lines.add(s)
 
-	# Add a line in the
-	# (used for local or global declaration)
+	# Add a declaration line (to `decl_lines`)
+	#
+	# Used for local and global declaration.
 	fun add_decl(s: String) do self.decl_lines.add(s)
 
 	init
