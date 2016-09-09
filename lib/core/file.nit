@@ -717,6 +717,12 @@ class Path
 	# var path = "/does/not/exists/".to_path
 	# path.rmdir
 	# assert path.last_error != null
+	#
+	# path = "/tmp/path/to/create".to_path
+	# path.to_s.mkdir
+	# assert path.exists
+	# path.rmdir
+	# assert path.last_error == null
 	# ~~~
 	fun rmdir
 	do
