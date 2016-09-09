@@ -226,6 +226,15 @@ redef class VerticalLayout
 	end
 end
 
+redef class TextView
+	# Convert `size` from app.nit relative size to iOS font points
+	private fun ios_points(size: nullable Float): Float
+	do
+		size = size or else 1.0
+		return 8.0 + size * 5.0
+	end
+end
+
 redef class Label
 
 	redef type NATIVE: UILabel
@@ -234,29 +243,26 @@ redef class Label
 	redef fun text=(text) do native.text = (text or else "").to_nsstring
 	redef fun text do return native.text.to_s
 
-	redef fun size=(size)
-	do
-		size = size or else 1.0
-		var points = 8.0 + size * 8.0
-		set_size_native(native, points)
-	end
+	redef fun size=(size) do native.size = ios_points(size)
 
-	private fun set_size_native(native: UILabel, points: Float)
+	redef fun align=(align) do native.align = align or else 0.0
+end
+
+redef class UILabel
+
+	private fun size=(points: Float)
 	in "ObjC" `{
-		native.font = [UIFont systemFontOfSize: points];
+		self.font = [UIFont systemFontOfSize: points];
 	`}
 
-	redef fun align=(align) do set_align_native(native, align or else 0.0)
-
-	private fun set_align_native(native: UILabel, align: Float)
+	private fun align=(align: Float)
 	in "ObjC" `{
-
 		if (align == 0.5)
-			native.textAlignment = NSTextAlignmentCenter;
+			self.textAlignment = NSTextAlignmentCenter;
 		else if (align < 0.5)
-			native.textAlignment = NSTextAlignmentLeft;
+			self.textAlignment = NSTextAlignmentLeft;
 		else//if (align > 0.5)
-			native.textAlignment = NSTextAlignmentRight;
+			self.textAlignment = NSTextAlignmentRight;
 	`}
 end
 
