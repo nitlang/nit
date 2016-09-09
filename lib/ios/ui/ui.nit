@@ -334,6 +334,28 @@ redef class TextInput
 		native.secure_text_entry = value or else false
 		super
 	end
+
+	redef fun size=(size) do native.size = ios_points(size)
+
+	redef fun align=(align) do native.align = align or else 0.0
+end
+
+redef class UITextField
+
+	private fun size=(points: Float)
+	in "ObjC" `{
+		self.font = [UIFont systemFontOfSize: points];
+	`}
+
+	private fun align=(align: Float)
+	in "ObjC" `{
+		if (align == 0.5)
+			self.textAlignment = NSTextAlignmentCenter;
+		else if (align < 0.5)
+			self.textAlignment = NSTextAlignmentLeft;
+		else//if (align > 0.5)
+			self.textAlignment = NSTextAlignmentRight;
+	`}
 end
 
 redef class Button
