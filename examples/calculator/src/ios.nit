@@ -13,10 +13,10 @@
 # limitations under the License.
 
 # Aesthetic adaptations for iOS
-module ios_calculator
+module ios
 
 import calculator
-import ios
+import ::ios
 
 redef class CalculatorWindow
 	init do title = "app.nit Calculator"
