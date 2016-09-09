@@ -340,7 +340,7 @@ class ToolContext
 		proc_which.wait
 		var res = proc_which.status
 		if res != 0 then
-			print "{error}: executable \"{prog}\" not found"
+			print_error "{error}: executable \"{prog}\" not found"
 			exit 1
 		end
 
@@ -349,7 +349,7 @@ class ToolContext
 		proc.wait
 		res = proc.status
 		if res != 0 then
-			print "{error}: execution of \"{prog} {args.join(" ")}\" failed"
+			print_error "{error}: execution of \"{prog} {args.join(" ")}\" failed"
 			exit 1
 		end
 	end
