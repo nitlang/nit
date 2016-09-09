@@ -350,6 +350,10 @@ redef class Button
 
 	redef fun enabled=(enabled) do native.enabled = enabled or else true
 	redef fun enabled do return native.enabled
+
+	redef fun size=(size) do native.title_label.size = ios_points(size)
+
+	redef fun align=(align) do native.title_label.align = align or else 0.0
 end
 
 redef class UIButton
