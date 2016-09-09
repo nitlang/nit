@@ -175,7 +175,14 @@ private class IOSToolchain
 		toolcontext.exec_and_check(args, "iOS project error")
 
 		# Move compiled app to destination
-		if outfile.file_exists then outfile.rmdir
+		if outfile.file_exists then
+			var error = outfile.rmdir
+			if error != null then
+				print_error error
+				exit 1
+			end
+		end
+
 		args = ["mv", "{ios_project_root}/build/Debug-iphonesimulator/{project_name}.app", outfile]
 		toolcontext.exec_and_check(args, "iOS project error")
 	end
