@@ -738,7 +738,7 @@ class Path
 
 		# Delete the directory itself if things are fine
 		if last_error == null then
-			if path.to_cstring.rmdir then
+			if not path.to_cstring.rmdir then
 				last_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
 			end
 		end
