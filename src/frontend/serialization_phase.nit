@@ -181,6 +181,16 @@ private class SerializationPhasePreModel
 	do
 		var npropdefs = nclassdef.n_propdefs
 
+		# Do not insert a `core_serialize_to` if it already exists
+		for npropdef in npropdefs do
+			if npropdef isa AMethPropdef then
+				var methid = npropdef.n_methid
+				if methid != null and methid.collect_text == "core_serialize_to" then
+					return
+				end
+			end
+		end
+
 		var code = new Array[String]
 		code.add "redef fun core_serialize_to(v)"
 		code.add "do"
