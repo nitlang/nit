@@ -1466,11 +1466,6 @@ redef class AMethPropdef
 		else if pname == "native_argv" then
 			var txt = v.arguments[args[1].to_i]
 			return v.native_string_instance(txt)
-		else if pname == "native_argc" then
-			return v.int_instance(v.arguments.length)
-		else if pname == "native_argv" then
-			var txt = v.arguments[args[1].to_i]
-			return v.native_string_instance(txt)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
