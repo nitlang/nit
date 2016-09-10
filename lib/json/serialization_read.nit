@@ -321,10 +321,10 @@ class JsonDeserializer
 	# Current array open for deserialization, used by `SimpleCollection::from_deserializer`
 	private var opened_array: nullable Array[nullable Object] = null
 
-	redef fun deserialize
+	redef fun deserialize(static_type)
 	do
 		errors.clear
-		return convert_object(root)
+		return convert_object(root, static_type)
 	end
 
 	# User customizable heuristic to infer the name of the Nit class to deserialize `json_object`
