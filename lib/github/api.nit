@@ -512,8 +512,6 @@ abstract class GithubEntity
 
 	# Github page url.
 	var html_url: nullable String is writable
-
-	redef fun to_json do return serialize_to_json
 end
 
 # A Github user
@@ -1062,8 +1060,6 @@ end
 redef class ISODate
 	super Jsonable
 	serialize
-
-	redef fun to_json do return serialize_to_json
 end
 
 # JsonDeserializer specific for Github objects.

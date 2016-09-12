@@ -152,7 +152,7 @@ class ValidationResult
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 
 	# Returns the validation result as a pretty formated string
 	fun to_pretty_string: String do

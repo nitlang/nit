@@ -127,9 +127,7 @@ class GithubError
 		json["message"] = message.to_json
 	end
 
-	redef fun to_json do
-		return json.to_json
-	end
+	redef fun serialize_to(v) do json.serialize_to v
 
 	redef fun to_s do return "[{name}] {super}"
 end

@@ -20,15 +20,12 @@ import json::static
 class NeoError
 	super Error
 	super Jsonable
+	serialize
 
 	# The name of the error.
 	#
 	# Used to programmatically distinguish this kind of error from others.
-	var name: String
-
-	redef fun to_json do
-		return "\{\"error\":{name.to_json},\"message\":{message.to_json}\}"
-	end
+	var name: String is serialize_as "error"
 
 	redef fun to_s do return "[{name}] {super}"
 end

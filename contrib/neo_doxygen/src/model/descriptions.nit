@@ -106,8 +106,8 @@ class Documentation
 	# Is the documentation empty?
 	fun is_empty: Bool do return content.is_empty
 
-	redef fun to_json do return content.to_json
-	redef fun append_json(b) do content.append_json(b)
+	redef fun serialize_to(v) do content.serialize_to v
+	redef fun accept_json_serializer(v) do content.serialize_to v
 end
 
 # A `Jsonable` array of strings.

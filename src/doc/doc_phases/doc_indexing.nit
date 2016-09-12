@@ -67,7 +67,7 @@ class IndexingPhase
 		var buffer = new Buffer
 		tpl.add buffer
 		buffer.append "var nitdocQuickSearchRawList="
-		table.append_json buffer
+		buffer.append table.to_json
 		buffer.append ";"
 		return tpl
 	end
@@ -95,14 +95,11 @@ end
 # A QuickSearch result.
 private class QuickSearchResult
 	super Jsonable
+	serialize
 
 	# The text of the link.
 	var txt: String
 
 	# The destination of the link.
 	var url: String
-
-	redef fun to_json do
-		return "\{\"txt\":{txt.to_json},\"url\":{url.to_json}\}"
-	end
 end

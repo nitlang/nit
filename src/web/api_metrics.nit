@@ -162,7 +162,7 @@ redef class MetricSet
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class Metric
@@ -179,7 +179,7 @@ redef class Metric
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class IntMetric
