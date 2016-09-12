@@ -732,6 +732,16 @@ redef class Serializable
 		return stream.to_s
 	end
 
+	# Serialize `self` to plain JSON
+	#
+	# Compatibility alias for `serialize_to_json(plain=true)`.
+	fun to_json: String do return serialize_to_json(plain=true)
+
+	# Serialize `self` to plain pretty JSON
+	#
+	# Compatibility alias for `serialize_to_json(plain=true, pretty=true)`.
+	fun to_pretty_json: String do return serialize_to_json(plain=true, pretty=true)
+
 	# Refinable service to customize the serialization of this class to JSON
 	#
 	# This method can be refined to customize the serialization by either
