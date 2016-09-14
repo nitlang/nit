@@ -47,8 +47,6 @@
 # end
 #
 # var bob = new Person("Bob", 1986)
-# var alice = new Person("Alice", 1978, bob)
-#
 # assert bob.serialize_to_json(pretty=true, plain=true) == """
 #{
 #	"name": "Bob",
@@ -56,6 +54,7 @@
 #	"next_of_kin": null
 #}"""
 #
+# var alice = new Person("Alice", 1978, bob)
 # assert alice.serialize_to_json(pretty=true, plain=true) == """
 #{
 #	"name": "Alice",
@@ -64,6 +63,26 @@
 #		"name": "Bob",
 #		"year_of_birth": 1986,
 #		"next_of_kin": null
+#	}
+#}"""
+#
+# # You can also build JSON objects as a `Map`
+# var charlie = new Map[String, nullable Serializable]
+# charlie["name"] = "Charlie"
+# charlie["year_of_birth"] = 1968
+# charlie["next_of_kin"] = alice
+# assert charlie.serialize_to_json(pretty=true, plain=true) == """
+#{
+#	"name": "Charlie",
+#	"year_of_birth": 1968,
+#	"next_of_kin": {
+#		"name": "Alice",
+#		"year_of_birth": 1978,
+#		"next_of_kin": {
+#			"name": "Bob",
+#			"year_of_birth": 1986,
+#			"next_of_kin": null
+#		}
 #	}
 #}"""
 # ~~~
