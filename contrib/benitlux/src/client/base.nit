@@ -19,7 +19,7 @@ import app::ui
 import app::data_store
 import app::http_request
 import android::aware
-import json::serialization
+import json
 
 import benitlux_model
 import translations

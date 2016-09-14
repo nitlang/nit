@@ -16,6 +16,7 @@
 module model::descriptions
 
 import json::static
+import json
 
 # Documentation associated to an entity.
 #

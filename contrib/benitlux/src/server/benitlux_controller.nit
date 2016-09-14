@@ -19,7 +19,7 @@ module benitlux_controller
 
 import nitcorn
 import nitcorn::restful
-private import json::serialization
+private import json
 
 import benitlux_model
 import benitlux_db

@@ -12,6 +12,7 @@
 module neo4j::error
 
 import json::static
+import json
 
 # An error thrown by the `neo4j` API.
 #

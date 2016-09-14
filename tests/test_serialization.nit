@@ -17,7 +17,7 @@
 #alt2#module test_serialization_alt2 is serialize
 
 import serialization
-import json::serialization
+import json
 
 # Simple class
 class A

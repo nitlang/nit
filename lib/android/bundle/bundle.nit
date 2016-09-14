@@ -19,7 +19,7 @@
 module bundle
 
 import serialization
-import json::serialization
+import json
 
 import platform
 import activities

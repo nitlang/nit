@@ -18,7 +18,7 @@
 module events
 
 import api
-intrude import json::serialization
+intrude import json
 
 # Github event stub.
 class GithubEvent

@@ -31,7 +31,7 @@ import app::ui
 import app::http_request
 import app::data_store
 import android::aware
-import json::serialization
+import json
 
 import model
 

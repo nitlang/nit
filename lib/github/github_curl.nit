@@ -18,6 +18,7 @@ module github_curl
 
 import curl
 import json::static
+import json
 
 # Specific Curl that know hot to talk to the github API
 class GithubCurl

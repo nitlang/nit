@@ -120,7 +120,7 @@ module pop_repos
 
 import popcorn::pop_config
 import serialization
-import json::serialization
+import json
 import mongodb::queries
 
 redef class AppConfig

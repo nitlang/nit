@@ -16,6 +16,7 @@
 module location
 
 import json::static
+import json
 
 # A location inside a source file.
 class Location

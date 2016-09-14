@@ -25,6 +25,7 @@
 module model_json
 
 import model::model_collect
+import json::static
 import json
 import loader
 

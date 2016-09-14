@@ -234,7 +234,7 @@ The main implementations of these services are `JsonSerializer` and `JsonDeseria
 from the `json_serialization` module.
 
 ~~~
-import json_serialization
+import json
 import user_credentials
 
 # Data to be serialized and deserialized

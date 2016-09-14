@@ -19,6 +19,7 @@ module refund_json
 
 import refund_base
 import json::static
+import json
 
 redef class RefundProcessor
 

@@ -70,7 +70,7 @@
 # ~~~
 module pop_validation
 
-import json
+import json::static
 
 # The base class of all validators
 abstract class DocumentValidator

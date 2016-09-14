@@ -20,7 +20,7 @@
 module api
 
 import github_curl
-intrude import json::serialization
+intrude import json::serialization_read
 
 # Client to Github API
 #

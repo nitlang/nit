@@ -172,7 +172,7 @@ module shibuqamoauth
 
 import popcorn
 import shibuqam
-import json::serialization
+import json
 
 redef class HttpRequest
 	# percent decoded get or post parameter.

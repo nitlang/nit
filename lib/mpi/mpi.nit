@@ -33,7 +33,7 @@ end
 import c
 intrude import core::text::flat
 import serialization
-private import json::serialization
+private import json
 
 in "C Header" `{
 	#include <mpi.h>
