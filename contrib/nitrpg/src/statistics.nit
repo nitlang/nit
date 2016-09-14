@@ -172,7 +172,7 @@ class GameStats
 		for k, v in values do self[k] = v.as(Int)
 	end
 
-	redef fun to_json do
+	redef fun to_json_object do
 		var obj = super
 		obj["period"] = period
 		obj["owner"] = owner.key

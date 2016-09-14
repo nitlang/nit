@@ -120,7 +120,7 @@ class Achievement
 			json["reward"].as(Int))
 	end
 
-	redef fun to_json do
+	redef fun to_json_object do
 		var json = super
 		json["id"] = id
 		json["name"] = name

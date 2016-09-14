@@ -104,7 +104,7 @@ class GameEvent
 		time = new ISODate.from_string(json["time"].as(String))
 	end
 
-	redef fun to_json do
+	redef fun to_json_object do
 		var json = new JsonObject
 		json["internal_id"] = internal_id.to_s
 		json["kind"] = kind

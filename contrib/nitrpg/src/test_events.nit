@@ -51,7 +51,7 @@ class TestGame
 		var event3 = new GameEvent(game, "test_kind", new JsonObject)
 		game.add_event(event1)
 		game.add_event(event2)
-		game.db.collection("events").insert(event3.to_json)
+		game.db.collection("events").insert(event3.to_json_object)
 		var ok = [event1.internal_id, event2.internal_id]
 		var res = game.load_events
 		assert res.length == 2
@@ -115,7 +115,7 @@ class TestGameEvent
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event = new GameEvent(game, "test_kind", new JsonObject)
-		assert event.to_json["kind"] == "test_kind"
+		assert event.to_json_object["kind"] == "test_kind"
 	end
 
 	fun test_init_from_json do
