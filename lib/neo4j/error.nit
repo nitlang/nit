@@ -16,7 +16,7 @@ import json::static
 # An error thrown by the `neo4j` API.
 #
 #     var error = new NeoError("ErrorMessage", "ErrorName")
-#     assert error.to_json == "\{\"error\":\"ErrorName\",\"message\":\"ErrorMessage\"\}"
+#     assert error.to_json == """{"message":"ErrorMessage","cause":null,"error":"ErrorName"}"""
 class NeoError
 	super Error
 	super Jsonable
