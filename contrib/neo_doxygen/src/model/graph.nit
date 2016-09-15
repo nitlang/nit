@@ -221,7 +221,7 @@ end
 abstract class Compound
 	super Entity
 
-	# Set the declared visibility (the proctection) of the compound.
+	# Set the declared visibility (the protection) of the compound.
 	fun visibility=(visibility: String) do
 		self["visibility"] = visibility
 	end
@@ -233,7 +233,7 @@ abstract class Compound
 
 	# Declare an inner namespace.
 	#
-	# Note: Althought Doxygen indicates that the name is optional,
+	# Note: Although Doxygen indicates that the name is optional,
 	# declarations with an empty name are not supported yet, except for the root
 	# namespace. For the root namespace, both arguments are empty.
 	#
@@ -246,7 +246,7 @@ abstract class Compound
 
 	# Declare an inner class.
 	#
-	# Note: Althought Doxygen indicates that both arguments are optional,
+	# Note: Although Doxygen indicates that both arguments are optional,
 	# declarations with an empty ID are not supported yet.
 	#
 	# Parameters:
@@ -292,7 +292,7 @@ class Namespace
 		self.labels.add("MGroup")
 	end
 
-	redef fun declare_namespace(id: String, full_name: String) do
+	redef fun declare_namespace(id, full_name) do
 		inner_namespaces.add new NamespaceRef(id, full_name)
 	end
 
