@@ -89,6 +89,7 @@ redef class RefundProcessor
 	fun write_output(str: String, file: String) do
 		var ofs = new FileWriter.open(file)
 		ofs.write(str)
+		ofs.write("\n")
 		ofs.close
 	end
 

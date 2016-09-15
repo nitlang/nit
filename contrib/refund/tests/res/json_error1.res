@@ -1,3 +1,3 @@
 {
-	"message": "Wrong input file (Unexpected Eof; is acceptable instead: value)"
+	"message": "Wrong input file (Empty JSON)"
 }
