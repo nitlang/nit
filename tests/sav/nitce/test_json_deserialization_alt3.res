@@ -100,19 +100,11 @@
 	"__kind": "obj", "__id": 0, "__class": "E",
 	"a": {
 		"__kind": "obj", "__id": 1, "__class": "Array",
-		"__items": [
-			"hello",
-			1234,
-			123.4
-		]
+		"__items": ["hello", 1234, 123.4]
 	},
 	"b": {
 		"__kind": "obj", "__id": 2, "__class": "Array",
-		"__items": [
-			"hella",
-			2345,
-			234.5
-		]
+		"__items": ["hella", 2345, 234.5]
 	}
 }
 
@@ -157,39 +149,21 @@ Deserialization Error: Doesn't know how to deserialize class "F"
 	"__kind": "obj", "__id": 0, "__class": "G",
 	"hs": {
 		"__kind": "obj", "__id": 1, "__class": "HashSet",
-		"__items": [
-			-1,
-			0
-		]
+		"__items": [-1, 0]
 	},
 	"s": {
 		"__kind": "obj", "__id": 2, "__class": "ArraySet",
-		"__items": [
-			"one",
-			"two"
-		]
+		"__items": ["one", "two"]
 	},
 	"hm": {
 		"__kind": "obj", "__id": 3, "__class": "HashMap", "__length": 2,
-		"__keys": [
-			"one",
-			"two"
-		],
-		"__values": [
-			1,
-			2
-		]
+		"__keys": ["one", "two"],
+		"__values": [1, 2]
 	},
 	"am": {
 		"__kind": "obj", "__id": 4, "__class": "ArrayMap", "__length": 2,
-		"__keys": [
-			"three",
-			"four"
-		],
-		"__values": [
-			"3",
-			"4"
-		]
+		"__keys": ["three", "four"],
+		"__values": ["3", "4"]
 	}
 }
 
