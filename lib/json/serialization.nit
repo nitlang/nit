@@ -326,7 +326,8 @@ class JsonSerializer
 		new_line_and_indent
 		stream.write "\""
 		stream.write name
-		stream.write "\": "
+		stream.write "\":"
+		if pretty_json then stream.write " "
 		super
 	end
 
@@ -934,7 +935,8 @@ redef class Map[K, V]
 
 				var k = key or else "null"
 				k.to_s.accept_json_serializer v
-				v.stream.write ": "
+				v.stream.write ":"
+				if v.pretty_json then v.stream.write " "
 				if not v.try_to_serialize(val) then
 					assert val != null # null would have been serialized
 					v.warn("element of type {val.class_name} is not serializable.")
