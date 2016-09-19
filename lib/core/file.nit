@@ -705,26 +705,32 @@ class Path
 		return st.is_dir
 	end
 
-	# Delete a directory and all of its content
+	# Recursively delete a directory and all of its content
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the file system.
 	#
-	# `last_error` is updated to contains the error information on error, and null on success.
-	# The method does not stop on the first error and try to remove most file and directories.
+	# `last_error` is updated with the first encountered error, or null on success.
+	# The method does not stop on the first error and tries to remove the most files and directories.
 	#
 	# ~~~
 	# var path = "/does/not/exists/".to_path
 	# path.rmdir
 	# assert path.last_error != null
+	#
+	# path = "/tmp/path/to/create".to_path
+	# path.to_s.mkdir
+	# assert path.exists
+	# path.rmdir
+	# assert path.last_error == null
 	# ~~~
 	fun rmdir
 	do
-		last_error = null
+		var first_error = null
 		for file in self.files do
 			var stat = file.link_stat
 			if stat == null then
-				last_error = file.last_error
+				if first_error == null then first_error = file.last_error
 				continue
 			end
 			if stat.is_dir then
@@ -733,15 +739,16 @@ class Path
 			else
 				file.delete
 			end
-			if last_error == null then last_error = file.last_error
+			if first_error == null then first_error = file.last_error
 		end
 
 		# Delete the directory itself if things are fine
-		if last_error == null then
-			if path.to_cstring.rmdir then
-				last_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
+		if first_error == null then
+			if not path.to_cstring.rmdir then
+				first_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
 			end
 		end
+		self.last_error = first_error
 	end
 
 	redef fun ==(other) do return other isa Path and simplified.path == other.simplified.path
