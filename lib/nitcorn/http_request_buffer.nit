@@ -100,7 +100,7 @@ class HTTPConnection
 
 	# We are receiving body parts.
 	private fun parse_body(str: String) do
-		current_length += str.length
+		current_length += str.byte_length
 		current_body.add str
 		if current_length >= content_length then
 			parse_end
