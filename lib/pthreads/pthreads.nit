@@ -128,7 +128,7 @@ private extern class NativePthread in "C" `{ pthread_t * `}
 
 	fun equal(other: NativePthread): Bool `{ return pthread_equal(*self, *other); `}
 
-	fun kill(signal: Int) `{ pthread_kill(*self, signal); `}
+	fun kill(signal: Int) `{ pthread_kill(*self, (int)signal); `}
 end
 
 private extern class NativePthreadAttr in "C" `{ pthread_attr_t * `}
