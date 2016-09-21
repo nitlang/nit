@@ -168,7 +168,7 @@ private class IOSToolchain
 		# TODO support more than the iPhone and the simulator.
 		var compile_mode = if release then "Release" else "Debug"
 		var args = ["sh", "-c", "cd {ios_project_root}; " +
-			"xcodebuild -target '{project_name}' " +
+			"xcodebuild -quiet -target '{project_name}' " +
 			"-destination 'platform=iOS Simulator,name=iPhone' " +
 			"-configuration {compile_mode} " +
 			 "ONLY_ACTIVE_ARCH=NO "+
