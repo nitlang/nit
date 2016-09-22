@@ -183,7 +183,9 @@ redef class Window
 		var native_view = view.native
 		assert native_view isa UIView
 
-		native.view = native_view
+		if view isa ListLayout then
+			native.view.add_subview native_view
+		else native.view = native_view
 	end
 end
 
@@ -404,25 +406,46 @@ redef class ListLayout
 	# Real container of the subviews, contained within `native`
 	var native_stack_view = new UIStackView
 
-	init
+	redef fun parent=(parent)
 	do
+		super
+
+		var root_view
+		if parent isa Window then
+			root_view = parent.native.view
+		else if parent isa View then
+			root_view = parent.native
+		else return
+
+		# Setup scroll view
+		var native_scroll_view = native
+		native_scroll_view.translates_autoresizing_mask_into_constraits = false
+		native_add_constraints(root_view, native_scroll_view)
+
+		# Setup stack_view
 		native_stack_view.translates_autoresizing_mask_into_constraits = false
 		native_stack_view.axis = new UILayoutConstraintAxis.vertical
-		native_stack_view.alignment = new UIStackViewAlignment.fill
-		native_stack_view.distribution = new UIStackViewDistribution.equal_spacing
 		native_stack_view.spacing = 4.0
-
-		native.add_subview native_stack_view
-		native_add_constraints(native, native_stack_view)
+		native_scroll_view.add_subview native_stack_view
+		native_add_constraints(native_scroll_view, native_stack_view)
+		native_lock_vertical_scroll(native_scroll_view, native_stack_view)
 	end
 
-	private fun native_add_constraints(scroll_view: UIScrollView, stack_view: UIStackView) in "ObjC" `{
-		[scroll_view addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"V:|-8-[view]-8-|"
-			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
-		[scroll_view addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"H:|-8-[view]"
-			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
+	# Add constraints to lock the vertical and horizontal dimensions
+	private fun native_add_constraints(root_view: UIView, nested_view: UIView)
+	in "ObjC" `{
+		[root_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"V:|-0-[nested_view]-0-|"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"nested_view": nested_view}]];
+		[root_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"H:|-0-[nested_view]-0-|"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"nested_view": nested_view}]];
+	`}
+
+	# Add a constraint to lock to the scroll vertically
+	private fun native_lock_vertical_scroll(scroll_view: UIScrollView, stack_view: UIStackView)
+	in "ObjC" `{
+		[scroll_view addConstraint: [scroll_view.widthAnchor constraintEqualToAnchor:stack_view.widthAnchor]];
 	`}
 
 	redef fun add(view)
