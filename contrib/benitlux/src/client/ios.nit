@@ -117,30 +117,3 @@ redef class UIApplication
 		}
 	`}
 end
-
-# ---
-# Shorten labels
-
-redef class Label
-	# Ellipsize `text` so it fits within `max_length` characters
-	#
-	# FIXME Remove this when labels are correctly ellipsized on iOS.
-	redef fun text=(text)
-	do
-		if text == null then
-			super
-			return
-		end
-
-		var max_length = 50
-		if parent isa HorizontalLayout and parent.parent isa BeerView then
-			# This is the name of a beer, remember its a hack
-			max_length = 20
-		end
-
-		if text.length > max_length then
-			text = text.substring(0, max_length - 3).to_s + "..."
-		end
-		super text
-	end
-end
