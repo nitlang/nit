@@ -73,9 +73,25 @@ in "ObjC" `{
 		return TableView_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
 	}
 @end
+
+// View controller associated to an app.nit Window
+@interface NitViewController: UIViewController
+@end
+
+@implementation NitViewController
+	- (void)viewWillDisappear:(BOOL)animated {
+		[super viewWillDisappear:animated];
+
+		if (self.isMovingFromParentViewController || self.isBeingDismissed) {
+			extern App app_nit_ios_app;
+			App_after_window_pop(app_nit_ios_app);
+		}
+	}
+@end
 `}
 
 redef class App
+
 	redef fun did_finish_launching_with_options
 	do
 		app_delegate.window = new UIWindow
@@ -107,7 +123,7 @@ redef class App
 		native.edgesForExtendedLayout = UIRectEdgeNone;
 	`}
 
-	redef fun window=(window)
+	redef fun push_window(window)
 	do
 		set_view_controller(app_delegate.window, window.native)
 		super
@@ -116,15 +132,28 @@ redef class App
 	# Use iOS ` popViewControllerAnimated`
 	redef fun pop_window
 	do
-		window_stack.pop
+		manual_pop = true
 		pop_view_controller app_delegate.window
-		window.on_resume
+		super
 	end
 
 	private fun pop_view_controller(window: UIWindow) in "ObjC" `{
 		UINavigationController *navController = (UINavigationController*)window.rootViewController;
 		[navController popViewControllerAnimated: YES];
 	`}
+
+	# Is the next `after_window_pop`  triggered by a call to `pop_window`?
+	#
+	# Otherwise, it's by the user via the navigation bar "Back" button.
+	private var manual_pop = false
+
+	# Callback when `window` is displayed again
+	private fun after_window_pop
+	do
+		if not manual_pop then window_stack.pop
+		manual_pop = false
+		window.on_resume
+	end
 end
 
 redef class AppDelegate
@@ -165,10 +194,19 @@ redef class CompositeControl
 	end
 end
 
+# View controller associated to an app.nit `Window`
+extern class NitViewController
+	super UIViewController
+
+	new import App.after_window_pop in "ObjC" `{
+		return [[NitViewController alloc] init];
+	`}
+end
+
 redef class Window
 
-	redef type NATIVE: UIViewController
-	redef var native = new UIViewController
+	redef type NATIVE: NitViewController
+	redef var native = new NitViewController
 
 	# Title of this window
 	fun title: String do return native.title.to_s
