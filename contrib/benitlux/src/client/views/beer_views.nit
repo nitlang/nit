@@ -63,6 +63,7 @@ class BeerView
 		for i in [1..5] do
 			var but = new StarButton(beer_info.beer, i, i <= rating, parent=l_stars)
 			but.size = 1.5
+			but.enabled = app.user != null
 			star_buttons.add but
 		end
 	end
