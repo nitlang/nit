@@ -21,6 +21,7 @@ intrude import app::ui
 import client
 import push
 import checkins
+intrude import user_views
 
 redef class HomeWindow
 	init
@@ -58,6 +59,17 @@ redef class HomeWindow
 			checkin_button.text = "Check in".t
 		end
 	end
+end
+
+redef class SignupWindow
+	init do txt_name.native.disable_autocorrect
+end
+
+redef class UITextField
+	private fun disable_autocorrect in "ObjC" `{
+		self.autocorrectionType = UITextAutocorrectionTypeNo;
+		self.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	`}
 end
 
 redef class App
