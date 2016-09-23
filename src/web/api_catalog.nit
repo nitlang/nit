@@ -137,12 +137,10 @@ end
 redef class Person
 	super Jsonable
 
-	redef fun to_json do
-		var obj = new JsonObject
-		obj["name"] = name
-		obj["email"] = email
-		obj["page"] = page
-		obj["hash"] = (email or else "").md5.to_lower
-		return obj.to_json
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("name", name)
+		v.serialize_attribute("email", email)
+		v.serialize_attribute("page", page)
+		v.serialize_attribute("hash", (email or else "").md5.to_lower)
 	end
 end

@@ -21,7 +21,7 @@ module intent_api10
 import dalvik
 import android::bundle
 import serialization
-private import json::serialization
+private import json
 
 in "Java" `{
 	import android.content.Intent;

@@ -18,7 +18,7 @@ module html_components
 
 import doc_base
 import html::bootstrap
-import json::static
+import json
 
 # A label with a text content.
 class DocHTMLLabel

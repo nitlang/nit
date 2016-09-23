@@ -7,4 +7,3 @@ JsonArray
 	"blue": [1, 2],
 	"ocean": ["fishy", "salty"]
 }
-

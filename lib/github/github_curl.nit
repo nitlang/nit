@@ -18,6 +18,7 @@ module github_curl
 
 import curl
 import json::static
+import json
 
 # Specific Curl that know hot to talk to the github API
 class GithubCurl
@@ -127,9 +128,7 @@ class GithubError
 		json["message"] = message.to_json
 	end
 
-	redef fun to_json do
-		return json.to_json
-	end
+	redef fun serialize_to(v) do json.serialize_to v
 
 	redef fun to_s do return "[{name}] {super}"
 end

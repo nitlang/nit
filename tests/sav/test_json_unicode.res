@@ -2,4 +2,3 @@
 	"beer": "test",
 	"name": "Gaëa"
 }
-

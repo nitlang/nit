@@ -344,21 +344,8 @@ redef class Text
 end
 
 redef class JsonParseError
+	serialize
 
 	# Location of the error in source
 	var location: nullable Location = null
-
-	# Get the JSON representation of `self`.
-	#
-	# ~~~
-	# var err = new JsonParseError("foo", new Position(1, 2, 3, 4, 5, 6))
-	# assert err.to_json == "Parsing error: foo"
-	# ~~~
-	redef fun to_json do
-		var l = location
-		var m = message
-		return if l == null then "Parsing error: {m}" else "Parsing error at {l}: {m}"
-	end
-
-	redef fun to_s do return to_json
 end

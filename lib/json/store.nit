@@ -90,6 +90,7 @@
 module store
 
 import static
+import json
 
 # A JsonStore can save and load json data from file system.
 class JsonStore

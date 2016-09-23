@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import test_deserialization
-import json::serialization
+import json
 #alt1# import test_deserialization_serial
 #alt3# import test_deserialization_serial
 

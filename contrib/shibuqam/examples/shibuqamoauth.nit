@@ -172,7 +172,7 @@ module shibuqamoauth
 
 import popcorn
 import shibuqam
-import json::serialization
+import json
 
 redef class HttpRequest
 	# percent decoded get or post parameter.
@@ -304,7 +304,6 @@ end
 
 redef class User
 	super Jsonable
-	redef fun to_json do return serialize_to_json(plain=true)
 end
 
 # Information about an authenticated used stored on the server to be given to the client.

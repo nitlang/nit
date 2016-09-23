@@ -17,7 +17,7 @@ module linux_client
 
 import mnit::linux
 import linux::audio
-import json::serialization
+import json
 
 import client
 

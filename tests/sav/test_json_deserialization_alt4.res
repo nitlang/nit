@@ -82,16 +82,8 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 
 # Json:
 {
-	"a": [
-		"hello",
-		1234,
-		123.4
-	],
-	"b": [
-		"hella",
-		2345,
-		234.5
-	]
+	"a": ["hello", 1234, 123.4],
+	"b": ["hella", 2345, 234.5]
 }
 
 # Nit:
@@ -115,14 +107,8 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 
 # Json:
 {
-	"hs": [
-		-1,
-		0
-	],
-	"s": [
-		"one",
-		"two"
-	],
+	"hs": [-1, 0],
+	"s": ["one", "two"],
 	"hm": {
 		"one": 1,
 		"two": 2

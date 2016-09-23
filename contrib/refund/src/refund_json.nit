@@ -19,6 +19,7 @@ module refund_json
 
 import refund_base
 import json::static
+import json
 
 redef class RefundProcessor
 
@@ -89,6 +90,7 @@ redef class RefundProcessor
 	fun write_output(str: String, file: String) do
 		var ofs = new FileWriter.open(file)
 		ofs.write(str)
+		ofs.write("\n")
 		ofs.close
 	end
 
@@ -118,7 +120,7 @@ redef class RefundProcessor
 		exit 1
 	end
 
-	redef fun show_stats do print load_stats.to_json.to_pretty_json
+	redef fun show_stats do print load_stats.to_json_object.to_pretty_json
 
 	redef fun load_stats do
 		# If no stats found, return a new object
@@ -134,7 +136,7 @@ redef class RefundProcessor
 	end
 
 	redef fun save_stats(stats) do
-		write_output(stats.to_json.to_pretty_json, stats_file)
+		write_output(stats.to_json_object.to_pretty_json, stats_file)
 	end
 end
 
@@ -146,7 +148,7 @@ redef class RefundStats
 	end
 
 	# Outputs `self` as a JSON string.
-	fun to_json: JsonObject do
+	fun to_json_object: JsonObject do
 		var obj = new JsonObject
 		for k, v in self do obj[k] = v
 		return obj

@@ -43,8 +43,8 @@ class TestGame
 
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(ogame, "privat")
-		game.db.collection("players").insert(player1.to_json)
-		ogame.db.collection("players").insert(player2.to_json)
+		game.db.collection("players").insert(player1.to_json_object)
+		ogame.db.collection("players").insert(player2.to_json_object)
 
 		assert game.load_player("privat") == null
 		assert game.load_player("Morriar").name == "Morriar"
@@ -60,9 +60,9 @@ class TestGame
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(ogame, "privat")
 		var player3 = new Player(game, "xymus")
-		game.db.collection("players").insert(player1.to_json)
-		ogame.db.collection("players").insert(player2.to_json)
-		game.db.collection("players").insert(player3.to_json)
+		game.db.collection("players").insert(player1.to_json_object)
+		ogame.db.collection("players").insert(player2.to_json_object)
+		game.db.collection("players").insert(player3.to_json_object)
 
 		var players = game.load_players
 		var ok = ["Morriar", "xymus"]

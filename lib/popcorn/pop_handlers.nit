@@ -18,6 +18,7 @@
 module pop_handlers
 
 import pop_routes
+import json::static
 import json
 
 # Class handler for a route.

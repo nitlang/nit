@@ -15,7 +15,7 @@
 # Crawler on the nitweb web API
 module nitwebcrawl
 
-import json
+import json::static
 
 # Download a HTTP resource
 fun curl(url: String): String do

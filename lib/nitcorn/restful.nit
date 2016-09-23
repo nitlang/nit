@@ -16,7 +16,7 @@
 module restful is new_annotation(restful)
 
 import nitcorn
-import json::serialization
+import json
 
 # Action with `restful` methods
 class RestfulAction

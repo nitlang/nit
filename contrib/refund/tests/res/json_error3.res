@@ -1,3 +1,3 @@
 {
-	"message": "Wrong input file (Unexpected Eof; is acceptable instead: members, pair)"
+	"message": "Wrong input file (Malformed JSON object)"
 }

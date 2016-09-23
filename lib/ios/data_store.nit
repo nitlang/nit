@@ -17,7 +17,7 @@ module data_store
 
 import app::data_store
 import cocoa::foundation
-private import json::serialization
+private import json
 
 redef class App
 	redef var data_store = new UserDefaultView

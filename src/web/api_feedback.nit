@@ -100,7 +100,7 @@ class MEntityRatings
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 # Rating value of a MEntity
@@ -130,5 +130,5 @@ class MEntityRating
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end

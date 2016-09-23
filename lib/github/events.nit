@@ -18,7 +18,7 @@
 module events
 
 import api
-intrude import json::serialization
+intrude import json
 
 # Github event stub.
 class GithubEvent
@@ -33,8 +33,6 @@ class GithubEvent
 
 	# Repo where this event occured.
 	var repo: Repo is writable
-
-	redef fun to_json do return serialize_to_json
 end
 
 # Triggered when a commit comment is created.

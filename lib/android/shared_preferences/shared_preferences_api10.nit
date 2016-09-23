@@ -19,7 +19,7 @@ module shared_preferences_api10
 
 import dalvik
 import serialization
-private import json::serialization
+private import json
 
 in "Java" `{
 	import android.content.SharedPreferences;

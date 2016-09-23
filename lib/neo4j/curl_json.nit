@@ -16,6 +16,7 @@
 module curl_json
 
 import json::static
+import json
 intrude import curl
 
 # An abstract request that defines most of the standard options for Neo4j REST API

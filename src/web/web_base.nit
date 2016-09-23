@@ -124,7 +124,7 @@ class APIError
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 # Fullname representation that can be used to build decorated links
@@ -134,9 +134,10 @@ end
 class Namespace
 	super Array[nullable NSEntity]
 	super NSEntity
+	serialize
 
 	redef fun to_s do return self.join("")
-	redef fun to_json do return (new JsonArray.from(self)).to_json
+	redef fun serialize_to(v) do to_a.serialize_to(v)
 end
 
 # Something that goes in a Namespace
@@ -154,16 +155,17 @@ end
 # an infinite loop.
 class NSRef
 	super NSEntity
+	serialize
 
 	# The mentity to link to/
 	var mentity: MEntity
 
-	redef fun to_json do
+	redef fun serialize_to(v) do
 		var obj = new JsonObject
 		obj["web_url"] = mentity.web_url
 		obj["api_url"] = mentity.api_url
 		obj["name"] = mentity.name
-		return obj.to_json
+		obj.serialize_to(v)
 	end
 end
 
@@ -364,5 +366,5 @@ redef class POSetElement[E]
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end

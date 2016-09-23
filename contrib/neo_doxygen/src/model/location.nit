@@ -16,6 +16,7 @@
 module location
 
 import json::static
+import json
 
 # A location inside a source file.
 class Location
@@ -36,11 +37,13 @@ class Location
 	# The one-based column index of the last character.
 	var column_end: Int = 1 is writable
 
-	redef fun to_s: String do
+	redef fun to_s do
+		var path = path
 		var file_part = "/dev/null:"
-		if path != null and path.length > 0 then file_part = "{path.as(not null)}:"
+		if path != null and path.length > 0 then file_part = "{path}:"
 		return "{file_part}{line_start},{column_start}--{line_end},{column_end}"
 	end
 
-	redef fun to_json do return to_s.to_json
+	redef fun serialize_to(v) do to_s.serialize_to v
+	redef fun accept_json_serializer(v) do to_s.serialize_to v
 end

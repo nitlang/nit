@@ -54,7 +54,6 @@
 #	redef fun to_s do return title
 #	redef fun ==(o) do return o isa SELF and id == o.id
 #	redef fun hash do return id.hash
-#	redef fun to_json do return serialize_to_json
 # end
 #
 # # We then need to subclass the `MongoRepository` to provide Book specific services.
@@ -121,7 +120,7 @@ module pop_repos
 
 import popcorn::pop_config
 import serialization
-import json::serialization
+import json
 import mongodb::queries
 
 redef class AppConfig
@@ -436,7 +435,6 @@ abstract class RepoObject
 
 	redef fun hash do return id.hash
 	redef fun to_s do return id
-	redef fun to_json do return serialize_to_json
 end
 
 # JsonObject can be used as a `RepositoryQuery`.

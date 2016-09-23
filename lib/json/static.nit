@@ -16,11 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Static interface to get Nit objects from a Json string.
+# Static interface to read Nit objects from JSON strings
 #
-# `Text::parse_json` returns an equivalent Nit object from
-# the Json source. This object can then be type checked by the usual
-# languages features (`isa` and `as`).
+# `Text::parse_json` returns a simple Nit object from the JSON source.
+# This object can then be type checked as usual with `isa` and `as`.
 module static
 
 import error
@@ -29,64 +28,7 @@ private import json_lexer
 
 # Something that can be translated to JSON.
 interface Jsonable
-	# Encode `self` in JSON.
-	#
-	# This is a recursive method which can be refined by any subclasses.
-	# To write any `Serializable` object to JSON, see `serialize_to_json`.
-	#
-	# SEE: `append_json`
-	fun to_json: String is abstract
-
-	# Use `append_json` to implement `to_json`.
-	#
-	# Therefore, one that redefine `append_json` may use the following
-	# redefinition to link `to_json` and `append_json`:
-	#
-	# ~~~nitish
-	# redef fun to_json do return to_json_by_append
-	# ~~~
-	#
-	# Note: This is not the default implementation of `to_json` in order to
-	# avoid cyclic references between `append_json` and `to_json` when none are
-	# implemented.
-	protected fun to_json_by_append: String do
-		var buffer = new FlatBuffer
-		append_json(buffer)
-		return buffer.to_s
-	end
-
-	# Append the JSON representation of `self` to the specified buffer.
-	#
-	# SEE: `to_json`
-	fun append_json(buffer: Buffer) do buffer.append(to_json)
-
-	# Pretty print JSON string.
-	#
-	# ~~~
-	# var obj = new JsonObject
-	# obj["foo"] = 1
-	# obj["bar"] = true
-	# var arr = new JsonArray
-	# arr.add 2
-	# arr.add false
-	# arr.add "baz"
-	# obj["baz"] = arr
-	# var res = obj.to_pretty_json
-	# var exp = """{
-	# \t"foo": 1,
-	# \t"bar": true,
-	# \t"baz": [2, false, "baz"]
-	# }\n"""
-	# assert res == exp
-	# ~~~
-	fun to_pretty_json: String do
-		var res = new FlatBuffer
-		pretty_json_visit(res, 0)
-		res.add '\n'
-		return res.to_s
-	end
-
-	private fun pretty_json_visit(buffer: FlatBuffer, indent: Int) is abstract
+	super Serializable
 end
 
 redef class Text
@@ -107,31 +49,6 @@ redef class Text
 	#     assert not "string".json_need_escape
 	#     assert "\\\"string\\\"".json_need_escape
 	protected fun json_need_escape: Bool do return has('\\')
-
-	redef fun append_json(buffer) do
-		buffer.add '\"'
-		for i in [0 .. self.length[ do
-			var char = self[i]
-			if char == '\\' then
-				buffer.append "\\\\"
-			else if char == '\"' then
-				buffer.append "\\\""
-			else if char < ' ' then
-				if char == '\n' then
-					buffer.append "\\n"
-				else if char == '\r' then
-					buffer.append "\\r"
-				else if char == '\t' then
-					buffer.append "\\t"
-				else
-					buffer.append char.escape_to_utf16
-				end
-			else
-				buffer.add char
-			end
-		end
-		buffer.add '\"'
-	end
 
 	# Escapes `self` from a JSON string to a Nit string
 	#
@@ -178,19 +95,6 @@ redef class Text
 			i += 1
 		end
 		return res.to_s
-	end
-
-
-	# Encode `self` in JSON.
-	#
-	# ~~~
-	# assert "\t\"http://example.com\"\r\n\0\\".to_json ==
-	#     "\"\\t\\\"http://example.com\\\"\\r\\n\\u0000\\\\\""
-	# ~~~
-	redef fun to_json do
-		var b = new FlatBuffer.with_capacity(byte_length)
-		append_json(b)
-		return b.to_s
 	end
 
 	# Parse `self` as JSON.
@@ -248,116 +152,22 @@ redef class FlatText
 	end
 end
 
-redef class Buffer
-
-	# Append the JSON representation of `jsonable` to `self`.
-	#
-	# Append `"null"` for `null`.
-	private fun append_json_of(jsonable: nullable Jsonable) do
-		if jsonable isa Jsonable then
-			append jsonable.to_json
-		else
-			append "null"
-		end
-	end
-end
-
 redef class Int
 	super Jsonable
-
-	# Encode `self` in JSON.
-	#
-	#     assert 0.to_json == "0"
-	#     assert (-42).to_json == "-42"
-	redef fun to_json do return self.to_s
 end
 
 redef class Float
 	super Jsonable
-
-	# Encode `self` in JSON.
-	#
-	# Note: Because this method use `to_s`, it may lose precision.
-	#
-	# ~~~
-	# # Will not work as expected.
-	# # assert (-0.0).to_json == "-0.0"
-	#
-	# assert (.5).to_json == "0.5"
-	# assert (0.0).to_json == "0.0"
-	# ~~~
-	redef fun to_json do return self.to_s
 end
 
 redef class Bool
 	super Jsonable
-
-	# Encode `self` in JSON.
-	#
-	#     assert true.to_json == "true"
-	#     assert false.to_json == "false"
-	redef fun to_json do return self.to_s
 end
 
 # A map that can be translated into a JSON object.
 interface JsonMapRead[K: String, V: nullable Jsonable]
 	super MapRead[K, V]
 	super Jsonable
-
-	redef fun append_json(buffer) do
-		buffer.append "\{"
-		var it = iterator
-		if it.is_ok then
-			append_json_entry(it, buffer)
-			while it.is_ok do
-				buffer.append ","
-				append_json_entry(it, buffer)
-			end
-		end
-		it.finish
-		buffer.append "\}"
-	end
-
-	# Encode `self` in JSON.
-	#
-	#     var obj = new JsonObject
-	#     obj["foo"] = "bar"
-	#     assert obj.to_json == "\{\"foo\":\"bar\"\}"
-	#     obj = new JsonObject
-	#     obj["baz"] = null
-	#     assert obj.to_json == "\{\"baz\":null\}"
-	redef fun to_json do return to_json_by_append
-
-	redef fun pretty_json_visit(buffer, indent) do
-		buffer.append "\{\n"
-		indent += 1
-		var i = 0
-		for k, v in self do
-			buffer.append "\t" * indent
-			buffer.append "\"{k}\": "
-			if v isa JsonObject or v isa JsonArray then
-				v.pretty_json_visit(buffer, indent)
-			else
-				buffer.append v.to_json
-			end
-			if i < length - 1 then
-				buffer.append ","
-			end
-			buffer.append "\n"
-			i += 1
-		end
-		indent -= 1
-		buffer.append "\t" * indent
-		buffer.append "\}"
-	end
-
-	private fun append_json_entry(iterator: MapIterator[String, nullable Jsonable],
-			buffer: Buffer) do
-		buffer.append iterator.key.to_json
-		buffer.append ":"
-		buffer.append_json_of(iterator.item)
-		iterator.next
-	end
 end
 
 # A JSON Object.
@@ -370,51 +180,6 @@ end
 class JsonSequenceRead[E: nullable Jsonable]
 	super Jsonable
 	super SequenceRead[E]
-
-	redef fun append_json(buffer) do
-		buffer.append "["
-		var it = iterator
-		if it.is_ok then
-			append_json_entry(it, buffer)
-			while it.is_ok do
-				buffer.append ","
-				append_json_entry(it, buffer)
-			end
-		end
-		it.finish
-		buffer.append "]"
-	end
-
-	# Encode `self` in JSON.
-	#
-	#     var arr = new JsonArray.with_items("foo", null)
-	#     assert arr.to_json == "[\"foo\",null]"
-	#     arr.pop
-	#     assert arr.to_json =="[\"foo\"]"
-	#     arr.pop
-	#     assert arr.to_json =="[]"
-	redef fun to_json do return to_json_by_append
-
-	redef fun pretty_json_visit(buffer, indent) do
-		buffer.append "\["
-		var i = 0
-		for v in self do
-			if v isa JsonObject or v isa JsonArray then
-				v.pretty_json_visit(buffer, indent)
-			else
-				buffer.append v.to_json
-			end
-			if i < length - 1 then buffer.append ", "
-			i += 1
-		end
-		buffer.append "\]"
-	end
-
-	private fun append_json_entry(iterator: Iterator[nullable Jsonable],
-			buffer: Buffer) do
-		buffer.append_json_of(iterator.item)
-		iterator.next
-	end
 end
 
 # A JSON array.
@@ -425,48 +190,10 @@ end
 
 redef class JsonParseError
 	super Jsonable
-
-	# Get the JSON representation of `self`.
-	#
-	# ~~~
-	# var err = new JsonParseError("foo", new Position(1, 2, 3, 4, 5, 6))
-	# assert err.to_json == "\{\"error\":\"JsonParseError\"," +
-	#		"\"position\":\{" +
-	#			"\"pos_start\":1,\"pos_end\":2," +
-	#			"\"line_start\":3,\"line_end\":4," +
-	#			"\"col_start\":5,\"col_end\":6" +
-	#		"\},\"message\":\"foo\"\}"
-	# ~~~
-	redef fun to_json do
-		return "\{\"error\":\"JsonParseError\"," +
-				"\"position\":{position.to_json}," +
-				"\"message\":{message.to_json}\}"
-	end
-
-	redef fun pretty_json_visit(buf, indents) do
-		buf.clear
-		buf.append(to_json)
-	end
 end
 
 redef class Position
 	super Jsonable
-
-	# Get the JSON representation of `self`.
-	#
-	# ~~~
-	# var pos = new Position(1, 2, 3, 4, 5, 6)
-	# assert pos.to_json == "\{" +
-	#			"\"pos_start\":1,\"pos_end\":2," +
-	#			"\"line_start\":3,\"line_end\":4," +
-	#			"\"col_start\":5,\"col_end\":6" +
-	#		"\}"
-	# ~~~
-	redef fun to_json do
-		return "\{\"pos_start\":{pos_start},\"pos_end\":{pos_end}," +
-				"\"line_start\":{line_start},\"line_end\":{line_end}," +
-				"\"col_start\":{col_start},\"col_end\":{col_end}\}"
-	end
 end
 
 ################################################################################

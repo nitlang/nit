@@ -42,6 +42,7 @@
 # ~~~
 module mongodb
 
+import json::static
 import json
 private import native_mongodb
 

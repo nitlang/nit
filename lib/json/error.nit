@@ -16,6 +16,7 @@ import nitcc_runtime
 # Ill-formed JSON.
 class JsonParseError
 	super Error
+	serialize
 
 	# The location of the error in the original text.
 	var position: nullable Position

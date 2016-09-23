@@ -17,7 +17,7 @@ module http_request
 
 import app_base
 import pthreads
-import json::serialization
+import json
 
 import linux::http_request is conditional(linux)
 import android::http_request is conditional(android)

@@ -25,6 +25,7 @@
 module model_json
 
 import model::model_collect
+import json::static
 import json
 import loader
 
@@ -68,7 +69,7 @@ redef class MEntity
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 
 	# Return `self` as a JsonObject with references.
 	#
@@ -95,7 +96,7 @@ redef class MDoc
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class Location
@@ -115,13 +116,13 @@ redef class Location
 		return obj
 	end
 
-	redef fun to_json do return json.to_json
+	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class MVisibility
 	super Jsonable
 
-	redef fun to_json do return to_s.to_json
+	redef fun serialize_to(v) do to_s.serialize_to(v)
 end
 
 redef class MPackage

@@ -42,10 +42,10 @@ interface GameEntity
 	fun key: String is abstract
 
 	# Saves `self` in db.
-	fun save do game.db.collection(collection_name).save(to_json)
+	fun save do game.db.collection(collection_name).save(to_json_object)
 
 	# Json representation of `self`.
-	fun to_json: JsonObject do
+	fun to_json_object: JsonObject do
 		var json = new JsonObject
 		json["_id"] = key
 		return json
@@ -102,7 +102,7 @@ class Game
 	# Used to load entities from saved data.
 	fun from_json(json: JsonObject) do end
 
-	redef fun to_json do
+	redef fun to_json_object do
 		var json = super
 		json["name"] = name
 		return json
@@ -166,7 +166,7 @@ class Game
 	end
 
 	# Erase all saved data for this game.
-	fun clear do db.collection(collection_name).remove(to_json)
+	fun clear do db.collection(collection_name).remove(to_json_object)
 
 	# Verbosity level used fo stdout.
 	#
@@ -236,7 +236,7 @@ class Player
 		nitcoins = json["nitcoins"].as(Int)
 	end
 
-	redef fun to_json do
+	redef fun to_json_object do
 		var json = super
 		json["game"] = game.key
 		json["name"] = name

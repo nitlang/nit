@@ -51,7 +51,7 @@ class TestGame
 		var a3 = new Achievement(game, "test_id3", "test_name", "test_desc", 15)
 		game.add_achievement(a1)
 		game.add_achievement(a2)
-		game.db.collection("achievements").insert(a3.to_json)
+		game.db.collection("achievements").insert(a3.to_json_object)
 		var ok = [a1.id, a2.id]
 		var res = game.load_achievements
 		assert res.length == 2
