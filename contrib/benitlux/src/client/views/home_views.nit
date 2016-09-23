@@ -55,9 +55,8 @@ class HomeWindow
 	# Cut-point for the iOS adaptation
 	var layout_user = new VerticalLayout(parent=layout)
 	private var layout_login = new HorizontalLayout(parent=layout_user)
-	private var lbl_login_status = new Label(parent=layout_login, text="Welcome".t, size=1.5)
-	private var but_login = new Button(parent=layout_login, text="Login or signup".t)
-	private var but_preferences = new Button(parent=layout_login, text="Preferences".t)
+	private var but_preferences: nullable Button = null
+	private var but_login: nullable Button = null
 
 	private var layout_beers = new VerticalLayout(parent=layout)
 	var layout_beers_title = new HorizontalLayout(parent=layout_beers)
@@ -89,13 +88,12 @@ class HomeWindow
 		layout_login.clear
 		if app.user != null then
 			# Logged in
-			lbl_login_status.parent = layout_login
-			but_preferences.parent = layout_login
+			var lbl_login_status = new Label(parent=layout_login, text="Welcome".t, size=1.5)
 			lbl_login_status.set_welcome
 		else
-			but_login.parent = layout_login
-			but_preferences.parent = layout_login
+			self.but_login = new Button(parent=layout_login, text="Login or signup".t)
 		end
+		self.but_preferences = new Button(parent=layout_login, text="Preferences".t)
 
 		# Fill beers
 		(new ListDiffAction(self, "rest/since?token={app.token}")).start
