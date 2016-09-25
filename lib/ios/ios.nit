@@ -30,3 +30,8 @@ end
 redef class NSString
 	private fun nslog in "ObjC" `{ NSLog(@"%@", self); `}
 end
+
+redef class NativeString
+	# FIXME temp workaround for #1945, bypass Unicode checks
+	redef fun char_at(pos) do return self[pos].ascii
+end
