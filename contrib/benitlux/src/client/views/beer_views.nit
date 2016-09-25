@@ -136,7 +136,7 @@ end
 class StarButton
 	super Button
 
-	autoinit beer, rating, on, parent, enabled
+	autoinit beer, rating, on, parent, enabled, size, align
 
 	# Info on the beer to rate
 	var beer: Beer

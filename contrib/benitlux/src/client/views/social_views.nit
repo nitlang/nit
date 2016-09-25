@@ -118,7 +118,7 @@ end
 class FollowButton
 	super Button
 
-	autoinit followed_id, following, followed_by, parent, enabled, text
+	autoinit followed_id, following, followed_by, parent, enabled, text, size, align
 
 	# Id of the user to be followd/unfollow
 	var followed_id: Int
