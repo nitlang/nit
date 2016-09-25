@@ -102,7 +102,7 @@ class HomeWindow
 		(new HomeListPeopleAction(self, "rest/friends?token={app.token}")).start
 
 		# Check if token is still valid
-		(new CheckTokenAction(self, "rest/check_token?token={app.token}")).start
+		if app.token != "none" then (new CheckTokenAction(self, "rest/check_token?token={app.token}")).start
 	end
 
 	redef fun on_event(event)
