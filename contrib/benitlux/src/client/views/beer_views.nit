@@ -33,22 +33,26 @@ class BeerView
 	# Layout of the first line with the name and `star_buttons`
 	var top_line_layout = new HorizontalLayout(parent=self)
 
+	var lbl_name = new Label(parent=top_line_layout, text=beer_info.beer.name, size = 1.25) is lazy
+	var lbl_stats = new Label(parent=self, text=beer_info.rating_text, align=0.0, size=0.5) is lazy
+	var lbl_desc: Label is noinit
+	var lbl_comment: nullable Label = null
+
 	init
 	do
-		var lbl_name = new Label(parent=top_line_layout, text=beer_info.beer.name)
-		lbl_name.size = 1.25
+		lbl_name
 
 		var desc = beer_info.beer.desc
 		if beer_info.is_new then desc += " (New)".t
-		var lbl_desc = new Label(parent=self, text=desc)
+		lbl_desc = new Label(parent=self, text=desc, align=0.0)
 
-		var lbl_stats = new Label(parent=self, text=beer_info.rating_text)
-		lbl_stats.size = 0.5
+		lbl_stats
 
 		var badges = beer_info.badges
 		if badges != null then
 			var lbl_comment = new Label(parent=self, text=badges.join(" "))
 			lbl_comment.size = 0.5
+			self.lbl_comment = lbl_comment
 		end
 
 		var rating = beer_info.user_rating or else 0
