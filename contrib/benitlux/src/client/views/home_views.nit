@@ -54,29 +54,29 @@ class HomeWindow
 
 	# Cut-point for the iOS adaptation
 	var layout_user = new VerticalLayout(parent=layout)
-	private var layout_login = new HorizontalLayout(parent=layout_user)
+	private var layout_login = new SectionHeader(parent=layout_user)
 	private var but_preferences: nullable Button = null
 	private var but_login: nullable Button = null
 
 	private var layout_beers = new VerticalLayout(parent=layout)
-	var layout_beers_title = new HorizontalLayout(parent=layout_beers)
+	var layout_beers_title = new SectionHeader(parent=layout_beers)
 	var title_beers = new SectionTitle(parent=layout_beers_title, text="Beer Menu".t, size=1.5)
 	private var beer_button = new Button(parent=layout_beers_title, text="View all".t)
 	private var beer_list = new VerticalLayout(parent=layout_beers)
 	private var beer_temp_lbl = new Label(parent=beer_list, text="Loading...".t)
 
 	private var layout_social = new VerticalLayout(parent=layout)
-	private var social_header = new HorizontalLayout(parent=layout_social)
+	private var social_header = new SectionHeader(parent=layout_social)
 	private var social_title = new SectionTitle(parent=social_header, text="Friends".t, size=1.5)
 	private var social_button = new Button(parent=social_header, text="Manage".t)
 	private var social_list = new VerticalLayout(parent=layout_social)
 	private var social_temp_lbl = new Label(parent=social_list, text="Loading...".t)
 
 	private var layout_news = new VerticalLayout(parent=layout)
-	private var news_header = new HorizontalLayout(parent=layout_news)
+	var news_header = new SectionHeader(parent=layout_news)
 	private var news_title = new SectionTitle(parent=news_header, text="Events".t, size=1.5)
 	#private var news_button = new Button(parent=news_header, text="Open website") # TODO
-	private var news_label = new Label(parent=layout_news, text="Bière en cask le jeudi!")
+	private var news_cask = new EventView(parent=layout_news, text="Bière en cask le jeudi!")
 
 	redef fun on_resume do refresh
 
@@ -88,7 +88,7 @@ class HomeWindow
 		layout_login.clear
 		if app.user != null then
 			# Logged in
-			var lbl_login_status = new Label(parent=layout_login, text="Welcome".t, size=1.5)
+			var lbl_login_status = new SectionTitle(parent=layout_login, text="Welcome".t, size=1.5)
 			lbl_login_status.set_welcome
 		else
 			self.but_login = new Button(parent=layout_login, text="Login or signup".t)
@@ -132,8 +132,15 @@ class HomeWindow
 	end
 end
 
-# `Label` used in section headers
-class SectionTitle super Label end
+private class EventView
+	super VerticalLayout
+	super ItemView
+
+	var text: Text
+
+	var lbl = new Label(parent=self, text=text) is lazy
+	init do lbl
+end
 
 # Async request to update the beer list on the home screen
 class ListDiffAction

@@ -34,7 +34,7 @@ class BeerView
 	var top_line_layout = new HorizontalLayout(parent=self)
 
 	var lbl_name = new Label(parent=top_line_layout, text=beer_info.beer.name, size = 1.25) is lazy
-	var lbl_stats = new Label(parent=self, text=beer_info.rating_text, align=0.0, size=0.5) is lazy
+	var lbl_stats = new DescLabel(parent=self, text=beer_info.rating_text, size=0.5) is lazy
 	var lbl_desc: Label is noinit
 	var lbl_comment: nullable Label = null
 
@@ -44,13 +44,13 @@ class BeerView
 
 		var desc = beer_info.beer.desc
 		if beer_info.is_new then desc += " (New)".t
-		lbl_desc = new Label(parent=self, text=desc, align=0.0)
+		lbl_desc = new DescLabel(parent=self, text=desc)
 
 		lbl_stats
 
 		var badges = beer_info.badges
 		if badges != null then
-			var lbl_comment = new Label(parent=self, text=badges.join(" "))
+			var lbl_comment = new DescLabel(parent=self, text=badges.join(" "))
 			lbl_comment.size = 0.5
 			self.lbl_comment = lbl_comment
 		end

@@ -46,16 +46,16 @@ class UserWindow
 
 	private var layout_user_options = new VerticalLayout(parent=layout)
 
-	private var lbl_user_options_title = new Label(parent=layout_user_options,
+	private var user_options_header = new SectionHeader(parent=layout_user_options)
+	private var lbl_user_options_title = new SectionTitle(parent=user_options_header,
 		text="Account options".t)
 
-	private var lbl_welcome = new Label(parent=layout_user_options)
+	var lbl_welcome = new DescLabel(parent=layout_user_options)
 	private var but_logout = new Button(parent=layout_user_options, text="Logout".t)
 
 	# Refesh displayed text
 	fun refresh
 	do
-		lbl_user_options_title.size = 1.5
 		lbl_welcome.set_user_name
 		but_logout.enabled = app.user != null
 	end
@@ -83,7 +83,7 @@ class SignupWindow
 	super Window
 
 	private var list = new ListLayout(parent=self)
-	private var lbl_feedback = new Label(parent=list, text="Welcome")
+	private var lbl_feedback = new DescLabel(parent=list, text="Welcome")
 
 	private var layout_login = new VerticalLayout(parent=list)
 
@@ -99,7 +99,7 @@ class SignupWindow
 	private var pass_line = new HorizontalLayout(parent=layout_login)
 	private var lbl_pass = new Label(parent=pass_line, text="Password".t)
 	private var txt_pass = new TextInput(parent=pass_line, is_password=true)
-	private var lbl_pass_desc = new Label(parent=layout_login, size = 0.5,
+	private var lbl_pass_desc = new DescLabel(parent=layout_login, size = 0.5,
 		text="Passwords must be composed of at least 6 characters.".t)
 
 	private var but_login = new Button(parent=layout_login, text="Login".t)
@@ -109,7 +109,7 @@ class SignupWindow
 
 	private var layout_register = new VerticalLayout(parent=list)
 
-	private var lbl_signup_desc = new Label(parent=layout_register, size = 0.5,
+	private var lbl_signup_desc = new DescLabel(parent=layout_register, size = 0.5,
 		text="Fill the following fields to sign up.".t)
 
 	# Repeat password

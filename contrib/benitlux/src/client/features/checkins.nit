@@ -153,7 +153,8 @@ end
 
 redef class UserWindow
 
-	private var lbl_checkins_options_title = new Label(parent=layout,
+	private var header = new SectionHeader(parent=layout)
+	private var lbl_checkins_options_title = new SectionTitle(parent=header,
 		text="Share options".t)
 
 	private var chk_share_checkins = new CheckBox(parent=layout,
@@ -162,7 +163,6 @@ redef class UserWindow
 	init
 	do
 		chk_share_checkins.is_checked = app.share_checkins
-		lbl_checkins_options_title.size = 1.5
 	end
 
 	redef fun on_event(event)
