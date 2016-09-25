@@ -194,6 +194,18 @@ class CheckTokenAction
 	redef fun on_load(res, status) do intercept_error(res)
 end
 
+redef class BenitluxHttpRequest
+	redef fun intercept_error(res)
+	do
+		var r = super
+		if res isa BenitluxTokenError then
+			var window = app.window
+			if window isa HomeWindow then window.refresh
+		end
+		return r
+	end
+end
+
 # Today's date as a `String`
 fun today: String
 do
