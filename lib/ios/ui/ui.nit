@@ -378,6 +378,9 @@ redef class TextInput
 	redef fun size=(size) do native.size = ios_points(size)
 
 	redef fun align=(align) do native.align = align or else 0.0
+
+	# Set the placeholder text, shown in light gray when the field is empty
+	fun placeholder=(text: Text) do native.placeholder = text.to_nsstring
 end
 
 redef class UITextField
