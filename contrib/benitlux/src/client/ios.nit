@@ -27,13 +27,13 @@ redef class HomeWindow
 	init
 	do
 		title = "Benitlux"
+
+		# Force equal height for `news_header`
+		var b = new Button(text="", parent=news_header)
 		update_checkin_text
 	end
 
-	# TODO hide when not logged in
-	private var layout_login_checkin = new HorizontalLayout(parent=layout_user)
-	private var checkin_label = new Label(parent=layout_login_checkin)
-	private var checkin_button = new Button(parent=layout_login_checkin)
+	private var checkin_button = new Button(parent=layout_user, align=0.0)
 
 	redef fun on_event(event)
 	do
@@ -62,14 +62,22 @@ redef class HomeWindow
 end
 
 redef class SignupWindow
-	init do txt_name.native.disable_autocorrect
-end
+	init
+	do
+		title = "Login or Signup".t
+		txt_name.native.disable_autocorrect
+		txt_name.placeholder = "Name".t
+		txt_pass.placeholder = "Password".t
+		txt_pass2.placeholder = "Password".t
+		txt_email.placeholder = "example@example.com".t
+		lbl_feedback.native.text_color = new UIColor.red_color
+		lbl_feedback.align = 0.5
 
-redef class UITextField
-	private fun disable_autocorrect in "ObjC" `{
-		self.autocorrectionType = UITextAutocorrectionTypeNo;
-		self.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	`}
+		for l in [layout_login, layout_signup] do
+			l.native.spacing = 8.0
+			l.native.set_layout_margins(16.0, 8.0)
+		end
+	end
 end
 
 redef class App
@@ -95,7 +103,10 @@ redef class App
 end
 
 redef class UserWindow
-	init do title = "Preferences".t
+	init do
+		title = "Preferences".t
+		lbl_welcome.align = 0.5
+	end
 end
 
 redef class BeersWindow
@@ -103,10 +114,89 @@ redef class BeersWindow
 end
 
 redef class SocialWindow
-	init do title = "People".t
+	init do
+		title = "People".t
+		txt_query.placeholder = "Name".t
+		txt_query.align = 0.5
+		txt_query.native.disable_autocorrect
+	end
 end
 
-# --- Notifications
+redef class DescLabel
+	init do native.text_color = new UIColor.dark_gray_color
+end
+
+redef class SectionTitle
+	init do
+		native.text_color = new UIColor.init_with_white_alpha(0.4, 1.0)
+		size = 1.0
+	end
+end
+
+redef class SectionHeader
+	init do
+		native.layout_margins_relative_arrangement = true
+		native.set_layout_margins(16.0, 4.0)
+	end
+end
+
+redef class ItemView
+	init do
+		var native = native
+		if native isa UIStackView then
+			native.set_layout_margins(16.0, 2.0)
+			native.layout_margins_relative_arrangement = true
+		end
+		native.background_color = new UIColor.white_color
+		native.set_white_background
+	end
+end
+
+redef class BeerView
+	init do
+		lbl_name.size = 1.0
+		lbl_desc.size = 0.5
+		native.set_layout_margins(16.0, 8.0)
+	end
+end
+
+redef class ListLayout
+	init do native.background_color = new UIColor.group_table_view_background_color
+end
+
+redef class CheckBox super ItemView end
+
+# ---
+# Extern classes
+
+redef class UIView
+	private fun set_layout_margins(margin, margin_y: Float)
+	in "ObjC" `{
+		self.layoutMargins = UIEdgeInsetsMake(margin_y, margin, margin_y, margin);
+	`}
+
+	private fun set_white_background
+	in "ObjC" `{
+		UIView *colored_view = [[UIView alloc] initWithFrame:self.bounds];
+		colored_view.backgroundColor = [UIColor whiteColor];
+		colored_view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		[self insertSubview:colored_view atIndex:0];
+
+		[colored_view.layer setBorderColor: [[UIColor colorWithWhite:0.8 alpha:1.0] CGColor]];
+		[colored_view.layer setBorderWidth: 0.5];
+	`}
+end
+
+redef class UITextField
+	private fun disable_autocorrect
+	in "ObjC" `{
+		self.autocorrectionType = UITextAutocorrectionTypeNo;
+		self.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	`}
+end
+
+# ---
+# Notifications
 
 redef fun notify(title, content, id)
 do native_notify(title.to_nsstring, content.to_nsstring)
