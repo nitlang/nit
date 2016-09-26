@@ -235,9 +235,6 @@ redef class Layout
 	init
 	do
 		native.alignment = new UIStackViewAlignment.fill
-
-		# TODO make customizable
-		native.spacing = 4.0
 	end
 
 	redef fun add(view)
@@ -466,7 +463,6 @@ redef class ListLayout
 		# Setup stack_view
 		native_stack_view.translates_autoresizing_mask_into_constraits = false
 		native_stack_view.axis = new UILayoutConstraintAxis.vertical
-		native_stack_view.spacing = 4.0
 		native_scroll_view.add_subview native_stack_view
 		native_add_constraints(native_scroll_view, native_stack_view)
 		native_lock_vertical_scroll(native_scroll_view, native_stack_view)
