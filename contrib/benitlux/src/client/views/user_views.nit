@@ -83,9 +83,12 @@ class SignupWindow
 	super Window
 
 	private var list = new ListLayout(parent=self)
-	private var lbl_feedback = new DescLabel(parent=list, text="Welcome")
 
-	private var layout_login = new VerticalLayout(parent=list)
+	private var login_header = new SectionHeader(parent=list)
+	private var login_title = new SectionTitle(parent=login_header, text="Login".t)
+
+	# Layout for the top form
+	var layout_login = new SignupForm(parent=list)
 
 	# ---
 	# First the login options
@@ -104,25 +107,31 @@ class SignupWindow
 
 	private var but_login = new Button(parent=layout_login, text="Login".t)
 
+	private var lbl_feedback = new DescLabel(parent=layout_login, text=" ")
+
 	# ---
 	# Then, the signup options
 
-	private var layout_register = new VerticalLayout(parent=list)
+	private var signup_header = new SectionHeader(parent=list)
+	private var signup_title = new SectionTitle(parent=signup_header, text="Signup".t)
 
-	private var lbl_signup_desc = new DescLabel(parent=layout_register, size = 0.5,
+	# Layout for the 2nd form
+	var layout_signup = new SignupForm(parent=list)
+
+	private var lbl_signup_desc = new DescLabel(parent=layout_signup, size = 0.5,
 		text="Fill the following fields to sign up.".t)
 
 	# Repeat password
-	private var pass_line2 = new HorizontalLayout(parent=layout_register)
+	private var pass_line2 = new HorizontalLayout(parent=layout_signup)
 	private var lbl_pass2 = new Label(parent=pass_line2, text="Repeat password".t)
 	private var txt_pass2 = new TextInput(parent=pass_line2, is_password=true)
 
 	# Email
-	private var email_line = new HorizontalLayout(parent=layout_register)
+	private var email_line = new HorizontalLayout(parent=layout_signup)
 	private var lbl_email = new Label(parent=email_line, text="Email".t)
 	private var txt_email = new TextInput(parent=email_line)
 
-	private var but_signup = new Button(parent=layout_register, text="Signup".t)
+	private var but_signup = new Button(parent=layout_signup, text="Signup".t)
 
 	redef fun on_event(event)
 	do
@@ -170,6 +179,12 @@ class SignupWindow
 
 	# Show lasting feedback to the user in a label
 	fun feedback(text: String) do lbl_feedback.text = text
+end
+
+# Form for login or signup
+class SignupForm
+	super VerticalLayout
+	super ItemView
 end
 
 # ---
