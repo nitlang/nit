@@ -29,8 +29,9 @@ redef class Sys
 	private var jvm_cache: nullable JavaVM = null
 	private var jni_env_cache: nullable JniEnv = null
 
-	# Default Java Virtual Machine to use (will be instantiated using
-	# `create_default_jvm` if not already set)
+	# Default Java Virtual Machine to use
+	#
+	# Instantiated using `create_default_jvm` if not already set.
 	fun jvm: JavaVM
 	do
 		if jvm_cache == null then create_default_jvm
@@ -110,7 +111,11 @@ extern class JavaString in "Java" `{ java.lang.String `}
 		return nit_cstr;
 	`}
 
-	redef fun to_s do return to_cstring.to_s
+	redef fun to_s
+	do
+		if is_java_null then return "<{inspect_head}:null>"
+		return to_cstring.to_s
+	end
 end
 
 redef class NativeString
@@ -188,7 +193,7 @@ redef extern class JavaObject
 	# Use Java's `toString` for any `JavaObject`
 	redef fun to_s
 	do
-		if is_java_null then return super
+		if is_java_null then return "<{inspect_head}:null>"
 		return to_java_string.to_s
 	end
 end
