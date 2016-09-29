@@ -508,7 +508,7 @@ redef class NativeString
 		int di;
 
 		md5_init(&state);
-		md5_append(&state, (const md5_byte_t *)self, strlen(self));
+		md5_append(&state, (const md5_byte_t *)self, (int)strlen(self));
 		md5_finish(&state, digest);
 
 		for (di = 0; di < 16; ++di)

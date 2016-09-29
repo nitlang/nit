@@ -166,17 +166,25 @@ private class IOSToolchain
 		# Compile with `xcodebuild`
 		#
 		# TODO support more than the iPhone and the simulator.
+		var compile_mode = if release then "Release" else "Debug"
 		var args = ["sh", "-c", "cd {ios_project_root}; " +
-			"xcodebuild -target '{project_name}' " +
+			"xcodebuild -quiet -target '{project_name}' " +
 			"-destination 'platform=iOS Simulator,name=iPhone' " +
-			"-configuration {if release then "Release" else "Debug"} " +
+			"-configuration {compile_mode} " +
 			 "ONLY_ACTIVE_ARCH=NO "+
 			"-sdk iphonesimulator build"]
 		toolcontext.exec_and_check(args, "iOS project error")
 
 		# Move compiled app to destination
-		if outfile.file_exists then outfile.rmdir
-		args = ["mv", "{ios_project_root}/build/Debug-iphonesimulator/{project_name}.app", outfile]
+		if outfile.file_exists then
+			var error = outfile.rmdir
+			if error != null then
+				print_error error
+				exit 1
+			end
+		end
+
+		args = ["mv", "{ios_project_root}/build/{compile_mode}-iphonesimulator/{project_name}.app", outfile]
 		toolcontext.exec_and_check(args, "iOS project error")
 	end
 end

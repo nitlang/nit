@@ -79,7 +79,9 @@ bin/proto.app: $(shell nitls -M src/client/ios_proto.nit) ios/AppIcon.appiconset
 
 ios-release: $(shell nitls -M src/client/ios.nit) ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin/
-	nitc -o bin/benitlux.app src/client/ios.nit -D benitlux_rest_server_uri=http://$(SERVER)/
+	nitc -o bin/benitlux.app src/client/ios.nit \
+		-D benitlux_rest_server_uri=http://xymus.net/benitlux/ --release \
+		--compile-dir nit_compile
 
 ios/AppIcon.appiconset/Contents.json: art/icon.svg
 	mkdir -p ios
