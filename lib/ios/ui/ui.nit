@@ -73,9 +73,25 @@ in "ObjC" `{
 		return TableView_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
 	}
 @end
+
+// View controller associated to an app.nit Window
+@interface NitViewController: UIViewController
+@end
+
+@implementation NitViewController
+	- (void)viewWillDisappear:(BOOL)animated {
+		[super viewWillDisappear:animated];
+
+		if (self.isMovingFromParentViewController || self.isBeingDismissed) {
+			extern App app_nit_ios_app;
+			App_after_window_pop(app_nit_ios_app);
+		}
+	}
+@end
 `}
 
 redef class App
+
 	redef fun did_finish_launching_with_options
 	do
 		app_delegate.window = new UIWindow
@@ -107,7 +123,7 @@ redef class App
 		native.edgesForExtendedLayout = UIRectEdgeNone;
 	`}
 
-	redef fun window=(window)
+	redef fun push_window(window)
 	do
 		set_view_controller(app_delegate.window, window.native)
 		super
@@ -116,15 +132,28 @@ redef class App
 	# Use iOS ` popViewControllerAnimated`
 	redef fun pop_window
 	do
-		window_stack.pop
+		manual_pop = true
 		pop_view_controller app_delegate.window
-		window.on_resume
+		super
 	end
 
 	private fun pop_view_controller(window: UIWindow) in "ObjC" `{
 		UINavigationController *navController = (UINavigationController*)window.rootViewController;
 		[navController popViewControllerAnimated: YES];
 	`}
+
+	# Is the next `after_window_pop`  triggered by a call to `pop_window`?
+	#
+	# Otherwise, it's by the user via the navigation bar "Back" button.
+	private var manual_pop = false
+
+	# Callback when `window` is displayed again
+	private fun after_window_pop
+	do
+		if not manual_pop then window_stack.pop
+		manual_pop = false
+		window.on_resume
+	end
 end
 
 redef class AppDelegate
@@ -165,10 +194,19 @@ redef class CompositeControl
 	end
 end
 
+# View controller associated to an app.nit `Window`
+extern class NitViewController
+	super UIViewController
+
+	new import App.after_window_pop in "ObjC" `{
+		return [[NitViewController alloc] init];
+	`}
+end
+
 redef class Window
 
-	redef type NATIVE: UIViewController
-	redef var native = new UIViewController
+	redef type NATIVE: NitViewController
+	redef var native = new NitViewController
 
 	# Title of this window
 	fun title: String do return native.title.to_s
@@ -183,7 +221,9 @@ redef class Window
 		var native_view = view.native
 		assert native_view isa UIView
 
-		native.view = native_view
+		if view isa ListLayout then
+			native.view.add_subview native_view
+		else native.view = native_view
 	end
 end
 
@@ -195,9 +235,6 @@ redef class Layout
 	init
 	do
 		native.alignment = new UIStackViewAlignment.fill
-
-		# TODO make customizable
-		native.spacing = 4.0
 	end
 
 	redef fun add(view)
@@ -226,6 +263,15 @@ redef class VerticalLayout
 	end
 end
 
+redef class TextView
+	# Convert `size` from app.nit relative size to iOS font points
+	private fun ios_points(size: nullable Float): Float
+	do
+		size = size or else 1.0
+		return 8.0 + size * 5.0
+	end
+end
+
 redef class Label
 
 	redef type NATIVE: UILabel
@@ -234,29 +280,26 @@ redef class Label
 	redef fun text=(text) do native.text = (text or else "").to_nsstring
 	redef fun text do return native.text.to_s
 
-	redef fun size=(size)
-	do
-		size = size or else 1.0
-		var points = 8.0 + size * 8.0
-		set_size_native(native, points)
-	end
+	redef fun size=(size) do native.size = ios_points(size)
 
-	private fun set_size_native(native: UILabel, points: Float)
+	redef fun align=(align) do native.align = align or else 0.0
+end
+
+redef class UILabel
+
+	private fun size=(points: Float)
 	in "ObjC" `{
-		native.font = [UIFont systemFontOfSize: points];
+		self.font = [UIFont systemFontOfSize: points];
 	`}
 
-	redef fun align=(align) do set_align_native(native, align or else 0.0)
-
-	private fun set_align_native(native: UILabel, align: Float)
+	private fun align=(align: Float)
 	in "ObjC" `{
-
 		if (align == 0.5)
-			native.textAlignment = NSTextAlignmentCenter;
+			self.textAlignment = NSTextAlignmentCenter;
 		else if (align < 0.5)
-			native.textAlignment = NSTextAlignmentLeft;
+			self.textAlignment = NSTextAlignmentLeft;
 		else//if (align > 0.5)
-			native.textAlignment = NSTextAlignmentRight;
+			self.textAlignment = NSTextAlignmentRight;
 	`}
 end
 
@@ -328,6 +371,31 @@ redef class TextInput
 		native.secure_text_entry = value or else false
 		super
 	end
+
+	redef fun size=(size) do native.size = ios_points(size)
+
+	redef fun align=(align) do native.align = align or else 0.0
+
+	# Set the placeholder text, shown in light gray when the field is empty
+	fun placeholder=(text: Text) do native.placeholder = text.to_nsstring
+end
+
+redef class UITextField
+
+	private fun size=(points: Float)
+	in "ObjC" `{
+		self.font = [UIFont systemFontOfSize: points];
+	`}
+
+	private fun align=(align: Float)
+	in "ObjC" `{
+		if (align == 0.5)
+			self.textAlignment = NSTextAlignmentCenter;
+		else if (align < 0.5)
+			self.textAlignment = NSTextAlignmentLeft;
+		else//if (align > 0.5)
+			self.textAlignment = NSTextAlignmentRight;
+	`}
 end
 
 redef class Button
@@ -344,6 +412,10 @@ redef class Button
 
 	redef fun enabled=(enabled) do native.enabled = enabled or else true
 	redef fun enabled do return native.enabled
+
+	redef fun size=(size) do native.title_label.size = ios_points(size)
+
+	redef fun align=(align) do native.title_label.align = align or else 0.0
 end
 
 redef class UIButton
@@ -372,25 +444,45 @@ redef class ListLayout
 	# Real container of the subviews, contained within `native`
 	var native_stack_view = new UIStackView
 
-	init
+	redef fun parent=(parent)
 	do
+		super
+
+		var root_view
+		if parent isa Window then
+			root_view = parent.native.view
+		else if parent isa View then
+			root_view = parent.native
+		else return
+
+		# Setup scroll view
+		var native_scroll_view = native
+		native_scroll_view.translates_autoresizing_mask_into_constraits = false
+		native_add_constraints(root_view, native_scroll_view)
+
+		# Setup stack_view
 		native_stack_view.translates_autoresizing_mask_into_constraits = false
 		native_stack_view.axis = new UILayoutConstraintAxis.vertical
-		native_stack_view.alignment = new UIStackViewAlignment.fill
-		native_stack_view.distribution = new UIStackViewDistribution.equal_spacing
-		native_stack_view.spacing = 4.0
-
-		native.add_subview native_stack_view
-		native_add_constraints(native, native_stack_view)
+		native_scroll_view.add_subview native_stack_view
+		native_add_constraints(native_scroll_view, native_stack_view)
+		native_lock_vertical_scroll(native_scroll_view, native_stack_view)
 	end
 
-	private fun native_add_constraints(scroll_view: UIScrollView, stack_view: UIStackView) in "ObjC" `{
-		[scroll_view addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"V:|-8-[view]-8-|"
-			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
-		[scroll_view addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"H:|-8-[view]"
-			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
+	# Add constraints to lock the vertical and horizontal dimensions
+	private fun native_add_constraints(root_view: UIView, nested_view: UIView)
+	in "ObjC" `{
+		[root_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"V:|-0-[nested_view]-0-|"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"nested_view": nested_view}]];
+		[root_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"H:|-0-[nested_view]-0-|"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"nested_view": nested_view}]];
+	`}
+
+	# Add a constraint to lock to the scroll vertically
+	private fun native_lock_vertical_scroll(scroll_view: UIScrollView, stack_view: UIStackView)
+	in "ObjC" `{
+		[scroll_view addConstraint: [scroll_view.widthAnchor constraintEqualToAnchor:stack_view.widthAnchor]];
 	`}
 
 	redef fun add(view)
