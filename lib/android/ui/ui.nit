@@ -330,11 +330,13 @@ redef class NativeButton
 		final int final_sender_object = sender_object;
 		Button_incr_ref(final_sender_object);
 
-		return new android.widget.Button(context){
+		return new android.widget.Button(context) {
 			@Override
 			public boolean onTouchEvent(android.view.MotionEvent event) {
-				if(event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+				if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
 					Button_on_click(final_sender_object);
+					return true;
+				} else if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
 					return true;
 				}
 				return false;

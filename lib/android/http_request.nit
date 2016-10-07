@@ -54,7 +54,23 @@ redef class Text
 		var res
 		if jrep.is_exception then
 			jrep = jrep.as_exception
-			res = new HttpRequestResult(null, new IOError(jrep.message.to_s))
+
+			# If the top exception doesn't have a message, get it from its causes.
+			var msg = null
+			var cause: JavaThrowable = jrep
+			loop
+				var jmsg = cause.message
+				if not jmsg.is_java_null then
+					msg = jmsg.to_s
+					break
+				else
+					cause = cause.cause
+					if cause.is_java_null then break
+				end
+			end
+			if msg == null then msg = jrep.to_s
+
+			res = new HttpRequestResult(null, new IOError(msg))
 		else if jrep.is_http_response then
 			jrep = jrep.as_http_response
 			res = new HttpRequestResult(jrep.content.to_s, null, jrep.status_code)
@@ -89,6 +105,7 @@ private fun java_http_get(uri: JavaString): JavaObject in "Java" `{
 		HttpGet get = new HttpGet(uri);
 		return client.execute(get);
 	} catch (Exception ex) {
+		ex.printStackTrace();
 		return ex;
 	}
 `}
