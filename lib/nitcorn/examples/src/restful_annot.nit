@@ -12,12 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Example for the `restful` annotation documented at `lib/nitcorn/restful.nit`
+module restful_annot
+
 import nitcorn::restful
 
+# An action root to its `restful` methods
 class MyAction
 	super RestfulAction
 
 	# Method answering requests like `foo?s=some_string&i=42&b=true`
+	#
+	# By default, the name of the HTTP resource is the name of the method.
+	# Responds to all HTTP methods, including GET, POST, PUT and DELETE.
 	fun foo(s: String, i: Int, b: Bool): HttpResponse
 	is restful do
 		var resp = new HttpResponse(200)
@@ -25,9 +32,13 @@ class MyAction
 		return resp
 	end
 
-	# Method answering requests like `bar?s=these_arguments_are_optional`
+	# Method answering requests like `api_name?s=these_arguments_are_optional`
+	#
+	# This method is available as both `api_name` and `alt_name` in HTTP.
+	# Responds only to the GET and PUT HTTP method.
 	fun bar(s: nullable String, i: nullable Int, b: nullable Bool): HttpResponse
-	is restful do
+	is restful("api_name", "alt_name", GET, PUT) do
+
 		var resp = new HttpResponse(200)
 		resp.body = "bar {s or else "null"} {i or else "null"} {b or else "null"}"
 		return resp
@@ -36,8 +47,11 @@ end
 
 var vh = new VirtualHost("localhost:8080")
 
-# Serve everything with our restful action
-vh.routes.add new Route(null, new MyAction)
+# Set `rest_path` as the root for an instance of `MyAction`, so:
+# * `MyClass::foo` is available as `localhost:8080/rest_path/foo?...`,
+# * `MyClass::bar` is available as both `localhost:8080/rest_path/api_name?...`
+#   and `localhost:8080/rest_path/alt_name?...`.
+vh.routes.add new Route("rest_path", new MyAction)
 
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
