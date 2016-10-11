@@ -182,11 +182,11 @@ for mclass in phase.restful_classes do
 redef class {{{mclass}}}
 	redef fun answer(request, truncated_uri)
 	do
-		var verbs = truncated_uri.split("/")
-		if verbs.not_empty and verbs.first.is_empty then verbs.shift
+		var resources = truncated_uri.split("/")
+		if resources.not_empty and resources.first.is_empty then resources.shift
 
-		if verbs.length != 1 then return super
-		var verb = verbs.first
+		if resources.length != 1 then return super
+		var resource = resources.first
 
 """
 	var methods = mclass.restful_methods
@@ -197,7 +197,7 @@ redef class {{{mclass}}}
 		t.add "		"
 		if i != 0 then t.add "else "
 
-		t.add """if verb == "{{{method.name}}}" then
+		t.add """if resource == "{{{method.name}}}" then
 """
 
 		var args = new Array[String]
