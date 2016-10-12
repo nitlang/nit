@@ -164,7 +164,8 @@ interface SignalHandler
 
 			nit_signals_list[signal].safely = safely;
 
-			nit_SignalHandler_receive_signal = SignalHandler_receive_signal;
+			nit_SignalHandler_receive_signal =
+				(void (*)(void*, long))&SignalHandler_receive_signal;
 		}
 	`}
 
