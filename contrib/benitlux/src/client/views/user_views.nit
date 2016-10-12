@@ -146,7 +146,7 @@ class SignupWindow
 
 				if sender == but_login then
 					feedback "Logging in...".t
-					(new LoginOrSignupAction(self, "rest/login?name={name}&pass={pass.pass_hash}")).start
+					(new LoginOrSignupAction(self, "rest/login?name={name.to_percent_encoding}&pass={pass.pass_hash}")).start
 				else if sender == but_signup then
 					if pass != txt_pass2.text then
 						feedback "Passwords do not match.".t
@@ -160,7 +160,7 @@ class SignupWindow
 					end
 
 					feedback "Signing up...".t
-					(new LoginOrSignupAction(self, "rest/signup?name={name}&pass={pass.pass_hash}&email={email}")).start
+					(new LoginOrSignupAction(self, "rest/signup?name={name.to_percent_encoding}&pass={pass.pass_hash}&email={email.to_percent_encoding}")).start
 				end
 			end
 		end

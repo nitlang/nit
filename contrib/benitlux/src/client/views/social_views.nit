@@ -66,7 +66,7 @@ class SocialWindow
 		var query = txt_query.text
 		if query == null or query.is_empty then return
 
-		var res = "rest/search?token={app.token}&query={query}&offset=0"
+		var res = "rest/search?token={app.token}&query={query.to_percent_encoding}&offset=0"
 		(new ListUsersAction(self, res)).start
 	end
 
