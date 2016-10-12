@@ -239,7 +239,10 @@ class HttpRequestParser
 			for param in get_args do
 				var key_value = param.split_with("=")
 				if key_value.length < 2 then continue
-				query_strings[key_value[0]] = key_value[1]
+
+				var key = key_value[0].from_percent_encoding
+				var value = key_value[1].from_percent_encoding
+				query_strings[key] = value
 			end
 		end
 
