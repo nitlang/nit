@@ -65,6 +65,14 @@ in "C" `{
 	{
 		ConnectionFactory_accept_connection(ctx, listener, fd, addrin, socklen);
 	}
+
+	// Callback forwarded to 'EventCallback.callback'
+	static void signal_cb(evutil_socket_t fd, short events, void *data)
+	{
+		EventCallback handler = data;
+		EventCallback_callback(handler, events);
+	}
+
 #endif
 
 `}
@@ -94,6 +102,38 @@ extern class NativeEventBase `{ struct event_base * `}
 	fun loopexit `{ event_base_loopexit(self, NULL); `}
 
 	redef fun free `{ event_base_free(self); `}
+end
+
+# Event, libevent's basic unit of operation
+extern class NativeEvent `{ struct event * `}
+
+	# Add to the set of pending events
+	#
+	# TODO support timeout
+	fun add `{ event_add(self, NULL); `}
+
+	# Remove from the set of monitored events
+	fun del `{ event_del(self); `}
+
+	redef fun free `{ event_free(self); `}
+end
+
+# Signal event
+extern class NativeEvSignal
+	super NativeEvent
+
+	new (base: NativeEventBase, signal: Int, handler: EventCallback)
+	import EventCallback.callback `{
+		EventCallback_incr_ref(handler);
+		return evsignal_new(base, signal, signal_cb, handler);
+	`}
+end
+
+# Receiver of event callbacks
+interface EventCallback
+
+	# Callback on an event
+	fun callback(events: Int) do end
 end
 
 # Spawned to manage a specific connection
