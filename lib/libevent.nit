@@ -85,16 +85,15 @@ extern class NativeEventBase `{ struct event_base * `}
 	# Event dispatching loop
 	#
 	# This loop will run the event base until either there are no more added
-	# events, or until something calls `exit_loop`.
+	# events, or until something calls `loopexit`.
 	fun dispatch `{ event_base_dispatch(self); `}
 
 	# Exit the event loop
 	#
 	# TODO support timer
-	fun exit_loop `{ event_base_loopexit(self, NULL); `}
+	fun loopexit `{ event_base_loopexit(self, NULL); `}
 
-	# Destroy this instance
-	fun destroy `{ event_base_free(self); `}
+	redef fun free `{ event_base_free(self); `}
 end
 
 # Spawned to manage a specific connection
