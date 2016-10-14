@@ -7,12 +7,15 @@ end
 import restful_annot
 
 redef class MyAction
-	redef fun answer(request, truncated_uri)
+	redef fun prepare_respond_and_close(request, truncated_uri, http_server)
 	do
 		var resources = truncated_uri.split("/")
 		if resources.not_empty and resources.first.is_empty then resources.shift
 
-		if resources.length != 1 then return super
+		if resources.length != 1 then
+			super
+			return
+		end
 		var resource = resources.first
 
 		if (resource == "foo") then
@@ -20,30 +23,74 @@ redef class MyAction
 			var out_s = in_s
 
 			var in_i = request.string_arg("i")
-			var out_i = deserialize_arg(in_i)
+			var out_i = deserialize_arg(in_i, "Int")
 
 			var in_b = request.string_arg("b")
-			var out_b = deserialize_arg(in_b)
+			var out_b = deserialize_arg(in_b, "Bool")
 
-			if not out_s isa String or not out_i isa Int or not out_b isa Bool then
-				return super
+			if out_s isa String and out_i isa Int and out_b isa Bool then
+				var response = foo(out_s, out_i, out_b)
+				http_server.respond response
+				http_server.close
+				return
 			end
-			return foo(out_s, out_i, out_b)
-		else if (resource == "api_name" or resource == "alt_name") and (request.method == "GET" or request.method == "PUT") then
+		end
+		if (resource == "api_name" or resource == "alt_name") and (request.method == "GET" or request.method == "PUT") then
 			var in_s = request.string_arg("s")
 			var out_s = in_s
 
 			var in_i = request.string_arg("i")
-			var out_i = deserialize_arg(in_i)
+			var out_i = deserialize_arg(in_i, "nullable Int")
 
 			var in_b = request.string_arg("b")
-			var out_b = deserialize_arg(in_b)
+			var out_b = deserialize_arg(in_b, "nullable Bool")
 
-			if not out_i isa nullable Int or not out_b isa nullable Bool then
-				return super
+			if out_i isa nullable Int and out_b isa nullable Bool then
+				var response = bar(out_s, out_i, out_b)
+				http_server.respond response
+				http_server.close
+				return
 			end
-			return bar(out_s, out_i, out_b)
 		end
-		return super
+		if (resource == "async_service") then
+			var in_str = request.string_arg("str")
+			var out_str = in_str
+
+			if out_str isa String then
+				var task = new Task_MyAction_async_service(self, request, http_server, out_str)
+				self.thread_pool.execute task
+				return
+			end
+		end
+		if (resource == "complex_args") then
+			var in_array = request.string_arg("array")
+			var out_array = deserialize_arg(in_array, "Array[String]")
+
+			var in_data = request.string_arg("data")
+			var out_data = deserialize_arg(in_data, "MyData")
+
+			if out_array isa Array[String] and out_data isa MyData then
+				var response = complex_args(out_array, out_data)
+				http_server.respond response
+				http_server.close
+				return
+			end
+		end
+		super
 	end
 end
+
+# Generated task to execute MyAction::async_service
+class Task_MyAction_async_service
+	super RestfulTask
+
+	redef type A: MyAction
+
+	private var out_str: String
+
+	redef fun indirect_restful_method
+	do
+		return action.async_service(out_str)
+	end
+end
+

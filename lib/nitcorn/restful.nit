@@ -53,8 +53,8 @@
 module restful is new_annotation(restful)
 
 import nitcorn
-import json
-import pthreads
+private import json
+import pthreads::threadpool
 
 # Action with `restful` methods
 class RestfulAction
@@ -82,6 +82,9 @@ class RestfulAction
 
 		return obj
 	end
+
+	# Thread pool used by methods annotated with `restful(async)`
+	var thread_pool = new ThreadPool is writable
 end
 
 # Thread dedicated to a single `request`

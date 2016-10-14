@@ -212,6 +212,9 @@ for mclass in phase.restful_classes do
 	var t = new Template
 	nit_module.content.add t
 
+	var classes = new Template
+	nit_module.content.add classes
+
 	t.add """
 redef class {{{mclass}}}
 	redef fun prepare_respond_and_close(request, truncated_uri, http_server)
@@ -279,12 +282,50 @@ redef class {{{mclass}}}
 		var sig = ""
 		if args.not_empty then sig = "({args.join(", ")})"
 
-		t.add """
+		if not method.restful_async then
+			# Synchronous method
+			t.add """
 				var response = {{{method.name}}}{{{sig}}}
 				http_server.respond response
 				http_server.close
 				return
 """
+		else
+			# Asynchronous method
+			var task_name = "Task_{mclass}_{method.name}"
+			args.unshift "http_server"
+			args.unshift "request"
+			args.unshift "self"
+
+			t.add """
+				var task = new {{{task_name}}}({{{args.join(", ")}}})
+				self.thread_pool.execute task
+				return
+"""
+
+			var thread_attribs = new Array[String]
+			for param in msig.mparameters do
+				thread_attribs.add """
+	private var out_{{{param.name}}}: {{{param.mtype}}}"""
+			end
+
+			classes.add """
+
+# Generated task to execute {{{mclass}}}::{{{method.name}}}
+class {{{task_name}}}
+	super RestfulTask
+
+	redef type A: {{{mclass}}}
+
+{{{thread_attribs.join("\n")}}}
+
+	redef fun indirect_restful_method
+	do
+		return action.{{{method.name}}}{{{sig}}}
+	end
+end
+"""
+		end
 
 		if isas.not_empty then t.add """
 			end
