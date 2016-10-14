@@ -279,6 +279,7 @@ redef class Collection[E]
 			if not v.try_to_serialize(e) then
 				assert e != null # null would have been serialized
 				v.warn("element of type {e.class_name} is not serializable.")
+				v.stream.write "null"
 			end
 		end
 		v.stream.write "]"
