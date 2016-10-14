@@ -37,6 +37,12 @@ private class RestfulPhase
 			return
 		end
 
+		var mpropdef = node.mpropdef
+		if mpropdef == null then return
+		var mproperty = mpropdef.mproperty
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
+
 		var http_resources = new Array[String]
 		var http_methods = new Array[String]
 		for arg in nat.n_args do
@@ -48,19 +54,14 @@ private class RestfulPhase
 			else if arg isa ATypeExpr and not id.chars.has("[") then
 				# Class id -> HTTP method
 				http_methods.add id
+			else if id == "async" then
+				mproperty.restful_async = true
 			else
 				toolcontext.error(nat.location,
 					"Syntax Error: `restful` expects String literals or ids as arguments.")
 				return
 			end
 		end
-
-		var mpropdef = node.mpropdef
-		if mpropdef == null then return
-
-		var mproperty = mpropdef.mproperty
-		var mclassdef = mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
 
 		# Test subclass of `RestfulAction`
 		var sup_class_name = "RestfulAction"
@@ -97,6 +98,9 @@ redef class MMethod
 
 	# Associated resources within an action, e.g. `foo` in `http://localhost/foo?arg=bar`
 	private var restful_resources: Array[String] = [name] is lazy
+
+	# Is this a `restful` method to be executed asynchronously
+	private var restful_async = false
 end
 
 redef class ToolContext
