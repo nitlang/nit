@@ -210,12 +210,15 @@ for mclass in phase.restful_classes do
 
 	t.add """
 redef class {{{mclass}}}
-	redef fun answer(request, truncated_uri)
+	redef fun prepare_respond_and_close(request, truncated_uri, http_server)
 	do
 		var resources = truncated_uri.split("/")
 		if resources.not_empty and resources.first.is_empty then resources.shift
 
-		if resources.length != 1 then return super
+		if resources.length != 1 then
+			super
+			return
+		end
 		var resource = resources.first
 
 """
@@ -273,7 +276,10 @@ redef class {{{mclass}}}
 		if args.not_empty then sig = "({args.join(", ")})"
 
 		t.add """
-			return {{{method.name}}}{{{sig}}}
+				var response = {{{method.name}}}{{{sig}}}
+				http_server.respond response
+				http_server.close
+				return
 """
 
 		if isas.not_empty then t.add """
@@ -285,7 +291,7 @@ redef class {{{mclass}}}
 	end
 
 	t.add """
-		return super
+		super
 	end
 end"""
 end
