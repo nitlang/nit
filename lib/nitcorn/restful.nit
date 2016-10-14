@@ -32,7 +32,7 @@
 # Arguments that are `nullable` are optional,
 # if they are missing `null` is passed to the `restful` method.
 #
-# The annotation accepts two kinds of arguments, in any order:
+# The annotation accepts three kinds of arguments, in any order:
 #
 # * String literals rename or add an alias for the HTTP resource.
 #   By default, the name of the HTTP resource is the name of the `restful` method.
@@ -41,6 +41,10 @@
 #
 # * Ids such as `GET`, `POST`, `PUT` and `DELETE` restrict which HTTP methods
 #   are accepted. By default, all HTTP methods are accepted.
+#
+# * The `async` keyword triggers executing calls to this service asynchronously
+#   by the `thread_pool` attribute of the `RestfulAction`.
+#   By default, each call are executed on the same thread in a FIFO order.
 #
 # See the example at `lib/nitcorn/examples/restful_annot.nit` or
 # a real world use case at `contrib/benitlux/src/server/benitlux_controller.nit`.
