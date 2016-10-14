@@ -57,6 +57,12 @@ class JsonDeserializer
 	# ~~~
 	var whitelist = new Array[Text]
 
+	# Should objects be checked if they a subtype of the static type before deserialization?
+	#
+	# Defaults to `true`, as it should always be activated.
+	# It can be turned off to implement the subtype check itself.
+	var check_subtypes = true is writable
+
 	# Root json object parsed from input text.
 	private var root: nullable Object is noinit
 
@@ -175,7 +181,7 @@ class JsonDeserializer
 					if class_name == null and static_type != null then
 						# Fallack to the static type, strip the `nullable` prefix
 						var prefix = "nullable "
-						if static_type.has(prefix) then
+						if static_type.has_prefix(prefix) then
 							class_name = static_type.substring_from(prefix.length)
 						else class_name = static_type
 					end
@@ -194,6 +200,15 @@ class JsonDeserializer
 				if whitelist.not_empty and not whitelist.has(class_name) then
 					errors.add new Error("Deserialization Error: '{class_name}' not in whitelist")
 					return null
+				end
+
+				if static_type != null and check_subtypes then
+					var static_class = static_type.strip_nullable_and_params
+					var dynamic_class = class_name.strip_nullable_and_params
+					if not class_inheritance_metamodel.has_edge(dynamic_class, static_class) then
+						errors.add new Error("Deserialization Error: `{class_name}` is not a subtype of the static type `{static_type}`")
+						return null
+					end
 				end
 
 				# advance on path
@@ -395,6 +410,25 @@ redef class Text
 		end
 		return res
 	end
+
+	# Strip the `nullable` prefix and the params from the class name `self`
+	#
+	# ~~~nitish
+	# assert "String".strip_nullable_and_params == "String"
+	# assert "Array[Int]".strip_nullable_and_params == "Array"
+	# assert "Map[Set[String], Set[Int]]".strip_nullable_and_params == "Map"
+	# ~~~
+	private fun strip_nullable_and_params: String
+	do
+		var class_name = to_s
+
+		var prefix = "nullable "
+		if class_name.has_prefix(prefix) then class_name = class_name.substring_from(prefix.length)
+
+		var bracket_index = class_name.index_of('[')
+		if bracket_index == -1 then return class_name
+		return class_name.substring(0, bracket_index)
+	end
 end
 
 redef class SimpleCollection[E]
@@ -510,6 +544,7 @@ redef class Sys
 	# ~~~
 	var class_inheritance_metamodel: POSet[String] is lazy do
 		var engine = new JsonDeserializer(class_inheritance_metamodel_json.to_s)
+		engine.check_subtypes = false
 		engine.whitelist.add_all(
 			["String", "POSet[String]", "POSetElement[String]", "HashSet[String]", "HashMap[String, POSetElement[String]]"])
 		var poset = engine.deserialize
