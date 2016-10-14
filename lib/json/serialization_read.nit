@@ -27,6 +27,35 @@ class JsonDeserializer
 	# Json text to deserialize from.
 	private var text: Text
 
+	# Accepted parameterized classes to deserialize
+	#
+	# If `whitelist.empty`, all types are accepted.
+	#
+	# ~~~nitish
+	# import json::serialization
+	#
+	# class MyClass
+	#     serialize
+	# end
+	#
+	# var json_string = """
+	# {"__class" = "MyClass"}
+	# """
+	#
+	# var deserializer = new JsonDeserializer(json_string)
+	# var obj = deserializer.deserialize
+	# assert deserializer.errors.is_empty
+	# assert obj isa MyClass
+	#
+	# deserializer = new JsonDeserializer(json_string)
+	# deserializer.whitelist.add "Array[String]"
+	# deserializer.whitelist.add "AnotherAcceptedClass"
+	# obj = deserializer.deserialize
+	# assert deserializer.errors.length == 1
+	# assert obj == null
+	# ~~~
+	var whitelist = new Array[Text]
+
 	# Root json object parsed from input text.
 	private var root: nullable Object is noinit
 
@@ -159,6 +188,11 @@ class JsonDeserializer
 				if not class_name isa String then
 					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
 					return object
+				end
+
+				if whitelist.not_empty and not whitelist.has(class_name) then
+					errors.add new Error("Deserialization Error: '{class_name}' not in whitelist")
+					return null
 				end
 
 				# advance on path
