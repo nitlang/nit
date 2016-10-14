@@ -19,6 +19,7 @@ import ::serialization::caching
 private import ::serialization::engine_tools
 private import static
 private import string_parser
+import poset
 
 # Deserializer from a Json string.
 class JsonDeserializer
@@ -490,5 +491,45 @@ redef class Map[K, V]
 				self[key] = value
 			end
 		end
+	end
+end
+
+# ---
+# Metamodel
+
+# Class inheritance graph as a `POSet[String]` serialized to JSON
+private fun class_inheritance_metamodel_json: NativeString is intern
+
+redef class Sys
+	# Class inheritance graph
+	#
+	# ~~~
+	# var hierarchy = class_inheritance_metamodel
+	# assert hierarchy.has_edge("String", "Object")
+	# assert not hierarchy.has_edge("Object", "String")
+	# ~~~
+	var class_inheritance_metamodel: POSet[String] is lazy do
+		var engine = new JsonDeserializer(class_inheritance_metamodel_json.to_s)
+		engine.whitelist.add_all(
+			["String", "POSet[String]", "POSetElement[String]", "HashSet[String]", "HashMap[String, POSetElement[String]]"])
+		var poset = engine.deserialize
+		if engine.errors.not_empty then
+			print_error engine.errors.join("\n")
+			return new POSet[String]
+		end
+		if poset isa POSet[String] then return poset
+		return new POSet[String]
+	end
+end
+
+redef class Deserializer
+	redef fun deserialize_class(name)
+	do
+		if name == "POSet[String]" then return new POSet[String].from_deserializer(self)
+		if name == "POSetElement[String]" then return new POSetElement[String].from_deserializer(self)
+		if name == "HashSet[String]" then return new HashSet[String].from_deserializer(self)
+		if name == "HashMap[String, POSetElement[String]]" then return new HashMap[String, POSetElement[String]].from_deserializer(self)
+
+		return super
 	end
 end
