@@ -54,6 +54,7 @@ module restful is new_annotation(restful)
 
 import nitcorn
 import json
+import pthreads
 
 # Action with `restful` methods
 class RestfulAction
@@ -80,5 +81,32 @@ class RestfulAction
 		end
 
 		return obj
+	end
+end
+
+# Thread dedicated to a single `request`
+abstract class RestfulTask
+	super Task
+
+	# Type of `action`
+	type A: RestfulAction
+
+	# Receiver action
+	var action: A
+
+	# Request that created this thread
+	var request: HttpRequest
+
+	# Server handling the `request`
+	var http_server: HttpServer
+
+	# Indirection to the real method in `action`
+	protected fun indirect_restful_method: HttpResponse is abstract
+
+	redef fun main
+	do
+		var response = indirect_restful_method
+		http_server.respond response
+		http_server.close
 	end
 end
