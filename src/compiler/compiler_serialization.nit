@@ -21,7 +21,18 @@ import abstract_compiler
 redef class ModelBuilder
 	redef fun write_and_make(compiler)
 	do
-		write_poset_to_file(compiler, "nit_class_inheritance_metamodel", compiler.mainmodule.flatten_mclass_hierarchy)
+		var uses_json_serialization_read = false
+		for mod in compiler.mainmodule.in_importation.greaters do
+			var concern = mod.parent_concern
+			if mod.name == "serialization_read" and concern != null and concern.name == "json" then
+				uses_json_serialization_read = true
+				break
+			end
+		end
+
+		if uses_json_serialization_read then
+			write_poset_to_file(compiler, "nit_class_inheritance_metamodel", compiler.mainmodule.flatten_mclass_hierarchy)
+		end
 
 		super
 	end
