@@ -224,9 +224,6 @@ redef class {{{mclass}}}
 		var msig = method.intro.msignature
 		if msig == null then continue
 
-		t.add "		"
-		if i != 0 then t.add "else "
-
 		# Condition to select this method from a request
 		var conds = new Array[String]
 
@@ -242,7 +239,8 @@ redef class {{{mclass}}}
 			conds.add "(" + method_conds.join(" or ") + ")"
 		end
 
-		t.add """if {{{conds.join(" and ")}}} then
+		t.add """
+		if {{{conds.join(" and ")}}} then
 """
 
 		# Extract the arguments from the request for the method call
@@ -268,9 +266,7 @@ redef class {{{mclass}}}
 		end
 
 		if isas.not_empty then t.add """
-			if not {{{isas.join(" or not ")}}} then
-				return super
-			end
+			if {{{isas.join(" and ")}}} then
 """
 
 		var sig = ""
@@ -279,10 +275,16 @@ redef class {{{mclass}}}
 		t.add """
 			return {{{method.name}}}{{{sig}}}
 """
+
+		if isas.not_empty then t.add """
+			end
+"""
+		t.add """
+		end
+"""
 	end
 
 	t.add """
-		end
 		return super
 	end
 end"""
