@@ -488,6 +488,26 @@ redef class Map[K, V]
 			var keys = v.path.last.get_or_null("__keys")
 			var values = v.path.last.get_or_null("__values")
 
+			if keys == null and values == null then
+				# Fallback to a plain object
+				for key, value_src in v.path.last do
+					var value = v.convert_object(value_src)
+
+					if not key isa K then
+						v.errors.add new AttributeTypeError(self, "keys", key, "K")
+						continue
+					end
+
+					if not value isa V then
+						v.errors.add new AttributeTypeError(self, "values", value, "V")
+						continue
+					end
+
+					self[key] = value
+				end
+				return
+			end
+
 			# Length is optional
 			if length == null and keys isa SequenceRead[nullable Object] then length = keys.length
 
