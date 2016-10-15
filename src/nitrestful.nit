@@ -23,7 +23,7 @@ private class RestfulPhase
 	super Phase
 
 	# Classes with methods marked with the `restful` annotation
-	var restful_classes = new HashSet[MClass]
+	var restful_classes = new HashSet[MClassDef]
 
 	redef fun process_annotated_node(node, nat)
 	do
@@ -77,16 +77,15 @@ private class RestfulPhase
 		end
 
 		# Register the property
-		var mclass = mclassdef.mclass
-		mclass.restful_methods.add mproperty
-		restful_classes.add mclass
+		mclassdef.restful_methods.add mproperty
+		restful_classes.add mclassdef
 
 		if http_resources.not_empty then mproperty.restful_resources = http_resources
 		mproperty.restful_verbs = http_methods
 	end
 end
 
-redef class MClass
+redef class MClassDef
 
 	# Methods with the `restful` annotation in this class
 	private var restful_methods = new Array[MMethod]
@@ -207,7 +206,8 @@ end
 var phase = toolcontext.restful_phase
 assert phase isa RestfulPhase
 
-for mclass in phase.restful_classes do
+for mclassdef in phase.restful_classes do
+	var mclass = mclassdef.mclass
 
 	var t = new Template
 	nit_module.content.add t
@@ -229,7 +229,7 @@ redef class {{{mclass}}}
 		var resource = resources.first
 
 """
-	var methods = mclass.restful_methods
+	var methods = mclassdef.restful_methods
 	for i in methods.length.times, method in methods do
 		var msig = method.intro.msignature
 		if msig == null then continue
