@@ -131,7 +131,7 @@ redef class MType
 		else
 			# Deserialize everything else
 			template.add """
-			var out_{{{arg_name}}} = deserialize_arg(in_{{{arg_name}}})
+			var out_{{{arg_name}}} = deserialize_arg(in_{{{arg_name}}}, "{{{self.name}}}")
 """
 		end
 	end
@@ -263,7 +263,11 @@ redef class {{{mclass}}}
 """
 
 			var mtype = param.mtype
-			mtype.gen_arg_convert(t, param.name)
+			var bound_mtype = mclassdef.bound_mtype
+			var resolved_mtype = mtype.resolve_for(bound_mtype, bound_mtype, mclassdef.mmodule, true)
+			var resolved_type_name = resolved_mtype.name
+
+			resolved_mtype.gen_arg_convert(t, param.name)
 
 			var arg = "out_{param.name}"
 			args.add arg
