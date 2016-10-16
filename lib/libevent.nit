@@ -90,6 +90,14 @@ extern class NativeEventBase `{ struct event_base * `}
 	# Has `self` been correctly initialized?
 	fun is_valid: Bool do return not address_is_null
 
+	# Reinitialize the event base after a fork
+	#
+	# Some event mechanisms do not survive across fork.
+	# The event base needs to be reinitialized with the `reinit` method.
+	#
+	# Returns `true` if some events could not be re-added.
+	fun reinit: Bool `{ return event_reinit(self); `}
+
 	# Event dispatching loop
 	#
 	# This loop will run the event base until either there are no more added
@@ -510,3 +518,21 @@ end
 
 # Enable some relatively expensive debugging checks that would normally be turned off
 fun enable_debug_mode `{ event_enable_debug_mode(); `}
+
+# Use Windows builtin locking and thread ID functions
+fun use_windows_threads: Bool `{
+#ifdef EVTHREAD_USE_WINDOWS_THREADS_IMPLEMENTED
+	return evthread_use_windows_threads();
+#else
+	return -1;
+#endif
+`}
+
+# Use Pthreads locking and thread ID functions
+fun use_pthreads: Bool `{
+#ifdef EVTHREAD_USE_PTHREADS_IMPLEMENTED
+	return evthread_use_pthreads();
+#else
+	return -1;
+#endif
+`}
