@@ -65,16 +65,16 @@ in "C" `{
 	{
 		ConnectionFactory_accept_connection(ctx, listener, fd, addrin, socklen);
 	}
+#endif
 
+#ifdef EventCallback_incr_ref
 	// Callback forwarded to 'EventCallback.callback'
 	static void signal_cb(evutil_socket_t fd, short events, void *data)
 	{
 		EventCallback handler = data;
 		EventCallback_callback(handler, events);
 	}
-
 #endif
-
 `}
 
 # Structure to hold information and state for a Libevent dispatch loop.
