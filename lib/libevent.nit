@@ -468,3 +468,6 @@ class ConnectionFactory
 		return NULL;
 	`}
 end
+
+# Enable some relatively expensive debugging checks that would normally be turned off
+fun enable_debug_mode `{ event_enable_debug_mode(); `}

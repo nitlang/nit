@@ -13,6 +13,43 @@
 # limitations under the License.
 
 # Support module for the `nitrestful` tool and the `restful` annotation
+#
+# The `restful` annotation is applied on a method to assign it to an HTTP resource.
+# The `restful` method must be a property of a subclass of `RestfulAction` and
+# return an `HTTPResponse`.
+# Once an instance of the class is assigned to a route, the method
+# can be invoked as a resource under that route.
+# The returned `HTTPResponse` will be sent back to the client.
+#
+# The arguments of the method must be deserializable.
+# So use simple data types like `String`, `Int`, `Float`, etc.
+# or any other `Serializable` class.
+# The method is invoked only if all the arguments are correctly passed
+# in the JSON format by the HTTP client.
+# There is one exception, `String` arguments are returned as is,
+# they don't need the surrounding `""`.
+# If an argument is missing or there a format error, the `answer` method responds to the request.
+# Arguments that are `nullable` are optional,
+# if they are missing `null` is passed to the `restful` method.
+#
+# The annotation accepts two kinds of arguments, in any order:
+#
+# * String literals rename or add an alias for the HTTP resource.
+#   By default, the name of the HTTP resource is the name of the `restful` method.
+#   The first string literal replaces the default name,
+#   while additional string literals add aliases.
+#
+# * Ids such as `GET`, `POST`, `PUT` and `DELETE` restrict which HTTP methods
+#   are accepted. By default, all HTTP methods are accepted.
+#
+# See the example at `lib/nitcorn/examples/restful_annot.nit` or
+# a real world use case at `contrib/benitlux/src/server/benitlux_controller.nit`.
+#
+# The `restful` annotation is implemented by then `nitrestful` tool.
+# To compile a module (`my_module.nit`) that uses the `restful` annotation:
+#
+# * Run `nitrestful my_module.nit` to produce `my_module_rest.nit`
+# * Link `my_module_rest.nit` at compilation: `nitc my_module.nit -m my_module_rest.nit`.
 module restful is new_annotation(restful)
 
 import nitcorn

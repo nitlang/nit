@@ -51,6 +51,8 @@ private class ATypeCounterVisitor
 
 	redef fun visit(n)
 	do
+		if n isa AAnnotation then return
+
 		if n isa AType then
 			var mclassdef = self.nclassdef.mclassdef
 			var mtype = modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, n)
