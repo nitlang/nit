@@ -80,7 +80,7 @@ class PkgconfigPhase
 			proc_exist.wait
 			status = proc_exist.status
 			if status == 1 then
-				modelbuilder.error(nat, "Error: package `{pkg}` unknown by `pkg-config`, make sure the development package is be installed.")
+				modelbuilder.error(nat, "Error: dev package for `{pkg}` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.")
 				return
 			else if status != 0 then
 				modelbuilder.error(nat, "Error: something went wrong calling `pkg-config`, make sure it is correctly installed.")
