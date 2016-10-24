@@ -19,6 +19,7 @@ import ::serialization::caching
 private import ::serialization::engine_tools
 private import static
 private import string_parser
+import poset
 
 # Deserializer from a Json string.
 class JsonDeserializer
@@ -26,6 +27,41 @@ class JsonDeserializer
 
 	# Json text to deserialize from.
 	private var text: Text
+
+	# Accepted parameterized classes to deserialize
+	#
+	# If `whitelist.empty`, all types are accepted.
+	#
+	# ~~~nitish
+	# import json::serialization
+	#
+	# class MyClass
+	#     serialize
+	# end
+	#
+	# var json_string = """
+	# {"__class" = "MyClass"}
+	# """
+	#
+	# var deserializer = new JsonDeserializer(json_string)
+	# var obj = deserializer.deserialize
+	# assert deserializer.errors.is_empty
+	# assert obj isa MyClass
+	#
+	# deserializer = new JsonDeserializer(json_string)
+	# deserializer.whitelist.add "Array[String]"
+	# deserializer.whitelist.add "AnotherAcceptedClass"
+	# obj = deserializer.deserialize
+	# assert deserializer.errors.length == 1
+	# assert obj == null
+	# ~~~
+	var whitelist = new Array[Text]
+
+	# Should objects be checked if they a subtype of the static type before deserialization?
+	#
+	# Defaults to `true`, as it should always be activated.
+	# It can be turned off to implement the subtype check itself.
+	var check_subtypes = true is writable
 
 	# Root json object parsed from input text.
 	private var root: nullable Object is noinit
@@ -145,7 +181,7 @@ class JsonDeserializer
 					if class_name == null and static_type != null then
 						# Fallack to the static type, strip the `nullable` prefix
 						var prefix = "nullable "
-						if static_type.has(prefix) then
+						if static_type.has_prefix(prefix) then
 							class_name = static_type.substring_from(prefix.length)
 						else class_name = static_type
 					end
@@ -159,6 +195,20 @@ class JsonDeserializer
 				if not class_name isa String then
 					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
 					return object
+				end
+
+				if whitelist.not_empty and not whitelist.has(class_name) then
+					errors.add new Error("Deserialization Error: '{class_name}' not in whitelist")
+					return null
+				end
+
+				if static_type != null and check_subtypes then
+					var static_class = static_type.strip_nullable_and_params
+					var dynamic_class = class_name.strip_nullable_and_params
+					if not class_inheritance_metamodel.has_edge(dynamic_class, static_class) then
+						errors.add new Error("Deserialization Error: `{class_name}` is not a subtype of the static type `{static_type}`")
+						return null
+					end
 				end
 
 				# advance on path
@@ -271,10 +321,10 @@ class JsonDeserializer
 	# Current array open for deserialization, used by `SimpleCollection::from_deserializer`
 	private var opened_array: nullable Array[nullable Object] = null
 
-	redef fun deserialize
+	redef fun deserialize(static_type)
 	do
 		errors.clear
-		return convert_object(root)
+		return convert_object(root, static_type)
 	end
 
 	# User customizable heuristic to infer the name of the Nit class to deserialize `json_object`
@@ -359,6 +409,25 @@ redef class Text
 			print_error "Deserialization Errors: {deserializer.errors.join(", ")}"
 		end
 		return res
+	end
+
+	# Strip the `nullable` prefix and the params from the class name `self`
+	#
+	# ~~~nitish
+	# assert "String".strip_nullable_and_params == "String"
+	# assert "Array[Int]".strip_nullable_and_params == "Array"
+	# assert "Map[Set[String], Set[Int]]".strip_nullable_and_params == "Map"
+	# ~~~
+	private fun strip_nullable_and_params: String
+	do
+		var class_name = to_s
+
+		var prefix = "nullable "
+		if class_name.has_prefix(prefix) then class_name = class_name.substring_from(prefix.length)
+
+		var bracket_index = class_name.index_of('[')
+		if bracket_index == -1 then return class_name
+		return class_name.substring(0, bracket_index)
 	end
 end
 
@@ -456,5 +525,46 @@ redef class Map[K, V]
 				self[key] = value
 			end
 		end
+	end
+end
+
+# ---
+# Metamodel
+
+# Class inheritance graph as a `POSet[String]` serialized to JSON
+private fun class_inheritance_metamodel_json: NativeString is intern
+
+redef class Sys
+	# Class inheritance graph
+	#
+	# ~~~
+	# var hierarchy = class_inheritance_metamodel
+	# assert hierarchy.has_edge("String", "Object")
+	# assert not hierarchy.has_edge("Object", "String")
+	# ~~~
+	var class_inheritance_metamodel: POSet[String] is lazy do
+		var engine = new JsonDeserializer(class_inheritance_metamodel_json.to_s)
+		engine.check_subtypes = false
+		engine.whitelist.add_all(
+			["String", "POSet[String]", "POSetElement[String]", "HashSet[String]", "HashMap[String, POSetElement[String]]"])
+		var poset = engine.deserialize
+		if engine.errors.not_empty then
+			print_error engine.errors.join("\n")
+			return new POSet[String]
+		end
+		if poset isa POSet[String] then return poset
+		return new POSet[String]
+	end
+end
+
+redef class Deserializer
+	redef fun deserialize_class(name)
+	do
+		if name == "POSet[String]" then return new POSet[String].from_deserializer(self)
+		if name == "POSetElement[String]" then return new POSetElement[String].from_deserializer(self)
+		if name == "HashSet[String]" then return new HashSet[String].from_deserializer(self)
+		if name == "HashMap[String, POSetElement[String]]" then return new HashMap[String, POSetElement[String]].from_deserializer(self)
+
+		return super
 	end
 end

@@ -92,8 +92,10 @@ end
 abstract class Deserializer
 	# Deserialize and return an object, storing errors in the attribute `errors`
 	#
+	# If a `static_type` is given, only subtypes of the `static_type` are accepted.
+	#
 	# This method behavior varies according to the implementation engines.
-	fun deserialize: nullable Object is abstract
+	fun deserialize(static_type: nullable String): nullable Object is abstract
 
 	# Deserialize the attribute with `name` from the object open for deserialization
 	#

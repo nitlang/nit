@@ -181,6 +181,16 @@ private class SerializationPhasePreModel
 	do
 		var npropdefs = nclassdef.n_propdefs
 
+		# Do not insert a `core_serialize_to` if it already exists
+		for npropdef in npropdefs do
+			if npropdef isa AMethPropdef then
+				var methid = npropdef.n_methid
+				if methid != null and methid.collect_text == "core_serialize_to" then
+					return
+				end
+			end
+		end
+
 		var code = new Array[String]
 		code.add "redef fun core_serialize_to(v)"
 		code.add "do"
@@ -307,14 +317,28 @@ do
 			var type_name = mtype.to_s
 			var name = attribute.name
 
+			var resolved_type_name = type_name
+			var mclassdef = nclassdef.mclassdef
+			if mclassdef != null then
+				var bound_mtype = mclassdef.bound_mtype
+				var resolved_mtype = mtype.resolve_for(bound_mtype, bound_mtype, mclassdef.mmodule, true)
+				resolved_type_name = resolved_mtype.name
+
+				# TODO Use something like `V.class_name` to get the precise runtime type of virtual types.
+				# We currently use the upper bound of virtual types as static type in generated code
+				# for type suggestion and to prevent loading unexected types.
+				# This leaves a security issue when, for example, `DefaultMap::default_value`
+				# is bound to `nullable Object` and would allow any object to be loaded.
+			end
+
 			if type_name == "nullable Object" then
 				# Don't type check
 				code.add """
-	self.{{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
+	self.{{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{resolved_type_name}}}")
 """
 			else
 				code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{resolved_type_name}}}")
 	if v.deserialize_attribute_missing then
 """
 				# What to do when an attribute is missing?
@@ -328,7 +352,7 @@ do
 
 				code.add """
 	else if not {{{name}}} isa {{{type_name}}} then
-		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
+		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{resolved_type_name}}}")
 		if v.keep_going == false then return
 	else
 		self.{{{name}}} = {{{name}}}

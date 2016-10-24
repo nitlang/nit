@@ -12,16 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Compilation to C
-module compiler
+# Service to serialize `POSet` to JSON
+module serialize_model
 
-import separate_erasure_compiler
-import global_compiler
-import compiler_ffi
-import memory_logger
-import compiler_serialization
+private import json::serialization_write
 
-import platform::android
-import platform::pnacl
-import platform::emscripten
-import platform::ios
+import model
+
+redef class POSet[E]
+
+	# Serialize `self` to JSON using the `to_s` representation of each item
+	fun to_thin_json: String
+	do
+		var thin_poset = new POSet[String]
+		for e in self do
+			var from = (e or else "null").to_s
+			for g in self[e].direct_greaters do
+				thin_poset.add_edge(from, (g or else "null").to_s)
+			end
+		end
+		return thin_poset.serialize_to_json
+	end
+end

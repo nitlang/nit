@@ -148,7 +148,7 @@ class ModelView
 		return model.mmodule_importation_hierarchy.sub(mmodules)
 	end
 
-	# Build the POSet of `mmodules` hierarchy.
+	# Build the POSet of `mclasses` hierarchy.
 	fun mclasses_poset(mainmodule: MModule, mclasses: Set[MClass]): POSet[MClass] do
 		return mainmodule.flatten_mclass_hierarchy.sub(mclasses)
 	end

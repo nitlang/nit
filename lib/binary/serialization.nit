@@ -304,7 +304,7 @@ class BinaryDeserializer
 		return null
 	end
 
-	redef fun deserialize
+	redef fun deserialize(static_type)
 	do
 		errors.clear
 
