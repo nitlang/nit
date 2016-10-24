@@ -174,17 +174,6 @@ import popcorn
 import shibuqam
 import json
 
-redef class HttpRequest
-	# percent decoded get or post parameter.
-	fun dec_param(name: String): nullable String
-	do
-		var res = get_args.get_or_null(name)
-		if res == null then res = post_args.get_or_null(name)
-		if res == null then return null
-		return res.from_percent_encoding
-	end
-end
-
 class AuthHandler
 	super Handler
 
@@ -232,8 +221,8 @@ class AuthHandler
 		# GET means a Authorization Request from the user-agent
 
 		# Get the `redirect_uri` parameter, we use it to identify the client
-		var redir = http_request.dec_param("redir")
-		if redir == null then redir = http_request.dec_param("redirect_uri")
+		var redir = http_request.string_arg("redir")
+		if redir == null then redir = http_request.string_arg("redirect_uri")
 		if redir == null then
 			response.send("No redirect_uri.", 400)
 			return
@@ -246,7 +235,7 @@ class AuthHandler
 		end
 
 		# Get the state, we use it to avoid CSRF attacks
-		var state = http_request.dec_param("state")
+		var state = http_request.string_arg("state")
 		var res = redir + "?"
 
 		# If we are here, the reverse proxy did the authentication
@@ -281,7 +270,7 @@ class AuthHandler
 
 		expiration
 
-		var code = http_request.dec_param("code")
+		var code = http_request.string_arg("code")
 		if code == null then
 			print "POST: no code"
 			return

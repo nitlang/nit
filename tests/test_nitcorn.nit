@@ -86,6 +86,7 @@ class ClientThread
 		system "curl -s '{iface}/simple_answer?i=0123&s=asdf'"
 		system "curl -s {iface}/simple_answer --data 'i=0123&s=asdf'"
 		system "curl -s {iface}/simple_answer --cookie 'i=0123; s=asdf'"
+		system "curl -s {iface}/simple_answer --get --data-urlencode 's=b b'"
 
 		system "curl -s {iface}/params_answer/0123/asdf"
 		system "curl -s {iface}/params_answer/0123/"
