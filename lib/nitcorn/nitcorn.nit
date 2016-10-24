@@ -62,3 +62,4 @@ module nitcorn
 import reactor
 import file_server
 import sessions
+import signal_handler

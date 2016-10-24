@@ -148,7 +148,7 @@ class HttpFactory
 			event_base.dispatch
 		end
 
-		event_base.destroy
+		event_base.free
 	end
 end
 

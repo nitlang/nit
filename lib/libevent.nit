@@ -67,6 +67,14 @@ in "C" `{
 	}
 #endif
 
+#ifdef EventCallback_incr_ref
+	// Callback forwarded to 'EventCallback.callback'
+	static void signal_cb(evutil_socket_t fd, short events, void *data)
+	{
+		EventCallback handler = data;
+		EventCallback_callback(handler, events);
+	}
+#endif
 `}
 
 # Structure to hold information and state for a Libevent dispatch loop.
@@ -85,16 +93,47 @@ extern class NativeEventBase `{ struct event_base * `}
 	# Event dispatching loop
 	#
 	# This loop will run the event base until either there are no more added
-	# events, or until something calls `exit_loop`.
+	# events, or until something calls `loopexit`.
 	fun dispatch `{ event_base_dispatch(self); `}
 
 	# Exit the event loop
 	#
 	# TODO support timer
-	fun exit_loop `{ event_base_loopexit(self, NULL); `}
+	fun loopexit `{ event_base_loopexit(self, NULL); `}
 
-	# Destroy this instance
-	fun destroy `{ event_base_free(self); `}
+	redef fun free `{ event_base_free(self); `}
+end
+
+# Event, libevent's basic unit of operation
+extern class NativeEvent `{ struct event * `}
+
+	# Add to the set of pending events
+	#
+	# TODO support timeout
+	fun add `{ event_add(self, NULL); `}
+
+	# Remove from the set of monitored events
+	fun del `{ event_del(self); `}
+
+	redef fun free `{ event_free(self); `}
+end
+
+# Signal event
+extern class NativeEvSignal
+	super NativeEvent
+
+	new (base: NativeEventBase, signal: Int, handler: EventCallback)
+	import EventCallback.callback `{
+		EventCallback_incr_ref(handler);
+		return evsignal_new(base, signal, signal_cb, handler);
+	`}
+end
+
+# Receiver of event callbacks
+interface EventCallback
+
+	# Callback on an event
+	fun callback(events: Int) do end
 end
 
 # Spawned to manage a specific connection
