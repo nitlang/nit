@@ -1578,7 +1578,7 @@ abstract class AbstractCompilerVisitor
 	fun int_instance(value: Int): RuntimeVariable
 	do
 		var t = mmodule.int_type
-		var res = new RuntimeVariable("{value.to_s}l", t, t)
+		var res = new RuntimeVariable("INT64_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1594,7 +1594,7 @@ abstract class AbstractCompilerVisitor
 	fun int8_instance(value: Int8): RuntimeVariable
 	do
 		var t = mmodule.int8_type
-		var res = new RuntimeVariable("((int8_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT8_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1602,7 +1602,7 @@ abstract class AbstractCompilerVisitor
 	fun int16_instance(value: Int16): RuntimeVariable
 	do
 		var t = mmodule.int16_type
-		var res = new RuntimeVariable("((int16_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT16_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1610,7 +1610,7 @@ abstract class AbstractCompilerVisitor
 	fun uint16_instance(value: UInt16): RuntimeVariable
 	do
 		var t = mmodule.uint16_type
-		var res = new RuntimeVariable("((uint16_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("UINT16_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1618,7 +1618,7 @@ abstract class AbstractCompilerVisitor
 	fun int32_instance(value: Int32): RuntimeVariable
 	do
 		var t = mmodule.int32_type
-		var res = new RuntimeVariable("((int32_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT32_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1626,7 +1626,7 @@ abstract class AbstractCompilerVisitor
 	fun uint32_instance(value: UInt32): RuntimeVariable
 	do
 		var t = mmodule.uint32_type
-		var res = new RuntimeVariable("((uint32_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("UINT32_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -2038,7 +2038,7 @@ redef class MClassType
 
 	redef var ctype is lazy do
 		if mclass.name == "Int" then
-			return "long"
+			return "int_fast64_t"
 		else if mclass.name == "Bool" then
 			return "short int"
 		else if mclass.name == "Char" then
@@ -2282,7 +2282,7 @@ redef class AMethPropdef
 		end
 		if cname == "Int" then
 			if pname == "output" then
-				v.add("printf(\"%ld\\n\", {arguments.first});")
+				v.add("printf(\"%\" PRIdFAST64 \"\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
 				v.ret(arguments.first)
@@ -2366,7 +2366,7 @@ redef class AMethPropdef
 			end
 		else if cname == "Char" then
 			if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "successor" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -2397,7 +2397,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
 				return true
 			else if pname == "code_point" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Byte" then
@@ -2405,7 +2405,7 @@ redef class AMethPropdef
 				v.add("printf(\"%x\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -2457,7 +2457,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
@@ -2486,7 +2486,7 @@ redef class AMethPropdef
 				v.add("printf({arguments.first}?\"true\\n\":\"false\\n\");")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
@@ -2547,7 +2547,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
@@ -2596,10 +2596,10 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
-				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_hchars" then
-				v.ret(v.new_expr("(long)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -2609,7 +2609,7 @@ redef class AMethPropdef
 				v.add("printf(\"%\"PRIi8 \"\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -2658,7 +2658,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
@@ -2696,7 +2696,7 @@ redef class AMethPropdef
 				v.add("printf(\"%\"PRIi16 \"\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -2745,7 +2745,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
@@ -2783,7 +2783,7 @@ redef class AMethPropdef
 				v.add("printf(\"%\"PRIu16 \"\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -2832,7 +2832,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
@@ -2870,7 +2870,7 @@ redef class AMethPropdef
 				v.add("printf(\"%\"PRIi32 \"\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -2919,7 +2919,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
@@ -2957,7 +2957,7 @@ redef class AMethPropdef
 				v.add("printf(\"%\"PRIu32 \"\\n\", {arguments.first});")
 				return true
 			else if pname == "object_id" then
-				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -3006,7 +3006,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "to_i" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(int_fast64_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
@@ -3047,7 +3047,7 @@ redef class AMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
 		else if pname == "object_id" then
-			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+			v.ret(v.new_expr("(int_fast64_t){arguments.first}", ret.as(not null)))
 			return true
 		else if pname == "is_same_type" then
 			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
