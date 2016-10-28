@@ -704,8 +704,9 @@ universal Byte
 	fun is_whitespace: Bool do return self == 0x7Fu8 or self <= 0x20u8
 end
 
-# Native integer numbers.
-# Correspond to C int.
+# Signed integer with a minimum width of 62 bits
+#
+# Corresponds to a C `int_fast64_t` minus 2 bits.
 universal Int
 	super Discrete
 	super Numeric
