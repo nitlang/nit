@@ -403,6 +403,15 @@ ifeq ($(uname_S),Darwin)
 	LDLIBS := $(filter-out -lrt,$(LDLIBS))
 endif
 
+# Special configuration for Windows under mingw64
+ifeq ($(uname_S),MINGW64_NT-10.0)
+	# Use the pcreposix regex library
+	LDLIBS += -lpcreposix
+
+	# Remove POSIX flag -lrt
+	LDLIBS := $(filter-out -lrt,$(LDLIBS))
+endif
+
 """
 
 		makefile.write("all: {outpath}\n")
