@@ -466,7 +466,7 @@ class GithubAPI
 	#     assert repo != null
 	#     var comment = api.load_commit_comment(repo, 8982707)
 	#     assert comment.user.login == "Morriar"
-	#     assert comment.body == "For testing purposes..."
+	#     assert comment.body == "For testing purposes...\n"
 	#     assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
 	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
 		return load_from_github("/repos/{repo.full_name}/comments/{id}").as(nullable CommitComment)
