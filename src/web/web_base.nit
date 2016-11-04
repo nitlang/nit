@@ -102,6 +102,16 @@ redef class HttpResponse
 	fun api_error(status: Int, message: String) do
 		json(new APIError(status, message), status)
 	end
+
+	# Write data as JSON and set the right content type header.
+	fun raw_json(json: nullable String, status: nullable Int) do
+		header["Content-Type"] = media_types["json"].as(not null)
+		if json == null then
+			send(null, status)
+		else
+			send(json, status)
+		end
+	end
 end
 
 # An error returned by the API.
@@ -109,22 +119,13 @@ end
 # Can be serialized to json.
 class APIError
 	super Jsonable
+	serialize
 
 	# Reponse status
 	var status: Int
 
 	# Response error message
 	var message: String
-
-	# Json Object for this error
-	var json: JsonObject is lazy do
-		var obj = new JsonObject
-		obj["status"] = status
-		obj["message"] = message
-		return obj
-	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 # Fullname representation that can be used to build decorated links
@@ -160,12 +161,10 @@ class NSRef
 	# The mentity to link to/
 	var mentity: MEntity
 
-	redef fun serialize_to(v) do
-		var obj = new JsonObject
-		obj["web_url"] = mentity.web_url
-		obj["api_url"] = mentity.api_url
-		obj["name"] = mentity.name
-		obj.serialize_to(v)
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("web_url", mentity.web_url)
+		v.serialize_attribute("api_url", mentity.api_url)
+		v.serialize_attribute("name", mentity.name)
 	end
 end
 
@@ -184,16 +183,12 @@ redef class MEntity
 	# URL to `self` within the JSON api.
 	fun api_url: String do return "/api/entity/" / full_name
 
-	redef fun json do
-		var obj = super
-		obj["namespace"] = namespace
-		obj["web_url"] = web_url
-		obj["api_url"] = api_url
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("namespace", namespace)
+		v.serialize_attribute("web_url", web_url)
+		v.serialize_attribute("api_url", api_url)
 	end
-
-	# Get the full json repesentation of `self` with MEntityRefs resolved.
-	fun api_json(handler: APIHandler): JsonObject do return full_json
 
 	# Return `self.full_name` as an object that can be serialized to json.
 	fun namespace: nullable Namespace do return null
@@ -203,47 +198,35 @@ redef class MEntity
 end
 
 redef class MEntityRef
-	redef fun json do
-		var obj = super
-		obj["namespace"] = mentity.namespace
-		obj["web_url"] = mentity.web_url
-		obj["api_url"] = mentity.api_url
-		obj["name"] = mentity.name
-		obj["mdoc"] = mentity.mdoc_or_fallback
-		obj["visibility"] = mentity.visibility
-		var modifiers = new JsonArray
-		for modifier in mentity.collect_modifiers do
-			modifiers.add modifier
-		end
-		obj["modifiers"] = modifiers
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("namespace", mentity.namespace)
+		v.serialize_attribute("web_url", mentity.web_url)
+		v.serialize_attribute("api_url", mentity.api_url)
+		v.serialize_attribute("name", mentity.name)
+		v.serialize_attribute("mdoc", mentity.mdoc_or_fallback)
+		v.serialize_attribute("visibility", mentity.visibility.to_s)
+		v.serialize_attribute("modifiers", mentity.collect_modifiers)
 		var mentity = self.mentity
 		if mentity isa MMethod then
-			obj["msignature"] = mentity.intro.msignature
+			v.serialize_attribute("msignature", mentity.intro.msignature)
 		else if mentity isa MMethodDef then
-			obj["msignature"] = mentity.msignature
+			v.serialize_attribute("msignature", mentity.msignature)
 		else if mentity isa MVirtualTypeProp then
-			obj["bound"] = to_mentity_ref(mentity.intro.bound)
+			v.serialize_attribute("bound", to_mentity_ref(mentity.intro.bound))
 		else if mentity isa MVirtualTypeDef then
-			obj["bound"] = to_mentity_ref(mentity.bound)
+			v.serialize_attribute("bound", to_mentity_ref(mentity.bound))
 		end
-		return obj
-	end
-
-	redef fun full_json do
-		var obj = super
-		obj["location"] = mentity.location
-		return obj
+		v.serialize_attribute("location", mentity.location)
 	end
 end
 
 redef class MDoc
 
 	# Add doc down processing
-	redef fun json do
-		var obj = new JsonObject
-		obj["html_synopsis"] = html_synopsis.write_to_string
-		obj["html_documentation"] = html_documentation.write_to_string
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("html_synopsis", html_synopsis.write_to_string)
+		v.serialize_attribute("html_documentation", html_documentation.write_to_string)
 	end
 end
 
@@ -355,16 +338,11 @@ end
 redef class POSetElement[E]
 	super Jsonable
 
-	# Return JSON representation of `self`.
-	fun json: JsonObject do
+	redef fun serialize_to(v) do
 		assert self isa POSetElement[MEntity]
-		var obj = new JsonObject
-		obj["greaters"] = to_mentity_refs(greaters)
-		obj["direct_greaters"] = to_mentity_refs(direct_greaters)
-		obj["direct_smallers"] = to_mentity_refs(direct_smallers)
-		obj["smallers"] = to_mentity_refs(smallers)
-		return obj
+		v.serialize_attribute("greaters", to_mentity_refs(greaters))
+		v.serialize_attribute("direct_greaters", to_mentity_refs(direct_greaters))
+		v.serialize_attribute("direct_smallers", to_mentity_refs(direct_smallers))
+		v.serialize_attribute("smallers", to_mentity_refs(smallers))
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 end
