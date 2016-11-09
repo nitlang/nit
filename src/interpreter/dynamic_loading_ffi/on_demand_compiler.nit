@@ -21,7 +21,6 @@ import nitni
 import ffi
 import naive_interpreter
 import pkgconfig
-import debugger_socket # To linearize `ToolContext::init`
 
 redef class ToolContext
 
