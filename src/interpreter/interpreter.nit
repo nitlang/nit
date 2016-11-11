@@ -16,6 +16,4 @@
 module interpreter
 
 import naive_interpreter
-import debugger
-import debugger_socket
 import dynamic_loading_ffi

@@ -94,15 +94,6 @@ Launches the target program with the debugger attached to it.
 ### `-c`
 Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned.
 
-### `--socket`
-Launches the target program with raw output on the network via sockets.
-
-### `--websocket`
-Launches the target program with output on the network via websockets.
-
-### `--port`
-Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535.
-
 ## OTHER OPTIONS
 
 ### `--vm`

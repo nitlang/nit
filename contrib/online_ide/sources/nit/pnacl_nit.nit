@@ -17,8 +17,7 @@
 # A version of the naive Nit interpreter for PNaCl.
 module pnacl_nit
 
-import nitc::interpreter::naive_interpreter
-import nitc::interpreter::debugger
+import nitc::naive_interpreter
 import pnacl
 intrude import nitc::toolcontext
 intrude import nitc::loader
@@ -172,13 +171,7 @@ class Pnacl_nit
 			var self_mm = mainmodule
 			var self_args = arguments
 
-			if toolcontext.opt_debugger_autorun.value then
-				modelbuilder.run_debugger_autorun(self_mm, self_args)
-			else if toolcontext.opt_debugger_mode.value then
-				modelbuilder.run_debugger(self_mm, self_args)
-			else
-				modelbuilder.run_naive_interpreter(self_mm, self_args)
-			end
+			modelbuilder.run_naive_interpreter(self_mm, self_args)
 		# If operation = 'load', we are loading lib files, so we store them into HashMaps and send a response to JS.
 		else if operation == "load" then
 			var filename = d["filename"]
