@@ -145,6 +145,13 @@ else
 	TIMESTAMP=
 fi
 
+# Detect a working hostname command
+if hostname --version | grep coreutils >/dev/null 2>&1; then
+	HOSTNAME="hostname"
+else
+	HOSTNAME="hostname -s"
+fi
+
 # $1 is the pattern of the test
 # $2 is the file to compare to
 # the result is:
@@ -372,7 +379,7 @@ need_skip()
 	fi
 
 	# Skip by hostname
-	local host_skip_file=`hostname -s`.skip
+	local host_skip_file=`$HOSTNAME`.skip
 	if test -e $host_skip_file && echo "$1" | grep -f "$host_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip hostname]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
@@ -521,7 +528,7 @@ case $engine in
 		;;
 esac
 
-savdirs="sav/`hostname -s` sav/`uname` sav/$engine $savdirs sav/"
+savdirs="sav/`$HOSTNAME` sav/`uname` sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
