@@ -580,8 +580,8 @@ for ii in "$@"; do
 	# Sould we skip the file for this engine?
 	need_skip "$f" "$f" "$pack" && continue
 
-	tmp=${ii/../AA}
-	if [ "x$tmp" = "x$ii" ]; then
+	local_tmp=${ii/../AA}
+	if [ "x$local_tmp" = "x$ii" ]; then
 		includes="-I . -I ../lib/core -I ../lib/core/collection -I alt"
 	else
 		includes="-I alt"
