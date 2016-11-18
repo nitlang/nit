@@ -292,9 +292,7 @@ class OptionContext
 	private var optmap = new HashMap[String, Option]
 
 	# Add one or more options to the context
-	fun add_option(opts: Option...) do
-			options.add_all(opts)
-	end
+	fun add_option(opts: Option...) do options.add_all(opts)
 
 	# Display all the options available
 	fun usage
