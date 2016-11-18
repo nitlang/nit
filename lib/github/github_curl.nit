@@ -53,7 +53,7 @@ class GithubCurl
 		if response isa CurlResponseSuccess then
 			var obj = response.body_str.parse_json
 			if obj isa JsonObject then
-				if obj.keys.has("message") then
+				if obj.keys.has("message") and obj.keys.has("documentation_url") then
 					print "Message from Github API: {obj["message"] or else ""}"
 					print "Requested URI: {uri}"
 					abort
@@ -83,7 +83,7 @@ class GithubCurl
 		if response isa CurlResponseSuccess then
 			var obj = response.body_str.parse_json
 			if obj isa JsonObject then
-				if obj.keys.has("message") then
+				if obj.keys.has("message") and obj.keys.has("documentation_url") then
 					var title = "GithubAPIError"
 					var msg = obj["message"].as(not null).to_s
 					var err = new GithubError(msg, title)
