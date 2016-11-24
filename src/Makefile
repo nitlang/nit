@@ -20,7 +20,7 @@ OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight ni
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
-# Workaround: Cygwin requires peflags to boostrap
+# Workaround: Cygwin requires peflags to bootstrap
 peflags := ${shell which peflags 2>/dev/null}
 
 all: bin/nitc
