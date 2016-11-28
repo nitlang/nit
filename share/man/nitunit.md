@@ -274,6 +274,23 @@ fun after_module do
 end
 ~~~~
 
+## Accessing the test suite environment
+
+The `NIT_TESTING_PATH` environment variable contains the current test suite
+file path.
+Nitunit define this variable before the execution of each test suite.
+It can be used to access files based on the current test_suite location:
+
+~~~
+class TestWithPath
+	super TestSuite
+
+    fun test_suite_path do
+        assert "NIT_TESTING_PATH".environ != ""
+    end
+end
+~~~
+
 ## Generating test suites
 
 Write test suites for big modules can be a repetitive and boring task...
@@ -383,6 +400,10 @@ To solve this issue, `NIT_TESTING_ID` is initialized with a distinct integer ide
 
 Note: `rand` is not a recommended way to get a distinct identifier because its randomness is disabled by default. See `SRAND`.
 
+### `NIT_TESTING_PATH`
+
+Only available for test suites.
+Contains the module test suite path.
 
 # SEE ALSO
 
