@@ -64,8 +64,8 @@ redef class ToolContext
 			return nitc
 		end
 
-		var nit_dir = nit_dir
-		nitc = nit_dir/"bin/nitc"
+		var nit_dir = nit_dir or else "."
+		nitc = nit_dir / "bin/nitc"
 		if not nitc.file_exists then
 			fatal_error(null, "Error: cannot find nitc. Set envvar NIT_DIR or NITC or use the --nitc option.")
 			abort
@@ -108,7 +108,6 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	# If `has_progress_bar` is false, then only the first and last state is shown
 	fun show_unit_status(name: String, tests: SequenceRead[UnitTest])
 	do
-		var esc = 27.code_point.to_s
 		var line = "\r\x1B[K==== {name} ["
 		var done = tests.length
 		var fails = 0
