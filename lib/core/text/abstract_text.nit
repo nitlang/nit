@@ -843,14 +843,14 @@ abstract class Text
 
 	# Decode `self` from percent (or URL) encoding to a clear string
 	#
-	# Replace invalid use of '%' with '?'.
+	# Invalid '%' are not decoded.
 	#
 	#     assert "aBc09-._~".from_percent_encoding == "aBc09-._~"
 	#     assert "%25%28%29%3c%20%3e".from_percent_encoding == "%()< >"
 	#     assert ".com%2fpost%3fe%3dasdf%26f%3d123".from_percent_encoding == ".com/post?e=asdf&f=123"
 	#     assert "%25%28%29%3C%20%3E".from_percent_encoding == "%()< >"
-	#     assert "incomplete %".from_percent_encoding == "incomplete ?"
-	#     assert "invalid % usage".from_percent_encoding == "invalid ? usage"
+	#     assert "incomplete %".from_percent_encoding == "incomplete %"
+	#     assert "invalid % usage".from_percent_encoding == "invalid % usage"
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
 	fun from_percent_encoding: String
 	do
@@ -874,7 +874,7 @@ abstract class Text
 			if c == '%' then
 				if i + 2 >= length then
 					# What follows % has been cut off
-					buf[l] = '?'.ascii
+					buf[l] = '%'.ascii
 				else
 					i += 1
 					var hex_s = substring(i, 2)
@@ -884,7 +884,7 @@ abstract class Text
 						i += 1
 					else
 						# What follows a % is not Hex
-						buf[l] = '?'.ascii
+						buf[l] = '%'.ascii
 						i -= 1
 					end
 				end
