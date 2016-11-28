@@ -1,0 +1,93 @@
+<div class='container-fluid'>
+	<div class='page-header'>
+		<h2>Grades</h2>
+
+		<div class='container-fluid'>
+			<div class='col-xs-6'>
+				<div class='card'>
+					<div class='card-body'>
+						<h4 class='card-title'>Most rated entities</h4>
+						<p ng-if='!most || most.length == 0' class='text-muted'>
+							<i>No grades yet</i>
+						</p>
+						<table class='table' ng-if='most.length > 0'>
+							<tr>
+								<th width='60%'>Entity</th>
+								<th>Total grades</th>
+							</tr>
+							<tr ng-repeat='rating in most'>
+								<th><a href='/doc/{{rating._id}}'>{{rating._id}}</a></th>
+								<td>{{rating.count}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-6'>
+				<div class='card'>
+					<div class='card-body'>
+						<h4 class='card-title'>Best rated entities</h4>
+						<p ng-if='!best || best.length == 0' class='text-muted'>
+							<i>No grades yet</i>
+						</p>
+						<table class='table' ng-if='best.length > 0'>
+							<tr>
+								<th width='60%'>Entity</th>
+								<th>Avg. grade</th>
+							</tr>
+							<tr ng-repeat='rating in best'>
+								<th><a href='/doc/{{rating._id}}'>{{rating._id}}</a></th>
+								<td>{{rating.avg}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-6'>
+				<div class='card'>
+					<div class='card-body'>
+						<h4 class='card-title'>Most active users</h4>
+						<p ng-if='!ratings || ratings.length == 0' class='text-muted'>
+							<i>No grades yet</i>
+						</p>
+						<table class='table' ng-if='ratings.length > 0'>
+							<tr>
+								<th width='60%'>User</th>
+								<th>Total grades</th>
+							</tr>
+							<tr ng-repeat='rating in ratings'>
+								<th ng-if='rating._id'>
+									<b>{{rating._id}}</b>
+								</th>
+								<th ng-if='!rating._id'>
+									<em>anon.</em>
+								</th>
+								<td>{{rating.count}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-6'>
+				<div class='card'>
+					<div class='card-body'>
+						<h4 class='card-title'>Worst rated entities</h4>
+						<p ng-if='!worst || worst.length == 0' class='text-muted'>
+							<i>No grades yet</i>
+						</p>
+						<table class='table' ng-if='worst.length > 0'>
+							<tr>
+								<th width='60%'>Entity</th>
+								<th>Total grades</th>
+							</tr>
+							<tr ng-repeat='rating in worst'>
+								<th><a href='/doc/{{rating._id}}'>{{rating._id}}</a></th>
+								<td>{{rating.avg}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -112,7 +112,27 @@
 						{rating: rating})
 						.success(cb)
 						.error(cbErr);
-				}
+				},
+				loadMostRated: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/most')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadBestRated: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/best')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadWorstRated: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/worst')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadUsersRatings: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/users')
+						.success(cb)
+						.error(cbErr);
+				},
 			}
 		}])
 
