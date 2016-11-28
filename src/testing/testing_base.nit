@@ -166,6 +166,13 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	fun show_unit(test: UnitTest, more_message: nullable String) do
 		print test.to_screen(more_message, not opt_no_color.value)
 	end
+
+	# Set the `NIT_TESTING_PATH` environment variable with `path`.
+	#
+	# If `path == null` then `NIT_TESTING_PATH` is set with the empty string.
+	fun set_testing_path(path: nullable String) do
+		"NIT_TESTING_PATH".setenv(path or else "")
+	end
 end
 
 # A unit test is an elementary test discovered, run and reported by nitunit.
