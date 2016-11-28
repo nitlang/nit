@@ -527,6 +527,15 @@ class User
 
 	# Avatar image url for this user.
 	var avatar_url: nullable String is writable
+
+	# User public name if any.
+	var name: nullable String is writable
+
+	# User public email if any.
+	var email: nullable String is writable
+
+	# User public blog if any.
+	var blog: nullable String is writable
 end
 
 # A Github repository.
