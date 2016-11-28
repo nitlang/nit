@@ -122,8 +122,8 @@ class TestSuite
 	# Test to be executed after the whole test suite.
 	var after_module: nullable TestCase = null
 
-	fun show_status
-	do
+	# Display test suite status in std-out.
+	fun show_status do
 		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
 	end
 
