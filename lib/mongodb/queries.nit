@@ -301,6 +301,50 @@ class MongoMatch
 		op("nor", field, new JsonArray.from(expressions))
 		return self
 	end
+
+	# Array contains all
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/all/#op._S_all
+	#
+	# `$all` selects the documents where the value of a field is an array that
+	# contains all the specified elements.
+	#
+	# ~~~json
+	# { field: { $all: [ <value1>, <value2>, ... ] } }
+	# ~~~
+	fun all(field: nullable String, values: Array[Jsonable]): MongoMatch do
+		op("all", field, new JsonArray.from(values))
+		return self
+	end
+
+	# Array element match
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch
+	#
+	# `$elemMatch` matches documents that contain an array field with at least
+	# one element that matches all the specified query criteria.
+	#
+	# ~~~json
+	# { field: { $elemMatch: <query> } }
+	# ~~~
+	fun elem_match(field: nullable String, query: Jsonable): MongoMatch do
+		op("elemMatch", field, query)
+		return self
+	end
+
+	# Array size match
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/size/#op._S_size
+	#
+	# `$size` matches any array with the number of elements specified by the argument
+	#
+	# ~~~json
+	# { field: { $size: <size> } }
+	# ~~~
+	fun size(field: nullable String, size: Int): MongoMatch do
+		op("size", field, size)
+		return self
+	end
 end
 
 # Mongo pipelines are arrays of aggregation stages
