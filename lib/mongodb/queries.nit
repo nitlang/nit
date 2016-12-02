@@ -211,7 +211,7 @@ class MongoMatch
 	# `$in` selects the documents where the value of a field equals any value
 	# in the specified array.
 	fun is_in(field: String, values: Array[nullable Jsonable]): MongoMatch do
-		op("$in", field, new JsonArray.from(values))
+		op("in", field, new JsonArray.from(values))
 		return self
 	end
 
@@ -227,7 +227,7 @@ class MongoMatch
 	# * the field value is not in the specified array or
 	# * the field does not exist.
 	fun is_nin(field: String, values: Array[nullable Jsonable]): MongoMatch do
-		op("$nin", field, new JsonArray.from(values))
+		op("nin", field, new JsonArray.from(values))
 		return self
 	end
 
@@ -245,7 +245,7 @@ class MongoMatch
 	# { field: { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
 	# ~~~
 	fun lor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
-		op("$or", field, new JsonArray.from(expressions))
+		op("or", field, new JsonArray.from(expressions))
 		return self
 	end
 
@@ -262,7 +262,7 @@ class MongoMatch
 	# { field: { $and: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
 	# ~~~
 	fun land(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
-		op("$and", field, new JsonArray.from(expressions))
+		op("and", field, new JsonArray.from(expressions))
 		return self
 	end
 
@@ -280,7 +280,7 @@ class MongoMatch
 	# { field: { $not: { <expression> } } }
 	# ~~~
 	fun lnot(field: nullable String, expression: Jsonable): MongoMatch do
-		op("$not", field, expression)
+		op("not", field, expression)
 		return self
 	end
 
@@ -298,7 +298,51 @@ class MongoMatch
 	# { field: { $nor: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
 	# ~~~
 	fun lnor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
-		op("$nor", field, new JsonArray.from(expressions))
+		op("nor", field, new JsonArray.from(expressions))
+		return self
+	end
+
+	# Array contains all
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/all/#op._S_all
+	#
+	# `$all` selects the documents where the value of a field is an array that
+	# contains all the specified elements.
+	#
+	# ~~~json
+	# { field: { $all: [ <value1>, <value2>, ... ] } }
+	# ~~~
+	fun all(field: nullable String, values: Array[Jsonable]): MongoMatch do
+		op("all", field, new JsonArray.from(values))
+		return self
+	end
+
+	# Array element match
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch
+	#
+	# `$elemMatch` matches documents that contain an array field with at least
+	# one element that matches all the specified query criteria.
+	#
+	# ~~~json
+	# { field: { $elemMatch: <query> } }
+	# ~~~
+	fun elem_match(field: nullable String, query: Jsonable): MongoMatch do
+		op("elemMatch", field, query)
+		return self
+	end
+
+	# Array size match
+	#
+	# https://docs.mongodb.com/manual/reference/operator/query/size/#op._S_size
+	#
+	# `$size` matches any array with the number of elements specified by the argument
+	#
+	# ~~~json
+	# { field: { $size: <size> } }
+	# ~~~
+	fun size(field: nullable String, size: Int): MongoMatch do
+		op("size", field, size)
 		return self
 	end
 end
