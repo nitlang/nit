@@ -154,6 +154,18 @@ redef class MPackage
 		end
 		return res
 	end
+
+	# `MModules` contained in `self`.
+	fun collect_mmodules(view: ModelView): HashSet[MModule] do
+		var res = new HashSet[MModule]
+		for mgroup in mgroups do
+			for mmodule in mgroup.mmodules do
+				if not view.accept_mentity(mmodule) then continue
+				res.add(mmodule)
+			end
+		end
+		return res
+	end
 end
 
 redef class MGroup
