@@ -122,13 +122,14 @@ class TestSuite
 	# Test to be executed after the whole test suite.
 	var after_module: nullable TestCase = null
 
-	fun show_status
-	do
+	# Display test suite status in std-out.
+	fun show_status do
 		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
 	end
 
 	# Execute the test suite
 	fun run do
+		set_env
 		show_status
 		if not toolcontext.test_dir.file_exists then
 			toolcontext.test_dir.mkdir
@@ -212,6 +213,13 @@ class TestSuite
 		if res != 0 then
 			failure = msg
 		end
+	end
+
+	# Set environment variables for test suite execution
+	fun set_env do
+		var loc = mmodule.location.file
+		if loc == null then return
+		toolcontext.set_testing_path(loc.filename)
 	end
 
 	# Error occured during test-suite compilation.
