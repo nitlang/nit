@@ -126,9 +126,9 @@ redef class Int
 
 	# Is self a prime number ?
 	#
-	# assert 3.is_prime
-	# assert not 1.is_prime
-	# assert not 15.is_prime
+	#	assert 3.is_prime
+	#	assert not 1.is_prime
+	#	assert not 15.is_prime
 	fun is_prime: Bool
 	do
 		if self == 2 then
@@ -252,15 +252,15 @@ redef class Float
 
 	# Returns `self` raised at `e` power.
 	#
-	#     #assert 2.0.pow(0.0) == 1.0
-	#     #assert 2.0.pow(3.0) == 8.0
-	#     #assert 0.0.pow(9.0) == 0.0
+	#     assert 2.0.pow(0.0) == 1.0
+	#     assert 2.0.pow(3.0) == 8.0
+	#     assert 0.0.pow(9.0) == 0.0
 	fun pow(e: Float): Float `{ return pow(self, e); `}
 
 	# Natural logarithm of `self`.
 	#
 	#     assert 0.0.log.is_inf == -1
-	#     #assert 1.0.log == 0.0
+	#     assert 1.0.log == 0.0
 	fun log: Float `{ return log(self); `}
 
 	# Logarithm of `self` to base `base`.
