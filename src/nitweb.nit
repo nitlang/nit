@@ -15,7 +15,6 @@
 # Runs a webserver based on nitcorn that render things from model.
 module nitweb
 
-import popcorn::pop_config
 import popcorn::pop_auth
 import frontend
 import web
@@ -27,15 +26,13 @@ redef class NitwebConfig
 	#
 	# * key: `github.client_id`
 	# * default: ``
-	var github_client_id: String is lazy do return value_or_default("github.client.id", "")
+	fun github_client_id: String do return ini["github.client.id"] or else ""
 
 	# Github client secret used for Github OAuth login.
 	#
 	# * key: `github.client_secret`
 	# * default: ``
-	var github_client_secret: String is lazy do
-		return value_or_default("github.client.secret", "")
-	end
+	fun github_client_secret: String do return ini["github.client.secret"] or else ""
 end
 
 redef class ToolContext
@@ -64,17 +61,17 @@ private class NitwebPhase
 
 	# Build the nitweb config from `toolcontext` options.
 	fun build_config(toolcontext: ToolContext, mainmodule: MModule): NitwebConfig do
-		var config_file = toolcontext.opt_config.value
-		if config_file == null then config_file = "nitweb.ini"
 		var config = new NitwebConfig(
-			config_file,
 			toolcontext.modelbuilder.model,
 			mainmodule,
 			toolcontext.modelbuilder)
+		var config_file = toolcontext.opt_config.value
+		if config_file == null then config.default_config_file = "nitweb.ini"
+		config.parse_options(args)
 		var opt_host = toolcontext.opt_host.value
-		if opt_host != null then config["app.host"] = opt_host
+		if opt_host != null then config.ini["app.host"] = opt_host
 		var opt_port = toolcontext.opt_port.value
-		if opt_port >= 0 then config["app.port"] = opt_port.to_s
+		if opt_port >= 0 then config.ini["app.port"] = opt_port.to_s
 		return config
 	end
 
