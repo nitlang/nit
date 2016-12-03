@@ -276,7 +276,7 @@ redef class MType
 		# define friendly type
 		ccu.header_c_types.add("#ifndef NIT_TYPE_{cname}\n")
 		ccu.header_c_types.add("#define NIT_TYPE_{cname} 1\n")
-		ccu.header_c_types.add("typedef struct nitni_instance *{cname};\n")
+		ccu.header_c_types.add("typedef struct nit_struct_{cname} \{ \} *{cname};\n")
 		ccu.header_c_types.add("#endif\n")
 	end
 end
