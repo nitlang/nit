@@ -73,7 +73,7 @@ redef class MDoc
 			   not lines.first.has_prefix("\t") then
 				# parse synopsys
 				var syn = inline_proc.process(lines.shift)
-				res.add "<p class=\"synopsys\">{syn}</p>"
+				res.add "<h1 class=\"synopsys\">{syn}</h1>"
 			end
 		end
 		# check for annotations
