@@ -51,8 +51,6 @@ class CLanguage
 		ecc.body_impl.add fc.to_writer
 	end
 
-	redef fun compile_extern_class(block, m, ecc, mmodule) do end
-
 	redef fun get_ftype(block, m) do return new ForeignCType(block.code)
 end
 

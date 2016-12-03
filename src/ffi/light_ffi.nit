@@ -100,14 +100,12 @@ redef class AModule
 		ffi_ccu.body_decl.add("#endif\n")
 
 		for nclassdef in n_classdefs do
-			# Does it declares an extern type?
+			# Is it an extern class with an extern type?
 			if nclassdef isa AStdClassdef and nclassdef.n_extern_code_block != null then
 				mmodule.uses_ffi = true
 				var language = nclassdef.n_extern_code_block.language
 				assert language != null
 				mmodule.present_languages.add(language)
-				nclassdef.n_extern_code_block.language.compile_extern_class(
-					nclassdef.n_extern_code_block.as(not null), nclassdef, ffi_ccu, mmodule)
 			end
 		end
 	end

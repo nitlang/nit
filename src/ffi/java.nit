@@ -159,8 +159,6 @@ class JavaLanguage
 		mmodule.callbacks_used_from_java.join m.foreign_callbacks
 	end
 
-	redef fun compile_extern_class(block, m, ccu, mmodule) do end
-
 	redef fun get_ftype(block, m) do return new ForeignJavaType(block.code)
 
 	redef fun compile_to_files(mmodule, compdir)

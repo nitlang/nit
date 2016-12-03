@@ -91,8 +91,6 @@ class ObjCLanguage
 		mmodule.objc_file.add_exported_function fc
 	end
 
-	redef fun compile_extern_class(block, m, ecc, mmodule) do end
-
 	redef fun get_ftype(block, m) do return new ForeignObjCType(block.code)
 
 	redef fun compile_to_files(mmodule, compdir)

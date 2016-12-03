@@ -121,10 +121,6 @@ abstract class FFILanguage
 	fun compile_extern_method(block: AExternCodeBlock, m: AMethPropdef,
 		ecc: CCompilationUnit, nmodule: MModule) is abstract
 
-	# Generate wrapper code for this extern class
-	fun compile_extern_class(block: AExternCodeBlock, m: AClassdef,
-		ecc: CCompilationUnit, mmodule: MModule) is abstract
-
 	# Get the foreign type of this extern class definition
 	fun get_ftype(block: AExternCodeBlock, m: AClassdef): ForeignType is abstract
 
