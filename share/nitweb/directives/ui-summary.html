@@ -1,0 +1,23 @@
+<div>
+	<h4>Summary</h4>
+	<div ng-repeat='entry in headings' class='summary'>
+		<h1 ng-if='entry.level == 1'>
+			<a ng-click='goTo(entry)'>{{entry.text}}</a>
+		</h1>
+		<h2 ng-if='entry.level == 2'>
+			<a ng-click='goTo(entry)'>{{entry.text}}</a>
+		</h2>
+		<h3 ng-if='entry.level == 3'>
+			<a ng-click='goTo(entry)'>{{entry.text}}</a>
+		</h3>
+		<h4 ng-if='entry.level == 4'>
+			<a ng-click='goTo(entry)'>{{entry.text}}</a>
+		</h4>
+		<h5 ng-if='entry.level == 5'>
+			<a ng-click='goTo(entry)'>{{entry.text}}</a>
+		</h5>
+		<h6 ng-if='entry.level == 6'>
+			<a ng-click='goTo(entry)'>{{entry.text}}</a>
+		</h6>
+	</div>
+</div>

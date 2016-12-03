@@ -94,7 +94,7 @@ entity-list:hover .btn-filter {
 /* doc */
 
 .nitdoc .synopsys {
-	font-size: 2em;
+	margin-top: 0;
 }
 
 .signature {
@@ -223,6 +223,23 @@ entity-list:hover .btn-filter {
 	margin-top: 8px;
 	margin-bottom: 0px;
 }
+
+/* Summary */
+
+.summary h1, .summary h2, .summary h3, .summary h4, .summary h5, .summary h6 {
+	margin: 5px 0;
+}
+
+.summary h1 a, .summary h2 a, .summary h3 a, .summary h4 a, .summary h5 a, .summary h6 a {
+	color: #555;
+}
+
+.summary h1 { font-size: 14px; margin-left: 0px; font-weight: bold; }
+.summary h2 { font-size: 13px; margin-left: 5px; font-weight: bold; }
+.summary h3 { font-size: 12px; margin-left: 10px; }
+.summary h4 { font-size: 11px; margin-left: 15px; }
+.summary h5 { font-size: 10px; margin-left: 20px; }
+.summary h6 { font-size: 9px; margin-left: 25px; }
 
 /*
  * Ratings
