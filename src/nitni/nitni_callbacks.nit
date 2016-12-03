@@ -42,44 +42,39 @@ class VerifyNitniCallbacksPhase
 	end
 end
 
-# Provides a better API but mainly the same content as AExternCalls
+# Set of callbacks to Nit from an `AExternCodeBlock` and used Nit types
 class ForeignCallbackSet
-	# set of imported functions, cached to avoid repetitions
-	var callbacks: Set[ MExplicitCall ] = new HashSet[ MExplicitCall ]
+	# Callbacks to method, accessors and constructors
+	var callbacks = new Set[MExplicitCall]
 
-	# set of imported functions, cached to avoid repetitions
-	var supers: Set[ MExplicitSuper ] = new HashSet[ MExplicitSuper ]
+	# Callbacks to super
+	var supers = new Set[MExplicitSuper]
 
-	# set of relevant types, cached to avoid repetitions
-	var types: Set[ MType ] = new HashSet[ MType ]
+	# Types used by the extern method signature and callbacks
+	var types = new Set[MType]
 
-	# set of imported casts and as, cached to avoid repetitions
-	var casts: Set[ MExplicitCast ] = new HashSet[ MExplicitCast ]
+	# Casts to be used from foreign code
+	var casts = new Set[MExplicitCast]
 
-	# Utility function, must be called only when all other maps are filled
-	private var all_cached: nullable Set[NitniCallback] = null
-	fun all: Set[NitniCallback]
-	do
-		var cached = all_cached
-		if cached != null then return cached
-
-		var set = new HashSet[NitniCallback]
-		set.add_all(callbacks)
-		set.add_all(supers)
-		set.add_all(types)
-		set.add_all(casts)
-		
-		self.all_cached = set
+	# All callbacks and types
+	#
+	# This attribute must be read only when all other sets are callback.
+	var all: Set[NitniCallback] is lazy do
+		var set = new Set[NitniCallback]
+		set.add_all callbacks
+		set.add_all supers
+		set.add_all types
+		set.add_all casts
 		return set
 	end
 
 	# Integrate content from the `other` set into this one
 	fun join(other: ForeignCallbackSet)
 	do
-		callbacks.add_all( other.callbacks )
-		supers.add_all( other.supers )
-		types.add_all( other.types )
-		casts.add_all( other.casts )
+		callbacks.add_all other.callbacks
+		supers.add_all other.supers
+		types.add_all other.types
+		casts.add_all other.casts
 	end
 end
 
@@ -94,7 +89,7 @@ redef class AMethPropdef
 		return fcs
 	end
 
-	# Verifiy the validity of the explicit callbacks to Nit
+	# Verify the validity of the explicit callbacks to Nit
 	# also fills the set returned by foreign_callbacks
 	fun verify_nitni_callbacks(toolcontext: ToolContext)
 	do

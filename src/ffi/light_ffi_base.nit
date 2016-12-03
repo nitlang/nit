@@ -103,19 +103,16 @@ redef class AExternCodeBlock
 	var language: nullable FFILanguage = null
 end
 
-# Visitor for a specific languages. Works kinda like a `Phase` and is executed
-# by a `Phase`.
-class FFILanguage
+# Visitor for a foreign language
+abstract class FFILanguage
+
 	# `FFILanguageAssignationPhase` assigning `self` to `AExternCodeBlock`s
 	var ffi_language_assignation_phase: FFILanguageAssignationPhase
 
-	init
-	do
-		ffi_language_assignation_phase.languages.add(self)
-	end
+	init do ffi_language_assignation_phase.languages.add(self)
 
 	# Is this `block` written in this language?
-	fun identify_language(block: AExternCodeBlock ): Bool is abstract
+	fun identify_language(block: AExternCodeBlock): Bool is abstract
 
 	# Generate wrapper code for this module/header code block
 	fun compile_module_block(block: AExternCodeBlock, ecc: CCompilationUnit, mmodule: MModule) is abstract

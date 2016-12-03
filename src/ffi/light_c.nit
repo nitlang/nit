@@ -46,8 +46,8 @@ class CLanguage
 	redef fun compile_extern_method(block, m, ecc, mmodule)
 	do
 		var fc = new ExternCFunction(m, mmodule)
-		fc.decls.add( block.location.as_line_pragma )
-		fc.exprs.add( block.code )
+		fc.decls.add block.location.as_line_pragma
+		fc.exprs.add block.code
 		ecc.body_impl.add fc.to_writer
 	end
 
@@ -71,9 +71,6 @@ redef class Location
 end
 
 redef class MModule
-	# FIXME make nullable the key of `cflags`, `ldflags` and `cppflags` when
-	# supported by the bootstrap
-
 	# Custom options for the C compiler (CFLAGS)
 	var cflags = new MultiHashMap[String, String]
 
