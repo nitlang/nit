@@ -26,7 +26,7 @@ module model_json
 
 import model::model_collect
 import json::static
-import json
+import json::serialization_write
 import loader
 
 # A reference to another mentity.
@@ -36,296 +36,251 @@ class MEntityRef
 	# MEntity to link to.
 	var mentity: MEntity
 
-	# Return `self` as a Json Object.
-	#
-	# By default, MEntity references contain only the `full_name` of the Mentity.
-	# You should redefine this method in your client to implement a different behavior.
-	redef fun json do
-		var obj = new JsonObject
-		obj["full_name"] = mentity.full_name
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("full_name", mentity.full_name)
 	end
 end
 
 redef class MEntity
 	super Jsonable
+	serialize
 
-	# Return `self` as a JsonObject.
-	#
-	# By default, every reference to another MEntity is skipped.
-	# Use full_json for a full representation.
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["name"] = name
-		obj["class_name"] = class_name
-		obj["full_name"] = full_name
-		obj["mdoc"] = mdoc_or_fallback
-		obj["visibility"] = visibility
-		var modifiers = new JsonArray
-		for modifier in collect_modifiers do
-			modifiers.add modifier
-		end
-		obj["modifiers"] = modifiers
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("name", name)
+		v.serialize_attribute("class_name", class_name)
+		v.serialize_attribute("full_name", full_name)
+		v.serialize_attribute("mdoc", mdoc_or_fallback)
+		v.serialize_attribute("visibility", visibility.to_s)
+		v.serialize_attribute("modifiers", collect_modifiers)
+		v.serialize_attribute("location", location)
 	end
 
-	redef fun serialize_to(v) do json.serialize_to(v)
+	# Serialize the full version of `self` to JSON
+	#
+	# See: `FullJsonSerializer`
+	fun serialize_to_full_json(plain, pretty: nullable Bool): String do
+		var stream = new StringWriter
+		var serializer = new FullJsonSerializer(stream)
+		serializer.plain_json = plain or else false
+		serializer.pretty_json = pretty or else false
+		serializer.serialize self
+		stream.close
+		return stream.to_s
+	end
 
-	# Return `self` as a JsonObject with references.
+	# Return the full json representation of `self` with references.
 	#
 	# By default, every reference to another MEntity is replaced by a pointer
 	# to the MEntity::json_id.
-	fun full_json: JsonObject do
-		var obj = json
-		obj["location"] = location
-		return obj
-	end
+	# Use this method to obtain a full object with mentities instead of pointers.
+	fun to_full_json: String do return serialize_to_full_json(plain=true)
 
-	# Return `full_json` as a json string.
-	fun to_full_json: String do return full_json.to_json
+	# Same as `to_full_json` but with pretty json.
+	fun to_pretty_full_json: String do return serialize_to_full_json(plain=true, pretty=true)
 end
 
 redef class MDoc
 	super Jsonable
+	serialize
 
-	# Return `self` as a JsonObject.
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["content"] = content.join("\n")
-		obj["location"] = location
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("content", content.join("\n"))
+		v.serialize_attribute("location", location)
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class Location
 	super Jsonable
+	serialize
 
-	# Return `self` as a JsonObject.
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["column_end"] = column_end
-		obj["column_start"] = column_start
-		obj["line_end"] = line_end
-		obj["line_start"] = line_start
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("column_end", column_end)
+		v.serialize_attribute("column_start", column_start)
+		v.serialize_attribute("line_end", line_end)
+		v.serialize_attribute("line_start", line_start)
 		var file = self.file
 		if file != null then
-			obj["file"] = file.filename
+			v.serialize_attribute("file", file.filename)
 		end
-		return obj
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
-end
-
-redef class MVisibility
-	super Jsonable
-
-	redef fun serialize_to(v) do to_s.serialize_to(v)
 end
 
 redef class MPackage
-
-	redef fun full_json do
-		var obj = super
-		if ini != null then
-			obj["ini"] = new JsonObject.from(ini.as(not null).to_map)
+	redef fun core_serialize_to(v) do
+		super
+		if v isa FullJsonSerializer then
+			v.serialize_attribute("root", to_mentity_ref(root))
+			v.serialize_attribute("mgroups", to_mentity_refs(mgroups))
+			var ini = self.ini
+			if ini != null then v.serialize_attribute("ini", ini.to_map)
 		end
-		obj["root"] = to_mentity_ref(root)
-		obj["mgroups"] = to_mentity_refs(mgroups)
-		return obj
 	end
 end
 
 redef class MGroup
-	redef fun json do
-		var obj = super
-		obj["is_root"] = is_root
-		return obj
-	end
-
-	redef fun full_json do
-		var obj = super
-		obj["mpackage"] = to_mentity_ref(mpackage)
-		obj["default_mmodule"] = to_mentity_ref(default_mmodule)
-		obj["parent"] = to_mentity_ref(parent)
-		obj["mmodules"] = to_mentity_refs(mmodules)
-		obj["mgroups"] = to_mentity_refs(in_nesting.direct_smallers)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		if v isa FullJsonSerializer then
+			v.serialize_attribute("is_root", is_root)
+			v.serialize_attribute("mpackage", to_mentity_ref(mpackage))
+			v.serialize_attribute("default_mmodule", to_mentity_ref(default_mmodule))
+			v.serialize_attribute("parent", to_mentity_ref(parent))
+			v.serialize_attribute("mmodules", to_mentity_refs(mmodules))
+			v.serialize_attribute("mgroups", to_mentity_refs(in_nesting.direct_smallers))
+		end
 	end
 end
 
 redef class MModule
-	redef fun full_json do
-		var obj = super
-		obj["mpackage"] = to_mentity_ref(mpackage)
-		obj["mgroup"] = to_mentity_ref(mgroup)
-		obj["intro_mclasses"] = to_mentity_refs(intro_mclasses)
-		obj["mclassdefs"] = to_mentity_refs(mclassdefs)
-		obj["intro_mclassdefs"] = to_mentity_refs(collect_intro_mclassdefs(private_view))
-		obj["redef_mclassdefs"] = to_mentity_refs(collect_redef_mclassdefs(private_view))
-		obj["imports"] = to_mentity_refs(in_importation.direct_greaters)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		if v isa FullJsonSerializer then
+			var view = private_view
+			v.serialize_attribute("mpackage", to_mentity_ref(mpackage))
+			v.serialize_attribute("mgroup", to_mentity_ref(mgroup))
+			v.serialize_attribute("intro_mclasses", to_mentity_refs(intro_mclasses))
+			v.serialize_attribute("mclassdefs", to_mentity_refs(mclassdefs))
+			v.serialize_attribute("intro_mclassdefs", to_mentity_refs(collect_intro_mclassdefs(view)))
+			v.serialize_attribute("redef_mclassdefs", to_mentity_refs(collect_redef_mclassdefs(view)))
+			v.serialize_attribute("imports", to_mentity_refs(in_importation.direct_greaters))
+		end
 	end
 end
 
 redef class MClass
-	redef fun json do
-		var obj = super
-		obj["mparameters"] = new JsonArray.from(mparameters)
-		return obj
-	end
-
-	redef fun full_json do
-		var obj = super
-		obj["intro"] = to_mentity_ref(intro)
-		obj["intro_mmodule"] = to_mentity_ref(intro_mmodule)
-		obj["mpackage"] = to_mentity_ref(intro_mmodule.mpackage)
-		obj["mclassdefs"] = to_mentity_refs(mclassdefs)
-		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
-		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
-		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
-		obj["parents"] = to_mentity_refs(collect_parents(private_view))
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("mparameters", mparameters)
+		if v isa FullJsonSerializer then
+			var view = private_view
+			v.serialize_attribute("intro", to_mentity_ref(intro))
+			v.serialize_attribute("intro_mmodule", to_mentity_ref(intro_mmodule))
+			v.serialize_attribute("mpackage", to_mentity_ref(intro_mmodule.mpackage))
+			v.serialize_attribute("mclassdefs", to_mentity_refs(mclassdefs))
+			v.serialize_attribute("all_mproperties", to_mentity_refs(collect_accessible_mproperties(view)))
+			v.serialize_attribute("intro_mproperties", to_mentity_refs(collect_intro_mproperties(view)))
+			v.serialize_attribute("redef_mproperties", to_mentity_refs(collect_redef_mproperties(view)))
+			v.serialize_attribute("parents", to_mentity_refs(collect_parents(view)))
+		end
 	end
 end
 
 redef class MClassDef
-	redef fun json do
-		var obj = super
-		obj["is_intro"] = is_intro
-		obj["mparameters"] = new JsonArray.from(mclass.mparameters)
-		return obj
-	end
-
-	redef fun full_json do
-		var obj = super
-		obj["mmodule"] = to_mentity_ref(mmodule)
-		obj["mclass"] = to_mentity_ref(mclass)
-		obj["mpropdefs"] = to_mentity_refs(mpropdefs)
-		obj["intro_mproperties"] = to_mentity_refs(intro_mproperties)
-		obj["intro"] = to_mentity_ref(mclass.intro)
-		obj["mpackage"] = to_mentity_ref(mmodule.mpackage)
-		obj["intro_mpropdefs"] = to_mentity_refs(collect_intro_mpropdefs(private_view))
-		obj["redef_mpropdefs"] = to_mentity_refs(collect_redef_mpropdefs(private_view))
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("is_intro", is_intro)
+		v.serialize_attribute("mparameters", mclass.mparameters)
+		if v isa FullJsonSerializer then
+			var view = private_view
+			v.serialize_attribute("mmodule", to_mentity_ref(mmodule))
+			v.serialize_attribute("mclass", to_mentity_ref(mclass))
+			v.serialize_attribute("mpropdefs", to_mentity_refs(mpropdefs))
+			v.serialize_attribute("intro_mproperties", to_mentity_refs(intro_mproperties))
+			v.serialize_attribute("intro", to_mentity_ref(mclass.intro))
+			v.serialize_attribute("mpackage", to_mentity_ref(mmodule.mpackage))
+			v.serialize_attribute("intro_mpropdefs", to_mentity_refs(collect_intro_mpropdefs(view)))
+			v.serialize_attribute("redef_mpropdefs", to_mentity_refs(collect_redef_mpropdefs(view)))
+		end
 	end
 end
 
 redef class MProperty
-	redef fun full_json do
-		var obj = super
-		obj["intro"] = to_mentity_ref(intro)
-		obj["intro_mclassdef"] = to_mentity_ref(intro_mclassdef)
-		obj["mpropdefs"] = to_mentity_refs(mpropdefs)
-		obj["intro_mclass"] = to_mentity_ref(intro_mclassdef.mclass)
-		obj["mpackage"] = to_mentity_ref(intro_mclassdef.mmodule.mpackage)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		if v isa FullJsonSerializer then
+			v.serialize_attribute("intro", to_mentity_ref(intro))
+			v.serialize_attribute("intro_mclassdef", to_mentity_ref(intro_mclassdef))
+			v.serialize_attribute("mpropdefs", to_mentity_refs(mpropdefs))
+			v.serialize_attribute("intro_mclass", to_mentity_ref(intro_mclassdef.mclass))
+			v.serialize_attribute("mpackage", to_mentity_ref(intro_mclassdef.mmodule.mpackage))
+		end
 	end
 end
 
 redef class MMethod
-	redef fun json do
-		var obj = super
-		obj["is_init"] = is_init
-		obj["msignature"] = intro.msignature
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("is_init", is_init)
+		v.serialize_attribute("msignature", intro.msignature)
 	end
 end
 
 redef class MAttribute
-	redef fun json do
-		var obj = super
-		obj["static_mtype"] = to_mentity_ref(intro.static_mtype)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("static_mtype", to_mentity_ref(intro.static_mtype))
 	end
 end
 
 redef class MVirtualTypeProp
-	redef fun json do
-		var obj = super
-		obj["mvirtualtype"] = to_mentity_ref(mvirtualtype)
-		obj["bound"] = to_mentity_ref(intro.bound)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("mvirtualtype", to_mentity_ref(mvirtualtype))
+		v.serialize_attribute("bound", to_mentity_ref(intro.bound))
 	end
 end
 
 redef class MPropDef
-	redef fun json do
-		var obj = super
-		obj["is_intro"] = is_intro
-		return obj
-	end
-
-	redef fun full_json do
-		var obj = super
-		obj["mclassdef"] = to_mentity_ref(mclassdef)
-		obj["mproperty"] = to_mentity_ref(mproperty)
-		obj["intro"] = to_mentity_ref(mproperty.intro)
-		obj["intro_mclassdef"] = to_mentity_ref(mproperty.intro.mclassdef)
-		obj["mmodule"] = to_mentity_ref(mclassdef.mmodule)
-		obj["mgroup"] = to_mentity_ref(mclassdef.mmodule.mgroup)
-		obj["mpackage"] = to_mentity_ref(mclassdef.mmodule.mpackage)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("is_intro", is_intro)
+		if v isa FullJsonSerializer then
+			v.serialize_attribute("mclassdef", to_mentity_ref(mclassdef))
+			v.serialize_attribute("mproperty", to_mentity_ref(mproperty))
+			v.serialize_attribute("intro", to_mentity_ref(mproperty.intro))
+			v.serialize_attribute("intro_mclassdef", to_mentity_ref(mproperty.intro.mclassdef))
+			v.serialize_attribute("mmodule", to_mentity_ref(mclassdef.mmodule))
+			v.serialize_attribute("mgroup", to_mentity_ref(mclassdef.mmodule.mgroup))
+			v.serialize_attribute("mpackage", to_mentity_ref(mclassdef.mmodule.mpackage))
+		end
 	end
 end
 
 redef class MMethodDef
-	redef fun json do
-		var obj = super
-		obj["msignature"] = msignature
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("msignature", msignature)
 	end
 end
 
 redef class MAttributeDef
-	redef fun json do
-		var obj = super
-		obj["static_mtype"] = to_mentity_ref(static_mtype)
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("static_mtype", to_mentity_ref(static_mtype))
 	end
 end
 
 redef class MVirtualTypeDef
-	redef fun json do
-		var obj = super
-		obj["bound"] = to_mentity_ref(bound)
-		obj["is_fixed"] = is_fixed
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("bound", to_mentity_ref(bound))
+		v.serialize_attribute("is_fixed", is_fixed)
 	end
 end
 
 redef class MSignature
-	redef fun json do
-		var obj = new JsonObject
-		obj["arity"] = arity
-		var arr = new JsonArray
-		for mparam in mparameters do arr.add mparam
-		obj["mparams"] = arr
-		obj["return_mtype"] = to_mentity_ref(return_mtype)
-		obj["vararg_rank"] = vararg_rank
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("arity", arity)
+		v.serialize_attribute("mparams", mparameters)
+		v.serialize_attribute("return_mtype", to_mentity_ref(return_mtype))
+		v.serialize_attribute("vararg_rank", vararg_rank)
 	end
 end
 
 redef class MParameterType
-	redef fun json do
-		var obj = new JsonObject
-		obj["name"] = name
-		obj["rank"] = rank
-		obj["mtype"] = to_mentity_ref(mclass.intro.bound_mtype.arguments[rank])
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("name", name)
+		v.serialize_attribute("rank", rank)
+		v.serialize_attribute("mtype", to_mentity_ref(mclass.intro.bound_mtype.arguments[rank]))
 	end
 end
 
 redef class MParameter
-	redef fun json do
-		var obj = new JsonObject
-		obj["is_vararg"] = is_vararg
-		obj["name"] = name
-		obj["mtype"] = to_mentity_ref(mtype)
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("is_vararg", is_vararg)
+		v.serialize_attribute("name", name)
+		v.serialize_attribute("mtype", to_mentity_ref(mtype))
 	end
 end
 
@@ -336,8 +291,19 @@ fun to_mentity_ref(mentity: nullable MEntity): nullable MEntityRef do
 end
 
 # Return a collection of `mentities` as a JsonArray of MEntityRefs.
-fun to_mentity_refs(mentities: Collection[MEntity]): JsonArray do
-	var array = new JsonArray
-	for mentity in mentities do array.add to_mentity_ref(mentity)
+fun to_mentity_refs(mentities: Collection[MEntity]): Array[MEntityRef] do
+	var array = new Array[MEntityRef]
+	for mentity in mentities do
+		var ref = to_mentity_ref(mentity)
+		if ref == null then continue
+		array.add ref
+	end
 	return array
+end
+
+# Use the FullJsonSerializer to generate the full json representation of a MEntity.
+#
+# See MEntity::to_full_json.
+class FullJsonSerializer
+	super JsonSerializer
 end

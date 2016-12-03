@@ -132,7 +132,7 @@ class APIEntity
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.json mentity.api_json(self)
+		res.raw_json mentity.to_full_json
 	end
 end
 
@@ -164,7 +164,7 @@ class APIEntityLinearization
 			return
 		end
 		var mentities = new JsonArray
-		for e in lin do mentities.add e.full_json
+		for e in lin do mentities.add e
 		res.json mentities
 	end
 end

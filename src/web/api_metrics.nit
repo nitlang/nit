@@ -154,82 +154,74 @@ end
 redef class MetricSet
 	super Jsonable
 
-	fun json: JsonObject do
-		var obj = new JsonObject
+	redef fun core_serialize_to(v) do
 		for metric in metrics do
-			obj[metric.name] = metric
+			v.serialize_attribute(metric.name, metric)
 		end
-		return obj
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class Metric
 	super Jsonable
 
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["name"] = name
-		obj["desc"] = desc
-		obj["empty"] = values.is_empty
-		if values.not_empty then obj["avg"] = avg
-		if values.not_empty then obj["std_dev"] = std_dev
-		if values.not_empty then obj["threshold"] = threshold
-		return obj
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("name", name)
+		v.serialize_attribute("desc", desc)
+		v.serialize_attribute("empty", values.is_empty)
+		if values.not_empty then v.serialize_attribute("avg", avg)
+		if values.not_empty then v.serialize_attribute("std_dev", std_dev)
+		if values.not_empty then v.serialize_attribute("threshold", threshold)
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 end
 
 redef class IntMetric
-	redef fun json do
-		var obj = super
-		if values.not_empty then obj["sum"] = sum
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		if values.not_empty then v.serialize_attribute("sum", sum)
 	end
 end
 
 redef class FloatMetric
-	redef fun json do
-		var obj = super
-		if values.not_empty then obj["sum"] = sum
-		return obj
+	redef fun core_serialize_to(v) do
+		super
+		if values.not_empty then v.serialize_attribute("sum", sum)
 	end
 end
 
 redef class MModuleMetric
-	redef fun json do
-		var obj = super
-		if values.not_empty then obj["min"] = min
-		if values.not_empty then obj["max"] = max
+	redef fun core_serialize_to(v) do
+		super
+		if values.not_empty then v.serialize_attribute("min", min)
+		if values.not_empty then v.serialize_attribute("max", max)
 		var values = new JsonObject
 		for value in sort do
-			var v = self[value]
-			var vobj = new JsonObject
-			vobj["mentity"] = value
-			vobj["value"] = if v isa Jsonable then v else v.to_s
-			values[value.full_name] = vobj
+			values[value.full_name] = new MetricEntry(value, self[value])
 		end
-		obj["values"] = values
-		return obj
+		v.serialize_attribute("values", values)
 	end
 end
 
 redef class MClassMetric
-	redef fun json do
-		var obj = super
-		if values.not_empty then obj["min"] = min
-		if values.not_empty then obj["max"] = max
+	redef fun core_serialize_to(v) do
+		super
+		if values.not_empty then v.serialize_attribute("min", min)
+		if values.not_empty then v.serialize_attribute("max", max)
 		var values = new JsonObject
 		for value in sort do
-			var v = self[value]
-			var vobj = new JsonObject
-			vobj["mentity"] = value
-			vobj["value"] = if v isa Jsonable then v else v.to_s
-			values[value.full_name] = vobj
+			values[value.full_name] = new MetricEntry(value, self[value])
 		end
-		obj["values"] = values
-		return obj
+		v.serialize_attribute("values", values)
+	end
+end
+
+private class MetricEntry
+	super Jsonable
+
+	var mentity: MEntity
+	var value: Object
+
+	redef fun core_serialize_to(v) do
+		v.serialize_attribute("mentity", mentity)
+		v.serialize_attribute("value", if value isa JsonObject then value else value.to_s)
 	end
 end
