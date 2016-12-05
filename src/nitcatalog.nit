@@ -232,12 +232,19 @@ redef class Catalog
 		var name = mpackage.name.html_escape
 		res.more_head.add """<title>{{{name}}}</title>"""
 
-		res.add """
-<div class="content">
-<h1 class="package-name">{{{name}}}</h1>
-"""
+		res.add """<div class="content">"""
+
 		var mdoc = mpackage.mdoc_or_fallback
-		if mdoc != null then res.add mdoc.html_documentation
+		if mdoc == null then
+			res.add """<h1 class="package-name">{{{name}}}</h1>"""
+		else
+			res.add """
+<div style="float: left">
+	<h1 class="package-name">{{{name}}}&nbsp;-&nbsp;</h1>
+</div>
+"""
+			res.add mdoc.html_documentation
+		end
 
 		res.add "<h2>Content</h2>"
 		var ot = new OrderedTree[MConcern]
