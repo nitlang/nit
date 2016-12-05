@@ -35,20 +35,20 @@
 		"full_name": "test_prog$Object"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
 	}],
 	"intro_mproperties": [{
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
 	}],
@@ -92,42 +92,42 @@
 		"full_name": "test_prog$Int"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Int::unary -"
+		"full_name": "test_prog::Object::!="
+	}, {
+		"full_name": "test_prog::Int::*"
 	}, {
 		"full_name": "test_prog::Int::+"
 	}, {
 		"full_name": "test_prog::Int::-"
 	}, {
-		"full_name": "test_prog::Int::*"
-	}, {
 		"full_name": "test_prog::Int::/"
-	}, {
-		"full_name": "test_prog::Int::>"
-	}, {
-		"full_name": "test_prog::Int::to_f"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Int::>"
+	}, {
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
+	}, {
+		"full_name": "test_prog::Int::to_f"
+	}, {
+		"full_name": "test_prog::Int::unary -"
 	}],
 	"intro_mproperties": [{
-		"full_name": "test_prog::Int::unary -"
+		"full_name": "test_prog::Int::*"
 	}, {
 		"full_name": "test_prog::Int::+"
 	}, {
 		"full_name": "test_prog::Int::-"
-	}, {
-		"full_name": "test_prog::Int::*"
 	}, {
 		"full_name": "test_prog::Int::/"
 	}, {
 		"full_name": "test_prog::Int::>"
 	}, {
 		"full_name": "test_prog::Int::to_f"
+	}, {
+		"full_name": "test_prog::Int::unary -"
 	}],
 	"redef_mproperties": [],
 	"parents": [{
@@ -171,30 +171,30 @@
 		"full_name": "test_prog$Float"
 	}],
 	"all_mproperties": [{
+		"full_name": "test_prog::Object::!="
+	}, {
+		"full_name": "test_prog::Float::*"
+	}, {
 		"full_name": "test_prog::Float::+"
 	}, {
 		"full_name": "test_prog::Float::-"
 	}, {
-		"full_name": "test_prog::Float::*"
-	}, {
 		"full_name": "test_prog::Float::/"
+	}, {
+		"full_name": "test_prog::Object::=="
 	}, {
 		"full_name": "test_prog::Float::>"
 	}, {
 		"full_name": "test_prog::Object::OTHER"
 	}, {
-		"full_name": "test_prog::Object::=="
-	}, {
-		"full_name": "test_prog::Object::!="
-	}, {
 		"full_name": "test_prog::Object::init"
 	}],
 	"intro_mproperties": [{
+		"full_name": "test_prog::Float::*"
+	}, {
 		"full_name": "test_prog::Float::+"
 	}, {
 		"full_name": "test_prog::Float::-"
-	}, {
-		"full_name": "test_prog::Float::*"
 	}, {
 		"full_name": "test_prog::Float::/"
 	}, {
@@ -242,11 +242,11 @@
 		"full_name": "test_prog$Bool"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
 	}],
@@ -293,11 +293,11 @@
 		"full_name": "test_prog$String"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
 	}],
@@ -350,11 +350,11 @@
 		"full_name": "test_prog$List"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
 	}],
@@ -401,50 +401,50 @@
 		"full_name": "test_prog$Career"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::careers::Career::_strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus="
-	}, {
-		"full_name": "test_prog::careers::Career::_endurance_bonus"
-	}, {
-		"full_name": "test_prog::Career::endurance_bonus"
-	}, {
-		"full_name": "test_prog::Career::endurance_bonus="
-	}, {
-		"full_name": "test_prog::careers::Career::_intelligence_bonus"
-	}, {
-		"full_name": "test_prog::Career::intelligence_bonus"
-	}, {
-		"full_name": "test_prog::Career::intelligence_bonus="
-	}, {
-		"full_name": "test_prog::Object::init"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
-	}],
-	"intro_mproperties": [{
-		"full_name": "test_prog::careers::Career::_strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::careers::Career::_endurance_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_strength_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus="
 	}, {
-		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+		"full_name": "test_prog::Object::init"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus="
+	}, {
+		"full_name": "test_prog::Career::strength_bonus"
+	}, {
+		"full_name": "test_prog::Career::strength_bonus="
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::careers::Career::_endurance_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_strength_bonus"
+	}, {
+		"full_name": "test_prog::Career::endurance_bonus"
+	}, {
+		"full_name": "test_prog::Career::endurance_bonus="
+	}, {
+		"full_name": "test_prog::Career::intelligence_bonus"
+	}, {
+		"full_name": "test_prog::Career::intelligence_bonus="
+	}, {
+		"full_name": "test_prog::Career::strength_bonus"
+	}, {
+		"full_name": "test_prog::Career::strength_bonus="
 	}],
 	"redef_mproperties": [{
 		"full_name": "test_prog::Object::init"
@@ -490,31 +490,31 @@
 		"full_name": "test_prog$Warrior"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::init"
+		"full_name": "test_prog::Object::!="
 	}, {
-		"full_name": "test_prog::careers::Career::_strength_bonus"
+		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Career::strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::careers::Career::_endurance_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_strength_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus="
 	}, {
-		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+		"full_name": "test_prog::Object::init"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus="
 	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Career::strength_bonus"
 	}, {
-		"full_name": "test_prog::Object::=="
-	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Career::strength_bonus="
 	}],
 	"intro_mproperties": [],
 	"redef_mproperties": [{
@@ -561,31 +561,31 @@
 		"full_name": "test_prog$Magician"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::init"
+		"full_name": "test_prog::Object::!="
 	}, {
-		"full_name": "test_prog::careers::Career::_strength_bonus"
+		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Career::strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::careers::Career::_endurance_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_strength_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus="
 	}, {
-		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+		"full_name": "test_prog::Object::init"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus="
 	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Career::strength_bonus"
 	}, {
-		"full_name": "test_prog::Object::=="
-	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Career::strength_bonus="
 	}],
 	"intro_mproperties": [],
 	"redef_mproperties": [{
@@ -632,31 +632,31 @@
 		"full_name": "test_prog$Alcoholic"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::init"
+		"full_name": "test_prog::Object::!="
 	}, {
-		"full_name": "test_prog::careers::Career::_strength_bonus"
+		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Career::strength_bonus"
-	}, {
-		"full_name": "test_prog::Career::strength_bonus="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::careers::Career::_endurance_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+	}, {
+		"full_name": "test_prog::careers::Career::_strength_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus"
 	}, {
 		"full_name": "test_prog::Career::endurance_bonus="
 	}, {
-		"full_name": "test_prog::careers::Career::_intelligence_bonus"
+		"full_name": "test_prog::Object::init"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus"
 	}, {
 		"full_name": "test_prog::Career::intelligence_bonus="
 	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Career::strength_bonus"
 	}, {
-		"full_name": "test_prog::Object::=="
-	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Career::strength_bonus="
 	}],
 	"intro_mproperties": [],
 	"redef_mproperties": [{
@@ -703,50 +703,50 @@
 		"full_name": "test_prog$Race"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::races::Race::_base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength="
-	}, {
-		"full_name": "test_prog::races::Race::_base_endurance"
-	}, {
-		"full_name": "test_prog::Race::base_endurance"
-	}, {
-		"full_name": "test_prog::Race::base_endurance="
-	}, {
-		"full_name": "test_prog::races::Race::_base_intelligence"
-	}, {
-		"full_name": "test_prog::Race::base_intelligence"
-	}, {
-		"full_name": "test_prog::Race::base_intelligence="
-	}, {
-		"full_name": "test_prog::Object::init"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
-	}],
-	"intro_mproperties": [{
-		"full_name": "test_prog::races::Race::_base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::races::Race::_base_endurance"
+	}, {
+		"full_name": "test_prog::races::Race::_base_intelligence"
+	}, {
+		"full_name": "test_prog::races::Race::_base_strength"
 	}, {
 		"full_name": "test_prog::Race::base_endurance"
 	}, {
 		"full_name": "test_prog::Race::base_endurance="
 	}, {
+		"full_name": "test_prog::Race::base_intelligence"
+	}, {
+		"full_name": "test_prog::Race::base_intelligence="
+	}, {
+		"full_name": "test_prog::Race::base_strength"
+	}, {
+		"full_name": "test_prog::Race::base_strength="
+	}, {
+		"full_name": "test_prog::Object::init"
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::races::Race::_base_endurance"
+	}, {
 		"full_name": "test_prog::races::Race::_base_intelligence"
+	}, {
+		"full_name": "test_prog::races::Race::_base_strength"
+	}, {
+		"full_name": "test_prog::Race::base_endurance"
+	}, {
+		"full_name": "test_prog::Race::base_endurance="
 	}, {
 		"full_name": "test_prog::Race::base_intelligence"
 	}, {
 		"full_name": "test_prog::Race::base_intelligence="
+	}, {
+		"full_name": "test_prog::Race::base_strength"
+	}, {
+		"full_name": "test_prog::Race::base_strength="
 	}],
 	"redef_mproperties": [{
 		"full_name": "test_prog::Object::init"
@@ -792,31 +792,31 @@
 		"full_name": "test_prog$Human"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::init"
+		"full_name": "test_prog::Object::!="
 	}, {
-		"full_name": "test_prog::races::Race::_base_strength"
+		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Race::base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::races::Race::_base_endurance"
+	}, {
+		"full_name": "test_prog::races::Race::_base_intelligence"
+	}, {
+		"full_name": "test_prog::races::Race::_base_strength"
 	}, {
 		"full_name": "test_prog::Race::base_endurance"
 	}, {
 		"full_name": "test_prog::Race::base_endurance="
 	}, {
-		"full_name": "test_prog::races::Race::_base_intelligence"
-	}, {
 		"full_name": "test_prog::Race::base_intelligence"
 	}, {
 		"full_name": "test_prog::Race::base_intelligence="
 	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Race::base_strength"
 	}, {
-		"full_name": "test_prog::Object::=="
+		"full_name": "test_prog::Race::base_strength="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::init"
 	}],
 	"intro_mproperties": [],
 	"redef_mproperties": [{
@@ -865,39 +865,39 @@
 		"full_name": "test_prog::combat$Dwarf"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::init"
+		"full_name": "test_prog::Object::!="
 	}, {
-		"full_name": "test_prog::Weapon::dps"
+		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::races::Race::_base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::races::Race::_base_endurance"
+	}, {
+		"full_name": "test_prog::races::Race::_base_intelligence"
+	}, {
+		"full_name": "test_prog::races::Race::_base_strength"
 	}, {
 		"full_name": "test_prog::Race::base_endurance"
 	}, {
 		"full_name": "test_prog::Race::base_endurance="
 	}, {
-		"full_name": "test_prog::races::Race::_base_intelligence"
-	}, {
 		"full_name": "test_prog::Race::base_intelligence"
 	}, {
 		"full_name": "test_prog::Race::base_intelligence="
 	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Race::base_strength"
 	}, {
-		"full_name": "test_prog::Object::=="
+		"full_name": "test_prog::Race::base_strength="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Weapon::dps"
+	}, {
+		"full_name": "test_prog::Object::init"
 	}],
 	"intro_mproperties": [],
 	"redef_mproperties": [{
-		"full_name": "test_prog::Object::init"
-	}, {
 		"full_name": "test_prog::Weapon::dps"
+	}, {
+		"full_name": "test_prog::Object::init"
 	}],
 	"parents": [{
 		"full_name": "test_prog::Race"
@@ -942,31 +942,31 @@
 		"full_name": "test_prog$Elf"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Object::init"
+		"full_name": "test_prog::Object::!="
 	}, {
-		"full_name": "test_prog::races::Race::_base_strength"
+		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Race::base_strength"
-	}, {
-		"full_name": "test_prog::Race::base_strength="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::races::Race::_base_endurance"
+	}, {
+		"full_name": "test_prog::races::Race::_base_intelligence"
+	}, {
+		"full_name": "test_prog::races::Race::_base_strength"
 	}, {
 		"full_name": "test_prog::Race::base_endurance"
 	}, {
 		"full_name": "test_prog::Race::base_endurance="
 	}, {
-		"full_name": "test_prog::races::Race::_base_intelligence"
-	}, {
 		"full_name": "test_prog::Race::base_intelligence"
 	}, {
 		"full_name": "test_prog::Race::base_intelligence="
 	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Race::base_strength"
 	}, {
-		"full_name": "test_prog::Object::=="
+		"full_name": "test_prog::Race::base_strength="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::init"
 	}],
 	"intro_mproperties": [],
 	"redef_mproperties": [{
@@ -1015,126 +1015,126 @@
 		"full_name": "test_prog::combat$Character"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::character::Character::_race"
-	}, {
-		"full_name": "test_prog::Character::race"
-	}, {
-		"full_name": "test_prog::Character::race="
-	}, {
-		"full_name": "test_prog::character::Character::_career"
-	}, {
-		"full_name": "test_prog::Character::career"
-	}, {
-		"full_name": "test_prog::Character::career="
-	}, {
-		"full_name": "test_prog::Character::quit"
-	}, {
-		"full_name": "test_prog::character::Character::_name"
-	}, {
-		"full_name": "test_prog::Character::name"
-	}, {
-		"full_name": "test_prog::Character::name="
-	}, {
-		"full_name": "test_prog::character::Character::_age"
-	}, {
-		"full_name": "test_prog::Character::age"
-	}, {
-		"full_name": "test_prog::Character::age="
-	}, {
-		"full_name": "test_prog::character::Character::_sex"
-	}, {
-		"full_name": "test_prog::Character::sex"
-	}, {
-		"full_name": "test_prog::Character::sex="
-	}, {
-		"full_name": "test_prog::Character::total_strengh"
-	}, {
-		"full_name": "test_prog::Character::total_endurance"
-	}, {
-		"full_name": "test_prog::Character::total_intelligence"
-	}, {
-		"full_name": "test_prog::Character::max_health"
-	}, {
-		"full_name": "test_prog::character::Character::_health"
-	}, {
-		"full_name": "test_prog::Character::health"
-	}, {
-		"full_name": "test_prog::Character::health="
-	}, {
-		"full_name": "test_prog::Object::init"
-	}, {
-		"full_name": "test_prog::Combatable::hit_points"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
-		"full_name": "test_prog::Combatable::attack"
-	}, {
-		"full_name": "test_prog::Combatable::direct_attack"
-	}, {
-		"full_name": "test_prog::Combatable::defend"
-	}, {
-		"full_name": "test_prog::Combatable::is_dead"
-	}],
-	"intro_mproperties": [{
-		"full_name": "test_prog::character::Character::_race"
-	}, {
-		"full_name": "test_prog::Character::race"
-	}, {
-		"full_name": "test_prog::Character::race="
+		"full_name": "test_prog::character::Character::_age"
 	}, {
 		"full_name": "test_prog::character::Character::_career"
 	}, {
-		"full_name": "test_prog::Character::career"
-	}, {
-		"full_name": "test_prog::Character::career="
-	}, {
-		"full_name": "test_prog::Character::quit"
+		"full_name": "test_prog::character::Character::_health"
 	}, {
 		"full_name": "test_prog::character::Character::_name"
 	}, {
-		"full_name": "test_prog::Character::name"
+		"full_name": "test_prog::character::Character::_race"
 	}, {
-		"full_name": "test_prog::Character::name="
-	}, {
-		"full_name": "test_prog::character::Character::_age"
+		"full_name": "test_prog::character::Character::_sex"
 	}, {
 		"full_name": "test_prog::Character::age"
 	}, {
 		"full_name": "test_prog::Character::age="
 	}, {
-		"full_name": "test_prog::character::Character::_sex"
+		"full_name": "test_prog::Combatable::attack"
+	}, {
+		"full_name": "test_prog::Character::career"
+	}, {
+		"full_name": "test_prog::Character::career="
+	}, {
+		"full_name": "test_prog::Combatable::defend"
+	}, {
+		"full_name": "test_prog::Combatable::direct_attack"
+	}, {
+		"full_name": "test_prog::Character::health"
+	}, {
+		"full_name": "test_prog::Character::health="
+	}, {
+		"full_name": "test_prog::Combatable::hit_points"
+	}, {
+		"full_name": "test_prog::Object::init"
+	}, {
+		"full_name": "test_prog::Combatable::is_dead"
+	}, {
+		"full_name": "test_prog::Character::max_health"
+	}, {
+		"full_name": "test_prog::Character::name"
+	}, {
+		"full_name": "test_prog::Character::name="
+	}, {
+		"full_name": "test_prog::Character::quit"
+	}, {
+		"full_name": "test_prog::Character::race"
+	}, {
+		"full_name": "test_prog::Character::race="
 	}, {
 		"full_name": "test_prog::Character::sex"
 	}, {
 		"full_name": "test_prog::Character::sex="
 	}, {
+		"full_name": "test_prog::Character::total_endurance"
+	}, {
+		"full_name": "test_prog::Character::total_intelligence"
+	}, {
 		"full_name": "test_prog::Character::total_strengh"
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::character::Character::_age"
+	}, {
+		"full_name": "test_prog::character::Character::_career"
+	}, {
+		"full_name": "test_prog::character::Character::_health"
+	}, {
+		"full_name": "test_prog::character::Character::_name"
+	}, {
+		"full_name": "test_prog::character::Character::_race"
+	}, {
+		"full_name": "test_prog::character::Character::_sex"
+	}, {
+		"full_name": "test_prog::Character::age"
+	}, {
+		"full_name": "test_prog::Character::age="
+	}, {
+		"full_name": "test_prog::Character::career"
+	}, {
+		"full_name": "test_prog::Character::career="
+	}, {
+		"full_name": "test_prog::Character::health"
+	}, {
+		"full_name": "test_prog::Character::health="
+	}, {
+		"full_name": "test_prog::Character::max_health"
+	}, {
+		"full_name": "test_prog::Character::name"
+	}, {
+		"full_name": "test_prog::Character::name="
+	}, {
+		"full_name": "test_prog::Character::quit"
+	}, {
+		"full_name": "test_prog::Character::race"
+	}, {
+		"full_name": "test_prog::Character::race="
+	}, {
+		"full_name": "test_prog::Character::sex"
+	}, {
+		"full_name": "test_prog::Character::sex="
 	}, {
 		"full_name": "test_prog::Character::total_endurance"
 	}, {
 		"full_name": "test_prog::Character::total_intelligence"
 	}, {
-		"full_name": "test_prog::Character::max_health"
-	}, {
-		"full_name": "test_prog::character::Character::_health"
-	}, {
-		"full_name": "test_prog::Character::health"
-	}, {
-		"full_name": "test_prog::Character::health="
+		"full_name": "test_prog::Character::total_strengh"
 	}],
 	"redef_mproperties": [{
-		"full_name": "test_prog::Object::init"
-	}, {
 		"full_name": "test_prog::Combatable::hit_points"
+	}, {
+		"full_name": "test_prog::Object::init"
 	}],
 	"parents": [{
-		"full_name": "test_prog::Object"
-	}, {
 		"full_name": "test_prog::Combatable"
+	}, {
+		"full_name": "test_prog::Object"
 	}]
 }
 {
@@ -1174,13 +1174,13 @@
 		"full_name": "test_prog$Weapon"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Weapon::dps"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
+	}, {
+		"full_name": "test_prog::Weapon::dps"
 	}, {
 		"full_name": "test_prog::Object::init"
 	}],
@@ -1229,32 +1229,32 @@
 		"full_name": "test_prog$Combatable"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Combatable::hit_points"
-	}, {
-		"full_name": "test_prog::Combatable::attack"
-	}, {
-		"full_name": "test_prog::Combatable::direct_attack"
-	}, {
-		"full_name": "test_prog::Combatable::defend"
-	}, {
-		"full_name": "test_prog::Combatable::is_dead"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
-	}, {
-		"full_name": "test_prog::Object::init"
-	}],
-	"intro_mproperties": [{
-		"full_name": "test_prog::Combatable::hit_points"
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Combatable::attack"
 	}, {
+		"full_name": "test_prog::Combatable::defend"
+	}, {
 		"full_name": "test_prog::Combatable::direct_attack"
 	}, {
+		"full_name": "test_prog::Combatable::hit_points"
+	}, {
+		"full_name": "test_prog::Object::init"
+	}, {
+		"full_name": "test_prog::Combatable::is_dead"
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::Combatable::attack"
+	}, {
 		"full_name": "test_prog::Combatable::defend"
+	}, {
+		"full_name": "test_prog::Combatable::direct_attack"
+	}, {
+		"full_name": "test_prog::Combatable::hit_points"
 	}, {
 		"full_name": "test_prog::Combatable::is_dead"
 	}],
@@ -1300,32 +1300,32 @@
 		"full_name": "test_prog$Game"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Game::player_characters"
-	}, {
-		"full_name": "test_prog::Game::computer_characters"
-	}, {
-		"full_name": "test_prog::Game::start_game"
-	}, {
-		"full_name": "test_prog::Game::pause_game"
-	}, {
-		"full_name": "test_prog::Game::stop_game"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
-	}, {
-		"full_name": "test_prog::Object::init"
-	}],
-	"intro_mproperties": [{
-		"full_name": "test_prog::Game::player_characters"
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Game::computer_characters"
 	}, {
-		"full_name": "test_prog::Game::start_game"
+		"full_name": "test_prog::Object::init"
 	}, {
 		"full_name": "test_prog::Game::pause_game"
+	}, {
+		"full_name": "test_prog::Game::player_characters"
+	}, {
+		"full_name": "test_prog::Game::start_game"
+	}, {
+		"full_name": "test_prog::Game::stop_game"
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::Game::computer_characters"
+	}, {
+		"full_name": "test_prog::Game::pause_game"
+	}, {
+		"full_name": "test_prog::Game::player_characters"
+	}, {
+		"full_name": "test_prog::Game::start_game"
 	}, {
 		"full_name": "test_prog::Game::stop_game"
 	}],
@@ -1362,15 +1362,15 @@
 		"full_name": "test_prog$Starter"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Starter::start"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
+	}, {
+		"full_name": "test_prog::Starter::start"
 	}],
 	"intro_mproperties": [{
 		"full_name": "test_prog::Starter::start"
@@ -1408,15 +1408,15 @@
 		"full_name": "test_prog$Sys"
 	}],
 	"all_mproperties": [{
-		"full_name": "test_prog::Sys::main"
-	}, {
-		"full_name": "test_prog::Object::OTHER"
+		"full_name": "test_prog::Object::!="
 	}, {
 		"full_name": "test_prog::Object::=="
 	}, {
-		"full_name": "test_prog::Object::!="
+		"full_name": "test_prog::Object::OTHER"
 	}, {
 		"full_name": "test_prog::Object::init"
+	}, {
+		"full_name": "test_prog::Sys::main"
 	}],
 	"intro_mproperties": [{
 		"full_name": "test_prog::Sys::main"

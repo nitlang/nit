@@ -25,13 +25,13 @@
 		"full_name": "test_prog>"
 	},
 	"mgroups": [{
-		"full_name": "test_prog>"
-	}, {
 		"full_name": "test_prog>game>"
 	}, {
 		"full_name": "test_prog>platform>"
 	}, {
 		"full_name": "test_prog>rpg>"
+	}, {
+		"full_name": "test_prog>"
 	}],
 	"ini": {
 		"upstream.issues": "https://github.com/nitlang/nit/issues",
