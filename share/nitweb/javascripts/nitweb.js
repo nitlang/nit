@@ -57,5 +57,9 @@
 				templateUrl: 'views/error.html'
 			});
 		$locationProvider.html5Mode(true);
+	})
+
+	.filter('encodeURI', function() {
+		return encodeURIComponent;
 	});
 })();
