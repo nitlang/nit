@@ -97,43 +97,43 @@
 		"full_name": "test_prog>platform>"
 	},
 	"intro_mclasses": [{
-		"full_name": "test_prog::Object"
-	}, {
-		"full_name": "test_prog::Int"
+		"full_name": "test_prog::Bool"
 	}, {
 		"full_name": "test_prog::Float"
 	}, {
-		"full_name": "test_prog::Bool"
-	}, {
-		"full_name": "test_prog::String"
+		"full_name": "test_prog::Int"
 	}, {
 		"full_name": "test_prog::List"
+	}, {
+		"full_name": "test_prog::Object"
+	}, {
+		"full_name": "test_prog::String"
 	}],
 	"mclassdefs": [{
-		"full_name": "test_prog$Object"
-	}, {
-		"full_name": "test_prog$Int"
+		"full_name": "test_prog$Bool"
 	}, {
 		"full_name": "test_prog$Float"
 	}, {
-		"full_name": "test_prog$Bool"
-	}, {
-		"full_name": "test_prog$String"
+		"full_name": "test_prog$Int"
 	}, {
 		"full_name": "test_prog$List"
+	}, {
+		"full_name": "test_prog$Object"
+	}, {
+		"full_name": "test_prog$String"
 	}],
 	"intro_mclassdefs": [{
-		"full_name": "test_prog$Object"
-	}, {
-		"full_name": "test_prog$Int"
+		"full_name": "test_prog$Bool"
 	}, {
 		"full_name": "test_prog$Float"
 	}, {
-		"full_name": "test_prog$Bool"
-	}, {
-		"full_name": "test_prog$String"
+		"full_name": "test_prog$Int"
 	}, {
 		"full_name": "test_prog$List"
+	}, {
+		"full_name": "test_prog$Object"
+	}, {
+		"full_name": "test_prog$String"
 	}],
 	"redef_mclassdefs": [],
 	"imports": []
@@ -168,31 +168,31 @@
 		"full_name": "test_prog>rpg>"
 	},
 	"intro_mclasses": [{
-		"full_name": "test_prog::Career"
+		"full_name": "test_prog::Alcoholic"
 	}, {
-		"full_name": "test_prog::Warrior"
+		"full_name": "test_prog::Career"
 	}, {
 		"full_name": "test_prog::Magician"
 	}, {
-		"full_name": "test_prog::Alcoholic"
+		"full_name": "test_prog::Warrior"
 	}],
 	"mclassdefs": [{
-		"full_name": "test_prog$Career"
+		"full_name": "test_prog$Alcoholic"
 	}, {
-		"full_name": "test_prog$Warrior"
+		"full_name": "test_prog$Career"
 	}, {
 		"full_name": "test_prog$Magician"
 	}, {
-		"full_name": "test_prog$Alcoholic"
+		"full_name": "test_prog$Warrior"
 	}],
 	"intro_mclassdefs": [{
-		"full_name": "test_prog$Career"
+		"full_name": "test_prog$Alcoholic"
 	}, {
-		"full_name": "test_prog$Warrior"
+		"full_name": "test_prog$Career"
 	}, {
 		"full_name": "test_prog$Magician"
 	}, {
-		"full_name": "test_prog$Alcoholic"
+		"full_name": "test_prog$Warrior"
 	}],
 	"redef_mclassdefs": [],
 	"imports": [{
@@ -274,23 +274,23 @@
 		"full_name": "test_prog>rpg>"
 	},
 	"intro_mclasses": [{
-		"full_name": "test_prog::Weapon"
-	}, {
 		"full_name": "test_prog::Combatable"
+	}, {
+		"full_name": "test_prog::Weapon"
 	}],
 	"mclassdefs": [{
-		"full_name": "test_prog$Weapon"
-	}, {
-		"full_name": "test_prog$Combatable"
-	}, {
 		"full_name": "test_prog::combat$Character"
 	}, {
+		"full_name": "test_prog$Combatable"
+	}, {
 		"full_name": "test_prog::combat$Dwarf"
+	}, {
+		"full_name": "test_prog$Weapon"
 	}],
 	"intro_mclassdefs": [{
-		"full_name": "test_prog$Weapon"
-	}, {
 		"full_name": "test_prog$Combatable"
+	}, {
+		"full_name": "test_prog$Weapon"
 	}],
 	"redef_mclassdefs": [{
 		"full_name": "test_prog::combat$Character"
@@ -331,31 +331,31 @@
 		"full_name": "test_prog>rpg>"
 	},
 	"intro_mclasses": [{
-		"full_name": "test_prog::Race"
-	}, {
-		"full_name": "test_prog::Human"
-	}, {
 		"full_name": "test_prog::Dwarf"
 	}, {
 		"full_name": "test_prog::Elf"
+	}, {
+		"full_name": "test_prog::Human"
+	}, {
+		"full_name": "test_prog::Race"
 	}],
 	"mclassdefs": [{
-		"full_name": "test_prog$Race"
-	}, {
-		"full_name": "test_prog$Human"
-	}, {
 		"full_name": "test_prog$Dwarf"
 	}, {
 		"full_name": "test_prog$Elf"
+	}, {
+		"full_name": "test_prog$Human"
+	}, {
+		"full_name": "test_prog$Race"
 	}],
 	"intro_mclassdefs": [{
-		"full_name": "test_prog$Race"
-	}, {
-		"full_name": "test_prog$Human"
-	}, {
 		"full_name": "test_prog$Dwarf"
 	}, {
 		"full_name": "test_prog$Elf"
+	}, {
+		"full_name": "test_prog$Human"
+	}, {
+		"full_name": "test_prog$Race"
 	}],
 	"redef_mclassdefs": [],
 	"imports": [{

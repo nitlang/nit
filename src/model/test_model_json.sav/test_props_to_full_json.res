@@ -172,7 +172,7 @@
 		"full_name": "test_prog$Object"
 	},
 	"mpropdefs": [{
-		"full_name": "test_prog$Object$init"
+		"full_name": "test_prog$Elf$Object::init"
 	}, {
 		"full_name": "test_prog$Career$Object::init"
 	}, {
@@ -188,9 +188,9 @@
 	}, {
 		"full_name": "test_prog$Dwarf$Object::init"
 	}, {
-		"full_name": "test_prog$Elf$Object::init"
-	}, {
 		"full_name": "test_prog$Character$Object::init"
+	}, {
+		"full_name": "test_prog$Object$init"
 	}],
 	"intro_mclass": {
 		"full_name": "test_prog::Object"
