@@ -757,6 +757,9 @@ class PullRequest
 
 	# Changed files count.
 	var changed_files: Int is writable
+
+	# URL to patch file
+	var patch_url: nullable String is writable
 end
 
 # A pull request reference (used for head and base).

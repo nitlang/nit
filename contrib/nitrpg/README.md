@@ -42,7 +42,9 @@ It should alwaysd be up if you want your game to be kept up-to-date.
 
 To run the listener:
 
+~~~raw
 	./listener <host> <port>
+~~~
 
 The arguments `host` and `port` must correspond to what you entered in your
 GitHub hook settings.
@@ -53,7 +55,9 @@ The `web` program act as a [nitcorn](http://nitlanguage.org/doc/stdlib/module_ni
 
 To run the webserver:
 
+~~~raw
 	./web <host> <port> <root>
+~~~
 
 The arguments `host` and `port` must correspond to what you entered in your
 GitHub hook settings.
@@ -62,11 +66,15 @@ NitRPG root.
 
 For example, if NitRPG is installed in `yourdomain.com/nitrpg`:
 
+~~~raw
 	./web localhost 3000 "/nitrpg"
+~~~
 
 Leave it empty if NitRPG is installed at the root of the domain:
 
+~~~raw
 	./web localhost 3000 ""
+~~~
 
 The webserver can then be accessed at `http://yourdomain.com:3000/nitrpg/`.
 
