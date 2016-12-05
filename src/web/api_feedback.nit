@@ -16,33 +16,138 @@
 module api_feedback
 
 import web_base
+import popcorn::pop_auth
 
 redef class NitwebConfig
 
 	# MongoDB collection used to store stars.
-	var stars: MongoCollection is lazy do return db.collection("stars")
+	var stars = new StarRatingRepo(db.collection("stars")) is lazy
 end
 
 redef class APIRouter
+
 	redef init do
 		super
+
+		use("/feedback/grades/most", new APIStarsMost(config))
+		use("/feedback/grades/best", new APIStarsBest(config))
+		use("/feedback/grades/worst", new APIStarsWorst(config))
+		use("/feedback/grades/users", new APIStarsUsers(config))
+
+		use("/feedback/user/stars", new APIUserStars(config))
+
 		use("/feedback/stars/:id", new APIStars(config))
+		use("/feedback/stars/:id/dimension/:dimension", new APIStarsDimension(config))
+	end
+end
+
+# Base handler for feedback features.
+abstract class APIFeedBack
+	super APIHandler
+
+	# Get the user logged in or null if no session
+	fun get_session_user(req: HttpRequest): nullable User do
+		var session = req.session
+		if session == null then return null
+		return session.user
+	end
+
+	# Get the login of the session user or null if no session
+	fun get_session_login(req: HttpRequest): nullable String do
+		var user = get_session_user(req)
+		if user == null then return null
+		return user.login
+	end
+end
+
+# Most rated entities
+class APIStarsMost
+	super APIFeedBack
+
+	redef fun get(req, res) do
+		res.json new JsonArray.from(config.stars.most_rated)
+	end
+end
+
+# Best rated entities
+class APIStarsBest
+	super APIFeedBack
+
+	redef fun get(req, res) do
+		res.json new JsonArray.from(config.stars.best_rated)
+	end
+end
+
+# Best rated entities
+class APIStarsWorst
+	super APIFeedBack
+
+	redef fun get(req, res) do
+		res.json new JsonArray.from(config.stars.worst_rated)
+	end
+end
+
+# Best rated entities
+class APIStarsUsers
+	super APIFeedBack
+
+	redef fun get(req, res) do
+		res.json new JsonArray.from(config.stars.users_ratings)
+	end
+end
+
+# Stars attributed to mentities by user
+class APIUserStars
+	super APIFeedBack
+
+	redef fun get(req, res) do
+		var user = get_session_user(req)
+		if user == null then return
+		res.json new JsonArray.from(user.ratings(config))
 	end
 end
 
 # Stars attributed to mentities
 class APIStars
-	super APIHandler
+	super APIFeedBack
 
 	redef fun get(req, res) do
+		var login = get_session_login(req)
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.json mentity_ratings(mentity)
+		res.json mentity.ratings(config, login)
+	end
+end
+
+# Stars attributed to mentities by dimension
+class APIStarsDimension
+	super APIFeedBack
+
+	redef fun get(req, res) do
+		var login = get_session_login(req)
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
+		var dimension = req.param("dimension")
+		if dimension == null then return
+		res.json mentity.ratings_by_dimension(config, dimension, login)
 	end
 
 	redef fun post(req, res) do
+		var user = get_session_user(req)
+		var login = null
+		if user != null then login = user.login
+
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
+		var dimension = req.param("dimension")
+		if dimension == null then return
+
+		# Retrieve user previous rating
+		var previous = null
+		if user != null then
+			previous = user.find_previous_rating(config, mentity, dimension)
+		end
+
 		var obj = req.body.parse_json
 		if not obj isa JsonObject then
 			res.api_error(400, "Expected a JSON object")
@@ -54,81 +159,129 @@ class APIStars
 			return
 		end
 
-		var val = new MEntityRating(mentity.full_name, rating, get_time)
-		config.stars.insert(val.json)
+		if previous != null then
+			previous.rating = rating
+			previous.timestamp = get_time
+			config.stars.save previous
+		else
+			config.stars.save new StarRating(login, mentity.full_name, dimension, rating)
+		end
+		res.json mentity.ratings_by_dimension(config, dimension, login)
+	end
+end
 
-		res.json mentity_ratings(mentity)
+# Star ratings allow users to rate mentities with a 5-stars system.
+#
+# Each rating can consider only one `dimension` of the mentity.
+# Dimensions are arbitrary strings used to group ratings.
+class StarRating
+	super RepoObject
+	serialize
+
+	# The user login that made that rating (or null if anon)
+	var user: nullable String
+
+	# Rated `MEntity::full_name`
+	var mentity: String
+
+	# The dimension rated (arbritrary key)
+	var dimension: nullable String
+
+	# The rating (traditionally a score between 0 and 5)
+	var rating: Int is writable
+
+	# Timestamp when this rating was created
+	var timestamp = 0 is writable
+end
+
+redef class User
+
+	# Find a previous rating of `self` for `mentity` and `dimension`
+	fun find_previous_rating(config: NitwebConfig, mentity: MEntity, dimension: nullable String): nullable StarRating do
+		var match = new MongoMatch
+		match.eq("mentity", mentity.full_name)
+		match.eq("dimension", dimension)
+		match.eq("user", login)
+		return config.stars.find(match)
+	end
+
+	# Find all ratings by `self`
+	fun ratings(config: NitwebConfig): Array[StarRating] do
+		return config.stars.find_all((new MongoMatch).eq("user", login))
+	end
+end
+
+redef class MEntity
+
+	# Get the ratings of a `dimension`
+	fun ratings_by_dimension(config: NitwebConfig, dimension: String, user: nullable String): JsonObject do
+		var match = (new MongoMatch).eq("mentity", full_name).eq("dimension", dimension)
+		var pipeline = new MongoPipeline
+		pipeline.match(match)
+		pipeline.group((new MongoGroup("mean_group")).avg("mean", "$rating"))
+
+		var res = config.stars.collection.aggregate(pipeline)
+		var obj = new JsonObject
+		obj["mean"] = if res.is_empty then 0.0 else res.first["mean"]
+		obj["ratings"] = new JsonArray.from(config.stars.find_all(match))
+
+		if user != null then
+			match["user"] = user
+			obj["user"] = config.stars.find(match)
+		end
+		return obj
 	end
 
 	# Get the ratings of a `mentity`
-	fun mentity_ratings(mentity: MEntity): MEntityRatings do
-		var ratings = new MEntityRatings(mentity)
-
-		var req = new JsonObject
-		req["mentity"] = mentity.full_name
-		var rs = config.stars.find_all(req)
-		for r in rs do ratings.ratings.add new MEntityRating.from_json(r)
-		return ratings
+	fun ratings(config: NitwebConfig, user: nullable String): JsonObject do
+		var match = new JsonObject
+		match["mentity"] = full_name
+		match["ratings"] = new JsonArray.from(config.stars.find_all(match))
+		match["feature"] = ratings_by_dimension(config, "feature", user)
+		match["doc"] = ratings_by_dimension(config, "doc", user)
+		match["examples"] = ratings_by_dimension(config, "examples", user)
+		match["code"] = ratings_by_dimension(config, "code", user)
+		return match
 	end
 end
 
-# Ratings representation for a mentity
-class MEntityRatings
-	super Jsonable
+# StarRating Mongo Repository
+class StarRatingRepo
+	super MongoRepository[StarRating]
 
-	# MEntity rated
-	var mentity: MEntity
-
-	# List of ratings
-	var ratings = new Array[MEntityRating]
-
-	# Mean of all ratings or 0
-	fun mean: Float do
-		if ratings.is_empty then return 0.0
-		var sum = 0.0
-		for r in ratings do sum += r.rating.to_f
-		var res = sum / ratings.length.to_f
-		return res
+	# Find most rated mentities
+	fun most_rated: Array[JsonObject] do
+		var pipeline = new MongoPipeline
+		pipeline.group((new MongoGroup("$mentity")).sum("count", 1))
+		pipeline.sort((new MongoMatch).eq("count", -1))
+		pipeline.limit(10)
+		return collection.aggregate(pipeline)
 	end
 
-	# Json representation of `self`
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["mentity"] = mentity.full_name
-		obj["ratings"] = new JsonArray.from(ratings)
-		obj["mean"] = mean
-		return obj
+	# Find best rated mentities
+	fun best_rated: Array[JsonObject] do
+		var pipeline = new MongoPipeline
+		pipeline.group((new MongoGroup("$mentity")).avg("avg", "$rating"))
+		pipeline.sort((new MongoMatch).eq("avg", -1))
+		pipeline.limit(10)
+		return collection.aggregate(pipeline)
 	end
 
-	redef fun serialize_to(v) do json.serialize_to(v)
-end
-
-# Rating value of a MEntity
-class MEntityRating
-	super Jsonable
-
-	# MEntity this rating is about
-	var mentity: String
-
-	# Rating value (between 1 and 5)
-	var rating: Int
-
-	# Timestamp of this rating
-	var timestamp: Int
-
-	# Init this rating value from a JsonObject
-	init from_json(obj: JsonObject) do
-		init(obj["mentity"].as(String), obj["rating"].as(Int), obj["timestamp"].as(Int))
+	# Find worst rated mentities
+	fun worst_rated: Array[JsonObject] do
+		var pipeline = new MongoPipeline
+		pipeline.group((new MongoGroup("$mentity")).avg("avg", "$rating"))
+		pipeline.sort((new MongoMatch).eq("avg", 1))
+		pipeline.limit(10)
+		return collection.aggregate(pipeline)
 	end
 
-	# Translate this rating value to a JsonObject
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["mentity"] = mentity
-		obj["rating"] = rating
-		obj["timestamp"] = timestamp
-		return obj
+	# Find worst rated mentities
+	fun users_ratings: Array[JsonObject] do
+		var pipeline = new MongoPipeline
+		pipeline.group((new MongoGroup("$user")).sum("count", 1))
+		pipeline.sort((new MongoMatch).eq("count", -1))
+		pipeline.limit(10)
+		return collection.aggregate(pipeline)
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 end

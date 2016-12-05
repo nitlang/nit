@@ -16,44 +16,47 @@
 
 (function() {
 	angular
-		.module('users', ['ngSanitize', 'model'])
+		.module('grades', ['ngSanitize', 'model'])
 
-		.controller('UserCtrl', ['User', '$routeParams', '$scope', function(User, $routeParams, $scope) {
-			this.loadUser = function() {
-				User.loadUser(
+		.controller('GradesCtrl', ['Feedback', '$scope', function(Feedback, $scope) {
+
+			this.loadMostRated = function() {
+				Feedback.loadMostRated(
 					function(data) {
-						$scope.user = data;
+						$scope.most = data;
 					}, function(err) {
 						$scope.error = err;
 					});
 			};
-			this.loadGrades = function() {
-				User.loadUserStars(
+
+			this.loadBestRated = function() {
+				Feedback.loadBestRated(
+					function(data) {
+						$scope.best = data;
+					}, function(err) {
+						$scope.error = err;
+					});
+			};
+			this.loadWorstRated = function() {
+				Feedback.loadWorstRated(
+					function(data) {
+						$scope.worst = data;
+					}, function(err) {
+						$scope.error = err;
+					});
+			};
+			this.loadUsersRatings = function() {
+				Feedback.loadUsersRatings(
 					function(data) {
 						$scope.ratings = data;
 					}, function(err) {
 						$scope.error = err;
 					});
 			};
-			this.loadUser();
-			this.loadGrades();
-		}])
 
-		.directive('userMenu', ['User', function(User) {
-			return {
-				restrict: 'E',
-				templateUrl: '/directives/user/user-menu.html',
-				link: function ($scope, element, attrs) {
-					$scope.loadUser = function() {
-						User.loadUser(
-							function(data) {
-								$scope.user = data;
-							}, function(err) {
-								//$scope.error = err;
-							});
-					}
-					$scope.loadUser();
-				}
-			};
+			this.loadMostRated();
+			this.loadBestRated();
+			this.loadWorstRated();
+			this.loadUsersRatings();
 		}])
 })();

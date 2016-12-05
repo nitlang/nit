@@ -102,11 +102,37 @@
 						.success(cb)
 						.error(cbErr);
 				},
-				postEntityStar: function(id, rating, cb, cbErr) {
-					$http.post(apiUrl + '/feedback/stars/' + id, {rating: rating})
+				loadEntityStarsDimension: function(id, dimension, cb, cbErr) {
+					$http.get(apiUrl + '/feedback/stars/' + id + '/dimension/' + dimension)
 						.success(cb)
 						.error(cbErr);
-				}
+				},
+				postEntityStarDimension: function(id, dimension, rating, cb, cbErr) {
+					$http.post(apiUrl + '/feedback/stars/' + id + '/dimension/' + dimension,
+						{rating: rating})
+						.success(cb)
+						.error(cbErr);
+				},
+				loadMostRated: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/most')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadBestRated: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/best')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadWorstRated: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/worst')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadUsersRatings: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/grades/users')
+						.success(cb)
+						.error(cbErr);
+				},
 			}
 		}])
 
@@ -136,7 +162,12 @@
 					$http.get(apiUrl + '/user')
 						.success(cb)
 						.error(cbErr);
-				}
+				},
+				loadUserStars: function(cb, cbErr) {
+					$http.get(apiUrl + '/feedback/user/stars')
+						.success(cb)
+						.error(cbErr);
+				},
 			}
 		}])
 })();

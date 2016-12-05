@@ -26,7 +26,7 @@ import popcorn::pop_repos
 class NitwebConfig
 	super AppConfig
 
-	redef var default_db_name = "nitweb"
+	redef fun default_db_name do return "nitweb"
 
 	# Model to use.
 	var model: Model
