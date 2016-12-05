@@ -26,11 +26,9 @@
 # import popcorn
 # import popcorn::pop_config
 #
-# # Parse app options
-# var opts = new AppOptions.from_args(args)
-#
 # # Build config from options
-# var config = new AppConfig.from_options(opts)
+# var config = new AppConfig
+# config.parse_options(args)
 #
 # # Use options
 # var app = new App
@@ -48,20 +46,9 @@
 #	super AppConfig
 #
 #	# My secret code I don't want to share in my source repository
-#	var secret: String = value_or_default("secret", "my-secret")
+#	fun secret: String do return opt_secret.value or else ini["secret"] or else "my-secret"
 #
-#	redef init from_options(options) do
-#		super
-#		if options isa MyOptions then
-#			var secret = options.opt_secret.value
-#			if secret != null then self["secret"] = secret
-#		end
-#	end
-# end
-#
-# class MyOptions
-#	super AppOptions
-#
+#	# opt --secret
 #	var opt_secret = new OptionString("My secret string", "--secret")
 #
 #	redef init do
@@ -81,8 +68,8 @@
 #	end
 # end
 #
-# var opts = new MyOptions.from_args(args)
-# var config = new MyConfig.from_options(opts)
+# var config = new MyConfig
+# config.parse_options(args)
 #
 # var app = new App
 # app.use("/secret", new SecretHandler(config))
@@ -90,8 +77,7 @@
 # ~~~
 module pop_config
 
-import ini
-import opts
+import config
 
 # Configuration file for Popcorn apps
 #
@@ -100,92 +86,47 @@ import opts
 # import popcorn::pop_config
 #
 # # Build config from default values
-# var config = new AppConfig("app.ini")
+# var config = new AppConfig
+# config.parse_options(args)
 #
 # # Change config values
-# config["app.port"] = 3001.to_s
+# config.ini["app.port"] = 3001.to_s
 #
 # # Use options
 # var app = new App
 # app.listen(config.app_host, config.app_port)
 # ~~~
 class AppConfig
-	super ConfigTree
+	super IniConfig
 
-	# Kind of options used by this config
-	type OPTIONS: AppOptions
+	redef var default_config_file: String = "app.ini"
 
-	# Default configuration file path
-	var default_config_file: String = "app.ini"
+	# Host name to bind on (will overwrite the config one).
+	var opt_host = new OptionString("Host to bind the server on", "--host")
 
 	# Web app host name
 	#
 	# * key: `app.host`
 	# * default: `localhost`
-	var app_host: String is lazy do return value_or_default("app.host", "localhost")
+	fun app_host: String do return opt_host.value or else ini["app.host"] or else "localhost"
+
+	# Port number to bind on (will overwrite the config one).
+	var opt_port = new OptionInt("Port number to use", -1, "--port")
 
 	# Web app port
 	#
 	# * key: `app.port`
 	# * default: `3000`
-	var app_port: Int is lazy do return value_or_default("app.port", "3000").to_i
-
-	# Init `self` from a `AppOptions` option values
-	init from_options(opts: OPTIONS) do
-		init(opts.opt_config.value or else default_config_file)
-		var opt_host = opts.opt_host.value
-		if opt_host != null then self["app.host"] = opt_host
-		var opt_port = opts.opt_port.value
-		if opt_port > 0 then self["app.port"] = opt_port.to_s
+	fun app_port: Int do
+		var opt = opt_port.value
+		if opt > -1 then return opt
+		var val = ini["app.port"]
+		if val != null then return val.to_i
+		return 3000
 	end
 
-	# Return the registered value for `key` or `default`
-	protected fun value_or_default(key: String, default: String): String do
-		return self[key] or else default
-	end
-end
-
-# Options configuration for Popcorn apps
-#
-# Use the `AppOptions` class in your app to parse command line args:
-# ~~~
-# import popcorn
-# import popcorn::pop_config
-#
-# # Parse app options
-# var opts = new AppOptions.from_args(args)
-#
-# # Build config from options
-# var config = new AppConfig.from_options(opts)
-#
-# # Use options
-# var app = new App
-# app.listen(config.app_host, config.app_port)
-# ~~~
-class AppOptions
-	super OptionContext
-
-	# Help option.
-	var opt_help = new OptionBool("Show this help message", "-h", "--help")
-
-	# Path to app config file.
-	var opt_config = new OptionString("Path to app config file", "--config")
-
-	# Host name to bind on (will overwrite the config one).
-	var opt_host = new OptionString("Host to bind the server on", "--host")
-
-	# Port number to bind on (will overwrite the config one).
-	var opt_port = new OptionInt("Port number to use", -1, "--port")
-
-	# You should redefined this method to add your options
 	init do
 		super
-		add_option(opt_help, opt_config, opt_host, opt_port)
-	end
-
-	# Initialize `self` and parse `args`
-	init from_args(args: Collection[String]) do
-		init
-		parse(args)
+		add_option(opt_host, opt_port)
 	end
 end
