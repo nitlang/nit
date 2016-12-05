@@ -14,7 +14,7 @@
 
 import neo4j
 
-var key = get_time
+var key = "NIT_TESTING_ID".environ.to_i
 
 var srv = new Neo4jServer
 srv.start_quiet
