@@ -581,6 +581,7 @@ class Bytes
 	#     assert "incomplete %".to_bytes.from_percent_encoding == "incomplete %".to_bytes
 	#     assert "invalid % usage".to_bytes.from_percent_encoding == "invalid % usage".to_bytes
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".to_bytes.from_percent_encoding == "éあいう".to_bytes
+	#     assert "%1 %A %C3%A9A9".to_bytes.from_percent_encoding == "%1 %A éA9".to_bytes
 	fun from_percent_encoding: Bytes do
 		var tmp = new Bytes.with_capacity(length)
 		var pos = 0

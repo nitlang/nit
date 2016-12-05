@@ -852,6 +852,7 @@ abstract class Text
 	#     assert "incomplete %".from_percent_encoding == "incomplete %"
 	#     assert "invalid % usage".from_percent_encoding == "invalid % usage"
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
+	#     assert "%1 %A %C3%A9A9".from_percent_encoding == "%1 %A éA9"
 	fun from_percent_encoding: String
 	do
 		var len = byte_length
