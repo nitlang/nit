@@ -36,18 +36,19 @@
 # animals.add(cat)
 # animals.add(turtle)
 #
+# var db_suffix = "NIT_TESTING_ID".environ
 # var db = new Postgres.open("dbname=postgres")
 #
 # assert db_is_open: not db.is_closed
-# assert create_table: db.create_table("IF NOT EXISTS animals (aname TEXT PRIMARY KEY, kind TEXT NOT NULL, age INT NOT NULL)") else print db.error
+# assert create_table: db.create_table("IF NOT EXISTS animals_{db_suffix} (aname TEXT PRIMARY KEY, kind TEXT NOT NULL, age INT NOT NULL)") else print db.error
 #
 # for animal in animals do
-#   assert insert: db.insert("INTO animals VALUES('{animal.name}', '{animal.kind}', {animal.age})") else print db.error
+#   assert insert: db.insert("INTO animals_{db_suffix} VALUES('{animal.name}', '{animal.kind}', {animal.age})") else print db.error
 # end
 #
-# var result = db.raw_execute("SELECT * FROM animals")
+# var result = db.raw_execute("SELECT * FROM animals_{db_suffix}")
 # assert  result.is_ok
-# assert drop_table: db.execute("DROP TABLE animals")
+# assert drop_table: db.execute("DROP TABLE animals_{db_suffix}")
 # db.finish
 # assert db_is_closed: db.is_closed
 # ~~~
