@@ -169,7 +169,7 @@ redef class MNullableType
 		var full_cname = "NIT_NULL___{base_cname}"
 
 		# In nitni files, declare internal function as extern
-		var full_friendly_csignature = "{cname_blind} {full_cname}()"
+		var full_friendly_csignature = "{cname} {full_cname}()"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
@@ -262,7 +262,7 @@ redef class MExplicitCast
 		#
 
 		# In nitni files, declare internal function as extern
-		var full_friendly_csignature = "int {v.compiler.mainmodule.c_name }___{from.mangled_cname}_is_a_{to.mangled_cname}({from.cname_blind})"
+		var full_friendly_csignature = "int {v.compiler.mainmodule.c_name}___{from.mangled_cname}_is_a_{to.mangled_cname}({from.cname})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
@@ -301,7 +301,7 @@ redef class MExplicitCast
 		#
 
 		# In nitni files, declare internal function as extern
-		full_friendly_csignature = "{to.cname_blind} {v.compiler.mainmodule.c_name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
+		full_friendly_csignature = "{to.cname} {v.compiler.mainmodule.c_name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
