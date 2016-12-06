@@ -24,8 +24,13 @@
 # # Opens the connexion with the Mongo server.
 # var client = new MongoClient("mongodb://localhost:27017/")
 #
+# # Select the database.
+# var db_suffix = "NIT_TESTING_ID".environ
+# var db_name = "test_{db_suffix}"
+# var db = client.database(db_name)
+#
 # # Retrieve a collection.
-# var col = client.database("test").collection("test")
+# var col = db.collection("test")
 #
 # # Insert a document in the collection.
 # var doc = new JsonObject
@@ -226,7 +231,9 @@ class MongoClient
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# db.collection("test").insert(new JsonObject)
 	# assert client.database_names.has("test")
 	# ~~~
@@ -253,7 +260,10 @@ class MongoClient
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# assert client.database("test").name == "test"
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# assert db.name == db_name
 	# ~~~
 	fun database(name: String): MongoDb do return new MongoDb(self, name)
 
@@ -312,7 +322,9 @@ class MongoDb
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# db.collection("test").insert(new JsonObject)
 	# assert db.collection_names.has("test")
 	# ~~~
@@ -335,7 +347,9 @@ class MongoDb
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# var col = db.collection("test")
 	# assert col.name == "test"
 	# ~~~
@@ -347,7 +361,9 @@ class MongoDb
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# assert not db.has_collection("qwerty")
 	# ~~~
 	fun has_collection(name: String): Bool do
@@ -405,7 +421,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var doc = new JsonObject
 	# doc["foo"] = 10
 	# doc["bar"] = "bar"
@@ -437,7 +456,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	#
 	# var doc = new JsonObject
 	# doc["foo"] = 10
@@ -467,7 +489,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var sel = new JsonObject
 	# sel["foo"] = 10
 	# assert col.remove(sel)
@@ -489,7 +514,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var sel = new JsonObject
 	# sel["foo"] = 10
 	# var upd = new JsonObject
@@ -517,7 +545,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# assert col.count(query) > 0
@@ -536,7 +567,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# var doc = col.find(query)
@@ -566,7 +600,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# assert col.find_all(query).length > 0
@@ -589,7 +626,10 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test_aggregate")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test_aggregate")
 	#
 	# col.drop
 	#
@@ -626,8 +666,11 @@ class MongoCollection
 	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
-	# assert col.stats["ns"] == "test.test"
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
+	# assert col.stats["ns"] == "{db_name}.test"
 	# ~~~
 	fun stats: nullable JsonObject do
 		var bson = native.stats
