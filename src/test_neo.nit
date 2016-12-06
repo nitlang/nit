@@ -19,7 +19,8 @@ import neo
 import model
 import frontend
 
-var test_name = "test_{get_time.to_s}"
+var test_id = "NIT_TESTING_ID".environ
+var test_name = "test_{test_id}"
 
 # init tool
 var toolcontext = new ToolContext
