@@ -27,9 +27,10 @@
    </div>
   </nav>
  </div>
-<div class="content">
-<h1 class="package-name">test_prog</h1>
-<div class="nitdoc"><p class="synopsys">Test program for model tools.</p><p>This program creates a fake model that can be used to test tools like:</p>
+<div class="content"><div style="float: left">
+	<h1 class="package-name">test_prog&nbsp;-&nbsp;</h1>
+</div>
+<div class="nitdoc"><h1 class="synopsys">Test program for model tools.</h1><p>This program creates a fake model that can be used to test tools like:</p>
 <ul>
 <li><code class="nitcode"><span class="nitcode"><span class="line"><span class="nc_i">nitdoc</span></span></span></code></li>
 <li><code class="nitcode"><span class="nitcode"><span class="line"><span class="nc_i">nitmetrics</span></span></span></code></li>
