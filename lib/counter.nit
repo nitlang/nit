@@ -280,6 +280,37 @@ class Counter[E]
 			printn("* ", i or else "null", " = ", self[i], " => occurences ", self[i].to_f / sum.to_f * 100.0, "%, cumulative ", subtotal.to_f / sum.to_f * 100.0, "% \n")
 		end
 	end
+
+	# Packs elements into separate arrays based on their occurences
+	#
+	# ~~~nit
+	#	var x = "aaaabbbeeecccddhhgjt"
+	#	var c = new Counter[Char]
+	#	for i in x do c.inc i
+	#	var ret = c.pack
+	#	assert ret.join(", ") == """[t,g,j], [d,h], [c,b,e], [a]"""
+	# ~~~
+	fun pack: Array[Array[E]] do
+		var ret = new Array[Array[E]]
+		var base = self.sort
+		if base.is_empty then return ret
+		var curr = new Array[E]
+		curr.push base.first
+		var curr_score = self[base.first]
+		base.shift
+		for i in base do
+			if self[i] == curr_score then
+				curr.push i
+				continue
+			end
+			curr_score = self[i]
+			ret.push curr
+			curr = new Array[E]
+			curr.push i
+		end
+		if not curr.is_empty then ret.push curr
+		return ret
+	end
 end
 
 redef class Collection[E]
