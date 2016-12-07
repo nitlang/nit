@@ -8,7 +8,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Service management trough the `for` control structure.
+# Service management through the `for` control structure.
 #
 # The module is a proof-of-concept to investigate the abuse of
 # the `for` structure to implement various services.
@@ -135,7 +135,7 @@ private class SortAbuserIterator[E]
 end
 
 redef class Array[E]
-	# Sort an array trough a `for` abuse.
+	# Sort an array through a `for` abuse.
 	# The user uses the provided query (item) to implements its own comparison
 	#
 	#     var a = [1, 3, 2]
@@ -151,7 +151,7 @@ end
 
 ####
 
-# Open and read a file trough a `for` abuse.
+# Open and read a file through a `for` abuse.
 # The abuse just ensures that the file is closed after the reading.
 #
 #     for f in file_open("/etc/issue") do
