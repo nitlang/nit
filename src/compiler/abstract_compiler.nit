@@ -1685,8 +1685,8 @@ abstract class AbstractCompilerVisitor
 	end
 
 	# Generates a CString instance fully escaped in C-style \xHH fashion
-	fun native_string_instance(ns: CString, len: Int): RuntimeVariable do
-		var mtype = mmodule.native_string_type
+	fun c_string_instance(ns: CString, len: Int): RuntimeVariable do
+		var mtype = mmodule.c_string_type
 		var nat = new_var(mtype)
 		var byte_esc = new Buffer.with_cap(len * 4)
 		for i in [0 .. len[ do
@@ -1706,7 +1706,7 @@ abstract class AbstractCompilerVisitor
 		self.add("if (likely({name}!=NULL)) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var native_mtype = mmodule.native_string_type
+		var native_mtype = mmodule.c_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var byte_length = self.int_instance(string.byte_length)
@@ -3726,7 +3726,7 @@ redef class AStringExpr
 		var s = v.string_instance(value)
 		if is_string then return s
 		if is_bytestring then
-			var ns = v.native_string_instance(bytes.items, bytes.length)
+			var ns = v.c_string_instance(bytes.items, bytes.length)
 			var ln = v.int_instance(bytes.length)
 			var cs = to_bytes_with_copy
 			assert cs != null
@@ -3800,7 +3800,7 @@ redef class ASuperstringExpr
 			v.native_array_set(a, i, e)
 		end
 
-		# Fast join the native string to get the result
+		# Fast join the C string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
 		assert res != null
 

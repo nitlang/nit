@@ -131,7 +131,7 @@ private extern class CallArg `{ nit_call_arg* `}
 	fun instance=(value: Instance) is light_ffi `{ self->value_Pointer = value; `}
 
 	# The `CString` held by this cell
-	fun native_string: CString `{ return (char*)self->value_Pointer; `}
+	fun c_string: CString `{ return (char*)self->value_Pointer; `}
 
 	# Set the content of this cell according to `static_type`
 	#
@@ -208,7 +208,7 @@ private extern class CallArg `{ nit_call_arg* `}
 		else if name == "Float" then
 			return v.float_instance(self.float)
 		else if name == "CString" then
-			var instance = new PrimitiveInstance[CString](static_type, self.native_string)
+			var instance = new PrimitiveInstance[CString](static_type, self.c_string)
 			v.init_instance_primitive instance
 			return instance
 		else if static_type isa MClassType and static_type.mclass.kind == extern_kind then

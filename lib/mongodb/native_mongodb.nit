@@ -64,7 +64,7 @@ extern class NativeBSON `{ bson_t * `}
 	# The `bson_as_json()` function shall encode bson as a JSON encoded UTF-8 string.
 	# The caller is responsible for freeing the resulting UTF-8 encoded string
 	# by calling `bson_free()` with the result.
-	fun to_native_string: CString `{ return bson_as_json(self, NULL); `}
+	fun to_c_string: CString `{ return bson_as_json(self, NULL); `}
 
 	# Wrapper for `bson_destroy()`.
 	#

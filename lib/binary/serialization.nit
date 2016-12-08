@@ -53,7 +53,7 @@ private fun kind_bool: Byte do return 0x05u8
 private fun kind_char: Byte do return 0x06u8
 private fun kind_float: Byte do return 0x07u8
 private fun kind_string: Byte do return 0x08u8
-private fun kind_native_string: Byte do return 0x09u8
+private fun kind_c_string: Byte do return 0x09u8
 private fun kind_flat_array: Byte do return 0x0Au8
 
 private fun new_object_end: Byte do return 0x00u8
@@ -233,7 +233,7 @@ class BinaryDeserializer
 			return bf.to_s_with_length(ln)[0]
 		end
 		if kind == kind_string then return stream.read_block
-		if kind == kind_native_string then return stream.read_block.to_cstring
+		if kind == kind_c_string then return stream.read_block.to_cstring
 
 		if kind == kind_flat_array then
 			# An array
@@ -406,7 +406,7 @@ end
 redef class CString
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_native_string
+		v.stream.write_byte kind_c_string
 		v.stream.write_block to_s
 	end
 end

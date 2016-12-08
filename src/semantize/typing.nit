@@ -1487,7 +1487,7 @@ redef class AugmentedStringFormExpr
 		var mclass = v.get_mclass(self, "String")
 		if mclass == null then return # Forward error
 		if is_bytestring then
-			to_bytes_with_copy = v.get_method(self, v.mmodule.native_string_type, "to_bytes_with_copy", false)
+			to_bytes_with_copy = v.get_method(self, v.mmodule.c_string_type, "to_bytes_with_copy", false)
 			mclass = v.get_mclass(self, "Bytes")
 		else if is_re then
 			to_re = v.get_method(self, mclass.mclass_type, "to_re", false)
