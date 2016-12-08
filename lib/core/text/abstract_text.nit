@@ -1268,9 +1268,9 @@ end
 abstract class FlatText
 	super Text
 
-	# Underlying C-String (`char*`)
+	# Underlying CString (`char*`)
 	#
-	# Warning : Might be void in some subclasses, be sure to check
+	# Warning: Might be void in some subclasses, be sure to check
 	# if set before using it.
 	var items: CString is noinit
 
