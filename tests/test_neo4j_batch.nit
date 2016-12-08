@@ -17,7 +17,7 @@ import neo4j
 var srv = new Neo4jServer
 srv.start_quiet
 
-var key = get_time
+var key = "NIT_TESTING_ID".environ.to_i
 
 var andres = new NeoNode
 andres.labels.add_all(["PERSON", "MALE"])
