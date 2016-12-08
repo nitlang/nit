@@ -1480,7 +1480,7 @@ redef class AugmentedStringFormExpr
 	var newline: nullable CallSite = null
 	# Regex::extended, used for suffix `b` on `re`
 	var extended: nullable CallSite = null
-	# NativeString::to_bytes_with_copy, used for prefix `b`
+	# CString::to_bytes_with_copy, used for prefix `b`
 	var to_bytes_with_copy: nullable CallSite = null
 
 	redef fun accept_typing(v) do

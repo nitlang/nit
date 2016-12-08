@@ -329,7 +329,7 @@ class NaiveInterpreter
 	end
 
 	# Return a new native string initialized with `txt`
-	fun native_string_instance_from_ns(txt: NativeString, len: Int): Instance
+	fun native_string_instance_from_ns(txt: CString, len: Int): Instance
 	do
 		var instance = native_string_instance_len(len)
 		var val = instance.val
@@ -339,12 +339,12 @@ class NaiveInterpreter
 	end
 
 	# Return a new native string initialized of `length`
-	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
+	fun native_string_instance_len(length: Int): PrimitiveInstance[CString]
 	do
-		var val = new NativeString(length)
+		var val = new CString(length)
 
 		var t = mainmodule.native_string_type
-		var instance = new PrimitiveInstance[NativeString](t, val)
+		var instance = new PrimitiveInstance[CString](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -1148,11 +1148,11 @@ redef class AMethPropdef
 			else if pname == "round" then
 				return v.float_instance(args[0].to_f.round)
 			end
-		else if cname == "NativeString" then
+		else if cname == "CString" then
 			if pname == "new" then
 				return v.native_string_instance_len(args[1].to_i)
 			end
-			var recvval = args.first.val.as(NativeString)
+			var recvval = args.first.val.as(CString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
 				return v.byte_instance(recvval[arg1])
@@ -1161,8 +1161,8 @@ redef class AMethPropdef
 				recvval[arg1] = args[2].val.as(Byte)
 				return null
 			else if pname == "copy_to" then
-				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(NativeString)
+				# sig= copy_to(dest: CString, length: Int, from: Int, to: Int)
+				var destval = args[1].val.as(CString)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
@@ -1174,11 +1174,11 @@ redef class AMethPropdef
 				var ns = recvval.fast_cstring(args[1].to_i)
 				return v.native_string_instance(ns.to_s)
 			else if pname == "fetch_4_chars" then
-				return v.int_instance(args[0].val.as(NativeString).fetch_4_chars(args[1].to_i))
+				return v.int_instance(args[0].val.as(CString).fetch_4_chars(args[1].to_i))
 			else if pname == "fetch_4_hchars" then
-				return v.int_instance(args[0].val.as(NativeString).fetch_4_hchars(args[1].to_i))
+				return v.int_instance(args[0].val.as(CString).fetch_4_hchars(args[1].to_i))
 			else if pname == "utf8_length" then
-				return v.int_instance(args[0].val.as(NativeString).utf8_length(args[1].to_i, args[2].to_i))
+				return v.int_instance(args[0].val.as(CString).utf8_length(args[1].to_i, args[2].to_i))
 			end
 		else if cname == "NativeArray" then
 			if pname == "new" then

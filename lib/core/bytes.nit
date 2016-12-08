@@ -53,7 +53,7 @@ redef class Byte
 	super BytePattern
 
 	# Write self as a string into `ns` at position `pos`
-	private fun add_digest_at(ns: NativeString, pos: Int) do
+	private fun add_digest_at(ns: CString, pos: Int) do
 		var tmp = (0xF0u8 & self) >> 4
 		ns[pos] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
 		tmp = 0x0Fu8 & self
@@ -146,8 +146,8 @@ class Bytes
 	super AbstractArray[Byte]
 	super BytePattern
 
-	# A NativeString being a char*, it can be used as underlying representation here.
-	var items: NativeString
+	# A CString being a char*, it can be used as underlying representation here.
+	var items: CString
 
 	# Number of bytes in the array
 	redef var length
@@ -163,13 +163,13 @@ class Bytes
 	#     var b = new Bytes.empty
 	#     assert b.to_s == ""
 	init empty do
-		var ns = new NativeString(0)
+		var ns = new CString(0)
 		init(ns, 0, 0)
 	end
 
 	# Init a `Bytes` with capacity `cap`
 	init with_capacity(cap: Int) do
-		var ns = new NativeString(cap)
+		var ns = new CString(cap)
 		init(ns, 0, cap)
 	end
 
@@ -262,7 +262,7 @@ class Bytes
 	# ~~~
 	fun hexdigest: String do
 		var elen = length * 2
-		var ns = new NativeString(elen)
+		var ns = new CString(elen)
 		var i = 0
 		var oi = 0
 		while i < length do
@@ -285,7 +285,7 @@ class Bytes
 	# ~~~
 	fun chexdigest: String do
 		var elen = length * 4
-		var ns = new NativeString(elen)
+		var ns = new CString(elen)
 		var i = 0
 		var oi = 0
 		while i < length do
@@ -308,7 +308,7 @@ class Bytes
 	# ~~~
 	fun binarydigest: String do
 		var elen = length * 8
-		var ns = new NativeString(elen)
+		var ns = new CString(elen)
 		var i = 0
 		var oi = 0
 		while i < length do
@@ -430,13 +430,13 @@ class Bytes
 
 	# Regenerates the buffer, necessary when it was persisted
 	private fun regen do
-		var nns = new NativeString(capacity)
+		var nns = new CString(capacity)
 		items.copy_to(nns, length, 0, 0)
 		persisted = false
 	end
 
 	# Appends the `ln` first bytes of `ns` to self
-	fun append_ns(ns: NativeString, ln: Int) do
+	fun append_ns(ns: CString, ln: Int) do
 		if persisted then regen
 		var nlen = length + ln
 		if nlen > capacity then enlarge(nlen)
@@ -445,7 +445,7 @@ class Bytes
 	end
 
 	# Appends `ln` bytes from `ns` starting at index `from` to self
-	fun append_ns_from(ns: NativeString, ln, from: Int) do
+	fun append_ns_from(ns: CString, ln, from: Int) do
 		if persisted then regen
 		var nlen = length + ln
 		if nlen > capacity then enlarge(nlen)
@@ -466,7 +466,7 @@ class Bytes
 		if capacity >= sz then return
 		persisted = false
 		while capacity < sz do capacity = capacity * 2 + 2
-		var ns = new NativeString(capacity)
+		var ns = new CString(capacity)
 		items.copy_to(ns, length, 0, 0)
 		items = ns
 	end
@@ -637,7 +637,7 @@ end
 private class BytesIterator
 	super IndexedIterator[Byte]
 
-	var tgt: NativeString
+	var tgt: CString
 
 	redef var index
 
@@ -796,7 +796,7 @@ redef class Text
 	#     assert "&lt;STRING&#47;&rt;".hexdigest == "266C743B535452494E47262334373B2672743B"
 	fun hexdigest: String do
 		var ln = byte_length
-		var outns = new NativeString(ln * 2)
+		var outns = new CString(ln * 2)
 		var oi = 0
 		for i in [0 .. ln[ do
 			bytes[i].add_digest_at(outns, oi)
@@ -934,7 +934,7 @@ redef class FlatText
 	end
 end
 
-redef class NativeString
+redef class CString
 	# Creates a new `Bytes` object from `self` with `len` as length
 	#
 	# If `len` is null, strlen will determine the length of the Bytes
@@ -948,7 +948,7 @@ redef class NativeString
 	# If `len` is null, strlen will determine the length of the Bytes
 	fun to_bytes_with_copy(len: nullable Int): Bytes do
 		if len == null then len = cstring_length
-		var nns = new NativeString(len)
+		var nns = new CString(len)
 		copy_to(nns, len, 0, 0)
 		return new Bytes(nns, len, len)
 	end

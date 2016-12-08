@@ -66,7 +66,7 @@ class WebsocketConnection
 	super TCPStream
 
 	init do
-		_buffer = new NativeString(1024)
+		_buffer = new CString(1024)
 		_buffer_pos = 0
 		_buffer_capacity = 1024
 		_buffer_length = 0
@@ -236,9 +236,9 @@ class WebsocketConnection
 	end
 
 	# Unmasks a message sent by a client
-	private fun unmask_message(key: NativeString, message: NativeString, len: Int): NativeString
+	private fun unmask_message(key: CString, message: CString, len: Int): CString
 	do
-		var return_message = new NativeString(len)
+		var return_message = new CString(len)
 
 		for i in [0 .. len[ do
 			return_message[i] = message[i] ^ key[i % 4]

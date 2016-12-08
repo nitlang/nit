@@ -257,7 +257,7 @@ class FileWriter
 	redef var is_writable = false
 
 	# Write `len` bytes from `native`.
-	private fun write_native(native: NativeString, from, len: Int)
+	private fun write_native(native: CString, from, len: Int)
 	do
 		if last_error != null then return
 		if not _is_writable then
@@ -304,20 +304,20 @@ redef class Int
 	# Creates a file stream from a file descriptor `fd` using the file access `mode`.
 	#
 	# NOTE: The `mode` specified must be compatible with the one used in the file descriptor.
-	private fun fd_to_stream(mode: NativeString): NativeFile `{
+	private fun fd_to_stream(mode: CString): NativeFile `{
 		return fdopen((int)self, mode);
 	`}
 end
 
 # Constant for read-only file streams
-private fun read_only: NativeString do return once "r".to_cstring
+private fun read_only: CString do return once "r".to_cstring
 
 # Constant for write-only file streams
 #
 # If a stream is opened on a file with this method,
 # it will wipe the previous file if any.
 # Else, it will create the file.
-private fun wipe_write: NativeString do return once "w".to_cstring
+private fun wipe_write: CString do return once "w".to_cstring
 
 ###############################################################################
 
@@ -1383,7 +1383,7 @@ redef class FlatString
 	end
 end
 
-redef class NativeString
+redef class CString
 	private fun file_exists: Bool `{
 #ifdef _WIN32
 		DWORD attribs = GetFileAttributesA(self);
@@ -1437,7 +1437,7 @@ redef class NativeString
 
 	private fun file_chdir: Bool `{ return !chdir(self); `}
 
-	private fun file_realpath: NativeString `{
+	private fun file_realpath: CString `{
 #ifdef _WIN32
 		DWORD len = GetFullPathName(self, 0, NULL, NULL);
 		char *buf = malloc(len+1); // FIXME don't leak memory
@@ -1503,11 +1503,11 @@ end
 
 # Instance of this class are standard FILE * pointers
 private extern class NativeFile `{ FILE* `}
-	fun io_read(buf: NativeString, len: Int): Int `{
+	fun io_read(buf: CString, len: Int): Int `{
 		return fread(buf, 1, len, self);
 	`}
 
-	fun io_write(buf: NativeString, from, len: Int): Int `{
+	fun io_write(buf: CString, from, len: Int): Int `{
 		return fwrite(buf+from, 1, len, self);
 	`}
 
@@ -1540,9 +1540,9 @@ private extern class NativeFile `{ FILE* `}
 		return setvbuf(self, NULL, (int)mode, buf_length);
 	`}
 
-	new io_open_read(path: NativeString) `{ return fopen(path, "r"); `}
+	new io_open_read(path: CString) `{ return fopen(path, "r"); `}
 
-	new io_open_write(path: NativeString) `{ return fopen(path, "w"); `}
+	new io_open_write(path: CString) `{ return fopen(path, "w"); `}
 
 	new native_stdin `{ return stdin; `}
 
@@ -1555,13 +1555,13 @@ end
 private extern class NativeDir `{ DIR* `}
 
 	# Open a directory
-	new opendir(path: NativeString) `{ return opendir(path); `}
+	new opendir(path: CString) `{ return opendir(path); `}
 
 	# Close a directory
 	fun closedir `{ closedir(self); `}
 
 	# Read the next directory entry
-	fun readdir: NativeString `{
+	fun readdir: CString `{
 		struct dirent *de;
 		de = readdir(self);
 		if (!de) return NULL;
@@ -1706,4 +1706,4 @@ end
 # Return the working (current) directory
 fun getcwd: String do return native_getcwd.to_s
 
-private fun native_getcwd: NativeString `{ return getcwd(NULL, 0); `}
+private fun native_getcwd: CString `{ return getcwd(NULL, 0); `}

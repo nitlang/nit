@@ -36,16 +36,16 @@ end
 
 redef class FlatText
 
-	# First byte of the NativeString
+	# First byte of the CString
 	protected fun first_byte: Int do return 0
 
-	# Last byte of the NativeString
+	# Last byte of the CString
 	protected fun last_byte: Int do return first_byte + _byte_length - 1
 
 	# Cache of the latest position (char) explored in the string
 	var position: Int = 0
 
-	# Cached position (bytes) in the NativeString underlying the String
+	# Cached position (bytes) in the CString underlying the String
 	var bytepos: Int = 0
 
 	# Index of the character `index` in `_items`
@@ -139,7 +139,7 @@ redef class FlatText
 		var max = last_byte
 		var pos = first_byte
 		var nlen = extra + _byte_length
-		var nits = new NativeString(nlen)
+		var nits = new CString(nlen)
 		var outpos = 0
 		while pos <= max do
 			var c = its[pos]
@@ -255,7 +255,7 @@ redef class FlatText
 		var its = _items
 		var max = last_byte
 		var nlen = _byte_length + ln_extra
-		var nns = new NativeString(nlen)
+		var nns = new CString(nlen)
 		var pos = first_byte
 		var opos = 0
 		while pos <= max do
@@ -426,7 +426,7 @@ abstract class FlatString
 
 	redef fun to_cstring do
 		var blen = _byte_length
-		var new_items = new NativeString(blen + 1)
+		var new_items = new CString(blen + 1)
 		_items.copy_to(new_items, blen, _first_byte, 0)
 		new_items[blen] = 0u8
 		return new_items
@@ -530,7 +530,7 @@ abstract class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private new with_infos(items: NativeString, byte_length, from: Int)
+	private new with_infos(items: CString, byte_length, from: Int)
 	do
 		var len = items.utf8_length(from, byte_length)
 		if byte_length == len then return new ASCIIFlatString.full_data(items, byte_length, from, len)
@@ -541,7 +541,7 @@ abstract class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private new full(items: NativeString, byte_length, from, length: Int)
+	private new full(items: CString, byte_length, from, length: Int)
 	do
 		if byte_length == length then return new ASCIIFlatString.full_data(items, byte_length, from, length)
 		return new UnicodeFlatString.full_data(items, byte_length, from, length)
@@ -614,7 +614,7 @@ abstract class FlatString
 		if s isa FlatText then
 			var sits = s._items
 			var sifrom = s.first_byte
-			var ns = new NativeString(nlen + 1)
+			var ns = new CString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
 			return new FlatString.full(ns, nlen, 0, _length + o.length)
@@ -630,7 +630,7 @@ abstract class FlatString
 		var newlen = mylen * i
 		var its = _items
 		var fb = _first_byte
-		var ns = new NativeString(new_byte_length + 1)
+		var ns = new CString(new_byte_length + 1)
 		ns[new_byte_length] = 0u8
 		var offset = 0
 		while i > 0 do
@@ -669,7 +669,7 @@ end
 private class UnicodeFlatString
 	super FlatString
 
-	init full_data(items: NativeString, byte_length, from, length: Int) do
+	init full_data(items: CString, byte_length, from, length: Int) do
 		self._items = items
 		self._length = length
 		self._byte_length = byte_length
@@ -693,7 +693,7 @@ end
 private class ASCIIFlatString
 	super FlatString
 
-	init full_data(items: NativeString, byte_length, from, length: Int) do
+	init full_data(items: CString, byte_length, from, length: Int) do
 		self._items = items
 		self._length = length
 		self._byte_length = byte_length
@@ -795,7 +795,7 @@ private class FlatStringByteReverseIterator
 
 	var target: FlatString
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -821,7 +821,7 @@ private class FlatStringByteIterator
 
 	var target: FlatString
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -884,12 +884,12 @@ class FlatBuffer
 
 	redef fun substrings do return new FlatSubstringsIter(self)
 
-	# Re-copies the `NativeString` into a new one and sets it as the new `Buffer`
+	# Re-copies the `CString` into a new one and sets it as the new `Buffer`
 	#
 	# This happens when an operation modifies the current `Buffer` and
 	# the Copy-On-Write flag `written` is set at true.
 	private fun reset do
-		var nns = new NativeString(capacity)
+		var nns = new CString(capacity)
 		if _byte_length != 0 then _items.copy_to(nns, _byte_length, 0, 0)
 		_items = nns
 		written = false
@@ -904,7 +904,7 @@ class FlatBuffer
 		var bt = _byte_length
 		if bt + len > capacity then
 			capacity = capacity * 2 + 2
-			nit = new NativeString(capacity)
+			nit = new CString(capacity)
 			oit.copy_to(nit, 0, 0, from)
 		end
 		oit.copy_to(nit, bt - from, from, from + len)
@@ -1005,7 +1005,7 @@ class FlatBuffer
 		# it does a copy of the current `Buffer`
 		written = false
 		var bln = _byte_length
-		var a = new NativeString(c)
+		var a = new CString(c)
 		if bln > 0 then
 			var it = _items
 			if bln > 0 then it.copy_to(a, bln, 0, 0)
@@ -1018,14 +1018,14 @@ class FlatBuffer
 	do
 		written = true
 		var bln = _byte_length
-		if bln == 0 then _items = new NativeString(1)
+		if bln == 0 then _items = new CString(1)
 		return new FlatString.full(_items, bln, 0, _length)
 	end
 
 	redef fun to_cstring
 	do
 		var bln = _byte_length
-		var new_native = new NativeString(bln + 1)
+		var new_native = new CString(bln + 1)
 		new_native[bln] = 0u8
 		if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
 		return new_native
@@ -1041,7 +1041,7 @@ class FlatBuffer
 	#
 	# If `_items` is shared, `written` should be set to true after the creation
 	# so that a modification will do a copy-on-write.
-	private init with_infos(items: NativeString, capacity, byte_length, length: Int)
+	private init with_infos(items: CString, capacity, byte_length, length: Int)
 	do
 		self._items = items
 		self.capacity = capacity
@@ -1052,7 +1052,7 @@ class FlatBuffer
 	# Create a new string copied from `s`.
 	init from(s: Text)
 	do
-		_items = new NativeString(s.byte_length)
+		_items = new CString(s.byte_length)
 		for i in s.substrings do i._items.copy_to(_items, i._byte_length, first_byte, 0)
 		_byte_length = s.byte_length
 		_length = s.length
@@ -1063,7 +1063,7 @@ class FlatBuffer
 	init with_capacity(cap: Int)
 	do
 		assert cap >= 0
-		_items = new NativeString(cap)
+		_items = new CString(cap)
 		capacity = cap
 		_byte_length = 0
 	end
@@ -1105,7 +1105,7 @@ class FlatBuffer
 		var byteto = its.char_to_byte_index(count + from - 1)
 		byteto += its.char_at(byteto).u8char_len - 1
 		var byte_length = byteto - bytefrom + 1
-		var r_items = new NativeString(byte_length)
+		var r_items = new CString(byte_length)
 		its.copy_to(r_items, byte_length, bytefrom, 0)
 		return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
 	end
@@ -1174,7 +1174,7 @@ private class FlatBufferByteReverseIterator
 
 	var target: FlatBuffer
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -1208,7 +1208,7 @@ private class FlatBufferByteIterator
 
 	var target: FlatBuffer
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -1307,7 +1307,7 @@ private class FlatBufferCharIterator
 
 end
 
-redef class NativeString
+redef class CString
 	redef fun to_s
 	do
 		return to_s_with_length(cstring_length)
@@ -1335,14 +1335,14 @@ redef class NativeString
 	do
 		var r = clean_utf8(length)
 		if r.items != self then return r
-		var new_self = new NativeString(length + 1)
+		var new_self = new CString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0)
 		new_self[length] = 0u8
 		return str
 	end
 
-	# Cleans a NativeString if necessary
+	# Cleans a CString if necessary
 	fun clean_utf8(len: Int): FlatString do
 		var replacements: nullable Array[Int] = null
 		var end_length = len
@@ -1414,7 +1414,7 @@ redef class NativeString
 		end
 		var ret = self
 		if end_length != len then
-			ret = new NativeString(end_length)
+			ret = new CString(end_length)
 			var old_repl = 0
 			var off = 0
 			var repls = replacements.as(not null)
@@ -1473,7 +1473,7 @@ redef class Int
 		if self == 1 then return "1"
 
 		var nslen = int_to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_int_to_s(ns, nslen + 1)
 		return new FlatString.full(ns, nslen, 0, nslen)
@@ -1506,7 +1506,7 @@ redef class Array[E]
 			i += 1
 			mypos += 1
 		end
-		var ns = new NativeString(sl + 1)
+		var ns = new CString(sl + 1)
 		ns[sl] = 0u8
 		i = 0
 		var off = 0
@@ -1543,7 +1543,7 @@ redef class NativeArray[E]
 			i += 1
 			mypos += 1
 		end
-		var ns = new NativeString(sl + 1)
+		var ns = new CString(sl + 1)
 		ns[sl] = 0u8
 		i = 0
 		var off = 0

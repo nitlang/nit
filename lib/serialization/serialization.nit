@@ -239,7 +239,7 @@ redef class Bool super DirectSerializable end
 redef class Char super DirectSerializable end
 redef class Int super DirectSerializable end
 redef class Float super DirectSerializable end
-redef class NativeString super DirectSerializable end
+redef class CString super DirectSerializable end
 redef class Text super DirectSerializable end
 redef class SimpleCollection[E] super Serializable end
 redef class Map[K, V] super Serializable end

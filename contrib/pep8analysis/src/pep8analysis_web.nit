@@ -40,7 +40,7 @@ in "C++" `{
 	using namespace emscripten;
 
 	EMSCRIPTEN_BINDINGS(my_module) {
-		function("run_analysis", &NativeString_run_analysis, allow_raw_pointers());
+		function("run_analysis", &CString_run_analysis, allow_raw_pointers());
 	}
 `}
 
@@ -108,11 +108,11 @@ redef class AnalysisManager
 	fun show_graph(content: String) do "show_graph('{content.escape_to_c}');".run_js
 end
 
-redef class NativeString
+redef class CString
 	fun run_analysis do manager.run_web to_s
 end
 
-fun dummy_set_callbacks import NativeString.run_analysis in "C++" `{
+fun dummy_set_callbacks import CString.run_analysis in "C++" `{
 `}
 
 dummy_set_callbacks

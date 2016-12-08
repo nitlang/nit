@@ -19,7 +19,7 @@ redef class FlatString
 	redef fun +(o) do
 		var mlen = length
 		var slen = o.length
-		var nns = new NativeString(mlen + slen)
+		var nns = new CString(mlen + slen)
 		items.copy_to(nns, mlen, index_from, 0)
 		if o isa FlatString then
 			o.items.copy_to(nns, slen, o.index_from, mlen)

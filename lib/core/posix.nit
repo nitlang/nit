@@ -61,10 +61,10 @@ extern class Passwd `{struct passwd*`}
 	new from_name(name: String) import String.to_cstring `{ return getpwnam( String_to_cstring(name) ); `}
 
 	# Username
-	fun name: String import NativeString.to_s `{ return NativeString_to_s(self->pw_name); `}
+	fun name: String import CString.to_s `{ return CString_to_s(self->pw_name); `}
 
 	# User password
-	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(self->pw_passwd); `}
+	fun passwd: String import CString.to_s `{ return CString_to_s(self->pw_passwd); `}
 
 	# User ID
 	fun uid: Int `{ return self->pw_uid; `}
@@ -73,10 +73,10 @@ extern class Passwd `{struct passwd*`}
 	fun gid: Int `{ return self->pw_gid; `}
 
 	# Home directory
-	fun dir: String import NativeString.to_s `{ return NativeString_to_s(self->pw_dir); `}
+	fun dir: String import CString.to_s `{ return CString_to_s(self->pw_dir); `}
 
 	# Shell program
-	fun shell: String import NativeString.to_s `{ return NativeString_to_s(self->pw_shell); `}
+	fun shell: String import CString.to_s `{ return CString_to_s(self->pw_shell); `}
 end
 
 # Information on a user group
@@ -88,16 +88,16 @@ extern class Group `{struct group*`}
 	new from_name(name: String) import String.to_cstring `{ return getgrnam( String_to_cstring(name) ); `}
 
 	# Name of this ground
-	fun name: String import NativeString.to_s `{ return NativeString_to_s(self->gr_name); `}
+	fun name: String import CString.to_s `{ return CString_to_s(self->gr_name); `}
 
 	# Encrypted password of this group
-	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(self->gr_passwd); `}
+	fun passwd: String import CString.to_s `{ return CString_to_s(self->gr_passwd); `}
 
 	# Id of this group
 	fun gid: Int `{ return self->gr_gid; `}
 
 	# List of the members of the group
-	fun mem: Array[String] import Array[String], Array[String].add, NativeString.to_s `{
+	fun mem: Array[String] import Array[String], Array[String].add, CString.to_s `{
 		char **mem;
 		int m;
 		Array_of_String ret;
@@ -106,7 +106,7 @@ extern class Group `{struct group*`}
 		ret = new_Array_of_String();
 
 		for (m = 0; mem[m] != NULL; m++)
-			Array_of_String_add(ret, NativeString_to_s(mem[m]));
+			Array_of_String_add(ret, CString_to_s(mem[m]));
 
 		return ret;
 	`}

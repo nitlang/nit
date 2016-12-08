@@ -30,7 +30,7 @@ private class UTF8Codec
 	redef fun max_lookahead do return 4
 
 	redef fun encode_char(c) do
-		var ns = new NativeString(c.u8char_len)
+		var ns = new CString(c.u8char_len)
 		add_char_to(c, ns)
 		return ns
 	end
@@ -71,7 +71,7 @@ private class UTF8Codec
 		var ret = ns.to_s_with_length(len)
 		var rit = ret.as(FlatString).items
 		if rit == ns then
-			var nns = new NativeString(len)
+			var nns = new CString(len)
 			rit.copy_to(nns, len, 0, 0)
 			return nns.to_s_full(ret.byte_length, ret.length)
 		end

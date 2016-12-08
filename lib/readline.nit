@@ -22,11 +22,11 @@ in "C" `{
 	#include <readline/history.h>
 `}
 
-private fun native_readline(prompt: NativeString): NativeString `{
+private fun native_readline(prompt: CString): CString `{
 	return readline(prompt);
 `}
 
-private fun native_add_history(data: NativeString) `{
+private fun native_add_history(data: CString) `{
 	if (data == NULL) return;
 	add_history(data);
 `}

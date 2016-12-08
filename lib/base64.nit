@@ -57,7 +57,7 @@ redef class Byte
 	end
 end
 
-redef class NativeString
+redef class CString
 	# Alphabet used by the base64 algorithm
 	private fun base64_chars : Bytes
 	do

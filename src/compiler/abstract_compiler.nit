@@ -1491,7 +1491,7 @@ abstract class AbstractCompilerVisitor
 	end
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
-	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
+	# NOTE: we do not return a `RuntimeVariable` "CString" as the class may not exist in the module/program
 	fun class_name_string(value: RuntimeVariable): String is abstract
 
 	# Variables handling
@@ -1684,8 +1684,8 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
-	# Generates a NativeString instance fully escaped in C-style \xHH fashion
-	fun native_string_instance(ns: NativeString, len: Int): RuntimeVariable do
+	# Generates a CString instance fully escaped in C-style \xHH fashion
+	fun native_string_instance(ns: CString, len: Int): RuntimeVariable do
 		var mtype = mmodule.native_string_type
 		var nat = new_var(mtype)
 		var byte_esc = new Buffer.with_cap(len * 4)
@@ -2073,7 +2073,7 @@ redef class MClassType
 			return "int32_t"
 		else if mclass.name == "UInt32" then
 			return "uint32_t"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
@@ -2115,7 +2115,7 @@ redef class MClassType
 			return "i32"
 		else if mclass.name == "UInt32" then
 			return "u32"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "str"
 		else if mclass.name == "NativeArray" then
 			#return "{self.arguments.first.ctype}*"
@@ -2584,7 +2584,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
-		else if cname == "NativeString" then
+		else if cname == "CString" then
 			if pname == "[]" then
 				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}[{arguments[1]}])", ret.as(not null)))
 				return true
@@ -2608,7 +2608,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				var alloc = v.nit_alloc(arguments[1].to_s, "NativeString")
+				var alloc = v.nit_alloc(arguments[1].to_s, "CString")
 				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then

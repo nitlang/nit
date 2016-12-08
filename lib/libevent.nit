@@ -184,7 +184,7 @@ class Connection
 	do
 		var evbuffer = bev.input_buffer
 		var len = evbuffer.length
-		var buf = new NativeString(len)
+		var buf = new CString(len)
 		evbuffer.remove(buf, len)
 		var str = buf.to_s_with_length(len)
 		read_callback str
@@ -299,7 +299,7 @@ fun evutil_socket_error: Int `{
 `}
 
 # Convert an error code from `evutil_socket_error` to a string
-fun evutil_socket_error_to_string(error_code: Int): NativeString `{
+fun evutil_socket_error_to_string(error_code: Int): CString `{
 	return evutil_socket_error_to_string(error_code);
 `}
 
@@ -344,7 +344,7 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 
 	# Set callbacks to `read_callback_native`, `write_callback` and `event_callback` of `conn`
 	fun setcb(conn: Connection) import Connection.read_callback_native,
-	Connection.write_callback, Connection.event_callback, NativeString `{
+	Connection.write_callback, Connection.event_callback, CString `{
 		Connection_incr_ref(conn);
 		bufferevent_setcb(self,
 			(bufferevent_data_cb)c_read_cb,
@@ -353,7 +353,7 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 	`}
 
 	# Write `length` bytes of `line`
-	fun write(line: NativeString, length: Int): Int `{
+	fun write(line: CString, length: Int): Int `{
 		return bufferevent_write(self, line, length);
 	`}
 
@@ -384,7 +384,7 @@ extern class NativeEvBuffer `{ struct evbuffer * `}
 	fun length: Int `{ return evbuffer_get_length(self); `}
 
 	# Read data from an evbuffer and drain the bytes read
-	fun remove(buffer: NativeString, len: Int) `{
+	fun remove(buffer: CString, len: Int) `{
 		evbuffer_remove(self, buffer, len);
 	`}
 end
@@ -410,7 +410,7 @@ end
 # A listener acting on an interface and port, spawns `Connection` on new connections
 extern class ConnectionListener `{ struct evconnlistener * `}
 
-	private new bind_to(base: NativeEventBase, address: NativeString, port: Int, factory: ConnectionFactory)
+	private new bind_to(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
 	import ConnectionFactory.accept_connection, error_callback `{
 
 		struct sockaddr_in sin;
@@ -465,7 +465,7 @@ class ConnectionFactory
 
 		# Human representation of remote client address
 		var addr_len = 46 # Longest possible IPv6 address + null byte
-		var addr_buf = new NativeString(addr_len)
+		var addr_buf = new CString(addr_len)
 		addr_buf = addrin_to_address(addrin, addr_buf, addr_len)
 		var addr = if addr_buf.address_is_null then
 				"Unknown address"
@@ -493,7 +493,7 @@ class ConnectionFactory
 	end
 
 	# Put string representation of source `address` into `buf`
-	private fun addrin_to_address(address: Pointer, buf: NativeString, buf_len: Int): NativeString `{
+	private fun addrin_to_address(address: Pointer, buf: CString, buf_len: Int): CString `{
 		struct sockaddr *addrin = (struct sockaddr*)address;
 
 		if (addrin->sa_family == AF_INET) {

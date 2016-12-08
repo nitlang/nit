@@ -78,7 +78,7 @@ extern class Sqlite3Code `{int`}
 		return err.to_s
 	end
 
-	private fun native_to_s: NativeString `{
+	private fun native_to_s: CString `{
 #if SQLITE_VERSION_NUMBER >= 3007015
 		return (char *)sqlite3_errstr(self);
 #else
@@ -95,7 +95,7 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return sqlite3_step(self);
 	`}
 
-	fun column_name(i: Int): NativeString `{
+	fun column_name(i: Int): CString `{
 		return (char *)sqlite3_column_name(self, i);
 	`}
 
@@ -112,7 +112,7 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return sqlite3_column_int(self, i);
 	`}
 
-	fun column_text(i: Int): NativeString `{
+	fun column_text(i: Int): CString `{
 		return (char *)sqlite3_column_text(self, i);
 	`}
 
@@ -138,7 +138,7 @@ end
 extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
-	new open(filename: NativeString) `{
+	new open(filename: CString) `{
 		sqlite3 *self = NULL;
 		int err = sqlite3_open(filename, &self);
 		nit_sqlite_open_error = err;
@@ -163,12 +163,12 @@ extern class NativeSqlite3 `{sqlite3 *`}
 	`}
 
 	# Execute a SQL statement
-	fun exec(sql: NativeString): Sqlite3Code `{
+	fun exec(sql: CString): Sqlite3Code `{
 		return sqlite3_exec(self, sql, NULL, NULL, NULL);
 	`}
 
 	# Prepare a SQL statement
-	fun prepare(sql: NativeString): NativeStatement `{
+	fun prepare(sql: CString): NativeStatement `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(self, sql, -1, &stmt, 0);
 		if (res == SQLITE_OK)

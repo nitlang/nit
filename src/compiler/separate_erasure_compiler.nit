@@ -322,7 +322,7 @@ class SeparateErasureCompiler
 			v.add("return (val*){res};")
 			v.add("\}")
 			return
-		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
+		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
 			var pointer_type = mainmodule.pointer_type
 
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
@@ -603,7 +603,7 @@ class SeparateErasureCompilerVisitor
 	redef fun unbox_extern(value, mtype)
 	do
 		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
-		   mtype.mclass.name != "NativeString" then
+		   mtype.mclass.name != "CString" then
 			var pointer_type = compiler.mainmodule.pointer_type
 			var res = self.new_var_extern(mtype)
 			self.add "{res} = ((struct instance_{pointer_type.c_name}*){value})->value; /* unboxing {value.mtype} */"
@@ -616,7 +616,7 @@ class SeparateErasureCompilerVisitor
 	redef fun box_extern(value, mtype)
 	do
 		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
-		   mtype.mclass.name != "NativeString" then
+		   mtype.mclass.name != "CString" then
 			var valtype = compiler.mainmodule.pointer_type
 			var res = self.new_var(mtype)
 			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then

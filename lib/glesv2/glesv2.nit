@@ -106,12 +106,12 @@ extern class GLProgram `{GLuint`}
 	fun active_attrib_name(index: Int): String
 	do
 		var max_size = active_attribute_max_length
-		var cname = new NativeString(max_size)
+		var cname = new CString(max_size)
 		active_attrib_name_native(index, max_size, cname)
 		return cname.to_s
 	end
 
-	private fun active_attrib_name_native(index, max_size: Int, name: NativeString) `{
+	private fun active_attrib_name_native(index, max_size: Int, name: CString) `{
 		// We get more values than we need, for compatibility. At least the
 		// NVidia driver tries to fill them even if NULL.
 
@@ -142,12 +142,12 @@ extern class GLProgram `{GLuint`}
 	fun active_uniform_name(index: Int): String
 	do
 		var max_size = active_uniform_max_length
-		var cname = new NativeString(max_size)
+		var cname = new CString(max_size)
 		active_uniform_name_native(index, max_size, cname)
 		return cname.to_s
 	end
 
-	private fun active_uniform_name_native(index, max_size: Int, name: NativeString) `{
+	private fun active_uniform_name_native(index, max_size: Int, name: CString) `{
 		int size;
 		GLenum type;
 		glGetActiveUniform(self, index, max_size, NULL, &size, &type, name);
@@ -207,13 +207,13 @@ fun glGetProgramiv(program: GLProgram, pname: GLGetParameterName): Int `{
 fun glGetProgramInfoLog(program: GLProgram): String
 do
 	var size = glGetProgramiv(program, gl_INFO_LOG_LENGTH)
-	var buf = new NativeString(size)
+	var buf = new CString(size)
 	native_glGetProgramInfoLog(program, size, buf)
 	return buf.to_s_with_length(size)
 end
 
 # Return the program information log in `buf`
-private fun native_glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: NativeString): Int `{
+private fun native_glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: CString): Int `{
 	int length;
 	glGetProgramInfoLog(program, buf_size, &length, buf);
 	return length;
@@ -233,7 +233,7 @@ extern class GLShader `{GLuint`}
 		return source_native(size).to_s
 	end
 
-	private fun source_native(size: Int): NativeString `{
+	private fun source_native(size: Int): CString `{
 		GLchar *code = malloc(size);
 		glGetShaderSource(self, size, NULL, code);
 		return code;
@@ -277,12 +277,12 @@ fun gl_VALIDATE_STATUS: GLGetParameterName `{ return GL_VALIDATE_STATUS; `}
 fun glGetShaderInfoLog(shader: GLShader): String
 do
 	var size = glGetShaderiv(shader, gl_INFO_LOG_LENGTH)
-	var buf = new NativeString(size)
+	var buf = new CString(size)
 	native_glGetShaderInfoLog(shader, size, buf)
 	return buf.to_s_with_length(size)
 end
 
-private fun native_glGetShaderInfoLog(shader: GLShader, buf_size: Int, buffer: NativeString): Int `{
+private fun native_glGetShaderInfoLog(shader: GLShader, buf_size: Int, buffer: CString): Int `{
 	int length;
 	glGetShaderInfoLog(shader, buf_size, &length, buffer);
 	return length;
@@ -302,7 +302,7 @@ fun glCreateShader(shader_type: GLShaderType): GLShader `{
 `}
 
 # Replace the source code in the `shader` object with `code`
-fun glShaderSource(shader: GLShader, code: NativeString) `{
+fun glShaderSource(shader: GLShader, code: CString) `{
 	glShaderSource(shader, 1, (GLchar const **)&code, NULL);
 `}
 

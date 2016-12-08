@@ -30,7 +30,7 @@ intrude import android::load_image
 
 extern class AndroidAsset in "C" `{struct AAsset*`}
 
-	fun read(count: Int): nullable String import String.as nullable, NativeString.to_s `{
+	fun read(count: Int): nullable String import String.as nullable, CString.to_s `{
 		char *buffer = malloc(sizeof(char) * (count+1));
 		int read = AAsset_read(self, buffer, count);
 		if (read != count)
@@ -38,7 +38,7 @@ extern class AndroidAsset in "C" `{struct AAsset*`}
 		else
 		{
 			buffer[count] = '\0';
-			return String_as_nullable(NativeString_to_s(buffer));
+			return String_as_nullable(CString_to_s(buffer));
 		}
 	`}
 

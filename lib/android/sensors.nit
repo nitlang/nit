@@ -121,8 +121,8 @@ end
 extern class ASensor `{ASensorRef`}
 
 	new  `{return malloc(sizeof(ASensorRef));`}
-	fun name: NativeString `{return (char*)ASensor_getName(self);`}
-	fun vendor: NativeString `{return (char*)ASensor_getVendor(self);`}
+	fun name: CString `{return (char*)ASensor_getName(self);`}
+	fun vendor: CString `{return (char*)ASensor_getVendor(self);`}
 	fun sensor_type: ASensorType `{return ASensor_getType(self);`}
 	fun resolution: Float `{return ASensor_getResolution(self);`}
 	fun min_delay: Int `{return ASensor_getMinDelay(self);`}

@@ -25,7 +25,7 @@
 #        | 0x06 utf8 byte sequence # Char
 #        | 0x07 double(64 bits)    # Float
 #        | 0x08 block              # String
-#        | 0x09 block              # NativeString
+#        | 0x09 block              # CString
 #        | 0x0A flat_array;        # Array[nullable Object]
 #
 # block = int64 int8*;
@@ -129,7 +129,7 @@ class BinaryDeserializer
 	private var unclaimed_attributes = new UnrolledList[HashMap[String, nullable Object]]
 
 	# Buffer for one char
-	private var char_buf: NativeString is lazy do return new NativeString(4)
+	private var char_buf: CString is lazy do return new CString(4)
 
 	# Read and deserialize the next attribute name and value
 	#
@@ -403,7 +403,7 @@ redef class Char
 	end
 end
 
-redef class NativeString
+redef class CString
 	redef fun serialize_to_binary(v)
 	do
 		v.stream.write_byte kind_native_string

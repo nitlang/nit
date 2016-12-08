@@ -71,6 +71,6 @@ private fun priority_fatal: Int do return 7
 private fun priority_silent: Int do return 8
 
 # Write `text` to Android log at priority `level` with tag `tag`
-private fun log_write(level: Int, tag, text: NativeString) `{
+private fun log_write(level: Int, tag, text: CString) `{
 	__android_log_write(level, tag, text);
 `}

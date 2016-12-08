@@ -56,9 +56,9 @@ redef class String
 	end
 end
 
-redef class NativeString
-	private fun get_environ: NativeString `{ return getenv(self); `}
-	private fun setenv(value: NativeString) `{
+redef class CString
+	private fun get_environ: CString `{ return getenv(self); `}
+	private fun setenv(value: CString) `{
 #ifdef _WIN32
 		_putenv_s(self, value);
 #else

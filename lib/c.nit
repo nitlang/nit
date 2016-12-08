@@ -207,9 +207,9 @@ extern class NativeCByteArray `{ unsigned char* `}
 	`}
 end
 
-# Wrapper around an array of `NativeString` in C (`char**`) with length and destroy state.
-class CNativeStringArray
-	super CArray[NativeString]
+# Wrapper around an array of `CString` in C (`char**`) with length and destroy state.
+class CCStringArray
+	super CArray[CString]
 
 	redef type NATIVE: NativeCStringArray
 
@@ -219,10 +219,10 @@ class CNativeStringArray
 		super size
 	end
 
-	# Create from an `SequenceRead[NativeString]`
-	new from(array: SequenceRead[NativeString])
+	# Create from an `SequenceRead[CString]`
+	new from(array: SequenceRead[CString])
 	do
-		var carray = new CNativeStringArray(array.length)
+		var carray = new CCStringArray(array.length)
 		for i in array.length.times do
 			carray[i] = array[i]
 		end
@@ -230,11 +230,11 @@ class CNativeStringArray
 	end
 end
 
-# An array of `NativeString` in C (`char**`)
+# An array of `CString` in C (`char**`)
 extern class NativeCStringArray `{ char** `}
 	super NativeCArray
 
-	redef type E: NativeString
+	redef type E: CString
 
 	# Initialize a new NativeCStringArray of `size` elements.
 	new(size: Int) `{ return calloc(size, sizeof(char*)); `}
@@ -244,7 +244,7 @@ extern class NativeCStringArray `{ char** `}
 	redef fun +(offset) `{ return self + offset; `}
 end
 
-redef class NativeString
+redef class CString
 	super NativeCArray
 	redef type E: Char
 

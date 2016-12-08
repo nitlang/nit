@@ -55,8 +55,8 @@ extern class TimeT `{time_t`}
 	fun update `{ time(&self); `}
 
 	# Convert `self` to a human readable String.
-	fun ctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( ctime(&self) );
+	fun ctime: String import CString.to_s_with_copy `{
+		return CString_to_s_with_copy( ctime(&self) );
 	`}
 
 	# Difference in secondes from start (self if the end time)
@@ -132,18 +132,18 @@ extern class Tm `{struct tm *`}
 	fun is_dst: Bool `{ return self->tm_isdst; `}
 
 	# Convert `self` to a human readable String.
-	private fun asctime: NativeString `{ return asctime(self); `}
+	private fun asctime: CString `{ return asctime(self); `}
 
 	# Convert `self` to a human readable String corresponding to `format`.
 	# TODO document allowed format.
-	fun strftime(format: String): String import String.to_cstring, NativeString.to_s_with_copy `{
+	fun strftime(format: String): String import String.to_cstring, CString.to_s_with_copy `{
 		char* buf, *c_format;
 
 		buf = (char*)malloc(100);
 		c_format = String_to_cstring(format);
 
 		strftime(buf, 100, c_format, self);
-		String s = NativeString_to_s_with_copy(buf);
+		String s = CString_to_s_with_copy(buf);
 		free(buf);
 		return s;
 	`}

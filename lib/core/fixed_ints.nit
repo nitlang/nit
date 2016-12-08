@@ -221,13 +221,13 @@ universal Int8
 	#     assert ~0x2Fi8 == 0xD0i8
 	fun ~: Int8 is intern
 
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun to_s_len: Int `{
 		return snprintf(NULL, 0, "%"PRIi8, self);
 	`}
 
-	# C function to convert a nit Int to a NativeString (char*)
-	private fun native_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert a nit Int to a CString (char*)
+	private fun native_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "%"PRIi8, self);
 	`}
 
@@ -237,7 +237,7 @@ universal Int8
 	#     assert (-123i8).to_s  == "-123"
 	redef fun to_s do
 		var nslen = to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)
@@ -367,13 +367,13 @@ universal Int16
 	#     assert ~0x2Fi16 == 0xFFD0i16
 	fun ~: Int16 is intern
 
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun to_s_len: Int `{
 		return snprintf(NULL, 0, "%"PRIi16, self);
 	`}
 
-	# C function to convert a nit Int to a NativeString (char*)
-	private fun native_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert a nit Int to a CString (char*)
+	private fun native_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "%"PRIi16, self);
 	`}
 
@@ -383,7 +383,7 @@ universal Int16
 	#     assert (-123i16).to_s  == "-123"
 	redef fun to_s do
 		var nslen = to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)
@@ -513,13 +513,13 @@ universal UInt16
 	#     assert ~0x2Fu16 == 0xFFD0u16
 	fun ~: UInt16 is intern
 
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun to_s_len: Int `{
 		return snprintf(NULL, 0, "%"PRIu16, self);
 	`}
 
-	# C function to convert a nit Int to a NativeString (char*)
-	private fun native_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert a nit Int to a CString (char*)
+	private fun native_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "%"PRIu16, self);
 	`}
 
@@ -529,7 +529,7 @@ universal UInt16
 	#     assert (-123u16).to_s  == "65413"
 	redef fun to_s do
 		var nslen = to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)
@@ -660,13 +660,13 @@ universal Int32
 	#     assert ~0x2Fi32 == 0xFFFFFFD0i32
 	fun ~: Int32 is intern
 
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun to_s_len: Int `{
 		return snprintf(NULL, 0, "%"PRIi32, self);
 	`}
 
-	# C function to convert a nit Int to a NativeString (char*)
-	private fun native_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert a nit Int to a CString (char*)
+	private fun native_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "%"PRIi32, self);
 	`}
 
@@ -676,7 +676,7 @@ universal Int32
 	#     assert (-123i32).to_s  == "-123"
 	redef fun to_s do
 		var nslen = to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)
@@ -806,13 +806,13 @@ universal UInt32
 	#     assert ~0x2Fu32 == 0xFFFFFFD0u32
 	fun ~: UInt32 is intern
 
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun to_s_len: Int `{
 		return snprintf(NULL, 0, "%"PRIu32, self);
 	`}
 
-	# C function to convert a nit Int to a NativeString (char*)
-	private fun native_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert a nit Int to a CString (char*)
+	private fun native_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "%"PRIu32, self);
 	`}
 
@@ -822,7 +822,7 @@ universal UInt32
 	#     assert (-123u32).to_s  == "4294967173"
 	redef fun to_s do
 		var nslen = to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)

@@ -140,7 +140,7 @@ extern class SDLDisplay `{SDL_Surface *`}
 		return null_SDLInputEvent();
 	`}
 
-	private fun new_key_event(name: NativeString, down: Bool): nullable SDLInputEvent
+	private fun new_key_event(name: CString, down: Bool): nullable SDLInputEvent
 	do return new SDLKeyEvent(name.to_s, down)
 
 	private fun new_mouse_motion_event(x, y, xr, yr: Float, down: Bool): nullable SDLInputEvent
@@ -484,7 +484,7 @@ extern class SDLFont `{TTF_Font *`}
 		if (fn == NULL)
 			return null_String();
 		else
-			return String_as_nullable(NativeString_to_s(fn));
+			return String_as_nullable(CString_to_s(fn));
 	`}
 
 	# Return the style name of the font
@@ -494,11 +494,11 @@ extern class SDLFont `{TTF_Font *`}
 		if (sn == NULL)
 			return null_String();
 		else
-			return String_as_nullable(NativeString_to_s(sn));
+			return String_as_nullable(CString_to_s(sn));
 	`}
 
 	# Return the estimated width of a String if used with the current font
-	fun width_of(text: String): Int import NativeString.to_s `{
+	fun width_of(text: String): Int import CString.to_s `{
 		char *ctext = String_to_cstring(text);
 		int w;
 		if (TTF_SizeText(self, ctext, &w, NULL))

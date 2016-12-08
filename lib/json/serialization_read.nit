@@ -532,7 +532,7 @@ end
 # Metamodel
 
 # Class inheritance graph as a `POSet[String]` serialized to JSON
-private fun class_inheritance_metamodel_json: NativeString is intern
+private fun class_inheritance_metamodel_json: CString is intern
 
 redef class Sys
 	# Class inheritance graph

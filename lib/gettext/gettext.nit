@@ -29,7 +29,7 @@ redef class Sys
 	end
 end
 
-redef class NativeString
+redef class CString
 	# Sets the locale of the program running
 	#
 	# This can be set at different times in the program,
@@ -54,14 +54,14 @@ redef class String
 
 	# Gettext `gettext`, SEE gettext manual for further info
 	fun gettext: String
-	import String.to_cstring, NativeString.to_s `{
-		return NativeString_to_s(gettext(String_to_cstring(self)));
+	import String.to_cstring, CString.to_s `{
+		return CString_to_s(gettext(String_to_cstring(self)));
 	`}
 
 	# Gettext `dgettext`, SEE gettext manual for further info
 	fun dgettext(domain: String): String
-	import String.to_cstring, NativeString.to_s `{
-		return NativeString_to_s(dgettext(String_to_cstring(domain), String_to_cstring(self)));
+	import String.to_cstring, CString.to_s `{
+		return CString_to_s(dgettext(String_to_cstring(domain), String_to_cstring(self)));
 	`}
 end
 
