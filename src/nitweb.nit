@@ -15,25 +15,9 @@
 # Runs a webserver based on nitcorn that render things from model.
 module nitweb
 
-import popcorn::pop_auth
 import frontend
 import web
 import doc::doc_down
-
-redef class NitwebConfig
-
-	# Github client id used for Github OAuth login.
-	#
-	# * key: `github.client_id`
-	# * default: ``
-	fun github_client_id: String do return ini["github.client.id"] or else ""
-
-	# Github client secret used for Github OAuth login.
-	#
-	# * key: `github.client_secret`
-	# * default: ``
-	fun github_client_secret: String do return ini["github.client.secret"] or else ""
-end
 
 redef class ToolContext
 
