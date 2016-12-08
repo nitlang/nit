@@ -572,15 +572,16 @@ class Bytes
 
 	# Decode `self` from percent (or URL) encoding to a clear string
 	#
-	# Replace invalid use of '%' with '?'.
+	# Invalid '%' are not decoded.
 	#
 	#     assert "aBc09-._~".to_bytes.from_percent_encoding == "aBc09-._~".to_bytes
 	#     assert "%25%28%29%3c%20%3e".to_bytes.from_percent_encoding == "%()< >".to_bytes
 	#     assert ".com%2fpost%3fe%3dasdf%26f%3d123".to_bytes.from_percent_encoding == ".com/post?e=asdf&f=123".to_bytes
 	#     assert "%25%28%29%3C%20%3E".to_bytes.from_percent_encoding == "%()< >".to_bytes
-	#     assert "incomplete %".to_bytes.from_percent_encoding == "incomplete ?".to_bytes
-	#     assert "invalid % usage".to_bytes.from_percent_encoding == "invalid ? usage".to_bytes
+	#     assert "incomplete %".to_bytes.from_percent_encoding == "incomplete %".to_bytes
+	#     assert "invalid % usage".to_bytes.from_percent_encoding == "invalid % usage".to_bytes
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".to_bytes.from_percent_encoding == "éあいう".to_bytes
+	#     assert "%1 %A %C3%A9A9".to_bytes.from_percent_encoding == "%1 %A éA9".to_bytes
 	fun from_percent_encoding: Bytes do
 		var tmp = new Bytes.with_capacity(length)
 		var pos = 0
@@ -592,14 +593,14 @@ class Bytes
 				continue
 			end
 			if length - pos < 2 then
-				tmp.add '?'.ascii
+				tmp.add '%'.ascii
 				pos += 1
 				continue
 			end
 			var bn = self[pos + 1]
 			var bnn = self[pos + 2]
 			if not bn.is_valid_hexdigit or not bnn.is_valid_hexdigit then
-				tmp.add '?'.ascii
+				tmp.add '%'.ascii
 				pos += 1
 				continue
 			end
