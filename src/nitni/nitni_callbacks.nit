@@ -203,11 +203,11 @@ class MExplicitCall
 
 			var creturn_type
 			if mproperty.is_init then
-				creturn_type = recv_mtype.cname
+				creturn_type = recv_mtype.friendly_cname
 			else if signature.return_mtype != null then
 				var ret_mtype = signature.return_mtype
 				ret_mtype = ret_mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
-				creturn_type = ret_mtype.cname
+				creturn_type = ret_mtype.friendly_cname
 			else
 				creturn_type = "void"
 			end
@@ -225,11 +225,11 @@ class MExplicitCall
 
 			var cparams = new List[String]
 			if not mproperty.is_init then
-				cparams.add( "{recv_mtype.cname} self" )
+				cparams.add( "{recv_mtype.friendly_cname} self" )
 			end
 			for p in signature.mparameters do
 				var param_mtype = p.mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
-				cparams.add( "{param_mtype.cname} {p.name}" )
+				cparams.add( "{param_mtype.friendly_cname} {p.name}" )
 			end
 
 			return "{creturn_type} {cname}( {cparams.join(", ")} )"

@@ -379,7 +379,7 @@ private class ToJavaCallContext
 	super CallContext
 
 	redef fun cast_to(mtype, name) do return "({mtype.jni_type})({name})"
-	redef fun cast_from(mtype, name) do return "({mtype.cname})({name})"
+	redef fun cast_from(mtype, name) do return "({mtype.friendly_cname})({name})"
 	redef fun name_mtype(mtype) do return mtype.jni_type
 end
 
@@ -387,7 +387,7 @@ end
 private class FromJavaCallContext
 	super CallContext
 
-	redef fun cast_to(mtype, name) do return "({mtype.cname})({name})"
+	redef fun cast_to(mtype, name) do return "({mtype.friendly_cname})({name})"
 	redef fun cast_from(mtype, name) do return "({mtype.jni_type})({name})"
 	redef fun name_mtype(mtype) do return mtype.jni_type
 end

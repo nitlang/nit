@@ -60,14 +60,14 @@ end
 redef class MMethodDef
 	# Name of the function to callback this method from C,
 	# also used in other functions names used for this method.
-	fun cname: String do return "{mclassdef.mclass.name}_{mproperty.short_cname}"
+	fun friendly_cname: String do return "{mclassdef.mclass.name}_{mproperty.short_cname}"
 end
 
 redef class MType
 	# Representation of this type in pure C on the FFI extern side
 	#   Object -> Object
 	#   Pointer -> void*
-	fun cname: String do return cname_normal_class
+	fun friendly_cname: String do return cname_normal_class
 
 	# Representation of this type in C for the internal of the system
 	# Hides extern types.
@@ -89,7 +89,7 @@ redef class MType
 end
 
 redef class MClassType
-	redef fun cname
+	redef fun friendly_cname
 	do
 		var name = mclass.name
 		if name == "Bool" then return "int"

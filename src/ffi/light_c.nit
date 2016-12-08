@@ -93,7 +93,7 @@ fun user_c_call_context: UserCCallContext do return once new UserCCallContext
 class UserCCallContext
 	super CallContext
 
-	redef fun name_mtype(mtype) do return mtype.cname
+	redef fun name_mtype(mtype) do return mtype.friendly_cname
 end
 
 class ExternCFunction

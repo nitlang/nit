@@ -223,7 +223,7 @@ private class CppCallContext
 			end
 		end
 
-		return mtype.cname
+		return mtype.friendly_cname
 	end
 end
 

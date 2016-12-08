@@ -212,7 +212,7 @@ typedef union nit_call_arg {
 		var used_types = collect_mtypes
 		for t in used_types do
 			if not t.is_cprimitive then
-				ecc.header_c_types.add "typedef void* {t.cname};\n"
+				ecc.header_c_types.add "typedef void* {t.friendly_cname};\n"
 			end
 		end
 
@@ -291,7 +291,7 @@ end
 
 redef class MMethodDef
 	# Name of the entry point to the implementation function in the foreign lib
-	fun foreign_lib_entry_cname: String do return "entry__{cname}"
+	fun foreign_lib_entry_cname: String do return "entry__{friendly_cname}"
 
 	# Compile the standardized entry point as part of the foreign lib API
 	private fun compile_foreign_code_entry(ecc: CCompilationUnit)

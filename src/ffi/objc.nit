@@ -220,7 +220,7 @@ private class ObjCCallContext
 			end
 		end
 
-		return mtype.cname
+		return mtype.friendly_cname
 	end
 end
 
