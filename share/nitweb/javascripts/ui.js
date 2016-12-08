@@ -129,6 +129,61 @@
 			};
 		})
 
+		.directive('uiSummary', function($rootScope, $location, $anchorScroll) {
+			return {
+				restrict: 'E',
+				scope: {
+					target: '@'
+				},
+				replace: true,
+				templateUrl: '/directives/ui-summary.html',
+				link: function ($scope, element, attrs) {
+					$scope.goTo = function(entity) {
+						$location.hash(entity.id);
+					}
+
+					$scope.textToId = function(text) {
+						return text.replace(/ /g, '-').replace(/[^A-Za-z_-]/g, '');
+					}
+
+					$rootScope.reloadSummary = function() {
+						var h = angular.element(document.querySelectorAll(
+							$scope.target + ' h1, ' +
+							$scope.target + ' h2, ' +
+							$scope.target + ' h3, ' +
+							$scope.target + ' h4, ' +
+							$scope.target + ' h5, ' +
+							$scope.target + ' h6 '));
+
+						$scope.headings = [];
+						angular.forEach(h, function(heading) {
+							var head = angular.element(heading);
+							if(!head.is(':visible')) { return ; }
+							var text = head.text().trim();
+							var id = $scope.textToId(text);
+							if(!head.attr('id')) {
+								head.attr('id', id);
+							} else {
+								id = head.attr('id');
+							}
+							$scope.headings.push({
+								id: id,
+								text: text,
+								level: parseInt(head[0].nodeName[1])
+							});
+						});
+						$anchorScroll();
+					}
+
+					$scope.$watch('target', function() {
+						setTimeout(function() {
+							$rootScope.reloadSummary();
+						}, 100);
+					});
+				}
+			};
+		})
+
 		.directive('uiFilterForm', function() {
 			return {
 				restrict: 'E',

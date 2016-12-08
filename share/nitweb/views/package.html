@@ -18,10 +18,15 @@
 
 <div class='tab-content'>
 	<div role='tabpanel' class='tab-pane fade in active' id='doc'>
-		<entity-card mentity='mentity' default-tab='doc' no-synopsis='true' />
+		<div class='col-xs-3'>
+			<ui-summary target='#summary-content' />
+		</div>
+		<div class='col-xs-9' id='summary-content'>
+			<entity-card mentity='mentity' default-tab='doc' no-synopsis='true' />
 
-		<entity-list list-title='Groups' list-entities='mentity.mgroups'
-			list-object-filter='{}' />
+			<entity-list list-title='Groups' list-entities='mentity.mgroups'
+				list-object-filter='{}' />
+		</div>
 	</div>
 	<div role='tabpanel' class='tab-pane fade' id='graph'>
 		<div class='card'>

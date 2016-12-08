@@ -28,17 +28,21 @@
 
 <div class='tab-content'>
 	<div role='tabpanel' class='tab-pane fade in active' id='doc'>
-		<entity-card mentity='mentity' default-tab='doc' no-synopsis='true' />
+		<div class='col-xs-3'>
+			<ui-summary target='#summary-content' />
+		</div>
+		<div class='col-xs-9' id='summary-content'>
+			<entity-card mentity='mentity' default-tab='doc' no-synopsis='true' />
 
-		<entity-list list-title='Imported modules' list-entities='mentity.imports'
-			list-object-filter='{}' />
+			<entity-list list-title='Imported modules' list-entities='mentity.imports'
+				list-object-filter='{}' />
 
-		<entity-list list-title='Introduced classes' list-entities='mentity.intro_mclasses'
-			list-object-filter='{}' />
+			<entity-list list-title='Introduced classes' list-entities='mentity.intro_mclasses'
+				list-object-filter='{}' />
 
-		<entity-list list-title='Class redefinitions' list-entities='mentity.redef_mclassdefs'
-			list-object-filter='{}' />
-
+			<entity-list list-title='Class redefinitions' list-entities='mentity.redef_mclassdefs'
+				list-object-filter='{}' />
+		</div>
 	</div>
 	<div role='tabpanel' class='tab-pane fade' id='code'>
 		<div class='card'>

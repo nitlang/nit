@@ -56,7 +56,8 @@
 			.when('/doc/:id', {
 				templateUrl: 'views/doc.html',
 				controller: 'EntityCtrl',
-				controllerAs: 'entityCtrl'
+				controllerAs: 'entityCtrl',
+				reloadOnSearch: false
 			})
 			.otherwise({
 				templateUrl: 'views/error.html'

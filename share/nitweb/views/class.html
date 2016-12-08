@@ -28,23 +28,28 @@
 
 <div class='tab-content'>
 	<div role='tabpanel' class='tab-pane fade in active' id='doc'>
-		<entity-card mentity='mentity' default-tab='doc' no-synopsis='true' />
+		<div class='col-xs-3'>
+			<ui-summary target='#summary-content' />
+		</div>
+		<div id='summary-content' class='col-xs-9'>
+			<entity-card mentity='mentity' default-tab='doc' no-synopsis='true' />
 
-		<entity-list list-title='Parents'
-			list-entities='mentity.parents'
-			list-object-filter='{}' />
+			<entity-list list-title='Parents'
+				list-entities='mentity.parents'
+				list-object-filter='{}' />
 
-		<entity-list list-title='Constructors'
-			list-entities='mentity.all_mproperties'
-			list-object-filter='{is_init: true}' />
+			<entity-list list-title='Constructors'
+				list-entities='mentity.all_mproperties'
+				list-object-filter='{is_init: true}' />
 
-		<entity-list list-title='Introduced properties'
-			list-entities='mentity.intro_mproperties'
-			list-object-filter='{is_init: "!true"}' />
+			<entity-list list-title='Introduced properties'
+				list-entities='mentity.intro_mproperties'
+				list-object-filter='{is_init: "!true"}' />
 
-		<entity-list list-title='Redefined properties'
-			list-entities='mentity.redef_mproperties'
-			list-object-filter='{is_init: "!true"}' />
+			<entity-list list-title='Redefined properties'
+				list-entities='mentity.redef_mproperties'
+				list-object-filter='{is_init: "!true"}' />
+		</div>
 	</div>
 	<div role='tabpanel' class='tab-pane fade' id='all_props'>
 		<entity-list list-title='All properties' list-entities='mentity.all_mproperties'
