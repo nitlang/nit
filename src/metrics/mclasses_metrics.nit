@@ -47,12 +47,16 @@ private class MClassesMetricsPhase
 		metrics.register(new CNOC(mainmodule, model_view))
 		metrics.register(new CNOD(mainmodule, model_view))
 		metrics.register(new CDIT(mainmodule, model_view))
-		metrics.register(new CNBP(mainmodule, model_view))
-		metrics.register(new CNBA(mainmodule, model_view))
-		metrics.register(new CNBI(mainmodule, model_view))
-		metrics.register(new CNBM(mainmodule, model_view))
-		metrics.register(new CNBV(mainmodule, model_view))
+		metrics.register(new CNBAP(mainmodule, model_view))
+		metrics.register(new CNBAPA(mainmodule, model_view))
+		metrics.register(new CNBAPI(mainmodule, model_view))
+		metrics.register(new CNBAPM(mainmodule, model_view))
+		metrics.register(new CNBAPVT(mainmodule, model_view))
 		metrics.register(new CNBIP(mainmodule, model_view))
+		metrics.register(new CNBIPA(mainmodule, model_view))
+		metrics.register(new CNBIPI(mainmodule, model_view))
+		metrics.register(new CNBIPM(mainmodule, model_view))
+		metrics.register(new CNBIPVT(mainmodule, model_view))
 		metrics.register(new CNBRP(mainmodule, model_view))
 		metrics.register(new CNBHP(mainmodule, model_view))
 
@@ -103,8 +107,8 @@ end
 class CNOA
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnoa"
-	redef fun desc do return "number of ancestor classes"
+	redef fun name do return "CNOA"
+	redef fun desc do return "Class Number Of Ancestors"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -117,8 +121,8 @@ end
 class CNOP
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnop"
-	redef fun desc do return "number of parent classes"
+	redef fun name do return "CNOP"
+	redef fun desc do return "Class Number Of Parents"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -131,8 +135,8 @@ end
 class CNOC
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnoc"
-	redef fun desc do return "number of child classes"
+	redef fun name do return "CNOC"
+	redef fun desc do return "Class Number Of Children"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -145,8 +149,8 @@ end
 class CNOD
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnod"
-	redef fun desc do return "number of descendant classes"
+	redef fun name do return "CNOD"
+	redef fun desc do return "Class Number Of Descendants"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -159,8 +163,8 @@ end
 class CDIT
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cdit"
-	redef fun desc do return "depth in class tree"
+	redef fun name do return "CDIT"
+	redef fun desc do return "Class Depth in Inheritance Tree"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -169,12 +173,12 @@ class CDIT
 	end
 end
 
-# Class Metric: Number of MProperties
-class CNBP
+# Class Metric: Number of Accessible Properties
+class CNBAP
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbp"
-	redef fun desc do return "number of accessible properties (inherited + local)"
+	redef fun name do return "CNBAP"
+	redef fun desc do return "Number of Accessible Properties (inherited + local)"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -183,12 +187,12 @@ class CNBP
 	end
 end
 
-# Class Metric: Number of MAttributes
-class CNBA
+# Class Metric: Number of Accessible Attributes
+class CNBAPA
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnba"
-	redef fun desc do return "number of accessible attributes (inherited + local)"
+	redef fun name do return "CNBAPA"
+	redef fun desc do return "Number of Accessible Attributes (inherited + local)"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -197,12 +201,12 @@ class CNBA
 	end
 end
 
-# Class Metric: Number of MMethods
-class CNBM
+# Class Metric: Number of Accessible Methods
+class CNBAPM
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbm"
-	redef fun desc do return "number of accessible methods (inherited + local)"
+	redef fun name do return "CNBAPM"
+	redef fun desc do return "Number of Accessible Methods (inherited + local)"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -211,12 +215,12 @@ class CNBM
 	end
 end
 
-# Class Metric: Number of Constructors
-class CNBI
+# Class Metric: Number of Accesible Inits
+class CNBAPI
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbi"
-	redef fun desc do return "number of accessible constructors (inherited + local)"
+	redef fun name do return "CNBAPI"
+	redef fun desc do return "Number of Accessible Inits (inherited + local)"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -225,12 +229,12 @@ class CNBI
 	end
 end
 
-# Class Metric: Number of Virtual Types
-class CNBV
+# Class Metric: Number of Accessible Virtual Types
+class CNBAPVT
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbv"
-	redef fun desc do return "number of accessible virtual types (inherited + local)"
+	redef fun name do return "CNBAPVT"
+	redef fun desc do return "Number of Accessible Virtual Types (inherited + local)"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -239,12 +243,12 @@ class CNBV
 	end
 end
 
-# Class Metric: Number of Introduced MProperties
+# Class Metric: Number of Introduced Properties
 class CNBIP
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbip"
-	redef fun desc do return "number of introduced properties"
+	redef fun name do return "CNBIP"
+	redef fun desc do return "Number of Introduced Properties"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -253,12 +257,69 @@ class CNBIP
 	end
 end
 
-# Class Metric: Number of Refined MProperties
+# Class Metric: Number of Introduced Attributes
+class CNBIPA
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "CNBIPA"
+	redef fun desc do return "Number of Introduced Attributes (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_intro_mattributes(model_view).length
+		end
+	end
+end
+
+# Class Metric: Number of Introduced Methods
+class CNBIPM
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "CNBIPM"
+	redef fun desc do return "Number of Introduced Methods (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_intro_mmethods(model_view).length
+		end
+	end
+end
+
+# Class Metric: Number of Introduced Inits
+class CNBIPI
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "CNBIPI"
+	redef fun desc do return "Number of Introduced Inits (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_intro_inits(model_view).length
+		end
+	end
+end
+
+# Class Metric: Number of Introduced Virtual Types
+class CNBIPVT
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "CNBIPVT"
+	redef fun desc do return "Number of Introduced Virtual Types (inherited + local)"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.collect_intro_vts(model_view).length
+		end
+	end
+end
+
+
+# Class Metric: Number of Refined Properties
 class CNBRP
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbrp"
-	redef fun desc do return "number of redefined properties"
+	redef fun name do return "CNBRP"
+	redef fun desc do return "Number of Redefined Properties"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -267,12 +328,12 @@ class CNBRP
 	end
 end
 
-# Class Metric: Number of Inherited MProperties
+# Class Metric: Number of inHerited Properties
 class CNBHP
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnbhp"
-	redef fun desc do return "number of inherited properties"
+	redef fun name do return "CNBHP"
+	redef fun desc do return "Number of inHerited Properties"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -281,12 +342,12 @@ class CNBHP
 	end
 end
 
-# Class Metric: Number of Local MProperties (Intro + Redef)
+# Class Metric: Number of Local Properties (Intro + Redef)
 class CNBLP
 	super MClassMetric
 	super IntMetric
-	redef fun name do return "cnblp"
-	redef fun desc do return "number of local properties (intro + redef)"
+	redef fun name do return "CNBLP"
+	redef fun desc do return "Number of Local Properties (intro + redef)"
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do

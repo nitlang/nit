@@ -43,7 +43,7 @@ private class NullablesMetricsPhase
 		var model_view = model.private_view
 
 		var metrics = new MetricSet
-		metrics.register(new CNBA(mainmodule, model_view))
+		metrics.register(new CNBAPA(mainmodule, model_view))
 		metrics.register(new CNBNA(mainmodule, model_view))
 
 		var mclasses = new HashSet[MClass]
