@@ -28,6 +28,8 @@ redef class ToolContext
 	# --all
 	var opt_all = new OptionBool("Compute all metrics", "--all")
 
+	# --model
+	var opt_model = new OptionBool("Compute metrics about the model", "--model")
 	# --mmodules
 	var opt_mmodules = new OptionBool("Compute metrics about mmodules", "--mmodules")
 	# --mclassses
@@ -68,6 +70,7 @@ redef class ToolContext
 	do
 		super
 		self.option_context.add_option(opt_all)
+		self.option_context.add_option(opt_model)
 		self.option_context.add_option(opt_mmodules)
 		self.option_context.add_option(opt_mclasses)
 		self.option_context.add_option(opt_mendel)

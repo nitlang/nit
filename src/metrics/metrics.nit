@@ -18,6 +18,7 @@
 module metrics
 
 import metrics_base
+import model_metrics
 import mmodules_metrics
 import mclasses_metrics
 import mendel_metrics
