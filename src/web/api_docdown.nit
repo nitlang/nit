@@ -58,6 +58,34 @@ class NitwebDecorator
 	# Modelbuilder used to access code
 	var modelbuilder: ModelBuilder
 
+	redef fun add_span_code(v, buffer, from, to) do
+		var text = new FlatBuffer
+		buffer.read(text, from, to)
+		var name = text.write_to_string
+		name = name.replace("nullable ", "")
+		var mentity = try_find_mentity(view, name)
+		if mentity == null then
+			super
+		else
+			v.add "<code>"
+			v.write_mentity_link(mentity, text.write_to_string)
+			v.add "</code>"
+		end
+	end
+
+	private fun try_find_mentity(view: ModelView, text: String): nullable MEntity do
+		var mentity = view.mentity_by_full_name(text)
+		if mentity != null then return mentity
+
+		var mentities = view.mentities_by_name(text)
+		if mentities.is_empty then
+			return null
+		else if mentities.length > 1 then
+			# TODO smart resolve conflicts
+		end
+		return mentities.first
+	end
+
 	redef fun add_wikilink(v, token) do
 		var link = token.link
 		if link == null then return
@@ -141,9 +169,9 @@ redef class MarkdownEmitter
 	end
 
 	# Write a link to a mentity in the output
-	fun write_mentity_link(mentity: MEntity) do
+	fun write_mentity_link(mentity: MEntity, text: nullable String) do
 		var link = mentity.web_url
-		var name = mentity.name
+		var name = text or else mentity.name
 		var mdoc = mentity.mdoc_or_fallback
 		var comment = null
 		if mdoc != null then comment = mdoc.synopsis
@@ -302,5 +330,18 @@ redef class GraphCommand
 		if mentity == null then return
 		var g = new InheritanceGraph(mentity, model)
 		v.add g.draw(3, 3).to_svg
+	end
+end
+
+redef class Text
+	# Read `self` between `nstart` and `nend` (excluded) and writte chars to `out`.
+	private fun read(out: FlatBuffer, nstart, nend: Int): Int do
+		var pos = nstart
+		while pos < length and pos < nend do
+			out.add self[pos]
+			pos += 1
+		end
+		if pos == length then return -1
+		return pos
 	end
 end
