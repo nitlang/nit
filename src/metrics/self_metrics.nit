@@ -20,7 +20,15 @@ module self_metrics
 import metrics_base
 
 redef class ToolContext
+	# --self
+	var opt_self = new OptionBool("Compute metrics about the usage of explicit and implicit self", "--self")
+
 	var self_metrics_phase: Phase = new SelfMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_self)
+	end
 end
 
 private class SelfMetricsPhase

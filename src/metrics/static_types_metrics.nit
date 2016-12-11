@@ -21,7 +21,15 @@ import metrics_base
 import modelize
 
 redef class ToolContext
+	# --static-types
+	var opt_static_types = new OptionBool("Compute explicit static types metrics", "--static-types")
+
 	var static_types_metrics_phase: Phase = new StaticTypesMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_static_types)
+	end
 end
 
 private class StaticTypesMetricsPhase

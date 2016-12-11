@@ -49,10 +49,18 @@ import mmodules_metrics
 import modelize
 
 redef class ToolContext
+	# --mendel
+	var opt_mendel = new OptionBool("Compute mendel metrics", "--mendel")
+
 	# Compute MENDEL metrics.
 	#
 	# See `mendel_metrics` module documentation.
 	var mendel_metrics_phase: Phase = new MendelMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_mendel)
+	end
 end
 
 private class MendelMetricsPhase

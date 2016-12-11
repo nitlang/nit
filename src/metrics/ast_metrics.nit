@@ -19,7 +19,15 @@ module ast_metrics
 import metrics_base
 
 redef class ToolContext
+	# --ast
+	var opt_ast = new OptionBool("Compute metrics about the usage of nodes and identifiers in the AST", "--ast")
+
 	var ast_metrics_phase: Phase = new AstMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_ast)
+	end
 end
 
 private class AstMetricsPhase

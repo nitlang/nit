@@ -18,12 +18,24 @@ module poset_metrics
 import metrics_base
 
 redef class ToolContext
+	# --poset
+	var opt_poset = new OptionBool("Complete metrics on posets", "--poset")
+
 	var poset_metrics_phase: Phase = new PosetMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_all)
+		self.option_context.add_option(opt_csv)
+		self.option_context.add_option(opt_poset)
+		self.option_context.add_option(opt_dir)
+		self.option_context.add_option(opt_nocolors)
+	end
 end
 
 private class PosetMetricsPhase
 	super Phase
-	
+
 	redef fun process_mainmodule(mainmodule, given_mmodules)
 	do
 		if not toolcontext.opt_poset.value and not toolcontext.opt_all.value then return

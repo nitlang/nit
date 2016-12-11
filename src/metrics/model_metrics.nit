@@ -22,8 +22,16 @@ import model::model_collect
 
 redef class ToolContext
 
+	# --model
+	var opt_model = new OptionBool("Compute metrics about the model", "--model")
+
 	# Model related metrics phase
 	var model_metrics_phase: Phase = new ModelMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_model)
+	end
 end
 
 # Extract metrics about a model

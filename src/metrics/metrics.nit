@@ -36,3 +36,7 @@ import poset_metrics
 import ast_metrics
 import detect_variance_constraints
 import detect_covariance
+
+redef class ToolContext
+	redef init do super #FIXME avoid linearization conflicts
+end
