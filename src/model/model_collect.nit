@@ -57,7 +57,6 @@ redef class MEntity
 		while todo.not_empty do
 			var mentity = todo.pop
 			if mentity == self or done.has(mentity) then continue
-			print "{mentity} == {self}"
 			done.add mentity
 			todo.add_all mentity.collect_parents(view)
 		end
@@ -126,6 +125,46 @@ redef class MEntity
 	end
 end
 
+redef class Model
+
+	# Collect all MPackages in `self`.
+	fun collect_mpackages(view: ModelView): HashSet[MPackage] do
+		var res = new HashSet[MPackage]
+		for mpackage in mpackages do
+			if not view.accept_mentity(mpackage) then continue
+			res.add(mpackage)
+		end
+		return res
+	end
+
+	# Collect all MModules in `self`.
+	fun collect_mmodules(view: ModelView): HashSet[MModule] do
+		var res = new HashSet[MModule]
+		for mpackage in collect_mpackages(view) do
+			res.add_all mpackage.collect_mmodules(view)
+		end
+		return res
+	end
+
+	# Collect all MClasses introduced in `self`.
+	fun collect_intro_mclasses(view: ModelView): HashSet[MClass] do
+		var res = new HashSet[MClass]
+		for mpackage in collect_mpackages(view) do
+			res.add_all mpackage.collect_intro_mclasses(view)
+		end
+		return res
+	end
+
+	# Collect all MProperties introduced in `self`.
+	fun collect_intro_mproperties(view: ModelView): HashSet[MProperty] do
+		var res = new HashSet[MProperty]
+		for mpackage in collect_mpackages(view) do
+			res.add_all mpackage.collect_intro_mproperties(view)
+		end
+		return res
+	end
+end
+
 redef class MPackage
 	redef fun collect_modifiers do
 		var res = super
@@ -162,6 +201,94 @@ redef class MPackage
 			for mmodule in mgroup.mmodules do
 				if not view.accept_mentity(mmodule) then continue
 				res.add(mmodule)
+			end
+		end
+		return res
+	end
+
+	# `MClasses` introduced in `self`.
+	fun collect_intro_mclasses(view: ModelView): HashSet[MClass] do
+		var res = new HashSet[MClass]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_intro_mclasses(view)
+			end
+		end
+		return res
+	end
+
+	# `Mclasses` redefined in `self`.
+	fun collect_redef_mclasses(view: ModelView): Set[MClass] do
+		var res = new HashSet[MClass]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_redef_mclasses(view)
+			end
+		end
+		return res
+	end
+
+	# `MProperties` introduced in `self`.
+	fun collect_intro_mproperties(view: ModelView): HashSet[MProperty] do
+		var res = new HashSet[MProperty]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_intro_mproperties(view)
+			end
+		end
+		return res
+	end
+
+	# `MProperties` redefined in `self`.
+	fun collect_redef_mproperties(view: ModelView): HashSet[MProperty] do
+		var res = new HashSet[MProperty]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_redef_mproperties(view)
+			end
+		end
+		return res
+	end
+
+	# Collect attributes introduced in 'self'.
+	fun collect_intro_attributes(view: ModelView): Set[MAttribute] do
+		var res = new HashSet[MAttribute]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_intro_attributes(view)
+			end
+		end
+		return res
+	end
+
+	# Collect inits introduced in 'self'.
+	fun collect_intro_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_intro_inits(view)
+			end
+		end
+		return res
+	end
+
+	# Collect methods introduced in 'self' (without inits).
+	fun collect_intro_methods(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_intro_methods(view)
+			end
+		end
+		return res
+	end
+
+	# Collect virtual types introduced in 'self'.
+	fun collect_intro_vts(view: ModelView): Set[MVirtualTypeProp] do
+		var res = new HashSet[MVirtualTypeProp]
+		for mgroup in mgroups do
+			for mmodule in collect_mmodules(view) do
+				res.add_all mmodule.collect_intro_vts(view)
 			end
 		end
 		return res
@@ -288,10 +415,66 @@ redef class MModule
 	fun collect_redef_mclasses(view: ModelView): Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for mclassdef in mclassdefs do
-			if not view.accept_mentity(mclassdef) then continue
+			if not view.accept_mentity(mclassdef.mclass) then continue
 			if not mclassdef.is_intro then mclasses.add(mclassdef.mclass)
 		end
 		return mclasses
+	end
+
+	# Collect mproperties introduced in `self` with `visibility >= to min_visibility`.
+	fun collect_intro_mproperties(view: ModelView): Set[MProperty] do
+		var res = new HashSet[MProperty]
+		for mclass in collect_intro_mclasses(view) do
+			res.add_all mclass.collect_intro_mproperties(view)
+		end
+		return res
+	end
+
+	# Collect mproperties redefined in `self`.
+	fun collect_redef_mproperties(view: ModelView): Set[MProperty] do
+		var res = new HashSet[MProperty]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.collect_redef_mpropdefs(view) do
+				res.add mpropdef.mproperty
+			end
+		end
+		return res
+	end
+
+	# Collect attributes introduced in 'self'.
+	fun collect_intro_attributes(view: ModelView): Set[MAttribute] do
+		var res = new HashSet[MAttribute]
+		for mproperty in collect_intro_mproperties(view) do
+			if mproperty isa MAttribute then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect inits introduced in 'self'.
+	fun collect_intro_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_intro_mproperties(view) do
+			if mproperty isa MMethod and mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect methods introduced in 'self' (without inits).
+	fun collect_intro_methods(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_intro_mproperties(view) do
+			if mproperty isa MMethod and not mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect virtual types introduced in 'self'.
+	fun collect_intro_vts(view: ModelView): Set[MVirtualTypeProp] do
+		var res = new HashSet[MVirtualTypeProp]
+		for mproperty in collect_intro_mproperties(view) do
+			if mproperty isa MVirtualTypeProp then res.add(mproperty)
+		end
+		return res
 	end
 end
 
@@ -548,6 +731,15 @@ redef class MClass
 			if mproperty isa MVirtualTypeProp then set.add mproperty
 		end
 		return set
+	end
+
+	# Collect vts introduced in 'self' if accepted by `view`.
+	fun collect_intro_vts(view: ModelView): Set[MVirtualTypeProp] do
+		var res = new HashSet[MVirtualTypeProp]
+		for mproperty in collect_intro_mproperties(view) do
+			if mproperty isa MVirtualTypeProp then res.add(mproperty)
+		end
+		return res
 	end
 end
 
