@@ -1209,8 +1209,28 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3$Sys$bar: 1 (4.34%)
   base_simple3$Sys$foo: 1 (4.34%)
   base_simple3$C$init: 1 (4.34%)
+
+# Doc metrics
+	Kind: MEntity kind -- nothing
+	LOD: Lines of Documentation -- nothing
+	  sum: 0
+	MDPars: Number of MD Paragraphs -- nothing
+	  sum: 0
+	MDCodeBlocks: Number of MD Code Blocks -- nothing
+	  sum: 0
+	MDCodeLines: Number of lines in MD Code Blocks -- nothing
+	  sum: 0
+	MDCodeSpans: Number of MD Code Spans -- nothing
+	  sum: 0
+	MDHeadlines: Number of MD healines -- nothing
+	  sum: 0
+	MDLists: Number of MD Lists -- nothing
+	  sum: 0
+	MDLinks: Number of MD links -- nothing
+	  sum: 0
 class_hierarchy.dot
 classdef_hierarchy.dot
+doc/
 inheritance/
 mclasses/
 mendel/

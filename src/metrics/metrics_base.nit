@@ -331,6 +331,47 @@ class FloatMetric
 	end
 end
 
+# A Metric that collects string data
+#
+# Used to label things (like rows in CSV files output)
+class StringMetric
+	super Metric
+
+	redef type VAL: String
+
+	# `StringMetric` uses a Counter to store values in intern.
+	protected var values_cache = new HashMap[ELM, VAL]
+
+	redef fun values do return values_cache
+
+	redef fun clear do values_cache.clear
+
+	redef fun sum do return ""
+	redef fun max do return 0
+	redef fun min do return 0
+	redef fun avg do return 0.0
+	redef fun std_dev do return 0.0
+
+	redef fun to_console(indent, colors) do
+		if values.is_empty then
+			if colors then
+				print "{"\t" * indent}{name}: {desc} -- nothing".green
+			else
+				print "{"\t" * indent}{name}: {desc} -- nothing"
+			end
+			return
+		end
+		var vals = new HashSet[VAL].from(values.values)
+		if colors then
+			print "{"\t" * indent}{name}: {desc}".green
+			print "{"\t" * indent}  values: {vals.join(", ")}".light_gray
+		else
+			print "{"\t" * indent}{name}: {desc}"
+			print "{"\t" * indent}  values: {vals.join(", ")}"
+		end
+	end
+end
+
 # A MetricSet is a metric holder
 #
 # It purpose is to be extended with a metric collect service
