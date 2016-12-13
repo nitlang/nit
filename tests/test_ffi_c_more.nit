@@ -38,8 +38,8 @@ extern class A
 
 	fun m : Int is extern `{ return 10; `}
 
-	fun n : String is extern import NativeString.to_s `{
-		return NativeString_to_s( "allo" );
+	fun n : String is extern import CString.to_s `{
+		return CString_to_s( "allo" );
 	`}
 
 	fun o ( str : String ) is extern import String.to_cstring `{

@@ -21,7 +21,7 @@ end
 class B
 	super A
 
-	redef fun id : String import super, NativeString.to_s, String.to_cstring `{
+	redef fun id : String import super, CString.to_s, String.to_cstring `{
 		char *new_name;
 		char *prefix = "B special ";
 		char *super_name = String_to_cstring( B_id___super( self ) );
@@ -31,7 +31,7 @@ class B
 		strcpy( new_name+strlen( prefix ), super_name );
 		new_name[ strlen( prefix )+strlen( super_name ) ] = '\0';
 
-		return NativeString_to_s( new_name );
+		return CString_to_s( new_name );
 	`}
 end
 

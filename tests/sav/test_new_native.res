@@ -1,4 +1,4 @@
-NativeString
+CString
 0x4e
 Nit
 NativeArray[Int]

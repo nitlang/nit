@@ -16,7 +16,7 @@ import core
 #alt1 intrude import core::text::ropes
 #alt2 intrude import core::text::ropes
 
-var ons = new NativeString(9)
+var ons = new CString(9)
 var base_str = "%Dégâštr"
 
 var str: String = base_str

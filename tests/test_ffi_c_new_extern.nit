@@ -23,11 +23,11 @@ extern class IntPtr `{ int* `}
 		return r;
 	`}
 
-	redef fun to_s import NativeString, NativeString.to_s `{
+	redef fun to_s import CString, CString.to_s `{
 		int len = snprintf(NULL, 0, "%d", *self) + 1;
-		char *c = new_NativeString(len);
+		char *c = new_CString(len);
 		sprintf(c, "%d", *self);
-		return NativeString_to_s(c);
+		return CString_to_s(c);
 	`}
 end
 
