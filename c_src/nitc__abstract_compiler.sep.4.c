@@ -9201,8 +9201,8 @@ goto RET_LABEL;
 if (likely(varonce1468!=NULL)) {
 var1469 = varonce1468;
 } else {
-var1470 = "NativeString";
-var1471 = core__flat___NativeString___to_s_full(var1470, 12l, 12l);
+var1470 = "CString";
+var1471 = core__flat___NativeString___to_s_full(var1470, 7l, 7l);
 var1469 = var1471;
 varonce1468 = var1469;
 }

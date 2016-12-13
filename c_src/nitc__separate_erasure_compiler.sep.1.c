@@ -5670,8 +5670,8 @@ RET_LABEL828:(void)0;
 if (likely(varonce830!=NULL)) {
 var831 = varonce830;
 } else {
-var832 = "NativeString";
-var833 = core__flat___NativeString___to_s_full(var832, 12l, 12l);
+var832 = "CString";
+var833 = core__flat___NativeString___to_s_full(var832, 7l, 7l);
 var831 = var833;
 varonce830 = var831;
 }
