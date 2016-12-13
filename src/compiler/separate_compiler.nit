@@ -1288,8 +1288,8 @@ class SeparateCompilerVisitor
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* boxing {value.mtype} */")
 			self.require_declaration("type_{mtype.c_name}")
 			self.add("{res}->type = &type_{mtype.c_name};")
-			self.require_declaration("class_{mtype.c_name}")
-			self.add("{res}->class = &class_{mtype.c_name};")
+			self.require_declaration("class_{mtype.mclass.c_name}")
+			self.add("{res}->class = &class_{mtype.mclass.c_name};")
 			return res
 		else
 			return value
