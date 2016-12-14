@@ -87,29 +87,11 @@ class ForeignCType
 end
 
 # Context when calling user C code from generated code
-fun to_c_call_context: ToCCallContext do return once new ToCCallContext
+fun user_c_call_context: UserCCallContext do return once new UserCCallContext
 
-# Context when calling generated code from user C code
-fun from_c_call_context: FromCCallContext do return once new FromCCallContext
-
-# Context when calling user C code from generated code
-class ToCCallContext
+# Context in C code written by the user
+class UserCCallContext
 	super CallContext
-
-	# TODO: private init because singleton instance (see `to_c_call_context`)
-
-	redef fun name_mtype(mtype)
-	do
-		if mtype isa MClassType and mtype.mclass.kind == extern_kind then return "void *"
-		return mtype.cname
-	end
-end
-
-# Context when calling generated code from user C code
-class FromCCallContext
-	super CallContext
-
-	# TODO: private init because singleton instance (see `from_c_call_context`)
 
 	redef fun name_mtype(mtype) do return mtype.cname
 end
@@ -124,7 +106,7 @@ class ExternCFunction
 		self.method = method
 
 		var recv_mtype = method.mpropdef.mclassdef.bound_mtype
-		var csignature = method.mpropdef.mproperty.build_csignature(recv_mtype, mmodule, "___impl", long_signature, from_c_call_context)
+		var csignature = method.mpropdef.mproperty.build_csignature(recv_mtype, mmodule, "___impl", long_signature, user_c_call_context)
 
 		super( csignature )
 	end

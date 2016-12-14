@@ -61,7 +61,7 @@ class CPPLanguage
 		var mproperty = m.mpropdef.mproperty
 
 		# Signature of the indirection function implemented as `extern "C"` in C++
-		var indirection_sig = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl_mid", long_signature, internal_call_context)
+		var indirection_sig = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl_mid", long_signature, user_c_call_context)
 
 		## In C file (__ffi.c)
 
@@ -70,7 +70,7 @@ class CPPLanguage
 
 		# Call the indirection function from C (___impl)
 		var fc: CFunction = new ExternCFunction(m, mmodule)
-		fc.exprs.add(mproperty.build_ccall(mclass_type, mmodule, "___cpp_impl_mid", long_signature, cpp_call_context, null))
+		fc.exprs.add(mproperty.build_ccall(mclass_type, mmodule, "___cpp_impl_mid", long_signature, user_c_call_context, null))
 		fc.exprs.add("\n")
 		ecc.add_exported_function( fc )
 

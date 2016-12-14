@@ -87,7 +87,7 @@ redef class MExplicitCall
 		assert mproperty isa MMethod
 
 		# In nitni files, declare internal function as extern
-		var full_friendly_csignature = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, internal_call_context)
+		var full_friendly_csignature = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, user_c_call_context)
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		if not compile_implementation_too then return
@@ -145,17 +145,16 @@ end
 redef class MType
 	private fun compile_extern_helper_functions(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
 	do
-		# actually, we do not need to do anything when using the bohem garbage collector
-		var call_context = from_c_call_context
+		var call_context = user_c_call_context
 
 		# incr_ref
 		ccu.header_decl.add "#ifndef {mangled_cname}_incr_ref\n"
-		ccu.header_decl.add "	#define {mangled_cname}_incr_ref(from) nitni_global_ref_incr(({call_context.name_mtype(self)})(from))\n"
+		ccu.header_decl.add "	#define {mangled_cname}_incr_ref(from) nitni_global_ref_incr(({call_context.name_mtype(self)})((void*)from))\n"
 		ccu.header_decl.add "#endif\n"
 
 		# decr_ref
 		ccu.header_decl.add "#ifndef {mangled_cname}_decr_ref\n"
-		ccu.header_decl.add "	#define {mangled_cname}_decr_ref(from) nitni_global_ref_decr(({call_context.name_mtype(self)})(from))\n"
+		ccu.header_decl.add "	#define {mangled_cname}_decr_ref(from) nitni_global_ref_decr(({call_context.name_mtype(self)})((void*)from))\n"
 		ccu.header_decl.add "#endif\n"
 	end
 end
@@ -204,7 +203,7 @@ redef class MExplicitSuper
 		var mclass_type = from.mclassdef.mclass.mclass_type
 
 		# In nitni files, declare internal function as extern
-		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, internal_call_context)
+		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, user_c_call_context)
 		ccu.header_decl.add("extern {internal_csignature};\n")
 
 		# In nitni files, #define friendly as extern
