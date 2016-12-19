@@ -1214,11 +1214,11 @@ class SeparateCompilerVisitor
 		else if not value.mtype.is_c_primitive then
 			if mtype.is_tagged then
 				if mtype.name == "Int" then
-					return self.new_expr("(long)({value})>>2", mtype)
+					return self.new_expr("(int_fast64_t)({value})>>2", mtype)
 				else if mtype.name == "Char" then
-					return self.new_expr("(uint32_t)((long)({value})>>2)", mtype)
+					return self.new_expr("(uint32_t)((int_fast64_t)({value})>>2)", mtype)
 				else if mtype.name == "Bool" then
-					return self.new_expr("(short int)((long)({value})>>2)", mtype)
+					return self.new_expr("(short int)((int_fast64_t)({value})>>2)", mtype)
 				else
 					abort
 				end
@@ -1231,9 +1231,9 @@ class SeparateCompilerVisitor
 				if value.mtype.name == "Int" then
 					res = self.new_expr("(val*)({value}<<2|1)", mtype)
 				else if value.mtype.name == "Char" then
-					res = self.new_expr("(val*)((long)({value})<<2|2)", mtype)
+					res = self.new_expr("(val*)((int_fast64_t)({value})<<2|2)", mtype)
 				else if value.mtype.name == "Bool" then
-					res = self.new_expr("(val*)((long)({value})<<2|3)", mtype)
+					res = self.new_expr("(val*)((int_fast64_t)({value})<<2|3)", mtype)
 				else
 					abort
 				end
@@ -1303,7 +1303,7 @@ class SeparateCompilerVisitor
 	fun extract_tag(value: RuntimeVariable): String
 	do
 		assert not value.mtype.is_c_primitive
-		return "((long){value}&3)" # Get the two low bits
+		return "((int_fast64_t){value}&3)" # Get the two low bits
 	end
 
 	# Returns a C expression of the runtime class structure of the value.

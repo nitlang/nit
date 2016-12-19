@@ -15,7 +15,7 @@
 import core::kernel
 
 fun foo `{ printf("FOO\n"); `}
-fun bar(i: Int) `{ printf("BAR %ld\n", i); `}
+fun bar(i: Int) `{ printf("BAR %ld\n", (long)i); `}
 fun baz: Int `{ printf("BAZ\n"); return 42; `}
 
 foo
