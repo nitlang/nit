@@ -1308,37 +1308,44 @@ private class FlatBufferCharIterator
 end
 
 redef class CString
-	redef fun to_s
+
+	# Get a `String` from the data at `self` copied into Nit memory
+	#
+	# Require: `self` is a null-terminated string.
+	redef fun to_s do return to_s_unsafe
+
+	# Get a `String` from `byte_length` bytes at `self` copied into Nit memory
+	#
+	# The string is cleaned.
+	fun to_s_with_length(byte_length: Int): String do return to_s_unsafe(byte_length)
+
+	redef fun to_s_unsafe(byte_length, char_length, copy, clean)
 	do
-		return to_s_with_length(cstring_length)
-	end
+		byte_length = byte_length or else cstring_length
+		clean = clean or else true
+		copy = copy or else true
 
-	redef fun to_s_with_length(length)
-	do
-		assert length >= 0
-		return clean_utf8(length)
-	end
+		# Clean?
+		var str = null
+		if clean then
+			str = clean_utf8(byte_length)
+			char_length = str.length
+		else
+			char_length = char_length or else utf8_length(0, byte_length)
+		end
 
-	redef fun to_s_full(byte_length, unilen) do
-		return new FlatString.full(self, byte_length, 0, unilen)
-	end
+		# Copy? (if not already copied by `clean_utf8`)
+		if copy and (str == null or str.items == self) then
+			var new_cstr = new CString(byte_length + 1)
+			copy_to(new_cstr, byte_length, 0, 0)
+			new_cstr[byte_length] = 0u8
+			str = new FlatString.full(new_cstr, byte_length, 0, char_length)
+		end
 
-	redef fun to_s_unsafe(len) do
-		if len == null then len = cstring_length
-		return new FlatString.with_infos(self, len, 0)
-	end
+		if str == null then
+			str = new FlatString.full(self, byte_length, 0, char_length)
+		end
 
-	redef fun to_s_with_copy do return to_s_with_copy_and_length(cstring_length)
-
-	# Get a `String` from `length` bytes at `self` copied into Nit memory
-	fun to_s_with_copy_and_length(length: Int): String
-	do
-		var r = clean_utf8(length)
-		if r.items != self then return r
-		var new_self = new CString(length + 1)
-		copy_to(new_self, length, 0, 0)
-		var str = new FlatString.with_infos(new_self, length, 0)
-		new_self[length] = 0u8
 		return str
 	end
 
