@@ -250,11 +250,11 @@ extern class NativeCurl `{ CURL * `}
 	`}
 
 	# Convert given string to URL encoded string
-	fun escape(url: String): String import String.to_cstring, CString.to_s_with_copy `{
+	fun escape(url: String): String import String.to_cstring, CString.to_s `{
 		char *orig_url, *encoded_url = NULL;
 		orig_url = String_to_cstring(url);
 		encoded_url = curl_easy_escape( self, orig_url, strlen(orig_url));
-		String b_url = CString_to_s_with_copy(encoded_url);
+		String b_url = CString_to_s(encoded_url);
 		curl_free(encoded_url);
 		return b_url;
 	`}
@@ -279,9 +279,9 @@ extern class CURLCode `{ CURLcode `}
 	fun is_valid_protocol: Bool `{ return self == CURLE_UNSUPPORTED_PROTOCOL; `}
 	fun is_valid_init: Bool `{ return self == CURLE_FAILED_INIT; `}
 	fun to_i: Int do return code end
-	redef fun to_s import CString.to_s_with_copy `{
+	redef fun to_s import CString.to_s `{
 		char *c = (char*)curl_easy_strerror(self);
-		return CString_to_s_with_copy(c);
+		return CString_to_s(c);
 	`}
 end
 

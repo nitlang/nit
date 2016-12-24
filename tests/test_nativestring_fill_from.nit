@@ -24,4 +24,4 @@ var cpstr: Text = src_s
 var ns = new CString(cpstr.byte_length)
 ns.fill_from(cpstr)
 
-print ns.to_s_with_length(cpstr.byte_length)
+print ns.to_s_unsafe(cpstr.byte_length, copy=false)

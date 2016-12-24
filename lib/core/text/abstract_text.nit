@@ -894,7 +894,7 @@ abstract class Text
 			l += 1
 		end
 
-		return buf.to_s_unsafe(l)
+		return buf.to_s_unsafe(l, copy=false)
 	end
 
 	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
@@ -1114,7 +1114,7 @@ abstract class Text
 	#
 	#	var ns = new CString(8)
 	#	"Text is String".copy_to_native(ns, 8, 2, 0)
-	#	assert ns.to_s_unsafe(8) == "xt is St"
+	#	assert ns.to_s_with_length(8) == "xt is St"
 	#
 	fun copy_to_native(dest: CString, n, src_offset, dest_offset: Int) do
 		var mypos = src_offset
@@ -1798,7 +1798,7 @@ redef class Byte
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_byte_to_s(ns, nslen + 1)
-		return ns.to_s_unsafe(nslen)
+		return ns.to_s_unsafe(nslen, copy=false, clean=false)
 	end
 end
 
@@ -1987,7 +1987,7 @@ redef class Char
 		var ln = u8char_len
 		var ns = new CString(ln + 1)
 		u8char_tos(ns, ln)
-		return ns.to_s_unsafe(ln)
+		return ns.to_s_unsafe(ln, copy=false, clean=false)
 	end
 
 	# Returns `self` escaped to UTF-16

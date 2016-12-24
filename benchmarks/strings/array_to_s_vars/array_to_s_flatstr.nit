@@ -30,7 +30,7 @@ redef class FlatString
 				pos += 1
 			end
 		end
-		return nns.to_s_with_length(mlen)
+		return nns.to_s_unsafe(mlen, copy=false)
 	end
 end
 

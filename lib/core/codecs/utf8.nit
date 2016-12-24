@@ -68,12 +68,12 @@ private class UTF8Codec
 	end
 
 	redef fun decode_string(ns, len) do
-		var ret = ns.to_s_with_length(len)
+		var ret = ns.to_s_unsafe(len, copy=false)
 		var rit = ret.as(FlatString).items
 		if rit == ns then
 			var nns = new CString(len)
 			rit.copy_to(nns, len, 0, 0)
-			return nns.to_s_full(ret.byte_length, ret.length)
+			return nns.to_s_unsafe(ret.byte_length, ret.length, copy=false)
 		end
 		return ret
 	end

@@ -329,7 +329,7 @@ redef class FlatText
 			end
 			pos += 1
 		end
-		return nns.to_s_unsafe(nlen)
+		return nns.to_s_unsafe(nlen, copy=false, clean=false)
 	end
 
 	redef fun [](index) do

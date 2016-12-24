@@ -52,6 +52,6 @@ redef class Array[E]
 			end
 			i += 1
 		end
-		return ns.to_s_with_length(sl)
+		return ns.to_s_unsafe(sl, copy=false)
 	end
 end

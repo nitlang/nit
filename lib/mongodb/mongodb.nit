@@ -92,7 +92,7 @@ private class BSON
 
 	redef fun to_s do
 		var ns = native.to_c_string
-		var res = ns.to_s_with_copy
+		var res = ns.to_s
 		ns.free # manual free of gc allocated CString
 		return res
 	end
@@ -147,7 +147,7 @@ class MongoError
 	# Human readable error message.
 	fun message: String do
 		var ns = native.message
-		var res = ns.to_s_with_copy
+		var res = ns.to_s
 		ns.free
 		return res
 	end
@@ -237,7 +237,7 @@ class MongoClient
 		var i = 0
 		var name = nas[i]
 		while not name.address_is_null do
-			res.add name.to_s_with_copy
+			res.add name.to_s
 			name.free
 			i += 1
 			name = nas[i]
@@ -323,7 +323,7 @@ class MongoDb
 		var i = 0
 		var name = nas[i]
 		while not name.address_is_null do
-			res.add name.to_s_with_copy
+			res.add name.to_s
 			name.free
 			i += 1
 			name = nas[i]

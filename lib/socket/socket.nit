@@ -407,7 +407,7 @@ class UDPSocket
 			error = new IOError.from_errno
 			return ""
 		end
-		return buf.to_s_with_length(len)
+		return buf.to_s_unsafe(len, copy=false)
 	end
 
 	# Receive `length` bytes of data from any sender and store the sender info in `sender.item`
@@ -426,7 +426,7 @@ class UDPSocket
 		end
 
 		sender.item = new SocketAddress(src)
-		return buf.to_s_with_length(len)
+		return buf.to_s_unsafe(len, copy=false)
 	end
 
 	# Send `data` to `dest_address` on `port`

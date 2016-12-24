@@ -474,7 +474,7 @@ class Bytes
 	redef fun to_s do
 		persisted = true
 		var b = self
-		var r = b.items.to_s_with_length(length)
+		var r = b.items.to_s_unsafe(length, copy=false)
 		if r != items then persisted = false
 		return r
 	end
