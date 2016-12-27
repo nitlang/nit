@@ -2320,6 +2320,11 @@ redef class CString
 	#   other library services rely on UTF-8 compliant characters.
 	fun to_s_unsafe(byte_length, char_length: nullable Int, copy, clean: nullable Bool): String is abstract
 
+	# Retro-compatibility service use by execution engines
+	#
+	# TODO remove this method at the next c_src regen.
+	private fun to_s_full(byte_length, char_length: Int): String do return to_s_unsafe(byte_length, char_length, false, false)
+
 	# Copies the content of `src` to `self`
 	#
 	# NOTE: `self` must be large enough to contain `self.byte_length` bytes
