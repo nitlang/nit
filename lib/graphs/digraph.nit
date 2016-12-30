@@ -369,15 +369,17 @@ interface Digraph[V: Object]
 	fun to_dot: String
 	do
 		var s = "digraph \{\n"
+		var id_set = new HashMap[V, Int]
 		# Writing the vertices
-		for u in vertices_iterator do
-			s += "   \"{u.to_s.escape_to_dot}\" "
+		for u in vertices_iterator, i in [0 .. vertices.length[ do
+			id_set[u] = i
+			s += "   \"{i}\" "
 			s += "[label=\"{u.to_s.escape_to_dot}\"];\n"
 		end
 		# Writing the arcs
 		for arc in arcs do
-			s += "   {arc[0].to_s.escape_to_dot} "
-			s += "-> {arc[1].to_s.escape_to_dot};"
+			s += "   {id_set[arc[0]]} "
+			s += "-> {id_set[arc[1]]};"
 		end
 		s += "\}"
 		return s
