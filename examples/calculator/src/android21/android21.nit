@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Aesthetic adaptations for Android Lollypop (API 21)
+# Aesthetic variation for Android Lollypop (API 21)
 module android21 is
 	android_api_min 21
 	android_api_target 21

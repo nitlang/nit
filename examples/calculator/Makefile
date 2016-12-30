@@ -62,13 +62,13 @@ android-install: bin/calculator14.apk
 
 ios: bin/calculator.app bin/scientific.app
 
-bin/calculator.app: $(shell ${NITLS} -M src/ios_calculator.nit) ${NITC} ios/AppIcon.appiconset/Contents.json
+bin/calculator.app: $(shell ${NITLS} -M src/ios.nit) ${NITC} ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin
-	${NITC} -o $@ src/ios_calculator.nit -D debug
+	${NITC} -o $@ src/ios.nit -D debug
 
-bin/scientific.app: $(shell ${NITLS} -M src/scientific src/ios_calculator.nit) ${NITC} src/scientific/ios/AppIcon.appiconset/Contents.json
+bin/scientific.app: $(shell ${NITLS} -M src/scientific src/ios.nit) ${NITC} src/scientific/ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin
-	${NITC} -o $@ src/scientific -m src/ios_calculator.nit -D debug
+	${NITC} -o $@ src/scientific -m src/ios.nit -D debug
 
 ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
 	mkdir -p ios

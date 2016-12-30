@@ -12,21 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Aesthetic adaptations for iOS
-module ios_calculator
+# Aesthetic variation for iOS
+module ios
 
 import calculator
-import ios
+import ::ios
 
 redef class CalculatorWindow
 	init do title = "app.nit Calculator"
 end
 
-redef class TextInput
-	init do set_ios_style(native)
+redef class Button
+	init do size = 2.5
+end
 
-	private fun set_ios_style(objc_text_field: UITextField)
-	in "ObjC" `{
-		objc_text_field.textAlignment = NSTextAlignmentCenter;
-	`}
+redef class TextInput
+	init
+	do
+		size = 5.0
+		align = 0.5
+	end
+end
+
+redef class VerticalLayout
+	redef init do native.distribution = new UIStackViewDistribution.fill_proportionally
 end
