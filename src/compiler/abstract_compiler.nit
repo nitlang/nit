@@ -1491,7 +1491,7 @@ abstract class AbstractCompilerVisitor
 	end
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
-	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
+	# NOTE: we do not return a `RuntimeVariable` "CString" as the class may not exist in the module/program
 	fun class_name_string(value: RuntimeVariable): String is abstract
 
 	# Variables handling
@@ -1684,9 +1684,9 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
-	# Generates a NativeString instance fully escaped in C-style \xHH fashion
-	fun native_string_instance(ns: NativeString, len: Int): RuntimeVariable do
-		var mtype = mmodule.native_string_type
+	# Generates a CString instance fully escaped in C-style \xHH fashion
+	fun c_string_instance(ns: CString, len: Int): RuntimeVariable do
+		var mtype = mmodule.c_string_type
 		var nat = new_var(mtype)
 		var byte_esc = new Buffer.with_cap(len * 4)
 		for i in [0 .. len[ do
@@ -1706,7 +1706,7 @@ abstract class AbstractCompilerVisitor
 		self.add("if (likely({name}!=NULL)) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var native_mtype = mmodule.native_string_type
+		var native_mtype = mmodule.c_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var byte_length = self.int_instance(string.byte_length)
@@ -2073,7 +2073,7 @@ redef class MClassType
 			return "int32_t"
 		else if mclass.name == "UInt32" then
 			return "uint32_t"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
@@ -2115,7 +2115,7 @@ redef class MClassType
 			return "i32"
 		else if mclass.name == "UInt32" then
 			return "u32"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "str"
 		else if mclass.name == "NativeArray" then
 			#return "{self.arguments.first.ctype}*"
@@ -2584,7 +2584,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
-		else if cname == "NativeString" then
+		else if cname == "CString" then
 			if pname == "[]" then
 				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}[{arguments[1]}])", ret.as(not null)))
 				return true
@@ -2608,7 +2608,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				var alloc = v.nit_alloc(arguments[1].to_s, "NativeString")
+				var alloc = v.nit_alloc(arguments[1].to_s, "CString")
 				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
@@ -3726,7 +3726,7 @@ redef class AStringExpr
 		var s = v.string_instance(value)
 		if is_string then return s
 		if is_bytestring then
-			var ns = v.native_string_instance(bytes.items, bytes.length)
+			var ns = v.c_string_instance(bytes.items, bytes.length)
 			var ln = v.int_instance(bytes.length)
 			var cs = to_bytes_with_copy
 			assert cs != null
@@ -3800,7 +3800,7 @@ redef class ASuperstringExpr
 			v.native_array_set(a, i, e)
 		end
 
-		# Fast join the native string to get the result
+		# Fast join the C string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
 		assert res != null
 

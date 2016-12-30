@@ -90,16 +90,16 @@ extern class GtkHeaderBar `{ GtkHeaderBar* `}
 	new `{ return (GtkHeaderBar*)gtk_header_bar_new(); `}
 
 	fun title=(title: Text) do native_title = title.to_cstring
-	private fun native_title=(title: NativeString) `{ gtk_header_bar_set_title(self, title); `}
+	private fun native_title=(title: CString) `{ gtk_header_bar_set_title(self, title); `}
 
 	fun title: String do return native_title.to_s
-	private fun native_title: NativeString `{ return (gchar *)gtk_header_bar_get_title(self); `}
+	private fun native_title: CString `{ return (gchar *)gtk_header_bar_get_title(self); `}
 
 	fun subtitle=(subtitle: Text) do native_subtitle = subtitle.to_cstring
-	fun native_subtitle=(subtitle: NativeString) `{ gtk_header_bar_set_subtitle(self, subtitle); `}
+	fun native_subtitle=(subtitle: CString) `{ gtk_header_bar_set_subtitle(self, subtitle); `}
 
 	fun subtitle: String do return native_subtitle.to_s
-	fun native_subtitle: NativeString `{ return (gchar *)gtk_header_bar_get_subtitle(self); `}
+	fun native_subtitle: CString `{ return (gchar *)gtk_header_bar_get_subtitle(self); `}
 
 	fun custom_title=(title_widget: GtkWidget) `{ gtk_header_bar_set_custom_title(self, title_widget); `}
 
@@ -121,23 +121,23 @@ extern class GtkStack `{ GtkStack * `}
 	new `{ return (GtkStack*)gtk_stack_new(); `}
 
 	fun stack_add(child: GtkWidget, name: String) do native_stack_add(child, name.to_cstring)
-	private fun native_stack_add(child: GtkWidget, name: NativeString) `{ gtk_stack_add_named(self, child, name); `}
+	private fun native_stack_add(child: GtkWidget, name: CString) `{ gtk_stack_add_named(self, child, name); `}
 
-	fun add_titled(child: GtkWidget, name, title: NativeString) `{ gtk_stack_add_titled(self, child, name, title); `}
-	fun native_add_titled(child: GtkWidget, name, title: NativeString) `{ gtk_stack_add_titled(self, child, name, title); `}
+	fun add_titled(child: GtkWidget, name, title: CString) `{ gtk_stack_add_titled(self, child, name, title); `}
+	fun native_add_titled(child: GtkWidget, name, title: CString) `{ gtk_stack_add_titled(self, child, name, title); `}
 
 	fun visible_child=(child: GtkWidget) `{ gtk_stack_set_visible_child(self, child); `}
 
 	fun visible_child: GtkWidget `{ return gtk_stack_get_visible_child(self); `}
 
 	fun visible_child_name=(name: Text) do native_visible_child_name = name.to_cstring
-	fun native_visible_child_name=(name: NativeString) `{ gtk_stack_set_visible_child_name(self, name); `}
+	fun native_visible_child_name=(name: CString) `{ gtk_stack_set_visible_child_name(self, name); `}
 
 	fun visible_child_name: Text do return native_visible_child_name.to_s
-	fun native_visible_child_name: NativeString `{ return (gchar *)gtk_stack_get_visible_child_name(self); `}
+	fun native_visible_child_name: CString `{ return (gchar *)gtk_stack_get_visible_child_name(self); `}
 
 	fun set_visible_child_full(name: Text, transition: GtkStackTransitionType) do native_set_visible_child_full(name.to_cstring, transition)
-	fun native_set_visible_child_full(name: NativeString, transition: GtkStackTransitionType) `{
+	fun native_set_visible_child_full(name: CString, transition: GtkStackTransitionType) `{
 		gtk_stack_set_visible_child_full(self, name, transition);
 	`}
 

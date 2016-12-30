@@ -90,7 +90,7 @@ private class Concat
 
 	redef fun to_cstring do
 		var len = _byte_length
-		var ns = new NativeString(len + 1)
+		var ns = new CString(len + 1)
 		ns[len] = 0u8
 		var off = 0
 		for i in substrings do
@@ -302,7 +302,7 @@ redef class FlatString
 			var sifrom = s._first_byte
 			var mifrom = _first_byte
 			var sits = s._items
-			var ns = new NativeString(nlen + 1)
+			var ns = new CString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
 			return new FlatString.full(ns, nlen, 0, length + s.length)
@@ -333,9 +333,9 @@ end
 private class RopeByteReverseIterator
 	super IndexedIterator[Byte]
 
-	# Current NativeString
-	var ns: NativeString is noautoinit
-	# Current position in NativeString
+	# Current CString
+	var ns: CString is noautoinit
+	# Current position in CString
 	var pns: Int is noautoinit
 	# Position in the Rope (0-indexed)
 	var pos: Int is noautoinit
@@ -377,7 +377,7 @@ private class RopeByteIterator
 	# Position in current `String`
 	var pns: Int is noautoinit
 	# Current `String` being iterated on
-	var ns: NativeString is noautoinit
+	var ns: CString is noautoinit
 	# Substrings of the Rope
 	var subs: IndexedIterator[FlatString] is noautoinit
 	# Maximum position to iterate on (e.g. Rope.byte_length)
@@ -416,9 +416,9 @@ end
 private class RopeCharReverseIterator
 	super IndexedIterator[Char]
 
-	# Current NativeString
+	# Current CString
 	var ns: String is noautoinit
-	# Current position in NativeString
+	# Current position in CString
 	var pns: Int is noautoinit
 	# Position in the Rope (0-indexed)
 	var pos: Int is noautoinit

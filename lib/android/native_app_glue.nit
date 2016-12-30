@@ -260,10 +260,10 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	fun java_native_activity: NativeActivity `{ return self->clazz; `}
 
 	# Path to this application's internal data directory.
-	fun internal_data_path: NativeString `{ return (char*)self->internalDataPath; `}
+	fun internal_data_path: CString `{ return (char*)self->internalDataPath; `}
 
 	# Path to this application's external (removable/mountable) data directory.
-	fun external_data_path: NativeString `{ return (char*)self->externalDataPath; `}
+	fun external_data_path: CString `{ return (char*)self->externalDataPath; `}
 
 	# The platform's SDK version code.
 	fun sdk_version: Int `{ return self->sdkVersion; `}
@@ -285,7 +285,7 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	# api?
 	#
 	# TODO activate in a future module at API 11
-	#fun obb_path: NativeString `{ return (char*)self->obbPath; `}
+	#fun obb_path: CString `{ return (char*)self->obbPath; `}
 end
 
 # This is the interface for the standard glue code of a threaded

@@ -1,4 +1,4 @@
-NativeString
+CString
 N
 Nit
 NativeArray

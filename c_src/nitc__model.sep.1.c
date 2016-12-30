@@ -1184,8 +1184,8 @@ fatal_exit(1);
 if (likely(varonce!=NULL)) {
 var3 = varonce;
 } else {
-var4 = "NativeString";
-var5 = core__flat___NativeString___to_s_full(var4, 12l, 12l);
+var4 = "CString";
+var5 = core__flat___NativeString___to_s_full(var4, 7l, 7l);
 var3 = var5;
 varonce = var3;
 }

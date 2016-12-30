@@ -258,7 +258,7 @@ redef class Char
 	end
 end
 
-redef class NativeString
+redef class CString
 	redef fun accept_json_serializer(v) do to_s.accept_json_serializer(v)
 end
 

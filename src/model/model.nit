@@ -252,8 +252,8 @@ redef class MModule
 	# The primitive type `String`
 	var string_type: MClassType = self.get_primitive_class("String").mclass_type is lazy
 
-	# The primitive type `NativeString`
-	var native_string_type: MClassType = self.get_primitive_class("NativeString").mclass_type is lazy
+	# The primitive type `CString`
+	var c_string_type: MClassType = self.get_primitive_class("CString").mclass_type is lazy
 
 	# A primitive type of `Array`
 	fun array_type(elt_type: MType): MClassType do return array_class.get_mtype([elt_type])

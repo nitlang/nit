@@ -587,7 +587,7 @@ end
 redef class AStringFormExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var native = v.analysis.mainmodule.native_string_type
+		var native = v.analysis.mainmodule.c_string_type
 		v.add_type(native)
 		var prop = v.get_method(native, "to_s_full")
 		v.add_monomorphic_send(native, prop)

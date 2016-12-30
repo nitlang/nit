@@ -91,7 +91,7 @@
 				_gaq.push(['_trackEvent', 'Bug', 'No Webworkers', $("#console").text()])
 				Module = Pep8Module
 				try {
-					run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
+					run_analysis = Module.cwrap('pep8analysis_web___CString_run_analysis', null, ['string'])
 					run_analysis(input)
 
 					complete()

@@ -139,7 +139,7 @@ abstract class Text
 	end
 
 	# Return a null terminated char *
-	fun to_cstring: NativeString is abstract
+	fun to_cstring: CString is abstract
 
 	# The index of the last occurrence of an element starting from pos (in reverse order).
 	#
@@ -867,7 +867,7 @@ abstract class Text
 		# If no transformation is needed, return self as a string
 		if not has_percent then return to_s
 
-		var buf = new NativeString(len)
+		var buf = new CString(len)
 		var i = 0
 		var l = 0
 		while i < length do
@@ -1109,15 +1109,15 @@ abstract class Text
 
 	# Copies `n` bytes from `self` at `src_offset` into `dest` starting at `dest_offset`
 	#
-	# Basically a high-level synonym of NativeString::copy_to
+	# Basically a high-level synonym of CString::copy_to
 	#
 	# REQUIRE: `n` must be large enough to contain `len` bytes
 	#
-	#	var ns = new NativeString(8)
+	#	var ns = new CString(8)
 	#	"Text is String".copy_to_native(ns, 8, 2, 0)
 	#	assert ns.to_s_unsafe(8) == "xt is St"
 	#
-	fun copy_to_native(dest: NativeString, n, src_offset, dest_offset: Int) do
+	fun copy_to_native(dest: CString, n, src_offset, dest_offset: Int) do
 		var mypos = src_offset
 		var itspos = dest_offset
 		while n > 0 do
@@ -1269,17 +1269,17 @@ end
 abstract class FlatText
 	super Text
 
-	# Underlying C-String (`char*`)
+	# Underlying CString (`char*`)
 	#
-	# Warning : Might be void in some subclasses, be sure to check
+	# Warning: Might be void in some subclasses, be sure to check
 	# if set before using it.
-	var items: NativeString is noinit
+	var items: CString is noinit
 
 	# Returns a char* starting at position `first_byte`
 	#
 	# WARNING: If you choose to use this service, be careful of the following.
 	#
-	# Strings and NativeString are *ideally* always allocated through a Garbage Collector.
+	# Strings and CString are *ideally* always allocated through a Garbage Collector.
 	# Since the GC tracks the use of the pointer for the beginning of the char*, it may be
 	# deallocated at any moment, rendering the pointer returned by this function invalid.
 	# Any access to freed memory may very likely cause undefined behaviour or a crash.
@@ -1290,7 +1290,7 @@ abstract class FlatText
 	#
 	# As always, do not modify the content of the String in C code, if this is what you want
 	# copy locally the char* as Nit Strings are immutable.
-	fun fast_cstring: NativeString is abstract
+	fun fast_cstring: CString is abstract
 
 	redef var length = 0
 
@@ -1743,8 +1743,8 @@ redef class Object
 	# User readable representation of `self`.
 	fun to_s: String do return inspect
 
-	# The class name of the object in NativeString format.
-	private fun native_class_name: NativeString is intern
+	# The class name of the object in CString format.
+	private fun native_class_name: CString is intern
 
 	# The class name of the object.
 	#
@@ -1780,13 +1780,13 @@ redef class Bool
 end
 
 redef class Byte
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun byte_to_s_len: Int `{
 		return snprintf(NULL, 0, "0x%02x", self);
 	`}
 
-	# C function to convert an nit Int to a NativeString (char*)
-	private fun native_byte_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert an nit Int to a CString (char*)
+	private fun native_byte_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "0x%02x", self);
 	`}
 
@@ -1796,7 +1796,7 @@ redef class Byte
 	#     assert (-123).to_b.to_s  == "0x85"
 	redef fun to_s do
 		var nslen = byte_to_s_len
-		var ns = new NativeString(nslen + 1)
+		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_byte_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen)
@@ -1806,7 +1806,7 @@ end
 redef class Int
 
 	# Wrapper of strerror C function
-	private fun strerror_ext: NativeString `{ return strerror((int)self); `}
+	private fun strerror_ext: CString `{ return strerror((int)self); `}
 
 	# Returns a string describing error number
 	fun strerror: String do return strerror_ext.to_s
@@ -1835,13 +1835,13 @@ redef class Int
 		end
 	end
 
-	# C function to calculate the length of the `NativeString` to receive `self`
+	# C function to calculate the length of the `CString` to receive `self`
 	private fun int_to_s_len: Int `{
 		return snprintf(NULL, 0, "%ld", self);
 	`}
 
-	# C function to convert an nit Int to a NativeString (char*)
-	private fun native_int_to_s(nstr: NativeString, strlen: Int) `{
+	# C function to convert an nit Int to a CString (char*)
+	private fun native_int_to_s(nstr: CString, strlen: Int) `{
 		snprintf(nstr, strlen, "%ld", self);
 	`}
 
@@ -1986,7 +1986,7 @@ redef class Char
 	#     assert 'x'.to_s    == "x"
 	redef fun to_s do
 		var ln = u8char_len
-		var ns = new NativeString(ln + 1)
+		var ns = new CString(ln + 1)
 		u8char_tos(ns, ln)
 		return ns.to_s_unsafe(ln)
 	end
@@ -2031,7 +2031,7 @@ redef class Char
 		return buf.to_s
 	end
 
-	private fun u8char_tos(r: NativeString, len: Int) `{
+	private fun u8char_tos(r: CString, len: Int) `{
 		r[len] = '\0';
 		switch(len){
 			case 1:
@@ -2235,7 +2235,7 @@ redef class Sys
 	private fun native_argc: Int is intern
 
 	# Second argument of the main C function.
-	private fun native_argv(i: Int): NativeString is intern
+	private fun native_argv(i: Int): CString is intern
 end
 
 # Comparator that efficienlty use `to_s` to compare things
@@ -2295,7 +2295,7 @@ do
 	return sys.program_args
 end
 
-redef class NativeString
+redef class CString
 	# Get a `String` from the data at `self` copied into Nit memory
 	#
 	# Require: `self` is a null-terminated string.

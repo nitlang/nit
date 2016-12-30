@@ -25,7 +25,7 @@
 #        | 0x06 utf8 byte sequence # Char
 #        | 0x07 double(64 bits)    # Float
 #        | 0x08 block              # String
-#        | 0x09 block              # NativeString
+#        | 0x09 block              # CString
 #        | 0x0A flat_array;        # Array[nullable Object]
 #
 # block = int64 int8*;
@@ -53,7 +53,7 @@ private fun kind_bool: Byte do return 0x05u8
 private fun kind_char: Byte do return 0x06u8
 private fun kind_float: Byte do return 0x07u8
 private fun kind_string: Byte do return 0x08u8
-private fun kind_native_string: Byte do return 0x09u8
+private fun kind_c_string: Byte do return 0x09u8
 private fun kind_flat_array: Byte do return 0x0Au8
 
 private fun new_object_end: Byte do return 0x00u8
@@ -129,7 +129,7 @@ class BinaryDeserializer
 	private var unclaimed_attributes = new UnrolledList[HashMap[String, nullable Object]]
 
 	# Buffer for one char
-	private var char_buf: NativeString is lazy do return new NativeString(4)
+	private var char_buf: CString is lazy do return new CString(4)
 
 	# Read and deserialize the next attribute name and value
 	#
@@ -233,7 +233,7 @@ class BinaryDeserializer
 			return bf.to_s_with_length(ln)[0]
 		end
 		if kind == kind_string then return stream.read_block
-		if kind == kind_native_string then return stream.read_block.to_cstring
+		if kind == kind_c_string then return stream.read_block.to_cstring
 
 		if kind == kind_flat_array then
 			# An array
@@ -403,10 +403,10 @@ redef class Char
 	end
 end
 
-redef class NativeString
+redef class CString
 	redef fun serialize_to_binary(v)
 	do
-		v.stream.write_byte kind_native_string
+		v.stream.write_byte kind_c_string
 		v.stream.write_block to_s
 	end
 end

@@ -28,7 +28,7 @@ private class ISO88591Codec
 	redef fun max_lookahead do return 1
 
 	redef fun encode_char(c) do
-		var ns = new NativeString(c.u8char_len)
+		var ns = new CString(c.u8char_len)
 		add_char_to(c, ns)
 		return ns
 	end

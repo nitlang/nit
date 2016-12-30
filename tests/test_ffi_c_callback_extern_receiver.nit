@@ -29,11 +29,11 @@ extern class Test
         return foobar;
     `}
 
-    fun test_me is extern import Test.foo, NativeString.to_s `{
+    fun test_me is extern import Test.foo, CString.to_s `{
         int i;
         for(i = 0; i < 2000; ++i) {
             printf("%d\n", i);
-            Test_foo(self, NativeString_to_s("asdf"));
+            Test_foo(self, CString_to_s("asdf"));
         }
     `}
 

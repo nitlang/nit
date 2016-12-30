@@ -108,15 +108,15 @@ private extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
 end
 
 private extern class JavaVMOption `{ JavaVMOption* `}
-	fun string: String import NativeString.to_s `{
-		return NativeString_to_s((char*)self->optionString);
+	fun string: String import CString.to_s `{
+		return CString_to_s((char*)self->optionString);
 	`}
 	fun string=(v: String) import String.to_cstring `{
 		self->optionString = String_to_cstring(v);
 	`}
 
-	fun extra_info: String import NativeString.to_s `{
-		return NativeString_to_s((char*)self->extraInfo);
+	fun extra_info: String import CString.to_s `{
+		return CString_to_s((char*)self->extraInfo);
 	`}
 	fun extra_info=(v: String) import String.to_cstring `{
 		self->extraInfo = String_to_cstring(v);
@@ -157,7 +157,7 @@ extern class JavaVM `{JavaVM *`}
 		return jvm;
 	`}
 
-	private fun jni_error(msg: NativeString, v: Int)
+	private fun jni_error(msg: CString, v: Int)
 	do
 		print "JNI Error: {msg} ({v})"
 		abort
@@ -287,8 +287,8 @@ extern class JniEnv `{JNIEnv *`}
 		return res;
 	`}
 
-	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a NativeString
-	fun call_string_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): NativeString import convert_args_to_jni `{
+	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a CString
+	fun call_string_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): CString import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(self, args);
 		jobject jobj = (*self)->CallObjectMethod(self, obj, method_id, args_tab);
 		free(args_tab);
@@ -441,16 +441,16 @@ end
 
 # Represents a jni JNINNativeMethod
 extern class JNINativeMethod `{ JNINativeMethod* `}
-	fun name: String import NativeString.to_s `{
-		return NativeString_to_s((void*)self->name);
+	fun name: String import CString.to_s `{
+		return CString_to_s((void*)self->name);
 	`}
 
 	fun name=(name: String) import String.to_cstring `{
 		self->name = String_to_cstring(name);
 	`}
 
-	fun signature: String import NativeString.to_s `{
-		return NativeString_to_s((void*)self->signature);
+	fun signature: String import CString.to_s `{
+		return CString_to_s((void*)self->signature);
 	`}
 
 	fun signature=(signature: String) import String.to_cstring `{
@@ -530,7 +530,7 @@ redef class Bool
 	`}
 end
 
-redef class NativeString
+redef class CString
 	redef fun to_jvalue(env)`{
 		jvalue value;
 		value.l = (*env)->NewStringUTF(env, self);

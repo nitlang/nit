@@ -571,10 +571,10 @@ extern class PepperVar `{ struct PP_Var* `}
 	private fun as_bool: Bool `{ return self->value.as_bool; `}
 	private fun as_int: Int `{ return self->value.as_int; `}
 	private fun as_float: Float `{ return self->value.as_double; `}
-	private fun as_string: String import NativeString.to_s_with_length `{
+	private fun as_string: String import CString.to_s_with_length `{
 		uint32_t len;
 		char* str = (char*)g_varInterface->VarToUtf8(*self, &len);
-		return NativeString_to_s_with_length(str, len);
+		return CString_to_s_with_length(str, len);
 	`}
 end
 
@@ -646,7 +646,7 @@ class PnaclStream
 	redef fun is_writable: Bool do return true
 
 	# Checks if there is a message in the queue, and if so the message is handled automatically.
-	fun check_message: NativeString `{
+	fun check_message: CString `{
 		return NitHandleMessage();
 	`}
 
@@ -679,7 +679,7 @@ end
 class PnaclApp
 
 	# Sets everything up to work, need to be called at first.
-	fun initialize import PnaclApp.handle_message, PnaclApp.handle_dictionary, NativeString.to_s_with_length `{
+	fun initialize import PnaclApp.handle_message, PnaclApp.handle_dictionary, CString.to_s_with_length `{
 		app = self;
 	`}
 

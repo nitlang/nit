@@ -6224,8 +6224,8 @@ var71 = nitc___nitc__MType___nitc__model_base__MEntity__name(var64);
 if (likely(varonce72!=NULL)) {
 var73 = varonce72;
 } else {
-var74 = "NativeString";
-var75 = core__flat___NativeString___to_s_full(var74, 12l, 12l);
+var74 = "CString";
+var75 = core__flat___NativeString___to_s_full(var74, 7l, 7l);
 var73 = var75;
 varonce72 = var73;
 }

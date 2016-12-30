@@ -317,10 +317,10 @@ class NaiveInterpreter
 		end
 	end
 
-	# Return a new native string initialized with `txt`
-	fun native_string_instance(txt: String): Instance
+	# Return a new C string initialized with `txt`
+	fun c_string_instance(txt: String): Instance
 	do
-		var instance = native_string_instance_len(txt.byte_length+1)
+		var instance = c_string_instance_len(txt.byte_length+1)
 		var val = instance.val
 		val[txt.byte_length] = 0u8
 		txt.to_cstring.copy_to(val, txt.byte_length, 0, 0)
@@ -328,23 +328,23 @@ class NaiveInterpreter
 		return instance
 	end
 
-	# Return a new native string initialized with `txt`
-	fun native_string_instance_from_ns(txt: NativeString, len: Int): Instance
+	# Return a new C string initialized with `txt`
+	fun c_string_instance_from_ns(txt: CString, len: Int): Instance
 	do
-		var instance = native_string_instance_len(len)
+		var instance = c_string_instance_len(len)
 		var val = instance.val
 		txt.copy_to(val, len, 0, 0)
 
 		return instance
 	end
 
-	# Return a new native string initialized of `length`
-	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
+	# Return a new C string initialized of `length`
+	fun c_string_instance_len(length: Int): PrimitiveInstance[CString]
 	do
-		var val = new NativeString(length)
+		var val = new CString(length)
 
-		var t = mainmodule.native_string_type
-		var instance = new PrimitiveInstance[NativeString](t, val)
+		var t = mainmodule.c_string_type
+		var instance = new PrimitiveInstance[CString](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -352,7 +352,7 @@ class NaiveInterpreter
 	# Return a new String instance for `txt`
 	fun string_instance(txt: String): Instance
 	do
-		var nat = native_string_instance(txt)
+		var nat = c_string_instance(txt)
 		var res = self.send(self.force_get_primitive_method("to_s_full", nat.mtype), [nat, self.int_instance(txt.byte_length), self.int_instance(txt.length)])
 		assert res != null
 		return res
@@ -941,7 +941,7 @@ redef class AMethPropdef
 		else if pname == "native_class_name" then
 			var recv = args.first
 			var txt = recv.mtype.to_s
-			return v.native_string_instance(txt)
+			return v.c_string_instance(txt)
 		else if pname == "==" then
 			# == is correctly redefined for instances
 			return v.bool_instance(args[0] == args[1])
@@ -952,7 +952,7 @@ redef class AMethPropdef
 		else if pname == "is_same_instance" then
 			return v.bool_instance(args[0].eq_is(args[1]))
 		else if pname == "class_inheritance_metamodel_json" then
-			return v.native_string_instance(v.mainmodule.flatten_mclass_hierarchy.to_thin_json)
+			return v.c_string_instance(v.mainmodule.flatten_mclass_hierarchy.to_thin_json)
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort
@@ -1148,11 +1148,11 @@ redef class AMethPropdef
 			else if pname == "round" then
 				return v.float_instance(args[0].to_f.round)
 			end
-		else if cname == "NativeString" then
+		else if cname == "CString" then
 			if pname == "new" then
-				return v.native_string_instance_len(args[1].to_i)
+				return v.c_string_instance_len(args[1].to_i)
 			end
-			var recvval = args.first.val.as(NativeString)
+			var recvval = args.first.val.as(CString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
 				return v.byte_instance(recvval[arg1])
@@ -1161,8 +1161,8 @@ redef class AMethPropdef
 				recvval[arg1] = args[2].val.as(Byte)
 				return null
 			else if pname == "copy_to" then
-				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(NativeString)
+				# sig= copy_to(dest: CString, length: Int, from: Int, to: Int)
+				var destval = args[1].val.as(CString)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
@@ -1172,13 +1172,13 @@ redef class AMethPropdef
 				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
 				var ns = recvval.fast_cstring(args[1].to_i)
-				return v.native_string_instance(ns.to_s)
+				return v.c_string_instance(ns.to_s)
 			else if pname == "fetch_4_chars" then
-				return v.int_instance(args[0].val.as(NativeString).fetch_4_chars(args[1].to_i))
+				return v.int_instance(args[0].val.as(CString).fetch_4_chars(args[1].to_i))
 			else if pname == "fetch_4_hchars" then
-				return v.int_instance(args[0].val.as(NativeString).fetch_4_hchars(args[1].to_i))
+				return v.int_instance(args[0].val.as(CString).fetch_4_hchars(args[1].to_i))
 			else if pname == "utf8_length" then
-				return v.int_instance(args[0].val.as(NativeString).utf8_length(args[1].to_i, args[2].to_i))
+				return v.int_instance(args[0].val.as(CString).utf8_length(args[1].to_i, args[2].to_i))
 			end
 		else if cname == "NativeArray" then
 			if pname == "new" then
@@ -1468,7 +1468,7 @@ redef class AMethPropdef
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
 			var txt = v.arguments[args[1].to_i]
-			return v.native_string_instance(txt)
+			return v.c_string_instance(txt)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
@@ -2019,7 +2019,7 @@ redef class AStringExpr
 		var s = v.string_instance(value)
 		if is_string then return s
 		if is_bytestring then
-			var ns = v.native_string_instance_from_ns(bytes.items, bytes.length)
+			var ns = v.c_string_instance_from_ns(bytes.items, bytes.length)
 			var ln = v.int_instance(bytes.length)
 			var prop = to_bytes_with_copy
 			assert prop != null

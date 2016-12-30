@@ -81,7 +81,7 @@ abstract class Reader
 	fun read_bytes(i: Int): Bytes
 	do
 		if last_error != null then return new Bytes.empty
-		var s = new NativeString(i)
+		var s = new CString(i)
 		var buf = new Bytes(s, 0, 0)
 		while i > 0 and not eof do
 			var c = read_byte
@@ -521,7 +521,7 @@ abstract class BufferedReader
 			while c < full_len do c = c * 2 + 2
 			_buffer_capacity = c
 		end
-		var nns = new NativeString(_buffer_capacity)
+		var nns = new CString(_buffer_capacity)
 		bf.items.copy_to(nns, bf.length, 0, 0)
 		_buffer.copy_to(nns, remsp, _buffer_pos, bf.length)
 		_buffer = nns
@@ -629,7 +629,7 @@ abstract class BufferedReader
 	end
 
 	# The buffer
-	private var buffer: NativeString = new NativeString(0)
+	private var buffer: CString = new CString(0)
 
 	# The current position in the buffer
 	private var buffer_pos = 0
@@ -649,7 +649,7 @@ abstract class BufferedReader
 	# Allocate a `_buffer` for a given `capacity`.
 	protected fun prepare_buffer(capacity: Int)
 	do
-		_buffer = new NativeString(capacity)
+		_buffer = new CString(capacity)
 		_buffer_pos = 0 # need to read
 		_buffer_length = 0
 		_buffer_capacity = capacity
@@ -727,7 +727,7 @@ class StringReader
 
 	redef fun read_all_bytes do
 		var nslen = source.length - cursor
-		var nns = new NativeString(nslen)
+		var nns = new CString(nslen)
 		source.copy_to_native(nns, nslen, cursor, 0)
 		return new Bytes(nns, nslen, nslen)
 	end

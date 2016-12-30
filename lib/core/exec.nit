@@ -114,7 +114,7 @@ class Process
 	end
 
 	private var data: NativeProcess
-	private fun basic_exec_execute(prog, args: NativeString, argc: Int, pipeflag: Int): NativeProcess `{
+	private fun basic_exec_execute(prog, args: CString, argc: Int, pipeflag: Int): NativeProcess `{
 #ifdef _WIN32
 		// FIXME use a higher level abstraction to support WIN32
 		return -1;
@@ -338,7 +338,7 @@ redef class Sys
 	fun pid: Int `{ return getpid(); `}
 end
 
-redef class NativeString
+redef class CString
 	# Execute self as a shell command.
 	#
 	# See the posix function system(3).

@@ -6,7 +6,7 @@ var Module = {
 	'TOTAL_MEMORY': 512000000
 }
 importScripts("pep8analysis.js")
-run_analysis = Module.cwrap('pep8analysis_web___NativeString_run_analysis', null, ['string'])
+run_analysis = Module.cwrap('pep8analysis_web___CString_run_analysis', null, ['string'])
 
 function show_graph(data) {
 	postMessage({'type':"show_graph", 'data': data})

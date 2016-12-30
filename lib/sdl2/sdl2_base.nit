@@ -42,7 +42,7 @@ class SDL
 	# Returns the latest SDL error
 	#
 	# After calling this method, you should also call `clear_error`.
-	fun error: NativeString `{ return (char*)SDL_GetError(); `}
+	fun error: CString `{ return (char*)SDL_GetError(); `}
 
 	# Clear the SDL error
 	fun clear_error `{ SDL_ClearError(); `}
@@ -65,7 +65,7 @@ class SDL
 	fun system_ram: Int `{ return SDL_GetSystemRAM(); `}
 
 	# Show a simple message box
-	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: NativeString) `{
+	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: CString) `{
 		SDL_ShowSimpleMessageBox(level, title, content, NULL);
 	`}
 
@@ -120,7 +120,7 @@ end
 # A window created by SDL
 extern class SDLWindow `{ SDL_Window * `}
 	# Create a window with the given `title`, `width` and `height`, also apply the `flags`
-	new (title: NativeString, width, height: Int, flags: SDLWindowFlags) `{
+	new (title: CString, width, height: Int, flags: SDLWindowFlags) `{
 		return SDL_CreateWindow(title,
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			width, height, flags);
@@ -138,7 +138,7 @@ extern class SDLWindow `{ SDL_Window * `}
 	# Show a simple message box
 	#
 	# Similar to `sys.sdl.show_simple_message_box` but attached to this window
-	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: NativeString) `{
+	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: CString) `{
 		SDL_ShowSimpleMessageBox(level, title, content, self);
 	`}
 
@@ -379,12 +379,12 @@ end
 extern class SDLSurface `{ SDL_Surface * `}
 
 	# Load the BMP file at `path`
-	new load_bmp(path: NativeString) `{ return SDL_LoadBMP(path); `}
+	new load_bmp(path: CString) `{ return SDL_LoadBMP(path); `}
 
 	redef fun free `{ SDL_FreeSurface(self); `}
 
 	# Save this texture to a BMP file
-	fun save_bmp(path: NativeString) `{ SDL_SaveBMP(self, path); `}
+	fun save_bmp(path: CString) `{ SDL_SaveBMP(self, path); `}
 end
 
 # A loaded bitmap texture
@@ -526,7 +526,7 @@ extern class SDLRendererInfo `{ SDL_RendererInfo * `}
 	new malloc `{ return malloc(sizeof(SDL_RendererInfo)); `}
 
 	# Name of the renderer's driver
-	fun name: NativeString `{ return (char*)self->name; `}
+	fun name: CString `{ return (char*)self->name; `}
 
 	# Maximum texture width supported by the renderer
 	fun max_texture_width: Int `{ return self->max_texture_width; `}

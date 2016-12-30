@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var s = new NativeString(4)
+var s = new CString(4)
 s[0] = 0x4Eu8
 s[2] = 0x74u8
 s[1] = 0x69u8

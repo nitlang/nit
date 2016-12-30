@@ -126,7 +126,7 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Write `length` bytes from `buffer`
-	fun write(buffer: NativeString, length: Int): Int `{
+	fun write(buffer: CString, length: Int): Int `{
 		return write(*self, buffer, length);
 	`}
 
@@ -137,7 +137,7 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Read `length` bytes into `buffer`, returns the number of bytes read
-	fun read(buffer: NativeString, length: Int): Int `{
+	fun read(buffer: CString, length: Int): Int `{
 		return read(*self, buffer, length);
 	`}
 
@@ -227,17 +227,17 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Send `len` bytes from `buf` to `dest_addr`
-	fun sendto(buf: NativeString, len: Int, flags: Int, dest_addr: NativeSocketAddrIn): Int `{
+	fun sendto(buf: CString, len: Int, flags: Int, dest_addr: NativeSocketAddrIn): Int `{
 		return sendto(*self, buf, len, flags, (struct sockaddr*)dest_addr, sizeof(struct sockaddr_in));
 	`}
 
 	# Receive a message into `buf` of maximum `len` bytes
-	fun recv(buf: NativeString, len: Int, flags: Int): Int `{
+	fun recv(buf: CString, len: Int, flags: Int): Int `{
 		return recv(*self, buf, len, flags);
 	`}
 
 	# Receive a message into `buf` of maximum `len` bytes and store sender info into `src_addr`
-	fun recvfrom(buf: NativeString, len: Int, flags: Int, src_addr: NativeSocketAddrIn): Int `{
+	fun recvfrom(buf: CString, len: Int, flags: Int, src_addr: NativeSocketAddrIn): Int `{
 		socklen_t srclen = sizeof(struct sockaddr_in);
 		return recvfrom(*self, buf, len, flags, (struct sockaddr*)src_addr, &srclen);
 	`}
@@ -275,7 +275,7 @@ extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
 	`}
 
 	# Internet address as then IPV4 numbers-and-dots notation
-	fun address: NativeString `{ return (char*)inet_ntoa(self->sin_addr); `}
+	fun address: CString `{ return (char*)inet_ntoa(self->sin_addr); `}
 
 	# Set `address` to `INADDR_ANY`
 	fun address_any `{ self->sin_addr.s_addr = INADDR_ANY; `}
@@ -298,7 +298,7 @@ end
 
 # Host entry information, a pointer to a `struct hostent`
 extern class NativeSocketHostent `{ struct hostent* `}
-	private fun native_h_aliases(i: Int): NativeString `{
+	private fun native_h_aliases(i: Int): CString `{
 		return self->h_aliases[i];
 	`}
 
@@ -314,7 +314,7 @@ extern class NativeSocketHostent `{ struct hostent* `}
 		return res
 	end
 
-	fun h_addr: NativeString `{
+	fun h_addr: CString `{
 		return (char*)inet_ntoa(*(struct in_addr*)self->h_addr);
 	`}
 
@@ -322,7 +322,7 @@ extern class NativeSocketHostent `{ struct hostent* `}
 
 	fun h_length: Int `{ return self->h_length; `}
 
-	fun h_name: NativeString `{ return self->h_name; `}
+	fun h_name: CString `{ return self->h_name; `}
 end
 
 extern class NativeTimeval `{ struct timeval* `}
@@ -518,7 +518,7 @@ end
 
 redef class Sys
 	# Get network host entry
-	fun gethostbyname(name: NativeString): NativeSocketHostent `{
+	fun gethostbyname(name: CString): NativeSocketHostent `{
 		return gethostbyname(name);
 	`}
 

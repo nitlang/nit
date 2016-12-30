@@ -26,5 +26,5 @@ assert 'd'.object_id.to_s.is_numeric
 # Check Float.object_id
 assert 1.0.object_id.to_s.is_numeric
 
-# Check NativeString.object_id
+# Check CString.object_id
 assert "Test".as(FlatString).items.object_id.to_s.is_numeric

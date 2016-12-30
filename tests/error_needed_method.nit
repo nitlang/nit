@@ -32,7 +32,7 @@ end
 class String
 end
 
-enum NativeString
+enum CString
 end
 
 class Array[E]

@@ -30,12 +30,12 @@ abstract class Codec
 	fun char_max_size: Int is abstract
 
 	# Transforms `c` to its representation in the format of `self`
-	fun encode_char(c: Char): NativeString is abstract
+	fun encode_char(c: Char): CString is abstract
 
 	# Adds a char `c` to bytes `s`
 	#
 	# Returns the number of bytes written to `s`
-	fun add_char_to(c: Char, s: NativeString): Int is abstract
+	fun add_char_to(c: Char, s: CString): Int is abstract
 
 	# Transforms `s` to the format of `self`
 	fun encode_string(s: Text): Bytes is abstract
@@ -57,11 +57,11 @@ abstract class Codec
 	# * 0 if valid
 	# * 1 if incomplete
 	# * 2 if invalid
-	fun is_valid_char(ns: NativeString, position: Int): Int is abstract
+	fun is_valid_char(ns: CString, position: Int): Int is abstract
 
 	# Decodes a char from `b` to a Unicode code-point
-	fun decode_char(b: NativeString): Char is abstract
+	fun decode_char(b: CString): Char is abstract
 
 	# Decodes a string `b` to UTF-8
-	fun decode_string(b: NativeString, len: Int): String is abstract
+	fun decode_string(b: CString, len: Int): String is abstract
 end

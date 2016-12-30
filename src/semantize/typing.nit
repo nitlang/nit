@@ -1480,14 +1480,14 @@ redef class AugmentedStringFormExpr
 	var newline: nullable CallSite = null
 	# Regex::extended, used for suffix `b` on `re`
 	var extended: nullable CallSite = null
-	# NativeString::to_bytes_with_copy, used for prefix `b`
+	# CString::to_bytes_with_copy, used for prefix `b`
 	var to_bytes_with_copy: nullable CallSite = null
 
 	redef fun accept_typing(v) do
 		var mclass = v.get_mclass(self, "String")
 		if mclass == null then return # Forward error
 		if is_bytestring then
-			to_bytes_with_copy = v.get_method(self, v.mmodule.native_string_type, "to_bytes_with_copy", false)
+			to_bytes_with_copy = v.get_method(self, v.mmodule.c_string_type, "to_bytes_with_copy", false)
 			mclass = v.get_mclass(self, "Bytes")
 		else if is_re then
 			to_re = v.get_method(self, mclass.mclass_type, "to_re", false)

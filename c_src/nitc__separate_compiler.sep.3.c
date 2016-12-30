@@ -1118,8 +1118,8 @@ RET_LABEL229:(void)0;
 if (likely(varonce231!=NULL)) {
 var232 = varonce231;
 } else {
-var233 = "NativeString";
-var234 = core__flat___NativeString___to_s_full(var233, 12l, 12l);
+var233 = "CString";
+var234 = core__flat___NativeString___to_s_full(var233, 7l, 7l);
 var232 = var234;
 varonce231 = var232;
 }
@@ -1768,8 +1768,8 @@ RET_LABEL22:(void)0;
 if (likely(varonce!=NULL)) {
 var24 = varonce;
 } else {
-var25 = "NativeString";
-var26 = core__flat___NativeString___to_s_full(var25, 12l, 12l);
+var25 = "CString";
+var26 = core__flat___NativeString___to_s_full(var25, 7l, 7l);
 var24 = var26;
 varonce = var24;
 }
@@ -2118,8 +2118,8 @@ RET_LABEL22:(void)0;
 if (likely(varonce!=NULL)) {
 var24 = varonce;
 } else {
-var25 = "NativeString";
-var26 = core__flat___NativeString___to_s_full(var25, 12l, 12l);
+var25 = "CString";
+var26 = core__flat___NativeString___to_s_full(var25, 7l, 7l);
 var24 = var26;
 varonce = var24;
 }

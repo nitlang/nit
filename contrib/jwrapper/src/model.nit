@@ -93,7 +93,7 @@ class JavaType
 			end
 		else
 			# Use the prefix and the short class name
-			# e.g. given the prefix Native: java.lang.String -> NativeString
+			# e.g. given the prefix Native: java.lang.String -> CString
 			name = prefix + id
 		end
 

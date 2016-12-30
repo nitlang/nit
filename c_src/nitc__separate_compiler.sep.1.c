@@ -3073,8 +3073,8 @@ core___core__AbstractArray___core__abstract_collection__Sequence__push(var_, var
 if (likely(varonce20!=NULL)) {
 var21 = varonce20;
 } else {
-var22 = "NativeString";
-var23 = core__flat___NativeString___to_s_full(var22, 12l, 12l);
+var22 = "CString";
+var23 = core__flat___NativeString___to_s_full(var22, 7l, 7l);
 var21 = var23;
 varonce20 = var21;
 }
@@ -3441,8 +3441,8 @@ RET_LABEL21:(void)0;
 if (likely(varonce23!=NULL)) {
 var24 = varonce23;
 } else {
-var25 = "NativeString";
-var26 = core__flat___NativeString___to_s_full(var25, 12l, 12l);
+var25 = "CString";
+var26 = core__flat___NativeString___to_s_full(var25, 7l, 7l);
 var24 = var26;
 varonce23 = var24;
 }

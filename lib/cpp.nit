@@ -28,7 +28,7 @@ redef class Text
 	fun to_cpp_string: CppString do return to_cstring.to_cpp_string(length)
 end
 
-redef class NativeString
+redef class CString
 	# Get `self` as a `CppString`
 	fun to_cpp_string(length: Int): CppString in "C++" `{
 		return new std::string(self, length);

@@ -96,9 +96,9 @@ private class BSON
 	end
 
 	redef fun to_s do
-		var ns = native.to_native_string
+		var ns = native.to_c_string
 		var res = ns.to_s_with_copy
-		ns.free # manual free of gc allocated NativeString
+		ns.free # manual free of gc allocated CString
 		return res
 	end
 

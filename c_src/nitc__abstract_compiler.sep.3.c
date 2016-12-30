@@ -4181,8 +4181,8 @@ RET_LABEL158:(void)0;
 if (likely(varonce160!=NULL)) {
 var161 = varonce160;
 } else {
-var162 = "NativeString";
-var163 = core__flat___NativeString___to_s_full(var162, 12l, 12l);
+var162 = "CString";
+var163 = core__flat___NativeString___to_s_full(var162, 7l, 7l);
 var161 = var163;
 varonce160 = var161;
 }
@@ -5077,8 +5077,8 @@ RET_LABEL154:(void)0;
 if (likely(varonce156!=NULL)) {
 var157 = varonce156;
 } else {
-var158 = "NativeString";
-var159 = core__flat___NativeString___to_s_full(var158, 12l, 12l);
+var158 = "CString";
+var159 = core__flat___NativeString___to_s_full(var158, 7l, 7l);
 var157 = var159;
 varonce156 = var157;
 }

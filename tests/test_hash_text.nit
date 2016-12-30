@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var x = "string__NativeString__to_s_with_length"
+var x = "string__CString__to_s_with_length"
 
-var y = "string" + "__" + "NativeString" + "__" + "to_s_with_length"
+var y = "string" + "__" + "CString" + "__" + "to_s_with_length"
 
 var z = new FlatBuffer.from("string")
 z.append("__")
-z.append("NativeString")
+z.append("CString")
 z.append("__")
 z.append("to_s_with_length")
 
-var a = ["string", "NativeString", "to_s_with_length"].join("__")
+var a = ["string", "CString", "to_s_with_length"].join("__")
 
 print x.hash == y.hash
 print y.hash == z.hash

@@ -64,10 +64,10 @@ redef class String
 
 	# Returns null on success
 	fun file_rename_to(dest: String): nullable String import String.to_cstring,
-	NativeString.to_s, String.as nullable `{
+	CString.to_s, String.as nullable `{
 		int res = rename(String_to_cstring(self), String_to_cstring(dest));
 		if (res == 0) return null_String();
-		return String_as_nullable(NativeString_to_s(strerror(errno)));
+		return String_as_nullable(CString_to_s(strerror(errno)));
 	`}
 
 	# Replace `~` by the path to the home diretory

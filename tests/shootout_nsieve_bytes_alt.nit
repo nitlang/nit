@@ -39,7 +39,7 @@ fun nsieve(n: Int): Int
 do
 	var count = 0
 	var b_arrsz = ((n - 1).to_f / 8.0).ceil.to_i
-	var bitarr = new Bitarray(new Bytes(new NativeString(b_arrsz), b_arrsz, b_arrsz))
+	var bitarr = new Bitarray(new Bytes(new CString(b_arrsz), b_arrsz, b_arrsz))
 	for i in [2 .. n[ do
 		# If self is already false, then no need to check for multiples
 		if not bitarr[i] then continue

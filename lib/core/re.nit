@@ -42,7 +42,7 @@ private extern class NativeRegex `{ regex_t* `}
 	new malloc `{ return malloc(sizeof(regex_t)); `}
 
 	# Compile the regular expression `regex` into a form that is suitable for subsequent `regexec` searches
-	fun regcomp(regex: NativeString, cflags: Int): Int `{
+	fun regcomp(regex: CString, cflags: Int): Int `{
 		return regcomp(self, regex, cflags);
 	`}
 
@@ -50,14 +50,14 @@ private extern class NativeRegex `{ regex_t* `}
 	#
 	# `nmatch` and `pmatch` are used to provide information regarding the location of any matches.
 	# `eflags` may be the bitwise-or of one or both of `flag_notbol` and `flag_noteol`.
-	fun regexec(string: NativeString, nmatch: Int, pmatch: NativeMatchArray, eflags: Int): Int `{
+	fun regexec(string: CString, nmatch: Int, pmatch: NativeMatchArray, eflags: Int): Int `{
 		return regexec(self, string, nmatch, pmatch, eflags);
 	`}
 
 	# Match `string` against the precompiled pattern buffer of `self`, do not locate matches
 	#
 	# `eflags` may be the bitwise-or of one or both of `flag_notbol` and `flag_noteol`.
-	fun regexec_match_only(string: NativeString, eflags: Int): Int `{
+	fun regexec_match_only(string: CString, eflags: Int): Int `{
 		return regexec(self, string, 0, NULL, eflags);
 	`}
 
@@ -67,7 +67,7 @@ private extern class NativeRegex `{ regex_t* `}
 	fun regfree `{ regfree(self); `}
 
 	# Turn the error codes that can be returned by both `regcomp` and `regexec` into error message strings
-	fun regerror(errcode: Int): NativeString `{
+	fun regerror(errcode: Int): CString `{
 		size_t len = regerror(errcode, self, NULL, 0);
 		char *message = malloc(len);
 		regerror(errcode, self, message, len);
@@ -115,8 +115,8 @@ private extern class NativeMatchArray `{ regmatch_t* `}
 	fun [](index: Int): NativeMatchArray `{ return self + index; `}
 end
 
-redef extern class NativeString
-	private fun substring_from(index: Int): NativeString `{ return self + index; `}
+redef extern class CString
+	private fun substring_from(index: Int): CString `{ return self + index; `}
 end
 
 redef class Text

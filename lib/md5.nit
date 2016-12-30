@@ -500,8 +500,8 @@ redef class Text
 	fun md5: String do return to_cstring.native_md5.to_s
 end
 
-redef class NativeString
-	private fun native_md5: NativeString `{
+redef class CString
+	private fun native_md5: CString `{
 		md5_state_t state;
 		md5_byte_t digest[16]; /* result */
 		char *hex_output = malloc(33*sizeof(char));

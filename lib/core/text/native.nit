@@ -83,16 +83,18 @@ redef class Int
 	end
 end
 
-# Native strings are simple C char *
-extern class NativeString `{ char* `}
-	# Creates a new NativeString with a capacity of `length`
+# C string `char *`
+#
+# Used as underlying implementation for `String` and some other `Text`.
+extern class CString `{ char* `}
+	# Create a new `CString` with the capacity for `length` characters
 	new(length: Int) is intern
 
-	# Returns a char* starting at `index`.
+	# Get a char* starting at `index`.
 	#
 	# WARNING: Unsafe for extern code, use only for temporary
 	# pointer manipulation purposes (e.g. write to file or such)
-	fun fast_cstring(index: Int): NativeString is intern
+	fun fast_cstring(index: Int): CString is intern
 
 	# Get char at `index`.
 	fun [](index: Int): Byte is intern
@@ -101,7 +103,7 @@ extern class NativeString `{ char* `}
 	fun []=(index: Int, item: Byte) is intern
 
 	# Copy `self` to `dest`.
-	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
+	fun copy_to(dest: CString, length: Int, from: Int, to: Int) is intern
 
 	redef fun ==(o) is intern do return is_same_instance(o)
 

@@ -217,8 +217,8 @@ in "C Header" `{
 	}
 `}
 
-redef class NativeString
-	private fun sha1_intern(len: Int): NativeString `{
+redef class CString
+	private fun sha1_intern(len: Int): CString `{
 		sha1nfo s;
 
 		sha1_init(&s);
@@ -239,7 +239,7 @@ redef class String
 
 	# Computes the SHA1 of the receiver
 	#
-	# Returns a digest of 20 bytes as a NativeString,
+	# Returns a digest of 20 bytes as a CString,
 	# note that all the characters are not necessarily ASCII.
 	# If you want the hex string version of the digest, use
 	# sha1_hexdigest.

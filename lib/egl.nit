@@ -103,7 +103,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 		}
 	`}
 
-	private fun report_egl_error(cmsg: NativeString)
+	private fun report_egl_error(cmsg: CString)
 	do
 		var msg = cmsg.to_s
 		print "libEGL error: {msg}"
@@ -173,8 +173,8 @@ extern class EGLDisplay `{ EGLDisplay `}
 		end
 	end
 
-	private fun query_string(name: Int): String import NativeString.to_s `{
-		return NativeString_to_s((char *)eglQueryString(self, name));
+	private fun query_string(name: Int): String import CString.to_s `{
+		return CString_to_s((char *)eglQueryString(self, name));
 	`}
 
 	fun vendor: String do return query_string(0x3053)

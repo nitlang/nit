@@ -1323,8 +1323,8 @@ goto RET_LABEL;
 if (likely(varonce96!=NULL)) {
 var97 = varonce96;
 } else {
-var98 = "NativeString";
-var99 = core__flat___NativeString___to_s_full(var98, 12l, 12l);
+var98 = "CString";
+var99 = core__flat___NativeString___to_s_full(var98, 7l, 7l);
 var97 = var99;
 varonce96 = var97;
 }
@@ -1830,8 +1830,8 @@ goto RET_LABEL;
 if (likely(varonce96!=NULL)) {
 var97 = varonce96;
 } else {
-var98 = "NativeString";
-var99 = core__flat___NativeString___to_s_full(var98, 12l, 12l);
+var98 = "CString";
+var99 = core__flat___NativeString___to_s_full(var98, 7l, 7l);
 var97 = var99;
 varonce96 = var97;
 }
@@ -2124,8 +2124,8 @@ core___core__AbstractArray___core__abstract_collection__Sequence__push(var_17, v
 if (likely(varonce34!=NULL)) {
 var35 = varonce34;
 } else {
-var36 = "NativeString";
-var37 = core__flat___NativeString___to_s_full(var36, 12l, 12l);
+var36 = "CString";
+var37 = core__flat___NativeString___to_s_full(var36, 7l, 7l);
 var35 = var37;
 varonce34 = var35;
 }

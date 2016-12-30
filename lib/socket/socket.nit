@@ -71,7 +71,7 @@ class TCPStream
 	# Creates a socket connection to host `host` on port `port`
 	init connect(host: String, port: Int)
 	do
-		_buffer = new NativeString(1024)
+		_buffer = new CString(1024)
 		_buffer_pos = 0
 		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
@@ -216,7 +216,7 @@ class TCPStream
 		if _buffer_capacity >= len then return
 		_buffer_capacity = len
 
-		var ns = new NativeString(_buffer_capacity)
+		var ns = new CString(_buffer_capacity)
 		_buffer.copy_to(ns, _buffer_length - _buffer_pos, _buffer_pos, 0)
 		_buffer = ns
 	end
@@ -401,7 +401,7 @@ class UDPSocket
 	# On error, returns an empty string and sets `error` appropriately.
 	fun recv(length: Int): String
 	do
-		var buf = new NativeString(length)
+		var buf = new CString(length)
 		var len = native.recvfrom(buf, length, 0, new NativeSocketAddrIn.nul)
 		if len == -1 then
 			error = new IOError.from_errno
@@ -416,7 +416,7 @@ class UDPSocket
 	fun recv_from(length: Int, sender: Ref[nullable SocketAddress]): String
 	do
 		var src = new NativeSocketAddrIn
-		var buf = new NativeString(length)
+		var buf = new CString(length)
 
 		var len = native.recvfrom(buf, length, 0, src)
 		if len == -1 then
