@@ -21,6 +21,7 @@ intrude import app::ui
 import client
 import push
 import checkins
+import manual_checkins
 intrude import user_views
 
 redef class HomeWindow
@@ -30,34 +31,6 @@ redef class HomeWindow
 
 		# Force equal height for `news_header`
 		var b = new Button(text="", parent=news_header)
-		update_checkin_text
-	end
-
-	private var checkin_button = new Button(parent=layout_user, align=0.0)
-
-	redef fun on_event(event)
-	do
-		super
-
-		if event isa ButtonPressEvent then
-			var sender = event.sender
-			if sender == checkin_button then
-				if app.currently_on_location then
-					app.on_check_out
-				else app.on_check_in
-			end
-		end
-	end
-
-	private fun update_checkin_text
-	do
-		if app.currently_on_location then
-			checkin_label.text = "Leaving?".t
-			checkin_button.text = "Check out".t
-		else
-			checkin_label.text = "On location?".t
-			checkin_button.text = "Check in".t
-		end
 	end
 end
 
@@ -81,20 +54,6 @@ redef class SignupWindow
 end
 
 redef class App
-	redef fun on_check_in
-	do
-		super
-		var window = window
-		if window isa HomeWindow then window.update_checkin_text
-	end
-
-	redef fun on_check_out
-	do
-		super
-		var window = window
-		if window isa HomeWindow then window.update_checkin_text
-	end
-
 	redef fun did_finish_launching_with_options
 	do
 		ui_application.register_user_notification_settings
