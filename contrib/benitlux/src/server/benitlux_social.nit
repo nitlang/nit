@@ -346,12 +346,18 @@ ROWID, name FROM users WHERE
 			# currently at the bar, official people (proprio, brewers, barmaids & barmen)
 
 			limit -= people.length
-			user_id = user_id or else -1
 
-			# Recommend popular users
+			# Recommend popular users without the local user or `followed_followers`
+			var avoid_ids = new Array[Int]
+			if user_id != null then avoid_ids.add user_id
+			for p in people do avoid_ids.add p.id
+			if avoid_ids.is_empty then avoid_ids.add -1
+
 			var stmt = select("""
 ROWID, name, (SELECT count(*) FROM follows WHERE follows.user_to == users.ROWID) AS n_followers
-FROM users WHERE ROWID != {{{user_id}}}
+FROM users WHERE {{{
+	[for id in avoid_ids do "ROWID != {id}"].join(" AND ")
+}}}
 ORDER BY n_followers DESC LIMIT {{{limit}}}""")
 			assert stmt != null else print_error "Select 'friends' failed with: {error or else "?"}"
 			for row in stmt do people.add new User(row[0].to_i, row[1].to_s)
