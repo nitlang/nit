@@ -18,7 +18,8 @@
 	angular
 		.module('ui', [ 'model' ])
 
-		.controller('SearchCtrl', ['Model', '$routeParams', '$scope', '$location', function(Model, $routeParams, $scope, $location) {
+		.controller('SearchCtrl', function(Model, $routeParams, $scope, $location, $document) {
+
 			$scope.query = '';
 
 			$scope.reset = function() {
@@ -79,7 +80,28 @@
 			}
 
 			$scope.reset();
-		}])
+		})
+
+		.directive('searchField', function($document) {
+			return {
+				restrict: 'E',
+				replace: true,
+				controller: 'SearchCtrl',
+				controllerAs: 'searchCtrl',
+				templateUrl: '/directives/search/field.html',
+				link: function ($scope, element, attrs) {
+					$document.bind('click', function (event) {
+						var isChild = $(element).has(event.target).length > 0;
+						var isSelf = element[0] == event.target;
+						var isInside = isChild || isSelf;
+						if (!isInside) {
+							$scope.reset();
+							$scope.$apply();
+						}
+					});
+				}
+			};
+		})
 
 		.directive('searchCard', function() {
 			return {
