@@ -37,7 +37,7 @@ extern class NSString in "ObjC" `{ NSString * `}
 	# Get an UTF8 encoded `char*` copy of `self`
 	fun utf8_string: CString in "ObjC" `{ return (char *)[self UTF8String]; `}
 
-	redef fun to_s do return utf8_string.to_s_with_copy
+	redef fun to_s do return utf8_string.to_s
 end
 
 redef class CString
@@ -63,7 +63,7 @@ extern class NSData in "ObjC" `{ NSData * `}
 	# Number of bytes containted in `self`
 	fun length: Int in "ObjC" `{ return self.length; `}
 
-	redef fun to_s do return bytes.to_s_with_copy_and_length(length)
+	redef fun to_s do return bytes.to_s_with_length(length)
 end
 
 # Error condition

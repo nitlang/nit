@@ -240,7 +240,7 @@ universal Int8
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen, copy=false)
 	end
 end
 
@@ -386,7 +386,7 @@ universal Int16
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen, copy=false)
 	end
 end
 
@@ -532,7 +532,7 @@ universal UInt16
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen, copy=false)
 	end
 end
 
@@ -679,7 +679,7 @@ universal Int32
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen, copy=false)
 	end
 end
 
@@ -825,7 +825,7 @@ universal UInt32
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen, copy=false)
 	end
 end
 

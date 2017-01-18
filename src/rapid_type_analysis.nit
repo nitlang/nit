@@ -589,7 +589,7 @@ redef class AStringFormExpr
 	do
 		var native = v.analysis.mainmodule.c_string_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s_full")
+		var prop = v.get_method(native, "to_s_unsafe")
 		v.add_monomorphic_send(native, prop)
 		v.add_callsite(to_re)
 		v.add_callsite(ignore_case)

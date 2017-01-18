@@ -230,7 +230,7 @@ class BinaryDeserializer
 				if b == null then return '�'
 				bf[i] = b
 			end
-			return bf.to_s_with_length(ln)[0]
+			return bf.to_s_unsafe(ln, copy=false)[0]
 		end
 		if kind == kind_string then return stream.read_block
 		if kind == kind_c_string then return stream.read_block.to_cstring

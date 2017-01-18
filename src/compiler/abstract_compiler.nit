@@ -1711,7 +1711,7 @@ abstract class AbstractCompilerVisitor
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var byte_length = self.int_instance(string.byte_length)
 		var unilen = self.int_instance(string.length)
-		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, byte_length, unilen]).as(not null)};")
+		self.add("{res} = {self.send(self.get_property("to_s_unsafe", native_mtype), [nat, byte_length, unilen, value_instance(false), value_instance(false)]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res

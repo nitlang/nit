@@ -55,8 +55,8 @@ extern class TimeT `{time_t`}
 	fun update `{ time(&self); `}
 
 	# Convert `self` to a human readable String.
-	fun ctime: String import CString.to_s_with_copy `{
-		return CString_to_s_with_copy( ctime(&self) );
+	fun ctime: String import CString.to_s `{
+		return CString_to_s( ctime(&self) );
 	`}
 
 	# Difference in secondes from start (self if the end time)
@@ -136,19 +136,19 @@ extern class Tm `{struct tm *`}
 
 	# Convert `self` to a human readable String corresponding to `format`.
 	# TODO document allowed format.
-	fun strftime(format: String): String import String.to_cstring, CString.to_s_with_copy `{
+	fun strftime(format: String): String import String.to_cstring, CString.to_s `{
 		char* buf, *c_format;
 
 		buf = (char*)malloc(100);
 		c_format = String_to_cstring(format);
 
 		strftime(buf, 100, c_format, self);
-		String s = CString_to_s_with_copy(buf);
+		String s = CString_to_s(buf);
 		free(buf);
 		return s;
 	`}
 
-	redef fun to_s do return asctime.to_s_with_copy.replace("\n", "")
+	redef fun to_s do return asctime.to_s.replace("\n", "")
 end
 
 # Date using the international format defined by ISO 8601.

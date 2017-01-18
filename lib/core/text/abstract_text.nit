@@ -895,7 +895,7 @@ abstract class Text
 			l += 1
 		end
 
-		return buf.to_s_unsafe(l)
+		return buf.to_s_unsafe(l, copy=false)
 	end
 
 	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
@@ -1115,7 +1115,7 @@ abstract class Text
 	#
 	#	var ns = new CString(8)
 	#	"Text is String".copy_to_native(ns, 8, 2, 0)
-	#	assert ns.to_s_unsafe(8) == "xt is St"
+	#	assert ns.to_s_with_length(8) == "xt is St"
 	#
 	fun copy_to_native(dest: CString, n, src_offset, dest_offset: Int) do
 		var mypos = src_offset
@@ -1799,7 +1799,7 @@ redef class Byte
 		var ns = new CString(nslen + 1)
 		ns[nslen] = 0u8
 		native_byte_to_s(ns, nslen + 1)
-		return ns.to_s_unsafe(nslen)
+		return ns.to_s_unsafe(nslen, copy=false, clean=false)
 	end
 end
 
@@ -1988,7 +1988,7 @@ redef class Char
 		var ln = u8char_len
 		var ns = new CString(ln + 1)
 		u8char_tos(ns, ln)
-		return ns.to_s_unsafe(ln)
+		return ns.to_s_unsafe(ln, copy=false, clean=false)
 	end
 
 	# Returns `self` escaped to UTF-16
@@ -2296,48 +2296,39 @@ do
 end
 
 redef class CString
-	# Get a `String` from the data at `self` copied into Nit memory
-	#
-	# Require: `self` is a null-terminated string.
-	fun to_s_with_copy: String is abstract
 
-	# Get a `String` from `length` bytes at `self`
+	# Get a `String` from the data at `self` (with unsafe options)
 	#
-	# The result may point to the data at `self` or
-	# it may make a copy in Nit controlled memory.
-	# This method should only be used when `self` was allocated by the Nit GC,
-	# or when manually controlling the deallocation of `self`.
-	fun to_s_with_length(length: Int): String is abstract
+	# The default behavior is the safest and equivalent to `to_s`.
+	#
+	# Options:
+	#
+	# * Set `byte_length` to the number of bytes to use as data.
+	#   Otherwise, this method searches for a terminating null byte.
+	#
+	# * Set `char_length` to the number of Unicode character in the string.
+	#   Otherwise, the data is read to count the characters.
+	#   Ignored if `clean == true`.
+	#
+	# * If `copy == true`, the default, copies the data at `self` in the
+	#   Nit GC allocated memory. Otherwise, the return may still point to
+	#   the data at `self`.
+	#
+	# * If `clean == true`, the default, the string is cleaned of invalid UTF-8
+	#   characters. If cleaning is necessary, the data is copied into Nit GC
+	#   managed memory, whether or not `copy == true`.
+	#   Don't clean only when the data has already been verified as valid UTF-8,
+	#   other library services rely on UTF-8 compliant characters.
+	fun to_s_unsafe(byte_length, char_length: nullable Int, copy, clean: nullable Bool): String is abstract
 
-	# Get a `String` from the raw `length` bytes at `self`
+	# Retro-compatibility service use by execution engines
 	#
-	# The default value of `length` is the number of bytes before
-	# the first null character.
-	#
-	# The created `String` points to the data at `self`.
-	# This method should be used when `self` was allocated by the Nit GC,
-	# or when manually controlling the deallocation of `self`.
-	#
-	# /!\: This service does not clean the items for compliance with UTF-8,
-	# use only when the data has already been verified as valid UTF-8.
-	fun to_s_unsafe(length: nullable Int): String is abstract
-
-	# Get a `String` from the raw `byte_length` bytes at `self` with `unilen` Unicode characters
-	#
-	# The created `String` points to the data at `self`.
-	# This method should be used when `self` was allocated by the Nit GC,
-	# or when manually controlling the deallocation of `self`.
-	#
-	# /!\: This service does not clean the items for compliance with UTF-8,
-	# use only when the data has already been verified as valid UTF-8.
-	#
-	# SEE: `abstract_text::Text` for more info on the difference
-	# between `Text::byte_length` and `Text::length`.
-	fun to_s_full(byte_length, unilen: Int): String is abstract
+	# TODO remove this method at the next c_src regen.
+	private fun to_s_full(byte_length, char_length: Int): String do return to_s_unsafe(byte_length, char_length, false, false)
 
 	# Copies the content of `src` to `self`
 	#
-	# NOTE: `self` must be large enough to withold `self.byte_length` bytes
+	# NOTE: `self` must be large enough to contain `self.byte_length` bytes
 	fun fill_from(src: Text) do src.copy_to_native(self, src.byte_length, 0, 0)
 end
 

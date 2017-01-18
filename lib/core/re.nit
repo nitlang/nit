@@ -239,7 +239,7 @@ class Regex
 			var error_cstr = native.regerror(res)
 
 			# We leave it to the lib to decide how to allocate the string that we keep
-			var error_str = error_cstr.to_s_with_copy
+			var error_str = error_cstr.to_s
 			error_cstr.free
 
 			return new Error(error_str)
@@ -279,7 +279,7 @@ class Regex
 		var error_cstr = native.regerror(errcode)
 
 		# We leave it to the lib to decide how to allocate the string that we keep
-		var error_str = error_cstr.to_s_with_copy
+		var error_str = error_cstr.to_s
 		error_cstr.free
 
 		return error_str
@@ -368,7 +368,7 @@ class Regex
 
 		# Actually execute
 		var cstr = text.to_cstring
-		var rets = cstr.to_s_with_length(text.byte_length)
+		var rets = cstr.to_s_unsafe(text.byte_length, copy=false)
 		var bytefrom = cstr.char_to_byte_index_cached(charfrom, 0, 0)
 		var subcstr = cstr.fast_cstring(bytefrom)
 		var eflags = gather_eflags
@@ -428,7 +428,7 @@ class Regex
 		# Actually execute
 		var cstr = text.to_cstring
 		var subcstr = cstr
-		var rets = cstr.to_s_with_length(text.byte_length)
+		var rets = cstr.to_s_unsafe(text.byte_length, copy=false)
 		var eflags = gather_eflags
 		var eflags_or_notbol = eflags | flag_notbol
 		var native_match = self.native_match

@@ -123,10 +123,10 @@ extern class BSONObjectId `{ bson_oid_t * `}
 	`}
 
 	# Object id.
-	fun id: String import CString.to_s_with_copy `{
+	fun id: String import CString.to_s `{
 		char str[25];
 		bson_oid_to_string(self, str);
-		return CString_to_s_with_copy(str);
+		return CString_to_s(str);
 	`}
 
 	# Destroy `self`.

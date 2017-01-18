@@ -683,7 +683,7 @@ class Path
 				# readdir cannot fail, so null means end of list
 				break
 			end
-			var name = de.to_s_with_copy
+			var name = de.to_s
 			if name == "." or name == ".." then continue
 			res.add self / name
 		end
@@ -1024,7 +1024,7 @@ redef class String
 	fun realpath: String do
 		var cs = to_cstring.file_realpath
 		assert file_exists
-		var res = cs.to_s_with_copy
+		var res = cs.to_s
 		cs.free
 		return res
 	end
@@ -1324,7 +1324,7 @@ redef class String
 		loop
 			var de = d.readdir
 			if de.address_is_null then break
-			var name = de.to_s_with_copy
+			var name = de.to_s
 			if name == "." or name == ".." then continue
 			res.add name
 		end

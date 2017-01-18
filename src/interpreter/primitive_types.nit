@@ -56,7 +56,7 @@ class PrimitiveNativeFile
 
 	fun io_write(buf: CString, from, len: Int): Int do
 		if file isa FileStream then return file.as(FileStream)._file.io_write(buf, from, len)
-		file.as(Writer).write(buf.to_s_with_length(len).substring_from(from))
+		file.as(Writer).write(buf.to_s_unsafe(len, copy=false).substring_from(from))
 		return len
 	end
 
