@@ -76,3 +76,14 @@ Information, contacts and help:
 * Website <http://www.nitlanguage.org>
 * Issues <https://github.com/nitlang/nit/issues>
 * Chatroom <https://gitter.im/nitlang/nit>
+
+[![Jenkins](http://gresil.org/jenkins/job/nit/badge/icon)](http://gresil.org/jenkins/job/nit/)
+
+[![Throughput Graph](https://graphs.waffle.io/nitlang/nit/throughput.svg)](https://waffle.io/nitlang/nit/metrics/throughput)
+
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=newcomer&title=newcomer)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=bug&title=Bug)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=todo&title=task)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=ok_will_merge&title=will merge)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=need_review&title= need review)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=SPEC&title=specification)](https://waffle.io/nitlang/nit)
