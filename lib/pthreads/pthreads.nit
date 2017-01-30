@@ -90,6 +90,61 @@ redef class Sys
 	end
 end
 
+
+# An atomic Int
+extern class AtomicInt in "C" `{ int* `}
+	new(i: Int)`{
+		int* v = malloc(sizeof(int));
+		return v;
+	`}
+
+	# Get the value and increment it by `i`
+	fun get_and_increment_by(i: Int): Int `{
+		return __sync_fetch_and_add(self, i);
+	`}
+
+	# Get the value and decrement it by `i`
+	fun get_and_decrement_by(i: Int): Int `{
+		return __sync_fetch_and_sub(self, i);
+	`}
+
+	# Get the value and increment it
+	fun get_and_increment: Int `{
+		return __sync_fetch_and_add(self, 1);
+	`}
+
+	# Get the value and decrement it
+	fun get_and_decrement: Int `{
+		return __sync_fetch_and_sub(self, 1);
+	`}
+
+	# Increment by `i` and get the new value
+	fun increment_by_and_get(i: Int): Int `{
+		return __sync_add_and_fetch(self, i);
+	`}
+
+	# Decrement by `i` and get the new value
+	fun decrement_by_and_get(i: Int): Int `{
+		return __sync_sub_and_fetch(self, i);
+	`}
+
+	# Increment the value and get the new one
+	fun increment_and_get: Int `{
+		return __sync_add_and_fetch(self, 1);
+	`}
+
+	# Decrement the value and get the new one
+	fun decrement_and_get: Int `{
+		return __sync_sub_and_fetch(self,1);
+	`}
+
+	# Get the current value
+	fun value: Int `{
+		return *self;
+	`}
+
+end
+
 private extern class NativePthread in "C" `{ pthread_t * `}
 
 	new create(nit_thread: Thread) import Thread.main_intern `{
