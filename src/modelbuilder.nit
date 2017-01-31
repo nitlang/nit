@@ -38,17 +38,13 @@ redef class ToolContext
 	do
 		assert not mmodules.is_empty
 		var mainmodule
-		if mmodules.length == 1 then
-			mainmodule = mmodules.first
-		else
-			# We need a main module, so we build it by importing all modules
-			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
-			mainmodule.is_fictive = true
-			mainmodule.first_real_mmodule = mmodules.first.first_real_mmodule
-			mainmodule.set_imported_mmodules(mmodules)
-			modelbuilder.apply_conditional_importations(mainmodule)
-			modelbuilder.run_phases
-		end
+		# We need a main module, so we build it by importing all modules
+		mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
+		mainmodule.is_fictive = true
+		mainmodule.first_real_mmodule = mmodules.first.first_real_mmodule
+		mainmodule.set_imported_mmodules(mmodules)
+		modelbuilder.apply_conditional_importations(mainmodule)
+		modelbuilder.run_phases
 		return mainmodule
 	end
 
