@@ -101,4 +101,22 @@ redef class ModelBuilder
 		end
 	end
 
+	# Load module `filename` and add it as a conditional importation of `mmodule`.
+	#
+	# This means that current (and future) submodules of `module` will also import `filename`.
+	fun inject_module_subimportation(mmodule: MModule, filename: String)
+	do
+		var am = load_module(filename)
+		if am == null then return # forward error
+		var mm = am.mmodule
+		if mm == null then return # forward error
+		# Add the new module before the existing submodules in the hierarchy
+		for subm in mmodule.in_importation.direct_smallers do
+			subm.set_imported_mmodules([mm])
+		end
+		# Register the new module as a conditional_importations for future submodules
+		conditional_importations.add([mm, mmodule])
+		# Register the new amodule to be processed by `run_phases`
+		toolcontext.todo_nmodules.unshift am
+	end
 end

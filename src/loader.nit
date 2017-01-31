@@ -1045,7 +1045,7 @@ redef class ModelBuilder
 	# (and `build_module_importation` that calls it).
 	#
 	# TODO (when the loader will be rewritten): use a better representation and move up rules in the model.
-	private var conditional_importations = new Array[SequenceRead[MModule]]
+	var conditional_importations = new Array[SequenceRead[MModule]]
 
 	# Extends the current importations according to imported rules about conditional importation
 	fun apply_conditional_importations(mmodule: MModule)
