@@ -1061,7 +1061,7 @@ redef class ModelBuilder
 				for i in [1..ci.length[ do
 					var m = ci[i]
 					# Is imported?
-					if not mmodule.in_importation.greaters.has(m) then continue label
+					if mmodule == m or not mmodule.in_importation.greaters.has(m) then continue label
 				end
 				# Still here? It means that all conditions modules are loaded and imported
 
