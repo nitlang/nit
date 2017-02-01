@@ -44,7 +44,13 @@ redef class ToolContext
 		mainmodule.first_real_mmodule = mmodules.first.first_real_mmodule
 		mainmodule.set_imported_mmodules(mmodules)
 		modelbuilder.apply_conditional_importations(mainmodule)
-		modelbuilder.run_phases
+		if mainmodule.in_importation.direct_greaters.length == 1 and mainmodule.in_importation.direct_greaters.first == mmodules.first then
+			# Drop the fictive module if not needed
+			mainmodule = mmodules.first
+		else
+			# Or else run phases on it
+			modelbuilder.run_phases
+		end
 		return mainmodule
 	end
 
