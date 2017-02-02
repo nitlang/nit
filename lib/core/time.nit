@@ -26,19 +26,24 @@ fun get_time: Int `{ return time(NULL); `}
 
 redef class Sys
 	# Wait a specific number of second and nanoseconds
-	fun nanosleep(sec, nanosec: Int) `{
+	#
+	# Returns `true` if interrupted by a signal.
+	fun nanosleep(sec, nanosec: Int): Bool `{
 		const struct timespec req = {sec, nanosec};
-		nanosleep(&req, NULL);
+		return nanosleep(&req, NULL);
 	`}
 end
 
 redef class Float
 	# Sleep approximately `self` seconds
+	#
+	# Is not interrupted by signals.
 	fun sleep `{
 		time_t s = self;
 		long ns = (self-s) * 1000000000.0;
-		const struct timespec req = {s, ns};
-		nanosleep(&req, NULL);
+		struct timespec req = {s, ns};
+
+		while (nanosleep(&req, &req)) { }
 	`}
 end
 
