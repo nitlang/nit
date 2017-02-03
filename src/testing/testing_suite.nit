@@ -344,10 +344,10 @@ redef class MMethodDef
 	private fun is_test: Bool do return name.has_prefix("test_")
 
 	# Is the method a "before_module"?
-	private fun is_before_module: Bool do return mproperty.is_toplevel and name == "before_module"
+	private fun is_before_module: Bool do return name == "before_module"
 
 	# Is the method a "after_module"?
-	private fun is_after_module: Bool do return mproperty.is_toplevel and name == "after_module"
+	private fun is_after_module: Bool do return name == "after_module"
 end
 
 redef class MClassDef
@@ -367,7 +367,7 @@ redef class MModule
 	# "before_module" method for this module.
 	private fun before_test: nullable MMethodDef do
 		for mclassdef in mclassdefs do
-			if not mclassdef.name == "Object" then continue
+			if not mclassdef.name == "Sys" then continue
 			for mpropdef in mclassdef.mpropdefs do
 				if mpropdef isa MMethodDef and mpropdef.is_before_module then return mpropdef
 			end
@@ -378,7 +378,7 @@ redef class MModule
 	# "after_module" method for this module.
 	private fun after_test: nullable MMethodDef do
 		for mclassdef in mclassdefs do
-			if not mclassdef.name == "Object" then continue
+			if not mclassdef.name == "Sys" then continue
 			for mpropdef in mclassdef.mpropdefs do
 				if mpropdef isa MMethodDef and mpropdef.is_after_module then return mpropdef
 			end
