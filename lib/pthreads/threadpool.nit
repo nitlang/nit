@@ -23,21 +23,22 @@ class ThreadPool
 	private var queue = new ConcurrentList[Task]
 	private var mutex = new Mutex
 	private var cond = new NativePthreadCond
+	private var threads = new Array[PoolThread]
 
-	# Number of threads used
-	var nb_threads: Int is noinit
+	# Number of threads used, can only grow after the first call to `execute`
+	var nb_threads = 5 is optional, writable
 
-	init do
-		for i in [0..nb_threads[ do
+	private fun create_threads do
+		while threads.length < nb_threads do
 			var t = new PoolThread(queue, mutex, cond)
 			t.start
+			threads.add t
 		end
 	end
 
-	private fun set_nb_threads(nb: nullable Int) is autoinit do nb_threads = nb or else 5
-
 	# Adds a Task into the queue
-	fun execute(task: JoinTask) do
+	fun execute(task: Task) do
+		create_threads
 		queue.push(task)
 		cond.signal
 	end
