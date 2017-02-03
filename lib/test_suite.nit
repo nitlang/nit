@@ -38,14 +38,25 @@ class TestSuite
 	fun after_test do end
 end
 
-# Method called before each test-suite.
-#
-# Redefine this method to factorize code that have to be
-# executed before every test suite.
-fun before_module do end
+redef class Sys
+	# Internal empty init.
+	private init nitunit do end
 
-# Method called after each test-suite.
-#
-# Redefine this method to factorize code that have to be
-# executed after every test suite.
-fun after_module do end
+	# No before test for the module
+	private fun before_test do end
+
+	# No after test for the module
+	private fun after_test do end
+
+	# Method called before each test-suite.
+	#
+	# Redefine this method to factorize code that have to be
+	# executed before every test suite.
+	fun before_module do end
+
+	# Method called after each test-suite.
+	#
+	# Redefine this method to factorize code that have to be
+	# executed after every test suite.
+	fun after_module do end
+end
