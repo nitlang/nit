@@ -124,6 +124,9 @@ class TestSuite
 
 	# Display test suite status in std-out.
 	fun show_status do
+		var test_cases = self.test_cases.to_a
+		if before_module != null then test_cases.add before_module.as(not null)
+		if after_module != null then test_cases.add after_module.as(not null)
 		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
 	end
 
@@ -148,8 +151,31 @@ class TestSuite
 			return
 		end
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
+
 		var before_module = self.before_module
-		if not before_module == null then before_module.run
+		var after_module = self.after_module
+
+		if before_module != null then
+			before_module.run
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(before_module)
+			if before_module.error != null then
+				for case in test_cases do
+					case.fail "Nitunit Error: before_module test failed"
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(case)
+				end
+				if after_module != null then
+					after_module.fail "Nitunit Error: before_module test failed"
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(after_module)
+				end
+				show_status
+				print ""
+				return
+			end
+		end
+
 		for case in test_cases do
 			case.run
 			toolcontext.clear_progress_bar
@@ -157,8 +183,12 @@ class TestSuite
 			show_status
 		end
 
-		var after_module = self.after_module
-		if not after_module == null then after_module.run
+		if not after_module == null then
+			after_module.run
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(after_module)
+			show_status
+		end
 
 		show_status
 		print ""
@@ -170,8 +200,16 @@ class TestSuite
 		file.addn "intrude import test_suite"
 		file.addn "import {mmodule.name}\n"
 		file.addn "var name = args.first"
+		var before_module = self.before_module
+		if before_module != null then
+			before_module.write_to_nit(file)
+		end
 		for case in test_cases do
 			case.write_to_nit(file)
+		end
+		var after_module = self.after_module
+		if after_module != null then
+			after_module.write_to_nit(file)
 		end
 		file.write_to_file("{test_file}.nit")
 	end
