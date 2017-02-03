@@ -138,10 +138,8 @@ class TestSuite
 		compile
 		if failure != null then
 			for case in test_cases do
-				case.is_done = true
-				case.error = "Compilation Error"
+				case.fail "Compilation Error"
 				case.raw_output = failure
-				toolcontext.modelbuilder.failed_tests += 1
 				toolcontext.clear_progress_bar
 				toolcontext.show_unit(case)
 			end
@@ -316,6 +314,15 @@ class TestCase
 			end
 		end
 		is_done = true
+	end
+
+	# Make the test case fail without testing it
+	#
+	# Useful when the compilation or the before_test failed.
+	fun fail(message: String) do
+		is_done = true
+		error = message
+		toolcontext.modelbuilder.failed_tests += 1
 	end
 
 	redef fun xml_classname do
