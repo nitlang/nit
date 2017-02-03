@@ -42,6 +42,15 @@ class ThreadPool
 		queue.push(task)
 		cond.signal
 	end
+
+	# Join all threads, waiting for all tasks to be completed
+	fun join_all do
+		# Wait
+		for t in threads do t.join
+
+		# Reset
+		threads.clear
+	end
 end
 
 # A Thread running in a threadpool
