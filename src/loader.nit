@@ -1045,7 +1045,7 @@ redef class ModelBuilder
 	# (and `build_module_importation` that calls it).
 	#
 	# TODO (when the loader will be rewritten): use a better representation and move up rules in the model.
-	private var conditional_importations = new Array[SequenceRead[MModule]]
+	var conditional_importations = new Array[SequenceRead[MModule]]
 
 	# Extends the current importations according to imported rules about conditional importation
 	fun apply_conditional_importations(mmodule: MModule)
@@ -1061,7 +1061,7 @@ redef class ModelBuilder
 				for i in [1..ci.length[ do
 					var m = ci[i]
 					# Is imported?
-					if not mmodule.in_importation.greaters.has(m) then continue label
+					if mmodule == m or not mmodule.in_importation.greaters.has(m) then continue label
 				end
 				# Still here? It means that all conditions modules are loaded and imported
 

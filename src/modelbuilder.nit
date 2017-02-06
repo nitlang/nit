@@ -38,14 +38,17 @@ redef class ToolContext
 	do
 		assert not mmodules.is_empty
 		var mainmodule
-		if mmodules.length == 1 then
+		# We need a main module, so we build it by importing all modules
+		mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
+		mainmodule.is_fictive = true
+		mainmodule.first_real_mmodule = mmodules.first.first_real_mmodule
+		mainmodule.set_imported_mmodules(mmodules)
+		modelbuilder.apply_conditional_importations(mainmodule)
+		if mainmodule.in_importation.direct_greaters.length == 1 and mainmodule.in_importation.direct_greaters.first == mmodules.first then
+			# Drop the fictive module if not needed
 			mainmodule = mmodules.first
 		else
-			# We need a main module, so we build it by importing all modules
-			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
-			mainmodule.is_fictive = true
-			mainmodule.set_imported_mmodules(mmodules)
-			modelbuilder.apply_conditional_importations(mainmodule)
+			# Or else run phases on it
 			modelbuilder.run_phases
 		end
 		return mainmodule
@@ -104,4 +107,22 @@ redef class ModelBuilder
 		end
 	end
 
+	# Load module `filename` and add it as a conditional importation of `mmodule`.
+	#
+	# This means that current (and future) submodules of `module` will also import `filename`.
+	fun inject_module_subimportation(mmodule: MModule, filename: String)
+	do
+		var am = load_module(filename)
+		if am == null then return # forward error
+		var mm = am.mmodule
+		if mm == null then return # forward error
+		# Add the new module before the existing submodules in the hierarchy
+		for subm in mmodule.in_importation.direct_smallers do
+			subm.set_imported_mmodules([mm])
+		end
+		# Register the new module as a conditional_importations for future submodules
+		conditional_importations.add([mm, mmodule])
+		# Register the new amodule to be processed by `run_phases`
+		toolcontext.todo_nmodules.unshift am
+	end
 end

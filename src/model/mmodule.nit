@@ -251,15 +251,13 @@ class MModule
 	# Is `self` a unit test module used by `nitunit`?
 	var is_test_suite: Bool = false is writable
 
-	# Get the first non `is_fictive` module greater than self
-	fun first_real_mmodule: MModule
-	do
-		var mmodule = self
-		while mmodule.is_fictive do
-			mmodule = mmodule.in_importation.direct_greaters.first
-		end
-		return mmodule
-	end
+	# Get the non-`is_fictive` module on which `self` is based on.
+	#
+	# On non-fictive module, this returns `self`.
+	# On fictive modules, this is used to refer the module which `self` is based on.
+	#
+	# This attribute should be set when a fictive module is created. See `is_fictive`.
+	var first_real_mmodule: MModule = self is writable
 
 	redef fun parent_concern do return mgroup
 end

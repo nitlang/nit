@@ -89,41 +89,45 @@
   total: 0
 --- Poset metrics ---
 ## Module importation hierarchy
-Number of nodes: 1
-Number of edges: 1 (1.00 per node)
-Number of direct edges: 0 (0.00 per node)
+Number of nodes: 2
+Number of edges: 3 (1.50 per node)
+Number of direct edges: 1 (0.50 per node)
 Distribution of greaters
- population: 1
+ population: 2
  minimum value: 1
- maximum value: 1
- total value: 1
- average value: 1.00
+ maximum value: 2
+ total value: 3
+ average value: 1.50
  distribution:
-  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
+  <=1: sub-population=1 (50.00%); cumulated value=1 (33.33%)
+  <=2: sub-population=1 (50.00%); cumulated value=2 (66.66%)
 Distribution of direct greaters
- population: 1
+ population: 2
  minimum value: 0
- maximum value: 0
- total value: 0
- average value: 0.00
- distribution:
-  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
-Distribution of smallers
- population: 1
- minimum value: 1
  maximum value: 1
  total value: 1
- average value: 1.00
+ average value: 0.50
  distribution:
-  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
+  <=0: sub-population=1 (50.00%); cumulated value=0 (0.00%)
+  <=1: sub-population=1 (50.00%); cumulated value=1 (100.00%)
+Distribution of smallers
+ population: 2
+ minimum value: 1
+ maximum value: 2
+ total value: 3
+ average value: 1.50
+ distribution:
+  <=1: sub-population=1 (50.00%); cumulated value=1 (33.33%)
+  <=2: sub-population=1 (50.00%); cumulated value=2 (66.66%)
 Distribution of direct smallers
- population: 1
+ population: 2
  minimum value: 0
- maximum value: 0
- total value: 0
- average value: 0.00
+ maximum value: 1
+ total value: 1
+ average value: 0.50
  distribution:
-  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
+  <=0: sub-population=1 (50.00%); cumulated value=0 (0.00%)
+  <=1: sub-population=1 (50.00%); cumulated value=1 (100.00%)
 ## Classdef hierarchy
 Number of nodes: 7
 Number of edges: 13 (1.85 per node)
@@ -205,7 +209,7 @@ Distribution of direct smallers
   <=0: sub-population=6 (85.71%); cumulated value=0 (0.00%)
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
 --- Metrics of refinement usage ---
-Number of modules: 1
+Number of modules: 2
 
 Number of classes: 7
   Number of interface kind: 1 (14.28%)
@@ -417,17 +421,17 @@ generating module_hierarchy.dot
 	  std: 0.0
 	  sum: 0
 	mnoc: number of child modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
 	  std: 0.0
-	  sum: 0
+	  sum: 1
 	mnod: number of descendant modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
 	  std: 0.0
-	  sum: 0
+	  sum: 1
 	mdit: depth in module tree
 	  avg: 0.0
 	  max: base_simple3 (0)
@@ -479,17 +483,17 @@ generating module_hierarchy.dot
 	  std: 0.0
 	  sum: 0
 	mnoc: number of child modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
 	  std: 0.0
-	  sum: 0
+	  sum: 1
 	mnod: number of descendant modules
-	  avg: 0.0
-	  max: base_simple3 (0)
-	  min: base_simple3 (0)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
 	  std: 0.0
-	  sum: 0
+	  sum: 1
 	mdit: depth in module tree
 	  avg: 0.0
 	  max: base_simple3 (0)
