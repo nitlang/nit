@@ -23,7 +23,7 @@ in "C header" `{
 
 in "C" `{
 
-#ifdef __MACH__
+#if defined(__MACH__) && !defined(CLOCK_REALTIME)
 /* OS X does not have clock_gettime, mascarade it and use clock_get_time
  * cf http://stackoverflow.com/questions/11680461/monotonic-clock-on-osx
 */
@@ -148,7 +148,7 @@ class Clock
 	# Smallest time frame reported by clock
 	fun resolution: Timespec `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
-#ifdef __MACH__
+#if defined(__MACH__) && !defined(CLOCK_REALTIME)
 		clock_serv_t cclock;
 		int nsecs;
 		mach_msg_type_number_t count;
