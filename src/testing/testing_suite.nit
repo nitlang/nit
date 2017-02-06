@@ -124,6 +124,9 @@ class TestSuite
 
 	# Display test suite status in std-out.
 	fun show_status do
+		var test_cases = self.test_cases.to_a
+		if before_module != null then test_cases.add before_module.as(not null)
+		if after_module != null then test_cases.add after_module.as(not null)
 		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
 	end
 
@@ -138,10 +141,8 @@ class TestSuite
 		compile
 		if failure != null then
 			for case in test_cases do
-				case.is_done = true
-				case.error = "Compilation Error"
+				case.fail "Compilation Error"
 				case.raw_output = failure
-				toolcontext.modelbuilder.failed_tests += 1
 				toolcontext.clear_progress_bar
 				toolcontext.show_unit(case)
 			end
@@ -150,8 +151,31 @@ class TestSuite
 			return
 		end
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
+
 		var before_module = self.before_module
-		if not before_module == null then before_module.run
+		var after_module = self.after_module
+
+		if before_module != null then
+			before_module.run
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(before_module)
+			if before_module.error != null then
+				for case in test_cases do
+					case.fail "Nitunit Error: before_module test failed"
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(case)
+				end
+				if after_module != null then
+					after_module.fail "Nitunit Error: before_module test failed"
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(after_module)
+				end
+				show_status
+				print ""
+				return
+			end
+		end
+
 		for case in test_cases do
 			case.run
 			toolcontext.clear_progress_bar
@@ -159,8 +183,12 @@ class TestSuite
 			show_status
 		end
 
-		var after_module = self.after_module
-		if not after_module == null then after_module.run
+		if not after_module == null then
+			after_module.run
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(after_module)
+			show_status
+		end
 
 		show_status
 		print ""
@@ -172,8 +200,16 @@ class TestSuite
 		file.addn "intrude import test_suite"
 		file.addn "import {mmodule.name}\n"
 		file.addn "var name = args.first"
+		var before_module = self.before_module
+		if before_module != null then
+			before_module.write_to_nit(file)
+		end
 		for case in test_cases do
 			case.write_to_nit(file)
+		end
+		var after_module = self.after_module
+		if after_module != null then
+			after_module.write_to_nit(file)
 		end
 		file.write_to_file("{test_file}.nit")
 	end
@@ -318,6 +354,15 @@ class TestCase
 		is_done = true
 	end
 
+	# Make the test case fail without testing it
+	#
+	# Useful when the compilation or the before_test failed.
+	fun fail(message: String) do
+		is_done = true
+		error = message
+		toolcontext.modelbuilder.failed_tests += 1
+	end
+
 	redef fun xml_classname do
 		var a = test_method.full_name.split("$")
 		return "nitunit.{a[0]}.{a[1]}"
@@ -337,10 +382,10 @@ redef class MMethodDef
 	private fun is_test: Bool do return name.has_prefix("test_")
 
 	# Is the method a "before_module"?
-	private fun is_before_module: Bool do return mproperty.is_toplevel and name == "before_module"
+	private fun is_before_module: Bool do return name == "before_module"
 
 	# Is the method a "after_module"?
-	private fun is_after_module: Bool do return mproperty.is_toplevel and name == "after_module"
+	private fun is_after_module: Bool do return name == "after_module"
 end
 
 redef class MClassDef
@@ -360,7 +405,7 @@ redef class MModule
 	# "before_module" method for this module.
 	private fun before_test: nullable MMethodDef do
 		for mclassdef in mclassdefs do
-			if not mclassdef.name == "Object" then continue
+			if not mclassdef.name == "Sys" then continue
 			for mpropdef in mclassdef.mpropdefs do
 				if mpropdef isa MMethodDef and mpropdef.is_before_module then return mpropdef
 			end
@@ -371,7 +416,7 @@ redef class MModule
 	# "after_module" method for this module.
 	private fun after_test: nullable MMethodDef do
 		for mclassdef in mclassdefs do
-			if not mclassdef.name == "Object" then continue
+			if not mclassdef.name == "Sys" then continue
 			for mpropdef in mclassdef.mpropdefs do
 				if mpropdef isa MMethodDef and mpropdef.is_after_module then return mpropdef
 			end
