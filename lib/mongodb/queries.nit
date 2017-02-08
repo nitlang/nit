@@ -479,6 +479,20 @@ class MongoPipeline
 	# { $group: { <group> } }
 	# ~~~
 	fun group(group: MongoGroup): MongoPipeline do return add_stage("group", group)
+
+	# Apply unwind
+	#
+	# https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
+	#
+	# Deconstructs an array field from the input documents to output a document
+	# for each element.
+	# Each output document is the input document with the value of the array
+	# field replaced by the element.
+	#
+	# ~~~json
+	# { $unwind: <field path> }
+	# ~~~
+	fun unwind(path: String): MongoPipeline do return add_stage("unwind", path)
 end
 
 # Mongo pipeline group stage
