@@ -1610,7 +1610,7 @@ abstract class AbstractCompilerVisitor
 	fun int8_instance(value: Int8): RuntimeVariable
 	do
 		var t = mmodule.int8_type
-		var res = new RuntimeVariable("((int8_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT8_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1618,7 +1618,7 @@ abstract class AbstractCompilerVisitor
 	fun int16_instance(value: Int16): RuntimeVariable
 	do
 		var t = mmodule.int16_type
-		var res = new RuntimeVariable("((int16_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT16_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1626,7 +1626,7 @@ abstract class AbstractCompilerVisitor
 	fun uint16_instance(value: UInt16): RuntimeVariable
 	do
 		var t = mmodule.uint16_type
-		var res = new RuntimeVariable("((uint16_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("UINT16_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1634,7 +1634,7 @@ abstract class AbstractCompilerVisitor
 	fun int32_instance(value: Int32): RuntimeVariable
 	do
 		var t = mmodule.int32_type
-		var res = new RuntimeVariable("((int32_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT32_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1642,7 +1642,7 @@ abstract class AbstractCompilerVisitor
 	fun uint32_instance(value: UInt32): RuntimeVariable
 	do
 		var t = mmodule.uint32_type
-		var res = new RuntimeVariable("((uint32_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("UINT32_C({value.to_s})", t, t)
 		return res
 	end
 
