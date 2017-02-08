@@ -13,3 +13,4 @@ module text
 
 import ropes
 import string_search
+import fixed_ints_text
