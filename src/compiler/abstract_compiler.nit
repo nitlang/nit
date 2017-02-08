@@ -3057,7 +3057,7 @@ redef class AMethPropdef
 			end
 		end
 		if pname == "exit" then
-			v.add("exit({arguments[1]});")
+			v.add("exit((int){arguments[1]});")
 			return true
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
