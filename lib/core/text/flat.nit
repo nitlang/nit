@@ -1359,7 +1359,7 @@ redef class CString
 		while rem > 0 do
 			while rem >= 4 do
 				var i = fetch_4_chars(pos)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				pos += 4
 				chr_ln += 4
 				rem -= 4

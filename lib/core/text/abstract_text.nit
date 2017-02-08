@@ -789,17 +789,17 @@ abstract class Text
 		if pos == null then pos = 0
 		if ln == null then ln = length - pos
 		if ln < 6 then return 0xFFFD.code_point
-		var cp = from_utf16_digit(pos + 2)
-		if cp < 0xD800 then return cp.code_point
-		if cp > 0xDFFF then return cp.code_point
-		if cp > 0xDBFF then return 0xFFFD.code_point
+		var cp = from_utf16_digit(pos + 2).to_u32
+		if cp < 0xD800u32 then return cp.code_point
+		if cp > 0xDFFFu32 then return cp.code_point
+		if cp > 0xDBFFu32 then return 0xFFFD.code_point
 		if ln == 6 then return 0xFFFD.code_point
 		if ln < 12 then return 0xFFFD.code_point
 		cp <<= 16
-		cp += from_utf16_digit(pos + 8)
-		var cplo = cp & 0xFFFF
-		if cplo < 0xDC00 then return 0xFFFD.code_point
-		if cplo > 0xDFFF then return 0xFFFD.code_point
+		cp += from_utf16_digit(pos + 8).to_u32
+		var cplo = cp & 0xFFFFu32
+		if cplo < 0xDC00u32 then return 0xFFFD.code_point
+		if cplo > 0xDFFFu32 then return 0xFFFD.code_point
 		return cp.from_utf16_surr.code_point
 	end
 

@@ -13,6 +13,7 @@ module native
 
 import kernel
 import math
+import fixed_ints
 
 in "C" `{
 #ifdef __linux__
@@ -68,19 +69,26 @@ redef class Byte
 	end
 end
 
-redef class Int
+redef class UInt32
 	# Returns the code_point from a utf16 surrogate pair
 	#
-	#     assert 0xD83DDE02.from_utf16_surr == 0x1F602
-	fun from_utf16_surr: Int do
-		var hi = (self & 0xFFFF0000) >> 16
-		var lo = self & 0xFFFF
-		var cp = 0
-		cp += (hi - 0xD800) << 10
-		cp += lo - 0xDC00
-		cp += 0x10000
+	#     assert 0xD83DDE02u32.from_utf16_surr == 0x1F602u32
+	fun from_utf16_surr: UInt32 do
+		var hi = (self & 0xFFFF0000u32) >> 16
+		var lo = self & 0xFFFFu32
+		var cp = 0u32
+		cp += (hi - 0xD800u32) << 10
+		cp += lo - 0xDC00u32
+		cp += 0x10000u32
 		return cp
 	end
+
+	# The character which code point (unicode-wise) is `self`
+	#
+	#     assert 65u32.code_point == 'A'
+	#     assert 10u32.code_point == '\n'
+	#     assert 0x220Bu32.code_point == '∋'
+	fun code_point: Char `{ return self; `}
 end
 
 # C string `char *`
@@ -141,26 +149,26 @@ extern class CString `{ char* `}
 		var c = self[pos]
 		if c & 0x80u8 == 0u8 then return c.ascii
 		var b = fetch_4_hchars(pos)
-		var ret = 0
-		if b & 0xC00000 != 0x800000 then return 0xFFFD.code_point
-		if b & 0xE0000000 == 0xC0000000 then
-			ret |= (b & 0x1F000000) >> 18
-			ret |= (b & 0x3F0000) >> 16
+		var ret = 0u32
+		if b & 0xC00000u32 != 0x800000u32 then return 0xFFFD.code_point
+		if b & 0xE0000000u32 == 0xC0000000u32 then
+			ret |= (b & 0x1F000000u32) >> 18
+			ret |= (b & 0x3F0000u32) >> 16
 			return ret.code_point
 		end
-		if not b & 0xC000 == 0x8000 then return 0xFFFD.code_point
-		if b & 0xF0000000 == 0xE0000000 then
-			ret |= (b & 0xF000000) >> 12
-			ret |= (b & 0x3F0000) >> 10
-			ret |= (b & 0x3F00) >> 8
+		if not b & 0xC000u32 == 0x8000u32 then return 0xFFFD.code_point
+		if b & 0xF0000000u32 == 0xE0000000u32 then
+			ret |= (b & 0xF000000u32) >> 12
+			ret |= (b & 0x3F0000u32) >> 10
+			ret |= (b & 0x3F00u32) >> 8
 			return ret.code_point
 		end
-		if not b & 0xC0 == 0x80 then return 0xFFFD.code_point
-		if b & 0xF8000000 == 0xF0000000 then
-			ret |= (b.to_i & 0x7000000) >> 6
-			ret |= (b.to_i & 0x3F0000) >> 4
-			ret |= (b.to_i & 0x3F00) >> 2
-			ret |= b.to_i & 0x3F
+		if not b & 0xC0u32 == 0x80u32 then return 0xFFFD.code_point
+		if b & 0xF8000000u32 == 0xF0000000u32 then
+			ret |= (b & 0x7000000u32) >> 6
+			ret |= (b & 0x3F0000u32) >> 4
+			ret |= (b & 0x3F00u32) >> 2
+			ret |= b & 0x3Fu32
 			return ret.code_point
 		end
 		return 0xFFFD.code_point
@@ -200,7 +208,7 @@ extern class CString `{ char* `}
 		while dist > 0 do
 			while dist >= 4 do
 				var i = fetch_4_chars(ns_i)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				ns_i += 4
 				my_i += 4
 				dist -= 4
@@ -214,7 +222,7 @@ extern class CString `{ char* `}
 		while dist < 0 do
 			while dist <= -4 do
 				var i = fetch_4_chars(ns_i - 4)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				ns_i -= 4
 				my_i -= 4
 				dist += 4
@@ -256,8 +264,8 @@ extern class CString `{ char* `}
 	# If the char is invalid UTF-8, `pos` is returned as-is
 	#
 	# ~~~raw
-	# 	assert "abc".items.find_beginning_of_char_at(2) == 2
-	# 	assert "か".items.find_beginning_of_char_at(1) == 0
+	#	assert "abc".items.find_beginning_of_char_at(2) == 2
+	#	assert "か".items.find_beginning_of_char_at(1) == 0
 	#	assert [0x41u8, 233u8].to_s.items.find_beginning_of_char_at(1) == 1
 	# ~~~
 	fun find_beginning_of_char_at(pos: Int): Int do
@@ -280,7 +288,7 @@ extern class CString `{ char* `}
 		while byte_length > 0 do
 			while byte_length >= 4 do
 				var i = fetch_4_chars(st)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				byte_length -= 4
 				st += 4
 				ln += 4
@@ -295,11 +303,10 @@ extern class CString `{ char* `}
 	end
 
 	# Fetch 4 chars in `self` at `pos`
-	fun fetch_4_chars(pos: Int): Int is intern `{ return (long)*((uint32_t*)(self+pos)); `}
+	fun fetch_4_chars(pos: Int): UInt32 is intern `{ return *((uint32_t*)(self+pos)); `}
 
 	# Fetch 4 chars in `self` at `pos`
-	fun fetch_4_hchars(pos: Int): Int is intern `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
-
+	fun fetch_4_hchars(pos: Int): UInt32 is intern `{ return (uint32_t)be32toh(*((uint32_t*)(self+pos))); `}
 
 	# Right shifts `len` bytes of `self` from `sh` bytes starting at position `pos`
 	fun rshift(sh, len, pos: Int) do

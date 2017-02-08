@@ -2612,10 +2612,10 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
-				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
+				v.ret(v.new_expr("*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_hchars" then
-				v.ret(v.new_expr("(long)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then

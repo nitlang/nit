@@ -1174,9 +1174,9 @@ redef class AMethPropdef
 				var ns = recvval.fast_cstring(args[1].to_i)
 				return v.c_string_instance(ns.to_s)
 			else if pname == "fetch_4_chars" then
-				return v.int_instance(args[0].val.as(CString).fetch_4_chars(args[1].to_i))
+				return v.uint32_instance(args[0].val.as(CString).fetch_4_chars(args[1].to_i))
 			else if pname == "fetch_4_hchars" then
-				return v.int_instance(args[0].val.as(CString).fetch_4_hchars(args[1].to_i))
+				return v.uint32_instance(args[0].val.as(CString).fetch_4_hchars(args[1].to_i))
 			else if pname == "utf8_length" then
 				return v.int_instance(args[0].val.as(CString).utf8_length(args[1].to_i, args[2].to_i))
 			end
