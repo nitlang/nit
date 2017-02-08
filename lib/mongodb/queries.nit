@@ -87,7 +87,7 @@ class MongoMatch
 			q["${name}"] = value
 			self[field] = q
 		else
-			self[name] = value
+			self["${name}"] = value
 		end
 		return self
 	end
