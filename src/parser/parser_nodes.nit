@@ -39,10 +39,15 @@ abstract class ANode
 	fun is_structural: Bool do return false
 
 	# Write the subtree on stdout.
-	# See `ASTDump`
-	fun dump_tree(display_structural: nullable Bool)
+	#
+	# Visit the subtree and display it with additional and useful information.
+	#
+	# By default, this displays all kind of nodes and the corresponding lines of codes.
+	#
+	# See `ASTDump` for details.
+	fun dump_tree(display_structural, display_line: nullable Bool)
 	do
-		var d = new ASTDump(display_structural or else true)
+		var d = new ASTDump(display_structural or else true, display_line or else true)
 		d.enter_visit(self)
 		d.write_to(sys.stdout)
 	end
@@ -191,6 +196,14 @@ class ASTDump
 	# Should tokens (and structural production like AQId) be displayed?
 	var display_structural: Bool
 
+	# Display lines?
+	#
+	# Should each new line be displayed (numbered and in gray)?
+	var display_line: Bool
+
+	# Current line number (when printing lines)
+	private var line = 0
+
 	redef fun visit(n)
 	do
 		if not display_structural and n.is_structural then return
@@ -199,6 +212,25 @@ class ASTDump
 		last_parent = n
 		n.visit_all(self)
 		last_parent = p
+	end
+
+	redef fun write_line(o, n, p)
+	do
+		if display_line then
+			var ls = n.location.line_start
+			var file = n.location.file
+			var line = self.line
+			if ls > line and file != null then
+				if line == 0 then line = ls - 1
+				while line < ls do
+					line += 1
+					o.write "{line}\t{file.get_line(line)}\n".light_gray
+				end
+				self.line = ls
+			end
+		end
+
+		super
 	end
 
 	redef fun display(n)
