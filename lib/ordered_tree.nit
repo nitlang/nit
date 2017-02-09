@@ -147,8 +147,7 @@ class OrderedTree[E: Object]
 	redef fun write_to(stream: Writer)
 	do
 		for r in roots do
-			stream.write display(r)
-			stream.write "\n"
+			write_line(stream, r, "")
 			sub_write_to(stream, r, "")
 		end
 	end
@@ -161,13 +160,27 @@ class OrderedTree[E: Object]
 		var last = subs.last
 		for e2 in subs do
 			if e2 != last then
-				o.write "{prefix}|--{display(e2)}\n"
+				write_line(o, e2, prefix+"|--")
 				sub_write_to(o, e2, prefix+"|  ")
 			else
-				o.write "{prefix}`--{display(e2)}\n"
+				write_line(o, e2, prefix+"`--")
 				sub_write_to(o, e2, prefix+"   ")
 			end
 		end
+	end
+
+	# Write the full line for the element `e` in `o`.
+	#
+	# Basically it does:
+	#
+	# ~~~nitish
+	# o.write "{prefix}{display(e)}\n"
+	# ~~~
+	#
+	# Usually, you should redefine `display` to change the display of an element.
+	protected fun write_line(o: Writer, e: E, prefix: String)
+	do
+		o.write "{prefix}{display(e)}\n"
 	end
 
 	# Sort roots and other elements using a comparator method
