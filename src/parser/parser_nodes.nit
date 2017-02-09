@@ -39,9 +39,9 @@ abstract class ANode
 
 	# Write the subtree on stdout.
 	# See `ASTDump`
-	fun dump_tree
+	fun dump_tree(display_structural: nullable Bool)
 	do
-		var d = new ASTDump
+		var d = new ASTDump(display_structural or else true)
 		d.enter_visit(self)
 		d.write_to(sys.stdout)
 	end
@@ -180,8 +180,14 @@ class ASTDump
 	# Is used to handle the initial node parent and workaround possible inconsistent `ANode::parent`
 	private var last_parent: nullable ANode = null
 
+	# Display tokens and structural production?
+	#
+	# Should tokens (and structural production like AQId) be displayed?
+	var display_structural: Bool
+
 	redef fun visit(n)
 	do
+		if not display_structural and n.is_structural then return
 		var p = last_parent
 		add(p, n)
 		last_parent = n
