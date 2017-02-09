@@ -18,6 +18,7 @@ module parser_nodes
 
 import location
 import ordered_tree
+private import console
 
 # Root of the AST class-hierarchy
 abstract class ANode
@@ -204,6 +205,12 @@ class ASTDump
 	do
 		return "{n.class_name} {n.dump_info(self)} @{n.location}"
 	end
+
+	# `s` as yellow
+	fun yellow(s: String): String do return s.yellow
+
+	# `s` as red
+	fun red(s: String): String do return s.red
 end
 
 # A sequence of nodes
