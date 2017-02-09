@@ -34,6 +34,9 @@ abstract class ANode
 		sys.stderr.write "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}\n"
 	end
 
+	# Is `self` a token or a pure-structural production like `AQId`?
+	fun is_structural: Bool do return false
+
 	# Write the subtree on stdout.
 	# See `ASTDump`
 	fun dump_tree
@@ -330,6 +333,8 @@ abstract class Token
 	# Whitespace are ignored by the lexer, so they are not even considered as loose tokens.
 	# See `blank_before` to get the whitespace that separate tokens.
 	var is_loose = false
+
+	redef fun is_structural do return true
 
 	# Loose tokens that precede `self`.
 	#
@@ -1667,6 +1672,8 @@ class AQid
 
 	# The final identifier
 	var n_id: TId is writable, noinit
+
+	redef fun is_structural do return true
 end
 
 # A potentially qualified class identifier `foo::bar::Baz`
@@ -1677,6 +1684,8 @@ class AQclassid
 
 	# The final identifier
 	var n_id: TClassid is writable, noinit
+
+	redef fun is_structural do return true
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
