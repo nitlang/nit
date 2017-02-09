@@ -46,6 +46,11 @@ abstract class ANode
 		d.write_to(sys.stdout)
 	end
 
+	# Information to display on a node
+	#
+	# Refine this method to add additional information on each node type.
+	fun dump_info(v: ASTDump): String do return ""
+
 	# Parent of the node in the AST
 	var parent: nullable ANode = null
 
@@ -197,11 +202,7 @@ class ASTDump
 
 	redef fun display(n)
 	do
-		if n isa Token then
-			return "{n.class_name} \"{n.text.escape_to_c}\" @{n.location}"
-		else
-			return "{n.class_name} @{n.location}"
-		end
+		return "{n.class_name} {n.dump_info(self)} @{n.location}"
 	end
 end
 
@@ -341,6 +342,8 @@ abstract class Token
 	var is_loose = false
 
 	redef fun is_structural do return true
+
+	redef fun dump_info(v) do return " {text.escape_to_c}"
 
 	# Loose tokens that precede `self`.
 	#
