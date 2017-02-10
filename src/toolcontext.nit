@@ -566,7 +566,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 	#
 	# It uses, in order:
 	#
-	# * the option `opt_no_color`
+	# * the option `opt_nit_dir`
 	# * the environment variable `NIT_DIR`
 	# * the runpath of the program from argv[0]
 	# * the runpath of the process from /proc
@@ -610,7 +610,8 @@ The Nit language documentation and the source code of its tools and libraries ma
 		end
 
 		# search in the PATH
-		var ps = "PATH".environ.split(":")
+		var path_sep = if is_windows then ";" else ":"
+		var ps = "PATH".environ.split(path_sep)
 		for p in ps do
 			res = p/".."
 			if check_nit_dir(res) then return res.simplify_path
