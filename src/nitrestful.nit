@@ -23,7 +23,7 @@ private class RestfulPhase
 	super Phase
 
 	# Classes with methods marked with the `restful` annotation
-	var restful_classes = new HashSet[MClass]
+	var restful_classes = new HashSet[MClassDef]
 
 	redef fun process_annotated_node(node, nat)
 	do
@@ -37,6 +37,12 @@ private class RestfulPhase
 			return
 		end
 
+		var mpropdef = node.mpropdef
+		if mpropdef == null then return
+		var mproperty = mpropdef.mproperty
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
+
 		var http_resources = new Array[String]
 		var http_methods = new Array[String]
 		for arg in nat.n_args do
@@ -48,19 +54,14 @@ private class RestfulPhase
 			else if arg isa ATypeExpr and not id.chars.has("[") then
 				# Class id -> HTTP method
 				http_methods.add id
+			else if id == "async" then
+				mproperty.restful_async = true
 			else
 				toolcontext.error(nat.location,
 					"Syntax Error: `restful` expects String literals or ids as arguments.")
 				return
 			end
 		end
-
-		var mpropdef = node.mpropdef
-		if mpropdef == null then return
-
-		var mproperty = mpropdef.mproperty
-		var mclassdef = mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
 
 		# Test subclass of `RestfulAction`
 		var sup_class_name = "RestfulAction"
@@ -76,16 +77,15 @@ private class RestfulPhase
 		end
 
 		# Register the property
-		var mclass = mclassdef.mclass
-		mclass.restful_methods.add mproperty
-		restful_classes.add mclass
+		mclassdef.restful_methods.add mproperty
+		restful_classes.add mclassdef
 
 		if http_resources.not_empty then mproperty.restful_resources = http_resources
 		mproperty.restful_verbs = http_methods
 	end
 end
 
-redef class MClass
+redef class MClassDef
 
 	# Methods with the `restful` annotation in this class
 	private var restful_methods = new Array[MMethod]
@@ -97,6 +97,9 @@ redef class MMethod
 
 	# Associated resources within an action, e.g. `foo` in `http://localhost/foo?arg=bar`
 	private var restful_resources: Array[String] = [name] is lazy
+
+	# Is this a `restful` method to be executed asynchronously
+	private var restful_async = false
 end
 
 redef class ToolContext
@@ -128,7 +131,7 @@ redef class MType
 		else
 			# Deserialize everything else
 			template.add """
-			var out_{{{arg_name}}} = deserialize_arg(in_{{{arg_name}}})
+			var out_{{{arg_name}}} = deserialize_arg(in_{{{arg_name}}}, "{{{self.name}}}")
 """
 		end
 	end
@@ -203,29 +206,33 @@ end
 var phase = toolcontext.restful_phase
 assert phase isa RestfulPhase
 
-for mclass in phase.restful_classes do
+for mclassdef in phase.restful_classes do
+	var mclass = mclassdef.mclass
 
 	var t = new Template
 	nit_module.content.add t
 
+	var classes = new Template
+	nit_module.content.add classes
+
 	t.add """
 redef class {{{mclass}}}
-	redef fun answer(request, truncated_uri)
+	redef fun prepare_respond_and_close(request, truncated_uri, http_server)
 	do
 		var resources = truncated_uri.split("/")
 		if resources.not_empty and resources.first.is_empty then resources.shift
 
-		if resources.length != 1 then return super
+		if resources.length != 1 then
+			super
+			return
+		end
 		var resource = resources.first
 
 """
-	var methods = mclass.restful_methods
+	var methods = mclassdef.restful_methods
 	for i in methods.length.times, method in methods do
 		var msig = method.intro.msignature
 		if msig == null then continue
-
-		t.add "		"
-		if i != 0 then t.add "else "
 
 		# Condition to select this method from a request
 		var conds = new Array[String]
@@ -242,7 +249,8 @@ redef class {{{mclass}}}
 			conds.add "(" + method_conds.join(" or ") + ")"
 		end
 
-		t.add """if {{{conds.join(" and ")}}} then
+		t.add """
+		if {{{conds.join(" and ")}}} then
 """
 
 		# Extract the arguments from the request for the method call
@@ -255,7 +263,11 @@ redef class {{{mclass}}}
 """
 
 			var mtype = param.mtype
-			mtype.gen_arg_convert(t, param.name)
+			var bound_mtype = mclassdef.bound_mtype
+			var resolved_mtype = mtype.resolve_for(bound_mtype, bound_mtype, mclassdef.mmodule, true)
+			var resolved_type_name = resolved_mtype.name
+
+			resolved_mtype.gen_arg_convert(t, param.name)
 
 			var arg = "out_{param.name}"
 			args.add arg
@@ -268,22 +280,67 @@ redef class {{{mclass}}}
 		end
 
 		if isas.not_empty then t.add """
-			if not {{{isas.join(" or not ")}}} then
-				return super
-			end
+			if {{{isas.join(" and ")}}} then
 """
 
 		var sig = ""
 		if args.not_empty then sig = "({args.join(", ")})"
 
+		if not method.restful_async then
+			# Synchronous method
+			t.add """
+				var response = {{{method.name}}}{{{sig}}}
+				http_server.respond response
+				http_server.close
+				return
+"""
+		else
+			# Asynchronous method
+			var task_name = "Task_{mclass}_{method.name}"
+			args.unshift "http_server"
+			args.unshift "request"
+			args.unshift "self"
+
+			t.add """
+				var task = new {{{task_name}}}({{{args.join(", ")}}})
+				self.thread_pool.execute task
+				return
+"""
+
+			var thread_attribs = new Array[String]
+			for param in msig.mparameters do
+				thread_attribs.add """
+	private var out_{{{param.name}}}: {{{param.mtype}}}"""
+			end
+
+			classes.add """
+
+# Generated task to execute {{{mclass}}}::{{{method.name}}}
+class {{{task_name}}}
+	super RestfulTask
+
+	redef type A: {{{mclass}}}
+
+{{{thread_attribs.join("\n")}}}
+
+	redef fun indirect_restful_method
+	do
+		return action.{{{method.name}}}{{{sig}}}
+	end
+end
+"""
+		end
+
+		if isas.not_empty then t.add """
+			end
+"""
 		t.add """
-			return {{{method.name}}}{{{sig}}}
+		end
 """
 	end
 
 	t.add """
-		end
-		return super
+		super
 	end
 end"""
 end
