@@ -94,6 +94,7 @@ abstract
 intern
 extern
 no_warning
+generated
 
 auto_inspect
 
