@@ -2085,7 +2085,7 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	redef fun native_array_instance(elttype, length)
 	do
 		var mtype = mmodule.native_array_type(elttype)
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
@@ -2098,11 +2098,11 @@ class SeparateCompilerVisitor
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			self.require_declaration(mtype.const_color)
-			return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
+			return self.new_expr("NEW_{mtype.mclass.c_name}((int){length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 		end
 		compiler.undead_types.add(mtype)
 		self.require_declaration("type_{mtype.c_name}")
-		return self.new_expr("NEW_{mtype.mclass.c_name}({length}, &type_{mtype.c_name})", mtype)
+		return self.new_expr("NEW_{mtype.mclass.c_name}((int){length}, &type_{mtype.c_name})", mtype)
 	end
 
 	redef fun native_array_def(pname, ret_type, arguments)

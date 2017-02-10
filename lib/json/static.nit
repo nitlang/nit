@@ -81,7 +81,7 @@ redef class Text
 						if self[i + 5] == '\\' and self[i + 6] == 'u' then
 							u16_esc <<= 16
 							u16_esc += from_utf16_digit(i + 7)
-							char = u16_esc.from_utf16_surr.code_point
+							char = u16_esc.to_u32.from_utf16_surr.code_point
 							i += 6
 						else
 							char = 0xFFFD.code_point

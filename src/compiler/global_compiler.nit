@@ -405,12 +405,12 @@ class GlobalCompilerVisitor
 		return false
 	end
 
-	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	redef fun native_array_instance(elttype, length)
 	do
 		var ret_type = mmodule.native_array_type(elttype)
 		ret_type = anchor(ret_type).as(MClassType)
 		length = autobox(length, compiler.mainmodule.int_type)
-		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
+		return self.new_expr("NEW_{ret_type.c_name}((int){length})", ret_type)
 	end
 
 	redef fun native_array_get(nat, i)
