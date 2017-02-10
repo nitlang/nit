@@ -481,6 +481,14 @@ redef class ANode
 	# Note that the broken status is not propagated to parent or children nodes.
 	# e.g. a broken expression used as argument does not make the whole call broken.
 	var is_broken = false is writable
+
+	redef fun dump_info(v) do
+		var res = super
+		if is_broken then
+			res += v.red("*broken*")
+		end
+		return res
+	end
 end
 
 redef class AType
@@ -489,6 +497,15 @@ redef class AType
 
 	# Is the mtype a valid one?
 	var checked_mtype: Bool = false
+
+	redef fun dump_info(v) do
+		var res = super
+		var mtype = self.mtype
+		if mtype != null then
+			res += v.yellow(":{mtype}")
+		end
+		return res
+	end
 end
 
 redef class AVisibility

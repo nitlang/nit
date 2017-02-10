@@ -677,6 +677,11 @@ class CallSite
 		if map == null then is_broken = true
 		return map == null
 	end
+
+	# Information about the callsite to display on a node
+	fun dump_info(v: ASTDump): String do
+		return "{recv}.{mpropdef}{msignature}"
+	end
 end
 
 redef class Variable
@@ -880,6 +885,19 @@ redef class AExpr
 	#
 	# This attribute is meaning less on expressions not used as attributes.
 	var vararg_decl: Int = 0
+
+	redef fun dump_info(v) do
+		var res = super
+		var mtype = self.mtype
+		if mtype != null then
+			res += v.yellow(":{mtype}")
+		end
+		var ict = self.implicit_cast_to
+		if ict != null then
+			res += v.yellow("(.as({ict}))")
+		end
+		return res
+	end
 end
 
 redef class ABlockExpr
@@ -1684,6 +1702,16 @@ redef class AIsaExpr
 	do
 		v.check_expr_cast(self, self.n_expr, self.n_type)
 	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var mtype = self.cast_type
+		if mtype != null then
+			res += v.yellow(".as({mtype})")
+		end
+		return res
+	end
+
 end
 
 redef class AAsCastExpr
@@ -1849,6 +1877,15 @@ redef class ASendExpr
 	fun raw_arguments: Array[AExpr] do return compute_raw_arguments
 
 	private fun compute_raw_arguments: Array[AExpr] is abstract
+
+	redef fun dump_info(v) do
+		var res = super
+		var callsite = self.callsite
+		if callsite != null then
+			res += v.yellow(" call="+callsite.dump_info(v))
+		end
+		return res
+	end
 end
 
 redef class ABinopExpr
@@ -2099,6 +2136,19 @@ redef class ASuperExpr
 
 		self.is_typed = true
 	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var callsite = self.callsite
+		if callsite != null then
+			res += v.yellow(" super-init="+callsite.dump_info(v))
+		end
+		var mpropdef = self.mpropdef
+		if mpropdef != null then
+			res += v.yellow(" call-next-method="+mpropdef.to_s)
+		end
+		return res
+	end
 end
 
 ####
@@ -2179,6 +2229,15 @@ redef class ANewExpr
 		var args = n_args.to_a
 		callsite.check_signature(v, node, args)
 	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var callsite = self.callsite
+		if callsite != null then
+			res += v.yellow(" call="+callsite.dump_info(v))
+		end
+		return res
+	end
 end
 
 ####
@@ -2218,6 +2277,16 @@ redef class AAttrFormExpr
 		if attr_type == null then return # skip error
 		attr_type = v.resolve_for(attr_type, recvtype, self.n_expr isa ASelfExpr)
 		self.attr_type = attr_type
+	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var mproperty = self.mproperty
+		var attr_type = self.attr_type
+		if mproperty != null then
+			res += v.yellow(" attr={mproperty}:{attr_type or else "BROKEN"}")
+		end
+		return res
 	end
 end
 

@@ -18,6 +18,7 @@ module parser_nodes
 
 import location
 import ordered_tree
+private import console
 
 # Root of the AST class-hierarchy
 abstract class ANode
@@ -34,14 +35,27 @@ abstract class ANode
 		sys.stderr.write "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}\n"
 	end
 
+	# Is `self` a token or a pure-structural production like `AQId`?
+	fun is_structural: Bool do return false
+
 	# Write the subtree on stdout.
-	# See `ASTDump`
-	fun dump_tree
+	#
+	# Visit the subtree and display it with additional and useful information.
+	#
+	# By default, this displays all kind of nodes and the corresponding lines of codes.
+	#
+	# See `ASTDump` for details.
+	fun dump_tree(display_structural, display_line: nullable Bool)
 	do
-		var d = new ASTDump
+		var d = new ASTDump(display_structural or else true, display_line or else true)
 		d.enter_visit(self)
 		d.write_to(sys.stdout)
 	end
+
+	# Information to display on a node
+	#
+	# Refine this method to add additional information on each node type.
+	fun dump_info(v: ASTDump): String do return ""
 
 	# Parent of the node in the AST
 	var parent: nullable ANode = null
@@ -177,8 +191,22 @@ class ASTDump
 	# Is used to handle the initial node parent and workaround possible inconsistent `ANode::parent`
 	private var last_parent: nullable ANode = null
 
+	# Display tokens and structural production?
+	#
+	# Should tokens (and structural production like AQId) be displayed?
+	var display_structural: Bool
+
+	# Display lines?
+	#
+	# Should each new line be displayed (numbered and in gray)?
+	var display_line: Bool
+
+	# Current line number (when printing lines)
+	private var line = 0
+
 	redef fun visit(n)
 	do
+		if not display_structural and n.is_structural then return
 		var p = last_parent
 		add(p, n)
 		last_parent = n
@@ -186,14 +214,35 @@ class ASTDump
 		last_parent = p
 	end
 
+	redef fun write_line(o, n, p)
+	do
+		if display_line then
+			var ls = n.location.line_start
+			var file = n.location.file
+			var line = self.line
+			if ls > line and file != null then
+				if line == 0 then line = ls - 1
+				while line < ls do
+					line += 1
+					o.write "{line}\t{file.get_line(line)}\n".light_gray
+				end
+				self.line = ls
+			end
+		end
+
+		super
+	end
+
 	redef fun display(n)
 	do
-		if n isa Token then
-			return "{n.class_name} \"{n.text.escape_to_c}\" @{n.location}"
-		else
-			return "{n.class_name} @{n.location}"
-		end
+		return "{n.class_name} {n.dump_info(self)} @{n.location}"
 	end
+
+	# `s` as yellow
+	fun yellow(s: String): String do return s.yellow
+
+	# `s` as red
+	fun red(s: String): String do return s.red
 end
 
 # A sequence of nodes
@@ -330,6 +379,10 @@ abstract class Token
 	# Whitespace are ignored by the lexer, so they are not even considered as loose tokens.
 	# See `blank_before` to get the whitespace that separate tokens.
 	var is_loose = false
+
+	redef fun is_structural do return true
+
+	redef fun dump_info(v) do return " {text.escape_to_c}"
 
 	# Loose tokens that precede `self`.
 	#
@@ -1667,6 +1720,8 @@ class AQid
 
 	# The final identifier
 	var n_id: TId is writable, noinit
+
+	redef fun is_structural do return true
 end
 
 # A potentially qualified class identifier `foo::bar::Baz`
@@ -1677,6 +1732,8 @@ class AQclassid
 
 	# The final identifier
 	var n_id: TClassid is writable, noinit
+
+	redef fun is_structural do return true
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
