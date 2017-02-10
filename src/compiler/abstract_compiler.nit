@@ -410,6 +410,9 @@ ifeq ($(uname_S),MINGW64_NT-10.0)
 
 	# Remove POSIX flag -lrt
 	LDLIBS := $(filter-out -lrt,$(LDLIBS))
+
+	# Silence warnings when storing Int, Char and Bool as pointer address
+	CFLAGS += -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
 endif
 
 """
