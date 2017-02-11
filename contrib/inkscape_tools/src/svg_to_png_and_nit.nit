@@ -255,7 +255,7 @@ end
 
 var opt_out_src = new OptionString("Path to output source file (folder or file)", "--src", "-s")
 var opt_assets = new OptionString("Path to assert dir where to put PNG files", "--assets", "-a")
-var opt_scale = new OptionFloat("Apply scaling to exported images (default at 1.0 of 90dpi)", 1.0, "--scale", "-x")
+var opt_scale = new OptionFloat("Apply scaling to exported images (default at 1.0 of 96dpi)", 1.0, "--scale", "-x")
 var opt_gamnit = new OptionBool("Target the Gamnit framework (by default it targets Mnit)", "--gamnit", "-g")
 var opt_pow2 = new OptionBool("Round the image size to the next power of 2", "--pow2")
 var opt_help = new OptionBool("Print this help message", "--help", "-h")
@@ -414,7 +414,7 @@ for drawing in drawings do
 	# Output png file to assets
 	var png_path = "{assets_path}/images/{drawing_name}.png"
 	var proc2 = new Process.from_a(prog, [drawing, "--without-gui",
-		"--export-dpi={(90.0*scale).to_i}",
+		"--export-dpi={(96.0*scale).to_i}",
 		"--export-png={png_path}",
 		"--export-area={min_x}:{y0}:{max_x}:{y1}",
 		"--export-background=#000000", "--export-background-opacity=0.0"])
