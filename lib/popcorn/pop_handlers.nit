@@ -20,6 +20,7 @@ module pop_handlers
 import pop_routes
 import json::static
 import json
+import csv
 
 # Class handler for a route.
 #
@@ -456,6 +457,16 @@ redef class HttpResponse
 			send(null, status)
 		else
 			send(json.to_json, status)
+		end
+	end
+
+	# Write data as CSV and set the right content type header.
+	fun csv(csv: nullable CsvDocument, status: nullable Int) do
+		header["Content-Type"] = media_types["csv"].as(not null)
+		if csv == null then
+			send(null, status)
+		else
+			send(csv.write_to_string, status)
 		end
 	end
 
