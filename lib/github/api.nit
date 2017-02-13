@@ -850,7 +850,7 @@ class Milestone
 	serialize
 
 	# The milestone id on Github.
-	var number: Int is writable
+	var number: nullable Int = null is writable
 
 	# Milestone title.
 	var title: String is writable
@@ -859,10 +859,10 @@ class Milestone
 	var description: nullable String is writable
 
 	# Count of opened issues linked to this milestone.
-	var open_issues: Int is writable
+	var open_issues: nullable Int = null is writable
 
 	# Count of closed issues linked to this milestone.
-	var closed_issues: Int is writable
+	var closed_issues: nullable Int = null is writable
 
 	# Milestone state.
 	var state: nullable String is writable
