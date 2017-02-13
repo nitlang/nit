@@ -737,7 +737,7 @@ class Issue
 	var closed_by: nullable User is writable
 
 	# Is this issue linked to a pull request?
-	var is_pull_request: Bool = false is writable, noserialize
+	var is_pull_request: Bool = false is writable
 end
 
 # A Github pull request.
