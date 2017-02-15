@@ -678,7 +678,7 @@ END
 				echo ""
 				echo "NIT_NO_STACK=1 $ff.bin" $args
 			fi
-			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
+			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH WRITE="$ff.write" \
 				saferun -a -o "$ff.time.out" "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			mv "$ff.time.out" "$ff.times.out"
 			awk '{ SUM += $1} END { print SUM }' "$ff.times.out" > "$ff.time.out"
