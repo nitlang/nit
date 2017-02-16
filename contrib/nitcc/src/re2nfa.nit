@@ -34,7 +34,7 @@ end
 
 redef class Nstr
 	redef fun value do return text.substring(1, text.length-2).unescape_nit
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		var a = new Automaton.epsilon
 		for c in self.value.chars do
@@ -47,7 +47,7 @@ end
 
 redef class Nch_dec
 	redef fun value do return text.substring_from(1).to_i.code_point.to_s
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		var a = new Automaton.atom(self.value.chars.first.code_point)
 		return a
@@ -56,7 +56,7 @@ end
 
 redef class Nch_hex
 	redef fun value do return text.substring_from(2).to_hex.code_point.to_s
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		var a = new Automaton.atom(self.value.chars.first.code_point)
 		return a
@@ -64,7 +64,7 @@ redef class Nch_hex
 end
 
 redef class NProd
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		assert children.length == 1 else print "no make_rfa for {self}"
 		return children.first.make_rfa
@@ -228,7 +228,7 @@ redef class Nre_par
 end
 
 redef class Nre_class
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		var c1 = children[0].children[0].value
 		var c2 = children[3].children[0].value
@@ -243,7 +243,7 @@ redef class Nre_class
 end
 
 redef class Nre_openclass
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		var c1 = children[0].children[0].value
 		if c1.length != 1 then
@@ -257,7 +257,7 @@ redef class Nre_openclass
 end
 
 redef class Nre_any
-	redef fun make_rfa: Automaton
+	redef fun make_rfa
 	do
 		var a = new Automaton.cla(0, null)
 		return a
