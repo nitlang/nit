@@ -33,7 +33,7 @@ redef class Node
 end
 
 redef class Nstr
-	redef fun value: String do return text.substring(1, text.length-2).unescape_nit
+	redef fun value do return text.substring(1, text.length-2).unescape_nit
 	redef fun make_rfa: Automaton
 	do
 		var a = new Automaton.epsilon
@@ -46,7 +46,7 @@ redef class Nstr
 end
 
 redef class Nch_dec
-	redef fun value: String do return text.substring_from(1).to_i.code_point.to_s
+	redef fun value do return text.substring_from(1).to_i.code_point.to_s
 	redef fun make_rfa: Automaton
 	do
 		var a = new Automaton.atom(self.value.chars.first.code_point)
@@ -55,7 +55,7 @@ redef class Nch_dec
 end
 
 redef class Nch_hex
-	redef fun value: String do return text.substring_from(2).to_hex.code_point.to_s
+	redef fun value do return text.substring_from(2).to_hex.code_point.to_s
 	redef fun make_rfa: Automaton
 	do
 		var a = new Automaton.atom(self.value.chars.first.code_point)
