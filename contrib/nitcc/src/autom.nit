@@ -252,8 +252,8 @@ class Automaton
 				if t.symbol == null then continue
 
 				# Check overlaps
-				var tf = t.symbol.first
-				var tl = t.symbol.last
+				var tf = t.symbol.as(not null).first
+				var tl = t.symbol.as(not null).last
 				if l != null and tf > l then continue
 				if tl != null and f > tl then continue
 
@@ -607,7 +607,7 @@ class Automaton
 					seen.add(nfa_dest)
 				end
 				if lastst != null and lastst.to == dfa_dest then
-					lastst.symbol.last = sym.last
+					lastst.symbol.as(not null).last = sym.last
 				else
 					lastst = dfa_state.add_trans(dfa_dest, sym)
 				end

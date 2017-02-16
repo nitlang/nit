@@ -46,7 +46,7 @@ var node = p.parse
 
 if not node isa NProd then
 	assert node isa NError
-	print "{node.position.to_s} Syntax Error: {node.message}"
+	print "{node.position.as(not null)} Syntax Error: {node.message}"
 	exit 1
 	abort
 end
