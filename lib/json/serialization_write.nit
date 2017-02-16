@@ -144,26 +144,49 @@ redef class Text
 	redef fun accept_json_serializer(v)
 	do
 		v.stream.write "\""
+
+		var start_i = 0
+		var escaped = null
 		for i in [0 .. self.length[ do
 			var char = self[i]
 			if char == '\\' then
-				v.stream.write "\\\\"
+				escaped = "\\\\"
 			else if char == '\"' then
-				v.stream.write "\\\""
+				escaped = "\\\""
 			else if char < ' ' then
 				if char == '\n' then
-					v.stream.write "\\n"
+					escaped = "\\n"
 				else if char == '\r' then
-					v.stream.write "\\r"
+					escaped = "\\r"
 				else if char == '\t' then
-					v.stream.write "\\t"
+					escaped = "\\t"
 				else
-					v.stream.write char.escape_to_utf16
+					escaped = char.escape_to_utf16
 				end
-			else
-				v.stream.write_char char
+			end
+
+			if escaped != null then
+				# Write open non-escaped string
+				if start_i <= i then
+					v.stream.write substring(start_i, i-start_i)
+				end
+
+				# Write escaped character
+				v.stream.write escaped
+				escaped = null
+				start_i = i+1
 			end
 		end
+
+		# Write remaining non-escaped string
+		if start_i < length then
+			if start_i == 0 then
+				v.stream.write self
+			else
+				v.stream.write substring(start_i, length-start_i)
+			end
+		end
+
 		v.stream.write "\""
 	end
 end
