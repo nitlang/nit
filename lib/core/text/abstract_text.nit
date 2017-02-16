@@ -1985,10 +1985,21 @@ redef class Char
 
 	#     assert 'x'.to_s    == "x"
 	redef fun to_s do
+		var c = self.code_point
+		# Crappy cache but is a crappy cache better than a crappy allocation?
+		var char_to_s_cache = once new Array[nullable String].filled_with(null, 256)
+		if c < 256 then
+			var res = char_to_s_cache[c]
+			if res != null then return res
+		end
 		var ln = u8char_len
 		var ns = new CString(ln + 1)
 		u8char_tos(ns, ln)
-		return ns.to_s_unsafe(ln, copy=false, clean=false)
+		var res = ns.to_s_unsafe(ln, copy=false, clean=false)
+		if c < 256 then
+			char_to_s_cache[c] = res
+		end
+		return res
 	end
 
 	# Returns `self` escaped to UTF-16

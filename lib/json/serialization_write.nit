@@ -161,7 +161,7 @@ redef class Text
 					v.stream.write char.escape_to_utf16
 				end
 			else
-				v.stream.write char.to_s
+				v.stream.write_char char
 			end
 		end
 		v.stream.write "\""
