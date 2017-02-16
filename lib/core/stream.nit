@@ -668,18 +668,24 @@ end
 class StringWriter
 	super Writer
 
-	private var content = new Array[String]
-	redef fun to_s do return content.plain_to_s
+	private var content = new Buffer
+	redef fun to_s do return content.to_s
 	redef fun is_writable do return not closed
 
 	redef fun write_bytes(b) do
-		content.add(b.to_s)
+		content.append(b.to_s)
 	end
 
 	redef fun write(str)
 	do
 		assert not closed
-		content.add(str.to_s)
+		content.append(str)
+	end
+
+	redef fun write_char(c)
+	do
+		assert not closed
+		content.add(c)
 	end
 
 	# Is the stream closed?
