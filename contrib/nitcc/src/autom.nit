@@ -466,8 +466,8 @@ class Automaton
 		end
 	end
 
-	# Produce a graphvis file for the automaton
-	fun to_dot(filepath: String)
+	# Produce a graphviz string from the automatom
+	fun to_dot: String
 	do
 		var names = new HashMap[State, String]
 		var ni = 0
@@ -476,25 +476,25 @@ class Automaton
 			ni += 1
 		end
 
-		var f = new FileWriter.open(filepath)
-                f.write("digraph g \{\n")
+		var f = new Buffer
+                f.append("digraph g \{\n")
 
 		for s in states do
-			f.write("s{names[s]}[shape=oval")
+			f.append("s{names[s]}[shape=oval")
 			#f.write("label=\"\",")
 			if accept.has(s) then
-				f.write(",color=blue")
+				f.append(",color=blue")
 			end
 			if tags.has_key(s) then
-				f.write(",label=\"")
+				f.append(",label=\"")
 				for token in tags[s] do
-					f.write("{token.name.escape_to_c}\\n")
+					f.append("{token.name.escape_to_c}\\n")
 				end
-				f.write("\"")
+				f.append("\"")
 			else
-				f.write(",label=\"\"")
+				f.append(",label=\"\"")
 			end
-			f.write("];\n")
+			f.append("];\n")
 			var outs = new HashMap[State, Array[nullable TSymbol]]
 			for t in s.outs do
 				var a
@@ -518,13 +518,12 @@ class Automaton
 						labe += c.to_s
 					end
 				end
-				f.write("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
+				f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 			end
 		end
-		f.write("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
-
-                f.write("\}\n")
-		f.close
+		f.append("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
+		f.append("\}\n")
+		return f.write_to_string
 	end
 
 	# Transform a NFA to a DFA.
