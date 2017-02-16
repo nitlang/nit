@@ -403,6 +403,18 @@ ifeq ($(uname_S),Darwin)
 	LDLIBS := $(filter-out -lrt,$(LDLIBS))
 endif
 
+# Special configuration for Windows under mingw64
+ifeq ($(uname_S),MINGW64_NT-10.0)
+	# Use the pcreposix regex library
+	LDLIBS += -lpcreposix
+
+	# Remove POSIX flag -lrt
+	LDLIBS := $(filter-out -lrt,$(LDLIBS))
+
+	# Silence warnings when storing Int, Char and Bool as pointer address
+	CFLAGS += -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
+endif
+
 """
 
 		makefile.write("all: {outpath}\n")
@@ -510,8 +522,10 @@ endif
 		self.toolcontext.info(command, 2)
 
 		var res
-		if self.toolcontext.verbose_level >= 3 or is_windows then
+		if self.toolcontext.verbose_level >= 3 then
 			res = sys.system("{command} 2>&1")
+		else if is_windows then
+			res = sys.system("{command} 2>&1 >nul")
 		else
 			res = sys.system("{command} 2>&1 >/dev/null")
 		end

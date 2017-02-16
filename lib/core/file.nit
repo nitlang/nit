@@ -1057,7 +1057,8 @@ redef class String
 	# ~~~
 	fun simplify_path: String
 	do
-		var a = self.split_with("/")
+		var path_sep = if is_windows then "\\" else "/"
+		var a = self.split_with(path_sep)
 		var a2 = new Array[String]
 		for x in a do
 			if x == "." and not a2.is_empty then continue # skip `././`
