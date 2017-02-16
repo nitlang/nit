@@ -537,7 +537,7 @@ class Automaton
 
 		var dfa = new Automaton.empty
 		var n2d = new ArrayMap[Set[State], State]
-		var seen = new ArraySet[Set[State]] 
+		var seen = new ArraySet[Set[State]]
 		var alphabet = new HashSet[Int]
 		var st = eclosure([start])
 		var todo = [st]
@@ -628,7 +628,7 @@ class Automaton
 			for t in s.outs do
 				if t.symbol != null then continue
 				var to = t.to
-				if res.has(to) then continue 
+				if res.has(to) then continue
 				res.add(to)
 				todo.add(to)
 			end
@@ -649,7 +649,7 @@ class Automaton
 				var l = sym.last
 				if l != null and l < symbol then continue
 				var to = t.to
-				if res.has(to) then continue 
+				if res.has(to) then continue
 				res.add(to)
 			end
 		end
