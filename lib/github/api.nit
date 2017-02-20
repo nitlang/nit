@@ -200,7 +200,9 @@ class GithubAPI
 		var array = get("/repos/{repo.full_name}/branches")
 		var res = new Array[Branch]
 		if not array isa JsonArray then return res
-		return deserialize(array.to_json).as(Array[Branch])
+		var deser = deserialize(array.to_json)
+		if deser isa Array[Object] then return res # empty array
+		return deser.as(Array[Branch])
 	end
 
 	# List of issues associated with their ids.
