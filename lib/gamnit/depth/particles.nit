@@ -252,12 +252,12 @@ class ParticleProgram
 		uniform bool use_texture;
 
 		// Texture to apply on this particle
-		uniform sampler2D texture;
+		uniform sampler2D texture0;
 
 		void main()
 		{
 			if (use_texture) {
-				gl_FragColor = texture2D(texture, gl_PointCoord) * v_color;
+				gl_FragColor = texture2D(texture0, gl_PointCoord) * v_color;
 				if (gl_FragColor.a <= 0.01) discard;
 			} else {
 				gl_FragColor = v_color;
@@ -272,7 +272,7 @@ class ParticleProgram
 	var use_texture = uniforms["use_texture"].as(UniformBool) is lazy
 
 	# Visible texture unit
-	var texture = uniforms["texture"].as(UniformSampler2D) is lazy
+	var texture = uniforms["texture0"].as(UniformSampler2D) is lazy
 
 	# Color tint per vertex
 	var color = attributes["color"].as(AttributeVec4) is lazy
