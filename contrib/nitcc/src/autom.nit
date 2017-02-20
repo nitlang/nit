@@ -467,7 +467,9 @@ class Automaton
 	end
 
 	# Produce a graphviz string from the automatom
-	fun to_dot: String
+	#
+	# Set `merge_transitions = false` to generate one edge by transition (default true).
+	fun to_dot(merge_transitions: nullable Bool): Writable
 	do
 		var names = new HashMap[State, String]
 		var ni = 0
@@ -477,22 +479,24 @@ class Automaton
 		end
 
 		var f = new Buffer
-                f.append("digraph g \{\n")
+		f.append("digraph g \{\n")
+		f.append("rankdir=LR;")
 
+		var state_nb = 0
 		for s in states do
-			f.append("s{names[s]}[shape=oval")
+			f.append("s{names[s]}[shape=circle")
 			#f.write("label=\"\",")
 			if accept.has(s) then
-				f.append(",color=blue")
+				f.append(",shape=doublecircle")
 			end
 			if tags.has_key(s) then
 				f.append(",label=\"")
 				for token in tags[s] do
-					f.append("{token.name.escape_to_c}\\n")
+					f.append("{token.name.escape_to_dot}\\n")
 				end
 				f.append("\"")
 			else
-				f.append(",label=\"\"")
+				f.append(",label=\"{state_nb}\"")
 			end
 			f.append("];\n")
 			var outs = new HashMap[State, Array[nullable TSymbol]]
@@ -511,19 +515,26 @@ class Automaton
 			for s2, a in outs do
 				var labe = ""
 				for c in a do
+					if merge_transitions == false then labe = ""
 					if not labe.is_empty then labe += "\n"
 					if c == null then
-						labe += "''"
+						labe += "ε"
 					else
 						labe += c.to_s
 					end
+					if merge_transitions == false then
+						f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_dot}\"];\n")
+					end
 				end
-				f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
+				if merge_transitions == null or merge_transitions == true then
+					f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
+				end
 			end
+			state_nb += 1
 		end
 		f.append("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
 		f.append("\}\n")
-		return f.write_to_string
+		return f
 	end
 
 	# Transform a NFA to a DFA.
