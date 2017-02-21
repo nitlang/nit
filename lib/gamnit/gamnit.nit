@@ -68,13 +68,14 @@ redef class App
 	# The implementation varies per platform.
 	private fun feed_events do end
 
-	# Main method to receive `InputEvent` produced by the system
+	# Hook to receive and respond to `event` triggered by the user or system
 	#
 	# Returns whether or not the event is used or intercepted.
 	# If `true`, the event will not be processed further by the system.
 	# Returns `false` to intercepts events like the back key on mobile devices.
 	#
-	# This method should be refined by client modules to react to user inputs.
+	# The instances passed as `event` may be freed (or overwritten),
+	# right after this method returns. They should not be preserved.
 	fun accept_event(event: InputEvent): Bool do return false
 end
 
