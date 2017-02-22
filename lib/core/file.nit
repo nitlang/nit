@@ -1509,7 +1509,12 @@ private extern class NativeFile `{ FILE* `}
 	`}
 
 	fun io_write(buf: CString, from, len: Int): Int `{
-		return fwrite(buf+from, 1, len, self);
+		size_t res = fwrite(buf+from, 1, len, self);
+#ifdef _WIN32
+		// Force flushing buffer because end of line does not trigger a flush
+		fflush(self);
+#endif
+		return (long)res;
 	`}
 
 	fun write_byte(value: Byte): Int `{
