@@ -42,12 +42,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	fun is_valid: Bool `{ return self != EGL_NO_DISPLAY; `}
 
 	fun initialize: Bool `{
-		EGLBoolean r = eglInitialize(self, NULL, NULL);
-		if (r == EGL_FALSE) {
-			fprintf(stderr, "Unable to eglInitialize");
-			return 0;
-		}
-		return 1;
+		return eglInitialize(self, NULL, NULL);
 	`}
 
 	fun major_version: Int `{
@@ -88,7 +83,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 		}
 
 		configs = (EGLConfig*)malloc(sizeof(EGLConfig)*n_configs);
- 
+
 		r = eglChooseConfig(self, c_attribs, configs, n_configs, &n_configs);
 
 		if (r == EGL_FALSE) {
@@ -136,11 +131,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	`}
 
 	fun make_current(draw, read: EGLSurface, context: EGLContext): Bool `{
-		if (eglMakeCurrent(self, draw, read, context) == EGL_FALSE) {
-			fprintf(stderr, "Unable to eglMakeCurrent");
-			return 0;
-		}
-		return 1;
+		return eglMakeCurrent(self, draw, read, context);
 	`}
 
 	# Can be used directly, but it is preferable to use a `EGLSurfaceAttribs`
@@ -181,7 +172,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 
 	fun version: String do return query_string(0x3054)
 
-	fun extensions: Array[String] do return query_string(0x3055).split_with(" ")
+	fun extensions: Array[String] do return query_string(0x3055).trim.split_with(" ")
 
 	fun client_apis: Array[String] do return query_string(0x308D).split_with(" ")
 
