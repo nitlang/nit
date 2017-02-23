@@ -36,8 +36,8 @@ class SDL
 	# TODO make this private and only called through `sys.sdl`
 	init internal do end
 
-	# Initialize the given SDL `subsystems`
-	fun initialize(subsystems: SDLInitFlags): Bool `{ return SDL_Init(subsystems); `}
+	# Initialize the given SDL `subsystems`, returns `false` on error
+	fun initialize(subsystems: SDLInitFlags): Bool `{ return SDL_Init(subsystems) == 0; `}
 
 	# Returns the latest SDL error
 	#
