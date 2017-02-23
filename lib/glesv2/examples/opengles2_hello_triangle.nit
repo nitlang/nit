@@ -25,6 +25,8 @@ import egl
 import sdl
 import x11
 
+import realtime
+
 if "NIT_TESTING".environ == "true" then exit(0)
 
 var window_width = 800
@@ -48,14 +50,14 @@ assert x_display != 0 else print "x11 fail"
 #
 var egl_display = new EGLDisplay(x_display)
 assert egl_display.is_valid else print "EGL display is not valid"
+
 egl_display.initialize
+assert egl_display.is_valid else print egl_display.error
 
 print "EGL version: {egl_display.version}"
 print "EGL vendor: {egl_display.vendor}"
-print "EGL extensions: {egl_display.extensions.join(", ")}"
+print "EGL extensions: \n* {egl_display.extensions.join("\n* ")}"
 print "EGL client APIs: {egl_display.client_apis.join(", ")}"
-
-assert egl_display.is_valid else print egl_display.error
 
 var config_chooser = new EGLConfigChooser
 #config_chooser.surface_type_egl
@@ -83,9 +85,6 @@ end
 
 var config = configs.first
 
-# TODO android part
-# Opengles1Display_midway_init(self, format);
-
 var surface = egl_display.create_window_surface(config, x11_window_handle, [0])
 assert surface.is_ok else print egl_display.error
 
@@ -93,7 +92,7 @@ var context = egl_display.create_context(config)
 assert context.is_ok else print egl_display.error
 
 var make_current_res = egl_display.make_current(surface, surface, context)
-assert make_current_res
+assert make_current_res else print egl_display.error
 
 var width = surface.attribs(egl_display).width
 var height = surface.attribs(egl_display).height
@@ -156,21 +155,30 @@ glLinkProgram program
 assert program.is_linked else print "Linking failed: {glGetProgramInfoLog(program)}"
 assert_no_gl_error
 
+# prepare
+glViewport(0, 0, width, height)
+glClearColor(0.5, 0.0, 0.5, 1.0)
+
 # draw!
 var vertices = [0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0]
 var vertex_array = new VertexArray(0, 3, vertices)
 vertex_array.attrib_pointer
-glClearColor(0.5, 0.0, 0.5, 1.0)
-for i in [0..10000[ do
+
+var clock = new Clock
+
+var n_frames = 1000
+for i in [0..n_frames[ do
 	printn "."
 	assert_no_gl_error
-	glViewport(0, 0, width, height)
+
 	glClear gl_COLOR_BUFFER_BIT
 	glUseProgram program
 	vertex_array.enable
 	glDrawArrays(gl_TRIANGLES, 0, 3)
 	egl_display.swap_buffers(surface)
 end
+
+print "FPS: {n_frames.to_f/clock.lapse.to_f}"
 
 # delete
 glDeleteProgram program
