@@ -33,10 +33,10 @@ redef class GamnitDisplay
 	# The selected EGL configuration
 	var egl_config: EGLConfig is noautoinit
 
-	# Setup the EGL display for the given `x11_display`
-	protected fun setup_egl_display(x11_display: Pointer)
+	# Setup the EGL display for the given `native_display`
+	protected fun setup_egl_display(native_display: Pointer)
 	do
-		var egl_display = new EGLDisplay(x11_display)
+		var egl_display = new EGLDisplay(native_display)
 		assert egl_display.is_valid else print "new EGL display is not valid"
 
 		egl_display.initialize
@@ -79,10 +79,10 @@ redef class GamnitDisplay
 		self.egl_config = configs.first
 	end
 
-	# Setup the EGL context for the given `window_handle`
-	protected fun setup_egl_context(window_handle: Pointer)
+	# Setup the EGL context for the given `native_window`
+	protected fun setup_egl_context(native_window: Pointer)
 	do
-		var window_surface = egl_display.create_window_surface(egl_config, window_handle, [0])
+		var window_surface = egl_display.create_window_surface(egl_config, native_window, [0])
 		assert window_surface.is_ok else print "Creating EGL window surface failed: {egl_display.error}"
 		self.window_surface = window_surface
 
