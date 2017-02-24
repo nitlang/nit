@@ -74,16 +74,17 @@ extern class Timespec `{struct timespec*`}
 	`}
 
 	# Subtract `other` from `self`
-	fun -(other: Timespec): Timespec
-	do
-		var s = sec - other.sec
-		var ns = nanosec - other.nanosec
-		if ns < 0 then
-			s -= 1
-			ns += 1000000000
-		end
-		return new Timespec(s, ns)
-	end
+	fun -(other: Timespec): Timespec `{
+		time_t s = self->tv_sec - other->tv_sec;
+		long ns = self->tv_nsec - other->tv_nsec;
+		if (ns < 0) {
+			s -= 1;
+			ns += 1000000000l;
+		}
+		struct timespec* tv = malloc(sizeof(struct timespec));
+		tv->tv_sec = s; tv->tv_nsec = ns;
+		return tv;
+	`}
 
 	# Number of whole seconds of elapsed time.
 	fun sec : Int `{
@@ -114,7 +115,9 @@ extern class Timespec `{struct timespec*`}
 	# Number of seconds as a `Float`
 	#
 	# Incurs a loss of precision, but the result is pretty to print.
-	fun to_f: Float do return sec.to_f + nanosec.to_f / 1000000000.0
+	fun to_f: Float `{
+		return (double)self->tv_sec + 0.000000001 * self->tv_nsec;
+	`}
 
 	redef fun to_s do return "{to_f}s"
 end
