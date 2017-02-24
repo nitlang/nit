@@ -20,22 +20,7 @@ module audio
 import app::audio
 import linux
 
-redef class Sound
-
-	redef fun play do
-		if path.has_suffix(".wav") then
-			sys.system "aplay -q {app.assets_dir}{path} &"
-		else if path.has_suffix(".mp3") then
-			sys.system "mpg123 -q {app.assets_dir}{path} &"
-		end
-	end
-
-	redef fun load do end
-	redef fun pause do end
-	redef fun resume do end
-end
-
-redef class Music
+redef class PlayableAudio
 
 	redef fun play do
 		if path.has_suffix(".wav") then
