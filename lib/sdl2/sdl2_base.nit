@@ -76,6 +76,25 @@ class SDL
 	# This method should not normally be used, refer to the SDL source code
 	# before use.
 	fun set_main_ready `{ SDL_SetMainReady(); `}
+
+	# Show or hide the cursor
+	fun show_cursor=(val: Bool) `{ SDL_ShowCursor(val? SDL_ENABLE: SDL_DISABLE); `}
+
+	# Is the cursor visible?
+	fun show_cursor: Bool `{ return SDL_ShowCursor(SDL_QUERY); `}
+
+	# Collect only relative mouse events and hide cursor
+	#
+	# Check `relative_mouse_mode` to see if the mode could be applied,
+	# if not, see `error`.
+	fun relative_mouse_mode=(value: Bool) `{
+		SDL_SetRelativeMouseMode(value);
+	`}
+
+	# Hide cursor and collect only relative mouse events?
+	fun relative_mouse_mode: Bool `{
+		return SDL_GetRelativeMouseMode();
+	`}
 end
 
 # Flags for `sys.sdl.initialize` and related methods
@@ -385,6 +404,42 @@ extern class SDLSurface `{ SDL_Surface * `}
 
 	# Save this texture to a BMP file
 	fun save_bmp(path: CString) `{ SDL_SaveBMP(self, path); `}
+
+	# Format of the pixels
+	fun format: SDL_PixelFormat `{ return self->format; `}
+
+	# Width in pixels
+	fun w: Int `{ return self->w; `}
+
+	# Height in pixels
+	fun h: Int `{ return self->h; `}
+
+	# Bytes in a row of pixels
+	fun pitch: Int `{ return self->pitch; `}
+
+	# Pointer to pixel data
+	fun pixels: Pointer `{ return self->pixels; `}
+end
+
+# Pixel format information
+extern class SDL_PixelFormat `{ SDL_PixelFormat * `}
+	# Number of significant bits in a pixel
+	fun bits_per_pixel: Int `{ return self->BitsPerPixel; `}
+
+	# Number of bytes required to hold a pixel
+	fun bytes_per_pixel: Int `{ return self->BytesPerPixel; `}
+
+	# Mask of the location of the red component
+	fun rmask: UInt32 `{ return self->Rmask; `}
+
+	# Mask of the location of the green component
+	fun gmask: UInt32 `{ return self->Gmask; `}
+
+	# Mask of the location of the blue component
+	fun bmask: UInt32 `{ return self->Bmask; `}
+
+	# Mask of the location of the alpha component
+	fun amask: UInt32 `{ return self->Amask; `}
 end
 
 # A loaded bitmap texture
