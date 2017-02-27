@@ -200,7 +200,9 @@ class GithubAPI
 		var array = get("/repos/{repo.full_name}/branches")
 		var res = new Array[Branch]
 		if not array isa JsonArray then return res
-		return deserialize(array.to_json).as(Array[Branch])
+		var deser = deserialize(array.to_json)
+		if deser isa Array[Object] then return res # empty array
+		return deser.as(Array[Branch])
 	end
 
 	# List of issues associated with their ids.
@@ -519,7 +521,7 @@ end
 # Provides access to [Github user data](https://developer.github.com/v3/users/).
 # Should be accessed from `GithubAPI::load_user`.
 class User
-	super GithubEntity
+	super GitUser
 	serialize
 
 	# Github login.
@@ -591,10 +593,10 @@ class Commit
 	var parents: nullable Array[Commit] = null is writable
 
 	# Author of the commit.
-	var author: nullable User is writable
+	var author: nullable GitUser is writable
 
 	# Committer of the commit.
-	var committer: nullable User is writable
+	var committer: nullable GitUser is writable
 
 	# Authoring date as String.
 	var author_date: nullable String is writable
@@ -621,6 +623,46 @@ class Commit
 
 	# Commit message.
 	var message: nullable String is writable
+
+	# Git commit representation linked to this commit.
+	var commit: nullable GitCommit
+end
+
+# A Git Commit representation
+class GitCommit
+	super GithubEntity
+	serialize
+
+	# Commit SHA.
+	var sha: nullable String is writable
+
+	# Parent commits of `self`.
+	var parents: nullable Array[GitCommit] = null is writable
+
+	# Author of the commit.
+	var author: nullable GitUser is writable
+
+	# Committer of the commit.
+	var committer: nullable GitUser is writable
+
+	# Commit message.
+	var message: nullable String is writable
+end
+
+# Git user authoring data
+class GitUser
+	super GithubEntity
+	serialize
+
+	# Authoring date.
+	var date: nullable String = null is writable
+
+	# Authoring date as ISODate.
+	fun iso_date: nullable ISODate do
+		var date = self.date
+		if date == null then return null
+		return new ISODate.from_string(date)
+	end
 end
 
 # A Github issue.
@@ -697,7 +739,7 @@ class Issue
 	var closed_by: nullable User is writable
 
 	# Is this issue linked to a pull request?
-	var is_pull_request: Bool = false is writable, noserialize
+	var is_pull_request: Bool = false is writable
 end
 
 # A Github pull request.
@@ -810,31 +852,35 @@ class Milestone
 	serialize
 
 	# The milestone id on Github.
-	var number: Int is writable
+	var number: nullable Int = null is writable
 
 	# Milestone title.
 	var title: String is writable
 
 	# Milestone long description.
-	var description: String is writable
+	var description: nullable String is writable
 
 	# Count of opened issues linked to this milestone.
-	var open_issues: Int is writable
+	var open_issues: nullable Int = null is writable
 
 	# Count of closed issues linked to this milestone.
-	var closed_issues: Int is writable
+	var closed_issues: nullable Int = null is writable
 
 	# Milestone state.
-	var state: String is writable
+	var state: nullable String is writable
 
 	# Creation time as String.
-	var created_at: String is writable
+	var created_at: nullable String is writable
 
 	# Creation time as ISODate.
-	fun iso_created_at: nullable ISODate do return new ISODate.from_string(created_at)
+	fun iso_created_at: nullable ISODate do
+		var created_at = self.created_at
+		if created_at == null then return null
+		return new ISODate.from_string(created_at)
+	end
 
 	# User that created this milestone.
-	var creator: User is writable
+	var creator: nullable User is writable
 
 	# Due time as String (if any).
 	var due_on: nullable String is writable
@@ -1079,7 +1125,7 @@ class GithubDeserializer
 	super JsonDeserializer
 
 	redef fun class_name_heuristic(json_object) do
-		if json_object.has_key("login") or json_object.has_key("email") then
+		if json_object.has_key("login") then
 			return "User"
 		else if json_object.has_key("full_name") then
 			return "Repo"
@@ -1087,8 +1133,12 @@ class GithubDeserializer
 			return "Branch"
 		else if json_object.has_key("sha") and json_object.has_key("ref") then
 			return "PullRef"
-		else if json_object.has_key("sha") or (json_object.has_key("id") and json_object.has_key("tree_id")) then
+		else if (json_object.has_key("sha") and json_object.has_key("commit")) or (json_object.has_key("id") and json_object.has_key("tree_id")) then
 			return "Commit"
+		else if json_object.has_key("sha") and json_object.has_key("tree") then
+			return "GitCommit"
+		else if json_object.has_key("name") and json_object.has_key("date") then
+			return "GitUser"
 		else if json_object.has_key("number") and json_object.has_key("patch_url") then
 			return "PullRequest"
 		else if json_object.has_key("open_issues") and json_object.has_key("closed_issues") then
@@ -1116,6 +1166,11 @@ class GithubDeserializer
 				issue.is_pull_request = true
 			end
 			return issue
+		else if name == "Commit" then
+			var commit = super.as(Commit)
+			var git_commit = commit.commit
+			if git_commit != null then commit.message = git_commit.message
+			return commit
 		end
 		return super
 	end

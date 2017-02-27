@@ -99,8 +99,8 @@ class JsonSerializer
 	do
 		if not plain_json or not first_attribute then
 			stream.write ","
-			first_attribute = false
 		end
+		first_attribute = false
 
 		new_line_and_indent
 		stream.write "\""
