@@ -80,6 +80,12 @@ class Counter[E]
 		map.clear
 	end
 
+	redef fun add_all(other) do
+		for k, v in other do
+			self[k] += v
+		end
+	end
+
 	# Count one more occurrence of `e`
 	fun inc(e: E)
 	do
