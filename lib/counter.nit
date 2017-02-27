@@ -133,6 +133,7 @@ class Counter[E]
 	# @toimplement by default just call `to_s` on the element
 	protected fun element_to_s(e: E): String
 	do
+		if e == null then return "null"
 		return e.to_s
 	end
 
