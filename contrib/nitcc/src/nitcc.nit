@@ -46,7 +46,7 @@ var node = p.parse
 
 if not node isa NProd then
 	assert node isa NError
-	print "{node.position.to_s} Syntax Error: {node.message}"
+	print "{node.position.as(not null)} Syntax Error: {node.message}"
 	exit 1
 	abort
 end
@@ -111,14 +111,14 @@ f.close
 
 var nfa = v2.nfa
 print "NFA automaton: {nfa.states.length} states (see {name}.nfa.dot)"
-nfa.to_dot("{name}.nfa.dot")
+nfa.to_dot.write_to_file("{name}.nfa.dot")
 
 var dfa = nfa.to_dfa.to_minimal_dfa
 
 dfa.solve_token_inclusion
 
 print "DFA automaton: {dfa.states.length} states (see {name}.dfa.dot)"
-dfa.to_dot("{name}.dfa.dot")
+dfa.to_dot.write_to_file("{name}.dfa.dot")
 
 if dfa.tags.has_key(dfa.start) then
 	print "Error: Empty tokens {dfa.tags[dfa.start].join(" ")}"

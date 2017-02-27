@@ -1,0 +1,8 @@
+*.dot
+*parser_parser.nit
+*parser_lexer.nit
+*_test_parser*
+*.out
+
+re_parser
+re_app

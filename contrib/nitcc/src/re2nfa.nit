@@ -20,7 +20,7 @@ import autom
 
 redef class Node
 	# Build the NFA of the regular expression
-	fun make_rfa: Automaton do
+	fun make_nfa: Automaton do
 		print inspect
 		abort
 	end
@@ -33,8 +33,8 @@ redef class Node
 end
 
 redef class Nstr
-	redef fun value: String do return text.substring(1, text.length-2).unescape_nit
-	redef fun make_rfa: Automaton
+	redef fun value do return text.substring(1, text.length-2).unescape_nit
+	redef fun make_nfa
 	do
 		var a = new Automaton.epsilon
 		for c in self.value.chars do
@@ -46,8 +46,8 @@ redef class Nstr
 end
 
 redef class Nch_dec
-	redef fun value: String do return text.substring_from(1).to_i.code_point.to_s
-	redef fun make_rfa: Automaton
+	redef fun value do return text.substring_from(1).to_i.code_point.to_s
+	redef fun make_nfa
 	do
 		var a = new Automaton.atom(self.value.chars.first.code_point)
 		return a
@@ -55,8 +55,8 @@ redef class Nch_dec
 end
 
 redef class Nch_hex
-	redef fun value: String do return text.substring_from(2).to_hex.code_point.to_s
-	redef fun make_rfa: Automaton
+	redef fun value do return text.substring_from(2).to_hex.code_point.to_s
+	redef fun make_nfa
 	do
 		var a = new Automaton.atom(self.value.chars.first.code_point)
 		return a
@@ -64,28 +64,28 @@ redef class Nch_hex
 end
 
 redef class NProd
-	redef fun make_rfa: Automaton
+	redef fun make_nfa
 	do
-		assert children.length == 1 else print "no make_rfa for {self}"
-		return children.first.make_rfa
+		assert children.length == 1 else print "no make_nfa for {self}"
+		return children.first.make_nfa
 	end
 end
 
 redef class Nre_alter
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
-		var b = children[2].make_rfa
+		var a = children[0].make_nfa
+		var b = children[2].make_nfa
 		a.alternate(b)
 		return a
 	end
 end
 
 redef class Nre_minus
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
-		var b = children[2].make_rfa.to_dfa
+		var a = children[0].make_nfa
+		var b = children[2].make_nfa.to_dfa
 		for t in b.start.outs do
 			if not t.to.outs.is_empty then
 				# `b` is not a single char, so just use except
@@ -107,7 +107,7 @@ redef class Nre_minus
 end
 
 redef class Nre_end
-	redef fun make_rfa
+	redef fun make_nfa
 	do
 		print "{children.first.position.to_s}: NOT YET IMPLEMENTED: token `End`; replaced with an empty string"
 		return new Automaton.epsilon
@@ -115,12 +115,12 @@ redef class Nre_end
 end
 
 redef class Nre_and
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
+		var a = children[0].make_nfa
 		var ta = new Token("1")
 		a.tag_accept(ta)
-		var b = children[2].make_rfa
+		var b = children[2].make_nfa
 		var tb = new Token("2")
 		b.tag_accept(tb)
 
@@ -141,18 +141,18 @@ redef class Nre_and
 end
 
 redef class Nre_except
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
-		var b = children[2].make_rfa
+		var a = children[0].make_nfa
+		var b = children[2].make_nfa
 		return a.except(b)
 	end
 end
 
 redef class Nre_shortest
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[2].make_rfa
+		var a = children[2].make_nfa
 		a = a.to_dfa
 		for s in a.accept do
 			for t in s.outs.to_a do t.delete
@@ -162,9 +162,9 @@ redef class Nre_shortest
 end
 
 redef class Nre_longest
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[2].make_rfa
+		var a = children[2].make_nfa
 		a = a.to_dfa
 		for s in a.accept.to_a do
 			if not s.outs.is_empty then a.accept.remove(s)
@@ -174,9 +174,9 @@ redef class Nre_longest
 end
 
 redef class Nre_prefixes
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[2].make_rfa
+		var a = children[2].make_nfa
 		a.trim
 		a.accept.add_all a.states
 		return a
@@ -184,51 +184,51 @@ redef class Nre_prefixes
 end
 
 redef class Nre_conc
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
-		var b = children[1].make_rfa
+		var a = children[0].make_nfa
+		var b = children[1].make_nfa
 		a.concat(b)
 		return a
 	end
 end
 
 redef class Nre_star
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
+		var a = children[0].make_nfa
 		a.close
 		return a
 	end
 end
 
 redef class Nre_ques
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
+		var a = children[0].make_nfa
 		a.optionnal
 		return a
 	end
 end
 
 redef class Nre_plus
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		var a = children[0].make_rfa
+		var a = children[0].make_nfa
 		a.plus
 		return a
 	end
 end
 
 redef class Nre_par
-	redef fun make_rfa
+	redef fun make_nfa
 	do
-		return children[1].make_rfa
+		return children[1].make_nfa
 	end
 end
 
 redef class Nre_class
-	redef fun make_rfa: Automaton
+	redef fun make_nfa
 	do
 		var c1 = children[0].children[0].value
 		var c2 = children[3].children[0].value
@@ -243,7 +243,7 @@ redef class Nre_class
 end
 
 redef class Nre_openclass
-	redef fun make_rfa: Automaton
+	redef fun make_nfa
 	do
 		var c1 = children[0].children[0].value
 		if c1.length != 1 then
@@ -257,7 +257,7 @@ redef class Nre_openclass
 end
 
 redef class Nre_any
-	redef fun make_rfa: Automaton
+	redef fun make_nfa
 	do
 		var a = new Automaton.cla(0, null)
 		return a

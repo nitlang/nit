@@ -221,7 +221,7 @@ redef class Nexpr
 		end
 		is_building = false
 		var nre = self.children[2]
-		res = nre.make_rfa
+		res = nre.make_nfa
 		nfa = res
 		return res
 	end
@@ -230,7 +230,7 @@ end
 redef class Nre_id
 	# The named expression
 	var nexpr: nullable Nexpr
-	
+
 	redef fun accept_check_name_visitor(v) do
 		var id = children.first.as(Nid)
 		var name = id.text
@@ -251,7 +251,7 @@ redef class Nre_id
 		v.nexpr.precs.add(node)
 	end
 
-	redef fun make_rfa
+	redef fun make_nfa
 	do
 		return nexpr.nfa.dup
 	end

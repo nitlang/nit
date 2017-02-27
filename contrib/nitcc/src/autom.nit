@@ -252,8 +252,8 @@ class Automaton
 				if t.symbol == null then continue
 
 				# Check overlaps
-				var tf = t.symbol.first
-				var tl = t.symbol.last
+				var tf = t.symbol.as(not null).first
+				var tl = t.symbol.as(not null).last
 				if l != null and tf > l then continue
 				if tl != null and f > tl then continue
 
@@ -466,8 +466,10 @@ class Automaton
 		end
 	end
 
-	# Produce a graphvis file for the automaton
-	fun to_dot(filepath: String)
+	# Produce a graphviz string from the automatom
+	#
+	# Set `merge_transitions = false` to generate one edge by transition (default true).
+	fun to_dot(merge_transitions: nullable Bool): Writable
 	do
 		var names = new HashMap[State, String]
 		var ni = 0
@@ -476,25 +478,27 @@ class Automaton
 			ni += 1
 		end
 
-		var f = new FileWriter.open(filepath)
-                f.write("digraph g \{\n")
+		var f = new Buffer
+		f.append("digraph g \{\n")
+		f.append("rankdir=LR;")
 
+		var state_nb = 0
 		for s in states do
-			f.write("s{names[s]}[shape=oval")
+			f.append("s{names[s]}[shape=circle")
 			#f.write("label=\"\",")
 			if accept.has(s) then
-				f.write(",color=blue")
+				f.append(",shape=doublecircle")
 			end
 			if tags.has_key(s) then
-				f.write(",label=\"")
+				f.append(",label=\"")
 				for token in tags[s] do
-					f.write("{token.name.escape_to_c}\\n")
+					f.append("{token.name.escape_to_dot}\\n")
 				end
-				f.write("\"")
+				f.append("\"")
 			else
-				f.write(",label=\"\"")
+				f.append(",label=\"{state_nb}\"")
 			end
-			f.write("];\n")
+			f.append("];\n")
 			var outs = new HashMap[State, Array[nullable TSymbol]]
 			for t in s.outs do
 				var a
@@ -511,20 +515,26 @@ class Automaton
 			for s2, a in outs do
 				var labe = ""
 				for c in a do
+					if merge_transitions == false then labe = ""
 					if not labe.is_empty then labe += "\n"
 					if c == null then
-						labe += "''"
+						labe += "ε"
 					else
 						labe += c.to_s
 					end
+					if merge_transitions == false then
+						f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_dot}\"];\n")
+					end
 				end
-				f.write("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
+				if merge_transitions == null or merge_transitions == true then
+					f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
+				end
 			end
+			state_nb += 1
 		end
-		f.write("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
-
-                f.write("\}\n")
-		f.close
+		f.append("empty->s{names[start]}; empty[label=\"\",shape=none];\n")
+		f.append("\}\n")
+		return f
 	end
 
 	# Transform a NFA to a DFA.
@@ -537,7 +547,7 @@ class Automaton
 
 		var dfa = new Automaton.empty
 		var n2d = new ArrayMap[Set[State], State]
-		var seen = new ArraySet[Set[State]] 
+		var seen = new ArraySet[Set[State]]
 		var alphabet = new HashSet[Int]
 		var st = eclosure([start])
 		var todo = [st]
@@ -607,7 +617,7 @@ class Automaton
 					seen.add(nfa_dest)
 				end
 				if lastst != null and lastst.to == dfa_dest then
-					lastst.symbol.last = sym.last
+					lastst.symbol.as(not null).last = sym.last
 				else
 					lastst = dfa_state.add_trans(dfa_dest, sym)
 				end
@@ -628,7 +638,7 @@ class Automaton
 			for t in s.outs do
 				if t.symbol != null then continue
 				var to = t.to
-				if res.has(to) then continue 
+				if res.has(to) then continue
 				res.add(to)
 				todo.add(to)
 			end
@@ -649,7 +659,7 @@ class Automaton
 				var l = sym.last
 				if l != null and l < symbol then continue
 				var to = t.to
-				if res.has(to) then continue 
+				if res.has(to) then continue
 				res.add(to)
 			end
 		end
