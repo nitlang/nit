@@ -1061,6 +1061,13 @@ extern class Pointer
 
 	# Free the memory pointed by this pointer
 	fun free `{ free(self); `}
+
+	# Use the address value
+	redef fun hash `{ return (long)self; `}
+
+	# Is equal to any instance pointing to the same address
+	redef fun ==(o) do return o isa Pointer and native_equals(o)
+	private fun native_equals(o: Pointer): Bool `{ return self == o; `}
 end
 
 # Task with a `main` method to be implemented by subclasses
