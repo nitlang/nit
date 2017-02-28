@@ -28,6 +28,8 @@ import glsl_validation
 import parallelization_phase
 import i18n_phase
 import regex_phase
+import actors_generation_phase
+import actors_injection_phase
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation
