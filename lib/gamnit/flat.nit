@@ -361,7 +361,7 @@ class Simple2dProgram
 		uniform bool use_texture;
 
 		// Texture to apply on this object
-		uniform sampler2D texture;
+		uniform sampler2D texture0;
 
 		// Input from the vertex shader
 		varying vec4 v_color;
@@ -370,7 +370,7 @@ class Simple2dProgram
 		void main()
 		{
 			if(use_texture) {
-				gl_FragColor = v_color * texture2D(texture, v_coord);
+				gl_FragColor = v_color * texture2D(texture0, v_coord);
 				if (gl_FragColor.a == 0.0) discard;
 			} else {
 				gl_FragColor = v_color;
@@ -385,7 +385,7 @@ class Simple2dProgram
 	var use_texture = uniforms["use_texture"].as(UniformBool) is lazy
 
 	# Visible texture unit
-	var texture = uniforms["texture"].as(UniformSampler2D) is lazy
+	var texture = uniforms["texture0"].as(UniformSampler2D) is lazy
 
 	# Coordinates on the textures, per vertex
 	var tex_coord = attributes["tex_coord"].as(AttributeVec2) is lazy

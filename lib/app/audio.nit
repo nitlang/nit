@@ -41,16 +41,16 @@ abstract class PlayableAudio
 	protected var is_loaded = false is writable
 
 	# Load this playable audio
-	fun load is abstract
+	fun load do end
 
 	# Play the sound
-	fun play is abstract
+	fun play do end
 
 	# Pause the sound
-	fun pause is abstract
+	fun pause do end
 
 	# Resume the sound
-	fun resume is abstract
+	fun resume do end
 end
 
 # Short sound

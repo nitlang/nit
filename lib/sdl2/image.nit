@@ -60,7 +60,7 @@ redef extern class SDLSurface
 end
 
 # Flags from `sys.sdl.img.initialize`
-extern class SDLImgInitFlags `{ int `}
+extern class SDLImgInitFlags `{ IMG_InitFlags `}
 	# Get the default empty flag set
 	new `{ return 0; `}
 

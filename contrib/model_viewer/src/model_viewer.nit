@@ -128,7 +128,7 @@ redef class App
 			else if event.is_arrow_left then
 				cycle_model -1
 			end
-		else if event isa PointerEvent and event.depressed then
+		else if event isa PointerEvent and not event.is_move and event.depressed then
 			if event.x.to_i > display.width / 2 then
 				cycle_model 1
 			else cycle_model -1

@@ -68,7 +68,7 @@ Char [
 Discrete -> Char [dir=back arrowtail=open style=dashed];
 
 Pointer [
- label = "{Pointer||+ address_is_null(): Bool\l+ free()\l}"
+ label = "{Pointer||+ address_is_null(): Bool\l+ free()\l- native_equals(o: Pointer): Bool\l}"
 ]
 Object -> Pointer [dir=back arrowtail=open style=dashed];
 
