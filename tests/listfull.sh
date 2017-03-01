@@ -1,5 +1,5 @@
 #!/bin/sh
-ls -1 -- "%s\n" "$@" \
+ls -1 -- "$@" \
 	../src/nit*.nit \
 	../src/test_*.nit \
 	../src/examples/*.nit \
