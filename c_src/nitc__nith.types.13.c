@@ -1,35 +1,15 @@
 #include "nitc__nith.types.0.h"
-/* runtime type HashSetNode[MProperty] */
-const struct type type_core__hash_collection__HashSetNode__nitc__MProperty = {
-1480,
-"HashSetNode[MProperty]", /* class_name_string */
-44,
+/* runtime type HashMapValues[String, nullable MGroup] */
+const struct type type_core__hash_collection__HashMapValues__core__String__nullable__nitc__MGroup = {
+1306,
+"HashMapValues[String, nullable MGroup]", /* class_name_string */
+147,
 0,
-&resolution_table_core__hash_collection__HashSetNode__nitc__MProperty,
-48,
+&resolution_table_core__hash_collection__HashMapValues__core__String__nullable__nitc__MGroup,
+205,
 {
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2757, /* nullable HashSetNode[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2779, /* nullable HashSetNode[PropertyLayoutElement] */
--1, /* empty */
--1, /* empty */
-2783, /* nullable HashSetNode[MProperty] */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -43,39 +23,226 @@ const struct type type_core__hash_collection__HashSetNode__nitc__MProperty = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1270, /* HashSetNode[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1449, /* HashSetNode[PropertyLayoutElement] */
 -1, /* empty */
 -1, /* empty */
-1480, /* HashSetNode[MProperty] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2476, /* Collection[nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2502, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1306, /* HashMapValues[String, nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1711, /* HashMapValues[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashSetNode__nitc__MProperty = {
+const struct types resolution_table_core__hash_collection__HashMapValues__core__String__nullable__nitc__MGroup = {
 0, /* dummy */
 {
+&type_core__HashMap__core__String__nullable__nitc__MGroup, /* HashMap[K, V]: HashMap[String, nullable MGroup] */
+&type_core__MapValuesIterator__core__String__nullable__nitc__MGroup, /* MapValuesIterator[K, V]: MapValuesIterator[String, nullable MGroup] */
 NULL, /* empty */
-&type_nitc__MProperty, /* K: MProperty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
 }
 };
-/* runtime type NativeArray[nullable HashSetNode[MProperty]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashSetNode__nitc__MProperty = {
-1481,
-"NativeArray[nullable HashSetNode[MProperty]]", /* class_name_string */
-182,
+/* runtime type HashMapIterator[String, nullable MGroup] */
+const struct type type_core__hash_collection__HashMapIterator__core__String__nullable__nitc__MGroup = {
+1307,
+"HashMapIterator[String, nullable MGroup]", /* class_name_string */
+100,
 0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashSetNode__nitc__MProperty,
-226,
+&resolution_table_core__hash_collection__HashMapIterator__core__String__nullable__nitc__MGroup,
+158,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -95,6 +262,7 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2679, /* MapIterator[String, nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -121,6 +289,7 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2706, /* MapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -172,6 +341,7 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1307, /* HashMapIterator[String, nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -187,7 +357,6 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2136, /* NativeArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -198,6 +367,7 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1712, /* HashMapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -229,8 +399,26 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapIterator__core__String__nullable__nitc__MGroup = {
+0, /* dummy */
+{
+&type_core__HashMap__core__String__nullable__nitc__MGroup, /* HashMap[K, V]: HashMap[String, nullable MGroup] */
+}
+};
+/* runtime type NativeArray[nullable HashMapNode[String, nullable MGroup]] */
+const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup = {
+1308,
+"NativeArray[nullable HashMapNode[String, nullable MGroup]]", /* class_name_string */
+149,
+0,
+&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup,
+228,
+{
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
-1271, /* NativeArray[nullable HashSetNode[Object]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -252,15 +440,171 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1450, /* NativeArray[nullable HashSetNode[PropertyLayoutElement]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1481, /* NativeArray[nullable HashSetNode[MProperty]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1717, /* NativeArray[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1308, /* NativeArray[nullable HashMapNode[String, nullable MGroup]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1713, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -302,24 +646,24 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashS
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashSetNode__nitc__MProperty = {
+const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup = {
 0, /* dummy */
 {
-&type_nullable__core__hash_collection__HashSetNode__nitc__MProperty, /* E: nullable HashSetNode[MProperty] */
-&type_core__NativeArray__nullable__core__hash_collection__HashSetNode__nitc__MProperty, /* NativeArray[E]: NativeArray[nullable HashSetNode[MProperty]] */
+&type_nullable__core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup, /* E: nullable HashMapNode[String, nullable MGroup] */
+&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup, /* NativeArray[E]: NativeArray[nullable HashMapNode[String, nullable MGroup]] */
 }
 };
-/* runtime type NativeArray[Writable] */
-const struct type type_core__NativeArray__core__Writable = {
-1482,
-"NativeArray[Writable]", /* class_name_string */
-39,
+/* runtime type HashMapNode[String, nullable MGroup] */
+const struct type type_core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup = {
+1309,
+"HashMapNode[String, nullable MGroup]", /* class_name_string */
+87,
 0,
-&resolution_table_core__NativeArray__core__Writable,
-226,
+&resolution_table_core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup,
+156,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -339,6 +683,7 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2760, /* nullable HashMapNode[String, nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -351,13 +696,11 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-229, /* NativeArray[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1482, /* NativeArray[Writable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -366,6 +709,7 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2799, /* nullable HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -405,6 +749,7 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1309, /* HashMapNode[String, nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -431,7 +776,6 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2136, /* NativeArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -459,77 +803,7 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
+1714, /* HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -546,1550 +820,24 @@ const struct type type_core__NativeArray__core__Writable = {
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__NativeArray__core__Writable = {
+const struct types resolution_table_core__hash_collection__HashMapNode__core__String__nullable__nitc__MGroup = {
 0, /* dummy */
 {
-&type_core__Writable, /* E: Writable */
-&type_core__NativeArray__core__Writable, /* NativeArray[E]: NativeArray[Writable] */
-}
-};
-/* runtime type ArrayIterator[Writable] */
-const struct type type_core__array__ArrayIterator__core__Writable = {
--1, /*CAST DEAD*/
-"ArrayIterator[Writable]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayIterator__core__Writable,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__core__Writable = {
-0, /* dummy */
-{
-&type_core__Array__core__Writable, /* Array[E]: Array[Writable] */
-&type_core__AbstractArrayRead__core__Writable, /* AbstractArrayRead[E]: AbstractArrayRead[Writable] */
-}
-};
-/* runtime type ArrayReverseIterator[Writable] */
-const struct type type_core__array__ArrayReverseIterator__core__Writable = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[Writable]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__core__Writable,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__core__Writable = {
-0, /* dummy */
-{
-&type_core__Array__core__Writable, /* Array[E]: Array[Writable] */
-&type_core__AbstractArrayRead__core__Writable, /* AbstractArrayRead[E]: AbstractArrayRead[Writable] */
-}
-};
-/* runtime type HashMapKeys[String, ConfigNode] */
-const struct type type_core__hash_collection__HashMapKeys__core__String__ini__ConfigNode = {
--1, /*CAST DEAD*/
-"HashMapKeys[String, ConfigNode]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapKeys__core__String__ini__ConfigNode,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2402, /* Collection[String] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2439, /* Collection[Writable] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapKeys__core__String__ini__ConfigNode = {
-0, /* dummy */
-{
-&type_core__HashMap__core__String__ini__ConfigNode, /* HashMap[K, V]: HashMap[String, ConfigNode] */
-&type_core__Array__core__String, /* Array[E]: Array[String] */
-&type_core__MapKeysIterator__core__String__ini__ConfigNode, /* MapKeysIterator[K, V]: MapKeysIterator[String, ConfigNode] */
-}
-};
-/* runtime type HashMapValues[String, ConfigNode] */
-const struct type type_core__hash_collection__HashMapValues__core__String__ini__ConfigNode = {
--1, /*CAST DEAD*/
-"HashMapValues[String, ConfigNode]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapValues__core__String__ini__ConfigNode,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2419, /* Collection[ConfigNode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapValues__core__String__ini__ConfigNode = {
-0, /* dummy */
-{
-&type_core__HashMap__core__String__ini__ConfigNode, /* HashMap[K, V]: HashMap[String, ConfigNode] */
-&type_core__Array__ini__ConfigNode, /* Array[E]: Array[ConfigNode] */
-&type_core__MapValuesIterator__core__String__ini__ConfigNode, /* MapValuesIterator[K, V]: MapValuesIterator[String, ConfigNode] */
-}
-};
-/* runtime type HashMapIterator[String, ConfigNode] */
-const struct type type_core__hash_collection__HashMapIterator__core__String__ini__ConfigNode = {
--1, /*CAST DEAD*/
-"HashMapIterator[String, ConfigNode]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapIterator__core__String__ini__ConfigNode,
-79,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2688, /* MapIterator[String, ConfigNode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapIterator__core__String__ini__ConfigNode = {
-0, /* dummy */
-{
-&type_core__HashMap__core__String__ini__ConfigNode, /* HashMap[K, V]: HashMap[String, ConfigNode] */
-}
-};
-/* runtime type HashMapNode[String, ConfigNode] */
-const struct type type_core__hash_collection__HashMapNode__core__String__ini__ConfigNode = {
-1488,
-"HashMapNode[String, ConfigNode]", /* class_name_string */
-112,
-0,
-&resolution_table_core__hash_collection__HashMapNode__core__String__ini__ConfigNode,
-152,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2784, /* nullable HashMapNode[String, ConfigNode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2803, /* nullable HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1488, /* HashMapNode[String, ConfigNode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1756, /* HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapNode__core__String__ini__ConfigNode = {
-0, /* dummy */
-{
-&type_ini__ConfigNode, /* V: ConfigNode */
+&type_nullable__nitc__MGroup, /* V: nullable MGroup */
 &type_core__String, /* K: String */
 }
 };
-/* runtime type NativeArray[nullable HashMapNode[String, ConfigNode]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__ini__ConfigNode = {
-1489,
-"NativeArray[nullable HashMapNode[String, ConfigNode]]", /* class_name_string */
-183,
+/* runtime type Array[nullable MGroup] */
+const struct type type_core__Array__nullable__nitc__MGroup = {
+1310,
+"Array[nullable MGroup]", /* class_name_string */
+455,
 0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__ini__ConfigNode,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1489, /* NativeArray[nullable HashMapNode[String, ConfigNode]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__ini__ConfigNode = {
-0, /* dummy */
-{
-&type_nullable__core__hash_collection__HashMapNode__core__String__ini__ConfigNode, /* E: nullable HashMapNode[String, ConfigNode] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__ini__ConfigNode, /* NativeArray[E]: NativeArray[nullable HashMapNode[String, ConfigNode]] */
-}
-};
-/* runtime type ArrayIterator[Byte] */
-const struct type type_core__array__ArrayIterator__core__Byte = {
--1, /*CAST DEAD*/
-"ArrayIterator[Byte]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayIterator__core__Byte,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__core__Byte = {
-0, /* dummy */
-{
-&type_core__Array__core__Byte, /* Array[E]: Array[Byte] */
-&type_core__AbstractArrayRead__core__Byte, /* AbstractArrayRead[E]: AbstractArrayRead[Byte] */
-}
-};
-/* runtime type ArrayReverseIterator[Byte] */
-const struct type type_core__array__ArrayReverseIterator__core__Byte = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[Byte]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__core__Byte,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__core__Byte = {
-0, /* dummy */
-{
-&type_core__Array__core__Byte, /* Array[E]: Array[Byte] */
-&type_core__AbstractArrayRead__core__Byte, /* AbstractArrayRead[E]: AbstractArrayRead[Byte] */
-}
-};
-/* runtime type NativeArray[Prod] */
-const struct type type_core__NativeArray__nitc__Prod = {
-1492,
-"NativeArray[Prod]", /* class_name_string */
-40,
-0,
-&resolution_table_core__NativeArray__nitc__Prod,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-229, /* NativeArray[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1492, /* NativeArray[Prod] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1329, /* NativeArray[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nitc__Prod = {
-0, /* dummy */
-{
-&type_nitc__Prod, /* E: Prod */
-&type_core__NativeArray__nitc__Prod, /* NativeArray[E]: NativeArray[Prod] */
-}
-};
-/* runtime type ArrayIterator[Prod] */
-const struct type type_core__array__ArrayIterator__nitc__Prod = {
--1, /*CAST DEAD*/
-"ArrayIterator[Prod]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayIterator__nitc__Prod,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__nitc__Prod = {
-0, /* dummy */
-{
-&type_core__Array__nitc__Prod, /* Array[E]: Array[Prod] */
-&type_core__AbstractArrayRead__nitc__Prod, /* AbstractArrayRead[E]: AbstractArrayRead[Prod] */
-}
-};
-/* runtime type ArrayReverseIterator[Prod] */
-const struct type type_core__array__ArrayReverseIterator__nitc__Prod = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[Prod]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__nitc__Prod,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__nitc__Prod = {
-0, /* dummy */
-{
-&type_core__Array__nitc__Prod, /* Array[E]: Array[Prod] */
-&type_core__AbstractArrayRead__nitc__Prod, /* AbstractArrayRead[E]: AbstractArrayRead[Prod] */
-}
-};
-/* runtime type NativeArray[Token] */
-const struct type type_core__NativeArray__nitc__Token = {
-1495,
-"NativeArray[Token]", /* class_name_string */
-41,
-0,
-&resolution_table_core__NativeArray__nitc__Token,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-229, /* NativeArray[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1495, /* NativeArray[Token] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1329, /* NativeArray[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nitc__Token = {
-0, /* dummy */
-{
-&type_nitc__Token, /* E: Token */
-&type_core__NativeArray__nitc__Token, /* NativeArray[E]: NativeArray[Token] */
-}
-};
-/* runtime type ArrayIterator[Token] */
-const struct type type_core__array__ArrayIterator__nitc__Token = {
--1, /*CAST DEAD*/
-"ArrayIterator[Token]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayIterator__nitc__Token,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__nitc__Token = {
-0, /* dummy */
-{
-&type_core__Array__nitc__Token, /* Array[E]: Array[Token] */
-&type_core__AbstractArrayRead__nitc__Token, /* AbstractArrayRead[E]: AbstractArrayRead[Token] */
-}
-};
-/* runtime type ArrayReverseIterator[Token] */
-const struct type type_core__array__ArrayReverseIterator__nitc__Token = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[Token]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__nitc__Token,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__nitc__Token = {
-0, /* dummy */
-{
-&type_core__Array__nitc__Token, /* Array[E]: Array[Token] */
-&type_core__AbstractArrayRead__nitc__Token, /* AbstractArrayRead[E]: AbstractArrayRead[Token] */
-}
-};
-/* runtime type Array[TId] */
-const struct type type_core__Array__nitc__TId = {
-1498,
-"Array[TId]", /* class_name_string */
-456,
-0,
-&resolution_table_core__Array__nitc__TId,
+&resolution_table_core__Array__nullable__nitc__MGroup,
 510,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2124,7 +872,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2132,7 +879,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2441, /* Collection[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2151,7 +897,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2460, /* Collection[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2159,10 +904,10 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2468, /* Collection[TId] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2476, /* Collection[nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2188,6 +933,7 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2502, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2202,7 +948,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2217,11 +962,11 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2015, /* Array[nullable Object] */
-2202, /* SequenceRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1715, /* Array[nullable Object] */
+2210, /* SequenceRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2249,9 +994,9 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2560, /* AbstractArrayRead[nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
-2557, /* AbstractArrayRead[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2260,7 +1005,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2566, /* AbstractArrayRead[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2280,7 +1024,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2586, /* AbstractArrayRead[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2288,13 +1031,13 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2594, /* AbstractArrayRead[TId] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2603, /* AbstractArrayRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2331,7 +1074,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2637, /* AbstractArrayRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2377,7 +1119,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2881, /* AbstractArray[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2385,7 +1126,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2889, /* AbstractArray[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2406,7 +1146,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2910, /* AbstractArray[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2414,7 +1153,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2918, /* AbstractArray[TId] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2422,6 +1160,7 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2922, /* AbstractArray[nullable MGroup] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2448,6 +1187,7 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2949, /* AbstractArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2457,7 +1197,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2961, /* AbstractArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2472,7 +1211,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-228, /* Array[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2518,7 +1256,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-260, /* Array[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2536,7 +1273,6 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1327, /* Array[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2544,7 +1280,19 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1498, /* Array[TId] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1310, /* Array[nullable MGroup] */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2600,66 +1348,1183 @@ const struct type type_core__Array__nitc__TId = {
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__Array__nitc__TId = {
+const struct types resolution_table_core__Array__nullable__nitc__MGroup = {
 0, /* dummy */
 {
-&type_nitc__TId, /* E: TId */
-&type_core__Array__nitc__TId, /* Array[E]: Array[TId] */
-&type_core__Collection__nitc__TId, /* Collection[E]: Collection[TId] */
-&type_core__Array__nitc__TId, /* Array[E]: Array[TId] */
-&type_core__AbstractArray__nitc__TId, /* AbstractArray[E]: AbstractArray[TId] */
-&type_core__NativeArray__nitc__TId, /* NativeArray[E]: NativeArray[TId] */
-&type_nitc__TId, /* E: TId */
-&type_core__Collection__nitc__TId, /* Collection[E]: Collection[TId] */
-&type_nitc__TId, /* E: TId */
-&type_core__Collection__nitc__TId, /* Collection[E]: Collection[TId] */
-&type_core__Collection__nitc__TId, /* Collection[E]: Collection[TId] */
-&type_core__Array__nitc__TId, /* Array[E]: Array[TId] */
-&type_core__AbstractArray__nitc__TId, /* AbstractArray[E]: AbstractArray[TId] */
-&type_core__array__ArrayIterator__nitc__TId, /* ArrayIterator[E]: ArrayIterator[TId] */
-&type_core__array__ArrayReverseIterator__nitc__TId, /* ArrayReverseIterator[E]: ArrayReverseIterator[TId] */
+&type_nullable__nitc__MGroup, /* E: nullable MGroup */
+&type_core__Array__nullable__nitc__MGroup, /* SELF: Array[nullable MGroup] */
+&type_core__Collection__nullable__nitc__MGroup, /* Collection[E]: Collection[nullable MGroup] */
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
+&type_core__AbstractArray__nullable__nitc__MGroup, /* AbstractArray[E]: AbstractArray[nullable MGroup] */
+&type_core__NativeArray__nullable__nitc__MGroup, /* NativeArray[E]: NativeArray[nullable MGroup] */
+&type_nullable__nitc__MGroup, /* E: nullable MGroup */
+&type_core__Collection__nullable__nitc__MGroup, /* Collection[E]: Collection[nullable MGroup] */
+&type_nullable__nitc__MGroup, /* E: nullable MGroup */
+&type_core__Collection__nullable__nitc__MGroup, /* Collection[E]: Collection[nullable MGroup] */
+&type_core__Collection__nullable__nitc__MGroup, /* Collection[E]: Collection[nullable MGroup] */
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
+&type_core__AbstractArray__nullable__nitc__MGroup, /* AbstractArray[E]: AbstractArray[nullable MGroup] */
+&type_core__array__ArrayIterator__nullable__nitc__MGroup, /* ArrayIterator[E]: ArrayIterator[nullable MGroup] */
+&type_core__array__ArrayReverseIterator__nullable__nitc__MGroup, /* ArrayReverseIterator[E]: ArrayReverseIterator[nullable MGroup] */
 }
 };
-/* runtime type ArraySetIterator[MGroup] */
-const struct type type_core__array__ArraySetIterator__nitc__MGroup = {
--1, /*CAST DEAD*/
-"ArraySetIterator[MGroup]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type MapValuesIterator[String, nullable MGroup] */
+const struct type type_core__MapValuesIterator__core__String__nullable__nitc__MGroup = {
+1311,
+"MapValuesIterator[String, nullable MGroup]", /* class_name_string */
+30,
 0,
-&resolution_table_core__array__ArraySetIterator__nitc__MGroup,
+&resolution_table_core__MapValuesIterator__core__String__nullable__nitc__MGroup,
+90,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1311, /* MapValuesIterator[String, nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1716, /* MapValuesIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__MapValuesIterator__core__String__nullable__nitc__MGroup = {
+0, /* dummy */
+{
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
+&type_core__MapIterator__core__String__nullable__nitc__MGroup, /* MapIterator[K, V]: MapIterator[String, nullable MGroup] */
+}
+};
+/* runtime type NativeArray[nullable MGroup] */
+const struct type type_core__NativeArray__nullable__nitc__MGroup = {
+1312,
+"NativeArray[nullable MGroup]", /* class_name_string */
+68,
+0,
+&resolution_table_core__NativeArray__nullable__nitc__MGroup,
+228,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1312, /* NativeArray[nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1717, /* NativeArray[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__NativeArray__nullable__nitc__MGroup = {
+0, /* dummy */
+{
+&type_nullable__nitc__MGroup, /* E: nullable MGroup */
+&type_core__NativeArray__nullable__nitc__MGroup, /* NativeArray[E]: NativeArray[nullable MGroup] */
+}
+};
+/* runtime type ArrayIterator[nullable MGroup] */
+const struct type type_core__array__ArrayIterator__nullable__nitc__MGroup = {
+1313,
+"ArrayIterator[nullable MGroup]", /* class_name_string */
+37,
+0,
+&resolution_table_core__array__ArrayIterator__nullable__nitc__MGroup,
+137,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1313, /* ArrayIterator[nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__array__ArrayIterator__nullable__nitc__MGroup = {
+0, /* dummy */
+{
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
+&type_core__AbstractArrayRead__nullable__nitc__MGroup, /* AbstractArrayRead[E]: AbstractArrayRead[nullable MGroup] */
+}
+};
+/* runtime type ArrayReverseIterator[nullable MGroup] */
+const struct type type_core__array__ArrayReverseIterator__nullable__nitc__MGroup = {
+1314,
+"ArrayReverseIterator[nullable MGroup]", /* class_name_string */
+163,
+0,
+&resolution_table_core__array__ArrayReverseIterator__nullable__nitc__MGroup,
+263,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1313, /* ArrayIterator[nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1314, /* ArrayReverseIterator[nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1719, /* ArrayReverseIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__array__ArrayReverseIterator__nullable__nitc__MGroup = {
+0, /* dummy */
+{
+&type_core__Array__nullable__nitc__MGroup, /* Array[E]: Array[nullable MGroup] */
+&type_core__AbstractArrayRead__nullable__nitc__MGroup, /* AbstractArrayRead[E]: AbstractArrayRead[nullable MGroup] */
+}
+};
+/* runtime type MapKeysIterator[String, nullable MGroup] */
+const struct type type_core__MapKeysIterator__core__String__nullable__nitc__MGroup = {
+1315,
+"MapKeysIterator[String, nullable MGroup]", /* class_name_string */
+30,
+0,
+&resolution_table_core__MapKeysIterator__core__String__nullable__nitc__MGroup,
+90,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+2840, /* Iterator[String] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1315, /* MapKeysIterator[String, nullable MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1720, /* MapKeysIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__MapKeysIterator__core__String__nullable__nitc__MGroup = {
+0, /* dummy */
+{
+&type_core__Array__core__String, /* Array[E]: Array[String] */
+&type_core__MapIterator__core__String__nullable__nitc__MGroup, /* MapIterator[K, V]: MapIterator[String, nullable MGroup] */
+}
+};
+/* runtime type NativeArray[SequenceRead[MModule]] */
+const struct type type_core__NativeArray__core__SequenceRead__nitc__MModule = {
+1316,
+"NativeArray[SequenceRead[MModule]]", /* class_name_string */
 11,
+0,
+&resolution_table_core__NativeArray__core__SequenceRead__nitc__MModule,
+228,
 {
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2830, /* Iterator[MGroup] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1316, /* NativeArray[SequenceRead[MModule]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+227, /* NativeArray[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1717, /* NativeArray[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__array__ArraySetIterator__nitc__MGroup = {
+const struct types resolution_table_core__NativeArray__core__SequenceRead__nitc__MModule = {
 0, /* dummy */
 {
-&type_core__Array__nitc__MGroup, /* Array[E]: Array[MGroup] */
-&type_core__Iterator__nitc__MGroup, /* Iterator[E]: Iterator[MGroup] */
+&type_core__SequenceRead__nitc__MModule, /* E: SequenceRead[MModule] */
+&type_core__NativeArray__core__SequenceRead__nitc__MModule, /* NativeArray[E]: NativeArray[SequenceRead[MModule]] */
 }
 };
-/* runtime type HashMapKeys[MClass, AClassdef] */
-const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__AClassdef = {
--1, /*CAST DEAD*/
-"HashMapKeys[MClass, AClassdef]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type ArrayIterator[SequenceRead[MModule]] */
+const struct type type_core__array__ArrayIterator__core__SequenceRead__nitc__MModule = {
+1317,
+"ArrayIterator[SequenceRead[MModule]]", /* class_name_string */
+38,
 0,
-&resolution_table_core__hash_collection__HashMapKeys__nitc__MClass__nitc__AClassdef,
-129,
+&resolution_table_core__array__ArrayIterator__core__SequenceRead__nitc__MModule,
+137,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2670,7 +2535,6 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2409, /* Collection[MClass] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2694,11 +2558,10 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
+1317, /* ArrayIterator[SequenceRead[MModule]] */
 -1, /* empty */
-2437, /* Collection[nullable MClass] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2739,6 +2602,7 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2756,6 +2620,7 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1884, /* ArrayIterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2772,7 +2637,14 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2789,25 +2661,25 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__nitc__A
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MClass__nitc__AClassdef = {
+const struct types resolution_table_core__array__ArrayIterator__core__SequenceRead__nitc__MModule = {
 0, /* dummy */
 {
-&type_core__HashMap__nitc__MClass__nitc__AClassdef, /* HashMap[K, V]: HashMap[MClass, AClassdef] */
-&type_core__Array__nitc__MClass, /* Array[E]: Array[MClass] */
-&type_core__MapKeysIterator__nitc__MClass__nitc__AClassdef, /* MapKeysIterator[K, V]: MapKeysIterator[MClass, AClassdef] */
+&type_core__Array__core__SequenceRead__nitc__MModule, /* Array[E]: Array[SequenceRead[MModule]] */
+&type_core__AbstractArrayRead__core__SequenceRead__nitc__MModule, /* AbstractArrayRead[E]: AbstractArrayRead[SequenceRead[MModule]] */
 }
 };
-/* runtime type HashMapValues[MClass, AClassdef] */
-const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc__AClassdef = {
--1, /*CAST DEAD*/
-"HashMapValues[MClass, AClassdef]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type ArrayReverseIterator[SequenceRead[MModule]] */
+const struct type type_core__array__ArrayReverseIterator__core__SequenceRead__nitc__MModule = {
+1318,
+"ArrayReverseIterator[SequenceRead[MModule]]", /* class_name_string */
+164,
 0,
-&resolution_table_core__hash_collection__HashMapValues__nitc__MClass__nitc__AClassdef,
-129,
+&resolution_table_core__array__ArrayReverseIterator__core__SequenceRead__nitc__MModule,
+263,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2837,19 +2709,17 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2428, /* Collection[AClassdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
+1317, /* ArrayIterator[SequenceRead[MModule]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2440, /* Collection[Prod] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2869,7 +2739,6 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2460, /* Collection[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2888,6 +2757,7 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2905,6 +2775,7 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1884, /* ArrayIterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2920,7 +2791,141 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1318, /* ArrayReverseIterator[SequenceRead[MModule]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1719, /* ArrayReverseIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1885, /* ArrayReverseIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2937,25 +2942,2496 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__nitc_
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MClass__nitc__AClassdef = {
+const struct types resolution_table_core__array__ArrayReverseIterator__core__SequenceRead__nitc__MModule = {
 0, /* dummy */
 {
-&type_core__HashMap__nitc__MClass__nitc__AClassdef, /* HashMap[K, V]: HashMap[MClass, AClassdef] */
+&type_core__Array__core__SequenceRead__nitc__MModule, /* Array[E]: Array[SequenceRead[MModule]] */
+&type_core__AbstractArrayRead__core__SequenceRead__nitc__MModule, /* AbstractArrayRead[E]: AbstractArrayRead[SequenceRead[MModule]] */
+}
+};
+/* runtime type NativeArray[AModule] */
+const struct type type_core__NativeArray__nitc__AModule = {
+1319,
+"NativeArray[AModule]", /* class_name_string */
+12,
+0,
+&resolution_table_core__NativeArray__nitc__AModule,
+228,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1319, /* NativeArray[AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+227, /* NativeArray[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2012, /* NativeArray[Prod] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1625, /* NativeArray[ANode] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1717, /* NativeArray[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__NativeArray__nitc__AModule = {
+0, /* dummy */
+{
+&type_nitc__AModule, /* E: AModule */
+&type_core__NativeArray__nitc__AModule, /* NativeArray[E]: NativeArray[AModule] */
+}
+};
+/* runtime type ArrayIterator[AModule] */
+const struct type type_core__array__ArrayIterator__nitc__AModule = {
+1320,
+"ArrayIterator[AModule]", /* class_name_string */
+39,
+0,
+&resolution_table_core__array__ArrayIterator__nitc__AModule,
+137,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1320, /* ArrayIterator[AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1626, /* ArrayIterator[ANode] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1884, /* ArrayIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2013, /* ArrayIterator[Prod] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__array__ArrayIterator__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__Array__nitc__AModule, /* Array[E]: Array[AModule] */
+&type_core__AbstractArrayRead__nitc__AModule, /* AbstractArrayRead[E]: AbstractArrayRead[AModule] */
+}
+};
+/* runtime type ArrayReverseIterator[AModule] */
+const struct type type_core__array__ArrayReverseIterator__nitc__AModule = {
+1321,
+"ArrayReverseIterator[AModule]", /* class_name_string */
+165,
+0,
+&resolution_table_core__array__ArrayReverseIterator__nitc__AModule,
+263,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1320, /* ArrayIterator[AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1626, /* ArrayIterator[ANode] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1884, /* ArrayIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2013, /* ArrayIterator[Prod] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1321, /* ArrayReverseIterator[AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1627, /* ArrayReverseIterator[ANode] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1719, /* ArrayReverseIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1885, /* ArrayReverseIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2014, /* ArrayReverseIterator[Prod] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__array__ArrayReverseIterator__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__Array__nitc__AModule, /* Array[E]: Array[AModule] */
+&type_core__AbstractArrayRead__nitc__AModule, /* AbstractArrayRead[E]: AbstractArrayRead[AModule] */
+}
+};
+/* runtime type HashMapKeys[MModule, AModule] */
+const struct type type_core__hash_collection__HashMapKeys__nitc__MModule__nitc__AModule = {
+1322,
+"HashMapKeys[MModule, AModule]", /* class_name_string */
+148,
+0,
+&resolution_table_core__hash_collection__HashMapKeys__nitc__MModule__nitc__AModule,
+205,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2416, /* Collection[MModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2442, /* Collection[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2475, /* Collection[nullable MModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2502, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1322, /* HashMapKeys[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1710, /* HashMapKeys[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__HashMap__nitc__MModule__nitc__AModule, /* HashMap[K, V]: HashMap[MModule, AModule] */
+&type_core__MapKeysIterator__nitc__MModule__nitc__AModule, /* MapKeysIterator[K, V]: MapKeysIterator[MModule, AModule] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nitc__MModule, /* Array[E]: Array[MModule] */
+}
+};
+/* runtime type HashMapValues[MModule, AModule] */
+const struct type type_core__hash_collection__HashMapValues__nitc__MModule__nitc__AModule = {
+1323,
+"HashMapValues[MModule, AModule]", /* class_name_string */
+148,
+0,
+&resolution_table_core__hash_collection__HashMapValues__nitc__MModule__nitc__AModule,
+205,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2420, /* Collection[AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2442, /* Collection[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2449, /* Collection[Prod] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2496, /* Collection[ANode] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2502, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1323, /* HashMapValues[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1711, /* HashMapValues[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__HashMap__nitc__MModule__nitc__AModule, /* HashMap[K, V]: HashMap[MModule, AModule] */
+&type_core__MapValuesIterator__nitc__MModule__nitc__AModule, /* MapValuesIterator[K, V]: MapValuesIterator[MModule, AModule] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nitc__AModule, /* Array[E]: Array[AModule] */
+}
+};
+/* runtime type HashMapIterator[MModule, AModule] */
+const struct type type_core__hash_collection__HashMapIterator__nitc__MModule__nitc__AModule = {
+1324,
+"HashMapIterator[MModule, AModule]", /* class_name_string */
+101,
+0,
+&resolution_table_core__hash_collection__HashMapIterator__nitc__MModule__nitc__AModule,
+158,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2680, /* MapIterator[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2706, /* MapIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1324, /* HashMapIterator[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1712, /* HashMapIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__HashMap__nitc__MModule__nitc__AModule, /* HashMap[K, V]: HashMap[MModule, AModule] */
+}
+};
+/* runtime type NativeArray[nullable HashMapNode[MModule, AModule]] */
+const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule = {
+1325,
+"NativeArray[nullable HashMapNode[MModule, AModule]]", /* class_name_string */
+150,
+0,
+&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule,
+228,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1717, /* NativeArray[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1325, /* NativeArray[nullable HashMapNode[MModule, AModule]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1713, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_nullable__core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule, /* E: nullable HashMapNode[MModule, AModule] */
+&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule, /* NativeArray[E]: NativeArray[nullable HashMapNode[MModule, AModule]] */
+}
+};
+/* runtime type HashMapNode[MModule, AModule] */
+const struct type type_core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule = {
+1326,
+"HashMapNode[MModule, AModule]", /* class_name_string */
+88,
+0,
+&resolution_table_core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule,
+156,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2761, /* nullable HashMapNode[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2799, /* nullable HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1326, /* HashMapNode[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1714, /* HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapNode__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_nitc__AModule, /* V: AModule */
+&type_nitc__MModule, /* K: MModule */
+}
+};
+/* runtime type MapValuesIterator[MModule, AModule] */
+const struct type type_core__MapValuesIterator__nitc__MModule__nitc__AModule = {
+1327,
+"MapValuesIterator[MModule, AModule]", /* class_name_string */
+31,
+0,
+&resolution_table_core__MapValuesIterator__nitc__MModule__nitc__AModule,
+90,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1327, /* MapValuesIterator[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1716, /* MapValuesIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__MapValuesIterator__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__Array__nitc__AModule, /* Array[E]: Array[AModule] */
+&type_core__MapIterator__nitc__MModule__nitc__AModule, /* MapIterator[K, V]: MapIterator[MModule, AModule] */
+}
+};
+/* runtime type MapKeysIterator[MModule, AModule] */
+const struct type type_core__MapKeysIterator__nitc__MModule__nitc__AModule = {
+1328,
+"MapKeysIterator[MModule, AModule]", /* class_name_string */
+31,
+0,
+&resolution_table_core__MapKeysIterator__nitc__MModule__nitc__AModule,
+90,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+2839, /* Iterator[MModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1328, /* MapKeysIterator[MModule, AModule] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1720, /* MapKeysIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__MapKeysIterator__nitc__MModule__nitc__AModule = {
+0, /* dummy */
+{
+&type_core__Array__nitc__MModule, /* Array[E]: Array[MModule] */
+&type_core__MapIterator__nitc__MModule__nitc__AModule, /* MapIterator[K, V]: MapIterator[MModule, AModule] */
+}
+};
+/* runtime type HashMapKeys[MClassDef, AClassdef] */
+const struct type type_core__hash_collection__HashMapKeys__nitc__MClassDef__nitc__AClassdef = {
+1329,
+"HashMapKeys[MClassDef, AClassdef]", /* class_name_string */
+149,
+0,
+&resolution_table_core__hash_collection__HashMapKeys__nitc__MClassDef__nitc__AClassdef,
+205,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2423, /* Collection[MClassDef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2442, /* Collection[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2502, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1329, /* HashMapKeys[MClassDef, AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1710, /* HashMapKeys[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MClassDef__nitc__AClassdef = {
+0, /* dummy */
+{
+&type_core__HashMap__nitc__MClassDef__nitc__AClassdef, /* HashMap[K, V]: HashMap[MClassDef, AClassdef] */
+&type_core__MapKeysIterator__nitc__MClassDef__nitc__AClassdef, /* MapKeysIterator[K, V]: MapKeysIterator[MClassDef, AClassdef] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nitc__MClassDef, /* Array[E]: Array[MClassDef] */
+}
+};
+/* runtime type HashMapValues[MClassDef, AClassdef] */
+const struct type type_core__hash_collection__HashMapValues__nitc__MClassDef__nitc__AClassdef = {
+1330,
+"HashMapValues[MClassDef, AClassdef]", /* class_name_string */
+149,
+0,
+&resolution_table_core__hash_collection__HashMapValues__nitc__MClassDef__nitc__AClassdef,
+205,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2437, /* Collection[AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2442, /* Collection[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2449, /* Collection[Prod] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2496, /* Collection[ANode] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2502, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1330, /* HashMapValues[MClassDef, AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1711, /* HashMapValues[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MClassDef__nitc__AClassdef = {
+0, /* dummy */
+{
+&type_core__HashMap__nitc__MClassDef__nitc__AClassdef, /* HashMap[K, V]: HashMap[MClassDef, AClassdef] */
+&type_core__MapValuesIterator__nitc__MClassDef__nitc__AClassdef, /* MapValuesIterator[K, V]: MapValuesIterator[MClassDef, AClassdef] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
 &type_core__Array__nitc__AClassdef, /* Array[E]: Array[AClassdef] */
-&type_core__MapValuesIterator__nitc__MClass__nitc__AClassdef, /* MapValuesIterator[K, V]: MapValuesIterator[MClass, AClassdef] */
 }
 };
-/* runtime type HashMapIterator[MClass, AClassdef] */
-const struct type type_core__hash_collection__HashMapIterator__nitc__MClass__nitc__AClassdef = {
--1, /*CAST DEAD*/
-"HashMapIterator[MClass, AClassdef]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type HashMapIterator[MClassDef, AClassdef] */
+const struct type type_core__hash_collection__HashMapIterator__nitc__MClassDef__nitc__AClassdef = {
+1331,
+"HashMapIterator[MClassDef, AClassdef]", /* class_name_string */
+102,
 0,
-&resolution_table_core__hash_collection__HashMapIterator__nitc__MClass__nitc__AClassdef,
-79,
+&resolution_table_core__hash_collection__HashMapIterator__nitc__MClassDef__nitc__AClassdef,
+158,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2681, /* MapIterator[MClassDef, AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2706, /* MapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -2993,7 +5469,23 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__MClass__nit
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2689, /* MapIterator[MClass, AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1331, /* HashMapIterator[MClassDef, AClassdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3011,7 +5503,23 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__MClass__nit
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1712, /* HashMapIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3035,23 +5543,23 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__MClass__nit
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MClass__nitc__AClassdef = {
+const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MClassDef__nitc__AClassdef = {
 0, /* dummy */
 {
-&type_core__HashMap__nitc__MClass__nitc__AClassdef, /* HashMap[K, V]: HashMap[MClass, AClassdef] */
+&type_core__HashMap__nitc__MClassDef__nitc__AClassdef, /* HashMap[K, V]: HashMap[MClassDef, AClassdef] */
 }
 };
-/* runtime type HashMapNode[MClass, AClassdef] */
-const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef = {
-1503,
-"HashMapNode[MClass, AClassdef]", /* class_name_string */
-113,
+/* runtime type NativeArray[nullable HashMapNode[MClassDef, AClassdef]] */
+const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef = {
+1332,
+"NativeArray[nullable HashMapNode[MClassDef, AClassdef]]", /* class_name_string */
+151,
 0,
-&resolution_table_core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef,
-152,
+&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef,
+228,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3088,7 +5596,6 @@ const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2785, /* nullable HashMapNode[MClass, AClassdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3105,7 +5612,6 @@ const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2803, /* nullable HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3147,6 +5653,7 @@ const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1717, /* NativeArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3163,7 +5670,6 @@ const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1503, /* HashMapNode[MClass, AClassdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3180,7 +5686,85 @@ const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1756, /* HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1332, /* NativeArray[nullable HashMapNode[MClassDef, AClassdef]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1713, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3204,24 +5788,199 @@ const struct type type_core__hash_collection__HashMapNode__nitc__MClass__nitc__A
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef = {
+const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef = {
+0, /* dummy */
+{
+&type_nullable__core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef, /* E: nullable HashMapNode[MClassDef, AClassdef] */
+&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef, /* NativeArray[E]: NativeArray[nullable HashMapNode[MClassDef, AClassdef]] */
+}
+};
+/* runtime type HashMapNode[MClassDef, AClassdef] */
+const struct type type_core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef = {
+1333,
+"HashMapNode[MClassDef, AClassdef]", /* class_name_string */
+89,
+0,
+&resolution_table_core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef,
+156,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2762, /* nullable HashMapNode[MClassDef, AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2799, /* nullable HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1333, /* HashMapNode[MClassDef, AClassdef] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1714, /* HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapNode__nitc__MClassDef__nitc__AClassdef = {
 0, /* dummy */
 {
 &type_nitc__AClassdef, /* V: AClassdef */
-&type_nitc__MClass, /* K: MClass */
+&type_nitc__MClassDef, /* K: MClassDef */
 }
 };
-/* runtime type NativeArray[nullable HashMapNode[MClass, AClassdef]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef = {
-1504,
-"NativeArray[nullable HashMapNode[MClass, AClassdef]]", /* class_name_string */
-184,
+/* runtime type MapValuesIterator[MClassDef, AClassdef] */
+const struct type type_core__MapValuesIterator__nitc__MClassDef__nitc__AClassdef = {
+1334,
+"MapValuesIterator[MClassDef, AClassdef]", /* class_name_string */
+32,
 0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef,
-226,
+&resolution_table_core__MapValuesIterator__nitc__MClassDef__nitc__AClassdef,
+90,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3251,6 +6010,7 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashM
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1334, /* MapValuesIterator[MClassDef, AClassdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3275,673 +6035,7 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashM
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1504, /* NativeArray[nullable HashMapNode[MClass, AClassdef]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef = {
-0, /* dummy */
-{
-&type_nullable__core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef, /* E: nullable HashMapNode[MClass, AClassdef] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__nitc__AClassdef, /* NativeArray[E]: NativeArray[nullable HashMapNode[MClass, AClassdef]] */
-}
-};
-/* runtime type Array[AType] */
-const struct type type_core__Array__nitc__AType = {
-1505,
-"Array[AType]", /* class_name_string */
-457,
-0,
-&resolution_table_core__Array__nitc__AType,
-510,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2440, /* Collection[Prod] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2460, /* Collection[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2469, /* Collection[AType] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2015, /* Array[nullable Object] */
-2202, /* SequenceRead[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2557, /* AbstractArrayRead[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2565, /* AbstractArrayRead[Prod] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2586, /* AbstractArrayRead[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2595, /* AbstractArrayRead[AType] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2637, /* AbstractArrayRead[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2881, /* AbstractArray[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2888, /* AbstractArray[Prod] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2910, /* AbstractArray[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2919, /* AbstractArray[AType] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2961, /* AbstractArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-228, /* Array[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-258, /* Array[Prod] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1327, /* Array[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1505, /* Array[AType] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
+1716, /* MapValuesIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -3976,41 +6070,28 @@ const struct type type_core__Array__nitc__AType = {
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__Array__nitc__AType = {
+const struct types resolution_table_core__MapValuesIterator__nitc__MClassDef__nitc__AClassdef = {
 0, /* dummy */
 {
-&type_nitc__AType, /* E: AType */
-&type_core__Array__nitc__AType, /* Array[E]: Array[AType] */
-&type_core__Collection__nitc__AType, /* Collection[E]: Collection[AType] */
-&type_core__Array__nitc__AType, /* Array[E]: Array[AType] */
-&type_core__AbstractArray__nitc__AType, /* AbstractArray[E]: AbstractArray[AType] */
-&type_core__NativeArray__nitc__AType, /* NativeArray[E]: NativeArray[AType] */
-&type_nitc__AType, /* E: AType */
-&type_core__Collection__nitc__AType, /* Collection[E]: Collection[AType] */
-&type_nitc__AType, /* E: AType */
-&type_core__Collection__nitc__AType, /* Collection[E]: Collection[AType] */
-&type_core__Collection__nitc__AType, /* Collection[E]: Collection[AType] */
-&type_core__Array__nitc__AType, /* Array[E]: Array[AType] */
-&type_core__AbstractArray__nitc__AType, /* AbstractArray[E]: AbstractArray[AType] */
-&type_core__array__ArrayIterator__nitc__AType, /* ArrayIterator[E]: ArrayIterator[AType] */
-&type_core__array__ArrayReverseIterator__nitc__AType, /* ArrayReverseIterator[E]: ArrayReverseIterator[AType] */
+&type_core__Array__nitc__AClassdef, /* Array[E]: Array[AClassdef] */
+&type_core__MapIterator__nitc__MClassDef__nitc__AClassdef, /* MapIterator[K, V]: MapIterator[MClassDef, AClassdef] */
 }
 };
-/* runtime type HashMapKeys[String, Variable] */
-const struct type type_core__hash_collection__HashMapKeys__core__String__nitc__Variable = {
--1, /*CAST DEAD*/
-"HashMapKeys[String, Variable]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type MapKeysIterator[MClassDef, AClassdef] */
+const struct type type_core__MapKeysIterator__nitc__MClassDef__nitc__AClassdef = {
+1335,
+"MapKeysIterator[MClassDef, AClassdef]", /* class_name_string */
+32,
 0,
-&resolution_table_core__hash_collection__HashMapKeys__core__String__nitc__Variable,
-129,
+&resolution_table_core__MapKeysIterator__nitc__MClassDef__nitc__AClassdef,
+90,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2402, /* Collection[String] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4037,17 +6118,16 @@ const struct type type_core__hash_collection__HashMapKeys__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1335, /* MapKeysIterator[MClassDef, AClassdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2439, /* Collection[Writable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4063,6 +6143,7 @@ const struct type type_core__hash_collection__HashMapKeys__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1720, /* MapKeysIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4081,45 +6162,6 @@ const struct type type_core__hash_collection__HashMapKeys__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4136,25 +6178,257 @@ const struct type type_core__hash_collection__HashMapKeys__core__String__nitc__V
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapKeys__core__String__nitc__Variable = {
+const struct types resolution_table_core__MapKeysIterator__nitc__MClassDef__nitc__AClassdef = {
 0, /* dummy */
 {
-&type_core__HashMap__core__String__nitc__Variable, /* HashMap[K, V]: HashMap[String, Variable] */
+&type_core__Array__nitc__MClassDef, /* Array[E]: Array[MClassDef] */
+&type_core__MapIterator__nitc__MClassDef__nitc__AClassdef, /* MapIterator[K, V]: MapIterator[MClassDef, AClassdef] */
+}
+};
+/* runtime type HashMapKeys[String, MModuleData[AAnnotation]] */
+const struct type type_core__hash_collection__HashMapKeys__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1336,
+"HashMapKeys[String, MModuleData[AAnnotation]]", /* class_name_string */
+150,
+0,
+&resolution_table_core__hash_collection__HashMapKeys__core__String__nitc__MModuleData__nitc__AAnnotation,
+205,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2410, /* Collection[String] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2442, /* Collection[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2448, /* Collection[Writable] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2502, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1336, /* HashMapKeys[String, MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1710, /* HashMapKeys[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapKeys__core__String__nitc__MModuleData__nitc__AAnnotation = {
+0, /* dummy */
+{
+&type_core__HashMap__core__String__nitc__MModuleData__nitc__AAnnotation, /* HashMap[K, V]: HashMap[String, MModuleData[AAnnotation]] */
+&type_core__MapKeysIterator__core__String__nitc__MModuleData__nitc__AAnnotation, /* MapKeysIterator[K, V]: MapKeysIterator[String, MModuleData[AAnnotation]] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
 &type_core__Array__core__String, /* Array[E]: Array[String] */
-&type_core__MapKeysIterator__core__String__nitc__Variable, /* MapKeysIterator[K, V]: MapKeysIterator[String, Variable] */
 }
 };
-/* runtime type HashMapValues[String, Variable] */
-const struct type type_core__hash_collection__HashMapValues__core__String__nitc__Variable = {
--1, /*CAST DEAD*/
-"HashMapValues[String, Variable]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type HashMapValues[String, MModuleData[AAnnotation]] */
+const struct type type_core__hash_collection__HashMapValues__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1337,
+"HashMapValues[String, MModuleData[AAnnotation]]", /* class_name_string */
+150,
 0,
-&resolution_table_core__hash_collection__HashMapValues__core__String__nitc__Variable,
-129,
+&resolution_table_core__hash_collection__HashMapValues__core__String__nitc__MModuleData__nitc__AAnnotation,
+205,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4189,8 +6463,8 @@ const struct type type_core__hash_collection__HashMapValues__core__String__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
+2442, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4202,7 +6476,6 @@ const struct type type_core__hash_collection__HashMapValues__core__String__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2446, /* Collection[Variable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4226,6 +6499,7 @@ const struct type type_core__hash_collection__HashMapValues__core__String__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2477, /* Collection[MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4250,6 +6524,7 @@ const struct type type_core__hash_collection__HashMapValues__core__String__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2502, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4267,7 +6542,6 @@ const struct type type_core__hash_collection__HashMapValues__core__String__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4282,27 +6556,6 @@ const struct type type_core__hash_collection__HashMapValues__core__String__nitc_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapValues__core__String__nitc__Variable = {
-0, /* dummy */
-{
-&type_core__HashMap__core__String__nitc__Variable, /* HashMap[K, V]: HashMap[String, Variable] */
-&type_core__Array__nitc__Variable, /* Array[E]: Array[Variable] */
-&type_core__MapValuesIterator__core__String__nitc__Variable, /* MapValuesIterator[K, V]: MapValuesIterator[String, Variable] */
-}
-};
-/* runtime type HashMapIterator[String, Variable] */
-const struct type type_core__hash_collection__HashMapIterator__core__String__nitc__Variable = {
--1, /*CAST DEAD*/
-"HashMapIterator[String, Variable]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapIterator__core__String__nitc__Variable,
-79,
-{
-2371, /* Object */
-2397, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4324,6 +6577,7 @@ const struct type type_core__hash_collection__HashMapIterator__core__String__nit
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1337, /* HashMapValues[String, MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4341,12 +6595,12 @@ const struct type type_core__hash_collection__HashMapIterator__core__String__nit
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2690, /* MapIterator[String, Variable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1711, /* HashMapValues[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4357,8 +6611,6 @@ const struct type type_core__hash_collection__HashMapIterator__core__String__nit
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4382,23 +6634,209 @@ const struct type type_core__hash_collection__HashMapIterator__core__String__nit
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapIterator__core__String__nitc__Variable = {
+const struct types resolution_table_core__hash_collection__HashMapValues__core__String__nitc__MModuleData__nitc__AAnnotation = {
 0, /* dummy */
 {
-&type_core__HashMap__core__String__nitc__Variable, /* HashMap[K, V]: HashMap[String, Variable] */
+&type_core__HashMap__core__String__nitc__MModuleData__nitc__AAnnotation, /* HashMap[K, V]: HashMap[String, MModuleData[AAnnotation]] */
+&type_core__MapValuesIterator__core__String__nitc__MModuleData__nitc__AAnnotation, /* MapValuesIterator[K, V]: MapValuesIterator[String, MModuleData[AAnnotation]] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
 }
 };
-/* runtime type HashMapNode[String, Variable] */
-const struct type type_core__hash_collection__HashMapNode__core__String__nitc__Variable = {
-1509,
-"HashMapNode[String, Variable]", /* class_name_string */
-114,
+/* runtime type HashMapIterator[String, MModuleData[AAnnotation]] */
+const struct type type_core__hash_collection__HashMapIterator__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1338,
+"HashMapIterator[String, MModuleData[AAnnotation]]", /* class_name_string */
+103,
 0,
-&resolution_table_core__hash_collection__HashMapNode__core__String__nitc__Variable,
+&resolution_table_core__hash_collection__HashMapIterator__core__String__nitc__MModuleData__nitc__AAnnotation,
+158,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2682, /* MapIterator[String, MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2706, /* MapIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1338, /* HashMapIterator[String, MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1712, /* HashMapIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapIterator__core__String__nitc__MModuleData__nitc__AAnnotation = {
+0, /* dummy */
+{
+&type_core__HashMap__core__String__nitc__MModuleData__nitc__AAnnotation, /* HashMap[K, V]: HashMap[String, MModuleData[AAnnotation]] */
+}
+};
+/* runtime type NativeArray[nullable HashMapNode[String, MModuleData[AAnnotation]]] */
+const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1339,
+"NativeArray[nullable HashMapNode[String, MModuleData[AAnnotation]]]", /* class_name_string */
 152,
+0,
+&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation,
+228,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4436,7 +6874,6 @@ const struct type type_core__hash_collection__HashMapNode__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2786, /* nullable HashMapNode[String, Variable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4452,7 +6889,6 @@ const struct type type_core__hash_collection__HashMapNode__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2803, /* nullable HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4494,6 +6930,7 @@ const struct type type_core__hash_collection__HashMapNode__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1717, /* NativeArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4511,7 +6948,6 @@ const struct type type_core__hash_collection__HashMapNode__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1509, /* HashMapNode[String, Variable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4527,7 +6963,85 @@ const struct type type_core__hash_collection__HashMapNode__core__String__nitc__V
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1756, /* HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1339, /* NativeArray[nullable HashMapNode[String, MModuleData[AAnnotation]]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1713, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -4551,2484 +7065,198 @@ const struct type type_core__hash_collection__HashMapNode__core__String__nitc__V
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapNode__core__String__nitc__Variable = {
+const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation = {
 0, /* dummy */
 {
-&type_nitc__Variable, /* V: Variable */
+&type_nullable__core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation, /* E: nullable HashMapNode[String, MModuleData[AAnnotation]] */
+&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation, /* NativeArray[E]: NativeArray[nullable HashMapNode[String, MModuleData[AAnnotation]]] */
+}
+};
+/* runtime type HashMapNode[String, MModuleData[AAnnotation]] */
+const struct type type_core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1340,
+"HashMapNode[String, MModuleData[AAnnotation]]", /* class_name_string */
+90,
+0,
+&resolution_table_core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation,
+156,
+{
+2380, /* Object */
+2401, /* nullable Object */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2763, /* nullable HashMapNode[String, MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+2799, /* nullable HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1340, /* HashMapNode[String, MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1714, /* HashMapNode[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapNode__core__String__nitc__MModuleData__nitc__AAnnotation = {
+0, /* dummy */
+{
+&type_nitc__MModuleData__nitc__AAnnotation, /* V: MModuleData[AAnnotation] */
 &type_core__String, /* K: String */
 }
 };
-/* runtime type NativeArray[nullable HashMapNode[String, Variable]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__Variable = {
-1510,
-"NativeArray[nullable HashMapNode[String, Variable]]", /* class_name_string */
-185,
+/* runtime type Array[MModuleData[AAnnotation]] */
+const struct type type_core__Array__nitc__MModuleData__nitc__AAnnotation = {
+1341,
+"Array[MModuleData[AAnnotation]]", /* class_name_string */
+456,
 0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__Variable,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1510, /* NativeArray[nullable HashMapNode[String, Variable]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__Variable = {
-0, /* dummy */
-{
-&type_nullable__core__hash_collection__HashMapNode__core__String__nitc__Variable, /* E: nullable HashMapNode[String, Variable] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__core__String__nitc__Variable, /* NativeArray[E]: NativeArray[nullable HashMapNode[String, Variable]] */
-}
-};
-/* runtime type NativeArray[AAttrPropdef] */
-const struct type type_core__NativeArray__nitc__AAttrPropdef = {
-1511,
-"NativeArray[AAttrPropdef]", /* class_name_string */
-42,
-0,
-&resolution_table_core__NativeArray__nitc__AAttrPropdef,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-229, /* NativeArray[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1492, /* NativeArray[Prod] */
--1, /* empty */
-1511, /* NativeArray[AAttrPropdef] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1681, /* NativeArray[APropdef] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1329, /* NativeArray[ANode] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nitc__AAttrPropdef = {
-0, /* dummy */
-{
-&type_nitc__AAttrPropdef, /* E: AAttrPropdef */
-&type_core__NativeArray__nitc__AAttrPropdef, /* NativeArray[E]: NativeArray[AAttrPropdef] */
-}
-};
-/* runtime type ArrayIterator[AAttrPropdef] */
-const struct type type_core__array__ArrayIterator__nitc__AAttrPropdef = {
--1, /*CAST DEAD*/
-"ArrayIterator[AAttrPropdef]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayIterator__nitc__AAttrPropdef,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__nitc__AAttrPropdef = {
-0, /* dummy */
-{
-&type_core__Array__nitc__AAttrPropdef, /* Array[E]: Array[AAttrPropdef] */
-&type_core__AbstractArrayRead__nitc__AAttrPropdef, /* AbstractArrayRead[E]: AbstractArrayRead[AAttrPropdef] */
-}
-};
-/* runtime type ArrayReverseIterator[AAttrPropdef] */
-const struct type type_core__array__ArrayReverseIterator__nitc__AAttrPropdef = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[AAttrPropdef]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__nitc__AAttrPropdef,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__nitc__AAttrPropdef = {
-0, /* dummy */
-{
-&type_core__Array__nitc__AAttrPropdef, /* Array[E]: Array[AAttrPropdef] */
-&type_core__AbstractArrayRead__nitc__AAttrPropdef, /* AbstractArrayRead[E]: AbstractArrayRead[AAttrPropdef] */
-}
-};
-/* runtime type HashMapKeys[Variable, RuntimeVariable] */
-const struct type type_core__hash_collection__HashMapKeys__nitc__Variable__nitc__RuntimeVariable = {
--1, /*CAST DEAD*/
-"HashMapKeys[Variable, RuntimeVariable]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapKeys__nitc__Variable__nitc__RuntimeVariable,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2446, /* Collection[Variable] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__Variable__nitc__RuntimeVariable = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__Variable__nitc__RuntimeVariable, /* HashMap[K, V]: HashMap[Variable, RuntimeVariable] */
-&type_core__Array__nitc__Variable, /* Array[E]: Array[Variable] */
-&type_core__MapKeysIterator__nitc__Variable__nitc__RuntimeVariable, /* MapKeysIterator[K, V]: MapKeysIterator[Variable, RuntimeVariable] */
-}
-};
-/* runtime type HashMapValues[Variable, RuntimeVariable] */
-const struct type type_core__hash_collection__HashMapValues__nitc__Variable__nitc__RuntimeVariable = {
--1, /*CAST DEAD*/
-"HashMapValues[Variable, RuntimeVariable]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapValues__nitc__Variable__nitc__RuntimeVariable,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2438, /* Collection[RuntimeVariable] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapValues__nitc__Variable__nitc__RuntimeVariable = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__Variable__nitc__RuntimeVariable, /* HashMap[K, V]: HashMap[Variable, RuntimeVariable] */
-&type_core__Array__nitc__RuntimeVariable, /* Array[E]: Array[RuntimeVariable] */
-&type_core__MapValuesIterator__nitc__Variable__nitc__RuntimeVariable, /* MapValuesIterator[K, V]: MapValuesIterator[Variable, RuntimeVariable] */
-}
-};
-/* runtime type HashMapIterator[Variable, RuntimeVariable] */
-const struct type type_core__hash_collection__HashMapIterator__nitc__Variable__nitc__RuntimeVariable = {
--1, /*CAST DEAD*/
-"HashMapIterator[Variable, RuntimeVariable]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapIterator__nitc__Variable__nitc__RuntimeVariable,
-79,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2691, /* MapIterator[Variable, RuntimeVariable] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__Variable__nitc__RuntimeVariable = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__Variable__nitc__RuntimeVariable, /* HashMap[K, V]: HashMap[Variable, RuntimeVariable] */
-}
-};
-/* runtime type HashMapNode[Variable, RuntimeVariable] */
-const struct type type_core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable = {
-1517,
-"HashMapNode[Variable, RuntimeVariable]", /* class_name_string */
-115,
-0,
-&resolution_table_core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable,
-152,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2787, /* nullable HashMapNode[Variable, RuntimeVariable] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2803, /* nullable HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1517, /* HashMapNode[Variable, RuntimeVariable] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1756, /* HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable = {
-0, /* dummy */
-{
-&type_nitc__RuntimeVariable, /* V: RuntimeVariable */
-&type_nitc__Variable, /* K: Variable */
-}
-};
-/* runtime type NativeArray[nullable HashMapNode[Variable, RuntimeVariable]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable = {
-1518,
-"NativeArray[nullable HashMapNode[Variable, RuntimeVariable]]", /* class_name_string */
-186,
-0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1518, /* NativeArray[nullable HashMapNode[Variable, RuntimeVariable]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable = {
-0, /* dummy */
-{
-&type_nullable__core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable, /* E: nullable HashMapNode[Variable, RuntimeVariable] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__Variable__nitc__RuntimeVariable, /* NativeArray[E]: NativeArray[nullable HashMapNode[Variable, RuntimeVariable]] */
-}
-};
-/* runtime type HashMapKeys[MType, Int] */
-const struct type type_core__hash_collection__HashMapKeys__nitc__MType__core__Int = {
--1, /*CAST DEAD*/
-"HashMapKeys[MType, Int]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapKeys__nitc__MType__core__Int,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2425, /* Collection[MType] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2444, /* Collection[nullable MType] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MType__core__Int = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MType__core__Int, /* HashMap[K, V]: HashMap[MType, Int] */
-&type_core__Array__nitc__MType, /* Array[E]: Array[MType] */
-&type_core__MapKeysIterator__nitc__MType__core__Int, /* MapKeysIterator[K, V]: MapKeysIterator[MType, Int] */
-}
-};
-/* runtime type HashMapValues[MType, Int] */
-const struct type type_core__hash_collection__HashMapValues__nitc__MType__core__Int = {
--1, /*CAST DEAD*/
-"HashMapValues[MType, Int]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapValues__nitc__MType__core__Int,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2418, /* Collection[Int] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MType__core__Int = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MType__core__Int, /* HashMap[K, V]: HashMap[MType, Int] */
-&type_core__Array__core__Int, /* Array[E]: Array[Int] */
-&type_core__MapValuesIterator__nitc__MType__core__Int, /* MapValuesIterator[K, V]: MapValuesIterator[MType, Int] */
-}
-};
-/* runtime type HashMapIterator[MType, Int] */
-const struct type type_core__hash_collection__HashMapIterator__nitc__MType__core__Int = {
--1, /*CAST DEAD*/
-"HashMapIterator[MType, Int]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapIterator__nitc__MType__core__Int,
-79,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2692, /* MapIterator[MType, Int] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MType__core__Int = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MType__core__Int, /* HashMap[K, V]: HashMap[MType, Int] */
-}
-};
-/* runtime type HashMapNode[MType, Int] */
-const struct type type_core__hash_collection__HashMapNode__nitc__MType__core__Int = {
-1522,
-"HashMapNode[MType, Int]", /* class_name_string */
-116,
-0,
-&resolution_table_core__hash_collection__HashMapNode__nitc__MType__core__Int,
-152,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2788, /* nullable HashMapNode[MType, Int] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2803, /* nullable HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1522, /* HashMapNode[MType, Int] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1756, /* HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapNode__nitc__MType__core__Int = {
-0, /* dummy */
-{
-&type_core__Int, /* V: Int */
-&type_nitc__MType, /* K: MType */
-}
-};
-/* runtime type NativeArray[nullable HashMapNode[MType, Int]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MType__core__Int = {
-1523,
-"NativeArray[nullable HashMapNode[MType, Int]]", /* class_name_string */
-187,
-0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MType__core__Int,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1523, /* NativeArray[nullable HashMapNode[MType, Int]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MType__core__Int = {
-0, /* dummy */
-{
-&type_nullable__core__hash_collection__HashMapNode__nitc__MType__core__Int, /* E: nullable HashMapNode[MType, Int] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MType__core__Int, /* NativeArray[E]: NativeArray[nullable HashMapNode[MType, Int]] */
-}
-};
-/* runtime type NativeArray[ReduceAction] */
-const struct type type_core__NativeArray__nitc__parser_work__ReduceAction = {
-1524,
-"NativeArray[ReduceAction]", /* class_name_string */
-43,
-0,
-&resolution_table_core__NativeArray__nitc__parser_work__ReduceAction,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-229, /* NativeArray[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1524, /* NativeArray[ReduceAction] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__NativeArray__nitc__parser_work__ReduceAction = {
-0, /* dummy */
-{
-&type_nitc__parser_work__ReduceAction, /* E: ReduceAction */
-&type_core__NativeArray__nitc__parser_work__ReduceAction, /* NativeArray[E]: NativeArray[ReduceAction] */
-}
-};
-/* runtime type ArrayIterator[ReduceAction] */
-const struct type type_core__array__ArrayIterator__nitc__parser_work__ReduceAction = {
--1, /*CAST DEAD*/
-"ArrayIterator[ReduceAction]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayIterator__nitc__parser_work__ReduceAction,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__nitc__parser_work__ReduceAction = {
-0, /* dummy */
-{
-&type_core__Array__nitc__parser_work__ReduceAction, /* Array[E]: Array[ReduceAction] */
-&type_core__AbstractArrayRead__nitc__parser_work__ReduceAction, /* AbstractArrayRead[E]: AbstractArrayRead[ReduceAction] */
-}
-};
-/* runtime type ArrayReverseIterator[ReduceAction] */
-const struct type type_core__array__ArrayReverseIterator__nitc__parser_work__ReduceAction = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[ReduceAction]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__nitc__parser_work__ReduceAction,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
-2391, /* Iterator[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__nitc__parser_work__ReduceAction = {
-0, /* dummy */
-{
-&type_core__Array__nitc__parser_work__ReduceAction, /* Array[E]: Array[ReduceAction] */
-&type_core__AbstractArrayRead__nitc__parser_work__ReduceAction, /* AbstractArrayRead[E]: AbstractArrayRead[ReduceAction] */
-}
-};
-/* runtime type Array[TComment] */
-const struct type type_core__Array__nitc__TComment = {
-1527,
-"Array[TComment]", /* class_name_string */
-458,
-0,
-&resolution_table_core__Array__nitc__TComment,
+&resolution_table_core__Array__nitc__MModuleData__nitc__AAnnotation,
 510,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7063,15 +7291,14 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
+2442, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2441, /* Collection[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7090,7 +7317,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2460, /* Collection[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7100,8 +7326,8 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2470, /* Collection[TComment] */
 -1, /* empty */
+2477, /* Collection[MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7126,6 +7352,7 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2502, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7141,7 +7368,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7156,10 +7382,10 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2015, /* Array[nullable Object] */
-2202, /* SequenceRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
+1715, /* Array[nullable Object] */
+2210, /* SequenceRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7190,7 +7416,7 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2557, /* AbstractArrayRead[Object] */
+2563, /* AbstractArrayRead[MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7199,7 +7425,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2566, /* AbstractArrayRead[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7219,7 +7444,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2586, /* AbstractArrayRead[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7229,10 +7453,10 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2596, /* AbstractArrayRead[TComment] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2603, /* AbstractArrayRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7250,6 +7474,7 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2621, /* AbstractArrayRead[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7270,7 +7495,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2637, /* AbstractArrayRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7316,15 +7540,14 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2881, /* AbstractArray[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2888, /* AbstractArray[Object] */
 -1, /* empty */
 -1, /* empty */
-2889, /* AbstractArray[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7345,7 +7568,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2910, /* AbstractArray[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7355,10 +7577,10 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2920, /* AbstractArray[TComment] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2923, /* AbstractArray[MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7384,6 +7606,7 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2949, /* AbstractArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7396,7 +7619,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2961, /* AbstractArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7411,13 +7633,13 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-228, /* Array[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+226, /* Array[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7457,7 +7679,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-260, /* Array[Token] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7475,7 +7696,6 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1327, /* Array[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7485,7 +7705,15 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1527, /* Array[TComment] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1341, /* Array[MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7539,37 +7767,39 @@ const struct type type_core__Array__nitc__TComment = {
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__Array__nitc__TComment = {
+const struct types resolution_table_core__Array__nitc__MModuleData__nitc__AAnnotation = {
 0, /* dummy */
 {
-&type_nitc__TComment, /* E: TComment */
-&type_core__Array__nitc__TComment, /* Array[E]: Array[TComment] */
-&type_core__Collection__nitc__TComment, /* Collection[E]: Collection[TComment] */
-&type_core__Array__nitc__TComment, /* Array[E]: Array[TComment] */
-&type_core__AbstractArray__nitc__TComment, /* AbstractArray[E]: AbstractArray[TComment] */
-&type_core__NativeArray__nitc__TComment, /* NativeArray[E]: NativeArray[TComment] */
-&type_nitc__TComment, /* E: TComment */
-&type_core__Collection__nitc__TComment, /* Collection[E]: Collection[TComment] */
-&type_nitc__TComment, /* E: TComment */
-&type_core__Collection__nitc__TComment, /* Collection[E]: Collection[TComment] */
-&type_core__Collection__nitc__TComment, /* Collection[E]: Collection[TComment] */
-&type_core__Array__nitc__TComment, /* Array[E]: Array[TComment] */
-&type_core__AbstractArray__nitc__TComment, /* AbstractArray[E]: AbstractArray[TComment] */
-&type_core__array__ArrayIterator__nitc__TComment, /* ArrayIterator[E]: ArrayIterator[TComment] */
-&type_core__array__ArrayReverseIterator__nitc__TComment, /* ArrayReverseIterator[E]: ArrayReverseIterator[TComment] */
+&type_nitc__MModuleData__nitc__AAnnotation, /* E: MModuleData[AAnnotation] */
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* SELF: Array[MModuleData[AAnnotation]] */
+&type_core__Collection__nitc__MModuleData__nitc__AAnnotation, /* Collection[E]: Collection[MModuleData[AAnnotation]] */
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
+&type_core__AbstractArray__nitc__MModuleData__nitc__AAnnotation, /* AbstractArray[E]: AbstractArray[MModuleData[AAnnotation]] */
+&type_core__NativeArray__nitc__MModuleData__nitc__AAnnotation, /* NativeArray[E]: NativeArray[MModuleData[AAnnotation]] */
+&type_nitc__MModuleData__nitc__AAnnotation, /* E: MModuleData[AAnnotation] */
+&type_core__Collection__nitc__MModuleData__nitc__AAnnotation, /* Collection[E]: Collection[MModuleData[AAnnotation]] */
+&type_nitc__MModuleData__nitc__AAnnotation, /* E: MModuleData[AAnnotation] */
+&type_core__Collection__nitc__MModuleData__nitc__AAnnotation, /* Collection[E]: Collection[MModuleData[AAnnotation]] */
+&type_core__Collection__nitc__MModuleData__nitc__AAnnotation, /* Collection[E]: Collection[MModuleData[AAnnotation]] */
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
+&type_core__AbstractArray__nitc__MModuleData__nitc__AAnnotation, /* AbstractArray[E]: AbstractArray[MModuleData[AAnnotation]] */
+&type_core__array__ArrayIterator__nitc__MModuleData__nitc__AAnnotation, /* ArrayIterator[E]: ArrayIterator[MModuleData[AAnnotation]] */
+&type_core__array__ArrayReverseIterator__nitc__MModuleData__nitc__AAnnotation, /* ArrayReverseIterator[E]: ArrayReverseIterator[MModuleData[AAnnotation]] */
 }
 };
-/* runtime type HashMapKeys[EscapeMark, String] */
-const struct type type_core__hash_collection__HashMapKeys__nitc__EscapeMark__core__String = {
--1, /*CAST DEAD*/
-"HashMapKeys[EscapeMark, String]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type MapValuesIterator[String, MModuleData[AAnnotation]] */
+const struct type type_core__MapValuesIterator__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1342,
+"MapValuesIterator[String, MModuleData[AAnnotation]]", /* class_name_string */
+33,
 0,
-&resolution_table_core__hash_collection__HashMapKeys__nitc__EscapeMark__core__String,
-129,
+&resolution_table_core__MapValuesIterator__core__String__nitc__MModuleData__nitc__AAnnotation,
+90,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7600,11 +7830,11 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1342, /* MapValuesIterator[String, MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7624,6 +7854,7 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1716, /* MapValuesIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7642,47 +7873,6 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2500, /* Collection[EscapeMark] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7699,29 +7889,27 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__EscapeMark__cor
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__EscapeMark__core__String = {
+const struct types resolution_table_core__MapValuesIterator__core__String__nitc__MModuleData__nitc__AAnnotation = {
 0, /* dummy */
 {
-&type_core__HashMap__nitc__EscapeMark__core__String, /* HashMap[K, V]: HashMap[EscapeMark, String] */
-&type_core__Array__nitc__EscapeMark, /* Array[E]: Array[EscapeMark] */
-&type_core__MapKeysIterator__nitc__EscapeMark__core__String, /* MapKeysIterator[K, V]: MapKeysIterator[EscapeMark, String] */
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
+&type_core__MapIterator__core__String__nitc__MModuleData__nitc__AAnnotation, /* MapIterator[K, V]: MapIterator[String, MModuleData[AAnnotation]] */
 }
 };
-/* runtime type HashMapValues[EscapeMark, String] */
-const struct type type_core__hash_collection__HashMapValues__nitc__EscapeMark__core__String = {
--1, /*CAST DEAD*/
-"HashMapValues[EscapeMark, String]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type NativeArray[MModuleData[AAnnotation]] */
+const struct type type_core__NativeArray__nitc__MModuleData__nitc__AAnnotation = {
+1343,
+"NativeArray[MModuleData[AAnnotation]]", /* class_name_string */
+69,
 0,
-&resolution_table_core__hash_collection__HashMapValues__nitc__EscapeMark__core__String,
-129,
+&resolution_table_core__NativeArray__nitc__MModuleData__nitc__AAnnotation,
+228,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2402, /* Collection[String] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7751,14 +7939,13 @@ const struct type type_core__hash_collection__HashMapValues__nitc__EscapeMark__c
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+227, /* NativeArray[Object] */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2439, /* Collection[Writable] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7787,6 +7974,7 @@ const struct type type_core__hash_collection__HashMapValues__nitc__EscapeMark__c
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1343, /* NativeArray[MModuleData[AAnnotation]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7812,6 +8000,7 @@ const struct type type_core__hash_collection__HashMapValues__nitc__EscapeMark__c
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1717, /* NativeArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7830,7 +8019,106 @@ const struct type type_core__hash_collection__HashMapValues__nitc__EscapeMark__c
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7847,25 +8135,568 @@ const struct type type_core__hash_collection__HashMapValues__nitc__EscapeMark__c
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapValues__nitc__EscapeMark__core__String = {
+const struct types resolution_table_core__NativeArray__nitc__MModuleData__nitc__AAnnotation = {
 0, /* dummy */
 {
-&type_core__HashMap__nitc__EscapeMark__core__String, /* HashMap[K, V]: HashMap[EscapeMark, String] */
+&type_nitc__MModuleData__nitc__AAnnotation, /* E: MModuleData[AAnnotation] */
+&type_core__NativeArray__nitc__MModuleData__nitc__AAnnotation, /* NativeArray[E]: NativeArray[MModuleData[AAnnotation]] */
+}
+};
+/* runtime type ArrayIterator[MModuleData[AAnnotation]] */
+const struct type type_core__array__ArrayIterator__nitc__MModuleData__nitc__AAnnotation = {
+1344,
+"ArrayIterator[MModuleData[AAnnotation]]", /* class_name_string */
+40,
+0,
+&resolution_table_core__array__ArrayIterator__nitc__MModuleData__nitc__AAnnotation,
+137,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1344, /* ArrayIterator[MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1884, /* ArrayIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__array__ArrayIterator__nitc__MModuleData__nitc__AAnnotation = {
+0, /* dummy */
+{
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
+&type_core__AbstractArrayRead__nitc__MModuleData__nitc__AAnnotation, /* AbstractArrayRead[E]: AbstractArrayRead[MModuleData[AAnnotation]] */
+}
+};
+/* runtime type ArrayReverseIterator[MModuleData[AAnnotation]] */
+const struct type type_core__array__ArrayReverseIterator__nitc__MModuleData__nitc__AAnnotation = {
+1345,
+"ArrayReverseIterator[MModuleData[AAnnotation]]", /* class_name_string */
+166,
+0,
+&resolution_table_core__array__ArrayReverseIterator__nitc__MModuleData__nitc__AAnnotation,
+263,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1344, /* ArrayIterator[MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1718, /* ArrayIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1884, /* ArrayIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1345, /* ArrayReverseIterator[MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1719, /* ArrayReverseIterator[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1885, /* ArrayReverseIterator[Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__array__ArrayReverseIterator__nitc__MModuleData__nitc__AAnnotation = {
+0, /* dummy */
+{
+&type_core__Array__nitc__MModuleData__nitc__AAnnotation, /* Array[E]: Array[MModuleData[AAnnotation]] */
+&type_core__AbstractArrayRead__nitc__MModuleData__nitc__AAnnotation, /* AbstractArrayRead[E]: AbstractArrayRead[MModuleData[AAnnotation]] */
+}
+};
+/* runtime type MapKeysIterator[String, MModuleData[AAnnotation]] */
+const struct type type_core__MapKeysIterator__core__String__nitc__MModuleData__nitc__AAnnotation = {
+1346,
+"MapKeysIterator[String, MModuleData[AAnnotation]]", /* class_name_string */
+33,
+0,
+&resolution_table_core__MapKeysIterator__core__String__nitc__MModuleData__nitc__AAnnotation,
+90,
+{
+2380, /* Object */
+2401, /* nullable Object */
+2400, /* Iterator[Object] */
+-1, /* empty */
+2840, /* Iterator[String] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1346, /* MapKeysIterator[String, MModuleData[AAnnotation]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1720, /* MapKeysIterator[Object, nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+},
+};
+const struct types resolution_table_core__MapKeysIterator__core__String__nitc__MModuleData__nitc__AAnnotation = {
+0, /* dummy */
+{
 &type_core__Array__core__String, /* Array[E]: Array[String] */
-&type_core__MapValuesIterator__nitc__EscapeMark__core__String, /* MapValuesIterator[K, V]: MapValuesIterator[EscapeMark, String] */
+&type_core__MapIterator__core__String__nitc__MModuleData__nitc__AAnnotation, /* MapIterator[K, V]: MapIterator[String, MModuleData[AAnnotation]] */
 }
 };
-/* runtime type HashMapIterator[EscapeMark, String] */
-const struct type type_core__hash_collection__HashMapIterator__nitc__EscapeMark__core__String = {
--1, /*CAST DEAD*/
-"HashMapIterator[EscapeMark, String]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type HashMapKeys[MPropDef, APropdef] */
+const struct type type_core__hash_collection__HashMapKeys__nitc__MPropDef__nitc__APropdef = {
+1347,
+"HashMapKeys[MPropDef, APropdef]", /* class_name_string */
+151,
 0,
-&resolution_table_core__hash_collection__HashMapIterator__nitc__EscapeMark__core__String,
-79,
+&resolution_table_core__hash_collection__HashMapKeys__nitc__MPropDef__nitc__APropdef,
+205,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7885,6 +8716,7 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__EscapeMark_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2426, /* Collection[MPropDef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7895,19 +8727,20 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__EscapeMark_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2681, /* MapIterator[Object, String] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2442, /* Collection[Object] */
 -1, /* empty */
+2444, /* Collection[PropertyLayoutElement] */
+2445, /* Collection[nullable MPropDef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2693, /* MapIterator[EscapeMark, String] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7921,7 +8754,6 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__EscapeMark_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7943,25 +8775,6 @@ const struct type type_core__hash_collection__HashMapIterator__nitc__EscapeMark_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__EscapeMark__core__String = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__EscapeMark__core__String, /* HashMap[K, V]: HashMap[EscapeMark, String] */
-}
-};
-/* runtime type HashMapNode[EscapeMark, String] */
-const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__core__String = {
-1531,
-"HashMapNode[EscapeMark, String]", /* class_name_string */
-117,
-0,
-&resolution_table_core__hash_collection__HashMapNode__nitc__EscapeMark__core__String,
-152,
-{
-2371, /* Object */
-2397, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7979,6 +8792,7 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2502, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -7990,9 +8804,9 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2770, /* nullable HashMapNode[Object, String] */
 -1, /* empty */
 -1, /* empty */
+2516, /* Collection[nullable PropertyLayoutElement] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8002,7 +8816,6 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2789, /* nullable HashMapNode[EscapeMark, String] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8015,7 +8828,6 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2803, /* nullable HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8034,6 +8846,7 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1347, /* HashMapKeys[MPropDef, APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8055,6 +8868,7 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1710, /* HashMapKeys[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8063,276 +8877,6 @@ const struct type type_core__hash_collection__HashMapNode__nitc__EscapeMark__cor
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
--1, /* empty */
-1363, /* HashMapNode[Object, String] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1531, /* HashMapNode[EscapeMark, String] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1756, /* HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapNode__nitc__EscapeMark__core__String = {
-0, /* dummy */
-{
-&type_core__String, /* V: String */
-&type_nitc__EscapeMark, /* K: EscapeMark */
-}
-};
-/* runtime type NativeArray[nullable HashMapNode[EscapeMark, String]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__EscapeMark__core__String = {
-1532,
-"NativeArray[nullable HashMapNode[EscapeMark, String]]", /* class_name_string */
-188,
-0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__EscapeMark__core__String,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1364, /* NativeArray[nullable HashMapNode[Object, String]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1532, /* NativeArray[nullable HashMapNode[EscapeMark, String]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8358,24 +8902,34 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashM
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__EscapeMark__core__String = {
+const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MPropDef__nitc__APropdef = {
 0, /* dummy */
 {
-&type_nullable__core__hash_collection__HashMapNode__nitc__EscapeMark__core__String, /* E: nullable HashMapNode[EscapeMark, String] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__EscapeMark__core__String, /* NativeArray[E]: NativeArray[nullable HashMapNode[EscapeMark, String]] */
+&type_core__HashMap__nitc__MPropDef__nitc__APropdef, /* HashMap[K, V]: HashMap[MPropDef, APropdef] */
+&type_core__MapKeysIterator__nitc__MPropDef__nitc__APropdef, /* MapKeysIterator[K, V]: MapKeysIterator[MPropDef, APropdef] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nitc__MPropDef, /* Array[E]: Array[MPropDef] */
 }
 };
-/* runtime type HashMapKeys[MClass, Array[MType]] */
-const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__Array__nitc__MType = {
--1, /*CAST DEAD*/
-"HashMapKeys[MClass, Array[MType]]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type HashMapValues[MPropDef, APropdef] */
+const struct type type_core__hash_collection__HashMapValues__nitc__MPropDef__nitc__APropdef = {
+1348,
+"HashMapValues[MPropDef, APropdef]", /* class_name_string */
+151,
 0,
-&resolution_table_core__hash_collection__HashMapKeys__nitc__MClass__core__Array__nitc__MType,
-129,
+&resolution_table_core__hash_collection__HashMapValues__nitc__MPropDef__nitc__APropdef,
+205,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8386,7 +8940,6 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2409, /* Collection[MClass] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8410,16 +8963,16 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
+2442, /* Collection[Object] */
 -1, /* empty */
-2437, /* Collection[nullable MClass] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2449, /* Collection[Prod] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8448,6 +9001,7 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2478, /* Collection[APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8465,11 +9019,13 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2496, /* Collection[ANode] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2502, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8488,7 +9044,6 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8503,27 +9058,6 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__A
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MClass__core__Array__nitc__MType = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MClass__core__Array__nitc__MType, /* HashMap[K, V]: HashMap[MClass, Array[MType]] */
-&type_core__Array__nitc__MClass, /* Array[E]: Array[MClass] */
-&type_core__MapKeysIterator__nitc__MClass__core__Array__nitc__MType, /* MapKeysIterator[K, V]: MapKeysIterator[MClass, Array[MType]] */
-}
-};
-/* runtime type HashMapValues[MClass, Array[MType]] */
-const struct type type_core__hash_collection__HashMapValues__nitc__MClass__core__Array__nitc__MType = {
--1, /*CAST DEAD*/
-"HashMapValues[MClass, Array[MType]]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapValues__nitc__MClass__core__Array__nitc__MType,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8545,6 +9079,7 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__core_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1348, /* HashMapValues[MPropDef, APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8558,7 +9093,6 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__core_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8567,6 +9101,7 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__core_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1711, /* HashMapValues[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -8575,570 +9110,6 @@ const struct type type_core__hash_collection__HashMapValues__nitc__MClass__core_
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2486, /* Collection[Array[MType]] */
--1, /* empty */
--1, /* empty */
-2489, /* Collection[Array[nullable MType]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2510, /* Collection[Array[Object]] */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MClass__core__Array__nitc__MType = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MClass__core__Array__nitc__MType, /* HashMap[K, V]: HashMap[MClass, Array[MType]] */
-&type_core__Array__core__Array__nitc__MType, /* Array[E]: Array[Array[MType]] */
-&type_core__MapValuesIterator__nitc__MClass__core__Array__nitc__MType, /* MapValuesIterator[K, V]: MapValuesIterator[MClass, Array[MType]] */
-}
-};
-/* runtime type HashMapIterator[MClass, Array[MType]] */
-const struct type type_core__hash_collection__HashMapIterator__nitc__MClass__core__Array__nitc__MType = {
--1, /*CAST DEAD*/
-"HashMapIterator[MClass, Array[MType]]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapIterator__nitc__MClass__core__Array__nitc__MType,
-79,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2694, /* MapIterator[MClass, Array[MType]] */
--1, /* empty */
-2696, /* MapIterator[MClass, Array[nullable MType]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2706, /* MapIterator[Object, Array[Object]] */
-2707, /* MapIterator[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MClass__core__Array__nitc__MType = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MClass__core__Array__nitc__MType, /* HashMap[K, V]: HashMap[MClass, Array[MType]] */
-}
-};
-/* runtime type HashMapNode[MClass, Array[MType]] */
-const struct type type_core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType = {
-1536,
-"HashMapNode[MClass, Array[MType]]", /* class_name_string */
-118,
-0,
-&resolution_table_core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType,
-152,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2790, /* nullable HashMapNode[MClass, Array[MType]] */
--1, /* empty */
-2792, /* nullable HashMapNode[MClass, Array[nullable MType]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2802, /* nullable HashMapNode[Object, Array[Object]] */
-2803, /* nullable HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1536, /* HashMapNode[MClass, Array[MType]] */
--1, /* empty */
-1549, /* HashMapNode[MClass, Array[nullable MType]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1751, /* HashMapNode[Object, Array[Object]] */
-1756, /* HashMapNode[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType = {
-0, /* dummy */
-{
-&type_core__Array__nitc__MType, /* V: Array[MType] */
-&type_nitc__MClass, /* K: MClass */
-}
-};
-/* runtime type NativeArray[nullable HashMapNode[MClass, Array[MType]]] */
-const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType = {
-1537,
-"NativeArray[nullable HashMapNode[MClass, Array[MType]]]", /* class_name_string */
-189,
-0,
-&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType,
-226,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2136, /* NativeArray[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1537, /* NativeArray[nullable HashMapNode[MClass, Array[MType]]] */
--1, /* empty */
-1550, /* NativeArray[nullable HashMapNode[MClass, Array[nullable MType]]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-1752, /* NativeArray[nullable HashMapNode[Object, Array[Object]]] */
-1757, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9164,24 +9135,34 @@ const struct type type_core__NativeArray__nullable__core__hash_collection__HashM
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType = {
+const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MPropDef__nitc__APropdef = {
 0, /* dummy */
 {
-&type_nullable__core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType, /* E: nullable HashMapNode[MClass, Array[MType]] */
-&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MClass__core__Array__nitc__MType, /* NativeArray[E]: NativeArray[nullable HashMapNode[MClass, Array[MType]]] */
+&type_core__HashMap__nitc__MPropDef__nitc__APropdef, /* HashMap[K, V]: HashMap[MPropDef, APropdef] */
+&type_core__MapValuesIterator__nitc__MPropDef__nitc__APropdef, /* MapValuesIterator[K, V]: MapValuesIterator[MPropDef, APropdef] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_core__Array__nitc__APropdef, /* Array[E]: Array[APropdef] */
 }
 };
-/* runtime type NativeArray[nullable MType] */
-const struct type type_core__NativeArray__nullable__nitc__MType = {
-1538,
-"NativeArray[nullable MType]", /* class_name_string */
-44,
+/* runtime type HashMapIterator[MPropDef, APropdef] */
+const struct type type_core__hash_collection__HashMapIterator__nitc__MPropDef__nitc__APropdef = {
+1349,
+"HashMapIterator[MPropDef, APropdef]", /* class_name_string */
+104,
 0,
-&resolution_table_core__NativeArray__nullable__nitc__MType,
-226,
+&resolution_table_core__hash_collection__HashMapIterator__nitc__MPropDef__nitc__APropdef,
+158,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9205,6 +9186,7 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2683, /* MapIterator[MPropDef, APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9224,10 +9206,10 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1538, /* NativeArray[nullable MType] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2706, /* MapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9283,6 +9265,7 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1349, /* HashMapIterator[MPropDef, APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9293,7 +9276,6 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2136, /* NativeArray[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9305,6 +9287,7 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1712, /* HashMapIterator[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9336,6 +9319,25 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+},
+};
+const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MPropDef__nitc__APropdef = {
+0, /* dummy */
+{
+&type_core__HashMap__nitc__MPropDef__nitc__APropdef, /* HashMap[K, V]: HashMap[MPropDef, APropdef] */
+}
+};
+/* runtime type NativeArray[nullable HashMapNode[MPropDef, APropdef]] */
+const struct type type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef = {
+1350,
+"NativeArray[nullable HashMapNode[MPropDef, APropdef]]", /* class_name_string */
+153,
+0,
+&resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef,
+228,
+{
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9367,6 +9369,162 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1717, /* NativeArray[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1350, /* NativeArray[nullable HashMapNode[MPropDef, APropdef]] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1713, /* NativeArray[nullable HashMapNode[Object, nullable Object]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9408,24 +9566,24 @@ const struct type type_core__NativeArray__nullable__nitc__MType = {
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__NativeArray__nullable__nitc__MType = {
+const struct types resolution_table_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef = {
 0, /* dummy */
 {
-&type_nullable__nitc__MType, /* E: nullable MType */
-&type_core__NativeArray__nullable__nitc__MType, /* NativeArray[E]: NativeArray[nullable MType] */
+&type_nullable__core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef, /* E: nullable HashMapNode[MPropDef, APropdef] */
+&type_core__NativeArray__nullable__core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef, /* NativeArray[E]: NativeArray[nullable HashMapNode[MPropDef, APropdef]] */
 }
 };
-/* runtime type ArrayIterator[nullable MType] */
-const struct type type_core__array__ArrayIterator__nullable__nitc__MType = {
--1, /*CAST DEAD*/
-"ArrayIterator[nullable MType]", /* class_name_string */
--1, /*CAST DEAD*/
+/* runtime type HashMapNode[MPropDef, APropdef] */
+const struct type type_core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef = {
+1351,
+"HashMapNode[MPropDef, APropdef]", /* class_name_string */
+91,
 0,
-&resolution_table_core__array__ArrayIterator__nullable__nitc__MType,
-11,
+&resolution_table_core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef,
+156,
 {
-2371, /* Object */
-2397, /* nullable Object */
+2380, /* Object */
+2401, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9435,26 +9593,6 @@ const struct type type_core__array__ArrayIterator__nullable__nitc__MType = {
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayIterator__nullable__nitc__MType = {
-0, /* dummy */
-{
-&type_core__Array__nullable__nitc__MType, /* Array[E]: Array[nullable MType] */
-&type_core__AbstractArrayRead__nullable__nitc__MType, /* AbstractArrayRead[E]: AbstractArrayRead[nullable MType] */
-}
-};
-/* runtime type ArrayReverseIterator[nullable MType] */
-const struct type type_core__array__ArrayReverseIterator__nullable__nitc__MType = {
--1, /*CAST DEAD*/
-"ArrayReverseIterator[nullable MType]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__array__ArrayReverseIterator__nullable__nitc__MType,
-11,
-{
-2371, /* Object */
-2397, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9464,37 +9602,17 @@ const struct type type_core__array__ArrayReverseIterator__nullable__nitc__MType 
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-},
-};
-const struct types resolution_table_core__array__ArrayReverseIterator__nullable__nitc__MType = {
-0, /* dummy */
-{
-&type_core__Array__nullable__nitc__MType, /* Array[E]: Array[nullable MType] */
-&type_core__AbstractArrayRead__nullable__nitc__MType, /* AbstractArrayRead[E]: AbstractArrayRead[nullable MType] */
-}
-};
-/* runtime type HashMapKeys[MClass, Set[MType]] */
-const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__Set__nitc__MType = {
--1, /*CAST DEAD*/
-"HashMapKeys[MClass, Set[MType]]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapKeys__nitc__MClass__core__Set__nitc__MType,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2764, /* nullable HashMapNode[MPropDef, APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2409, /* Collection[MClass] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9511,6 +9629,7 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__S
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+2799, /* nullable HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9518,11 +9637,9 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__S
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2433, /* Collection[Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2437, /* Collection[nullable MClass] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9556,6 +9673,7 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__S
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
+1351, /* HashMapNode[MPropDef, APropdef] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9596,7 +9714,16 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__S
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2511, /* Collection[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1714, /* HashMapNode[Object, nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
@@ -9613,255 +9740,10 @@ const struct type type_core__hash_collection__HashMapKeys__nitc__MClass__core__S
 -1, /* empty */
 },
 };
-const struct types resolution_table_core__hash_collection__HashMapKeys__nitc__MClass__core__Set__nitc__MType = {
+const struct types resolution_table_core__hash_collection__HashMapNode__nitc__MPropDef__nitc__APropdef = {
 0, /* dummy */
 {
-&type_core__HashMap__nitc__MClass__core__Set__nitc__MType, /* HashMap[K, V]: HashMap[MClass, Set[MType]] */
-&type_core__Array__nitc__MClass, /* Array[E]: Array[MClass] */
-&type_core__MapKeysIterator__nitc__MClass__core__Set__nitc__MType, /* MapKeysIterator[K, V]: MapKeysIterator[MClass, Set[MType]] */
-}
-};
-/* runtime type HashMapValues[MClass, Set[MType]] */
-const struct type type_core__hash_collection__HashMapValues__nitc__MClass__core__Set__nitc__MType = {
--1, /*CAST DEAD*/
-"HashMapValues[MClass, Set[MType]]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapValues__nitc__MClass__core__Set__nitc__MType,
-129,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2433, /* Collection[Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2501, /* Collection[Set[MType]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2511, /* Collection[nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapValues__nitc__MClass__core__Set__nitc__MType = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MClass__core__Set__nitc__MType, /* HashMap[K, V]: HashMap[MClass, Set[MType]] */
-&type_core__Array__core__Set__nitc__MType, /* Array[E]: Array[Set[MType]] */
-&type_core__MapValuesIterator__nitc__MClass__core__Set__nitc__MType, /* MapValuesIterator[K, V]: MapValuesIterator[MClass, Set[MType]] */
-}
-};
-/* runtime type HashMapIterator[MClass, Set[MType]] */
-const struct type type_core__hash_collection__HashMapIterator__nitc__MClass__core__Set__nitc__MType = {
--1, /*CAST DEAD*/
-"HashMapIterator[MClass, Set[MType]]", /* class_name_string */
--1, /*CAST DEAD*/
-0,
-&resolution_table_core__hash_collection__HashMapIterator__nitc__MClass__core__Set__nitc__MType,
-79,
-{
-2371, /* Object */
-2397, /* nullable Object */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2695, /* MapIterator[MClass, Set[MType]] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-2707, /* MapIterator[Object, nullable Object] */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
--1, /* empty */
-},
-};
-const struct types resolution_table_core__hash_collection__HashMapIterator__nitc__MClass__core__Set__nitc__MType = {
-0, /* dummy */
-{
-&type_core__HashMap__nitc__MClass__core__Set__nitc__MType, /* HashMap[K, V]: HashMap[MClass, Set[MType]] */
+&type_nitc__APropdef, /* V: APropdef */
+&type_nitc__MPropDef, /* K: MPropDef */
 }
 };

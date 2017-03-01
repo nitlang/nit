@@ -11,7 +11,7 @@
 #else
 	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #endif
-char* environ___NativeString_get_environ___impl( char* self )
+char* core__environ___CString_get_environ___impl( char* self )
 {
 #line 59 "../lib/core/environ.nit"
 

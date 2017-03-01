@@ -7,7 +7,7 @@ extern const char FILE_nitc__c_tools[];
 extern const char FILE_nitc__parser_nodes[];
 val* nitc__light_c___Location___as_line_pragma(val* self);
 void template___template__Template___add(val* self, val* p0);
-val* core__flat___NativeString___to_s_full(char* self, long p0, long p1);
+val* core__flat___CString___to_s_unsafe(char* self, val* p0, val* p1, val* p2, val* p3);
 val* nitc__light_ffi_base___AExternCodeBlock___code(val* self);
 short int nitc__light_c___AExternCodeBlock___is_c_body(val* self);
 #define COLOR_nitc__c_tools__CCompilationUnit___body_impl 6
@@ -36,14 +36,14 @@ val* core__flat___Int___core__abstract_text__Object__to_s(long self);
 extern const char FILE_nitc__location[];
 #define COLOR_nitc__location__SourceFile___filename 1
 #define COLOR_core__abstract_text__NativeArray__native_to_s 12
-#define COLOR_nitc__light_c__MModule___cflags 63
-#define COLOR_nitc__light_c__MModule___ldflags 64
-#define COLOR_nitc__light_c__MModule___pkgconfigs 65
+#define COLOR_nitc__light_c__MModule___cflags 64
+#define COLOR_nitc__light_c__MModule___ldflags 65
+#define COLOR_nitc__light_c__MModule___pkgconfigs 66
 #define COLOR_nitc__light_c__ForeignCType___ctype 0
 #define COLOR_nitc___nitc__ForeignCType___core__kernel__Object__init 14
-#define COLOR_nitc__nitni_base__MType__cname 54
+#define COLOR_nitc__nitni_base__MType__cname 58
 #define COLOR_nitc__light_c__ExternCFunction___method 3
-#define COLOR_nitc__modelize_property__APropdef___mpropdef 5
+#define COLOR_nitc__modelize_property__APropdef___mpropdef 3
 extern const char FILE_nitc__model[];
 #define COLOR_nitc__model__MPropDef___mclassdef 7
 #define COLOR_nitc__model__MClassDef___bound_mtype 9

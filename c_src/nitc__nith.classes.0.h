@@ -13,10 +13,10 @@ short int core___core__Object____61d_61d(val* self, val* p0);
 short int core___core__Object___is_same_instance(val* self, val* p0);
 val* core__abstract_text___Object___inspect(val* self);
 long core___core__Object___object_id(val* self);
+long core___core__Object___hash(val* self);
 val* core__abstract_text___Object___class_name(val* self);
 val* core__abstract_text___Object___inspect_head(val* self);
 char* core__abstract_text___Object___native_class_name(val* self);
-long core___core__Object___hash(val* self);
 void nitc___nitc__Phase___toolcontext_61d(val* self, val* p0);
 void nitc___nitc__Phase___depends_61d(val* self, val* p0);
 void nitc___nitc__Phase___in_hierarchy_61d(val* self, val* p0);
@@ -27,6 +27,7 @@ void nitc__modelbuilder___Phase___process_mainmodule(val* self, val* p0, val* p1
 void nitc__modelize_property___nitc__modelize_property__ModelizePropertyPhase___nitc__phase__Phase__process_nmodule(val* self, val* p0);
 void nitc___nitc__Phase___process_nclassdef(val* self, val* p0);
 void nitc___nitc__Phase___process_annotated_node(val* self, val* p0, val* p1);
+void nitc___nitc__Phase___process_nmodule_after(val* self, val* p0);
 void nitc___nitc__Phase___process_npropdef(val* self, val* p0);
 val* nitc___nitc__Phase___in_hierarchy(val* self);
 void nitc___nitc__Phase___disabled_61d(val* self, short int p0);
@@ -48,12 +49,15 @@ val* nitc__loader___ModelBuilder___parsed_modules(val* self);
 val* nitc___nitc__ModelBuilder___model(val* self);
 val* nitc__loader___ModelBuilder___mmodule2node(val* self, val* p0);
 val* nitc__loader___ModelBuilder___identify_module(val* self, val* p0);
+val* nitc__loader___ModelBuilder___last_loader_error(val* self);
 val* nitc__loader___ModelBuilder___mmodule2nmodule(val* self);
 val* nitc__rapid_type_analysis___ModelBuilder___do_rapid_type_analysis(val* self, val* p0);
 void nitc__separate_compiler___ModelBuilder___run_separate_compiler(val* self, val* p0, val* p1);
 void nitc__separate_erasure_compiler___ModelBuilder___run_separate_erasure_compiler(val* self, val* p0, val* p1);
+void nitc__loader___ModelBuilder___last_loader_error_61d(val* self, val* p0);
 val* nitc__loader___ModelBuilder___search_module_in_paths(val* self, val* p0, val* p1, val* p2);
 val* nitc__loader___ModelBuilder___identify_group(val* self, val* p0);
+void nitc__loader___ModelBuilder___scan_group(val* self, val* p0);
 val* nitc__loader___ModelBuilder___identified_modules_by_path(val* self);
 val* nitc__loader___ModelBuilder___module_absolute_path(val* self, val* p0);
 val* nitc__loader___ModelBuilder___identified_modules(val* self);
@@ -63,7 +67,6 @@ void nitc__modelize_property___ModelBuilder___build_properties(val* self, val* p
 void nitc___nitc__ModelBuilder___error(val* self, val* p0, val* p1);
 void nitc__loader___ModelBuilder___apply_conditional_importations(val* self, val* p0);
 void nitc__abstract_compiler___ModelBuilder___write_and_make(val* self, val* p0);
-void nitc__loader___ModelBuilder___scan_group(val* self, val* p0);
 val* nitc__loader___ModelBuilder___mgroups(val* self);
 val* nitc__loader___ModelBuilder___load_markdown(val* self, val* p0);
 val* nitc__loader___ModelBuilder___load_module_ast(val* self, val* p0);
@@ -90,6 +93,8 @@ long nitc__separate_compiler___ModelBuilder___nb_invok_by_inline(val* self);
 val* nitc__loader___ModelBuilder___nmodules(val* self);
 short int nitc__loader___ModelBuilder___match_amodulename(val* self, val* p0, val* p1);
 val* nitc__loader___ModelBuilder___search_group_in_paths(val* self, val* p0, val* p1);
+val* nitc___nitc__ModelBuilder___try_get_mclass_by_qid(val* self, val* p0, val* p1);
+void nitc___nitc__ModelBuilder___class_not_found(val* self, val* p0, val* p1);
 val* nitc___nitc__ModelBuilder___resolve_mtype_unchecked(val* self, val* p0, val* p1, val* p2, short int p3);
 void nitc___nitc__ModelBuilder___advice(val* self, val* p0, val* p1, val* p2);
 short int nitc___nitc__ModelBuilder___check_subtype(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
@@ -98,6 +103,7 @@ val* nitc__modelize_property___ModelBuilder___mpropdef2npropdef(val* self);
 val* nitc__modelize_property___ModelBuilder___the_root_init_mmethod(val* self);
 void nitc__modelize_property___ModelBuilder___the_root_init_mmethod_61d(val* self, val* p0);
 val* nitc__modelize_property___ModelBuilder___collect_attr_propdef(val* self, val* p0);
+val* nitc___nitc__ModelBuilder___bad_class_names(val* self);
 val* nitc___nitc__ModelBuilder___try_get_mproperty_by_name2(val* self, val* p0, val* p1, val* p2, val* p3);
 val* nitc___nitc__ModelBuilder___try_get_mproperty_by_name2_cache(val* self);
 void nitc__separate_compiler___ModelBuilder___nb_invok_by_tables_61d(val* self, long p0);
@@ -110,35 +116,38 @@ void nitc___nitc__ModelBuilder___core__kernel__Object__init(val* self);
 extern const struct class class_nitc__ModelBuilder;
 val* NEW_more_collections__HashMap3(const struct type* type);
 extern const struct type type_more_collections__HashMap3__nitc__MModule__nitc__MType__core__String__nullable__nitc__MProperty;
-#define COLOR_nitc__modelbuilder_base__ModelBuilder___try_get_mproperty_by_name2_cache 13
+#define COLOR_nitc__modelbuilder_base__ModelBuilder___try_get_mproperty_by_name2_cache 14
+val* NEW_more_collections__MultiHashMap(const struct type* type);
+extern const struct type type_more_collections__MultiHashMap__nitc__MModule__core__String;
+void core___core__HashMap___core__kernel__Object__init(val* self);
+#define COLOR_nitc__modelbuilder_base__ModelBuilder___bad_class_names 15
 val* NEW_core__Array(const struct type* type);
 extern const struct type type_core__Array__core__String;
 void core___core__Array___core__kernel__Object__init(val* self);
 #define COLOR_nitc__loader__ModelBuilder___paths 3
 val* NEW_core__HashMap(const struct type* type);
 extern const struct type type_core__HashMap__core__String__nullable__nitc__MModule;
-void core___core__HashMap___core__kernel__Object__init(val* self);
 #define COLOR_nitc__loader__ModelBuilder___identified_modules_by_path 4
 extern const struct type type_core__Array__nitc__MModule;
 #define COLOR_nitc__loader__ModelBuilder___identified_modules 5
 #define COLOR_nitc__loader__ModelBuilder___parsed_modules 6
 extern const struct type type_core__HashMap__core__String__nullable__nitc__MGroup;
-#define COLOR_nitc__loader__ModelBuilder___mgroups 7
+#define COLOR_nitc__loader__ModelBuilder___mgroups 8
 extern const struct type type_core__Array__core__SequenceRead__nitc__MModule;
-#define COLOR_nitc__loader__ModelBuilder___conditional_importations 8
+#define COLOR_nitc__loader__ModelBuilder___conditional_importations 9
 extern const struct type type_core__Array__nitc__AModule;
-#define COLOR_nitc__loader__ModelBuilder___nmodules 9
+#define COLOR_nitc__loader__ModelBuilder___nmodules 10
 extern const struct type type_core__HashMap__nitc__MModule__nitc__AModule;
-#define COLOR_nitc__loader__ModelBuilder___mmodule2nmodule 10
+#define COLOR_nitc__loader__ModelBuilder___mmodule2nmodule 11
 extern const struct type type_core__HashMap__nitc__MClassDef__nitc__AClassdef;
 #define COLOR_nitc__modelize_class__ModelBuilder___mclassdef2nclassdef 2
 extern const struct type type_core__HashMap__core__String__nitc__MModuleData__nitc__AAnnotation;
-#define COLOR_nitc__annotation__ModelBuilder___collect_annotations_data_cache 14
+#define COLOR_nitc__annotation__ModelBuilder___collect_annotations_data_cache 16
 extern const struct type type_core__HashMap__nitc__MPropDef__nitc__APropdef;
 #define COLOR_nitc__modelize_property__ModelBuilder___mpropdef2npropdef 0
-#define COLOR_nitc__separate_compiler__ModelBuilder___nb_invok_by_tables 15
-#define COLOR_nitc__separate_compiler__ModelBuilder___nb_invok_by_direct 16
-#define COLOR_nitc__separate_compiler__ModelBuilder___nb_invok_by_inline 17
+#define COLOR_nitc__separate_compiler__ModelBuilder___nb_invok_by_tables 17
+#define COLOR_nitc__separate_compiler__ModelBuilder___nb_invok_by_direct 18
+#define COLOR_nitc__separate_compiler__ModelBuilder___nb_invok_by_inline 19
 void nitc__model___nitc__model__MClassDefSorter___core__kernel__Object__init(val* self);
 void core___core__Comparator___sort(val* self, val* p0);
 void core___core__Comparator___sub_sort(val* self, val* p0, long p1, long p2);
@@ -158,8 +167,10 @@ val* nitc___nitc__MClass___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MClass___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MClass___nitc__model_base__MEntity__model(val* self);
 short int nitc___nitc__MEntity___is_fictive(val* self);
+val* nitc___nitc__MClass___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MClass___nitc__model_base__MEntity__name(val* self);
 void nitc___nitc__MEntity___is_fictive_61d(val* self, short int p0);
+val* nitc___nitc__MClass___MEntity__visibility(val* self);
 val* nitc___nitc__MClass___nitc__model_base__MEntity__full_name(val* self);
 void nitc__mdoc___MEntity___mdoc_61d(val* self, val* p0);
 void nitc___nitc__MEntity___is_broken_61d(val* self, short int p0);
@@ -169,12 +180,12 @@ val* nitc__mdoc___MEntity___mdoc(val* self);
 void nitc__mdoc___MEntity___deprecation_61d(val* self, val* p0);
 val* nitc__mdoc___MEntity___deprecation(val* self);
 val* nitc___nitc__MClass___mclass_type(val* self);
-val* nitc___nitc__MClass___visibility(val* self);
 val* nitc___nitc__MClass___intro_mmodule(val* self);
 val* nitc___nitc__MClass___kind(val* self);
 val* nitc__extern_classes___MClass___compute_ftype(val* self, val* p0);
 void nitc___nitc__MClass___intro_mmodule_61d(val* self, val* p0);
 void nitc___nitc__MClass___name_61d(val* self, val* p0);
+void nitc___nitc__MClass___location_61d(val* self, val* p0);
 void nitc___nitc__MClass___setup_parameter_names(val* self, val* p0);
 void nitc___nitc__MClass___kind_61d(val* self, val* p0);
 void nitc___nitc__MClass___visibility_61d(val* self, val* p0);
@@ -204,18 +215,20 @@ extern const struct class class_nitc__MClass;
 #define COLOR_nitc__model_base__MEntity___is_broken 0
 #define COLOR_nitc__model_base__MEntity___is_fictive 1
 extern const struct type type_core__Array__nitc__MParameterType;
-#define COLOR_nitc__model__MClass___mparameters 14
+#define COLOR_nitc__model__MClass___mparameters 15
 extern const struct type type_core__Array__nitc__MClassDef;
-#define COLOR_nitc__model__MClass___mclassdefs 17
+#define COLOR_nitc__model__MClass___mclassdefs 18
 extern const struct type type_core__HashMap__core__Array__nitc__MType__nitc__MGenericType;
-#define COLOR_nitc__model__MClass___get_mtype_cache 20
-#define COLOR_nitc__model__MClass___has_new_factory 21
-#define COLOR_nitc__extern_classes__MClass___ftype_computed 31
+#define COLOR_nitc__model__MClass___get_mtype_cache 21
+#define COLOR_nitc__model__MClass___has_new_factory 22
+#define COLOR_nitc__extern_classes__MClass___ftype_computed 32
 void nitc___nitc__MClassDef___core__kernel__Object__init(val* self);
 val* nitc___nitc__MClassDef___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MClassDef___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MClassDef___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MClassDef___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MClassDef___nitc__model_base__MEntity__name(val* self);
+val* nitc___nitc__MClassDef___MEntity__visibility(val* self);
 val* nitc___nitc__MClassDef___nitc__model_base__MEntity__full_name(val* self);
 short int nitc___nitc__MClassDef___is_intro(val* self);
 val* nitc___nitc__MClassDef___mmodule(val* self);
@@ -233,10 +246,10 @@ void nitc___nitc__MClassDef___to_s_61d(val* self, val* p0);
 val* nitc___nitc__MClassDef___in_hierarchy(val* self);
 void nitc___nitc__MClassDef___in_hierarchy_61d(val* self, val* p0);
 val* nitc___nitc__MClassDef___mpropdefs(val* self);
+val* nitc___nitc__MClassDef___mpropdefs_by_property(val* self);
 val* nitc___nitc__MClassDef___supertypes(val* self);
 void nitc__modelize_property___MClassDef___build_self_type(val* self, val* p0, val* p1);
 val* nitc__extern_classes___MClassDef___ftype(val* self);
-val* nitc___nitc__MClassDef___location(val* self);
 val* nitc__extern_classes___MClassDef___ftype_cache(val* self);
 val* nitc___nitc__MClassDef___intro_mproperties(val* self);
 val* nitc__modelize_property___MClassDef___mprop2npropdef(val* self);
@@ -247,14 +260,18 @@ extern const struct type type_core__Array__nitc__MProperty;
 #define COLOR_nitc__model__MClassDef___intro_mproperties 18
 extern const struct type type_core__Array__nitc__MPropDef;
 #define COLOR_nitc__model__MClassDef___mpropdefs 19
+extern const struct type type_core__HashMap__nitc__MProperty__nitc__MPropDef;
+#define COLOR_nitc__model__MClassDef___mpropdefs_by_property 20
 extern const struct type type_core__HashMap__nitc__MProperty__nitc__APropdef;
 #define COLOR_nitc__modelize_property__MClassDef___mprop2npropdef 6
-#define COLOR_nitc__extern_classes__MClassDef___ftype_computed 21
+#define COLOR_nitc__extern_classes__MClassDef___ftype_computed 22
 void nitc___nitc__MClassType___core__kernel__Object__init(val* self);
 val* nitc___nitc__MClassType___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MClassType___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MClassType___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MClassType___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MType___nitc__model_base__MEntity__name(val* self);
+val* nitc__model___MEntity___visibility(val* self);
 val* nitc___nitc__MClassType___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MClassType___MType__collect_mclassdefs(val* self, val* p0);
 short int nitc___nitc__MType___has_mproperty(val* self, val* p0, val* p1);
@@ -263,10 +280,12 @@ val* nitc__abstract_compiler___MClassType___MType__ctype(val* self);
 short int nitc___nitc__MClassType___MType__need_anchor(val* self);
 short int nitc___nitc__MClassType___MType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
 val* nitc___nitc__MClassType___MType__anchor_to(val* self, val* p0, val* p1);
+short int nitc___nitc__MType___is_legal_in(val* self, val* p0, val* p1);
 val* nitc___nitc__MType___as_nullable(val* self);
 short int nitc___nitc__MType___is_subtype(val* self, val* p0, val* p1, val* p2);
 val* nitc___nitc__MType___lookup_bound(val* self, val* p0, val* p1);
 val* nitc___nitc__MType___as_notnull(val* self);
+short int nitc___nitc__MType___is_ok(val* self);
 long nitc___nitc__MType___length(val* self);
 void nitc__separate_compiler___MType___tag_value_61d(val* self, long p0);
 void nitc__separate_compiler___MType___is_tagged_61d(val* self, short int p0);
@@ -319,6 +338,8 @@ val* nitc___nitc__MGenericType___nitc__model_base__MEntity__full_name(val* self)
 val* nitc___nitc__MGenericType___MType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
 short int nitc___nitc__MGenericType___MType__need_anchor(val* self);
 short int nitc___nitc__MGenericType___MType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+short int nitc___nitc__MGenericType___MType__is_legal_in(val* self, val* p0, val* p1);
+short int nitc___nitc__MGenericType___MType__is_ok(val* self);
 long nitc___nitc__MGenericType___MType__length(val* self);
 val* nitc__nitni_base___MGenericType___MType__mangled_cname(val* self);
 val* nitc___nitc__MGenericType___MClassType__arguments(val* self);
@@ -330,6 +351,7 @@ void nitc___nitc__MVirtualType___core__kernel__Object__init(val* self);
 val* nitc___nitc__MVirtualType___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MVirtualType___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MVirtualType___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MVirtualType___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MVirtualType___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MType___collect_mclassdefs(val* self, val* p0);
 val* nitc___nitc__MVirtualType___MType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
@@ -356,6 +378,7 @@ void nitc___nitc__MParameterType___core__kernel__Object__init(val* self);
 val* nitc___nitc__MParameterType___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MParameterType___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MParameterType___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MParameterType___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MParameterType___nitc__model_base__MEntity__name(val* self);
 val* nitc___nitc__MParameterType___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MParameterType___MType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
@@ -372,13 +395,16 @@ void nitc___nitc__MNullableType___core__kernel__Object__init(val* self);
 val* nitc___nitc__MNullableType___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MNullableType___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MProxyType___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MProxyType___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MNullableType___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MProxyType___MType__collect_mclassdefs(val* self, val* p0);
 val* nitc___nitc__MNullableType___MType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
 short int nitc___nitc__MProxyType___MType__need_anchor(val* self);
 short int nitc___nitc__MProxyType___MType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+short int nitc___nitc__MProxyType___MType__is_legal_in(val* self, val* p0, val* p1);
 val* nitc___nitc__MNullableType___MType__as_nullable(val* self);
 val* nitc___nitc__MProxyType___MType__as_notnull(val* self);
+short int nitc___nitc__MProxyType___MType__is_ok(val* self);
 long nitc___nitc__MProxyType___MType__length(val* self);
 val* nitc___nitc__MNullableType___MType__lookup_fixed(val* self, val* p0, val* p1);
 val* nitc___nitc__MProxyType___MType__collect_mclasses(val* self, val* p0);
@@ -405,6 +431,7 @@ void nitc___nitc__MNullType___core__kernel__Object__init(val* self);
 val* nitc___nitc__MNullType___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MNullType___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MNullType___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MEntity___location(val* self);
 val* nitc___nitc__MNullType___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MNullType___MType__collect_mclassdefs(val* self, val* p0);
 val* nitc___nitc__MNullType___MType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
@@ -431,6 +458,20 @@ val* nitc___nitc__MBottomType___MType__collect_mclasses(val* self, val* p0);
 val* nitc___nitc__MBottomType___MType__collect_mtypes(val* self, val* p0);
 void nitc___nitc__MBottomType___model_61d(val* self, val* p0);
 extern const struct class class_nitc__MBottomType;
+void nitc___nitc__MErrorType___core__kernel__Object__init(val* self);
+val* nitc___nitc__MErrorType___core__abstract_text__Object__to_s(val* self);
+val* nitc___nitc__MErrorType___nitc__model_base__MEntity__c_name(val* self);
+val* nitc___nitc__MErrorType___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MErrorType___nitc__model_base__MEntity__full_name(val* self);
+val* nitc___nitc__MErrorType___MType__collect_mclassdefs(val* self, val* p0);
+val* nitc___nitc__MErrorType___MType__resolve_for(val* self, val* p0, val* p1, val* p2, short int p3);
+short int nitc___nitc__MErrorType___MType__need_anchor(val* self);
+short int nitc___nitc__MErrorType___MType__can_resolve_for(val* self, val* p0, val* p1, val* p2);
+short int nitc___nitc__MErrorType___MType__is_ok(val* self);
+val* nitc___nitc__MErrorType___MType__collect_mclasses(val* self, val* p0);
+val* nitc___nitc__MErrorType___MType__collect_mtypes(val* self, val* p0);
+void nitc___nitc__MErrorType___model_61d(val* self, val* p0);
+extern const struct class class_nitc__MErrorType;
 void nitc___nitc__MSignature___core__kernel__Object__init(val* self);
 val* nitc___nitc__MSignature___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MEntity___c_name(val* self);
@@ -464,16 +505,18 @@ void nitc___nitc__MProperty___core__kernel__Object__init(val* self);
 val* nitc___nitc__MProperty___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MProperty___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MProperty___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MProperty___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MProperty___nitc__model_base__MEntity__name(val* self);
+val* nitc___nitc__MProperty___MEntity__visibility(val* self);
 val* nitc___nitc__MProperty___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MProperty___intro(val* self);
 val* nitc___nitc__MProperty___intro_mclassdef(val* self);
-val* nitc___nitc__MProperty___visibility(val* self);
 val* nitc___nitc__MProperty___mpropdefs(val* self);
 void nitc___nitc__MProperty___intro_61d(val* self, val* p0);
 val* nitc___nitc__MProperty___lookup_definitions(val* self, val* p0, val* p1);
 void nitc___nitc__MProperty___intro_mclassdef_61d(val* self, val* p0);
 void nitc___nitc__MProperty___name_61d(val* self, val* p0);
+void nitc___nitc__MProperty___location_61d(val* self, val* p0);
 void nitc___nitc__MProperty___visibility_61d(val* self, val* p0);
 void nitc___nitc__MProperty___is_autoinit_61d(val* self, short int p0);
 val* nitc___nitc__MProperty___lookup_super_definitions(val* self, val* p0, val* p1);
@@ -497,30 +540,33 @@ val* nitc__nitni_utilities___MMethod___build_csignature(val* self, val* p0, val*
 short int nitc___nitc__MMethod___is_null_safe(val* self);
 short int nitc___nitc__MMethod___is_toplevel(val* self);
 extern const struct class class_nitc__MMethod;
-#define COLOR_nitc__model__MProperty___is_autoinit 13
+#define COLOR_nitc__model__MProperty___is_autoinit 14
 #define COLOR_core__Array__nitc__model__MProperty__MPROPDEF 0
-#define COLOR_nitc__model__MProperty___mpropdefs 14
+#define COLOR_nitc__model__MProperty___mpropdefs 15
 val* NEW_more_collections__HashMap2(const struct type* type);
 #define COLOR_more_collections__HashMap2__nitc__MModule__nitc__MType__core__Array__nitc__model__MProperty__MPROPDEF 1
-#define COLOR_nitc__model__MProperty___lookup_definitions_cache 16
-#define COLOR_nitc__model__MProperty___lookup_all_definitions_cache 17
-#define COLOR_nitc__model__MMethod___is_toplevel 18
-#define COLOR_nitc__model__MMethod___is_init 19
-#define COLOR_nitc__model__MMethod___is_root_init 20
-#define COLOR_nitc__model__MMethod___is_new 21
+#define COLOR_nitc__model__MProperty___lookup_definitions_cache 17
+#define COLOR_nitc__model__MProperty___lookup_all_definitions_cache 18
+#define COLOR_nitc__model__MMethod___is_toplevel 19
+#define COLOR_nitc__model__MMethod___is_init 20
+#define COLOR_nitc__model__MMethod___is_root_init 21
+#define COLOR_nitc__model__MMethod___is_new 22
 extern const struct class class_nitc__MAttribute;
 val* nitc___nitc__MVirtualTypeProp___mvirtualtype(val* self);
+short int nitc___nitc__MVirtualTypeProp___is_selftype(val* self);
 extern const struct class class_nitc__MVirtualTypeProp;
 val* NEW_nitc__MVirtualType(const struct type* type);
 extern const struct type type_nitc__MVirtualType;
-#define COLOR_nitc__model__MVirtualType__mproperty_61d 57
+#define COLOR_nitc__model__MVirtualType__mproperty_61d 61
 #define COLOR_core__kernel__Object__init 0
-#define COLOR_nitc__model__MVirtualTypeProp___mvirtualtype 18
+#define COLOR_nitc__model__MVirtualTypeProp___mvirtualtype 19
 void nitc___nitc__MPropDef___core__kernel__Object__init(val* self);
 val* nitc___nitc__MPropDef___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MPropDef___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MPropDef___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MPropDef___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MPropDef___nitc__model_base__MEntity__name(val* self);
+val* nitc___nitc__MPropDef___MEntity__visibility(val* self);
 val* nitc___nitc__MPropDef___nitc__model_base__MEntity__full_name(val* self);
 val* nitc___nitc__MPropDef___mclassdef(val* self);
 val* nitc___nitc__MPropDef___mproperty(val* self);
@@ -532,10 +578,10 @@ short int nitc___nitc__MPropDef___is_intro(val* self);
 void nitc__modelize_property___MPropDef___has_supercall_61d(val* self, short int p0);
 short int nitc__modelize_property___MPropDef___has_supercall(val* self);
 val* nitc___nitc__MPropDef___lookup_next_definition(val* self, val* p0, val* p1);
-val* nitc___nitc__MPropDef___location(val* self);
 val* nitc___nitc__MMethodDef___msignature(val* self);
 void nitc___nitc__MMethodDef___msignature_61d(val* self, val* p0);
 void nitc___nitc__MMethodDef___constant_value_61d(val* self, val* p0);
+short int nitc___nitc__MMethodDef___is_abstract(val* self);
 val* nitc___nitc__MMethodDef___constant_value(val* self);
 short int nitc___nitc__MMethodDef___is_intern(val* self);
 short int nitc___nitc__MMethodDef___is_extern(val* self);
@@ -550,7 +596,6 @@ val* nitc__separate_compiler___MMethodDef___separate_runtime_function_cache(val*
 void nitc__separate_compiler___MMethodDef___separate_runtime_function_cache_61d(val* self, val* p0);
 val* nitc__abstract_compiler___MMethodDef___compile_inside_to_c(val* self, val* p0, val* p1);
 short int nitc__abstract_compiler___MMethodDef___can_inline(val* self, val* p0);
-short int nitc___nitc__MMethodDef___is_abstract(val* self);
 void nitc__abstract_compiler___MMethodDef___compile_parameter_check(val* self, val* p0, val* p1);
 void nitc___nitc__MMethodDef___is_abstract_61d(val* self, short int p0);
 void nitc___nitc__MMethodDef___is_intern_61d(val* self, short int p0);
@@ -581,10 +626,10 @@ void nitc___nitc__MModule___core__kernel__Object__init(val* self);
 val* nitc___nitc__MModule___core__abstract_text__Object__to_s(val* self);
 val* nitc___nitc__MModule___nitc__model_base__MEntity__c_name(val* self);
 val* nitc___nitc__MModule___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MModule___nitc__model_base__MEntity__location(val* self);
 val* nitc___nitc__MModule___nitc__model_base__MEntity__name(val* self);
 val* nitc___nitc__MModule___nitc__model_base__MEntity__full_name(val* self);
 val* nitc__loader___MModule___load(val* self, val* p0);
-val* nitc___nitc__MModule___location(val* self);
 val* nitc___nitc__MModule___mgroup(val* self);
 val* nitc__model___MModule___get_primitive_class(val* self, val* p0);
 void nitc___nitc__MModule___model_61d(val* self, val* p0);
@@ -592,20 +637,21 @@ void nitc___nitc__MModule___mgroup_61d(val* self, val* p0);
 void nitc___nitc__MModule___name_61d(val* self, val* p0);
 void nitc___nitc__MModule___location_61d(val* self, val* p0);
 void nitc___nitc__MModule___set_imported_mmodules(val* self, val* p0);
+void nitc___nitc__MModule___first_real_mmodule_61d(val* self, val* p0);
 val* nitc__model___MModule___sys_type(val* self);
 val* nitc___nitc__MModule___namespace_for(val* self, val* p0);
 val* nitc___nitc__MModule___mpackage(val* self);
 val* nitc___nitc__MModule___c_namespace_for(val* self, val* p0);
 val* nitc__model___MModule___try_get_primitive_method(val* self, val* p0, val* p1);
-void nitc___nitc__MModule___filepath_61d(val* self, val* p0);
+val* nitc___nitc__MModule___filepath(val* self);
 val* nitc__loader___MModule___parse(val* self, val* p0);
 val* nitc__platform___MModule___target_platform(val* self);
 void nitc__platform___MModule___local_target_platform_61d(val* self, val* p0);
-void nitc___nitc__MModule___in_importation_61d(val* self, val* p0);
+val* nitc___nitc__MModule___first_real_mmodule(val* self);
 val* nitc___nitc__MModule___in_importation(val* self);
+void nitc___nitc__MModule___in_importation_61d(val* self, val* p0);
 val* nitc__model___MModule___object_type(val* self);
 val* nitc__model___MModule___mclassdefs(val* self);
-val* nitc___nitc__MModule___filepath(val* self);
 void nitc___nitc__MModule___set_visibility_for(val* self, val* p0, val* p1);
 val* nitc__platform___MModule___local_target_platform(val* self);
 val* nitc__model___MModule___intro_mclasses(val* self);
@@ -615,6 +661,7 @@ val* nitc__model___MModule___native_array_type(val* self, val* p0);
 val* nitc__model___MModule___flatten_mclass_hierarchy(val* self);
 val* nitc__abstract_compiler___MModule___properties(val* self, val* p0);
 void nitc___nitc__MModule___is_test_suite_61d(val* self, short int p0);
+void nitc___nitc__MModule___is_generated_61d(val* self, short int p0);
 val* nitc___nitc__MModule___intrude_mmodules(val* self);
 val* nitc___nitc__MModule___public_mmodules(val* self);
 val* nitc___nitc__MModule___private_mmodules(val* self);
@@ -631,12 +678,11 @@ void nitc__model___MModule___linearize_mclassdefs(val* self, val* p0);
 void nitc__model___MModule___linearize_mpropdefs(val* self, val* p0);
 val* nitc__light___MModule___collect_linker_libs(val* self);
 val* nitc__light_c___MModule___ldflags(val* self);
-val* nitc__model___MModule___native_string_type(val* self);
+val* nitc__model___MModule___bool_type(val* self);
+val* nitc__model___MModule___c_string_type(val* self);
 val* nitc__model___MModule___string_type(val* self);
 void nitc__light___MModule___finalize_ffi(val* self, val* p0);
-val* nitc___nitc__MModule___first_real_mmodule(val* self);
 val* nitc__model___MModule___int_type(val* self);
-val* nitc__model___MModule___bool_type(val* self);
 void nitc__light_ffi___MModule___uses_ffi_61d(val* self, short int p0);
 short int nitc__light_ffi___MModule___uses_ffi(val* self);
 val* nitc__light___MModule___nmodule(val* self, val* p0);
@@ -663,35 +709,147 @@ extern const struct class class_nitc__MModule;
 val* NEW_core__HashSet(const struct type* type);
 extern const struct type type_core__HashSet__nitc__MModule;
 void core___core__HashSet___core__kernel__Object__init(val* self);
-#define COLOR_nitc__mmodule__MModule___intrude_mmodules 51
-#define COLOR_nitc__mmodule__MModule___public_mmodules 52
-#define COLOR_nitc__mmodule__MModule___private_mmodules 53
-#define COLOR_nitc__mmodule__MModule___is_test_suite 54
+#define COLOR_nitc__mmodule__MModule___intrude_mmodules 50
+#define COLOR_nitc__mmodule__MModule___public_mmodules 51
+#define COLOR_nitc__mmodule__MModule___private_mmodules 52
+#define COLOR_nitc__mmodule__MModule___is_test_suite 53
+#define COLOR_nitc__mmodule__MModule___is_generated 54
+#define COLOR_nitc__mmodule__MModule___first_real_mmodule 55
 extern const struct type type_core__Array__nitc__MClass;
 #define COLOR_nitc__model__MModule___intro_mclasses 6
 #define COLOR_nitc__model__MModule___mclassdefs 7
 extern const struct type type_core__Array__nitc__ExternFile;
-#define COLOR_nitc__light_ffi_base__MModule___ffi_files 62
-val* NEW_more_collections__MultiHashMap(const struct type* type);
+#define COLOR_nitc__light_ffi_base__MModule___ffi_files 63
 extern const struct type type_more_collections__MultiHashMap__core__String__core__String;
-#define COLOR_nitc__light_c__MModule___cflags 63
-#define COLOR_nitc__light_c__MModule___ldflags 64
-#define COLOR_nitc__light_c__MModule___pkgconfigs 65
+#define COLOR_nitc__light_c__MModule___cflags 64
+#define COLOR_nitc__light_c__MModule___ldflags 65
+#define COLOR_nitc__light_c__MModule___pkgconfigs 66
 extern const struct type type_core__HashMap__nitc__MClass__core__Set__nitc__MProperty;
-#define COLOR_nitc__abstract_compiler__MModule___properties_cache 55
-#define COLOR_nitc__light_ffi__MModule___uses_ffi 58
+#define COLOR_nitc__abstract_compiler__MModule___properties_cache 56
+#define COLOR_nitc__light_ffi__MModule___uses_ffi 59
 extern const struct type type_core__HashSet__nitc__FFILanguage;
-#define COLOR_nitc__light_ffi__MModule___present_languages 60
+#define COLOR_nitc__light_ffi__MModule___present_languages 61
 extern const struct type type_core__HashSet__nitc__AMethPropdef;
-#define COLOR_nitc__light_ffi__MModule___compiled_ffi_methods 61
+#define COLOR_nitc__light_ffi__MModule___compiled_ffi_methods 62
+void nitc___nitc__MPackage___core__kernel__Object__init(val* self);
+val* nitc___nitc__MPackage___core__abstract_text__Object__to_s(val* self);
+val* nitc___nitc__MPackage___nitc__model_base__MEntity__c_name(val* self);
+val* nitc___nitc__MPackage___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MPackage___nitc__model_base__MEntity__location(val* self);
+val* nitc___nitc__MPackage___nitc__model_base__MEntity__name(val* self);
+val* nitc___nitc__MPackage___nitc__model_base__MEntity__full_name(val* self);
+val* nitc___nitc__MPackage___mgroups(val* self);
+short int nitc__loader___MPackage___accept(val* self, val* p0);
+val* nitc__loader___MPackage___ini(val* self);
+void nitc___nitc__MPackage___name_61d(val* self, val* p0);
+void nitc___nitc__MPackage___model_61d(val* self, val* p0);
+void nitc___nitc__MPackage___location_61d(val* self, val* p0);
+void nitc___nitc__MPackage___root_61d(val* self, val* p0);
+void nitc__loader___MPackage___ini_61d(val* self, val* p0);
+val* nitc__loader___MPackage___excludes(val* self);
+val* nitc___nitc__MPackage___root(val* self);
+extern const struct class class_nitc__MPackage;
+val* NEW_poset__POSet(const struct type* type);
+extern const struct type type_poset__POSet__nitc__MGroup;
+#define COLOR_nitc__mpackage__MPackage___mgroups 15
+void nitc___nitc__MGroup___core__kernel__Object__init(val* self);
+val* nitc___nitc__MGroup___core__abstract_text__Object__to_s(val* self);
+val* nitc___nitc__MGroup___nitc__model_base__MEntity__model(val* self);
+val* nitc___nitc__MGroup___nitc__model_base__MEntity__location(val* self);
+val* nitc___nitc__MGroup___nitc__model_base__MEntity__name(val* self);
+val* nitc___nitc__MGroup___nitc__model_base__MEntity__full_name(val* self);
+val* nitc___nitc__MGroup___mpackage(val* self);
+val* nitc___nitc__MGroup___filepath(val* self);
+val* nitc__loader___MGroup___mmodules_by_name(val* self, val* p0);
+val* nitc__mmodule___MGroup___mmodules(val* self);
+void nitc___nitc__MGroup___name_61d(val* self, val* p0);
+void nitc___nitc__MGroup___location_61d(val* self, val* p0);
+void nitc___nitc__MGroup___mpackage_61d(val* self, val* p0);
+void nitc___nitc__MGroup___parent_61d(val* self, val* p0);
+val* nitc__mmodule___MGroup___default_mmodule(val* self);
+void nitc__mmodule___MGroup___default_mmodule_61d(val* self, val* p0);
+short int nitc__loader___MGroup___scanned(val* self);
+void nitc__loader___MGroup___scanned_61d(val* self, short int p0);
+val* nitc___nitc__MGroup___in_nesting(val* self);
+void nitc___nitc__MGroup___in_nesting_61d(val* self, val* p0);
+val* nitc___nitc__MGroup___parent(val* self);
+extern const struct class class_nitc__MGroup;
+#define COLOR_nitc__mmodule__MGroup___mmodules 7
+#define COLOR_nitc__loader__MGroup___scanned 6
+val* nitc___nitc__Model___MEntity__model(val* self);
+val* nitc___nitc__MEntity___name(val* self);
+val* nitc__mmodule___Model___mmodule_importation_hierarchy(val* self);
+val* nitc___nitc__Model___no_location(val* self);
+val* nitc__mmodule___Model___mmodules_by_name(val* self);
+val* nitc__mmodule___Model___mmodules(val* self);
+val* nitc__model___Model___get_mclasses_by_name(val* self, val* p0);
+val* nitc__model___Model___mclassdef_hierarchy(val* self);
+val* nitc__model___Model___get_mproperties_by_name(val* self, val* p0);
+val* nitc__mpackage___Model___mpackages(val* self);
+val* nitc__mpackage___Model___mpackage_by_name(val* self);
+val* nitc__model___Model___mclasses_by_name(val* self);
+val* nitc__model___Model___mclasses(val* self);
+val* nitc__model___Model___full_mtype_specialization_hierarchy(val* self);
+val* nitc__model___Model___intro_mtype_specialization_hierarchy(val* self);
+val* nitc__model___Model___mproperties_by_name(val* self);
+val* nitc__mmodule___Model___get_mmodules_by_name(val* self, val* p0);
+val* nitc__model___Model___null_type(val* self);
+val* nitc__model___Model___mproperties(val* self);
+extern const struct class class_nitc__Model;
+val* NEW_nitc__Location(const struct type* type);
+extern const struct type type_nitc__Location;
+#define COLOR_nitc__location__Location__file_61d 19
+#define COLOR_nitc__location__Location__line_start_61d 20
+#define COLOR_nitc__location__Location__line_end_61d 21
+#define COLOR_nitc__location__Location__column_start_61d 22
+#define COLOR_nitc__location__Location__column_end_61d 23
+#define COLOR_nitc__model_base__Model___no_location 19
+extern const struct type type_core__Array__nitc__MPackage;
+#define COLOR_nitc__mpackage__Model___mpackages 17
+extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MPackage;
+#define COLOR_nitc__mpackage__Model___mpackage_by_name 18
+#define COLOR_nitc__mmodule__Model___mmodules 14
+extern const struct type type_poset__POSet__nitc__MModule;
+#define COLOR_nitc__mmodule__Model___mmodule_importation_hierarchy 15
+extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MModule;
+#define COLOR_nitc__mmodule__Model___mmodules_by_name 16
+#define COLOR_nitc__model__Model___mclasses 6
+#define COLOR_nitc__model__Model___mproperties 7
+extern const struct type type_poset__POSet__nitc__MClassDef;
+#define COLOR_nitc__model__Model___mclassdef_hierarchy 8
+extern const struct type type_poset__POSet__nitc__MClassType;
+#define COLOR_nitc__model__Model___intro_mtype_specialization_hierarchy 9
+#define COLOR_nitc__model__Model___full_mtype_specialization_hierarchy 10
+extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MClass;
+#define COLOR_nitc__model__Model___mclasses_by_name 11
+extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MProperty;
+#define COLOR_nitc__model__Model___mproperties_by_name 12
+val* NEW_nitc__MNullType(const struct type* type);
+extern const struct type type_nitc__MNullType;
+#define COLOR_nitc__model__MNullType__model_61d 60
+#define COLOR_nitc__model__Model___null_type 13
+void nitc___nitc__MVisibility___core__kernel__Object__init(val* self);
+val* nitc___nitc__MVisibility___core__abstract_text__Object__to_s(val* self);
+short int core___core__Comparable____60d_61d(val* self, val* p0);
+short int core___core__Comparable____62d(val* self, val* p0);
+short int core___core__Comparable____62d_61d(val* self, val* p0);
+short int nitc___nitc__MVisibility___core__kernel__Comparable___60d(val* self, val* p0);
+long core___core__Comparable____60d_61d_62d(val* self, val* p0);
+val* core___core__Comparable___min(val* self, val* p0);
+val* core___core__Comparable___max(val* self, val* p0);
+void nitc___nitc__MVisibility___to_s_61d(val* self, val* p0);
+void nitc___nitc__MVisibility___level_61d(val* self, long p0);
+long nitc___nitc__MVisibility___level(val* self);
+extern const struct class class_nitc__MVisibility;
 void nitc___nitc__SourceFile___core__kernel__Object__init(val* self);
 val* nitc___nitc__SourceFile___filename(val* self);
+val* nitc__toolcontext___SourceFile___messages(val* self);
+val* nitc___nitc__SourceFile___line_starts(val* self);
+val* nitc___nitc__SourceFile___string(val* self);
 void nitc___nitc__SourceFile___from_string(val* self, val* p0, val* p1);
 void nitc___nitc__SourceFile___string_61d(val* self, val* p0);
 val* nitc___nitc__SourceFile___stream(val* self);
-val* nitc___nitc__SourceFile___line_starts(val* self);
 void nitc___nitc__SourceFile___filename_61d(val* self, val* p0);
-val* nitc___nitc__SourceFile___string(val* self);
 void nitc___nitc__SourceFile___stream_61d(val* self, val* p0);
 val* nitc__loader___SourceFile___mmodule(val* self);
 void nitc__loader___SourceFile___mmodule_61d(val* self, val* p0);
@@ -701,29 +859,28 @@ void nitc__parser_nodes___SourceFile___last_token_61d(val* self, val* p0);
 extern const struct class class_nitc__SourceFile;
 extern const struct type type_core__Array__core__Int;
 #define COLOR_nitc__location__SourceFile___line_starts 4
+extern const struct type type_core__Array__nitc__Message;
+#define COLOR_nitc__toolcontext__SourceFile___messages 5
 void nitc___nitc__Location___core__kernel__Object__init(val* self);
 val* nitc___nitc__Location___core__abstract_text__Object__to_s(val* self);
 short int nitc___nitc__Location___core__kernel__Object___61d_61d(val* self, val* p0);
-short int core___core__Comparable____60d_61d(val* self, val* p0);
-short int core___core__Comparable____62d(val* self, val* p0);
-short int core___core__Comparable____62d_61d(val* self, val* p0);
 short int nitc___nitc__Location___core__kernel__Comparable___60d(val* self, val* p0);
-long core___core__Comparable____60d_61d_62d(val* self, val* p0);
-val* nitc___nitc__Location___file(val* self);
 void nitc___nitc__Location___file_61d(val* self, val* p0);
 void nitc___nitc__Location___line_start_61d(val* self, long p0);
 void nitc___nitc__Location___line_end_61d(val* self, long p0);
 void nitc___nitc__Location___column_start_61d(val* self, long p0);
 void nitc___nitc__Location___column_end_61d(val* self, long p0);
-void nitc__toolcontext___Location___add_message(val* self, val* p0);
-val* nitc___nitc__Location___colored_line(val* self, val* p0);
+val* nitc___nitc__Location___file(val* self);
 long nitc___nitc__Location___line_start(val* self);
 long nitc___nitc__Location___line_end(val* self);
 long nitc___nitc__Location___column_start(val* self);
 long nitc___nitc__Location___column_end(val* self);
 short int nitc___nitc__Location___located_in(val* self, val* p0);
+void nitc__toolcontext___Location___add_message(val* self, val* p0);
 val* nitc__toolcontext___Location___messages(val* self);
 void nitc__toolcontext___Location___messages_61d(val* self, val* p0);
+val* nitc___nitc__Location___colored_line(val* self, val* p0);
+void nitc___nitc__Location___opaque_file(val* self, val* p0);
 val* nitc___nitc__Location___text(val* self);
 val* nitc___nitc__Location___text_cache(val* self);
 long nitc___nitc__Location___pstart(val* self);
@@ -736,30 +893,35 @@ val* core___core__String___Object__to_s(val* self);
 short int core___core__Text___core__kernel__Object___61d_61d(val* self, val* p0);
 long core___core__Text___core__kernel__Object__hash(val* self);
 short int core___core__Text___core__kernel__Comparable___60d(val* self, val* p0);
+val* core___core__String___core__kernel__Cloneable__clone(val* self);
 val* core___core__Pattern___split_in(val* self, val* p0);
 val* core__string_search___Text___Pattern__search_in(val* self, val* p0, long p1);
 long core__string_search___Text___Pattern__search_index_in(val* self, val* p0, long p1);
-long core__fixed_ints___Text___to_i(val* self);
+long core__fixed_ints_text___Text___to_i(val* self);
 char* core__ropes___core__ropes__Concat___core__abstract_text__Text__to_cstring(val* self);
 long core__ropes___core__ropes__Concat___core__abstract_text__Text__length(val* self);
+short int core__file___Text___file_exists(val* self);
 val* core__ropes___core__ropes__Concat___core__abstract_text__Text__chars(val* self);
 val* core__ropes___core__ropes__Concat___core__abstract_text__Text__substring(val* self, long p0, long p1);
-short int core__fixed_ints___Text___is_int(val* self);
+short int core__fixed_ints_text___Text___is_int(val* self);
 val* core__string_search___Text___remove_all(val* self, val* p0);
+uint32_t core__ropes___core__ropes__Concat___core__abstract_text__Text___91d_93d(val* self, long p0);
 void core__file___Writable___write_to_file(val* self, val* p0);
 void core__stream___Text___Writable__write_to(val* self, val* p0);
-uint32_t core__ropes___core__ropes__Concat___core__abstract_text__Text___91d_93d(val* self, long p0);
 val* core___core__Text___substring_from(val* self, long p0);
 long core___core__Text___to_hex(val* self, val* p0, val* p1);
 long core___core__Text___to_oct(val* self);
 long core___core__Text___to_bin(val* self);
 long core___core__Text___to_dec(val* self);
-long core__ropes___core__ropes__Concat___core__abstract_text__Text__bytelen(val* self);
+val* core__ropes___core__ropes__Concat___core__abstract_text__Text___43d(val* self, val* p0);
+long core__ropes___core__ropes__Concat___core__abstract_text__Text__byte_length(val* self);
 val* core__ropes___core__ropes__Concat___core__abstract_text__Text__substrings(val* self);
+val* core___core__String___Text__to_snake_case(val* self);
 short int core__ropes___core__ropes__Concat___core__abstract_text__Text__is_empty(val* self);
 val* core__string_search___Text___split_with(val* self, val* p0);
-val* core__fixed_ints___Text___strip_numhead(val* self);
-val* core__fixed_ints___Text___get_numhead(val* self);
+val* core__ropes___core__ropes__Concat___core__abstract_text__Text___42d(val* self, long p0);
+val* core__fixed_ints_text___Text___strip_numhead(val* self);
+val* core__fixed_ints_text___Text___get_numhead(val* self);
 short int core___core__Text___is_hex(val* self);
 short int core___core__Text___is_bin(val* self);
 short int core___core__Text___is_oct(val* self);
@@ -767,6 +929,9 @@ short int core___core__Text___is_dec(val* self);
 val* core__string_search___Text___split(val* self, val* p0);
 val* core__ropes___core__ropes__Concat___core__abstract_text__Text__empty(val* self);
 long core___core__Text___a_to(val* self, long p0);
+uint32_t core___core__Text___last(val* self);
+val* core___core__Text___hash_cache(val* self);
+void core___core__Text___hash_cache_61d(val* self, val* p0);
 short int core___core__Text___is_lower(val* self);
 short int core___core__Text___has_suffix(val* self, val* p0);
 void core__file___Text___write_native_to(val* self, val* p0);
@@ -774,9 +939,8 @@ val* core___core__Text___to_cmangle(val* self);
 val* core__string_search___Text___split_once_on(val* self, val* p0);
 short int core___core__Text___is_numeric(val* self);
 short int core___core__Text___has_substring(val* self, val* p0, long p1);
-uint32_t core___core__Text___last(val* self);
-val* core___core__Text___hash_cache(val* self);
-void core___core__Text___hash_cache_61d(val* self, val* p0);
+long core___core__Text___levenshtein_distance(val* self, val* p0);
+long core___core__Text___last_index_of_from(val* self, uint32_t p0, long p1);
 short int core___core__Text___has_prefix(val* self, val* p0);
 val* core___core__Text___trim(val* self);
 val* core___core__Text___escape_to_c(val* self);
@@ -784,89 +948,46 @@ val* core__file___Text___to_path(val* self);
 val* core___core__Text___chomp(val* self);
 val* core___core__Text___r_trim(val* self);
 val* core___core__Text___l_trim(val* self);
+val* csv___core__Text___escape_to_csv(val* self, uint32_t p0, uint32_t p1, val* p2);
 val* core___core__Text___escape_to_sh(val* self);
+val* core__ropes___core__ropes__Concat___core__abstract_text__Text__to_lower(val* self);
+long csv___core__Text___chars_to_escape_csv(val* self, uint32_t p0, uint32_t p1, val* p2);
 val* core___core__Text___escape_to_mk(val* self);
 val* core__string_search___Text___replace(val* self, val* p0, val* p1);
-val* core__fixed_ints___Text___to_num(val* self);
+long core___core__Text___index_of(val* self, uint32_t p0);
+long core___core__Text___last_index_of(val* self, uint32_t p0);
+uint32_t core___core__Text___first(val* self);
+val* core__fixed_ints_text___Text___to_num(val* self);
 double core___core__Text___to_f(val* self);
 val* core___core__Text___unescape_nit(val* self);
-val* core__ropes___core__ropes__Concat___core__abstract_text__Text__bytes(val* self);
-short int core__fixed_ints___Text___is_num(val* self);
-val* core__fixed_ints___Text___get_numext(val* self);
-val* core__fixed_ints___Text___strip_numext(val* self);
+long core___core__Text___index_of_from(val* self, uint32_t p0, long p1);
+val* core__bytes___Text___unescape_to_bytes(val* self);
+val* core__bytes___Text___to_bytes(val* self);
+short int core__fixed_ints_text___Text___is_num(val* self);
+val* core__fixed_ints_text___Text___get_numext(val* self);
+val* core__fixed_ints_text___Text___strip_numext(val* self);
+void core__bytes___Text___append_to_bytes(val* self, val* p0);
+val* core__ropes___core__ropes__Concat___core__abstract_text__Text__to_upper(val* self);
 val* core__environ___String___environ(val* self);
-val* core__ropes___core__ropes__Concat___core__abstract_text__String___43d(val* self, val* p0);
-val* core___core__String___to_snake_case(val* self);
-val* core__file___String___strip_extension(val* self, val* p0);
 val* core__file___String____47d(val* self, val* p0);
-short int core__file___String___file_exists(val* self);
-val* core__ropes___core__ropes__Concat___core__abstract_text__String___42d(val* self, long p0);
-val* core__file___String___file_extension(val* self);
 val* core__file___String___join_path(val* self, val* p0);
+val* core__file___String___strip_extension(val* self, val* p0);
+val* core__file___String___file_extension(val* self);
 val* core__file___String___basename(val* self, val* p0);
 val* core__file___String___simplify_path(val* self);
+val* core__file___String___dirname(val* self);
+val* core__file___String___file_stat(val* self);
+val* core__file___String___files(val* self);
+val* core__file___String___realpath(val* self);
+val* core__file___String___relpath(val* self, val* p0);
+val* core__file___String___mkdir(val* self, val* p0);
+void core__file___String___file_copy_to(val* self, val* p0);
 void core__ropes___core__ropes__Concat___left_61d(val* self, val* p0);
 void core__ropes___core__ropes__Concat___right_61d(val* self, val* p0);
-void core__ropes___core__ropes__Concat___length_61d(val* self, long p0);
 val* core__ropes___core__ropes__Concat___get_leaf_at(val* self, long p0);
 val* core__ropes___core__ropes__Concat___balance(val* self);
 val* core__ropes___core__ropes__Concat___recurse_balance(val* self, val* p0, long p1);
-val* core__file___String___dirname(val* self);
-val* core__file___String___file_stat(val* self);
-val* core__file___String___realpath(val* self);
-val* core__file___String___files(val* self);
-val* core__file___String___mkdir(val* self);
-val* core__ropes___core__ropes__Concat___core__abstract_text__String__to_lower(val* self);
-void core__file___String___file_copy_to(val* self, val* p0);
-val* core__file___String___relpath(val* self, val* p0);
-val* core__ropes___core__ropes__Concat___core__abstract_text__String__to_upper(val* self);
 extern const struct class class_core__ropes__Concat;
-#define COLOR_core__ropes__Concat___flat_last_pos_start 8
-#define COLOR_core__ropes__Concat___flat_last_pos_end 9
-void core___core__RopeBuffer___core__kernel__Object__init(val* self);
-val* core___core__RopeBuffer___core__abstract_text__Object__to_s(val* self);
-long core___core__Buffer___core__kernel__Object__hash(val* self);
-char* core___core__Text___to_cstring(val* self);
-long core___core__RopeBuffer___core__abstract_text__Text__length(val* self);
-val* core___core__RopeBuffer___core__abstract_text__Text__chars(val* self);
-val* core___core__RopeBuffer___core__abstract_text__Text__substring(val* self, long p0, long p1);
-uint32_t core___core__RopeBuffer___core__abstract_text__Text___91d_93d(val* self, long p0);
-long core___core__RopeBuffer___core__abstract_text__Text__bytelen(val* self);
-val* core___core__RopeBuffer___core__abstract_text__Text__substrings(val* self);
-short int core___core__Text___is_empty(val* self);
-val* core___core__RopeBuffer___core__abstract_text__Text__empty(val* self);
-val* core___core__RopeBuffer___core__abstract_text__Text__bytes(val* self);
-val* core__flat___Buffer___new(val* self);
-void core___core__RopeBuffer___core__abstract_text__Buffer__append(val* self, val* p0);
-val* core__flat___Buffer___with_cap(val* self, long p0);
-void core___core__RopeBuffer___core__abstract_text__Buffer__add(val* self, uint32_t p0);
-short int core___core__Buffer___is_dirty(val* self);
-void core___core__Buffer___is_dirty_61d(val* self, short int p0);
-void core___core__Buffer___written_61d(val* self, short int p0);
-void core___core__RopeBuffer___core__abstract_text__Buffer__enlarge(val* self, long p0);
-short int core___core__Buffer___written(val* self);
-void core___core__RopeBuffer___core__abstract_text__Buffer___91d_93d_61d(val* self, long p0, uint32_t p1);
-void core___core__RopeBuffer___ns_61d(val* self, char* p0);
-void core___core__RopeBuffer___buf_size_61d(val* self, long p0);
-void core___core__RopeBuffer___dumped_61d(val* self, long p0);
-void core___core__RopeBuffer___persist_buffer(val* self);
-val* core___core__RopeBuffer___str(val* self);
-long core___core__RopeBuffer___dumped(val* self);
-long core___core__RopeBuffer___rpos(val* self);
-char* core___core__RopeBuffer___ns(val* self);
-void core___core__RopeBuffer___from(val* self, val* p0);
-void core___core__RopeBuffer___str_61d(val* self, val* p0);
-long core___core__RopeBuffer___buf_size(val* self);
-void core___core__RopeBuffer___rpos_61d(val* self, long p0);
-void core___core__RopeBuffer___dump_buffer(val* self);
-extern const struct class class_core__RopeBuffer;
-#define COLOR_core__abstract_text__Buffer___is_dirty 1
-#define COLOR_core__abstract_text__Buffer___written 2
-val* core__flat___NativeString___to_s_full(char* self, long p0, long p1);
-#define COLOR_core__ropes__RopeBuffer___str 7
-#define COLOR_core__ropes__RopeBuffer___rpos 9
-#define COLOR_core__ropes__RopeBuffer___nslen 10
-#define COLOR_core__ropes__RopeBuffer___bytelen 12
 void core__ropes___core__ropes__RopeCharIteratorPiece___core__kernel__Object__init(val* self);
 val* core__ropes___core__ropes__RopeCharIteratorPiece___prev(val* self);
 val* core__ropes___core__ropes__RopeCharIteratorPiece___node(val* self);
@@ -877,42 +998,12 @@ void core__ropes___core__ropes__RopeCharIteratorPiece___node_61d(val* self, val*
 void core__ropes___core__ropes__RopeCharIteratorPiece___prev_61d(val* self, val* p0);
 short int core__ropes___core__ropes__RopeCharIteratorPiece___rdone(val* self);
 extern const struct class class_core__ropes__RopeCharIteratorPiece;
-short int core__ropes___core__ropes__RopeByteReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core__ropes___core__ropes__RopeByteReverseIterator___core__abstract_collection__Iterator__item(val* self);
-void core__ropes___core__ropes__RopeByteReverseIterator___core__abstract_collection__Iterator__next(val* self);
-void core___core__Iterator___finish(val* self);
-val* core___core__Iterator___iterator(val* self);
-val* core__array___Iterator___to_a(val* self);
-long core__ropes___core__ropes__RopeByteReverseIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core__ropes___core__ropes__RopeByteReverseIterator___from(val* self, val* p0, long p1);
-long core__ropes___core__ropes__RopeByteReverseIterator___pos(val* self);
-char* core__ropes___core__ropes__RopeByteReverseIterator___ns(val* self);
-long core__ropes___core__ropes__RopeByteReverseIterator___pns(val* self);
-void core__ropes___core__ropes__RopeByteReverseIterator___pns_61d(val* self, long p0);
-void core__ropes___core__ropes__RopeByteReverseIterator___pos_61d(val* self, long p0);
-val* core__ropes___core__ropes__RopeByteReverseIterator___subs(val* self);
-void core__ropes___core__ropes__RopeByteReverseIterator___ns_61d(val* self, char* p0);
-void core__ropes___core__ropes__RopeByteReverseIterator___subs_61d(val* self, val* p0);
-extern const struct class class_core__ropes__RopeByteReverseIterator;
-short int core__ropes___core__ropes__RopeByteIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core__ropes___core__ropes__RopeByteIterator___core__abstract_collection__Iterator__item(val* self);
-void core__ropes___core__ropes__RopeByteIterator___core__abstract_collection__Iterator__next(val* self);
-long core__ropes___core__ropes__RopeByteIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core__ropes___core__ropes__RopeByteIterator___from(val* self, val* p0, long p1);
-long core__ropes___core__ropes__RopeByteIterator___pos(val* self);
-long core__ropes___core__ropes__RopeByteIterator___max(val* self);
-char* core__ropes___core__ropes__RopeByteIterator___ns(val* self);
-long core__ropes___core__ropes__RopeByteIterator___pns(val* self);
-void core__ropes___core__ropes__RopeByteIterator___pns_61d(val* self, long p0);
-void core__ropes___core__ropes__RopeByteIterator___pos_61d(val* self, long p0);
-val* core__ropes___core__ropes__RopeByteIterator___subs(val* self);
-void core__ropes___core__ropes__RopeByteIterator___ns_61d(val* self, char* p0);
-void core__ropes___core__ropes__RopeByteIterator___subs_61d(val* self, val* p0);
-void core__ropes___core__ropes__RopeByteIterator___max_61d(val* self, long p0);
-extern const struct class class_core__ropes__RopeByteIterator;
 short int core__ropes___core__ropes__RopeCharReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
 val* VIRTUAL_core__ropes___core__ropes__RopeCharReverseIterator___core__abstract_collection__Iterator__item(val* self);
 void core__ropes___core__ropes__RopeCharReverseIterator___core__abstract_collection__Iterator__next(val* self);
+void core___core__Iterator___finish(val* self);
+val* core___core__Iterator___iterator(val* self);
+val* core__array___Iterator___to_a(val* self);
 long core__ropes___core__ropes__RopeCharReverseIterator___core__abstract_collection__IndexedIterator__index(val* self);
 void core__ropes___core__ropes__RopeCharReverseIterator___from(val* self, val* p0, long p1);
 long core__ropes___core__ropes__RopeCharReverseIterator___pos(val* self);
@@ -952,18 +1043,6 @@ void core__ropes___core__ropes__ReverseRopeSubstrings___str_61d(val* self, val* 
 void core__ropes___core__ropes__ReverseRopeSubstrings___pos_61d(val* self, long p0);
 void core__ropes___core__ropes__ReverseRopeSubstrings___iter_61d(val* self, val* p0);
 extern const struct class class_core__ropes__ReverseRopeSubstrings;
-short int core__ropes___core__ropes__RopeBufSubstringIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* core__ropes___core__ropes__RopeBufSubstringIterator___core__abstract_collection__Iterator__item(val* self);
-void core__ropes___core__ropes__RopeBufSubstringIterator___core__abstract_collection__Iterator__next(val* self);
-void core__ropes___core__ropes__RopeBufSubstringIterator___from(val* self, val* p0);
-val* core__ropes___core__ropes__RopeBufSubstringIterator___iter(val* self);
-short int core__ropes___core__ropes__RopeBufSubstringIterator___nsstr_done(val* self);
-val* core__ropes___core__ropes__RopeBufSubstringIterator___nsstr(val* self);
-void core__ropes___core__ropes__RopeBufSubstringIterator___nsstr_done_61d(val* self, short int p0);
-void core__ropes___core__ropes__RopeBufSubstringIterator___iter_61d(val* self, val* p0);
-void core__ropes___core__ropes__RopeBufSubstringIterator___nsstr_61d(val* self, val* p0);
-extern const struct class class_core__ropes__RopeBufSubstringIterator;
-#define COLOR_core__ropes__RopeBufSubstringIterator___nsstr_done 2
 short int core__ropes___core__ropes__RopeSubstrings___core__abstract_collection__Iterator__is_ok(val* self);
 val* core__ropes___core__ropes__RopeSubstrings___core__abstract_collection__Iterator__item(val* self);
 void core__ropes___core__ropes__RopeSubstrings___core__abstract_collection__Iterator__next(val* self);
@@ -984,13 +1063,15 @@ short int core___core__SequenceRead___core__kernel__Object___61d_61d(val* self, 
 long core___core__SequenceRead___core__kernel__Object__hash(val* self);
 void core__abstract_text___core__abstract_text__StringCharView___target_61d(val* self, val* p0);
 val* core__abstract_text___core__abstract_text__StringCharView___target(val* self);
-val* core__abstract_text___Collection___join(val* self, val* p0);
+val* core__abstract_text___Collection___join(val* self, val* p0, val* p1);
 val* core__array___Collection___to_a(val* self);
 long core__abstract_text___core__abstract_text__StringCharView___core__abstract_collection__Collection__length(val* self);
 short int core__abstract_text___core__abstract_text__StringCharView___core__abstract_collection__Collection__is_empty(val* self);
 val* core__abstract_text___core__abstract_text__StringCharView___core__abstract_collection__Collection__iterator(val* self);
+short int core___core__Collection___has_exactly(val* self, val* p0);
 short int core___core__Collection___has_all(val* self, val* p0);
 short int core___core__Collection___has(val* self, val* p0);
+long core___core__Collection___count(val* self, val* p0);
 val* core___core__SequenceRead___Collection__first(val* self);
 short int core___core__Collection___not_empty(val* self);
 val* core__abstract_text___Collection___plain_to_s(val* self);
@@ -998,90 +1079,12 @@ val* VIRTUAL_core__ropes___core__ropes__RopeChars___core__abstract_collection__S
 val* core__ropes___core__ropes__RopeChars___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
 long core___core__SequenceRead___index_of(val* self, val* p0);
 long core___core__SequenceRead___last_index_of(val* self, val* p0);
-long core___core__SequenceRead___index_of_from(val* self, val* p0, long p1);
 val* core___core__SequenceRead___last(val* self);
+long core___core__SequenceRead___index_of_from(val* self, val* p0, long p1);
 long core___core__SequenceRead___last_index_of_from(val* self, val* p0, long p1);
 val* core__abstract_text___core__abstract_text__StringCharView___core__abstract_collection__SequenceRead__reverse_iterator(val* self);
 val* core__ropes___core__ropes__RopeChars___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
 extern const struct class class_core__ropes__RopeChars;
-void core__abstract_text___core__abstract_text__StringByteView___core__kernel__Object__init(val* self);
-void core__abstract_text___core__abstract_text__StringByteView___target_61d(val* self, val* p0);
-val* core__abstract_text___core__abstract_text__StringByteView___target(val* self);
-long core__abstract_text___core__abstract_text__StringByteView___core__abstract_collection__Collection__length(val* self);
-short int core__abstract_text___core__abstract_text__StringByteView___core__abstract_collection__Collection__is_empty(val* self);
-val* core__abstract_text___core__abstract_text__StringByteView___core__abstract_collection__Collection__iterator(val* self);
-val* VIRTUAL_core__ropes___core__ropes__RopeBytes___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
-val* core__ropes___core__ropes__RopeBytes___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
-val* core__abstract_text___core__abstract_text__StringByteView___core__abstract_collection__SequenceRead__reverse_iterator(val* self);
-val* core__ropes___core__ropes__RopeBytes___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
-extern const struct class class_core__ropes__RopeBytes;
-short int core___core__RopeBufferCharIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core___core__RopeBufferCharIterator___core__abstract_collection__Iterator__item(val* self);
-void core___core__RopeBufferCharIterator___core__abstract_collection__Iterator__next(val* self);
-long core___core__RopeBufferCharIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core___core__RopeBufferCharIterator___from(val* self, val* p0, long p1);
-val* core___core__RopeBufferCharIterator___sit(val* self);
-void core___core__RopeBufferCharIterator___sit_61d(val* self, val* p0);
-extern const struct class class_core__RopeBufferCharIterator;
-short int core___core__RopeBufferCharReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core___core__RopeBufferCharReverseIterator___core__abstract_collection__Iterator__item(val* self);
-void core___core__RopeBufferCharReverseIterator___core__abstract_collection__Iterator__next(val* self);
-long core___core__RopeBufferCharReverseIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core___core__RopeBufferCharReverseIterator___from(val* self, val* p0, long p1);
-val* core___core__RopeBufferCharReverseIterator___sit(val* self);
-void core___core__RopeBufferCharReverseIterator___sit_61d(val* self, val* p0);
-extern const struct class class_core__RopeBufferCharReverseIterator;
-val* VIRTUAL_core___core__RopeBufferChars___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
-val* core___core__RopeBufferChars___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
-val* core___core__RopeBufferChars___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
-void core___core__RemovableCollection___remove(val* self, val* p0);
-void core___core__RemovableCollection___clear(val* self);
-void core___core__SimpleCollection___add_all(val* self, val* p0);
-void VIRTUAL_core___core__RopeBufferChars___core__abstract_collection__SimpleCollection__add(val* self, val* p0);
-void VIRTUAL_core___core__RopeBufferChars___core__abstract_collection__Sequence__push(val* self, val* p0);
-void core___core__Sequence___append(val* self, val* p0);
-void VIRTUAL_core___core__RopeBufferChars___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
-void core___core__Sequence___remove_at(val* self, long p0);
-val* core___core__Sequence___pop(val* self);
-val* core___core__Sequence___shift(val* self);
-void core___core__Sequence___prepend(val* self, val* p0);
-void core___core__Sequence___insert_all(val* self, val* p0, long p1);
-void core___core__Sequence___unshift(val* self, val* p0);
-void core___core__Sequence___insert(val* self, val* p0, long p1);
-void core___core__Sequence___first_61d(val* self, val* p0);
-extern const struct class class_core__RopeBufferChars;
-short int core___core__RopeBufferByteIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core___core__RopeBufferByteIterator___core__abstract_collection__Iterator__item(val* self);
-void core___core__RopeBufferByteIterator___core__abstract_collection__Iterator__next(val* self);
-long core___core__RopeBufferByteIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core___core__RopeBufferByteIterator___from(val* self, val* p0, long p1);
-long core___core__RopeBufferByteIterator___maxpos(val* self);
-val* core___core__RopeBufferByteIterator___sit(val* self);
-char* core___core__RopeBufferByteIterator___ns(val* self);
-long core___core__RopeBufferByteIterator___pns(val* self);
-void core___core__RopeBufferByteIterator___index_61d(val* self, long p0);
-void core___core__RopeBufferByteIterator___pns_61d(val* self, long p0);
-void core___core__RopeBufferByteIterator___ns_61d(val* self, char* p0);
-void core___core__RopeBufferByteIterator___maxpos_61d(val* self, long p0);
-void core___core__RopeBufferByteIterator___sit_61d(val* self, val* p0);
-extern const struct class class_core__RopeBufferByteIterator;
-short int core___core__RopeBufferByteReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core___core__RopeBufferByteReverseIterator___core__abstract_collection__Iterator__item(val* self);
-void core___core__RopeBufferByteReverseIterator___core__abstract_collection__Iterator__next(val* self);
-long core___core__RopeBufferByteReverseIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core___core__RopeBufferByteReverseIterator___from(val* self, val* p0, long p1);
-long core___core__RopeBufferByteReverseIterator___pns(val* self);
-char* core___core__RopeBufferByteReverseIterator___ns(val* self);
-val* core___core__RopeBufferByteReverseIterator___sit(val* self);
-void core___core__RopeBufferByteReverseIterator___index_61d(val* self, long p0);
-void core___core__RopeBufferByteReverseIterator___pns_61d(val* self, long p0);
-void core___core__RopeBufferByteReverseIterator___sit_61d(val* self, val* p0);
-void core___core__RopeBufferByteReverseIterator___ns_61d(val* self, char* p0);
-extern const struct class class_core__RopeBufferByteReverseIterator;
-val* VIRTUAL_core___core__RopeBufferBytes___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
-val* core___core__RopeBufferBytes___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
-val* core___core__RopeBufferBytes___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
-extern const struct class class_core__RopeBufferBytes;
 void core__flat___core__flat__FlatSubstringsIter___core__kernel__Object__init(val* self);
 short int core__flat___core__flat__FlatSubstringsIter___core__abstract_collection__Iterator__is_ok(val* self);
 val* core__flat___core__flat__FlatSubstringsIter___core__abstract_collection__Iterator__item(val* self);
@@ -1097,35 +1100,46 @@ long core___core__FlatText___Text__length(val* self);
 val* core___core__FlatString___core__abstract_text__Text__chars(val* self);
 val* core___core__FlatString___core__abstract_text__Text__substring(val* self, long p0, long p1);
 uint32_t core__flat___FlatText___core__abstract_text__Text___91d_93d(val* self, long p0);
-val* core___core__FlatString___core__abstract_text__Text__substring_from(val* self, long p0);
 long core__flat___FlatText___core__abstract_text__Text__to_hex(val* self, val* p0, val* p1);
-long core___core__FlatText___Text__bytelen(val* self);
+val* core__ropes___FlatString___core__abstract_text__Text___43d(val* self, val* p0);
+long core___core__FlatText___Text__byte_length(val* self);
 val* core___core__FlatString___core__abstract_text__Text__substrings(val* self);
+short int core___core__Text___is_empty(val* self);
+val* core___core__FlatString___core__abstract_text__Text___42d(val* self, long p0);
 val* core___core__FlatString___core__abstract_text__Text__empty(val* self);
 void core__file___FlatString___Text__write_native_to(val* self, val* p0);
 val* core__flat___FlatText___core__abstract_text__Text__escape_to_c(val* self);
-val* core___core__FlatString___core__abstract_text__Text__bytes(val* self);
-val* core__ropes___FlatString___core__abstract_text__String___43d(val* self, val* p0);
-val* core___core__FlatString___core__abstract_text__String___42d(val* self, long p0);
+val* core___core__FlatString___core__abstract_text__Text__to_lower(val* self);
+void core__bytes___FlatText___Text__append_to_bytes(val* self, val* p0);
+val* core___core__FlatString___core__abstract_text__Text__to_upper(val* self);
 val* core__file___FlatString___String__file_extension(val* self);
 val* core__file___FlatString___String__basename(val* self, val* p0);
+char* core___core__FlatText___items(val* self);
 long core___core__FlatString___FlatText__first_byte(val* self);
 uint32_t core__flat___FlatText___fetch_char_at(val* self, long p0);
 long core__flat___FlatText___char_to_byte_index(val* self, long p0);
-char* core___core__FlatText___items(val* self);
 long core__flat___FlatText___last_byte(val* self);
+void core___core__FlatText___length_61d(val* self, long p0);
+void core___core__FlatText___byte_length_61d(val* self, long p0);
 long core__flat___FlatText___chars_to_escape_to_c(val* self);
-val* core___core__FlatString___core__abstract_text__String__to_lower(val* self);
-val* core___core__FlatString___core__abstract_text__String__to_upper(val* self);
-void core___core__FlatString___full(val* self, char* p0, long p1, long p2, long p3);
-void core___core__FlatString___with_infos(val* self, char* p0, long p1, long p2);
+val* core___core__FlatString___full(val* self, char* p0, long p1, long p2, long p3);
+val* core___core__FlatString___with_infos(val* self, char* p0, long p1, long p2);
 val* core___core__FlatString___substring_impl(val* self, long p0, long p1, long p2);
-void core___core__FlatString___to_cstring_61d(val* self, char* p0);
 extern const struct class class_core__FlatString;
-#define COLOR_core__abstract_text__FlatText___length 6
-#define COLOR_core__abstract_text__FlatText___bytelen 7
-#define COLOR_core__flat__FlatText___position 3
-#define COLOR_core__flat__FlatText___bytepos 4
+#define COLOR_core__abstract_text__FlatText___length 4
+#define COLOR_core__abstract_text__FlatText___byte_length 5
+#define COLOR_core__flat__FlatText___position 1
+#define COLOR_core__flat__FlatText___bytepos 2
+val* core__flat___core__flat__UnicodeFlatString___core__abstract_text__Text__substring_from(val* self, long p0);
+void core__flat___core__flat__UnicodeFlatString___full_data(val* self, char* p0, long p1, long p2, long p3);
+extern const struct class class_core__flat__UnicodeFlatString;
+val* core__flat___core__flat__ASCIIFlatString___core__abstract_text__Text__substring(val* self, long p0, long p1);
+uint32_t core__flat___core__flat__ASCIIFlatString___core__abstract_text__Text___91d_93d(val* self, long p0);
+uint32_t core__flat___core__flat__ASCIIFlatString___FlatText__fetch_char_at(val* self, long p0);
+long core__flat___core__flat__ASCIIFlatString___FlatText__char_to_byte_index(val* self, long p0);
+val* core__flat___core__flat__ASCIIFlatString___FlatString__substring_impl(val* self, long p0, long p1, long p2);
+void core__flat___core__flat__ASCIIFlatString___full_data(val* self, char* p0, long p1, long p2, long p3);
+extern const struct class class_core__flat__ASCIIFlatString;
 void core__flat___core__flat__FlatStringCharReverseIterator___core__kernel__Object__init(val* self);
 short int core__flat___core__flat__FlatStringCharReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
 val* VIRTUAL_core__flat___core__flat__FlatStringCharReverseIterator___core__abstract_collection__Iterator__item(val* self);
@@ -1152,89 +1166,43 @@ val* VIRTUAL_core__flat___core__flat__FlatStringCharView___core__abstract_collec
 val* core__flat___core__flat__FlatStringCharView___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
 val* core__flat___core__flat__FlatStringCharView___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
 extern const struct class class_core__flat__FlatStringCharView;
-void core__flat___core__flat__FlatStringByteReverseIterator___core__kernel__Object__init(val* self);
-short int core__flat___core__flat__FlatStringByteReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core__flat___core__flat__FlatStringByteReverseIterator___core__abstract_collection__Iterator__item(val* self);
-void core__flat___core__flat__FlatStringByteReverseIterator___core__abstract_collection__Iterator__next(val* self);
-long core__flat___core__flat__FlatStringByteReverseIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core__flat___core__flat__FlatStringByteReverseIterator___target_61d(val* self, val* p0);
-void core__flat___core__flat__FlatStringByteReverseIterator___curr_pos_61d(val* self, long p0);
-val* core__flat___core__flat__FlatStringByteReverseIterator___target(val* self);
-void core__flat___core__flat__FlatStringByteReverseIterator___target_items_61d(val* self, char* p0);
-long core__flat___core__flat__FlatStringByteReverseIterator___curr_pos(val* self);
-char* core__flat___core__flat__FlatStringByteReverseIterator___target_items(val* self);
-extern const struct class class_core__flat__FlatStringByteReverseIterator;
-void core__flat___core__flat__FlatStringByteIterator___core__kernel__Object__init(val* self);
-short int core__flat___core__flat__FlatStringByteIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core__flat___core__flat__FlatStringByteIterator___core__abstract_collection__Iterator__item(val* self);
-void core__flat___core__flat__FlatStringByteIterator___core__abstract_collection__Iterator__next(val* self);
-long core__flat___core__flat__FlatStringByteIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core__flat___core__flat__FlatStringByteIterator___target_61d(val* self, val* p0);
-void core__flat___core__flat__FlatStringByteIterator___curr_pos_61d(val* self, long p0);
-val* core__flat___core__flat__FlatStringByteIterator___target(val* self);
-void core__flat___core__flat__FlatStringByteIterator___target_items_61d(val* self, char* p0);
-long core__flat___core__flat__FlatStringByteIterator___curr_pos(val* self);
-char* core__flat___core__flat__FlatStringByteIterator___target_items(val* self);
-extern const struct class class_core__flat__FlatStringByteIterator;
-val* VIRTUAL_core__flat___core__flat__FlatStringByteView___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
-val* core__flat___core__flat__FlatStringByteView___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
-val* core__flat___core__flat__FlatStringByteView___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
-extern const struct class class_core__flat__FlatStringByteView;
 void core___core__FlatBuffer___core__kernel__Object__init(val* self);
 val* core___core__FlatBuffer___core__abstract_text__Object__to_s(val* self);
+val* core___core__Buffer___core__kernel__Cloneable__clone(val* self);
 char* core___core__FlatBuffer___core__abstract_text__Text__to_cstring(val* self);
 val* core___core__FlatBuffer___core__abstract_text__Text__chars(val* self);
 val* core___core__FlatBuffer___core__abstract_text__Text__substring(val* self, long p0, long p1);
+val* core___core__Text____43d(val* self, val* p0);
 val* core___core__FlatBuffer___core__abstract_text__Text__substrings(val* self);
+val* core___core__Buffer___Text__to_snake_case(val* self);
+val* core___core__Buffer___Text___42d(val* self, long p0);
 val* core___core__FlatBuffer___core__abstract_text__Text__empty(val* self);
-val* core___core__FlatBuffer___core__abstract_text__Text__bytes(val* self);
+val* core___core__Buffer___Text__to_lower(val* self);
+val* core___core__Buffer___Text__to_upper(val* self);
+val* core__flat___Buffer___new(val* self);
 void core___core__FlatBuffer___core__abstract_text__Buffer__append(val* self, val* p0);
-void core___core__FlatBuffer___core__abstract_text__Buffer__add(val* self, uint32_t p0);
+val* core__flat___Buffer___with_cap(val* self, long p0);
+void core___core__Buffer___snake_case(val* self);
+void core___core__Buffer___written_61d(val* self, short int p0);
 void core___core__FlatBuffer___core__abstract_text__Buffer__enlarge(val* self, long p0);
+void core___core__FlatBuffer___core__abstract_text__Buffer__insert_char(val* self, uint32_t p0, long p1);
 void core___core__FlatBuffer___core__abstract_text__Buffer___91d_93d_61d(val* self, long p0, uint32_t p1);
-long core__flat___FlatText___first_byte(val* self);
+void core___core__FlatBuffer___core__abstract_text__Buffer__add(val* self, uint32_t p0);
+short int core___core__Buffer___written(val* self);
+void core___core__FlatBuffer___core__abstract_text__Buffer__lower(val* self);
+void core___core__FlatBuffer___core__abstract_text__Buffer__upper(val* self);
 void core___core__FlatBuffer___from(val* self, val* p0);
-void core___core__FlatBuffer___real_items_61d(val* self, char* p0);
-char* core___core__FlatBuffer___real_items(val* self);
 void core___core__FlatBuffer___with_infos(val* self, char* p0, long p1, long p2, long p3);
-long core___core__FlatBuffer___capacity(val* self);
+long core__flat___FlatText___first_byte(val* self);
 void core___core__FlatBuffer___with_capacity(val* self, long p0);
-void core___core__FlatBuffer___reset(val* self);
+long core___core__FlatBuffer___capacity(val* self);
 void core___core__FlatBuffer___capacity_61d(val* self, long p0);
 void core___core__FlatBuffer___rshift_bytes(val* self, long p0, long p1);
+void core___core__FlatBuffer___reset(val* self);
 void core___core__FlatBuffer___lshift_bytes(val* self, long p0, long p1);
 extern const struct class class_core__FlatBuffer;
-#define COLOR_core__flat__FlatBuffer___char_cache 12
-#define COLOR_core__flat__FlatBuffer___byte_cache 13
-#define COLOR_core__flat__FlatBuffer___capacity 14
-void core__flat___core__flat__FlatBufferByteReverseIterator___core__kernel__Object__init(val* self);
-short int core__flat___core__flat__FlatBufferByteReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core__flat___core__flat__FlatBufferByteReverseIterator___core__abstract_collection__Iterator__item(val* self);
-void core__flat___core__flat__FlatBufferByteReverseIterator___core__abstract_collection__Iterator__next(val* self);
-long core__flat___core__flat__FlatBufferByteReverseIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core__flat___core__flat__FlatBufferByteReverseIterator___target_61d(val* self, val* p0);
-void core__flat___core__flat__FlatBufferByteReverseIterator___curr_pos_61d(val* self, long p0);
-void core__flat___core__flat__FlatBufferByteReverseIterator___target_items_61d(val* self, char* p0);
-val* core__flat___core__flat__FlatBufferByteReverseIterator___target(val* self);
-long core__flat___core__flat__FlatBufferByteReverseIterator___curr_pos(val* self);
-char* core__flat___core__flat__FlatBufferByteReverseIterator___target_items(val* self);
-extern const struct class class_core__flat__FlatBufferByteReverseIterator;
-val* VIRTUAL_core__flat___core__flat__FlatBufferByteView___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
-val* core__flat___core__flat__FlatBufferByteView___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
-val* core__flat___core__flat__FlatBufferByteView___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
-extern const struct class class_core__flat__FlatBufferByteView;
-void core__flat___core__flat__FlatBufferByteIterator___core__kernel__Object__init(val* self);
-short int core__flat___core__flat__FlatBufferByteIterator___core__abstract_collection__Iterator__is_ok(val* self);
-val* VIRTUAL_core__flat___core__flat__FlatBufferByteIterator___core__abstract_collection__Iterator__item(val* self);
-void core__flat___core__flat__FlatBufferByteIterator___core__abstract_collection__Iterator__next(val* self);
-long core__flat___core__flat__FlatBufferByteIterator___core__abstract_collection__IndexedIterator__index(val* self);
-void core__flat___core__flat__FlatBufferByteIterator___target_61d(val* self, val* p0);
-void core__flat___core__flat__FlatBufferByteIterator___curr_pos_61d(val* self, long p0);
-void core__flat___core__flat__FlatBufferByteIterator___target_items_61d(val* self, char* p0);
-val* core__flat___core__flat__FlatBufferByteIterator___target(val* self);
-long core__flat___core__flat__FlatBufferByteIterator___curr_pos(val* self);
-char* core__flat___core__flat__FlatBufferByteIterator___target_items(val* self);
-extern const struct class class_core__flat__FlatBufferByteIterator;
+#define COLOR_core__abstract_text__Buffer___written 6
+#define COLOR_core__flat__FlatBuffer___capacity 7
 void core__flat___core__flat__FlatBufferCharReverseIterator___core__kernel__Object__init(val* self);
 short int core__flat___core__flat__FlatBufferCharReverseIterator___core__abstract_collection__Iterator__is_ok(val* self);
 val* VIRTUAL_core__flat___core__flat__FlatBufferCharReverseIterator___core__abstract_collection__Iterator__item(val* self);
@@ -1249,10 +1217,21 @@ void core__flat___core__flat__FlatBufferCharView___enlarge(val* self, long p0);
 val* VIRTUAL_core__flat___core__flat__FlatBufferCharView___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
 val* core__flat___core__flat__FlatBufferCharView___core__abstract_collection__SequenceRead__iterator_from(val* self, long p0);
 val* core__flat___core__flat__FlatBufferCharView___core__abstract_collection__SequenceRead__reverse_iterator_from(val* self, long p0);
+void core___core__RemovableCollection___clear(val* self);
+void core___core__RemovableCollection___remove(val* self, val* p0);
 void VIRTUAL_core__flat___core__flat__FlatBufferCharView___core__abstract_collection__SimpleCollection__add(val* self, val* p0);
+void core___core__SimpleCollection___add_all(val* self, val* p0);
 void VIRTUAL_core__flat___core__flat__FlatBufferCharView___core__abstract_collection__Sequence__push(val* self, val* p0);
 void core__flat___core__flat__FlatBufferCharView___core__abstract_collection__Sequence__append(val* self, val* p0);
+val* core___core__Sequence___shift(val* self);
 void VIRTUAL_core__flat___core__flat__FlatBufferCharView___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
+void core___core__Sequence___remove_at(val* self, long p0);
+val* core___core__Sequence___pop(val* self);
+void core___core__Sequence___unshift(val* self, val* p0);
+void core___core__Sequence___prepend(val* self, val* p0);
+void core___core__Sequence___insert_all(val* self, val* p0, long p1);
+void core___core__Sequence___insert(val* self, val* p0, long p1);
+void core___core__Sequence___first_61d(val* self, val* p0);
 extern const struct class class_core__flat__FlatBufferCharView;
 void core__flat___core__flat__FlatBufferCharIterator___core__kernel__Object__init(val* self);
 short int core__flat___core__flat__FlatBufferCharIterator___core__abstract_collection__Iterator__is_ok(val* self);
@@ -1266,18 +1245,21 @@ val* core__flat___core__flat__FlatBufferCharIterator___target(val* self);
 long core__flat___core__flat__FlatBufferCharIterator___curr_pos(val* self);
 long core__flat___core__flat__FlatBufferCharIterator___max(val* self);
 extern const struct class class_core__flat__FlatBufferCharIterator;
+char* core___core__Text___to_cstring(val* self);
 long core___core__Text___length(val* self);
 val* core___core__Buffer___Text__chars(val* self);
 val* core___core__Text___substring(val* self, long p0, long p1);
 uint32_t core___core__Text____91d_93d(val* self, long p0);
-long core___core__Text___bytelen(val* self);
+long core___core__Text___byte_length(val* self);
 val* core___core__Text___substrings(val* self);
 val* core___core__Text___empty(val* self);
-val* core___core__Text___bytes(val* self);
 void core___core__Buffer___append(val* self, val* p0);
-void core___core__Buffer___add(val* self, uint32_t p0);
 void core___core__Buffer___enlarge(val* self, long p0);
+void core___core__Buffer___insert_char(val* self, uint32_t p0, long p1);
 void core___core__Buffer____91d_93d_61d(val* self, long p0, uint32_t p1);
+void core___core__Buffer___add(val* self, uint32_t p0);
+void core___core__Buffer___lower(val* self);
+void core___core__Buffer___upper(val* self);
 extern const struct class class_core__Buffer;
 long core___core__CachedAlphaComparator___core__sorter__Comparator__compare(val* self, val* p0, val* p1);
 val* core___core__CachedAlphaComparator___do_to_s(val* self, val* p0);
@@ -1287,44 +1269,40 @@ extern const struct type type_core__HashMap__core__Object__core__String;
 #define COLOR_core__abstract_text__CachedAlphaComparator___cache 0
 long core__abstract_text___core__abstract_text__AlphaComparator___core__sorter__Comparator__compare(val* self, val* p0, val* p1);
 extern const struct class class_core__abstract_text__AlphaComparator;
-short int VIRTUAL_core___core__NativeString___core__kernel__Object___33d_61d(val* self, val* p0);
-val* VIRTUAL_core__flat___NativeString___core__abstract_text__Object__to_s(val* self);
-short int VIRTUAL_core___core__NativeString___core__kernel__Object___61d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__CString___core__kernel__Object___33d_61d(val* self, val* p0);
+val* VIRTUAL_core__flat___CString___core__abstract_text__Object__to_s(val* self);
+short int VIRTUAL_core___core__CString___core__kernel__Object___61d_61d(val* self, val* p0);
+long core___core__Pointer___Object__hash(val* self);
+short int core___core__Pointer___native_equals(val* self, val* p0);
 short int core___core__Pointer___address_is_null(val* self);
 void core___core__Pointer___free(val* self);
-char* core___core__NativeString___new(char* self, long p0);
-char* core__environ___NativeString___get_environ(char* self);
-void core___core__NativeString___copy_to(char* self, char* p0, long p1, long p2, long p3);
-void core___core__NativeString____91d_93d_61d(char* self, long p0, unsigned char p1);
-val* core__flat___NativeString___to_s_with_length(char* self, long p0);
-long core___core__NativeString___cstring_length(char* self);
-val* core__flat___NativeString___to_s_unsafe(char* self, val* p0);
-unsigned char core___core__NativeString____91d_93d(char* self, long p0);
-val* core__flat___NativeString___clean_utf8(char* self, long p0);
-long core___core__NativeString___utf8_length(char* self, long p0, long p1);
-short int core__file___NativeString___file_exists(char* self);
-long core___core__NativeString___fetch_95d4_chars(char* self, long p0);
-long core___core__NativeString___length_of_char_at(char* self, long p0);
-uint32_t core___core__NativeString___char_at(char* self, long p0);
-long core___core__NativeString___find_beginning_of_char_at(char* self, long p0);
-long core___core__NativeString___char_to_byte_index_cached(char* self, long p0, long p1, long p2);
-long core___core__NativeString___char_to_byte_index(char* self, long p0);
-void core__flat___NativeString___set_char_at(char* self, long p0, uint32_t p1);
-long core___core__NativeString___fetch_95d4_ffi(char* self, long p0);
-long core___core__NativeString___fetch_95d4_hchars(char* self, long p0);
-void core__flat___NativeString___native_set_char(char* self, long p0, uint32_t p1, long p2);
-long core___core__NativeString___fetch_95d4h_ffi(char* self, long p0);
-val* core__file___NativeString___file_stat(char* self);
-char* core__file___NativeString___file_realpath(char* self);
-val* core__flat___NativeString___to_s_with_copy(char* self);
-short int core__file___NativeString___file_mkdir(char* self);
-long core__exec___NativeString___system(char* self);
-double core___core__NativeString___atof(char* self);
-extern const struct type type_core__NativeString;
-extern const struct class class_core__NativeString;
+char* core___core__CString___new(char* self, long p0);
+val* core__flat___CString___to_s_unsafe(char* self, val* p0, val* p1, val* p2, val* p3);
+char* core__environ___CString___get_environ(char* self);
+long core___core__CString___cstring_length(char* self);
+val* core__flat___CString___clean_utf8(char* self, long p0);
+long core___core__CString___utf8_length(char* self, long p0, long p1);
+void core___core__CString___copy_to(char* self, char* p0, long p1, long p2, long p3);
+void core___core__CString____91d_93d_61d(char* self, long p0, unsigned char p1);
+unsigned char core___core__CString____91d_93d(char* self, long p0);
+uint32_t core___core__CString___fetch_95d4_chars(char* self, long p0);
+long core___core__CString___length_of_char_at(char* self, long p0);
+uint32_t core___core__CString___char_at(char* self, long p0);
+short int core__file___CString___file_exists(char* self);
+uint32_t core___core__CString___fetch_95d4_hchars(char* self, long p0);
+long core___core__CString___find_beginning_of_char_at(char* self, long p0);
+long core___core__CString___char_to_byte_index_cached(char* self, long p0, long p1, long p2);
+long core___core__CString___char_to_byte_index(char* self, long p0);
+void core__flat___CString___set_char_at(char* self, long p0, uint32_t p1);
+val* core__file___CString___file_stat(char* self);
+char* core__file___CString___file_realpath(char* self);
+short int core__file___CString___file_mkdir(char* self, long p0);
+long core__exec___CString___system(char* self);
+double core___core__CString___atof(char* self);
+extern const struct type type_core__CString;
+extern const struct class class_core__CString;
 void core__environ___Sys___core__kernel__Object__init(val* self);
-val* core__utf8___Sys___utf8_decoder(val* self);
-val* core__utf8___Sys___utf8_coder(val* self);
+val* core__utf8___Sys___utf8_codec(val* self);
 void core___core__Sys___run(val* self);
 void core__math___Sys___srand_from(val* self, long p0);
 long core__file___Sys___buffer_mode_line(val* self);
@@ -1339,8 +1317,8 @@ val* core__abstract_text___Sys___program_args(val* self);
 val* core__file___Sys___stdout(val* self);
 long core__time___Sys___get_time(val* self);
 long core__ropes___Sys___maxlen(val* self);
-void core__abstract_text___Sys___init_args(val* self);
 val* core__file___Sys___stderr(val* self);
+void core__abstract_text___Sys___init_args(val* self);
 val* nitc__model_base___core__Sys___private_visibility(val* self);
 long core__abstract_text___Sys___native_argc(val* self);
 char* core__abstract_text___Sys___native_argv(val* self, long p0);
@@ -1350,18 +1328,19 @@ val* nitc__model___core__Sys___abstract_kind(val* self);
 val* nitc__model___core__Sys___interface_kind(val* self);
 val* nitc__model___core__Sys___enum_kind(val* self);
 val* nitc__model_base___core__Sys___public_visibility(val* self);
-val* nitc__model_base___core__Sys___protected_visibility(val* self);
+void core__file___Sys___print_error(val* self, val* p0);
 val* core__abstract_text___Sys___alpha_comparator(val* self);
-val* csv___core__Sys___rfc4180(val* self);
+short int core___core__Sys___is_windows(val* self);
+val* nitc__model_base___core__Sys___protected_visibility(val* self);
 val* counter___core__Sys___div(val* self, long p0, long p1);
+val* core__file___Sys___getcwd(val* self);
 val* nitc__model_base___core__Sys___intrude_visibility(val* self);
 void core__file___Sys___printn(val* self, val* p0);
+char* core__file___Sys___native_getcwd(val* self);
 val* nitc__model_base___core__Sys___none_visibility(val* self);
 long core__exec___Sys___system(val* self, val* p0);
 val* nitc__version___core__Sys___nit_version(val* self);
 val* core__abstract_text___Sys___program_name(val* self);
-val* core__file___Sys___getcwd(val* self);
-char* core__file___Sys___native_getcwd(val* self);
 val* nitc__nitni_utilities___core__Sys___long_signature(val* self);
 val* nitc__nitni_utilities___core__Sys___internal_call_context(val* self);
 val* nitc__light_c___core__Sys___from_c_call_context(val* self);
@@ -1382,10 +1361,12 @@ short int VIRTUAL_core___core__Float___Comparable___62d(val* self, val* p0);
 short int VIRTUAL_core___core__Float___Comparable___62d_61d(val* self, val* p0);
 short int VIRTUAL_core___core__Float___Comparable___60d(val* self, val* p0);
 long VIRTUAL_core___core__Float___Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__Float___Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__Float___Comparable__max(val* self, val* p0);
+val* core__abstract_text___Float___to_precision(double self, long p0);
 val* VIRTUAL_core___core__Float___Numeric___43d(val* self, val* p0);
 val* VIRTUAL_core___core__Float___Numeric___45d(val* self, val* p0);
 val* VIRTUAL_core___core__Float___Numeric__unary_32d_45d(val* self);
-val* core__abstract_text___Float___to_precision(double self, long p0);
 long core__math___Float___is_inf(double self);
 long VIRTUAL_core___core__Float___Numeric__to_i(val* self);
 val* VIRTUAL_core___core__Float___Numeric___42d(val* self, val* p0);
@@ -1411,10 +1392,12 @@ short int VIRTUAL_core___core__Byte___Comparable___62d(val* self, val* p0);
 short int VIRTUAL_core___core__Byte___Comparable___62d_61d(val* self, val* p0);
 short int VIRTUAL_core___core__Byte___Comparable___60d(val* self, val* p0);
 long VIRTUAL_core___core__Byte___Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__Byte___Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__Byte___Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__Byte___Discrete__successor(val* self, long p0);
 val* VIRTUAL_core___core__Byte___Numeric___43d(val* self, val* p0);
 val* VIRTUAL_core___core__Byte___Numeric___45d(val* self, val* p0);
 val* VIRTUAL_core___core__Byte___Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__Byte___Discrete__successor(val* self, long p0);
 long VIRTUAL_core___core__Byte___Discrete__distance(val* self, val* p0);
 long VIRTUAL_core___core__Byte___Numeric__to_i(val* self);
 val* VIRTUAL_core___core__Byte___Numeric___42d(val* self, val* p0);
@@ -1428,13 +1411,9 @@ val* VIRTUAL_core___core__Byte___Numeric___47d(val* self, val* p0);
 double VIRTUAL_core___core__Byte___Numeric__to_f(val* self);
 long core__abstract_text___Byte___byte_to_s_len(unsigned char self);
 void core__abstract_text___Byte___native_byte_to_s(unsigned char self, char* p0, long p1);
-uint32_t core___core__Byte___ascii(unsigned char self);
 unsigned char core__math___Byte____38d(unsigned char self, unsigned char p0);
-uint32_t core___core__Byte___ffi_ascii(unsigned char self);
-unsigned char core__math___Byte___band(unsigned char self, unsigned char p0);
+uint32_t core___core__Byte___ascii(unsigned char self);
 unsigned char core___core__Byte____62d_62d(unsigned char self, long p0);
-unsigned char core___core__Byte___rsh(unsigned char self, long p0);
-long core__native___Byte___u8len(unsigned char self);
 extern const struct type type_core__Byte;
 extern const struct class class_core__Byte;
 short int VIRTUAL_core___core__Int___Object___33d_61d(val* self, val* p0);
@@ -1447,10 +1426,12 @@ short int VIRTUAL_core___core__Int___Comparable___62d(val* self, val* p0);
 short int VIRTUAL_core___core__Int___Comparable___62d_61d(val* self, val* p0);
 short int VIRTUAL_core___core__Int___Comparable___60d(val* self, val* p0);
 long VIRTUAL_core___core__Int___Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__Int___Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__Int___Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__Int___Discrete__successor(val* self, long p0);
 val* VIRTUAL_core___core__Int___Numeric___43d(val* self, val* p0);
 val* VIRTUAL_core___core__Int___Numeric___45d(val* self, val* p0);
 val* VIRTUAL_core___core__Int___Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__Int___Discrete__successor(val* self, long p0);
 long VIRTUAL_core___core__Int___Discrete__distance(val* self, val* p0);
 long VIRTUAL_core___core__Int___Numeric__to_i(val* self);
 val* VIRTUAL_core___core__Int___Numeric___42d(val* self, val* p0);
@@ -1467,21 +1448,16 @@ long core__abstract_text___Int___int_to_s_len(long self);
 void core__abstract_text___Int___native_int_to_s(long self, char* p0, long p1);
 char* core__abstract_text___Int___strerror_ext(long self);
 long core___core__Int___abs(long self);
+uint32_t core___core__Int___code_point(long self);
 long core___core__Int____60d_60d(long self, long p0);
 val* core__abstract_text___Int___to_hex(long self);
-long core__math___Int____38d(long self, long p0);
-long core___core__Int___lsh(long self, long p0);
-uint32_t core___core__Int___code_point(long self);
 long core___core__Int____37d(long self, long p0);
-val* core__flat___Int___to_base(long self, long p0, short int p1);
-long core__math___Int___band(long self, long p0);
+val* core__abstract_text___Int___to_base(long self, long p0);
+long core___core__Int___digit_count(long self, long p0);
+void core__abstract_text___Int___fill_buffer(long self, val* p0, long p1);
 long core__math___Int____124d(long self, long p0);
 long core___core__Int____62d_62d(long self, long p0);
-uint32_t core___core__Int___cp(long self);
-long core___core__Int___digit_count(long self, long p0);
-void core__abstract_text___Int___fill_buffer(long self, val* p0, long p1, short int p2);
-long core__math___Int___bor(long self, long p0);
-long core___core__Int___rsh(long self, long p0);
+long core__math___Int____38d(long self, long p0);
 long core___core__Int___digit_count_base_95d10(long self);
 uint32_t core___core__Int___to_c(long self);
 short int VIRTUAL_core___core__Char___Object___33d_61d(val* self, val* p0);
@@ -1493,25 +1469,25 @@ short int VIRTUAL_core___core__Char___Comparable___60d_61d(val* self, val* p0);
 short int VIRTUAL_core___core__Char___Comparable___62d(val* self, val* p0);
 short int VIRTUAL_core___core__Char___Comparable___62d_61d(val* self, val* p0);
 short int VIRTUAL_core___core__Char___Comparable___60d(val* self, val* p0);
+val* VIRTUAL_core___core__Char___Discrete__successor(val* self, long p0);
 val* VIRTUAL_core__string_search___Char___Pattern__search_in(val* self, val* p0, long p1);
 long VIRTUAL_core__string_search___Char___Pattern__search_index_in(val* self, val* p0, long p1);
-val* VIRTUAL_core___core__Char___Discrete__successor(val* self, long p0);
 long VIRTUAL_core___core__Char___Discrete__distance(val* self, val* p0);
 long core__abstract_text___Char___u8char_len(uint32_t self);
 void core__abstract_text___Char___u8char_tos(uint32_t self, char* p0, long p1);
-short int core__abstract_text___Char___is_numeric(uint32_t self);
 long core___core__Char___code_point(uint32_t self);
+short int core__abstract_text___Char___is_numeric(uint32_t self);
 long core__abstract_text___Char___from_hex(uint32_t self);
-short int core___core__Char___is_lower(uint32_t self);
-short int core___core__Char___is_upper(uint32_t self);
-uint32_t core___core__Char___to_lower(uint32_t self);
-long core___core__Char___cp(uint32_t self);
 short int core__abstract_text___Char___is_hexdigit(uint32_t self);
 long core___core__Char___to_i(uint32_t self);
+short int core___core__Char___is_upper(uint32_t self);
+short int core___core__Char___is_lower(uint32_t self);
+uint32_t core___core__Char___to_lower(uint32_t self);
 unsigned char core___core__Char___ascii(uint32_t self);
 short int core___core__Char___is_digit(uint32_t self);
 short int core___core__Char___is_whitespace(uint32_t self);
 uint32_t core___core__Char___to_upper(uint32_t self);
+short int core___core__Pointer___Object___61d_61d(val* self, val* p0);
 extern const struct type type_core__Pointer;
 extern const struct class class_core__Pointer;
 void core__abstract_collection___core__abstract_collection__RefIterator___core__kernel__Object__init(val* self);
@@ -1522,6 +1498,19 @@ void core__abstract_collection___core__abstract_collection__RefIterator___contai
 void core__abstract_collection___core__abstract_collection__RefIterator___is_ok_61d(val* self, short int p0);
 extern const struct class class_core__abstract_collection__RefIterator;
 #define COLOR_core__abstract_collection__RefIterator___is_ok 0
+short int core___core__Set___core__kernel__Object___61d_61d(val* self, val* p0);
+long core___core__Set___core__kernel__Object__hash(val* self);
+val* core___core__Set___union(val* self, val* p0);
+val* core__hash_collection___Set___new(val* self);
+val* core___core__Set___new_set(val* self);
+val* core___core__Set___core__kernel__Cloneable__clone(val* self);
+long core___core__Collection___length(val* self);
+short int core___core__Collection___is_empty(val* self);
+val* core___core__Collection___iterator(val* self);
+long core___core__Set___Collection__count(val* self, val* p0);
+val* core___core__Collection___first(val* self);
+void core___core__SimpleCollection___add(val* self, val* p0);
+extern const struct class class_core__Set;
 void core___core__MapKeysIterator___core__kernel__Object__init(val* self);
 short int core___core__MapKeysIterator___Iterator__is_ok(val* self);
 val* core___core__MapKeysIterator___Iterator__item(val* self);
@@ -1560,20 +1549,22 @@ long core___core__List___core__abstract_collection__Collection__length(val* self
 short int core___core__List___core__abstract_collection__Collection__is_empty(val* self);
 val* core___core__List___core__abstract_collection__Collection__iterator(val* self);
 short int core___core__List___core__abstract_collection__Collection__has(val* self, val* p0);
+long core___core__List___core__abstract_collection__Collection__count(val* self, val* p0);
 val* core___core__List___core__abstract_collection__Collection__first(val* self);
 val* core___core__List___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
 val* core___core__SequenceRead___iterator_from(val* self, long p0);
 val* core___core__List___core__abstract_collection__SequenceRead__last(val* self);
 val* core___core__List___core__abstract_collection__SequenceRead__reverse_iterator(val* self);
 val* core___core__SequenceRead___reverse_iterator_from(val* self, long p0);
-void core___core__List___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__List___core__abstract_collection__RemovableCollection__clear(val* self);
+void core___core__List___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__Sequence___SimpleCollection__add(val* self, val* p0);
 void core___core__List___core__abstract_collection__Sequence__push(val* self, val* p0);
+void core___core__Sequence___append(val* self, val* p0);
+val* core___core__List___core__abstract_collection__Sequence__shift(val* self);
 void core___core__List___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
 void core___core__List___core__abstract_collection__Sequence__remove_at(val* self, long p0);
 val* core___core__List___core__abstract_collection__Sequence__pop(val* self);
-val* core___core__List___core__abstract_collection__Sequence__shift(val* self);
 void core___core__List___core__abstract_collection__Sequence__unshift(val* self, val* p0);
 void core___core__List___core__abstract_collection__Sequence__insert(val* self, val* p0, long p1);
 void core___core__List___core__abstract_collection__Sequence__first_61d(val* self, val* p0);
@@ -1595,19 +1586,22 @@ void core___core__Ref___item_61d(val* self, val* p0);
 val* core___core__Ref___item(val* self);
 void core__list___core__list__ListNode___next_61d(val* self, val* p0);
 void core__list___core__list__ListNode___prev_61d(val* self, val* p0);
+val* core__list___core__list__ListNode___next(val* self);
+val* core__list___core__list__ListNode___prev(val* self);
 long core___core__Ref___Collection__length(val* self);
 short int core___core__Ref___Collection__is_empty(val* self);
 val* core___core__Ref___Collection__iterator(val* self);
 short int core___core__Ref___Collection__has(val* self, val* p0);
+long core___core__Ref___Collection__count(val* self, val* p0);
 val* core___core__Ref___Collection__first(val* self);
-val* core__list___core__list__ListNode___prev(val* self);
-val* core__list___core__list__ListNode___next(val* self);
 extern const struct class class_core__list__ListNode;
 short int core___core__Array___core__kernel__Object___61d_61d(val* self, val* p0);
+val* core___core__Array___core__kernel__Cloneable__clone(val* self);
 long core___core__AbstractArrayRead___core__abstract_collection__Collection__length(val* self);
 short int core___core__AbstractArrayRead___core__abstract_collection__Collection__is_empty(val* self);
 val* core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(val* self);
 short int core___core__AbstractArrayRead___core__abstract_collection__Collection__has(val* self, val* p0);
+long core___core__AbstractArrayRead___core__abstract_collection__Collection__count(val* self, val* p0);
 val* core__flat___Array___core__abstract_text__Collection__plain_to_s(val* self);
 void core___core__Array___with_native(val* self, val* p0, long p1);
 void core___core__Array___with_capacity(val* self, long p0);
@@ -1617,21 +1611,21 @@ long core___core__AbstractArrayRead___core__abstract_collection__SequenceRead__l
 long core___core__AbstractArrayRead___core__abstract_collection__SequenceRead__index_of_from(val* self, val* p0, long p1);
 long core___core__AbstractArrayRead___core__abstract_collection__SequenceRead__last_index_of_from(val* self, val* p0, long p1);
 val* core___core__AbstractArrayRead___core__abstract_collection__SequenceRead__reverse_iterator(val* self);
-void core___core__AbstractArray___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__AbstractArray___core__abstract_collection__RemovableCollection__clear(val* self);
+void core___core__AbstractArray___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__Array___AbstractArrayRead__copy_to(val* self, long p0, long p1, val* p2, long p3);
-val* core___core__AbstractArrayRead___reversed(val* self);
 void core___core__AbstractArrayRead___length_61d(val* self, long p0);
+val* core___core__AbstractArrayRead___reversed(val* self);
 val* core___core__AbstractArrayRead___sub(val* self, long p0, long p1);
-void core___core__Array___core__abstract_collection__SimpleCollection__add_all(val* self, val* p0);
 void core___core__Array___core__abstract_collection__SimpleCollection__add(val* self, val* p0);
+void core___core__Array___core__abstract_collection__SimpleCollection__add_all(val* self, val* p0);
 void core___core__AbstractArray___core__abstract_collection__Sequence__push(val* self, val* p0);
+val* core___core__AbstractArray___core__abstract_collection__Sequence__shift(val* self);
 void core___core__Array___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
 void core___core__AbstractArray___core__abstract_collection__Sequence__remove_at(val* self, long p0);
 val* core___core__AbstractArray___core__abstract_collection__Sequence__pop(val* self);
-val* core___core__AbstractArray___core__abstract_collection__Sequence__shift(val* self);
-void core___core__AbstractArray___core__abstract_collection__Sequence__insert_all(val* self, val* p0, long p1);
 void core___core__AbstractArray___core__abstract_collection__Sequence__unshift(val* self, val* p0);
+void core___core__AbstractArray___core__abstract_collection__Sequence__insert_all(val* self, val* p0, long p1);
 void core___core__AbstractArray___core__abstract_collection__Sequence__insert(val* self, val* p0, long p1);
 void core___core__Array___AbstractArray__enlarge(val* self, long p0);
 val* core___core__Array___items(val* self);
@@ -1655,16 +1649,16 @@ void core__array___core__array__ArrayReverseIterator___core__abstract_collection
 void core__array___core__array__ArrayReverseIterator___core__abstract_collection__Iterator__finish(val* self);
 extern const struct class class_core__array__ArrayReverseIterator;
 void core___core__ArraySet___core__kernel__Object__init(val* self);
-short int core___core__Set___core__kernel__Object___61d_61d(val* self, val* p0);
-long core___core__Set___core__kernel__Object__hash(val* self);
+val* core___core__ArraySet___core__abstract_collection__Set__new_set(val* self);
 void core___core__ArraySet___remove_at(val* self, long p0);
+val* core___core__ArraySet___core__kernel__Cloneable__clone(val* self);
 long core___core__ArraySet___core__abstract_collection__Collection__length(val* self);
 short int core___core__ArraySet___core__abstract_collection__Collection__is_empty(val* self);
 val* core___core__ArraySet___core__abstract_collection__Collection__iterator(val* self);
 short int core___core__ArraySet___core__abstract_collection__Collection__has(val* self, val* p0);
 val* core___core__ArraySet___core__abstract_collection__Collection__first(val* self);
-void core___core__ArraySet___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__ArraySet___core__abstract_collection__RemovableCollection__clear(val* self);
+void core___core__ArraySet___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__ArraySet___core__abstract_collection__SimpleCollection__add(val* self, val* p0);
 extern const struct class class_core__ArraySet;
 void core__array___core__array__ArraySetIterator___core__kernel__Object__init(val* self);
@@ -1679,14 +1673,16 @@ long core___core__ArrayMap___core__abstract_collection__MapRead__length(val* sel
 val* core___core__CoupleMap___MapRead__iterator(val* self);
 short int core___core__CoupleMap___MapRead__has_key(val* self, val* p0);
 val* core___core__ArrayMap___core__abstract_collection__MapRead___91d_93d(val* self, val* p0);
-short int core___core__ArrayMap___core__abstract_collection__MapRead__is_empty(val* self);
 val* core___core__ArrayMap___core__abstract_collection__MapRead__keys(val* self);
+short int core___core__ArrayMap___core__abstract_collection__MapRead__is_empty(val* self);
 val* core___core__MapRead___provide_default_value(val* self, val* p0);
+val* core___core__ArrayMap___core__kernel__Cloneable__clone(val* self);
 val* core___core__MapRead___get_or_null(val* self, val* p0);
 val* core___core__ArrayMap___core__abstract_collection__MapRead__values(val* self);
 void core___core__ArrayMap___core__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1);
 void core___core__ArrayMap___core__abstract_collection__Map__clear(val* self);
 val* core__flat___Map___join(val* self, val* p0, val* p1);
+void core___core__Map___add_all(val* self, val* p0);
 val* core___core__ArrayMap___core__abstract_collection__CoupleMap__couple_iterator(val* self);
 val* core___core__ArrayMap___core__abstract_collection__CoupleMap__couple_at(val* self, val* p0);
 long core___core__ArrayMap___index(val* self, val* p0);
@@ -1702,9 +1698,10 @@ long core__array___core__array__ArrayMapKeys___core__abstract_collection__Collec
 short int core__array___core__array__ArrayMapKeys___core__abstract_collection__Collection__is_empty(val* self);
 val* core__array___core__array__ArrayMapKeys___core__abstract_collection__Collection__iterator(val* self);
 short int core__array___core__array__ArrayMapKeys___core__abstract_collection__Collection__has(val* self, val* p0);
+long core__array___core__array__ArrayMapKeys___core__abstract_collection__Collection__count(val* self, val* p0);
 val* core__array___core__array__ArrayMapKeys___core__abstract_collection__Collection__first(val* self);
-void core__array___core__array__ArrayMapKeys___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core__array___core__array__ArrayMapKeys___core__abstract_collection__RemovableCollection__clear(val* self);
+void core__array___core__array__ArrayMapKeys___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 extern const struct class class_core__array__ArrayMapKeys;
 void core__array___core__array__ArrayMapValues___core__kernel__Object__init(val* self);
 void core__array___core__array__ArrayMapValues___map_61d(val* self, val* p0);
@@ -1713,9 +1710,10 @@ long core__array___core__array__ArrayMapValues___core__abstract_collection__Coll
 short int core__array___core__array__ArrayMapValues___core__abstract_collection__Collection__is_empty(val* self);
 val* core__array___core__array__ArrayMapValues___core__abstract_collection__Collection__iterator(val* self);
 short int core__array___core__array__ArrayMapValues___core__abstract_collection__Collection__has(val* self, val* p0);
+long core__array___core__array__ArrayMapValues___core__abstract_collection__Collection__count(val* self, val* p0);
 val* core__array___core__array__ArrayMapValues___core__abstract_collection__Collection__first(val* self);
-void core__array___core__array__ArrayMapValues___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core__array___core__array__ArrayMapValues___core__abstract_collection__RemovableCollection__clear(val* self);
+void core__array___core__array__ArrayMapValues___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 extern const struct class class_core__array__ArrayMapValues;
 val* core__flat___NativeArray___native_to_s(val* self);
 val* core___core__NativeArray____91d_93d(val* self, long p0);
@@ -1730,21 +1728,20 @@ void core___core__CircularArray___length_61d(val* self, long p0);
 long core___core__CircularArray___tail(val* self);
 void core___core__CircularArray___tail_61d(val* self, long p0);
 val* core___core__CircularArray___native(val* self);
-long core___core__CircularArray___core__abstract_collection__Collection__length(val* self);
-short int core___core__Collection___is_empty(val* self);
-val* core___core__CircularArray___core__abstract_collection__Collection__iterator(val* self);
 long core___core__CircularArray___offset(val* self, long p0);
 void core___core__CircularArray___head_61d(val* self, long p0);
+long core___core__CircularArray___head(val* self);
+long core___core__CircularArray___core__abstract_collection__Collection__length(val* self);
+val* core___core__CircularArray___core__abstract_collection__Collection__iterator(val* self);
+void core___core__CircularArray___native_61d(val* self, val* p0);
 val* core___core__CircularArray___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
 val* core___core__SequenceRead___reverse_iterator(val* self);
 void core___core__CircularArray___core__abstract_collection__RemovableCollection__clear(val* self);
-long core___core__CircularArray___head(val* self);
-void core___core__CircularArray___native_61d(val* self, val* p0);
 void core___core__CircularArray___core__abstract_collection__SimpleCollection__add_all(val* self, val* p0);
 void core___core__CircularArray___core__abstract_collection__Sequence__push(val* self, val* p0);
+val* core___core__CircularArray___core__abstract_collection__Sequence__shift(val* self);
 void core___core__CircularArray___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
 val* core___core__CircularArray___core__abstract_collection__Sequence__pop(val* self);
-val* core___core__CircularArray___core__abstract_collection__Sequence__shift(val* self);
 void core___core__CircularArray___core__abstract_collection__Sequence__unshift(val* self, val* p0);
 void core___core__CircularArray___core__abstract_collection__Sequence__insert(val* self, val* p0, long p1);
 extern const struct class class_core__CircularArray;
@@ -1767,19 +1764,19 @@ long core___core__HashMap___core__abstract_collection__MapRead__length(val* self
 val* core___core__HashMap___core__abstract_collection__MapRead__iterator(val* self);
 short int core___core__HashMap___core__abstract_collection__MapRead__has_key(val* self, val* p0);
 val* core___core__HashMap___core__abstract_collection__MapRead___91d_93d(val* self, val* p0);
-short int core___core__HashMap___core__abstract_collection__MapRead__is_empty(val* self);
 val* core___core__HashMap___core__abstract_collection__MapRead__keys(val* self);
+short int core___core__HashMap___core__abstract_collection__MapRead__is_empty(val* self);
 val* core___core__HashMap___core__abstract_collection__MapRead__get_or_null(val* self, val* p0);
 val* core___core__HashMap___core__abstract_collection__MapRead__values(val* self);
 void core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1);
 void core___core__HashMap___core__abstract_collection__Map__clear(val* self);
-val* core__hash_collection___core__hash_collection__HashCollection___node_at(val* self, val* p0);
 void core__hash_collection___core__hash_collection__HashCollection___enlarge(val* self, long p0);
 long core__hash_collection___core__hash_collection__HashCollection___index_at(val* self, val* p0);
 val* core__hash_collection___core__hash_collection__HashCollection___node_at_idx(val* self, long p0, val* p1);
 void core__hash_collection___core__hash_collection__HashCollection___store(val* self, long p0, val* p1);
-void core__hash_collection___core__hash_collection__HashCollection___remove_node(val* self, val* p0);
+val* core__hash_collection___core__hash_collection__HashCollection___node_at(val* self, val* p0);
 void core__hash_collection___core__hash_collection__HashCollection___raz(val* self);
+void core__hash_collection___core__hash_collection__HashCollection___remove_node(val* self, val* p0);
 extern const struct class class_core__HashMap;
 #define COLOR_core__hash_collection__HashCollection___capacity 1
 #define COLOR_core__hash_collection__HashCollection___the_length 2
@@ -1790,9 +1787,10 @@ long core__hash_collection___core__hash_collection__HashMapKeys___core__abstract
 short int core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__is_empty(val* self);
 val* core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__iterator(val* self);
 short int core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__has(val* self, val* p0);
+long core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__count(val* self, val* p0);
 val* core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__first(val* self);
-void core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__RemovableCollection__clear(val* self);
+void core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 extern const struct class class_core__hash_collection__HashMapKeys;
 void core__hash_collection___core__hash_collection__HashMapValues___core__kernel__Object__init(val* self);
 void core__hash_collection___core__hash_collection__HashMapValues___map_61d(val* self, val* p0);
@@ -1801,9 +1799,10 @@ long core__hash_collection___core__hash_collection__HashMapValues___core__abstra
 short int core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__is_empty(val* self);
 val* core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__iterator(val* self);
 short int core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__has(val* self, val* p0);
+long core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__count(val* self, val* p0);
 val* core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__first(val* self);
-void core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__RemovableCollection__clear(val* self);
+void core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 extern const struct class class_core__hash_collection__HashMapValues;
 void core__hash_collection___core__hash_collection__HashMapNode___core__kernel__Object__init(val* self);
 void core__hash_collection___core__hash_collection__HashNode___key_61d(val* self, val* p0);
@@ -1818,14 +1817,15 @@ void core__hash_collection___core__hash_collection__HashMapIterator___core__abst
 void core__hash_collection___core__hash_collection__HashMapIterator___map_61d(val* self, val* p0);
 val* core__hash_collection___core__hash_collection__HashMapIterator___map(val* self);
 extern const struct class class_core__hash_collection__HashMapIterator;
+val* core___core__HashSet___core__abstract_collection__Set__new_set(val* self);
 void core___core__HashSet___from(val* self, val* p0);
 long core___core__HashSet___core__abstract_collection__Collection__length(val* self);
 short int core___core__HashSet___core__abstract_collection__Collection__is_empty(val* self);
 val* core___core__HashSet___core__abstract_collection__Collection__iterator(val* self);
 short int core___core__HashSet___core__abstract_collection__Collection__has(val* self, val* p0);
 val* core___core__HashSet___core__abstract_collection__Collection__first(val* self);
-void core___core__HashSet___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__HashSet___core__abstract_collection__RemovableCollection__clear(val* self);
+void core___core__HashSet___core__abstract_collection__RemovableCollection__remove(val* self, val* p0);
 void core___core__HashSet___core__abstract_collection__SimpleCollection__add(val* self, val* p0);
 extern const struct class class_core__HashSet;
 extern const struct class class_core__hash_collection__HashSetNode;
@@ -1835,6 +1835,165 @@ val* core__hash_collection___core__hash_collection__HashSetIterator___core__abst
 void core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__next(val* self);
 void core__hash_collection___core__hash_collection__HashSetIterator___set_61d(val* self, val* p0);
 extern const struct class class_core__hash_collection__HashSetIterator;
+short int VIRTUAL_core___core__Int8___core__kernel__Object___33d_61d(val* self, val* p0);
+val* VIRTUAL_core__fixed_ints_text___Int8___core__abstract_text__Object__to_s(val* self);
+short int VIRTUAL_core___core__Int8___core__kernel__Object___61d_61d(val* self, val* p0);
+long VIRTUAL_core___core__Int8___core__kernel__Object__object_id(val* self);
+long VIRTUAL_core___core__Int8___core__kernel__Object__hash(val* self);
+short int VIRTUAL_core___core__Int8___core__kernel__Comparable___60d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__Int8___core__kernel__Comparable___62d(val* self, val* p0);
+short int VIRTUAL_core___core__Int8___core__kernel__Comparable___62d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__Int8___core__kernel__Comparable___60d(val* self, val* p0);
+long VIRTUAL_core___core__Int8___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__Int8___core__kernel__Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__Int8___core__kernel__Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__Int8___core__kernel__Discrete__successor(val* self, long p0);
+val* VIRTUAL_core___core__Int8___core__kernel__Numeric___43d(val* self, val* p0);
+val* VIRTUAL_core___core__Int8___core__kernel__Numeric___45d(val* self, val* p0);
+val* VIRTUAL_core___core__Int8___core__kernel__Numeric__unary_32d_45d(val* self);
+long VIRTUAL_core___core__Int8___core__kernel__Discrete__distance(val* self, val* p0);
+long VIRTUAL_core___core__Int8___core__kernel__Numeric__to_i(val* self);
+val* VIRTUAL_core___core__Int8___core__kernel__Numeric___42d(val* self, val* p0);
+unsigned char VIRTUAL_core___core__Int8___core__kernel__Numeric__to_b(val* self);
+int8_t VIRTUAL_core___core__Int8___Numeric__to_i8(val* self);
+int16_t VIRTUAL_core___core__Int8___Numeric__to_i16(val* self);
+uint16_t VIRTUAL_core___core__Int8___Numeric__to_u16(val* self);
+int32_t VIRTUAL_core___core__Int8___Numeric__to_i32(val* self);
+uint32_t VIRTUAL_core___core__Int8___Numeric__to_u32(val* self);
+val* VIRTUAL_core___core__Int8___core__kernel__Numeric___47d(val* self, val* p0);
+double VIRTUAL_core___core__Int8___core__kernel__Numeric__to_f(val* self);
+long core__fixed_ints_text___Int8___to_s_len(int8_t self);
+void core__fixed_ints_text___Int8___native_to_s(int8_t self, char* p0, long p1);
+extern const struct type type_core__Int8;
+extern const struct class class_core__Int8;
+short int VIRTUAL_core___core__Int16___core__kernel__Object___33d_61d(val* self, val* p0);
+val* VIRTUAL_core__fixed_ints_text___Int16___core__abstract_text__Object__to_s(val* self);
+short int VIRTUAL_core___core__Int16___core__kernel__Object___61d_61d(val* self, val* p0);
+long VIRTUAL_core___core__Int16___core__kernel__Object__object_id(val* self);
+long VIRTUAL_core___core__Int16___core__kernel__Object__hash(val* self);
+short int VIRTUAL_core___core__Int16___core__kernel__Comparable___60d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__Int16___core__kernel__Comparable___62d(val* self, val* p0);
+short int VIRTUAL_core___core__Int16___core__kernel__Comparable___62d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__Int16___core__kernel__Comparable___60d(val* self, val* p0);
+long VIRTUAL_core___core__Int16___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__Int16___core__kernel__Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__Int16___core__kernel__Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__Int16___core__kernel__Discrete__successor(val* self, long p0);
+val* VIRTUAL_core___core__Int16___core__kernel__Numeric___43d(val* self, val* p0);
+val* VIRTUAL_core___core__Int16___core__kernel__Numeric___45d(val* self, val* p0);
+val* VIRTUAL_core___core__Int16___core__kernel__Numeric__unary_32d_45d(val* self);
+long VIRTUAL_core___core__Int16___core__kernel__Discrete__distance(val* self, val* p0);
+long VIRTUAL_core___core__Int16___core__kernel__Numeric__to_i(val* self);
+val* VIRTUAL_core___core__Int16___core__kernel__Numeric___42d(val* self, val* p0);
+unsigned char VIRTUAL_core___core__Int16___core__kernel__Numeric__to_b(val* self);
+int8_t VIRTUAL_core___core__Int16___Numeric__to_i8(val* self);
+int16_t VIRTUAL_core___core__Int16___Numeric__to_i16(val* self);
+uint16_t VIRTUAL_core___core__Int16___Numeric__to_u16(val* self);
+int32_t VIRTUAL_core___core__Int16___Numeric__to_i32(val* self);
+uint32_t VIRTUAL_core___core__Int16___Numeric__to_u32(val* self);
+val* VIRTUAL_core___core__Int16___core__kernel__Numeric___47d(val* self, val* p0);
+double VIRTUAL_core___core__Int16___core__kernel__Numeric__to_f(val* self);
+long core__fixed_ints_text___Int16___to_s_len(int16_t self);
+void core__fixed_ints_text___Int16___native_to_s(int16_t self, char* p0, long p1);
+extern const struct type type_core__Int16;
+extern const struct class class_core__Int16;
+short int VIRTUAL_core___core__UInt16___core__kernel__Object___33d_61d(val* self, val* p0);
+val* VIRTUAL_core__fixed_ints_text___UInt16___core__abstract_text__Object__to_s(val* self);
+short int VIRTUAL_core___core__UInt16___core__kernel__Object___61d_61d(val* self, val* p0);
+long VIRTUAL_core___core__UInt16___core__kernel__Object__object_id(val* self);
+long VIRTUAL_core___core__UInt16___core__kernel__Object__hash(val* self);
+short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___60d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___62d(val* self, val* p0);
+short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___62d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___60d(val* self, val* p0);
+long VIRTUAL_core___core__UInt16___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__UInt16___core__kernel__Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__UInt16___core__kernel__Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__UInt16___core__kernel__Discrete__successor(val* self, long p0);
+val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___43d(val* self, val* p0);
+val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___45d(val* self, val* p0);
+val* VIRTUAL_core___core__UInt16___core__kernel__Numeric__unary_32d_45d(val* self);
+long VIRTUAL_core___core__UInt16___core__kernel__Discrete__distance(val* self, val* p0);
+long VIRTUAL_core___core__UInt16___core__kernel__Numeric__to_i(val* self);
+val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___42d(val* self, val* p0);
+unsigned char VIRTUAL_core___core__UInt16___core__kernel__Numeric__to_b(val* self);
+int8_t VIRTUAL_core___core__UInt16___Numeric__to_i8(val* self);
+int16_t VIRTUAL_core___core__UInt16___Numeric__to_i16(val* self);
+uint16_t VIRTUAL_core___core__UInt16___Numeric__to_u16(val* self);
+int32_t VIRTUAL_core___core__UInt16___Numeric__to_i32(val* self);
+uint32_t VIRTUAL_core___core__UInt16___Numeric__to_u32(val* self);
+val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___47d(val* self, val* p0);
+double VIRTUAL_core___core__UInt16___core__kernel__Numeric__to_f(val* self);
+long core__fixed_ints_text___UInt16___to_s_len(uint16_t self);
+void core__fixed_ints_text___UInt16___native_to_s(uint16_t self, char* p0, long p1);
+extern const struct type type_core__UInt16;
+extern const struct class class_core__UInt16;
+short int VIRTUAL_core___core__Int32___core__kernel__Object___33d_61d(val* self, val* p0);
+val* VIRTUAL_core__fixed_ints_text___Int32___core__abstract_text__Object__to_s(val* self);
+short int VIRTUAL_core___core__Int32___core__kernel__Object___61d_61d(val* self, val* p0);
+long VIRTUAL_core___core__Int32___core__kernel__Object__object_id(val* self);
+long VIRTUAL_core___core__Int32___core__kernel__Object__hash(val* self);
+short int VIRTUAL_core___core__Int32___core__kernel__Comparable___60d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__Int32___core__kernel__Comparable___62d(val* self, val* p0);
+short int VIRTUAL_core___core__Int32___core__kernel__Comparable___62d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__Int32___core__kernel__Comparable___60d(val* self, val* p0);
+long VIRTUAL_core___core__Int32___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__Int32___core__kernel__Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__Int32___core__kernel__Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__Int32___core__kernel__Discrete__successor(val* self, long p0);
+val* VIRTUAL_core___core__Int32___core__kernel__Numeric___43d(val* self, val* p0);
+val* VIRTUAL_core___core__Int32___core__kernel__Numeric___45d(val* self, val* p0);
+val* VIRTUAL_core___core__Int32___core__kernel__Numeric__unary_32d_45d(val* self);
+long VIRTUAL_core___core__Int32___core__kernel__Discrete__distance(val* self, val* p0);
+long VIRTUAL_core___core__Int32___core__kernel__Numeric__to_i(val* self);
+val* VIRTUAL_core___core__Int32___core__kernel__Numeric___42d(val* self, val* p0);
+unsigned char VIRTUAL_core___core__Int32___core__kernel__Numeric__to_b(val* self);
+int8_t VIRTUAL_core___core__Int32___Numeric__to_i8(val* self);
+int16_t VIRTUAL_core___core__Int32___Numeric__to_i16(val* self);
+uint16_t VIRTUAL_core___core__Int32___Numeric__to_u16(val* self);
+int32_t VIRTUAL_core___core__Int32___Numeric__to_i32(val* self);
+uint32_t VIRTUAL_core___core__Int32___Numeric__to_u32(val* self);
+val* VIRTUAL_core___core__Int32___core__kernel__Numeric___47d(val* self, val* p0);
+double VIRTUAL_core___core__Int32___core__kernel__Numeric__to_f(val* self);
+long core__fixed_ints_text___Int32___to_s_len(int32_t self);
+void core__fixed_ints_text___Int32___native_to_s(int32_t self, char* p0, long p1);
+extern const struct type type_core__Int32;
+extern const struct class class_core__Int32;
+short int VIRTUAL_core___core__UInt32___core__kernel__Object___33d_61d(val* self, val* p0);
+val* VIRTUAL_core__fixed_ints_text___UInt32___core__abstract_text__Object__to_s(val* self);
+short int VIRTUAL_core___core__UInt32___core__kernel__Object___61d_61d(val* self, val* p0);
+long VIRTUAL_core___core__UInt32___core__kernel__Object__object_id(val* self);
+long VIRTUAL_core___core__UInt32___core__kernel__Object__hash(val* self);
+short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___60d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___62d(val* self, val* p0);
+short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___62d_61d(val* self, val* p0);
+short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___60d(val* self, val* p0);
+long VIRTUAL_core___core__UInt32___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
+val* VIRTUAL_core___core__UInt32___core__kernel__Comparable__min(val* self, val* p0);
+val* VIRTUAL_core___core__UInt32___core__kernel__Comparable__max(val* self, val* p0);
+val* VIRTUAL_core___core__UInt32___core__kernel__Discrete__successor(val* self, long p0);
+val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___43d(val* self, val* p0);
+val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___45d(val* self, val* p0);
+val* VIRTUAL_core___core__UInt32___core__kernel__Numeric__unary_32d_45d(val* self);
+long VIRTUAL_core___core__UInt32___core__kernel__Discrete__distance(val* self, val* p0);
+long VIRTUAL_core___core__UInt32___core__kernel__Numeric__to_i(val* self);
+val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___42d(val* self, val* p0);
+unsigned char VIRTUAL_core___core__UInt32___core__kernel__Numeric__to_b(val* self);
+int8_t VIRTUAL_core___core__UInt32___Numeric__to_i8(val* self);
+int16_t VIRTUAL_core___core__UInt32___Numeric__to_i16(val* self);
+uint16_t VIRTUAL_core___core__UInt32___Numeric__to_u16(val* self);
+int32_t VIRTUAL_core___core__UInt32___Numeric__to_i32(val* self);
+uint32_t VIRTUAL_core___core__UInt32___Numeric__to_u32(val* self);
+val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___47d(val* self, val* p0);
+double VIRTUAL_core___core__UInt32___core__kernel__Numeric__to_f(val* self);
+long core__fixed_ints_text___UInt32___to_s_len(uint32_t self);
+void core__fixed_ints_text___UInt32___native_to_s(uint32_t self, char* p0, long p1);
+uint32_t core___core__UInt32____38d(uint32_t self, uint32_t p0);
+uint32_t core___core__UInt32____124d(uint32_t self, uint32_t p0);
+uint32_t core___core__UInt32____62d_62d(uint32_t self, long p0);
+uint32_t core__native___UInt32___code_point(uint32_t self);
+extern const struct type type_core__UInt32;
+extern const struct class class_core__UInt32;
 void core___core__Match___core__kernel__Object__init(val* self);
 val* core___core__Match___core__abstract_text__Object__to_s(val* self);
 long core___core__Match___from(val* self);
@@ -1853,14 +2012,13 @@ void core___core__FileStream___set_buffering_mode(val* self, long p0, long p1);
 val* core___core__FileStream___path(val* self);
 void core___core__BufferedReader___prepare_buffer(val* self, long p0);
 void core___core__BufferedReader___buffer_reset(val* self);
-val* core___core__Reader___read_all(val* self);
+short int core___core__FileReader___core__stream__BufferedReader__end_reached(val* self);
 short int core___core__BufferedReader___Reader__eof(val* self);
 val* core___core__Reader___read_line(val* self);
-val* core___core__BufferedReader___Reader__read_all_bytes(val* self);
+val* core___core__Reader___read_all(val* self);
 void core___core__BufferedReader___Reader__append_line_to(val* self, val* p0);
-val* core___core__Reader___read(val* self, long p0);
+val* core___core__BufferedReader___Reader__read_all_bytes(val* self);
 val* core___core__BufferedReader___Reader__read_bytes(val* self, long p0);
-short int core___core__FileReader___core__stream__BufferedReader__end_reached(val* self);
 void core___core__FileReader___core__stream__BufferedReader__fill_buffer(val* self);
 long core___core__BufferedReader___read_intern(val* self, long p0, val* p1);
 void core___core__FileReader___open(val* self, val* p0);
@@ -1875,6 +2033,7 @@ extern const struct class class_core__FileReader;
 #define COLOR_core__file__FileReader___end_reached 8
 void core___core__FileWriter___core__stream__Stream__close(val* self);
 void core___core__FileWriter___core__stream__Writer__write(val* self, val* p0);
+void core___core__Writer___write_char(val* self, uint32_t p0);
 void core___core__FileWriter___core__stream__Writer__write_bytes(val* self, val* p0);
 void core___core__FileWriter___write_native(val* self, char* p0, long p1, long p2);
 void core___core__FileWriter___open(val* self, val* p0);
@@ -1935,10 +2094,13 @@ extern const struct class class_core__IOError;
 void core___core__Bytes___core__kernel__Object__init(val* self);
 val* core___core__Bytes___core__abstract_text__Object__to_s(val* self);
 char* core___core__Bytes___items(val* self);
-void core___core__Bytes___empty(val* self);
 void core___core__Bytes___with_capacity(val* self, long p0);
+void core___core__Bytes___empty(val* self);
 void core___core__Bytes___append_ns_from(val* self, char* p0, long p1, long p2);
 void core___core__Bytes___persisted_61d(val* self, short int p0);
+short int core___core__Bytes___persisted(val* self);
+void core___core__Bytes___regen(val* self);
+long core___core__Bytes___capacity(val* self);
 long core___core__Bytes___core__abstract_collection__Collection__length(val* self);
 short int core___core__Bytes___core__abstract_collection__Collection__is_empty(val* self);
 val* core___core__Bytes___core__abstract_collection__Collection__iterator(val* self);
@@ -1951,12 +2113,10 @@ void core___core__Bytes___core__abstract_collection__Sequence__append(val* self,
 void VIRTUAL_core___core__Bytes___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
 val* VIRTUAL_core___core__Bytes___core__abstract_collection__Sequence__pop(val* self);
 void core___core__Bytes___core__array__AbstractArray__enlarge(val* self, long p0);
-short int core___core__Bytes___persisted(val* self);
-void core___core__Bytes___regen(val* self);
-long core___core__Bytes___capacity(val* self);
 void core___core__Bytes___append_ns(val* self, char* p0, long p1);
 void core___core__Bytes___capacity_61d(val* self, long p0);
 void core___core__Bytes___items_61d(val* self, char* p0);
+void core___core__Bytes___add_char(val* self, uint32_t p0);
 extern const struct class class_core__Bytes;
 #define COLOR_core__bytes__Bytes___persisted 5
 void core__bytes___core__bytes__BytesIterator___core__kernel__Object__init(val* self);
@@ -1971,242 +2131,7 @@ void core__bytes___core__bytes__BytesIterator___index_61d(val* self, long p0);
 void core__bytes___core__bytes__BytesIterator___tgt_61d(val* self, char* p0);
 void core__bytes___core__bytes__BytesIterator___max_61d(val* self, long p0);
 extern const struct class class_core__bytes__BytesIterator;
-extern const struct class class_core__utf8__UTF8Coder;
-extern const struct class class_core__utf8__UTF8Decoder;
-short int VIRTUAL_core___core__Int8___core__kernel__Object___33d_61d(val* self, val* p0);
-val* VIRTUAL_core___core__Int8___core__abstract_text__Object__to_s(val* self);
-short int VIRTUAL_core___core__Int8___core__kernel__Object___61d_61d(val* self, val* p0);
-long VIRTUAL_core___core__Int8___core__kernel__Object__object_id(val* self);
-long VIRTUAL_core___core__Int8___core__kernel__Object__hash(val* self);
-short int VIRTUAL_core___core__Int8___core__kernel__Comparable___60d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__Int8___core__kernel__Comparable___62d(val* self, val* p0);
-short int VIRTUAL_core___core__Int8___core__kernel__Comparable___62d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__Int8___core__kernel__Comparable___60d(val* self, val* p0);
-long VIRTUAL_core___core__Int8___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
-val* VIRTUAL_core___core__Int8___core__kernel__Numeric___43d(val* self, val* p0);
-val* VIRTUAL_core___core__Int8___core__kernel__Numeric___45d(val* self, val* p0);
-val* VIRTUAL_core___core__Int8___core__kernel__Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__Int8___core__kernel__Discrete__successor(val* self, long p0);
-long VIRTUAL_core___core__Int8___core__kernel__Discrete__distance(val* self, val* p0);
-long VIRTUAL_core___core__Int8___core__kernel__Numeric__to_i(val* self);
-val* VIRTUAL_core___core__Int8___core__kernel__Numeric___42d(val* self, val* p0);
-unsigned char VIRTUAL_core___core__Int8___core__kernel__Numeric__to_b(val* self);
-int8_t VIRTUAL_core___core__Int8___Numeric__to_i8(val* self);
-int16_t VIRTUAL_core___core__Int8___Numeric__to_i16(val* self);
-uint16_t VIRTUAL_core___core__Int8___Numeric__to_u16(val* self);
-int32_t VIRTUAL_core___core__Int8___Numeric__to_i32(val* self);
-uint32_t VIRTUAL_core___core__Int8___Numeric__to_u32(val* self);
-val* VIRTUAL_core___core__Int8___core__kernel__Numeric___47d(val* self, val* p0);
-double VIRTUAL_core___core__Int8___core__kernel__Numeric__to_f(val* self);
-long core___core__Int8___to_s_len(int8_t self);
-void core___core__Int8___native_to_s(int8_t self, char* p0, long p1);
-extern const struct type type_core__Int8;
-extern const struct class class_core__Int8;
-short int VIRTUAL_core___core__Int16___core__kernel__Object___33d_61d(val* self, val* p0);
-val* VIRTUAL_core___core__Int16___core__abstract_text__Object__to_s(val* self);
-short int VIRTUAL_core___core__Int16___core__kernel__Object___61d_61d(val* self, val* p0);
-long VIRTUAL_core___core__Int16___core__kernel__Object__object_id(val* self);
-long VIRTUAL_core___core__Int16___core__kernel__Object__hash(val* self);
-short int VIRTUAL_core___core__Int16___core__kernel__Comparable___60d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__Int16___core__kernel__Comparable___62d(val* self, val* p0);
-short int VIRTUAL_core___core__Int16___core__kernel__Comparable___62d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__Int16___core__kernel__Comparable___60d(val* self, val* p0);
-long VIRTUAL_core___core__Int16___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
-val* VIRTUAL_core___core__Int16___core__kernel__Numeric___43d(val* self, val* p0);
-val* VIRTUAL_core___core__Int16___core__kernel__Numeric___45d(val* self, val* p0);
-val* VIRTUAL_core___core__Int16___core__kernel__Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__Int16___core__kernel__Discrete__successor(val* self, long p0);
-long VIRTUAL_core___core__Int16___core__kernel__Discrete__distance(val* self, val* p0);
-long VIRTUAL_core___core__Int16___core__kernel__Numeric__to_i(val* self);
-val* VIRTUAL_core___core__Int16___core__kernel__Numeric___42d(val* self, val* p0);
-unsigned char VIRTUAL_core___core__Int16___core__kernel__Numeric__to_b(val* self);
-int8_t VIRTUAL_core___core__Int16___Numeric__to_i8(val* self);
-int16_t VIRTUAL_core___core__Int16___Numeric__to_i16(val* self);
-uint16_t VIRTUAL_core___core__Int16___Numeric__to_u16(val* self);
-int32_t VIRTUAL_core___core__Int16___Numeric__to_i32(val* self);
-uint32_t VIRTUAL_core___core__Int16___Numeric__to_u32(val* self);
-val* VIRTUAL_core___core__Int16___core__kernel__Numeric___47d(val* self, val* p0);
-double VIRTUAL_core___core__Int16___core__kernel__Numeric__to_f(val* self);
-long core___core__Int16___to_s_len(int16_t self);
-void core___core__Int16___native_to_s(int16_t self, char* p0, long p1);
-extern const struct type type_core__Int16;
-extern const struct class class_core__Int16;
-short int VIRTUAL_core___core__UInt16___core__kernel__Object___33d_61d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt16___core__abstract_text__Object__to_s(val* self);
-short int VIRTUAL_core___core__UInt16___core__kernel__Object___61d_61d(val* self, val* p0);
-long VIRTUAL_core___core__UInt16___core__kernel__Object__object_id(val* self);
-long VIRTUAL_core___core__UInt16___core__kernel__Object__hash(val* self);
-short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___60d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___62d(val* self, val* p0);
-short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___62d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__UInt16___core__kernel__Comparable___60d(val* self, val* p0);
-long VIRTUAL_core___core__UInt16___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___43d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___45d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt16___core__kernel__Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__UInt16___core__kernel__Discrete__successor(val* self, long p0);
-long VIRTUAL_core___core__UInt16___core__kernel__Discrete__distance(val* self, val* p0);
-long VIRTUAL_core___core__UInt16___core__kernel__Numeric__to_i(val* self);
-val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___42d(val* self, val* p0);
-unsigned char VIRTUAL_core___core__UInt16___core__kernel__Numeric__to_b(val* self);
-int8_t VIRTUAL_core___core__UInt16___Numeric__to_i8(val* self);
-int16_t VIRTUAL_core___core__UInt16___Numeric__to_i16(val* self);
-uint16_t VIRTUAL_core___core__UInt16___Numeric__to_u16(val* self);
-int32_t VIRTUAL_core___core__UInt16___Numeric__to_i32(val* self);
-uint32_t VIRTUAL_core___core__UInt16___Numeric__to_u32(val* self);
-val* VIRTUAL_core___core__UInt16___core__kernel__Numeric___47d(val* self, val* p0);
-double VIRTUAL_core___core__UInt16___core__kernel__Numeric__to_f(val* self);
-long core___core__UInt16___to_s_len(uint16_t self);
-void core___core__UInt16___native_to_s(uint16_t self, char* p0, long p1);
-extern const struct type type_core__UInt16;
-extern const struct class class_core__UInt16;
-short int VIRTUAL_core___core__Int32___core__kernel__Object___33d_61d(val* self, val* p0);
-val* VIRTUAL_core___core__Int32___core__abstract_text__Object__to_s(val* self);
-short int VIRTUAL_core___core__Int32___core__kernel__Object___61d_61d(val* self, val* p0);
-long VIRTUAL_core___core__Int32___core__kernel__Object__object_id(val* self);
-long VIRTUAL_core___core__Int32___core__kernel__Object__hash(val* self);
-short int VIRTUAL_core___core__Int32___core__kernel__Comparable___60d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__Int32___core__kernel__Comparable___62d(val* self, val* p0);
-short int VIRTUAL_core___core__Int32___core__kernel__Comparable___62d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__Int32___core__kernel__Comparable___60d(val* self, val* p0);
-long VIRTUAL_core___core__Int32___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
-val* VIRTUAL_core___core__Int32___core__kernel__Numeric___43d(val* self, val* p0);
-val* VIRTUAL_core___core__Int32___core__kernel__Numeric___45d(val* self, val* p0);
-val* VIRTUAL_core___core__Int32___core__kernel__Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__Int32___core__kernel__Discrete__successor(val* self, long p0);
-long VIRTUAL_core___core__Int32___core__kernel__Discrete__distance(val* self, val* p0);
-long VIRTUAL_core___core__Int32___core__kernel__Numeric__to_i(val* self);
-val* VIRTUAL_core___core__Int32___core__kernel__Numeric___42d(val* self, val* p0);
-unsigned char VIRTUAL_core___core__Int32___core__kernel__Numeric__to_b(val* self);
-int8_t VIRTUAL_core___core__Int32___Numeric__to_i8(val* self);
-int16_t VIRTUAL_core___core__Int32___Numeric__to_i16(val* self);
-uint16_t VIRTUAL_core___core__Int32___Numeric__to_u16(val* self);
-int32_t VIRTUAL_core___core__Int32___Numeric__to_i32(val* self);
-uint32_t VIRTUAL_core___core__Int32___Numeric__to_u32(val* self);
-val* VIRTUAL_core___core__Int32___core__kernel__Numeric___47d(val* self, val* p0);
-double VIRTUAL_core___core__Int32___core__kernel__Numeric__to_f(val* self);
-long core___core__Int32___to_s_len(int32_t self);
-void core___core__Int32___native_to_s(int32_t self, char* p0, long p1);
-extern const struct type type_core__Int32;
-extern const struct class class_core__Int32;
-short int VIRTUAL_core___core__UInt32___core__kernel__Object___33d_61d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt32___core__abstract_text__Object__to_s(val* self);
-short int VIRTUAL_core___core__UInt32___core__kernel__Object___61d_61d(val* self, val* p0);
-long VIRTUAL_core___core__UInt32___core__kernel__Object__object_id(val* self);
-long VIRTUAL_core___core__UInt32___core__kernel__Object__hash(val* self);
-short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___60d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___62d(val* self, val* p0);
-short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___62d_61d(val* self, val* p0);
-short int VIRTUAL_core___core__UInt32___core__kernel__Comparable___60d(val* self, val* p0);
-long VIRTUAL_core___core__UInt32___core__kernel__Comparable___60d_61d_62d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___43d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___45d(val* self, val* p0);
-val* VIRTUAL_core___core__UInt32___core__kernel__Numeric__unary_32d_45d(val* self);
-val* VIRTUAL_core___core__UInt32___core__kernel__Discrete__successor(val* self, long p0);
-long VIRTUAL_core___core__UInt32___core__kernel__Discrete__distance(val* self, val* p0);
-long VIRTUAL_core___core__UInt32___core__kernel__Numeric__to_i(val* self);
-val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___42d(val* self, val* p0);
-unsigned char VIRTUAL_core___core__UInt32___core__kernel__Numeric__to_b(val* self);
-int8_t VIRTUAL_core___core__UInt32___Numeric__to_i8(val* self);
-int16_t VIRTUAL_core___core__UInt32___Numeric__to_i16(val* self);
-uint16_t VIRTUAL_core___core__UInt32___Numeric__to_u16(val* self);
-int32_t VIRTUAL_core___core__UInt32___Numeric__to_i32(val* self);
-uint32_t VIRTUAL_core___core__UInt32___Numeric__to_u32(val* self);
-val* VIRTUAL_core___core__UInt32___core__kernel__Numeric___47d(val* self, val* p0);
-double VIRTUAL_core___core__UInt32___core__kernel__Numeric__to_f(val* self);
-long core___core__UInt32___to_s_len(uint32_t self);
-void core___core__UInt32___native_to_s(uint32_t self, char* p0, long p1);
-extern const struct type type_core__UInt32;
-extern const struct class class_core__UInt32;
-void nitc___nitc__MPackage___core__kernel__Object__init(val* self);
-val* nitc___nitc__MPackage___core__abstract_text__Object__to_s(val* self);
-val* nitc___nitc__MPackage___nitc__model_base__MEntity__c_name(val* self);
-val* nitc___nitc__MPackage___nitc__model_base__MEntity__model(val* self);
-val* nitc___nitc__MPackage___nitc__model_base__MEntity__name(val* self);
-val* nitc___nitc__MPackage___nitc__model_base__MEntity__full_name(val* self);
-void nitc___nitc__MPackage___name_61d(val* self, val* p0);
-void nitc___nitc__MPackage___model_61d(val* self, val* p0);
-void nitc___nitc__MPackage___root_61d(val* self, val* p0);
-void nitc__loader___MPackage___ini_61d(val* self, val* p0);
-val* nitc___nitc__MPackage___mgroups(val* self);
-val* nitc___nitc__MPackage___root(val* self);
-extern const struct class class_nitc__MPackage;
-val* NEW_poset__POSet(const struct type* type);
-extern const struct type type_poset__POSet__nitc__MGroup;
-#define COLOR_nitc__mpackage__MPackage___mgroups 12
-void nitc___nitc__MGroup___core__kernel__Object__init(val* self);
-val* nitc___nitc__MGroup___core__abstract_text__Object__to_s(val* self);
-val* nitc___nitc__MGroup___nitc__model_base__MEntity__model(val* self);
-val* nitc___nitc__MGroup___nitc__model_base__MEntity__name(val* self);
-val* nitc___nitc__MGroup___nitc__model_base__MEntity__full_name(val* self);
-val* nitc___nitc__MGroup___mpackage(val* self);
-val* nitc___nitc__MGroup___filepath(val* self);
-void nitc___nitc__MGroup___name_61d(val* self, val* p0);
-void nitc___nitc__MGroup___mpackage_61d(val* self, val* p0);
-void nitc___nitc__MGroup___parent_61d(val* self, val* p0);
-void nitc___nitc__MGroup___filepath_61d(val* self, val* p0);
-val* nitc__mmodule___MGroup___mmodules(val* self);
-val* nitc__mmodule___MGroup___default_mmodule(val* self);
-void nitc__mmodule___MGroup___default_mmodule_61d(val* self, val* p0);
-val* nitc__loader___MGroup___mmodules_by_name(val* self, val* p0);
-void nitc___nitc__MGroup___in_nesting_61d(val* self, val* p0);
-val* nitc___nitc__MGroup___parent(val* self);
-short int nitc__loader___MGroup___scanned(val* self);
-void nitc__loader___MGroup___scanned_61d(val* self, short int p0);
-val* nitc___nitc__MGroup___in_nesting(val* self);
-extern const struct class class_nitc__MGroup;
-#define COLOR_nitc__mmodule__MGroup___mmodules 7
-#define COLOR_nitc__loader__MGroup___scanned 6
-val* nitc___nitc__Model___MEntity__model(val* self);
-val* nitc___nitc__MEntity___name(val* self);
-val* nitc__mmodule___Model___mmodule_importation_hierarchy(val* self);
-val* nitc__mmodule___Model___mmodules_by_name(val* self);
-val* nitc__mmodule___Model___mmodules(val* self);
-val* nitc__model___Model___get_mclasses_by_name(val* self, val* p0);
-val* nitc__model___Model___mclassdef_hierarchy(val* self);
-val* nitc__model___Model___get_mproperties_by_name(val* self, val* p0);
-val* nitc__mpackage___Model___mpackages(val* self);
-val* nitc__mpackage___Model___mpackage_by_name(val* self);
-val* nitc__model___Model___mclasses_by_name(val* self);
-val* nitc__model___Model___mclasses(val* self);
-val* nitc__model___Model___full_mtype_specialization_hierarchy(val* self);
-val* nitc__model___Model___intro_mtype_specialization_hierarchy(val* self);
-val* nitc__model___Model___mproperties_by_name(val* self);
-val* nitc__mmodule___Model___get_mmodules_by_name(val* self, val* p0);
-val* nitc__model___Model___null_type(val* self);
-val* nitc__model___Model___mproperties(val* self);
-extern const struct class class_nitc__Model;
-extern const struct type type_core__Array__nitc__MPackage;
-#define COLOR_nitc__mpackage__Model___mpackages 17
-extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MPackage;
-#define COLOR_nitc__mpackage__Model___mpackage_by_name 18
-#define COLOR_nitc__mmodule__Model___mmodules 14
-extern const struct type type_poset__POSet__nitc__MModule;
-#define COLOR_nitc__mmodule__Model___mmodule_importation_hierarchy 15
-extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MModule;
-#define COLOR_nitc__mmodule__Model___mmodules_by_name 16
-#define COLOR_nitc__model__Model___mclasses 6
-#define COLOR_nitc__model__Model___mproperties 7
-extern const struct type type_poset__POSet__nitc__MClassDef;
-#define COLOR_nitc__model__Model___mclassdef_hierarchy 8
-extern const struct type type_poset__POSet__nitc__MClassType;
-#define COLOR_nitc__model__Model___intro_mtype_specialization_hierarchy 9
-#define COLOR_nitc__model__Model___full_mtype_specialization_hierarchy 10
-extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MClass;
-#define COLOR_nitc__model__Model___mclasses_by_name 11
-extern const struct type type_more_collections__MultiHashMap__core__String__nitc__MProperty;
-#define COLOR_nitc__model__Model___mproperties_by_name 12
-val* NEW_nitc__MNullType(const struct type* type);
-extern const struct type type_nitc__MNullType;
-#define COLOR_nitc__model__MNullType__model_61d 56
-#define COLOR_nitc__model__Model___null_type 13
-void nitc___nitc__MVisibility___core__kernel__Object__init(val* self);
-val* nitc___nitc__MVisibility___core__abstract_text__Object__to_s(val* self);
-short int nitc___nitc__MVisibility___core__kernel__Comparable___60d(val* self, val* p0);
-void nitc___nitc__MVisibility___to_s_61d(val* self, val* p0);
-void nitc___nitc__MVisibility___level_61d(val* self, long p0);
-long nitc___nitc__MVisibility___level(val* self);
-extern const struct class class_nitc__MVisibility;
+extern const struct class class_core__utf8__UTF8Codec;
 val* more_collections___more_collections__MultiHashMap___core__abstract_collection__MapRead__provide_default_value(val* self, val* p0);
 void more_collections___more_collections__MultiHashMap___add_one(val* self, val* p0, val* p1);
 extern const struct class class_more_collections__MultiHashMap;
@@ -2222,36 +2147,47 @@ val* more_collections___more_collections__HashMap3___level1(val* self);
 extern const struct class class_more_collections__HashMap3;
 #define COLOR_core__HashMap__more_collections__HashMap3___35dK1__more_collections__HashMap2__more_collections__HashMap3___35dK2__more_collections__HashMap3___35dK3__more_collections__HashMap3___35dV 0
 #define COLOR_more_collections__HashMap3___level1 0
+void more_collections___more_collections__BestDistance___core__kernel__Object__init(val* self);
+void more_collections___more_collections__BestDistance___best_distance_61d(val* self, long p0);
+short int more_collections___more_collections__BestDistance___update(val* self, long p0, val* p1);
+val* more_collections___more_collections__BestDistance___best_items(val* self);
+long more_collections___more_collections__BestDistance___best_distance(val* self);
+extern const struct class class_more_collections__BestDistance;
+val* NEW_core__Set(const struct type* type);
+#define COLOR_core__Set__more_collections__BestDistance___35dE 0
+#define COLOR_more_collections__BestDistance___best_items 1
+short int poset___poset__POSet___core__kernel__Object___61d_61d(val* self, val* p0);
+long poset___poset__POSet___core__kernel__Object__hash(val* self);
 long poset___poset__POSet___core__sorter__Comparator__compare(val* self, val* p0, val* p1);
-long core___core__Collection___length(val* self);
+val* poset___poset__POSet___elements(val* self);
+val* poset___poset__POSet____91d_93d(val* self, val* p0);
+val* poset___poset__POSet___core__kernel__Cloneable__clone(val* self);
 val* poset___poset__POSet___core__abstract_collection__Collection__iterator(val* self);
 short int poset___poset__POSet___core__abstract_collection__Collection__has(val* self, val* p0);
-val* core___core__Collection___first(val* self);
 val* poset___poset__POSet___add_node(val* self, val* p0);
 void poset___poset__POSet___add_edge(val* self, val* p0, val* p1);
-val* poset___poset__POSet___elements(val* self);
+val* poset___poset__POSet___sub(val* self, val* p0);
 short int poset___poset__POSet___has_edge(val* self, val* p0, val* p1);
-val* poset___poset__POSet____91d_93d(val* self, val* p0);
 val* nitc__coloring___poset__POSet___to_conflict_graph(val* self);
 val* poset___poset__POSet___linearize(val* self, val* p0);
 extern const struct class class_poset__POSet;
 #define COLOR_core__HashMap__poset__POSet___35dE__poset__POSetElement__poset__POSet___35dE 0
 #define COLOR_poset__POSet___elements 0
 void poset___poset__POSetElement___core__kernel__Object__init(val* self);
+val* poset___poset__POSetElement___direct_greaters(val* self);
+val* poset___poset__POSetElement___dtos(val* self);
 void poset___poset__POSetElement___poset_61d(val* self, val* p0);
 void poset___poset__POSetElement___element_61d(val* self, val* p0);
 void poset___poset__POSetElement___count_61d(val* self, long p0);
 val* poset___poset__POSetElement___tos(val* self);
 val* poset___poset__POSetElement___froms(val* self);
 val* poset___poset__POSetElement___dfroms(val* self);
-val* poset___poset__POSetElement___dtos(val* self);
 short int poset___poset__POSetElement____60d_61d(val* self, val* p0);
 val* poset___poset__POSetElement___poset(val* self);
 long poset___poset__POSetElement___count(val* self);
-short int poset___poset__POSetElement____60d(val* self, val* p0);
-val* poset___poset__POSetElement___direct_greaters(val* self);
 val* poset___poset__POSetElement___greaters(val* self);
 val* poset___poset__POSetElement___smallers(val* self);
+short int poset___poset__POSetElement____60d(val* self, val* p0);
 val* poset___poset__POSetElement___element(val* self);
 val* poset___poset__POSetElement___direct_smallers(val* self);
 extern const struct class class_poset__POSetElement;
@@ -2273,6 +2209,9 @@ short int ordered_tree___ordered_tree__OrderedTree___core__kernel__Object___61d_
 long ordered_tree___ordered_tree__OrderedTree___core__kernel__Object__hash(val* self);
 void ordered_tree___ordered_tree__OrderedTree___add(val* self, val* p0, val* p1);
 void ordered_tree___ordered_tree__OrderedTree___sort_with(val* self, val* p0);
+val* ordered_tree___ordered_tree__OrderedTree___roots(val* self);
+val* ordered_tree___ordered_tree__OrderedTree___sub(val* self);
+val* ordered_tree___ordered_tree__OrderedTree___core__kernel__Cloneable__clone(val* self);
 val* ordered_tree___ordered_tree__OrderedTree___core__array__Collection__to_a(val* self);
 long ordered_tree___ordered_tree__OrderedTree___core__abstract_collection__Collection__length(val* self);
 short int ordered_tree___ordered_tree__OrderedTree___core__abstract_collection__Collection__is_empty(val* self);
@@ -2280,13 +2219,13 @@ val* ordered_tree___ordered_tree__OrderedTree___core__abstract_collection__Colle
 short int ordered_tree___ordered_tree__OrderedTree___core__abstract_collection__Collection__has(val* self, val* p0);
 val* ordered_tree___ordered_tree__OrderedTree___core__abstract_collection__Collection__first(val* self);
 void ordered_tree___ordered_tree__OrderedTree___core__stream__Writable__write_to(val* self, val* p0);
-val* ordered_tree___ordered_tree__OrderedTree___roots(val* self);
-val* ordered_tree___ordered_tree__OrderedTree___sub(val* self);
 void ordered_tree___ordered_tree__OrderedTree___sub_to_a(val* self, val* p0, val* p1);
 val* ordered_tree___ordered_tree__OrderedTree___parents(val* self);
-val* ordered_tree___ordered_tree__OrderedTree___display(val* self, val* p0);
+void ordered_tree___ordered_tree__OrderedTree___add_all(val* self, val* p0, val* p1);
+void ordered_tree___ordered_tree__OrderedTree___write_line(val* self, val* p0, val* p1, val* p2);
 void ordered_tree___ordered_tree__OrderedTree___sub_write_to(val* self, val* p0, val* p1, val* p2);
 void ordered_tree___ordered_tree__OrderedTree___detach(val* self, val* p0);
+val* ordered_tree___ordered_tree__OrderedTree___display(val* self, val* p0);
 extern const struct class class_ordered_tree__OrderedTree;
 #define COLOR_core__Array__ordered_tree__OrderedTree___35dE 0
 #define COLOR_ordered_tree__OrderedTree___roots 1
@@ -2309,15 +2248,19 @@ void nitc___nitc__Message___core__kernel__Object__init(val* self);
 val* nitc___nitc__Message___core__abstract_text__Object__to_s(val* self);
 short int nitc___nitc__Message___core__kernel__Object___61d_61d(val* self, val* p0);
 short int nitc___nitc__Message___core__kernel__Comparable___60d(val* self, val* p0);
-val* nitc___nitc__Message___to_color_string(val* self);
 void nitc___nitc__Message___location_61d(val* self, val* p0);
 void nitc___nitc__Message___tag_61d(val* self, val* p0);
 void nitc___nitc__Message___text_61d(val* self, val* p0);
-val* nitc___nitc__Message___tag(val* self);
+void nitc___nitc__Message___level_61d(val* self, long p0);
+val* nitc___nitc__Message___to_color_string(val* self);
 val* nitc___nitc__Message___location(val* self);
 val* nitc___nitc__Message___text(val* self);
+val* nitc___nitc__Message___tag(val* self);
 extern const struct class class_nitc__Message;
 void nitc__separate_erasure_compiler___ToolContext___core__kernel__Object__init(val* self);
+val* nitc___nitc__ToolContext___opt_share_dir(val* self);
+val* nitc___nitc__ToolContext___nit_dir(val* self);
+void nitc___nitc__ToolContext___fatal_error(val* self, val* p0, val* p1);
 val* nitc__phase___ToolContext___phases(val* self);
 val* nitc__scope___ToolContext___scope_phase(val* self);
 val* nitc__flow___ToolContext___flow_phase(val* self);
@@ -2338,10 +2281,10 @@ void nitc__modelbuilder___ToolContext___run_global_phases(val* self, val* p0);
 val* nitc__separate_erasure_compiler___ToolContext___opt_erasure(val* self);
 val* nitc__separate_erasure_compiler___ToolContext___opt_no_check_erasure_cast(val* self);
 val* nitc__separate_erasure_compiler___ToolContext___opt_rta(val* self);
+val* nitc___nitc__ToolContext___error(val* self, val* p0, val* p1);
+short int nitc___nitc__ToolContext___check_errors(val* self);
 val* nitc__separate_compiler___ToolContext___opt_separate(val* self);
 val* nitc__loader___ToolContext___opt_path(val* self);
-val* nitc___nitc__ToolContext___nit_dir(val* self);
-short int nitc___nitc__ToolContext___check_errors(val* self);
 val* nitc__loader___ToolContext___opt_only_parse(val* self);
 void nitc___nitc__ToolContext___errors_info(val* self);
 long nitc___nitc__ToolContext___error_count(val* self);
@@ -2369,15 +2312,18 @@ val* nitc__separate_compiler___ToolContext___opt_semi_global(val* self);
 val* nitc__separate_compiler___ToolContext___opt_colo_dead_methods(val* self);
 val* nitc__separate_compiler___ToolContext___opt_tables_metrics(val* self);
 val* nitc__separate_compiler___ToolContext___opt_type_poset(val* self);
-val* nitc__abstract_compiler___ToolContext___opt_no_check_all(val* self);
-val* nitc__modelbuilder_base___ToolContext___modelbuilder_real(val* self);
-void nitc__modelbuilder_base___ToolContext___modelbuilder_real_61d(val* self, val* p0);
-val* nitc___nitc__ToolContext___error(val* self, val* p0, val* p1);
 val* nitc___nitc__ToolContext___messages(val* self);
+val* nitc___nitc__ToolContext___opt_warn(val* self);
+void nitc___nitc__ToolContext___error_count_61d(val* self, long p0);
+val* nitc___nitc__ToolContext___opt_stop_on_first_error(val* self);
 val* nitc___nitc__ToolContext___message_sorter(val* self);
 val* nitc___nitc__ToolContext___opt_no_color(val* self);
 short int nitc___nitc__ToolContext___keep_going(val* self);
+val* nitc__abstract_compiler___ToolContext___opt_no_check_all(val* self);
+val* nitc__modelbuilder_base___ToolContext___modelbuilder_real(val* self);
+void nitc__modelbuilder_base___ToolContext___modelbuilder_real_61d(val* self, val* p0);
 long nitc___nitc__ToolContext___warning_count(val* self);
+void nitc__phase___ToolContext___todo_nmodules_61d(val* self, val* p0);
 val* nitc__phase___ToolContext___phased_modules(val* self);
 short int nitc__phase___ToolContext___semantize_is_lazy(val* self);
 void nitc__phase___ToolContext___phase_process_npropdef(val* self, val* p0, val* p1);
@@ -2404,20 +2350,16 @@ val* nitc__abstract_compiler___ToolContext___opt_release(val* self);
 val* nitc__abstract_compiler___ToolContext___opt_max_c_lines(val* self);
 val* nitc__abstract_compiler___ToolContext___opt_group_c_files(val* self);
 val* nitc__abstract_compiler___ToolContext___opt_debug(val* self);
-void nitc___nitc__ToolContext___error_count_61d(val* self, long p0);
-val* nitc___nitc__ToolContext___opt_stop_on_first_error(val* self);
 val* nitc__platform___ToolContext___platform_from_name(val* self, val* p0);
 val* nitc___nitc__ToolContext___opt_log(val* self);
 val* nitc___nitc__ToolContext___log_directory(val* self);
 val* nitc__transform___ToolContext___opt_no_shortcut_range(val* self);
 val* nitc__phase___ToolContext___opt_disable_phase(val* self);
-void nitc___nitc__ToolContext___fatal_error(val* self, val* p0, val* p1);
 val* nitc__phase___ToolContext___opt_sloppy(val* self);
 void nitc__phase___ToolContext___semantize_is_lazy_61d(val* self, short int p0);
 val* nitc___nitc__ToolContext___warning(val* self, val* p0, val* p1, val* p2);
 void nitc__phase___ToolContext___run_phases_on_npropdef(val* self, val* p0);
 val* nitc__modelbuilder___ToolContext___opt_ignore_visibility(val* self);
-val* nitc___nitc__ToolContext___opt_warn(val* self);
 val* nitc___nitc__ToolContext___opt_help(val* self);
 void nitc___nitc__ToolContext___usage(val* self);
 val* nitc___nitc__ToolContext___opt_version(val* self);
@@ -2426,7 +2368,7 @@ val* nitc___nitc__ToolContext___opt_bash_completion(val* self);
 val* nitc___nitc__ToolContext___opt_stub_man(val* self);
 val* nitc___nitc__ToolContext___tooldescription(val* self);
 void nitc___nitc__ToolContext___nit_dir_61d(val* self, val* p0);
-val* nitc___nitc__ToolContext___compute_nit_dir(val* self);
+val* nitc___nitc__ToolContext___locate_nit_dir(val* self);
 short int nitc___nitc__ToolContext___accept_no_arguments(val* self);
 void nitc___nitc__ToolContext___verbose_level_61d(val* self, long p0);
 val* nitc___nitc__ToolContext___opt_verbose(val* self);
@@ -2437,8 +2379,8 @@ val* nitc___nitc__ToolContext___opt_log_dir(val* self);
 void nitc___nitc__ToolContext___log_directory_61d(val* self, val* p0);
 void nitc___nitc__ToolContext___log_info_61d(val* self, val* p0);
 val* nitc___nitc__ToolContext___advice(val* self, val* p0, val* p1, val* p2);
-val* nitc___nitc__ToolContext___opt_warning(val* self);
 short int nitc___nitc__ToolContext___is_warning_blacklisted(val* self, val* p0, val* p1);
+val* nitc___nitc__ToolContext___opt_warning(val* self);
 void nitc___nitc__ToolContext___warning_count_61d(val* self, long p0);
 val* nitc___nitc__ToolContext___opt_set_dummy_tool(val* self);
 val* nitc___nitc__ToolContext___opt_nit_dir(val* self);
@@ -2463,7 +2405,6 @@ extern const struct class class_nitc__ToolContext;
 #define COLOR_nitc__toolcontext__ToolContext___error_count 7
 #define COLOR_nitc__toolcontext__ToolContext___warning_count 8
 #define COLOR_nitc__toolcontext__ToolContext___log_directory 9
-extern const struct type type_core__Array__nitc__Message;
 #define COLOR_nitc__toolcontext__ToolContext___messages 11
 #define COLOR_nitc__toolcontext__ToolContext___message_sorter 12
 #define COLOR_nitc__toolcontext__ToolContext___keep_going 13
@@ -2476,7 +2417,7 @@ val* NEW_opts__OptionCount(const struct type* type);
 extern const struct type type_opts__OptionCount;
 val* NEW_core__NativeArray(int length, const struct type* type);
 extern const struct type type_core__NativeArray__core__String;
-#define COLOR_core__array__Array__with_native 27
+#define COLOR_core__array__Array__with_native 32
 void opts___opts__OptionCount___init(val* self, val* p0, val* p1);
 #define COLOR_nitc__toolcontext__ToolContext___opt_warn 16
 val* NEW_opts__OptionArray(const struct type* type);
@@ -2493,54 +2434,55 @@ extern const struct type type_opts__OptionString;
 void opts___opts__OptionString___init(val* self, val* p0, val* p1);
 #define COLOR_nitc__toolcontext__ToolContext___opt_log_dir 20
 #define COLOR_nitc__toolcontext__ToolContext___opt_nit_dir 21
-#define COLOR_nitc__toolcontext__ToolContext___opt_help 22
-#define COLOR_nitc__toolcontext__ToolContext___opt_version 23
-#define COLOR_nitc__toolcontext__ToolContext___opt_set_dummy_tool 24
-#define COLOR_nitc__toolcontext__ToolContext___opt_verbose 25
-#define COLOR_nitc__toolcontext__ToolContext___opt_stop_on_first_error 26
-#define COLOR_nitc__toolcontext__ToolContext___opt_keep_going 27
-#define COLOR_nitc__toolcontext__ToolContext___opt_no_color 28
-#define COLOR_nitc__toolcontext__ToolContext___opt_bash_completion 29
-#define COLOR_nitc__toolcontext__ToolContext___opt_stub_man 30
-#define COLOR_nitc__toolcontext__ToolContext___verbose_level 31
-#define COLOR_nitc__toolcontext__ToolContext___tooldescription 32
-#define COLOR_nitc__toolcontext__ToolContext___accept_no_arguments 33
+#define COLOR_nitc__toolcontext__ToolContext___opt_share_dir 22
+#define COLOR_nitc__toolcontext__ToolContext___opt_help 23
+#define COLOR_nitc__toolcontext__ToolContext___opt_version 24
+#define COLOR_nitc__toolcontext__ToolContext___opt_set_dummy_tool 25
+#define COLOR_nitc__toolcontext__ToolContext___opt_verbose 26
+#define COLOR_nitc__toolcontext__ToolContext___opt_stop_on_first_error 27
+#define COLOR_nitc__toolcontext__ToolContext___opt_keep_going 28
+#define COLOR_nitc__toolcontext__ToolContext___opt_no_color 29
+#define COLOR_nitc__toolcontext__ToolContext___opt_bash_completion 30
+#define COLOR_nitc__toolcontext__ToolContext___opt_stub_man 31
+#define COLOR_nitc__toolcontext__ToolContext___verbose_level 32
+#define COLOR_nitc__toolcontext__ToolContext___tooldescription 33
+#define COLOR_nitc__toolcontext__ToolContext___accept_no_arguments 34
 extern const struct type type_poset__POSet__nitc__Phase;
-#define COLOR_nitc__phase__ToolContext___phases 35
-#define COLOR_nitc__phase__ToolContext___opt_disable_phase 36
-#define COLOR_nitc__phase__ToolContext___opt_sloppy 37
-#define COLOR_nitc__phase__ToolContext___semantize_is_lazy 40
+#define COLOR_nitc__phase__ToolContext___phases 38
+#define COLOR_nitc__phase__ToolContext___opt_disable_phase 39
+#define COLOR_nitc__phase__ToolContext___opt_sloppy 40
+#define COLOR_nitc__phase__ToolContext___semantize_is_lazy 43
 extern const struct type type_core__HashSet__nitc__AModule;
-#define COLOR_nitc__phase__ToolContext___phased_modules 41
+#define COLOR_nitc__phase__ToolContext___phased_modules 44
 val* NEW_nitc__literal__LiteralPhase(const struct type* type);
 extern const struct type type_nitc__literal__LiteralPhase;
 #define COLOR_nitc__phase__Phase__toolcontext_61d 12
 #define COLOR_nitc__phase__Phase__depends_61d 13
-#define COLOR_nitc__literal__ToolContext___literal_phase 42
+#define COLOR_nitc__literal__ToolContext___literal_phase 46
 #define COLOR_nitc__loader__ToolContext___opt_path 3
 #define COLOR_nitc__loader__ToolContext___opt_only_metamodel 4
 #define COLOR_nitc__loader__ToolContext___opt_only_parse 5
 #define COLOR_nitc__modelbuilder__ToolContext___opt_ignore_visibility 2
-#define COLOR_nitc__mixin__ToolContext___opt_mixins 97
-#define COLOR_nitc__mixin__ToolContext___opt_defines 98
+#define COLOR_nitc__mixin__ToolContext___opt_mixins 101
+#define COLOR_nitc__mixin__ToolContext___opt_defines 102
 val* NEW_nitc__modelize_class__ModelizeClassPhase(const struct type* type);
 extern const struct type type_nitc__modelize_class__ModelizeClassPhase;
 #define COLOR_nitc__modelize_class__ToolContext___modelize_class_phase 1
 val* NEW_nitc__scope__ScopePhase(const struct type* type);
 extern const struct type type_nitc__scope__ScopePhase;
-#define COLOR_nitc__scope__ToolContext___scope_phase 48
+#define COLOR_nitc__scope__ToolContext___scope_phase 52
 val* NEW_nitc__FFILanguageAssignationPhase(const struct type* type);
 extern const struct type type_nitc__FFILanguageAssignationPhase;
-#define COLOR_nitc__light_ffi_base__ToolContext___ffi_language_assignation_phase 99
+#define COLOR_nitc__light_ffi_base__ToolContext___ffi_language_assignation_phase 103
 val* NEW_nitc__flow__FlowPhase(const struct type* type);
 extern const struct type type_nitc__flow__FlowPhase;
 extern const struct type type_core__Array__nitc__Phase;
 extern const char FILE_nitc__scope[];
-#define COLOR_nitc__flow__ToolContext___flow_phase 47
+#define COLOR_nitc__flow__ToolContext___flow_phase 51
 val* NEW_nitc__local_var_init__LocalVarInitPhase(const struct type* type);
 extern const struct type type_nitc__local_var_init__LocalVarInitPhase;
 extern const char FILE_nitc__flow[];
-#define COLOR_nitc__local_var_init__ToolContext___local_var_init_phase 46
+#define COLOR_nitc__local_var_init__ToolContext___local_var_init_phase 50
 val* NEW_nitc__modelize_property__ModelizePropertyPhase(const struct type* type);
 extern const struct type type_nitc__modelize_property__ModelizePropertyPhase;
 extern const char FILE_nitc__modelize_class[];
@@ -2548,81 +2490,81 @@ extern const char FILE_nitc__modelize_class[];
 val* NEW_nitc__platform__PlatformPhase(const struct type* type);
 extern const struct type type_nitc__platform__PlatformPhase;
 extern const char FILE_nitc__modelize_property[];
-#define COLOR_nitc__platform__ToolContext___platform_phase 96
+#define COLOR_nitc__platform__ToolContext___platform_phase 100
 val* NEW_nitc__extern_classes__ExternClassesTypingPhaseAst(const struct type* type);
 extern const struct type type_nitc__extern_classes__ExternClassesTypingPhaseAst;
 extern const char FILE_nitc__light_ffi_base[];
-#define COLOR_nitc__extern_classes__ToolContext___extern_classes_typing_phase_ast 100
+#define COLOR_nitc__extern_classes__ToolContext___extern_classes_typing_phase_ast 104
 val* NEW_nitc__extern_classes__ExternClassesTypingPhaseModel(const struct type* type);
 extern const struct type type_nitc__extern_classes__ExternClassesTypingPhaseModel;
 extern const char FILE_nitc__extern_classes[];
-#define COLOR_nitc__extern_classes__ToolContext___extern_classes_typing_phase_model 101
+#define COLOR_nitc__extern_classes__ToolContext___extern_classes_typing_phase_model 105
 val* NEW_nitc__typing__TypingPhase(const struct type* type);
 extern const struct type type_nitc__typing__TypingPhase;
 extern const char FILE_nitc__local_var_init[];
-#define COLOR_nitc__typing__ToolContext___typing_phase 45
+#define COLOR_nitc__typing__ToolContext___typing_phase 49
 val* NEW_nitc__auto_super_init__AutoSuperInitPhase(const struct type* type);
 extern const struct type type_nitc__auto_super_init__AutoSuperInitPhase;
 extern const char FILE_nitc__typing[];
-#define COLOR_nitc__auto_super_init__ToolContext___auto_super_init_phase 49
+#define COLOR_nitc__auto_super_init__ToolContext___auto_super_init_phase 53
 val* NEW_nitc__transform__TransformPhase(const struct type* type);
 extern const struct type type_nitc__transform__TransformPhase;
 extern const char FILE_nitc__auto_super_init[];
-#define COLOR_nitc__transform__ToolContext___transform_phase 43
-#define COLOR_nitc__transform__ToolContext___opt_no_shortcut_range 44
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_output 74
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_dir 75
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_cc 76
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_main 77
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_make_flags 78
+#define COLOR_nitc__transform__ToolContext___transform_phase 47
+#define COLOR_nitc__transform__ToolContext___opt_no_shortcut_range 48
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_output 78
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_dir 79
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_cc 80
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_main 81
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_make_flags 82
 val* NEW_opts__OptionInt(const struct type* type);
 extern const struct type type_opts__OptionInt;
 void opts___opts__OptionInt___init(val* self, val* p0, long p1, val* p2);
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_max_c_lines 79
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_group_c_files 80
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_compile_dir 81
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_hardening 82
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_covariance 83
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_attr_isset 84
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_assert 85
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_autocast 86
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_null 87
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_all 88
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_typing_test_metrics 89
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_invocation_metrics 90
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_isset_checks_metrics 91
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_stacktrace 92
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_gcc_directive 93
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_release 94
-#define COLOR_nitc__abstract_compiler__ToolContext___opt_debug 95
-#define COLOR_nitc__separate_compiler__ToolContext___opt_separate 54
-#define COLOR_nitc__separate_compiler__ToolContext___opt_no_inline_intern 55
-#define COLOR_nitc__separate_compiler__ToolContext___opt_no_union_attribute 56
-#define COLOR_nitc__separate_compiler__ToolContext___opt_no_shortcut_equate 57
-#define COLOR_nitc__separate_compiler__ToolContext___opt_no_tag_primitives 58
-#define COLOR_nitc__separate_compiler__ToolContext___opt_colors_are_symbols 59
-#define COLOR_nitc__separate_compiler__ToolContext___opt_trampoline_call 60
-#define COLOR_nitc__separate_compiler__ToolContext___opt_guard_call 61
-#define COLOR_nitc__separate_compiler__ToolContext___opt_substitute_monomorph 62
-#define COLOR_nitc__separate_compiler__ToolContext___opt_link_boost 63
-#define COLOR_nitc__separate_compiler__ToolContext___opt_inline_coloring_numbers 64
-#define COLOR_nitc__separate_compiler__ToolContext___opt_inline_some_methods 65
-#define COLOR_nitc__separate_compiler__ToolContext___opt_direct_call_monomorph 66
-#define COLOR_nitc__separate_compiler__ToolContext___opt_direct_call_monomorph0 67
-#define COLOR_nitc__separate_compiler__ToolContext___opt_skip_dead_methods 68
-#define COLOR_nitc__separate_compiler__ToolContext___opt_semi_global 69
-#define COLOR_nitc__separate_compiler__ToolContext___opt_colo_dead_methods 70
-#define COLOR_nitc__separate_compiler__ToolContext___opt_tables_metrics 71
-#define COLOR_nitc__separate_compiler__ToolContext___opt_type_poset 72
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_max_c_lines 83
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_group_c_files 84
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_compile_dir 85
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_hardening 86
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_covariance 87
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_attr_isset 88
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_assert 89
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_autocast 90
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_null 91
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_check_all 92
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_typing_test_metrics 93
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_invocation_metrics 94
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_isset_checks_metrics 95
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_stacktrace 96
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_no_gcc_directive 97
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_release 98
+#define COLOR_nitc__abstract_compiler__ToolContext___opt_debug 99
+#define COLOR_nitc__separate_compiler__ToolContext___opt_separate 58
+#define COLOR_nitc__separate_compiler__ToolContext___opt_no_inline_intern 59
+#define COLOR_nitc__separate_compiler__ToolContext___opt_no_union_attribute 60
+#define COLOR_nitc__separate_compiler__ToolContext___opt_no_shortcut_equate 61
+#define COLOR_nitc__separate_compiler__ToolContext___opt_no_tag_primitives 62
+#define COLOR_nitc__separate_compiler__ToolContext___opt_colors_are_symbols 63
+#define COLOR_nitc__separate_compiler__ToolContext___opt_trampoline_call 64
+#define COLOR_nitc__separate_compiler__ToolContext___opt_guard_call 65
+#define COLOR_nitc__separate_compiler__ToolContext___opt_substitute_monomorph 66
+#define COLOR_nitc__separate_compiler__ToolContext___opt_link_boost 67
+#define COLOR_nitc__separate_compiler__ToolContext___opt_inline_coloring_numbers 68
+#define COLOR_nitc__separate_compiler__ToolContext___opt_inline_some_methods 69
+#define COLOR_nitc__separate_compiler__ToolContext___opt_direct_call_monomorph 70
+#define COLOR_nitc__separate_compiler__ToolContext___opt_direct_call_monomorph0 71
+#define COLOR_nitc__separate_compiler__ToolContext___opt_skip_dead_methods 72
+#define COLOR_nitc__separate_compiler__ToolContext___opt_semi_global 73
+#define COLOR_nitc__separate_compiler__ToolContext___opt_colo_dead_methods 74
+#define COLOR_nitc__separate_compiler__ToolContext___opt_tables_metrics 75
+#define COLOR_nitc__separate_compiler__ToolContext___opt_type_poset 76
 val* NEW_nitc__SeparateCompilerPhase(const struct type* type);
 extern const struct type type_nitc__SeparateCompilerPhase;
-#define COLOR_nitc__separate_compiler__ToolContext___separate_compiler_phase 73
-#define COLOR_nitc__separate_erasure_compiler__ToolContext___opt_erasure 50
-#define COLOR_nitc__separate_erasure_compiler__ToolContext___opt_rta 51
-#define COLOR_nitc__separate_erasure_compiler__ToolContext___opt_no_check_erasure_cast 52
+#define COLOR_nitc__separate_compiler__ToolContext___separate_compiler_phase 77
+#define COLOR_nitc__separate_erasure_compiler__ToolContext___opt_erasure 54
+#define COLOR_nitc__separate_erasure_compiler__ToolContext___opt_rta 55
+#define COLOR_nitc__separate_erasure_compiler__ToolContext___opt_no_check_erasure_cast 56
 val* NEW_nitc__ErasureCompilerPhase(const struct type* type);
 extern const struct type type_nitc__ErasureCompilerPhase;
-#define COLOR_nitc__separate_erasure_compiler__ToolContext___erasure_compiler_phase 53
+#define COLOR_nitc__separate_erasure_compiler__ToolContext___erasure_compiler_phase 57
 void nitc___nitc__BashCompletion___core__kernel__Object__init(val* self);
 short int template___template__Template___is_writing(val* self);
 void template___template__Template___is_writing_61d(val* self, short int p0);
@@ -3027,8 +2969,8 @@ void nitc__parser___nitc__parser__ReduceAction174___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction174;
 void nitc__parser___nitc__parser__ReduceAction175___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction175;
-void nitc__parser___nitc__parser__ReduceAction183___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction183;
+void nitc__parser___nitc__parser__ReduceAction176___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction176;
 void nitc__parser___nitc__parser__ReduceAction184___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction184;
 void nitc__parser___nitc__parser__ReduceAction185___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3053,12 +2995,12 @@ void nitc__parser___nitc__parser__ReduceAction194___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction194;
 void nitc__parser___nitc__parser__ReduceAction195___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction195;
-void nitc__parser___nitc__parser__ReduceAction197___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction197;
+void nitc__parser___nitc__parser__ReduceAction196___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction196;
 void nitc__parser___nitc__parser__ReduceAction198___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction198;
-void nitc__parser___nitc__parser__ReduceAction200___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction200;
+void nitc__parser___nitc__parser__ReduceAction199___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction199;
 void nitc__parser___nitc__parser__ReduceAction201___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction201;
 void nitc__parser___nitc__parser__ReduceAction202___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3189,10 +3131,10 @@ void nitc__parser___nitc__parser__ReduceAction264___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction264;
 void nitc__parser___nitc__parser__ReduceAction265___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction265;
+void nitc__parser___nitc__parser__ReduceAction266___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction266;
 void nitc__parser___nitc__parser__ReduceAction267___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction267;
-void nitc__parser___nitc__parser__ReduceAction268___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction268;
 void nitc__parser___nitc__parser__ReduceAction269___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction269;
 void nitc__parser___nitc__parser__ReduceAction270___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3215,32 +3157,32 @@ void nitc__parser___nitc__parser__ReduceAction278___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction278;
 void nitc__parser___nitc__parser__ReduceAction279___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction279;
+void nitc__parser___nitc__parser__ReduceAction280___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction280;
 void nitc__parser___nitc__parser__ReduceAction281___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction281;
-void nitc__parser___nitc__parser__ReduceAction282___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction282;
 void nitc__parser___nitc__parser__ReduceAction283___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction283;
 void nitc__parser___nitc__parser__ReduceAction284___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction284;
 void nitc__parser___nitc__parser__ReduceAction285___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction285;
+void nitc__parser___nitc__parser__ReduceAction286___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction286;
 void nitc__parser___nitc__parser__ReduceAction287___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction287;
 void nitc__parser___nitc__parser__ReduceAction289___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction289;
-void nitc__parser___nitc__parser__ReduceAction290___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction290;
 void nitc__parser___nitc__parser__ReduceAction291___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction291;
 void nitc__parser___nitc__parser__ReduceAction292___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction292;
+void nitc__parser___nitc__parser__ReduceAction293___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction293;
 void nitc__parser___nitc__parser__ReduceAction294___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction294;
 void nitc__parser___nitc__parser__ReduceAction296___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction296;
-void nitc__parser___nitc__parser__ReduceAction297___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction297;
 void nitc__parser___nitc__parser__ReduceAction298___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction298;
 void nitc__parser___nitc__parser__ReduceAction299___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3253,6 +3195,8 @@ void nitc__parser___nitc__parser__ReduceAction302___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction302;
 void nitc__parser___nitc__parser__ReduceAction303___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction303;
+void nitc__parser___nitc__parser__ReduceAction304___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction304;
 void nitc__parser___nitc__parser__ReduceAction305___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction305;
 void nitc__parser___nitc__parser__ReduceAction307___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3261,40 +3205,40 @@ void nitc__parser___nitc__parser__ReduceAction309___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction309;
 void nitc__parser___nitc__parser__ReduceAction311___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction311;
-void nitc__parser___nitc__parser__ReduceAction312___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction312;
+void nitc__parser___nitc__parser__ReduceAction313___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction313;
 void nitc__parser___nitc__parser__ReduceAction314___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction314;
-void nitc__parser___nitc__parser__ReduceAction315___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction315;
+void nitc__parser___nitc__parser__ReduceAction316___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction316;
 void nitc__parser___nitc__parser__ReduceAction317___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction317;
-void nitc__parser___nitc__parser__ReduceAction318___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction318;
 void nitc__parser___nitc__parser__ReduceAction319___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction319;
+void nitc__parser___nitc__parser__ReduceAction320___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction320;
 void nitc__parser___nitc__parser__ReduceAction321___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction321;
 void nitc__parser___nitc__parser__ReduceAction323___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction323;
-void nitc__parser___nitc__parser__ReduceAction324___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction324;
 void nitc__parser___nitc__parser__ReduceAction325___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction325;
 void nitc__parser___nitc__parser__ReduceAction326___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction326;
+void nitc__parser___nitc__parser__ReduceAction327___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction327;
 void nitc__parser___nitc__parser__ReduceAction328___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction328;
-void nitc__parser___nitc__parser__ReduceAction329___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction329;
 void nitc__parser___nitc__parser__ReduceAction330___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction330;
 void nitc__parser___nitc__parser__ReduceAction331___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction331;
+void nitc__parser___nitc__parser__ReduceAction332___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction332;
 void nitc__parser___nitc__parser__ReduceAction333___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction333;
-void nitc__parser___nitc__parser__ReduceAction334___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction334;
+void nitc__parser___nitc__parser__ReduceAction335___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction335;
 void nitc__parser___nitc__parser__ReduceAction336___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction336;
 void nitc__parser___nitc__parser__ReduceAction338___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3317,8 +3261,6 @@ void nitc__parser___nitc__parser__ReduceAction354___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction354;
 void nitc__parser___nitc__parser__ReduceAction356___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction356;
-void nitc__parser___nitc__parser__ReduceAction357___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction357;
 void nitc__parser___nitc__parser__ReduceAction358___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction358;
 void nitc__parser___nitc__parser__ReduceAction359___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3341,10 +3283,10 @@ void nitc__parser___nitc__parser__ReduceAction367___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction367;
 void nitc__parser___nitc__parser__ReduceAction368___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction368;
+void nitc__parser___nitc__parser__ReduceAction369___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction369;
 void nitc__parser___nitc__parser__ReduceAction370___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction370;
-void nitc__parser___nitc__parser__ReduceAction371___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction371;
 void nitc__parser___nitc__parser__ReduceAction372___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction372;
 void nitc__parser___nitc__parser__ReduceAction373___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3361,28 +3303,28 @@ void nitc__parser___nitc__parser__ReduceAction378___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction378;
 void nitc__parser___nitc__parser__ReduceAction379___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction379;
-void nitc__parser___nitc__parser__ReduceAction382___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction382;
-void nitc__parser___nitc__parser__ReduceAction383___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction383;
+void nitc__parser___nitc__parser__ReduceAction380___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction380;
+void nitc__parser___nitc__parser__ReduceAction381___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction381;
 void nitc__parser___nitc__parser__ReduceAction384___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction384;
 void nitc__parser___nitc__parser__ReduceAction385___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction385;
+void nitc__parser___nitc__parser__ReduceAction386___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction386;
 void nitc__parser___nitc__parser__ReduceAction387___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction387;
-void nitc__parser___nitc__parser__ReduceAction388___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction388;
 void nitc__parser___nitc__parser__ReduceAction389___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction389;
 void nitc__parser___nitc__parser__ReduceAction390___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction390;
+void nitc__parser___nitc__parser__ReduceAction391___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction391;
 void nitc__parser___nitc__parser__ReduceAction392___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction392;
 void nitc__parser___nitc__parser__ReduceAction394___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction394;
-void nitc__parser___nitc__parser__ReduceAction395___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction395;
 void nitc__parser___nitc__parser__ReduceAction396___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction396;
 void nitc__parser___nitc__parser__ReduceAction397___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3391,30 +3333,30 @@ void nitc__parser___nitc__parser__ReduceAction398___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction398;
 void nitc__parser___nitc__parser__ReduceAction399___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction399;
-void nitc__parser___nitc__parser__ReduceAction402___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction402;
-void nitc__parser___nitc__parser__ReduceAction403___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction403;
+void nitc__parser___nitc__parser__ReduceAction400___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction400;
+void nitc__parser___nitc__parser__ReduceAction401___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction401;
 void nitc__parser___nitc__parser__ReduceAction404___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction404;
 void nitc__parser___nitc__parser__ReduceAction405___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction405;
 void nitc__parser___nitc__parser__ReduceAction406___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction406;
+void nitc__parser___nitc__parser__ReduceAction407___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction407;
 void nitc__parser___nitc__parser__ReduceAction408___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction408;
-void nitc__parser___nitc__parser__ReduceAction409___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction409;
 void nitc__parser___nitc__parser__ReduceAction410___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction410;
 void nitc__parser___nitc__parser__ReduceAction411___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction411;
-void nitc__parser___nitc__parser__ReduceAction414___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction414;
+void nitc__parser___nitc__parser__ReduceAction412___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction412;
+void nitc__parser___nitc__parser__ReduceAction413___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction413;
 void nitc__parser___nitc__parser__ReduceAction416___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction416;
-void nitc__parser___nitc__parser__ReduceAction417___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction417;
 void nitc__parser___nitc__parser__ReduceAction418___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction418;
 void nitc__parser___nitc__parser__ReduceAction419___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3433,12 +3375,12 @@ void nitc__parser___nitc__parser__ReduceAction425___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction425;
 void nitc__parser___nitc__parser__ReduceAction426___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction426;
-void nitc__parser___nitc__parser__ReduceAction430___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction430;
-void nitc__parser___nitc__parser__ReduceAction433___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction433;
-void nitc__parser___nitc__parser__ReduceAction434___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction434;
+void nitc__parser___nitc__parser__ReduceAction427___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction427;
+void nitc__parser___nitc__parser__ReduceAction428___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction428;
+void nitc__parser___nitc__parser__ReduceAction432___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction432;
 void nitc__parser___nitc__parser__ReduceAction435___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction435;
 void nitc__parser___nitc__parser__ReduceAction436___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3451,16 +3393,16 @@ void nitc__parser___nitc__parser__ReduceAction439___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction439;
 void nitc__parser___nitc__parser__ReduceAction440___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction440;
+void nitc__parser___nitc__parser__ReduceAction441___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction441;
 void nitc__parser___nitc__parser__ReduceAction442___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction442;
 void nitc__parser___nitc__parser__ReduceAction444___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction444;
-void nitc__parser___nitc__parser__ReduceAction445___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction445;
+void nitc__parser___nitc__parser__ReduceAction446___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction446;
 void nitc__parser___nitc__parser__ReduceAction447___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction447;
-void nitc__parser___nitc__parser__ReduceAction448___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction448;
 void nitc__parser___nitc__parser__ReduceAction449___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction449;
 void nitc__parser___nitc__parser__ReduceAction450___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3483,10 +3425,10 @@ void nitc__parser___nitc__parser__ReduceAction458___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction458;
 void nitc__parser___nitc__parser__ReduceAction459___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction459;
+void nitc__parser___nitc__parser__ReduceAction460___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction460;
 void nitc__parser___nitc__parser__ReduceAction461___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction461;
-void nitc__parser___nitc__parser__ReduceAction462___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction462;
 void nitc__parser___nitc__parser__ReduceAction463___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction463;
 void nitc__parser___nitc__parser__ReduceAction464___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3497,42 +3439,40 @@ void nitc__parser___nitc__parser__ReduceAction466___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction466;
 void nitc__parser___nitc__parser__ReduceAction467___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction467;
+void nitc__parser___nitc__parser__ReduceAction468___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction468;
 void nitc__parser___nitc__parser__ReduceAction469___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction469;
-void nitc__parser___nitc__parser__ReduceAction470___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction470;
+void nitc__parser___nitc__parser__ReduceAction471___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction471;
 void nitc__parser___nitc__parser__ReduceAction472___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction472;
-void nitc__parser___nitc__parser__ReduceAction473___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction473;
-void nitc__parser___nitc__parser__ReduceAction476___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction476;
-void nitc__parser___nitc__parser__ReduceAction477___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction477;
-void nitc__parser___nitc__parser__ReduceAction480___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction480;
+void nitc__parser___nitc__parser__ReduceAction474___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction474;
+void nitc__parser___nitc__parser__ReduceAction475___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction475;
+void nitc__parser___nitc__parser__ReduceAction478___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction478;
+void nitc__parser___nitc__parser__ReduceAction479___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction479;
 void nitc__parser___nitc__parser__ReduceAction482___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction482;
-void nitc__parser___nitc__parser__ReduceAction483___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction483;
 void nitc__parser___nitc__parser__ReduceAction484___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction484;
+void nitc__parser___nitc__parser__ReduceAction485___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction485;
 void nitc__parser___nitc__parser__ReduceAction486___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction486;
 void nitc__parser___nitc__parser__ReduceAction488___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction488;
-void nitc__parser___nitc__parser__ReduceAction489___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction489;
-void nitc__parser___nitc__parser__ReduceAction492___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction492;
-void nitc__parser___nitc__parser__ReduceAction853___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction853;
-void nitc__parser___nitc__parser__ReduceAction855___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction855;
+void nitc__parser___nitc__parser__ReduceAction490___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction490;
+void nitc__parser___nitc__parser__ReduceAction491___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction491;
+void nitc__parser___nitc__parser__ReduceAction494___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction494;
 void nitc__parser___nitc__parser__ReduceAction856___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction856;
-void nitc__parser___nitc__parser__ReduceAction857___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction857;
 void nitc__parser___nitc__parser__ReduceAction858___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction858;
 void nitc__parser___nitc__parser__ReduceAction859___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3545,30 +3485,22 @@ void nitc__parser___nitc__parser__ReduceAction862___nitc__parser_work__ReduceAct
 extern const struct class class_nitc__parser__ReduceAction862;
 void nitc__parser___nitc__parser__ReduceAction863___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction863;
+void nitc__parser___nitc__parser__ReduceAction864___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction864;
+void nitc__parser___nitc__parser__ReduceAction865___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction865;
 void nitc__parser___nitc__parser__ReduceAction866___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction866;
-void nitc__parser___nitc__parser__ReduceAction867___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction867;
-void nitc__parser___nitc__parser__ReduceAction891___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction891;
-void nitc__parser___nitc__parser__ReduceAction892___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction892;
-void nitc__parser___nitc__parser__ReduceAction1053___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1053;
-void nitc__parser___nitc__parser__ReduceAction1054___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1054;
-void nitc__parser___nitc__parser__ReduceAction1055___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1055;
-void nitc__parser___nitc__parser__ReduceAction1056___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1056;
-void nitc__parser___nitc__parser__ReduceAction1057___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1057;
-void nitc__parser___nitc__parser__ReduceAction1058___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1058;
-void nitc__parser___nitc__parser__ReduceAction1060___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1060;
-void nitc__parser___nitc__parser__ReduceAction1062___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1062;
+void nitc__parser___nitc__parser__ReduceAction869___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction869;
+void nitc__parser___nitc__parser__ReduceAction870___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction870;
+void nitc__parser___nitc__parser__ReduceAction894___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction894;
+void nitc__parser___nitc__parser__ReduceAction895___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction895;
+void nitc__parser___nitc__parser__ReduceAction1063___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1063;
 void nitc__parser___nitc__parser__ReduceAction1064___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction1064;
 void nitc__parser___nitc__parser__ReduceAction1065___nitc__parser_work__ReduceAction__action(val* self, val* p0);
@@ -3583,34 +3515,48 @@ void nitc__parser___nitc__parser__ReduceAction1070___nitc__parser_work__ReduceAc
 extern const struct class class_nitc__parser__ReduceAction1070;
 void nitc__parser___nitc__parser__ReduceAction1072___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction1072;
+void nitc__parser___nitc__parser__ReduceAction1074___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1074;
+void nitc__parser___nitc__parser__ReduceAction1075___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1075;
+void nitc__parser___nitc__parser__ReduceAction1076___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1076;
+void nitc__parser___nitc__parser__ReduceAction1077___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1077;
 void nitc__parser___nitc__parser__ReduceAction1078___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction1078;
-void nitc__parser___nitc__parser__ReduceAction1086___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1086;
-void nitc__parser___nitc__parser__ReduceAction1087___nitc__parser_work__ReduceAction__action(val* self, val* p0);
-extern const struct class class_nitc__parser__ReduceAction1087;
+void nitc__parser___nitc__parser__ReduceAction1080___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1080;
+void nitc__parser___nitc__parser__ReduceAction1082___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1082;
 void nitc__parser___nitc__parser__ReduceAction1088___nitc__parser_work__ReduceAction__action(val* self, val* p0);
 extern const struct class class_nitc__parser__ReduceAction1088;
+void nitc__parser___nitc__parser__ReduceAction1096___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1096;
+void nitc__parser___nitc__parser__ReduceAction1097___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1097;
+void nitc__parser___nitc__parser__ReduceAction1098___nitc__parser_work__ReduceAction__action(val* self, val* p0);
+extern const struct class class_nitc__parser__ReduceAction1098;
 void nitc___nitc__ANodes___core__kernel__Object__init(val* self);
 void nitc___nitc__ANodes___parent_61d(val* self, val* p0);
 void nitc___nitc__ANodes___hook_add(val* self, val* p0);
 val* nitc___nitc__ANodes___items(val* self);
 void nitc___nitc__ANodes___hook_remove(val* self, val* p0);
 val* nitc___nitc__ANodes___parent(val* self);
+void nitc___nitc__ANodes___visit_all(val* self, val* p0);
+void nitc___nitc__ANodes___unsafe_add_all(val* self, val* p0);
+short int nitc___nitc__ANodes___replace_child(val* self, val* p0, val* p1);
 long nitc___nitc__ANodes___core__abstract_collection__Collection__length(val* self);
 short int nitc___nitc__ANodes___core__abstract_collection__Collection__is_empty(val* self);
 val* nitc___nitc__ANodes___core__abstract_collection__Collection__iterator(val* self);
 short int nitc___nitc__ANodes___core__abstract_collection__Collection__has(val* self, val* p0);
-void nitc___nitc__ANodes___visit_all(val* self, val* p0);
-void nitc___nitc__ANodes___unsafe_add_all(val* self, val* p0);
 val* nitc___nitc__ANodes___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
 val* nitc___nitc__ANodes___core__abstract_collection__SequenceRead__reverse_iterator(val* self);
-short int nitc___nitc__ANodes___replace_child(val* self, val* p0, val* p1);
 void nitc___nitc__ANodes___core__abstract_collection__Sequence__push(val* self, val* p0);
+val* nitc___nitc__ANodes___core__abstract_collection__Sequence__shift(val* self);
 void nitc___nitc__ANodes___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1);
 void nitc___nitc__ANodes___core__abstract_collection__Sequence__remove_at(val* self, long p0);
 val* nitc___nitc__ANodes___core__abstract_collection__Sequence__pop(val* self);
-val* nitc___nitc__ANodes___core__abstract_collection__Sequence__shift(val* self);
 void nitc___nitc__ANodes___core__abstract_collection__Sequence__unshift(val* self, val* p0);
 extern const struct class class_nitc__ANodes;
 #define COLOR_core__Array__nitc__ANodes___35dE 0
@@ -3622,6 +3568,7 @@ void nitc___nitc__Token___ANode__visit_all(val* self, val* p0);
 short int nitc__modelbuilder_base___ANode___is_broken(val* self);
 val* nitc___nitc__ANode___hot_location(val* self);
 void nitc__modelbuilder_base___ANode___is_broken_61d(val* self, short int p0);
+void nitc___nitc__ANode___debug(val* self, val* p0);
 void nitc__literal___ANode___accept_literal(val* self, val* p0);
 void nitc___nitc__ANode___parent_61d(val* self, val* p0);
 void nitc__transform___ANode___full_transform_visitor(val* self, val* p0);
@@ -3632,11 +3579,11 @@ void nitc__flow___ANode___accept_flow_visitor(val* self, val* p0);
 void nitc__local_var_init___ANode___accept_local_var_visitor(val* self, val* p0);
 void nitc__auto_super_init___ANode___accept_auto_super_init(val* self, val* p0);
 void nitc__transform___ANode___accept_transform_visitor(val* self, val* p0);
-void nitc___nitc__ANode___debug(val* self, val* p0);
 void nitc___nitc__ANode___location_61d(val* self, val* p0);
 void nitc___nitc__ANode___replace_with(val* self, val* p0);
 void nitc__typing___ANode___accept_post_typing(val* self, val* p0);
 void nitc___nitc__Token___ANode__replace_child(val* self, val* p0, val* p1);
+val* nitc__typing___ANode___bad_expr_message(val* self, val* p0);
 val* nitc__lexer_work___Token___text(val* self);
 long nitc__lexer___TEol___nitc__lexer_work__Token__parser_index(val* self);
 void nitc___nitc__Token___next_token_61d(val* self, val* p0);
@@ -3696,6 +3643,9 @@ extern const struct class class_nitc__TKwis;
 long nitc__lexer___TKwdo___nitc__lexer_work__Token__parser_index(val* self);
 void nitc__lexer___TKwdo___init_tk(val* self, val* p0);
 extern const struct class class_nitc__TKwdo;
+long nitc__lexer___TKwcatch___nitc__lexer_work__Token__parser_index(val* self);
+void nitc__lexer___TKwcatch___init_tk(val* self, val* p0);
+extern const struct class class_nitc__TKwcatch;
 long nitc__lexer___TKwvar___nitc__lexer_work__Token__parser_index(val* self);
 void nitc__lexer___TKwvar___init_tk(val* self, val* p0);
 extern const struct class class_nitc__TKwvar;
@@ -3801,6 +3751,9 @@ extern const struct class class_nitc__TKwlabel;
 long nitc__lexer___TKwwith___nitc__lexer_work__Token__parser_index(val* self);
 void nitc__lexer___TKwwith___init_tk(val* self, val* p0);
 extern const struct class class_nitc__TKwwith;
+long nitc__lexer___TKwyield___nitc__lexer_work__Token__parser_index(val* self);
+void nitc__lexer___TKwyield___init_tk(val* self, val* p0);
+extern const struct class class_nitc__TKwyield;
 long nitc__lexer___TKwdebug___nitc__lexer_work__Token__parser_index(val* self);
 void nitc__lexer___TKwdebug___init_tk(val* self, val* p0);
 extern const struct class class_nitc__TKwdebug;
@@ -4000,11 +3953,6 @@ extern const struct class class_nitc__AParserError;
 void nitc__parser_prod___AModule___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc___nitc__Prod___ANode__replace_with(val* self, val* p0);
 void nitc__parser_prod___AModule___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-val* nitc__parser_work___Prod___collect_text(val* self);
-val* nitc___nitc__Prod___get_annotations(val* self, val* p0);
-val* nitc___nitc__Prod___n_annotations(val* self);
-val* nitc__annotation___Prod___get_single_annotation(val* self, val* p0, val* p1);
-void nitc___nitc__Prod___n_annotations_61d(val* self, val* p0);
 val* nitc__loader___AModule___mmodule(val* self);
 val* nitc___nitc__AModule___n_classdefs(val* self);
 void nitc__literal___AModule___do_literal(val* self, val* p0);
@@ -4012,6 +3960,11 @@ val* nitc___nitc__AModule___n_extern_code_blocks(val* self);
 void nitc__loader___AModule___mmodule_61d(val* self, val* p0);
 short int nitc__loader___AModule___is_importation_done(val* self);
 void nitc__loader___AModule___is_importation_done_61d(val* self, short int p0);
+val* nitc__parser_work___Prod___collect_text(val* self);
+val* nitc___nitc__Prod___get_annotations(val* self, val* p0);
+val* nitc___nitc__Prod___n_annotations(val* self);
+val* nitc__annotation___Prod___get_single_annotation(val* self, val* p0, val* p1);
+void nitc___nitc__Prod___n_annotations_61d(val* self, val* p0);
 val* nitc___nitc__AModule___n_imports(val* self);
 short int nitc__modelize_class___AModule___build_classes_is_done(val* self);
 void nitc__modelize_class___AModule___build_classes_is_done_61d(val* self, short int p0);
@@ -4024,22 +3977,22 @@ extern const struct class class_nitc__AModule;
 val* NEW_nitc__ANodes(const struct type* type);
 extern const struct type type_nitc__ANodes__nitc__AImport;
 #define COLOR_nitc__parser_nodes__ANodes__parent_61d 12
-#define COLOR_nitc__parser_nodes__AModule___n_imports 10
+#define COLOR_nitc__parser_nodes__AModule___n_imports 8
 extern const struct type type_nitc__ANodes__nitc__AExternCodeBlock;
 #define COLOR_nitc__parser_nodes__AModule___n_extern_code_blocks 11
 extern const struct type type_nitc__ANodes__nitc__AClassdef;
 #define COLOR_nitc__parser_nodes__AModule___n_classdefs 12
-#define COLOR_nitc__loader__AModule___is_importation_done 8
-#define COLOR_nitc__modelize_class__AModule___build_classes_is_done 5
+#define COLOR_nitc__loader__AModule___is_importation_done 6
+#define COLOR_nitc__modelize_class__AModule___build_classes_is_done 3
 extern const struct type type_core__HashMap__nitc__MClass__nitc__AClassdef;
-#define COLOR_nitc__modelize_class__AModule___mclass2nclassdef 6
+#define COLOR_nitc__modelize_class__AModule___mclass2nclassdef 4
 void nitc__parser_prod___AModuledecl___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AModuledecl___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AModuledecl___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 val* nitc___nitc__AModuledecl___n_name(val* self);
 void nitc__parser_prod___AModuledecl___init_amoduledecl(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 void nitc__parser_prod___AModuledecl___n_kwmodule_61d(val* self, val* p0);
 void nitc__parser_prod___AModuledecl___n_name_61d(val* self, val* p0);
+void nitc__parser_prod___AModuledecl___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 val* nitc___nitc__ADefinition___n_kwredef(val* self);
 val* nitc___nitc__ADefinition___n_doc(val* self);
 val* nitc___nitc__ADefinition___n_visibility(val* self);
@@ -4049,7 +4002,6 @@ void nitc__parser_prod___AModuledecl___nitc__parser_nodes__ADefinition__n_visibi
 extern const struct class class_nitc__AModuledecl;
 void nitc__parser_prod___AStdImport___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AStdImport___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AStdImport___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 val* nitc___nitc__AImport___n_visibility(val* self);
 void nitc__parser_prod___AStdImport___nitc__parser_nodes__AImport__n_visibility_61d(val* self, val* p0);
 void nitc__parser_prod___AStdImport___nitc__parser_nodes__AImport__n_kwimport_61d(val* self, val* p0);
@@ -4057,6 +4009,7 @@ val* nitc___nitc__AStdImport___n_name(val* self);
 void nitc__loader___AStdImport___mmodule_61d(val* self, val* p0);
 val* nitc__loader___AStdImport___mmodule(val* self);
 void nitc__parser_prod___AStdImport___init_astdimport(val* self, val* p0, val* p1, val* p2, val* p3);
+void nitc__parser_prod___AStdImport___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__parser_prod___AStdImport___n_name_61d(val* self, val* p0);
 extern const struct class class_nitc__AStdImport;
 void nitc__parser_prod___ANoImport___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
@@ -4098,12 +4051,10 @@ val* nitc__modelize_class___AClassdef___all_defs(val* self);
 val* nitc__modelize_class___AClassdef___mclassdef(val* self);
 short int nitc__modelize_property___AClassdef___build_properties_is_done(val* self);
 void nitc__modelize_property___AClassdef___build_properties_is_done_61d(val* self, short int p0);
-val* nitc__modelize_property___AClassdef___mfree_init(val* self);
 void nitc__modelize_class___AClassdef___mclass_61d(val* self, val* p0);
 void nitc__modelize_class___AClassdef___all_defs_61d(val* self, val* p0);
 val* nitc__modelize_class___AClassdef___mclass(val* self);
 void nitc__modelize_class___AClassdef___mclassdef_61d(val* self, val* p0);
-void nitc__modelize_property___AClassdef___mfree_init_61d(val* self, val* p0);
 void nitc__abstract_compiler___AClassdef___compile_to_c(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___AStdClassdef___nitc__parser_nodes__ADefinition__n_doc_61d(val* self, val* p0);
 void nitc__parser_prod___AStdClassdef___nitc__parser_nodes__ADefinition__n_kwredef_61d(val* self, val* p0);
@@ -4122,10 +4073,10 @@ void nitc__parser_prod___AStdClassdef___n_extern_code_block_61d(val* self, val* 
 void nitc__parser_prod___AStdClassdef___n_kwend_61d(val* self, val* p0);
 extern const struct class class_nitc__AStdClassdef;
 extern const struct type type_nitc__ANodes__nitc__APropdef;
-#define COLOR_nitc__parser_nodes__AClassdef___n_propdefs 10
-#define COLOR_nitc__modelize_property__AClassdef___build_properties_is_done 5
+#define COLOR_nitc__parser_nodes__AClassdef___n_propdefs 7
+#define COLOR_nitc__modelize_property__AClassdef___build_properties_is_done 3
 extern const struct type type_nitc__ANodes__nitc__AFormaldef;
-#define COLOR_nitc__parser_nodes__AStdClassdef___n_formaldefs 17
+#define COLOR_nitc__parser_nodes__AStdClassdef___n_formaldefs 16
 void nitc__parser_prod___ATopClassdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ATopClassdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___ATopClassdef___init_atopclassdef(val* self, val* p0);
@@ -4168,19 +4119,18 @@ void nitc__parser_prod___AExternClasskind___n_kwclass_61d(val* self, val* p0);
 extern const struct class class_nitc__AExternClasskind;
 void nitc__parser_prod___AFormaldef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AFormaldef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AFormaldef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 val* nitc___nitc__AFormaldef___n_type(val* self);
 val* nitc___nitc__AFormaldef___n_id(val* self);
 void nitc__modelize_class___AFormaldef___bound_61d(val* self, val* p0);
 void nitc__parser_prod___AFormaldef___init_aformaldef(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___AFormaldef___n_id_61d(val* self, val* p0);
 void nitc__parser_prod___AFormaldef___n_type_61d(val* self, val* p0);
+void nitc__parser_prod___AFormaldef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 extern const struct class class_nitc__AFormaldef;
 void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 val* nitc___nitc__AAttrPropdef___ANode__hot_location(val* self);
 void nitc__flow___APropdef___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__modelize_property___AAttrPropdef___APropdef__build_property(val* self, val* p0, val* p1);
 void nitc__modelize_property___AAttrPropdef___APropdef__build_signature(val* self, val* p0);
 val* nitc__modelize_property___APropdef___mpropdef(val* self);
@@ -4188,14 +4138,15 @@ void nitc__modelize_property___AAttrPropdef___APropdef__check_signature(val* sel
 void nitc__scope___APropdef___do_scope(val* self, val* p0);
 void nitc__flow___APropdef___do_flow(val* self, val* p0);
 void nitc__local_var_init___APropdef___do_local_var_init(val* self, val* p0);
+void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___AAttrPropdef___APropdef__do_typing(val* self, val* p0);
 short int nitc__phase___APropdef___is_phased(val* self);
 void nitc__phase___APropdef___is_phased_61d(val* self, short int p0);
-void nitc__abstract_compiler___AAttrPropdef___APropdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
-val* nitc__modelize_property___APropdef___new_property_visibility(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__ADefinition__n_doc_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__ADefinition__n_kwredef_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrPropdef___nitc__parser_nodes__ADefinition__n_visibility_61d(val* self, val* p0);
+void nitc__abstract_compiler___AAttrPropdef___APropdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
+val* nitc__modelize_property___APropdef___new_property_visibility(val* self, val* p0, val* p1, val* p2);
 short int nitc__modelize_property___APropdef___check_redef_keyword(val* self, val* p0, val* p1, val* p2, short int p3, val* p4);
 void nitc__modelize_property___APropdef___check_redef_property_visibility(val* self, val* p0, val* p1, val* p2);
 void nitc__modelize_property___APropdef___set_doc(val* self, val* p0, val* p1);
@@ -4204,10 +4155,13 @@ void nitc__modelize_property___AAttrPropdef___APropdef__check_repeated_types(val
 void nitc__typing___APropdef___selfvariable_61d(val* self, val* p0);
 void nitc__flow___APropdef___before_flow_context_61d(val* self, val* p0);
 void nitc__flow___APropdef___after_flow_context_61d(val* self, val* p0);
+val* nitc__scope___APropdef___return_mark(val* self);
+void nitc__scope___APropdef___return_mark_61d(val* self, val* p0);
 short int nitc__abstract_compiler___AAttrPropdef___APropdef__can_inline(val* self);
 val* nitc__modelize_property___AAttrPropdef___mreadpropdef(val* self);
 short int nitc__modelize_property___AAttrPropdef___noinit(val* self);
 short int nitc__modelize_property___AAttrPropdef___has_value(val* self);
+short int nitc__modelize_property___AAttrPropdef___is_optional(val* self);
 val* nitc__modelize_property___AAttrPropdef___mwritepropdef(val* self);
 val* nitc___nitc__AAttrPropdef___n_expr(val* self);
 val* nitc___nitc__AAttrPropdef___n_block(val* self);
@@ -4219,6 +4173,7 @@ void nitc__modelize_property___AAttrPropdef___has_value_61d(val* self, short int
 void nitc__modelize_property___AAttrPropdef___noinit_61d(val* self, short int p0);
 void nitc__modelize_property___AAttrPropdef___is_lazy_61d(val* self, short int p0);
 void nitc__modelize_property___AAttrPropdef___mlazypropdef_61d(val* self, val* p0);
+void nitc__modelize_property___AAttrPropdef___is_optional_61d(val* self, short int p0);
 void nitc__modelize_property___AAttrPropdef___mwritepropdef_61d(val* self, val* p0);
 val* nitc___nitc__AAttrPropdef___n_type(val* self);
 void nitc__modelize_property___AAttrPropdef___mtype_61d(val* self, val* p0);
@@ -4237,22 +4192,23 @@ void nitc__parser_prod___AAttrPropdef___n_block_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrPropdef___n_kwend_61d(val* self, val* p0);
 void nitc__abstract_compiler___AAttrPropdef___init_expr(val* self, val* p0, val* p1);
 extern const struct class class_nitc__AAttrPropdef;
-#define COLOR_nitc__phase__APropdef___is_phased 6
-#define COLOR_nitc__modelize_property__AAttrPropdef___noinit 14
-#define COLOR_nitc__modelize_property__AAttrPropdef___is_lazy 15
-#define COLOR_nitc__modelize_property__AAttrPropdef___has_value 16
+#define COLOR_nitc__phase__APropdef___is_phased 4
+#define COLOR_nitc__modelize_property__AAttrPropdef___noinit 15
+#define COLOR_nitc__modelize_property__AAttrPropdef___is_lazy 16
+#define COLOR_nitc__modelize_property__AAttrPropdef___is_optional 17
+#define COLOR_nitc__modelize_property__AAttrPropdef___has_value 18
 void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 val* nitc___nitc__AMethPropdef___ANode__hot_location(val* self);
 void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__modelize_property___AMethPropdef___APropdef__build_property(val* self, val* p0, val* p1);
 void nitc__modelize_property___AMethPropdef___APropdef__build_signature(val* self, val* p0);
 void nitc__modelize_property___AMethPropdef___APropdef__check_signature(val* self, val* p0);
+void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___AMethPropdef___APropdef__do_typing(val* self, val* p0);
-void nitc__abstract_compiler___AMethPropdef___APropdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__ADefinition__n_doc_61d(val* self, val* p0);
 void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__ADefinition__n_kwredef_61d(val* self, val* p0);
 void nitc__parser_prod___AMethPropdef___nitc__parser_nodes__ADefinition__n_visibility_61d(val* self, val* p0);
+void nitc__abstract_compiler___AMethPropdef___APropdef__compile_to_c(val* self, val* p0, val* p1, val* p2);
 void nitc__modelize_property___AMethPropdef___APropdef__check_repeated_types(val* self, val* p0);
 short int nitc__separate_compiler___AMethPropdef___nitc__abstract_compiler__APropdef__can_inline(val* self);
 val* nitc___nitc__AMethPropdef___n_extern_code_block(val* self);
@@ -4291,8 +4247,8 @@ short int nitc__abstract_compiler___AMethPropdef___APropdef__can_inline(val* sel
 short int nitc__abstract_compiler___AMethPropdef___compile_externinit_to_c(val* self, val* p0, val* p1, val* p2);
 short int nitc__abstract_compiler___AMethPropdef___compile_externmeth_to_c(val* self, val* p0, val* p1, val* p2);
 extern const struct class class_nitc__AMethPropdef;
-#define COLOR_nitc__modelize_property__AMethPropdef___is_autoinit 10
-#define COLOR_nitc__auto_super_init__AMethPropdef___auto_super_call 25
+#define COLOR_nitc__modelize_property__AMethPropdef___is_autoinit 14
+#define COLOR_nitc__auto_super_init__AMethPropdef___auto_super_call 26
 void nitc__parser_prod___AMainMethPropdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AMainMethPropdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___AMainMethPropdef___nitc__parser_nodes__ADefinition__n_kwredef_61d(val* self, val* p0);
@@ -4302,15 +4258,15 @@ extern const struct class class_nitc__AMainMethPropdef;
 void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__astvalidation___AAnnotation___ANode__accept_ast_validation(val* self, val* p0);
 void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__modelize_property___APropdef___build_property(val* self, val* p0, val* p1);
 void nitc__modelize_property___APropdef___build_signature(val* self, val* p0);
 void nitc__modelize_property___APropdef___check_signature(val* self, val* p0);
+void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___APropdef___do_typing(val* self, val* p0);
-void nitc__abstract_compiler___APropdef___compile_to_c(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__ADefinition__n_doc_61d(val* self, val* p0);
 void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__ADefinition__n_kwredef_61d(val* self, val* p0);
 void nitc__parser_prod___AAnnotPropdef___nitc__parser_nodes__ADefinition__n_visibility_61d(val* self, val* p0);
+void nitc__abstract_compiler___APropdef___compile_to_c(val* self, val* p0, val* p1, val* p2);
 void nitc__modelize_property___APropdef___check_repeated_types(val* self, val* p0);
 short int nitc__abstract_compiler___APropdef___can_inline(val* self);
 val* nitc___nitc__AAnnotation___name(val* self);
@@ -4325,7 +4281,7 @@ val* nitc__annotation___AAnnotation___arg_as_string(val* self, val* p0);
 void nitc__parser_prod___AAnnotPropdef___init_aannotpropdef(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5, val* p6, val* p7);
 extern const struct class class_nitc__AAnnotPropdef;
 extern const struct type type_nitc__ANodes__nitc__AExpr;
-#define COLOR_nitc__parser_nodes__AAnnotation___n_args 15
+#define COLOR_nitc__parser_nodes__AAnnotation___n_args 16
 void nitc__parser_prod___ASuperPropdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ASuperPropdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___ASuperPropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
@@ -4344,7 +4300,7 @@ val* nitc___nitc__AExternCalls___n_extern_calls(val* self);
 void nitc__parser_prod___AExternCalls___n_kwimport_61d(val* self, val* p0);
 extern const struct class class_nitc__AExternCalls;
 extern const struct type type_nitc__ANodes__nitc__AExternCall;
-#define COLOR_nitc__parser_nodes__AExternCalls___n_extern_calls 6
+#define COLOR_nitc__parser_nodes__AExternCalls___n_extern_calls 4
 void nitc__parser_prod___ALocalPropExternCall___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ALocalPropExternCall___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___ALocalPropExternCall___init_alocalpropexterncall(val* self, val* p0);
@@ -4392,10 +4348,10 @@ void nitc__parser_prod___AAsNotNullableExternCall___n_kwnullable_61d(val* self, 
 extern const struct class class_nitc__AAsNotNullableExternCall;
 void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__modelize_property___ATypePropdef___APropdef__build_property(val* self, val* p0, val* p1);
 void nitc__modelize_property___ATypePropdef___APropdef__build_signature(val* self, val* p0);
 void nitc__modelize_property___ATypePropdef___APropdef__check_signature(val* self, val* p0);
+void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__ADefinition__n_doc_61d(val* self, val* p0);
 void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__ADefinition__n_kwredef_61d(val* self, val* p0);
 void nitc__parser_prod___ATypePropdef___nitc__parser_nodes__ADefinition__n_visibility_61d(val* self, val* p0);
@@ -4551,6 +4507,11 @@ extern const struct class class_nitc__AQid;
 void nitc__parser_prod___AQclassid___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AQclassid___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 val* nitc___nitc__AQclassid___n_id(val* self);
+val* nitc___nitc__AQclassid___n_qualified(val* self);
+short int nitc__modelbuilder_base___AQclassid___accept(val* self, val* p0);
+val* nitc__modelbuilder_base___AQclassid___full_name(val* self);
+val* nitc__modelbuilder_base___AQclassid___mpackname(val* self);
+val* nitc__modelbuilder_base___AQclassid___mmodname(val* self);
 void nitc__parser_prod___AQclassid___init_aqclassid(val* self, val* p0, val* p1);
 void nitc__parser_prod___AQclassid___n_qualified_61d(val* self, val* p0);
 void nitc__parser_prod___AQclassid___n_id_61d(val* self, val* p0);
@@ -4575,14 +4536,13 @@ void nitc__parser_prod___ASignature___n_type_61d(val* self, val* p0);
 extern const struct class class_nitc__ASignature;
 extern const struct type type_nitc__ANodes__nitc__AParam;
 #define COLOR_nitc__parser_nodes__ASignature___n_params 11
-#define COLOR_nitc__modelize_property__ASignature___is_visited 5
-#define COLOR_nitc__modelize_property__ASignature___param_names 6
-#define COLOR_nitc__modelize_property__ASignature___param_types 7
-#define COLOR_nitc__modelize_property__ASignature___vararg_rank 8
+#define COLOR_nitc__modelize_property__ASignature___is_visited 3
+#define COLOR_nitc__modelize_property__ASignature___param_names 4
+#define COLOR_nitc__modelize_property__ASignature___param_types 5
+#define COLOR_nitc__modelize_property__ASignature___vararg_rank 6
 void nitc__parser_prod___AParam___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__scope___AParam___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__parser_prod___AParam___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AParam___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__parser_prod___AParam___init_aparam(val* self, val* p0, val* p1, val* p2, val* p3);
 void nitc__modelize_property___AParam___mparameter_61d(val* self, val* p0);
 val* nitc___nitc__AParam___n_type(val* self);
@@ -4590,13 +4550,13 @@ val* nitc__scope___AParam___variable(val* self);
 val* nitc___nitc__AParam___n_id(val* self);
 void nitc__scope___AParam___variable_61d(val* self, val* p0);
 val* nitc___nitc__AParam___n_dotdotdot(val* self);
+void nitc__parser_prod___AParam___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__parser_prod___AParam___n_id_61d(val* self, val* p0);
 void nitc__parser_prod___AParam___n_type_61d(val* self, val* p0);
 void nitc__parser_prod___AParam___n_dotdotdot_61d(val* self, val* p0);
 extern const struct class class_nitc__AParam;
 void nitc__parser_prod___AType___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AType___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AType___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 val* nitc__modelbuilder_base___AType___mtype(val* self);
 short int nitc__modelbuilder_base___AType___checked_mtype(val* self);
 val* nitc___nitc__AType___n_types(val* self);
@@ -4604,6 +4564,7 @@ void nitc__modelbuilder_base___AType___checked_mtype_61d(val* self, short int p0
 val* nitc___nitc__AType___n_qid(val* self);
 val* nitc___nitc__AType___n_kwnullable(val* self);
 void nitc__modelbuilder_base___AType___mtype_61d(val* self, val* p0);
+void nitc__parser_prod___AType___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__parser_prod___AType___init_atype(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 void nitc__parser_prod___AType___n_kwnullable_61d(val* self, val* p0);
 void nitc__parser_prod___AType___n_qid_61d(val* self, val* p0);
@@ -4612,8 +4573,8 @@ void nitc__parser_prod___AType___n_cbra_61d(val* self, val* p0);
 void nitc__astbuilder___AType___make(val* self);
 extern const struct class class_nitc__AType;
 extern const struct type type_nitc__ANodes__nitc__AType;
-#define COLOR_nitc__parser_nodes__AType___n_types 10
-#define COLOR_nitc__modelbuilder_base__AType___checked_mtype 6
+#define COLOR_nitc__parser_nodes__AType___n_types 8
+#define COLOR_nitc__modelbuilder_base__AType___checked_mtype 4
 void nitc__parser_prod___ALabel___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ALabel___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___ALabel___init_alabel(val* self, val* p0, val* p1);
@@ -4627,6 +4588,10 @@ void nitc__astvalidation___AExpr___ANode__accept_ast_validation(val* self, val* 
 void nitc__flow___ABlockExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AExpr___nitc__parser_nodes__ANode__replace_with(val* self, val* p0);
 void nitc__parser_prod___ABlockExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void nitc__parser_prod___ABlockExpr___init_ablockexpr(val* self, val* p0, val* p1);
+val* nitc___nitc__ABlockExpr___n_expr(val* self);
+void nitc__astbuilder___ABlockExpr___make(val* self);
+void nitc__parser_prod___ABlockExpr___n_kwend_61d(val* self, val* p0);
 val* nitc__literal___AExpr___as_string(val* self);
 val* nitc__parser_work___AExpr___as_id(val* self);
 val* nitc__typing___ABlockExpr___AExpr__mtype(val* self);
@@ -4643,33 +4608,23 @@ void nitc__typing___ABlockExpr___AExpr__accept_typing(val* self, val* p0);
 void nitc__typing___AExpr___implicit_cast_to_61d(val* self, val* p0);
 val* nitc__astbuilder___AExpr___variable_cache(val* self);
 void nitc__astbuilder___AExpr___variable_cache_61d(val* self, val* p0);
+void nitc__typing___AExpr___vararg_decl_61d(val* self, long p0);
+long nitc__typing___AExpr___vararg_decl(val* self);
 void nitc__abstract_compiler___ABlockExpr___AExpr__stmt(val* self, val* p0);
 void nitc__typing___AExpr___is_typed_61d(val* self, short int p0);
 void nitc__typing___AExpr___mtype_61d(val* self, val* p0);
 val* nitc__typing___AExpr___its_variable(val* self);
 val* nitc__abstract_compiler___ABlockExpr___AExpr__expr(val* self, val* p0);
-void nitc__typing___AExpr___vararg_decl_61d(val* self, long p0);
 void nitc__typing___AExpr___comprehension_61d(val* self, val* p0);
-long nitc__typing___AExpr___vararg_decl(val* self);
-void nitc__parser_prod___ABlockExpr___init_ablockexpr(val* self, val* p0, val* p1);
-val* nitc___nitc__ABlockExpr___n_expr(val* self);
-void nitc__astbuilder___ABlockExpr___make(val* self);
-void nitc__parser_prod___ABlockExpr___n_kwend_61d(val* self, val* p0);
 extern const struct class class_nitc__ABlockExpr;
-#define COLOR_nitc__typing__AExpr___is_typed 7
-#define COLOR_nitc__typing__AExpr___vararg_decl 10
-#define COLOR_nitc__parser_nodes__ABlockExpr___n_expr 12
+#define COLOR_nitc__typing__AExpr___is_typed 13
+#define COLOR_nitc__typing__AExpr___vararg_decl 16
+#define COLOR_nitc__parser_nodes__ABlockExpr___n_expr 3
 void nitc__parser_prod___AVardeclExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__scope___AVardeclExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__local_var_init___AVardeclExpr___ANode__accept_local_var_visitor(val* self, val* p0);
 void nitc__transform___AVardeclExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AVardeclExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AVardeclExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-val* nitc__typing___AExpr___mtype(val* self);
-void nitc__astbuilder___AExpr___add(val* self, val* p0);
-void nitc__typing___AVardeclExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AVardeclExpr___AExpr__stmt(val* self, val* p0);
-val* nitc__abstract_compiler___AExpr___expr(val* self, val* p0);
 void nitc__parser_prod___AVardeclExpr___init_avardeclexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 val* nitc___nitc__AVardeclExpr___n_id(val* self);
 void nitc__scope___AVardeclExpr___variable_61d(val* self, val* p0);
@@ -4677,33 +4632,49 @@ val* nitc___nitc__AVardeclExpr___n_expr(val* self);
 val* nitc__scope___AVardeclExpr___variable(val* self);
 val* nitc___nitc__AVardeclExpr___n_type(val* self);
 void nitc__parser_prod___AVardeclExpr___n_kwvar_61d(val* self, val* p0);
+void nitc__parser_prod___AVardeclExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+val* nitc__typing___AExpr___mtype(val* self);
+void nitc__astbuilder___AExpr___add(val* self, val* p0);
+void nitc__typing___AVardeclExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AVardeclExpr___AExpr__stmt(val* self, val* p0);
+val* nitc__abstract_compiler___AExpr___expr(val* self, val* p0);
 void nitc__parser_prod___AVardeclExpr___n_id_61d(val* self, val* p0);
 void nitc__parser_prod___AVardeclExpr___n_type_61d(val* self, val* p0);
 void nitc__parser_prod___AVardeclExpr___n_assign_61d(val* self, val* p0);
 void nitc__parser_prod___AVardeclExpr___n_expr_61d(val* self, val* p0);
 extern const struct class class_nitc__AVardeclExpr;
 void nitc__parser_prod___AReturnExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
+void nitc__scope___AReturnExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___AReturnExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___AReturnExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AReturnExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AReturnExpr___AExpr__stmt(val* self, val* p0);
-void nitc__parser_prod___AReturnExpr___init_areturnexpr(val* self, val* p0, val* p1);
-val* nitc___nitc__AReturnExpr___n_expr(val* self);
-void nitc__parser_prod___AReturnExpr___n_kwreturn_61d(val* self, val* p0);
-void nitc__parser_prod___AReturnExpr___n_expr_61d(val* self, val* p0);
-extern const struct class class_nitc__AReturnExpr;
-void nitc__parser_prod___ABreakExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
-void nitc__scope___ABreakExpr___ANode__accept_scope_visitor(val* self, val* p0);
-void nitc__flow___AEscapeExpr___ANode__accept_flow_visitor(val* self, val* p0);
-void nitc__parser_prod___ABreakExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___ABreakExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AEscapeExpr___AExpr__stmt(val* self, val* p0);
 val* nitc___nitc__ALabelable___n_label(val* self);
-void nitc__parser_prod___ABreakExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
+void nitc___nitc__ALabelable___n_label_61d(val* self, val* p0);
 void nitc__scope___AEscapeExpr___escapemark_61d(val* self, val* p0);
 val* nitc__flow___AEscapeExpr___before_flow_context(val* self);
 val* nitc___nitc__AEscapeExpr___n_expr(val* self);
+void nitc__parser_prod___AReturnExpr___nitc__parser_nodes__AEscapeExpr__n_expr_61d(val* self, val* p0);
 val* nitc__scope___AEscapeExpr___escapemark(val* self);
+void nitc__typing___AReturnExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AReturnExpr___AExpr__stmt(val* self, val* p0);
+void nitc__parser_prod___AReturnExpr___init_areturnexpr(val* self, val* p0, val* p1);
+void nitc__parser_prod___AReturnExpr___n_kwreturn_61d(val* self, val* p0);
+void nitc__flow___AEscapeExpr___ANode__accept_flow_visitor(val* self, val* p0);
+extern const struct class class_nitc__AReturnExpr;
+void nitc__parser_prod___AYieldExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
+void nitc__parser_prod___AYieldExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void nitc__parser_prod___AYieldExpr___init_ayieldexpr(val* self, val* p0, val* p1);
+void nitc__parser_prod___AYieldExpr___n_kwyield_61d(val* self, val* p0);
+void nitc__parser_prod___AYieldExpr___n_expr_61d(val* self, val* p0);
+void nitc__typing___AExpr___accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AExpr___stmt(val* self, val* p0);
+extern const struct class class_nitc__AYieldExpr;
+void nitc__parser_prod___ABreakExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
+void nitc__scope___ABreakExpr___ANode__accept_scope_visitor(val* self, val* p0);
+void nitc__parser_prod___ABreakExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void nitc__parser_prod___ABreakExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
+void nitc___nitc__AEscapeExpr___n_expr_61d(val* self, val* p0);
+void nitc__typing___ABreakExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AEscapeExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___ABreakExpr___init_abreakexpr(val* self, val* p0, val* p1);
 void nitc__astbuilder___ABreakExpr___make(val* self, val* p0);
 void nitc__parser_prod___ABreakExpr___n_kwbreak_61d(val* self, val* p0);
@@ -4711,16 +4682,16 @@ extern const struct class class_nitc__ABreakExpr;
 void nitc__parser_prod___AAbortExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AAbortExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___AAbortExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAbortExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AAbortExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AAbortExpr___init_aabortexpr(val* self, val* p0);
 void nitc__parser_prod___AAbortExpr___n_kwabort_61d(val* self, val* p0);
+void nitc__typing___AAbortExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AAbortExpr___AExpr__stmt(val* self, val* p0);
 extern const struct class class_nitc__AAbortExpr;
 void nitc__parser_prod___AContinueExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__scope___AContinueExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__parser_prod___AContinueExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AContinueExpr___AExpr__accept_typing(val* self, val* p0);
 void nitc__parser_prod___AContinueExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
+void nitc__typing___AContinueExpr___AExpr__accept_typing(val* self, val* p0);
 void nitc__parser_prod___AContinueExpr___init_acontinueexpr(val* self, val* p0, val* p1);
 void nitc__parser_prod___AContinueExpr___n_kwcontinue_61d(val* self, val* p0);
 extern const struct class class_nitc__AContinueExpr;
@@ -4728,25 +4699,25 @@ void nitc__parser_prod___ADoExpr___nitc__parser_nodes__ANode__visit_all(val* sel
 void nitc__scope___ADoExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___ADoExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___ADoExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__astbuilder___ADoExpr___AExpr__add(val* self, val* p0);
-void nitc__typing___ADoExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___ADoExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___ADoExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
-void nitc__parser_prod___ADoExpr___init_adoexpr(val* self, val* p0, val* p1, val* p2);
+void nitc__parser_prod___ADoExpr___init_adoexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 void nitc__scope___ADoExpr___break_mark_61d(val* self, val* p0);
 val* nitc___nitc__ADoExpr___n_block(val* self);
 val* nitc__scope___ADoExpr___break_mark(val* self);
+val* nitc___nitc__ADoExpr___n_catch(val* self);
+void nitc__astbuilder___ADoExpr___AExpr__add(val* self, val* p0);
+void nitc__typing___ADoExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___ADoExpr___AExpr__stmt(val* self, val* p0);
 void nitc__astbuilder___ADoExpr___make(val* self);
 void nitc__parser_prod___ADoExpr___n_kwdo_61d(val* self, val* p0);
 void nitc__parser_prod___ADoExpr___n_block_61d(val* self, val* p0);
+void nitc__parser_prod___ADoExpr___n_kwcatch_61d(val* self, val* p0);
+void nitc__parser_prod___ADoExpr___n_catch_61d(val* self, val* p0);
 extern const struct class class_nitc__ADoExpr;
 void nitc__parser_prod___AIfExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__scope___AIfExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___AIfExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___AIfExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AIfExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AIfExpr___AExpr__stmt(val* self, val* p0);
-val* nitc__abstract_compiler___AIfExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIfExpr___init_aifexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 val* nitc___nitc__AIfExpr___n_expr(val* self);
 val* nitc___nitc__AIfExpr___n_then(val* self);
@@ -4754,6 +4725,9 @@ val* nitc___nitc__AIfExpr___n_else(val* self);
 void nitc__astbuilder___AIfExpr___make(val* self, val* p0, val* p1);
 void nitc__parser_prod___AIfExpr___n_kwif_61d(val* self, val* p0);
 void nitc__parser_prod___AIfExpr___n_expr_61d(val* self, val* p0);
+void nitc__typing___AIfExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AIfExpr___AExpr__stmt(val* self, val* p0);
+val* nitc__abstract_compiler___AIfExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIfExpr___n_kwthen_61d(val* self, val* p0);
 void nitc__parser_prod___AIfExpr___n_then_61d(val* self, val* p0);
 void nitc__parser_prod___AIfExpr___n_kwelse_61d(val* self, val* p0);
@@ -4763,9 +4737,6 @@ void nitc__parser_prod___AIfexprExpr___nitc__parser_nodes__ANode__visit_all(val*
 void nitc__flow___AIfexprExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AIfexprExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AIfexprExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AExpr___stmt(val* self, val* p0);
-val* nitc__abstract_compiler___AIfexprExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___init_aifexprexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 val* nitc___nitc__AIfexprExpr___n_expr(val* self);
 val* nitc___nitc__AIfexprExpr___n_then(val* self);
@@ -4773,6 +4744,8 @@ val* nitc___nitc__AIfexprExpr___n_else(val* self);
 void nitc__parser_prod___AIfexprExpr___n_kwif_61d(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___n_kwthen_61d(val* self, val* p0);
+void nitc__typing___AIfexprExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AIfexprExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___n_then_61d(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___n_kwelse_61d(val* self, val* p0);
 void nitc__parser_prod___AIfexprExpr___n_else_61d(val* self, val* p0);
@@ -4782,14 +4755,14 @@ void nitc__scope___AWhileExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___AWhileExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AWhileExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AWhileExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AWhileExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AWhileExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AWhileExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
 void nitc__parser_prod___AWhileExpr___init_awhileexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 void nitc__scope___AWhileExpr___break_mark_61d(val* self, val* p0);
 void nitc__scope___AWhileExpr___continue_mark_61d(val* self, val* p0);
 val* nitc___nitc__AWhileExpr___n_expr(val* self);
 val* nitc___nitc__AWhileExpr___n_block(val* self);
+void nitc__typing___AWhileExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AWhileExpr___AExpr__stmt(val* self, val* p0);
 val* nitc__scope___AWhileExpr___continue_mark(val* self);
 val* nitc__scope___AWhileExpr___break_mark(val* self);
 void nitc__parser_prod___AWhileExpr___n_kwwhile_61d(val* self, val* p0);
@@ -4801,15 +4774,15 @@ void nitc__parser_prod___ALoopExpr___nitc__parser_nodes__ANode__visit_all(val* s
 void nitc__scope___ALoopExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___ALoopExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___ALoopExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__astbuilder___ALoopExpr___AExpr__add(val* self, val* p0);
-void nitc__typing___ALoopExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___ALoopExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___ALoopExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
 void nitc__parser_prod___ALoopExpr___init_aloopexpr(val* self, val* p0, val* p1, val* p2);
 void nitc__scope___ALoopExpr___break_mark_61d(val* self, val* p0);
 void nitc__scope___ALoopExpr___continue_mark_61d(val* self, val* p0);
 val* nitc___nitc__ALoopExpr___n_block(val* self);
 val* nitc__scope___ALoopExpr___continue_mark(val* self);
+void nitc__astbuilder___ALoopExpr___AExpr__add(val* self, val* p0);
+void nitc__typing___ALoopExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___ALoopExpr___AExpr__stmt(val* self, val* p0);
 val* nitc__scope___ALoopExpr___break_mark(val* self);
 void nitc__astbuilder___ALoopExpr___make(val* self);
 void nitc__parser_prod___ALoopExpr___n_kwloop_61d(val* self, val* p0);
@@ -4820,14 +4793,14 @@ void nitc__scope___AForExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___AForExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AForExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AForExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AForExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AForExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AForExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
 void nitc__parser_prod___AForExpr___init_aforexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 val* nitc___nitc__AForExpr___n_groups(val* self);
 void nitc__scope___AForExpr___break_mark_61d(val* self, val* p0);
 void nitc__scope___AForExpr___continue_mark_61d(val* self, val* p0);
 val* nitc___nitc__AForExpr___n_block(val* self);
+void nitc__typing___AForExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AForExpr___AExpr__stmt(val* self, val* p0);
 val* nitc__scope___AForExpr___continue_mark(val* self);
 val* nitc__scope___AForExpr___break_mark(val* self);
 void nitc__parser_prod___AForExpr___n_kwfor_61d(val* self, val* p0);
@@ -4835,7 +4808,7 @@ void nitc__parser_prod___AForExpr___n_kwdo_61d(val* self, val* p0);
 void nitc__parser_prod___AForExpr___n_block_61d(val* self, val* p0);
 extern const struct class class_nitc__AForExpr;
 extern const struct type type_nitc__ANodes__nitc__AForGroup;
-#define COLOR_nitc__parser_nodes__AForExpr___n_groups 14
+#define COLOR_nitc__parser_nodes__AForExpr___n_groups 5
 void nitc__parser_prod___AForGroup___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__rapid_type_analysis___AForGroup___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___AForGroup___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
@@ -4869,19 +4842,19 @@ void nitc__typing___AForGroup___method_lt_61d(val* self, val* p0);
 void nitc__typing___AForGroup___method_successor_61d(val* self, val* p0);
 extern const struct class class_nitc__AForGroup;
 extern const struct type type_nitc__ANodes__nitc__TId;
-#define COLOR_nitc__parser_nodes__AForGroup___n_ids 5
+#define COLOR_nitc__parser_nodes__AForGroup___n_ids 3
 void nitc__parser_prod___AWithExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__scope___AWithExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___AWithExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AWithExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AWithExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AWithExpr___AExpr__accept_typing(val* self, val* p0);
 void nitc__parser_prod___AWithExpr___nitc__parser_nodes__ALabelable__n_label_61d(val* self, val* p0);
 void nitc__parser_prod___AWithExpr___init_awithexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 void nitc__scope___AWithExpr___break_mark_61d(val* self, val* p0);
 val* nitc___nitc__AWithExpr___n_expr(val* self);
 val* nitc___nitc__AWithExpr___n_block(val* self);
 val* nitc__scope___AWithExpr___break_mark(val* self);
+void nitc__typing___AWithExpr___AExpr__accept_typing(val* self, val* p0);
 val* nitc__typing___AWithExpr___method_start(val* self);
 val* nitc__typing___AWithExpr___method_finish(val* self);
 void nitc__typing___AWithExpr___method_start_61d(val* self, val* p0);
@@ -4895,8 +4868,6 @@ void nitc__parser_prod___AAssertExpr___nitc__parser_nodes__ANode__visit_all(val*
 void nitc__scope___AAssertExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__flow___AAssertExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___AAssertExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAssertExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AAssertExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AAssertExpr___init_aassertexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 val* nitc___nitc__AAssertExpr___n_expr(val* self);
 val* nitc___nitc__AAssertExpr___n_else(val* self);
@@ -4904,75 +4875,77 @@ void nitc__parser_prod___AAssertExpr___n_kwassert_61d(val* self, val* p0);
 void nitc__parser_prod___AAssertExpr___n_id_61d(val* self, val* p0);
 void nitc__parser_prod___AAssertExpr___n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAssertExpr___n_kwelse_61d(val* self, val* p0);
+void nitc__typing___AAssertExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AAssertExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AAssertExpr___n_else_61d(val* self, val* p0);
 val* nitc___nitc__AAssertExpr___n_id(val* self);
 extern const struct class class_nitc__AAssertExpr;
 void nitc__parser_prod___AOnceExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AOnceExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___AOnceExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AOnceExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AOnceExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AOnceExpr___init_aonceexpr(val* self, val* p0, val* p1);
 val* nitc___nitc__AOnceExpr___n_expr(val* self);
 void nitc__parser_prod___AOnceExpr___n_kwonce_61d(val* self, val* p0);
 void nitc__parser_prod___AOnceExpr___n_expr_61d(val* self, val* p0);
+void nitc__typing___AOnceExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AOnceExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AOnceExpr;
 void nitc__parser_prod___AOrExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AOrExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AOrExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AOrExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AOrExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AOrExpr___AExpr__expr(val* self, val* p0);
 val* nitc___nitc__ABinBoolExpr___n_expr(val* self);
 val* nitc___nitc__ABinBoolExpr___n_expr2(val* self);
 void nitc__parser_prod___AOrExpr___nitc__parser_nodes__ABinBoolExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AOrExpr___nitc__parser_nodes__ABinBoolExpr__n_op_61d(val* self, val* p0);
 void nitc__parser_prod___AOrExpr___nitc__parser_nodes__ABinBoolExpr__n_expr2_61d(val* self, val* p0);
 void nitc__parser_prod___AOrExpr___init_aorexpr(val* self, val* p0, val* p1, val* p2);
+void nitc__typing___AOrExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AOrExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AOrExpr;
 void nitc__parser_prod___AAndExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AAndExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AAndExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AAndExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAndExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AAndExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AAndExpr___nitc__parser_nodes__ABinBoolExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAndExpr___nitc__parser_nodes__ABinBoolExpr__n_op_61d(val* self, val* p0);
 void nitc__parser_prod___AAndExpr___nitc__parser_nodes__ABinBoolExpr__n_expr2_61d(val* self, val* p0);
 void nitc__parser_prod___AAndExpr___init_aandexpr(val* self, val* p0, val* p1, val* p2);
+void nitc__typing___AAndExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AAndExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AAndExpr;
 void nitc__parser_prod___AOrElseExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AOrElseExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__typing___AOrElseExpr___ANode__accept_post_typing(val* self, val* p0);
 void nitc__parser_prod___AOrElseExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AOrElseExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AOrElseExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AOrElseExpr___nitc__parser_nodes__ABinBoolExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AOrElseExpr___nitc__parser_nodes__ABinBoolExpr__n_op_61d(val* self, val* p0);
 void nitc__parser_prod___AOrElseExpr___nitc__parser_nodes__ABinBoolExpr__n_expr2_61d(val* self, val* p0);
 void nitc__parser_prod___AOrElseExpr___init_aorelseexpr(val* self, val* p0, val* p1, val* p2, val* p3);
 void nitc__parser_prod___AOrElseExpr___n_kwelse_61d(val* self, val* p0);
+void nitc__typing___AOrElseExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AOrElseExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AOrElseExpr;
 void nitc__parser_prod___AImpliesExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AImpliesExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AImpliesExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AImpliesExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AImpliesExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AImpliesExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AImpliesExpr___nitc__parser_nodes__ABinBoolExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AImpliesExpr___nitc__parser_nodes__ABinBoolExpr__n_op_61d(val* self, val* p0);
 void nitc__parser_prod___AImpliesExpr___nitc__parser_nodes__ABinBoolExpr__n_expr2_61d(val* self, val* p0);
 void nitc__parser_prod___AImpliesExpr___init_aimpliesexpr(val* self, val* p0, val* p1, val* p2);
+void nitc__typing___AImpliesExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AImpliesExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AImpliesExpr;
 void nitc__parser_prod___ANotExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___ANotExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__parser_prod___ANotExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___ANotExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___ANotExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ANotExpr___init_anotexpr(val* self, val* p0, val* p1);
 val* nitc___nitc__ANotExpr___n_expr(val* self);
 void nitc__parser_prod___ANotExpr___n_kwnot_61d(val* self, val* p0);
 void nitc__parser_prod___ANotExpr___n_expr_61d(val* self, val* p0);
+void nitc__typing___ANotExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___ANotExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__ANotExpr;
 void nitc__parser_prod___AEqExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__rapid_type_analysis___ASendExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
@@ -4980,8 +4953,7 @@ void nitc__flow___AEqExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__auto_super_init___ASendExpr___ANode__accept_auto_super_init(val* self, val* p0);
 void nitc__typing___AEqFormExpr___ANode__accept_post_typing(val* self, val* p0);
 void nitc__parser_prod___AEqExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AEqFormExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___ASendExpr___AExpr__expr(val* self, val* p0);
+val* nitc__typing___ASendExpr___ANode__bad_expr_message(val* self, val* p0);
 val* nitc___nitc__ASendExpr___n_expr(val* self);
 val* nitc__typing___ASendExpr___callsite(val* self);
 val* nitc__typing___ASendExpr___raw_arguments(val* self);
@@ -4989,6 +4961,8 @@ val* nitc__typing___ABinopExpr___ASendExpr__compute_raw_arguments(val* self);
 val* nitc__typing___ABinopExpr___ASendExpr__property_name(val* self);
 val* nitc__typing___ABinopExpr___ASendExpr__property_node(val* self);
 void nitc__typing___ASendExpr___callsite_61d(val* self, val* p0);
+void nitc__typing___AEqFormExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___ASendExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AEqExpr___nitc__parser_nodes__ASendExpr__n_expr_61d(val* self, val* p0);
 val* nitc___nitc__ABinopExpr___n_expr2(val* self);
 void nitc__parser_prod___AEqExpr___nitc__parser_nodes__ABinopExpr__n_op_61d(val* self, val* p0);
@@ -5060,8 +5034,6 @@ void nitc__rapid_type_analysis___AIsaExpr___ANode__accept_rapid_type_visitor(val
 void nitc__flow___AIsaExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__typing___AIsaExpr___ANode__accept_post_typing(val* self, val* p0);
 void nitc__parser_prod___AIsaExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AIsaExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AIsaExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIsaExpr___init_aisaexpr(val* self, val* p0, val* p1, val* p2);
 val* nitc__typing___AIsaExpr___cast_type(val* self);
 val* nitc___nitc__AIsaExpr___n_expr(val* self);
@@ -5069,6 +5041,8 @@ val* nitc___nitc__AIsaExpr___n_type(val* self);
 void nitc__typing___AIsaExpr___cast_type_61d(val* self, val* p0);
 void nitc__parser_prod___AIsaExpr___n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AIsaExpr___n_kwisa_61d(val* self, val* p0);
+void nitc__typing___AIsaExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AIsaExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIsaExpr___n_type_61d(val* self, val* p0);
 extern const struct class class_nitc__AIsaExpr;
 void nitc__parser_prod___APlusExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
@@ -5178,8 +5152,6 @@ extern const struct class class_nitc__AUtildeExpr;
 void nitc__parser_prod___ANewExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__rapid_type_analysis___ANewExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___ANewExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___ANewExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___ANewExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ANewExpr___init_anewexpr(val* self, val* p0, val* p1, val* p2, val* p3);
 val* nitc___nitc__ANewExpr___n_type(val* self);
 val* nitc__typing___ANewExpr___recvtype(val* self);
@@ -5187,6 +5159,8 @@ val* nitc__typing___ANewExpr___callsite(val* self);
 void nitc__astbuilder___ANewExpr___make(val* self, val* p0, val* p1);
 void nitc__typing___ANewExpr___recvtype_61d(val* self, val* p0);
 val* nitc___nitc__ANewExpr___n_qid(val* self);
+void nitc__typing___ANewExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___ANewExpr___AExpr__expr(val* self, val* p0);
 val* nitc___nitc__ANewExpr___n_kwnew(val* self);
 val* nitc___nitc__ANewExpr___n_args(val* self);
 void nitc__typing___ANewExpr___callsite_61d(val* self, val* p0);
@@ -5197,8 +5171,6 @@ void nitc__parser_prod___ANewExpr___n_args_61d(val* self, val* p0);
 extern const struct class class_nitc__ANewExpr;
 void nitc__parser_prod___AAttrExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AAttrExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAttrExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AAttrExpr___AExpr__expr(val* self, val* p0);
 val* nitc___nitc__AAttrFormExpr___n_expr(val* self);
 val* nitc__typing___AAttrFormExpr___mproperty(val* self);
 void nitc__typing___AAttrFormExpr___resolve_property(val* self, val* p0);
@@ -5206,6 +5178,8 @@ val* nitc__typing___AAttrFormExpr___attr_type(val* self);
 val* nitc___nitc__AAttrFormExpr___n_id(val* self);
 void nitc__parser_prod___AAttrExpr___nitc__parser_nodes__AAttrFormExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrExpr___nitc__parser_nodes__AAttrFormExpr__n_id_61d(val* self, val* p0);
+void nitc__typing___AAttrExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AAttrExpr___AExpr__expr(val* self, val* p0);
 void nitc__typing___AAttrFormExpr___mproperty_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrExpr___init_aattrexpr(val* self, val* p0, val* p1);
 void nitc__astbuilder___AAttrExpr___make(val* self, val* p0, val* p1, val* p2);
@@ -5213,10 +5187,10 @@ void nitc__typing___AAttrFormExpr___attr_type_61d(val* self, val* p0);
 extern const struct class class_nitc__AAttrExpr;
 void nitc__parser_prod___AAttrAssignExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AAttrAssignExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAttrAssignExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AAttrAssignExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AAttrAssignExpr___nitc__parser_nodes__AAttrFormExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrAssignExpr___nitc__parser_nodes__AAttrFormExpr__n_id_61d(val* self, val* p0);
+void nitc__typing___AAttrAssignExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AAttrAssignExpr___AExpr__expr(val* self, val* p0);
 val* nitc___nitc__AAssignFormExpr___n_assign(val* self);
 val* nitc___nitc__AAssignFormExpr___n_value(val* self);
 void nitc__parser_prod___AAttrAssignExpr___nitc__parser_nodes__AAssignFormExpr__n_assign_61d(val* self, val* p0);
@@ -5229,10 +5203,10 @@ void nitc__rapid_type_analysis___AAttrReassignExpr___ANode__accept_rapid_type_vi
 void nitc__flow___AReassignFormExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AAttrReassignExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AAttrReassignExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAttrReassignExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AAttrReassignExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AAttrReassignExpr___nitc__parser_nodes__AAttrFormExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAttrReassignExpr___nitc__parser_nodes__AAttrFormExpr__n_id_61d(val* self, val* p0);
+void nitc__typing___AAttrReassignExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AAttrReassignExpr___AExpr__stmt(val* self, val* p0);
 val* nitc__typing___AReassignFormExpr___reassign_callsite(val* self);
 val* nitc___nitc__AReassignFormExpr___n_value(val* self);
 val* nitc___nitc__AReassignFormExpr___n_assign_op(val* self);
@@ -5276,11 +5250,11 @@ void nitc__parser_prod___ACallReassignExpr___nitc__parser_nodes__ANode__visit_al
 void nitc__rapid_type_analysis___ASendReassignFormExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__transform___ASendReassignFormExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___ACallReassignExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___ASendReassignFormExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___ASendReassignFormExpr___AExpr__stmt(val* self, val* p0);
 val* nitc__typing___ACallReassignExpr___ASendExpr__compute_raw_arguments(val* self);
 val* nitc__typing___ACallReassignExpr___ASendExpr__property_name(val* self);
 val* nitc__typing___ACallReassignExpr___ASendExpr__property_node(val* self);
+void nitc__typing___ASendReassignFormExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___ASendReassignFormExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___ACallReassignExpr___nitc__parser_nodes__ASendExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___ACallReassignExpr___nitc__parser_nodes__AReassignFormExpr__n_assign_op_61d(val* self, val* p0);
 void nitc__parser_prod___ACallReassignExpr___nitc__parser_nodes__AReassignFormExpr__n_value_61d(val* self, val* p0);
@@ -5295,8 +5269,6 @@ void nitc__parser_prod___ASuperExpr___nitc__parser_nodes__ANode__visit_all(val* 
 void nitc__rapid_type_analysis___ASuperExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__auto_super_init___ASuperExpr___ANode__accept_auto_super_init(val* self, val* p0);
 void nitc__parser_prod___ASuperExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___ASuperExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___ASuperExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ASuperExpr___init_asuperexpr(val* self, val* p0, val* p1, val* p2);
 val* nitc__typing___ASuperExpr___callsite(val* self);
 val* nitc__typing___ASuperExpr___mpropdef(val* self);
@@ -5304,6 +5276,8 @@ void nitc__typing___ASuperExpr___process_superinit(val* self, val* p0);
 val* nitc___nitc__ASuperExpr___n_args(val* self);
 void nitc__typing___ASuperExpr___signaturemap_61d(val* self, val* p0);
 void nitc__typing___ASuperExpr___mpropdef_61d(val* self, val* p0);
+void nitc__typing___ASuperExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___ASuperExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ASuperExpr___n_qualified_61d(val* self, val* p0);
 void nitc__parser_prod___ASuperExpr___n_kwsuper_61d(val* self, val* p0);
 void nitc__parser_prod___ASuperExpr___n_args_61d(val* self, val* p0);
@@ -5354,24 +5328,24 @@ extern const struct class class_nitc__ABraReassignExpr;
 void nitc__parser_prod___AVarExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__local_var_init___AVarExpr___ANode__accept_local_var_visitor(val* self, val* p0);
 void nitc__parser_prod___AVarExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AVarExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__typing___AVarExpr___AExpr__its_variable(val* self);
-val* nitc__abstract_compiler___AVarExpr___AExpr__expr(val* self, val* p0);
 void nitc__scope___AVarFormExpr___variable_61d(val* self, val* p0);
 val* nitc__scope___AVarFormExpr___variable(val* self);
 void nitc__parser_prod___AVarExpr___nitc__parser_nodes__AVarFormExpr__n_id_61d(val* self, val* p0);
 void nitc__astbuilder___AVarExpr___make(val* self, val* p0, val* p1);
 void nitc__parser_prod___AVarExpr___init_avarexpr(val* self, val* p0);
+void nitc__typing___AVarExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__typing___AVarExpr___AExpr__its_variable(val* self);
+val* nitc__abstract_compiler___AVarExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AVarExpr;
 void nitc__parser_prod___AVarAssignExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AVarAssignExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__local_var_init___AVarAssignExpr___ANode__accept_local_var_visitor(val* self, val* p0);
 void nitc__parser_prod___AVarAssignExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AVarAssignExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AVarAssignExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AVarAssignExpr___nitc__parser_nodes__AVarFormExpr__n_id_61d(val* self, val* p0);
 void nitc__astbuilder___AVarAssignExpr___make(val* self, val* p0, val* p1);
 void nitc__parser_prod___AVarAssignExpr___init_avarassignexpr(val* self, val* p0, val* p1, val* p2);
+void nitc__typing___AVarAssignExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AVarAssignExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AVarAssignExpr___nitc__parser_nodes__AAssignFormExpr__n_assign_61d(val* self, val* p0);
 void nitc__parser_prod___AVarAssignExpr___nitc__parser_nodes__AAssignFormExpr__n_value_61d(val* self, val* p0);
 extern const struct class class_nitc__AVarAssignExpr;
@@ -5380,10 +5354,10 @@ void nitc__rapid_type_analysis___AVarReassignExpr___ANode__accept_rapid_type_vis
 void nitc__local_var_init___AVarReassignExpr___ANode__accept_local_var_visitor(val* self, val* p0);
 void nitc__transform___AVarReassignExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AVarReassignExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AVarReassignExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___AVarReassignExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AVarReassignExpr___nitc__parser_nodes__AVarFormExpr__n_id_61d(val* self, val* p0);
 void nitc__parser_prod___AVarReassignExpr___init_avarreassignexpr(val* self, val* p0, val* p1, val* p2);
+void nitc__typing___AVarReassignExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___AVarReassignExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___AVarReassignExpr___nitc__parser_nodes__AReassignFormExpr__n_assign_op_61d(val* self, val* p0);
 void nitc__parser_prod___AVarReassignExpr___nitc__parser_nodes__AReassignFormExpr__n_value_61d(val* self, val* p0);
 extern const struct class class_nitc__AVarReassignExpr;
@@ -5391,9 +5365,6 @@ void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__ANode__visit_all(val*
 void nitc__rapid_type_analysis___ACrangeExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__transform___ACrangeExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___ARangeExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___ACrangeExpr___AExpr__expr(val* self, val* p0);
 val* nitc__typing___ARangeExpr___init_callsite(val* self);
 val* nitc___nitc__ARangeExpr___n_expr(val* self);
 val* nitc___nitc__ARangeExpr___n_expr2(val* self);
@@ -5401,6 +5372,9 @@ void nitc__typing___ARangeExpr___init_callsite_61d(val* self, val* p0);
 void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__ARangeExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__ARangeExpr__n_dotdot_61d(val* self, val* p0);
 void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__ARangeExpr__n_expr2_61d(val* self, val* p0);
+void nitc__parser_prod___ACrangeExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+void nitc__typing___ARangeExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___ACrangeExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ACrangeExpr___init_acrangeexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 void nitc__parser_prod___ACrangeExpr___n_obra_61d(val* self, val* p0);
 void nitc__parser_prod___ACrangeExpr___n_cbra_61d(val* self, val* p0);
@@ -5409,11 +5383,11 @@ void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__ANode__visit_all(val*
 void nitc__rapid_type_analysis___AOrangeExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__transform___AOrangeExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-val* nitc__abstract_compiler___AOrangeExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__ARangeExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__ARangeExpr__n_dotdot_61d(val* self, val* p0);
 void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__ARangeExpr__n_expr2_61d(val* self, val* p0);
+void nitc__parser_prod___AOrangeExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+val* nitc__abstract_compiler___AOrangeExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AOrangeExpr___init_aorangeexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 void nitc__parser_prod___AOrangeExpr___n_obra_61d(val* self, val* p0);
 void nitc__parser_prod___AOrangeExpr___n_cbra_61d(val* self, val* p0);
@@ -5422,9 +5396,6 @@ void nitc__parser_prod___AArrayExpr___nitc__parser_nodes__ANode__visit_all(val* 
 void nitc__transform___AArrayExpr___ANode__full_transform_visitor(val* self, val* p0);
 void nitc__rapid_type_analysis___AArrayExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___AArrayExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AArrayExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___AArrayExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AArrayExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AArrayExpr___init_aarrayexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 val* nitc__transform___AArrayExpr___nnew(val* self);
 val* nitc__typing___AArrayExpr___push_callsite(val* self);
@@ -5432,6 +5403,9 @@ val* nitc___nitc__AArrayExpr___n_exprs(val* self);
 val* nitc__typing___AArrayExpr___with_capacity_callsite(val* self);
 void nitc__transform___AArrayExpr___nnew_61d(val* self, val* p0);
 val* nitc__typing___AArrayExpr___element_mtype(val* self);
+void nitc__parser_prod___AArrayExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+void nitc__typing___AArrayExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AArrayExpr___AExpr__expr(val* self, val* p0);
 val* nitc___nitc__AArrayExpr___n_type(val* self);
 void nitc__typing___AArrayExpr___set_comprehension(val* self, val* p0);
 void nitc__typing___AArrayExpr___element_mtype_61d(val* self, val* p0);
@@ -5441,149 +5415,200 @@ void nitc__parser_prod___AArrayExpr___n_obra_61d(val* self, val* p0);
 void nitc__parser_prod___AArrayExpr___n_type_61d(val* self, val* p0);
 void nitc__parser_prod___AArrayExpr___n_cbra_61d(val* self, val* p0);
 extern const struct class class_nitc__AArrayExpr;
-#define COLOR_nitc__parser_nodes__AArrayExpr___n_exprs 13
+#define COLOR_nitc__parser_nodes__AArrayExpr___n_exprs 4
 void nitc__parser_prod___ASelfExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__scope___ASelfExpr___ANode__accept_scope_visitor(val* self, val* p0);
 void nitc__parser_prod___ASelfExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___ASelfExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___ASelfExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__typing___ASelfExpr___AExpr__its_variable(val* self);
-val* nitc__abstract_compiler___ASelfExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ASelfExpr___init_aselfexpr(val* self, val* p0, val* p1);
 void nitc__scope___ASelfExpr___variable_61d(val* self, val* p0);
 void nitc__typing___ASelfExpr___its_variable_61d(val* self, val* p0);
 void nitc__parser_prod___ASelfExpr___n_kwself_61d(val* self, val* p0);
+void nitc__parser_prod___ASelfExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+void nitc__typing___ASelfExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__typing___ASelfExpr___AExpr__its_variable(val* self);
+val* nitc__abstract_compiler___ASelfExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__ASelfExpr;
 void nitc__parser_prod___AImplicitSelfExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AImplicitSelfExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-val* nitc__abstract_compiler___AImplicitSelfExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(val* self);
 void nitc__typing___AImplicitSelfExpr___is_sys_61d(val* self, short int p0);
+val* nitc__abstract_compiler___AImplicitSelfExpr___AExpr__expr(val* self, val* p0);
 short int nitc__typing___AImplicitSelfExpr___is_sys(val* self);
 extern const struct class class_nitc__AImplicitSelfExpr;
-#define COLOR_nitc__typing__AImplicitSelfExpr___is_sys 15
+#define COLOR_nitc__typing__AImplicitSelfExpr___is_sys 6
 void nitc__parser_prod___ATrueExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__rapid_type_analysis___ATrueExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___ATrueExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void nitc__parser_prod___ATrueExpr___init_atrueexpr(val* self, val* p0, val* p1);
+void nitc__parser_prod___ATrueExpr___n_kwtrue_61d(val* self, val* p0);
 void nitc__parser_prod___ATrueExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___ATrueExpr___AExpr__accept_typing(val* self, val* p0);
 val* nitc__abstract_compiler___ATrueExpr___AExpr__expr(val* self, val* p0);
-void nitc__parser_prod___ATrueExpr___init_atrueexpr(val* self, val* p0, val* p1);
-void nitc__parser_prod___ATrueExpr___n_kwtrue_61d(val* self, val* p0);
 extern const struct class class_nitc__ATrueExpr;
 void nitc__parser_prod___AFalseExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__rapid_type_analysis___AFalseExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___AFalseExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void nitc__parser_prod___AFalseExpr___init_afalseexpr(val* self, val* p0, val* p1);
+void nitc__parser_prod___AFalseExpr___n_kwfalse_61d(val* self, val* p0);
 void nitc__parser_prod___AFalseExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___AFalseExpr___AExpr__accept_typing(val* self, val* p0);
 val* nitc__abstract_compiler___AFalseExpr___AExpr__expr(val* self, val* p0);
-void nitc__parser_prod___AFalseExpr___init_afalseexpr(val* self, val* p0, val* p1);
-void nitc__parser_prod___AFalseExpr___n_kwfalse_61d(val* self, val* p0);
 extern const struct class class_nitc__AFalseExpr;
 void nitc__parser_prod___ANullExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ANullExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+void nitc__parser_prod___ANullExpr___init_anullexpr(val* self, val* p0, val* p1);
+void nitc__parser_prod___ANullExpr___n_kwnull_61d(val* self, val* p0);
 void nitc__parser_prod___ANullExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___ANullExpr___AExpr__accept_typing(val* self, val* p0);
 val* nitc__abstract_compiler___ANullExpr___AExpr__expr(val* self, val* p0);
-void nitc__parser_prod___ANullExpr___init_anullexpr(val* self, val* p0, val* p1);
-void nitc__parser_prod___ANullExpr___n_kwnull_61d(val* self, val* p0);
 extern const struct class class_nitc__ANullExpr;
 void nitc__parser_prod___AIntegerExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__literal___AIntegerExpr___ANode__accept_literal(val* self, val* p0);
 void nitc__rapid_type_analysis___AIntegerExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___AIntegerExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AIntegerExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___AIntegerExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AIntegerExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIntegerExpr___init_aintegerexpr(val* self, val* p0, val* p1);
 val* nitc__literal___AIntegerExpr___value(val* self);
 void nitc__literal___AIntegerExpr___value_61d(val* self, val* p0);
 val* nitc___nitc__AIntegerExpr___n_integer(val* self);
 void nitc__astbuilder___AIntegerExpr___make(val* self, long p0, val* p1);
 void nitc__parser_prod___AIntegerExpr___n_integer_61d(val* self, val* p0);
+void nitc__parser_prod___AIntegerExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+void nitc__typing___AIntegerExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AIntegerExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AIntegerExpr;
 void nitc__parser_prod___AFloatExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__literal___AFloatExpr___ANode__accept_literal(val* self, val* p0);
 void nitc__rapid_type_analysis___AFloatExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___AFloatExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AFloatExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___AFloatExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AFloatExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AFloatExpr___init_afloatexpr(val* self, val* p0, val* p1);
 void nitc__literal___AFloatExpr___value_61d(val* self, val* p0);
 val* nitc___nitc__AFloatExpr___n_float(val* self);
 void nitc__parser_prod___AFloatExpr___n_float_61d(val* self, val* p0);
+void nitc__parser_prod___AFloatExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+void nitc__typing___AFloatExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AFloatExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AFloatExpr;
 void nitc__parser_prod___ACharExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__literal___ACharExpr___ANode__accept_literal(val* self, val* p0);
 void nitc__rapid_type_analysis___ACharExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___ACharExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+val* nitc__literal___ACharExpr___AAugmentedLiteral__text(val* self);
+uint32_t nitc__literal___ACharExpr___AAugmentedLiteral__delimiter_start(val* self);
+uint32_t nitc__literal___ACharExpr___AAugmentedLiteral__delimiter_end(val* self);
+val* nitc___nitc__AAugmentedLiteral___prefix(val* self);
+val* nitc___nitc__AAugmentedLiteral___suffix(val* self);
+val* nitc___nitc__AAugmentedLiteral___content(val* self);
+short int nitc__literal___ACharExpr___AAugmentedLiteral__is_valid_augmentation(val* self);
 void nitc__parser_prod___ACharExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___ACharExpr___AExpr__accept_typing(val* self, val* p0);
 val* nitc__abstract_compiler___ACharExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ACharExpr___init_acharexpr(val* self, val* p0, val* p1);
-val* nitc___nitc__ACharExpr___n_char(val* self);
+short int nitc__literal___ACharExpr___is_ascii(val* self);
+short int nitc__literal___ACharExpr___is_code_point(val* self);
 void nitc__literal___ACharExpr___value_61d(val* self, val* p0);
+val* nitc___nitc__ACharExpr___n_char(val* self);
 void nitc__parser_prod___ACharExpr___n_char_61d(val* self, val* p0);
 val* nitc__literal___ACharExpr___value(val* self);
 extern const struct class class_nitc__ACharExpr;
 void nitc__parser_prod___AStringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
-void nitc__literal___AStringFormExpr___ANode__accept_literal(val* self, val* p0);
+void nitc__literal___AStringExpr___ANode__accept_literal(val* self, val* p0);
 void nitc__rapid_type_analysis___AStringFormExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___AStringExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+val* nitc__literal___AStringFormExpr___AAugmentedLiteral__text(val* self);
+uint32_t nitc__literal___AStringExpr___AAugmentedLiteral__delimiter_start(val* self);
+uint32_t nitc__literal___AStringExpr___AAugmentedLiteral__delimiter_end(val* self);
+short int nitc___nitc__AugmentedStringFormExpr___AAugmentedLiteral__is_valid_augmentation(val* self);
 void nitc__parser_prod___AStringExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___AStringFormExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AStringFormExpr___AExpr__expr(val* self, val* p0);
+void nitc__typing___AugmentedStringFormExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AStringExpr___AExpr__expr(val* self, val* p0);
+void nitc__literal___AStringExpr___AugmentedStringFormExpr__delimiter_end_61d(val* self, uint32_t p0);
+void nitc__literal___AStringExpr___AugmentedStringFormExpr__delimiter_start_61d(val* self, uint32_t p0);
+short int nitc___nitc__AugmentedStringFormExpr___is_bytestring(val* self);
+short int nitc___nitc__AugmentedStringFormExpr___is_re(val* self);
+short int nitc___nitc__AugmentedStringFormExpr___is_string(val* self);
+val* nitc__typing___AugmentedStringFormExpr___to_re(val* self);
+val* nitc__typing___AugmentedStringFormExpr___ignore_case(val* self);
+val* nitc__typing___AugmentedStringFormExpr___newline(val* self);
+val* nitc__typing___AugmentedStringFormExpr___extended(val* self);
+val* nitc__typing___AugmentedStringFormExpr___to_bytes_with_copy(val* self);
+void nitc__typing___AugmentedStringFormExpr___to_bytes_with_copy_61d(val* self, val* p0);
+void nitc__typing___AugmentedStringFormExpr___to_re_61d(val* self, val* p0);
+void nitc__typing___AugmentedStringFormExpr___ignore_case_61d(val* self, val* p0);
+void nitc__typing___AugmentedStringFormExpr___newline_61d(val* self, val* p0);
+void nitc__typing___AugmentedStringFormExpr___extended_61d(val* self, val* p0);
+val* nitc__abstract_compiler___AugmentedStringFormExpr___make_re(val* self, val* p0, val* p1);
 val* nitc__literal___AStringFormExpr___value(val* self);
 val* nitc___nitc__AStringFormExpr___n_string(val* self);
+void nitc__literal___AStringFormExpr___bytes_61d(val* self, val* p0);
+val* nitc__literal___AStringFormExpr___raw_text(val* self);
 void nitc__literal___AStringFormExpr___value_61d(val* self, val* p0);
+val* nitc__literal___AStringFormExpr___bytes(val* self);
 void nitc__parser_prod___AStringExpr___nitc__parser_nodes__AStringFormExpr__n_string_61d(val* self, val* p0);
 void nitc__parser_prod___AStringExpr___init_astringexpr(val* self, val* p0, val* p1);
+void nitc__literal___AStringFormExpr___ANode__accept_literal(val* self, val* p0);
 extern const struct class class_nitc__AStringExpr;
+#define COLOR_nitc__literal__AugmentedStringFormExpr___delimiter_start 18
+#define COLOR_nitc__literal__AugmentedStringFormExpr___delimiter_end 19
 void nitc__parser_prod___AStartStringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AStartStringExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+uint32_t nitc__literal___AStartStringExpr___AAugmentedLiteral__delimiter_start(val* self);
+uint32_t nitc___nitc__AugmentedStringFormExpr___AAugmentedLiteral__delimiter_end(val* self);
+val* nitc__literal___AStartStringExpr___AAugmentedLiteral__suffix(val* self);
+val* nitc__abstract_compiler___AStringFormExpr___AExpr__expr(val* self, val* p0);
+void nitc___nitc__AugmentedStringFormExpr___delimiter_end_61d(val* self, uint32_t p0);
+void nitc__literal___AStartStringExpr___AugmentedStringFormExpr__delimiter_start_61d(val* self, uint32_t p0);
 void nitc__parser_prod___AStartStringExpr___nitc__parser_nodes__AStringFormExpr__n_string_61d(val* self, val* p0);
 void nitc__parser_prod___AStartStringExpr___init_astartstringexpr(val* self, val* p0);
 extern const struct class class_nitc__AStartStringExpr;
 void nitc__parser_prod___AMidStringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AMidStringExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+uint32_t nitc___nitc__AugmentedStringFormExpr___AAugmentedLiteral__delimiter_start(val* self);
+val* nitc__literal___AMidStringExpr___AAugmentedLiteral__prefix(val* self);
+val* nitc__literal___AMidStringExpr___AAugmentedLiteral__suffix(val* self);
+void nitc___nitc__AugmentedStringFormExpr___delimiter_start_61d(val* self, uint32_t p0);
 void nitc__parser_prod___AMidStringExpr___nitc__parser_nodes__AStringFormExpr__n_string_61d(val* self, val* p0);
 void nitc__parser_prod___AMidStringExpr___init_amidstringexpr(val* self, val* p0);
 extern const struct class class_nitc__AMidStringExpr;
 void nitc__parser_prod___AEndStringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AEndStringExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+uint32_t nitc__literal___AEndStringExpr___AAugmentedLiteral__delimiter_end(val* self);
+val* nitc__literal___AEndStringExpr___AAugmentedLiteral__prefix(val* self);
+void nitc__literal___AEndStringExpr___AugmentedStringFormExpr__delimiter_end_61d(val* self, uint32_t p0);
 void nitc__parser_prod___AEndStringExpr___nitc__parser_nodes__AStringFormExpr__n_string_61d(val* self, val* p0);
 void nitc__parser_prod___AEndStringExpr___init_aendstringexpr(val* self, val* p0);
 extern const struct class class_nitc__AEndStringExpr;
-void nitc__parser_prod___ASuperstringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
+void nitc__literal___ASuperstringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
+void nitc__literal___ASuperstringExpr___ANode__accept_literal(val* self, val* p0);
 void nitc__rapid_type_analysis___ASuperstringExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__parser_prod___ASuperstringExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
+val* nitc___nitc__AAugmentedLiteral___text(val* self);
+val* nitc__literal___ASuperstringExpr___AAugmentedLiteral__prefix(val* self);
+val* nitc__literal___ASuperstringExpr___AAugmentedLiteral__suffix(val* self);
 void nitc__parser_prod___ASuperstringExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__typing___ASuperstringExpr___AExpr__accept_typing(val* self, val* p0);
 val* nitc__abstract_compiler___ASuperstringExpr___AExpr__expr(val* self, val* p0);
-void nitc__parser_prod___ASuperstringExpr___init_asuperstringexpr(val* self, val* p0, val* p1);
 val* nitc___nitc__ASuperstringExpr___n_exprs(val* self);
+void nitc__parser_prod___ASuperstringExpr___init_asuperstringexpr(val* self, val* p0, val* p1);
+void nitc__parser_prod___ASuperstringExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 extern const struct class class_nitc__ASuperstringExpr;
-#define COLOR_nitc__parser_nodes__ASuperstringExpr___n_exprs 12
+#define COLOR_nitc__parser_nodes__ASuperstringExpr___n_exprs 25
 void nitc__parser_prod___AParExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__flow___AParExpr___ANode__accept_flow_visitor(val* self, val* p0);
 void nitc__transform___AParExpr___ANode__accept_transform_visitor(val* self, val* p0);
 void nitc__parser_prod___AParExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AParExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
-void nitc__typing___AParExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AParExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AParExpr___init_aparexpr(val* self, val* p0, val* p1, val* p2, val* p3);
 val* nitc___nitc__AParExpr___n_expr(val* self);
 void nitc__parser_prod___AParExpr___n_opar_61d(val* self, val* p0);
 void nitc__parser_prod___AParExpr___n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AParExpr___n_cpar_61d(val* self, val* p0);
+void nitc__parser_prod___AParExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
+void nitc__typing___AParExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AParExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AParExpr;
 void nitc__parser_prod___AAsCastExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__rapid_type_analysis___AAsCastExpr___ANode__accept_rapid_type_visitor(val* self, val* p0);
 void nitc__typing___AAsCastExpr___ANode__accept_post_typing(val* self, val* p0);
 void nitc__parser_prod___AAsCastExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAsCastExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AAsCastExpr___AExpr__expr(val* self, val* p0);
 val* nitc___nitc__AAsCastForm___n_expr(val* self);
 void nitc__parser_prod___AAsCastExpr___nitc__parser_nodes__AAsCastForm__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAsCastExpr___nitc__parser_nodes__AAsCastForm__n_kwas_61d(val* self, val* p0);
@@ -5591,56 +5616,57 @@ void nitc__parser_prod___AAsCastExpr___nitc__parser_nodes__AAsCastForm__n_opar_6
 void nitc__parser_prod___AAsCastExpr___nitc__parser_nodes__AAsCastForm__n_cpar_61d(val* self, val* p0);
 void nitc__parser_prod___AAsCastExpr___init_aascastexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4);
 val* nitc___nitc__AAsCastExpr___n_type(val* self);
+void nitc__typing___AAsCastExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AAsCastExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AAsCastExpr___n_type_61d(val* self, val* p0);
 extern const struct class class_nitc__AAsCastExpr;
 void nitc__parser_prod___AAsNotnullExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__typing___AAsNotnullExpr___ANode__accept_post_typing(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AAsNotnullExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AAsNotnullExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___nitc__parser_nodes__AAsCastForm__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___nitc__parser_nodes__AAsCastForm__n_kwas_61d(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___nitc__parser_nodes__AAsCastForm__n_opar_61d(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___nitc__parser_nodes__AAsCastForm__n_cpar_61d(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val* self, val* p0, val* p1, val* p2, val* p3, val* p4, val* p5);
 void nitc__parser_prod___AAsNotnullExpr___n_kwnot_61d(val* self, val* p0);
+void nitc__typing___AAsNotnullExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AAsNotnullExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AAsNotnullExpr___n_kwnull_61d(val* self, val* p0);
 extern const struct class class_nitc__AAsNotnullExpr;
 void nitc__parser_prod___AIssetAttrExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AIssetAttrExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AIssetAttrExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AIssetAttrExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIssetAttrExpr___nitc__parser_nodes__AAttrFormExpr__n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AIssetAttrExpr___nitc__parser_nodes__AAttrFormExpr__n_id_61d(val* self, val* p0);
+void nitc__typing___AIssetAttrExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AIssetAttrExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AIssetAttrExpr___init_aissetattrexpr(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___AIssetAttrExpr___n_kwisset_61d(val* self, val* p0);
 extern const struct class class_nitc__AIssetAttrExpr;
 void nitc__parser_prod___AVarargExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AVarargExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AVarargExpr___AExpr__accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___AVarargExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___AVarargExpr___init_avarargexpr(val* self, val* p0, val* p1);
 void nitc__parser_prod___AVarargExpr___n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___AVarargExpr___n_dotdotdot_61d(val* self, val* p0);
 val* nitc___nitc__AVarargExpr___n_expr(val* self);
+void nitc__typing___AVarargExpr___AExpr__accept_typing(val* self, val* p0);
+val* nitc__abstract_compiler___AVarargExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__AVarargExpr;
 void nitc__parser_prod___ANamedargExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ANamedargExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___AExpr___accept_typing(val* self, val* p0);
-val* nitc__abstract_compiler___ANamedargExpr___AExpr__expr(val* self, val* p0);
 void nitc__parser_prod___ANamedargExpr___init_anamedargexpr(val* self, val* p0, val* p1, val* p2);
 void nitc__parser_prod___ANamedargExpr___n_id_61d(val* self, val* p0);
 void nitc__parser_prod___ANamedargExpr___n_assign_61d(val* self, val* p0);
 void nitc__parser_prod___ANamedargExpr___n_expr_61d(val* self, val* p0);
 val* nitc___nitc__ANamedargExpr___n_id(val* self);
 val* nitc___nitc__ANamedargExpr___n_expr(val* self);
+val* nitc__abstract_compiler___ANamedargExpr___AExpr__expr(val* self, val* p0);
 extern const struct class class_nitc__ANamedargExpr;
 void nitc__parser_prod___AManyExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AManyExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___AManyExpr___init_amanyexpr(val* self, val* p0);
 val* nitc___nitc__AManyExpr___n_exprs(val* self);
 extern const struct class class_nitc__AManyExpr;
-#define COLOR_nitc__parser_nodes__AManyExpr___n_exprs 12
+#define COLOR_nitc__parser_nodes__AManyExpr___n_exprs 3
 void nitc__parser_prod___ATypeExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ATypeExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___ATypeExpr___init_atypeexpr(val* self, val* p0);
@@ -5654,13 +5680,11 @@ void nitc__parser_prod___AMethidExpr___n_id_61d(val* self, val* p0);
 extern const struct class class_nitc__AMethidExpr;
 void nitc__parser_prod___AAtExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AAtExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AAtExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 void nitc__parser_prod___AAtExpr___init_aatexpr(val* self, val* p0);
+void nitc__parser_prod___AAtExpr___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
 extern const struct class class_nitc__AAtExpr;
 void nitc__parser_prod___ADebugTypeExpr___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ADebugTypeExpr___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__typing___ADebugTypeExpr___AExpr__accept_typing(val* self, val* p0);
-void nitc__abstract_compiler___ADebugTypeExpr___AExpr__stmt(val* self, val* p0);
 void nitc__parser_prod___ADebugTypeExpr___init_adebugtypeexpr(val* self, val* p0, val* p1, val* p2, val* p3);
 val* nitc___nitc__ADebugTypeExpr___n_expr(val* self);
 val* nitc___nitc__ADebugTypeExpr___n_type(val* self);
@@ -5668,6 +5692,8 @@ void nitc__parser_prod___ADebugTypeExpr___n_kwdebug_61d(val* self, val* p0);
 void nitc__parser_prod___ADebugTypeExpr___n_kwtype_61d(val* self, val* p0);
 void nitc__parser_prod___ADebugTypeExpr___n_expr_61d(val* self, val* p0);
 void nitc__parser_prod___ADebugTypeExpr___n_type_61d(val* self, val* p0);
+void nitc__typing___ADebugTypeExpr___AExpr__accept_typing(val* self, val* p0);
+void nitc__abstract_compiler___ADebugTypeExpr___AExpr__stmt(val* self, val* p0);
 extern const struct class class_nitc__ADebugTypeExpr;
 void nitc__parser_prod___AListExprs___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AListExprs___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
@@ -5675,7 +5701,7 @@ val* nitc___nitc__AExprs___n_exprs(val* self);
 val* nitc__typing___AExprs___to_a(val* self);
 void nitc__parser_prod___AListExprs___init_alistexprs(val* self, val* p0);
 extern const struct class class_nitc__AListExprs;
-#define COLOR_nitc__parser_nodes__AExprs___n_exprs 5
+#define COLOR_nitc__parser_nodes__AExprs___n_exprs 3
 void nitc__parser_prod___AParExprs___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AParExprs___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___AParExprs___init_aparexprs(val* self, val* p0, val* p1, val* p2);
@@ -5763,7 +5789,7 @@ void nitc__parser_prod___AModuleName___init_amodulename(val* self, val* p0, val*
 void nitc__parser_prod___AModuleName___n_quad_61d(val* self, val* p0);
 void nitc__parser_prod___AModuleName___n_id_61d(val* self, val* p0);
 extern const struct class class_nitc__AModuleName;
-#define COLOR_nitc__parser_nodes__AModuleName___n_path 6
+#define COLOR_nitc__parser_nodes__AModuleName___n_path 4
 void nitc__parser_prod___AInLanguage___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AInLanguage___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 val* nitc___nitc__AInLanguage___n_string(val* self);
@@ -5789,11 +5815,12 @@ short int nitc__light_c___AExternCodeBlock___is_c_body(val* self);
 extern const struct class class_nitc__AExternCodeBlock;
 void nitc__parser_prod___AQualified___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AQualified___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
-void nitc__parser_prod___AQualified___init_aqualified(val* self, val* p0, val* p1);
+val* nitc___nitc__AQualified___n_classid(val* self);
 val* nitc___nitc__AQualified___n_id(val* self);
+void nitc__parser_prod___AQualified___init_aqualified(val* self, val* p0, val* p1);
 void nitc__parser_prod___AQualified___n_classid_61d(val* self, val* p0);
 extern const struct class class_nitc__AQualified;
-#define COLOR_nitc__parser_nodes__AQualified___n_id 6
+#define COLOR_nitc__parser_nodes__AQualified___n_id 4
 void nitc__parser_prod___ADoc___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___ADoc___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 val* nitc__modelbuilder_base___ADoc___to_mdoc(val* self);
@@ -5803,7 +5830,7 @@ void nitc__modelbuilder_base___ADoc___mdoc_cache_61d(val* self, val* p0);
 void nitc__parser_prod___ADoc___init_adoc(val* self, val* p0);
 extern const struct class class_nitc__ADoc;
 extern const struct type type_nitc__ANodes__nitc__TComment;
-#define COLOR_nitc__parser_nodes__ADoc___n_comment 6
+#define COLOR_nitc__parser_nodes__ADoc___n_comment 4
 void nitc__parser_prod___AAnnotations___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AAnnotations___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 val* nitc___nitc__AAnnotations___n_items(val* self);
@@ -5815,7 +5842,7 @@ void nitc__parser_prod___AAnnotations___n_cpar_61d(val* self, val* p0);
 void nitc__parser_prod___AAnnotations___n_kwend_61d(val* self, val* p0);
 extern const struct class class_nitc__AAnnotations;
 extern const struct type type_nitc__ANodes__nitc__AAnnotation;
-#define COLOR_nitc__parser_nodes__AAnnotations___n_items 8
+#define COLOR_nitc__parser_nodes__AAnnotations___n_items 6
 void nitc__parser_prod___AAnnotation___nitc__parser_nodes__ANode__visit_all(val* self, val* p0);
 void nitc__parser_prod___AAnnotation___nitc__parser_nodes__ANode__replace_child(val* self, val* p0, val* p1);
 void nitc__parser_prod___AAnnotation___nitc__parser_nodes__Prod__n_annotations_61d(val* self, val* p0);
@@ -5905,17 +5932,17 @@ extern const struct class class_nitc__parser_work__TextCollectorVisitor;
 #define COLOR_nitc__parser_work__TextCollectorVisitor___text 1
 void ini___ini__ConfigTree___core__kernel__Object__init(val* self);
 val* ini___ini__ConfigTree___core__abstract_text__Object__to_s(val* self);
-void ini___ini__ConfigTree___ini_file_61d(val* self, val* p0);
 val* ini___ini__ConfigTree____91d_93d(val* self, val* p0);
+void ini___ini__ConfigTree___ini_file_61d(val* self, val* p0);
+val* ini___ini__ConfigTree___get_node(val* self, val* p0);
 val* ini___ini__ConfigTree___ini_file(val* self);
 void ini___ini__ConfigTree___load(val* self);
 val* ini___ini__ConfigTree___to_map(val* self);
-val* ini___ini__ConfigTree___get_node(val* self, val* p0);
+val* ini___ini__ConfigTree___get_root(val* self, val* p0);
 val* ini___ini__ConfigTree___roots(val* self);
 void ini___ini__ConfigTree___set_node(val* self, val* p0, val* p1);
 void ini___ini__ConfigTree___set_array(val* self, val* p0, val* p1);
 val* ini___ini__ConfigTree___leaves(val* self);
-val* ini___ini__ConfigTree___get_root(val* self, val* p0);
 short int ini___ini__ConfigTree___has_key(val* self, val* p0);
 void ini___ini__ConfigTree___core__stream__Writable__write_to(val* self, val* p0);
 extern const struct class class_ini__ConfigTree;
@@ -5923,13 +5950,13 @@ extern const struct type type_core__Array__ini__ConfigNode;
 #define COLOR_ini__ConfigTree___roots 1
 void ini___ini__ConfigNode___core__kernel__Object__init(val* self);
 val* ini___ini__ConfigNode___value(val* self);
-val* ini___ini__ConfigNode___key(val* self);
 val* ini___ini__ConfigNode___get_child(val* self, val* p0);
+val* ini___ini__ConfigNode___key(val* self);
+val* ini___ini__ConfigNode___name(val* self);
+val* ini___ini__ConfigNode___children(val* self);
 void ini___ini__ConfigNode___name_61d(val* self, val* p0);
 void ini___ini__ConfigNode___value_61d(val* self, val* p0);
 void ini___ini__ConfigNode___parent_61d(val* self, val* p0);
-val* ini___ini__ConfigNode___children(val* self);
-val* ini___ini__ConfigNode___name(val* self);
 val* ini___ini__ConfigNode___parent(val* self);
 extern const struct class class_ini__ConfigNode;
 extern const struct type type_core__HashMap__core__String__ini__ConfigNode;
@@ -6045,6 +6072,7 @@ val* NEW_core__ArrayMap(const struct type* type);
 extern const struct type type_core__ArrayMap__core__Int__core__Int;
 #define COLOR_nitc__typing__SignatureMap___map 0
 void nitc___nitc__CallSite___core__kernel__Object__init(val* self);
+val* nitc___nitc__CallSite___nitc__model_base__MEntity__location(val* self);
 void nitc___nitc__CallSite___location_61d(val* self, val* p0);
 void nitc___nitc__CallSite___recv_61d(val* self, val* p0);
 void nitc___nitc__CallSite___mmodule_61d(val* self, val* p0);
@@ -6097,8 +6125,8 @@ void nitc__flow___nitc__flow__FlowVisitor___current_flow_context_61d(val* self, 
 val* nitc__flow___nitc__flow__FlowVisitor___toolcontext(val* self);
 val* nitc__flow___nitc__flow__FlowVisitor___make_unreachable_flow(val* self);
 void nitc__flow___nitc__flow__FlowVisitor___merge_breaks(val* self, val* p0);
-val* nitc__flow___nitc__flow__FlowVisitor___visit_expr(val* self, val* p0);
 val* nitc__flow___nitc__flow__FlowVisitor___make_merge_flow(val* self, val* p0, val* p1);
+val* nitc__flow___nitc__flow__FlowVisitor___visit_expr(val* self, val* p0);
 void nitc__flow___nitc__flow__FlowVisitor___merge_continues_to(val* self, val* p0, val* p1);
 val* nitc__flow___nitc__flow__FlowVisitor___make_true_false_flow(val* self, val* p0, val* p1);
 val* nitc__flow___nitc__flow__FlowVisitor___make_sub_true_false_flow(val* self);
@@ -6161,9 +6189,9 @@ extern const struct class class_nitc__Variable;
 #define COLOR_nitc__scope__Variable___warn_unread 4
 #define COLOR_nitc__typing__Variable___is_adapted 1
 void nitc___nitc__EscapeMark___core__kernel__Object__init(val* self);
+void nitc___nitc__EscapeMark___name_61d(val* self, val* p0);
 val* nitc___nitc__EscapeMark___escapes(val* self);
 val* nitc___nitc__EscapeMark___continue_mark(val* self);
-void nitc___nitc__EscapeMark___name_61d(val* self, val* p0);
 void nitc___nitc__EscapeMark___continue_mark_61d(val* self, val* p0);
 val* nitc___nitc__EscapeMark___name(val* self);
 extern const struct class class_nitc__EscapeMark;
@@ -6172,10 +6200,12 @@ extern const struct type type_core__Array__nitc__AEscapeExpr;
 void nitc__scope___nitc__scope__ScopeVisitor___core__kernel__Object__init(val* self);
 void nitc__scope___nitc__scope__ScopeVisitor___nitc__parser_nodes__Visitor__visit(val* self, val* p0);
 void nitc__scope___nitc__scope__ScopeVisitor___toolcontext_61d(val* self, val* p0);
+void nitc__scope___nitc__scope__ScopeVisitor___propdef_61d(val* self, val* p0);
 void nitc__scope___nitc__scope__ScopeVisitor___shift_scope(val* self);
 val* nitc__scope___nitc__scope__ScopeVisitor___scopes(val* self);
 val* nitc__scope___nitc__scope__ScopeVisitor___toolcontext(val* self);
 short int nitc__scope___nitc__scope__ScopeVisitor___register_variable(val* self, val* p0, val* p1);
+val* nitc__scope___nitc__scope__ScopeVisitor___propdef(val* self);
 val* nitc__scope___nitc__scope__ScopeVisitor___get_escapemark(val* self, val* p0, val* p1);
 void nitc__scope___nitc__scope__ScopeVisitor___error(val* self, val* p0, val* p1);
 val* nitc__scope___nitc__scope__ScopeVisitor___search_variable(val* self, val* p0);
@@ -6184,11 +6214,11 @@ val* nitc__scope___nitc__scope__ScopeVisitor___make_escape_mark(val* self, val* 
 void nitc__scope___nitc__scope__ScopeVisitor___enter_visit_block(val* self, val* p0, val* p1);
 val* nitc__scope___nitc__scope__ScopeVisitor___search_label(val* self, val* p0);
 extern const struct class class_nitc__scope__ScopeVisitor;
-#define COLOR_nitc__scope__ScopeVisitor___selfvariable 2
+#define COLOR_nitc__scope__ScopeVisitor___selfvariable 3
 val* NEW_core__List(const struct type* type);
 extern const struct type type_core__List__nitc__scope__Scope;
-#define COLOR_core___core__List___core__kernel__Object__init 27
-#define COLOR_nitc__scope__ScopeVisitor___scopes 3
+#define COLOR_core___core__List___core__kernel__Object__init 17
+#define COLOR_nitc__scope__ScopeVisitor___scopes 4
 val* nitc__scope___nitc__scope__Scope___variables(val* self);
 val* nitc__scope___nitc__scope__Scope___escapemark(val* self);
 val* nitc__scope___nitc__scope__Scope___get_variable(val* self, val* p0);
@@ -6286,41 +6316,29 @@ val* nitc___nitc__RapidTypeVisitor___analysis(val* self);
 val* nitc___nitc__RapidTypeVisitor___get_method(val* self, val* p0, val* p1);
 val* nitc___nitc__RapidTypeVisitor___cleanup_type(val* self, val* p0);
 extern const struct class class_nitc__RapidTypeVisitor;
-void csv___csv__CsvFormat___core__kernel__Object__init(val* self);
-uint32_t csv___csv__CsvFormat___delimiter(val* self);
-void csv___csv__CsvFormat___delimiter_61d(val* self, uint32_t p0);
-void csv___csv__CsvFormat___separator_61d(val* self, uint32_t p0);
-void csv___csv__CsvFormat___eol_61d(val* self, val* p0);
-uint32_t csv___csv__CsvFormat___separator(val* self);
-val* csv___csv__CsvFormat___eol(val* self);
-short int csv___csv__CsvFormat___is_value_clean(val* self, val* p0);
-val* csv___csv__CsvFormat___escape_cell(val* self, val* p0);
-val* csv___csv__CsvFormat___escaping(val* self);
-extern const struct class class_csv__CsvFormat;
-void csv___csv__CsvDocument___format_61d(val* self, val* p0);
+void csv___csv__CsvDocument___core__kernel__Object__init(val* self);
+void csv___csv__CsvStream___separator_61d(val* self, uint32_t p0);
+uint32_t csv___csv__CsvStream___separator(val* self);
+void csv___csv__CsvStream___eol_61d(val* self, val* p0);
+val* csv___csv__CsvStream___eol(val* self);
+void csv___csv__CsvStream___delimiter_61d(val* self, uint32_t p0);
+uint32_t csv___csv__CsvStream___delimiter(val* self);
 void csv___csv__CsvDocument___header_61d(val* self, val* p0);
+void csv___csv__CsvDocument___records_61d(val* self, val* p0);
 void csv___csv__CsvDocument___add_record(val* self, val* p0);
-val* csv___csv__CsvDocument___format(val* self);
 val* csv___csv__CsvDocument___header(val* self);
 val* csv___csv__CsvDocument___records(val* self);
 void csv___csv__CsvDocument___core__stream__Writable__write_to(val* self, val* p0);
 extern const struct class class_csv__CsvDocument;
-#define COLOR_csv__CsvDocument___format 0
-#define COLOR_csv__CsvDocument___header 1
-extern const struct type type_core__Array__core__Array__core__String;
-#define COLOR_csv__CsvDocument___records 2
+#define COLOR_csv__CsvStream___delimiter 0
+#define COLOR_csv__CsvStream___separator 1
+#define COLOR_csv__CsvStream___eol 2
 void csv___csv__CsvWriter___core__kernel__Object__init(val* self);
-void csv___csv__CsvWriter___with_format(val* self, val* p0, val* p1);
-void csv___csv__CsvWriter___write_sequence(val* self, val* p0);
 void csv___csv__CsvWriter___ostream_61d(val* self, val* p0);
-void csv___csv__CsvWriter___format_61d(val* self, val* p0);
-val* csv___csv__CsvWriter___format(val* self);
-void csv___csv__CsvWriter___write_cell(val* self, val* p0);
+void csv___csv__CsvWriter___write_line(val* self, val* p0);
+void csv___csv__CsvWriter___write_lines(val* self, val* p0);
 val* csv___csv__CsvWriter___ostream(val* self);
-short int csv___csv__CsvWriter___always_escape(val* self);
 extern const struct class class_csv__CsvWriter;
-#define COLOR_csv__CsvWriter___format 1
-#define COLOR_csv__CsvWriter___always_escape 2
 void nitc___nitc__ErasureCompilerPhase___nitc__modelbuilder__Phase__process_mainmodule(val* self, val* p0, val* p1);
 extern const struct class class_nitc__ErasureCompilerPhase;
 void nitc___nitc__SeparateErasureCompiler___core__kernel__Object__init(val* self);
@@ -6346,9 +6364,12 @@ val* nitc___nitc__AbstractCompiler___files(val* self);
 val* nitc___nitc__AbstractCompiler___header(val* self);
 void nitc___nitc__SeparateErasureCompiler___nitc__abstract_compiler__AbstractCompiler__compile_header_structs(val* self);
 void nitc___nitc__SeparateCompiler___nitc__abstract_compiler__AbstractCompiler__compile_nitni_structs(val* self);
+void nitc___nitc__AbstractCompiler___compile_catch_stack(val* self);
 val* nitc___nitc__SeparateErasureCompiler___nitc__abstract_compiler__AbstractCompiler__new_visitor(val* self);
 void nitc___nitc__AbstractCompiler___provide_declaration(val* self, val* p0, val* p1);
 void nitc___nitc__AbstractCompiler___generate_init_attr(val* self, val* p0, val* p1, val* p2);
+void nitc___nitc__AbstractCompiler___compile_before_main(val* self, val* p0);
+void nitc___nitc__AbstractCompiler___compile_begin_main(val* self, val* p0);
 val* nitc___nitc__AbstractCompiler___count_type_test_resolved(val* self);
 val* nitc___nitc__AbstractCompiler___count_type_test_unresolved(val* self);
 val* nitc___nitc__AbstractCompiler___count_type_test_skipped(val* self);
@@ -6435,7 +6456,7 @@ void nitc___nitc__SeparateCompiler___core__kernel__Object__init(val* self);
 extern const struct class class_nitc__SeparateErasureCompiler;
 extern const struct type type_core__HashMap__core__String__core__String;
 #define COLOR_nitc__abstract_compiler__AbstractCompiler___names 0
-extern const struct type type_core__List__nitc__CodeFile;
+extern const struct type type_core__Array__nitc__CodeFile;
 #define COLOR_nitc__abstract_compiler__AbstractCompiler___files 6
 #define COLOR_nitc__abstract_compiler__AbstractCompiler___linker_script 8
 #define COLOR_nitc__abstract_compiler__AbstractCompiler___provided_declarations 9
@@ -6472,6 +6493,7 @@ extern const struct type type_core__HashMap__nitc__MClass__core__Array__nullable
 void nitc___nitc__AbstractCompilerVisitor___core__kernel__Object__init(val* self);
 void nitc___nitc__AbstractCompilerVisitor___add_decl(val* self, val* p0);
 void nitc___nitc__AbstractCompilerVisitor___require_declaration(val* self, val* p0);
+val* nitc___nitc__AbstractCompilerVisitor___nit_alloc(val* self, val* p0, val* p1);
 void nitc___nitc__AbstractCompilerVisitor___add(val* self, val* p0);
 val* nitc___nitc__AbstractCompilerVisitor___compiler(val* self);
 void nitc___nitc__AbstractCompilerVisitor___add_abort(val* self, val* p0);
@@ -6506,6 +6528,7 @@ void nitc___nitc__AbstractCompilerVisitor___ret(val* self, val* p0);
 val* nitc___nitc__AbstractCompilerVisitor___value_instance(val* self, val* p0);
 void nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__write_attribute(val* self, val* p0, val* p1, val* p2);
 val* nitc___nitc__AbstractCompilerVisitor___bool_instance(val* self, short int p0);
+short int nitc___nitc__AbstractCompilerVisitor___maybenull(val* self, val* p0);
 val* nitc___nitc__AbstractCompilerVisitor___bool_type(val* self);
 void nitc___nitc__AbstractCompilerVisitor___add_cast(val* self, val* p0, val* p1, val* p2);
 val* nitc___nitc__SeparateErasureCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__compile_callsite(val* self, val* p0, val* p1);
@@ -6524,7 +6547,6 @@ val* nitc___nitc__AbstractCompilerVisitor___resolve_for(val* self, val* p0, val*
 void nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__unbox_signature_extern(val* self, val* p0, val* p1);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__equal_test(val* self, val* p0, val* p1);
 short int nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__native_array_def(val* self, val* p0, val* p1, val* p2);
-void nitc___nitc__SeparateErasureCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__calloc_array(val* self, val* p0, val* p1);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__is_same_type_test(val* self, val* p0, val* p1);
 val* nitc___nitc__SeparateErasureCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__box_extern(val* self, val* p0, val* p1);
 val* nitc___nitc__AbstractCompilerVisitor___variables(val* self);
@@ -6550,6 +6572,7 @@ val* nitc___nitc__AbstractCompilerVisitor___int32_instance(val* self, int32_t p0
 val* nitc___nitc__AbstractCompilerVisitor___uint32_instance(val* self, uint32_t p0);
 val* nitc___nitc__AbstractCompilerVisitor___float_instance(val* self, val* p0);
 val* nitc___nitc__AbstractCompilerVisitor___char_instance(val* self, uint32_t p0);
+val* nitc___nitc__AbstractCompilerVisitor___c_string_instance(val* self, char* p0, long p1);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__array_instance(val* self, val* p0, val* p1);
 void nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__native_array_set(val* self, val* p0, long p1, val* p2);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__vararg_instance(val* self, val* p0, val* p1, val* p2, val* p3);
@@ -6583,7 +6606,6 @@ extern const struct class class_nitc__SeparateCompiler;
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__init_instance(val* self, val* p0);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__class_name_string(val* self, val* p0);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__type_test(val* self, val* p0, val* p1, val* p2);
-void nitc___nitc__AbstractCompilerVisitor___calloc_array(val* self, val* p0, val* p1);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__box_extern(val* self, val* p0, val* p1);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__unbox_extern(val* self, val* p0, val* p1);
 val* nitc___nitc__SeparateCompilerVisitor___nitc__abstract_compiler__AbstractCompilerVisitor__native_array_instance(val* self, val* p0, val* p1);
@@ -6642,7 +6664,6 @@ void nitc___nitc__CodeWriter___add_decl(val* self, val* p0);
 val* nitc___nitc__CodeWriter___decl_lines(val* self);
 val* nitc___nitc__CodeWriter___lines(val* self);
 extern const struct class class_nitc__CodeWriter;
-extern const struct type type_core__List__core__String;
 #define COLOR_nitc__abstract_compiler__CodeWriter___lines 1
 #define COLOR_nitc__abstract_compiler__CodeWriter___decl_lines 2
 void nitc___nitc__RuntimeVariable___core__kernel__Object__init(val* self);

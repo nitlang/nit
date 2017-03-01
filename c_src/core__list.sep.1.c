@@ -1,5 +1,5 @@
 #include "core__list.sep.0.h"
-/* method list#List#[] for (self: List[nullable Object], Int): nullable Object */
+/* method list$List$[] for (self: List[nullable Object], Int): nullable Object */
 val* core___core__List___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0) {
 val* var /* : nullable Object */;
 long var_index /* var index: Int */;
@@ -10,18 +10,17 @@ var_index = p0;
 {
 var1 = core___core__List___get_node(self, var_index);
 }
-if (var1 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 24);
 fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item (var1) on <var1:nullable ListNode[nullable Object]> */
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
 }
-var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object]> */
+{
+{ /* Inline abstract_collection$Ref$item (var1) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var2 = var4;
 RET_LABEL3:(void)0;
 }
@@ -31,7 +30,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#[]= for (self: List[nullable Object], Int, nullable Object) */
+/* method list$List$[]= for (self: List[nullable Object], Int, nullable Object) */
 void core___core__List___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1) {
 short int var /* : Bool */;
 int cltype;
@@ -74,12 +73,16 @@ var_item = p1;
 {
 var1 = core___core__List___get_node(self, var_index);
 }
-if (var1 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 26);
 fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item= (var1,var_item) on <var1:nullable ListNode[nullable Object]> */
+}
+{
+{ /* Inline abstract_collection$Ref$item= (var1,var_item) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (item) <var_item:nullable Object> isa E */
 /* <var_item:nullable Object> isa E */
 type_struct6 = var1->type->resolution_table->types[COLOR_core__Ref___35dE];
@@ -98,39 +101,33 @@ var3 = (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->type_t
 if (unlikely(!var3)) {
 var_class_name8 = var_item == NULL ? "null" : (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name8);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 340);
 fatal_exit(1);
 }
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
-}
-var1->attrs[COLOR_core__abstract_collection__Ref___item].val = var_item; /* _item on <var1:nullable ListNode[nullable Object]> */
+var1->attrs[COLOR_core__abstract_collection__Ref___item].val = var_item; /* _item on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL2:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method list#List#first for (self: List[nullable Object]): nullable Object */
+/* method list$List$first for (self: List[nullable Object]): nullable Object */
 val* core___core__List___core__abstract_collection__Collection__first(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : nullable ListNode[nullable Object] */;
 val* var2 /* : nullable Object */;
 val* var4 /* : nullable Object */;
 var1 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
-if (var1 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 29);
 fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item (var1) on <var1:nullable ListNode[nullable Object]> */
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
 }
-var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object]> */
+{
+{ /* Inline abstract_collection$Ref$item (var1) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var2 = var4;
 RET_LABEL3:(void)0;
 }
@@ -140,7 +137,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#first= for (self: List[nullable Object], nullable Object) */
+/* method list$List$first= for (self: List[nullable Object], nullable Object) */
 void core___core__List___core__abstract_collection__Sequence__first_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -179,12 +176,16 @@ fatal_exit(1);
 }
 var_e = p0;
 var1 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
-if (var1 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 32);
 fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item= (var1,var_e) on <var1:nullable ListNode[nullable Object]> */
+}
+{
+{ /* Inline abstract_collection$Ref$item= (var1,var_e) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (item) <var_e:nullable Object> isa E */
 /* <var_e:nullable Object> isa E */
 type_struct6 = var1->type->resolution_table->types[COLOR_core__Ref___35dE];
@@ -203,39 +204,33 @@ var3 = (((long)var_e&3)?type_info[((long)var_e&3)]:var_e->type)->type_table[clty
 if (unlikely(!var3)) {
 var_class_name8 = var_e == NULL ? "null" : (((long)var_e&3)?type_info[((long)var_e&3)]:var_e->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name8);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 340);
 fatal_exit(1);
 }
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
-}
-var1->attrs[COLOR_core__abstract_collection__Ref___item].val = var_e; /* _item on <var1:nullable ListNode[nullable Object]> */
+var1->attrs[COLOR_core__abstract_collection__Ref___item].val = var_e; /* _item on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL2:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method list#List#last for (self: List[nullable Object]): nullable Object */
+/* method list$List$last for (self: List[nullable Object]): nullable Object */
 val* core___core__List___core__abstract_collection__SequenceRead__last(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : nullable ListNode[nullable Object] */;
 val* var2 /* : nullable Object */;
 val* var4 /* : nullable Object */;
 var1 = self->attrs[COLOR_core__list__List___tail].val; /* _tail on <self:List[nullable Object]> */
-if (var1 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 35);
 fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item (var1) on <var1:nullable ListNode[nullable Object]> */
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
 }
-var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object]> */
+{
+{ /* Inline abstract_collection$Ref$item (var1) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var2 = var4;
 RET_LABEL3:(void)0;
 }
@@ -245,7 +240,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#is_empty for (self: List[nullable Object]): Bool */
+/* method list$List$is_empty for (self: List[nullable Object]): Bool */
 short int core___core__List___core__abstract_collection__Collection__is_empty(val* self) {
 short int var /* : Bool */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -261,10 +256,10 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var1,((val*)NULL)) on <var1:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var1,((val*)NULL)) on <var1:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var1,var_other) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var1,var_other) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var7 = var1 == var_other;
 var5 = var7;
 goto RET_LABEL6;
@@ -282,7 +277,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#length for (self: List[nullable Object]): Int */
+/* method list$List$length for (self: List[nullable Object]): Int */
 long core___core__List___core__abstract_collection__Collection__length(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -291,12 +286,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method list#List#length= for (self: List[nullable Object], Int) */
+/* method list$List$length= for (self: List[nullable Object], Int) */
 void core___core__List___length_61d(val* self, long p0) {
 self->attrs[COLOR_core__list__List___length].l = p0; /* _length on <self:List[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#List#has for (self: List[nullable Object], nullable Object): Bool */
+/* method list$List$has for (self: List[nullable Object], nullable Object): Bool */
 short int core___core__List___core__abstract_collection__Collection__has(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_e /* var e: nullable Object */;
@@ -344,7 +339,7 @@ var4 = 0; /* is null */
 var4 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var3,((val*)NULL)) on <var3:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var3,((val*)NULL)) on <var3:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var7 = ((short int(*)(val* self, val* p0))(var3->class->vft[COLOR_core__kernel__Object___61d_61d]))(var3, var_other); /* == on <var3:nullable ListNode[nullable Object](ListNode[nullable Object])>*/
@@ -361,7 +356,107 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#push for (self: List[nullable Object], nullable Object) */
+/* method list$List$count for (self: List[nullable Object], nullable Object): Int */
+long core___core__List___core__abstract_collection__Collection__count(val* self, val* p0) {
+long var /* : Int */;
+val* var_e /* var e: nullable Object */;
+long var_nb /* var nb: Int */;
+val* var1 /* : nullable ListNode[nullable Object] */;
+val* var_node /* var node: nullable ListNode[nullable Object] */;
+short int var2 /* : Bool */;
+short int var3 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
+val* var7 /* : nullable Object */;
+val* var9 /* : nullable Object */;
+short int var10 /* : Bool */;
+short int var11 /* : Bool */;
+long var12 /* : Int */;
+short int var14 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var15 /* : Int */;
+val* var16 /* : nullable ListNode[nullable Object] */;
+val* var18 /* : nullable ListNode[nullable Object] */;
+var_e = p0;
+var_nb = 0l;
+var1 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
+var_node = var1;
+for(;;) {
+if (var_node == NULL) {
+var2 = 0; /* is null */
+} else {
+var2 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel$Object$!= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
+var_other = ((val*)NULL);
+{
+var5 = ((short int(*)(val* self, val* p0))(var_node->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_node, var_other); /* == on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])>*/
+}
+var6 = !var5;
+var3 = var6;
+goto RET_LABEL4;
+RET_LABEL4:(void)0;
+}
+var2 = var3;
+}
+if (var2){
+{
+{ /* Inline abstract_collection$Ref$item (var_node) on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var9 = var_node->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var7 = var9;
+RET_LABEL8:(void)0;
+}
+}
+if (var7 == NULL) {
+var10 = (var_e != NULL);
+} else {
+var11 = ((short int(*)(val* self, val* p0))((((long)var7&3)?class_info[((long)var7&3)]:var7->class)->vft[COLOR_core__kernel__Object___33d_61d]))(var7, var_e); /* != on <var7:nullable Object>*/
+var10 = var11;
+}
+if (var10){
+{
+{ /* Inline kernel$Int$+ (var_nb,1l) on <var_nb:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var14 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var14)) {
+var_class_name = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
+}
+var15 = var_nb + 1l;
+var12 = var15;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
+}
+}
+var_nb = var12;
+} else {
+}
+{
+{ /* Inline list$ListNode$next (var_node) on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var18 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var16 = var18;
+RET_LABEL17:(void)0;
+}
+}
+var_node = var16;
+} else {
+goto BREAK_label;
+}
+}
+BREAK_label: (void)0;
+var = var_nb;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method list$List$push for (self: List[nullable Object], nullable Object) */
 void core___core__List___core__abstract_collection__Sequence__push(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -373,32 +468,31 @@ val* var_e /* var e: nullable Object */;
 val* var1 /* : ListNode[nullable Object] */;
 val* var_node /* var node: ListNode[nullable Object] */;
 val* var2 /* : nullable ListNode[nullable Object] */;
+val* var_tail /* var tail: nullable ListNode[nullable Object] */;
 short int var3 /* : Bool */;
 short int var4 /* : Bool */;
 val* var_other /* var other: nullable Object */;
 short int var6 /* : Bool */;
 short int var8 /* : Bool */;
-val* var9 /* : nullable ListNode[nullable Object] */;
-short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-const struct type* type_struct14;
-const char* var_class_name15;
-val* var16 /* : nullable ListNode[nullable Object] */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-const struct type* type_struct21;
-const char* var_class_name22;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+const struct type* type_struct13;
+const char* var_class_name14;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+const struct type* type_struct19;
+const char* var_class_name20;
 val* var_ /* var : List[nullable Object] */;
+long var21 /* : Int */;
 long var23 /* : Int */;
-long var25 /* : Int */;
-long var26 /* : Int */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-const char* var_class_name31;
-long var32 /* : Int */;
+long var24 /* : Int */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+const char* var_class_name29;
+long var30 /* : Int */;
 /* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
 type_struct = self->type->resolution_table->types[COLOR_core__List___35dE];
@@ -430,17 +524,18 @@ var1 = NEW_core__list__ListNode(self->type->resolution_table->types[COLOR_core__
 }
 var_node = var1;
 var2 = self->attrs[COLOR_core__list__List___tail].val; /* _tail on <self:List[nullable Object]> */
-if (var2 == NULL) {
+var_tail = var2;
+if (var_tail == NULL) {
 var3 = 1; /* is null */
 } else {
 var3 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var2,((val*)NULL)) on <var2:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var_tail,((val*)NULL)) on <var_tail:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var2,var_other) on <var2:nullable ListNode[nullable Object](ListNode[nullable Object])> */
-var8 = var2 == var_other;
+{ /* Inline kernel$Object$is_same_instance (var_tail,var_other) on <var_tail:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var8 = var_tail == var_other;
 var6 = var8;
 goto RET_LABEL7;
 RET_LABEL7:(void)0;
@@ -455,101 +550,86 @@ var3 = var4;
 if (var3){
 self->attrs[COLOR_core__list__List___head].val = var_node; /* _head on <self:List[nullable Object]> */
 } else {
-var9 = self->attrs[COLOR_core__list__List___tail].val; /* _tail on <self:List[nullable Object]> */
-if (var9 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 93);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next= (var9,var_node) on <var9:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$next= (var_tail,var_node) on <var_tail:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (next) <var_node:ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var_node:ListNode[nullable Object]> isa nullable ListNode[E] */
-type_struct14 = var9->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
-cltype12 = type_struct14->color;
-idtype13 = type_struct14->id;
-if(cltype12 >= var_node->type->table_size) {
-var11 = 0;
+type_struct13 = var_tail->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
+cltype11 = type_struct13->color;
+idtype12 = type_struct13->id;
+if(cltype11 >= var_node->type->table_size) {
+var10 = 0;
 } else {
-var11 = var_node->type->type_table[cltype12] == idtype13;
+var10 = var_node->type->type_table[cltype11] == idtype12;
 }
-if (unlikely(!var11)) {
-var_class_name15 = var_node == NULL ? "null" : var_node->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name15);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+if (unlikely(!var10)) {
+var_class_name14 = var_node == NULL ? "null" : var_node->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name14);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
-if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
-fatal_exit(1);
-}
-var9->attrs[COLOR_core__list__ListNode___next].val = var_node; /* _next on <var9:nullable ListNode[nullable Object]> */
-RET_LABEL10:(void)0;
+var_tail->attrs[COLOR_core__list__ListNode___next].val = var_node; /* _next on <var_tail:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+RET_LABEL9:(void)0;
 }
 }
-var16 = self->attrs[COLOR_core__list__List___tail].val; /* _tail on <self:List[nullable Object]> */
 {
-{ /* Inline list#ListNode#prev= (var_node,var16) on <var_node:ListNode[nullable Object]> */
-/* Covariant cast for argument 0 (prev) <var16:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
-/* <var16:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
-type_struct21 = var_node->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
-cltype19 = type_struct21->color;
-idtype20 = type_struct21->id;
-if(var16 == NULL) {
-var18 = 1;
+{ /* Inline list$ListNode$prev= (var_node,var_tail) on <var_node:ListNode[nullable Object]> */
+/* Covariant cast for argument 0 (prev) <var_tail:nullable ListNode[nullable Object](ListNode[nullable Object])> isa nullable ListNode[E] */
+/* <var_tail:nullable ListNode[nullable Object](ListNode[nullable Object])> isa nullable ListNode[E] */
+type_struct19 = var_node->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
+cltype17 = type_struct19->color;
+idtype18 = type_struct19->id;
+if(cltype17 >= var_tail->type->table_size) {
+var16 = 0;
 } else {
-if(cltype19 >= var16->type->table_size) {
-var18 = 0;
-} else {
-var18 = var16->type->type_table[cltype19] == idtype20;
+var16 = var_tail->type->type_table[cltype17] == idtype18;
 }
-}
-if (unlikely(!var18)) {
-var_class_name22 = var16 == NULL ? "null" : var16->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name22);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+if (unlikely(!var16)) {
+var_class_name20 = var_tail == NULL ? "null" : var_tail->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name20);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
-var_node->attrs[COLOR_core__list__ListNode___prev].val = var16; /* _prev on <var_node:ListNode[nullable Object]> */
-RET_LABEL17:(void)0;
+var_node->attrs[COLOR_core__list__ListNode___prev].val = var_tail; /* _prev on <var_node:ListNode[nullable Object]> */
+RET_LABEL15:(void)0;
 }
 }
 }
 self->attrs[COLOR_core__list__List___tail].val = var_node; /* _tail on <self:List[nullable Object]> */
 var_ = self;
 {
-{ /* Inline list#List#length (var_) on <var_:List[nullable Object]> */
-var25 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
-var23 = var25;
-RET_LABEL24:(void)0;
+{ /* Inline list$List$length (var_) on <var_:List[nullable Object]> */
+var23 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
+var21 = var23;
+RET_LABEL22:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var23,1l) on <var23:Int> */
+{ /* Inline kernel$Int$+ (var21,1l) on <var21:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
-var28 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var28)) {
-var_class_name31 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+var26 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var26)) {
+var_class_name29 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name29);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
-var32 = var23 + 1l;
-var26 = var32;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+var30 = var21 + 1l;
+var24 = var30;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
 }
 }
 {
-{ /* Inline list#List#length= (var_,var26) on <var_:List[nullable Object]> */
-var_->attrs[COLOR_core__list__List___length].l = var26; /* _length on <var_:List[nullable Object]> */
-RET_LABEL33:(void)0;
+{ /* Inline list$List$length= (var_,var24) on <var_:List[nullable Object]> */
+var_->attrs[COLOR_core__list__List___length].l = var24; /* _length on <var_:List[nullable Object]> */
+RET_LABEL31:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method list#List#unshift for (self: List[nullable Object], nullable Object) */
+/* method list$List$unshift for (self: List[nullable Object], nullable Object) */
 void core___core__List___core__abstract_collection__Sequence__unshift(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -561,32 +641,31 @@ val* var_e /* var e: nullable Object */;
 val* var1 /* : ListNode[nullable Object] */;
 val* var_node /* var node: ListNode[nullable Object] */;
 val* var2 /* : nullable ListNode[nullable Object] */;
+val* var_head /* var head: nullable ListNode[nullable Object] */;
 short int var3 /* : Bool */;
 short int var4 /* : Bool */;
 val* var_other /* var other: nullable Object */;
 short int var6 /* : Bool */;
 short int var8 /* : Bool */;
-val* var9 /* : nullable ListNode[nullable Object] */;
-short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-const struct type* type_struct14;
-const char* var_class_name15;
-val* var16 /* : nullable ListNode[nullable Object] */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-const struct type* type_struct21;
-const char* var_class_name22;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+const struct type* type_struct13;
+const char* var_class_name14;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+const struct type* type_struct19;
+const char* var_class_name20;
 val* var_ /* var : List[nullable Object] */;
+long var21 /* : Int */;
 long var23 /* : Int */;
-long var25 /* : Int */;
-long var26 /* : Int */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-const char* var_class_name31;
-long var32 /* : Int */;
+long var24 /* : Int */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+const char* var_class_name29;
+long var30 /* : Int */;
 /* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
 type_struct = self->type->resolution_table->types[COLOR_core__List___35dE];
@@ -605,7 +684,7 @@ var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idt
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 100);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 101);
 fatal_exit(1);
 }
 var_e = p0;
@@ -618,17 +697,18 @@ var1 = NEW_core__list__ListNode(self->type->resolution_table->types[COLOR_core__
 }
 var_node = var1;
 var2 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
-if (var2 == NULL) {
+var_head = var2;
+if (var_head == NULL) {
 var3 = 1; /* is null */
 } else {
 var3 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var2,((val*)NULL)) on <var2:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var_head,((val*)NULL)) on <var_head:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var2,var_other) on <var2:nullable ListNode[nullable Object](ListNode[nullable Object])> */
-var8 = var2 == var_other;
+{ /* Inline kernel$Object$is_same_instance (var_head,var_other) on <var_head:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var8 = var_head == var_other;
 var6 = var8;
 goto RET_LABEL7;
 RET_LABEL7:(void)0;
@@ -643,101 +723,86 @@ var3 = var4;
 if (var3){
 self->attrs[COLOR_core__list__List___tail].val = var_node; /* _tail on <self:List[nullable Object]> */
 } else {
-var9 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
 {
-{ /* Inline list#ListNode#next= (var_node,var9) on <var_node:ListNode[nullable Object]> */
-/* Covariant cast for argument 0 (next) <var9:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
-/* <var9:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
-type_struct14 = var_node->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
-cltype12 = type_struct14->color;
-idtype13 = type_struct14->id;
-if(var9 == NULL) {
-var11 = 1;
+{ /* Inline list$ListNode$next= (var_node,var_head) on <var_node:ListNode[nullable Object]> */
+/* Covariant cast for argument 0 (next) <var_head:nullable ListNode[nullable Object](ListNode[nullable Object])> isa nullable ListNode[E] */
+/* <var_head:nullable ListNode[nullable Object](ListNode[nullable Object])> isa nullable ListNode[E] */
+type_struct13 = var_node->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
+cltype11 = type_struct13->color;
+idtype12 = type_struct13->id;
+if(cltype11 >= var_head->type->table_size) {
+var10 = 0;
 } else {
-if(cltype12 >= var9->type->table_size) {
-var11 = 0;
-} else {
-var11 = var9->type->type_table[cltype12] == idtype13;
+var10 = var_head->type->type_table[cltype11] == idtype12;
 }
-}
-if (unlikely(!var11)) {
-var_class_name15 = var9 == NULL ? "null" : var9->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name15);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+if (unlikely(!var10)) {
+var_class_name14 = var_head == NULL ? "null" : var_head->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name14);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
-var_node->attrs[COLOR_core__list__ListNode___next].val = var9; /* _next on <var_node:ListNode[nullable Object]> */
-RET_LABEL10:(void)0;
+var_node->attrs[COLOR_core__list__ListNode___next].val = var_head; /* _next on <var_node:ListNode[nullable Object]> */
+RET_LABEL9:(void)0;
 }
 }
-var16 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
-if (var16 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 108);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev= (var16,var_node) on <var16:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$prev= (var_head,var_node) on <var_head:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (prev) <var_node:ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var_node:ListNode[nullable Object]> isa nullable ListNode[E] */
-type_struct21 = var16->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
-cltype19 = type_struct21->color;
-idtype20 = type_struct21->id;
-if(cltype19 >= var_node->type->table_size) {
-var18 = 0;
+type_struct19 = var_head->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
+cltype17 = type_struct19->color;
+idtype18 = type_struct19->id;
+if(cltype17 >= var_node->type->table_size) {
+var16 = 0;
 } else {
-var18 = var_node->type->type_table[cltype19] == idtype20;
+var16 = var_node->type->type_table[cltype17] == idtype18;
 }
-if (unlikely(!var18)) {
-var_class_name22 = var_node == NULL ? "null" : var_node->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name22);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+if (unlikely(!var16)) {
+var_class_name20 = var_node == NULL ? "null" : var_node->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name20);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
-if (unlikely(var16 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
-fatal_exit(1);
-}
-var16->attrs[COLOR_core__list__ListNode___prev].val = var_node; /* _prev on <var16:nullable ListNode[nullable Object]> */
-RET_LABEL17:(void)0;
+var_head->attrs[COLOR_core__list__ListNode___prev].val = var_node; /* _prev on <var_head:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+RET_LABEL15:(void)0;
 }
 }
 }
 self->attrs[COLOR_core__list__List___head].val = var_node; /* _head on <self:List[nullable Object]> */
 var_ = self;
 {
-{ /* Inline list#List#length (var_) on <var_:List[nullable Object]> */
-var25 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
-var23 = var25;
-RET_LABEL24:(void)0;
+{ /* Inline list$List$length (var_) on <var_:List[nullable Object]> */
+var23 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
+var21 = var23;
+RET_LABEL22:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var23,1l) on <var23:Int> */
+{ /* Inline kernel$Int$+ (var21,1l) on <var21:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
-var28 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var28)) {
-var_class_name31 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+var26 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var26)) {
+var_class_name29 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name29);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
-var32 = var23 + 1l;
-var26 = var32;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+var30 = var21 + 1l;
+var24 = var30;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
 }
 }
 {
-{ /* Inline list#List#length= (var_,var26) on <var_:List[nullable Object]> */
-var_->attrs[COLOR_core__list__List___length].l = var26; /* _length on <var_:List[nullable Object]> */
-RET_LABEL33:(void)0;
+{ /* Inline list$List$length= (var_,var24) on <var_:List[nullable Object]> */
+var_->attrs[COLOR_core__list__List___length].l = var24; /* _length on <var_:List[nullable Object]> */
+RET_LABEL31:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method list#List#insert for (self: List[nullable Object], nullable Object, Int) */
+/* method list$List$insert for (self: List[nullable Object], nullable Object, Int) */
 void core___core__List___core__abstract_collection__Sequence__insert(val* self, val* p0, long p1) {
 short int var /* : Bool */;
 int cltype;
@@ -772,7 +837,7 @@ var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idt
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 114);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 116);
 fatal_exit(1);
 }
 var_e = p0;
@@ -787,10 +852,10 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_node,var_other) on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var_node,var_other) on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var7 = var_node == var_other;
 var5 = var7;
 goto RET_LABEL6;
@@ -805,21 +870,21 @@ var2 = var3;
 }
 if (var2){
 {
-core___core__List___core__abstract_collection__Sequence__push(self, var_e); /* Direct call list#List#push on <self:List[nullable Object]>*/
+core___core__List___core__abstract_collection__Sequence__push(self, var_e); /* Direct call list$List$push on <self:List[nullable Object]>*/
 }
 goto RET_LABEL;
 } else {
 }
 {
-core___core__List___insert_before(self, var_e, var_node); /* Direct call list#List#insert_before on <self:List[nullable Object]>*/
+core___core__List___insert_before(self, var_e, var_node); /* Direct call list$List$insert_before on <self:List[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method list#List#pop for (self: List[nullable Object]): nullable Object */
+/* method list$List$pop for (self: List[nullable Object]): nullable Object */
 val* core___core__List___core__abstract_collection__Sequence__pop(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : nullable ListNode[nullable Object] */;
-val* var_node /* var node: nullable ListNode[nullable Object] */;
+val* var_node /* var node: ListNode[nullable Object] */;
 val* var2 /* : nullable ListNode[nullable Object] */;
 val* var4 /* : nullable ListNode[nullable Object] */;
 short int var6 /* : Bool */;
@@ -849,45 +914,35 @@ long var29 /* : Int */;
 val* var31 /* : nullable Object */;
 val* var33 /* : nullable Object */;
 var1 = self->attrs[COLOR_core__list__List___tail].val; /* _tail on <self:List[nullable Object]> */
-var_node = var1;
-if (var_node == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 147);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:nullable ListNode[nullable Object]> */
-if (unlikely(var_node == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 149);
 fatal_exit(1);
 }
-var4 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:nullable ListNode[nullable Object]> */
+var_node = var1;
+{
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
+var4 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var2 = var4;
 RET_LABEL3:(void)0;
 }
 }
 self->attrs[COLOR_core__list__List___tail].val = var2; /* _tail on <self:List[nullable Object]> */
-if (var_node == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 148);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$prev= (var_node,((val*)NULL)) on <var_node:ListNode[nullable Object]> */
 /* Covariant cast for argument 0 (prev) <((val*)NULL):null> isa nullable ListNode[E] */
 /* <((val*)NULL):null> isa nullable ListNode[E] */
 var6 = 1; /* easy <((val*)NULL):null> isa nullable ListNode[E]*/
 if (unlikely(!var6)) {
 var_class_name = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
-if (unlikely(var_node == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
-fatal_exit(1);
-}
-var_node->attrs[COLOR_core__list__ListNode___prev].val = ((val*)NULL); /* _prev on <var_node:nullable ListNode[nullable Object]> */
+var_node->attrs[COLOR_core__list__ListNode___prev].val = ((val*)NULL); /* _prev on <var_node:ListNode[nullable Object]> */
 RET_LABEL5:(void)0;
 }
 }
@@ -898,10 +953,10 @@ var8 = 1; /* is null */
 var8 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var7,((val*)NULL)) on <var7:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var7,((val*)NULL)) on <var7:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var7,var_other) on <var7:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var7,var_other) on <var7:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var13 = var7 == var_other;
 var11 = var13;
 goto RET_LABEL12;
@@ -918,48 +973,47 @@ if (var8){
 self->attrs[COLOR_core__list__List___head].val = ((val*)NULL); /* _head on <self:List[nullable Object]> */
 } else {
 var14 = self->attrs[COLOR_core__list__List___tail].val; /* _tail on <self:List[nullable Object]> */
-if (var14 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 152);
+if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 155);
 fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next= (var14,((val*)NULL)) on <var14:nullable ListNode[nullable Object]> */
+}
+{
+{ /* Inline list$ListNode$next= (var14,((val*)NULL)) on <var14:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (next) <((val*)NULL):null> isa nullable ListNode[E] */
 /* <((val*)NULL):null> isa nullable ListNode[E] */
 var16 = 1; /* easy <((val*)NULL):null> isa nullable ListNode[E]*/
 if (unlikely(!var16)) {
 var_class_name19 = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name19);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
-if (unlikely(var14 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
-fatal_exit(1);
-}
-var14->attrs[COLOR_core__list__ListNode___next].val = ((val*)NULL); /* _next on <var14:nullable ListNode[nullable Object]> */
+var14->attrs[COLOR_core__list__ListNode___next].val = ((val*)NULL); /* _next on <var14:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL15:(void)0;
 }
 }
 }
 var_ = self;
 {
-{ /* Inline list#List#length (var_) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length (var_) on <var_:List[nullable Object]> */
 var22 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
 var20 = var22;
 RET_LABEL21:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var20,1l) on <var20:Int> */
+{ /* Inline kernel$Int$- (var20,1l) on <var20:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var25 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var29 = var20 - 1l;
@@ -969,23 +1023,14 @@ RET_LABEL24:(void)0;
 }
 }
 {
-{ /* Inline list#List#length= (var_,var23) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length= (var_,var23) on <var_:List[nullable Object]> */
 var_->attrs[COLOR_core__list__List___length].l = var23; /* _length on <var_:List[nullable Object]> */
 RET_LABEL30:(void)0;
 }
 }
-if (var_node == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 155);
-fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item (var_node) on <var_node:nullable ListNode[nullable Object]> */
-if (unlikely(var_node == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
-}
-var33 = var_node->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var_node:nullable ListNode[nullable Object]> */
+{
+{ /* Inline abstract_collection$Ref$item (var_node) on <var_node:ListNode[nullable Object]> */
+var33 = var_node->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var_node:ListNode[nullable Object]> */
 var31 = var33;
 RET_LABEL32:(void)0;
 }
@@ -995,11 +1040,11 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#shift for (self: List[nullable Object]): nullable Object */
+/* method list$List$shift for (self: List[nullable Object]): nullable Object */
 val* core___core__List___core__abstract_collection__Sequence__shift(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : nullable ListNode[nullable Object] */;
-val* var_node /* var node: nullable ListNode[nullable Object] */;
+val* var_node /* var node: ListNode[nullable Object] */;
 val* var2 /* : nullable ListNode[nullable Object] */;
 val* var4 /* : nullable ListNode[nullable Object] */;
 short int var6 /* : Bool */;
@@ -1029,45 +1074,35 @@ long var29 /* : Int */;
 val* var31 /* : nullable Object */;
 val* var33 /* : nullable Object */;
 var1 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
-var_node = var1;
-if (var_node == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 162);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next (var_node) on <var_node:nullable ListNode[nullable Object]> */
-if (unlikely(var_node == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 164);
 fatal_exit(1);
 }
-var4 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:nullable ListNode[nullable Object]> */
+var_node = var1;
+{
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
+var4 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var2 = var4;
 RET_LABEL3:(void)0;
 }
 }
 self->attrs[COLOR_core__list__List___head].val = var2; /* _head on <self:List[nullable Object]> */
-if (var_node == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 163);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$next= (var_node,((val*)NULL)) on <var_node:ListNode[nullable Object]> */
 /* Covariant cast for argument 0 (next) <((val*)NULL):null> isa nullable ListNode[E] */
 /* <((val*)NULL):null> isa nullable ListNode[E] */
 var6 = 1; /* easy <((val*)NULL):null> isa nullable ListNode[E]*/
 if (unlikely(!var6)) {
 var_class_name = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
-if (unlikely(var_node == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
-fatal_exit(1);
-}
-var_node->attrs[COLOR_core__list__ListNode___next].val = ((val*)NULL); /* _next on <var_node:nullable ListNode[nullable Object]> */
+var_node->attrs[COLOR_core__list__ListNode___next].val = ((val*)NULL); /* _next on <var_node:ListNode[nullable Object]> */
 RET_LABEL5:(void)0;
 }
 }
@@ -1078,10 +1113,10 @@ var8 = 1; /* is null */
 var8 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var7,((val*)NULL)) on <var7:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var7,((val*)NULL)) on <var7:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var7,var_other) on <var7:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var7,var_other) on <var7:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var13 = var7 == var_other;
 var11 = var13;
 goto RET_LABEL12;
@@ -1098,48 +1133,47 @@ if (var8){
 self->attrs[COLOR_core__list__List___tail].val = ((val*)NULL); /* _tail on <self:List[nullable Object]> */
 } else {
 var14 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
-if (var14 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 167);
+if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 170);
 fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev= (var14,((val*)NULL)) on <var14:nullable ListNode[nullable Object]> */
+}
+{
+{ /* Inline list$ListNode$prev= (var14,((val*)NULL)) on <var14:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (prev) <((val*)NULL):null> isa nullable ListNode[E] */
 /* <((val*)NULL):null> isa nullable ListNode[E] */
 var16 = 1; /* easy <((val*)NULL):null> isa nullable ListNode[E]*/
 if (unlikely(!var16)) {
 var_class_name19 = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name19);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
-if (unlikely(var14 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
-fatal_exit(1);
-}
-var14->attrs[COLOR_core__list__ListNode___prev].val = ((val*)NULL); /* _prev on <var14:nullable ListNode[nullable Object]> */
+var14->attrs[COLOR_core__list__ListNode___prev].val = ((val*)NULL); /* _prev on <var14:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL15:(void)0;
 }
 }
 }
 var_ = self;
 {
-{ /* Inline list#List#length (var_) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length (var_) on <var_:List[nullable Object]> */
 var22 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
 var20 = var22;
 RET_LABEL21:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var20,1l) on <var20:Int> */
+{ /* Inline kernel$Int$- (var20,1l) on <var20:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var25 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var29 = var20 - 1l;
@@ -1149,23 +1183,14 @@ RET_LABEL24:(void)0;
 }
 }
 {
-{ /* Inline list#List#length= (var_,var23) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length= (var_,var23) on <var_:List[nullable Object]> */
 var_->attrs[COLOR_core__list__List___length].l = var23; /* _length on <var_:List[nullable Object]> */
 RET_LABEL30:(void)0;
 }
 }
-if (var_node == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 170);
-fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item (var_node) on <var_node:nullable ListNode[nullable Object]> */
-if (unlikely(var_node == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
-fatal_exit(1);
-}
-var33 = var_node->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var_node:nullable ListNode[nullable Object]> */
+{
+{ /* Inline abstract_collection$Ref$item (var_node) on <var_node:ListNode[nullable Object]> */
+var33 = var_node->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var_node:ListNode[nullable Object]> */
 var31 = var33;
 RET_LABEL32:(void)0;
 }
@@ -1175,7 +1200,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#remove for (self: List[nullable Object], nullable Object) */
+/* method list$List$remove for (self: List[nullable Object], nullable Object) */
 void core___core__List___core__abstract_collection__RemovableCollection__remove(val* self, val* p0) {
 val* var_e /* var e: nullable Object */;
 short int var /* : Bool */;
@@ -1210,7 +1235,7 @@ var = (((long)var_e&3)?type_info[((long)var_e&3)]:var_e->type)->type_table[cltyp
 if (unlikely(!var)) {
 var_class_name = var_e == NULL ? "null" : (((long)var_e&3)?type_info[((long)var_e&3)]:var_e->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 175);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 178);
 fatal_exit(1);
 }
 var1 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
@@ -1224,7 +1249,7 @@ var3 = 0; /* is null */
 var3 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var6 = ((short int(*)(val* self, val* p0))(var_node->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_node, var_other); /* == on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])>*/
@@ -1238,13 +1263,13 @@ var3 = var4;
 }
 if (var3){
 {
-core___core__List___remove_node(self, var_node); /* Direct call list#List#remove_node on <self:List[nullable Object]>*/
+core___core__List___remove_node(self, var_node); /* Direct call list$List$remove_node on <self:List[nullable Object]>*/
 }
 } else {
 }
 RET_LABEL:;
 }
-/* method list#List#remove_at for (self: List[nullable Object], Int) */
+/* method list$List$remove_at for (self: List[nullable Object], Int) */
 void core___core__List___core__abstract_collection__Sequence__remove_at(val* self, long p0) {
 long var_i /* var i: Int */;
 val* var /* : nullable ListNode[nullable Object] */;
@@ -1265,7 +1290,7 @@ var1 = 0; /* is null */
 var1 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_node,((val*)NULL)) on <var_node:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var4 = ((short int(*)(val* self, val* p0))(var_node->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_node, var_other); /* == on <var_node:nullable ListNode[nullable Object](ListNode[nullable Object])>*/
@@ -1279,19 +1304,25 @@ var1 = var2;
 }
 if (var1){
 {
-core___core__List___remove_node(self, var_node); /* Direct call list#List#remove_node on <self:List[nullable Object]>*/
+core___core__List___remove_node(self, var_node); /* Direct call list$List$remove_node on <self:List[nullable Object]>*/
 }
 } else {
 }
 RET_LABEL:;
 }
-/* method list#List#clear for (self: List[nullable Object]) */
+/* method list$List$clear for (self: List[nullable Object]) */
 void core___core__List___core__abstract_collection__RemovableCollection__clear(val* self) {
 self->attrs[COLOR_core__list__List___head].val = ((val*)NULL); /* _head on <self:List[nullable Object]> */
 self->attrs[COLOR_core__list__List___tail].val = ((val*)NULL); /* _tail on <self:List[nullable Object]> */
+{
+{ /* Inline list$List$length= (self,0l) on <self:List[nullable Object]> */
+self->attrs[COLOR_core__list__List___length].l = 0l; /* _length on <self:List[nullable Object]> */
+RET_LABEL1:(void)0;
+}
+}
 RET_LABEL:;
 }
-/* method list#List#iterator for (self: List[nullable Object]): ListIterator[nullable Object] */
+/* method list$List$iterator for (self: List[nullable Object]): ListIterator[nullable Object] */
 val* core___core__List___core__abstract_collection__Collection__iterator(val* self) {
 val* var /* : ListIterator[nullable Object] */;
 val* var1 /* : ListIterator[nullable Object] */;
@@ -1307,7 +1338,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#reverse_iterator for (self: List[nullable Object]): ListIterator[nullable Object] */
+/* method list$List$reverse_iterator for (self: List[nullable Object]): ListIterator[nullable Object] */
 val* core___core__List___core__abstract_collection__SequenceRead__reverse_iterator(val* self) {
 val* var /* : ListIterator[nullable Object] */;
 val* var1 /* : ListReverseIterator[nullable Object] */;
@@ -1323,14 +1354,14 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#init for (self: List[nullable Object]) */
+/* method list$List$init for (self: List[nullable Object]) */
 void core___core__List___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core___core__List___core__kernel__Object__init]))(self); /* init on <self:List[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method list#List#get_node for (self: List[nullable Object], Int): nullable ListNode[nullable Object] */
+/* method list$List$get_node for (self: List[nullable Object], Int): nullable ListNode[nullable Object] */
 val* core___core__List___get_node(val* self, long p0) {
 val* var /* : nullable ListNode[nullable Object] */;
 long var_i /* var i: Int */;
@@ -1367,14 +1398,14 @@ var_i = p0;
 var1 = self->attrs[COLOR_core__list__List___head].val; /* _head on <self:List[nullable Object]> */
 var_n = var1;
 {
-{ /* Inline kernel#Int#< (var_i,0l) on <var_i:Int> */
+{ /* Inline kernel$Int$< (var_i,0l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var4 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var5 = var_i < 0l;
@@ -1395,7 +1426,7 @@ var7 = 0; /* is null */
 var7 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_n,((val*)NULL)) on <var_n:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_n,((val*)NULL)) on <var_n:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var10 = ((short int(*)(val* self, val* p0))(var_n->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_n, var_other); /* == on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])>*/
@@ -1410,14 +1441,14 @@ var7 = var8;
 var_ = var7;
 if (var7){
 {
-{ /* Inline kernel#Int#> (var_i,0l) on <var_i:Int> */
+{ /* Inline kernel$Int$> (var_i,0l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var14 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var14)) {
 var_class_name17 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var18 = var_i > 0l;
@@ -1432,7 +1463,7 @@ var6 = var_;
 }
 if (var6){
 {
-{ /* Inline list#ListNode#next (var_n) on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline list$ListNode$next (var_n) on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var21 = var_n->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var19 = var21;
 RET_LABEL20:(void)0;
@@ -1440,14 +1471,14 @@ RET_LABEL20:(void)0;
 }
 var_n = var19;
 {
-{ /* Inline kernel#Int#- (var_i,1l) on <var_i:Int> */
+{ /* Inline kernel$Int$- (var_i,1l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var24 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var24)) {
 var_class_name27 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var28 = var_i - 1l;
@@ -1467,7 +1498,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#search_node_after for (self: List[nullable Object], nullable Object, nullable ListNode[nullable Object]): nullable ListNode[nullable Object] */
+/* method list$List$search_node_after for (self: List[nullable Object], nullable Object, nullable ListNode[nullable Object]): nullable ListNode[nullable Object] */
 val* core___core__List___search_node_after(val* self, val* p0, val* p1) {
 val* var /* : nullable ListNode[nullable Object] */;
 short int var1 /* : Bool */;
@@ -1515,7 +1546,7 @@ var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == id
 if (unlikely(!var1)) {
 var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 221);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 225);
 fatal_exit(1);
 }
 /* Covariant cast for argument 1 (after) <p1:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
@@ -1535,7 +1566,7 @@ var2 = p1->type->type_table[cltype3] == idtype4;
 if (unlikely(!var2)) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name6);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 221);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 225);
 fatal_exit(1);
 }
 var_e = p0;
@@ -1548,7 +1579,7 @@ var8 = 0; /* is null */
 var8 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_n,((val*)NULL)) on <var_n:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_n,((val*)NULL)) on <var_n:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var11 = ((short int(*)(val* self, val* p0))(var_n->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_n, var_other); /* == on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])>*/
@@ -1563,7 +1594,7 @@ var8 = var9;
 var_ = var8;
 if (var8){
 {
-{ /* Inline abstract_collection#Ref#item (var_n) on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline abstract_collection$Ref$item (var_n) on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var15 = var_n->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var13 = var15;
 RET_LABEL14:(void)0;
@@ -1581,7 +1612,7 @@ var7 = var_;
 }
 if (var7){
 {
-{ /* Inline list#ListNode#next (var_n) on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline list$ListNode$next (var_n) on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var20 = var_n->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_n:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var18 = var20;
 RET_LABEL19:(void)0;
@@ -1598,7 +1629,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#List#remove_node for (self: List[nullable Object], ListNode[nullable Object]) */
+/* method list$List$remove_node for (self: List[nullable Object], ListNode[nullable Object]) */
 void core___core__List___remove_node(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1681,27 +1712,27 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "ListNode[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 229);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 233);
 fatal_exit(1);
 }
 var_node = p0;
 var_ = self;
 {
-{ /* Inline list#List#length (var_) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length (var_) on <var_:List[nullable Object]> */
 var3 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var1,1l) on <var1:Int> */
+{ /* Inline kernel$Int$- (var1,1l) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var6 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var6)) {
 var_class_name9 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var10 = var1 - 1l;
@@ -1711,13 +1742,13 @@ RET_LABEL5:(void)0;
 }
 }
 {
-{ /* Inline list#List#length= (var_,var4) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length= (var_,var4) on <var_:List[nullable Object]> */
 var_->attrs[COLOR_core__list__List___length].l = var4; /* _length on <var_:List[nullable Object]> */
 RET_LABEL11:(void)0;
 }
 }
 {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
 var14 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var12 = var14;
 RET_LABEL13:(void)0;
@@ -1729,10 +1760,10 @@ var15 = 1; /* is null */
 var15 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var12,((val*)NULL)) on <var12:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var12,((val*)NULL)) on <var12:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var12,var_other) on <var12:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var12,var_other) on <var12:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var20 = var12 == var_other;
 var18 = var20;
 goto RET_LABEL19;
@@ -1747,7 +1778,7 @@ var15 = var16;
 }
 if (var15){
 {
-{ /* Inline list#ListNode#next (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
 var23 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var21 = var23;
 RET_LABEL22:(void)0;
@@ -1755,7 +1786,7 @@ RET_LABEL22:(void)0;
 }
 self->attrs[COLOR_core__list__List___head].val = var21; /* _head on <self:List[nullable Object]> */
 {
-{ /* Inline list#ListNode#next (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
 var26 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var24 = var26;
 RET_LABEL25:(void)0;
@@ -1767,10 +1798,10 @@ var27 = 1; /* is null */
 var27 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var24,((val*)NULL)) on <var24:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var24,((val*)NULL)) on <var24:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var24,var_other) on <var24:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var24,var_other) on <var24:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var32 = var24 == var_other;
 var30 = var32;
 goto RET_LABEL31;
@@ -1787,40 +1818,39 @@ if (var27){
 self->attrs[COLOR_core__list__List___tail].val = ((val*)NULL); /* _tail on <self:List[nullable Object]> */
 } else {
 {
-{ /* Inline list#ListNode#next (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
 var35 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var33 = var35;
 RET_LABEL34:(void)0;
 }
 }
-if (var33 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 238);
+if (unlikely(var33 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 242);
 fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev= (var33,((val*)NULL)) on <var33:nullable ListNode[nullable Object]> */
+}
+{
+{ /* Inline list$ListNode$prev= (var33,((val*)NULL)) on <var33:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (prev) <((val*)NULL):null> isa nullable ListNode[E] */
 /* <((val*)NULL):null> isa nullable ListNode[E] */
 var37 = 1; /* easy <((val*)NULL):null> isa nullable ListNode[E]*/
 if (unlikely(!var37)) {
 var_class_name40 = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name40);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
-if (unlikely(var33 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
-fatal_exit(1);
-}
-var33->attrs[COLOR_core__list__ListNode___prev].val = ((val*)NULL); /* _prev on <var33:nullable ListNode[nullable Object]> */
+var33->attrs[COLOR_core__list__ListNode___prev].val = ((val*)NULL); /* _prev on <var33:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL36:(void)0;
 }
 }
 }
 } else {
 {
-{ /* Inline list#ListNode#next (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
 var43 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var41 = var43;
 RET_LABEL42:(void)0;
@@ -1832,10 +1862,10 @@ var44 = 1; /* is null */
 var44 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var41,((val*)NULL)) on <var41:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var41,((val*)NULL)) on <var41:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var41,var_other) on <var41:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var41,var_other) on <var41:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var49 = var41 == var_other;
 var47 = var49;
 goto RET_LABEL48;
@@ -1850,7 +1880,7 @@ var44 = var45;
 }
 if (var44){
 {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
 var52 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var50 = var52;
 RET_LABEL51:(void)0;
@@ -1858,57 +1888,60 @@ RET_LABEL51:(void)0;
 }
 self->attrs[COLOR_core__list__List___tail].val = var50; /* _tail on <self:List[nullable Object]> */
 {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
 var55 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var53 = var55;
 RET_LABEL54:(void)0;
 }
 }
-if (var53 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 242);
+if (unlikely(var53 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 246);
 fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next= (var53,((val*)NULL)) on <var53:nullable ListNode[nullable Object]> */
+}
+{
+{ /* Inline list$ListNode$next= (var53,((val*)NULL)) on <var53:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (next) <((val*)NULL):null> isa nullable ListNode[E] */
 /* <((val*)NULL):null> isa nullable ListNode[E] */
 var57 = 1; /* easy <((val*)NULL):null> isa nullable ListNode[E]*/
 if (unlikely(!var57)) {
 var_class_name60 = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name60);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
-if (unlikely(var53 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
-fatal_exit(1);
-}
-var53->attrs[COLOR_core__list__ListNode___next].val = ((val*)NULL); /* _next on <var53:nullable ListNode[nullable Object]> */
+var53->attrs[COLOR_core__list__ListNode___next].val = ((val*)NULL); /* _next on <var53:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL56:(void)0;
 }
 }
 } else {
 {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
 var63 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var61 = var63;
 RET_LABEL62:(void)0;
 }
 }
+if (unlikely(var61 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 248);
+fatal_exit(1);
+}
 {
-{ /* Inline list#ListNode#next (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
 var66 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var64 = var66;
 RET_LABEL65:(void)0;
 }
 }
-if (var61 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 244);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next= (var61,var64) on <var61:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$next= (var61,var64) on <var61:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (next) <var64:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var64:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
 type_struct71 = var61->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
@@ -1926,38 +1959,37 @@ var68 = var64->type->type_table[cltype69] == idtype70;
 if (unlikely(!var68)) {
 var_class_name72 = var64 == NULL ? "null" : var64->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name72);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
-if (unlikely(var61 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
-fatal_exit(1);
-}
-var61->attrs[COLOR_core__list__ListNode___next].val = var64; /* _next on <var61:nullable ListNode[nullable Object]> */
+var61->attrs[COLOR_core__list__ListNode___next].val = var64; /* _next on <var61:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL67:(void)0;
 }
 }
 {
-{ /* Inline list#ListNode#next (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next (var_node) on <var_node:ListNode[nullable Object]> */
 var75 = var_node->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var_node:ListNode[nullable Object]> */
 var73 = var75;
 RET_LABEL74:(void)0;
 }
 }
+if (unlikely(var73 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 249);
+fatal_exit(1);
+}
 {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
 var78 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var76 = var78;
 RET_LABEL77:(void)0;
 }
 }
-if (var73 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 245);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev= (var73,var76) on <var73:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$prev= (var73,var76) on <var73:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (prev) <var76:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var76:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
 type_struct83 = var73->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
@@ -1975,15 +2007,10 @@ var80 = var76->type->type_table[cltype81] == idtype82;
 if (unlikely(!var80)) {
 var_class_name84 = var76 == NULL ? "null" : var76->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name84);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
-if (unlikely(var73 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
-fatal_exit(1);
-}
-var73->attrs[COLOR_core__list__ListNode___prev].val = var76; /* _prev on <var73:nullable ListNode[nullable Object]> */
+var73->attrs[COLOR_core__list__ListNode___prev].val = var76; /* _prev on <var73:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 RET_LABEL79:(void)0;
 }
 }
@@ -1991,7 +2018,7 @@ RET_LABEL79:(void)0;
 }
 RET_LABEL:;
 }
-/* method list#List#insert_before for (self: List[nullable Object], nullable Object, ListNode[nullable Object]) */
+/* method list$List$insert_before for (self: List[nullable Object], nullable Object, ListNode[nullable Object]) */
 void core___core__List___insert_before(val* self, val* p0, val* p1) {
 short int var /* : Bool */;
 int cltype;
@@ -2063,7 +2090,7 @@ var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idt
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 249);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 253);
 fatal_exit(1);
 }
 /* Covariant cast for argument 1 (node) <p1:ListNode[nullable Object]> isa ListNode[E] */
@@ -2079,28 +2106,28 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 if (unlikely(!var1)) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "ListNode[E]", var_class_name5);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 249);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 253);
 fatal_exit(1);
 }
 var_element = p0;
 var_node = p1;
 var_ = self;
 {
-{ /* Inline list#List#length (var_) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length (var_) on <var_:List[nullable Object]> */
 var8 = var_->attrs[COLOR_core__list__List___length].l; /* _length on <var_:List[nullable Object]> */
 var6 = var8;
 RET_LABEL7:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var6,1l) on <var6:Int> */
+{ /* Inline kernel$Int$+ (var6,1l) on <var6:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var11 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var11)) {
 var_class_name14 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var15 = var6 + 1l;
@@ -2110,7 +2137,7 @@ RET_LABEL10:(void)0;
 }
 }
 {
-{ /* Inline list#List#length= (var_,var9) on <var_:List[nullable Object]> */
+{ /* Inline list$List$length= (var_,var9) on <var_:List[nullable Object]> */
 var_->attrs[COLOR_core__list__List___length].l = var9; /* _length on <var_:List[nullable Object]> */
 RET_LABEL16:(void)0;
 }
@@ -2124,7 +2151,7 @@ var17 = NEW_core__list__ListNode(self->type->resolution_table->types[COLOR_core_
 }
 var_nnode = var17;
 {
-{ /* Inline list#ListNode#prev (var_node) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev (var_node) on <var_node:ListNode[nullable Object]> */
 var20 = var_node->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var_node:ListNode[nullable Object]> */
 var18 = var20;
 RET_LABEL19:(void)0;
@@ -2137,10 +2164,10 @@ var21 = 1; /* is null */
 var21 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_prev,((val*)NULL)) on <var_prev:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var_prev,((val*)NULL)) on <var_prev:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_prev,var_other) on <var_prev:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var_prev,var_other) on <var_prev:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var26 = var_prev == var_other;
 var24 = var26;
 goto RET_LABEL25;
@@ -2157,7 +2184,7 @@ if (var21){
 self->attrs[COLOR_core__list__List___head].val = var_nnode; /* _head on <self:List[nullable Object]> */
 } else {
 {
-{ /* Inline list#ListNode#next= (var_prev,var_nnode) on <var_prev:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline list$ListNode$next= (var_prev,var_nnode) on <var_prev:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 /* Covariant cast for argument 0 (next) <var_nnode:ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var_nnode:ListNode[nullable Object]> isa nullable ListNode[E] */
 type_struct31 = var_prev->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
@@ -2171,7 +2198,7 @@ var28 = var_nnode->type->type_table[cltype29] == idtype30;
 if (unlikely(!var28)) {
 var_class_name32 = var_nnode == NULL ? "null" : var_nnode->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name32);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
 var_prev->attrs[COLOR_core__list__ListNode___next].val = var_nnode; /* _next on <var_prev:nullable ListNode[nullable Object](ListNode[nullable Object])> */
@@ -2180,7 +2207,7 @@ RET_LABEL27:(void)0;
 }
 }
 {
-{ /* Inline list#ListNode#prev= (var_nnode,var_prev) on <var_nnode:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev= (var_nnode,var_prev) on <var_nnode:ListNode[nullable Object]> */
 /* Covariant cast for argument 0 (prev) <var_prev:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var_prev:nullable ListNode[nullable Object]> isa nullable ListNode[E] */
 type_struct37 = var_nnode->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
@@ -2198,7 +2225,7 @@ var34 = var_prev->type->type_table[cltype35] == idtype36;
 if (unlikely(!var34)) {
 var_class_name38 = var_prev == NULL ? "null" : var_prev->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name38);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
 var_nnode->attrs[COLOR_core__list__ListNode___prev].val = var_prev; /* _prev on <var_nnode:ListNode[nullable Object]> */
@@ -2206,7 +2233,7 @@ RET_LABEL33:(void)0;
 }
 }
 {
-{ /* Inline list#ListNode#next= (var_nnode,var_node) on <var_nnode:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$next= (var_nnode,var_node) on <var_nnode:ListNode[nullable Object]> */
 /* Covariant cast for argument 0 (next) <var_node:ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var_node:ListNode[nullable Object]> isa nullable ListNode[E] */
 type_struct43 = var_nnode->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
@@ -2220,7 +2247,7 @@ var40 = var_node->type->type_table[cltype41] == idtype42;
 if (unlikely(!var40)) {
 var_class_name44 = var_node == NULL ? "null" : var_node->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name44);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
 var_nnode->attrs[COLOR_core__list__ListNode___next].val = var_node; /* _next on <var_nnode:ListNode[nullable Object]> */
@@ -2228,7 +2255,7 @@ RET_LABEL39:(void)0;
 }
 }
 {
-{ /* Inline list#ListNode#prev= (var_node,var_nnode) on <var_node:ListNode[nullable Object]> */
+{ /* Inline list$ListNode$prev= (var_node,var_nnode) on <var_node:ListNode[nullable Object]> */
 /* Covariant cast for argument 0 (prev) <var_nnode:ListNode[nullable Object]> isa nullable ListNode[E] */
 /* <var_nnode:ListNode[nullable Object]> isa nullable ListNode[E] */
 type_struct49 = var_node->type->resolution_table->types[COLOR_nullable__core__list__ListNode__core__list__ListNode___35dE];
@@ -2242,7 +2269,7 @@ var46 = var_nnode->type->type_table[cltype47] == idtype48;
 if (unlikely(!var46)) {
 var_class_name50 = var_nnode == NULL ? "null" : var_nnode->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name50);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
 var_node->attrs[COLOR_core__list__ListNode___prev].val = var_nnode; /* _prev on <var_node:ListNode[nullable Object]> */
@@ -2251,25 +2278,24 @@ RET_LABEL45:(void)0;
 }
 RET_LABEL:;
 }
-/* method list#ListIterator#item for (self: ListIterator[nullable Object]): nullable Object */
+/* method list$ListIterator$item for (self: ListIterator[nullable Object]): nullable Object */
 val* core___core__ListIterator___core__abstract_collection__Iterator__item(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : nullable ListNode[nullable Object] */;
 val* var2 /* : nullable Object */;
 val* var4 /* : nullable Object */;
 var1 = self->attrs[COLOR_core__list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
-if (var1 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 268);
-fatal_exit(1);
-} else {
-{ /* Inline abstract_collection#Ref#item (var1) on <var1:nullable ListNode[nullable Object]> */
 if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__abstract_collection, 334);
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 272);
 fatal_exit(1);
 }
-var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object]> */
+{
+{ /* Inline abstract_collection$Ref$item (var1) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var4 = var1->attrs[COLOR_core__abstract_collection__Ref___item].val; /* _item on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var2 = var4;
 RET_LABEL3:(void)0;
 }
@@ -2279,7 +2305,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#ListIterator#is_ok for (self: ListIterator[nullable Object]): Bool */
+/* method list$ListIterator$is_ok for (self: ListIterator[nullable Object]): Bool */
 short int core___core__ListIterator___core__abstract_collection__Iterator__is_ok(val* self) {
 short int var /* : Bool */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -2296,10 +2322,10 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var1,((val*)NULL)) on <var1:nullable ListNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var1,((val*)NULL)) on <var1:nullable ListNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var1,var_other) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var1,var_other) on <var1:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var7 = var1 == var_other;
 var5 = var7;
 goto RET_LABEL6;
@@ -2318,7 +2344,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method list#ListIterator#next for (self: ListIterator[nullable Object]) */
+/* method list$ListIterator$next for (self: ListIterator[nullable Object]) */
 void core___core__ListIterator___core__abstract_collection__Iterator__next(val* self) {
 val* var /* : nullable ListNode[nullable Object] */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -2332,18 +2358,17 @@ int idtype;
 const char* var_class_name;
 long var8 /* : Int */;
 var = self->attrs[COLOR_core__list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
-if (var == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 277);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#next (var) on <var:nullable ListNode[nullable Object]> */
 if (unlikely(var == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 281);
 fatal_exit(1);
 }
-var3 = var->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$next (var) on <var:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var3 = var->attrs[COLOR_core__list__ListNode___next].val; /* _next on <var:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
@@ -2352,14 +2377,14 @@ self->attrs[COLOR_core__list__ListIterator___node].val = var1; /* _node on <self
 var_ = self;
 var4 = var_->attrs[COLOR_core__list__ListIterator___index].l; /* _index on <var_:ListIterator[nullable Object]> */
 {
-{ /* Inline kernel#Int#+ (var4,1l) on <var4:Int> */
+{ /* Inline kernel$Int$+ (var4,1l) on <var4:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var7 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var8 = var4 + 1l;
@@ -2371,7 +2396,7 @@ RET_LABEL6:(void)0;
 var_->attrs[COLOR_core__list__ListIterator___index].l = var5; /* _index on <var_:ListIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#ListIterator#init for (self: ListIterator[nullable Object]) */
+/* method list$ListIterator$init for (self: ListIterator[nullable Object]) */
 void core___core__ListIterator___core__kernel__Object__init(val* self) {
 val* var /* : List[nullable Object] */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -2380,15 +2405,18 @@ val* var1 /* : nullable ListNode[nullable Object] */;
 }
 var = self->attrs[COLOR_core__list__ListIterator___list].val; /* _list on <self:ListIterator[nullable Object]> */
 if (unlikely(var == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _list");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 284);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 288);
 fatal_exit(1);
 }
 var1 = var->attrs[COLOR_core__list__List___head].val; /* _head on <var:List[nullable Object]> */
 self->attrs[COLOR_core__list__ListIterator___node].val = var1; /* _node on <self:ListIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#ListIterator#list= for (self: ListIterator[nullable Object], List[nullable Object]) */
+/* method list$ListIterator$list= for (self: ListIterator[nullable Object], List[nullable Object]) */
 void core___core__ListIterator___list_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2408,13 +2436,13 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "List[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 287);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 291);
 fatal_exit(1);
 }
 self->attrs[COLOR_core__list__ListIterator___list].val = p0; /* _list on <self:ListIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#ListIterator#index for (self: ListIterator[nullable Object]): Int */
+/* method list$ListIterator$index for (self: ListIterator[nullable Object]): Int */
 long core___core__ListIterator___core__abstract_collection__IndexedIterator__index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -2423,7 +2451,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method list#ListReverseIterator#next for (self: ListReverseIterator[nullable Object]) */
+/* method list$ListReverseIterator$next for (self: ListReverseIterator[nullable Object]) */
 void core__list___core__list__ListReverseIterator___core__abstract_collection__Iterator__next(val* self) {
 val* var /* : nullable ListNode[nullable Object] */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -2437,18 +2465,17 @@ int idtype;
 const char* var_class_name;
 long var8 /* : Int */;
 var = self->attrs[COLOR_core__list__ListIterator___node].val; /* _node on <self:ListReverseIterator[nullable Object]> */
-if (var == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 314);
-fatal_exit(1);
-} else {
-{ /* Inline list#ListNode#prev (var) on <var:nullable ListNode[nullable Object]> */
 if (unlikely(var == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Cast failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 318);
 fatal_exit(1);
 }
-var3 = var->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var:nullable ListNode[nullable Object]> */
+{
+{ /* Inline list$ListNode$prev (var) on <var:nullable ListNode[nullable Object](ListNode[nullable Object])> */
+var3 = var->attrs[COLOR_core__list__ListNode___prev].val; /* _prev on <var:nullable ListNode[nullable Object](ListNode[nullable Object])> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
@@ -2457,14 +2484,14 @@ self->attrs[COLOR_core__list__ListIterator___node].val = var1; /* _node on <self
 var_ = self;
 var4 = var_->attrs[COLOR_core__list__ListIterator___index].l; /* _index on <var_:ListReverseIterator[nullable Object]> */
 {
-{ /* Inline kernel#Int#- (var4,1l) on <var4:Int> */
+{ /* Inline kernel$Int$- (var4,1l) on <var4:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var7 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var8 = var4 - 1l;
@@ -2476,7 +2503,7 @@ RET_LABEL6:(void)0;
 var_->attrs[COLOR_core__list__ListIterator___index].l = var5; /* _index on <var_:ListReverseIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#ListReverseIterator#init for (self: ListReverseIterator[nullable Object]) */
+/* method list$ListReverseIterator$init for (self: ListReverseIterator[nullable Object]) */
 void core__list___core__list__ListReverseIterator___core__kernel__Object__init(val* self) {
 val* var /* : List[nullable Object] */;
 val* var_list /* var list: List[nullable Object] */;
@@ -2488,15 +2515,18 @@ long var4 /* : Int */;
 }
 var = self->attrs[COLOR_core__list__ListIterator___list].val; /* _list on <self:ListReverseIterator[nullable Object]> */
 if (unlikely(var == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _list");
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 320);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 324);
 fatal_exit(1);
 }
 var_list = var;
 var1 = var_list->attrs[COLOR_core__list__List___tail].val; /* _tail on <var_list:List[nullable Object]> */
 self->attrs[COLOR_core__list__ListIterator___node].val = var1; /* _node on <self:ListReverseIterator[nullable Object]> */
 {
-{ /* Inline list#List#length (var_list) on <var_list:List[nullable Object]> */
+{ /* Inline list$List$length (var_list) on <var_list:List[nullable Object]> */
 var4 = var_list->attrs[COLOR_core__list__List___length].l; /* _length on <var_list:List[nullable Object]> */
 var2 = var4;
 RET_LABEL3:(void)0;
@@ -2505,7 +2535,7 @@ RET_LABEL3:(void)0;
 self->attrs[COLOR_core__list__ListIterator___index].l = var2; /* _index on <self:ListReverseIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#ListNode#next for (self: ListNode[nullable Object]): nullable ListNode[nullable Object] */
+/* method list$ListNode$next for (self: ListNode[nullable Object]): nullable ListNode[nullable Object] */
 val* core__list___core__list__ListNode___next(val* self) {
 val* var /* : nullable ListNode[nullable Object] */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -2514,7 +2544,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method list#ListNode#next= for (self: ListNode[nullable Object], nullable ListNode[nullable Object]) */
+/* method list$ListNode$next= for (self: ListNode[nullable Object], nullable ListNode[nullable Object]) */
 void core__list___core__list__ListNode___next_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2538,13 +2568,13 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 330);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 334);
 fatal_exit(1);
 }
 self->attrs[COLOR_core__list__ListNode___next].val = p0; /* _next on <self:ListNode[nullable Object]> */
 RET_LABEL:;
 }
-/* method list#ListNode#prev for (self: ListNode[nullable Object]): nullable ListNode[nullable Object] */
+/* method list$ListNode$prev for (self: ListNode[nullable Object]): nullable ListNode[nullable Object] */
 val* core__list___core__list__ListNode___prev(val* self) {
 val* var /* : nullable ListNode[nullable Object] */;
 val* var1 /* : nullable ListNode[nullable Object] */;
@@ -2553,7 +2583,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method list#ListNode#prev= for (self: ListNode[nullable Object], nullable ListNode[nullable Object]) */
+/* method list$ListNode$prev= for (self: ListNode[nullable Object], nullable ListNode[nullable Object]) */
 void core__list___core__list__ListNode___prev_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2577,7 +2607,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable ListNode[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 333);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__list, 337);
 fatal_exit(1);
 }
 self->attrs[COLOR_core__list__ListNode___prev].val = p0; /* _prev on <self:ListNode[nullable Object]> */

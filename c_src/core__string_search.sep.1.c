@@ -1,5 +1,5 @@
 #include "core__string_search.sep.0.h"
-/* method string_search#Pattern#split_in for (self: Pattern, Text): Array[Match] */
+/* method string_search$Pattern$split_in for (self: Pattern, Text): Array[Match] */
 val* core___core__Pattern___split_in(val* self, val* p0) {
 val* var /* : Array[Match] */;
 val* var_s /* var s: Text */;
@@ -38,7 +38,7 @@ long var28 /* : Int */;
 var_s = p0;
 var1 = NEW_core__Array(&type_core__Array__core__Match);
 {
-core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[Match]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Match]>*/
 }
 var_res = var1;
 var_i = 0l;
@@ -53,7 +53,7 @@ var3 = 0; /* is null */
 var3 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_match,((val*)NULL)) on <var_match:nullable Match> */
+{ /* Inline kernel$Object$!= (var_match,((val*)NULL)) on <var_match:nullable Match> */
 var_other = ((val*)NULL);
 {
 var6 = ((short int(*)(val* self, val* p0))(var_match->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_match, var_other); /* == on <var_match:nullable Match(Match)>*/
@@ -67,21 +67,21 @@ var3 = var4;
 }
 if (var3){
 {
-{ /* Inline string_search#Match#from (var_match) on <var_match:nullable Match(Match)> */
+{ /* Inline string_search$Match$from (var_match) on <var_match:nullable Match(Match)> */
 var10 = var_match->attrs[COLOR_core__string_search__Match___from].l; /* _from on <var_match:nullable Match(Match)> */
 var8 = var10;
 RET_LABEL9:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var8,var_i) on <var8:Int> */
+{ /* Inline kernel$Int$- (var8,var_i) on <var8:Int> */
 /* Covariant cast for argument 0 (i) <var_i:Int> isa OTHER */
 /* <var_i:Int> isa OTHER */
 var13 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var13)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var14 = var8 - var_i;
@@ -108,7 +108,7 @@ var16 = ((val*(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Objec
 ((void(*)(val* self))(var15->class->vft[COLOR_core__kernel__Object__init]))(var15); /* init on <var15:Match>*/
 }
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var15); /* Direct call array#Array#add on <var_res:Array[Match]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var15); /* Direct call array$Array$add on <var_res:Array[Match]>*/
 }
 {
 var17 = core___core__Match___after(var_match);
@@ -131,14 +131,14 @@ var20 = ((val*(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Objec
 var21 = ((long(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Text__length]))(var_s); /* length on <var_s:Text>*/
 }
 {
-{ /* Inline kernel#Int#- (var21,var_i) on <var21:Int> */
+{ /* Inline kernel$Int$- (var21,var_i) on <var21:Int> */
 /* Covariant cast for argument 0 (i) <var_i:Int> isa OTHER */
 /* <var_i:Int> isa OTHER */
 var24 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var24)) {
 var_class_name27 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var28 = var21 - var_i;
@@ -160,19 +160,22 @@ RET_LABEL23:(void)0;
 ((void(*)(val* self))(var19->class->vft[COLOR_core__kernel__Object__init]))(var19); /* init on <var19:Match>*/
 }
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var19); /* Direct call array#Array#add on <var_res:Array[Match]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var19); /* Direct call array$Array$add on <var_res:Array[Match]>*/
 }
 var = var_res;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Match#string for (self: Match): String */
+/* method string_search$Match$string for (self: Match): String */
 val* core___core__Match___string(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_core__string_search__Match___string].val; /* _string on <self:Match> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 239);
 fatal_exit(1);
@@ -181,12 +184,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Match#string= for (self: Match, String) */
+/* method string_search$Match$string= for (self: Match, String) */
 void core___core__Match___string_61d(val* self, val* p0) {
 self->attrs[COLOR_core__string_search__Match___string].val = p0; /* _string on <self:Match> */
 RET_LABEL:;
 }
-/* method string_search#Match#from for (self: Match): Int */
+/* method string_search$Match$from for (self: Match): Int */
 long core___core__Match___from(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -195,12 +198,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Match#from= for (self: Match, Int) */
+/* method string_search$Match$from= for (self: Match, Int) */
 void core___core__Match___from_61d(val* self, long p0) {
 self->attrs[COLOR_core__string_search__Match___from].l = p0; /* _from on <self:Match> */
 RET_LABEL:;
 }
-/* method string_search#Match#length for (self: Match): Int */
+/* method string_search$Match$length for (self: Match): Int */
 long core___core__Match___length(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -209,12 +212,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Match#length= for (self: Match, Int) */
+/* method string_search$Match$length= for (self: Match, Int) */
 void core___core__Match___length_61d(val* self, long p0) {
 self->attrs[COLOR_core__string_search__Match___length].l = p0; /* _length on <self:Match> */
 RET_LABEL:;
 }
-/* method string_search#Match#after for (self: Match): Int */
+/* method string_search$Match$after for (self: Match): Int */
 long core___core__Match___after(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -228,28 +231,28 @@ int idtype;
 const char* var_class_name;
 long var10 /* : Int */;
 {
-{ /* Inline string_search#Match#from (self) on <self:Match> */
+{ /* Inline string_search$Match$from (self) on <self:Match> */
 var3 = self->attrs[COLOR_core__string_search__Match___from].l; /* _from on <self:Match> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline string_search#Match#length (self) on <self:Match> */
+{ /* Inline string_search$Match$length (self) on <self:Match> */
 var6 = self->attrs[COLOR_core__string_search__Match___length].l; /* _length on <self:Match> */
 var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var1,var4) on <var1:Int> */
+{ /* Inline kernel$Int$+ (var1,var4) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <var4:Int> isa OTHER */
 /* <var4:Int> isa OTHER */
 var9 = 1; /* easy <var4:Int> isa OTHER*/
 if (unlikely(!var9)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var10 = var1 + var4;
@@ -263,7 +266,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Match#to_s for (self: Match): String */
+/* method string_search$Match$to_s for (self: Match): String */
 val* core___core__Match___core__abstract_text__Object__to_s(val* self) {
 val* var /* : String */;
 val* var1 /* : String */;
@@ -274,9 +277,12 @@ long var7 /* : Int */;
 long var9 /* : Int */;
 val* var10 /* : Text */;
 {
-{ /* Inline string_search#Match#string (self) on <self:Match> */
+{ /* Inline string_search$Match$string (self) on <self:Match> */
 var3 = self->attrs[COLOR_core__string_search__Match___string].val; /* _string on <self:Match> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 239);
 fatal_exit(1);
@@ -286,14 +292,14 @@ RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline string_search#Match#from (self) on <self:Match> */
+{ /* Inline string_search$Match$from (self) on <self:Match> */
 var6 = self->attrs[COLOR_core__string_search__Match___from].l; /* _from on <self:Match> */
 var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
 {
-{ /* Inline string_search#Match#length (self) on <self:Match> */
+{ /* Inline string_search$Match$length (self) on <self:Match> */
 var9 = self->attrs[COLOR_core__string_search__Match___length].l; /* _length on <self:Match> */
 var7 = var9;
 RET_LABEL8:(void)0;
@@ -307,7 +313,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Match#init for (self: Match) */
+/* method string_search$Match$init for (self: Match) */
 void core___core__Match___core__kernel__Object__init(val* self) {
 long var /* : Int */;
 long var2 /* : Int */;
@@ -348,21 +354,21 @@ short int var40 /* : Bool */;
 ((void(*)(val* self))(self->class->vft[COLOR_core___core__Match___core__kernel__Object__init]))(self); /* init on <self:Match>*/
 }
 {
-{ /* Inline string_search#Match#length (self) on <self:Match> */
+{ /* Inline string_search$Match$length (self) on <self:Match> */
 var2 = self->attrs[COLOR_core__string_search__Match___length].l; /* _length on <self:Match> */
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#>= (var,0l) on <var:Int> */
+{ /* Inline kernel$Int$>= (var,0l) on <var:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var5 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var5)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var6 = var >= 0l;
@@ -372,26 +378,29 @@ RET_LABEL4:(void)0;
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert \'positive_length\' failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 298);
 fatal_exit(1);
 }
 {
-{ /* Inline string_search#Match#from (self) on <self:Match> */
+{ /* Inline string_search$Match$from (self) on <self:Match> */
 var9 = self->attrs[COLOR_core__string_search__Match___from].l; /* _from on <self:Match> */
 var7 = var9;
 RET_LABEL8:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#>= (var7,0l) on <var7:Int> */
+{ /* Inline kernel$Int$>= (var7,0l) on <var7:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var12 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var12)) {
 var_class_name15 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var16 = var7 >= 0l;
@@ -401,33 +410,36 @@ RET_LABEL11:(void)0;
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert \'valid_from\' failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 299);
 fatal_exit(1);
 }
 {
-{ /* Inline string_search#Match#from (self) on <self:Match> */
+{ /* Inline string_search$Match$from (self) on <self:Match> */
 var19 = self->attrs[COLOR_core__string_search__Match___from].l; /* _from on <self:Match> */
 var17 = var19;
 RET_LABEL18:(void)0;
 }
 }
 {
-{ /* Inline string_search#Match#length (self) on <self:Match> */
+{ /* Inline string_search$Match$length (self) on <self:Match> */
 var22 = self->attrs[COLOR_core__string_search__Match___length].l; /* _length on <self:Match> */
 var20 = var22;
 RET_LABEL21:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var17,var20) on <var17:Int> */
+{ /* Inline kernel$Int$+ (var17,var20) on <var17:Int> */
 /* Covariant cast for argument 0 (i) <var20:Int> isa OTHER */
 /* <var20:Int> isa OTHER */
 var25 = 1; /* easy <var20:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var29 = var17 + var20;
@@ -437,9 +449,12 @@ RET_LABEL24:(void)0;
 }
 }
 {
-{ /* Inline string_search#Match#string (self) on <self:Match> */
+{ /* Inline string_search$Match$string (self) on <self:Match> */
 var32 = self->attrs[COLOR_core__string_search__Match___string].val; /* _string on <self:Match> */
 if (unlikely(var32 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _string");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 239);
 fatal_exit(1);
@@ -452,14 +467,14 @@ RET_LABEL31:(void)0;
 var33 = ((long(*)(val* self))(var30->class->vft[COLOR_core__abstract_text__Text__length]))(var30); /* length on <var30:String>*/
 }
 {
-{ /* Inline kernel#Int#<= (var23,var33) on <var23:Int> */
+{ /* Inline kernel$Int$<= (var23,var33) on <var23:Int> */
 /* Covariant cast for argument 0 (i) <var33:Int> isa OTHER */
 /* <var33:Int> isa OTHER */
 var36 = 1; /* easy <var33:Int> isa OTHER*/
 if (unlikely(!var36)) {
 var_class_name39 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 724);
 fatal_exit(1);
 }
 var40 = var23 <= var33;
@@ -469,13 +484,16 @@ RET_LABEL35:(void)0;
 }
 }
 if (unlikely(!var34)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert \'valid_after\' failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 300);
 fatal_exit(1);
 }
 RET_LABEL:;
 }
-/* method string_search#Char#search_index_in for (self: Char, Text, Int): Int */
+/* method string_search$Char$search_index_in for (self: Char, Text, Int): Int */
 long core__string_search___Char___Pattern__search_index_in(uint32_t self, val* p0, long p1) {
 long var /* : Int */;
 val* var_s /* var s: Text */;
@@ -488,19 +506,17 @@ int cltype;
 int idtype;
 const char* var_class_name;
 short int var5 /* : Bool */;
-val* var6 /* : SequenceRead[Char] */;
-val* var7 /* : nullable Object */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-uint32_t var11 /* : Char */;
-long var12 /* : Int */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
-const char* var_class_name17;
-long var18 /* : Int */;
+uint32_t var6 /* : Char */;
+short int var7 /* : Bool */;
+short int var9 /* : Bool */;
+long var10 /* : Int */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+const char* var_class_name15;
+long var16 /* : Int */;
+long var17 /* : Int */;
 long var19 /* : Int */;
-long var21 /* : Int */;
 var_s = p0;
 var_from = p1;
 {
@@ -509,14 +525,14 @@ var1 = ((long(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Text__
 var_stop = var1;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_from,var_stop) on <var_from:Int> */
+{ /* Inline kernel$Int$< (var_from,var_stop) on <var_from:Int> */
 /* Covariant cast for argument 0 (i) <var_stop:Int> isa OTHER */
 /* <var_stop:Int> isa OTHER */
 var4 = 1; /* easy <var_stop:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var5 = var_from < var_stop;
@@ -527,62 +543,58 @@ RET_LABEL3:(void)0;
 }
 if (var2){
 {
-var6 = ((val*(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Text__chars]))(var_s); /* chars on <var_s:Text>*/
+var6 = ((uint32_t(*)(val* self, long p0))(var_s->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(var_s, var_from); /* [] on <var_s:Text>*/
 }
 {
-var7 = ((val*(*)(val* self, long p0))((((long)var6&3)?class_info[((long)var6&3)]:var6->class)->vft[COLOR_core__abstract_collection__SequenceRead___91d_93d]))(var6, var_from); /* [] on <var6:SequenceRead[Char]>*/
-}
-{
-{ /* Inline kernel#Char#== (var7,self) on <var7:nullable Object(Char)> */
-var11 = (uint32_t)((long)(var7)>>2);
-var10 = var11 == self;
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+{ /* Inline kernel$Char$== (var6,self) on <var6:Char> */
+var9 = var6 == self;
+var7 = var9;
+goto RET_LABEL8;
+RET_LABEL8:(void)0;
 }
 }
-if (var8){
+if (var7){
 var = var_from;
 goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline kernel#Int#+ (var_from,1l) on <var_from:Int> */
+{ /* Inline kernel$Int$+ (var_from,1l) on <var_from:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
-var14 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var14)) {
-var_class_name17 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+var12 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var12)) {
+var_class_name15 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
-var18 = var_from + 1l;
-var12 = var18;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var16 = var_from + 1l;
+var10 = var16;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
 }
-var_from = var12;
+var_from = var10;
 } else {
 goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
 {
-{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
-var21 = -1l;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+{ /* Inline kernel$Int$unary - (1l) on <1l:Int> */
+var19 = -1l;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
 }
-var = var19;
+var = var17;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Char#search_index_in for (self: Pattern, Text, Int): Int */
+/* method string_search$Char$search_index_in for (self: Pattern, Text, Int): Int */
 long VIRTUAL_core__string_search___Char___Pattern__search_index_in(val* self, val* p0, long p1) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -593,7 +605,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Char#search_in for (self: Char, Text, Int): nullable Match */
+/* method string_search$Char$search_in for (self: Char, Text, Int): nullable Match */
 val* core__string_search___Char___Pattern__search_in(uint32_t self, val* p0, long p1) {
 val* var /* : nullable Match */;
 val* var_s /* var s: Text */;
@@ -615,14 +627,14 @@ var1 = core__string_search___Char___Pattern__search_index_in(self, var_s, var_fr
 }
 var_pos = var1;
 {
-{ /* Inline kernel#Int#< (var_pos,0l) on <var_pos:Int> */
+{ /* Inline kernel$Int$< (var_pos,0l) on <var_pos:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var4 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var5 = var_pos < 0l;
@@ -657,7 +669,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Char#search_in for (self: Pattern, Text, Int): nullable Match */
+/* method string_search$Char$search_in for (self: Pattern, Text, Int): nullable Match */
 val* VIRTUAL_core__string_search___Char___Pattern__search_in(val* self, val* p0, long p1) {
 val* var /* : nullable Match */;
 val* var1 /* : nullable Match */;
@@ -668,7 +680,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#search_index_in for (self: Text, Text, Int): Int */
+/* method string_search$Text$search_index_in for (self: Text, Text, Int): Int */
 long core__string_search___Text___Pattern__search_index_in(val* self, val* p0, long p1) {
 long var /* : Int */;
 val* var_s /* var s: Text */;
@@ -716,49 +728,47 @@ int idtype41;
 const char* var_class_name42;
 short int var43 /* : Bool */;
 short int var_ /* var : Bool */;
-val* var44 /* : SequenceRead[Char] */;
-val* var45 /* : nullable Object */;
-val* var46 /* : SequenceRead[Char] */;
-long var47 /* : Int */;
-short int var49 /* : Bool */;
-int cltype50;
-int idtype51;
-const char* var_class_name52;
-long var53 /* : Int */;
-val* var54 /* : nullable Object */;
+uint32_t var44 /* : Char */;
+long var45 /* : Int */;
+short int var47 /* : Bool */;
+int cltype48;
+int idtype49;
+const char* var_class_name50;
+long var51 /* : Int */;
+uint32_t var52 /* : Char */;
+short int var53 /* : Bool */;
 short int var55 /* : Bool */;
-short int var57 /* : Bool */;
-long var58 /* : Int */;
-short int var60 /* : Bool */;
-int cltype61;
-int idtype62;
-const char* var_class_name63;
-long var64 /* : Int */;
+long var56 /* : Int */;
+short int var58 /* : Bool */;
+int cltype59;
+int idtype60;
+const char* var_class_name61;
+long var62 /* : Int */;
+short int var63 /* : Bool */;
 short int var65 /* : Bool */;
-short int var67 /* : Bool */;
-int cltype68;
-int idtype69;
-const char* var_class_name70;
-short int var71 /* : Bool */;
-long var72 /* : Int */;
-short int var74 /* : Bool */;
-int cltype75;
-int idtype76;
-const char* var_class_name77;
+int cltype66;
+int idtype67;
+const char* var_class_name68;
+short int var69 /* : Bool */;
+long var70 /* : Int */;
+short int var72 /* : Bool */;
+int cltype73;
+int idtype74;
+const char* var_class_name75;
+long var76 /* : Int */;
 long var78 /* : Int */;
 long var80 /* : Int */;
-long var82 /* : Int */;
 var_s = p0;
 var_from = p1;
 {
-{ /* Inline kernel#Int#>= (var_from,0l) on <var_from:Int> */
+{ /* Inline kernel$Int$>= (var_from,0l) on <var_from:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var3 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var3)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var4 = var_from >= 0l;
@@ -768,6 +778,9 @@ RET_LABEL2:(void)0;
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 333);
 fatal_exit(1);
@@ -779,14 +792,14 @@ var5 = ((long(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Text__
 var6 = ((long(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Text__length]))(self); /* length on <self:Text>*/
 }
 {
-{ /* Inline kernel#Int#- (var5,var6) on <var5:Int> */
+{ /* Inline kernel$Int$- (var5,var6) on <var5:Int> */
 /* Covariant cast for argument 0 (i) <var6:Int> isa OTHER */
 /* <var6:Int> isa OTHER */
 var9 = 1; /* easy <var6:Int> isa OTHER*/
 if (unlikely(!var9)) {
 var_class_name12 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var13 = var5 - var6;
@@ -796,14 +809,14 @@ RET_LABEL8:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var7,1l) on <var7:Int> */
+{ /* Inline kernel$Int$+ (var7,1l) on <var7:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var16 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var16)) {
 var_class_name19 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name19);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var20 = var7 + 1l;
@@ -815,14 +828,14 @@ RET_LABEL15:(void)0;
 var_stop = var14;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_from,var_stop) on <var_from:Int> */
+{ /* Inline kernel$Int$< (var_from,var_stop) on <var_from:Int> */
 /* Covariant cast for argument 0 (i) <var_stop:Int> isa OTHER */
 /* <var_stop:Int> isa OTHER */
 var23 = 1; /* easy <var_stop:Int> isa OTHER*/
 if (unlikely(!var23)) {
 var_class_name26 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name26);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var27 = var_from < var_stop;
@@ -836,14 +849,14 @@ if (var21){
 var28 = ((long(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Text__length]))(self); /* length on <self:Text>*/
 }
 {
-{ /* Inline kernel#Int#- (var28,1l) on <var28:Int> */
+{ /* Inline kernel$Int$- (var28,1l) on <var28:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var31 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var31)) {
 var_class_name34 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var35 = var28 - 1l;
@@ -855,14 +868,14 @@ RET_LABEL30:(void)0;
 var_i = var29;
 for(;;) {
 {
-{ /* Inline kernel#Int#>= (var_i,0l) on <var_i:Int> */
+{ /* Inline kernel$Int$>= (var_i,0l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var39 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var39)) {
 var_class_name42 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name42);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var43 = var_i >= 0l;
@@ -874,129 +887,123 @@ RET_LABEL38:(void)0;
 var_ = var37;
 if (var37){
 {
-var44 = ((val*(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Text__chars]))(self); /* chars on <self:Text>*/
+var44 = ((uint32_t(*)(val* self, long p0))(self->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(self, var_i); /* [] on <self:Text>*/
 }
 {
-var45 = ((val*(*)(val* self, long p0))((((long)var44&3)?class_info[((long)var44&3)]:var44->class)->vft[COLOR_core__abstract_collection__SequenceRead___91d_93d]))(var44, var_i); /* [] on <var44:SequenceRead[Char]>*/
-}
-{
-var46 = ((val*(*)(val* self))(var_s->class->vft[COLOR_core__abstract_text__Text__chars]))(var_s); /* chars on <var_s:Text>*/
-}
-{
-{ /* Inline kernel#Int#+ (var_i,var_from) on <var_i:Int> */
+{ /* Inline kernel$Int$+ (var_i,var_from) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <var_from:Int> isa OTHER */
 /* <var_from:Int> isa OTHER */
-var49 = 1; /* easy <var_from:Int> isa OTHER*/
-if (unlikely(!var49)) {
-var_class_name52 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name52);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+var47 = 1; /* easy <var_from:Int> isa OTHER*/
+if (unlikely(!var47)) {
+var_class_name50 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name50);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
-var53 = var_i + var_from;
-var47 = var53;
-goto RET_LABEL48;
-RET_LABEL48:(void)0;
+var51 = var_i + var_from;
+var45 = var51;
+goto RET_LABEL46;
+RET_LABEL46:(void)0;
 }
 }
 {
-var54 = ((val*(*)(val* self, long p0))((((long)var46&3)?class_info[((long)var46&3)]:var46->class)->vft[COLOR_core__abstract_collection__SequenceRead___91d_93d]))(var46, var47); /* [] on <var46:SequenceRead[Char]>*/
+var52 = ((uint32_t(*)(val* self, long p0))(var_s->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(var_s, var45); /* [] on <var_s:Text>*/
 }
 {
-{ /* Inline kernel#Char#== (var45,var54) on <var45:nullable Object(Char)> */
-var57 = var45 == var54;
-var55 = var57;
-goto RET_LABEL56;
-RET_LABEL56:(void)0;
+{ /* Inline kernel$Char$== (var44,var52) on <var44:Char> */
+var55 = var44 == var52;
+var53 = var55;
+goto RET_LABEL54;
+RET_LABEL54:(void)0;
 }
 }
-var36 = var55;
+var36 = var53;
 } else {
 var36 = var_;
 }
 if (var36){
 {
-{ /* Inline kernel#Int#- (var_i,1l) on <var_i:Int> */
+{ /* Inline kernel$Int$- (var_i,1l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
-var60 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var60)) {
-var_class_name63 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name63);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+var58 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var58)) {
+var_class_name61 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name61);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
-var64 = var_i - 1l;
-var58 = var64;
-goto RET_LABEL59;
-RET_LABEL59:(void)0;
+var62 = var_i - 1l;
+var56 = var62;
+goto RET_LABEL57;
+RET_LABEL57:(void)0;
 }
 }
-var_i = var58;
+var_i = var56;
 } else {
 goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
 {
-{ /* Inline kernel#Int#< (var_i,0l) on <var_i:Int> */
+{ /* Inline kernel$Int$< (var_i,0l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
-var67 = 1; /* easy <0l:Int> isa OTHER*/
-if (unlikely(!var67)) {
-var_class_name70 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name70);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+var65 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var65)) {
+var_class_name68 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name68);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
-var71 = var_i < 0l;
-var65 = var71;
-goto RET_LABEL66;
-RET_LABEL66:(void)0;
+var69 = var_i < 0l;
+var63 = var69;
+goto RET_LABEL64;
+RET_LABEL64:(void)0;
 }
 }
-if (var65){
+if (var63){
 var = var_from;
 goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline kernel#Int#+ (var_from,1l) on <var_from:Int> */
+{ /* Inline kernel$Int$+ (var_from,1l) on <var_from:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
-var74 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var74)) {
-var_class_name77 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name77);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+var72 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var72)) {
+var_class_name75 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name75);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
-var78 = var_from + 1l;
-var72 = var78;
-goto RET_LABEL73;
-RET_LABEL73:(void)0;
+var76 = var_from + 1l;
+var70 = var76;
+goto RET_LABEL71;
+RET_LABEL71:(void)0;
 }
 }
-var_from = var72;
+var_from = var70;
 } else {
-goto BREAK_label79;
+goto BREAK_label77;
 }
 }
-BREAK_label79: (void)0;
+BREAK_label77: (void)0;
 {
-{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
-var82 = -1l;
-var80 = var82;
-goto RET_LABEL81;
-RET_LABEL81:(void)0;
+{ /* Inline kernel$Int$unary - (1l) on <1l:Int> */
+var80 = -1l;
+var78 = var80;
+goto RET_LABEL79;
+RET_LABEL79:(void)0;
 }
 }
-var = var80;
+var = var78;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#search_in for (self: Text, Text, Int): nullable Match */
+/* method string_search$Text$search_in for (self: Text, Text, Int): nullable Match */
 val* core__string_search___Text___Pattern__search_in(val* self, val* p0, long p1) {
 val* var /* : nullable Match */;
 val* var_s /* var s: Text */;
@@ -1019,14 +1026,14 @@ var1 = core__string_search___Text___Pattern__search_index_in(self, var_s, var_fr
 }
 var_pos = var1;
 {
-{ /* Inline kernel#Int#< (var_pos,0l) on <var_pos:Int> */
+{ /* Inline kernel$Int$< (var_pos,0l) on <var_pos:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var4 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var5 = var_pos < 0l;
@@ -1064,7 +1071,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#split for (self: Text, Pattern): Array[String] */
+/* method string_search$Text$split for (self: Text, Pattern): Array[String] */
 val* core__string_search___Text___split(val* self, val* p0) {
 val* var /* : Array[String] */;
 val* var_pattern /* var pattern: Pattern */;
@@ -1088,14 +1095,14 @@ var1 = core___core__Pattern___split_in(var_pattern, self);
 var_matches = var1;
 var2 = NEW_core__Array(&type_core__Array__core__String);
 {
-{ /* Inline array#AbstractArrayRead#length (var_matches) on <var_matches:Array[Match]> */
+{ /* Inline array$AbstractArrayRead$length (var_matches) on <var_matches:Array[Match]> */
 var5 = var_matches->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_matches:Array[Match]> */
 var3 = var5;
 RET_LABEL4:(void)0;
 }
 }
 {
-core___core__Array___with_capacity(var2, var3); /* Direct call array#Array#with_capacity on <var2:Array[String]>*/
+core___core__Array___with_capacity(var2, var3); /* Direct call array$Array$with_capacity on <var2:Array[String]>*/
 }
 var_res = var2;
 var_ = var_matches;
@@ -1119,7 +1126,7 @@ var_m = var9;
 var10 = core___core__Match___core__abstract_text__Object__to_s(var_m);
 }
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var10); /* Direct call array#Array#add on <var_res:Array[String]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var10); /* Direct call array$Array$add on <var_res:Array[String]>*/
 }
 {
 ((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_7); /* next on <var_7:IndexedIterator[Match]>*/
@@ -1134,7 +1141,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#split_with for (self: Text, Pattern): Array[String] */
+/* method string_search$Text$split_with for (self: Text, Pattern): Array[String] */
 val* core__string_search___Text___split_with(val* self, val* p0) {
 val* var /* : Array[String] */;
 val* var_pattern /* var pattern: Pattern */;
@@ -1148,7 +1155,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#split_once_on for (self: Text, Pattern): Array[Text] */
+/* method string_search$Text$split_once_on for (self: Text, Pattern): Array[Text] */
 val* core__string_search___Text___split_once_on(val* self, val* p0) {
 val* var /* : Array[Text] */;
 val* var_pattern /* var pattern: Pattern */;
@@ -1178,7 +1185,7 @@ var1 = ((val*(*)(val* self, val* p0, long p1))((((long)var_pattern&3)?class_info
 var_m = var1;
 var2 = NEW_core__Array(self->type->resolution_table->types[COLOR_core__Array__core__abstract_text__Text__SELFTYPE]);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Text]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Text]>*/
 }
 var_res = var2;
 if (var_m == NULL) {
@@ -1187,10 +1194,10 @@ var3 = 1; /* is null */
 var3 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_m,((val*)NULL)) on <var_m:nullable Match> */
+{ /* Inline kernel$Object$== (var_m,((val*)NULL)) on <var_m:nullable Match> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_m,var_other) on <var_m:nullable Match(Match)> */
+{ /* Inline kernel$Object$is_same_instance (var_m,var_other) on <var_m:nullable Match(Match)> */
 var8 = var_m == var_other;
 var6 = var8;
 goto RET_LABEL7;
@@ -1220,11 +1227,11 @@ PRINT_ERROR(" (%s:%d)\n", FILE_core__string_search, 465);
 fatal_exit(1);
 }
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, self); /* Direct call array#Array#add on <var_res:Array[Text]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, self); /* Direct call array$Array$add on <var_res:Array[Text]>*/
 }
 } else {
 {
-{ /* Inline string_search#Match#from (var_m) on <var_m:nullable Match(Match)> */
+{ /* Inline string_search$Match$from (var_m) on <var_m:nullable Match(Match)> */
 var12 = var_m->attrs[COLOR_core__string_search__Match___from].l; /* _from on <var_m:nullable Match(Match)> */
 var10 = var12;
 RET_LABEL11:(void)0;
@@ -1234,7 +1241,7 @@ RET_LABEL11:(void)0;
 var13 = ((val*(*)(val* self, long p0, long p1))(self->class->vft[COLOR_core__abstract_text__Text__substring]))(self, 0l, var10); /* substring on <self:Text>*/
 }
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var13); /* Direct call array#Array#add on <var_res:Array[Text]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var13); /* Direct call array$Array$add on <var_res:Array[Text]>*/
 }
 {
 var14 = core___core__Match___after(var_m);
@@ -1243,7 +1250,7 @@ var14 = core___core__Match___after(var_m);
 var15 = ((val*(*)(val* self, long p0))(self->class->vft[COLOR_core__abstract_text__Text__substring_from]))(self, var14); /* substring_from on <self:Text>*/
 }
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var15); /* Direct call array#Array#add on <var_res:Array[Text]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_res, var15); /* Direct call array$Array$add on <var_res:Array[Text]>*/
 }
 }
 var = var_res;
@@ -1251,7 +1258,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#replace for (self: Text, Pattern, Text): String */
+/* method string_search$Text$replace for (self: Text, Pattern, Text): String */
 val* core__string_search___Text___replace(val* self, val* p0, val* p1) {
 val* var /* : String */;
 short int var1 /* : Bool */;
@@ -1285,14 +1292,14 @@ var_string = p1;
 var2 = core__string_search___Text___split_with(self, var_pattern);
 }
 {
-var3 = core__abstract_text___Collection___join(var2, var_string);
+var3 = core__abstract_text___Collection___join(var2, var_string, ((val*)NULL));
 }
 var = var3;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method string_search#Text#remove_all for (self: Text, Pattern): String */
+/* method string_search$Text$remove_all for (self: Text, Pattern): String */
 val* core__string_search___Text___remove_all(val* self, val* p0) {
 val* var /* : String */;
 val* var_pattern /* var pattern: Pattern */;
@@ -1303,7 +1310,7 @@ var_pattern = p0;
 var1 = core__string_search___Text___split(self, var_pattern);
 }
 {
-var2 = core__abstract_text___Collection___join(var1, ((val*)NULL));
+var2 = core__abstract_text___Collection___join(var1, ((val*)NULL), ((val*)NULL));
 }
 var = var2;
 goto RET_LABEL;
