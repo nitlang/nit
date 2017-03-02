@@ -4,6 +4,8 @@ NITUNIT=../../bin/nitunit
 
 all: re_parser re_app
 
+pre-build: grammar
+
 nitcc:
 	cd ../nitcc && make nitcc
 
