@@ -404,7 +404,7 @@ ifeq ($(uname_S),Darwin)
 endif
 
 # Special configuration for Windows under mingw64
-ifeq ($(uname_S),MINGW64_NT-10.0)
+ifneq ($(findstring MINGW64,$(uname_S)),)
 	# Use the pcreposix regex library
 	LDLIBS += -lpcreposix
 
