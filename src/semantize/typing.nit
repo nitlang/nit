@@ -644,6 +644,82 @@ private class TypeVisitor
 		#self.modelbuilder.warning(node, "Type Error: {col.length} conflicting types: <{col.join(", ")}>")
 		return null
 	end
+
+	# Find a most general common subtype between `type1` and `type2`.
+	#
+	# Find the most general type that is a subtype of `type2` and, if possible, a subtype of `type1`.
+	# Basically, this return the most specific type between `type1` and `type2`.
+	# If nullable types are involved, the information is correctly preserved.
+	# If `type1` and `type2` are incomparable then `type2` is preferred (since intersection types
+	# are not representable in Nit).
+	#
+	# The `null` value is returned if both `type1` and `type2` are null.
+	#
+	# Examples (with diamond A,B,C,D):
+	#
+	# * intersect_types(A,B) -> B, because B is a subtype of A
+	# * intersect_types(B,A) -> B, because B is a subtype of A
+	# * intersect_types(B,C) -> C, B and C are incomparable,
+	#   `type2` is then preferred (`B and C` cannot be represented)
+	# * intersect_types(nullable B,A) -> B, because B<:A and the non-null information is preserved
+	# * intersect_types(B,nullable C) -> C, `type2` is preferred and the non-null information is preserved
+	fun intersect_types(node: ANode, type1, type2: nullable MType): nullable MType
+	do
+		if type1 == null then return type2
+		if type2 == null then return type1
+
+		if not can_be_null(type2) or not can_be_null(type1) then
+			type1 = type1.as_notnull
+			type2 = type2.as_notnull
+		end
+
+		var res
+		if is_subtype(type1, type2) then
+			res = type1
+		else
+			res = type2
+		end
+		return res
+	end
+
+	# Find a most general type that is a subtype of `type1` but not one of `type2`.
+	#
+	# Basically, this returns `type1`-`type2` but since there is no substraction type
+	# in Nit this just returns `type1` most of the case.
+	#
+	# The few other cases are if `type2` is a super-type and if some nullable information
+	# is present.
+	#
+	# The `null` value is returned if `type1` is null.
+	#
+	# Examples (with diamond A,B,C,D):
+	#
+	# * diff_types(A,B) -> A, because the notB cannot be represented
+	# * diff_types(B,A) -> None (absurd type), because B<:A
+	# * diff_types(nullable A, nullable B) -> A, because null is removed
+	# * diff_types(nullable B, A) -> Null, because anything but null is removed
+	fun diff_types(node: ANode, type1, type2: nullable MType): nullable MType
+	do
+		if type1 == null then return null
+		if type2 == null then return type1
+
+		# if t1 <: t2 then t1-t2 = bottom
+		if is_subtype(type1, type2) then
+			return modelbuilder.model.null_type.as_notnull
+		end
+
+		# else if t1 <: nullable t2 then t1-t2 = nulltype
+		if is_subtype(type1, type2.as_nullable) then
+			return modelbuilder.model.null_type
+		end
+
+		# else t2 can be null and type2 must accept null then null is excluded in t1
+		if can_be_null(type1) and (type2 isa MNullableType or type2 isa MNullType) then
+			return type1.as_notnull
+		end
+
+		return type1
+	end
 end
 
 # Mapping between parameters and arguments in a call.
