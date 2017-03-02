@@ -1788,9 +1788,16 @@ redef class AIsaExpr
 			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
 
-			# Do not adapt if there is no information gain (i.e. adapt to a supertype)
-			if mtype == null or orig == null or not v.is_subtype(orig, mtype) then
-				self.after_flow_context.when_true.set_var(v, variable, mtype)
+			var thentype = v.intersect_types(self, orig, mtype)
+			if thentype != orig then
+				self.after_flow_context.when_true.set_var(v, variable, thentype)
+				#debug "{variable}:{orig or else "?"} isa {mtype or else "?"} -> then {thentype or else "?"}"
+			end
+
+			var elsetype = v.diff_types(self, orig, mtype)
+			if elsetype != orig then
+				self.after_flow_context.when_false.set_var(v, variable, elsetype)
+				#debug "{variable}:{orig or else "?"} isa {mtype or else "?"} -> else {elsetype or else "?"}"
 			end
 		end
 
