@@ -600,6 +600,29 @@ private class TypeVisitor
 		flow.set_var(self, variable, mtype)
 	end
 
+	# Find the exact representable most specific common super-type in `col`.
+	#
+	# Try to find the most specific common type that is a super-type of each types
+	# in `col`.
+	# In most cases, the result is simply the most general type in `col`.
+	# If nullables types are involved, then the nullable information is correctly preserved.
+	# If incomparable super-types exists in `col`, them no solution is given and the `null`
+	# value is returned (since union types are non representable in Nit)
+	#
+	# The `null` values in `col` are ignored, nulltypes (MNullType) are considered.
+	#
+	# Returns the `null` value if:
+	#
+	# * `col` is empty
+	# * `col` only have null values
+	# * there is a conflict
+	#
+	# Example (with a diamond A,B,C,D):
+	#
+	# * merge(A,B,C) -> A, because A is the most general type in {A,B,C}
+	# * merge(C,B) -> null, there is conflict, because `B or C` cannot be represented
+	# * merge(A,nullable B) -> nullable A, because A is the most general type and
+	#   the nullable information is preserved
 	fun merge_types(node: ANode, col: Array[nullable MType]): nullable MType
 	do
 		if col.length == 1 then return col.first
