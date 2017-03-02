@@ -134,6 +134,8 @@ if env time --quiet -f%U true 2>/dev/null; then
 	TIME="env time --quiet -f%U"
 elif env time -f%U true 2>/dev/null; then
 	TIME="env time -f%U"
+elif env gtime -f%U true 2>/dev/null; then
+	TIME="env gtime -f%U"
 else
 	TIME=
 fi
