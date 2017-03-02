@@ -148,7 +148,7 @@ else
 fi
 
 # Detect a working hostname command
-if hostname --version | grep coreutils >/dev/null 2>&1; then
+if hostname --version 2>&1 | grep coreutils >/dev/null 2>&1; then
 	HOSTNAME="hostname"
 else
 	HOSTNAME="hostname -s"
