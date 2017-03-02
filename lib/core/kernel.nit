@@ -1063,7 +1063,7 @@ extern class Pointer
 	fun free `{ free(self); `}
 
 	# Use the address value
-	redef fun hash `{ return (long)self; `}
+	redef fun hash `{ return (long)(intptr_t)self; `}
 
 	# Is equal to any instance pointing to the same address
 	redef fun ==(o) do return o isa Pointer and native_equals(o)
