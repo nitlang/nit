@@ -134,6 +134,8 @@ if env time --quiet -f%U true 2>/dev/null; then
 	TIME="env time --quiet -f%U"
 elif env time -f%U true 2>/dev/null; then
 	TIME="env time -f%U"
+elif env gtime -f%U true 2>/dev/null; then
+	TIME="env gtime -f%U"
 else
 	TIME=
 fi
@@ -146,7 +148,7 @@ else
 fi
 
 # Detect a working hostname command
-if hostname --version | grep coreutils >/dev/null 2>&1; then
+if hostname --version 2>&1 | grep coreutils >/dev/null 2>&1; then
 	HOSTNAME="hostname"
 else
 	HOSTNAME="hostname -s"
