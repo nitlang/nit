@@ -208,9 +208,9 @@ class ConfigTree
 				path = key
 				set_node(path, null)
 			else
-				var parts = line.split("=")
-				assert parts.length > 1 else
-					print "Error: malformed ini at line {line_number}"
+				var parts = line.split_once_on("=")
+				if parts.length == 1 then
+					continue
 				end
 				var key = parts[0].trim
 				var val = parts[1].trim
