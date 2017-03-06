@@ -16,48 +16,39 @@
 
 	#include <stdlib.h>
 	#include <errno.h>
-long kernel___Sys_errno___impl( Sys self )
+long core__kernel___Sys_errno___impl( Sys self )
 {
 #line 298 "../lib/core/kernel.nit"
 
  return errno; }
-unsigned char kernel___Byte_rsh___impl( unsigned char self, long i )
+int core__kernel___Sys_is_windows___impl( Sys self )
 {
-#line 655 "../lib/core/kernel.nit"
+#line 1084 "../lib/core/kernel.nit"
 
- return self >> i; }
-uint32_t kernel___Byte_ffi_ascii___impl( unsigned char self )
-{
-#line 662 "../lib/core/kernel.nit"
 
- return (uint32_t)self; }
-long kernel___Int_lsh___impl( long self, long i )
+#ifdef _WIN32
+	return 1;
+#else
+	return 0;
+#endif
+}
+int core__kernel___Pointer_address_is_null___impl( void* self )
 {
-#line 753 "../lib/core/kernel.nit"
-
- return self << i; }
-long kernel___Int_rsh___impl( long self, long i )
-{
-#line 760 "../lib/core/kernel.nit"
-
- return self >> i; }
-uint32_t kernel___Int_cp___impl( long self )
-{
-#line 821 "../lib/core/kernel.nit"
-
- return (uint32_t)self; }
-long kernel___Char_cp___impl( uint32_t self )
-{
-#line 969 "../lib/core/kernel.nit"
-
- return (long)self; }
-int kernel___Pointer_address_is_null___impl( void* self )
-{
-#line 1070 "../lib/core/kernel.nit"
+#line 1059 "../lib/core/kernel.nit"
 
  return self == NULL; }
-void kernel___Pointer_free___impl( void* self )
+void core__kernel___Pointer_free___impl( void* self )
 {
-#line 1073 "../lib/core/kernel.nit"
+#line 1062 "../lib/core/kernel.nit"
 
  free(self); }
+long core__kernel___Pointer_hash___impl( void* self )
+{
+#line 1065 "../lib/core/kernel.nit"
+
+ return (long)self; }
+int core__kernel___Pointer_native_equals___impl( void* self, void* o )
+{
+#line 1069 "../lib/core/kernel.nit"
+
+ return self == o; }

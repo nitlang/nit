@@ -15,8 +15,10 @@
 	#include <sys/stat.h>
 	#include <unistd.h>
 	#include <stdio.h>
-	#include <poll.h>
 	#include <errno.h>
+#ifndef _WIN32
+	#include <poll.h>
+#endif
 #include "core__math._ffi.h"
 #include "core__time._ffi.h"
 #endif

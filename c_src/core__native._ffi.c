@@ -11,7 +11,7 @@
 #else
 	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #endif
-#line 16 "../lib/core/text/native.nit"
+#line 17 "../lib/core/text/native.nit"
 
 
 #ifdef __linux__
@@ -21,6 +21,9 @@
 	#include <libkern/OSByteOrder.h>
 	#define be32toh(x) OSSwapBigToHostInt32(x)
 #endif
+#ifdef _WIN32
+	#define be32toh(val) _byteswap_ulong(val)
+#endif
 
 #ifdef __pnacl__
 	#define be16toh(val) (((val) >> 8) | ((val) << 8))
@@ -29,18 +32,13 @@
 #ifndef be32toh
 	#define be32toh(val) betoh32(val)
 #endif
-double native___NativeString_atof___impl( char* self )
+double core__native___CString_atof___impl( char* self )
 {
-#line 102 "../lib/core/text/native.nit"
+#line 131 "../lib/core/text/native.nit"
 
  return atof(self); }
-long native___NativeString_fetch_4_ffi___impl( char* self, long pos )
+uint32_t core__native___UInt32_code_point___impl( uint32_t self )
 {
-#line 282 "../lib/core/text/native.nit"
+#line 90 "../lib/core/text/native.nit"
 
- return (long)*((uint32_t*)(self+pos)); }
-long native___NativeString_fetch_4h_ffi___impl( char* self, long pos )
-{
-#line 283 "../lib/core/text/native.nit"
-
- return (long)be32toh(*((uint32_t*)(self+pos))); }
+ return self; }

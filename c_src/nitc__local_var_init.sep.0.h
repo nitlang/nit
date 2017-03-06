@@ -1,5 +1,5 @@
 #include "nit.common.h"
-#define COLOR_nitc__local_var_init__ToolContext___local_var_init_phase 46
+#define COLOR_nitc__local_var_init__ToolContext___local_var_init_phase 50
 extern const char FILE_nitc__local_var_init[];
 #define COLOR_nitc__phase__Phase___toolcontext 0
 extern const char FILE_nitc__phase[];
@@ -12,20 +12,20 @@ void nitc___nitc__Visitor___enter_visit(val* self, val* p0);
 #define COLOR_nitc__local_var_init__LocalVarInitVisitor___toolcontext 1
 #define COLOR_nitc__local_var_init__LocalVarInitVisitor___maybe_unset_vars 2
 #define COLOR_core__kernel__Object___61d_61d 4
-#define COLOR_core__abstract_collection__SimpleCollection__add 45
-#define COLOR_core__abstract_collection__Collection__has 23
-#define COLOR_nitc__flow__AExpr___after_flow_context 11
+#define COLOR_core__abstract_collection__SimpleCollection__add 49
+#define COLOR_core__abstract_collection__Collection__has 27
+#define COLOR_nitc__flow__AExpr___after_flow_context 17
 #define COLOR_nitc__local_var_init__FlowContext___set_vars 1
 short int nitc__local_var_init___FlowContext___is_variable_set(val* self, val* p0);
 val* nitc___nitc__ANode___hot_location(val* self);
 val* NEW_core__NativeArray(int length, const struct type* type);
 extern const struct type type_core__NativeArray__core__String;
-val* core__flat___NativeString___to_s_full(char* self, long p0, long p1);
+val* core__flat___CString___to_s_unsafe(char* self, val* p0, val* p1, val* p2, val* p3);
 #define COLOR_core__abstract_text__Object__to_s 3
 #define COLOR_core__abstract_text__NativeArray__native_to_s 12
 val* nitc___nitc__ToolContext___error(val* self, val* p0, val* p1);
-#define COLOR_core__abstract_collection__RemovableCollection__remove 38
-#define COLOR_nitc__local_var_init__ANode__accept_local_var_visitor 25
+#define COLOR_core__abstract_collection__RemovableCollection__remove 44
+#define COLOR_nitc__local_var_init__ANode__accept_local_var_visitor 26
 #define COLOR_nitc__local_var_init___nitc__local_var_init__LocalVarInitVisitor___core__kernel__Object__init 21
 #define COLOR_nitc__flow__FlowContext___previous 2
 extern const char FILE_nitc__flow[];
@@ -37,13 +37,13 @@ val* core___core__AbstractArrayRead___core__abstract_collection__Collection__ite
 #define COLOR_core__abstract_collection__Iterator__next 14
 #define COLOR_core__abstract_collection__Iterator__finish 15
 #define COLOR_nitc__parser_nodes__ANode__visit_all 14
-#define COLOR_nitc__local_var_init___AVardeclExpr___ANode__accept_local_var_visitor 77
-#define COLOR_nitc__parser_nodes__AVardeclExpr___n_expr 16
-#define COLOR_nitc__scope__AVardeclExpr___variable 17
+#define COLOR_nitc__local_var_init___AVardeclExpr___ANode__accept_local_var_visitor 78
+#define COLOR_nitc__parser_nodes__AVardeclExpr___n_expr 7
+#define COLOR_nitc__scope__AVardeclExpr___variable 8
 void nitc__local_var_init___nitc__local_var_init__LocalVarInitVisitor___mark_is_unset(val* self, val* p0, val* p1);
-#define COLOR_nitc__local_var_init___AVarExpr___ANode__accept_local_var_visitor 70
-#define COLOR_nitc__scope__AVarFormExpr___variable 13
+#define COLOR_nitc__local_var_init___AVarExpr___ANode__accept_local_var_visitor 39
+#define COLOR_nitc__scope__AVarFormExpr___variable 4
 void nitc__local_var_init___nitc__local_var_init__LocalVarInitVisitor___check_is_set(val* self, val* p0, val* p1);
-#define COLOR_nitc__local_var_init___AVarAssignExpr___ANode__accept_local_var_visitor 71
+#define COLOR_nitc__local_var_init___AVarAssignExpr___ANode__accept_local_var_visitor 40
 void nitc__local_var_init___nitc__local_var_init__LocalVarInitVisitor___mark_is_set(val* self, val* p0, val* p1);
-#define COLOR_nitc__local_var_init___AVarReassignExpr___ANode__accept_local_var_visitor 69
+#define COLOR_nitc__local_var_init___AVarReassignExpr___ANode__accept_local_var_visitor 38

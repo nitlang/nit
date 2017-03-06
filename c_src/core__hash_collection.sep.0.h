@@ -1,6 +1,9 @@
 #include "nit.common.h"
+val* NEW_core__HashSet(const struct type* type);
+#define COLOR_core__HashSet__core__Set___35dE 7
+void core___core__HashSet___core__kernel__Object__init(val* self);
 #define COLOR_core__kernel__Object___61d_61d 4
-#define COLOR_core__kernel__Object__hash 11
+#define COLOR_core__kernel__Object__hash 8
 #define COLOR_core__hash_collection__HashCollection___capacity 1
 extern const struct type type_core__Int;
 extern const char FILE_core__kernel[];
@@ -14,7 +17,7 @@ extern const char FILE_core__hash_collection[];
 #define COLOR_core__hash_collection__HashNode___key 0
 #define COLOR_core__hash_collection__HashNode___next_in_bucklet 4
 #define COLOR_nullable__core__hash_collection__HashCollection__N 9
-#define COLOR_core__hash_collection__HashCollection__N 11
+#define COLOR_core__hash_collection__HashCollection__N 12
 #define COLOR_core__hash_collection__HashCollection___first_item 3
 #define COLOR_core__hash_collection__HashCollection___last_item 4
 #define COLOR_core__hash_collection__HashNode___next_item 1
@@ -24,7 +27,7 @@ extern const char FILE_core__array[];
 #define COLOR_core__hash_collection__HashNode___prev_in_bucklet 3
 void core__hash_collection___core__hash_collection__HashCollection___enlarge(val* self, long p0);
 val* NEW_core__NativeArray(int length, const struct type* type);
-#define COLOR_core__NativeArray__nullable__core__hash_collection__HashCollection__N 12
+#define COLOR_core__NativeArray__nullable__core__hash_collection__HashCollection__N 13
 #define COLOR_core__hash_collection__HashNode___35dK 1
 #define COLOR_core__hash_collection___core__hash_collection__HashNode___core__kernel__Object__init 13
 val* core__hash_collection___core__hash_collection__HashCollection___node_at(val* self, val* p0);
@@ -42,7 +45,7 @@ val* NEW_core__hash_collection__HashMapNode(const struct type* type);
 #define COLOR_core__hash_collection__HashMapNode__value_61d 14
 void core__hash_collection___core__hash_collection__HashCollection___store(val* self, long p0, val* p1);
 void core__hash_collection___core__hash_collection__HashCollection___raz(val* self);
-#define COLOR_core___core__HashMap___core__kernel__Object__init 24
+#define COLOR_core___core__HashMap___core__kernel__Object__init 19
 #define COLOR_core__hash_collection__HashMap___keys 7
 val* NEW_core__hash_collection__HashMapKeys(const struct type* type);
 #define COLOR_core__hash_collection__HashMapKeys__core__HashMap___35dK__core__HashMap___35dV 7
@@ -53,10 +56,11 @@ val* NEW_core__hash_collection__HashMapValues(const struct type* type);
 #define COLOR_core__hash_collection__HashMapValues__map_61d 12
 #define COLOR_core__hash_collection__HashMapKeys___map 0
 #define COLOR_core__HashMap__core__hash_collection__HashMapKeys___35dK__core__hash_collection__HashMapKeys___35dV 0
+short int core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__has(val* self, val* p0);
 short int core___core__HashMap___core__abstract_collection__MapRead__is_empty(val* self);
 long core___core__HashMap___core__abstract_collection__MapRead__length(val* self);
 val* NEW_core__MapKeysIterator(const struct type* type);
-#define COLOR_core__MapKeysIterator__core__hash_collection__HashMapKeys___35dK__core__hash_collection__HashMapKeys___35dV 2
+#define COLOR_core__MapKeysIterator__core__hash_collection__HashMapKeys___35dK__core__hash_collection__HashMapKeys___35dV 1
 val* core___core__HashMap___core__abstract_collection__MapRead__iterator(val* self);
 #define COLOR_core__abstract_collection__MapKeysIterator__original_iterator_61d 18
 void core___core__HashMap___core__abstract_collection__Map__clear(val* self);
@@ -65,7 +69,7 @@ void core__hash_collection___core__hash_collection__HashCollection___remove_node
 #define COLOR_core__hash_collection__HashMapValues___map 0
 #define COLOR_core__HashMap__core__hash_collection__HashMapValues___35dK__core__hash_collection__HashMapValues___35dV 0
 val* NEW_core__MapValuesIterator(const struct type* type);
-#define COLOR_core__MapValuesIterator__core__hash_collection__HashMapValues___35dK__core__hash_collection__HashMapValues___35dV 2
+#define COLOR_core__MapValuesIterator__core__hash_collection__HashMapValues___35dK__core__hash_collection__HashMapValues___35dV 1
 #define COLOR_core__abstract_collection__MapValuesIterator__original_iterator_61d 18
 #define COLOR_core__hash_collection___core__hash_collection__HashMapValues___core__kernel__Object__init 14
 #define COLOR_core__hash_collection__HashMapNode___35dV 0
@@ -81,10 +85,10 @@ val* NEW_core__hash_collection__HashSetNode(const struct type* type);
 val* NEW_core__hash_collection__HashSetIterator(const struct type* type);
 #define COLOR_core__hash_collection__HashSetIterator__core__HashSet___35dE 3
 #define COLOR_core__hash_collection__HashSetIterator__set_61d 18
-#define COLOR_core___core__HashSet___core__kernel__Object__init 13
+#define COLOR_core___core__HashSet___core__kernel__Object__init 16
 #define COLOR_core__Collection__core__HashSet___35dE 4
-void core___core__HashSet___core__kernel__Object__init(val* self);
 void core___core__SimpleCollection___add_all(val* self, val* p0);
+#define COLOR_core__HashSet__core__HashSet___35dE 5
 #define COLOR_core__hash_collection__HashSetIterator___node 1
 short int core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__is_ok(val* self);
 #define COLOR_core__HashSet__core__hash_collection__HashSetIterator___35dE 1

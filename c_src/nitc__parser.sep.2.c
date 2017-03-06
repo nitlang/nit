@@ -1,5 +1,5 @@
 #include "nitc__parser.sep.0.h"
-/* method parser#ReduceAction0#action for (self: ReduceAction0, Parser) */
+/* method parser$ReduceAction0$action for (self: ReduceAction0, Parser) */
 void nitc__parser___nitc__parser__ReduceAction0___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -32,17 +32,17 @@ var = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var;
 var1 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Object]>*/
 }
 var_listnode3 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode4 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode6 = var3;
 var_pclassdefnode5 = var_nodearraylist1;
@@ -59,8 +59,11 @@ var4 = (((long)var_pclassdefnode5&3)?type_info[((long)var_pclassdefnode5&3)]:var
 }
 }
 if (unlikely(!var4)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1118);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1128);
 fatal_exit(1);
 }
 if (var_pclassdefnode5 == NULL) {
@@ -69,10 +72,10 @@ var5 = 0; /* is null */
 var5 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode5,((val*)NULL)) on <var_pclassdefnode5:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode5,((val*)NULL)) on <var_pclassdefnode5:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var8 = ((short int(*)(val* self, val* p0))(var_pclassdefnode5->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode5, var_other); /* == on <var_pclassdefnode5:nullable AClassdef(AClassdef)>*/
+var8 = ((short int(*)(val* self, val* p0))(var_pclassdefnode5->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode5, var_other); /* == on <var_pclassdefnode5:nullable Object(AClassdef)>*/
 }
 var9 = !var8;
 var6 = var9;
@@ -83,13 +86,13 @@ var5 = var6;
 }
 if (var5){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode6, var_pclassdefnode5); /* Direct call array#Array#add on <var_listnode6:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode6, var_pclassdefnode5); /* Direct call array$Array$add on <var_listnode6:Array[Object]>*/
 }
 } else {
 }
 var10 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var10, ((val*)NULL), var_listnode3, var_listnode4, var_listnode6); /* Direct call parser_prod#AModule#init_amodule on <var10:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var10, ((val*)NULL), var_listnode3, var_listnode4, var_listnode6); /* Direct call parser_prod$AModule$init_amodule on <var10:AModule>*/
 }
 var_pmodulenode1 = var10;
 var_node_list = var_pmodulenode1;
@@ -98,11 +101,11 @@ var11 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var12 = nitc___nitc__Parser___go_to(var_p, var11);
 }
 {
-nitc___nitc__Parser___push(var_p, var12, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var12, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction1#action for (self: ReduceAction1, Parser) */
+/* method parser$ReduceAction1$action for (self: ReduceAction1, Parser) */
 void nitc__parser___nitc__parser__ReduceAction1___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -145,17 +148,17 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode3 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode4 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode6 = var4;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -172,8 +175,11 @@ var5 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var5)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1143);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1153);
 fatal_exit(1);
 }
 var_pclassdefnode5 = var_nodearraylist2;
@@ -190,8 +196,11 @@ var6 = (((long)var_pclassdefnode5&3)?type_info[((long)var_pclassdefnode5&3)]:var
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1145);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1155);
 fatal_exit(1);
 }
 if (var_pclassdefnode5 == NULL) {
@@ -200,10 +209,10 @@ var9 = 0; /* is null */
 var9 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode5,((val*)NULL)) on <var_pclassdefnode5:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode5,((val*)NULL)) on <var_pclassdefnode5:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var12 = ((short int(*)(val* self, val* p0))(var_pclassdefnode5->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode5, var_other); /* == on <var_pclassdefnode5:nullable AClassdef(AClassdef)>*/
+var12 = ((short int(*)(val* self, val* p0))(var_pclassdefnode5->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode5, var_other); /* == on <var_pclassdefnode5:nullable Object(AClassdef)>*/
 }
 var13 = !var12;
 var10 = var13;
@@ -214,13 +223,13 @@ var9 = var10;
 }
 if (var9){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode6, var_pclassdefnode5); /* Direct call array#Array#add on <var_listnode6:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode6, var_pclassdefnode5); /* Direct call array$Array$add on <var_listnode6:Array[Object]>*/
 }
 } else {
 }
 var14 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var14, var_pmoduledeclnode2, var_listnode3, var_listnode4, var_listnode6); /* Direct call parser_prod#AModule#init_amodule on <var14:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var14, var_pmoduledeclnode2, var_listnode3, var_listnode4, var_listnode6); /* Direct call parser_prod$AModule$init_amodule on <var14:AModule>*/
 }
 var_pmodulenode1 = var14;
 var_node_list = var_pmodulenode1;
@@ -229,11 +238,11 @@ var15 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var16 = nitc___nitc__Parser___go_to(var_p, var15);
 }
 {
-nitc___nitc__Parser___push(var_p, var16, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var16, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction2#action for (self: ReduceAction2, Parser) */
+/* method parser$ReduceAction2$action for (self: ReduceAction2, Parser) */
 void nitc__parser___nitc__parser__ReduceAction2___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -277,17 +286,17 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode4 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode5 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode7 = var4;
 var_listnode3 = var_nodearraylist1;
@@ -304,8 +313,11 @@ var5 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var5)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1170);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1180);
 fatal_exit(1);
 }
 {
@@ -326,8 +338,11 @@ var7 = (((long)var_pclassdefnode6&3)?type_info[((long)var_pclassdefnode6&3)]:var
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1173);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1183);
 fatal_exit(1);
 }
 if (var_pclassdefnode6 == NULL) {
@@ -336,10 +351,10 @@ var10 = 0; /* is null */
 var10 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var13 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable AClassdef(AClassdef)>*/
+var13 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable Object(AClassdef)>*/
 }
 var14 = !var13;
 var11 = var14;
@@ -350,13 +365,13 @@ var10 = var11;
 }
 if (var10){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array#Array#add on <var_listnode7:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array$Array$add on <var_listnode7:Array[Object]>*/
 }
 } else {
 }
 var15 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var15, ((val*)NULL), var_listnode4, var_listnode5, var_listnode7); /* Direct call parser_prod#AModule#init_amodule on <var15:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var15, ((val*)NULL), var_listnode4, var_listnode5, var_listnode7); /* Direct call parser_prod$AModule$init_amodule on <var15:AModule>*/
 }
 var_pmodulenode1 = var15;
 var_node_list = var_pmodulenode1;
@@ -365,11 +380,11 @@ var16 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var17 = nitc___nitc__Parser___go_to(var_p, var16);
 }
 {
-nitc___nitc__Parser___push(var_p, var17, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var17, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction3#action for (self: ReduceAction3, Parser) */
+/* method parser$ReduceAction3$action for (self: ReduceAction3, Parser) */
 void nitc__parser___nitc__parser__ReduceAction3___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -423,17 +438,17 @@ var2 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode4 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode5 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode7 = var5;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -450,8 +465,11 @@ var6 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1199);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1209);
 fatal_exit(1);
 }
 var_listnode3 = var_nodearraylist2;
@@ -468,8 +486,11 @@ var7 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1201);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1211);
 fatal_exit(1);
 }
 {
@@ -490,8 +511,11 @@ var11 = (((long)var_pclassdefnode6&3)?type_info[((long)var_pclassdefnode6&3)]:va
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1204);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1214);
 fatal_exit(1);
 }
 if (var_pclassdefnode6 == NULL) {
@@ -500,10 +524,10 @@ var14 = 0; /* is null */
 var14 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var17 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable AClassdef(AClassdef)>*/
+var17 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable Object(AClassdef)>*/
 }
 var18 = !var17;
 var15 = var18;
@@ -514,13 +538,13 @@ var14 = var15;
 }
 if (var14){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array#Array#add on <var_listnode7:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array$Array$add on <var_listnode7:Array[Object]>*/
 }
 } else {
 }
 var19 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var19, var_pmoduledeclnode2, var_listnode4, var_listnode5, var_listnode7); /* Direct call parser_prod#AModule#init_amodule on <var19:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var19, var_pmoduledeclnode2, var_listnode4, var_listnode5, var_listnode7); /* Direct call parser_prod$AModule$init_amodule on <var19:AModule>*/
 }
 var_pmodulenode1 = var19;
 var_node_list = var_pmodulenode1;
@@ -529,11 +553,11 @@ var20 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var21 = nitc___nitc__Parser___go_to(var_p, var20);
 }
 {
-nitc___nitc__Parser___push(var_p, var21, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var21, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction4#action for (self: ReduceAction4, Parser) */
+/* method parser$ReduceAction4$action for (self: ReduceAction4, Parser) */
 void nitc__parser___nitc__parser__ReduceAction4___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -577,17 +601,17 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode3 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode5 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode7 = var4;
 var_listnode4 = var_nodearraylist1;
@@ -604,8 +628,11 @@ var5 = (((long)var_listnode4&3)?type_info[((long)var_listnode4&3)]:var_listnode4
 }
 }
 if (unlikely(!var5)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1229);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1239);
 fatal_exit(1);
 }
 {
@@ -626,8 +653,11 @@ var7 = (((long)var_pclassdefnode6&3)?type_info[((long)var_pclassdefnode6&3)]:var
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1232);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1242);
 fatal_exit(1);
 }
 if (var_pclassdefnode6 == NULL) {
@@ -636,10 +666,10 @@ var10 = 0; /* is null */
 var10 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var13 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable AClassdef(AClassdef)>*/
+var13 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable Object(AClassdef)>*/
 }
 var14 = !var13;
 var11 = var14;
@@ -650,13 +680,13 @@ var10 = var11;
 }
 if (var10){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array#Array#add on <var_listnode7:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array$Array$add on <var_listnode7:Array[Object]>*/
 }
 } else {
 }
 var15 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var15, ((val*)NULL), var_listnode3, var_listnode5, var_listnode7); /* Direct call parser_prod#AModule#init_amodule on <var15:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var15, ((val*)NULL), var_listnode3, var_listnode5, var_listnode7); /* Direct call parser_prod$AModule$init_amodule on <var15:AModule>*/
 }
 var_pmodulenode1 = var15;
 var_node_list = var_pmodulenode1;
@@ -665,11 +695,11 @@ var16 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var17 = nitc___nitc__Parser___go_to(var_p, var16);
 }
 {
-nitc___nitc__Parser___push(var_p, var17, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var17, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction5#action for (self: ReduceAction5, Parser) */
+/* method parser$ReduceAction5$action for (self: ReduceAction5, Parser) */
 void nitc__parser___nitc__parser__ReduceAction5___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -723,17 +753,17 @@ var2 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode3 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode5 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode7 = var5;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -750,8 +780,11 @@ var6 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1258);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1268);
 fatal_exit(1);
 }
 var_listnode4 = var_nodearraylist2;
@@ -768,8 +801,11 @@ var7 = (((long)var_listnode4&3)?type_info[((long)var_listnode4&3)]:var_listnode4
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1260);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1270);
 fatal_exit(1);
 }
 {
@@ -790,8 +826,11 @@ var11 = (((long)var_pclassdefnode6&3)?type_info[((long)var_pclassdefnode6&3)]:va
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1263);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1273);
 fatal_exit(1);
 }
 if (var_pclassdefnode6 == NULL) {
@@ -800,10 +839,10 @@ var14 = 0; /* is null */
 var14 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var17 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable AClassdef(AClassdef)>*/
+var17 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable Object(AClassdef)>*/
 }
 var18 = !var17;
 var15 = var18;
@@ -814,13 +853,13 @@ var14 = var15;
 }
 if (var14){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array#Array#add on <var_listnode7:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array$Array$add on <var_listnode7:Array[Object]>*/
 }
 } else {
 }
 var19 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var19, var_pmoduledeclnode2, var_listnode3, var_listnode5, var_listnode7); /* Direct call parser_prod#AModule#init_amodule on <var19:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var19, var_pmoduledeclnode2, var_listnode3, var_listnode5, var_listnode7); /* Direct call parser_prod$AModule$init_amodule on <var19:AModule>*/
 }
 var_pmodulenode1 = var19;
 var_node_list = var_pmodulenode1;
@@ -829,11 +868,11 @@ var20 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var21 = nitc___nitc__Parser___go_to(var_p, var20);
 }
 {
-nitc___nitc__Parser___push(var_p, var21, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var21, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction6#action for (self: ReduceAction6, Parser) */
+/* method parser$ReduceAction6$action for (self: ReduceAction6, Parser) */
 void nitc__parser___nitc__parser__ReduceAction6___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -888,17 +927,17 @@ var2 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode4 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode6 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode8 = var5;
 var_listnode3 = var_nodearraylist1;
@@ -915,8 +954,11 @@ var6 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1289);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1299);
 fatal_exit(1);
 }
 {
@@ -937,8 +979,11 @@ var8 = (((long)var_listnode5&3)?type_info[((long)var_listnode5&3)]:var_listnode5
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1292);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1302);
 fatal_exit(1);
 }
 {
@@ -959,8 +1004,11 @@ var12 = (((long)var_pclassdefnode7&3)?type_info[((long)var_pclassdefnode7&3)]:va
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1295);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1305);
 fatal_exit(1);
 }
 if (var_pclassdefnode7 == NULL) {
@@ -969,10 +1017,10 @@ var15 = 0; /* is null */
 var15 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var18 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable AClassdef(AClassdef)>*/
+var18 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable Object(AClassdef)>*/
 }
 var19 = !var18;
 var16 = var19;
@@ -983,13 +1031,13 @@ var15 = var16;
 }
 if (var15){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array#Array#add on <var_listnode8:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array$Array$add on <var_listnode8:Array[Object]>*/
 }
 } else {
 }
 var20 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var20, ((val*)NULL), var_listnode4, var_listnode6, var_listnode8); /* Direct call parser_prod#AModule#init_amodule on <var20:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var20, ((val*)NULL), var_listnode4, var_listnode6, var_listnode8); /* Direct call parser_prod$AModule$init_amodule on <var20:AModule>*/
 }
 var_pmodulenode1 = var20;
 var_node_list = var_pmodulenode1;
@@ -998,11 +1046,11 @@ var21 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var22 = nitc___nitc__Parser___go_to(var_p, var21);
 }
 {
-nitc___nitc__Parser___push(var_p, var22, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var22, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction7#action for (self: ReduceAction7, Parser) */
+/* method parser$ReduceAction7$action for (self: ReduceAction7, Parser) */
 void nitc__parser___nitc__parser__ReduceAction7___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -1067,17 +1115,17 @@ var3 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode4 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode6 = var5;
 var6 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var6); /* Direct call array$Array$init on <var6:Array[Object]>*/
 }
 var_listnode8 = var6;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -1094,8 +1142,11 @@ var7 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1322);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1332);
 fatal_exit(1);
 }
 var_listnode3 = var_nodearraylist2;
@@ -1112,8 +1163,11 @@ var8 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1324);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1334);
 fatal_exit(1);
 }
 {
@@ -1134,8 +1188,11 @@ var12 = (((long)var_listnode5&3)?type_info[((long)var_listnode5&3)]:var_listnode
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1327);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1337);
 fatal_exit(1);
 }
 {
@@ -1156,8 +1213,11 @@ var16 = (((long)var_pclassdefnode7&3)?type_info[((long)var_pclassdefnode7&3)]:va
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1330);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1340);
 fatal_exit(1);
 }
 if (var_pclassdefnode7 == NULL) {
@@ -1166,10 +1226,10 @@ var19 = 0; /* is null */
 var19 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var22 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable AClassdef(AClassdef)>*/
+var22 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable Object(AClassdef)>*/
 }
 var23 = !var22;
 var20 = var23;
@@ -1180,13 +1240,13 @@ var19 = var20;
 }
 if (var19){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array#Array#add on <var_listnode8:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array$Array$add on <var_listnode8:Array[Object]>*/
 }
 } else {
 }
 var24 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var24, var_pmoduledeclnode2, var_listnode4, var_listnode6, var_listnode8); /* Direct call parser_prod#AModule#init_amodule on <var24:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var24, var_pmoduledeclnode2, var_listnode4, var_listnode6, var_listnode8); /* Direct call parser_prod$AModule$init_amodule on <var24:AModule>*/
 }
 var_pmodulenode1 = var24;
 var_node_list = var_pmodulenode1;
@@ -1195,11 +1255,11 @@ var25 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var26 = nitc___nitc__Parser___go_to(var_p, var25);
 }
 {
-nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction8#action for (self: ReduceAction8, Parser) */
+/* method parser$ReduceAction8$action for (self: ReduceAction8, Parser) */
 void nitc__parser___nitc__parser__ReduceAction8___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -1243,17 +1303,17 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode3 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode4 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode7 = var4;
 var_listnode5 = var_nodearraylist1;
@@ -1270,8 +1330,11 @@ var5 = (((long)var_listnode5&3)?type_info[((long)var_listnode5&3)]:var_listnode5
 }
 }
 if (unlikely(!var5)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1355);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1365);
 fatal_exit(1);
 }
 var_pclassdefnode6 = var_nodearraylist2;
@@ -1288,8 +1351,11 @@ var6 = (((long)var_pclassdefnode6&3)?type_info[((long)var_pclassdefnode6&3)]:var
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1357);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1367);
 fatal_exit(1);
 }
 {
@@ -1302,10 +1368,10 @@ var10 = 0; /* is null */
 var10 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var13 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable AClassdef(AClassdef)>*/
+var13 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable Object(AClassdef)>*/
 }
 var14 = !var13;
 var11 = var14;
@@ -1316,13 +1382,13 @@ var10 = var11;
 }
 if (var10){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array#Array#add on <var_listnode7:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array$Array$add on <var_listnode7:Array[Object]>*/
 }
 } else {
 }
 var15 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var15, ((val*)NULL), var_listnode3, var_listnode4, var_listnode7); /* Direct call parser_prod#AModule#init_amodule on <var15:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var15, ((val*)NULL), var_listnode3, var_listnode4, var_listnode7); /* Direct call parser_prod$AModule$init_amodule on <var15:AModule>*/
 }
 var_pmodulenode1 = var15;
 var_node_list = var_pmodulenode1;
@@ -1331,11 +1397,11 @@ var16 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var17 = nitc___nitc__Parser___go_to(var_p, var16);
 }
 {
-nitc___nitc__Parser___push(var_p, var17, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var17, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction9#action for (self: ReduceAction9, Parser) */
+/* method parser$ReduceAction9$action for (self: ReduceAction9, Parser) */
 void nitc__parser___nitc__parser__ReduceAction9___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -1389,17 +1455,17 @@ var2 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode3 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode4 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode7 = var5;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -1416,8 +1482,11 @@ var6 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1384);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1394);
 fatal_exit(1);
 }
 var_listnode5 = var_nodearraylist2;
@@ -1434,8 +1503,11 @@ var7 = (((long)var_listnode5&3)?type_info[((long)var_listnode5&3)]:var_listnode5
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1386);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1396);
 fatal_exit(1);
 }
 var_pclassdefnode6 = var_nodearraylist3;
@@ -1452,8 +1524,11 @@ var10 = (((long)var_pclassdefnode6&3)?type_info[((long)var_pclassdefnode6&3)]:va
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1388);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1398);
 fatal_exit(1);
 }
 {
@@ -1466,10 +1541,10 @@ var14 = 0; /* is null */
 var14 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode6,((val*)NULL)) on <var_pclassdefnode6:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var17 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable AClassdef(AClassdef)>*/
+var17 = ((short int(*)(val* self, val* p0))(var_pclassdefnode6->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode6, var_other); /* == on <var_pclassdefnode6:nullable Object(AClassdef)>*/
 }
 var18 = !var17;
 var15 = var18;
@@ -1480,13 +1555,13 @@ var14 = var15;
 }
 if (var14){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array#Array#add on <var_listnode7:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode7, var_pclassdefnode6); /* Direct call array$Array$add on <var_listnode7:Array[Object]>*/
 }
 } else {
 }
 var19 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var19, var_pmoduledeclnode2, var_listnode3, var_listnode4, var_listnode7); /* Direct call parser_prod#AModule#init_amodule on <var19:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var19, var_pmoduledeclnode2, var_listnode3, var_listnode4, var_listnode7); /* Direct call parser_prod$AModule$init_amodule on <var19:AModule>*/
 }
 var_pmodulenode1 = var19;
 var_node_list = var_pmodulenode1;
@@ -1495,11 +1570,11 @@ var20 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var21 = nitc___nitc__Parser___go_to(var_p, var20);
 }
 {
-nitc___nitc__Parser___push(var_p, var21, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var21, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction10#action for (self: ReduceAction10, Parser) */
+/* method parser$ReduceAction10$action for (self: ReduceAction10, Parser) */
 void nitc__parser___nitc__parser__ReduceAction10___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -1554,17 +1629,17 @@ var2 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode4 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode5 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode8 = var5;
 var_listnode3 = var_nodearraylist1;
@@ -1581,8 +1656,11 @@ var6 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1415);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1425);
 fatal_exit(1);
 }
 {
@@ -1603,8 +1681,11 @@ var8 = (((long)var_listnode6&3)?type_info[((long)var_listnode6&3)]:var_listnode6
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1418);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1428);
 fatal_exit(1);
 }
 var_pclassdefnode7 = var_nodearraylist3;
@@ -1621,8 +1702,11 @@ var11 = (((long)var_pclassdefnode7&3)?type_info[((long)var_pclassdefnode7&3)]:va
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1420);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1430);
 fatal_exit(1);
 }
 {
@@ -1635,10 +1719,10 @@ var15 = 0; /* is null */
 var15 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var18 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable AClassdef(AClassdef)>*/
+var18 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable Object(AClassdef)>*/
 }
 var19 = !var18;
 var16 = var19;
@@ -1649,13 +1733,13 @@ var15 = var16;
 }
 if (var15){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array#Array#add on <var_listnode8:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array$Array$add on <var_listnode8:Array[Object]>*/
 }
 } else {
 }
 var20 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var20, ((val*)NULL), var_listnode4, var_listnode5, var_listnode8); /* Direct call parser_prod#AModule#init_amodule on <var20:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var20, ((val*)NULL), var_listnode4, var_listnode5, var_listnode8); /* Direct call parser_prod$AModule$init_amodule on <var20:AModule>*/
 }
 var_pmodulenode1 = var20;
 var_node_list = var_pmodulenode1;
@@ -1664,11 +1748,11 @@ var21 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var22 = nitc___nitc__Parser___go_to(var_p, var21);
 }
 {
-nitc___nitc__Parser___push(var_p, var22, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var22, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction11#action for (self: ReduceAction11, Parser) */
+/* method parser$ReduceAction11$action for (self: ReduceAction11, Parser) */
 void nitc__parser___nitc__parser__ReduceAction11___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -1733,17 +1817,17 @@ var3 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode4 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode5 = var5;
 var6 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var6); /* Direct call array$Array$init on <var6:Array[Object]>*/
 }
 var_listnode8 = var6;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -1760,8 +1844,11 @@ var7 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1448);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1458);
 fatal_exit(1);
 }
 var_listnode3 = var_nodearraylist2;
@@ -1778,8 +1865,11 @@ var8 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1450);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1460);
 fatal_exit(1);
 }
 {
@@ -1800,8 +1890,11 @@ var12 = (((long)var_listnode6&3)?type_info[((long)var_listnode6&3)]:var_listnode
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1453);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1463);
 fatal_exit(1);
 }
 var_pclassdefnode7 = var_nodearraylist4;
@@ -1818,8 +1911,11 @@ var15 = (((long)var_pclassdefnode7&3)?type_info[((long)var_pclassdefnode7&3)]:va
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1455);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1465);
 fatal_exit(1);
 }
 {
@@ -1832,10 +1928,10 @@ var19 = 0; /* is null */
 var19 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var22 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable AClassdef(AClassdef)>*/
+var22 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable Object(AClassdef)>*/
 }
 var23 = !var22;
 var20 = var23;
@@ -1846,13 +1942,13 @@ var19 = var20;
 }
 if (var19){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array#Array#add on <var_listnode8:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array$Array$add on <var_listnode8:Array[Object]>*/
 }
 } else {
 }
 var24 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var24, var_pmoduledeclnode2, var_listnode4, var_listnode5, var_listnode8); /* Direct call parser_prod#AModule#init_amodule on <var24:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var24, var_pmoduledeclnode2, var_listnode4, var_listnode5, var_listnode8); /* Direct call parser_prod$AModule$init_amodule on <var24:AModule>*/
 }
 var_pmodulenode1 = var24;
 var_node_list = var_pmodulenode1;
@@ -1861,11 +1957,11 @@ var25 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var26 = nitc___nitc__Parser___go_to(var_p, var25);
 }
 {
-nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction12#action for (self: ReduceAction12, Parser) */
+/* method parser$ReduceAction12$action for (self: ReduceAction12, Parser) */
 void nitc__parser___nitc__parser__ReduceAction12___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -1920,17 +2016,17 @@ var2 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var2;
 var3 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var3); /* Direct call array#Array#init on <var3:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var3); /* Direct call array$Array$init on <var3:Array[Object]>*/
 }
 var_listnode3 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode5 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode8 = var5;
 var_listnode4 = var_nodearraylist1;
@@ -1947,8 +2043,11 @@ var6 = (((long)var_listnode4&3)?type_info[((long)var_listnode4&3)]:var_listnode4
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1482);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1492);
 fatal_exit(1);
 }
 {
@@ -1969,8 +2068,11 @@ var8 = (((long)var_listnode6&3)?type_info[((long)var_listnode6&3)]:var_listnode6
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1485);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1495);
 fatal_exit(1);
 }
 var_pclassdefnode7 = var_nodearraylist3;
@@ -1987,8 +2089,11 @@ var11 = (((long)var_pclassdefnode7&3)?type_info[((long)var_pclassdefnode7&3)]:va
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1487);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1497);
 fatal_exit(1);
 }
 {
@@ -2001,10 +2106,10 @@ var15 = 0; /* is null */
 var15 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var18 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable AClassdef(AClassdef)>*/
+var18 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable Object(AClassdef)>*/
 }
 var19 = !var18;
 var16 = var19;
@@ -2015,13 +2120,13 @@ var15 = var16;
 }
 if (var15){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array#Array#add on <var_listnode8:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array$Array$add on <var_listnode8:Array[Object]>*/
 }
 } else {
 }
 var20 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var20, ((val*)NULL), var_listnode3, var_listnode5, var_listnode8); /* Direct call parser_prod#AModule#init_amodule on <var20:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var20, ((val*)NULL), var_listnode3, var_listnode5, var_listnode8); /* Direct call parser_prod$AModule$init_amodule on <var20:AModule>*/
 }
 var_pmodulenode1 = var20;
 var_node_list = var_pmodulenode1;
@@ -2030,11 +2135,11 @@ var21 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var22 = nitc___nitc__Parser___go_to(var_p, var21);
 }
 {
-nitc___nitc__Parser___push(var_p, var22, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var22, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction13#action for (self: ReduceAction13, Parser) */
+/* method parser$ReduceAction13$action for (self: ReduceAction13, Parser) */
 void nitc__parser___nitc__parser__ReduceAction13___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -2099,17 +2204,17 @@ var3 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode3 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode5 = var5;
 var6 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var6); /* Direct call array$Array$init on <var6:Array[Object]>*/
 }
 var_listnode8 = var6;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -2126,8 +2231,11 @@ var7 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1515);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1525);
 fatal_exit(1);
 }
 var_listnode4 = var_nodearraylist2;
@@ -2144,8 +2252,11 @@ var8 = (((long)var_listnode4&3)?type_info[((long)var_listnode4&3)]:var_listnode4
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1517);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1527);
 fatal_exit(1);
 }
 {
@@ -2166,8 +2277,11 @@ var12 = (((long)var_listnode6&3)?type_info[((long)var_listnode6&3)]:var_listnode
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1520);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1530);
 fatal_exit(1);
 }
 var_pclassdefnode7 = var_nodearraylist4;
@@ -2184,8 +2298,11 @@ var15 = (((long)var_pclassdefnode7&3)?type_info[((long)var_pclassdefnode7&3)]:va
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1522);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1532);
 fatal_exit(1);
 }
 {
@@ -2198,10 +2315,10 @@ var19 = 0; /* is null */
 var19 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode7,((val*)NULL)) on <var_pclassdefnode7:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var22 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable AClassdef(AClassdef)>*/
+var22 = ((short int(*)(val* self, val* p0))(var_pclassdefnode7->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode7, var_other); /* == on <var_pclassdefnode7:nullable Object(AClassdef)>*/
 }
 var23 = !var22;
 var20 = var23;
@@ -2212,13 +2329,13 @@ var19 = var20;
 }
 if (var19){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array#Array#add on <var_listnode8:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode8, var_pclassdefnode7); /* Direct call array$Array$add on <var_listnode8:Array[Object]>*/
 }
 } else {
 }
 var24 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var24, var_pmoduledeclnode2, var_listnode3, var_listnode5, var_listnode8); /* Direct call parser_prod#AModule#init_amodule on <var24:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var24, var_pmoduledeclnode2, var_listnode3, var_listnode5, var_listnode8); /* Direct call parser_prod$AModule$init_amodule on <var24:AModule>*/
 }
 var_pmodulenode1 = var24;
 var_node_list = var_pmodulenode1;
@@ -2227,11 +2344,11 @@ var25 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var26 = nitc___nitc__Parser___go_to(var_p, var25);
 }
 {
-nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction14#action for (self: ReduceAction14, Parser) */
+/* method parser$ReduceAction14$action for (self: ReduceAction14, Parser) */
 void nitc__parser___nitc__parser__ReduceAction14___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -2297,17 +2414,17 @@ var3 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var3;
 var4 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var4); /* Direct call array#Array#init on <var4:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var4); /* Direct call array$Array$init on <var4:Array[Object]>*/
 }
 var_listnode4 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode6 = var5;
 var6 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var6); /* Direct call array$Array$init on <var6:Array[Object]>*/
 }
 var_listnode9 = var6;
 var_listnode3 = var_nodearraylist1;
@@ -2324,8 +2441,11 @@ var7 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1550);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1560);
 fatal_exit(1);
 }
 {
@@ -2346,8 +2466,11 @@ var9 = (((long)var_listnode5&3)?type_info[((long)var_listnode5&3)]:var_listnode5
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1553);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1563);
 fatal_exit(1);
 }
 {
@@ -2368,8 +2491,11 @@ var13 = (((long)var_listnode7&3)?type_info[((long)var_listnode7&3)]:var_listnode
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1556);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1566);
 fatal_exit(1);
 }
 var_pclassdefnode8 = var_nodearraylist4;
@@ -2386,8 +2512,11 @@ var16 = (((long)var_pclassdefnode8&3)?type_info[((long)var_pclassdefnode8&3)]:va
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1558);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1568);
 fatal_exit(1);
 }
 {
@@ -2400,10 +2529,10 @@ var20 = 0; /* is null */
 var20 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode8,((val*)NULL)) on <var_pclassdefnode8:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode8,((val*)NULL)) on <var_pclassdefnode8:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var23 = ((short int(*)(val* self, val* p0))(var_pclassdefnode8->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode8, var_other); /* == on <var_pclassdefnode8:nullable AClassdef(AClassdef)>*/
+var23 = ((short int(*)(val* self, val* p0))(var_pclassdefnode8->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode8, var_other); /* == on <var_pclassdefnode8:nullable Object(AClassdef)>*/
 }
 var24 = !var23;
 var21 = var24;
@@ -2414,13 +2543,13 @@ var20 = var21;
 }
 if (var20){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode9, var_pclassdefnode8); /* Direct call array#Array#add on <var_listnode9:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode9, var_pclassdefnode8); /* Direct call array$Array$add on <var_listnode9:Array[Object]>*/
 }
 } else {
 }
 var25 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var25, ((val*)NULL), var_listnode4, var_listnode6, var_listnode9); /* Direct call parser_prod#AModule#init_amodule on <var25:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var25, ((val*)NULL), var_listnode4, var_listnode6, var_listnode9); /* Direct call parser_prod$AModule$init_amodule on <var25:AModule>*/
 }
 var_pmodulenode1 = var25;
 var_node_list = var_pmodulenode1;
@@ -2429,11 +2558,11 @@ var26 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var27 = nitc___nitc__Parser___go_to(var_p, var26);
 }
 {
-nitc___nitc__Parser___push(var_p, var27, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var27, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction15#action for (self: ReduceAction15, Parser) */
+/* method parser$ReduceAction15$action for (self: ReduceAction15, Parser) */
 void nitc__parser___nitc__parser__ReduceAction15___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -2509,17 +2638,17 @@ var4 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var4;
 var5 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var5); /* Direct call array#Array#init on <var5:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var5); /* Direct call array$Array$init on <var5:Array[Object]>*/
 }
 var_listnode4 = var5;
 var6 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var6); /* Direct call array#Array#init on <var6:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var6); /* Direct call array$Array$init on <var6:Array[Object]>*/
 }
 var_listnode6 = var6;
 var7 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var7); /* Direct call array#Array#init on <var7:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var7); /* Direct call array$Array$init on <var7:Array[Object]>*/
 }
 var_listnode9 = var7;
 var_pmoduledeclnode2 = var_nodearraylist1;
@@ -2536,8 +2665,11 @@ var8 = (((long)var_pmoduledeclnode2&3)?type_info[((long)var_pmoduledeclnode2&3)]
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1587);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1597);
 fatal_exit(1);
 }
 var_listnode3 = var_nodearraylist2;
@@ -2554,8 +2686,11 @@ var9 = (((long)var_listnode3&3)?type_info[((long)var_listnode3&3)]:var_listnode3
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1589);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1599);
 fatal_exit(1);
 }
 {
@@ -2576,8 +2711,11 @@ var13 = (((long)var_listnode5&3)?type_info[((long)var_listnode5&3)]:var_listnode
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1592);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1602);
 fatal_exit(1);
 }
 {
@@ -2598,8 +2736,11 @@ var17 = (((long)var_listnode7&3)?type_info[((long)var_listnode7&3)]:var_listnode
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1595);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1605);
 fatal_exit(1);
 }
 var_pclassdefnode8 = var_nodearraylist5;
@@ -2616,8 +2757,11 @@ var20 = (((long)var_pclassdefnode8&3)?type_info[((long)var_pclassdefnode8&3)]:va
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1597);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1607);
 fatal_exit(1);
 }
 {
@@ -2630,10 +2774,10 @@ var24 = 0; /* is null */
 var24 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_pclassdefnode8,((val*)NULL)) on <var_pclassdefnode8:nullable Object(nullable AClassdef)> */
+{ /* Inline kernel$Object$!= (var_pclassdefnode8,((val*)NULL)) on <var_pclassdefnode8:nullable Object(nullable AClassdef)> */
 var_other = ((val*)NULL);
 {
-var27 = ((short int(*)(val* self, val* p0))(var_pclassdefnode8->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode8, var_other); /* == on <var_pclassdefnode8:nullable AClassdef(AClassdef)>*/
+var27 = ((short int(*)(val* self, val* p0))(var_pclassdefnode8->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_pclassdefnode8, var_other); /* == on <var_pclassdefnode8:nullable Object(AClassdef)>*/
 }
 var28 = !var27;
 var25 = var28;
@@ -2644,13 +2788,13 @@ var24 = var25;
 }
 if (var24){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode9, var_pclassdefnode8); /* Direct call array#Array#add on <var_listnode9:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode9, var_pclassdefnode8); /* Direct call array$Array$add on <var_listnode9:Array[Object]>*/
 }
 } else {
 }
 var29 = NEW_nitc__AModule(&type_nitc__AModule);
 {
-nitc__parser_prod___AModule___init_amodule(var29, var_pmoduledeclnode2, var_listnode4, var_listnode6, var_listnode9); /* Direct call parser_prod#AModule#init_amodule on <var29:AModule>*/
+nitc__parser_prod___AModule___init_amodule(var29, var_pmoduledeclnode2, var_listnode4, var_listnode6, var_listnode9); /* Direct call parser_prod$AModule$init_amodule on <var29:AModule>*/
 }
 var_pmodulenode1 = var29;
 var_node_list = var_pmodulenode1;
@@ -2659,11 +2803,11 @@ var30 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var31 = nitc___nitc__Parser___go_to(var_p, var30);
 }
 {
-nitc___nitc__Parser___push(var_p, var31, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var31, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction16#action for (self: ReduceAction16, Parser) */
+/* method parser$ReduceAction16$action for (self: ReduceAction16, Parser) */
 void nitc__parser___nitc__parser__ReduceAction16___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -2759,8 +2903,11 @@ var8 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1626);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1636);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -2777,8 +2924,11 @@ var9 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1628);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1638);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -2795,8 +2945,11 @@ var12 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1630);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1640);
 fatal_exit(1);
 }
 var_tkwmodulenode5 = var_nodearraylist4;
@@ -2813,8 +2966,11 @@ var15 = (((long)var_tkwmodulenode5&3)?type_info[((long)var_tkwmodulenode5&3)]:va
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1632);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1642);
 fatal_exit(1);
 }
 var_pmodulenamenode6 = var_nodearraylist6;
@@ -2831,8 +2987,11 @@ var18 = (((long)var_pmodulenamenode6&3)?type_info[((long)var_pmodulenamenode6&3)
 }
 }
 if (unlikely(!var18)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1634);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1644);
 fatal_exit(1);
 }
 var_pannotationsnode7 = var_nodearraylist7;
@@ -2849,13 +3008,16 @@ var21 = (((long)var_pannotationsnode7&3)?type_info[((long)var_pannotationsnode7&
 }
 }
 if (unlikely(!var21)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1636);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1646);
 fatal_exit(1);
 }
 var24 = NEW_nitc__AModuledecl(&type_nitc__AModuledecl);
 {
-nitc__parser_prod___AModuledecl___init_amoduledecl(var24, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmodulenode5, var_pmodulenamenode6, var_pannotationsnode7); /* Direct call parser_prod#AModuledecl#init_amoduledecl on <var24:AModuledecl>*/
+nitc__parser_prod___AModuledecl___init_amoduledecl(var24, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmodulenode5, var_pmodulenamenode6, var_pannotationsnode7); /* Direct call parser_prod$AModuledecl$init_amoduledecl on <var24:AModuledecl>*/
 }
 var_pmoduledeclnode1 = var24;
 var_node_list = var_pmoduledeclnode1;
@@ -2864,11 +3026,11 @@ var25 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var26 = nitc___nitc__Parser___go_to(var_p, var25);
 }
 {
-nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var26, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction17#action for (self: ReduceAction17, Parser) */
+/* method parser$ReduceAction17$action for (self: ReduceAction17, Parser) */
 void nitc__parser___nitc__parser__ReduceAction17___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -2956,8 +3118,11 @@ var8 = (((long)var_pvisibilitynode2&3)?type_info[((long)var_pvisibilitynode2&3)]
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1663);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1673);
 fatal_exit(1);
 }
 var_tkwimportnode3 = var_nodearraylist4;
@@ -2974,8 +3139,11 @@ var9 = (((long)var_tkwimportnode3&3)?type_info[((long)var_tkwimportnode3&3)]:var
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1665);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1675);
 fatal_exit(1);
 }
 var_pmodulenamenode4 = var_nodearraylist6;
@@ -2992,8 +3160,11 @@ var12 = (((long)var_pmodulenamenode4&3)?type_info[((long)var_pmodulenamenode4&3)
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1667);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1677);
 fatal_exit(1);
 }
 var_pannotationsnode5 = var_nodearraylist7;
@@ -3010,13 +3181,16 @@ var15 = (((long)var_pannotationsnode5&3)?type_info[((long)var_pannotationsnode5&
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1669);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1679);
 fatal_exit(1);
 }
 var18 = NEW_nitc__AStdImport(&type_nitc__AStdImport);
 {
-nitc__parser_prod___AStdImport___init_astdimport(var18, var_pvisibilitynode2, var_tkwimportnode3, var_pmodulenamenode4, var_pannotationsnode5); /* Direct call parser_prod#AStdImport#init_astdimport on <var18:AStdImport>*/
+nitc__parser_prod___AStdImport___init_astdimport(var18, var_pvisibilitynode2, var_tkwimportnode3, var_pmodulenamenode4, var_pannotationsnode5); /* Direct call parser_prod$AStdImport$init_astdimport on <var18:AStdImport>*/
 }
 var_pimportnode1 = var18;
 var_node_list = var_pimportnode1;
@@ -3025,11 +3199,11 @@ var19 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var20 = nitc___nitc__Parser___go_to(var_p, var19);
 }
 {
-nitc___nitc__Parser___push(var_p, var20, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var20, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction18#action for (self: ReduceAction18, Parser) */
+/* method parser$ReduceAction18$action for (self: ReduceAction18, Parser) */
 void nitc__parser___nitc__parser__ReduceAction18___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3107,8 +3281,11 @@ var7 = (((long)var_pvisibilitynode2&3)?type_info[((long)var_pvisibilitynode2&3)]
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1693);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1703);
 fatal_exit(1);
 }
 var_tkwimportnode3 = var_nodearraylist4;
@@ -3125,8 +3302,11 @@ var8 = (((long)var_tkwimportnode3&3)?type_info[((long)var_tkwimportnode3&3)]:var
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1695);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1705);
 fatal_exit(1);
 }
 var_tkwendnode4 = var_nodearraylist6;
@@ -3143,13 +3323,16 @@ var11 = (((long)var_tkwendnode4&3)?type_info[((long)var_tkwendnode4&3)]:var_tkwe
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1697);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1707);
 fatal_exit(1);
 }
 var14 = NEW_nitc__ANoImport(&type_nitc__ANoImport);
 {
-nitc__parser_prod___ANoImport___init_anoimport(var14, var_pvisibilitynode2, var_tkwimportnode3, var_tkwendnode4); /* Direct call parser_prod#ANoImport#init_anoimport on <var14:ANoImport>*/
+nitc__parser_prod___ANoImport___init_anoimport(var14, var_pvisibilitynode2, var_tkwimportnode3, var_tkwendnode4); /* Direct call parser_prod$ANoImport$init_anoimport on <var14:ANoImport>*/
 }
 var_pimportnode1 = var14;
 var_node_list = var_pimportnode1;
@@ -3158,11 +3341,11 @@ var15 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var16 = nitc___nitc__Parser___go_to(var_p, var15);
 }
 {
-nitc___nitc__Parser___push(var_p, var16, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var16, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction19#action for (self: ReduceAction19, Parser) */
+/* method parser$ReduceAction19$action for (self: ReduceAction19, Parser) */
 void nitc__parser___nitc__parser__ReduceAction19___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3184,11 +3367,11 @@ var1 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var2 = nitc___nitc__Parser___go_to(var_p, var1);
 }
 {
-nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction20#action for (self: ReduceAction20, Parser) */
+/* method parser$ReduceAction20$action for (self: ReduceAction20, Parser) */
 void nitc__parser___nitc__parser__ReduceAction20___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3223,7 +3406,7 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode3 = var2;
 var_ppropdefnode2 = var_nodearraylist1;
@@ -3240,8 +3423,11 @@ var3 = (((long)var_ppropdefnode2&3)?type_info[((long)var_ppropdefnode2&3)]:var_p
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1727);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1737);
 fatal_exit(1);
 }
 if (var_ppropdefnode2 == NULL) {
@@ -3250,10 +3436,10 @@ var4 = 0; /* is null */
 var4 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_ppropdefnode2,((val*)NULL)) on <var_ppropdefnode2:nullable Object(nullable APropdef)> */
+{ /* Inline kernel$Object$!= (var_ppropdefnode2,((val*)NULL)) on <var_ppropdefnode2:nullable Object(nullable APropdef)> */
 var_other = ((val*)NULL);
 {
-var7 = ((short int(*)(val* self, val* p0))(var_ppropdefnode2->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_ppropdefnode2, var_other); /* == on <var_ppropdefnode2:nullable APropdef(APropdef)>*/
+var7 = ((short int(*)(val* self, val* p0))(var_ppropdefnode2->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_ppropdefnode2, var_other); /* == on <var_ppropdefnode2:nullable Object(APropdef)>*/
 }
 var8 = !var7;
 var5 = var8;
@@ -3264,13 +3450,13 @@ var4 = var5;
 }
 if (var4){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode3, var_ppropdefnode2); /* Direct call array#Array#add on <var_listnode3:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode3, var_ppropdefnode2); /* Direct call array$Array$add on <var_listnode3:Array[Object]>*/
 }
 } else {
 }
 var9 = NEW_nitc__ATopClassdef(&type_nitc__ATopClassdef);
 {
-nitc__parser_prod___ATopClassdef___init_atopclassdef(var9, var_listnode3); /* Direct call parser_prod#ATopClassdef#init_atopclassdef on <var9:ATopClassdef>*/
+nitc__parser_prod___ATopClassdef___init_atopclassdef(var9, var_listnode3); /* Direct call parser_prod$ATopClassdef$init_atopclassdef on <var9:ATopClassdef>*/
 }
 var_pclassdefnode1 = var9;
 var_node_list = var_pclassdefnode1;
@@ -3279,11 +3465,11 @@ var10 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var11 = nitc___nitc__Parser___go_to(var_p, var10);
 }
 {
-nitc___nitc__Parser___push(var_p, var11, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var11, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction21#action for (self: ReduceAction21, Parser) */
+/* method parser$ReduceAction21$action for (self: ReduceAction21, Parser) */
 void nitc__parser___nitc__parser__ReduceAction21___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3312,7 +3498,7 @@ var = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var;
 var1 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Object]>*/
 }
 var_listnode3 = var1;
 var_ppropdefnode2 = var_nodearraylist1;
@@ -3329,8 +3515,11 @@ var2 = (((long)var_ppropdefnode2&3)?type_info[((long)var_ppropdefnode2&3)]:var_p
 }
 }
 if (unlikely(!var2)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1746);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1756);
 fatal_exit(1);
 }
 if (var_ppropdefnode2 == NULL) {
@@ -3339,10 +3528,10 @@ var3 = 0; /* is null */
 var3 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_ppropdefnode2,((val*)NULL)) on <var_ppropdefnode2:nullable Object(nullable APropdef)> */
+{ /* Inline kernel$Object$!= (var_ppropdefnode2,((val*)NULL)) on <var_ppropdefnode2:nullable Object(nullable APropdef)> */
 var_other = ((val*)NULL);
 {
-var6 = ((short int(*)(val* self, val* p0))(var_ppropdefnode2->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_ppropdefnode2, var_other); /* == on <var_ppropdefnode2:nullable APropdef(APropdef)>*/
+var6 = ((short int(*)(val* self, val* p0))(var_ppropdefnode2->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_ppropdefnode2, var_other); /* == on <var_ppropdefnode2:nullable Object(APropdef)>*/
 }
 var7 = !var6;
 var4 = var7;
@@ -3353,13 +3542,13 @@ var3 = var4;
 }
 if (var3){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode3, var_ppropdefnode2); /* Direct call array#Array#add on <var_listnode3:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode3, var_ppropdefnode2); /* Direct call array$Array$add on <var_listnode3:Array[Object]>*/
 }
 } else {
 }
 var8 = NEW_nitc__AMainClassdef(&type_nitc__AMainClassdef);
 {
-nitc__parser_prod___AMainClassdef___init_amainclassdef(var8, var_listnode3); /* Direct call parser_prod#AMainClassdef#init_amainclassdef on <var8:AMainClassdef>*/
+nitc__parser_prod___AMainClassdef___init_amainclassdef(var8, var_listnode3); /* Direct call parser_prod$AMainClassdef$init_amainclassdef on <var8:AMainClassdef>*/
 }
 var_pclassdefnode1 = var8;
 var_node_list = var_pclassdefnode1;
@@ -3368,11 +3557,11 @@ var9 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var10 = nitc___nitc__Parser___go_to(var_p, var9);
 }
 {
-nitc___nitc__Parser___push(var_p, var10, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var10, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction22#action for (self: ReduceAction22, Parser) */
+/* method parser$ReduceAction22$action for (self: ReduceAction22, Parser) */
 void nitc__parser___nitc__parser__ReduceAction22___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3386,11 +3575,11 @@ var = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on <
 var1 = nitc___nitc__Parser___go_to(var_p, var);
 }
 {
-nitc___nitc__Parser___push(var_p, var1, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var1, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction23#action for (self: ReduceAction23, Parser) */
+/* method parser$ReduceAction23$action for (self: ReduceAction23, Parser) */
 void nitc__parser___nitc__parser__ReduceAction23___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3410,11 +3599,11 @@ var1 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var2 = nitc___nitc__Parser___go_to(var_p, var1);
 }
 {
-nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction24#action for (self: ReduceAction24, Parser) */
+/* method parser$ReduceAction24$action for (self: ReduceAction24, Parser) */
 void nitc__parser___nitc__parser__ReduceAction24___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3454,13 +3643,16 @@ var2 = (((long)var_pexprnode3&3)?type_info[((long)var_pexprnode3&3)]:var_pexprno
 }
 }
 if (unlikely(!var2)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1784);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1794);
 fatal_exit(1);
 }
 var3 = NEW_nitc__AMainMethPropdef(&type_nitc__AMainMethPropdef);
 {
-nitc__parser_prod___AMainMethPropdef___init_amainmethpropdef(var3, ((val*)NULL), var_pexprnode3); /* Direct call parser_prod#AMainMethPropdef#init_amainmethpropdef on <var3:AMainMethPropdef>*/
+nitc__parser_prod___AMainMethPropdef___init_amainmethpropdef(var3, ((val*)NULL), var_pexprnode3); /* Direct call parser_prod$AMainMethPropdef$init_amainmethpropdef on <var3:AMainMethPropdef>*/
 }
 var_ppropdefnode1 = var3;
 var_node_list = var_ppropdefnode1;
@@ -3469,11 +3661,11 @@ var4 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var5 = nitc___nitc__Parser___go_to(var_p, var4);
 }
 {
-nitc___nitc__Parser___push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var5, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction26#action for (self: ReduceAction26, Parser) */
+/* method parser$ReduceAction26$action for (self: ReduceAction26, Parser) */
 void nitc__parser___nitc__parser__ReduceAction26___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3566,12 +3758,12 @@ var7 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var7;
 var8 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var8); /* Direct call array#Array#init on <var8:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var8); /* Direct call array$Array$init on <var8:Array[Object]>*/
 }
 var_listnode8 = var8;
 var9 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var9); /* Direct call array#Array#init on <var9:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var9); /* Direct call array$Array$init on <var9:Array[Object]>*/
 }
 var_listnode12 = var9;
 var_pdocnode2 = var_nodearraylist1;
@@ -3588,8 +3780,11 @@ var10 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1809);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1819);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -3606,8 +3801,11 @@ var11 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1811);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1821);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -3624,8 +3822,11 @@ var14 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1813);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1823);
 fatal_exit(1);
 }
 var_pclasskindnode5 = var_nodearraylist4;
@@ -3642,8 +3843,11 @@ var17 = (((long)var_pclasskindnode5&3)?type_info[((long)var_pclasskindnode5&3)]:
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1815);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1825);
 fatal_exit(1);
 }
 var_pqclassidnode6 = var_nodearraylist6;
@@ -3660,8 +3864,11 @@ var20 = (((long)var_pqclassidnode6&3)?type_info[((long)var_pqclassidnode6&3)]:va
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1817);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1827);
 fatal_exit(1);
 }
 var_listnode11 = var_nodearraylist7;
@@ -3678,8 +3885,11 @@ var23 = (((long)var_listnode11&3)?type_info[((long)var_listnode11&3)]:var_listno
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1819);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1829);
 fatal_exit(1);
 }
 {
@@ -3700,13 +3910,16 @@ var27 = (((long)var_tkwendnode13&3)?type_info[((long)var_tkwendnode13&3)]:var_tk
 }
 }
 if (unlikely(!var27)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1822);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1832);
 fatal_exit(1);
 }
 var30 = NEW_nitc__AStdClassdef(&type_nitc__AStdClassdef);
 {
-nitc__parser_prod___AStdClassdef___init_astdclassdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, ((val*)NULL), var_listnode8, ((val*)NULL), ((val*)NULL), var_listnode12, var_tkwendnode13); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var30:AStdClassdef>*/
+nitc__parser_prod___AStdClassdef___init_astdclassdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, ((val*)NULL), var_listnode8, ((val*)NULL), ((val*)NULL), var_listnode12, var_tkwendnode13); /* Direct call parser_prod$AStdClassdef$init_astdclassdef on <var30:AStdClassdef>*/
 }
 var_pclassdefnode1 = var30;
 var_node_list = var_pclassdefnode1;
@@ -3715,11 +3928,11 @@ var31 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var32 = nitc___nitc__Parser___go_to(var_p, var31);
 }
 {
-nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction27#action for (self: ReduceAction27, Parser) */
+/* method parser$ReduceAction27$action for (self: ReduceAction27, Parser) */
 void nitc__parser___nitc__parser__ReduceAction27___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -3822,12 +4035,12 @@ var8 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var8;
 var9 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var9); /* Direct call array#Array#init on <var9:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var9); /* Direct call array$Array$init on <var9:Array[Object]>*/
 }
 var_listnode8 = var9;
 var10 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var10); /* Direct call array#Array#init on <var10:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var10); /* Direct call array$Array$init on <var10:Array[Object]>*/
 }
 var_listnode12 = var10;
 var_pdocnode2 = var_nodearraylist1;
@@ -3844,8 +4057,11 @@ var11 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1857);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1867);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -3862,8 +4078,11 @@ var12 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1859);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1869);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -3880,8 +4099,11 @@ var15 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1861);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1871);
 fatal_exit(1);
 }
 var_pclasskindnode5 = var_nodearraylist4;
@@ -3898,8 +4120,11 @@ var18 = (((long)var_pclasskindnode5&3)?type_info[((long)var_pclasskindnode5&3)]:
 }
 }
 if (unlikely(!var18)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1863);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1873);
 fatal_exit(1);
 }
 var_pqclassidnode6 = var_nodearraylist6;
@@ -3916,8 +4141,11 @@ var21 = (((long)var_pqclassidnode6&3)?type_info[((long)var_pqclassidnode6&3)]:va
 }
 }
 if (unlikely(!var21)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1865);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1875);
 fatal_exit(1);
 }
 var_pexterncodeblocknode10 = var_nodearraylist7;
@@ -3934,8 +4162,11 @@ var24 = (((long)var_pexterncodeblocknode10&3)?type_info[((long)var_pexterncodebl
 }
 }
 if (unlikely(!var24)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1867);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1877);
 fatal_exit(1);
 }
 var_listnode11 = var_nodearraylist8;
@@ -3952,8 +4183,11 @@ var27 = (((long)var_listnode11&3)?type_info[((long)var_listnode11&3)]:var_listno
 }
 }
 if (unlikely(!var27)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1869);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1879);
 fatal_exit(1);
 }
 {
@@ -3974,13 +4208,16 @@ var31 = (((long)var_tkwendnode13&3)?type_info[((long)var_tkwendnode13&3)]:var_tk
 }
 }
 if (unlikely(!var31)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1872);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1882);
 fatal_exit(1);
 }
 var34 = NEW_nitc__AStdClassdef(&type_nitc__AStdClassdef);
 {
-nitc__parser_prod___AStdClassdef___init_astdclassdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, ((val*)NULL), var_listnode8, ((val*)NULL), var_pexterncodeblocknode10, var_listnode12, var_tkwendnode13); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var34:AStdClassdef>*/
+nitc__parser_prod___AStdClassdef___init_astdclassdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, ((val*)NULL), var_listnode8, ((val*)NULL), var_pexterncodeblocknode10, var_listnode12, var_tkwendnode13); /* Direct call parser_prod$AStdClassdef$init_astdclassdef on <var34:AStdClassdef>*/
 }
 var_pclassdefnode1 = var34;
 var_node_list = var_pclassdefnode1;
@@ -3989,11 +4226,11 @@ var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var36 = nitc___nitc__Parser___go_to(var_p, var35);
 }
 {
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction28#action for (self: ReduceAction28, Parser) */
+/* method parser$ReduceAction28$action for (self: ReduceAction28, Parser) */
 void nitc__parser___nitc__parser__ReduceAction28___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4123,12 +4360,12 @@ var11 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var11;
 var12 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var12); /* Direct call array#Array#init on <var12:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var12); /* Direct call array$Array$init on <var12:Array[Object]>*/
 }
 var_listnode9 = var12;
 var13 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var13); /* Direct call array$Array$init on <var13:Array[Object]>*/
 }
 var_listnode13 = var13;
 var_pdocnode2 = var_nodearraylist1;
@@ -4145,8 +4382,11 @@ var14 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1910);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1920);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4163,8 +4403,11 @@ var15 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1912);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1922);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4181,8 +4424,11 @@ var18 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var18)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1914);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1924);
 fatal_exit(1);
 }
 var_pclasskindnode5 = var_nodearraylist4;
@@ -4199,8 +4445,11 @@ var21 = (((long)var_pclasskindnode5&3)?type_info[((long)var_pclasskindnode5&3)]:
 }
 }
 if (unlikely(!var21)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1916);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1926);
 fatal_exit(1);
 }
 var_pqclassidnode6 = var_nodearraylist6;
@@ -4217,8 +4466,11 @@ var24 = (((long)var_pqclassidnode6&3)?type_info[((long)var_pqclassidnode6&3)]:va
 }
 }
 if (unlikely(!var24)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1918);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1928);
 fatal_exit(1);
 }
 var_tobranode7 = var_nodearraylist7;
@@ -4235,8 +4487,11 @@ var27 = (((long)var_tobranode7&3)?type_info[((long)var_tobranode7&3)]:var_tobran
 }
 }
 if (unlikely(!var27)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1920);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1930);
 fatal_exit(1);
 }
 var_listnode8 = var_nodearraylist9;
@@ -4253,8 +4508,11 @@ var30 = (((long)var_listnode8&3)?type_info[((long)var_listnode8&3)]:var_listnode
 }
 }
 if (unlikely(!var30)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1922);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1932);
 fatal_exit(1);
 }
 {
@@ -4275,8 +4533,11 @@ var34 = (((long)var_tcbranode10&3)?type_info[((long)var_tcbranode10&3)]:var_tcbr
 }
 }
 if (unlikely(!var34)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1925);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1935);
 fatal_exit(1);
 }
 var_listnode12 = var_nodearraylist11;
@@ -4293,8 +4554,11 @@ var37 = (((long)var_listnode12&3)?type_info[((long)var_listnode12&3)]:var_listno
 }
 }
 if (unlikely(!var37)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1927);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1937);
 fatal_exit(1);
 }
 {
@@ -4315,13 +4579,16 @@ var41 = (((long)var_tkwendnode14&3)?type_info[((long)var_tkwendnode14&3)]:var_tk
 }
 }
 if (unlikely(!var41)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1930);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1940);
 fatal_exit(1);
 }
 var44 = NEW_nitc__AStdClassdef(&type_nitc__AStdClassdef);
 {
-nitc__parser_prod___AStdClassdef___init_astdclassdef(var44, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, var_tobranode7, var_listnode9, var_tcbranode10, ((val*)NULL), var_listnode13, var_tkwendnode14); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var44:AStdClassdef>*/
+nitc__parser_prod___AStdClassdef___init_astdclassdef(var44, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, var_tobranode7, var_listnode9, var_tcbranode10, ((val*)NULL), var_listnode13, var_tkwendnode14); /* Direct call parser_prod$AStdClassdef$init_astdclassdef on <var44:AStdClassdef>*/
 }
 var_pclassdefnode1 = var44;
 var_node_list = var_pclassdefnode1;
@@ -4330,11 +4597,11 @@ var45 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var46 = nitc___nitc__Parser___go_to(var_p, var45);
 }
 {
-nitc___nitc__Parser___push(var_p, var46, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var46, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction29#action for (self: ReduceAction29, Parser) */
+/* method parser$ReduceAction29$action for (self: ReduceAction29, Parser) */
 void nitc__parser___nitc__parser__ReduceAction29___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4474,12 +4741,12 @@ var12 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var12;
 var13 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var13); /* Direct call array#Array#init on <var13:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var13); /* Direct call array$Array$init on <var13:Array[Object]>*/
 }
 var_listnode9 = var13;
 var14 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var14); /* Direct call array#Array#init on <var14:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var14); /* Direct call array$Array$init on <var14:Array[Object]>*/
 }
 var_listnode13 = var14;
 var_pdocnode2 = var_nodearraylist1;
@@ -4496,8 +4763,11 @@ var15 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1969);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1979);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -4514,8 +4784,11 @@ var16 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1971);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1981);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -4532,8 +4805,11 @@ var19 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var19)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1973);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1983);
 fatal_exit(1);
 }
 var_pclasskindnode5 = var_nodearraylist4;
@@ -4550,8 +4826,11 @@ var22 = (((long)var_pclasskindnode5&3)?type_info[((long)var_pclasskindnode5&3)]:
 }
 }
 if (unlikely(!var22)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1975);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1985);
 fatal_exit(1);
 }
 var_pqclassidnode6 = var_nodearraylist6;
@@ -4568,8 +4847,11 @@ var25 = (((long)var_pqclassidnode6&3)?type_info[((long)var_pqclassidnode6&3)]:va
 }
 }
 if (unlikely(!var25)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1977);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1987);
 fatal_exit(1);
 }
 var_tobranode7 = var_nodearraylist7;
@@ -4586,8 +4868,11 @@ var28 = (((long)var_tobranode7&3)?type_info[((long)var_tobranode7&3)]:var_tobran
 }
 }
 if (unlikely(!var28)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1979);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1989);
 fatal_exit(1);
 }
 var_listnode8 = var_nodearraylist9;
@@ -4604,8 +4889,11 @@ var31 = (((long)var_listnode8&3)?type_info[((long)var_listnode8&3)]:var_listnode
 }
 }
 if (unlikely(!var31)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1981);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1991);
 fatal_exit(1);
 }
 {
@@ -4626,8 +4914,11 @@ var35 = (((long)var_tcbranode10&3)?type_info[((long)var_tcbranode10&3)]:var_tcbr
 }
 }
 if (unlikely(!var35)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1984);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1994);
 fatal_exit(1);
 }
 var_pexterncodeblocknode11 = var_nodearraylist11;
@@ -4644,8 +4935,11 @@ var38 = (((long)var_pexterncodeblocknode11&3)?type_info[((long)var_pexterncodebl
 }
 }
 if (unlikely(!var38)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1986);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1996);
 fatal_exit(1);
 }
 var_listnode12 = var_nodearraylist12;
@@ -4662,8 +4956,11 @@ var41 = (((long)var_listnode12&3)?type_info[((long)var_listnode12&3)]:var_listno
 }
 }
 if (unlikely(!var41)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1988);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1998);
 fatal_exit(1);
 }
 {
@@ -4684,13 +4981,16 @@ var45 = (((long)var_tkwendnode14&3)?type_info[((long)var_tkwendnode14&3)]:var_tk
 }
 }
 if (unlikely(!var45)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 1991);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2001);
 fatal_exit(1);
 }
 var48 = NEW_nitc__AStdClassdef(&type_nitc__AStdClassdef);
 {
-nitc__parser_prod___AStdClassdef___init_astdclassdef(var48, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, var_tobranode7, var_listnode9, var_tcbranode10, var_pexterncodeblocknode11, var_listnode13, var_tkwendnode14); /* Direct call parser_prod#AStdClassdef#init_astdclassdef on <var48:AStdClassdef>*/
+nitc__parser_prod___AStdClassdef___init_astdclassdef(var48, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_pclasskindnode5, var_pqclassidnode6, var_tobranode7, var_listnode9, var_tcbranode10, var_pexterncodeblocknode11, var_listnode13, var_tkwendnode14); /* Direct call parser_prod$AStdClassdef$init_astdclassdef on <var48:AStdClassdef>*/
 }
 var_pclassdefnode1 = var48;
 var_node_list = var_pclassdefnode1;
@@ -4699,11 +4999,11 @@ var49 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var50 = nitc___nitc__Parser___go_to(var_p, var49);
 }
 {
-nitc___nitc__Parser___push(var_p, var50, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var50, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction31#action for (self: ReduceAction31, Parser) */
+/* method parser$ReduceAction31$action for (self: ReduceAction31, Parser) */
 void nitc__parser___nitc__parser__ReduceAction31___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4725,11 +5025,11 @@ var1 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var2 = nitc___nitc__Parser___go_to(var_p, var1);
 }
 {
-nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction32#action for (self: ReduceAction32, Parser) */
+/* method parser$ReduceAction32$action for (self: ReduceAction32, Parser) */
 void nitc__parser___nitc__parser__ReduceAction32___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4763,13 +5063,16 @@ var1 = (((long)var_tkwclassnode2&3)?type_info[((long)var_tkwclassnode2&3)]:var_t
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2027);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2037);
 fatal_exit(1);
 }
 var2 = NEW_nitc__AConcreteClasskind(&type_nitc__AConcreteClasskind);
 {
-nitc__parser_prod___AConcreteClasskind___init_aconcreteclasskind(var2, var_tkwclassnode2); /* Direct call parser_prod#AConcreteClasskind#init_aconcreteclasskind on <var2:AConcreteClasskind>*/
+nitc__parser_prod___AConcreteClasskind___init_aconcreteclasskind(var2, var_tkwclassnode2); /* Direct call parser_prod$AConcreteClasskind$init_aconcreteclasskind on <var2:AConcreteClasskind>*/
 }
 var_pclasskindnode1 = var2;
 var_node_list = var_pclasskindnode1;
@@ -4778,11 +5081,11 @@ var3 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var4 = nitc___nitc__Parser___go_to(var_p, var3);
 }
 {
-nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction33#action for (self: ReduceAction33, Parser) */
+/* method parser$ReduceAction33$action for (self: ReduceAction33, Parser) */
 void nitc__parser___nitc__parser__ReduceAction33___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4826,8 +5129,11 @@ var2 = (((long)var_tkwabstractnode2&3)?type_info[((long)var_tkwabstractnode2&3)]
 }
 }
 if (unlikely(!var2)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2043);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2053);
 fatal_exit(1);
 }
 var_tkwclassnode3 = var_nodearraylist2;
@@ -4844,13 +5150,16 @@ var3 = (((long)var_tkwclassnode3&3)?type_info[((long)var_tkwclassnode3&3)]:var_t
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2045);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2055);
 fatal_exit(1);
 }
 var6 = NEW_nitc__AAbstractClasskind(&type_nitc__AAbstractClasskind);
 {
-nitc__parser_prod___AAbstractClasskind___init_aabstractclasskind(var6, var_tkwabstractnode2, var_tkwclassnode3); /* Direct call parser_prod#AAbstractClasskind#init_aabstractclasskind on <var6:AAbstractClasskind>*/
+nitc__parser_prod___AAbstractClasskind___init_aabstractclasskind(var6, var_tkwabstractnode2, var_tkwclassnode3); /* Direct call parser_prod$AAbstractClasskind$init_aabstractclasskind on <var6:AAbstractClasskind>*/
 }
 var_pclasskindnode1 = var6;
 var_node_list = var_pclasskindnode1;
@@ -4859,11 +5168,11 @@ var7 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var8 = nitc___nitc__Parser___go_to(var_p, var7);
 }
 {
-nitc___nitc__Parser___push(var_p, var8, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var8, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction34#action for (self: ReduceAction34, Parser) */
+/* method parser$ReduceAction34$action for (self: ReduceAction34, Parser) */
 void nitc__parser___nitc__parser__ReduceAction34___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4897,13 +5206,16 @@ var1 = (((long)var_tkwinterfacenode2&3)?type_info[((long)var_tkwinterfacenode2&3
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2061);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2071);
 fatal_exit(1);
 }
 var2 = NEW_nitc__AInterfaceClasskind(&type_nitc__AInterfaceClasskind);
 {
-nitc__parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(var2, var_tkwinterfacenode2); /* Direct call parser_prod#AInterfaceClasskind#init_ainterfaceclasskind on <var2:AInterfaceClasskind>*/
+nitc__parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(var2, var_tkwinterfacenode2); /* Direct call parser_prod$AInterfaceClasskind$init_ainterfaceclasskind on <var2:AInterfaceClasskind>*/
 }
 var_pclasskindnode1 = var2;
 var_node_list = var_pclasskindnode1;
@@ -4912,11 +5224,11 @@ var3 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var4 = nitc___nitc__Parser___go_to(var_p, var3);
 }
 {
-nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction35#action for (self: ReduceAction35, Parser) */
+/* method parser$ReduceAction35$action for (self: ReduceAction35, Parser) */
 void nitc__parser___nitc__parser__ReduceAction35___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -4950,13 +5262,16 @@ var1 = (((long)var_tkwenumnode2&3)?type_info[((long)var_tkwenumnode2&3)]:var_tkw
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2076);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2086);
 fatal_exit(1);
 }
 var2 = NEW_nitc__AEnumClasskind(&type_nitc__AEnumClasskind);
 {
-nitc__parser_prod___AEnumClasskind___init_aenumclasskind(var2, var_tkwenumnode2); /* Direct call parser_prod#AEnumClasskind#init_aenumclasskind on <var2:AEnumClasskind>*/
+nitc__parser_prod___AEnumClasskind___init_aenumclasskind(var2, var_tkwenumnode2); /* Direct call parser_prod$AEnumClasskind$init_aenumclasskind on <var2:AEnumClasskind>*/
 }
 var_pclasskindnode1 = var2;
 var_node_list = var_pclasskindnode1;
@@ -4965,11 +5280,11 @@ var3 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var4 = nitc___nitc__Parser___go_to(var_p, var3);
 }
 {
-nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction36#action for (self: ReduceAction36, Parser) */
+/* method parser$ReduceAction36$action for (self: ReduceAction36, Parser) */
 void nitc__parser___nitc__parser__ReduceAction36___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5013,8 +5328,11 @@ var2 = (((long)var_tkwexternnode2&3)?type_info[((long)var_tkwexternnode2&3)]:var
 }
 }
 if (unlikely(!var2)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2092);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2102);
 fatal_exit(1);
 }
 var_tkwclassnode3 = var_nodearraylist2;
@@ -5031,13 +5349,16 @@ var3 = (((long)var_tkwclassnode3&3)?type_info[((long)var_tkwclassnode3&3)]:var_t
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2094);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2104);
 fatal_exit(1);
 }
 var6 = NEW_nitc__AExternClasskind(&type_nitc__AExternClasskind);
 {
-nitc__parser_prod___AExternClasskind___init_aexternclasskind(var6, var_tkwexternnode2, var_tkwclassnode3); /* Direct call parser_prod#AExternClasskind#init_aexternclasskind on <var6:AExternClasskind>*/
+nitc__parser_prod___AExternClasskind___init_aexternclasskind(var6, var_tkwexternnode2, var_tkwclassnode3); /* Direct call parser_prod$AExternClasskind$init_aexternclasskind on <var6:AExternClasskind>*/
 }
 var_pclasskindnode1 = var6;
 var_node_list = var_pclasskindnode1;
@@ -5046,11 +5367,11 @@ var7 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var8 = nitc___nitc__Parser___go_to(var_p, var7);
 }
 {
-nitc___nitc__Parser___push(var_p, var8, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var8, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction37#action for (self: ReduceAction37, Parser) */
+/* method parser$ReduceAction37$action for (self: ReduceAction37, Parser) */
 void nitc__parser___nitc__parser__ReduceAction37___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5071,7 +5392,7 @@ var = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var;
 var1 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Object]>*/
 }
 var_listnode2 = var1;
 var_pformaldefnode1 = var_nodearraylist1;
@@ -5086,7 +5407,7 @@ var2 = var3;
 }
 if (var2){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode2, var_pformaldefnode1); /* Direct call array#Array#add on <var_listnode2:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode2, var_pformaldefnode1); /* Direct call array$Array$add on <var_listnode2:Array[Object]>*/
 }
 } else {
 }
@@ -5096,11 +5417,11 @@ var4 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var5 = nitc___nitc__Parser___go_to(var_p, var4);
 }
 {
-nitc___nitc__Parser___push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var5, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction38#action for (self: ReduceAction38, Parser) */
+/* method parser$ReduceAction38$action for (self: ReduceAction38, Parser) */
 void nitc__parser___nitc__parser__ReduceAction38___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5132,7 +5453,7 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode3 = var2;
 var_pformaldefnode1 = var_nodearraylist1;
@@ -5150,8 +5471,11 @@ var3 = (((long)var_listnode2&3)?type_info[((long)var_listnode2&3)]:var_listnode2
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2128);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2138);
 fatal_exit(1);
 }
 if (var_pformaldefnode1 == NULL) {
@@ -5165,7 +5489,7 @@ var4 = var5;
 }
 if (var4){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode3, var_pformaldefnode1); /* Direct call array#Array#add on <var_listnode3:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode3, var_pformaldefnode1); /* Direct call array$Array$add on <var_listnode3:Array[Object]>*/
 }
 } else {
 }
@@ -5179,11 +5503,11 @@ var7 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var8 = nitc___nitc__Parser___go_to(var_p, var7);
 }
 {
-nitc___nitc__Parser___push(var_p, var8, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var8, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction39#action for (self: ReduceAction39, Parser) */
+/* method parser$ReduceAction39$action for (self: ReduceAction39, Parser) */
 void nitc__parser___nitc__parser__ReduceAction39___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5195,7 +5519,7 @@ var_p = p0;
 var_node_list = ((val*)NULL);
 var = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var); /* Direct call array#Array#init on <var:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var); /* Direct call array$Array$init on <var:Array[Object]>*/
 }
 var_listnode1 = var;
 var_node_list = var_listnode1;
@@ -5204,11 +5528,11 @@ var1 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var2 = nitc___nitc__Parser___go_to(var_p, var1);
 }
 {
-nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var2, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction40#action for (self: ReduceAction40, Parser) */
+/* method parser$ReduceAction40$action for (self: ReduceAction40, Parser) */
 void nitc__parser___nitc__parser__ReduceAction40___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5242,11 +5566,11 @@ var3 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var4 = nitc___nitc__Parser___go_to(var_p, var3);
 }
 {
-nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var4, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction41#action for (self: ReduceAction41, Parser) */
+/* method parser$ReduceAction41$action for (self: ReduceAction41, Parser) */
 void nitc__parser___nitc__parser__ReduceAction41___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5296,8 +5620,11 @@ var3 = (((long)var_tclassidnode2&3)?type_info[((long)var_tclassidnode2&3)]:var_t
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2169);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2179);
 fatal_exit(1);
 }
 var_ptypenode3 = var_nodearraylist2;
@@ -5314,13 +5641,16 @@ var4 = (((long)var_ptypenode3&3)?type_info[((long)var_ptypenode3&3)]:var_ptypeno
 }
 }
 if (unlikely(!var4)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2171);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2181);
 fatal_exit(1);
 }
 var7 = NEW_nitc__AFormaldef(&type_nitc__AFormaldef);
 {
-nitc__parser_prod___AFormaldef___init_aformaldef(var7, var_tclassidnode2, var_ptypenode3, ((val*)NULL)); /* Direct call parser_prod#AFormaldef#init_aformaldef on <var7:AFormaldef>*/
+nitc__parser_prod___AFormaldef___init_aformaldef(var7, var_tclassidnode2, var_ptypenode3, ((val*)NULL)); /* Direct call parser_prod$AFormaldef$init_aformaldef on <var7:AFormaldef>*/
 }
 var_pformaldefnode1 = var7;
 var_node_list = var_pformaldefnode1;
@@ -5329,11 +5659,11 @@ var8 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var9 = nitc___nitc__Parser___go_to(var_p, var8);
 }
 {
-nitc___nitc__Parser___push(var_p, var9, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var9, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction42#action for (self: ReduceAction42, Parser) */
+/* method parser$ReduceAction42$action for (self: ReduceAction42, Parser) */
 void nitc__parser___nitc__parser__ReduceAction42___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5393,8 +5723,11 @@ var4 = (((long)var_tclassidnode2&3)?type_info[((long)var_tclassidnode2&3)]:var_t
 }
 }
 if (unlikely(!var4)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2191);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2201);
 fatal_exit(1);
 }
 var_ptypenode3 = var_nodearraylist3;
@@ -5411,8 +5744,11 @@ var5 = (((long)var_ptypenode3&3)?type_info[((long)var_ptypenode3&3)]:var_ptypeno
 }
 }
 if (unlikely(!var5)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2193);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2203);
 fatal_exit(1);
 }
 var_pannotationsnode4 = var_nodearraylist2;
@@ -5429,13 +5765,16 @@ var8 = (((long)var_pannotationsnode4&3)?type_info[((long)var_pannotationsnode4&3
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2195);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2205);
 fatal_exit(1);
 }
 var11 = NEW_nitc__AFormaldef(&type_nitc__AFormaldef);
 {
-nitc__parser_prod___AFormaldef___init_aformaldef(var11, var_tclassidnode2, var_ptypenode3, var_pannotationsnode4); /* Direct call parser_prod#AFormaldef#init_aformaldef on <var11:AFormaldef>*/
+nitc__parser_prod___AFormaldef___init_aformaldef(var11, var_tclassidnode2, var_ptypenode3, var_pannotationsnode4); /* Direct call parser_prod$AFormaldef$init_aformaldef on <var11:AFormaldef>*/
 }
 var_pformaldefnode1 = var11;
 var_node_list = var_pformaldefnode1;
@@ -5444,11 +5783,11 @@ var12 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var13 = nitc___nitc__Parser___go_to(var_p, var12);
 }
 {
-nitc___nitc__Parser___push(var_p, var13, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var13, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction43#action for (self: ReduceAction43, Parser) */
+/* method parser$ReduceAction43$action for (self: ReduceAction43, Parser) */
 void nitc__parser___nitc__parser__ReduceAction43___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5538,8 +5877,11 @@ var7 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2218);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2228);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -5556,8 +5898,11 @@ var8 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2220);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2230);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -5574,8 +5919,11 @@ var11 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2222);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2232);
 fatal_exit(1);
 }
 var_tkwsupernode5 = var_nodearraylist4;
@@ -5592,8 +5940,11 @@ var14 = (((long)var_tkwsupernode5&3)?type_info[((long)var_tkwsupernode5&3)]:var_
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2224);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2234);
 fatal_exit(1);
 }
 var_ptypenode6 = var_nodearraylist6;
@@ -5610,8 +5961,11 @@ var17 = (((long)var_ptypenode6&3)?type_info[((long)var_ptypenode6&3)]:var_ptypen
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2226);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2236);
 fatal_exit(1);
 }
 var_pannotationsnode7 = var_nodearraylist7;
@@ -5628,13 +5982,16 @@ var20 = (((long)var_pannotationsnode7&3)?type_info[((long)var_pannotationsnode7&
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2228);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2238);
 fatal_exit(1);
 }
 var23 = NEW_nitc__ASuperPropdef(&type_nitc__ASuperPropdef);
 {
-nitc__parser_prod___ASuperPropdef___init_asuperpropdef(var23, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwsupernode5, var_ptypenode6, var_pannotationsnode7); /* Direct call parser_prod#ASuperPropdef#init_asuperpropdef on <var23:ASuperPropdef>*/
+nitc__parser_prod___ASuperPropdef___init_asuperpropdef(var23, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwsupernode5, var_ptypenode6, var_pannotationsnode7); /* Direct call parser_prod$ASuperPropdef$init_asuperpropdef on <var23:ASuperPropdef>*/
 }
 var_ppropdefnode1 = var23;
 var_node_list = var_ppropdefnode1;
@@ -5643,11 +6000,11 @@ var24 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var25 = nitc___nitc__Parser___go_to(var_p, var24);
 }
 {
-nitc___nitc__Parser___push(var_p, var25, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var25, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction44#action for (self: ReduceAction44, Parser) */
+/* method parser$ReduceAction44$action for (self: ReduceAction44, Parser) */
 void nitc__parser___nitc__parser__ReduceAction44___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5676,7 +6033,7 @@ var1 = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var1;
 var2 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[Object]>*/
 }
 var_listnode2 = var2;
 var_listnode1 = var_nodearraylist1;
@@ -5693,8 +6050,11 @@ var3 = (((long)var_listnode1&3)?type_info[((long)var_listnode1&3)]:var_listnode1
 }
 }
 if (unlikely(!var3)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2250);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2260);
 fatal_exit(1);
 }
 {
@@ -5707,11 +6067,11 @@ var5 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var6 = nitc___nitc__Parser___go_to(var_p, var5);
 }
 {
-nitc___nitc__Parser___push(var_p, var6, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var6, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction45#action for (self: ReduceAction45, Parser) */
+/* method parser$ReduceAction45$action for (self: ReduceAction45, Parser) */
 void nitc__parser___nitc__parser__ReduceAction45___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5732,7 +6092,7 @@ var = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var;
 var1 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Object]>*/
 }
 var_listnode2 = var1;
 var_ppropdefnode1 = var_nodearraylist1;
@@ -5747,7 +6107,7 @@ var2 = var3;
 }
 if (var2){
 {
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode2, var_ppropdefnode1); /* Direct call array#Array#add on <var_listnode2:Array[Object]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_listnode2, var_ppropdefnode1); /* Direct call array$Array$add on <var_listnode2:Array[Object]>*/
 }
 } else {
 }
@@ -5757,11 +6117,11 @@ var4 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var5 = nitc___nitc__Parser___go_to(var_p, var4);
 }
 {
-nitc___nitc__Parser___push(var_p, var5, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var5, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction46#action for (self: ReduceAction46, Parser) */
+/* method parser$ReduceAction46$action for (self: ReduceAction46, Parser) */
 void nitc__parser___nitc__parser__ReduceAction46___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5779,7 +6139,7 @@ var = nitc___nitc__Parser___pop(var_p);
 var_nodearraylist1 = var;
 var1 = NEW_core__Array(&type_core__Array__core__Object);
 {
-core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[Object]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Object]>*/
 }
 var_listnode1 = var1;
 var_node_list = var_listnode1;
@@ -5788,11 +6148,11 @@ var2 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var3 = nitc___nitc__Parser___go_to(var_p, var2);
 }
 {
-nitc___nitc__Parser___push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var3, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction47#action for (self: ReduceAction47, Parser) */
+/* method parser$ReduceAction47$action for (self: ReduceAction47, Parser) */
 void nitc__parser___nitc__parser__ReduceAction47___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5820,11 +6180,11 @@ var2 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on 
 var3 = nitc___nitc__Parser___go_to(var_p, var2);
 }
 {
-nitc___nitc__Parser___push(var_p, var3, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var3, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction48#action for (self: ReduceAction48, Parser) */
+/* method parser$ReduceAction48$action for (self: ReduceAction48, Parser) */
 void nitc__parser___nitc__parser__ReduceAction48___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -5938,8 +6298,11 @@ var9 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2309);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2319);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -5956,8 +6319,11 @@ var10 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2311);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2321);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -5974,8 +6340,11 @@ var13 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2313);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2323);
 fatal_exit(1);
 }
 var_tkwmethnode5 = var_nodearraylist4;
@@ -5992,8 +6361,11 @@ var16 = (((long)var_tkwmethnode5&3)?type_info[((long)var_tkwmethnode5&3)]:var_tk
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2315);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2325);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -6010,8 +6382,11 @@ var19 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var19)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2317);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2327);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -6028,8 +6403,11 @@ var22 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var22)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2319);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2329);
 fatal_exit(1);
 }
 var_tkwdonode13 = var_nodearraylist7;
@@ -6046,8 +6424,11 @@ var25 = (((long)var_tkwdonode13&3)?type_info[((long)var_tkwdonode13&3)]:var_tkwd
 }
 }
 if (unlikely(!var25)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2321);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2331);
 fatal_exit(1);
 }
 var_pexprnode14 = var_nodearraylist8;
@@ -6064,8 +6445,11 @@ var28 = (((long)var_pexprnode14&3)?type_info[((long)var_pexprnode14&3)]:var_pexp
 }
 }
 if (unlikely(!var28)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2323);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2333);
 fatal_exit(1);
 }
 var_tkwendnode15 = var_nodearraylist9;
@@ -6082,13 +6466,16 @@ var31 = (((long)var_tkwendnode15&3)?type_info[((long)var_tkwendnode15&3)]:var_tk
 }
 }
 if (unlikely(!var31)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2325);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2335);
 fatal_exit(1);
 }
 var34 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var34:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var34:AMethPropdef>*/
 }
 var_ppropdefnode1 = var34;
 var_node_list = var_ppropdefnode1;
@@ -6097,11 +6484,11 @@ var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var36 = nitc___nitc__Parser___go_to(var_p, var35);
 }
 {
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction49#action for (self: ReduceAction49, Parser) */
+/* method parser$ReduceAction49$action for (self: ReduceAction49, Parser) */
 void nitc__parser___nitc__parser__ReduceAction49___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6225,8 +6612,11 @@ var10 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2362);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2372);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -6243,8 +6633,11 @@ var11 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2364);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2374);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -6261,8 +6654,11 @@ var14 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2366);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2376);
 fatal_exit(1);
 }
 var_tkwmethnode5 = var_nodearraylist4;
@@ -6279,8 +6675,11 @@ var17 = (((long)var_tkwmethnode5&3)?type_info[((long)var_tkwmethnode5&3)]:var_tk
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2368);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2378);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -6297,8 +6696,11 @@ var20 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2370);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2380);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -6315,8 +6717,11 @@ var23 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2372);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2382);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist7;
@@ -6333,8 +6738,11 @@ var26 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var26)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2374);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2384);
 fatal_exit(1);
 }
 var_tkwdonode13 = var_nodearraylist8;
@@ -6351,8 +6759,11 @@ var29 = (((long)var_tkwdonode13&3)?type_info[((long)var_tkwdonode13&3)]:var_tkwd
 }
 }
 if (unlikely(!var29)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2376);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2386);
 fatal_exit(1);
 }
 var_pexprnode14 = var_nodearraylist9;
@@ -6369,8 +6780,11 @@ var32 = (((long)var_pexprnode14&3)?type_info[((long)var_pexprnode14&3)]:var_pexp
 }
 }
 if (unlikely(!var32)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2378);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2388);
 fatal_exit(1);
 }
 var_tkwendnode15 = var_nodearraylist10;
@@ -6387,13 +6801,16 @@ var35 = (((long)var_tkwendnode15&3)?type_info[((long)var_tkwendnode15&3)]:var_tk
 }
 }
 if (unlikely(!var35)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2380);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2390);
 fatal_exit(1);
 }
 var38 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var38, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var38:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var38, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var38:AMethPropdef>*/
 }
 var_ppropdefnode1 = var38;
 var_node_list = var_ppropdefnode1;
@@ -6402,11 +6819,11 @@ var39 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var40 = nitc___nitc__Parser___go_to(var_p, var39);
 }
 {
-nitc___nitc__Parser___push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var40, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction50#action for (self: ReduceAction50, Parser) */
+/* method parser$ReduceAction50$action for (self: ReduceAction50, Parser) */
 void nitc__parser___nitc__parser__ReduceAction50___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6500,8 +6917,11 @@ var7 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2414);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2424);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -6518,8 +6938,11 @@ var8 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2416);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2426);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -6536,8 +6959,11 @@ var11 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2418);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2428);
 fatal_exit(1);
 }
 var_tkwmethnode5 = var_nodearraylist4;
@@ -6554,8 +6980,11 @@ var14 = (((long)var_tkwmethnode5&3)?type_info[((long)var_tkwmethnode5&3)]:var_tk
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2420);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2430);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -6572,8 +7001,11 @@ var17 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2422);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2432);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -6590,8 +7022,11 @@ var20 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2424);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2434);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist7;
@@ -6608,13 +7043,16 @@ var23 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2426);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2436);
 fatal_exit(1);
 }
 var26 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var26, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var26:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var26, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var26:AMethPropdef>*/
 }
 var_ppropdefnode1 = var26;
 var_node_list = var_ppropdefnode1;
@@ -6623,11 +7061,11 @@ var27 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var28 = nitc___nitc__Parser___go_to(var_p, var27);
 }
 {
-nitc___nitc__Parser___push(var_p, var28, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var28, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction51#action for (self: ReduceAction51, Parser) */
+/* method parser$ReduceAction51$action for (self: ReduceAction51, Parser) */
 void nitc__parser___nitc__parser__ReduceAction51___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6711,8 +7149,11 @@ var6 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var6)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2459);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2469);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -6729,8 +7170,11 @@ var7 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2461);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2471);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -6747,8 +7191,11 @@ var10 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2463);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2473);
 fatal_exit(1);
 }
 var_tkwnewnode7 = var_nodearraylist4;
@@ -6765,8 +7212,11 @@ var13 = (((long)var_tkwnewnode7&3)?type_info[((long)var_tkwnewnode7&3)]:var_tkwn
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2465);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2475);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist5;
@@ -6783,8 +7233,11 @@ var16 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2467);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2477);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist6;
@@ -6801,13 +7254,16 @@ var19 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var19)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2469);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2479);
 fatal_exit(1);
 }
 var22 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var22, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, ((val*)NULL), var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var22:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var22, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, ((val*)NULL), var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var22:AMethPropdef>*/
 }
 var_ppropdefnode1 = var22;
 var_node_list = var_ppropdefnode1;
@@ -6816,11 +7272,11 @@ var23 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var24 = nitc___nitc__Parser___go_to(var_p, var23);
 }
 {
-nitc___nitc__Parser___push(var_p, var24, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var24, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction52#action for (self: ReduceAction52, Parser) */
+/* method parser$ReduceAction52$action for (self: ReduceAction52, Parser) */
 void nitc__parser___nitc__parser__ReduceAction52___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -6914,8 +7370,11 @@ var7 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2503);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2513);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -6932,8 +7391,11 @@ var8 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2505);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2515);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -6950,8 +7412,11 @@ var11 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2507);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2517);
 fatal_exit(1);
 }
 var_tkwnewnode7 = var_nodearraylist4;
@@ -6968,8 +7433,11 @@ var14 = (((long)var_tkwnewnode7&3)?type_info[((long)var_tkwnewnode7&3)]:var_tkwn
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2509);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2519);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -6986,8 +7454,11 @@ var17 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2511);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2521);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -7004,8 +7475,11 @@ var20 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2513);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2523);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist7;
@@ -7022,13 +7496,16 @@ var23 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2515);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2525);
 fatal_exit(1);
 }
 var26 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var26, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var26:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var26, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var26:AMethPropdef>*/
 }
 var_ppropdefnode1 = var26;
 var_node_list = var_ppropdefnode1;
@@ -7037,11 +7514,11 @@ var27 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var28 = nitc___nitc__Parser___go_to(var_p, var27);
 }
 {
-nitc___nitc__Parser___push(var_p, var28, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var28, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction53#action for (self: ReduceAction53, Parser) */
+/* method parser$ReduceAction53$action for (self: ReduceAction53, Parser) */
 void nitc__parser___nitc__parser__ReduceAction53___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7145,8 +7622,11 @@ var8 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2550);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2560);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7163,8 +7643,11 @@ var9 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2552);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2562);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -7181,8 +7664,11 @@ var12 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2554);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2564);
 fatal_exit(1);
 }
 var_tkwnewnode7 = var_nodearraylist4;
@@ -7199,8 +7685,11 @@ var15 = (((long)var_tkwnewnode7&3)?type_info[((long)var_tkwnewnode7&3)]:var_tkwn
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2556);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2566);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist5;
@@ -7217,8 +7706,11 @@ var18 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var18)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2558);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2568);
 fatal_exit(1);
 }
 var_tkwdonode13 = var_nodearraylist6;
@@ -7235,8 +7727,11 @@ var21 = (((long)var_tkwdonode13&3)?type_info[((long)var_tkwdonode13&3)]:var_tkwd
 }
 }
 if (unlikely(!var21)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2560);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2570);
 fatal_exit(1);
 }
 var_pexprnode14 = var_nodearraylist7;
@@ -7253,8 +7748,11 @@ var24 = (((long)var_pexprnode14&3)?type_info[((long)var_pexprnode14&3)]:var_pexp
 }
 }
 if (unlikely(!var24)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2562);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2572);
 fatal_exit(1);
 }
 var_tkwendnode15 = var_nodearraylist8;
@@ -7271,13 +7769,16 @@ var27 = (((long)var_tkwendnode15&3)?type_info[((long)var_tkwendnode15&3)]:var_tk
 }
 }
 if (unlikely(!var27)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2564);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2574);
 fatal_exit(1);
 }
 var30 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, ((val*)NULL), var_psignaturenode9, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var30:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, ((val*)NULL), var_psignaturenode9, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var30:AMethPropdef>*/
 }
 var_ppropdefnode1 = var30;
 var_node_list = var_ppropdefnode1;
@@ -7286,11 +7787,11 @@ var31 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var32 = nitc___nitc__Parser___go_to(var_p, var31);
 }
 {
-nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction54#action for (self: ReduceAction54, Parser) */
+/* method parser$ReduceAction54$action for (self: ReduceAction54, Parser) */
 void nitc__parser___nitc__parser__ReduceAction54___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7404,8 +7905,11 @@ var9 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2600);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2610);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7422,8 +7926,11 @@ var10 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2602);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2612);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -7440,8 +7947,11 @@ var13 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2604);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2614);
 fatal_exit(1);
 }
 var_tkwnewnode7 = var_nodearraylist4;
@@ -7458,8 +7968,11 @@ var16 = (((long)var_tkwnewnode7&3)?type_info[((long)var_tkwnewnode7&3)]:var_tkwn
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2606);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2616);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -7476,8 +7989,11 @@ var19 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var19)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2608);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2618);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -7494,8 +8010,11 @@ var22 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var22)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2610);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2620);
 fatal_exit(1);
 }
 var_tkwdonode13 = var_nodearraylist7;
@@ -7512,8 +8031,11 @@ var25 = (((long)var_tkwdonode13&3)?type_info[((long)var_tkwdonode13&3)]:var_tkwd
 }
 }
 if (unlikely(!var25)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2612);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2622);
 fatal_exit(1);
 }
 var_pexprnode14 = var_nodearraylist8;
@@ -7530,8 +8052,11 @@ var28 = (((long)var_pexprnode14&3)?type_info[((long)var_pexprnode14&3)]:var_pexp
 }
 }
 if (unlikely(!var28)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2614);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2624);
 fatal_exit(1);
 }
 var_tkwendnode15 = var_nodearraylist9;
@@ -7548,13 +8073,16 @@ var31 = (((long)var_tkwendnode15&3)?type_info[((long)var_tkwendnode15&3)]:var_tk
 }
 }
 if (unlikely(!var31)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2616);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2626);
 fatal_exit(1);
 }
 var34 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var34:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var34:AMethPropdef>*/
 }
 var_ppropdefnode1 = var34;
 var_node_list = var_ppropdefnode1;
@@ -7563,11 +8091,11 @@ var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var36 = nitc___nitc__Parser___go_to(var_p, var35);
 }
 {
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction55#action for (self: ReduceAction55, Parser) */
+/* method parser$ReduceAction55$action for (self: ReduceAction55, Parser) */
 void nitc__parser___nitc__parser__ReduceAction55___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7681,8 +8209,11 @@ var9 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2652);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2662);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7699,8 +8230,11 @@ var10 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2654);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2664);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -7717,8 +8251,11 @@ var13 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2656);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2666);
 fatal_exit(1);
 }
 var_tkwnewnode7 = var_nodearraylist4;
@@ -7735,8 +8272,11 @@ var16 = (((long)var_tkwnewnode7&3)?type_info[((long)var_tkwnewnode7&3)]:var_tkwn
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2658);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2668);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist5;
@@ -7753,8 +8293,11 @@ var19 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var19)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2660);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2670);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist6;
@@ -7771,8 +8314,11 @@ var22 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var22)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2662);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2672);
 fatal_exit(1);
 }
 var_tkwdonode13 = var_nodearraylist7;
@@ -7789,8 +8335,11 @@ var25 = (((long)var_tkwdonode13&3)?type_info[((long)var_tkwdonode13&3)]:var_tkwd
 }
 }
 if (unlikely(!var25)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2664);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2674);
 fatal_exit(1);
 }
 var_pexprnode14 = var_nodearraylist8;
@@ -7807,8 +8356,11 @@ var28 = (((long)var_pexprnode14&3)?type_info[((long)var_pexprnode14&3)]:var_pexp
 }
 }
 if (unlikely(!var28)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2666);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2676);
 fatal_exit(1);
 }
 var_tkwendnode15 = var_nodearraylist9;
@@ -7825,13 +8377,16 @@ var31 = (((long)var_tkwendnode15&3)?type_info[((long)var_tkwendnode15&3)]:var_tk
 }
 }
 if (unlikely(!var31)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2668);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2678);
 fatal_exit(1);
 }
 var34 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, ((val*)NULL), var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var34:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, ((val*)NULL), var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var34:AMethPropdef>*/
 }
 var_ppropdefnode1 = var34;
 var_node_list = var_ppropdefnode1;
@@ -7840,11 +8395,11 @@ var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var36 = nitc___nitc__Parser___go_to(var_p, var35);
 }
 {
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction56#action for (self: ReduceAction56, Parser) */
+/* method parser$ReduceAction56$action for (self: ReduceAction56, Parser) */
 void nitc__parser___nitc__parser__ReduceAction56___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -7968,8 +8523,11 @@ var10 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2705);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2715);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -7986,8 +8544,11 @@ var11 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2707);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2717);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -8004,8 +8565,11 @@ var14 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2709);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2719);
 fatal_exit(1);
 }
 var_tkwnewnode7 = var_nodearraylist4;
@@ -8022,8 +8586,11 @@ var17 = (((long)var_tkwnewnode7&3)?type_info[((long)var_tkwnewnode7&3)]:var_tkwn
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2711);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2721);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -8040,8 +8607,11 @@ var20 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2713);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2723);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -8058,8 +8628,11 @@ var23 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2715);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2725);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist7;
@@ -8076,8 +8649,11 @@ var26 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var26)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2717);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2727);
 fatal_exit(1);
 }
 var_tkwdonode13 = var_nodearraylist8;
@@ -8094,8 +8670,11 @@ var29 = (((long)var_tkwdonode13&3)?type_info[((long)var_tkwdonode13&3)]:var_tkwd
 }
 }
 if (unlikely(!var29)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2719);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2729);
 fatal_exit(1);
 }
 var_pexprnode14 = var_nodearraylist9;
@@ -8112,8 +8691,11 @@ var32 = (((long)var_pexprnode14&3)?type_info[((long)var_pexprnode14&3)]:var_pexp
 }
 }
 if (unlikely(!var32)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2721);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2731);
 fatal_exit(1);
 }
 var_tkwendnode15 = var_nodearraylist10;
@@ -8130,13 +8712,16 @@ var35 = (((long)var_tkwendnode15&3)?type_info[((long)var_tkwendnode15&3)]:var_tk
 }
 }
 if (unlikely(!var35)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2723);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2733);
 fatal_exit(1);
 }
 var38 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var38, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var38:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var38, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, ((val*)NULL), ((val*)NULL), var_tkwnewnode7, var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), var_tkwdonode13, var_pexprnode14, var_tkwendnode15); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var38:AMethPropdef>*/
 }
 var_ppropdefnode1 = var38;
 var_node_list = var_ppropdefnode1;
@@ -8145,11 +8730,11 @@ var39 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var40 = nitc___nitc__Parser___go_to(var_p, var39);
 }
 {
-nitc___nitc__Parser___push(var_p, var40, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var40, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction57#action for (self: ReduceAction57, Parser) */
+/* method parser$ReduceAction57$action for (self: ReduceAction57, Parser) */
 void nitc__parser___nitc__parser__ReduceAction57___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8253,8 +8838,11 @@ var8 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2758);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2768);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -8271,8 +8859,11 @@ var9 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2760);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2770);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -8289,8 +8880,11 @@ var12 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var12)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2762);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2772);
 fatal_exit(1);
 }
 var_tkwmethnode5 = var_nodearraylist4;
@@ -8307,8 +8901,11 @@ var15 = (((long)var_tkwmethnode5&3)?type_info[((long)var_tkwmethnode5&3)]:var_tk
 }
 }
 if (unlikely(!var15)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2764);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2774);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -8325,8 +8922,11 @@ var18 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var18)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2766);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2776);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -8343,8 +8943,11 @@ var21 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var21)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2768);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2778);
 fatal_exit(1);
 }
 var_pexterncallsnode11 = var_nodearraylist7;
@@ -8361,8 +8964,11 @@ var24 = (((long)var_pexterncallsnode11&3)?type_info[((long)var_pexterncallsnode1
 }
 }
 if (unlikely(!var24)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2770);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2780);
 fatal_exit(1);
 }
 var_pexterncodeblocknode12 = var_nodearraylist8;
@@ -8379,13 +8985,16 @@ var27 = (((long)var_pexterncodeblocknode12&3)?type_info[((long)var_pexterncodebl
 }
 }
 if (unlikely(!var27)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2772);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2782);
 fatal_exit(1);
 }
 var30 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, ((val*)NULL), var_pexterncallsnode11, var_pexterncodeblocknode12, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var30:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, ((val*)NULL), var_pexterncallsnode11, var_pexterncodeblocknode12, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var30:AMethPropdef>*/
 }
 var_ppropdefnode1 = var30;
 var_node_list = var_ppropdefnode1;
@@ -8394,11 +9003,11 @@ var31 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var32 = nitc___nitc__Parser___go_to(var_p, var31);
 }
 {
-nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction58#action for (self: ReduceAction58, Parser) */
+/* method parser$ReduceAction58$action for (self: ReduceAction58, Parser) */
 void nitc__parser___nitc__parser__ReduceAction58___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8512,8 +9121,11 @@ var9 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var9)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2808);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2818);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -8530,8 +9142,11 @@ var10 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2810);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2820);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -8548,8 +9163,11 @@ var13 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var13)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2812);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2822);
 fatal_exit(1);
 }
 var_tkwmethnode5 = var_nodearraylist4;
@@ -8566,8 +9184,11 @@ var16 = (((long)var_tkwmethnode5&3)?type_info[((long)var_tkwmethnode5&3)]:var_tk
 }
 }
 if (unlikely(!var16)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2814);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2824);
 fatal_exit(1);
 }
 var_pmethidnode8 = var_nodearraylist5;
@@ -8584,8 +9205,11 @@ var19 = (((long)var_pmethidnode8&3)?type_info[((long)var_pmethidnode8&3)]:var_pm
 }
 }
 if (unlikely(!var19)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2816);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2826);
 fatal_exit(1);
 }
 var_psignaturenode9 = var_nodearraylist6;
@@ -8602,8 +9226,11 @@ var22 = (((long)var_psignaturenode9&3)?type_info[((long)var_psignaturenode9&3)]:
 }
 }
 if (unlikely(!var22)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2818);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2828);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist7;
@@ -8620,8 +9247,11 @@ var25 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var25)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2820);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2830);
 fatal_exit(1);
 }
 var_pexterncallsnode11 = var_nodearraylist8;
@@ -8638,8 +9268,11 @@ var28 = (((long)var_pexterncallsnode11&3)?type_info[((long)var_pexterncallsnode1
 }
 }
 if (unlikely(!var28)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2822);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2832);
 fatal_exit(1);
 }
 var_pexterncodeblocknode12 = var_nodearraylist9;
@@ -8656,13 +9289,16 @@ var31 = (((long)var_pexterncodeblocknode12&3)?type_info[((long)var_pexterncodebl
 }
 }
 if (unlikely(!var31)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2824);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2834);
 fatal_exit(1);
 }
 var34 = NEW_nitc__AMethPropdef(&type_nitc__AMethPropdef);
 {
-nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, var_pexterncallsnode11, var_pexterncodeblocknode12, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AMethPropdef#init_amethpropdef on <var34:AMethPropdef>*/
+nitc__parser_prod___AMethPropdef___init_amethpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwmethnode5, ((val*)NULL), ((val*)NULL), var_pmethidnode8, var_psignaturenode9, var_pannotationsnode10, var_pexterncallsnode11, var_pexterncodeblocknode12, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AMethPropdef$init_amethpropdef on <var34:AMethPropdef>*/
 }
 var_ppropdefnode1 = var34;
 var_node_list = var_ppropdefnode1;
@@ -8671,11 +9307,11 @@ var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var36 = nitc___nitc__Parser___go_to(var_p, var35);
 }
 {
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction59#action for (self: ReduceAction59, Parser) */
+/* method parser$ReduceAction59$action for (self: ReduceAction59, Parser) */
 void nitc__parser___nitc__parser__ReduceAction59___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -8769,8 +9405,11 @@ var7 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2
 }
 }
 if (unlikely(!var7)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2858);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2868);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -8787,8 +9426,11 @@ var8 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_t
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2860);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2870);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -8805,8 +9447,11 @@ var11 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2862);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2872);
 fatal_exit(1);
 }
 var_tkwvarnode5 = var_nodearraylist4;
@@ -8823,8 +9468,11 @@ var14 = (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwv
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2864);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2874);
 fatal_exit(1);
 }
 var_tidnode6 = var_nodearraylist5;
@@ -8841,8 +9489,11 @@ var17 = (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2866);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2876);
 fatal_exit(1);
 }
 var_ptypenode7 = var_nodearraylist6;
@@ -8859,8 +9510,11 @@ var20 = (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypen
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2868);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2878);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist7;
@@ -8877,13 +9531,16 @@ var23 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2870);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2880);
 fatal_exit(1);
 }
 var26 = NEW_nitc__AAttrPropdef(&type_nitc__AAttrPropdef);
 {
-nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var26, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, ((val*)NULL), ((val*)NULL), var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var26:AAttrPropdef>*/
+nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var26, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, ((val*)NULL), ((val*)NULL), var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AAttrPropdef$init_aattrpropdef on <var26:AAttrPropdef>*/
 }
 var_ppropdefnode1 = var26;
 var_node_list = var_ppropdefnode1;
@@ -8892,11 +9549,11 @@ var27 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var28 = nitc___nitc__Parser___go_to(var_p, var27);
 }
 {
-nitc___nitc__Parser___push(var_p, var28, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var28, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }
-/* method parser#ReduceAction60#action for (self: ReduceAction60, Parser) */
+/* method parser$ReduceAction60$action for (self: ReduceAction60, Parser) */
 void nitc__parser___nitc__parser__ReduceAction60___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
 val* var_p /* var p: Parser */;
 val* var_node_list /* var node_list: nullable Object */;
@@ -9016,8 +9673,11 @@ var10 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode
 }
 }
 if (unlikely(!var10)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2905);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2915);
 fatal_exit(1);
 }
 var_tkwredefnode3 = var_nodearraylist2;
@@ -9034,8 +9694,11 @@ var11 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_
 }
 }
 if (unlikely(!var11)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2907);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2917);
 fatal_exit(1);
 }
 var_pvisibilitynode4 = var_nodearraylist3;
@@ -9052,8 +9715,11 @@ var14 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2909);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2919);
 fatal_exit(1);
 }
 var_tkwvarnode5 = var_nodearraylist4;
@@ -9070,8 +9736,11 @@ var17 = (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwv
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2911);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2921);
 fatal_exit(1);
 }
 var_tidnode6 = var_nodearraylist5;
@@ -9088,8 +9757,11 @@ var20 = (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->
 }
 }
 if (unlikely(!var20)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2913);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2923);
 fatal_exit(1);
 }
 var_ptypenode7 = var_nodearraylist6;
@@ -9106,8 +9778,11 @@ var23 = (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypen
 }
 }
 if (unlikely(!var23)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2915);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2925);
 fatal_exit(1);
 }
 var_tassignnode8 = var_nodearraylist7;
@@ -9124,8 +9799,11 @@ var26 = (((long)var_tassignnode8&3)?type_info[((long)var_tassignnode8&3)]:var_ta
 }
 }
 if (unlikely(!var26)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2917);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2927);
 fatal_exit(1);
 }
 var_pexprnode9 = var_nodearraylist9;
@@ -9142,8 +9820,11 @@ var29 = (((long)var_pexprnode9&3)?type_info[((long)var_pexprnode9&3)]:var_pexprn
 }
 }
 if (unlikely(!var29)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2919);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2929);
 fatal_exit(1);
 }
 var_pannotationsnode10 = var_nodearraylist10;
@@ -9160,13 +9841,16 @@ var32 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode1
 }
 }
 if (unlikely(!var32)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2921);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2931);
 fatal_exit(1);
 }
 var35 = NEW_nitc__AAttrPropdef(&type_nitc__AAttrPropdef);
 {
-nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var35, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var_tassignnode8, var_pexprnode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var35:AAttrPropdef>*/
+nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var35, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, var_tassignnode8, var_pexprnode9, var_pannotationsnode10, ((val*)NULL), ((val*)NULL), ((val*)NULL)); /* Direct call parser_prod$AAttrPropdef$init_aattrpropdef on <var35:AAttrPropdef>*/
 }
 var_ppropdefnode1 = var35;
 var_node_list = var_ppropdefnode1;
@@ -9175,810 +9859,7 @@ var36 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on
 var37 = nitc___nitc__Parser___go_to(var_p, var36);
 }
 {
-nitc___nitc__Parser___push(var_p, var37, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction61#action for (self: ReduceAction61, Parser) */
-void nitc__parser___nitc__parser__ReduceAction61___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var8 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var9 /* : Bool */;
-int cltype10;
-int idtype11;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
-short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-val* var_tidnode6 /* var tidnode6: nullable Object */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-val* var_ptypenode7 /* var ptypenode7: nullable Object */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-val* var_tkwdonode11 /* var tkwdonode11: nullable Object */;
-short int var24 /* : Bool */;
-int cltype25;
-int idtype26;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
-short int var27 /* : Bool */;
-int cltype28;
-int idtype29;
-val* var30 /* : AAttrPropdef */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var31 /* : Int */;
-long var32 /* : Int */;
-var_p = p0;
-var_node_list = ((val*)NULL);
-{
-var = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist8 = var;
-{
-var1 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist7 = var1;
-{
-var2 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist6 = var2;
-{
-var3 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist5 = var3;
-{
-var4 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist4 = var4;
-{
-var5 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist3 = var5;
-{
-var6 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist2 = var6;
-{
-var7 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist1 = var7;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable__nitc__ADoc.color;
-idtype = type_nullable__nitc__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var8 = 1;
-} else {
-if(cltype >= (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2->type)->table_size) {
-var8 = 0;
-} else {
-var8 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2->type)->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var8)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2954);
-fatal_exit(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype10 = type_nullable__nitc__TKwredef.color;
-idtype11 = type_nullable__nitc__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var9 = 1;
-} else {
-if(cltype10 >= (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_tkwredefnode3->type)->table_size) {
-var9 = 0;
-} else {
-var9 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_tkwredefnode3->type)->type_table[cltype10] == idtype11;
-}
-}
-if (unlikely(!var9)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2956);
-fatal_exit(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype13 = type_nullable__nitc__AVisibility.color;
-idtype14 = type_nullable__nitc__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var12 = 1;
-} else {
-if(cltype13 >= (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)]:var_pvisibilitynode4->type)->table_size) {
-var12 = 0;
-} else {
-var12 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)]:var_pvisibilitynode4->type)->type_table[cltype13] == idtype14;
-}
-}
-if (unlikely(!var12)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2958);
-fatal_exit(1);
-}
-var_tkwvarnode5 = var_nodearraylist4;
-/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
-cltype16 = type_nullable__nitc__TKwvar.color;
-idtype17 = type_nullable__nitc__TKwvar.id;
-if(var_tkwvarnode5 == NULL) {
-var15 = 1;
-} else {
-if(cltype16 >= (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwvarnode5->type)->table_size) {
-var15 = 0;
-} else {
-var15 = (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwvarnode5->type)->type_table[cltype16] == idtype17;
-}
-}
-if (unlikely(!var15)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2960);
-fatal_exit(1);
-}
-var_tidnode6 = var_nodearraylist5;
-/* <var_tidnode6:nullable Object> isa nullable TId */
-cltype19 = type_nullable__nitc__TId.color;
-idtype20 = type_nullable__nitc__TId.id;
-if(var_tidnode6 == NULL) {
-var18 = 1;
-} else {
-if(cltype19 >= (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->type)->table_size) {
-var18 = 0;
-} else {
-var18 = (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->type)->type_table[cltype19] == idtype20;
-}
-}
-if (unlikely(!var18)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2962);
-fatal_exit(1);
-}
-var_ptypenode7 = var_nodearraylist6;
-/* <var_ptypenode7:nullable Object> isa nullable AType */
-cltype22 = type_nullable__nitc__AType.color;
-idtype23 = type_nullable__nitc__AType.id;
-if(var_ptypenode7 == NULL) {
-var21 = 1;
-} else {
-if(cltype22 >= (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypenode7->type)->table_size) {
-var21 = 0;
-} else {
-var21 = (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypenode7->type)->type_table[cltype22] == idtype23;
-}
-}
-if (unlikely(!var21)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2964);
-fatal_exit(1);
-}
-var_tkwdonode11 = var_nodearraylist7;
-/* <var_tkwdonode11:nullable Object> isa nullable TKwdo */
-cltype25 = type_nullable__nitc__TKwdo.color;
-idtype26 = type_nullable__nitc__TKwdo.id;
-if(var_tkwdonode11 == NULL) {
-var24 = 1;
-} else {
-if(cltype25 >= (((long)var_tkwdonode11&3)?type_info[((long)var_tkwdonode11&3)]:var_tkwdonode11->type)->table_size) {
-var24 = 0;
-} else {
-var24 = (((long)var_tkwdonode11&3)?type_info[((long)var_tkwdonode11&3)]:var_tkwdonode11->type)->type_table[cltype25] == idtype26;
-}
-}
-if (unlikely(!var24)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2966);
-fatal_exit(1);
-}
-var_pexprnode12 = var_nodearraylist8;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype28 = type_nullable__nitc__AExpr.color;
-idtype29 = type_nullable__nitc__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var27 = 1;
-} else {
-if(cltype28 >= (((long)var_pexprnode12&3)?type_info[((long)var_pexprnode12&3)]:var_pexprnode12->type)->table_size) {
-var27 = 0;
-} else {
-var27 = (((long)var_pexprnode12&3)?type_info[((long)var_pexprnode12&3)]:var_pexprnode12->type)->type_table[cltype28] == idtype29;
-}
-}
-if (unlikely(!var27)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 2968);
-fatal_exit(1);
-}
-var30 = NEW_nitc__AAttrPropdef(&type_nitc__AAttrPropdef);
-{
-nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var30, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode11, var_pexprnode12, ((val*)NULL)); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var30:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var30;
-var_node_list = var_ppropdefnode1;
-var31 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction61> */
-{
-var32 = nitc___nitc__Parser___go_to(var_p, var31);
-}
-{
-nitc___nitc__Parser___push(var_p, var32, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction62#action for (self: ReduceAction62, Parser) */
-void nitc__parser___nitc__parser__ReduceAction62___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var9 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var10 /* : Bool */;
-int cltype11;
-int idtype12;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
-short int var16 /* : Bool */;
-int cltype17;
-int idtype18;
-val* var_tidnode6 /* var tidnode6: nullable Object */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-val* var_ptypenode7 /* var ptypenode7: nullable Object */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-val* var_pannotationsnode10 /* var pannotationsnode10: nullable Object */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-val* var_tkwdonode11 /* var tkwdonode11: nullable Object */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
-short int var31 /* : Bool */;
-int cltype32;
-int idtype33;
-val* var34 /* : AAttrPropdef */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var35 /* : Int */;
-long var36 /* : Int */;
-var_p = p0;
-var_node_list = ((val*)NULL);
-{
-var = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist9 = var;
-{
-var1 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist8 = var1;
-{
-var2 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist7 = var2;
-{
-var3 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist6 = var3;
-{
-var4 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist5 = var4;
-{
-var5 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist4 = var5;
-{
-var6 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist3 = var6;
-{
-var7 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist2 = var7;
-{
-var8 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist1 = var8;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable__nitc__ADoc.color;
-idtype = type_nullable__nitc__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var9 = 1;
-} else {
-if(cltype >= (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2->type)->table_size) {
-var9 = 0;
-} else {
-var9 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2->type)->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var9)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3002);
-fatal_exit(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype11 = type_nullable__nitc__TKwredef.color;
-idtype12 = type_nullable__nitc__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var10 = 1;
-} else {
-if(cltype11 >= (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_tkwredefnode3->type)->table_size) {
-var10 = 0;
-} else {
-var10 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_tkwredefnode3->type)->type_table[cltype11] == idtype12;
-}
-}
-if (unlikely(!var10)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3004);
-fatal_exit(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype14 = type_nullable__nitc__AVisibility.color;
-idtype15 = type_nullable__nitc__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var13 = 1;
-} else {
-if(cltype14 >= (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)]:var_pvisibilitynode4->type)->table_size) {
-var13 = 0;
-} else {
-var13 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)]:var_pvisibilitynode4->type)->type_table[cltype14] == idtype15;
-}
-}
-if (unlikely(!var13)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3006);
-fatal_exit(1);
-}
-var_tkwvarnode5 = var_nodearraylist4;
-/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
-cltype17 = type_nullable__nitc__TKwvar.color;
-idtype18 = type_nullable__nitc__TKwvar.id;
-if(var_tkwvarnode5 == NULL) {
-var16 = 1;
-} else {
-if(cltype17 >= (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwvarnode5->type)->table_size) {
-var16 = 0;
-} else {
-var16 = (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwvarnode5->type)->type_table[cltype17] == idtype18;
-}
-}
-if (unlikely(!var16)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3008);
-fatal_exit(1);
-}
-var_tidnode6 = var_nodearraylist5;
-/* <var_tidnode6:nullable Object> isa nullable TId */
-cltype20 = type_nullable__nitc__TId.color;
-idtype21 = type_nullable__nitc__TId.id;
-if(var_tidnode6 == NULL) {
-var19 = 1;
-} else {
-if(cltype20 >= (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->type)->table_size) {
-var19 = 0;
-} else {
-var19 = (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->type)->type_table[cltype20] == idtype21;
-}
-}
-if (unlikely(!var19)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3010);
-fatal_exit(1);
-}
-var_ptypenode7 = var_nodearraylist6;
-/* <var_ptypenode7:nullable Object> isa nullable AType */
-cltype23 = type_nullable__nitc__AType.color;
-idtype24 = type_nullable__nitc__AType.id;
-if(var_ptypenode7 == NULL) {
-var22 = 1;
-} else {
-if(cltype23 >= (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypenode7->type)->table_size) {
-var22 = 0;
-} else {
-var22 = (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypenode7->type)->type_table[cltype23] == idtype24;
-}
-}
-if (unlikely(!var22)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3012);
-fatal_exit(1);
-}
-var_pannotationsnode10 = var_nodearraylist7;
-/* <var_pannotationsnode10:nullable Object> isa nullable AAnnotations */
-cltype26 = type_nullable__nitc__AAnnotations.color;
-idtype27 = type_nullable__nitc__AAnnotations.id;
-if(var_pannotationsnode10 == NULL) {
-var25 = 1;
-} else {
-if(cltype26 >= (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode10&3)]:var_pannotationsnode10->type)->table_size) {
-var25 = 0;
-} else {
-var25 = (((long)var_pannotationsnode10&3)?type_info[((long)var_pannotationsnode10&3)]:var_pannotationsnode10->type)->type_table[cltype26] == idtype27;
-}
-}
-if (unlikely(!var25)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3014);
-fatal_exit(1);
-}
-var_tkwdonode11 = var_nodearraylist8;
-/* <var_tkwdonode11:nullable Object> isa nullable TKwdo */
-cltype29 = type_nullable__nitc__TKwdo.color;
-idtype30 = type_nullable__nitc__TKwdo.id;
-if(var_tkwdonode11 == NULL) {
-var28 = 1;
-} else {
-if(cltype29 >= (((long)var_tkwdonode11&3)?type_info[((long)var_tkwdonode11&3)]:var_tkwdonode11->type)->table_size) {
-var28 = 0;
-} else {
-var28 = (((long)var_tkwdonode11&3)?type_info[((long)var_tkwdonode11&3)]:var_tkwdonode11->type)->type_table[cltype29] == idtype30;
-}
-}
-if (unlikely(!var28)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3016);
-fatal_exit(1);
-}
-var_pexprnode12 = var_nodearraylist9;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype32 = type_nullable__nitc__AExpr.color;
-idtype33 = type_nullable__nitc__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var31 = 1;
-} else {
-if(cltype32 >= (((long)var_pexprnode12&3)?type_info[((long)var_pexprnode12&3)]:var_pexprnode12->type)->table_size) {
-var31 = 0;
-} else {
-var31 = (((long)var_pexprnode12&3)?type_info[((long)var_pexprnode12&3)]:var_pexprnode12->type)->type_table[cltype32] == idtype33;
-}
-}
-if (unlikely(!var31)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3018);
-fatal_exit(1);
-}
-var34 = NEW_nitc__AAttrPropdef(&type_nitc__AAttrPropdef);
-{
-nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, ((val*)NULL), ((val*)NULL), var_pannotationsnode10, var_tkwdonode11, var_pexprnode12, ((val*)NULL)); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var34:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var34;
-var_node_list = var_ppropdefnode1;
-var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction62> */
-{
-var36 = nitc___nitc__Parser___go_to(var_p, var35);
-}
-{
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
-}
-RET_LABEL:;
-}
-/* method parser#ReduceAction63#action for (self: ReduceAction63, Parser) */
-void nitc__parser___nitc__parser__ReduceAction63___nitc__parser_work__ReduceAction__action(val* self, val* p0) {
-val* var_p /* var p: Parser */;
-val* var_node_list /* var node_list: nullable Object */;
-val* var /* : nullable Object */;
-val* var_nodearraylist9 /* var nodearraylist9: nullable Object */;
-val* var1 /* : nullable Object */;
-val* var_nodearraylist8 /* var nodearraylist8: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var_nodearraylist7 /* var nodearraylist7: nullable Object */;
-val* var3 /* : nullable Object */;
-val* var_nodearraylist6 /* var nodearraylist6: nullable Object */;
-val* var4 /* : nullable Object */;
-val* var_nodearraylist5 /* var nodearraylist5: nullable Object */;
-val* var5 /* : nullable Object */;
-val* var_nodearraylist4 /* var nodearraylist4: nullable Object */;
-val* var6 /* : nullable Object */;
-val* var_nodearraylist3 /* var nodearraylist3: nullable Object */;
-val* var7 /* : nullable Object */;
-val* var_nodearraylist2 /* var nodearraylist2: nullable Object */;
-val* var8 /* : nullable Object */;
-val* var_nodearraylist1 /* var nodearraylist1: nullable Object */;
-val* var_pdocnode2 /* var pdocnode2: nullable Object */;
-short int var9 /* : Bool */;
-int cltype;
-int idtype;
-val* var_tkwredefnode3 /* var tkwredefnode3: nullable Object */;
-short int var10 /* : Bool */;
-int cltype11;
-int idtype12;
-val* var_pvisibilitynode4 /* var pvisibilitynode4: nullable Object */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-val* var_tkwvarnode5 /* var tkwvarnode5: nullable Object */;
-short int var16 /* : Bool */;
-int cltype17;
-int idtype18;
-val* var_tidnode6 /* var tidnode6: nullable Object */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-val* var_ptypenode7 /* var ptypenode7: nullable Object */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-val* var_tkwdonode11 /* var tkwdonode11: nullable Object */;
-short int var25 /* : Bool */;
-int cltype26;
-int idtype27;
-val* var_pexprnode12 /* var pexprnode12: nullable Object */;
-short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-val* var_tkwendnode13 /* var tkwendnode13: nullable Object */;
-short int var31 /* : Bool */;
-int cltype32;
-int idtype33;
-val* var34 /* : AAttrPropdef */;
-val* var_ppropdefnode1 /* var ppropdefnode1: nullable AAttrPropdef */;
-long var35 /* : Int */;
-long var36 /* : Int */;
-var_p = p0;
-var_node_list = ((val*)NULL);
-{
-var = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist9 = var;
-{
-var1 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist8 = var1;
-{
-var2 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist7 = var2;
-{
-var3 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist6 = var3;
-{
-var4 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist5 = var4;
-{
-var5 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist4 = var5;
-{
-var6 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist3 = var6;
-{
-var7 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist2 = var7;
-{
-var8 = nitc___nitc__Parser___pop(var_p);
-}
-var_nodearraylist1 = var8;
-var_pdocnode2 = var_nodearraylist1;
-/* <var_pdocnode2:nullable Object> isa nullable ADoc */
-cltype = type_nullable__nitc__ADoc.color;
-idtype = type_nullable__nitc__ADoc.id;
-if(var_pdocnode2 == NULL) {
-var9 = 1;
-} else {
-if(cltype >= (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2->type)->table_size) {
-var9 = 0;
-} else {
-var9 = (((long)var_pdocnode2&3)?type_info[((long)var_pdocnode2&3)]:var_pdocnode2->type)->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var9)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3052);
-fatal_exit(1);
-}
-var_tkwredefnode3 = var_nodearraylist2;
-/* <var_tkwredefnode3:nullable Object> isa nullable TKwredef */
-cltype11 = type_nullable__nitc__TKwredef.color;
-idtype12 = type_nullable__nitc__TKwredef.id;
-if(var_tkwredefnode3 == NULL) {
-var10 = 1;
-} else {
-if(cltype11 >= (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_tkwredefnode3->type)->table_size) {
-var10 = 0;
-} else {
-var10 = (((long)var_tkwredefnode3&3)?type_info[((long)var_tkwredefnode3&3)]:var_tkwredefnode3->type)->type_table[cltype11] == idtype12;
-}
-}
-if (unlikely(!var10)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3054);
-fatal_exit(1);
-}
-var_pvisibilitynode4 = var_nodearraylist3;
-/* <var_pvisibilitynode4:nullable Object> isa nullable AVisibility */
-cltype14 = type_nullable__nitc__AVisibility.color;
-idtype15 = type_nullable__nitc__AVisibility.id;
-if(var_pvisibilitynode4 == NULL) {
-var13 = 1;
-} else {
-if(cltype14 >= (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)]:var_pvisibilitynode4->type)->table_size) {
-var13 = 0;
-} else {
-var13 = (((long)var_pvisibilitynode4&3)?type_info[((long)var_pvisibilitynode4&3)]:var_pvisibilitynode4->type)->type_table[cltype14] == idtype15;
-}
-}
-if (unlikely(!var13)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3056);
-fatal_exit(1);
-}
-var_tkwvarnode5 = var_nodearraylist4;
-/* <var_tkwvarnode5:nullable Object> isa nullable TKwvar */
-cltype17 = type_nullable__nitc__TKwvar.color;
-idtype18 = type_nullable__nitc__TKwvar.id;
-if(var_tkwvarnode5 == NULL) {
-var16 = 1;
-} else {
-if(cltype17 >= (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwvarnode5->type)->table_size) {
-var16 = 0;
-} else {
-var16 = (((long)var_tkwvarnode5&3)?type_info[((long)var_tkwvarnode5&3)]:var_tkwvarnode5->type)->type_table[cltype17] == idtype18;
-}
-}
-if (unlikely(!var16)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3058);
-fatal_exit(1);
-}
-var_tidnode6 = var_nodearraylist5;
-/* <var_tidnode6:nullable Object> isa nullable TId */
-cltype20 = type_nullable__nitc__TId.color;
-idtype21 = type_nullable__nitc__TId.id;
-if(var_tidnode6 == NULL) {
-var19 = 1;
-} else {
-if(cltype20 >= (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->type)->table_size) {
-var19 = 0;
-} else {
-var19 = (((long)var_tidnode6&3)?type_info[((long)var_tidnode6&3)]:var_tidnode6->type)->type_table[cltype20] == idtype21;
-}
-}
-if (unlikely(!var19)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3060);
-fatal_exit(1);
-}
-var_ptypenode7 = var_nodearraylist6;
-/* <var_ptypenode7:nullable Object> isa nullable AType */
-cltype23 = type_nullable__nitc__AType.color;
-idtype24 = type_nullable__nitc__AType.id;
-if(var_ptypenode7 == NULL) {
-var22 = 1;
-} else {
-if(cltype23 >= (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypenode7->type)->table_size) {
-var22 = 0;
-} else {
-var22 = (((long)var_ptypenode7&3)?type_info[((long)var_ptypenode7&3)]:var_ptypenode7->type)->type_table[cltype23] == idtype24;
-}
-}
-if (unlikely(!var22)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3062);
-fatal_exit(1);
-}
-var_tkwdonode11 = var_nodearraylist7;
-/* <var_tkwdonode11:nullable Object> isa nullable TKwdo */
-cltype26 = type_nullable__nitc__TKwdo.color;
-idtype27 = type_nullable__nitc__TKwdo.id;
-if(var_tkwdonode11 == NULL) {
-var25 = 1;
-} else {
-if(cltype26 >= (((long)var_tkwdonode11&3)?type_info[((long)var_tkwdonode11&3)]:var_tkwdonode11->type)->table_size) {
-var25 = 0;
-} else {
-var25 = (((long)var_tkwdonode11&3)?type_info[((long)var_tkwdonode11&3)]:var_tkwdonode11->type)->type_table[cltype26] == idtype27;
-}
-}
-if (unlikely(!var25)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3064);
-fatal_exit(1);
-}
-var_pexprnode12 = var_nodearraylist8;
-/* <var_pexprnode12:nullable Object> isa nullable AExpr */
-cltype29 = type_nullable__nitc__AExpr.color;
-idtype30 = type_nullable__nitc__AExpr.id;
-if(var_pexprnode12 == NULL) {
-var28 = 1;
-} else {
-if(cltype29 >= (((long)var_pexprnode12&3)?type_info[((long)var_pexprnode12&3)]:var_pexprnode12->type)->table_size) {
-var28 = 0;
-} else {
-var28 = (((long)var_pexprnode12&3)?type_info[((long)var_pexprnode12&3)]:var_pexprnode12->type)->type_table[cltype29] == idtype30;
-}
-}
-if (unlikely(!var28)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3066);
-fatal_exit(1);
-}
-var_tkwendnode13 = var_nodearraylist9;
-/* <var_tkwendnode13:nullable Object> isa nullable TKwend */
-cltype32 = type_nullable__nitc__TKwend.color;
-idtype33 = type_nullable__nitc__TKwend.id;
-if(var_tkwendnode13 == NULL) {
-var31 = 1;
-} else {
-if(cltype32 >= (((long)var_tkwendnode13&3)?type_info[((long)var_tkwendnode13&3)]:var_tkwendnode13->type)->table_size) {
-var31 = 0;
-} else {
-var31 = (((long)var_tkwendnode13&3)?type_info[((long)var_tkwendnode13&3)]:var_tkwendnode13->type)->type_table[cltype32] == idtype33;
-}
-}
-if (unlikely(!var31)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__parser, 3068);
-fatal_exit(1);
-}
-var34 = NEW_nitc__AAttrPropdef(&type_nitc__AAttrPropdef);
-{
-nitc__parser_prod___AAttrPropdef___init_aattrpropdef(var34, var_pdocnode2, var_tkwredefnode3, var_pvisibilitynode4, var_tkwvarnode5, var_tidnode6, var_ptypenode7, ((val*)NULL), ((val*)NULL), ((val*)NULL), var_tkwdonode11, var_pexprnode12, var_tkwendnode13); /* Direct call parser_prod#AAttrPropdef#init_aattrpropdef on <var34:AAttrPropdef>*/
-}
-var_ppropdefnode1 = var34;
-var_node_list = var_ppropdefnode1;
-var35 = self->attrs[COLOR_nitc__parser_work__ReduceAction___goto].l; /* _goto on <self:ReduceAction63> */
-{
-var36 = nitc___nitc__Parser___go_to(var_p, var35);
-}
-{
-nitc___nitc__Parser___push(var_p, var36, var_node_list); /* Direct call parser_work#Parser#push on <var_p:Parser>*/
+nitc___nitc__Parser___push(var_p, var37, var_node_list); /* Direct call parser_work$Parser$push on <var_p:Parser>*/
 }
 RET_LABEL:;
 }

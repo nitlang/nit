@@ -46,38 +46,23 @@
 
 		return result;
 	}
-int math___Float_is_nan___impl( double self )
+int core__math___Float_is_nan___impl( double self )
 {
-#line 308 "../lib/core/math.nit"
+#line 312 "../lib/core/math.nit"
 
  return isnan(self); }
-long math___Int_band___impl( long self, long i )
+int core__math___Float_native_is_inf___impl( double self )
 {
-#line 71 "../lib/core/math.nit"
-
- return self & i; }
-long math___Int_bor___impl( long self, long i )
-{
-#line 78 "../lib/core/math.nit"
-
- return self | i; }
-unsigned char math___Byte_band___impl( unsigned char self, unsigned char i )
-{
-#line 183 "../lib/core/math.nit"
-
- return self & i; }
-int math___Float_native_is_inf___impl( double self )
-{
-#line 330 "../lib/core/math.nit"
+#line 334 "../lib/core/math.nit"
 
  return isinf(self); }
-void math___Sys_srand___impl( Sys self )
+void core__math___Sys_srand___impl( Sys self )
 {
-#line 558 "../lib/core/math.nit"
+#line 573 "../lib/core/math.nit"
 
- nit_rand_seeded = 0; srand(time(NULL)); }
-void math___Sys_srand_from___impl( Sys self, long x )
+ nit_rand_seeded = 0; srand((unsigned int)time(NULL)); }
+void core__math___Sys_srand_from___impl( Sys self, long x )
 {
-#line 553 "../lib/core/math.nit"
+#line 568 "../lib/core/math.nit"
 
- nit_rand_seeded = 1; nit_rand_seed = x; }
+ nit_rand_seeded = 1; nit_rand_seed = (unsigned int)x; }

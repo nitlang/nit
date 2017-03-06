@@ -19,17 +19,40 @@
 	#include <errno.h>
 	#include <stdio.h>
 	#include <unistd.h>
-	#include <sys/wait.h>
 	#include <signal.h>
-long exec___NativeString_system___impl( char* self )
+	#include <sys/types.h>
+
+#ifdef _WIN32
+	#include <windows.h>
+	#include <fcntl.h>
+#else
+	#include <sys/wait.h>
+#endif
+
+	typedef struct se_exec_data se_exec_data_t;
+	struct se_exec_data {
+#ifdef _WIN32
+		HANDLE h_process;
+		HANDLE h_thread;
+#endif
+		pid_t id;
+		int running;
+		int status;
+		int in_fd;
+		int out_fd;
+		int err_fd;
+	};
+long core__exec___CString_system___impl( char* self )
 {
-#line 332 "../lib/core/exec.nit"
+#line 457 "../lib/core/exec.nit"
 
 
 		int status = system(self);
+#ifndef _WIN32
 		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT) {
 			// system exited on SIGINT: in my opinion the user wants the main to be discontinued
 			kill(getpid(), SIGINT);
 		}
+#endif
 		return status;
 	}

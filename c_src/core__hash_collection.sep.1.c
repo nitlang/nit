@@ -1,5 +1,18 @@
 #include "core__hash_collection.sep.0.h"
-/* method hash_collection#HashCollection#index_at for (self: HashCollection[nullable Object], nullable Object): Int */
+/* method hash_collection$Set$new for (self: Set[nullable Object]): Set[nullable Object] */
+val* core__hash_collection___Set___new(val* self) {
+val* var /* : Set[nullable Object] */;
+val* var1 /* : HashSet[nullable Object] */;
+var1 = NEW_core__HashSet((((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_core__HashSet__core__Set___35dE]);
+{
+core___core__HashSet___core__kernel__Object__init(var1); /* Direct call hash_collection$HashSet$init on <var1:HashSet[nullable Object]>*/
+}
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method hash_collection$HashCollection$index_at for (self: HashCollection[nullable Object], nullable Object): Int */
 long core__hash_collection___core__hash_collection__HashCollection___index_at(val* self, val* p0) {
 long var /* : Int */;
 val* var_k /* var k: nullable Object */;
@@ -38,7 +51,7 @@ var3 = ((long(*)(val* self))((((long)var_k&3)?class_info[((long)var_k&3)]:var_k-
 }
 var4 = self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#% (var3,var4) on <var3:Int> */
+{ /* Inline kernel$Int$% (var3,var4) on <var3:Int> */
 var7 = var3 % var4;
 var5 = var7;
 goto RET_LABEL6;
@@ -47,14 +60,14 @@ RET_LABEL6:(void)0;
 }
 var_i = var5;
 {
-{ /* Inline kernel#Int#< (var_i,0l) on <var_i:Int> */
+{ /* Inline kernel$Int$< (var_i,0l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var10 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var11 = var_i < 0l;
@@ -65,7 +78,7 @@ RET_LABEL9:(void)0;
 }
 if (var8){
 {
-{ /* Inline kernel#Int#unary - (var_i) on <var_i:Int> */
+{ /* Inline kernel$Int$unary - (var_i) on <var_i:Int> */
 var14 = -var_i;
 var12 = var14;
 goto RET_LABEL13;
@@ -80,7 +93,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashCollection#node_at for (self: HashCollection[nullable Object], nullable Object): nullable HashNode[nullable Object] */
+/* method hash_collection$HashCollection$node_at for (self: HashCollection[nullable Object], nullable Object): nullable HashNode[nullable Object] */
 val* core__hash_collection___core__hash_collection__HashCollection___node_at(val* self, val* p0) {
 val* var /* : nullable HashNode[nullable Object] */;
 val* var_k /* var k: nullable Object */;
@@ -98,7 +111,7 @@ val* var_res /* var res: nullable HashNode[nullable Object] */;
 var_k = p0;
 var1 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var1,0l) on <var1:Int> */
+{ /* Inline kernel$Int$== (var1,0l) on <var1:Int> */
 var4 = var1 == 0l;
 var2 = var4;
 goto RET_LABEL3;
@@ -114,8 +127,8 @@ var5 = self->attrs[COLOR_core__hash_collection__HashCollection___last_accessed_k
 if (var_k == NULL) {
 var6 = (var5 == NULL);
 } else {
-{ /* Inline kernel#Object#is_same_instance (var_k,var5) on <var_k:nullable Object> */
-var9 = var_k == var5 || (var_k != NULL && var5 != NULL && (!((long)var_k&3)) && (!((long)var5&3)) && var_k->class == var5->class && ((var_k->class->box_kind == 3 && ((struct instance_core__Byte*)var_k)->value == ((struct instance_core__Byte*)var5)->value) || (var_k->class->box_kind == 5 && ((struct instance_core__Float*)var_k)->value == ((struct instance_core__Float*)var5)->value) || (var_k->class->box_kind == 6 && ((struct instance_core__NativeString*)var_k)->value == ((struct instance_core__NativeString*)var5)->value) || (var_k->class->box_kind == 7 && ((struct instance_core__Pointer*)var_k)->value == ((struct instance_core__Pointer*)var5)->value) || (var_k->class->box_kind == 8 && ((struct instance_core__Int8*)var_k)->value == ((struct instance_core__Int8*)var5)->value) || (var_k->class->box_kind == 9 && ((struct instance_core__Int16*)var_k)->value == ((struct instance_core__Int16*)var5)->value) || (var_k->class->box_kind == 10 && ((struct instance_core__UInt16*)var_k)->value == ((struct instance_core__UInt16*)var5)->value) || (var_k->class->box_kind == 11 && ((struct instance_core__Int32*)var_k)->value == ((struct instance_core__Int32*)var5)->value) || (var_k->class->box_kind == 12 && ((struct instance_core__UInt32*)var_k)->value == ((struct instance_core__UInt32*)var5)->value)));
+{ /* Inline kernel$Object$is_same_instance (var_k,var5) on <var_k:nullable Object> */
+var9 = var_k == var5 || (var_k != NULL && var5 != NULL && (!((long)var_k&3)) && (!((long)var5&3)) && var_k->class == var5->class && ((var_k->class->box_kind == 3 && ((struct instance_core__Byte*)var_k)->value == ((struct instance_core__Byte*)var5)->value) || (var_k->class->box_kind == 5 && ((struct instance_core__Float*)var_k)->value == ((struct instance_core__Float*)var5)->value) || (var_k->class->box_kind == 6 && ((struct instance_core__CString*)var_k)->value == ((struct instance_core__CString*)var5)->value) || (var_k->class->box_kind == 7 && ((struct instance_core__Pointer*)var_k)->value == ((struct instance_core__Pointer*)var5)->value) || (var_k->class->box_kind == 8 && ((struct instance_core__Int8*)var_k)->value == ((struct instance_core__Int8*)var5)->value) || (var_k->class->box_kind == 9 && ((struct instance_core__Int16*)var_k)->value == ((struct instance_core__Int16*)var5)->value) || (var_k->class->box_kind == 10 && ((struct instance_core__UInt16*)var_k)->value == ((struct instance_core__UInt16*)var5)->value) || (var_k->class->box_kind == 11 && ((struct instance_core__Int32*)var_k)->value == ((struct instance_core__Int32*)var5)->value) || (var_k->class->box_kind == 12 && ((struct instance_core__UInt32*)var_k)->value == ((struct instance_core__UInt32*)var5)->value)));
 var7 = var9;
 goto RET_LABEL8;
 RET_LABEL8:(void)0;
@@ -142,7 +155,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashCollection#node_at_idx for (self: HashCollection[nullable Object], Int, nullable Object): nullable HashNode[nullable Object] */
+/* method hash_collection$HashCollection$node_at_idx for (self: HashCollection[nullable Object], Int, nullable Object): nullable HashNode[nullable Object] */
 val* core__hash_collection___core__hash_collection__HashCollection___node_at_idx(val* self, long p0, val* p1) {
 val* var /* : nullable HashNode[nullable Object] */;
 long var_i /* var i: Int */;
@@ -178,7 +191,7 @@ var_i = p0;
 var_k = p1;
 var1 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var1,0l) on <var1:Int> */
+{ /* Inline kernel$Int$== (var1,0l) on <var1:Int> */
 var4 = var1 == 0l;
 var2 = var4;
 goto RET_LABEL3;
@@ -192,12 +205,15 @@ goto RET_LABEL;
 }
 var5 = self->attrs[COLOR_core__hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[nullable Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 72);
 fatal_exit(1);
 }
 {
-{ /* Inline array#NativeArray#[] (var5,var_i) on <var5:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[] (var5,var_i) on <var5:NativeArray[nullable HashNode[nullable Object]]> */
 var8 = ((struct instance_core__NativeArray*)var5)->values[var_i];
 var6 = var8;
 goto RET_LABEL7;
@@ -212,7 +228,7 @@ var9 = 0; /* is null */
 var9 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_c,((val*)NULL)) on <var_c:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_c,((val*)NULL)) on <var_c:nullable HashNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var12 = ((short int(*)(val* self, val* p0))(var_c->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_c, var_other); /* == on <var_c:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -230,8 +246,8 @@ var_ck = var14;
 if (var_ck == NULL) {
 var16 = (var_k == NULL);
 } else {
-{ /* Inline kernel#Object#is_same_instance (var_ck,var_k) on <var_ck:nullable Object> */
-var19 = var_ck == var_k || (var_ck != NULL && var_k != NULL && (!((long)var_ck&3)) && (!((long)var_k&3)) && var_ck->class == var_k->class && ((var_ck->class->box_kind == 3 && ((struct instance_core__Byte*)var_ck)->value == ((struct instance_core__Byte*)var_k)->value) || (var_ck->class->box_kind == 5 && ((struct instance_core__Float*)var_ck)->value == ((struct instance_core__Float*)var_k)->value) || (var_ck->class->box_kind == 6 && ((struct instance_core__NativeString*)var_ck)->value == ((struct instance_core__NativeString*)var_k)->value) || (var_ck->class->box_kind == 7 && ((struct instance_core__Pointer*)var_ck)->value == ((struct instance_core__Pointer*)var_k)->value) || (var_ck->class->box_kind == 8 && ((struct instance_core__Int8*)var_ck)->value == ((struct instance_core__Int8*)var_k)->value) || (var_ck->class->box_kind == 9 && ((struct instance_core__Int16*)var_ck)->value == ((struct instance_core__Int16*)var_k)->value) || (var_ck->class->box_kind == 10 && ((struct instance_core__UInt16*)var_ck)->value == ((struct instance_core__UInt16*)var_k)->value) || (var_ck->class->box_kind == 11 && ((struct instance_core__Int32*)var_ck)->value == ((struct instance_core__Int32*)var_k)->value) || (var_ck->class->box_kind == 12 && ((struct instance_core__UInt32*)var_ck)->value == ((struct instance_core__UInt32*)var_k)->value)));
+{ /* Inline kernel$Object$is_same_instance (var_ck,var_k) on <var_ck:nullable Object> */
+var19 = var_ck == var_k || (var_ck != NULL && var_k != NULL && (!((long)var_ck&3)) && (!((long)var_k&3)) && var_ck->class == var_k->class && ((var_ck->class->box_kind == 3 && ((struct instance_core__Byte*)var_ck)->value == ((struct instance_core__Byte*)var_k)->value) || (var_ck->class->box_kind == 5 && ((struct instance_core__Float*)var_ck)->value == ((struct instance_core__Float*)var_k)->value) || (var_ck->class->box_kind == 6 && ((struct instance_core__CString*)var_ck)->value == ((struct instance_core__CString*)var_k)->value) || (var_ck->class->box_kind == 7 && ((struct instance_core__Pointer*)var_ck)->value == ((struct instance_core__Pointer*)var_k)->value) || (var_ck->class->box_kind == 8 && ((struct instance_core__Int8*)var_ck)->value == ((struct instance_core__Int8*)var_k)->value) || (var_ck->class->box_kind == 9 && ((struct instance_core__Int16*)var_ck)->value == ((struct instance_core__Int16*)var_k)->value) || (var_ck->class->box_kind == 10 && ((struct instance_core__UInt16*)var_ck)->value == ((struct instance_core__UInt16*)var_k)->value) || (var_ck->class->box_kind == 11 && ((struct instance_core__Int32*)var_ck)->value == ((struct instance_core__Int32*)var_k)->value) || (var_ck->class->box_kind == 12 && ((struct instance_core__UInt32*)var_ck)->value == ((struct instance_core__UInt32*)var_k)->value)));
 var17 = var19;
 goto RET_LABEL18;
 RET_LABEL18:(void)0;
@@ -285,7 +301,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashCollection#store for (self: HashCollection[nullable Object], Int, HashNode[nullable Object]) */
+/* method hash_collection$HashCollection$store for (self: HashCollection[nullable Object], Int, HashNode[nullable Object]) */
 void core__hash_collection___core__hash_collection__HashCollection___store(val* self, long p0, val* p1) {
 short int var /* : Bool */;
 int cltype;
@@ -394,10 +410,10 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var1,((val*)NULL)) on <var1:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var1,((val*)NULL)) on <var1:nullable HashNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var1,var_other) on <var1:nullable HashNode[nullable Object](HashNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var1,var_other) on <var1:nullable HashNode[nullable Object](HashNode[nullable Object])> */
 var7 = var1 == var_other;
 var5 = var7;
 goto RET_LABEL6;
@@ -415,6 +431,9 @@ self->attrs[COLOR_core__hash_collection__HashCollection___first_item].val = var_
 } else {
 var8 = self->attrs[COLOR_core__hash_collection__HashCollection___last_item].val; /* _last_item on <self:HashCollection[nullable Object]> */
 if (unlikely(var8 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 90);
 fatal_exit(1);
@@ -427,12 +446,15 @@ var_node->attrs[COLOR_core__hash_collection__HashNode___next_item].val = ((val*)
 self->attrs[COLOR_core__hash_collection__HashCollection___last_item].val = var_node; /* _last_item on <self:HashCollection[nullable Object]> */
 var10 = self->attrs[COLOR_core__hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[nullable Object]> */
 if (unlikely(var10 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 97);
 fatal_exit(1);
 }
 {
-{ /* Inline array#NativeArray#[] (var10,var_index) on <var10:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[] (var10,var_index) on <var10:NativeArray[nullable HashNode[nullable Object]]> */
 var13 = ((struct instance_core__NativeArray*)var10)->values[var_index];
 var11 = var13;
 goto RET_LABEL12;
@@ -442,12 +464,15 @@ RET_LABEL12:(void)0;
 var_next = var11;
 var14 = self->attrs[COLOR_core__hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[nullable Object]> */
 if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 98);
 fatal_exit(1);
 }
 {
-{ /* Inline array#NativeArray#[]= (var14,var_index,var_node) on <var14:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[]= (var14,var_index,var_node) on <var14:NativeArray[nullable HashNode[nullable Object]]> */
 /* Covariant cast for argument 1 (item) <var_node:HashNode[nullable Object]> isa E */
 /* <var_node:HashNode[nullable Object]> isa E */
 type_struct19 = var14->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -461,7 +486,7 @@ var16 = var_node->type->type_table[cltype17] == idtype18;
 if (unlikely(!var16)) {
 var_class_name20 = var_node == NULL ? "null" : var_node->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name20);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var14)->values[var_index]=var_node;
@@ -475,7 +500,7 @@ var21 = 0; /* is null */
 var21 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
 var_other24 = ((val*)NULL);
 {
 var25 = ((short int(*)(val* self, val* p0))(var_next->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_next, var_other24); /* == on <var_next:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -497,14 +522,14 @@ self->attrs[COLOR_core__hash_collection__HashCollection___last_accessed_node].va
 var28 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashCollection[nullable Object]> */
 var_l = var28;
 {
-{ /* Inline kernel#Int#+ (var_l,1l) on <var_l:Int> */
+{ /* Inline kernel$Int$+ (var_l,1l) on <var_l:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var31 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var31)) {
 var_class_name34 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var35 = var_l + 1l;
@@ -515,14 +540,14 @@ RET_LABEL30:(void)0;
 }
 self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l = var29; /* _the_length on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#+ (var_l,5l) on <var_l:Int> */
+{ /* Inline kernel$Int$+ (var_l,5l) on <var_l:Int> */
 /* Covariant cast for argument 0 (i) <5l:Int> isa OTHER */
 /* <5l:Int> isa OTHER */
 var38 = 1; /* easy <5l:Int> isa OTHER*/
 if (unlikely(!var38)) {
 var_class_name41 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name41);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var42 = var_l + 5l;
@@ -532,14 +557,14 @@ RET_LABEL37:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#* (var36,2l) on <var36:Int> */
+{ /* Inline kernel$Int$* (var36,2l) on <var36:Int> */
 /* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
 /* <2l:Int> isa OTHER */
 var45 = 1; /* easy <2l:Int> isa OTHER*/
 if (unlikely(!var45)) {
 var_class_name48 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 735);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 732);
 fatal_exit(1);
 }
 var49 = var36 * 2l;
@@ -549,14 +574,14 @@ RET_LABEL44:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var43,1l) on <var43:Int> */
+{ /* Inline kernel$Int$+ (var43,1l) on <var43:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var52 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var52)) {
 var_class_name55 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name55);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var56 = var43 + 1l;
@@ -568,14 +593,14 @@ RET_LABEL51:(void)0;
 var_l = var50;
 var57 = self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#>= (var_l,var57) on <var_l:Int> */
+{ /* Inline kernel$Int$>= (var_l,var57) on <var_l:Int> */
 /* Covariant cast for argument 0 (i) <var57:Int> isa OTHER */
 /* <var57:Int> isa OTHER */
 var60 = 1; /* easy <var57:Int> isa OTHER*/
 if (unlikely(!var60)) {
 var_class_name63 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name63);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var64 = var_l >= var57;
@@ -586,14 +611,14 @@ RET_LABEL59:(void)0;
 }
 if (var58){
 {
-{ /* Inline kernel#Int#* (var_l,3l) on <var_l:Int> */
+{ /* Inline kernel$Int$* (var_l,3l) on <var_l:Int> */
 /* Covariant cast for argument 0 (i) <3l:Int> isa OTHER */
 /* <3l:Int> isa OTHER */
 var67 = 1; /* easy <3l:Int> isa OTHER*/
 if (unlikely(!var67)) {
 var_class_name70 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name70);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 735);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 732);
 fatal_exit(1);
 }
 var71 = var_l * 3l;
@@ -603,14 +628,14 @@ RET_LABEL66:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#/ (var65,2l) on <var65:Int> */
+{ /* Inline kernel$Int$/ (var65,2l) on <var65:Int> */
 /* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
 /* <2l:Int> isa OTHER */
 var74 = 1; /* easy <2l:Int> isa OTHER*/
 if (unlikely(!var74)) {
 var_class_name77 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name77);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 736);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 733);
 fatal_exit(1);
 }
 var78 = var65 / 2l;
@@ -620,14 +645,14 @@ RET_LABEL73:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var72,1l) on <var72:Int> */
+{ /* Inline kernel$Int$+ (var72,1l) on <var72:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var81 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var81)) {
 var_class_name84 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name84);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var85 = var72 + 1l;
@@ -637,13 +662,13 @@ RET_LABEL80:(void)0;
 }
 }
 {
-core__hash_collection___core__hash_collection__HashCollection___enlarge(self, var79); /* Direct call hash_collection#HashCollection#enlarge on <self:HashCollection[nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___enlarge(self, var79); /* Direct call hash_collection$HashCollection$enlarge on <self:HashCollection[nullable Object]>*/
 }
 } else {
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashCollection#remove_node for (self: HashCollection[nullable Object], nullable Object) */
+/* method hash_collection$HashCollection$remove_node for (self: HashCollection[nullable Object], nullable Object) */
 void core__hash_collection___core__hash_collection__HashCollection___remove_node(val* self, val* p0) {
 val* var_k /* var k: nullable Object */;
 long var /* : Int */;
@@ -714,7 +739,7 @@ short int var62 /* : Bool */;
 var_k = p0;
 var = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var,0l) on <var:Int> */
+{ /* Inline kernel$Int$== (var,0l) on <var:Int> */
 var3 = var == 0l;
 var1 = var3;
 goto RET_LABEL2;
@@ -739,10 +764,10 @@ var6 = 1; /* is null */
 var6 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_node,((val*)NULL)) on <var_node:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$== (var_node,((val*)NULL)) on <var_node:nullable HashNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_node,var_other) on <var_node:nullable HashNode[nullable Object](HashNode[nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var_node,var_other) on <var_node:nullable HashNode[nullable Object](HashNode[nullable Object])> */
 var11 = var_node == var_other;
 var9 = var11;
 goto RET_LABEL10;
@@ -769,7 +794,7 @@ var14 = 0; /* is null */
 var14 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_prev,((val*)NULL)) on <var_prev:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_prev,((val*)NULL)) on <var_prev:nullable HashNode[nullable Object]> */
 var_other17 = ((val*)NULL);
 {
 var18 = ((short int(*)(val* self, val* p0))(var_prev->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_prev, var_other17); /* == on <var_prev:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -811,7 +836,7 @@ var21 = 0; /* is null */
 var21 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
 var_other17 = ((val*)NULL);
 {
 var24 = ((short int(*)(val* self, val* p0))(var_next->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_next, var_other17); /* == on <var_next:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -850,14 +875,14 @@ self->attrs[COLOR_core__hash_collection__HashCollection___last_item].val = var_p
 var_ = self;
 var31 = var_->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <var_:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#- (var31,1l) on <var31:Int> */
+{ /* Inline kernel$Int$- (var31,1l) on <var31:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var34 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var34)) {
 var_class_name37 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name37);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var38 = var31 - 1l;
@@ -877,7 +902,7 @@ var41 = 0; /* is null */
 var41 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_prev,((val*)NULL)) on <var_prev:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_prev,((val*)NULL)) on <var_prev:nullable HashNode[nullable Object]> */
 var_other17 = ((val*)NULL);
 {
 var44 = ((short int(*)(val* self, val* p0))(var_prev->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_prev, var_other17); /* == on <var_prev:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -894,6 +919,9 @@ var_prev->attrs[COLOR_core__hash_collection__HashNode___next_in_bucklet].val = v
 } else {
 var46 = self->attrs[COLOR_core__hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[nullable Object]> */
 if (unlikely(var46 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 147);
 fatal_exit(1);
@@ -918,7 +946,7 @@ PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 147);
 fatal_exit(1);
 }
 {
-{ /* Inline array#NativeArray#[]= (var46,var_i,var_next) on <var46:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[]= (var46,var_i,var_next) on <var46:NativeArray[nullable HashNode[nullable Object]]> */
 /* Covariant cast for argument 1 (item) <var_next:nullable HashNode[nullable Object]> isa E */
 /* <var_next:nullable HashNode[nullable Object]> isa E */
 type_struct56 = var46->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -937,7 +965,7 @@ var53 = var_next->type->type_table[cltype54] == idtype55;
 if (unlikely(!var53)) {
 var_class_name57 = var_next == NULL ? "null" : var_next->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name57);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var46)->values[var_i]=var_next;
@@ -951,7 +979,7 @@ var58 = 0; /* is null */
 var58 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
 var_other17 = ((val*)NULL);
 {
 var61 = ((short int(*)(val* self, val* p0))(var_next->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_next, var_other17); /* == on <var_next:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -970,7 +998,7 @@ var_next->attrs[COLOR_core__hash_collection__HashNode___prev_in_bucklet].val = v
 self->attrs[COLOR_core__hash_collection__HashCollection___last_accessed_key].val = ((val*)NULL); /* _last_accessed_key on <self:HashCollection[nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashCollection#raz for (self: HashCollection[nullable Object]) */
+/* method hash_collection$HashCollection$raz for (self: HashCollection[nullable Object]) */
 void core__hash_collection___core__hash_collection__HashCollection___raz(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -1001,14 +1029,14 @@ const char* var_class_name23;
 long var24 /* : Int */;
 var = self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#- (var,1l) on <var:Int> */
+{ /* Inline kernel$Int$- (var,1l) on <var:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var3 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var3)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var4 = var - 1l;
@@ -1020,14 +1048,14 @@ RET_LABEL2:(void)0;
 var_i = var1;
 for(;;) {
 {
-{ /* Inline kernel#Int#>= (var_i,0l) on <var_i:Int> */
+{ /* Inline kernel$Int$>= (var_i,0l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var7 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name10 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var11 = var_i >= 0l;
@@ -1039,12 +1067,15 @@ RET_LABEL6:(void)0;
 if (var5){
 var12 = self->attrs[COLOR_core__hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[nullable Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 161);
 fatal_exit(1);
 }
 {
-{ /* Inline array#NativeArray#[]= (var12,var_i,((val*)NULL)) on <var12:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[]= (var12,var_i,((val*)NULL)) on <var12:NativeArray[nullable HashNode[nullable Object]]> */
 /* Covariant cast for argument 1 (item) <((val*)NULL):null> isa E */
 /* <((val*)NULL):null> isa E */
 type_struct = var12->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -1063,7 +1094,7 @@ var14 = ((val*)NULL)->type->type_table[cltype15] == idtype16;
 if (unlikely(!var14)) {
 var_class_name17 = ((val*)NULL) == NULL ? "null" : ((val*)NULL)->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var12)->values[var_i]=((val*)NULL);
@@ -1071,14 +1102,14 @@ RET_LABEL13:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var_i,1l) on <var_i:Int> */
+{ /* Inline kernel$Int$- (var_i,1l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var20 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var20)) {
 var_class_name23 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var24 = var_i - 1l;
@@ -1099,7 +1130,7 @@ self->attrs[COLOR_core__hash_collection__HashCollection___last_item].val = ((val
 self->attrs[COLOR_core__hash_collection__HashCollection___last_accessed_key].val = ((val*)NULL); /* _last_accessed_key on <self:HashCollection[nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashCollection#enlarge for (self: HashCollection[nullable Object], Int) */
+/* method hash_collection$HashCollection$enlarge for (self: HashCollection[nullable Object], Int) */
 void core__hash_collection___core__hash_collection__HashCollection___enlarge(val* self, long p0) {
 long var_cap /* var cap: Int */;
 long var /* : Int */;
@@ -1162,14 +1193,14 @@ const char* var_class_name55;
 var_cap = p0;
 var = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#+ (var,1l) on <var:Int> */
+{ /* Inline kernel$Int$+ (var,1l) on <var:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var3 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var3)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var4 = var + 1l;
@@ -1179,14 +1210,14 @@ RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#< (var_cap,var1) on <var_cap:Int> */
+{ /* Inline kernel$Int$< (var_cap,var1) on <var_cap:Int> */
 /* Covariant cast for argument 0 (i) <var1:Int> isa OTHER */
 /* <var1:Int> isa OTHER */
 var7 = 1; /* easy <var1:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name10 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var11 = var_cap < var1;
@@ -1198,14 +1229,14 @@ RET_LABEL6:(void)0;
 if (var5){
 var12 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#+ (var12,1l) on <var12:Int> */
+{ /* Inline kernel$Int$+ (var12,1l) on <var12:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var15 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var15)) {
 var_class_name18 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var19 = var12 + 1l;
@@ -1219,14 +1250,14 @@ var_cap = var13;
 }
 var20 = self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[nullable Object]> */
 {
-{ /* Inline kernel#Int#<= (var_cap,var20) on <var_cap:Int> */
+{ /* Inline kernel$Int$<= (var_cap,var20) on <var_cap:Int> */
 /* Covariant cast for argument 0 (i) <var20:Int> isa OTHER */
 /* <var20:Int> isa OTHER */
 var23 = 1; /* easy <var20:Int> isa OTHER*/
 if (unlikely(!var23)) {
 var_class_name26 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name26);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 724);
 fatal_exit(1);
 }
 var27 = var_cap <= var20;
@@ -1241,7 +1272,7 @@ goto RET_LABEL;
 }
 self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l = var_cap; /* _capacity on <self:HashCollection[nullable Object]> */
 self->attrs[COLOR_core__hash_collection__HashCollection___last_accessed_key].val = ((val*)NULL); /* _last_accessed_key on <self:HashCollection[nullable Object]> */
-var28 = NEW_core__NativeArray(var_cap, self->type->resolution_table->types[COLOR_core__NativeArray__nullable__core__hash_collection__HashCollection__N]);
+var28 = NEW_core__NativeArray((int)var_cap, self->type->resolution_table->types[COLOR_core__NativeArray__nullable__core__hash_collection__HashCollection__N]);
 var_new_array = var28;
 self->attrs[COLOR_core__hash_collection__HashCollection___array].val = var_new_array; /* _array on <self:HashCollection[nullable Object]> */
 var29 = self->attrs[COLOR_core__hash_collection__HashCollection___first_item].val; /* _first_item on <self:HashCollection[nullable Object]> */
@@ -1253,7 +1284,7 @@ var30 = 0; /* is null */
 var30 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_node,((val*)NULL)) on <var_node:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_node,((val*)NULL)) on <var_node:nullable HashNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var33 = ((short int(*)(val* self, val* p0))(var_node->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_node, var_other); /* == on <var_node:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -1272,7 +1303,7 @@ var36 = core__hash_collection___core__hash_collection__HashCollection___index_at
 }
 var_index = var36;
 {
-{ /* Inline array#NativeArray#[] (var_new_array,var_index) on <var_new_array:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[] (var_new_array,var_index) on <var_new_array:NativeArray[nullable HashNode[nullable Object]]> */
 var39 = ((struct instance_core__NativeArray*)var_new_array)->values[var_index];
 var37 = var39;
 goto RET_LABEL38;
@@ -1281,7 +1312,7 @@ RET_LABEL38:(void)0;
 }
 var_next = var37;
 {
-{ /* Inline array#NativeArray#[]= (var_new_array,var_index,var_node) on <var_new_array:NativeArray[nullable HashNode[nullable Object]]> */
+{ /* Inline array$NativeArray$[]= (var_new_array,var_index,var_node) on <var_new_array:NativeArray[nullable HashNode[nullable Object]]> */
 /* Covariant cast for argument 1 (item) <var_node:nullable HashNode[nullable Object](HashNode[nullable Object])> isa E */
 /* <var_node:nullable HashNode[nullable Object](HashNode[nullable Object])> isa E */
 type_struct = var_new_array->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -1295,7 +1326,7 @@ var41 = var_node->type->type_table[cltype42] == idtype43;
 if (unlikely(!var41)) {
 var_class_name44 = var_node == NULL ? "null" : var_node->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name44);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var_new_array)->values[var_index]=var_node;
@@ -1310,7 +1341,7 @@ var45 = 0; /* is null */
 var45 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_next,((val*)NULL)) on <var_next:nullable HashNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var48 = ((short int(*)(val* self, val* p0))(var_next->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_next, var_other); /* == on <var_next:nullable HashNode[nullable Object](HashNode[nullable Object])>*/
@@ -1354,7 +1385,7 @@ goto BREAK_label;
 BREAK_label: (void)0;
 RET_LABEL:;
 }
-/* method hash_collection#HashNode#key= for (self: HashNode[nullable Object], nullable Object) */
+/* method hash_collection$HashNode$key= for (self: HashNode[nullable Object], nullable Object) */
 void core__hash_collection___core__hash_collection__HashNode___key_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1386,14 +1417,14 @@ fatal_exit(1);
 self->attrs[COLOR_core__hash_collection__HashNode___key].val = p0; /* _key on <self:HashNode[nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashNode#init for (self: HashNode[nullable Object]) */
+/* method hash_collection$HashNode$init for (self: HashNode[nullable Object]) */
 void core__hash_collection___core__hash_collection__HashNode___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core__hash_collection___core__hash_collection__HashNode___core__kernel__Object__init]))(self); /* init on <self:HashNode[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMap#[] for (self: HashMap[nullable Object, nullable Object], nullable Object): nullable Object */
+/* method hash_collection$HashMap$[] for (self: HashMap[nullable Object, nullable Object], nullable Object): nullable Object */
 val* core___core__HashMap___core__abstract_collection__MapRead___91d_93d(val* self, val* p0) {
 val* var /* : nullable Object */;
 val* var_key /* var key: nullable Object */;
@@ -1417,10 +1448,10 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
+{ /* Inline kernel$Object$== (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_c,var_other) on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var_c,var_other) on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
 var7 = var_c == var_other;
 var5 = var7;
 goto RET_LABEL6;
@@ -1447,7 +1478,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#get_or_null for (self: HashMap[nullable Object, nullable Object], nullable Object): nullable Object */
+/* method hash_collection$HashMap$get_or_null for (self: HashMap[nullable Object, nullable Object], nullable Object): nullable Object */
 val* core___core__HashMap___core__abstract_collection__MapRead__get_or_null(val* self, val* p0) {
 val* var /* : nullable Object */;
 val* var_key /* var key: nullable Object */;
@@ -1470,10 +1501,10 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
+{ /* Inline kernel$Object$== (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
 var_other = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_c,var_other) on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
+{ /* Inline kernel$Object$is_same_instance (var_c,var_other) on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
 var7 = var_c == var_other;
 var5 = var7;
 goto RET_LABEL6;
@@ -1497,7 +1528,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#iterator for (self: HashMap[nullable Object, nullable Object]): MapIterator[nullable Object, nullable Object] */
+/* method hash_collection$HashMap$iterator for (self: HashMap[nullable Object, nullable Object]): MapIterator[nullable Object, nullable Object] */
 val* core___core__HashMap___core__abstract_collection__MapRead__iterator(val* self) {
 val* var /* : MapIterator[nullable Object, nullable Object] */;
 val* var1 /* : HashMapIterator[nullable Object, nullable Object] */;
@@ -1513,7 +1544,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#length for (self: HashMap[nullable Object, nullable Object]): Int */
+/* method hash_collection$HashMap$length for (self: HashMap[nullable Object, nullable Object]): Int */
 long core___core__HashMap___core__abstract_collection__MapRead__length(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -1523,7 +1554,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#is_empty for (self: HashMap[nullable Object, nullable Object]): Bool */
+/* method hash_collection$HashMap$is_empty for (self: HashMap[nullable Object, nullable Object]): Bool */
 short int core___core__HashMap___core__abstract_collection__MapRead__is_empty(val* self) {
 short int var /* : Bool */;
 long var1 /* : Int */;
@@ -1531,7 +1562,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 var1 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashMap[nullable Object, nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var1,0l) on <var1:Int> */
+{ /* Inline kernel$Int$== (var1,0l) on <var1:Int> */
 var4 = var1 == 0l;
 var2 = var4;
 goto RET_LABEL3;
@@ -1543,7 +1574,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#[]= for (self: HashMap[nullable Object, nullable Object], nullable Object, nullable Object) */
+/* method hash_collection$HashMap$[]= for (self: HashMap[nullable Object, nullable Object], nullable Object, nullable Object) */
 void core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1) {
 short int var /* : Bool */;
 int cltype;
@@ -1618,7 +1649,7 @@ var_key = p0;
 var_v = p1;
 var7 = self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashMap[nullable Object, nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var7,0l) on <var7:Int> */
+{ /* Inline kernel$Int$== (var7,0l) on <var7:Int> */
 var10 = var7 == 0l;
 var8 = var10;
 goto RET_LABEL9;
@@ -1627,7 +1658,7 @@ RET_LABEL9:(void)0;
 }
 if (var8){
 {
-core__hash_collection___core__hash_collection__HashCollection___enlarge(self, 17l); /* Direct call hash_collection#HashCollection#enlarge on <self:HashMap[nullable Object, nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___enlarge(self, 17l); /* Direct call hash_collection$HashCollection$enlarge on <self:HashMap[nullable Object, nullable Object]>*/
 }
 } else {
 }
@@ -1645,7 +1676,7 @@ var13 = 0; /* is null */
 var13 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
+{ /* Inline kernel$Object$!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
 var_other = ((val*)NULL);
 {
 var16 = ((short int(*)(val* self, val* p0))(var_c->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_c, var_other); /* == on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
@@ -1672,19 +1703,19 @@ var18 = NEW_core__hash_collection__HashMapNode(self->type->resolution_table->typ
 ((void(*)(val* self))(var18->class->vft[COLOR_core__kernel__Object__init]))(var18); /* init on <var18:HashMapNode[nullable Object, nullable Object]>*/
 }
 {
-core__hash_collection___core__hash_collection__HashCollection___store(self, var_i, var18); /* Direct call hash_collection#HashCollection#store on <self:HashMap[nullable Object, nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___store(self, var_i, var18); /* Direct call hash_collection$HashCollection$store on <self:HashMap[nullable Object, nullable Object]>*/
 }
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMap#clear for (self: HashMap[nullable Object, nullable Object]) */
+/* method hash_collection$HashMap$clear for (self: HashMap[nullable Object, nullable Object]) */
 void core___core__HashMap___core__abstract_collection__Map__clear(val* self) {
 {
-core__hash_collection___core__hash_collection__HashCollection___raz(self); /* Direct call hash_collection#HashCollection#raz on <self:HashMap[nullable Object, nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___raz(self); /* Direct call hash_collection$HashCollection$raz on <self:HashMap[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMap#init for (self: HashMap[nullable Object, nullable Object]) */
+/* method hash_collection$HashMap$init for (self: HashMap[nullable Object, nullable Object]) */
 void core___core__HashMap___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core___core__HashMap___core__kernel__Object__init]))(self); /* init on <self:HashMap[nullable Object, nullable Object]>*/
@@ -1693,7 +1724,7 @@ self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l = 0l; /* _
 self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l = 0l; /* _the_length on <self:HashMap[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashMap#keys for (self: HashMap[nullable Object, nullable Object]): RemovableCollection[nullable Object] */
+/* method hash_collection$HashMap$keys for (self: HashMap[nullable Object, nullable Object]): RemovableCollection[nullable Object] */
 val* core___core__HashMap___core__abstract_collection__MapRead__keys(val* self) {
 val* var /* : RemovableCollection[nullable Object] */;
 short int var1 /* : Bool */;
@@ -1703,6 +1734,9 @@ var1 = self->attrs[COLOR_core__hash_collection__HashMap___keys].val != NULL; /* 
 if(likely(var1)) {
 var2 = self->attrs[COLOR_core__hash_collection__HashMap___keys].val; /* _keys on <self:HashMap[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _keys");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 279);
 fatal_exit(1);
@@ -1722,7 +1756,7 @@ var = var2;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#values for (self: HashMap[nullable Object, nullable Object]): RemovableCollection[nullable Object] */
+/* method hash_collection$HashMap$values for (self: HashMap[nullable Object, nullable Object]): RemovableCollection[nullable Object] */
 val* core___core__HashMap___core__abstract_collection__MapRead__values(val* self) {
 val* var /* : RemovableCollection[nullable Object] */;
 short int var1 /* : Bool */;
@@ -1732,6 +1766,9 @@ var1 = self->attrs[COLOR_core__hash_collection__HashMap___values].val != NULL; /
 if(likely(var1)) {
 var2 = self->attrs[COLOR_core__hash_collection__HashMap___values].val; /* _values on <self:HashMap[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _values");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 280);
 fatal_exit(1);
@@ -1751,7 +1788,7 @@ var = var2;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMap#has_key for (self: HashMap[nullable Object, nullable Object], nullable Object): Bool */
+/* method hash_collection$HashMap$has_key for (self: HashMap[nullable Object, nullable Object], nullable Object): Bool */
 short int core___core__HashMap___core__abstract_collection__MapRead__has_key(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_k /* var k: nullable Object */;
@@ -1771,10 +1808,10 @@ var2 = 0; /* is null */
 var2 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var1,((val*)NULL)) on <var1:nullable HashNode[nullable Object](nullable HashMapNode[nullable Object, nullable Object])> */
+{ /* Inline kernel$Object$!= (var1,((val*)NULL)) on <var1:nullable HashNode[nullable Object](nullable HashMapNode[nullable Object, nullable Object])> */
 var_other = ((val*)NULL);
 {
-var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_core__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
+var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_core__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable HashNode[nullable Object](HashMapNode[nullable Object, nullable Object])>*/
 }
 var6 = !var5;
 var3 = var6;
@@ -1788,12 +1825,15 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#map for (self: HashMapKeys[nullable Object, nullable Object]): HashMap[nullable Object, nullable Object] */
+/* method hash_collection$HashMapKeys$map for (self: HashMapKeys[nullable Object, nullable Object]): HashMap[nullable Object, nullable Object] */
 val* core__hash_collection___core__hash_collection__HashMapKeys___map(val* self) {
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 var1 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -1802,7 +1842,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#map= for (self: HashMapKeys[nullable Object, nullable Object], HashMap[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapKeys$map= for (self: HashMapKeys[nullable Object, nullable Object], HashMap[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapKeys___map_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1828,7 +1868,26 @@ fatal_exit(1);
 self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val = p0; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashMapKeys#first for (self: HashMapKeys[nullable Object, nullable Object]): nullable Object */
+/* method hash_collection$HashMapKeys$count for (self: HashMapKeys[nullable Object, nullable Object], nullable Object): Int */
+long core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__count(val* self, val* p0) {
+long var /* : Int */;
+val* var_k /* var k: nullable Object */;
+short int var1 /* : Bool */;
+var_k = p0;
+{
+var1 = core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__has(self, var_k);
+}
+if (var1){
+var = 1l;
+goto RET_LABEL;
+} else {
+var = 0l;
+goto RET_LABEL;
+}
+RET_LABEL:;
+return var;
+}
+/* method hash_collection$HashMapKeys$first for (self: HashMapKeys[nullable Object, nullable Object]): nullable Object */
 val* core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__first(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
@@ -1836,9 +1895,12 @@ val* var3 /* : HashMap[nullable Object, nullable Object] */;
 val* var4 /* : nullable HashNode[nullable Object] */;
 val* var5 /* : nullable Object */;
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -1849,6 +1911,9 @@ RET_LABEL2:(void)0;
 }
 var4 = var1->attrs[COLOR_core__hash_collection__HashCollection___first_item].val; /* _first_item on <var1:HashMap[nullable Object, nullable Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 291);
 fatal_exit(1);
@@ -1859,7 +1924,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#has for (self: HashMapKeys[nullable Object, nullable Object], nullable Object): Bool */
+/* method hash_collection$HashMapKeys$has for (self: HashMapKeys[nullable Object, nullable Object], nullable Object): Bool */
 short int core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__has(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_k /* var k: nullable Object */;
@@ -1873,9 +1938,12 @@ short int var8 /* : Bool */;
 short int var9 /* : Bool */;
 var_k = p0;
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -1893,10 +1961,10 @@ var5 = 0; /* is null */
 var5 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var4,((val*)NULL)) on <var4:nullable HashNode[nullable Object](nullable HashMapNode[nullable Object, nullable Object])> */
+{ /* Inline kernel$Object$!= (var4,((val*)NULL)) on <var4:nullable HashNode[nullable Object](nullable HashMapNode[nullable Object, nullable Object])> */
 var_other = ((val*)NULL);
 {
-var8 = ((short int(*)(val* self, val* p0))(var4->class->vft[COLOR_core__kernel__Object___61d_61d]))(var4, var_other); /* == on <var4:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
+var8 = ((short int(*)(val* self, val* p0))(var4->class->vft[COLOR_core__kernel__Object___61d_61d]))(var4, var_other); /* == on <var4:nullable HashNode[nullable Object](HashMapNode[nullable Object, nullable Object])>*/
 }
 var9 = !var8;
 var6 = var9;
@@ -1910,16 +1978,19 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#is_empty for (self: HashMapKeys[nullable Object, nullable Object]): Bool */
+/* method hash_collection$HashMapKeys$is_empty for (self: HashMapKeys[nullable Object, nullable Object]): Bool */
 short int core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__is_empty(val* self) {
 short int var /* : Bool */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 val* var3 /* : HashMap[nullable Object, nullable Object] */;
 short int var4 /* : Bool */;
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -1936,16 +2007,19 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#length for (self: HashMapKeys[nullable Object, nullable Object]): Int */
+/* method hash_collection$HashMapKeys$length for (self: HashMapKeys[nullable Object, nullable Object]): Int */
 long core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__length(val* self) {
 long var /* : Int */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 val* var3 /* : HashMap[nullable Object, nullable Object] */;
 long var4 /* : Int */;
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -1962,7 +2036,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#iterator for (self: HashMapKeys[nullable Object, nullable Object]): Iterator[nullable Object] */
+/* method hash_collection$HashMapKeys$iterator for (self: HashMapKeys[nullable Object, nullable Object]): Iterator[nullable Object] */
 val* core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__Collection__iterator(val* self) {
 val* var /* : Iterator[nullable Object] */;
 val* var1 /* : MapKeysIterator[nullable Object, nullable Object] */;
@@ -1971,9 +2045,12 @@ val* var4 /* : HashMap[nullable Object, nullable Object] */;
 val* var5 /* : MapIterator[nullable Object, nullable Object] */;
 var1 = NEW_core__MapKeysIterator(self->type->resolution_table->types[COLOR_core__MapKeysIterator__core__hash_collection__HashMapKeys___35dK__core__hash_collection__HashMapKeys___35dV]);
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var4 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -1996,14 +2073,17 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapKeys#clear for (self: HashMapKeys[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapKeys$clear for (self: HashMapKeys[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__RemovableCollection__clear(val* self) {
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var2 /* : HashMap[nullable Object, nullable Object] */;
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var2 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -2013,20 +2093,23 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection#HashMap#clear on <var:HashMap[nullable Object, nullable Object]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection$HashMap$clear on <var:HashMap[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMapKeys#remove for (self: HashMapKeys[nullable Object, nullable Object], nullable Object) */
+/* method hash_collection$HashMapKeys$remove for (self: HashMapKeys[nullable Object, nullable Object], nullable Object) */
 void core__hash_collection___core__hash_collection__HashMapKeys___core__abstract_collection__RemovableCollection__remove(val* self, val* p0) {
 val* var_key /* var key: nullable Object */;
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var2 /* : HashMap[nullable Object, nullable Object] */;
 var_key = p0;
 {
-{ /* Inline hash_collection#HashMapKeys#map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapKeys$map (self) on <self:HashMapKeys[nullable Object, nullable Object]> */
 var2 = self->attrs[COLOR_core__hash_collection__HashMapKeys___map].val; /* _map on <self:HashMapKeys[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 287);
 fatal_exit(1);
@@ -2036,23 +2119,26 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core__hash_collection___core__hash_collection__HashCollection___remove_node(var, var_key); /* Direct call hash_collection#HashCollection#remove_node on <var:HashMap[nullable Object, nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___remove_node(var, var_key); /* Direct call hash_collection$HashCollection$remove_node on <var:HashMap[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMapKeys#init for (self: HashMapKeys[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapKeys$init for (self: HashMapKeys[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapKeys___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core__hash_collection___core__hash_collection__HashMapKeys___core__kernel__Object__init]))(self); /* init on <self:HashMapKeys[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMapValues#map for (self: HashMapValues[nullable Object, nullable Object]): HashMap[nullable Object, nullable Object] */
+/* method hash_collection$HashMapValues$map for (self: HashMapValues[nullable Object, nullable Object]): HashMap[nullable Object, nullable Object] */
 val* core__hash_collection___core__hash_collection__HashMapValues___map(val* self) {
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 var1 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2061,7 +2147,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapValues#map= for (self: HashMapValues[nullable Object, nullable Object], HashMap[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapValues$map= for (self: HashMapValues[nullable Object, nullable Object], HashMap[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapValues___map_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2087,7 +2173,110 @@ fatal_exit(1);
 self->attrs[COLOR_core__hash_collection__HashMapValues___map].val = p0; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashMapValues#first for (self: HashMapValues[nullable Object, nullable Object]): nullable Object */
+/* method hash_collection$HashMapValues$count for (self: HashMapValues[nullable Object, nullable Object], nullable Object): Int */
+long core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__count(val* self, val* p0) {
+long var /* : Int */;
+val* var_item /* var item: nullable Object */;
+long var_nb /* var nb: Int */;
+val* var1 /* : HashMap[nullable Object, nullable Object] */;
+val* var3 /* : HashMap[nullable Object, nullable Object] */;
+val* var4 /* : nullable HashNode[nullable Object] */;
+val* var_c /* var c: nullable HashMapNode[nullable Object, nullable Object] */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var8 /* : Bool */;
+short int var9 /* : Bool */;
+val* var10 /* : nullable Object */;
+short int var11 /* : Bool */;
+short int var12 /* : Bool */;
+long var13 /* : Int */;
+short int var15 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var16 /* : Int */;
+val* var17 /* : nullable HashNode[nullable Object] */;
+var_item = p0;
+var_nb = 0l;
+{
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+var3 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
+if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
+PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
+fatal_exit(1);
+}
+var1 = var3;
+RET_LABEL2:(void)0;
+}
+}
+var4 = var1->attrs[COLOR_core__hash_collection__HashCollection___first_item].val; /* _first_item on <var1:HashMap[nullable Object, nullable Object]> */
+var_c = var4;
+for(;;) {
+if (var_c == NULL) {
+var5 = 0; /* is null */
+} else {
+var5 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel$Object$!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
+var_other = ((val*)NULL);
+{
+var8 = ((short int(*)(val* self, val* p0))(var_c->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_c, var_other); /* == on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
+}
+var9 = !var8;
+var6 = var9;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
+}
+var5 = var6;
+}
+if (var5){
+var10 = var_c->attrs[COLOR_core__hash_collection__HashMapNode___value].val; /* _value on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
+if (var10 == NULL) {
+var11 = (var_item == NULL);
+} else {
+var12 = ((short int(*)(val* self, val* p0))((((long)var10&3)?class_info[((long)var10&3)]:var10->class)->vft[COLOR_core__kernel__Object___61d_61d]))(var10, var_item); /* == on <var10:nullable Object>*/
+var11 = var12;
+}
+if (var11){
+{
+{ /* Inline kernel$Int$+ (var_nb,1l) on <var_nb:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var15 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var15)) {
+var_class_name = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
+}
+var16 = var_nb + 1l;
+var13 = var16;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
+}
+}
+var_nb = var13;
+} else {
+}
+var17 = var_c->attrs[COLOR_core__hash_collection__HashNode___next_item].val; /* _next_item on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
+var_c = var17;
+} else {
+goto BREAK_label;
+}
+}
+BREAK_label: (void)0;
+var = var_nb;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method hash_collection$HashMapValues$first for (self: HashMapValues[nullable Object, nullable Object]): nullable Object */
 val* core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__first(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
@@ -2095,9 +2284,12 @@ val* var3 /* : HashMap[nullable Object, nullable Object] */;
 val* var4 /* : nullable HashNode[nullable Object] */;
 val* var5 /* : nullable Object */;
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2108,6 +2300,9 @@ RET_LABEL2:(void)0;
 }
 var4 = var1->attrs[COLOR_core__hash_collection__HashCollection___first_item].val; /* _first_item on <var1:HashMap[nullable Object, nullable Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 321);
 fatal_exit(1);
@@ -2118,7 +2313,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapValues#has for (self: HashMapValues[nullable Object, nullable Object], nullable Object): Bool */
+/* method hash_collection$HashMapValues$has for (self: HashMapValues[nullable Object, nullable Object], nullable Object): Bool */
 short int core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__has(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_item /* var item: nullable Object */;
@@ -2137,9 +2332,12 @@ short int var12 /* : Bool */;
 val* var13 /* : nullable HashNode[nullable Object] */;
 var_item = p0;
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2157,7 +2355,7 @@ var5 = 0; /* is null */
 var5 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
+{ /* Inline kernel$Object$!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
 var_other = ((val*)NULL);
 {
 var8 = ((short int(*)(val* self, val* p0))(var_c->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_c, var_other); /* == on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
@@ -2194,16 +2392,19 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapValues#is_empty for (self: HashMapValues[nullable Object, nullable Object]): Bool */
+/* method hash_collection$HashMapValues$is_empty for (self: HashMapValues[nullable Object, nullable Object]): Bool */
 short int core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__is_empty(val* self) {
 short int var /* : Bool */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 val* var3 /* : HashMap[nullable Object, nullable Object] */;
 short int var4 /* : Bool */;
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2220,16 +2421,19 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapValues#length for (self: HashMapValues[nullable Object, nullable Object]): Int */
+/* method hash_collection$HashMapValues$length for (self: HashMapValues[nullable Object, nullable Object]): Int */
 long core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__length(val* self) {
 long var /* : Int */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 val* var3 /* : HashMap[nullable Object, nullable Object] */;
 long var4 /* : Int */;
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2246,7 +2450,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapValues#iterator for (self: HashMapValues[nullable Object, nullable Object]): Iterator[nullable Object] */
+/* method hash_collection$HashMapValues$iterator for (self: HashMapValues[nullable Object, nullable Object]): Iterator[nullable Object] */
 val* core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__Collection__iterator(val* self) {
 val* var /* : Iterator[nullable Object] */;
 val* var1 /* : MapValuesIterator[nullable Object, nullable Object] */;
@@ -2255,9 +2459,12 @@ val* var4 /* : HashMap[nullable Object, nullable Object] */;
 val* var5 /* : MapIterator[nullable Object, nullable Object] */;
 var1 = NEW_core__MapValuesIterator(self->type->resolution_table->types[COLOR_core__MapValuesIterator__core__hash_collection__HashMapValues___35dK__core__hash_collection__HashMapValues___35dV]);
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var4 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2280,14 +2487,17 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapValues#clear for (self: HashMapValues[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapValues$clear for (self: HashMapValues[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__RemovableCollection__clear(val* self) {
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var2 /* : HashMap[nullable Object, nullable Object] */;
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var2 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2297,11 +2507,11 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection#HashMap#clear on <var:HashMap[nullable Object, nullable Object]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection$HashMap$clear on <var:HashMap[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMapValues#remove for (self: HashMapValues[nullable Object, nullable Object], nullable Object) */
+/* method hash_collection$HashMapValues$remove for (self: HashMapValues[nullable Object, nullable Object], nullable Object) */
 void core__hash_collection___core__hash_collection__HashMapValues___core__abstract_collection__RemovableCollection__remove(val* self, val* p0) {
 val* var_item /* var item: nullable Object */;
 val* var /* : HashMap[nullable Object, nullable Object] */;
@@ -2321,9 +2531,12 @@ val* var12 /* : nullable Object */;
 val* var13 /* : nullable HashNode[nullable Object] */;
 var_item = p0;
 {
-{ /* Inline hash_collection#HashMapValues#map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapValues$map (self) on <self:HashMapValues[nullable Object, nullable Object]> */
 var2 = self->attrs[COLOR_core__hash_collection__HashMapValues___map].val; /* _map on <self:HashMapValues[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 308);
 fatal_exit(1);
@@ -2342,7 +2555,7 @@ var4 = 0; /* is null */
 var4 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
+{ /* Inline kernel$Object$!= (var_c,((val*)NULL)) on <var_c:nullable HashMapNode[nullable Object, nullable Object]> */
 var_other = ((val*)NULL);
 {
 var7 = ((short int(*)(val* self, val* p0))(var_c->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_c, var_other); /* == on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
@@ -2365,7 +2578,7 @@ var10 = var11;
 if (var10){
 var12 = var_c->attrs[COLOR_core__hash_collection__HashNode___key].val; /* _key on <var_c:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])> */
 {
-core__hash_collection___core__hash_collection__HashCollection___remove_node(var_map, var12); /* Direct call hash_collection#HashCollection#remove_node on <var_map:HashMap[nullable Object, nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___remove_node(var_map, var12); /* Direct call hash_collection$HashCollection$remove_node on <var_map:HashMap[nullable Object, nullable Object]>*/
 }
 goto RET_LABEL;
 } else {
@@ -2379,14 +2592,14 @@ goto BREAK_label;
 BREAK_label: (void)0;
 RET_LABEL:;
 }
-/* method hash_collection#HashMapValues#init for (self: HashMapValues[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapValues$init for (self: HashMapValues[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapValues___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core__hash_collection___core__hash_collection__HashMapValues___core__kernel__Object__init]))(self); /* init on <self:HashMapValues[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMapNode#value= for (self: HashMapNode[nullable Object, nullable Object], nullable Object) */
+/* method hash_collection$HashMapNode$value= for (self: HashMapNode[nullable Object, nullable Object], nullable Object) */
 void core__hash_collection___core__hash_collection__HashMapNode___value_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2418,14 +2631,14 @@ fatal_exit(1);
 self->attrs[COLOR_core__hash_collection__HashMapNode___value].val = p0; /* _value on <self:HashMapNode[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashMapNode#init for (self: HashMapNode[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapNode$init for (self: HashMapNode[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapNode___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core__hash_collection___core__hash_collection__HashMapNode___core__kernel__Object__init]))(self); /* init on <self:HashMapNode[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashMapIterator#is_ok for (self: HashMapIterator[nullable Object, nullable Object]): Bool */
+/* method hash_collection$HashMapIterator$is_ok for (self: HashMapIterator[nullable Object, nullable Object]): Bool */
 short int core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__is_ok(val* self) {
 short int var /* : Bool */;
 val* var1 /* : nullable HashMapNode[nullable Object, nullable Object] */;
@@ -2441,7 +2654,7 @@ var2 = 0; /* is null */
 var2 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var1,((val*)NULL)) on <var1:nullable HashMapNode[nullable Object, nullable Object]> */
+{ /* Inline kernel$Object$!= (var1,((val*)NULL)) on <var1:nullable HashMapNode[nullable Object, nullable Object]> */
 var_other = ((val*)NULL);
 {
 var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_core__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable HashMapNode[nullable Object, nullable Object](HashMapNode[nullable Object, nullable Object])>*/
@@ -2458,7 +2671,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapIterator#item for (self: HashMapIterator[nullable Object, nullable Object]): nullable Object */
+/* method hash_collection$HashMapIterator$item for (self: HashMapIterator[nullable Object, nullable Object]): nullable Object */
 val* core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__item(val* self) {
 val* var /* : nullable Object */;
 short int var1 /* : Bool */;
@@ -2468,12 +2681,18 @@ val* var3 /* : nullable Object */;
 var1 = core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__is_ok(self);
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 389);
 fatal_exit(1);
 }
 var2 = self->attrs[COLOR_core__hash_collection__HashMapIterator___node].val; /* _node on <self:HashMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 390);
 fatal_exit(1);
@@ -2484,7 +2703,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapIterator#key for (self: HashMapIterator[nullable Object, nullable Object]): nullable Object */
+/* method hash_collection$HashMapIterator$key for (self: HashMapIterator[nullable Object, nullable Object]): nullable Object */
 val* core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__key(val* self) {
 val* var /* : nullable Object */;
 short int var1 /* : Bool */;
@@ -2494,12 +2713,18 @@ val* var3 /* : nullable Object */;
 var1 = core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__is_ok(self);
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 401);
 fatal_exit(1);
 }
 var2 = self->attrs[COLOR_core__hash_collection__HashMapIterator___node].val; /* _node on <self:HashMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 402);
 fatal_exit(1);
@@ -2510,7 +2735,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapIterator#next for (self: HashMapIterator[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapIterator$next for (self: HashMapIterator[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__next(val* self) {
 short int var /* : Bool */;
 val* var1 /* : nullable HashMapNode[nullable Object, nullable Object] */;
@@ -2519,12 +2744,18 @@ val* var2 /* : nullable HashNode[nullable Object] */;
 var = core__hash_collection___core__hash_collection__HashMapIterator___core__abstract_collection__MapIterator__is_ok(self);
 }
 if (unlikely(!var)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 407);
 fatal_exit(1);
 }
 var1 = self->attrs[COLOR_core__hash_collection__HashMapIterator___node].val; /* _node on <self:HashMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 408);
 fatal_exit(1);
@@ -2533,12 +2764,15 @@ var2 = var1->attrs[COLOR_core__hash_collection__HashNode___next_item].val; /* _n
 self->attrs[COLOR_core__hash_collection__HashMapIterator___node].val = var2; /* _node on <self:HashMapIterator[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashMapIterator#map for (self: HashMapIterator[nullable Object, nullable Object]): HashMap[nullable Object, nullable Object] */
+/* method hash_collection$HashMapIterator$map for (self: HashMapIterator[nullable Object, nullable Object]): HashMap[nullable Object, nullable Object] */
 val* core__hash_collection___core__hash_collection__HashMapIterator___map(val* self) {
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var1 /* : HashMap[nullable Object, nullable Object] */;
 var1 = self->attrs[COLOR_core__hash_collection__HashMapIterator___map].val; /* _map on <self:HashMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 411);
 fatal_exit(1);
@@ -2547,7 +2781,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashMapIterator#map= for (self: HashMapIterator[nullable Object, nullable Object], HashMap[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapIterator$map= for (self: HashMapIterator[nullable Object, nullable Object], HashMap[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapIterator___map_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2573,7 +2807,7 @@ fatal_exit(1);
 self->attrs[COLOR_core__hash_collection__HashMapIterator___map].val = p0; /* _map on <self:HashMapIterator[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashMapIterator#init for (self: HashMapIterator[nullable Object, nullable Object]) */
+/* method hash_collection$HashMapIterator$init for (self: HashMapIterator[nullable Object, nullable Object]) */
 void core__hash_collection___core__hash_collection__HashMapIterator___core__kernel__Object__init(val* self) {
 val* var /* : HashMap[nullable Object, nullable Object] */;
 val* var2 /* : HashMap[nullable Object, nullable Object] */;
@@ -2583,9 +2817,12 @@ val* var4 /* : nullable HashNode[nullable Object] */;
 ((void(*)(val* self))(self->class->vft[COLOR_core__hash_collection___core__hash_collection__HashMapIterator___core__kernel__Object__init]))(self); /* init on <self:HashMapIterator[nullable Object, nullable Object]>*/
 }
 {
-{ /* Inline hash_collection#HashMapIterator#map (self) on <self:HashMapIterator[nullable Object, nullable Object]> */
+{ /* Inline hash_collection$HashMapIterator$map (self) on <self:HashMapIterator[nullable Object, nullable Object]> */
 var2 = self->attrs[COLOR_core__hash_collection__HashMapIterator___map].val; /* _map on <self:HashMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 411);
 fatal_exit(1);
@@ -2597,6 +2834,9 @@ RET_LABEL1:(void)0;
 self->attrs[COLOR_core__hash_collection__HashMapIterator___map].val = var; /* _map on <self:HashMapIterator[nullable Object, nullable Object]> */
 var3 = self->attrs[COLOR_core__hash_collection__HashMapIterator___map].val; /* _map on <self:HashMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _map");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 420);
 fatal_exit(1);
@@ -2605,7 +2845,7 @@ var4 = var3->attrs[COLOR_core__hash_collection__HashCollection___first_item].val
 self->attrs[COLOR_core__hash_collection__HashMapIterator___node].val = var4; /* _node on <self:HashMapIterator[nullable Object, nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashSet#length for (self: HashSet[nullable Object]): Int */
+/* method hash_collection$HashSet$length for (self: HashSet[nullable Object]): Int */
 long core___core__HashSet___core__abstract_collection__Collection__length(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -2615,7 +2855,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSet#is_empty for (self: HashSet[nullable Object]): Bool */
+/* method hash_collection$HashSet$is_empty for (self: HashSet[nullable Object]): Bool */
 short int core___core__HashSet___core__abstract_collection__Collection__is_empty(val* self) {
 short int var /* : Bool */;
 long var1 /* : Int */;
@@ -2623,7 +2863,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 var1 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashSet[nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var1,0l) on <var1:Int> */
+{ /* Inline kernel$Int$== (var1,0l) on <var1:Int> */
 var4 = var1 == 0l;
 var2 = var4;
 goto RET_LABEL3;
@@ -2635,7 +2875,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSet#first for (self: HashSet[nullable Object]): nullable Object */
+/* method hash_collection$HashSet$first for (self: HashSet[nullable Object]): nullable Object */
 val* core___core__HashSet___core__abstract_collection__Collection__first(val* self) {
 val* var /* : nullable Object */;
 long var1 /* : Int */;
@@ -2649,14 +2889,14 @@ val* var6 /* : nullable HashNode[nullable Object] */;
 val* var7 /* : nullable Object */;
 var1 = self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l; /* _the_length on <self:HashSet[nullable Object]> */
 {
-{ /* Inline kernel#Int#> (var1,0l) on <var1:Int> */
+{ /* Inline kernel$Int$> (var1,0l) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var4 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var5 = var1 > 0l;
@@ -2666,12 +2906,18 @@ RET_LABEL3:(void)0;
 }
 }
 if (unlikely(!var2)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 438);
 fatal_exit(1);
 }
 var6 = self->attrs[COLOR_core__hash_collection__HashCollection___first_item].val; /* _first_item on <self:HashSet[nullable Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 439);
 fatal_exit(1);
@@ -2682,7 +2928,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSet#has for (self: HashSet[nullable Object], nullable Object): Bool */
+/* method hash_collection$HashSet$has for (self: HashSet[nullable Object], nullable Object): Bool */
 short int core___core__HashSet___core__abstract_collection__Collection__has(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_item /* var item: nullable Object */;
@@ -2702,10 +2948,10 @@ var2 = 0; /* is null */
 var2 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var1,((val*)NULL)) on <var1:nullable HashNode[nullable Object](nullable HashSetNode[nullable Object])> */
+{ /* Inline kernel$Object$!= (var1,((val*)NULL)) on <var1:nullable HashNode[nullable Object](nullable HashSetNode[nullable Object])> */
 var_other = ((val*)NULL);
 {
-var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_core__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable HashSetNode[nullable Object](HashSetNode[nullable Object])>*/
+var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_core__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable HashNode[nullable Object](HashSetNode[nullable Object])>*/
 }
 var6 = !var5;
 var3 = var6;
@@ -2719,7 +2965,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSet#add for (self: HashSet[nullable Object], nullable Object) */
+/* method hash_collection$HashSet$add for (self: HashSet[nullable Object], nullable Object) */
 void core___core__HashSet___core__abstract_collection__SimpleCollection__add(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2765,7 +3011,7 @@ fatal_exit(1);
 var_item = p0;
 var1 = self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashSet[nullable Object]> */
 {
-{ /* Inline kernel#Int#== (var1,0l) on <var1:Int> */
+{ /* Inline kernel$Int$== (var1,0l) on <var1:Int> */
 var4 = var1 == 0l;
 var2 = var4;
 goto RET_LABEL3;
@@ -2774,7 +3020,7 @@ RET_LABEL3:(void)0;
 }
 if (var2){
 {
-core__hash_collection___core__hash_collection__HashCollection___enlarge(self, 17l); /* Direct call hash_collection#HashCollection#enlarge on <self:HashSet[nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___enlarge(self, 17l); /* Direct call hash_collection$HashCollection$enlarge on <self:HashSet[nullable Object]>*/
 }
 } else {
 }
@@ -2792,7 +3038,7 @@ var7 = 0; /* is null */
 var7 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_c,((val*)NULL)) on <var_c:nullable HashSetNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var_c,((val*)NULL)) on <var_c:nullable HashSetNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var10 = ((short int(*)(val* self, val* p0))(var_c->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_c, var_other); /* == on <var_c:nullable HashSetNode[nullable Object](HashSetNode[nullable Object])>*/
@@ -2815,28 +3061,28 @@ var12 = NEW_core__hash_collection__HashSetNode(self->type->resolution_table->typ
 ((void(*)(val* self))(var12->class->vft[COLOR_core__kernel__Object__init]))(var12); /* init on <var12:HashSetNode[nullable Object]>*/
 }
 {
-core__hash_collection___core__hash_collection__HashCollection___store(self, var_i, var12); /* Direct call hash_collection#HashCollection#store on <self:HashSet[nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___store(self, var_i, var12); /* Direct call hash_collection$HashCollection$store on <self:HashSet[nullable Object]>*/
 }
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashSet#remove for (self: HashSet[nullable Object], nullable Object) */
+/* method hash_collection$HashSet$remove for (self: HashSet[nullable Object], nullable Object) */
 void core___core__HashSet___core__abstract_collection__RemovableCollection__remove(val* self, val* p0) {
 val* var_item /* var item: nullable Object */;
 var_item = p0;
 {
-core__hash_collection___core__hash_collection__HashCollection___remove_node(self, var_item); /* Direct call hash_collection#HashCollection#remove_node on <self:HashSet[nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___remove_node(self, var_item); /* Direct call hash_collection$HashCollection$remove_node on <self:HashSet[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashSet#clear for (self: HashSet[nullable Object]) */
+/* method hash_collection$HashSet$clear for (self: HashSet[nullable Object]) */
 void core___core__HashSet___core__abstract_collection__RemovableCollection__clear(val* self) {
 {
-core__hash_collection___core__hash_collection__HashCollection___raz(self); /* Direct call hash_collection#HashCollection#raz on <self:HashSet[nullable Object]>*/
+core__hash_collection___core__hash_collection__HashCollection___raz(self); /* Direct call hash_collection$HashCollection$raz on <self:HashSet[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashSet#iterator for (self: HashSet[nullable Object]): Iterator[nullable Object] */
+/* method hash_collection$HashSet$iterator for (self: HashSet[nullable Object]): Iterator[nullable Object] */
 val* core___core__HashSet___core__abstract_collection__Collection__iterator(val* self) {
 val* var /* : Iterator[nullable Object] */;
 val* var1 /* : HashSetIterator[nullable Object] */;
@@ -2852,7 +3098,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSet#init for (self: HashSet[nullable Object]) */
+/* method hash_collection$HashSet$init for (self: HashSet[nullable Object]) */
 void core___core__HashSet___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core___core__HashSet___core__kernel__Object__init]))(self); /* init on <self:HashSet[nullable Object]>*/
@@ -2861,7 +3107,7 @@ self->attrs[COLOR_core__hash_collection__HashCollection___capacity].l = 0l; /* _
 self->attrs[COLOR_core__hash_collection__HashCollection___the_length].l = 0l; /* _the_length on <self:HashSet[nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashSet#from for (self: HashSet[nullable Object], Collection[nullable Object]) */
+/* method hash_collection$HashSet$from for (self: HashSet[nullable Object], Collection[nullable Object]) */
 void core___core__HashSet___from(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2887,14 +3133,27 @@ fatal_exit(1);
 }
 var_coll = p0;
 {
-core___core__HashSet___core__kernel__Object__init(self); /* Direct call hash_collection#HashSet#init on <self:HashSet[nullable Object]>*/
+core___core__HashSet___core__kernel__Object__init(self); /* Direct call hash_collection$HashSet$init on <self:HashSet[nullable Object]>*/
 }
 {
-core___core__SimpleCollection___add_all(self, var_coll); /* Direct call abstract_collection#SimpleCollection#add_all on <self:HashSet[nullable Object]>*/
+core___core__SimpleCollection___add_all(self, var_coll); /* Direct call abstract_collection$SimpleCollection$add_all on <self:HashSet[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method hash_collection#HashSetIterator#is_ok for (self: HashSetIterator[nullable Object]): Bool */
+/* method hash_collection$HashSet$new_set for (self: HashSet[nullable Object]): Set[nullable Object] */
+val* core___core__HashSet___core__abstract_collection__Set__new_set(val* self) {
+val* var /* : Set[nullable Object] */;
+val* var1 /* : HashSet[nullable Object] */;
+var1 = NEW_core__HashSet(self->type->resolution_table->types[COLOR_core__HashSet__core__HashSet___35dE]);
+{
+core___core__HashSet___core__kernel__Object__init(var1); /* Direct call hash_collection$HashSet$init on <var1:HashSet[nullable Object]>*/
+}
+var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method hash_collection$HashSetIterator$is_ok for (self: HashSetIterator[nullable Object]): Bool */
 short int core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__is_ok(val* self) {
 short int var /* : Bool */;
 val* var1 /* : nullable HashSetNode[nullable Object] */;
@@ -2910,7 +3169,7 @@ var2 = 0; /* is null */
 var2 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var1,((val*)NULL)) on <var1:nullable HashSetNode[nullable Object]> */
+{ /* Inline kernel$Object$!= (var1,((val*)NULL)) on <var1:nullable HashSetNode[nullable Object]> */
 var_other = ((val*)NULL);
 {
 var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_core__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable HashSetNode[nullable Object](HashSetNode[nullable Object])>*/
@@ -2927,7 +3186,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSetIterator#item for (self: HashSetIterator[nullable Object]): nullable Object */
+/* method hash_collection$HashSetIterator$item for (self: HashSetIterator[nullable Object]): nullable Object */
 val* core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__item(val* self) {
 val* var /* : nullable Object */;
 short int var1 /* : Bool */;
@@ -2937,12 +3196,18 @@ val* var3 /* : nullable Object */;
 var1 = core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__is_ok(self);
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 491);
 fatal_exit(1);
 }
 var2 = self->attrs[COLOR_core__hash_collection__HashSetIterator___node].val; /* _node on <self:HashSetIterator[nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 492);
 fatal_exit(1);
@@ -2953,7 +3218,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method hash_collection#HashSetIterator#next for (self: HashSetIterator[nullable Object]) */
+/* method hash_collection$HashSetIterator$next for (self: HashSetIterator[nullable Object]) */
 void core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__next(val* self) {
 short int var /* : Bool */;
 val* var1 /* : nullable HashSetNode[nullable Object] */;
@@ -2962,12 +3227,18 @@ val* var2 /* : nullable HashNode[nullable Object] */;
 var = core__hash_collection___core__hash_collection__HashSetIterator___core__abstract_collection__Iterator__is_ok(self);
 }
 if (unlikely(!var)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 497);
 fatal_exit(1);
 }
 var1 = self->attrs[COLOR_core__hash_collection__HashSetIterator___node].val; /* _node on <self:HashSetIterator[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 498);
 fatal_exit(1);
@@ -2976,7 +3247,7 @@ var2 = var1->attrs[COLOR_core__hash_collection__HashNode___next_item].val; /* _n
 self->attrs[COLOR_core__hash_collection__HashSetIterator___node].val = var2; /* _node on <self:HashSetIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashSetIterator#set= for (self: HashSetIterator[nullable Object], HashSet[nullable Object]) */
+/* method hash_collection$HashSetIterator$set= for (self: HashSetIterator[nullable Object], HashSet[nullable Object]) */
 void core__hash_collection___core__hash_collection__HashSetIterator___set_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -3002,7 +3273,7 @@ fatal_exit(1);
 self->attrs[COLOR_core__hash_collection__HashSetIterator___set].val = p0; /* _set on <self:HashSetIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method hash_collection#HashSetIterator#init for (self: HashSetIterator[nullable Object]) */
+/* method hash_collection$HashSetIterator$init for (self: HashSetIterator[nullable Object]) */
 void core__hash_collection___core__hash_collection__HashSetIterator___core__kernel__Object__init(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var1 /* : nullable HashNode[nullable Object] */;
@@ -3011,6 +3282,9 @@ val* var1 /* : nullable HashNode[nullable Object] */;
 }
 var = self->attrs[COLOR_core__hash_collection__HashSetIterator___set].val; /* _set on <self:HashSetIterator[nullable Object]> */
 if (unlikely(var == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _set");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__hash_collection, 509);
 fatal_exit(1);
