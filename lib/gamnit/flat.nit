@@ -38,6 +38,7 @@ import geometry::points_and_lines
 import matrix::projection
 import more_collections
 import realtime
+import performance_analysis
 
 import gamnit
 import gamnit::cameras
@@ -130,8 +131,11 @@ redef class App
 	# UI sprites to draw in reference to `ui_camera`, over world `sprites`
 	var ui_sprites: Sequence[Sprite] = new List[Sprite]
 
+	# Main clock used to count each frame `dt`, lapsed for `update` only
 	private var clock = new Clock is lazy
 
+	# Performance clock to for `frame_core_draw` operations
+	private var perf_clock_main = new Clock
 	redef fun on_create
 	do
 		super
@@ -186,8 +190,10 @@ redef class App
 		assert gl_error == gl_NO_ERROR else print gl_error
 
 		# Update game logic and set sprites
+		perf_clock_main.lapse
 		var dt = clock.lapse.to_f
 		update dt
+		sys.perfs["gamnit flat update client"].add perf_clock_main.lapse
 
 		# Draw and flip screen
 		frame_core_draw display
@@ -201,9 +207,15 @@ redef class App
 	# Draw the whole screen, all `glDraw...` calls should be executed here
 	protected fun frame_core_draw(display: GamnitDisplay)
 	do
+		perf_clock_main.lapse
+
 		frame_core_world_sprites display
+		perfs["gamnit flat world_sprites"].add perf_clock_main.lapse
+
 		frame_core_ui_sprites display
+		perfs["gamnit flat ui_sprites"].add perf_clock_main.lapse
 	end
+
 
 	# Draw world sprites from `sprites`
 	protected fun frame_core_world_sprites(display: GamnitDisplay)
