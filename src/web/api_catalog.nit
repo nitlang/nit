@@ -20,7 +20,12 @@ import catalog
 redef class NitwebConfig
 
 	# Catalog to pass to handlers.
-	var catalog: Catalog is lazy do
+	var catalog: Catalog is noinit
+
+	# Build the catalog
+	#
+	# This method should be called at nitweb startup.
+	fun build_catalog do
 		var catalog = new Catalog(modelbuilder)
 		for mpackage in model.mpackages do
 			catalog.deps.add_node(mpackage)
@@ -36,7 +41,7 @@ redef class NitwebConfig
 			catalog.git_info(mpackage)
 			catalog.package_page(mpackage)
 		end
-		return catalog
+		self.catalog = catalog
 	end
 end
 

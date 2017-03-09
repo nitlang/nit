@@ -63,6 +63,7 @@ private class NitwebPhase
 	do
 		var config = build_config(toolcontext, mainmodule)
 		config.model.nitdoc_md_processor = config.md_processor
+		config.build_catalog
 
 		var app = new App
 
