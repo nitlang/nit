@@ -325,11 +325,11 @@ redef class SimpleCollection[E]
 			v.stream.write """","""
 			v.new_line_and_indent
 			v.stream.write """"__items": """
-
+			serialize_to_pure_json v
 			core_serialize_to v
+		else
+			serialize_to_pure_json v
 		end
-
-		serialize_to_pure_json v
 
 		if not v.plain_json then
 			v.indent_level -= 1
