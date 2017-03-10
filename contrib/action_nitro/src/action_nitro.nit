@@ -201,7 +201,7 @@ redef class App
 
 		# Prepare for intro animation
 		ui_sprites.add tutorial_goal
-		world_camera.far = 700.0
+		world_camera.far = 1024.0
 	end
 
 	redef fun update(dt)
