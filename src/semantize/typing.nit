@@ -580,7 +580,16 @@ private class TypeVisitor
 				return mtypes.first
 			else
 				var res = merge_types(node,mtypes)
-				if res == null then res = variable.declared_type
+				if res == null then
+					res = variable.declared_type
+					# Try to fallback to a non-null version
+					if res != null and can_be_null(res) then do
+						for t in mtypes do
+							if t != null and can_be_null(t) then break label
+						end
+						res = res.as_notnull
+					end label
+				end
 				return res
 			end
 		end
