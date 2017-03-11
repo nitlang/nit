@@ -20,6 +20,7 @@ RUN dpkg --add-architecture i386 \
 		libsdl-ttf2.0-dev \
 		libsdl1.2-dev \
 		libsdl2-dev \
+		libsdl2-image-dev \
 		libsqlite3-dev \
 		libx11-dev \
 		libxdg-basedir-dev \
