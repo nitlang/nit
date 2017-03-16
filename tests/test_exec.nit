@@ -24,6 +24,7 @@ print ""
 
 var ip = new ProcessReader("echo", "B hello world!")
 ip.read_line.output
+ip.eof.output
 ip.wait
 print ip.status
 

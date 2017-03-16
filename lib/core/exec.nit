@@ -164,7 +164,7 @@ class Process
 				return NULL;
 			}
 			start_info.hStdInput = in_fd[0];
-			result->in_fd = _open_osfhandle((intptr_t)in_fd[1], _O_APPEND);
+			result->in_fd = _open_osfhandle((intptr_t)in_fd[1], _O_WRONLY);
 			if ( !SetHandleInformation(in_fd[1], HANDLE_FLAG_INHERIT, 0) )
 				return NULL;
 		} else {
@@ -213,6 +213,10 @@ class Process
 			NULL,       // use parent's current directory
 			&start_info,
 			&proc_info);
+
+		if (pipeflag & 1) CloseHandle(in_fd[0]);
+		if (pipeflag & 2) CloseHandle(out_fd[1]);
+		if (pipeflag & 3) CloseHandle(err_fd[1]);
 
 		// Error?
 		if (!created) {
