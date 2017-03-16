@@ -46,10 +46,12 @@ redef class String
 	# Search for the program `self` in all directories from `PATH`
 	fun program_is_in_path: Bool
 	do
+		var sep = if is_windows then ";" else ":"
 		var full_path = "PATH".environ
-		var paths = full_path.split(":")
+		var paths = full_path.split(sep)
 		for path in paths do if path.file_exists then
 			if path.join_path(self).file_exists then return true
+			if is_windows and (path / self + ".exe").file_exists then return true
 		end
 
 		return false
