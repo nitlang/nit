@@ -29,7 +29,8 @@
 #   and the like. It can be used to standardize the size of the UI across
 #   devices. It is used to position the sprites in `App::ui_sprites`.
 #
-# See the sample game at `contrib/asteronits/`.
+# See the sample game at `contrib/asteronits/` and the basic project template
+# at `lib/gamnit/examples/template_flat/`.
 module flat
 
 import glesv2
