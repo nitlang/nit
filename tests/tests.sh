@@ -154,6 +154,8 @@ else
 	HOSTNAME="hostname -s"
 fi
 
+UNAME=`uname | sed s/-.*//`
+
 # $1 is the pattern of the test
 # $2 is the file to compare to
 # the result is:
@@ -373,7 +375,7 @@ need_skip()
 	fi
 
 	# Skip by OS
-	local os_skip_file=`uname`.skip
+	local os_skip_file=$UNAME.skip
 	if test -e $os_skip_file && echo "$1" | grep -f "$os_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip os]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
@@ -530,7 +532,7 @@ case $engine in
 		;;
 esac
 
-savdirs="sav/`$HOSTNAME` sav/`uname` sav/$engine $savdirs sav/"
+savdirs="sav/`$HOSTNAME` sav/$UNAME sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
