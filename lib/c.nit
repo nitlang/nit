@@ -30,7 +30,7 @@ abstract class CArray[E]
 	# Pointer to the real C array
 	var native_array: NATIVE is noinit
 
-	private init(length: Int) is old_style_init do self._length = length
+	init(length: Int) is old_style_init do self._length = length
 
 	redef fun [](index)
 	do
