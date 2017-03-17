@@ -73,7 +73,7 @@ void main()
 	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
 """@glsl_fragment_shader.to_cstring)
-glIsShader fragment_shader
+glCompileShader fragment_shader
 assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {glGetShaderInfoLog(fragment_shader)}"
 assert glGetError == gl_NO_ERROR
 
