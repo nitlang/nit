@@ -1056,6 +1056,9 @@ end
 
 # Pointer classes are used to manipulate extern C structures.
 extern class Pointer
+	# C `NULL` pointer
+	new nul `{ return NULL; `}
+
 	# Is the address behind this Object at NULL?
 	fun address_is_null: Bool `{ return self == NULL; `}
 
