@@ -409,6 +409,11 @@ extern_code_body {-> extern_code_block} = no extern_code_block {-> extern_code_b
 
 /* TYPES *********************************************************************/
 type~nobra~nopar {-> type}
+	= {atom} [t]:type_atom~nobra~nopar {-> t.type }
+	| {inter} [t1]:type_atom~nobra~nopar kwand [t2]:type_atom~nobra~nopar {-> t1.type } /* TODO create real nodes */
+	| {union} [t1]:type_atom~nobra~nopar kwor [t2]:type_atom~nobra~nopar {-> t1.type }
+	;
+type_atom~nobra~nopar {-> type}
 	= {simple} kwnullable? qclassid annotations_o~nopar {-> New type(kwnullable, qclassid, Null, [], Null, annotations_o~nopar.annotations)}
 !nobra	| {generic} kwnullable? qclassid obra no types [n2]:no cbra annotations_o~nopar {-> New type(kwnullable, qclassid, obra, [types.type], cbra, annotations_o~nopar.annotations)}
 	;
@@ -574,7 +579,7 @@ expr_eq~nopar~nobra {-> expr}
 	| {:gt} expr_bitor~nopar~nobra gt :no [expr2]:expr_bitor~nopar~nobra
 	| {:ge} expr_bitor~nopar~nobra ge :no [expr2]:expr_bitor~nopar~nobra
 	| {:starship} expr_bitor~nopar~nobra starship :no [expr2]:expr_bitor~nopar~nobra
-	| {:isa} expr_bitor~nopar~nobra kwisa :no type~nobra
+	| {:isa} expr_bitor~nopar~nobra kwisa :no type_atom~nobra
 	;
 
 expr_bitor~nopar~nobra {-> expr}
@@ -626,7 +631,7 @@ expr_minus~nopar~nobra {-> expr}
 
 expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
-	| {new} kwnew no type~nobra_nopar args {-> New expr.new(kwnew, type~nobra_nopar.type, Null, args.exprs)}
+	| {new} kwnew no type_atom~nobra_nopar args {-> New expr.new(kwnew, type_atom~nobra_nopar.type, Null, args.exprs)}
 	| {isset_attr} kwisset recv~nopar~nobra qualified_o attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
 	;
 
@@ -637,7 +642,7 @@ expr_atom~nopar~nobra {-> expr}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
-	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid, args.exprs)}
+	| {new} kwnew no type_atom~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type_atom~nobra_nopar.type, qid, args.exprs)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
         | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
