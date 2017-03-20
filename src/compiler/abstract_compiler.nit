@@ -349,14 +349,21 @@ class MakefileToolchain
 		end
 		var debug = toolcontext.opt_debug.value
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write """
+CC ?= ccache cc
+CXX ?= ccache c++
+CFLAGS ?= -g {{{if not debug then "-O2" else ""}}} -Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs
+CINCL =
+LDFLAGS ?=
+LDLIBS  ?= -lm {{{linker_options.join(" ")}}}
+\n"""
 
 		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
 		if platform.supports_libunwind then
 			if toolcontext.opt_no_stacktrace.value then
-				makefile.write "NO_STACKTRACE=True"
+				makefile.write "NO_STACKTRACE ?= True"
 			else
-				makefile.write "NO_STACKTRACE= # Set to `True` to enable"
+				makefile.write "NO_STACKTRACE ?= # Set to `True` to enable"
 			end
 		end
 
