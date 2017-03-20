@@ -963,30 +963,28 @@ redef class String
 	#     assert "path/to".basename(".ext")                 == "to"
 	#     assert "path/to/".basename(".ext")                == "to"
 	#     assert "path/to".basename                         == "to"
-	#     assert "path".basename("")                        == "path"
-	#     assert "/path".basename("")                       == "path"
-	#     assert "/".basename("")                           == "/"
-	#     assert "".basename("")                            == ""
+	#     assert "path".basename                            == "path"
+	#     assert "/path".basename                           == "path"
+	#     assert "/".basename                               == "/"
+	#     assert "".basename                                == ""
+	#
+	# On Windows, '\' are replaced by '/':
+	#
+	# ~~~nitish
+	# assert "C:\\path\\to\\a_file.ext".basename(".ext")    == "a_file"
+	# assert "C:\\".basename                                == "C:"
+	# ~~~
 	fun basename(extension: nullable String): String
 	do
 		var n = self
-		if is_windows then
-			var l = length - 1 # Index of the last char
-			while l > 0 and (self.chars[l] == '/' or chars[l] == '\\') do l -= 1 # remove all trailing `/`
-			if l == 0 then return "/"
-			var pos = chars.last_index_of_from('/', l)
-			pos = pos.max(last_index_of_from('\\', l))
-			if pos >= 0 then
-				n = substring(pos+1, l-pos)
-			end
-		else
-			var l = length - 1 # Index of the last char
-			while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
-			if l == 0 then return "/"
-			var pos = chars.last_index_of_from('/', l)
-			if pos >= 0 then
-				n = substring(pos+1, l-pos)
-			end
+		if is_windows then n = n.replace("\\", "/")
+
+		var l = length - 1 # Index of the last char
+		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
+		if l == 0 then return "/"
+		var pos = chars.last_index_of_from('/', l)
+		if pos >= 0 then
+			n = substring(pos+1, l-pos)
 		end
 
 		if extension != null then
@@ -1004,13 +1002,23 @@ redef class String
 	#     assert "/path".dirname                       == "/"
 	#     assert "/".dirname                           == "/"
 	#     assert "".dirname                            == "."
+	#
+	# On Windows, '\' are replaced by '/':
+	#
+	# ~~~nitish
+	# assert "C:\\path\\to\\a_file.ext".dirname        == "C:/path/to"
+	# assert "C:\\file".dirname                        == "C:"
+	# ~~~
 	fun dirname: String
 	do
+		var s = self
+		if is_windows then s = s.replace("\\", "/")
+
 		var l = length - 1 # Index of the last char
-		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
-		var pos = chars.last_index_of_from('/', l)
+		while l > 0 and s.chars[l] == '/' do l -= 1 # remove all trailing `/`
+		var pos = s.chars.last_index_of_from('/', l)
 		if pos > 0 then
-			return substring(0, pos)
+			return s.substring(0, pos)
 		else if pos == 0 then
 			return "/"
 		else
@@ -1055,10 +1063,18 @@ redef class String
 	# assert "./../dir".simplify_path		   == "../dir"
 	# assert "./dir".simplify_path			   == "dir"
 	# ~~~
+	#
+	# On Windows, '\' are replaced by '/':
+	#
+	# ~~~nitish
+	# assert "C:\\some\\.\\complex\\../../path/to/a_file.ext".simplify_path == "C:/path/to/a_file.ext"
+	# assert "C:\\".simplify_path              == "C:"
+	# ~~~
 	fun simplify_path: String
 	do
-		var path_sep = if is_windows then "\\" else "/"
-		var a = self.split_with(path_sep)
+		var s = self
+		if is_windows then s = s.replace("\\", "/")
+		var a = s.split_with("/")
 		var a2 = new Array[String]
 		for x in a do
 			if x == "." and not a2.is_empty then continue # skip `././`
@@ -1183,6 +1199,7 @@ redef class String
 	#     assert "/" + "/".relpath(".") == getcwd
 	fun relpath(dest: String): String
 	do
+		# TODO windows support
 		var cwd = getcwd
 		var from = (cwd/self).simplify_path.split("/")
 		if from.last.is_empty then from.pop # case for the root directory
@@ -1215,8 +1232,10 @@ redef class String
 	fun mkdir(mode: nullable Int): nullable Error
 	do
 		mode = mode or else 0o777
+		var s = self
+		if is_windows then s = s.replace("\\", "/")
 
-		var dirs = self.split_with("/")
+		var dirs = s.split_with("/")
 		var path = new FlatBuffer
 		if dirs.is_empty then return null
 		if dirs[0].is_empty then
@@ -1235,7 +1254,7 @@ redef class String
 				error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 			end
 		end
-		var res = self.to_cstring.file_mkdir(mode)
+		var res = s.to_cstring.file_mkdir(mode)
 		if not res and error == null then
 			error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 		end
@@ -1356,29 +1375,19 @@ redef class FlatString
 	end
 
 	redef fun basename(extension) do
+		var s = self
+		if is_windows then s = s.replace("\\", "/").as(FlatString)
+
 		var bname
-		if is_windows then
-			var l = last_byte
-			var its = _items
-			var min = _first_byte
-			var sl = '/'.ascii
-			var ls = '\\'.ascii
-			while l > min and (its[l] == sl or its[l] == ls) do l -= 1
-			if l == min then return "\\"
-			var ns = l
-			while ns >= min and its[ns] != sl and its[ns] != ls do ns -= 1
-			bname = new FlatString.with_infos(its, l - ns, ns + 1)
-		else
-			var l = last_byte
-			var its = _items
-			var min = _first_byte
-			var sl = '/'.ascii
-			while l > min and its[l] == sl do l -= 1
-			if l == min then return "/"
-			var ns = l
-			while ns >= min and its[ns] != sl do ns -= 1
-			bname = new FlatString.with_infos(its, l - ns, ns + 1)
-		end
+		var l = s.last_byte
+		var its = s._items
+		var min = s._first_byte
+		var sl = '/'.ascii
+		while l > min and its[l] == sl do l -= 1
+		if l == min then return "/"
+		var ns = l
+		while ns >= min and its[ns] != sl do ns -= 1
+		bname = new FlatString.with_infos(its, l - ns, ns + 1)
 
 		return if extension != null then bname.strip_extension(extension) else bname
 	end
