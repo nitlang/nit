@@ -187,7 +187,7 @@ fun glValidateProgram(program: GLProgram) `{ glValidateProgram(program); `}
 # Delete the `program` object
 fun glDeleteProgram(program: GLProgram) `{ glDeleteProgram(program); `}
 
-# Determine if `name` corresponds to a program object
+# Does `name` corresponds to a program object?
 fun glIsProgram(name: GLProgram): Bool `{ return glIsProgram(name); `}
 
 # Attach a `shader` to `program`
@@ -312,7 +312,7 @@ fun glCompileShader(shader: GLShader) `{ glCompileShader(shader); `}
 # Delete the `shader` object
 fun glDeleteShader(shader: GLShader) `{ glDeleteShader(shader); `}
 
-# Determine if `name` corresponds to a shader object
+# Does `name` corresponds to a shader object?
 fun glIsShader(name: GLShader): Bool `{ return glIsShader(name); `}
 
 # An OpenGL ES 2.0 fragment shader
@@ -694,7 +694,7 @@ private fun native_glGenRenderbuffers(n: Int, renderbuffers: NativeCIntArray) `{
 	glGenRenderbuffers(n, (GLuint *)renderbuffers);
 `}
 
-# Determine if `name` corresponds to a renderbuffer object
+# Does `name` corresponds to a renderbuffer object?
 fun glIsRenderbuffer(name: Int): Bool `{
 	return glIsRenderbuffer(name);
 `}
@@ -876,6 +876,62 @@ fun glHint(target: GLHintTarget, mode: GLHintMode) `{
 # Generate and fill set of mipmaps for the texture object `target`
 fun glGenerateMipmap(target: GLTextureTarget) `{ glGenerateMipmap(target); `}
 
+# Generate `n` buffer names
+fun glGenBuffers(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenBuffers(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenBuffers(n: Int, buffers: NativeCIntArray) `{
+	glGenBuffers(n, (GLuint *)buffers);
+`}
+
+# Does `name` corresponds to a buffer object?
+fun glIsBuffer(name: Int): Bool `{
+	return glIsBuffer(name);
+`}
+
+# Delete named buffer objects
+fun glDeleteBuffers(buffers: SequenceRead[Int])
+do
+	var n = buffers.length
+	var array = new CIntArray.from(buffers)
+	native_glDeleteFramebuffers(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteBuffers(n: Int, buffers: NativeCIntArray) `{
+	return glDeleteBuffers(n, (const GLuint *)buffers);
+`}
+
+# Create and initialize a buffer object's data store
+fun glBufferData(target: GLArrayBuffer, size: Int, data: Pointer, usage: GLBufferUsage) `{
+	glBufferData(target, size, data, usage);
+`}
+
+# Update a subset of a buffer object's data store
+fun glBufferSubData(target: GLArrayBuffer, offset, size: Int, data: Pointer) `{
+	glBufferSubData(target, offset, size, data);
+`}
+
+# Expected usage of a buffer
+extern class GLBufferUsage
+	super GLEnum
+end
+
+# Data will be modified once and used a few times
+fun gl_STREAM_DRAW: GLBufferUsage `{ return GL_STREAM_DRAW; `}
+
+# Data will be modified once and used many times
+fun gl_STATIC_DRAW: GLBufferUsage `{ return GL_STATIC_DRAW; `}
+
+# Data will be modified repeatedly and used many times
+fun gl_DYNAMIC_DRAW: GLBufferUsage `{ return GL_DYNAMIC_DRAW; `}
+
 # Bind the named `buffer` object
 fun glBindBuffer(target: GLArrayBuffer, buffer: Int) `{ glBindBuffer(target, buffer); `}
 
@@ -967,11 +1023,11 @@ do
 	return a
 end
 
-private fun native_glGenFramebuffers(n: Int, textures: NativeCIntArray) `{
-	glGenFramebuffers(n, (GLuint *)textures);
+private fun native_glGenFramebuffers(n: Int, framebuffers: NativeCIntArray) `{
+	glGenFramebuffers(n, (GLuint *)framebuffers);
 `}
 
-# Determine if `name` corresponds to a framebuffer object
+# Does `name` corresponds to a framebuffer object?
 fun glIsFramebuffer(name: Int): Bool `{
 	return glIsFramebuffer(name);
 `}
