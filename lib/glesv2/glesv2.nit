@@ -450,11 +450,18 @@ class GLfloatArray
 	end
 
 	# Fill with the content of `array`
-	fun fill_from(array: Array[Float])
+	#
+	# If `dst_offset` is set, the data is copied to the index `dst_offset`,
+	# otherwise, it is copied the beginning of `self`.
+	#
+	# Require: `length >= array.length + dst_offset or else 0`
+	fun fill_from(array: Array[Float], dst_offset: nullable Int)
 	do
-		assert length >= array.length
+		dst_offset = dst_offset or else 0
+
+		assert length >= array.length + dst_offset
 		for k in [0..array.length[ do
-			self[k] = array[k]
+			self[dst_offset+k] = array[k]
 		end
 	end
 end

@@ -134,7 +134,7 @@ class TextSprites
 	#
 	# Defaults to `app::ui_sprites`, but it could also be set to a
 	# `app::sprites` or a custom collection.
-	var target_sprite_set: Sequence[Sprite] = app.ui_sprites is lazy, writable
+	var target_sprite_set: Set[Sprite] = app.ui_sprites is lazy, writable
 
 	private var cached_text: nullable Text = ""
 
