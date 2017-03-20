@@ -580,7 +580,16 @@ private class TypeVisitor
 				return mtypes.first
 			else
 				var res = merge_types(node,mtypes)
-				if res == null then res = variable.declared_type
+				if res == null then
+					res = variable.declared_type
+					# Try to fallback to a non-null version
+					if res != null and can_be_null(res) then do
+						for t in mtypes do
+							if t != null and can_be_null(t) then break label
+						end
+						res = res.as_notnull
+					end label
+				end
 				return res
 			end
 		end
@@ -600,6 +609,29 @@ private class TypeVisitor
 		flow.set_var(self, variable, mtype)
 	end
 
+	# Find the exact representable most specific common super-type in `col`.
+	#
+	# Try to find the most specific common type that is a super-type of each types
+	# in `col`.
+	# In most cases, the result is simply the most general type in `col`.
+	# If nullables types are involved, then the nullable information is correctly preserved.
+	# If incomparable super-types exists in `col`, them no solution is given and the `null`
+	# value is returned (since union types are non representable in Nit)
+	#
+	# The `null` values in `col` are ignored, nulltypes (MNullType) are considered.
+	#
+	# Returns the `null` value if:
+	#
+	# * `col` is empty
+	# * `col` only have null values
+	# * there is a conflict
+	#
+	# Example (with a diamond A,B,C,D):
+	#
+	# * merge(A,B,C) -> A, because A is the most general type in {A,B,C}
+	# * merge(C,B) -> null, there is conflict, because `B or C` cannot be represented
+	# * merge(A,nullable B) -> nullable A, because A is the most general type and
+	#   the nullable information is preserved
 	fun merge_types(node: ANode, col: Array[nullable MType]): nullable MType
 	do
 		if col.length == 1 then return col.first
@@ -620,6 +652,82 @@ private class TypeVisitor
 		end
 		#self.modelbuilder.warning(node, "Type Error: {col.length} conflicting types: <{col.join(", ")}>")
 		return null
+	end
+
+	# Find a most general common subtype between `type1` and `type2`.
+	#
+	# Find the most general type that is a subtype of `type2` and, if possible, a subtype of `type1`.
+	# Basically, this return the most specific type between `type1` and `type2`.
+	# If nullable types are involved, the information is correctly preserved.
+	# If `type1` and `type2` are incomparable then `type2` is preferred (since intersection types
+	# are not representable in Nit).
+	#
+	# The `null` value is returned if both `type1` and `type2` are null.
+	#
+	# Examples (with diamond A,B,C,D):
+	#
+	# * intersect_types(A,B) -> B, because B is a subtype of A
+	# * intersect_types(B,A) -> B, because B is a subtype of A
+	# * intersect_types(B,C) -> C, B and C are incomparable,
+	#   `type2` is then preferred (`B and C` cannot be represented)
+	# * intersect_types(nullable B,A) -> B, because B<:A and the non-null information is preserved
+	# * intersect_types(B,nullable C) -> C, `type2` is preferred and the non-null information is preserved
+	fun intersect_types(node: ANode, type1, type2: nullable MType): nullable MType
+	do
+		if type1 == null then return type2
+		if type2 == null then return type1
+
+		if not can_be_null(type2) or not can_be_null(type1) then
+			type1 = type1.as_notnull
+			type2 = type2.as_notnull
+		end
+
+		var res
+		if is_subtype(type1, type2) then
+			res = type1
+		else
+			res = type2
+		end
+		return res
+	end
+
+	# Find a most general type that is a subtype of `type1` but not one of `type2`.
+	#
+	# Basically, this returns `type1`-`type2` but since there is no substraction type
+	# in Nit this just returns `type1` most of the case.
+	#
+	# The few other cases are if `type2` is a super-type and if some nullable information
+	# is present.
+	#
+	# The `null` value is returned if `type1` is null.
+	#
+	# Examples (with diamond A,B,C,D):
+	#
+	# * diff_types(A,B) -> A, because the notB cannot be represented
+	# * diff_types(B,A) -> None (absurd type), because B<:A
+	# * diff_types(nullable A, nullable B) -> A, because null is removed
+	# * diff_types(nullable B, A) -> Null, because anything but null is removed
+	fun diff_types(node: ANode, type1, type2: nullable MType): nullable MType
+	do
+		if type1 == null then return null
+		if type2 == null then return type1
+
+		# if t1 <: t2 then t1-t2 = bottom
+		if is_subtype(type1, type2) then
+			return modelbuilder.model.null_type.as_notnull
+		end
+
+		# else if t1 <: nullable t2 then t1-t2 = nulltype
+		if is_subtype(type1, type2.as_nullable) then
+			return modelbuilder.model.null_type
+		end
+
+		# else t2 can be null and type2 must accept null then null is excluded in t1
+		if can_be_null(type1) and (type2 isa MNullableType or type2 isa MNullType) then
+			return type1.as_notnull
+		end
+
+		return type1
 	end
 end
 
@@ -1689,9 +1797,16 @@ redef class AIsaExpr
 			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
 
-			# Do not adapt if there is no information gain (i.e. adapt to a supertype)
-			if mtype == null or orig == null or not v.is_subtype(orig, mtype) then
-				self.after_flow_context.when_true.set_var(v, variable, mtype)
+			var thentype = v.intersect_types(self, orig, mtype)
+			if thentype != orig then
+				self.after_flow_context.when_true.set_var(v, variable, thentype)
+				#debug "{variable}:{orig or else "?"} isa {mtype or else "?"} -> then {thentype or else "?"}"
+			end
+
+			var elsetype = v.diff_types(self, orig, mtype)
+			if elsetype != orig then
+				self.after_flow_context.when_false.set_var(v, variable, elsetype)
+				#debug "{variable}:{orig or else "?"} isa {mtype or else "?"} -> else {elsetype or else "?"}"
 			end
 		end
 
