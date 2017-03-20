@@ -13,3 +13,4 @@
 # limitations under the License.
 
 print "NIT_TESTING".environ
+print "NIT_TESTING_TOOL".environ
