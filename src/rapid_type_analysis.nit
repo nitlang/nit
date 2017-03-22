@@ -64,7 +64,7 @@ class RapidTypeAnalysis
 
 	# The pool of undesolved live types
 	# They are globally resolved at the end of the analaysis
-	var live_open_types = new HashSet[MClassType]
+	private var live_open_types = new HashSet[MClassType]
 
 	# Live (instantiated) classes.
 	var live_classes = new HashSet[MClass]
@@ -74,7 +74,7 @@ class RapidTypeAnalysis
 
 	# The pool of undesolved types used to perform type checks (isa and as).
 	# They are globally resolved at the end of the analaysis
-	var live_open_cast_types = new HashSet[MType]
+	private var live_open_cast_types = new HashSet[MType]
 
 	# Live method definitions.
 	var live_methoddefs = new HashSet[MMethodDef]
