@@ -1,6 +1,7 @@
 # List of out-of-tree repositories
 # Format: repo name
 https://github.com/R4PaSs/brewnit.git brewnit
+https://gitlab.com/xymus/darpg.git darpg
 https://github.com/Morriar/Missions.git missions
 https://github.com/ppepos/pep8-dbg.git pep8dbg
 https://gitlab.com/xymus/sputnit.git sputnit
