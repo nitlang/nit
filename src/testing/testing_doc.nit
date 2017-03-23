@@ -263,7 +263,7 @@ class NitUnitExecutor
 		f.write("# GENERATED FILE\n")
 		f.write("# Docunits extracted from comments\n")
 		if mmodule != null then
-			f.write("import {mmodule.name}\n")
+			f.write("intrude import {mmodule.name}\n")
 		end
 		f.write("\n")
 		return f
