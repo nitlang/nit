@@ -61,7 +61,7 @@ redef class App
 	# ---
 	# Background
 
-	private var city_texture = new Texture("textures/city_background_clean.png")
+	private var city_texture = new TextureAsset("textures/city_background_clean.png")
 
 	private var stars_texture = new Texture("textures/stars.jpg")
 	private var stars = new Sprite(stars_texture, new Point3d[Float](0.0, 1100.0, -600.0)) is lazy
@@ -146,6 +146,7 @@ redef class App
 		stars.scale = 2.1
 
 		# City background
+		city_texture.pixelated = true
 		var city_sprite = new Sprite(city_texture, new Point3d[Float](0.0, 370.0, -600.0))
 		city_sprite.scale = 0.8
 		sprites.add city_sprite
@@ -165,11 +166,12 @@ redef class App
 		actors.add ground
 
 		# Trees
-		for i in 1000.times do
+		for i in 2000.times do
 			var s = 0.1 + 0.1.rand
 			var h = tree_texture.height * s
 			var sprite = new Sprite(tree_texture,
 				new Point3d[Float](0.0 & 1500.0, h/2.0 - 10.0*s, 10.0 - 609.0.rand))
+			sprite.static = true
 			sprite.scale = s
 			sprites.add sprite
 
@@ -269,6 +271,7 @@ redef class App
 			player.moving = 0.0
 			if pressed_keys.has("left") then player.moving -= 1.0
 			if pressed_keys.has("right") then player.moving += 1.0
+			player.sprite.as(PlayerSprite).update
 		end
 
 		# Try to fire as long as a key is pressed
@@ -350,9 +353,11 @@ redef class App
 		var s = super
 
 		if event isa QuitEvent then
+			print perfs
 			exit 0
 		else if event isa KeyEvent then
 			if event.name == "escape" and event.is_down then
+				print perfs
 				exit 0
 			end
 
@@ -631,16 +636,15 @@ class PlayerSprite
 	# Stop the running animation
 	fun stop_running do current_animation = null
 
-	redef fun texture
+	# Update `texture` from `current_animation`
+	fun update
 	do
 		var anim = current_animation
 		if anim != null then
 			var dt = app.world.t - anim_ot
 			var i = (dt / time_per_frame).to_i+2
-			return anim.modulo(i)
+			texture = anim.modulo(i)
 		end
-
-		return super
 	end
 end
 
