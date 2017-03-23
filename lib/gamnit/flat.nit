@@ -110,6 +110,36 @@ class Sprite
 		scale_direct = value
 	end
 
+	# Red tint applied to `texture` on draw
+	fun red: Float do return tint[0]
+
+	# Red tint applied to `texture` on draw
+	fun red=(value: Float)
+	do
+		if isset _tint and value != red then needs_update
+		tint[0] = value
+	end
+
+	# Green tint applied to `texture` on draw
+	fun green: Float do return tint[1]
+
+	# Green tint applied to `texture` on draw
+	fun green=(value: Float)
+	do
+		if isset _tint and value != green then needs_update
+		tint[1] = value
+	end
+
+	# Blue tint applied to `texture` on draw
+	fun blue: Float do return tint[2]
+
+	# Blue tint applied to `texture` on draw
+	fun blue=(value: Float)
+	do
+		if isset _tint and value != blue then needs_update
+		tint[2] = value
+	end
+
 	# Transparency applied to `texture` on draw
 	fun alpha: Float do return tint[3]
 
