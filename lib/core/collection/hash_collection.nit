@@ -21,7 +21,7 @@ redef class Map[K, V]
 end
 
 redef class Set[E]
-	# Get an instance of `HashMap[K, V]`, the default implementation
+	# Get an instance of `HashSet[E]`, the default implementation
 	new do return new HashSet[E]
 end
 
