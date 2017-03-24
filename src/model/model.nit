@@ -898,7 +898,7 @@ abstract class MType
 	#
 	# Explanation of the example:
 	# In H, T is set to B, because "H super G[B]", and U is bound to Y,
-        # because "redef type U: Y". Therefore, Map[T, U] is bound to
+	# because "redef type U: Y". Therefore, Map[T, U] is bound to
 	# Map[B, Y]
 	#
 	# ENSURE: `not self.need_anchor implies result == self`
