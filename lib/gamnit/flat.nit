@@ -654,6 +654,7 @@ private class SpriteSet
 
 	redef fun add(e)
 	do
+		if contexts_items.has(e.context) then return
 		map_sprite e
 		super
 	end
@@ -662,6 +663,12 @@ private class SpriteSet
 	do
 		super
 		if e isa Sprite then unmap_sprite e
+	end
+
+	redef fun remove_all(e)
+	do
+		if not has(e) then return
+		remove e
 	end
 
 	redef fun clear
