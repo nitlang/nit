@@ -81,11 +81,6 @@ private class TypeVisitor
 
 	fun anchor_to(mtype: MType): MType
 	do
-		var anchor = anchor
-		if anchor == null then
-			assert not mtype.need_anchor
-			return mtype
-		end
 		return mtype.anchor_to(mmodule, anchor)
 	end
 
