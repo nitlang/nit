@@ -904,12 +904,13 @@ abstract class MType
 	# because "redef type U: Y". Therefore, Map[T, U] is bound to
 	# Map[B, Y]
 	#
+	# REQUIRE: `self.need_anchor implies anchor != null`
 	# ENSURE: `not self.need_anchor implies result == self`
 	# ENSURE: `not result.need_anchor`
-	fun anchor_to(mmodule: MModule, anchor: MClassType): MType
+	fun anchor_to(mmodule: MModule, anchor: nullable MClassType): MType
 	do
 		if not need_anchor then return self
-		assert not anchor.need_anchor
+		assert anchor != null and not anchor.need_anchor
 		# Just resolve to the anchor and clear all the virtual types
 		var res = self.resolve_for(anchor, null, mmodule, true)
 		assert not res.need_anchor
@@ -1220,7 +1221,7 @@ class MClassType
 
 	redef fun need_anchor do return false
 
-	redef fun anchor_to(mmodule: MModule, anchor: MClassType): MClassType
+	redef fun anchor_to(mmodule, anchor): MClassType
 	do
 		return super.as(MClassType)
 	end
