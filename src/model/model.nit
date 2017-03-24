@@ -1136,6 +1136,7 @@ abstract class MType
 	# * H[G[A], B] -> 3
 	#
 	# Formal types have a depth of 1.
+	# Only `MClassType` and `MFormalType` nodes are counted.
 	fun depth: Int
 	do
 		return 1
@@ -1149,6 +1150,7 @@ abstract class MType
 	# * H[G[A], B] -> 4
 	#
 	# Formal types have a length of 1.
+	# Only `MClassType` and `MFormalType` nodes are counted.
 	fun length: Int
 	do
 		return 1
