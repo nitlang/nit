@@ -1405,7 +1405,7 @@ class SeparateCompilerVisitor
 		var res: nullable RuntimeVariable = null
 		var recv = arguments.first
 		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_null.value or mmethod.name == "==" or mmethod.name == "!="
-		if maybenull(recv) and consider_null then
+		if maybe_null(recv) and consider_null then
 			self.add("if ({recv} == NULL) \{")
 			if mmethod.name == "==" or mmethod.name == "is_same_instance" then
 				res = self.new_var(bool_type)
@@ -2059,12 +2059,6 @@ class SeparateCompilerVisitor
 		if not t isa MClassType then return false
 		var k = t.mclass.kind
 		return k == interface_kind or t.is_c_primitive
-	end
-
-	fun maybe_null(value: RuntimeVariable): Bool
-	do
-		var t = value.mcasttype
-		return t isa MNullableType or t isa MNullType
 	end
 
 	redef fun array_instance(array, elttype)
