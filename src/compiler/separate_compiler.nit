@@ -1410,20 +1410,20 @@ class SeparateCompilerVisitor
 			if mmethod.name == "==" or mmethod.name == "is_same_instance" then
 				res = self.new_var(bool_type)
 				var arg = arguments[1]
-				if arg.mcasttype isa MNullableType then
-					self.add("{res} = ({arg} == NULL);")
-				else if arg.mcasttype isa MNullType then
+				if arg.mcasttype isa MNullType then
 					self.add("{res} = 1; /* is null */")
+				else if arg.mcasttype.can_be_null(compiler.mainmodule) then
+					self.add("{res} = ({arg} == NULL);")
 				else
 					self.add("{res} = 0; /* {arg.inspect} cannot be null */")
 				end
 			else if mmethod.name == "!=" then
 				res = self.new_var(bool_type)
 				var arg = arguments[1]
-				if arg.mcasttype isa MNullableType then
-					self.add("{res} = ({arg} != NULL);")
-				else if arg.mcasttype isa MNullType then
+				if arg.mcasttype isa MNullType then
 					self.add("{res} = 0; /* is null */")
+				else if arg.mcasttype.can_be_null(compiler.mainmodule) then
+					self.add("{res} = ({arg} != NULL);")
 				else
 					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
 				end
@@ -1924,10 +1924,10 @@ class SeparateCompilerVisitor
 			var tests = new Array[String]
 
 			var t2 = value2.mcasttype
-			if t2 isa MNullableType then
+			if t2.can_be_null(compiler.mainmodule) then
 				# The destination type cannot be null
 				tests.add("({value2} != NULL)")
-				t2 = t2.mtype
+				t2 = t2.as_notnull
 			else if t2 isa MNullType then
 				# `value2` is known to be null, thus incompatible with a primitive
 				self.add("{res} = 0; /* incompatible types {t1} vs. {t2}*/")
@@ -1963,16 +1963,16 @@ class SeparateCompilerVisitor
 		var maybe_null = true
 		var test = new Array[String]
 		var t1 = value1.mcasttype
-		if t1 isa MNullableType then
+		if t1.can_be_null(compiler.mainmodule) then
 			test.add("{value1} != NULL")
-			t1 = t1.mtype
+			t1 = t1.as_notnull
 		else
 			maybe_null = false
 		end
 		var t2 = value2.mcasttype
-		if t2 isa MNullableType then
+		if t2.can_be_null(compiler.mainmodule) then
 			test.add("{value2} != NULL")
-			t2 = t2.mtype
+			t2 = t2.as_notnull
 		else
 			maybe_null = false
 		end
