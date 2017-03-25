@@ -1466,7 +1466,7 @@ abstract class AbstractCompilerVisitor
 	# Can value be null? (according to current knowledge)
 	fun maybe_null(value: RuntimeVariable): Bool
 	do
-		return value.mcasttype isa MNullableType or value.mcasttype isa MNullType
+		return value.mcasttype.can_be_null(compiler.mainmodule, null)
 	end
 
 	# Add a check and an abort for a null receiver if needed
