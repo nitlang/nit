@@ -103,6 +103,9 @@ redef class Model
 	# The only null type
 	var null_type = new MNullType(self)
 
+	# The only bottom type
+	var bottom_type: MBottomType = null_type.as_notnull
+
 	# Build an ordered tree with from `concerns`
 	fun concerns_tree(mconcerns: Collection[MConcern]): ConcernsTree do
 		var seen = new HashSet[MConcern]
@@ -1811,7 +1814,7 @@ class MNullType
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 
-	redef var as_notnull = new MBottomType(model) is lazy
+	redef var as_notnull: MBottomType = new MBottomType(model) is lazy
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
