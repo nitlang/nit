@@ -651,11 +651,6 @@ private class TypeVisitor
 		if type1 == null then return type2
 		if type2 == null then return type1
 
-		if not can_be_null(type2) or not can_be_null(type1) then
-			type1 = type1.as_notnull
-			type2 = type2.as_notnull
-		end
-
 		return type1.intersection(type2, mmodule, anchor)
 	end
 
