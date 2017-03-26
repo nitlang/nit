@@ -1157,6 +1157,15 @@ abstract class MType
 		var type1 = self
 		var type2 = other
 
+		# Merge to the subtype, if applicable.
+		# TODO: Do something smarter when `anchor == null`.
+		if anchor != null or not (type1.need_anchor or type2.need_anchor) then
+			if type1.is_subtype(mmodule, anchor, type2) then
+				return type1
+			else if type2.is_subtype(mmodule, anchor, type1) then
+				return type2
+			end
+		end
 		return type1.cache_intersection(type2, mmodule)
 	end
 
