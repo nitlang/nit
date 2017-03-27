@@ -566,7 +566,12 @@ class MClass
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
 
-	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+	redef fun mdoc_or_fallback
+	do
+		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
+		# recursion.
+		return intro.mdoc
+	end
 end
 
 
@@ -725,6 +730,8 @@ class MClassDef
 
 	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
 	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
+
+	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 end
 
 # A global static type
@@ -1295,6 +1302,7 @@ class MClassType
 	private var collect_mclasses_cache = new HashMap[MModule, Set[MClass]]
 	private var collect_mtypes_cache = new HashMap[MModule, Set[MClassType]]
 
+	redef fun mdoc_or_fallback do return mclass.mdoc_or_fallback
 end
 
 # A type based on a generic class.
@@ -1525,6 +1533,8 @@ class MVirtualType
 	redef fun full_name do return self.mproperty.full_name
 
 	redef fun c_name do return self.mproperty.c_name
+
+	redef fun mdoc_or_fallback do return mproperty.mdoc_or_fallback
 end
 
 # The type associated to a formal parameter generic type of a class
@@ -2049,7 +2059,12 @@ abstract class MProperty
 
 	redef var location
 
-	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+	redef fun mdoc_or_fallback
+	do
+		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
+		# recursion.
+		return intro.mdoc
+	end
 
 	# The canonical name of the property.
 	#
@@ -2471,6 +2486,8 @@ abstract class MPropDef
 		assert has_next_property: i.is_ok
 		return i.item
 	end
+
+	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
 end
 
 # A local definition of a method
