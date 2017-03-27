@@ -115,5 +115,12 @@ end
 # The running `App`
 fun app: App do return once new App
 
+# Platform bound at compilation (by importation or -m)
+#
+# This value should not be used to decide the behavior of the software.
+# Class refinement provide a safer and a static solution to apply variations.
+# However, this value can be used in log files and communications with servers.
+fun bound_platform: String do return "none"
+
 app.setup
 app.run

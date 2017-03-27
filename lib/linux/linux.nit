@@ -60,3 +60,5 @@ redef class TextAsset
 		return content
 	end
 end
+
+redef fun bound_platform do return "GNU/Linux"

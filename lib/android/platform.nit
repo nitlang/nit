@@ -20,3 +20,5 @@ module platform is platform "android"
 import java
 import app
 import aware
+
+redef fun bound_platform do return "Android"
