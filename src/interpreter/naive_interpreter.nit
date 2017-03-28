@@ -749,7 +749,7 @@ class MutableInstance
 end
 
 # Special instance to handle primitives values (int, bool, etc.)
-# The trick it just to encapsulate the <<real>> value
+# The trick is just to encapsulate the “real” value.
 class PrimitiveInstance[E]
 	super Instance
 
