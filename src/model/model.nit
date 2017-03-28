@@ -103,6 +103,9 @@ redef class Model
 	# The only null type
 	var null_type = new MNullType(self)
 
+	# The only bottom type
+	var bottom_type: MBottomType = null_type.as_notnull
+
 	# Build an ordered tree with from `concerns`
 	fun concerns_tree(mconcerns: Collection[MConcern]): ConcernsTree do
 		var seen = new HashSet[MConcern]
@@ -905,15 +908,16 @@ abstract class MType
 	#
 	# Explanation of the example:
 	# In H, T is set to B, because "H super G[B]", and U is bound to Y,
-        # because "redef type U: Y". Therefore, Map[T, U] is bound to
+	# because "redef type U: Y". Therefore, Map[T, U] is bound to
 	# Map[B, Y]
 	#
+	# REQUIRE: `self.need_anchor implies anchor != null`
 	# ENSURE: `not self.need_anchor implies result == self`
 	# ENSURE: `not result.need_anchor`
-	fun anchor_to(mmodule: MModule, anchor: MClassType): MType
+	fun anchor_to(mmodule: MModule, anchor: nullable MClassType): MType
 	do
 		if not need_anchor then return self
-		assert not anchor.need_anchor
+		assert anchor != null and not anchor.need_anchor
 		# Just resolve to the anchor and clear all the virtual types
 		var res = self.resolve_for(anchor, null, mmodule, true)
 		assert not res.need_anchor
@@ -1143,6 +1147,7 @@ abstract class MType
 	# * H[G[A], B] -> 3
 	#
 	# Formal types have a depth of 1.
+	# Only `MClassType` and `MFormalType` nodes are counted.
 	fun depth: Int
 	do
 		return 1
@@ -1156,6 +1161,7 @@ abstract class MType
 	# * H[G[A], B] -> 4
 	#
 	# Formal types have a length of 1.
+	# Only `MClassType` and `MFormalType` nodes are counted.
 	fun length: Int
 	do
 		return 1
@@ -1222,7 +1228,7 @@ class MClassType
 
 	redef fun need_anchor do return false
 
-	redef fun anchor_to(mmodule: MModule, anchor: MClassType): MClassType
+	redef fun anchor_to(mmodule, anchor): MClassType
 	do
 		return super.as(MClassType)
 	end
@@ -1819,7 +1825,7 @@ class MNullType
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 
-	redef var as_notnull = new MBottomType(model) is lazy
+	redef var as_notnull: MBottomType = new MBottomType(model) is lazy
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true

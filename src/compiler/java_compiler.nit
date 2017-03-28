@@ -1301,7 +1301,7 @@ redef class MType
 
 	# Is the associated Java type a primitive one?
 	#
-	# ENSURE `result == (java_type != "Object")`
+	# ENSURE `result == (java_type != "RTVal")`
 	var is_java_primitive: Bool is lazy do return java_type != "RTVal"
 end
 
