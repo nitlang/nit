@@ -691,9 +691,10 @@ abstract class Instance
 	# ASSERT: not self.mtype.is_anchored
 	var mtype: MType
 
-	# return true if the instance is the true value.
-	# return false if the instance is the true value.
-	# else aborts
+	# Return `true` if the instance is the `true` value.
+	#
+	# Return `false` if the instance is the `false` value.
+	# Abort if the instance is not a boolean value.
 	fun is_true: Bool do abort
 
 	# Return true if `self` IS `o` (using the Nit semantic of is)
