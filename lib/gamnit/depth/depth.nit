@@ -52,19 +52,26 @@ redef class App
 		normals_program.use
 		normals_program.mvp.uniform app.world_camera.mvp_matrix
 
+		frame_core_depth_clock.lapse
 		for actor in actors do
 			for leaf in actor.model.leaves do
 				leaf.material.draw(actor, leaf)
 			end
 		end
+		perfs["gamnit depth actors"].add frame_core_depth_clock.lapse
 
 		frame_core_world_sprites display
+		perfs["gamnit depth sprites"].add frame_core_depth_clock.lapse
 
 		# Toggle writing to the depth buffer for particles effects
 		glDepthMask false
 		for system in particle_systems do system.draw
 		glDepthMask true
+		perfs["gamnit depth particles"].add frame_core_depth_clock.lapse
 
 		frame_core_ui_sprites display
+		perfs["gamnit depth ui_sprites"].add frame_core_depth_clock.lapse
 	end
+
+	private var frame_core_depth_clock = new Clock
 end

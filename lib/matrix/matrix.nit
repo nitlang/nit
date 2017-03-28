@@ -28,7 +28,7 @@ class Matrix
 	var height: Int
 
 	# Items of this matrix, rows by rows
-	private var items: Array[Float] is lazy	do
+	var items: Array[Float] is lazy	do
 		return new Array[Float].filled_with(0.0, width*height)
 	end
 
