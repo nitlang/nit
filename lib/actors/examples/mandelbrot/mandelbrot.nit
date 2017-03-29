@@ -34,7 +34,7 @@ class Worker
 			var zi2 = cib[y]
 
 			var b = 0
-			for j in [0..49[ do
+			for j in [0..nb_rounds[ do
 				var nzr1 = zr1 * zr1 - zi1 * zi1 + crb[x+i]
 				var nzi1 = zr1 * zi1 + zr1 * zi1 + cib[y]
 				zr1 = nzr1
@@ -62,11 +62,7 @@ class Worker
 		var line = 0
 		loop
 			line = atomic.get_and_increment
-			if line < n then
-				put_line(line, data[line])
-			else
-				break
-			end
+			if line < n then put_line(line, data[line]) else break
 		end
 	end
 end
@@ -79,23 +75,22 @@ redef class Sys
 	var cib: Array[Float] is noautoinit
 	var atomic = new AtomicInt(0)
 	var nb_threads = 8
+	# How many time do we iterate before deciding if the number
+	# is in the mandelbrot set or not
+	var nb_rounds  = 49
 end
 
-if args.is_empty then
-	n = 200
-else
-	n = args[0].to_i
-end
+n = if args.is_empty then 200 else args[0].to_i
 
-sys.crb = new Array[Float].with_capacity(n + 7)
-sys.cib = new Array[Float].with_capacity(n + 7)
+sys.crb = new Array[Float].with_capacity(n)
+sys.cib = new Array[Float].with_capacity(n)
 sys.inv_n = 2.0 / n.to_f
 for i in [0..n[ do
 	sys.cib[i] = i.to_f * inv_n - 1.0
 	sys.crb[i] = i.to_f * inv_n - 1.5
 end
 sys.data = new Array[Array[Byte]].with_capacity(n)
-for i in [0..n[ do sys.data[i] = new Array[Byte].filled_with(0.to_b, (n + 7) / 8)
+for i in [0..n[ do sys.data[i] = new Array[Byte].filled_with(0.to_b, (n) / 8)
 
 # Parallel Approach
 var actors = new Array[Worker]
