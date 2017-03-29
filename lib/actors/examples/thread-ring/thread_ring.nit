@@ -33,26 +33,24 @@ class ThreadRing
 
 	# Receive a token, then send it to `next` unless its value is `0`
 	fun send_token(message: Int) do
-		if message == 0 then
-			print id
-		end
-		if message >= 1 then
-			next.async.send_token(message - 1)
-		end
+		if message == 0 then print id
+		if message >= 1 then next.async.send_token(message - 1)
 	end
+end
+
+redef class Sys
+	# numbers of actors to create the ring
+	var nb_actors = 503
 end
 
 var first = new ThreadRing(1)
 var current = new ThreadRing(2)
 first.next = current
-for i in [3..503] do
+for i in [3..nb_actors] do
 	var t = new ThreadRing(i)
 	current.next = t
 	current = t
 end
 current.next = first
-if args.is_empty then
-	first.send_token(1000)
-else
-	first.send_token(args[0].to_i)
-end
+var n = if args.is_empty then 1000 else args[0].to_i
+first.send_token(n)
