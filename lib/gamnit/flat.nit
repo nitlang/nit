@@ -41,6 +41,7 @@ import performance_analysis
 
 import gamnit
 import gamnit::cameras
+import gamnit::dynamic_resolution
 import gamnit::limit_fps
 
 import android_two_fingers_motion is conditional(android)
@@ -355,13 +356,16 @@ redef class App
 	# Draw the whole screen, all `glDraw...` calls should be executed here
 	protected fun frame_core_draw(display: GamnitDisplay)
 	do
-		perf_clock_main.lapse
+		frame_core_dynamic_resolution_before display
 
+		perf_clock_main.lapse
 		frame_core_world_sprites display
 		perfs["gamnit flat world_sprites"].add perf_clock_main.lapse
 
 		frame_core_ui_sprites display
 		perfs["gamnit flat ui_sprites"].add perf_clock_main.lapse
+
+		frame_core_dynamic_resolution_after display
 	end
 
 	private fun frame_core_sprites(display: GamnitDisplay, sprite_set: SpriteSet, camera: Camera)

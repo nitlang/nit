@@ -45,6 +45,8 @@ redef class App
 	# Draw all elements of `actors` and then call `frame_core_flat`
 	protected fun frame_core_depth(display: GamnitDisplay)
 	do
+		frame_core_dynamic_resolution_before display
+
 		# Update cameras on both our programs
 		versatile_program.use
 		versatile_program.mvp.uniform world_camera.mvp_matrix
@@ -71,6 +73,8 @@ redef class App
 
 		frame_core_ui_sprites display
 		perfs["gamnit depth ui_sprites"].add frame_core_depth_clock.lapse
+
+		frame_core_dynamic_resolution_after display
 	end
 
 	private var frame_core_depth_clock = new Clock
