@@ -752,7 +752,7 @@ fun gl_RGBA4: GLRenderbufferFormat `{ return GL_RGBA4; `}
 fun gl_RGB565: GLRenderbufferFormat `{ return GL_RGB565; `}
 
 # 5 red, 5 green, 5 blue, 1 alpha bits format
-fun gl_RGB_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
+fun gl_RGB5_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
 
 # 16 depth bits format
 fun gl_DEPTH_COMPNENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
@@ -917,7 +917,7 @@ fun glDeleteBuffers(buffers: SequenceRead[Int])
 do
 	var n = buffers.length
 	var array = new CIntArray.from(buffers)
-	native_glDeleteFramebuffers(n, array.native_array)
+	native_glDeleteBuffers(n, array.native_array)
 	array.destroy
 end
 
