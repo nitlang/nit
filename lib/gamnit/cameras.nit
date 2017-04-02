@@ -234,7 +234,7 @@ class UICamera
 
 		var wx = x.to_f * width / display.width.to_f - position.x
 		var wy = y.to_f * height / display.height.to_f - position.y
-		return new Point[Float](wx, wy)
+		return new Point[Float](wx, -wy)
 	end
 
 	# Center of the screen, from the point of view of the camera, at z = 0
