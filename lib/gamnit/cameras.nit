@@ -240,16 +240,28 @@ class UICamera
 	# Center of the screen, from the point of view of the camera, at z = 0
 	fun center: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y - height / 2.0, 0.0)
 
-	# Anchor in the top left corner of the screen, at z = 0
+	# Center of the top of the screen, at z = 0
+	fun top: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y, 0.0)
+
+	# Center of the bottom of the screen, at z = 0
+	fun bottom: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y - height, 0.0)
+
+	# Center of the left border of the screen, at z = 0
+	fun left: Point3d[Float] do return new Point3d[Float](position.x, position.y - height / 2.0, 0.0)
+
+	# Center of the right border of the screen, at z = 0
+	fun right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height / 2.0, 0.0)
+
+	# Top left corner of the screen, at z = 0
 	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
 
-	# Anchor in the top right corner of the screen, at z = 0
+	# Top right corner of the screen, at z = 0
 	fun top_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y, 0.0)
 
-	# Anchor in the bottom left corner of the screen, at z = 0
+	# Bottom left corner of the screen, at z = 0
 	fun bottom_left: Point3d[Float] do return new Point3d[Float](position.x, position.y - height, 0.0)
 
-	# Anchor in the bottom right corner of the screen, at z = 0
+	# Bottom right corner of the screen, at z = 0
 	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height, 0.0)
 
 	# TODO cache the anchors and the matrix
