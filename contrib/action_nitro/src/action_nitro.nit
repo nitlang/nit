@@ -12,7 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module action_nitro
+module action_nitro is
+	app_name "Action Nitro"
+	app_namespace "net.xymus.action_nitro"
+	app_version(1, 0, git_revision)
+
+	android_manifest_activity """android:screenOrientation="sensorLandscape""""
+	android_api_target 15
+end
 
 import gamnit::depth
 import gamnit::keys
@@ -32,7 +39,7 @@ redef class App
 	# Game world assets
 
 	# Textures of the biplane, jet, helicopter, parachute and powerups
-	private var planes_sheet = new PlanesImages
+	var planes_sheet = new PlanesImages
 
 	# Animation for the player movement
 	private var player_textures: Array[Texture] =
