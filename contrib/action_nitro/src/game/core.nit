@@ -238,7 +238,7 @@ abstract class Body
 	end
 
 	# Destroy this objects and most references to it
-	protected fun destroy(world: World) do end
+	fun destroy(world: World) do end
 
 	# ---
 	# Box services
