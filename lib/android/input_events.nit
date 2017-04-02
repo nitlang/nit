@@ -200,7 +200,7 @@ class AndroidPointerEvent
 		motion_event.just_went_down
 
 	# Unique id of this pointer since the beginning of the gesture
-	fun pointer_id: Int do return native_pointer_id(motion_event.native, pointer_index)
+	redef fun pointer_id do return native_pointer_id(motion_event.native, pointer_index)
 
 	private fun native_pointer_id(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Int `{
 		return AMotionEvent_getPointerId(motion_event, pointer_index);
