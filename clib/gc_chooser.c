@@ -127,7 +127,7 @@ void initialize_gc_option(void) {
 
 void gc_register_finalizer(void* obj) {
 #ifdef WITH_LIBGC
-	GC_register_finalizer(obj, &gc_finalize, NULL, NULL, NULL);
+	GC_register_finalizer_no_order(obj, &gc_finalize, NULL, NULL, NULL);
 #endif
 }
 
