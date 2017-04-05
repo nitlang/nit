@@ -67,7 +67,7 @@ class MeetingPlace
 				firstid = id
 				current = new Future[Pair]
 			else
-				var color = complement(c, firstcolor.as(not null))
+				var color = complements[c][firstcolor.as(not null)]
 				current.set_value(new Pair(id == firstid, color))
 				firstcolor = null
 				meetings_left -= 1
@@ -85,35 +85,11 @@ redef class Sys
 	fun yellow: Int do return 2
 	var numbers: Array[String] = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 	var colors: Array[String] = ["blue", "red", "yellow"]
-end
+	# Matrix for complementing colors
+	var complements: Array[Array[Int]] = [[0, 2, 1],
+	                                      [2, 1, 0],
+	                                      [1, 0, 2]]
 
-fun complement(c, other: Int): Int do
-	if c == blue then
-		if other == blue then
-			return blue
-		else if other == red then
-			return yellow
-		else if other == yellow then
-			return red
-		end
-	else if c == red then
-		if other == blue then
-			return yellow
-		else if other == red then
-			return red
-		else if other == yellow then
-			return blue
-		end
-	else if c == yellow then
-		if other == blue then
-			return red
-		else if other == red then
-			return blue
-		else if other == yellow then
-			return yellow
-		end
-	end
-	abort
 end
 
 fun print_all_colors do
@@ -129,7 +105,7 @@ fun print_all_colors do
 end
 
 fun print_colors(c1, c2: Int) do
-	print colors[c1] + " + " + colors[c2] + " -> " + colors[complement(c1, c2)]
+	print colors[c1] + " + " + colors[c2] + " -> " + colors[complements[c1][c2]]
 end
 
 fun get_number(n: Int): String do
@@ -169,12 +145,7 @@ fun work(n, nb_colors : Int ) do
 	end
 end
 
-var n = 0
-if args.is_empty then
-	n = 600
-else
-	n = args[0].to_i
-end
+var n = if args.is_empty then 600 else args[0].to_i
 
 print_all_colors
 print ""

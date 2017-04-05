@@ -36,22 +36,14 @@ class FannkuchRedux
 	fun first_permutation(idx: Int) do
 		for i in [0..p.length[ do p[i] = i
 
-		var i = count.length - 1
-		while i > 0 do
+		for i in [0..count.length[.reverse_iterator do
 			var d = idx / fact[i]
 			count[i] = d
 			idx = idx % fact[i]
 
 			p.copy_to(0, i+1, pp, 0)
 
-			for j in [0..i] do
-				if j + d <= i then
-					p[j] = pp[j+d]
-				else
-					p[j] = pp[j+d-i-1]
-				end
-			end
-			i -= 1
+			for j in [0..i] do p[j] = if j + d <= i then pp[j+d] else pp[j+d-i-1]
 		end
 	end
 
@@ -82,8 +74,7 @@ class FannkuchRedux
 		var first = p[0]
 		if p[first] != 0 then
 			p.copy_to(0, pp.length, pp, 0)
-			loop
-
+			while pp[first] != 0 do
 				flips += 1
 				var lo = 1
 				var hi = first - 1
@@ -97,8 +88,6 @@ class FannkuchRedux
 				var t = pp[first]
 				pp[first] = first
 				first = t
-
-				if pp[first] == 0 then break
 			end
 		end
 		return flips
@@ -113,21 +102,13 @@ class FannkuchRedux
 		var maxflips = 1
 		var chk_sum = 0
 
-		var i = idx_min
-		loop
+		for i in [idx_min..idx_max[ do
 			if p[0] != 0 then
 				var flips = count_flips
 				maxflips = maxflips.max(flips)
-				if i % 2 == 0 then
-					chk_sum += flips
-				else
-					chk_sum += -flips
-				end
+				chk_sum += if i % 2 == 0 then flips else -flips
 			end
-
-			i += 1
-			if i == idx_max then break
-			next_permutation
+			if i + 1 != idx_max then next_permutation
 		end
 
 		max_flips[task] = maxflips
@@ -145,11 +126,7 @@ class FannkuchRedux
 		var task = 0
 		loop
 			task = task_id.get_and_increment
-			if task < n_tasks then
-				run_task(task)
-			else
-				break
-			end
+			if task < n_tasks then run_task(task) else break
 		end
 	end
 end
@@ -171,11 +148,7 @@ fun print_result(n, res, chk: Int) do
 
 end
 
-if args.is_empty then
-	n = 7
-else
-	n = args[0].to_i
-end
+n = if args.is_empty then 7 else args[0].to_i
 
 fact = new Array[Int].with_capacity(n+1)
 fact[0] = 1
@@ -188,7 +161,7 @@ for i in [0..n_tasks[ do max_flips.add(0)
 chk_sums = new Array[Int].with_capacity(n_tasks)
 for i in [0..n_tasks[ do chk_sums.add(0)
 
-var actors = new Array[FannkuchRedux].with_capacity(8)
+var actors = new Array[FannkuchRedux].with_capacity(nb_actors)
 for i in [0..nb_actors[ do
 	var a = new FannkuchRedux
 	actors.add(a)
