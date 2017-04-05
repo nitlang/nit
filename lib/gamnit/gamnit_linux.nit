@@ -56,6 +56,10 @@ redef class SDLMouseEvent
 	redef fun to_gamnit_event(buffer) do return new GamnitPointerEvent(buffer, self)
 end
 
+redef class SDLMouseWheelEvent
+	redef fun to_gamnit_event(buffer) do return new GamnitMouseWheelEvent(buffer, self)
+end
+
 redef class SDLKeyboardEvent
 	redef fun to_gamnit_event(buffer) do return new GamnitKeyEvent(buffer, self)
 end
@@ -124,6 +128,19 @@ class GamnitPointerEvent
 			return native.state & 1 == 1
 		else abort
 	end
+end
+
+# Event on mouse wheel input
+class GamnitMouseWheelEvent
+	super GamnitInputEvent
+
+	redef type NATIVE: SDLMouseWheelEvent
+
+	# Horizontal scroll amount
+	fun x: Float do return native.x.to_f
+
+	# Vertical scroll amount
+	fun y: Float do return native.y.to_f
 end
 
 # SDL2 event not handled by gamnit

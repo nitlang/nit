@@ -47,6 +47,7 @@ extern class SDLEventBuffer `{SDL_Event *`}
 		if is_mouse_motion then return to_mouse_motion
 		if is_mouse_button_down then return to_mouse_button_down
 		if is_mouse_button_up then return to_mouse_button_up
+		if is_mouse_wheel then return to_mouse_wheel
 		if is_keydown then return to_keydown
 		if is_keyup then return to_keyup
 		return to_event_direct
@@ -86,6 +87,14 @@ extern class SDLEventBuffer `{SDL_Event *`}
 	# Require: `is_mouse_button_up`
 	fun to_mouse_button_up: SDLMouseButtonUpEvent `{ return self; `}
 
+	# Is this a mouse wheel event?
+	fun is_mouse_wheel: Bool `{ return self->type == SDL_MOUSEWHEEL; `}
+
+	# Get a reference to data at `self` as a `SDLMouseWheelEvent`
+	#
+	# Require: `is_mouse_wheel`
+	fun to_mouse_wheel: SDLMouseWheelEvent `{ return self; `}
+
 	# Is this a key presse event?
 	fun is_keydown: Bool `{ return self->type == SDL_KEYDOWN; `}
 
@@ -108,7 +117,6 @@ extern class SDLEventBuffer `{SDL_Event *`}
 	# SDL_WindowEvent window
 	# SDL_TextEditingEvent edit
 	# SDL_TextInputEvent text
-	# SDL_MouseWheelEvent wheel
 	# SDL_JoyAxisEvent jaxis
 	# SDL_JoyBallEvent jball
 	# SDL_JoyHatEvent jhat;
@@ -212,6 +220,17 @@ end
 # Mouse button click event
 extern class SDLMouseButtonDownEvent
 	super SDLMouseButtonEvent
+end
+
+# Mouse wheel event
+extern class SDLMouseWheelEvent
+	super SDLEvent
+
+	# Horizontal scroll amount
+	fun x: Int `{ return self->wheel.x; `}
+
+	# Vertical scroll amount
+	fun y: Int `{ return self->wheel.y; `}
 end
 
 # Keyboard button event
