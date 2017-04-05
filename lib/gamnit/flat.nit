@@ -42,8 +42,7 @@ import performance_analysis
 import gamnit
 import gamnit::cameras
 import gamnit::limit_fps
-
-import android_two_fingers_motion is conditional(android)
+import gamnit::camera_control
 
 # Draw a `texture` at `center`
 #

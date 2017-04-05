@@ -12,16 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Two fingers camera manipulation, scroll and pinch to zoom
-#
-# Provides the main service `EulerCamera::accept_two_fingers_motion`.
-module android_two_fingers_motion
+# Two fingers camera manipulation, pinch to zoom and slide to scroll
+module camera_control_android
 
-# TODO add an abstraction when another platform supports it
-
-import gamnit
-import cameras
 import android
+import camera_control
 
 redef class EulerCamera
 	# Smoothened history of pointers in the current motion event
@@ -30,23 +25,7 @@ redef class EulerCamera
 	# Start time of the current motion event
 	private var last_motion_start: Int = -1
 
-	# Move and zoom (set `position`) from a two finger pinch and slide option
-	#
-	# Returns `true` if the event is intercepted.
-	#
-	# Should be called from `App::accept_event` before accepting pointer events:
-	#
-	# ~~~nitish
-	# redef class App
-	#     redef fun accept_event(event)
-	#     do
-	#         if world_camera.accept_two_fingers_motion(event) then return true
-	#
-	#         # Handle other events...
-	#     end
-	# end
-	# ~~~
-	fun accept_two_fingers_motion(event: InputEvent): Bool
+	redef fun accept_scroll_and_zoom(event)
 	do
 		if not event isa AndroidMotionEvent then return false
 
