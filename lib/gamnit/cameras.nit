@@ -210,12 +210,12 @@ class UICamera
 	# Width in world units, defaults to the width in pixels of the screen
 	var width: Float = display.width.to_f is lazy
 
-	# Height in world units, defaults to the height in pixels of the screen
-	var height: Float = display.height.to_f is lazy
+	# Height in world units, defaults to 1080.0
+	#
+	# Set this value using `reset_height`.
+	var height = 1080.0
 
 	# Reset the camera position so that `height` world units are visible on the Y axis
-	#
-	# By default, `height` is set to `display.height`.
 	#
 	# This can be used to set standardized UI units independently from the screen resolution.
 	fun reset_height(height: nullable Float)

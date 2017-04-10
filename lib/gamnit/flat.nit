@@ -293,8 +293,6 @@ redef class App
 	do
 		texture.load
 
-		ui_camera.reset_height 1080.0
-
 		var splash = new Sprite(texture, ui_camera.center)
 		ui_sprites.add splash
 
