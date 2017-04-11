@@ -1,0 +1,11 @@
+Categories:Nit,Games
+License:Apache2
+Web Site:http://nitlanguage.org
+Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/contrib/action_nitro
+Issue Tracker:https://github.com/nitlang/nit/issues
+
+Summary:Jump from plate to plane to reach the ISS and defeat the bad guys
+Description:
+Simple action platformer using many features of the gamnit game framework.
+This was created by the Nit team in a weekend for the clibre gamejam 2016.
+.

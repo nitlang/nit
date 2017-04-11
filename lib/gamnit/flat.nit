@@ -676,6 +676,10 @@ private class SpriteSet
 
 	redef fun clear
 	do
+		for sprite in self do
+			sprite.context = null
+			sprite.sprite_set = null
+		end
 		super
 		for c in contexts_items do c.destroy
 		contexts_map.clear

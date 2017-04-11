@@ -9,14 +9,10 @@ bin/asteronits: $(shell ${NITLS} -M src/asteronits.nit linux) pre-build
 bin/texture_atlas_parser: ../../lib/gamnit/texture_atlas_parser.nit
 	${NITC} ../../lib/gamnit/texture_atlas_parser.nit -o $@
 
-src/controls.nit: art/controls.svg
-	make -C ../inkscape_tools/
-	../inkscape_tools/bin/svg_to_png_and_nit art/controls.svg -a assets/ -s src/ -x 2.0 -g
-
 src/spritesheet.nit: bin/texture_atlas_parser
 	bin/texture_atlas_parser art/sheet.xml --dir src/ -n spritesheet
 
-pre-build: src/controls.nit src/spritesheet.nit
+pre-build: src/spritesheet.nit
 
 check: bin/asteronits
 	NIT_TESTING=true bin/asteronits

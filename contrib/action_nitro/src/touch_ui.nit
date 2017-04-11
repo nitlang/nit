@@ -12,12 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Touchscreen UI for mobile devices
-module touch_ui
-
 import gamnit::virtual_gamepad
 
-import asteronits
+import action_nitro
 
 redef class App
 	redef fun on_create
@@ -25,10 +22,17 @@ redef class App
 		super
 
 		var gamepad = new VirtualGamepad
-		gamepad.add_dpad
-		gamepad.controls.first.as(DPad).show_down = false
-		gamepad.add_button("space", gamepad_spritesheet.fire)
-		gamepad.visible = true
+		gamepad.add_dpad(["up","left","down","right"])
+		gamepad.add_dpad(["w","a","s","d"])
+		gamepad.add_button("space", planes_sheet.open_chute)
 		self.gamepad = gamepad
+	end
+
+	redef fun begin_play(initial)
+	do
+		super
+
+		var gamepad = self.gamepad
+		if gamepad != null then gamepad.visible = true
 	end
 end

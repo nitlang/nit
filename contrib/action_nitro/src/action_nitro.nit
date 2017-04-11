@@ -12,7 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module action_nitro
+module action_nitro is
+	app_name "Action Nitro"
+	app_namespace "net.xymus.action_nitro"
+	app_version(1, 0, git_revision)
+
+	android_manifest_activity """android:screenOrientation="sensorLandscape""""
+	android_api_target 15
+end
 
 import gamnit::depth
 import gamnit::keys
@@ -32,7 +39,7 @@ redef class App
 	# Game world assets
 
 	# Textures of the biplane, jet, helicopter, parachute and powerups
-	private var planes_sheet = new PlanesImages
+	var planes_sheet = new PlanesImages
 
 	# Animation for the player movement
 	private var player_textures: Array[Texture] =
@@ -121,6 +128,9 @@ redef class App
 
 	private var altitude_counter = new CounterSprites(texts_sheet.n,
 		new Point3d[Float](1400.0, -64.0, 0.0))
+
+	# Did the player asked to skip the intro animation?
+	private var skip_intro = false
 
 	redef fun on_create
 	do
@@ -240,7 +250,7 @@ redef class App
 		# Cinematic?
 		var t = world.t
 		var intro_duration = 8.0
-		if t < intro_duration then
+		if t < intro_duration and not skip_intro then
 			var pitch = t/intro_duration
 			pitch = (pitch*pi).sin
 			world_camera.pitch = pitch
@@ -248,16 +258,10 @@ redef class App
 		end
 
 		if world.player == null then
-			# Game is starting!
-			world.spawn_player
-			world.planes.add new Airplane(new Point3d[Float](0.0, world.player.center.y - 10.0, 0.0), 16.0, 4.0)
-
-			# Setup tutorial
-			ui_sprites.clear
-			ui_sprites.add_all([tutorial_wasd, tutorial_arrows, tutorial_chute])
-
 			world_camera.pitch = 0.0
 			world_camera.far = 700.0
+
+			begin_play true
 		end
 
 		# Update counters
@@ -336,6 +340,20 @@ redef class App
 		end
 	end
 
+	# Begin playing, after intro if `initial`, otherwise after death
+	fun begin_play(initial: Bool)
+	do
+		ui_sprites.clear
+
+		world.spawn_player
+		world.planes.add new Airplane(new Point3d[Float](0.0, world.player.center.y - 10.0, 0.0), 16.0, 4.0)
+
+		if initial then
+			# Setup tutorial
+			ui_sprites.add_all([tutorial_wasd, tutorial_arrows, tutorial_chute])
+		end
+	end
+
 	# Seconds at which the game was won, using `world.t` as reference
 	private var won_at: nullable Float = null
 
@@ -350,7 +368,7 @@ redef class App
 
 	redef fun accept_event(event)
 	do
-		var s = super
+		if super then return true
 
 		if event isa QuitEvent then
 			print perfs
@@ -397,17 +415,20 @@ redef class App
 					else player.sprite.as(PlayerSprite).start_running
 				end
 			end
+		end
 
-			# When player is dead, respawn on spacebar
-			if player != null and not player.is_alive then
-				if event.name == "space" then
-					ui_sprites.clear
-					world.spawn_player
-				end
+		# When player is dead, respawn on spacebar or pointer depressed
+		if (event isa KeyEvent and event.name == "space") or
+		   (event isa PointerEvent and not event.is_move and event.depressed) then
+			var player = world.player
+			if player == null then
+				skip_intro = true
+			else if not player.is_alive then
+				begin_play false
 			end
 		end
 
-		return s
+		return false
 	end
 end
 

@@ -230,15 +230,15 @@ redef class KeyEvent
 	# How does this event affect the ship thrust?
 	fun thrust: Float
 	do
-		if is_arrow_up or name == "w" then return 1.0
+		if name == "up" or name == "w" then return 1.0
 		return 0.0
 	end
 
 	# How does this event affect the ship thrust?
 	fun rotation: Float
 	do
-		if is_arrow_right or name == "d" then return -1.0
-		if is_arrow_left or name == "a" then return 1.0
+		if name == "right" or name == "d" then return -1.0
+		if name == "left" or name == "a" then return 1.0
 		return 0.0
 	end
 end
