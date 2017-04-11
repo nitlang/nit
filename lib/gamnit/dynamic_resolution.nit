@@ -64,6 +64,12 @@ redef class App
 		assert error == null else print_error error
 	end
 
+	redef fun on_resize(display)
+	do
+		dynamic_context.resize(display, max_dynamic_resolution_ratio)
+		super
+	end
+
 	# Prepare to draw to the dynamic screen if `dynamic_resolution_ratio != 1.0`
 	protected fun frame_core_dynamic_resolution_before(display: GamnitDisplay)
 	do
@@ -176,9 +182,6 @@ private class DynamicContext
 	do
 		# TODO enable antialiasing.
 
-		var width = (display.width.to_f * max_dynamic_resolution_ratio).to_i
-		var height = (display.height.to_f * max_dynamic_resolution_ratio).to_i
-
 		# Set aside the real screen framebuffer name
 		var screen_framebuffer = glGetIntegerv(gl_FRAMEBUFFER_BINDING, 0)
 		self.screen_framebuffer = screen_framebuffer
@@ -188,34 +191,19 @@ private class DynamicContext
 		glBindFramebuffer(gl_FRAMEBUFFER, framebuffer)
 		assert glIsFramebuffer(framebuffer)
 		self.dynamic_framebuffer = framebuffer
-
-		# Depth
-		var depthbuffer = glGenRenderbuffers(1).first
-		glBindRenderbuffer(gl_RENDERBUFFER, depthbuffer)
-		assert glIsRenderbuffer(depthbuffer)
-		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPNENT16, width, height)
-		glFramebufferRenderbuffer(gl_FRAMEBUFFER, gl_DEPTH_ATTACHMENT, gl_RENDERBUFFER, depthbuffer)
-		self.depth_renderbuffer = depthbuffer
-
-		# Texture
-		var texture = glGenTextures(1).first
-		glBindTexture(gl_TEXTURE_2D, texture)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_S, gl_CLAMP_TO_EDGE)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_T, gl_CLAMP_TO_EDGE)
-		glTexImage2D(gl_TEXTURE_2D, 0, gl_RGB, width, height,
-		             0, gl_RGB, gl_UNSIGNED_BYTE, new Pointer.nul)
-		glFramebufferTexture2D(gl_FRAMEBUFFER, gl_COLOR_ATTACHMENT0, gl_TEXTURE_2D, texture, 0)
-		self.texture = texture
-
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
-		assert glCheckFramebufferStatus(gl_FRAMEBUFFER) == gl_FRAMEBUFFER_COMPLETE
 
-		# Take down
-		glBindRenderbuffer(gl_RENDERBUFFER, 0)
-		glBindFramebuffer(gl_FRAMEBUFFER, 0)
+		# Depth & texture/color
+		var depthbuffer = glGenRenderbuffers(1).first
+		self.depth_renderbuffer = depthbuffer
+		var texture = glGenTextures(1).first
+		self.texture = texture
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		resize(display, max_dynamic_resolution_ratio)
+		assert glCheckFramebufferStatus(gl_FRAMEBUFFER) == gl_FRAMEBUFFER_COMPLETE
 
 		# Array buffer
 		buffer_array = glGenBuffers(1).first
@@ -239,6 +227,46 @@ private class DynamicContext
 		glBufferData(gl_ARRAY_BUFFER, data.length*4, c_data.native_array, gl_STATIC_DRAW)
 
 		glBindBuffer(gl_ARRAY_BUFFER, 0)
+
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+	end
+
+	# Init size or resize `depth_renderbuffer` and `texture`
+	fun resize(display: GamnitDisplay, max_dynamic_resolution_ratio: Float)
+	do
+		var width = (display.width.to_f * max_dynamic_resolution_ratio).to_i
+		var height = (display.height.to_f * max_dynamic_resolution_ratio).to_i
+
+		glBindFramebuffer(gl_FRAMEBUFFER, dynamic_framebuffer)
+
+		var depthbuffer = self.depth_renderbuffer
+		var texture = self.texture
+
+		# Depth
+		glBindRenderbuffer(gl_RENDERBUFFER, depthbuffer)
+		assert glIsRenderbuffer(depthbuffer)
+		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPNENT16, width, height)
+		glFramebufferRenderbuffer(gl_FRAMEBUFFER, gl_DEPTH_ATTACHMENT, gl_RENDERBUFFER, depthbuffer)
+		var gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		# Texture
+		glBindTexture(gl_TEXTURE_2D, texture)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_S, gl_CLAMP_TO_EDGE)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_T, gl_CLAMP_TO_EDGE)
+		glTexImage2D(gl_TEXTURE_2D, 0, gl_RGB, width, height,
+		             0, gl_RGB, gl_UNSIGNED_BYTE, new Pointer.nul)
+		glFramebufferTexture2D(gl_FRAMEBUFFER, gl_COLOR_ATTACHMENT0, gl_TEXTURE_2D, texture, 0)
+
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		# Take down
+		glBindRenderbuffer(gl_RENDERBUFFER, 0)
+		glBindFramebuffer(gl_FRAMEBUFFER, 0)
 
 		gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
