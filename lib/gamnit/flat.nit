@@ -41,6 +41,7 @@ import performance_analysis
 
 import gamnit
 import gamnit::cameras
+import gamnit::dynamic_resolution
 import gamnit::limit_fps
 
 import android_two_fingers_motion is conditional(android)
@@ -217,20 +218,20 @@ redef class App
 
 	# Camera for world `sprites` and `depth::actors` with perspective
 	#
-	# By default, the camera is configured to respect the resolution
-	# of the screen in world coordinates at `z == 0.0`.
+	# By default, the camera is configured to a height of 1080 units
+	# of world coordinates at `z == 0.0`.
 	var world_camera: EulerCamera is lazy do
 		var camera = new EulerCamera(app.display.as(not null))
 
-		# Aim for pixel resolution at level 0
-		camera.reset_height
-		camera.near = 100.0
+		# Aim for full HD pixel resolution at level 0
+		camera.reset_height 1080.0
+		camera.near = 10.0
 
 		return camera
 	end
 
 	# Camera for `ui_sprites` using an orthogonal view
-	var ui_camera: UICamera = new UICamera(app.display.as(not null)) is lazy
+	var ui_camera = new UICamera(app.display.as(not null)) is lazy
 
 	# World sprites to draw as seen by `world_camera`
 	var sprites: Set[Sprite] = new SpriteSet
@@ -355,13 +356,16 @@ redef class App
 	# Draw the whole screen, all `glDraw...` calls should be executed here
 	protected fun frame_core_draw(display: GamnitDisplay)
 	do
-		perf_clock_main.lapse
+		frame_core_dynamic_resolution_before display
 
+		perf_clock_main.lapse
 		frame_core_world_sprites display
 		perfs["gamnit flat world_sprites"].add perf_clock_main.lapse
 
 		frame_core_ui_sprites display
 		perfs["gamnit flat ui_sprites"].add perf_clock_main.lapse
+
+		frame_core_dynamic_resolution_after display
 	end
 
 	private fun frame_core_sprites(display: GamnitDisplay, sprite_set: SpriteSet, camera: Camera)

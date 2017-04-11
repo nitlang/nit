@@ -752,7 +752,7 @@ fun gl_RGBA4: GLRenderbufferFormat `{ return GL_RGBA4; `}
 fun gl_RGB565: GLRenderbufferFormat `{ return GL_RGB565; `}
 
 # 5 red, 5 green, 5 blue, 1 alpha bits format
-fun gl_RGB_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
+fun gl_RGB5_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
 
 # 16 depth bits format
 fun gl_DEPTH_COMPNENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
@@ -917,7 +917,7 @@ fun glDeleteBuffers(buffers: SequenceRead[Int])
 do
 	var n = buffers.length
 	var array = new CIntArray.from(buffers)
-	native_glDeleteFramebuffers(n, array.native_array)
+	native_glDeleteBuffers(n, array.native_array)
 	array.destroy
 end
 
@@ -1300,3 +1300,11 @@ fun gl_MAX_COMBINED_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_COM
 fun gl_MAX_VERTEX_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS; `}
 fun gl_MAX_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_TEXTURE_IMAGE_UNITS; `}
 fun gl_MAX_FRAGMENT_UNIFORM_VECTORS: GLGetParameterName `{ return GL_MAX_FRAGMENT_UNIFORM_VECTORS; `}
+
+fun gl_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_ARRAY_BUFFER_BINDING; `}
+fun gl_ELEMENT_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_ELEMENT_ARRAY_BUFFER_BINDING; `}
+fun gl_TEXTURE_BINDING_2D: GLGetParameterName `{ return GL_TEXTURE_BINDING_2D; `}
+fun gl_TEXTURE_BINDING_CUBE_MAP: GLGetParameterName `{ return GL_TEXTURE_BINDING_CUBE_MAP; `}
+fun gl_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING; `}
+fun gl_FRAMEBUFFER_BINDING: GLGetParameterName `{ return GL_FRAMEBUFFER_BINDING; `}
+fun gl_RENDERBUFFER_BINDING: GLGetParameterName `{ return GL_RENDERBUFFER_BINDING; `}

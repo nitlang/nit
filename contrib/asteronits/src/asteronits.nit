@@ -110,6 +110,12 @@ redef class App
 				return true
 			else if event.name == "escape" then
 				exit 0
+			else if event.name == "." and event.is_down then
+				dynamic_resolution_ratio *= 2.0
+				print dynamic_resolution_ratio
+			else if event.name == "," and event.is_down then
+				dynamic_resolution_ratio /= 2.0
+				print dynamic_resolution_ratio
 			end
 		end
 
