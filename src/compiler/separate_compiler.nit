@@ -1238,7 +1238,7 @@ class SeparateCompilerVisitor
 					abort
 				end
 				# Do not loose type info
-				res.mcasttype = value.mcasttype
+				res.mcasttype = mtype.intersection(value.mcasttype, compiler.mainmodule)
 				return res
 			end
 			var valtype = value.mtype.as(MClassType)
@@ -1247,7 +1247,7 @@ class SeparateCompilerVisitor
 			end
 			var res = self.new_var(mtype)
 			# Do not loose type info
-			res.mcasttype = value.mcasttype
+			res.mcasttype = mtype.intersection(value.mcasttype, compiler.mainmodule)
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
