@@ -201,12 +201,7 @@ private class TypeVisitor
 	# Can `mtype` be null (up to the current knowledge)?
 	fun can_be_null(mtype: MType): Bool
 	do
-		if mtype isa MNullableType or mtype isa MNullType then return true
-		if mtype isa MFormalType then
-			var x = anchor_to(mtype)
-			if x isa MNullableType or x isa MNullType then return true
-		end
-		return false
+		return mtype.can_be_null(mmodule, anchor)
 	end
 
 	# Check that `mtype` can be null (up to the current knowledge).

@@ -1139,6 +1139,12 @@ abstract class MType
 	# ENSURE: `not self.need_anchor implies result == true`
 	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract
 
+	# When resolved with `anchor`, does this type possibly allows `null`?
+	fun can_be_null(mmodule: MModule, anchor: nullable MClassType): Bool
+	do
+		return false
+	end
+
 	# Intersect `self` with `other`.
 	#
 	# The resulting type represents the subtypes that are common to both `self`
@@ -1505,6 +1511,16 @@ class MIntersectionType
 		return result
 	end
 
+	redef fun can_be_null(mmodule, anchor)
+	do
+		for mtype in operands do
+			if not mtype.can_be_null(mmodule, anchor) then
+				return false
+			end
+		end
+		return true
+	end
+
 	redef fun collect_mclassdefs(mmodule)
 	do
 		var result = collect_mclassdefs_cache.get_or_null(mmodule)
@@ -1782,6 +1798,11 @@ abstract class MFormalType
 	super MType
 
 	redef var as_notnull = new MNotNullType(self) is lazy
+
+	redef fun can_be_null(mmodule, anchor)
+	do
+		return anchor_to(mmodule, anchor).can_be_null(mmodule, anchor)
+	end
 end
 
 # A virtual formal type.
@@ -1791,6 +1812,15 @@ class MVirtualType
 	# The property associated with the type.
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MVirtualTypeProp
+
+	redef fun can_be_null(mmodule, anchor)
+	do
+		if anchor == null then
+			# Use the default bound.
+			return mproperty.intro.bound.can_be_null(mmodule, anchor)
+		end
+		return super
+	end
 
 	redef fun location do return mproperty.location
 
@@ -1925,6 +1955,17 @@ class MParameterType
 
 	# The generic class where the parameter belong
 	var mclass: MClass
+
+	redef fun can_be_null(mmodule, anchor)
+	do
+		if anchor == null then
+			# Use the default bound.
+			var intro = mclass.try_intro
+			if intro == null then return true
+			return intro.bound_mtype.arguments[rank].can_be_null(mmodule, anchor)
+		end
+		return super
+	end
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
@@ -2115,6 +2156,9 @@ class MNullableType
 	redef var c_name is lazy do return "nullable__{mtype.c_name}"
 
 	redef fun as_nullable do return self
+
+	redef fun can_be_null(mmodule, anchor) do return true
+
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		var res = super
@@ -2170,6 +2214,9 @@ class MNullType
 
 	redef var as_notnull: MBottomType = new MBottomType(model) is lazy
 	redef fun need_anchor do return false
+
+	redef fun can_be_null(mmodule, anchor) do return true
+
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
 
