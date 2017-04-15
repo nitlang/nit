@@ -495,7 +495,7 @@ private class Simple2dProgram
 		{
 			if(use_texture) {
 				gl_FragColor = v_color * texture2D(texture0, v_coord);
-				if (gl_FragColor.a <= 0.1) discard;
+				if (gl_FragColor.a <= 0.01) discard;
 			} else {
 				gl_FragColor = v_color;
 			}
