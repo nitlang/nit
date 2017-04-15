@@ -1994,6 +1994,14 @@ class MParameterType
 	do
 		assert not resolved_receiver.need_anchor
 		resolved_receiver = resolved_receiver.undecorate
+		if resolved_receiver isa MTypeSet[MType] then
+			var operands = new Set[MType]
+			for operand in resolved_receiver.operands do
+				operands.add(lookup_bound(mmodule, operand))
+			end
+			return resolved_receiver.apply_to(operands, mmodule)
+		end
+
 		assert resolved_receiver isa MClassType # It is the only remaining type
 		var goalclass = self.mclass
 		if resolved_receiver.mclass == goalclass then
@@ -2053,6 +2061,22 @@ class MParameterType
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
+		if resolved_receiver isa MTypeSet[MType] then
+			var operands = new Set[MType]
+			for operand in resolved_receiver.operands do
+				operands.add(resolve_for_anchored(mtype, operand, anchor,
+						mmodule, cleanup_virtual))
+			end
+			return resolved_receiver.apply_to(operands, mmodule, anchor)
+		end
+		return resolve_for_anchored(mtype, resolved_receiver, anchor, mmodule,
+				cleanup_virtual)
+	end
+
+	private fun resolve_for_anchored(mtype: MType, resolved_receiver: MType,
+			anchor: nullable MClassType, mmodule: MModule,
+			cleanup_virtual: Bool): MType
+	do
 		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		# Eh! The parameter is in the current class.
