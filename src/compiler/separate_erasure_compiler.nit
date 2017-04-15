@@ -505,6 +505,19 @@ class SeparateErasureCompilerVisitor
 
 		var res = self.new_var(bool_type)
 
+		if mtype isa MIntersectionType then
+			add("{res} = 0;")
+			for t in mtype.operands do
+				var sub_test = type_test(value, t, tag)
+				add("if ({sub_test}) \{")
+			end
+			add("{res} = 1;")
+			for t in mtype.operands do
+				add("\}")
+			end
+			return res
+		end
+
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
@@ -516,12 +529,17 @@ class SeparateErasureCompilerVisitor
 			mtype = mtype.mtype
 			accept_null = "1"
 		end
+		if mtype isa MNotNullType then
+			mtype = mtype.mtype
+		end
 		if mtype isa MParameterType then
 			# Here we get the bound of the the formal type (eh, erasure...)
 			mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, false)
 			if mtype isa MNullableType then
 				mtype = mtype.mtype
-				accept_null = "1"
+				if maybe_null then
+					accept_null = "1"
+				end
 			end
 		end
 
