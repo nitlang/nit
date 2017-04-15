@@ -646,24 +646,11 @@ private class TypeVisitor
 		return null
 	end
 
-	# Find a most general common subtype between `type1` and `type2`.
+	# Intersect the specified types.
 	#
-	# Find the most general type that is a subtype of `type2` and, if possible, a subtype of `type1`.
-	# Basically, this return the most specific type between `type1` and `type2`.
-	# If nullable types are involved, the information is correctly preserved.
-	# If `type1` and `type2` are incomparable then `type2` is preferred (since intersection types
-	# are not representable in Nit).
+	# `null` is returned if both `type1` and `type2` are null.
 	#
-	# The `null` value is returned if both `type1` and `type2` are null.
-	#
-	# Examples (with diamond A,B,C,D):
-	#
-	# * intersect_types(A,B) -> B, because B is a subtype of A
-	# * intersect_types(B,A) -> B, because B is a subtype of A
-	# * intersect_types(B,C) -> C, B and C are incomparable,
-	#   `type2` is then preferred (`B and C` cannot be represented)
-	# * intersect_types(nullable B,A) -> B, because B<:A and the non-null information is preserved
-	# * intersect_types(B,nullable C) -> C, `type2` is preferred and the non-null information is preserved
+	# SEE: `MType::intersection`
 	fun intersect_types(node: ANode, type1, type2: nullable MType): nullable MType
 	do
 		if type1 == null then return type2
@@ -674,13 +661,7 @@ private class TypeVisitor
 			type2 = type2.as_notnull
 		end
 
-		var res
-		if is_subtype(type1, type2) then
-			res = type1
-		else
-			res = type2
-		end
-		return res
+		return type1.intersection(type2, mmodule, anchor)
 	end
 
 	# Find a most general type that is a subtype of `type1` but not one of `type2`.
