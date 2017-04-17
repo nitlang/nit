@@ -2055,10 +2055,7 @@ class SeparateCompilerVisitor
 
 	fun can_be_primitive(value: RuntimeVariable): Bool
 	do
-		var t = value.mcasttype.undecorate
-		if not t isa MClassType then return false
-		var k = t.mclass.kind
-		return k == interface_kind or t.is_c_primitive
+		return value.mcasttype.undecorate.can_be_primitive
 	end
 
 	redef fun array_instance(array, elttype)
@@ -2388,6 +2385,27 @@ redef class MType
 	# ENSURE `is_tagged == (tag_value > 0)`
 	# ENSURE `not is_tagged == (tag_value == 0)`
 	var tag_value = 0
+
+	private fun can_be_primitive: Bool do return false
+end
+
+redef class MIntersectionType
+	redef fun can_be_primitive
+	do
+		for t in operands do
+			if t.can_be_primitive then
+				return true
+			end
+		end
+		return false
+	end
+end
+
+redef class MClassType
+	redef fun can_be_primitive
+	do
+		return mclass.kind == interface_kind or is_c_primitive
+	end
 end
 
 redef class MEntity

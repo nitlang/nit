@@ -2099,6 +2099,19 @@ redef class MType
 	fun is_c_primitive: Bool do return false
 end
 
+redef class MIntersectionType
+	redef var ctype is lazy do
+		for t in operands do
+			if t.is_c_primitive then
+				return t.ctype
+			end
+		end
+		return super
+	end
+
+	redef var is_c_primitive is lazy do return ctype != "val*"
+end
+
 redef class MClassType
 
 	redef var ctype is lazy do

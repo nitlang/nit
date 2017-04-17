@@ -858,11 +858,9 @@ class JavaCompilerVisitor
 	end
 
 	# Can this `value` be a primitive Java value?
-	private fun can_be_primitive(value: RuntimeVariable): Bool do
-		var t = value.mcasttype.undecorate
-		if not t isa MClassType then return false
-		var k = t.mclass.kind
-		return k == interface_kind or t.is_java_primitive
+	fun can_be_primitive(value: RuntimeVariable): Bool
+	do
+		return value.mcasttype.undecorate.can_be_primitive
 	end
 
 	#  Generate a polymorphic subtype test
@@ -1303,6 +1301,29 @@ redef class MType
 	#
 	# ENSURE `result == (java_type != "RTVal")`
 	var is_java_primitive: Bool is lazy do return java_type != "RTVal"
+
+	private fun can_be_primitive: Bool do return false
+end
+
+redef class MIntersectionType
+	redef var java_type is lazy do
+		for t in operands do
+			if t.is_java_primitive then
+				return t.java_type
+			end
+		end
+		return super
+	end
+
+	redef fun can_be_primitive
+	do
+		for t in operands do
+			if t.can_be_primitive then
+				return true
+			end
+		end
+		return false
+	end
 end
 
 redef class MClassType
@@ -1324,6 +1345,11 @@ redef class MClassType
 			return "Array"
 		end
 		return "RTVal"
+	end
+
+	redef fun can_be_primitive
+	do
+		return mclass.kind == interface_kind or is_java_primitive
 	end
 end
 
