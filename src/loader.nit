@@ -742,7 +742,7 @@ redef class ModelBuilder
 
 	# Injection of a new module without source.
 	# Used by the interpreter.
-	fun load_rt_module(parent: nullable MModule, nmodule: AModule, mod_name: String): nullable AModule
+	fun load_rt_module(parent: nullable MModule, nmodule: AModule, mod_name: String): nullable MModule
 	do
 		# Create the module
 
@@ -763,7 +763,7 @@ redef class ModelBuilder
 			build_module_importation(nmodule)
 		end
 
-		return nmodule
+		return mmodule
 	end
 
 	# Visit the AST and create the `MModule` object
