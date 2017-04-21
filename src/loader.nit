@@ -759,9 +759,8 @@ redef class ModelBuilder
 			imported_modules.add(parent)
 			mmodule.set_visibility_for(parent, intrude_visibility)
 			mmodule.set_imported_mmodules(imported_modules)
-		else
-			build_module_importation(nmodule)
 		end
+		build_module_importation(nmodule)
 
 		return mmodule
 	end
