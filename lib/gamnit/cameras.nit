@@ -264,7 +264,7 @@ class UICamera
 	# Bottom right corner of the screen, at z = 0
 	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height, 0.0)
 
-	# TODO cache the anchors and the matrix
+	# TODO cache the anchors
 
 	redef fun mvp_matrix
 	do
