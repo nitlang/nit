@@ -35,6 +35,7 @@ module flat
 
 import glesv2
 intrude import geometry::points_and_lines # For _x, _y and _z
+intrude import matrix
 import matrix::projection
 import more_collections
 import performance_analysis
@@ -859,7 +860,7 @@ private class SpriteContext
 			else
 				rot = new Matrix.rotation(sprite.rotation, 0.0, 0.0, 1.0)
 			end
-			data.fill_from(rot.items, o+15)
+			data.fill_from_matrix(rot, o+15)
 
 			o += float_per_vertex
 		end
@@ -1256,4 +1257,22 @@ private class GroupedArray[E]
 		end
 		return ss.join
 	end
+end
+
+redef class GLfloatArray
+	private fun fill_from_matrix(matrix: Matrix, dst_offset: nullable Int)
+	do
+		dst_offset = dst_offset or else 0
+		var mat_len = matrix.width*matrix.height
+		assert length >= mat_len + dst_offset
+		native_array.fill_from_matrix_native(matrix.items, dst_offset, mat_len)
+	end
+end
+
+redef class NativeGLfloatArray
+	private fun fill_from_matrix_native(matrix: matrix::NativeDoubleArray, dst_offset, len: Int) `{
+		int i;
+		for (i = 0; i < len; i ++)
+			self[i+dst_offset] = (GLfloat)matrix[i];
+	`}
 end
