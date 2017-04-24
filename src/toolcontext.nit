@@ -143,7 +143,7 @@ end
 # Global context for tools
 class ToolContext
 	# Number of errors
-	var error_count: Int = 0
+	var error_count: Int = 0 is writable
 
 	# Number of warnings
 	var warning_count: Int = 0

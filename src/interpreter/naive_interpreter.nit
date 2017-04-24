@@ -61,7 +61,7 @@ class NaiveInterpreter
 	var modelbuilder: ModelBuilder
 
 	# The main module of the program (used to lookup method)
-	var mainmodule: MModule
+	var mainmodule: MModule is writable
 
 	# The command line arguments of the interpreted program
 	# arguments.first is the program name
