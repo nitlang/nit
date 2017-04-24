@@ -821,6 +821,11 @@ redef class ANode
 	# `v` is used to know if a colored message is displayed or not
 	fun fatal(v: NaiveInterpreter, message: String)
 	do
+		# Abort if there is a `catch` block
+		if v.catch_count > 0 then
+			abort
+		end
+
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
 			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
 		else
@@ -1689,13 +1694,8 @@ end
 redef class AAbortExpr
 	redef fun stmt(v)
 	do
-		# Abort as asked if there is no `catch` bloc
-		if v.catch_count <= 0 then
-			fatal(v, "Aborted")
-			exit(1)
-		else
-			abort
-		end
+		fatal(v, "Aborted")
+		exit(1)
 	end
 end
 
