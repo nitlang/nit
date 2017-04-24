@@ -121,6 +121,9 @@ class NaiveInterpreter
 	# The count of `catch` blocs that have been encountered and can catch an abort
 	var catch_count = 0
 
+	# The last error thrown on abort/runtime error where catch_count > 0
+	var last_error: nullable FatalError = null
+
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
 	fun is_escaping: Bool do return escapemark != null
@@ -685,6 +688,15 @@ class NaiveInterpreter
 	var error_instance = new MutableInstance(modelbuilder.model.null_type) is lazy
 end
 
+# A runtime error
+class FatalError
+	# The error message
+	var message: String
+
+	# The problematic node, if any
+	var node: nullable ANode
+end
+
 # An instance represents a value of the executed program.
 abstract class Instance
 	# The dynamic type of the instance
@@ -823,6 +835,7 @@ redef class ANode
 	do
 		# Abort if there is a `catch` block
 		if v.catch_count > 0 then
+			v.last_error = new FatalError(message, self)
 			abort
 		end
 
