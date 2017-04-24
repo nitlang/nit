@@ -119,7 +119,7 @@ class NaiveInterpreter
 	var escapemark: nullable EscapeMark = null
 
 	# The count of `catch` blocs that have been encountered and can catch an abort
-	var catch_count = 0
+	var catch_count = 0 is writable
 
 	# The last error thrown on abort/runtime error where catch_count > 0
 	var last_error: nullable FatalError = null
