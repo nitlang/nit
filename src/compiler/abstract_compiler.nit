@@ -1825,16 +1825,25 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
+		add_raw_throw
+		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
+		add_raw_abort
+	end
+
+	# Generate a long jump if there is a catch block.
+	#
+	# This method should be called before the error messages and before a `add_raw_abort`.
+	fun add_raw_throw
+	do
 		self.add("if(catchStack.cursor >= 0)\{")
 		self.add("longjmp(catchStack.envs[catchStack.cursor], 1);")
 		self.add("\}")
-		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
-		add_raw_abort
 	end
 
 	# Generate abort without a message.
 	#
 	# Used when one need a more complex message.
+	# Do not forget to call `add_raw_abort` before the display of a custom user message.
 	fun add_raw_abort
 	do
 		var current_node = self.current_node
@@ -1854,6 +1863,7 @@ abstract class AbstractCompilerVisitor
 	do
 		var res = self.type_test(value, mtype, tag)
 		self.add("if (unlikely(!{res})) \{")
+		self.add_raw_throw
 		var cn = self.class_name_string(value)
 		self.add("PRINT_ERROR(\"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
 		self.add_raw_abort
@@ -2183,6 +2193,7 @@ redef class MMethodDef
 		var node = modelbuilder.mpropdef2node(self)
 
 		if is_abstract then
+			v.add_raw_throw
 			var cn = v.class_name_string(arguments.first)
 			v.current_node = node
 			v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mproperty.name.escape_to_c}\", {cn});")
@@ -2294,6 +2305,7 @@ redef class AMethPropdef
 		end
 
 		# We have a problem
+		v.add_raw_throw
 		var cn = v.class_name_string(arguments.first)
 		v.add("PRINT_ERROR(\"Runtime error: uncompiled method `%s` called on `%s`. NOT YET IMPLEMENTED\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
 		v.add_raw_abort
