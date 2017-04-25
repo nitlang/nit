@@ -1832,10 +1832,14 @@ abstract class AbstractCompilerVisitor
 		add_raw_abort
 	end
 
+	# Generate abort without a message.
+	#
+	# Used when one need a more complex message.
 	fun add_raw_abort
 	do
-		if self.current_node != null and self.current_node.location.file != null and
-				self.current_node.location.file.mmodule != null then
+		var current_node = self.current_node
+		if current_node != null and current_node.location.file != null and
+				current_node.location.file.mmodule != null then
 			var f = "FILE_{self.current_node.location.file.mmodule.c_name}"
 			self.require_declaration(f)
 			self.add("PRINT_ERROR(\" (%s:%d)\\n\", {f}, {current_node.location.line_start});")
