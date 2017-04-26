@@ -436,7 +436,7 @@ istodo()
 find_nitc()
 {
 	local name="$enginebinname"
-	local recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
+	local recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../contrib/nitin/bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		echo "Could not find binary for engine $engine, aborting"
 		exit 1
@@ -470,6 +470,7 @@ while [ $stop = false ]; do
 done
 enginebinname=$engine
 isinterpret=
+isinteractive=
 case $engine in
 	nitc|nitg)
 		engine=nitcs;
@@ -514,6 +515,10 @@ case $engine in
 		enginebinname=nit
 		OPT="--vm $OPT"
 		savdirs="sav/niti/"
+		;;
+	nitin)
+		enginebinname=nitin
+		isinteractive=true
 		;;
 	nitj)
 		engine=nitj;
@@ -623,6 +628,15 @@ for ii in "$@"; do
 		if [ -n "$isinterpret" ]; then
 			cat > "$ff.bin" <<END
 exec $NITC --no-color $OPT $includes -- $(printf '%q' "$i") "\$@"
+END
+			chmod +x "$ff.bin"
+			> "$ff.cmp.err"
+			> "$ff.compile.log"
+			ERR=0
+			echo 0.0 > "$ff.time.out"
+		elif [ -n "$isinteractive" ]; then
+			cat > "$ff.bin" <<END
+exec $NITC --no-color --no-prompt $OPT $includes < $(printf '%q' "$i") "\$@"
 END
 			chmod +x "$ff.bin"
 			> "$ff.cmp.err"

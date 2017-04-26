@@ -24,6 +24,15 @@ import nitc::frontend
 import nitc::parser_util
 
 redef class ToolContext
+
+	# --no-prompt
+	var opt_no_prompt = new OptionBool("Disable writing a prompt.", "--no-prompt")
+
+	redef init do
+		super
+		option_context.add_option(opt_no_prompt)
+	end
+
 	# Parse a full module given as a string
 	#
 	# Return a AModule or a AError
@@ -62,7 +71,13 @@ redef class ToolContext
 		var oldtext = ""
 
 		loop
-			var s = readline(prompt)
+			var s
+			if opt_no_prompt.value then
+				s = stdin.read_line
+				if s == "" and stdin.eof then s = null
+			else
+				s = readline(prompt)
+			end
 			if s == null then return null
 			if s == "" then continue
 

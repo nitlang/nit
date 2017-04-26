@@ -14,6 +14,7 @@ ls -1 -- "$@" \
 	../contrib/friendz/src/solver_cmd.nit \
 	../contrib/neo_doxygen/src/tests/neo_doxygen_*.nit \
 	../contrib/pep8analysis/src/pep8analysis.nit \
+	../contrib/nitin/nitin.nit \
 	../contrib/nitiwiki/src/nitiwiki.nit \
 	*.nit \
 	| grep -v ../lib/popcorn/examples/
