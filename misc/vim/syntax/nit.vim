@@ -57,7 +57,7 @@ syn match NITClosure "!\h\w*"
 
 " Fallback highlight keywords
 syn match NITNull "\<\(null\)\>"
-syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\|loop\|is\)\>"
+syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|catch\|else\|loop\|is\)\>"
 syn match NITKeyword "\<\(super\)\>"
 " Unmatchning error
 syn match Error "\<end\>"

@@ -84,6 +84,7 @@
     <context id="keywords" style-ref="keyword">
       <keyword>do</keyword>
       <keyword>end</keyword>
+      <keyword>catch</keyword>
       <keyword>intrude</keyword>
       <keyword>private</keyword>
       <keyword>if</keyword>

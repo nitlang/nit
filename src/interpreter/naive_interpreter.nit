@@ -119,7 +119,10 @@ class NaiveInterpreter
 	var escapemark: nullable EscapeMark = null
 
 	# The count of `catch` blocs that have been encountered and can catch an abort
-	var catch_count = 0
+	var catch_count = 0 is writable
+
+	# The last error thrown on abort/runtime error where catch_count > 0
+	var last_error: nullable FatalError = null
 
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
@@ -685,6 +688,15 @@ class NaiveInterpreter
 	var error_instance = new MutableInstance(modelbuilder.model.null_type) is lazy
 end
 
+# A runtime error
+class FatalError
+	# The error message
+	var message: String
+
+	# The problematic node, if any
+	var node: nullable ANode
+end
+
 # An instance represents a value of the executed program.
 abstract class Instance
 	# The dynamic type of the instance
@@ -821,6 +833,12 @@ redef class ANode
 	# `v` is used to know if a colored message is displayed or not
 	fun fatal(v: NaiveInterpreter, message: String)
 	do
+		# Abort if there is a `catch` block
+		if v.catch_count > 0 then
+			v.last_error = new FatalError(message, self)
+			abort
+		end
+
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
 			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
 		else
@@ -1689,13 +1707,8 @@ end
 redef class AAbortExpr
 	redef fun stmt(v)
 	do
-		# Abort as asked if there is no `catch` bloc
-		if v.catch_count <= 0 then
-			fatal(v, "Aborted")
-			exit(1)
-		else
-			abort
-		end
+		fatal(v, "Aborted")
+		exit(1)
 	end
 end
 
