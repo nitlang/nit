@@ -22,6 +22,7 @@ import highlight
 import nitcorn
 import nitcorn::log
 import template
+import json::serialization_write
 
 # Nitcorn service to hightlight code
 #
@@ -38,6 +39,13 @@ class HighlightAction
 		var code = http_request.post_args.get_or_null("code")
 		var hlcode = null
 		if code != null then hlcode = hightlightcode(hl, code)
+
+		if http_request.post_args.get_or_null("json") == "true" and hlcode != null then
+			var response = new HttpResponse(200)
+			response.header["Content-Type"] = "text/json"
+			response.body = hlcode.to_json
+			return response
+		end
 
 		if http_request.post_args.get_or_null("ajax") == "true" and hlcode != null then
 			page.add hlcode.code_mirror_update

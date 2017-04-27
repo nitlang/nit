@@ -19,6 +19,7 @@ import frontend
 import html
 import pipeline
 import astutil
+import serialization
 
 # Fully process a content as a nit source file.
 fun hightlightcode(hl: HighlightVisitor, content: String): HLCode
@@ -65,6 +66,8 @@ end
 
 # A standalone highlighted piece of code
 class HLCode
+	super Serializable
+
 	# The highlighter used
 	var hl: HighlightVisitor
 
@@ -98,6 +101,19 @@ class HLCode
 		end
 		res.add """});}"""
 		return res
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("code", hl.html.write_to_string)
+		var msgs = new Array[Map[String, Serializable]]
+		for m in source.messages do
+			var o = new Map[String, Serializable]
+			msgs.add o
+			o["line"] = m.location.line_start-1
+			o["message"] = m.text
+		end
+		v.serialize_attribute("messages", msgs)
 	end
 end
 
