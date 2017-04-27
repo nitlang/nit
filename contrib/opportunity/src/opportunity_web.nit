@@ -21,6 +21,10 @@ import privileges
 
 var iface = "localhost:8080"
 
+if args.not_empty then
+	iface = args.first
+end
+
 var vh = new VirtualHost(iface)
 vh.routes.add new Route("/rest/", new OpportunityRESTAction)
 vh.routes.add new Route("/static/", new FileServer("art"))
