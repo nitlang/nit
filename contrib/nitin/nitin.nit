@@ -184,6 +184,21 @@ loop
 
 	# Run the main if the AST contains a main
 	if amodule.n_classdefs.not_empty and amodule.n_classdefs.last isa AMainClassdef then
-		interpreter.send(mainprop, [mainobj])
+		do
+			interpreter.catch_count += 1
+			interpreter.send(mainprop, [mainobj])
+		catch
+			var e = interpreter.last_error
+			if e != null then
+				var en = e.node
+				if en != null then
+					print "{en.location}: Runtime error: {e.message}\n{en.location.colored_line("0;31")}"
+				else
+					print "Runtime error: {e.message}"
+				end
+			end
+			print interpreter.stack_trace
+			interpreter.frames.clear
+		end
 	end
 end

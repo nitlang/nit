@@ -11,11 +11,11 @@ This tool is outside src/ because:
 * use GNU readline to read lines
 * use importation/refinement to handle incremental execution (so basically everything works out of the box)
 * maintain an interpreter and live objects (the model grows but the interpreter and runtime data are reused)
+* runtime errors/aborts return to the interactive loop
 
 Main missing features
 
 * top-level variables are local
-* runtime error/aborts just abort the interactive loop
 * FFI is strange
 * No model/object inspection
 
