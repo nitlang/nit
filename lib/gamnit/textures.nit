@@ -124,7 +124,6 @@ class GamnitRootTexture
 		glBindTexture(gl_TEXTURE_2D, gl_texture)
 
 		var param = if pixelated then gl_NEAREST else gl_LINEAR
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, param)
 		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
 	end
 
