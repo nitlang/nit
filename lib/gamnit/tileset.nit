@@ -157,12 +157,12 @@ class TextSprites
 		if text == null then return
 
 		# Build new sprites
-		var dx = font.vspace.to_f/2.0
+		var dx = font.advance/2.0
 		var dy = font.hspace.to_f/2.0
 		for c in text do
 			if c == '\n' then
 				dy -= font.height.to_f + font.vspace.to_f
-				dx = font.vspace.to_f/2.0
+				dx = font.advance/2.0
 				continue
 			else if c.is_whitespace then
 				dx += font.advance
