@@ -82,7 +82,7 @@ end
 redef class Sys
 	redef fun run
 	do
-		if "NIT_TESTING".environ == "true" then exit 0
+		if "NIT_TESTING_TOOL".environ == "tests.sh" then exit 0
 		super
 	end
 end

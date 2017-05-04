@@ -67,6 +67,7 @@ if "NIT_TESTING".environ != "" then
 end
 
 "NIT_TESTING".setenv("true")
+"NIT_TESTING_TOOL".setenv("nitunit")
 "NIT_TESTING_ID".setenv(pid.to_s)
 "SRAND".setenv("0")
 

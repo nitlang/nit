@@ -21,6 +21,7 @@
 export LANG=C
 export LC_ALL=C
 export NIT_TESTING=true
+export NIT_TESTING_TOOL=tests.sh
 # Use the pid as a collision prevention
 export NIT_TESTING_ID=$$
 export NIT_SRAND=0

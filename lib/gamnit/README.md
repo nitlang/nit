@@ -8,13 +8,13 @@ It is based on the portability framework _app.nit_ and the OpenGL ES 2.0 standar
 To compile the _gamnit_ apps packaged with the Nit repositoy on GNU/Linux you need to install the dev version of a few libraries and some tools.
 Under Debian 8.2, this command should install everything needed:
 
-~~~
+~~~raw
 apt-get install libgles2-mesa-dev libsdl2-dev libsdl2-image-dev inkscape mpg123
 ~~~
 
 Under Windows 64 bits, using msys2, you can install the required packages with:
 
-~~~
+~~~raw
 pacman -S mingw-w64-x86_64-angleproject-git mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_image
 ~~~
 
