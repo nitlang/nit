@@ -551,8 +551,8 @@ redef class MVirtualType
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(mproperty)
 		var p = mproperty
+		res.new_field("virtual type").add p.intro.linkto(v)
 		add_doc_to_infobox(res)
-		if mdoc != null then mdoc.fill_infobox(res)
 		return res
 	end
 	redef fun linkto(v)
