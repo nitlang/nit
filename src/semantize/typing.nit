@@ -785,6 +785,8 @@ class CallSite
 	fun dump_info(v: ASTDump): String do
 		return "{recv}.{mpropdef}{msignature}"
 	end
+
+	redef fun mdoc_or_fallback do return mproperty.intro.mdoc
 end
 
 redef class Variable

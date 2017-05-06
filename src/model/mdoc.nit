@@ -45,6 +45,7 @@ redef class MEntity
 	#   their introducing definition.
 	# * `MClassType`s fall back to their wrapped `MClass`.
 	# * `MVirtualType`s fall back to their wrapped `MProperty`.
+	# * `CallSite` fall back on the wrapped `MProperty`.
 	# * Other entities do not fall back.
 	#
 	# One may use `MDoc::original_mentity` to retrieve the original
