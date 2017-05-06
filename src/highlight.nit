@@ -363,12 +363,14 @@ class HInfoBox
 	end
 
 	# Append a new dropdown in the popuped content
-	fun new_dropdown(title, text: String): HTMLTag
+	fun new_dropdown(title, text: String, text_is_html: nullable Bool): HTMLTag
 	do
 		content.add_raw_html """<div class="dropdown"> <a data-toggle="dropdown" href="#"><b>"""
 		content.append(title)
 		content.add_raw_html "</b> "
-		content.append(text)
+		if text_is_html == true then
+			content.add_raw_html(text)
+		else content.append(text)
 		content.add_raw_html """<span class="caret"></span></a>"""
 		var res = content.open("ul").add_class("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "dLabel")
 		content.add_raw_html "</div>"
