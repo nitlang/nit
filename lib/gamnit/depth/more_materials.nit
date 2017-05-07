@@ -26,7 +26,7 @@ redef class Material
 		[1.0, 1.0, 1.0, 1.0])
 end
 
-# Simple material with static colors used for debugging or display abstract objects
+# Simple material with static colors
 class SmoothMaterial
 	super Material
 

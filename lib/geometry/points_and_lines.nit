@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides interfaces and classes to represent basic geometry needs.
+# Interfaces and classes to represent basic geometry needs.
 module points_and_lines is serialize
 
 import serialization
 
-# An abstract 2d point, strongly linked to its implementation `Point`
+# Abstract 2d point, strongly linked to its implementation `Point`
 interface IPoint[N: Numeric]
 
 	# Horizontal coordinate
@@ -84,7 +84,7 @@ interface IPoint[N: Numeric]
 	redef fun ==(o) do return o isa IPoint[Numeric] and o.x == x and o.y == y
 end
 
-# A 2d point and an implementation of `IPoint`
+# 2D point with `x` and `z`
 class Point[N: Numeric]
 	super IPoint[N]
 
@@ -92,17 +92,17 @@ class Point[N: Numeric]
 	redef var y: N is writable
 end
 
-# An abstract 3d point, strongly linked to its implementation `Point3d`
+# Abstract 3d point, strongly linked to its implementation `Point3d`
 interface IPoint3d[N: Numeric]
 	super IPoint[N]
 
-	# depth coordinate
+	# Depth coordinate
 	fun z: N is abstract
 
 	redef fun to_s do return "({x}, {y}, {z})"
 end
 
-# A 3d point and an implementation of `IPoint3d`
+# 3D point with `x`, `y` and `z`
 class Point3d[N: Numeric]
 	super IPoint3d[N]
 	super Point[N]
@@ -110,21 +110,21 @@ class Point3d[N: Numeric]
 	redef var z: N is writable
 end
 
-# An abstract 2d line segment
+# Abstract 2D line segment between two ordered points
 interface ILine[N: Numeric]
 	# The type of points that ends the segment
 	type P: IPoint[N]
 
-	# The point that is the left-end of the segment
+	# Point at the left-end of the segment
 	fun point_left: P is abstract
 
-	# The point that is the right-end of the segment
+	# Point at the right-end of the segment
 	fun point_right: P is abstract
 
 	redef fun to_s do return "{point_left}--{point_right}"
 end
 
-# A 2d line segment
+# 2D line segment between two ordered points
 class Line[N: Numeric]
 	super ILine[N]
 
@@ -142,14 +142,14 @@ class Line[N: Numeric]
 	end
 end
 
-# An abstract 3d line segment
+# Abstract 3D line segment between two ordered points
 interface ILine3d[N: Numeric]
 	super ILine[N]
 
 	redef type P: IPoint3d[N]
 end
 
-# A 3d line segment
+# 3D line segment between two ordered points
 class Line3d[N: Numeric]
 	super Line[N]
 	super ILine3d[N]

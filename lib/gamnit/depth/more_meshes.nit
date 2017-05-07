@@ -80,6 +80,8 @@ class Plane
 end
 
 # Cube, with 6 faces
+#
+# Occupies `[-0.5..0.5]` on all three axes.
 class Cube
 	super Mesh
 

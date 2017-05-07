@@ -12,12 +12,48 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services to load textures, create subtextures and manage their life-cycle
+# Load textures, create subtextures and manage their life-cycle
 module textures
 
 import display
 
-# Abstract gamnit texture
+# Texture composed of pixels, loaded from the assets folder by default
+#
+# Most textures should be created with `App` (as attributes)
+# for the method `on_create` to load them.
+#
+# ~~~
+# import gamnit::flat
+#
+# redef class App
+#     # Create the texture object, it will be loaded automatically
+#     var texture = new Texture("path/in/assets.png")
+#
+#     redef fun on_create()
+#     do
+#         # Let `on_create` load the texture
+#         super
+#
+#         # Use the texture
+#         var sprite = new Sprite(texture, new Point3d[Float](0.0, 0.0, 0.0))
+#         app.sprites.add sprite
+#     end
+# end
+# ~~~
+#
+# Otherwise, they can be loaded and error checked explicitly after `on_create`.
+#
+# ~~~nitish
+# var texture = new Texture("path/in/assets.png")
+# texture.load
+# var error = texture.error
+# if error != null then print_error error
+# ~~~
+#
+# A texture may also be created programmatically, like `CheckerTexture`,
+# or derived from another texture, using `subtexture`.
+# Textures with actual pixel data (not `Subtexture`) are `RootTexture`.
+# Texture loaded from the assets folder may in the PNG or JPG formats.
 abstract class Texture
 
 	# Prepare a texture located at `path` within the `assets` folder
