@@ -18,6 +18,7 @@
 module linux
 
 import app
+intrude import app::app_base # For test_bound_platform
 
 redef class App
 	# Path to the expected location of the asset folder of this program
@@ -62,3 +63,5 @@ redef class TextAsset
 end
 
 redef fun bound_platform do return "GNU/Linux"
+
+redef fun test_bound_platform do end

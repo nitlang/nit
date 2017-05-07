@@ -78,11 +78,3 @@ redef class App
 	# right after this method returns. They should not be preserved.
 	fun accept_event(event: InputEvent): Bool do return false
 end
-
-redef class Sys
-	redef fun run
-	do
-		if "NIT_TESTING".environ == "true" then exit 0
-		super
-	end
-end

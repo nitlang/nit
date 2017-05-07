@@ -122,5 +122,16 @@ fun app: App do return once new App
 # However, this value can be used in log files and communications with servers.
 fun bound_platform: String do return "none"
 
+# Test if the application was bound to a platform, if not crash
+private fun test_bound_platform
+do
+	print_error "Apps must be bound to a platform at compilation using `-m linux` or `-m android`"
+	exit 1
+end
+
+if "NIT_TESTING".environ == "true" then exit 0
+
+test_bound_platform
+
 app.setup
 app.run
