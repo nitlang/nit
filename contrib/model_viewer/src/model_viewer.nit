@@ -30,9 +30,9 @@ redef class App
 
 	# All available models
 	var models: Array[Model] = [
-		new LeafModel(new Cube, new SmoothMaterial.default),
-		new LeafModel(new Mesh.uv_sphere(4.0, 32, 16), new SmoothMaterial.default),
-		new LeafModel(new Mesh.uv_sphere(4.0, 32, 16), new NormalsMaterial),
+		new LeafModel(new Cube, new Material),
+		new LeafModel(new UVSphere(4.0, 32, 16), new Material),
+		new LeafModel(new UVSphere(4.0, 32, 16), new NormalsMaterial),
 		new Model("models/Tree_01.obj"),
 		new Model("models/Oak_Fall_01.obj"),
 		new Model("models/Quandtum_BA-2_v1_1.obj"),

@@ -63,13 +63,13 @@ class GlobeModel
 	redef fun load
 	do
 		leaves.add new LeafModel(
-			new Mesh.uv_sphere(1.0, 2*n_parallels, n_parallels),
+			new UVSphere(1.0, 2*n_parallels, n_parallels),
 			new GlobeMaterial.surface)
 		leaves.add new LeafModel(
-			new Mesh.uv_sphere(1.1, 2*n_parallels, n_parallels),
+			new UVSphere(1.1, 2*n_parallels, n_parallels),
 			new GlobeMaterial.clouds)
 		leaves.add new LeafModel(
-			new Mesh.uv_sphere(1.2, 2*n_parallels, n_parallels),
+			new UVSphere(1.2, 2*n_parallels, n_parallels),
 			new GlobeMaterial.atmo)
 	end
 end

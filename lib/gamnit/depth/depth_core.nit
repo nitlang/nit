@@ -105,58 +105,6 @@ class Mesh
 
 	# `GLDrawMode` used to display this mesh, defaults to `gl_TRIANGLES`
 	fun draw_mode: GLDrawMode do return gl_TRIANGLES
-
-	# Create an UV sphere of `radius` with `n_meridians` and `n_parallels`
-	init uv_sphere(radius: Float, n_meridians, n_parallels: Int)
-	do
-		var w = n_meridians
-		var h = n_parallels
-
-		var vertices = new Array[Float].with_capacity(w*h*3)
-		self.vertices = vertices
-
-		var texture_coords = new Array[Float].with_capacity(w*h*2)
-		self.texture_coords = texture_coords
-
-		var normals = new Array[Float].with_capacity(w*h*3)
-		self.normals = normals
-
-		# Build vertices
-		for m in [0..w[ do
-			for p in [0..h[ do
-				var u = m.to_f * 2.0 * pi / (w-1).to_f
-				var v = p.to_f * pi / (h-1).to_f
-
-				vertices.add radius * u.cos * v.sin
-				vertices.add radius * v.cos
-				vertices.add radius * u.sin * v.sin
-
-				texture_coords.add (1.0 - m.to_f/(w-1).to_f)
-				texture_coords.add(p.to_f/(h-1).to_f)
-
-				normals.add u.cos * v.sin
-				normals.add v.cos
-				normals.add u.sin * v.sin
-			end
-		end
-
-		# Build faces
-		var indices = new Array[Int].with_capacity((w-1)*(h-1)*6)
-		self.indices = indices
-		for m in [0..w-1[ do
-			for p in [0..h-1[ do
-				var a = m*h + p
-
-				indices.add a
-				indices.add a+h
-				indices.add a+1
-
-				indices.add a+h
-				indices.add a+h+1
-				indices.add a+1
-			end
-		end
-	end
 end
 
 # Source of light
