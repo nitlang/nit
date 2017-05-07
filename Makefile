@@ -25,7 +25,9 @@ all: tools man
 	@echo "To configure your shell environment, execute the following command:"
 	@echo "    source misc/nit_env.sh install"
 
-# Compile all programs in $PROGS
+# Compile all programs in `contrib`, `examples` and `src`.
+#
+# Furthermore, build the toolchain’s `man` pages.
 full: all
 	for m in $(PROGS); do $(MAKE) -C "$$m" || exit 1; done
 
