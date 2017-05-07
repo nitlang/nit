@@ -601,7 +601,7 @@ private class SpriteSet
 	super HashSet[Sprite]
 
 	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap2[GamnitRootTexture, Bool, SpriteContext]
+	var contexts_map = new HashMap2[RootTexture, Bool, SpriteContext]
 
 	# Contexts in `contexts_map`
 	var contexts_items = new Array[SpriteContext]
@@ -696,7 +696,7 @@ private class SpriteContext
 	# Context config and state
 
 	# Only root texture drawn by this context
-	var texture: nullable GamnitRootTexture
+	var texture: nullable RootTexture
 
 	# OpenGL ES usage of `buffer_array` and `buffer_element`
 	var usage: GLBufferUsage

@@ -23,8 +23,8 @@ abstract class Texture
 	# Prepare a texture located at `path` within the `assets` folder
 	new (path: Text) do return new TextureAsset(path.to_s)
 
-	# Root texture of which `self` is derived
-	fun root: GamnitRootTexture is abstract
+	# Root texture from which `self` is derived
+	fun root: RootTexture is abstract
 
 	# Width in pixels of this texture
 	var width = 0.0
@@ -42,10 +42,10 @@ abstract class Texture
 	fun gl_texture: Int do return root.gl_texture
 
 	# Prepare a subtexture from this texture, from the given pixel offsets
-	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
+	fun subtexture(left, top, width, height: Numeric): Subtexture
 	do
 		# Setup the subtexture
-		var subtex = new GamnitSubtexture(root, self, left.to_f, top.to_f, width.to_f, height.to_f)
+		var subtex = new Subtexture(root, self, left.to_f, top.to_f, width.to_f, height.to_f)
 		return subtex
 	end
 
@@ -64,7 +64,7 @@ end
 
 # Colorful small texture of 2x2 pixels
 class CheckerTexture
-	super GamnitRootTexture
+	super RootTexture
 
 	redef fun load(force)
 	do
@@ -84,7 +84,7 @@ class CheckerTexture
 end
 
 # Texture with its own pixels
-class GamnitRootTexture
+class RootTexture
 	super Texture
 
 	redef fun root do return self
@@ -143,7 +143,7 @@ end
 
 # Texture loaded from the assets folder
 class TextureAsset
-	super GamnitRootTexture
+	super RootTexture
 
 	# Path to this texture within the `assets` folder
 	var path: String
@@ -166,7 +166,7 @@ class TextureAsset
 end
 
 # Texture derived from another texture, does not own its pixels
-class GamnitSubtexture
+class Subtexture
 	super Texture
 
 	redef var root
