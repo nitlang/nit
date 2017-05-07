@@ -62,7 +62,7 @@ class ModelAsset
 		var content = text_asset.to_s
 		if content.is_empty then
 			print_error "Model failed to load: Asset empty at '{self.path}'"
-			leaves.add new LeafModel(new Cube, new SmoothMaterial.default)
+			leaves.add new LeafModel(new Cube, new Material)
 			return
 		end
 
@@ -71,7 +71,7 @@ class ModelAsset
 		var obj_def = parser.parse
 		if obj_def == null then
 			print_error "Model failed to load: .obj format error on '{self.path}'"
-			leaves.add new LeafModel(new Cube, new SmoothMaterial.default)
+			leaves.add new LeafModel(new Cube, new Material)
 			return
 		end
 
@@ -212,7 +212,7 @@ private class ModelFromObj
 		# Create models and store them
 		for mesh, mtl_def in mesh_to_mtl do
 			var material = materials.get_or_null(mtl_def)
-			if material == null then material = new SmoothMaterial.default
+			if material == null then material = new Material
 
 			var model = new LeafModel(mesh, material)
 			array.add model
@@ -387,5 +387,5 @@ redef class Sys
 	# Blue cube of 1 unit on each side, acting as placeholder for models failing to load
 	#
 	# This model can be freely used by any `Actor` as placeholder or for debugging.
-	var placeholder_model = new LeafModel(new Cube, new SmoothMaterial.default) is lazy
+	var placeholder_model = new LeafModel(new Cube, new Material) is lazy
 end

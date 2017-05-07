@@ -18,15 +18,17 @@ module more_materials
 intrude import depth_core
 intrude import flat
 
-# Simple material with static colors used for debugging or display abstract objects
-class SmoothMaterial
-	super Material
-
+redef class Material
 	# Get the default blueish material
-	init default do init(
+	new do return new SmoothMaterial(
 		[0.0, 0.0, 0.3, 1.0],
 		[0.0, 0.0, 0.6, 1.0],
 		[1.0, 1.0, 1.0, 1.0])
+end
+
+# Simple material with static colors used for debugging or display abstract objects
+class SmoothMaterial
+	super Material
 
 	# Ambient color, always visible
 	var ambient_color: Array[Float] is writable
