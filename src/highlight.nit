@@ -25,7 +25,8 @@ class HighlightVisitor
 	# The root of the HTML hierarchy
 	var html = new HTMLTag("span")
 
-	# Is the HTML include a nested `<span class"{type_of_node}">` element for each `ANode` of the AST?
+	# Should the HTML include a nested `<span class"{type_of_node}">` element for each `ANode` of the AST?
+	#
 	# Used to have a really huge and verbose HTML (mainly for debug)
 	var with_ast = false is writable
 
@@ -62,7 +63,7 @@ class HighlightVisitor
 	#
 	# By default, `null` is returned.
 	# Clients are therefore encouraged to redefine the method in a subclass to control where entities should link to.
-	fun hrefto(entitiy: MEntity): nullable String do return null
+	fun hrefto(entity: MEntity): nullable String do return null
 
 	init
 	do

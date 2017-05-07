@@ -32,7 +32,7 @@ class NitlightVisitor
 	# Entities outside these modules will not be linked.
 	var mmodules: Collection[MModule]
 
-	redef fun hrefto(entitiy) do return entitiy.href(self)
+	redef fun hrefto(entity) do return entity.href(self)
 end
 
 redef class MEntity

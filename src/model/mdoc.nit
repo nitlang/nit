@@ -35,7 +35,7 @@ end
 
 redef class MEntity
 	# The documentation associated to the entity
-	var mdoc: nullable MDoc is writable
+	var mdoc: nullable MDoc = null is writable
 
 	# The documentation associated to the entity or their main nested entity.
 	#
