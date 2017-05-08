@@ -18,7 +18,7 @@ module client3d is
 	app_namespace "org.nitlanguage.tinks3d"
 	app_version(1, 0, git_revision)
 
-	android_api_target 15
+	android_api_target 10
 	android_manifest """<uses-permission android:name="android.permission.INTERNET" />"""
 end
 

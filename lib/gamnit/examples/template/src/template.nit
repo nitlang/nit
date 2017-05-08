@@ -6,12 +6,11 @@
 # http://sam.zoy.org/projects/COPYING.WTFPL for more details.
 
 # Template for a 2D gamnit game
-module template_flat is
-	app_name "gamnit 2D Template"
-	app_namespace "net.xymus.template_flat"
-	app_version(1, 0, git_revision)
-
-	android_api_target 15
+module template is
+	app_name "gamnit template"
+	app_namespace "org.gamnit.template"
+	app_version(0, 1, git_revision)
+	android_api_target 10
 end
 
 import gamnit::flat # For `Texture, Sprite`, etc.

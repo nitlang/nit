@@ -19,7 +19,7 @@ module model_viewer is
 	app_version(1, 0, git_revision)
 
 	android_manifest_activity """android:screenOrientation="landscape""""
-	android_api_target 15
+	android_api_target 10
 end
 
 import gamnit::depth
