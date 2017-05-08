@@ -69,6 +69,8 @@ class JsonSerializer
 	# Used only when `plain_json == true`.
 	private var first_attribute = false
 
+	redef var current_object = null
+
 	redef fun serialize(object)
 	do
 		if object == null then
@@ -88,8 +90,11 @@ class JsonSerializer
 			end
 
 			first_attribute = true
+			var last_object = current_object
+			current_object = object
 			object.accept_json_serializer self
 			first_attribute = false
+			current_object = last_object
 
 			if plain_json then open_objects.pop
 		end
@@ -248,7 +253,7 @@ redef class Serializable
 			v.stream.write class_name
 			v.stream.write "\""
 		end
-		core_serialize_to(v)
+		v.serialize_core(self)
 
 		v.indent_level -= 1
 		v.new_line_and_indent

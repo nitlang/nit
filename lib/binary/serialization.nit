@@ -70,6 +70,8 @@ class BinarySerializer
 	# Target writing stream
 	var stream: Writer is writable
 
+	redef var current_object = null
+
 	redef fun serialize(object)
 	do
 		if object == null then
@@ -92,7 +94,10 @@ class BinarySerializer
 			stream.write_int64 id
 		else
 			# serialize here
+			var last_object = current_object
+			current_object = object
 			object.serialize_to_binary self
+			current_object = last_object
 		end
 	end
 
@@ -366,7 +371,7 @@ redef class Serializable
 	private fun serialize_to_binary(v: BinarySerializer)
 	do
 		serialize_header_to_binary v
-		core_serialize_to v
+		v.serialize_core self
 		v.stream.write_byte new_object_end
 	end
 end
@@ -454,7 +459,7 @@ redef class Map[K, V]
 	do
 		serialize_header_to_binary v
 
-		core_serialize_to v
+		v.serialize_core self
 
 		v.stream.write_string "keys"
 		v.serialize_flat_array keys
