@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITCOPT=
 
 contrib_dir = ./contrib
 examples_dir = ./examples
