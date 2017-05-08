@@ -740,7 +740,7 @@ end
 class CallSite
 	super MEntity
 
-	redef var location: Location
+	redef var location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
@@ -785,11 +785,13 @@ class CallSite
 	fun dump_info(v: ASTDump): String do
 		return "{recv}.{mpropdef}{msignature}"
 	end
+
+	redef fun mdoc_or_fallback do return mproperty.intro.mdoc
 end
 
 redef class Variable
 	# The declared type of the variable
-	var declared_type: nullable MType is writable
+	var declared_type: nullable MType = null is writable
 
 	# Was the variable type-adapted?
 	# This is used to speedup type retrieval while it remains `false`

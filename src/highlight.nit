@@ -25,7 +25,8 @@ class HighlightVisitor
 	# The root of the HTML hierarchy
 	var html = new HTMLTag("span")
 
-	# Is the HTML include a nested `<span class"{type_of_node}">` element for each `ANode` of the AST?
+	# Should the HTML include a nested `<span class"{type_of_node}">` element for each `ANode` of the AST?
+	#
 	# Used to have a really huge and verbose HTML (mainly for debug)
 	var with_ast = false is writable
 
@@ -62,7 +63,7 @@ class HighlightVisitor
 	#
 	# By default, `null` is returned.
 	# Clients are therefore encouraged to redefine the method in a subclass to control where entities should link to.
-	fun hrefto(entitiy: MEntity): nullable String do return null
+	fun hrefto(entity: MEntity): nullable String do return null
 
 	init
 	do
@@ -362,12 +363,14 @@ class HInfoBox
 	end
 
 	# Append a new dropdown in the popuped content
-	fun new_dropdown(title, text: String): HTMLTag
+	fun new_dropdown(title, text: String, text_is_html: nullable Bool): HTMLTag
 	do
 		content.add_raw_html """<div class="dropdown"> <a data-toggle="dropdown" href="#"><b>"""
 		content.append(title)
 		content.add_raw_html "</b> "
-		content.append(text)
+		if text_is_html == true then
+			content.add_raw_html(text)
+		else content.append(text)
 		content.add_raw_html """<span class="caret"></span></a>"""
 		var res = content.open("ul").add_class("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "dLabel")
 		content.add_raw_html "</div>"
@@ -551,8 +554,8 @@ redef class MVirtualType
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(mproperty)
 		var p = mproperty
+		res.new_field("virtual type").add p.intro.linkto(v)
 		add_doc_to_infobox(res)
-		if mdoc != null then mdoc.fill_infobox(res)
 		return res
 	end
 	redef fun linkto(v)

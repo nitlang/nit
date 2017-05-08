@@ -35,7 +35,7 @@ end
 
 redef class MEntity
 	# The documentation associated to the entity
-	var mdoc: nullable MDoc is writable
+	var mdoc: nullable MDoc = null is writable
 
 	# The documentation associated to the entity or their main nested entity.
 	#
@@ -45,6 +45,7 @@ redef class MEntity
 	#   their introducing definition.
 	# * `MClassType`s fall back to their wrapped `MClass`.
 	# * `MVirtualType`s fall back to their wrapped `MProperty`.
+	# * `CallSite` fall back on the wrapped `MProperty`.
 	# * Other entities do not fall back.
 	#
 	# One may use `MDoc::original_mentity` to retrieve the original
