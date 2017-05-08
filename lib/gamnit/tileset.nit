@@ -83,6 +83,12 @@ class TileSetFont
 	# A negative value may display overlapped tiles.
 	var vspace: Numeric = 0.0 is writable
 
+	# Line spacing modifier for `pld` and `plu`
+	#
+	# This value acts as multiplier to `height + vspace`.
+	# Defaults to 0.4, so a `pld` moves chars down by about half a line.
+	var partial_line_mod: Numeric = 0.4 is writable
+
 	# The glyph/tile/texture associated to `char`
 	#
 	# Returns null if `char` is not in `chars`.
@@ -164,6 +170,12 @@ class TextSprites
 				dy -= font.height.to_f + font.vspace.to_f
 				dx = font.advance/2.0
 				continue
+			else if c == pld then
+				dy -= (font.height.to_f + font.vspace.to_f) * font.partial_line_mod.to_f
+				continue
+			else if c == plu then
+				dy += (font.height.to_f + font.vspace.to_f) * font.partial_line_mod.to_f
+				continue
 			else if c.is_whitespace then
 				dx += font.advance
 				continue
@@ -184,3 +196,9 @@ class TextSprites
 		target_sprite_set.add_all sprites
 	end
 end
+
+# Partial line forward (U+008B)
+fun pld: Char do return ''
+
+# Partial line backward (U+008C)
+fun plu: Char do return ''
