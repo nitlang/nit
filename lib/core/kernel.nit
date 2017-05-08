@@ -1045,12 +1045,13 @@ universal Char
 	#
 	#     assert 'A'.is_whitespace  == false
 	#     assert ','.is_whitespace  == false
-	#     assert ' '.is_whitespace  == true
+	#     assert ' '.is_whitespace  == true # space
+	#     assert ' '.is_whitespace  == true # non-breaking space
 	#     assert '\t'.is_whitespace == true
 	fun is_whitespace: Bool
 	do
 		var i = code_point
-		return i <= 0x20 or i == 0x7F
+		return i <= 0x20 or i == 0x7F or i == 0xA0
 	end
 end
 
