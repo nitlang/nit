@@ -16,8 +16,13 @@
 
 NITCOPT=
 
+contrib_dir = ./contrib
+examples_dir = ./examples
+all_contribs = $(dir $(contrib_dir)/*/Makefile)
+
 # Additional program directories (contrib and examples) that are buildable
-PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
+extras = $(filter-out $(contrib_dir)/nitc/,$(all_contribs))
+extras += $(dir $(examples_dir)/*/Makefile)
 
 all: tools man
 	@echo ""
@@ -29,7 +34,9 @@ all: tools man
 #
 # Furthermore, build the toolchain’s `man` pages.
 full: all
-	for m in $(PROGS); do $(MAKE) -C "$$m" || exit 1; done
+	for directory in $(extras); do \
+		(cd "$${directory}" && $(MAKE)) || exit 1; \
+	done
 
 docs: doc/stdlib/index.html doc/nitc/index.html
 
@@ -82,6 +89,6 @@ clean:
 	cd src; make clean
 	cd tests; make clean
 	cd share/man; make clean
-	for m in $(PROGS); do \
-		$(MAKE) clean -C "$$m"; \
-		done || true
+	for directory in $(extras); do \
+		(cd "$$directory" && $(MAKE) clean); \
+	done
