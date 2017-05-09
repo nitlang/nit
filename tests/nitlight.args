@@ -1,1 +1,3 @@
 -f base_simple3.nit
+base_simple3.nit
+-f --line-id-prefix XYZ --first-line 38 --last-line 46 base_simple3.nit
