@@ -114,6 +114,22 @@ class HighlightVisitor
 			if l.next_looses.not_empty then l = l.next_looses.last
 		end
 
+		var line = first_line
+		if line != null then
+			while f.location.line_start < line do
+				f = f.next_token
+				if f == null then return
+			end
+		end
+
+		line = last_line
+		if line != null then
+			while l.location.line_end > line do
+				l = l.prev_token
+				if l == null then return
+			end
+		end
+
 		if include_whole_lines then
 			f = f.first_real_token_in_line
 			l = l.last_real_token_in_line
@@ -221,7 +237,7 @@ class HighlightVisitor
 			end
 
 			# Add the token
-			if c isa TEol then 
+			if c isa TEol then
 				html.append "\n"
 			else
 				var tag = full_tag(c, hv)
@@ -258,8 +274,7 @@ class HighlightVisitor
 
 			c = n
 		end
-		#assert stack.is_empty
-		#assert stack2.is_empty
+		if not stack2.is_empty then html = stack2.first
 	end
 
 	# Return a default CSS content related to CSS classes used in the `html` tree.
