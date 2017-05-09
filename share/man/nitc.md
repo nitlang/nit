@@ -7,6 +7,8 @@ nitc - compiles Nit programs.
 
 nitc [*options*] FILE...
 
+nitc [*options*] --run FILE [ARG]...
+
 
 # DESCRIPTION
 
@@ -162,6 +164,21 @@ Base directory of the Nit installation.
 Has precedence over the environment variable `NIT_DIR`.
 
 ## COMPILATION
+
+### `--run`
+Execute the binary after the compilation.
+
+The binary is generated as expected then it is executed directly.
+After the execution, the binary is not removed.
+
+When `--run` is used, the first argument is the program to compile, the rest of the arguments are the arguments of the program.
+Note that you MUST use `--` before the program arguments if one of them is an option starting with a `-`.
+
+~~~bash
+$ nitc --run foo.nit arg       # compile foo.nit, then executes `./foo arg`
+$ nitc --run foo.nit arg -W    # compile foo.nit with warnings, then executes `./foo arg`
+$ nitc --run foo.nit -- arg -W # compile foo.nit, then executes `./foo arg -W`
+~~~
 
 ### `--compile-dir`
 Directory used to generate temporary files.
