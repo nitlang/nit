@@ -127,7 +127,7 @@ end
 # A count option. Count the number of time this option is present
 class OptionCount
 	super Option
-	redef type VALUE: Int
+	redef type VALUE: Int is fixed
 
 	# Init a new OptionCount with a `help` message and `names`.
 	init(help: String, names: String...) is old_style_init do super(help, 0, names)
