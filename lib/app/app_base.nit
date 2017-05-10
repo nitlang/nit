@@ -115,5 +115,23 @@ end
 # The running `App`
 fun app: App do return once new App
 
+# Platform bound at compilation (by importation or -m)
+#
+# This value should not be used to decide the behavior of the software.
+# Class refinement provide a safer and a static solution to apply variations.
+# However, this value can be used in log files and communications with servers.
+fun bound_platform: String do return "none"
+
+# Test if the application was bound to a platform, if not crash
+private fun test_bound_platform
+do
+	print_error "Apps must be bound to a platform at compilation using `-m linux` or `-m android`"
+	exit 1
+end
+
+if "NIT_TESTING".environ == "true" then exit 0
+
+test_bound_platform
+
 app.setup
 app.run

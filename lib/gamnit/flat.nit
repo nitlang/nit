@@ -1078,7 +1078,7 @@ end
 #
 # array.add "E"
 # assert array.to_s == "[A,B,c,D,E]"
-# assert array.capacity == 5
+# assert array.capacity == 6
 # assert array.length == 5
 #
 # array.remove "A"
