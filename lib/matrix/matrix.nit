@@ -28,9 +28,7 @@ class Matrix
 	var height: Int
 
 	# Items of this matrix, rows by rows
-	var items: Array[Float] is lazy	do
-		return new Array[Float].filled_with(0.0, width*height)
-	end
+	private var items = new NativeDoubleArray(width*height) is lazy
 
 	# Create a matrix from nested sequences
 	#
@@ -134,7 +132,12 @@ class Matrix
 	end
 
 	# Create a new clone of this matrix
-	redef fun clone do return new Matrix.from_array(width, height, items.clone)
+	redef fun clone
+	do
+		var c = new Matrix(width, height)
+		for i in [0..width*height[ do c.items[i] = items[i]
+		return c
+	end
 
 	# Get the value at column `y` and row `x`
 	#
@@ -212,7 +215,7 @@ class Matrix
 		var out = new Matrix(other.width, self.height)
 		for j in self.height.times do
 			for i in other.width.times do
-				var sum = items.first.zero
+				var sum = items[0].zero
 				for k in self.width.times do sum += self[j, k] * other[k, i]
 				out[j, i] = sum
 			end
@@ -244,15 +247,22 @@ class Matrix
 
 	redef fun to_s
 	do
-		var lines = new Array[String]
-		for y in height.times do
-			lines.add items.subarray(y*width, width).join(" ")
+		var s = new FlatBuffer
+		for y in [0..height[ do
+			for x in [0..width[ do
+				s.append items[y*width+x].to_s
+				if x < width-1 then s.add ' '
+			end
+			if y < height-1 then s.add '\n'
 		end
-		return lines.join("\n")
+		return s.to_s
 	end
 
-	redef fun ==(other) do return other isa Matrix and other.items == self.items
-	redef fun hash do return items.hash
+	redef fun ==(other) do return other isa Matrix and
+		width == other.width and height == other.height and
+		items.equal_items(items, width*height)
+
+	redef fun hash do return items.hash_items(width*height)
 end
 
 private class MatrixIndexIterator
@@ -292,4 +302,37 @@ class MatrixCoordinate
 	var y: Int
 
 	redef fun to_s do return "({x},{y})"
+end
+
+# Specialized native structure to store matrix items and avoid boxing cost
+private extern class NativeDoubleArray `{ double* `}
+
+	new(size: Int) do
+		var sizeof_double = 8
+		var buf = new CString(sizeof_double*size)
+		return new NativeDoubleArray.in_buffer(buf)
+	end
+
+	new in_buffer(buffer: CString) `{ return (double*)buffer; `}
+
+	fun [](i: Int): Float `{ return self[i]; `}
+
+	fun []=(i: Int, value: Float) `{ self[i] = value; `}
+
+	fun equal_items(other: NativeDoubleArray, len: Int): Bool `{
+		int i;
+		for (i = 0; i < len; i ++)
+			if (self[i] != other[i])
+				return 0;
+		return 1;
+	`}
+
+	fun hash_items(len: Int): Int `{
+		// Adapted from `SequenceRead::hash`
+		long r = 17+len;
+		int i;
+		for (i = 0; i < len; i ++)
+			r = r * 3 / 2 + (long)(i*1024.0);
+		return r;
+	`}
 end
