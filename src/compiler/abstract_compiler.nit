@@ -31,6 +31,8 @@ redef class ToolContext
 	var opt_output = new OptionString("Filename of the generated executable", "-o", "--output")
 	# --dir
 	var opt_dir = new OptionString("Output directory", "--dir")
+	# --run
+	var opt_run = new OptionBool("Execute the binary after the compilation", "--run")
 	# --no-cc
 	var opt_no_cc = new OptionBool("Do not invoke the C compiler", "--no-cc")
 	# --no-main
@@ -75,7 +77,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_run, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_no_stacktrace)
@@ -197,6 +199,14 @@ class MakefileToolchain
 
 		if auto_remove then
 			sys.system("rm -r -- '{root_compile_dir.escape_to_sh}/'")
+		end
+
+		if toolcontext.opt_run.value then
+			var mainmodule = compiler.mainmodule
+			var out = outfile(mainmodule)
+			var cmd = ["."/out]
+			cmd.append toolcontext.option_context.rest
+			toolcontext.exec_and_check(cmd, "--run")
 		end
 
 		time1 = get_time
@@ -4194,6 +4204,10 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
+if toolcontext.opt_run.value then
+	# When --run, only the first is the program, the rest is the run arguments
+	arguments = [toolcontext.option_context.rest.shift]
+end
 if arguments.length > 1 and toolcontext.opt_output.value != null then
 	print "Option Error: --output needs a single source file. Do you prefer --dir?"
 	exit 1
