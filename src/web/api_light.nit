@@ -12,32 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Components required to build a web server about the nit model.
-module web
+# Highlight and collect messages from a piece of code
+module api_light
 
-import api_auth
-import api_model
-import api_catalog
-import api_graph
-import api_docdown
-import api_metrics
-import api_feedback
-import api_light
+import web_base
+import highlight
 
 redef class APIRouter
 	redef init do
 		super
-		use("/*", new APIErrorHandler(config)) # catch 404 errors
+		use("/light/", new APILight(config))
 	end
 end
 
-# Error handler user to catch non resolved request by the API
-#
-# Displays a JSON formatted 404 error.
-class APIErrorHandler
+# Highlight handler accept source code as POST data and render it as HTML with nitpick messages
+class APILight
 	super APIHandler
 
-	redef fun all(req, res) do
-		res.api_error(404, "Not found")
+	redef fun post(req, res) do
+		var hl = new HighlightVisitor
+		var hlcode = hightlightcode(hl, req.body)
+		res.json(hlcode)
 	end
 end

@@ -19,6 +19,103 @@ import frontend
 import html
 import pipeline
 import astutil
+import serialization
+
+# Fully process a content as a nit source file.
+fun hightlightcode(hl: HighlightVisitor, content: String): HLCode
+do
+	# Prepare a stand-alone tool context
+	var tc = new ToolContext
+	tc.nit_dir = tc.locate_nit_dir # still use the common lib to have core
+	tc.keep_going = true # no exit, obviously
+	tc.opt_warn.value = -1 # no output, obviously
+
+	# Prepare an stand-alone model and model builder.
+	# Unfortunately, models are enclosing and append-only.
+	# There is no way (yet?) to have a shared module `core` with
+	# isolated and throwable user modules.
+	var model = new Model
+	var mb = new ModelBuilder(model, tc)
+
+	# Parse the code
+	var source = new SourceFile.from_string("", content + "\n")
+	var lexer = new Lexer(source)
+	var parser = new Parser(lexer)
+	var tree = parser.parse
+
+	var hlcode = new HLCode(hl, content, source)
+
+	# Check syntax error
+	var eof = tree.n_eof
+	if eof isa AError then
+		mb.error(eof, eof.message)
+		hl.hightlight_source(source)
+		return hlcode
+	end
+	var amodule = tree.n_base.as(not null)
+
+	# Load the AST as a module in the model
+	# Then process it
+	mb.load_rt_module(null, amodule, "")
+	mb.run_phases
+
+	# Highlight the processed module
+	hl.enter_visit(amodule)
+	return hlcode
+end
+
+# A standalone highlighted piece of code
+class HLCode
+	super Serializable
+
+	# The highlighter used
+	var hl: HighlightVisitor
+
+	# The raw code source
+	var content: String
+
+	# The pseudo source-file
+	var source: SourceFile
+
+	# JavaScript code to update an existing codemirror editor.
+	fun code_mirror_update: Template
+	do
+
+		var res = new Template
+		res.add """
+	function nitmessage() {
+		editor.operation(function(){
+			for (var i = 0; i < widgets.length; ++i)
+			      editor.removeLineWidget(widgets[i]);
+			widgets.length = 0;
+"""
+
+		for m in source.messages do
+			res.add """
+			var l = document.createElement("div");
+			l.className = "lint-error"
+			l.innerHTML = "<span class='glyphicon glyphicon-warning-sign lint-error-icon'></span> {{{m.text.html_escape}}}";
+			var w = editor.addLineWidget({{{m.location.line_start-1}}}, l);
+			widgets.push(w);
+"""
+		end
+		res.add """});}"""
+		return res
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("code", hl.html.write_to_string)
+		var msgs = new Array[Map[String, Serializable]]
+		for m in source.messages do
+			var o = new Map[String, Serializable]
+			msgs.add o
+			o["line"] = m.location.line_start-1
+			o["message"] = m.text
+		end
+		v.serialize_attribute("messages", msgs)
+	end
+end
 
 # Visitor used to produce a HTML tree based on a AST on a `Source`
 class HighlightVisitor
