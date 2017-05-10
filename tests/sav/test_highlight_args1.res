@@ -171,7 +171,7 @@
 <h2>AST node: AMethPropdef at base_simple3.nit:26,2--21</h2>
 <pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3$Int$output"><span class="line" id="L26">	<span class="nc_k">fun</span> <span class="nc_def popupable" title="base_simple3$Int$output" data-title="&lt;a href=&#34;#base_simple3___base_simple3__Int___output&#34;&gt;base_simple3$Int$output&lt;&#47;a&gt;" data-content="&lt;div&gt;&lt;b&gt;fun&lt;&#47;b&gt; &lt;span&gt;output&lt;span&gt;&lt;&#47;span&gt;&lt;&#47;span&gt;&lt;br&#47;&gt;&lt;&#47;div&gt;" data-toggle="popover"><span class="nc_i">output</span></span> <span class="nc_k">is</span> <span class="nc_i">intern</span></span></span></span></code></pre>
 <h2>AST node: TKwmeth at base_simple3.nit:26,2--4</h2>
-<pre><code><span class="nc_pdef foldable" id="base_simple3$Int$output"><span class="line" id="L26">	<span class="nc_k">fun</span></span></span></code></pre>
+<pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3$Int$output"><span class="line" id="L26">	<span class="nc_k">fun</span></span></span></span></code></pre>
 <h2>AST node: AIdMethid at base_simple3.nit:26,6--11</h2>
 <pre><code><span class="nitcode"><span class="nc_def popupable foldable" title="base_simple3$Int$output" data-title="&lt;a href=&#34;#base_simple3___base_simple3__Int___output&#34;&gt;base_simple3$Int$output&lt;&#47;a&gt;" data-content="&lt;div&gt;&lt;b&gt;fun&lt;&#47;b&gt; &lt;span&gt;output&lt;span&gt;&lt;&#47;span&gt;&lt;&#47;span&gt;&lt;br&#47;&gt;&lt;&#47;div&gt;" data-toggle="popover"><span class="line" id="L26"> <span class="nc_i">output</span></span></span></span></code></pre>
 <h2>AST node: TId at base_simple3.nit:26,6--11</h2>
@@ -191,5 +191,4 @@
 <h2>AST node: TKwclass at base_simple3.nit:29,1--5</h2>
 <pre><code><span class="nitcode"><span class="line" id="L29"><span class="nc_k">class</span></span></span></code></pre>
 <h2>AST node: TKwinit at base_simple3.nit:30,2--5</h2>
-<pre><code><span class="nc_pdef foldable" id="base_simple3$A$init"><span class="line" id="L30">	<span class="nc_k">init</span></span></span></code></pre>
-<h2>AST node: TKwdo at base***TRUNCATED***
+<pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3$A$init"><span class="line" id="L30">	<span class="nc_k">init</span></sp***TRUNCATED***
