@@ -76,13 +76,13 @@ class HttpRequest
 		return s
 	end
 
-	# Returns argument `arg_name` as an Int or `null` if not found or not a number.
+	# Returns argument `arg_name` as an Int or `null` if not found or not an integer.
 	#
 	# NOTE: Prioritizes POST before GET
 	fun int_arg(arg_name: String): nullable Int do
 		if not all_args.has_key(arg_name) then return null
 		var i = all_args[arg_name]
-		if not i.is_numeric then return null
+		if not i.is_int then return null
 		return i.to_i
 	end
 
