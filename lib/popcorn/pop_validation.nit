@@ -699,3 +699,31 @@ class ISBNField
 
 	redef var re = "(^ISBN [0-9]-[0-9]\{3\}-[0-9]\{5\}-[0-9]?$)".to_re
 end
+
+# Check if a field is a valid URL
+#
+# Matched against the following regular expression:
+# ~~~raw
+# ^(http|https):\/\/[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)+([a-zA-Z0-9\-\.,@?^=%&amp;:/~\+#]*[a-zA-Z0-9\-\@?^=%&amp;/~\+#])?
+# ~~~
+# You should redefine the base regular expression `re` with your own.
+#
+# ~~~
+# var validator = new ObjectValidator
+# validator.add new URLField("url")
+# assert not validator.validate("""{ "url": "" }""")
+# assert not validator.validate("""{ "url": "foo" }""")
+# assert not validator.validate("""{ "url": "http://foo" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo?q" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo?q&a" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo?q&a=1" }""")
+# ~~~
+class URLField
+	super RegexField
+
+	autoinit field, required
+
+	redef var re = "^(http|https):\\/\\/[a-zA-Z0-9\\-_]+(\\.[a-zA-Z0-9\\-_]+)+([a-zA-Z0-9\\-\\.,@?^=%&:/~\\+#]*[a-zA-Z0-9\\-\\@?^=%&/~\\+#])?".to_re
+end
