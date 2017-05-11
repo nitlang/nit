@@ -14,9 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=nitunit
+module test_example_query_string is test_suite
 
-all:
+import pop_tests
+import example_query_string
 
-check:
-	$(NITUNIT) . tests/ examples/
+class TestExampleQueryString
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/?user=Morriar"
+		system "curl -s {host}:{port}/?reload"
+		system "curl -s {host}:{port}/?foo\\&bar=baz"
+		system "curl -s {host}:{port}/?items=10\\&order=asc"
+	end
+
+	fun test_example_query_string do
+		var app = new App
+		app.use("/", new QueryStringHandler)
+		run_test(app)
+	end
+end

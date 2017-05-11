@@ -14,9 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=nitunit
+module test_example_static_default is test_suite
 
-all:
+import pop_tests
+import example_static_default
 
-check:
-	$(NITUNIT) . tests/ examples/
+class TestExampleStaticDefault
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/css/style.css"
+		system "curl -s {host}:{port}/js/app.js"
+		system "curl -s {host}:{port}/hello.html"
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/css/not_found.nit"
+		system "curl -s {host}:{port}/static/css/not_found.nit"
+		system "curl -s {host}:{port}/not_found.nit"
+	end
+
+	fun test_example_static_default do
+		var app = new App
+		app.use("/", new StaticHandler("examples/static_files/public/", "default.html"))
+		run_test(app)
+	end
+end

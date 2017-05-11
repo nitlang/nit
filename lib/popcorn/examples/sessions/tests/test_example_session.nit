@@ -14,9 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=nitunit
+module test_example_session is test_suite
 
-all:
+import pop_tests
+import example_session
 
-check:
-	$(NITUNIT) . tests/ examples/
+class TestExampleSession
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/ -X POST"
+		system "curl -s {host}:{port}/not_found"
+		system "curl -s {host}:{port}/user/not_found"
+		system "curl -s {host}:{port}/products/not_found"
+	end
+
+	fun test_example_session do
+		var app = new App
+		app.use("/*", new SessionInit)
+		app.use("/", new AppLogin)
+		run_test(app)
+	end
+end

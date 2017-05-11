@@ -14,9 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=nitunit
+module test_example_simple_error_handler is test_suite
 
-all:
+import pop_tests
+import example_simple_error_handler
 
-check:
-	$(NITUNIT) . tests/ examples/
+class TestExampleSimpleErrorHandler
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/about"
+	end
+
+	fun test_example_simple_error_handler do
+		var app = new App
+		app.use("/", new HelloHandler)
+		app.use("/*", new SimpleErrorHandler)
+		run_test(app)
+	end
+end

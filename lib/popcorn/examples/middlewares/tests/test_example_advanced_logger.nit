@@ -14,9 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=nitunit
+module test_example_advanced_logger is test_suite
 
-all:
+import pop_tests
+import example_advanced_logger
 
-check:
-	$(NITUNIT) . tests/ examples/
+class TestExampleAdvancedLogger
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/about"
+	end
+
+	fun test_example_advanced_logger do
+		var app = new App
+		app.use_before("/*", new RequestTimeHandler)
+		app.use("/", new HelloHandler)
+		app.use_after("/*", new LogHandler)
+		run_test(app)
+	end
+end
