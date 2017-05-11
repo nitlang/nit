@@ -29,7 +29,7 @@ class TestExampleSimpleErrorHandler
 
 	fun test_example_simple_error_handler do
 		var app = new App
-		app.use("/", new HelloHandler)
+		app.use("/", new SomeHandler)
 		app.use("/*", new SimpleErrorHandler)
 		run_test(app)
 	end

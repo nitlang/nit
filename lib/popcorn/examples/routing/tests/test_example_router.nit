@@ -36,7 +36,7 @@ class TestExampleRouter
 	fun test_example_router do
 		var user_router = new Router
 		user_router.use("/*", new UserLogger)
-		user_router.use("/", new UserHome)
+		user_router.use("/", new UserHomepage)
 		user_router.use("/profile", new UserProfile)
 		var app = new App
 		app.use("/", new AppHome)

@@ -19,7 +19,7 @@ module test_example_post_handler is test_suite
 import pop_tests
 import example_post_handler
 
-class TestExampleQueryString
+class TestExamplePostHandler
 	super TestPopcorn
 
 	redef fun client_test do

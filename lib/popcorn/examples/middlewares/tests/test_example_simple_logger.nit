@@ -29,8 +29,8 @@ class TestExampleSimpleLogger
 
 	fun test_example_simple_logger do
 		var app = new App
-		app.use_before("/*", new LogHandler)
-		app.use("/", new HelloHandler)
+		app.use_before("/*", new SimpleLoggerHandler)
+		app.use("/", new MyOtherHandler)
 		run_test(app)
 	end
 end

@@ -30,8 +30,8 @@ class TestExampleAdvancedLogger
 	fun test_example_advanced_logger do
 		var app = new App
 		app.use_before("/*", new RequestTimeHandler)
-		app.use("/", new HelloHandler)
-		app.use_after("/*", new LogHandler)
+		app.use("/", new AnotherHandler)
+		app.use_after("/*", new AdvancedLoggerHandler)
 		run_test(app)
 	end
 end
