@@ -51,6 +51,13 @@ redef class Sys
 	`}
 end
 
+redef class Int
+	# Sleep approximately `self` seconds
+	#
+	# Is not interrupted by signals.
+	fun sleep do to_f.sleep
+end
+
 redef class Float
 	# Sleep approximately `self` seconds
 	#
