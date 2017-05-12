@@ -61,7 +61,7 @@
 #	redef fun post(req, res) do
 #		var validator = new BookValidator
 #		if not validator.validate(req.body) then
-#			res.json_error(validator.validation, 400)
+#			res.json(validator.validation, 400)
 #			return
 #		end
 #		# TODO data persistence
@@ -95,8 +95,6 @@ end
 #
 # Errors messages are grouped into *scopes*. A scope is a string that specify wich
 # field or document the error message is related to.
-#
-# See `HttpResponse::json_error`.
 class ValidationResult
 	super Jsonable
 
