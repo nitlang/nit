@@ -95,7 +95,6 @@ end
 
 # A QuickSearch result.
 private class QuickSearchResult
-	super Jsonable
 	serialize
 
 	# The text of the link.

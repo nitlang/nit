@@ -20,7 +20,7 @@ import json
 
 # A location inside a source file.
 class Location
-	super Jsonable
+	super Serializable
 
 	# The file’s path.
 	var path: nullable String = null is writable

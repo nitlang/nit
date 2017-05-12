@@ -47,7 +47,7 @@ abstract class NeoNodeCollection
 	super SimpleCollection[NeoNode]
 
 	# The type of the local IDs.
-	type ID_TYPE: Jsonable
+	type ID_TYPE: Serializable
 
 	# The property of the nodes that hold the local ID.
 	var id_property: String

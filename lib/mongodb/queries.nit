@@ -81,7 +81,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$<name>: <value>} }
 	# ~~~
-	fun op(name: String, field: nullable String, value: nullable Jsonable): MongoMatch do
+	fun op(name: String, field: nullable String, value: nullable Serializable): MongoMatch do
 		if field != null then
 			var q = new JsonObject
 			q["${name}"] = value
@@ -99,7 +99,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$eq: value} }
 	# ~~~
-	fun eq(field: String, value: nullable Jsonable): MongoMatch do
+	fun eq(field: String, value: nullable Serializable): MongoMatch do
 		self[field] = value
 		return self
 	end
@@ -111,7 +111,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$ne: value} }
 	# ~~~
-	fun ne(field: String, value: nullable Jsonable): MongoMatch do
+	fun ne(field: String, value: nullable Serializable): MongoMatch do
 		op("ne", field, value)
 		return self
 	end
@@ -123,7 +123,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$gt: value} }
 	# ~~~
-	fun gt(field: String, value: nullable Jsonable): MongoMatch do
+	fun gt(field: String, value: nullable Serializable): MongoMatch do
 		op("gt", field, value)
 		return self
 	end
@@ -135,7 +135,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$gte: value} }
 	# ~~~
-	fun gte(field: String, value: nullable Jsonable): MongoMatch do
+	fun gte(field: String, value: nullable Serializable): MongoMatch do
 		op("gte", field, value)
 		return self
 	end
@@ -147,7 +147,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$lt: value} }
 	# ~~~
-	fun lt(field: String, value: nullable Jsonable): MongoMatch do
+	fun lt(field: String, value: nullable Serializable): MongoMatch do
 		op("lt", field, value)
 		return self
 	end
@@ -159,7 +159,7 @@ class MongoMatch
 	# ~~~json
 	# {field: {$lte: value} }
 	# ~~~
-	fun lte(field: String, value: nullable Jsonable): MongoMatch do
+	fun lte(field: String, value: nullable Serializable): MongoMatch do
 		op("lte", field, value)
 		return self
 	end
@@ -210,7 +210,7 @@ class MongoMatch
 	#
 	# `$in` selects the documents where the value of a field equals any value
 	# in the specified array.
-	fun is_in(field: String, values: Array[nullable Jsonable]): MongoMatch do
+	fun is_in(field: String, values: Array[nullable Serializable]): MongoMatch do
 		op("in", field, new JsonArray.from(values))
 		return self
 	end
@@ -226,7 +226,7 @@ class MongoMatch
 	# `$nin` selects the documents where:
 	# * the field value is not in the specified array or
 	# * the field does not exist.
-	fun is_nin(field: String, values: Array[nullable Jsonable]): MongoMatch do
+	fun is_nin(field: String, values: Array[nullable Serializable]): MongoMatch do
 		op("nin", field, new JsonArray.from(values))
 		return self
 	end
@@ -244,7 +244,7 @@ class MongoMatch
 	# ~~~json
 	# { field: { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
 	# ~~~
-	fun lor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+	fun lor(field: nullable String, expressions: Array[Serializable]): MongoMatch do
 		op("or", field, new JsonArray.from(expressions))
 		return self
 	end
@@ -261,7 +261,7 @@ class MongoMatch
 	# ~~~json
 	# { field: { $and: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
 	# ~~~
-	fun land(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+	fun land(field: nullable String, expressions: Array[Serializable]): MongoMatch do
 		op("and", field, new JsonArray.from(expressions))
 		return self
 	end
@@ -279,7 +279,7 @@ class MongoMatch
 	# ~~~json
 	# { field: { $not: { <expression> } } }
 	# ~~~
-	fun lnot(field: nullable String, expression: Jsonable): MongoMatch do
+	fun lnot(field: nullable String, expression: Serializable): MongoMatch do
 		op("not", field, expression)
 		return self
 	end
@@ -297,7 +297,7 @@ class MongoMatch
 	# ~~~json
 	# { field: { $nor: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] } }
 	# ~~~
-	fun lnor(field: nullable String, expressions: Array[Jsonable]): MongoMatch do
+	fun lnor(field: nullable String, expressions: Array[Serializable]): MongoMatch do
 		op("nor", field, new JsonArray.from(expressions))
 		return self
 	end
@@ -312,7 +312,7 @@ class MongoMatch
 	# ~~~json
 	# { field: { $all: [ <value1>, <value2>, ... ] } }
 	# ~~~
-	fun all(field: nullable String, values: Array[Jsonable]): MongoMatch do
+	fun all(field: nullable String, values: Array[Serializable]): MongoMatch do
 		op("all", field, new JsonArray.from(values))
 		return self
 	end
@@ -327,7 +327,7 @@ class MongoMatch
 	# ~~~json
 	# { field: { $elemMatch: <query> } }
 	# ~~~
-	fun elem_match(field: nullable String, query: Jsonable): MongoMatch do
+	fun elem_match(field: nullable String, query: Serializable): MongoMatch do
 		op("elemMatch", field, query)
 		return self
 	end
@@ -383,7 +383,7 @@ class MongoPipeline
 	# ~~~json
 	# { $<stage>: <json> }
 	# ~~~
-	fun add_stage(stage: String, json: Jsonable): MongoPipeline do
+	fun add_stage(stage: String, json: Serializable): MongoPipeline do
 		var obj = new JsonObject
 		obj["${stage}"] = json
 		add obj
@@ -540,7 +540,7 @@ class MongoGroup
 	# ~~~json
 	# <field>: { <accumulator> : <expression> }
 	# ~~~
-	private fun acc(name: String, field: String, expression: nullable Jsonable): MongoGroup do
+	private fun acc(name: String, field: String, expression: nullable Serializable): MongoGroup do
 		var q = new JsonObject
 		q["${name}"] = expression
 		self[field] = q
@@ -556,7 +556,7 @@ class MongoGroup
 	# ~~~
 	#
 	# `$sum` ignores non-numeric values.
-	fun sum(field: String, expression: Jsonable): MongoGroup do
+	fun sum(field: String, expression: Serializable): MongoGroup do
 		return acc("sum", field, expression)
 	end
 
@@ -569,7 +569,7 @@ class MongoGroup
 	# ~~~
 	#
 	# `$avg` ignores non-numeric values.
-	fun avg(field: String, expression: Jsonable): MongoGroup do
+	fun avg(field: String, expression: Serializable): MongoGroup do
 		return acc("avg", field, expression)
 	end
 
@@ -583,7 +583,7 @@ class MongoGroup
 	#
 	# `$max` compares both value and type, using the specified BSON comparison
 	# order for values of different types.
-	fun max(field: String, expression: Jsonable): MongoGroup do
+	fun max(field: String, expression: Serializable): MongoGroup do
 		return acc("max", field, expression)
 	end
 
@@ -597,7 +597,7 @@ class MongoGroup
 	#
 	# `$min` compares both value and type, using the specified BSON comparison
 	# order for values of different types.
-	fun min(field: String, expression: Jsonable): MongoGroup do
+	fun min(field: String, expression: Serializable): MongoGroup do
 		return acc("min", field, expression)
 	end
 
@@ -613,7 +613,7 @@ class MongoGroup
 	# document in a group of documents that share the same group by key.
 	#
 	# Only meaningful when documents are in a defined order.
-	fun first(field: String, expression: Jsonable): MongoGroup do
+	fun first(field: String, expression: Serializable): MongoGroup do
 		return acc("first", field, expression)
 	end
 
@@ -629,7 +629,7 @@ class MongoGroup
 	# document in a group of documents that share the same group by key.
 	#
 	# Only meaningful when documents are in a defined order.
-	fun last(field: String, expression: Jsonable): MongoGroup do
+	fun last(field: String, expression: Serializable): MongoGroup do
 		return acc("last", field, expression)
 	end
 
@@ -643,7 +643,7 @@ class MongoGroup
 	#
 	# Returns an array of all values that result from applying an expression to
 	# each document in a group of documents that share the same group by key.
-	fun push(field: String, expr: Jsonable): MongoGroup do
+	fun push(field: String, expr: Serializable): MongoGroup do
 		return acc("push", field, expr)
 	end
 
@@ -660,7 +660,7 @@ class MongoGroup
 	# group by key.
 	#
 	# Order of the elements in the output array is unspecified.
-	fun addToSet(field: String, expr: Jsonable): MongoGroup do
+	fun addToSet(field: String, expr: Serializable): MongoGroup do
 		return acc("addToSet", field, expr)
 	end
 end

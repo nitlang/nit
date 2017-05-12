@@ -152,7 +152,7 @@ redef class MClass
 end
 
 redef class MetricSet
-	super Jsonable
+	super Serializable
 
 	redef fun core_serialize_to(v) do
 		for metric in metrics do
@@ -162,7 +162,7 @@ redef class MetricSet
 end
 
 redef class Metric
-	super Jsonable
+	super Serializable
 
 	redef fun core_serialize_to(v) do
 		v.serialize_attribute("name", name)
@@ -215,7 +215,7 @@ redef class MClassMetric
 end
 
 private class MetricEntry
-	super Jsonable
+	super Serializable
 
 	var mentity: MEntity
 	var value: Object

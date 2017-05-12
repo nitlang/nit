@@ -41,7 +41,6 @@
 # # Serializable book representation.
 # class Book
 #	serialize
-#	super Jsonable
 #
 #	# Book uniq ID
 #	var id: String = (new MongoObjectId).id is serialize_as "_id"
@@ -407,7 +406,6 @@ end
 # end
 # ~~~
 abstract class RepoObject
-	super Jsonable
 	serialize
 
 	# `self` unique id.

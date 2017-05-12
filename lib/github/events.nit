@@ -22,7 +22,6 @@ intrude import json
 
 # Github event stub.
 class GithubEvent
-	super Jsonable
 	serialize
 
 	# Event ID from Github.

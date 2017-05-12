@@ -32,7 +32,7 @@ fun curl(url: String): String do
 end
 
 # Recursively collect all string values in a json value associated to a given key.
-fun search_json(json: nullable Jsonable, key: String, result: nullable Array[String]): Array[String]
+fun search_json(json: nullable Serializable, key: String, result: nullable Array[String]): Array[String]
 do
 	if result == null then result = new Array[String]
 	if json isa JsonObject then

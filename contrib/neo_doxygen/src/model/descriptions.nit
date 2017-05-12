@@ -51,7 +51,7 @@ import json
 # assert doc.to_json == "[]"
 # ~~~
 class Documentation
-	super Jsonable
+	super Serializable
 
 	private var content = new JsonStringArray
 	private var has_brief_description: Bool = false
@@ -111,7 +111,7 @@ class Documentation
 	redef fun accept_json_serializer(v) do content.serialize_to v
 end
 
-# A `Jsonable` array of strings.
+# A `Serializable` array of strings.
 private class JsonStringArray
 	super JsonSequenceRead[String]
 	super Array[String]
