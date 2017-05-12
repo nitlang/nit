@@ -518,3 +518,13 @@ redef class CString
 		return hex_output;
 	`}
 end
+
+# Return a new hexadecimal salt of `l` length
+fun md5_salt(l: Int): String do
+	var hex = "0123456789ABCDEF".chars
+	var salt = new Buffer
+	for i in [1..l] do
+		salt.add hex.rand
+	end
+	return salt.write_to_string
+end
