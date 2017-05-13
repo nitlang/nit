@@ -257,4 +257,14 @@ redef class Text
 	#
 	#     assert "The quick brown fox jumps over the lazy dog".sha1_hexdigest == "2FD4E1C67A2D28FCED849EE1BB76E7391B93EB12"
 	fun sha1_hexdigest: String do return sha1.hexdigest
+
+	# Is `self` a SHA-1 hexdigest?
+	#
+	#~~~nit
+	# assert "2FD4E1C67A2D28FCED849EE1BB76E7391B93EB12".is_sha1_digest
+	# assert not "Not a digest".is_sha1_digest
+	# assert not "2FD4E1C67A2D28FCED849EE1B76E7391B93EB12".is_sha1_digest
+	# assert not "2FD4E1C67A2D28FCED849EE1UB76E7391B93EB12".is_sha1_digest
+	#~~~
+	fun is_sha1_digest: Bool do return length == 40 and is_hex
 end
