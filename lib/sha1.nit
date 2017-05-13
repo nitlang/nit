@@ -235,7 +235,7 @@ redef class CString
 	`}
 end
 
-redef class String
+redef class Text
 
 	# Computes the SHA1 of the receiver
 	#
