@@ -32,6 +32,7 @@ extras += $(dir $(wildcard $(examples_dir)/*/Makefile))
 # Only used for cleaning.
 libs = $(dir $(wildcard $(lib_dir)/*/Makefile))
 
+.PHONY: all
 all: tools man
 	@echo ""
 	@echo "Congratulations! Nit was succesfully compiled."
@@ -41,18 +42,27 @@ all: tools man
 # Compile all programs in `contrib`, `examples` and `src`.
 #
 # Furthermore, build the toolchain’s `man` pages.
+.PHONY: full
 full: all
 	for directory in $(extras); do \
 		(cd "$${directory}" && $(MAKE)) || exit 1; \
 	done
 
+.PHONY: docs
 docs: $(project_docdir)/stdlib/index.html $(project_docdir)/nitc/index.html
 
+.PHONY: tools $(project_bindir)
 tools $(project_bindir):
 	cd $(srcdir) && $(MAKE)
 
-$(project_bindir)/%:
+# These targets are not phony in order to avoid rebuilding the documentation
+# tools each time the documentation is generated.
+$(project_bindir)/%: _phony_nop
 	cd $(srcdir) && $(MAKE) ../$@
+# Implicit rules can not be phony directly. So, we use a empty phony dependency
+# to workaround this limitation.
+.PHONY: _phony_nop
+_phony_nop:
 
 $(project_docdir)/stdlib/index.html: $(project_bindir)/nitdoc $(project_bindir)/nitls
 	@echo '***************************************************************'
@@ -84,6 +94,7 @@ $(project_docdir)/nitc/index.html: $(project_bindir)/nitdoc $(project_bindir)/ni
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "3"
 
+.PHONY: man $(project_mandir)
 man $(project_mandir):
 	# Setup PATH to find nitc
 	export PATH="$$(cd $(project_bindir) && pwd):$$PATH" && \
@@ -97,6 +108,7 @@ man $(project_mandir):
 # deletes files that may need special tools to rebuild.
 #
 # See also: https://www.gnu.org/prep/standards/html_node/Standard-Targets.html
+.PHONY: clean distclean mostlyclean maintainer-clean
 clean distclean mostlyclean maintainer-clean:
 	rm -rf -- $(project_docdir)/stdlib $(project_docdir)/nitc
 	# Clean everything in `./contrib/` and `./examples/`,
