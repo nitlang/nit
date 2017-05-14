@@ -40,13 +40,10 @@ full: all
 docs: doc/stdlib/index.html doc/nitc/index.html
 
 tools:
-	cd src; make
+	cd ./src && $(MAKE)
 
-bin/nitdoc:
-	cd src; make ../bin/nitdoc
-
-bin/nitls:
-	cd src; make ../bin/nitls
+bin/nitdoc bin/nitls:
+	cd ./src && $(MAKE) ../bin/$@
 
 doc/stdlib/index.html: bin/nitdoc bin/nitls
 	@echo '***************************************************************'
@@ -80,14 +77,15 @@ doc/nitc/index.html: bin/nitdoc bin/nitls
 
 man:
 	# Setup PATH to find nitc
-	PATH=$$PWD/bin:$$PATH $(MAKE) -C share/man
+	export PATH="$$(cd ./bin && pwd):$$PATH" && \
+	cd ./share/man && $(MAKE)
 
 clean:
 	rm -rf -- doc/stdlib doc/nitc || true
-	cd c_src; make clean
-	cd src; make clean
-	cd tests; make clean
-	cd share/man; make clean
+	cd ./c_src && $(MAKE) clean
+	cd ./src && $(MAKE) clean
+	cd ./tests && $(MAKE) clean
+	cd ./share/man && $(MAKE) clean
 	for directory in $(extras); do \
 		(cd "$$directory" && $(MAKE) clean); \
 	done
