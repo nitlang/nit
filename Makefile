@@ -101,3 +101,4 @@ clean distclean mostlyclean maintainer-clean:
 	for directory in $(extras); do \
 		(cd "$$directory" && { $(MAKE) $@ || $(MAKE) clean || true; }); \
 	done
+	if [ $@ '!=' mostlyclean ]; then rm -f ./c_src/nitc; fi
