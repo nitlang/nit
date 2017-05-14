@@ -47,6 +47,7 @@ all: tools man
 # Furthermore, build the toolchain’s `man` pages.
 .PHONY: full
 full: all
+	export PATH="$$(cd $(project_bindir) && pwd):$$PATH" && \
 	for directory in $(extras); do \
 		(cd "$${directory}" && $(MAKE)) || exit 1; \
 	done
