@@ -470,9 +470,14 @@ redef class HttpResponse
 		end
 	end
 
-	# Write error as JSON and set the right content type header.
-	fun json_error(error: nullable Serializable, status: nullable Int) do
-		json(error, status)
+	# Write error as JSON.
+	#
+	# Format: `{"message": message, "status": status}`
+	fun json_error(message: String, status: Int) do
+		var obj = new JsonObject
+		obj["status"] = status
+		obj["message"] = message
+		json(obj, status)
 	end
 
 	# Redirect response to `location`
