@@ -140,19 +140,14 @@ class ValidationResult
 	# Does `self` contains `errors`?
 	fun has_error: Bool do return errors.not_empty
 
-	# Render self as a JsonObject
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["has_error"] = has_error
-		var e = new JsonObject
-		for k, v in errors do
-			e[k] = new JsonArray.from(v)
+	redef fun core_serialize_to(v) do
+		var errors = new JsonObject
+		for k, e in self.errors do
+			errors[k] = new JsonArray.from(e)
 		end
-		obj["errors"] = e
-		return obj
+		v.serialize_attribute("has_error", has_error)
+		v.serialize_attribute("errors", errors)
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 
 	# Returns the validation result as a pretty formated string
 	fun to_pretty_string: String do
