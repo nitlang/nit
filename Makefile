@@ -17,11 +17,11 @@
 
 contrib_dir = ./contrib
 examples_dir = ./examples
-all_contribs = $(dir $(contrib_dir)/*/Makefile)
+all_contribs = $(dir $(wildcard $(contrib_dir)/*/Makefile))
 
 # Additional program directories (contrib and examples) that are buildable
 extras = $(filter-out $(contrib_dir)/nitc/,$(all_contribs))
-extras += $(dir $(examples_dir)/*/Makefile)
+extras += $(dir $(wildcard $(examples_dir)/*/Makefile))
 
 all: tools man
 	@echo ""
