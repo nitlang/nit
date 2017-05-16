@@ -57,6 +57,11 @@ interface Serializer
 	# use double dispatch to customize the bahavior per serializable objects.
 	fun serialize(object: nullable Serializable) is abstract
 
+	# The object currently serialized by `serialized`
+	#
+	# Can be used by a custom serializer to add domain-specific serialization behavior.
+	protected fun current_object: nullable Object is abstract
+
 	# Serialize an object, with full serialization or a simple reference
 	protected fun serialize_reference(object: Serializable) is abstract
 
@@ -79,6 +84,15 @@ interface Serializer
 			serialize value
 		else return false
 		return true
+	end
+
+	# The method is called when a standard `value` is serialized
+	#
+	# The default behavior is to call `value.core_serialize_to(self)` but it
+	# can be redefined by a custom serializer to add domain-specific serialization behavior.
+	fun serialize_core(value: Serializable)
+	do
+		value.core_serialize_to(self)
 	end
 
 	# Warn of problems and potential errors (such as if an attribute
