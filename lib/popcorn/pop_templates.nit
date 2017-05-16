@@ -14,6 +14,72 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Template rendering for popcorn
+#
+# ## Basic templates
+#
+# Use TemplateString to render really basic templates that just need macro
+# replacements.
+#
+# Example:
+# ~~~nit
+# class TemplateStringHandler
+#	super Handler
+#
+#	redef fun get(req, res) do
+#		# Values to add in the template
+#		var values = new HashMap[String, String]
+#		values["USER"] = "Morriar"
+#		values["MYSITE"] = "My super website"
+#
+#		# Render it with a shortcut
+#		res.template_string("""
+#			<h1>Hello %USER%!</h1>
+#			<p>Welcome to %MYSITE%.</p>
+#		""", values)
+#	end
+# end
+# ~~~
+#
+# For larger templates, you can also use external files (makes your Nit code cleaner):
+# ~~~nit
+# class TemplateFileHandler
+#	super Handler
+#
+#	redef fun get(req, res) do
+#		# Values to add in the template
+#		var values = new HashMap[String, String]
+#		values["USER"] = "Morriar"
+#		values["MYSITE"] = "My super website"
+#
+#		# Render it from an external file
+#		res.template_file("example_template.tpl", values)
+#	end
+# end
+# ~~~
+#
+# ## Using pug templates
+#
+# Pug is a templating format provided by the external command `pug`.
+# For complex templates that need conditional or loop statements, pug can be a solution.
+#
+# See the pug syntax here: https://pugjs.org/api/getting-started.html
+#
+# ~~~nit
+# class PugFileHandler
+#	super Handler
+#
+#	redef fun get(req, res) do
+#		# Values to add in the template
+#		var json = new JsonObject
+#		json["user"] = "Morriar"
+#		json["mysite"] = "My super website"
+#
+#		# Render it from an external file
+#		res.pug_file("example_template.pug", json)
+#	end
+# end
+# ~~~
 module pop_templates
 
 import popcorn::pop_handlers
