@@ -71,8 +71,43 @@ class MyTemplateFileHandler
 	end
 end
 
+class MyTemplatePugHandler
+	super Handler
+
+	redef fun get(req, res) do
+		# Values to add in the template
+		var json = new JsonObject
+		json["user"] = "Morriar"
+		json["mysite"] = "My super website"
+
+		res.pug("""
+h1 Hello #{user}
+p Welcome to #{mysite}
+		""", json)
+	end
+end
+
+class MyTemplatePugFileHandler
+	super Handler
+
+	# Use template from external file
+	var pug_file = "example_template.pug"
+
+	redef fun get(req, res) do
+		# Values to add in the template
+		var json = new JsonObject
+		json["user"] = "Morriar"
+		json["mysite"] = "My super website"
+
+		# Render it from an external file
+		res.pug_file(pug_file, json)
+	end
+end
+
 var app = new App
 app.use("/", new MyTemplateHandler)
 app.use("/string", new MyTemplateStringHandler)
 app.use("/file", new MyTemplateFileHandler)
+app.use("/pug", new MyTemplatePugHandler)
+app.use("/pug_file", new MyTemplatePugFileHandler)
 app.listen("localhost", 3000)

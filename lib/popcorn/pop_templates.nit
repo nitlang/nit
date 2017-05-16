@@ -43,4 +43,26 @@ redef class HttpResponse
 		var tpl = new TemplateString.from_file(file)
 		template(tpl, values, status)
 	end
+
+	# Render `pug_string` with the command cli `pug` and use data from `json`
+	#
+	# See https://pugjs.org/api/getting-started.html for more details on pug.
+	fun pug(pug_string: nullable String, json: nullable Serializable, status: nullable Int) do
+		var process
+		if json == null then
+			process = new ProcessDuplex("pug", "-D")
+		else
+			process = new ProcessDuplex("pug", "-D", "-O", json.to_json)
+		end
+		var out = process.write_and_read(pug_string or else "")
+		process.close
+		html(out, status)
+	end
+
+	# Render `file` with the command cli `pug` and use data from `json`
+	#
+	# See https://pugjs.org/api/getting-started.html for more details on pug.
+	fun pug_file(file: String, json: nullable Serializable, status: nullable Int) do
+		pug(file.to_path.read_all, json, status)
+	end
 end

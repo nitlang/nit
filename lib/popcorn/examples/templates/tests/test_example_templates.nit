@@ -62,3 +62,33 @@ class TestExampleTemplateFile
 		run_test(app)
 	end
 end
+
+class TestExampleTemplatePug
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/"
+	end
+
+	fun test_example_template_pug do
+		var app = new App
+		app.use("/", new MyTemplatePugHandler)
+		run_test(app)
+	end
+end
+
+class TestExampleTemplatePugFile
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/"
+	end
+
+	fun test_example_template_pug_file do
+		var app = new App
+		var handler = new MyTemplatePugFileHandler
+		handler.pug_file = test_path / "../example_template.pug"
+		app.use("/", handler)
+		run_test(app)
+	end
+end
