@@ -125,8 +125,24 @@ class AppConfig
 		return 3000
 	end
 
+	# Displayed host name
+	#
+	# Specify this option if you need a qualified hostname to use within your handlers
+	# and `app_host` require something else like an IP to bind.
+	#
+	# Default is `app_host`.
+	var opt_hostname = new OptionString("Displayed host name", "--hostname")
+
+	# Displayed host name config
+	#
+	# * key: `app.hostname`
+	# * default: `localhost`
+	fun app_hostname: String do
+		return opt_hostname.value or else ini["app.hostname"] or else app_host
+	end
+
 	init do
 		super
-		add_option(opt_host, opt_port)
+		add_option(opt_host, opt_port, opt_hostname)
 	end
 end
