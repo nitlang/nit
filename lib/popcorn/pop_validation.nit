@@ -729,3 +729,42 @@ class URLField
 
 	redef var re = "^(http|https):\\/\\/[a-zA-Z0-9\\-_]+(\\.[a-zA-Z0-9\\-_]+)+([a-zA-Z0-9\\-\\.,@?^=%&:/~\\+#]*[a-zA-Z0-9\\-\\@?^=%&/~\\+#])?".to_re
 end
+
+# Check if a field value is already used
+#
+# This class provides a stub validator for fields that should contain a unique value along an
+# application (typically logins or ids).
+#
+# Here an example that uses a `Repository` if an email is unique:
+# ~~~nitish
+# class UniqueEmailField
+#	super UniqueField
+#
+#	var users: UsersRepository
+#
+#	redef fun check_unicity(v, field, val) do
+#		var user = users.find_by_email(val)
+#		if user != null then
+#			v.validation.add_error(field, "Email `{val}` already used")
+#			return false
+#		end
+#		return true
+#	end
+# end
+# ~~~
+class UniqueField
+	super StringField
+
+	# Check if `val` is already used somewhere
+	#
+	# You must redefine this method to handle your own validation.
+	fun check_unicity(v: ObjectValidator, field, val: String): Bool is abstract
+
+	redef fun validate_field(v, obj) do
+		if not super then return false
+		var val = obj.get_or_null(field)
+		if not val isa String then return false
+		if not check_unicity(v, field, val) then return false
+		return true
+	end
+end
