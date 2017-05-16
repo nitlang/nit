@@ -19,10 +19,27 @@ import stream
 
 in "C Header" `{
 	#include <time.h>
+	#include <sys/time.h>
 `}
 
-# Unix time: the number of seconds elapsed since January 1, 1970
+# The number of seconds elapsed since January 1, 1970
+#
+# Uses the Unix function `time`.
 fun get_time: Int `{ return time(NULL); `}
+
+# The number of milliseconds elapsed since January 1, 1970
+#
+# Returns `get_microtime / 1000`
+fun get_millitime: Int do return get_microtime / 1000
+
+# The number of microseconds elapsed since January 1, 1970
+#
+# Uses the Unix function `gettimeofday`.
+fun get_microtime: Int `{
+	struct timeval val;
+	gettimeofday(&val, NULL);
+	return val.tv_sec * 1000000 + val.tv_usec;
+`}
 
 redef class Sys
 	# Wait a specific number of second and nanoseconds
@@ -32,6 +49,13 @@ redef class Sys
 		const struct timespec req = {sec, nanosec};
 		return nanosleep(&req, NULL);
 	`}
+end
+
+redef class Int
+	# Sleep approximately `self` seconds
+	#
+	# Is not interrupted by signals.
+	fun sleep do to_f.sleep
 end
 
 redef class Float
