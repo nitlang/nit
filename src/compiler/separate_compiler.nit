@@ -344,7 +344,7 @@ class SeparateCompiler
 
 		for m in mainmodule.in_importation.greaters do for cd in m.mclassdefs do
 			var mclass = cd.mclass
-			# Collect methods ad attributes
+			# Collect methods and attributes
 			for p in cd.intro_mproperties do
 				if p isa MMethod then
 					if rta == null then
