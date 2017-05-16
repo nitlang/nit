@@ -43,7 +43,7 @@ class GithubCurl
 
 	# Get the requested URI, and check the HTTP response. Then convert to JSON
 	# and check for Github errors.
-	fun get_and_check(uri: String): nullable Jsonable
+	fun get_and_check(uri: String): nullable Serializable
 	do
 		var request = new CurlHTTPRequest(uri)
 		request.user_agent = user_agent
@@ -74,7 +74,7 @@ class GithubCurl
 	# Then convert to JSON and check for Github errors.
 	# Unlike `get_and_check`, error do not trigger an abort but
 	# are reported as `GithubError`.
-	fun get_and_parse(uri: String): nullable Jsonable
+	fun get_and_parse(uri: String): nullable Serializable
 	do
 		var request = new CurlHTTPRequest(uri)
 		request.user_agent = user_agent
@@ -114,7 +114,7 @@ end
 # Check the `json` value to find them.
 class GithubError
 	super Error
-	super Jsonable
+	super Serializable
 
 	# The name of the error.
 	var name: String

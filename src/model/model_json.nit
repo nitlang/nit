@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Make model entities Jsonable.
+# Make model entities Serializable.
 #
 # To avoid cycles, every reference from a MEntity to another is replaced by a
 # MEntityRef.
@@ -42,7 +42,6 @@ class MEntityRef
 end
 
 redef class MEntity
-	super Jsonable
 	serialize
 
 	redef fun core_serialize_to(v) do
@@ -88,7 +87,6 @@ redef class MEntity
 end
 
 redef class MDoc
-	super Jsonable
 	serialize
 
 	redef fun core_serialize_to(v) do
@@ -99,7 +97,6 @@ redef class MDoc
 end
 
 redef class Location
-	super Jsonable
 	serialize
 
 	redef fun core_serialize_to(v) do

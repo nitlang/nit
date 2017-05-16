@@ -111,7 +111,7 @@ class JsonGraphStore
 end
 
 redef class NeoGraph
-	super Jsonable
+	super Serializable
 
 	# Retrieve the graph from the specified JSON document.
 	#
@@ -217,7 +217,7 @@ end
 
 redef class NeoNodeCollection
 	# Convert the specified JSON value into a local ID.
-	fun id_from_jsonable(id: nullable Jsonable): ID_TYPE do return id.as(ID_TYPE)
+	fun id_from_jsonable(id: nullable Serializable): ID_TYPE do return id.as(ID_TYPE)
 end
 
 redef class NeoEntity
@@ -226,9 +226,9 @@ redef class NeoEntity
 	fun append_json_for(graph: NeoGraph, v: JsonSerializer) is abstract
 end
 
-# Make `NeoNode` `Jsonable`.
+# Make `NeoNode` `Serializable`.
 redef class NeoNode
-	super Jsonable
+	super Serializable
 
 	# Retrieve the node from the specified JSON value.
 	#

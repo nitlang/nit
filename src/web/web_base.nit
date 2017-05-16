@@ -118,7 +118,6 @@ end
 #
 # Can be serialized to json.
 class APIError
-	super Jsonable
 	serialize
 
 	# Reponse status
@@ -147,7 +146,7 @@ end
 # * a `NSToken` for tokens like `::`, `>` and `$`
 # * a `MSRef` for references to mentities
 interface NSEntity
-	super Jsonable
+	super Serializable
 end
 
 # A reference to a MEntity that can be rendered as a link.
@@ -336,7 +335,7 @@ redef class MVirtualType
 end
 
 redef class POSetElement[E]
-	super Jsonable
+	super Serializable
 
 	redef fun serialize_to(v) do
 		assert self isa POSetElement[MEntity]

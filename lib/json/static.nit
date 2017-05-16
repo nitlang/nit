@@ -26,13 +26,7 @@ import error
 private import json_parser
 private import json_lexer
 
-# Something that can be translated to JSON.
-interface Jsonable
-	super Serializable
-end
-
 redef class Text
-	super Jsonable
 
 	# Removes JSON-escaping if necessary in a JSON string
 	#
@@ -128,7 +122,7 @@ redef class Text
 	#     var bad = "\{foo: \"bar\"\}".parse_json
 	#     assert bad isa JsonParseError
 	#     assert bad.position.col_start == 2
-	fun parse_json: nullable Jsonable do
+	fun parse_json: nullable Serializable do
 		var lexer = new Lexer_json(to_s)
 		var parser = new Parser_json
 		var tokens = lexer.lex
@@ -152,48 +146,28 @@ redef class FlatText
 	end
 end
 
-redef class Int
-	super Jsonable
-end
-
-redef class Float
-	super Jsonable
-end
-
-redef class Bool
-	super Jsonable
-end
-
 # A map that can be translated into a JSON object.
-interface JsonMapRead[K: String, V: nullable Jsonable]
+interface JsonMapRead[K: String, V: nullable Serializable]
 	super MapRead[K, V]
-	super Jsonable
+	super Serializable
 end
 
 # A JSON Object.
 class JsonObject
-	super JsonMapRead[String, nullable Jsonable]
-	super HashMap[String, nullable Jsonable]
+	super JsonMapRead[String, nullable Serializable]
+	super HashMap[String, nullable Serializable]
 end
 
 # A sequence that can be translated into a JSON array.
-class JsonSequenceRead[E: nullable Jsonable]
-	super Jsonable
+class JsonSequenceRead[E: nullable Serializable]
+	super Serializable
 	super SequenceRead[E]
 end
 
 # A JSON array.
 class JsonArray
-	super JsonSequenceRead[nullable Jsonable]
-	super Array[nullable Jsonable]
-end
-
-redef class JsonParseError
-	super Jsonable
-end
-
-redef class Position
-	super Jsonable
+	super JsonSequenceRead[nullable Serializable]
+	super Array[nullable Serializable]
 end
 
 ################################################################################
@@ -201,7 +175,7 @@ end
 
 redef class Nvalue
 	# The represented value.
-	private fun to_nit_object: nullable Jsonable is abstract
+	private fun to_nit_object: nullable Serializable is abstract
 end
 
 redef class Nvalue_number
@@ -269,7 +243,7 @@ redef class Npair
 	private fun name: String do return n_string.to_nit_string
 
 	# The represented value.
-	private fun value: nullable Jsonable do return n_value.to_nit_object
+	private fun value: nullable Serializable do return n_value.to_nit_object
 end
 
 redef class Nvalue_array

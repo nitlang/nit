@@ -20,7 +20,6 @@ import json
 #     assert error.to_json == """{"message":"ErrorMessage","cause":null,"error":"ErrorName"}"""
 class NeoError
 	super Error
-	super Jsonable
 	serialize
 
 	# The name of the error.

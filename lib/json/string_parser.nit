@@ -54,7 +54,7 @@ class JSONStringParser
 	# var p = new JSONStringParser("""{"numbers": [1,23,3], "string": "string"}""")
 	# assert p.parse_entity isa JsonObject
 	# ~~~
-	fun parse_entity: nullable Jsonable do
+	fun parse_entity: nullable Serializable do
 		var srclen = len
 		ignore_whitespaces
 		if pos >= srclen then return make_parse_error("Empty JSON")
@@ -95,7 +95,7 @@ class JSONStringParser
 	end
 
 	# Parses a JSON Array
-	fun parse_json_array: Jsonable do
+	fun parse_json_array: Serializable do
 		var max = len
 		if pos >= max then return make_parse_error("Incomplete JSON array")
 		var arr = new JsonArray
@@ -120,7 +120,7 @@ class JSONStringParser
 	end
 
 	# Parses a JSON Object
-	fun parse_json_object: Jsonable do
+	fun parse_json_object: Serializable do
 		var max = len
 		if pos >= max then return make_parse_error("Incomplete JSON object")
 		var obj = new JsonObject
@@ -160,7 +160,7 @@ class JSONStringParser
 	end
 
 	# Parses an Int or Float
-	fun parse_json_number: Jsonable do
+	fun parse_json_number: Serializable do
 		var max = len
 		var p = pos
 		var c = src[p]
@@ -234,7 +234,7 @@ class JSONStringParser
 	private var parse_str_buf = new FlatBuffer
 
 	# Parses and returns a Nit string from a JSON String
-	fun parse_json_string: Jsonable do
+	fun parse_json_string: Serializable do
 		var src = src
 		var ln = src.length
 		var p = pos

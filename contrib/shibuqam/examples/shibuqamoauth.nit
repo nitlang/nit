@@ -292,7 +292,7 @@ class AuthHandler
 end
 
 redef class User
-	super Jsonable
+	super Serializable
 end
 
 # Information about an authenticated used stored on the server to be given to the client.

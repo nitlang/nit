@@ -28,7 +28,7 @@
 #
 # # Serializable book representation.
 # class Book
-#	super Jsonable
+#	super Serializable
 #
 #	# Book ISBN
 #	var isbn: String
@@ -98,7 +98,7 @@ end
 #
 # See `HttpResponse::json_error`.
 class ValidationResult
-	super Jsonable
+	super Serializable
 
 	# Object parsed during validation
 	#
@@ -199,8 +199,8 @@ class ObjectValidator
 		return validate_json(json)
 	end
 
-	# Validate a Jsonable input
-	fun validate_json(json: Jsonable): Bool do
+	# Validate a Serializable input
+	fun validate_json(json: Serializable): Bool do
 		if not json isa JsonObject then
 			validation.add_error("document", "Expected JsonObject got `{json.class_name}`")
 			return false
@@ -251,8 +251,8 @@ class ArrayValidator
 		return validate_json(json)
 	end
 
-	# Validate a Jsonable input
-	fun validate_json(json: Jsonable): Bool do
+	# Validate a Serializable input
+	fun validate_json(json: Serializable): Bool do
 		if not json isa JsonArray then
 			validation.add_error("document", "Expected JsonArray got `{json.class_name}`")
 			return false

@@ -128,7 +128,7 @@ class JsonStore
 	#
 	# Only `JsonObject` and `JsonArray` are allowed in a json file.
 	# Use `store_object` or `store_array` instead.
-	private fun store_json(key: String, json: Jsonable) do
+	private fun store_json(key: String, json: Serializable) do
 		var path = "{store_dir}/{key}.json".simplify_path
 		path.dirname.mkdir
 		var file = new FileWriter.open(path)
@@ -149,7 +149,7 @@ class JsonStore
 	# Load a JsonObject associated to `key` from store.
 	#
 	# Ensure `has_data(key)`
-	private fun load_json(key: String): nullable Jsonable do
+	private fun load_json(key: String): nullable Serializable do
 		assert has_key(key)
 		var path = "{store_dir}/{key}.json".simplify_path
 		var file = new FileReader.open(path)

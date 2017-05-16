@@ -107,7 +107,7 @@ end
 class JsonPOST
 	super JsonCurlRequest
 
-	var json_data: nullable Jsonable = null is writable
+	var json_data: nullable Serializable = null is writable
 
 	redef fun init_headers do
 		super
@@ -142,7 +142,7 @@ end
 class JsonPUT
 	super JsonCurlRequest
 
-	var json_data: nullable Jsonable = null is writable
+	var json_data: nullable Serializable = null is writable
 
 	redef fun init_headers do
 		super
@@ -161,4 +161,3 @@ class JsonPUT
 		return null
 	end
 end
-

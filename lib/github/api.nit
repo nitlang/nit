@@ -116,7 +116,7 @@ class GithubAPI
 	#     assert err isa GithubError
 	#     assert err.name == "GithubAPIError"
 	#     assert err.message == "Not Found"
-	fun get(path: String): nullable Jsonable do
+	fun get(path: String): nullable Serializable do
 		path = sanitize_uri(path)
 		var res = ghcurl.get_and_parse("{api_url}{path}")
 		if res isa Error then
@@ -509,7 +509,6 @@ end
 #
 # Mainly a Nit wrapper around a JSON objet.
 abstract class GithubEntity
-	super Jsonable
 	serialize
 
 	# Github page url.
@@ -1116,7 +1115,6 @@ end
 
 # Make ISO Datew serilizable
 redef class ISODate
-	super Jsonable
 	serialize
 end
 

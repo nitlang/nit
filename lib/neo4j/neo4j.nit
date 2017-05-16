@@ -124,7 +124,7 @@ class Neo4jClient
 		self.cypher_url = root["cypher"].to_s
 	end
 
-	fun service_root: Jsonable do return get(base_url / "db/data")
+	fun service_root: Serializable do return get(base_url / "db/data")
 
 	# Is the connection with the Neo4j server ok?
 	fun is_ok: Bool do return service_root isa JsonObject
@@ -314,19 +314,19 @@ class Neo4jClient
 
 	# Perform a `CypherQuery`
 	# see: CypherQuery
-	fun cypher(query: CypherQuery): Jsonable do
+	fun cypher(query: CypherQuery): Serializable do
 		return post("{cypher_url}", query.to_rest)
 	end
 
 	# GET JSON data from `url`
-	fun get(url: String): Jsonable do
+	fun get(url: String): Serializable do
 		var request = new JsonGET(url)
 		var response = request.execute
 		return parse_response(response)
 	end
 
 	# POST `params` to `url`
-	fun post(url: String, params: Jsonable): Jsonable do
+	fun post(url: String, params: Serializable): Serializable do
 		var request = new JsonPOST(url)
 		request.json_data = params
 		var response = request.execute
@@ -334,7 +334,7 @@ class Neo4jClient
 	end
 
 	# PUT `params` at `url`
-	fun put(url: String, params: Jsonable): Jsonable do
+	fun put(url: String, params: Serializable): Serializable do
 		var request = new JsonPUT(url)
 		request.json_data = params
 		var response = request.execute
@@ -342,14 +342,14 @@ class Neo4jClient
 	end
 
 	# DELETE `url`
-	fun delete(url: String): Jsonable do
+	fun delete(url: String): Serializable do
 		var request = new JsonDELETE(url)
 		var response = request.execute
 		return parse_response(response)
 	end
 
 	# Parse the cURL `response` as a JSON string
-	private fun parse_response(response: CurlResponse): Jsonable do
+	private fun parse_response(response: CurlResponse): Serializable do
 		if response isa CurlResponseSuccess then
 			var str = response.body_str
 			if str.is_empty then return new JsonObject
@@ -551,13 +551,13 @@ abstract class NeoEntity
 	end
 
 	# Get the entity property at `key`
-	fun [](key: String): nullable Jsonable do
+	fun [](key: String): nullable Serializable do
 		if not properties.has_key(key) then return null
 		return properties[key]
 	end
 
 	# Set the entity property `value` at `key`
-	fun []=(key: String, value: nullable Jsonable) do properties[key] = value
+	fun []=(key: String, value: nullable Serializable) do properties[key] = value
 
 	# Is the property `key` set?
 	fun has_key(key: String): Bool do return properties.has_key(key)
@@ -923,7 +923,7 @@ class NeoBatch
 	end
 
 	# Associate data from response in original nodes and edges
-	private fun finalize_batch(response: Jsonable): List[NeoError] do
+	private fun finalize_batch(response: Serializable): List[NeoError] do
 		var errors = new List[NeoError]
 		if not response isa JsonArray then
 			errors.add(new NeoError("Unexpected batch response format.", "Neo4jError"))
@@ -1013,7 +1013,7 @@ class NeoJob
 	# Job service target: `/node`, `/labels` etc...
 	var to: String
 	# Body to send with the job service request
-	var body: nullable Jsonable = null
+	var body: nullable Serializable = null
 
 	# JSON formated job
 	fun to_rest: JsonObject do

@@ -31,6 +31,7 @@ redef class Deserializer
 		if name == "HashMap[String, POSetElement[String]]" then return new HashMap[String, POSetElement[String]].from_deserializer(self)
 		if name == "Array[Match]" then return new Array[Match].from_deserializer(self)
 		if name == "Array[nullable Match]" then return new Array[nullable Match].from_deserializer(self)
+		if name == "Array[nullable Serializable]" then return new Array[nullable Serializable].from_deserializer(self)
 		return super
 	end
 end

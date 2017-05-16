@@ -140,7 +140,7 @@ class APICatalogContributors
 end
 
 redef class Person
-	super Jsonable
+	super Serializable
 
 	redef fun core_serialize_to(v) do
 		v.serialize_attribute("name", name)
