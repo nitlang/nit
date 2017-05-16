@@ -75,7 +75,7 @@
 # ~~~
 # app.use("/api/user", new GithubUser)
 # ~~~
-module pop_auth
+module pop_auth_github
 
 import pop_sessions
 import github
