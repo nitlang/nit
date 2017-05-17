@@ -138,19 +138,14 @@ class ValidationResult
 	# Does `self` contains `errors`?
 	fun has_error: Bool do return errors.not_empty
 
-	# Render self as a JsonObject
-	fun json: JsonObject do
-		var obj = new JsonObject
-		obj["has_error"] = has_error
-		var e = new JsonObject
-		for k, v in errors do
-			e[k] = new JsonArray.from(v)
+	redef fun core_serialize_to(v) do
+		var errors = new JsonObject
+		for k, e in self.errors do
+			errors[k] = new JsonArray.from(e)
 		end
-		obj["errors"] = e
-		return obj
+		v.serialize_attribute("has_error", has_error)
+		v.serialize_attribute("errors", errors)
 	end
-
-	redef fun serialize_to(v) do json.serialize_to(v)
 
 	# Returns the validation result as a pretty formated string
 	fun to_pretty_string: String do
@@ -698,4 +693,71 @@ class ISBNField
 	autoinit field, required
 
 	redef var re = "(^ISBN [0-9]-[0-9]\{3\}-[0-9]\{5\}-[0-9]?$)".to_re
+end
+
+# Check if a field is a valid URL
+#
+# Matched against the following regular expression:
+# ~~~raw
+# ^(http|https):\/\/[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)+([a-zA-Z0-9\-\.,@?^=%&amp;:/~\+#]*[a-zA-Z0-9\-\@?^=%&amp;/~\+#])?
+# ~~~
+# You should redefine the base regular expression `re` with your own.
+#
+# ~~~
+# var validator = new ObjectValidator
+# validator.add new URLField("url")
+# assert not validator.validate("""{ "url": "" }""")
+# assert not validator.validate("""{ "url": "foo" }""")
+# assert not validator.validate("""{ "url": "http://foo" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo?q" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo?q&a" }""")
+# assert validator.validate("""{ "url": "http://nitlanguage.org/foo?q&a=1" }""")
+# ~~~
+class URLField
+	super RegexField
+
+	autoinit field, required
+
+	redef var re = "^(http|https):\\/\\/[a-zA-Z0-9\\-_]+(\\.[a-zA-Z0-9\\-_]+)+([a-zA-Z0-9\\-\\.,@?^=%&:/~\\+#]*[a-zA-Z0-9\\-\\@?^=%&/~\\+#])?".to_re
+end
+
+# Check if a field value is already used
+#
+# This class provides a stub validator for fields that should contain a unique value along an
+# application (typically logins or ids).
+#
+# Here an example that uses a `Repository` if an email is unique:
+# ~~~nitish
+# class UniqueEmailField
+#	super UniqueField
+#
+#	var users: UsersRepository
+#
+#	redef fun check_unicity(v, field, val) do
+#		var user = users.find_by_email(val)
+#		if user != null then
+#			v.validation.add_error(field, "Email `{val}` already used")
+#			return false
+#		end
+#		return true
+#	end
+# end
+# ~~~
+class UniqueField
+	super StringField
+
+	# Check if `val` is already used somewhere
+	#
+	# You must redefine this method to handle your own validation.
+	fun check_unicity(v: ObjectValidator, field, val: String): Bool is abstract
+
+	redef fun validate_field(v, obj) do
+		if not super then return false
+		var val = obj.get_or_null(field)
+		if not val isa String then return false
+		if not check_unicity(v, field, val) then return false
+		return true
+	end
 end
