@@ -470,11 +470,14 @@ redef class Text
 		return res
 	end
 
-	# Replace all occurences of `pattern` with `string`
+	# Replace all occurrences of `pattern` with `string`
 	#
-	#     assert "hlelo".replace("le", "el")	     ==  "hello"
-	#     assert "hello".replace('l', "")	     ==  "heo"
-	fun replace(pattern: Pattern, string: SELFTYPE): String
+	#     assert "hlelo".replace("le", "el") == "hello"
+	#     assert "hello".replace('l', "")    == "heo"
+	#
+	#     var t: Text = "hello"
+	#     assert t.replace("hello", new FlatBuffer) == ""
+	fun replace(pattern: Pattern, string: Text): String
 	do
 		return self.split_with(pattern).join(string)
 	end
