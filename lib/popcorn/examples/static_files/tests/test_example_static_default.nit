@@ -34,7 +34,7 @@ class TestExampleStaticDefault
 
 	fun test_example_static_default do
 		var app = new App
-		app.use("/", new StaticHandler("examples/static_files/public/", "default.html"))
+		app.use("/", new StaticHandler(test_path / "../public/", "default.html"))
 		run_test(app)
 	end
 end

@@ -32,7 +32,7 @@ class TestExampleAngular
 	fun test_example_angular do
 		var app = new App
 		app.use("/counter", new CounterAPI)
-		app.use("/*", new StaticHandler("examples/angular/www/", "index.html"))
+		app.use("/*", new StaticHandler(test_path / "../www/", "index.html"))
 		run_test(app)
 	end
 end

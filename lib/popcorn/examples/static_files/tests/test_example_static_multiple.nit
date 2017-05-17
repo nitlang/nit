@@ -38,10 +38,10 @@ class TestExampleStaticMultiple
 
 	fun test_example_static_multiple do
 		var app = new App
-		app.use("/", new StaticHandler("examples/static_files/public/"))
-		app.use("/", new StaticHandler("examples/static_files/files/"))
-		app.use("/static", new StaticHandler("examples/static_files/public/"))
-		app.use("/static", new StaticHandler("examples/static_files/files/"))
+		app.use("/", new StaticHandler(test_path / "../public/"))
+		app.use("/", new StaticHandler(test_path / "../files/"))
+		app.use("/static", new StaticHandler(test_path / "../public/"))
+		app.use("/static", new StaticHandler(test_path / "../files/"))
 		run_test(app)
 	end
 end

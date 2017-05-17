@@ -34,7 +34,7 @@ class TestExampleStatic
 
 	fun test_example_static do
 		var app = new App
-		app.use("/", new StaticHandler("examples/static_files/public/"))
+		app.use("/", new StaticHandler(test_path / "../public/"))
 		run_test(app)
 	end
 end
