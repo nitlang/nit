@@ -210,7 +210,7 @@ redef class TexturedMaterial
 		# If using a texture, set `texture_coords`
 		program.tex_coord.array_enabled = sample_used_texture != null
 		if sample_used_texture != null then
-			if sample_used_texture isa GamnitRootTexture then
+			if sample_used_texture isa RootTexture then
 				# Coordinates are directly valid
 				program.tex_coord.array(mesh.texture_coords, 2)
 			else

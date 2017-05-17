@@ -46,11 +46,53 @@ import gamnit::dynamic_resolution
 import gamnit::limit_fps
 import gamnit::camera_control
 
-# Draw a `texture` at `center`
+# Visible 2D entity in the game world or UI
 #
-# An instance of `Sprite` can only belong to a single `SpriteSet` at
-# a time. The on screen position depends on the camera associated
+# Similar to `gamnit::Actor` which is in 3D.
+#
+# Each sprite associates a `texture` to the position `center`.
+# The appearance is modified by `rotation`, `invert_x`,
+# `scale`, `red`, `green`, `blue` and `alpha`.
+# These values can be changed at any time and will trigger an update
+# of the data on the GPU side, having a small performance cost.
+#
+# For a sprite to be visible, it must be added to either the world `sprites`
+# or the `ui_sprites`.
+# However, an instance of `Sprite` can only belong to a single `SpriteSet`
+# at a time. The final on-screen position depends on the camera associated
 # to the `SpriteSet`.
+#
+# ~~~
+# # Load texture and create sprite
+# var texture = new Texture("path/in/assets.png")
+# var sprite = new Sprite(texture, new Point3d[Float](0.0, 0.0, 0.0))
+#
+# # Add sprite to the visible game world
+# app.sprites.add sprite
+#
+# # Extra configuration of the sprite
+# sprite.rotation = pi/2.0
+# sprite.scale = 2.0
+#
+# # Show only the blue colors
+# sprite.red = 0.0
+# sprite.green = 0.0
+# ~~~
+#
+# To add a sprite to the UI it can be anchored to screen borders
+# with `ui_camera.top_left` and the likes.
+#
+# ~~~nitish
+# # Place it a bit off the top left of the screen
+# var pos = app.ui_camera.top_left.offset(128.0, -128.0, 0)
+#
+# # Load texture and create sprite
+# var texture = new Texture("path/in/assets.png")
+# var sprite = new Sprite(texture, pos)
+#
+# # Add it to the UI (above world sprites)
+# app.ui_sprites.add sprite
+# ~~~
 class Sprite
 
 	# Texture drawn to screen
@@ -80,10 +122,10 @@ class Sprite
 		center_direct = value
 	end
 
-	# Rotation on the Z axis, positive values go counterclockwise
+	# Rotation on the Z axis, positive values turn counterclockwise
 	var rotation = 0.0 is writable(rotation_direct=)
 
-	# Rotation on the Z axis, positive values go counterclockwise
+	# Rotation on the Z axis, positive values turn counterclockwise
 	fun rotation=(value: Float)
 	do
 		if isset _rotation and value != rotation then needs_update
@@ -102,10 +144,12 @@ class Sprite
 
 	# Scale applied to this sprite
 	#
-	# The default size of `self` depends on the size in pixels of `texture`.
+	# The basic size of `self` depends on the size in pixels of `texture`.
 	var scale = 1.0 is writable(scale_direct=)
 
-	# Scale applied to this sprite, see `scale`
+	# Scale applied to this sprite
+	#
+	# The basic size of `self` depends on the size in pixels of `texture`.
 	fun scale=(value: Float)
 	do
 		if isset _scale and value != scale then needs_update
@@ -233,10 +277,10 @@ redef class App
 	# Camera for `ui_sprites` using an orthogonal view
 	var ui_camera = new UICamera(app.display.as(not null)) is lazy
 
-	# World sprites to draw as seen by `world_camera`
+	# World sprites drawn as seen by `world_camera`
 	var sprites: Set[Sprite] = new SpriteSet
 
-	# UI sprites to draw as seen by `ui_camera`, drawn over world `sprites`
+	# UI sprites drawn as seen by `ui_camera`, over world `sprites`
 	var ui_sprites: Set[Sprite] = new SpriteSet
 
 	# Main method to refine in clients to update game logic and `sprites`
@@ -602,7 +646,7 @@ private class SpriteSet
 	super HashSet[Sprite]
 
 	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap2[GamnitRootTexture, Bool, SpriteContext]
+	var contexts_map = new HashMap2[RootTexture, Bool, SpriteContext]
 
 	# Contexts in `contexts_map`
 	var contexts_items = new Array[SpriteContext]
@@ -697,7 +741,7 @@ private class SpriteContext
 	# Context config and state
 
 	# Only root texture drawn by this context
-	var texture: nullable GamnitRootTexture
+	var texture: nullable RootTexture
 
 	# OpenGL ES usage of `buffer_array` and `buffer_element`
 	var usage: GLBufferUsage
@@ -1040,6 +1084,8 @@ end
 # The data can be compressed by a call to `defragment`.
 #
 # ~~~
+# intrude import gamnit::flat
+#
 # var array = new GroupedArray[String]
 # assert array.to_s == ""
 #
@@ -1199,6 +1245,8 @@ private class GroupedArray[E]
 	# Returns the elements that moved as a list.
 	#
 	# ~~~
+	# intrude import gamnit::flat
+	#
 	# var array = new GroupedArray[String]
 	# array.add "a"
 	# array.add "b"

@@ -80,6 +80,8 @@ class Plane
 end
 
 # Cube, with 6 faces
+#
+# Occupies `[-0.5..0.5]` on all three axes.
 class Cube
 	super Mesh
 
@@ -131,4 +133,69 @@ class Cube
 	end
 
 	redef var center = new Point3d[Float](0.0, 0.0, 0.0) is lazy
+end
+
+# Sphere with `radius` and a number of faces set by `n_meridians` and `n_parallels`
+class UVSphere
+	super Mesh
+
+	# Distance between the center and the vertices
+	var radius: Float
+
+	# Number of vertices on a full circle around the Z axis
+	var n_meridians: Int
+
+	# Number of vertices on an arc between both poles
+	var n_parallels: Int
+
+	init
+	do
+		var w = n_meridians
+		var h = n_parallels
+
+		var vertices = new Array[Float].with_capacity(w*h*3)
+		self.vertices = vertices
+
+		var texture_coords = new Array[Float].with_capacity(w*h*2)
+		self.texture_coords = texture_coords
+
+		var normals = new Array[Float].with_capacity(w*h*3)
+		self.normals = normals
+
+		# Build vertices
+		for m in [0..w[ do
+			for p in [0..h[ do
+				var u = m.to_f * 2.0 * pi / (w-1).to_f
+				var v = p.to_f * pi / (h-1).to_f
+
+				vertices.add radius * u.cos * v.sin
+				vertices.add radius * v.cos
+				vertices.add radius * u.sin * v.sin
+
+				texture_coords.add (1.0 - m.to_f/(w-1).to_f)
+				texture_coords.add(p.to_f/(h-1).to_f)
+
+				normals.add u.cos * v.sin
+				normals.add v.cos
+				normals.add u.sin * v.sin
+			end
+		end
+
+		# Build faces
+		var indices = new Array[Int].with_capacity((w-1)*(h-1)*6)
+		self.indices = indices
+		for m in [0..w-1[ do
+			for p in [0..h-1[ do
+				var a = m*h + p
+
+				indices.add a
+				indices.add a+h
+				indices.add a+1
+
+				indices.add a+h
+				indices.add a+h+1
+				indices.add a+1
+			end
+		end
+	end
 end

@@ -385,7 +385,7 @@ end
 interface SimpleCollection[E]
 	super RemovableCollection[E]
 
-	# Add an item in a collection.
+	# Add `item` to this collection.
 	#
 	#     var a = [1,2]
 	#     a.add 3
