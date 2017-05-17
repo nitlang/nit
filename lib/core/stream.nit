@@ -55,7 +55,7 @@ abstract class Stream
 	# Used to inform `self` that the operations are over.
 	# Specific streams can use this to free some resources.
 	#
-	# Is automatically invoked at the end of `woth` structures.
+	# Is automatically invoked at the end of `with` structures.
 	#
 	# call `close` by default.
 	fun finish do close
