@@ -154,6 +154,14 @@ redef class MModule
 	# (introduction and refinement)
 	var mclassdefs = new Array[MClassDef]
 
+	private var mclassdef_sorter: MClassDefSorter is lazy do
+		return new MClassDefSorter(self)
+	end
+
+	private var mpropdef_sorter: MPropDefSorter is lazy do
+		return new MPropDefSorter(self)
+	end
+
 	# Does the current module has a given class `mclass`?
 	# Return true if the mmodule introduces, refines or imports a class.
 	# Visibility is not considered.
@@ -201,8 +209,7 @@ redef class MModule
 	# The most general is first, the most specific is last
 	fun linearize_mclassdefs(mclassdefs: Array[MClassDef])
 	do
-		var sorter = new MClassDefSorter(self)
-		sorter.sort(mclassdefs)
+		mclassdef_sorter.sort(mclassdefs)
 	end
 
 	# Sort a given array of property definitions using the linearization order of the module
@@ -210,8 +217,7 @@ redef class MModule
 	# The most general is first, the most specific is last
 	fun linearize_mpropdefs(mpropdefs: Array[MPropDef])
 	do
-		var sorter = new MPropDefSorter(self)
-		sorter.sort(mpropdefs)
+		mpropdef_sorter.sort(mpropdefs)
 	end
 
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
@@ -355,14 +361,12 @@ private class MPropDefSorter
 	super Comparator
 	redef type COMPARED: MPropDef
 	var mmodule: MModule
+
 	redef fun compare(pa, pb)
 	do
 		var a = pa.mclassdef
 		var b = pb.mclassdef
-		var ca = a.mclass
-		var cb = b.mclass
-		if ca != cb then return mmodule.flatten_mclass_hierarchy.compare(ca, cb)
-		return mmodule.model.mclassdef_hierarchy.compare(a, b)
+		return mmodule.mclassdef_sorter.compare(a, b)
 	end
 end
 
