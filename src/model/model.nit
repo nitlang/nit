@@ -169,7 +169,7 @@ redef class MModule
 	# Visibility is not considered.
 	#
 	# Note: this function is expensive and is usually used for the main
-	# module of a program only. Do not use it to do you own subtype
+	# module of a program only. Do not use it to do your own subtype
 	# functions.
 	fun flatten_mclass_hierarchy: POSet[MClass]
 	do
@@ -368,8 +368,8 @@ end
 
 # A named class
 #
-# `MClass` are global to the model; it means that a `MClass` is not bound to a
-# specific `MModule`.
+# `MClass`es are global to the model; it means that a `MClass` is not bound
+# to a specific `MModule`.
 #
 # This characteristic helps the reasoning about classes in a program since a
 # single `MClass` object always denote the same class.
@@ -473,11 +473,13 @@ class MClass
 	end
 
 	# The kind of the class (interface, abstract class, etc.)
-	# In Nit, the kind of a class cannot evolve in refinements
+	#
+	# In Nit, the kind of a class cannot evolve in refinements.
 	var kind: MClassKind
 
 	# The visibility of the class
-	# In Nit, the visibility of a class cannot evolve in refinements
+	#
+	# In Nit, the visibility of a class cannot evolve in refinements.
 	redef var visibility
 
 	init
@@ -501,12 +503,12 @@ class MClass
 	# Warning: such a definition may not exist in the early life of the object.
 	# In this case, the method will abort.
 	#
-	# Use `try_intro` instead
+	# Use `try_intro` instead.
 	var intro: MClassDef is noinit
 
-	# The definition that introduces the class or null if not yet known.
+	# The definition that introduces the class or `null` if not yet known.
 	#
-	# See `intro`
+	# SEE: `intro`
 	fun try_intro: nullable MClassDef do
 		if isset _intro then return _intro else return null
 	end
@@ -2582,7 +2584,7 @@ class MClassKind
 
 	# TODO: private init because enumeration.
 
-	# Can a class of kind `self` specializes a class of kine `other`?
+	# Can a class of kind `self` specializes a class of kind `other`?
 	fun can_specialize(other: MClassKind): Bool
 	do
 		if other == interface_kind then return true # everybody can specialize interfaces
