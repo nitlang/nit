@@ -19,4 +19,4 @@ NITUNIT=nitunit
 all:
 
 check:
-	$(NITUNIT) .
+	$(NITUNIT) . tests/ examples/

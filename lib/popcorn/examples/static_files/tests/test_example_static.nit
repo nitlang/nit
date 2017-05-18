@@ -14,22 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import popcorn
+module test_example_static is test_suite
 
-class SimpleLoggerHandler
-	super Handler
+import pop_tests
+import example_static
 
-	redef fun all(req, res) do print "Request Logged"
+class TestExampleStatic
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/css/style.css"
+		system "curl -s {host}:{port}/js/app.js"
+		system "curl -s {host}:{port}/hello.html"
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/css/not_found.nit"
+		system "curl -s {host}:{port}/static/css/not_found.nit"
+		system "curl -s {host}:{port}/not_found.nit"
+	end
+
+	fun test_example_static do
+		var app = new App
+		app.use("/", new StaticHandler(test_path / "../public/"))
+		run_test(app)
+	end
 end
-
-class MyOtherHandler
-	super Handler
-
-	redef fun get(req, res) do res.send "Hello World!"
-end
-
-
-var app = new App
-app.use_before("/*", new SimpleLoggerHandler)
-app.use("/", new MyOtherHandler)
-app.listen("localhost", 3000)

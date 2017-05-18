@@ -131,6 +131,11 @@ class TestPopcorn
 	# Port used to run App.
 	var port: Int = test_port
 
+	# Directory of the current test suite
+	#
+	# Useful when your tested app need to load some external files.
+	var test_path: String = "NIT_TESTING_PATH".environ.dirname
+
 	# Run the test suite on the App.
 	fun run_test(app: App) do
 		var server = new AppThread(host, port, app)

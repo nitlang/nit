@@ -14,22 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import popcorn
+module test_example_post_handler is test_suite
 
-class SimpleLoggerHandler
-	super Handler
+import pop_tests
+import example_post_handler
 
-	redef fun all(req, res) do print "Request Logged"
+class TestExamplePostHandler
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/ -X POST"
+		system "curl -s {host}:{port}/ --data 'user'"
+		system "curl -s {host}:{port}/ --data 'user=Morriar'"
+		system "curl -s {host}:{port}/ --data 'user=\&order=desc'"
+		system "curl -s {host}:{port}/ --data 'user=Morriar\&order=desc'"
+		system "curl -s {host}:{port}/"
+	end
+
+	fun test_example_post_handler do
+		var app = new App
+		app.use("/", new PostHandler)
+		run_test(app)
+	end
 end
-
-class MyOtherHandler
-	super Handler
-
-	redef fun get(req, res) do res.send "Hello World!"
-end
-
-
-var app = new App
-app.use_before("/*", new SimpleLoggerHandler)
-app.use("/", new MyOtherHandler)
-app.listen("localhost", 3000)

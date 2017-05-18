@@ -14,22 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import popcorn
+module test_example_angular is test_suite
 
-class SimpleLoggerHandler
-	super Handler
+import pop_tests
+import example_angular
 
-	redef fun all(req, res) do print "Request Logged"
+class TestExampleAngular
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/counter"
+		system "curl -s {host}:{port}/counter -X POST"
+		system "curl -s {host}:{port}/counter"
+		system "curl -s {host}:{port}/not_found" # handled by angular controller
+	end
+
+	fun test_example_angular do
+		var app = new App
+		app.use("/counter", new CounterAPI)
+		app.use("/*", new StaticHandler(test_path / "../www/", "index.html"))
+		run_test(app)
+	end
 end
-
-class MyOtherHandler
-	super Handler
-
-	redef fun get(req, res) do res.send "Hello World!"
-end
-
-
-var app = new App
-app.use_before("/*", new SimpleLoggerHandler)
-app.use("/", new MyOtherHandler)
-app.listen("localhost", 3000)

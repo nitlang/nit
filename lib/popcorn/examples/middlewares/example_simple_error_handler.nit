@@ -26,7 +26,7 @@ class SimpleErrorHandler
 	end
 end
 
-class HelloHandler
+class SomeHandler
 	super Handler
 
 	redef fun get(req, res) do res.send "Hello World!"
@@ -34,6 +34,6 @@ end
 
 
 var app = new App
-app.use("/", new HelloHandler)
+app.use("/", new SomeHandler)
 app.use("/*", new SimpleErrorHandler)
 app.listen("localhost", 3000)
