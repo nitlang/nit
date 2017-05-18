@@ -15,40 +15,45 @@
 # limitations under the License.
 
 # QuadTree API mostly used for 2 dimensional collision detection
+#
 # The QuadTree data structure partition a 2D space by recursively
-# subdividing it into 4 regions when it's capacity is reached
-# This module introduce 2 principal implementation of the structure,
-# the static and the dynamic QuadTree
+# subdividing it into 4 regions when its capacity is reached.
+# This module introduces 2 main implementation of the structure,
+# a static and a dynamic QuadTree.
 module quadtree
 
 import boxes
 import pipeline
 
-# Abstract QuadTree implementing most of the basic functions
-# and introducing specific QuadTree data
+# Abstract QuadTree implementing the basic functions and data
 abstract class QuadTree[E: Boxed[Numeric]]
 	super BoxedCollection[E]
 
+	# Center coordinate of the children
 	protected var center: nullable Point[Numeric] = null
-	var data: Array[E] = new Array[E]
 
-	#  ________________
-	#  |       |       |
-	#  |   1   |   2   |
-	#  |-------|-------|
-	#  |   0   |   3   |
-	#  |_______|_______|
+	# Items in this node
+	protected var data = new Array[E]
 
-	protected var child0: nullable QuadTree[E] = null
-	protected var child1: nullable QuadTree[E] = null
-	protected var child2: nullable QuadTree[E] = null
-	protected var child3: nullable QuadTree[E] = null
+	# Children nodes, if not `is_leaf`
+	#
+	# ~~~raw
+	# ________________
+	# |       |       |
+	# |   1   |   2   |
+	# |-------|-------|
+	# |   0   |   3   |
+	# |_______|_______|
+	# ~~~
+	protected var children = new Array[QuadTree[E]]
 
-	# represent the threshold before subdividing the node
+	# Maximum number of items in this node before subdividing
 	protected var item_limit: Int
+
+	# Parent node in the tree
 	protected var parent_node: nullable QuadTree[E] = null
 
-	# create a node, giving him self as a parent. Used to create children nodes
+	# Create a child node to `parent`
 	init with_parent(limit: Int, parent: QuadTree[E])
 	do
 		init(limit)
@@ -61,31 +66,33 @@ abstract class QuadTree[E: Boxed[Numeric]]
 		return res
 	end
 
-	# add the item to the tree, create children if the limit is reached
+	# Add `item` to the tree, create children if `item_limit` is reached
 	redef fun add(item) do if self.is_leaf then self.data.add(item) else add_to_children(item)
 
 	private fun add_to_children(item: Boxed[Numeric])
 	do
-		if self.child0 != null then
-			if self.center.x > item.right then
-				if self.center.y > item.top then
-					child0.add(item)
-				else if self.center.y < item.bottom then
-					child1.add(item)
+		if children.not_empty then
+			var center = center
+			assert center != null
+			if center.x > item.right then
+				if center.y > item.top then
+					children[0].add(item)
+				else if center.y < item.bottom then
+					children[1].add(item)
 				else
 					self.data.add(item)
 				end
-			else if self.center.x < item.left then
-				if self.center.y > item.top then
-					child3.add(item)
-				else if self.center.y < item.bottom then
-					child2.add(item)
+			else if center.x < item.left then
+				if center.y > item.top then
+					children[3].add(item)
+				else if center.y < item.bottom then
+					children[2].add(item)
 				else
 					self.data.add(item)
 				end
-			else if self.center.y > item.top then
+			else if center.y > item.top then
 				self.data.add(item)
-			else if self.center.y < item.bottom then
+			else if center.y < item.bottom then
 				self.data.add(item)
 			else
 				self.data.add(item)
@@ -93,10 +100,16 @@ abstract class QuadTree[E: Boxed[Numeric]]
 		end
 	end
 
-	redef fun is_empty do return data.is_empty and (self.is_leaf or (child0.is_empty and child1.is_empty and child2.is_empty and child3.is_empty))
+	redef fun is_empty
+	do
+		if is_leaf then return data.is_empty
+
+		assert children.length >= 4
+		return data.is_empty and children[0].is_empty and children[1].is_empty and children[2].is_empty and children[3].is_empty
+	end
 
 	# Return whether or not the Node is a leaf of the tree
-	fun is_leaf: Bool do return child0 == null
+	fun is_leaf: Bool do return children.is_empty
 
 	#     var dquadtree = new DQuadTree[Point[Int]](2)
 	#     var p1 = new Point[Int](0,0)
@@ -113,7 +126,7 @@ abstract class QuadTree[E: Boxed[Numeric]]
 	#     assert result.length == 0
 	#     result = dquadtree.items_overlapping(p4.padded(10))
 	#     assert result.length == 3
-	fun items_overlapping_in(region: Boxed[Numeric], mdata: SimpleCollection[E])
+	private fun items_overlapping_in(region: Boxed[Numeric], mdata: SimpleCollection[E])
 	do
 		if self.is_leaf and data.length >= item_limit then
 			subdivide
@@ -125,63 +138,72 @@ abstract class QuadTree[E: Boxed[Numeric]]
 			end
 		end
 		for i in data do if i.intersects(region) then mdata.add(i)
-		if self.child0 != null then
-			if self.center.x > region.right then
-				if self.center.y > region.top then
-					child0.items_overlapping_in(region, mdata)
-				else if self.center.y < region.bottom then
-					child1.items_overlapping_in(region, mdata)
+
+		if children.not_empty then
+			var center = center
+			assert center != null
+			if center.x > region.right then
+				if center.y > region.top then
+					children[0].items_overlapping_in(region, mdata)
+				else if center.y < region.bottom then
+					children[1].items_overlapping_in(region, mdata)
 				else
-					child0.items_overlapping_in(region,mdata)
-					child1.items_overlapping_in(region, mdata)
+					children[0].items_overlapping_in(region,mdata)
+					children[1].items_overlapping_in(region, mdata)
 				end
-			else if self.center.x < region.left then
-				if self.center.y > region.top then
-					child3.items_overlapping_in(region, mdata)
-				else if self.center.y < region.bottom then
-					child2.items_overlapping_in(region, mdata)
+			else if center.x < region.left then
+				if center.y > region.top then
+					children[3].items_overlapping_in(region, mdata)
+				else if center.y < region.bottom then
+					children[2].items_overlapping_in(region, mdata)
 				else
-					child3.items_overlapping_in(region, mdata)
-					child2.items_overlapping_in(region, mdata)
+					children[3].items_overlapping_in(region, mdata)
+					children[2].items_overlapping_in(region, mdata)
 				end
-			else if self.center.y > region.top then
-				child0.items_overlapping_in(region, mdata)
-				child3.items_overlapping_in(region, mdata)
-			else if self.center.y < region.bottom then
-				child1.items_overlapping_in(region, mdata)
-				child2.items_overlapping_in(region, mdata)
+			else if center.y > region.top then
+				children[0].items_overlapping_in(region, mdata)
+				children[3].items_overlapping_in(region, mdata)
+			else if center.y < region.bottom then
+				children[1].items_overlapping_in(region, mdata)
+				children[2].items_overlapping_in(region, mdata)
 			else
-				child0.items_overlapping_in(region, mdata)
-				child1.items_overlapping_in(region, mdata)
-				child2.items_overlapping_in(region, mdata)
-				child3.items_overlapping_in(region, mdata)
+				children[0].items_overlapping_in(region, mdata)
+				children[1].items_overlapping_in(region, mdata)
+				children[2].items_overlapping_in(region, mdata)
+				children[3].items_overlapping_in(region, mdata)
 			end
 		end
 	end
 
-	# this function is responsible of the creation of the children,
-	# depending on your needs
+	# Create children nodes, depends on the concrete implementation
 	protected fun subdivide is abstract
 
-	redef fun iterator do if self.is_leaf then return data.iterator else return data.iterator + child0.iterator + child1.iterator + child2.iterator + child3.iterator
+	redef fun iterator
+	do
+		if is_leaf then return data.iterator
+
+		assert children.length >= 4
+		return data.iterator + children[0].iterator + children[1].iterator + children[2].iterator + children[3].iterator
+	end
 end
 
 # A dynamic implementation of the quadtree data structure
-# the center of the parent node is determined by the average
-# values of the data it contains when the item limit is reached
+#
+# The center of the parent node is determined by the average
+# values of the data it contains when `item_limit` is reached.
 class DQuadTree[E: Boxed[Numeric]]
 	super QuadTree[E]
 
 	redef fun subdivide
 	do
 		self.center = new Point[Numeric](average_x, average_y)
-		child0 = new DQuadTree[E].with_parent(self.item_limit, self)
-		child1 = new DQuadTree[E].with_parent(self.item_limit, self)
-		child2 = new DQuadTree[E].with_parent(self.item_limit, self)
-		child3 = new DQuadTree[E].with_parent(self.item_limit, self)
+		children[0] = new DQuadTree[E].with_parent(self.item_limit, self)
+		children[1] = new DQuadTree[E].with_parent(self.item_limit, self)
+		children[2] = new DQuadTree[E].with_parent(self.item_limit, self)
+		children[3] = new DQuadTree[E].with_parent(self.item_limit, self)
 	end
 
-	# average x of data in this node
+	# Average X coordinate of the items in this node
 	fun average_x: Numeric
 	do
 		var x_total = data.first.left.zero
@@ -191,7 +213,7 @@ class DQuadTree[E: Boxed[Numeric]]
 		return x_total/x_total.value_of(self.data.length)
 	end
 
-	# average y of data in this node
+	# Average Y coordinate of the items in this node
 	fun average_y: Numeric
 	do
 		var y_total = data.first.left.zero
@@ -202,17 +224,19 @@ class DQuadTree[E: Boxed[Numeric]]
 	end
 end
 
-# Static implementation of the quadtree structure.
+# Static implementation of the quadtree structure
+#
 # You need to specify a zone when creating the quadtree,
 # which will be the zone corresponding to the root node.
-# each subdivision cut the space in 4 equal regions from
-# the center of the parent node
+# Each subdivision cut the space in 4 equal regions from
+# the center of the parent node.
 class SQuadTree[E: Boxed[Numeric]]
 	super QuadTree[E]
 
-	# the width of the current node of the QuadTree
+	# Width of this node of the QuadTree
 	var width: Numeric
-	# the height of the current node of the QuadTree
+
+	# Height of this node of the QuadTree
 	var height: Numeric
 
 	init
@@ -220,30 +244,35 @@ class SQuadTree[E: Boxed[Numeric]]
 		center = new Point[Numeric](width.div(2), height.div(2))
 	end
 
-	init with_parent(l: Int, c: Point[Numeric], w: Numeric, h: Numeric, p: QuadTree[E])
+	# Create a child node to `parent`
+	init with_parent(l: Int, c: Point[Numeric], w, h: Numeric, parent: QuadTree[E])
 	do
 		init(l, w, h)
 		center = c
-		self.parent_node = p
+		self.parent_node = parent
 	end
 
 	redef fun subdivide
 	do
-		child0 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](self.center.x.div(2), self.center.y.div(2)), self.width.div(2), self.height.div(2), self)
-		child1 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](self.center.x.div(2), (self.center.y.mul(3)).div(2)), self.width.div(2), self.height.div(2), self)
-		child2 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((self.center.x.mul(3)).div(2), (self.center.y.mul(3)).div(2)), self.width.div(2), self.height.div(2), self)
-		child3 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((self.center.x.mul(3)).div(2), self.center.y.div(2)), self.width.div(2), self.height.div(2), self)
+		var center = center
+		assert center != null
+
+		children[0] = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](center.x.div(2), center.y.div(2)), self.width.div(2), self.height.div(2), self)
+		children[1] = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](center.x.div(2), (center.y.mul(3)).div(2)), self.width.div(2), self.height.div(2), self)
+		children[2] = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((center.x.mul(3)).div(2), (center.y.mul(3)).div(2)), self.width.div(2), self.height.div(2), self)
+		children[3] = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((center.x.mul(3)).div(2), center.y.div(2)), self.width.div(2), self.height.div(2), self)
 	end
 
 	redef fun to_s
 	do
-		var s = "center : {center.to_s}\n"
+		var s = "center : {center or else "null"}\n"
 		for d in data do s += d.to_s
-		if child0 != null then
-			s += "\nchild0: {child0.to_s}\n"
-			s += "   child1: {child1.to_s}\n"
-			s += "   child2: {child2.to_s}\n"
-			s += "   child3: {child3.to_s}\n"
+
+		if children.not_empty then
+			s += "\n   children[0]: {children[0]}\n"
+			s += "   children[1]: {children[1]}\n"
+			s += "   children[2]: {children[2]}\n"
+			s += "   children[3]: {children[3]}\n"
 		end
 		return s
 	end
