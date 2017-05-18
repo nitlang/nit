@@ -88,8 +88,8 @@ end
 class Point[N: Numeric]
 	super IPoint[N]
 
-	redef var x: N is writable
-	redef var y: N is writable
+	redef var x: N = 0.0 is writable, optional
+	redef var y: N = 0.0 is writable, optional
 end
 
 # Abstract 3d point, strongly linked to its implementation `Point3d`
@@ -107,7 +107,7 @@ class Point3d[N: Numeric]
 	super IPoint3d[N]
 	super Point[N]
 
-	redef var z: N is writable
+	redef var z: N = 0.0 is writable, optional
 end
 
 # Abstract 2D line segment between two ordered points
