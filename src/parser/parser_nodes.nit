@@ -1211,8 +1211,9 @@ class AIntrudeVisibility
 end
 
 # A class definition
-# While most definition are `AStdClassdef`
-# There is tow special case of class definition
+#
+# While most definitions are `AStdClassdef`s,
+# there are 2 special cases of class definitions.
 abstract class AClassdef
 	super Prod
 	# All the declared properties (including the main method)
