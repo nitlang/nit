@@ -160,9 +160,16 @@ end
 #
 # Possible colors:
 #
-# * A:0, B:1, C: 2, D: 1, E: 3, F:3, G:2, H:4
+# * A: 0
+# * B: 1
+# * C: 2
+# * D: 1
+# * E: 3
+# * F: 3
+# * G: 2
+# * H: 4
 #
-# see: Ducournau, R. (2011).
+# SEE: Ducournau, R. (2011).
 # Coloring, a versatile technique for implementing object-oriented languages.
 # Software: Practice and Experience, 41(6), 627–659.
 class POSetColorer[E: Object]
