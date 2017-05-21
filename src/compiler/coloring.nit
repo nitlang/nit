@@ -178,6 +178,9 @@ class POSetColorer[E: Object]
 	var is_colored = false
 
 	# Resulting ids
+	#
+	# All ids are strictly positive (`>= 1`).
+	#
 	# REQUIRE: is_colored
 	fun ids: Map[E, Int] do
 		assert is_colored
@@ -223,7 +226,7 @@ class POSetColorer[E: Object]
 		ids_cache.clear
 		var elements = new HashSet[E].from(poset_cache.to_a)
 		for e in poset_cache.linearize(elements) do
-			ids_cache[e] = ids_cache.length
+			ids_cache[e] = ids_cache.length + 1
 		end
 	end
 
