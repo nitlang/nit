@@ -30,9 +30,9 @@ redef class XMLEntity
 	# assert xml["animal"].length == 1
 	# assert xml["animal"].first["cat"].length == 2
 	# ~~~
-	fun [](tag_name: String): Array[XMLEntity]
+	fun [](tag_name: String): Array[XMLTag]
 	do
-		var res = new Array[XMLEntity]
+		var res = new Array[XMLTag]
 		for child in children do
 			if child isa XMLTag and child.tag_name == tag_name then
 				res.add child
