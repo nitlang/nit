@@ -15,7 +15,7 @@
 # Support for `TileSet`, `TileSetFont` and drawing text with `TextSprites`
 module tileset
 
-import flat
+import font
 
 # Efficiently retrieve tiles in a big texture
 class TileSet
@@ -60,6 +60,7 @@ end
 # A monospace bitmap font where glyphs are stored in a tileset
 class TileSetFont
 	super TileSet
+	super Font
 
 	# Set the characters present in `texture`
 	#
@@ -82,12 +83,6 @@ class TileSetFont
 	#
 	# A negative value may display overlapped tiles.
 	var vspace: Numeric = 0.0 is writable
-
-	# Line spacing modifier for `pld` and `plu`
-	#
-	# This value acts as multiplier to `height + vspace`.
-	# Defaults to 0.4, so a `pld` moves chars down by about half a line.
-	var partial_line_mod: Numeric = 0.4 is writable
 
 	# The glyph/tile/texture associated to `char`
 	#
@@ -122,83 +117,37 @@ class TileSetFont
 		var n_lines = text.chars.count('\n')
 		return (n_lines+1).mul(height.add(vspace)).sub(vspace)
 	end
-end
 
-# Manage a set of sprites to display some text
-class TextSprites
-
-	# Font used to draw text
-	var font: TileSetFont
-
-	# Top left of the first character in UI coordinates
-	var anchor: Point3d[Float]
-
-	# Last set of sprites generated to display `text=`
-	var sprites = new Array[Sprite]
-
-	# Sprite set where to put created sprites
-	#
-	# Defaults to `app::ui_sprites`, but it could also be set to a
-	# `app::sprites` or a custom collection.
-	var target_sprite_set: Set[Sprite] = app.ui_sprites is lazy, writable
-
-	private var cached_text: nullable Text = ""
-
-	# Last text drawn
-	fun text: nullable Text do return cached_text
-
-	# Update the text displayed by inserting new sprites into `app.ui_sprites`
-	#
-	# Does not redraw if `text` has not changed.
-	fun text=(text: nullable Text)
-	is autoinit do
-		# Don't redraw if text hasn't changed
-		if text == cached_text then return
-		cached_text = text
-
-		# Clean up last used sprites
-		for s in sprites do if target_sprite_set.has(s) then target_sprite_set.remove s
-		sprites.clear
-
-		if text == null then return
-
+	redef fun write_into(text_sprites, text)
+	do
 		# Build new sprites
-		var dx = font.advance/2.0
-		var dy = font.hspace.to_f/2.0
+		var dx = advance/2.0
+		var dy = hspace.to_f/2.0
 		for c in text do
 			if c == '\n' then
-				dy -= font.height.to_f + font.vspace.to_f
-				dx = font.advance/2.0
+				dy -= height.to_f + vspace.to_f
+				dx = advance/2.0
 				continue
 			else if c == pld then
-				dy -= (font.height.to_f + font.vspace.to_f) * font.partial_line_mod.to_f
+				dy -= (height.to_f + vspace.to_f) * partial_line_mod.to_f
 				continue
 			else if c == plu then
-				dy += (font.height.to_f + font.vspace.to_f) * font.partial_line_mod.to_f
+				dy += (height.to_f + vspace.to_f) * partial_line_mod.to_f
 				continue
 			else if c.is_whitespace then
-				dx += font.advance
+				dx += advance
 				continue
 			end
 
-			var tex = font.char(c)
+			var tex = char(c)
 			if tex == null then
 				# Try to fallback to '?'
-				tex = font.char('?')
+				tex = char('?')
 				if tex == null then continue
 			end
 
-			sprites.add new Sprite(tex, anchor.offset(dx, dy, 0))
-			dx += font.advance
+			text_sprites.sprites.add new Sprite(tex, text_sprites.anchor.offset(dx, dy, 0))
+			dx += advance
 		end
-
-		# Register sprites to be drawn by `app.ui_camera`
-		target_sprite_set.add_all sprites
 	end
 end
-
-# Partial line forward (U+008B)
-fun pld: Char do return ''
-
-# Partial line backward (U+008C)
-fun plu: Char do return ''
