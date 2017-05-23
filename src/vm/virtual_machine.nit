@@ -199,13 +199,20 @@ class VirtualMachine super NaiveInterpreter
 	do
 		if mclass.loaded then return
 
-		# Recursively load superclasses
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+		load_supers(mclass)
 
 		if mclass.abstract_loaded then
 			mclass.allocate_vtable(self)
 		else
 			mclass.make_vt(self, true)
+		end
+	end
+
+	# Recursively load superclasses.
+	private fun load_supers(mclass: MClass)
+	do
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
+			load_class_indirect(parent)
 		end
 	end
 
@@ -217,7 +224,7 @@ class VirtualMachine super NaiveInterpreter
 		# It the class was already implicitly loaded
 		if mclass.abstract_loaded then return
 
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+		load_supers(mclass)
 
 		mclass.make_vt(self, false)
 	end
