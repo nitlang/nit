@@ -62,7 +62,7 @@ class RapidTypeAnalysis
 	# live_methods to determine new methoddefs to visit
 	var live_types = new HashSet[MClassType]
 
-	# The pool of undesolved live types
+	# The pool of unresolved live types
 	# They are globally resolved at the end of the analaysis
 	var live_open_types = new HashSet[MClassType]
 
