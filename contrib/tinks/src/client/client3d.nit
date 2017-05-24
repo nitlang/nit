@@ -359,7 +359,7 @@ redef class Feature
 		# Apply a random model and rotation to new features
 		actor = new Actor(rule.models.rand,
 			new Point3d[Float](pos.x, 0.0, pos.y))
-		actor.rotation = 2.0*pi.rand
+		actor.yaw = 2.0*pi.rand
 		actor.scale = 0.75
 
 		self.actor = actor
@@ -426,7 +426,7 @@ redef class ExplosionEvent
 		# Blast mark on the ground
 		var blast = new Actor(app.blast_model, new Point3d[Float](pos.x, 0.05 & 0.04, pos.y))
 		blast.scale = 3.0
-		blast.rotation = 2.0*pi.rand
+		blast.yaw = 2.0*pi.rand
 		app.actors.add blast
 
 		# Smoke
@@ -474,8 +474,8 @@ redef class TankMoveEvent
 			actor.center.z = pos.y
 		end
 
-		tank.actors[0].rotation = tank.heading + pi
-		tank.actors[1].rotation = tank.turret.heading + pi
+		tank.actors[0].yaw = -tank.heading + pi
+		tank.actors[1].yaw = -tank.turret.heading + pi
 
 		# Keep going only for the local tank
 		var local_player = app.context.local_player

@@ -49,7 +49,7 @@ class SmoothMaterial
 		# Actor specs
 		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		# From mesh
 		program.coord.array_enabled = true
@@ -171,7 +171,8 @@ class TexturedMaterial
 
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		program.ambient_color.uniform(ambient_color[0], ambient_color[1], ambient_color[2], ambient_color[3]*actor.alpha)
 		program.diffuse_color.uniform(diffuse_color[0], diffuse_color[1], diffuse_color[2], diffuse_color[3]*actor.alpha)
@@ -216,7 +217,8 @@ class NormalsMaterial
 
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		program.normal.array_enabled = true
 		program.normal.array(mesh.normals, 3)

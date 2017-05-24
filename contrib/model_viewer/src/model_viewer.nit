@@ -146,7 +146,7 @@ redef class App
 		var t = clock.total.to_f
 
 		# Rotate the model
-		actors.first.rotation = t
+		actors.first.yaw = t
 
 		# Move the light source
 		var dist_to_light = 20.0

@@ -148,7 +148,7 @@ class GlobeMaterial
 
 		# Set uniforms
 		program.scale.uniform 1.0
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
 		program.color.uniform(color[0], color[1], color[2], color[3])
 		program.is_surface.uniform is_surface

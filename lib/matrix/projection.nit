@@ -150,4 +150,27 @@ redef class Matrix
 		var rotated = self * rotation
 		self.items = rotated.items
 	end
+
+	# Rotation matrix from Euler angles `pitch`, `yaw` and `roll` in radians
+	#
+	# Apply a composition of intrinsic rotations around the axes x-y'-z''.
+	# Or `pitch` around the X axis, `yaw` around Y and `roll` around Z,
+	# applied successively. All rotations follow the right hand rule.
+	#
+	# This service aims to respect the world axes and logic of `gamnit`,
+	# it may not correspond to all needs.
+	new gamnit_euler_rotation(pitch, yaw, roll: Float)
+	do
+		var c1 = pitch.cos
+		var s1 = pitch.sin
+		var c2 = yaw.cos
+		var s2 = yaw.sin
+		var c3 = roll.cos
+		var s3 = roll.sin
+		return new Matrix.from(
+			[[          c2*c3,          -c2*s3,   -s2, 0.0],
+			 [ c1*s3+c3*s1*s2,  c1*c3-s1*s2*s3, c2*s1, 0.0],
+			 [-s1*s3+c1*c3*s2, -c3*s1-c1*s2*s3, c1*c2, 0.0],
+			 [            0.0,             0.0,   0.0, 1.0]])
+	end
 end

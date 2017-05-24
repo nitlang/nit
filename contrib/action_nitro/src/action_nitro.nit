@@ -507,7 +507,7 @@ end
 redef class Boss
 	redef var actor is lazy do
 		var actor = new Actor(app.iss_model, center)
-		actor.rotation = pi/2.0
+		actor.yaw = pi/2.0
 		return actor
 	end
 
@@ -556,7 +556,7 @@ redef class Player
 			var splatter = new Actor(app.splatter_model,
 				new Point3d[Float](center.x, 0.05 & 0.04, center.y))
 			splatter.scale = 32.0
-			splatter.rotation = 2.0 * pi.rand
+			splatter.yaw = 2.0*pi.rand
 			app.actors.add splatter
 		end
 

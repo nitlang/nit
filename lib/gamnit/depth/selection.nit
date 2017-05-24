@@ -157,7 +157,7 @@ redef class Material
 
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		var display = app.display
 		assert display != null
