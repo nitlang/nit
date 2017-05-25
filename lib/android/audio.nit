@@ -498,7 +498,10 @@ redef class PlayableAudio
 	# Used when the app pause all sounds or resume all sounds
 	var paused: Bool = false
 
-	redef init do sounds.add self
+	# Is `self` already loaded?
+	protected var is_loaded = false is writable
+
+	redef var error = null
 end
 
 redef class Sound
@@ -642,7 +645,6 @@ end
 
 redef class App
 
-
 	# Returns the default MediaPlayer of the application.
 	# When you load a music, it goes in this MediaPlayer.
 	# Use it for advanced sound management
@@ -666,16 +668,12 @@ redef class App
 
 	# Same as `load_sound` but load the sound from the `res/raw` folder
 	fun load_sound_from_res(sound_name: String): Sound do
-		var sound = default_soundpool.load_name(resource_manager,self.native_activity, sound_name)
-		sys.sounds.add sound
-		return sound
+		return default_soundpool.load_name(resource_manager, native_activity, sound_name)
 	end
 
 	# Same as `load_music` but load the sound from the `res/raw` folder
 	fun load_music_from_res(music: String): Music do
-		var sound = default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity)
-		sys.sounds.add sound
-		return sound
+		return default_mediaplayer.load_sound(resource_manager.raw_id(music), native_activity)
 	end
 
 	redef fun on_pause do
@@ -707,11 +705,4 @@ redef class App
 			if not s.paused then s.resume
 		end
 	end
-end
-
-redef class Sys
-
-	# Sounds handled by the application, when you load a sound, it's added to this list.
-	# This array is used in `pause` and `resume`
-	private var sounds = new Array[PlayableAudio]
 end
