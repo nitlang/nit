@@ -1478,8 +1478,8 @@ class MVirtualType
 
 	# A VT is fixed when:
 	# * the VT is (re-)defined with the annotation `is fixed`
-	# * the VT is (indirectly) bound to an enum class (see `enum_kind`) since there is no subtype possible
-	# * the receiver is an enum class since there is no subtype possible
+	# * the receiver is an enum class since there is no subtype that can
+	#   redefine this virtual type
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
@@ -1493,13 +1493,10 @@ class MVirtualType
 		# Recursively lookup the fixed result
 		res = res.lookup_fixed(mmodule, resolved_receiver)
 
-		# 1. For a fixed VT, return the resolved bound
+		# For a fixed VT, return the resolved bound
 		if prop.is_fixed then return res
 
-		# 2. For a enum boud, return the bound
-		if res isa MClassType and res.mclass.kind == enum_kind then return res
-
-		# 3. for a enum receiver return the bound
+		# For a enum receiver return the bound
 		if resolved_receiver.mclass.kind == enum_kind then return res
 
 		return self
@@ -1620,9 +1617,7 @@ class MParameterType
 	end
 
 	# A PT is fixed when:
-	# * Its bound is a enum class (see `enum_kind`).
-	#   The PT is just useless, but it is still a case.
-	# * More usually, the `resolved_receiver` is a subclass of `self.mclass`,
+	# * The `resolved_receiver` is a subclass of `self.mclass`,
 	#   so it is necessarily fixed in a `super` clause, either with a normal type
 	#   or with another PT.
 	#   See `resolve_for` for examples about related issues.
@@ -1641,13 +1636,7 @@ class MParameterType
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
 
 		if mtype isa MGenericType and mtype.mclass == self.mclass then
-			var res = mtype.arguments[self.rank]
-			if anchor != null and res.need_anchor then
-				# Maybe the result can be resolved more if are bound to a final class
-				var r2 = res.anchor_to(mmodule, anchor)
-				if r2 isa MClassType and r2.mclass.kind == enum_kind then return r2
-			end
-			return res
+			return mtype.arguments[self.rank]
 		end
 
 		# self is a parameter type of mtype (or of a super-class of mtype)

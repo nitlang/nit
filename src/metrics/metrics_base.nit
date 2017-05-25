@@ -235,7 +235,7 @@ end
 class IntMetric
 	super Metric
 
-	redef type VAL: Int
+	redef type VAL: Int is fixed
 	redef type RES: Counter[ELM]
 
 	# `IntMetric` uses a Counter to store values in intern.
