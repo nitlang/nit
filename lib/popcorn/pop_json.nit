@@ -55,6 +55,7 @@
 # ~~~
 module pop_json
 
+import json
 import pop_handlers
 import pop_validation
 
@@ -158,4 +159,27 @@ redef class Handler
 	#
 	# Define it in each sub handlers depending on the kind of objects sent in request bodies.
 	type BODY: Serializable
+end
+
+redef class HttpResponse
+
+	# Write data as JSON and set the right content type header.
+	fun json(json: nullable Serializable, status: nullable Int) do
+		header["Content-Type"] = media_types["json"].as(not null)
+		if json == null then
+			send(null, status)
+		else
+			send(json.to_json, status)
+		end
+	end
+
+	# Write error as JSON.
+	#
+	# Format: `{"message": message, "status": status}`
+	fun json_error(message: String, status: Int) do
+		var obj = new JsonObject
+		obj["status"] = status
+		obj["message"] = message
+		json(obj, status)
+	end
 end
