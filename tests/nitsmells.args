@@ -1,0 +1,5 @@
+--no-colors test_prog/
+--no-colors TestNitsmells/FeatureEnvy/
+--no-colors TestNitsmells/LargeClass/
+--no-colors TestNitsmells/LongMethod/
+--no-colors TestNitsmells/LongParameterList/
