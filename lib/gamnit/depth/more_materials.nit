@@ -97,6 +97,9 @@ class TexturedMaterial
 	# Texture applied to the specular color
 	var specular_texture: nullable Texture = null is writable
 
+	# Bump map TODO
+	private var normals_texture: nullable Texture = null is writable
+
 	redef fun draw(actor, model)
 	do
 		var mesh = model.mesh
@@ -138,6 +141,17 @@ class TexturedMaterial
 			sample_used_texture = texture
 		else
 			program.use_map_specular.uniform false
+		end
+
+		texture = normals_texture
+		if texture != null then
+			glActiveTexture gl_TEXTURE3
+			glBindTexture(gl_TEXTURE_2D, texture.gl_texture)
+			program.use_map_bump.uniform true
+			program.map_bump.uniform 3
+			sample_used_texture = texture
+		else
+			program.use_map_bump.uniform false
 		end
 
 		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
@@ -231,8 +245,8 @@ class NormalsMaterial
 	end
 end
 
-# Graphic program to display 3D models with Lamber diffuse lighting
-class LambertProgram
+# Graphic program to display 3D models with Blinn-Phong specular lighting
+class BlinnPhongProgram
 	super GamnitProgramFromSource
 
 	redef var vertex_shader_source = """
@@ -265,20 +279,19 @@ class LambertProgram
 		// Output for the fragment shader
 		varying vec2 v_tex_coord;
 		varying vec3 v_normal;
-		varying vec4 v_light_center;
-		varying vec4 v_camera;
+		varying vec4 v_to_light;
+		varying vec4 v_to_camera;
 
 		void main()
 		{
+			vec4 pos = (vec4(coord.xyz * scale, 1.0) * rotation + translation);
+			gl_Position = pos * mvp;
+
 			// Pass varyings to the fragment shader
 			v_tex_coord = vec2(tex_coord.x, 1.0 - tex_coord.y);
-			v_normal = normalize(vec4(normal, 0.0) * rotation * mvp).xyz;
-
-			gl_Position = (vec4(coord.xyz * scale, 1.0) * rotation + translation) * mvp;
-
-			// TODO compute v_light_center and v_camera on the CPU side and pass as uniforms
-			v_light_center = vec4(light_center, 0.0) * mvp;
-			v_camera = vec4(camera, 0.0) * mvp;
+			v_normal = normalize(vec4(normal, 0.0) * rotation).xyz;
+			v_to_light = normalize(vec4(light_center, 1.0) - pos);
+			v_to_camera = normalize(vec4(camera, 1.0) - pos);
 		}
 		""" @ glsl_vertex_shader
 
@@ -288,8 +301,8 @@ class LambertProgram
 		// Input from the vertex shader
 		varying vec2 v_tex_coord;
 		varying vec3 v_normal;
-		varying vec4 v_light_center;
-		varying vec4 v_camera;
+		varying vec4 v_to_light;
+		varying vec4 v_to_camera;
 
 		// Colors
 		uniform vec4 ambient_color;
@@ -318,21 +331,39 @@ class LambertProgram
 
 		void main()
 		{
-			// Lambert diffusion
-			vec3 light_dir = normalize(v_light_center.xyz);
-			float lambert = max(dot(light_dir, v_normal), 0.0);
+			// Normal
+			vec3 normal = v_normal;
+			if (use_map_bump) {
+				// TODO
+				vec3 bump = 2.0 * texture2D(map_bump, v_tex_coord).rgb - 1.0;
+			}
 
-			if (use_map_ambient)
-				gl_FragColor = ambient_color * texture2D(map_ambient, v_tex_coord);
-			else
-				gl_FragColor = ambient_color;
+			// Ambient light
+			vec4 ambient = ambient_color;
+			if (use_map_ambient) ambient *= texture2D(map_ambient, v_tex_coord);
 
-			if (use_map_diffuse)
-				gl_FragColor += lambert * diffuse_color * texture2D(map_diffuse, v_tex_coord);
-			else
-				gl_FragColor += lambert * diffuse_color;
+			// Diffuse Lambert light
+			vec3 to_light = v_to_light.xyz;
+			float lambert = clamp(dot(normal, to_light), 0.0, 1.0);
 
+			vec4 diffuse = lambert * diffuse_color;
+			if (use_map_diffuse) diffuse *= texture2D(map_diffuse, v_tex_coord);
+
+			// Specular Phong light
+			float s = 0.0;
+			if (lambert > 0.0) {
+				vec3 l = reflect(-to_light, normal);
+				s = clamp(dot(l, v_to_camera.xyz), 0.0, 1.0);
+				s = pow(s, 8.0); // TODO make this `shininess` a material attribute
+			}
+
+			vec4 specular = s * specular_color;
+			if (use_map_specular) specular *= texture2D(map_specular, v_tex_coord).x;
+
+			gl_FragColor = ambient + diffuse + specular;
 			if (gl_FragColor.a < 0.01) discard;
+
+			//gl_FragColor = vec4(normalize(normal).rgb, 1.0); // Debug
 		}
 		""" @ glsl_fragment_shader
 
@@ -356,6 +387,12 @@ class LambertProgram
 
 	# Specularity texture unit
 	var map_specular = uniforms["map_specular"].as(UniformSampler2D) is lazy
+
+	# Should this program use the texture `map_bump`?
+	var use_map_bump = uniforms["use_map_bump"].as(UniformBool) is lazy
+
+	# Bump texture unit
+	var map_bump = uniforms["map_bump"].as(UniformSampler2D) is lazy
 
 	# Normal per vertex
 	var normal = attributes["normal"].as(AttributeVec3) is lazy
@@ -392,8 +429,10 @@ class LambertProgram
 end
 
 # Program to color objects from their normal vectors
+#
+# May be used in place of `BlinnPhongProgram` for debugging or effect.
 class NormalProgram
-	super LambertProgram
+	super BlinnPhongProgram
 
 	redef var fragment_shader_source = """
 		precision mediump float;
@@ -409,7 +448,7 @@ class NormalProgram
 end
 
 redef class App
-	private var versatile_program = new LambertProgram is lazy
+	private var versatile_program = new BlinnPhongProgram is lazy
 
 	private var normals_program = new NormalProgram is lazy
 end
