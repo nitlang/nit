@@ -68,8 +68,6 @@ redef class Server
 			client.writer.serialize game
 			client.writer.serialize client.player
 			client.socket.flush
-
-			clients.add client
 		end
 
 		if dedicated and clients.is_empty then

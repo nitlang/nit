@@ -67,8 +67,13 @@ class Server
 	end
 
 	# Accept currently waiting clients and return them as an array
-	fun accept_clients: Array[RemoteClient]
+	#
+	# If `add_to_clients`, the default, the new clients are added to `clients`.
+	# Otherwise, the return value of `accept_clients` may be added to `clients`
+	# explicitly by the caller after an extra verification or sorting.
+	fun accept_clients(add_to_clients: nullable Bool): Array[RemoteClient]
 	do
+		add_to_clients = add_to_clients or else true
 		assert not listening_socket.closed
 
 		var new_clients = new Array[RemoteClient]
@@ -87,13 +92,18 @@ class Server
 				client_socket.close
 			end
 		end
+
+		if add_to_clients then clients.add_all new_clients
+
 		return new_clients
 	end
 
 	# Broadcast a `message` to all `clients`, then flush the connection
-	fun broadcast(message: Serializable)
+	#
+	# The client `except` is skipped and will not receive the `message`.
+	fun broadcast(message: Serializable, except: nullable RemoteClient)
 	do
-		for client in clients do
+		for client in clients do if client != except then
 			client.writer.serialize(message)
 			client.socket.flush
 		end
