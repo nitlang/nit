@@ -22,8 +22,9 @@ import binary::serialization
 #
 # This name must be the same between client/server and
 # it should not be used by other programs that may interfere.
-#
 # Both client and server refuse connections with a different name.
+#
+# This value must not contain spaces.
 fun handshake_app_name: String do return program_name
 
 # Version of the communication protocol to use in the handshake
@@ -32,6 +33,8 @@ fun handshake_app_name: String do return program_name
 # that different versions indicates incompatible protocols.
 #
 # Both client and server refuse connections with a different version.
+#
+# This value must not contain spaces.
 fun handshake_app_version: String do return "0.0"
 
 # Server port listening for discovery requests

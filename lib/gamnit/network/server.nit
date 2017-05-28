@@ -39,7 +39,7 @@
 #
 #     # `accept_clients` in non-blocking,
 #     # sleep before tying again, or do something else.
-#     nanosleep(0, 50000000)
+#     0.5.sleep
 #     printn "."
 # end
 # ~~~
@@ -168,7 +168,7 @@ class RemoteClient
 	# Check for compatibility with the client
 	fun handshake: Bool
 	do
-		print "Server: Handshake requested by {socket.address}"
+		print "Server: Handshake initiated by {socket.address}"
 
 		# Make sure it is the same app
 		var server_app = sys.handshake_app_name

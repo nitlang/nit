@@ -48,7 +48,7 @@ redef class App
 			# No command line
 			return new LocalServerContext
 		else
-			print "Connecting to:{address}:{port}"
+			print "Connecting to {address}:{port}"
 
 			# Args are: tinks server_address {port}
 			if args.length > 1 then port = args[1].to_i
