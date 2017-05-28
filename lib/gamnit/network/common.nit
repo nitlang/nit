@@ -33,3 +33,14 @@ fun handshake_app_name: String do return program_name
 #
 # Both client and server refuse connections with a different version.
 fun handshake_app_version: String do return "0.0"
+
+# Server port listening for discovery requests
+#
+# This name must be the same between client/server.
+fun discovery_port: Int do return 18722
+
+# First word in discovery requests
+private fun discovery_request_message: String do return "gamnit::network?"
+
+# First word in discovery responses
+private fun discovery_response_message: String do return "gamnit::network!"

@@ -45,7 +45,7 @@
 # ~~~
 module server
 
-import common
+intrude import common
 
 # Game server controller
 class Server
@@ -56,15 +56,15 @@ class Server
 	# All connected `RemoteClient`
 	var clients = new Array[RemoteClient]
 
-	# Socket accepting new connections
+	# TCP socket accepting new connections
+	#
+	# Opened on the first call to `accept_clients`.
 	var listening_socket: TCPServer is lazy do
-		print port
 		var socket = new TCPServer(port)
 		socket.listen 8
 		socket.blocking = false
 		return socket
 	end
-	init do listening_socket
 
 	# Accept currently waiting clients and return them as an array
 	fun accept_clients: Array[RemoteClient]
@@ -97,6 +97,47 @@ class Server
 			client.writer.serialize(message)
 			client.socket.flush
 		end
+	end
+
+	# Respond to pending discovery requests by sending the TCP listening address and port
+	#
+	# Returns the number of valid requests received.
+	#
+	# The response messages includes the TCP listening address and port
+	# for remote clients to connect with TCP using `connect`.
+	# These connections are accepted by the server with `accept_clients`.
+	fun answer_discovery_requests: Int
+	do
+		var count = 0
+		loop
+			var ptr = new Ref[nullable SocketAddress](null)
+			var read = discovery_socket.recv_from(1024, ptr)
+
+			# No sender means there is no discovery request
+			var sender = ptr.item
+			if sender == null then break
+
+			var words = read.split(" ")
+			if words.length != 2 or words[0] != discovery_request_message or words[1] != handshake_app_name then
+				print "Server Warning: Rejected discovery request '{read}' from {sender.address}:{sender.port}"
+				continue
+			end
+
+			var msg = "{discovery_response_message} {handshake_app_name} {self.port}"
+			discovery_socket.send_to(sender.address, sender.port, msg)
+			count += 1
+		end
+		return count
+	end
+
+	# UDP socket responding to discovery requests
+	#
+	# Usually opened on the first call to `answer_discovery_request`.
+	var discovery_socket: UDPSocket is lazy do
+		var s = new UDPSocket
+		s.blocking = false
+		s.bind(null, discovery_port)
+		return s
 	end
 end
 
