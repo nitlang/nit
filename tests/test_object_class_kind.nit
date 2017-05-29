@@ -14,9 +14,10 @@
 
 import end
 
-interface Object #alt1-4#
+interface Object #alt1-5#
 #alt1# abstract class Object
-#alt2# class Object
+#alt2,5# class Object
 #alt3# enum Object
 #alt4# extern class Object
+	#alt5# subset
 end
