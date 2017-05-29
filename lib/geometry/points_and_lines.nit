@@ -38,7 +38,16 @@ interface IPoint[N: Numeric]
 	# assert p0.dist(p1).is_approx(3.6, 0.01)
 	# ~~~
 	#
-	# TODO 3D implementation.
+	# If `self` or `other` are in 3D, the distance takes into account the 3 axes.
+	# For a 2D point, the Z coordinate is considered to be 0.
+	#
+	# ~~~
+	# var p2 = new Point3d[Float](0.0, 0.0, 0.0)
+	# var p3 = new Point3d[Float](2.0, 3.0, 4.0)
+	# var p4 = new Point[Float](2.0, 3.0)
+	# assert p2.dist(p3).is_approx(5.385, 0.01)
+	# assert p2.dist(p4).is_approx(3.606, 0.01)
+	# ~~~
 	fun dist(other: Point[Numeric]): N
 	do
 		return x.value_of(dist2(other).to_f.sqrt)
@@ -54,8 +63,28 @@ interface IPoint[N: Numeric]
 	# assert p0.dist2(p1) == 13.0
 	# ~~~
 	#
-	# TODO 3D implementation.
+	# If `self` or `other` are in 3D, the distance takes into account the 3 axes.
+	# For a 2D point, the Z coordinate is considered to be 0.
+	#
+	# ~~~
+	# var p2 = new Point3d[Float](0.0, 0.0, 0.0)
+	# var p3 = new Point3d[Float](2.0, 3.0, 4.0)
+	# var p4 = new Point[Float](2.0, 3.0)
+	# assert p2.dist2(p3).is_approx(29.0, 0.01)
+	# assert p2.dist2(p4).is_approx(13.0, 0.01)
+	# assert p4.dist2(p2).is_approx(13.0, 0.01)
+	# ~~~
 	fun dist2(other: Point[Numeric]): N
+	do return x.value_of(other.dist2_with_2d(self))
+
+	private fun dist2_with_2d(other: IPoint[Numeric]): Numeric
+	do return dist2_xy(other)
+
+	private fun dist2_with_3d(other: IPoint3d[Numeric]): Numeric
+	do return dist2_xy(other).add(other.z.mul(other.z))
+
+	# Square of the distance with `other` on the X and Y axes
+	private fun dist2_xy(other: IPoint[N]): N
 	do
 		var dx = other.x.sub(x)
 		var dy = other.y.sub(y)
@@ -88,8 +117,8 @@ end
 class Point[N: Numeric]
 	super IPoint[N]
 
-	redef var x: N is writable
-	redef var y: N is writable
+	redef var x: N = 0.0 is writable, optional
+	redef var y: N = 0.0 is writable, optional
 end
 
 # Abstract 3d point, strongly linked to its implementation `Point3d`
@@ -100,6 +129,19 @@ interface IPoint3d[N: Numeric]
 	fun z: N is abstract
 
 	redef fun to_s do return "({x}, {y}, {z})"
+
+	redef fun dist2(other)
+	do return x.value_of(other.dist2_with_3d(self))
+
+	redef fun dist2_with_2d(other)
+	do return dist2_xy(other).add(z.mul(z))
+
+	redef fun dist2_with_3d(other)
+	do
+		var dz = other.z.sub(z)
+		var s = dist2_xy(other).add(dz.mul(dz))
+		return x.value_of(s)
+	end
 end
 
 # 3D point with `x`, `y` and `z`
@@ -107,7 +149,7 @@ class Point3d[N: Numeric]
 	super IPoint3d[N]
 	super Point[N]
 
-	redef var z: N is writable
+	redef var z: N = 0.0 is writable, optional
 end
 
 # Abstract 2D line segment between two ordered points
