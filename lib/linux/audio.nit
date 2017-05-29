@@ -14,23 +14,112 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Linux audio implementation
+# `app::audio` implementation for GNU/Linux using SDL2 mixer
 module audio
 
 import app::audio
+import sdl2::mixer
 import linux
 
 redef class PlayableAudio
+	redef var error = null
 
-	redef fun play do
-		if path.has_suffix(".wav") then
-			sys.system "aplay -q {app.assets_dir}{path} &"
-		else if path.has_suffix(".mp3") then
-			sys.system "mpg123 -q {app.assets_dir}{path} &"
+	# Real file system path to this asset
+	private fun fs_path: String do return app.assets_dir / path
+
+	# Does `fs_path` exist?
+	private fun fs_path_exists: Bool
+	do
+		if not fs_path.file_exists then
+			error = new Error("Failed to load audio '{path}': file not found")
+			return false
 		end
+		return true
+	end
+end
+
+redef class Sound
+
+	private var native: nullable MixChunk = null
+
+	redef fun load
+	do
+		if not fs_path_exists then return
+
+		# SDL2 mixer load
+		var native = mix.load_wav(fs_path.to_cstring)
+		if native.address_is_null then
+			error = new Error("Failed to load sound '{path}': {mix.error}")
+			return
+		end
+
+		self.native = native
 	end
 
-	redef fun load do end
-	redef fun pause do end
-	redef fun resume do end
+	redef fun play
+	do
+		var native = native
+
+		if native == null and error == null then
+			# Lazy load
+			load
+
+			# Auto print errors on lazy loading only
+			var error = error
+			if error != null then print_error error
+		end
+
+		# If there's an error, silently skip
+		if error != null then return
+		native = self.native
+		assert native != null
+
+		# Play on any available channel
+		mix.play_channel(-1, native, 0)
+	end
+end
+
+redef class Music
+
+	private var native: nullable MixMusic = null
+
+	redef fun load
+	do
+		if not fs_path_exists then return
+
+		# SDL2 mixer load
+		var native = mix.load_mus(fs_path.to_cstring)
+		if native.address_is_null then
+			error = new Error("Failed to load music '{path}': {mix.error}")
+			return
+		end
+
+		self.native = native
+	end
+
+	redef fun play
+	do
+		var native = native
+
+		if native == null and error == null then
+			# Lazy load
+			load
+
+			# Auto print errors on lazy loading only
+			var error = error
+			if error != null then print_error error
+		end
+
+		# If there's an error, silently skip
+		if error != null then return
+		native = self.native
+		assert native != null
+
+		# Play looping
+		mix.play_music(native, -1)
+	end
+
+	redef fun pause do mix.pause_music
+
+	redef fun resume do mix.resume_music
 end

@@ -16,6 +16,7 @@
 module display_linux
 
 import sdl2::image
+import sdl2::mixer
 
 import egl # local to gamnit
 intrude import display
@@ -68,7 +69,7 @@ redef class GamnitDisplay
 	# Setup the SDL display and lib
 	fun setup_sdl(window_width, window_height: Int): SDLWindow
 	do
-		assert sdl.initialize((new SDLInitFlags).video) else
+		assert sdl.initialize((new SDLInitFlags).video.audio) else
 			print_error "Failed to initialize SDL2: {sdl.error}"
 		end
 
@@ -82,11 +83,33 @@ redef class GamnitDisplay
 			print_error "Failed to create SDL2 window: {sdl.error}"
 		end
 
+		# Audio support
+		var inited = mix.initialize(mix_init_flags)
+		assert inited != mix_init_flags else
+			print_error "Failed to load SDL2 mixer format supports: {mix.error}"
+		end
+
+		var opened = mix.open_audio(44100, mix.default_format, 2, 1024)
+		assert opened else
+			print_error "Failed to initialize SDL2 mixer: {mix.error}"
+		end
+
 		return sdl_window
 	end
 
+	# Initialization flags passed to SDL2 mixer
+	#
+	# Defaults to all available formats.
+	var mix_init_flags: MixInitFlags = mix.flac | mix.mod | mix.mp3 | mix.ogg is lazy, writable
+
 	# Close the SDL display
-	fun close_sdl do sdl_window.destroy
+	fun close_sdl
+	do
+		sdl_window.destroy
+		mix.close_audio
+		mix.quit
+		sdl.finalize
+	end
 end
 
 redef class TextureAsset

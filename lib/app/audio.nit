@@ -31,14 +31,13 @@ import android::audio is conditional(android)
 # Abstraction of a playable Audio
 abstract class PlayableAudio
 
+	init do sounds.add self
+
 	# Path to the audio file in the assets folder
 	var path: String
 
 	# Last error on this sound, if any
-	var error: nullable Error = null is writable
-
-	# Is `self` already loaded?
-	protected var is_loaded = false is writable
+	fun error: nullable Error do return null
 
 	# Load this playable audio
 	fun load do end
@@ -61,4 +60,10 @@ end
 # Long sound that can bee looped
 class Music
 	super PlayableAudio
+end
+
+redef class Sys
+
+	# All instantiated sounds
+	var sounds = new Array[PlayableAudio]
 end
