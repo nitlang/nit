@@ -125,8 +125,31 @@ class AppConfig
 		return 3000
 	end
 
+	# Displayed host name
+	#
+	# Specify this option if you need a qualified hostname to use within your handlers
+	# and `app_host` requires something else like an IP to bind.
+	# Really useful if the popcorn app runs behind a proxy.
+	#
+	# Default is `"{app_host}:{app_port}"`
+	var opt_hostname = new OptionString("Displayed host name", "--hostname")
+
+	# Displayed host name config
+	#
+	# * key: `app.hostname`
+	# * default: `"{app_host}:{app_port}"`
+	fun app_hostname: String do
+		var opt = opt_hostname.value
+		if opt != null then return opt
+		var cfg = ini["app.hostname"]
+		if cfg != null then return cfg
+		var res = app_host
+		if app_port != 80 then res = "{res}:{app_port}"
+		return res
+	end
+
 	init do
 		super
-		add_option(opt_host, opt_port)
+		add_option(opt_host, opt_port, opt_hostname)
 	end
 end
