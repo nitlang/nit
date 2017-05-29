@@ -2586,19 +2586,23 @@ class MClassKind
 	# Can a class of kind `self` specializes a class of kind `other`?
 	fun can_specialize(other: MClassKind): Bool
 	do
-		if other == interface_kind then return true # everybody can specialize interfaces
-		if self == interface_kind or self == enum_kind then
-			# no other case for interfaces
+		if other == interface_kind then
+			# everybody can specialize interfaces
+			return true
+		else if self == interface_kind or self == enum_kind then
+			# no other case for interfaces and enums
 			return false
+		else if self == subset_kind then
+			# A subset may specialize anything, except another subset.
+			# TODO: Allow sub-subsets once we can handle them.
+			return other != subset_kind
 		else if self == extern_kind then
 			# only compatible with themselves
 			return self == other
-		else if other == enum_kind or other == extern_kind then
-			# abstract_kind and concrete_kind are incompatible
-			return false
+		else
+			# assert self == abstract_kind or self == concrete_kind
+			return other == abstract_kind or other == concrete_kind
 		end
-		# remain only abstract_kind and concrete_kind
-		return true
 	end
 end
 
@@ -2612,3 +2616,5 @@ fun interface_kind: MClassKind do return once new MClassKind("interface", false,
 fun enum_kind: MClassKind do return once new MClassKind("enum", false, true, false)
 # The class kind `extern`
 fun extern_kind: MClassKind do return once new MClassKind("extern class", false, true, false)
+# The class kind `subset`
+fun subset_kind: MClassKind do return once new MClassKind("subset", true, false, false)
