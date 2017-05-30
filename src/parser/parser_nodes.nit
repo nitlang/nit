@@ -539,6 +539,13 @@ class TKwenum
 	super TokenKeyword
 end
 
+# The keyword `subset`
+#
+# TODO: Make `subset` an actual keyword.
+class TKwsubset
+	super TokenKeyword
+end
+
 # The keyword `end`
 class TKwend
 	super TokenKeyword
@@ -1312,6 +1319,18 @@ class AExternClasskind
 
 	# The `class` keyword.
 	var n_kwclass: nullable TKwclass = null is writable
+end
+
+class ASubsetClasskind
+	super AClasskind
+
+	# The `subset` keyword.
+	var n_kwsubset: TKwsubset is writable, noinit
+
+	redef fun visit_all(v) do
+		# TODO: Remove this redefinition once generated from the grammar.
+		v.enter_visit(n_kwsubset)
+	end
 end
 
 # The definition of a formal generic parameter type. eg `X: Y`
