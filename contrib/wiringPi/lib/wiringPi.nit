@@ -87,9 +87,17 @@ end
 # Note that only wiringPi pin 1 (BCM_GPIO 18) supports PWM output
 # and only wiringPi pin 7 (BCM_GPIO 4) supports CLOCK output modes.
 extern class RPiPinMode `{ int `}
+
+	# INPUT mode.
 	new input_mode `{ return INPUT; `}
+
+	# OUTPUT mode.
 	new output_mode `{ return OUTPUT; `}
+
+	# PWM_OUTPUT (Pulse-Width Modulation) mode.
 	new pwm_mode `{ return PWM_OUTPUT; `}
+
+	# CLOCK mode.
 	new clock_mode `{ return GPIO_CLOCK; `}
 end
 
@@ -101,30 +109,39 @@ end
 # The internal pull up/down resistors have a value of approximately
 # 50Kohms on the Raspberry Pi.
 extern class PUDControl `{ int `}
+
+	# No PUD (`PUD_OFF`).
 	new off `{ return PUD_OFF; `}
+
+	# Pull to ground.
 	new down `{ return PUD_DOWN; `}
+
+	# Pull up to 3.3v.
 	new up `{ return PUD_UP; `}
 end
 
 # Abstraction a daisy chain of 74×595 shift registers
 class SR595
-	private var registers: Array[Bool]
-	private var nb_pins: Int
-	private var ser: RPiPin
-	private var rclk: RPiPin
-	private var srclk: RPiPin
 
-	# Initialize a new shift register chain
-	# `nb_pins`: number of pins available
-	# `ser_pin`: SER (serial) pin id
-	# `rclk_pin`: RCLK (register clock) pin id
-	# `srclk_pin`: SRCLK (serial clock) pin id
-	init(nb_pins, ser_pin, rclk_pin, srclk_pin: Int) do
+	# Number of pins available.
+	private var nb_pins: Int
+
+	# Registers array.
+	private var registers: Array[Bool] is noinit
+
+	# SER (serial) pin.
+	private var ser = new RPiPin(7)
+
+	# RCLK (register clock) pin.
+	private var rclk = new RPiPin(6)
+
+	# SRCLK (serial clock) pin.
+	private var srclk = new RPiPin(5)
+
+	# Initialize a new shift register chain.
+	init do
 		# configure pin layout
 		self.nb_pins = nb_pins
-		self.ser = new RPiPin(7)
-		self.rclk = new RPiPin(6)
-		self.srclk = new RPiPin(5)
 		clear_registers
 		# enable output mode on shift register output
 		ser.mode(new RPiPinMode.output_mode)
