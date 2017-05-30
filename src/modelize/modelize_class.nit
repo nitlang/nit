@@ -493,6 +493,9 @@ end
 redef class AExternClasskind
 	redef fun mkind do return extern_kind
 end
+redef class ASubsetClasskind
+	redef fun mkind do return subset_kind
+end
 
 redef class AFormaldef
 	# The associated parameter type
