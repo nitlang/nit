@@ -18,10 +18,13 @@
 module modelize_class
 
 import modelbuilder
+import modelize_subset
 
 redef class ToolContext
 	# Run `AModule::build_classes` on each module
-	var modelize_class_phase: Phase = new ModelizeClassPhase(self, null)
+	var modelize_class_phase: Phase = new ModelizeClassPhase(self, [
+		modelize_subset_phase
+	])
 end
 
 private class ModelizeClassPhase
