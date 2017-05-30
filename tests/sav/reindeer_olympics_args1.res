@@ -1,0 +1,9 @@
+Rudolph has raced 2640 km and has 1084 points
+Cupid has raced 2696 km and has 838 points
+Prancer has raced 2484 km and has 24 points
+Donner has raced 2550 km and has 277 points
+Dasher has raced 2508 km and has 0 points
+Comet has raced 2520 km and has 121 points
+Blitzen has raced 2592 km and has 0 points
+Vixen has raced 2560 km and has 13 points
+Dancer has raced 2527 km and has 199 points

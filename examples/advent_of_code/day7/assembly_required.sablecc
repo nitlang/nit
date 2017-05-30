@@ -1,0 +1,35 @@
+Grammar assembly_required;
+
+Lexer
+
+alpha = 'a'..'z';
+digit = '0'..'9';
+
+bin_not = 'NOT';
+bin_lsh = 'LSHIFT';
+bin_rsh = 'RSHIFT';
+bin_and = 'AND';
+bin_or = 'OR';
+number = digit+;
+arr = '->';
+id = alpha+;
+
+blank = (' '|'\n'|'\t')+;
+
+Parser
+Ignored blank;
+
+prog = e+;
+
+e =	{op:} value bin_binop value arr id |
+	{unary:} bin_not id arr id |
+	{ass:} value arr id;
+
+
+bin_binop = 	{lsh:} bin_lsh |
+		{rsh:} bin_rsh |
+		{and:} bin_and |
+		{or:} bin_or;
+
+value = {num:} number |
+	{id:}  id;
