@@ -140,6 +140,7 @@ redef class App
 
 		# Load 3d models
 		iss_model.load
+		if iss_model.errors.not_empty then print_error iss_model.errors.join("\n")
 
 		# Setup cameras
 		world_camera.reset_height 60.0

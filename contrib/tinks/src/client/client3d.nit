@@ -122,8 +122,15 @@ redef class App
 		show_splash_screen logo
 
 		# Load everything
-		for model in models do model.load
-		for texture in all_root_textures do texture.load
+		for texture in all_root_textures do
+			texture.load
+			var error = texture.error
+			if error != null then print_error error
+		end
+		for model in models do
+			model.load
+			if model.errors.not_empty then print_error model.errors.join("\n")
+		end
 
 		# Modify all textures so they have a higher ambient color
 		for model in models do
