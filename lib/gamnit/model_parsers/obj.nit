@@ -155,7 +155,7 @@ class ObjDef
 	# Faces
 	var faces = new Array[ObjFace]
 
-	# Referenced material libraries
+	# Relative paths to referenced material libraries
 	fun material_libs: Set[String] do
 		var libs = new Set[String]
 		for face in faces do

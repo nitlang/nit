@@ -113,12 +113,11 @@ private class ModelFromObj
 		end
 
 		# Load material libs
-		# TODO do not load each libs more than once
-		var mtl_libs = new Map[String, Map[String, MtlDef]]
+		var mtl_libs = sys.mtl_libs
 		var lib_names = obj_def.material_libs
 		for name in lib_names do
-			var lib_path = self.path.dirname / name
-			var lib_asset = new TextAsset(lib_path)
+			var asset_path = self.path.dirname / name
+			var lib_asset = new TextAsset(asset_path)
 			lib_asset.load
 
 			var error = lib_asset.error
@@ -129,7 +128,7 @@ private class ModelFromObj
 
 			var mtl_parser = new MtlFileParser(lib_asset.to_s)
 			var mtl_lib = mtl_parser.parse
-			mtl_libs[name] = mtl_lib
+			mtl_libs[asset_path] = mtl_lib
 		end
 
 		# Create 1 mesh per material, and prepare materials
@@ -149,7 +148,8 @@ private class ModelFromObj
 			var mtl_lib_name = faces.first.material_lib
 			var mtl_name = faces.first.material_name
 			if mtl_lib_name != null and mtl_name != null then
-				var mtl_lib = mtl_libs[mtl_lib_name]
+				var asset_path = self.path.dirname / mtl_lib_name
+				var mtl_lib = mtl_libs[asset_path]
 				var mtl = mtl_lib.get_or_null(mtl_name)
 				if mtl != null then
 					mtl_def = mtl
@@ -380,6 +380,9 @@ end
 redef class Sys
 	# Textures loaded from .mtl files for models
 	var asset_textures_by_name = new Map[String, TextureAsset]
+
+	# Loaded .mtl material definitions, sorted by path in assets and material name
+	private var mtl_libs = new Map[String, Map[String, MtlDef]]
 
 	# All instantiated asset models
 	var models = new Set[ModelAsset]
