@@ -39,20 +39,24 @@ class ModelAsset
 
 	init do models.add self
 
+	private var loaded = false
+
 	redef fun load
 	do
 		var ext = path.file_extension
 		if ext == "obj" then
 			load_obj_file
 		else
-			print_error "Model failed to load: Extension '{ext or else "null"}' unrecognized"
+			errors.add new Error("Model at '{path}' failed to load: Extension '{ext or else "null"}' unrecognized")
 		end
 
-		if leaves.is_empty then
+		if leaves_cache.is_empty then
 			# Nothing was loaded, use a cube with the default material
 			var leaf = placeholder_model
-			leaves.add leaf
+			leaves_cache.add leaf
 		end
+
+		loaded = true
 	end
 
 	private fun load_obj_file
@@ -61,8 +65,8 @@ class ModelAsset
 		var text_asset = new TextAsset(path)
 		var content = text_asset.to_s
 		if content.is_empty then
-			print_error "Model failed to load: Asset empty at '{self.path}'"
-			leaves.add new LeafModel(new Cube, new Material)
+			errors.add new Error("Model failed to load: Asset empty at '{self.path}'")
+			leaves_cache.add new LeafModel(new Cube, new Material)
 			return
 		end
 
@@ -70,8 +74,8 @@ class ModelAsset
 		var parser = new ObjFileParser(content)
 		var obj_def = parser.parse
 		if obj_def == null then
-			print_error "Model failed to load: .obj format error on '{self.path}'"
-			leaves.add new LeafModel(new Cube, new Material)
+			errors.add new Error("Model failed to load: .obj format error on '{self.path}'")
+			leaves_cache.add new LeafModel(new Cube, new Material)
 			return
 		end
 
@@ -80,10 +84,29 @@ class ModelAsset
 
 		# Build models
 		var converter = new ModelFromObj(path, obj_def)
-		converter.models leaves
+		converter.models leaves_cache
+		errors.add_all converter.errors
 	end
 
-	redef var leaves = new Array[LeafModel]
+	redef fun leaves
+	do
+		if not loaded then
+			# Lazy load
+			load
+
+			# Print errors when lazy loading only
+			if errors.length == 1 then
+				print_error errors.first
+			else if errors.length > 1 then
+				print_error "Loading model at '{path}' raised {errors.length} errors:\n* "
+				print_error errors.join("\n* ")
+			end
+		end
+
+		return leaves_cache
+	end
+
+	private var leaves_cache = new Array[LeafModel]
 end
 
 # Short-lived service to convert an `ObjDef` to `models`
@@ -98,7 +121,11 @@ private class ModelFromObj
 	# Parsed .obj definition
 	var obj_def: ObjDef
 
-	fun models(array: Array[LeafModel])
+	# Errors raised by calls to `models`
+	var errors = new Array[Error]
+
+	# Fill `leaves` with models described in `obj_def`
+	fun models(leaves: Array[LeafModel])
 	do
 		# Sort faces by material
 		var mtl_to_faces = new MultiHashMap[String, ObjFace]
@@ -122,7 +149,7 @@ private class ModelFromObj
 
 			var error = lib_asset.error
 			if error != null then
-				print_error error.to_s
+				errors.add error
 				continue
 			end
 
@@ -158,7 +185,7 @@ private class ModelFromObj
 						texture_names.add self.path.dirname / e
 					end
 				else
-					print_error "mtl '{mtl_name}' not found in '{mtl_lib_name}'"
+					errors.add new Error("Error loading model at '{path}': mtl '{mtl_name}' not found in '{asset_path}'")
 				end
 			end
 
@@ -170,6 +197,10 @@ private class ModelFromObj
 			if not asset_textures_by_name.keys.has(name) then
 				var tex = new TextureAsset(name)
 				asset_textures_by_name[name] = tex
+
+				tex.load
+				var error = tex.error
+				if error != null then errors.add error
 			end
 		end
 
@@ -215,7 +246,7 @@ private class ModelFromObj
 			if material == null then material = new Material
 
 			var model = new LeafModel(mesh, material)
-			array.add model
+			leaves.add model
 		end
 	end
 

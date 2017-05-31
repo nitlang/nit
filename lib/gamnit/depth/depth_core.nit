@@ -105,6 +105,9 @@ abstract class Model
 	# Load this model in memory
 	fun load do end
 
+	# Errors raised at loading
+	var errors = new Array[Error]
+
 	# All `LeafModel` composing this model
 	#
 	# Usually, there is one `LeafModel` per material.
