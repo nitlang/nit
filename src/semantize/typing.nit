@@ -61,7 +61,6 @@ private class TypeVisitor
 		var mpropdef = self.mpropdef
 
 		if mpropdef != null then
-			self.mpropdef = mpropdef
 			var mclassdef = mpropdef.mclassdef
 			self.mclassdef = mclassdef
 			self.anchor = mclassdef.bound_mtype
