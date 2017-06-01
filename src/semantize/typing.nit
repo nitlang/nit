@@ -46,7 +46,7 @@ private class TypeVisitor
 	var mclassdef: nullable MClassDef = null
 
 	# The analyzed property
-	var mpropdef: nullable MPropDef
+	var mpropdef: MPropDef
 
 	var selfvariable = new Variable("self")
 
@@ -59,22 +59,19 @@ private class TypeVisitor
 	init
 	do
 		var mpropdef = self.mpropdef
+		var mclassdef = mpropdef.mclassdef
+		self.mclassdef = mclassdef
+		self.anchor = mclassdef.bound_mtype
 
-		if mpropdef != null then
-			var mclassdef = mpropdef.mclassdef
-			self.mclassdef = mclassdef
-			self.anchor = mclassdef.bound_mtype
+		var mclass = mclassdef.mclass
 
-			var mclass = mclassdef.mclass
+		var selfvariable = new Variable("self")
+		self.selfvariable = selfvariable
+		selfvariable.declared_type = mclass.mclass_type
 
-			var selfvariable = new Variable("self")
-			self.selfvariable = selfvariable
-			selfvariable.declared_type = mclass.mclass_type
-
-			var mprop = mpropdef.mproperty
-			if mprop isa MMethod and mprop.is_new then
-				is_toplevel_context = true
-			end
+		var mprop = mpropdef.mproperty
+		if mprop isa MMethod and mprop.is_new then
+			is_toplevel_context = true
 		end
 	end
 
