@@ -36,7 +36,7 @@ private class TypeVisitor
 
 	# The module of the analysis
 	# Used to correctly query the model
-	var mmodule: MModule
+	var mmodule: MModule is noinit
 
 	# The static type of the receiver
 	# Mainly used for type tests and type resolutions
@@ -60,6 +60,7 @@ private class TypeVisitor
 	do
 		var mpropdef = self.mpropdef
 		var mclassdef = mpropdef.mclassdef
+		mmodule = mclassdef.mmodule
 		self.mclassdef = mclassdef
 		self.anchor = mclassdef.bound_mtype
 
@@ -860,7 +861,7 @@ redef class AMethPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # skip error
 
-		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var mmethoddef = self.mpropdef.as(not null)
@@ -927,7 +928,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mreadpropdef
 		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
-		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
