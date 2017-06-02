@@ -24,6 +24,7 @@
 #
 # ~~~
 # import popcorn
+# import popcorn::pop_json
 # import serialization
 #
 # # Serializable book representation.

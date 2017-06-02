@@ -77,6 +77,7 @@
 # ~~~
 module pop_auth
 
+import pop_json
 import pop_sessions
 import github
 

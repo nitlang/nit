@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import popcorn
+import popcorn::pop_json
 
 class CounterAPI
 	super Handler
