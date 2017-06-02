@@ -365,7 +365,7 @@ redef class ModelBuilder
 			if nclassdef isa AStdClassdef then
 				var mclassdef = nclassdef.mclassdef
 				# check bound of formal parameter
-				for nfd in  nclassdef.n_formaldefs do
+				for nfd in nclassdef.n_formaldefs do
 					var nfdt = nfd.n_type
 					if nfdt != null and nfdt.mtype != null then
 						var bound = resolve_mtype(mmodule, mclassdef, nfdt)
