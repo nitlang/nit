@@ -43,7 +43,7 @@ private class TypeVisitor
 	var anchor: nullable MClassType = null
 
 	# The analyzed mclassdef
-	var mclassdef: nullable MClassDef = null
+	var mclassdef: MClassDef is noinit
 
 	# The analyzed property
 	var mpropdef: MPropDef
