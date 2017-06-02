@@ -260,18 +260,50 @@ class ModelBuilder
 	end
 
 	# Return the static type associated to the node `ntype`.
-	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
+	#
+	# `mclassdef` is the context where the call is made (used to understand
+	# formal types).
 	# In case of problem, an error is displayed on `ntype` and null is returned.
-	# FIXME: the name "resolve_mtype" is awful
-	fun resolve_mtype_unchecked(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType, with_virtual: Bool): nullable MType
+	#
+	# Same as `resolve_mtype_unchecked3`, but get the context (module, class and
+	# anchor) from `mclassdef`.
+	#
+	# SEE: `resolve_mtype`
+	# SEE: `resolve_mtype3_unchecked`
+	#
+	# FIXME: Find a better name for this method.
+	fun resolve_mtype_unchecked(mclassdef: MClassDef, ntype: AType, with_virtual: Bool): nullable MType
+	do
+		return resolve_mtype3_unchecked(
+			mclassdef.mmodule,
+			mclassdef.mclass,
+			mclassdef.bound_mtype,
+			ntype,
+			with_virtual
+		)
+	end
+
+	# Return the static type associated to the node `ntype`.
+	#
+	# `mmodule`, `mclass` and `anchor` compose the context where the call is
+	# made (used to understand formal types).
+	# In case of problem, an error is displayed on `ntype` and null is returned.
+	#
+	# Note: The “3” is for 3 contextual parameters.
+	#
+	# SEE: `resolve_mtype`
+	# SEE: `resolve_mtype_unchecked`
+	#
+	# FIXME: Find a better name for this method.
+	fun resolve_mtype3_unchecked(mmodule: MModule, mclass: nullable MClass, anchor: nullable MClassType, ntype: AType, with_virtual: Bool): nullable MType
 	do
 		var qid = ntype.n_qid
 		var name = qid.n_id.text
 		var res: MType
 
 		# Check virtual type
-		if mclassdef != null and with_virtual then
-			var prop = try_get_mproperty_by_name(ntype, mclassdef, name).as(nullable MVirtualTypeProp)
+		if anchor != null and with_virtual then
+			var prop = try_get_mproperty_by_name2(ntype, mmodule, anchor, name).as(nullable MVirtualTypeProp)
 			if prop != null then
 				if not ntype.n_types.is_empty then
 					error(ntype, "Type Error: formal type `{name}` cannot have formal parameters.")
@@ -284,8 +316,8 @@ class ModelBuilder
 		end
 
 		# Check parameter type
-		if mclassdef != null then
-			for p in mclassdef.mclass.mparameters do
+		if mclass != null then
+			for p in mclass.mparameters do
 				if p.name != name then continue
 
 				if not ntype.n_types.is_empty then
@@ -321,7 +353,7 @@ class ModelBuilder
 			else
 				var mtypes = new Array[MType]
 				for nt in ntype.n_types do
-					var mt = resolve_mtype_unchecked(mmodule, mclassdef, nt, with_virtual)
+					var mt = resolve_mtype3_unchecked(mmodule, mclass, anchor, nt, with_virtual)
 					if mt == null then return null # Forward error
 					mtypes.add(mt)
 				end
@@ -415,13 +447,44 @@ class ModelBuilder
 	private var bad_class_names = new MultiHashMap[MModule, String]
 
 	# Return the static type associated to the node `ntype`.
-	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
+	#
+	# `mclassdef` is the context where the call is made (used to understand
+	# formal types).
 	# In case of problem, an error is displayed on `ntype` and null is returned.
-	# FIXME: the name "resolve_mtype" is awful
-	fun resolve_mtype(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType): nullable MType
+	#
+	# Same as `resolve_mtype3`, but get the context (module, class and ) from
+	# `mclassdef`.
+	#
+	# SEE: `resolve_mtype3`
+	# SEE: `resolve_mtype_unchecked`
+	#
+	# FIXME: Find a better name for this method.
+	fun resolve_mtype(mclassdef: MClassDef, ntype: AType): nullable MType
+	do
+		return resolve_mtype3(
+			mclassdef.mmodule,
+			mclassdef.mclass,
+			mclassdef.bound_mtype,
+			ntype
+		)
+	end
+
+	# Return the static type associated to the node `ntype`.
+	#
+	# `mmodule`, `mclass` and `anchor` compose the context where the call is
+	# made (used to understand formal types).
+	# In case of problem, an error is displayed on `ntype` and null is returned.
+	#
+	# Note: The “3” is for 3 contextual parameters.
+	#
+	# SEE: `resolve_mtype`
+	# SEE: `resolve_mtype_unchecked`
+	#
+	# FIXME: Find a better name for this method.
+	fun resolve_mtype3(mmodule: MModule, mclass: nullable MClass, anchor: nullable MClassType, ntype: AType): nullable MType
 	do
 		var mtype = ntype.mtype
-		if mtype == null then mtype = resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+		if mtype == null then mtype = resolve_mtype3_unchecked(mmodule, mclass, anchor, ntype, true)
 		if mtype == null then return null # Forward error
 
 		if ntype.checked_mtype then return mtype
@@ -432,10 +495,8 @@ class ModelBuilder
 				if intro == null then return null # skip error
 				var bound = intro.bound_mtype.arguments[i]
 				var nt = ntype.n_types[i]
-				var mt = resolve_mtype(mmodule, mclassdef, nt)
+				var mt = resolve_mtype3(mmodule, mclass, anchor, nt)
 				if mt == null then return null # forward error
-				var anchor
-				if mclassdef != null then anchor = mclassdef.bound_mtype else anchor = null
 				if not check_subtype(nt, mmodule, anchor, mt, bound) then
 					error(nt, "Type Error: expected `{bound}`, got `{mt}`.")
 					return null

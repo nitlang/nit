@@ -671,14 +671,13 @@ redef class ASignature
 	# Visit and fill information about a signature
 	private fun visit_signature(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
 	do
-		var mmodule = mclassdef.mmodule
 		var param_names = self.param_names
 		var param_types = self.param_types
 		for np in self.n_params do
 			param_names.add(np.n_id.text)
 			var ntype = np.n_type
 			if ntype != null then
-				var mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+				var mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 				if mtype == null then return false # Skip error
 				for i in [0..param_names.length-param_types.length[ do
 					param_types.add(mtype)
@@ -695,7 +694,7 @@ redef class ASignature
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			self.ret_type = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+			self.ret_type = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 			if self.ret_type == null then return false # Skip error
 		end
 
@@ -709,14 +708,14 @@ redef class ASignature
 		for np in self.n_params do
 			var ntype = np.n_type
 			if ntype != null then
-				if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+				if modelbuilder.resolve_mtype(mclassdef, ntype) == null then
 					res = false
 				end
 			end
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+			if modelbuilder.resolve_mtype(mclassdef, ntype) == null then
 				res = false
 			end
 		end
@@ -1348,7 +1347,7 @@ redef class AAttrPropdef
 
 		var ntype = self.n_type
 		if ntype != null then
-			mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+			mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 			if mtype == null then return
 		end
 
@@ -1369,9 +1368,9 @@ redef class AAttrPropdef
 		if mtype == null then
 			if nexpr != null then
 				if nexpr isa ANewExpr then
-					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
+					mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
 				else if nexpr isa AAsCastExpr then
-					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
+					mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
 				else if nexpr isa AIntegerExpr then
 					var cla: nullable MClass = null
 					if nexpr.value isa Int then
@@ -1432,7 +1431,7 @@ redef class AAttrPropdef
 			end
 		else if ntype != null and inherited_type == mtype then
 			if nexpr isa ANewExpr then
-				var xmtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
+				var xmtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
 				if xmtype == mtype then
 					modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition")
 				end
@@ -1488,11 +1487,11 @@ redef class AAttrPropdef
 
 		# Check types
 		if ntype != null then
-			if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then return
+			if modelbuilder.resolve_mtype(mclassdef, ntype) == null then return
 		end
 		var nexpr = n_expr
 		if nexpr isa ANewExpr then
-			if modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type) == null then return
+			if modelbuilder.resolve_mtype(mclassdef, nexpr.n_type) == null then return
 		end
 
 		# Lookup for signature in the precursor
@@ -1645,11 +1644,10 @@ redef class ATypePropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skipped
 		var mclassdef = mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
 		var ntype = self.n_type
-		mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+		mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 		if mtype == null then return
 
 		mpropdef.bound = mtype
@@ -1671,7 +1669,7 @@ redef class ATypePropdef
 		var anchor = mclassdef.bound_mtype
 
 		var ntype = self.n_type
-		if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then
+		if modelbuilder.resolve_mtype(mclassdef, ntype) == null then
 			mpropdef.bound = null
 			return
 		end

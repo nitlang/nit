@@ -304,7 +304,7 @@ redef class AFullPropExternCall
 		var mmodule = npropdef.mpropdef.mclassdef.mmodule
 		var mclassdef = npropdef.mpropdef.mclassdef
 		var mclass_type = mclassdef.bound_mtype
-		var mtype = toolcontext.modelbuilder.resolve_mtype(mmodule, mclassdef, n_type)
+		var mtype = toolcontext.modelbuilder.resolve_mtype(mclassdef, n_type)
 
 		if mtype == null then return
 
@@ -337,7 +337,7 @@ redef class AInitPropExternCall
 	do
 		var mmodule = npropdef.mpropdef.mclassdef.mmodule
 		var mclassdef = npropdef.mpropdef.mclassdef
-		var mtype = toolcontext.modelbuilder.resolve_mtype(mmodule, mclassdef, n_type)
+		var mtype = toolcontext.modelbuilder.resolve_mtype(mclassdef, n_type)
 		if mtype == null then return
 
 		if not mtype isa MClassType then
@@ -398,9 +398,8 @@ redef class ACastAsExternCall
 	redef fun verify_and_collect(npropdef, callback_set, toolcontext)
 	do
 		var mclassdef = npropdef.mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
-		toolcontext.modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, n_from_type, true)
-		toolcontext.modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, n_to_type, true)
+		toolcontext.modelbuilder.resolve_mtype_unchecked(mclassdef, n_from_type, true)
+		toolcontext.modelbuilder.resolve_mtype_unchecked(mclassdef, n_to_type, true)
 		super
 	end
 end
@@ -412,8 +411,7 @@ redef class AAsNullableExternCall
 	redef fun verify_and_collect(npropdef, callback_set, toolcontext)
 	do
 		var mclassdef = npropdef.mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
-		toolcontext.modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, n_type, true)
+		toolcontext.modelbuilder.resolve_mtype_unchecked(mclassdef, n_type, true)
 		super
 	end
 end
@@ -429,8 +427,7 @@ redef class AAsNotNullableExternCall
 	redef fun verify_and_collect(npropdef, callback_set, toolcontext)
 	do
 		var mclassdef = npropdef.mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
-		toolcontext.modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, n_type, true)
+		toolcontext.modelbuilder.resolve_mtype_unchecked(mclassdef, n_type, true)
 		super
 	end
 end
