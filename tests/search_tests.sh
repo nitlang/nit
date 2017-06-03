@@ -67,7 +67,9 @@ for f in "$@"; do
 	c=`echo "$c" | sed 's/\(_[0-9]*alt[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/g;s/\(_args[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/'`
 	b=`echo "$b" | sed 's/_[0-9]*alt[0-9][0-9]*//g;s/_args[0-9][0-9]*//'`
 	# Search the orig nit file in the list
-	cat listfull.out | grep -- "\(^'\|/\)$c.nit" || {
+	{
+		grep -- "\(^'\|/\)$c.nit" listfull.out | xargs -E '' -- printf '%s\n'
+	} || {
 		res=1
 		echo >&2 "No test $b.nit found for $f"
 		test "$verbose" == "true" || continue
