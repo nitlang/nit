@@ -61,6 +61,7 @@ private class MModulesMetricsPhase
 		metrics.register(new MNBIAC(mainmodule, model_view))
 		metrics.register(new MNBII(mainmodule, model_view))
 		metrics.register(new MNBIE(mainmodule, model_view))
+		metrics.register(new MNBHP(mainmodule, model_view))
 		metrics.register(new MNBIP(mainmodule, model_view))
 		metrics.register(new MNBRP(mainmodule, model_view))
 		metrics.register(new MNBIPA(mainmodule, model_view))
@@ -273,6 +274,25 @@ class MNBIE
 				if mclass.kind == enum_kind then value += 1
 			end
 			values[mmodule] = value
+		end
+	end
+end
+
+# Module Metric: Number of Inherited Properties (of all kind)
+class MNBHP
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBHP"
+	redef fun desc do return "Number of Inherited Properties (of all kind)"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var sum = 0
+			for ancestor in mmodule.collect_ancestors(model_view) do
+				sum += ancestor.collect_intro_mproperties(model_view).length
+			end
+			values[mmodule] = sum
 		end
 	end
 end

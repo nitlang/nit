@@ -66,17 +66,17 @@
 								"content": [
 									{
 										"label": "Concrete classes",
-										"value": $scope.chartMetrics.mnbcc.avg,
+										"value": $scope.chartMetrics.MNBICC.avg,
 										"color": "#228835"
 									},
 									{
 										"label": "Abstract classes",
-										"value": $scope.chartMetrics.mnbac.avg,
+										"value": $scope.chartMetrics.MNBIAC.avg,
 										"color": "#103EB8"
 									},
 									{
 										"label": "Interfaces",
-										"value": $scope.chartMetrics.mnbic.avg,
+										"value": $scope.chartMetrics.MNBII.avg,
 										"color": "#e65314"
 									}
 								]
@@ -153,18 +153,18 @@
 								"sortOrder": "value-asc",
 								"content": [
 									{
-										"label": "Inherited",
-										"value": $scope.chartMetrics.mnbd.avg - $scope.chartMetrics.mnbr.avg - $scope.chartMetrics.mnbi.avg,
+										"label": "Imported",
+										"value": $scope.chartMetrics.MNBHC.avg,
 										"color": "#999999"
 									},
 									{
 										"label": "Introduced",
-										"value": $scope.chartMetrics.mnbi.avg,
+										"value": $scope.chartMetrics.MNBIC.avg,
 										"color": "#228835"
 									},
 									{
 										"label": "Redefined",
-										"value": $scope.chartMetrics.mnbr.avg,
+										"value": $scope.chartMetrics.MNBRC.avg,
 										"color": "#e65314"
 									}
 								]
@@ -242,17 +242,17 @@
 								"content": [
 									{
 										"label": "Inherited",
-										"value": $scope.chartMetrics.cnbhp.avg - $scope.chartMetrics.cnbrp.avg,
+										"value": $scope.chartMetrics.CNBHP.avg,
 										"color": "#999999"
 									},
 									{
 										"label": "Introduced",
-										"value": $scope.chartMetrics.cnbip.avg,
+										"value": $scope.chartMetrics.CNBIP.avg,
 										"color": "#228835"
 									},
 									{
 										"label": "Redefined",
-										"value": $scope.chartMetrics.cnbrp.avg,
+										"value": $scope.chartMetrics.CNBRP.avg,
 										"color": "#e65314"
 									}
 								]
@@ -330,22 +330,22 @@
 								"content": [
 									{
 										"label": "Attributes",
-										"value": $scope.chartMetrics.cnba.avg,
+										"value": $scope.chartMetrics.CNBIPA.avg,
 										"color": "#228835"
 									},
 									{
 										"label": "Methods",
-										"value": $scope.chartMetrics.cnbm.avg - $scope.chartMetrics.cnbi.avg,
+										"value": $scope.chartMetrics.CNBIPM.avg,
 										"color": "#999999"
 									},
 									{
 										"label": "Constructors",
-										"value": $scope.chartMetrics.cnbi.avg,
+										"value": $scope.chartMetrics.CNBIPI.avg,
 										"color": "#e65314"
 									},
 									{
 										"label": "Virtual Types",
-										"value": $scope.chartMetrics.cnbv.avg,
+										"value": $scope.chartMetrics.CNBIVT.avg,
 										"color": "#103EB8"
 									}
 								]
