@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_angular is test_suite
+module test_example_angular is test
 
 import pop_tests
 import example_angular
 
 class TestExampleAngular
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/counter"
@@ -29,7 +30,7 @@ class TestExampleAngular
 		system "curl -s {host}:{port}/not_found" # handled by angular controller
 	end
 
-	fun test_example_angular do
+	fun test_example_angular is test do
 		var app = new App
 		app.use("/counter", new CounterAPI)
 		app.use("/*", new StaticHandler(test_path / "../www/", "index.html"))

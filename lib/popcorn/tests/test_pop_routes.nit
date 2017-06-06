@@ -14,22 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_pop_routes is test_suite
+module test_pop_routes is test
 
 import pop_routes
-import test_suite
 
 class TestAppRoute
-	super TestSuite
+	test
 
-	fun test_root_match_only_one_uri do
+	fun test_root_match_only_one_uri is test do
 		var r = new AppRoute("/")
 		assert r.match("")
 		assert r.match("/")
 		assert not r.match("/user")
 	end
 
-	fun test_strict_route_match_only_one_uri do
+	fun test_strict_route_match_only_one_uri is test do
 		var r = new AppRoute("/user")
 		assert not r.match("/")
 		assert r.match("/user")
@@ -40,9 +39,9 @@ class TestAppRoute
 end
 
 class TestAppParamRoute
-	super TestSuite
+	test
 
-	fun test_param_route_match_good_uri_params_1 do
+	fun test_param_route_match_good_uri_params_1 is test do
 		var r = new AppParamRoute("/:id")
 		assert not r.match("/")
 		assert r.match("/user")
@@ -50,7 +49,7 @@ class TestAppParamRoute
 		assert not r.match("/user/10")
 	end
 
-	fun test_param_route_match_good_uri_params_2 do
+	fun test_param_route_match_good_uri_params_2 is test do
 		var r = new AppParamRoute("/user/:id")
 		assert not r.match("/")
 		assert not r.match("/user")
@@ -60,7 +59,7 @@ class TestAppParamRoute
 		assert not r.match("/user/10/profile")
 	end
 
-	fun test_param_route_match_good_uri_params_3 do
+	fun test_param_route_match_good_uri_params_3 is test do
 		var r = new AppParamRoute("/user/:id/profile")
 		assert not r.match("/")
 		assert not r.match("/user")
@@ -73,7 +72,7 @@ class TestAppParamRoute
 		assert not r.match("/user/10/foo")
 	end
 
-	fun test_param_route_match_good_uri_params_4 do
+	fun test_param_route_match_good_uri_params_4 is test do
 		var r = new AppParamRoute("/:id/:foo")
 		assert not r.match("/")
 		assert not r.match("/user")
@@ -83,7 +82,7 @@ class TestAppParamRoute
 		assert not r.match("/user/10/10")
 	end
 
-	fun test_param_route_match_good_uri_params_5 do
+	fun test_param_route_match_good_uri_params_5 is test do
 		var r = new AppParamRoute("/user/:id/:foo")
 		assert not r.match("/")
 		assert not r.match("/user")
@@ -94,7 +93,7 @@ class TestAppParamRoute
 		assert not r.match("/user/10/10/profile")
 	end
 
-	fun test_param_route_match_good_uri_params_6 do
+	fun test_param_route_match_good_uri_params_6 is test do
 		var r = new AppParamRoute("/user/:id/settings/:foo")
 		assert not r.match("/")
 		assert not r.match("/user")
@@ -110,30 +109,30 @@ class TestAppParamRoute
 end
 
 class TestRouteMatching
-	super TestSuite
+	test
 
-	fun test_glob_route_match_good_uri_prefix1 do
+	fun test_glob_route_match_good_uri_prefix1 is test do
 		var r = new AppGlobRoute("/*")
 		assert r.match("/")
 		assert r.match("/user")
 		assert r.match("/user/10")
 	end
 
-	fun test_glob_route_match_good_uri_prefix2 do
+	fun test_glob_route_match_good_uri_prefix2 is test do
 		var r = new AppGlobRoute("/user/*")
 		assert not r.match("/")
 		assert r.match("/user")
 		assert r.match("/user/10")
 	end
 
-	fun test_glob_route_match_good_uri_prefix3 do
+	fun test_glob_route_match_good_uri_prefix3 is test do
 		var r = new AppGlobRoute("/user*")
 		assert not r.match("/")
 		assert r.match("/user")
 		assert r.match("/user/10")
 	end
 
-	fun test_glob_route_work_with_parameters_1 do
+	fun test_glob_route_work_with_parameters_1 is test do
 		var r = new AppGlobRoute("/:id/*")
 		assert not r.match("/")
 		assert r.match("/user")
@@ -141,14 +140,14 @@ class TestRouteMatching
 		assert r.match("/user/10/profile")
 	end
 
-	fun test_glob_route_work_with_parameters_2 do
+	fun test_glob_route_work_with_parameters_2 is test do
 		var r = new AppGlobRoute("/:id*")
 		assert not r.match("/")
 		assert r.match("/user")
 		assert r.match("/user/10")
 	end
 
-	fun test_glob_route_work_with_parameters_3 do
+	fun test_glob_route_work_with_parameters_3 is test do
 		var r = new AppGlobRoute("/user/:id/*")
 		assert not r.match("/")
 		assert not r.match("/user")
@@ -156,7 +155,7 @@ class TestRouteMatching
 		assert r.match("/user/10/profile")
 	end
 
-	fun test_glob_route_work_with_parameters_4 do
+	fun test_glob_route_work_with_parameters_4 is test do
 		var r = new AppGlobRoute("/user/:id*")
 		assert not r.match("/")
 		assert not r.match("/user")

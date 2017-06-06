@@ -14,20 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_simple_error_handler is test_suite
+module test_example_simple_error_handler is test
 
 import pop_tests
 import example_simple_error_handler
 
 class TestExampleSimpleErrorHandler
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 		system "curl -s {host}:{port}/about"
 	end
 
-	fun test_example_simple_error_handler do
+	fun test_example_simple_error_handler is test do
 		var app = new App
 		app.use("/", new SomeHandler)
 		app.use("/*", new SimpleErrorHandler)
