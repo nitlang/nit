@@ -17,7 +17,6 @@ import sax::helpers::xml_filter_impl
 import sax::ext::decl_handler
 import sax::ext::lexical_handler
 import console
-import test_suite
 
 # A filter that internally log events it recieves.
 #
@@ -532,7 +531,6 @@ end
 
 # Base class for test suites on a SAX reader.
 abstract class SAXTestSuite
-	super TestSuite
 
 	# Logger of the expected event sequence.
 	var expected = new SAXEventLogger
@@ -545,8 +543,7 @@ abstract class SAXTestSuite
 
 	private var init_done: Bool = false
 
-	redef fun before_test do
-		super
+	fun before_test is before do
 		if not init_done then
 			reader = create_reader
 			actual.parent = reader

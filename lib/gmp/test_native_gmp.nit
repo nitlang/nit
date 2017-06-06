@@ -12,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_native_gmp is test_suite
+module test_native_gmp is test
 
-import test_suite
 import native_gmp
 
 class TestNativeMPZ
-    super TestSuite
+	test
 
     var op1: NativeMPZ
     var op2: NativeMPZ
@@ -26,9 +25,7 @@ class TestNativeMPZ
     var r: NativeMPQ
     var res: NativeMPZ
 
-    init do end
-
-    redef fun before_test do
+    fun before_test is before do
         op1 = new NativeMPZ
         op2 = new NativeMPZ
         ui = new UInt64
@@ -36,7 +33,7 @@ class TestNativeMPZ
         res = new NativeMPZ
     end
 
-    redef fun after_test do
+    fun after_test is after do
         op1.finalize
         op2.finalize
         ui.free
@@ -212,23 +209,21 @@ class TestNativeMPZ
 end
 
 class TestNativeMPQ
-    super TestSuite
+	test
 
     var op1: NativeMPQ
     var op2: NativeMPQ
     var l: NativeMPZ
     var res: NativeMPQ
 
-    init do end
-
-    redef fun before_test do
+    fun before_test is before do
         op1 = new NativeMPQ
         op2 = new NativeMPQ
         l = new NativeMPZ
         res = new NativeMPQ
     end
 
-    redef fun after_test do
+    fun after_test is after do
         op1.finalize
         op2.finalize
         l.finalize

@@ -12,23 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_github_curl is test_suite
+module test_github_curl is test
 
 import github::github_curl
-import test_suite
 
 class TestGithubCurl
-	super TestSuite
+	test
 
 	var auth: String = get_github_oauth
 	var user_agent: String = "nit"
 	var testee: GithubCurl is noinit
 
-	redef fun before_test do
+	fun before_test is before do
 		testee = new GithubCurl(auth, user_agent)
 	end
 
-	fun test_get_repo do
+	fun test_get_repo is test do
 		var uri = "https://api.github.com/repos/nitlang/nit"
 		var res = testee.get_and_check(uri)
 
@@ -37,7 +36,7 @@ class TestGithubCurl
 		assert res["owner"] isa JsonObject
 	end
 
-	fun test_get_user do
+	fun test_get_user is test do
 		var uri = "https://api.github.com/users/Morriar"
 		var res = testee.get_and_check(uri)
 
