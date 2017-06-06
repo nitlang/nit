@@ -15,14 +15,15 @@
 # limitations under the License.
 
 # Test module for `game.nit`.
-module test_game is test_suite
+module test_game is test
 
 import test_helper
 
 class TestGame
 	super NitrpgTestHelper
+	test
 
-	fun test_add_player do
+	fun test_add_player is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var users = ["Morriar", "xymus"]
@@ -36,7 +37,7 @@ class TestGame
 		end
 	end
 
-	fun test_load_player do
+	fun test_load_player is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var ogame = load_game("Morriar/nit", db)
@@ -52,7 +53,7 @@ class TestGame
 		assert ogame.load_player("Morriar") == null
 	end
 
-	fun test_load_players do
+	fun test_load_players is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var ogame = load_game("Morriar/nit", db)
@@ -72,8 +73,9 @@ end
 
 class TestPlayer
 	super NitrpgTestHelper
+	test
 
-	fun test_init do
+	fun test_init is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var player = new Player(game, "Morriar")
@@ -82,7 +84,7 @@ class TestPlayer
 		assert player.nitcoins == 0
 	end
 
-	fun test_init_from_json do
+	fun test_init_from_json is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var json = """{"name": "Morriar", "nitcoins": 10}""".parse_json
@@ -92,7 +94,7 @@ class TestPlayer
 		assert player.nitcoins == 10
 	end
 
-	fun test_save do
+	fun test_save is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var json = """{"name": "Morriar", "nitcoins": 10}""".parse_json.as(JsonObject)
@@ -101,7 +103,7 @@ class TestPlayer
 		assert game.db.collection("players").find(json) != null
 	end
 
-	fun test_game_add_player do
+	fun test_game_add_player is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		game.add_player(game.api.load_user("Morriar").as(not null))
@@ -109,7 +111,7 @@ class TestPlayer
 		assert game.db.collection("players").find(json) != null
 	end
 
-	fun test_game_load_player do
+	fun test_game_load_player is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var json = """{"name": "Morriar", "nitcoins": 10}""".parse_json.as(JsonObject)
@@ -123,8 +125,9 @@ end
 
 class TestUser
 	super NitrpgTestHelper
+	test
 
-	fun test_player do
+	fun test_player is test do
 		var db = gen_test_db
 		var api = new GithubAPI(get_github_oauth)
 		var game = load_game("privat/nit", db)
