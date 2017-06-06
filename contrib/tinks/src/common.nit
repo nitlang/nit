@@ -26,6 +26,5 @@ redef class Sys
 	# Default listening port of the server
 	fun default_listening_port: Int do return 18721
 
-	# Port to which clients send discovery requests
-	fun discovery_port: Int do return 18722
+	redef fun discovery_port do return 18722
 end

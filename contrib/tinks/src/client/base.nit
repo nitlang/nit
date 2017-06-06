@@ -35,22 +35,10 @@ redef class App
 		else
 			print "Looking for a server..."
 
-			var s = new UDPSocket
-			s.enable_broadcast = true
-			s.blocking = false
-			s.broadcast(discovery_port, "Server? {handshake_app_name}")
-			nanosleep(0, 100_000_000)
-
-			var ptr = new Ref[nullable SocketAddress](null)
-			var resp = s.recv_from(1024, ptr)
-			var src = ptr.item
-
-			if not resp.is_empty then
-				var words = resp.split(" ")
-				if words.length == 3 and words[0] == "Server!" and words[1] == handshake_app_name and words[2].is_numeric then
-					address = src.address
-					port = words[2].to_i
-				end
+			var servers = discover_local_servers
+			if servers.not_empty then
+				address = servers.first.address
+				port = servers.first.port
 			end
 		end
 
@@ -60,7 +48,7 @@ redef class App
 			# No command line
 			return new LocalServerContext
 		else
-			print "Connecting to:{address}:{port}"
+			print "Connecting to {address}:{port}"
 
 			# Args are: tinks server_address {port}
 			if args.length > 1 then port = args[1].to_i

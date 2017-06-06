@@ -26,13 +26,6 @@ redef class RemoteClient
 end
 
 redef class Server
-	# `UDPSocket` to which clients send discovery requests
-	var discovery_socket: UDPSocket do
-		var s = new UDPSocket
-		s.blocking = false
-		s.bind(null, discovery_port)
-		return s
-	end
 
 	# The current game
 	var game = new TGame is lazy, writable
@@ -62,24 +55,8 @@ redef class Server
 		# Do game logic
 		var turn = game.do_turn
 
-		# Respond to discovery requests
-		loop
-			var ptr = new Ref[nullable SocketAddress](null)
-			var read = discovery_socket.recv_from(1024, ptr)
-
-			# No sender means there is no request (an error would also do it)
-			var sender = ptr.item
-			if sender == null then break
-
-			var words = read.split(" ")
-			if words.length != 2 or words[0] != "Server?" or words[1] != handshake_app_name then
-				print "Server Warning: Rejected discovery request '{read}'"
-				continue
-			end
-
-			discovery_socket.send_to(sender.address, sender.port,
-				"Server! {handshake_app_name} {self.port}")
-		end
+		# Respond to discovery requests sent over UDP
+		answer_discovery_requests
 
 		# Setup clients
 		var new_clients = accept_clients
@@ -91,8 +68,6 @@ redef class Server
 			client.writer.serialize game
 			client.writer.serialize client.player
 			client.socket.flush
-
-			clients.add client
 		end
 
 		if dedicated and clients.is_empty then
