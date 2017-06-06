@@ -482,6 +482,15 @@ redef class Text
 		return self.split_with(pattern).join(string)
 	end
 
+	# Replace the first occurrence of `pattern` with `string`
+	#
+	#     assert "hlelo".replace_first("le", "el") == "hello"
+	#     assert "hello".replace_first('l', "")    == "helo"
+	fun replace_first(pattern: Pattern, string: Text): String
+	do
+		return self.split_once_on(pattern).join(string)
+	end
+
 	# Does `self` contains at least one instance of `pattern`?
 	#
 	#     assert "hello".has('l')
