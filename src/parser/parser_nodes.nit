@@ -22,7 +22,7 @@ private import console
 
 # Root of the AST class-hierarchy
 abstract class ANode
-	# Location is set during AST building. Once built, location cannon be null.
+	# Location is set during AST building. Once built, location can not be null.
 	# However, manual instantiated nodes may need more care.
 	var location: Location is writable, noinit
 
@@ -534,7 +534,7 @@ class TKwinterface
 	super TokenKeyword
 end
 
-# The keywords `enum` ane `universal`
+# The keywords `enum` and `universal`
 class TKwenum
 	super TokenKeyword
 end
@@ -3023,7 +3023,8 @@ abstract class AAtid
 	super Prod
 
 	# The identifier of the annotation.
-	# Can be a TId of a keyword
+	#
+	# Can be a TId or a keyword.
 	var n_id: Token is writable, noinit
 end
 
