@@ -142,6 +142,17 @@ interface IPoint3d[N: Numeric]
 		var s = dist2_xy(other).add(dz.mul(dz))
 		return x.value_of(s)
 	end
+
+	# Get a new `Point3d[Float]` at an offset of `x, y, z` from `self`
+	#
+	# ~~~
+	# var origin = new Point3d[Float](1.0, 1.0, 1.0)
+	# assert origin.offset(1.0, 2.0, 3.0).to_s == "(2.0, 3.0, 4.0)"
+	# ~~~
+	fun offset(x, y, z: Numeric): Point3d[Float]
+	do return new Point3d[Float](self.x.to_f+x.to_f,
+	                             self.y.to_f+y.to_f,
+	                             self.z.to_f+z.to_f)
 end
 
 # 3D point with `x`, `y` and `z`

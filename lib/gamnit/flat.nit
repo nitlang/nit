@@ -583,12 +583,6 @@ private class Simple2dProgram
 end
 
 redef class Point3d[N]
-	# Get a new `Point3d[Float]` with an offset of each axis of `x, y, z`
-	fun offset(x, y, z: Numeric): Point3d[Float]
-	do
-		return new Point3d[Float](self.x.to_f+x.to_f, self.y.to_f+y.to_f, self.z.to_f+z.to_f)
-	end
-
 	# ---
 	# Associate each point to its sprites
 
