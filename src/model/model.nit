@@ -2430,11 +2430,9 @@ abstract class MPropDef
 					res.append "::"
 				end
 			end
-			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
-				# precise "B" only if not the same class than "A"
-				res.append mproperty.intro_mclassdef.name
-				res.append "::"
-			end
+			# precise "B" because it is not the same class than "A"
+			res.append mproperty.intro_mclassdef.name
+			res.append "::"
 			# Always use the property name "x"
 			res.append mproperty.name
 		end
@@ -2452,10 +2450,8 @@ abstract class MPropDef
 				res.append mproperty.intro_mclassdef.mmodule.c_name
 				res.append "__"
 			end
-			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
-				res.append mproperty.intro_mclassdef.name.to_cmangle
-				res.append "__"
-			end
+			res.append mproperty.intro_mclassdef.name.to_cmangle
+			res.append "__"
 			res.append mproperty.name.to_cmangle
 		end
 		return res.to_s
