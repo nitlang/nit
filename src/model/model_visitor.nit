@@ -104,13 +104,13 @@ abstract class ModelVisitor
 	# Should we accept nitunit test suites?
 	#
 	# Default is `false`.
-	var include_test_suite = false is writable
+	var include_test = false is writable
 
 	# Can we accept this `mentity` regarding its test suite status?
-	fun accept_test_suite(mentity: MEntity): Bool do
-		if include_test_suite then return true
+	fun accept_test(mentity: MEntity): Bool do
+		if include_test then return true
 		if not mentity isa MModule then return true
-		return not mentity.is_test_suite
+		return not mentity.is_test
 	end
 
 	# Should we accept `MAttribute` instances?
@@ -131,7 +131,7 @@ abstract class ModelVisitor
 		if not accept_visibility(mentity) then return false
 		if not accept_fictive(mentity) then return false
 		if not accept_empty_doc(mentity) then return false
-		if not accept_test_suite(mentity) then return false
+		if not accept_test(mentity) then return false
 		if not accept_attribute(mentity) then return false
 		return true
 	end

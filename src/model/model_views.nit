@@ -122,7 +122,7 @@ class ModelView
 		v.include_fictive = self.include_fictive
 		v.include_empty_doc = self.include_empty_doc
 		v.include_attribute = self.include_attribute
-		v.include_test_suite = self.include_test_suite
+		v.include_test = self.include_test
 	end
 
 	# Searches the MEntity that matches `full_name`.

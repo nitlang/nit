@@ -384,7 +384,7 @@ class Catalog
 					end
 				end
 				var ms = gs
-				if m.is_test_suite then ms /= 100.0
+				if m.is_test then ms /= 100.0
 				entity_score += ms
 				if m.mdoc != null then doc_score += ms else ms /= 10.0
 				for cd in m.mclassdefs do

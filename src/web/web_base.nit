@@ -47,7 +47,7 @@ class NitwebConfig
 		view.include_fictive = true
 		view.include_empty_doc = true
 		view.include_attribute = true
-		view.include_test_suite = true
+		view.include_test = true
 		return view
 	end
 end

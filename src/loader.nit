@@ -810,8 +810,6 @@ redef class ModelBuilder
 				mmodule.mdoc = mdoc
 				mdoc.original_mentity = mmodule
 			end
-			# Is the module a test suite?
-			mmodule.is_test_suite = not decl.get_annotations("test_suite").is_empty
 			# Is the module generated?
 			mmodule.is_generated = not decl.get_annotations("generated").is_empty
 		end
