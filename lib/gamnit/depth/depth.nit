@@ -45,6 +45,7 @@ redef class App
 	# Draw all elements of `actors` and then call `frame_core_flat`
 	protected fun frame_core_depth(display: GamnitDisplay)
 	do
+		glViewport(0, 0, display.width, display.height)
 		frame_core_dynamic_resolution_before display
 
 		# Update cameras on both our programs

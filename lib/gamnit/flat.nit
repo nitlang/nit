@@ -41,8 +41,8 @@ import more_collections
 import performance_analysis
 
 import gamnit
-import gamnit::cameras_cache
 intrude import gamnit::cameras
+intrude import gamnit::cameras_cache
 import gamnit::dynamic_resolution
 import gamnit::limit_fps
 import gamnit::camera_control
@@ -294,7 +294,7 @@ redef class App
 	do
 		texture.load
 
-		var splash = new Sprite(texture, ui_camera.center)
+		var splash = new Sprite(texture, ui_camera.center.offset(0.0, 0.0, 0.0))
 		ui_sprites.add splash
 
 		var display = display
@@ -370,6 +370,17 @@ redef class App
 		# Close gamnit
 		var display = display
 		if display != null then display.close
+	end
+
+	redef fun on_resize(display)
+	do
+		super
+
+		world_camera.mvp_matrix_cache = null
+		ui_camera.mvp_matrix_cache = null
+
+		# Update all sprites in the UI
+		for sprite in ui_sprites do sprite.needs_update
 	end
 
 	redef fun frame_core(display)

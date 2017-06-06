@@ -78,7 +78,7 @@ redef class GamnitDisplay
 			print_error "Failed to initialize SDL2 IMG: {sdl.error}"
 		end
 
-		var sdl_window = new SDLWindow(window_title.to_cstring, window_width, window_height, (new SDLWindowFlags).opengl)
+		var sdl_window = new SDLWindow(window_title.to_cstring, window_width, window_height, sdl_window_flags)
 		assert not sdl_window.address_is_null else
 			print_error "Failed to create SDL2 window: {sdl.error}"
 		end
@@ -97,7 +97,12 @@ redef class GamnitDisplay
 		return sdl_window
 	end
 
-	# Initialization flags passed to SDL2 mixer
+	# SDL2 window initialization flags
+	#
+	# The default value supports OpenGL and window resizing.
+	var sdl_window_flags: SDLWindowFlags = (new SDLWindowFlags).opengl.resizable is lazy, writable
+
+	# SDL2 mixer initialization flags
 	#
 	# Defaults to all available formats.
 	var mix_init_flags: MixInitFlags = mix.flac | mix.mod | mix.mp3 | mix.ogg is lazy, writable

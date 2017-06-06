@@ -207,8 +207,8 @@ class UICamera
 	# Clipping wall the farthest of the camera, defaults to -100.0
 	var far: Float = -100.0 is writable
 
-	# Width in world units, defaults to the width in pixels of the screen
-	var width: Float = display.width.to_f is lazy
+	# Width in world units, calculated from `height` and the screen aspect ratio
+	fun width: Float do return height * display.aspect_ratio
 
 	# Height in world units, defaults to 1080.0
 	#
@@ -221,9 +221,7 @@ class UICamera
 	fun reset_height(height: nullable Float)
 	do
 		if height == null then height = display.height.to_f
-
 		self.height = height
-		self.width = height * display.aspect_ratio
 	end
 
 	# Convert the position `x, y` on screen, to UI coordinates

@@ -34,7 +34,7 @@ class GamnitDisplay
 	fun height: Int is abstract
 
 	# Aspect ratio of the screen, `width / height`
-	var aspect_ratio: Float is lazy do return width.to_f / height.to_f
+	fun aspect_ratio: Float do return width.to_f / height.to_f
 
 	# Is the cursor locked et the center of the screen?
 	var lock_cursor = false is writable

@@ -110,12 +110,6 @@ redef class UICamera
 		mvp_matrix_cache = null
 	end
 
-	redef fun width=(value)
-	do
-		super
-		mvp_matrix_cache = null
-	end
-
 	redef fun height=(value)
 	do
 		super
