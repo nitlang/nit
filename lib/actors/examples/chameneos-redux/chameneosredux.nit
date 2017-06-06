@@ -128,7 +128,7 @@ fun work(n, nb_colors : Int ) do
 
 	for c in creatures do c.async.run
 
-	active_actors.is_empty
+	active_actors.wait
 
 	var total = 0
 	for c in creatures do

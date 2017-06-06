@@ -15,12 +15,15 @@
 # See `nit/lib/actors/actors.nit` for the abstraction on which the generated classes are based
 module actors_generation_phase
 
+import actors_injection_phase
 import modelize
 import gen_nit
 import modelbuilder
 
 private class ActorPhase
 	super Phase
+
+	var generated_actor_modules = new Array[String]
 
 	# Source code of the actor classes to generate
 	var actors = new Array[String]
@@ -34,27 +37,14 @@ private class ActorPhase
 	# Redefinitions of annotated classes
 	var redef_classes = new Array[String]
 
-	redef fun process_annotated_node(nclass, nat)
-	do
-		if nat.n_atid.n_id.text != "actor" then return
-
-		if not nclass isa AStdClassdef then
-			toolcontext.error(nat.location, "Syntax Error: only a class can be annotated as an actor.")
-			return
-		end
-
-		# Get the module associated with this class
-		var mclassdef = nclass.mclassdef
-		assert mclassdef != null
-
-		var mmod = mclassdef.mmodule
+	fun generate_actor_classes(mclassdef: MClassDef, mmod: MModule) do
 		if not mmod.generate_actor_submodule then mmod.generate_actor_submodule = true
 
 		# Get the name of the annotated class
 		var classname = mclassdef.name
 
 		# Generate the actor class
-		actors.add(
+		if mclassdef.is_intro then actors.add(
 """
 class Actor{{{classname}}}
 	super Actor
@@ -64,7 +54,11 @@ end
 		######## Generate the Messages classes ########
 
 		# Get all the methods definitions
-		var propdefs = mclassdef.mpropdefs
+		var propdefs = new Array[MPropDef]
+		for propdef in mclassdef.mpropdefs do
+			if propdef.is_intro then propdefs.add(propdef)
+		end
+
 		var methods = new Array[MMethodDef]
 		for p in propdefs do
 			if p isa MMethodDef then
@@ -77,7 +71,8 @@ end
 
 		# Generate the superclass for all Messages classes (each actor has its own Message super class)
 		var msg_class_name = "Message" + classname
-		messages.add(
+
+		if mclassdef.is_intro then messages.add(
 """
 class {{{msg_class_name}}}
 	super Message
@@ -173,12 +168,14 @@ end
 		# All of the functions of the proxy too
 
 		# Let's generate the proxy class then
+
+		var redef_virtual_type = ""
+		if mclassdef.is_intro then redef_virtual_type = "redef type E: Actor{classname}"
 		proxys.add(
 """
 redef class Proxy{{{classname}}}
 
-	redef type E: Actor{{{classname}}}
-	#var actor: Actor{{{classname}}} is noinit
+	{{{redef_virtual_type}}}
 
 	init proxy(base_class: {{{classname}}}) do
 		actor = new Actor{{{classname}}}(base_class)
@@ -189,12 +186,46 @@ redef class Proxy{{{classname}}}
 end
 """)
 
-		redef_classes.add(
+	if mclassdef.is_intro then redef_classes.add(
 """
 redef class {{{classname}}}
-redef var async is lazy do return new Proxy{{{classname}}}.proxy(self)
+	var m = new Mutex
+	var lazy_proxy: Proxy{{{classname}}} is lazy do return new Proxy{{{classname}}}.proxy(self)
+
+	redef fun async: Proxy{{{classname}}} do
+		m.lock
+		var p = lazy_proxy
+		m.unlock
+		return p
+	end
 end
 """)
+
+	end
+
+	redef fun process_nmodule(nmodule) do
+		var mmod = nmodule.mmodule
+		if mmod == null then return
+
+		if generated_actor_modules.has(mmod.name) then return
+
+		var mclasses_defs = mmod.mclassdefs
+		for mclass_def in mclasses_defs do
+			var mclass = mclass_def.mclass
+			var actor = mclass.actor
+			if actor != null then generate_actor_classes(mclass_def, mmod)
+		end
+
+	end
+
+	redef fun process_annotated_node(nclass, nat)
+	do
+		if nat.n_atid.n_id.text != "actor" then return
+
+		if not nclass isa AStdClassdef then
+			toolcontext.error(nat.location, "Syntax Error: only a class can be annotated as an actor.")
+			return
+		end
 	end
 
 	redef fun process_nmodule_after(nmodule) do
@@ -226,6 +257,10 @@ end
 		# for mmod in mmodules do nit_module.imports.add mmod.name
 		nit_module.imports.add first_mmodule.name
 
+		generated_actor_modules.add(module_name)
+		var idx = generated_actor_modules.index_of(module_name)
+		for i in [0..idx[ do nit_module.imports.add(generated_actor_modules[i])
+
 		nit_module.content.add "####################### Redef classes #########################"
 		for c in redef_classes do nit_module.content.add( c + "\n\n" )
 
@@ -241,10 +276,10 @@ end
 		# Write support module
 		nit_module.write_to_file module_path
 
-		actors = new Array[String]
-		messages = new Array[String]
-		proxys = new Array[String]
-		redef_classes = new Array[String]
+		actors.clear
+		messages.clear
+		proxys.clear
+		redef_classes.clear
 
 		toolcontext.modelbuilder.inject_module_subimportation(first_mmodule, module_path)
 	end
@@ -257,5 +292,5 @@ end
 
 redef class ToolContext
 	# Generate actors
-	var actor_phase: Phase = new ActorPhase(self, [modelize_class_phase])
+	var actor_phase: Phase = new ActorPhase(self, [modelize_class_phase, modelize_property_phase])
 end
