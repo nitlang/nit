@@ -131,25 +131,24 @@ This flag can be used by libraries and program to prevent (or limit) the executi
 
 TestSuites are Nit modules that define a set of TestCases.
 
-A test suite is a module that uses the annotation `is test_suite`.
+A test suite is a module that uses the annotation `is test`.
 
 It is common that a test suite focuses on testing a single module.
-In this case, the name of the test_suite is often `test_foo.nit` where `foo.nit` is the tested module.
+In this case, the name of the test suite is often `test_foo.nit` where `foo.nit` is the tested module.
 
 The structure of a test suite is the following:
 
 ~~~~
 # test suite for module `foo`
-module test_foo is test_suite
+module test_foo is test
 
-import test_suite
 import foo # can be intrude to test private things
 
 class TestFoo
-	super TestSuite
+    test
 
     # test case for `foo::Foo::baz`
-    fun test_baz do
+    fun baz is test do
         var subject = new Foo
         assert subject.baz(1, 2) == 3
     end
@@ -160,18 +159,18 @@ Test suite can be executed using the same `nitunit` command:
 
     $ nitunit foo.nit
 
-`nitunit` will execute a test for each method named `test_*` in a class
-subclassing `TestSuite` so multiple tests can be executed for a single method:
+`nitunit` will execute a test for each method with the `test` annotation in a class
+also annotated with `test` so multiple tests can be executed for a single method:
 
 ~~~~
 class TestFoo
-	super TestSuite
+    test
 
-    fun test_baz_1 do
+    fun baz_1 is test do
         var subject = new Foo
         assert subject.baz(1, 2) == 3
     end
-    fun test_baz_2 do
+    fun baz_2 is test do
         var subject = new Foo
         assert subject.baz(1, -2) == -1
     end
@@ -204,12 +203,12 @@ The `diff(1)` command is used to perform the comparison.
 The test is failed if non-zero is returned by `diff`.
 
 ~~~
-module test_mod is test_suite
+module test_mod is test
 
 class TestFoo
-	super TestSuite
+	test
 
-	fun test_bar do
+	fun bar is test do
 		print "Hello!"
 	end
 end
@@ -228,25 +227,27 @@ To helps the management of the expected results, the option `--autosav` can be u
 
 ## Configuring TestSuites
 
-`TestSuite`s also provide methods to configure the test run:
-
-`before_test` and `after_test`: methods called before/after each test case.
+`TestSuite`s also provide annotations to configure the test run:
+`before` and `after` annotations can be applied to methods that must be called before/after each test case.
 They can be used to factorize repetitive tasks:
 
 ~~~~
 class TestFoo
-	super TestSuite
+    test
+
     var subject: Foo
+
     # Mandatory empty init
     init do end
+
     # Method executed before each test
-    fun before_test do
+    fun set_up is before do
         subject = new Foo
     end
-    fun test_baz_1 do
+    fun baz_1 is test do
         assert subject.baz(1, 2) == 3
     end
-    fun test_baz_2 do
+    fun baz_2 is test do
         assert subject.baz(1, -2) == -1
     end
 end
@@ -254,7 +255,7 @@ end
 
 When using custom test attributes, an empty `init` must be declared to allow automatic test running.
 
-`before_module` and `after_module`: methods called before/after each test suite.
+`before_all` and `after_all` annotations can be applied to methods that must be called before/after each test suite.
 They have to be declared at top level:
 
 ~~~~
@@ -279,11 +280,11 @@ end
 The `NIT_TESTING_PATH` environment variable contains the current test suite
 file path.
 Nitunit define this variable before the execution of each test suite.
-It can be used to access files based on the current test_suite location:
+It can be used to access files based on the current test suite location:
 
 ~~~
 class TestWithPath
-	super TestSuite
+    test
 
     fun test_suite_path do
         assert "NIT_TESTING_PATH".environ != ""
