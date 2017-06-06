@@ -18,7 +18,6 @@ module testing_suite
 import testing_base
 import html
 private import parse_annotations
-private import annotation
 private import realtime
 
 redef class ToolContext
@@ -48,11 +47,17 @@ class NitUnitTester
 			if not mclassdef.is_test then continue
 			if not suite_match_pattern(mclassdef) then continue
 			toolcontext.modelbuilder.total_classes += 1
+
+			var before = mclassdef.before
+			var after = mclassdef.after
+
 			for mpropdef in mclassdef.mpropdefs do
 				if not mpropdef isa MMethodDef or not mpropdef.is_test then continue
 				if not case_match_pattern(mpropdef) then continue
 				toolcontext.modelbuilder.total_tests += 1
 				var test = new TestCase(suite, mpropdef, toolcontext)
+				test.before = before
+				test.after = after
 				suite.test_cases.add test
 			end
 		end
@@ -263,6 +268,12 @@ class TestCase
 	# Test method to be compiled and tested.
 	var test_method: MMethodDef
 
+	# Cases to execute before this one
+	var before = new Array[MMethodDef]
+
+	# Cases to execute after this one
+	var after = new Array[MMethodDef]
+
 	redef fun full_name do return test_method.full_name
 
 	redef fun location do return test_method.location
@@ -278,9 +289,13 @@ class TestCase
 			file.addn "\t{name}"
 		else
 			file.addn "\tvar subject = new {test_method.mclassdef.name}.nitunit"
-			file.addn "\tsubject.before_test"
+			for mmethod in before do
+				file.addn "\tsubject.{mmethod.name}"
+			end
 			file.addn "\tsubject.{name}"
-			file.addn "\tsubject.after_test"
+			for mmethod in after do
+				file.addn "\tsubject.{mmethod.name}"
+			end
 		end
 		file.addn "end"
 	end
@@ -366,6 +381,22 @@ class TestCase
 end
 
 redef class MClassDef
+	# Methods tagged with `before` in this class definition
+	private fun before: Array[MMethodDef] do
+		var res = new Array[MMethodDef]
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef and mpropdef.is_before then
+				res.add mpropdef
+			end
+		end
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return res
+		for mclassdef in in_hierarchy.direct_greaters do
+			res.add_all mclassdef.before
+		end
+		return res
+	end
+
 	# Methods tagged with `before_all` in this class definition
 	private fun before_all: Array[MMethodDef] do
 		var res = new Array[MMethodDef]
@@ -378,6 +409,22 @@ redef class MClassDef
 		if in_hierarchy == null then return res
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.before_all
+		end
+		return res
+	end
+
+	# Methods tagged with `after` in this class definition
+	private fun after: Array[MMethodDef] do
+		var res = new Array[MMethodDef]
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef and mpropdef.is_after then
+				res.add mpropdef
+			end
+		end
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return res
+		for mclassdef in in_hierarchy.direct_greaters do
+			res.add_all mclassdef.after
 		end
 		return res
 	end
