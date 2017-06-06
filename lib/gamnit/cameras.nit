@@ -29,7 +29,7 @@ abstract class Camera
 	var display: GamnitDisplay
 
 	# Position of this camera in world space
-	var position = new Point3d[Float](0.0, 0.0, 0.0) is writable
+	var position = new Point3d[Float](0.0, 0.0, 0.0)
 
 	# The Model-View-Projection matrix created by this camera
 	#
@@ -238,33 +238,31 @@ class UICamera
 	end
 
 	# Center of the screen, from the point of view of the camera, at z = 0
-	fun center: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y - height / 2.0, 0.0)
+	var center: IPoint3d[Float] = new CameraAnchor(self, 0.5, -0.5)
 
 	# Center of the top of the screen, at z = 0
-	fun top: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y, 0.0)
+	var top: IPoint3d[Float] = new CameraAnchor(self, 0.5, 0.0)
 
 	# Center of the bottom of the screen, at z = 0
-	fun bottom: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y - height, 0.0)
+	var bottom: IPoint3d[Float] = new CameraAnchor(self, 0.5, -1.0)
 
 	# Center of the left border of the screen, at z = 0
-	fun left: Point3d[Float] do return new Point3d[Float](position.x, position.y - height / 2.0, 0.0)
+	var left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -1.0)
 
 	# Center of the right border of the screen, at z = 0
-	fun right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height / 2.0, 0.0)
+	var right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -1.0)
 
 	# Top left corner of the screen, at z = 0
-	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
+	var top_left: IPoint3d[Float] = new CameraAnchor(self, 0.0, 0.0)
 
 	# Top right corner of the screen, at z = 0
-	fun top_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y, 0.0)
+	var top_right: IPoint3d[Float] = new CameraAnchor(self, 1.0, 0.0)
 
 	# Bottom left corner of the screen, at z = 0
-	fun bottom_left: Point3d[Float] do return new Point3d[Float](position.x, position.y - height, 0.0)
+	var bottom_left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -1.0)
 
 	# Bottom right corner of the screen, at z = 0
-	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height, 0.0)
-
-	# TODO cache the anchors
+	var bottom_right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -1.0)
 
 	redef fun mvp_matrix
 	do
@@ -278,4 +276,56 @@ class UICamera
 
 		return view * projection
 	end
+end
+
+# Immutable relative anchors for reference points on `camera`
+private class CameraAnchor
+	super IPoint3d[Float]
+
+	# Reference camera
+	var camera: UICamera
+
+	# Reference position, the top left of the screen
+	var ref: Point3d[Float] = camera.position is lazy
+
+	# X position as proportion of the screen width
+	var relative_x: Float
+
+	# Y position as proportion of the screen height
+	var relative_y: Float
+
+	redef fun x do return ref.x + relative_x*camera.width
+	redef fun y do return ref.y + relative_y*camera.height
+	redef fun z do return ref.z
+
+	redef fun offset(x, y, z) do return new OffsetPoint3d(self, x.to_f, y.to_f, z.to_f)
+end
+
+# Position relative to another point or usually a `CameraAnchor`
+private class OffsetPoint3d
+	super Point3d[Float]
+
+	autoinit ref, offset_x, offset_y, offset_z
+
+	# Reference point to which the offsets are applied
+	var ref: IPoint3d[Float]
+
+	# Difference on the X axis
+	var offset_x: Float
+
+	# Difference on the X axis
+	var offset_y: Float
+
+	# Difference on the X axis
+	var offset_z: Float
+
+	redef fun x do return ref.x + offset_x
+	redef fun y do return ref.y + offset_y
+	redef fun z do return ref.z + offset_z
+
+	redef fun x=(value) do if value != null then offset_x += value - x
+	redef fun y=(value) do if value != null then offset_y += value - y
+	redef fun z=(value) do if value != null then offset_z += value - z
+
+	redef fun offset(x, y, z) do return new OffsetPoint3d(self, x.to_f, y.to_f, z.to_f)
 end

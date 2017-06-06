@@ -561,7 +561,7 @@ redef class Player
 		end
 
 		# Display respawn instructions
-		app.ui_sprites.add new Sprite(app.texts_sheet.respawn, app.ui_camera.center)
+		app.ui_sprites.add new Sprite(app.texts_sheet.respawn, app.ui_camera.center.offset(0.0, 0.0, 0.0))
 	end
 end
 
