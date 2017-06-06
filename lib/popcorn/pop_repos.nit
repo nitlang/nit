@@ -37,6 +37,7 @@
 #
 # import popcorn
 # import popcorn::pop_repos
+# import popcorn::pop_json
 #
 # # Serializable book representation.
 # class Book
@@ -254,6 +255,7 @@ end
 # ~~~
 # import popcorn
 # import popcorn::pop_repos
+# import popcorn::pop_json
 #
 # # First, let's create a User abstraction:
 #

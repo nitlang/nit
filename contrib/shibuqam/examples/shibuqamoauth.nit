@@ -171,6 +171,7 @@
 module shibuqamoauth
 
 import popcorn
+import popcorn::pop_json
 import shibuqam
 import json
 

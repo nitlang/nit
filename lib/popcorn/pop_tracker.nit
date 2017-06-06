@@ -47,6 +47,7 @@ module pop_tracker
 import popcorn
 import popcorn::pop_config
 import popcorn::pop_logging
+import popcorn::pop_json
 import popcorn::pop_repos
 
 redef class AppConfig

@@ -83,6 +83,7 @@
 module pop_templates
 
 import popcorn::pop_handlers
+import popcorn::pop_json
 import template::macro
 
 redef class HttpResponse

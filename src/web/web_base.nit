@@ -21,6 +21,7 @@ import doc_down
 import popcorn
 import popcorn::pop_config
 import popcorn::pop_repos
+import popcorn::pop_json
 
 # Nitweb config file.
 class NitwebConfig

@@ -18,8 +18,6 @@
 module pop_handlers
 
 import pop_routes
-import json::static
-import json
 import csv
 
 # Class handler for a route.
@@ -450,16 +448,6 @@ redef class HttpResponse
 		send(html, status)
 	end
 
-	# Write data as JSON and set the right content type header.
-	fun json(json: nullable Serializable, status: nullable Int) do
-		header["Content-Type"] = media_types["json"].as(not null)
-		if json == null then
-			send(null, status)
-		else
-			send(json.to_json, status)
-		end
-	end
-
 	# Write data as CSV and set the right content type header.
 	fun csv(csv: nullable CsvDocument, status: nullable Int) do
 		header["Content-Type"] = media_types["csv"].as(not null)
@@ -468,16 +456,6 @@ redef class HttpResponse
 		else
 			send(csv.write_to_string, status)
 		end
-	end
-
-	# Write error as JSON.
-	#
-	# Format: `{"message": message, "status": status}`
-	fun json_error(message: String, status: Int) do
-		var obj = new JsonObject
-		obj["status"] = status
-		obj["message"] = message
-		json(obj, status)
 	end
 
 	# Redirect response to `location`
