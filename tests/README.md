@@ -17,6 +17,8 @@ This directory contains small Nit programs and useful scripts to test the non re
   Useful before committing something.
 * `listfull.sh` lists tests that are run by `testfull.sh`.
   It is used by other scripts but can be used by human to see what is tested.
+  Each path is quoted using apostrophes, with `'\''` escaping an apostrophe.
+  This syntax is compatible with `xargs` and the POSIX shell.
 
   Currently, all files in `tests/`, `lib/` and `examples/` are executed, some of `contrib/` and the main programs of `src/`.
   To update the list of tested files, just edit this script.
