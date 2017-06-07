@@ -36,6 +36,10 @@ redef class GamnitDisplay
 
 	redef fun show_cursor=(val) do sdl.show_cursor = val
 
+	redef fun lock_cursor=(val) do sdl.relative_mouse_mode = val
+
+	redef fun lock_cursor do return sdl.relative_mouse_mode
+
 	# Setup SDL, wm, EGL in order
 	redef fun setup
 	do

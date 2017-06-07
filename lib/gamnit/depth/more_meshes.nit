@@ -79,22 +79,31 @@ class Plane
 	# TODO use gl_TRIANGLE_FAN instead
 end
 
-# Cube, with 6 faces
+# Cuboid, or rectangular prism, with 6 faces and right angles
 #
-# Occupies `[-0.5..0.5]` on all three axes.
-class Cube
+# Can be created from a `Boxed3d` using `to_mesh`.
+class Cuboid
 	super Mesh
 
-	redef var vertices is lazy do
-		var a = [-0.5, -0.5, -0.5]
-		var b = [ 0.5, -0.5, -0.5]
-		var c = [-0.5,  0.5, -0.5]
-		var d = [ 0.5,  0.5, -0.5]
+	# Width, on the X axis
+	var width: Float
 
-		var e = [-0.5, -0.5,  0.5]
-		var f = [ 0.5, -0.5,  0.5]
-		var g = [-0.5,  0.5,  0.5]
-		var h = [ 0.5,  0.5,  0.5]
+	# Height, on the Y axis
+	var height: Float
+
+	# Depth, on the Z axis
+	var depth: Float
+
+	redef var vertices is lazy do
+		var a = [-0.5*width, -0.5*height, -0.5*depth]
+		var b = [ 0.5*width, -0.5*height, -0.5*depth]
+		var c = [-0.5*width,  0.5*height, -0.5*depth]
+		var d = [ 0.5*width,  0.5*height, -0.5*depth]
+
+		var e = [-0.5*width, -0.5*height,  0.5*depth]
+		var f = [ 0.5*width, -0.5*height,  0.5*depth]
+		var g = [-0.5*width,  0.5*height,  0.5*depth]
+		var h = [ 0.5*width,  0.5*height,  0.5*depth]
 
 		var vertices = new Array[Float]
 		for v in [a, c, d, a, d, b, # front
@@ -133,6 +142,35 @@ class Cube
 	end
 
 	redef var center = new Point3d[Float](0.0, 0.0, 0.0) is lazy
+end
+
+# Cube, with 6 faces, edges of equal length and square angles
+#
+# Occupies `[-0.5..0.5]` on all three axes.
+class Cube
+	super Cuboid
+
+	noautoinit
+
+	init
+	do
+		width = 1.0
+		height = 1.0
+		depth = 1.0
+	end
+end
+
+redef class Boxed3d[N]
+	# Create a `Cuboid` mesh with the dimension of `self`
+	#
+	# Does not use the position of `self`, but it can be given to an `Actor`.
+	fun to_mesh: Cuboid
+	do
+		var width = right.to_f-left.to_f
+		var height = top.to_f-bottom.to_f
+		var depth = front.to_f-back.to_f
+		return new Cuboid(width, height, depth)
+	end
 end
 
 # Sphere with `radius` and a number of faces set by `n_meridians` and `n_parallels`

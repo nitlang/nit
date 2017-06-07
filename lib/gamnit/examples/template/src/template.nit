@@ -63,8 +63,8 @@ redef class App
 		# cause glitches on mobiles devices with small depth buffer.
 		world_camera.near = 1.0
 
-		# Make the background blue and opaque.
-		glClearColor(0.0, 0.0, 1.0, 1.0)
+		# Make the background sky blue and opaque.
+		glClearColor(0.5, 0.8, 1.0, 1.0)
 
 		# If the first command line argument is an integer, add extra sprites.
 		if args.not_empty and args.first.is_int then
@@ -109,8 +109,9 @@ redef class App
 		if event isa QuitEvent or
 		  (event isa KeyEvent and event.name == "escape" and event.is_up) then
 			# When window close button, escape or back key is pressed
-			# show the average FPS over the last few seconds.
-			print "{current_fps} fps"
+			print "Ran at {current_fps} FPS in the last few seconds"
+
+			print "Performance statistics to detect bottlenecks:"
 			print sys.perfs
 
 			# Quit abruptly

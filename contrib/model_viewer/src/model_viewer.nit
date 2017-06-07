@@ -67,8 +67,10 @@ redef class App
 		world_camera.near = 0.1
 		world_camera.far = 100.0
 
-		for model in models do model.load
-		for texture in asset_textures_by_name.values do texture.load
+		for model in models do
+			model.load
+			if model.errors.not_empty then print_error model.errors.join("\n")
+		end
 
 		# Display the first model
 		model = models[model_index]
@@ -146,7 +148,7 @@ redef class App
 		var t = clock.total.to_f
 
 		# Rotate the model
-		actors.first.rotation = t
+		actors.first.yaw = t
 
 		# Move the light source
 		var dist_to_light = 20.0

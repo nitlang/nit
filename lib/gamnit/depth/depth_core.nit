@@ -46,8 +46,30 @@ class Actor
 	# Position of this sprite in world coordinates
 	var center: Point3d[Float] is writable
 
-	# Rotation on the Z axis
-	var rotation = 0.0 is writable
+	# Rotation around the X axis (+ looks up, - looks down)
+	#
+	# Positive values look up, and negative look down.
+	#
+	# All actor rotations follow the right hand rule.
+	# The default orientation of the model should look towards -Z.
+	var pitch = 0.0 is writable
+
+	# Rotation around the Y axis (+ turns left, - turns right)
+	#
+	# Positive values turn `self` to the left, and negative values to the right.
+	#
+	# All actor rotations follow the right hand rule.
+	# The default orientation of the model should look towards -Z.
+	var yaw = 0.0 is writable
+
+	# Rotation around the Z axis (looking to -Z: + turns counterclockwise, - clockwise)
+	#
+	# From the default camera point of view, looking down on the Z axis,
+	# positive values turn `self` counterclockwise, and negative values clockwise.
+	#
+	# All actor rotations follow the right hand rule.
+	# The default orientation of the model should look towards -Z.
+	var roll = 0.0 is writable
 
 	# Scale applied to the model
 	var scale = 1.0 is writable
@@ -82,6 +104,9 @@ abstract class Model
 
 	# Load this model in memory
 	fun load do end
+
+	# Errors raised at loading
+	var errors = new Array[Error]
 
 	# All `LeafModel` composing this model
 	#

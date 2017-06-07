@@ -9,7 +9,7 @@ Ks 0.287480 0.287480 0.287480
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd textures/tread.jpg
+map_Kd textures/TTread.jpg
 
 newmtl Treads
 Ns 178.431373

@@ -31,8 +31,7 @@ redef class Point[N]
 	do
 		var dx = other.x.to_f - x.to_f
 		var dy = other.y.to_f - y.to_f
-		var a = sys.atan2(dy.to_f, dx.to_f)
-		return a
+		return sys.atan2(dy.to_f, dx.to_f)
 	end
 end
 
@@ -52,19 +51,21 @@ redef universal Float
 		return s
 	end
 
-	# Linear interpolation on the arc delimited by `self` and `other` at `p` out of 1.0
+	# Linear interpolation of between the angles `a` and `b`, in radians
 	#
 	# The result is normalized with `angle_normalize`.
 	#
 	# ~~~
-	# assert 0.0.angle_lerp(pi, 0.5).is_approx(0.5*pi, 0.0001)
-	# assert 0.0.angle_lerp(pi, 8.5).is_approx(0.5*pi, 0.0001)
-	# assert 0.0.angle_lerp(pi, 7.5).is_approx(-0.5*pi, 0.0001)
+	# assert 0.5.angle_lerp(0.0, pi).is_approx(0.5*pi, 0.0001)
+	# assert 8.5.angle_lerp(0.0, pi).is_approx(0.5*pi, 0.0001)
+	# assert 7.5.angle_lerp(0.0, pi).is_approx(-0.5*pi, 0.0001)
+	# assert 0.5.angle_lerp(0.2, 2.0*pi-0.1).is_approx(0.05, 0.0001)
 	# ~~~
-	fun angle_lerp(other, p: Float): Float
+	fun angle_lerp(a, b: Float): Float
 	do
-		var d = other - self
-		var a = self + d*p
-		return a.angle_normalize
+		var d = b - a
+		while d > pi do d -= 2.0*pi
+		while d < -pi do d += 2.0*pi
+		return (a + d*self).angle_normalize
 	end
 end
