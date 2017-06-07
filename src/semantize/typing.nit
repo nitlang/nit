@@ -36,17 +36,17 @@ private class TypeVisitor
 
 	# The module of the analysis
 	# Used to correctly query the model
-	var mmodule: MModule
+	var mmodule: MModule is noinit
 
 	# The static type of the receiver
 	# Mainly used for type tests and type resolutions
-	var anchor: nullable MClassType = null
+	var anchor: MClassType is noinit
 
 	# The analyzed mclassdef
-	var mclassdef: nullable MClassDef = null
+	var mclassdef: MClassDef is noinit
 
 	# The analyzed property
-	var mpropdef: nullable MPropDef
+	var mpropdef: MPropDef
 
 	var selfvariable = new Variable("self")
 
@@ -59,23 +59,20 @@ private class TypeVisitor
 	init
 	do
 		var mpropdef = self.mpropdef
+		var mclassdef = mpropdef.mclassdef
+		mmodule = mclassdef.mmodule
+		self.mclassdef = mclassdef
+		self.anchor = mclassdef.bound_mtype
 
-		if mpropdef != null then
-			self.mpropdef = mpropdef
-			var mclassdef = mpropdef.mclassdef
-			self.mclassdef = mclassdef
-			self.anchor = mclassdef.bound_mtype
+		var mclass = mclassdef.mclass
 
-			var mclass = mclassdef.mclass
+		var selfvariable = new Variable("self")
+		self.selfvariable = selfvariable
+		selfvariable.declared_type = mclass.mclass_type
 
-			var selfvariable = new Variable("self")
-			self.selfvariable = selfvariable
-			selfvariable.declared_type = mclass.mclass_type
-
-			var mprop = mpropdef.mproperty
-			if mprop isa MMethod and mprop.is_new then
-				is_toplevel_context = true
-			end
+		var mprop = mpropdef.mproperty
+		if mprop isa MMethod and mprop.is_new then
+			is_toplevel_context = true
 		end
 	end
 
@@ -278,7 +275,7 @@ private class TypeVisitor
 
 	fun resolve_mtype(node: AType): nullable MType
 	do
-		return self.modelbuilder.resolve_mtype(mmodule, mclassdef, node)
+		return self.modelbuilder.resolve_mtype(mclassdef, node)
 	end
 
 	fun try_get_mclass(node: ANode, name: String): nullable MClass
@@ -864,7 +861,7 @@ redef class AMethPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # skip error
 
-		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var mmethoddef = self.mpropdef.as(not null)
@@ -931,7 +928,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mreadpropdef
 		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
-		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
@@ -2142,7 +2139,6 @@ redef class ASuperExpr
 	redef fun accept_typing(v)
 	do
 		var anchor = v.anchor
-		assert anchor != null
 		var recvtype = v.get_variable(self, v.selfvariable)
 		assert recvtype != null
 		var mproperty = v.mpropdef.mproperty
@@ -2181,7 +2177,6 @@ redef class ASuperExpr
 	private fun process_superinit(v: TypeVisitor)
 	do
 		var anchor = v.anchor
-		assert anchor != null
 		var recvtype = v.get_variable(self, v.selfvariable)
 		assert recvtype != null
 		var mpropdef = v.mpropdef

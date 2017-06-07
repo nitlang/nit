@@ -350,7 +350,6 @@ redef class TypeVisitor
 		if dcp.is_disabled then return res
 
 		var anchor = self.anchor
-		assert anchor != null
 		var supx = sup
 		var subx = sub
 		var p = node.parent.as(not null)
