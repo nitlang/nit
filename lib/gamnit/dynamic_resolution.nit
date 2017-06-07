@@ -73,6 +73,7 @@ redef class App
 			# Draw directly to the screen framebuffer
 			glBindFramebuffer(gl_FRAMEBUFFER, dynamic_context.screen_framebuffer)
 			glViewport(0, 0, display.width, display.height)
+			glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
 			var gl_error = glGetError
 			assert gl_error == gl_NO_ERROR else print_error gl_error
@@ -81,12 +82,13 @@ redef class App
 
 		# Draw to our dynamic framebuffer
 		glBindFramebuffer(gl_FRAMEBUFFER, dynamic_context.dynamic_framebuffer)
-		glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
 		var ratio = dynamic_resolution_ratio
 		ratio = ratio.clamp(min_dynamic_resolution_ratio, max_dynamic_resolution_ratio)
 		glViewport(0, 0, (display.width.to_f*ratio).to_i,
 						 (display.height.to_f*ratio).to_i)
+
+		glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error

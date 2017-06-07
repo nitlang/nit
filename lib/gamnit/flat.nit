@@ -375,9 +375,6 @@ redef class App
 
 	redef fun frame_core(display)
 	do
-		# Prepare to draw, clear buffers
-		glClear(gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT)
-
 		# Check errors
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
