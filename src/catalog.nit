@@ -158,6 +158,13 @@ class Person
 	# Some homepage. Eg "http://example.com/~jdoe"
 	var page: nullable String is writable
 
+	# Gravatar id
+	var gravatar: nullable String is lazy do
+		var email = self.email
+		if email == null then return null
+		return email.md5.to_lower
+	end
+
 	# Return a full-featured link to a person
 	fun to_html: String
 	do
@@ -167,10 +174,9 @@ class Person
 		if page != null then
 			res += "<a href=\"{page.html_escape}\">"
 		end
-		var email = self.email
-		if email != null then
-			var md5 = email.md5.to_lower
-			res += "<img src=\"https://secure.gravatar.com/avatar/{md5}?size=20&amp;default=retro\">&nbsp;"
+		var gravatar = self.gravatar
+		if gravatar != null then
+			res += "<img src=\"https://secure.gravatar.com/avatar/{gravatar}?size=20&amp;default=retro\">&nbsp;"
 		end
 		res += e
 		if page != null then res += "</a>"
@@ -343,7 +349,6 @@ class Catalog
 			score += 100.0
 			score += mdoc.content.length.score
 		end
-
 		var metadata = mpackage.metadata
 
 		var tryit = metadata.tryit
