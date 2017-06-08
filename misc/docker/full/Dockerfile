@@ -21,6 +21,7 @@ RUN dpkg --add-architecture i386 \
 		libsdl1.2-dev \
 		libsdl2-dev \
 		libsdl2-image-dev \
+		libsdl2-mixer-dev \
 		libsqlite3-dev \
 		libx11-dev \
 		libxdg-basedir-dev \
