@@ -9,7 +9,7 @@ To compile the _gamnit_ apps packaged with the Nit repositoy on GNU/Linux you ne
 Under Debian 8.2, this command should install everything needed:
 
 ~~~
-apt-get install libgles2-mesa-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev inkscape mpg123
+apt-get install libgles2-mesa-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev inkscape
 ~~~
 
 Under Windows 64 bits, using msys2, you can install the required packages with:
