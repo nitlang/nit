@@ -73,6 +73,7 @@ private class CheckAnnotationPhase
 
 	# Raw new-line separated list of primitive annotation
 	# Note: empty-lines will be ignored since there is no annotation named by the empty string.
+	# TODO: Remplace the `subset` annotation by a class kind keyword.
 	var primtives_annotations_list = """
 new_annotation
 
@@ -104,6 +105,8 @@ ldflags
 light_ffi
 
 platform
+
+subset
 """
 
 	# Efficient set build from `primtives_annotations_list`

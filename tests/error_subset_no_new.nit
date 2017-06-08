@@ -12,12 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import end
+import core::kernel
 
-interface Object #alt1-5#
-#alt1# abstract class Object
-#alt2,5# class Object
-#alt3# enum Object
-#alt4# extern class Object
-	#alt5# subset
+class A
+	var x: Int
 end
+
+class S
+	super A
+	subset do return true
+end
+
+var a = new A(1)
+a.x.output
+var s = new S(2)
+s.x.output

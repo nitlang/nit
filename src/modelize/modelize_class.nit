@@ -18,10 +18,13 @@
 module modelize_class
 
 import modelbuilder
+import modelize_subset
 
 redef class ToolContext
 	# Run `AModule::build_classes` on each module
-	var modelize_class_phase: Phase = new ModelizeClassPhase(self, null)
+	var modelize_class_phase: Phase = new ModelizeClassPhase(self, [
+		modelize_subset_phase
+	])
 end
 
 private class ModelizeClassPhase
@@ -499,6 +502,9 @@ redef class AEnumClasskind
 end
 redef class AExternClasskind
 	redef fun mkind do return extern_kind
+end
+redef class ASubsetClasskind
+	redef fun mkind do return subset_kind
 end
 
 redef class AFormaldef

@@ -12,12 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import end
+# TODO: Actual testing in `test_subset_redef2`.
 
-interface Object #alt1-5#
-#alt1# abstract class Object
-#alt2,5# class Object
-#alt3# enum Object
-#alt4# extern class Object
-	#alt5# subset
+import core::kernel
+
+class NonZero
+	subset do return not self.is_zero
+	super Numeric
+
+	fun int_inverse: Int do
+		return (1.0 / self.to_f).to_i
+	end
 end
+
+#alt1# redef class NonZero end

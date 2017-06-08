@@ -37,6 +37,10 @@ end
 extern class ExC
 end
 
+class SSet
+	subset
+end
+
 ##
 
 interface SubI
@@ -45,6 +49,7 @@ interface SubI
 	#alt2# super CC
 	#alt3# super EnC
 	#alt4# super ExC
+	#alt16# super SSet
 end
 
 abstract class SubA
@@ -53,6 +58,7 @@ abstract class SubA
 	super CC
 	#alt5# super EnC
 	#alt6# super ExC
+	#alt17# super SSet
 end
 
 class SubC
@@ -61,6 +67,7 @@ class SubC
 	super CC
 	#alt7# super EnC
 	#alt8# super ExC
+	#alt18# super SSet
 end
 
 enum SubEn
@@ -69,6 +76,7 @@ enum SubEn
 	#alt10# super CC
 	#alt11# super EnC
 	#alt12# super ExC
+	#alt19# super SSet
 end
 
 extern class SubEx
@@ -77,4 +85,42 @@ extern class SubEx
 	#alt14# super CC
 	#alt15# super EnC
 	super ExC
+	#alt20# super SSet
 end
+
+# A subset can inherit anything except a subset, and has only one direct parent.
+
+class SSetI
+	subset
+	super IC
+	# TODO: super AC
+	# TODO: super CC
+	# TODO: super EnC
+	# TODO: super ExC
+	# TODO: super SSet
+end
+
+class SSetA
+	subset
+	super AC
+end
+
+class SSetC
+	subset
+	super CC
+end
+
+class SSetEn
+	subset
+	super EnC
+end
+
+class SSetEx
+	subset
+	super ExC
+end
+
+#alt26# class SubSSet
+#alt26# 	subset
+#alt26# 	super SSet
+#alt26# end
