@@ -433,12 +433,15 @@ class Catalog
 		var ini = mpackage.ini
 		if ini == null then return
 
+		var root = mpackage.root
+		if root == null then return
+
 		# TODO use real git info
 		#var repo = ini.get_or_null("upstream.git")
 		#var branch = ini.get_or_null("upstream.git.branch")
 		#var directory = ini.get_or_null("upstream.git.directory")
 
-		var dirpath = mpackage.root.filepath
+		var dirpath = root.filepath
 		if dirpath == null then return
 
 		# Collect commits info
