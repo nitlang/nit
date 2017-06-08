@@ -97,3 +97,34 @@ class Class[E: Object]
 
 	redef fun to_s do return name
 end
+
+# Helper to get the name of a type
+#
+# This is one of the hackiest way to retrieve the name of a random type.
+#
+# ~~~
+# var dummy = new GetName[Sequence[nullable Comparable]]
+# assert dummy.to_s == "Sequence[nullable Comparable]"
+# ~~~
+#
+# This also works to resolve formal types
+#
+# ~~~
+# class G[T]
+#   type V: Collection[T]
+#
+#   var name_of_v: String = (new GetName[V]).to_s is lazy
+# end
+#
+# var g = new G[Bool]
+# assert g.name_of_v == "Collection[Bool]"
+# ~~~
+#
+# Warning: this does not work if --erasure is used.
+class GetName[E]
+	redef fun to_s do
+		var name = class_name
+		if name.length < 9 then return ""
+		return name.substring(8, name.length-9)
+	end
+end
