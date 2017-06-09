@@ -269,6 +269,8 @@ redef class ModelBuilder
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var mclass = nclassdef.mclass.as(not null)
+		var name = mclass.name
+		var kind = mclass.kind
 
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
 		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
@@ -292,17 +294,19 @@ redef class ModelBuilder
 					error(ntype, "Error: supertypes cannot be a formal type.")
 					continue
 				end
-				if not mclass.kind.can_specialize(mtype.mclass.kind) then
-					error(ntype, "Error: {mclass.kind} `{mclass}` cannot specialize {mtype.mclass.kind} `{mtype.mclass}`.")
+				var superclass = mtype.mclass
+				var super_kind = superclass.kind
+				if not kind.can_specialize(super_kind) then
+					error(ntype, "Error: {kind} `{mclass}` cannot specialize {super_kind} `{superclass}`.")
 				end
 				supertypes.add mtype
 				#print "new super : {mclass} < {mtype}"
-				if mtype.mclass.kind == extern_kind then specpointer = false
+				if super_kind == extern_kind then specpointer = false
 			end
 		end
 
 		if is_intro and objectclass != null then
-			if mclass.kind == extern_kind and mclass.name != "Pointer" then
+			if kind == extern_kind and name != "Pointer" then
 				# it is an extern class, but not a Pointer
 				if pointerclass == null then
 					error(nclassdef, "Error: `Pointer` must be defined first.")
@@ -310,10 +314,10 @@ redef class ModelBuilder
 				end
 				if specpointer then supertypes.add pointerclass.mclass_type
 			else if specobject then
-				if mclass.name != "Object" then
+				if name != "Object" then
 					# it is a standard class without super class (but is not Object)
 					supertypes.add objectclass.mclass_type
-				else if mclass.kind != interface_kind then
+				else if kind != interface_kind then
 					error(nclassdef, "Error: `Object` must be an {interface_kind}.")
 				end
 			end
