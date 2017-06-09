@@ -18,6 +18,16 @@
 	angular
 		.module('index', ['model', 'ngSanitize'])
 
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('index', {
+					url: '/',
+					templateUrl: 'views/index.html',
+					controller: 'IndexCtrl',
+					controllerAs: 'indexCtrl'
+				})
+		})
+
 		.controller('IndexCtrl', ['Catalog', '$sce', '$scope', '$location', '$anchorScroll', function(Catalog, $sce, $scope, $location, $anchorScroll) {
 			this.loadHighlighted = function() {
 				Catalog.loadHightlighted(

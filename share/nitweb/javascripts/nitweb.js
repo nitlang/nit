@@ -27,12 +27,6 @@
 
 	.config(function($stateProvider, $locationProvider) {
 		$stateProvider
-			.state('index', {
-				url: '/',
-				templateUrl: 'views/index.html',
-				controller: 'IndexCtrl',
-				controllerAs: 'indexCtrl'
-			})
 			.state('user', {
 				url: '/user',
 				templateUrl: 'views/user.html',
