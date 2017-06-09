@@ -19,14 +19,4 @@
 
 	angular
 		.module('model', [])
-
-		.factory('Metrics', [ '$http', function($http) {
-			return {
-				loadStructuralMetrics: function(id, cb, cbErr) {
-					$http.get(apiUrl + '/metrics/structural/' + id)
-						.success(cb)
-						.error(cbErr);
-				}
-			}
-		}])
 })();

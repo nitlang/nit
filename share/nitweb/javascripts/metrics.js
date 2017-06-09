@@ -16,7 +16,17 @@
 
 (function() {
 	angular
-		.module('metrics', ['model'])
+		.module('metrics', [])
+
+		.factory('Metrics', [ '$http', function($http) {
+			return {
+				loadStructuralMetrics: function(id, cb, cbErr) {
+					$http.get('/api/metrics/structural/' + id)
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
 
 		.directive('metricsList', function() {
 			return {
