@@ -250,12 +250,28 @@ redef class ModelBuilder
 	do
 		var mmodule = nmodule.mmodule
 		if mmodule == null then return
-		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
-		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
 		var mclass = nclassdef.mclass
 		if mclass == null then return
 		var mclassdef = nclassdef.mclassdef
 		if mclassdef == null then return
+
+		var supertypes = collect_supertypes(nmodule, nclassdef, mclassdef.is_intro)
+		mclassdef.set_supertypes(supertypes)
+		if not supertypes.is_empty then self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
+	end
+
+	# List the supertypes specified or implied by `nclassdef`.
+	#
+	# REQUIRE: `nmodule.mmodule != null`
+	# REQUIRE: `nclassdef.mclass != null`
+	private fun collect_supertypes(nmodule: AModule, nclassdef: AClassdef,
+			is_intro: Bool): Array[MClassType]
+	do
+		var mmodule = nmodule.mmodule.as(not null)
+		var mclass = nclassdef.mclass.as(not null)
+
+		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
+		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
 
 		# Do we need to specify Object as a super class?
 		var specobject = true
@@ -285,12 +301,12 @@ redef class ModelBuilder
 			end
 		end
 
-		if mclassdef.is_intro and objectclass != null then
+		if is_intro and objectclass != null then
 			if mclass.kind == extern_kind and mclass.name != "Pointer" then
 				# it is an extern class, but not a Pointer
 				if pointerclass == null then
 					error(nclassdef, "Error: `Pointer` must be defined first.")
-					return
+					return supertypes
 				end
 				if specpointer then supertypes.add pointerclass.mclass_type
 			else if specobject then
@@ -299,13 +315,11 @@ redef class ModelBuilder
 					supertypes.add objectclass.mclass_type
 				else if mclass.kind != interface_kind then
 					error(nclassdef, "Error: `Object` must be an {interface_kind}.")
-					return
 				end
 			end
 		end
 
-		mclassdef.set_supertypes(supertypes)
-		if not supertypes.is_empty then self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
+		return supertypes
 	end
 
 	# Check the validity of the specialization heirarchy
