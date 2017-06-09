@@ -27,25 +27,6 @@
 
 	.config(function($stateProvider, $locationProvider) {
 		$stateProvider
-			.state('user', {
-				url: '/user',
-				templateUrl: 'views/user.html',
-				controller: 'UserCtrl',
-				controllerAs: 'userCtrl'
-			})
-			.state('login', {
-				url: '/login',
-				controller : function(){
-					window.location.replace('/login');
-				},
-			    template : "<div></div>"
-			})
-			.state('logout', {
-				controller : function(){
-					window.location.replace('/logout');
-				},
-			    template : "<div></div>"
-			})
 			.state({
 				name: '404',
 				url: '*path',
