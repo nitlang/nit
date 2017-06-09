@@ -269,7 +269,8 @@ redef class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				specobject = false
 				var ntype = nsc.n_type
-				var mtype = resolve_mtype_unchecked(mclassdef, ntype, false)
+				var mtype = resolve_mtype3_unchecked(mmodule, mclass, null,
+						ntype, false)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
 					error(ntype, "Error: supertypes cannot be a formal type.")
