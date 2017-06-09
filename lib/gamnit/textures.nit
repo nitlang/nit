@@ -209,6 +209,9 @@ class TextureAsset
 
 		load_from_platform
 
+		# If no pixel data was loaded, load the pixel default texture
+		if gl_texture == -1 then load_checker 32
+
 		loaded = true
 	end
 
