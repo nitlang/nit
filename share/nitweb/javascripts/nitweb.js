@@ -20,6 +20,11 @@
 	.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeSpinner = false;
 	}])
+
+	.run(['$anchorScroll', function($anchorScroll) {
+		$anchorScroll.yOffset = 80;
+	}])
+
 	.config(function($stateProvider, $locationProvider) {
 		$stateProvider
 			.state('index', {
