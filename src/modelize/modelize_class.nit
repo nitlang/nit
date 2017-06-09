@@ -274,7 +274,7 @@ redef class ModelBuilder
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
 					error(ntype, "Error: supertypes cannot be a formal type.")
-					return
+					continue
 				end
 				if not mclass.kind.can_specialize(mtype.mclass.kind) then
 					error(ntype, "Error: {mclass.kind} `{mclass}` cannot specialize {mtype.mclass.kind} `{mtype.mclass}`.")
