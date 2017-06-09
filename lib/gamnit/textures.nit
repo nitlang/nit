@@ -98,24 +98,18 @@ abstract class Texture
 	fun offset_bottom: Float do return 1.0
 end
 
-# Colorful small texture of 2x2 pixels
+# Colorful small texture of 32x32 pixels by default
 class CheckerTexture
 	super RootTexture
 
+	# Width and height in pixels, defaults to 32
+	var size = 32 is optional
+
 	redef fun load(force)
 	do
-		var pixels = [0xFFu8, 0x00u8, 0x00u8,
-		              0x00u8, 0xFFu8, 0x00u8,
-		              0x00u8, 0x00u8, 0xFFu8,
-		              0xFFu8, 0xFFu8, 0xFFu8]
-
-		var cpixels = new CByteArray.from(pixels)
-
-		width = 2.0
-		height = 2.0
-		load_from_pixels(cpixels.native_array, 2, 2, gl_RGB)
-
-		cpixels.destroy
+		if gl_texture != -1 then return
+		load_checker size
+		loaded = true
 	end
 end
 
@@ -149,6 +143,31 @@ class RootTexture
 
 		glHint(gl_GENERATE_MIPMAP_HINT, gl_NICEST)
 		glGenerateMipmap(gl_TEXTURE_2D)
+	end
+
+	private fun load_checker(size: Int)
+	do
+		var cpixels = new CByteArray(3*size*size)
+
+		var i = 0
+		for x in [0..size[ do
+			var quadrant_x = if x < size/2 then 0 else 1
+			for y in [0..size[ do
+				var quadrant_y = if y < size/2 then 0 else 1
+				var color = if quadrant_x == quadrant_y then
+					[0u8, 0u8, 0u8, 255u8]
+				else [255u8, 255u8, 255u8, 255u8]
+
+				for j in [0..3[ do cpixels[i+j] = color[j]
+				i += 3
+			end
+		end
+
+		width = size.to_f
+		height = size.to_f
+		load_from_pixels(cpixels.native_array, size, size, gl_RGB)
+
+		cpixels.destroy
 	end
 
 	# Set whether this texture should be pixelated when drawn, otherwise it is interpolated
