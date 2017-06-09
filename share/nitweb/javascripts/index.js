@@ -28,7 +28,7 @@
 				})
 		})
 
-		.controller('IndexCtrl', ['Catalog', '$sce', '$scope', '$location', '$anchorScroll', function(Catalog, $sce, $scope, $location, $anchorScroll) {
+		.controller('IndexCtrl', function(Catalog, $sce, $scope, $location, $anchorScroll) {
 			this.loadHighlighted = function() {
 				Catalog.loadHightlighted(
 					function(data) {
@@ -82,9 +82,9 @@
 			this.loadHighlighted();
 			this.loadStats();
 			this.loadContributors();
-		}])
+		})
 
-		.directive('contributorList', ['Model', function(Model) {
+		.directive('contributorList', function(Model) {
 			return {
 				restrict: 'E',
 				scope: {
@@ -94,5 +94,5 @@
 				},
 				templateUrl: '/directives/contributor-list.html'
 			};
-		}])
+		})
 })();
