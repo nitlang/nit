@@ -2602,12 +2602,10 @@ class MClassKind
 		else if self == extern_kind then
 			# only compatible with themselves
 			return self == other
-		else if other == enum_kind or other == extern_kind then
-			# abstract_kind and concrete_kind are incompatible
-			return false
+		else
+			# assert self == abstract_kind or self == concrete_kind
+			return other == abstract_kind or other == concrete_kind
 		end
-		# remain only abstract_kind and concrete_kind
-		return true
 	end
 end
 
