@@ -16,7 +16,7 @@
 
 (function() {
 	angular
-		.module('users', ['ngSanitize', 'model'])
+		.module('users', ['ngSanitize'])
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
@@ -40,6 +40,21 @@
 					template : "<div></div>"
 				})
 		})
+
+		.factory('User', [ '$http', function($http) {
+			return {
+				loadUser: function(cb, cbErr) {
+					$http.get('/api/user')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadUserStars: function(cb, cbErr) {
+					$http.get('/api/feedback/user/stars')
+						.success(cb)
+						.error(cbErr);
+				},
+			}
+		}])
 
 		.controller('UserCtrl', ['User', '$scope', function(User, $scope) {
 			this.loadUser = function() {

@@ -29,19 +29,4 @@
 				}
 			}
 		}])
-
-		.factory('User', [ '$http', function($http) {
-			return {
-				loadUser: function(cb, cbErr) {
-					$http.get(apiUrl + '/user')
-						.success(cb)
-						.error(cbErr);
-				},
-				loadUserStars: function(cb, cbErr) {
-					$http.get(apiUrl + '/feedback/user/stars')
-						.success(cb)
-						.error(cbErr);
-				},
-			}
-		}])
 })();
