@@ -16,7 +16,48 @@
 
 (function() {
 	angular
-		.module('entities', ['ngSanitize', 'ui', 'model'])
+		.module('entities', ['ngSanitize', 'ui'])
+
+		.factory('Model', [ '$http', function($http) {
+			return {
+
+				loadEntity: function(id, cb, cbErr) {
+					$http.get('/api/entity/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityLinearization: function(id, cb, cbErr) {
+					$http.get('/api/linearization/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityDefs: function(id, cb, cbErr) {
+					$http.get('/api/defs/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityCode: function(id, cb, cbErr) {
+					$http.get('/api/code/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityGraph: function(id, cb, cbErr) {
+					$http.get('/api/graph/inheritance/' + id + '?cdepth=3')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				search: function(q, n, cb, cbErr) {
+					$http.get('/api/search?q=' + q + '&n=' + n)
+						.success(cb)
+						.error(cbErr);
+				}
+			};
+		}])
 
 		.controller('EntityCtrl', ['Model', 'Metrics', 'Feedback', '$stateParams', '$scope', '$sce', function(Model, Metrics, Feedback, $stateParams, $scope, $sce) {
 			$scope.entityId = $stateParams.id;

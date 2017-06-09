@@ -20,47 +20,6 @@
 	angular
 		.module('model', [])
 
-		.factory('Model', [ '$http', function($http) {
-			return {
-
-				loadEntity: function(id, cb, cbErr) {
-					$http.get(apiUrl + '/entity/' + id)
-						.success(cb)
-						.error(cbErr);
-				},
-
-				loadEntityLinearization: function(id, cb, cbErr) {
-					$http.get(apiUrl + '/linearization/' + id)
-						.success(cb)
-						.error(cbErr);
-				},
-
-				loadEntityDefs: function(id, cb, cbErr) {
-					$http.get(apiUrl + '/defs/' + id)
-						.success(cb)
-						.error(cbErr);
-				},
-
-				loadEntityCode: function(id, cb, cbErr) {
-					$http.get(apiUrl + '/code/' + id)
-						.success(cb)
-						.error(cbErr);
-				},
-
-				loadEntityGraph: function(id, cb, cbErr) {
-					$http.get(apiUrl + '/graph/inheritance/' + id + '?cdepth=3')
-						.success(cb)
-						.error(cbErr);
-				},
-
-				search: function(q, n, cb, cbErr) {
-					$http.get(apiUrl + '/search?q=' + q + '&n=' + n)
-						.success(cb)
-						.error(cbErr);
-				}
-			};
-		}])
-
 		.factory('Feedback', [ '$http', function($http) {
 			return {
 				loadEntityStars: function(id, cb, cbErr) {
