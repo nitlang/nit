@@ -16,7 +16,7 @@
 
 (function() {
 	angular
-		.module('index', ['ngSanitize'])
+		.module('index', [])
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
