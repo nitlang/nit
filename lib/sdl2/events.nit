@@ -50,6 +50,7 @@ extern class SDLEventBuffer `{SDL_Event *`}
 		if is_mouse_wheel then return to_mouse_wheel
 		if is_keydown then return to_keydown
 		if is_keyup then return to_keyup
+		if is_window then return to_window
 		return to_event_direct
 	end
 
@@ -110,6 +111,14 @@ extern class SDLEventBuffer `{SDL_Event *`}
 	#
 	# Require: `is_keyup`
 	fun to_keyup: SDLKeyboardUpEvent `{ return self; `}
+
+	#  Is this a window event?
+	fun is_window: Bool `{ return self->type == SDL_WINDOWEVENT; `}
+
+	# Get a reference to data at `self` as a `SDLWindowEvent`
+	#
+	# Require: `is_window`
+	fun to_window: SDLWindowEvent `{ return self; `}
 
 	# TODO other SDL events:
 	#
@@ -276,4 +285,24 @@ extern class SDLKeysym `{ SDL_Keysym * `}
 	# Modification keys
 	fun mod: Int `{ return self->mod; `}
 	# TODO related masks
+end
+
+# Window event
+extern class SDLWindowEvent
+	super SDLEvent
+
+	# Window identifier
+	fun id: Int `{ return self->window.windowID; `}
+
+	# Is `self` a resized event?
+	fun is_resized: Bool `{ return self->window.event == SDL_WINDOWEVENT_RESIZED; `}
+
+	# Is `self` a size changed event?
+	fun is_size_changed: Bool `{ return self->window.event == SDL_WINDOWEVENT_SIZE_CHANGED; `}
+
+	# `data1` field, depends on the event kind
+	fun data1: Int `{ return self->window.data1; `}
+
+	# `data2` field, depends on the event kind
+	fun data2: Int `{ return self->window.data2; `}
 end

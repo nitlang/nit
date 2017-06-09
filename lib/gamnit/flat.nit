@@ -41,7 +41,8 @@ import more_collections
 import performance_analysis
 
 import gamnit
-import gamnit::cameras_cache
+intrude import gamnit::cameras
+intrude import gamnit::cameras_cache
 import gamnit::dynamic_resolution
 import gamnit::limit_fps
 import gamnit::camera_control
@@ -293,9 +294,7 @@ redef class App
 	do
 		texture.load
 
-		ui_camera.reset_height 1080.0
-
-		var splash = new Sprite(texture, ui_camera.center)
+		var splash = new Sprite(texture, ui_camera.center.offset(0.0, 0.0, 0.0))
 		ui_sprites.add splash
 
 		var display = display
@@ -371,6 +370,17 @@ redef class App
 		# Close gamnit
 		var display = display
 		if display != null then display.close
+	end
+
+	redef fun on_resize(display)
+	do
+		super
+
+		world_camera.mvp_matrix_cache = null
+		ui_camera.mvp_matrix_cache = null
+
+		# Update all sprites in the UI
+		for sprite in ui_sprites do sprite.needs_update
 	end
 
 	redef fun frame_core(display)
@@ -585,12 +595,6 @@ private class Simple2dProgram
 end
 
 redef class Point3d[N]
-	# Get a new `Point3d[Float]` with an offset of each axis of `x, y, z`
-	fun offset(x, y, z: Numeric): Point3d[Float]
-	do
-		return new Point3d[Float](self.x.to_f+x.to_f, self.y.to_f+y.to_f, self.z.to_f+z.to_f)
-	end
-
 	# ---
 	# Associate each point to its sprites
 
@@ -622,6 +626,26 @@ redef class Point3d[N]
 		if sprites != null then for s in sprites do s.needs_update
 	end
 
+	redef fun x=(v)
+	do
+		if isset _x and v != x then needs_update
+		super
+	end
+
+	redef fun y=(v)
+	do
+		if isset _y and v != y then needs_update
+		super
+	end
+
+	redef fun z=(v)
+	do
+		if isset _z and v != z then needs_update
+		super
+	end
+end
+
+redef class OffsetPoint3d
 	redef fun x=(v)
 	do
 		if isset _x and v != x then needs_update

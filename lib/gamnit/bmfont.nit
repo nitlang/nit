@@ -270,7 +270,8 @@ end
 # ~~~
 # redef class App
 #     var font = new BMFontAsset("arial.fnt")
-#     var ui_text = new TextSprites(font, ui_camera.top_left)
+#     var pos: Point3d[Float] = ui_camera.top_left.offset(128.0, -128.0, 0.0)
+#     var ui_text = new TextSprites(font, pos)
 #
 #     redef fun on_create
 #     do

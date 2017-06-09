@@ -18,6 +18,7 @@ module gamnit_linux
 import sdl2::events
 
 intrude import gamnit
+intrude import display_linux
 
 redef class App
 	private var sdl_event_buffer = new SDLEventBuffer.malloc
@@ -33,6 +34,12 @@ redef class App
 
 			# Convert to an SDL event with data
 			var sdl_event = sdl_event_buffer.to_event
+			if sdl_event isa SDLWindowEvent and sdl_event.is_resized then
+				display.width = sdl_event.data1
+				display.height = sdl_event.data2
+				on_resize display
+			end
+
 			# Convert to `mnit::inputs` conforming objects
 			var gamnit_event = sdl_event.to_gamnit_event(sdl_event_buffer)
 			accept_event gamnit_event

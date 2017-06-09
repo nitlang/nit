@@ -77,4 +77,9 @@ redef class App
 	# The instances passed as `event` may be freed (or overwritten),
 	# right after this method returns. They should not be preserved.
 	fun accept_event(event: InputEvent): Bool do return false
+
+	# The window has been resized by the user or system
+	#
+	# The framework handles resizing the viewport automatically.
+	fun on_resize(display: GamnitDisplay) do end
 end

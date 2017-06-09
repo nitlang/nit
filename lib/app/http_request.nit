@@ -126,7 +126,7 @@ end
 #
 # Prints on communication errors and when the server returns an HTTP status code not in the 200s.
 #
-# ~~~
+# ~~~nitish
 # var request = new SimpleAsyncHttpRequest("http://example.com")
 # request.start
 # ~~~
