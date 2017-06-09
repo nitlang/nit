@@ -16,7 +16,7 @@
 
 (function() {
 	angular
-		.module('docdown', ['model', 'ngSanitize'])
+		.module('docdown', ['ngSanitize'])
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
@@ -27,6 +27,16 @@
 					controllerAs: 'docdownCtrl'
 				})
 		})
+
+		.factory('DocDown', [ '$http', function($http) {
+			return {
+				postMarkdown: function(md, cb, cbErr) {
+					$http.post('/api/docdown', md)
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
 
 		.controller('DocdownCtrl', ['$sce', '$scope', '$location', 'DocDown', function($sce, $scope, $location, DocDown) {
 

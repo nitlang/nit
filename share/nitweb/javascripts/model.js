@@ -61,16 +61,6 @@
 			}
 		}])
 
-		.factory('DocDown', [ '$http', function($http) {
-			return {
-				postMarkdown: function(md, cb, cbErr) {
-					$http.post(apiUrl + '/docdown', md)
-						.success(cb)
-						.error(cbErr);
-				}
-			}
-		}])
-
 		.factory('Metrics', [ '$http', function($http) {
 			return {
 				loadStructuralMetrics: function(id, cb, cbErr) {
