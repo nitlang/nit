@@ -18,6 +18,16 @@
 	angular
 		.module('entities', ['ngSanitize', 'ui'])
 
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('doc', {
+					url: '/doc/:id',
+					templateUrl: 'views/doc.html',
+					controller: 'EntityCtrl',
+					controllerAs: 'entityCtrl',
+				})
+		})
+
 		.factory('Model', [ '$http', function($http) {
 			return {
 

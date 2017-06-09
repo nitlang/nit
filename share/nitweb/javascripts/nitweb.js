@@ -58,12 +58,6 @@
 				},
 			    template : "<div></div>"
 			})
-			.state('doc', {
-				url: '/doc/:id',
-				templateUrl: 'views/doc.html',
-				controller: 'EntityCtrl',
-				controllerAs: 'entityCtrl',
-			})
 			.state({
 				name: '404',
 				url: '*path',
