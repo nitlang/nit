@@ -16,7 +16,7 @@
 
 (function() {
 	angular
-		.module('index', ['model', 'ngSanitize'])
+		.module('index', ['ngSanitize'])
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
@@ -27,6 +27,40 @@
 					controllerAs: 'indexCtrl'
 				})
 		})
+
+		.factory('Catalog', [ '$http', function($http) {
+			return {
+				loadHightlighted: function(cb, cbErr) {
+					$http.get('/api/catalog/highlighted')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadMostRequired: function(cb, cbErr) {
+					$http.get('/api/catalog/required')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadByTags: function(cb, cbErr) {
+					$http.get('/api/catalog/bytags')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadStats: function(cb, cbErr) {
+					$http.get('/api/catalog/stats')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadContributors: function(cb, cbErr) {
+					$http.get('/api/catalog/contributors')
+						.success(cb)
+						.error(cbErr);
+				},
+			}
+		}])
 
 		.controller('IndexCtrl', function(Catalog, $sce, $scope, $location, $anchorScroll) {
 			this.loadHighlighted = function() {
