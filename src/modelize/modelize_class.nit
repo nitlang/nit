@@ -246,7 +246,7 @@ redef class ModelBuilder
 	end
 
 	# Visit the AST and set the super-types of the `MClassDef` objects
-	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
+	private fun build_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule
 		if mmodule == null then return
@@ -360,7 +360,7 @@ redef class ModelBuilder
 
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
-			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
+			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
 		end
 
 		# Create the mclassdef hierarchy
