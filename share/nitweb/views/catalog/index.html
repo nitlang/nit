@@ -1,0 +1,47 @@
+<div class='container-fluid'>
+	<div class='page-header'>
+		<h2>Welcome to NitWeb!</h2>
+		<p class='text-muted'>The Nit knowledge base.</p>
+	</div>
+
+	<ul class='nav nav-tabs' role='tablist'>
+		<li role='presentation' ui-sref-active='active'>
+			<a ui-sref='catalog.highlighted'>
+				<span class='glyphicon glyphicon-book'/> Highlighed
+			</a>
+		</li>
+		<li role='presentation' ui-sref-active='active'>
+			<a ui-sref='catalog.required'>
+				<span class='glyphicon glyphicon-book'/> Most required
+			</a>
+		</li>
+		<li role='presentation' ui-sref-active='active'>
+			<a ui-sref='catalog.tags'>
+				<span class='glyphicon glyphicon-book'/> By tags
+			</a>
+		</li>
+	</ul>
+	<table class='table'>
+		<tr>
+			<td ng-repeat='(key, value) in vm.stats'>
+				<h5><strong>{{value}}</strong>&nbsp;<span>{{key}}</span></h5>
+			</td>
+		</tr>
+	</table>
+
+	<div class='container-fluid'>
+		<div class='col-xs-9'>
+			<div class='tab-content'>
+				<div role='tabpanel' class='tab-pane fade in active'>
+					<ui-view />
+				</div>
+			</div>
+		</div>
+		<div class='col-xs-3'>
+			<contributor-list list-title='Maintainers'
+					list-contributors='vm.contributors.maintainers' />
+			<contributor-list list-title='Contributors'
+					list-contributors='vm.contributors.contributors' />
+		</div>
+	</div>
+</div>

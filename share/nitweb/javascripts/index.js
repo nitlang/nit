@@ -20,11 +20,30 @@
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
-				.state('index', {
+				.state('catalog', {
 					url: '/',
-					templateUrl: 'views/index.html',
-					controller: 'IndexCtrl',
-					controllerAs: 'indexCtrl'
+					templateUrl: 'views/catalog/index.html',
+					controller: 'CatalogCtrl',
+					controllerAs: 'vm',
+					abstract: true
+				})
+				.state('catalog.highlighted', {
+					url: '',
+					templateUrl: 'views/catalog/highlighted.html',
+					controller: 'CatalogHighlightedCtrl',
+					controllerAs: 'vm'
+				})
+				.state('catalog.required', {
+					url: 'required',
+					templateUrl: 'views/catalog/most_required.html',
+					controller: 'CatalogRequiredCtrl',
+					controllerAs: 'vm'
+				})
+				.state('catalog.tags', {
+					url: 'tags',
+					templateUrl: 'views/catalog/by_tags.html',
+					controller: 'CatalogTagsCtrl',
+					controllerAs: 'vm'
 				})
 		})
 
@@ -62,60 +81,61 @@
 			}
 		}])
 
-		.controller('IndexCtrl', function(Catalog, $sce, $scope, $location, $anchorScroll) {
-			this.loadHighlighted = function() {
-				Catalog.loadHightlighted(
-					function(data) {
-						$scope.highlighted = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+		.controller('CatalogCtrl', function(Catalog) {
+			var vm = this;
 
-			this.loadMostRequired = function() {
-				Catalog.loadMostRequired(
-					function(data) {
-						$scope.required = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+			Catalog.loadContributors(
+				function(data) {
+					vm.contributors = data;
+				}, function(err) {
+					vm.error = err;
+				});
 
-			this.loadByTags = function() {
-				Catalog.loadByTags(
-					function(data) {
-						$scope.bytags = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+			Catalog.loadStats(
+				function(data) {
+					vm.stats = data;
+				}, function(err) {
+					vm.error = err;
+				});
+		})
 
-			this.loadStats = function() {
-				Catalog.loadStats(
-					function(data) {
-						$scope.stats = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+		.controller('CatalogHighlightedCtrl', function(Catalog) {
+			var vm = this;
 
-			this.loadContributors = function() {
-				Catalog.loadContributors(
-					function(data) {
-						$scope.contributors = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+			Catalog.loadHightlighted(
+				function(data) {
+					vm.highlighted = data;
+				}, function(err) {
+					vm.error = err;
+				});
+		})
+
+		.controller('CatalogRequiredCtrl', function(Catalog) {
+			var vm = this;
+
+			Catalog.loadMostRequired(
+				function(data) {
+					vm.required = data;
+				}, function(err) {
+					vm.error = err;
+				});
+		})
+
+		.controller('CatalogTagsCtrl', function(Catalog, $anchorScroll, $location) {
+			var vm = this;
+
+			Catalog.loadByTags(
+				function(data) {
+					vm.bytags = data;
+				}, function(err) {
+					vm.error = err;
+				});
 
 
-			this.scrollTo = function(hash) {
-				$anchorScroll(hash);
+			vm.scrollTo = function(hash) {
+				$location.hash(hash);
+				$anchorScroll();
 			}
-
-			this.loadHighlighted();
-			this.loadStats();
-			this.loadContributors();
 		})
 
 		.directive('contributorList', function(Model) {
