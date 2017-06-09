@@ -1,0 +1,46 @@
+<div>
+	<div class='col-xs-3'>
+		<ui-summary target='#summary-content' />
+	</div>
+	<div class='col-xs-9' id='summary-content'>
+		<entity-card mentity='vm.mentity' default-tab='doc' no-synopsis='true' />
+
+		<entity-list list-title='Groups' list-entities='vm.mentity.mgroups'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Parent group' list-entities='[vm.mentity.parent]'
+			list-object-filter='{}' ng-if='vm.mentity.parent' />
+
+		<entity-list list-title='Subgroups' list-entities='vm.mentity.mgroups'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Modules' list-entities='vm.mentity.mmodules'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Imported modules' list-entities='vm.mentity.imports'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Introduced classes' list-entities='vm.mentity.intro_mclasses'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Class redefinitions' list-entities='vm.mentity.redef_mclassdefs'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Parents'
+			list-entities='vm.mentity.parents'
+			list-object-filter='{}' />
+
+		<entity-list list-title='Constructors'
+			list-entities='vm.mentity.all_mproperties'
+			list-object-filter='{is_init: true}' />
+
+		<entity-list list-title='Introduced properties'
+			list-entities='vm.mentity.intro_mproperties'
+			list-object-filter='{is_init: "!true"}' />
+
+		<entity-list list-title='Redefined properties'
+			list-entities='vm.mentity.redef_mproperties'
+			list-object-filter='{is_init: "!true"}' />
+
+	</div>
+</div>
