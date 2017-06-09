@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import end
+import core::kernel
 
-interface Object #alt1-5#
-#alt1# abstract class Object
-#alt2# class Object
-#alt3# enum Object
-#alt4# extern class Object
-#alt5# subset Object
+subset B
+	super A
+end
+
+class A #alt1# subset A
 end

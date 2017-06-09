@@ -29,12 +29,16 @@ end
 extern class ExC2
 end
 
+subset SSet2
+end
+
 redef class SubI
 	super IC2
 	#alt1# super AC2
 	#alt2# super CC2
 	#alt3# super EnC2
 	#alt4# super ExC2
+	#alt16# super SSet2
 end
 
 redef class SubA
@@ -43,6 +47,7 @@ redef class SubA
 	super CC2
 	#alt5# super EnC2
 	#alt6# super ExC2
+	#alt17# super SSet2
 end
 
 redef class SubC
@@ -51,6 +56,7 @@ redef class SubC
 	super CC2
 	#alt7# super EnC2
 	#alt8# super ExC2
+	#alt18# super SSet2
 end
 
 redef class SubEn
@@ -59,6 +65,7 @@ redef class SubEn
 	#alt10# super CC2
 	#alt11# super EnC2
 	#alt12# super ExC2
+	#alt19# super SSet2
 end
 
 redef class SubEx
@@ -67,4 +74,5 @@ redef class SubEx
 	#alt14# super CC2
 	#alt15# super EnC2
 	super ExC2
+	#alt20# super SSet2
 end
