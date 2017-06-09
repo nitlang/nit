@@ -33,12 +33,6 @@
 				controller: 'UserCtrl',
 				controllerAs: 'userCtrl'
 			})
-			.state('docdown', {
-				url: '/docdown',
-				templateUrl: 'views/docdown.html',
-				controller: 'DocdownCtrl',
-				controllerAs: 'docdownCtrl'
-			})
 			.state('grades', {
 				url: '/grades',
 				templateUrl: 'views/grades.html',

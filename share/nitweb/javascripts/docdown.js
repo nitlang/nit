@@ -18,6 +18,16 @@
 	angular
 		.module('docdown', ['model', 'ngSanitize'])
 
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('docdown', {
+					url: '/docdown',
+					templateUrl: 'views/docdown.html',
+					controller: 'DocdownCtrl',
+					controllerAs: 'docdownCtrl'
+				})
+		})
+
 		.controller('DocdownCtrl', ['$sce', '$scope', '$location', 'DocDown', function($sce, $scope, $location, DocDown) {
 
 			this.updateSnippet = function() {
