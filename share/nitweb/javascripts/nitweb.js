@@ -33,12 +33,6 @@
 				controller: 'UserCtrl',
 				controllerAs: 'userCtrl'
 			})
-			.state('grades', {
-				url: '/grades',
-				templateUrl: 'views/grades.html',
-				controller: 'GradesCtrl',
-				controllerAs: 'gradesCtrl'
-			})
 			.state('login', {
 				url: '/login',
 				controller : function(){

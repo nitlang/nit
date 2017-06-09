@@ -18,6 +18,16 @@
 	angular
 		.module('grades', ['ngSanitize', 'model'])
 
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('grades', {
+					url: '/grades',
+					templateUrl: 'views/grades.html',
+					controller: 'GradesCtrl',
+					controllerAs: 'gradesCtrl'
+				})
+		})
+
 		.controller('GradesCtrl', ['Feedback', '$scope', function(Feedback, $scope) {
 
 			this.loadMostRated = function() {
