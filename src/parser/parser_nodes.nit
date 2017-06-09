@@ -1392,6 +1392,9 @@ class AMethPropdef
 	# The `init` keyword, if any
 	var n_kwinit: nullable TKwinit = null is writable
 
+	# The `isa` keyword, if any
+	var n_kwisa: nullable TKwisa = null is writable
+
 	# The `new` keyword, if any
 	var n_kwnew: nullable TKwnew = null is writable
 
