@@ -18,7 +18,7 @@
 	angular
 		.module('users', ['ngSanitize', 'model'])
 
-		.controller('UserCtrl', ['User', '$routeParams', '$scope', function(User, $routeParams, $scope) {
+		.controller('UserCtrl', ['User', '$scope', function(User, $scope) {
 			this.loadUser = function() {
 				User.loadUser(
 					function(data) {

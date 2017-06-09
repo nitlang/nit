@@ -22,7 +22,7 @@
 			$anchorScroll.yOffset = 80;
 		}])
 
-		.controller('IndexCtrl', ['Catalog', '$routeParams', '$sce', '$scope', '$location', '$anchorScroll', function(Catalog, $routeParams, $sce, $scope, $location, $anchorScroll) {
+		.controller('IndexCtrl', ['Catalog', '$sce', '$scope', '$location', '$anchorScroll', function(Catalog, $sce, $scope, $location, $anchorScroll) {
 			this.loadHighlighted = function() {
 				Catalog.loadHightlighted(
 					function(data) {

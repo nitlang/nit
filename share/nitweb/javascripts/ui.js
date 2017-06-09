@@ -18,7 +18,7 @@
 	angular
 		.module('ui', [ 'model' ])
 
-		.controller('SearchCtrl', function(Model, $routeParams, $scope, $location, $document) {
+		.controller('SearchCtrl', function(Model, $scope, $location, $document) {
 
 			$scope.query = '';
 

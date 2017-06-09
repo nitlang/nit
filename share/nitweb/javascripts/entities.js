@@ -18,11 +18,11 @@
 	angular
 		.module('entities', ['ngSanitize', 'ui', 'model'])
 
-		.controller('EntityCtrl', ['Model', 'Metrics', 'Feedback', '$routeParams', '$scope', '$sce', function(Model, Metrics, Feedback, $routeParams, $scope, $sce) {
-			$scope.entityId = $routeParams.id;
+		.controller('EntityCtrl', ['Model', 'Metrics', 'Feedback', '$stateParams', '$scope', '$sce', function(Model, Metrics, Feedback, $stateParams, $scope, $sce) {
+			$scope.entityId = $stateParams.id;
 
 			this.loadEntityLinearization = function() {
-				Model.loadEntityLinearization($routeParams.id,
+				Model.loadEntityLinearization($stateParams.id,
 					function(data) {
 						$scope.linearization = data;
 					}, function(err) {
@@ -31,7 +31,7 @@
 			};
 
 			this.loadEntityDefs = function() {
-				Model.loadEntityDefs($routeParams.id,
+				Model.loadEntityDefs($stateParams.id,
 					function(data) {
 						$scope.defs = data;
 					}, function(err) {
@@ -40,7 +40,7 @@
 			};
 
 			this.loadEntityCode = function() {
-				Model.loadEntityCode($routeParams.id,
+				Model.loadEntityCode($stateParams.id,
 					function(data) {
 						$scope.code = data;
 					}, function(err) {
@@ -49,7 +49,7 @@
 			};
 
 			this.loadEntityGraph = function(e) {
-				Model.loadEntityGraph($routeParams.id,
+				Model.loadEntityGraph($stateParams.id,
 					function(data) {
 						$scope.graph = $sce.trustAsHtml(data);
 					}, function(err) {
@@ -58,7 +58,7 @@
 			};
 
 			this.loadStructuralMetrics = function() {
-				Metrics.loadStructuralMetrics($routeParams.id,
+				Metrics.loadStructuralMetrics($stateParams.id,
 					function(data) {
 						$scope.metrics = data;
 					}, function(message, status) {
@@ -66,7 +66,7 @@
 					});
 			};
 
-			Model.loadEntity($routeParams.id,
+			Model.loadEntity($stateParams.id,
 				function(data) {
 					$scope.mentity = data;
 				}, function(message, status) {

@@ -18,7 +18,7 @@
 	angular
 		.module('docdown', ['model', 'ngSanitize'])
 
-		.controller('DocdownCtrl', ['$routeParams', '$sce', '$scope', '$location', 'DocDown', function($routeParams, $sce, $scope, $location, DocDown) {
+		.controller('DocdownCtrl', ['$sce', '$scope', '$location', 'DocDown', function($sce, $scope, $location, DocDown) {
 
 			this.updateSnippet = function() {
 				this.updateLink();
