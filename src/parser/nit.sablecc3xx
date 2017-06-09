@@ -298,17 +298,17 @@ propdefn {-> propdef}
 	= propdef n1 {-> propdef.propdef}
 	;
 propdef~toplevel {-> propdef}
-	= {meth} [doc]:nd redef visibility kwmeth qmethid signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
-	| {nobody} [doc]:nd redef visibility kwmeth qmethid signature annotation_withend_nonull {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, qmethid.methid, signature.signature, annotation_withend_nonull.annotations, Null, Null, Null, Null, Null)}
-!toplevel| {intern_new} [doc]:nd redef visibility kwnew qmethid? signature annotation_withend_nonull {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, kwnew, qmethid.methid, signature, annotation_withend_nonull.annotations, Null, Null, Null, Null, Null)}
-!toplevel| {new} [doc]:nd redef visibility kwnew qmethid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, kwnew, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
-	| {extern_implicit} [doc]:nd redef visibility kwmeth qmethid signature annotation_noend? extern_calls extern_code_block {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, qmethid.methid, signature.signature, annotation_noend.annotations, extern_calls, extern_code_block, Null, Null, Null)}
+	= {meth} [doc]:nd redef visibility kwmeth qmethid signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
+	| {nobody} [doc]:nd redef visibility kwmeth qmethid signature annotation_withend_nonull {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, Null, qmethid.methid, signature.signature, annotation_withend_nonull.annotations, Null, Null, Null, Null, Null)}
+!toplevel| {intern_new} [doc]:nd redef visibility kwnew qmethid? signature annotation_withend_nonull {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, Null, kwnew, qmethid.methid, signature, annotation_withend_nonull.annotations, Null, Null, Null, Null, Null)}
+!toplevel| {new} [doc]:nd redef visibility kwnew qmethid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, Null, kwnew, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
+	| {extern_implicit} [doc]:nd redef visibility kwmeth qmethid signature annotation_noend? extern_calls extern_code_block {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, Null, qmethid.methid, signature.signature, annotation_noend.annotations, extern_calls, extern_code_block, Null, Null, Null)}
 !toplevel| {var3} [doc]:nd redef visibility kwvar id typing_o annotation_withend {-> New propdef.attr(doc.doc, redef.kwredef, visibility, kwvar, id, typing_o.type, Null, Null, annotation_withend.annotations, Null, Null, Null)}
 !toplevel| {var4} [doc]:nd redef visibility kwvar id typing_o assign [n2]:no expr annotation_withend {-> New propdef.attr(doc.doc, redef.kwredef, visibility, kwvar, id, typing_o.type, assign, expr.expr, annotation_withend.annotations, Null, Null, Null)}
 !toplevel| {var5} [doc]:nd redef visibility kwvar id typing_o annotation_noend? kwdo stmtso kwend? {-> New propdef.attr(doc.doc, redef.kwredef, visibility, kwvar, id, typing_o.type, Null, Null, annotation_noend.annotations, kwdo, stmtso.expr, kwend)}
-!toplevel| {init} [doc]:nd redef visibility kwinit qmethid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, kwinit, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
+!toplevel| {init} [doc]:nd redef visibility kwinit qmethid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, kwinit, Null, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
 !toplevel| {type} [doc]:nd redef visibility kwtype qclassid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, qclassid, typing.type, annotation_withend.annotations)}
-!toplevel| {extern_init_implicit} [doc]:nd redef visibility kwnew qmethid? signature annotation_noend? extern_calls extern_code_block {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, kwnew, qmethid.methid, signature, annotation_noend.annotations, extern_calls, extern_code_block, Null, Null, Null)}
+!toplevel| {extern_init_implicit} [doc]:nd redef visibility kwnew qmethid? signature annotation_noend? extern_calls extern_code_block {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, Null, kwnew, qmethid.methid, signature, annotation_noend.annotations, extern_calls, extern_code_block, Null, Null, Null)}
 !toplevel| {annot} line_annotation_forclass {-> line_annotation_forclass.propdef}
 !toplevel| {super} superclass {-> superclass.propdef}
 	;
@@ -918,7 +918,7 @@ formaldef = [id]:classid type? annotations?;
 propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? assign? expr? annotations? kwdo? [block]:expr? kwend?
 	| {main_meth} kwredef? [block]:expr?
 	| {type} doc? kwredef? visibility kwtype [qid]:qclassid type annotations?
-	| {meth} doc? kwredef? visibility kwmeth? kwinit? kwnew? methid? signature annotations? extern_calls? extern_code_block? kwdo? [block]:expr? kwend?
+	| {meth} doc? kwredef? visibility kwmeth? kwinit? kwisa? kwnew? methid? signature annotations? extern_calls? extern_code_block? kwdo? [block]:expr? kwend?
 	| {super} doc? kwredef? visibility kwsuper type annotations?
 	| {annot} doc? kwredef? visibility? atid opar? [args]:expr* cpar? annotations?
 	;
