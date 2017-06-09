@@ -732,6 +732,35 @@ redef class AExternClasskind
 		v.enter_visit(_n_kwclass)
 	end
 end
+redef class ASubsetClasskind
+	init init_asubsetclasskind (
+		n_kwsubset: nullable TKwsubset
+	)
+	do
+		_n_kwsubset = n_kwsubset.as(not null)
+		n_kwsubset.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_kwsubset == old_child then
+			n_kwsubset = new_child.as(TKwsubset)
+			return
+		end
+	end
+
+	redef fun n_kwsubset=(node)
+	do
+		_n_kwsubset = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_kwsubset)
+	end
+end
 redef class AFormaldef
 	init init_aformaldef (
 		n_id: nullable TClassid,
@@ -1115,6 +1144,7 @@ redef class AMethPropdef
 		n_visibility: nullable AVisibility,
 		n_kwmeth: nullable TKwmeth,
 		n_kwinit: nullable TKwinit,
+		n_kwisa: nullable TKwisa,
 		n_kwnew: nullable TKwnew,
 		n_methid: nullable AMethid,
 		n_signature: nullable ASignature,
@@ -1136,6 +1166,8 @@ redef class AMethPropdef
 		if n_kwmeth != null then n_kwmeth.parent = self
 		_n_kwinit = n_kwinit
 		if n_kwinit != null then n_kwinit.parent = self
+		_n_kwisa = n_kwisa
+		if n_kwisa != null then n_kwisa.parent = self
 		_n_kwnew = n_kwnew
 		if n_kwnew != null then n_kwnew.parent = self
 		_n_methid = n_methid
@@ -1176,6 +1208,10 @@ redef class AMethPropdef
 		end
 		if _n_kwinit == old_child then
 			n_kwinit = new_child.as(nullable TKwinit)
+			return
+		end
+		if _n_kwisa == old_child then
+			n_kwisa = new_child.as(nullable TKwisa)
 			return
 		end
 		if _n_kwnew == old_child then
@@ -1241,6 +1277,11 @@ redef class AMethPropdef
 		_n_kwinit = node
 		if node != null then node.parent = self
 	end
+	redef fun n_kwisa=(node)
+	do
+		_n_kwisa = node
+		if node != null then node.parent = self
+	end
 	redef fun n_kwnew=(node)
 	do
 		_n_kwnew = node
@@ -1295,6 +1336,7 @@ redef class AMethPropdef
 		v.enter_visit(_n_visibility)
 		v.enter_visit(_n_kwmeth)
 		v.enter_visit(_n_kwinit)
+		v.enter_visit(_n_kwisa)
 		v.enter_visit(_n_kwnew)
 		v.enter_visit(_n_methid)
 		v.enter_visit(_n_signature)
