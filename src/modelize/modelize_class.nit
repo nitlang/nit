@@ -160,6 +160,8 @@ redef class ModelBuilder
 			return
 		end
 
+		var is_intro = (mclass.intro_mmodule == mmodule)
+
 		var bound_mtype = build_a_bound_mtype(nmodule, nclassdef)
 		if bound_mtype == null then return
 		var mclassdef = new MClassDef(mmodule, bound_mtype, nclassdef.location)
@@ -172,12 +174,12 @@ redef class ModelBuilder
 				var mdoc = ndoc.to_mdoc
 				mclassdef.mdoc = mdoc
 				mdoc.original_mentity = mclassdef
-			else if mclassdef.is_intro and mclass.visibility >= public_visibility then
+			else if is_intro and mclass.visibility >= public_visibility then
 				advice(nclassdef, "missing-doc", "Documentation warning: Undocumented public class `{mclass}`")
 			end
 		end
 
-		if mclassdef.is_intro then
+		if is_intro then
 			self.toolcontext.info("{mclassdef} introduces new {mclass.kind} {mclass.full_name}", 3)
 		else
 			self.toolcontext.info("{mclassdef} refines {mclass.kind} {mclass.full_name}", 3)
