@@ -161,6 +161,7 @@ redef class ModelBuilder
 		end
 
 		var is_intro = (mclass.intro_mmodule == mmodule)
+		var supertypes = collect_supertypes(nmodule, nclassdef, is_intro)
 
 		var bound_mtype = build_a_bound_mtype(nmodule, nclassdef)
 		if bound_mtype == null then return
@@ -183,6 +184,11 @@ redef class ModelBuilder
 			self.toolcontext.info("{mclassdef} introduces new {mclass.kind} {mclass.full_name}", 3)
 		else
 			self.toolcontext.info("{mclassdef} refines {mclass.kind} {mclass.full_name}", 3)
+		end
+
+		mclassdef.set_supertypes(supertypes)
+		if not supertypes.is_empty then
+			self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
 		end
 	end
 
@@ -245,21 +251,6 @@ redef class ModelBuilder
 		end
 
 		return mclass.get_mtype(bounds)
-	end
-
-	# Visit the AST and set the super-types of the `MClassDef` objects
-	private fun build_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
-	do
-		var mmodule = nmodule.mmodule
-		if mmodule == null then return
-		var mclass = nclassdef.mclass
-		if mclass == null then return
-		var mclassdef = nclassdef.mclassdef
-		if mclassdef == null then return
-
-		var supertypes = collect_supertypes(nmodule, nclassdef, mclassdef.is_intro)
-		mclassdef.set_supertypes(supertypes)
-		if not supertypes.is_empty then self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
 	end
 
 	# List the supertypes specified or implied by `nclassdef`.
@@ -379,11 +370,6 @@ redef class ModelBuilder
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
-		# Create inheritance on all classdefs
-		for nclassdef in nmodule.n_classdefs do
-			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
-		end
-
 		# Create the mclassdef hierarchy
 		for mclassdef in mmodule.mclassdefs do
 			mclassdef.add_in_hierarchy
@@ -419,7 +405,9 @@ redef class ModelBuilder
 				# check declared super types
 				for nsc in nclassdef.n_superclasses do
 					var ntype = nsc.n_type
-					if ntype.mtype != null then
+					# Don’t check `ntype` if we already failed to build the
+					# `MType` or the anchor.
+					if ntype.mtype != null and anchor != null then
 						var mtype = resolve_mtype3(mmodule, mclass, anchor, ntype)
 						if mtype == null then return # Forward error
 					end
