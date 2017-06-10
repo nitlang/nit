@@ -96,6 +96,22 @@ abstract class Texture
 
 	# Offset of the bottom border on `root` from 0.0 to 1.0
 	fun offset_bottom: Float do return 1.0
+
+	# Should this texture be drawn pixelated when magnified? otherwise it is interpolated
+	#
+	# This setting affects all the textures based on the same pixel data, or `root`.
+	#
+	# Must be set after a successful call to `load`.
+	fun pixelated=(pixelated: Bool)
+	do
+		if root.gl_texture == -1 then return
+
+		# TODO do not modify `root` by using *sampler objects* in glesv3
+		glBindTexture(gl_TEXTURE_2D, root.gl_texture)
+
+		var param = if pixelated then gl_NEAREST else gl_LINEAR
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
+	end
 end
 
 # Colorful small texture of 32x32 pixels by default
@@ -226,18 +242,6 @@ class RootTexture
 		load_from_pixels(cpixels.native_array, size, size, gl_RGB)
 
 		cpixels.destroy
-	end
-
-	# Set whether this texture should be pixelated when drawn, otherwise it is interpolated
-	fun pixelated=(pixelated: Bool)
-	do
-		# TODO this service could be made available in `Texture` when using
-		# the kind of texture wrapper of gles v2 or maybe 3
-
-		glBindTexture(gl_TEXTURE_2D, gl_texture)
-
-		var param = if pixelated then gl_NEAREST else gl_LINEAR
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
 	end
 
 	# Has this resource been deleted?
