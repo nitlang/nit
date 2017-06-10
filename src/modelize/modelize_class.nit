@@ -169,6 +169,7 @@ redef class ModelBuilder
 		nclassdef.mclassdef = mclassdef
 		self.mclassdef2nclassdef[mclassdef] = nclassdef
 
+		# Add the documentation (if available).
 		if nclassdef isa AStdClassdef then
 			var ndoc = nclassdef.n_doc
 			if ndoc != null then
