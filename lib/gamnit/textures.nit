@@ -113,6 +113,64 @@ class CheckerTexture
 	end
 end
 
+# Custom texture with pixel values filled programmatically
+#
+# At creation, the texture is composed of `width` by `height` (rounded down)
+# transparent pixels. The pixels value can be set using `[]=`.
+#
+# ~~~
+# # Build a texture with 4 colors
+# var tex = new CustomTexture(2.0, 2.0)
+# tex[0, 0] = [1.0, 0.0, 0.0] # Red
+# tex[0, 1] = [0.0, 1.0, 0.0] # Green
+# tex[1, 0] = [0.0, 0.0, 1.0] # Blue
+# tex[1, 1] = [1.0, 1.0, 1.0, 0.5] # Transparent white
+# tex.load
+# ~~~
+class CustomTexture
+	super RootTexture
+
+	redef var width
+	redef var height
+
+	private var cpixels = new CByteArray(4*width.to_i*height.to_i) is lazy
+
+	# Set the `color` of the pixel at `x`, `y` (from the top-left corner)
+	#
+	# The argument `color` should be an array of up to 4 floats (RGBA).
+	# If `color` has less than 4 items, the missing items are replaced by 1.0.
+	#
+	# Require: `not loaded and x < width.to_i and y < height.to_i`
+	fun []=(x, y: Int, color: Array[Float])
+	do
+		assert not loaded else print_error "{class_name}::[]= already loaded"
+		assert x < width.to_i and y < height.to_i else print_error "{class_name}::[] out of bounds"
+
+		# Simple conversion from [0.0..1.0] to [0..255]
+		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
+		while bytes.length < 4 do bytes.add 255u8
+
+		var offset = 4*(x + y*width.to_i)
+		for i in [0..4[ do cpixels[offset+i] = bytes[i]
+	end
+
+	redef fun load(force)
+	do
+		if loaded then return
+
+		# Round down the desired dimension
+		var width = width.to_i
+		var height = height.to_i
+		self.width = width.to_f
+		self.height = height.to_f
+
+		load_from_pixels(cpixels.native_array, width, height, gl_RGBA)
+
+		cpixels.destroy
+		loaded = true
+	end
+end
+
 # Texture with its own pixels
 class RootTexture
 	super Texture
