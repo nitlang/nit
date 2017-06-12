@@ -516,6 +516,52 @@ class FloatField
 	end
 end
 
+# Check if a field is a Bool
+#
+# ~~~
+# var validator = new ObjectValidator
+# validator.add new BoolField("field", required=false)
+# assert validator.validate("""{}""")
+# assert validator.validate("""{ "field": true }""")
+# assert validator.validate("""{ "field": false }""")
+# assert not validator.validate("""{ "field": "foo" }""")
+#
+# validator = new ObjectValidator
+# validator.add new BoolField("field")
+# assert not validator.validate("""{}""")
+# assert validator.validate("""{ "field": true }""")
+# assert validator.validate("""{ "field": false }""")
+# assert not validator.validate("""{ "field": "foo" }""")
+# ~~~
+#
+# No type conversion is applied on the input value:
+# ~~~
+# assert not validator.validate("""{ "field": "true" }""")
+# assert not validator.validate("""{ "field": 1 }""")
+# assert not validator.validate("""{ "field": [true] }""")
+# ~~~
+class BoolField
+	super RequiredField
+
+	redef fun validate_field(v, obj) do
+		if not super then return false
+		var val = obj.get_or_null(field)
+		if val == null then
+			if required == null or required == true then
+				v.validation.add_error(field, "Expected Bool got `null`")
+				return false
+			else
+				return true
+			end
+		end
+		if not val isa Bool then
+			v.validation.add_error(field, "Expected Bool got `{val.class_name}`")
+			return false
+		end
+		return true
+	end
+end
+
 # Check that a field is a JsonObject
 #
 # ~~~
