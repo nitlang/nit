@@ -50,6 +50,13 @@ redef class Model
 	#
 	# Each classdef is associated with its super-classdefs in regard to
 	# its module of definition.
+	#
+	# ~~~
+	# var m = new ModelDiamond
+	# assert     m.mclassdef_hierarchy.has_edge(m.mclassdef_b, m.mclassdef_a)
+	# assert not m.mclassdef_hierarchy.has_edge(m.mclassdef_a, m.mclassdef_b)
+	# assert not m.mclassdef_hierarchy.has_edge(m.mclassdef_b, m.mclassdef_c)
+	# ~~~
 	var mclassdef_hierarchy = new POSet[MClassDef]
 
 	# Class-type hierarchy restricted to the introduction.
@@ -81,6 +88,12 @@ redef class Model
 	# (instead of an empty array)
 	#
 	# Visibility or modules are not considered
+	#
+	# ~~~
+	# var m = new ModelStandalone
+	# assert m.get_mclasses_by_name("Object") == [m.mclass_o]
+	# assert m.get_mclasses_by_name("Fail") == null
+	# ~~~
 	fun get_mclasses_by_name(name: String): nullable Array[MClass]
 	do
 		return mclasses_by_name.get_or_null(name)
@@ -2602,3 +2615,70 @@ fun interface_kind: MClassKind do return once new MClassKind("interface", false)
 fun enum_kind: MClassKind do return once new MClassKind("enum", false)
 # The class kind `extern`
 fun extern_kind: MClassKind do return once new MClassKind("extern class", false)
+
+# A standalone pre-constructed model used to test various model-related methods.
+#
+# When instantiated, a standalone model is already filled with entities that are exposed as attributes.
+class ModelStandalone
+	super Model
+
+	redef var location = new Location.opaque_file("ModelStandalone")
+
+	# The first module
+	var mmodule0 = new MModule(self, null, "module0", location)
+
+	# The root Object class
+	var mclass_o = new MClass(mmodule0, "Object", location, null, interface_kind, public_visibility)
+
+	# The introduction of `mclass_o`
+	var mclassdef_o = new MClassDef(mmodule0, mclass_o.mclass_type, location)
+end
+
+# A standalone model with the common class diamond-hierarchy ABCD
+class ModelDiamond
+	super ModelStandalone
+
+	# A, a simple subclass of Object
+	var mclass_a = new MClass(mmodule0, "A", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_a`
+	var mclassdef_a: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_a.mclass_type, location)
+		res.set_supertypes([mclass_o.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+
+	# B, a subclass of A (`mclass_a`)
+	var mclass_b = new MClass(mmodule0, "B", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_b`
+	var mclassdef_b: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_b.mclass_type, location)
+		res.set_supertypes([mclass_a.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+
+	# C, another subclass of A (`mclass_a`)
+	var mclass_c = new MClass(mmodule0, "C", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_c`
+	var mclassdef_c: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_c.mclass_type, location)
+		res.set_supertypes([mclass_a.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+
+	# D, a multiple subclass of B (`mclass_b`) and C (`mclass_c`)
+	var mclass_d = new MClass(mmodule0, "D", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_d`
+	var mclassdef_d: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_d.mclass_type, location)
+		res.set_supertypes([mclass_b.mclass_type, mclass_c.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+end
