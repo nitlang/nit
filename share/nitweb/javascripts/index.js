@@ -16,69 +16,129 @@
 
 (function() {
 	angular
-		.module('index', ['model', 'ngSanitize'])
+		.module('index', [])
 
-		.run(['$anchorScroll', function($anchorScroll) {
-			$anchorScroll.yOffset = 80;
-		}])
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('catalog', {
+					url: '/',
+					templateUrl: 'views/catalog/index.html',
+					controller: 'CatalogCtrl',
+					controllerAs: 'vm',
+					abstract: true
+				})
+				.state('catalog.highlighted', {
+					url: '',
+					templateUrl: 'views/catalog/highlighted.html',
+					controller: 'CatalogHighlightedCtrl',
+					controllerAs: 'vm'
+				})
+				.state('catalog.required', {
+					url: 'required',
+					templateUrl: 'views/catalog/most_required.html',
+					controller: 'CatalogRequiredCtrl',
+					controllerAs: 'vm'
+				})
+				.state('catalog.tags', {
+					url: 'tags',
+					templateUrl: 'views/catalog/by_tags.html',
+					controller: 'CatalogTagsCtrl',
+					controllerAs: 'vm'
+				})
+		})
 
-		.controller('IndexCtrl', ['Catalog', '$routeParams', '$sce', '$scope', '$location', '$anchorScroll', function(Catalog, $routeParams, $sce, $scope, $location, $anchorScroll) {
-			this.loadHighlighted = function() {
-				Catalog.loadHightlighted(
-					function(data) {
-						$scope.highlighted = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+		.factory('Catalog', [ '$http', function($http) {
+			return {
+				loadHightlighted: function(cb, cbErr) {
+					$http.get('/api/catalog/highlighted')
+						.success(cb)
+						.error(cbErr);
+				},
 
-			this.loadMostRequired = function() {
-				Catalog.loadMostRequired(
-					function(data) {
-						$scope.required = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+				loadMostRequired: function(cb, cbErr) {
+					$http.get('/api/catalog/required')
+						.success(cb)
+						.error(cbErr);
+				},
 
-			this.loadByTags = function() {
-				Catalog.loadByTags(
-					function(data) {
-						$scope.bytags = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+				loadByTags: function(cb, cbErr) {
+					$http.get('/api/catalog/bytags')
+						.success(cb)
+						.error(cbErr);
+				},
 
-			this.loadStats = function() {
-				Catalog.loadStats(
-					function(data) {
-						$scope.stats = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
+				loadStats: function(cb, cbErr) {
+					$http.get('/api/catalog/stats')
+						.success(cb)
+						.error(cbErr);
+				},
 
-			this.loadContributors = function() {
-				Catalog.loadContributors(
-					function(data) {
-						$scope.contributors = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
-
-
-			this.scrollTo = function(hash) {
-				$anchorScroll(hash);
+				loadContributors: function(cb, cbErr) {
+					$http.get('/api/catalog/contributors')
+						.success(cb)
+						.error(cbErr);
+				},
 			}
-
-			this.loadHighlighted();
-			this.loadStats();
-			this.loadContributors();
 		}])
 
-		.directive('contributorList', ['Model', function(Model) {
+		.controller('CatalogCtrl', function(Catalog) {
+			var vm = this;
+
+			Catalog.loadContributors(
+				function(data) {
+					vm.contributors = data;
+				}, function(err) {
+					vm.error = err;
+				});
+
+			Catalog.loadStats(
+				function(data) {
+					vm.stats = data;
+				}, function(err) {
+					vm.error = err;
+				});
+		})
+
+		.controller('CatalogHighlightedCtrl', function(Catalog) {
+			var vm = this;
+
+			Catalog.loadHightlighted(
+				function(data) {
+					vm.highlighted = data;
+				}, function(err) {
+					vm.error = err;
+				});
+		})
+
+		.controller('CatalogRequiredCtrl', function(Catalog) {
+			var vm = this;
+
+			Catalog.loadMostRequired(
+				function(data) {
+					vm.required = data;
+				}, function(err) {
+					vm.error = err;
+				});
+		})
+
+		.controller('CatalogTagsCtrl', function(Catalog, $anchorScroll, $location) {
+			var vm = this;
+
+			Catalog.loadByTags(
+				function(data) {
+					vm.bytags = data;
+				}, function(err) {
+					vm.error = err;
+				});
+
+
+			vm.scrollTo = function(hash) {
+				$location.hash(hash);
+				$anchorScroll();
+			}
+		})
+
+		.directive('contributorList', function(Model) {
 			return {
 				restrict: 'E',
 				scope: {
@@ -88,5 +148,5 @@
 				},
 				templateUrl: '/directives/contributor-list.html'
 			};
-		}])
+		})
 })();

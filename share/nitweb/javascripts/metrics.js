@@ -16,7 +16,17 @@
 
 (function() {
 	angular
-		.module('metrics', ['model'])
+		.module('metrics', [])
+
+		.factory('Metrics', [ '$http', function($http) {
+			return {
+				loadStructuralMetrics: function(id, cb, cbErr) {
+					$http.get('/api/metrics/structural/' + id)
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
 
 		.directive('metricsList', function() {
 			return {
@@ -66,17 +76,20 @@
 								"content": [
 									{
 										"label": "Concrete classes",
-										"value": $scope.chartMetrics.mnbcc.avg,
+										"value": $scope.chartMetrics.mnbcc?
+											$scope.chartMetrics.mnbcc.avg : 0,
 										"color": "#228835"
 									},
 									{
 										"label": "Abstract classes",
-										"value": $scope.chartMetrics.mnbac.avg,
+										"value": $scope.chartMetrics.mnbac?
+											$scope.chartMetrics.mnbac.avg : 0,
 										"color": "#103EB8"
 									},
 									{
 										"label": "Interfaces",
-										"value": $scope.chartMetrics.mnbic.avg,
+										"value": $scope.chartMetrics.mnbic?
+											$scope.chartMetrics.mnbic.avg : 0,
 										"color": "#e65314"
 									}
 								]

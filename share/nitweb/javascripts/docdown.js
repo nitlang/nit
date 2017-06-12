@@ -16,9 +16,29 @@
 
 (function() {
 	angular
-		.module('docdown', ['model', 'ngSanitize'])
+		.module('docdown', ['ngSanitize'])
 
-		.controller('DocdownCtrl', ['$routeParams', '$sce', '$scope', '$location', 'DocDown', function($routeParams, $sce, $scope, $location, DocDown) {
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('docdown', {
+					url: '/docdown',
+					templateUrl: 'views/docdown.html',
+					controller: 'DocdownCtrl',
+					controllerAs: 'docdownCtrl'
+				})
+		})
+
+		.factory('DocDown', [ '$http', function($http) {
+			return {
+				postMarkdown: function(md, cb, cbErr) {
+					$http.post('/api/docdown', md)
+						.success(cb)
+						.error(cbErr);
+				}
+			}
+		}])
+
+		.controller('DocdownCtrl', ['$sce', '$scope', '$location', 'DocDown', function($sce, $scope, $location, DocDown) {
 
 			this.updateSnippet = function() {
 				this.updateLink();

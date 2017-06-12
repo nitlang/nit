@@ -16,7 +16,58 @@
 
 (function() {
 	angular
-		.module('grades', ['ngSanitize', 'model'])
+		.module('grades', ['ngSanitize'])
+
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('grades', {
+					url: '/grades',
+					templateUrl: 'views/grades.html',
+					controller: 'GradesCtrl',
+					controllerAs: 'gradesCtrl'
+				})
+		})
+
+		.factory('Feedback', [ '$http', function($http) {
+			return {
+				loadEntityStars: function(id, cb, cbErr) {
+					$http.get('/api/feedback/stars/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+				loadEntityStarsDimension: function(id, dimension, cb, cbErr) {
+					$http.get('/api/feedback/stars/' + id + '/dimension/' + dimension)
+						.success(cb)
+						.error(cbErr);
+				},
+				postEntityStarDimension: function(id, dimension, rating, cb, cbErr) {
+					$http.post('/api/feedback/stars/' + id + '/dimension/' + dimension,
+						{rating: rating})
+						.success(cb)
+						.error(cbErr);
+				},
+				loadMostRated: function(cb, cbErr) {
+					$http.get('/api/feedback/grades/most')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadBestRated: function(cb, cbErr) {
+					$http.get('/api/feedback/grades/best')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadWorstRated: function(cb, cbErr) {
+					$http.get('/api/feedback/grades/worst')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadUsersRatings: function(cb, cbErr) {
+					$http.get('/api/feedback/grades/users')
+						.success(cb)
+						.error(cbErr);
+				},
+			}
+		}])
 
 		.controller('GradesCtrl', ['Feedback', '$scope', function(Feedback, $scope) {
 

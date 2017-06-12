@@ -16,63 +16,209 @@
 
 (function() {
 	angular
-		.module('entities', ['ngSanitize', 'ui', 'model'])
+		.module('entities', ['ngSanitize', 'ui'])
 
-		.controller('EntityCtrl', ['Model', 'Metrics', 'Feedback', '$routeParams', '$scope', '$sce', function(Model, Metrics, Feedback, $routeParams, $scope, $sce) {
-			$scope.entityId = $routeParams.id;
+		/* Router */
 
-			this.loadEntityLinearization = function() {
-				Model.loadEntityLinearization($routeParams.id,
-					function(data) {
-						$scope.linearization = data;
-					}, function(err) {
-						$scope.error = err;
-					});
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('doc', {
+					url: '/doc/:id',
+					templateUrl: 'views/doc/index.html',
+					resolve: {
+						mentity: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntity($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity) {
+						this.mentity = mentity;
+					},
+					controllerAs: 'vm',
+					abstract: true
+				})
+				.state('doc.entity', {
+					url: '',
+					templateUrl: 'views/doc/entity.html',
+					controller: function(mentity) {
+						this.mentity = mentity;
+					},
+					controllerAs: 'vm',
+					abstract: true
+				})
+				.state('doc.entity.doc', {
+					url: '',
+					templateUrl: 'views/doc/doc.html',
+					controller: function(mentity) {
+						this.mentity = mentity;
+					},
+					controllerAs: 'vm',
+				})
+				.state('doc.entity.graph', {
+					url: '/graph',
+					templateUrl: 'views/doc/graph.html',
+					resolve: {
+						graph: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityGraph($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(graph, $sce) {
+						this.graph = $sce.trustAsHtml(graph);
+					},
+					controllerAs: 'vm',
+				})
+				.state('doc.entity.metrics', {
+					url: '/metrics',
+					templateUrl: 'views/doc/metrics.html',
+					resolve: {
+						metrics: function(Metrics, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Metrics.loadStructuralMetrics($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, metrics) {
+						this.mentity = mentity;
+						this.metrics = metrics;
+					},
+					controllerAs: 'vm',
+				})
+				.state('doc.entity.code', {
+					url: '/code',
+					templateUrl: 'views/doc/code.html',
+					resolve: {
+						code: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityCode($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, code) {
+						this.mentity = mentity;
+						this.code = code;
+					},
+					controllerAs: 'vm',
+				})
+				.state('doc.entity.defs', {
+					url: '/defs',
+					templateUrl: 'views/doc/defs.html',
+					resolve: {
+						defs: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityDefs($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, defs) {
+						this.mentity = mentity;
+						this.defs = defs;
+					},
+					controllerAs: 'vm',
+				})
+				.state('doc.entity.lin', {
+					url: '/lin',
+					templateUrl: 'views/doc/lin.html',
+					resolve: {
+						lin: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityLinearization($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, lin, $scope, $location, $anchorScroll) {
+						var vm = this;
+						vm.focus = $location.hash() ?
+							$location.hash() : mentity.intro.full_name;
+						vm.mentity = mentity;
+						vm.linearization = lin;
+						setTimeout(function() {
+							$anchorScroll();
+						}, 400);
+						$scope.$watch(function () {
+							return $location.hash();
+						}, function (value) {
+							vm.focus = $location.hash() ?
+								$location.hash() : mentity.intro.full_name;
+							$anchorScroll();
+						});
+					},
+					controllerAs: 'vm'
+				})
+				.state('doc.entity.all', {
+					url: '/all',
+					templateUrl: 'views/doc/all.html',
+					controller: function(mentity) {
+						this.mentity = mentity;
+					},
+					controllerAs: 'vm',
+				})
+		})
+
+		/* Model */
+
+		.factory('Model', [ '$http', function($http) {
+			return {
+
+				loadEntity: function(id, cb, cbErr) {
+					$http.get('/api/entity/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityLinearization: function(id, cb, cbErr) {
+					$http.get('/api/linearization/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityDefs: function(id, cb, cbErr) {
+					$http.get('/api/defs/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityCode: function(id, cb, cbErr) {
+					$http.get('/api/code/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityGraph: function(id, cb, cbErr) {
+					$http.get('/api/graph/inheritance/' + id + '?cdepth=3')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				search: function(q, n, cb, cbErr) {
+					$http.get('/api/search?q=' + q + '&n=' + n)
+						.success(cb)
+						.error(cbErr);
+				}
 			};
-
-			this.loadEntityDefs = function() {
-				Model.loadEntityDefs($routeParams.id,
-					function(data) {
-						$scope.defs = data;
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
-
-			this.loadEntityCode = function() {
-				Model.loadEntityCode($routeParams.id,
-					function(data) {
-						$scope.code = data;
-					}, function(err) {
-						$scope.code = err;
-					});
-			};
-
-			this.loadEntityGraph = function(e) {
-				Model.loadEntityGraph($routeParams.id,
-					function(data) {
-						$scope.graph = $sce.trustAsHtml(data);
-					}, function(err) {
-						$scope.error = err;
-					});
-			};
-
-			this.loadStructuralMetrics = function() {
-				Metrics.loadStructuralMetrics($routeParams.id,
-					function(data) {
-						$scope.metrics = data;
-					}, function(message, status) {
-						$scope.error = {message: message, status: status};
-					});
-			};
-
-			Model.loadEntity($routeParams.id,
-				function(data) {
-					$scope.mentity = data;
-				}, function(message, status) {
-					$scope.error = {message: message, status: status};
-				});
 		}])
+
+		/* Directives */
 
 		.directive('entityLink', function() {
 			return {
@@ -236,7 +382,7 @@
 					$scope.codeId = 'code_' + $scope.definition.full_name.replace(/[^a-zA-Z0-9]/g, '_');
 
 					$scope.isActive = function() {
-						return $scope.focus.full_name == $scope.definition.full_name;
+						return $scope.focus == $scope.definition.full_name;
 					}
 
 					$scope.loadCardCode = function() {
@@ -259,7 +405,9 @@
 						}
 					};
 
-					if($scope.isActive()) $scope.loadCardCode();
+					$scope.$watch('focus', function() {
+						if($scope.isActive()) $scope.loadCardCode();
+					});
 				}
 			};
 		}])

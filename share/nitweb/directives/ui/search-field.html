@@ -1,0 +1,8 @@
+<form style='margin-bottom: 0'>
+	<div class='form-group has-icon'>
+		<input placeholder='Search...' type='text' class='form-control search-input'
+			ng-model-options='{ debounce: 300 }' ng-model='vm.query'
+			ng-keydown='update($event)' ng-change='vm.search()'>
+		<span class='glyphicon glyphicon-search form-control-icon text-muted'></span>
+	</div>
+</form>

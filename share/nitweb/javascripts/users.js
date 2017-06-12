@@ -16,9 +16,47 @@
 
 (function() {
 	angular
-		.module('users', ['ngSanitize', 'model'])
+		.module('users', ['ngSanitize'])
 
-		.controller('UserCtrl', ['User', '$routeParams', '$scope', function(User, $routeParams, $scope) {
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('user', {
+					url: '/user',
+					templateUrl: 'views/user.html',
+					controller: 'UserCtrl',
+					controllerAs: 'userCtrl'
+				})
+				.state('login', {
+					url: '/login',
+					controller : function(){
+						window.location.replace('/login');
+					},
+					template : "<div></div>"
+				})
+				.state('logout', {
+					controller : function(){
+						window.location.replace('/logout');
+					},
+					template : "<div></div>"
+				})
+		})
+
+		.factory('User', [ '$http', function($http) {
+			return {
+				loadUser: function(cb, cbErr) {
+					$http.get('/api/user')
+						.success(cb)
+						.error(cbErr);
+				},
+				loadUserStars: function(cb, cbErr) {
+					$http.get('/api/feedback/user/stars')
+						.success(cb)
+						.error(cbErr);
+				},
+			}
+		}])
+
+		.controller('UserCtrl', ['User', '$scope', function(User, $scope) {
 			this.loadUser = function() {
 				User.loadUser(
 					function(data) {

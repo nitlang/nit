@@ -15,57 +15,23 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'angular-loading-bar', 'entities', 'docdown', 'index', 'metrics', 'users', 'grades'])
+	angular.module('nitweb', ['ui.router', 'ngSanitize', 'angular-loading-bar', 'index', 'entities', 'docdown', 'metrics', 'users', 'grades'])
+
 	.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeSpinner = false;
 	}])
-	.config(function($routeProvider, $locationProvider) {
-		$routeProvider
-			.when('/', {
-				templateUrl: 'views/index.html',
-				controller: 'IndexCtrl',
-				controllerAs: 'indexCtrl'
-			})
-			.when('/user', {
-				templateUrl: 'views/user.html',
-				controller: 'UserCtrl',
-				controllerAs: 'userCtrl'
-			})
-			.when('/docdown', {
-				templateUrl: 'views/docdown.html',
-				controller: 'DocdownCtrl',
-				controllerAs: 'docdownCtrl'
-			})
-			.when('/grades', {
-				templateUrl: 'views/grades.html',
-				controller: 'GradesCtrl',
-				controllerAs: 'gradesCtrl'
-			})
-			.when('/login', {
-				controller : function(){
-					window.location.replace('/login');
-				},
-			    template : "<div></div>"
-			})
-			.when('/logout', {
-				controller : function(){
-					window.location.replace('/logout');
-				},
-			    template : "<div></div>"
-			})
-			.when('/doc/:id', {
-				templateUrl: 'views/doc.html',
-				controller: 'EntityCtrl',
-				controllerAs: 'entityCtrl',
-				reloadOnSearch: false
-			})
-			.otherwise({
+
+	.run(['$anchorScroll', function($anchorScroll) {
+		$anchorScroll.yOffset = 80;
+	}])
+
+	.config(function($stateProvider, $locationProvider) {
+		$stateProvider
+			.state({
+				name: '404',
+				url: '*path',
 				templateUrl: 'views/error.html'
-			});
+			})
 		$locationProvider.html5Mode(true);
 	})
-
-	.filter('encodeURI', function() {
-		return encodeURIComponent;
-	});
 })();
