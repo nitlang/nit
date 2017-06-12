@@ -66,7 +66,7 @@ graph.add_edge(b3, nend)
 
 if args.is_empty then
 	print graph.to_dot
-	graph.show
+	# graph.show
 else
 	graph.to_dot.write_to_file args.first
 end
