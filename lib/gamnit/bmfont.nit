@@ -40,7 +40,7 @@ class BMFont
 	var face: Text
 
 	# Size of the source true type font
-	var size: Int
+	var size: Float
 
 	# Is the font bold?
 	var bold: Bool
@@ -67,16 +67,16 @@ class BMFont
 	# Information common to all characters
 
 	# Distance in pixels between each line of text
-	var line_height: Int
+	var line_height: Float
 
 	# Pixels from the top of the line to the base of the characters
-	var base: Int
+	var base: Float
 
 	# Width of the texture
-	var scale_w: Int
+	var scale_w: Float
 
 	# Height of the texture
-	var scale_h: Int
+	var scale_h: Float
 
 	# Textures
 	var pages = new Map[String, TextureAsset]
@@ -85,7 +85,7 @@ class BMFont
 	var chars = new Map[Char, BMFontChar]
 
 	# Distance between certain characters
-	var kernings = new HashMap2[Char, Char, Int]
+	var kernings = new HashMap2[Char, Char, Float]
 
 	redef fun to_s do return "<{class_name} {face} at {size} pt, "+
 	                         "{pages.length} pages, {chars.length} chars>"
@@ -111,25 +111,25 @@ end
 class BMFontChar
 
 	# Subtexture left coordinate
-	var x: Int
+	var x: Float
 
 	# Subtexture top coordinate
-	var y: Int
+	var y: Float
 
 	# Subtexture width
-	var width: Int
+	var width: Float
 
 	# Subtexture height
-	var height: Int
+	var height: Float
 
 	# Drawing offset on X
-	var xoffset: Int
+	var xoffset: Float
 
 	# Drawing offset on Y
-	var yoffset: Int
+	var yoffset: Float
 
 	# Cursor advance after drawing this character
-	var xadvance: Int
+	var xadvance: Float
 
 	# Full texture contaning this character and others
 	var page: TextureAsset
@@ -174,9 +174,9 @@ redef class Text
 	# """
 	#
 	# var fnt = desc.parse_bmfont("dir_in_assets").value
-	# assert fnt.to_s == "<BMFont arial at 72 pt, 1 pages, 3 chars>"
-	# assert fnt.line_height == 80
-	# assert fnt.kernings['A', 'C'] == -1
+	# assert fnt.to_s == "<BMFont arial at 72.0 pt, 1 pages, 3 chars>"
+	# assert fnt.line_height == 80.0
+	# assert fnt.kernings['A', 'C'] == -1.0
 	# assert fnt.chars['A'].page.path == "dir_in_assets/arial.png"
 	# ~~~
 	fun parse_bmfont(dir: String): MaybeError[BMFont, Error]
@@ -208,16 +208,16 @@ redef class Text
 
 		var fnt = new BMFont(
 			info_map["face"],
-			info_map["size"].to_i,
+			info_map["size"].to_f,
 			info_map["bold"] == "1",
 			info_map["italic"] == "1",
 			info_map["unicode"] == "1",
 			info_map["padding"],
 			info_map["spacing"],
-			common_map["lineHeight"].to_i,
-			common_map["base"].to_i,
-			common_map["scaleW"].to_i,
-			common_map["scaleH"].to_i
+			common_map["lineHeight"].to_f,
+			common_map["base"].to_f,
+			common_map["scaleW"].to_f,
+			common_map["scaleH"].to_f
 		)
 
 		# Pages / pixel data files
@@ -238,10 +238,10 @@ redef class Text
 			var id = attributes["id"].to_i.code_point
 
 			var c = new BMFontChar(
-				attributes["x"].to_i, attributes["y"].to_i,
-				attributes["width"].to_i, attributes["height"].to_i,
-				attributes["xoffset"].to_i, attributes["yoffset"].to_i,
-				attributes["xadvance"].to_i,
+				attributes["x"].to_f, attributes["y"].to_f,
+				attributes["width"].to_f, attributes["height"].to_f,
+				attributes["xoffset"].to_f, attributes["yoffset"].to_f,
+				attributes["xadvance"].to_f,
 				fnt.pages[attributes["page"]])
 
 			fnt.chars[id] = c
@@ -256,7 +256,7 @@ redef class Text
 				var attributes = item.attributes_to_map
 				var first = attributes["first"].to_i.code_point
 				var second = attributes["second"].to_i.code_point
-				var amount = attributes["amount"].to_i
+				var amount = attributes["amount"].to_f
 				fnt.kernings[first, second] = amount
 			end
 		end
@@ -355,7 +355,7 @@ class BMFontAsset
 		var dx = 0.0
 		var dy = 0.0
 
-		var line_height = desc.line_height.to_f
+		var line_height = desc.line_height
 
 		var prev_char = null
 		for c in text do
@@ -378,9 +378,9 @@ class BMFontAsset
 				continue
 			else if c.is_whitespace then
 				var advance = if desc.chars.keys.has(' ') then
-						desc.chars[' '].xadvance.to_f
+						desc.chars[' '].xadvance
 					else if desc.chars.keys.has('f') then
-						desc.chars['f'].xadvance.to_f
+						desc.chars['f'].xadvance
 					else 16.0
 				dx += advance
 				prev_char = null
@@ -395,15 +395,15 @@ class BMFontAsset
 			end
 
 			var char_info = desc.chars[c]
-			var advance = char_info.xadvance.to_f
+			var advance = char_info.xadvance
 
 			var kerning = 0.0
 			if prev_char != null then
-				kerning = (desc.kernings[prev_char, c] or else 0).to_f
+				kerning = desc.kernings[prev_char, c] or else 0.0
 			end
 
-			var x = dx + char_info.width.to_f/2.0  + char_info.xoffset.to_f + kerning
-			var y = dy - char_info.height.to_f/2.0 - char_info.yoffset.to_f
+			var x = dx + char_info.width/2.0  + char_info.xoffset + kerning
+			var y = dy - char_info.height/2.0 - char_info.yoffset
 			var pos = text_sprites.anchor.offset(x, y, 0.0)
 			text_sprites.sprites.add new Sprite(char_info.subtexture, pos)
 
