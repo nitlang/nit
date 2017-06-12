@@ -34,8 +34,4 @@
 			})
 		$locationProvider.html5Mode(true);
 	})
-
-	.filter('encodeURI', function() {
-		return encodeURIComponent;
-	});
 })();

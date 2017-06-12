@@ -77,14 +77,5 @@
 		</li>
 	</ul>
 	<br>
-	<div ng-switch='vm.mentity.class_name'>
-		<div ng-switch-when='MClassDef'>
-			<div ng-include src='"/views/classdef.html"' />
-		</div>
-		<div ng-switch-when='MMethodDef' ng-switch-when='MAttributeDef' ng-switch-when='MVirtualTypeDef'>
-			<div ng-include src='"/views/propdef.html"' />
-		</div>
-
-		<ui-view />
-	</div>
+	<ui-view />
 </div>

@@ -146,11 +146,24 @@
 							return d.promise;
 						}
 					},
-					controller: function(mentity, lin) {
-						this.mentity = mentity;
-						this.lin = lin;
+					controller: function(mentity, lin, $scope, $location, $anchorScroll) {
+						var vm = this;
+						vm.focus = $location.hash() ?
+							$location.hash() : mentity.intro.full_name;
+						vm.mentity = mentity;
+						vm.linearization = lin;
+						setTimeout(function() {
+							$anchorScroll();
+						}, 400);
+						$scope.$watch(function () {
+							return $location.hash();
+						}, function (value) {
+							vm.focus = $location.hash() ?
+								$location.hash() : mentity.intro.full_name;
+							$anchorScroll();
+						});
 					},
-					controllerAs: 'vm',
+					controllerAs: 'vm'
 				})
 				.state('doc.entity.all', {
 					url: '/all',
@@ -369,7 +382,7 @@
 					$scope.codeId = 'code_' + $scope.definition.full_name.replace(/[^a-zA-Z0-9]/g, '_');
 
 					$scope.isActive = function() {
-						return $scope.focus.full_name == $scope.definition.full_name;
+						return $scope.focus == $scope.definition.full_name;
 					}
 
 					$scope.loadCardCode = function() {
@@ -392,7 +405,9 @@
 						}
 					};
 
-					if($scope.isActive()) $scope.loadCardCode();
+					$scope.$watch('focus', function() {
+						if($scope.isActive()) $scope.loadCardCode();
+					});
 				}
 			};
 		}])
