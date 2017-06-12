@@ -24,8 +24,16 @@ import mclasses_metrics
 
 redef class ToolContext
 
+	# --rta
+	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
+
 	# RTA related metrics phase
 	var rta_metrics_phase: Phase = new RTAMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_rta)
+	end
 end
 
 private class RTAMetricsPhase

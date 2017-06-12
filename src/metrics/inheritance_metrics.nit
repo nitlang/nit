@@ -23,8 +23,16 @@ import mclasses_metrics
 
 redef class ToolContext
 
+	# --inheritance
+	var opt_inheritance = new OptionBool("Compute metrics about inheritance usage", "--inheritance")
+
 	# Inheritance related metrics phase
 	var inheritance_metrics_phase: Phase = new InheritanceMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_inheritance)
+	end
 end
 
 # Extract metrics about inheritance from model.

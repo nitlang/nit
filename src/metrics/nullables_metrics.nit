@@ -23,8 +23,16 @@ import semantize
 
 redef class ToolContext
 
+	# --nullables
+	var opt_nullables = new OptionBool("Compute metrics on nullables send", "--nullables")
+
 	# Nullable types related metrics
 	var nullables_metrics_phase: Phase = new NullablesMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_nullables)
+	end
 end
 
 private class NullablesMetricsPhase
@@ -43,7 +51,7 @@ private class NullablesMetricsPhase
 		var model_view = model.private_view
 
 		var metrics = new MetricSet
-		metrics.register(new CNBA(mainmodule, model_view))
+		metrics.register(new CNBAPA(mainmodule, model_view))
 		metrics.register(new CNBNA(mainmodule, model_view))
 
 		var mclasses = new HashSet[MClass]

@@ -20,7 +20,16 @@ module tables_metrics
 import metrics_base
 
 redef class ToolContext
+
+	# --tables
+	var opt_tables = new OptionBool("Compute tables metrics", "--tables")
+
 	var tables_metrics_phase: Phase = new TablesMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_tables)
+	end
 end
 
 private class TablesMetricsPhase

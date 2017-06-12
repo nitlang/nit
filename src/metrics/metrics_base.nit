@@ -28,60 +28,26 @@ redef class ToolContext
 	# --all
 	var opt_all = new OptionBool("Compute all metrics", "--all")
 
-	# --mmodules
-	var opt_mmodules = new OptionBool("Compute metrics about mmodules", "--mmodules")
-	# --mclassses
-	var opt_mclasses = new OptionBool("Compute metrics about mclasses", "--mclasses")
-	# --mendel
-	var opt_mendel = new OptionBool("Compute mendel metrics", "--mendel")
-	# --inheritance
-	var opt_inheritance = new OptionBool("Compute metrics about inheritance usage", "--inheritance")
-	# --genericity
-	var opt_refinement = new OptionBool("Compute metrics about refinement usage", "--refinement")
-	# --self
-	var opt_self = new OptionBool("Compute metrics about the usage of explicit and implicit self", "--self")
-	# --ast
-	var opt_ast = new OptionBool("Compute metrics about the usage of nodes and identifiers in the AST", "--ast")
-	# --nullables
-	var opt_nullables = new OptionBool("Compute metrics on nullables send", "--nullables")
-	# --static-types
-	var opt_static_types = new OptionBool("Compute explicit static types metrics", "--static-types")
-	# --tables
-	var opt_tables = new OptionBool("Compute tables metrics", "--tables")
-	# --rta
-	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
 	# --generate-csv
 	var opt_csv = new OptionBool("Also export metrics in CSV format", "--csv")
-	# --generate_hyperdoc
-	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
-	# --poset
-	var opt_poset = new OptionBool("Complete metrics on posets", "--poset")
+
 	# --no-colors
 	var opt_nocolors = new OptionBool("Disable colors in console outputs", "--no-colors")
+
 	# --dir
 	var opt_dir = new OptionString("Directory where some statistics files are generated", "-d", "--dir")
+
+	# --generate_hyperdoc
+	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
 
 	# Output directory for metrics files.
 	var output_dir: String = "."
 
-	redef init
-	do
+	redef init do
 		super
 		self.option_context.add_option(opt_all)
-		self.option_context.add_option(opt_mmodules)
-		self.option_context.add_option(opt_mclasses)
-		self.option_context.add_option(opt_mendel)
-		self.option_context.add_option(opt_inheritance)
-		self.option_context.add_option(opt_refinement)
-		self.option_context.add_option(opt_self)
-		self.option_context.add_option(opt_ast)
-		self.option_context.add_option(opt_nullables)
-		self.option_context.add_option(opt_static_types)
-		self.option_context.add_option(opt_tables)
-		self.option_context.add_option(opt_rta)
-		self.option_context.add_option(opt_csv)
 		self.option_context.add_option(opt_generate_hyperdoc)
-		self.option_context.add_option(opt_poset)
+		self.option_context.add_option(opt_csv)
 		self.option_context.add_option(opt_dir)
 		self.option_context.add_option(opt_nocolors)
 	end
@@ -361,6 +327,47 @@ class FloatMetric
 			print "{"\t" * indent}  sum: {sum}".light_gray
 		else
 			print "{"\t" * indent}  sum: {sum}"
+		end
+	end
+end
+
+# A Metric that collects string data
+#
+# Used to label things (like rows in CSV files output)
+class StringMetric
+	super Metric
+
+	redef type VAL: String
+
+	# `StringMetric` uses a Counter to store values in intern.
+	protected var values_cache = new HashMap[ELM, VAL]
+
+	redef fun values do return values_cache
+
+	redef fun clear do values_cache.clear
+
+	redef fun sum do return ""
+	redef fun max do return 0
+	redef fun min do return 0
+	redef fun avg do return 0.0
+	redef fun std_dev do return 0.0
+
+	redef fun to_console(indent, colors) do
+		if values.is_empty then
+			if colors then
+				print "{"\t" * indent}{name}: {desc} -- nothing".green
+			else
+				print "{"\t" * indent}{name}: {desc} -- nothing"
+			end
+			return
+		end
+		var vals = new HashSet[VAL].from(values.values)
+		if colors then
+			print "{"\t" * indent}{name}: {desc}".green
+			print "{"\t" * indent}  values: {vals.join(", ")}".light_gray
+		else
+			print "{"\t" * indent}{name}: {desc}"
+			print "{"\t" * indent}  values: {vals.join(", ")}"
 		end
 	end
 end

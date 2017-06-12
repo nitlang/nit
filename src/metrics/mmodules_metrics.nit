@@ -22,8 +22,16 @@ import model::model_collect
 
 redef class ToolContext
 
+	# --mmodules
+	var opt_mmodules = new OptionBool("Compute metrics about mmodules", "--mmodules")
+
 	# MModules related metrics phase
 	var mmodules_metrics_phase: Phase = new MModulesMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_mmodules)
+	end
 end
 
 # Extract metrics about modules from the model.
@@ -47,11 +55,19 @@ private class MModulesMetricsPhase
 		metrics.register(new MNOC(mainmodule, model_view))
 		metrics.register(new MNOD(mainmodule, model_view))
 		metrics.register(new MDIT(mainmodule, model_view))
-		metrics.register(new MNBI(mainmodule, model_view))
-		metrics.register(new MNBR(mainmodule, model_view))
-		metrics.register(new MNBCC(mainmodule, model_view))
-		metrics.register(new MNBAC(mainmodule, model_view))
 		metrics.register(new MNBIC(mainmodule, model_view))
+		metrics.register(new MNBRC(mainmodule, model_view))
+		metrics.register(new MNBICC(mainmodule, model_view))
+		metrics.register(new MNBIAC(mainmodule, model_view))
+		metrics.register(new MNBII(mainmodule, model_view))
+		metrics.register(new MNBIE(mainmodule, model_view))
+		metrics.register(new MNBHP(mainmodule, model_view))
+		metrics.register(new MNBIP(mainmodule, model_view))
+		metrics.register(new MNBRP(mainmodule, model_view))
+		metrics.register(new MNBIPA(mainmodule, model_view))
+		metrics.register(new MNBIPI(mainmodule, model_view))
+		metrics.register(new MNBIPM(mainmodule, model_view))
+		metrics.register(new MNBIPVT(mainmodule, model_view))
 
 		var mmodules = new HashSet[MModule]
 		for mpackage in model.mpackages do
@@ -96,8 +112,8 @@ end
 class MNOA
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mnoa"
-	redef fun desc do return "number of ancestor modules"
+	redef fun name do return "MNOA"
+	redef fun desc do return "Module Number Of Ancestors"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -110,8 +126,8 @@ end
 class MNOP
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mnop"
-	redef fun desc do return "number of parent modules"
+	redef fun name do return "MNOP"
+	redef fun desc do return "Module Number Of Parents"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -124,8 +140,8 @@ end
 class MNOC
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mnoc"
-	redef fun desc do return "number of child modules"
+	redef fun name do return "MNOC"
+	redef fun desc do return "Module Number Of Children"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -138,8 +154,8 @@ end
 class MNOD
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mnod"
-	redef fun desc do return "number of descendant modules"
+	redef fun name do return "MNOD"
+	redef fun desc do return "Module Number Of Descendants"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -152,8 +168,8 @@ end
 class MDIT
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mdit"
-	redef fun desc do return "depth in module tree"
+	redef fun name do return "MDIR"
+	redef fun desc do return "Module Depth In Tree"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -162,129 +178,211 @@ class MDIT
 	end
 end
 
-# Module Metric: Number of Accessible Definitions (of all kind)
-#
-# count all mclasses accessible by the module
-class MNBD
-	super MModuleMetric
-	super IntMetric
-	redef fun name do return "mnbd"
-	redef fun desc do return "number of definition accessibles in module"
-
-	redef fun collect(mmodules) do
-		for mmodule in mmodules do
-			values[mmodule] = 0
-			for a in mmodule.collect_ancestors(model_view) do
-				values[mmodule] += a.intro_mclasses.length
-			end
-		end
-	end
-end
-
-# Module Metric: Number of Introduction (of all kind)
-#
-# count all mclasses introduced by the module
-class MNBI
-	super MModuleMetric
-	super IntMetric
-	redef fun name do return "mnbi"
-	redef fun desc do return "number of introduction in module"
-
-	redef fun collect(mmodules) do
-		for mmodule in mmodules do
-			values[mmodule] = mmodule.intro_mclasses.length
-		end
-	end
-end
-
-# Module Metric: Number of Refinement
-#
-# count all mclasses refined in the module
-class MNBR
-	super MModuleMetric
-	super IntMetric
-	redef fun name do return "mnbr"
-	redef fun desc do return "number of refinement in module"
-
-	redef fun collect(mmodules) do
-		for mmodule in mmodules do
-			var value = 0
-			for mclassdef in mmodule.mclassdefs do
-				if not mclassdef.is_intro then value += 1
-			end
-			values[mmodule] = value
-		end
-	end
-end
-
-# Module Metric: Number of Concrete Class in module (intro + redef)
-class MNBCC
-	super MModuleMetric
-	super IntMetric
-	redef fun name do return "mnbcc"
-	redef fun desc do return "number of concrete class in module (intro + redef)"
-
-	redef fun collect(mmodules) do
-		for mmodule in mmodules do
-			var value = 0
-			for mclassdef in mmodule.mclassdefs do
-				if mclassdef.mclass.kind == concrete_kind then value += 1
-			end
-			values[mmodule] = value
-		end
-	end
-end
-
-# Module Metric: Number of Abstract Class in module (intro + redef)
-class MNBAC
-	super MModuleMetric
-	super IntMetric
-	redef fun name do return "mnbac"
-	redef fun desc do return "number of abstract class in module (intro + redef)"
-
-	redef fun collect(mmodules) do
-		for mmodule in mmodules do
-			var value = 0
-			for mclassdef in mmodule.mclassdefs do
-				if mclassdef.mclass.kind == abstract_kind then value += 1
-			end
-			values[mmodule] = value
-		end
-	end
-end
-
-# Module Metric: Number of Interface in module (intro + redef)
+# Module Metric: Number of Introduced Classes (of all kind)
 class MNBIC
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mnbic"
-	redef fun desc do return "number of interface in module (intro + redef)"
+	redef fun name do return "MNBIC"
+	redef fun desc do return "Number of Introduced Classes"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_intro_mclasses(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Refined Classes
+class MNBRC
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "MNBRC"
+	redef fun desc do return "Number of Refined Classes"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_redef_mclasses(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Concrete Classes
+class MNBICC
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "MNBICC"
+	redef fun desc do return "Number of Introduced Concrete Classes"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var value = 0
-			for mclassdef in mmodule.mclassdefs do
-				if mclassdef.mclass.kind == interface_kind then value += 1
+			for mclass in mmodule.collect_intro_mclasses(model_view) do
+				if mclass.kind == concrete_kind then value += 1
 			end
 			values[mmodule] = value
 		end
 	end
 end
 
-# Module Metric: Number of Enum in module (intro + redef)
-class MNBEC
+# Module Metric: Number of Introduced Abstract Classes
+class MNBIAC
 	super MModuleMetric
 	super IntMetric
-	redef fun name do return "mnbec"
-	redef fun desc do return "number of enum in module (intro + redef)"
+	redef fun name do return "MNBIAC"
+	redef fun desc do return "Number of Introduced Abstract Classes"
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var value = 0
-			for mclassdef in mmodule.mclassdefs do
-				if mclassdef.mclass.kind == enum_kind then value += 1
+			for mclass in mmodule.collect_intro_mclasses(model_view) do
+				if mclass.kind == abstract_kind then value += 1
 			end
 			values[mmodule] = value
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Interfaces
+class MNBII
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "MNBII"
+	redef fun desc do return "Number of Introduced Interfaces"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclass in mmodule.collect_intro_mclasses(model_view) do
+				if mclass.kind == interface_kind then value += 1
+			end
+			values[mmodule] = value
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Enums
+class MNBIE
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "MNBIE"
+	redef fun desc do return "Number of Introduced Enums"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclass in mmodule.collect_intro_mclasses(model_view) do
+				if mclass.kind == enum_kind then value += 1
+			end
+			values[mmodule] = value
+		end
+	end
+end
+
+# Module Metric: Number of Inherited Properties (of all kind)
+class MNBHP
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBHP"
+	redef fun desc do return "Number of Inherited Properties (of all kind)"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var sum = 0
+			for ancestor in mmodule.collect_ancestors(model_view) do
+				sum += ancestor.collect_intro_mproperties(model_view).length
+			end
+			values[mmodule] = sum
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Properties (of all kind)
+class MNBIP
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBIP"
+	redef fun desc do return "Number of Introduced Properties (of all kind)"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_intro_mproperties(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Redefined Properties (of all kind)
+class MNBRP
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBRP"
+	redef fun desc do return "Number of Redefined Properties (of all kind)"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_redef_mproperties(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Attributes
+class MNBIPA
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBIPA"
+	redef fun desc do return "Number of Introduced Property Attribute"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_intro_attributes(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Inits
+class MNBIPI
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBIPI"
+	redef fun desc do return "Number of Introduced Property Inits"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_intro_inits(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Methods
+class MNBIPM
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBIPM"
+	redef fun desc do return "Number of Introduced Property Methods"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_intro_methods(model_view).length
+		end
+	end
+end
+
+# Module Metric: Number of Introduced Virtual Types
+class MNBIPVT
+	super MModuleMetric
+	super IntMetric
+
+	redef fun name do return "MNBIPVT"
+	redef fun desc do return "Number of Introduced Property Virtual Types"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.collect_intro_vts(model_view).length
 		end
 	end
 end

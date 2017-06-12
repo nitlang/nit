@@ -13,6 +13,12 @@ nitmetrics [*options*]... FILE...
 ### `--all`
 Compute all metrics.
 
+### `--model`
+Compute metrics about the model.
+
+### `--mpackages`
+Compute metrics about mpackages.
+
 ### `--mmodules`
 Compute metrics about mmodules.
 
@@ -27,6 +33,9 @@ Compute metrics about inheritance usage.
 
 ### `--refinement`
 Compute metrics about refinement usage.
+
+### `--doc`
+Compute metrics about documentation.
 
 ### `--self`
 Compute metrics about the usage of explicit and implicit self.

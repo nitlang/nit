@@ -245,79 +245,103 @@ generating module_hierarchy.dot
 
  ## package base_simple3
   `- group base_simple3>
-	cnoa: number of ancestor classes
+	CNOA: Class Number Of Ancestors
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-	cnop: number of parent classes
+	CNOP: Class Number Of Parents
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-	cnoc: number of child classes
+	CNOC: Class Number Of Children
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.268
 	  sum: 6
-	cnod: number of descendant classes
+	CNOD: Class Number Of Descendants
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.268
 	  sum: 6
-	cdit: depth in class tree
+	CDIT: Class Depth in Inheritance Tree
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-	cnbp: number of accessible properties (inherited + local)
+	CNBAP: Number of Accessible Properties (inherited + local)
 	  avg: 3.0
 	  max: C (7)
 	  min: Object (1)
 	  std: 2.36
 	  sum: 24
-	cnba: number of accessible attributes (inherited + local)
+	CNBAPA: Number of Accessible Attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
 	  min: Object (0)
 	  std: 0.845
 	  sum: 3
-	cnbi: number of accessible constructors (inherited + local)
+	CNBAPI: Number of Accessible Inits (inherited + local)
 	  avg: 1.0
 	  max: B (2)
 	  min: Object (1)
 	  std: 0.378
 	  sum: 8
-	cnbm: number of accessible methods (inherited + local)
+	CNBAPM: Number of Accessible Methods (inherited + local)
 	  avg: 3.0
 	  max: B (5)
 	  min: Object (1)
 	  std: 1.773
 	  sum: 21
-	cnbv: number of accessible virtual types (inherited + local)
+	CNBAPVT: Number of Accessible Virtual Types (inherited + local)
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
 	  sum: 0
-	cnbip: number of introduced properties
+	CNBIP: Number of Introduced Properties
 	  avg: 2.0
 	  max: C (6)
 	  min: Bool (0)
 	  std: 2.268
 	  sum: 18
-	cnbrp: number of redefined properties
+	CNBIPA: Number of Introduced Attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	CNBIPI: Number of Introduced Inits (inherited + local)
+	  avg: 0.0
+	  max: Object (1)
+	  min: Bool (0)
+	  std: 0.535
+	  sum: 2
+	CNBIPM: Number of Introduced Methods (inherited + local)
+	  avg: 2.0
+	  max: B (4)
+	  min: Bool (0)
+	  std: 1.648
+	  sum: 15
+	CNBIPVT: Number of Introduced Virtual Types (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
+	CNBRP: Number of Redefined Properties
 	  avg: 0.0
 	  max: A (1)
 	  min: Object (0)
 	  std: 0.535
 	  sum: 2
-	cnbhp: number of inherited properties
+	CNBHP: Number of inHerited Properties
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
@@ -325,79 +349,103 @@ generating module_hierarchy.dot
 	  sum: 6
 
  ## global metrics
-	cnoa: number of ancestor classes
+	CNOA: Class Number Of Ancestors
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-	cnop: number of parent classes
+	CNOP: Class Number Of Parents
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-	cnoc: number of child classes
+	CNOC: Class Number Of Children
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.268
 	  sum: 6
-	cnod: number of descendant classes
+	CNOD: Class Number Of Descendants
 	  avg: 0.0
 	  max: Object (6)
 	  min: Bool (0)
 	  std: 2.268
 	  sum: 6
-	cdit: depth in class tree
+	CDIT: Class Depth in Inheritance Tree
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-	cnbp: number of accessible properties (inherited + local)
+	CNBAP: Number of Accessible Properties (inherited + local)
 	  avg: 3.0
 	  max: C (7)
 	  min: Object (1)
 	  std: 2.36
 	  sum: 24
-	cnba: number of accessible attributes (inherited + local)
+	CNBAPA: Number of Accessible Attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
 	  min: Object (0)
 	  std: 0.845
 	  sum: 3
-	cnbi: number of accessible constructors (inherited + local)
+	CNBAPI: Number of Accessible Inits (inherited + local)
 	  avg: 1.0
 	  max: B (2)
 	  min: Object (1)
 	  std: 0.378
 	  sum: 8
-	cnbm: number of accessible methods (inherited + local)
+	CNBAPM: Number of Accessible Methods (inherited + local)
 	  avg: 3.0
 	  max: B (5)
 	  min: Object (1)
 	  std: 1.773
 	  sum: 21
-	cnbv: number of accessible virtual types (inherited + local)
+	CNBAPVT: Number of Accessible Virtual Types (inherited + local)
 	  avg: 0.0
 	  max: Object (0)
 	  min: Object (0)
 	  std: 0.0
 	  sum: 0
-	cnbip: number of introduced properties
+	CNBIP: Number of Introduced Properties
 	  avg: 2.0
 	  max: C (6)
 	  min: Bool (0)
 	  std: 2.268
 	  sum: 18
-	cnbrp: number of redefined properties
+	CNBIPA: Number of Introduced Attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	CNBIPI: Number of Introduced Inits (inherited + local)
+	  avg: 0.0
+	  max: Object (1)
+	  min: Bool (0)
+	  std: 0.535
+	  sum: 2
+	CNBIPM: Number of Introduced Methods (inherited + local)
+	  avg: 2.0
+	  max: B (4)
+	  min: Bool (0)
+	  std: 1.648
+	  sum: 15
+	CNBIPVT: Number of Introduced Virtual Types (inherited + local)
+	  avg: 0.0
+	  max: Object (0)
+	  min: Object (0)
+	  std: 0.0
+	  sum: 0
+	CNBRP: Number of Redefined Properties
 	  avg: 0.0
 	  max: A (1)
 	  min: Object (0)
 	  std: 0.535
 	  sum: 2
-	cnbhp: number of inherited properties
+	CNBHP: Number of inHerited Properties
 	  avg: 0.0
 	  max: Bool (1)
 	  min: Object (0)
@@ -408,128 +456,348 @@ generating module_hierarchy.dot
 
  ## package base_simple3
   `- group base_simple3>
-	mnoa: number of ancestor modules
+	MNOA: Module Number Of Ancestors
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnop: number of parent modules
+	MNOP: Module Number Of Parents
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnoc: number of child modules
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
-	  std: 0.0
-	  sum: 1
-	mnod: number of descendant modules
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
-	  std: 0.0
-	  sum: 1
-	mdit: depth in module tree
+	MNOC: Module Number Of Children
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnbi: number of introduction in module
+	MNOD: Module Number Of Descendants
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	MDIR: Module Depth In Tree
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	MNBIC: Number of Introduced Classes
 	  avg: 7.0
 	  max: base_simple3 (7)
 	  min: base_simple3 (7)
 	  std: 0.0
 	  sum: 7
-	mnbr: number of refinement in module
+	MNBRC: Number of Refined Classes
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnbcc: number of concrete class in module (intro + redef)
+	MNBICC: Number of Introduced Concrete Classes
 	  avg: 4.0
 	  max: base_simple3 (4)
 	  min: base_simple3 (4)
 	  std: 0.0
 	  sum: 4
-	mnbac: number of abstract class in module (intro + redef)
+	MNBIAC: Number of Introduced Abstract Classes
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnbic: number of interface in module (intro + redef)
+	MNBII: Number of Introduced Interfaces
 	  avg: 1.0
 	  max: base_simple3 (1)
 	  min: base_simple3 (1)
 	  std: 0.0
 	  sum: 1
+	MNBIE: Number of Introduced Enums
+	  avg: 2.0
+	  max: base_simple3 (2)
+	  min: base_simple3 (2)
+	  std: 0.0
+	  sum: 2
+	MNBIP: Number of Introduced Properties (of all kind)
+	  avg: 18.0
+	  max: base_simple3 (18)
+	  min: base_simple3 (18)
+	  std: 0.0
+	  sum: 18
+	MNBRP: Number of Redefined Properties (of all kind)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
+	MNBIPA: Number of Introduced Property Attribute
+	  avg: 3.0
+	  max: base_simple3 (3)
+	  min: base_simple3 (3)
+	  std: 0.0
+	  sum: 3
+	MNBIPI: Number of Introduced Property Inits
+	  avg: 2.0
+	  max: base_simple3 (2)
+	  min: base_simple3 (2)
+	  std: 0.0
+	  sum: 2
+	MNBIPM: Number of Introduced Property Methods
+	  avg: 13.0
+	  max: base_simple3 (13)
+	  min: base_simple3 (13)
+	  std: 0.0
+	  sum: 13
+	MNBIPVT: Number of Introduced Property Virtual Types
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
 
  ## global metrics
-	mnoa: number of ancestor modules
+	MNOA: Module Number Of Ancestors
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnop: number of parent modules
+	MNOP: Module Number Of Parents
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnoc: number of child modules
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
-	  std: 0.0
-	  sum: 1
-	mnod: number of descendant modules
-	  avg: 1.0
-	  max: base_simple3 (1)
-	  min: base_simple3 (1)
-	  std: 0.0
-	  sum: 1
-	mdit: depth in module tree
+	MNOC: Module Number Of Children
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnbi: number of introduction in module
+	MNOD: Module Number Of Descendants
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	MDIR: Module Depth In Tree
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	MNBIC: Number of Introduced Classes
 	  avg: 7.0
 	  max: base_simple3 (7)
 	  min: base_simple3 (7)
 	  std: 0.0
 	  sum: 7
-	mnbr: number of refinement in module
+	MNBRC: Number of Refined Classes
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnbcc: number of concrete class in module (intro + redef)
+	MNBICC: Number of Introduced Concrete Classes
 	  avg: 4.0
 	  max: base_simple3 (4)
 	  min: base_simple3 (4)
 	  std: 0.0
 	  sum: 4
-	mnbac: number of abstract class in module (intro + redef)
+	MNBIAC: Number of Introduced Abstract Classes
 	  avg: 0.0
 	  max: base_simple3 (0)
 	  min: base_simple3 (0)
 	  std: 0.0
 	  sum: 0
-	mnbic: number of interface in module (intro + redef)
+	MNBII: Number of Introduced Interfaces
 	  avg: 1.0
 	  max: base_simple3 (1)
 	  min: base_simple3 (1)
 	  std: 0.0
 	  sum: 1
+	MNBIE: Number of Introduced Enums
+	  avg: 2.0
+	  max: base_simple3 (2)
+	  min: base_simple3 (2)
+	  std: 0.0
+	  sum: 2
+	MNBIP: Number of Introduced Properties (of all kind)
+	  avg: 18.0
+	  max: base_simple3 (18)
+	  min: base_simple3 (18)
+	  std: 0.0
+	  sum: 18
+	MNBRP: Number of Redefined Properties (of all kind)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
+	MNBIPA: Number of Introduced Property Attribute
+	  avg: 3.0
+	  max: base_simple3 (3)
+	  min: base_simple3 (3)
+	  std: 0.0
+	  sum: 3
+	MNBIPI: Number of Introduced Property Inits
+	  avg: 2.0
+	  max: base_simple3 (2)
+	  min: base_simple3 (2)
+	  std: 0.0
+	  sum: 2
+	MNBIPM: Number of Introduced Property Methods
+	  avg: 13.0
+	  max: base_simple3 (13)
+	  min: base_simple3 (13)
+	  std: 0.0
+	  sum: 13
+	MNBIPVT: Number of Introduced Property Virtual Types
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+
+# Model metrics
+	NBP: Number of Packages
+	  avg: 1.0
+	  max: Model (1)
+	  min: Model (1)
+	  std: 0.0
+	  sum: 1
+	NBM: Number of Modules
+	  avg: 1.0
+	  max: Model (1)
+	  min: Model (1)
+	  std: 0.0
+	  sum: 1
+	NBIC: Number of Introduced Classes
+	  avg: 7.0
+	  max: Model (7)
+	  min: Model (7)
+	  std: 0.0
+	  sum: 7
+	NBIP: Number of Introduced Properties
+	  avg: 18.0
+	  max: Model (18)
+	  min: Model (18)
+	  std: 0.0
+	  sum: 18
+
+# MPackages metrics
+	PNOA: Package Number Of Ancestors
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PNOP: Package Number Of Parents
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PNOC: Package Number Of Children
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PNOD: Package Number Of Descendants
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PDIT: Package Depth In Tree
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PNBM: Number of Modules
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
+	PNBIC: Number of Introduced Classes (of all kind)
+	  avg: 7.0
+	  max: base_simple3 (7)
+	  min: base_simple3 (7)
+	  std: 0.0
+	  sum: 7
+	PNBRC: Number of Refined Classes (of all kind)
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PNBICC: Number of Introduced Concrete Classes
+	  avg: 4.0
+	  max: base_simple3 (4)
+	  min: base_simple3 (4)
+	  std: 0.0
+	  sum: 4
+	PNBIAC: Number of Introduced Abstract Classes
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
+	PNBII: Number of Introduced Interfaces
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
+	PNBIE: Number of Introduced Enums
+	  avg: 2.0
+	  max: base_simple3 (2)
+	  min: base_simple3 (2)
+	  std: 0.0
+	  sum: 2
+	PNBIP: Number of Introduced Properties (of all kind)
+	  avg: 18.0
+	  max: base_simple3 (18)
+	  min: base_simple3 (18)
+	  std: 0.0
+	  sum: 18
+	PNBRP: Number of Redefined Properties (of all kind)
+	  avg: 1.0
+	  max: base_simple3 (1)
+	  min: base_simple3 (1)
+	  std: 0.0
+	  sum: 1
+	PNBIPA: Number of Introduced Property Attribute
+	  avg: 3.0
+	  max: base_simple3 (3)
+	  min: base_simple3 (3)
+	  std: 0.0
+	  sum: 3
+	PNBIPI: Number of Introduced Property Inits
+	  avg: 2.0
+	  max: base_simple3 (2)
+	  min: base_simple3 (2)
+	  std: 0.0
+	  sum: 2
+	PNBIPM: Number of Introduced Property Methods
+	  avg: 13.0
+	  max: base_simple3 (13)
+	  min: base_simple3 (13)
+	  std: 0.0
+	  sum: 13
+	PNBIPVT: Number of Introduced Property Virtual Types
+	  avg: 0.0
+	  max: base_simple3 (0)
+	  min: base_simple3 (0)
+	  std: 0.0
+	  sum: 0
 
 # Inheritance metrics
 
@@ -793,7 +1061,7 @@ Statistics of type usage:
 
  ## package base_simple3
   `- group base_simple3>
-	cnba: number of accessible attributes (inherited + local)
+	CNBAPA: Number of Accessible Attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
 	  min: Object (0)
@@ -803,7 +1071,7 @@ Statistics of type usage:
 	  sum: 0
 
  ## global metrics
-	cnba: number of accessible attributes (inherited + local)
+	CNBAPA: Number of Accessible Attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
 	  min: Object (0)
@@ -941,14 +1209,36 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3$Sys$bar: 1 (4.34%)
   base_simple3$Sys$foo: 1 (4.34%)
   base_simple3$C$init: 1 (4.34%)
+
+# Doc metrics
+	Kind: MEntity kind -- nothing
+	LOD: Lines of Documentation -- nothing
+	  sum: 0
+	MDPars: Number of MD Paragraphs -- nothing
+	  sum: 0
+	MDCodeBlocks: Number of MD Code Blocks -- nothing
+	  sum: 0
+	MDCodeLines: Number of lines in MD Code Blocks -- nothing
+	  sum: 0
+	MDCodeSpans: Number of MD Code Spans -- nothing
+	  sum: 0
+	MDHeadlines: Number of MD healines -- nothing
+	  sum: 0
+	MDLists: Number of MD Lists -- nothing
+	  sum: 0
+	MDLinks: Number of MD links -- nothing
+	  sum: 0
 class_hierarchy.dot
 classdef_hierarchy.dot
+doc/
 inheritance/
 mclasses/
 mendel/
 mmodules/
+model/
 model.html
 module_hierarchy.dot
+mpackages/
 nullables/
 package_hierarchy.dot
 rta/

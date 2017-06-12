@@ -18,6 +18,8 @@
 module metrics
 
 import metrics_base
+import model_metrics
+import mpackages_metrics
 import mmodules_metrics
 import mclasses_metrics
 import mendel_metrics
@@ -34,3 +36,8 @@ import poset_metrics
 import ast_metrics
 import detect_variance_constraints
 import detect_covariance
+import doc_metrics
+
+redef class ToolContext
+	redef init do super #FIXME avoid linearization conflicts
+end

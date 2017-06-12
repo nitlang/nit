@@ -21,7 +21,15 @@ import model
 import metrics_base
 
 redef class ToolContext
+	# --refinement
+	var opt_refinement = new OptionBool("Compute metrics about refinement usage", "--refinement")
+
 	var refinement_metrics_phase: Phase = new RefinementMetricsPhase(self, null)
+
+	redef init do
+		super
+		self.option_context.add_option(opt_refinement)
+	end
 end
 
 private class RefinementMetricsPhase
