@@ -56,6 +56,7 @@
 module pop_json
 
 import json
+import meta
 import pop_handlers
 import pop_validation
 
@@ -147,7 +148,7 @@ redef class Handler
 	fun deserialize_body(req: HttpRequest, res: HttpResponse): nullable BODY do
 		var body = req.body
 		var deserializer = new JsonDeserializer(body)
-		var form = deserializer.deserialize(body)
+		var form = deserializer.deserialize(body_type)
 		if not form isa BODY or deserializer.errors.not_empty then
 			res.json_error("Bad input", 400)
 			return null
@@ -159,6 +160,8 @@ redef class Handler
 	#
 	# Define it in each sub handlers depending on the kind of objects sent in request bodies.
 	type BODY: Serializable
+
+	private var body_type: String is lazy do return (new GetName[BODY]).to_s
 end
 
 redef class HttpResponse
