@@ -470,8 +470,11 @@ redef class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				var ntype = nsc.n_type
 				var mtype = ntype.mtype
-				if mtype == null then continue
-				assert mtype isa MClassType
+
+				# If the supertype is `null` or don’t refer to a class, we
+				# already raised an error.
+				if not mtype isa MClassType then continue
+
 				var sc = mtype.mclass
 				if not parents.has(sc) or sc == objectclass then
 					# Skip the warning on generated code
