@@ -356,11 +356,10 @@ class BMFontAsset
 		var dy = 0.0
 
 		var line_height = desc.line_height
+		var partial_line_skip = line_height * partial_line_mod.to_f
 
 		var prev_char = null
 		for c in text do
-
-			var partial_line_mod = 0.4
 
 			# Special characters
 			if c == '\n' then
@@ -369,11 +368,11 @@ class BMFontAsset
 				prev_char = null
 				continue
 			else if c == pld then
-				dy -= line_height * partial_line_mod.to_f
+				dy -= partial_line_skip
 				prev_char = null
 				continue
 			else if c == plu then
-				dy += line_height * partial_line_mod.to_f
+				dy += partial_line_skip
 				prev_char = null
 				continue
 			else if c.is_whitespace then
