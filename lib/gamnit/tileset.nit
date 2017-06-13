@@ -58,6 +58,8 @@ class TileSet
 end
 
 # A monospace bitmap font where glyphs are stored in a tileset
+#
+# This `Font` does not implement all settings of `TextSprites`.
 class TileSetFont
 	super TileSet
 	super Font

@@ -36,7 +36,17 @@ class TextSprites
 	# Font used to draw text
 	var font: Font
 
-	# Top left of the first character in UI coordinates
+	# Reference coordinates of this block of text
+	#
+	# When left aligned, the default at `align == 0.0`, the anchor is the
+	# left coordinate of the first character of the first line.
+	# When right aligned, at `align == 1.0`, the anchor is the right
+	# coordinate of the last character.
+	# When centered, at `align == 0.5`, the anchor is at the center.
+	#
+	# When top aligned, the default at `valign == 0.0`, the anchor is at the
+	# top of this block of text.
+	# When bottom aligned, at `valign == 1.0`, the anchor is at the bottom.
 	var anchor: Point3d[Float]
 
 	# Last set of sprites generated to display `text=`
@@ -48,7 +58,9 @@ class TextSprites
 	# `app::sprites` or a custom collection.
 	var target_sprite_set: Set[Sprite] = app.ui_sprites is lazy, writable
 
-	private var cached_text: nullable Text = ""
+	private var cached_text: nullable Text = null
+
+	private var init_complete = false
 
 	# Last text drawn
 	fun text: nullable Text do return cached_text
@@ -62,6 +74,8 @@ class TextSprites
 		if text == cached_text then return
 		cached_text = text
 
+		if not init_complete then return
+
 		# Clean up last used sprites
 		for s in sprites do if target_sprite_set.has(s) then target_sprite_set.remove s
 		sprites.clear
@@ -72,6 +86,65 @@ class TextSprites
 
 		# Register sprites to be drawn by `app.ui_camera`
 		target_sprite_set.add_all sprites
+	end
+
+	# Horizontal text alignment
+	#
+	# Use 0.0 to align left (the default), 0.5 to align in the center or
+	# 1.0 to align on the right.
+	#
+	# See: `valign`
+	var align = 0.0 is optional, writable
+
+	# Vertical text alignment
+	#
+	# Use 0.0 for top alignment (the default) where the text is under the `anchor`,
+	# 0.5 to vertically center the text on the `anchor` or
+	# or 1.0 to bottom align the text above the `anchor`.
+	#
+	# See: `align`
+	var valign = 0.0 is optional, writable
+
+	# Maximum width of each line of text
+	#
+	# The first word of each line is exempt and may overflow.
+	#
+	# The behavior when a line overflow depends on `wrap`.
+	var max_width: nullable Float is writable
+
+	# Maximum height of this block of text
+	#
+	# The first line is exempt and may overflow.
+	# Overflowing lines are cut.
+	var max_height: nullable Float is writable
+
+	# Should overflowing lines wrap to the next line?
+	#
+	# If `true`, the default, overflowing lines continue on the next line.
+	# Otherwise, lines are cut before overflowing.
+	var wrap = true is optional, writable
+
+	# Width of the currently displayed text
+	var width = 0.0
+
+	# Height of the currently displayed text
+	var height = 0.0
+
+	# Force drawing of the text sprites
+	#
+	# This method may be called after changing a setting (`align`, `wrap`, etc.)
+	# to update the displayed text.
+	fun force_redraw
+	do
+		var t = cached_text
+		cached_text = null
+		text = t
+	end
+
+	init
+	do
+		init_complete = true
+		force_redraw
 	end
 end
 
