@@ -130,12 +130,12 @@ else
 fi
 
 # Detect a working time command
-if env time --quiet -f%U true 2>/dev/null; then
-	TIME="env time --quiet -f%U"
-elif env time -f%U true 2>/dev/null; then
-	TIME="env time -f%U"
-elif env gtime -f%U true 2>/dev/null; then
-	TIME="env gtime -f%U"
+if env time --quiet -f%e true 2>/dev/null; then
+	TIME="env time --quiet -f%e"
+elif env time -f%e true 2>/dev/null; then
+	TIME="env time -f%e"
+elif env gtime -f%e true 2>/dev/null; then
+	TIME="env gtime -f%e"
 else
 	TIME=
 fi
