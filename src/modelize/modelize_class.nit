@@ -291,7 +291,7 @@ redef class ModelBuilder
 						ntype, false)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
-					error(ntype, "Error: supertypes cannot be a formal type.")
+					error(ntype, "Error: a supertype cannot be a formal type.")
 					continue
 				end
 				var superclass = mtype.mclass
