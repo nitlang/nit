@@ -24,7 +24,7 @@ module bmfont
 
 private import dom
 
-import font
+intrude import font
 
 # BMFont description, parsed with `Text::parse_bmfont` or loaded as a `BMFontAsset`
 #
@@ -86,6 +86,13 @@ class BMFont
 
 	# Distance between certain characters
 	var kernings = new HashMap2[Char, Char, Float]
+
+	# Additional distance between `prev_char` and `char`
+	fun kerning(prev_char: nullable Char, char: Char): Float
+	do
+		if prev_char == null then return 0.0
+		return kernings[prev_char, char] or else 0.0
+	end
 
 	redef fun to_s do return "<{class_name} {face} at {size} pt, "+
 	                         "{pages.length} pages, {chars.length} chars>"
@@ -354,34 +361,85 @@ class BMFontAsset
 	do
 		var dx = 0.0
 		var dy = 0.0
+		var text_width = 0.0
+
+		var max_width = text_sprites.max_width
+		var max_height = text_sprites.max_height
 
 		var line_height = desc.line_height
 		var partial_line_skip = line_height * partial_line_mod.to_f
+		var line_sprites = new Array[Sprite]
 
 		var prev_char = null
-		for c in text do
+		var i = -1
+		while i < text.length - 1 do
+			i += 1
+			var c = text[i]
 
 			# Special characters
+			var word_break = false
 			if c == '\n' then
-				dy -= line_height.to_f
-				dx = 0.0 #advance/2.0
+				justify(line_sprites, text_sprites.align, dx)
+				dy -= line_height
+				if max_height != null and max_height < -dy + line_height then break
+				dx = 0.0
 				prev_char = null
 				continue
 			else if c == pld then
 				dy -= partial_line_skip
-				prev_char = null
+				word_break = true
 				continue
 			else if c == plu then
 				dy += partial_line_skip
-				prev_char = null
+				word_break = true
 				continue
 			else if c.is_whitespace then
-				var advance = if desc.chars.keys.has(' ') then
+				var space_advance = if desc.chars.keys.has(' ') then
 						desc.chars[' '].xadvance
 					else if desc.chars.keys.has('f') then
 						desc.chars['f'].xadvance
 					else 16.0
-				dx += advance
+				dx += space_advance
+				word_break = true
+			end
+
+			# End of a word?
+			if word_break then
+				# If we care about line width, check for overflow
+				if max_width != null then
+					# Calculate the length of the next word
+					var prev_w = null
+					var word_len = 0.0
+					for wi in [i+1..text.length[ do
+						var w = text[wi]
+
+						if w == '\n' or w == pld or w == plu or w.is_whitespace then break
+						word_len += advance(prev_w, w)
+						prev_w = w
+					end
+
+					# Would the line be too long?
+					if dx + word_len > max_width then
+						if text_sprites.wrap then
+							# Wrap
+							justify(line_sprites, text_sprites.align, dx)
+							dy -= line_height
+							if max_height != null and max_height < -dy + line_height then break
+							dx = 0.0
+						else
+							# Cut short
+							justify(line_sprites, text_sprites.align, dx)
+							dy -= line_height
+							if max_height != null and max_height < -dy + line_height then break
+							dx = 0.0
+							while c != '\n' and i < text.length - 1 do
+								i += 1
+								c = text[i]
+							end
+						end
+					end
+				end
+
 				prev_char = null
 				continue
 			end
@@ -395,27 +453,52 @@ class BMFontAsset
 
 			var char_info = desc.chars[c]
 			var advance = char_info.xadvance
-
-			var kerning = 0.0
-			if prev_char != null then
-				kerning = desc.kernings[prev_char, c] or else 0.0
-			end
+			var kerning = desc.kerning(prev_char, c)
 
 			var x = dx + char_info.width/2.0  + char_info.xoffset + kerning
 			var y = dy - char_info.height/2.0 - char_info.yoffset
 			var pos = text_sprites.anchor.offset(x, y, 0.0)
-			text_sprites.sprites.add new Sprite(char_info.subtexture, pos)
+			var s = new Sprite(char_info.subtexture, pos)
+			text_sprites.sprites.add s
+			line_sprites.add s
 
 			dx += advance + kerning
 			prev_char = c
+
+			text_width = text_width.max(dx)
 		end
+
+		justify(line_sprites, text_sprites.align, dx)
+
+		# valign
+		if text_sprites.valign != 0.0 then
+			var d = (-dy+line_height) * text_sprites.valign
+			for s in text_sprites.sprites do s.center.y += d
+		end
+
+		text_sprites.width = text_width.max(dx)
+		text_sprites.height = dy + line_height
 	end
 
-	# Character replacing other charactesr missing from the font
+	# Character replacing other characters missing from the font
 	private var replacement_char: nullable Char is lazy do
 		for c in  "�?".chars do
 			if desc.chars.keys.has(c) then return c
 		end
 		return null
+	end
+
+	private fun advance(prev_char: nullable Char, char: Char): Float
+	do
+		var char_info = desc.chars[char]
+		var kerning = desc.kerning(prev_char, char)
+		return char_info.xadvance + kerning
+	end
+
+	private fun justify(line_sprites: Array[Sprite], align: Float, line_width: Float)
+	do
+		var dx = -line_width*align
+		for s in line_sprites do s.center.x += dx
+		line_sprites.clear
 	end
 end
