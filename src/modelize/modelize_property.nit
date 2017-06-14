@@ -775,17 +775,15 @@ redef class AMethPropdef
 		var amethodid = self.n_methid
 		var name_node: ANode
 		if amethodid == null then
-			if not is_init then
-				name = "main"
-				name_node = self
-			else if n_kwinit != null then
+			if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
 			else if n_kwnew != null then
 				name = "new"
 				name_node = n_kwnew
 			else
-				abort
+				name = "main"
+				name_node = self
 			end
 		else if amethodid isa AIdMethid then
 			name = amethodid.n_id.text
