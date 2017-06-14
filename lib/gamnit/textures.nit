@@ -170,6 +170,29 @@ class CustomTexture
 		for i in [0..4[ do cpixels[offset+i] = bytes[i]
 	end
 
+	# Overwrite all pixels with `color`
+	#
+	# The argument `color` should be an array of up to 4 floats (RGBA).
+	# If `color` has less than 4 items, the missing items are replaced by 1.0.
+	#
+	# Require: `not loaded`
+	fun fill(color: Array[Float])
+	do
+		assert not loaded else print_error "{class_name}::fill already loaded"
+
+		# Simple conversion from [0.0..1.0] to [0..255]
+		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
+		while bytes.length < 4 do bytes.add 255u8
+
+		var i = 0
+		for x in [0..width.to_i[ do
+			for y in [0..height.to_i[ do
+				for j in [0..4[ do cpixels[i+j] = bytes[j]
+				i += 4
+			end
+		end
+	end
+
 	redef fun load(force)
 	do
 		if loaded then return
