@@ -898,9 +898,7 @@ redef class Text
 
 	# return true if a file with this names exists
 	fun file_exists: Bool do return to_cstring.file_exists
-end
 
-redef class String
 	# The status of a file. see POSIX stat(2).
 	fun file_stat: nullable FileStat
 	do
@@ -943,14 +941,14 @@ redef class String
 		if extension == null then
 			extension = file_extension
 			if extension == null then
-				return self
+				return self.to_s
 			else extension = ".{extension}"
 		end
 
 		if has_suffix(extension) then
-			return substring(0, length - extension.length)
+			return substring(0, length - extension.length).to_s
 		end
-		return self
+		return self.to_s
 	end
 
 	# Extract the basename of a path and strip the `extension`
@@ -989,7 +987,7 @@ redef class String
 
 		if extension != null then
 			return n.strip_extension(extension)
-		else return n
+		else return n.to_s
 	end
 
 	# Extract the dirname of a path
@@ -1018,7 +1016,7 @@ redef class String
 		while l > 0 and s.chars[l] == '/' do l -= 1 # remove all trailing `/`
 		var pos = s.chars.last_index_of_from('/', l)
 		if pos > 0 then
-			return s.substring(0, pos)
+			return s.substring(0, pos).to_s
 		else if pos == 0 then
 			return "/"
 		else
@@ -1115,11 +1113,11 @@ redef class String
 	# Note: You may want to use `simplify_path` on the result.
 	#
 	# Note: This method works only with POSIX paths.
-	fun join_path(path: String): String
+	fun join_path(path: Text): String
 	do
-		if path.is_empty then return self
-		if self.is_empty then return path
-		if path.chars[0] == '/' then return path
+		if path.is_empty then return self.to_s
+		if self.is_empty then return path.to_s
+		if path.chars[0] == '/' then return path.to_s
 		if self.last == '/' then return "{self}{path}"
 		return "{self}/{path}"
 	end
@@ -1134,7 +1132,7 @@ redef class String
 	#     assert "".to_program_name == "./" # At least, your shell will detect the error.
 	fun to_program_name: String do
 		if self.has_prefix("/") then
-			return self
+			return self.to_s
 		else
 			return "./{self}"
 		end
@@ -1154,7 +1152,7 @@ redef class String
 	#     var b = "/bar"
 	#     var c = "baz/foobar"
 	#     assert a/b/c == "/bar/baz/foobar"
-	fun /(path: String): String do return join_path(path)
+	fun /(path: Text): String do return join_path(path)
 
 	# Returns the relative path needed to go from `self` to `dest`.
 	#
@@ -1318,7 +1316,7 @@ redef class String
 	do
 		var last_slash = chars.last_index_of('.')
 		if last_slash > 0 then
-			return substring( last_slash+1, length )
+			return substring( last_slash+1, length ).to_s
 		else
 			return null
 		end
