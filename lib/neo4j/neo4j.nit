@@ -415,6 +415,13 @@ class CypherQuery
 		self.params = params
 	end
 
+	# Pass the argument `value` as the parameter `key`.
+	#
+	# SEE: `set`
+	fun []=(key: String, value: nullable Serializable) do
+		params[key] = value
+	end
+
 	# Add a `CREATE` statement to the query
 	fun ncreate(query: String): CypherQuery do
 		self.query = "{self.query}CREATE {query} "
@@ -448,6 +455,23 @@ class CypherQuery
 	# Add a `RETURN` statement to the query
 	fun nreturn(query: String): CypherQuery do
 		self.query = "{self.query}RETURN {query} "
+		return self
+	end
+
+	# Pass the argument `value` as the parameter `key`.
+	#
+	# Return `self`.
+	#
+	# ```
+	# var query = (new CypherQuery).nmatch("(n)").nwhere(
+	# 		"n.key = key").set("key", "foo")
+	#
+	# assert query.params["key"] == "foo"
+	# ```
+	#
+	# SEE: `[]=`
+	fun set(key: String, value: nullable Serializable): SELF do
+		self[key] = value
 		return self
 	end
 
