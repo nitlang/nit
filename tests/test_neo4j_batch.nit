@@ -17,6 +17,7 @@ import neo4j
 var srv = new Neo4jServer
 srv.start_quiet
 
+# key used to loosely assume unicity and prevent conflicting db accesses
 var key = "NIT_TESTING_ID".environ.to_i
 
 var andres = new NeoNode
@@ -38,6 +39,9 @@ loves["since"] = 1999
 
 var client = new Neo4jClient("http://localhost:7474")
 assert client.is_ok
+
+# Clear the previous objects, if any
+client.cypher(new CypherQuery.from_string("MATCH (n) WHERE n.key = {key} OPTIONAL MATCH n-[r]-() DELETE r, n"))
 
 print "# Save batch\n"
 
