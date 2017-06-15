@@ -96,26 +96,117 @@ abstract class Texture
 
 	# Offset of the bottom border on `root` from 0.0 to 1.0
 	fun offset_bottom: Float do return 1.0
+
+	# Should this texture be drawn pixelated when magnified? otherwise it is interpolated
+	#
+	# This setting affects all the textures based on the same pixel data, or `root`.
+	#
+	# Must be set after a successful call to `load`.
+	fun pixelated=(pixelated: Bool)
+	do
+		if root.gl_texture == -1 then return
+
+		# TODO do not modify `root` by using *sampler objects* in glesv3
+		glBindTexture(gl_TEXTURE_2D, root.gl_texture)
+
+		var param = if pixelated then gl_NEAREST else gl_LINEAR
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
+	end
 end
 
-# Colorful small texture of 2x2 pixels
+# Colorful small texture of 32x32 pixels by default
 class CheckerTexture
 	super RootTexture
 
+	# Width and height in pixels, defaults to 32
+	var size = 32 is optional
+
 	redef fun load(force)
 	do
-		var pixels = [0xFFu8, 0x00u8, 0x00u8,
-		              0x00u8, 0xFFu8, 0x00u8,
-		              0x00u8, 0x00u8, 0xFFu8,
-		              0xFFu8, 0xFFu8, 0xFFu8]
+		if gl_texture != -1 then return
+		load_checker size
+		loaded = true
+	end
+end
 
-		var cpixels = new CByteArray.from(pixels)
+# Custom texture with pixel values filled programmatically
+#
+# At creation, the texture is composed of `width` by `height` (rounded down)
+# transparent pixels. The pixels value can be set using `[]=`.
+#
+# ~~~
+# # Build a texture with 4 colors
+# var tex = new CustomTexture(2.0, 2.0)
+# tex[0, 0] = [1.0, 0.0, 0.0] # Red
+# tex[0, 1] = [0.0, 1.0, 0.0] # Green
+# tex[1, 0] = [0.0, 0.0, 1.0] # Blue
+# tex[1, 1] = [1.0, 1.0, 1.0, 0.5] # Transparent white
+# tex.load
+# ~~~
+class CustomTexture
+	super RootTexture
 
-		width = 2.0
-		height = 2.0
-		load_from_pixels(cpixels.native_array, 2, 2, gl_RGB)
+	redef var width
+	redef var height
+
+	private var cpixels = new CByteArray(4*width.to_i*height.to_i) is lazy
+
+	# Set the `color` of the pixel at `x`, `y` (from the top-left corner)
+	#
+	# The argument `color` should be an array of up to 4 floats (RGBA).
+	# If `color` has less than 4 items, the missing items are replaced by 1.0.
+	#
+	# Require: `not loaded and x < width.to_i and y < height.to_i`
+	fun []=(x, y: Int, color: Array[Float])
+	do
+		assert not loaded else print_error "{class_name}::[]= already loaded"
+		assert x < width.to_i and y < height.to_i else print_error "{class_name}::[] out of bounds"
+
+		# Simple conversion from [0.0..1.0] to [0..255]
+		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
+		while bytes.length < 4 do bytes.add 255u8
+
+		var offset = 4*(x + y*width.to_i)
+		for i in [0..4[ do cpixels[offset+i] = bytes[i]
+	end
+
+	# Overwrite all pixels with `color`
+	#
+	# The argument `color` should be an array of up to 4 floats (RGBA).
+	# If `color` has less than 4 items, the missing items are replaced by 1.0.
+	#
+	# Require: `not loaded`
+	fun fill(color: Array[Float])
+	do
+		assert not loaded else print_error "{class_name}::fill already loaded"
+
+		# Simple conversion from [0.0..1.0] to [0..255]
+		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
+		while bytes.length < 4 do bytes.add 255u8
+
+		var i = 0
+		for x in [0..width.to_i[ do
+			for y in [0..height.to_i[ do
+				for j in [0..4[ do cpixels[i+j] = bytes[j]
+				i += 4
+			end
+		end
+	end
+
+	redef fun load(force)
+	do
+		if loaded then return
+
+		# Round down the desired dimension
+		var width = width.to_i
+		var height = height.to_i
+		self.width = width.to_f
+		self.height = height.to_f
+
+		load_from_pixels(cpixels.native_array, width, height, gl_RGBA)
 
 		cpixels.destroy
+		loaded = true
 	end
 end
 
@@ -151,16 +242,29 @@ class RootTexture
 		glGenerateMipmap(gl_TEXTURE_2D)
 	end
 
-	# Set whether this texture should be pixelated when drawn, otherwise it is interpolated
-	fun pixelated=(pixelated: Bool)
+	private fun load_checker(size: Int)
 	do
-		# TODO this service could be made available in `Texture` when using
-		# the kind of texture wrapper of gles v2 or maybe 3
+		var cpixels = new CByteArray(3*size*size)
 
-		glBindTexture(gl_TEXTURE_2D, gl_texture)
+		var i = 0
+		for x in [0..size[ do
+			var quadrant_x = if x < size/2 then 0 else 1
+			for y in [0..size[ do
+				var quadrant_y = if y < size/2 then 0 else 1
+				var color = if quadrant_x == quadrant_y then
+					[0u8, 0u8, 0u8, 255u8]
+				else [255u8, 255u8, 255u8, 255u8]
 
-		var param = if pixelated then gl_NEAREST else gl_LINEAR
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
+				for j in [0..3[ do cpixels[i+j] = color[j]
+				i += 3
+			end
+		end
+
+		width = size.to_f
+		height = size.to_f
+		load_from_pixels(cpixels.native_array, size, size, gl_RGB)
+
+		cpixels.destroy
 	end
 
 	# Has this resource been deleted?
@@ -189,6 +293,9 @@ class TextureAsset
 		if loaded and force != true then return
 
 		load_from_platform
+
+		# If no pixel data was loaded, load the pixel default texture
+		if gl_texture == -1 then load_checker 32
 
 		loaded = true
 	end
