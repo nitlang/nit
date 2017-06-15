@@ -19,6 +19,24 @@
 #
 # Default values are guessed from git and the file system.
 
+while true; do
+	case "$1" in
+		"")
+			break
+			;;
+		-h|--help)
+			echo "nit-makepackage: creates a package.ini in the current directory"
+			echo "There is no option (yet)"
+			exit
+			;;
+		*)
+			echo >&2 "nit-makepackage does not accept options yet"
+			exit 1
+			;;
+	esac
+done
+
+
 name=`basename $PWD`
 maintainer=`git shortlog -esn . | head -n 1 | sed 's/\s*[0-9]*\s*//'`
 dir=`git rev-parse --show-prefix`
