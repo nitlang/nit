@@ -769,22 +769,21 @@ redef class AMethPropdef
 	do
 		var n_kwinit = n_kwinit
 		var n_kwnew = n_kwnew
-		var is_init = n_kwinit != null or n_kwnew != null
+		var is_new = n_kwnew != null
+		var is_init = n_kwinit != null or is_new
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
 		if amethodid == null then
-			if not is_init then
-				name = "main"
-				name_node = self
-			else if n_kwinit != null then
+			if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
 			else if n_kwnew != null then
 				name = "new"
 				name_node = n_kwnew
 			else
-				abort
+				name = "main"
+				name_node = self
 			end
 		else if amethodid isa AIdMethid then
 			name = amethodid.n_id.text
@@ -828,8 +827,8 @@ redef class AMethPropdef
 				mprop.is_root_init = true
 			end
 			mprop.is_init = is_init
-			mprop.is_new = n_kwnew != null
-			if mprop.is_new then mclassdef.mclass.has_new_factory = true
+			mprop.is_new = is_new
+			if is_new then mclassdef.mclass.has_new_factory = true
 			if name == "sys" then mprop.is_toplevel = true # special case for sys allowed in `new` factories
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then
 				mprop.is_broken = true
