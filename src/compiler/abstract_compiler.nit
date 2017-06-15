@@ -360,8 +360,12 @@ class MakefileToolchain
 		var debug = toolcontext.opt_debug.value
 
 		makefile.write """
-CC ?= ccache cc
-CXX ?= ccache c++
+ifeq ($(origin CC), default)
+        CC = ccache cc
+endif
+ifeq ($(origin CXX), default)
+        CXX = ccache c++
+endif
 CFLAGS ?= -g {{{if not debug then "-O2" else ""}}} -Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs
 CINCL =
 LDFLAGS ?=
