@@ -126,5 +126,5 @@ var query = (new CypherQuery).
 	nand("n.key = {key}").
 	nreturn("n, r, m")
 var res7 = client.cypher(query)
-assert not res7.as(JsonObject)["data"].as(JsonArray).is_empty
+assert res7.as(JsonObject)["data"].as(JsonArray).length == 1
 
