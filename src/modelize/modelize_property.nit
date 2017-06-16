@@ -872,11 +872,12 @@ redef class AMethPropdef
 	do
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skiped
+		var mproperty = mpropdef.mproperty
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
 
-		if mpropdef.mproperty.is_root_init and not mclassdef.is_intro then
+		if mproperty.is_root_init and not mclassdef.is_intro then
 			var root_init = mclassdef.mclass.root_init
 			if root_init != null then
 				# Inherit the initializers by refinement
@@ -906,7 +907,7 @@ redef class AMethPropdef
 		# FIXME: do not inherit from the intro, but from the most specific
 		var msignature: nullable MSignature = null
 		if not mpropdef.is_intro then
-			msignature = mpropdef.mproperty.intro.msignature
+			msignature = mproperty.intro.msignature
 			if msignature == null then return # Skip error
 
 			# The local signature is adapted to use the local formal types, if any.
@@ -916,14 +917,14 @@ redef class AMethPropdef
 			if param_names.length != msignature.arity then
 				var node: ANode
 				if nsig != null then node = nsig else node = self
-				modelbuilder.error(node, "Redef Error: expected {msignature.arity} parameter(s) for `{mpropdef.mproperty.name}{msignature}`; got {param_names.length}. See introduction at `{mpropdef.mproperty.full_name}`.")
+				modelbuilder.error(node, "Redef Error: expected {msignature.arity} parameter(s) for `{mproperty.name}{msignature}`; got {param_names.length}. See introduction at `{mproperty.full_name}`.")
 				return
 			end
-		else if mpropdef.mproperty.is_init and not mpropdef.mproperty.is_new then
+		else if mproperty.is_init and not mproperty.is_new then
 			# FIXME UGLY: inherit signature from a super-constructor
 			for msupertype in mclassdef.supertypes do
 				msupertype = msupertype.anchor_to(mmodule, mclassdef.bound_mtype)
-				var candidate = modelbuilder.try_get_mproperty_by_name2(self, mmodule, msupertype, mpropdef.mproperty.name)
+				var candidate = modelbuilder.try_get_mproperty_by_name2(self, mmodule, msupertype, mproperty.name)
 				if candidate != null then
 					if msignature == null then
 						msignature = candidate.intro.as(MMethodDef).msignature
@@ -960,14 +961,14 @@ redef class AMethPropdef
 		end
 
 		# In `new`-factories, the return type is by default the classtype.
-		if ret_type == null and mpropdef.mproperty.is_new then ret_type = mclassdef.mclass.mclass_type
+		if ret_type == null and mproperty.is_new then ret_type = mclassdef.mclass.mclass_type
 
 		# Special checks for operator methods
 		if not accept_special_last_parameter and mparameters.not_empty and mparameters.last.is_vararg then
-			modelbuilder.error(self.n_signature.n_params.last, "Error: illegal variadic parameter `{mparameters.last}` for `{mpropdef.mproperty.name}`.")
+			modelbuilder.error(self.n_signature.n_params.last, "Error: illegal variadic parameter `{mparameters.last}` for `{mproperty.name}`.")
 		end
 		if ret_type == null and return_is_mandatory then
-			modelbuilder.error(self.n_methid, "Error: mandatory return type for `{mpropdef.mproperty.name}`.")
+			modelbuilder.error(self.n_methid, "Error: mandatory return type for `{mproperty.name}`.")
 		end
 
 		msignature = new MSignature(mparameters, ret_type)
