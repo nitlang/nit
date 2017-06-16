@@ -26,7 +26,7 @@ RUN git clone https://github.com/nitlang/nit.git /nit \
 	&& make \
 	&& . misc/nit_env.sh install \
 	# Clean and reduce size
-	&& strip c_src/nitc bin/nit* \
+	&& { strip c_src/nitc bin/nit* || true; } \
 	&& ccache -C \
 	&& rm -rf .git
 
