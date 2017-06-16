@@ -21,6 +21,7 @@
 update_oot() {
 	if test -d "$dir"; then
 		echo "$name: git pull"
+		../misc/jenkins/unitrun.sh "cmd-$name-remote" git --work-tree="$PWD/$dir" --git-dir="$PWD/$dir/.git" remote set-url origin "$repo"
 		../misc/jenkins/unitrun.sh "cmd-$name-pull" git --work-tree="$PWD/$dir" --git-dir="$PWD/$dir/.git" pull -f
 	else
 		echo "$name: git clone"

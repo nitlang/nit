@@ -2,6 +2,8 @@
 # Format: repo name
 https://github.com/R4PaSs/brewnit.git brewnit
 https://gitlab.com/xymus/darpg.git darpg
+https://gitlab.com/jeremlvt/dawn_arrival.git dawn_arrival
 https://github.com/Morriar/Missions.git missions
+https://gitlab.com/Heavyshield/NitGains.git nitgains
 https://github.com/ppepos/pep8-dbg.git pep8dbg
 https://gitlab.com/xymus/sputnit.git sputnit
