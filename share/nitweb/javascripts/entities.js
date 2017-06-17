@@ -53,8 +53,19 @@
 				.state('doc.entity.doc', {
 					url: '',
 					templateUrl: 'views/doc/doc.html',
-					controller: function(mentity) {
+					resolve: {
+						doc: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityDoc($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, doc) {
 						this.mentity = mentity;
+						this.doc = doc;
 					},
 					controllerAs: 'vm',
 				})
@@ -182,6 +193,12 @@
 
 				loadEntity: function(id, cb, cbErr) {
 					$http.get('/api/entity/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityDoc: function(id, cb, cbErr) {
+					$http.get('/api/entity/' + id + '/doc')
 						.success(cb)
 						.error(cbErr);
 				},

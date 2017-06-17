@@ -3,7 +3,16 @@
 		<ui-summary target='#summary-content' />
 	</div>
 	<div class='col-xs-9' id='summary-content'>
-		<entity-card mentity='vm.mentity' default-tab='doc' no-synopsis='true' />
+		<div class='card'>
+			<div class='card-body'>
+				<div ng-if='vm.doc'>
+					<div ng-bind-html='vm.doc.documentation'></div>
+				</div>
+				<div ng-if='!vm.doc'>
+					<i class='text-muted'>No documentation for this entity.</i>
+				</div>
+			</div>
+		</div>
 
 		<entity-list list-title='Groups' list-entities='vm.mentity.mgroups'
 			list-object-filter='{}' />
