@@ -26,6 +26,7 @@ redef class APIRouter
 		use("/search", new APISearch(config))
 		use("/random", new APIRandom(config))
 		use("/entity/:id", new APIEntity(config))
+		use("/entity/:id/doc", new APIEntityDoc(config))
 		use("/code/:id", new APIEntityCode(config))
 		use("/uml/:id", new APIEntityUML(config))
 		use("/linearization/:id", new APIEntityLinearization(config))
@@ -144,6 +145,26 @@ class APIEntity
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
 		res.raw_json mentity.to_full_json
+	end
+end
+
+# Return the full MDoc of a MEntity.
+#
+# Example: `GET /entity/core::Array/doc`
+class APIEntityDoc
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
+
+		var obj = new JsonObject
+		var mdoc = mentity.mdoc_or_fallback
+		if mdoc != null then
+			obj["documentation"] = mdoc.html_documentation.write_to_string
+			obj["location"] = mdoc.location
+		end
+		res.json obj
 	end
 end
 
