@@ -31,6 +31,9 @@ end
 class TKwenum
 	super Token
 end
+class TKwsubset
+	super Token
+end
 class TKwend
 	super Token
 end
@@ -469,6 +472,10 @@ class AExternClasskind
 	var n_kwextern: TKwextern is writable, noinit
 	var n_kwclass: nullable TKwclass = null is writable
 end
+class ASubsetClasskind
+	super AClasskind
+	var n_kwsubset: TKwsubset is writable, noinit
+end
 class AFormaldef
 	super AFormaldef
 	var n_id: TClassid is writable, noinit
@@ -512,6 +519,7 @@ class AMethPropdef
 	var n_visibility: AVisibility is writable, noinit
 	var n_kwmeth: nullable TKwmeth = null is writable
 	var n_kwinit: nullable TKwinit = null is writable
+	var n_kwisa: nullable TKwisa = null is writable
 	var n_kwnew: nullable TKwnew = null is writable
 	var n_methid: nullable AMethid = null is writable
 	var n_signature: ASignature is writable, noinit

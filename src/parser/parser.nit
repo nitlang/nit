@@ -9,7 +9,7 @@ private import tables
 redef class Parser
 	redef fun build_reduce_table
 	do
-		var reduce_table = new Array[ReduceAction].with_capacity(1113)
+		var reduce_table = new Array[ReduceAction].with_capacity(1116)
 		reduce_table.add new ReduceAction0(0)
 		reduce_table.add new ReduceAction1(0)
 		reduce_table.add new ReduceAction2(0)
@@ -47,18 +47,18 @@ redef class Parser
 		reduce_table.add new ReduceAction34(8)
 		reduce_table.add new ReduceAction35(8)
 		reduce_table.add new ReduceAction36(8)
-		reduce_table.add new ReduceAction37(9)
+		reduce_table.add new ReduceAction37(8)
 		reduce_table.add new ReduceAction38(9)
 		reduce_table.add new ReduceAction39(9)
-		reduce_table.add new ReduceAction40(10)
-		reduce_table.add new ReduceAction41(11)
+		reduce_table.add new ReduceAction40(9)
+		reduce_table.add new ReduceAction41(10)
 		reduce_table.add new ReduceAction42(11)
-		reduce_table.add new ReduceAction43(12)
-		reduce_table.add new ReduceAction44(13)
+		reduce_table.add new ReduceAction43(11)
+		reduce_table.add new ReduceAction44(12)
 		reduce_table.add new ReduceAction45(13)
 		reduce_table.add new ReduceAction46(13)
-		reduce_table.add new ReduceAction47(14)
-		reduce_table.add new ReduceAction48(15)
+		reduce_table.add new ReduceAction47(13)
+		reduce_table.add new ReduceAction48(14)
 		reduce_table.add new ReduceAction49(15)
 		reduce_table.add new ReduceAction50(15)
 		reduce_table.add new ReduceAction51(15)
@@ -85,20 +85,20 @@ redef class Parser
 		reduce_table.add new ReduceAction72(15)
 		reduce_table.add new ReduceAction73(15)
 		reduce_table.add new ReduceAction74(15)
-		reduce_table.add new ReduceAction74(15)
-		reduce_table.add new ReduceAction76(16)
-		reduce_table.add new ReduceAction77(16)
+		reduce_table.add new ReduceAction75(15)
+		reduce_table.add new ReduceAction76(15)
+		reduce_table.add new ReduceAction77(15)
+		reduce_table.add new ReduceAction77(15)
+		reduce_table.add new ReduceAction79(16)
+		reduce_table.add new ReduceAction80(16)
 		reduce_table.add new ReduceAction22(16)
-		reduce_table.add new ReduceAction76(17)
-		reduce_table.add new ReduceAction80(17)
-		reduce_table.add new ReduceAction81(18)
-		reduce_table.add new ReduceAction82(18)
-		reduce_table.add new ReduceAction83(18)
+		reduce_table.add new ReduceAction79(17)
+		reduce_table.add new ReduceAction83(17)
 		reduce_table.add new ReduceAction84(18)
 		reduce_table.add new ReduceAction85(18)
-		reduce_table.add new ReduceAction86(19)
-		reduce_table.add new ReduceAction87(19)
-		reduce_table.add new ReduceAction88(19)
+		reduce_table.add new ReduceAction86(18)
+		reduce_table.add new ReduceAction87(18)
+		reduce_table.add new ReduceAction88(18)
 		reduce_table.add new ReduceAction89(19)
 		reduce_table.add new ReduceAction90(19)
 		reduce_table.add new ReduceAction91(19)
@@ -119,87 +119,87 @@ redef class Parser
 		reduce_table.add new ReduceAction106(19)
 		reduce_table.add new ReduceAction107(19)
 		reduce_table.add new ReduceAction108(19)
-		reduce_table.add new ReduceAction109(20)
-		reduce_table.add new ReduceAction110(20)
-		reduce_table.add new ReduceAction111(20)
+		reduce_table.add new ReduceAction109(19)
+		reduce_table.add new ReduceAction110(19)
+		reduce_table.add new ReduceAction111(19)
 		reduce_table.add new ReduceAction112(20)
-		reduce_table.add new ReduceAction113(21)
-		reduce_table.add new ReduceAction114(21)
-		reduce_table.add new ReduceAction39(21)
-		reduce_table.add new ReduceAction116(22)
-		reduce_table.add new ReduceAction117(23)
-		reduce_table.add new ReduceAction118(23)
-		reduce_table.add new ReduceAction119(23)
+		reduce_table.add new ReduceAction113(20)
+		reduce_table.add new ReduceAction114(20)
+		reduce_table.add new ReduceAction115(20)
+		reduce_table.add new ReduceAction116(21)
+		reduce_table.add new ReduceAction117(21)
+		reduce_table.add new ReduceAction40(21)
+		reduce_table.add new ReduceAction119(22)
 		reduce_table.add new ReduceAction120(23)
 		reduce_table.add new ReduceAction121(23)
-		reduce_table.add new ReduceAction122(24)
-		reduce_table.add new ReduceAction123(24)
+		reduce_table.add new ReduceAction122(23)
+		reduce_table.add new ReduceAction123(23)
+		reduce_table.add new ReduceAction124(23)
+		reduce_table.add new ReduceAction125(24)
+		reduce_table.add new ReduceAction126(24)
 		reduce_table.add new ReduceAction22(24)
-		reduce_table.add new ReduceAction125(25)
-		reduce_table.add new ReduceAction126(26)
-		reduce_table.add new ReduceAction126(26)
-		reduce_table.add new ReduceAction128(26)
-		reduce_table.add new ReduceAction129(27)
-		reduce_table.add new ReduceAction130(27)
-		reduce_table.add new ReduceAction131(27)
-		reduce_table.add new ReduceAction132(28)
-		reduce_table.add new ReduceAction133(28)
-		reduce_table.add new ReduceAction134(28)
+		reduce_table.add new ReduceAction128(25)
+		reduce_table.add new ReduceAction129(26)
+		reduce_table.add new ReduceAction129(26)
+		reduce_table.add new ReduceAction131(26)
+		reduce_table.add new ReduceAction132(27)
+		reduce_table.add new ReduceAction133(27)
+		reduce_table.add new ReduceAction134(27)
 		reduce_table.add new ReduceAction135(28)
 		reduce_table.add new ReduceAction136(28)
 		reduce_table.add new ReduceAction137(28)
+		reduce_table.add new ReduceAction138(28)
+		reduce_table.add new ReduceAction139(28)
+		reduce_table.add new ReduceAction140(28)
 		reduce_table.add new ReduceAction22(29)
-		reduce_table.add new ReduceAction139(29)
-		reduce_table.add new ReduceAction140(30)
-		reduce_table.add new ReduceAction141(31)
-		reduce_table.add new ReduceAction142(31)
-		reduce_table.add new ReduceAction143(32)
+		reduce_table.add new ReduceAction142(29)
+		reduce_table.add new ReduceAction143(30)
+		reduce_table.add new ReduceAction144(31)
+		reduce_table.add new ReduceAction145(31)
+		reduce_table.add new ReduceAction146(32)
 		reduce_table.add new ReduceAction22(32)
-		reduce_table.add new ReduceAction145(33)
-		reduce_table.add new ReduceAction146(34)
-		reduce_table.add new ReduceAction147(34)
-		reduce_table.add new ReduceAction147(34)
-		reduce_table.add new ReduceAction149(35)
-		reduce_table.add new ReduceAction150(35)
-		reduce_table.add new ReduceAction151(35)
+		reduce_table.add new ReduceAction148(33)
+		reduce_table.add new ReduceAction149(34)
+		reduce_table.add new ReduceAction150(34)
+		reduce_table.add new ReduceAction150(34)
 		reduce_table.add new ReduceAction152(35)
-		reduce_table.add new ReduceAction153(36)
-		reduce_table.add new ReduceAction154(36)
-		reduce_table.add new ReduceAction155(37)
-		reduce_table.add new ReduceAction155(38)
-		reduce_table.add new ReduceAction155(39)
+		reduce_table.add new ReduceAction153(35)
+		reduce_table.add new ReduceAction154(35)
+		reduce_table.add new ReduceAction155(35)
+		reduce_table.add new ReduceAction156(36)
+		reduce_table.add new ReduceAction157(36)
+		reduce_table.add new ReduceAction158(37)
+		reduce_table.add new ReduceAction158(38)
+		reduce_table.add new ReduceAction158(39)
 		reduce_table.add new ReduceAction22(39)
-		reduce_table.add new ReduceAction159(40)
-		reduce_table.add new ReduceAction160(40)
-		reduce_table.add new ReduceAction161(40)
 		reduce_table.add new ReduceAction162(40)
-		reduce_table.add new ReduceAction163(41)
-		reduce_table.add new ReduceAction164(41)
-		reduce_table.add new ReduceAction165(42)
-		reduce_table.add new ReduceAction166(42)
-		reduce_table.add new ReduceAction167(43)
-		reduce_table.add new ReduceAction168(43)
-		reduce_table.add new ReduceAction159(44)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction172(45)
-		reduce_table.add new ReduceAction173(45)
-		reduce_table.add new ReduceAction174(45)
+		reduce_table.add new ReduceAction163(40)
+		reduce_table.add new ReduceAction164(40)
+		reduce_table.add new ReduceAction165(40)
+		reduce_table.add new ReduceAction166(41)
+		reduce_table.add new ReduceAction167(41)
+		reduce_table.add new ReduceAction168(42)
+		reduce_table.add new ReduceAction169(42)
+		reduce_table.add new ReduceAction170(43)
+		reduce_table.add new ReduceAction171(43)
+		reduce_table.add new ReduceAction162(44)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
 		reduce_table.add new ReduceAction175(45)
 		reduce_table.add new ReduceAction176(45)
 		reduce_table.add new ReduceAction177(45)
 		reduce_table.add new ReduceAction178(45)
 		reduce_table.add new ReduceAction179(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction162(45)
-		reduce_table.add new ReduceAction187(45)
-		reduce_table.add new ReduceAction188(45)
-		reduce_table.add new ReduceAction189(45)
+		reduce_table.add new ReduceAction180(45)
+		reduce_table.add new ReduceAction181(45)
+		reduce_table.add new ReduceAction182(45)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
+		reduce_table.add new ReduceAction165(45)
 		reduce_table.add new ReduceAction190(45)
 		reduce_table.add new ReduceAction191(45)
 		reduce_table.add new ReduceAction192(45)
@@ -210,20 +210,20 @@ redef class Parser
 		reduce_table.add new ReduceAction197(45)
 		reduce_table.add new ReduceAction198(45)
 		reduce_table.add new ReduceAction199(45)
-		reduce_table.add new ReduceAction198(45)
+		reduce_table.add new ReduceAction200(45)
 		reduce_table.add new ReduceAction201(45)
 		reduce_table.add new ReduceAction202(45)
 		reduce_table.add new ReduceAction201(45)
 		reduce_table.add new ReduceAction204(45)
-		reduce_table.add new ReduceAction205(46)
-		reduce_table.add new ReduceAction206(46)
-		reduce_table.add new ReduceAction207(47)
-		reduce_table.add new ReduceAction208(47)
-		reduce_table.add new ReduceAction209(47)
+		reduce_table.add new ReduceAction205(45)
+		reduce_table.add new ReduceAction204(45)
+		reduce_table.add new ReduceAction207(45)
+		reduce_table.add new ReduceAction208(46)
+		reduce_table.add new ReduceAction209(46)
 		reduce_table.add new ReduceAction210(47)
-		reduce_table.add new ReduceAction211(48)
-		reduce_table.add new ReduceAction212(48)
-		reduce_table.add new ReduceAction213(48)
+		reduce_table.add new ReduceAction211(47)
+		reduce_table.add new ReduceAction212(47)
+		reduce_table.add new ReduceAction213(47)
 		reduce_table.add new ReduceAction214(48)
 		reduce_table.add new ReduceAction215(48)
 		reduce_table.add new ReduceAction216(48)
@@ -259,9 +259,9 @@ redef class Parser
 		reduce_table.add new ReduceAction246(48)
 		reduce_table.add new ReduceAction247(48)
 		reduce_table.add new ReduceAction248(48)
-		reduce_table.add new ReduceAction249(49)
-		reduce_table.add new ReduceAction250(49)
-		reduce_table.add new ReduceAction251(49)
+		reduce_table.add new ReduceAction249(48)
+		reduce_table.add new ReduceAction250(48)
+		reduce_table.add new ReduceAction251(48)
 		reduce_table.add new ReduceAction252(49)
 		reduce_table.add new ReduceAction253(49)
 		reduce_table.add new ReduceAction254(49)
@@ -270,110 +270,110 @@ redef class Parser
 		reduce_table.add new ReduceAction257(49)
 		reduce_table.add new ReduceAction258(49)
 		reduce_table.add new ReduceAction259(49)
-		reduce_table.add new ReduceAction260(50)
-		reduce_table.add new ReduceAction261(50)
-		reduce_table.add new ReduceAction262(50)
-		reduce_table.add new ReduceAction263(51)
-		reduce_table.add new ReduceAction264(51)
-		reduce_table.add new ReduceAction265(51)
+		reduce_table.add new ReduceAction260(49)
+		reduce_table.add new ReduceAction261(49)
+		reduce_table.add new ReduceAction262(49)
+		reduce_table.add new ReduceAction263(50)
+		reduce_table.add new ReduceAction264(50)
+		reduce_table.add new ReduceAction265(50)
 		reduce_table.add new ReduceAction266(51)
 		reduce_table.add new ReduceAction267(51)
 		reduce_table.add new ReduceAction268(51)
 		reduce_table.add new ReduceAction269(51)
 		reduce_table.add new ReduceAction270(51)
-		reduce_table.add new ReduceAction161(52)
-		reduce_table.add new ReduceAction272(53)
-		reduce_table.add new ReduceAction273(53)
-		reduce_table.add new ReduceAction274(54)
-		reduce_table.add new ReduceAction275(54)
-		reduce_table.add new ReduceAction276(55)
-		reduce_table.add new ReduceAction277(55)
-		reduce_table.add new ReduceAction278(56)
-		reduce_table.add new ReduceAction279(56)
-		reduce_table.add new ReduceAction280(57)
-		reduce_table.add new ReduceAction281(58)
-		reduce_table.add new ReduceAction282(58)
-		reduce_table.add new ReduceAction283(59)
-		reduce_table.add new ReduceAction284(59)
-		reduce_table.add new ReduceAction162(59)
-		reduce_table.add new ReduceAction286(60)
-		reduce_table.add new ReduceAction287(60)
-		reduce_table.add new ReduceAction288(60)
+		reduce_table.add new ReduceAction271(51)
+		reduce_table.add new ReduceAction272(51)
+		reduce_table.add new ReduceAction273(51)
+		reduce_table.add new ReduceAction164(52)
+		reduce_table.add new ReduceAction275(53)
+		reduce_table.add new ReduceAction276(53)
+		reduce_table.add new ReduceAction277(54)
+		reduce_table.add new ReduceAction278(54)
+		reduce_table.add new ReduceAction279(55)
+		reduce_table.add new ReduceAction280(55)
+		reduce_table.add new ReduceAction281(56)
+		reduce_table.add new ReduceAction282(56)
+		reduce_table.add new ReduceAction283(57)
+		reduce_table.add new ReduceAction284(58)
+		reduce_table.add new ReduceAction285(58)
+		reduce_table.add new ReduceAction286(59)
+		reduce_table.add new ReduceAction287(59)
+		reduce_table.add new ReduceAction165(59)
 		reduce_table.add new ReduceAction289(60)
-		reduce_table.add new ReduceAction290(61)
-		reduce_table.add new ReduceAction162(62)
-		reduce_table.add new ReduceAction292(62)
-		reduce_table.add new ReduceAction162(63)
-		reduce_table.add new ReduceAction294(63)
-		reduce_table.add new ReduceAction295(63)
-		reduce_table.add new ReduceAction296(63)
+		reduce_table.add new ReduceAction290(60)
+		reduce_table.add new ReduceAction291(60)
+		reduce_table.add new ReduceAction292(60)
+		reduce_table.add new ReduceAction293(61)
+		reduce_table.add new ReduceAction165(62)
+		reduce_table.add new ReduceAction295(62)
+		reduce_table.add new ReduceAction165(63)
 		reduce_table.add new ReduceAction297(63)
-		reduce_table.add new ReduceAction162(64)
-		reduce_table.add new ReduceAction299(64)
-		reduce_table.add new ReduceAction162(65)
-		reduce_table.add new ReduceAction301(65)
-		reduce_table.add new ReduceAction302(65)
-		reduce_table.add new ReduceAction303(65)
+		reduce_table.add new ReduceAction298(63)
+		reduce_table.add new ReduceAction299(63)
+		reduce_table.add new ReduceAction300(63)
+		reduce_table.add new ReduceAction165(64)
+		reduce_table.add new ReduceAction302(64)
+		reduce_table.add new ReduceAction165(65)
 		reduce_table.add new ReduceAction304(65)
 		reduce_table.add new ReduceAction305(65)
 		reduce_table.add new ReduceAction306(65)
 		reduce_table.add new ReduceAction307(65)
 		reduce_table.add new ReduceAction308(65)
-		reduce_table.add new ReduceAction162(66)
-		reduce_table.add new ReduceAction310(66)
-		reduce_table.add new ReduceAction162(67)
-		reduce_table.add new ReduceAction312(67)
-		reduce_table.add new ReduceAction162(68)
-		reduce_table.add new ReduceAction314(68)
-		reduce_table.add new ReduceAction162(69)
-		reduce_table.add new ReduceAction316(69)
-		reduce_table.add new ReduceAction317(69)
-		reduce_table.add new ReduceAction162(70)
-		reduce_table.add new ReduceAction319(70)
-		reduce_table.add new ReduceAction320(70)
-		reduce_table.add new ReduceAction162(71)
-		reduce_table.add new ReduceAction322(71)
-		reduce_table.add new ReduceAction323(71)
-		reduce_table.add new ReduceAction324(71)
-		reduce_table.add new ReduceAction162(72)
-		reduce_table.add new ReduceAction326(72)
-		reduce_table.add new ReduceAction162(73)
-		reduce_table.add new ReduceAction328(73)
-		reduce_table.add new ReduceAction329(73)
-		reduce_table.add new ReduceAction330(73)
+		reduce_table.add new ReduceAction309(65)
+		reduce_table.add new ReduceAction310(65)
+		reduce_table.add new ReduceAction311(65)
+		reduce_table.add new ReduceAction165(66)
+		reduce_table.add new ReduceAction313(66)
+		reduce_table.add new ReduceAction165(67)
+		reduce_table.add new ReduceAction315(67)
+		reduce_table.add new ReduceAction165(68)
+		reduce_table.add new ReduceAction317(68)
+		reduce_table.add new ReduceAction165(69)
+		reduce_table.add new ReduceAction319(69)
+		reduce_table.add new ReduceAction320(69)
+		reduce_table.add new ReduceAction165(70)
+		reduce_table.add new ReduceAction322(70)
+		reduce_table.add new ReduceAction323(70)
+		reduce_table.add new ReduceAction165(71)
+		reduce_table.add new ReduceAction325(71)
+		reduce_table.add new ReduceAction326(71)
+		reduce_table.add new ReduceAction327(71)
+		reduce_table.add new ReduceAction165(72)
+		reduce_table.add new ReduceAction329(72)
+		reduce_table.add new ReduceAction165(73)
 		reduce_table.add new ReduceAction331(73)
-		reduce_table.add new ReduceAction162(74)
-		reduce_table.add new ReduceAction333(74)
-		reduce_table.add new ReduceAction334(74)
-		reduce_table.add new ReduceAction335(74)
+		reduce_table.add new ReduceAction332(73)
+		reduce_table.add new ReduceAction333(73)
+		reduce_table.add new ReduceAction334(73)
+		reduce_table.add new ReduceAction165(74)
 		reduce_table.add new ReduceAction336(74)
-		reduce_table.add new ReduceAction162(75)
-		reduce_table.add new ReduceAction338(75)
-		reduce_table.add new ReduceAction339(75)
-		reduce_table.add new ReduceAction187(75)
+		reduce_table.add new ReduceAction337(74)
+		reduce_table.add new ReduceAction338(74)
+		reduce_table.add new ReduceAction339(74)
+		reduce_table.add new ReduceAction165(75)
 		reduce_table.add new ReduceAction341(75)
-		reduce_table.add new ReduceAction188(75)
-		reduce_table.add new ReduceAction343(75)
-		reduce_table.add new ReduceAction189(75)
-		reduce_table.add new ReduceAction345(75)
+		reduce_table.add new ReduceAction342(75)
 		reduce_table.add new ReduceAction190(75)
-		reduce_table.add new ReduceAction347(75)
+		reduce_table.add new ReduceAction344(75)
 		reduce_table.add new ReduceAction191(75)
-		reduce_table.add new ReduceAction349(75)
+		reduce_table.add new ReduceAction346(75)
 		reduce_table.add new ReduceAction192(75)
-		reduce_table.add new ReduceAction351(75)
+		reduce_table.add new ReduceAction348(75)
 		reduce_table.add new ReduceAction193(75)
-		reduce_table.add new ReduceAction353(75)
+		reduce_table.add new ReduceAction350(75)
 		reduce_table.add new ReduceAction194(75)
-		reduce_table.add new ReduceAction355(75)
+		reduce_table.add new ReduceAction352(75)
 		reduce_table.add new ReduceAction195(75)
-		reduce_table.add new ReduceAction357(75)
+		reduce_table.add new ReduceAction354(75)
 		reduce_table.add new ReduceAction196(75)
-		reduce_table.add new ReduceAction359(75)
+		reduce_table.add new ReduceAction356(75)
 		reduce_table.add new ReduceAction197(75)
-		reduce_table.add new ReduceAction361(75)
+		reduce_table.add new ReduceAction358(75)
+		reduce_table.add new ReduceAction198(75)
+		reduce_table.add new ReduceAction360(75)
+		reduce_table.add new ReduceAction199(75)
 		reduce_table.add new ReduceAction362(75)
-		reduce_table.add new ReduceAction363(75)
+		reduce_table.add new ReduceAction200(75)
 		reduce_table.add new ReduceAction364(75)
 		reduce_table.add new ReduceAction365(75)
 		reduce_table.add new ReduceAction366(75)
@@ -384,140 +384,140 @@ redef class Parser
 		reduce_table.add new ReduceAction371(75)
 		reduce_table.add new ReduceAction372(75)
 		reduce_table.add new ReduceAction373(75)
-		reduce_table.add new ReduceAction162(76)
-		reduce_table.add new ReduceAction375(76)
-		reduce_table.add new ReduceAction376(76)
-		reduce_table.add new ReduceAction377(77)
-		reduce_table.add new ReduceAction378(77)
-		reduce_table.add new ReduceAction379(77)
+		reduce_table.add new ReduceAction374(75)
+		reduce_table.add new ReduceAction375(75)
+		reduce_table.add new ReduceAction376(75)
+		reduce_table.add new ReduceAction165(76)
+		reduce_table.add new ReduceAction378(76)
+		reduce_table.add new ReduceAction379(76)
 		reduce_table.add new ReduceAction380(77)
 		reduce_table.add new ReduceAction381(77)
 		reduce_table.add new ReduceAction382(77)
 		reduce_table.add new ReduceAction383(77)
 		reduce_table.add new ReduceAction384(77)
-		reduce_table.add new ReduceAction162(77)
-		reduce_table.add new ReduceAction162(77)
+		reduce_table.add new ReduceAction385(77)
+		reduce_table.add new ReduceAction386(77)
 		reduce_table.add new ReduceAction387(77)
-		reduce_table.add new ReduceAction388(77)
-		reduce_table.add new ReduceAction389(77)
-		reduce_table.add new ReduceAction390(78)
-		reduce_table.add new ReduceAction390(78)
-		reduce_table.add new ReduceAction392(79)
-		reduce_table.add new ReduceAction393(80)
-		reduce_table.add new ReduceAction394(81)
-		reduce_table.add new ReduceAction395(81)
-		reduce_table.add new ReduceAction393(82)
-		reduce_table.add new ReduceAction397(83)
-		reduce_table.add new ReduceAction277(83)
-		reduce_table.add new ReduceAction399(83)
-		reduce_table.add new ReduceAction400(84)
-		reduce_table.add new ReduceAction401(84)
-		reduce_table.add new ReduceAction402(85)
-		reduce_table.add new ReduceAction403(85)
-		reduce_table.add new ReduceAction404(86)
-		reduce_table.add new ReduceAction402(87)
-		reduce_table.add new ReduceAction403(87)
-		reduce_table.add new ReduceAction407(88)
-		reduce_table.add new ReduceAction408(89)
-		reduce_table.add new ReduceAction409(90)
-		reduce_table.add new ReduceAction410(90)
-		reduce_table.add new ReduceAction411(91)
+		reduce_table.add new ReduceAction165(77)
+		reduce_table.add new ReduceAction165(77)
+		reduce_table.add new ReduceAction390(77)
+		reduce_table.add new ReduceAction391(77)
+		reduce_table.add new ReduceAction392(77)
+		reduce_table.add new ReduceAction393(78)
+		reduce_table.add new ReduceAction393(78)
+		reduce_table.add new ReduceAction395(79)
+		reduce_table.add new ReduceAction396(80)
+		reduce_table.add new ReduceAction397(81)
+		reduce_table.add new ReduceAction398(81)
+		reduce_table.add new ReduceAction396(82)
+		reduce_table.add new ReduceAction400(83)
+		reduce_table.add new ReduceAction280(83)
+		reduce_table.add new ReduceAction402(83)
+		reduce_table.add new ReduceAction403(84)
+		reduce_table.add new ReduceAction404(84)
+		reduce_table.add new ReduceAction405(85)
+		reduce_table.add new ReduceAction406(85)
+		reduce_table.add new ReduceAction407(86)
+		reduce_table.add new ReduceAction405(87)
+		reduce_table.add new ReduceAction406(87)
+		reduce_table.add new ReduceAction410(88)
+		reduce_table.add new ReduceAction411(89)
+		reduce_table.add new ReduceAction412(90)
+		reduce_table.add new ReduceAction413(90)
+		reduce_table.add new ReduceAction414(91)
 		reduce_table.add new ReduceAction22(91)
-		reduce_table.add new ReduceAction413(92)
-		reduce_table.add new ReduceAction414(92)
-		reduce_table.add new ReduceAction415(93)
-		reduce_table.add new ReduceAction416(93)
-		reduce_table.add new ReduceAction413(94)
-		reduce_table.add new ReduceAction414(94)
-		reduce_table.add new ReduceAction419(94)
-		reduce_table.add new ReduceAction162(95)
-		reduce_table.add new ReduceAction421(96)
-		reduce_table.add new ReduceAction422(97)
-		reduce_table.add new ReduceAction423(97)
-		reduce_table.add new ReduceAction424(97)
+		reduce_table.add new ReduceAction416(92)
+		reduce_table.add new ReduceAction417(92)
+		reduce_table.add new ReduceAction418(93)
+		reduce_table.add new ReduceAction419(93)
+		reduce_table.add new ReduceAction416(94)
+		reduce_table.add new ReduceAction417(94)
+		reduce_table.add new ReduceAction422(94)
+		reduce_table.add new ReduceAction165(95)
+		reduce_table.add new ReduceAction424(96)
 		reduce_table.add new ReduceAction425(97)
 		reduce_table.add new ReduceAction426(97)
-		reduce_table.add new ReduceAction427(98)
-		reduce_table.add new ReduceAction428(98)
-		reduce_table.add new ReduceAction429(98)
+		reduce_table.add new ReduceAction427(97)
+		reduce_table.add new ReduceAction428(97)
+		reduce_table.add new ReduceAction429(97)
 		reduce_table.add new ReduceAction430(98)
 		reduce_table.add new ReduceAction431(98)
-		reduce_table.add new ReduceAction394(99)
-		reduce_table.add new ReduceAction395(99)
-		reduce_table.add new ReduceAction393(100)
-		reduce_table.add new ReduceAction435(101)
-		reduce_table.add new ReduceAction162(101)
-		reduce_table.add new ReduceAction162(101)
+		reduce_table.add new ReduceAction432(98)
+		reduce_table.add new ReduceAction433(98)
+		reduce_table.add new ReduceAction434(98)
+		reduce_table.add new ReduceAction397(99)
+		reduce_table.add new ReduceAction398(99)
+		reduce_table.add new ReduceAction396(100)
 		reduce_table.add new ReduceAction438(101)
-		reduce_table.add new ReduceAction439(101)
-		reduce_table.add new ReduceAction440(101)
-		reduce_table.add new ReduceAction441(102)
-		reduce_table.add new ReduceAction442(102)
-		reduce_table.add new ReduceAction443(102)
-		reduce_table.add new ReduceAction444(103)
-		reduce_table.add new ReduceAction445(103)
-		reduce_table.add new ReduceAction444(104)
+		reduce_table.add new ReduceAction165(101)
+		reduce_table.add new ReduceAction165(101)
+		reduce_table.add new ReduceAction441(101)
+		reduce_table.add new ReduceAction442(101)
+		reduce_table.add new ReduceAction443(101)
+		reduce_table.add new ReduceAction444(102)
+		reduce_table.add new ReduceAction445(102)
+		reduce_table.add new ReduceAction446(102)
+		reduce_table.add new ReduceAction447(103)
+		reduce_table.add new ReduceAction448(103)
 		reduce_table.add new ReduceAction447(104)
-		reduce_table.add new ReduceAction445(104)
-		reduce_table.add new ReduceAction449(104)
-		reduce_table.add new ReduceAction450(105)
-		reduce_table.add new ReduceAction403(106)
-		reduce_table.add new ReduceAction452(106)
-		reduce_table.add new ReduceAction453(107)
-		reduce_table.add new ReduceAction454(108)
-		reduce_table.add new ReduceAction455(108)
-		reduce_table.add new ReduceAction456(109)
-		reduce_table.add new ReduceAction457(109)
-		reduce_table.add new ReduceAction458(110)
-		reduce_table.add new ReduceAction459(110)
-		reduce_table.add new ReduceAction460(110)
+		reduce_table.add new ReduceAction450(104)
+		reduce_table.add new ReduceAction448(104)
+		reduce_table.add new ReduceAction452(104)
+		reduce_table.add new ReduceAction453(105)
+		reduce_table.add new ReduceAction406(106)
+		reduce_table.add new ReduceAction455(106)
+		reduce_table.add new ReduceAction456(107)
+		reduce_table.add new ReduceAction457(108)
+		reduce_table.add new ReduceAction458(108)
+		reduce_table.add new ReduceAction459(109)
+		reduce_table.add new ReduceAction460(109)
 		reduce_table.add new ReduceAction461(110)
-		reduce_table.add new ReduceAction462(111)
-		reduce_table.add new ReduceAction463(111)
-		reduce_table.add new ReduceAction464(111)
+		reduce_table.add new ReduceAction462(110)
+		reduce_table.add new ReduceAction463(110)
+		reduce_table.add new ReduceAction464(110)
+		reduce_table.add new ReduceAction465(111)
+		reduce_table.add new ReduceAction466(111)
+		reduce_table.add new ReduceAction467(111)
 		reduce_table.add new ReduceAction22(111)
-		reduce_table.add new ReduceAction466(112)
-		reduce_table.add new ReduceAction467(112)
-		reduce_table.add new ReduceAction468(112)
 		reduce_table.add new ReduceAction469(112)
-		reduce_table.add new ReduceAction470(113)
-		reduce_table.add new ReduceAction471(113)
-		reduce_table.add new ReduceAction472(113)
-		reduce_table.add new ReduceAction471(113)
-		reduce_table.add new ReduceAction474(114)
-		reduce_table.add new ReduceAction475(115)
+		reduce_table.add new ReduceAction470(112)
+		reduce_table.add new ReduceAction471(112)
+		reduce_table.add new ReduceAction472(112)
+		reduce_table.add new ReduceAction473(113)
+		reduce_table.add new ReduceAction474(113)
+		reduce_table.add new ReduceAction475(113)
+		reduce_table.add new ReduceAction474(113)
+		reduce_table.add new ReduceAction477(114)
+		reduce_table.add new ReduceAction478(115)
 		reduce_table.add new ReduceAction22(116)
-		reduce_table.add new ReduceAction477(116)
-		reduce_table.add new ReduceAction478(117)
-		reduce_table.add new ReduceAction478(117)
-		reduce_table.add new ReduceAction478(117)
-		reduce_table.add new ReduceAction481(118)
-		reduce_table.add new ReduceAction482(118)
+		reduce_table.add new ReduceAction480(116)
+		reduce_table.add new ReduceAction481(117)
+		reduce_table.add new ReduceAction481(117)
+		reduce_table.add new ReduceAction481(117)
+		reduce_table.add new ReduceAction484(118)
+		reduce_table.add new ReduceAction485(118)
 		reduce_table.add new ReduceAction23(118)
 		reduce_table.add new ReduceAction23(118)
-		reduce_table.add new ReduceAction485(118)
-		reduce_table.add new ReduceAction485(118)
-		reduce_table.add new ReduceAction487(118)
 		reduce_table.add new ReduceAction488(118)
-		reduce_table.add new ReduceAction489(118)
-		reduce_table.add new ReduceAction489(118)
+		reduce_table.add new ReduceAction488(118)
+		reduce_table.add new ReduceAction490(118)
 		reduce_table.add new ReduceAction491(118)
+		reduce_table.add new ReduceAction492(118)
+		reduce_table.add new ReduceAction492(118)
+		reduce_table.add new ReduceAction494(118)
 		reduce_table.add new ReduceAction22(119)
-		reduce_table.add new ReduceAction493(119)
-		reduce_table.add new ReduceAction494(120)
-		reduce_table.add new ReduceAction478(120)
-		reduce_table.add new ReduceAction478(121)
-		reduce_table.add new ReduceAction497(121)
-		reduce_table.add new ReduceAction48(122)
+		reduce_table.add new ReduceAction496(119)
+		reduce_table.add new ReduceAction497(120)
+		reduce_table.add new ReduceAction481(120)
+		reduce_table.add new ReduceAction481(121)
+		reduce_table.add new ReduceAction500(121)
 		reduce_table.add new ReduceAction49(122)
 		reduce_table.add new ReduceAction50(122)
-		reduce_table.add new ReduceAction57(122)
-		reduce_table.add new ReduceAction58(122)
-		reduce_table.add new ReduceAction76(123)
-		reduce_table.add new ReduceAction77(123)
-		reduce_table.add new ReduceAction86(124)
-		reduce_table.add new ReduceAction87(124)
-		reduce_table.add new ReduceAction88(124)
+		reduce_table.add new ReduceAction51(122)
+		reduce_table.add new ReduceAction60(122)
+		reduce_table.add new ReduceAction61(122)
+		reduce_table.add new ReduceAction79(123)
+		reduce_table.add new ReduceAction80(123)
 		reduce_table.add new ReduceAction89(124)
 		reduce_table.add new ReduceAction90(124)
 		reduce_table.add new ReduceAction91(124)
@@ -537,89 +537,89 @@ redef class Parser
 		reduce_table.add new ReduceAction105(124)
 		reduce_table.add new ReduceAction106(124)
 		reduce_table.add new ReduceAction107(124)
-		reduce_table.add new ReduceAction470(125)
-		reduce_table.add new ReduceAction471(125)
-		reduce_table.add new ReduceAction472(125)
-		reduce_table.add new ReduceAction471(125)
-		reduce_table.add new ReduceAction146(126)
-		reduce_table.add new ReduceAction147(126)
-		reduce_table.add new ReduceAction147(126)
-		reduce_table.add new ReduceAction149(127)
-		reduce_table.add new ReduceAction150(127)
-		reduce_table.add new ReduceAction162(128)
-		reduce_table.add new ReduceAction292(128)
-		reduce_table.add new ReduceAction162(129)
-		reduce_table.add new ReduceAction294(129)
-		reduce_table.add new ReduceAction295(129)
-		reduce_table.add new ReduceAction296(129)
+		reduce_table.add new ReduceAction108(124)
+		reduce_table.add new ReduceAction109(124)
+		reduce_table.add new ReduceAction110(124)
+		reduce_table.add new ReduceAction473(125)
+		reduce_table.add new ReduceAction474(125)
+		reduce_table.add new ReduceAction475(125)
+		reduce_table.add new ReduceAction474(125)
+		reduce_table.add new ReduceAction149(126)
+		reduce_table.add new ReduceAction150(126)
+		reduce_table.add new ReduceAction150(126)
+		reduce_table.add new ReduceAction152(127)
+		reduce_table.add new ReduceAction153(127)
+		reduce_table.add new ReduceAction165(128)
+		reduce_table.add new ReduceAction295(128)
+		reduce_table.add new ReduceAction165(129)
 		reduce_table.add new ReduceAction297(129)
-		reduce_table.add new ReduceAction162(130)
-		reduce_table.add new ReduceAction299(130)
-		reduce_table.add new ReduceAction162(131)
-		reduce_table.add new ReduceAction301(131)
-		reduce_table.add new ReduceAction302(131)
-		reduce_table.add new ReduceAction303(131)
+		reduce_table.add new ReduceAction298(129)
+		reduce_table.add new ReduceAction299(129)
+		reduce_table.add new ReduceAction300(129)
+		reduce_table.add new ReduceAction165(130)
+		reduce_table.add new ReduceAction302(130)
+		reduce_table.add new ReduceAction165(131)
 		reduce_table.add new ReduceAction304(131)
 		reduce_table.add new ReduceAction305(131)
 		reduce_table.add new ReduceAction306(131)
 		reduce_table.add new ReduceAction307(131)
 		reduce_table.add new ReduceAction308(131)
-		reduce_table.add new ReduceAction162(132)
-		reduce_table.add new ReduceAction310(132)
-		reduce_table.add new ReduceAction162(133)
-		reduce_table.add new ReduceAction312(133)
-		reduce_table.add new ReduceAction162(134)
-		reduce_table.add new ReduceAction314(134)
-		reduce_table.add new ReduceAction162(135)
-		reduce_table.add new ReduceAction316(135)
-		reduce_table.add new ReduceAction317(135)
-		reduce_table.add new ReduceAction162(136)
-		reduce_table.add new ReduceAction319(136)
-		reduce_table.add new ReduceAction320(136)
-		reduce_table.add new ReduceAction162(137)
-		reduce_table.add new ReduceAction322(137)
-		reduce_table.add new ReduceAction323(137)
-		reduce_table.add new ReduceAction324(137)
-		reduce_table.add new ReduceAction162(138)
-		reduce_table.add new ReduceAction326(138)
-		reduce_table.add new ReduceAction162(139)
-		reduce_table.add new ReduceAction328(139)
-		reduce_table.add new ReduceAction329(139)
-		reduce_table.add new ReduceAction330(139)
+		reduce_table.add new ReduceAction309(131)
+		reduce_table.add new ReduceAction310(131)
+		reduce_table.add new ReduceAction311(131)
+		reduce_table.add new ReduceAction165(132)
+		reduce_table.add new ReduceAction313(132)
+		reduce_table.add new ReduceAction165(133)
+		reduce_table.add new ReduceAction315(133)
+		reduce_table.add new ReduceAction165(134)
+		reduce_table.add new ReduceAction317(134)
+		reduce_table.add new ReduceAction165(135)
+		reduce_table.add new ReduceAction319(135)
+		reduce_table.add new ReduceAction320(135)
+		reduce_table.add new ReduceAction165(136)
+		reduce_table.add new ReduceAction322(136)
+		reduce_table.add new ReduceAction323(136)
+		reduce_table.add new ReduceAction165(137)
+		reduce_table.add new ReduceAction325(137)
+		reduce_table.add new ReduceAction326(137)
+		reduce_table.add new ReduceAction327(137)
+		reduce_table.add new ReduceAction165(138)
+		reduce_table.add new ReduceAction329(138)
+		reduce_table.add new ReduceAction165(139)
 		reduce_table.add new ReduceAction331(139)
-		reduce_table.add new ReduceAction162(140)
-		reduce_table.add new ReduceAction333(140)
-		reduce_table.add new ReduceAction334(140)
-		reduce_table.add new ReduceAction335(140)
+		reduce_table.add new ReduceAction332(139)
+		reduce_table.add new ReduceAction333(139)
+		reduce_table.add new ReduceAction334(139)
+		reduce_table.add new ReduceAction165(140)
 		reduce_table.add new ReduceAction336(140)
-		reduce_table.add new ReduceAction162(141)
-		reduce_table.add new ReduceAction338(141)
-		reduce_table.add new ReduceAction339(141)
-		reduce_table.add new ReduceAction187(141)
-		reduce_table.add new ReduceAction191(141)
+		reduce_table.add new ReduceAction337(140)
+		reduce_table.add new ReduceAction338(140)
+		reduce_table.add new ReduceAction339(140)
+		reduce_table.add new ReduceAction165(141)
 		reduce_table.add new ReduceAction341(141)
-		reduce_table.add new ReduceAction349(141)
-		reduce_table.add new ReduceAction188(141)
-		reduce_table.add new ReduceAction192(141)
-		reduce_table.add new ReduceAction343(141)
-		reduce_table.add new ReduceAction351(141)
-		reduce_table.add new ReduceAction189(141)
-		reduce_table.add new ReduceAction193(141)
-		reduce_table.add new ReduceAction345(141)
-		reduce_table.add new ReduceAction353(141)
+		reduce_table.add new ReduceAction342(141)
 		reduce_table.add new ReduceAction190(141)
 		reduce_table.add new ReduceAction194(141)
-		reduce_table.add new ReduceAction347(141)
-		reduce_table.add new ReduceAction355(141)
+		reduce_table.add new ReduceAction344(141)
+		reduce_table.add new ReduceAction352(141)
+		reduce_table.add new ReduceAction191(141)
 		reduce_table.add new ReduceAction195(141)
-		reduce_table.add new ReduceAction357(141)
+		reduce_table.add new ReduceAction346(141)
+		reduce_table.add new ReduceAction354(141)
+		reduce_table.add new ReduceAction192(141)
 		reduce_table.add new ReduceAction196(141)
+		reduce_table.add new ReduceAction348(141)
+		reduce_table.add new ReduceAction356(141)
+		reduce_table.add new ReduceAction193(141)
 		reduce_table.add new ReduceAction197(141)
-		reduce_table.add new ReduceAction359(141)
-		reduce_table.add new ReduceAction361(141)
-		reduce_table.add new ReduceAction363(141)
+		reduce_table.add new ReduceAction350(141)
+		reduce_table.add new ReduceAction358(141)
+		reduce_table.add new ReduceAction198(141)
+		reduce_table.add new ReduceAction360(141)
+		reduce_table.add new ReduceAction199(141)
+		reduce_table.add new ReduceAction200(141)
+		reduce_table.add new ReduceAction362(141)
 		reduce_table.add new ReduceAction364(141)
-		reduce_table.add new ReduceAction365(141)
 		reduce_table.add new ReduceAction366(141)
 		reduce_table.add new ReduceAction367(141)
 		reduce_table.add new ReduceAction368(141)
@@ -628,46 +628,46 @@ redef class Parser
 		reduce_table.add new ReduceAction371(141)
 		reduce_table.add new ReduceAction372(141)
 		reduce_table.add new ReduceAction373(141)
-		reduce_table.add new ReduceAction162(142)
-		reduce_table.add new ReduceAction375(142)
-		reduce_table.add new ReduceAction376(142)
-		reduce_table.add new ReduceAction377(143)
-		reduce_table.add new ReduceAction378(143)
-		reduce_table.add new ReduceAction379(143)
+		reduce_table.add new ReduceAction374(141)
+		reduce_table.add new ReduceAction375(141)
+		reduce_table.add new ReduceAction376(141)
+		reduce_table.add new ReduceAction165(142)
+		reduce_table.add new ReduceAction378(142)
+		reduce_table.add new ReduceAction379(142)
 		reduce_table.add new ReduceAction380(143)
 		reduce_table.add new ReduceAction381(143)
 		reduce_table.add new ReduceAction382(143)
 		reduce_table.add new ReduceAction383(143)
 		reduce_table.add new ReduceAction384(143)
-		reduce_table.add new ReduceAction162(143)
-		reduce_table.add new ReduceAction162(143)
-		reduce_table.add new ReduceAction146(144)
-		reduce_table.add new ReduceAction147(144)
-		reduce_table.add new ReduceAction147(144)
-		reduce_table.add new ReduceAction149(145)
-		reduce_table.add new ReduceAction150(145)
-		reduce_table.add new ReduceAction151(145)
+		reduce_table.add new ReduceAction385(143)
+		reduce_table.add new ReduceAction386(143)
+		reduce_table.add new ReduceAction387(143)
+		reduce_table.add new ReduceAction165(143)
+		reduce_table.add new ReduceAction165(143)
+		reduce_table.add new ReduceAction149(144)
+		reduce_table.add new ReduceAction150(144)
+		reduce_table.add new ReduceAction150(144)
 		reduce_table.add new ReduceAction152(145)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction172(146)
-		reduce_table.add new ReduceAction173(146)
-		reduce_table.add new ReduceAction174(146)
+		reduce_table.add new ReduceAction153(145)
+		reduce_table.add new ReduceAction154(145)
+		reduce_table.add new ReduceAction155(145)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
 		reduce_table.add new ReduceAction175(146)
 		reduce_table.add new ReduceAction176(146)
 		reduce_table.add new ReduceAction177(146)
 		reduce_table.add new ReduceAction178(146)
 		reduce_table.add new ReduceAction179(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction162(146)
-		reduce_table.add new ReduceAction187(146)
-		reduce_table.add new ReduceAction188(146)
-		reduce_table.add new ReduceAction189(146)
+		reduce_table.add new ReduceAction180(146)
+		reduce_table.add new ReduceAction181(146)
+		reduce_table.add new ReduceAction182(146)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
+		reduce_table.add new ReduceAction165(146)
 		reduce_table.add new ReduceAction190(146)
 		reduce_table.add new ReduceAction191(146)
 		reduce_table.add new ReduceAction192(146)
@@ -678,14 +678,14 @@ redef class Parser
 		reduce_table.add new ReduceAction197(146)
 		reduce_table.add new ReduceAction198(146)
 		reduce_table.add new ReduceAction199(146)
-		reduce_table.add new ReduceAction198(146)
+		reduce_table.add new ReduceAction200(146)
 		reduce_table.add new ReduceAction201(146)
 		reduce_table.add new ReduceAction202(146)
 		reduce_table.add new ReduceAction201(146)
 		reduce_table.add new ReduceAction204(146)
-		reduce_table.add new ReduceAction211(147)
-		reduce_table.add new ReduceAction212(147)
-		reduce_table.add new ReduceAction213(147)
+		reduce_table.add new ReduceAction205(146)
+		reduce_table.add new ReduceAction204(146)
+		reduce_table.add new ReduceAction207(146)
 		reduce_table.add new ReduceAction214(147)
 		reduce_table.add new ReduceAction215(147)
 		reduce_table.add new ReduceAction216(147)
@@ -721,79 +721,79 @@ redef class Parser
 		reduce_table.add new ReduceAction246(147)
 		reduce_table.add new ReduceAction247(147)
 		reduce_table.add new ReduceAction248(147)
-		reduce_table.add new ReduceAction162(148)
-		reduce_table.add new ReduceAction292(148)
-		reduce_table.add new ReduceAction162(149)
-		reduce_table.add new ReduceAction294(149)
-		reduce_table.add new ReduceAction295(149)
-		reduce_table.add new ReduceAction296(149)
+		reduce_table.add new ReduceAction249(147)
+		reduce_table.add new ReduceAction250(147)
+		reduce_table.add new ReduceAction251(147)
+		reduce_table.add new ReduceAction165(148)
+		reduce_table.add new ReduceAction295(148)
+		reduce_table.add new ReduceAction165(149)
 		reduce_table.add new ReduceAction297(149)
-		reduce_table.add new ReduceAction162(150)
-		reduce_table.add new ReduceAction299(150)
-		reduce_table.add new ReduceAction162(151)
-		reduce_table.add new ReduceAction301(151)
-		reduce_table.add new ReduceAction302(151)
-		reduce_table.add new ReduceAction303(151)
+		reduce_table.add new ReduceAction298(149)
+		reduce_table.add new ReduceAction299(149)
+		reduce_table.add new ReduceAction300(149)
+		reduce_table.add new ReduceAction165(150)
+		reduce_table.add new ReduceAction302(150)
+		reduce_table.add new ReduceAction165(151)
 		reduce_table.add new ReduceAction304(151)
 		reduce_table.add new ReduceAction305(151)
 		reduce_table.add new ReduceAction306(151)
 		reduce_table.add new ReduceAction307(151)
 		reduce_table.add new ReduceAction308(151)
-		reduce_table.add new ReduceAction162(152)
-		reduce_table.add new ReduceAction310(152)
-		reduce_table.add new ReduceAction162(153)
-		reduce_table.add new ReduceAction312(153)
-		reduce_table.add new ReduceAction162(154)
-		reduce_table.add new ReduceAction314(154)
-		reduce_table.add new ReduceAction162(155)
-		reduce_table.add new ReduceAction316(155)
-		reduce_table.add new ReduceAction317(155)
-		reduce_table.add new ReduceAction162(156)
-		reduce_table.add new ReduceAction319(156)
-		reduce_table.add new ReduceAction320(156)
-		reduce_table.add new ReduceAction162(157)
-		reduce_table.add new ReduceAction322(157)
-		reduce_table.add new ReduceAction323(157)
-		reduce_table.add new ReduceAction324(157)
-		reduce_table.add new ReduceAction162(158)
-		reduce_table.add new ReduceAction326(158)
-		reduce_table.add new ReduceAction162(159)
-		reduce_table.add new ReduceAction328(159)
-		reduce_table.add new ReduceAction329(159)
-		reduce_table.add new ReduceAction330(159)
+		reduce_table.add new ReduceAction309(151)
+		reduce_table.add new ReduceAction310(151)
+		reduce_table.add new ReduceAction311(151)
+		reduce_table.add new ReduceAction165(152)
+		reduce_table.add new ReduceAction313(152)
+		reduce_table.add new ReduceAction165(153)
+		reduce_table.add new ReduceAction315(153)
+		reduce_table.add new ReduceAction165(154)
+		reduce_table.add new ReduceAction317(154)
+		reduce_table.add new ReduceAction165(155)
+		reduce_table.add new ReduceAction319(155)
+		reduce_table.add new ReduceAction320(155)
+		reduce_table.add new ReduceAction165(156)
+		reduce_table.add new ReduceAction322(156)
+		reduce_table.add new ReduceAction323(156)
+		reduce_table.add new ReduceAction165(157)
+		reduce_table.add new ReduceAction325(157)
+		reduce_table.add new ReduceAction326(157)
+		reduce_table.add new ReduceAction327(157)
+		reduce_table.add new ReduceAction165(158)
+		reduce_table.add new ReduceAction329(158)
+		reduce_table.add new ReduceAction165(159)
 		reduce_table.add new ReduceAction331(159)
-		reduce_table.add new ReduceAction162(160)
-		reduce_table.add new ReduceAction333(160)
-		reduce_table.add new ReduceAction334(160)
-		reduce_table.add new ReduceAction335(160)
+		reduce_table.add new ReduceAction332(159)
+		reduce_table.add new ReduceAction333(159)
+		reduce_table.add new ReduceAction334(159)
+		reduce_table.add new ReduceAction165(160)
 		reduce_table.add new ReduceAction336(160)
-		reduce_table.add new ReduceAction162(161)
-		reduce_table.add new ReduceAction338(161)
-		reduce_table.add new ReduceAction339(161)
-		reduce_table.add new ReduceAction187(161)
+		reduce_table.add new ReduceAction337(160)
+		reduce_table.add new ReduceAction338(160)
+		reduce_table.add new ReduceAction339(160)
+		reduce_table.add new ReduceAction165(161)
 		reduce_table.add new ReduceAction341(161)
-		reduce_table.add new ReduceAction188(161)
-		reduce_table.add new ReduceAction343(161)
-		reduce_table.add new ReduceAction189(161)
-		reduce_table.add new ReduceAction345(161)
+		reduce_table.add new ReduceAction342(161)
 		reduce_table.add new ReduceAction190(161)
-		reduce_table.add new ReduceAction347(161)
+		reduce_table.add new ReduceAction344(161)
 		reduce_table.add new ReduceAction191(161)
-		reduce_table.add new ReduceAction349(161)
+		reduce_table.add new ReduceAction346(161)
 		reduce_table.add new ReduceAction192(161)
-		reduce_table.add new ReduceAction351(161)
+		reduce_table.add new ReduceAction348(161)
 		reduce_table.add new ReduceAction193(161)
-		reduce_table.add new ReduceAction353(161)
+		reduce_table.add new ReduceAction350(161)
 		reduce_table.add new ReduceAction194(161)
-		reduce_table.add new ReduceAction355(161)
+		reduce_table.add new ReduceAction352(161)
 		reduce_table.add new ReduceAction195(161)
-		reduce_table.add new ReduceAction357(161)
+		reduce_table.add new ReduceAction354(161)
 		reduce_table.add new ReduceAction196(161)
-		reduce_table.add new ReduceAction359(161)
+		reduce_table.add new ReduceAction356(161)
 		reduce_table.add new ReduceAction197(161)
-		reduce_table.add new ReduceAction361(161)
+		reduce_table.add new ReduceAction358(161)
+		reduce_table.add new ReduceAction198(161)
+		reduce_table.add new ReduceAction360(161)
+		reduce_table.add new ReduceAction199(161)
 		reduce_table.add new ReduceAction362(161)
-		reduce_table.add new ReduceAction363(161)
+		reduce_table.add new ReduceAction200(161)
 		reduce_table.add new ReduceAction364(161)
 		reduce_table.add new ReduceAction365(161)
 		reduce_table.add new ReduceAction366(161)
@@ -804,98 +804,98 @@ redef class Parser
 		reduce_table.add new ReduceAction371(161)
 		reduce_table.add new ReduceAction372(161)
 		reduce_table.add new ReduceAction373(161)
-		reduce_table.add new ReduceAction162(162)
-		reduce_table.add new ReduceAction375(162)
-		reduce_table.add new ReduceAction376(162)
-		reduce_table.add new ReduceAction377(163)
-		reduce_table.add new ReduceAction378(163)
-		reduce_table.add new ReduceAction379(163)
+		reduce_table.add new ReduceAction374(161)
+		reduce_table.add new ReduceAction375(161)
+		reduce_table.add new ReduceAction376(161)
+		reduce_table.add new ReduceAction165(162)
+		reduce_table.add new ReduceAction378(162)
+		reduce_table.add new ReduceAction379(162)
 		reduce_table.add new ReduceAction380(163)
 		reduce_table.add new ReduceAction381(163)
 		reduce_table.add new ReduceAction382(163)
 		reduce_table.add new ReduceAction383(163)
 		reduce_table.add new ReduceAction384(163)
-		reduce_table.add new ReduceAction162(163)
-		reduce_table.add new ReduceAction409(164)
-		reduce_table.add new ReduceAction410(164)
-		reduce_table.add new ReduceAction411(165)
+		reduce_table.add new ReduceAction385(163)
+		reduce_table.add new ReduceAction386(163)
+		reduce_table.add new ReduceAction387(163)
+		reduce_table.add new ReduceAction165(163)
+		reduce_table.add new ReduceAction412(164)
+		reduce_table.add new ReduceAction413(164)
+		reduce_table.add new ReduceAction414(165)
 		reduce_table.add new ReduceAction22(165)
-		reduce_table.add new ReduceAction413(166)
-		reduce_table.add new ReduceAction413(167)
-		reduce_table.add new ReduceAction394(168)
-		reduce_table.add new ReduceAction395(168)
-		reduce_table.add new ReduceAction435(169)
-		reduce_table.add new ReduceAction162(169)
-		reduce_table.add new ReduceAction162(169)
+		reduce_table.add new ReduceAction416(166)
+		reduce_table.add new ReduceAction416(167)
+		reduce_table.add new ReduceAction397(168)
+		reduce_table.add new ReduceAction398(168)
 		reduce_table.add new ReduceAction438(169)
-		reduce_table.add new ReduceAction439(169)
-		reduce_table.add new ReduceAction146(170)
-		reduce_table.add new ReduceAction147(170)
-		reduce_table.add new ReduceAction147(170)
-		reduce_table.add new ReduceAction149(171)
-		reduce_table.add new ReduceAction150(171)
-		reduce_table.add new ReduceAction162(172)
-		reduce_table.add new ReduceAction292(172)
-		reduce_table.add new ReduceAction162(173)
-		reduce_table.add new ReduceAction294(173)
-		reduce_table.add new ReduceAction295(173)
-		reduce_table.add new ReduceAction296(173)
+		reduce_table.add new ReduceAction165(169)
+		reduce_table.add new ReduceAction165(169)
+		reduce_table.add new ReduceAction441(169)
+		reduce_table.add new ReduceAction442(169)
+		reduce_table.add new ReduceAction149(170)
+		reduce_table.add new ReduceAction150(170)
+		reduce_table.add new ReduceAction150(170)
+		reduce_table.add new ReduceAction152(171)
+		reduce_table.add new ReduceAction153(171)
+		reduce_table.add new ReduceAction165(172)
+		reduce_table.add new ReduceAction295(172)
+		reduce_table.add new ReduceAction165(173)
 		reduce_table.add new ReduceAction297(173)
-		reduce_table.add new ReduceAction162(174)
-		reduce_table.add new ReduceAction299(174)
-		reduce_table.add new ReduceAction162(175)
-		reduce_table.add new ReduceAction301(175)
-		reduce_table.add new ReduceAction302(175)
-		reduce_table.add new ReduceAction303(175)
+		reduce_table.add new ReduceAction298(173)
+		reduce_table.add new ReduceAction299(173)
+		reduce_table.add new ReduceAction300(173)
+		reduce_table.add new ReduceAction165(174)
+		reduce_table.add new ReduceAction302(174)
+		reduce_table.add new ReduceAction165(175)
 		reduce_table.add new ReduceAction304(175)
 		reduce_table.add new ReduceAction305(175)
 		reduce_table.add new ReduceAction306(175)
 		reduce_table.add new ReduceAction307(175)
 		reduce_table.add new ReduceAction308(175)
-		reduce_table.add new ReduceAction162(176)
-		reduce_table.add new ReduceAction310(176)
-		reduce_table.add new ReduceAction162(177)
-		reduce_table.add new ReduceAction312(177)
-		reduce_table.add new ReduceAction162(178)
-		reduce_table.add new ReduceAction314(178)
-		reduce_table.add new ReduceAction162(179)
-		reduce_table.add new ReduceAction316(179)
-		reduce_table.add new ReduceAction317(179)
-		reduce_table.add new ReduceAction162(180)
-		reduce_table.add new ReduceAction319(180)
-		reduce_table.add new ReduceAction320(180)
-		reduce_table.add new ReduceAction162(181)
-		reduce_table.add new ReduceAction322(181)
-		reduce_table.add new ReduceAction323(181)
-		reduce_table.add new ReduceAction324(181)
-		reduce_table.add new ReduceAction162(182)
-		reduce_table.add new ReduceAction326(182)
-		reduce_table.add new ReduceAction162(183)
-		reduce_table.add new ReduceAction328(183)
-		reduce_table.add new ReduceAction329(183)
-		reduce_table.add new ReduceAction330(183)
+		reduce_table.add new ReduceAction309(175)
+		reduce_table.add new ReduceAction310(175)
+		reduce_table.add new ReduceAction311(175)
+		reduce_table.add new ReduceAction165(176)
+		reduce_table.add new ReduceAction313(176)
+		reduce_table.add new ReduceAction165(177)
+		reduce_table.add new ReduceAction315(177)
+		reduce_table.add new ReduceAction165(178)
+		reduce_table.add new ReduceAction317(178)
+		reduce_table.add new ReduceAction165(179)
+		reduce_table.add new ReduceAction319(179)
+		reduce_table.add new ReduceAction320(179)
+		reduce_table.add new ReduceAction165(180)
+		reduce_table.add new ReduceAction322(180)
+		reduce_table.add new ReduceAction323(180)
+		reduce_table.add new ReduceAction165(181)
+		reduce_table.add new ReduceAction325(181)
+		reduce_table.add new ReduceAction326(181)
+		reduce_table.add new ReduceAction327(181)
+		reduce_table.add new ReduceAction165(182)
+		reduce_table.add new ReduceAction329(182)
+		reduce_table.add new ReduceAction165(183)
 		reduce_table.add new ReduceAction331(183)
-		reduce_table.add new ReduceAction162(184)
-		reduce_table.add new ReduceAction333(184)
-		reduce_table.add new ReduceAction334(184)
-		reduce_table.add new ReduceAction868(184)
-		reduce_table.add new ReduceAction162(185)
-		reduce_table.add new ReduceAction870(185)
-		reduce_table.add new ReduceAction871(185)
-		reduce_table.add new ReduceAction872(185)
+		reduce_table.add new ReduceAction332(183)
+		reduce_table.add new ReduceAction333(183)
+		reduce_table.add new ReduceAction334(183)
+		reduce_table.add new ReduceAction165(184)
+		reduce_table.add new ReduceAction336(184)
+		reduce_table.add new ReduceAction337(184)
+		reduce_table.add new ReduceAction871(184)
+		reduce_table.add new ReduceAction165(185)
 		reduce_table.add new ReduceAction873(185)
 		reduce_table.add new ReduceAction874(185)
 		reduce_table.add new ReduceAction875(185)
 		reduce_table.add new ReduceAction876(185)
 		reduce_table.add new ReduceAction877(185)
 		reduce_table.add new ReduceAction878(185)
-		reduce_table.add new ReduceAction195(185)
-		reduce_table.add new ReduceAction357(185)
+		reduce_table.add new ReduceAction879(185)
+		reduce_table.add new ReduceAction880(185)
 		reduce_table.add new ReduceAction881(185)
-		reduce_table.add new ReduceAction882(185)
-		reduce_table.add new ReduceAction363(185)
-		reduce_table.add new ReduceAction364(185)
-		reduce_table.add new ReduceAction365(185)
+		reduce_table.add new ReduceAction198(185)
+		reduce_table.add new ReduceAction360(185)
+		reduce_table.add new ReduceAction884(185)
+		reduce_table.add new ReduceAction885(185)
 		reduce_table.add new ReduceAction366(185)
 		reduce_table.add new ReduceAction367(185)
 		reduce_table.add new ReduceAction368(185)
@@ -904,44 +904,44 @@ redef class Parser
 		reduce_table.add new ReduceAction371(185)
 		reduce_table.add new ReduceAction372(185)
 		reduce_table.add new ReduceAction373(185)
-		reduce_table.add new ReduceAction162(186)
-		reduce_table.add new ReduceAction375(186)
-		reduce_table.add new ReduceAction376(186)
-		reduce_table.add new ReduceAction377(187)
-		reduce_table.add new ReduceAction378(187)
-		reduce_table.add new ReduceAction379(187)
+		reduce_table.add new ReduceAction374(185)
+		reduce_table.add new ReduceAction375(185)
+		reduce_table.add new ReduceAction376(185)
+		reduce_table.add new ReduceAction165(186)
+		reduce_table.add new ReduceAction378(186)
+		reduce_table.add new ReduceAction379(186)
 		reduce_table.add new ReduceAction380(187)
 		reduce_table.add new ReduceAction381(187)
 		reduce_table.add new ReduceAction382(187)
 		reduce_table.add new ReduceAction383(187)
 		reduce_table.add new ReduceAction384(187)
-		reduce_table.add new ReduceAction162(187)
-		reduce_table.add new ReduceAction906(188)
-		reduce_table.add new ReduceAction907(188)
-		reduce_table.add new ReduceAction159(189)
-		reduce_table.add new ReduceAction160(189)
-		reduce_table.add new ReduceAction161(189)
+		reduce_table.add new ReduceAction385(187)
+		reduce_table.add new ReduceAction386(187)
+		reduce_table.add new ReduceAction387(187)
+		reduce_table.add new ReduceAction165(187)
+		reduce_table.add new ReduceAction909(188)
+		reduce_table.add new ReduceAction910(188)
 		reduce_table.add new ReduceAction162(189)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction172(190)
-		reduce_table.add new ReduceAction173(190)
-		reduce_table.add new ReduceAction174(190)
+		reduce_table.add new ReduceAction163(189)
+		reduce_table.add new ReduceAction164(189)
+		reduce_table.add new ReduceAction165(189)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
 		reduce_table.add new ReduceAction175(190)
 		reduce_table.add new ReduceAction176(190)
 		reduce_table.add new ReduceAction177(190)
 		reduce_table.add new ReduceAction178(190)
 		reduce_table.add new ReduceAction179(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction162(190)
-		reduce_table.add new ReduceAction187(190)
-		reduce_table.add new ReduceAction188(190)
-		reduce_table.add new ReduceAction189(190)
+		reduce_table.add new ReduceAction180(190)
+		reduce_table.add new ReduceAction181(190)
+		reduce_table.add new ReduceAction182(190)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
+		reduce_table.add new ReduceAction165(190)
 		reduce_table.add new ReduceAction190(190)
 		reduce_table.add new ReduceAction191(190)
 		reduce_table.add new ReduceAction192(190)
@@ -952,45 +952,45 @@ redef class Parser
 		reduce_table.add new ReduceAction197(190)
 		reduce_table.add new ReduceAction198(190)
 		reduce_table.add new ReduceAction199(190)
-		reduce_table.add new ReduceAction198(190)
+		reduce_table.add new ReduceAction200(190)
 		reduce_table.add new ReduceAction201(190)
 		reduce_table.add new ReduceAction202(190)
 		reduce_table.add new ReduceAction201(190)
 		reduce_table.add new ReduceAction204(190)
-		reduce_table.add new ReduceAction260(191)
-		reduce_table.add new ReduceAction261(191)
-		reduce_table.add new ReduceAction262(191)
-		reduce_table.add new ReduceAction263(192)
-		reduce_table.add new ReduceAction272(193)
-		reduce_table.add new ReduceAction273(193)
-		reduce_table.add new ReduceAction274(194)
-		reduce_table.add new ReduceAction275(194)
-		reduce_table.add new ReduceAction276(195)
-		reduce_table.add new ReduceAction277(195)
-		reduce_table.add new ReduceAction281(196)
-		reduce_table.add new ReduceAction282(196)
-		reduce_table.add new ReduceAction286(197)
-		reduce_table.add new ReduceAction287(197)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction172(198)
-		reduce_table.add new ReduceAction173(198)
-		reduce_table.add new ReduceAction174(198)
+		reduce_table.add new ReduceAction205(190)
+		reduce_table.add new ReduceAction204(190)
+		reduce_table.add new ReduceAction207(190)
+		reduce_table.add new ReduceAction263(191)
+		reduce_table.add new ReduceAction264(191)
+		reduce_table.add new ReduceAction265(191)
+		reduce_table.add new ReduceAction266(192)
+		reduce_table.add new ReduceAction275(193)
+		reduce_table.add new ReduceAction276(193)
+		reduce_table.add new ReduceAction277(194)
+		reduce_table.add new ReduceAction278(194)
+		reduce_table.add new ReduceAction279(195)
+		reduce_table.add new ReduceAction280(195)
+		reduce_table.add new ReduceAction284(196)
+		reduce_table.add new ReduceAction285(196)
+		reduce_table.add new ReduceAction289(197)
+		reduce_table.add new ReduceAction290(197)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
 		reduce_table.add new ReduceAction175(198)
 		reduce_table.add new ReduceAction176(198)
 		reduce_table.add new ReduceAction177(198)
 		reduce_table.add new ReduceAction178(198)
 		reduce_table.add new ReduceAction179(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction162(198)
-		reduce_table.add new ReduceAction187(198)
-		reduce_table.add new ReduceAction188(198)
-		reduce_table.add new ReduceAction189(198)
+		reduce_table.add new ReduceAction180(198)
+		reduce_table.add new ReduceAction181(198)
+		reduce_table.add new ReduceAction182(198)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
+		reduce_table.add new ReduceAction165(198)
 		reduce_table.add new ReduceAction190(198)
 		reduce_table.add new ReduceAction191(198)
 		reduce_table.add new ReduceAction192(198)
@@ -1001,128 +1001,131 @@ redef class Parser
 		reduce_table.add new ReduceAction197(198)
 		reduce_table.add new ReduceAction198(198)
 		reduce_table.add new ReduceAction199(198)
-		reduce_table.add new ReduceAction198(198)
+		reduce_table.add new ReduceAction200(198)
 		reduce_table.add new ReduceAction201(198)
 		reduce_table.add new ReduceAction202(198)
 		reduce_table.add new ReduceAction201(198)
 		reduce_table.add new ReduceAction204(198)
-		reduce_table.add new ReduceAction159(199)
-		reduce_table.add new ReduceAction160(199)
-		reduce_table.add new ReduceAction161(199)
-		reduce_table.add new ReduceAction159(200)
-		reduce_table.add new ReduceAction160(200)
-		reduce_table.add new ReduceAction161(200)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction172(201)
-		reduce_table.add new ReduceAction173(201)
-		reduce_table.add new ReduceAction174(201)
+		reduce_table.add new ReduceAction205(198)
+		reduce_table.add new ReduceAction204(198)
+		reduce_table.add new ReduceAction207(198)
+		reduce_table.add new ReduceAction162(199)
+		reduce_table.add new ReduceAction163(199)
+		reduce_table.add new ReduceAction164(199)
+		reduce_table.add new ReduceAction162(200)
+		reduce_table.add new ReduceAction163(200)
+		reduce_table.add new ReduceAction164(200)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction165(201)
 		reduce_table.add new ReduceAction175(201)
 		reduce_table.add new ReduceAction176(201)
 		reduce_table.add new ReduceAction177(201)
 		reduce_table.add new ReduceAction178(201)
 		reduce_table.add new ReduceAction179(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction162(201)
-		reduce_table.add new ReduceAction204(201)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction172(202)
-		reduce_table.add new ReduceAction173(202)
-		reduce_table.add new ReduceAction174(202)
+		reduce_table.add new ReduceAction180(201)
+		reduce_table.add new ReduceAction181(201)
+		reduce_table.add new ReduceAction182(201)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction165(201)
+		reduce_table.add new ReduceAction207(201)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction165(202)
 		reduce_table.add new ReduceAction175(202)
 		reduce_table.add new ReduceAction176(202)
 		reduce_table.add new ReduceAction177(202)
 		reduce_table.add new ReduceAction178(202)
 		reduce_table.add new ReduceAction179(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction162(202)
-		reduce_table.add new ReduceAction204(202)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction172(203)
-		reduce_table.add new ReduceAction173(203)
-		reduce_table.add new ReduceAction174(203)
+		reduce_table.add new ReduceAction180(202)
+		reduce_table.add new ReduceAction181(202)
+		reduce_table.add new ReduceAction182(202)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction165(202)
+		reduce_table.add new ReduceAction207(202)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction165(203)
 		reduce_table.add new ReduceAction175(203)
 		reduce_table.add new ReduceAction176(203)
 		reduce_table.add new ReduceAction177(203)
 		reduce_table.add new ReduceAction178(203)
 		reduce_table.add new ReduceAction179(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction162(203)
-		reduce_table.add new ReduceAction204(203)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction172(204)
-		reduce_table.add new ReduceAction173(204)
-		reduce_table.add new ReduceAction174(204)
+		reduce_table.add new ReduceAction180(203)
+		reduce_table.add new ReduceAction181(203)
+		reduce_table.add new ReduceAction182(203)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction165(203)
+		reduce_table.add new ReduceAction207(203)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction165(204)
 		reduce_table.add new ReduceAction175(204)
 		reduce_table.add new ReduceAction176(204)
 		reduce_table.add new ReduceAction177(204)
 		reduce_table.add new ReduceAction178(204)
 		reduce_table.add new ReduceAction179(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction162(204)
-		reduce_table.add new ReduceAction204(204)
-		reduce_table.add new ReduceAction441(205)
-		reduce_table.add new ReduceAction443(205)
-		reduce_table.add new ReduceAction481(206)
-		reduce_table.add new ReduceAction482(206)
+		reduce_table.add new ReduceAction180(204)
+		reduce_table.add new ReduceAction181(204)
+		reduce_table.add new ReduceAction182(204)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction165(204)
+		reduce_table.add new ReduceAction207(204)
+		reduce_table.add new ReduceAction444(205)
+		reduce_table.add new ReduceAction446(205)
+		reduce_table.add new ReduceAction484(206)
+		reduce_table.add new ReduceAction485(206)
 		reduce_table.add new ReduceAction23(206)
-		reduce_table.add new ReduceAction1075(207)
-		reduce_table.add new ReduceAction1076(207)
-		reduce_table.add new ReduceAction1077(208)
-		reduce_table.add new ReduceAction1078(208)
-		reduce_table.add new ReduceAction1079(209)
-		reduce_table.add new ReduceAction1080(209)
-		reduce_table.add new ReduceAction37(210)
-		reduce_table.add new ReduceAction1082(210)
-		reduce_table.add new ReduceAction45(211)
-		reduce_table.add new ReduceAction1084(211)
-		reduce_table.add new ReduceAction415(212)
-		reduce_table.add new ReduceAction1086(212)
-		reduce_table.add new ReduceAction1087(213)
-		reduce_table.add new ReduceAction1088(213)
-		reduce_table.add new ReduceAction1089(214)
-		reduce_table.add new ReduceAction1090(214)
-		reduce_table.add new ReduceAction153(215)
-		reduce_table.add new ReduceAction1092(215)
-		reduce_table.add new ReduceAction394(216)
-		reduce_table.add new ReduceAction1094(216)
-		reduce_table.add new ReduceAction394(217)
-		reduce_table.add new ReduceAction1094(217)
-		reduce_table.add new ReduceAction394(218)
-		reduce_table.add new ReduceAction1094(218)
-		reduce_table.add new ReduceAction455(219)
-		reduce_table.add new ReduceAction1100(219)
-		reduce_table.add new ReduceAction415(220)
-		reduce_table.add new ReduceAction1086(220)
-		reduce_table.add new ReduceAction394(221)
-		reduce_table.add new ReduceAction1094(221)
-		reduce_table.add new ReduceAction394(222)
-		reduce_table.add new ReduceAction1094(222)
-		reduce_table.add new ReduceAction456(223)
-		reduce_table.add new ReduceAction1108(223)
-		reduce_table.add new ReduceAction1109(224)
-		reduce_table.add new ReduceAction1110(224)
-		reduce_table.add new ReduceAction478(225)
-		reduce_table.add new ReduceAction497(225)
+		reduce_table.add new ReduceAction1078(207)
+		reduce_table.add new ReduceAction1079(207)
+		reduce_table.add new ReduceAction1080(208)
+		reduce_table.add new ReduceAction1081(208)
+		reduce_table.add new ReduceAction1082(209)
+		reduce_table.add new ReduceAction1083(209)
+		reduce_table.add new ReduceAction38(210)
+		reduce_table.add new ReduceAction1085(210)
+		reduce_table.add new ReduceAction46(211)
+		reduce_table.add new ReduceAction1087(211)
+		reduce_table.add new ReduceAction418(212)
+		reduce_table.add new ReduceAction1089(212)
+		reduce_table.add new ReduceAction1090(213)
+		reduce_table.add new ReduceAction1091(213)
+		reduce_table.add new ReduceAction1092(214)
+		reduce_table.add new ReduceAction1093(214)
+		reduce_table.add new ReduceAction156(215)
+		reduce_table.add new ReduceAction1095(215)
+		reduce_table.add new ReduceAction397(216)
+		reduce_table.add new ReduceAction1097(216)
+		reduce_table.add new ReduceAction397(217)
+		reduce_table.add new ReduceAction1097(217)
+		reduce_table.add new ReduceAction397(218)
+		reduce_table.add new ReduceAction1097(218)
+		reduce_table.add new ReduceAction458(219)
+		reduce_table.add new ReduceAction1103(219)
+		reduce_table.add new ReduceAction418(220)
+		reduce_table.add new ReduceAction1089(220)
+		reduce_table.add new ReduceAction397(221)
+		reduce_table.add new ReduceAction1097(221)
+		reduce_table.add new ReduceAction397(222)
+		reduce_table.add new ReduceAction1097(222)
+		reduce_table.add new ReduceAction459(223)
+		reduce_table.add new ReduceAction1111(223)
+		reduce_table.add new ReduceAction1112(224)
+		reduce_table.add new ReduceAction1113(224)
+		reduce_table.add new ReduceAction481(225)
+		reduce_table.add new ReduceAction500(225)
 		return reduce_table
 	end
 end
@@ -2128,6 +2131,21 @@ private class ReduceAction37
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
+					var tkwsubsetnode2 = nodearraylist1
+					assert tkwsubsetnode2 isa nullable TKwsubset
+					var pclasskindnode1: nullable ASubsetClasskind = new ASubsetClasskind.init_asubsetclasskind(
+						tkwsubsetnode2
+					)
+					node_list = pclasskindnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction38
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pformaldefnode1 = nodearraylist1
 					if pformaldefnode1 != null then
@@ -2137,7 +2155,7 @@ private class ReduceAction37
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction38
+private class ReduceAction39
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2156,7 +2174,7 @@ private class ReduceAction38
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction39
+private class ReduceAction40
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2166,7 +2184,7 @@ private class ReduceAction39
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction40
+private class ReduceAction41
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2179,7 +2197,7 @@ private class ReduceAction40
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction41
+private class ReduceAction42
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2200,7 +2218,7 @@ private class ReduceAction41
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction42
+private class ReduceAction43
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2224,7 +2242,7 @@ private class ReduceAction42
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction43
+private class ReduceAction44
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2260,7 +2278,7 @@ private class ReduceAction43
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction44
+private class ReduceAction45
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2275,7 +2293,7 @@ private class ReduceAction44
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction45
+private class ReduceAction46
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2290,7 +2308,7 @@ private class ReduceAction45
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction46
+private class ReduceAction47
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2301,7 +2319,7 @@ private class ReduceAction46
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction47
+private class ReduceAction48
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2313,7 +2331,7 @@ private class ReduceAction47
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction48
+private class ReduceAction49
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2335,16 +2353,16 @@ private class ReduceAction48
 					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var tkwdonode13 = nodearraylist7
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist8
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist9
-					assert tkwendnode15 isa nullable TKwend
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var tkwdonode14 = nodearraylist7
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist8
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist9
+					assert tkwendnode16 isa nullable TKwend
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2352,20 +2370,21 @@ private class ReduceAction48
 						tkwmethnode5,
 						null,
 						null,
-						pmethidnode8,
-						psignaturenode9,
+						null,
+						pmethidnode9,
+						psignaturenode10,
 						null,
 						null,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction49
+private class ReduceAction50
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2388,18 +2407,18 @@ private class ReduceAction49
 					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
-					var tkwdonode13 = nodearraylist8
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist9
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist10
-					assert tkwendnode15 isa nullable TKwend
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
+					var tkwdonode14 = nodearraylist8
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist9
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist10
+					assert tkwendnode16 isa nullable TKwend
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2407,20 +2426,21 @@ private class ReduceAction49
 						tkwmethnode5,
 						null,
 						null,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
+						null,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
 						null,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction50
+private class ReduceAction51
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2440,12 +2460,12 @@ private class ReduceAction50
 					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2453,52 +2473,10 @@ private class ReduceAction50
 						tkwmethnode5,
 						null,
 						null,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
 						null,
-						null,
-						null,
-						null,
-						null
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction51
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist6
-					assert pannotationsnode10 isa nullable AAnnotations
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						null,
-						tkwnewnode7,
-						null,
-						psignaturenode9,
-						pannotationsnode10,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
 						null,
 						null,
 						null,
@@ -2527,29 +2505,37 @@ private class ReduceAction52
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
+					var tkwisanode7 = nodearraylist4
+					assert tkwisanode7 isa nullable TKwisa
+					var listnode12 = new Array[Object]
+					var psignaturenode10: nullable ASignature = new ASignature.init_asignature(
+						null,
+						listnode12,
+						null,
+						null
+					)
+					var tkwdonode18 = nodearraylist5
+					assert tkwdonode18 isa nullable TKwdo
+					var pexprnode19 = nodearraylist6
+					assert pexprnode19 isa nullable AExpr
+					var tkwendnode20 = nodearraylist7
+					assert tkwendnode20 isa nullable TKwend
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						null,
 						null,
-						tkwnewnode7,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
+						tkwisanode7,
+						null,
+						null,
+						psignaturenode10,
 						null,
 						null,
 						null,
-						null,
-						null
+						tkwdonode18,
+						pexprnode19,
+						tkwendnode20
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2574,31 +2560,39 @@ private class ReduceAction53
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var tkwdonode13 = nodearraylist6
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist7
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist8
-					assert tkwendnode15 isa nullable TKwend
+					var tkwisanode7 = nodearraylist4
+					assert tkwisanode7 isa nullable TKwisa
+					var listnode12 = new Array[Object]
+					var psignaturenode10: nullable ASignature = new ASignature.init_asignature(
+						null,
+						listnode12,
+						null,
+						null
+					)
+					var pannotationsnode15 = nodearraylist5
+					assert pannotationsnode15 isa nullable AAnnotations
+					var tkwdonode18 = nodearraylist6
+					assert tkwdonode18 isa nullable TKwdo
+					var pexprnode19 = nodearraylist7
+					assert pexprnode19 isa nullable AExpr
+					var tkwendnode20 = nodearraylist8
+					assert tkwendnode20 isa nullable TKwend
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						null,
 						null,
-						tkwnewnode7,
-						null,
-						psignaturenode9,
+						tkwisanode7,
 						null,
 						null,
+						psignaturenode10,
+						pannotationsnode15,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
+						null,
+						tkwdonode18,
+						pexprnode19,
+						tkwendnode20
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2609,9 +2603,6 @@ private class ReduceAction54
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
-					var nodearraylist9 = p.pop
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -2624,33 +2615,28 @@ private class ReduceAction54
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var tkwdonode13 = nodearraylist7
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist8
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist9
-					assert tkwendnode15 isa nullable TKwend
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist6
+					assert pannotationsnode11 isa nullable AAnnotations
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						null,
 						null,
-						tkwnewnode7,
-						pmethidnode8,
-						psignaturenode9,
+						null,
+						tkwnewnode8,
+						null,
+						psignaturenode10,
+						pannotationsnode11,
 						null,
 						null,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
+						null,
+						null
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2661,8 +2647,6 @@ private class ReduceAction55
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
-					var nodearraylist9 = p.pop
-					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -2676,33 +2660,30 @@ private class ReduceAction55
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist6
-					assert pannotationsnode10 isa nullable AAnnotations
-					var tkwdonode13 = nodearraylist7
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist8
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist9
-					assert tkwendnode15 isa nullable TKwend
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						null,
 						null,
-						tkwnewnode7,
 						null,
-						psignaturenode9,
-						pannotationsnode10,
+						tkwnewnode8,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
 						null,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
+						null,
+						null,
+						null
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2713,7 +2694,56 @@ private class ReduceAction56
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
-					var nodearraylist10 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var tkwdonode14 = nodearraylist6
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist7
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist8
+					assert tkwendnode16 isa nullable TKwend
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						null,
+						null,
+						tkwnewnode8,
+						null,
+						psignaturenode10,
+						null,
+						null,
+						null,
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction57
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -2729,84 +2759,34 @@ private class ReduceAction56
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
-					var tkwdonode13 = nodearraylist8
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist9
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist10
-					assert tkwendnode15 isa nullable TKwend
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var tkwdonode14 = nodearraylist7
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist8
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist9
+					assert tkwendnode16 isa nullable TKwend
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						null,
 						null,
-						tkwnewnode7,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
+						null,
+						tkwnewnode8,
+						pmethidnode9,
+						psignaturenode10,
 						null,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction57
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa nullable TKwmeth
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pexterncallsnode11 = nodearraylist7
-					assert pexterncallsnode11 isa nullable AExternCalls
-					var pexterncodeblocknode12 = nodearraylist8
-					assert pexterncodeblocknode12 isa nullable AExternCodeBlock
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						tkwmethnode5,
 						null,
-						null,
-						pmethidnode8,
-						psignaturenode9,
-						null,
-						pexterncallsnode11,
-						pexterncodeblocknode12,
-						null,
-						null,
-						null
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2832,18 +2812,124 @@ private class ReduceAction58
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist6
+					assert pannotationsnode11 isa nullable AAnnotations
+					var tkwdonode14 = nodearraylist7
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist8
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist9
+					assert tkwendnode16 isa nullable TKwend
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						null,
+						null,
+						tkwnewnode8,
+						null,
+						psignaturenode10,
+						pannotationsnode11,
+						null,
+						null,
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction59
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
+					var tkwdonode14 = nodearraylist8
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist9
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist10
+					assert tkwendnode16 isa nullable TKwend
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						null,
+						null,
+						tkwnewnode8,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
+						null,
+						null,
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction60
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
-					var pexterncallsnode11 = nodearraylist8
-					assert pexterncallsnode11 isa nullable AExternCalls
-					var pexterncodeblocknode12 = nodearraylist9
-					assert pexterncodeblocknode12 isa nullable AExternCodeBlock
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pexterncallsnode12 = nodearraylist7
+					assert pexterncallsnode12 isa nullable AExternCalls
+					var pexterncodeblocknode13 = nodearraylist8
+					assert pexterncodeblocknode13 isa nullable AExternCodeBlock
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2851,11 +2937,12 @@ private class ReduceAction58
 						tkwmethnode5,
 						null,
 						null,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
-						pexterncallsnode11,
-						pexterncodeblocknode12,
+						null,
+						pmethidnode9,
+						psignaturenode10,
+						null,
+						pexterncallsnode12,
+						pexterncodeblocknode13,
 						null,
 						null,
 						null
@@ -2864,7 +2951,60 @@ private class ReduceAction58
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction59
+private class ReduceAction61
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa nullable TKwmeth
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
+					var pexterncallsnode12 = nodearraylist8
+					assert pexterncallsnode12 isa nullable AExternCalls
+					var pexterncodeblocknode13 = nodearraylist9
+					assert pexterncodeblocknode13 isa nullable AExternCodeBlock
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						null,
+						null,
+						null,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
+						pexterncallsnode12,
+						pexterncodeblocknode13,
+						null,
+						null,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction62
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2908,7 +3048,7 @@ private class ReduceAction59
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction60
+private class ReduceAction63
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -2959,7 +3099,7 @@ private class ReduceAction60
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction61
+private class ReduceAction64
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3006,7 +3146,7 @@ private class ReduceAction61
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction62
+private class ReduceAction65
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3056,7 +3196,7 @@ private class ReduceAction62
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction63
+private class ReduceAction66
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3106,7 +3246,7 @@ private class ReduceAction63
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction64
+private class ReduceAction67
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3159,160 +3299,163 @@ private class ReduceAction64
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction65
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwinitnode6 = nodearraylist4
-					assert tkwinitnode6 isa nullable TKwinit
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var tkwdonode13 = nodearraylist6
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist7
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist8
-					assert tkwendnode15 isa nullable TKwend
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						tkwinitnode6,
-						null,
-						null,
-						psignaturenode9,
-						null,
-						null,
-						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction66
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist9 = p.pop
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwinitnode6 = nodearraylist4
-					assert tkwinitnode6 isa nullable TKwinit
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var tkwdonode13 = nodearraylist7
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist8
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist9
-					assert tkwendnode15 isa nullable TKwend
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						tkwinitnode6,
-						null,
-						pmethidnode8,
-						psignaturenode9,
-						null,
-						null,
-						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction67
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist9 = p.pop
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwinitnode6 = nodearraylist4
-					assert tkwinitnode6 isa nullable TKwinit
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist6
-					assert pannotationsnode10 isa nullable AAnnotations
-					var tkwdonode13 = nodearraylist7
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist8
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist9
-					assert tkwendnode15 isa nullable TKwend
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						tkwinitnode6,
-						null,
-						null,
-						psignaturenode9,
-						pannotationsnode10,
-						null,
-						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
 private class ReduceAction68
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwinitnode6 = nodearraylist4
+					assert tkwinitnode6 isa nullable TKwinit
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var tkwdonode14 = nodearraylist6
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist7
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist8
+					assert tkwendnode16 isa nullable TKwend
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						tkwinitnode6,
+						null,
+						null,
+						null,
+						psignaturenode10,
+						null,
+						null,
+						null,
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction69
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwinitnode6 = nodearraylist4
+					assert tkwinitnode6 isa nullable TKwinit
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var tkwdonode14 = nodearraylist7
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist8
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist9
+					assert tkwendnode16 isa nullable TKwend
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						tkwinitnode6,
+						null,
+						null,
+						pmethidnode9,
+						psignaturenode10,
+						null,
+						null,
+						null,
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction70
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwinitnode6 = nodearraylist4
+					assert tkwinitnode6 isa nullable TKwinit
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist6
+					assert pannotationsnode11 isa nullable AAnnotations
+					var tkwdonode14 = nodearraylist7
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist8
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist9
+					assert tkwendnode16 isa nullable TKwend
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						tkwinitnode6,
+						null,
+						null,
+						null,
+						psignaturenode10,
+						pannotationsnode11,
+						null,
+						null,
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction71
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3335,18 +3478,18 @@ private class ReduceAction68
 					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode6 = nodearraylist4
 					assert tkwinitnode6 isa nullable TKwinit
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
-					var tkwdonode13 = nodearraylist8
-					assert tkwdonode13 isa nullable TKwdo
-					var pexprnode14 = nodearraylist9
-					assert pexprnode14 isa nullable AExpr
-					var tkwendnode15 = nodearraylist10
-					assert tkwendnode15 isa nullable TKwend
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
+					var tkwdonode14 = nodearraylist8
+					assert tkwdonode14 isa nullable TKwdo
+					var pexprnode15 = nodearraylist9
+					assert pexprnode15 isa nullable AExpr
+					var tkwendnode16 = nodearraylist10
+					assert tkwendnode16 isa nullable TKwend
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -3354,20 +3497,21 @@ private class ReduceAction68
 						null,
 						tkwinitnode6,
 						null,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
+						null,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
 						null,
 						null,
-						tkwdonode13,
-						pexprnode14,
-						tkwendnode15
+						tkwdonode14,
+						pexprnode15,
+						tkwendnode16
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction69
+private class ReduceAction72
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3406,151 +3550,154 @@ private class ReduceAction69
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction70
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var pexterncallsnode11 = nodearraylist6
-					assert pexterncallsnode11 isa nullable AExternCalls
-					var pexterncodeblocknode12 = nodearraylist7
-					assert pexterncodeblocknode12 isa nullable AExternCodeBlock
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						null,
-						tkwnewnode7,
-						null,
-						psignaturenode9,
-						null,
-						pexterncallsnode11,
-						pexterncodeblocknode12,
-						null,
-						null,
-						null
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction71
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pexterncallsnode11 = nodearraylist7
-					assert pexterncallsnode11 isa nullable AExternCalls
-					var pexterncodeblocknode12 = nodearraylist8
-					assert pexterncodeblocknode12 isa nullable AExternCodeBlock
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						null,
-						tkwnewnode7,
-						pmethidnode8,
-						psignaturenode9,
-						null,
-						pexterncallsnode11,
-						pexterncodeblocknode12,
-						null,
-						null,
-						null
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction72
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable ADoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa nullable TKwredef
-					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var psignaturenode9 = nodearraylist5
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist6
-					assert pannotationsnode10 isa nullable AAnnotations
-					var pexterncallsnode11 = nodearraylist7
-					assert pexterncallsnode11 isa nullable AExternCalls
-					var pexterncodeblocknode12 = nodearraylist8
-					assert pexterncodeblocknode12 isa nullable AExternCodeBlock
-					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
-						pdocnode2,
-						tkwredefnode3,
-						pvisibilitynode4,
-						null,
-						null,
-						tkwnewnode7,
-						null,
-						psignaturenode9,
-						pannotationsnode10,
-						pexterncallsnode11,
-						pexterncodeblocknode12,
-						null,
-						null,
-						null
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
 private class ReduceAction73
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var pexterncallsnode12 = nodearraylist6
+					assert pexterncallsnode12 isa nullable AExternCalls
+					var pexterncodeblocknode13 = nodearraylist7
+					assert pexterncodeblocknode13 isa nullable AExternCodeBlock
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						null,
+						null,
+						tkwnewnode8,
+						null,
+						psignaturenode10,
+						null,
+						pexterncallsnode12,
+						pexterncodeblocknode13,
+						null,
+						null,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction74
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pexterncallsnode12 = nodearraylist7
+					assert pexterncallsnode12 isa nullable AExternCalls
+					var pexterncodeblocknode13 = nodearraylist8
+					assert pexterncodeblocknode13 isa nullable AExternCodeBlock
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						null,
+						null,
+						tkwnewnode8,
+						pmethidnode9,
+						psignaturenode10,
+						null,
+						pexterncallsnode12,
+						pexterncodeblocknode13,
+						null,
+						null,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction75
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var psignaturenode10 = nodearraylist5
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist6
+					assert pannotationsnode11 isa nullable AAnnotations
+					var pexterncallsnode12 = nodearraylist7
+					assert pexterncallsnode12 isa nullable AExternCalls
+					var pexterncodeblocknode13 = nodearraylist8
+					assert pexterncodeblocknode13 isa nullable AExternCodeBlock
+					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						null,
+						null,
+						null,
+						tkwnewnode8,
+						null,
+						psignaturenode10,
+						pannotationsnode11,
+						pexterncallsnode12,
+						pexterncodeblocknode13,
+						null,
+						null,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction76
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3570,30 +3717,31 @@ private class ReduceAction73
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa nullable AVisibility
-					var tkwnewnode7 = nodearraylist4
-					assert tkwnewnode7 isa nullable TKwnew
-					var pmethidnode8 = nodearraylist5
-					assert pmethidnode8 isa nullable AMethid
-					var psignaturenode9 = nodearraylist6
-					assert psignaturenode9 isa nullable ASignature
-					var pannotationsnode10 = nodearraylist7
-					assert pannotationsnode10 isa nullable AAnnotations
-					var pexterncallsnode11 = nodearraylist8
-					assert pexterncallsnode11 isa nullable AExternCalls
-					var pexterncodeblocknode12 = nodearraylist9
-					assert pexterncodeblocknode12 isa nullable AExternCodeBlock
+					var tkwnewnode8 = nodearraylist4
+					assert tkwnewnode8 isa nullable TKwnew
+					var pmethidnode9 = nodearraylist5
+					assert pmethidnode9 isa nullable AMethid
+					var psignaturenode10 = nodearraylist6
+					assert psignaturenode10 isa nullable ASignature
+					var pannotationsnode11 = nodearraylist7
+					assert pannotationsnode11 isa nullable AAnnotations
+					var pexterncallsnode12 = nodearraylist8
+					assert pexterncallsnode12 isa nullable AExternCalls
+					var pexterncodeblocknode13 = nodearraylist9
+					assert pexterncodeblocknode13 isa nullable AExternCodeBlock
 					var ppropdefnode1: nullable AMethPropdef = new AMethPropdef.init_amethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						null,
 						null,
-						tkwnewnode7,
-						pmethidnode8,
-						psignaturenode9,
-						pannotationsnode10,
-						pexterncallsnode11,
-						pexterncodeblocknode12,
+						null,
+						tkwnewnode8,
+						pmethidnode9,
+						psignaturenode10,
+						pannotationsnode11,
+						pexterncallsnode12,
+						pexterncodeblocknode13,
 						null,
 						null,
 						null
@@ -3602,7 +3750,7 @@ private class ReduceAction73
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction74
+private class ReduceAction77
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3613,7 +3761,7 @@ private class ReduceAction74
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction76
+private class ReduceAction79
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3638,7 +3786,7 @@ private class ReduceAction76
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction77
+private class ReduceAction80
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3667,7 +3815,7 @@ private class ReduceAction77
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction80
+private class ReduceAction83
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3693,7 +3841,7 @@ private class ReduceAction80
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction81
+private class ReduceAction84
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3705,7 +3853,7 @@ private class ReduceAction81
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction82
+private class ReduceAction85
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3721,7 +3869,7 @@ private class ReduceAction82
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction83
+private class ReduceAction86
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3737,7 +3885,7 @@ private class ReduceAction83
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction84
+private class ReduceAction87
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3753,7 +3901,7 @@ private class ReduceAction84
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction85
+private class ReduceAction88
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3769,7 +3917,7 @@ private class ReduceAction85
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction86
+private class ReduceAction89
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3784,7 +3932,7 @@ private class ReduceAction86
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction87
+private class ReduceAction90
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3799,7 +3947,7 @@ private class ReduceAction87
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction88
+private class ReduceAction91
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3814,7 +3962,7 @@ private class ReduceAction88
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction89
+private class ReduceAction92
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3829,7 +3977,7 @@ private class ReduceAction89
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction90
+private class ReduceAction93
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3844,7 +3992,7 @@ private class ReduceAction90
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction91
+private class ReduceAction94
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3859,7 +4007,7 @@ private class ReduceAction91
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction92
+private class ReduceAction95
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3874,7 +4022,7 @@ private class ReduceAction92
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction93
+private class ReduceAction96
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3889,7 +4037,7 @@ private class ReduceAction93
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction94
+private class ReduceAction97
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3904,7 +4052,7 @@ private class ReduceAction94
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction95
+private class ReduceAction98
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3919,7 +4067,7 @@ private class ReduceAction95
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction96
+private class ReduceAction99
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3934,7 +4082,7 @@ private class ReduceAction96
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction97
+private class ReduceAction100
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3949,7 +4097,7 @@ private class ReduceAction97
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction98
+private class ReduceAction101
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3964,7 +4112,7 @@ private class ReduceAction98
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction99
+private class ReduceAction102
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3979,7 +4127,7 @@ private class ReduceAction99
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction100
+private class ReduceAction103
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -3994,7 +4142,7 @@ private class ReduceAction100
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction101
+private class ReduceAction104
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4009,7 +4157,7 @@ private class ReduceAction101
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction102
+private class ReduceAction105
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4024,7 +4172,7 @@ private class ReduceAction102
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction103
+private class ReduceAction106
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4039,7 +4187,7 @@ private class ReduceAction103
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction104
+private class ReduceAction107
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4058,7 +4206,7 @@ private class ReduceAction104
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction105
+private class ReduceAction108
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4073,7 +4221,7 @@ private class ReduceAction105
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction106
+private class ReduceAction109
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4092,7 +4240,7 @@ private class ReduceAction106
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction107
+private class ReduceAction110
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4115,7 +4263,7 @@ private class ReduceAction107
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction108
+private class ReduceAction111
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4130,7 +4278,7 @@ private class ReduceAction108
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction109
+private class ReduceAction112
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4161,7 +4309,7 @@ private class ReduceAction109
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction110
+private class ReduceAction113
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4189,7 +4337,7 @@ private class ReduceAction110
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction111
+private class ReduceAction114
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4209,7 +4357,7 @@ private class ReduceAction111
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction112
+private class ReduceAction115
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4226,7 +4374,7 @@ private class ReduceAction112
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction113
+private class ReduceAction116
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4242,7 +4390,7 @@ private class ReduceAction113
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction114
+private class ReduceAction117
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4262,7 +4410,7 @@ private class ReduceAction114
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction116
+private class ReduceAction119
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4275,7 +4423,7 @@ private class ReduceAction116
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction117
+private class ReduceAction120
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4296,7 +4444,7 @@ private class ReduceAction117
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction118
+private class ReduceAction121
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4317,7 +4465,7 @@ private class ReduceAction118
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction119
+private class ReduceAction122
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4341,7 +4489,7 @@ private class ReduceAction119
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction120
+private class ReduceAction123
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4365,7 +4513,7 @@ private class ReduceAction120
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction121
+private class ReduceAction124
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4392,7 +4540,7 @@ private class ReduceAction121
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction122
+private class ReduceAction125
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4416,7 +4564,7 @@ private class ReduceAction122
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction123
+private class ReduceAction126
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4444,7 +4592,7 @@ private class ReduceAction123
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction125
+private class ReduceAction128
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4457,7 +4605,7 @@ private class ReduceAction125
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction126
+private class ReduceAction129
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4468,7 +4616,7 @@ private class ReduceAction126
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction128
+private class ReduceAction131
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4483,7 +4631,7 @@ private class ReduceAction128
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction129
+private class ReduceAction132
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4498,7 +4646,7 @@ private class ReduceAction129
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction130
+private class ReduceAction133
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4521,7 +4669,7 @@ private class ReduceAction130
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction131
+private class ReduceAction134
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4536,7 +4684,7 @@ private class ReduceAction131
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction132
+private class ReduceAction135
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4568,7 +4716,7 @@ private class ReduceAction132
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction133
+private class ReduceAction136
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4596,7 +4744,7 @@ private class ReduceAction133
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction134
+private class ReduceAction137
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4625,7 +4773,7 @@ private class ReduceAction134
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction135
+private class ReduceAction138
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4650,7 +4798,7 @@ private class ReduceAction135
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction136
+private class ReduceAction139
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4684,7 +4832,7 @@ private class ReduceAction136
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction137
+private class ReduceAction140
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4714,7 +4862,7 @@ private class ReduceAction137
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction139
+private class ReduceAction142
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4725,7 +4873,7 @@ private class ReduceAction139
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction140
+private class ReduceAction143
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4746,7 +4894,7 @@ private class ReduceAction140
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction141
+private class ReduceAction144
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4762,7 +4910,7 @@ private class ReduceAction141
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction142
+private class ReduceAction145
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4781,7 +4929,7 @@ private class ReduceAction142
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction143
+private class ReduceAction146
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4792,7 +4940,7 @@ private class ReduceAction143
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction145
+private class ReduceAction148
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4804,7 +4952,7 @@ private class ReduceAction145
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction146
+private class ReduceAction149
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4815,7 +4963,7 @@ private class ReduceAction146
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction147
+private class ReduceAction150
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4828,7 +4976,7 @@ private class ReduceAction147
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction149
+private class ReduceAction152
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4852,7 +5000,7 @@ private class ReduceAction149
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction150
+private class ReduceAction153
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4879,7 +5027,7 @@ private class ReduceAction150
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction151
+private class ReduceAction154
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4915,7 +5063,7 @@ private class ReduceAction151
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction152
+private class ReduceAction155
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4954,7 +5102,7 @@ private class ReduceAction152
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction153
+private class ReduceAction156
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4969,7 +5117,7 @@ private class ReduceAction153
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction154
+private class ReduceAction157
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4988,7 +5136,7 @@ private class ReduceAction154
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction155
+private class ReduceAction158
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5001,7 +5149,7 @@ private class ReduceAction155
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction159
+private class ReduceAction162
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5013,7 +5161,7 @@ private class ReduceAction159
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction160
+private class ReduceAction163
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5031,7 +5179,7 @@ private class ReduceAction160
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction161
+private class ReduceAction164
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5048,7 +5196,7 @@ private class ReduceAction161
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction162
+private class ReduceAction165
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5059,7 +5207,7 @@ private class ReduceAction162
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction163
+private class ReduceAction166
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5079,7 +5227,7 @@ private class ReduceAction163
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction164
+private class ReduceAction167
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5103,7 +5251,7 @@ private class ReduceAction164
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction165
+private class ReduceAction168
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5124,7 +5272,7 @@ private class ReduceAction165
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction166
+private class ReduceAction169
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5149,7 +5297,7 @@ private class ReduceAction166
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction167
+private class ReduceAction170
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5173,7 +5321,7 @@ private class ReduceAction167
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction168
+private class ReduceAction171
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5201,7 +5349,7 @@ private class ReduceAction168
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction172
+private class ReduceAction175
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5217,7 +5365,7 @@ private class ReduceAction172
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction173
+private class ReduceAction176
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5236,7 +5384,7 @@ private class ReduceAction173
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction174
+private class ReduceAction177
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5255,7 +5403,7 @@ private class ReduceAction174
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction175
+private class ReduceAction178
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5271,7 +5419,7 @@ private class ReduceAction175
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction176
+private class ReduceAction179
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5290,7 +5438,7 @@ private class ReduceAction176
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction177
+private class ReduceAction180
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5305,7 +5453,7 @@ private class ReduceAction177
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction178
+private class ReduceAction181
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5321,7 +5469,7 @@ private class ReduceAction178
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction179
+private class ReduceAction182
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5340,7 +5488,7 @@ private class ReduceAction179
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction187
+private class ReduceAction190
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5369,7 +5517,7 @@ private class ReduceAction187
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction188
+private class ReduceAction191
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5406,7 +5554,7 @@ private class ReduceAction188
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction189
+private class ReduceAction192
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5447,7 +5595,7 @@ private class ReduceAction189
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction190
+private class ReduceAction193
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5485,7 +5633,7 @@ private class ReduceAction190
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction191
+private class ReduceAction194
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5510,7 +5658,7 @@ private class ReduceAction191
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction192
+private class ReduceAction195
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5543,7 +5691,7 @@ private class ReduceAction192
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction193
+private class ReduceAction196
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5580,7 +5728,7 @@ private class ReduceAction193
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction194
+private class ReduceAction197
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5614,7 +5762,7 @@ private class ReduceAction194
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction195
+private class ReduceAction198
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5637,7 +5785,7 @@ private class ReduceAction195
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction196
+private class ReduceAction199
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5662,7 +5810,7 @@ private class ReduceAction196
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction197
+private class ReduceAction200
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5683,7 +5831,7 @@ private class ReduceAction197
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction198
+private class ReduceAction201
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5709,7 +5857,7 @@ private class ReduceAction198
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction199
+private class ReduceAction202
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5736,7 +5884,7 @@ private class ReduceAction199
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction201
+private class ReduceAction204
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5758,7 +5906,7 @@ private class ReduceAction201
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction202
+private class ReduceAction205
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5781,7 +5929,7 @@ private class ReduceAction202
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction204
+private class ReduceAction207
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5809,7 +5957,7 @@ private class ReduceAction204
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction205
+private class ReduceAction208
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5825,7 +5973,7 @@ private class ReduceAction205
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction206
+private class ReduceAction209
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5844,7 +5992,7 @@ private class ReduceAction206
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction207
+private class ReduceAction210
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5870,7 +6018,7 @@ private class ReduceAction207
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction208
+private class ReduceAction211
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5899,7 +6047,7 @@ private class ReduceAction208
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction209
+private class ReduceAction212
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5932,7 +6080,7 @@ private class ReduceAction209
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction210
+private class ReduceAction213
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5968,7 +6116,7 @@ private class ReduceAction210
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction211
+private class ReduceAction214
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5998,7 +6146,7 @@ private class ReduceAction211
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction212
+private class ReduceAction215
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6024,7 +6172,7 @@ private class ReduceAction212
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction213
+private class ReduceAction216
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6061,7 +6209,7 @@ private class ReduceAction213
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction214
+private class ReduceAction217
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6099,7 +6247,7 @@ private class ReduceAction214
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction215
+private class ReduceAction218
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6144,7 +6292,7 @@ private class ReduceAction215
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction216
+private class ReduceAction219
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6190,7 +6338,7 @@ private class ReduceAction216
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction217
+private class ReduceAction220
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6239,7 +6387,7 @@ private class ReduceAction217
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction218
+private class ReduceAction221
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6289,7 +6437,7 @@ private class ReduceAction218
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction219
+private class ReduceAction222
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6335,7 +6483,7 @@ private class ReduceAction219
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction220
+private class ReduceAction223
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6382,7 +6530,7 @@ private class ReduceAction220
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction221
+private class ReduceAction224
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6415,7 +6563,7 @@ private class ReduceAction221
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction222
+private class ReduceAction225
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6449,7 +6597,7 @@ private class ReduceAction222
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction223
+private class ReduceAction226
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6490,7 +6638,7 @@ private class ReduceAction223
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction224
+private class ReduceAction227
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6532,7 +6680,7 @@ private class ReduceAction224
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction225
+private class ReduceAction228
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6577,7 +6725,7 @@ private class ReduceAction225
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction226
+private class ReduceAction229
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6623,7 +6771,7 @@ private class ReduceAction226
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction227
+private class ReduceAction230
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6665,7 +6813,7 @@ private class ReduceAction227
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction228
+private class ReduceAction231
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6708,7 +6856,7 @@ private class ReduceAction228
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction229
+private class ReduceAction232
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6735,7 +6883,7 @@ private class ReduceAction229
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction230
+private class ReduceAction233
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6765,7 +6913,7 @@ private class ReduceAction230
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction231
+private class ReduceAction234
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6791,7 +6939,7 @@ private class ReduceAction231
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction232
+private class ReduceAction235
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6828,7 +6976,7 @@ private class ReduceAction232
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction233
+private class ReduceAction236
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6866,7 +7014,7 @@ private class ReduceAction233
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction234
+private class ReduceAction237
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6911,7 +7059,7 @@ private class ReduceAction234
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction235
+private class ReduceAction238
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6957,7 +7105,7 @@ private class ReduceAction235
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction236
+private class ReduceAction239
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7006,7 +7154,7 @@ private class ReduceAction236
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction237
+private class ReduceAction240
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7056,7 +7204,7 @@ private class ReduceAction237
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction238
+private class ReduceAction241
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7102,7 +7250,7 @@ private class ReduceAction238
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction239
+private class ReduceAction242
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7149,7 +7297,7 @@ private class ReduceAction239
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction240
+private class ReduceAction243
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7182,7 +7330,7 @@ private class ReduceAction240
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction241
+private class ReduceAction244
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7216,7 +7364,7 @@ private class ReduceAction241
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction242
+private class ReduceAction245
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7257,7 +7405,7 @@ private class ReduceAction242
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction243
+private class ReduceAction246
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7299,7 +7447,7 @@ private class ReduceAction243
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction244
+private class ReduceAction247
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7344,7 +7492,7 @@ private class ReduceAction244
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction245
+private class ReduceAction248
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7390,7 +7538,7 @@ private class ReduceAction245
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction246
+private class ReduceAction249
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7432,7 +7580,7 @@ private class ReduceAction246
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction247
+private class ReduceAction250
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7475,7 +7623,7 @@ private class ReduceAction247
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction248
+private class ReduceAction251
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7502,7 +7650,7 @@ private class ReduceAction248
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction249
+private class ReduceAction252
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7517,7 +7665,7 @@ private class ReduceAction249
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction250
+private class ReduceAction253
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7532,7 +7680,7 @@ private class ReduceAction250
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction251
+private class ReduceAction254
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7547,7 +7695,7 @@ private class ReduceAction251
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction252
+private class ReduceAction255
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7562,7 +7710,7 @@ private class ReduceAction252
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction253
+private class ReduceAction256
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7577,7 +7725,7 @@ private class ReduceAction253
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction254
+private class ReduceAction257
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7592,7 +7740,7 @@ private class ReduceAction254
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction255
+private class ReduceAction258
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7607,7 +7755,7 @@ private class ReduceAction255
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction256
+private class ReduceAction259
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7622,7 +7770,7 @@ private class ReduceAction256
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction257
+private class ReduceAction260
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7637,7 +7785,7 @@ private class ReduceAction257
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction258
+private class ReduceAction261
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7652,7 +7800,7 @@ private class ReduceAction258
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction259
+private class ReduceAction262
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7667,7 +7815,7 @@ private class ReduceAction259
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction260
+private class ReduceAction263
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7692,7 +7840,7 @@ private class ReduceAction260
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction261
+private class ReduceAction264
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7714,7 +7862,7 @@ private class ReduceAction261
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction262
+private class ReduceAction265
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7743,7 +7891,7 @@ private class ReduceAction262
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction263
+private class ReduceAction266
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7780,7 +7928,7 @@ private class ReduceAction263
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction264
+private class ReduceAction267
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7811,7 +7959,7 @@ private class ReduceAction264
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction265
+private class ReduceAction268
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7849,7 +7997,7 @@ private class ReduceAction265
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction266
+private class ReduceAction269
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7883,7 +8031,7 @@ private class ReduceAction266
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction267
+private class ReduceAction270
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7918,7 +8066,7 @@ private class ReduceAction267
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction268
+private class ReduceAction271
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7953,7 +8101,7 @@ private class ReduceAction268
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction269
+private class ReduceAction272
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7984,7 +8132,7 @@ private class ReduceAction269
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction270
+private class ReduceAction273
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8016,7 +8164,7 @@ private class ReduceAction270
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction272
+private class ReduceAction275
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8039,7 +8187,7 @@ private class ReduceAction272
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction273
+private class ReduceAction276
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8059,7 +8207,7 @@ private class ReduceAction273
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction274
+private class ReduceAction277
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8092,7 +8240,7 @@ private class ReduceAction274
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction275
+private class ReduceAction278
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8122,7 +8270,7 @@ private class ReduceAction275
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction276
+private class ReduceAction279
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8157,7 +8305,7 @@ private class ReduceAction276
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction277
+private class ReduceAction280
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8189,7 +8337,7 @@ private class ReduceAction277
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction278
+private class ReduceAction281
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8204,7 +8352,7 @@ private class ReduceAction278
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction279
+private class ReduceAction282
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8226,7 +8374,7 @@ private class ReduceAction279
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction280
+private class ReduceAction283
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8253,7 +8401,7 @@ private class ReduceAction280
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction281
+private class ReduceAction284
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8286,7 +8434,7 @@ private class ReduceAction281
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction282
+private class ReduceAction285
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8316,7 +8464,7 @@ private class ReduceAction282
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction283
+private class ReduceAction286
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8346,7 +8494,7 @@ private class ReduceAction283
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction284
+private class ReduceAction287
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8379,7 +8527,7 @@ private class ReduceAction284
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction286
+private class ReduceAction289
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8407,7 +8555,7 @@ private class ReduceAction286
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction287
+private class ReduceAction290
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8438,7 +8586,7 @@ private class ReduceAction287
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction288
+private class ReduceAction291
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8460,7 +8608,7 @@ private class ReduceAction288
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction289
+private class ReduceAction292
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8485,7 +8633,7 @@ private class ReduceAction289
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction290
+private class ReduceAction293
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8497,7 +8645,7 @@ private class ReduceAction290
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction292
+private class ReduceAction295
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8537,7 +8685,7 @@ private class ReduceAction292
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction294
+private class ReduceAction297
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8561,7 +8709,7 @@ private class ReduceAction294
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction295
+private class ReduceAction298
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8585,7 +8733,7 @@ private class ReduceAction295
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction296
+private class ReduceAction299
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8613,7 +8761,7 @@ private class ReduceAction296
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction297
+private class ReduceAction300
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8637,7 +8785,7 @@ private class ReduceAction297
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction299
+private class ReduceAction302
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8657,7 +8805,7 @@ private class ReduceAction299
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction301
+private class ReduceAction304
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8681,7 +8829,7 @@ private class ReduceAction301
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction302
+private class ReduceAction305
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8705,7 +8853,7 @@ private class ReduceAction302
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction303
+private class ReduceAction306
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8729,7 +8877,7 @@ private class ReduceAction303
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction304
+private class ReduceAction307
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8753,7 +8901,7 @@ private class ReduceAction304
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction305
+private class ReduceAction308
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8777,7 +8925,7 @@ private class ReduceAction305
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction306
+private class ReduceAction309
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8801,7 +8949,7 @@ private class ReduceAction306
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction307
+private class ReduceAction310
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8825,7 +8973,7 @@ private class ReduceAction307
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction308
+private class ReduceAction311
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8849,7 +8997,7 @@ private class ReduceAction308
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction310
+private class ReduceAction313
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8873,7 +9021,7 @@ private class ReduceAction310
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction312
+private class ReduceAction315
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8897,7 +9045,7 @@ private class ReduceAction312
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction314
+private class ReduceAction317
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8921,7 +9069,7 @@ private class ReduceAction314
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction316
+private class ReduceAction319
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8945,7 +9093,7 @@ private class ReduceAction316
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction317
+private class ReduceAction320
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8969,7 +9117,7 @@ private class ReduceAction317
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction319
+private class ReduceAction322
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8993,7 +9141,7 @@ private class ReduceAction319
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction320
+private class ReduceAction323
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9017,7 +9165,7 @@ private class ReduceAction320
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction322
+private class ReduceAction325
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9041,7 +9189,7 @@ private class ReduceAction322
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction323
+private class ReduceAction326
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9065,7 +9213,7 @@ private class ReduceAction323
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction324
+private class ReduceAction327
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9089,7 +9237,7 @@ private class ReduceAction324
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction326
+private class ReduceAction329
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9113,7 +9261,7 @@ private class ReduceAction326
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction328
+private class ReduceAction331
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9132,7 +9280,7 @@ private class ReduceAction328
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction329
+private class ReduceAction332
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9151,7 +9299,7 @@ private class ReduceAction329
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction330
+private class ReduceAction333
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9170,7 +9318,7 @@ private class ReduceAction330
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction331
+private class ReduceAction334
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9190,7 +9338,7 @@ private class ReduceAction331
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction333
+private class ReduceAction336
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9215,7 +9363,7 @@ private class ReduceAction333
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction334
+private class ReduceAction337
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9241,7 +9389,7 @@ private class ReduceAction334
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction335
+private class ReduceAction338
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9267,7 +9415,7 @@ private class ReduceAction335
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction336
+private class ReduceAction339
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9289,7 +9437,7 @@ private class ReduceAction336
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction338
+private class ReduceAction341
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9311,7 +9459,7 @@ private class ReduceAction338
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction339
+private class ReduceAction342
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9329,7 +9477,7 @@ private class ReduceAction339
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction341
+private class ReduceAction344
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9359,7 +9507,7 @@ private class ReduceAction341
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction343
+private class ReduceAction346
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9397,7 +9545,7 @@ private class ReduceAction343
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction345
+private class ReduceAction348
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9439,7 +9587,7 @@ private class ReduceAction345
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction347
+private class ReduceAction350
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9478,7 +9626,7 @@ private class ReduceAction347
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction349
+private class ReduceAction352
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9504,7 +9652,7 @@ private class ReduceAction349
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction351
+private class ReduceAction354
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9538,7 +9686,7 @@ private class ReduceAction351
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction353
+private class ReduceAction356
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9576,7 +9724,7 @@ private class ReduceAction353
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction355
+private class ReduceAction358
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9611,7 +9759,7 @@ private class ReduceAction355
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction357
+private class ReduceAction360
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9635,7 +9783,7 @@ private class ReduceAction357
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction359
+private class ReduceAction362
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9661,7 +9809,7 @@ private class ReduceAction359
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction361
+private class ReduceAction364
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9683,7 +9831,7 @@ private class ReduceAction361
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction362
+private class ReduceAction365
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9702,7 +9850,7 @@ private class ReduceAction362
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction363
+private class ReduceAction366
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9736,7 +9884,7 @@ private class ReduceAction363
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction364
+private class ReduceAction367
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9771,7 +9919,7 @@ private class ReduceAction364
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction365
+private class ReduceAction368
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9813,7 +9961,7 @@ private class ReduceAction365
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction366
+private class ReduceAction369
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9856,7 +10004,7 @@ private class ReduceAction366
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction367
+private class ReduceAction370
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9902,7 +10050,7 @@ private class ReduceAction367
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction368
+private class ReduceAction371
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9949,7 +10097,7 @@ private class ReduceAction368
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction369
+private class ReduceAction372
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9992,7 +10140,7 @@ private class ReduceAction369
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction370
+private class ReduceAction373
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10036,7 +10184,7 @@ private class ReduceAction370
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction371
+private class ReduceAction374
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10072,7 +10220,7 @@ private class ReduceAction371
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction372
+private class ReduceAction375
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10113,7 +10261,7 @@ private class ReduceAction372
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction373
+private class ReduceAction376
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10146,7 +10294,7 @@ private class ReduceAction373
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction375
+private class ReduceAction378
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10165,7 +10313,7 @@ private class ReduceAction375
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction376
+private class ReduceAction379
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10188,7 +10336,7 @@ private class ReduceAction376
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction377
+private class ReduceAction380
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10207,7 +10355,7 @@ private class ReduceAction377
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction378
+private class ReduceAction381
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10226,7 +10374,7 @@ private class ReduceAction378
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction379
+private class ReduceAction382
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10245,7 +10393,7 @@ private class ReduceAction379
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction380
+private class ReduceAction383
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10264,7 +10412,7 @@ private class ReduceAction380
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction381
+private class ReduceAction384
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10283,7 +10431,7 @@ private class ReduceAction381
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction382
+private class ReduceAction385
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10302,7 +10450,7 @@ private class ReduceAction382
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction383
+private class ReduceAction386
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10321,7 +10469,7 @@ private class ReduceAction383
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction384
+private class ReduceAction387
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10340,7 +10488,7 @@ private class ReduceAction384
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction387
+private class ReduceAction390
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10379,7 +10527,7 @@ private class ReduceAction387
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction388
+private class ReduceAction391
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10418,7 +10566,7 @@ private class ReduceAction388
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction389
+private class ReduceAction392
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10452,7 +10600,7 @@ private class ReduceAction389
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction390
+private class ReduceAction393
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10481,7 +10629,7 @@ private class ReduceAction390
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction392
+private class ReduceAction395
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10504,7 +10652,7 @@ private class ReduceAction392
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction393
+private class ReduceAction396
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10517,7 +10665,7 @@ private class ReduceAction393
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction394
+private class ReduceAction397
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10532,7 +10680,7 @@ private class ReduceAction394
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction395
+private class ReduceAction398
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10551,7 +10699,7 @@ private class ReduceAction395
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction397
+private class ReduceAction400
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10563,7 +10711,7 @@ private class ReduceAction397
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction399
+private class ReduceAction402
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10595,7 +10743,7 @@ private class ReduceAction399
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction400
+private class ReduceAction403
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10622,7 +10770,7 @@ private class ReduceAction400
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction401
+private class ReduceAction404
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10653,7 +10801,7 @@ private class ReduceAction401
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction402
+private class ReduceAction405
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10675,7 +10823,7 @@ private class ReduceAction402
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction403
+private class ReduceAction406
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10691,7 +10839,7 @@ private class ReduceAction403
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction404
+private class ReduceAction407
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10706,7 +10854,7 @@ private class ReduceAction404
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction407
+private class ReduceAction410
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10721,7 +10869,7 @@ private class ReduceAction407
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction408
+private class ReduceAction411
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10736,7 +10884,7 @@ private class ReduceAction408
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction409
+private class ReduceAction412
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10763,7 +10911,7 @@ private class ReduceAction409
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction410
+private class ReduceAction413
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10796,7 +10944,7 @@ private class ReduceAction410
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction411
+private class ReduceAction414
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10807,7 +10955,7 @@ private class ReduceAction411
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction413
+private class ReduceAction416
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10839,7 +10987,7 @@ private class ReduceAction413
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction414
+private class ReduceAction417
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10883,7 +11031,7 @@ private class ReduceAction414
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction415
+private class ReduceAction418
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10898,7 +11046,7 @@ private class ReduceAction415
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction416
+private class ReduceAction419
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10917,7 +11065,7 @@ private class ReduceAction416
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction419
+private class ReduceAction422
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10952,7 +11100,7 @@ private class ReduceAction419
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction421
+private class ReduceAction424
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10965,7 +11113,7 @@ private class ReduceAction421
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction422
+private class ReduceAction425
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10998,7 +11146,7 @@ private class ReduceAction422
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction423
+private class ReduceAction426
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11034,7 +11182,7 @@ private class ReduceAction423
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction424
+private class ReduceAction427
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11078,7 +11226,7 @@ private class ReduceAction424
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction425
+private class ReduceAction428
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11125,7 +11273,7 @@ private class ReduceAction425
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction426
+private class ReduceAction429
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11162,7 +11310,7 @@ private class ReduceAction426
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction427
+private class ReduceAction430
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11188,7 +11336,7 @@ private class ReduceAction427
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction428
+private class ReduceAction431
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11217,7 +11365,7 @@ private class ReduceAction428
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction429
+private class ReduceAction432
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11254,7 +11402,7 @@ private class ReduceAction429
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction430
+private class ReduceAction433
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11294,7 +11442,7 @@ private class ReduceAction430
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction431
+private class ReduceAction434
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11324,7 +11472,7 @@ private class ReduceAction431
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction435
+private class ReduceAction438
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11339,7 +11487,7 @@ private class ReduceAction435
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction438
+private class ReduceAction441
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11360,7 +11508,7 @@ private class ReduceAction438
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction439
+private class ReduceAction442
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11377,7 +11525,7 @@ private class ReduceAction439
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction440
+private class ReduceAction443
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11392,7 +11540,7 @@ private class ReduceAction440
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction441
+private class ReduceAction444
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11407,7 +11555,7 @@ private class ReduceAction441
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction442
+private class ReduceAction445
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11422,7 +11570,7 @@ private class ReduceAction442
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction443
+private class ReduceAction446
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11437,7 +11585,7 @@ private class ReduceAction443
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction444
+private class ReduceAction447
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11463,7 +11611,7 @@ private class ReduceAction444
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction445
+private class ReduceAction448
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11485,7 +11633,7 @@ private class ReduceAction445
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction447
+private class ReduceAction450
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11504,7 +11652,7 @@ private class ReduceAction447
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction449
+private class ReduceAction452
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11517,7 +11665,7 @@ private class ReduceAction449
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction450
+private class ReduceAction453
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11543,7 +11691,7 @@ private class ReduceAction450
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction452
+private class ReduceAction455
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11563,7 +11711,7 @@ private class ReduceAction452
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction453
+private class ReduceAction456
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11577,7 +11725,7 @@ private class ReduceAction453
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction454
+private class ReduceAction457
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11595,7 +11743,7 @@ private class ReduceAction454
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction455
+private class ReduceAction458
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11609,7 +11757,7 @@ private class ReduceAction455
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction456
+private class ReduceAction459
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11624,7 +11772,7 @@ private class ReduceAction456
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction457
+private class ReduceAction460
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11645,7 +11793,7 @@ private class ReduceAction457
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction458
+private class ReduceAction461
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11663,7 +11811,7 @@ private class ReduceAction458
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction459
+private class ReduceAction462
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11685,7 +11833,7 @@ private class ReduceAction459
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction460
+private class ReduceAction463
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11707,7 +11855,7 @@ private class ReduceAction460
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction461
+private class ReduceAction464
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11733,7 +11881,7 @@ private class ReduceAction461
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction462
+private class ReduceAction465
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11750,7 +11898,7 @@ private class ReduceAction462
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction463
+private class ReduceAction466
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11771,7 +11919,7 @@ private class ReduceAction463
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction464
+private class ReduceAction467
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11789,7 +11937,7 @@ private class ReduceAction464
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction466
+private class ReduceAction469
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11805,7 +11953,7 @@ private class ReduceAction466
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction467
+private class ReduceAction470
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11829,7 +11977,7 @@ private class ReduceAction467
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction468
+private class ReduceAction471
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11857,7 +12005,7 @@ private class ReduceAction468
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction469
+private class ReduceAction472
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11882,7 +12030,7 @@ private class ReduceAction469
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction470
+private class ReduceAction473
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11893,7 +12041,7 @@ private class ReduceAction470
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction471
+private class ReduceAction474
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11905,7 +12053,7 @@ private class ReduceAction471
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction472
+private class ReduceAction475
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11918,7 +12066,7 @@ private class ReduceAction472
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction474
+private class ReduceAction477
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11931,7 +12079,7 @@ private class ReduceAction474
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction475
+private class ReduceAction478
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11944,7 +12092,7 @@ private class ReduceAction475
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction477
+private class ReduceAction480
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11955,7 +12103,7 @@ private class ReduceAction477
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction478
+private class ReduceAction481
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11964,7 +12112,7 @@ private class ReduceAction478
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction481
+private class ReduceAction484
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11981,7 +12129,7 @@ private class ReduceAction481
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction482
+private class ReduceAction485
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11999,7 +12147,7 @@ private class ReduceAction482
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction485
+private class ReduceAction488
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12010,7 +12158,7 @@ private class ReduceAction485
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction487
+private class ReduceAction490
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12022,7 +12170,7 @@ private class ReduceAction487
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction488
+private class ReduceAction491
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12034,7 +12182,7 @@ private class ReduceAction488
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction489
+private class ReduceAction492
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12047,7 +12195,7 @@ private class ReduceAction489
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction491
+private class ReduceAction494
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12061,7 +12209,7 @@ private class ReduceAction491
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction493
+private class ReduceAction496
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12072,7 +12220,7 @@ private class ReduceAction493
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction494
+private class ReduceAction497
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12080,7 +12228,7 @@ private class ReduceAction494
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction497
+private class ReduceAction500
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12090,7 +12238,7 @@ private class ReduceAction497
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction868
+private class ReduceAction871
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12114,7 +12262,7 @@ private class ReduceAction868
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction870
+private class ReduceAction873
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12134,7 +12282,7 @@ private class ReduceAction870
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction871
+private class ReduceAction874
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12161,7 +12309,7 @@ private class ReduceAction871
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction872
+private class ReduceAction875
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12189,7 +12337,7 @@ private class ReduceAction872
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction873
+private class ReduceAction876
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12224,7 +12372,7 @@ private class ReduceAction873
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction874
+private class ReduceAction877
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12260,7 +12408,7 @@ private class ReduceAction874
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction875
+private class ReduceAction878
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12299,7 +12447,7 @@ private class ReduceAction875
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction876
+private class ReduceAction879
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12339,7 +12487,7 @@ private class ReduceAction876
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction877
+private class ReduceAction880
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12375,7 +12523,7 @@ private class ReduceAction877
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction878
+private class ReduceAction881
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12412,7 +12560,7 @@ private class ReduceAction878
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction881
+private class ReduceAction884
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12435,7 +12583,7 @@ private class ReduceAction881
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction882
+private class ReduceAction885
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12459,7 +12607,7 @@ private class ReduceAction882
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction906
+private class ReduceAction909
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12472,7 +12620,7 @@ private class ReduceAction906
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction907
+private class ReduceAction910
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12482,7 +12630,7 @@ private class ReduceAction907
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1075
+private class ReduceAction1078
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12497,7 +12645,7 @@ private class ReduceAction1075
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1076
+private class ReduceAction1079
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12516,7 +12664,7 @@ private class ReduceAction1076
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1077
+private class ReduceAction1080
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12531,7 +12679,7 @@ private class ReduceAction1077
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1078
+private class ReduceAction1081
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12550,7 +12698,7 @@ private class ReduceAction1078
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1079
+private class ReduceAction1082
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12565,7 +12713,7 @@ private class ReduceAction1079
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1080
+private class ReduceAction1083
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12584,7 +12732,7 @@ private class ReduceAction1080
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1082
+private class ReduceAction1085
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12603,7 +12751,7 @@ private class ReduceAction1082
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1084
+private class ReduceAction1087
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12622,7 +12770,7 @@ private class ReduceAction1084
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1086
+private class ReduceAction1089
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12641,7 +12789,7 @@ private class ReduceAction1086
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1087
+private class ReduceAction1090
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12656,7 +12804,7 @@ private class ReduceAction1087
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1088
+private class ReduceAction1091
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12675,7 +12823,7 @@ private class ReduceAction1088
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1089
+private class ReduceAction1092
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12690,7 +12838,7 @@ private class ReduceAction1089
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1090
+private class ReduceAction1093
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12709,7 +12857,7 @@ private class ReduceAction1090
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1092
+private class ReduceAction1095
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12728,7 +12876,7 @@ private class ReduceAction1092
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1094
+private class ReduceAction1097
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12747,7 +12895,7 @@ private class ReduceAction1094
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1100
+private class ReduceAction1103
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12765,7 +12913,7 @@ private class ReduceAction1100
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1108
+private class ReduceAction1111
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12784,7 +12932,7 @@ private class ReduceAction1108
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1109
+private class ReduceAction1112
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12799,7 +12947,7 @@ private class ReduceAction1109
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1110
+private class ReduceAction1113
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
