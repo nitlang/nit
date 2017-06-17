@@ -24,7 +24,7 @@ module bmfont
 
 private import dom
 
-import font
+intrude import font
 
 # BMFont description, parsed with `Text::parse_bmfont` or loaded as a `BMFontAsset`
 #
@@ -40,7 +40,7 @@ class BMFont
 	var face: Text
 
 	# Size of the source true type font
-	var size: Int
+	var size: Float
 
 	# Is the font bold?
 	var bold: Bool
@@ -67,16 +67,16 @@ class BMFont
 	# Information common to all characters
 
 	# Distance in pixels between each line of text
-	var line_height: Int
+	var line_height: Float
 
 	# Pixels from the top of the line to the base of the characters
-	var base: Int
+	var base: Float
 
 	# Width of the texture
-	var scale_w: Int
+	var scale_w: Float
 
 	# Height of the texture
-	var scale_h: Int
+	var scale_h: Float
 
 	# Textures
 	var pages = new Map[String, TextureAsset]
@@ -85,7 +85,14 @@ class BMFont
 	var chars = new Map[Char, BMFontChar]
 
 	# Distance between certain characters
-	var kernings = new HashMap2[Char, Char, Int]
+	var kernings = new HashMap2[Char, Char, Float]
+
+	# Additional distance between `prev_char` and `char`
+	fun kerning(prev_char: nullable Char, char: Char): Float
+	do
+		if prev_char == null then return 0.0
+		return kernings[prev_char, char] or else 0.0
+	end
 
 	redef fun to_s do return "<{class_name} {face} at {size} pt, "+
 	                         "{pages.length} pages, {chars.length} chars>"
@@ -111,25 +118,25 @@ end
 class BMFontChar
 
 	# Subtexture left coordinate
-	var x: Int
+	var x: Float
 
 	# Subtexture top coordinate
-	var y: Int
+	var y: Float
 
 	# Subtexture width
-	var width: Int
+	var width: Float
 
 	# Subtexture height
-	var height: Int
+	var height: Float
 
 	# Drawing offset on X
-	var xoffset: Int
+	var xoffset: Float
 
 	# Drawing offset on Y
-	var yoffset: Int
+	var yoffset: Float
 
 	# Cursor advance after drawing this character
-	var xadvance: Int
+	var xadvance: Float
 
 	# Full texture contaning this character and others
 	var page: TextureAsset
@@ -174,9 +181,9 @@ redef class Text
 	# """
 	#
 	# var fnt = desc.parse_bmfont("dir_in_assets").value
-	# assert fnt.to_s == "<BMFont arial at 72 pt, 1 pages, 3 chars>"
-	# assert fnt.line_height == 80
-	# assert fnt.kernings['A', 'C'] == -1
+	# assert fnt.to_s == "<BMFont arial at 72.0 pt, 1 pages, 3 chars>"
+	# assert fnt.line_height == 80.0
+	# assert fnt.kernings['A', 'C'] == -1.0
 	# assert fnt.chars['A'].page.path == "dir_in_assets/arial.png"
 	# ~~~
 	fun parse_bmfont(dir: String): MaybeError[BMFont, Error]
@@ -208,16 +215,16 @@ redef class Text
 
 		var fnt = new BMFont(
 			info_map["face"],
-			info_map["size"].to_i,
+			info_map["size"].to_f,
 			info_map["bold"] == "1",
 			info_map["italic"] == "1",
 			info_map["unicode"] == "1",
 			info_map["padding"],
 			info_map["spacing"],
-			common_map["lineHeight"].to_i,
-			common_map["base"].to_i,
-			common_map["scaleW"].to_i,
-			common_map["scaleH"].to_i
+			common_map["lineHeight"].to_f,
+			common_map["base"].to_f,
+			common_map["scaleW"].to_f,
+			common_map["scaleH"].to_f
 		)
 
 		# Pages / pixel data files
@@ -238,10 +245,10 @@ redef class Text
 			var id = attributes["id"].to_i.code_point
 
 			var c = new BMFontChar(
-				attributes["x"].to_i, attributes["y"].to_i,
-				attributes["width"].to_i, attributes["height"].to_i,
-				attributes["xoffset"].to_i, attributes["yoffset"].to_i,
-				attributes["xadvance"].to_i,
+				attributes["x"].to_f, attributes["y"].to_f,
+				attributes["width"].to_f, attributes["height"].to_f,
+				attributes["xoffset"].to_f, attributes["yoffset"].to_f,
+				attributes["xadvance"].to_f,
 				fnt.pages[attributes["page"]])
 
 			fnt.chars[id] = c
@@ -256,7 +263,7 @@ redef class Text
 				var attributes = item.attributes_to_map
 				var first = attributes["first"].to_i.code_point
 				var second = attributes["second"].to_i.code_point
-				var amount = attributes["amount"].to_i
+				var amount = attributes["amount"].to_f
 				fnt.kernings[first, second] = amount
 			end
 		end
@@ -355,35 +362,85 @@ class BMFontAsset
 	do
 		var dx = 0.0
 		var dy = 0.0
+		var text_width = 0.0
 
-		var line_height = desc.line_height.to_f
+		var max_width = text_sprites.max_width
+		var max_height = text_sprites.max_height
+
+		var line_height = desc.line_height
+		var partial_line_skip = line_height * partial_line_mod.to_f
+		var line_sprites = new Array[Sprite]
 
 		var prev_char = null
-		for c in text do
-
-			var partial_line_mod = 0.4
+		var i = -1
+		while i < text.length - 1 do
+			i += 1
+			var c = text[i]
 
 			# Special characters
+			var word_break = false
 			if c == '\n' then
-				dy -= line_height.to_f
-				dx = 0.0 #advance/2.0
+				justify(line_sprites, text_sprites.align, dx)
+				dy -= line_height
+				if max_height != null and max_height < -dy + line_height then break
+				dx = 0.0
 				prev_char = null
 				continue
 			else if c == pld then
-				dy -= line_height * partial_line_mod.to_f
-				prev_char = null
+				dy -= partial_line_skip
+				word_break = true
 				continue
 			else if c == plu then
-				dy += line_height * partial_line_mod.to_f
-				prev_char = null
+				dy += partial_line_skip
+				word_break = true
 				continue
 			else if c.is_whitespace then
-				var advance = if desc.chars.keys.has(' ') then
-						desc.chars[' '].xadvance.to_f
+				var space_advance = if desc.chars.keys.has(' ') then
+						desc.chars[' '].xadvance
 					else if desc.chars.keys.has('f') then
-						desc.chars['f'].xadvance.to_f
+						desc.chars['f'].xadvance
 					else 16.0
-				dx += advance
+				dx += space_advance
+				word_break = true
+			end
+
+			# End of a word?
+			if word_break then
+				# If we care about line width, check for overflow
+				if max_width != null then
+					# Calculate the length of the next word
+					var prev_w = null
+					var word_len = 0.0
+					for wi in [i+1..text.length[ do
+						var w = text[wi]
+
+						if w == '\n' or w == pld or w == plu or w.is_whitespace then break
+						word_len += advance(prev_w, w)
+						prev_w = w
+					end
+
+					# Would the line be too long?
+					if dx + word_len > max_width then
+						if text_sprites.wrap then
+							# Wrap
+							justify(line_sprites, text_sprites.align, dx)
+							dy -= line_height
+							if max_height != null and max_height < -dy + line_height then break
+							dx = 0.0
+						else
+							# Cut short
+							justify(line_sprites, text_sprites.align, dx)
+							dy -= line_height
+							if max_height != null and max_height < -dy + line_height then break
+							dx = 0.0
+							while c != '\n' and i < text.length - 1 do
+								i += 1
+								c = text[i]
+							end
+						end
+					end
+				end
+
 				prev_char = null
 				continue
 			end
@@ -396,28 +453,53 @@ class BMFontAsset
 			end
 
 			var char_info = desc.chars[c]
-			var advance = char_info.xadvance.to_f
+			var advance = char_info.xadvance
+			var kerning = desc.kerning(prev_char, c)
 
-			var kerning = 0.0
-			if prev_char != null then
-				kerning = (desc.kernings[prev_char, c] or else 0).to_f
-			end
-
-			var x = dx + char_info.width.to_f/2.0  + char_info.xoffset.to_f + kerning
-			var y = dy - char_info.height.to_f/2.0 - char_info.yoffset.to_f
+			var x = dx + char_info.width/2.0  + char_info.xoffset + kerning
+			var y = dy - char_info.height/2.0 - char_info.yoffset
 			var pos = text_sprites.anchor.offset(x, y, 0.0)
-			text_sprites.sprites.add new Sprite(char_info.subtexture, pos)
+			var s = new Sprite(char_info.subtexture, pos)
+			text_sprites.sprites.add s
+			line_sprites.add s
 
 			dx += advance + kerning
 			prev_char = c
+
+			text_width = text_width.max(dx)
 		end
+
+		justify(line_sprites, text_sprites.align, dx)
+
+		# valign
+		if text_sprites.valign != 0.0 then
+			var d = (-dy+line_height) * text_sprites.valign
+			for s in text_sprites.sprites do s.center.y += d
+		end
+
+		text_sprites.width = text_width.max(dx)
+		text_sprites.height = dy + line_height
 	end
 
-	# Character replacing other charactesr missing from the font
+	# Character replacing other characters missing from the font
 	private var replacement_char: nullable Char is lazy do
 		for c in  "�?".chars do
 			if desc.chars.keys.has(c) then return c
 		end
 		return null
+	end
+
+	private fun advance(prev_char: nullable Char, char: Char): Float
+	do
+		var char_info = desc.chars[char]
+		var kerning = desc.kerning(prev_char, char)
+		return char_info.xadvance + kerning
+	end
+
+	private fun justify(line_sprites: Array[Sprite], align: Float, line_width: Float)
+	do
+		var dx = -line_width*align
+		for s in line_sprites do s.center.x += dx
+		line_sprites.clear
 	end
 end

@@ -5,7 +5,7 @@ It is based on the portability framework _app.nit_ and the OpenGL ES 2.0 standar
 
 # System configuration
 
-To compile the _gamnit_ apps packaged with the Nit repositoy on GNU/Linux you need to install the dev version of a few libraries and some tools.
+To compile the _gamnit_ apps packaged with the Nit repository on GNU/Linux you need to install the dev version of a few libraries and some tools.
 Under Debian 8.2, this command should install everything needed:
 
 ~~~
