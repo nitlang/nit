@@ -80,10 +80,19 @@
 									$state.go('404', null, { location: false })
 								});
 							return d.promise;
+						},
+						inh: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityInh($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
 						}
 					},
-					controller: function(graph, $sce) {
+					controller: function(inh, graph, $sce) {
 						this.graph = $sce.trustAsHtml(graph);
+						this.inh = inh;
 					},
 					controllerAs: 'vm',
 				})
@@ -223,6 +232,12 @@
 
 				loadEntityGraph: function(id, cb, cbErr) {
 					$http.get('/api/graph/inheritance/' + id + '?cdepth=3')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityInh: function(id, cb, cbErr) {
+					$http.get('/api/inheritance/' + id)
 						.success(cb)
 						.error(cbErr);
 				},
