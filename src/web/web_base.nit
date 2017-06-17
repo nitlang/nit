@@ -226,7 +226,6 @@ redef class MDoc
 	# Add doc down processing
 	redef fun core_serialize_to(v) do
 		v.serialize_attribute("html_synopsis", html_synopsis.write_to_string)
-		v.serialize_attribute("html_documentation", html_documentation.write_to_string)
 	end
 end
 
