@@ -463,8 +463,10 @@ class CypherQuery
 	# Return `self`.
 	#
 	# ```
-	# var query = (new CypherQuery).nmatch("(n)").nwhere(
-	# 		"n.key = key").set("key", "foo")
+	# var query = (new CypherQuery).
+	# 		nmatch("(n)").
+	# 		nwhere("n.key = \{key\}").
+	#		set("key", "foo")
 	#
 	# assert query.params["key"] == "foo"
 	# ```
