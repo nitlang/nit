@@ -211,7 +211,13 @@ class APIEntityDefs
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
 		var mentities: Array[MEntity]
-		if mentity isa MModule then
+		if mentity isa MPackage then
+			mentities = mentity.mgroups.to_a
+		else if mentity isa MGroup then
+			mentities = new Array[MEntity]
+			mentities.add_all mentity.in_nesting.direct_smallers
+			mentities.add_all mentity.mmodules
+		else if mentity isa MModule then
 			mentities = mentity.mclassdefs
 		else if mentity isa MClass then
 			mentities = mentity.mclassdefs
