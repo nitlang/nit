@@ -207,6 +207,7 @@ redef class MEntityRef
 		v.serialize_attribute("mdoc", mentity.mdoc_or_fallback)
 		v.serialize_attribute("visibility", mentity.visibility.to_s)
 		v.serialize_attribute("modifiers", mentity.collect_modifiers)
+		v.serialize_attribute("class_name", mentity.class_name)
 		var mentity = self.mentity
 		if mentity isa MMethod then
 			v.serialize_attribute("msignature", mentity.intro.msignature)
