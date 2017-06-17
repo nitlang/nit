@@ -341,11 +341,9 @@ end
 redef class POSetElement[E]
 	super Serializable
 
-	redef fun serialize_to(v) do
+	redef fun core_serialize_to(v) do
 		assert self isa POSetElement[MEntity]
-		v.serialize_attribute("greaters", to_mentity_refs(greaters))
 		v.serialize_attribute("direct_greaters", to_mentity_refs(direct_greaters))
 		v.serialize_attribute("direct_smallers", to_mentity_refs(direct_smallers))
-		v.serialize_attribute("smallers", to_mentity_refs(smallers))
 	end
 end
