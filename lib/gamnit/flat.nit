@@ -393,6 +393,7 @@ redef class App
 		perf_clock_main.lapse
 		var dt = clock.lapse.to_f
 		update dt
+		frame_dt = dt
 		sys.perfs["gamnit flat update client"].add perf_clock_main.lapse
 
 		# Draw and flip screen
@@ -403,6 +404,8 @@ redef class App
 		gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 	end
+
+	private var frame_dt = 0.0
 
 	# Draw the whole screen, all `glDraw...` calls should be executed here
 	protected fun frame_core_draw(display: GamnitDisplay)
@@ -424,6 +427,9 @@ redef class App
 		var simple_2d_program = app.simple_2d_program
 		simple_2d_program.use
 		simple_2d_program.mvp.uniform camera.mvp_matrix
+
+		sprite_set.time += frame_dt*sprite_set.time_mod
+		simple_2d_program.time.uniform sprite_set.time
 
 		# draw
 		sprite_set.draw
@@ -506,6 +512,9 @@ private class Simple2dProgram
 
 		// Model view projection matrix
 		uniform mat4 mvp;
+
+		// Current world time, in seconds
+		uniform float time;
 
 		// Rotation matrix
 		attribute vec4 rotation_row0;
@@ -674,6 +683,12 @@ private class SpriteSet
 
 	# Sprites needing resorting in `contexts_map`
 	var sprites_to_remap = new Array[Sprite]
+
+	# Animation speed multiplier (0.0 to pause, 1.0 for normal speed, etc.)
+	var time_mod = 1.0 is writable
+
+	# Seconds elapsed since the launch of the program, in world time responding to `time_mod`
+	var time = 0.0
 
 	# Add a sprite to the appropriate context
 	fun map_sprite(sprite: Sprite)
