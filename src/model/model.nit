@@ -1436,6 +1436,17 @@ class MIntersectionType
 
 	redef var hash is lazy do return operands.hash
 
+	redef fun apply_to(operands, mmodule, anchor)
+	do
+		var i = operands.iterator
+		var result = i.item
+		i.next
+		for operand in i do
+			result = result.intersection(operand, mmodule, anchor)
+		end
+		return result
+	end
+
 	# TODO
 	#redef var c_name is lazy do return…
 
