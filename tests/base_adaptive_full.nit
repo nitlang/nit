@@ -15,7 +15,7 @@
 # A comprehensive test to check most cast of adaptive typing with merge, union and intersections.
 #
 # alt1 is for necessary static errors
-# alt2 is for errors due to the lack of union&intersection types
+# alt2 is for errors due to the lack of union types
 
 import core::kernel
 
@@ -52,7 +52,7 @@ fun test_o(x:Object) do end
 fun inter1(x: B) do
 	if x isa C then
 		test_a(x)
-		#alt2#test_b(x)
+		test_b(x)
 		test_c(x)
 	else
 		test_a(x)
@@ -68,7 +68,7 @@ end
 fun inter2(x: nullable Object) do
 	if x isa B and x isa C then
 		test_a(x)
-		#alt2#test_b(x)
+		test_b(x)
 		test_c(x)
 	end
 end
@@ -81,18 +81,15 @@ fun inter3(x: nullable Object) do
 		#alt1#test_c(x)
 		if x isa C then
 			test_a(x)
-			#alt2#test_b(x)
+			test_b(x)
 			test_c(x)
 		else
 			test_a(x)
 			test_b(x)
 			#alt1#test_c(x)
 		end
-		#alt2#test_a(x)
-		# The previous one need an explanation: merge(inter(B,C),sub(B,C)) = merge(C,B) = null (because conflict).
-		# Unfortunately the fallback is on Object (instead of B) because the B information in the then branch
-		# is lost and for the typer, `x isa C` is indistinguishable with `x=new C`.
-		#alt2#test_b(x)
+		test_a(x)
+		test_b(x)
 		#alt1#test_c(x)
 		test_o(x)
 	else
@@ -294,7 +291,7 @@ fun loop_inter1a(b: B) do
 	var x = b
 	while x isa C do
 		test_a(x)
-		#alt2#test_b(x)
+		test_b(x)
 		test_c(x)
 		x = b
 		test_a(x)
@@ -319,7 +316,7 @@ fun loop_inter2a(b: B) do
 		#alt1#test_c(x)
 	end
 	test_a(x)
-	#alt2#test_b(x)
+	test_b(x)
 	test_c(x)
 end
 
@@ -329,7 +326,7 @@ fun loop_inter1b(b: B) do
 	x = b
 	while x isa C do
 		test_a(x)
-		#alt2#test_b(x)
+		test_b(x)
 		test_c(x)
 		x = b
 		test_a(x)
@@ -355,6 +352,6 @@ fun loop_inter2b(b: B) do
 		#alt1#test_c(x)
 	end
 	test_a(x)
-	#alt2#test_b(x)
+	test_b(x)
 	test_c(x)
 end
