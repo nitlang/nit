@@ -1483,6 +1483,19 @@ class MIntersectionType
 	# TODO
 	#redef var c_name is lazy do return…
 
+	redef fun cache_intersection(other, mmodule)
+	do
+		var result = intersection_cache.get_or_null(other)
+		if result == null then
+			# Flatten the resulting intersection.
+			var new_operands = operands.clone
+			new_operands.add other
+			result = new MIntersectionType(mmodule, new_operands)
+			intersection_cache[other] = result
+		end
+		return result
+	end
+
 	redef fun collect_mclassdefs(mmodule)
 	do
 		var result = collect_mclassdefs_cache.get_or_null(mmodule)
