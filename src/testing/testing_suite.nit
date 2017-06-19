@@ -288,7 +288,7 @@ class TestCase
 		if test_method.mproperty.is_toplevel then
 			file.addn "\t{name}"
 		else
-			file.addn "\tvar subject = new {test_method.mclassdef.name}.nitunit"
+			file.addn "\tvar subject = new {test_method.mclassdef.name}.intern"
 			for mmethod in before do
 				file.addn "\tsubject.{mmethod.name}"
 			end
