@@ -226,6 +226,9 @@ bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomor
 
 bench_nitc_options "misc" "" --log --typing-test-metrics --invocation-metrics --isset-checks-metrics --tables-metrics --no-stacktrace --release --debug #FIXME add --sloppy
 
+# sanitary just run the default configuration, this is used to check that `run_compiler` works.
+bench_nitc_options "sanitary" ""
+
 function bench_nitc-e_gc()
 {
 	name="$FUNCNAME"
