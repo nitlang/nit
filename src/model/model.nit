@@ -1327,6 +1327,19 @@ abstract class MTypeSet[E: MType]
 	private fun apply_to(operands: Collection[MType], mmodule: MModule,
 			anchor: nullable MClassType): MType is abstract
 
+	redef var c_name is lazy do
+		var buffer = new Buffer.from_text(keyword)
+		# Since the arity is not implicit, we must specify it to avoid
+		# ambiguities in case this typing expression is nested in another one.
+		buffer.append(operands.length.to_s)
+		# See also `MGenericType::c_name`
+		for operand in operands do
+			buffer.append("__")
+			buffer.append(operand.c_name)
+		end
+		return buffer.to_s
+	end
+
 	redef fun can_resolve_for(mtype, anchor, mmodule)
 	do
 		if not need_anchor then return true
@@ -1504,9 +1517,6 @@ class MIntersectionType
 		end
 		return result
 	end
-
-	# TODO
-	#redef var c_name is lazy do return…
 
 	redef fun cache_intersection(other, mmodule)
 	do

@@ -140,6 +140,20 @@ class TestMIntersectionType
 		assert_equals(actual, expected)
 	end
 
+	fun test_c_name do
+		var type_s = new MTypeStub
+		type_s.c_name = "{mmodule.c_name}__S"
+		var type_t = new MTypeStub
+		type_t.c_name = "{mmodule.c_name}__T"
+		var s_and_t = new MIntersectionType.with_operands(
+			mmodule, type_s, type_t
+		)
+		assert_equals(
+			s_and_t.c_name,
+			"and2__{mmodule.c_name}__S__{mmodule.c_name}__T"
+		)
+	end
+
 	fun test_full_name do
 		var type_s = new MTypeStub
 		type_s.full_name = "{mmodule.full_name}::S"
