@@ -866,6 +866,13 @@ abstract class MType
 
 		if sub isa MBottomType or sub isa MErrorType then
 			return true
+		else if sub isa MIntersectionType then
+			for t in sub.operands do
+				if t.is_subtype(mmodule, anchor, sup) then
+					return true
+				end
+			end
+			return false
 		end
 
 		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
@@ -874,6 +881,13 @@ abstract class MType
 		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType or sup isa MErrorType then
 			# These types are not super-types of Class-based types.
 			return false
+		else if sup isa MIntersectionType then
+			for t in sup.operands do
+				if not sub.is_subtype(mmodule, anchor, t) then
+					return false
+				end
+			end
+			return true
 		end
 
 		assert sup isa MClassType else print_error "got {sup} {sub.inspect}" # It is the only remaining type
@@ -1361,6 +1375,80 @@ abstract class MTypeSet[E: MType]
 		end
 		return apply_to(undecorated, mmodule)
 	end
+end
+
+# An intersection of multiple types.
+#
+# Conceptually, the subtypes that are common to all the `operands`.
+class MIntersectionType
+	super MTypeSet[MType]
+
+	# Intersect the specified types.
+	init with_operands(mmodule: MModule, operands: MType...) do
+		init(mmodule, new HashSet[MType].from(operands))
+	end
+
+	redef fun ==(other)
+	do
+		# If we don’t redefine `==`, we would need to cache all intersections
+		# in the `Model` object (in order to make fixed-point algorithms work).
+		if super then return true
+		return other isa MIntersectionType and other.operands == operands
+	end
+
+	redef var hash is lazy do return operands.hash
+
+	# TODO
+	#redef var c_name is lazy do return…
+
+	redef fun collect_mclassdefs(mmodule)
+	do
+		var result = collect_mclassdefs_cache.get_or_null(mmodule)
+		if result == null then
+			result = new Set[MClassDef]
+			for mtype in operands do
+				result.add_all(mtype.collect_mclassdefs(mmodule))
+			end
+			collect_mclassdefs_cache[mmodule] = result
+		end
+		return result
+	end
+
+	private var collect_mclassdefs_cache = new Map[MModule, Set[MClassDef]]
+
+	redef fun collect_mclasses(mmodule)
+	do
+		var result = collect_mclasses_cache.get_or_null(mmodule)
+		if result == null then
+			result = new Set[MClass]
+			for mtype in operands do
+				result.add_all(mtype.collect_mclasses(mmodule))
+			end
+			collect_mclasses_cache[mmodule] = result
+		end
+		return result
+	end
+
+	private var collect_mclasses_cache = new Map[MModule, Set[MClass]]
+
+	redef fun collect_mtypes(mmodule)
+	do
+		var result = collect_mtypes_cache.get_or_null(mmodule)
+		if result == null then
+			result = new Set[MClassType]
+			for mtype in operands do
+				result.add_all(mtype.collect_mtypes(mmodule))
+			end
+			collect_mtypes_cache[mmodule] = result
+		end
+		return result
+	end
+
+	private var collect_mtypes_cache = new Map[MModule, Set[MClassType]]
+
+	redef fun separator do return " and "
+
+	redef var undecorate is lazy do return super
 end
 
 # A type based on a class.
