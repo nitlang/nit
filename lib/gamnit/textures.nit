@@ -80,9 +80,7 @@ abstract class Texture
 	# Prepare a subtexture from this texture, from the given pixel offsets
 	fun subtexture(left, top, width, height: Numeric): Subtexture
 	do
-		# Setup the subtexture
-		var subtex = new Subtexture(root, self, left.to_f, top.to_f, width.to_f, height.to_f)
-		return subtex
+		return new AbsoluteSubtexture(self, left.to_f, top.to_f, width.to_f, height.to_f)
 	end
 
 	# Offset of the left border on `root` from 0.0 to 1.0
@@ -309,18 +307,25 @@ class TextureAsset
 end
 
 # Texture derived from another texture, does not own its pixels
-class Subtexture
+abstract class Subtexture
 	super Texture
-
-	redef var root
 
 	# Parent texture, from which this texture was created
 	var parent: Texture
 
-	# Left border of this texture compared to `parent`
+	redef var root = parent.root is lateinit
+
+	redef fun load(force) do root.load(force)
+end
+
+# Subtexture created from pixel coordinates within `parent`
+class AbsoluteSubtexture
+	super Subtexture
+
+	# Left border of this texture relative to `parent`
 	var left: Float
 
-	# Top border of this texture compared to `parent`
+	# Top border of this texture relative to `parent`
 	var top: Float
 
 	private fun set_wh(width, height: Float)
@@ -329,12 +334,23 @@ class Subtexture
 		self.height = height
 	end
 
-	redef fun load(force) do root.load(force)
-
 	redef var offset_left = parent.offset_left + left / root.width is lazy
 	redef var offset_top = parent.offset_top + top / root.height is lazy
 	redef var offset_right = offset_left + width / root.width is lazy
 	redef var offset_bottom = offset_top + height / root.height is lazy
+end
+
+# Subtexture created from relative coordinates ([0..1]) out of the `root` texture
+class RelativeSubtexture
+	super Subtexture
+
+	redef var offset_left
+	redef var offset_top
+	redef var offset_right
+	redef var offset_bottom
+
+	redef fun width do return root.width * (offset_right - offset_left)
+	redef fun height do return root.height * (offset_bottom - offset_top)
 end
 
 redef class Sys
