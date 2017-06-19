@@ -96,6 +96,51 @@ class TestMType
 	end
 end
 
+class TestMIntersectionType
+	super TestSuite
+
+	private var model: ModelStandalone is noinit
+
+	private var mmodule: MModule is noinit
+
+	private var object_type: MClassType is noinit
+
+	init do
+		model = new ModelStandalone
+		mmodule = model.mmodule0
+		object_type = model.mclass_o.mclass_type
+	end
+
+	private fun assert_equals(actual, expected: Object) do
+		assert actual == expected else
+			print_error "{actual} == {expected}"
+		end
+	end
+
+	fun test_as_notnull_formal do
+		var type_s = new MTypeStub
+		type_s.can_be_null_return = true
+		type_s.need_anchor = true
+		type_s.to_s = "S"
+
+		var type_t = new MTypeStub
+		type_t.can_be_null_return = true
+		type_t.need_anchor = true
+		type_t.to_s = "T"
+
+		var s_and_t = type_s.intersection(type_t, mmodule)
+		var actual = s_and_t.as_notnull
+		var expected = new MIntersectionType.with_operands(
+			mmodule,
+			type_s,
+			type_t,
+			object_type
+		)
+
+		assert_equals(actual, expected)
+	end
+end
+
 private class MTypeStub
 	super MType
 
