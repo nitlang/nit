@@ -75,6 +75,7 @@ function run_compiler()
 		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 		run_command "$@" ../contrib/jwrapper/src/jwrapper.nit -o "jwrapper.$title.bin"
 		bench_command "jwrapper" "jwrapper ant.jar" "./jwrapper.$title.bin" /usr/share/java/ant.jar -o out/ant_jar.nit
+		rm -r tmp 2> /dev/null # remove jwrapper output directory
 	fi
 
 	rm -r *.bin out 2> /dev/null
