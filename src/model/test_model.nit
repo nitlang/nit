@@ -139,6 +139,31 @@ class TestMIntersectionType
 
 		assert_equals(actual, expected)
 	end
+
+	fun test_full_name do
+		var type_s = new MTypeStub
+		type_s.full_name = "{mmodule.full_name}::S"
+		var type_t = new MTypeStub
+		type_t.full_name = "{mmodule.full_name}::T"
+		var s_and_t = new MIntersectionType.with_operands(
+			mmodule, type_s, type_t
+		)
+		assert_equals(
+			s_and_t.full_name,
+			"({mmodule.full_name}::S and {mmodule.full_name}::T)"
+		)
+	end
+
+	fun test_to_s do
+		var type_s = new MTypeStub
+		type_s.to_s = "S"
+		var type_t = new MTypeStub
+		type_t.to_s = "T"
+		var s_and_t = new MIntersectionType.with_operands(
+			mmodule, type_s, type_t
+		)
+		assert_equals(s_and_t.to_s, "(S and T)")
+	end
 end
 
 private class MTypeStub

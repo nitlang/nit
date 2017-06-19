@@ -1351,12 +1351,11 @@ abstract class MTypeSet[E: MType]
 	end
 
 	redef var full_name is lazy do
-		# TODO: Make unambiguous when multiple operations are combined.
 		var names = new Array[String].with_capacity(operands.length)
 		for mtype in operands do
 			names.add(mtype.full_name)
 		end
-		return names.join(separator)
+		return "({names.join(separator)})"
 	end
 
 	redef fun is_legal_in(mmodule, anchor)
@@ -1425,8 +1424,7 @@ abstract class MTypeSet[E: MType]
 	# `" and "` or `" or "`
 	private fun separator: String do return " {keyword} "
 
-	redef var to_s is lazy do return operands.join(separator)
-	# TODO: Make unambiguous when multiple operations are combined.
+	redef var to_s is lazy do return "({operands.join(separator)})"
 
 	redef fun undecorate
 	do
