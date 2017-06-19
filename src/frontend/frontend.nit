@@ -24,6 +24,7 @@ import div_by_zero
 import serialization_phase
 import deriving
 import check_annotation
+import parse_annotations
 import glsl_validation
 import parallelization_phase
 import i18n_phase
