@@ -75,6 +75,7 @@ function run_compiler()
 		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 		run_command "$@" ../contrib/jwrapper/src/jwrapper.nit -o "jwrapper.$title.bin"
 		bench_command "jwrapper" "jwrapper ant.jar" "./jwrapper.$title.bin" /usr/share/java/ant.jar -o out/ant_jar.nit
+		rm -r tmp 2> /dev/null # remove jwrapper output directory
 	fi
 
 	rm -r *.bin out 2> /dev/null
@@ -224,6 +225,9 @@ bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "
 bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomorph
 
 bench_nitc_options "misc" "" --log --typing-test-metrics --invocation-metrics --isset-checks-metrics --tables-metrics --no-stacktrace --release --debug #FIXME add --sloppy
+
+# sanitary just run the default configuration, this is used to check that `run_compiler` works.
+bench_nitc_options "sanitary" ""
 
 function bench_nitc-e_gc()
 {
