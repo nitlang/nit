@@ -1447,6 +1447,39 @@ class MIntersectionType
 		return result
 	end
 
+	redef var as_notnull is lazy do
+		var new_operands = new Set[MType]
+		# Do we need to add `Object` to the operands?
+		var add_object = true
+		for mtype in operands do
+			if mtype isa MClassType or mtype isa MNotNullType then
+				# Already not null.
+				return self
+			else
+				var operand = mtype.undecorate
+				if operand isa MNullType then
+					return model.bottom_type
+				else if operand isa MClassType or
+						operand isa MNotNullType then
+					add_object = false
+				end
+				new_operands.add operand
+			end
+		end
+		if add_object then
+			new_operands.add mmodule.object_type
+		end
+
+		# TODO: Merge to the subtype when possible.
+		var i = new_operands.iterator
+		var result = i.item
+		i.next
+		for operand in i do
+			result = result.cache_intersection(operand, mmodule)
+		end
+		return result
+	end
+
 	# TODO
 	#redef var c_name is lazy do return…
 
