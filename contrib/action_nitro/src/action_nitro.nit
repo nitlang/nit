@@ -41,6 +41,9 @@ redef class App
 	# Textures of the biplane, jet, helicopter, parachute and powerups
 	var planes_sheet = new PlanesImages
 
+	# Animation when opening the parachute
+	var parachute_animation = new Animation(planes_sheet.parachute, 16.0)
+
 	# Animation for the player movement
 	private var running_texture = new Texture("textures/player.png")
 	private var running_animation: Animation = running_texture.to_animation(10.0, 12, 0)
@@ -525,8 +528,12 @@ redef class Enemy
 end
 
 redef class Parachute
-	redef var sprite = new Sprite(app.planes_sheet.parachute, center) is lazy
-	init do sprite.scale = width / sprite.texture.width
+	redef var sprite = new Sprite(app.planes_sheet.parachute_open, center) is lazy
+	init
+	do
+		sprite.scale = width / sprite.texture.width
+		sprite.animate app.parachute_animation
+	end
 end
 
 redef class Player
