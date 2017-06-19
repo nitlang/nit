@@ -95,3 +95,17 @@ class TestMType
 		assert type_d.is_subtype(mmodule, null, c_and_b)
 	end
 end
+
+private class MTypeStub
+	super MType
+
+	redef var c_name is noinit
+	var can_be_null_return: Bool = false is writable
+	redef fun can_be_null(mmodule, anchor) do return can_be_null_return
+	redef var depth is noinit
+	redef var full_name is noinit
+	redef var is_ok is noinit
+	redef var length is noinit
+	redef var need_anchor is noinit
+	redef var to_s is noinit
+end
