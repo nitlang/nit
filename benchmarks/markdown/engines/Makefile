@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class pandoc/pandoc
+all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class
 
 nitmd/nitmd:
 	make -C nitmd
