@@ -1220,6 +1220,149 @@ abstract class MType
 	end
 end
 
+# A type that represents an operation over a set of types.
+abstract class MTypeSet[E: MType]
+	super MType
+
+	# The context in which this type was created.
+	#
+	# Used to populate `model` and look for `Object`.
+	#
+	# TODO: Remove this attribute once `as_notnull` don’t need it.
+	var mmodule: MModule
+
+	# The operands of this operation.
+	#
+	# Must not be empty. Must not be edited.
+	var operands: Set[E]
+
+	init do
+		assert operands.not_empty
+	end
+
+	redef fun model do return mmodule.model
+
+	redef fun location do return operands.first.location
+	# TODO: Return a more accurate location.
+
+	# Apply the same operator over `operands`.
+	#
+	# Does not consider properties of `self`. Used to abstract type
+	# generation done by methods of this class.
+	#
+	# May simplify the resulting expression and not return an instance of
+	# `SELF`. The contextual parameters (`mmodule` and `anchor`) are used to
+	# resolve types during comparisons in order to simplify the resulting type.
+	private fun apply_to(operands: Collection[MType], mmodule: MModule,
+			anchor: nullable MClassType): MType is abstract
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if not need_anchor then return true
+		for t in operands do
+			if not t.can_resolve_for(mtype, anchor, mmodule) then
+				return false
+			end
+		end
+		return true
+	end
+
+	redef fun depth
+	do
+		var result = 0
+		for operand in operands do
+			var current = operand.depth
+			if current > result then
+				result = current
+			end
+		end
+		return result
+	end
+
+	redef var full_name is lazy do
+		# TODO: Make unambiguous when multiple operations are combined.
+		var names = new Array[String].with_capacity(operands.length)
+		for mtype in operands do
+			names.add(mtype.full_name)
+		end
+		return names.join(separator)
+	end
+
+	redef fun is_legal_in(mmodule, anchor)
+	do
+		for mtype in operands do
+			if not mtype.is_legal_in(mmodule, anchor) then
+				return false
+			end
+		end
+		return true
+	end
+
+	redef fun is_ok
+	do
+		for mtype in operands do
+			if not mtype.is_ok then
+				return false
+			end
+		end
+		return true
+	end
+
+	redef var need_anchor is lazy do
+		for mtype in operands do
+			if mtype.need_anchor then
+				return true
+			end
+		end
+		return false
+	end
+
+	redef fun length
+	do
+		var result = 0
+		for mtype in operands do
+			result += mtype.length
+		end
+		return result
+	end
+
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var resolved = new Set[MType]
+		for mtype in operands do
+			resolved.add(mtype.lookup_fixed(mmodule, resolved_receiver))
+		end
+		return apply_to(resolved, mmodule)
+	end
+
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+	do
+		var resolved = new Set[MType]
+		for t in operands do
+			resolved.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
+		end
+		return apply_to(resolved, mmodule)
+	end
+
+	# The separator to use in `to_s` and `full_name`.
+	#
+	# `" and "` or `" or "`
+	protected fun separator: String is abstract
+
+	redef var to_s is lazy do return operands.join(separator)
+	# TODO: Make unambiguous when multiple operations are combined.
+
+	redef fun undecorate
+	do
+		# TODO: Unions must override this.
+		var undecorated = new Set[MType]
+		for t in operands do
+			undecorated.add(t.undecorate)
+		end
+		return apply_to(undecorated, mmodule)
+	end
+end
+
 # A type based on a class.
 #
 # `MClassType` have properties (see `has_mproperty`).
