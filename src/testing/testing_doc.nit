@@ -113,8 +113,9 @@ class NitUnitExecutor
 				simple_du.add du
 			end
 		end
-		test_simple_docunits(simple_du)
 
+		# Try to mass compile all the simple du as a single nit module
+		compile_simple_docunits(simple_du)
 		# Now test them in order
 		for du in docunits do
 			if du.error != null then
@@ -138,17 +139,22 @@ class NitUnitExecutor
 		end
 	end
 
-	# Executes multiples doc-units in a shared program.
+	# Compiles multiples doc-units in a shared program.
 	# Used for docunits simple block of code (without modules, classes, functions etc.)
 	#
-	# In case of compilation error, the method fallbacks to `test_single_docunit` to
+	# In case of success, the docunits are compiled and the caller can call `execute_simple_docunit`.
+	#
+	# In case of compilation error, the docunits are let uncompiled.
+	# The caller should fallbacks to `test_single_docunit` to
 	# * locate exactly the compilation problem in the problematic docunit.
 	# * permit the execution of the other docunits that may be correct.
-	fun test_simple_docunits(dus: Array[DocUnit])
+	fun compile_simple_docunits(dus: Array[DocUnit])
 	do
 		if dus.is_empty then return
 
 		var file = "{prefix}-0.nit"
+
+		toolcontext.info("Compile {dus.length} simple(s) doc-unit(s) in {file}", 1)
 
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
@@ -156,7 +162,6 @@ class NitUnitExecutor
 		f = create_unitfile(file)
 		var i = 0
 		for du in dus do
-
 			i += 1
 			f.write("fun run_{i} do\n")
 			f.write("# {du.full_name}\n")
@@ -175,7 +180,7 @@ class NitUnitExecutor
 
 		if res != 0 then
 			# Compilation error.
-			# They will be executed independently
+			# They should be generated and compiled independently
 			return
 		end
 
