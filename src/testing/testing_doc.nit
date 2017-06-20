@@ -100,7 +100,8 @@ class NitUnitExecutor
 		end
 
 		# Try to group each nitunit into a single source file to fasten the compilation
-		var simple_du = new Array[DocUnit]
+		var simple_du = new Array[DocUnit] # du that are simple statements
+		var single_du = new Array[DocUnit] # du that are modules or include classes
 		show_status
 		for du in docunits do
 			# Skip existing errors
@@ -111,11 +112,17 @@ class NitUnitExecutor
 			var ast = toolcontext.parse_something(du.block)
 			if ast isa AExpr then
 				simple_du.add du
+			else
+				single_du.add du
 			end
 		end
 
 		# Try to mass compile all the simple du as a single nit module
 		compile_simple_docunits(simple_du)
+		# Try to mass compile all the single du in a single nitc invocation with many modules
+		compile_single_docunits(single_du)
+		# If the mass compilation fail, then each one will be compiled individually
+
 		# Now test them in order
 		for du in docunits do
 			if du.error != null then
@@ -124,7 +131,8 @@ class NitUnitExecutor
 				# Already compiled. Execute it.
 				execute_simple_docunit(du)
 			else
-				# Need to try to compile it, then execute it
+				# A mass compilation failed
+				# Need to try to recompile it, then execute it
 				test_single_docunit(du)
 			end
 			mark_done(du)
@@ -279,7 +287,7 @@ class NitUnitExecutor
 		return f
 	end
 
-	# Compile an unit file and return the compiler return code
+	# Compile a unit file and return the compiler return code
 	#
 	# Can terminate the program if the compiler is not found
 	private fun compile_unitfile(file: String): Int
@@ -287,10 +295,50 @@ class NitUnitExecutor
 		var nitc = toolcontext.find_nitc
 		var opts = new Array[String]
 		if mmodule != null then
+			# FIXME playing this way with the include dir is not safe nor robust
 			opts.add "-I {mmodule.filepath.dirname}"
 		end
 		var cmd = "{nitc} --ignore-visibility --no-color -q '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = toolcontext.safe_exec(cmd)
+		return res
+	end
+
+	# Compile a unit file and return the compiler return code
+	#
+	# Can terminate the program if the compiler is not found
+	private fun compile_single_docunits(dus: Array[DocUnit]): Int
+	do
+		# Generate all unitfiles
+		var files = new Array[String]
+		for du in dus do
+			files.add generate_single_docunit(du)
+		end
+
+		if files.is_empty then return 0
+
+		toolcontext.info("Compile {dus.length} single(s) doc-unit(s) at once", 1)
+
+		# Mass compile them
+		var nitc = toolcontext.find_nitc
+		var opts = new Array[String]
+		if mmodule != null then
+			# FIXME playing this way with the include dir is not safe nor robust
+			opts.add "-I {mmodule.filepath.dirname}"
+		end
+		var cmd = "{nitc} --ignore-visibility --no-color -q '{files.join("' '")}' {opts.join(" ")} > '{prefix}.out1' 2>&1 </dev/null --dir {prefix.dirname}"
+		var res = toolcontext.safe_exec(cmd)
+		if res != 0 then
+			# Mass compilation failure
+			return res
+		end
+
+		# Rename each file into it expected binary name
+		for du in dus do
+			var f = du.test_file.as(not null)
+			toolcontext.safe_exec("mv '{f.strip_extension(".nit")}' '{f}.bin'")
+			du.is_compiled = true
+		end
+
 		return res
 	end
 end
