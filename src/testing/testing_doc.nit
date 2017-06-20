@@ -215,19 +215,28 @@ class NitUnitExecutor
 		end
 	end
 
-	# Executes a single doc-unit in its own program.
-	# Used for docunits larger than a single block of code (with modules, classes, functions etc.)
-	fun test_single_docunit(du: DocUnit)
+	# Produce a single unit file for the docunit `du`.
+	fun generate_single_docunit(du: DocUnit): String
 	do
 		cpt += 1
 		var file = "{prefix}-{cpt}.nit"
-
-		toolcontext.info("Execute doc-unit {du.full_name} in {file}", 1)
 
 		var f
 		f = create_unitfile(file)
 		f.write(du.block)
 		f.close
+
+		du.test_file = file
+		return file
+	end
+
+	# Executes a single doc-unit in its own program.
+	# Used for docunits larger than a single block of code (with modules, classes, functions etc.)
+	fun test_single_docunit(du: DocUnit)
+	do
+		var file = generate_single_docunit(du)
+
+		toolcontext.info("Compile doc-unit {du.full_name} in {file}", 1)
 
 		if toolcontext.opt_noact.value then return
 
