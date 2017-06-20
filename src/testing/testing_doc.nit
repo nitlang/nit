@@ -199,7 +199,7 @@ class NitUnitExecutor
 	fun execute_simple_docunit(du: DocUnit)
 	do
 		var file = du.test_file.as(not null)
-		var i = du.test_arg.as(not null)
+		var i = du.test_arg or else 0
 		toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
 		var clock = new Clock
 		var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
@@ -241,24 +241,19 @@ class NitUnitExecutor
 		if toolcontext.opt_noact.value then return
 
 		var res = compile_unitfile(file)
-		var res2 = 0
-		if res == 0 then
-			var clock = new Clock
-			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
-			if not toolcontext.opt_no_time.value then du.real_time = clock.total
-			du.was_exec = true
-		end
-
 		var content = "{file}.out1".to_path.read_all
 		du.raw_output = content
+
+		du.test_file = file
 
 		if res != 0 then
 			du.error = "Compilation error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
-		else if res2 != 0 then
-			du.error = "Runtime error in {file}"
-			toolcontext.modelbuilder.failed_entities += 1
+			return
 		end
+
+		du.is_compiled = true
+		execute_simple_docunit(du)
 	end
 
 	# Create and fill the header of a unit file `file`.
