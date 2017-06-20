@@ -119,7 +119,7 @@ class NitUnitExecutor
 		for du in docunits do
 			if du.error != null then
 				# Nothing to execute. Conclude
-			else if du.test_file != null then
+			else if du.is_compiled then
 				# Already compiled. Execute it.
 				execute_simple_docunit(du)
 			else
@@ -186,6 +186,7 @@ class NitUnitExecutor
 			i += 1
 			du.test_file = file
 			du.test_arg = i
+			du.is_compiled = true
 		end
 	end
 
@@ -402,6 +403,9 @@ class DocUnit
 	# Note that a same generated file can be used for multiple tests.
 	# See `test_arg` that is used to distinguish them
 	var test_file: nullable String = null
+
+	#  Was `test_file` successfully compiled?
+	var is_compiled = false
 
 	# The command-line argument to use when executing the test, if any.
 	var test_arg: nullable Int = null
