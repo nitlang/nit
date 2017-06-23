@@ -235,7 +235,10 @@ class Sprite
 	fun needs_update
 	do
 		var c = context
-		if c != null then c.sprites_to_update.add self
+		if c == null then return
+		if c.last_sprite_to_update == self then return
+		c.sprites_to_update.add self
+		c.last_sprite_to_update = self
 	end
 
 	# Request a resorting of this sprite in its sprite list
@@ -696,6 +699,7 @@ private class SpriteSet
 
 		context.sprites.add sprite
 		context.sprites_to_update.add sprite
+		context.last_sprite_to_update = sprite
 
 		sprite.context = context
 		sprite.sprite_set = self
@@ -775,6 +779,9 @@ private class SpriteContext
 
 	# Sprites to update since last `draw`
 	var sprites_to_update = new Set[Sprite]
+
+	# Cache of the last `Sprite` added to `sprites_to_update` since the last call to `draw`
+	var last_sprite_to_update: nullable Sprite = null
 
 	# Sprites that have been update and for which `needs_update` can be set to false
 	var updated_sprites = new Array[Sprite]
@@ -1010,6 +1017,7 @@ private class SpriteContext
 
 			for sprite in sprites_to_update do update_sprite(sprite)
 			sprites_to_update.clear
+			last_sprite_to_update = null
 
 			sys.perfs["gamnit flat gpu update"].add app.perf_clock_sprites.lapse
 		end
