@@ -990,6 +990,7 @@ private class SpriteContext
 		glBindBuffer(gl_ELEMENT_ARRAY_BUFFER, buffer_element)
 
 		# Resize GPU buffers?
+		var update_everything = false
 		if sprites.capacity > buffer_capacity then
 			# Try to defragment first
 			var moved = sprites.defragment
@@ -999,6 +1000,7 @@ private class SpriteContext
 				resize
 
 				# We must update everything
+				update_everything = true
 				for s in sprites.items do if s != null then sprites_to_update.add s
 			else
 				# Just update the moved sprites
@@ -1012,10 +1014,17 @@ private class SpriteContext
 		end
 
 		# Update GPU sprites data
-		if sprites_to_update.not_empty then
+		if sprites_to_update.not_empty or update_everything then
 			app.perf_clock_sprites.lapse
 
-			for sprite in sprites_to_update do update_sprite(sprite)
+			if update_everything then
+				for sprite in sprites.items do if sprite != null then
+					update_sprite(sprite)
+				end
+			else
+				for sprite in sprites_to_update do update_sprite(sprite)
+			end
+
 			sprites_to_update.clear
 			last_sprite_to_update = null
 
