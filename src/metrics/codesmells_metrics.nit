@@ -16,9 +16,7 @@
 module codesmells_metrics
 
 import frontend
-import metrics_base
-import mclasses_metrics
-import semantize
+import nitsmell_toolcontext
 import method_analyze_metrics
 import mclassdef_collect
 
@@ -43,7 +41,11 @@ class CodeSmellsMetricsPhase
 		for mclass in mainmodule.flatten_mclass_hierarchy do
 			mclass_codesmell.collect(mclass.mclassdefs,self)
 		end
-		mclass_codesmell.print_top(10)
+		if toolcontext.opt_get_all.value then
+			mclass_codesmell.print_all
+		else
+			mclass_codesmell.print_top(10)
+		end
 	end
 
 	fun set_all_average_metrics do
@@ -60,22 +62,21 @@ class BadConceptonController
 	# Code smell list
 	var bad_conception_elements = new Array[BadConceptionFinder]
 
-	# Print all element conception
+	# Print all collected code smell sort in decroissant order
 	fun print_all do
-		for bad_conception in bad_conception_elements do
-			bad_conception.print_all
+		for bad_conception in self.sort do
+			bad_conception.print_collected_data
 		end
 	end
 
-	# Print number of top element conception
+	# Print the n top element
 	fun print_top(number: Int) do
-		var test = self.get_numbers_of_elements(number)
-		for bad_conception in test do
-			bad_conception.print_all
+		for bad_conception in self.get_numbers_of_elements(number) do
+			bad_conception.print_collected_data
 		end
 	end
 
-	# Collection
+	# Collect method take Array of mclassdef to find the code smells for every class
 	fun collect(mclassdefs: Array[MClassDef],phase: CodeSmellsMetricsPhase) do
 		for mclassdef in mclassdefs do
 			var bad_conception_class = new BadConceptionFinder(mclassdef,phase)
@@ -84,6 +85,7 @@ class BadConceptonController
 		end
 	end
 
+	# Sort the bad_conception_elements array
 	fun sort: Array[BadConceptionFinder]
 	do
 		var res = bad_conception_elements
@@ -92,6 +94,7 @@ class BadConceptonController
 		return res
 	end
 
+	# Return an array with n elements
 	fun get_numbers_of_elements(number : Int) : Array[BadConceptionFinder]do
 		var return_values = new Array[BadConceptionFinder]
 		var list = self.sort
@@ -109,31 +112,48 @@ class BadConceptionFinder
 	var mclassdef: MClassDef
 	var array_badconception = new Array[BadConception]
 	var phase: CodeSmellsMetricsPhase
+	var score = 0.0
 
+	# Collect code smell with selected toolcontext option
 	fun collect do
 		var bad_conception_elements = new Array[BadConception]
-		bad_conception_elements.add(new LargeClass(phase))
-		bad_conception_elements.add(new LongParameterList(phase))
-		bad_conception_elements.add(new FeatureEnvy(phase))
-		bad_conception_elements.add(new LongMethod(phase))
+		# Check toolcontext option
+		if phase.toolcontext.opt_feature_envy.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new FeatureEnvy(phase))
+		if phase.toolcontext.opt_long_method.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LongMethod(phase))
+		if phase.toolcontext.opt_long_params.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LongParameterList(phase))
+		if phase.toolcontext.opt_no_abstract_implementation.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new NoAbstractImplementation(phase))
+		if phase.toolcontext.opt_large_class.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LargeClass(phase))
+		# Collected all code smell if their state is true
 		for bad_conception_element in bad_conception_elements do
 			if bad_conception_element.collect(self.mclassdef,phase.toolcontext.modelbuilder) then array_badconception.add(bad_conception_element)
 		end
+		# Compute global score
+		collect_global_score
 	end
 
-	fun print_all do
+	fun print_collected_data do
 		if array_badconception.length != 0 then
-			print "-----------"
-			print "{mclassdef.full_name}"
+			print "--------------------"
+			print phase.toolcontext.format_h1("Full name: {mclassdef.full_name} Location: {mclassdef.location}")
 			for bad_conception in array_badconception do
 				bad_conception.print_result
 			end
 		end
 	end
+
+	fun collect_global_score do
+		if array_badconception.not_empty then
+			for bad_conception in array_badconception do
+				self.score += bad_conception.score
+			end
+		end
+	end
 end
 
-class BadConception
+abstract class BadConception
 	var phase: CodeSmellsMetricsPhase
+
+	var score = 0.0
 
 	# Name
 	fun name: String is abstract
@@ -146,6 +166,11 @@ class BadConception
 
 	# Show results in console
 	fun print_result is abstract
+
+	# Compute code smell score to sort
+	fun score_rate do
+		score = 1.0
+	end
 end
 
 class LargeClass
@@ -159,14 +184,19 @@ class LargeClass
 	redef fun desc do return "Large class"
 
 	redef fun collect(mclassdef, model_builder): Bool do
-		number_attribut = mclassdef.collect_intro_and_redef_mattributes(model_builder.model.private_view).length
-		# get the number of methods (subtract the get and set of attibutes with (numberAtribut*2))
-		number_method = mclassdef.collect_intro_and_redef_methods(model_builder.model.private_view).length
-		return number_method.to_f > phase.average_number_of_method and number_attribut.to_f > phase.average_number_of_attribute
+		self.number_attribut = mclassdef.collect_intro_and_redef_mattributes(model_builder.model.private_view).length
+		# Get the number of methods (Accessor include) (subtract the get and set of attibutes with (numberAtribut*2))
+		self.number_method = mclassdef.collect_intro_and_redef_methods(model_builder.model.private_view).length
+		self.score_rate
+		return self.number_method.to_f > phase.average_number_of_method and self.number_attribut.to_f > phase.average_number_of_attribute
 	end
 
 	redef fun print_result do
 		print phase.toolcontext.format_h2("{desc}: {number_attribut} attributes and {number_method} methods ({phase.average_number_of_attribute}A {phase.average_number_of_method}M Average)")
+	end
+
+	redef fun score_rate do
+		score = (number_method.to_f + number_attribut.to_f) / (phase.average_number_of_method + phase.average_number_of_attribute)
 	end
 end
 
@@ -180,24 +210,33 @@ class LongParameterList
 
 	redef fun collect(mclassdef, model_builder): Bool do
 		for meth in mclassdef.collect_intro_and_redef_mpropdefs(model_builder.model.private_view) do
-			# check if the property is a method definition
+			var threshold_value = 4
+			# Get the threshold value from the toolcontext command
+			if phase.toolcontext.opt_long_params_threshold.value != 0 then threshold_value = phase.toolcontext.opt_long_params_threshold.value
+			# Check if the property is a method definition
 			if not meth isa MMethodDef then continue
 			# Check if method has a signature
 			if meth.msignature == null then continue
-			if meth.msignature.mparameters.length <= 4 then continue
-			bad_methods.add(meth)
+			if meth.msignature.mparameters.length <= threshold_value then continue
+			self.bad_methods.add(meth)
 		end
-		return bad_methods.not_empty
+		self.score_rate
+		return self.bad_methods.not_empty
 	end
 
-
 	redef fun print_result do
-		print "{desc}:"
-		if bad_methods.length >= 1 then
+		print phase.toolcontext.format_h2("{desc}:")
+		if self.bad_methods.not_empty then
 			print "	Affected method(s):"
-			for method in bad_methods do
+			for method in self.bad_methods do
 				print "		-{method.name} has {method.msignature.mparameters.length} parameters"
 			end
+		end
+	end
+
+	redef fun score_rate do
+		if self.bad_methods.not_empty then
+			self.score = self.bad_methods.length.to_f/ phase.average_number_of_method
 		end
 	end
 end
@@ -213,19 +252,36 @@ class FeatureEnvy
 	redef fun collect(mclassdef, model_builder): Bool do
 		var mmethoddefs = call_analyze_methods(mclassdef,model_builder)
 		for mmethoddef in mmethoddefs do
-			if mmethoddef.total_extern_call <= mmethoddef.total_self_call then continue
-			bad_methods.add(mmethoddef)
+			var max_class_call = mmethoddef.class_call.max
+			# Check if the class with the maximum call is >= auto-call and the maximum call class is != of this class
+			if mmethoddef.class_call[max_class_call] <= mmethoddef.total_self_call or max_class_call.mclass.full_name == mclassdef.mclass.full_name then continue
+			self.bad_methods.add(mmethoddef)
 		end
-		return bad_methods.not_empty
+		self.score_rate
+		return self.bad_methods.not_empty
 	end
 
 	redef fun print_result do
-		print "{desc}:"
-		if bad_methods.length >= 1 then
+		print phase.toolcontext.format_h2("{desc}:")
+		if self.bad_methods.not_empty then
 			print "	Affected method(s):"
-			for method in bad_methods do
-				print "		-{method.name} {method.total_self_call}/{method.total_call}"
+			for method in self.bad_methods do
+				var max_class_call = method.class_call.max
+				if max_class_call != null then
+					# Check if the type of max call class is generique
+					if max_class_call.mclass.mclass_type isa MGenericType and not phase.toolcontext.opt_move_generics.value then
+						print "		-{method.name}({method.msignature.mparameters.join(", ")}) {method.total_self_call}/{method.class_call[max_class_call]}"
+					else
+						print "		-{method.name}({method.msignature.mparameters.join(", ")}) {method.total_self_call}/{method.class_call[max_class_call]} move to {max_class_call}"
+					end
+				end
 			end
+		end
+	end
+
+	redef fun score_rate do
+		if self.bad_methods.not_empty then
+			self.score = self.bad_methods.length.to_f / phase.average_number_of_method
 		end
 	end
 end
@@ -240,20 +296,66 @@ class LongMethod
 
 	redef fun collect(mclassdef, model_builder): Bool do
 		var mmethoddefs = call_analyze_methods(mclassdef,model_builder)
+		var threshold_value = phase.average_number_of_lines.to_i
+		# Get the threshold value from the toolcontext command
+		if phase.toolcontext.opt_long_method_threshold.value != 0 then threshold_value = phase.toolcontext.opt_long_method_threshold.value
+
 		for mmethoddef in mmethoddefs do
-			if mmethoddef.line_number <= phase.average_number_of_lines.to_i then continue
-			bad_methods.add(mmethoddef)
+			if mmethoddef.line_number <= threshold_value then continue
+			self.bad_methods.add(mmethoddef)
 		end
+		self.score_rate
+		return self.bad_methods.not_empty
+	end
+
+	redef fun print_result do
+		print phase.toolcontext.format_h2("{desc}:  Average {phase.average_number_of_lines.to_i} lines")
+		if self.bad_methods.not_empty then
+			print "	Affected method(s):"
+			for method in self.bad_methods do
+				print "		-{method.name} has {method.line_number} lines"
+			end
+		end
+	end
+
+	redef fun score_rate do
+		if self.bad_methods.not_empty then
+			self.score = self.bad_methods.length.to_f / phase.average_number_of_method
+		end
+	end
+end
+
+class NoAbstractImplementation
+	super BadConception
+	var bad_methods = new Array[MMethodDef]
+
+	redef fun name do return "LONGMETH"
+
+	redef fun desc do return "No Implemented abstract property"
+
+	redef fun collect(mclassdef, model_builder): Bool do
+		if not mclassdef.mclass.is_abstract and not mclassdef.mclass.is_interface then
+			if mclassdef.collect_abstract_methods(model_builder.model.private_view).not_empty then
+				bad_methods.add_all(mclassdef.collect_not_define_properties(model_builder.model.private_view))
+			end
+		end
+		self.score_rate
 		return bad_methods.not_empty
 	end
 
 	redef fun print_result do
-		print "{desc}:  Average {phase.average_number_of_lines.to_i} lines"
-		if bad_methods.length >= 1 then
+		print phase.toolcontext.format_h2("{desc}:")
+		if self.bad_methods.not_empty then
 			print "	Affected method(s):"
-			for method in bad_methods do
-				print "		-{method.name} has {method.line_number} lines"
+			for method in self.bad_methods do
+				print "		-{method.name}"
 			end
+		end
+	end
+
+	redef fun score_rate do
+		if self.bad_methods.not_empty then
+			self.score = self.bad_methods.length.to_f / phase.average_number_of_method
 		end
 	end
 end
@@ -313,5 +415,11 @@ end
 class BadConceptionComparator
 	super Comparator
 	redef type COMPARED: BadConceptionFinder
-	redef fun compare(a,b) do return a.array_badconception.length <=> b.array_badconception.length
+	redef fun compare(a,b) do
+		var test = a.array_badconception.length <=> b.array_badconception.length
+		if test == 0 then
+			return a.score <=> b.score
+		end
+		return a.array_badconception.length <=> b.array_badconception.length
+	end
 end
