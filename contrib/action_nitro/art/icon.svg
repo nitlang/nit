@@ -60,8 +60,8 @@
      id="layer1"
      transform="translate(-286.05811,81.477047)">
     <image
-       sodipodi:absref="/home/xymus/projects/nit/contrib/action_nitro/art/../assets/particles/explosion00.png"
-       xlink:href="../assets/particles/explosion00.png"
+       sodipodi:absref="icon_background.png"
+       xlink:href="icon_background.png"
        width="479.1073"
        height="439.72864"
        id="image3062"
