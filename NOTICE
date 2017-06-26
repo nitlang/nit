@@ -72,16 +72,6 @@ Files: share/nitdoc/scripts/jquery-1.7.1.min.js
 Copyright: 2011 John Resig, http://jquery.com/
 Licence: BSD 2 (see LICENSE-BSD)
 
-Files: /misc/gtksourceview/nit.lang
-Copyright: 2009-2011 Alexis Laferrière <alexis.laf@xymus.net>
-           2011-2017 Jean Privat <jean@pryen.org>
-           Based on ruby.lang from
-           2004      Archit Baweja <bighead@users.sourceforge.net>
-           2005      Michael Witrant <mike@lepton.fr>
-           2006      Gabriel Bauman <gbauman@gmail.com>
-License: GPL 2.0 (see LICENSE-GPL-2)
-Comment: GPL because the original work is GPL
-
 Files: /share/png/*
 Copyright: 1998-2014 Glenn Randers-Pehrson
            1996-1997 Andreas Dilger
