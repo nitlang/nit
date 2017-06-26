@@ -258,7 +258,6 @@ class ParticleProgram
 		{
 			if (use_texture) {
 				gl_FragColor = texture2D(texture0, gl_PointCoord) * v_color;
-				if (gl_FragColor.a <= 0.01) discard;
 			} else {
 				gl_FragColor = v_color;
 			}
@@ -301,7 +300,7 @@ class ExplosionProgram
 		gl_Position = center * mvp;
 		gl_PointSize = scale / gl_Position.z * pt;
 
-		if (pt > 0.8) v_color.a = (1.0-pt)/0.2;
+		if (pt > 0.8) v_color *= (1.0-pt)/0.2;
 	"""
 end
 
@@ -318,8 +317,8 @@ class SmokeProgram
 		gl_PointSize = scale / gl_Position.z * (pt+0.1);
 
 		if (pt < 0.1)
-			v_color.a = pt / 0.1;
+			v_color *= pt / 0.1;
 		else
-			v_color.a = 1.0 - pt*0.9;
+			v_color *= 1.0 - pt*0.9;
 	"""
 end

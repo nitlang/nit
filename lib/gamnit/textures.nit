@@ -208,7 +208,7 @@ class CustomTexture
 	end
 end
 
-# Texture with its own pixels
+# Texture with its own pixel data
 class RootTexture
 	super Texture
 
@@ -221,12 +221,29 @@ class RootTexture
 
 	init do all_root_textures.add self
 
+	# Should the pixels RGB values be premultiplied by their alpha value at loading?
+	#
+	# All gamnit textures must have premultiplied alpha, it provides a better
+	# alpha blending, avoids artifacts and allows for additive blending.
+	#
+	# When at `true`, the default, pixels RGB values are premultiplied
+	# at loading. Set to `false` if pixels RGB values are already
+	# premultiplied in the source data.
+	#
+	# This value must be set before calling `load`.
+	var premultiply_alpha = true is writable
+
 	private fun load_from_pixels(pixels: Pointer, width, height: Int, format: GLPixelFormat)
 	do
 		var max_texture_size = glGetIntegerv(gl_MAX_TEXTURE_SIZE, 0)
 		if width > max_texture_size or height > max_texture_size then
 			error = new Error("Texture {self} width or height is over the GL_MAX_TEXTURE_SIZE of {max_texture_size}")
 			return
+		end
+
+		# Premultiply alpha?
+		if premultiply_alpha and format == gl_RGBA then
+			pixels.premultiply_alpha(width, height)
 		end
 
 		glPixelStorei(gl_UNPACK_ALIGNEMENT, 1)
@@ -367,4 +384,21 @@ class TextureSet
 
 	# Load all texture of this set
 	fun load_all do for t in self do t.load
+end
+
+redef class Pointer
+	# Multiply RBG values by their alpha value
+	private fun premultiply_alpha(width, height: Int) `{
+		uint8_t *bytes = (uint8_t *)self;
+		int x, y, i = 0;
+		for(y = 0; y < height; y ++) {
+			for(x = 0; x < width; x ++) {
+				int a = bytes[i+3];
+				bytes[i  ] = bytes[i  ] * a / 255;
+				bytes[i+1] = bytes[i+1] * a / 255;
+				bytes[i+2] = bytes[i+2] * a / 255;
+				i += 4;
+			}
+		}
+	`}
 end

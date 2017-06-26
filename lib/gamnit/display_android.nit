@@ -62,7 +62,7 @@ redef class TextureAsset
 			return
 		end
 
-		var buf = bmp.copy_pixels
+		var buf = bmp.copy_pixels(unmultiply=not premultiply_alpha)
 		loaded = true
 		width = bmp.width.to_f
 		height = bmp.height.to_f

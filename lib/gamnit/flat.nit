@@ -430,7 +430,7 @@ redef class App
 
 		# Enable blending
 		gl.capabilities.blend.enable
-		glBlendFunc(gl_SRC_ALPHA, gl_ONE_MINUS_SRC_ALPHA)
+		glBlendFunc(gl_ONE, gl_ONE_MINUS_SRC_ALPHA)
 
 		# Enable depth test
 		gl.capabilities.depth_test.enable
@@ -695,7 +695,7 @@ private class Simple2dProgram
 			}
 
 			gl_Position = (vec4(c * scale, 1.0) * rotation() + translation)* mvp;
-			v_color = color;
+			v_color = vec4(color.rgb*color.a, color.a);
 		}
 		""" @ glsl_vertex_shader
 
