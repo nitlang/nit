@@ -76,3 +76,30 @@ redef class SubEx
 	super ExC2
 	#alt20# super SSet2
 end
+
+redef class SSetI
+	#alt21# super SubI
+	#alt22# super IC2
+	#alt23# super AC2
+	#alt24# super CC2
+	#alt25# super EnC2
+	#alt26# super ExC2
+	#alt27# super SSet2
+	#alt28# super Object
+end
+
+redef class SSetA
+	#alt29# super SubA
+end
+
+redef class SSetC
+	#alt30# super SubC
+end
+
+redef class SSetEn
+	#alt31# super SubEn
+end
+
+redef class SSetEx
+	#alt32# super SubEx
+end

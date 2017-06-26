@@ -162,6 +162,7 @@ redef class ModelBuilder
 
 		var is_intro = (mclass.intro_mmodule == mmodule)
 		var supertypes = collect_supertypes(nmodule, nclassdef, is_intro)
+		set_normal_class_of(nmodule, nclassdef, supertypes, is_intro)
 
 		var bound_mtype = build_a_bound_mtype(nmodule, nclassdef)
 		if bound_mtype == null then return
@@ -190,6 +191,51 @@ redef class ModelBuilder
 		mclassdef.set_supertypes(supertypes)
 		if not supertypes.is_empty then
 			self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
+		end
+	end
+
+	# Set the base normal class of `nclassdef.mclass`, if needed.
+	#
+	# If `mclass` is not a subset, do nothing. Else, ensure that `mclass` has
+	# exactly one (explicit or implied) direct superclass and set it as the
+	# base normal class.
+	#
+	# `is_intro` indicates if we are currently processing a definition that
+	# introduces the class.
+	private fun set_normal_class_of(nmodule: AModule, nclassdef: AClassdef,
+			supertypes: Array[MClassType], is_intro: Bool)
+	do
+		var mclass = nclassdef.mclass
+		if mclass.kind != subset_kind then
+			return
+		else if is_intro then
+			# A subset can only have one direct supertype.
+			if supertypes.length != 1 then
+				if supertypes.is_empty then
+					# Supertype collection failed or `Object` is not yet
+					# defined.
+					var mmodule = nmodule.mmodule.as(not null)
+					var objectclass = try_get_mclass_by_name(nmodule, mmodule,
+							"Object")
+					if objectclass == null then
+						error(nclassdef,
+							"Error: {mclass.kind} `{mclass.name}` must have " +
+							"a base class."
+						)
+					end
+				else
+					error(nclassdef,
+						"Error: {mclass.kind} `{mclass.name}` has multiple " +
+						"base classes."
+					)
+				end
+			end
+			# TODO: Actually set the normal class.
+		else if supertypes.not_empty then
+			error(nclassdef,
+				"Error: Only the introducing definition of " +
+				"{mclass.kind} `{mclass.name}` may specify a base class."
+			)
 		end
 	end
 
