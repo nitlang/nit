@@ -634,17 +634,6 @@ redef class World
 	end
 end
 
-redef class Int
-	# Pad a number with `0`s on the left side to reach `size` digits
-	private fun pad(size: Int): String
-	do
-		var s = to_s
-		var d = size - s.length
-		if d > 0 then s = "0"*d + s
-		return s
-	end
-end
-
 # Manager to display numbers in sprite
 class CounterSprites
 
