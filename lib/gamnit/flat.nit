@@ -235,7 +235,10 @@ class Sprite
 	fun needs_update
 	do
 		var c = context
-		if c != null then c.sprites_to_update.add self
+		if c == null then return
+		if c.last_sprite_to_update == self then return
+		c.sprites_to_update.add self
+		c.last_sprite_to_update = self
 	end
 
 	# Request a resorting of this sprite in its sprite list
@@ -252,6 +255,9 @@ class Sprite
 
 	# Current context to which `self` was sorted
 	private var context: nullable SpriteContext = null
+
+	# Index in `context`
+	private var context_index: Int = -1
 
 	# Current context to which `self` belongs
 	private var sprite_set: nullable SpriteSet = null
@@ -693,6 +699,7 @@ private class SpriteSet
 
 		context.sprites.add sprite
 		context.sprites_to_update.add sprite
+		context.last_sprite_to_update = sprite
 
 		sprite.context = context
 		sprite.sprite_set = self
@@ -768,10 +775,13 @@ private class SpriteContext
 	var usage: GLBufferUsage
 
 	# Sprites drawn by this context
-	var sprites = new GroupedArray[Sprite]
+	var sprites = new GroupedSprites
 
 	# Sprites to update since last `draw`
 	var sprites_to_update = new Set[Sprite]
+
+	# Cache of the last `Sprite` added to `sprites_to_update` since the last call to `draw`
+	var last_sprite_to_update: nullable Sprite = null
 
 	# Sprites that have been update and for which `needs_update` can be set to false
 	var updated_sprites = new Array[Sprite]
@@ -878,8 +888,11 @@ private class SpriteContext
 	# Update GPU data of `sprite`
 	fun update_sprite(sprite: Sprite)
 	do
-		var sprite_index = sprites.index_of(sprite)
-		if sprite_index == -1 then return
+		var context = sprite.context
+		if context != self then return
+
+		var sprite_index = sprite.context_index
+		assert sprite_index != -1
 
 		# Vertices data
 
@@ -977,6 +990,7 @@ private class SpriteContext
 		glBindBuffer(gl_ELEMENT_ARRAY_BUFFER, buffer_element)
 
 		# Resize GPU buffers?
+		var update_everything = false
 		if sprites.capacity > buffer_capacity then
 			# Try to defragment first
 			var moved = sprites.defragment
@@ -986,6 +1000,7 @@ private class SpriteContext
 				resize
 
 				# We must update everything
+				update_everything = true
 				for s in sprites.items do if s != null then sprites_to_update.add s
 			else
 				# Just update the moved sprites
@@ -999,11 +1014,19 @@ private class SpriteContext
 		end
 
 		# Update GPU sprites data
-		if sprites_to_update.not_empty then
+		if sprites_to_update.not_empty or update_everything then
 			app.perf_clock_sprites.lapse
 
-			for sprite in sprites_to_update do update_sprite(sprite)
+			if update_everything then
+				for sprite in sprites.items do if sprite != null then
+					update_sprite(sprite)
+				end
+			else
+				for sprite in sprites_to_update do update_sprite(sprite)
+			end
+
 			sprites_to_update.clear
+			last_sprite_to_update = null
 
 			sys.perfs["gamnit flat gpu update"].add app.perf_clock_sprites.lapse
 		end
@@ -1169,9 +1192,6 @@ private class GroupedArray[E]
 	# Number of item slots in the array
 	fun capacity: Int do return items.length
 
-	# Index of `item`
-	fun index_of(item: E): Int do return items.index_of(item)
-
 	# List of available slots
 	var available = new MinHeap[Int].default
 
@@ -1181,8 +1201,8 @@ private class GroupedArray[E]
 	# Index of the spots after filled chunks
 	var ends = new List[Int]
 
-	# Add `item` to the first available slot
-	fun add(item: E)
+	# Add `item` to the first available slot and return its index
+	fun add(item: E): Int
 	do
 		length += 1
 
@@ -1207,7 +1227,7 @@ private class GroupedArray[E]
 				# at end of first chunk
 				ends.first += 1
 			end
-			return
+			return i
 		end
 
 		items.add item
@@ -1215,13 +1235,20 @@ private class GroupedArray[E]
 			starts.add 0
 			ends.add 1
 		else ends.last += 1
+		return ends.last - 1
 	end
 
 	# Remove the first instance of `item`
 	fun remove(item: E)
 	do
-		var i = items.index_of(item)
-		assert i != -1
+		var index = items.index_of(item)
+		remove_at(item, index)
+	end
+
+	# Remove `item` at `index`
+	fun remove_at(item: E, index: Int)
+	do
+		var i = index
 		length -= 1
 		items[i] = null
 
@@ -1296,6 +1323,7 @@ private class GroupedArray[E]
 		while max > 0 and (starts.length > 1 or starts.first != 0) do
 			var i = ends.last - 1
 			var e = items[i]
+			assert e != null
 			remove e
 			add e
 			moved.add e
@@ -1326,6 +1354,20 @@ private class GroupedArray[E]
 		end
 		return ss.join
 	end
+end
+
+# Optimized `GroupedArray` to use `Sprite::context_index` and avoid using `index_of`
+private class GroupedSprites
+	super GroupedArray[Sprite]
+
+	redef fun add(item)
+	do
+		var index = super
+		item.context_index = index
+		return index
+	end
+
+	redef fun remove(item) do remove_at(item, item.context_index)
 end
 
 redef class GLfloatArray
