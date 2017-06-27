@@ -238,6 +238,9 @@ class RootTexture
 
 		glHint(gl_GENERATE_MIPMAP_HINT, gl_NICEST)
 		glGenerateMipmap(gl_TEXTURE_2D)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR_MIPMAP_LINEAR)
+
+		glBindTexture(gl_TEXTURE_2D, 0)
 	end
 
 	private fun load_checker(size: Int)
