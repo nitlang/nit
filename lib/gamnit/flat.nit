@@ -123,6 +123,55 @@ class Sprite
 		center_direct = value
 	end
 
+	# Last animation set with `animate`
+	var animation: nullable Animation = null
+
+	# Animation on the shader, if this changes it `needs_remap`
+	private var shader_animation: nullable Animation = null
+
+	# Animation start time, relative to `sprite_set.time`
+	#
+	# At -1.0 if animation started before being assigned a `sprite_set`.
+	private var animation_start = 0.0
+
+	# Number of loops to show `animation`
+	private var animation_loops = 0.0
+
+	# Start the `animation` for `n_loops`, replacing the static `texture`
+	#
+	# By default, if `n_loops` is not set, the animation plays once.
+	# If `n_loops == -1.0` then the animation loops infinitely.
+	# Otherwise, the animation repeats, e.g. it repeats twice and a half
+	# if `n_loops == 2.5`.
+	#
+	# The animation can be stopped using `animate_stop`.
+	fun animate(animation: Animation, n_loops: nullable Float)
+	do
+		if not animation.valid then print_error "{class_name}::animate: invalid animation {animation}"
+
+		var shader_animation = shader_animation
+		if shader_animation == null or animation.frames.first.root != shader_animation.frames.first.root then
+			# Resort with the new animation texture
+			needs_remap
+		else
+			needs_update
+		end
+
+		var sprite_set = sprite_set
+		animation_start = if sprite_set != null then sprite_set.time else -1.0
+		animation_loops = n_loops or else 1.0
+		self.shader_animation = animation
+		self.animation = animation
+	end
+
+	# Stop any active `animation` to display the static `texture`
+	fun animate_stop
+	do
+		if animation == null then return
+		needs_update
+		animation = null
+	end
+
 	# Rotation on the Z axis, positive values turn counterclockwise
 	var rotation = 0.0 is writable(rotation_direct=)
 
@@ -263,6 +312,44 @@ class Sprite
 	private var sprite_set: nullable SpriteSet = null
 end
 
+# Animation for sprites, set with `Sprite.animate`
+#
+# Two main services create animations:
+# * The constructors accepts an array of textures and the number of frames per
+#   seconds: `new Animation(array_of_subtextures, 10.0)`
+# * The method `Texture::to_animation` uses the whole texture
+#   dividing it in frames either on X or Y:
+#   `new Texture("path/in/assets.png").to_animation(30.0, 0, 12)`
+class Animation
+
+	# Frames composing this animation
+	#
+	# All frames must share the same `Texture::root`, be on a vertical or
+	# horizontal line, be spaced equally and share the same dimensions.
+	var frames: SequenceRead[Texture]
+
+	# Frames per seconds, a higher value makes this animation faster
+	#
+	# The animation speed is also affected by `SpriteSet::time_mod`.
+	var fps: Float
+
+	# Are the `frames` valid for an animation? (see the requirements in `frames`)
+	var valid: Bool is lazy do
+		var r: nullable RootTexture = null
+		for f in frames do
+			if r == null then
+				r = f.root
+			else
+				if r != f.root then return false
+			end
+		end
+
+		# TODO check for line, constant distance, and same aspect ratio.
+
+		return true
+	end
+end
+
 redef class App
 	# Default graphic program to draw `sprites`
 	private var simple_2d_program = new Simple2dProgram is lazy
@@ -399,6 +486,7 @@ redef class App
 		perf_clock_main.lapse
 		var dt = clock.lapse.to_f
 		update dt
+		frame_dt = dt
 		sys.perfs["gamnit flat update client"].add perf_clock_main.lapse
 
 		# Draw and flip screen
@@ -409,6 +497,8 @@ redef class App
 		gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 	end
+
+	private var frame_dt = 0.0
 
 	# Draw the whole screen, all `glDraw...` calls should be executed here
 	protected fun frame_core_draw(display: GamnitDisplay)
@@ -430,6 +520,9 @@ redef class App
 		var simple_2d_program = app.simple_2d_program
 		simple_2d_program.use
 		simple_2d_program.mvp.uniform camera.mvp_matrix
+
+		sprite_set.time += frame_dt*sprite_set.time_mod
+		simple_2d_program.time.uniform sprite_set.time
 
 		# draw
 		sprite_set.draw
@@ -488,6 +581,34 @@ redef class Texture
 		        r, b,
 		        l, b]
 	end
+
+	# Convert to a sprite animation at `fps` speed with `x` or `y` frames
+	#
+	# The arguments `x` and `y` set the number of frames in the texture.
+	# Use `x` for an horizontal arrangement or `y` for vertical.
+	# One and only one of the arguments must be different than 0,
+	# as an animation can only be on a line and cannot wrap.
+	fun to_animation(fps: Float, x, y: Int): Animation
+	do
+		assert (x == 0) != (y == 0)
+
+		var n_frames = x.max(y)
+		var frames = new Array[Texture]
+
+		var dx = (x/n_frames).to_f/n_frames.to_f
+		var dy = (y/n_frames).to_f/n_frames.to_f
+		var w = if x == 0 then 1.0 else dx
+		var h = if y == 0 then 1.0 else dy
+		var left = 0.0
+		var top = 0.0
+		for i in n_frames.times do
+			frames.add new RelativeSubtexture(root, left, top, left+w, top+h)
+			left += dx
+			top += dy
+		end
+
+		return new Animation(frames, fps)
+	end
 end
 
 # Graphic program to display simple models with a texture, translation, rotation and scale
@@ -513,11 +634,35 @@ private class Simple2dProgram
 		// Model view projection matrix
 		uniform mat4 mvp;
 
+		// Current world time, in seconds
+		uniform float time;
+
 		// Rotation matrix
 		attribute vec4 rotation_row0;
 		attribute vec4 rotation_row1;
 		attribute vec4 rotation_row2;
 		attribute vec4 rotation_row3;
+
+		// Animation speed, frames per seconds
+		attribute float a_fps;
+
+		// Number of frames in the animation
+		attribute float a_n_frames;
+
+		// World coordinate of the animation (for aspect ratio)
+		attribute vec2 a_coord;
+
+		// Animation texture coordinates of the first frame
+		attribute vec2 a_tex_coord;
+
+		// Animation texture coordinates difference between frames
+		attribute vec2 a_tex_diff;
+
+		// Animation start time, in reference to `time`
+		attribute float a_start;
+
+		// Number of loops to play of the animation
+		attribute float a_loops;
 
 		mat4 rotation()
 		{
@@ -528,11 +673,29 @@ private class Simple2dProgram
 		varying vec4 v_color;
 		varying vec2 v_coord;
 
+		// Is there an active animation?
+		varying float v_animated;
+
 		void main()
 		{
-			gl_Position = (vec4(coord.xyz * scale, 1.0) * rotation() + translation)* mvp;
+			vec3 c; // coords
+
+			float end = a_start + a_loops/a_fps*a_n_frames;
+			if (a_loops == -1.0 || time < end) {
+				// in animation
+				float frame = mod(floor((time-a_start)*a_fps), a_n_frames);
+				v_coord = a_tex_coord + a_tex_diff*frame;
+				c = vec3(a_coord, coord.z);
+				v_animated = 1.0;
+			} else {
+				// static
+				v_coord = tex_coord;
+				c = coord.xyz;
+				v_animated = 0.0;
+			}
+
+			gl_Position = (vec4(c * scale, 1.0) * rotation() + translation)* mvp;
 			v_color = color;
-			v_coord = tex_coord;
 		}
 		""" @ glsl_vertex_shader
 
@@ -545,13 +708,20 @@ private class Simple2dProgram
 		// Texture to apply on this object
 		uniform sampler2D texture0;
 
+		// Texture to apply on this object
+		uniform sampler2D animation;
+
 		// Input from the vertex shader
 		varying vec4 v_color;
 		varying vec2 v_coord;
+		varying float v_animated;
 
 		void main()
 		{
-			if(use_texture) {
+			if (v_animated > 0.5) {
+				gl_FragColor = v_color * texture2D(animation, v_coord);
+				if (gl_FragColor.a <= 0.01) discard;
+			} else if (use_texture) {
 				gl_FragColor = v_color * texture2D(texture0, v_coord);
 				if (gl_FragColor.a <= 0.01) discard;
 			} else {
@@ -595,6 +765,36 @@ private class Simple2dProgram
 
 	# Model view projection matrix
 	var mvp = uniforms["mvp"].as(UniformMat4) is lazy
+
+	# World time, in seconds
+	var time = uniforms["time"].as(UniformFloat) is lazy
+
+	# ---
+	# Animations
+
+	# Texture of all the frames of the animation
+	var animation_texture = uniforms["animation"].as(UniformSampler2D) is lazy
+
+	# Frame per second of the animation
+	var animation_fps = attributes["a_fps"].as(AttributeFloat) is lazy
+
+	# Number of frames in the animation
+	var animation_n_frames = attributes["a_n_frames"].as(AttributeFloat) is lazy
+
+	# Coordinates of each frame (mush be shared by all frames)
+	var animation_coord = attributes["a_coord"].as(AttributeVec2) is lazy
+
+	# Texture coordinates of the first frame
+	var animation_tex_coord = attributes["a_tex_coord"].as(AttributeVec2) is lazy
+
+	# Coordinate difference between each frame
+	var animation_tex_diff = attributes["a_tex_diff"].as(AttributeVec2) is lazy
+
+	# Animation start time, in seconds and in reference to `dt`
+	var animation_start = attributes["a_start"].as(AttributeFloat) is lazy
+
+	# Number of loops of the animation, -1 for infinite
+	var animation_loops = attributes["a_loops"].as(AttributeFloat) is lazy
 end
 
 redef class Point3d[N]
@@ -673,7 +873,7 @@ private class SpriteSet
 	super HashSet[Sprite]
 
 	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap2[RootTexture, Bool, SpriteContext]
+	var contexts_map = new HashMap3[RootTexture, nullable RootTexture, Bool, SpriteContext]
 
 	# Contexts in `contexts_map`
 	var contexts_items = new Array[SpriteContext]
@@ -681,19 +881,29 @@ private class SpriteSet
 	# Sprites needing resorting in `contexts_map`
 	var sprites_to_remap = new Array[Sprite]
 
+	# Animation speed multiplier (0.0 to pause, 1.0 for normal speed, etc.)
+	var time_mod = 1.0 is writable
+
+	# Seconds elapsed since the launch of the program, in world time responding to `time_mod`
+	var time = 0.0
+
 	# Add a sprite to the appropriate context
 	fun map_sprite(sprite: Sprite)
 	do
 		assert sprite.context == null else print_error "Sprite {sprite} belongs to another SpriteSet"
 
+		# Sort by texture and animation texture
 		var texture = sprite.texture.root
-		var context = contexts_map[texture, sprite.static]
+		var animation = sprite.animation
+		var animation_texture = if animation != null then
+			animation.frames.first.root else null
+		var context = contexts_map[texture, animation_texture, sprite.static]
 
 		if context == null then
 			var usage = if sprite.static then gl_STATIC_DRAW else gl_DYNAMIC_DRAW
-			context = new SpriteContext(texture, usage)
+			context = new SpriteContext(texture, animation_texture, usage)
 
-			contexts_map[texture, sprite.static] = context
+			contexts_map[texture, animation_texture, sprite.static] = context
 			contexts_items.add context
 		end
 
@@ -703,6 +913,11 @@ private class SpriteSet
 
 		sprite.context = context
 		sprite.sprite_set = self
+
+		if animation != null and sprite.animation_start == -1.0 then
+			# Start animation
+			sprite.animation_start = time
+		end
 	end
 
 	# Remove a sprite from its context
@@ -771,6 +986,9 @@ private class SpriteContext
 	# Only root texture drawn by this context
 	var texture: nullable RootTexture
 
+	# Only animation texture drawn by this context
+	var animation_texture: nullable RootTexture
+
 	# OpenGL ES usage of `buffer_array` and `buffer_element`
 	var usage: GLBufferUsage
 
@@ -812,10 +1030,11 @@ private class SpriteContext
 
 	# Number of GL_FLOAT per vertex of `Simple2dProgram`
 	var float_per_vertex: Int is lazy do
-		# vec4 translation, vec4 color, vec4 coord,
-		# float scale, vec2 tex_coord, vec4 rotation_row*
-		return 4 + 4 + 4 +
-		       1 + 2 + 4*4
+		return 4 + 4 + 4 +   # vec4 translation, vec4 color, vec4 coord,
+		       1 + 2 + 4*4 + # float scale, vec2 tex_coord, vec4 rotation_row*,
+		       1 + 1 +       # float a_fps, float a_n_frames,
+		       2 + 2 + 2 +   # vec2 a_coord, vec2 a_tex_coord, vec2 a_tex_diff,
+		       1 + 1         # float a_start, float a_loops
 	end
 
 	# Number of bytes per vertex of `Simple2dProgram`
@@ -940,6 +1159,40 @@ private class SpriteContext
 			end
 			data.fill_from_matrix(rot, o+15)
 
+			var animation = sprite.animation
+			if animation == null then
+				for i in [31..40] do data[o+i] = 0.0
+			else
+				# a_fps
+				data[o+31] = animation.fps
+
+				# a_n_frames
+				data[o+32] = animation.frames.length.to_f
+
+				# a_coord
+				data[o+33] = animation.frames.first.vertices[v*3+0]
+				data[o+34] = animation.frames.first.vertices[v*3+1]
+
+				# a_tex_coord
+				var tc = if sprite.invert_x then
+						animation.frames.first.texture_coords_invert_x
+					else animation.frames.first.texture_coords
+				data[o+35] = tc[v*2]
+				data[o+36] = tc[v*2+1]
+
+				# a_tex_diff
+				var dx = animation.frames[1].texture_coords[0] - animation.frames[0].texture_coords[0]
+				var dy = animation.frames[1].texture_coords[1] - animation.frames[0].texture_coords[1]
+				data[o+37] = dx
+				data[o+38] = dy
+
+				# a_start
+				data[o+39] = sprite.animation_start
+
+				# a_loops
+				data[o+40] = sprite.animation_loops
+			end
+
 			o += float_per_vertex
 		end
 
@@ -1042,8 +1295,19 @@ private class SpriteContext
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 
+		var animation = animation_texture
+		if animation != null then
+			glActiveTexture gl_TEXTURE1
+			glBindTexture(gl_TEXTURE_2D, animation.gl_texture)
+			app.simple_2d_program.animation_texture.uniform 1
+		end
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
 		# Configure attributes, in order:
-		# vec4 translation, vec4 color, float scale, vec4 coord, vec2 tex_coord, vec4 rotation_row*
+		# vec4 translation, vec4 color, float scale, vec4 coord, vec2 tex_coord, vec4 rotation_row*,
+		# a_fps, a_n_frames, a_coord, a_tex_coord, a_tex_diff, a_start, a_loops
+
 		var offset = 0
 		var p = app.simple_2d_program
 		var sizeof_gl_float = 4 # sizeof(GL_FLOAT)
@@ -1093,6 +1357,55 @@ private class SpriteContext
 			gl_error = glGetError
 			assert gl_error == gl_NO_ERROR else print_error gl_error
 		end
+
+		size = 1
+		glEnableVertexAttribArray p.animation_fps.location
+		glVertexAttribPointeri(p.animation_fps.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		size = 1
+		glEnableVertexAttribArray p.animation_n_frames.location
+		glVertexAttribPointeri(p.animation_n_frames.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		size = 2
+		glEnableVertexAttribArray p.animation_coord.location
+		glVertexAttribPointeri(p.animation_coord.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		size = 2
+		glEnableVertexAttribArray p.animation_tex_coord.location
+		glVertexAttribPointeri(p.animation_tex_coord.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		size = 2
+		glEnableVertexAttribArray p.animation_tex_diff.location
+		glVertexAttribPointeri(p.animation_tex_diff.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		size = 1
+		glEnableVertexAttribArray p.animation_start.location
+		glVertexAttribPointeri(p.animation_start.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+
+		size = 1
+		glEnableVertexAttribArray p.animation_loops.location
+		glVertexAttribPointeri(p.animation_loops.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
+		offset += size * sizeof_gl_float
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
 
 		# Actual draw
 		for s in sprites.starts, e in sprites.ends do

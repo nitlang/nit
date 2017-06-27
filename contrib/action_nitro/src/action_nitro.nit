@@ -41,9 +41,12 @@ redef class App
 	# Textures of the biplane, jet, helicopter, parachute and powerups
 	var planes_sheet = new PlanesImages
 
+	# Animation when opening the parachute
+	var parachute_animation = new Animation(planes_sheet.parachute, 16.0)
+
 	# Animation for the player movement
-	private var player_textures: Array[Texture] =
-		[for f in [1..12] do new Texture("textures/player/frame_{f.pad(2)}.png")]
+	private var running_texture = new Texture("textures/player.png")
+	private var running_animation: Animation = running_texture.to_animation(10.0, 12, 0)
 
 	# Boss 3D model
 	private var iss_model = new Model("models/iss.obj")
@@ -276,7 +279,6 @@ redef class App
 			player.moving = 0.0
 			if pressed_keys.has("left") then player.moving -= 1.0
 			if pressed_keys.has("right") then player.moving += 1.0
-			player.sprite.as(PlayerSprite).update
 		end
 
 		# Try to fire as long as a key is pressed
@@ -404,16 +406,12 @@ redef class App
 					if event.name == "left" then
 						var mod = if event.is_down then -1.0 else 1.0
 						player.moving += mod
-					end
-
-					if event.name == "right" then
+						player.animate_move
+					else if event.name == "right" then
 						var mod = if event.is_down then 1.0 else -1.0
 						player.moving += mod
+						player.animate_move
 					end
-
-					if player.moving == 0.0 then
-					player.sprite.as(PlayerSprite).stop_running
-					else player.sprite.as(PlayerSprite).start_running
 				end
 			end
 		end
@@ -525,18 +523,30 @@ redef class Boss
 end
 
 redef class Enemy
-	redef var sprite = new Sprite(app.player_textures.rand, center) is lazy
+	redef var sprite = new Sprite(app.running_animation.frames.rand, center) is lazy
 	init do sprite.scale = width/sprite.texture.width * 2.0
 end
 
 redef class Parachute
-	redef var sprite = new Sprite(app.planes_sheet.parachute, center) is lazy
-	init do sprite.scale = width / sprite.texture.width
+	redef var sprite = new Sprite(app.planes_sheet.parachute_open, center) is lazy
+	init
+	do
+		sprite.scale = width / sprite.texture.width
+		sprite.animate app.parachute_animation
+	end
 end
 
 redef class Player
-	redef var sprite = new PlayerSprite(app.player_textures[1], center, app.player_textures, 0.08) is lazy
+	redef var sprite = new Sprite(app.running_animation.frames.last, center) is lazy
 	init do sprite.scale = width/sprite.texture.width * 2.0
+
+	# Update current animation
+	fun animate_move
+	do
+		if moving == 0.0 then
+			sprite.animate_stop
+		else sprite.animate(app.running_animation, -1.0)
+	end
 
 	redef fun update(dt, world)
 	do
@@ -629,44 +639,6 @@ redef class Int
 		var d = size - s.length
 		if d > 0 then s = "0"*d + s
 		return s
-	end
-end
-
-# Special `Sprite` for the player character which is animated
-class PlayerSprite
-	super Sprite
-
-	# Animation of the running character
-	var running_animation: Array[Texture]
-
-	# Seconds per frame of the animations
-	var time_per_frame: Float
-
-	# Currently playing animation
-	private var current_animation: nullable Array[Texture] = null
-
-	# Second at witch `current_animation` started
-	private var anim_ot = 0.0
-
-	# Start the running animation
-	fun start_running
-	do
-		anim_ot = app.world.t
-		current_animation = running_animation
-	end
-
-	# Stop the running animation
-	fun stop_running do current_animation = null
-
-	# Update `texture` from `current_animation`
-	fun update
-	do
-		var anim = current_animation
-		if anim != null then
-			var dt = app.world.t - anim_ot
-			var i = (dt / time_per_frame).to_i+2
-			texture = anim.modulo(i)
-		end
 	end
 end
 

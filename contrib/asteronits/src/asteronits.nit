@@ -61,7 +61,7 @@ redef class App
 	var world = new World(12, 2, display.aspect_ratio) is lazy
 
 	# Sound effects
-	private var fx_fire = new Sound("sounds/fire.mp3")
+	private var fx_fire = new Sound("sounds/fire.ogg")
 	private var fx_explosion_ship = new Sound("sounds/explosion_ship.wav")
 	private var fx_explosion_asteroids = new Sound("sounds/explosion_asteroids.wav")
 
