@@ -2017,6 +2017,10 @@ redef class AEqFormExpr
 
 		if mtype == null or mtype2 == null then return
 
+		if mtype == v.type_bool(self) and (n_expr2 isa AFalseExpr or n_expr2 isa ATrueExpr) then
+			v.modelbuilder.warning(self, "useless-truism", "Warning: useless comparison to a Bool literal.")
+		end
+
 		if not mtype2 isa MNullType then return
 
 		v.check_can_be_null(n_expr, mtype)
