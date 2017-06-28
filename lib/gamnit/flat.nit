@@ -873,7 +873,7 @@ private class SpriteSet
 	super HashSet[Sprite]
 
 	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap3[RootTexture, nullable RootTexture, Bool, SpriteContext]
+	var contexts_map = new HashMap3[RootTexture, nullable RootTexture, Bool, Array[SpriteContext]]
 
 	# Contexts in `contexts_map`
 	var contexts_items = new Array[SpriteContext]
@@ -897,13 +897,29 @@ private class SpriteSet
 		var animation = sprite.animation
 		var animation_texture = if animation != null then
 			animation.frames.first.root else null
-		var context = contexts_map[texture, animation_texture, sprite.static]
+		var contexts = contexts_map[texture, animation_texture, sprite.static]
+
+		var context = null
+		if contexts != null then
+			for c in contexts.reverse_iterator do
+				var size = c.sprites.length + 1
+				if size * 4 <= 0xffff then
+					context = c
+					break
+				end
+			end
+		end
 
 		if context == null then
 			var usage = if sprite.static then gl_STATIC_DRAW else gl_DYNAMIC_DRAW
 			context = new SpriteContext(texture, animation_texture, usage)
 
-			contexts_map[texture, animation_texture, sprite.static] = context
+			if contexts == null then
+				contexts = new Array[SpriteContext]
+				contexts_map[texture, animation_texture, sprite.static] = contexts
+			end
+
+			contexts.add context
 			contexts_items.add context
 		end
 
