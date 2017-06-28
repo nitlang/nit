@@ -52,7 +52,7 @@ RUN mkdir -p /opt \
 	&& rm android-sdk-linux.tgz \
 	&& echo y | android-sdk-linux/tools/android update sdk -a --no-ui --filter \
 		# Hardcode minimal known working things
-		platform-tools,build-tools-22.0.1,android-22,android-10 \
+		platform-tools,build-tools-22.0.1,android-22,android-21,android-19,android-16,android-15,android-10 \
 	# Android NDK
 	&& curl http://dl.google.com/android/repository/android-ndk-r11c-linux-x86_64.zip -o android-ndk.zip \
 	&& unzip -q android-ndk.zip \
