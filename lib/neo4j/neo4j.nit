@@ -290,7 +290,7 @@ class Neo4jClient
 
 		# Build the query.
 		var buffer = new Buffer
-		buffer.append "match n where \{label_0\} in labels(n)"
+		buffer.append "match (n) where \{label_0\} in labels(n)"
 		for i in [1..labels.length[ do
 			buffer.append " and \{label_{i}\} in labels(n)"
 		end
