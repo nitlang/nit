@@ -18,7 +18,6 @@ module action_nitro is
 	app_version(1, 0, git_revision)
 
 	android_manifest_activity """android:screenOrientation="sensorLandscape""""
-	android_api_target 10
 end
 
 import gamnit::depth

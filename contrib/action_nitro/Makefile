@@ -7,8 +7,8 @@ bin/action_nitro: $(shell ${NITLS} -M src/action_nitro.nit -m linux) pre-build
 	${NITC} src/action_nitro.nit -m linux -o $@
 
 android:
-bin/action_nitro.apk: $(shell ${NITLS} -M src/action_nitro.nit -m android -m src/touch_ui.nit) pre-build android/res/
-	${NITC} src/action_nitro.nit -m android -m src/touch_ui.nit -o $@
+bin/action_nitro.apk: $(shell ${NITLS} -M src/action_nitro.nit -m gamnit::android19 -m src/touch_ui.nit) pre-build android/res/
+	${NITC} src/action_nitro.nit -m gamnit::android19 -m src/touch_ui.nit -o $@
 
 src/gen/texts.nit: art/texts.svg
 	make -C ../inkscape_tools/
