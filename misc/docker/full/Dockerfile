@@ -74,3 +74,6 @@ RUN git clone https://github.com/KhronosGroup/glslang.git \
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV ANDROID_NDK /opt/android-ndk
 ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK
+ENV JAVA_HOME=/usr/lib/jvm/default-java/
+ENV JNI_LIB_PATH=$JAVA_HOME/jre/lib/amd64/server/
+ENV LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/amd64/server/
