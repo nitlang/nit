@@ -31,6 +31,7 @@ RUN dpkg --add-architecture i386 \
 		# Packages needed for contrib, platforms and FFI
 		ant \
 		clang \
+		cmake \
 		default-jdk \
 		file \
 		inkscape \
@@ -60,6 +61,14 @@ RUN mkdir -p /opt \
 	&& ln -s android-ndk-r11c android-ndk \
 	&& rm android-ndk.zip \
 	&& printf "PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK\nexport PATH\n" >> "/etc/profile.d/android.sh"
+
+# Install OpenGL validator
+RUN git clone https://github.com/KhronosGroup/glslang.git \
+	&& mkdir -p glslang/build \
+	&& cd glslang/build \
+	&& cmake .. \
+	&& make \
+	&& make
 
 # Setup environment variables
 ENV ANDROID_HOME /opt/android-sdk-linux
