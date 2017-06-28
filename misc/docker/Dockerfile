@@ -1,6 +1,6 @@
 # This is a basic install of Nit on a debian base.
 
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Jean Privat <jean@pryen.org>
 
 # Install dependencies
