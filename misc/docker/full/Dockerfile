@@ -56,6 +56,7 @@ RUN mkdir -p /opt \
 	# Android NDK
 	&& curl http://dl.google.com/android/repository/android-ndk-r11c-linux-x86_64.zip -o android-ndk.zip \
 	&& unzip -q android-ndk.zip \
+	&& chmod -R a+X /opt \
 	&& ln -s android-ndk-r11c android-ndk \
 	&& rm android-ndk.zip \
 	&& printf "PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK\nexport PATH\n" >> "/etc/profile.d/android.sh"
