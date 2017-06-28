@@ -134,3 +134,7 @@ You may want to map the command to a shortcut by adding the following code to `~
 " Map the NitExecute function to Ctrl-F
 map <C-f> :NitExecute<enter>
 ~~~
+
+# Test case for syntax highlighting
+To check the accuracy of language definition files, the module
+`../tests/test_syntax.nit` can be used as a demo.
