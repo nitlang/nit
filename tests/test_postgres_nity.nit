@@ -40,7 +40,7 @@ assert raw_exec: result.is_ok else print db.error
 
 assert postgres_nfields: result.nfields == 4 else print_error db.error
 assert postgres_fname: result.fname(0) == "uname" else print_error db.error
-assert postgres_isnull: result.is_null(0,0) == false else print_error db.error
+assert postgres_isnull: not result.is_null(0,0) else print_error db.error
 assert postgres_value: result.value(0,0) == "Bob" else print_error db.error
 
 assert drop_table: db.execute("DROP TABLE users_{db_suffix}") else print db.error

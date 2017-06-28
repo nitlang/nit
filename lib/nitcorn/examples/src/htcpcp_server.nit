@@ -36,7 +36,7 @@ class HTCPCPAction
 		var method = http_request.method
 		var response: HttpResponse
 
-		if is_teapot == true then
+		if is_teapot then
 			response = new HttpResponse(418)
 			response.body = "I'm a teapot!\n"
 			response.header["Content-Type"] = "text"
