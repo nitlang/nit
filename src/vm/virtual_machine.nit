@@ -116,7 +116,7 @@ class VirtualMachine super NaiveInterpreter
 		var mask = sub.mclass.vtable.mask
 
 		var res = inter_is_subtype_ph(super_id, mask, sub.mclass.vtable.internal_vtable)
-		if res == false then return false
+		if not res then return false
 		# sub and sup can be generic types, each argument of generics has to be tested
 
 		if not sup isa MGenericType then return true
@@ -127,7 +127,7 @@ class VirtualMachine super NaiveInterpreter
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
 			var res2 = is_subtype(sub_arg, sup_arg)
-			if res2 == false then return false
+			if not res2 then return false
 		end
 		return true
 	end

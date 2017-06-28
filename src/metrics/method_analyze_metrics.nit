@@ -69,7 +69,7 @@ public class MethodAnalyzeMetrics
 			var callsite = n.callsite
 			if callsite != null then
 				self.total_call += 1
-				if callsite.recv_is_self == true then self.total_self_call += 1
+				if callsite.recv_is_self then self.total_self_call += 1
 			end
 		end
 	end
