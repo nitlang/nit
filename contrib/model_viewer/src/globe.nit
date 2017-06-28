@@ -91,10 +91,12 @@ class GlobeMaterial
 	init surface do init(0, true, [1.0, 1.0, 1.0, 1.0])
 
 	# Create and configure a material for the cloud layer
-	init clouds do init(4, false, [1.0, 1.0, 1.0, 0.5])
+	init clouds do init(4, false, [1.0*clouds_a, 1.0*clouds_a, 1.0*clouds_a, clouds_a])
+	private var clouds_a = 0.5
 
 	# Create and configure a material for the visible atmosphere
-	init atmo do init(null, false, [0.0, 0.8, 1.0, 0.05])
+	init atmo do init(null, false, [0.0, 0.8*atmo_a, 1.0*atmo_a, atmo_a])
+	private var atmo_a = 0.05
 
 	redef fun draw(actor, model)
 	do
@@ -228,7 +230,6 @@ class GlobeProgram
 				s += 0.05 * texture2D(tex_displace, tex_coord).r;
 
 			gl_Position = (vec4(coord.xyz * s, 1.0) * rotation + translation) * mvp;
-
 		}
 		""" @ glsl_vertex_shader
 
