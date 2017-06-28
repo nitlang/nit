@@ -31,12 +31,18 @@ class SmoothMaterial
 	super Material
 
 	# Ambient color, always visible
+	#
+	# The RGB values should be premultiplied by the alpha value.
 	var ambient_color: Array[Float] is writable
 
 	# Diffuse color when covered by a light source
+	#
+	# The RGB values should be premultiplied by the alpha value.
 	var diffuse_color: Array[Float] is writable
 
 	# Specular color affecting reflections
+	#
+	# The RGB values should be premultiplied by the alpha value.
 	var specular_color: Array[Float] is writable
 
 	redef fun draw(actor, model)
@@ -71,9 +77,13 @@ class SmoothMaterial
 		program.camera.uniform(app.world_camera.position.x, app.world_camera.position.y, app.world_camera.position.z)
 
 		# Colors from the material
-		program.ambient_color.uniform(ambient_color[0], ambient_color[1], ambient_color[2], ambient_color[3]*actor.alpha)
-		program.diffuse_color.uniform(diffuse_color[0], diffuse_color[1], diffuse_color[2], diffuse_color[3]*actor.alpha)
-		program.specular_color.uniform(specular_color[0], specular_color[1], specular_color[2], specular_color[3]*actor.alpha)
+		var a = actor.alpha
+		program.ambient_color.uniform(ambient_color[0]*a, ambient_color[1]*a,
+		                              ambient_color[2]*a, ambient_color[3]*a)
+		program.diffuse_color.uniform(diffuse_color[0]*a, diffuse_color[1]*a,
+		                              diffuse_color[2]*a, diffuse_color[3]*a)
+		program.specular_color.uniform(specular_color[0]*a, specular_color[1]*a,
+		                               specular_color[2]*a, specular_color[3]*a)
 
 		# Execute draw
 		if mesh.indices.is_empty then
@@ -188,9 +198,13 @@ class TexturedMaterial
 
 		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
-		program.ambient_color.uniform(ambient_color[0], ambient_color[1], ambient_color[2], ambient_color[3]*actor.alpha)
-		program.diffuse_color.uniform(diffuse_color[0], diffuse_color[1], diffuse_color[2], diffuse_color[3]*actor.alpha)
-		program.specular_color.uniform(specular_color[0], specular_color[1], specular_color[2], specular_color[3]*actor.alpha)
+		var a = actor.alpha
+		program.ambient_color.uniform(ambient_color[0]*a, ambient_color[1]*a,
+		                              ambient_color[2]*a, ambient_color[3]*a)
+		program.diffuse_color.uniform(diffuse_color[0]*a, diffuse_color[1]*a,
+		                              diffuse_color[2]*a, diffuse_color[3]*a)
+		program.specular_color.uniform(specular_color[0]*a, specular_color[1]*a,
+		                               specular_color[2]*a, specular_color[3]*a)
 
 		program.normal.array_enabled = true
 		program.normal.array(mesh.normals, 3)

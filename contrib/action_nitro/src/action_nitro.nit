@@ -18,7 +18,6 @@ module action_nitro is
 	app_version(1, 0, git_revision)
 
 	android_manifest_activity """android:screenOrientation="sensorLandscape""""
-	android_api_target 10
 end
 
 import gamnit::depth
@@ -80,11 +79,11 @@ redef class App
 	# Particle effects
 
 	# Explosion particles
-	var explosions = new ParticleSystem(20, explosion_program,
+	var explosions = new ParticleSystem(100, explosion_program,
 		new Texture("particles/explosion00.png"))
 
 	# Blood explosion particles
-	var blood = new ParticleSystem(20, explosion_program,
+	var blood = new ParticleSystem(100, explosion_program,
 		new Texture("particles/blood07.png"))
 
 	# Smoke for the background
@@ -137,6 +136,9 @@ redef class App
 
 	redef fun on_create
 	do
+		blood.texture.as(RootTexture).premultiply_alpha = false
+		explosions.texture.as(RootTexture).premultiply_alpha = false
+
 		super
 
 		show_splash_screen new Texture("textures/splash.jpg")
@@ -150,10 +152,10 @@ redef class App
 		ui_camera.reset_height 1080.0
 
 		# Register particle systems
-		particle_systems.add explosions
-		particle_systems.add blood
 		particle_systems.add smoke
 		particle_systems.add clouds
+		particle_systems.add blood
+		particle_systems.add explosions
 
 		# Stars background
 		sprites.add stars
@@ -468,12 +470,12 @@ redef class Human
 	# Show death animation (explosion)
 	fun death_animation
 	do
-		var force = 4.0
+		var force = 2.0
 		health = 0.0
-		for i in 32.times do
+		for i in 16.times do
 			app.blood.add(
 				new Point3d[Float](center.x & force, center.y & force, center.z & force),
-				(2048.0 & 4096.0) * force, 0.3 & 0.1)
+				(4096.0 & 2048.0) * force, 0.3 & 0.1)
 		end
 	end
 end
@@ -622,23 +624,13 @@ redef class World
 		super
 
 		# Particles
-		app.explosions.add(center, 8192.0 * force, 0.3)
-		for i in (4.0*force).to_i.times do
+		var range = 0.5 * force
+		app.explosions.add(center, 4096.0 * force, 0.3)
+		for i in (2.0*force).to_i.times do
 			app.explosions.add(
-				new Point3d[Float](center.x & force, center.y & force/2.0, center.z & force),
-				(4096.0 & 2048.0) * force, 0.3 & 0.3, 0.5.rand)
+				new Point3d[Float](center.x & range, center.y & range, center.z & range),
+				(2048.0 & 1024.0) * force, 0.3 & 0.3, 0.5.rand)
 		end
-	end
-end
-
-redef class Int
-	# Pad a number with `0`s on the left side to reach `size` digits
-	private fun pad(size: Int): String
-	do
-		var s = to_s
-		var d = size - s.length
-		if d > 0 then s = "0"*d + s
-		return s
 	end
 end
 
@@ -694,8 +686,8 @@ redef class SmokeProgram
 		gl_PointSize = scale / gl_Position.z * (pt+0.1);
 
 		if (pt < 0.1)
-			v_color.a = pt / 0.1;
+			v_color *= pt / 0.1;
 		else
-			v_color.a = 1.0 - pt*0.9;
+			v_color *= 1.0 - pt*0.9;
 	"""
 end

@@ -50,19 +50,24 @@ end
 
 redef class TextureAsset
 
+	private fun load_bitmap(asset_manager: AssetManager, path: String): NativeBitmap
+	do
+		return asset_manager.bitmap(path)
+	end
+
 	redef fun load_from_platform
 	do
 		jni_env.push_local_frame 4
 
 		var asset_manager = app.asset_manager
-		var bmp = asset_manager.bitmap(path)
+		var bmp = load_bitmap(asset_manager, path)
 		if bmp.is_java_null then
 			error = new Error("Failed to load texture at '{path}'")
 			jni_env.pop_local_frame
 			return
 		end
 
-		var buf = bmp.copy_pixels
+		var buf = bmp.copy_pixels(unmultiply=not premultiply_alpha)
 		loaded = true
 		width = bmp.width.to_f
 		height = bmp.height.to_f
