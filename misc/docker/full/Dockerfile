@@ -14,8 +14,10 @@ RUN dpkg --add-architecture i386 \
 		libgles1-mesa-dev \
 		libgles2-mesa-dev \
 		libgtk-3-dev \
+		libgmp-dev \
 		libncurses5-dev \
 		libpq-dev \
+		libreadline-dev \
 		libsdl-image1.2-dev \
 		libsdl-ttf2.0-dev \
 		libsdl1.2-dev \
