@@ -12,26 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Simple API for 2D games, built around `Sprite` and `App::update`
-#
-# Client programs should implement `App::update` to execute game logic and
-# add instances of `Sprite` to `App::sprites` and `App::ui_sprites`.
-# At each frame, all sprites are drawn to the screen.
-#
-# This system relies on two cameras `App::world_camera` and `App::ui_camera`.
-#
-# * `App::world_camera` applies a perspective effect to draw the game world.
-#   This camera is designed to be moved around to see the world as well as to
-#   zoom in and out. It is used to position the sprites in `App::sprites`.
-#
-# * `App::ui_camera` is a simple orthogonal camera to display UI objects.
-#   This camera should mostly be still, it can still move for chock effects
-#   and the like. It can be used to standardize the size of the UI across
-#   devices. It is used to position the sprites in `App::ui_sprites`.
-#
-# See the sample game at `contrib/asteronits/` and the basic project template
-# at `lib/gamnit/examples/template/`.
-module flat
+# Core services for the `flat` API for 2D games
+module flat_core
 
 import glesv2
 intrude import geometry::points_and_lines # For _x, _y and _z
