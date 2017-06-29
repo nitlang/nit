@@ -26,7 +26,6 @@ import gamnit::flat
 
 import game_logic
 import spritesheet
-import app::audio
 
 redef class Spritesheet
 	# Largest meteors, organized by color

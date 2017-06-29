@@ -26,8 +26,6 @@ import gamnit
 intrude import gamnit::cameras
 intrude import gamnit::cameras_cache
 import gamnit::dynamic_resolution
-import gamnit::limit_fps
-import gamnit::camera_control
 
 # Visible 2D entity in the game world or UI
 #

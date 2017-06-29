@@ -34,3 +34,11 @@
 module flat
 
 import gamnit::flat_core
+
+# Extra optional features
+import gamnit::limit_fps
+import gamnit::keys
+import gamnit::camera_control
+import gamnit::tileset
+import gamnit::bmfont
+import app::audio

@@ -15,7 +15,7 @@
 # Base entities of the depth 3D game framework
 module depth_core
 
-intrude import gamnit::flat
+import gamnit::flat_core
 
 # Visible 3D entity in the game world
 #

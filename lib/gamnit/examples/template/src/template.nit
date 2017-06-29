@@ -13,9 +13,7 @@ module template is
 	android_api_target 10
 end
 
-import gamnit::flat # For `Texture, Sprite`, etc.
-import gamnit::keys # For `pressed_keys`
-import app::audio # For `Sound`
+import gamnit::flat # The 2D API, use `gamnit::depth` for 3D
 
 redef class App
 
