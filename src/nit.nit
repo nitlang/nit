@@ -18,7 +18,7 @@
 module nit
 
 import interpreter
-import frontend
+import frontend::code_gen
 import parser_util
 import vm
 

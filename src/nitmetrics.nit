@@ -17,7 +17,7 @@
 # A program that collects various metrics on nit programs and libraries
 module nitmetrics
 
-import frontend
+import frontend::code_gen
 import metrics
 
 # Create a tool context to handle options and paths
