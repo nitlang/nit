@@ -21,8 +21,6 @@ module action_nitro is
 end
 
 import gamnit::depth
-import gamnit::keys
-import gamnit::limit_fps
 
 import game
 

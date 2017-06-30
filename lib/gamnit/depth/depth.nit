@@ -15,6 +15,7 @@
 # Framework for 3D games in Nit
 module depth
 
+import flat
 intrude import more_materials
 import more_models
 import model_dimensions

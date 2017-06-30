@@ -23,8 +23,6 @@ module client3d is
 end
 
 import gamnit::depth
-import gamnit::keys
-import app::audio
 
 import base
 

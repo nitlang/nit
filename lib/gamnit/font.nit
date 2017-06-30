@@ -15,7 +15,7 @@
 # Abstract font drawing services, implemented by `bmfont` and `tileset`
 module font
 
-import flat
+import gamnit::flat_core
 
 # Abstract font, drawn by a `TextSprites`
 abstract class Font
