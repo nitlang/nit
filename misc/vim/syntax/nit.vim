@@ -64,7 +64,7 @@ syn match Error "\<end\>"
 
 " Declarations, definitions and blocks
 syn region NITModuleDecl matchgroup=NITDefine start="\<\(import\|module\|package\)\>\s*" matchgroup=NONE end="\ze\(\s\|:\|(\|$\)"  oneline
-syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|universal\|interface\|extern\)\>" matchgroup=NITDefine end="\<end\>" contains=ALLBUT,NITAnnotLine fold
+syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|subset\|universal\|interface\|extern\)\>" matchgroup=NITDefine end="\<end\>" contains=ALLBUT,NITAnnotLine fold
 syn region NITFunctionDecl matchgroup=NITDefine start="\<fun\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline
 syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
@@ -87,9 +87,9 @@ syn match  NITComment	"#.*" contains=NITTodo,@Spell
 
 " Keywords
 " TODO: Decide what to do with built-in annotations and include all of them.
-syn keyword NITKeyword	 abstract intern new
-syn keyword NITDefine	 private public protected intrude readable writable redef
-syn keyword NITControl   if while for with assert and or in as isa once break continue return abort
+syn keyword NITKeyword	 abstract intern new __debug__
+syn keyword NITDefine	 private public protected intrude writable redef
+syn keyword NITControl   if while for with assert and or implies in as isa once break continue return abort yield
 syn keyword NITClass     nullable
 syn keyword NITInclude   special
 syn keyword NITTodo      FIXME NOTE TODO XXX contained

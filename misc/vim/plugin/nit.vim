@@ -244,13 +244,14 @@ fun NitOmnifunc(findstart, base)
 			" It may be a keyword
 			" The list follows the order of the SableCC grammar.
 			if strlen(a:base) > 0
-				for keyword in ['module', 'import', 'class', 'abstract', 'interface',
-					\'universal', 'enum', 'end', 'fun', 'type', 'init', 'redef', 'is',
+				for keyword in ['package', 'module', 'import', 'class', 'abstract', 'interface',
+					\'universal', 'enum', 'subset', 'end', 'fun', 'type', 'init', 'redef', 'is',
 					\'do', 'var', 'extern', 'public', 'protected', 'private', 'intrude',
 					\'if', 'then', 'else', 'while', 'loop', 'for', 'in', 'and', 'or',
 					\'not', 'implies', 'return', 'continue', 'break', 'abort', 'assert',
 					\'new', 'isa', 'once', 'super', 'self', 'true', 'false', 'null',
-					\'as', 'nullable', 'isset', 'label']
+					\'as', 'nullable', 'isset', 'label', 'with', '__debug__', 'yield',
+					\'catch']
 
 					if keyword =~ '^' . a:base
 						call add(matches, keyword)
@@ -363,7 +364,7 @@ endfun
 fun NitGitGrep()
 	let word = expand("<cword>")
 	let out = tempname()
-	execute 'silent !(git grep "\\(module\\|class\\|universal\\|interface\\|var\\|fun\\) '.word.'";'.
+	execute 'silent !(git grep "\\(module\\|class\\|enum\\|subset\\|universal\\|interface\\|var\\|fun\\) '.word.'";'.
 		\'echo; git grep '.word.') > '.out
 
 	" Open the preview window on a temp file

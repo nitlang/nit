@@ -30,7 +30,7 @@ setlocal nosmartindent
 setlocal nocindent
 setlocal autoindent
 setlocal comments=:#
-setlocal indentkeys+==end,=else,=catch,=do,=var,0!,=then,=loop,=special,=class,=interface,=universal
+setlocal indentkeys+==end,=else,=catch,=do,=var,0!,=then,=loop,=class,=enum,=interface,=subset,=universal
 
 " Only define the function once.
 if exists("*GetNITIndent")
@@ -38,11 +38,11 @@ if exists("*GetNITIndent")
 endif
 
 " Indent after
-let s:relative_indent = '\<\(do\|loop\|then\|else\|catch\|if\)\s*\(#\|$\)\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|interface\|universal\|special\)\>'
+let s:relative_indent = '\<\(do\|loop\|then\|else\|catch\|if\)\s*\(#\|$\)\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|enum\|interface\|subset\|universal\)\>'
 " Unindent on them
 let s:outdent = '^\s*\(catch\|else\|then\|end\)\>'
 " At 0
-let s:no_indent = '^\s*\(class\|import\|special\)\>'
+let s:no_indent = '^\s*\(class\|import\)\>'
 
 let s:syng_strcom = '\<NIT\(String\|StringDelimiter\|Escape\|Comment\|Documentation\)\>'
 
