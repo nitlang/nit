@@ -86,6 +86,7 @@ syn match  NITSharpBang	"\%^#!.*"
 syn match  NITComment	"#.*" contains=NITTodo,@Spell
 
 " Keywords
+" TODO: Decide what to do with built-in annotations and include all of them.
 syn keyword NITKeyword	 abstract intern new
 syn keyword NITDefine	 private public protected intrude readable writable redef
 syn keyword NITControl   if while for with assert and or in as isa once break continue return abort
