@@ -242,6 +242,7 @@ fun NitOmnifunc(findstart, base)
 		" If is nothing else...
 		if !handled
 			" It may be a keyword
+			" The list follows the order of the SableCC grammar.
 			if strlen(a:base) > 0
 				for keyword in ['module', 'import', 'class', 'abstract', 'interface',
 					\'universal', 'enum', 'end', 'fun', 'type', 'init', 'redef', 'is',
