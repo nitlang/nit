@@ -378,10 +378,10 @@ redef class App
 	var ui_camera = new UICamera(app.display.as(not null)) is lazy
 
 	# World sprites drawn as seen by `world_camera`
-	var sprites: Set[Sprite] = new SpriteSet
+	var sprites = new SpriteSet
 
 	# UI sprites drawn as seen by `ui_camera`, over world `sprites`
-	var ui_sprites: Set[Sprite] = new SpriteSet
+	var ui_sprites = new SpriteSet
 
 	# Main method to refine in clients to update game logic and `sprites`
 	fun update(dt: Float) do end
@@ -537,7 +537,7 @@ redef class App
 	# Draw world sprites from `sprites`
 	protected fun frame_core_world_sprites(display: GamnitDisplay)
 	do
-		frame_core_sprites(display, sprites.as(SpriteSet), world_camera)
+		frame_core_sprites(display, sprites, world_camera)
 	end
 
 	# Draw UI sprites from `ui_sprites`
@@ -546,7 +546,7 @@ redef class App
 		# Reset only the depth buffer
 		glClear gl_DEPTH_BUFFER_BIT
 
-		frame_core_sprites(display, ui_sprites.as(SpriteSet), ui_camera)
+		frame_core_sprites(display, ui_sprites, ui_camera)
 	end
 end
 
@@ -875,17 +875,8 @@ redef class OffsetPoint3d
 end
 
 # Set of sprites sorting them into different `SpriteContext`
-private class SpriteSet
+class SpriteSet
 	super HashSet[Sprite]
-
-	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap4[RootTexture, nullable RootTexture, Bool, Int, Array[SpriteContext]]
-
-	# Contexts in `contexts_map`, sorted by draw order
-	var contexts_items = new Array[SpriteContext]
-
-	# Sprites needing resorting in `contexts_map`
-	var sprites_to_remap = new Array[Sprite]
 
 	# Animation speed multiplier (0.0 to pause, 1.0 for normal speed, etc.)
 	var time_mod = 1.0 is writable
@@ -893,8 +884,17 @@ private class SpriteSet
 	# Seconds elapsed since the launch of the program, in world time responding to `time_mod`
 	var time = 0.0
 
+	# Map texture then static vs dynamic to a `SpriteContext`
+	private var contexts_map = new HashMap4[RootTexture, nullable RootTexture, Bool, Int, Array[SpriteContext]]
+
+	# Contexts in `contexts_map`, sorted by draw order
+	private var contexts_items = new Array[SpriteContext]
+
+	# Sprites needing resorting in `contexts_map`
+	private var sprites_to_remap = new Array[Sprite]
+
 	# Add a sprite to the appropriate context
-	fun map_sprite(sprite: Sprite)
+	private fun map_sprite(sprite: Sprite)
 	do
 		assert sprite.context == null else print_error "Sprite {sprite} belongs to another SpriteSet"
 
@@ -946,7 +946,7 @@ private class SpriteSet
 	end
 
 	# Remove a sprite from its context
-	fun unmap_sprite(sprite: Sprite)
+	private fun unmap_sprite(sprite: Sprite)
 	do
 		var context = sprite.context
 		assert context != null
@@ -957,7 +957,7 @@ private class SpriteSet
 	end
 
 	# Draw all sprites by all contexts
-	fun draw
+	private fun draw
 	do
 		# Remap sprites that may need to change context
 		for sprite in sprites_to_remap do
