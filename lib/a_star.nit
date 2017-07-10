@@ -90,7 +90,7 @@ class Node
 	# lifetime limited to evocation of `path_to`
 	private var open: Bool = false
 
-	# Main functionnality, returns path from `self` to `dest`
+	# Main functionality, returns path from `self` to `dest`
 	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable AStarPath[N]
 	do
 		return path_to_alts(dest, max_cost, context, null)
