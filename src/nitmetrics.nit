@@ -17,7 +17,7 @@
 # A program that collects various metrics on nit programs and libraries
 module nitmetrics
 
-import frontend
+import frontend::code_gen
 import metrics
 
 # Create a tool context to handle options and paths
@@ -30,9 +30,9 @@ toolcontext.process_options(args)
 # Get arguments
 var arguments = toolcontext.option_context.rest
 
-# We need a model to collect stufs
+# We need a model to collect stuff
 var model = new Model
-# An a model builder to parse files
+# And a model builder to parse files
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 # Here we load an process all modules passed on the command line

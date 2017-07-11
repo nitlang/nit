@@ -18,7 +18,7 @@
 module nitvm
 
 import vm
-import frontend
+import frontend::code_gen
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext

@@ -14,14 +14,14 @@
 
 # Example of simple module that aims to do some specific work on nit programs.
 #
-# Fast prototypes can just start with this skeletton.
+# Fast prototypes can just start with this skeleton.
 module test_test_phase
 
-# We need the framework that perfoms standard code for the main-program
+# We need the framework that performs standard code for the main-program
 import test_phase
 
 # We usualy need specific phases
-# NOTE: `frontend` is sufficent in most case (it is often too much)
+# NOTE: `frontend` is sufficient in most case (it is often too much)
 import frontend
 
 # The body of the specific work.
