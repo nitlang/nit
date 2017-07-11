@@ -729,3 +729,84 @@ class POSetElement[E]
 		end
 	end
 end
+
+redef class MapRead[K, V]
+	# Return all elements of `keys` that have a value.
+	#
+	# ~~~
+	# var map = new Map[String, String]
+	# map["A"] = "a"
+	# map["B"] = "b"
+	# map["C"] = "c"
+	#
+	# assert map.filter_keys(["B"]) == ["B"]
+	# assert map.filter_keys(["A", "Z", "C"]) == ["A", "C"]
+	# assert map.filter_keys(["X", "Y", "Z"]).is_empty
+	# ~~~
+	#
+	# `has_key` is used to filter.
+	fun filter_keys(keys: Collection[nullable Object]): Array[K]
+	do
+		var res = new Array[K]
+		for e in keys do
+			if has_key(e) then res.add e
+		end
+		return res
+	end
+
+	# Search all the values in `pe.greaters`.
+	#
+	# Elements without values are ignored.
+	#
+	# Basically, values defined in all greater elements of `pe` are inherited.
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["E", "D", "C", "B", "A"])
+	# pos.add_chain(["D", "X", "B"])
+	#
+	# var map = new HashMap[String, String]
+	# map["A"] = "a"
+	# map["C"] = "c"
+	# map["X"] = "x"
+	# map["E"] = "e"
+	#
+	# assert map.lookup_all_values(pos["B"]).has_exactly(["a"])
+	# assert map.lookup_all_values(pos["C"]).has_exactly(["a", "c"])
+	# assert map.lookup_all_values(pos["D"]).has_exactly(["a", "c", "x"])
+	# ~~~
+	fun lookup_all_values(pe: POSetElement[K]): Set[V]
+	do
+		var res = new Set[V]
+		for k in filter_keys(pe.greaters) do res.add self[k]
+		return res
+	end
+
+	# Combine the values in `pe.greaters` from the most smaller elements that have a value.
+	#
+	# Elements without values are ignored.
+	#
+	# Basically, values defined in nearest greater elements of `pe` are inherited.
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["E", "D", "C", "B", "A"])
+	# pos.add_chain(["D", "X", "B"])
+	#
+	# var map = new HashMap[String, String]
+	# map["A"] = "a"
+	# map["C"] = "c"
+	# map["X"] = "x"
+	# map["E"] = "e"
+	#
+	# assert map.lookup_values(pos["B"]).has_exactly(["a"])
+	# assert map.lookup_values(pos["C"]).has_exactly(["c"])
+	# assert map.lookup_values(pos["D"]).has_exactly(["c", "x"])
+	# ~~~
+	fun lookup_values(pe: POSetElement[K]): Set[V]
+	do
+		var res = new Set[V]
+		for k in pe.poset.select_smallest(filter_keys(pe.greaters)) do res.add self[k]
+		return res
+	end
+end

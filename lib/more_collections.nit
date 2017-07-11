@@ -16,6 +16,7 @@
 module more_collections is serialize
 
 import serialization
+import poset
 
 # Simple way to store an `HashMap[K, Array[V]]`
 #
@@ -101,6 +102,35 @@ class MultiHashMap[K, V]
 			x.remove(v)
 			if x.is_empty then keys.remove(k)
 		end
+	end
+
+	# Search the values in `pe.greaters` from the most smaller elements that have a value.
+	#
+	# Elements without values are ignored.
+	#
+	# Basically, values defined in nearest greater elements of `pe` are inherited.
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["E", "D", "C", "B", "A"])
+	# pos.add_chain(["D", "X", "B"])
+	#
+	# var map = new MultiHashMap[String, String]
+	# map["A"].append(["a", "1"])
+	# map["C"].append(["c", "2"])
+	# map["X"].append(["x", "2"])
+	# map["E"].add "e"
+	#
+	# assert map.lookup_joined_values(pos["B"]).has_exactly(["a", "1"])
+	# assert map.lookup_joined_values(pos["C"]).has_exactly(["c", "2"])
+	# assert map.lookup_joined_values(pos["D"]).has_exactly(["c", "x", "2"])
+	# ~~~
+	fun lookup_joined_values(pe: POSetElement[K]): Set[V]
+	do
+		var res = new Set[V]
+		for k in pe.poset.select_smallest(filter_keys(pe.greaters)) do res.add_all self[k]
+		return res
+
 	end
 end
 
