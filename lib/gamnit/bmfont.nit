@@ -139,13 +139,16 @@ class BMFontChar
 	var xadvance: Float
 
 	# Full texture contaning this character and others
-	var page: TextureAsset
+	var page: RootTexture
 
 	# TODO Channel where the image is found
 	#var chnl: Int
 
 	# Subtexture with this character image only
-	var subtexture: Texture = page.subtexture(x, y, width, height) is lazy
+	var subtexture: Texture = page.subtexture(x, y, width, height) is lazy, writable
+
+	# Scale to apply to this char only
+	var scale = 1.0 is writable
 end
 
 redef class Text
@@ -184,7 +187,7 @@ redef class Text
 	# assert fnt.to_s == "<BMFont arial at 72.0 pt, 1 pages, 3 chars>"
 	# assert fnt.line_height == 80.0
 	# assert fnt.kernings['A', 'C'] == -1.0
-	# assert fnt.chars['A'].page.path == "dir_in_assets/arial.png"
+	# assert fnt.chars['A'].page.as(TextureAsset).path == "dir_in_assets/arial.png"
 	# ~~~
 	fun parse_bmfont(dir: String): MaybeError[BMFont, Error]
 	do
@@ -461,7 +464,7 @@ class BMFontAsset
 			var y = dy - (char_info.height/2.0 + char_info.yoffset) * scale
 			var pos = text_sprites.anchor.offset(x, y, 0.0)
 			var s = new Sprite(char_info.subtexture, pos)
-			s.scale = scale
+			s.scale = scale * char_info.scale
 			text_sprites.sprites.add s
 			line_sprites.add s
 
