@@ -366,15 +366,24 @@ class BMFontAsset
 		var dx = 0.0
 		var dy = 0.0
 		var text_width = 0.0
+		var line_sprites = new Array[Sprite]
 
+		# TextSprite customization
 		var max_width = text_sprites.max_width
 		var max_height = text_sprites.max_height
 		var scale = text_sprites.scale
 
+		# Font customization
 		var line_height = desc.line_height * scale
 		var partial_line_skip = line_height * partial_line_mod.to_f
-		var line_sprites = new Array[Sprite]
 
+		# Links data
+		text_sprites.links.clear
+		var in_link = false
+		var link_sprites = new Array[Sprite]
+		var link_name = ""
+
+		# Loop over all characters
 		var prev_char = null
 		var i = -1
 		while i < text.length - 1 do
@@ -406,7 +415,56 @@ class BMFontAsset
 					else 16.0
 				dx += space_advance * scale
 				word_break = true
+			else if c == '[' then
+				# Open link?
+				if i + 1 < text.length and text[i+1] == '[' then
+					# Escape if duplicated
+					i += 1
+				else
+					in_link = true
+					continue
+				end
+			else if c == ']' then
+				# Close link?
+				if i + 1 < text.length and text[i+1] == ']' then
+					# Escape if duplicated
+					i += 1
+				else
+					# If there's a () use it as link_name
+					var j = i + 1
+					if j < text.length and text[j] == '(' then
+						var new_name
+						new_name = ""
+						loop
+							j += 1
+							if j > text.length then
+								# No closing ), abort
+								new_name = null
+								break
+							end
+
+							var l = text[j]
+							if l == ')' then break
+							new_name += l.to_s
+						end
+						if new_name != null then
+							link_name = new_name
+							i = j
+						end
+					end
+
+					# Register the link for the clients
+					text_sprites.links[link_name] = link_sprites
+
+					# Prepare next link
+					in_link = false
+					link_sprites = new Array[Sprite]
+					link_name = ""
+					continue
+				end
 			end
+
+			if in_link then link_name += c.to_s
 
 			# End of a word?
 			if word_break then
@@ -418,7 +476,7 @@ class BMFontAsset
 					for wi in [i+1..text.length[ do
 						var w = text[wi]
 
-						if w == '\n' or w == pld or w == plu or w.is_whitespace then break
+						if w == '\n' or w == pld or w == plu or w.is_whitespace or (in_link and w == ']') then break
 						word_len += advance(prev_w, w) * scale
 						prev_w = w
 					end
@@ -467,6 +525,7 @@ class BMFontAsset
 			s.scale = scale * char_info.scale
 			text_sprites.sprites.add s
 			line_sprites.add s
+			if in_link then link_sprites.add s
 
 			dx += (advance + kerning) * scale
 			prev_char = c

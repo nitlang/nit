@@ -129,6 +129,19 @@ class TextSprites
 	# Defaults to 1.0.
 	var scale = 1.0 is optional, writable
 
+	# Links in the currently displayed text
+	#
+	# Links are declared in a Markdown-like format:
+	#
+	# * `[my link]` creates a link with the name `my link`.
+	# * `[pretty name](internal name)` creates a link with the
+	#   name `internal_name` while showing the text `pretty name`.
+	#
+	# This `Map` lists the sprites composing each link.
+	# These sprites can be modified as desired by the clients,
+	# by changing their tints or anything else.
+	var links = new Map[String, Array[Sprite]] is lazy
+
 	# Width of the currently displayed text
 	var width = 0.0
 
