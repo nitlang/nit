@@ -366,8 +366,9 @@ class BMFontAsset
 
 		var max_width = text_sprites.max_width
 		var max_height = text_sprites.max_height
+		var scale = text_sprites.scale
 
-		var line_height = desc.line_height
+		var line_height = desc.line_height * scale
 		var partial_line_skip = line_height * partial_line_mod.to_f
 		var line_sprites = new Array[Sprite]
 
@@ -400,7 +401,7 @@ class BMFontAsset
 					else if desc.chars.keys.has('f') then
 						desc.chars['f'].xadvance
 					else 16.0
-				dx += space_advance
+				dx += space_advance * scale
 				word_break = true
 			end
 
@@ -415,7 +416,7 @@ class BMFontAsset
 						var w = text[wi]
 
 						if w == '\n' or w == pld or w == plu or w.is_whitespace then break
-						word_len += advance(prev_w, w)
+						word_len += advance(prev_w, w) * scale
 						prev_w = w
 					end
 
@@ -456,14 +457,15 @@ class BMFontAsset
 			var advance = char_info.xadvance
 			var kerning = desc.kerning(prev_char, c)
 
-			var x = dx + char_info.width/2.0  + char_info.xoffset + kerning
-			var y = dy - char_info.height/2.0 - char_info.yoffset
+			var x = dx + (char_info.width/2.0  + char_info.xoffset + kerning) * scale
+			var y = dy - (char_info.height/2.0 + char_info.yoffset) * scale
 			var pos = text_sprites.anchor.offset(x, y, 0.0)
 			var s = new Sprite(char_info.subtexture, pos)
+			s.scale = scale
 			text_sprites.sprites.add s
 			line_sprites.add s
 
-			dx += advance + kerning
+			dx += (advance + kerning) * scale
 			prev_char = c
 
 			text_width = text_width.max(dx)

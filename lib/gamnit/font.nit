@@ -124,6 +124,11 @@ class TextSprites
 	# Otherwise, lines are cut before overflowing.
 	var wrap = true is optional, writable
 
+	# Scale applied to all sprites and spacing
+	#
+	# Defaults to 1.0.
+	var scale = 1.0 is optional, writable
+
 	# Width of the currently displayed text
 	var width = 0.0
 
