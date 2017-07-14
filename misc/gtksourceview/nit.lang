@@ -71,6 +71,10 @@
 			<keyword>import</keyword>
 		</context>
 
+		<context id="kwnull" style-ref="null-value">
+			<keyword>null</keyword>
+		</context>
+
 		<context id="keyword" style-ref="keyword">
 			<keyword>abort</keyword>
 			<keyword>abstract</keyword>
@@ -355,6 +359,7 @@
 				<context ref="string"/>
 				<context ref="reserved"/>
 				<context ref="kwimport"/>
+				<context ref="kwnull"/>
 				<context ref="keyword"/>
 				<context ref="builtin-annotation"/>
 				<context ref="boolean"/>
