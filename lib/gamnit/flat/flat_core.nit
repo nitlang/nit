@@ -1211,8 +1211,12 @@ private class SpriteContext
 				data[o+36] = tc[v*2+1]
 
 				# a_tex_diff
-				var dx = animation.frames[1].texture_coords[0] - animation.frames[0].texture_coords[0]
-				var dy = animation.frames[1].texture_coords[1] - animation.frames[0].texture_coords[1]
+				var dx = 0.0
+				var dy = 0.0
+				if animation.frames.length > 1 then
+					dx = animation.frames[1].texture_coords[0] - animation.frames[0].texture_coords[0]
+					dy = animation.frames[1].texture_coords[1] - animation.frames[0].texture_coords[1]
+				end
 				data[o+37] = dx
 				data[o+38] = dy
 
