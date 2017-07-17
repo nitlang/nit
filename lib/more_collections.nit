@@ -244,6 +244,61 @@ class HashMap3[K1, K2, K3, V]
 	fun clear do level1.clear
 end
 
+# Simple way to store an `HashMap[K1, HashMap[K2, HashMap[K3, HashMap[K4, V]]]]`
+#
+# ~~~~
+# var hm4 = new HashMap4[Int, String, Int, String, Float]
+# hm4[1, "one", 11, "un"] = 1.0
+# hm4[2, "two", 22, "deux"] = 2.0
+# assert hm4[1, "one", 11, "un"] == 1.0
+# assert hm4[2, "not-two", 22, "deux"] == null
+# ~~~~
+class HashMap4[K1, K2, K3, K4, V]
+
+	private var level1 = new HashMap[K1, HashMap3[K2, K3, K4, V]]
+
+	# Return the value associated to the keys `k1`, `k2`, `k3` and `k4`.
+	# Return `null` if no such a value.
+	fun [](k1: K1, k2: K2, k3: K3, k4: K4): nullable V
+	do
+		var level1 = self.level1
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then return null
+		return level2[k2, k3, k4]
+	end
+
+	# Set `v` the value associated to the keys `k1`, `k2`, `k3` and `k4`.
+	fun []=(k1: K1, k2: K2, k3: K3, k4: K4, v: V)
+	do
+		var level1 = self.level1
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then
+			level2 = new HashMap3[K2, K3, K4, V]
+			level1[k1] = level2
+		end
+		level2[k2, k3, k4] = v
+	end
+
+	# Remove the item at `k1`, `k2`, `k3` and `k4`
+	fun remove_at(k1: K1, k2: K2, k3: K3, k4: K4)
+	do
+		var level1 = self.level1
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then return
+		level2.remove_at(k2, k3, k4)
+	end
+
+	# Is there a value at `k1, k2, k3, k4`?
+	fun has(k1: K1, k2: K2, k3: K3, k4: K4): Bool
+	do
+		if not level1.keys.has(k1) then return false
+		return level1[k1].has(k2, k3, k4)
+	end
+
+	# Remove all items
+	fun clear do level1.clear
+end
+
 # A map with a default value.
 #
 # ~~~~

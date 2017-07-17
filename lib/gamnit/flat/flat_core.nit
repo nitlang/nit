@@ -241,6 +241,32 @@ class Sprite
 		tint_direct = value
 	end
 
+	# Draw order, higher values cause this sprite to be drawn latter
+	#
+	# Change this value to avoid artifacts when drawing non-opaque sprites.
+	# In general, sprites with a non-opaque `texture` and sprites closer to
+	# the camera should have a higher value to be drawn last.
+	#
+	# Sprites sharing a `draw_order` are drawn in the same pass.
+	# The sprite to sprite draw order is undefined and may change when adding
+	# and removing sprites, or changing their attributes.
+	#
+	# ### Warning
+	#
+	# Changing this value may have a negative performance impact if there are
+	# many different `draw_order` values across many sprites.
+	# Sprites sharing some attributes are drawn as group to reduce
+	# the communication overhead between the CPU and GPU,
+	# and changing `draw_order` may break up large groups into smaller groups.
+	var draw_order = 0 is writable(draw_order_direct=)
+
+	# Set draw order,  see `draw_order`
+	fun draw_order=(value: Int)
+	do
+		if isset _draw_order and value != draw_order then needs_remap
+		draw_order_direct = value
+	end
+
 	# Is this sprite static and added in bulk?
 	#
 	# Set to `true` to give a hint to the framework that this sprite won't
@@ -853,9 +879,9 @@ private class SpriteSet
 	super HashSet[Sprite]
 
 	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap3[RootTexture, nullable RootTexture, Bool, Array[SpriteContext]]
+	var contexts_map = new HashMap4[RootTexture, nullable RootTexture, Bool, Int, Array[SpriteContext]]
 
-	# Contexts in `contexts_map`
+	# Contexts in `contexts_map`, sorted by draw order
 	var contexts_items = new Array[SpriteContext]
 
 	# Sprites needing resorting in `contexts_map`
@@ -877,7 +903,8 @@ private class SpriteSet
 		var animation = sprite.animation
 		var animation_texture = if animation != null then
 			animation.frames.first.root else null
-		var contexts = contexts_map[texture, animation_texture, sprite.static]
+		var draw_order = sprite.draw_order
+		var contexts = contexts_map[texture, animation_texture, sprite.static, draw_order]
 
 		var context = null
 		if contexts != null then
@@ -892,15 +919,17 @@ private class SpriteSet
 
 		if context == null then
 			var usage = if sprite.static then gl_STATIC_DRAW else gl_DYNAMIC_DRAW
-			context = new SpriteContext(texture, animation_texture, usage)
+			context = new SpriteContext(texture, animation_texture, usage, draw_order)
 
 			if contexts == null then
 				contexts = new Array[SpriteContext]
-				contexts_map[texture, animation_texture, sprite.static] = contexts
+				contexts_map[texture, animation_texture, sprite.static, draw_order] = contexts
 			end
 
 			contexts.add context
+
 			contexts_items.add context
+			sprite_draw_order_sorter.sort(contexts_items)
 		end
 
 		context.sprites.add sprite
@@ -930,12 +959,14 @@ private class SpriteSet
 	# Draw all sprites by all contexts
 	fun draw
 	do
+		# Remap sprites that may need to change context
 		for sprite in sprites_to_remap do
 			unmap_sprite sprite
 			map_sprite sprite
 		end
 		sprites_to_remap.clear
 
+		# Sort by draw order
 		for context in contexts_items do context.draw
 	end
 
@@ -987,6 +1018,9 @@ private class SpriteContext
 
 	# OpenGL ES usage of `buffer_array` and `buffer_element`
 	var usage: GLBufferUsage
+
+	# Draw order shared by all `sprites`
+	var draw_order: Int
 
 	# Sprites drawn by this context
 	var sprites = new GroupedSprites
@@ -1695,4 +1729,21 @@ redef class NativeGLfloatArray
 		for (i = 0; i < len; i ++)
 			self[i+dst_offset] = (GLfloat)matrix[i];
 	`}
+end
+
+redef class Sys
+	private var sprite_draw_order_sorter = new DrawOrderComparator is lazy
+end
+
+# Sort `SpriteContext` by their `draw_order`
+private class DrawOrderComparator
+	super Comparator
+
+	# This class can't set COMPARED because
+	# `the public property cannot contain the private type...`
+	#redef type COMPARED: SpriteContext
+
+	# Require: `a isa SpriteContext and b isa SpriteContext`
+	redef fun compare(a, b)
+	do return a.as(SpriteContext).draw_order <=> b.as(SpriteContext).draw_order
 end
