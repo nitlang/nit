@@ -687,7 +687,7 @@ private class Simple2dProgram
 			vec3 c; // coords
 
 			float end = a_start + a_loops/a_fps*a_n_frames;
-			if (a_loops == -1.0 || time < end) {
+			if (a_fps != 0.0 && (a_loops == -1.0 || time < end)) {
 				// in animation
 				float frame = mod(floor((time-a_start)*a_fps), a_n_frames);
 				v_coord = a_tex_coord + a_tex_diff*frame;
