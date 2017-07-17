@@ -89,6 +89,9 @@ redef class MEntity
 			for i in 2.times do stream.write line_separator
 			stream.write mdoc.content.join(line_separator)
 		end
+
+		write_location(mainmodule, stream)
+
 		write_extra_doc(mainmodule, stream)
 
 		stream.write "\n"
@@ -104,6 +107,15 @@ redef class MEntity
 
 	# Extra auto documentation to append to the `stream`
 	private fun write_extra_doc(mainmodule: MModule, stream: Writer) do end
+
+	# Location (file and line when available) of related declarations
+	private fun write_location(mainmodule: MModule, stream: Writer)
+	do
+		for i in 2.times do stream.write line_separator
+		stream.write "## Location"
+		stream.write line_separator
+		stream.write "* {location}"
+	end
 end
 
 redef class MMethodDef
@@ -112,6 +124,26 @@ redef class MMethodDef
 		var msignature = msignature
 		if msignature != null then
 			stream.write msignature.to_s
+		end
+	end
+
+	redef fun write_location(mainmodule, stream)
+	do
+		for i in 2.times do stream.write line_separator
+		stream.write "## Location of introduction and refinements"
+
+		# Group locations in the same file
+		var file_to_location = new MultiHashMap[nullable SourceFile, Location]
+		for c in mproperty.mpropdefs do
+			file_to_location[c.location.file].add c.location
+		end
+
+		# Write one file per location
+		for file, locations in file_to_location do
+			var l = locations.first
+			stream.write line_separator
+			stream.write "* {l}"
+			if locations.length > 1 then stream.write " ({locations.length-1} more)"
 		end
 	end
 end
@@ -218,6 +250,16 @@ redef class MClassType
 	end
 
 	redef fun complete_mdoc do return mclass.intro.mdoc
+
+	redef fun write_location(mainmodule, stream)
+	do
+		for i in 2.times do stream.write line_separator
+		stream.write "## Location of introduction and refinements"
+		for c in mclass.mclassdefs do
+			stream.write line_separator
+			stream.write "* {c.location}"
+		end
+	end
 end
 
 private class AutocompletePhase

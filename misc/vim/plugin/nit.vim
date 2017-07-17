@@ -358,12 +358,13 @@ endfun
 
 " Call `git grep` on the word under the cursor
 "
-" Shows declarations first, then all matches, in the preview window.
+" In the preview window, list introductions, declarations and then all matches.
 fun NitGitGrep()
 	let word = expand("<cword>")
 	let out = tempname()
-	execute 'silent !(git grep "\\(module\\|class\\|universal\\|interface\\|var\\|fun\\) '.word.'";'.
-		\'echo; git grep '.word.') > '.out
+	execute 'silent !(git grep -n -e "\<\\(module\\|class\\|universal\\|interface\\|subset\\|var\\|fun\\)\> \<'.word.'\>" --and --not -e redef -- ''*.nit'';'.
+		\'git grep -n "redef \<\\(class\\|universal\\|interface\\|subset\\|var\\|fun\\)\> \<'.word.'\>" -- ''*.nit'';'.
+		\'echo; git grep -n -e "\<'.word.'\>" --and --not -e "\<\\(module\\|class\\|universal\\|interface\\|subset\\|var\\|fun\\)\> \<'.word.'\>" -- ''*.nit'') > '.out
 
 	" Open the preview window on a temp file
 	execute "silent pedit " . out
