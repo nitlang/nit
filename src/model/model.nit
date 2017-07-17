@@ -1975,16 +1975,34 @@ class MSignature
 		var b = new FlatBuffer
 		if not mparameters.is_empty then
 			b.append("(")
+			var last_mtype = null
 			for i in [0..mparameters.length[ do
 				var mparameter = mparameters[i]
+
+				# Group types that are common to contiguous parameters
+				if mparameter.mtype != last_mtype and last_mtype != null then
+					b.append(": ")
+					b.append(last_mtype.to_s)
+				end
+
 				if i > 0 then b.append(", ")
 				b.append(mparameter.name)
-				b.append(": ")
-				b.append(mparameter.mtype.to_s)
+
 				if mparameter.is_vararg then
+					b.append(": ")
+					b.append(mparameter.mtype.to_s)
 					b.append("...")
+					last_mtype = null
+				else
+					last_mtype = mparameter.mtype
 				end
 			end
+
+			if last_mtype != null then
+				b.append(": ")
+				b.append(last_mtype.to_s)
+			end
+
 			b.append(")")
 		end
 		var ret = self.return_mtype
