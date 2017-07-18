@@ -46,7 +46,7 @@ redef class App
 
 		# Shared content
 		var description = "The anchor icon identifies the coordinate of TextSprites::anchor."
-		var lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+		var lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et [dolore magna](my_link asdf) aliqua."
 		var color = [0.0, 0.25, 0.5]
 
 		# ---
@@ -77,8 +77,8 @@ redef class App
 
 		texts.add new TextSprites(font,
 			ui_camera.top_left.offset(1000.0, -400.0, 0.0),
-			"Right, max_width=400.0:\n"+lorem_ipsum,
-			align=1.0, max_width=400.0)
+			"Right, max_width=400.0, scale=0.66:\n"+lorem_ipsum,
+			align=1.0, max_width=400.0, scale=0.66)
 
 		texts.add new TextSprites(font,
 			ui_camera.top_left.offset(300.0, -700.0, 0.0),
@@ -119,6 +119,16 @@ redef class App
 			ui_camera.top_left.offset(1500.0, -220.0, 0.0),
 			"align=0.5, valign=0.5:\n"+lorem_ipsum,
 			max_width=400.0, align=0.5, valign=0.5)
+
+		# ---
+		# Links
+
+		for ts in texts do
+			for link_name, sprites in ts.links do
+				print "Link: {link_name}"
+				for s in sprites do s.green = 0.0
+			end
+		end
 
 		# ---
 		# Anchors and background boxes
