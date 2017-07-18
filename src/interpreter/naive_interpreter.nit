@@ -839,7 +839,7 @@ redef class ANode
 			abort
 		end
 
-		if v.modelbuilder.toolcontext.opt_no_color.value == true then
+		if v.modelbuilder.toolcontext.opt_no_color.value then
 			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
 		else
 			sys.stderr.write("{location}: Runtime error: {message}\n{location.colored_line("0;31")}\n")

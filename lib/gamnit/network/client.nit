@@ -62,7 +62,7 @@ class RemoteServer
 	var socket: nullable TCPStream = null
 
 	# Is this connection connected?
-	fun connected: Bool do return socket != null and socket.connected == true
+	fun connected: Bool do return socket != null and socket.connected
 
 	# `BinarySerializer` used to send data to this client through `socket`
 	var writer: BinarySerializer is noinit

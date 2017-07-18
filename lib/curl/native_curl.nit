@@ -87,8 +87,8 @@ extern class NativeCurl `{ CURL * `}
 	fun easy_setopt(opt: CURLOption, obj: Object): CURLCode
 	do
 		if obj isa Int then return native_setopt_int(opt, obj)
-		if obj isa Bool and obj == true then return native_setopt_int(opt, 1)
-		if obj isa Bool and obj == false then return native_setopt_int(opt, 0)
+		if obj == true then return native_setopt_int(opt, 1)
+		if obj == false then return native_setopt_int(opt, 0)
 		if obj isa String then return native_setopt_string(opt, obj)
 		if obj isa FileWriter then return native_setopt_file(opt, obj._file.as(not null))
 		if obj isa CURLSList then return native_setopt_slist(opt, obj)
@@ -324,7 +324,7 @@ extern class CURLSList `{ struct curl_slist * `}
 		var r = new Array[String]
 		var cursor = self
 		loop
-			if native_data_reachable(cursor) != true then break
+			if not native_data_reachable(cursor) then break
 			r.add(native_data(cursor))
 			cursor = native_next(cursor)
 		end

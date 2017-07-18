@@ -885,7 +885,7 @@ abstract class MType
 		if anchor == null then anchor = sub # UGLY: any anchor will work
 		var resolved_sub = sub.anchor_to(mmodule, anchor)
 		var res = resolved_sub.collect_mclasses(mmodule).has(sup.mclass)
-		if res == false then return false
+		if not res then return false
 		if not sup isa MGenericType then return true
 		var sub2 = sub.supertype_to(mmodule, anchor, sup.mclass)
 		assert sub2.mclass == sup.mclass
@@ -893,7 +893,7 @@ abstract class MType
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
 			res = sub_arg.is_subtype(mmodule, anchor, sup_arg)
-			if res == false then return false
+			if not res then return false
 		end
 		return true
 	end

@@ -37,7 +37,7 @@ assert postgres_select: result.status.is_ok else print_error db.error
 assert postgres_ntuples: result.ntuples == 2 else print_error db.error
 assert postgres_nfields: result.nfields == 3 else print_error db.error
 assert postgres_fname: result.fname(0) == "aname" else print_error db.error
-assert postgres_isnull: result.is_null(0,0) == false else print_error db.error
+assert postgres_isnull: not result.is_null(0,0) else print_error db.error
 assert postgres_value: result.value(0,0) == "Whale" else print_error db.error
 
 var cols: Int = result.nfields

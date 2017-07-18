@@ -117,7 +117,7 @@ class BadConceptionFinder
 		bad_conception_elements.add(new FeatureEnvy(phase))
 		bad_conception_elements.add(new LongMethod(phase))
 		for bad_conception_element in bad_conception_elements do
-			if bad_conception_element.collect(self.mclassdef,phase.toolcontext.modelbuilder) == true then array_badconception.add(bad_conception_element)
+			if bad_conception_element.collect(self.mclassdef,phase.toolcontext.modelbuilder) then array_badconception.add(bad_conception_element)
 		end
 	end
 
