@@ -961,6 +961,10 @@ class SpriteSet
 	do
 		# Remap sprites that may need to change context
 		for sprite in sprites_to_remap do
+
+			# Skip if it was removed from this set after being modified
+			if sprite.context != self then continue
+
 			unmap_sprite sprite
 			map_sprite sprite
 		end
