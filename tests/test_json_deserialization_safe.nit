@@ -14,13 +14,22 @@
 
 import json
 
-class MyClass
+class A
     serialize
 
-	var other: MyClass
+	var other: nullable A
 
-	type C: MyClass
+	type C: nullable A
 	var next: C
+
+	redef fun to_s do return "<{class_name} other:{other or else "null"} next:{next or else "null"}>"
+end
+
+class B
+	super A
+	serialize
+
+	redef type C: nullable B
 end
 
 class DangerSup
@@ -40,13 +49,75 @@ class DangerSub
 	end
 end
 
-var json_with_metadata = """{
-    "__class": "MyClass",
+class G[E: A]
+	serialize
+	var e: E
+
+	redef fun to_s do return "<{class_name} e:{if isset _e then e.to_s else "not-set"}>"
+end
+
+redef class Deserializer
+	redef fun deserialize_class(name)
+	do
+		if name == "G[A]" then return new G[A].from_deserializer(self)
+		if name == "G[B]" then return new G[B].from_deserializer(self)
+		return super
+	end
+end
+
+var json = """{
+    "__class": "A",
     "other": {"__class": "DangerSub", "dangerous_setter": "My text 1"},
     "next": {"__class": "DangerSub", "dangerous_setter": "My text 2"}
 }"""
 
-var deserializer = new JsonDeserializer(json_with_metadata)
-#alt1#deserializer.check_subtypes = false
-deserializer.deserialize
+# OK, accept only valid types, so don't try to deserialize DangerSub
+var deserializer = new JsonDeserializer(json)
+var res = deserializer.deserialize
 print deserializer.errors.join("\n")
+print res or else "null"
+
+print "---"
+
+# Accept any types, so deserialize the dangerous classes
+deserializer = new JsonDeserializer(json)
+deserializer.check_subtypes = false
+res = deserializer.deserialize
+print deserializer.errors.join("\n")
+print res or else "null"
+
+print "---"
+
+# Valid virtual type for `next: B`
+json = """{"__class": "B", "next": {"__class": "B"}}"""
+deserializer = new JsonDeserializer(json)
+res = deserializer.deserialize
+print deserializer.errors.join("\n")
+print res or else "null"
+
+print "---"
+
+# Virtual type error for `next: B`
+json = """{"__class": "B", "next": {"__class": "A"}}"""
+deserializer = new JsonDeserializer(json)
+res = deserializer.deserialize
+print deserializer.errors.join("\n")
+print res or else "null"
+
+print "---"
+
+# Valid parameter type for `e: A`
+json = """{"__class": "G[A]", "e": {"__class": "A"}}"""
+deserializer = new JsonDeserializer(json)
+res = deserializer.deserialize
+print deserializer.errors.join("\n")
+print res or else "null"
+
+print "---"
+
+# Parameter type error for `e: B`
+json = """{"__class": "G[B]", "e": {"__class": "A"}}"""
+deserializer = new JsonDeserializer(json)
+res = deserializer.deserialize
+print deserializer.errors.join("\n")
+print res or else "null"
