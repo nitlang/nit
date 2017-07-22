@@ -451,25 +451,15 @@ redef class SimpleCollection[E]
 				open_array = arr
 			end
 
-			# Try to get the name of the single parameter type assuming it is E.
-			# This does not work in non-generic subclasses,
-			# when the first parameter is not E, or
-			# when there is more than one parameter. (The last one could be fixed)
-			var class_name = class_name
-			var items_type = null
-			var bracket_index = class_name.index_of('[')
-			if bracket_index != -1 then
-				var start = bracket_index + 1
-				var ending = class_name.last_index_of(']')
-				items_type = class_name.substring(start, ending-start)
-			end
+			# Name of the dynamic name of E
+			var items_type_name = (new GetName[E]).to_s
 
 			# Fill array
 			for o in open_array do
-				var obj = v.convert_object(o, items_type)
+				var obj = v.convert_object(o, items_type_name)
 				if obj isa E then
 					add obj
-				else v.errors.add new AttributeTypeError(self, "items", obj, "E")
+				else v.errors.add new AttributeTypeError(self, "items", obj, items_type_name)
 			end
 		end
 	end
@@ -484,6 +474,9 @@ redef class Map[K, V]
 			v.notify_of_creation self
 			init
 
+			var keys_type_name = (new GetName[K]).to_s
+			var values_type_name = (new GetName[V]).to_s
+
 			var length = v.deserialize_attribute("__length")
 			var keys = v.path.last.get_or_null("__keys")
 			var values = v.path.last.get_or_null("__values")
@@ -491,15 +484,16 @@ redef class Map[K, V]
 			if keys == null and values == null then
 				# Fallback to a plain object
 				for key, value_src in v.path.last do
-					var value = v.convert_object(value_src)
+
+					var value = v.convert_object(value_src, values_type_name)
 
 					if not key isa K then
-						v.errors.add new AttributeTypeError(self, "keys", key, "K")
+						v.errors.add new AttributeTypeError(self, "keys", key, keys_type_name)
 						continue
 					end
 
 					if not value isa V then
-						v.errors.add new AttributeTypeError(self, "values", value, "V")
+						v.errors.add new AttributeTypeError(self, "values", value, values_type_name)
 						continue
 					end
 
@@ -525,16 +519,17 @@ redef class Map[K, V]
 			end
 
 			for i in length.times do
-				var key = v.convert_object(keys[i])
-				var value = v.convert_object(values[i])
+				var key = v.convert_object(keys[i], keys_type_name)
 
 				if not key isa K then
-					v.errors.add new AttributeTypeError(self, "keys", key, "K")
+					v.errors.add new AttributeTypeError(self, "keys", key, keys_type_name)
 					continue
 				end
 
+				var value = v.convert_object(values[i], values_type_name)
+
 				if not value isa V then
-					v.errors.add new AttributeTypeError(self, "values", value, "V")
+					v.errors.add new AttributeTypeError(self, "values", value, values_type_name)
 					continue
 				end
 
