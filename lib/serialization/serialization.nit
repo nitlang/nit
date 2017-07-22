@@ -49,6 +49,9 @@ module serialization is
 	new_annotation serialize_as
 end
 
+intrude import core::queue
+import meta
+
 # Abstract serialization service to be sub-classed by specialized services.
 interface Serializer
 	# Entry point method of this service, serialize the `object`
@@ -326,5 +329,73 @@ redef class Error
 	do
 		v.serialize_attribute("message", message)
 		v.serialize_attribute("cause", cause)
+	end
+end
+
+# ---
+# core::queue classes
+
+redef abstract class ProxyQueue[E]
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var seq = v.deserialize_attribute("seq", (new GetName[Sequence[E]]).to_s)
+		if not seq isa Sequence[E] then seq = new Array[E]
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "seq")
+		end
+
+		init seq
+	end
+
+	redef fun core_serialize_to(v) do v.serialize_attribute("seq", seq)
+end
+
+redef class RandQueue[E]
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var seq = v.deserialize_attribute("seq", (new GetName[SimpleCollection[E]]).to_s)
+		if not seq isa SimpleCollection[E] then seq = new Array[E]
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "seq")
+		end
+
+		init seq
+	end
+
+	redef fun core_serialize_to(v) do v.serialize_attribute("seq", seq)
+end
+
+redef class MinHeap[E]
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var items = v.deserialize_attribute("items", (new GetName[SimpleCollection[E]]).to_s)
+		if not items isa Array[E] then items = new Array[E]
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "items")
+		end
+
+		var comparator = v.deserialize_attribute("comparator", "Comparator")
+		if not comparator isa Comparator then comparator = default_comparator
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "comparator")
+		end
+
+		init comparator
+		self.items.add_all items
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("items", items)
+		v.serialize_attribute("comparator", comparator)
 	end
 end
