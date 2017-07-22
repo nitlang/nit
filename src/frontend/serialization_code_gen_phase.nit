@@ -71,42 +71,50 @@ do
 			var type_name = mtype.to_s
 			var name = attribute.name
 
-			var resolved_type_name = type_name
-			var mclassdef = nclassdef.mclassdef
-			if mclassdef != null then
-				var bound_mtype = mclassdef.bound_mtype
-				var resolved_mtype = mtype.resolve_for(bound_mtype, bound_mtype, mclassdef.mmodule, true)
-				resolved_type_name = resolved_mtype.name
-
-				# TODO Use something like `V.class_name` to get the precise runtime type of virtual types.
-				# We currently use the upper bound of virtual types as static type in generated code
-				# for type suggestion and to prevent loading unexected types.
-				# This leaves a security issue when, for example, `DefaultMap::default_value`
-				# is bound to `nullable Object` and would allow any object to be loaded.
+			if mtype.need_anchor then
+				# Check dynamic type of virtual params
+				code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", (new GetName[{{{mtype}}}]).to_s)
+"""
+			else
+				# No param to check
+				code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{type_name}}}")
+"""
 			end
 
 			if type_name == "nullable Object" then
 				# Don't type check
 				code.add """
-	self.{{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{resolved_type_name}}}")
+	self.{{{name}}} = {{{name}}}
 """
 			else
+				# Needs type check
 				code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}", "{{{resolved_type_name}}}")
 	if v.deserialize_attribute_missing then
 """
 				# What to do when an attribute is missing?
 				if attribute.has_value then
 					# Leave it to the default value
 				else if mtype isa MNullableType then
+					# This is always a nullable type
 					code.add """
 		self.{{{name}}} = null"""
+				else if mtype isa MFormalType then
+					# This type nullability may change in subclasses
+					code.add """
+		var n___{{{name}}} = null
+		if n___{{{name}}} isa {{{mtype}}} then
+			self.{{{name}}} = n___{{{name}}}
+		else
+			v.errors.add new AttributeMissingError(self, "{{{name}}}")
+		end"""
 				else code.add """
 		v.errors.add new Error("Deserialization Error: attribute `{class_name}::{{{name}}}` missing from JSON object")"""
 
 				code.add """
 	else if not {{{name}}} isa {{{type_name}}} then
-		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{resolved_type_name}}}")
+		v.errors.add new AttributeTypeError(self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
 		if v.keep_going == false then return
 	else
 		self.{{{name}}} = {{{name}}}
