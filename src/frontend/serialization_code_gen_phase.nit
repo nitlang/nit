@@ -53,7 +53,7 @@ private class SerializationPhasePostModel
 	do
 		var code = new Array[String]
 		code.add """
-redef init from_deserializer(v: Deserializer)
+redef init from_deserializer(v)
 do
 	super
 	v.notify_of_creation self
