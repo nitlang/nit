@@ -113,8 +113,7 @@ abstract class Deserializer
 
 	# Deserialize the attribute with `name` from the object open for deserialization
 	#
-	# The `static_type` can be used as last resort if the deserialized object
-	# desn't have any metadata declaring the dynamic type.
+	# The `static_type` restricts what kind of object can be deserialized.
 	#
 	# Return the deserialized value or null on error, and set
 	# `deserialize_attribute_missing` to whether the attribute was missing.
