@@ -110,7 +110,7 @@ do
 			v.errors.add new AttributeMissingError(self, "{{{name}}}")
 		end"""
 				else code.add """
-		v.errors.add new Error("Deserialization Error: attribute `{class_name}::{{{name}}}` missing from JSON object")"""
+		v.errors.add new AttributeMissingError(self, "{{{name}}}")"""
 
 				code.add """
 	else if not {{{name}}} isa {{{type_name}}} then
