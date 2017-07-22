@@ -138,18 +138,18 @@ class JsonDeserializer
 			# ref?
 			if kind == "ref" then
 				if not object.keys.has("__id") then
-					errors.add new Error("Serialization Error: JSON object reference does not declare a `__id`.")
+					errors.add new Error("Deserialization Error: JSON object reference does not declare a `__id`.")
 					return object
 				end
 
 				var id = object["__id"]
 				if not id isa Int then
-					errors.add new Error("Serialization Error: JSON object reference declares a non-integer `__id`.")
+					errors.add new Error("Deserialization Error: JSON object reference declares a non-integer `__id`.")
 					return object
 				end
 
 				if not cache.has_id(id) then
-					errors.add new Error("Serialization Error: JSON object reference has an unknown `__id`.")
+					errors.add new Error("Deserialization Error: JSON object reference has an unknown `__id`.")
 					return object
 				end
 
@@ -163,12 +163,12 @@ class JsonDeserializer
 					id = object["__id"]
 
 					if not id isa Int then
-						errors.add new Error("Serialization Error: JSON object declaration declares a non-integer `__id`.")
+						errors.add new Error("Deserialization Error: JSON object declaration declares a non-integer `__id`.")
 						return object
 					end
 
 					if cache.has_id(id) then
-						errors.add new Error("Serialization Error: JSON object with `__id` {id} is deserialized twice.")
+						errors.add new Error("Deserialization Error: JSON object with `__id` {id} is deserialized twice.")
 						# Keep going
 					end
 				end
@@ -188,12 +188,12 @@ class JsonDeserializer
 				end
 
 				if class_name == null then
-					errors.add new Error("Serialization Error: JSON object declaration does not declare a `__class`.")
+					errors.add new Error("Deserialization Error: JSON object declaration does not declare a `__class`.")
 					return object
 				end
 
 				if not class_name isa String then
-					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
+					errors.add new Error("Deserialization Error: JSON object declaration declares a non-string `__class`.")
 					return object
 				end
 
@@ -227,21 +227,21 @@ class JsonDeserializer
 			# char?
 			if kind == "char" then
 				if not object.keys.has("__val") then
-					errors.add new Error("Serialization Error: JSON `char` object does not declare a `__val`.")
+					errors.add new Error("Deserialization Error: JSON `char` object does not declare a `__val`.")
 					return object
 				end
 
 				var val = object["__val"]
 
 				if not val isa String or val.is_empty then
-					errors.add new Error("Serialization Error: JSON `char` object does not declare a single char in `__val`.")
+					errors.add new Error("Deserialization Error: JSON `char` object does not declare a single char in `__val`.")
 					return object
 				end
 
 				return val.chars.first
 			end
 
-			errors.add new Error("Serialization Error: JSON object has an unknown `__kind`.")
+			errors.add new Error("Deserialization Error: JSON object has an unknown `__kind`.")
 			return object
 		end
 
