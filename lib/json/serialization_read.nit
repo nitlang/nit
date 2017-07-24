@@ -518,6 +518,8 @@ redef class Map[K, V]
 				return
 			end
 
+			# First, convert all keys to follow the order of the serialization
+			var converted_keys = new Array[K]
 			for i in length.times do
 				var key = v.convert_object(keys[i], keys_type_name)
 
@@ -526,6 +528,12 @@ redef class Map[K, V]
 					continue
 				end
 
+				converted_keys.add key
+			end
+
+			# Then convert the values and build the map
+			for i in length.times do
+				var key = converted_keys[i]
 				var value = v.convert_object(values[i], values_type_name)
 
 				if not value isa V then
