@@ -169,17 +169,22 @@ abstract class Deserializer
 	var errors = new Array[Error]
 end
 
-# Error on invalid dynamic type for a deserialized attribute
-class AttributeTypeError
+# Deserialization error related to an attribute of `receiver`
+abstract class AttributeError
 	super Error
-
-	autoinit receiver, attribute_name, attribute, expected_type
 
 	# Parent object of the problematic attribute
 	var receiver: Object
 
 	# Name of the problematic attribute in `receiver`
 	var attribute_name: String
+end
+
+# Invalid dynamic type for a deserialized attribute
+class AttributeTypeError
+	super AttributeError
+
+	autoinit receiver, attribute_name, attribute, expected_type
 
 	# Deserialized object that isn't of the `expected_type`
 	var attribute: nullable Object
@@ -193,6 +198,17 @@ class AttributeTypeError
 
 		return "Deserialization Error: {
 		}Wrong type on `{receiver.class_name}::{attribute_name}` expected `{expected_type}`, got `{found_type}`"
+	end
+end
+
+# Missing attribute at deserialization
+class AttributeMissingError
+	super AttributeError
+
+	autoinit receiver, attribute_name
+
+	redef var message is lazy do
+		return "Deserialization Error: Missing attribute `{receiver.class_name}::{attribute_name}`"
 	end
 end
 
