@@ -242,10 +242,10 @@ redef class Serializable
 	# which is used by all the serialization engines, not just JSON.
 	protected fun accept_json_serializer(v: JsonSerializer)
 	do
-		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
 		v.indent_level += 1
 		if not v.plain_json then
+			var id = v.cache.new_id_for(self)
 			v.new_line_and_indent
 			v.stream.write "\"__kind\": \"obj\", \"__id\": "
 			v.stream.write id.to_s
