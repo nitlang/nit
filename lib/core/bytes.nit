@@ -214,7 +214,7 @@ class Bytes
 		return slice(st, ed - st + 1)
 	end
 
-	# Returns a subset of the content of `self` starting at `from` and of length `count`
+	# Copy a subset of `self` starting at `from` and of `count` bytes
 	#
 	#     var b = "abcd".to_bytes
 	#     assert b.slice(1, 2).hexdigest == "6263"
@@ -239,7 +239,7 @@ class Bytes
 		return ret
 	end
 
-	# Returns a copy of `self` starting at `from`
+	# Copy of `self` starting at `from`
 	#
 	#     var b = "abcd".to_bytes
 	#     assert b.slice_from(1).hexdigest  == "626364"
