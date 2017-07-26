@@ -241,6 +241,17 @@ class JsonDeserializer
 				return val.chars.first
 			end
 
+			# byte?
+			if kind == "byte" then
+				var val = object.get_or_null("__val")
+				if not val isa Int then
+					errors.add new Error("Serialization Error: JSON `byte` object does not declare an integer `__val`.")
+					return object
+				end
+
+				return val.to_b
+			end
+
 			errors.add new Error("Deserialization Error: JSON object has an unknown `__kind`.")
 			return object
 		end

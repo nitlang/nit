@@ -270,6 +270,7 @@ end
 
 redef class Bool super DirectSerializable end
 redef class Char super DirectSerializable end
+redef class Byte super DirectSerializable end
 redef class Int super DirectSerializable end
 redef class Float super DirectSerializable end
 redef class CString super DirectSerializable end

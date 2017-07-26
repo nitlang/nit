@@ -33,7 +33,7 @@ class JsonSerializer
 	#   be deserialized to their original form using `JsonDeserializer`.
 	# * Use references when an object has already been serialized so to not duplicate it.
 	# * Support cycles in references.
-	# * Preserve the Nit `Char` type as an object because it does not exist in JSON.
+	# * Preserve the Nit `Char` and `Byte` types as special objects.
 	# * The generated JSON is standard and can be read by non-Nit programs.
 	#   However, some Nit types are not represented by the simplest possible JSON representation.
 	#   With the added metadata, it can be complex to read.
@@ -281,6 +281,19 @@ redef class Char
 		else
 			v.stream.write "\{\"__kind\": \"char\", \"__val\": "
 			to_s.accept_json_serializer v
+			v.stream.write "\}"
+		end
+	end
+end
+
+redef class Byte
+	redef fun accept_json_serializer(v)
+	do
+		if v.plain_json then
+			to_i.accept_json_serializer v
+		else
+			v.stream.write "\{\"__kind\": \"byte\", \"__val\": "
+			to_i.accept_json_serializer v
 			v.stream.write "\}"
 		end
 	end
