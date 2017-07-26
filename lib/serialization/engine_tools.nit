@@ -44,3 +44,35 @@ class StrictHashMap[K, V]
 		return c
 	end
 end
+
+redef class Text
+
+	# Strip the `nullable` prefix from the type name `self`
+	#
+	# ~~~
+	# assert "String".strip_nullable == "String"
+	# assert "nullable Array[Int]".strip_nullable == "Array[Int]"
+	# assert "Map[Set[String], Set[Int]]".strip_nullable == "Map[Set[String], Set[Int]]"
+	# ~~~
+	fun strip_nullable: Text
+	do
+		var prefix = "nullable "
+		return if has_prefix(prefix) then substring_from(prefix.length) else self
+	end
+
+	# Strip the `nullable` prefix and the params from the type name `self`
+	#
+	# ~~~
+	# assert "String".strip_nullable_and_params == "String"
+	# assert "nullable Array[Int]".strip_nullable_and_params == "Array"
+	# assert "Map[Set[String], Set[Int]]".strip_nullable_and_params == "Map"
+	# ~~~
+	fun strip_nullable_and_params: Text
+	do
+		var class_name = strip_nullable
+
+		var bracket_index = class_name.index_of('[')
+		if bracket_index == -1 then return class_name
+		return class_name.substring(0, bracket_index)
+	end
+end

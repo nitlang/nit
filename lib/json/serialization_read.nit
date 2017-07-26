@@ -180,10 +180,7 @@ class JsonDeserializer
 
 					if class_name == null and static_type != null then
 						# Fallack to the static type, strip the `nullable` prefix
-						var prefix = "nullable "
-						if static_type.has_prefix(prefix) then
-							class_name = static_type.substring_from(prefix.length)
-						else class_name = static_type
+						class_name = static_type.strip_nullable
 					end
 				end
 
@@ -203,8 +200,8 @@ class JsonDeserializer
 				end
 
 				if static_type != null and check_subtypes then
-					var static_class = static_type.strip_nullable_and_params
-					var dynamic_class = class_name.strip_nullable_and_params
+					var static_class = static_type.strip_nullable_and_params.to_s
+					var dynamic_class = class_name.strip_nullable_and_params.to_s
 					if not class_inheritance_metamodel.has_edge(dynamic_class, static_class) then
 						errors.add new Error("Deserialization Error: `{class_name}` is not a subtype of the static type `{static_type}`")
 						return null
@@ -260,13 +257,8 @@ class JsonDeserializer
 		if object isa Array[nullable Object] then
 			# Can we use the static type?
 			if static_type != null then
-				var prefix = "nullable "
-				var class_name = if static_type.has(prefix) then
-						static_type.substring_from(prefix.length)
-					else static_type
-
 				opened_array = object
-				var value = deserialize_class(class_name)
+				var value = deserialize_class(static_type.strip_nullable)
 				opened_array = null
 				return value
 			end
@@ -430,25 +422,6 @@ redef class Text
 			print_error "Deserialization Errors: {deserializer.errors.join(", ")}"
 		end
 		return res
-	end
-
-	# Strip the `nullable` prefix and the params from the class name `self`
-	#
-	# ~~~nitish
-	# assert "String".strip_nullable_and_params == "String"
-	# assert "Array[Int]".strip_nullable_and_params == "Array"
-	# assert "Map[Set[String], Set[Int]]".strip_nullable_and_params == "Map"
-	# ~~~
-	private fun strip_nullable_and_params: String
-	do
-		var class_name = to_s
-
-		var prefix = "nullable "
-		if class_name.has_prefix(prefix) then class_name = class_name.substring_from(prefix.length)
-
-		var bracket_index = class_name.index_of('[')
-		if bracket_index == -1 then return class_name
-		return class_name.substring(0, bracket_index)
 	end
 end
 
