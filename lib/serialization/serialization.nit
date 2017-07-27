@@ -247,19 +247,6 @@ interface Serializable
 	init from_deserializer(deserializer: Deserializer) is nosuper do end
 end
 
-redef interface Object
-	# Is `self` the same as `other` in a serialization context?
-	#
-	# Used to determine if an object has already been serialized.
-	fun is_same_serialized(other: nullable Object): Bool do return is_same_instance(other)
-
-	# Hash value use for serialization
-	#
-	# Used in combination with `is_same_serialized`. If two objects are the same
-	# in a serialization context, they must have the same `serialization_hash`.
-	fun serialization_hash: Int do return object_id
-end
-
 # Instances of this class are not delayed and instead serialized immediately
 # This applies mainly to `universal` types
 interface DirectSerializable
