@@ -326,6 +326,16 @@ class JsonDeserializer
 			return array
 		end
 
+		if object isa String and object.length == 1 and static_type == "Char" then
+			# Char serialized as a JSON string
+			return object.chars.first
+		end
+
+		if object isa Int and static_type == "Byte" then
+			# Byte serialized as an integer
+			return object.to_b
+		end
+
 		return object
 	end
 
