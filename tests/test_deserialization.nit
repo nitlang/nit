@@ -79,7 +79,7 @@ class F[N: Numeric]
 
 	var n: N
 
-	redef fun to_s do return "<E: {n}>"
+	redef fun to_s do return "<F: {n}>"
 end
 
 # Other collections
