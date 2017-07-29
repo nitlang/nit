@@ -89,12 +89,12 @@ redef class GamnitDisplay
 
 		# Audio support
 		var inited = mix.initialize(mix_init_flags)
-		assert inited != mix_init_flags else
+		if inited != mix_init_flags then
 			print_error "Failed to load SDL2 mixer format supports: {mix.error}"
 		end
 
-		var opened = mix.open_audio(44100, mix.default_format, 2, 1024)
-		assert opened else
+		var open = mix.open_audio(44100, mix.default_format, 2, 1024)
+		if not open then
 			print_error "Failed to initialize SDL2 mixer: {mix.error}"
 		end
 
@@ -108,8 +108,8 @@ redef class GamnitDisplay
 
 	# SDL2 mixer initialization flags
 	#
-	# Defaults to all available formats.
-	var mix_init_flags: MixInitFlags = mix.flac | mix.mod | mix.mp3 | mix.ogg is lazy, writable
+	# Defaults to FLAC, MP3 and OGG.
+	var mix_init_flags: MixInitFlags = mix.flac | mix.mp3 | mix.ogg is lazy, writable
 
 	# Close the SDL display
 	fun close_sdl
