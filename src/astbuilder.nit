@@ -23,7 +23,7 @@ intrude import semantize::scope
 # General factory to build semantic nodes in the AST of expressions
 class ASTBuilder
 	# The module used as reference for the building
-	# It is used to gather types and other stufs
+	# It is used to gather types and other stuff
 	var mmodule: MModule
 
 	# The anchor used for some mechanism relying on types
@@ -35,7 +35,7 @@ class ASTBuilder
 		return new AIntegerExpr.make(value, mmodule.int_type)
 	end
 
-	# Make a new instatiation
+	# Make a new instantiation
 	fun make_new(callsite: CallSite, args: nullable Array[AExpr]): ANewExpr
 	do
 		return new ANewExpr.make(callsite, args)
@@ -96,7 +96,7 @@ class ASTBuilder
 		return new ABreakExpr.make(escapemark)
 	end
 
-	# Make a new condinionnal
+	# Make a new conditional
 	# `mtype` is the return type of the whole if, in case of a ternary operator.
 	fun make_if(condition: AExpr, mtype: nullable MType): AIfExpr
 	do
@@ -128,9 +128,9 @@ redef class AExpr
 	private var variable_cache: nullable Variable
 
 	# The `detach` method completely remove the node in the parent.
-	# Owever, sometime, it is useful to keep the emplacement of the removed child.
+	# However, sometime, it is useful to keep the emplacement of the removed child.
 	#
-	# The standard usecase is the insertion of a node beetwen a parent `p` and a child `p.c`.
+	# The standard use case is the insertion of a node between a parent `p` and a child `p.c`.
 	# To create the new node `n`, we need to attach the child to it.
 	# But, to put `n` where `c` was in `p`, the place has to be remembered.
 	#
@@ -162,7 +162,7 @@ redef class AExpr
 end
 
 # A placeholder for a `AExpr` node
-# Instances are transiantly used to mark some specific emplacments in the AST
+# Instances are transiantly used to mark some specific emplacements in the AST
 # during complex transformations.
 #
 # Their must not appear in a valid AST
@@ -181,7 +181,7 @@ redef class ABlockExpr
 		self.is_typed = true
 	end
 
-	redef fun add(expr: AExpr)
+	redef fun add(expr)
 	do
 		n_expr.add expr
 	end
@@ -196,7 +196,7 @@ redef class ALoopExpr
 		n_block.is_typed = true
 	end
 
-	redef fun add(expr: AExpr)
+	redef fun add(expr)
 	do
 		n_block.add expr
 	end
@@ -222,7 +222,7 @@ redef class ADoExpr
 		return new ABreakExpr.make(escapemark)
 	end
 
-	redef fun add(expr: AExpr)
+	redef fun add(expr)
 	do
 		n_block.add expr
 	end
