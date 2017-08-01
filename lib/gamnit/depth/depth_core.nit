@@ -113,6 +113,9 @@ abstract class Model
 	# Usually, there is one `LeafModel` per material.
 	# At each frame, each material is asked to draw all the live `LeafModel` instaces.
 	fun leaves: Array[LeafModel] is abstract
+
+	# Sub-models with names, usually declared in the asset file
+	var named_parts = new Map[Text, Model]
 end
 
 # Model composed of one or many other `LeafModel`
