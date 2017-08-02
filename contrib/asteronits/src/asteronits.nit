@@ -89,6 +89,8 @@ redef class App
 
 	redef fun accept_event(event)
 	do
+		if super then return true
+
 		if event isa QuitEvent then
 			exit 0
 		else if event isa KeyEvent then
