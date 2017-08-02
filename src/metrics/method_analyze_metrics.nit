@@ -17,9 +17,7 @@ module method_analyze_metrics
 
 # We usualy need specific phases
 # NOTE: `frontend` is sufficent in most case (it is often too much)
-import metrics_base
-import mclasses_metrics
-import semantize
+import nitsmell_toolcontext
 import mclassdef_collect
 
 
@@ -41,19 +39,18 @@ fun call_analyze_methods(mclassdef: MClassDef, model_builder: ModelBuilder): Arr
 end
 
 fun set_analyse_result_methoddef(mmethoddef: MMethodDef, visitor: MethodAnalyzeMetrics): MMethodDef do
-	mmethoddef.total_call = visitor.total_call
 	mmethoddef.line_number = visitor.line_number.length
 	mmethoddef.total_self_call = visitor.total_self_call
-	mmethoddef.total_extern_call = visitor.total_call - visitor.total_self_call
+	mmethoddef.class_call = visitor.class_call
 	return mmethoddef
 end
 
 public class MethodAnalyzeMetrics
 	super Visitor
 	var ameth_prop_def: AMethPropdef
-	var total_call = 0
 	var line_number = new Counter[nullable Int]
 	var total_self_call = 0
+	var class_call = new Counter[MClassType]
 
 	redef fun visit(n) do
 		n.visit_all(self)
@@ -64,11 +61,11 @@ public class MethodAnalyzeMetrics
 				end
 			end
 		end
-
 		if n isa ASendExpr then
 			var callsite = n.callsite
 			if callsite != null then
-				self.total_call += 1
+				var class_site_recv = callsite.recv
+				if class_site_recv isa MClassType then class_call.inc(class_site_recv)
 				if callsite.recv_is_self then self.total_self_call += 1
 			end
 		end
@@ -76,8 +73,7 @@ public class MethodAnalyzeMetrics
 end
 
 redef class MMethodDef
-	var total_call = 0
 	var line_number = 0
 	var total_self_call = 0
-	var total_extern_call = 0
+	var class_call = new Counter[MClassType]
 end

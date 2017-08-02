@@ -20,7 +20,7 @@ import platform
 class Starter
 	fun no_para do end
 
-	fun no_para2() do end
+	fun no_para2 do end
 end
 
 class Test
@@ -29,6 +29,10 @@ class Test
 	end
 
 	fun long_list_parameter(numbers : Int, para1 : Bool, para2 : Float, para3 : Int, para4 : Starter) do
+		var starter = new Starter
+	end
+
+	fun extra_long_list_parameter(numbers : Int, para1 : Bool, para2 : Float, para3 : Int, para4 : Starter,para5 : Int, para6 : Int) do
 		var starter = new Starter
 	end
 end

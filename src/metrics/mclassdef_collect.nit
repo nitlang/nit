@@ -121,6 +121,7 @@ redef class MClassDef
 		return res
 	end
 
+	# Collect all mmethod inehrited,intro and redef
 	fun collect_all_methods(view: ModelView): Set[MMethod] do
 		var set = new HashSet[MMethod]
 		set.add_all collect_intro_mmethods(view)
@@ -129,6 +130,7 @@ redef class MClassDef
 		return set
 	end
 
+	# Collect all mattributs inehrited,intro and redef
 	fun collect_all_mattributes(view: ModelView): Set[MAttribute] do
 		var set = new HashSet[MAttribute]
 		set.add_all collect_redef_mattributes(view)
@@ -137,6 +139,7 @@ redef class MClassDef
 		return set
 	end
 
+	# Collect intro and redef mmethods
 	fun collect_intro_and_redef_methods(view: ModelView): Set[MMethod] do
 		var set = new HashSet[MMethod]
 		set.add_all collect_intro_mmethods(view)
@@ -144,6 +147,7 @@ redef class MClassDef
 		return set
 	end
 
+	# Collect intro and redef mattributs
 	fun collect_intro_and_redef_mattributes(view: ModelView): Set[MAttribute] do
 		var set = new HashSet[MAttribute]
 		set.add_all collect_redef_mattributes(view)
@@ -151,17 +155,37 @@ redef class MClassDef
 		return set
 	end
 
-	fun collect_intro_and_redef_mproperties(view: ModelView): Set[MProperty] do
-		var set = new HashSet[MProperty]
-		set.add_all collect_redef_mproperties(view)
-		set.add_all collect_intro_mproperties(view)
-		return set
-	end
-
+	# Collect intro and redef mpropdefs
 	fun collect_intro_and_redef_mpropdefs(view: ModelView): Set[MPropDef] do
 		var set = new HashSet[MPropDef]
 		set.add_all collect_intro_mpropdefs(view)
 		set.add_all collect_redef_mpropdefs(view)
+		return set
+	end
+
+	# Collect intro abstract mmethodDef
+	fun collect_abstract_methods(view: ModelView): Set[MMethodDef] do
+		var set = new HashSet[MMethodDef]
+		var mpropdefs = collect_intro_mpropdefs(view)
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef then
+				if mpropdef.is_abstract then set.add(mpropdef)
+			end
+		end
+		return set
+	end
+
+	# Collect not defined properties
+	fun collect_not_define_properties(view: ModelView):Set[MMethodDef] do
+		var set = new HashSet[MMethodDef]
+		for mpropdef in collect_abstract_methods(view) do
+			var redef_count = 0
+			for mprop in mpropdef.mproperty.mpropdefs do
+				if mprop.is_abstract then continue
+				redef_count += 1
+			end
+			if redef_count == 0 then set.add(mpropdef)
+		end
 		return set
 	end
 end

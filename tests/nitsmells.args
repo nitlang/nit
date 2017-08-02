@@ -1,5 +1,8 @@
---no-colors test_prog/
---no-colors TestNitsmells/FeatureEnvy/
---no-colors TestNitsmells/LargeClass/
---no-colors TestNitsmells/LongMethod/
---no-colors TestNitsmells/LongParameterList/
+--no-colors --all test_prog/
+--no-colors --feature-envy TestNitsmells/FeatureEnvy/
+--no-colors --large-class TestNitsmells/LargeClass/
+--no-colors --long-methods TestNitsmells/LongMethod/
+--no-colors --long-params TestNitsmells/LongParameterList/
+--no-colors --no-abstract-implementation TestNitsmells/NoAbstractImplemented/
+--no-colors --long-methods --long-method-threshold 3 TestNitsmells/LongMethod/
+--no-colors --long-params --long-params-threshold 5 TestNitsmells/LongParameterList/

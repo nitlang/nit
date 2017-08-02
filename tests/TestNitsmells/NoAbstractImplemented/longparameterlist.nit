@@ -13,33 +13,36 @@
 # limitations under the License.
 
 # A test program with a fake model to check model tools.
-module longmethod
+module longparameterlist
 
 import platform
 
 class Starter
-	var attribute = 0
-	var attribute1 = 0
-	var attribute2 = 0
-	fun start do
-		self.attribute1 = 10
-	end
+	fun no_para do end
 
-	fun ended do end
+	fun no_para2 do end
+
+	fun name: Int is abstract
+
+	fun name2: Int is abstract
+
+	var toto: Int is abstract
 end
 
-class LongMethodClass
-	var test_variable = 0
+class NoImplemented
+	super Starter
 
-	fun long_method do
+	fun short_list_parameter(numbers : Int, para1 : Bool, para2 : Float, para3 : Int) do
 		var starter = new Starter
-		test_variable = 3
 	end
 
-	fun extra_long_method do
+	fun long_list_parameter(numbers : Int, para1 : Bool, para2 : Float, para3 : Int, para4 : Starter) do
 		var starter = new Starter
-		test_variable = 3
-		test_variable = 5
-		test_variable = 8
 	end
+end
+
+class Implemented
+	super NoImplemented
+
+	redef fun name do return 1 end
 end

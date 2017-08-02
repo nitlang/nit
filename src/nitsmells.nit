@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import metrics_base
-import mclasses_metrics
+import nitsmell_toolcontext
 import semantize
 
 import codesmells_metrics
+# For force nit to do the good linéarisation to remove the toolcontext redef warning
+redef class ToolContext
+     redef init do super
+end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
