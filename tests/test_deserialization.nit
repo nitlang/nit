@@ -125,5 +125,5 @@ class TestEntities
 	var with_generics: Array[Serializable] = [a, b, c, d, e, fi, ff, g: Serializable]
 end
 
-# We instanciate it here so that `nitserial` detects generic types as being alive
+# We instantiate it here so that `nitserial` detects generic types as being alive
 var entities = new TestEntities

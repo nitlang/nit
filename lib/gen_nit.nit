@@ -55,8 +55,12 @@ class NitModule
 	# Annotations on the module declaration
 	var annotations = new Array[Writable]
 
-	# Imports from this module
-	var imports = new Array[Writable]
+	# Importation declarations
+	#
+	# Accepts two formats:
+	# * Module name only, short or qualified: `json`, `gamnit::flat`, etc.
+	# * Full importation declaration: `import json`, `private import gamnit::flat`, etc.
+	var imports = new Set[Writable]
 
 	# Main content of this module
 	var content = new Array[Writable]
@@ -75,7 +79,15 @@ class NitModule
 			add "end\n\n"
 		end
 
-		for i in imports do add "import {i}\n"
+		for i in imports do
+			if i.to_s.has("import ") then
+				add i
+			else
+				add "import "
+				add i
+			end
+			add "\n"
+		end
 		add "\n"
 
 		for l in content do

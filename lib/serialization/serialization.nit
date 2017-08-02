@@ -49,6 +49,9 @@ module serialization is
 	new_annotation serialize_as
 end
 
+intrude import core::queue
+import meta
+
 # Abstract serialization service to be sub-classed by specialized services.
 interface Serializer
 	# Entry point method of this service, serialize the `object`
@@ -113,8 +116,7 @@ abstract class Deserializer
 
 	# Deserialize the attribute with `name` from the object open for deserialization
 	#
-	# The `static_type` can be used as last resort if the deserialized object
-	# desn't have any metadata declaring the dynamic type.
+	# The `static_type` restricts what kind of object can be deserialized.
 	#
 	# Return the deserialized value or null on error, and set
 	# `deserialize_attribute_missing` to whether the attribute was missing.
@@ -170,17 +172,22 @@ abstract class Deserializer
 	var errors = new Array[Error]
 end
 
-# Error on invalid dynamic type for a deserialized attribute
-class AttributeTypeError
+# Deserialization error related to an attribute of `receiver`
+abstract class AttributeError
 	super Error
-
-	autoinit receiver, attribute_name, attribute, expected_type
 
 	# Parent object of the problematic attribute
 	var receiver: Object
 
 	# Name of the problematic attribute in `receiver`
 	var attribute_name: String
+end
+
+# Invalid dynamic type for a deserialized attribute
+class AttributeTypeError
+	super AttributeError
+
+	autoinit receiver, attribute_name, attribute, expected_type
 
 	# Deserialized object that isn't of the `expected_type`
 	var attribute: nullable Object
@@ -194,6 +201,17 @@ class AttributeTypeError
 
 		return "Deserialization Error: {
 		}Wrong type on `{receiver.class_name}::{attribute_name}` expected `{expected_type}`, got `{found_type}`"
+	end
+end
+
+# Missing attribute at deserialization
+class AttributeMissingError
+	super AttributeError
+
+	autoinit receiver, attribute_name
+
+	redef var message is lazy do
+		return "Deserialization Error: Missing attribute `{receiver.class_name}::{attribute_name}`"
 	end
 end
 
@@ -311,5 +329,73 @@ redef class Error
 	do
 		v.serialize_attribute("message", message)
 		v.serialize_attribute("cause", cause)
+	end
+end
+
+# ---
+# core::queue classes
+
+redef abstract class ProxyQueue[E]
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var seq = v.deserialize_attribute("seq", (new GetName[Sequence[E]]).to_s)
+		if not seq isa Sequence[E] then seq = new Array[E]
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "seq")
+		end
+
+		init seq
+	end
+
+	redef fun core_serialize_to(v) do v.serialize_attribute("seq", seq)
+end
+
+redef class RandQueue[E]
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var seq = v.deserialize_attribute("seq", (new GetName[SimpleCollection[E]]).to_s)
+		if not seq isa SimpleCollection[E] then seq = new Array[E]
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "seq")
+		end
+
+		init seq
+	end
+
+	redef fun core_serialize_to(v) do v.serialize_attribute("seq", seq)
+end
+
+redef class MinHeap[E]
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var items = v.deserialize_attribute("items", (new GetName[SimpleCollection[E]]).to_s)
+		if not items isa Array[E] then items = new Array[E]
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "items")
+		end
+
+		var comparator = v.deserialize_attribute("comparator", "Comparator")
+		if not comparator isa Comparator then comparator = default_comparator
+		if v.deserialize_attribute_missing then
+			v.errors.add new AttributeMissingError(self, "comparator")
+		end
+
+		init comparator
+		self.items.add_all items
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("items", items)
+		v.serialize_attribute("comparator", comparator)
 	end
 end

@@ -7,6 +7,7 @@ end
 
 import test_serialization
 import serialization
+intrude import serialization::engine_tools
 
 redef class Deserializer
 	redef fun deserialize_class(name)
@@ -15,6 +16,7 @@ redef class Deserializer
 		if name == "Array[Text]" then return new Array[Text].from_deserializer(self)
 		if name == "Array[Map[String, nullable Object]]" then return new Array[Map[String, nullable Object]].from_deserializer(self)
 		if name == "Array[String]" then return new Array[String].from_deserializer(self)
+		if name == "StrictHashMap[Int, Object]" then return new StrictHashMap[Int, Object].from_deserializer(self)
 		if name == "Array[Error]" then return new Array[Error].from_deserializer(self)
 		if name == "POSet[String]" then return new POSet[String].from_deserializer(self)
 		if name == "Array[Int]" then return new Array[Int].from_deserializer(self)
@@ -27,6 +29,7 @@ redef class Deserializer
 		if name == "Array[Float]" then return new Array[Float].from_deserializer(self)
 		if name == "Array[Object]" then return new Array[Object].from_deserializer(self)
 		if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
+		if name == "StrictHashMap[Serializable, Int]" then return new StrictHashMap[Serializable, Int].from_deserializer(self)
 		if name == "POSetElement[String]" then return new POSetElement[String].from_deserializer(self)
 		if name == "HashMap[String, POSetElement[String]]" then return new HashMap[String, POSetElement[String]].from_deserializer(self)
 		if name == "Array[Match]" then return new Array[Match].from_deserializer(self)
