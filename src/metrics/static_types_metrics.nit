@@ -53,8 +53,9 @@ private class ATypeCounterVisitor
 	do
 		if n isa AAnnotation then return
 
-		if n isa AType then
-			var mclassdef = self.nclassdef.mclassdef.as(not null)
+		if n isa AType then do
+			var mclassdef = self.nclassdef.mclassdef
+			if mclassdef == null then break
 			var mtype = modelbuilder.resolve_mtype(mclassdef, n)
 			if mtype != null then
 				self.typecount.inc(mtype)
