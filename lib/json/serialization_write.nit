@@ -317,8 +317,10 @@ end
 redef class SimpleCollection[E]
 	redef fun accept_json_serializer(v)
 	do
-		# Register as pseudo object
-		if not v.plain_json then
+		if v.plain_json then
+			serialize_to_pure_json v
+		else
+			# Register as pseudo object
 			var id = v.cache.new_id_for(self)
 			v.stream.write """{"""
 			v.indent_level += 1
@@ -329,14 +331,12 @@ redef class SimpleCollection[E]
 			v.stream.write class_name
 			v.stream.write """","""
 			v.new_line_and_indent
+
 			v.stream.write """"__items": """
 			serialize_to_pure_json v
-			core_serialize_to v
-		else
-			serialize_to_pure_json v
-		end
 
-		if not v.plain_json then
+			core_serialize_to v
+
 			v.indent_level -= 1
 			v.new_line_and_indent
 			v.stream.write "\}"
