@@ -18,3 +18,4 @@
 module serialization
 
 import serialization_core
+import inspect
