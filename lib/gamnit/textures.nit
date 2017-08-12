@@ -238,8 +238,11 @@ class RootTexture
 	private fun load_from_pixels(pixels: Pointer, width, height: Int, format: GLPixelFormat)
 	do
 		var max_texture_size = glGetIntegerv(gl_MAX_TEXTURE_SIZE, 0)
-		if width > max_texture_size or height > max_texture_size then
-			error = new Error("Texture {self} width or height is over the GL_MAX_TEXTURE_SIZE of {max_texture_size}")
+		if width > max_texture_size then
+			error = new Error("Texture width larger than gl_MAX_TEXTURE_SIZE ({max_texture_size}) in {self} at {width}")
+			return
+		else if height > max_texture_size then
+			error = new Error("Texture height larger than gl_MAX_TEXTURE_SIZE ({max_texture_size}) in {self} at {height}")
 			return
 		end
 
