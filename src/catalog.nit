@@ -318,8 +318,11 @@ class Catalog
 	# The score is loosely computed using other metrics
 	var score = new Counter[MPackage]
 
-	# List of known people
+	# List of known people by their git string
 	var persons = new HashMap[String, Person]
+
+	# Map person short names to person objects
+	var name2person = new HashMap[String, Person]
 
 	# Scan, register and add a contributor to a package
 	fun register_contrib(person: String, mpackage: MPackage): Person
@@ -339,6 +342,7 @@ class Catalog
 			projs.add mpackage
 			mpackage.metadata.contributors.add p
 		end
+		name2person[p.name] = p
 		return p
 	end
 
@@ -346,6 +350,7 @@ class Catalog
 	fun package_page(mpackage: MPackage)
 	do
 		mpackages[mpackage.full_name] = mpackage
+
 		var score = score[mpackage].to_f
 
 		var mdoc = mpackage.mdoc_or_fallback
