@@ -26,22 +26,8 @@ redef class NitwebConfig
 	#
 	# This method should be called at nitweb startup.
 	fun build_catalog do
-		var catalog = new Catalog(modelbuilder)
-		for mpackage in model.mpackages do
-			catalog.deps.add_node(mpackage)
-			for mgroup in mpackage.mgroups do
-				for mmodule in mgroup.mmodules do
-					for imported in mmodule.in_importation.direct_greaters do
-						var ip = imported.mpackage
-						if ip == null or ip == mpackage then continue
-						catalog.deps.add_edge(mpackage, ip)
-					end
-				end
-			end
-			catalog.git_info(mpackage)
-			catalog.package_page(mpackage)
-		end
-		self.catalog = catalog
+		self.catalog = new Catalog(modelbuilder)
+		self.catalog.build_catalog(model.mpackages)
 	end
 end
 
@@ -136,6 +122,34 @@ class APICatalogContributors
 		obj["maintainers"] = new JsonArray.from(config.catalog.maint2proj.keys)
 		obj["contributors"] = new JsonArray.from(config.catalog.contrib2proj.keys)
 		res.json obj
+	end
+end
+
+redef class Catalog
+
+	# Build the catalog from `mpackages`
+	fun build_catalog(mpackages: Array[MPackage]) do
+		# Compute the poset
+		for p in mpackages do
+			var g = p.root
+			assert g != null
+			modelbuilder.scan_group(g)
+
+			deps.add_node(p)
+			for gg in p.mgroups do for m in gg.mmodules do
+				for im in m.in_importation.direct_greaters do
+					var ip = im.mpackage
+					if ip == null or ip == p then continue
+					deps.add_edge(p, ip)
+				end
+			end
+		end
+		# Build the catalog
+		for mpackage in mpackages do
+			package_page(mpackage)
+			git_info(mpackage)
+			mpackage_stats(mpackage)
+		end
 	end
 end
 
