@@ -44,6 +44,10 @@ redef class APIRouter
 
 		use("/catalog/tags", new APICatalogTags(config))
 		use("/catalog/tag/:tid", new APICatalogTag(config))
+
+		use("/catalog/person/:pid", new APICatalogPerson(config))
+		use("/catalog/person/:pid/maintaining", new APICatalogMaintaining(config))
+		use("/catalog/person/:pid/contributing", new APICatalogContributing(config))
 	end
 end
 
@@ -197,6 +201,79 @@ class APICatalogTag
 		res.json obj
 	end
 end
+
+# Get a person existing in the catalog
+#
+# `GET /person/:pid`: get the person with `pid`
+class APICatalogPerson
+	super APICatalogHandler
+
+	# Get the person with `:pid` or throw a 404 error
+	fun get_person(req: HttpRequest, res: HttpResponse): nullable Person do
+		var id = req.param("pid")
+		if id == null then
+			res.api_error(400, "Missing package full_name")
+			return null
+		end
+		id = id.from_percent_encoding
+		if not config.catalog.name2person.has_key(id) then
+			res.api_error(404, "Person not found")
+			return null
+		end
+		return config.catalog.name2person[id]
+	end
+
+	redef fun get(req, res) do
+		var person = get_person(req, res)
+		if person == null then return
+		res.json person
+	end
+end
+
+# Get the list of mpackages maintained by a person
+#
+# `GET /person/:pid/maintaining?p=1&n=10`: return a paginated list of packages
+class APICatalogMaintaining
+	super APICatalogPerson
+
+	redef fun get(req, res) do
+		var person = get_person(req, res)
+		if person == null then return
+
+		var page = req.int_arg("p")
+		var limit = req.int_arg("n")
+		var array = new Array[MPackage]
+		if config.catalog.maint2proj.has_key(person) then
+			array = config.catalog.maint2proj[person].to_a
+		end
+		mpackages_sorter.sort(array)
+		var response = new JsonArray.from(array)
+		res.json paginate(response, response.length, page, limit)
+	end
+end
+
+# Get the list of mpackages contributed by a person
+#
+# `GET /person/:pid/contributing?p=1&n=10`: return a paginated list of packages
+class APICatalogContributing
+	super APICatalogPerson
+
+	redef fun get(req, res) do
+		var person = get_person(req, res)
+		if person == null then return
+
+		var page = req.int_arg("p")
+		var limit = req.int_arg("n")
+		var array = new Array[MPackage]
+		if config.catalog.contrib2proj.has_key(person) then
+			array = config.catalog.contrib2proj[person].to_a
+		end
+		mpackages_sorter.sort(array)
+		var response = new JsonArray.from(array)
+		res.json paginate(response, response.length, page, limit)
+	end
+end
+
 redef class Catalog
 
 	# Build the catalog from `mpackages`
