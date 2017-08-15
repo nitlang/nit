@@ -21,9 +21,12 @@
 		cfpLoadingBarProvider.includeSpinner = false;
 	}])
 
-	.run(['$anchorScroll', function($anchorScroll) {
+	.run(function($rootScope, $anchorScroll) {
 		$anchorScroll.yOffset = 80;
-	}])
+		$rootScope.$on('$stateChangeSuccess', function() {
+		  $anchorScroll();
+		});
+	})
 
 	.config(function($stateProvider, $locationProvider) {
 		$stateProvider
