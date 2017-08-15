@@ -324,6 +324,9 @@ class Catalog
 	# Map person short names to person objects
 	var name2person = new HashMap[String, Person]
 
+	# Package statistics cache
+	var mpackages_stats = new HashMap[MPackage, MPackageStats]
+
 	# Scan, register and add a contributor to a package
 	fun register_contrib(person: String, mpackage: MPackage): Person
 	do
@@ -522,8 +525,61 @@ class Catalog
 		for c in contributors.sort.reverse_iterator do
 			register_contrib(c, mpackage)
 		end
-
 	end
+
+	# Compose package stats
+	fun mpackage_stats(mpackage: MPackage): MPackageStats do
+		var stats = new MPackageStats
+		stats.mmodules = mmodules[mpackage]
+		stats.mclasses = mclasses[mpackage]
+		stats.mmethods = mmethods[mpackage]
+		stats.loc = loc[mpackage]
+		stats.errors = errors[mpackage]
+		stats.warnings = warnings[mpackage]
+		stats.warnings_per_kloc = warnings_per_kloc[mpackage]
+		stats.documentation_score = documentation_score[mpackage]
+		stats.commits = commits[mpackage]
+		stats.score = score[mpackage]
+
+		mpackages_stats[mpackage] = stats
+		return stats
+	end
+end
+
+# MPackage statistics for the catalog
+class MPackageStats
+
+	# Number of modules
+	var mmodules = 0
+
+	# Number of classes
+	var mclasses = 0
+
+	# Number of methods
+	var mmethods = 0
+
+	# Number of lines of code
+	var loc = 0
+
+	# Number of errors
+	var errors = 0
+
+	# Number of warnings and advices
+	var warnings = 0
+
+	# Number of warnings per 1000 lines of code (w/kloc)
+	var warnings_per_kloc = 0
+
+	# Documentation score (between 0 and 100)
+	var documentation_score = 0
+
+	# Number of commits by package
+	var commits = 0
+
+	# Score by package
+	#
+	# The score is loosely computed using other metrics
+	var score = 0
 end
 
 # Execute a git command and return the result
