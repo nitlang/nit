@@ -544,6 +544,48 @@ class Catalog
 		mpackages_stats[mpackage] = stats
 		return stats
 	end
+
+	# Compose catalog stats
+	var catalog_stats: CatalogStats is lazy do
+		var stats = new CatalogStats
+		stats.packages = mpackages.length
+		stats.maintainers = maint2proj.length
+		stats.contributors = contrib2proj.length
+		stats.tags = tag2proj.length
+		stats.modules = mmodules.sum
+		stats.classes = mclasses.sum
+		stats.methods = mmethods.sum
+		stats.loc = loc.sum
+		return stats
+	end
+end
+
+# Catalog statistics
+class CatalogStats
+
+	# Number of packages
+	var packages = 0
+
+	# Number of maintainers
+	var maintainers = 0
+
+	# Number of contributors
+	var contributors = 0
+
+	# Number of tags
+	var tags = 0
+
+	# Number of modules
+	var modules = 0
+
+	# Number of classes
+	var classes = 0
+
+	# Number of methods
+	var methods = 0
+
+	# Number of line of codes
+	var loc = 0
 end
 
 # MPackage statistics for the catalog
