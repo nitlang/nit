@@ -6,30 +6,6 @@
 		<h5 class='card-heading' ng-if='!noSynopsis'>
 			<entity-signature mentity='mentity'/>
 		</h5>
-		<div class='tab-content'>
-			<div id='{{mentity.html_id}}-signature' class='tab-pane' ng-if='!noSynopsis'
-			  ng-class='currentTab == "signature" ? "active" : ""'>
-				<span class='synopsis' ng-bind-html='mentity.mdoc.html_synopsis' />
-			</div>
-			<div id='{{mentity.html_id}}-grade' class='tab-pane'
-			  ng-class='currentTab == "grade" ? "active" : ""'>
-				<entity-rating mentity='mentity' ratings='ratings'>
-			</div>
-		</div>
-	</div>
-	<div class='card-right'>
-		<div class='dropdown'>
-			<button class='btn btn-link dropdown-toggle' type='button' data-toggle='dropdown'>
-				<span class='glyphicon glyphicon-chevron-down'></span>
-			</button>
-			<ul class='dropdown-menu dropdown-menu-right'>
-				<li ng-class='currentTab == "signature" ? "active" : ""' ng-if='!noSynopsis'>
-					<a ng-click='currentTab = "signature"'>Signature</a>
-				</li>
-				<li ng-class='currentTab == "grade" ? "active" : ""'>
-					<a ng-click='loadEntityStars(); currentTab = "grade"'>Grade</a>
-				</li>
-			</ul>
-		</div>
+		<span class='synopsis' ng-bind-html='mentity.mdoc.html_synopsis' />
 	</div>
 </div>
