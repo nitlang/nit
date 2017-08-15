@@ -34,6 +34,8 @@ end
 redef class APIRouter
 	redef init do
 		super
+		use("/catalog/packages/", new APICatalogPackages(config))
+
 		use("/catalog/highlighted", new APICatalogHighLighted(config))
 		use("/catalog/required", new APICatalogMostRequired(config))
 		use("/catalog/bytags", new APICatalogByTags(config))
@@ -72,6 +74,22 @@ abstract class APICatalogHandler
 			res[k.to_s.html_escape] = new JsonArray.from(projs)
 		end
 		return res
+	end
+end
+
+# Get all the packages from the catalog using pagination
+#
+# `GET /packages?p=1&n=10`: get the list of catalog by page
+class APICatalogPackages
+	super APICatalogHandler
+
+	redef fun get(req, res) do
+		var page = req.int_arg("p")
+		var limit = req.int_arg("n")
+		var mpackages = config.catalog.mpackages.values.to_a
+		mpackages_sorter.sort(mpackages)
+		var response = new JsonArray.from(mpackages)
+		res.json paginate(response, page, limit)
 	end
 end
 
