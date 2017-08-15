@@ -14,7 +14,7 @@
 
 module api_catalog
 
-import web_base
+import api_model
 import catalog
 
 redef class NitwebConfig
@@ -271,6 +271,20 @@ class APICatalogContributing
 		mpackages_sorter.sort(array)
 		var response = new JsonArray.from(array)
 		res.json paginate(response, response.length, page, limit)
+	end
+end
+
+redef class APIEntity
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
+
+		# Special case for packages (catalog view)
+		if mentity isa MPackage then
+			res.raw_json mentity.to_full_catalog_json(plain=true, config.catalog)
+		else
+			res.raw_json mentity.to_full_json
+		end
 	end
 end
 

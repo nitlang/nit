@@ -66,6 +66,10 @@
 					controller: function(mentity, doc) {
 						this.mentity = mentity;
 						this.doc = doc;
+
+						this.date = function(date) {
+							return new Date(date);
+						}
 					},
 					controllerAs: 'vm',
 				})
