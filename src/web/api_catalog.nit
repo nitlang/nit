@@ -41,6 +41,9 @@ redef class APIRouter
 		use("/catalog/bytags", new APICatalogByTags(config))
 		use("/catalog/contributors", new APICatalogContributors(config))
 		use("/catalog/stats", new APICatalogStats(config))
+
+		use("/catalog/tags", new APICatalogTags(config))
+		use("/catalog/tag/:tid", new APICatalogTag(config))
 	end
 end
 
@@ -143,6 +146,57 @@ class APICatalogStats
 	end
 end
 
+# Get all the tags from the catalog
+#
+# `GET /tags`: the list of tags associated with their number of packages
+class APICatalogTags
+	super APICatalogHandler
+
+	# Sorter to sort tags alphabetically
+	var tags_sorter = new CatalogTagsSorter
+
+	redef fun get(req, res) do
+		var obj = new JsonObject
+
+		var tags = config.catalog.tag2proj.keys.to_a
+		tags_sorter.sort(tags)
+
+		for tag in tags do
+			if not config.catalog.tag2proj.has_key(tag) then continue
+			obj[tag] = config.catalog.tag2proj[tag].length
+		end
+		res.json obj
+	end
+end
+
+# Get the packages related to a tag
+#
+# `GET /tag/:tid?p=1&n=10`: return a paginated list of packages
+class APICatalogTag
+	super APICatalogHandler
+
+	redef fun get(req, res) do
+		var page = req.int_arg("p")
+		var limit = req.int_arg("n")
+		var id = req.param("tid")
+		if id == null then
+			res.api_error(400, "Missing tag")
+			return
+		end
+		id = id.from_percent_encoding
+		if not config.catalog.tag2proj.has_key(id) then
+			res.api_error(404, "Tag not found")
+			return
+		end
+		var obj = new JsonObject
+		obj["tag"] = id
+		var mpackages = config.catalog.tag2proj[id]
+		mpackages_sorter.sort(mpackages)
+		var response = new JsonArray.from(mpackages)
+		obj["packages"] = paginate(response, response.length, page, limit)
+		res.json obj
+	end
+end
 redef class Catalog
 
 	# Build the catalog from `mpackages`
