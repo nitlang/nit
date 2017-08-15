@@ -198,7 +198,7 @@ class TestSuite
 	# Write the test unit for `self` in a nit compilable file.
 	fun write_to_nit do
 		var file = new Template
-		file.addn "intrude import test_suite"
+		file.addn "intrude import core"
 		file.addn "import {mmodule.name}\n"
 		file.addn "var name = args.first"
 		var before_module = self.before_module
@@ -387,19 +387,6 @@ redef class MMethodDef
 
 	# Is the method a "after_module"?
 	private fun is_after_module: Bool do return name == "after_module"
-end
-
-redef class MClassDef
-	# Is the class a TestClass?
-	# i.e. is a subclass of `TestSuite`
-	private fun is_test: Bool do
-		var in_hierarchy = self.in_hierarchy
-		if in_hierarchy == null then return false
-		for sup in in_hierarchy.greaters do
-			if sup.name == "TestSuite" then return true
-		end
-		return false
-	end
 end
 
 redef class MModule
