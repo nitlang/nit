@@ -45,6 +45,11 @@ end
 abstract class APICatalogHandler
 	super APIHandler
 
+	# Sorter used to sort packages
+	#
+	# Sorting is based on mpackage score.
+	var mpackages_sorter = new CatalogScoreSorter(config.catalog) is lazy
+
 	# List the 10 best packages from `cpt`
 	fun list_best(cpt: Counter[MPackage]): JsonArray do
 		var res = new JsonArray
@@ -217,5 +222,61 @@ redef class Person
 		v.serialize_attribute("name", name)
 		v.serialize_attribute("email", email)
 		v.serialize_attribute("gravatar", gravatar)
+	end
+end
+
+redef class MPackage
+	# Serialize the full catalog version of `self` to JSON
+	#
+	# See: `FullCatalogSerializer`
+	fun to_full_catalog_json(catalog: Catalog, plain, pretty: nullable Bool): String do
+		var stream = new StringWriter
+		var serializer = new FullCatalogSerializer(stream, catalog)
+		serializer.plain_json = plain or else false
+		serializer.pretty_json = pretty or else false
+		serializer.serialize self
+		stream.close
+		return stream.to_s
+	end
+
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("metadata", metadata)
+		if v isa FullCatalogSerializer then
+			v.serialize_attribute("stats", v.catalog.mpackages_stats[self])
+
+			var parents = v.catalog.deps[self].direct_greaters.to_a
+			v.serialize_attribute("dependencies", v.deps_to_json(parents))
+			var children = v.catalog.deps[self].direct_smallers.to_a
+			v.serialize_attribute("clients", v.deps_to_json(children))
+		end
+	end
+end
+
+# CatalogSerializer decorate the Package JSON with full catalog metadata
+#
+# See MEntity::to_full_catalog_json.
+class FullCatalogSerializer
+	super FullJsonSerializer
+
+	# Catalog used to decorate the MPackages
+	var catalog: Catalog
+
+	private fun deps_to_json(mpackages: Array[MPackage]): JsonArray do
+		var res = new JsonArray
+		for mpackage in mpackages do
+			res.add dep_to_json(mpackage)
+		end
+		return res
+	end
+
+	private fun dep_to_json(mpackage: MPackage): JsonObject do
+		var obj = new JsonObject
+		obj["name"] = mpackage.name
+		var mdoc = mpackage.mdoc_or_fallback
+		if mdoc != null then
+			obj["synopsis"] = mdoc.synopsis.write_to_string
+		end
+		return obj
 	end
 end
