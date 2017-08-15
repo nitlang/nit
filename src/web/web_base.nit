@@ -82,6 +82,46 @@ abstract class APIHandler
 		end
 		return mentity
 	end
+
+	# Paginate a json array
+	#
+	# Returns only a subset of `results` depending on the current `page` and the
+	# number of elements to return set by `limit`.
+	#
+	# Transforms the json array into an object:
+	# ~~~json
+	# {
+	#	"page": 2,
+	#	"limit": 10,
+	#	"results: [ ... ],
+	#	"max": 5,
+	#	"total": 49
+	# }
+	# ~~~
+	fun paginate(results: JsonArray, count: Int, page, limit: nullable Int): JsonObject do
+		if page == null or page <= 0 then page = 1
+		if limit == null or limit <= 0 then limit = 20
+
+		var max = count / limit
+		if max == 0 then
+			page = 1
+			max = 1
+		else if page > max then
+			page = max
+		end
+
+		var lstart = (page - 1) * limit
+		var lend = limit
+		if lstart + lend > count then lend = count - lstart
+
+		var res = new JsonObject
+		res["page"] = page
+		res["limit"] = limit
+		res["results"] = new JsonArray.from(results.subarray(lstart, lend))
+		res["max"] = max
+		res["total"] = count
+		return res
+	end
 end
 
 # A Rooter dedicated to APIHandlers.
