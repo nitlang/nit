@@ -268,6 +268,9 @@ class Catalog
 	# used to access the files and count source lines of code
 	var modelbuilder: ModelBuilder
 
+	# List of all packages by their names
+	var mpackages = new HashMap[String, MPackage]
+
 	# Packages by tag
 	var tag2proj = new MultiHashMap[String, MPackage]
 
@@ -342,6 +345,7 @@ class Catalog
 	# Compute information for a package
 	fun package_page(mpackage: MPackage)
 	do
+		mpackages[mpackage.full_name] = mpackage
 		var score = score[mpackage].to_f
 
 		var mdoc = mpackage.mdoc_or_fallback
