@@ -624,6 +624,33 @@ class MPackageStats
 	var score = 0
 end
 
+# Sort the mpackages by their score
+class CatalogScoreSorter
+	super Comparator
+
+	# Catalog used to access scores
+	var catalog: Catalog
+
+	redef type COMPARED: MPackage
+
+	redef fun compare(a, b) do
+		if not catalog.mpackages_stats.has_key(a) then return 1
+		if not catalog.mpackages_stats.has_key(b) then return -1
+		var astats = catalog.mpackages_stats[a]
+		var bstats = catalog.mpackages_stats[b]
+		return bstats.score <=> astats.score
+	end
+end
+
+# Sort tabs alphabetically
+class CatalogTagsSorter
+	super Comparator
+
+	redef type COMPARED: String
+
+	redef fun compare(a, b) do return a <=> b
+end
+
 # Execute a git command and return the result
 fun git_run(command: String...): String
 do
