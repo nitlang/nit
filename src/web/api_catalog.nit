@@ -89,23 +89,7 @@ class APICatalogPackages
 		var mpackages = config.catalog.mpackages.values.to_a
 		mpackages_sorter.sort(mpackages)
 		var response = new JsonArray.from(mpackages)
-		res.json paginate(response, page, limit)
-	end
-end
-
-class APICatalogStats
-	super APICatalogHandler
-
-	redef fun get(req, res) do
-		var obj = new JsonObject
-		obj["packages"] = config.model.mpackages.length
-		obj["maintainers"] = config.catalog.maint2proj.length
-		obj["contributors"] = config.catalog.contrib2proj.length
-		obj["modules"] = config.catalog.mmodules.sum
-		obj["classes"] = config.catalog.mclasses.sum
-		obj["methods"] = config.catalog.mmethods.sum
-		obj["loc"] = config.catalog.loc.sum
-		res.json obj
+		res.json paginate(response, response.length, page, limit)
 	end
 end
 
@@ -145,6 +129,17 @@ class APICatalogContributors
 		obj["maintainers"] = new JsonArray.from(config.catalog.maint2proj.keys)
 		obj["contributors"] = new JsonArray.from(config.catalog.contrib2proj.keys)
 		res.json obj
+	end
+end
+
+# Get the catalog statistics
+#
+# `GET /stats`: return the catalog statistics
+class APICatalogStats
+	super APICatalogHandler
+
+	redef fun get(req, res) do
+		res.json config.catalog.catalog_stats
 	end
 end
 
