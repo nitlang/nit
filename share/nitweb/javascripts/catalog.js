@@ -16,7 +16,7 @@
 
 (function() {
 	angular
-		.module('index', [])
+		.module('catalog', [])
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
