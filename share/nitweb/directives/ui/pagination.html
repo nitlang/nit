@@ -1,0 +1,14 @@
+<nav>
+	<ul class='pagination' ng-if='pagination.pagination.max > 1'>
+		<li ng-class='{disabled: pagination.pagination.page <= 1}'>
+			<a ng-click='pagination.changePage(pagination.pagination.page - 1, pagination.pagination.limit)'><span>&laquo;</span></a>
+		</li>
+		<li ng-repeat='page in pagination.pages'
+			ng-class='{disabled: pagination.pagination.page == page}'>
+			<a ng-click='pagination.changePage(page, pagination.pagination.limit)'>{{page}}</a>
+		</li>
+		<li ng-class='{disabled: pagination.pagination.page >= pagination.pagination.max}'>
+			<a ng-click='pagination.changePage(pagination.pagination.page + 1, pagination.pagination.limit)'><span>&raquo;</span></a>
+		</li>
+	</ul>
+</nav>
