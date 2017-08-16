@@ -36,6 +36,13 @@ redef class App
 		var display = new GamnitDisplay
 		display.setup
 		self.display = display
+
+		# Print the current GL configuration, for debugging
+		print "GL vendor: {glGetString(gl_VENDOR)}"
+		print "GL renderer: {glGetString(gl_RENDERER)}"
+		print "GL version: {glGetString(gl_VERSION)}"
+		print "GLSL version: {glGetString(gl_SHADING_LANGUAGE_VERSION)}"
+		print "GL extensions: {glGetString(gl_EXTENSIONS)}"
 	end
 
 	# Core of the frame logic, executed only when the display is visible
