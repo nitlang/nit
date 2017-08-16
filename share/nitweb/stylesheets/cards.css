@@ -29,9 +29,9 @@
 	display: table;
 	width: 100%;
 	background: #fff;
-	border: 1px solid #ccc;
+	border: 1px solid #eee;
 	margin-top: 10px;
-	box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+	box-shadow: -1px -1px 3px rgba(0,0,0,.06), 1px 1px 3px rgba(0,0,0,.12);
 }
 
 .card-body, .card-left, .card-right {
@@ -57,7 +57,7 @@
 }
 
 .card-list > .card:first-child {
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #ddd;
 }
 
 .card-list > .card {

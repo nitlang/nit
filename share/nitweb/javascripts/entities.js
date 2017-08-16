@@ -340,24 +340,10 @@
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '=',
-					defaultTab: '@',
-					noSynopsis: '='
+					mentity: '='
 				},
 				replace: true,
-				templateUrl: '/directives/entity/card.html',
-				link: function ($scope, element, attrs) {
-					$scope.currentTab = $scope.defaultTab ? $scope.defaultTab : 'signature';
-
-					$scope.loadEntityStars = function() {
-						Feedback.loadEntityStars($scope.mentity.full_name,
-							function(data) {
-								$scope.ratings = data;
-							}, function(message, status) {
-								$scope.error = {message: message, status: status};
-							});
-					};
-				}
+				templateUrl: '/directives/entity/card.html'
 			};
 		}])
 
