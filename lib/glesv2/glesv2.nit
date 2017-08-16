@@ -1308,3 +1308,22 @@ fun gl_TEXTURE_BINDING_CUBE_MAP: GLGetParameterName `{ return GL_TEXTURE_BINDING
 fun gl_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING; `}
 fun gl_FRAMEBUFFER_BINDING: GLGetParameterName `{ return GL_FRAMEBUFFER_BINDING; `}
 fun gl_RENDERBUFFER_BINDING: GLGetParameterName `{ return GL_RENDERBUFFER_BINDING; `}
+
+# Return a string describing the current GL configuration
+fun glGetString(name: GLEnum): String do return glGetString_native(name).to_s
+private fun glGetString_native(name: GLEnum): CString `{ return (char*)glGetString(name); `}
+
+# Company responsible for this GL implementation
+fun gl_VENDOR: GLEnum `{ return GL_VENDOR; `}
+
+# Name of the renderer, typically specific to a particular configuration of the hardware platform
+fun gl_RENDERER: GLEnum `{ return GL_RENDERER; `}
+
+# Version or release number
+fun gl_VERSION: GLEnum `{ return GL_VERSION; `}
+
+# Version or release number for the shading language of the form
+fun gl_SHADING_LANGUAGE_VERSION: GLEnum `{ return GL_SHADING_LANGUAGE_VERSION; `}
+
+# Space-separated list of supported extensions to GL
+fun gl_EXTENSIONS: GLEnum `{ return GL_EXTENSIONS; `}
