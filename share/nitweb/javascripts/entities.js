@@ -245,9 +245,8 @@
 						.success(cb)
 						.error(cbErr);
 				},
-
-				search: function(q, n, cb, cbErr) {
-					$http.get('/api/search?q=' + q + '&n=' + n)
+				search: function(q, p, n, cb, cbErr) {
+					$http.get('/api/search?q=' + q + '&p=' + p + '&n=' + n)
 						.success(cb)
 						.error(cbErr);
 				}

@@ -18,84 +18,127 @@
 	angular
 		.module('ui', [])
 
-		.controller('SearchCtrl', function(Model, $scope, $location, $document) {
+		/* Search */
 
-			$scope.query = '';
-
-			$scope.reset = function() {
-				$scope.activeItem = 0;
-				$scope.results = [];
-			}
-
-			$scope.update = function(e) {
-				if(e.keyCode == 38) {
-					$scope.selectUp();
-				} else if(e.keyCode == 40) {
-					$scope.selectDown();
-				} else if(e.keyCode == 27) {
-					$scope.selectEscape();
-				} else if(e.keyCode == 13) {
-					$scope.selectEnter();
-				}
-			}
-
-			$scope.selectUp = function() {
-				if($scope.activeItem > 0) {
-					$scope.activeItem -= 1;
-				}
-			}
-
-			$scope.selectDown = function() {
-				if($scope.activeItem < $scope.results.length - 1) {
-					$scope.activeItem += 1;
-				}
-			}
-
-			$scope.selectEnter = function(e) {
-				$location.url($scope.results[$scope.activeItem].web_url);
-				$scope.reset();
-			}
-
-			$scope.selectEscape = function() {
-				$scope.reset();
-			}
-
-			$scope.setActive = function(index) {
-				$scope.activeItem = index;
-			}
-
-			$scope.search = function() {
-				if(!$scope.query) {
-					$scope.reset();
-					return;
-				}
-				Model.search($scope.query, 10,
-					function(data) {
-						$scope.reset();
-						$scope.results = data;
-					}, function(err) {
-						$scope.reset();
-						$scope.error = err;
-					});
-			}
-
-			$scope.reset();
+		.config(function($stateProvider, $locationProvider) {
+			$stateProvider
+				.state('search', {
+					url: '/search?q&p&n',
+					controller: 'SearchCtrl',
+					controllerAs: 'vm',
+					templateUrl: 'views/search.html',
+					resolve: {
+						entities: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							var query = $stateParams.q;
+							var page = $stateParams.p ? $stateParams.p : 1;
+							var limit = $stateParams.n ? $stateParams.n : 10;
+							Model.search(query, page, limit, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					}
+				})
 		})
 
-		.directive('searchField', function($document) {
+		.controller('SearchCtrl', function($scope, $state, $stateParams, entities) {
+			var vm = this;
+			vm.entities = entities;
+			vm.query = $stateParams.q;
+
+			$scope.$on('change-page', function(e, page, limit) {
+				$state.go('search', {q: vm.query, p: page, l: limit});
+			})
+		})
+
+		.directive('uiSearchField', function($document) {
 			return {
 				restrict: 'E',
 				replace: true,
-				controller: 'SearchCtrl',
-				controllerAs: 'searchCtrl',
-				templateUrl: '/directives/search/field.html',
-				link: function ($scope, element, attrs) {
+				controller: function($scope, $state, $stateParams, $location, Model) {
+					var vm = this;
+					vm.search = function() {
+						if(!vm.query) {
+							vm.reset();
+							return;
+						}
+						Model.search(vm.query, 1, 8,
+							function(data) {
+								vm.reset();
+								vm.results = data;
+							}, function(err) {
+								vm.reset();
+								vm.error = err;
+							});
+					}
+
+					vm.reset = function() {
+						vm.activeItem = -1;
+						vm.results = {
+							results: []
+						};
+					}
+
+					vm.update = function(e) {
+						if(e.keyCode == 38) {
+							vm.selectUp();
+						} else if(e.keyCode == 40) {
+							vm.selectDown();
+						} else if(e.keyCode == 27) {
+							vm.selectEscape();
+						} else if(e.keyCode == 13) {
+							vm.selectEnter();
+						}
+					}
+
+					vm.selectUp = function() {
+						if(vm.activeItem >= 0) {
+							vm.activeItem -= 1;
+						}
+					}
+
+					vm.selectDown = function() {
+						if(vm.activeItem < vm.results.results.length) {
+							vm.activeItem += 1;
+						}
+					}
+
+					vm.selectEnter = function(e) {
+						if(vm.activeItem >= 0 && vm.activeItem < vm.results.results.length) {
+							$location.url(vm.results.results[vm.activeItem].web_url);
+						} else {
+							$state.go('search', {q: vm.query, p: 1});
+						}
+						vm.reset();
+					}
+
+					vm.selectEscape = function() {
+						vm.reset();
+					}
+
+					vm.setActive = function(index) {
+						vm.activeItem = index;
+					}
+
+					vm.reset();
+
+					$scope.$watch(function() {
+						return $stateParams.q;
+					}, function(q) {
+						if(q) vm.query = q;
+					});
+				},
+				controllerAs: 'vm',
+				templateUrl: 'directives/ui/search-field.html',
+				link: function ($scope, element, attrs, ctrl) {
 					$document.bind('click', function (event) {
 						var isChild = $(element).has(event.target).length > 0;
 						var isSelf = element[0] == event.target;
 						var isInside = isChild || isSelf;
 						if (!isInside) {
-							$scope.reset();
+							ctrl.reset();
 							$scope.$apply();
 						}
 					});
@@ -103,16 +146,7 @@
 			};
 		})
 
-		.directive('searchCard', function() {
-			return {
-				restrict: 'E',
-				scope: {
-					mentity: '='
-				},
-				replace: true,
-				templateUrl: '/directives/search/card.html'
-			};
-		})
+		/* Filters */
 
 		.directive('uiFilters', function() {
 			return {
