@@ -220,6 +220,59 @@ redef class APIEntity
 	end
 end
 
+redef class APISearch
+	super APICatalogHandler
+
+	redef fun search(query, limit) do
+		var index = config.view.index
+
+		# lookup by name prefix
+		var matches = index.find_by_name_prefix(query).uniq.
+			sort(lname_sorter, name_sorter, kind_sorter)
+		matches = matches.rerank.sort(vis_sorter, score_sorter)
+
+		# lookup by tags
+		var malus = matches.length
+		if config.catalog.tag2proj.has_key(query) then
+			for mpackage in config.catalog.tag2proj[query] do
+				matches.add new IndexMatch(mpackage, malus)
+				malus += 1
+			end
+			matches = matches.uniq.rerank.sort(vis_sorter, score_sorter)
+		end
+
+		# lookup by full_name prefix
+		malus = matches.length
+		var full_matches = new IndexMatches
+		for match in index.find_by_full_name_prefix(query).
+			sort(lfname_sorter, fname_sorter) do
+			match.score += 1
+			full_matches.add match
+		end
+		matches = matches.uniq
+
+		# lookup by similarity
+		malus = matches.length
+		var sim_matches = new IndexMatches
+		for match in index.find_by_similarity(query).sort(score_sorter, lname_sorter, name_sorter) do
+			if match.score > query.length then break
+			match.score += 1
+			sim_matches.add match
+		end
+		matches.add_all sim_matches
+		matches = matches.uniq
+		return matches.rerank.sort(vis_sorter, score_sorter).mentities
+	end
+
+	private var score_sorter = new ScoreComparator
+	private var vis_sorter = new VisibilityComparator
+	private var name_sorter = new NameComparator
+	private var lname_sorter = new NameLengthComparator
+	private var fname_sorter = new FullNameComparator
+	private var lfname_sorter = new FullNameLengthComparator
+	private var kind_sorter = new MEntityComparator
+end
+
 redef class Catalog
 
 	# Build the catalog from `mpackages`
