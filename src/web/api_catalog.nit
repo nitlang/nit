@@ -35,11 +35,6 @@ redef class APIRouter
 	redef init do
 		super
 		use("/catalog/packages/", new APICatalogPackages(config))
-
-		use("/catalog/highlighted", new APICatalogHighLighted(config))
-		use("/catalog/required", new APICatalogMostRequired(config))
-		use("/catalog/bytags", new APICatalogByTags(config))
-		use("/catalog/contributors", new APICatalogContributors(config))
 		use("/catalog/stats", new APICatalogStats(config))
 
 		use("/catalog/tags", new APICatalogTags(config))
@@ -58,30 +53,6 @@ abstract class APICatalogHandler
 	#
 	# Sorting is based on mpackage score.
 	var mpackages_sorter = new CatalogScoreSorter(config.catalog) is lazy
-
-	# List the 10 best packages from `cpt`
-	fun list_best(cpt: Counter[MPackage]): JsonArray do
-		var res = new JsonArray
-		var best = cpt.sort
-		for i in [1..10] do
-			if i > best.length then break
-			res.add best[best.length-i]
-		end
-		return res
-	end
-
-	# List packages by group.
-	fun list_by(map: MultiHashMap[Object, MPackage]): JsonObject do
-		var res = new JsonObject
-		var keys = map.keys.to_a
-		alpha_comparator.sort(keys)
-		for k in keys do
-			var projs = map[k].to_a
-			alpha_comparator.sort(projs)
-			res[k.to_s.html_escape] = new JsonArray.from(projs)
-		end
-		return res
-	end
 end
 
 # Get all the packages from the catalog using pagination
@@ -97,45 +68,6 @@ class APICatalogPackages
 		mpackages_sorter.sort(mpackages)
 		var response = new JsonArray.from(mpackages)
 		res.json paginate(response, response.length, page, limit)
-	end
-end
-
-class APICatalogHighLighted
-	super APICatalogHandler
-
-	redef fun get(req, res) do res.json list_best(config.catalog.score)
-end
-
-class APICatalogMostRequired
-	super APICatalogHandler
-
-	redef fun get(req, res) do
-		if config.catalog.deps.not_empty then
-			var reqs = new Counter[MPackage]
-			for p in config.model.mpackages do
-				reqs[p] = config.catalog.deps[p].smallers.length - 1
-			end
-			res.json list_best(reqs)
-			return
-		end
-		res.json new JsonArray
-	end
-end
-
-class APICatalogByTags
-	super APICatalogHandler
-
-	redef fun get(req, res) do res.json list_by(config.catalog.tag2proj)
-end
-
-class APICatalogContributors
-	super APICatalogHandler
-
-	redef fun get(req, res) do
-		var obj = new JsonObject
-		obj["maintainers"] = new JsonArray.from(config.catalog.maint2proj.keys)
-		obj["contributors"] = new JsonArray.from(config.catalog.contrib2proj.keys)
-		res.json obj
 	end
 end
 
