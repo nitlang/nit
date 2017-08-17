@@ -137,6 +137,24 @@ redef class HttpResponse
 		json(new APIError(status, message), status)
 	end
 
+	# Return `serializable` as a json string
+	#
+	# Uses `req` to define serialization options.
+	fun api_json(req: HttpRequest, serializable: nullable Serializable, status: nullable Int, plain, pretty: nullable Bool) do
+		json(serializable, status, plain, req.bool_arg("pretty"))
+	end
+
+	# Return the full version of `serializable` as a json string
+	#
+	# Uses `req` to define serializable options.
+	fun api_full_json(req: HttpRequest, serializable: nullable MEntity, status: nullable Int, plain, pretty: nullable Bool) do
+		if serializable == null then
+			json(null, status)
+		else
+			raw_json(serializable.serialize_to_full_json(
+				plain or else true, req.bool_arg("pretty") or else false), status)
+		end
+	end
 	# Write data as JSON and set the right content type header.
 	fun raw_json(json: nullable String, status: nullable Int) do
 		header["Content-Type"] = media_types["json"].as(not null)

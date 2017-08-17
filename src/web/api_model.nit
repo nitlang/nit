@@ -102,7 +102,7 @@ class APIList
 		var mentities = list_mentities(req)
 		mentities = sort_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
-		res.json new JsonArray.from(mentities)
+		res.api_json(req, new JsonArray.from(mentities))
 	end
 end
 
@@ -121,7 +121,7 @@ class APISearch
 		var page = req.int_arg("p")
 		var limit = req.int_arg("n")
 		var response = new JsonArray.from(search(query, limit))
-		res.json paginate(response, response.length, page, limit)
+		res.api_json(req, paginate(response, response.length, page, limit))
 	end
 
 	fun search(query: String, limit: nullable Int): Array[MEntity] do
@@ -147,7 +147,7 @@ class APIRandom
 		mentities = filter_mentities(req, mentities)
 		mentities = randomize_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
-		res.json new JsonArray.from(mentities)
+		res.api_json(req, new JsonArray.from(mentities))
 	end
 end
 
@@ -160,7 +160,7 @@ class APIEntity
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.raw_json mentity.to_full_json(config.view.mainmodule)
+		res.api_full_json(req, mentity)
 	end
 end
 
@@ -180,7 +180,7 @@ class APIEntityDoc
 			obj["documentation"] = mdoc.html_documentation.write_to_string
 			obj["location"] = mdoc.location
 		end
-		res.json obj
+		res.api_json(req, obj)
 	end
 end
 
@@ -193,7 +193,7 @@ class APIEntityInheritance
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.json mentity.hierarchy_poset(config.view)[mentity]
+		res.api_json(req, mentity.hierarchy_poset(config.view)[mentity])
 	end
 end
 
@@ -213,7 +213,7 @@ class APIEntityLinearization
 		end
 		var mentities = new JsonArray
 		for e in lin do mentities.add e
-		res.json mentities
+		res.api_json(req, mentities)
 	end
 end
 
@@ -248,7 +248,8 @@ class APIEntityDefs
 		mentities = filter_mentities(req, mentities)
 		mentities = sort_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
-		res.json new JsonArray.from(mentities)
+		res.api_json(req, new JsonArray.from(mentities))
+	end
 	end
 end
 

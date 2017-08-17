@@ -32,6 +32,6 @@ class APILight
 	redef fun post(req, res) do
 		var hl = new HtmlightVisitor
 		var hlcode = hl.highlightcode(req.body)
-		res.json(hlcode)
+		res.api_json(req, hlcode)
 	end
 end

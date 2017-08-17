@@ -67,7 +67,7 @@ class APICatalogPackages
 		var mpackages = config.catalog.mpackages.values.to_a
 		mpackages_sorter.sort(mpackages)
 		var response = new JsonArray.from(mpackages)
-		res.json paginate(response, response.length, page, limit)
+		res.api_json(req, paginate(response, response.length, page, limit))
 	end
 end
 
@@ -78,7 +78,7 @@ class APICatalogStats
 	super APICatalogHandler
 
 	redef fun get(req, res) do
-		res.json config.catalog.catalog_stats
+		res.api_json(req, config.catalog.catalog_stats)
 	end
 end
 
@@ -101,7 +101,7 @@ class APICatalogTags
 			if not config.catalog.tag2proj.has_key(tag) then continue
 			obj[tag] = config.catalog.tag2proj[tag].length
 		end
-		res.json obj
+		res.api_json(req, obj)
 	end
 end
 
@@ -130,7 +130,7 @@ class APICatalogTag
 		mpackages_sorter.sort(mpackages)
 		var response = new JsonArray.from(mpackages)
 		obj["packages"] = paginate(response, response.length, page, limit)
-		res.json obj
+		res.api_json(req, obj)
 	end
 end
 
@@ -158,7 +158,7 @@ class APICatalogPerson
 	redef fun get(req, res) do
 		var person = get_person(req, res)
 		if person == null then return
-		res.json person
+		res.api_json(req, person)
 	end
 end
 
@@ -180,7 +180,7 @@ class APICatalogMaintaining
 		end
 		mpackages_sorter.sort(array)
 		var response = new JsonArray.from(array)
-		res.json paginate(response, response.length, page, limit)
+		res.api_json(req, paginate(response, response.length, page, limit))
 	end
 end
 
@@ -202,7 +202,7 @@ class APICatalogContributing
 		end
 		mpackages_sorter.sort(array)
 		var response = new JsonArray.from(array)
-		res.json paginate(response, response.length, page, limit)
+		res.api_json(req, paginate(response, response.length, page, limit))
 	end
 end
 
@@ -213,9 +213,9 @@ redef class APIEntity
 
 		# Special case for packages (catalog view)
 		if mentity isa MPackage then
-			res.raw_json mentity.to_full_catalog_json(plain=true, config.mainmodule, config.catalog)
+			res.raw_json mentity.to_full_catalog_json(config.catalog, plain = true, pretty = req.bool_arg("pretty"))
 		else
-			res.raw_json mentity.to_full_json(config.mainmodule)
+			res.api_full_json(req, mentity)
 		end
 	end
 end
