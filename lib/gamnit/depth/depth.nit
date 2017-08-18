@@ -52,17 +52,10 @@ redef class App
 		glViewport(0, 0, display.width, display.height)
 		frame_core_dynamic_resolution_before display
 
-		# Update cameras on both our programs
-		versatile_program.use
-		versatile_program.mvp.uniform world_camera.mvp_matrix
-
-		normals_program.use
-		normals_program.mvp.uniform app.world_camera.mvp_matrix
-
 		frame_core_depth_clock.lapse
 		for actor in actors do
 			for leaf in actor.model.leaves do
-				leaf.material.draw(actor, leaf)
+				leaf.material.draw(actor, leaf, app.world_camera)
 			end
 		end
 		perfs["gamnit depth actors"].add frame_core_depth_clock.lapse

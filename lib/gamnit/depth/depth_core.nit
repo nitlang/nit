@@ -165,7 +165,7 @@ abstract class Material
 	# This method is called on many materials for many `actor` and `model` at each frame.
 	# It is expected to use a `GLProgram` and call an equivalent to `glDrawArrays`.
 	# However, it should not call `glClear` nor `GamnitDisplay::flip`.
-	fun draw(actor: Actor, model: LeafModel) do end
+	fun draw(actor: Actor, model: LeafModel, camera: Camera) do end
 end
 
 # Mesh with all geometry data

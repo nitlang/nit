@@ -45,10 +45,11 @@ class SmoothMaterial
 	# The RGB values should be premultiplied by the alpha value.
 	var specular_color: Array[Float] is writable
 
-	redef fun draw(actor, model)
+	redef fun draw(actor, model, camera)
 	do
 		var program = app.versatile_program
 		program.use
+		program.mvp.uniform camera.mvp_matrix
 
 		var mesh = model.mesh
 
@@ -74,7 +75,7 @@ class SmoothMaterial
 		program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
 
 		# Camera
-		program.camera.uniform(app.world_camera.position.x, app.world_camera.position.y, app.world_camera.position.z)
+		program.camera.uniform(camera.position.x, camera.position.y, camera.position.z)
 
 		# Colors from the material
 		var a = actor.alpha
@@ -110,7 +111,7 @@ class TexturedMaterial
 	# Bump map TODO
 	private var normals_texture: nullable Texture = null is writable
 
-	redef fun draw(actor, model)
+	redef fun draw(actor, model, camera)
 	do
 		var mesh = model.mesh
 
@@ -164,6 +165,7 @@ class TexturedMaterial
 			program.use_map_bump.uniform false
 		end
 
+		program.mvp.uniform camera.mvp_matrix
 		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 
@@ -210,7 +212,9 @@ class TexturedMaterial
 		program.normal.array(mesh.normals, 3)
 
 		program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
-		program.camera.uniform(app.world_camera.position.x, app.world_camera.position.y, app.world_camera.position.z)
+
+		# Camera
+		program.camera.uniform(camera.position.x, camera.position.y, camera.position.z)
 
 		if mesh.indices.is_empty then
 			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
@@ -227,11 +231,11 @@ end
 class NormalsMaterial
 	super Material
 
-	redef fun draw(actor, model)
+	redef fun draw(actor, model, camera)
 	do
 		var program = app.normals_program
 		program.use
-		program.mvp.uniform app.world_camera.mvp_matrix
+		program.mvp.uniform camera.mvp_matrix
 
 		var mesh = model.mesh
 
