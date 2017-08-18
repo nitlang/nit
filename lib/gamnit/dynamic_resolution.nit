@@ -136,7 +136,11 @@ redef class App
 
 		# Draw
 		glDrawArrays(gl_TRIANGLE_STRIP, 0, 4)
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
 
+		# Take down
+		glBindBuffer(gl_ARRAY_BUFFER, 0)
 		gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 
