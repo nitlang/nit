@@ -393,7 +393,7 @@ class BlinnPhongProgram
 	# Should this program use the texture `map_diffuse`?
 	var use_map_diffuse = uniforms["use_map_diffuse"].as(UniformBool) is lazy
 
-	# Diffuser texture unit
+	# Diffuse texture unit
 	var map_diffuse = uniforms["map_diffuse"].as(UniformSampler2D) is lazy
 
 	# Should this program use the texture `map_specular`?

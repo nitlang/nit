@@ -159,7 +159,7 @@ redef class App
 	end
 end
 
-# Program drawing the dynamic screen to the real screen
+# Handles to reused GL buffers and texture
 private class DynamicContext
 
 	# Real screen framebuffer
@@ -176,8 +176,6 @@ private class DynamicContext
 
 	# Buffer name for vertex data
 	var buffer_array: Int = -1
-
-	var float_per_vertex: Int is lazy do return 4 + 4 + 3
 
 	# Prepare all attributes once per resolution change
 	fun prepare_once(display: GamnitDisplay, max_dynamic_resolution_ratio: Float)
@@ -248,7 +246,7 @@ private class DynamicContext
 		# Depth
 		glBindRenderbuffer(gl_RENDERBUFFER, depthbuffer)
 		assert glIsRenderbuffer(depthbuffer)
-		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPNENT16, width, height)
+		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPONENT16, width, height)
 		glFramebufferRenderbuffer(gl_FRAMEBUFFER, gl_DEPTH_ATTACHMENT, gl_RENDERBUFFER, depthbuffer)
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error

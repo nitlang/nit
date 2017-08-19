@@ -755,7 +755,7 @@ fun gl_RGB565: GLRenderbufferFormat `{ return GL_RGB565; `}
 fun gl_RGB5_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
 
 # 16 depth bits format
-fun gl_DEPTH_COMPNENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
+fun gl_DEPTH_COMPONENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
 
 # 8 stencil bits format
 fun gl_STENCIL_INDEX8: GLRenderbufferFormat `{ return GL_STENCIL_INDEX8; `}
@@ -1206,6 +1206,7 @@ end
 fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
 fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
 fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
+fun gl_DEPTH_COMPONENT: GLPixelFormat `{ return GL_DEPTH_COMPONENT; `}
 
 # Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
