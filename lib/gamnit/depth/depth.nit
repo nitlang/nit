@@ -21,6 +21,7 @@ import more_models
 import model_dimensions
 import particles
 import selection
+import shadow
 
 redef class App
 
@@ -49,10 +50,18 @@ redef class App
 	# Draw all elements of `actors` and then call `frame_core_flat`
 	protected fun frame_core_depth(display: GamnitDisplay)
 	do
+		frame_core_depth_clock.lapse
+
+		# Compute shadows
+		if light isa LightCastingShadows then
+			frame_core_shadow_prep display
+			perfs["gamnit depth shadows"].add frame_core_depth_clock.lapse
+		end
+
 		glViewport(0, 0, display.width, display.height)
 		frame_core_dynamic_resolution_before display
+		perfs["gamnit depth dynres"].add frame_core_depth_clock.lapse
 
-		frame_core_depth_clock.lapse
 		for actor in actors do
 			for leaf in actor.model.leaves do
 				leaf.material.draw(actor, leaf, app.world_camera)
@@ -73,6 +82,9 @@ redef class App
 		perfs["gamnit depth ui_sprites"].add frame_core_depth_clock.lapse
 
 		frame_core_dynamic_resolution_after display
+
+		# Debug, show the light point of view
+		#frame_core_shadow_debug display
 	end
 
 	private var frame_core_depth_clock = new Clock

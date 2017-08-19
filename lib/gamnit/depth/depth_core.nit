@@ -203,14 +203,23 @@ class Mesh
 end
 
 # Source of light
-#
-# Instances of this class define a light source position and type.
-class Light
-
-	# TODO point light, spotlight, directional light, etc.
+abstract class Light
 
 	# Center of this light source in world coordinates
 	var position = new Point3d[Float](0.0, 1000.0, 0.0)
+end
+
+# Basic light projected from a single point
+class PointLight
+	super Light
+end
+
+# Source of light casting shadows
+abstract class LightCastingShadows
+	super Light
+
+	# View from the camera, used for shadow mapping, implemented by sub-classes
+	fun camera: Camera is abstract
 end
 
 redef class App
@@ -219,7 +228,7 @@ redef class App
 	var actors = new Array[Actor]
 
 	# Single light of the scene
-	var light = new Light
+	var light: Light = new PointLight is writable
 
 	# TODO move `actors & light` to a scene object
 	# TODO support more than 1 light

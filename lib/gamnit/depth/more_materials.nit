@@ -17,6 +17,8 @@ module more_materials
 
 intrude import depth_core
 intrude import flat
+intrude import shadow
+import more_lights
 
 redef class Material
 	# Get the default blueish material
@@ -71,9 +73,6 @@ class SmoothMaterial
 		program.use_map_specular.uniform false
 		program.tex_coord.array_enabled = false
 
-		# Lights
-		program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
-
 		# Camera
 		program.camera.uniform(camera.position.x, camera.position.y, camera.position.z)
 
@@ -86,12 +85,54 @@ class SmoothMaterial
 		program.specular_color.uniform(specular_color[0]*a, specular_color[1]*a,
 		                               specular_color[2]*a, specular_color[3]*a)
 
+		setup_lights(actor, model, camera, program)
+
 		# Execute draw
 		if mesh.indices.is_empty then
 			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
 			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
+	end
+
+	private fun setup_lights(actor: Actor, model: LeafModel, camera: Camera, program: BlinnPhongProgram)
+	do
+		# TODO use a list of lights
+
+		# Light, for Lambert and Blinn-Phong
+		var light = app.light
+		if light isa ParallelLight then
+			program.light_kind.uniform 1
+
+			# Vector parallel to the light source
+			program.light_center.uniform(
+				-light.pitch.sin * light.yaw.sin,
+				light.pitch.cos,
+				-light.yaw.cos)
+		else if light isa PointLight then
+			program.light_kind.uniform 2
+
+			# Position of the light source
+			program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
+		else
+			program.light_kind.uniform 0
+		end
+
+		# Draw projected shadows?
+		if not light isa LightCastingShadows or not app.shadow_depth_texture_available then
+			program.use_shadows.uniform false
+			return
+		else program.use_shadows.uniform true
+
+		# Light point of view
+		program.light_mvp.uniform light.camera.mvp_matrix
+
+		# Depth texture
+		glActiveTexture gl_TEXTURE4
+		glBindTexture(gl_TEXTURE_2D, app.shadow_context.depth_texture)
+		program.depth_texture.uniform 4
+		program.depth_texture_size.uniform app.shadow_resolution.to_f
+		program.depth_texture_taps.uniform 2 # TODO make configurable
 	end
 end
 
@@ -182,8 +223,6 @@ class TexturedMaterial
 				var xd = sample_used_texture.offset_right - xa
 				var ya = sample_used_texture.offset_top
 				var yd = sample_used_texture.offset_bottom - ya
-				xd *= 0.999
-				yd *= 0.999
 
 				var tex_coords = new Array[Float].with_capacity(mesh.texture_coords.length)
 				for i in [0..mesh.texture_coords.length/2[ do
@@ -211,7 +250,8 @@ class TexturedMaterial
 		program.normal.array_enabled = true
 		program.normal.array(mesh.normals, 3)
 
-		program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
+		# Light
+		setup_lights(actor, model, camera, program)
 
 		# Camera
 		program.camera.uniform(camera.position.x, camera.position.y, camera.position.z)
@@ -283,13 +323,15 @@ class BlinnPhongProgram
 		// Vertex normal
 		attribute vec3 normal;
 
-		// Model view projection matrix
+		// Camera model view projection matrix
 		uniform mat4 mvp;
 
 		uniform mat4 rotation;
 
 		// Lights config
+		uniform int light_kind;
 		uniform vec3 light_center;
+		uniform mat4 light_mvp;
 
 		// Coordinates of the camera
 		uniform vec3 camera;
@@ -299,17 +341,28 @@ class BlinnPhongProgram
 		varying vec3 v_normal;
 		varying vec4 v_to_light;
 		varying vec4 v_to_camera;
+		varying vec4 v_depth_pos;
 
 		void main()
 		{
 			vec4 pos = (vec4(coord.xyz * scale, 1.0) * rotation + translation);
 			gl_Position = pos * mvp;
+			v_depth_pos = (pos * light_mvp) * 0.5 + 0.5;
 
 			// Pass varyings to the fragment shader
 			v_tex_coord = vec2(tex_coord.x, 1.0 - tex_coord.y);
 			v_normal = normalize(vec4(normal, 0.0) * rotation).xyz;
-			v_to_light = normalize(vec4(light_center, 1.0) - pos);
 			v_to_camera = normalize(vec4(camera, 1.0) - pos);
+
+			if (light_kind == 0) {
+				// No light
+			} else if (light_kind == 1) {
+				// Parallel
+				v_to_light = normalize(vec4(light_center, 1.0));
+			} else {
+				// Point light (and others?)
+				v_to_light = normalize(vec4(light_center, 1.0) - pos);
+			}
 		}
 		""" @ glsl_vertex_shader
 
@@ -321,6 +374,7 @@ class BlinnPhongProgram
 		varying vec3 v_normal;
 		varying vec4 v_to_light;
 		varying vec4 v_to_camera;
+		varying vec4 v_depth_pos;
 
 		// Colors
 		uniform vec4 ambient_color;
@@ -347,6 +401,60 @@ class BlinnPhongProgram
 		uniform bool use_map_normal;
 		uniform sampler2D map_normal;
 
+		// Shadow
+		uniform int light_kind;
+		uniform bool use_shadows;
+		uniform sampler2D depth_texture;
+		uniform float depth_texture_size;
+		uniform int depth_texture_taps;
+
+		// Shadow effect on the diffuse colors of the fragment at offset `x, y`
+		float shadow_lookup(vec2 depth_coord, float x, float y) {
+			float tap_width = 1.0;
+			float pixel_size = tap_width/depth_texture_size;
+
+			vec2 offset = vec2(x * pixel_size * v_depth_pos.w,
+			                   y * pixel_size * v_depth_pos.w);
+			depth_coord += offset;
+
+			float depth = v_depth_pos.z/v_depth_pos.w;
+			//vec2 depth_coord = v_depth_pos.xy/v_depth_pos.w;
+			if (depth_coord.x < 0.0 || depth_coord.x > 1.0 || depth_coord.y < 0.0 || depth_coord.y > 1.0) {
+				// Out of the shadow map texture
+				//gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); // debug, red out of the light view
+				return 1.0;
+			}
+
+			float shadow_depth = texture2D(depth_texture, depth_coord).r;
+			float bias = 0.0001;
+			if (shadow_depth == 1.0) {
+				// Too far to be in depth texture
+				return 1.0;
+			} else if (shadow_depth <= depth - bias) {
+				// In a shadow
+				//gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); // debug, blue shadows
+				return 0.2; // TODO replace with a configurable ambient light
+			}
+
+			//gl_FragColor = vec4(0.0, 1.0-(shadow_depth-depth), 0.0, 1.0); // debug, green lit surfaces
+			return 1.0;
+		}
+
+		// Shadow effect on the diffuse colors of the fragment
+		float shadow() {
+			if (!use_shadows) return 1.0;
+
+			vec2 depth_coord = v_depth_pos.xy/v_depth_pos.w;
+
+			float taps = float(depth_texture_taps);
+			float tap_step = 2.00/taps;
+			float sum = 0.0;
+			for (float x = -1.0; x <= 0.99; x += tap_step)
+				for (float y = -1.0; y <= 0.99; y += tap_step)
+					sum += shadow_lookup(depth_coord, x, y);
+			return sum / taps / taps;
+		}
+
 		void main()
 		{
 			// Normal
@@ -360,28 +468,44 @@ class BlinnPhongProgram
 			vec4 ambient = ambient_color;
 			if (use_map_ambient) ambient *= texture2D(map_ambient, v_tex_coord);
 
-			// Diffuse Lambert light
-			vec3 to_light = v_to_light.xyz;
-			float lambert = clamp(dot(normal, to_light), 0.0, 1.0);
+			if (light_kind == 0) {
+				// No light, show diffuse and ambient
 
-			vec4 diffuse = lambert * diffuse_color;
-			if (use_map_diffuse) diffuse *= texture2D(map_diffuse, v_tex_coord);
+				vec4 diffuse = diffuse_color;
+				if (use_map_diffuse) diffuse *= texture2D(map_diffuse, v_tex_coord);
 
-			// Specular Phong light
-			float s = 0.0;
-			if (lambert > 0.0) {
-				vec3 l = reflect(-to_light, normal);
-				s = clamp(dot(l, v_to_camera.xyz), 0.0, 1.0);
-				s = pow(s, 8.0); // TODO make this `shininess` a material attribute
+				gl_FragColor = ambient + diffuse;
+			} else {
+				// Parallel light or point light (1 or 2)
+
+				// Diffuse Lambert light
+				vec3 to_light = v_to_light.xyz;
+				float lambert = clamp(dot(normal, to_light), 0.0, 1.0);
+
+				vec4 diffuse = lambert * diffuse_color;
+				if (use_map_diffuse) diffuse *= texture2D(map_diffuse, v_tex_coord);
+
+				// Specular Phong light
+				float s = 0.0;
+				if (lambert > 0.0) {
+					// In light
+					vec3 l = reflect(-to_light, normal);
+					s = clamp(dot(l, v_to_camera.xyz), 0.0, 1.0);
+					s = pow(s, 8.0); // TODO make this `shininess` a material attribute
+
+					// Shadows
+					diffuse *= shadow();
+				}
+
+				vec4 specular = s * specular_color;
+				if (use_map_specular) specular *= texture2D(map_specular, v_tex_coord).x;
+
+				gl_FragColor = ambient + diffuse + specular;
 			}
 
-			vec4 specular = s * specular_color;
-			if (use_map_specular) specular *= texture2D(map_specular, v_tex_coord).x;
-
-			gl_FragColor = ambient + diffuse + specular;
 			if (gl_FragColor.a < 0.01) discard;
 
-			//gl_FragColor = vec4(normalize(normal).rgb, 1.0); // Debug
+			//gl_FragColor = vec4(normalize(normal).rgb, 1.0); // Debug normals
 		}
 		""" @ glsl_fragment_shader
 
@@ -427,8 +551,26 @@ class BlinnPhongProgram
 	# Specular color
 	var specular_color = uniforms["specular_color"].as(UniformVec4) is lazy
 
-	# Center position of the light
+	# Kind of lights: 0 -> no light, 1 -> parallel, 2 -> point
+	var light_kind = uniforms["light_kind"].as(UniformInt) is lazy
+
+	# Center position of the light *or* vector to parallel light source
 	var light_center = uniforms["light_center"].as(UniformVec3) is lazy
+
+	# Light model view projection matrix
+	var light_mvp = uniforms["light_mvp"].as(UniformMat4) is lazy
+
+	# Should shadow be drawn? Would use `depth_texture` and `light_mvp`.
+	var use_shadows = uniforms["use_shadows"].as(UniformBool) is lazy
+
+	# Diffuse texture unit
+	var depth_texture = uniforms["depth_texture"].as(UniformSampler2D) is lazy
+
+	# Size, in pixels, of `depth_texture`
+	var depth_texture_size = uniforms["depth_texture_size"].as(UniformFloat) is lazy
+
+	# Times to tap the `depth_texture`, square root (set to 3 for a total of 9 taps)
+	var depth_texture_taps = uniforms["depth_texture_taps"].as(UniformInt) is lazy
 
 	# Camera position
 	var camera = uniforms["camera"].as(UniformVec3) is lazy
@@ -442,7 +584,7 @@ class BlinnPhongProgram
 	# Scaling per vertex
 	var scale = uniforms["scale"].as(UniformFloat) is lazy
 
-	# Model view projection matrix
+	# Camera model view projection matrix
 	var mvp = uniforms["mvp"].as(UniformMat4) is lazy
 end
 
