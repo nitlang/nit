@@ -32,6 +32,9 @@ redef class App
 		world_camera.reset_height(10.0)
 		world_camera.near = 0.1
 
+		# Cull the invisible triangles in the back of the geometries
+		glCullFace gl_BACK
+
 		# Prepare programs
 		var programs = [versatile_program, normals_program, explosion_program, smoke_program, static_program, selection_program: GamnitProgram]
 		for program in programs do
