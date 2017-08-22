@@ -50,7 +50,7 @@ class ClassCompound
 		class_def.name = name
 	end
 
-	redef fun location=(location: nullable Location) do
+	redef fun location=(location) do
 		super
 		class_def.location = location
 	end

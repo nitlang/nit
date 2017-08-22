@@ -46,7 +46,7 @@ class FileCompound
 		super
 	end
 
-	redef fun location=(location: nullable Location) do
+	redef fun location=(location) do
 		super
 		for m in inner_namespaces do m.location = location
 	end

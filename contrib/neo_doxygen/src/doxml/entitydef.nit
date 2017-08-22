@@ -57,8 +57,8 @@ abstract class EntityDefListener
 	end
 
 	# Parse the attributes of a `location` element.
-	protected fun get_location(atts: Attributes): Location do
-		var location = new Location
+	protected fun get_location(atts: Attributes): neo_doxygen::Location do
+		var location = new neo_doxygen::Location
 
 		location.path = atts.value_ns("", "bodyfile") or else atts.value_ns("", "file")
 		# Doxygen may indicate `[generated]`.

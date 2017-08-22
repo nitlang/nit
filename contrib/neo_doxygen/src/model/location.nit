@@ -15,7 +15,6 @@
 # This module is used to model locations in source files.
 module location
 
-import json::static
 import json
 
 # A location inside a source file.
