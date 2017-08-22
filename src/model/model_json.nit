@@ -96,7 +96,7 @@ redef class MDoc
 	end
 end
 
-redef class Location
+redef class nitc::Location
 	serialize
 
 	redef fun core_serialize_to(v) do

@@ -94,7 +94,7 @@ class TestModelSerialization
 	end
 end
 
-redef class Location
+redef class nitc::Location
 	serialize
 
 	# Avoid diff on location absolute path
