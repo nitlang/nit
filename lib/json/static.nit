@@ -116,11 +116,11 @@ redef class Text
 	#     assert str isa String
 	#     assert str == "foo, bar, baz"
 	#
-	# Example of a syntaxic error:
+	# Example of a syntax error:
 	#
-	#     var bad = "\{foo: \"bar\"\}".parse_json
-	#     assert bad isa JsonParseError
-	#     assert bad.position.col_start == 2
+	#     var error = "\{foo: \"bar\"\}".parse_json
+	#     assert error isa JsonParseError
+	#     assert error.to_s == "Bad key format Error: bad JSON entity"
 	fun parse_json: nullable Serializable do return (new JSONStringParser(self.to_s)).parse_entity
 end
 
