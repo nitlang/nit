@@ -24,6 +24,7 @@ import c_tools
 private import annotation
 import mixin
 import counter
+private import explain_assert_api
 
 # Add compiling options
 redef class ToolContext
@@ -3606,6 +3607,9 @@ redef class AAssertExpr
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (unlikely(!{cond})) \{")
 		v.stmt(self.n_else)
+
+		explain_assert v
+
 		var nid = self.n_id
 		if nid != null then
 			v.add_abort("Assert '{nid.text}' failed")
@@ -3613,6 +3617,24 @@ redef class AAssertExpr
 			v.add_abort("Assert failed")
 		end
 		v.add("\}")
+	end
+
+	# Explain assert if it fails
+	private fun explain_assert(v: AbstractCompilerVisitor)
+	do
+		var explain_assert_str = explain_assert_str
+		if explain_assert_str == null then return
+
+		var nas = v.compiler.modelbuilder.model.get_mclasses_by_name("NativeArray")
+		if nas == null then return
+
+		var expr = explain_assert_str.expr(v)
+		if expr == null then return
+
+		var cstr = v.send(v.get_property("to_cstring", expr.mtype), [expr])
+		if cstr == null then return
+
+		v.add "PRINT_ERROR(\"Runtime assert: %s\\n\", {cstr});"
 	end
 end
 

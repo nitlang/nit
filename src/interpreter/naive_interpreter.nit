@@ -23,6 +23,7 @@ private import parser::tables
 import mixin
 import primitive_types
 private import model::serialize_model
+private import frontend::explain_assert_api
 
 redef class ToolContext
 	# --discover-call-trace
@@ -1875,6 +1876,22 @@ redef class AAssertExpr
 		if not cond.is_true then
 			v.stmt(self.n_else)
 			if v.is_escaping then return
+
+			# Explain assert if it fails
+			var explain_assert_str = explain_assert_str
+			if explain_assert_str != null then
+				var i = v.expr(explain_assert_str)
+				if i isa MutableInstance then
+					var res = v.send(v.force_get_primitive_method("to_cstring", i.mtype), [i])
+					if res != null then
+						var val = res.val
+						if val != null then
+							print_error "Runtime assert: {val.to_s}"
+						end
+					end
+				end
+			end
+
 			var nid = self.n_id
 			if nid != null then
 				fatal(v, "Assert '{nid.text}' failed")
