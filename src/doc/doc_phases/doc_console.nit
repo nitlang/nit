@@ -88,12 +88,26 @@ class Nitx
 		prompt
 	end
 
+	# Parser used to process doc commands
+	var parser: DocCommandParser is lazy do
+		var parser = new DocCommandParser
+		parser.allowed_commands = ["doc", "comment", "list", "param", "return",
+			"new", "call", "code"]
+		return parser
+	end
+
 	# Processes the query string and performs it.
 	fun do_query(str: String) do
-		var query = new DocCommand(str)
-		if query isa NitxCommand then
-			query.execute(self)
+		if str == ":q" then
+			exit 0
+		else if str == ":h" then
+			help
 			return
+		end
+		var query = parser.parse(str)
+		if query == null then
+			query = new CommentCommand(str)
+			query.arg = str
 		end
 		var res = query.perform(self, doc)
 		var suggest = null
@@ -105,27 +119,14 @@ class Nitx
 	end
 end
 
-redef interface DocCommand
-
-	redef new(query_string) do
-		if query_string == ":q" then
-			return new NitxQuit
-		else if query_string == ":h" then
-			return new NitxHelp
-		end
-		var cmd = super(query_string)
-		if cmd isa UnknownCommand then
-			return new CommentCommand("comment: {query_string}")
-		end
-		return cmd
-	end
+redef class DocCommand
 
 	# Looks up the `doc` model and returns possible matches.
 	fun perform(nitx: Nitx, doc: DocModel): Array[NitxMatch] is abstract
 
 	# Looks up the `doc` model and returns possible suggestions.
 	fun suggest(nitx: Nitx, doc: DocModel): nullable Array[MEntity] do
-		return find_suggestions(doc, args.first)
+		return find_suggestions(doc, arg)
 	end
 
 	# Pretty prints the results for the console.
@@ -184,7 +185,7 @@ class MEntityMatch
 end
 
 redef class CommentCommand
-	redef fun perform(nitx, doc) do return find_mentities(doc, args.first)
+	redef fun perform(nitx, doc) do return find_mentities(doc, arg)
 
 	redef fun make_results(nitx, results, suggest) do
 		var len = results.length
@@ -207,7 +208,7 @@ end
 redef class ParamCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
-		var mtype_name = args.first
+		var mtype_name = arg
 		for mproperty in doc.mproperties do
 			if not mproperty isa MMethod then continue
 			var msignature = mproperty.intro.msignature
@@ -227,7 +228,7 @@ end
 redef class ReturnCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
-		var mtype_name = args.first
+		var mtype_name = arg
 		for mproperty in doc.mproperties do
 			if not mproperty isa MMethod then continue
 			var msignature = mproperty.intro.msignature
@@ -246,7 +247,7 @@ end
 redef class NewCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
-		var mtype_name = args.first
+		var mtype_name = arg
 		for mpropdef in doc.mpropdefs do
 			var visitor = new TypeInitVisitor(mtype_name)
 			var npropdef = nitx.ctx.modelbuilder.mpropdef2node(mpropdef)
@@ -264,7 +265,7 @@ end
 redef class CallCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
-		var mprop_name = args.first
+		var mprop_name = arg
 		for mpropdef in doc.mpropdefs do
 			var visitor = new MPropertyCallVisitor
 			var npropdef = nitx.ctx.modelbuilder.mpropdef2node(mpropdef)
@@ -283,7 +284,7 @@ end
 redef class ArticleCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
-		var name = args.first
+		var name = arg
 		for page in doc.pages.values do
 			if name == "*" then # FIXME dev only
 				res.add new PageMatch(self, page)
@@ -402,7 +403,7 @@ redef class CodeCommand
 	# FIXME refactor this!
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
-		var name = args.first
+		var name = arg
 		# if name is an existing sourcefile, opens it
 		if name.file_exists then
 			var fr = new FileReader.open(name)
@@ -440,32 +441,6 @@ class CodeMatch
 	var content: String
 
 	redef fun make_list_item do return "* {location}"
-end
-
-
-# A query that contains a nitx command.
-#
-# These commands are prefixed with `:` and are used to control the execution of
-# `nitx` like displaying the help or quiting.
-interface NitxCommand
-	super DocCommand
-
-	# Executes the command.
-	fun execute(nitx: Nitx) is abstract
-end
-
-# Exits nitx.
-class NitxQuit
-	super NitxCommand
-
-	redef fun execute(nitx) do exit 0
-end
-
-# Displays the help message.
-class NitxHelp
-	super NitxCommand
-
-	redef fun execute(nitx) do nitx.help
 end
 
 ## exploration
