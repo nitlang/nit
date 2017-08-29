@@ -28,7 +28,7 @@ redef class MDoc
 	var comment: String is lazy do
 		var lines = content.to_a
 		if not lines.is_empty then lines.shift
-		return content.join("\n")
+		return lines.join("\n")
 	end
 
 	# Full comment HTML escaped.
