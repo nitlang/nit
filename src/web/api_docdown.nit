@@ -231,25 +231,6 @@ redef class DocCommand
 	end
 end
 
-redef class ArticleCommand
-	redef fun render(v, token, model) do
-		var name = arg
-		var mentity = v.find_mentity(model, name)
-		if mentity == null then return
-		var mdoc = mentity.mdoc_or_fallback
-		if mdoc == null then
-			v.write_warning("no MDoc for mentity `{name}`")
-			return
-		end
-		v.add "<h3>"
-		v.write_mentity_link(mentity)
-		v.add " - "
-		v.emit_text mdoc.synopsis
-		v.add "</h3>"
-		v.add v.processor.process(mdoc.comment).write_to_string
-	end
-end
-
 redef class CommentCommand
 	redef fun render(v, token, model) do
 		var name = arg
@@ -260,7 +241,20 @@ redef class CommentCommand
 			v.write_warning("no MDoc for mentity `{name}`")
 			return
 		end
-		v.add v.processor.process(mdoc.comment).write_to_string
+		v.add "<h3>"
+		if not opts.has_key("no-link") then
+			v.write_mentity_link(mentity)
+		end
+		if not opts.has_key("no-link") and not opts.has_key("no-synopsis") then
+			v.add " - "
+		end
+		if not opts.has_key("no-synopsis") then
+			v.emit_text mdoc.html_synopsis.write_to_string
+		end
+		v.add "</h3>"
+		if not opts.has_key("no-comment") then
+			v.add v.processor.process(mdoc.comment).write_to_string
+		end
 	end
 end
 

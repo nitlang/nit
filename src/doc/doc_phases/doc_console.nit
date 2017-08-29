@@ -280,38 +280,6 @@ redef class CallCommand
 	end
 end
 
-# A query to search a Nitdoc documentation page by its name.
-redef class ArticleCommand
-	redef fun perform(nitx, doc) do
-		var res = new Array[NitxMatch]
-		var name = arg
-		for page in doc.pages.values do
-			if name == "*" then # FIXME dev only
-				res.add new PageMatch(self, page)
-			else if page.title == name then
-				res.add new PageMatch(self, page)
-			else if page isa MEntityPage and page.mentity.cs_namespace == name then
-				res.add new PageMatch(self, page)
-			end
-		end
-		return res
-	end
-
-	redef fun make_results(nitx, results, suggest) do
-		var len = results.length
-		# FIXME how to render the pager for one worded namespaces like "core"?
-		if len == 1 then
-			var page = results.first.as(PageMatch).page
-			var pager = new Pager
-			pager.add page.write_to_string
-			pager.render
-			return page
-		else
-			return super
-		end
-	end
-end
-
 # A match between a `DocPage` and a `MEntity`.
 class PageMatch
 	super NitxMatch

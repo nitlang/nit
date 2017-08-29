@@ -64,7 +64,7 @@ class TestDocCommandParser
 
 	fun test_no_opts is test do
 		var command = parser.parse("doc: core::Array")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert parser.errors.is_empty
@@ -72,7 +72,7 @@ class TestDocCommandParser
 
 	fun test_opts_empty is test do
 		var command = parser.parse("doc: core::Array | ")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert parser.errors.is_empty
@@ -80,7 +80,7 @@ class TestDocCommandParser
 
 	fun test_1_opt is test do
 		var command = parser.parse("doc: core::Array | opt1: val1 ")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert command.opts.length == 1
@@ -90,7 +90,7 @@ class TestDocCommandParser
 
 	fun test_2_opts is test do
 		var command = parser.parse("doc: core::Array | opt1: val1 , opt2: val2,  ")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert command.opts.length == 2
@@ -101,7 +101,7 @@ class TestDocCommandParser
 
 	fun test_empty_opt_name is test do
 		var command = parser.parse("doc: core::Array | opt1: val1  , :")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert command.opts.length == 1
@@ -111,7 +111,7 @@ class TestDocCommandParser
 
 	fun test_empty_opt_value is test do
 		var command = parser.parse("doc: core::Array | opt1:  , opt2: val2,  ")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert command.opts.length == 2
@@ -122,7 +122,7 @@ class TestDocCommandParser
 
 	fun test_empty_opt_value2 is test do
 		var command = parser.parse("doc: core::Array | opt1")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert command.opts.length == 1
@@ -132,7 +132,7 @@ class TestDocCommandParser
 
 	fun test_empty_opt_value3 is test do
 		var command = parser.parse("doc: core::Array | opt1, opt2: val2")
-		assert command isa ArticleCommand
+		assert command isa CommentCommand
 		assert command.name == "doc"
 		assert command.arg == "core::Array"
 		assert command.opts.length == 2

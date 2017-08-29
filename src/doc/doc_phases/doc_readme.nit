@@ -244,7 +244,7 @@ redef class DocCommand
 	fun render(v: ReadmeMdEmitter, token: TokenWikiLink) is abstract
 end
 
-redef class ArticleCommand
+redef class CommentCommand
 	redef fun render(v, token) do
 		var string = args.first
 		var res = v.find_mentities(string)

@@ -23,8 +23,8 @@ module doc_commands
 class DocCommandParser
 
 	# List of allowed command names for this parser
-	var allowed_commands: Array[String] = [ "doc", "comment", "list", "param",
-		"return", "new", "call", "code", "graph"] is writable
+	var allowed_commands: Array[String] = [ "doc", "list", "param", "return",
+		"new", "call", "code", "graph"] is writable
 
 	# Parse `string` as a DocCommand
 	#
@@ -33,7 +33,7 @@ class DocCommandParser
 	# ~~~
 	# var parser = new DocCommandParser
 	#
-	# var command = parser.parse("comment: core::Array")
+	# var command = parser.parse("doc: core::Array")
 	# assert command isa CommentCommand
 	# assert command.arg == "core::Array"
 	#
@@ -102,8 +102,7 @@ class DocCommandParser
 	#
 	# You must redefine this method to add new custom commands.
 	fun new_command(name, string: String): nullable DocCommand do
-		if name == "doc" then return new ArticleCommand(string)
-		if name == "comment" then return new CommentCommand(string)
+		if name == "doc" then return new CommentCommand(string)
 		if name == "list" then return new ListCommand(string)
 		if name == "param" then return new ParamCommand(string)
 		if name == "return" then return new ReturnCommand(string)
@@ -208,19 +207,10 @@ end
 # A `DocCommand` that includes the documentation article of a `MEntity`.
 #
 # Syntax: `doc: MEntity::name`.
-class ArticleCommand
-	super DocCommand
-
-	redef var name = "doc"
-end
-
-# A `DocCommand` that includes the MDoc of a `MEntity`.
-#
-# Syntax: `comment: MEntity::name`.
 class CommentCommand
 	super DocCommand
 
-	redef var name = "comment"
+	redef var name = "doc"
 end
 
 # A `DocCommand` that includes a list of something.
