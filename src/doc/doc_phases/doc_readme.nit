@@ -188,6 +188,9 @@ end
 class ReadmeDecorator
 	super MdDecorator
 
+	# Parser used to process doc commands
+	var parser = new DocCommandParser
+
 	redef type EMITTER: ReadmeMdEmitter
 
 	redef fun add_headline(v, block) do
@@ -206,8 +209,8 @@ class ReadmeDecorator
 
 	redef fun add_wikilink(v, token) do
 		var link = token.link.as(not null).to_s
-		var cmd = new DocCommand(link)
-		if cmd isa UnknownCommand then
+		var cmd = parser.parse(link)
+		if cmd == null then
 			# search MEntities by name
 			var res = v.find_mentities(link.to_s)
 			# no match, print warning and display wikilink as is
@@ -235,7 +238,7 @@ class ReadmeDecorator
 	end
 end
 
-redef interface DocCommand
+redef class DocCommand
 
 	# Render the content of the doc command.
 	fun render(v: ReadmeMdEmitter, token: TokenWikiLink) is abstract
