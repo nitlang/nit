@@ -43,3 +43,6 @@ test_rubix_visual
 test_rubix_cube
 test_csv
 repeating_key_xor_solve
+test_explain_assert
+base_notnull_lit_alt2
+assertions
