@@ -235,7 +235,7 @@ class MongoClient
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
 	# db.collection("test").insert(new JsonObject)
-	# assert client.database_names.has("test")
+	# assert client.database_names.has(db_name)
 	# ~~~
 	fun database_names: Array[String] do
 		var res = new Array[String]
