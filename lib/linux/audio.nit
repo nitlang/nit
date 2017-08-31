@@ -56,7 +56,13 @@ redef class Sound
 		self.native = native
 	end
 
-	redef fun play
+	redef fun play do play_channel(-1, 0)
+
+	# Play this sound on `channel` (or any channel if -1) and return the channel
+	#
+	# Repeat the sound `loops` times, `loops == 0` plays it once,
+	# `loops == 1` plays it twice and `loops == -1` loops infinitely.
+	fun play_channel(channel, loops: Int): Int
 	do
 		var native = native
 
@@ -70,12 +76,12 @@ redef class Sound
 		end
 
 		# If there's an error, silently skip
-		if error != null then return
+		if error != null then return -1
 		native = self.native
 		assert native != null
 
 		# Play on any available channel
-		mix.play_channel(-1, native, 0)
+		return mix.play_channel(channel, native, loops)
 	end
 end
 

@@ -91,17 +91,71 @@ class Mix
 	# Play `chunk` on `channel`
 	#
 	# If `channel == -1` the first unreserved channel is used.
-	# The sound is repeated `loops` times, `loops == 0` plays it once and
-	# `loops == -1` loops infinitely.
-	fun play_channel(channel: Int, chunk: MixChunk, loops: Int): Bool `{
-		return Mix_PlayChannel(channel, chunk, loops) == 0;
+	# The sound is repeated `loops` times, `loops == 0` plays it once,
+	# `loops == 1` plays it twice and `loops == -1` loops infinitely.
+	#
+	# Returns the channel used, or `-1` on error.
+	fun play_channel(channel: Int, chunk: MixChunk, loops: Int): Int `{
+		return Mix_PlayChannel(channel, chunk, loops);
 	`}
 
-	# Set the chunk volume out of `mix.max_volume` and return the previous value
+	# Play `chunk` on `channel`
 	#
-	# Use `volume = -1` to only read the previous value.
+	# If `channel == -1` the first unreserved channel is used.
+	# The sound is repeated `loops` times, `loops == 0` plays it once,
+	# `loops == 1` plays it twice and `loops == -1` loops infinitely.
+	# If `ticks != -1`, the sample plays for at most `ticks` milliseconds.
+	fun play_channel_timed(channel: Int, chunk: MixChunk, loops, ticks: Int): Int `{
+		return Mix_PlayChannelTimed(channel, chunk, loops, ticks);
+	`}
+
+	# Halt/stop `channel` playback
+	#
+	# If `channel == -1`, halt all channels.
+	fun halt_channel(channel: Int) `{
+		Mix_HaltChannel(channel);
+	`}
+
+	# Halt `channel` in `ticks` milliseconds and return the number of channels set to expire
+	#
+	# If `channel == -1`, halt all channels.
+	fun expire_channel(channel, ticks: Int): Int `{
+		return Mix_ExpireChannel(channel, ticks);
+	`}
+
+	# Reserve `num` channels from being used by `play_channel(-1...)`
+	#
+	# Returns the number of of channels reserved.
+	fun reserve_channels(num: Int): Int `{
+		return Mix_ReserveChannels(num);
+	`}
+
+	# Set the `volume` of `channel`, out of `mix.max_volume`
+	#
+	# If `channel == -1`, set the volume of all channels.
+	#
+	# Returns the current volume of the channel, or if `channel == -1` the average volume.
+	fun volume(channel, volume: Int): Int `{
+		return Mix_Volume(channel, volume);
+	`}
+
+	# Set the `volume` for `chunk`, out of `mix.max_volume`
+	#
+	# If `volume == -1`, only read the previous value.
+	#
+	# Returns the previous volume value.
 	fun volume_chunk(chunk: MixChunk, volume: Int) `{
 		Mix_VolumeChunk(chunk, volume);
+	`}
+
+	# Pause `channel`, or all playing channels if -1
+	fun pause(channel: Int) `{
+		Mix_Pause(channel);
+	`}
+
+	# Unpause `channel`, or all paused channels if -1
+	fun resume(channel: Int) `{
+		Mix_Resume(channel);
 	`}
 
 	# ---
