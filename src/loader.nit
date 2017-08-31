@@ -135,6 +135,7 @@ redef class ModelBuilder
 				alpha_comparator.sort(fs)
 				# Try each entry as a group or a module
 				for f in fs do
+					if f.first == '.' then continue
 					var af = a/f
 					mgroup = identify_group(af)
 					if mgroup != null then
@@ -636,6 +637,7 @@ redef class ModelBuilder
 		var files = p.files
 		alpha_comparator.sort(files)
 		for f in files do
+			if f.first == '.' then continue
 			var fp = p/f
 			var g = identify_group(fp)
 			# Recursively scan for groups of the same package
