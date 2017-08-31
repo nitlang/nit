@@ -213,15 +213,15 @@ class MarkdownProcessor
 		if not line.is_empty and line.leading < 4 and line.value[line.leading] == '[' then
 			pos = line.leading + 1
 			pos = md.read_until(id, pos, ']')
-			if not id.is_empty and pos + 2 < line.value.length then
+			if not id.is_empty and pos >= 0 and pos + 2 < line.value.length then
 				if line.value[pos + 1] == ':' then
 					pos += 2
 					pos = md.skip_spaces(pos)
-					if line.value[pos] == '<' then
+					if pos >= 0 and line.value[pos] == '<' then
 						pos += 1
 						pos = md.read_until(link, pos, '>')
 						pos += 1
-					else
+					else if pos >= 0 then
 						pos = md.read_until(link, pos, ' ', '\n')
 					end
 					if not link.is_empty then
