@@ -40,7 +40,7 @@ abstract class EntityDefListener
 	# The current entity.
 	protected fun entity: Entity is abstract
 
-	redef fun start_dox_element(local_name: String, atts: Attributes) do
+	redef fun start_dox_element(local_name, atts) do
 		if ["briefdescription", "detaileddescription", "inbodydescription"].has(local_name) then
 			doc.doc = entity.doc
 			doc.listen_until(dox_uri, local_name)
@@ -57,8 +57,8 @@ abstract class EntityDefListener
 	end
 
 	# Parse the attributes of a `location` element.
-	protected fun get_location(atts: Attributes): Location do
-		var location = new Location
+	protected fun get_location(atts: Attributes): neo_doxygen::Location do
+		var location = new neo_doxygen::Location
 
 		location.path = atts.value_ns("", "bodyfile") or else atts.value_ns("", "file")
 		# Doxygen may indicate `[generated]`.
@@ -100,7 +100,7 @@ abstract class ParamListener[T: Parameter]
 	# Create a new parameter.
 	protected fun create_parameter: T is abstract
 
-	redef fun start_dox_element(local_name: String, atts: Attributes) do
+	redef fun start_dox_element(local_name, atts) do
 		if "declname" == local_name then
 			text.listen_until(dox_uri, local_name)
 		else if "type" == local_name then
@@ -110,7 +110,7 @@ abstract class ParamListener[T: Parameter]
 		end
 	end
 
-	redef fun end_dox_element(local_name: String) do
+	redef fun end_dox_element(local_name) do
 		if "declname" == local_name then
 			parameter.name = text.to_s
 		else if "type" == local_name then

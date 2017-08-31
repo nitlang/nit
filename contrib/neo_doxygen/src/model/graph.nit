@@ -167,13 +167,13 @@ abstract class Entity
 	fun ns_separator: String do return "::"
 
 	# Set the location of the entity in the source code.
-	fun location=(location: nullable Location) do
+	fun location=(location: nullable neo_doxygen::Location) do
 		self["location"] = location
 	end
 
 	# Get the location of the entity in the source code.
-	fun location: nullable Location do
-		return self["location"].as(nullable Location)
+	fun location: nullable neo_doxygen::Location do
+		return self["location"].as(nullable neo_doxygen::Location)
 	end
 
 	# Put the entity in the graph.
@@ -202,12 +202,12 @@ abstract class CodeBlock
 	super Entity
 
 	init do
-		self["location"] = new Location
+		self["location"] = new neo_doxygen::Location
 	end
 
-	redef fun location=(location: nullable Location) do
+	redef fun location=(location) do
 		if location == null then
-			super(new Location)
+			super(new neo_doxygen::Location)
 		else
 			super
 		end

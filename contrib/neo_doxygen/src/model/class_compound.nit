@@ -44,13 +44,13 @@ class ClassCompound
 	# Return the number of type parameters.
 	fun arity: Int do return class_type.arity
 
-	redef fun name=(name: String) do
+	redef fun name=(name) do
 		super
 		class_type.name = name
 		class_def.name = name
 	end
 
-	redef fun location=(location: nullable Location) do
+	redef fun location=(location) do
 		super
 		class_def.location = location
 	end
@@ -60,11 +60,11 @@ class ClassCompound
 		class_def["mdoc"] = doc
 	end
 
-	redef fun declare_super(id: String, full_name: String, prot: String, virt: String) do
+	redef fun declare_super(id, full_name, prot, virt) do
 		class_def.declare_super(id, full_name, prot, virt)
 	end
 
-	redef fun declare_member(member: Member) do
+	redef fun declare_member(member) do
 		class_def.declare_member(member)
 	end
 

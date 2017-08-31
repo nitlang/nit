@@ -18,7 +18,6 @@ module serialization_read
 import ::serialization::caching
 private import ::serialization::engine_tools
 private import static
-private import string_parser
 import poset
 
 # Deserializer from a Json string.
