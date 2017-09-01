@@ -463,6 +463,8 @@ redef class App
 
 	redef fun on_stop
 	do
+		super
+
 		# Clean up
 		simple_2d_program.delete
 
