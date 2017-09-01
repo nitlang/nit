@@ -965,7 +965,7 @@ class SpriteSet
 		for sprite in sprites_to_remap do
 
 			# Skip if it was removed from this set after being modified
-			if sprite.context != self then continue
+			if sprite.sprite_set != self then continue
 
 			unmap_sprite sprite
 			map_sprite sprite
@@ -1005,6 +1005,7 @@ class SpriteSet
 		for c in contexts_items do c.destroy
 		contexts_map.clear
 		contexts_items.clear
+		sprites_to_remap.clear
 	end
 end
 
