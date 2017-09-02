@@ -328,23 +328,34 @@ class Bytes
 		return new FlatString.full(ns, elen, 0, elen)
 	end
 
-	# Interprets `self` as a big-endian positive integer.
+	# Interprets `self` as a big-endian integer (unsigned by default)
 	#
 	# ~~~
 	# var b = "0102".hexdigest_to_bytes
 	# assert b.to_i == 258
-	# ~~~
 	#
-	# Nul bytes on the left are trimmed.
-	# 0 is returned for an empty Bytes object.
-	#
-	# ~~~
-	# assert "01".hexdigest_to_bytes.to_i == 1
-	# assert "0001".hexdigest_to_bytes.to_i == 1
-	#
+	# assert   "01".hexdigest_to_bytes.to_i == 1
+	# assert   "FF".hexdigest_to_bytes.to_i == 255
 	# assert "0000".hexdigest_to_bytes.to_i == 0
-	# assert "00".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# If `self.is_empty`, 0 is returned.
+	#
+	# ~~~
 	# assert "".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# If `signed == true`, the bytes are read as a signed integer.
+	# As usual, the sign bit is the left most bit, no matter the
+	# `length` of `self`.
+	#
+	# ~~~
+	# assert     "01".hexdigest_to_bytes.to_i(true) ==      1
+	# assert     "FF".hexdigest_to_bytes.to_i(true) ==     -1
+	# assert   "00FF".hexdigest_to_bytes.to_i(true) ==    255
+	# assert     "E0".hexdigest_to_bytes.to_i(true) ==    -32
+	# assert   "FE00".hexdigest_to_bytes.to_i(true) ==   -512
+	# assert "FEFEFE".hexdigest_to_bytes.to_i(true) == -65794
 	# ~~~
 	#
 	# `Int::to_bytes` is a loosely reverse method.
@@ -353,10 +364,12 @@ class Bytes
 	# assert b.to_i.to_bytes == b
 	# assert (b.to_i + 1).to_bytes.hexdigest == "0103"
 	# assert "0001".hexdigest_to_bytes.to_i.to_bytes.hexdigest == "01"
+	#
+	# assert (-32).to_bytes.to_i(true) == -32
 	# ~~~
 	#
 	# Warning: `Int` might overflow for bytes with more than 60 bits.
-	fun to_i: Int do
+	fun to_i(signed: nullable Bool): Int do
 		var res = 0
 		var i = 0
 		while i < length do
@@ -364,6 +377,18 @@ class Bytes
 			res += self[i].to_i
 			i += 1
 		end
+
+		# Two's complement is `signed`
+		if signed == true and not_empty and first > 0x80u8 then
+			var ff = 0
+			for j in [0..length[ do
+				ff *= 0x100
+				ff += 0xFF
+			end
+
+			res = -((res ^ ff) + 1)
+		end
+
 		return res
 	end
 
