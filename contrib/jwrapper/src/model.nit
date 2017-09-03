@@ -21,7 +21,7 @@ module model is serialize
 import more_collections
 import opts
 import poset
-import binary::serialization
+import msgpack
 
 import jtype_converter
 
@@ -270,7 +270,7 @@ class JavaModel
 			end
 
 			var file = model_path.to_path.open_ro
-			var d = new BinaryDeserializer(file)
+			var d = new MsgPackDeserializer(file)
 			var model = d.deserialize
 			file.close
 

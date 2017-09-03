@@ -153,7 +153,7 @@ class CodeGenerator
 		# Write the model to file next to the Nit module
 		var model_path = file_name.strip_extension + ".jwrapper.bin"
 		var model_stream = model_path.to_path.open_wo
-		var serializer = new BinarySerializer(model_stream)
+		var serializer = new MsgPackSerializer(model_stream)
 		serializer.serialize model
 		model_stream.close
 	end
