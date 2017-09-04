@@ -16,7 +16,9 @@
 module ui_example is
 	app_name "app.nit UI"
 	app_namespace "org.nitlanguage.ui_example"
-	android_api_target 15
+	android_api_min 21
+	android_api_target 21
+	android_manifest_activity "android:theme=\"@android:style/Theme.Material\""
 end
 
 import app::ui
@@ -31,7 +33,7 @@ class UiExampleWindow
 	var layout = new ListLayout(parent=self)
 
 	# Some label
-	var some_label = new Label(parent=layout, text="This Window uses a ListLayout.")
+	var some_label = new Label(parent=layout, text="Sample Window using a ListLayout.")
 
 	# A checkbox
 	var checkbox = new CheckBox(parent=layout, text="A CheckBox")
