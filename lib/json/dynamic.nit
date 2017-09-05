@@ -248,51 +248,97 @@ class JsonValue
 		return new JsonValue(result)
 	end
 
-	# Advanced query to get a value within the map `self` or it's children.
+	# Get the value at `query`, a string of map keys and array indices
 	#
-	# A query is composed of the keys to each map seperated by '.'.
+	# The `query` is composed of map keys and array indices separated by "." (by default).
+	# The separator can be set with `sep` to any string.
 	#
-	# require: `self.is_map`
+	# Given the following JSON object parsed as a `JsonValue`.
+	# ~~~
+	# var jvalue = """
+	# {
+	#   "a": {
+	#          "i": 123,
+	#          "b": true
+	#        },
+	#   "b": ["zero", "one", "two"]
+	# }""".to_json_value
+	# ~~~
 	#
-	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a").is_map
-	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a.t").to_bool
-	#     assert not """{"a": {"t": true, "f": false}}""".to_json_value.get("a.f").to_bool
-	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a.t.t").is_error
-	#     assert """{"a": {"b": {"c": {"d": 123}}}}""".to_json_value.get("a.b.c.d").to_i == 123
-	#     assert """{"a": {"b": {"c": {"d": 123}}}}""".to_json_value.get("a.z.c.d").is_error
-	fun get(query: String): JsonValue do
-		var keys = query.split(".")
-		var value = value
+	# Access a value in maps by its key, starting from the key in the root object.
+	# ~~~
+	# assert jvalue.get("a").is_map
+	# assert jvalue.get("a.i").to_i == 123
+	# assert jvalue.get("a.b").to_bool
+	# ~~~
+	#
+	# Access an item in an array by its index.
+	# ~~~
+	# assert jvalue.get("b.1").to_s == "one"
+	# ~~~
+	#
+	# Any error at any depth of a query is reported. The client should usually
+	# check for errors before using the returned value.
+	# ~~~
+	# assert jvalue.get("a.b.c").to_error.to_s == "Value at `a.b` is not a map. Got a `map`"
+	# assert jvalue.get("b.3").to_error.to_s == "Index `3` out of bounds at `b`"
+	# ~~~
+	#
+	# Set `sep` to a custom string to access keys containing a dot.
+	# ~~~
+	# jvalue = """
+	# {
+	#   "a.b": { "i": 123 },
+	#   "c/d": [ 456 ]
+	# }""".to_json_value
+	#
+	# assert jvalue.get("a.b/i", sep="/").to_i == 123
+	# assert jvalue.get("c/d:0", sep=":").to_i == 456
+	# ~~~
+	fun get(query: Text, sep: nullable Text): JsonValue
+	do
 		if is_error then return self
+
+		sep = sep or else "."
+		var keys = query.split(sep)
+		var value = value
 		for i in [0..keys.length[ do
 			var key = keys[i]
 			if value isa MapRead[String, nullable Object] then
 				if value.has_key(key) then
 					value = value[key]
 				else
-					var sub_query = sub_query_to_s(keys, i)
-					var e = new JsonKeyError("Key `{key}` not found.",
+					var sub_query = sub_query_to_s(keys, i, sep)
+					value = new JsonKeyError("Key `{key}` not found.",
 							self, sub_query)
-					return new JsonValue(e)
+					break
+				end
+			else if value isa Sequence[nullable Object] then
+				if key.is_int then
+					var index = key.to_i
+					if index < value.length then
+						value = value[index]
+					else
+						var sub_query = sub_query_to_s(keys, i, sep)
+						value = new JsonKeyError("Index `{key}` out of bounds at `{sub_query}`",
+								self, sub_query)
+						break
+					end
 				end
 			else
-				var sub_query = sub_query_to_s(keys, i)
-				var val_type = (new JsonValue(value)).json_type
-				var e = new JsonKeyError("Value at `{sub_query}` is not a map. Got type `{val_type}`",
+				var sub_query = sub_query_to_s(keys, i, sep)
+				value = new JsonKeyError("Value at `{sub_query}` is not a map. Got a `{json_type}`",
 						self, sub_query)
-				return new JsonValue(e)
+				break
 			end
 		end
 		return new JsonValue(value)
 	end
 
-	# Concatenate all keys up to `last` for debugging purposes.
-	#
-	# Note: This method deletes elements in `keys`.
-	private fun sub_query_to_s(keys: Array[String], last: Int): String do
-		last += 1
-		for j in [last..keys.length[ do keys.pop
-		return keys.join(".")
+	# Concatenate all keys up to `last` for error reports
+	private fun sub_query_to_s(keys: Array[String], last: Int, sep: Text): String
+	do
+		return [for i in [0..last[ do keys[i]].join(sep)
 	end
 
 	# Return a human-readable description of the type.
