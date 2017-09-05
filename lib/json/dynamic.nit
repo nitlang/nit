@@ -14,21 +14,56 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Dynamic interface to read JSON strings.
+# Dynamic interface to read values from JSON strings
 #
-# `String::to_json_value` returns a `JsonValue` which can be queried
-# to get the underlying JSON data.
+# Most services are in `JsonValue`, which is created by `Text::to_json_value`.
 module dynamic
 
 import error
 private import static
 
-# Wraps a JSON value.
+redef class Text
+	# Parse `self` to a `JsonValue`
+	fun to_json_value: JsonValue do return new JsonValue(parse_json)
+end
+
+# Dynamic wrapper of a JSON value, created by `Text::to_json_value`
 #
-# Offer methods to query the type, to dynamicaly cast the underlying value and
-# to query elements (in case of a JSON object or a JSON array).
+# Provides high-level services to explore JSON objects with minimal overhead
+# dealing with static types. Use this class to manipulate the JSON data first
+# and check for errors only before using the resulting data.
 #
-# Use `String::to_json_value` to get a `JsonValue` from a string.
+# For example, given:
+# ~~~
+# var json_src = """
+# {
+#   "i": 123,
+#   "m": {
+#          "t": true,
+#          "f": false
+#        },
+#   "a": ["zero", "one", "two"]
+# }"""
+# var json_value = json_src.to_json_value # Parse src to a `JsonValue`
+# ~~~
+#
+# Access array or map values using their indices.
+# ~~~
+# var target_int = json_value["i"]
+# assert target_int.is_int # Check for error and expected type
+# assert target_int.to_i == 123 # Use the value
+# ~~~
+#
+# Use `get` to reach a value nested in multiple objects.
+# ~~~
+# var target_str = json_value.get("a.0")
+# assert target_str.is_string # Check for error and expected type
+# assert target_str.to_s == "zero" # Use the value
+# ~~~
+#
+# This API is useful for scripts and when you need only a few values from a
+# JSON object. To access many values or check the conformity of the JSON
+# beforehand, use the `json` serialization services.
 class JsonValue
 
 	# The wrapped JSON value.
@@ -358,23 +393,15 @@ class JsonValue
 	end
 end
 
-# Keyed access failed.
+# Key access error
 class JsonKeyError
 	super Error
 
-	# The value on which the access was requested.
+	# The value on which the access was requested
 	var json_value: JsonValue
 
-	# The requested key.
+	# The requested key
 	#
-	# In the case of `JsonValue.get`, the sub-query that failed.
+	# In the case of `JsonValue::get`, the sub-query that failed.
 	var key: Object
-end
-
-redef class Text
-	# Parse `self` to obtain a `JsonValue`
-	fun to_json_value: JsonValue do
-		var value = parse_json
-		return new JsonValue(value)
-	end
 end
