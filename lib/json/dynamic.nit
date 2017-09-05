@@ -192,19 +192,6 @@ class JsonValue
 	# require: `self.is_error`
 	fun to_error: Error do return value.as(Error)
 
-	### JsonParseError
-
-	# Is this value a parse error?
-	#
-	#     assert "[".to_json_value.is_parse_error
-	#     assert not "[]".to_json_value.is_parse_error
-	fun is_parse_error: Bool do return value isa JsonParseError
-
-	# Get this value as a `JsonParseError`.
-	#
-	# require: `self.is_parse_error`
-	fun to_parse_error: JsonParseError do return value.as(JsonParseError)
-
 	### Children access
 
 	# Iterator over the values of the array `self`
@@ -311,7 +298,8 @@ class JsonValue
 	# Return a human-readable description of the type.
 	#
 	# For debugging purpose only.
-	fun json_type: String do
+	private fun json_type: String
+	do
 		if is_array then return "array"
 		if is_bool then return "bool"
 		if is_float then return "float"
@@ -319,7 +307,6 @@ class JsonValue
 		if is_null then return "null"
 		if is_map then return "map"
 		if is_string then return "string"
-		if is_parse_error then return "parse_error"
 		if is_error then return "error"
 		return "undefined"
 	end
