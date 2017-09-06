@@ -29,11 +29,11 @@ import ios::data_store is conditional(ios)
 
 redef class App
 	# Services to store and load data
-	fun data_store: DataStore is abstract
+	var data_store = new DataStore is lazy
 end
 
 # Simple data storage facility
-interface DataStore
+class DataStore
 
 	# Get the object stored at `key`, or null if nothing is available
 	fun [](key: String): nullable Object is abstract

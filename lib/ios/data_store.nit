@@ -19,12 +19,7 @@ import app::data_store
 import cocoa::foundation
 private import json
 
-redef class App
-	redef var data_store = new UserDefaultView
-end
-
-private class UserDefaultView
-	super DataStore
+redef class DataStore
 
 	# The `NSUserDefaults` used to implement `DataStore`
 	var user_defaults = new NSUserDefaults.standard_user_defaults is lazy

@@ -20,14 +20,9 @@
 module data_store
 
 import app::data_store
-private import shared_preferences
+import shared_preferences
 
-redef class App
-	redef var data_store = new SharedPreferenceView
-end
-
-private class SharedPreferenceView
-	super DataStore
+redef class DataStore
 
 	# The `SharedPreferences` used to implement the `DataStore`
 	var shared_preferences = new SharedPreferences.privately(app, "data_store") is lazy
