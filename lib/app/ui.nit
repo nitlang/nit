@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Portable UI API for the _app.nit_ framework
+# Portable UI controls from mobiles apps
 module ui
 
 import app_base
@@ -30,10 +30,9 @@ redef class App
 	# This attribute is set by `push_window`.
 	var window: Window is noinit
 
-	# Make visible and push `window` on the top of `pop_window`
+	# Make `window` visible and push it on the top of the `window_stack`
 	#
-	# This method must be called at least once within `App::on_create`.
-	# It can be called at any times while the app is active.
+	# This method can be called at any times while the app is active.
 	fun push_window(window: Window)
 	do
 		window_stack.add window
@@ -185,6 +184,9 @@ class CompositeControl
 end
 
 # A window, root of the `Control` tree
+#
+# Each window should hold a single control, usually a `CompositeControl`,
+# which in turn holds all the displayed controls.
 class Window
 	super CompositeControl
 
@@ -195,7 +197,7 @@ class Window
 	fun on_back_button do app.pop_window
 end
 
-# A viewable `Control`
+# A visible `Control`
 abstract class View
 	super Control
 
@@ -205,7 +207,9 @@ abstract class View
 	var enabled: nullable Bool is writable, abstract, autoinit
 end
 
-# A control with some `text`
+# A control displaying some `text`
+#
+# For a text-only control, see `Label`.
 abstract class TextView
 	super View
 
@@ -245,17 +249,17 @@ class TextInput
 	var is_password: nullable Bool is writable
 end
 
-# A pushable button, raises `ButtonPressEvent`
+# A pressable button, raises `ButtonPressEvent`
 class Button
 	super TextView
 end
 
-# A text label
+# A simple text label
 class Label
 	super TextView
 end
 
-# Toggle control with two states and a label
+# Toggle control between two states, also displays a label
 class CheckBox
 	super TextView
 
