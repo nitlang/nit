@@ -32,7 +32,16 @@ redef class DataStore
 
 		# TODO report errors
 		var deserializer = new JsonDeserializer(nsstr.to_s)
-		return deserializer.deserialize
+		var deserialized = deserializer.deserialize
+
+		var errors = deserializer.errors
+		if errors.not_empty then
+			# An update may have broken the versioning compatibility
+			print_error "{class_name} error at deserialization: {errors.join(", ")}"
+			return null # Let's be safe
+		end
+
+		return deserialized
 	end
 
 	redef fun []=(key, value)

@@ -66,6 +66,7 @@ redef class DataStore
 
 		# Prepare SELECT statement
 		var stmt = db.select("* FROM {db_table} WHERE key == {key.to_sql_string}")
+		if stmt == null then return null
 
 		# Execute statment
 		for row in stmt do
@@ -76,6 +77,13 @@ redef class DataStore
 			# Deserialize
 			var deserializer = new JsonDeserializer(serialized)
 			var deserialized = deserializer.deserialize
+
+			var errors = deserializer.errors
+			if errors.not_empty then
+				# An update may have broken the versioning compatibility
+				print_error "{class_name} error at deserialization: {errors.join(", ")}"
+				return null # Let's be safe
+			end
 
 			return deserialized
 		end
