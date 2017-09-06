@@ -19,24 +19,9 @@ import beer_views
 import social_views
 import user_views
 
+redef fun root_window do return new HomeWindow
+
 redef class App
-	redef fun on_create
-	do
-		if debug then print "App::on_create"
-
-		# Create the main window
-		show_home
-		super
-	end
-
-	# Show the home/main windows
-	fun show_home
-	do
-		var window = new HomeWindow
-		window.refresh
-		push_window window
-	end
-
 	redef fun on_log_in
 	do
 		super
