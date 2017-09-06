@@ -38,6 +38,7 @@ redef class App
 	do
 		window_stack.add window
 		self.window = window
+		window.on_create
 	end
 
 	# Pop the current `window` from the stack and show the previous one
@@ -54,7 +55,11 @@ redef class App
 	# Stack of active windows
 	var window_stack = new Array[Window]
 
-	redef fun on_create do window.on_create
+	redef fun on_create
+	do
+		var window = root_window
+		push_window window
+	end
 
 	redef fun on_resume do window.on_resume
 
@@ -66,6 +71,13 @@ redef class App
 
 	redef fun on_save_state do window.on_save_state
 end
+
+# Hook to create the first window shown to the user
+#
+# By default, a `Window` is created, which can be refined to customize it.
+# However, most apps should refine this method to return a different window,
+# this way the app can have more than one window.
+fun root_window: Window do return new Window
 
 # An event created by an `AppComponent` and sent to `AppObserver`s
 interface AppEvent

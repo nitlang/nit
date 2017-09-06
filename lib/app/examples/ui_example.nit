@@ -84,11 +84,4 @@ class SecondWindow
 	var another_label = new Label(parent=layout, text="Close it by tapping the back button.")
 end
 
-redef class App
-	redef fun on_create
-	do
-		# Create the main window
-		push_window new UiExampleWindow
-		super
-	end
-end
+redef fun root_window do return new UiExampleWindow
