@@ -207,6 +207,7 @@ redef class MEntityRef
 		v.serialize_attribute("mdoc", mentity.mdoc_or_fallback)
 		v.serialize_attribute("visibility", mentity.visibility.to_s)
 		v.serialize_attribute("modifiers", mentity.collect_modifiers)
+		v.serialize_attribute("class_name", mentity.class_name)
 		var mentity = self.mentity
 		if mentity isa MMethod then
 			v.serialize_attribute("msignature", mentity.intro.msignature)
@@ -226,7 +227,6 @@ redef class MDoc
 	# Add doc down processing
 	redef fun core_serialize_to(v) do
 		v.serialize_attribute("html_synopsis", html_synopsis.write_to_string)
-		v.serialize_attribute("html_documentation", html_documentation.write_to_string)
 	end
 end
 
@@ -342,11 +342,9 @@ end
 redef class POSetElement[E]
 	super Serializable
 
-	redef fun serialize_to(v) do
+	redef fun core_serialize_to(v) do
 		assert self isa POSetElement[MEntity]
-		v.serialize_attribute("greaters", to_mentity_refs(greaters))
 		v.serialize_attribute("direct_greaters", to_mentity_refs(direct_greaters))
 		v.serialize_attribute("direct_smallers", to_mentity_refs(direct_smallers))
-		v.serialize_attribute("smallers", to_mentity_refs(smallers))
 	end
 end

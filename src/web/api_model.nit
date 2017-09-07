@@ -26,6 +26,7 @@ redef class APIRouter
 		use("/search", new APISearch(config))
 		use("/random", new APIRandom(config))
 		use("/entity/:id", new APIEntity(config))
+		use("/entity/:id/doc", new APIEntityDoc(config))
 		use("/code/:id", new APIEntityCode(config))
 		use("/uml/:id", new APIEntityUML(config))
 		use("/linearization/:id", new APIEntityLinearization(config))
@@ -147,6 +148,26 @@ class APIEntity
 	end
 end
 
+# Return the full MDoc of a MEntity.
+#
+# Example: `GET /entity/core::Array/doc`
+class APIEntityDoc
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
+
+		var obj = new JsonObject
+		var mdoc = mentity.mdoc_or_fallback
+		if mdoc != null then
+			obj["documentation"] = mdoc.html_documentation.write_to_string
+			obj["location"] = mdoc.location
+		end
+		res.json obj
+	end
+end
+
 # List ancestors, parents, child and descendants of MEntity
 #
 # Example: `GET /entity/core::Array/inheritance`
@@ -190,7 +211,13 @@ class APIEntityDefs
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
 		var mentities: Array[MEntity]
-		if mentity isa MModule then
+		if mentity isa MPackage then
+			mentities = mentity.mgroups.to_a
+		else if mentity isa MGroup then
+			mentities = new Array[MEntity]
+			mentities.add_all mentity.in_nesting.direct_smallers
+			mentities.add_all mentity.mmodules
+		else if mentity isa MModule then
 			mentities = mentity.mclassdefs
 		else if mentity isa MClass then
 			mentities = mentity.mclassdefs

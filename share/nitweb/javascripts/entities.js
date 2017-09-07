@@ -53,8 +53,19 @@
 				.state('doc.entity.doc', {
 					url: '',
 					templateUrl: 'views/doc/doc.html',
-					controller: function(mentity) {
+					resolve: {
+						doc: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityDoc($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, doc) {
 						this.mentity = mentity;
+						this.doc = doc;
 					},
 					controllerAs: 'vm',
 				})
@@ -69,10 +80,19 @@
 									$state.go('404', null, { location: false })
 								});
 							return d.promise;
+						},
+						inh: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityInh($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
 						}
 					},
-					controller: function(graph, $sce) {
+					controller: function(inh, graph, $sce) {
 						this.graph = $sce.trustAsHtml(graph);
+						this.inh = inh;
 					},
 					controllerAs: 'vm',
 				})
@@ -186,6 +206,12 @@
 						.error(cbErr);
 				},
 
+				loadEntityDoc: function(id, cb, cbErr) {
+					$http.get('/api/entity/' + id + '/doc')
+						.success(cb)
+						.error(cbErr);
+				},
+
 				loadEntityLinearization: function(id, cb, cbErr) {
 					$http.get('/api/linearization/' + id)
 						.success(cb)
@@ -206,6 +232,12 @@
 
 				loadEntityGraph: function(id, cb, cbErr) {
 					$http.get('/api/graph/inheritance/' + id + '?cdepth=3')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityInh: function(id, cb, cbErr) {
+					$http.get('/api/inheritance/' + id)
 						.success(cb)
 						.error(cbErr);
 				},
