@@ -12,7 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Portable UI controls from mobiles apps
+# Portable UI controls for mobiles apps
+#
+# ~~~
+# import app::ui
+#
+# class MyWindow
+#     super Window
+#
+#     var layout = new ListLayout(parent=self)
+#     var lbl = new Label(parent=layout, text="Hello world", align=0.5)
+#     var but = new Button(parent=layout, text="Press here")
+#
+#     redef fun on_event(event) do lbl.text = "Pressed!"
+# end
+#
+# redef fun root_window do return new MyWindow
+# ~~~
 module ui
 
 import app_base
