@@ -21,14 +21,16 @@ import pipeline
 import astutil
 import serialization
 
-# Fully process a content as a nit source file.
-fun hightlightcode(hl: HighlightVisitor, content: String): HLCode
+# Fully process `content` as a Nit source file.
+#
+# Set `print_errors = true` to print errors in the code to the console.
+fun hightlightcode(hl: HighlightVisitor, content: String, print_errors: nullable Bool): HLCode
 do
 	# Prepare a stand-alone tool context
 	var tc = new ToolContext
 	tc.nit_dir = tc.locate_nit_dir # still use the common lib to have core
 	tc.keep_going = true # no exit, obviously
-	tc.opt_warn.value = -1 # no output, obviously
+	if print_errors != true then tc.opt_warn.value = -1 # no output
 
 	# Prepare an stand-alone model and model builder.
 	# Unfortunately, models are enclosing and append-only.
