@@ -112,7 +112,7 @@
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 # Nit:
-<E: 2222>
+<F: 2222>
 
 # Json:
 {
@@ -121,10 +121,10 @@
 }
 
 # Back in Nit:
-<E: 2222>
+<F: 2222>
 
 # Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Json:
 {
@@ -133,7 +133,7 @@
 }
 
 # Back in Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>

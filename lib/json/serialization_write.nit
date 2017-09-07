@@ -33,7 +33,7 @@ class JsonSerializer
 	#   be deserialized to their original form using `JsonDeserializer`.
 	# * Use references when an object has already been serialized so to not duplicate it.
 	# * Support cycles in references.
-	# * Preserve the Nit `Char` type as an object because it does not exist in JSON.
+	# * Preserve the Nit `Char` and `Byte` types as special objects.
 	# * The generated JSON is standard and can be read by non-Nit programs.
 	#   However, some Nit types are not represented by the simplest possible JSON representation.
 	#   With the added metadata, it can be complex to read.
@@ -242,10 +242,10 @@ redef class Serializable
 	# which is used by all the serialization engines, not just JSON.
 	protected fun accept_json_serializer(v: JsonSerializer)
 	do
-		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
 		v.indent_level += 1
 		if not v.plain_json then
+			var id = v.cache.new_id_for(self)
 			v.new_line_and_indent
 			v.stream.write "\"__kind\": \"obj\", \"__id\": "
 			v.stream.write id.to_s
@@ -286,6 +286,19 @@ redef class Char
 	end
 end
 
+redef class Byte
+	redef fun accept_json_serializer(v)
+	do
+		if v.plain_json then
+			to_i.accept_json_serializer v
+		else
+			v.stream.write "\{\"__kind\": \"byte\", \"__val\": "
+			to_i.accept_json_serializer v
+			v.stream.write "\}"
+		end
+	end
+end
+
 redef class CString
 	redef fun accept_json_serializer(v) do to_s.accept_json_serializer(v)
 end
@@ -317,8 +330,10 @@ end
 redef class SimpleCollection[E]
 	redef fun accept_json_serializer(v)
 	do
-		# Register as pseudo object
-		if not v.plain_json then
+		if v.plain_json then
+			serialize_to_pure_json v
+		else
+			# Register as pseudo object
 			var id = v.cache.new_id_for(self)
 			v.stream.write """{"""
 			v.indent_level += 1
@@ -329,14 +344,12 @@ redef class SimpleCollection[E]
 			v.stream.write class_name
 			v.stream.write """","""
 			v.new_line_and_indent
+
 			v.stream.write """"__items": """
 			serialize_to_pure_json v
-			core_serialize_to v
-		else
-			serialize_to_pure_json v
-		end
 
-		if not v.plain_json then
+			core_serialize_to v
+
 			v.indent_level -= 1
 			v.new_line_and_indent
 			v.stream.write "\}"

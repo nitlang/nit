@@ -53,8 +53,9 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 {"n":2222}
 
 # Back in Nit:
-<F: 2222>
+null
 
+Deserialization Error: Doesn't know how to deserialize class "F"
 # Nit:
 <F: 33.33>
 
@@ -62,8 +63,9 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 {"n":33.33}
 
 # Back in Nit:
-<F: 33.33>
+null
 
+Deserialization Error: Doesn't know how to deserialize class "F"
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 

@@ -116,7 +116,7 @@ Deserialization Error: Wrong type on `E::a` expected `Array[Object]`, got `null`
 Deserialization Error: Doesn't know how to deserialize class "Array"
 Deserialization Error: Wrong type on `E::b` expected `Array[nullable Serializable]`, got `null`
 # Nit:
-<E: 2222>
+<F: 2222>
 
 # Json:
 {
@@ -129,7 +129,7 @@ null
 
 Deserialization Error: Doesn't know how to deserialize class "F"
 # Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Json:
 {

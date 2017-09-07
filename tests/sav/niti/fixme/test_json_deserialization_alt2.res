@@ -71,7 +71,9 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 {"hs":[-1,0],"s":["one","two"],"hm":{"one":1,"two":2},"am":{"three":"3","four":"4"}}
 
 # Back in Nit:
-<G: hs: -1, 0; s: ; hm: one. 1, two. 2; am: three. 3, four. 4>
+<G: hs: -1, 0; s: ; hm: ; am: >
 
 Deserialization Error: Doesn't know how to deserialize class "Set[String]"
 Deserialization Error: Wrong type on `G::s` expected `Set[String]`, got `null`
+Deserialization Error: Wrong type on `G::hm` expected `HashMap[String, Int]`, got `Bool`
+Deserialization Error: Wrong type on `G::am` expected `ArrayMap[String, String]`, got `Bool`
