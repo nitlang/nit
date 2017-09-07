@@ -931,7 +931,7 @@ end
 redef class FlatText
 	redef fun append_to_bytes(b) do
 		var from = if self isa FlatString then first_byte else 0
-		b.append_ns_from(items, byte_length, from)
+		if isset _items then b.append_ns_from(items, byte_length, from)
 	end
 end
 
