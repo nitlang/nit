@@ -473,19 +473,19 @@ redef class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
-		assert sub isa MClassType # It is the only remaining type
+		if sub isa MBottomType or sub isa MErrorType then
+			return true
+		end
 
-		# A unfixed formal type can only accept itself
-		if sup isa MFormalType then
+		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
+
+		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
+		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType or sup isa MErrorType then
+			# These types are not super-types of Class-based types.
 			return false
 		end
 
-		if sup isa MNullType then
-			# `sup` accepts only null
-			return false
-		end
-
-		assert sup isa MClassType # It is the only remaining type
+		assert sup isa MClassType else print_error "got {sup} {sub.inspect}" # It is the only remaining type
 
 		# Now both are MClassType, we need to dig
 
