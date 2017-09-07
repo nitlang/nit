@@ -162,6 +162,14 @@ class UniformBool
 	fun uniform(val: Bool) do uniform_1i(location, if val then 1 else 0)
 end
 
+# Shader uniform of GLSL type `int`
+class UniformInt
+	super Uniform
+
+	# Set this uniform value
+	fun uniform(val: Int) do uniform_1i(location, val)
+end
+
 # Shader uniform of GLSL type `vec4`
 class UniformFloat
 	super Uniform
@@ -230,6 +238,7 @@ end
 class InactiveUniform
 	super InactiveVariable
 	super UniformBool
+	super UniformInt
 	super UniformFloat
 	super UniformSampler2D
 	super UniformVec2
@@ -408,6 +417,8 @@ abstract class GamnitProgram
 			var uniform
 			if typ == gl_BOOL then
 				uniform = new UniformBool(gl_program, name, location, size)
+			else if typ == gl_INT then
+				uniform = new UniformInt(gl_program, name, location, size)
 			else if typ == gl_SAMPLER_2D then
 				uniform = new UniformSampler2D(gl_program, name, location, size)
 			else if typ == gl_FLOAT then
