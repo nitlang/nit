@@ -461,6 +461,7 @@ class Bytes
 	redef fun enlarge(sz) do
 		if capacity >= sz then return
 		persisted = false
+		if capacity < 16 then capacity = 16
 		while capacity < sz do capacity = capacity * 2 + 2
 		var ns = new CString(capacity)
 		items.copy_to(ns, length, 0, 0)
