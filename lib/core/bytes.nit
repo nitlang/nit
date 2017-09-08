@@ -453,12 +453,8 @@ class Bytes
 		length += ln
 	end
 
-	# Appends the bytes of `s` to `selftextextt`
-	fun append_text(s: Text) do
-		for i in s.substrings do
-			append_ns(i.fast_cstring, i.byte_length)
-		end
-	end
+	# Appends the bytes of `str` to `self`
+	fun append_text(str: Text) do str.append_to_bytes self
 
 	redef fun append_to(b) do b.append self
 
