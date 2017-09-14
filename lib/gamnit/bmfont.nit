@@ -477,6 +477,13 @@ class BMFontAsset
 						var w = text[wi]
 
 						if w == '\n' or w == pld or w == plu or w.is_whitespace or (in_link and w == ']') then break
+
+						if not desc.chars.keys.has(w) then
+							var rc = replacement_char
+							if rc == null then continue
+							w = rc
+						end
+
 						word_len += advance(prev_w, w) * scale
 						prev_w = w
 					end
