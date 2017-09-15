@@ -19,6 +19,7 @@ import frontend
 import nitsmell_toolcontext
 import method_analyze_metrics
 import mclassdef_collect
+import counter
 
 redef class ToolContext
 	var codesmells_metrics_phase = new CodeSmellsMetricsPhase(self, null)
@@ -118,9 +119,12 @@ class BadConceptonController
 		print phase.toolcontext.format_h2("Number of tested classes: {number_of_tested_class}")
 		print phase.toolcontext.format_h2("Number of collect classes: {bad_conception_elements.length}")
 		print phase.toolcontext.format_h2("Number of average code smell: {average_code_smell}")
-		print phase.toolcontext.format_h2("Detected code smells statistics (number of elements // Percentage of impacted classes)")
+		print phase.toolcontext.format_h2("Detected code smells statistics (number of classes | Percentage of impacted classes)")
 		for code_smell in counter.sort do
-			print "	* {code_smell}: {counter[code_smell]} classes ({counter[code_smell].to_f * 100.0 / bad_conception_elements.length.to_f}%)"
+			var numbers_of_bad_elements = bad_conception_elements.length.to_f
+			if numbers_of_bad_elements != 0 then
+				print "	* {code_smell}: {counter[code_smell]} classes ({counter[code_smell].to_f * 100.0 / numbers_of_bad_elements}%)"
+			end
 		end
 	end
 
@@ -140,7 +144,7 @@ class BadConceptonController
 		for  bad_conception_element in bad_conception_elements do
 			count_code_smell_numbers += bad_conception_element.array_badconception.length
 		end
-		return count_code_smell_numbers.to_f / bad_conception_elements.length.to_f
+		return div(count_code_smell_numbers , bad_conception_elements.length).to_f
 	end
 end
 
@@ -169,7 +173,7 @@ class BadConceptionFinder
 	end
 
 	fun print_collected_data do
-		if array_badconception.length != 0 then
+		if array_badconception.not_empty then
 			print "--------------------"
 			print phase.toolcontext.format_h1("Full name: {mclassdef.full_name} Location: {mclassdef.location}")
 			for bad_conception in array_badconception do
@@ -205,9 +209,7 @@ abstract class BadConception
 	fun print_result is abstract
 
 	# Compute code smell score to sort
-	fun score_compute do
-		score = 1.0
-	end
+	fun score_compute do score = 1.0
 end
 
 class LargeClass
@@ -306,7 +308,7 @@ class FeatureEnvy
 				var max_class_call = method.class_call.max
 				if max_class_call != null then
 					# Check if the type of max call class is generique
-					if max_class_call.mclass.mclass_type isa MGenericType and phase.toolcontext.opt_move_generics.value == false then
+					if max_class_call.mclass.mclass_type isa MGenericType and not phase.toolcontext.opt_move_generics.value then
 						print "		-{method.name}({method.msignature.mparameters.join(", ")}) {method.total_self_call}/{method.class_call[max_class_call]}"
 					else
 						print "		-{method.name}({method.msignature.mparameters.join(", ")}) {method.total_self_call}/{method.class_call[max_class_call]} move to {max_class_call}"
@@ -441,7 +443,7 @@ redef class ModelView
 				if mmethoddef.line_number == 0 then continue
 				count += 1
 			end
-			if not mclassdef.collect_local_mproperties(self).length != 0 then continue
+			if mclassdef.collect_local_mproperties(self).length == 0 then continue
 			if count == 0 then continue
 			methods_analyse_metrics[mclassdef] = (result/count).to_i
 		end

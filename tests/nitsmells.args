@@ -6,3 +6,4 @@
 --no-colors --no-abstract-implementation TestNitsmells/NoAbstractImplemented/
 --no-colors --long-methods --long-method-threshold 3 TestNitsmells/LongMethod/
 --no-colors --long-params --long-params-threshold 5 TestNitsmells/LongParameterList/
+--no-colors --stats TestNitsmells/FeatureEnvy/
