@@ -31,6 +31,7 @@
 # http://www.khronos.org/opengles/sdk/docs/man/
 module glesv2 is
 	pkgconfig
+	no_warning "missing-doc"
 	new_annotation glsl_vertex_shader
 	new_annotation glsl_fragment_shader
 	ldflags("-lGLESv2")@android
