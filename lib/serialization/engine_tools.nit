@@ -15,7 +15,7 @@
 # Advanced services for serialization engines
 module engine_tools
 
-import serialization
+import serialization_core
 intrude import core::collection::hash_collection
 
 # Maps instances to a value, uses `is_same_serialized` and `serialization_hash`.

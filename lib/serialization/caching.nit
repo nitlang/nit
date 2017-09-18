@@ -15,7 +15,7 @@
 # Services for caching serialization engines
 module caching
 
-import serialization
+import serialization_core
 private import engine_tools
 
 # A `Serializer` with a `cache`

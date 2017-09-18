@@ -17,7 +17,7 @@
 # Pre order sets and partial order set (ie hierarchies)
 module poset
 
-import serialization
+import serialization::serialization_core
 
 # Pre-order set graph.
 # This class models an incremental pre-order graph where new nodes and edges can be added (but not removed).
