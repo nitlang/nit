@@ -397,7 +397,16 @@ class SharedPreferences
 		if serialized_string == "" then return null
 
 		var deserializer = new JsonDeserializer(serialized_string)
-		return deserializer.deserialize
+		var deserialized = deserializer.deserialize
+
+		var errors = deserializer.errors
+		if errors.not_empty then
+			# An update may have broken the versioning compatibility
+			print_error "{class_name} error at deserialization: {errors.join(", ")}"
+			return null # Let's be safe
+		end
+
+		return deserialized
 	end
 end
 

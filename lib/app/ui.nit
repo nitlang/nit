@@ -12,7 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Portable UI API for the _app.nit_ framework
+# Portable UI controls for mobiles apps
+#
+# ~~~
+# import app::ui
+#
+# class MyWindow
+#     super Window
+#
+#     var layout = new ListLayout(parent=self)
+#     var lbl = new Label(parent=layout, text="Hello world", align=0.5)
+#     var but = new Button(parent=layout, text="Press here")
+#
+#     redef fun on_event(event) do lbl.text = "Pressed!"
+# end
+#
+# redef fun root_window do return new MyWindow
+# ~~~
 module ui
 
 import app_base
@@ -30,14 +46,14 @@ redef class App
 	# This attribute is set by `push_window`.
 	var window: Window is noinit
 
-	# Make visible and push `window` on the top of `pop_window`
+	# Make `window` visible and push it on the top of the `window_stack`
 	#
-	# This method must be called at least once within `App::on_create`.
-	# It can be called at any times while the app is active.
+	# This method can be called at any times while the app is active.
 	fun push_window(window: Window)
 	do
 		window_stack.add window
 		self.window = window
+		window.on_create
 	end
 
 	# Pop the current `window` from the stack and show the previous one
@@ -54,7 +70,11 @@ redef class App
 	# Stack of active windows
 	var window_stack = new Array[Window]
 
-	redef fun on_create do window.on_create
+	redef fun on_create
+	do
+		var window = root_window
+		push_window window
+	end
 
 	redef fun on_resume do window.on_resume
 
@@ -66,6 +86,13 @@ redef class App
 
 	redef fun on_save_state do window.on_save_state
 end
+
+# Hook to create the first window shown to the user
+#
+# By default, a `Window` is created, which can be refined to customize it.
+# However, most apps should refine this method to return a different window,
+# this way the app can have more than one window.
+fun root_window: Window do return new Window
 
 # An event created by an `AppComponent` and sent to `AppObserver`s
 interface AppEvent
@@ -173,6 +200,9 @@ class CompositeControl
 end
 
 # A window, root of the `Control` tree
+#
+# Each window should hold a single control, usually a `CompositeControl`,
+# which in turn holds all the displayed controls.
 class Window
 	super CompositeControl
 
@@ -183,7 +213,7 @@ class Window
 	fun on_back_button do app.pop_window
 end
 
-# A viewable `Control`
+# A visible `Control`
 abstract class View
 	super Control
 
@@ -193,7 +223,9 @@ abstract class View
 	var enabled: nullable Bool is writable, abstract, autoinit
 end
 
-# A control with some `text`
+# A control displaying some `text`
+#
+# For a text-only control, see `Label`.
 abstract class TextView
 	super View
 
@@ -233,17 +265,17 @@ class TextInput
 	var is_password: nullable Bool is writable
 end
 
-# A pushable button, raises `ButtonPressEvent`
+# A pressable button, raises `ButtonPressEvent`
 class Button
 	super TextView
 end
 
-# A text label
+# A simple text label
 class Label
 	super TextView
 end
 
-# Toggle control with two states and a label
+# Toggle control between two states, also displays a label
 class CheckBox
 	super TextView
 
