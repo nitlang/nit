@@ -81,8 +81,7 @@ redef class App
 			glViewport(0, 0, display.width, display.height)
 			glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
-			var gl_error = glGetError
-			assert gl_error == gl_NO_ERROR else print_error gl_error
+			assert glGetError == gl_NO_ERROR
 			return
 		end
 
@@ -96,8 +95,7 @@ redef class App
 
 		glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Draw the dynamic screen to the real screen if `dynamic_resolution_ratio != 1.0`
@@ -131,18 +129,15 @@ redef class App
 		n_floats = 2
 		glEnableVertexAttribArray dynres_program.tex_coord.location
 		glVertexAttribPointeri(dynres_program.tex_coord.location, n_floats, gl_FLOAT, false, 0, offset)
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Draw
 		glDrawArrays(gl_TRIANGLE_STRIP, 0, 4)
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Take down
 		glBindBuffer(gl_ARRAY_BUFFER, 0)
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		sys.perfs["gamnit flat dyn res"].add app.perf_clock_dynamic_resolution.lapse
 	end
@@ -195,16 +190,14 @@ private class DynamicContext
 		glBindFramebuffer(gl_FRAMEBUFFER, framebuffer)
 		assert glIsFramebuffer(framebuffer)
 		self.dynamic_framebuffer = framebuffer
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Depth & texture/color
 		var depthbuffer = glGenRenderbuffers(1).first
 		self.depth_renderbuffer = depthbuffer
 		var texture = glGenTextures(1).first
 		self.texture = texture
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		resize(display, max_dynamic_resolution_ratio)
 		assert glCheckFramebufferStatus(gl_FRAMEBUFFER) == gl_FRAMEBUFFER_COMPLETE
@@ -213,8 +206,7 @@ private class DynamicContext
 		buffer_array = glGenBuffers(1).first
 		glBindBuffer(gl_ARRAY_BUFFER, buffer_array)
 		assert glIsBuffer(buffer_array)
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		## coord
 		var data = new Array[Float]
@@ -232,8 +224,7 @@ private class DynamicContext
 
 		glBindBuffer(gl_ARRAY_BUFFER, 0)
 
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Init size or resize `depth_renderbuffer` and `texture`
@@ -252,8 +243,7 @@ private class DynamicContext
 		assert glIsRenderbuffer(depthbuffer)
 		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPONENT16, width, height)
 		glFramebufferRenderbuffer(gl_FRAMEBUFFER, gl_DEPTH_ATTACHMENT, gl_RENDERBUFFER, depthbuffer)
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Texture
 		glBindTexture(gl_TEXTURE_2D, texture)
@@ -265,15 +255,13 @@ private class DynamicContext
 		             0, gl_RGB, gl_UNSIGNED_BYTE, new Pointer.nul)
 		glFramebufferTexture2D(gl_FRAMEBUFFER, gl_COLOR_ATTACHMENT0, gl_TEXTURE_2D, texture, 0)
 
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Take down
 		glBindRenderbuffer(gl_RENDERBUFFER, 0)
 		glBindFramebuffer(gl_FRAMEBUFFER, 0)
 
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 
 	var destroyed = false
@@ -284,8 +272,7 @@ private class DynamicContext
 
 		# Free the buffer
 		glDeleteBuffers([buffer_array])
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 		buffer_array = -1
 
 		# Free the dynamic framebuffer and its attachments
