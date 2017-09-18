@@ -214,7 +214,7 @@ class Bytes
 		return slice(st, ed - st + 1)
 	end
 
-	# Returns a subset of the content of `self` starting at `from` and of length `count`
+	# Copy a subset of `self` starting at `from` and of `count` bytes
 	#
 	#     var b = "abcd".to_bytes
 	#     assert b.slice(1, 2).hexdigest == "6263"
@@ -239,7 +239,7 @@ class Bytes
 		return ret
 	end
 
-	# Returns a copy of `self` starting at `from`
+	# Copy of `self` starting at `from`
 	#
 	#     var b = "abcd".to_bytes
 	#     assert b.slice_from(1).hexdigest  == "626364"
@@ -453,18 +453,15 @@ class Bytes
 		length += ln
 	end
 
-	# Appends the bytes of `s` to `selftextextt`
-	fun append_text(s: Text) do
-		for i in s.substrings do
-			append_ns(i.fast_cstring, i.byte_length)
-		end
-	end
+	# Appends the bytes of `str` to `self`
+	fun append_text(str: Text) do str.append_to_bytes self
 
 	redef fun append_to(b) do b.append self
 
 	redef fun enlarge(sz) do
 		if capacity >= sz then return
 		persisted = false
+		if capacity < 16 then capacity = 16
 		while capacity < sz do capacity = capacity * 2 + 2
 		var ns = new CString(capacity)
 		items.copy_to(ns, length, 0, 0)
@@ -931,7 +928,7 @@ end
 redef class FlatText
 	redef fun append_to_bytes(b) do
 		var from = if self isa FlatString then first_byte else 0
-		b.append_ns_from(items, byte_length, from)
+		if isset _items then b.append_ns_from(items, byte_length, from)
 	end
 end
 

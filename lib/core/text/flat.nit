@@ -1205,7 +1205,7 @@ private class FlatBufferByteIterator
 
 	var curr_pos: Int
 
-	init do target_items = target._items
+	init do if isset target._items then target_items = target._items
 
 	redef fun index do return curr_pos
 

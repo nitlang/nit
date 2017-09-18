@@ -662,81 +662,172 @@ abstract class Duplex
 	super Writer
 end
 
-# `Stream` that can be used to write to a `String`
+# Write to `bytes` in memory
 #
-# Mainly used for compatibility with Writer type and tests.
-class StringWriter
+# ~~~
+# var writer = new BytesWriter
+#
+# writer.write "Strings "
+# writer.write_char '&'
+# writer.write_byte 0x20u8
+# writer.write_bytes "bytes".to_bytes
+#
+# assert writer.to_s == "\\x53\\x74\\x72\\x69\\x6E\\x67\\x73\\x20\\x26\\x20\\x62\\x79\\x74\\x65\\x73"
+# assert writer.bytes.to_s == "Strings & bytes"
+# ~~~
+#
+# As with any binary data, UTF-8 code points encoded on two bytes or more
+# can be constructed byte by byte.
+#
+# ~~~
+# writer = new BytesWriter
+#
+# # Write just the character first half
+# writer.write_byte 0xC2u8
+# assert writer.to_s == "\\xC2"
+# assert writer.bytes.to_s == "�"
+#
+# # Complete the character
+# writer.write_byte 0xA2u8
+# assert writer.to_s == "\\xC2\\xA2"
+# assert writer.bytes.to_s == "¢"
+# ~~~
+class BytesWriter
 	super Writer
 
-	private var content = new Buffer
-	redef fun to_s do return content.to_s
-	redef fun is_writable do return not closed
+	# Written memory
+	var bytes = new Bytes.empty
 
-	redef fun write_bytes(b) do
-		content.append(b.to_s)
-	end
+	redef fun to_s do return bytes.chexdigest
 
 	redef fun write(str)
 	do
-		assert not closed
-		content.append(str)
+		if closed then return
+		str.append_to_bytes bytes
 	end
 
 	redef fun write_char(c)
 	do
-		assert not closed
-		content.add(c)
+		if closed then return
+		bytes.add_char c
+	end
+
+	redef fun write_byte(value)
+	do
+		if closed then return
+		bytes.add value
+	end
+
+	redef fun write_bytes(b)
+	do
+		if closed then return
+		bytes.append b
 	end
 
 	# Is the stream closed?
 	protected var closed = false
 
 	redef fun close do closed = true
+	redef fun is_writable do return not closed
 end
 
-# `Stream` used to read from a `String`
+# `Stream` writing to a `String`
 #
-# Mainly used for compatibility with Reader type and tests.
-class StringReader
+# This class has the same behavior as `BytesWriter`
+# except for `to_s` which decodes `bytes` to a string.
+#
+# ~~~
+# var writer = new StringWriter
+#
+# writer.write "Strings "
+# writer.write_char '&'
+# writer.write_byte 0x20u8
+# writer.write_bytes "bytes".to_bytes
+#
+# assert writer.to_s == "Strings & bytes"
+# ~~~
+class StringWriter
+	super BytesWriter
+
+	redef fun to_s do return bytes.to_s
+end
+
+# Read from `bytes` in memory
+#
+# ~~~
+# var reader = new BytesReader(b"a…b")
+# assert reader.read_char == 'a'
+# assert reader.read_byte == 0xE2u8 # 1st byte of '…'
+# assert reader.read_byte == 0x80u8 # 2nd byte of '…'
+# assert reader.read_char == '�' # Reads the last byte as an invalid char
+# assert reader.read_all_bytes == b"b"
+# ~~~
+class BytesReader
 	super Reader
 
-	# The string to read from.
+	# Source data to read
+	var bytes: Bytes
+
+	# The current position in `bytes`
+	private var cursor = 0
+
+	redef fun read_char
+	do
+		if cursor >= bytes.length then return null
+
+		var len = bytes.items.length_of_char_at(cursor)
+		var char = bytes.items.char_at(cursor)
+		cursor += len
+		return char
+	end
+
+	redef fun read_byte
+	do
+		if cursor >= bytes.length then return null
+
+		var c = bytes[cursor]
+		cursor += 1
+		return c
+	end
+
+	redef fun close do bytes = new Bytes.empty
+
+	redef fun read_all_bytes
+	do
+		var res = bytes.slice_from(cursor)
+		cursor = bytes.length
+		return res
+	end
+
+	redef fun eof do return cursor >= bytes.length
+end
+
+# `Stream` reading from a `String` source
+#
+# This class has the same behavior as `BytesReader`
+# except for its constructor accepting a `String`.
+#
+# ~~~
+# var reader = new StringReader("a…b")
+# assert reader.read_char == 'a'
+# assert reader.read_byte == 0xE2u8 # 1st byte of '…'
+# assert reader.read_byte == 0x80u8 # 2nd byte of '…'
+# assert reader.read_char == '�' # Reads the last byte as an invalid char
+# assert reader.read_all == "b"
+# ~~~
+class StringReader
+	super BytesReader
+
+	autoinit source
+
+	# Source data to read
 	var source: String
 
-	# The current position in the string (bytewise).
-	private var cursor: Int = 0
+	init do bytes = source.to_bytes
 
-	redef fun read_char do
-		if cursor < source.length then
-			# Fix when supporting UTF-8
-			var c = source[cursor]
-			cursor += 1
-			return c
-		else
-			return null
-		end
-	end
-
-	redef fun read_byte do
-		if cursor < source.length then
-			var c = source.bytes[cursor]
-			cursor += 1
-			return c
-		else
-			return null
-		end
-	end
-
-	redef fun close do
+	redef fun close
+	do
 		source = ""
+		super
 	end
-
-	redef fun read_all_bytes do
-		var nslen = source.length - cursor
-		var nns = new CString(nslen)
-		source.copy_to_native(nns, nslen, cursor, 0)
-		return new Bytes(nns, nslen, nslen)
-	end
-
-	redef fun eof do return cursor >= source.byte_length
 end
