@@ -187,7 +187,6 @@ class XMLProcessor
 				end
 			end
 		else
-			if tag_name.has("xml") then return new XMLError(st_loc, "Forbidden keyword xml in Processing Instruction")
 			var cont_st = pos
 			var cont_end = ignore_until("?>")
 			if cont_end == -1 then
