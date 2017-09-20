@@ -490,18 +490,13 @@ class BMFontAsset
 
 					# Would the line be too long?
 					if dx + word_len > max_width then
-						if text_sprites.wrap then
-							# Wrap
-							justify(line_sprites, text_sprites.align, dx)
-							dy -= line_height
-							if max_height != null and max_height < -dy + line_height then break
-							dx = 0.0
-						else
-							# Cut short
-							justify(line_sprites, text_sprites.align, dx)
-							dy -= line_height
-							if max_height != null and max_height < -dy + line_height then break
-							dx = 0.0
+						justify(line_sprites, text_sprites.align, dx)
+						dy -= line_height
+						if max_height != null and max_height < -dy + line_height then break
+						dx = 0.0
+
+						if not text_sprites.wrap then
+							# Cut short, skip everything until the next new line
 							while c != '\n' and i < text.length - 1 do
 								i += 1
 								c = text[i]
