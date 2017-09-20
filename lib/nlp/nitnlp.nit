@@ -33,7 +33,7 @@ var arguments = options.rest
 # Processor initialization
 var java_cp = opt_java_cp.value
 if java_cp == null then java_cp = "*"
-var proc = new NLPProcessor(java_cp)
+var proc = new NLPJavaProcessor(java_cp)
 
 if arguments.length != 2 then
 	print "Usage: nitnlp text1 text2\n"

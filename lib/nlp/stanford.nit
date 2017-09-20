@@ -20,19 +20,47 @@ module stanford
 import opts
 import dom
 
+# Natural Language Processor
+#
+# NLPProcessor provides natural language processing for input text and files.
+# Analyzed documents can be manipulated through the resulting NLPDocument.
+interface NLPProcessor
+
+	# Creates a new NLPDocument from a string
+	fun process(string: String): NLPDocument is abstract
+
+	# Creates a new NLPDocument from a file content
+	fun process_file(path: String): NLPDocument do
+		var content = path.to_path.read_all
+		return process(content)
+	end
+
+	# Creates a new NLPDocument from a list of files (batch mode)
+	#
+	# Returns a map of file path associated with their NLPDocument.
+	fun process_files(paths: Array[String]): Map[String, NLPDocument] do
+		var res = new HashMap[String, NLPDocument]
+		for file in paths do
+			res[file] = process_file(file)
+		end
+		return res
+	end
+end
+
 # Wrapper around StanfordNLP jar.
 #
-# NLPProcessor provides natural language processing of input text files and
-# an API to handle analysis results.
-#
 # FIXME this should use the Java FFI.
-class NLPProcessor
+class NLPJavaProcessor
+	super NLPProcessor
 
 	# Classpath to give to Java when loading the StanfordNLP jars.
 	var java_cp: String
 
+	# Temp dir used to store batch results
+	var tmp_dir = ".nlp"
+
 	# Process a string and return a new NLPDocument from this.
-	fun process(string: String): NLPDocument do
+	redef fun process(string) do
 		var tmp_file = ".nlp.in"
 		var file = new FileWriter.open(tmp_file)
 		file.write string
@@ -43,7 +71,7 @@ class NLPProcessor
 	end
 
 	# Process the `input` file and return a new NLPDocument from this.
-	fun process_file(input: String): NLPDocument do
+	redef fun process_file(input) do
 		# TODO opt annotators
 		var tmp_file = "{input.basename}.xml"
 		sys.system "java -cp \"{java_cp}\" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma -outputFormat xml -file {input}"
@@ -55,7 +83,7 @@ class NLPProcessor
 	# Batch mode.
 	#
 	# Returns a map of file path associated with their NLPDocument.
-	fun process_files(inputs: Collection[String], output_dir: String): Map[String, NLPDocument] do
+	redef fun process_files(inputs) do
 		# Prepare the input file list
 		var input_file = "inputs.list"
 		var fw = new FileWriter.open(input_file)
@@ -63,14 +91,15 @@ class NLPProcessor
 		fw.close
 
 		# Run Stanford NLP jar
-		sys.system "java -cp \"{java_cp}\" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma -outputFormat xml -filelist {input_file} -outputDirectory {output_dir}"
+		sys.system "java -cp \"{java_cp}\" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma -outputFormat xml -filelist {input_file} -outputDirectory {tmp_dir}"
 		# Parse output
 		var map = new HashMap[String, NLPDocument]
 		for input in inputs do
-			var out_file = output_dir / "{input.basename}.xml"
+			var out_file = tmp_dir / "{input.basename}.xml"
 			map[input] = new NLPDocument.from_xml_file(out_file)
 		end
 		input_file.file_delete
+		tmp_dir.rmdir
 		return map
 	end
 end
