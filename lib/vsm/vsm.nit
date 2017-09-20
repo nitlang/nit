@@ -28,7 +28,7 @@ import counter
 #
 # *n-dimensions* vectors are used to represent a text document or an object.
 class Vector
-	super Counter[String]
+	super HashMap[nullable Object, Float]
 
 	# Cosine similarity of `self` and `other`.
 	#
@@ -58,17 +58,18 @@ class Vector
 	# ~~~
 	fun cosine_similarity(other: SELF): Float do
 		# Collect terms
-		var terms = new HashSet[String]
+		var terms = new HashSet[nullable Object]
 		for k in self.keys do terms.add k
 		for k in other.keys do terms.add k
 
 		# Get dot product of two vectors
-		var dot = 0
+		var dot = 0.0
 		for term in terms do
-			dot += self.get_or_default(term, 0) * other.get_or_default(term, 0)
+			dot += self.get_or_default(term, 0.0) * other.get_or_default(term, 0.0)
 		end
-
-		return dot.to_f / (self.norm * other.norm)
+		var cos = dot.to_f / (self.norm * other.norm)
+		if cos.is_nan then return 0.0
+		return cos
 	end
 
 	# The norm of the vector.
@@ -90,8 +91,12 @@ class Vector
 	# assert v.norm.is_approx(3.742, 0.001)
 	# ~~~
 	fun norm: Float do
-		var sum = 0
-		for v in self.values do sum += v ** 2
+		var sum = 0.0
+		for v in self.values do sum += v.pow(2.0)
 		return sum.to_f.sqrt
+	end
+
+	redef fun to_s do
+		return "[{join(", ", ":")}]"
 	end
 end

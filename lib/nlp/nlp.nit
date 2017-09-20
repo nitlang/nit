@@ -23,8 +23,8 @@ import vsm
 redef class NLPDocument
 
 	# `NLPVector` representing `self`.
-	var vector: Vector[String] is lazy do
-		var vector = new Vector[String]
+	var vector: Vector is lazy do
+		var vector = new Vector
 		for sentence in sentences do
 			for token in sentence.tokens do
 				if not keep_pos_token(token) then continue
