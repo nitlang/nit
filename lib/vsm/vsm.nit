@@ -12,17 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# NLPVector Space Model.
+# Vector Space Model
 #
-# The Vector Space Model (VSM) is used to compare natural language texts.
-# Texts are translated to multidimensionnal vectors then compared by cosine
-# similarity.
+# Vector Space Model (VSM) is an algebraic model for representing text documents
+# (and any objects, in general) as vectors of identifiers, such as, for example,
+# index terms.
+#
+# It is used in information filtering, information retrieval, indexing and
+# relevancy rankings.
 module vsm
 
 import counter
 
-# A multi-dimensional vector.
-class NLPVector
+# A n-dimensions vector
+#
+# *n-dimensions* vectors are used to represent a text document or an object.
+class Vector
 	super Counter[String]
 
 	# Cosine similarity of `self` and `other`.
@@ -31,23 +36,23 @@ class NLPVector
 	# two vectors are orthogonal and 1.0 means that they are identical.
 	#
 	# ~~~
-	# var v1 = new NLPVector
-	# v1["x"] = 1
-	# v1["y"] = 2
-	# v1["z"] = 3
+	# var v1 = new Vector
+	# v1["x"] = 1.0
+	# v1["y"] = 2.0
+	# v1["z"] = 3.0
 	#
-	# var v2 = new NLPVector
-	# v2["x"] = 1
-	# v2["y"] = 2
-	# v2["z"] = 3
+	# var v2 = new Vector
+	# v2["x"] = 1.0
+	# v2["y"] = 2.0
+	# v2["z"] = 3.0
 	#
-	# var v3 = new NLPVector
-	# v3["a"] = 1
-	# v3["b"] = 2
-	# v3["c"] = 3
+	# var v3 = new Vector
+	# v3["a"] = 1.0
+	# v3["b"] = 2.0
+	# v3["c"] = 3.0
 	#
 	# print v1.cosine_similarity(v2)
-	# #assert v1.cosine_similarity(v2) == 1.0
+	# assert v1.cosine_similarity(v2) == 1.0
 	# print v1.cosine_similarity(v3)
 	# assert v1.cosine_similarity(v3) == 0.0
 	# ~~~
@@ -57,7 +62,7 @@ class NLPVector
 		for k in self.keys do terms.add k
 		for k in other.keys do terms.add k
 
-		# Get dot product of two verctors
+		# Get dot product of two vectors
 		var dot = 0
 		for term in terms do
 			dot += self.get_or_default(term, 0) * other.get_or_default(term, 0)
@@ -71,17 +76,17 @@ class NLPVector
 	# `||x|| = (x1 ** 2 ... + xn ** 2).sqrt`
 	#
 	# ~~~
-	# var v = new NLPVector
-	# v["x"] = 1
-	# v["y"] = 1
-	# v["z"] = 1
-	# v["t"] = 1
+	# var v = new Vector
+	# v["x"] = 1.0
+	# v["y"] = 1.0
+	# v["z"] = 1.0
+	# v["t"] = 1.0
 	# assert v.norm.is_approx(2.0, 0.001)
 	#
-	# v["x"] = 1
-	# v["y"] = 2
-	# v["z"] = 3
-	# v["t"] = 0
+	# v["x"] = 1.0
+	# v["y"] = 2.0
+	# v["z"] = 3.0
+	# v["t"] = 0.0
 	# assert v.norm.is_approx(3.742, 0.001)
 	# ~~~
 	fun norm: Float do
