@@ -19,6 +19,8 @@ module stanford
 
 import opts
 import dom
+import curl
+import pthreads
 
 # Natural Language Processor
 #
@@ -283,5 +285,83 @@ class NLPToken
 		var end_offset = xml["CharacterOffsetEnd"].first.as(XMLStartTag).data.to_i
 		var pos = xml["POS"].first.as(XMLStartTag).data
 		init(index, word, lemma, begin_offset, end_offset, pos)
+	end
+end
+
+# Stanford web server
+#
+# Runs the server on `port`.
+#
+# For more details about the stanford NLP server see
+# https://stanfordnlp.github.io/CoreNLP/corenlp-server.html
+class NLPServer
+	super Thread
+
+	# Stanford jar classpath
+	#
+	# Classpath to give to Java when loading the StanfordNLP jars.
+	var java_cp: String
+
+	# Port the Java server will listen on
+	var port: Int
+
+	redef fun main do
+		sys.system "java -mx4g -cp \"{java_cp}\" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port {port.to_s} -timeout 15000"
+		return null
+	end
+end
+
+# A NLPProcessor using a NLPServer as backend
+class NLPClient
+	super NLPProcessor
+
+	# Base uri of the NLP server API
+	#
+	# For examples "http://localhost:9000" or "https://myserver.com"
+	var api_uri: String
+
+	# Annotators to use
+	#
+	# The specified annotators must exist on the server.
+	#
+	# Defaults are: `tokenize`, `ssplit`, `pos` and `lemma`.
+	var annotators: Array[String] = ["tokenize", "ssplit", "pos", "lemma"] is writable
+
+	# Language to process
+	#
+	# The language must be available on the server.
+	#
+	# Default is `en`.
+	var language = "en" is writable
+
+	# Output format to ask.
+	#
+	# Only `xml` is implemented at the moment.
+	private var format = "xml"
+
+	# API uri used to build curl POST requests
+	fun post_uri: String do
+		return "{api_uri}/?properties=%7B%22annotators%22%3A%20%22tokenize%2Cssplit%2Cpos%2clemma%22%2C%22outputFormat%22%3A%22{format}%22%7D&pipelineLanguage={language}"
+	end
+
+	redef fun process(string) do
+		var request = new CurlHTTPRequest(post_uri)
+		request.body = string
+		var response = request.execute
+		if response isa CurlResponseSuccess then
+			if response.status_code != 200 then
+				print "Error: {response.body_str}"
+				return new NLPDocument
+			end
+			var xml = response.body_str.to_xml
+			if xml isa XMLError then
+				print xml
+			end
+			return new NLPDocument.from_xml(response.body_str.to_xml.as(XMLDocument))
+		else if response isa CurlResponseFailed then
+			print "Error: {response.error_msg}"
+			return new NLPDocument
+		end
+		return new NLPDocument
 	end
 end
