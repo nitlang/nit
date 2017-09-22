@@ -328,23 +328,34 @@ class Bytes
 		return new FlatString.full(ns, elen, 0, elen)
 	end
 
-	# Interprets `self` as a big-endian positive integer.
+	# Interprets `self` as a big-endian integer (unsigned by default)
 	#
 	# ~~~
 	# var b = "0102".hexdigest_to_bytes
 	# assert b.to_i == 258
-	# ~~~
 	#
-	# Nul bytes on the left are trimmed.
-	# 0 is returned for an empty Bytes object.
-	#
-	# ~~~
-	# assert "01".hexdigest_to_bytes.to_i == 1
-	# assert "0001".hexdigest_to_bytes.to_i == 1
-	#
+	# assert   "01".hexdigest_to_bytes.to_i == 1
+	# assert   "FF".hexdigest_to_bytes.to_i == 255
 	# assert "0000".hexdigest_to_bytes.to_i == 0
-	# assert "00".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# If `self.is_empty`, 0 is returned.
+	#
+	# ~~~
 	# assert "".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# If `signed == true`, the bytes are read as a signed integer.
+	# As usual, the sign bit is the left most bit, no matter the
+	# `length` of `self`.
+	#
+	# ~~~
+	# assert     "01".hexdigest_to_bytes.to_i(true) ==      1
+	# assert     "FF".hexdigest_to_bytes.to_i(true) ==     -1
+	# assert   "00FF".hexdigest_to_bytes.to_i(true) ==    255
+	# assert     "E0".hexdigest_to_bytes.to_i(true) ==    -32
+	# assert   "FE00".hexdigest_to_bytes.to_i(true) ==   -512
+	# assert "FEFEFE".hexdigest_to_bytes.to_i(true) == -65794
 	# ~~~
 	#
 	# `Int::to_bytes` is a loosely reverse method.
@@ -353,10 +364,12 @@ class Bytes
 	# assert b.to_i.to_bytes == b
 	# assert (b.to_i + 1).to_bytes.hexdigest == "0103"
 	# assert "0001".hexdigest_to_bytes.to_i.to_bytes.hexdigest == "01"
+	#
+	# assert (-32).to_bytes.to_i(true) == -32
 	# ~~~
 	#
 	# Warning: `Int` might overflow for bytes with more than 60 bits.
-	fun to_i: Int do
+	fun to_i(signed: nullable Bool): Int do
 		var res = 0
 		var i = 0
 		while i < length do
@@ -364,6 +377,18 @@ class Bytes
 			res += self[i].to_i
 			i += 1
 		end
+
+		# Two's complement is `signed`
+		if signed == true and not_empty and first > 0x80u8 then
+			var ff = 0
+			for j in [0..length[ do
+				ff *= 0x100
+				ff += 0xFF
+			end
+
+			res = -((res ^ ff) + 1)
+		end
+
 		return res
 	end
 
@@ -651,7 +676,7 @@ private class BytesIterator
 end
 
 redef class Int
-	# A big-endian representation of self.
+	# A signed big-endian representation of `self`
 	#
 	# ~~~
 	# assert     1.to_bytes.hexdigest ==     "01"
@@ -661,43 +686,86 @@ redef class Int
 	# assert 65536.to_bytes.hexdigest == "010000"
 	# ~~~
 	#
+	# Negative values are converted to their two's complement.
+	# Be careful as the result can be ambiguous.
+	#
+	# ~~~
+	# assert     (-1).to_bytes.hexdigest ==     "FF"
+	# assert    (-32).to_bytes.hexdigest ==     "E0"
+	# assert   (-512).to_bytes.hexdigest ==   "FE00"
+	# assert (-65794).to_bytes.hexdigest == "FEFEFE"
+	# ~~~
+	#
+	# Optionally, set `n_bytes` to the desired number of bytes in the output.
+	# This setting can disambiguate the result between positive and negative
+	# integers. Be careful with this parameter as the result may overflow.
+	#
+	# ~~~
+	# assert        1.to_bytes(2).hexdigest ==     "0001"
+	# assert    65535.to_bytes(2).hexdigest ==     "FFFF"
+	# assert     (-1).to_bytes(2).hexdigest ==     "FFFF"
+	# assert   (-512).to_bytes(4).hexdigest == "FFFFFE00"
+	# assert 0x123456.to_bytes(2).hexdigest ==     "3456"
+	# ~~~
+	#
 	# For 0, a Bytes object with single nul byte is returned (instead of an empty Bytes object).
 	#
 	# ~~~
 	# assert 0.to_bytes.hexdigest == "00"
 	# ~~~
 	#
-	# `Bytes::to_i` can be used to do the reverse operation.
+	# For positive integers, `Bytes::to_i` can reverse the operation.
 	#
 	# ~~~
 	# assert 1234.to_bytes.to_i == 1234
 	# ~~~
 	#
 	# Require self >= 0
-	fun to_bytes: Bytes do
-		if self == 0 then return "\0".to_bytes
-		assert self > 0
+	fun to_bytes(n_bytes: nullable Int): Bytes do
+
+		# If 0, force using at least one byte
+		if self == 0 and n_bytes == null then n_bytes = 1
 
 		# Compute the len (log256)
 		var len = 1
 		var max = 256
-		while self >= max do
+		var s = self.abs
+		while s >= max do
 			len += 1
 			max *= 256
 		end
 
+		# Two's complement
+		s = self
+		if self < 0 then
+			var ff = 0
+			for j in [0..len[ do
+				ff *= 0x100
+				ff += 0xFF
+			end
+
+			s = ((-self) ^ ff) + 1
+		end
+
+		# Cut long values
+		if n_bytes != null and len > n_bytes then len = n_bytes
+
 		# Allocate the buffer
-		var res = new Bytes.with_capacity(len)
-		for i in [0..len[ do res[i] = 0u8
+		var cap = n_bytes or else len
+		var res = new Bytes.with_capacity(cap)
+
+		var filler = if self < 0 then 0xFFu8 else 0u8
+		for i in [0..cap[ do res[i] = filler
 
 		# Fill it starting with the end
-		var i = len
-		var sum = self
-		while i > 0 do
+		var i = cap
+		var sum = s
+		while i > cap - len do
 			i -= 1
 			res[i] = (sum % 256).to_b
 			sum /= 256
 		end
+
 		return res
 	end
 end

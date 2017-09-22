@@ -59,6 +59,11 @@ redef interface Object
 	fun serialization_hash: Int do return object_id
 end
 
+redef class String
+	redef fun serialization_hash do return hash
+	redef fun is_same_serialized(o) do return self == o
+end
+
 redef class Text
 
 	# Strip the `nullable` prefix from the type name `self`
