@@ -1,6 +1,8 @@
 *.bak
 *.swp
 *.swo
+*.swn
+*.swm
 *~
 .project
 EIFGENs
