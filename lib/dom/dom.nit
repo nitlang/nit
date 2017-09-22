@@ -58,13 +58,13 @@ redef class XMLStartTag
 	# var xml = code.to_xml
 	# assert xml["animal"].first["tiger"].first.as(XMLStartTag).data == "This is a white tiger!"
 	# ~~~
-	fun data: String
+	fun data: nullable String
 	do
 		for child in children do
 			if child isa PCDATA then return child.content
 			if child isa CDATA then return child.content
 		end
-		abort
+		return null
 	end
 end
 
