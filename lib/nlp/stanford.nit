@@ -279,12 +279,22 @@ class NLPToken
 	# ~~~
 	init from_xml(xml: XMLStartTag) do
 		var index = xml.attributes.first.as(XMLStringAttr).value.to_i
-		var word = xml["word"].first.as(XMLStartTag).data
-		var lemma = xml["lemma"].first.as(XMLStartTag).data
-		var begin_offset = xml["CharacterOffsetBegin"].first.as(XMLStartTag).data.to_i
-		var end_offset = xml["CharacterOffsetEnd"].first.as(XMLStartTag).data.to_i
-		var pos = xml["POS"].first.as(XMLStartTag).data
+		var word = read_data(xml, "word")
+		var lemma = read_data(xml, "lemma")
+		var begin_offset = read_data(xml, "CharacterOffsetBegin").to_i
+		var end_offset = read_data(xml, "CharacterOffsetEnd").to_i
+		var pos = read_data(xml, "POS")
 		init(index, word, lemma, begin_offset, end_offset, pos)
+	end
+
+	private fun read_data(xml: XMLStartTag, tag_name: String): String do
+		var res = ""
+		if xml[tag_name].is_empty then return res
+		var first = xml[tag_name].first
+		if not first isa XMLStartTag then return res
+		var data = first.data
+		if data == null then return res
+		return data
 	end
 end
 
