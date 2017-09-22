@@ -100,3 +100,275 @@ class Vector
 		return "[{join(", ", ":")}]"
 	end
 end
+
+# A Document index based on VSM
+#
+# Using VSMIndex you can index documents associated with their vector.
+# Documents can then be matched to query vectors.
+class VSMIndex
+
+	# Documents index
+	#
+	# TODO use a more efficient representation.
+	var documents = new HashSet[Document]
+
+	# Count for all terms in all indexed documents
+	#
+	# Used to compute the `inverse_doc_frequency`.
+	var terms_doc_count = new Vector
+
+	# Inverse document frequency
+	#
+	# The inverse document frequency is a measure of how much information a term
+	# provides, that is, whether the term is common or rare across all documents.
+	var inverse_doc_frequency = new Vector
+
+	# Used to sort matches
+	#
+	# See `IndexMatch`.
+	var sorter = new IndexMatchSorter
+
+	# Match `query` vector to all index document vectors
+	#
+	# Returns an `IndexMatch` for each indexed document.
+	# Results are ordered by descending similarity.
+	fun match_vector(query: Vector): Array[IndexMatch] do
+		var matches = new Array[IndexMatch]
+		for doc in documents do
+			var sim = query.cosine_similarity(doc.tfidf)
+			if sim == 0.0 then continue
+			matches.add new IndexMatch(doc, sim)
+		end
+		sorter.sort(matches)
+		return matches
+	end
+
+	# Index a document
+	#
+	# With each new document, the `inverse_doc_frequency` must be updated.
+	# By default, the method `update_index` is called after each call to
+	# `index_document`.
+	#
+	# When processing batch documents, use `auto_update = false` to disable
+	# the auto update of the index.
+	fun index_document(doc: Document, auto_update: nullable Bool) do
+		for term, count in doc.terms_count do
+			if not terms_doc_count.has_key(term) then
+				terms_doc_count[term] = 1.0
+			else
+				terms_doc_count[term] += 1.0
+			end
+		end
+		documents.add doc
+		if auto_update == null or auto_update then update_index
+	end
+
+	# Update the index
+	#
+	# Recompute the `inverse_doc_frequency` values.
+	# Must be called manually after indexing new document with the option
+	# `auto_update = false`.
+	fun update_index do
+		for doc in documents do
+			for term, ccount in doc.terms_count do
+				inverse_doc_frequency[term] = (documents.length.to_f / terms_doc_count[term]).log
+			end
+		end
+		for doc in documents do
+			for term, freq in doc.terms_frequency do
+				doc.tfidf[term] = freq * inverse_doc_frequency[term]
+			end
+		end
+	end
+end
+
+# A VSM index to store strings
+class StringIndex
+	super VSMIndex
+
+	# Index a new Document from `title`, `uri` and string `string`.
+	#
+	# Return the Document created.
+	#
+	# See `index_document`.
+	fun index_string(title, uri, string: String, auto_update: nullable Bool): Document do
+		var vector = parse_string(string)
+		var doc = new Document(title, uri, vector)
+		index_document(doc, auto_update)
+		return doc
+	end
+
+	# Match the `query` string against all indexed documents
+	#
+	# See `match_vector`.
+	fun match_string(query: String): Array[IndexMatch] do
+		var vector = parse_string(query)
+		return match_vector(vector)
+	end
+
+	# Parse the `string` as a Vector
+	#
+	# Returns a vector containing the terms of `string`.
+	fun parse_string(string: String): Vector do
+		var reader = new StringReader(string)
+		var vector = new Vector
+		loop
+			var token = reader.read_word
+			if token == "" then break
+
+			if not vector.has_key(token) then
+				vector[token] = 1.0
+			else
+				vector[token] += 1.0
+			end
+		end
+		return vector
+	end
+end
+
+# A VSMIndex to index files
+class FileIndex
+	super StringIndex
+
+	# Index a file from its `path`.
+	#
+	# Return the created document or null if `path` is not accepted by `accept_file`.
+	#
+	# See `index_document`.
+	fun index_file(path: String, auto_update: nullable Bool): nullable Document do
+		if not accept_file(path) then return null
+		var vector = parse_file(path)
+		var doc = new Document(path, path, vector)
+		index_document(doc, auto_update)
+		return doc
+	end
+
+	# Index multiple files
+	#
+	# The recursive method `index_dir` will be called for each directory found
+	# in `paths`.
+	#
+	# See `index_file`
+	fun index_files(paths: Collection[String], auto_update: nullable Bool) do
+		for path in paths do
+			if path.to_path.is_dir then
+				index_dir(path, false)
+			else
+				index_file(path, false)
+			end
+		end
+		if auto_update != null and auto_update then update_index
+	end
+
+	# Index all files in `dir` recursively
+	#
+	# See `index_file`.
+	fun index_dir(dir: String, auto_update: nullable Bool) do
+		if not dir.to_path.is_dir then return
+		for file in dir.files do
+			var path = dir / file
+			if path.to_path.is_dir then
+				index_dir(path, false)
+			else
+				index_file(path, false)
+			end
+		end
+		if auto_update != null and auto_update then update_index
+	end
+
+	# Is `path` accepted depending on `whitelist_exts` and `blacklist_exts`?
+	fun accept_file(path: String): Bool do
+		var ext = path.file_extension
+		if ext != null then
+			ext = ext.to_lower
+			if blacklist_exts.has(ext) then return false
+			if whitelist_exts.not_empty and not whitelist_exts.has(ext) then return false
+		end
+		return whitelist_exts.is_empty
+	end
+
+	# Parse the `file` content as a Vector
+	#
+	# See `parse_string`.
+	fun parse_file(file: String): Vector do
+		return parse_string(file.to_path.read_all)
+	end
+
+	# File extensions white list
+	#
+	# If not empty, only files with these extensions will be indexed.
+	#
+	# If an extension is in both `whitelist_exts` and `blacklist_exts`, the
+	# blacklist will prevail and the file will be ignored.
+	var whitelist_exts = new Array[String] is writable
+
+	# File extensions black list
+	#
+	# Files with these extensions will not be indexed.
+	var blacklist_exts = new Array[String] is writable
+end
+
+# A Document to add in a VSMIndex
+class Document
+
+	# Document title
+	var title: String
+
+	# Document URI
+	var uri: String
+
+	# Count of all terms found in the document
+	#
+	# Used to compute the document `terms_frequency`.
+	var terms_count: Vector
+
+	# Frequency of each term found in the document
+	#
+	# Used to match the document against the `VSMIndex::inverse_doc_frequency`.
+	var terms_frequency: Vector is lazy do
+		var all_terms = 0.0
+		for t, c in terms_count do all_terms += c
+
+		var vector = new Vector
+		for t, c in terms_count do
+			vector[t] = c / all_terms
+		end
+		return vector
+	end
+
+	# Term frequency–Inverse document frequency for each term
+	#
+	# A high weight in tf–idf is reached by a high term frequency
+	# (in the given document) and a low document frequency of the term in the
+	# whole collection of documents
+	var tfidf = new Vector
+
+	redef fun to_s do return "{title}"
+end
+
+# A match to a `request` in an `Index`
+class IndexMatch
+	super Comparable
+
+	# Document matching the `request_vector`
+	var document: Document
+
+	# Similarity between the `request` and the `doc`.
+	#
+	# Result is in the range 0.0 .. 1.1 where 0.0 means no similarity and 1.0
+	# means perfect similarity.
+	var similarity: Float
+
+	redef fun to_s do return "{document} ({similarity})"
+end
+
+# Sort matches by similarity
+class IndexMatchSorter
+	super DefaultComparator
+
+	redef type COMPARED: IndexMatch
+
+	redef fun compare(a, b) do
+		return b.similarity <=> a.similarity
+	end
+end
