@@ -329,7 +329,7 @@ class BlinnPhongProgram
 		uniform mat4 rotation;
 
 		// Lights config
-		uniform int light_kind;
+		uniform lowp int light_kind;
 		uniform vec3 light_center;
 		uniform mat4 light_mvp;
 
@@ -402,7 +402,7 @@ class BlinnPhongProgram
 		uniform sampler2D map_normal;
 
 		// Shadow
-		uniform int light_kind;
+		uniform lowp int light_kind;
 		uniform bool use_shadows;
 		uniform sampler2D depth_texture;
 		uniform float depth_texture_size;
