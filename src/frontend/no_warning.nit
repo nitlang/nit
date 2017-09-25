@@ -48,8 +48,8 @@ private class NoWarningPhase
 
 		var modelbuilder = toolcontext.modelbuilder
 
-		# Disable `missing-doc` for `test_suite`
-		if source != null and not nmoduledecl.get_annotations("test_suite").is_empty then
+		# Disable `missing-doc` for `test`
+		if source != null and not nmoduledecl.get_annotations("test").is_empty then
 			toolcontext.warning_blacklist[source].add("missing-doc")
 		end
 

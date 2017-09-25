@@ -12,15 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_coloring is test_suite
+module test_coloring is test
 
-import test_suite
 import coloring
 
 class TestPOSetColorer
-	super TestSuite
+	test
 
-	fun test_ids_strictly_positive do
+	fun test_ids_strictly_positive is test do
 		var poset = new POSet[String]
 		poset.add_node "A"
 

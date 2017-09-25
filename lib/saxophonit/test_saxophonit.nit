@@ -9,7 +9,7 @@
 # another product.
 
 # Tests for SAXophoNit
-module test_saxophonit is test_suite
+module test_saxophonit is test
 
 import sax::helpers::sax_locator_impl
 import sax::helpers::attributes_impl
@@ -18,10 +18,11 @@ import saxophonit::testing
 
 class TestSaxophonit
 	super SAXTestSuite
+	test
 
 	redef fun create_reader do return new XophonReader
 
-	fun test_empty do
+	fun test_empty is test do
 		before_test
 		parse_string("<foo />")
 		expected.document_locator = new SAXLocatorImpl
@@ -32,7 +33,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_simple_element do
+	fun test_simple_element is test do
 		before_test
 		parse_string("<foo>bar</foo>")
 		expected.document_locator = new SAXLocatorImpl
@@ -44,7 +45,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_type_mismatch do
+	fun test_type_mismatch is test do
 		before_test
 		parse_string("<a></b>")
 		expected.document_locator = new SAXLocatorImpl
@@ -57,7 +58,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_attributes do
+	fun test_attributes is test do
 		var atts = new AttributesImpl
 
 		before_test
@@ -72,7 +73,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_nested do
+	fun test_nested is test do
 		var atts = new AttributesImpl
 
 		before_test
@@ -90,7 +91,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_xmldecl do
+	fun test_xmldecl is test do
 		before_test
 		parse_string("<?xml version='1.0'?><foo />")
 		expected.document_locator = new SAXLocatorImpl
@@ -101,7 +102,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_xmldecl_encoding do
+	fun test_xmldecl_encoding is test do
 		before_test
 		parse_string("<?xml version=\"1.0\" encoding='utf-8'?><foo />")
 		expected.document_locator = new SAXLocatorImpl
@@ -112,7 +113,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_xmldecl_standalone do
+	fun test_xmldecl_standalone is test do
 		before_test
 		parse_string("<?xml version='1.0' standalone=\"yes\"?><foo />")
 		expected.document_locator = new SAXLocatorImpl
@@ -123,7 +124,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_xmldecl_both do
+	fun test_xmldecl_both is test do
 		before_test
 		parse_string("<?xml version='1.0' encoding='utf-8' standalone=\"yes\"?><foo />")
 		expected.document_locator = new SAXLocatorImpl
@@ -134,7 +135,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_reference_builtin do
+	fun test_reference_builtin is test do
 		before_test
 		parse_string("<foo>&amp;&quot;&apos;&lt;&gt;&#48;&#x30;&#x03A;</foo>")
 		expected.document_locator = new SAXLocatorImpl
@@ -153,7 +154,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_comments do
+	fun test_comments is test do
 		# TODO For the moment, comments are simply ignored.
 		before_test
 		parse_string("<!-- I--><foo>bar<!--l-i-k-e--></foo><!--comments    -->")
@@ -166,7 +167,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_ns_simple do
+	fun test_ns_simple is test do
 		before_test
 		parse_string("<foo:bar xmlns:foo='https://s.exemple.org' />")
 		expected.document_locator = new SAXLocatorImpl
@@ -178,7 +179,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_ns_prefix do
+	fun test_ns_prefix is test do
 		var atts = new AttributesImpl
 
 		before_test
@@ -194,7 +195,7 @@ class TestSaxophonit
 		assert_equals
 	end
 
-	fun test_mixed do
+	fun test_mixed is test do
 		var atts = new AttributesImpl
 
 		# TODO For the moment, ignorable white space is not detected.

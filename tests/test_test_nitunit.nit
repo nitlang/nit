@@ -15,31 +15,30 @@
 # limitations under the License.
 
 # NitUnit file for test_nitunit module.
-module test_test_nitunit is test_suite
+module test_test_nitunit is test
 
-import test_suite
 intrude import test_nitunit
 
 class TestX
-	super TestSuite
+	test
 
 	var subject: X is noinit
 
-	redef fun before_test do
+	fun before_test is before do
 		subject = new X
 	end
 
-	fun test_foo do
+	fun test_foo is test do
 		subject.foo
 	end
 
 	# will fail
-	fun test_foo1 do
+	fun test_foo1 is test do
 		subject.foo1(10, 20)
 		assert false
 	end
 
-	fun test_foo2 do
+	fun test_foo2 is test do
 		assert subject.foo2
 	end
 end

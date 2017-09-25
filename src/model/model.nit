@@ -588,6 +588,8 @@ class MClass
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
 
+	redef var is_test is lazy do return intro.is_test
+
 	redef fun mdoc_or_fallback
 	do
 		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
@@ -2327,6 +2329,20 @@ abstract class MProperty
 	end
 
 	private var lookup_all_definitions_cache = new HashMap2[MModule, MType, Array[MPROPDEF]]
+
+	redef var is_test is lazy do return intro.is_test
+
+	# Does self have the `before` annotation?
+	var is_before: Bool is lazy do return intro.is_before
+
+	# Does self have the `before_all` annotation?
+	var is_before_all: Bool is lazy do return intro.is_before_all
+
+	# Does self have the `after` annotation?
+	var is_after: Bool is lazy do return intro.is_after
+
+	# Does self have the `after_all` annotation?
+	var is_after_all: Bool is lazy do return intro.is_after_all
 end
 
 # A global method
@@ -2516,6 +2532,18 @@ abstract class MPropDef
 	end
 
 	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
+
+	# Does self have the `before` annotation?
+	var is_before = false is writable
+
+	# Does self have the `before_all` annotation?
+	var is_before_all = false is writable
+
+	# Does self have the `after` annotation?
+	var is_after = false is writable
+
+	# Does self have the `after_all` annotation?
+	var is_after_all = false is writable
 end
 
 # A local definition of a method

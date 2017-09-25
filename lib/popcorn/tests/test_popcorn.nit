@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_popcorn is test_suite
+module test_popcorn is test
 
 import pop_tests
 import popcorn
@@ -29,6 +29,7 @@ end
 
 class TestPopcornRouter
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}"
@@ -44,7 +45,7 @@ class TestPopcornRouter
 		system "curl -s {host}:{port}/products/not_found"
 	end
 
-	fun test_router do
+	fun test_router is test do
 		var app = new App
 		app.use("/", new TestHandler("/"))
 		app.use("/about", new TestHandler("/about"))
@@ -65,6 +66,7 @@ end
 
 class TestPopcornRoutes
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}"
@@ -84,7 +86,7 @@ class TestPopcornRoutes
 		system "curl -s {host}:{port}/user/id/not_found"
 	end
 
-	fun test_routes do
+	fun test_routes is test do
 		var app = new App
 		app.use("/", new TestHandler("/"))
 		app.use("/user", new TestHandler("/user"))

@@ -14,20 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_simple_logger is test_suite
+module test_example_simple_logger is test
 
 import pop_tests
 import example_simple_logger
 
 class TestExampleSimpleLogger
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 		system "curl -s {host}:{port}/about"
 	end
 
-	fun test_example_simple_logger do
+	fun test_example_simple_logger is test do
 		var app = new App
 		app.use_before("/*", new SimpleLoggerHandler)
 		app.use("/", new MyOtherHandler)

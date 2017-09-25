@@ -27,9 +27,8 @@ class NitUnitGenerator
 	fun gen_unit(mmodule: MModule, test_file: String): Template do
 		var with_private = toolcontext.opt_gen_private.value
 		var tpl = new Template
-		tpl.addn "module test_{mmodule.name} is test_suite"
+		tpl.addn "module test_{mmodule.name} is test"
 		tpl.addn ""
-		tpl.addn "import test_suite"
 		if with_private then
 			tpl.addn "intrude import {mmodule.name}"
 		else
@@ -39,7 +38,7 @@ class NitUnitGenerator
 			if mclassdef.mclass.kind != concrete_kind then continue
 			tpl.addn ""
 			tpl.addn "class Test{mclassdef.name}"
-			tpl.addn "\tsuper TestSuite"
+			tpl.addn "\ttest"
 			for mpropdef in mclassdef.mpropdefs do
 				if not mpropdef isa MMethodDef then continue
 				var mproperty = mpropdef.mproperty
@@ -48,7 +47,7 @@ class NitUnitGenerator
 				if not with_private and mproperty.visibility <= protected_visibility then continue
 				var case_name = case_name(mpropdef)
 				tpl.addn ""
-				tpl.addn "\tfun {case_name} do"
+				tpl.addn "\tfun {case_name} is test do"
 				tpl.addn "\t\tassert not_implemented: false # TODO remove once implemented"
 				tpl.addn ""
 				tpl.addn gen_init(mclassdef)

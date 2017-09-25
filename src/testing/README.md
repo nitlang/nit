@@ -49,20 +49,19 @@ To test a method you have to instanciate its class:
 
 TestSuites are Nit files that define a set of TestCase for a particular module.
 
-The test suite module must be declared using the `test_suite` annotation.
+The test suite module must be declared using the `test` annotation.
 The structure of a test suite is the following:
 
 	# test suite for module `foo`
-	module test_foo is test_suite
+	module test_foo is test
 
-	import test_suite # import the `TestSuite` class and the `test_suite` annotation
 	import foo # can be intrude to test private things
 
 	class TestFoo
-		super TestSuite
+		test
 
 		# test case for `foo::Foo::baz`
-		fun test_baz do
+		fun baz is test do
 			var subject = new Foo
 			assert subject.baz(1, 2) == 3
 		end
@@ -79,18 +78,18 @@ Otherwise, you can use the `-t` option to specify the test suite module name:
 
 	$ nitunit foo.nit -t my_test_suite.nit
 
-`nitunit` will execute a test for each method named `test_*` in a class named `Test*`
+`nitunit` will execute a test for each method annotated with `test` in a class also annotated with `test`
 so multiple tests can be executed for a single method:
 
 	class TestFoo
-		super TestSuite
+		test
 
-		fun test_baz_1 do
+		fun baz_1 is test do
 			var subject = new Foo
 			assert subject.baz(1, 2) == 3
 		end
 
-		fun test_baz_2 do
+		fun baz_2 is test do
 			var subject = new Foo
 			assert subject.baz(1, -2) == -1
 		end
@@ -98,51 +97,50 @@ so multiple tests can be executed for a single method:
 
 `TestSuites` also provide methods to configure the test run:
 
-`before_test` and `after_test`: methods called before/after each test case.
+`before` and `after` annotations can be added to methods that must be called before/after each test case.
 They can be used to factorize repetitive tasks:
 
 	class TestFoo
-		super TestSuite
+		test
 
 		var subject: Foo is noinit
 
 		# Method executed before each test
-		redef fun before_test do
+		redef fun set_up is before do
 			subject = new Foo
 		end
 
-		fun test_baz_1 do
+		fun baz_1 is test do
 			assert subject.baz(1, 2) == 3
 		end
 
-		fun test_baz_2 do
+		fun baz_2 is test do
 			assert subject.baz(1, -2) == -1
 		end
 	end
 
 When using custom test attributes, a empty init must be declared to allow automatic test running.
 
-`before_module` and `after_module`: methods called before/after each test suite.
+`before_all` and `after_all` annotations can be set on methods that must be called before/after each test suite.
 They have to be declared at top level:
 
 	module test_bdd_connector
 
-	import test_suite
 	import bdd_connector
 
 	# Testing the bdd_connector
 	class TestConnector
-		super TestSuite
+		test
 		# test cases using a server
 	end
 
 	# Method executed before testing the module
-	redef fun before_module do
+	fun before_module is before_all do
 		# start server before all test cases
 	end
 
 	# Method executed after testing the module
-	redef fun after_module do
+	fun after_module is after_all do
 		# stop server after all test cases
 	end
 

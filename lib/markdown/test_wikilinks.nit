@@ -13,33 +13,33 @@
 # limitations under the License.
 
 # Test suites for module `markdown`
-module test_wikilinks is test_suite
+module test_wikilinks is test
 
 import test_markdown
 import wikilinks
 
 class TestTokenWikilink
-	super TestSuite
+	test
 
-	fun test_token_location1 do
+	fun test_token_location1 is test do
 		var string = "[[wikilink]]"
 		var stack =  ["TokenWikiLink at 1,1--1,1"]
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location2 do
+	fun test_token_location2 is test do
 		var string = "Hello [[World]]"
 		var stack =  ["TokenWikiLink at 1,7--1,7"]
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location3 do
+	fun test_token_location3 is test do
 		var string = "\nHello\nworld [[wikilink]] !"
 		var stack =  ["TokenWikiLink at 3,7--3,7"]
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location4 do
+	fun test_token_location4 is test do
 		var string = "[[link1]]\n\n[[link2]]"
 		var stack =  [
 			"TokenWikiLink at 1,1--1,1",
@@ -47,7 +47,7 @@ class TestTokenWikilink
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location5 do
+	fun test_token_location5 is test do
 		var string = "[[link1]]\n[[link2]]"
 		var stack =  [
 			"TokenWikiLink at 1,1--1,1",
@@ -55,7 +55,7 @@ class TestTokenWikilink
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location6 do
+	fun test_token_location6 is test do
 		var string = """
 [[doc: github]]
 

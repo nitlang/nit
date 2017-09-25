@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Test module for `listener.nit`
-module test_listener is test_suite
+module test_listener is test
 
 import test_helper
 import reactors
@@ -24,6 +24,7 @@ import events_generator
 
 private class DummyListener
 	super NitrpgTestHelper
+	test
 
 	var reactors = new Array[GameReactor]
 
@@ -39,12 +40,13 @@ end
 
 class TestListener
 	super NitrpgTestHelper
+	test
 
 	var generator = new EventsGenerator(api)
 
 	var repo: Repo is lazy do return load_repo("Morriar/nit")
 
-	fun test_game_issue_stats do
+	fun test_game_issue_stats is test do
 		var db = gen_test_db
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -66,7 +68,7 @@ class TestListener
 		assert game.stats.overall["issues_open"] == 1
 	end
 
-	fun test_player_issue_stats do
+	fun test_player_issue_stats is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -89,7 +91,7 @@ class TestListener
 		assert player.stats.overall["issues_open"] == 1
 	end
 
-	fun test_game_pr_stats do
+	fun test_game_pr_stats is test do
 		var db = gen_test_db
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -121,7 +123,7 @@ class TestListener
 		assert game.stats.overall["commits"] == 2
 	end
 
-	fun test_game_issue_comment_stats do
+	fun test_game_issue_comment_stats is test do
 		var db = gen_test_db
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -143,7 +145,7 @@ class TestListener
 		assert game.stats.overall["reviews"] == 1
 	end
 
-	fun test_player_pull_reactor do
+	fun test_player_pull_reactor is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -168,7 +170,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 12
 	end
 
-	fun test_player_review_reactor do
+	fun test_player_review_reactor is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -211,7 +213,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 4
 	end
 
-	fun test_X_issues_achievements do
+	fun test_X_issues_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -234,7 +236,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 1110
 	end
 
-	fun test_X_pulls_achievements do
+	fun test_X_pulls_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -257,7 +259,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 1110
 	end
 
-	fun test_X_commits_achievements do
+	fun test_X_commits_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -283,7 +285,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 11110
 	end
 
-	fun test_X_comments_achievements do
+	fun test_X_comments_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -308,7 +310,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 1110
 	end
 
-    fun test_issues_achievements do
+    fun test_issues_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
@@ -325,7 +327,7 @@ class TestListener
 		assert player.stats.overall["nitcoins"] == 20
 	end
 
-	fun test_comments_reactor do
+	fun test_comments_reactor is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
