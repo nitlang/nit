@@ -58,7 +58,7 @@ import virtual_gamepad_spritesheet
 redef class App
 
 	# Current touch gamepad, still may be invisible
-	var gamepad: nullable VirtualGamepad = null
+	var gamepad: nullable VirtualGamepad = null is writable
 
 	# Textures used for `DPad` and available to clients
 	var gamepad_spritesheet = new VirtualGamepadSpritesheet
@@ -86,7 +86,7 @@ class VirtualGamepad
 	# and `add_button`.
 	var controls = new Array[RoundControl]
 
-	# Add a directional pad (`DPad`) to a default location
+	# Add and return a directional pad (`DPad`) to a default location
 	#
 	# The 4 buttons fire events with the corresponding name in `names`.
 	# Items in `names` should be in order of top, left, down and right.
@@ -101,17 +101,22 @@ class VirtualGamepad
 	# added by `add_button`.
 	#
 	# Require: `names == null or names.length == 4`
-	fun add_dpad(names: nullable Array[String])
+	fun add_dpad(names: nullable Array[String]): nullable DPad
 	do
 		if names == null then names = ["w","a","s","d"]
 		assert names.length == 4
 
 		if n_dpads == 0 then
-			controls.add new DPad(app.ui_camera.bottom_left.offset(200.0, 100.0, 0.0), names)
+			var dpad = new DPad(app.ui_camera.bottom_left.offset(200.0, 100.0, 0.0), names)
+			controls.add dpad
+			return dpad
 		else if n_dpads == 1 then
-			controls.add new DPad(app.ui_camera.bottom_right.offset(-200.0, 100.0, 0.0), names)
+			var dpad = new DPad(app.ui_camera.bottom_right.offset(-200.0, 100.0, 0.0), names)
+			controls.add dpad
+			return dpad
 		else
 			print_error "Too many DPad ({n_dpads}) in {self}"
+			return null
 		end
 	end
 
@@ -132,7 +137,7 @@ class VirtualGamepad
 		new Point[Float](-350.0, 350.0),
 		new Point[Float](-350.0, 550.0))
 
-	# Add a round button to a default location
+	# Add and return a round button to a default location
 	#
 	# Fired events use `name`, it should usually correspond to a
 	# keyboard key like "space" or "a".
@@ -144,7 +149,7 @@ class VirtualGamepad
 	#
 	# A maximum of 6 buttons may be added using this method when
 	# there is less than 2 `DPad`. Otherwise, only 2 buttons can be added.
-	fun add_button(name: String, texture: Texture)
+	fun add_button(name: String, texture: Texture): nullable RoundButton
 	do
 		if n_dpads == 2 and button_positions.length == 6 then
 			# Drop the bottom 4 buttons
@@ -156,8 +161,10 @@ class VirtualGamepad
 
 		assert button_positions.not_empty else print_error "Too many buttons in {self}"
 		var pos = button_positions.shift
-		controls.add new RoundButton(
+		var but = new RoundButton(
 			app.ui_camera.bottom_right.offset(pos.x, pos.y, 0.0), name, texture)
+		controls.add but
+		return but
 	end
 
 	private fun prepare

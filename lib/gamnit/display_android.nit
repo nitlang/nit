@@ -78,3 +78,8 @@ redef class TextureAsset
 		jni_env.pop_local_frame
 	end
 end
+
+redef class Pointer
+	# Disable out premultiply as we use only the one from Android
+	redef fun premultiply_alpha(width, height) do end
+end

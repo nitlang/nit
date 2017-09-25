@@ -367,6 +367,10 @@ class BMFontAsset
 		var dy = 0.0
 		var text_width = 0.0
 		var line_sprites = new Array[Sprite]
+		var height = 0.0
+
+		# Has the current line height been added to `height`?
+		var line_height_counted = false
 
 		# TextSprite customization
 		var max_width = text_sprites.max_width
@@ -397,14 +401,21 @@ class BMFontAsset
 				dy -= line_height
 				if max_height != null and max_height < -dy + line_height then break
 				dx = 0.0
+				if not line_height_counted then
+					# Force to account for empty lines
+					height += line_height
+				end
+				line_height_counted = false
 				prev_char = null
 				continue
 			else if c == pld then
 				dy -= partial_line_skip
+				height += partial_line_skip
 				word_break = true
 				continue
 			else if c == plu then
 				dy += partial_line_skip
+				height -= partial_line_skip # We could keep two heights and return the max
 				word_break = true
 				continue
 			else if c.is_whitespace then
@@ -477,24 +488,27 @@ class BMFontAsset
 						var w = text[wi]
 
 						if w == '\n' or w == pld or w == plu or w.is_whitespace or (in_link and w == ']') then break
+
+						if not desc.chars.keys.has(w) then
+							var rc = replacement_char
+							if rc == null then continue
+							w = rc
+						end
+
 						word_len += advance(prev_w, w) * scale
 						prev_w = w
 					end
 
 					# Would the line be too long?
 					if dx + word_len > max_width then
-						if text_sprites.wrap then
-							# Wrap
-							justify(line_sprites, text_sprites.align, dx)
-							dy -= line_height
-							if max_height != null and max_height < -dy + line_height then break
-							dx = 0.0
-						else
-							# Cut short
-							justify(line_sprites, text_sprites.align, dx)
-							dy -= line_height
-							if max_height != null and max_height < -dy + line_height then break
-							dx = 0.0
+						justify(line_sprites, text_sprites.align, dx)
+						dy -= line_height
+						if max_height != null and max_height < -dy + line_height then break
+						dx = 0.0
+						line_height_counted = false
+
+						if not text_sprites.wrap then
+							# Cut short, skip everything until the next new line
 							while c != '\n' and i < text.length - 1 do
 								i += 1
 								c = text[i]
@@ -531,6 +545,12 @@ class BMFontAsset
 			prev_char = c
 
 			text_width = text_width.max(dx)
+
+			if not line_height_counted then
+				# Increase `height` only once per line iff there's a caracter
+				line_height_counted = true
+				height += line_height
+			end
 		end
 
 		justify(line_sprites, text_sprites.align, dx)
@@ -542,7 +562,7 @@ class BMFontAsset
 		end
 
 		text_sprites.width = text_width.max(dx)
-		text_sprites.height = dy + line_height
+		text_sprites.height = height
 	end
 
 	# Character replacing other characters missing from the font
