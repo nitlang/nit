@@ -317,7 +317,11 @@ redef class GraphCommand
 		var mentity = v.find_mentity(model, name)
 		if mentity == null then return
 		var g = new InheritanceGraph(mentity, model)
-		v.add g.draw(3, 3).to_svg
+		var pdepth = if opts.has_key("pdepth") and opts["pdepth"].is_int then
+			opts["pdepth"].to_i else 3
+		var cdepth = if opts.has_key("cdepth") and opts["cdepth"].is_int then
+			opts["cdepth"].to_i else 3
+		v.add g.draw(pdepth, cdepth).to_svg
 	end
 end
 
