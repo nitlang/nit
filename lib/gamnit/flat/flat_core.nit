@@ -459,6 +459,9 @@ redef class App
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
 		end
+
+		sprites.reset
+		ui_sprites.reset
 	end
 
 	redef fun on_stop
@@ -1006,6 +1009,22 @@ class SpriteSet
 		contexts_map.clear
 		contexts_items.clear
 		sprites_to_remap.clear
+	end
+
+	private fun reset
+	do
+		for sprite in self do
+			sprite.context = null
+		end
+
+		for c in contexts_items do c.destroy
+		contexts_map.clear
+		contexts_items.clear
+		sprites_to_remap.clear
+
+		for sprite in self do
+			map_sprite sprite
+		end
 	end
 end
 
