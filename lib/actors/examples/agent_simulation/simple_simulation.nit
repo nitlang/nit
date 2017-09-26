@@ -17,7 +17,7 @@
 # The steps consist of each agent greeting each other, and
 # waiting for every other agent to respond before notifying
 # to the `ClockAgent` that they finished their step.
-module simple_simulation
+module simple_simulation is example
 
 import agent_simulation
 

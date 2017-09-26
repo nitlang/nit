@@ -18,7 +18,7 @@
 #
 # From the book OpenGL ES 2.0 Programming Guide, see code reference:
 # https://code.google.com/p/opengles-book-samples/source/browse/trunk/LinuxX11/Chapter_2/Hello_Triangle/Hello_Triangle.c
-module opengles2_hello_triangle
+module opengles2_hello_triangle is example
 
 import glesv2
 import egl

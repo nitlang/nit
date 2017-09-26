@@ -14,6 +14,7 @@
 
 # Example for the `app::http_request` main service `AsyncHttpRequest`
 module http_request_example is
+	example
 	app_name "app.nit HTTP"
 	app_namespace "org.nitlanguage.http_example"
 	android_api_target 15

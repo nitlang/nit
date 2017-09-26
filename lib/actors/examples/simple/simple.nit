@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # A very simple example of the actor model
-module simple
+module simple is example
 
 import actors
 

@@ -41,6 +41,8 @@
 #
 # The shortest plan, in two steps, is to move *up* the tile under the hole (e),
 # then to move *left* the tile after the hole (h).
+module puzzle is example
+
 import ai::search
 
 # The state (`S`) is a square grid, modeled as a one-dimensional array of Tile.

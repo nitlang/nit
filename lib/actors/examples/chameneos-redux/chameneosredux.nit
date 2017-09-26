@@ -17,7 +17,7 @@
 #
 # Complete description of the chameneos-redux :
 # https://benchmarksgame.alioth.debian.org/u64q/chameneosredux-description.html#chameneosredux
-module chameneosredux is no_warning("missing-doc")
+module chameneosredux is example, no_warning("missing-doc")
 
 import actors
 

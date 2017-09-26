@@ -19,7 +19,7 @@
 # ~~~raw
 # get_mclasses ../../lib core::Array Array care::Arrow Fail
 # ~~~
-module get_mclasses
+module get_mclasses is example
 
 import parser_util
 import modelbuilder

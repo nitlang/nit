@@ -9,7 +9,7 @@
 # another product.
 
 # Simple XML validity checker using the `dom` module
-module checker
+module checker is example
 
 import dom
 

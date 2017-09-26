@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # test for threaded annotation
-module threaded_example
+module threaded_example is example
 
 import pthreads
 

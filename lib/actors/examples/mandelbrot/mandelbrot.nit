@@ -17,7 +17,7 @@
 #
 # Complete description of mandelbrot :
 # https://benchmarksgame.alioth.debian.org/u64q/mandelbrot-description.html#mandelbrot
-module mandelbrot is no_warning("missing-doc")
+module mandelbrot is example, no_warning("missing-doc")
 
 import actors
 

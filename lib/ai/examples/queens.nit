@@ -28,7 +28,7 @@
 #
 # This program takes an integer n as argument then display all solutions for the
 # n-queens proglem (ie. on a n*n board).
-module queens
+module queens is example
 
 import ai::backtrack
 

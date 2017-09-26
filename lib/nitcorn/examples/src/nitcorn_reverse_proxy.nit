@@ -15,6 +15,7 @@
 # limitations under the License.
 
 # Minimal example using a `ProxyAction`
+module nitcorn_reverse_proxy is example
 
 import nitcorn::proxy
 

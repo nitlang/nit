@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Simple example using threadpool
-module threadpool_example
+module threadpool_example is example
 
 import threadpool
 

@@ -21,7 +21,7 @@
 # Creates a converter and initializes it
 # Finally checks for dictionaries
 
-import pnacl
+import pnacl is example
 
 class Converter
 	super PnaclApp

@@ -7,6 +7,7 @@
 
 # Template for a 2D gamnit game
 module template is
+	example
 	app_name "gamnit template"
 	app_namespace "org.gamnit.template"
 	app_version(0, 1, git_revision)

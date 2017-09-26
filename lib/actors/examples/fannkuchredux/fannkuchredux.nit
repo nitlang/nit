@@ -17,7 +17,7 @@
 #
 # Complete description of the fannkuch-redux :
 # https://benchmarksgame.alioth.debian.org/u64q/fannkuchredux-description.html#fannkuchredux
-module fannkuchredux is no_warning("missing-doc")
+module fannkuchredux is example, no_warning("missing-doc")
 
 import actors
 

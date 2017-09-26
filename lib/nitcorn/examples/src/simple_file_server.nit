@@ -18,7 +18,7 @@
 #
 # To be safe, it is recommended to run this program with its own username:
 # `sudo file_server -u nitcorn:www`
-module simple_file_server
+module simple_file_server is example
 
 import nitcorn
 import privileges
