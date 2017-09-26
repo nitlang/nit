@@ -417,10 +417,15 @@ redef class App
 	# Second performance clock for smaller operations
 	private var perf_clock_sprites = new Clock is lazy
 
-	redef fun on_create
+	redef fun create_gamnit
 	do
 		super
+		create_flat
+	end
 
+	# Prepare the flat framework services
+	fun create_flat
+	do
 		var display = display
 		assert display != null
 

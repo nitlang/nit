@@ -17,7 +17,7 @@ import gamnit::flat # The 2D API, use `gamnit::depth` for 3D
 
 redef class App
 
-	# Texture, loaded automatically at `on_create`
+	# Texture, loaded in `create_scene`
 	var texture = new Texture("fighter.png")
 
 	# Sound effect, lazy loaded at first use
@@ -26,7 +26,7 @@ redef class App
 	# Sprite, must be loaded in or after `on_create`
 	var sprite = new Sprite(texture, new Point3d[Float](0.0, 0.0, 0.0)) is lazy
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 

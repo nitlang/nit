@@ -39,7 +39,7 @@ redef class App
 	# Vertex data for the triangle
 	var vertex_array: VertexArray is noautoinit
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
