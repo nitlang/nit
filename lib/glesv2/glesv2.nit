@@ -1328,7 +1328,13 @@ fun gl_FRAMEBUFFER_BINDING: GLGetParameterName `{ return GL_FRAMEBUFFER_BINDING;
 fun gl_RENDERBUFFER_BINDING: GLGetParameterName `{ return GL_RENDERBUFFER_BINDING; `}
 
 # Return a string describing the current GL configuration
-fun glGetString(name: GLEnum): String do return glGetString_native(name).to_s
+fun glGetString(name: GLEnum): String
+do
+	var cstr = glGetString_native(name)
+	assert not cstr.address_is_null
+	return cstr.to_s
+end
+
 private fun glGetString_native(name: GLEnum): CString `{ return (char*)glGetString(name); `}
 
 # Company responsible for this GL implementation
