@@ -152,6 +152,13 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 		}
 	`}
 	fun reset in "Java" `{ self.reset(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeMediaPlayer_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 # Sound Pool from Java, used to play sounds simultaneously
@@ -203,6 +210,13 @@ private extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	fun stop(stream_id: Int) in "Java" `{ self.stop((int)stream_id); `}
 	fun unload(sound_id: Int): Bool in "Java" `{ return self.unload((int)sound_id); `}
 	fun release in "Java" `{ self.release(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeSoundPool_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 
@@ -238,7 +252,7 @@ class SoundPool
 	# Stream priority
 	private var priority = 1
 
-	init do self.nsoundpool = new NativeSoundPool(max_streams, stream_type, src_quality)
+	init do self.nsoundpool = (new NativeSoundPool(max_streams, stream_type, src_quality)).new_global_ref
 
 	# Load the sound from an asset file descriptor
 	# this function is for advanced use
@@ -364,7 +378,7 @@ class MediaPlayer
 
 	# Create a new MediaPlayer, but no sound is attached, you'll need
 	# to use `load_sound` before using it
-	init do self.nmedia_player = new NativeMediaPlayer
+	init do self.nmedia_player = (new NativeMediaPlayer).new_global_ref
 
 	# Init the mediaplayer with a sound resource id
 	init from_id(context: NativeActivity, id: Int) do
