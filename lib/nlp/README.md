@@ -61,14 +61,6 @@ For ease of use, this wrapper introduce a Nit model to handle CoreNLP XML result
 [[doc: nlp::NLPProcessor::process_file]]
 [[doc: nlp::NLPProcessor::process_files]]
 
-## Vector Space Model
-
-[[doc: NLPVector]]
-
-[[doc: vector]]
-
-[[doc: nlp::NLPVector::cosine_similarity]]
-
 ## NitNLP binary
 
 The `nitnlp` binary is given as an example of NitNLP client.
