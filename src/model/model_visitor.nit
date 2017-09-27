@@ -77,6 +77,7 @@ abstract class ModelVisitor
 			min_visibility = protected_visibility,
 			accept_fictive = false,
 			accept_test = false,
+			accept_example = false,
 			accept_redef = true,
 			accept_extern = true,
 			accept_attribute = true,
