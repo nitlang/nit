@@ -37,4 +37,6 @@ class TestTestSuite
 	fun test_sav_conflict is test do
 		print "Tested method"
 	end
+
+	redef fun to_s do return "<{class_name}>"
 end

@@ -32,4 +32,4 @@ for i in ci do print i
 print ci.to_a
 
 ci.destroy
-#alt4#print ci[0]
+assert ci.destroyed
