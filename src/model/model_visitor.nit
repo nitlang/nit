@@ -109,7 +109,14 @@ abstract class ModelVisitor
 	# Can we accept this `mentity` regarding its test suite status?
 	fun accept_test(mentity: MEntity): Bool do
 		if include_test then return true
-		if not mentity isa MModule then return true
+		if mentity isa MProperty then
+			if mentity.is_before or mentity.is_before_all then return false
+			if mentity.is_after or mentity.is_after_all then return false
+		end
+		if mentity isa MPropDef then
+			if mentity.is_before or mentity.is_before_all then return false
+			if mentity.is_after or mentity.is_after_all then return false
+		end
 		return not mentity.is_test
 	end
 
