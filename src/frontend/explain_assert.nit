@@ -35,6 +35,7 @@ module explain_assert
 import astbuilder
 intrude import literal # for value=
 intrude import typing # for mtype=
+import astvalidation
 
 import explain_assert_api
 
@@ -145,7 +146,9 @@ private class ExplainAssertVisitor
 		end
 
 		# Set the expression value aside
+		var old_parent = v_expr.parent
 		var expr = v_expr.make_var_read
+		if old_parent != null then old_parent.validate
 
 		# Protect nullable types
 		if mtype isa MNullType then
