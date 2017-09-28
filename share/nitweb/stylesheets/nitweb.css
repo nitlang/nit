@@ -33,6 +33,10 @@
 	background: #FF8100;
 }
 
+[ng-click] {
+	cursor: pointer;
+}
+
 /* Body */
 
 body {
@@ -125,28 +129,6 @@ entity-list:hover .btn-filter {
     line-height: 34px;
     text-align: center;
     pointer-events: none;
-}
-
-/* search */
-
-.search-input {
-	width: 100%;
-}
-
-.search-results {
-	position: absolute;
-	margin-top: 2px;
-	right: 15px;
-	left: 15px;
-}
-
-.search-results .card.active {
-	background: #eee;
-	border-color: #eee;
-}
-
-.card-search {
-	cursor: pointer;
 }
 
 /* navs */

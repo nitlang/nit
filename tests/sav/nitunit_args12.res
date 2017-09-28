@@ -2,9 +2,9 @@
 [OK] test_nitunit7::test_nitunit7$core::Sys$before_module
 [OK] test_nitunit7$TestNitunit7$test_foo
 [KO] test_nitunit7::test_nitunit7$core::Sys$after_module
-     test_nitunit7.nit:31,1--33,3: Runtime Error in file nitunit.out/gen_test_nitunit7.nit
+     test_nitunit7.nit:29,1--31,3: Runtime Error in file nitunit.out/gen_test_nitunit7.nit
      Output
-	Runtime error: Assert failed (test_nitunit7.nit:32)
+	Runtime error: Assert failed (test_nitunit7.nit:30)
 
 
 Docunits: Entities: 5; Documented ones: 0; With nitunits: 0

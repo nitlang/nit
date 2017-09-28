@@ -103,6 +103,11 @@ abstract class MEntity
 	# Fictive entities are used internally but they should not be
 	# exposed to the final user.
 	var is_fictive: Bool = false is writable
+
+	# Is `self` created for unit testing purpose?
+	#
+	# See `nitunit`.
+	var is_test: Bool = false is writable
 end
 
 # Something that represents a concern

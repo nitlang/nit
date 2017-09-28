@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_glob_route is test_suite
+module test_example_glob_route is test
 
 import pop_tests
 import example_glob_route
 
 class TestExampleGlobRoute
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/user/Morriar/item/10"
@@ -32,7 +33,7 @@ class TestExampleGlobRoute
 		system "curl -s {host}:{port}/not_found/not_found"
 	end
 
-	fun test_example_glob_route do
+	fun test_example_glob_route is test do
 		var app = new App
 		app.use("/user/:user/item/:item/*", new UserItem)
 		run_test(app)

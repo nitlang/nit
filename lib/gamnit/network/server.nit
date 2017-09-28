@@ -160,18 +160,18 @@ class RemoteClient
 	# Is this client connected?
 	fun connected: Bool do return socket.connected
 
-	# `BinarySerializer` used to send data to this client through `socket`
-	var writer: BinarySerializer is noinit
+	# `MsgPackSerializer` used to send data to this client through `socket`
+	var writer: MsgPackSerializer is noinit
 
-	# `BinaryDeserializer` used to receive data from this client through `socket`
-	var reader: BinaryDeserializer is noinit
+	# `MsgPackDeserializer` used to receive data from this client through `socket`
+	var reader: MsgPackDeserializer is noinit
 
 	init
 	do
 		# Setup serialization
-		writer = new BinarySerializer(socket)
+		writer = new MsgPackSerializer(socket)
 		writer.cache = new AsyncCache(true)
-		reader = new BinaryDeserializer(socket)
+		reader = new MsgPackDeserializer(socket)
 		writer.link reader
 	end
 
@@ -182,29 +182,29 @@ class RemoteClient
 
 		# Make sure it is the same app
 		var server_app = sys.handshake_app_name
-		var client_app = socket.read_string
+		var client_app = socket.deserialize_msgpack
 		if server_app != client_app then
-			print_error "Server Error: Client app name is '{client_app}'"
+			print_error "Server Error: Client app name is '{client_app or else "<invalid>"}'"
 
 			# Send an empty string so the client read it and give up
-			socket.write_string ""
+			socket.serialize_msgpack ""
 			socket.close
 			return false
 		end
 
-		socket.write_string server_app
+		socket.serialize_msgpack server_app
 
 		# App version
 		var app_version = sys.handshake_app_version
-		var client_version = socket.read_string
+		var client_version = socket.deserialize_msgpack
 		if client_version != app_version then
-			print_error "Handshake Error: client version is different '{client_version}'"
-			socket.write_string ""
+			print_error "Handshake Error: client version is different '{client_version or else "<invalid>"}'"
+			socket.serialize_msgpack ""
 			socket.close
 			return false
 		end
 
-		socket.write_string app_version
+		socket.serialize_msgpack app_version
 
 		return true
 	end

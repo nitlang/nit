@@ -14,19 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_templates is test_suite
+module test_example_templates is test
 
 import pop_tests
 intrude import example_templates
 
 class TestExampleTemplate
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template do
+	fun test_example_template is test do
 		var app = new App
 		app.use("/", new MyTemplateHandler)
 		run_test(app)
@@ -35,12 +36,13 @@ end
 
 class TestExampleTemplateString
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template_string do
+	fun test_example_template_string is test do
 		var app = new App
 		app.use("/", new MyTemplateStringHandler)
 		run_test(app)
@@ -49,12 +51,13 @@ end
 
 class TestExampleTemplateFile
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template_file do
+	fun test_example_template_file is test do
 		var app = new App
 		var handler = new MyTemplateFileHandler
 		handler.tpl_file = test_path / "../example_template.tpl"
@@ -65,12 +68,13 @@ end
 
 class TestExampleTemplatePug
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template_pug do
+	fun test_example_template_pug is test do
 		var app = new App
 		app.use("/", new MyTemplatePugHandler)
 		run_test(app)
@@ -79,12 +83,13 @@ end
 
 class TestExampleTemplatePugFile
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template_pug_file do
+	fun test_example_template_pug_file is test do
 		var app = new App
 		var handler = new MyTemplatePugFileHandler
 		handler.pug_file = test_path / "../example_template.pug"

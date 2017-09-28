@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_query_string is test_suite
+module test_example_query_string is test
 
 import pop_tests
 import example_query_string
 
 class TestExampleQueryString
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
@@ -30,7 +31,7 @@ class TestExampleQueryString
 		system "curl -s {host}:{port}/?items=10\\&order=asc"
 	end
 
-	fun test_example_query_string do
+	fun test_example_query_string is test do
 		var app = new App
 		app.use("/", new QueryStringHandler)
 		run_test(app)

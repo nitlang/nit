@@ -12,18 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_nitunit5 is test_suite
-
-import test_suite
+module test_nitunit5 is test
 
 class TestNitunit5
-	super TestSuite
+	test
 
-	fun test_path_is_set do
+	fun test_path_is_set is test do
 		assert "NIT_TESTING_PATH".environ != ""
 	end
 
-	fun test_path_is_suite_path do
+	fun test_path_is_suite_path is test do
 		assert "NIT_TESTING_PATH".environ.basename == "test_nitunit5.nit"
 	end
 end

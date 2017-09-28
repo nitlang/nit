@@ -15,7 +15,7 @@
 # Advanced services for serialization engines
 module engine_tools
 
-import serialization
+import serialization_core
 intrude import core::collection::hash_collection
 
 # Maps instances to a value, uses `is_same_serialized` and `serialization_hash`.
@@ -57,6 +57,11 @@ redef interface Object
 	# Used in combination with `is_same_serialized`. If two objects are the same
 	# in a serialization context, they must have the same `serialization_hash`.
 	fun serialization_hash: Int do return object_id
+end
+
+redef class String
+	redef fun serialization_hash do return hash
+	redef fun is_same_serialized(o) do return self == o
 end
 
 redef class Text

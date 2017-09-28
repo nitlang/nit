@@ -66,6 +66,10 @@
 					controller: function(mentity, doc) {
 						this.mentity = mentity;
 						this.doc = doc;
+
+						this.date = function(date) {
+							return new Date(date);
+						}
 					},
 					controllerAs: 'vm',
 				})
@@ -241,9 +245,8 @@
 						.success(cb)
 						.error(cbErr);
 				},
-
-				search: function(q, n, cb, cbErr) {
-					$http.get('/api/search?q=' + q + '&n=' + n)
+				search: function(q, p, n, cb, cbErr) {
+					$http.get('/api/search?q=' + q + '&p=' + p + '&n=' + n)
 						.success(cb)
 						.error(cbErr);
 				}
@@ -340,24 +343,10 @@
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '=',
-					defaultTab: '@',
-					noSynopsis: '='
+					mentity: '='
 				},
 				replace: true,
-				templateUrl: '/directives/entity/card.html',
-				link: function ($scope, element, attrs) {
-					$scope.currentTab = $scope.defaultTab ? $scope.defaultTab : 'signature';
-
-					$scope.loadEntityStars = function() {
-						Feedback.loadEntityStars($scope.mentity.full_name,
-							function(data) {
-								$scope.ratings = data;
-							}, function(message, status) {
-								$scope.error = {message: message, status: status};
-							});
-					};
-				}
+				templateUrl: '/directives/entity/card.html'
 			};
 		}])
 

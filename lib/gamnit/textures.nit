@@ -168,13 +168,13 @@ class CustomTexture
 		for i in [0..4[ do cpixels[offset+i] = bytes[i]
 	end
 
-	# Overwrite all pixels with `color`
+	# Overwrite all pixels with `color`, return `self`
 	#
 	# The argument `color` should be an array of up to 4 floats (RGBA).
 	# If `color` has less than 4 items, the missing items are replaced by 1.0.
 	#
 	# Require: `not loaded`
-	fun fill(color: Array[Float])
+	fun fill(color: Array[Float]): SELF
 	do
 		assert not loaded else print_error "{class_name}::fill already loaded"
 
@@ -189,6 +189,8 @@ class CustomTexture
 				i += 4
 			end
 		end
+
+		return self
 	end
 
 	redef fun load(force)
@@ -236,8 +238,11 @@ class RootTexture
 	private fun load_from_pixels(pixels: Pointer, width, height: Int, format: GLPixelFormat)
 	do
 		var max_texture_size = glGetIntegerv(gl_MAX_TEXTURE_SIZE, 0)
-		if width > max_texture_size or height > max_texture_size then
-			error = new Error("Texture {self} width or height is over the GL_MAX_TEXTURE_SIZE of {max_texture_size}")
+		if width > max_texture_size then
+			error = new Error("Texture width larger than gl_MAX_TEXTURE_SIZE ({max_texture_size}) in {self} at {width}")
+			return
+		else if height > max_texture_size then
+			error = new Error("Texture height larger than gl_MAX_TEXTURE_SIZE ({max_texture_size}) in {self} at {height}")
 			return
 		end
 

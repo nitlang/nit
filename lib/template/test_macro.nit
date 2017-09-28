@@ -12,15 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_macro is test_suite
+module test_macro is test
 
-import test_suite
 import macro
 
 class TestTemplateString
-	super TestSuite
+	test
 
-	fun test_tpl_parse_1 do
+	fun test_tpl_parse_1 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +36,7 @@ class TestTemplateString
 		assert res == tpl
 	end
 
-	fun test_tpl_parse_2 do
+	fun test_tpl_parse_2 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +53,7 @@ class TestTemplateString
 		assert res == tpl
 	end
 
-	fun test_tpl_parse_3 do
+	fun test_tpl_parse_3 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +66,7 @@ class TestTemplateString
 		assert res == tpl
 	end
 
-	fun test_tpl_parse_4 do
+	fun test_tpl_parse_4 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +82,7 @@ class TestTemplateString
 		assert res == tpl
 	end
 
-	fun test_tpl_parse_5 do
+	fun test_tpl_parse_5 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +99,7 @@ class TestTemplateString
 		assert res == tpl
 	end
 
-	fun test_tpl_parse_6 do
+	fun test_tpl_parse_6 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +115,7 @@ class TestTemplateString
 		assert res == tpl
 	end
 
-	fun test_tpl_replace_1 do
+	fun test_tpl_replace_1 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -145,7 +144,7 @@ class TestTemplateString
 		assert res == exp
 	end
 
-	fun test_tpl_replace_2 do
+	fun test_tpl_replace_2 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">
@@ -175,7 +174,7 @@ class TestTemplateString
 		assert res == exp
 	end
 
-	fun test_tpl_replace_3 do
+	fun test_tpl_replace_3 is test do
 		var tpl = """
 <!DOCTYPE html>
 <html lang="en">

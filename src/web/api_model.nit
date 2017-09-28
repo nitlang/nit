@@ -104,13 +104,19 @@ class APISearch
 	super APIList
 
 	redef fun get(req, res) do
-		var q = req.string_arg("q")
-		if q == null then
-			res.json new JsonArray
+		var query = req.string_arg("q")
+		if query == null then
+			res.api_error(400, "Missing search string")
 			return
 		end
-		var n = req.int_arg("n")
-		res.json new JsonArray.from(config.view.find(q, n))
+		var page = req.int_arg("p")
+		var limit = req.int_arg("n")
+		var response = new JsonArray.from(search(query, limit))
+		res.json paginate(response, response.length, page, limit)
+	end
+
+	fun search(query: String, limit: nullable Int): Array[MEntity] do
+		return config.view.find(query)
 	end
 end
 

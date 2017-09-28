@@ -106,12 +106,26 @@ end
 
 redef class MModule
 	super AnnotatedMEntity
+
+	redef var is_test is lazy do return has_annotation("test")
 end
 
 redef class MClassDef
 	super AnnotatedMEntity
+
+	redef var is_test is lazy do return has_annotation("test")
 end
 
 redef class MPropDef
 	super AnnotatedMEntity
+
+	redef var is_test is lazy do return has_annotation("test")
+
+	redef var is_before is lazy do return has_annotation("before")
+
+	redef var is_before_all is lazy do return has_annotation("before_all")
+
+	redef var is_after is lazy do return has_annotation("after")
+
+	redef var is_after_all is lazy do return has_annotation("after_all")
 end

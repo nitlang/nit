@@ -16,6 +16,7 @@
 module more_lights
 
 import depth_core
+intrude import cameras_cache
 
 # TODO
 #class PointLight
@@ -57,10 +58,8 @@ private class ParallelLightCamera
 		return view
 	end
 
-	redef fun mvp_matrix
+	private fun create_mvp_matrix: Matrix
 	do
-		# TODO cache
-
 		var near = -light.depth/2.0
 		var far = light.depth/2.0
 
@@ -71,5 +70,41 @@ private class ParallelLightCamera
 		                                       -light.height/2.0, light.height/2.0,
 		                                       near, far)
 		return view * projection
+	end
+
+	redef fun mvp_matrix
+	do
+		var m = mvp_matrix_cache
+		if m == null or check_position_changed then
+			m = create_mvp_matrix
+			mvp_matrix_cache = m
+		end
+		return m
+	end
+
+	private var pitch_cache = 0.0
+	private var yaw_cache = 0.0
+	private var width_cache = 0.0
+	private var height_cache = 0.0
+	private var depth_cache = 0.0
+
+	redef fun check_position_changed
+	do
+		if super then return true
+
+		if light.pitch != pitch_cache or
+		   light.yaw != yaw_cache or
+		   light.width != width_cache or
+		   light.height != height_cache or
+		   light.depth != depth_cache then
+			pitch_cache = light.pitch
+			yaw_cache = light.yaw
+			width_cache = light.width
+			height_cache = light.height
+			depth_cache = light.depth
+			return true
+		end
+
+		return false
 	end
 end

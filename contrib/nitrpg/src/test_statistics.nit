@@ -15,15 +15,16 @@
 # limitations under the License.
 
 # Test module for `stats.nit`
-module test_statistics is test_suite
+module test_statistics is test
 
 import test_helper
 import statistics
 
 class TestGame
 	super NitrpgTestHelper
+	test
 
-	fun test_game_stats do
+	fun test_game_stats is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var stats = game.stats
@@ -40,8 +41,9 @@ end
 
 class TestPlayer
 	super NitrpgTestHelper
+	test
 
-	fun test_player_stats do
+	fun test_player_stats is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var player = new Player(game, "Morriar")
@@ -59,8 +61,9 @@ end
 
 class TestGameStats
 	super NitrpgTestHelper
+	test
 
-	fun test_init_from_json do
+	fun test_init_from_json is test do
 		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var owner = new Player(game, "Morriar")

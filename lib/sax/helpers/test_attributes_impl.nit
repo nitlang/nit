@@ -9,13 +9,12 @@
 # another product.
 
 # Test suite for `attributes_impl`.
-module test_attributes_impl is test_suite
+module test_attributes_impl is test
 
-import test_suite
 import sax::helpers::attributes_impl
 
 class TestAttributesImpl
-	super TestSuite
+	test
 
 	private fun sample: AttributesImpl do
 		var subject = new AttributesImpl
@@ -32,7 +31,7 @@ class TestAttributesImpl
 		return subject
 	end
 
-	fun test_length do
+	fun test_length is test do
 		var subject = new AttributesImpl
 
 		assert 0 == subject.length
@@ -47,7 +46,7 @@ class TestAttributesImpl
 		assert 0 == subject.length
 	end
 
-	fun test_uri do
+	fun test_uri is test do
 		var subject = sample
 
 		assert "http://example.com/" == subject.uri(0)
@@ -60,7 +59,7 @@ class TestAttributesImpl
 		assert subject.uri(0) == null
 	end
 
-	fun test_local_name do
+	fun test_local_name is test do
 		var subject = sample
 
 		assert "bar" == subject.local_name(0)
@@ -73,7 +72,7 @@ class TestAttributesImpl
 		assert subject.local_name(0) == null
 	end
 
-	fun test_qname do
+	fun test_qname is test do
 		var subject = sample
 
 		assert "foo:bar" == subject.qname(0)
@@ -86,7 +85,7 @@ class TestAttributesImpl
 		assert subject.qname(0) == null
 	end
 
-	fun test_type_of do
+	fun test_type_of is test do
 		var subject = sample
 
 		assert "CDATA" == subject.type_of(0)
@@ -99,7 +98,7 @@ class TestAttributesImpl
 		assert subject.type_of(0) == null
 	end
 
-	fun test_type_of_qname do
+	fun test_type_of_qname is test do
 		var subject = sample
 
 		assert "CDATA" == subject.type_of("foo:bar")
@@ -111,7 +110,7 @@ class TestAttributesImpl
 		assert subject.type_of("xml:lang") == null
 	end
 
-	fun test_value_of do
+	fun test_value_of is test do
 		var subject = sample
 
 		assert "baz" == subject.value_of(0)
@@ -124,7 +123,7 @@ class TestAttributesImpl
 		assert subject.value_of(0) == null
 	end
 
-	fun test_value_of_qname do
+	fun test_value_of_qname is test do
 		var subject = sample
 
 		assert "baz" == subject.value_of("foo:bar")
@@ -136,7 +135,7 @@ class TestAttributesImpl
 		assert subject.value_of("xml:lang") == null
 	end
 
-	fun test_index_ns do
+	fun test_index_ns is test do
 		var subject = sample
 
 		assert 0 == subject.index_ns("http://example.com/", "bar")
@@ -148,7 +147,7 @@ class TestAttributesImpl
 		assert -1 == subject.index_ns("http://example.com/", "bar")
 	end
 
-	fun test_index_of do
+	fun test_index_of is test do
 		var subject = sample
 
 		assert 0 == subject.index_of("foo:bar")
@@ -160,7 +159,7 @@ class TestAttributesImpl
 		assert -1 == subject.index_of("foo:bar")
 	end
 
-	fun test_type_ns do
+	fun test_type_ns is test do
 		var subject = sample
 
 		assert "CDATA" == subject.type_ns("http://example.com/", "bar")
@@ -172,7 +171,7 @@ class TestAttributesImpl
 		assert subject.type_ns("http://example.com/", "bar") == null
 	end
 
-	fun test_value_ns do
+	fun test_value_ns is test do
 		var subject = sample
 
 		assert "baz" == subject.value_ns("http://example.com/", "bar")
@@ -184,7 +183,7 @@ class TestAttributesImpl
 		assert subject.value_ns("http://example.com/", "bar") == null
 	end
 
-	fun test_attributes_set do
+	fun test_attributes_set is test do
 		var subject = sample
 		var subject2 = new AttributesImpl
 
@@ -195,7 +194,7 @@ class TestAttributesImpl
 		assert subject.length == 4
 	end
 
-	fun test_set do
+	fun test_set is test do
 		var subject = sample
 
 		subject.set(1, "urn:is:not:often:used", "i-am_ME", "i-am_ME", "ID",
@@ -205,7 +204,7 @@ class TestAttributesImpl
 		assert "NMTOKENS" == subject.type_of(0)
 	end
 
-	fun test_remove_at do
+	fun test_remove_at is test do
 		var subject = sample
 
 		subject.remove_at(1)
@@ -213,7 +212,7 @@ class TestAttributesImpl
 		assert "xml:lang" == subject.qname(1)
 	end
 
-	fun test_uri_set do
+	fun test_uri_set is test do
 		var subject = sample
 
 		subject.uri(0) = "https://example.org/serious"
@@ -222,7 +221,7 @@ class TestAttributesImpl
 		assert "https://example.org/serious" == subject.uri(0)
 	end
 
-	fun test_local_name_set do
+	fun test_local_name_set is test do
 		var subject = sample
 
 		subject.local_name(0) = "trololol"
@@ -231,7 +230,7 @@ class TestAttributesImpl
 		assert "ImYou42" == subject.local_name(1)
 	end
 
-	fun test_qname_set do
+	fun test_qname_set is test do
 		var subject = sample
 
 		subject.qname(0) = "go-to:bar"
@@ -240,7 +239,7 @@ class TestAttributesImpl
 		assert "yo:i-am_ME" == subject.qname(1)
 	end
 
-	fun test_type_of_set do
+	fun test_type_of_set is test do
 		var subject = sample
 
 		subject.type_of(0) = "NMTOKENS"
@@ -249,7 +248,7 @@ class TestAttributesImpl
 		assert "ENTITY" == subject.type_of(1)
 	end
 
-	fun test_value_of_set do
+	fun test_value_of_set is test do
 		var subject = sample
 
 		subject.value_of(0) = "buz"

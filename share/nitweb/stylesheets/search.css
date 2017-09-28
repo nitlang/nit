@@ -61,3 +61,20 @@
 .navbar-fixed-top *:-moz-placeholder { color: #fff; }
 .navbar-fixed-top *::-moz-placeholder { color: #fff; }
 .navbar-fixed-top *:-ms-input-placeholder { color: #fff; }
+
+.search-input {
+	width: 100%;
+}
+
+.card-list.search-results {
+	position: absolute;
+	margin-top: 2px;
+	right: 15px;
+	left: 15px;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 3px rgba(0,0,0,.12);
+}
+
+.search-results .card.active {
+	background: #eee;
+	border-color: #eee;
+}

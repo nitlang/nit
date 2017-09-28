@@ -9,13 +9,12 @@
 # another product.
 
 # Test suite for `testing`.
-module test_testing is test_suite
+module test_testing is test
 
 import saxophonit::testing
-import test_suite
 
 class TestSaxEventLogger
-	super TestSuite
+	test
 
 	# Constants for diff formatting.
 
@@ -40,8 +39,7 @@ class TestSaxEventLogger
 
 	private var init_done: Bool = false
 
-	redef fun before_test do
-		super
+	fun before_test is before do
 		if not init_done then
 			default = a.term_default
 			ins = a.term_insertion
@@ -64,19 +62,19 @@ class TestSaxEventLogger
 		end
 	end
 
-	fun test_diff_empty do
+	fun test_diff_empty is test do
 		assert "" == a.diff(b).to_s
 		assert "" == b.diff(a).to_s
 	end
 
-	fun test_diff_equal1 do
+	fun test_diff_equal1 is test do
 		b.start_document
 		a.start_document
 		assert "" == a.diff(b).to_s
 		assert "" == b.diff(a).to_s
 	end
 
-	fun test_diff_equal2 do
+	fun test_diff_equal2 is test do
 		b.start_document
 		b.end_document
 		a.start_document
@@ -85,7 +83,7 @@ class TestSaxEventLogger
 		assert "" == b.diff(a).to_s
 	end
 
-	fun test_diff_insertion do
+	fun test_diff_insertion is test do
 		var exp: String
 		var test: String
 
@@ -115,7 +113,7 @@ class TestSaxEventLogger
 		assert_equals(2, exp, test)
 	end
 
-	fun test_diff_edition do
+	fun test_diff_edition is test do
 		var exp: String
 		var test: String
 

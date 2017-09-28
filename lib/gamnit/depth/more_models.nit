@@ -43,6 +43,8 @@ class ModelAsset
 
 	redef fun load
 	do
+		if loaded then return
+
 		var ext = path.file_extension
 		if ext == "obj" then
 			load_obj_file
@@ -57,6 +59,22 @@ class ModelAsset
 		end
 
 		loaded = true
+	end
+
+	private fun lazy_load
+	do
+		if loaded then return
+
+		# Lazy load
+		load
+
+		# Print errors when lazy loading only
+		if errors.length == 1 then
+			print_error errors.first
+		else if errors.length > 1 then
+			print_error "Loading model at '{path}' raised {errors.length} errors:\n* "
+			print_error errors.join("\n* ")
+		end
 	end
 
 	private fun load_obj_file
@@ -83,37 +101,33 @@ class ModelAsset
 		if debug_gamnit then assert obj_def.is_coherent
 
 		# Build models
-		var converter = new ModelFromObj(path, obj_def)
-		converter.models leaves_cache
+		var converter = new BuildModelFromObj(path, obj_def)
+		converter.fill_leaves self
 		errors.add_all converter.errors
 	end
 
 	redef fun leaves
 	do
-		if not loaded then
-			# Lazy load
-			load
-
-			# Print errors when lazy loading only
-			if errors.length == 1 then
-				print_error errors.first
-			else if errors.length > 1 then
-				print_error "Loading model at '{path}' raised {errors.length} errors:\n* "
-				print_error errors.join("\n* ")
-			end
-		end
-
+		lazy_load
 		return leaves_cache
 	end
 
 	private var leaves_cache = new Array[LeafModel]
+
+	redef fun named_parts
+	do
+		lazy_load
+		return named_leaves_cache
+	end
+
+	private var named_leaves_cache = new Map[String, Model]
 end
 
-# Short-lived service to convert an `ObjDef` to `models`
+# Short-lived service to convert an `ObjDef` to `fill_leaves`
 #
 # Limitations: This service only support faces with 3 or 4 vertices.
 # Faces with more vertices should be triangulated by the modeling tool.
-private class ModelFromObj
+private class BuildModelFromObj
 
 	# Path to the .obj file in the assets folder, used to find .mtl files
 	var path: String
@@ -121,22 +135,28 @@ private class ModelFromObj
 	# Parsed .obj definition
 	var obj_def: ObjDef
 
-	# Errors raised by calls to `models`
+	# Errors raised by calls to `fill_leaves`
 	var errors = new Array[Error]
 
-	# Fill `leaves` with models described in `obj_def`
-	fun models(leaves: Array[LeafModel])
+	# Fill `leaves` with objects described in `obj_def`
+	fun fill_leaves(target_model: ModelAsset)
 	do
+		var leaves = target_model.leaves_cache
+
 		# Sort faces by material
-		var mtl_to_faces = new MultiHashMap[String, ObjFace]
-		for face in obj_def.faces do
-			var mtl_lib_name = face.material_lib
-			var mtl_name = face.material_name
+		var obj_mtl_to_faces = new Map[ObjObj, MultiHashMap[String, ObjFace]]
+		for obj in obj_def.objects do
+			var mtl_to_faces = new MultiHashMap[String, ObjFace]
+			obj_mtl_to_faces[obj] = mtl_to_faces
+			for face in obj.faces do
+				var mtl_lib_name = face.material_lib
+				var mtl_name = face.material_name
 
-			var full_name = ""
-			if mtl_lib_name != null and mtl_name != null then full_name = mtl_lib_name / mtl_name
+				var full_name = ""
+				if mtl_lib_name != null and mtl_name != null then full_name = mtl_lib_name / mtl_name
 
-			mtl_to_faces[full_name].add face
+				mtl_to_faces[full_name].add face
+			end
 		end
 
 		# Load material libs
@@ -158,38 +178,43 @@ private class ModelFromObj
 			mtl_libs[asset_path] = mtl_lib
 		end
 
-		# Create 1 mesh per material, and prepare materials
+		# Create 1 mesh per material per object, and prepare materials
 		var mesh_to_mtl = new Map[Mesh, nullable MtlDef]
+		var mesh_to_name = new Map[Mesh, String]
 		var texture_names = new Set[String]
-		for full_name, faces in mtl_to_faces do
+		for obj in obj_def.objects do
+			var mtl_to_faces = obj_mtl_to_faces[obj]
+			for mtl_path, faces in mtl_to_faces do
 
-			# Create mesh
-			var mesh = new Mesh
-			mesh.vertices = vertices(faces)
-			mesh.normals = normals(faces)
-			mesh.texture_coords = texture_coords(faces)
+				# Create mesh
+				var mesh = new Mesh
+				mesh.vertices = vertices(faces)
+				mesh.normals = normals(faces)
+				mesh.texture_coords = texture_coords(faces)
 
-			# Material
-			var mtl_def = null
+				# Material
+				var mtl_def = null
 
-			var mtl_lib_name = faces.first.material_lib
-			var mtl_name = faces.first.material_name
-			if mtl_lib_name != null and mtl_name != null then
-				var asset_path = self.path.dirname / mtl_lib_name
-				var mtl_lib = mtl_libs[asset_path]
-				var mtl = mtl_lib.get_or_null(mtl_name)
-				if mtl != null then
-					mtl_def = mtl
+				var mtl_lib_name = faces.first.material_lib
+				var mtl_name = faces.first.material_name
+				if mtl_lib_name != null and mtl_name != null then
+					var asset_path = self.path.dirname / mtl_lib_name
+					var mtl_lib = mtl_libs[asset_path]
+					var mtl = mtl_lib.get_or_null(mtl_name)
+					if mtl != null then
+						mtl_def = mtl
 
-					for e in mtl.maps do
-						texture_names.add self.path.dirname / e
+						for e in mtl.maps do
+							texture_names.add self.path.dirname / e
+						end
+					else
+						errors.add new Error("Error loading model at '{path}': mtl '{mtl_name}' not found in '{asset_path}'")
 					end
-				else
-					errors.add new Error("Error loading model at '{path}': mtl '{mtl_name}' not found in '{asset_path}'")
 				end
-			end
 
-			mesh_to_mtl[mesh] = mtl_def
+				mesh_to_mtl[mesh] = mtl_def
+				mesh_to_name[mesh] = obj.name
+			end
 		end
 
 		# Load textures need for these materials
@@ -241,12 +266,27 @@ private class ModelFromObj
 		end
 
 		# Create models and store them
+		var name_to_leaves = new MultiHashMap[String, LeafModel]
 		for mesh, mtl_def in mesh_to_mtl do
+
 			var material = materials.get_or_null(mtl_def)
 			if material == null then material = new Material
 
 			var model = new LeafModel(mesh, material)
 			leaves.add model
+
+			name_to_leaves[mesh_to_name[mesh]].add model
+		end
+
+		# Collect objects with a name
+		for name, models in name_to_leaves do
+			if models.length == 1 then
+				target_model.named_leaves_cache[name] = models.first
+			else
+				var named_model = new CompositeModel
+				named_model.leaves.add_all models
+				target_model.named_leaves_cache[name] = named_model
+			end
 		end
 	end
 

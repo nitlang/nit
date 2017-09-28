@@ -53,18 +53,41 @@ import counter # For statistics
 import modelize # To process and count classes and methods
 
 redef class MPackage
+
+	# Metadata related to this package
+	var metadata = new MPackageMetadata(self)
+end
+
+# The metadata extracted from a MPackage
+class MPackageMetadata
+
+	# The mpacakge this metadata belongs to
+	var mpackage: MPackage
+
 	# Return the associated metadata from the `ini`, if any
-	fun metadata(key: String): nullable String
-	do
-		var ini = self.ini
+	fun metadata(key: String): nullable String do
+		var ini = mpackage.ini
 		if ini == null then return null
 		return ini[key]
 	end
 
 	# The consolidated list of tags
-	var tags = new Array[String]
+	var tags: Array[String] is lazy do
+		var tags = new Array[String]
+		var string = metadata("package.tags")
+		if string == null then return tags
+		for tag in string.split(",") do
+			tag = tag.trim
+			if tag.is_empty then continue
+			tags.add tag
+		end
+		if tryit != null then tags.add "tryit"
+		if apk != null then tags.add "apk"
+		if tags.is_empty then tags.add "none"
+		return tags
+	end
 
-	# The list of maintainers
+	# The list of all maintainers
 	var maintainers = new Array[Person]
 
 	# The list of contributors
@@ -75,6 +98,43 @@ redef class MPackage
 
 	# The date of the oldest commit
 	var first_date: nullable String = null
+
+	# Key: package.maintainer`
+	var maintainer: nullable String is lazy do return metadata("package.maintainer")
+
+	# Key: `package.more_contributors`
+	var more_contributors: Array[String] is lazy do
+		var res = new Array[String]
+		var string = metadata("package.more_contributors")
+		if string == null then return res
+		for c in string.split(",") do
+			c = c.trim
+			if c.is_empty then continue
+			res.add c
+		end
+		return res
+	end
+
+	# Key: `package.license`
+	var license: nullable String is lazy do return metadata("package.license")
+
+	# Key: `upstream.tryit`
+	var tryit: nullable String is lazy do return metadata("upstream.tryit")
+
+	# Key: `upstream.apk`
+	var apk: nullable String is lazy do return metadata("upstream.apk")
+
+	# Key: `upstream.homepage`
+	var homepage: nullable String is lazy do return metadata("upstream.homepage")
+
+	# Key: `upstream.browse`
+	var browse: nullable String is lazy do return metadata("upstream.browse")
+
+	# Package git clone address
+	var git: nullable String is lazy do return metadata("upstream.git")
+
+	# Package issue tracker
+	var issues: nullable String is lazy do return metadata("upstream.issues")
 end
 
 redef class Int
@@ -98,6 +158,13 @@ class Person
 	# Some homepage. Eg "http://example.com/~jdoe"
 	var page: nullable String is writable
 
+	# Gravatar id
+	var gravatar: nullable String is lazy do
+		var email = self.email
+		if email == null then return null
+		return email.md5.to_lower
+	end
+
 	# Return a full-featured link to a person
 	fun to_html: String
 	do
@@ -107,10 +174,9 @@ class Person
 		if page != null then
 			res += "<a href=\"{page.html_escape}\">"
 		end
-		var email = self.email
-		if email != null then
-			var md5 = email.md5.to_lower
-			res += "<img src=\"https://secure.gravatar.com/avatar/{md5}?size=20&amp;default=retro\">&nbsp;"
+		var gravatar = self.gravatar
+		if gravatar != null then
+			res += "<img src=\"https://secure.gravatar.com/avatar/{gravatar}?size=20&amp;default=retro\">&nbsp;"
 		end
 		res += e
 		if page != null then res += "</a>"
@@ -202,6 +268,9 @@ class Catalog
 	# used to access the files and count source lines of code
 	var modelbuilder: ModelBuilder
 
+	# List of all packages by their names
+	var mpackages = new HashMap[String, MPackage]
+
 	# Packages by tag
 	var tag2proj = new MultiHashMap[String, MPackage]
 
@@ -249,8 +318,14 @@ class Catalog
 	# The score is loosely computed using other metrics
 	var score = new Counter[MPackage]
 
-	# List of known people
+	# List of known people by their git string
 	var persons = new HashMap[String, Person]
+
+	# Map person short names to person objects
+	var name2person = new HashMap[String, Person]
+
+	# Package statistics cache
+	var mpackages_stats = new HashMap[MPackage, MPackageStats]
 
 	# Scan, register and add a contributor to a package
 	fun register_contrib(person: String, mpackage: MPackage): Person
@@ -268,14 +343,17 @@ class Catalog
 		var projs = contrib2proj[p]
 		if not projs.has(mpackage) then
 			projs.add mpackage
-			mpackage.contributors.add p
+			mpackage.metadata.contributors.add p
 		end
+		name2person[p.name] = p
 		return p
 	end
 
 	# Compute information for a package
 	fun package_page(mpackage: MPackage)
 	do
+		mpackages[mpackage.full_name] = mpackage
+
 		var score = score[mpackage].to_f
 
 		var mdoc = mpackage.mdoc_or_fallback
@@ -283,58 +361,45 @@ class Catalog
 			score += 100.0
 			score += mdoc.content.length.score
 		end
+		var metadata = mpackage.metadata
 
-
-		var tryit = mpackage.metadata("upstream.tryit")
+		var tryit = metadata.tryit
 		if tryit != null then
 			score += 1.0
 		end
-		var apk = mpackage.metadata("upstream.apk")
+		var apk = metadata.apk
 		if apk != null then
 			score += 1.0
 		end
-
-		var homepage = mpackage.metadata("upstream.homepage")
+		var homepage = metadata.homepage
 		if homepage != null then
 			score += 5.0
 		end
-		var maintainer = mpackage.metadata("package.maintainer")
+		var maintainer = metadata.maintainer
 		if maintainer != null then
 			score += 5.0
 			var person = register_contrib(maintainer, mpackage)
-			mpackage.maintainers.add person
+			mpackage.metadata.maintainers.add person
 			var projs = maint2proj[person]
 			if not projs.has(mpackage) then projs.add mpackage
 		end
-		var license = mpackage.metadata("package.license")
+		var license = metadata.license
 		if license != null then
 			score += 5.0
 		end
-
-		var browse = mpackage.metadata("upstream.browse")
+		var browse = metadata.browse
 		if browse != null then
 			score += 5.0
 		end
-
-		var tags = mpackage.metadata("package.tags")
-		var ts = mpackage.tags
-		if tags != null then
-			for t in tags.split(",") do
-				t = t.trim
-				if t == "" then continue
-				ts.add t
-			end
+		var tags = metadata.tags
+		for tag in tags do
+			tag2proj[tag].add mpackage
 		end
-		if ts.is_empty then ts.add "none"
-		if tryit != null then ts.add "tryit"
-		if apk != null then ts.add "apk"
-		for t in ts do
-			tag2proj[t].add mpackage
+		if tags.not_empty then
+			var cat = tags.first
+			cat2proj[cat].add mpackage
+			score += tags.length.score
 		end
-		var cat = ts.first
-		cat2proj[cat].add mpackage
-		score += ts.length.score
-
 		if deps.has(mpackage) then
 			score += deps[mpackage].greaters.length.score
 			score += deps[mpackage].direct_greaters.length.score
@@ -342,15 +407,12 @@ class Catalog
 			score += deps[mpackage].direct_smallers.length.score
 		end
 
-		var contributors = mpackage.contributors
-		var more_contributors = mpackage.metadata("package.more_contributors")
-		if more_contributors != null then
-			for c in more_contributors.split(",") do
-				register_contrib(c.trim, mpackage)
-			end
+		var contributors = mpackage.metadata.contributors
+		var more_contributors = metadata.more_contributors
+		for c in more_contributors do
+			register_contrib(c, mpackage)
 		end
 		score += contributors.length.to_f
-
 		var mmodules = 0
 		var mclasses = 0
 		var mmethods = 0
@@ -384,7 +446,7 @@ class Catalog
 					end
 				end
 				var ms = gs
-				if m.is_test_suite then ms /= 100.0
+				if m.is_test then ms /= 100.0
 				entity_score += ms
 				if m.mdoc != null then doc_score += ms else ms /= 10.0
 				for cd in m.mclassdefs do
@@ -417,7 +479,6 @@ class Catalog
 		end
 		var documentation_score =  (100.0 * doc_score / entity_score).to_i
 		self.documentation_score[mpackage] = documentation_score
-
 		#score += mmodules.score
 		score += mclasses.score
 		score += mmethods.score
@@ -433,12 +494,15 @@ class Catalog
 		var ini = mpackage.ini
 		if ini == null then return
 
+		var root = mpackage.root
+		if root == null then return
+
 		# TODO use real git info
 		#var repo = ini.get_or_null("upstream.git")
 		#var branch = ini.get_or_null("upstream.git.branch")
 		#var directory = ini.get_or_null("upstream.git.directory")
 
-		var dirpath = mpackage.root.filepath
+		var dirpath = root.filepath
 		if dirpath == null then return
 
 		# Collect commits info
@@ -452,8 +516,8 @@ class Catalog
 			if s.length != 2 or s.last == "" then continue
 
 			# Collect date of last and first commit
-			if mpackage.last_date == null then mpackage.last_date = s.first
-			mpackage.first_date = s.first
+			if mpackage.metadata.last_date == null then mpackage.metadata.last_date = s.first
+			mpackage.metadata.first_date = s.first
 
 			# Count contributors
 			contributors.inc(s.last)
@@ -461,8 +525,130 @@ class Catalog
 		for c in contributors.sort.reverse_iterator do
 			register_contrib(c, mpackage)
 		end
-
 	end
+
+	# Compose package stats
+	fun mpackage_stats(mpackage: MPackage): MPackageStats do
+		var stats = new MPackageStats
+		stats.mmodules = mmodules[mpackage]
+		stats.mclasses = mclasses[mpackage]
+		stats.mmethods = mmethods[mpackage]
+		stats.loc = loc[mpackage]
+		stats.errors = errors[mpackage]
+		stats.warnings = warnings[mpackage]
+		stats.warnings_per_kloc = warnings_per_kloc[mpackage]
+		stats.documentation_score = documentation_score[mpackage]
+		stats.commits = commits[mpackage]
+		stats.score = score[mpackage]
+
+		mpackages_stats[mpackage] = stats
+		return stats
+	end
+
+	# Compose catalog stats
+	var catalog_stats: CatalogStats is lazy do
+		var stats = new CatalogStats
+		stats.packages = mpackages.length
+		stats.maintainers = maint2proj.length
+		stats.contributors = contrib2proj.length
+		stats.tags = tag2proj.length
+		stats.modules = mmodules.sum
+		stats.classes = mclasses.sum
+		stats.methods = mmethods.sum
+		stats.loc = loc.sum
+		return stats
+	end
+end
+
+# Catalog statistics
+class CatalogStats
+
+	# Number of packages
+	var packages = 0
+
+	# Number of maintainers
+	var maintainers = 0
+
+	# Number of contributors
+	var contributors = 0
+
+	# Number of tags
+	var tags = 0
+
+	# Number of modules
+	var modules = 0
+
+	# Number of classes
+	var classes = 0
+
+	# Number of methods
+	var methods = 0
+
+	# Number of line of codes
+	var loc = 0
+end
+
+# MPackage statistics for the catalog
+class MPackageStats
+
+	# Number of modules
+	var mmodules = 0
+
+	# Number of classes
+	var mclasses = 0
+
+	# Number of methods
+	var mmethods = 0
+
+	# Number of lines of code
+	var loc = 0
+
+	# Number of errors
+	var errors = 0
+
+	# Number of warnings and advices
+	var warnings = 0
+
+	# Number of warnings per 1000 lines of code (w/kloc)
+	var warnings_per_kloc = 0
+
+	# Documentation score (between 0 and 100)
+	var documentation_score = 0
+
+	# Number of commits by package
+	var commits = 0
+
+	# Score by package
+	#
+	# The score is loosely computed using other metrics
+	var score = 0
+end
+
+# Sort the mpackages by their score
+class CatalogScoreSorter
+	super Comparator
+
+	# Catalog used to access scores
+	var catalog: Catalog
+
+	redef type COMPARED: MPackage
+
+	redef fun compare(a, b) do
+		if not catalog.mpackages_stats.has_key(a) then return 1
+		if not catalog.mpackages_stats.has_key(b) then return -1
+		var astats = catalog.mpackages_stats[a]
+		var bstats = catalog.mpackages_stats[b]
+		return bstats.score <=> astats.score
+	end
+end
+
+# Sort tabs alphabetically
+class CatalogTagsSorter
+	super Comparator
+
+	redef type COMPARED: String
+
+	redef fun compare(a, b) do return a <=> b
 end
 
 # Execute a git command and return the result
