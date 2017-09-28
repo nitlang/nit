@@ -38,7 +38,8 @@ class ReadmePhase
 	fun warning(location: nullable MDLocation, page: ReadmePage, message: String) do
 		var loc = null
 		if location != null then
-			loc = location.to_location(page.mentity.mdoc.location.file)
+			var mdoc = page.mentity.mdoc
+			if mdoc != null then loc = location.to_location(mdoc.location.file)
 		end
 		ctx.warning(loc, "readme-warning", message)
 	end
@@ -51,14 +52,15 @@ end
 
 redef class ReadmePage
 	redef fun build_content(v, doc) do
-		if mentity.mdoc == null then
+		var mdoc = mentity.mdoc
+		if mdoc == null then
 			v.warning(null, self, "Empty README for group `{mentity}`")
 			return
 		end
 		var proc = new MarkdownProcessor
 		proc.emitter = new ReadmeMdEmitter(proc, self, v)
 		proc.emitter.decorator = new ReadmeDecorator
-		var md = mentity.mdoc.content.join("\n")
+		var md = mdoc.content.join("\n")
 		proc.process(md)
 	end
 end
@@ -91,6 +93,7 @@ class ReadmeMdEmitter
 	# Called from `add_headline`.
 	private fun open_section(lvl: Int, title: String) do
 		var section = new ReadmeSection(title.escape_to_c, title, lvl, processor)
+		var current_section = self.current_section
 		if current_section == null then
 			page.root.add_child(section)
 		else
@@ -119,6 +122,7 @@ class ReadmeMdEmitter
 	# This closes the current article, inserts `article` then opens a new article.
 	private fun add_article(article: DocArticle) do
 		close_article
+		var current_section = self.current_section
 		if current_section == null then
 			page.root.add_child(article)
 		else
@@ -184,15 +188,18 @@ end
 class ReadmeDecorator
 	super MdDecorator
 
+	# Parser used to process doc commands
+	var parser = new DocCommandParser
+
 	redef type EMITTER: ReadmeMdEmitter
 
 	redef fun add_headline(v, block) do
-		var txt = block.block.first_line.value
+		var txt = block.block.first_line.as(not null).value
 		var lvl = block.depth
 		if not v.context.is_empty then
 			v.close_article
 			while v.current_section != null do
-				if v.current_section.depth < lvl then break
+				if v.current_section.as(not null).depth < lvl then break
 				v.close_section
 			end
 		end
@@ -201,9 +208,9 @@ class ReadmeDecorator
 	end
 
 	redef fun add_wikilink(v, token) do
-		var link = token.link.to_s
-		var cmd = new DocCommand(link)
-		if cmd isa UnknownCommand then
+		var link = token.link.as(not null).to_s
+		var cmd = parser.parse(link)
+		if cmd == null then
 			# search MEntities by name
 			var res = v.find_mentities(link.to_s)
 			# no match, print warning and display wikilink as is
@@ -223,20 +230,21 @@ class ReadmeDecorator
 		# TODO real link
 		var link = mentity.full_name
 		if name == null then name = mentity.name
-		if comment == null and mentity.mdoc != null then
-			comment = mentity.mdoc.synopsis
+		if comment == null then
+			var mdoc = mentity.mdoc
+			if mdoc != null then comment = mdoc.synopsis
 		end
 		add_link(v, link, name, comment)
 	end
 end
 
-redef interface DocCommand
+redef class DocCommand
 
 	# Render the content of the doc command.
 	fun render(v: ReadmeMdEmitter, token: TokenWikiLink) is abstract
 end
 
-redef class ArticleCommand
+redef class CommentCommand
 	redef fun render(v, token) do
 		var string = args.first
 		var res = v.find_mentities(string)

@@ -87,10 +87,7 @@ class NitwebDecorator
 	end
 
 	redef fun add_wikilink(v, token) do
-		var link = token.link
-		if link == null then return
-		var cmd = new DocCommand(link.write_to_string)
-		cmd.render(v, token, view)
+		v.render_wikilink(token, view)
 	end
 end
 
@@ -105,20 +102,51 @@ class NitwebInlineDecorator
 	var modelbuilder: ModelBuilder
 
 	redef fun add_wikilink(v, token) do
-		var link = token.link
-		if link == null then return
-		var cmd = new DocCommand(link.write_to_string)
-		cmd.render(v, token, view)
+		v.render_wikilink(token, view)
 	end
 end
 
 redef class MarkdownEmitter
+
+	# Parser used to process doc commands
+	var parser = new DocCommandParser
+
+	# Render a wikilink
+	fun render_wikilink(token: TokenWikiLink, model: ModelView) do
+		var link = token.link
+		if link == null then return
+		var name = token.name
+		if name != null then link = "{name} | {link}"
+		var cmd = parser.parse(link.write_to_string)
+		if cmd == null then
+			var full_name = if token.link != null then token.link.as(not null).write_to_string.trim else null
+			if full_name == null or full_name.is_empty then
+				write_error("empty wikilink")
+				return
+			end
+			var mentity = find_mentity(model, full_name)
+			if mentity == null then return
+			name = if token.name != null then token.name.as(not null).to_s else null
+			write_mentity_link(mentity, name)
+			return
+		else
+			for message in parser.errors do
+				if message.level == 1 then
+					write_error(message.message)
+				else if message.level > 1 then
+					write_warning(message.message)
+				end
+			end
+		end
+		cmd.render(self, token, model)
+	end
+
 	# Find the MEntity that matches `name`.
 	#
 	# Write an error if the entity is not found
 	fun find_mentity(model: ModelView, name: nullable String): nullable MEntity do
 		if name == null then
-			write_error("No MEntity found")
+			write_error("no MEntity found")
 			return null
 		end
 		# Lookup by full name
@@ -129,7 +157,7 @@ redef class MarkdownEmitter
 		if mentities.is_empty then
 			var suggest = model.find(name, 3)
 			var msg = new Buffer
-			msg.append "No MEntity found for name `{name}`"
+			msg.append "no MEntity found for name `{name}`"
 			if suggest.not_empty then
 				msg.append " (suggestions: "
 				var i = 0
@@ -144,7 +172,7 @@ redef class MarkdownEmitter
 			return null
 		else if mentities.length > 1 then
 			var msg = new Buffer
-			msg.append "Conflicts for name `{name}`"
+			msg.append "conflicts for name `{name}`"
 			msg.append " (conflicts: "
 			var i = 0
 			for s in mentities do
@@ -195,76 +223,44 @@ redef class MarkdownEmitter
 	end
 end
 
-redef interface DocCommand
+redef class DocCommand
 
 	# Emit the HTML related to the execution of this doc command
 	fun render(v: MarkdownEmitter, token: TokenWikiLink, model: ModelView) do
-		v.write_error("Not yet implemented command `{token.link or else "null"}`")
-	end
-end
-
-redef class UnknownCommand
-	redef fun render(v, token, model) do
-		var link = token.link
-		if link == null then
-			v.write_error("Empty command")
-			return
-		end
-		var full_name = link.write_to_string
-		var mentity = v.find_mentity(model, full_name)
-		if mentity == null then return
-		v.write_mentity_link(mentity)
-	end
-end
-
-redef class ArticleCommand
-	redef fun render(v, token, model) do
-		if args.is_empty then
-			v.write_error("Expected one arg: the MEntity name")
-			return
-		end
-		var name = args.first
-		var mentity = v.find_mentity(model, name)
-		if mentity == null then return
-		var mdoc = mentity.mdoc_or_fallback
-		if mdoc == null then
-			v.write_warning("No MDoc for mentity `{name}`")
-			return
-		end
-		v.add "<h3>"
-		v.write_mentity_link(mentity)
-		v.add " - "
-		v.emit_text mdoc.synopsis
-		v.add "</h3>"
-		v.add v.processor.process(mdoc.comment).write_to_string
+		v.write_error("not yet implemented command `{token.link or else "null"}`")
 	end
 end
 
 redef class CommentCommand
 	redef fun render(v, token, model) do
-		if args.is_empty then
-			v.write_error("Expected one arg: the MEntity name")
-			return
-		end
-		var name = args.first
+		var name = arg
 		var mentity = v.find_mentity(model, name)
 		if mentity == null then return
 		var mdoc = mentity.mdoc_or_fallback
 		if mdoc == null then
-			v.write_warning("No MDoc for mentity `{name}`")
+			v.write_warning("no MDoc for mentity `{name}`")
 			return
 		end
-		v.add v.processor.process(mdoc.comment).write_to_string
+		v.add "<h3>"
+		if not opts.has_key("no-link") then
+			v.write_mentity_link(mentity)
+		end
+		if not opts.has_key("no-link") and not opts.has_key("no-synopsis") then
+			v.add " - "
+		end
+		if not opts.has_key("no-synopsis") then
+			v.emit_text mdoc.html_synopsis.write_to_string
+		end
+		v.add "</h3>"
+		if not opts.has_key("no-comment") then
+			v.add v.processor.process(mdoc.comment).write_to_string
+		end
 	end
 end
 
 redef class ListCommand
 	redef fun render(v, token, model) do
-		if args.is_empty then
-			v.write_error("Expected one arg: the MEntity name")
-			return
-		end
-		var name = args.first
+		var name = arg
 		var mentity = v.find_mentity(model, name)
 		if mentity == null then return
 		if mentity isa MPackage then
@@ -283,25 +279,21 @@ redef class ListCommand
 		else if mentity isa MProperty then
 			v.write_mentity_list(mentity.mpropdefs)
 		else
-			v.write_error("No list found for name `{name}`")
+			v.write_error("no list found for name `{name}`")
 		end
 	end
 end
 
 redef class CodeCommand
 	redef fun render(v, token, model) do
-		if args.is_empty then
-			v.write_error("Expected one arg: the MEntity name")
-			return
-		end
-		var name = args.first
+		var name = arg
 		var mentity = v.find_mentity(model, name)
 		if mentity == null then return
 		if mentity isa MClass then mentity = mentity.intro
 		if mentity isa MProperty then mentity = mentity.intro
 		var source = render_source(mentity, v.decorator.as(NitwebDecorator).modelbuilder)
 		if source == null then
-			v.write_error("No source for MEntity `{name}`")
+			v.write_error("no source for MEntity `{name}`")
 			return
 		end
 		v.add "<pre>"
@@ -321,15 +313,15 @@ end
 
 redef class GraphCommand
 	redef fun render(v, token, model) do
-		if args.is_empty then
-			v.write_error("Expected one arg: the MEntity name")
-			return
-		end
-		var name = args.first
+		var name = arg
 		var mentity = v.find_mentity(model, name)
 		if mentity == null then return
 		var g = new InheritanceGraph(mentity, model)
-		v.add g.draw(3, 3).to_svg
+		var pdepth = if opts.has_key("pdepth") and opts["pdepth"].is_int then
+			opts["pdepth"].to_i else 3
+		var cdepth = if opts.has_key("cdepth") and opts["cdepth"].is_int then
+			opts["cdepth"].to_i else 3
+		v.add g.draw(pdepth, cdepth).to_svg
 	end
 end
 
