@@ -1206,6 +1206,12 @@ redef class AAttrPropdef
 		end
 		mclassdef.mprop2npropdef[mreadprop] = self
 
+		var attr_mpropdef = mpropdef
+		if attr_mpropdef != null then
+			mreadprop.getter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.getter = mreadprop
+		end
+
 		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 		self.mreadpropdef = mreadpropdef
 		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
@@ -1311,6 +1317,11 @@ redef class AAttrPropdef
 			end
 		end
 		mclassdef.mprop2npropdef[mwriteprop] = self
+
+		if attr_mpropdef != null then
+			mwriteprop.setter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.setter = mwriteprop
+		end
 
 		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 		self.mwritepropdef = mwritepropdef
