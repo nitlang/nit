@@ -2361,6 +2361,29 @@ class MMethod
 	# A specific method that is safe to call on null.
 	# Currently, only `==`, `!=` and `is_same_instance` are safe
 	fun is_null_safe: Bool do return name == "==" or name == "!=" or name == "is_same_instance"
+
+	# Is this method a getter (auto or not)?
+	#
+	# See `getter_for`.
+	fun is_getter: Bool do return getter_for != null
+
+	# The attribute this getter is for
+	#
+	# Return `null` is this method is not a getter.
+	var getter_for: nullable MAttribute = null is writable
+
+	# Is this method a setter (auto or not)?
+	#
+	# See `setter_for`.
+	fun is_setter: Bool do return setter_for != null
+
+	# The attribute this setter is for
+	#
+	# Return `null` is this method is not a setter.
+	var setter_for: nullable MAttribute = null is writable
+
+	# Is this method a getter or a setter?
+	fun is_accessor: Bool do return is_getter or is_setter
 end
 
 # A global attribute
@@ -2369,6 +2392,21 @@ class MAttribute
 
 	redef type MPROPDEF: MAttributeDef
 
+	# Does this attribute have a getter (auto or not)?
+	#
+	# See `getter`.
+	fun has_getter: Bool do return getter != null
+
+	# The getter of this attribute (if any)
+	var getter: nullable MProperty = null is writable
+
+	# Does this attribute have a setter (auto or not)?
+	#
+	# See `setter`.
+	fun has_setter: Bool do return setter != null
+
+	# The setter of this attribute (if any)
+	var setter: nullable MProperty = null is writable
 end
 
 # A global virtual type
