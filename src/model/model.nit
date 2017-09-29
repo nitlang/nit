@@ -2442,7 +2442,7 @@ abstract class MPropDef
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	redef var location: Location
+	redef var location
 
 	redef fun visibility do return mproperty.visibility
 
