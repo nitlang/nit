@@ -216,21 +216,21 @@ class APIEntityDefs
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		var mentities: Array[MEntity]
+		var mentities = new Array[MEntity]
 		if mentity isa MPackage then
-			mentities = mentity.mgroups.to_a
+			mentities.add_all mentity.collect_mgroups(config.view)
+			mentities.add_all mentity.collect_mmodules(config.view)
 		else if mentity isa MGroup then
-			mentities = new Array[MEntity]
-			mentities.add_all mentity.in_nesting.direct_smallers
-			mentities.add_all mentity.mmodules
+			mentities.add_all mentity.collect_mgroups(config.view)
+			mentities.add_all mentity.collect_mmodules(config.view)
 		else if mentity isa MModule then
-			mentities = mentity.mclassdefs
+			mentities.add_all mentity.collect_local_mclassdefs(config.view)
 		else if mentity isa MClass then
-			mentities = mentity.mclassdefs
+			mentities.add_all mentity.collect_mclassdefs(config.view)
 		else if mentity isa MClassDef then
-			mentities = mentity.mpropdefs
+			mentities.add_all mentity.collect_mpropdefs(config.view)
 		else if mentity isa MProperty then
-			mentities = mentity.mpropdefs
+			mentities.add_all mentity.collect_mpropdefs(config.view)
 		else
 			res.api_error(404, "No definition list for mentity `{mentity.full_name}`")
 			return
