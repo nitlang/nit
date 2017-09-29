@@ -14,17 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Collect things from a `Model`.
+# Collect things from a `ModelView`
+#
+# This module introduce several usefull methods to list and count things from a
+# ModelView.
+#
+# First setup you view from a Model:
+#
+# ~~~nitih
+# var view = new ModelView(model)
+# ~~~
+#
+# Then ask question using the view:
+#
+# ~~~nitish
+# print number of parents for `{my_class}`
+# print my_class.collect_parents(view).count
+# ~~~
 #
 # **Warning**
 #
 # `model_collect` offers a flattened view of the model without considering any
 # main module.
 # For this reason, `model_collect` lists all the definitions reachable from all
-# modules
+# modules.
 #
 # This is usefull for tools that need a global view of a model like `nitdoc`,
-# `nitx` or `nituml`.
+# `nitx`, `nitmetrics` or `nituml`.
 # It should not be used for compiling stuffs like computing VFT, where the listed
 # entities could not be reachable depending on the modules really imported.
 module model_collect
@@ -33,20 +49,18 @@ import model_views
 
 redef class MEntity
 
-	# FIXME used to bypass RTA limitation on type resolution.
+	# FIXME used to bypass RTA limitation on type resolution
 	type MENTITY: SELF
 
-	# Collect modifier keywords like `redef`, `private` etc.
-	fun collect_modifiers: Array[String] do
-		return new Array[String]
-	end
+	# Collect modifier keywords like `redef`, `private` etc
+	fun collect_modifiers: Array[String] do return new Array[String]
 
-	# Collect `self` linearization anchored on `mainmodule`.
+	# Collect `self` linearization anchored on `mainmodule`
 	fun collect_linearization(mainmodule: MModule): nullable Array[MEntity] do
 		return null
 	end
 
-	# Collect `self` ancestors (direct and indirect).
+	# Collect `self` ancestors (direct and indirect)
 	#
 	# The concept of ancestor is abstract at this stage.
 	fun collect_ancestors(view: ModelView): Set[MENTITY] do
@@ -57,24 +71,23 @@ redef class MEntity
 		while todo.not_empty do
 			var mentity = todo.pop
 			if mentity == self or done.has(mentity) then continue
-			print "{mentity} == {self}"
 			done.add mentity
 			todo.add_all mentity.collect_parents(view)
 		end
 		return done
 	end
 
-	# Collect `self` parents (direct ancestors).
+	# Collect `self` parents (direct ancestors)
 	#
 	# The concept of parent is abstract at this stage.
 	fun collect_parents(view: ModelView): Set[MENTITY] is abstract
 
-	# Collect `self` children (direct descendants).
+	# Collect `self` children (direct descendants)
 	#
 	# The concept of child is abstract at this stage.
 	fun collect_children(view: ModelView): Set[MENTITY] is abstract
 
-	# Collect `self` descendants (direct and direct).
+	# Collect `self` descendants (direct and direct)
 	#
 	# The concept of descendant is abstract at this stage.
 	fun collect_descendants(view: ModelView): Set[MENTITY] do
@@ -91,18 +104,18 @@ redef class MEntity
 		return done
 	end
 
-	# Build a poset representing `self` in it's own hierarchy.
+	# Build a poset representing `self` in it's own hierarchy
 	#
 	# The notion of hierarchy depends on the type of MEntity.
 	#
 	# Here a recap:
-	# * MPackage: package dependencies
-	# * MGroup: group dependencies
-	# * MModule: modules imports
-	# * MClass: class inheritance (all classdefs flattened)
-	# * MClassDef: classdef inheritance
-	# * MProperty: property definitions graph (all propdefs flattened)
-	# * MPropDef: property definitions graph
+	# * `MPackage`: package dependencies
+	# * `MGroup`: group dependencies
+	# * `MModule`: modules imports
+	# * `MClass`: class inheritance (all classdefs flattened)
+	# * `MClassDef`: classdef inheritance
+	# * `MProperty`: property definitions graph (all propdefs flattened)
+	# * `MPropDef`: property definitions graph
 	fun hierarchy_poset(view: ModelView): POSet[MENTITY] do
 		var done = new HashSet[MENTITY]
 		var mentities = new Array[MENTITY]
@@ -133,7 +146,7 @@ redef class MPackage
 		return res
 	end
 
-	# `MPackage` parents are its direct dependencies.
+	# Collect all packages directly imported by `self`
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
 		for mgroup in mgroups do
@@ -146,7 +159,7 @@ redef class MPackage
 		return res
 	end
 
-	# `MPackage` children are packages that directly depends on `self`.
+	# Collect all packages that directly depends on `self`
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
 		for mpackage in view.mpackages do
@@ -155,7 +168,7 @@ redef class MPackage
 		return res
 	end
 
-	# `MModules` contained in `self`.
+	# Collect all modules contained in `self`
 	fun collect_mmodules(view: ModelView): HashSet[MModule] do
 		var res = new HashSet[MModule]
 		for mgroup in mgroups do
@@ -175,7 +188,7 @@ redef class MGroup
 		return res
 	end
 
-	# `MGroup` parents are its direct dependencies.
+	# Collect all groups directly import by `self`
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
 		for mmodule in mmodules do
@@ -189,7 +202,7 @@ redef class MGroup
 		return res
 	end
 
-	# `MGroup` children are mgroups that directly depends on `self`.
+	# Collect all group that directly import `self`
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
 		for mgroup in view.mgroups do
@@ -208,7 +221,7 @@ redef class MModule
 		return res
 	end
 
-	# `MModule` ancestors are all its transitive imports.
+	# Collect all module ancestors of `self` (direct and transitive imports)
 	redef fun collect_ancestors(view) do
 		var res = new HashSet[MENTITY]
 		for mentity in in_importation.greaters do
@@ -219,7 +232,7 @@ redef class MModule
 		return res
 	end
 
-	# `MModule` parents are all its direct imports.
+	# Collect all modules directly imported by `self`
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
 		for mentity in in_importation.direct_greaters do
@@ -230,7 +243,7 @@ redef class MModule
 		return res
 	end
 
-	# `MModule` children are modules that directly import `self`.
+	# Collect all modules that directly import `self`
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
 		for mentity in in_importation.direct_smallers do
@@ -241,7 +254,7 @@ redef class MModule
 		return res
 	end
 
-	# `MModule` children are modules that transitively import `self`.
+	# Collect all module descendants of `self` (direct and transitive imports)
 	redef fun collect_descendants(view) do
 		var res = new HashSet[MENTITY]
 		for mentity in in_importation.smallers do
@@ -252,7 +265,7 @@ redef class MModule
 		return res
 	end
 
-	# Collect mclassdefs introduced in `self` with `visibility >= to min_visibility`.
+	# Collect all class definitions introduced in `self`
 	fun collect_intro_mclassdefs(view: ModelView): Set[MClassDef] do
 		var res = new HashSet[MClassDef]
 		for mclassdef in mclassdefs do
@@ -263,7 +276,7 @@ redef class MModule
 		return res
 	end
 
-	# Collect mclassdefs redefined in `self` with `visibility >= to min_visibility`.
+	# Collect all class definitions refined in `self`
 	fun collect_redef_mclassdefs(view: ModelView): Set[MClassDef] do
 		var res = new HashSet[MClassDef]
 		for mclassdef in mclassdefs do
@@ -274,7 +287,7 @@ redef class MModule
 		return res
 	end
 
-	# Collect mclasses introduced in `self` with `visibility >= to min_visibility`.
+	# Collect all classes introduced in `self`
 	fun collect_intro_mclasses(view: ModelView): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mclass in intro_mclasses do
@@ -284,7 +297,7 @@ redef class MModule
 		return res
 	end
 
-	# Collect mclasses redefined in `self` with `visibility >= to min_visibility`.
+	# Collect all classes refined in `self`
 	fun collect_redef_mclasses(view: ModelView): Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for mclassdef in mclassdefs do
@@ -305,7 +318,7 @@ redef class MClass
 		return mclassdefs
 	end
 
-	# `MClass` parents are the direct parents of `self`.
+	# Collect all direct parents of `self`
 	#
 	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_parents(view) do
@@ -320,7 +333,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect all ancestors of `self` with `visibility >= to min_visibility`.
+	# Collect all ancestors of `self`
 	redef fun collect_ancestors(view) do
 		var res = new HashSet[MENTITY]
 		for mclassdef in mclassdefs do
@@ -332,7 +345,7 @@ redef class MClass
 		return res
 	end
 
-	# `MClass` parents are the direct parents of `self`.
+	# Collect all direct children of `self`
 	#
 	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_children(view) do
@@ -347,7 +360,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect all mproperties introduced in 'self' with `visibility >= min_visibility`.
+	# Collect all properties introduced in `self`
 	fun collect_intro_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
@@ -359,7 +372,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect all mproperties redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all properties redefined in `self`
 	fun collect_redef_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
@@ -372,7 +385,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect mproperties introduced and redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all properties introduced and redefined in `self`
 	fun collect_local_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		set.add_all collect_intro_mproperties(view)
@@ -380,7 +393,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect all mproperties inehrited by 'self' with `visibility >= min_visibility`.
+	# Collect all properties inehrited by `self`
 	fun collect_inherited_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for parent in collect_parents(view) do
@@ -390,9 +403,9 @@ redef class MClass
 		return set
 	end
 
-	# Collect all mproperties accessible by 'self' with `visibility >= min_visibility`.
+	# Collect all properties accessible by `self`
 	#
-	# This include introduced, redefined, inherited mproperties.
+	# This include introduced, redefined, inherited properties.
 	fun collect_accessible_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		set.add_all(collect_intro_mproperties(view))
@@ -401,7 +414,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect mmethods introduced in 'self' with `visibility >= min_visibility`.
+	# Collect all methods introduced in `self`
 	fun collect_intro_mmethods(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mproperty in collect_intro_mproperties(view) do
@@ -410,7 +423,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect mmethods redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all methods redefined in `self`
 	fun collect_redef_mmethods(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mproperty in collect_redef_mproperties(view) do
@@ -419,7 +432,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect mmethods introduced and redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all methods introduced and redefined in `self`
 	fun collect_local_mmethods(view: ModelView): Set[MMethod] do
 		var set = new HashSet[MMethod]
 		set.add_all collect_intro_mmethods(view)
@@ -427,7 +440,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect mmethods inherited by 'self' if accepted by `view`.
+	# Collect all methods inherited by `self`
 	fun collect_inherited_mmethods(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mproperty in collect_inherited_mproperties(view) do
@@ -436,9 +449,9 @@ redef class MClass
 		return res
 	end
 
-	# Collect all mmethods accessible by 'self' with `visibility >= min_visibility`.
+	# Collect all methods accessible by `self`
 	#
-	# This include introduced, redefined, inherited mmethods.
+	# This include introduced, redefined, inherited methods.
 	fun collect_accessible_mmethods(view: ModelView): Set[MMethod] do
 		var set = new HashSet[MMethod]
 		set.add_all(collect_intro_mmethods(view))
@@ -447,7 +460,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect mattributes introduced in 'self' with `visibility >= min_visibility`.
+	# Collect all attributes introduced in `self`
 	fun collect_intro_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
 		for mproperty in collect_intro_mproperties(view) do
@@ -456,7 +469,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect mattributes redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all attributes redefined in `self`
 	fun collect_redef_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
 		for mproperty in collect_redef_mproperties(view) do
@@ -465,7 +478,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect mattributes introduced and redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all attributes introduced and redefined in `self`
 	fun collect_local_mattributes(view: ModelView): Set[MAttribute] do
 		var set = new HashSet[MAttribute]
 		set.add_all collect_intro_mattributes(view)
@@ -473,7 +486,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect mattributes inherited by 'self' with `visibility >= min_visibility`.
+	# Collect all attributes inherited by `self`
 	fun collect_inherited_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
 		for mproperty in collect_inherited_mproperties(view) do
@@ -482,7 +495,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect all mattributes accessible by 'self' with `visibility >= min_visibility`.
+	# Collect all attributes accessible by `self`
 	#
 	# This include introduced, redefined, inherited mattributes.
 	fun collect_accessible_mattributes(view: ModelView): Set[MAttribute] do
@@ -493,7 +506,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect init mmethods introduced in 'self' if accepted by `view`.
+	# Collect all init methods introduced in `self`
 	fun collect_intro_inits(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mproperty in collect_intro_mmethods(view) do
@@ -502,7 +515,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect init mmethods redefined in 'self' if accepted by `view`.
+	# Collect all init methods redefined in `self`
 	fun collect_redef_inits(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mproperty in collect_redef_mmethods(view) do
@@ -511,7 +524,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect init mmethods introduced and redefined in 'self' if accepted by `view`.
+	# Collect all init methods introduced and redefined in `self`
 	fun collect_local_inits(view: ModelView): Set[MMethod] do
 		var set = new HashSet[MMethod]
 		set.add_all collect_intro_inits(view)
@@ -519,7 +532,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect init mmethods inherited by 'self'  if accepted by `view`.
+	# Collect all init methods inherited by `self`
 	fun collect_inherited_inits(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mproperty in collect_inherited_mmethods(view) do
@@ -528,7 +541,7 @@ redef class MClass
 		return res
 	end
 
-	# Collect all init mmethods accessible by 'self'  if accepted by `view`.
+	# Collect all init methods accessible by `self`
 	#
 	# This include introduced, redefined, inherited inits.
 	fun collect_accessible_inits(view: ModelView): Set[MMethod] do
@@ -539,7 +552,7 @@ redef class MClass
 		return set
 	end
 
-	# Collect all virtual types accessible by 'self'  if accepted by `view`.
+	# Collect all virtual types accessible by `self`
 	#
 	# This include introduced, redefined, inherited virtual types.
 	fun collect_accessible_vts(view: ModelView): Set[MVirtualTypeProp] do
@@ -562,7 +575,6 @@ redef class MClassDef
 		return mclassdefs
 	end
 
-	# `MClassDef` ancestors are its direct and transitive super classes.
 	redef fun collect_ancestors(view) do
 		var res = new HashSet[MENTITY]
 		var hierarchy = self.in_hierarchy
@@ -574,7 +586,6 @@ redef class MClassDef
 		return res
 	end
 
-	# `MClassDef` parents are its direct super classes.
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
 		var hierarchy = self.in_hierarchy
@@ -586,7 +597,6 @@ redef class MClassDef
 		return res
 	end
 
-	# `MClassDef` children are its direct subclasses.
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
 		var hierarchy = self.in_hierarchy
@@ -598,7 +608,7 @@ redef class MClassDef
 		return res
 	end
 
-	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
+	# Collect all property definitions in `self`
 	fun collect_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
@@ -608,7 +618,7 @@ redef class MClassDef
 		return res
 	end
 
-	# Collect mpropdefs introduced in 'self' with `visibility >= min_visibility`.
+	# Collect all property definitions that are introduction in `self`
 	fun collect_intro_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
@@ -619,7 +629,7 @@ redef class MClassDef
 		return res
 	end
 
-	# Collect mpropdefs redefined in 'self' with `visibility >= min_visibility`.
+	# Collect all property definitions that are redefinition in `self`
 	fun collect_redef_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
@@ -651,7 +661,7 @@ redef class MProperty
 		return mpropdefs
 	end
 
-	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
+	# Collect all property definitions of `self`
 	fun collect_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
@@ -661,9 +671,7 @@ redef class MProperty
 		return res
 	end
 
-	# `MProperty` parents are all direct super definition of `self`.
-	#
-	# This method uses a flattened hierarchy containing all the mpropdefs.
+	# Collect all direct super definitions of `self`
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
 		for mpropdef in mpropdefs do
@@ -675,9 +683,7 @@ redef class MProperty
 		return res
 	end
 
-	# `MProperty` parents are all direct sub definition of `self`.
-	#
-	# This method uses a flattened hierarchy containing all the mpropdefs.
+	# Collection all definitions that have `self` as a direct super definition
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
 		for mpropdef in mpropdefs do
@@ -691,6 +697,7 @@ redef class MProperty
 end
 
 redef class MPropDef
+
 	redef fun collect_modifiers do
 		var res = super
 		if not is_intro then
@@ -730,7 +737,7 @@ redef class MPropDef
 		return mpropdefs
 	end
 
-	# `MPropDef` parents include only the next definition of `self`.
+	# Collect only the next definition of `self`
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
 		var mpropdef = self
@@ -741,7 +748,7 @@ redef class MPropDef
 		return res
 	end
 
-	# `MPropdef` children are definitions that directly depends on `self`.
+	# Collect all children definitions that directly depend on `self`
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
 		for mpropdef in mproperty.collect_mpropdefs(view) do
