@@ -24,6 +24,7 @@
 module rapid_type_analysis
 
 import semantize
+private import explain_assert_api
 
 import csv # for live_types_to_csv
 private import ordered_tree # for live_methods_to_tree
@@ -665,6 +666,31 @@ redef class AAsCastExpr
 		var mtype = self.mtype
 		if mtype == null then return
 		v.add_cast_type(mtype)
+	end
+end
+
+redef class AAssertExpr
+	redef fun accept_rapid_type_visitor(v)
+	do
+		if can_explain_assert(v.analysis.modelbuilder) then
+			var str = explain_assert_str
+			if str != null then str.accept_rapid_type_visitor(v)
+		end
+	end
+
+	# Does `modelbuilder` know the classes to build a superstring to explain a failed assert?
+	private fun can_explain_assert(modelbuilder: ModelBuilder): Bool
+	do
+		var nas = modelbuilder.model.get_mclasses_by_name("NativeArray")
+		if nas == null then return false
+
+		nas = modelbuilder.model.get_mclasses_by_name("Array")
+		if nas == null or nas.is_empty then return false
+
+		nas = modelbuilder.model.get_mclasses_by_name("String")
+		if nas == null or nas.is_empty then return false
+
+		return true
 	end
 end
 
