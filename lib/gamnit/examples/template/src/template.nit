@@ -52,7 +52,7 @@ redef class App
 		# Scale the ship so it is approximately 5 world units wide.
 		sprite.scale = 5.0 / texture.width
 
-		# Move the camera to show 10 world units on the Y axis at Z = 0.
+		# Move the camera to show 20 world units on the Y axis at Z = 0.
 		# The `sprite` should take approximately 1/4 of the height of the screen.
 		world_camera.reset_height 20.0
 
