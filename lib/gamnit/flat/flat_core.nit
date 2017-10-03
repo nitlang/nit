@@ -542,6 +542,8 @@ redef class App
 
 		# draw
 		sprite_set.draw
+
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Draw world sprites from `sprites`
