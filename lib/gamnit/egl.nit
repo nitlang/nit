@@ -96,6 +96,47 @@ redef class GamnitDisplay
 		assert egl_bind_opengl_es_api else print "EGL bind API failed: {egl_display.error}"
 	end
 
+	# Check if the current configuration of `native_window` is still valid
+	#
+	# There is two return values:
+	# * Returns `true` if the Gamnit services should be recreated.
+	# * Sets `native_window_is_invalid` if the system provided window handle is invalid.
+	#   We should wait until we are provided a valid window handle.
+	fun check_egl_context(native_window: Pointer): Bool
+	do
+		native_window_is_invalid = false
+
+		if not egl_context.is_ok then
+			# Needs recreating
+			egl_context = egl_display.create_context(egl_config)
+			assert egl_context.is_ok else print "Creating EGL context failed: {egl_display.error}"
+		end
+
+		var success = egl_display.make_current(window_surface, window_surface, egl_context)
+		if not success then
+			var error = egl_display.error
+			print "check_egl_context make_current: {error}"
+
+
+			if error.is_bad_native_window then
+				# native_window is invalid
+				native_window_is_invalid = true
+				return true
+
+			else if not error.is_success then
+				# The context is now invalid, rebuild it
+				setup_egl_context native_window
+				return true
+			end
+		end
+		return false
+	end
+
+	# Return value from `check_egl_context`, the current native window is invalid
+	#
+	# We should wait until we are provided a valid window handle.
+	var native_window_is_invalid = false
+
 	redef fun width do return window_surface.attribs(egl_display).width
 
 	redef fun height do return window_surface.attribs(egl_display).height

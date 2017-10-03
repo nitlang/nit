@@ -52,13 +52,27 @@ in "C header" `{
 in "C body" `{
 	struct android_app* native_app_glue_data;
 
+	// Was `android_main` called?
+	int android_main_launched = 0;
+
 	// Entry point called by the native_app_glue_framework framework
 	// We relay the call to the Nit application.
 	void android_main(struct android_app* app) {
 		native_app_glue_data = app;
 
-		int main(int argc, char ** argv);
-		main(0, NULL);
+		if (android_main_launched) {
+			// Second call to `android_main`, may happen if `exit 0` was not
+			// called previously to force unloading the Nit app state.
+			// This happens sometimes when the `destroy` lifecycle command
+			// was not correctly received.
+			// We `exit 0` here hoping the system restarts the app nicely
+			// without an error popup.
+			exit(0);
+		} else {
+			android_main_launched = 1;
+			int main(int argc, char ** argv);
+			main(0, NULL);
+		}
 	}
 
 	// Main callback on the native_app_glue framework
@@ -360,7 +374,7 @@ extern class NativeAppGlue `{ struct android_app* `}
 
 	# This is non-zero when the application's NativeActivity is being
 	# destroyed and waiting for the app thread to complete.
-	fun detroy_request: Bool `{ return self->destroyRequested; `}
+	fun destroy_requested: Bool `{ return self->destroyRequested; `}
 end
 
 # Android NDK's struture holding configurations of the native app
