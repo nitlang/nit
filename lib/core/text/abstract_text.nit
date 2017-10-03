@@ -1915,35 +1915,23 @@ redef class Float
 			return  "-inf"
 		end
 
-		if decimals == 0 then return self.to_i.to_s
-		var f = self
-		for i in [0..decimals[ do f = f * 10.0
-		if self > 0.0 then
-			f = f + 0.5
-		else
-			f = f - 0.5
-		end
-		var i = f.to_i
-		if i == 0 then return "0." + "0"*decimals
-
-		# Prepare both parts of the float, before and after the "."
-		var s = i.abs.to_s
-		var sl = s.length
-		var p1
-		var p2
-		if sl > decimals then
-			# Has something before the "."
-			p1 = s.substring(0, sl-decimals)
-			p2 = s.substring(sl-decimals, decimals)
-		else
-			p1 = "0"
-			p2 = "0"*(decimals-sl) + s
-		end
-
-		if i < 0 then p1 = "-" + p1
-
-		return p1 + "." + p2
+		var size = to_precision_size(decimals)
+		var cstr = new CString(size+1)
+		to_precision_fill(decimals, size+1, cstr)
+		return cstr.to_s_unsafe(byte_length=size, copy=false)
 	end
+
+	# Required string length to hold `self` with `nb` decimals
+	#
+	# The length does not include the terminating null byte.
+	private fun to_precision_size(nb: Int): Int `{
+		return snprintf(NULL, 0, "%.*f", (int)nb, self);
+	`}
+
+	# Fill `cstr` with `self` and `nb` decimals
+	private fun to_precision_fill(nb, size: Int, cstr: CString) `{
+		snprintf(cstr, size, "%.*f", (int)nb, self);
+	`}
 end
 
 redef class Char
