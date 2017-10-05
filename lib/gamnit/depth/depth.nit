@@ -25,13 +25,18 @@ import shadow
 
 redef class App
 
-	redef fun create_gamnit
+	redef fun create_scene
 	do
-		super
-
 		# Move the camera back a bit
 		world_camera.reset_height(10.0)
 		world_camera.near = 0.1
+
+		super
+	end
+
+	redef fun create_gamnit
+	do
+		super
 
 		# Cull the invisible triangles in the back of the geometries
 		glCullFace gl_BACK
