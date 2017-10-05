@@ -6,4 +6,6 @@ test_parser
 test_highlight
 test_model_visitor
 test_model_index
+test_loader
+get_mclasses
 ^nit
