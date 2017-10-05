@@ -3637,6 +3637,9 @@ redef class AAssertExpr
 		var nas = v.compiler.modelbuilder.model.get_mclasses_by_name("NativeArray")
 		if nas == null then return
 
+		nas = v.compiler.modelbuilder.model.get_mclasses_by_name("Array")
+		if nas == null or nas.is_empty then return
+
 		var expr = explain_assert_str.expr(v)
 		if expr == null then return
 
