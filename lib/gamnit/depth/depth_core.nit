@@ -185,7 +185,10 @@ end
 # ~~~
 class Mesh
 
-	# Vertices coordinates
+	# Number for vertices
+	fun n_vertices: Int do return vertices.length / 3
+
+	# Vertices relative coordinates, 3 floats per vertex
 	var vertices = new Array[Float] is lazy, writable
 
 	# Indices to draw triangles with `glDrawElements`
@@ -195,10 +198,10 @@ class Mesh
 
 	private var indices_c = new CUInt16Array.from(indices) is lazy, writable
 
-	# Normals on each vertex
+	# Normals, 3 floats per vertex
 	var normals = new Array[Float] is lazy, writable
 
-	# Coordinates on the texture per vertex
+	# Coordinates on the texture, 2 floats per vertex
 	var texture_coords = new Array[Float] is lazy, writable
 
 	# `GLDrawMode` used to display this mesh, defaults to `gl_TRIANGLES`
