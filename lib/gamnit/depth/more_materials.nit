@@ -49,7 +49,7 @@ class SmoothMaterial
 
 	redef fun draw(actor, model, camera)
 	do
-		var program = app.versatile_program
+		var program = app.blinn_phong_program
 		program.use
 		program.mvp.uniform camera.mvp_matrix
 
@@ -156,7 +156,7 @@ class TexturedMaterial
 	do
 		var mesh = model.mesh
 
-		var program = app.versatile_program
+		var program = app.blinn_phong_program
 		program.use
 
 		# One of the textures used, if any
@@ -608,7 +608,7 @@ class NormalProgram
 end
 
 redef class App
-	private var versatile_program = new BlinnPhongProgram is lazy
+	private var blinn_phong_program = new BlinnPhongProgram is lazy
 
 	private var normals_program = new NormalProgram is lazy
 end

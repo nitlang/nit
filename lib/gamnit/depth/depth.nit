@@ -37,7 +37,7 @@ redef class App
 		glCullFace gl_BACK
 
 		# Prepare programs
-		var programs = [versatile_program, normals_program, explosion_program, smoke_program, static_program, selection_program: GamnitProgram]
+		var programs = [blinn_phong_program, normals_program, explosion_program, smoke_program, static_program, selection_program: GamnitProgram]
 		for program in programs do
 			program.compile_and_link
 			var gamnit_error = program.error
