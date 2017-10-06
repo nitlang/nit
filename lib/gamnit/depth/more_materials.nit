@@ -56,9 +56,13 @@ class SmoothMaterial
 		var mesh = model.mesh
 
 		# Actor specs
+		glDisableVertexAttribArray program.translation.location
+		glDisableVertexAttribArray program.scale.location
+
 		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
-		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
+		program.alpha.uniform actor.alpha
+		program.rotation = new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		# From mesh
 		program.coord.array_enabled = true
@@ -77,13 +81,12 @@ class SmoothMaterial
 		program.camera.uniform(camera.position.x, camera.position.y, camera.position.z)
 
 		# Colors from the material
-		var a = actor.alpha
-		program.ambient_color.uniform(ambient_color[0]*a, ambient_color[1]*a,
-		                              ambient_color[2]*a, ambient_color[3]*a)
-		program.diffuse_color.uniform(diffuse_color[0]*a, diffuse_color[1]*a,
-		                              diffuse_color[2]*a, diffuse_color[3]*a)
-		program.specular_color.uniform(specular_color[0]*a, specular_color[1]*a,
-		                               specular_color[2]*a, specular_color[3]*a)
+		program.ambient_color.uniform(ambient_color[0], ambient_color[1],
+		                              ambient_color[2], ambient_color[3])
+		program.diffuse_color.uniform(diffuse_color[0], diffuse_color[1],
+		                              diffuse_color[2], diffuse_color[3])
+		program.specular_color.uniform(specular_color[0], specular_color[1],
+		                               specular_color[2], specular_color[3])
 
 		setup_lights(camera, program)
 
@@ -206,9 +209,13 @@ class TexturedMaterial
 			program.use_map_bump.uniform false
 		end
 
+		glDisableVertexAttribArray program.translation.location
+		glDisableVertexAttribArray program.scale.location
+
 		program.mvp.uniform camera.mvp_matrix
 		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
+		program.alpha.uniform actor.alpha
 
 		# If using a texture, set `texture_coords`
 		program.tex_coord.array_enabled = sample_used_texture != null
@@ -237,15 +244,14 @@ class TexturedMaterial
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
 
-		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
+		program.rotation = new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
-		var a = actor.alpha
-		program.ambient_color.uniform(ambient_color[0]*a, ambient_color[1]*a,
-		                              ambient_color[2]*a, ambient_color[3]*a)
-		program.diffuse_color.uniform(diffuse_color[0]*a, diffuse_color[1]*a,
-		                              diffuse_color[2]*a, diffuse_color[3]*a)
-		program.specular_color.uniform(specular_color[0]*a, specular_color[1]*a,
-		                               specular_color[2]*a, specular_color[3]*a)
+		program.ambient_color.uniform(ambient_color[0], ambient_color[1],
+		                              ambient_color[2], ambient_color[3])
+		program.diffuse_color.uniform(diffuse_color[0], diffuse_color[1],
+		                              diffuse_color[2], diffuse_color[3])
+		program.specular_color.uniform(specular_color[0], specular_color[1],
+		                               specular_color[2], specular_color[3])
 
 		program.normal.array_enabled = true
 		program.normal.array(mesh.normals, 3)
@@ -290,7 +296,7 @@ class NormalsMaterial
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
 
-		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
+		program.rotation = new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		program.normal.array_enabled = true
 		program.normal.array(mesh.normals, 3)
@@ -312,10 +318,12 @@ class BlinnPhongProgram
 		attribute vec4 coord;
 
 		// Vertex translation
-		uniform vec4 translation;
+		attribute vec4 translation;
 
 		// Vertex scaling
-		uniform float scale;
+		attribute float scale;
+
+		attribute float alpha;
 
 		// Vertex coordinates on textures
 		attribute vec2 tex_coord;
@@ -326,7 +334,16 @@ class BlinnPhongProgram
 		// Camera model view projection matrix
 		uniform mat4 mvp;
 
-		uniform mat4 rotation;
+		// Actor rotation
+		attribute vec4 rotation_row0;
+		attribute vec4 rotation_row1;
+		attribute vec4 rotation_row2;
+		attribute vec4 rotation_row3;
+
+		mat4 rotation()
+		{
+			return mat4(rotation_row0, rotation_row1, rotation_row2, rotation_row3);
+		}
 
 		// Lights config
 		uniform lowp int light_kind;
@@ -342,9 +359,11 @@ class BlinnPhongProgram
 		varying vec4 v_to_light;
 		varying vec4 v_to_camera;
 		varying vec4 v_depth_pos;
+		varying float v_alpha;
 
 		void main()
 		{
+			mat4 rotation = rotation();
 			vec4 pos = (vec4(coord.xyz * scale, 1.0) * rotation + translation);
 			gl_Position = pos * mvp;
 			v_depth_pos = (pos * light_mvp) * 0.5 + 0.5;
@@ -363,6 +382,8 @@ class BlinnPhongProgram
 				// Point light (and others?)
 				v_to_light = normalize(vec4(light_center, 1.0) - pos);
 			}
+
+			v_alpha = alpha;
 		}
 		""" @ glsl_vertex_shader
 
@@ -375,6 +396,7 @@ class BlinnPhongProgram
 		varying vec4 v_to_light;
 		varying vec4 v_to_camera;
 		varying vec4 v_depth_pos;
+		varying float v_alpha;
 
 		// Colors
 		uniform vec4 ambient_color;
@@ -465,13 +487,13 @@ class BlinnPhongProgram
 			}
 
 			// Ambient light
-			vec4 ambient = ambient_color;
+			vec4 ambient = ambient_color * v_alpha;
 			if (use_map_ambient) ambient *= texture2D(map_ambient, v_tex_coord);
 
 			if (light_kind == 0) {
 				// No light, show diffuse and ambient
 
-				vec4 diffuse = diffuse_color;
+				vec4 diffuse = diffuse_color * v_alpha;
 				if (use_map_diffuse) diffuse *= texture2D(map_diffuse, v_tex_coord);
 
 				gl_FragColor = ambient + diffuse;
@@ -497,7 +519,7 @@ class BlinnPhongProgram
 					diffuse *= shadow();
 				}
 
-				vec4 specular = s * specular_color;
+				vec4 specular = s * specular_color * v_alpha;
 				if (use_map_specular) specular *= texture2D(map_specular, v_tex_coord).x;
 
 				gl_FragColor = ambient + diffuse + specular;
@@ -576,13 +598,40 @@ class BlinnPhongProgram
 	var camera = uniforms["camera"].as(UniformVec3) is lazy
 
 	# Translation applied to each vertex
-	var translation = uniforms["translation"].as(UniformVec4) is lazy
+	var translation = attributes["translation"].as(AttributeVec4) is lazy # TODO attribute
 
-	# Rotation matrix
-	var rotation = uniforms["rotation"].as(UniformMat4) is lazy
+	# Set `mat` at the uniform rotation matrix
+	fun rotation=(mat: Matrix)
+	do
+		var i = 0
+		for r in [rotation_row0, rotation_row1, rotation_row2, rotation_row3] do
+			if r.is_active then
+				glDisableVertexAttribArray r.location
+				r.uniform(mat[0, i], mat[1, i], mat[2, i], mat[3, i])
+			end
+			i += 1
+		end
+		var gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
+	end
+
+	# Rotation matrix, row0
+	var rotation_row0 = attributes["rotation_row0"].as(AttributeVec4) is lazy
+
+	# Rotation matrix, row 1
+	var rotation_row1 = attributes["rotation_row1"].as(AttributeVec4) is lazy
+
+	# Rotation matrix, row 2
+	var rotation_row2 = attributes["rotation_row2"].as(AttributeVec4) is lazy
+
+	# Rotation matrix, row 3
+	var rotation_row3 = attributes["rotation_row3"].as(AttributeVec4) is lazy
 
 	# Scaling per vertex
-	var scale = uniforms["scale"].as(UniformFloat) is lazy
+	var scale = attributes["scale"].as(AttributeFloat) is lazy
+
+	# Scaling per vertex
+	var alpha = attributes["alpha"].as(AttributeFloat) is lazy
 
 	# Camera model view projection matrix
 	var mvp = uniforms["mvp"].as(UniformMat4) is lazy
