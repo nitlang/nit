@@ -85,7 +85,7 @@ class SmoothMaterial
 		program.specular_color.uniform(specular_color[0]*a, specular_color[1]*a,
 		                               specular_color[2]*a, specular_color[3]*a)
 
-		setup_lights(actor, model, camera, program)
+		setup_lights(camera, program)
 
 		# Execute draw
 		if mesh.indices.is_empty then
@@ -95,7 +95,7 @@ class SmoothMaterial
 		end
 	end
 
-	private fun setup_lights(actor: Actor, model: LeafModel, camera: Camera, program: BlinnPhongProgram)
+	private fun setup_lights(camera: Camera, program: BlinnPhongProgram)
 	do
 		# TODO use a list of lights
 
@@ -251,7 +251,7 @@ class TexturedMaterial
 		program.normal.array(mesh.normals, 3)
 
 		# Light
-		setup_lights(actor, model, camera, program)
+		setup_lights(camera, program)
 
 		# Camera
 		program.camera.uniform(camera.position.x, camera.position.y, camera.position.z)
