@@ -31,9 +31,9 @@ redef class NLPDocument
 				var lemma = token.lemma
 				if lemma_black_list.has(lemma) then continue
 				if not vector.has_key(lemma) then
-					vector[lemma] = 1
+					vector[lemma] = 1.0
 				else
-					vector[lemma] += 1
+					vector[lemma] += 1.0
 				end
 			end
 		end
