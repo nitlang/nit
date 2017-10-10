@@ -93,7 +93,7 @@ class Attribute
 
 		var native = native_float_array
 		if native == null or array.length > native.length then
-			if native != null then native.destroy
+			if native != null then native.finalize
 			native = new GLfloatArray.from(array)
 			self.native_float_array = native
 		else

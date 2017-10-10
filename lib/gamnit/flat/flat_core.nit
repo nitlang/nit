@@ -1724,10 +1724,11 @@ end
 redef class GLfloatArray
 	private fun fill_from_matrix(matrix: Matrix, dst_offset: nullable Int)
 	do
-		dst_offset = dst_offset or else 0
+		dst_offset = dst_offset or else add_index
 		var mat_len = matrix.width*matrix.height
 		assert length >= mat_len + dst_offset
 		native_array.fill_from_matrix_native(matrix.items, dst_offset, mat_len)
+		add_index += mat_len
 	end
 end
 
