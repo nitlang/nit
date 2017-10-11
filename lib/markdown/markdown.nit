@@ -262,7 +262,10 @@ class MarkdownProcessor
 						pos = md.read_until(comment, pos, c)
 					end
 				end
-				if not comment.is_empty then last_link_ref.title = comment.write_to_string
+				var last_link_ref = self.last_link_ref
+				if not comment.is_empty and last_link_ref != null then
+					last_link_ref.title = comment.write_to_string
+				end
 			end
 			if comment.is_empty then return false
 			return true
@@ -757,7 +760,9 @@ class HTMLDecorator
 
 	redef fun add_headline(v, block) do
 		# save headline
-		var txt = block.block.first_line.value
+		var line = block.block.first_line
+		if line == null then return
+		var txt = line.value
 		var id = strip_id(txt)
 		var lvl = block.depth
 		headlines[id] = new HeadLine(id, txt, lvl)
@@ -1021,8 +1026,8 @@ class MDBlock
 	fun split(line: MDLine): MDBlock do
 		# location for new block
 		var new_loc = new MDLocation(
-			first_line.location.line_start,
-			first_line.location.column_start,
+			first_line.as(not null).location.line_start,
+			first_line.as(not null).location.column_start,
 			line.location.line_end,
 			line.location.column_end)
 		# create block
@@ -1034,16 +1039,16 @@ class MDBlock
 		if first_line == null then
 			last_line = null
 		else
-			first_line.prev = null
+			first_line.as(not null).prev = null
 			# update current block loc
-			location.line_start = first_line.location.line_start
-			location.column_start = first_line.location.column_start
+			location.line_start = first_line.as(not null).location.line_start
+			location.column_start = first_line.as(not null).location.column_start
 		end
 		if first_block == null then
 			first_block = block
 			last_block = block
 		else
-			last_block.next = block
+			last_block.as(not null).next = block
 			last_block = block
 		end
 		return block
@@ -1055,10 +1060,10 @@ class MDBlock
 			first_line = line
 			last_line = line
 		else
-			last_line.next_empty = line.is_empty
-			line.prev_empty = last_line.is_empty
+			last_line.as(not null).next_empty = line.is_empty
+			line.prev_empty = last_line.as(not null).is_empty
 			line.prev = last_line
-			last_line.next = line
+			last_line.as(not null).next = line
 			last_line = line
 		end
 	end
@@ -1068,12 +1073,12 @@ class MDBlock
 		if line.prev == null then
 			first_line = line.next
 		else
-			line.prev.next = line.next
+			line.prev.as(not null).next = line.next
 		end
 		if line.next == null then
 			last_line = line.prev
 		else
-			line.next.prev = line.prev
+			line.next.as(not null).prev = line.prev
 		end
 		line.prev = null
 		line.next = null
@@ -1307,6 +1312,7 @@ class BlockHeadline
 		if depth > 0 then return
 		var level = 0
 		var line = block.first_line
+		if line == null then return
 		if line.is_empty then return
 		var start = line.leading
 		while start < line.value.length and line.value[start] == '#' do
@@ -1346,6 +1352,7 @@ abstract class BlockList
 	# Split list block into list items sub-blocks.
 	private fun init_block(v: MarkdownProcessor) do
 		var line = block.first_line
+		if line == null then return
 		line = line.next
 		while line != null do
 			var t = v.line_kind(line)
@@ -1478,8 +1485,8 @@ class MDLine
 		leading = 0
 		trailing = 0
 		is_empty = true
-		if prev != null then prev.next_empty = true
-		if next != null then next.prev_empty = true
+		if prev != null then prev.as(not null).next_empty = true
+		if next != null then next.as(not null).prev_empty = true
 	end
 
 	# Number or leading spaces on this line.
@@ -1613,8 +1620,8 @@ class MDLine
 	# Used by `check_html`.
 	private fun read_xml_comment(first_line: MDLine, start: Int): Int do
 		var line: nullable MDLine = first_line
-		if start + 3 < line.value.length then
-			if line.value[2] == '-' and line.value[3] == '-' then
+		if start + 3 < line.as(not null).value.length then
+			if line.as(not null).value[2] == '-' and line.as(not null).value[3] == '-' then
 				var pos = start + 4
 				while line != null do
 					while pos < line.value.length and line.value[pos] != '-' do
@@ -1655,7 +1662,7 @@ class LineEmpty
 	super Line
 
 	redef fun process(v) do
-		v.current_line = v.current_line.next
+		v.current_line = v.current_line.as(not null).next
 	end
 end
 
@@ -1667,7 +1674,7 @@ class LineOther
 	redef fun process(v) do
 		var line = v.current_line
 		# go to block end
-		var was_empty = line.prev_empty
+		var was_empty = line.as(not null).prev_empty
 		while line != null and not line.is_empty do
 			var t = v.line_kind(line)
 			if (v.in_list or v.ext_mode) and t isa LineList then
@@ -1683,29 +1690,30 @@ class LineOther
 			line = line.next
 		end
 		# build block
+		var current_block = v.current_block.as(not null)
 		if line != null and not line.is_empty then
-			var block = v.current_block.split(line.prev.as(not null))
+			var block = current_block.split(line.prev.as(not null))
 			if v.in_list and not was_empty then
 				block.kind = new BlockNone(block)
 			else
 				block.kind = new BlockParagraph(block)
 			end
-			v.current_block.remove_leading_empty_lines
+			current_block.remove_leading_empty_lines
 		else
 			var block: MDBlock
 			if line != null then
-				block = v.current_block.split(line)
+				block = current_block.split(line)
 			else
-				block = v.current_block.split(v.current_block.last_line.as(not null))
+				block = current_block.split(current_block.last_line.as(not null))
 			end
 			if v.in_list and (line == null or not line.is_empty) and not was_empty then
 				block.kind = new BlockNone(block)
 			else
 				block.kind = new BlockParagraph(block)
 			end
-			v.current_block.remove_leading_empty_lines
+			current_block.remove_leading_empty_lines
 		end
-		v.current_line = v.current_block.first_line
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1720,15 +1728,16 @@ class LineCode
 			line = line.next
 		end
 		# split at block end line
+		var current_block = v.current_block.as(not null)
 		var block: MDBlock
 		if line != null then
-			block = v.current_block.split(line.prev.as(not null))
+			block = current_block.split(line.prev.as(not null))
 		else
-			block = v.current_block.split(v.current_block.last_line.as(not null))
+			block = current_block.split(current_block.last_line.as(not null))
 		end
 		block.kind = new BlockCode(block)
 		block.remove_surrounding_empty_lines
-		v.current_line = v.current_block.first_line
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1738,12 +1747,14 @@ class LineXML
 
 	redef fun process(v) do
 		var line = v.current_line
+		if line == null then return
+		var current_block = v.current_block.as(not null)
 		var prev = line.prev
-		if prev != null then v.current_block.split(prev)
-		var block = v.current_block.split(line.xml_end_line.as(not null))
+		if prev != null then current_block.split(prev)
+		var block = current_block.split(line.xml_end_line.as(not null))
 		block.kind = new BlockXML(block)
-		v.current_block.remove_leading_empty_lines
-		v.current_line = v.current_block.first_line
+		current_block.remove_leading_empty_lines
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1753,6 +1764,7 @@ class LineBlockquote
 
 	redef fun process(v) do
 		var line = v.current_line
+		var current_block = v.current_block.as(not null)
 		# go to bquote end
 		while line != null do
 			if not line.is_empty and (line.prev_empty and
@@ -1763,9 +1775,9 @@ class LineBlockquote
 		# build sub block
 		var block: MDBlock
 		if line != null then
-			block = v.current_block.split(line.prev.as(not null))
+			block = current_block.split(line.prev.as(not null))
 		else
-			block = v.current_block.split(v.current_block.last_line.as(not null))
+			block = current_block.split(current_block.last_line.as(not null))
 		end
 		var kind = new BlockQuote(block)
 		block.kind = kind
@@ -1773,7 +1785,7 @@ class LineBlockquote
 		kind.remove_block_quote_prefix(block)
 		v.current_line = line
 		v.recurse(block, false)
-		v.current_line = v.current_block.first_line
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1783,11 +1795,13 @@ class LineHR
 
 	redef fun process(v) do
 		var line = v.current_line
-		if line.prev != null then v.current_block.split(line.prev.as(not null))
-		var block = v.current_block.split(line.as(not null))
+		if line == null then return
+		var current_block = v.current_block.as(not null)
+		if line.prev != null then current_block.split(line.prev.as(not null))
+		var block = current_block.split(line)
 		block.kind = new BlockRuler(block)
-		v.current_block.remove_leading_empty_lines
-		v.current_line = v.current_block.first_line
+		current_block.remove_leading_empty_lines
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1797,7 +1811,8 @@ class LineFence
 
 	redef fun process(v) do
 		# go to fence end
-		var line = v.current_line.next
+		var line = v.current_line.as(not null).next
+		var current_block = v.current_block.as(not null)
 		while line != null do
 			if v.line_kind(line) isa LineFence then break
 			line = line.next
@@ -1808,17 +1823,17 @@ class LineFence
 		# build fence block
 		var block: MDBlock
 		if line != null then
-			block = v.current_block.split(line.prev.as(not null))
+			block = current_block.split(line.prev.as(not null))
 		else
-			block = v.current_block.split(v.current_block.last_line.as(not null))
+			block = current_block.split(current_block.last_line.as(not null))
 		end
 		block.remove_surrounding_empty_lines
-		var meta = block.first_line.value.meta_from_fence
+		var meta = block.first_line.as(not null).value.meta_from_fence
 		block.kind = new BlockFence(block, meta)
-		block.first_line.clear
+		block.first_line.as(not null).clear
 		var last = block.last_line
 		if last != null and v.line_kind(last) isa LineFence then
-			block.last_line.clear
+			block.last_line.as(not null).clear
 		end
 		block.remove_surrounding_empty_lines
 		v.current_line = line
@@ -1831,14 +1846,16 @@ class LineHeadline
 
 	redef fun process(v) do
 		var line = v.current_line
+		if line == null then return
+		var current_block = v.current_block.as(not null)
 		var lprev = line.prev
-		if lprev != null then v.current_block.split(lprev)
-		var block = v.current_block.split(line.as(not null))
+		if lprev != null then current_block.split(lprev)
+		var block = current_block.split(line)
 		var kind = new BlockHeadline(block)
 		block.kind = kind
 		kind.transform_headline(block)
-		v.current_block.remove_leading_empty_lines
-		v.current_line = v.current_block.first_line
+		current_block.remove_leading_empty_lines
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1848,16 +1865,18 @@ class LineHeadline1
 
 	redef fun process(v) do
 		var line = v.current_line
+		if line == null then return
+		var current_block = v.current_block.as(not null)
 		var lprev = line.prev
-		if lprev != null then v.current_block.split(lprev)
-		line.next.clear
-		var block = v.current_block.split(line.as(not null))
+		if lprev != null then current_block.split(lprev)
+		line.next.as(not null).clear
+		var block = current_block.split(line)
 		var kind = new BlockHeadline(block)
 		kind.depth = 1
 		kind.transform_headline(block)
 		block.kind = kind
-		v.current_block.remove_leading_empty_lines
-		v.current_line = v.current_block.first_line
+		current_block.remove_leading_empty_lines
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1867,16 +1886,18 @@ class LineHeadline2
 
 	redef fun process(v) do
 		var line = v.current_line
+		if line == null then return
+		var current_block = v.current_block.as(not null)
 		var lprev = line.prev
-		if lprev != null then v.current_block.split(lprev)
-		line.next.clear
-		var block = v.current_block.split(line.as(not null))
+		if lprev != null then current_block.split(lprev)
+		line.next.as(not null).clear
+		var block = current_block.split(line)
 		var kind = new BlockHeadline(block)
 		kind.depth = 2
 		kind.transform_headline(block)
 		block.kind = kind
-		v.current_block.remove_leading_empty_lines
-		v.current_line = v.current_block.first_line
+		current_block.remove_leading_empty_lines
+		v.current_line = current_block.first_line
 	end
 end
 
@@ -1895,19 +1916,20 @@ abstract class LineList
 			line = line.next
 		end
 		# build list block
+		var current_block = v.current_block.as(not null)
 		var list: MDBlock
 		if line != null then
-			list = v.current_block.split(line.prev.as(not null))
+			list = current_block.split(line.prev.as(not null))
 		else
-			list = v.current_block.split(v.current_block.last_line.as(not null))
+			list = current_block.split(current_block.last_line.as(not null))
 		end
 		var kind = block_kind(list)
 		list.kind = kind
-		list.first_line.prev_empty = false
-		list.last_line.next_empty = false
+		list.first_line.as(not null).prev_empty = false
+		list.last_line.as(not null).next_empty = false
 		list.remove_surrounding_empty_lines
-		list.first_line.prev_empty = false
-		list.last_line.next_empty = false
+		list.first_line.as(not null).prev_empty = false
+		list.last_line.as(not null).next_empty = false
 		kind.init_block(v)
 		var block = list.first_block
 		while block != null do
@@ -2030,14 +2052,15 @@ abstract class TokenCode
 	super Token
 
 	redef fun emit(v) do
+		var current_text = v.current_text.as(not null)
 		var a = pos + next_pos + 1
-		var b = v.processor.find_token(v.current_text.as(not null), a, self)
+		var b = v.processor.find_token(current_text, a, self)
 		if b > 0 then
 			v.current_pos = b + next_pos
-			while a < b and v.current_text[a] == ' ' do a += 1
+			while a < b and current_text[a] == ' ' do a += 1
 			if a < b then
-				while v.current_text[b - 1] == ' ' do b -= 1
-				v.decorator.add_span_code(v, v.current_text.as(not null), a, b)
+				while current_text[b - 1] == ' ' do b -= 1
+				v.decorator.add_span_code(v, current_text, a, b)
 			end
 		else
 			v.addc char
@@ -2095,6 +2118,7 @@ abstract class TokenLinkOrImage
 	# Check if the link is a valid link.
 	private fun check_link(v: MarkdownEmitter, out: FlatBuffer, start: Int, token: Token): Int do
 		var md = v.current_text
+		if md == null then return -1
 		var pos
 		if token isa TokenLink then
 			pos = start + 1
@@ -2109,7 +2133,7 @@ abstract class TokenLinkOrImage
 		pos += 1
 		pos = md.skip_spaces(pos)
 		if pos < start then
-			var tid = name.write_to_string.to_lower
+			var tid = name.as(not null).write_to_string.to_lower
 			if v.processor.link_refs.has_key(tid) then
 				var lr = v.processor.link_refs[tid]
 				is_abbrev = lr.is_abbrev
@@ -2159,14 +2183,14 @@ abstract class TokenLinkOrImage
 			else
 				id = name
 			end
-			var tid = id.write_to_string.to_lower
+			var tid = id.as(not null).write_to_string.to_lower
 			if v.processor.link_refs.has_key(tid) then
 				var lr = v.processor.link_refs[tid]
 				link = lr.link
 				comment = lr.title
 			end
 		else
-			var tid = name.write_to_string.replace("\n", " ").to_lower
+			var tid = name.as(not null).write_to_string.replace("\n", " ").to_lower
 			if v.processor.link_refs.has_key(tid) then
 				var lr = v.processor.link_refs[tid]
 				link = lr.link
@@ -2301,7 +2325,7 @@ class TokenEscape
 
 	redef fun emit(v) do
 		v.current_pos += 1
-		v.addc v.current_text[v.current_pos]
+		v.addc v.current_text.as(not null)[v.current_pos]
 	end
 end
 
