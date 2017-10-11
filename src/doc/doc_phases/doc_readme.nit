@@ -57,17 +57,16 @@ redef class ReadmePage
 			v.warning(null, self, "Empty README for group `{mentity}`")
 			return
 		end
-		var proc = new MarkdownProcessor
-		proc.emitter = new ReadmeMdEmitter(proc, self, v)
-		proc.emitter.decorator = new ReadmeDecorator
+		var proc = new ReadmeMdProcessor(self, v)
+		proc.decorator = new ReadmeDecorator
 		var md = mdoc.content.join("\n")
 		proc.process(md)
 	end
 end
 
 # Markdown emitter used to produce the `ReadmeArticle`.
-class ReadmeMdEmitter
-	super MarkdownEmitter
+class ReadmeMdProcessor
+	super MarkdownProcessor
 
 	# Readme page being decorated.
 	var page: ReadmePage
@@ -92,7 +91,7 @@ class ReadmeMdEmitter
 	#
 	# Called from `add_headline`.
 	private fun open_section(lvl: Int, title: String) do
-		var section = new ReadmeSection(title.escape_to_c, title, lvl, processor)
+		var section = new ReadmeSection(title.escape_to_c, title, lvl, self)
 		var current_section = self.current_section
 		if current_section == null then
 			page.root.add_child(section)
@@ -137,7 +136,7 @@ class ReadmeMdEmitter
 	private fun open_article do
 		var section: DocComposite = page.root
 		if current_section != null then section = current_section.as(not null)
-		var article = new ReadmeArticle("mdarticle-{section.children.length}", null, processor)
+		var article = new ReadmeArticle("mdarticle-{section.children.length}", null, self)
 		section.add_child(article)
 		context.add article
 		push_article article
@@ -191,7 +190,7 @@ class ReadmeDecorator
 	# Parser used to process doc commands
 	var parser = new DocCommandParser
 
-	redef type EMITTER: ReadmeMdEmitter
+	redef type PROCESSOR: ReadmeMdProcessor
 
 	redef fun add_headline(v, block) do
 		var txt = block.block.first_line.as(not null).value
@@ -226,7 +225,7 @@ class ReadmeDecorator
 	end
 
 	# Renders a link to a mentity.
-	private fun add_mentity_link(v: EMITTER, mentity: MEntity, name, comment: nullable Text) do
+	private fun add_mentity_link(v: PROCESSOR, mentity: MEntity, name, comment: nullable Text) do
 		# TODO real link
 		var link = mentity.full_name
 		if name == null then name = mentity.name
@@ -241,7 +240,7 @@ end
 redef class DocCommand
 
 	# Render the content of the doc command.
-	fun render(v: ReadmeMdEmitter, token: TokenWikiLink) is abstract
+	fun render(v: ReadmeMdProcessor, token: TokenWikiLink) is abstract
 end
 
 redef class CommentCommand

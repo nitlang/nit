@@ -187,7 +187,7 @@ redef class Catalog
 	do
 		# Register `self` to the global NitdocDecorator
 		# FIXME this is ugly. But no better idea at the moment.
-		modelbuilder.model.nitdoc_md_processor.emitter.decorator.as(NitdocDecorator).catalog = self
+		modelbuilder.model.nitdoc_md_processor.decorator.as(NitdocDecorator).catalog = self
 	end
 
 	# The output directory where to generate pages

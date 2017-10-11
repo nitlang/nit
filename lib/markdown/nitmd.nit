@@ -49,9 +49,9 @@ var to = opt_to.value
 if to == null or to == "html" then
 	# Noop
 else if to == "md" then
-	processor.emitter.decorator = new MdDecorator
+	processor.decorator = new MdDecorator
 else if to == "man" then
-	processor.emitter.decorator = new ManDecorator
+	processor.decorator = new ManDecorator
 else
 	print "Unknown output format: {to}"
 	exit 1

@@ -2735,7 +2735,7 @@ class TestHTMLDecorator
 # c
 """
 		var proc = new MarkdownProcessor
-		var decorator = proc.emitter.decorator.as(HTMLDecorator)
+		var decorator = proc.decorator.as(HTMLDecorator)
 		proc.process(test)
 		var res = ""
 		for id, headline in decorator.headlines do
@@ -2852,7 +2852,7 @@ class TestBlockLocation
 		]
 		var string =
 		"# Title\n* li1\n* li2"
-		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end
 
@@ -2870,7 +2870,7 @@ some code
 
 1. li1
 1. li2"""
-		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end
 
@@ -2879,7 +2879,7 @@ some code
 			"BlockHeadline: 1,1--1,8",
 			"BlockHeadline: 3,1--3,10"]
 		var string ="""# Title\n\n## Title 2"""
-		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end
 end
