@@ -208,7 +208,8 @@ class StringIndex
 	# See `match_vector`.
 	fun match_string(query: String): Array[IndexMatch] do
 		var vector = parse_string(query)
-		return match_vector(vector)
+		var doc = new Document("", "", vector)
+		return match_vector(doc.terms_frequency)
 	end
 
 	# Parse the `string` as a Vector
