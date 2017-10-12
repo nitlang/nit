@@ -93,7 +93,7 @@
 #
 # The `IniConfig` class extends `Config` to add an easy way to link your
 # configuration to an ini file.
-
+#
 # ~~~
 # class MyIniConfig
 #	super IniConfig
