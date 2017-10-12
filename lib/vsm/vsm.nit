@@ -72,6 +72,11 @@ class Vector
 		return cos
 	end
 
+	redef fun [](k) do
+		if not has_key(k) then return 0.0
+		return super
+	end
+
 	# The norm of the vector.
 	#
 	# `||x|| = (x1 ** 2 ... + xn ** 2).sqrt`
