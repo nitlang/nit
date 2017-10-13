@@ -159,18 +159,43 @@ redef class Matrix
 	#
 	# This service aims to respect the world axes and logic of `gamnit`,
 	# it may not correspond to all needs.
+	#
+	# The returned `Matrix` may be cached, it must not be modified.
 	new gamnit_euler_rotation(pitch, yaw, roll: Float)
 	do
+		if pitch == 0.0 and yaw == 0.0 and roll == 0.0 then
+			return once new Matrix.identity(4)
+		end
+
+		if rotation_pitch == pitch and rotation_yaw == yaw and rotation_roll == roll then
+			var rot = rotation_matrix_cache
+			if rot != null then return rot
+		end
+
 		var c1 = pitch.cos
 		var s1 = pitch.sin
 		var c2 = yaw.cos
 		var s2 = yaw.sin
 		var c3 = roll.cos
 		var s3 = roll.sin
-		return new Matrix.from(
+		var rot = new Matrix.from(
 			[[          c2*c3,          -c2*s3,   -s2, 0.0],
 			 [ c1*s3+c3*s1*s2,  c1*c3-s1*s2*s3, c2*s1, 0.0],
 			 [-s1*s3+c1*c3*s2, -c3*s1-c1*s2*s3, c1*c2, 0.0],
 			 [            0.0,             0.0,   0.0, 1.0]])
+
+		rotation_matrix_cache = rot
+		rotation_pitch = pitch
+		rotation_yaw = yaw
+		rotation_roll = roll
+		return rot
 	end
+end
+
+redef class Sys
+
+	private var rotation_matrix_cache: nullable Matrix = null
+	private var rotation_pitch = 0.0
+	private var rotation_yaw = 0.0
+	private var rotation_roll = 0.0
 end
