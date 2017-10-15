@@ -216,12 +216,22 @@ redef class App
 	# Raised when the soft input window being shown or hidden, and similar events.
 	fun content_rect_changed do end
 
-	# Call the `ALooper` to retrieve events and callback the application
+	# Call the `ALooper_pollAll` to retrieve events and callback the application
 	fun poll_looper(timeout_ms: Int) import handle_looper_event `{
 		int ident;
 		int event;
 		void* source;
 		while ((ident=ALooper_pollAll(timeout_ms, NULL, &event, &source)) >= 0) {
+			App_handle_looper_event(self, ident, event, source);
+		}
+	`}
+
+	# Call the `ALooper_pollOnce` to retrieve at most one event and callback the application
+	fun poll_looper_pause(timeout_ms: Int) import handle_looper_event `{
+		int event;
+		void* source;
+		int ident = ALooper_pollOnce(timeout_ms, NULL, &event, &source);
+		if (ident >= 0) {
 			App_handle_looper_event(self, ident, event, source);
 		}
 	`}
