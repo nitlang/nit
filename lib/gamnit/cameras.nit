@@ -245,10 +245,10 @@ class UICamera
 	var bottom: IPoint3d[Float] = new CameraAnchor(self, 0.5, -1.0)
 
 	# Center of the left border of the screen, at z = 0
-	var left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -1.0)
+	var left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -0.5)
 
 	# Center of the right border of the screen, at z = 0
-	var right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -1.0)
+	var right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -0.5)
 
 	# Top left corner of the screen, at z = 0
 	var top_left: IPoint3d[Float] = new CameraAnchor(self, 0.0, 0.0)
