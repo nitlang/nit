@@ -67,7 +67,8 @@ private class MendelMetricsPhase
 		print toolcontext.format_h1("\n# Mendel metrics")
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = model.protected_view
+		var model_view = new ModelView(model, mainmodule)
+		model_view.min_visibility = protected_visibility
 
 		var mclasses = new HashSet[MClass]
 		for mclass in model_view.mclasses do
@@ -75,9 +76,9 @@ private class MendelMetricsPhase
 			mclasses.add(mclass)
 		end
 
-		var cnblp = new CNBLP(mainmodule, model_view)
-		var cnvi = new CNVI(mainmodule, model_view)
-		var cnvs = new CNVS(mainmodule, model_view)
+		var cnblp = new CNBLP(model_view)
+		var cnvi = new CNVI(model_view)
+		var cnvs = new CNVS(model_view)
 
 		var metrics = new MetricSet
 		metrics.register(cnblp, cnvi, cnvs)
@@ -140,7 +141,7 @@ class CBMS
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var totc = mclass.collect_accessible_mproperties(model_view).length
-			var ditc = mclass.in_hierarchy(mainmodule).depth
+			var ditc = mclass.in_hierarchy(model_view.mainmodule).depth
 			values[mclass] = totc.to_f / (ditc + 1).to_f
 		end
 	end
@@ -173,10 +174,10 @@ class CNVI
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
 	redef fun collect(mclasses) do
-		var cbms = new CBMS(mainmodule, model_view)
+		var cbms = new CBMS(model_view)
 		for mclass in mclasses do
 			# compute branch mean size
-			var parents = mclass.in_hierarchy(mainmodule).direct_greaters
+			var parents = mclass.in_hierarchy(model_view.mainmodule).direct_greaters
 			if parents.length > 0 then
 				cbms.clear
 				cbms.collect(new HashSet[MClass].from(parents))
@@ -199,7 +200,7 @@ class MNVI
 	redef fun desc do return "module novelty index, contribution of the module to its branch in term of introductions"
 
 	redef fun collect(mmodules) do
-		var mbms = new MBMS(mainmodule, model_view)
+		var mbms = new MBMS(model_view)
 		for mmodule in mmodules do
 			# compute branch mean size
 			var parents = mmodule.in_importation.direct_greaters
@@ -226,7 +227,7 @@ class CNVS
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
 	redef fun collect(mclasses) do
-		var cnvi = new CNVI(mainmodule, model_view)
+		var cnvi = new CNVI(model_view)
 		cnvi.collect(mclasses)
 		for mclass in mclasses do
 			var locc = mclass.collect_local_mproperties(model_view).length
@@ -244,7 +245,7 @@ class MNVS
 	redef fun desc do return "module novelty score, importance of the contribution of the module to its branch"
 
 	redef fun collect(mmodules) do
-		var mnvi = new MNVI(mainmodule, model_view)
+		var mnvi = new MNVI(model_view)
 		mnvi.collect(mmodules)
 		for mmodule in mmodules do
 			var locc = mmodule.collect_intro_mclassdefs(model_view).length
