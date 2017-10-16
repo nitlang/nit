@@ -318,7 +318,9 @@ redef class MModulePage
 	redef fun init_topmenu(v, doc) do
 		super
 		var mpackage = mentity.mpackage
-		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
+		if mpackage != null then
+			topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
+		end
 		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
