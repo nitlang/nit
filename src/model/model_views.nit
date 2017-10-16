@@ -28,6 +28,9 @@ class ModelView
 	# The model to view through `self`.
 	var model: Model
 
+	# MModule used to flatten mclass hierarchy
+	var mainmodule: MModule
+
 	# MPackages visible through `self`.
 	var mpackages: Set[MPackage] is lazy do
 		var mpackages = new HashSet[MPackage]
@@ -175,27 +178,6 @@ class ModelTreeVisitor
 end
 
 redef class MEntity
-
-	# Get a public view of the model
-	fun public_view: ModelView do
-		var view = new ModelView(self.model)
-		view.min_visibility = public_visibility
-		return view
-	end
-
-	# Get a public view of the model
-	fun protected_view: ModelView do
-		var view = new ModelView(self.model)
-		view.min_visibility = protected_visibility
-		return view
-	end
-
-	# Get a public view of the model
-	fun private_view: ModelView do
-		var view = new ModelView(self.model)
-		view.min_visibility = private_visibility
-		return view
-	end
 
 	private fun accept_namespace_visitor(v: LookupNamespaceVisitor) do
 		if v.parts.is_empty then return
