@@ -46,7 +46,10 @@ private class Nitdoc
 		var accept_attribute = true
 		if toolcontext.opt_no_attributes.value then accept_attribute = false
 
-		var filters = new ModelFilter(min_visibility, accept_attribute = accept_attribute)
+		var filters = new ModelFilter(
+			min_visibility,
+			accept_attribute = accept_attribute,
+			accept_fictive = false)
 		var doc = new DocModel(mainmodule.model, mainmodule, filters)
 
 		var phases = [
