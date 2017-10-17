@@ -399,6 +399,9 @@ redef class App
 		var display = display
 		assert display != null
 		glClear gl_COLOR_BUFFER_BIT
+
+		ui_camera.reset_height 1080.0
+		glViewport(0, 0, display.width, display.height)
 		frame_core_ui_sprites display
 		display.flip
 
