@@ -52,8 +52,8 @@ class Matrix
 
 		for j in height.times do assert items[j].length == width
 
-		for j in height.times do
-			for i in width.times do
+		for j in [0..height[ do
+			for i in [0..width[ do
 				self[j, i] = items[j][i]
 			end
 		end
@@ -123,8 +123,8 @@ class Matrix
 		assert size >= 0
 
 		var matrix = new Matrix(size, size)
-		for i in size.times do
-			for j in size.times do
+		for i in [0..size[ do
+			for j in [0..size[ do
 				matrix[j, i] = if i == j then 1.0 else 0.0
 			end
 		end
@@ -213,10 +213,10 @@ class Matrix
 		assert self.width == other.height
 
 		var out = new Matrix(other.width, self.height)
-		for j in self.height.times do
-			for i in other.width.times do
+		for j in [0..self.height[ do
+			for i in [0..other.width[ do
 				var sum = items[0].zero
-				for k in self.width.times do sum += self[j, k] * other[k, i]
+				for k in [0..self.width[ do sum += self[j, k] * other[k, i]
 				out[j, i] = sum
 			end
 		end

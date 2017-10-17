@@ -566,8 +566,8 @@ redef extern class NativeGLfloatArray
 	# Overwrite this matrix with the identity matrix
 	fun set_identity
 	do
-		for i in 4.times do
-			for j in 4.times do
+		for i in [0..4[ do
+			for j in [0..4[ do
 				matrix_set(i, j, if i == j then 1.0 else 0.0)
 			end
 		end
@@ -584,8 +584,8 @@ redef class Matrix
 	# Copy content of this matrix to a `NativeGLfloatArray`
 	fun fill_native(native: NativeGLfloatArray)
 	do
-		for i in width.times do
-			for j in height.times do
+		for i in [0..width[ do
+			for j in [0..height[ do
 				native.matrix_set(i, j, self[i, j])
 			end
 		end
