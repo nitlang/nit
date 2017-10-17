@@ -1140,6 +1140,12 @@ class MDBlock
 			text.append "\n"
 			line = line.next
 		end
+		var block = first_block
+		while block != null do
+			text.append block.text
+			text.append "\n"
+			block = block.next
+		end
 		return text.write_to_string
 	end
 end
