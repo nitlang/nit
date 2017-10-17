@@ -64,7 +64,7 @@ redef class MDoc
 	# Renders markdown line as a HTML comment block.
 	private fun lines_to_html(lines: Array[String]): Writable do
 		var res = new Template
-		var decorator = markdown_proc.emitter.decorator.as(NitdocDecorator)
+		var decorator = markdown_proc.decorator.as(NitdocDecorator)
 		decorator.current_mdoc = self
 		res.add "<div class=\"nitdoc\">"
 		# do not use DocUnit as synopsys
@@ -199,7 +199,7 @@ redef class Model
 	# Get a markdown processor for Nitdoc comments.
 	var nitdoc_md_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new NitdocDecorator
+		proc.decorator = new NitdocDecorator
 		return proc
 	end
 
@@ -208,7 +208,7 @@ redef class Model
 	# This processor is specificaly designed to inlinable doc elements like synopsys.
 	var nitdoc_inline_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new InlineDecorator
+		proc.decorator = new InlineDecorator
 		return proc
 	end
 end

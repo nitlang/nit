@@ -168,7 +168,7 @@ redef class WikiEntry
 		var blocks = sidebar.blocks
 		for i in [0..blocks.length[ do
 			blocks[i] = md_proc.process(blocks[i].to_s).write_to_string
-			md_proc.emitter.decorator.headlines.clear
+			md_proc.decorator.headlines.clear
 		end
 	end
 end
@@ -212,7 +212,7 @@ redef class WikiArticle
 		super
 		if not is_dirty and not wiki.force_render or not has_source then return
 		content = md_proc.process(md.as(not null))
-		headlines.add_all(md_proc.emitter.decorator.headlines)
+		headlines.add_all(md_proc.decorator.headlines)
 	end
 end
 
@@ -243,8 +243,7 @@ class NitiwikiMdProcessor
 	var context: WikiEntry
 
 	init do
-		emitter = new MarkdownEmitter(self)
-		emitter.decorator = new NitiwikiDecorator(wiki, context)
+		decorator = new NitiwikiDecorator(wiki, context)
 	end
 end
 
@@ -259,7 +258,7 @@ class NitiwikiDecorator
 	var context: WikiEntry
 
 	redef fun add_wikilink(v, token) do
-		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
+		var wiki = v.as(NitiwikiMdProcessor).wiki
 		var target: nullable WikiEntry = null
 		var anchor: nullable String = null
 		var link = token.link

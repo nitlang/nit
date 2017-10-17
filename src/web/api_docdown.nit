@@ -25,7 +25,7 @@ redef class NitwebConfig
 	# Specific Markdown processor to use within Nitweb
 	var md_processor: MarkdownProcessor is lazy do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new NitwebDecorator(view, modelbuilder)
+		proc.decorator = new NitwebDecorator(view, modelbuilder)
 		return proc
 	end
 end
@@ -106,7 +106,7 @@ class NitwebInlineDecorator
 	end
 end
 
-redef class MarkdownEmitter
+redef class MarkdownProcessor
 
 	# Parser used to process doc commands
 	var parser = new DocCommandParser
@@ -226,7 +226,7 @@ end
 redef class DocCommand
 
 	# Emit the HTML related to the execution of this doc command
-	fun render(v: MarkdownEmitter, token: TokenWikiLink, model: ModelView) do
+	fun render(v: MarkdownProcessor, token: TokenWikiLink, model: ModelView) do
 		v.write_error("not yet implemented command `{token.link or else "null"}`")
 	end
 end
@@ -253,7 +253,7 @@ redef class CommentCommand
 		end
 		v.add "</h3>"
 		if not opts.has_key("no-comment") then
-			v.add v.processor.process(mdoc.comment).write_to_string
+			v.add v.process(mdoc.comment).write_to_string
 		end
 	end
 end
