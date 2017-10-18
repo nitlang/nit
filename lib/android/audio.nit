@@ -28,8 +28,8 @@
 #
 # ~~~nitish
 # # Note that you need to specify the path from "assets" folder and the extension
-# var s = app.load_sound("sounds/test_sound.ogg")
-# var m = app.load_music("sounds/test_music.ogg")
+# var s = new Sound("sounds/test_sound.ogg")
+# var m = new Music("sounds/test_music.ogg")
 # s.play
 # m.play
 # ~~~
