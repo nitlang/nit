@@ -338,7 +338,7 @@ abstract class Subtexture
 	# Parent texture, from which this texture was created
 	var parent: Texture
 
-	redef var root = parent.root is lateinit
+	redef fun root do return parent.root
 
 	redef fun load(force) do root.load(force)
 end
@@ -392,7 +392,7 @@ class TextureSet
 end
 
 redef class Pointer
-	# Multiply RBG values by their alpha value
+	# Multiply RGB values by their alpha value
 	private fun premultiply_alpha(width, height: Int) `{
 		uint8_t *bytes = (uint8_t *)self;
 		int x, y, i = 0;
