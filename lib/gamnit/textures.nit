@@ -195,7 +195,14 @@ class CustomTexture
 
 	redef fun load(force)
 	do
-		if loaded then return
+		force = force or else false
+		if loaded and not force then return
+
+		if force and glIsTexture(gl_texture) then
+			# Was already loaded, free the previous GL name
+			glDeleteTextures([gl_texture])
+		end
+		gl_texture = -1
 
 		# Round down the desired dimension
 		var width = width.to_i
@@ -205,7 +212,6 @@ class CustomTexture
 
 		load_from_pixels(cpixels.native_array, width, height, gl_RGBA)
 
-		cpixels.destroy
 		loaded = true
 	end
 end
