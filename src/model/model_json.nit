@@ -57,9 +57,9 @@ redef class MEntity
 	# Serialize the full version of `self` to JSON
 	#
 	# See: `FullJsonSerializer`
-	fun serialize_to_full_json(plain, pretty: nullable Bool): String do
+	fun serialize_to_full_json(mainmodule: MModule, plain, pretty: nullable Bool): String do
 		var stream = new StringWriter
-		var serializer = new FullJsonSerializer(stream)
+		var serializer = new FullJsonSerializer(stream, mainmodule)
 		serializer.plain_json = plain or else false
 		serializer.pretty_json = pretty or else false
 		serializer.serialize self
@@ -72,10 +72,14 @@ redef class MEntity
 	# By default, every reference to another MEntity is replaced by a pointer
 	# to the MEntity::json_id.
 	# Use this method to obtain a full object with mentities instead of pointers.
-	fun to_full_json: String do return serialize_to_full_json(plain=true)
+	fun to_full_json(mainmodule: MModule): String do
+		return serialize_to_full_json(mainmodule, plain=true)
+	end
 
 	# Same as `to_full_json` but with pretty json.
-	fun to_pretty_full_json: String do return serialize_to_full_json(plain=true, pretty=true)
+	fun to_pretty_full_json(mainmodule: MModule): String do
+		return serialize_to_full_json(mainmodule, plain=true, pretty=true)
+	end
 
 	# Sort mentities by name
 	private fun sort_entities(mentities: Collection[MEntity]): Array[MEntity] do
@@ -141,7 +145,7 @@ redef class MModule
 	redef fun core_serialize_to(v) do
 		super
 		if v isa FullJsonSerializer then
-			var view = private_view
+			var view = new ModelView(model, v.mainmodule)
 			v.serialize_attribute("mpackage", to_mentity_ref(mpackage))
 			v.serialize_attribute("mgroup", to_mentity_ref(mgroup))
 			v.serialize_attribute("intro_mclasses", to_mentity_refs(sort_entities(intro_mclasses)))
@@ -158,7 +162,7 @@ redef class MClass
 		super
 		v.serialize_attribute("mparameters", mparameters)
 		if v isa FullJsonSerializer then
-			var view = private_view
+			var view = new ModelView(model, v.mainmodule)
 			v.serialize_attribute("intro", to_mentity_ref(intro))
 			v.serialize_attribute("intro_mmodule", to_mentity_ref(intro_mmodule))
 			v.serialize_attribute("mpackage", to_mentity_ref(intro_mmodule.mpackage))
@@ -177,7 +181,7 @@ redef class MClassDef
 		v.serialize_attribute("is_intro", is_intro)
 		v.serialize_attribute("mparameters", mclass.mparameters)
 		if v isa FullJsonSerializer then
-			var view = private_view
+			var view = new ModelView(model, v.mainmodule)
 			v.serialize_attribute("mmodule", to_mentity_ref(mmodule))
 			v.serialize_attribute("mclass", to_mentity_ref(mclass))
 			v.serialize_attribute("mpropdefs", to_mentity_refs(sort_entities(mpropdefs)))
@@ -311,4 +315,7 @@ end
 # See MEntity::to_full_json.
 class FullJsonSerializer
 	super JsonSerializer
+
+	# FIXME tmp use of the mainmodule, a PR is comming to clean all the JSON mess
+	var mainmodule: MModule
 end

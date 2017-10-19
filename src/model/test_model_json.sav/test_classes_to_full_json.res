@@ -1133,8 +1133,6 @@
 	}],
 	"parents": [{
 		"full_name": "test_prog::Combatable"
-	}, {
-		"full_name": "test_prog::Object"
 	}]
 }
 {

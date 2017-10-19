@@ -150,7 +150,7 @@ class APIEntity
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.raw_json mentity.to_full_json
+		res.raw_json mentity.to_full_json(config.view.mainmodule)
 	end
 end
 
