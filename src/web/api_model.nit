@@ -70,10 +70,19 @@ class APIList
 		return mentities
 	end
 
+	# Filter mentities based on the config view filters
+	fun filter_mentities(req: HttpRequest, mentities: Array[MEntity]): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			if config.view.filter.accept_mentity(mentity) then res.add mentity
+		end
+		return res
+	end
+
 	# Sort mentities by lexicographic order
 	#
 	# TODO choose order from request
-	fun sort_mentities(req: HttpRequest, mentities: Array[MEntity]) : Array[MEntity] do
+	fun sort_mentities(req: HttpRequest, mentities: Array[MEntity]): Array[MEntity] do
 		var sorted = mentities.to_a
 		var sorter = new MEntityNameSorter
 		sorter.sort(sorted)
@@ -135,6 +144,7 @@ class APIRandom
 
 	redef fun get(req, res) do
 		var mentities = list_mentities(req)
+		mentities = filter_mentities(req, mentities)
 		mentities = randomize_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
 		res.json new JsonArray.from(mentities)
@@ -235,6 +245,7 @@ class APIEntityDefs
 			res.api_error(404, "No definition list for mentity `{mentity.full_name}`")
 			return
 		end
+		mentities = filter_mentities(req, mentities)
 		mentities = sort_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
 		res.json new JsonArray.from(mentities)

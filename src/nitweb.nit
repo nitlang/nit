@@ -30,12 +30,28 @@ redef class ToolContext
 	# Port number to bind on (will overwrite the config one).
 	var opt_port = new OptionInt("Port number to use", -1, "--port")
 
+	# --no-private
+	var opt_no_private = new OptionBool("Do not show private entities", "--no-private")
+
+	# --no-fictive
+	var opt_no_fictive = new OptionBool("Do not show fictive entities", "--no-fictive")
+
+	# --no-test
+	var opt_no_test = new OptionBool("Do not show test related entities", "--no-test")
+
+	# --no-attribute
+	var opt_no_attribute = new OptionBool("Do not show attributes", "--no-attribute")
+
+	# --no-empty-doc
+	var opt_no_empty_doc = new OptionBool("Do not undocumented entities", "--no-empty-doc")
+
 	# Web rendering phase.
 	var webphase: Phase = new NitwebPhase(self, null)
 
 	init do
 		super
-		option_context.add_option(opt_config, opt_host, opt_port)
+		option_context.add_option(opt_config, opt_host, opt_port, opt_no_private,
+			opt_no_fictive, opt_no_test, opt_no_attribute, opt_no_empty_doc)
 	end
 end
 
@@ -45,10 +61,20 @@ private class NitwebPhase
 
 	# Build the nitweb config from `toolcontext` options.
 	fun build_config(toolcontext: ToolContext, mainmodule: MModule): NitwebConfig do
-		var config = new NitwebConfig(
-			toolcontext.modelbuilder.model,
-			mainmodule,
-			toolcontext.modelbuilder)
+
+		var model = toolcontext.modelbuilder.model
+
+		var filter = new ModelFilter(
+			if toolcontext.opt_no_private.value then protected_visibility else private_visibility,
+			accept_fictive = not toolcontext.opt_no_fictive.value,
+			accept_empty_doc = not toolcontext.opt_no_empty_doc.value,
+			accept_test = not toolcontext.opt_no_test.value,
+			accept_attribute = not toolcontext.opt_no_attribute.value
+		)
+
+		var view = new ModelView(model, mainmodule, filter)
+
+		var config = new NitwebConfig(model, mainmodule, toolcontext.modelbuilder, view)
 		var config_file = toolcontext.opt_config.value
 		if config_file == null then config.default_config_file = "nitweb.ini"
 		config.parse_options(args)
