@@ -41,11 +41,12 @@ private class UMLPhase
 	super Phase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		var view = new ModelView(mainmodule.model, mainmodule)
+		var filters = new ModelFilter
 		if not toolcontext.opt_privacy.value then
-			view.min_visibility = protected_visibility
+			filters.min_visibility = protected_visibility
 		end
 
+		var view = new ModelView(mainmodule.model, mainmodule, filters)
 		var d = new UMLModel(view, mainmodule)
 		if toolcontext.opt_gen.value == 0 then
 			print d.generate_class_uml.write_to_string
