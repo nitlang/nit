@@ -55,38 +55,38 @@ do
 	var model = modelbuilder.model
 
 	print "All entities, including fictive ones:"
-	var filters = new ModelFilters(private_visibility, accept_fictive = true)
+	var filters = new ModelFilter(private_visibility, accept_fictive = true)
 	var v = new TestModelVisitor(filters)
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 	var names = v.names
 
 	print "All entities:"
-	filters = new ModelFilters(private_visibility)
+	filters = new ModelFilter(private_visibility)
 	v = new TestModelVisitor(filters)
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 
 	print "\nAll non-private entities:"
-	filters = new ModelFilters(protected_visibility)
+	filters = new ModelFilter(protected_visibility)
 	v = new TestModelVisitor(filters)
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 
 	print "\nAll documented non-private entities:"
-	filters = new ModelFilters(protected_visibility, accept_empty_doc = false)
+	filters = new ModelFilter(protected_visibility, accept_empty_doc = false)
 	v = new TestModelVisitor(filters)
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 
 	print "\nAll public entities:"
-	filters = new ModelFilters(public_visibility)
+	filters = new ModelFilter(public_visibility)
 	v = new TestModelVisitor(filters)
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 
 	print "\nAll documented public entities:"
-	filters = new ModelFilters(public_visibility, accept_empty_doc = false)
+	filters = new ModelFilter(public_visibility, accept_empty_doc = false)
 	v = new TestModelVisitor(filters)
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
