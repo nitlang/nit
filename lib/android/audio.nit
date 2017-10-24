@@ -656,14 +656,14 @@ redef class App
 	var default_soundpool: SoundPool is lazy do return new SoundPool
 
 	# Get the native audio manager
-	private fun audio_manager: NativeAudioManager import native_activity in "Java" `{
-		return (AudioManager)App_native_activity(self).getSystemService(Context.AUDIO_SERVICE);
+	private fun audio_manager(native_activity: NativeContext): NativeAudioManager in "Java" `{
+		return (AudioManager)native_activity.getSystemService(Context.AUDIO_SERVICE);
 	`}
 
 	# Sets the stream of the app to STREAM_MUSIC.
 	# STREAM_MUSIC is the default stream used by android apps.
-	private fun manage_audio_stream import native_activity in "Java" `{
-		App_native_activity(self).setVolumeControlStream(AudioManager.STREAM_MUSIC);
+	private fun manage_audio_stream(native_activity: NativeActivity) in "Java" `{
+		native_activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
 
 	# Same as `load_sound` but load the sound from the `res/raw` folder
@@ -688,18 +688,18 @@ redef class App
 				s.paused = false
 			end
 		end
-		audio_manager.abandon_audio_focus
+		audio_manager(native_activity).abandon_audio_focus
 	end
 
 	redef fun on_create do
 		super
-		audio_manager.request_audio_focus
-		manage_audio_stream
+		audio_manager(native_activity).request_audio_focus
+		manage_audio_stream native_activity
 	end
 
 	redef fun on_resume do
 		super
-		audio_manager.request_audio_focus
+		audio_manager(native_activity).request_audio_focus
 		for s in sounds do
 			# Resumes only the sounds paused by the App
 			if not s.paused then s.resume
