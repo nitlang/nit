@@ -8,29 +8,52 @@ file can be specified using the `-o` and `--dir` options.
 
 # Host system configuration
 
-Some configuration is required to compile for the Android platform from a GNU/Linux host.
+To compile Android apps from a 64 bits GNU/Linux host you can reuse an existing Android Studio
+installation or make a clean install with command line tools only.
 
-1. Download and install the latest Android SDK __and__ NDK.
+Note that this guide supports only 64 bits GNU/Linux hosts with support for a Java 8 JDK,
+it may be possible to support other platforms with some tweaks.
 
-2. Update PATH so it includes the tools `android`, `ndk-build` and `ant`.
-	You should add something like the following snippet to your .bashrc or equivalent,
-	be careful to replace `ANDROID_SDK` and `ANDROID_NDK` with the full path where you installed each package.
+1.	Install the required SDK packages using one of these two methods:
+
+	a.	Using Android Studio, open `Tools > Android > SDK Manager`, in the SDK Tools tab,
+		install "Android SDK Build-Tools", CMake and NDK.
+
+	b.	From the command line, run this script for a quick setup without Android Studio.
+		You will probably need to tweak it to you system or update the download URL
+		to the latest SDK tools from https://developer.android.com/studio/index.html#command-tools
+
+		~~~
+		# Fetch and extract SDK tools
+		mkdir -p ~/Android/Sdk
+		cd ~/Android/Sdk
+		wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+		unzip sdk-tools-linux-3859397.zip
+
+		# Update tools
+		tools/bin/sdkmanager --update
+
+		# Accept the licenses
+		tools/bin/sdkmanager --licenses
+
+		# Install the basic build tools
+		tools/bin/sdkmanager "build-tools;27.0.0" ndk-bundle
+		~~~
+
+3.	Set the environment variable ANDROID_HOME to the SDK installation directory, usually `~/Android/Sdk/`.
+	Use the following command to setup the variable for bash.
 
 	~~~
-	export PATH=$PATH:ANDROID_SDK/tools/:ANDROID_SDK/platform-tools/:ANDROID_NDK/
+	echo "export ANDROID_HOME=~/Android/Sdk/" >> ~/.bashrc
 	~~~
 
-2. Using the `android` executable, download the latest `tools, build-tools` and within the Android 4.0.3 (API 15) folder, install `SDK platform`.
-	You may have to install additional SDK platforms for applications with different targets.
-
-3. Using your OS package manager, install `apt openjdk-7-jdk lib32stdc++6 lib32z1`.
-	On Debian and Ubuntu the command is:
+4.	Install Java 8 JDK, on Debian/Ubuntu systems you can use the following command:
 
 	~~~
-	sudo apt-get install apt openjdk-7-jdk lib32stdc++6 lib32z1
+	sudo apt install openjdk-8-jdk
 	~~~
 
-# Configure your Android application
+# Configure the Android application
 
 The _app.nit_ framework and this project offers some services to
 customize the generated Android application.
