@@ -1803,6 +1803,8 @@ class MNullableType
 		if t == mtype then return self
 		return t.as_nullable
 	end
+
+	redef fun mdoc_or_fallback do return mtype.mdoc_or_fallback
 end
 
 # A non-null version of a formal type.
