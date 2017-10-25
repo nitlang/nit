@@ -143,7 +143,7 @@ end
 
 redef class MParameterType
 	redef fun html_link do
-		return new Link.with_title("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
+		return new Link("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
 	end
 end
 
@@ -191,7 +191,7 @@ redef class MConcern
 	private fun html_concern_item: ListItem do
 		var lnk = html_link
 		var tpl = new Template
-		tpl.add new Link.with_title("#{nitdoc_id}.concern", lnk.text, lnk.title)
+		tpl.add new Link("#{nitdoc_id}.concern", lnk.text, lnk.title)
 		var comment = html_synopsis
 		if comment != null then
 			tpl.add ": "
