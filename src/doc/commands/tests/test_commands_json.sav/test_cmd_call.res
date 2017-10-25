@@ -1,56 +1,54 @@
 {
 	"results": [{
 		"name": "init",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "$", {
+			"name": "Character",
+			"synopsis": "Characters can be played by both the human or the machine."
+		}, "$", {
+			"name": "Object",
+			"synopsis": "Root of everything."
+		}, "::", {
+			"name": "init"
+		}],
 		"class_name": "MMethodDef",
 		"full_name": "test_prog$Character$Object::init",
-		"mdoc": null,
 		"visibility": "public",
 		"modifiers": ["redef", "init"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 68,
-			"line_start": 21,
-			"file": "test_location"
-		},
-		"is_intro": false,
 		"msignature": {
 			"arity": 0,
-			"mparams": [],
-			"return_mtype": null,
-			"vararg_rank": -1
+			"mparameters": [],
+			"return_mtype": null
 		}
 	}, {
 		"name": "total_strengh",
+		"synopsis": "The actual strength of the character.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "$", {
+			"name": "Character",
+			"synopsis": "Characters can be played by both the human or the machine."
+		}, "$", {
+			"name": "total_strengh",
+			"synopsis": "The actual strength of the character."
+		}],
 		"class_name": "MMethodDef",
 		"full_name": "test_prog$Character$total_strengh",
-		"mdoc": {
-			"content": "The actual strength of the character.\n\nReturns `race.base_strength + career.strength_bonus` or just `race.base_strength` is unemployed.",
-			"location": {
-				"column_end": 0,
-				"column_start": 2,
-				"line_end": 42,
-				"line_start": 39,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">The actual strength of the character.</span>",
 		"modifiers": ["fun"],
-		"location": {
-			"column_end": 4,
-			"column_start": 2,
-			"line_end": 45,
-			"line_start": 39,
-			"file": "test_location"
-		},
 		"is_intro": true,
 		"msignature": {
 			"arity": 0,
-			"mparams": [],
+			"mparameters": [],
 			"return_mtype": {
-				"full_name": "test_prog::Int"
-			},
-			"vararg_rank": -1
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			}
 		}
 	}],
 	"page": null,

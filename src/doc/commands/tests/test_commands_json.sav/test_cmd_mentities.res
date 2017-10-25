@@ -107,18 +107,16 @@
 		}
 	}, {
 		"name": "game_examples",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "game_examples"
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::game_examples",
-		"mdoc": null,
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 32,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"modifiers": ["module"]
 	}, {
 		"name": "platform",
 		"class_name": "MModule",

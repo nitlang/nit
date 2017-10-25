@@ -1,28 +1,19 @@
 {
 	"results": [{
 		"name": "Object",
+		"synopsis": "Root of everything.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Object",
+			"synopsis": "Root of everything."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Object",
-		"mdoc": {
-			"content": "Root of everything.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 21,
-				"line_start": 20,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["interface"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 30,
-			"line_start": 20,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Root of everything.</span>",
+		"modifiers": ["interface"]
 	}],
 	"page": null,
 	"count": null,

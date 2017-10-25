@@ -1,237 +1,171 @@
 {
 	"results": [{
 		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Career",
+			"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Career",
-		"mdoc": {
-			"content": "A `Career` gives a characteristic bonus or malus to the character.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 30,
-				"line_start": 29,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["abstract class"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 36,
-			"line_start": 29,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>",
+		"modifiers": ["abstract class"]
 	}, {
 		"name": "career",
+		"synopsis": "The current `Career` of the character.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Character",
+			"synopsis": "Characters can be played by both the human or the machine."
+		}, "::", {
+			"name": "career",
+			"synopsis": "The current `Career` of the character."
+		}],
 		"class_name": "MMethod",
 		"full_name": "test_prog::Character::career",
-		"mdoc": {
-			"content": "The current `Career` of the character.\nReturns `null` if character is unemployed.",
-			"location": {
-				"column_end": 0,
-				"column_start": 2,
-				"line_end": 29,
-				"line_start": 27,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 		"modifiers": ["fun"],
-		"location": {
-			"column_end": 47,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 27,
-			"file": "test_location"
-		},
-		"is_init": false,
 		"msignature": {
 			"arity": 0,
-			"mparams": [],
+			"mparameters": [],
 			"return_mtype": {
-				"full_name": "nullable test_prog::Career"
-			},
-			"vararg_rank": -1
+				"name": "nullable Career",
+				"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
+			}
 		}
 	}, {
 		"name": "game",
+		"synopsis": "Gaming group",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, ">", {
+			"name": "game",
+			"synopsis": "Gaming group"
+		}, ">"],
 		"class_name": "MGroup",
 		"full_name": "test_prog>game>",
-		"mdoc": {
-			"content": "Gaming group",
-			"location": {
-				"column_end": 0,
-				"column_start": 0,
-				"line_end": 1,
-				"line_start": 1,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["group"],
-		"location": {
-			"column_end": 0,
-			"column_start": 0,
-			"line_end": 0,
-			"line_start": 0,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Gaming group</span>",
+		"modifiers": ["group"]
 	}, {
 		"name": "game",
+		"synopsis": "A game abstraction for RPG.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "game",
+			"synopsis": "A game abstraction for RPG."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::game",
-		"mdoc": {
-			"content": "A game abstraction for RPG.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 45,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A game abstraction for RPG.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "races",
+		"synopsis": "Races of the game.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "races",
+			"synopsis": "Races of the game."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::races",
-		"mdoc": {
-			"content": "Races of the game.\n\nAll characters belong to a `Race`.\n\nAvailable races:\n\n * `Human`\n * `Dwarf`\n * `Elf`",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 24,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 78,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Races of the game.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "careers",
+		"synopsis": "Careers of the game.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "careers",
+			"synopsis": "Careers of the game."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::careers",
-		"mdoc": {
-			"content": "Careers of the game.\n\nAll characters can have a `Career`.\nA character can also quit its current career and start a new one.\n\nAvailable careers:\n\n * `Warrior`\n * `Magician`\n * `Alcoholic`",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 25,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 69,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Careers of the game.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Game",
+			"synopsis": "This is the interface you have to implement to use ure gaming platform."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Game",
-		"mdoc": {
-			"content": "This is the interface you have to implement to use ure gaming platform.\n\nsee http://our.platform.com",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 23,
-				"line_start": 20,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["interface"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 45,
-			"line_start": 20,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">This is the interface you have to implement to use ure gaming platform.</span>",
+		"modifiers": ["interface"]
 	}, {
 		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Race",
+			"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Race",
-		"mdoc": {
-			"content": "Race determines basic characteristics and what the character will be able to do in life.\n\nThese are base characteristics, they cannot be changed\nbut you can add new ones if needed using refinement.\nObjects and spells cannot change those characteristics.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 33,
-				"line_start": 28,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["abstract class"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 45,
-			"line_start": 28,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>",
+		"modifiers": ["abstract class"]
 	}, {
 		"name": "Starter",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Starter"
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Starter",
-		"mdoc": null,
 		"visibility": "public",
-		"modifiers": ["class"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 23,
-			"line_start": 21,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"modifiers": ["class"]
 	}, {
 		"name": "age",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Character",
+			"synopsis": "Characters can be played by both the human or the machine."
+		}, "::", {
+			"name": "age"
+		}],
 		"class_name": "MMethod",
 		"full_name": "test_prog::Character::age",
-		"mdoc": null,
 		"visibility": "public",
 		"modifiers": ["fun"],
-		"location": {
-			"column_end": 13,
-			"column_start": 2,
-			"line_end": 36,
-			"line_start": 36,
-			"file": "test_location"
-		},
-		"is_init": false,
 		"msignature": {
 			"arity": 0,
-			"mparams": [],
+			"mparameters": [],
 			"return_mtype": {
-				"full_name": "test_prog::Int"
-			},
-			"vararg_rank": -1
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			}
 		}
 	}],
 	"page": 1,
