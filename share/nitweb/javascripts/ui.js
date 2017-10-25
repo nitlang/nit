@@ -298,6 +298,7 @@
 			return {
 				restrict: 'E',
 				replace: true,
+				scope: {},
 				bindToController: {
 					pagination: '=',
 					suffix: '=?'
@@ -305,7 +306,7 @@
 				controller: function($scope) {
 					var vm = this;
 
-					$scope.$watch('pagination.pagination', function(pagination) {
+					$scope.$watch('vm.pagination', function(pagination) {
 						if(!pagination) return;
 						vm.computePages(pagination);
 					})
@@ -336,7 +337,7 @@
 						$scope.$emit('change-page' + suffix, page, limit);
 					}
 				},
-				controllerAs: 'pagination',
+				controllerAs: 'vm',
 				templateUrl: 'directives/ui/pagination.html'
 			};
 		})

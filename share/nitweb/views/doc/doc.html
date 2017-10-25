@@ -7,32 +7,30 @@
 	}'>
 		<div class='card'>
 			<div class='card-body'>
-				<div ng-if='vm.doc'>
+				<div ng-if='vm.doc.documentation'>
 					<div ng-bind-html='vm.doc.documentation'></div>
 				</div>
-				<div ng-if='!vm.doc'>
+				<div ng-if='!vm.doc.documentation'>
 					<i class='text-muted'>No documentation for this entity.</i>
 				</div>
 			</div>
 		</div>
 
-		<entity-list list-title='Introduced classes' list-entities='vm.mentity.intro_mclasses'
-			list-object-filter='{}' />
+		<entity-list list-title='Introduced classes' list-entities='vm.intros.results'
+			list-object-filter='{}' ng-if='vm.mentity.class_name == "MModule"' />
 
-		<entity-list list-title='Class redefinitions' list-entities='vm.mentity.redef_mclassdefs'
-			list-object-filter='{}' />
+		<entity-list list-title='Class redefinitions' list-entities='vm.redefs.results'
+			list-object-filter='{}' ng-if='vm.mentity.class_name == "MModule"' />
 
 		<entity-list list-title='Constructors'
 			list-entities='vm.mentity.all_mproperties'
 			list-object-filter='{is_init: true}' />
 
-		<entity-list list-title='Introduced properties'
-			list-entities='vm.mentity.intro_mproperties'
-			list-object-filter='{is_init: "!true"}' />
+		<entity-list list-title='Introduced properties' list-entities='vm.intros.results'
+			list-object-filter='{is_init: "!true"}' ng-if='vm.mentity.class_name == "MClass"' />
 
-		<entity-list list-title='Redefined properties'
-			list-entities='vm.mentity.redef_mproperties'
-			list-object-filter='{is_init: "!true"}' />
+		<entity-list list-title='Redefined properties' list-entities='vm.redefs.results'
+			list-object-filter='{is_init: "!true"}' ng-if='vm.mentity.class_name == "MClass"' />
 
 	</div>
 
@@ -40,47 +38,47 @@
 		"hidden": vm.mentity.class_name != "MPackage"
 	}'>
 		<br>
-		<p ng-repeat='maintainer in vm.mentity.metadata.maintainers' class='lead'>
+		<p ng-repeat='maintainer in vm.meta.maintainers' class='lead'>
 			<img class='avatar' src='https://secure.gravatar.com/avatar/{{maintainer.gravatar}}?size=20&default=retro' />
 			<span>
 				<a ui-sref='person({id: maintainer.name})'>{{maintainer.name}}</a>
 			</span>
 			<br>
 		</p>
-		<span ng-if='vm.mentity.metadata.license'>
+		<span ng-if='vm.meta.license'>
 			<span class='text-muted'>
-				<a href='http://opensource.org/licenses/{{vm.mentity.metadata.license}}'>{{vm.mentity.metadata.license}}</a>
+				<a href='http://opensource.org/licenses/{{vm.meta.license}}'>{{vm.meta.license}}</a>
 				license
 			</span>
 			<br>
 		</span>
 
-		<div ng-if='vm.mentity.metadata.homepage || vm.mentity.metadata.issues'>
+		<div ng-if='vm.meta.homepage || vm.meta.issues'>
 			<h3>Links</h3>
 			<ul class='list-unstyled'>
-				<li ng-if='vm.mentity.metadata.homepage'>
-					<a href='{{vm.mentity.metadata.homepage}}'>Homepage</a>
+				<li ng-if='vm.meta.homepage'>
+					<a href='{{vm.meta.homepage}}'>Homepage</a>
 				</li>
-				<li ng-if='vm.mentity.metadata.browse'>
-					<a href='{{vm.mentity.metadata.browse}}'>Source Code</a>
+				<li ng-if='vm.meta.browse'>
+					<a href='{{vm.meta.browse}}'>Source Code</a>
 				</li>
-				<li ng-if='vm.mentity.metadata.issues'>
-					<a href='{{vm.mentity.metadata.issues}}'>Issues</a>
+				<li ng-if='vm.meta.issues'>
+					<a href='{{vm.meta.issues}}'>Issues</a>
 				</li>
 			</ul>
 		</div>
 
-		<div ng-if='vm.mentity.metadata.git || vm.mentity.stats.commits'>
+		<div ng-if='vm.meta.git || vm.mentity.stats.commits'>
 			<h3>Git</h3>
 			<ul class='list-unstyled' style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>
-				<li ng-if='vm.mentity.metadata.git'>
-					<a href='{{vm.mentity.metadata.git}}'>{{vm.mentity.metadata.git}}</a>
+				<li ng-if='vm.meta.git'>
+					<a href='{{vm.meta.git}}'>{{vm.meta.git}}</a>
 				</li>
 				<li ng-if='vm.mentity.stats.commits' class='text-muted'>
 					<br><b>{{vm.mentity.stats.commits}} commits</b>
 				</li>
-				<li ng-if='vm.mentity.metadata.last_date'><b class='text-muted'>Last:</b> {{vm.date(vm.mentity.metadata.last_date) | date: 'medium'}}</li>
-				<li ng-if='vm.mentity.metadata.first_date'><b class='text-muted'>First: </b>{{vm.date(vm.mentity.metadata.first_date) | date: 'medium'}}</li>
+				<li ng-if='vm.meta.last_date'><b class='text-muted'>Last:</b> {{vm.date(vm.meta.last_date) | date: 'medium'}}</li>
+				<li ng-if='vm.meta.first_date'><b class='text-muted'>First: </b>{{vm.date(vm.meta.first_date) | date: 'medium'}}</li>
 			</ul>
 		</div>
 
@@ -100,31 +98,31 @@
 			</ul>
 		</div>
 
-		<div ng-if='vm.mentity.metadata.tags.length > 0'>
+		<div ng-if='vm.meta.tags.length > 0'>
 			<h3>Tags</h3>
-			<span ng-repeat='tag in vm.mentity.metadata.tags'>
+			<span ng-repeat='tag in vm.meta.tags'>
 				<a ui-sref='tag({id: tag})'>{{tag}}</a><span ng-if='!$last'>,</span>
 			</span>
 		</div>
 
-		<div ng-if='vm.mentity.dependencies.length > 0'>
+		<div ng-if='vm.parents.results.length > 0'>
 			<h3>Requirements</h3>
-			<span ng-repeat='parent in vm.mentity.dependencies'>
-				<a ui-sref='mentity({id: parent.name})' title='{{parent.synopsis}}'>{{parent.name}}</a><span ng-if='!$last'>,</span>
+			<span ng-repeat='parent in vm.parents.results'>
+				<entity-link mentity='parent' /><span ng-if='!$last'>,</span>
 			</span>
 		</div>
 
-		<div ng-if='vm.mentity.clients.length > 0'>
+		<div ng-if='vm.children.results.length > 0'>
 			<h3>Clients</h3>
-			<span ng-repeat='client in vm.mentity.clients'>
-				<a ui-sref='mentity({id: client.name})' title='{{client.synopsis}}'>{{client.name}}</a><span ng-if='!$last'>,</span>
+			<span ng-repeat='client in vm.children.results'>
+				<entity-link mentity='client' /><span ng-if='!$last'>,</span>
 			</span>
 		</div>
 
-		<div ng-if='vm.mentity.metadata.contributors.length > 1'>
+		<div ng-if='vm.meta.contributors.length > 1'>
 			<h3>Contributors</h3>
 			<ul class='list-unstyled'>
-				<li ng-repeat='contributor in vm.mentity.metadata.contributors'>
+				<li ng-repeat='contributor in vm.meta.contributors'>
 					<img class='avatar' src='https://secure.gravatar.com/avatar/{{contributor.gravatar}}?size=20&default=retro' />
 					<a ui-sref='person({id: contributor.name})'>
 					{{contributor.name}}</a>
