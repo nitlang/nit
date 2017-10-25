@@ -1,3737 +1,2166 @@
 {
 	"name": "OTHER",
+	"synopsis": "Used for comparisons.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "$", {
+		"name": "OTHER",
+		"synopsis": "Used for comparisons."
+	}],
 	"class_name": "MVirtualTypeDef",
 	"full_name": "test_prog$Object$OTHER",
-	"mdoc": {
-		"content": "Used for comparisons.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 23,
-			"line_start": 22,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used for comparisons.</span>",
 	"modifiers": ["type"],
-	"location": {
-		"column_end": 28,
-		"column_start": 2,
-		"line_end": 23,
-		"line_start": 22,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::OTHER"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$OTHER"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"bound": {
-		"full_name": "nullable test_prog::Object"
-	},
-	"is_fixed": false
+		"name": "nullable Object",
+		"synopsis": "Root of everything.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Root of everything.</span>"
+	}
 }
 {
 	"name": "==",
+	"synopsis": "Is `other` equqls to `self`?",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "$", {
+		"name": "==",
+		"synopsis": "Is `other` equqls to `self`?"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Object$==",
-	"mdoc": {
-		"content": "Is `other` equqls to `self`?",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 26,
-			"line_start": 25,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Is <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">other</span></span></span></code> equqls to <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">self</span></span></span></code>?</span>",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 37,
-		"column_start": 2,
-		"line_end": 26,
-		"line_start": 25,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::=="
-	},
-	"intro": {
-		"full_name": "test_prog$Object$=="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "other",
 			"mtype": {
-				"full_name": "test_prog::Object::OTHER"
+				"name": "OTHER",
+				"synopsis": "Used for comparisons.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Used for comparisons.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Bool"
-		},
-		"vararg_rank": -1
+			"name": "Bool",
+			"synopsis": "Booleans, `true` or `false`.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		}
 	}
 }
 {
 	"name": "!=",
+	"synopsis": "Is `other` different from `self`?",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "$", {
+		"name": "!=",
+		"synopsis": "Is `other` different from `self`?"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Object$!=",
-	"mdoc": {
-		"content": "Is `other` different from `self`?",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 28,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Is <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">other</span></span></span></code> different from <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">self</span></span></span></code>?</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 55,
-		"column_start": 2,
-		"line_end": 29,
-		"line_start": 28,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::!="
-	},
-	"intro": {
-		"full_name": "test_prog$Object$!="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "other",
 			"mtype": {
-				"full_name": "test_prog::Object::OTHER"
+				"name": "OTHER",
+				"synopsis": "Used for comparisons.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Used for comparisons.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Bool"
-		},
-		"vararg_rank": -1
+			"name": "Bool",
+			"synopsis": "Booleans, `true` or `false`.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		}
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "$", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Object$init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["init"],
-	"location": {
-		"column_end": 3,
-		"column_start": 1,
-		"line_end": 30,
-		"line_start": 20,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 12,
-		"column_start": 2,
-		"line_end": 35,
-		"line_start": 35,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Warrior",
+		"synopsis": "Warriors are good for fighting."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Warrior$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 46,
-		"line_start": 42,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Warrior"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Magician",
+		"synopsis": "Magicians know magic and how to use it."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Magician$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 57,
-		"line_start": 53,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Magician"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Alcoholic",
+		"synopsis": "Alcoholics are good to nothing escept taking punches."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Alcoholic$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 68,
-		"line_start": 64,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Alcoholic"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 12,
-		"column_start": 2,
-		"line_end": 44,
-		"line_start": 44,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Human",
+		"synopsis": "Humans are able to do everithing."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Human$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 55,
-		"line_start": 51,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Human"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Dwarf",
+		"synopsis": "Dwarves make strong warriors."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Dwarf$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 66,
-		"line_start": 62,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Dwarf"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Elf",
+		"synopsis": "Elves make good magicians."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Elf$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 77,
-		"line_start": 73,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Elf"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "init",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "init"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$Object::init",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["redef", "init"],
-	"location": {
-		"column_end": 3,
-		"column_start": 1,
-		"line_end": 68,
-		"line_start": 21,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Object::init"
-	},
-	"intro": {
-		"full_name": "test_prog$Object$init"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Object"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "unary -",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": "unary -"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$unary -",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 21,
-		"column_start": 2,
-		"line_end": 34,
-		"line_start": 34,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::unary -"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$unary -"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "+",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": "+"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$+",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 35,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::+"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$+"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "i",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "-",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": "-"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$-",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 36,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::-"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$-"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "i",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "*",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": "*"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$*",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 37,
-		"line_start": 37,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::*"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$*"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "i",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "/",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": "/"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$/",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 38,
-		"line_start": 38,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::/"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$/"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "i",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": ">",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": ">"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$>",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 30,
-		"column_start": 2,
-		"line_end": 39,
-		"line_start": 39,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::>"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$>"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "i",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Bool"
-		},
-		"vararg_rank": -1
+			"name": "Bool",
+			"synopsis": "Booleans, `true` or `false`.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		}
 	}
 }
 {
 	"name": "to_f",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "$", {
+		"name": "to_f"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Int$to_f",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 26,
-		"column_start": 2,
-		"line_end": 40,
-		"line_start": 40,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Int::to_f"
-	},
-	"intro": {
-		"full_name": "test_prog$Int$to_f"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Int"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": "+",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Float",
+		"synopsis": "Some services about Floats."
+	}, "$", {
+		"name": "+"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Float$+",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 33,
-		"column_start": 2,
-		"line_end": 45,
-		"line_start": 45,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Float::+"
-	},
-	"intro": {
-		"full_name": "test_prog$Float$+"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "f",
 			"mtype": {
-				"full_name": "test_prog::Float"
+				"name": "Float",
+				"synopsis": "Some services about Floats.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": "-",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Float",
+		"synopsis": "Some services about Floats."
+	}, "$", {
+		"name": "-"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Float$-",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 33,
-		"column_start": 2,
-		"line_end": 46,
-		"line_start": 46,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Float::-"
-	},
-	"intro": {
-		"full_name": "test_prog$Float$-"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "f",
 			"mtype": {
-				"full_name": "test_prog::Float"
+				"name": "Float",
+				"synopsis": "Some services about Floats.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": "*",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Float",
+		"synopsis": "Some services about Floats."
+	}, "$", {
+		"name": "*"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Float$*",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 33,
-		"column_start": 2,
-		"line_end": 47,
-		"line_start": 47,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Float::*"
-	},
-	"intro": {
-		"full_name": "test_prog$Float$*"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "f",
 			"mtype": {
-				"full_name": "test_prog::Float"
+				"name": "Float",
+				"synopsis": "Some services about Floats.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": "/",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Float",
+		"synopsis": "Some services about Floats."
+	}, "$", {
+		"name": "/"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Float$/",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 33,
-		"column_start": 2,
-		"line_end": 48,
-		"line_start": 48,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Float::/"
-	},
-	"intro": {
-		"full_name": "test_prog$Float$/"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "f",
 			"mtype": {
-				"full_name": "test_prog::Float"
+				"name": "Float",
+				"synopsis": "Some services about Floats.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": ">",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Float",
+		"synopsis": "Some services about Floats."
+	}, "$", {
+		"name": ">"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Float$>",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
-	"location": {
-		"column_end": 32,
-		"column_start": 2,
-		"line_end": 49,
-		"line_start": 49,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Float::>"
-	},
-	"intro": {
-		"full_name": "test_prog$Float$>"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Float"
-	},
-	"mmodule": {
-		"full_name": "test_prog::platform"
-	},
-	"mgroup": {
-		"full_name": "test_prog>platform>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "f",
 			"mtype": {
-				"full_name": "test_prog::Float"
+				"name": "Float",
+				"synopsis": "Some services about Floats.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Bool"
-		},
-		"vararg_rank": -1
+			"name": "Bool",
+			"synopsis": "Booleans, `true` or `false`.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		}
 	}
 }
 {
 	"name": "_strength_bonus",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "_strength_bonus"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Career$_strength_bonus",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 24,
-		"column_start": 2,
-		"line_end": 31,
-		"line_start": 31,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::careers::Career::_strength_bonus"
-	},
-	"intro": {
-		"full_name": "test_prog$Career$_strength_bonus"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "strength_bonus",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "strength_bonus"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$strength_bonus",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 24,
-		"column_start": 2,
-		"line_end": 31,
-		"line_start": 31,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Career::strength_bonus"
-	},
-	"intro": {
-		"full_name": "test_prog$Career$strength_bonus"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "strength_bonus=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "strength_bonus="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$strength_bonus=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 24,
-		"column_start": 2,
-		"line_end": 31,
-		"line_start": 31,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Career::strength_bonus="
-	},
-	"intro": {
-		"full_name": "test_prog$Career$strength_bonus="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "strength_bonus",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_endurance_bonus",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "_endurance_bonus"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Career$_endurance_bonus",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 25,
-		"column_start": 2,
-		"line_end": 32,
-		"line_start": 32,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::careers::Career::_endurance_bonus"
-	},
-	"intro": {
-		"full_name": "test_prog$Career$_endurance_bonus"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "endurance_bonus",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "endurance_bonus"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$endurance_bonus",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 25,
-		"column_start": 2,
-		"line_end": 32,
-		"line_start": 32,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Career::endurance_bonus"
-	},
-	"intro": {
-		"full_name": "test_prog$Career$endurance_bonus"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "endurance_bonus=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "endurance_bonus="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$endurance_bonus=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 25,
-		"column_start": 2,
-		"line_end": 32,
-		"line_start": 32,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Career::endurance_bonus="
-	},
-	"intro": {
-		"full_name": "test_prog$Career$endurance_bonus="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "endurance_bonus",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_intelligence_bonus",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "_intelligence_bonus"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Career$_intelligence_bonus",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 28,
-		"column_start": 2,
-		"line_end": 33,
-		"line_start": 33,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::careers::Career::_intelligence_bonus"
-	},
-	"intro": {
-		"full_name": "test_prog$Career$_intelligence_bonus"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "intelligence_bonus",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "intelligence_bonus"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$intelligence_bonus",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 28,
-		"column_start": 2,
-		"line_end": 33,
-		"line_start": 33,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Career::intelligence_bonus"
-	},
-	"intro": {
-		"full_name": "test_prog$Career$intelligence_bonus"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "intelligence_bonus=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "$", {
+		"name": "intelligence_bonus="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Career$intelligence_bonus=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 28,
-		"column_start": 2,
-		"line_end": 33,
-		"line_start": 33,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Career::intelligence_bonus="
-	},
-	"intro": {
-		"full_name": "test_prog$Career$intelligence_bonus="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Career"
-	},
-	"mmodule": {
-		"full_name": "test_prog::careers"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "intelligence_bonus",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_base_strength",
+	"synopsis": "Used to represents how strong the race is.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "_base_strength",
+		"synopsis": "Used to represents how strong the race is."
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Race$_base_strength",
-	"mdoc": {
-		"content": "Used to represents how strong the race is.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 36,
-			"line_start": 35,
-			"file": "test_location"
-		}
-	},
 	"visibility": "private",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how strong the race is.</span>",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 23,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::races::Race::_base_strength"
-	},
-	"intro": {
-		"full_name": "test_prog$Race$_base_strength"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "base_strength",
+	"synopsis": "Used to represents how strong the race is.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "base_strength",
+		"synopsis": "Used to represents how strong the race is."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$base_strength",
-	"mdoc": {
-		"content": "Used to represents how strong the race is.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 36,
-			"line_start": 35,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how strong the race is.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 23,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Race::base_strength"
-	},
-	"intro": {
-		"full_name": "test_prog$Race$base_strength"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "base_strength=",
+	"synopsis": "Used to represents how strong the race is.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "base_strength=",
+		"synopsis": "Used to represents how strong the race is."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$base_strength=",
-	"mdoc": {
-		"content": "Used to represents how strong the race is.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 36,
-			"line_start": 35,
-			"file": "test_location"
-		}
-	},
 	"visibility": "protected",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how strong the race is.</span>",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 23,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Race::base_strength="
-	},
-	"intro": {
-		"full_name": "test_prog$Race$base_strength="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "base_strength",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_base_endurance",
+	"synopsis": "Used to represents how the race can absorb damage.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "_base_endurance",
+		"synopsis": "Used to represents how the race can absorb damage."
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Race$_base_endurance",
-	"mdoc": {
-		"content": "Used to represents how the race can absorb damage.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 39,
-			"line_start": 38,
-			"file": "test_location"
-		}
-	},
 	"visibility": "private",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how the race can absorb damage.</span>",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 24,
-		"column_start": 2,
-		"line_end": 39,
-		"line_start": 38,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::races::Race::_base_endurance"
-	},
-	"intro": {
-		"full_name": "test_prog$Race$_base_endurance"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "base_endurance",
+	"synopsis": "Used to represents how the race can absorb damage.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "base_endurance",
+		"synopsis": "Used to represents how the race can absorb damage."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$base_endurance",
-	"mdoc": {
-		"content": "Used to represents how the race can absorb damage.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 39,
-			"line_start": 38,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how the race can absorb damage.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 24,
-		"column_start": 2,
-		"line_end": 39,
-		"line_start": 38,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Race::base_endurance"
-	},
-	"intro": {
-		"full_name": "test_prog$Race$base_endurance"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "base_endurance=",
+	"synopsis": "Used to represents how the race can absorb damage.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "base_endurance=",
+		"synopsis": "Used to represents how the race can absorb damage."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$base_endurance=",
-	"mdoc": {
-		"content": "Used to represents how the race can absorb damage.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 39,
-			"line_start": 38,
-			"file": "test_location"
-		}
-	},
 	"visibility": "protected",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how the race can absorb damage.</span>",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 24,
-		"column_start": 2,
-		"line_end": 39,
-		"line_start": 38,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Race::base_endurance="
-	},
-	"intro": {
-		"full_name": "test_prog$Race$base_endurance="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "base_endurance",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_base_intelligence",
+	"synopsis": "Is this race smart?",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "_base_intelligence",
+		"synopsis": "Is this race smart?"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Race$_base_intelligence",
-	"mdoc": {
-		"content": "Is this race smart?",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 42,
-			"line_start": 41,
-			"file": "test_location"
-		}
-	},
 	"visibility": "private",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Is this race smart?</span>",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 42,
-		"line_start": 41,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::races::Race::_base_intelligence"
-	},
-	"intro": {
-		"full_name": "test_prog$Race$_base_intelligence"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "base_intelligence",
+	"synopsis": "Is this race smart?",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "base_intelligence",
+		"synopsis": "Is this race smart?"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$base_intelligence",
-	"mdoc": {
-		"content": "Is this race smart?",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 42,
-			"line_start": 41,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Is this race smart?</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 42,
-		"line_start": 41,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Race::base_intelligence"
-	},
-	"intro": {
-		"full_name": "test_prog$Race$base_intelligence"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "base_intelligence=",
+	"synopsis": "Is this race smart?",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "$", {
+		"name": "base_intelligence=",
+		"synopsis": "Is this race smart?"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Race$base_intelligence=",
-	"mdoc": {
-		"content": "Is this race smart?",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 42,
-			"line_start": 41,
-			"file": "test_location"
-		}
-	},
 	"visibility": "protected",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Is this race smart?</span>",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 42,
-		"line_start": 41,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Race::base_intelligence="
-	},
-	"intro": {
-		"full_name": "test_prog$Race$base_intelligence="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Race"
-	},
-	"mmodule": {
-		"full_name": "test_prog::races"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "base_intelligence",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_race",
+	"synopsis": "The `Race` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "_race",
+		"synopsis": "The `Race` of the character."
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Character$_race",
-	"mdoc": {
-		"content": "The `Race` of the character.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 25,
-			"line_start": 24,
-			"file": "test_location"
-		}
-	},
 	"visibility": "private",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 15,
-		"column_start": 2,
-		"line_end": 25,
-		"line_start": 24,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::character::Character::_race"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$_race"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Race"
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
 	}
 }
 {
 	"name": "race",
+	"synopsis": "The `Race` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "race",
+		"synopsis": "The `Race` of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$race",
-	"mdoc": {
-		"content": "The `Race` of the character.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 25,
-			"line_start": 24,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 15,
-		"column_start": 2,
-		"line_end": 25,
-		"line_start": 24,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::race"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$race"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Race"
-		},
-		"vararg_rank": -1
+			"name": "Race",
+			"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
+		}
 	}
 }
 {
 	"name": "race=",
+	"synopsis": "The `Race` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "race=",
+		"synopsis": "The `Race` of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$race=",
-	"mdoc": {
-		"content": "The `Race` of the character.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 25,
-			"line_start": 24,
-			"file": "test_location"
-		}
-	},
 	"visibility": "protected",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 15,
-		"column_start": 2,
-		"line_end": 25,
-		"line_start": 24,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::race="
-	},
-	"intro": {
-		"full_name": "test_prog$Character$race="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "race",
 			"mtype": {
-				"full_name": "test_prog::Race"
+				"name": "Race",
+				"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_career",
+	"synopsis": "The current `Career` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "_career",
+		"synopsis": "The current `Career` of the character."
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Character$_career",
-	"mdoc": {
-		"content": "The current `Career` of the character.\nReturns `null` if character is unemployed.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 27,
-			"file": "test_location"
-		}
-	},
 	"visibility": "private",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 47,
-		"column_start": 2,
-		"line_end": 29,
-		"line_start": 27,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::character::Character::_career"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$_career"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "nullable test_prog::Career"
+		"name": "nullable Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
 	}
 }
 {
 	"name": "career",
+	"synopsis": "The current `Career` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "career",
+		"synopsis": "The current `Career` of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$career",
-	"mdoc": {
-		"content": "The current `Career` of the character.\nReturns `null` if character is unemployed.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 27,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 47,
-		"column_start": 2,
-		"line_end": 29,
-		"line_start": 27,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::career"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$career"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "nullable test_prog::Career"
-		},
-		"vararg_rank": -1
+			"name": "nullable Career",
+			"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
+		}
 	}
 }
 {
 	"name": "career=",
+	"synopsis": "The current `Career` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "career=",
+		"synopsis": "The current `Career` of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$career=",
-	"mdoc": {
-		"content": "The current `Career` of the character.\nReturns `null` if character is unemployed.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 27,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 47,
-		"column_start": 2,
-		"line_end": 29,
-		"line_start": 27,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::career="
-	},
-	"intro": {
-		"full_name": "test_prog$Character$career="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "career",
 			"mtype": {
-				"full_name": "nullable test_prog::Career"
+				"name": "nullable Career",
+				"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "quit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "quit"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$quit",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 33,
-		"line_start": 31,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::quit"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$quit"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "_name",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "_name"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Character$_name",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 17,
-		"column_start": 2,
-		"line_end": 35,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::character::Character::_name"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$_name"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::String"
+		"name": "String",
+		"synopsis": "Strings (there is no chars...).",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>"
 	}
 }
 {
 	"name": "name",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "name"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$name",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 17,
-		"column_start": 2,
-		"line_end": 35,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::name"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$name"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::String"
-		},
-		"vararg_rank": -1
+			"name": "String",
+			"synopsis": "Strings (there is no chars...).",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>"
+		}
 	}
 }
 {
 	"name": "name=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "name="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$name=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 17,
-		"column_start": 2,
-		"line_end": 35,
-		"line_start": 35,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::name="
-	},
-	"intro": {
-		"full_name": "test_prog$Character$name="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "name",
 			"mtype": {
-				"full_name": "test_prog::String"
+				"name": "String",
+				"synopsis": "Strings (there is no chars...).",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_age",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "_age"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Character$_age",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 13,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 36,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::character::Character::_age"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$_age"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "age",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "age"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$age",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 13,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 36,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::age"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$age"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "age=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "age="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$age=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 13,
-		"column_start": 2,
-		"line_end": 36,
-		"line_start": 36,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::age="
-	},
-	"intro": {
-		"full_name": "test_prog$Character$age="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "age",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_sex",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "_sex"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Character$_sex",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 14,
-		"column_start": 2,
-		"line_end": 37,
-		"line_start": 37,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::character::Character::_sex"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$_sex"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Bool"
+		"name": "Bool",
+		"synopsis": "Booleans, `true` or `false`.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 	}
 }
 {
 	"name": "sex",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "sex"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$sex",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 14,
-		"column_start": 2,
-		"line_end": 37,
-		"line_start": 37,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::sex"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$sex"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Bool"
-		},
-		"vararg_rank": -1
+			"name": "Bool",
+			"synopsis": "Booleans, `true` or `false`.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		}
 	}
 }
 {
 	"name": "sex=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "sex="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$sex=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 14,
-		"column_start": 2,
-		"line_end": 37,
-		"line_start": 37,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::sex="
-	},
-	"intro": {
-		"full_name": "test_prog$Character$sex="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "sex",
 			"mtype": {
-				"full_name": "test_prog::Bool"
+				"name": "Bool",
+				"synopsis": "Booleans, `true` or `false`.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "total_strengh",
+	"synopsis": "The actual strength of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "total_strengh",
+		"synopsis": "The actual strength of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$total_strengh",
-	"mdoc": {
-		"content": "The actual strength of the character.\n\nReturns `race.base_strength + career.strength_bonus` or just `race.base_strength` is unemployed.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 42,
-			"line_start": 39,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The actual strength of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 45,
-		"line_start": 39,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::total_strengh"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$total_strengh"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "total_endurance",
+	"synopsis": "The actual endurance of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "total_endurance",
+		"synopsis": "The actual endurance of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$total_endurance",
-	"mdoc": {
-		"content": "The actual endurance of the character.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 48,
-			"line_start": 47,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The actual endurance of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 51,
-		"line_start": 47,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::total_endurance"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$total_endurance"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "total_intelligence",
+	"synopsis": "The acutal intelligence of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "total_intelligence",
+		"synopsis": "The acutal intelligence of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$total_intelligence",
-	"mdoc": {
-		"content": "The acutal intelligence of the character.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 54,
-			"line_start": 53,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The acutal intelligence of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 4,
-		"column_start": 2,
-		"line_end": 57,
-		"line_start": 53,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::total_intelligence"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$total_intelligence"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "max_health",
+	"synopsis": "Maximum health of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "max_health",
+		"synopsis": "Maximum health of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$max_health",
-	"mdoc": {
-		"content": "Maximum health of the character.\n\nBased on `total endurance * 10`.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 62,
-			"line_start": 59,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Maximum health of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 51,
-		"column_start": 2,
-		"line_end": 62,
-		"line_start": 59,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::max_health"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$max_health"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "_health",
+	"synopsis": "The current `health` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "_health",
+		"synopsis": "The current `health` of the character."
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$Character$_health",
-	"mdoc": {
-		"content": "The current `health` of the character.\n\nStarts at `max_health`.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 67,
-			"line_start": 64,
-			"file": "test_location"
-		}
-	},
 	"visibility": "private",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 67,
-		"line_start": 64,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::character::Character::_health"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$_health"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::Int"
+		"name": "Int",
+		"synopsis": "Some services about Integers.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
 	"name": "health",
+	"synopsis": "The current `health` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "health",
+		"synopsis": "The current `health` of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$health",
-	"mdoc": {
-		"content": "The current `health` of the character.\n\nStarts at `max_health`.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 67,
-			"line_start": 64,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 67,
-		"line_start": 64,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::health"
-	},
-	"intro": {
-		"full_name": "test_prog$Character$health"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "health=",
+	"synopsis": "The current `health` of the character.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "health=",
+		"synopsis": "The current `health` of the character."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Character$health=",
-	"mdoc": {
-		"content": "The current `health` of the character.\n\nStarts at `max_health`.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 67,
-			"line_start": 64,
-			"file": "test_location"
-		}
-	},
 	"visibility": "protected",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 29,
-		"column_start": 2,
-		"line_end": 67,
-		"line_start": 64,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Character::health="
-	},
-	"intro": {
-		"full_name": "test_prog$Character$health="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Character"
-	},
-	"mmodule": {
-		"full_name": "test_prog::character"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "health",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "dps",
+	"synopsis": "Damage per second inflicted by this weapon.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Weapon",
+		"synopsis": "Something that can be used to attack someone and inflict damage."
+	}, "$", {
+		"name": "dps",
+		"synopsis": "Damage per second inflicted by this weapon."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Weapon$dps",
-	"mdoc": {
-		"content": "Damage per second inflicted by this weapon.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 23,
-			"line_start": 22,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Damage per second inflicted by this weapon.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 23,
-		"line_start": 22,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Weapon"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Weapon::dps"
-	},
-	"intro": {
-		"full_name": "test_prog$Weapon$dps"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Weapon"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": "dps",
+	"synopsis": "Dwarf `dps` are based on the dwarf `base_endurance` (represents weight here)",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "combat",
+		"synopsis": "COmbat interactions between characters."
+	}, "$", {
+		"name": "Dwarf",
+		"synopsis": "Dwarves make strong warriors."
+	}, "$", {
+		"name": "Weapon",
+		"synopsis": "Something that can be used to attack someone and inflict damage."
+	}, "::", {
+		"name": "dps",
+		"synopsis": "Dwarf `dps` are based on the dwarf `base_endurance` (represents weight here)"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog::combat$Dwarf$Weapon::dps",
-	"mdoc": {
-		"content": "Dwarf `dps` are based on the dwarf `base_endurance` (represents weight here)",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 66,
-			"line_start": 65,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Dwarf <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">dps</span></span></span></code> are based on the dwarf <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">base_endurance</span></span></span></code> (represents weight here)</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 51,
-		"column_start": 2,
-		"line_end": 66,
-		"line_start": 65,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog::combat$Dwarf"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Weapon::dps"
-	},
-	"intro": {
-		"full_name": "test_prog$Weapon$dps"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Weapon"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Float"
-		},
-		"vararg_rank": -1
+			"name": "Float",
+			"synopsis": "Some services about Floats.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+		}
 	}
 }
 {
 	"name": "hit_points",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "$", {
+		"name": "hit_points"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Combatable$hit_points",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 32,
-		"column_start": 2,
-		"line_end": 32,
-		"line_start": 32,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Combatable::hit_points"
-	},
-	"intro": {
-		"full_name": "test_prog$Combatable$hit_points"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "hit_points",
+	"synopsis": "Use character `health` to determines hit_points.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "combat",
+		"synopsis": "COmbat interactions between characters."
+	}, "$", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "$", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "::", {
+		"name": "hit_points",
+		"synopsis": "Use character `health` to determines hit_points."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog::combat$Character$Combatable::hit_points",
-	"mdoc": {
-		"content": "Use character `health` to determines hit_points.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 58,
-			"line_start": 57,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Use character <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> to determines hit_points.</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 38,
-		"column_start": 2,
-		"line_end": 58,
-		"line_start": 57,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog::combat$Character"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Combatable::hit_points"
-	},
-	"intro": {
-		"full_name": "test_prog$Combatable$hit_points"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "attack",
+	"synopsis": "A `Combatable` can attack a `target` that is also a `Combatable`.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "$", {
+		"name": "attack",
+		"synopsis": "A `Combatable` can attack a `target` that is also a `Combatable`."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Combatable$attack",
-	"mdoc": {
-		"content": "A `Combatable` can attack a `target` that is also a `Combatable`.\n\nAttack the `target` using `wepaon` and returns the number of inflicted hit points.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 37,
-			"line_start": 34,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code> can attack a <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">target</span></span></span></code> that is also a <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code>.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 64,
-		"column_start": 2,
-		"line_end": 37,
-		"line_start": 34,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Combatable::attack"
-	},
-	"intro": {
-		"full_name": "test_prog$Combatable$attack"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 2,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "target",
 			"mtype": {
-				"full_name": "test_prog::Combatable"
+				"name": "Combatable",
+				"synopsis": "Something that can be combatted, it can `attack` and `defend`.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>"
 			}
 		}, {
 			"is_vararg": false,
 			"name": "weapon",
 			"mtype": {
-				"full_name": "test_prog::Weapon"
+				"name": "Weapon",
+				"synopsis": "Something that can be used to attack someone and inflict damage.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be used to attack someone and inflict damage.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "direct_attack",
+	"synopsis": "Like `attack` but cannot be defended.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "$", {
+		"name": "direct_attack",
+		"synopsis": "Like `attack` but cannot be defended."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Combatable$direct_attack",
-	"mdoc": {
-		"content": "Like `attack` but cannot be defended.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 40,
-			"line_start": 39,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Like <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> but cannot be defended.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 71,
-		"column_start": 2,
-		"line_end": 40,
-		"line_start": 39,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Combatable::direct_attack"
-	},
-	"intro": {
-		"full_name": "test_prog$Combatable$direct_attack"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 2,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "target",
 			"mtype": {
-				"full_name": "test_prog::Combatable"
+				"name": "Combatable",
+				"synopsis": "Something that can be combatted, it can `attack` and `defend`.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>"
 			}
 		}, {
 			"is_vararg": false,
 			"name": "weapon",
 			"mtype": {
-				"full_name": "test_prog::Weapon"
+				"name": "Weapon",
+				"synopsis": "Something that can be used to attack someone and inflict damage.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be used to attack someone and inflict damage.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "defend",
+	"synopsis": "`Combatable` can defend against attacks.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "$", {
+		"name": "defend",
+		"synopsis": "`Combatable` can defend against attacks."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Combatable$defend",
-	"mdoc": {
-		"content": "`Combatable` can defend against attacks.\n\nDefends against a number of received hit points and return the number of pared hit points.\n\n@param hit: damage received.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 47,
-			"line_start": 42,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\"><code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code> can defend against attacks.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 38,
-		"column_start": 2,
-		"line_end": 47,
-		"line_start": 42,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Combatable::defend"
-	},
-	"intro": {
-		"full_name": "test_prog$Combatable$defend"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "hit",
 			"mtype": {
-				"full_name": "test_prog::Int"
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
-			"full_name": "test_prog::Int"
-		},
-		"vararg_rank": -1
+			"name": "Int",
+			"synopsis": "Some services about Integers.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		}
 	}
 }
 {
 	"name": "is_dead",
+	"synopsis": "Is the character still have hit_points?",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "$", {
+		"name": "is_dead",
+		"synopsis": "Is the character still have hit_points?"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Combatable$is_dead",
-	"mdoc": {
-		"content": "Is the character still have hit_points?",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 50,
-			"line_start": 49,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Is the character still have hit_points?</span>",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 43,
-		"column_start": 2,
-		"line_end": 50,
-		"line_start": 49,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Combatable::is_dead"
-	},
-	"intro": {
-		"full_name": "test_prog$Combatable$is_dead"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Combatable"
-	},
-	"mmodule": {
-		"full_name": "test_prog::combat"
-	},
-	"mgroup": {
-		"full_name": "test_prog>rpg>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::Bool"
-		},
-		"vararg_rank": -1
+			"name": "Bool",
+			"synopsis": "Booleans, `true` or `false`.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		}
 	}
 }
 {
 	"name": "player_characters",
+	"synopsis": "Characters played by human players.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "$", {
+		"name": "player_characters",
+		"synopsis": "Characters played by human players."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Game$player_characters",
-	"mdoc": {
-		"content": "Characters played by human players.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 26,
-			"line_start": 25,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters played by human players.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 51,
-		"column_start": 2,
-		"line_end": 26,
-		"line_start": 25,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::player_characters"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$player_characters"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game"
-	},
-	"mgroup": {
-		"full_name": "test_prog>game>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::List[test_prog::Character]"
-		},
-		"vararg_rank": -1
+			"name": "List[Character]",
+			"synopsis": "List of things.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		}
 	}
 }
 {
@@ -3790,56 +2219,31 @@
 }
 {
 	"name": "computer_characters",
+	"synopsis": "Characters players by computer.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "$", {
+		"name": "computer_characters",
+		"synopsis": "Characters players by computer."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Game$computer_characters",
-	"mdoc": {
-		"content": "Characters players by computer.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 28,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters players by computer.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 53,
-		"column_start": 2,
-		"line_end": 29,
-		"line_start": 28,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::computer_characters"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$computer_characters"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game"
-	},
-	"mgroup": {
-		"full_name": "test_prog>game>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::List[test_prog::Character]"
-		},
-		"vararg_rank": -1
+			"name": "List[Character]",
+			"synopsis": "List of things.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		}
 	}
 }
 {
@@ -3898,54 +2302,27 @@
 }
 {
 	"name": "start_game",
+	"synopsis": "Start the game.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "$", {
+		"name": "start_game",
+		"synopsis": "Start the game."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Game$start_game",
-	"mdoc": {
-		"content": "Start the game.\n\nYou have to implement that method!",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 34,
-			"line_start": 31,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Start the game.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 34,
-		"line_start": 31,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::start_game"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$start_game"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game"
-	},
-	"mgroup": {
-		"full_name": "test_prog>game>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
@@ -4002,54 +2379,27 @@
 }
 {
 	"name": "pause_game",
+	"synopsis": "Pause the game.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "$", {
+		"name": "pause_game",
+		"synopsis": "Pause the game."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Game$pause_game",
-	"mdoc": {
-		"content": "Pause the game.\n\nYou have to implement that method!",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 39,
-			"line_start": 36,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Pause the game.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 39,
-		"line_start": 36,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::pause_game"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$pause_game"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game"
-	},
-	"mgroup": {
-		"full_name": "test_prog>game>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
@@ -4106,54 +2456,27 @@
 }
 {
 	"name": "stop_game",
+	"synopsis": "Stop the game.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "$", {
+		"name": "stop_game",
+		"synopsis": "Stop the game."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Game$stop_game",
-	"mdoc": {
-		"content": "Stop the game.\n\nYou have to implement that method!",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 44,
-			"line_start": 41,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Stop the game.</span>",
 	"modifiers": ["abstract", "fun"],
-	"location": {
-		"column_end": 26,
-		"column_start": 2,
-		"line_end": 44,
-		"line_start": 41,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::stop_game"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$stop_game"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game"
-	},
-	"mgroup": {
-		"full_name": "test_prog>game>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
@@ -4388,87 +2711,43 @@
 }
 {
 	"name": "start",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Starter"
+	}, "$", {
+		"name": "start"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Starter$start",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 17,
-		"column_start": 2,
-		"line_end": 22,
-		"line_start": 22,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Starter"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Starter::start"
-	},
-	"intro": {
-		"full_name": "test_prog$Starter$start"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Starter"
-	},
-	"mmodule": {
-		"full_name": "test_prog::test_prog"
-	},
-	"mgroup": {
-		"full_name": "test_prog>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "main",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Sys"
+	}, "$", {
+		"name": "main"
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$Sys$main",
-	"mdoc": null,
 	"visibility": "public",
 	"modifiers": ["fun"],
-	"location": {
-		"column_end": 13,
-		"column_start": 1,
-		"line_end": 26,
-		"line_start": 25,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$Sys"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Sys::main"
-	},
-	"intro": {
-		"full_name": "test_prog$Sys$main"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Sys"
-	},
-	"mmodule": {
-		"full_name": "test_prog::test_prog"
-	},
-	"mgroup": {
-		"full_name": "test_prog>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }

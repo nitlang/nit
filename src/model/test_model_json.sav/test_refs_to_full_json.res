@@ -1,9 +1,11 @@
 {
-	"full_name": "test_prog"
+	"name": "test_prog",
+	"synopsis": "Test program for model tools."
 }
 {
-	"full_name": "test_prog::game_examples"
+	"name": "excluded"
 }
 {
-	"full_name": "test_prog::Object"
+	"name": "Object",
+	"synopsis": "Root of everything."
 }

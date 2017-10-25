@@ -43,54 +43,54 @@ class TestModelSerialization
 		mentities.add model.mmodules.first
 		mentities.add model.mclasses.first
 		for mentity in mentities do
-			print ((new MEntityRef(mentity)).to_pretty_full_json(mainmodule))
+			print ((new MEntityRef(mentity)).serialize_to_json(pretty = true, plain = true))
 		end
 	end
 
 	fun test_packages_to_full_json is test do
 		for mentity in model.mpackages do
-			print mentity.to_pretty_full_json(mainmodule)
+			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_groups_to_full_json is test do
 		for mpackage in model.mpackages do
 			for mentity in mpackage.mgroups do
-				print mentity.to_pretty_full_json(mainmodule)
+				print mentity.serialize_to_json(pretty = true, plain = true)
 			end
 		end
 	end
 
 	fun test_modules_to_full_json is test do
 		for mentity in model.mmodules do
-			print mentity.to_pretty_full_json(mainmodule)
+			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_classes_to_full_json is test do
 		for mentity in model.mclasses do
-			print mentity.to_pretty_full_json(mainmodule)
+			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_classdefs_to_full_json is test do
 		for mclass in model.mclasses do
 			for mentity in mclass.mclassdefs do
-				print mentity.to_pretty_full_json(mainmodule)
+				print mentity.serialize_to_json(pretty = true, plain = true)
 			end
 		end
 	end
 
 	fun test_props_to_full_json is test do
 		for mentity in model.mproperties do
-			print mentity.to_pretty_full_json(mainmodule)
+			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_propdefs_to_full_json is test do
 		for mprop in model.mproperties do
 			for mentity in mprop.mpropdefs do
-				print mentity.to_pretty_full_json(mainmodule)
+				print mentity.serialize_to_json(pretty = true, plain = true)
 			end
 		end
 	end

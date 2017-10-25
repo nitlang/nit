@@ -11,6 +11,9 @@
 		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Career",
+		"visibility": "public",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>",
+		"modifiers": ["abstract class"]
 	}],
 	"page": null,
 	"count": null,
