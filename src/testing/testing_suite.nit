@@ -449,18 +449,32 @@ end
 redef class MModule
 	# Methods tagged with `before_all` at the module level (in `Sys`)
 	private fun before_all: Array[MMethodDef] do
-		for mclassdef in mclassdefs do
-			if mclassdef.name == "Sys" then return mclassdef.before_all
+		var res = new Array[MMethodDef]
+		for mmodule in in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.name != "Sys" then continue
+				for mpropdef in mclassdef.mpropdefs do
+					if not mpropdef isa MMethodDef or not mpropdef.is_before_all then continue
+					res.add mpropdef
+				end
+			end
 		end
-		return new Array[MMethodDef]
+		return res
 	end
 
 	# Methods tagged with `after_all` at the module level (in `Sys`)
 	private fun after_all: Array[MMethodDef] do
-		for mclassdef in mclassdefs do
-			if mclassdef.name == "Sys" then return mclassdef.after_all
+		var res = new Array[MMethodDef]
+		for mmodule in in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.name != "Sys" then continue
+				for mpropdef in mclassdef.mpropdefs do
+					if not mpropdef isa MMethodDef or not mpropdef.is_after_all then continue
+					res.add mpropdef
+				end
+			end
 		end
-		return new Array[MMethodDef]
+		return res
 	end
 end
 
