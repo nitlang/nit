@@ -133,28 +133,87 @@ end
 
 When using custom test attributes, a empty init must be declared to allow automatic test running.
 
-`before_all` and `after_all` annotations can be set on methods that must be called before/after each test suite.
-They have to be declared at top level:
+At class level, `before_all` and `after_all` annotations can be set on methods that must be called before/after all the test cases in the class:
 
-	module test_bdd_connector
+~~~nitish
+class TestFoo
+	test
 
-	import bdd_connector
+	var subject: Foo is noinit
 
-	# Testing the bdd_connector
-	class TestConnector
-		test
-		# test cases using a server
+	# Method executed before all tests in the class
+	fun set_up is before_all do
+		subject = new Foo
 	end
 
-	# Method executed before testing the module
-	fun before_module is before_all do
-		# start server before all test cases
+	fun baz_1 is test do
+		assert subject.baz(1, 2) == 3
 	end
 
-	# Method executed after testing the module
-	fun after_module is after_all do
-		# stop server after all test cases
+	fun baz_2 is test do
+		assert subject.baz(1, -2) == -1
 	end
+end
+~~~
+
+`before_all` and `after_all` annotations can also be set on methods that must be called before/after each test suite when declared at top level:
+
+~~~nitish
+module test_bdd_connector
+
+import bdd_connector
+
+# Testing the bdd_connector
+class TestConnector
+	test
+	# test cases using a server
+end
+
+# Method executed before testing the module
+fun setup_db is before_all do
+	# start server before all test cases
+end
+
+# Method executed after testing the module
+fun teardown_db is after_all do
+	# stop server after all test cases
+end
+~~~
+
+When dealing with multiple test suites, niunit allows you to import other test suites to factorize your tests:
+
+~~~nitish
+module test_bdd_users
+
+import test_bdd_connector
+
+# Testing the user table
+class TestUsersTable
+	test
+	# test cases using the db server from `test_bdd_connector`
+end
+
+fun setup_table is before_all do
+	# create user table
+end
+
+fun teardown_table is after_all do
+	# drop user table
+end
+~~~
+
+Methods with `before*` and `after*` annotations are linearized and called in different ways.
+
+* `before*` methods are called from the least specific to the most specific
+* `after*` methods are called from the most specific to the least specific
+
+In the previous example, the execution order would be:
+
+1. `test_bdd_connector::setup_db`
+2. `test_bdd_users::setup_table`
+3. `all test cases from test_bdd_users`
+4. `test_bdd_users::teardown_table`
+5. `test_bdd_connector::teardown_db`
 
 ## Generating test suites
 
