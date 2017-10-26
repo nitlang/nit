@@ -48,6 +48,14 @@ class NitUnitTester
 			if not suite_match_pattern(mclassdef) then continue
 			toolcontext.modelbuilder.total_classes += 1
 
+			var test_class = new TestClass
+
+			# method to execute before all tests in the class
+			for mmethod in mclassdef.before_all do
+				toolcontext.modelbuilder.total_tests += 1
+				test_class.before_all.add new TestCase(suite, mmethod, toolcontext)
+			end
+
 			var before = mclassdef.before
 			var after = mclassdef.after
 
@@ -58,8 +66,16 @@ class NitUnitTester
 				var test = new TestCase(suite, mpropdef, toolcontext)
 				test.before = before
 				test.after = after
-				suite.test_cases.add test
+				test_class.test_cases.add test
 			end
+
+			# method to execute after all tests in the class
+			for mmethod in mclassdef.after_all do
+				toolcontext.modelbuilder.total_tests += 1
+				test_class.after_all.add new TestCase(suite, mmethod, toolcontext)
+			end
+
+			suite.test_classes.add test_class
 		end
 		# method to execute after all tests in the module
 		for mmethod in mmodule.after_all do
@@ -115,7 +131,7 @@ class TestSuite
 	var toolcontext: ToolContext
 
 	# List of `TestCase` to be executed in this suite.
-	var test_cases = new Array[TestCase]
+	var test_classes = new Array[TestClass]
 
 	# Tests to be executed before the whole test suite.
 	var before_all = new Array[TestCase]
@@ -125,7 +141,12 @@ class TestSuite
 
 	# Display test suite status in std-out.
 	fun show_status do
-		var test_cases = self.test_cases.to_a
+		var test_cases = new Array[TestCase]
+		for test_class in test_classes do
+			test_cases.add_all test_class.before_all
+			test_cases.add_all test_class.test_cases
+			test_cases.add_all test_class.after_all
+		end
 		test_cases.add_all before_all
 		test_cases.add_all after_all
 		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
@@ -141,11 +162,13 @@ class TestSuite
 		write_to_nit
 		compile
 		if failure != null then
-			for case in test_cases do
-				case.fail "Compilation Error"
-				case.raw_output = failure
-				toolcontext.clear_progress_bar
-				toolcontext.show_unit(case)
+			for test_class in test_classes do
+				for case in test_class.test_cases do
+					case.fail "Compilation Error"
+					case.raw_output = failure
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(case)
+				end
 			end
 			show_status
 			print ""
@@ -158,13 +181,25 @@ class TestSuite
 			toolcontext.clear_progress_bar
 			toolcontext.show_unit(before_module)
 			if before_module.error != null then
-				for case in test_cases do
-					case.fail "Nitunit Error: before_module test failed"
-					toolcontext.clear_progress_bar
-					toolcontext.show_unit(case)
+				for test_class in test_classes do
+					for case in test_class.before_all do
+						case.fail "Nitunit Error: before module test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(case)
+					end
+					for case in test_class.test_cases do
+						case.fail "Nitunit Error: before module test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(case)
+					end
+					for case in test_class.after_all do
+						case.fail "Nitunit Error: before module test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(case)
+					end
 				end
 				for after_module in after_all do
-					after_module.fail "Nitunit Error: before_module test failed"
+					after_module.fail "Nitunit Error: before module test failed"
 					toolcontext.clear_progress_bar
 					toolcontext.show_unit(after_module)
 				end
@@ -174,11 +209,39 @@ class TestSuite
 			end
 		end
 
-		for case in test_cases do
-			case.run
-			toolcontext.clear_progress_bar
-			toolcontext.show_unit(case)
-			show_status
+		for test_class in test_classes do
+			for case in test_class.before_all do
+				case.run
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+				if case.error != null then
+					for scase in test_class.test_cases do
+						scase.fail "Nitunit Error: before class test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(scase)
+					end
+					for scase in test_class.after_all do
+						scase.fail "Nitunit Error: before class test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(scase)
+					end
+					show_status
+					print ""
+					return
+				end
+			end
+			for case in test_class.test_cases do
+				case.run
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+				show_status
+			end
+			for after_class in test_class.after_all do
+				after_class.run
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(after_class)
+				show_status
+			end
 		end
 
 		for after_module in after_all do
@@ -201,8 +264,16 @@ class TestSuite
 		for before_module in before_all do
 			before_module.write_to_nit(file)
 		end
-		for case in test_cases do
-			case.write_to_nit(file)
+		for test_class in test_classes do
+			for case in test_class.before_all do
+				case.write_to_nit(file)
+			end
+			for case in test_class.test_cases do
+				case.write_to_nit(file)
+			end
+			for case in test_class.after_all do
+				case.write_to_nit(file)
+			end
 		end
 		for after_module in after_all do
 			after_module.write_to_nit(file)
@@ -215,7 +286,9 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
-		for test in test_cases do n.add test.to_xml
+		for test_class in test_classes do
+			for test in test_class.test_cases do n.add test.to_xml
+		end
 		return n
 	end
 
@@ -256,6 +329,20 @@ class TestSuite
 
 	# Error occured during test-suite compilation.
 	var failure: nullable String = null
+end
+
+# A test class contains multiple test cases
+#
+# For each test class, methods can be executed before and after all cases.
+class TestClass
+	# List of `TestCase` to be executed in this suite.
+	var test_cases = new Array[TestCase]
+
+	# Tests to be executed before the whole test suite.
+	var before_all = new Array[TestCase]
+
+	# Tests to be executed after the whole test suite.
+	var after_all = new Array[TestCase]
 end
 
 # A test case is a unit test considering only a `MMethodDef`.
