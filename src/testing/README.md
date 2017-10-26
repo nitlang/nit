@@ -38,12 +38,14 @@ To test a method you have to instanciate its class:
 	class Foo
 		#    var foo = new Foo
 		#    assert foo.baz(1, 2) == 3
-		fun baz(a, b: Int) do return a + b
+		fun baz(a, b: Int): Int do return a + b
 	end
 
 `nitunit` is used to test Nit files:
 
+~~~sh
 	$ nitunit foo.nit
+~~~
 
 ## Working with `TestSuites`
 
@@ -52,72 +54,82 @@ TestSuites are Nit files that define a set of TestCase for a particular module.
 The test suite module must be declared using the `test` annotation.
 The structure of a test suite is the following:
 
-	# test suite for module `foo`
-	module test_foo is test
+~~~nitish
+# test suite for module `foo`
+module test_foo is test
 
-	import foo # can be intrude to test private things
+import foo # can be intrude to test private things
 
-	class TestFoo
-		test
+class TestFoo
+	test
 
-		# test case for `foo::Foo::baz`
-		fun baz is test do
-			var subject = new Foo
-			assert subject.baz(1, 2) == 3
-		end
+	# test case for `foo::Foo::baz`
+	fun baz is test do
+		var subject = new Foo
+		assert subject.baz(1, 2) == 3
 	end
+end
+~~~
 
 Test suite can be executed using the same `nitunit` command:
 
+~~~sh
 	$ nitunit foo.nit
+~~~
 
 To be started automatically with nitunit, the module must be called `test_`
 followed by the name of the module to test.
 So for the module `foo.nit` the test suite will be called `test_foo.nit`.
 Otherwise, you can use the `-t` option to specify the test suite module name:
 
+~~~sh
 	$ nitunit foo.nit -t my_test_suite.nit
+~~~
 
 `nitunit` will execute a test for each method annotated with `test` in a class also annotated with `test`
 so multiple tests can be executed for a single method:
 
-	class TestFoo
-		test
+~~~nitish
+class TestFoo
+	test
 
-		fun baz_1 is test do
-			var subject = new Foo
-			assert subject.baz(1, 2) == 3
-		end
-
-		fun baz_2 is test do
-			var subject = new Foo
-			assert subject.baz(1, -2) == -1
-		end
+	fun baz_1 is test do
+		var subject = new Foo
+		assert subject.baz(1, 2) == 3
 	end
+
+	fun baz_2 is test do
+		var subject = new Foo
+		assert subject.baz(1, -2) == -1
+	end
+end
+~~~
 
 `TestSuites` also provide methods to configure the test run:
 
 `before` and `after` annotations can be added to methods that must be called before/after each test case.
 They can be used to factorize repetitive tasks:
 
-	class TestFoo
-		test
+~~~nitish
+class TestFoo
+	test
 
-		var subject: Foo is noinit
+	var subject: Foo is noinit
 
-		# Method executed before each test
-		redef fun set_up is before do
-			subject = new Foo
-		end
-
-		fun baz_1 is test do
-			assert subject.baz(1, 2) == 3
-		end
-
-		fun baz_2 is test do
-			assert subject.baz(1, -2) == -1
-		end
+	# Method executed before each test
+	fun set_up is before do
+		subject = new Foo
 	end
+
+	fun baz_1 is test do
+		assert subject.baz(1, 2) == 3
+	end
+
+	fun baz_2 is test do
+		assert subject.baz(1, -2) == -1
+	end
+end
+~~~
 
 When using custom test attributes, a empty init must be declared to allow automatic test running.
 
@@ -149,7 +161,9 @@ They have to be declared at top level:
 Write test suites for big modules can be a pepetitive and boring task...
 To make it easier, `nitunit` can generate test skeletons for Nit modules:
 
+~~~sh
 	$ nitunit --gen-suite foo.nit
+~~~
 
 This will generate the test suite `test_foo` containing test case stubs for all public
 methods found in `foo.nit`.
