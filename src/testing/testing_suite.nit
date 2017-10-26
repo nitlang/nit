@@ -383,66 +383,66 @@ end
 redef class MClassDef
 	# Methods tagged with `before` in this class definition
 	private fun before: Array[MMethodDef] do
-		var res = new Array[MMethodDef]
+		var res = new ArraySet[MMethodDef]
 		for mpropdef in mpropdefs do
 			if mpropdef isa MMethodDef and mpropdef.is_before then
 				res.add mpropdef
 			end
 		end
 		var in_hierarchy = self.in_hierarchy
-		if in_hierarchy == null then return res
+		if in_hierarchy == null then return res.to_a
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.before
 		end
-		return res
+		return res.to_a
 	end
 
 	# Methods tagged with `before_all` in this class definition
 	private fun before_all: Array[MMethodDef] do
-		var res = new Array[MMethodDef]
+		var res = new ArraySet[MMethodDef]
 		for mpropdef in mpropdefs do
 			if mpropdef isa MMethodDef and mpropdef.is_before_all then
 				res.add mpropdef
 			end
 		end
 		var in_hierarchy = self.in_hierarchy
-		if in_hierarchy == null then return res
+		if in_hierarchy == null then return res.to_a
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.before_all
 		end
-		return res
+		return res.to_a
 	end
 
 	# Methods tagged with `after` in this class definition
 	private fun after: Array[MMethodDef] do
-		var res = new Array[MMethodDef]
+		var res = new ArraySet[MMethodDef]
 		for mpropdef in mpropdefs do
 			if mpropdef isa MMethodDef and mpropdef.is_after then
 				res.add mpropdef
 			end
 		end
 		var in_hierarchy = self.in_hierarchy
-		if in_hierarchy == null then return res
+		if in_hierarchy == null then return res.to_a
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.after
 		end
-		return res
+		return res.to_a
 	end
 
 	# Methods tagged with `after_all` in this class definition
 	private fun after_all: Array[MMethodDef] do
-		var res = new Array[MMethodDef]
+		var res = new ArraySet[MMethodDef]
 		for mpropdef in mpropdefs do
 			if mpropdef isa MMethodDef and mpropdef.is_after_all then
 				res.add mpropdef
 			end
 		end
 		var in_hierarchy = self.in_hierarchy
-		if in_hierarchy == null then return res
+		if in_hierarchy == null then return res.to_a
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.after_all
 		end
-		return res
+		return res.to_a
 	end
 end
 
