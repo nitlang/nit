@@ -80,27 +80,27 @@ class Sprite
 	var texture: Texture is writable(texture_direct=)
 
 	# Texture drawn to screen
-	fun texture=(value: Texture)
+	fun texture=(texture: Texture)
 	do
-		if isset _texture and value != texture then
+		if isset _texture and texture != self.texture then
 			needs_update
-			if value.root != texture.root then needs_remap
+			if texture.root != self.texture.root then needs_remap
 		end
-		texture_direct = value
+		texture_direct = texture
 	end
 
 	# Center position of this sprite in world coordinates
 	var center: Point3d[Float] is writable(center_direct=), noautoinit
 
 	# Center position of this sprite in world coordinates
-	fun center=(value: Point3d[Float]) is autoinit do
-		if isset _center and value != center then
+	fun center=(center: Point3d[Float]) is autoinit do
+		if isset _center and center != self.center then
 			needs_update
-			center.sprites_remove self
+			self.center.sprites_remove self
 		end
 
-		value.sprites_add self
-		center_direct = value
+		center.sprites_add self
+		center_direct = center
 	end
 
 	# Last animation set with `animate`
