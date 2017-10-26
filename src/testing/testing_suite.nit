@@ -481,7 +481,9 @@ redef class MClassDef
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.before
 		end
-		return res.to_a
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin
 	end
 
 	# Methods tagged with `before_all` in this class definition
@@ -497,7 +499,9 @@ redef class MClassDef
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.before_all
 		end
-		return res.to_a
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin
 	end
 
 	# Methods tagged with `after` in this class definition
@@ -513,7 +517,9 @@ redef class MClassDef
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.after
 		end
-		return res.to_a
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin.reversed
 	end
 
 	# Methods tagged with `after_all` in this class definition
@@ -529,7 +535,9 @@ redef class MClassDef
 		for mclassdef in in_hierarchy.direct_greaters do
 			res.add_all mclassdef.after_all
 		end
-		return res.to_a
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin.reversed
 	end
 end
 
@@ -546,7 +554,9 @@ redef class MModule
 				end
 			end
 		end
-		return res
+		var lin = res.to_a
+		linearize_mpropdefs(lin)
+		return lin
 	end
 
 	# Methods tagged with `after_all` at the module level (in `Sys`)
@@ -561,7 +571,9 @@ redef class MModule
 				end
 			end
 		end
-		return res
+		var lin = res.to_a
+		linearize_mpropdefs(lin)
+		return lin.reversed
 	end
 end
 
