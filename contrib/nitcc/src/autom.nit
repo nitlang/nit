@@ -526,7 +526,7 @@ class Automaton
 						f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_dot}\"];\n")
 					end
 				end
-				if merge_transitions == null or merge_transitions == true then
+				if merge_transitions or else true then
 					f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 				end
 			end
