@@ -228,52 +228,113 @@ To helps the management of the expected results, the option `--autosav` can be u
 ## Configuring TestSuites
 
 `TestSuite`s also provide annotations to configure the test run:
-`before` and `after` annotations can be applied to methods that must be called before/after each test case.
+`before` and `after` annotations can be added to methods that must be called before/after each test case.
 They can be used to factorize repetitive tasks:
 
-~~~~
+~~~
 class TestFoo
-    test
+	test
 
-    var subject: Foo
+	var subject: Foo is noinit
 
-    # Mandatory empty init
-    init do end
+	# Method executed before each test
+	fun set_up is before do
+		subject = new Foo
+	end
 
-    # Method executed before each test
-    fun set_up is before do
-        subject = new Foo
-    end
-    fun baz_1 is test do
-        assert subject.baz(1, 2) == 3
-    end
-    fun baz_2 is test do
-        assert subject.baz(1, -2) == -1
-    end
+	fun baz_1 is test do
+		assert subject.baz(1, 2) == 3
+	end
+
+	fun baz_2 is test do
+		assert subject.baz(1, -2) == -1
+	end
 end
-~~~~
+~~~
 
-When using custom test attributes, an empty `init` must be declared to allow automatic test running.
+When using custom test attributes, a empty init must be declared to allow automatic test running.
 
-`before_all` and `after_all` annotations can be applied to methods that must be called before/after each test suite.
-They have to be declared at top level:
+At class level, `before_all` and `after_all` annotations can be set on methods that must be called before/after all the test cases in the class:
 
-~~~~
+~~~
+class TestFoo
+	test
+
+	var subject: Foo is noinit
+
+	# Method executed before all tests in the class
+	fun set_up is before_all do
+		subject = new Foo
+	end
+
+	fun baz_1 is test do
+		assert subject.baz(1, 2) == 3
+	end
+
+	fun baz_2 is test do
+		assert subject.baz(1, -2) == -1
+	end
+end
+~~~
+
+`before_all` and `after_all` annotations can also be set on methods that must be called before/after each test suite when declared at top level:
+
+~~~
 module test_bdd_connector
+
 import bdd_connector
+
 # Testing the bdd_connector
 class TestConnector
-    # test cases using a server
+	test
+	# test cases using a server
 end
+
 # Method executed before testing the module
-fun before_module do
-    # start server before all test cases
+fun setup_db is before_all do
+	# start server before all test cases
 end
+
 # Method executed after testing the module
-fun after_module do
-    # stop server after all test cases
+fun teardown_db is after_all do
+	# stop server after all test cases
 end
-~~~~
+~~~
+
+When dealing with multiple test suites, niunit allows you to import other test suites to factorize your tests:
+
+~~~
+module test_bdd_users
+
+import test_bdd_connector
+
+# Testing the user table
+class TestUsersTable
+	test
+	# test cases using the db server from `test_bdd_connector`
+end
+
+fun setup_table is before_all do
+	# create user table
+end
+
+fun teardown_table is after_all do
+	# drop user table
+end
+~~~
+
+Methods with `before*` and `after*` annotations are linearized and called in different ways.
+
+* `before*` methods are called from the least specific to the most specific
+* `after*` methods are called from the most specific to the least specific
+
+In the previous example, the execution order would be:
+
+1. `test_bdd_connector::setup_db`
+2. `test_bdd_users::setup_table`
+3. `all test cases from test_bdd_users`
+4. `test_bdd_users::teardown_table`
+5. `test_bdd_connector::teardown_db`
 
 ## Accessing the test suite environment
 
