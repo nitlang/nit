@@ -35,9 +35,6 @@ class DocModel
 	# See `add_page`.
 	var pages: Map[String, DocPage] = new HashMap[String, DocPage]
 
-	# The entry point of the `model`.
-	var mainmodule: MModule is writable
-
 	# Add a `page` to this documentation.
 	fun add_page(page: DocPage) do
 		if pages.has_key(page.id) then

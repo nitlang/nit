@@ -22,7 +22,7 @@
 # First setup you view from a Model:
 #
 # ~~~nitih
-# var view = new ModelView(model)
+# var view = new ModelView(model, mainmodule)
 # ~~~
 #
 # Then ask question using the view:
@@ -117,22 +117,30 @@ redef class MEntity
 	# * `MProperty`: property definitions graph (all propdefs flattened)
 	# * `MPropDef`: property definitions graph
 	fun hierarchy_poset(view: ModelView): POSet[MENTITY] do
-		var done = new HashSet[MENTITY]
-		var mentities = new Array[MENTITY]
-		mentities.add self
 		var poset = new POSet[MENTITY]
-		while mentities.not_empty do
-			var mentity = mentities.pop
-			if done.has(mentity) then continue
-			done.add mentity
+		var parents_done = new HashSet[MENTITY]
+		var parents = new Array[MENTITY]
+		parents.add self
+		while parents.not_empty do
+			var mentity = parents.pop
+			if parents_done.has(mentity) then continue
+			parents_done.add mentity
 			poset.add_node mentity
 			for parent in mentity.collect_parents(view) do
 				poset.add_edge(mentity, parent)
-				mentities.add parent
+				parents.add parent
 			end
+		end
+		var children_done = new HashSet[MEntity]
+		var children = new Array[MEntity]
+		children.add self
+		while children.not_empty do
+			var mentity = children.pop
+			if children_done.has(mentity) then continue
+			children_done.add mentity
 			for child in mentity.collect_children(view) do
 				poset.add_edge(child, mentity)
-				mentities.add child
+				children.add child
 			end
 		end
 		return poset
@@ -571,24 +579,9 @@ redef class MClass
 	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
-		for mclassdef in mclassdefs do
-			for parent in mclassdef.collect_parents(view) do
-				var mclass = parent.mclass
-				if mclass == self or not view.accept_mentity(parent) then continue
-				res.add mclass
-			end
-		end
-		return res
-	end
-
-	# Collect all ancestors of `self`
-	redef fun collect_ancestors(view) do
-		var res = new HashSet[MENTITY]
-		for mclassdef in mclassdefs do
-			for parent in mclassdef.collect_parents(view) do
-				if not view.accept_mentity(parent) then continue
-				res.add parent.mclass
-			end
+		for mclass in in_hierarchy(view.mainmodule).direct_greaters do
+			if mclass == self or not view.accept_mentity(mclass) then continue
+			res.add mclass
 		end
 		return res
 	end
@@ -598,12 +591,9 @@ redef class MClass
 	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
-		for mclassdef in mclassdefs do
-			for child in mclassdef.collect_children(view) do
-				var mclass = child.mclass
-				if mclass == self or not view.accept_mentity(child) then continue
-				res.add mclass
-			end
+		for mclass in in_hierarchy(view.mainmodule).direct_smallers do
+			if mclass == self or not view.accept_mentity(mclass) then continue
+			res.add mclass
 		end
 		return res
 	end

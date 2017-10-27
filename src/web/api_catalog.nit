@@ -213,9 +213,9 @@ redef class APIEntity
 
 		# Special case for packages (catalog view)
 		if mentity isa MPackage then
-			res.raw_json mentity.to_full_catalog_json(plain=true, config.catalog)
+			res.raw_json mentity.to_full_catalog_json(plain=true, config.mainmodule, config.catalog)
 		else
-			res.raw_json mentity.to_full_json
+			res.raw_json mentity.to_full_json(config.mainmodule)
 		end
 	end
 end
@@ -372,9 +372,9 @@ redef class MPackage
 	# Serialize the full catalog version of `self` to JSON
 	#
 	# See: `FullCatalogSerializer`
-	fun to_full_catalog_json(catalog: Catalog, plain, pretty: nullable Bool): String do
+	fun to_full_catalog_json(mainmodule: MModule, catalog: Catalog, plain, pretty: nullable Bool): String do
 		var stream = new StringWriter
-		var serializer = new FullCatalogSerializer(stream, catalog)
+		var serializer = new FullCatalogSerializer(stream, mainmodule, catalog)
 		serializer.plain_json = plain or else false
 		serializer.pretty_json = pretty or else false
 		serializer.serialize self

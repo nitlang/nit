@@ -42,7 +42,7 @@ class NitwebConfig
 	#
 	# So we can cache the model view.
 	var view: ModelView is lazy do
-		var view = new ModelView(model)
+		var view = new ModelView(model, mainmodule)
 		view.min_visibility = private_visibility
 		view.include_fictive = true
 		view.include_empty_doc = true

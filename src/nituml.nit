@@ -41,7 +41,7 @@ private class UMLPhase
 	super Phase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		var view = new ModelView(mainmodule.model)
+		var view = new ModelView(mainmodule.model, mainmodule)
 		if not toolcontext.opt_privacy.value then
 			view.min_visibility = protected_visibility
 		end
