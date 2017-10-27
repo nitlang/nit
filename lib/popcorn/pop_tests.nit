@@ -79,9 +79,11 @@ redef class Sys
 
 	# Return a new port for each instance
 	fun test_port: Int do
-		srand
-		return 10000+20000.rand
+		return testing_id % 20000 + 10000
 	end
+
+	# Nitdoc testing ID
+	fun testing_id: Int do return "NIT_TESTING_ID".environ.to_i
 end
 
 # Thread running the App to test.
