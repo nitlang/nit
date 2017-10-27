@@ -367,6 +367,7 @@ class Automaton
 		# Keep only the good stuff
 		states.clear
 		states.add_all(goods)
+		states.add(start)
 	end
 
 	# Generate a minimal DFA
