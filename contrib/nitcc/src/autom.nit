@@ -386,10 +386,9 @@ class Automaton
 
 		# split accept states.
 		# An accept state is distinct with a non accept state.
-		for s1 in states do
+		for s1 in accept do
 			for s2 in states do
 				if distincts[s1].has(s2) then continue
-				if not accept.has(s1) then continue
 				if not accept.has(s2) then
 					distincts[s1].add(s2)
 					distincts[s2].add(s1)
