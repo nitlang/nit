@@ -112,8 +112,15 @@ f.close
 var nfa = v2.nfa
 print "NFA automaton: {nfa.states.length} states (see {name}.nfa.dot)"
 nfa.to_dot.write_to_file("{name}.nfa.dot")
+var nfanoe = nfa.to_nfa_noe
+nfanoe.to_dot.write_to_file("{name}.nfanoe.dot")
+print "NFA automaton without epsilon: {nfanoe.states.length} states (see {name}.nfanoe.dot)"
 
-var dfa = nfa.to_dfa.to_minimal_dfa
+var dfa = nfa.to_dfa
+dfa.to_dot.write_to_file("{name}.dfanomin.dot")
+print "DFA automaton (non minimal): {dfa.states.length} states (see {name}.dfanomin.dot)"
+
+dfa = dfa.to_minimal_dfa
 
 dfa.solve_token_inclusion
 
