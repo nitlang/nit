@@ -287,7 +287,7 @@ class Activity
 	# Notification from Android, the system is running low on memory
 	#
 	# Try to reduce your memory use.
-	fun on_low_memory do end
+	fun on_low_memory do force_garbage_collection
 
 	# Notification from Android, the current window of the activity has lost or gained focus
 	fun on_window_focus_changed(has_focus: Bool) do end
