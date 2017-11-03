@@ -33,7 +33,16 @@ redef class App
 	#
 	# The gamnit services redefine this method to prepare optimizations and more.
 	# Clients may also refine this method to prepare custom OpenGL resources.
-	fun create_gamnit
+	fun create_gamnit do end
+
+	# Hook to prepare for recreating the OpenGL context
+	#
+	# Some gamnit services refine this method to reset caches before the
+	# next call to `create_gamnit`.
+	fun recreate_gamnit do end
+
+	# Create and set `self.display`
+	fun create_display
 	do
 		var display = new GamnitDisplay
 		display.setup

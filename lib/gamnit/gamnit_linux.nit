@@ -50,6 +50,7 @@ redef class App
 	redef fun on_create
 	do
 		super
+		create_display
 		create_gamnit
 		create_scene
 	end
