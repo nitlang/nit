@@ -67,8 +67,8 @@ private class MendelMetricsPhase
 		print toolcontext.format_h1("\n# Mendel metrics")
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = new ModelView(model, mainmodule)
-		model_view.min_visibility = protected_visibility
+		var filter = new ModelFilter(min_visibility = protected_visibility)
+		var model_view = new ModelView(model, mainmodule, filter)
 
 		var mclasses = new HashSet[MClass]
 		for mclass in model_view.mclasses do

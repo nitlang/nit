@@ -34,7 +34,8 @@ class CodeSmellsMetricsPhase
 	redef fun process_mainmodule(mainmodule, given_mmodules) do
 		print toolcontext.format_h1("--- Code Smells Metrics ---")
 
-		var view = new ModelView(toolcontext.modelbuilder.model, mainmodule)
+		var filter = new ModelFilter(private_visibility)
+		var view = new ModelView(toolcontext.modelbuilder.model, mainmodule, filter)
 		self.set_all_average_metrics(view)
 		var mclass_codesmell = new BadConceptonController(view)
 		var collect = new Counter[MClassDef]

@@ -37,7 +37,8 @@ private class MClassesMetricsPhase
 		out.mkdir
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = new ModelView(model, mainmodule)
+		var filter = new ModelFilter(private_visibility)
+		var model_view = new ModelView(model, mainmodule, filter)
 
 		print toolcontext.format_h1("\n# MClasses metrics")
 
