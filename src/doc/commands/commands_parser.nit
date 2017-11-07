@@ -41,6 +41,35 @@ class CommandParser
 	"param", "return", "new", "call", "defs", "list", "random",
 	"catalog", "stats", "tags", "tag", "person", "contrib", "maintain"] is writable
 
+	# List of commands usage and documentation
+	var commands_usage: Map[String, String] do
+		var usage = new ArrayMap[String, String]
+		usage["search: <string>"] = "list entities matching `string`"
+		usage["doc: <name>"] = "display the documentation for `name`"
+		usage["defs: <name>"] = "list all definitions for `name`"
+		usage["code: <name>"] = "display the code for `name`"
+		usage["lin: <name>"] = "display the linearization for `name`"
+		usage["uml: <name>"] = "display the UML diagram for `name`"
+		usage["graph: <name>"] = "display the inheritance graph for `name`"
+		usage["parents: <name>"] = "list the direct parents of `name`"
+		usage["ancestors: <name>"] = "list all ancestors of `name`"
+		usage["children: <name>"] = "list direct children of `name`"
+		usage["descendants: <name>"] = "list all descendants of `name`"
+		usage["param: <type>"] = "list all methods accepting `type` as parameter"
+		usage["return: <type>"] = "list all methods returning `type`"
+		usage["new: <class>"] = "list all methods initializing `class`"
+		usage["call: <property>"] = "list all methods calling `property`"
+		usage["list: <kind>"] = "list all entities of `kind` from the model"
+		usage["random: <kind>"] = "list random entities of `kind` from the model"
+		usage["catalog:"] = "list packages from catalog"
+		usage["stats:"] = "display catalog statistics"
+		usage["tags:"] = "list all tabs from catalog"
+		usage["tag: <tag>"] = "list all packages with `tag`"
+		usage["maintain: <person>"] = "list all packages maintained by `person`"
+		usage["contrib: <person>"] = "list all packages contributed by `person`"
+		return usage
+	end
+
 	# Parse `string` as a DocCommand
 	#
 	# Returns `null` if the string cannot be parsed.
