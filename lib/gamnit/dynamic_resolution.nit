@@ -54,7 +54,7 @@ redef class App
 
 	private var perf_clock_dynamic_resolution = new Clock is lazy
 
-	redef fun create_scene
+	redef fun create_gamnit
 	do
 		super
 
@@ -62,6 +62,8 @@ redef class App
 		program.compile_and_link
 		var error = program.error
 		assert error == null else print_error error
+
+		dynamic_context_cache = null
 	end
 
 	redef fun on_resize(display)
@@ -148,7 +150,17 @@ redef class App
 	end
 
 	# Framebuffer and texture for dynamic resolution intermediate drawing
-	private var dynamic_context: DynamicContext = create_dynamic_context is lazy
+	private fun dynamic_context: DynamicContext
+	do
+		var cache = dynamic_context_cache
+		if cache != null then return cache
+
+		cache = create_dynamic_context
+		dynamic_context_cache = cache
+		return cache
+	end
+
+	private var dynamic_context_cache: nullable DynamicContext = null
 
 	private fun create_dynamic_context: DynamicContext
 	do
