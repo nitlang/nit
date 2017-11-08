@@ -39,7 +39,7 @@ redef class GamnitDisplay
 		setup_egl_display native_display
 
 		# We need 8 bits per color for selection by color
-		select_egl_config(red_bits, green_bits, blue_bits, 0, 8, 0, 0)
+		select_egl_config(red_bits, green_bits, blue_bits, 0, 8, 0)
 
 		var format = egl_config.attribs(egl_display).native_visual_id
 		assert not native_window.address_is_null

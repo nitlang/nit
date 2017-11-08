@@ -46,7 +46,7 @@ redef class GamnitDisplay
 	end
 
 	# Select an EGL config
-	protected fun select_egl_config(red, green, blue, alpha, depth, stencil, sample: Int)
+	protected fun select_egl_config(red, green, blue, alpha, depth, stencil: Int)
 	do
 		var config_chooser = new EGLConfigChooser
 		config_chooser.renderable_type_egl
@@ -57,7 +57,10 @@ redef class GamnitDisplay
 		if alpha > 0 then config_chooser.alpha_size = alpha
 		if depth > 0 then config_chooser.depth_size = depth
 		if stencil > 0 then config_chooser.stencil_size = stencil
-		if sample > 0 then config_chooser.sample_buffers = sample
+
+		config_chooser.sample_buffers = 1
+		config_chooser.samples = 4
+
 		config_chooser.close
 
 		var configs = config_chooser.choose(egl_display)
@@ -72,6 +75,7 @@ redef class GamnitDisplay
 				print "  Caveats: {attribs.caveat}"
 				print "  Size of RGBA: {attribs.red_size} {attribs.green_size} {attribs.blue_size} {attribs.alpha_size}"
 				print "  Buffer, depth, stencil: {attribs.buffer_size} {attribs.depth_size} {attribs.stencil_size}"
+				print "  Sample buffers, samples: {attribs.sample_buffers} {attribs.samples}"
 			end
 		end
 
