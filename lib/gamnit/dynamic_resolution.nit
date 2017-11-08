@@ -42,7 +42,7 @@ redef class App
 	#
 	# This value is applied to both X and Y, so it has an exponential effect on
 	# the number of pixels.
-	var dynamic_resolution_ratio = 1.0
+	var dynamic_resolution_ratio = 1.0 is writable
 
 	# Minimum dynamic screen resolution
 	var min_dynamic_resolution_ratio = 0.0125 is writable
