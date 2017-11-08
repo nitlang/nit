@@ -427,13 +427,13 @@ class BlinnPhongProgram
 		uniform lowp int light_kind;
 		uniform bool use_shadows;
 		uniform sampler2D depth_texture;
-		uniform float depth_texture_size;
-		uniform int depth_texture_taps;
+		uniform float depth_size;
+		uniform int depth_taps;
 
 		// Shadow effect on the diffuse colors of the fragment at offset `x, y`
 		float shadow_lookup(vec2 depth_coord, float x, float y) {
 			float tap_width = 1.0;
-			float pixel_size = tap_width/depth_texture_size;
+			float pixel_size = tap_width/depth_size;
 
 			vec2 offset = vec2(x * pixel_size * v_depth_pos.w,
 			                   y * pixel_size * v_depth_pos.w);
@@ -468,7 +468,7 @@ class BlinnPhongProgram
 
 			vec2 depth_coord = v_depth_pos.xy/v_depth_pos.w;
 
-			float taps = float(depth_texture_taps);
+			float taps = float(depth_taps);
 			float tap_step = 2.00/taps;
 			float sum = 0.0;
 			for (float x = -1.0; x <= 0.99; x += tap_step)
@@ -589,10 +589,10 @@ class BlinnPhongProgram
 	var depth_texture = uniforms["depth_texture"].as(UniformSampler2D) is lazy
 
 	# Size, in pixels, of `depth_texture`
-	var depth_texture_size = uniforms["depth_texture_size"].as(UniformFloat) is lazy
+	var depth_texture_size = uniforms["depth_size"].as(UniformFloat) is lazy
 
 	# Times to tap the `depth_texture`, square root (set to 3 for a total of 9 taps)
-	var depth_texture_taps = uniforms["depth_texture_taps"].as(UniformInt) is lazy
+	var depth_texture_taps = uniforms["depth_taps"].as(UniformInt) is lazy
 
 	# Camera position
 	var camera = uniforms["camera"].as(UniformVec3) is lazy
