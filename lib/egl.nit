@@ -216,6 +216,8 @@ class EGLConfigAttribs
 	fun red_size: Int do return display.config_attrib(config, 0x3024)
 	fun depth_size: Int do return display.config_attrib(config, 0x3025)
 	fun stencil_size: Int do return display.config_attrib(config, 0x3026)
+	fun samples: Int do return display.config_attrib(config, 0x3031)
+	fun sample_buffers: Int do return display.config_attrib(config, 0x3032)
 
 	fun native_visual_id: Int do return display.config_attrib(config, 0x302E)
 	fun native_visual_type: Int do return display.config_attrib(config, 0x302F)
@@ -427,7 +429,8 @@ class EGLConfigChooser
 	fun alpha_size=(size: Int) do insert_attrib_with_val(0x3021, size)
 	fun depth_size=(size: Int) do insert_attrib_with_val(0x3025, size)
 	fun stencil_size=(size: Int) do insert_attrib_with_val(0x3026, size)
-	fun sample_buffers=(size: Int) do insert_attrib_with_val(0x3031, size)
+	fun samples=(count: Int) do insert_attrib_with_val(0x3031, count)
+	fun sample_buffers=(size: Int) do insert_attrib_with_val(0x3032, size)
 
 	fun caveat=(caveat: EGLConfigCaveat) do insert_attrib_with_val(0x3050, caveat.to_i)
 
