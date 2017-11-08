@@ -367,6 +367,7 @@ class Automaton
 		# Keep only the good stuff
 		states.clear
 		states.add_all(goods)
+		states.add(start)
 	end
 
 	# Generate a minimal DFA
@@ -385,10 +386,9 @@ class Automaton
 
 		# split accept states.
 		# An accept state is distinct with a non accept state.
-		for s1 in states do
+		for s1 in accept do
 			for s2 in states do
 				if distincts[s1].has(s2) then continue
-				if not accept.has(s1) then continue
 				if not accept.has(s2) then
 					distincts[s1].add(s2)
 					distincts[s2].add(s1)
@@ -526,7 +526,7 @@ class Automaton
 						f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_dot}\"];\n")
 					end
 				end
-				if merge_transitions == null or merge_transitions == true then
+				if merge_transitions or else true then
 					f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 				end
 			end
@@ -620,6 +620,58 @@ class Automaton
 					lastst.symbol.as(not null).last = sym.last
 				else
 					lastst = dfa_state.add_trans(dfa_dest, sym)
+				end
+			end
+		end
+		return dfa
+	end
+
+	# Transform a NFA to a epsilonless NFA.
+	fun to_nfa_noe: Automaton
+	do
+		assert_valid
+
+		trim
+
+		var dfa = new Automaton.empty
+		var n2d = new ArrayMap[Set[State], State]
+		var seen = new ArraySet[Set[State]]
+		var st = eclosure([start])
+		var todo = [st]
+		n2d[st] = dfa.start
+		seen.add(st)
+		while not todo.is_empty do
+			var nfa_states = todo.pop
+			#print "* work on {nfa_states.inspect}={nfa_states} (remains {todo.length}/{seen.length})"
+			var dfa_state = n2d[nfa_states]
+			for s in nfa_states do
+				for t in s.outs do
+					if t.symbol == null then continue
+					var nfa_dest = eclosure([t.to])
+					#print "{nfa_states} -> {sym} -> {nfa_dest}"
+					var dfa_dest
+					if seen.has(nfa_dest) then
+						#print "* reuse {nfa_dest.inspect}={nfa_dest}"
+						dfa_dest = n2d[nfa_dest]
+					else
+						#print "* new {nfa_dest.inspect}={nfa_dest}"
+						dfa_dest = new State
+						dfa.states.add(dfa_dest)
+						n2d[nfa_dest] = dfa_dest
+						todo.add(nfa_dest)
+						seen.add(nfa_dest)
+					end
+					dfa_state.add_trans(dfa_dest, t.symbol)
+				end
+
+				# Mark accept and tags
+				if accept.has(s) then
+					if tags.has_key(s) then
+						for t in tags[s] do
+							dfa.add_tag(dfa_state, t)
+						end
+					end
+					dfa.accept.add(dfa_state)
 				end
 			end
 		end
