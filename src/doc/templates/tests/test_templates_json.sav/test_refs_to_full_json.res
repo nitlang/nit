@@ -3,7 +3,7 @@
 	"synopsis": "Test program for model tools."
 }
 {
-	"name": "excluded"
+	"name": "game_examples"
 }
 {
 	"name": "Object",

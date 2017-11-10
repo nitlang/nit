@@ -12,6 +12,19 @@
 	"modifiers": ["group"]
 }
 {
+	"name": "examples",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, ">", {
+		"name": "examples"
+	}, ">"],
+	"class_name": "MGroup",
+	"full_name": "test_prog>examples>",
+	"visibility": "public",
+	"modifiers": ["group"]
+}
+{
 	"name": "game",
 	"synopsis": "Gaming group",
 	"namespace": [{

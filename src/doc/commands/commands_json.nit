@@ -20,9 +20,8 @@ import commands::commands_graph
 import commands::commands_usage
 import commands::commands_catalog
 
-import model::model_json
+import templates::templates_json
 import catalog::catalog_json
-import doc::doc_down
 
 redef class DocCommand
 	# Return a JSON Serializable representation of `self` results

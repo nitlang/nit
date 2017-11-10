@@ -2165,56 +2165,33 @@
 }
 {
 	"name": "player_characters",
+	"synopsis": "Characters played by human players.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "player_characters",
+		"synopsis": "Characters played by human players."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$Game::player_characters",
-	"mdoc": {
-		"content": "Characters played by human players.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 26,
-			"line_start": 25,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters played by human players.</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 50,
-		"column_start": 2,
-		"line_end": 23,
-		"line_start": 23,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::player_characters"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$player_characters"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::List[test_prog::Character]"
-		},
-		"vararg_rank": -1
+			"name": "List[Character]",
+			"synopsis": "List of things.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		}
 	}
 }
 {
@@ -2248,56 +2225,33 @@
 }
 {
 	"name": "computer_characters",
+	"synopsis": "Characters players by computer.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "computer_characters",
+		"synopsis": "Characters players by computer."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$Game::computer_characters",
-	"mdoc": {
-		"content": "Characters players by computer.",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 29,
-			"line_start": 28,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters players by computer.</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 52,
-		"column_start": 2,
-		"line_end": 25,
-		"line_start": 25,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::computer_characters"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$computer_characters"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
+		"mparameters": [],
 		"return_mtype": {
-			"full_name": "test_prog::List[test_prog::Character]"
-		},
-		"vararg_rank": -1
+			"name": "List[Character]",
+			"synopsis": "List of things.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		}
 	}
 }
 {
@@ -2327,54 +2281,29 @@
 }
 {
 	"name": "start_game",
+	"synopsis": "Start the game.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "start_game",
+		"synopsis": "Start the game."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$Game::start_game",
-	"mdoc": {
-		"content": "Start the game.\n\nYou have to implement that method!",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 34,
-			"line_start": 31,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Start the game.</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 28,
-		"column_start": 2,
-		"line_end": 27,
-		"line_start": 27,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::start_game"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$start_game"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
@@ -2404,54 +2333,29 @@
 }
 {
 	"name": "pause_game",
+	"synopsis": "Pause the game.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "pause_game",
+		"synopsis": "Pause the game."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$Game::pause_game",
-	"mdoc": {
-		"content": "Pause the game.\n\nYou have to implement that method!",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 39,
-			"line_start": 36,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Pause the game.</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 28,
-		"column_start": 2,
-		"line_end": 29,
-		"line_start": 29,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::pause_game"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$pause_game"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
@@ -2481,232 +2385,133 @@
 }
 {
 	"name": "stop_game",
+	"synopsis": "Stop the game.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "stop_game",
+		"synopsis": "Stop the game."
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$Game::stop_game",
-	"mdoc": {
-		"content": "Stop the game.\n\nYou have to implement that method!",
-		"location": {
-			"column_end": 0,
-			"column_start": 2,
-			"line_end": 44,
-			"line_start": 41,
-			"file": "test_location"
-		}
-	},
 	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Stop the game.</span>",
 	"modifiers": ["redef", "fun"],
-	"location": {
-		"column_end": 27,
-		"column_start": 2,
-		"line_end": 31,
-		"line_start": 31,
-		"file": "test_location"
-	},
-	"is_intro": false,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::Game::stop_game"
-	},
-	"intro": {
-		"full_name": "test_prog$Game$stop_game"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$Game"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 0,
-		"mparams": [],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
 	"name": "_player_characters",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "_player_characters"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$MyGame$_player_characters",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 50,
-		"column_start": 2,
-		"line_end": 23,
-		"line_start": 23,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::game_examples::MyGame::_player_characters"
-	},
-	"intro": {
-		"full_name": "test_prog$MyGame$_player_characters"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::List[test_prog::Character]"
+		"name": "List[Character]",
+		"synopsis": "List of things.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
 	}
 }
 {
 	"name": "player_characters=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "player_characters="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$player_characters=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 50,
-		"column_start": 2,
-		"line_end": 23,
-		"line_start": 23,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::MyGame::player_characters="
-	},
-	"intro": {
-		"full_name": "test_prog$MyGame$player_characters="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "player_characters",
 			"mtype": {
-				"full_name": "test_prog::List[test_prog::Character]"
+				"name": "List[Character]",
+				"synopsis": "List of things.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {
 	"name": "_computer_characters",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "_computer_characters"
+	}],
 	"class_name": "MAttributeDef",
 	"full_name": "test_prog$MyGame$_computer_characters",
-	"mdoc": null,
 	"visibility": "private",
 	"modifiers": ["private", "var"],
-	"location": {
-		"column_end": 52,
-		"column_start": 2,
-		"line_end": 25,
-		"line_start": 25,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::game_examples::MyGame::_computer_characters"
-	},
-	"intro": {
-		"full_name": "test_prog$MyGame$_computer_characters"
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"static_mtype": {
-		"full_name": "test_prog::List[test_prog::Character]"
+		"name": "List[Character]",
+		"synopsis": "List of things.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
 	}
 }
 {
 	"name": "computer_characters=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "$", {
+		"name": "computer_characters="
+	}],
 	"class_name": "MMethodDef",
 	"full_name": "test_prog$MyGame$computer_characters=",
-	"mdoc": null,
 	"visibility": "protected",
 	"modifiers": ["protected", "fun"],
-	"location": {
-		"column_end": 52,
-		"column_start": 2,
-		"line_end": 25,
-		"line_start": 25,
-		"file": "test_location"
-	},
 	"is_intro": true,
-	"mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mproperty": {
-		"full_name": "test_prog::MyGame::computer_characters="
-	},
-	"intro": {
-		"full_name": "test_prog$MyGame$computer_characters="
-	},
-	"intro_mclassdef": {
-		"full_name": "test_prog$MyGame"
-	},
-	"mmodule": {
-		"full_name": "test_prog::game_examples"
-	},
-	"mgroup": {
-		"full_name": "test_prog>examples>"
-	},
-	"mpackage": {
-		"full_name": "test_prog"
-	},
 	"msignature": {
 		"arity": 1,
-		"mparams": [{
+		"mparameters": [{
 			"is_vararg": false,
 			"name": "computer_characters",
 			"mtype": {
-				"full_name": "test_prog::List[test_prog::Character]"
+				"name": "List[Character]",
+				"synopsis": "List of things.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
 			}
 		}],
-		"return_mtype": null,
-		"vararg_rank": -1
+		"return_mtype": null
 	}
 }
 {

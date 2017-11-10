@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_model_json is test
+module test_templates_json is test
 
-import model_json
+import templates_json
 import frontend
 
 class TestModelSerialization
 	test
 
 	var suite_path: String = "NIT_TESTING_PATH".environ
-	var lib_path: String = "{suite_path.dirname}/../../tests/test_prog"
+	var lib_path: String = "{suite_path.dirname}/../../../../tests/test_prog"
 
 	var mainmodule: MModule is noinit
 

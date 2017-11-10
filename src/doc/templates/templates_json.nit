@@ -22,7 +22,7 @@
 # rather than the refs.
 #
 # TODO consider serialization module?
-module model_json
+module templates_json
 
 import model::model_collect
 import json::static
