@@ -162,7 +162,8 @@ redef class MClass
 		super
 		v.serialize_attribute("mparameters", mparameters)
 		if v isa FullJsonSerializer then
-			var view = new ModelView(model, v.mainmodule)
+			var filter = new ModelFilter(private_visibility)
+			var view = new ModelView(model, v.mainmodule, filter)
 			v.serialize_attribute("intro", to_mentity_ref(intro))
 			v.serialize_attribute("intro_mmodule", to_mentity_ref(intro_mmodule))
 			v.serialize_attribute("mpackage", to_mentity_ref(intro_mmodule.mpackage))
@@ -181,7 +182,8 @@ redef class MClassDef
 		v.serialize_attribute("is_intro", is_intro)
 		v.serialize_attribute("mparameters", mclass.mparameters)
 		if v isa FullJsonSerializer then
-			var view = new ModelView(model, v.mainmodule)
+			var filter = new ModelFilter(private_visibility)
+			var view = new ModelView(model, v.mainmodule, filter)
 			v.serialize_attribute("mmodule", to_mentity_ref(mmodule))
 			v.serialize_attribute("mclass", to_mentity_ref(mclass))
 			v.serialize_attribute("mpropdefs", to_mentity_refs(sort_entities(mpropdefs)))
