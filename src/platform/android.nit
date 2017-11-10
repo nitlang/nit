@@ -91,11 +91,7 @@ class AndroidToolchain
 		# ---
 
 		var app_name = project.name
-		if not release then app_name += " Debug"
-
 		var app_package = project.namespace
-		if not release then app_package += "_debug"
-
 		var app_version = project.version
 
 		var app_min_api = project.min_api
