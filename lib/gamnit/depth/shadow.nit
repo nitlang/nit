@@ -84,8 +84,6 @@ redef class App
 		var light = app.light
 		if not light isa LightCastingShadows then return
 
-		perf_clock_shadow.lapse
-
 		# Make sure there's no errors pending
 		assert glGetError == gl_NO_ERROR
 
@@ -116,8 +114,6 @@ redef class App
 		# Take down, bring back default values
 		glBindFramebuffer(gl_FRAMEBUFFER, shadow_context.screen_framebuffer)
 		glColorMask(true, true, true, true)
-
-		perfs["gamnit shadows prep"].add perf_clock_shadow.lapse
 	end
 
 	# ---
