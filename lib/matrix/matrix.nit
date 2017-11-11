@@ -213,13 +213,7 @@ class Matrix
 		assert self.width == other.height
 
 		var out = new Matrix(other.width, self.height)
-		for j in [0..self.height[ do
-			for i in [0..other.width[ do
-				var sum = items[0].zero
-				for k in [0..self.width[ do sum += self[j, k] * other[k, i]
-				out[j, i] = sum
-			end
-		end
+		out.items.mul(items, other.items, self.width, self.height, other.width)
 		return out
 	end
 
@@ -334,5 +328,15 @@ private extern class NativeDoubleArray `{ double* `}
 		for (i = 0; i < len; i ++)
 			r = r * 3 / 2 + (long)(i*1024.0);
 		return r;
+	`}
+
+	fun mul(a, b: NativeDoubleArray, a_width, a_height, b_width: Int) `{
+		int i, j, k;
+		for (j = 0; j < a_height; j ++)
+			for (i = 0; i < b_width; i ++) {
+				float sum = 0.0;
+				for (k = 0; k < a_width; k ++) sum += a[j*a_width + k] * b[k*b_width + i];
+				self[j*b_width + i] = sum;
+			}
 	`}
 end
