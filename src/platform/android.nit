@@ -173,7 +173,7 @@ android {
         }
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                arguments "-DANDROID_TOOLCHAIN=gcc"
             }
         }
     }
@@ -307,7 +307,7 @@ set(CMAKE_USE_PTHREADS_INIT TRUE)
 add_definitions("-DGC_DONT_DEFINE_LINK_MAP")
 
 ## Silence warning
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-tautological-pointer-compare")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
 add_subdirectory(${lib_src_DIR} ${lib_build_DIR} )
 include_directories(${lib_src_DIR}/include)
