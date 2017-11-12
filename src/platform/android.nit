@@ -299,7 +299,7 @@ set(lib_build_DIR ../libgc/outputs)
 file(MAKE_DIRECTORY ${lib_build_DIR})
 
 ## Config
-add_definitions("-DGC_PTHREADS")
+add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA")
 set(enable_threads TRUE)
 set(CMAKE_USE_PTHREADS_INIT TRUE)
 
