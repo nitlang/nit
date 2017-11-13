@@ -46,6 +46,8 @@ end
 class InheritanceGraph
 	super ModelVisitor
 
+	autoinit center, view, filter
+
 	# MEntity at the center of this graph
 	var center: MEntity
 

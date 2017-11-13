@@ -38,8 +38,8 @@ private class RTAMetricsPhase
 		out.mkdir
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = new ModelView(model, mainmodule)
-		model_view.min_visibility = protected_visibility
+		var filter = new ModelFilter(min_visibility = protected_visibility)
+		var model_view = new ModelView(model, mainmodule, filter)
 
 		print toolcontext.format_h1("\n# RTA metrics")
 

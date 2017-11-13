@@ -25,6 +25,8 @@ import model_visitor
 class ModelView
 	super ModelVisitor
 
+	autoinit(model, mainmodule, filter)
+
 	# The model to view through `self`.
 	var model: Model
 
@@ -120,14 +122,6 @@ class ModelView
 		return res
 	end
 
-	private fun init_visitor(v: ModelVisitor) do
-		v.min_visibility = self.min_visibility
-		v.include_fictive = self.include_fictive
-		v.include_empty_doc = self.include_empty_doc
-		v.include_attribute = self.include_attribute
-		v.include_test = self.include_test
-	end
-
 	# Searches the MEntity that matches `full_name`.
 	fun mentity_by_full_name(full_name: String): nullable MEntity do
 		for mentity in mentities do
@@ -139,7 +133,7 @@ class ModelView
 	# Build an concerns tree with from `self`
 	fun to_tree: MEntityTree do
 		var v = new ModelTreeVisitor
-		init_visitor(v)
+		v.filter = self.filter
 		for mpackage in mpackages do
 			v.enter_visit(mpackage)
 		end
@@ -178,7 +172,6 @@ class ModelTreeVisitor
 end
 
 redef class MEntity
-
 	private fun accept_namespace_visitor(v: LookupNamespaceVisitor) do
 		if v.parts.is_empty then return
 		if name != v.parts.first then return

@@ -65,8 +65,12 @@ toolcontext.run_global_phases(mmodules)
 var mainmodule = toolcontext.make_main_module(mmodules)
 
 # Build index
+var filters = new ModelFilter(
+	private_visibility,
+	accept_fictive = false,
+	accept_test = false)
+var view = new ModelView(model, mainmodule, filters)
 var index = new ModelIndex
-var view = new ModelView(model, mainmodule)
 for mentity in view.mentities do
 	if mentity isa MClassDef or mentity isa MPropDef then continue
 	index.index(mentity)

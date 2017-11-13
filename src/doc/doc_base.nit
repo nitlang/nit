@@ -28,6 +28,8 @@ import model::model_views
 class DocModel
 	super ModelView
 
+	autoinit model, mainmodule, filter
+
 	# `DocPage` composing the documentation associated to their ids.
 	#
 	# This is where `DocPhase` store and access pages to produce documentation.

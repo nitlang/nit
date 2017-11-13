@@ -41,9 +41,16 @@ private class Nitdoc
 	super Phase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		var doc = new DocModel(mainmodule.model, mainmodule)
-		if not toolcontext.opt_private.value then doc.min_visibility = protected_visibility
-		if not toolcontext.opt_no_attributes.value then doc.include_attribute = false
+		var min_visibility = private_visibility
+		if not toolcontext.opt_private.value then min_visibility = protected_visibility
+		var accept_attribute = true
+		if toolcontext.opt_no_attributes.value then accept_attribute = false
+
+		var filters = new ModelFilter(
+			min_visibility,
+			accept_attribute = accept_attribute,
+			accept_fictive = false)
+		var doc = new DocModel(mainmodule.model, mainmodule, filters)
 
 		var phases = [
 			new IndexingPhase(toolcontext, doc),
