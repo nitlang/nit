@@ -1,7 +1,7 @@
 NITC=../../bin/nitc
 NITLS=../../bin/nitls
 
-all: bin/calculator bin/test
+all: bin/calculator bin/scientific bin/test
 
 bin/calculator: $(shell ${NITLS} -M src/calculator.nit -m linux) ${NITC}
 	mkdir -p bin
