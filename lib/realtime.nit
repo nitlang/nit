@@ -44,7 +44,7 @@ void clock_gettime(clock_t clock_name, struct timespec *ts) {
 `}
 
 # Elapsed time representation.
-extern class Timespec `{struct timespec*`}
+private extern class Timespec `{struct timespec*`}
 
 	# Init a new Timespec from `s` seconds and `ns` nanoseconds.
 	new ( s, ns : Int ) `{
@@ -143,13 +143,15 @@ class Clock
 	# TODO use less mallocs
 
 	# Time at creation
-	protected var time_at_beginning = new Timespec.monotonic_now
+	private var time_at_beginning = new Timespec.monotonic_now
 
 	# Time at last time a lapse method was called
-	protected var time_at_last_lapse = new Timespec.monotonic_now
+	private var time_at_last_lapse = new Timespec.monotonic_now
+
+	private var temp = new Timespec.monotonic_now
 
 	# Smallest time frame reported by clock
-	fun resolution: Timespec `{
+	private fun resolution: Timespec `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
 #if defined(__MACH__) && !defined(CLOCK_REALTIME)
 		clock_serv_t cclock;
