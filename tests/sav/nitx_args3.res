@@ -1,9 +1,31 @@
 
-[1m[34m# [m[m[1m[34mbase_simple3[m[m
-[1m[30mpackage base_simple3[m[m
+Features for `base_simple3::base_simple3`:
 
-    [1m[32mpackage base_simple3[m[m
-    [1m[30mbase_simple3.nit:17,1--66,13[m[m
+ + base_simple3$A
+   class A
+   base_simple3.nit:29,1--32,3
 
+ + base_simple3$B
+   class B
+   base_simple3.nit:34,1--42,3
 
+ + base_simple3$Bool
+   enum Bool
+   base_simple3.nit:22,1--23,3
+
+ + base_simple3$C
+   class C
+   base_simple3.nit:44,1--47,3
+
+ + base_simple3$Int
+   enum Int
+   base_simple3.nit:25,1--27,3
+
+ + base_simple3$Object
+   interface Object
+   base_simple3.nit:19,1--20,3
+
+ + base_simple3$Sys
+   class Sys
+   base_simple3.nit:49,1--19
 
