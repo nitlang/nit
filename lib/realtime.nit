@@ -86,6 +86,18 @@ private extern class Timespec `{struct timespec*`}
 		return tv;
 	`}
 
+	# Set `self` to `a` - `b`
+	fun minus(a, b: Timespec) `{
+		time_t s = a->tv_sec - b->tv_sec;
+		long ns = a->tv_nsec - b->tv_nsec;
+		if (ns < 0) {
+			s -= 1;
+			ns += 1000000000l;
+		}
+		self->tv_sec = s;
+		self->tv_nsec = ns;
+	`}
+
 	# Number of whole seconds of elapsed time.
 	fun sec : Int `{
 		return self->tv_sec;
@@ -171,40 +183,40 @@ class Clock
 	# Seconds since the creation of this instance
 	fun total: Float
 	do
-		var now = new Timespec.monotonic_now
-		var diff = now - time_at_beginning
-		var r = diff.to_f
-		diff.free
-		now.free
-		return r
+		var now = temp
+		now.update
+		now.minus(now, time_at_beginning)
+		return now.to_f
 	end
 
 	# Seconds since the last call to `lapse`
 	fun lapse: Float
 	do
-		var nt = new Timespec.monotonic_now
-		var dt = nt - time_at_last_lapse
-		var r = dt.to_f
-		dt.free
-		time_at_last_lapse.free
-		time_at_last_lapse = nt
+		var time_at_last_lapse = time_at_last_lapse
+		var now = temp
+		now.update
+		time_at_last_lapse.minus(now, time_at_last_lapse)
+		var r = time_at_last_lapse.to_f
+
+		self.temp = time_at_last_lapse
+		self.time_at_last_lapse = now
+
 		return r
 	end
 
 	# Seconds since the last call to `lapse`, without resetting the lapse counter
 	fun peek_lapse: Float
 	do
-		var nt = new Timespec.monotonic_now
-		var dt = nt - time_at_last_lapse
-		var r = dt.to_f
-		nt.free
-		dt.free
-		return r
+		var now = temp
+		now.update
+		now.minus(now, time_at_last_lapse)
+		return now.to_f
 	end
 
 	redef fun finalize_once
 	do
 		time_at_beginning.free
 		time_at_last_lapse.free
+		temp.free
 	end
 end
