@@ -327,6 +327,10 @@ private extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 		return self.hasAlpha();
 	`}
 
+	fun recycle in "Java" `{
+		self.recycle();
+	`}
+
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
 		Sys sys = NativeBitmap_sys(self);
