@@ -378,19 +378,41 @@ target_link_libraries(nit_app gc-lib
 		# Generate AndroidManifest.xml
 
 		# Is there an icon?
-		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]
-		var icon_available = false
+		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi", "anydpi", "anydpi-v26"]
+		var icon_name = null
+		var has_round = false
+
 		for res in resolutions do
-			var path = project_root / "android/res/drawable-{res}/icon.png"
-			if path.file_exists then
-				icon_available = true
+			# New style mipmap
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher_round.png".file_exists then
+				has_round = true
+			end
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher.png".file_exists then
+				icon_name = "@mipmap/ic_launcher"
 				break
+			end
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher.xml".file_exists then
+				icon_name = "@mipmap/ic_launcher"
+				break
+			end
+		end
+		if icon_name == null then
+			# Old style drawable-hdpi/icon.png
+			for res in resolutions do
+				var path = project_root / "android/res/drawable-{res}/icon.png"
+				if path.file_exists then
+					icon_name = "@drawable/icon"
+					break
+				end
 			end
 		end
 
 		var icon_declaration
-		if icon_available then
-			icon_declaration = "android:icon=\"@drawable/icon\""
+		if icon_name != null then
+			icon_declaration = "android:icon=\"{icon_name}\""
+			if app_target_api >= 25 and has_round then
+				icon_declaration += "\n\t\tandroid:roundIcon=\"@mipmap/ic_launcher_round\""
+			end
 		else icon_declaration = ""
 
 		# TODO android:roundIcon
