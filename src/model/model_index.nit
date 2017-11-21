@@ -29,8 +29,7 @@
 #
 # ~~~nitish
 # var index = new ModelIndex
-# var view = new ModelView(model, mainmodule)
-# for mentity in view.mentities do
+# for mentity in model.collect_mentities do
 #	index.index(mentity)
 # end
 # ~~~
@@ -55,8 +54,7 @@
 #
 # ~~~nitish
 # var index = new ModelIndex
-# var view = new ModelView(model, mainmodule)
-# for mentity in view.mentities do
+# for mentity in model.collect_mentities do
 #	# We don't really care about definitions
 #	if mentity isa MClassDef or mentity isa MPropDef then continue
 #	index.index(mentity)
@@ -127,15 +125,15 @@
 # ~~~
 module model_index
 
-import model::model_views
+import model::model_collect
 import trees::trie
 
-redef class ModelView
+redef class Model
 
 	# Keep a direct link to mentities by full name to speed up `mentity_from_uri`
 	var mentities_by_full_name: HashMap[String, MEntity] is lazy do
 		var mentities_by_full_name = new HashMap[String, MEntity]
-		for mentity in mentities do
+		for mentity in collect_mentities do
 			mentities_by_full_name[mentity.full_name] = mentity
 		end
 		return mentities_by_full_name
@@ -144,23 +142,29 @@ redef class ModelView
 	# ModelIndex used to perform searches
 	var index: ModelIndex is lazy do
 		var index = new ModelIndex
-		for mentity in mentities do
+		for mentity in collect_mentities do
 			if mentity isa MClassDef or mentity isa MPropDef then continue
 			index.index mentity
 		end
 		return index
 	end
 
-	redef fun mentities_by_name(name) do
+	redef fun mentities_by_name(name, filter) do
+		var res = new Array[MEntity]
 		if index.name_prefixes.has_key(name) then
-			return index.name_prefixes[name]
+			for mentity in index.name_prefixes[name] do
+				if filter == null or filter.accept_mentity(mentity) then
+					res.add mentity
+				end
+			end
 		end
-		return new Array[MEntity]
+		return res
 	end
 
-	redef fun mentity_by_full_name(full_name) do
+	redef fun mentity_by_full_name(full_name, filter) do
 		if mentities_by_full_name.has_key(full_name) then
-			return mentities_by_full_name[full_name]
+			var mentity = mentities_by_full_name[full_name]
+			if filter == null or filter.accept_mentity(mentity) then return mentity
 		end
 		return null
 	end
@@ -175,7 +179,7 @@ redef class ModelView
 
 	# Search mentities based on a `query` string
 	#
-	# Lookup the view index for anything matching `query` and return `limit` results.
+	# Lookup the index for anything matching `query` and return `limit` results.
 	#
 	# The algorithm used is the following:
 	# 1- lookup by name prefix
@@ -228,8 +232,7 @@ end
 # ~~~nitish
 # # Build index
 # var index = new ModelIndex
-# var view = new ModelView(model, mainmodule)
-# for mentity in view.mentities do
+# for mentity in model.collect_mentities do
 #	if mentity isa MClassDef or mentity isa MPropDef then continue
 #	index.index(mentity)
 # end
