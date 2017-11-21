@@ -176,7 +176,7 @@ loop
 
 	# An error
 	if n isa AError then
-		print "{n.location.colored_line("0;31")}: {n.message}"
+		modelbuilder.error(n, n.message)
 		continue
 	end
 
