@@ -1297,6 +1297,92 @@
 	"redef_mpropdefs": []
 }
 {
+	"name": "MyGame",
+	"class_name": "MClassDef",
+	"full_name": "test_prog$MyGame",
+	"mdoc": {
+		"content": "This is an example of how to implement the Game interface",
+		"location": {
+			"column_end": 0,
+			"column_start": 1,
+			"line_end": 20,
+			"line_start": 19,
+			"file": "test_location"
+		}
+	},
+	"visibility": "public",
+	"modifiers": ["public", "class"],
+	"location": {
+		"column_end": 3,
+		"column_start": 1,
+		"line_end": 32,
+		"line_start": 19,
+		"file": "test_location"
+	},
+	"is_intro": true,
+	"mparameters": [],
+	"mmodule": {
+		"full_name": "test_prog::game_examples"
+	},
+	"mclass": {
+		"full_name": "test_prog::MyGame"
+	},
+	"mpropdefs": [{
+		"full_name": "test_prog$MyGame$_computer_characters"
+	}, {
+		"full_name": "test_prog$MyGame$_player_characters"
+	}, {
+		"full_name": "test_prog$MyGame$Game::computer_characters"
+	}, {
+		"full_name": "test_prog$MyGame$computer_characters="
+	}, {
+		"full_name": "test_prog$MyGame$Game::pause_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::player_characters"
+	}, {
+		"full_name": "test_prog$MyGame$player_characters="
+	}, {
+		"full_name": "test_prog$MyGame$Game::start_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::stop_game"
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::game_examples::MyGame::_computer_characters"
+	}, {
+		"full_name": "test_prog::game_examples::MyGame::_player_characters"
+	}, {
+		"full_name": "test_prog::MyGame::computer_characters="
+	}, {
+		"full_name": "test_prog::MyGame::player_characters="
+	}],
+	"intro": {
+		"full_name": "test_prog$MyGame"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"intro_mpropdefs": [{
+		"full_name": "test_prog$MyGame$_computer_characters"
+	}, {
+		"full_name": "test_prog$MyGame$_player_characters"
+	}, {
+		"full_name": "test_prog$MyGame$computer_characters="
+	}, {
+		"full_name": "test_prog$MyGame$player_characters="
+	}],
+	"redef_mpropdefs": [{
+		"full_name": "test_prog$MyGame$Game::computer_characters"
+	}, {
+		"full_name": "test_prog$MyGame$Game::pause_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::player_characters"
+	}, {
+		"full_name": "test_prog$MyGame$Game::start_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::stop_game"
+	}]
+}
+{
 	"name": "Starter",
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Starter",

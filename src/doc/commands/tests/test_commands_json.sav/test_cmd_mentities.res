@@ -106,6 +106,20 @@
 			"file": "test_location"
 		}
 	}, {
+		"name": "game_examples",
+		"class_name": "MModule",
+		"full_name": "test_prog::game_examples",
+		"mdoc": null,
+		"visibility": "public",
+		"modifiers": ["module"],
+		"location": {
+			"column_end": 3,
+			"column_start": 1,
+			"line_end": 32,
+			"line_start": 15,
+			"file": "test_location"
+		}
+	}, {
 		"name": "platform",
 		"class_name": "MModule",
 		"full_name": "test_prog::platform",

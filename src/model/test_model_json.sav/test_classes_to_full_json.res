@@ -1333,6 +1333,83 @@
 	}]
 }
 {
+	"name": "MyGame",
+	"class_name": "MClass",
+	"full_name": "test_prog::MyGame",
+	"mdoc": {
+		"content": "This is an example of how to implement the Game interface",
+		"location": {
+			"column_end": 0,
+			"column_start": 1,
+			"line_end": 20,
+			"line_start": 19,
+			"file": "test_location"
+		}
+	},
+	"visibility": "public",
+	"modifiers": ["public", "class"],
+	"location": {
+		"column_end": 3,
+		"column_start": 1,
+		"line_end": 32,
+		"line_start": 19,
+		"file": "test_location"
+	},
+	"mparameters": [],
+	"intro": {
+		"full_name": "test_prog$MyGame"
+	},
+	"intro_mmodule": {
+		"full_name": "test_prog::game_examples"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"mclassdefs": [{
+		"full_name": "test_prog$MyGame"
+	}],
+	"all_mproperties": [{
+		"full_name": "test_prog::game_examples::MyGame::_computer_characters"
+	}, {
+		"full_name": "test_prog::game_examples::MyGame::_player_characters"
+	}, {
+		"full_name": "test_prog::Game::computer_characters"
+	}, {
+		"full_name": "test_prog::MyGame::computer_characters="
+	}, {
+		"full_name": "test_prog::Game::pause_game"
+	}, {
+		"full_name": "test_prog::Game::player_characters"
+	}, {
+		"full_name": "test_prog::MyGame::player_characters="
+	}, {
+		"full_name": "test_prog::Game::start_game"
+	}, {
+		"full_name": "test_prog::Game::stop_game"
+	}],
+	"intro_mproperties": [{
+		"full_name": "test_prog::game_examples::MyGame::_computer_characters"
+	}, {
+		"full_name": "test_prog::game_examples::MyGame::_player_characters"
+	}, {
+		"full_name": "test_prog::MyGame::computer_characters="
+	}, {
+		"full_name": "test_prog::MyGame::player_characters="
+	}],
+	"redef_mproperties": [{
+		"full_name": "test_prog::Game::computer_characters"
+	}, {
+		"full_name": "test_prog::Game::pause_game"
+	}, {
+		"full_name": "test_prog::Game::player_characters"
+	}, {
+		"full_name": "test_prog::Game::start_game"
+	}, {
+		"full_name": "test_prog::Game::stop_game"
+	}],
+	"parents": []
+}
+{
 	"name": "Starter",
 	"class_name": "MClass",
 	"full_name": "test_prog::Starter",

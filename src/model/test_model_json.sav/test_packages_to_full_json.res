@@ -25,6 +25,8 @@
 		"full_name": "test_prog>"
 	},
 	"mgroups": [{
+		"full_name": "test_prog>examples>"
+	}, {
 		"full_name": "test_prog>game>"
 	}, {
 		"full_name": "test_prog>platform>"
