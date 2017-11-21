@@ -154,10 +154,9 @@ class CustomTexture
 	# The argument `color` should be an array of up to 4 floats (RGBA).
 	# If `color` has less than 4 items, the missing items are replaced by 1.0.
 	#
-	# Require: `not loaded and x < width.to_i and y < height.to_i`
+	# Require: `x < width.to_i and y < height.to_i`
 	fun []=(x, y: Int, color: Array[Float])
 	do
-		assert not loaded else print_error "{class_name}::[]= already loaded"
 		assert x < width.to_i and y < height.to_i else print_error "{class_name}::[] out of bounds"
 
 		# Simple conversion from [0.0..1.0] to [0..255]
@@ -166,18 +165,16 @@ class CustomTexture
 
 		var offset = 4*(x + y*width.to_i)
 		for i in [0..4[ do cpixels[offset+i] = bytes[i]
+
+		loaded = false
 	end
 
 	# Overwrite all pixels with `color`, return `self`
 	#
 	# The argument `color` should be an array of up to 4 floats (RGBA).
 	# If `color` has less than 4 items, the missing items are replaced by 1.0.
-	#
-	# Require: `not loaded`
 	fun fill(color: Array[Float]): SELF
 	do
-		assert not loaded else print_error "{class_name}::fill already loaded"
-
 		# Simple conversion from [0.0..1.0] to [0..255]
 		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
 		while bytes.length < 4 do bytes.add 255u8
@@ -190,6 +187,7 @@ class CustomTexture
 			end
 		end
 
+		loaded = false
 		return self
 	end
 
