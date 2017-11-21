@@ -78,10 +78,11 @@ redef class App
 		glDepthMask true
 		perfs["gamnit depth particles"].add frame_core_depth_clock.lapse
 
+		# Stop using the dynamic resolution before drawing UI sprites
+		frame_core_dynamic_resolution_after display
+
 		frame_core_ui_sprites display
 		perfs["gamnit depth ui_sprites"].add frame_core_depth_clock.lapse
-
-		frame_core_dynamic_resolution_after display
 
 		# Debug, show the light point of view
 		#frame_core_shadow_debug display
