@@ -22,6 +22,7 @@ module nitin
 import nitc::interpreter
 import nitc::frontend
 import nitc::parser_util
+intrude import nitc::scope
 
 redef class ToolContext
 
@@ -120,6 +121,62 @@ redef class ToolContext
 	end
 end
 
+redef class AMethPropdef
+	var injected_variables: nullable Map[Variable, Instance] = null is writable
+	var new_variables: nullable Array[Variable] = null
+
+	redef fun accept_scope_visitor(v)
+	do
+		var injected_variables = self.injected_variables
+		if injected_variables == null then
+			super
+			return
+		end
+
+		# Inject main variables in the initial scope
+		var scope = v.scopes.first
+		for variable in injected_variables.keys do
+			scope.variables[variable.name] = variable
+		end
+
+		super
+
+		# Gather new top-level variables as main variables
+		scope = v.scopes.first
+		var new_variables = new Array[Variable]
+		for variable in scope.variables.values do
+			if not injected_variables.has_key(variable) then
+				new_variables.add(variable)
+			end
+		end
+		self.new_variables = new_variables
+	end
+
+	redef fun call_commons(v, m, a, f)
+	do
+		var injected_variables = self.injected_variables
+		if injected_variables == null then return super
+
+		# Inject main variables in the frame
+		assert f isa InterpreterFrame
+		for variable, i in injected_variables do
+			f.map[variable] = i
+		end
+
+		var res = super
+
+		# Update the values of the variables
+		for variable in injected_variables.keys do
+			injected_variables[variable] = f.map[variable]
+		end
+		# Retrieve the values of the new main variables
+		for variable in new_variables.as(not null) do
+			injected_variables[variable] = f.map[variable]
+		end
+
+		return res
+	end
+end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -154,6 +211,8 @@ assert mainobj != null
 var sys_type = mainobj.mtype.as(MClassType)
 var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
 assert mainprop != null
+
+var main_variables = new Map[Variable, Instance]
 
 var l = 0
 loop
@@ -194,6 +253,7 @@ loop
 	if amodule.n_classdefs.not_empty and amodule.n_classdefs.last isa AMainClassdef then
 		main_method = amodule.n_classdefs.last.n_propdefs.first
 		assert main_method isa AMethPropdef
+		main_method.injected_variables = main_variables
 	end
 
 	modelbuilder.run_phases
