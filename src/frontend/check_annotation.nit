@@ -104,6 +104,12 @@ ldflags
 light_ffi
 
 platform
+
+test
+before
+before_all
+after
+after_all
 """
 
 	# Efficient set build from `primtives_annotations_list`
