@@ -28,9 +28,12 @@ redef class ToolContext
 	# --no-prompt
 	var opt_no_prompt = new OptionBool("Disable writing a prompt.", "--no-prompt")
 
+	# --source-name
+	var opt_source_name = new OptionString("Set a name for the input source.", "--source-name")
+
 	redef init do
 		super
-		option_context.add_option(opt_no_prompt)
+		option_context.add_option(opt_no_prompt, opt_source_name)
 	end
 
 	# Parse a full module given as a string
@@ -38,7 +41,8 @@ redef class ToolContext
 	# Return a AModule or a AError
 	fun p_module(string: String): ANode
 	do
-		var source = new SourceFile.from_string("", string)
+		var source_name = opt_source_name.value or else ""
+		var source = new SourceFile.from_string(source_name, string)
 		var lexer = new Lexer(source)
 		var parser = new Parser(lexer)
 		var tree = parser.parse
