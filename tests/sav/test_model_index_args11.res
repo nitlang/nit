@@ -1,6 +1,6 @@
 # Dwarves
 
- * 13: List (test_prog::List)
+ * 13: Int (test_prog::Int)
  * 12: Sys (test_prog::Sys)
  * 8: excluded (excluded>)
  * 7: excluded (excluded)
