@@ -42,6 +42,7 @@ redef class ToolContext
 	fun p_module(string: String): ANode
 	do
 		var source_name = opt_source_name.value or else ""
+		string = "\n" * last_line + string
 		var source = new SourceFile.from_string(source_name, string)
 		var lexer = new Lexer(source)
 		var parser = new Parser(lexer)
@@ -69,6 +70,9 @@ redef class ToolContext
 	# With the default implementation, the history is dropped
 	fun readline_add_history(text: String) do end
 
+	# The last line number read by `i_parse`
+	var last_line = 0
+
 	# Parse the input of the user as a module
 	fun i_parse(prompt: String): nullable ANode
 	do
@@ -83,7 +87,14 @@ redef class ToolContext
 				s = readline(prompt)
 			end
 			if s == null then return null
-			if s == "" then continue
+			if s == "" then
+				if oldtext != "" then
+					oldtext += "\n"
+				else
+					last_line += 1
+				end
+				continue
+			end
 
 			if s.chars.first == ':' then
 				var res = new TString
@@ -102,6 +113,7 @@ redef class ToolContext
 				continue
 			end
 
+			last_line = n.location.file.line_starts.length - 1
 			readline_add_history(text.chomp)
 			return n
 		end
