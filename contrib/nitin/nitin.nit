@@ -189,6 +189,13 @@ loop
 	l += 1
 	var newmodule = modelbuilder.load_rt_module(mainmodule, amodule, "input-{l}")
 	if newmodule == null then continue
+
+	var main_method = null
+	if amodule.n_classdefs.not_empty and amodule.n_classdefs.last isa AMainClassdef then
+		main_method = amodule.n_classdefs.last.n_propdefs.first
+		assert main_method isa AMethPropdef
+	end
+
 	modelbuilder.run_phases
 	if not toolcontext.check_errors then
 		toolcontext.error_count = 0
@@ -199,7 +206,7 @@ loop
 	interpreter.mainmodule = mainmodule
 
 	# Run the main if the AST contains a main
-	if amodule.n_classdefs.not_empty and amodule.n_classdefs.last isa AMainClassdef then
+	if main_method != null then
 		do
 			interpreter.catch_count += 1
 			interpreter.send(mainprop, [mainobj])
