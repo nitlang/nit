@@ -1,5 +1,6 @@
+Empty README for group `examples` (readme-warning)
 Empty README for group `excluded` (readme-warning)
-Errors: 0. Warnings: 1.
+Errors: 0. Warnings: 2.
 MGroupPage excluded
 	# excluded.section
 		## excluded.intro
@@ -32,6 +33,8 @@ ReadmePage excluded
 
 ReadmePage test_prog
 	# mdarticle-0
+
+ReadmePage examples
 
 ReadmePage game
 	# mdarticle-0
@@ -126,6 +129,78 @@ MPropertyPage main
 	# main.section
 		## test_prog-__Sys__main.intro
 
+MGroupPage examples
+	# examples.section
+		## test_prog__examples.intro
+		## test_prog__examples.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-.definition
+				#### test_prog__examples-.intros_redefs
+					##### list.group
+						###### test_prog__examples-.intros
+						###### test_prog__examples-.redefs
+
+MModulePage game_examples
+	# game_examples.section
+		## test_prog__examples-.intro
+		## test_prog__examples-.importation
+			### test_prog__examples-.graph
+			### list.group
+				#### test_prog__examples-.imports
+				#### test_prog__examples-.clients
+		## test_prog__examples-.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame.definition-list
+				#### test_prog__examples-__MyGame.definition
+					##### test_prog__examples-__MyGame.intros_redefs
+						###### list.group
+							####### test_prog__examples-__MyGame.intros
+							####### test_prog__examples-__MyGame.redefs
+
+MClassPage MyGame
+	# MyGame.section
+		## test_prog__examples-__MyGame.intro
+		## test_prog__examples-__MyGame.inheritance
+			### test_prog__examples-__MyGame.graph
+			### list.group
+				#### test_prog__examples-__MyGame.parents
+				#### test_prog__examples-__MyGame.ancestors
+				#### test_prog__examples-__MyGame.children
+				#### test_prog__examples-__MyGame.descendants
+		## test_prog__examples-__MyGame.constructors
+			### test_prog__platform-__Object__init.definition
+		## test_prog__examples-__MyGame.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame__computer_characters.definition
+				#### test_prog__examples-__MyGame__computer_characters.lin
+			### test_prog__examples-__MyGame__computer_characters_61d.definition
+			### test_prog__examples-__MyGame__pause_game.definition
+				#### test_prog__examples-__MyGame__pause_game.lin
+			### test_prog__examples-__MyGame__player_characters.definition
+				#### test_prog__examples-__MyGame__player_characters.lin
+			### test_prog__examples-__MyGame__player_characters_61d.definition
+			### test_prog__examples-__MyGame__start_game.definition
+				#### test_prog__examples-__MyGame__start_game.lin
+			### test_prog__examples-__MyGame__stop_game.definition
+				#### test_prog__examples-__MyGame__stop_game.lin
+
+MPropertyPage computer_characters=
+	# computer_characters=.section
+		## test_prog__examples-__MyGame__computer_characters_61d.intro
+
+MPropertyPage player_characters=
+	# player_characters=.section
+		## test_prog__examples-__MyGame__player_characters_61d.intro
+
 MGroupPage game
 	# game.section
 		## test_prog__game.intro
@@ -186,22 +261,52 @@ MClassPage Game
 MPropertyPage computer_characters
 	# computer_characters.section
 		## test_prog__game-__Game__computer_characters.intro
+		## test_prog__game-__Game__computer_characters.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame__computer_characters.definition
 
 MPropertyPage pause_game
 	# pause_game.section
 		## test_prog__game-__Game__pause_game.intro
+		## test_prog__game-__Game__pause_game.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame__pause_game.definition
 
 MPropertyPage player_characters
 	# player_characters.section
 		## test_prog__game-__Game__player_characters.intro
+		## test_prog__game-__Game__player_characters.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame__player_characters.definition
 
 MPropertyPage start_game
 	# start_game.section
 		## test_prog__game-__Game__start_game.intro
+		## test_prog__game-__Game__start_game.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame__start_game.definition
 
 MPropertyPage stop_game
 	# stop_game.section
 		## test_prog__game-__Game__stop_game.intro
+		## test_prog__game-__Game__stop_game.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__examples.concern
+		## test_prog__examples-.concern
+			### test_prog__examples-__MyGame__stop_game.definition
 
 MGroupPage platform
 	# platform.section
@@ -1034,24 +1139,24 @@ MModulePage rpg
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
 
-Generated 99 pages
+Generated 105 pages
  list:
-  MPropertyPage: 58 (58.58%)
-  MClassPage: 20 (20.20%)
-  MModulePage: 9 (9.09%)
-  ReadmePage: 5 (5.05%)
-  MGroupPage: 5 (5.05%)
-  SearchPage: 1 (1.01%)
-  OverviewPage: 1 (1.01%)
-Found 185 mentities
+  MPropertyPage: 60 (57.14%)
+  MClassPage: 21 (20.00%)
+  MModulePage: 10 (9.52%)
+  ReadmePage: 6 (5.71%)
+  MGroupPage: 6 (5.71%)
+  SearchPage: 1 (0.95%)
+  OverviewPage: 1 (0.95%)
+Found 198 mentities
  list:
-  MMethodDef: 68 (36.75%)
-  MMethod: 57 (30.81%)
-  MClassDef: 22 (11.89%)
-  MClass: 20 (10.81%)
-  MModule: 9 (4.86%)
-  MGroup: 5 (2.70%)
-  MPackage: 2 (1.08%)
-  MVirtualTypeDef: 1 (0.54%)
-  MVirtualTypeProp: 1 (0.54%)
+  MMethodDef: 75 (37.87%)
+  MMethod: 59 (29.79%)
+  MClassDef: 23 (11.61%)
+  MClass: 21 (10.60%)
+  MModule: 10 (5.05%)
+  MGroup: 6 (3.03%)
+  MPackage: 2 (1.01%)
+  MVirtualTypeDef: 1 (0.50%)
+  MVirtualTypeProp: 1 (0.50%)
 quicksearch-list.js
