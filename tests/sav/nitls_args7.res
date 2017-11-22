@@ -1,4 +1,6 @@
 test_prog: Test program for model tools. (test_prog)
+|--examples (test_prog/examples)
+|  `--[1mgame_examples[m (test_prog/examples/game_examples.nit)
 |--game: Gaming group (test_prog/game)
 |  `--[1mgame[m: A game abstraction for RPG. (test_prog/game/game.nit)
 |--platform: Fictive Crappy Platform. (test_prog/platform)
