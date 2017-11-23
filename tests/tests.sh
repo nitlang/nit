@@ -636,7 +636,7 @@ END
 			echo 0.0 > "$ff.time.out"
 		elif [ -n "$isinteractive" ]; then
 			cat > "$ff.bin" <<END
-exec $NITC --no-color --no-prompt $OPT $includes < $(printf '%q' "$i") "\$@"
+exec $NITC --no-color --no-prompt --source-name $(printf '%q' "$i") $OPT $includes < $(printf '%q' "$i") "\$@"
 END
 			chmod +x "$ff.bin"
 			> "$ff.cmp.err"

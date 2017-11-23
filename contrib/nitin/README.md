@@ -12,10 +12,10 @@ This tool is outside src/ because:
 * use importation/refinement to handle incremental execution (so basically everything works out of the box)
 * maintain an interpreter and live objects (the model grows but the interpreter and runtime data are reused)
 * runtime errors/aborts return to the interactive loop
+* top-level variables are preserved but are only visible at the top level
 
 Main missing features
 
-* top-level variables are local
 * FFI is strange
 * No model/object inspection
 
@@ -30,19 +30,26 @@ The rest is the output.
 $ nitin
 --> print 5+2
 7
+--> var a = 5
+--> print a + 3
+8
 ~~~
 
 ### Complex and control statements
 
 ~~~raw
+-->var sum=0
 -->for i in [0..5[ do
 ...print i
+...sum += i
 ...end
 0
 1
 2
 3
 4
+-->print sum
+10
 ~~~
 
 You can use `do` blocks to delay the execution and control the scope of variables.
@@ -93,8 +100,15 @@ bye
 
 ### Class refinement
 
-Already instantiated objects gain the new methods, attributes and specializations.
-However, the new attributes are left uninitialized (default values or init are not recomputed on existing objects)
+Class refinement is available
+
+~~~raw
+-->redef class String
+...fun foo: String do return self + "foo"
+...end
+-->print "hello".foo
+hellofoo
+~~~
 
 Top-level methods automatically refine Sys.
 
@@ -110,15 +124,40 @@ Top-level methods automatically refine Sys.
 I'm sys
 ~~~
 
-You can store global variables as attributes of Sys
+Already instantiated objects gain the new methods, attributes and specializations.
 
 ~~~raw
--->redef class Sys
-...var my_int: Int is writable
+-->class A
 ...end
--->my_int = 5
--->print my_int
-5
+-->var a = new A
+-->print a
+--><A:#561daea16660>
+-->redef class A
+...redef fun to_s do return "A"
+...end
+-->print a
+A
+~~~
+
+However, the new attributes are left uninitialized (default values or init are not recomputed on existing objects)
+
+~~~raw
+-->redef class A
+...var v = "foo"
+...redef fun to_s do return "A:{v}"
+...end
+--->print a
+Runtime error: Uninitialized attribute _v
+	redef fun to_s do return "A:{v}"
+	                             ^
+,---- Stack trace -- - -  -
+| input-6$A$to_s (13,30)
+| file$Sys$print (lib/core/file.nit:1694,19--29)
+| input-7$Sys$main (15,1--7)
+`------------------- - -  -
+-->a.v = "bar"
+-->print a
+A:bar
 ~~~
 
 ### Dynamic importation
