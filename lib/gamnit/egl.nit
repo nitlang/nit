@@ -110,6 +110,10 @@ redef class GamnitDisplay
 
 	redef fun flip
 	do
+		assert glGetError == gl_NO_ERROR
+
+		assert egl_display.is_valid
+
 		egl_display.swap_buffers(window_surface)
 	end
 end

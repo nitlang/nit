@@ -93,6 +93,8 @@ class SmoothMaterial
 		else
 			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
+
+		assert glGetError == gl_NO_ERROR
 	end
 
 	private fun setup_lights(actor: Actor, model: LeafModel, camera: Camera, program: BlinnPhongProgram)

@@ -84,7 +84,7 @@ end
 
 # 3D model composed of `Mesh` and `Material`, loaded from the assets folder by default
 #
-# Instances can be created at any time and must be loaded after or at the end of `on_create`.
+# Instances can be created at any time and must be loaded after or at the end of `create_scene`.
 # If loading fails, the model is replaced by `placeholder_model`.
 #
 # ~~~

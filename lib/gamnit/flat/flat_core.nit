@@ -417,10 +417,15 @@ redef class App
 	# Second performance clock for smaller operations
 	private var perf_clock_sprites = new Clock is lazy
 
-	redef fun on_create
+	redef fun create_gamnit
 	do
 		super
+		create_flat
+	end
 
+	# Prepare the flat framework services
+	fun create_flat
+	do
 		var display = display
 		assert display != null
 
@@ -459,10 +464,15 @@ redef class App
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
 		end
+
+		sprites.reset
+		ui_sprites.reset
 	end
 
 	redef fun on_stop
 	do
+		super
+
 		# Clean up
 		simple_2d_program.delete
 
@@ -532,6 +542,8 @@ redef class App
 
 		# draw
 		sprite_set.draw
+
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Draw world sprites from `sprites`
@@ -963,7 +975,7 @@ class SpriteSet
 		for sprite in sprites_to_remap do
 
 			# Skip if it was removed from this set after being modified
-			if sprite.context != self then continue
+			if sprite.sprite_set != self then continue
 
 			unmap_sprite sprite
 			map_sprite sprite
@@ -1003,6 +1015,23 @@ class SpriteSet
 		for c in contexts_items do c.destroy
 		contexts_map.clear
 		contexts_items.clear
+		sprites_to_remap.clear
+	end
+
+	private fun reset
+	do
+		for sprite in self do
+			sprite.context = null
+		end
+
+		for c in contexts_items do c.destroy
+		contexts_map.clear
+		contexts_items.clear
+		sprites_to_remap.clear
+
+		for sprite in self do
+			map_sprite sprite
+		end
 	end
 end
 

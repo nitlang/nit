@@ -64,7 +64,7 @@ redef class App
 	private var fx_explosion_ship = new Sound("sounds/explosion_ship.wav")
 	private var fx_explosion_asteroids = new Sound("sounds/explosion_asteroids.wav")
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 

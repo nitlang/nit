@@ -25,7 +25,7 @@
 #
 # ~~~
 # redef class App
-#     redef fun on_create
+#     redef fun create_scene
 #     do
 #         super
 #

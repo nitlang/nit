@@ -46,6 +46,13 @@ redef class App
 			accept_event gamnit_event
 		end
 	end
+
+	redef fun on_create
+	do
+		super
+		create_gamnit
+		create_scene
+	end
 end
 
 redef class GamnitDisplay

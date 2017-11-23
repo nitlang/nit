@@ -54,7 +54,7 @@ redef class App
 
 	private var perf_clock_dynamic_resolution = new Clock is lazy
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 

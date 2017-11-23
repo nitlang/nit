@@ -28,7 +28,7 @@ redef class App
 	# Bottom right corner
 	var corner = new Texture("corner.png")
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 

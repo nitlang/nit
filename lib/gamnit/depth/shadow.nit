@@ -52,7 +52,7 @@ redef class App
 
 	private var perf_clock_shadow = new Clock is lazy
 
-	redef fun on_create
+	redef fun create_gamnit
 	do
 		super
 

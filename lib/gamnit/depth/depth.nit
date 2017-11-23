@@ -25,13 +25,18 @@ import shadow
 
 redef class App
 
-	redef fun on_create
+	redef fun create_scene
 	do
-		super
-
 		# Move the camera back a bit
 		world_camera.reset_height(10.0)
 		world_camera.near = 0.1
+
+		super
+	end
+
+	redef fun create_gamnit
+	do
+		super
 
 		# Cull the invisible triangles in the back of the geometries
 		glCullFace gl_BACK
@@ -65,6 +70,7 @@ redef class App
 		for actor in actors do
 			for leaf in actor.model.leaves do
 				leaf.material.draw(actor, leaf, app.world_camera)
+				assert glGetError == gl_NO_ERROR else print_error "Gamnit error on material {leaf.material.class_name}"
 			end
 		end
 		perfs["gamnit depth actors"].add frame_core_depth_clock.lapse
@@ -74,7 +80,10 @@ redef class App
 
 		# Toggle writing to the depth buffer for particles effects
 		glDepthMask false
-		for system in particle_systems do system.draw
+		for system in particle_systems do
+			system.draw
+			assert glGetError == gl_NO_ERROR else print_error "OpenGL error in {system}"
+		end
 		glDepthMask true
 		perfs["gamnit depth particles"].add frame_core_depth_clock.lapse
 

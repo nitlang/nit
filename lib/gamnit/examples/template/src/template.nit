@@ -17,7 +17,7 @@ import gamnit::flat # The 2D API, use `gamnit::depth` for 3D
 
 redef class App
 
-	# Texture, loaded automatically at `on_create`
+	# Texture, loaded in `create_scene`
 	var texture = new Texture("fighter.png")
 
 	# Sound effect, lazy loaded at first use
@@ -26,7 +26,7 @@ redef class App
 	# Sprite, must be loaded in or after `on_create`
 	var sprite = new Sprite(texture, new Point3d[Float](0.0, 0.0, 0.0)) is lazy
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
@@ -52,7 +52,7 @@ redef class App
 		# Scale the ship so it is approximately 5 world units wide.
 		sprite.scale = 5.0 / texture.width
 
-		# Move the camera to show 10 world units on the Y axis at Z = 0.
+		# Move the camera to show 20 world units on the Y axis at Z = 0.
 		# The `sprite` should take approximately 1/4 of the height of the screen.
 		world_camera.reset_height 20.0
 

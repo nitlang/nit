@@ -20,7 +20,7 @@ import display
 # Texture composed of pixels, loaded from the assets folder by default
 #
 # Most textures should be created with `App` (as attributes)
-# for the method `on_create` to load them.
+# for the method `create_scene` to load them.
 #
 # ~~~
 # import gamnit::flat
@@ -29,9 +29,9 @@ import display
 #     # Create the texture object, it will be loaded automatically
 #     var texture = new Texture("path/in/assets.png")
 #
-#     redef fun on_create()
+#     redef fun create_scene()
 #     do
-#         # Let `on_create` load the texture
+#         # Let `create_scene` load the texture
 #         super
 #
 #         # Use the texture
@@ -41,7 +41,7 @@ import display
 # end
 # ~~~
 #
-# Otherwise, they can be loaded and error checked explicitly after `on_create`.
+# Otherwise, they can be loaded and error checked explicitly after `create_scene`.
 #
 # ~~~nitish
 # var texture = new Texture("path/in/assets.png")

@@ -20,7 +20,7 @@ import gamnit::virtual_gamepad
 import asteronits
 
 redef class App
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
