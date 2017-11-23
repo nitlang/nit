@@ -236,6 +236,7 @@ loop
 	# An error
 	if n isa AError then
 		modelbuilder.error(n, n.message)
+		toolcontext.check_errors
 		continue
 	end
 
