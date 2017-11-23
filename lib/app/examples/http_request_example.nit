@@ -56,7 +56,7 @@ class MyHttpRequest
 	redef fun after do win.button_request.enabled = true
 end
 
-# Simpe window with a label and a button
+# Simple window with a label and a button
 class HttpRequestClientWindow
 	super Window
 
@@ -81,11 +81,4 @@ class HttpRequestClientWindow
 	end
 end
 
-redef class App
-	redef fun on_create
-	do
-		# Create the main window
-		push_window new HttpRequestClientWindow
-		super
-	end
-end
+redef fun root_window do return new HttpRequestClientWindow
