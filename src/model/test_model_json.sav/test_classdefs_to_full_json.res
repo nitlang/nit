@@ -13,7 +13,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "interface"],
+	"modifiers": ["interface"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -79,7 +79,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -163,7 +163,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -235,7 +235,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 14,
 		"column_start": 1,
@@ -277,7 +277,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 16,
 		"column_start": 1,
@@ -319,7 +319,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 17,
 		"column_start": 1,
@@ -367,7 +367,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract class"],
+	"modifiers": ["abstract class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -467,7 +467,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -513,7 +513,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -559,7 +559,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -605,7 +605,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract class"],
+	"modifiers": ["abstract class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -705,7 +705,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -751,7 +751,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -843,7 +843,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -889,7 +889,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -1119,7 +1119,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "interface"],
+	"modifiers": ["interface"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -1167,7 +1167,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "interface"],
+	"modifiers": ["interface"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -1239,7 +1239,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "interface"],
+	"modifiers": ["interface"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -1302,7 +1302,7 @@
 	"full_name": "test_prog$Starter",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -1341,7 +1341,7 @@
 	"full_name": "test_prog$Sys",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 13,
 		"column_start": 1,

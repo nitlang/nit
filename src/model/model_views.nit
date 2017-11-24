@@ -130,6 +130,15 @@ class ModelView
 		return null
 	end
 
+	# Searches the MEntities that matches `full_name`.
+	fun mentities_by_name(name: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			if mentity.name == name then res.add mentity
+		end
+		return res
+	end
+
 	# Build an concerns tree with from `self`
 	fun to_tree: MEntityTree do
 		var v = new ModelTreeVisitor

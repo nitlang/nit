@@ -151,8 +151,7 @@ redef class ModelView
 		return index
 	end
 
-	# Find mentities by their `name`
-	fun mentities_by_name(name: String): Array[MEntity] do
+	redef fun mentities_by_name(name) do
 		if index.name_prefixes.has_key(name) then
 			return index.name_prefixes[name]
 		end

@@ -48,7 +48,12 @@ redef class MDoc
 		var syn = inline_proc.process(content.first)
 		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
 		return res
+	end
 
+	# Renders the synopsis as a HTML comment block.
+	var md_synopsis: Writable is lazy do
+		if content.is_empty then return ""
+		return content.first
 	end
 
 	# Renders the comment without the synopsis as a HTML comment block.
@@ -58,8 +63,19 @@ redef class MDoc
 		return lines_to_html(lines)
 	end
 
+	#
+	var md_comment: Writable is lazy do
+		if content.is_empty then return ""
+		var lines = content.to_a
+		lines.shift
+		return lines.join("\n")
+	end
+
 	# Renders the synopsis and the comment as a HTML comment block.
 	var html_documentation: Writable is lazy do return lines_to_html(content.to_a)
+
+	# Renders the synopsis and the comment as a HTML comment block.
+	var md_documentation: Writable is lazy do return lines_to_md(content.to_a)
 
 	# Renders markdown line as a HTML comment block.
 	private fun lines_to_html(lines: Array[String]): Writable do
@@ -92,7 +108,20 @@ redef class MDoc
 		res.add "</div>"
 		decorator.current_mdoc = null
 		return res
+	end
 
+	private fun lines_to_md(lines: Array[String]): Writable do
+		var res = new Template
+		if not lines.is_empty then
+			var syn = lines.first
+			if not syn.has_prefix("    ") and not syn.has_prefix("\t") and
+			  not syn.trim.has_prefix("#") then
+				lines.shift
+				res.add "# {syn}\n"
+			end
+		end
+		res.add lines.join("\n")
+		return res
 	end
 end
 

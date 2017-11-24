@@ -150,6 +150,7 @@ class MarkdownProcessor
 		parent.remove_surrounding_empty_lines
 		recurse(parent, false)
 		# output processed text
+		decorator.headlines.clear
 		return emit(parent.kind)
 	end
 

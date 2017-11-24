@@ -13,7 +13,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "type"],
+	"modifiers": ["type"],
 	"location": {
 		"column_end": 28,
 		"column_start": 2,
@@ -58,7 +58,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 37,
 		"column_start": 2,
@@ -112,7 +112,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 55,
 		"column_start": 2,
@@ -157,7 +157,7 @@
 	"full_name": "test_prog::Object::init",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "init"],
+	"modifiers": ["init"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
@@ -212,7 +212,7 @@
 	"full_name": "test_prog::Int::unary -",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 21,
 		"column_start": 2,
@@ -251,7 +251,7 @@
 	"full_name": "test_prog::Int::+",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 29,
 		"column_start": 2,
@@ -296,7 +296,7 @@
 	"full_name": "test_prog::Int::-",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 29,
 		"column_start": 2,
@@ -341,7 +341,7 @@
 	"full_name": "test_prog::Int::*",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 29,
 		"column_start": 2,
@@ -386,7 +386,7 @@
 	"full_name": "test_prog::Int::/",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 29,
 		"column_start": 2,
@@ -431,7 +431,7 @@
 	"full_name": "test_prog::Int::>",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 30,
 		"column_start": 2,
@@ -476,7 +476,7 @@
 	"full_name": "test_prog::Int::to_f",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 26,
 		"column_start": 2,
@@ -515,7 +515,7 @@
 	"full_name": "test_prog::Float::+",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 33,
 		"column_start": 2,
@@ -560,7 +560,7 @@
 	"full_name": "test_prog::Float::-",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 33,
 		"column_start": 2,
@@ -605,7 +605,7 @@
 	"full_name": "test_prog::Float::*",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 33,
 		"column_start": 2,
@@ -650,7 +650,7 @@
 	"full_name": "test_prog::Float::/",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 33,
 		"column_start": 2,
@@ -695,7 +695,7 @@
 	"full_name": "test_prog::Float::>",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "intern", "fun"],
+	"modifiers": ["intern", "fun"],
 	"location": {
 		"column_end": 32,
 		"column_start": 2,
@@ -773,7 +773,7 @@
 	"full_name": "test_prog::Career::strength_bonus",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 24,
 		"column_start": 2,
@@ -888,7 +888,7 @@
 	"full_name": "test_prog::Career::endurance_bonus",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 25,
 		"column_start": 2,
@@ -1003,7 +1003,7 @@
 	"full_name": "test_prog::Career::intelligence_bonus",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 28,
 		"column_start": 2,
@@ -1136,7 +1136,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 23,
 		"column_start": 2,
@@ -1278,7 +1278,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 24,
 		"column_start": 2,
@@ -1420,7 +1420,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 27,
 		"column_start": 2,
@@ -1562,7 +1562,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 15,
 		"column_start": 2,
@@ -1704,7 +1704,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 47,
 		"column_start": 2,
@@ -1752,7 +1752,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 47,
 		"column_start": 2,
@@ -1795,7 +1795,7 @@
 	"full_name": "test_prog::Character::quit",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 4,
 		"column_start": 2,
@@ -1865,7 +1865,7 @@
 	"full_name": "test_prog::Character::name",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 17,
 		"column_start": 2,
@@ -1980,7 +1980,7 @@
 	"full_name": "test_prog::Character::age",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 13,
 		"column_start": 2,
@@ -2095,7 +2095,7 @@
 	"full_name": "test_prog::Character::sex",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 14,
 		"column_start": 2,
@@ -2186,7 +2186,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 4,
 		"column_start": 2,
@@ -2234,7 +2234,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 4,
 		"column_start": 2,
@@ -2282,7 +2282,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 4,
 		"column_start": 2,
@@ -2330,7 +2330,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 51,
 		"column_start": 2,
@@ -2420,7 +2420,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 29,
 		"column_start": 2,
@@ -2520,7 +2520,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 27,
 		"column_start": 2,
@@ -2561,7 +2561,7 @@
 	"full_name": "test_prog::Combatable::hit_points",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 32,
 		"column_start": 2,
@@ -2611,7 +2611,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 64,
 		"column_start": 2,
@@ -2671,7 +2671,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 71,
 		"column_start": 2,
@@ -2731,7 +2731,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 38,
 		"column_start": 2,
@@ -2785,7 +2785,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 43,
 		"column_start": 2,
@@ -2833,7 +2833,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 51,
 		"column_start": 2,
@@ -2881,7 +2881,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 53,
 		"column_start": 2,
@@ -2929,7 +2929,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 27,
 		"column_start": 2,
@@ -2975,7 +2975,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 27,
 		"column_start": 2,
@@ -3021,7 +3021,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "abstract", "fun"],
+	"modifiers": ["abstract", "fun"],
 	"location": {
 		"column_end": 26,
 		"column_start": 2,
@@ -3058,7 +3058,7 @@
 	"full_name": "test_prog::Starter::start",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 17,
 		"column_start": 2,
@@ -3095,7 +3095,7 @@
 	"full_name": "test_prog::Sys::main",
 	"mdoc": null,
 	"visibility": "public",
-	"modifiers": ["public", "fun"],
+	"modifiers": ["fun"],
 	"location": {
 		"column_end": 13,
 		"column_start": 1,

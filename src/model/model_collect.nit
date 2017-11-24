@@ -394,17 +394,6 @@ redef class MModule
 
 	redef fun collect_modifiers do return super + ["module"]
 
-	# Collect all module ancestors of `self` (direct and transitive imports)
-	redef fun collect_ancestors(view) do
-		var res = new HashSet[MENTITY]
-		for mentity in in_importation.greaters do
-			if mentity == self then continue
-			if not view.accept_mentity(mentity) then continue
-			res.add mentity
-		end
-		return res
-	end
-
 	# Collect all modules directly imported by `self`
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
@@ -880,7 +869,9 @@ redef class MClassDef
 		if not is_intro then
 			res.add "redef"
 		else
-			res.add mclass.visibility.to_s
+			if mclass.visibility != public_visibility then
+				res.add mclass.visibility.to_s
+			end
 		end
 		res.add mclass.kind.to_s
 		return res
@@ -893,17 +884,6 @@ redef class MClassDef
 		end
 		mainmodule.linearize_mclassdefs(mclassdefs)
 		return mclassdefs
-	end
-
-	redef fun collect_ancestors(view) do
-		var res = new HashSet[MENTITY]
-		var hierarchy = self.in_hierarchy
-		if hierarchy == null then return res
-		for parent in hierarchy.greaters do
-			if parent == self or not view.accept_mentity(parent) then continue
-			res.add parent
-		end
-		return res
 	end
 
 	redef fun collect_parents(view) do
@@ -1042,7 +1022,9 @@ redef class MPropDef
 		if not is_intro then
 			res.add "redef"
 		else
-			res.add mproperty.visibility.to_s
+			if mproperty.visibility != public_visibility then
+				res.add mproperty.visibility.to_s
+			end
 		end
 		var mprop = self
 		if mprop isa MVirtualTypeDef then

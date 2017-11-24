@@ -334,6 +334,8 @@ end
 redef class DocSection
 	super BSComponent
 
+	redef fun css_classes do return new Array[String]
+
 	redef fun rendering do
 		if is_hidden then
 			addn "<a id=\"{html_id}\"></a>"
@@ -348,6 +350,8 @@ end
 
 redef class DocArticle
 	super BSComponent
+
+	redef fun css_classes do return new Array[String]
 
 	redef fun rendering do
 		if is_hidden then return
