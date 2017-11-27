@@ -64,6 +64,7 @@ in "C body" `{
 		global_jvm = vm;
 
 		// Invoke Nit system and main
+		int main(int argc, char ** argv);
 		main(0, NULL);
 
 		return JNI_VERSION_1_2;

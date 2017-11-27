@@ -152,6 +152,13 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 		}
 	`}
 	fun reset in "Java" `{ self.reset(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeMediaPlayer_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 # Sound Pool from Java, used to play sounds simultaneously
@@ -203,6 +210,13 @@ private extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	fun stop(stream_id: Int) in "Java" `{ self.stop((int)stream_id); `}
 	fun unload(sound_id: Int): Bool in "Java" `{ return self.unload((int)sound_id); `}
 	fun release in "Java" `{ self.release(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeSoundPool_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 
@@ -238,7 +252,7 @@ class SoundPool
 	# Stream priority
 	private var priority = 1
 
-	init do self.nsoundpool = new NativeSoundPool(max_streams, stream_type, src_quality)
+	init do self.nsoundpool = (new NativeSoundPool(max_streams, stream_type, src_quality)).new_global_ref
 
 	# Load the sound from an asset file descriptor
 	# this function is for advanced use
@@ -364,7 +378,7 @@ class MediaPlayer
 
 	# Create a new MediaPlayer, but no sound is attached, you'll need
 	# to use `load_sound` before using it
-	init do self.nmedia_player = new NativeMediaPlayer
+	init do self.nmedia_player = (new NativeMediaPlayer).new_global_ref
 
 	# Init the mediaplayer with a sound resource id
 	init from_id(context: NativeActivity, id: Int) do
@@ -656,14 +670,14 @@ redef class App
 	var default_soundpool: SoundPool is lazy do return new SoundPool
 
 	# Get the native audio manager
-	private fun audio_manager: NativeAudioManager import native_activity in "Java" `{
-		return (AudioManager)App_native_activity(self).getSystemService(Context.AUDIO_SERVICE);
+	private fun audio_manager(native_activity: NativeContext): NativeAudioManager in "Java" `{
+		return (AudioManager)native_activity.getSystemService(Context.AUDIO_SERVICE);
 	`}
 
 	# Sets the stream of the app to STREAM_MUSIC.
 	# STREAM_MUSIC is the default stream used by android apps.
-	private fun manage_audio_stream import native_activity in "Java" `{
-		App_native_activity(self).setVolumeControlStream(AudioManager.STREAM_MUSIC);
+	private fun manage_audio_stream(native_activity: NativeActivity) in "Java" `{
+		native_activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
 
 	# Same as `load_sound` but load the sound from the `res/raw` folder
@@ -688,18 +702,18 @@ redef class App
 				s.paused = false
 			end
 		end
-		audio_manager.abandon_audio_focus
+		audio_manager(native_activity).abandon_audio_focus
 	end
 
 	redef fun on_create do
 		super
-		audio_manager.request_audio_focus
-		manage_audio_stream
+		audio_manager(native_activity).request_audio_focus
+		manage_audio_stream native_activity
 	end
 
 	redef fun on_resume do
 		super
-		audio_manager.request_audio_focus
+		audio_manager(native_activity).request_audio_focus
 		for s in sounds do
 			# Resumes only the sounds paused by the App
 			if not s.paused then s.resume

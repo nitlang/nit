@@ -37,7 +37,7 @@
 #   main activity of the running application. Use it to get anything related
 #   to the `Context` and as anchor to execute Java UI code.
 module native_app_glue is
-	ldflags "-landroid"
+	ldflags("-landroid", "-lnative_app_glue")
 	android_activity "android.app.NativeActivity"
 end
 
@@ -56,7 +56,8 @@ in "C body" `{
 	// We relay the call to the Nit application.
 	void android_main(struct android_app* app) {
 		native_app_glue_data = app;
-		app_dummy();
+
+		int main(int argc, char ** argv);
 		main(0, NULL);
 	}
 

@@ -208,6 +208,7 @@ redef class Android_widget_ArrayAdapter
 	private new (context: NativeContext, res: Int, sender: ListLayout)
 	import ListLayout.create_view in "Java" `{
 		final int final_sender_object = sender;
+		ListLayout_incr_ref(sender);
 
 		return new android.widget.ArrayAdapter(context, (int)res) {
 				@Override
@@ -349,6 +350,7 @@ redef class Android_app_Fragment
 	private new (nit_window: Window)
 	import Window.on_create_fragment in "Java" `{
 		final int final_nit_window = nit_window;
+		Window_incr_ref(nit_window);
 
 		return new android.app.Fragment(){
 			@Override
