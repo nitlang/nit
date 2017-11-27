@@ -13,10 +13,10 @@ This tool is outside src/ because:
 * maintain an interpreter and live objects (the model grows but the interpreter and runtime data are reused)
 * runtime errors/aborts return to the interactive loop
 * top-level variables are preserved but are only visible at the top level
+* Basic FFI
 
-Main missing features
+Main missing feature
 
-* FFI is strange
 * No model/object inspection
 
 ## Examples
@@ -170,4 +170,16 @@ A:bar
 -->import json
 -->print([0..10[.to_a.to_json)
 [0,1,2,3,4,5,6,7,8,9]
+~~~
+
+### FFI
+
+The FFI is handled as with the non-interactive interpreter.
+
+~~~raw
+-->fun hello `{
+...puts("Hello, world");
+...`}
+-->hello
+Hello, world
 ~~~

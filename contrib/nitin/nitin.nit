@@ -107,7 +107,7 @@ redef class ToolContext
 			oldtext = ""
 			var n = p_module(text)
 
-			if n isa AParserError and (n.token isa EOF) then
+			if n isa AParserError and (n.token isa EOF or n.token isa TBadTString or n.token isa TBadExtern) then
 				# Unexpected end of file, thus continuing
 				if oldtext == "" then prompt = "." * prompt.length
 				oldtext = text
@@ -236,6 +236,7 @@ loop
 	# An error
 	if n isa AError then
 		modelbuilder.error(n, n.message)
+		toolcontext.check_errors
 		continue
 	end
 

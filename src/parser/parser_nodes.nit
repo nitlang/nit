@@ -1078,6 +1078,11 @@ class TBadString
 	end
 end
 
+# A malformed triple quoted string
+class TBadTString
+	super TBadString
+end
+
 # A malformed char
 class TBadChar
 	super Token
@@ -1090,6 +1095,15 @@ end
 # A extern code block
 class TExternCodeSegment
 	super Token
+end
+
+# A malformed extern code block
+class TBadExtern
+	super Token
+	redef fun to_s
+	do
+		do return "malformed extern segment {text}"
+	end
 end
 
 # A end of file

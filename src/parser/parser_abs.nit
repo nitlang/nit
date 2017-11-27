@@ -334,10 +334,16 @@ end
 class TBadString
 	super Token
 end
+class TBadTString
+	super Token
+end
 class TBadChar
 	super Token
 end
 class TExternCodeSegment
+	super Token
+end
+class TBadExtern
 	super Token
 end
 class EOF
