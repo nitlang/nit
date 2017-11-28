@@ -15,7 +15,7 @@
 # Feedback related features
 module api_feedback
 
-import web_base
+import api_base
 import popcorn::pop_auth
 
 redef class NitwebConfig

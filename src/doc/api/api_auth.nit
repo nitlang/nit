@@ -14,7 +14,7 @@
 
 module api_auth
 
-import web_base
+import api_base
 import popcorn::pop_auth
 
 redef class NitwebConfig

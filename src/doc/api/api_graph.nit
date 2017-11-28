@@ -15,7 +15,7 @@
 # Render various graph from a model.
 module api_graph
 
-import web_base
+import api_base
 import dot
 import uml
 

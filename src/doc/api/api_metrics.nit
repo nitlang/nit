@@ -14,7 +14,7 @@
 
 module api_metrics
 
-import web_base
+import api_base
 import metrics
 
 redef class APIRouter

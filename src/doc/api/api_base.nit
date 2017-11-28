@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Base classes used by `nitweb`.
-module web_base
+module api_base
 
 import model::model_views
 import model::model_json

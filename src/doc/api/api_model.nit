@@ -14,7 +14,7 @@
 
 module api_model
 
-import web_base
+import api_base
 import htmlight
 import uml
 import model::model_index
@@ -249,7 +249,6 @@ class APIEntityDefs
 		mentities = sort_mentities(req, mentities)
 		mentities = limit_mentities(req, mentities)
 		res.api_json(req, new JsonArray.from(mentities))
-	end
 	end
 end
 
