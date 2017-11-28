@@ -15,13 +15,14 @@
 # Base classes used by `nitweb`.
 module api_base
 
-import model::model_views
-import model::model_json
-import doc_down
 import popcorn
 import popcorn::pop_config
 import popcorn::pop_repos
 import popcorn::pop_json
+
+import commands::commands_http
+import commands::commands_json
+import commands::commands_html
 
 # Nitweb config file.
 class NitwebConfig
@@ -38,8 +39,43 @@ class NitwebConfig
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
 
-	# ModelView used to access model.
+	# The JSON API does not filter anything by default.
+	#
+	# So we can cache the model view.
 	var view: ModelView
+
+	# Catalog to pass to handlers.
+	var catalog: Catalog is noinit
+
+	# Build the catalog
+	#
+	# This method should be called at nitweb startup.
+	# TODO move to nitweb
+	fun build_catalog do
+		var catalog = new Catalog(modelbuilder)
+		# Compute the poset
+		for p in view.mpackages do
+			var g = p.root
+			assert g != null
+			modelbuilder.scan_group(g)
+
+			catalog.deps.add_node(p)
+			for gg in p.mgroups do for m in gg.mmodules do
+				for im in m.in_importation.direct_greaters do
+					var ip = im.mpackage
+					if ip == null or ip == p then continue
+					catalog.deps.add_edge(p, ip)
+				end
+			end
+		end
+		# Build the catalog
+		for mpackage in view.mpackages do
+			catalog.package_page(mpackage)
+			catalog.git_info(mpackage)
+			catalog.mpackage_stats(mpackage)
+		end
+		self.catalog = catalog
+	end
 end
 
 # Specific handler for the nitweb API.
@@ -143,27 +179,6 @@ redef class HttpResponse
 	fun api_json(req: HttpRequest, serializable: nullable Serializable, status: nullable Int, plain, pretty: nullable Bool) do
 		json(serializable, status, plain, req.bool_arg("pretty"))
 	end
-
-	# Return the full version of `serializable` as a json string
-	#
-	# Uses `req` to define serializable options.
-	fun api_full_json(req: HttpRequest, serializable: nullable MEntity, status: nullable Int, plain, pretty: nullable Bool) do
-		if serializable == null then
-			json(null, status)
-		else
-			raw_json(serializable.serialize_to_full_json(
-				plain or else true, req.bool_arg("pretty") or else false), status)
-		end
-	end
-	# Write data as JSON and set the right content type header.
-	fun raw_json(json: nullable String, status: nullable Int) do
-		header["Content-Type"] = media_types["json"].as(not null)
-		if json == null then
-			send(null, status)
-		else
-			send(json, status)
-		end
-	end
 end
 
 # An error returned by the API.
@@ -179,53 +194,6 @@ class APIError
 	var message: String
 end
 
-# Fullname representation that can be used to build decorated links
-#
-# * MPackage: `mpackage_name`
-# * MGroup: `(mpackage_name::)mgroup_name`
-class Namespace
-	super Array[nullable NSEntity]
-	super NSEntity
-	serialize
-
-	redef fun to_s do return self.join("")
-	redef fun serialize_to(v) do to_a.serialize_to(v)
-end
-
-# Something that goes in a Namespace
-#
-# Can be either:
-# * a `NSToken` for tokens like `::`, `>` and `$`
-# * a `MSRef` for references to mentities
-interface NSEntity
-	super Serializable
-end
-
-# A reference to a MEntity that can be rendered as a link.
-#
-# We do not reuse `MEntityRef` ref since NSRef can be found in a ref and create
-# an infinite loop.
-class NSRef
-	super NSEntity
-	serialize
-
-	# The mentity to link to/
-	var mentity: MEntity
-
-	redef fun core_serialize_to(v) do
-		v.serialize_attribute("web_url", mentity.web_url)
-		v.serialize_attribute("api_url", mentity.api_url)
-		v.serialize_attribute("name", mentity.name)
-	end
-end
-
-# A namespace token representation
-#
-# Used for namespace tokens like `::`, `>` and `$`
-redef class String
-	super NSEntity
-end
-
 redef class MEntity
 
 	# URL to `self` within the web interface.
@@ -236,166 +204,51 @@ redef class MEntity
 
 	redef fun core_serialize_to(v) do
 		super
-		v.serialize_attribute("namespace", namespace)
 		v.serialize_attribute("web_url", web_url)
 		v.serialize_attribute("api_url", api_url)
 	end
-
-	# Return `self.full_name` as an object that can be serialized to json.
-	fun namespace: nullable Namespace do return null
-
-	# Return a new NSRef to `self`.
-	fun to_ns_ref: NSRef do return new NSRef(self)
 end
 
 redef class MEntityRef
 	redef fun core_serialize_to(v) do
 		super
-		v.serialize_attribute("namespace", mentity.namespace)
 		v.serialize_attribute("web_url", mentity.web_url)
 		v.serialize_attribute("api_url", mentity.api_url)
-		v.serialize_attribute("name", mentity.name)
-		v.serialize_attribute("mdoc", mentity.mdoc_or_fallback)
-		v.serialize_attribute("visibility", mentity.visibility.to_s)
-		v.serialize_attribute("modifiers", mentity.collect_modifiers)
-		v.serialize_attribute("class_name", mentity.class_name)
-		var mentity = self.mentity
-		if mentity isa MMethod then
-			v.serialize_attribute("msignature", mentity.intro.msignature)
-		else if mentity isa MMethodDef then
-			v.serialize_attribute("msignature", mentity.msignature)
-		else if mentity isa MVirtualTypeProp then
-			v.serialize_attribute("bound", to_mentity_ref(mentity.intro.bound))
-		else if mentity isa MVirtualTypeDef then
-			v.serialize_attribute("bound", to_mentity_ref(mentity.bound))
-		end
-		v.serialize_attribute("location", mentity.location)
-	end
-end
-
-redef class MDoc
-
-	# Add doc down processing
-	redef fun core_serialize_to(v) do
-		v.serialize_attribute("html_synopsis", html_synopsis.write_to_string)
-	end
-end
-
-redef class MPackage
-	redef fun namespace do return new Namespace.from([to_ns_ref])
-end
-
-redef class MGroup
-	redef fun namespace do
-		var p = parent
-		if p == null then
-			return new Namespace.from([to_ns_ref, ">": nullable NSEntity])
-		end
-		return new Namespace.from([p.namespace, to_ns_ref, ">": nullable NSEntity])
-	end
-end
-
-redef class MModule
-	redef fun namespace do
-		var mgroup = self.mgroup
-		if mgroup == null then
-			return new Namespace.from([to_ns_ref])
-		end
-		return new Namespace.from([mgroup.mpackage.to_ns_ref, "::", to_ns_ref: nullable NSEntity])
-	end
-
-	private fun ns_for(visibility: MVisibility): nullable Namespace do
-		if visibility <= private_visibility then return namespace
-		var mgroup = self.mgroup
-		if mgroup == null then return namespace
-		return mgroup.mpackage.namespace
-	end
-end
-
-redef class MClass
-	redef fun namespace do
-		return new Namespace.from([intro_mmodule.ns_for(visibility), "::", to_ns_ref: nullable NSEntity])
 	end
 end
 
 redef class MClassDef
-	redef fun namespace do
-		if is_intro then
-			return new Namespace.from([mmodule.ns_for(mclass.visibility), "$", to_ns_ref: nullable NSEntity])
-		else if mclass.intro_mmodule.mpackage != mmodule.mpackage then
-			return new Namespace.from([mmodule.namespace, "$", mclass.namespace: nullable NSEntity])
-		else if mclass.visibility > private_visibility then
-			return new Namespace.from([mmodule.namespace, "$", mclass.to_ns_ref: nullable NSEntity])
-		end
-		return new Namespace.from([mmodule.full_name, "$::", mclass.intro_mmodule.to_ns_ref: nullable NSEntity])
-	end
-
 	redef fun web_url do return "{mclass.web_url}/lin#{full_name}"
 end
 
-redef class MProperty
-	redef fun namespace do
-		if intro_mclassdef.is_intro then
-			return new Namespace.from([intro_mclassdef.mmodule.ns_for(visibility), "::", intro_mclassdef.mclass.to_ns_ref, "::", to_ns_ref: nullable NSEntity])
-		else
-			return new Namespace.from([intro_mclassdef.mmodule.namespace, "::", intro_mclassdef.mclass.to_ns_ref, "::", to_ns_ref: nullable NSEntity])
-		end
-	end
+redef class MPropDef
+	redef fun web_url do return "{mproperty.web_url}/lin#{full_name}"
 end
 
-redef class MPropDef
-	redef fun namespace do
-		var res = new Namespace
-		res.add mclassdef.namespace
-		res.add "$"
-
-		if mclassdef.mclass == mproperty.intro_mclassdef.mclass then
-			res.add to_ns_ref
-		else
-			if mclassdef.mmodule.mpackage != mproperty.intro_mclassdef.mmodule.mpackage then
-				res.add mproperty.intro_mclassdef.mmodule.ns_for(mproperty.visibility)
-				res.add "::"
-			else if mproperty.visibility <= private_visibility then
-				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mpackage then
-					res.add "::"
-					res.add mproperty.intro_mclassdef.mmodule.to_ns_ref
-					res.add "::"
-				end
-			end
-			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
-				res.add mproperty.intro_mclassdef.to_ns_ref
-				res.add "::"
-			end
-			res.add to_ns_ref
-		end
-		return res
+redef class MType
+	redef fun core_serialize_to(v) do
+		super
+		v.serialize_attribute("web_url", web_url)
+		v.serialize_attribute("api_url", api_url)
 	end
-
-	redef fun web_url do return "{mproperty.web_url}/lin#{full_name}"
 end
 
 redef class MClassType
 	redef var web_url = mclass.web_url is lazy
+	redef var api_url = mclass.api_url is lazy
 end
 
 redef class MNullableType
 	redef var web_url = mtype.web_url is lazy
+	redef var api_url = mtype.api_url is lazy
 end
 
 redef class MParameterType
 	redef var web_url = mclass.web_url is lazy
+	redef var api_url = mclass.api_url is lazy
 end
 
 redef class MVirtualType
 	redef var web_url = mproperty.web_url is lazy
-end
-
-redef class POSetElement[E]
-	super Serializable
-
-	redef fun core_serialize_to(v) do
-		assert self isa POSetElement[MEntity]
-		v.serialize_attribute("direct_greaters", to_mentity_refs(direct_greaters))
-		v.serialize_attribute("direct_smallers", to_mentity_refs(direct_smallers))
-	end
+	redef var api_url = mproperty.api_url is lazy
 end

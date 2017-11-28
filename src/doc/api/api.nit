@@ -17,8 +17,6 @@ module api
 
 import api_auth
 import api_model
-import api_catalog
-import api_graph
 import api_docdown
 import api_metrics
 import api_feedback

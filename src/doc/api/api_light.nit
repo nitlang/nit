@@ -16,7 +16,6 @@
 module api_light
 
 import api_base
-import htmlight
 
 redef class APIRouter
 	redef init do
