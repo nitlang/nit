@@ -18,8 +18,8 @@
 # This shell script compile, run and verify Nit program files
 
 # Set lang do default to avoid failed tests because of locale
-export LANG=C
-export LC_ALL=C
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
 export NIT_TESTING=true
 # Use the pid as a collision prevention
 export NIT_TESTING_ID=$$
@@ -708,7 +708,7 @@ END
 			if [ -f "$ff.write" ]; then
 				cat -- "$ff.write" >> "$ff.res"
 			elif [ -d "$ff.write" ]; then
-				LANG=C /bin/ls -F "$ff.write" >> "$ff.res"
+				/bin/ls -F "$ff.write" >> "$ff.res"
 			fi
 			cp -- "$ff.res"  "$ff.res2"
 			cat -- "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
@@ -750,7 +750,7 @@ END
 					if [ -f "$fff.write" ]; then
 						cat -- "$fff.write" >> "$fff.res"
 					elif [ -d "$fff.write" ]; then
-						LANG=C /bin/ls -F -- "$fff.write" >> "$fff.res"
+						/bin/ls -F -- "$fff.write" >> "$fff.res"
 					fi
 					if [ -s "$fff.err" ]; then
 						cp -- "$fff.res"  "$fff.res2"
