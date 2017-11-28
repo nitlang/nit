@@ -35,12 +35,12 @@ Core classes and methods used by default by Nit programs and libraries.
 
 ### Other
 
-[[list: kernel]]
+[[defs: kernel]]
 
 ## Core Collections
 
-[[doc: collection]]
+[[doc: core::collection]]
 
 ## String and Text manipulation
 
-[[doc: text]]
+[[doc: core::text]]
