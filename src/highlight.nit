@@ -21,51 +21,6 @@ import pipeline
 import astutil
 import serialization
 
-# Fully process `content` as a Nit source file.
-#
-# Set `print_errors = true` to print errors in the code to the console.
-fun hightlightcode(hl: HighlightVisitor, content: String, print_errors: nullable Bool): HLCode
-do
-	# Prepare a stand-alone tool context
-	var tc = new ToolContext
-	tc.nit_dir = tc.locate_nit_dir # still use the common lib to have core
-	tc.keep_going = true # no exit, obviously
-	if print_errors != true then tc.opt_warn.value = -1 # no output
-
-	# Prepare an stand-alone model and model builder.
-	# Unfortunately, models are enclosing and append-only.
-	# There is no way (yet?) to have a shared module `core` with
-	# isolated and throwable user modules.
-	var model = new Model
-	var mb = new ModelBuilder(model, tc)
-
-	# Parse the code
-	var source = new SourceFile.from_string("", content + "\n")
-	var lexer = new Lexer(source)
-	var parser = new Parser(lexer)
-	var tree = parser.parse
-
-	var hlcode = new HLCode(hl, content, source)
-
-	# Check syntax error
-	var eof = tree.n_eof
-	if eof isa AError then
-		mb.error(eof, eof.message)
-		hl.hightlight_source(source)
-		return hlcode
-	end
-	var amodule = tree.n_base.as(not null)
-
-	# Load the AST as a module in the model
-	# Then process it
-	mb.load_rt_module(null, amodule, "")
-	mb.run_phases
-
-	# Highlight the processed module
-	hl.enter_visit(amodule)
-	return hlcode
-end
-
 # A standalone highlighted piece of code
 class HLCode
 	super Serializable
@@ -431,6 +386,51 @@ class HighlightVisitor
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script>$(".popupable").popover({html:true, placement:'top'})/*initialize bootstrap popover*/</script>"""
+	end
+
+	# Fully process `content` as a Nit source file.
+	#
+	# Set `print_errors = true` to print errors in the code to the console.
+	fun highlightcode(content: String, print_errors: nullable Bool): HLCode
+	do
+		# Prepare a stand-alone tool context
+		var tc = new ToolContext
+		tc.nit_dir = tc.locate_nit_dir # still use the common lib to have core
+		tc.keep_going = true # no exit, obviously
+		if print_errors != true then tc.opt_warn.value = -1 # no output
+
+		# Prepare an stand-alone model and model builder.
+		# Unfortunately, models are enclosing and append-only.
+		# There is no way (yet?) to have a shared module `core` with
+		# isolated and throwable user modules.
+		var model = new Model
+		var mb = new ModelBuilder(model, tc)
+
+		# Parse the code
+		var source = new SourceFile.from_string("", content + "\n")
+		var lexer = new Lexer(source)
+		var parser = new Parser(lexer)
+		var tree = parser.parse
+
+		var hlcode = new HLCode(self, content, source)
+
+		# Check syntax error
+		var eof = tree.n_eof
+		if eof isa AError then
+			mb.error(eof, eof.message)
+			highlight_source(source)
+			return hlcode
+		end
+		var amodule = tree.n_base.as(not null)
+
+		# Load the AST as a module in the model
+		# Then process it
+		mb.load_rt_module(null, amodule, "")
+		mb.run_phases
+
+		# Highlight the processed module
+		highlight_node(amodule)
+		return hlcode
 	end
 end
 

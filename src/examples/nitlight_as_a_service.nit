@@ -24,7 +24,7 @@ import nitcorn::log
 import template
 import json::serialization_write
 
-# Nitcorn service to hightlight code
+# Nitcorn service to highlight code
 #
 # It's a single stand-alone page that has to form to itself.
 class HighlightAction
@@ -38,7 +38,7 @@ class HighlightAction
 		# There is code? Process it
 		var code = http_request.post_args.get_or_null("code")
 		var hlcode = null
-		if code != null then hlcode = hightlightcode(hl, code)
+		if code != null then hlcode = hl.highlightcode(code)
 
 		if http_request.post_args.get_or_null("json") == "true" and hlcode != null then
 			var response = new HttpResponse(200)
