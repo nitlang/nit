@@ -15,7 +15,7 @@
 module api_model
 
 import web_base
-import highlight
+import htmlight
 import uml
 import model::model_index
 
@@ -311,8 +311,8 @@ class APIEntityCode
 	private fun render_source(mentity: MEntity): nullable HTMLTag do
 		var node = config.modelbuilder.mentity2node(mentity)
 		if node == null then return null
-		var hl = new HighlightVisitor
-		hl.enter_visit node
+		var hl = new HtmlightVisitor
+		hl.highlight_node node
 		return hl.html
 	end
 end

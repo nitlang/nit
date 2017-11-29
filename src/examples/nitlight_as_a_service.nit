@@ -18,7 +18,7 @@
 module nitlight_as_a_service
 
 import frontend
-import highlight
+import htmlight
 import nitcorn
 import nitcorn::log
 import template
@@ -32,7 +32,7 @@ class HighlightAction
 
 	redef fun answer(http_request, turi)
 	do
-		var hl = new HighlightVisitor
+		var hl = new HtmlightVisitor
 		var page = new Template
 
 		# There is code? Process it

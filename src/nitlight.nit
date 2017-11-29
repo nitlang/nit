@@ -15,10 +15,10 @@
 # Tool that produces highlighting for Nit programs
 module nitlight
 
-import highlight
+import htmlight
 
 class NitlightVisitor
-	super HighlightVisitor
+	super HtmlightVisitor
 
 	# The current highlight module
 	#
@@ -186,7 +186,7 @@ if dir != null then
 	page.add_raw_html "</li></body>"
 	page.write_to_file("{dir}/index.html")
 
-	var v = new HighlightVisitor
+	var v = new HtmlightVisitor
 	toolcontext.info("write {dir}/style.css", 1)
 	var f = new FileWriter.open("{dir}/style.css")
 	f.write v.css_content

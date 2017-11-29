@@ -15,11 +15,11 @@
 # Program used to test the Nit highlighter
 module test_highlight
 
-import highlight
+import htmlight
 import test_phase
 
 class TestHighlightVisitor
-	super HighlightVisitor
+	super HtmlightVisitor
 	redef fun hrefto(e) do
 		return "#" + e.c_name
 	end

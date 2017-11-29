@@ -16,7 +16,7 @@
 module api_light
 
 import web_base
-import highlight
+import htmlight
 
 redef class APIRouter
 	redef init do
@@ -30,7 +30,7 @@ class APILight
 	super APIHandler
 
 	redef fun post(req, res) do
-		var hl = new HighlightVisitor
+		var hl = new HtmlightVisitor
 		var hlcode = hl.highlightcode(req.body)
 		res.json(hlcode)
 	end
