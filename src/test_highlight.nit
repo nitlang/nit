@@ -41,7 +41,7 @@ do
 		var n = mb.mpropdef2node(pd)
 		if not n isa APropdef then continue
 		var hl = new TestHighlightVisitor
-		hl.enter_visit(n)
+		hl.highlight_node(n)
 		print "<h1 id=\"{pd.c_name}\">{pd.full_name}</h1>"
 		printn "<pre><code>"
 		hl.html.write_to(stdout)
@@ -69,7 +69,7 @@ class THLVisitor
 			seen.add cn
 
 			var hl = new TestHighlightVisitor
-			hl.enter_visit(n)
+			hl.highlight_node(n)
 			print "<h2>AST node: {cn} at {n.location}</h2>"
 			printn "<pre><code>"
 			hl.html.write_to(stdout)

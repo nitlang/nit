@@ -150,7 +150,7 @@ for mm in mmodules do
 		page.add_raw_html v.head_content
 		page.add_raw_html "</head><body><pre class='nit_code'>"
 	end
-	v.enter_visit(m)
+	v.highlight_node(m)
 	if not opt_fragment.value then
 		page.add(v.html)
 		page.add_raw_html "</pre>"

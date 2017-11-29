@@ -188,9 +188,8 @@ class HighlightVisitor
 	# Default: false
 	var include_whole_lines = false is writable
 
-	# The entry-point of the highlighting.
-	# Will fill `html` with the generated HTML content.
-	fun enter_visit(n: ANode)
+	# Highlight a AST element.
+	fun highlight_node(n: ANode)
 	do
 		n.parentize_tokens
 
@@ -234,7 +233,7 @@ class HighlightVisitor
 			l = l.last_real_token_in_line
 		end
 
-		htmlize(f, l)
+		do_highlight(f, l)
 	end
 
 	private fun full_tag(anode: ANode, hv: HighlightVisitor): nullable HTMLTag
@@ -273,13 +272,13 @@ class HighlightVisitor
 	# Highlight a full lexed source file.
 	#
 	# REQUIRE `source.first_token != null`
-	fun hightlight_source(source: SourceFile)
+	fun highlight_source(source: SourceFile)
 	do
-		htmlize(source.first_token.as(not null), null)
+		do_highlight(source.first_token.as(not null), null)
 	end
 
-	# Produce HTML between two tokens
-	protected fun htmlize(first_token: Token, last_token: nullable Token)
+	# Low-level highlighting between 2 tokens
+	protected fun do_highlight(first_token: Token, last_token: nullable Token)
 	do
 		var stack2 = new Array[HTMLTag]
 		var stack = new Array[Prod]
