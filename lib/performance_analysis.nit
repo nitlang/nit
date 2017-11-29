@@ -60,9 +60,14 @@ class PerfMap
 		return ts
 	end
 
+	# Number of digits to the right of the decimal points in reports created by `to_s`
+	#
+	# Defaults to 4.
+	var precision = 4 is writable
+
 	redef fun to_s
 	do
-		var prec = 3
+		var prec = precision
 
 		var table = new Map[String, Array[String]]
 		for event, stats in self do

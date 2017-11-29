@@ -139,5 +139,7 @@ redef class TextureAsset
 		var pixels = surface.pixels
 
 		load_from_pixels(pixels, surface.w, surface.h, format)
+
+		surface.free
 	end
 end

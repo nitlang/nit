@@ -434,12 +434,27 @@ fun glUniform4f(index: Int, x, y, z, w: Float) `{ glUniform4f(index, x, y, z, w)
 
 # Low level array of `Float`
 class GLfloatArray
-	super CArray[Float]
-	redef type NATIVE: NativeGLfloatArray
+	super FinalizableOnce
 
-	redef init(length)
+	var length: Int
+
+	var native_array = new NativeGLfloatArray(length) is lateinit
+
+	fun [](index: Int): Float do return native_array[index]
+
+	fun []=(index: Int, val: Float) do native_array[index] = val
+
+	var add_index = 0
+
+	fun reset_add do add_index = 0
+
+	# Require: `add_index < length`
+	fun add(value: Float)
 	do
-		native_array = new NativeGLfloatArray(length)
+		var index = add_index
+		assert index < length
+		native_array[index] = value
+		self.add_index = index + 1
 	end
 
 	# Create with the content of `array`
@@ -458,26 +473,27 @@ class GLfloatArray
 	# Require: `length >= array.length + dst_offset or else 0`
 	fun fill_from(array: Array[Float], dst_offset: nullable Int)
 	do
-		dst_offset = dst_offset or else 0
+		dst_offset = dst_offset or else add_index
 
 		assert length >= array.length + dst_offset
 		for k in [0..array.length[ do
 			self[dst_offset+k] = array[k]
 		end
 	end
+
+	redef fun finalize_once do native_array.free
 end
 
 # An array of `GLfloat` in C (`GLfloat*`)
 extern class NativeGLfloatArray `{ GLfloat* `}
-	super NativeCArray
-	redef type E: Float
 
 	new(size: Int) `{ return calloc(size, sizeof(GLfloat)); `}
 
-	redef fun [](index) `{ return self[index]; `}
-	redef fun []=(index, val) `{ self[index] = val; `}
+	fun [](index: Int): Float `{ return self[index]; `}
 
-	redef fun +(offset) `{ return self + offset; `}
+	fun []=(index: Int, val: Float) `{ self[index] = val; `}
+
+	fun +(offset: Int): NativeGLfloatArray `{ return self + offset; `}
 end
 
 # General type for OpenGL enumerations

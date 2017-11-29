@@ -25,7 +25,7 @@ redef class App
 	# Zero (or a negative value) means no limit.
 	#
 	# Applications can modify this value even during the main-loop.
-	var maximum_fps = 60.0 is writable
+	var maximum_fps = 0.0 is writable
 
 	# Current frame-rate
 	#

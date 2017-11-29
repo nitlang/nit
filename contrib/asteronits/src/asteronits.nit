@@ -70,6 +70,8 @@ redef class App
 
 		# Move the camera to show all the world world in the screen range
 		world_camera.reset_height(world.half_height * 2.0)
+
+		ui_camera.reset_height 720.0
 	end
 
 	# Main spritesheet with ships, asteroids and beams

@@ -74,6 +74,8 @@ redef class TextureAsset
 		var pixels = buf.native_array
 
 		load_from_pixels(pixels, bmp.width, bmp.height, gl_RGBA)
+		buf.destroy
+		bmp.recycle
 
 		jni_env.pop_local_frame
 	end
