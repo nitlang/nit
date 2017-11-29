@@ -102,6 +102,20 @@ Importing `android::landscape` or `android::portrait` locks the generated
 application in the specified orientation. This can be useful for games and
 other multimedia applications.
 
+## Resources and application icon
+
+Resources specific to the Android platform should be placed in an `android/` folder at the root of the project.
+The folder should adopt the structure of a normal Android project, e.g., a custom XML resource file can be placed
+at `android/res/values/color.xml` to be compiled with the Android application.
+
+The application icon should also be placed in the `android/` folder.
+Place the classic bitmap version at `android/res/mipmap-hdpi/ic_launcher.png` (and others),
+and the adaptive version at `android/res/mipmap-anydpi-v26/ic_launcher.xml`.
+The Nit compiler detects these files and uses them as the application icon.
+
+Additional `android/` folders may be placed next to more specific Nit modules to change the Android resources
+for application variants. The more specific resources will have priority over the project level `android/` files.
+
 # Compilation modes
 
 There are two compilation modes for the Android platform, debug and release.

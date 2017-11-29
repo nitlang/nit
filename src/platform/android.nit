@@ -91,11 +91,7 @@ class AndroidToolchain
 		# ---
 
 		var app_name = project.name
-		if not release then app_name += " Debug"
-
 		var app_package = project.namespace
-		if not release then app_package += "_debug"
-
 		var app_version = project.version
 
 		var app_min_api = project.min_api
@@ -303,7 +299,7 @@ set(lib_build_DIR ../libgc/outputs)
 file(MAKE_DIRECTORY ${lib_build_DIR})
 
 ## Config
-add_definitions("-DGC_PTHREADS")
+add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA")
 set(enable_threads TRUE)
 set(CMAKE_USE_PTHREADS_INIT TRUE)
 
@@ -378,19 +374,41 @@ target_link_libraries(nit_app gc-lib
 		# Generate AndroidManifest.xml
 
 		# Is there an icon?
-		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]
-		var icon_available = false
+		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi", "anydpi", "anydpi-v26"]
+		var icon_name = null
+		var has_round = false
+
 		for res in resolutions do
-			var path = project_root / "android/res/drawable-{res}/icon.png"
-			if path.file_exists then
-				icon_available = true
+			# New style mipmap
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher_round.png".file_exists then
+				has_round = true
+			end
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher.png".file_exists then
+				icon_name = "@mipmap/ic_launcher"
 				break
+			end
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher.xml".file_exists then
+				icon_name = "@mipmap/ic_launcher"
+				break
+			end
+		end
+		if icon_name == null then
+			# Old style drawable-hdpi/icon.png
+			for res in resolutions do
+				var path = project_root / "android/res/drawable-{res}/icon.png"
+				if path.file_exists then
+					icon_name = "@drawable/icon"
+					break
+				end
 			end
 		end
 
 		var icon_declaration
-		if icon_available then
-			icon_declaration = "android:icon=\"@drawable/icon\""
+		if icon_name != null then
+			icon_declaration = "android:icon=\"{icon_name}\""
+			if app_target_api >= 25 and has_round then
+				icon_declaration += "\n\t\tandroid:roundIcon=\"@mipmap/ic_launcher_round\""
+			end
 		else icon_declaration = ""
 
 		# TODO android:roundIcon

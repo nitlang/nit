@@ -195,7 +195,7 @@ redef class App
 	# Notification from the Android framework, the system is running low on memory
 	#
 	# Try to reduce your memory use.
-	fun low_memory do end
+	fun low_memory do force_garbage_collection
 
 	# Notification from the Android framework, the current device configuration has changed
 	fun config_changed do end
