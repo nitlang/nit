@@ -484,7 +484,9 @@ abstract class GamnitProgram
 	do
 		if deleted then return
 
-		glDeleteProgram gl_program.as(not null)
+		var gl_program = gl_program
+		if gl_program != null then glDeleteProgram gl_program
+
 		deleted = true
 	end
 end
