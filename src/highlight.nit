@@ -191,15 +191,15 @@ class HighlightVisitor
 		do_highlight(f, l)
 	end
 
-	private fun full_tag(anode: ANode, hv: HighlightVisitor): nullable HTMLTag
+	private fun full_tag(anode: ANode): nullable HTMLTag
 	do
-		var tag = anode.make_tag(hv)
+		var tag = anode.make_tag(self)
 		if tag == null then return null
-		var infobox = anode.infobox(hv)
+		var infobox = anode.infobox(self)
 		if infobox == null and anode isa Token then
 			var pa = anode.parent
 			if pa != null then
-				infobox = pa.decorate_tag(hv, tag, anode)
+				infobox = pa.decorate_tag(self, tag, anode)
 			end
 		end
 		if infobox != null and not show_infobox then
@@ -211,7 +211,7 @@ class HighlightVisitor
 		if messages != null and show_messages then
 			tag.css("border-bottom", "solid 2px red")
 			if infobox == null then
-				infobox = new HInfoBox(hv, "Messages")
+				infobox = new HInfoBox(self, "Messages")
 			end
 			var c = infobox.new_dropdown("{messages.length} message(s)", "")
 			for m in messages do
@@ -239,7 +239,6 @@ class HighlightVisitor
 		var stack = new Array[Prod]
 		var line = 0
 		var c: nullable Token = first_token
-		var hv = self
 		while c != null do
 			var starting
 
@@ -254,7 +253,7 @@ class HighlightVisitor
 				if c0 != null then starting = c0.starting_prods
 				if starting != null then for p in starting do
 					if not p.is_block then continue
-					var tag = full_tag(p, hv)
+					var tag = full_tag(p)
 					if tag == null then continue
 					tag.add_class("foldable")
 					stack2.add(html)
@@ -281,7 +280,7 @@ class HighlightVisitor
 			starting = c.starting_prods
 			if starting != null then for p in starting do
 				if not p.is_span then continue
-				var tag = full_tag(p, hv)
+				var tag = full_tag(p)
 				if tag == null then continue
 				stack2.add(html)
 				html.add tag
@@ -293,7 +292,7 @@ class HighlightVisitor
 			if c isa TEol then
 				html.append "\n"
 			else
-				var tag = full_tag(c, hv)
+				var tag = full_tag(c)
 				if tag != null then html.add tag
 			end
 
