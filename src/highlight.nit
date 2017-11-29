@@ -17,6 +17,7 @@ module highlight
 
 import frontend
 import astutil
+import console
 
 # Visitor used to produce a HTML tree based on a AST on a `Source`
 class AbstractHighlightVisitor
@@ -108,4 +109,49 @@ class AbstractHighlightVisitor
 
 	# Low-level highlighting between 2 tokens
 	protected fun do_highlight(first_token: Token, last_token: nullable Token) is abstract
+end
+
+# Text-based highlighter that use ANSI escape sequence for colors
+class AnsiHighlightVisitor
+	super AbstractHighlightVisitor
+
+	# The produced highlighting
+	var result = new Template
+
+	redef fun do_highlight(f, l)
+	do
+		var c
+		c = f
+		while c != null do
+			if c != f then result.add(c.blank_before)
+			result.add c.ansi_colored
+
+			if c == l then
+				c = null
+			else
+				c = c.next_token
+			end
+		end
+	end
+end
+
+redef class Token
+	# Return the ANSI colored text
+	fun ansi_colored: String do return text
+end
+
+redef class TComment
+	redef fun ansi_colored do return super.blue
+end
+
+redef class TokenKeyword
+	redef fun ansi_colored do return super.yellow
+end
+
+redef class TClassid
+	redef fun ansi_colored do return super.green
+end
+
+redef class TokenLiteral
+	redef fun ansi_colored do return super.red
 end
