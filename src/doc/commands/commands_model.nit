@@ -22,7 +22,7 @@ import commands_base
 import model::model_collect
 import modelize
 import modelbuilder
-import highlight
+import htmlight
 import doc_down
 
 # Retrieve the MDoc related to a MEntity
@@ -428,8 +428,8 @@ class CmdCode
 		var node = self.node
 		if node == null then return null
 		if format == "html" then
-			var hl = new HighlightVisitor
-			hl.enter_visit node
+			var hl = new HtmlightVisitor
+			hl.highlight_node node
 			return hl.html
 		end
 		# TODO make a raw visitor

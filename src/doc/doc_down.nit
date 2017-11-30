@@ -16,7 +16,7 @@
 module doc_down
 
 import markdown
-import highlight
+import htmlight
 private import parser_util
 
 redef class MDoc
@@ -160,9 +160,9 @@ class NitdocDecorator
 			return
 		end
 		v.add "<pre class=\"nitcode\"><code>"
-		var hl = new HighlightVisitor
+		var hl = new HtmlightVisitor
 		hl.line_id_prefix = ""
-		hl.enter_visit(ast)
+		hl.highlight_node(ast)
 		v.add(hl.html)
 		v.add "</code></pre>\n"
 	end
@@ -177,9 +177,9 @@ class NitdocDecorator
 			append_code(v, text, from, to)
 		else
 			v.add "<code class=\"nitcode\">"
-			var hl = new HighlightVisitor
+			var hl = new HtmlightVisitor
 			hl.line_id_prefix = ""
-			hl.enter_visit(ast)
+			hl.highlight_node(ast)
 			v.add(hl.html)
 		end
 		v.add "</code>"
@@ -217,8 +217,8 @@ private class InlineDecorator
 			return
 		end
 		v.add "<code class=\"nitcode\">"
-		var hl = new HighlightVisitor
-		hl.enter_visit(ast)
+		var hl = new HtmlightVisitor
+		hl.highlight_node(ast)
 		v.add(hl.html)
 		v.add "</code>"
 	end
