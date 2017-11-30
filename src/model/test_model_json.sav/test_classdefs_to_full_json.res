@@ -1311,7 +1311,7 @@
 		}
 	},
 	"visibility": "public",
-	"modifiers": ["public", "class"],
+	"modifiers": ["class"],
 	"location": {
 		"column_end": 3,
 		"column_start": 1,
