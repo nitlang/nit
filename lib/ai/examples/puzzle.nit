@@ -25,7 +25,7 @@
 #
 # The argument "abcd.fgeh" is the grid
 #
-# ~~~
+# ~~~raw
 # abc
 # d.f
 # geh
@@ -33,7 +33,7 @@
 #
 # The goal is:
 #
-# ~~~
+# ~~~raw
 # abc
 # def
 # gh.
