@@ -495,6 +495,12 @@ redef class App
 		for sprite in ui_sprites do sprite.needs_update
 	end
 
+	redef fun on_resume
+	do
+		clock.lapse
+		super
+	end
+
 	redef fun frame_core(display)
 	do
 		# Check errors
