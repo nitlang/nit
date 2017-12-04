@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # Example from http://www.graphviz.org/content/cluster
+module clusters is example
 
 import dot
 

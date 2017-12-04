@@ -2849,6 +2849,8 @@
 	},
 	"mpropdefs": [{
 		"full_name": "test_prog$Game$player_characters"
+	}, {
+		"full_name": "test_prog$MyGame$Game::player_characters"
 	}],
 	"intro_mclass": {
 		"full_name": "test_prog::Game"
@@ -2897,6 +2899,8 @@
 	},
 	"mpropdefs": [{
 		"full_name": "test_prog$Game$computer_characters"
+	}, {
+		"full_name": "test_prog$MyGame$Game::computer_characters"
 	}],
 	"intro_mclass": {
 		"full_name": "test_prog::Game"
@@ -2945,6 +2949,8 @@
 	},
 	"mpropdefs": [{
 		"full_name": "test_prog$Game$start_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::start_game"
 	}],
 	"intro_mclass": {
 		"full_name": "test_prog::Game"
@@ -2991,6 +2997,8 @@
 	},
 	"mpropdefs": [{
 		"full_name": "test_prog$Game$pause_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::pause_game"
 	}],
 	"intro_mclass": {
 		"full_name": "test_prog::Game"
@@ -3037,6 +3045,8 @@
 	},
 	"mpropdefs": [{
 		"full_name": "test_prog$Game$stop_game"
+	}, {
+		"full_name": "test_prog$MyGame$Game::stop_game"
 	}],
 	"intro_mclass": {
 		"full_name": "test_prog::Game"
@@ -3048,6 +3058,158 @@
 	"msignature": {
 		"arity": 0,
 		"mparams": [],
+		"return_mtype": null,
+		"vararg_rank": -1
+	}
+}
+{
+	"name": "_player_characters",
+	"class_name": "MAttribute",
+	"full_name": "test_prog::game_examples::MyGame::_player_characters",
+	"mdoc": null,
+	"visibility": "private",
+	"modifiers": ["private", "var"],
+	"location": {
+		"column_end": 50,
+		"column_start": 2,
+		"line_end": 23,
+		"line_start": 23,
+		"file": "test_location"
+	},
+	"intro": {
+		"full_name": "test_prog$MyGame$_player_characters"
+	},
+	"intro_mclassdef": {
+		"full_name": "test_prog$MyGame"
+	},
+	"mpropdefs": [{
+		"full_name": "test_prog$MyGame$_player_characters"
+	}],
+	"intro_mclass": {
+		"full_name": "test_prog::MyGame"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"static_mtype": {
+		"full_name": "test_prog::List[test_prog::Character]"
+	}
+}
+{
+	"name": "player_characters=",
+	"class_name": "MMethod",
+	"full_name": "test_prog::MyGame::player_characters=",
+	"mdoc": null,
+	"visibility": "protected",
+	"modifiers": ["protected", "fun"],
+	"location": {
+		"column_end": 50,
+		"column_start": 2,
+		"line_end": 23,
+		"line_start": 23,
+		"file": "test_location"
+	},
+	"intro": {
+		"full_name": "test_prog$MyGame$player_characters="
+	},
+	"intro_mclassdef": {
+		"full_name": "test_prog$MyGame"
+	},
+	"mpropdefs": [{
+		"full_name": "test_prog$MyGame$player_characters="
+	}],
+	"intro_mclass": {
+		"full_name": "test_prog::MyGame"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"is_init": false,
+	"msignature": {
+		"arity": 1,
+		"mparams": [{
+			"is_vararg": false,
+			"name": "player_characters",
+			"mtype": {
+				"full_name": "test_prog::List[test_prog::Character]"
+			}
+		}],
+		"return_mtype": null,
+		"vararg_rank": -1
+	}
+}
+{
+	"name": "_computer_characters",
+	"class_name": "MAttribute",
+	"full_name": "test_prog::game_examples::MyGame::_computer_characters",
+	"mdoc": null,
+	"visibility": "private",
+	"modifiers": ["private", "var"],
+	"location": {
+		"column_end": 52,
+		"column_start": 2,
+		"line_end": 25,
+		"line_start": 25,
+		"file": "test_location"
+	},
+	"intro": {
+		"full_name": "test_prog$MyGame$_computer_characters"
+	},
+	"intro_mclassdef": {
+		"full_name": "test_prog$MyGame"
+	},
+	"mpropdefs": [{
+		"full_name": "test_prog$MyGame$_computer_characters"
+	}],
+	"intro_mclass": {
+		"full_name": "test_prog::MyGame"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"static_mtype": {
+		"full_name": "test_prog::List[test_prog::Character]"
+	}
+}
+{
+	"name": "computer_characters=",
+	"class_name": "MMethod",
+	"full_name": "test_prog::MyGame::computer_characters=",
+	"mdoc": null,
+	"visibility": "protected",
+	"modifiers": ["protected", "fun"],
+	"location": {
+		"column_end": 52,
+		"column_start": 2,
+		"line_end": 25,
+		"line_start": 25,
+		"file": "test_location"
+	},
+	"intro": {
+		"full_name": "test_prog$MyGame$computer_characters="
+	},
+	"intro_mclassdef": {
+		"full_name": "test_prog$MyGame"
+	},
+	"mpropdefs": [{
+		"full_name": "test_prog$MyGame$computer_characters="
+	}],
+	"intro_mclass": {
+		"full_name": "test_prog::MyGame"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"is_init": false,
+	"msignature": {
+		"arity": 1,
+		"mparams": [{
+			"is_vararg": false,
+			"name": "computer_characters",
+			"mtype": {
+				"full_name": "test_prog::List[test_prog::Character]"
+			}
+		}],
 		"return_mtype": null,
 		"vararg_rank": -1
 	}

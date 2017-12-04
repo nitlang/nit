@@ -71,7 +71,7 @@ class TestCommandsParser
 		var cmd = parser.parse("descendants: Object")
 		assert cmd isa CmdDescendants
 		assert parser.error == null
-		assert cmd.results.as(not null).length == 19
+		assert cmd.results.as(not null).length == 20
 	end
 
 	fun test_cmd_parser_descendants_without_children is test do
@@ -79,8 +79,7 @@ class TestCommandsParser
 		var cmd = parser.parse("descendants: Object | children: false")
 		assert cmd isa CmdDescendants
 		assert parser.error == null
-		print cmd.results.as(not null)
-		assert cmd.results.as(not null).length == 7
+		assert cmd.results.as(not null).length == 8
 	end
 
 	# CmdSearch

@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module tmpl_composer is example
+
 import template
 
 ### Here, definition of the specific templates

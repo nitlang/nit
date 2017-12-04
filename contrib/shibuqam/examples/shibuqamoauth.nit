@@ -168,7 +168,7 @@
 # * no `client_id`: because we do not want to code a db of clients. The `redirect_uri` can be seen as a simple client_id. We have also no way to present the client to the user since we do not control the authorization page of shibboleth since is done by the reverse proxy.
 # * no `scope` and no `authorisation_code` since since there is nothing to access. We just get minimal information after the successful shibboleth login. Thus we have nothing more to authorise once the user is authenticated.
 # * no `client_secret`: the user information are already public. There is no need to make the code more complex to protect public information.
-module shibuqamoauth
+module shibuqamoauth is example
 
 import popcorn
 import popcorn::pop_json

@@ -14,7 +14,7 @@
 
 module model_filters
 
-import model
+import model_examples
 
 # A list of filters that can be applied on a MEntity
 #
@@ -49,6 +49,7 @@ class ModelFilter
 		if not accept_mentity_test(mentity) then return false
 		if not accept_mentity_redef(mentity) then return false
 		if not accept_mentity_extern(mentity) then return false
+		if not accept_mentity_example(mentity) then return false
 		if not accept_mentity_attribute(mentity) then return false
 		if not accept_mentity_empty_doc(mentity) then return false
 		if not accept_mentity_inherited(mentity) then return false
@@ -153,6 +154,17 @@ class ModelFilter
 	fun accept_mentity_empty_doc(mentity: MEntity): Bool do
 		if accept_empty_doc then return true
 		return mentity.mdoc_or_fallback != null
+	end
+
+	# Accept examples?
+	#
+	# Default is `true`.
+	var accept_example = true is optional
+
+	# Accept only entities that are not example related
+	fun accept_mentity_example(mentity: MEntity): Bool do
+		if accept_example then return true
+		return not mentity.is_example
 	end
 
 	# If set, accept only entities local to `accept_inherited`

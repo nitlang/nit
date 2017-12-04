@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # a "Framework" to make Multi-Agent Simulations in Nit
-module agent_simulation is no_warning("missing-doc")
+module agent_simulation is example, no_warning("missing-doc")
 
 import actors
 

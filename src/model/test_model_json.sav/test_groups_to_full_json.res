@@ -33,12 +33,41 @@
 		"full_name": "test_prog::test_prog"
 	}],
 	"mgroups": [{
+		"full_name": "test_prog>examples>"
+	}, {
 		"full_name": "test_prog>game>"
 	}, {
 		"full_name": "test_prog>platform>"
 	}, {
 		"full_name": "test_prog>rpg>"
 	}]
+}
+{
+	"name": "examples",
+	"class_name": "MGroup",
+	"full_name": "test_prog>examples>",
+	"mdoc": null,
+	"visibility": "public",
+	"modifiers": ["group"],
+	"location": {
+		"column_end": 0,
+		"column_start": 0,
+		"line_end": 0,
+		"line_start": 0,
+		"file": "test_location"
+	},
+	"is_root": false,
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"default_mmodule": null,
+	"parent": {
+		"full_name": "test_prog>"
+	},
+	"mmodules": [{
+		"full_name": "test_prog::game_examples"
+	}],
+	"mgroups": []
 }
 {
 	"name": "game",

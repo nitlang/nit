@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Crawler on the nitweb web API
-module nitwebcrawl
+module nitwebcrawl is example
 
 import json::static
 

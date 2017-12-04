@@ -29,7 +29,7 @@
 #
 # The advantage of the approach is that it is done programmatically so can be adapted to real complex use cases.
 # Basically, this is half-way between the full automatic serialization and the full manual serialisation.
-module custom_serialization
+module custom_serialization is example
 
 import serialization
 import json::serialization_write

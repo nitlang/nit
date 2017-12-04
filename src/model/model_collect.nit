@@ -568,6 +568,7 @@ redef class MClass
 	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_parents(view) do
 		var res = new HashSet[MENTITY]
+		if not view.mainmodule.flatten_mclass_hierarchy.has(self) then return res
 		for mclass in in_hierarchy(view.mainmodule).direct_greaters do
 			if mclass == self or not view.accept_mentity(mclass) then continue
 			res.add mclass
@@ -580,6 +581,7 @@ redef class MClass
 	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_children(view) do
 		var res = new HashSet[MENTITY]
+		if not view.mainmodule.flatten_mclass_hierarchy.has(self) then return res
 		for mclass in in_hierarchy(view.mainmodule).direct_smallers do
 			if mclass == self or not view.accept_mentity(mclass) then continue
 			res.add mclass

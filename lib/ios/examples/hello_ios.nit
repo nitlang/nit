@@ -14,6 +14,7 @@
 
 # Simple iOS app with a single label
 module hello_ios is
+	example
 	app_name "Hello iOS"
 	app_namespace "nit.app.hello_ios"
 	app_version(0, 5, git_revision)

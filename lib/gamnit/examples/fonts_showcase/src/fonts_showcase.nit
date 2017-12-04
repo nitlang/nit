@@ -7,6 +7,7 @@
 
 # Font support showcase
 module fonts_showcase is
+	example
 	app_name "gamnit fonts"
 	app_namespace "org.gamnit.fonts_showcase"
 	app_version(1, 0, git_revision)

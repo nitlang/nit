@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module user_test is example
+
 import queue
 
 var queue = new JavaQueue

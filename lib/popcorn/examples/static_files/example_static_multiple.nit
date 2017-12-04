@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module example_static_multiple is example
+
 import popcorn
 
 var app = new App

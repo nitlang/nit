@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Simple example of joinable task using threadpool
-module jointask_example
+module jointask_example is example
 
 import threadpool
 

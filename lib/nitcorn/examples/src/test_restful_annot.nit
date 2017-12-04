@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_restful_annot is example
+
 import nitcorn::restful_annot
 
 import pthreads

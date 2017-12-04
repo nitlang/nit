@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # An example to test and demonstrate the `sdl2` lib with `image` and `events`
-module minimal
+module minimal is example
 
 import sdl2::all
 

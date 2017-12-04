@@ -15,7 +15,7 @@
 # This is an example of a client of the frontend without command-line processing.
 #
 # It offers a simple nitcorn web server that offers a textarea and nitpick and nitlignt it.
-module nitlight_as_a_service
+module nitlight_as_a_service is example
 
 import frontend
 import htmlight

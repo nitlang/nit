@@ -13,13 +13,7 @@
 
 # Standard classes and methods used by default by Nit programs and libraries.
 # This module is implicitly imported by every module.
-module core is
-	new_annotation test
-	new_annotation before
-	new_annotation before_all
-	new_annotation after
-	new_annotation after_all
-end
+module core
 
 import posix
 import environ

@@ -17,7 +17,7 @@
 # Hyper Text Coffee Pot Control Protocol
 
 # A server that implements HTCPCP. At the moment there are no additions.
-module htcpcp_server
+module htcpcp_server is example
 
 import nitcorn
 

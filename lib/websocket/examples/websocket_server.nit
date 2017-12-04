@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Sample module for a minimal chat server using Websockets on port 8088
-module websocket_server
+module websocket_server is example
 
 import websocket
 

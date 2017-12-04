@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Example that uses `shibuqam` to authenticate users and count the number of time they reload.
-module reloadgame
+module reloadgame is example
 
 import popcorn
 import counter

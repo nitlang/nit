@@ -14,6 +14,7 @@
 
 # User interface example using `app::ui`
 module ui_example is
+	example
 	app_name "app.nit UI"
 	app_namespace "org.nitlanguage.ui_example"
 	android_api_min 21

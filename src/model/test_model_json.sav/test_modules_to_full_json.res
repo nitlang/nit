@@ -1,4 +1,38 @@
 {
+	"name": "game_examples",
+	"class_name": "MModule",
+	"full_name": "test_prog::game_examples",
+	"mdoc": null,
+	"visibility": "public",
+	"modifiers": ["module"],
+	"location": {
+		"column_end": 3,
+		"column_start": 1,
+		"line_end": 32,
+		"line_start": 15,
+		"file": "test_location"
+	},
+	"mpackage": {
+		"full_name": "test_prog"
+	},
+	"mgroup": {
+		"full_name": "test_prog>examples>"
+	},
+	"intro_mclasses": [{
+		"full_name": "test_prog::MyGame"
+	}],
+	"mclassdefs": [{
+		"full_name": "test_prog$MyGame"
+	}],
+	"intro_mclassdefs": [{
+		"full_name": "test_prog$MyGame"
+	}],
+	"redef_mclassdefs": [],
+	"imports": [{
+		"full_name": "test_prog::game"
+	}]
+}
+{
 	"name": "excluded",
 	"class_name": "MModule",
 	"full_name": "excluded::excluded",
@@ -470,5 +504,7 @@
 	"redef_mclassdefs": [],
 	"imports": [{
 		"full_name": "test_prog::test_prog"
+	}, {
+		"full_name": "test_prog::game_examples"
 	}]
 }

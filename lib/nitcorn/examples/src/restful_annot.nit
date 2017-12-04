@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Example for the `restful` annotation documented at `lib/nitcorn/restful.nit`
-module restful_annot
+module restful_annot is example
 
 import nitcorn::restful
 import nitcorn::pthreads
