@@ -208,6 +208,9 @@ redef class CmdFeatures
 end
 
 redef class CmdCode
+
+	redef var format = "ansi" is optional
+
 	redef fun execute(no_color) do
 		var mentity = self.mentity
 		if mentity == null then return
@@ -218,7 +221,16 @@ redef class CmdCode
 		else
 			print title
 		end
-		printn mentity.cs_source_code
+		if no_color == null or not no_color then
+			var ansi = render
+			if ansi != null then
+				print "~~~"
+				print ansi.write_to_string
+				print "~~~"
+			end
+		else
+			printn mentity.cs_source_code
+		end
 	end
 end
 
