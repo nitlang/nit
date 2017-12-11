@@ -20,6 +20,7 @@ import mnit::input
 
 import display_linux is conditional(linux)
 import display_android is conditional(android)
+import display_ios is conditional(ios)
 
 # Should Gamnit be more verbose?
 fun debug_gamnit: Bool do return false
