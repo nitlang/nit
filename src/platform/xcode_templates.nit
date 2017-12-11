@@ -174,6 +174,7 @@ class PbxprojectTemplate
 """
 
 		add """
+		0F4688411FDF8748004F34D4 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 0F4688401FDF8748004F34D4 /* assets */; };
 		0FDD07A21C6F8E0E006FF70E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FDD07A11C6F8E0E006FF70E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +220,7 @@ class PbxprojectTemplate
 		for file in files do add file.description
 
 		add """
+		0F4688401FDF8748004F34D4 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = {{{name}}}/assets; sourceTree = SOURCE_ROOT; };
 		0FDD07A11C6F8E0E006FF70E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +255,7 @@ class PbxprojectTemplate
 		AF9F83CE1A5F0D21004B62C0 /* {{{name}}} */ = {
 			isa = PBXGroup;
 			children = (
+				0F4688401FDF8748004F34D4 /* assets */,
 """
 			# Reference all known files
 			for file in files do add """
@@ -328,6 +331,7 @@ class PbxprojectTemplate
 
 		add """
 				0FDD07A21C6F8E0E006FF70E /* LaunchScreen.storyboard in Resources */,
+				0F4688411FDF8748004F34D4 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
