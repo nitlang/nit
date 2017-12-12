@@ -411,8 +411,12 @@ class DPad
 			center.offset(   0.0,-100.0+dy, 0.0))
 
 		# Non-interactive joystick background
-		sprites.add new Sprite(app.gamepad_spritesheet.joystick_back,
+		var back = new Sprite(app.gamepad_spritesheet.joystick_back,
 			center.offset(0.0, 0.0+dy, -1.0)) # In the back
+		back.draw_order = -1
+		sprites.add back
+
+		# Non-interactive handle in the bottom
 		if not show_down then sprites.add new Sprite(app.gamepad_spritesheet.joystick_down,
 			center.offset(0.0, -100.0+dy,  0.0))
 
