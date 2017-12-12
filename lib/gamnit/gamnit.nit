@@ -24,6 +24,7 @@ import programs
 import gamnit_android is conditional(android)
 import gamnit_linux is conditional(linux)
 import gamnit_ios is conditional(ios)
+import input_ios is conditional(ios)
 
 redef class App
 
