@@ -149,6 +149,9 @@ class PbxprojectTemplate
 	# Name of the project
 	var name: String
 
+	# OTHER_CFLAGS
+	var cflags = "" is writable
+
 	# All body/implementation source files to be compiled
 	private var source_files = new Array[PbxFile]
 
@@ -428,6 +431,7 @@ class PbxprojectTemplate
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -438,6 +442,7 @@ class PbxprojectTemplate
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
