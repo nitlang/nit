@@ -93,7 +93,7 @@ redef class App
 
 		if dynamic_resolution_ratio == 1.0 then
 			# Draw directly to the screen framebuffer
-			glBindFramebuffer(gl_FRAMEBUFFER, screen_framebuffer)
+			bind_screen_framebuffer screen_framebuffer
 			glViewport(0, 0, display.width, display.height)
 			glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
@@ -125,7 +125,7 @@ redef class App
 		var ratio = dynamic_resolution_ratio
 		ratio = ratio.clamp(min_dynamic_resolution_ratio, max_dynamic_resolution_ratio)
 
-		glBindFramebuffer(gl_FRAMEBUFFER, screen_framebuffer)
+		bind_screen_framebuffer screen_framebuffer
 		glBindBuffer(gl_ARRAY_BUFFER, dynamic_context.buffer_array)
 		glViewport(0, 0, display.width, display.height)
 		glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT

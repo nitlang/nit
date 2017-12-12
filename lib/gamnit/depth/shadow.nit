@@ -112,7 +112,7 @@ redef class App
 		end
 
 		# Take down, bring back default values
-		glBindFramebuffer(gl_FRAMEBUFFER, shadow_context.screen_framebuffer)
+		bind_screen_framebuffer shadow_context.screen_framebuffer
 		glColorMask(true, true, true, true)
 	end
 
