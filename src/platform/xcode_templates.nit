@@ -85,6 +85,9 @@ class PbxFile
 	# Path to `self`
 	var path: String
 
+	# Compiler flags for this source file
+	var cflags: String = "" is writable
+
 	# UUID for build elements
 	private var build_uuid: String = sys.pbx_uuid_generator.next_uuid is lazy
 
@@ -104,15 +107,22 @@ class PbxFile
 	end
 
 	# PBX description of this file
-	private fun description: Writable do return """
+	private fun description: Writable
+	do
+		var extra = ""
+		var cflags = cflags
+		if not cflags.is_empty then extra = "\nsettings = \{COMPILER_FLAGS = \"{cflags}\"; \};"
+
+		return """
 		{{{ref_uuid}}} /* {{{doc}}} */ = {
 			isa = PBXFileReference;
 			fileEncoding = 4;
 			lastKnownFileType = {{{file_type}}};
 			path = {{{path}}};
-			sourceTree = "<group>";
+			sourceTree = "<group>";{{{extra}}}
 			};
 """
+	end
 
 	private fun add_to_project(project: PbxprojectTemplate)
 	do
