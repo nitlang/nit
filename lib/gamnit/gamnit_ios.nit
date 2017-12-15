@@ -18,6 +18,8 @@ module gamnit_ios
 import ios
 import gamnit
 
+import ios::assets
+
 redef class App
 	redef fun did_finish_launching_with_options
 	do
