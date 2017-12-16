@@ -45,6 +45,7 @@ redef class App
 		print "GL version: {glGetString(gl_VERSION)}"
 		print "GLSL version: {glGetString(gl_SHADING_LANGUAGE_VERSION)}"
 		print "GL extensions: {glGetString(gl_EXTENSIONS)}"
+		print "GL max texture size: {glGetIntegerv(gl_MAX_TEXTURE_SIZE, 0)}"
 	end
 
 	# Hook for client programs to setup the scene
