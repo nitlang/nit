@@ -557,6 +557,7 @@ redef class Sound
 				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var retval_assets = app.default_soundpool.load_asset_fd_rid(nam)
+				nam.close
 				if retval_assets == -1 then
 					self.error = new Error("Failed to load " + path)
 				else
@@ -631,6 +632,7 @@ redef class Music
 				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var mp_sound_assets = app.default_mediaplayer.data_source_fd(nam)
+				nam.close
 				if mp_sound_assets.error != null then
 					self.error = mp_sound_assets.error
 				else
