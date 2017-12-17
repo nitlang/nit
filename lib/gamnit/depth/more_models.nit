@@ -31,8 +31,8 @@ end
 # Model loaded from a file in the asset folder
 #
 # In case of error, `error` is set accordingly.
-# If the error is on the mesh, `mesh` is set to a default `new Mesh.cube`.
-# If the material is missing or it failed to load, `material` is set to a `new SimpleMaterial.default`.
+# If the error is on the mesh, `mesh` is set to a default `new Cube`.
+# If the material is missing or it failed to load, `material` is set to the blueish `new Material`.
 class ModelAsset
 	super Model
 	super Asset
