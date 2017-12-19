@@ -57,6 +57,11 @@ Ignore the attributes.
 ### `--private`
 Also generate private API.
 
+### `--catalog`
+Use catalog.
+
+Allow queries to catalog data (can be long on large code base).
+
 # SEE ALSO
 
 The Nit language documentation and the source code of its tools and libraries may be downloaded from <http://nitlanguage.org>

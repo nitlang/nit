@@ -398,7 +398,7 @@ class CmdCode
 	# Rendering format
 	#
 	# Set the output format for this piece of code.
-	# Can be "raw" or "html".
+	# Can be "raw", "html" or "ansi".
 	# Default is "raw".
 	#
 	# This format can be different than the format used in the command response.
@@ -431,9 +431,14 @@ class CmdCode
 			var hl = new HtmlightVisitor
 			hl.highlight_node node
 			return hl.html
+		else if format == "ansi" then
+			var hl = new AnsiHighlightVisitor
+			hl.highlight_node node
+			return hl.result
 		end
-		# TODO make a raw visitor
-		return node.to_s
+		var mentity = self.mentity
+		if mentity == null then return null
+		return mentity.location.text
 	end
 end
 
