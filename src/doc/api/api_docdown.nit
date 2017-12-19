@@ -12,26 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Highlight and collect messages from a piece of code
-module api_light
+# Nitdoc specific Markdown format handling for Nitweb
+module api_docdown
 
-import web_base
-import htmlight
+import api_model
+import commands::commands_docdown
+
+redef class NitwebConfig
+	# Specific Markdown processor to use within Nitweb
+	var md_processor: MarkdownProcessor is lazy do
+		var parser = new CommandParser(view, modelbuilder)
+		var proc = new CmdMarkdownProcessor(parser)
+		proc.decorator = new CmdDecorator(view)
+		return proc
+	end
+end
 
 redef class APIRouter
 	redef init do
 		super
-		use("/light/", new APILight(config))
+		use("/docdown/", new APIDocdown(config))
 	end
 end
 
-# Highlight handler accept source code as POST data and render it as HTML with nitpick messages
-class APILight
+# Docdown handler accept docdown as POST data and render it as HTML
+class APIDocdown
 	super APIHandler
 
 	redef fun post(req, res) do
-		var hl = new HtmlightVisitor
-		var hlcode = hl.highlightcode(req.body)
-		res.json(hlcode)
+		res.html config.md_processor.process(req.body)
 	end
 end

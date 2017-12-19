@@ -15,7 +15,7 @@
 # Feedback related features
 module api_feedback
 
-import web_base
+import api_base
 import popcorn::pop_auth
 
 redef class NitwebConfig
@@ -65,7 +65,7 @@ class APIStarsMost
 	super APIFeedBack
 
 	redef fun get(req, res) do
-		res.json new JsonArray.from(config.stars.most_rated)
+		res.api_json(req, new JsonArray.from(config.stars.most_rated))
 	end
 end
 
@@ -74,7 +74,7 @@ class APIStarsBest
 	super APIFeedBack
 
 	redef fun get(req, res) do
-		res.json new JsonArray.from(config.stars.best_rated)
+		res.api_json(req, new JsonArray.from(config.stars.best_rated))
 	end
 end
 
@@ -83,7 +83,7 @@ class APIStarsWorst
 	super APIFeedBack
 
 	redef fun get(req, res) do
-		res.json new JsonArray.from(config.stars.worst_rated)
+		res.api_json(req, new JsonArray.from(config.stars.worst_rated))
 	end
 end
 
@@ -92,7 +92,7 @@ class APIStarsUsers
 	super APIFeedBack
 
 	redef fun get(req, res) do
-		res.json new JsonArray.from(config.stars.users_ratings)
+		res.api_json(req, new JsonArray.from(config.stars.users_ratings))
 	end
 end
 
@@ -103,7 +103,7 @@ class APIUserStars
 	redef fun get(req, res) do
 		var user = get_session_user(req)
 		if user == null then return
-		res.json new JsonArray.from(user.ratings(config))
+		res.api_json(req, new JsonArray.from(user.ratings(config)))
 	end
 end
 
@@ -115,7 +115,7 @@ class APIStars
 		var login = get_session_login(req)
 		var mentity = mentity_from_uri(req, res)
 		if mentity == null then return
-		res.json mentity.ratings(config, login)
+		res.api_json(req, mentity.ratings(config, login))
 	end
 end
 
@@ -129,7 +129,7 @@ class APIStarsDimension
 		if mentity == null then return
 		var dimension = req.param("dimension")
 		if dimension == null then return
-		res.json mentity.ratings_by_dimension(config, dimension, login)
+		res.api_json(req, mentity.ratings_by_dimension(config, dimension, login))
 	end
 
 	redef fun post(req, res) do
@@ -166,7 +166,7 @@ class APIStarsDimension
 		else
 			config.stars.save new StarRating(login, mentity.full_name, dimension, rating)
 		end
-		res.json mentity.ratings_by_dimension(config, dimension, login)
+		res.api_json(req, mentity.ratings_by_dimension(config, dimension, login))
 	end
 end
 

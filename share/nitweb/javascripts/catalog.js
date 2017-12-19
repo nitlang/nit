@@ -122,8 +122,8 @@
 					.success(cb)
 					.error(cbErr);
 			},
-			packages: function(p, n, cb, cbErr) {
-				$http.get('/api/catalog/packages?p=' + p + '&n=' + n)
+			packages: function(p, l, cb, cbErr) {
+				$http.get('/api/catalog/packages?p=' + p + '&l=' + l)
 					.success(cb)
 					.error(cbErr);
 			},
@@ -137,18 +137,18 @@
 					.success(cb)
 					.error(cbErr);
 			},
-			personMaintaining: function(id, p, n, cb, cbErr) {
-				$http.get('/api/catalog/person/' + id + '/maintaining?p=' + p + '&n=' + n)
+			personMaintaining: function(id, p, l, cb, cbErr) {
+				$http.get('/api/catalog/person/' + id + '/maintaining?p=' + p + '&l=' + l)
 					.success(cb)
 					.error(cbErr);
 			},
-			personContributing: function(id, p, n, cb, cbErr) {
-				$http.get('/api/catalog/person/' + id + '/contributing?p=' + p + '&n=' + n)
+			personContributing: function(id, p, l, cb, cbErr) {
+				$http.get('/api/catalog/person/' + id + '/contributing?p=' + p + '&l=' + l)
 					.success(cb)
 					.error(cbErr);
 			},
-			tag: function(id, p, n, cb, cbErr) {
-				$http.get('/api/catalog/tag/' + id + '?p=' + p + '&n=' + n)
+			tag: function(id, p, l, cb, cbErr) {
+				$http.get('/api/catalog/tag/' + id + '?p=' + p + '&l=' + l)
 					.success(cb)
 					.error(cbErr);
 			}
@@ -162,7 +162,6 @@
 		vm.packages = packages;
 		vm.tags = tags;
 		vm.stats = stats;
-
 		$scope.$on('change-page', function(e, page, limit) {
 			$state.go('catalog', {p: page, l: limit});
 		})
@@ -175,23 +174,22 @@
 		vm.contributing = contributing;
 
 		var p1 = $stateParams.p1 ? $stateParams.p1 : 1;
-		var n1 = $stateParams.n1 ? $stateParams.n1 : 10;
+		var l1 = $stateParams.l1 ? $stateParams.l1 : 10;
 		var p2 = $stateParams.p2 ? $stateParams.p2 : 1;
-		var n2 = $stateParams.n2 ? $stateParams.n2 : 10;
+		var l2 = $stateParams.l2 ? $stateParams.l2 : 10;
 
 		$scope.$on('change-page1', function(e, page, limit) {
-			$state.go('person', {id: $stateParams.id, p1: page, n1: limit, p2: p2, n2: n2});
+			$state.go('person', {id: $stateParams.id, p1: page, l1: limit, p2: p2, l2: l2});
 		})
 
 		$scope.$on('change-page2', function(e, page, limit) {
-			$state.go('person', {id: $stateParams.id, p1: p1, n1: n1, p2: page, n2: limit});
+			$state.go('person', {id: $stateParams.id, p1: p1, l1: l1, p2: page, l2: limit});
 		})
 	})
 
 	.controller('TagCtrl', function($state, $scope, tag) {
 		var vm = this;
 		vm.tag = tag;
-
 		$scope.$on('change-page', function(e, page, limit) {
 			$state.go('tag', {id: vm.tag.tag, p: page, l: limit});
 		})

@@ -1,216 +1,147 @@
 {
 	"results": [{
 		"name": "careers",
+		"synopsis": "Careers of the game.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "careers",
+			"synopsis": "Careers of the game."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::careers",
-		"mdoc": {
-			"content": "Careers of the game.\n\nAll characters can have a `Career`.\nA character can also quit its current career and start a new one.\n\nAvailable careers:\n\n * `Warrior`\n * `Magician`\n * `Alcoholic`",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 25,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 69,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Careers of the game.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "character",
+		"synopsis": "Characters are playable entity in the world.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "character",
+			"synopsis": "Characters are playable entity in the world."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::character",
-		"mdoc": {
-			"content": "Characters are playable entity in the world.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 68,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Characters are playable entity in the world.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "combat",
+		"synopsis": "COmbat interactions between characters.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "combat",
+			"synopsis": "COmbat interactions between characters."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::combat",
-		"mdoc": {
-			"content": "COmbat interactions between characters.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 67,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">COmbat interactions between characters.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "excluded",
+		"namespace": [{
+			"name": "excluded"
+		}, "::", {
+			"name": "excluded"
+		}],
 		"class_name": "MModule",
 		"full_name": "excluded::excluded",
-		"mdoc": null,
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 0,
-			"column_start": 0,
-			"line_end": 0,
-			"line_start": 0,
-			"file": "test_location"
-		}
+		"modifiers": ["module"]
 	}, {
 		"name": "game",
+		"synopsis": "A game abstraction for RPG.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "game",
+			"synopsis": "A game abstraction for RPG."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::game",
-		"mdoc": {
-			"content": "A game abstraction for RPG.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 45,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A game abstraction for RPG.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "game_examples",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "game_examples"
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::game_examples",
-		"mdoc": null,
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 32,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"modifiers": ["module"]
 	}, {
 		"name": "platform",
+		"synopsis": "Declares base types allowed on the platform.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "platform",
+			"synopsis": "Declares base types allowed on the platform."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::platform",
-		"mdoc": {
-			"content": "Declares base types allowed on the platform.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 17,
-			"column_start": 1,
-			"line_end": 59,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Declares base types allowed on the platform.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "races",
+		"synopsis": "Races of the game.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "races",
+			"synopsis": "Races of the game."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::races",
-		"mdoc": {
-			"content": "Races of the game.\n\nAll characters belong to a `Race`.\n\nAvailable races:\n\n * `Human`\n * `Dwarf`\n * `Elf`",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 24,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 78,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Races of the game.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "rpg",
+		"synopsis": "A worlg RPG abstraction.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "rpg",
+			"synopsis": "A worlg RPG abstraction."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::rpg",
-		"mdoc": {
-			"content": "A worlg RPG abstraction.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 13,
-			"column_start": 1,
-			"line_end": 21,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A worlg RPG abstraction.</span>",
+		"modifiers": ["module"]
 	}, {
 		"name": "test_prog",
+		"synopsis": "A test program with a fake model to check model tools.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "test_prog",
+			"synopsis": "A test program with a fake model to check model tools."
+		}],
 		"class_name": "MModule",
 		"full_name": "test_prog::test_prog",
-		"mdoc": {
-			"content": "A test program with a fake model to check model tools.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 16,
-				"line_start": 15,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["module"],
-		"location": {
-			"column_end": 13,
-			"column_start": 1,
-			"line_end": 26,
-			"line_start": 15,
-			"file": "test_location"
-		}
+		"html_synopsis": "<span class=\"synopsys nitdoc\">A test program with a fake model to check model tools.</span>",
+		"modifiers": ["module"]
 	}],
 	"page": null,
 	"count": null,

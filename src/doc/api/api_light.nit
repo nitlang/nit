@@ -12,29 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module api_auth
+# Highlight and collect messages from a piece of code
+module api_light
 
-import web_base
-import popcorn::pop_auth
-
-redef class NitwebConfig
-
-	# Github client id used for Github OAuth login.
-	#
-	# * key: `github.client_id`
-	# * default: ``
-	fun github_client_id: String do return ini["github.client.id"] or else ""
-
-	# Github client secret used for Github OAuth login.
-	#
-	# * key: `github.client_secret`
-	# * default: ``
-	fun github_client_secret: String do return ini["github.client.secret"] or else ""
-end
+import api_base
 
 redef class APIRouter
 	redef init do
 		super
-		use("/user", new GithubUser)
+		use("/light/", new APILight(config))
+	end
+end
+
+# Highlight handler accept source code as POST data and render it as HTML with nitpick messages
+class APILight
+	super APIHandler
+
+	redef fun post(req, res) do
+		var hl = new HtmlightVisitor
+		var hlcode = hl.highlightcode(req.body)
+		res.api_json(req, hlcode)
 	end
 end

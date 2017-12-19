@@ -14,7 +14,7 @@
 
 module api_metrics
 
-import web_base
+import api_base
 import metrics
 
 redef class APIRouter
@@ -72,7 +72,7 @@ class APIStructuralMetrics
 			res.api_error(404, "No metric for mentity `{mentity.full_name}`")
 			return
 		end
-		res.json metrics
+		res.api_json(req, metrics)
 	end
 end
 

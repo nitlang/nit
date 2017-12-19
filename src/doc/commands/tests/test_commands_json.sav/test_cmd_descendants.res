@@ -1,76 +1,49 @@
 {
 	"results": [{
 		"name": "Alcoholic",
+		"synopsis": "Alcoholics are good to nothing escept taking punches.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Alcoholic",
+			"synopsis": "Alcoholics are good to nothing escept taking punches."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Alcoholic",
-		"mdoc": {
-			"content": "Alcoholics are good to nothing escept taking punches.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 61,
-				"line_start": 60,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["class"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 69,
-			"line_start": 60,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Alcoholics are good to nothing escept taking punches.</span>",
+		"modifiers": ["class"]
 	}, {
 		"name": "Magician",
+		"synopsis": "Magicians know magic and how to use it.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Magician",
+			"synopsis": "Magicians know magic and how to use it."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Magician",
-		"mdoc": {
-			"content": "Magicians know magic and how to use it.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 50,
-				"line_start": 49,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["class"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 58,
-			"line_start": 49,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Magicians know magic and how to use it.</span>",
+		"modifiers": ["class"]
 	}, {
 		"name": "Warrior",
+		"synopsis": "Warriors are good for fighting.",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Warrior",
+			"synopsis": "Warriors are good for fighting."
+		}],
 		"class_name": "MClass",
 		"full_name": "test_prog::Warrior",
-		"mdoc": {
-			"content": "Warriors are good for fighting.",
-			"location": {
-				"column_end": 0,
-				"column_start": 1,
-				"line_end": 39,
-				"line_start": 38,
-				"file": "test_location"
-			}
-		},
 		"visibility": "public",
-		"modifiers": ["class"],
-		"location": {
-			"column_end": 3,
-			"column_start": 1,
-			"line_end": 47,
-			"line_start": 38,
-			"file": "test_location"
-		},
-		"mparameters": []
+		"html_synopsis": "<span class=\"synopsys nitdoc\">Warriors are good for fighting.</span>",
+		"modifiers": ["class"]
 	}],
 	"page": null,
 	"count": null,
