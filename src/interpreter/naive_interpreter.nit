@@ -1702,6 +1702,8 @@ redef class AEscapeExpr
 			var i = v.expr(ne)
 			if i == null then return
 			v.escapevalue = i
+		else
+			v.escapevalue = null
 		end
 		v.escapemark = self.escapemark
 	end
