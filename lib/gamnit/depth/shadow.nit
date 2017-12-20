@@ -218,7 +218,6 @@ private class ShadowContext
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 
 		resize(display, shadow_resolution)
-		assert glCheckFramebufferStatus(gl_FRAMEBUFFER) == gl_FRAMEBUFFER_COMPLETE
 
 		# Array buffer
 		buffer_array = glGenBuffers(1).first
