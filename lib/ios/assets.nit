@@ -46,6 +46,10 @@ private fun asset_path(path: NSString): NSString in "ObjC" `{
 	return [[NSBundle mainBundle] pathForResource:path ofType:nil];
 `}
 
+private fun asset_url(path: NSString): NSObject in "ObjC" `{
+	return [[NSBundle mainBundle] URLForResource:path withExtension:nil];
+`}
+
 private fun asset_content(path: NSString): NSString in "ObjC" `{
 	return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 `}
