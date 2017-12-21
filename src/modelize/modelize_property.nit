@@ -819,43 +819,46 @@ redef class AMethPropdef
 				modelbuilder.advice(self, "useless-init", "Warning: useless empty init in {mclassdef}")
 			end
 		end
-		if mprop == null then
-			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-			mprop = new MMethod(mclassdef, name, self.location, mvisibility)
-			if look_like_a_root_init and modelbuilder.the_root_init_mmethod == null then
-				modelbuilder.the_root_init_mmethod = mprop
-				mprop.is_root_init = true
+		do
+			if mprop == null then
+				var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
+				mprop = new MMethod(mclassdef, name, self.location, mvisibility)
+				if look_like_a_root_init and modelbuilder.the_root_init_mmethod == null then
+					modelbuilder.the_root_init_mmethod = mprop
+					mprop.is_root_init = true
+				end
+				mprop.is_init = is_init
+				mprop.is_new = is_new
+				if is_new then mclassdef.mclass.has_new_factory = true
+				if name == "sys" then mprop.is_toplevel = true # special case for sys allowed in `new` factories
+				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then
+					mprop.is_broken = true
+					break label
+				end
+			else
+				if mprop.is_broken then break label
+				if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then break label
+				check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 			end
-			mprop.is_init = is_init
-			mprop.is_new = is_new
-			if is_new then mclassdef.mclass.has_new_factory = true
-			if name == "sys" then mprop.is_toplevel = true # special case for sys allowed in `new` factories
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then
-				mprop.is_broken = true
-				return
-			end
-		else
-			if mprop.is_broken then return
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
-			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
-		end
 
-		# Check name conflicts in the local class for constructors.
-		if is_init then
-			for p, n in mclassdef.mprop2npropdef do
-				if p != mprop and p isa MMethod and p.name == name then
-					if not check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, p) then
-						mprop.is_broken = true
-						return
+			# Check name conflicts in the local class for constructors.
+			if is_init then
+				for p, n in mclassdef.mprop2npropdef do
+					if p != mprop and p isa MMethod and p.name == name then
+						if not check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, p) then
+							mprop.is_broken = true
+							break label
+						end
+						break
 					end
-					break
 				end
 			end
-		end
+		end label
 
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
+		mpropdef.is_broken = mprop.is_broken
 
 		set_doc(mpropdef, modelbuilder)
 
