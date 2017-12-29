@@ -39,8 +39,8 @@ class AppProject
 	var version_code: Int is lazy do
 
 		# Get the date and time (down to the minute) as string
-		var local_time = new Tm.localtime
-		var local_time_s = local_time.strftime("%y%m%d%H%M")
+		var gmtime = new Tm.gmtime
+		var local_time_s = gmtime.strftime("%y%m%d%H%M")
 		return local_time_s.to_i
 	end
 
