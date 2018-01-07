@@ -1,1 +1,2 @@
 NOT YET IMPLEMENTED
+Error: dev package for `glesv1_cm` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
