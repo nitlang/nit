@@ -476,9 +476,6 @@ redef class App
 	do
 		super
 
-		# Clean up
-		simple_2d_program.delete
-
 		# Close gamnit
 		var display = display
 		if display != null then display.close
