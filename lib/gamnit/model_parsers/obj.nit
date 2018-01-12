@@ -80,7 +80,11 @@ class ObjFileParser
 				geometry.params.add vec
 			else if token == "f" then # Faces
 				var face = read_face
-				if obj_obj != null then obj_obj.faces.add face
+				if obj_obj == null then
+					obj_obj = new ObjObj("")
+					geometry.objects.add obj_obj
+				end
+				obj_obj.faces.add face
 			else if token == "mtllib" then
 				current_material_lib = read_until_eol_or_comment
 			else if token == "usemtl" then

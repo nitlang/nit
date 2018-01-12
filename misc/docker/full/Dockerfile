@@ -37,6 +37,7 @@ RUN dpkg --add-architecture i386 \
 		inkscape \
 		libopenmpi-dev \
 		unzip \
+		zipalign \
 		# Android
 		libc6:i386 \
 		libstdc++6:i386 \
