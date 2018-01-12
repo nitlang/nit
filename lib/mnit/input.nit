@@ -16,7 +16,6 @@
 # Implemented independantly for each platforms and technologies.
 module input
 
-import sdl is conditional(linux)
 import android::input_events is conditional(android)
 
 # Input to the App, propagated through `App::input`.
