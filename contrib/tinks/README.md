@@ -30,16 +30,10 @@ It should be easy to add features as refinements on both the client and the serv
 
 # Clients and server
 
-Tinks! has two distinct clients and one dedicated server.
+Tinks! has a client and a dedicated server.
 The whole project is modular, these software share mostly the same code.
 
-* The original 2D client at `bin/tinks` uses mnit and OpenGL ES 1.0 to display the world from above.
-
-  The Android variant at `bin/tinks.apk` uses the same view from above, with added on-screen controls.
-
-  ![Screenshot of the 2D client](doc/tinks.png)
-
-* The 3D client at `bin/tinks3d` uses gamnit and OpenGL ES 2.0 for an immersive world.
+* The 3D client at `bin/tinks3d` uses `gamnit` and OpenGL ES 2.0 for an immersive world.
 
   Despite the different graphics, both client are fully compatible for multiplayer.
 
