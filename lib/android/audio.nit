@@ -28,8 +28,8 @@
 #
 # ~~~nitish
 # # Note that you need to specify the path from "assets" folder and the extension
-# var s = app.load_sound("sounds/test_sound.ogg")
-# var m = app.load_music("sounds/test_music.ogg")
+# var s = new Sound("sounds/test_sound.ogg")
+# var m = new Music("sounds/test_music.ogg")
 # s.play
 # m.play
 # ~~~
@@ -542,14 +542,22 @@ redef class Sound
 
 	redef fun load do
 		if is_loaded then return
-		var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, path.strip_extension)
-		if retval_resources == -1 then
-			self.error = new Error("Failed to load " + path)
+
+		# Try resources (res)
+		var rid = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, path.strip_extension)
+		if rid > 0 then
+			self.soundpool_id = rid
+			self.soundpool = app.default_soundpool
+			self.error = null
+			self.soundpool.error = null
+		else
+			# Try assets
 			var nam = app.asset_manager.open_fd(path)
 			if nam.is_java_null then
 				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var retval_assets = app.default_soundpool.load_asset_fd_rid(nam)
+				nam.close
 				if retval_assets == -1 then
 					self.error = new Error("Failed to load " + path)
 				else
@@ -559,11 +567,6 @@ redef class Sound
 					self.soundpool.error = null
 				end
 			end
-		else
-			self.soundpool_id = retval_resources
-			self.soundpool = app.default_soundpool
-			self.error = null
-			self.soundpool.error = null
 		end
 		is_loaded = true
 
@@ -611,14 +614,25 @@ redef class Music
 
 	redef fun load do
 		if is_loaded then return
-		var mp_sound_resources = app.default_mediaplayer.load_sound(app.resource_manager.raw_id(path.strip_extension), app.native_activity)
-		if mp_sound_resources.error != null then
+
+		# Try resources (res)
+		var rid = app.resource_manager.raw_id(path.strip_extension)
+		if rid > 0 then
+			var mp_sound_resources = app.default_mediaplayer.load_sound(rid, app.native_activity)
+			if mp_sound_resources.error != null then
+				self.media_player = app.default_mediaplayer
+				self.error = null
+				self.media_player.error = null
+			end
 			self.error = mp_sound_resources.error
+		else
+			# Try assets
 			var nam = app.asset_manager.open_fd(path)
 			if nam.is_java_null then
 				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var mp_sound_assets = app.default_mediaplayer.data_source_fd(nam)
+				nam.close
 				if mp_sound_assets.error != null then
 					self.error = mp_sound_assets.error
 				else
@@ -627,10 +641,6 @@ redef class Music
 					self.media_player.error = null
 				end
 			end
-		else
-			self.media_player = app.default_mediaplayer
-			self.error = null
-			self.media_player.error = null
 		end
 		is_loaded = true
 
