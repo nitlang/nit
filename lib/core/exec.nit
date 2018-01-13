@@ -327,6 +327,9 @@ class Process
 				close(err_fd[1]);
 			} else
 				result->err_fd = -1;
+		} else {
+			perror("Process:");
+			return NULL;
 		}
 
 		return result;
