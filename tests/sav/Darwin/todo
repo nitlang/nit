@@ -1,5 +1,4 @@
 fatal error: 'endian.h' file not found
-Error: dev package for `glesv1_cm` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
 Error: dev package for `glesv2` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
 Error: dev package for `egl` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
 Error: dev package for `ncurses` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
