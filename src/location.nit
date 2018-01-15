@@ -208,7 +208,7 @@ class Location
 
 		if line_start == loc.line_start then
 			if column_start < loc.column_start then return false
-			if column_start > loc.column_end then return false
+			if line_start == loc.line_end and column_start > loc.column_end then return false
 		end
 
 		if line_end == loc.line_end and column_end > loc.column_end then return false
