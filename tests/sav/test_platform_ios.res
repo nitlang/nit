@@ -7,4 +7,5 @@ out/test_platform_ios.bin/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.n
 out/test_platform_ios.bin/PkgInfo
 out/test_platform_ios.bin/_CodeSignature
 out/test_platform_ios.bin/_CodeSignature/CodeResources
+out/test_platform_ios.bin/assets
 out/test_platform_ios.bin/test_platform_ios
