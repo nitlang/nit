@@ -15,13 +15,8 @@
 
 # Fetch libgc/bdwgc
 
-# cd to the absolute installation path
-if expr match "$0" "^/.*"; then
-	install="`dirname "$0"`"
-else
-	install="`pwd`/`dirname "$0"`"
-fi
-cd $install
+# cd to the installation path
+cd "`dirname "${BASH_SOURCE[0]}"`"
 
 # Download or redownload
 rm -rf bdwgc
