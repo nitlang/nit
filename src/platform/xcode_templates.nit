@@ -118,7 +118,7 @@ class PbxFile
 			isa = PBXFileReference;
 			fileEncoding = 4;
 			lastKnownFileType = {{{file_type}}};
-			path = {{{path}}};
+			path = '{{{path}}}';
 			sourceTree = "<group>";{{{extra}}}
 			};
 """
