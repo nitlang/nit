@@ -17,12 +17,11 @@ module asteronits is
 	app_name "Asteronits"
 	app_namespace "org.nitlanguage.asteronits"
 	app_version(1, 0, git_revision)
-
-	android_manifest_activity """android:screenOrientation="sensorLandscape""""
-	android_api_target 10
 end
 
 import gamnit::flat
+
+import gamnit::landscape
 
 import game_logic
 import spritesheet

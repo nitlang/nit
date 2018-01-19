@@ -50,7 +50,7 @@ redef class GamnitDisplay
 		setup_egl_display sdl_window.wm_info.display_handle
 
 		if debug_gamnit then print "Setting up EGL context"
-		select_egl_config(red_bits, green_bits, blue_bits, 8, 8, 0, 0)
+		select_egl_config(red_bits, green_bits, blue_bits, 8, 8, 0)
 		setup_egl_context sdl_window.wm_info.window_handle
 	end
 

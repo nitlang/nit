@@ -17,12 +17,10 @@ module model_viewer is
 	app_name "Model Viewer"
 	app_namespace "org.nitlanguage.model_viewer"
 	app_version(1, 0, git_revision)
-
-	android_manifest_activity """android:screenOrientation="landscape""""
-	android_api_target 10
 end
 
 import gamnit::depth
+import gamnit::landscape
 
 import globe
 

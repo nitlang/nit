@@ -16,11 +16,10 @@ module action_nitro is
 	app_name "Action Nitro"
 	app_namespace "net.xymus.action_nitro"
 	app_version(1, 0, git_revision)
-
-	android_manifest_activity """android:screenOrientation="sensorLandscape""""
 end
 
 import gamnit::depth
+import gamnit::landscape
 
 import game
 
