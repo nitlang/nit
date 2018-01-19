@@ -20,6 +20,11 @@
 # Set lang do default to avoid failed tests because of locale
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
+if uname | grep Darwin 1>/dev/null 2>&1; then
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
+fi
+
 export NIT_TESTING=true
 # Use the pid as a collision prevention
 export NIT_TESTING_ID=$$
