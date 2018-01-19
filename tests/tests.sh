@@ -34,12 +34,21 @@ unset NIT_DIR
 
 # Get the first Java lib available
 if which_java=$(which javac 2>/dev/null); then
-	JAVA_HOME=$(dirname $(dirname $(readlink -f "$which_java")))
+
+	if sh -c "readlink -f ." 1>/dev/null 2>&1; then
+		READLINK="readlink -f"
+	else
+		# Darwin?
+		READLINK="readlink"
+	fi
+	JAVA_HOME=$(dirname $(dirname $($READLINK "$which_java")))
 
 	shopt -s nullglob
 	paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
-	paths=($paths)
-	JNI_LIB_PATH=`dirname ${paths[0]}`
+	if [ -n "$paths" ]; then
+		paths=($paths)
+		JNI_LIB_PATH=`dirname ${paths[0]}`
+	fi
 	shopt -u nullglob
 fi
 
