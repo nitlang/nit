@@ -1,2 +1,2 @@
 #!/bin/sh
-./listfull.sh | xargs -E '' -x -- ./tests.sh "$@"
+./listfull.sh | xargs -E '' -- ./tests.sh "$@"
