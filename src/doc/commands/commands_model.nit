@@ -70,7 +70,7 @@ class CmdComment
 	end
 
 	# Render `mdoc` depending on `full_doc` and `format`
-	fun render: nullable Writable do
+	fun render_comment: nullable Writable do
 		var mdoc = self.mdoc
 		if mdoc == null then return null
 

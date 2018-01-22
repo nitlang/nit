@@ -65,7 +65,7 @@ end
 redef class CmdComment
 	redef fun to_json do
 		var obj = new JsonObject
-		var render = self.render
+		var render = self.render_comment
 		if render != null then
 			obj["documentation"] = render.write_to_string
 		end
