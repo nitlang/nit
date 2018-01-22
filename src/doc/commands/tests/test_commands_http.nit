@@ -175,7 +175,7 @@ class TestCommandsHttp
 
 	fun test_cmd_http_code is test do
 		var req = new_request("/test_prog::Career")
-		var cmd = new CmdCode(test_view, test_builder)
+		var cmd = new CmdEntityCode(test_view, test_builder)
 		var res = cmd.http_init(req)
 		assert res isa CmdSuccess
 		assert cmd.node isa AStdClassdef
@@ -184,7 +184,7 @@ class TestCommandsHttp
 
 	fun test_cmd_http_code_format is test do
 		var req = new_request("/test_prog::Career?format=html")
-		var cmd = new CmdCode(test_view, test_builder)
+		var cmd = new CmdEntityCode(test_view, test_builder)
 		var res = cmd.http_init(req)
 		assert res isa CmdSuccess
 		assert cmd.node isa AStdClassdef
@@ -193,7 +193,7 @@ class TestCommandsHttp
 
 	fun test_cmd_http_code_no_code is test do
 		var req = new_request("/test_prog")
-		var cmd = new CmdCode(test_view, test_builder)
+		var cmd = new CmdEntityCode(test_view, test_builder)
 		var res = cmd.http_init(req)
 		assert res isa WarningNoCode
 	end
