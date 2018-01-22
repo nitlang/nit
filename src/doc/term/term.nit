@@ -207,7 +207,7 @@ redef class CmdFeatures
 	end
 end
 
-redef class CmdCode
+redef class CmdEntityCode
 
 	redef var format = "ansi" is optional
 
@@ -222,7 +222,7 @@ redef class CmdCode
 			print title
 		end
 		if no_color == null or not no_color then
-			var ansi = render
+			var ansi = render_code(node)
 			if ansi != null then
 				print "~~~"
 				print ansi.write_to_string

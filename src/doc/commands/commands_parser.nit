@@ -136,7 +136,7 @@ class CommandParser
 	fun new_command(name: String): nullable DocCommand do
 		# CmdEntity
 		if name == "doc" then return new CmdComment(view)
-		if name == "code" then return new CmdCode(view, modelbuilder)
+		if name == "code" then return new CmdEntityCode(view, modelbuilder)
 		if name == "lin" then return new CmdLinearization(view)
 		if name == "defs" then return new CmdFeatures(view)
 		if name == "parents" then return new CmdParents(view)

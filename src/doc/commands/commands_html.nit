@@ -104,9 +104,9 @@ redef class CmdComment
 	end
 end
 
-redef class CmdCode
+redef class CmdEntityCode
 	redef fun to_html do
-		var output = render
+		var output = render_code(node)
 		if output == null then return ""
 		return "<pre>{output.write_to_string}</pre>"
 	end
