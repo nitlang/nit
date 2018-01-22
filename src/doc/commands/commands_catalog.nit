@@ -52,31 +52,31 @@ class CmdCatalogSearch
 		matches = matches.rerank.sort(vis_sorter, score_sorter)
 
 		# lookup by tags
-		var malus = matches.length
+		var malus = matches.length.to_f
 		if catalog.tag2proj.has_key(query) then
 			for mpackage in catalog.tag2proj[query] do
 				matches.add new IndexMatch(mpackage, malus)
-				malus += 1
+				malus += 1.0
 			end
 			matches = matches.uniq.rerank.sort(vis_sorter, score_sorter)
 		end
 
 		# lookup by full_name prefix
-		malus = matches.length
+		malus = matches.length.to_f
 		var full_matches = new IndexMatches
 		for match in index.find_by_full_name_prefix(query).
 			sort(lfname_sorter, fname_sorter) do
-			match.score += 1
+			match.score += 1.0
 			full_matches.add match
 		end
 		matches = matches.uniq
 
 		# lookup by similarity
-		malus = matches.length
+		malus = matches.length.to_f
 		var sim_matches = new IndexMatches
 		for match in index.find_by_similarity(query).sort(score_sorter, lname_sorter, name_sorter) do
-			if match.score > query.length then break
-			match.score += 1
+			if match.score > query.length.to_f then break
+			match.score += 1.0
 			sim_matches.add match
 		end
 		matches.add_all sim_matches
