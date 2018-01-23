@@ -23,11 +23,12 @@ private import annotation
 private import literal
 
 redef class ToolContext
+	# Detects the `pkgconfig` annotation on the module declaration only
 	var pkgconfig_phase: Phase = new PkgconfigPhase(self, [literal_phase])
 end
 
-# Detects the `pkgconfig` annotation on the module declaration only.
-class PkgconfigPhase
+# Detects the `pkgconfig` annotation on the module declaration only
+private class PkgconfigPhase
 	super Phase
 
 	redef fun process_annotated_node(nmoduledecl, nat)
@@ -43,7 +44,7 @@ class PkgconfigPhase
 			return
 		end
 
-		# retreive module
+		# retrieve module
 		var nmodule = nmoduledecl.parent.as(AModule)
 		var mmodule = nmodule.mmodule.as(not null)
 
