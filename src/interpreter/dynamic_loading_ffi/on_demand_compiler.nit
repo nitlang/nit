@@ -138,19 +138,10 @@ redef class AModule
 		var pkgconfigs = mmodule.pkgconfigs
 		var pkg_cflags = ""
 		if not pkgconfigs.is_empty then
-			var cmd = "which pkg-config >/dev/null"
-			if system(cmd) != 0 then
-				v.fatal "FFI Error: Command `pkg-config` not found. Please install it"
-				return false
-			end
 
-			for p in pkgconfigs do
-				cmd = "pkg-config --exists '{p}'"
-				if system(cmd) != 0 then
-					v.fatal "FFI Error: package {p} is not found by `pkg-config`. Please install it."
-					return false
-				end
-			end
+			# Check if the pkgconfig packages are available
+			v.modelbuilder.toolcontext.check_pkgconfig_packages pkgconfigs
+			if not v.modelbuilder.toolcontext.check_errors then return false
 
 			pkg_cflags = "`pkg-config --cflags {pkgconfigs.join(" ")}`"
 			ldflags += " `pkg-config --libs {pkgconfigs.join(" ")}`"

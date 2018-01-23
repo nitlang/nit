@@ -25,6 +25,42 @@ private import literal
 redef class ToolContext
 	# Detects the `pkgconfig` annotation on the module declaration only
 	var pkgconfig_phase: Phase = new PkgconfigPhase(self, [literal_phase])
+
+	# Is the external program `pkg-config` available?
+	var pkgconfig_is_available: Bool is lazy do
+		# Ignore/silence the process output
+		var proc_which = new ProcessReader("which", "pkg-config")
+		proc_which.wait
+
+		var status = proc_which.status
+		if status != 0 then
+			error(null, "Error: program `pkg-config` not found, make sure it is installed.")
+			return false
+		end
+		return true
+	end
+
+	# Check if the `packages` are known by the external program `pkg-config`
+	#
+	# Missing packages are reported to the console via `ToolContext::error`.
+	# Check for errors using `check_errors`.
+	fun check_pkgconfig_packages(packages: Array[String])
+	do
+		if not pkgconfig_is_available then return
+
+		for pkg in packages do
+			var proc_exist = new Process("pkg-config", "--exists", pkg)
+			proc_exist.wait
+			var status = proc_exist.status
+			if status == 1 then
+				error(null,
+					"Error: dev package for `{pkg}` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.")
+			else if status != 0 then
+				error(null,
+					"Error: something went wrong calling `pkg-config`, make sure it is correctly configured.")
+			end
+		end
+	end
 end
 
 # Detects the `pkgconfig` annotation on the module declaration only
@@ -67,27 +103,7 @@ private class PkgconfigPhase
 			end
 		end
 
-		# check availability of pkg-config
-		var proc_which = new ProcessReader("which", "pkg-config")
-		proc_which.wait
-		var status = proc_which.status
-		if status != 0 then
-			modelbuilder.error(nat, "Error: program `pkg-config` not found, make sure it is installed.")
-			return
-		end
-
 		for pkg in pkgs do
-			var proc_exist = new Process("pkg-config", "--exists", pkg)
-			proc_exist.wait
-			status = proc_exist.status
-			if status == 1 then
-				modelbuilder.error(nat, "Error: dev package for `{pkg}` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.")
-				continue
-			else if status != 0 then
-				modelbuilder.error(nat, "Error: something went wrong calling `pkg-config`, make sure it is correctly installed.")
-				continue
-			end
-
 			mmodule.pkgconfigs.add pkg
 		end
 	end
