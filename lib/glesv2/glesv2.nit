@@ -17,8 +17,8 @@
 # OpenGL graphics rendering library for embedded systems, version 2.0
 #
 # This is a low-level wrapper, it can be useful for developers already familiar
-# with the C API of OpenGL. Most developers will prefer to use higher level
-# wrappers such as `mnit` and `gammit`.
+# with the C API of OpenGL. Most developers will prefer to use the higher level
+# graphic API `gammit`.
 #
 # Defines the annotations `glsl_vertex_shader` and `glsl_fragment_shader`
 # applicable on string literals to check shader code using `glslangValidator`.

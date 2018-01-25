@@ -37,8 +37,8 @@
 # ~~~~
 module sensors
 
-import game
-import mnit
+import android
+import gamnit
 
 in "C header" `{
 	#include <jni.h>
@@ -239,11 +239,11 @@ redef class App
 	var eventqueue: ASensorEventQueue
 	var sensors_support_enabled = false is writable
 
-	private fun extern_input_sensor_accelerometer(event: ASensorAccelerometer) do input(event)
-	private fun extern_input_sensor_magnetic_field(event: ASensorMagneticField) do input(event)
-	private fun extern_input_sensor_gyroscope(event: ASensorGyroscope) do input(event)
-	private fun extern_input_sensor_light(event: ASensorLight) do input(event)
-	private fun extern_input_sensor_proximity(event: ASensorProximity) do input(event)
+	private fun extern_input_sensor_accelerometer(event: ASensorAccelerometer) do accept_event(event)
+	private fun extern_input_sensor_magnetic_field(event: ASensorMagneticField) do accept_event(event)
+	private fun extern_input_sensor_gyroscope(event: ASensorGyroscope) do accept_event(event)
+	private fun extern_input_sensor_light(event: ASensorLight) do accept_event(event)
+	private fun extern_input_sensor_proximity(event: ASensorProximity) do accept_event(event)
 
 	# Sensors support
 	# The user decides which sensors he wants to use by setting them enabled
