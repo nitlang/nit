@@ -205,7 +205,7 @@ end
 class APIEntityCode
 	super APICommand
 
-	redef fun command do return new CmdCode(config.view, config.modelbuilder)
+	redef fun command do return new CmdEntityCode(config.view, config.modelbuilder)
 end
 
 # Return the UML diagram for MEntity.

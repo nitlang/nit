@@ -28,8 +28,6 @@ redef class DocCommand
 end
 
 redef class CmdEntity
-
-
 	redef fun http_init(req) do
 		var name = req.param("id")
 		if name != null then name = name.from_percent_encoding
@@ -124,6 +122,18 @@ redef class CmdCode
 	redef fun http_init(req) do
 		format = req.string_arg("format") or else "raw"
 		return super
+	end
+end
+
+redef class CmdEntityCode
+	# FIXME avoid linearization conflict
+	redef fun http_init(req) do
+		var name = req.param("id")
+		if name != null then name = name.from_percent_encoding
+		mentity_name = name
+
+		format = req.string_arg("format") or else "raw"
+		return init_command
 	end
 end
 

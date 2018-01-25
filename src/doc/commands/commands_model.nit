@@ -70,7 +70,7 @@ class CmdComment
 	end
 
 	# Render `mdoc` depending on `full_doc` and `format`
-	fun render: nullable Writable do
+	fun render_comment: nullable Writable do
 		var mdoc = self.mdoc
 		if mdoc == null then return null
 
@@ -383,17 +383,14 @@ class WarningNoFeatures
 	redef fun to_s do return "No features for `{mentity.full_name}`"
 end
 
-# Cmd that finds the source code related to an `mentity`
-class CmdCode
-	super CmdEntity
+# Abstract command that returns source-code pieces
+abstract class CmdCode
+	super DocCommand
 
-	autoinit(view, modelbuilder, mentity, mentity_name, format)
+	autoinit(view, modelbuilder, format)
 
 	# ModelBuilder used to get AST nodes
 	var modelbuilder: ModelBuilder
-
-	# AST node to return
-	var node: nullable ANode = null is optional, writable
 
 	# Rendering format
 	#
@@ -405,6 +402,32 @@ class CmdCode
 	# For example you can choose to render code as HTML inside a JSON object response.
 	# Another example is to render raw format to put into a HTML code tag.
 	var format = "raw" is optional, writable
+
+	# Render `node` depending on the selected `format`
+	fun render_code(node: nullable ANode): nullable Writable do
+		if node == null then return null
+		if format == "html" then
+			var hl = new HtmlightVisitor
+			hl.highlight_node node
+			return hl.html
+		else if format == "ansi" then
+			var hl = new AnsiHighlightVisitor
+			hl.highlight_node node
+			return hl.result
+		end
+		return node.location.text
+	end
+end
+
+# Cmd that finds the source code related to an `mentity`
+class CmdEntityCode
+	super CmdEntity
+	super CmdCode
+
+	autoinit(view, modelbuilder, mentity, mentity_name, format)
+
+	# AST node to return
+	var node: nullable ANode = null is optional, writable
 
 	# Same as `CmdEntity::init_mentity`
 	#
@@ -421,24 +444,6 @@ class CmdCode
 		node = modelbuilder.mentity2node(mentity)
 		if node == null then return new WarningNoCode(mentity)
 		return res
-	end
-
-	# Render `node` depending on the selected `format`
-	fun render: nullable Writable do
-		var node = self.node
-		if node == null then return null
-		if format == "html" then
-			var hl = new HtmlightVisitor
-			hl.highlight_node node
-			return hl.html
-		else if format == "ansi" then
-			var hl = new AnsiHighlightVisitor
-			hl.highlight_node node
-			return hl.result
-		end
-		var mentity = self.mentity
-		if mentity == null then return null
-		return mentity.location.text
 	end
 end
 

@@ -65,7 +65,7 @@ end
 redef class CmdComment
 	redef fun to_json do
 		var obj = new JsonObject
-		var render = self.render
+		var render = self.render_comment
 		if render != null then
 			obj["documentation"] = render.write_to_string
 		end
@@ -73,14 +73,14 @@ redef class CmdComment
 	end
 end
 
-redef class CmdCode
+redef class CmdEntityCode
 	redef fun to_json do
 		var obj = new JsonObject
 		var node = self.node
 		if node != null then
 			obj["location"] = node.location
 		end
-		var output = render
+		var output = render_code(node)
 		if output != null then
 			obj["code"] = output.write_to_string
 		end

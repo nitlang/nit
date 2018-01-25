@@ -151,14 +151,14 @@ class TestCommandsModel
 	# CmdCode
 
 	fun test_cmd_code is test do
-		var cmd = new CmdCode(test_view, test_builder, mentity_name = "test_prog::Career")
+		var cmd = new CmdEntityCode(test_view, test_builder, mentity_name = "test_prog::Career")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.node isa AStdClassdef
 	end
 
 	fun test_cmd_code_no_code is test do
-		var cmd = new CmdCode(test_view, test_builder, mentity_name = "test_prog")
+		var cmd = new CmdEntityCode(test_view, test_builder, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa WarningNoCode
 	end

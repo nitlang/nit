@@ -141,7 +141,7 @@ class TestCommandsParser
 	fun test_cmd_parser_code is test do
 		var parser = new CommandParser(test_view, test_builder)
 		var cmd = parser.parse("code: test_prog::Character")
-		assert cmd isa CmdCode
+		assert cmd isa CmdEntityCode
 		assert parser.error == null
 		assert cmd.node != null
 	end
