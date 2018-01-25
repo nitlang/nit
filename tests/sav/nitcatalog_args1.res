@@ -41,6 +41,10 @@
 <p><img src="../res/c94d8a73ccfe143ebde7599e88f5f5ce.png" alt="Tinks3D"/></p>
 </div><h2>Content</h2><ul>
 <li><strong>test_prog</strong>: <span class="synopsys nitdoc">Test program for model tools.</span> (test_prog)<ul>
+<li><strong>examples</strong> (test_prog/examples)<ul>
+<li><strong>game_examples</strong> (test_prog/examples/game_examples.nit)</li>
+</ul>
+</li>
 <li><strong>game</strong>: <span class="synopsys nitdoc">Gaming group</span> (test_prog/game)<ul>
 <li><strong>game</strong>: <span class="synopsys nitdoc">A game abstraction for RPG.</span> (test_prog/game/game.nit)</li>
 </ul>
@@ -76,8 +80,8 @@
 </ul>
 <h3>Quality</h3>
 <ul class="box">
-<li>28 warnings (63/kloc)</li>
-<li>95% documented</li>
+<li>28 warnings (59/kloc)</li>
+<li>82% documented</li>
 </ul>
 <h3>Tags</h3>
 <a href="../index.html#tag_test">test</a>, <a href="../index.html#tag_game">game</a><h3>Requirements</h3>
@@ -85,10 +89,10 @@ none<h3>Clients</h3>
 none<h3>Contributors</h3>
 <ul class="box"><li><a href="http:&#47;&#47;www.example.com&#47;~jdoe"><img src="https://secure.gravatar.com/avatar/694ea0904ceaf766c6738166ed89bafb?size=20&amp;default=retro">&nbsp;John Doe</a></li><li><img src="https://secure.gravatar.com/avatar/db3f2909768694ad2bb6409b44627182?size=20&amp;default=retro">&nbsp;Riri</li><li>Fifi (http:&#47;&#47;www.example.com&#47;~fifi)</li><li>Loulou</li></ul><h3>Stats</h3>
 <ul class="box">
-<li>8 modules</li>
-<li>22 classes</li>
-<li>68 methods</li>
-<li>439 lines of code</li>
+<li>9 modules</li>
+<li>23 classes</li>
+<li>75 methods</li>
+<li>471 lines of code</li>
 </ul>
 </div>
 </div> <!-- container-fluid -->

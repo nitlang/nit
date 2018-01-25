@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Example use of the Curl module
-module curl_http
+module curl_http is example
 
 import curl
 

@@ -31,15 +31,16 @@
 # Here we use `curl` to access some URI on the app.
 #
 # ~~~nitish
-# module test_example_hello is test_suite
+# module test_example_hello is test
 #
 # import pop_tests
 # import example_hello
 #
 # class TestExampleHello
 #	super TestPopcorn
+#	test
 #
-#	fun test_example_hello do
+#	fun example_hello is test do
 #		var app = new App
 #		app.use("/", new HelloHandler)
 #		run_test(app)
@@ -68,7 +69,6 @@
 # See `examples/hello_world` for the complete example.
 module pop_tests
 
-import test_suite
 import popcorn
 import pthreads
 
@@ -79,9 +79,11 @@ redef class Sys
 
 	# Return a new port for each instance
 	fun test_port: Int do
-		srand
-		return 10000+20000.rand
+		return testing_id % 20000 + 10000
 	end
+
+	# Nitdoc testing ID
+	fun testing_id: Int do return "NIT_TESTING_ID".environ.to_i
 end
 
 # Thread running the App to test.
@@ -123,7 +125,6 @@ end
 
 # TestSuite for Popcorn blackbox testing.
 class TestPopcorn
-	super TestSuite
 
 	# Host used to run App.
 	var host: String = test_host

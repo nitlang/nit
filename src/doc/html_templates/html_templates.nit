@@ -334,6 +334,8 @@ end
 redef class DocSection
 	super BSComponent
 
+	redef fun css_classes do return new Array[String]
+
 	redef fun rendering do
 		if is_hidden then
 			addn "<a id=\"{html_id}\"></a>"
@@ -348,6 +350,8 @@ end
 
 redef class DocArticle
 	super BSComponent
+
+	redef fun css_classes do return new Array[String]
 
 	redef fun rendering do
 		if is_hidden then return
@@ -578,7 +582,7 @@ end
 
 redef class ReadmeSection
 	redef var html_id is lazy do
-		return markdown_processor.emitter.decorator.strip_id(html_title.as(not null).to_s)
+		return markdown_processor.decorator.strip_id(html_title.as(not null).to_s)
 	end
 
 	redef var html_title is lazy do

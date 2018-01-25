@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import java_api
+import java_api is example
 
 # Get a Java string
 var str = java_lang_integer_to_string_int(5678)

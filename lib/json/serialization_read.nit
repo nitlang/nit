@@ -15,53 +15,20 @@
 # Services to read JSON: `from_json_string` and `JsonDeserializer`
 module serialization_read
 
-import ::serialization::caching
-private import ::serialization::engine_tools
+import serialization::caching
+private import serialization::engine_tools
+import serialization::safe
+
 private import static
-private import string_parser
 import poset
 
 # Deserializer from a Json string.
 class JsonDeserializer
 	super CachingDeserializer
+	super SafeDeserializer
 
 	# Json text to deserialize from.
 	private var text: Text
-
-	# Accepted parameterized classes to deserialize
-	#
-	# If `whitelist.empty`, all types are accepted.
-	#
-	# ~~~nitish
-	# import json::serialization
-	#
-	# class MyClass
-	#     serialize
-	# end
-	#
-	# var json_string = """
-	# {"__class" = "MyClass"}
-	# """
-	#
-	# var deserializer = new JsonDeserializer(json_string)
-	# var obj = deserializer.deserialize
-	# assert deserializer.errors.is_empty
-	# assert obj isa MyClass
-	#
-	# deserializer = new JsonDeserializer(json_string)
-	# deserializer.whitelist.add "Array[String]"
-	# deserializer.whitelist.add "AnotherAcceptedClass"
-	# obj = deserializer.deserialize
-	# assert deserializer.errors.length == 1
-	# assert obj == null
-	# ~~~
-	var whitelist = new Array[Text]
-
-	# Should objects be checked if they a subtype of the static type before deserialization?
-	#
-	# Defaults to `true`, as it should always be activated.
-	# It can be turned off to implement the subtype check itself.
-	var check_subtypes = true is writable
 
 	# Root json object parsed from input text.
 	private var root: nullable Object is noinit
@@ -138,18 +105,18 @@ class JsonDeserializer
 			# ref?
 			if kind == "ref" then
 				if not object.keys.has("__id") then
-					errors.add new Error("Serialization Error: JSON object reference does not declare a `__id`.")
+					errors.add new Error("Deserialization Error: JSON object reference does not declare a `__id`.")
 					return object
 				end
 
 				var id = object["__id"]
 				if not id isa Int then
-					errors.add new Error("Serialization Error: JSON object reference declares a non-integer `__id`.")
+					errors.add new Error("Deserialization Error: JSON object reference declares a non-integer `__id`.")
 					return object
 				end
 
 				if not cache.has_id(id) then
-					errors.add new Error("Serialization Error: JSON object reference has an unknown `__id`.")
+					errors.add new Error("Deserialization Error: JSON object reference has an unknown `__id`.")
 					return object
 				end
 
@@ -163,12 +130,12 @@ class JsonDeserializer
 					id = object["__id"]
 
 					if not id isa Int then
-						errors.add new Error("Serialization Error: JSON object declaration declares a non-integer `__id`.")
+						errors.add new Error("Deserialization Error: JSON object declaration declares a non-integer `__id`.")
 						return object
 					end
 
 					if cache.has_id(id) then
-						errors.add new Error("Serialization Error: JSON object with `__id` {id} is deserialized twice.")
+						errors.add new Error("Deserialization Error: JSON object with `__id` {id} is deserialized twice.")
 						# Keep going
 					end
 				end
@@ -180,36 +147,21 @@ class JsonDeserializer
 
 					if class_name == null and static_type != null then
 						# Fallack to the static type, strip the `nullable` prefix
-						var prefix = "nullable "
-						if static_type.has_prefix(prefix) then
-							class_name = static_type.substring_from(prefix.length)
-						else class_name = static_type
+						class_name = static_type.strip_nullable
 					end
 				end
 
 				if class_name == null then
-					errors.add new Error("Serialization Error: JSON object declaration does not declare a `__class`.")
+					errors.add new Error("Deserialization Error: JSON object declaration does not declare a `__class`.")
 					return object
 				end
 
 				if not class_name isa String then
-					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
+					errors.add new Error("Deserialization Error: JSON object declaration declares a non-string `__class`.")
 					return object
 				end
 
-				if whitelist.not_empty and not whitelist.has(class_name) then
-					errors.add new Error("Deserialization Error: '{class_name}' not in whitelist")
-					return null
-				end
-
-				if static_type != null and check_subtypes then
-					var static_class = static_type.strip_nullable_and_params
-					var dynamic_class = class_name.strip_nullable_and_params
-					if not class_inheritance_metamodel.has_edge(dynamic_class, static_class) then
-						errors.add new Error("Deserialization Error: `{class_name}` is not a subtype of the static type `{static_type}`")
-						return null
-					end
-				end
+				if not accept(class_name, static_type) then return null
 
 				# advance on path
 				path.push object
@@ -227,21 +179,32 @@ class JsonDeserializer
 			# char?
 			if kind == "char" then
 				if not object.keys.has("__val") then
-					errors.add new Error("Serialization Error: JSON `char` object does not declare a `__val`.")
+					errors.add new Error("Deserialization Error: JSON `char` object does not declare a `__val`.")
 					return object
 				end
 
 				var val = object["__val"]
 
 				if not val isa String or val.is_empty then
-					errors.add new Error("Serialization Error: JSON `char` object does not declare a single char in `__val`.")
+					errors.add new Error("Deserialization Error: JSON `char` object does not declare a single char in `__val`.")
 					return object
 				end
 
 				return val.chars.first
 			end
 
-			errors.add new Error("Serialization Error: JSON object has an unknown `__kind`.")
+			# byte?
+			if kind == "byte" then
+				var val = object.get_or_null("__val")
+				if not val isa Int then
+					errors.add new Error("Serialization Error: JSON `byte` object does not declare an integer `__val`.")
+					return object
+				end
+
+				return val.to_b
+			end
+
+			errors.add new Error("Deserialization Error: JSON object has an unknown `__kind`.")
 			return object
 		end
 
@@ -249,13 +212,8 @@ class JsonDeserializer
 		if object isa Array[nullable Object] then
 			# Can we use the static type?
 			if static_type != null then
-				var prefix = "nullable "
-				var class_name = if static_type.has(prefix) then
-						static_type.substring_from(prefix.length)
-					else static_type
-
 				opened_array = object
-				var value = deserialize_class(class_name)
+				var value = deserialize_class(static_type.strip_nullable)
 				opened_array = null
 				return value
 			end
@@ -313,6 +271,16 @@ class JsonDeserializer
 
 			# Uninferrable type, return as `Array[nullable Object]`
 			return array
+		end
+
+		if object isa String and object.length == 1 and static_type == "Char" then
+			# Char serialized as a JSON string
+			return object.chars.first
+		end
+
+		if object isa Int and static_type == "Byte" then
+			# Byte serialized as an integer
+			return object.to_b
 		end
 
 		return object
@@ -410,25 +378,6 @@ redef class Text
 		end
 		return res
 	end
-
-	# Strip the `nullable` prefix and the params from the class name `self`
-	#
-	# ~~~nitish
-	# assert "String".strip_nullable_and_params == "String"
-	# assert "Array[Int]".strip_nullable_and_params == "Array"
-	# assert "Map[Set[String], Set[Int]]".strip_nullable_and_params == "Map"
-	# ~~~
-	private fun strip_nullable_and_params: String
-	do
-		var class_name = to_s
-
-		var prefix = "nullable "
-		if class_name.has_prefix(prefix) then class_name = class_name.substring_from(prefix.length)
-
-		var bracket_index = class_name.index_of('[')
-		if bracket_index == -1 then return class_name
-		return class_name.substring(0, bracket_index)
-	end
 end
 
 redef class SimpleCollection[E]
@@ -451,25 +400,15 @@ redef class SimpleCollection[E]
 				open_array = arr
 			end
 
-			# Try to get the name of the single parameter type assuming it is E.
-			# This does not work in non-generic subclasses,
-			# when the first parameter is not E, or
-			# when there is more than one parameter. (The last one could be fixed)
-			var class_name = class_name
-			var items_type = null
-			var bracket_index = class_name.index_of('[')
-			if bracket_index != -1 then
-				var start = bracket_index + 1
-				var ending = class_name.last_index_of(']')
-				items_type = class_name.substring(start, ending-start)
-			end
+			# Name of the dynamic name of E
+			var items_type_name = (new GetName[E]).to_s
 
 			# Fill array
 			for o in open_array do
-				var obj = v.convert_object(o, items_type)
+				var obj = v.convert_object(o, items_type_name)
 				if obj isa E then
 					add obj
-				else v.errors.add new AttributeTypeError(self, "items", obj, "E")
+				else v.errors.add new AttributeTypeError(self, "items", obj, items_type_name)
 			end
 		end
 	end
@@ -484,6 +423,9 @@ redef class Map[K, V]
 			v.notify_of_creation self
 			init
 
+			var keys_type_name = (new GetName[K]).to_s
+			var values_type_name = (new GetName[V]).to_s
+
 			var length = v.deserialize_attribute("__length")
 			var keys = v.path.last.get_or_null("__keys")
 			var values = v.path.last.get_or_null("__values")
@@ -491,15 +433,16 @@ redef class Map[K, V]
 			if keys == null and values == null then
 				# Fallback to a plain object
 				for key, value_src in v.path.last do
-					var value = v.convert_object(value_src)
+
+					var value = v.convert_object(value_src, values_type_name)
 
 					if not key isa K then
-						v.errors.add new AttributeTypeError(self, "keys", key, "K")
+						v.errors.add new AttributeTypeError(self, "keys", key, keys_type_name)
 						continue
 					end
 
 					if not value isa V then
-						v.errors.add new AttributeTypeError(self, "values", value, "V")
+						v.errors.add new AttributeTypeError(self, "values", value, values_type_name)
 						continue
 					end
 
@@ -524,17 +467,26 @@ redef class Map[K, V]
 				return
 			end
 
+			# First, convert all keys to follow the order of the serialization
+			var converted_keys = new Array[K]
 			for i in length.times do
-				var key = v.convert_object(keys[i])
-				var value = v.convert_object(values[i])
+				var key = v.convert_object(keys[i], keys_type_name)
 
 				if not key isa K then
-					v.errors.add new AttributeTypeError(self, "keys", key, "K")
+					v.errors.add new AttributeTypeError(self, "keys", key, keys_type_name)
 					continue
 				end
 
+				converted_keys.add key
+			end
+
+			# Then convert the values and build the map
+			for i in length.times do
+				var key = converted_keys[i]
+				var value = v.convert_object(values[i], values_type_name)
+
 				if not value isa V then
-					v.errors.add new AttributeTypeError(self, "values", value, "V")
+					v.errors.add new AttributeTypeError(self, "values", value, values_type_name)
 					continue
 				end
 
@@ -555,36 +507,21 @@ end
 private fun class_inheritance_metamodel_json: CString is intern
 
 redef class Sys
-	# Class inheritance graph
-	#
-	# ~~~
-	# var hierarchy = class_inheritance_metamodel
-	# assert hierarchy.has_edge("String", "Object")
-	# assert not hierarchy.has_edge("Object", "String")
-	# ~~~
-	var class_inheritance_metamodel: POSet[String] is lazy do
+	redef var class_inheritance_metamodel is lazy do
 		var engine = new JsonDeserializer(class_inheritance_metamodel_json.to_s)
 		engine.check_subtypes = false
 		engine.whitelist.add_all(
-			["String", "POSet[String]", "POSetElement[String]", "HashSet[String]", "HashMap[String, POSetElement[String]]"])
+			["String", "POSet[String]", "POSetElement[String]",
+			 "HashSet[String]", "HashMap[String, POSetElement[String]]"])
+
 		var poset = engine.deserialize
 		if engine.errors.not_empty then
-			print_error engine.errors.join("\n")
+			print_error "Deserialization errors in class_inheritance_metamodel:"
+			print_error engine.errors.join("\n* ")
 			return new POSet[String]
 		end
+
 		if poset isa POSet[String] then return poset
 		return new POSet[String]
-	end
-end
-
-redef class Deserializer
-	redef fun deserialize_class(name)
-	do
-		if name == "POSet[String]" then return new POSet[String].from_deserializer(self)
-		if name == "POSetElement[String]" then return new POSetElement[String].from_deserializer(self)
-		if name == "HashSet[String]" then return new HashSet[String].from_deserializer(self)
-		if name == "HashMap[String, POSetElement[String]]" then return new HashMap[String, POSetElement[String]].from_deserializer(self)
-
-		return super
 	end
 end

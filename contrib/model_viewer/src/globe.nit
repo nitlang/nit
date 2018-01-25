@@ -98,7 +98,7 @@ class GlobeMaterial
 	init atmo do init(null, false, [0.0, 0.8*atmo_a, 1.0*atmo_a, atmo_a])
 	private var atmo_a = 0.05
 
-	redef fun draw(actor, model)
+	redef fun draw(actor, model, camera)
 	do
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print gl_error
@@ -106,9 +106,6 @@ class GlobeMaterial
 		var mesh = model.mesh
 
 		var program = app.globe_program
-		program.use
-
-		# Set constant program values
 		program.use
 
 		# Bind textures
@@ -135,7 +132,7 @@ class GlobeMaterial
 		# Update camera view and light
 		var p = app.world_camera.position
 		program.camera.uniform(p.x, p.y, p.z)
-		program.mvp.uniform app.world_camera.mvp_matrix
+		program.mvp.uniform camera.mvp_matrix
 		program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
 
 		# Set attributes

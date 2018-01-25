@@ -825,7 +825,7 @@ class InterpreterFrame
 	super Frame
 
 	# Mapping between a variable and the current value
-	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
 end
 
 redef class ANode
@@ -874,7 +874,10 @@ redef class AMethPropdef
 		return res
 	end
 
-	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
+	# Execution of the body of the method
+	#
+	# It handle the common special cases: super, intern, extern
+	fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
 	do
 		v.frames.unshift(f)
 
@@ -1699,6 +1702,8 @@ redef class AEscapeExpr
 			var i = v.expr(ne)
 			if i == null then return
 			v.escapevalue = i
+		else
+			v.escapevalue = null
 		end
 		v.escapemark = self.escapemark
 	end

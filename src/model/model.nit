@@ -159,6 +159,14 @@ class ConcernsTree
 	super OrderedTree[MConcern]
 end
 
+redef class MGroup
+	redef var is_test is lazy do
+		var parent = self.parent
+		if parent != null and parent.is_test then return true
+		return name == "tests"
+	end
+end
+
 redef class MModule
 	# All the classes introduced in the module
 	var intro_mclasses = new Array[MClass]
@@ -587,6 +595,8 @@ class MClass
 
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
+
+	redef var is_test is lazy do return intro.is_test
 
 	redef fun mdoc_or_fallback
 	do
@@ -1793,6 +1803,8 @@ class MNullableType
 		if t == mtype then return self
 		return t.as_nullable
 	end
+
+	redef fun mdoc_or_fallback do return mtype.mdoc_or_fallback
 end
 
 # A non-null version of a formal type.
@@ -2327,6 +2339,20 @@ abstract class MProperty
 	end
 
 	private var lookup_all_definitions_cache = new HashMap2[MModule, MType, Array[MPROPDEF]]
+
+	redef var is_test is lazy do return intro.is_test
+
+	# Does self have the `before` annotation?
+	var is_before: Bool is lazy do return intro.is_before
+
+	# Does self have the `before_all` annotation?
+	var is_before_all: Bool is lazy do return intro.is_before_all
+
+	# Does self have the `after` annotation?
+	var is_after: Bool is lazy do return intro.is_after
+
+	# Does self have the `after_all` annotation?
+	var is_after_all: Bool is lazy do return intro.is_after_all
 end
 
 # A global method
@@ -2361,6 +2387,29 @@ class MMethod
 	# A specific method that is safe to call on null.
 	# Currently, only `==`, `!=` and `is_same_instance` are safe
 	fun is_null_safe: Bool do return name == "==" or name == "!=" or name == "is_same_instance"
+
+	# Is this method a getter (auto or not)?
+	#
+	# See `getter_for`.
+	fun is_getter: Bool do return getter_for != null
+
+	# The attribute this getter is for
+	#
+	# Return `null` is this method is not a getter.
+	var getter_for: nullable MAttribute = null is writable
+
+	# Is this method a setter (auto or not)?
+	#
+	# See `setter_for`.
+	fun is_setter: Bool do return setter_for != null
+
+	# The attribute this setter is for
+	#
+	# Return `null` is this method is not a setter.
+	var setter_for: nullable MAttribute = null is writable
+
+	# Is this method a getter or a setter?
+	fun is_accessor: Bool do return is_getter or is_setter
 end
 
 # A global attribute
@@ -2369,6 +2418,21 @@ class MAttribute
 
 	redef type MPROPDEF: MAttributeDef
 
+	# Does this attribute have a getter (auto or not)?
+	#
+	# See `getter`.
+	fun has_getter: Bool do return getter != null
+
+	# The getter of this attribute (if any)
+	var getter: nullable MProperty = null is writable
+
+	# Does this attribute have a setter (auto or not)?
+	#
+	# See `setter`.
+	fun has_setter: Bool do return setter != null
+
+	# The setter of this attribute (if any)
+	var setter: nullable MProperty = null is writable
 end
 
 # A global virtual type
@@ -2404,7 +2468,7 @@ abstract class MPropDef
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	redef var location: Location
+	redef var location
 
 	redef fun visibility do return mproperty.visibility
 
@@ -2516,6 +2580,18 @@ abstract class MPropDef
 	end
 
 	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
+
+	# Does self have the `before` annotation?
+	var is_before = false is writable
+
+	# Does self have the `before_all` annotation?
+	var is_before_all = false is writable
+
+	# Does self have the `after` annotation?
+	var is_after = false is writable
+
+	# Does self have the `after_all` annotation?
+	var is_after_all = false is writable
 end
 
 # A local definition of a method

@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_static is test_suite
+module test_example_static is test
 
 import pop_tests
 import example_static
 
 class TestExampleStatic
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/css/style.css"
@@ -32,7 +33,7 @@ class TestExampleStatic
 		system "curl -s {host}:{port}/not_found.nit"
 	end
 
-	fun test_example_static do
+	fun test_example_static is test do
 		var app = new App
 		app.use("/", new StaticHandler(test_path / "../public/"))
 		run_test(app)

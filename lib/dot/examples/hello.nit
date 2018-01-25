@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # Example from http://www.graphviz.org/content/hello
+module hello is example
 
 import dot
 

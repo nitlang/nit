@@ -25,8 +25,13 @@ import model_visitor
 class ModelView
 	super ModelVisitor
 
+	autoinit(model, mainmodule, filter)
+
 	# The model to view through `self`.
 	var model: Model
+
+	# MModule used to flatten mclass hierarchy
+	var mainmodule: MModule
 
 	# MPackages visible through `self`.
 	var mpackages: Set[MPackage] is lazy do
@@ -117,14 +122,6 @@ class ModelView
 		return res
 	end
 
-	private fun init_visitor(v: ModelVisitor) do
-		v.min_visibility = self.min_visibility
-		v.include_fictive = self.include_fictive
-		v.include_empty_doc = self.include_empty_doc
-		v.include_attribute = self.include_attribute
-		v.include_test_suite = self.include_test_suite
-	end
-
 	# Searches the MEntity that matches `full_name`.
 	fun mentity_by_full_name(full_name: String): nullable MEntity do
 		for mentity in mentities do
@@ -133,10 +130,19 @@ class ModelView
 		return null
 	end
 
+	# Searches the MEntities that matches `full_name`.
+	fun mentities_by_name(name: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			if mentity.name == name then res.add mentity
+		end
+		return res
+	end
+
 	# Build an concerns tree with from `self`
 	fun to_tree: MEntityTree do
 		var v = new ModelTreeVisitor
-		init_visitor(v)
+		v.filter = self.filter
 		for mpackage in mpackages do
 			v.enter_visit(mpackage)
 		end
@@ -175,28 +181,6 @@ class ModelTreeVisitor
 end
 
 redef class MEntity
-
-	# Get a public view of the model
-	fun public_view: ModelView do
-		var view = new ModelView(self.model)
-		view.min_visibility = public_visibility
-		return view
-	end
-
-	# Get a public view of the model
-	fun protected_view: ModelView do
-		var view = new ModelView(self.model)
-		view.min_visibility = protected_visibility
-		return view
-	end
-
-	# Get a public view of the model
-	fun private_view: ModelView do
-		var view = new ModelView(self.model)
-		view.min_visibility = private_visibility
-		return view
-	end
-
 	private fun accept_namespace_visitor(v: LookupNamespaceVisitor) do
 		if v.parts.is_empty then return
 		if name != v.parts.first then return

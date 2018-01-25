@@ -15,6 +15,19 @@
 			</a>
 		</li>
 
+		<!-- definitions -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage" ||
+				vm.mentity.class_name == "MGroup" ||
+				vm.mentity.class_name == "MModule"'>
+			<a ui-sref='.defs'>
+				<span class='glyphicon glyphicon-list'/>
+				<span ng-if='vm.mentity.class_name == "MPackage"'>Groups</span>
+				<span ng-if='vm.mentity.class_name == "MGroup"'>Content</span>
+				<span ng-if='vm.mentity.class_name == "MModule"'>Classes</span>
+			</a>
+		</li>
+
 		<!-- graph -->
 		<li role='presentation' ui-sref-active='active' ng-if='
 				vm.mentity.class_name == "MPackage" ||
@@ -35,14 +48,6 @@
 				vm.mentity.class_name == "MModule"'>
 			<a ui-sref='.code'>
 				<span class='glyphicon glyphicon-console'/> Code
-			</a>
-		</li>
-
-		<!-- definitions -->
-		<li role='presentation' ui-sref-active='active' ng-if='
-				vm.mentity.class_name == "MModule"'>
-			<a ui-sref='.defs'>
-				<span class='glyphicon glyphicon-asterisk'/> Class definitions
 			</a>
 		</li>
 
@@ -73,6 +78,13 @@
 				vm.mentity.class_name == "MClass"'>
 			<a ui-sref='.metrics'>
 				<span class='glyphicon glyphicon-stats'/> Metrics
+			</a>
+		</li>
+
+		<!-- grades -->
+		<li role='presentation' ui-sref-active='active'>
+			<a ui-sref='.grades'>
+				<span class='glyphicon glyphicon-star'/> Grades
 			</a>
 		</li>
 	</ul>

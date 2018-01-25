@@ -1,3 +1,5 @@
+module minilang is example
+
 import minilang_test_parser
 
 # An naive recursive stack-based interpreter of the minilang language.

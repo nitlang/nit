@@ -37,6 +37,7 @@ redef class App
 			if sdl_event isa SDLWindowEvent and sdl_event.is_resized then
 				display.width = sdl_event.data1
 				display.height = sdl_event.data2
+				display.aspect_ratio = sdl_event.data1.to_f / sdl_event.data2.to_f
 				on_resize display
 			end
 
@@ -45,6 +46,18 @@ redef class App
 			accept_event gamnit_event
 		end
 	end
+
+	redef fun on_create
+	do
+		super
+		create_display
+		create_gamnit
+		create_scene
+	end
+end
+
+redef class GamnitDisplay
+	redef var aspect_ratio = super is lazy
 end
 
 # ---

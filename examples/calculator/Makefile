@@ -1,13 +1,13 @@
 NITC=../../bin/nitc
 NITLS=../../bin/nitls
 
-all: bin/calculator bin/test
+all: bin/calculator bin/scientific bin/test
 
-bin/calculator: $(shell ${NITLS} -M src/calculator.nit linux) ${NITC}
+bin/calculator: $(shell ${NITLS} -M src/calculator.nit -m linux) ${NITC}
 	mkdir -p bin
 	${NITC} -o $@ src/calculator.nit -m linux
 
-bin/scientific: $(shell ${NITLS} -M scientific linux) ${NITC}
+bin/scientific: $(shell ${NITLS} -M scientific -m linux) ${NITC}
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m linux
 
@@ -28,15 +28,15 @@ bin/calculator21.apk: $(shell ${NITLS} -M src/android21) ${NITC} android/res/dra
 	mkdir -p bin
 	${NITC} -o $@ src/android21 -D debug
 
-bin/scientific14.apk: $(shell ${NITLS} -M src/scientific src/android14.nit) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
+bin/scientific14.apk: $(shell ${NITLS} -M src/scientific -m src/android14.nit) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m src/android14.nit -D debug
 
-bin/scientific21.apk: $(shell ${NITLS} -M src/scientific src/android21) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
+bin/scientific21.apk: $(shell ${NITLS} -M src/scientific -m src/android21) ${NITC} src/scientific/android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m src/android21 -D debug
 
-android-release: $(shell ${NITLS} -M src/scientific src/android14.nit) ${NITC} android/res/drawable-hdpi/icon.png
+android-release: $(shell ${NITLS} -M src/scientific -m src/android14.nit) ${NITC} android/res/drawable-hdpi/icon.png
 	mkdir -p bin
 	${NITC} -o bin/calculator14.apk src/android14.nit --release
 	${NITC} -o bin/calculator21.apk src/android21 --release
@@ -66,7 +66,7 @@ bin/calculator.app: $(shell ${NITLS} -M src/ios.nit) ${NITC} ios/AppIcon.appicon
 	mkdir -p bin
 	${NITC} -o $@ src/ios.nit -D debug
 
-bin/scientific.app: $(shell ${NITLS} -M src/scientific src/ios.nit) ${NITC} src/scientific/ios/AppIcon.appiconset/Contents.json
+bin/scientific.app: $(shell ${NITLS} -M src/scientific -m src/ios.nit) ${NITC} src/scientific/ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin
 	${NITC} -o $@ src/scientific -m src/ios.nit -D debug
 

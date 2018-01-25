@@ -12,21 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_nitunit4_base is test_suite
-
-import test_suite
+module test_nitunit4_base
 
 class SuperTestSuite
-	super TestSuite
 
 	var before = false
 
-	redef fun before_test do
+	fun before_test is before do
 		print "Before Test"
 		before = true
 	end
 
-	redef fun after_test do
+	fun after_test is after do
 		print "After Test"
 		assert before
 	end

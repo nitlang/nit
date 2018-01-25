@@ -225,7 +225,7 @@ private class SerializationPhasePreModel
 		end
 
 		var code = """
-redef init from_deserializer(v: Deserializer) do abort"""
+redef init from_deserializer(v) do abort"""
 
 		var npropdef = toolcontext.parse_propdef(code).as(AMethPropdef)
 		npropdefs.add npropdef

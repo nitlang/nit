@@ -16,7 +16,7 @@
 module common
 
 import socket
-import binary::serialization
+import msgpack
 
 # Unique name of the application to use in the handshake
 #

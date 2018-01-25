@@ -84,7 +84,7 @@ end
 
 # 3D model composed of `Mesh` and `Material`, loaded from the assets folder by default
 #
-# Instances can be created at any time and must be loaded after or at the end of `on_create`.
+# Instances can be created at any time and must be loaded after or at the end of `create_scene`.
 # If loading fails, the model is replaced by `placeholder_model`.
 #
 # ~~~
@@ -113,6 +113,9 @@ abstract class Model
 	# Usually, there is one `LeafModel` per material.
 	# At each frame, each material is asked to draw all the live `LeafModel` instaces.
 	fun leaves: Array[LeafModel] is abstract
+
+	# Sub-models with names, usually declared in the asset file
+	var named_parts = new Map[Text, Model]
 end
 
 # Model composed of one or many other `LeafModel`
@@ -165,7 +168,7 @@ abstract class Material
 	# This method is called on many materials for many `actor` and `model` at each frame.
 	# It is expected to use a `GLProgram` and call an equivalent to `glDrawArrays`.
 	# However, it should not call `glClear` nor `GamnitDisplay::flip`.
-	fun draw(actor: Actor, model: LeafModel) do end
+	fun draw(actor: Actor, model: LeafModel, camera: Camera) do end
 end
 
 # Mesh with all geometry data
@@ -182,7 +185,10 @@ end
 # ~~~
 class Mesh
 
-	# Vertices coordinates
+	# Number for vertices
+	fun n_vertices: Int do return vertices.length / 3
+
+	# Vertices relative coordinates, 3 floats per vertex
 	var vertices = new Array[Float] is lazy, writable
 
 	# Indices to draw triangles with `glDrawElements`
@@ -192,10 +198,10 @@ class Mesh
 
 	private var indices_c = new CUInt16Array.from(indices) is lazy, writable
 
-	# Normals on each vertex
+	# Normals, 3 floats per vertex
 	var normals = new Array[Float] is lazy, writable
 
-	# Coordinates on the texture per vertex
+	# Coordinates on the texture, 2 floats per vertex
 	var texture_coords = new Array[Float] is lazy, writable
 
 	# `GLDrawMode` used to display this mesh, defaults to `gl_TRIANGLES`
@@ -203,14 +209,23 @@ class Mesh
 end
 
 # Source of light
-#
-# Instances of this class define a light source position and type.
-class Light
-
-	# TODO point light, spotlight, directional light, etc.
+abstract class Light
 
 	# Center of this light source in world coordinates
 	var position = new Point3d[Float](0.0, 1000.0, 0.0)
+end
+
+# Basic light projected from a single point
+class PointLight
+	super Light
+end
+
+# Source of light casting shadows
+abstract class LightCastingShadows
+	super Light
+
+	# View from the camera, used for shadow mapping, implemented by sub-classes
+	fun camera: Camera is abstract
 end
 
 redef class App
@@ -219,7 +234,7 @@ redef class App
 	var actors = new Array[Actor]
 
 	# Single light of the scene
-	var light = new Light
+	var light: Light = new PointLight is writable
 
 	# TODO move `actors & light` to a scene object
 	# TODO support more than 1 light

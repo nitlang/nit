@@ -7,4 +7,4 @@ Long method:  Average 1 lines
 		-total_strengh has 2 lines
 		-total_endurance has 2 lines
 		-total_intelligence has 2 lines
-Large class: 6 attributes and 18 methods (5.414A 7.161M Average)
+Large class: 6 attributes and 18 methods (4.581A 7.153M Average)

@@ -29,8 +29,8 @@
 #
 # ~~~nitish
 # var index = new ModelIndex
-#
-# for mentity in model.private_view.mentities do
+# var view = new ModelView(model, mainmodule)
+# for mentity in view.mentities do
 #	index.index(mentity)
 # end
 # ~~~
@@ -55,8 +55,8 @@
 #
 # ~~~nitish
 # var index = new ModelIndex
-#
-# for mentity in model.private_view.mentities do
+# var view = new ModelView(model, mainmodule)
+# for mentity in view.mentities do
 #	# We don't really care about definitions
 #	if mentity isa MClassDef or mentity isa MPropDef then continue
 #	index.index(mentity)
@@ -135,7 +135,7 @@ redef class ModelView
 	# Keep a direct link to mentities by full name to speed up `mentity_from_uri`
 	var mentities_by_full_name: HashMap[String, MEntity] is lazy do
 		var mentities_by_full_name = new HashMap[String, MEntity]
-		for mentity in model.private_view.mentities do
+		for mentity in mentities do
 			mentities_by_full_name[mentity.full_name] = mentity
 		end
 		return mentities_by_full_name
@@ -144,15 +144,14 @@ redef class ModelView
 	# ModelIndex used to perform searches
 	var index: ModelIndex is lazy do
 		var index = new ModelIndex
-		for mentity in model.private_view.mentities do
+		for mentity in mentities do
 			if mentity isa MClassDef or mentity isa MPropDef then continue
 			index.index mentity
 		end
 		return index
 	end
 
-	# Find mentities by their `name`
-	fun mentities_by_name(name: String): Array[MEntity] do
+	redef fun mentities_by_name(name) do
 		if index.name_prefixes.has_key(name) then
 			return index.name_prefixes[name]
 		end
@@ -229,7 +228,8 @@ end
 # ~~~nitish
 # # Build index
 # var index = new ModelIndex
-# for mentity in model.private_view.mentities do
+# var view = new ModelView(model, mainmodule)
+# for mentity in view.mentities do
 #	if mentity isa MClassDef or mentity isa MPropDef then continue
 #	index.index(mentity)
 # end

@@ -187,7 +187,7 @@ redef class Catalog
 	do
 		# Register `self` to the global NitdocDecorator
 		# FIXME this is ugly. But no better idea at the moment.
-		modelbuilder.model.nitdoc_md_processor.emitter.decorator.as(NitdocDecorator).catalog = self
+		modelbuilder.model.nitdoc_md_processor.decorator.as(NitdocDecorator).catalog = self
 	end
 
 	# The output directory where to generate pages
@@ -267,12 +267,12 @@ redef class Catalog
 <div class="sidebar">
 <ul class="box">
 """
-		var tryit = mpackage.metadata("upstream.tryit")
+		var tryit = mpackage.metadata.metadata("upstream.tryit")
 		if tryit != null then
 			var e = tryit.html_escape
 			res.add "<li><a href=\"{e}\">Try<span style=\"color:white\">n</span>it!</a></li>\n"
 		end
-		var apk = mpackage.metadata("upstream.apk")
+		var apk = mpackage.metadata.metadata("upstream.apk")
 		if apk != null then
 			var e = apk.html_escape
 			res.add "<li><a href=\"{e}\">Android apk</a></li>\n"
@@ -280,15 +280,15 @@ redef class Catalog
 
 		res.add """</ul>\n<ul class="box">\n"""
 
-		var homepage = mpackage.metadata("upstream.homepage")
+		var homepage = mpackage.metadata.metadata("upstream.homepage")
 		if homepage != null then
 			var e = homepage.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		for maintainer in mpackage.maintainers do
+		for maintainer in mpackage.metadata.maintainers do
 			res.add "<li>{maintainer.to_html}</li>"
 		end
-		var license = mpackage.metadata("package.license")
+		var license = mpackage.metadata.metadata("package.license")
 		if license != null then
 			var e = license.html_escape
 			res.add "<li><a href=\"http://opensource.org/licenses/{e}\">{e}</a> license</li>\n"
@@ -296,22 +296,22 @@ redef class Catalog
 		res.add "</ul>\n"
 
 		res.add "<h3>Source Code</h3>\n<ul class=\"box\">\n"
-		var browse = mpackage.metadata("upstream.browse")
+		var browse = mpackage.metadata.metadata("upstream.browse")
 		if browse != null then
 			var e = browse.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		var git = mpackage.metadata("upstream.git")
+		var git = mpackage.metadata.metadata("upstream.git")
 		if git != null then
 			var e = git.html_escape
 			res.add "<li><tt>{e}</tt></li>\n"
 		end
-		var last_date = mpackage.last_date
+		var last_date = mpackage.metadata.last_date
 		if last_date != null then
 			var e = last_date.html_escape
 			res.add "<li>most recent commit: {e}</li>\n"
 		end
-		var first_date = mpackage.first_date
+		var first_date = mpackage.metadata.first_date
 		if first_date != null then
 			var e = first_date.html_escape
 			res.add "<li>oldest commit: {e}</li>\n"
@@ -333,7 +333,7 @@ redef class Catalog
 
 		res.add "<h3>Tags</h3>\n"
 		var ts2 = new Array[String]
-		for t in mpackage.tags do
+		for t in mpackage.metadata.tags do
 			t = t.html_escape
 			ts2.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
 		end
@@ -381,7 +381,7 @@ redef class Catalog
 			end
 		end
 
-		var contributors = mpackage.contributors
+		var contributors = mpackage.metadata.contributors
 		if not contributors.is_empty then
 			res.add "<h3>Contributors</h3>\n<ul class=\"box\">"
 			for c in contributors do
@@ -499,9 +499,9 @@ redef class Catalog
 			res.add "<tr>"
 			res.add "<td><a href=\"p/{p.name}.html\">{p.name}</a></td>"
 			var maint = "?"
-			if p.maintainers.not_empty then maint = p.maintainers.first.name.html_escape
+			if p.metadata.maintainers.not_empty then maint = p.metadata.maintainers.first.name.html_escape
 			res.add "<td>{maint}</td>"
-			res.add "<td>{p.contributors.length}</td>"
+			res.add "<td>{p.metadata.contributors.length}</td>"
 			if deps.not_empty then
 				res.add "<td>{deps[p].greaters.length-1}</td>"
 				res.add "<td>{deps[p].direct_greaters.length}</td>"

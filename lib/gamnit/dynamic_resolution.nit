@@ -42,7 +42,7 @@ redef class App
 	#
 	# This value is applied to both X and Y, so it has an exponential effect on
 	# the number of pixels.
-	var dynamic_resolution_ratio = 1.0
+	var dynamic_resolution_ratio = 1.0 is writable
 
 	# Minimum dynamic screen resolution
 	var min_dynamic_resolution_ratio = 0.0125 is writable
@@ -54,7 +54,7 @@ redef class App
 
 	private var perf_clock_dynamic_resolution = new Clock is lazy
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
@@ -136,7 +136,11 @@ redef class App
 
 		# Draw
 		glDrawArrays(gl_TRIANGLE_STRIP, 0, 4)
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print_error gl_error
 
+		# Take down
+		glBindBuffer(gl_ARRAY_BUFFER, 0)
 		gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 
@@ -159,7 +163,7 @@ redef class App
 	end
 end
 
-# Program drawing the dynamic screen to the real screen
+# Handles to reused GL buffers and texture
 private class DynamicContext
 
 	# Real screen framebuffer
@@ -176,8 +180,6 @@ private class DynamicContext
 
 	# Buffer name for vertex data
 	var buffer_array: Int = -1
-
-	var float_per_vertex: Int is lazy do return 4 + 4 + 3
 
 	# Prepare all attributes once per resolution change
 	fun prepare_once(display: GamnitDisplay, max_dynamic_resolution_ratio: Float)
@@ -248,7 +250,7 @@ private class DynamicContext
 		# Depth
 		glBindRenderbuffer(gl_RENDERBUFFER, depthbuffer)
 		assert glIsRenderbuffer(depthbuffer)
-		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPNENT16, width, height)
+		glRenderbufferStorage(gl_RENDERBUFFER, gl_DEPTH_COMPONENT16, width, height)
 		glFramebufferRenderbuffer(gl_FRAMEBUFFER, gl_DEPTH_ATTACHMENT, gl_RENDERBUFFER, depthbuffer)
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print_error gl_error

@@ -26,17 +26,45 @@ import gamnit_linux is conditional(linux)
 
 redef class App
 
-	# Main `GamnitDisplay` initialized by `on_create`
+	# Main `GamnitDisplay` initialized by `create_gamnit`
 	var display: nullable GamnitDisplay = null
 
-	redef fun on_create
-	do
-		super
+	# Hook to setup the OpenGL context: compiling shaders, creating VBO, reloading textures, etc.
+	#
+	# The gamnit services redefine this method to prepare optimizations and more.
+	# Clients may also refine this method to prepare custom OpenGL resources.
+	fun create_gamnit do end
 
+	# Hook to prepare for recreating the OpenGL context
+	#
+	# Some gamnit services refine this method to reset caches before the
+	# next call to `create_gamnit`.
+	fun recreate_gamnit do end
+
+	# Create and set `self.display`
+	fun create_display
+	do
 		var display = new GamnitDisplay
 		display.setup
 		self.display = display
+
+		# Print the current GL configuration, for debugging
+		print "GL vendor: {glGetString(gl_VENDOR)}"
+		print "GL renderer: {glGetString(gl_RENDERER)}"
+		print "GL version: {glGetString(gl_VERSION)}"
+		print "GLSL version: {glGetString(gl_SHADING_LANGUAGE_VERSION)}"
+		print "GL extensions: {glGetString(gl_EXTENSIONS)}"
+		print "GL max texture size: {glGetIntegerv(gl_MAX_TEXTURE_SIZE, 0)}"
 	end
+
+	# Hook for client programs to setup the scene
+	#
+	# Refine this method to build the game world or the main menu,
+	# creating instances of `Sprite` and `Actor` as needed.
+	#
+	# This method is called only once per execution of the program and it should
+	# be considered as the entry point of most game logic.
+	fun create_scene do end
 
 	# Core of the frame logic, executed only when the display is visible
 	#

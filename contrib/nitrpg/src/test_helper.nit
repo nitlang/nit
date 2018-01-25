@@ -17,13 +17,11 @@
 # Test tools for NitRPG.
 module test_helper
 
-import test_suite
 import game
 import github::cache
 
 # Used to factorize test treatments.
 abstract class NitrpgTestHelper
-	super TestSuite
 
 	# Github API client
 	var api: GithubAPI do
@@ -70,5 +68,6 @@ abstract class NitrpgTestHelper
 		db.drop
 	end
 
-	redef fun after_test do drop_test_db
+	# Drop the databse after each test
+	fun after_test is after do drop_test_db
 end

@@ -31,6 +31,7 @@
 # http://www.khronos.org/opengles/sdk/docs/man/
 module glesv2 is
 	pkgconfig
+	no_warning "missing-doc"
 	new_annotation glsl_vertex_shader
 	new_annotation glsl_fragment_shader
 	ldflags("-lGLESv2")@android
@@ -433,12 +434,27 @@ fun glUniform4f(index: Int, x, y, z, w: Float) `{ glUniform4f(index, x, y, z, w)
 
 # Low level array of `Float`
 class GLfloatArray
-	super CArray[Float]
-	redef type NATIVE: NativeGLfloatArray
+	super FinalizableOnce
 
-	redef init(length)
+	var length: Int
+
+	var native_array = new NativeGLfloatArray(length) is lateinit
+
+	fun [](index: Int): Float do return native_array[index]
+
+	fun []=(index: Int, val: Float) do native_array[index] = val
+
+	var add_index = 0
+
+	fun reset_add do add_index = 0
+
+	# Require: `add_index < length`
+	fun add(value: Float)
 	do
-		native_array = new NativeGLfloatArray(length)
+		var index = add_index
+		assert index < length
+		native_array[index] = value
+		self.add_index = index + 1
 	end
 
 	# Create with the content of `array`
@@ -457,26 +473,27 @@ class GLfloatArray
 	# Require: `length >= array.length + dst_offset or else 0`
 	fun fill_from(array: Array[Float], dst_offset: nullable Int)
 	do
-		dst_offset = dst_offset or else 0
+		dst_offset = dst_offset or else add_index
 
 		assert length >= array.length + dst_offset
 		for k in [0..array.length[ do
 			self[dst_offset+k] = array[k]
 		end
 	end
+
+	redef fun finalize_once do native_array.free
 end
 
 # An array of `GLfloat` in C (`GLfloat*`)
 extern class NativeGLfloatArray `{ GLfloat* `}
-	super NativeCArray
-	redef type E: Float
 
 	new(size: Int) `{ return calloc(size, sizeof(GLfloat)); `}
 
-	redef fun [](index) `{ return self[index]; `}
-	redef fun []=(index, val) `{ self[index] = val; `}
+	fun [](index: Int): Float `{ return self[index]; `}
 
-	redef fun +(offset) `{ return self + offset; `}
+	fun []=(index: Int, val: Float) `{ self[index] = val; `}
+
+	fun +(offset: Int): NativeGLfloatArray `{ return self + offset; `}
 end
 
 # General type for OpenGL enumerations
@@ -755,7 +772,7 @@ fun gl_RGB565: GLRenderbufferFormat `{ return GL_RGB565; `}
 fun gl_RGB5_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
 
 # 16 depth bits format
-fun gl_DEPTH_COMPNENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
+fun gl_DEPTH_COMPONENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
 
 # 8 stencil bits format
 fun gl_STENCIL_INDEX8: GLRenderbufferFormat `{ return GL_STENCIL_INDEX8; `}
@@ -1206,6 +1223,7 @@ end
 fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
 fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
 fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
+fun gl_DEPTH_COMPONENT: GLPixelFormat `{ return GL_DEPTH_COMPONENT; `}
 
 # Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
@@ -1308,3 +1326,28 @@ fun gl_TEXTURE_BINDING_CUBE_MAP: GLGetParameterName `{ return GL_TEXTURE_BINDING
 fun gl_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING; `}
 fun gl_FRAMEBUFFER_BINDING: GLGetParameterName `{ return GL_FRAMEBUFFER_BINDING; `}
 fun gl_RENDERBUFFER_BINDING: GLGetParameterName `{ return GL_RENDERBUFFER_BINDING; `}
+
+# Return a string describing the current GL configuration
+fun glGetString(name: GLEnum): String
+do
+	var cstr = glGetString_native(name)
+	assert not cstr.address_is_null
+	return cstr.to_s
+end
+
+private fun glGetString_native(name: GLEnum): CString `{ return (char*)glGetString(name); `}
+
+# Company responsible for this GL implementation
+fun gl_VENDOR: GLEnum `{ return GL_VENDOR; `}
+
+# Name of the renderer, typically specific to a particular configuration of the hardware platform
+fun gl_RENDERER: GLEnum `{ return GL_RENDERER; `}
+
+# Version or release number
+fun gl_VERSION: GLEnum `{ return GL_VERSION; `}
+
+# Version or release number for the shading language of the form
+fun gl_SHADING_LANGUAGE_VERSION: GLEnum `{ return GL_SHADING_LANGUAGE_VERSION; `}
+
+# Space-separated list of supported extensions to GL
+fun gl_EXTENSIONS: GLEnum `{ return GL_EXTENSIONS; `}

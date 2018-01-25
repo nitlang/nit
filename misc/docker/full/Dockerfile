@@ -37,6 +37,7 @@ RUN dpkg --add-architecture i386 \
 		inkscape \
 		libopenmpi-dev \
 		unzip \
+		zipalign \
 		# Android
 		libc6:i386 \
 		libstdc++6:i386 \
@@ -48,19 +49,16 @@ RUN dpkg --add-architecture i386 \
 RUN mkdir -p /opt \
 	&& cd /opt \
 	# Android SDK
-	&& curl https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz -o android-sdk-linux.tgz \
-	&& tar xzf android-sdk-linux.tgz \
-	&& rm android-sdk-linux.tgz \
-	&& echo y | android-sdk-linux/tools/android update sdk -a --no-ui --filter \
-		# Hardcode minimal known working things
-		platform-tools,build-tools-22.0.1,android-22,android-21,android-19,android-16,android-15,android-10 \
-	# Android NDK
-	&& curl http://dl.google.com/android/repository/android-ndk-r11c-linux-x86_64.zip -o android-ndk.zip \
-	&& unzip -q android-ndk.zip \
+	&& curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -o android-sdk-linux.zip \
+	&& unzip android-sdk-linux.zip -d android-sdk-linux \
+	&& rm android-sdk-linux.zip \
 	&& chmod -R a+X /opt \
-	&& ln -s android-ndk-r11c android-ndk \
-	&& rm android-ndk.zip \
-	&& printf "PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK\nexport PATH\n" >> "/etc/profile.d/android.sh"
+	&& yes | android-sdk-linux/tools/bin/sdkmanager --licenses \
+	&& android-sdk-linux/tools/bin/sdkmanager "build-tools;27.0.0" "cmake;3.6.4111459" ndk-bundle platform-tools tools
+
+# Download gradlew and bdwgc for Android
+RUN /nit/share/android-gradlew/gradlew \
+	&& /nit/share/android-bdwgc/setup.sh
 
 # Install OpenGL validator
 RUN git clone https://github.com/KhronosGroup/glslang.git \
@@ -71,9 +69,7 @@ RUN git clone https://github.com/KhronosGroup/glslang.git \
 	&& make
 
 # Setup environment variables
-ENV ANDROID_HOME /opt/android-sdk-linux
-ENV ANDROID_NDK /opt/android-ndk
-ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK
+ENV ANDROID_HOME=/opt/android-sdk-linux/
 ENV JAVA_HOME=/usr/lib/jvm/default-java/
 ENV JNI_LIB_PATH=$JAVA_HOME/jre/lib/amd64/server/
 ENV LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/amd64/server/

@@ -14,9 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Simple data storage services
+# Key/value storage services
 #
-# The implementation varies per platform.
+# The main services is `App::data_store`, a `DataStore` holding any
+# serializable Nit object.
 module data_store
 
 import app_base
@@ -28,12 +29,61 @@ import android::data_store is conditional(android)
 import ios::data_store is conditional(ios)
 
 redef class App
+
 	# Services to store and load data
-	fun data_store: DataStore is abstract
+	#
+	# ~~~
+	# import app::ui
+	# import app::data_store
+	#
+	# class MyWindow
+	#     super Window
+	#
+	#     var state = "Simple string or any serializable class"
+	#
+	#     redef fun on_save_state do app.data_store["state"] = state
+	#
+	#     redef fun on_restore_state
+	#     do
+	#         var state = app.data_store["state"]
+	#         if state isa String then self.state = state
+	#     end
+	# end
+	# ~~~
+	var data_store = new DataStore is lazy
 end
 
 # Simple data storage facility
-interface DataStore
+#
+# Write values with `[]=` and read with `[]`.
+# ~~~
+# import linux::data_store # Needed for testing only
+#
+# class A
+#     serialize
+#
+#     var b = true
+#     var f = 1.234
+# end
+#
+# var data_store = new DataStore
+# data_store["one"] = 1
+# data_store["str"] = "Some string"
+# data_store["a"] = new A
+#
+# assert data_store["one"] == 1
+# assert data_store["str"] == "Some string"
+# assert data_store["a"].as(A).b
+# assert data_store["a"].as(A).f == 1.234
+# assert data_store["other"] == null
+# ~~~
+#
+# Set to `null` to clear a value.
+# ~~~
+# data_store["one"] = null
+# assert data_store["one"] == null
+# ~~~
+class DataStore
 
 	# Get the object stored at `key`, or null if nothing is available
 	fun [](key: String): nullable Object is abstract

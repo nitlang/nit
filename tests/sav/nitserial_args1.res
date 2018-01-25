@@ -7,16 +7,19 @@ end
 
 import test_serialization
 import serialization
+intrude import serialization::engine_tools
 
 redef class Deserializer
 	redef fun deserialize_class(name)
 	do
 		# Module: test_serialization
-		if name == "Array[Text]" then return new Array[Text].from_deserializer(self)
 		if name == "Array[Map[String, nullable Object]]" then return new Array[Map[String, nullable Object]].from_deserializer(self)
 		if name == "Array[String]" then return new Array[String].from_deserializer(self)
+		if name == "Array[Text]" then return new Array[Text].from_deserializer(self)
 		if name == "Array[Error]" then return new Array[Error].from_deserializer(self)
+		if name == "StrictHashMap[Int, Object]" then return new StrictHashMap[Int, Object].from_deserializer(self)
 		if name == "POSet[String]" then return new POSet[String].from_deserializer(self)
+		if name == "StrictHashMap[Serializable, Int]" then return new StrictHashMap[Serializable, Int].from_deserializer(self)
 		if name == "Array[Int]" then return new Array[Int].from_deserializer(self)
 		if name == "Array[nullable Object]" then return new Array[nullable Object].from_deserializer(self)
 		if name == "HashSet[String]" then return new HashSet[String].from_deserializer(self)

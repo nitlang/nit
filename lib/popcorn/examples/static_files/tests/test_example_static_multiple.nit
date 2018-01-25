@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_static_multiple is test_suite
+module test_example_static_multiple is test
 
 import pop_tests
 import example_static_multiple
 
 class TestExampleStaticMultiple
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/css/style.css"
@@ -36,7 +37,7 @@ class TestExampleStaticMultiple
 		system "curl -s {host}:{port}/not_found.nit"
 	end
 
-	fun test_example_static_multiple do
+	fun test_example_static_multiple is test do
 		var app = new App
 		app.use("/", new StaticHandler(test_path / "../public/"))
 		app.use("/", new StaticHandler(test_path / "../files/"))

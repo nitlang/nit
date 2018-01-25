@@ -15,15 +15,16 @@
 # limitations under the License.
 
 # Test module for `achievements.nit`
-module test_achievements is test_suite
+module test_achievements is test
 
 import test_helper
 import achievements
 
 class TestGame
 	super NitrpgTestHelper
+	test
 
-	fun test_add_achievement do
+	fun test_add_achievement is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
@@ -33,7 +34,7 @@ class TestGame
 		assert game.load_achievements.length == 2
 	end
 
-	fun test_load_achievement do
+	fun test_load_achievement is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
@@ -43,7 +44,7 @@ class TestGame
 		assert game.load_achievement(a2.id) == null
 	end
 
-	fun test_load_achievements do
+	fun test_load_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
@@ -61,8 +62,9 @@ end
 
 class TestPlayer
 	super NitrpgTestHelper
+	test
 
-	fun test_add_achievement do
+	fun test_add_achievement is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
@@ -73,7 +75,7 @@ class TestPlayer
 		assert player1.load_achievements.length == 2
 	end
 
-	fun test_load_achievement do
+	fun test_load_achievement is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
@@ -88,7 +90,7 @@ class TestPlayer
 		assert player2.load_achievement(a1.id) == null
 	end
 
-	fun test_load_achievements do
+	fun test_load_achievements is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
@@ -108,8 +110,9 @@ end
 
 class TestAchievement
 	super NitrpgTestHelper
+	test
 
-	fun test_init do
+	fun test_init is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a = new Achievement(game, "test_id", "test_name", "test_desc", 15)
@@ -119,7 +122,7 @@ class TestAchievement
 		assert a.reward == 15
 	end
 
-	fun test_init_from_json do
+	fun test_init_from_json is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var json = """{

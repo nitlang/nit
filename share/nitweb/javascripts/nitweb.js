@@ -15,15 +15,18 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ui.router', 'ngSanitize', 'angular-loading-bar', 'index', 'entities', 'docdown', 'metrics', 'users', 'grades'])
+	angular.module('nitweb', ['ui.router', 'ngSanitize', 'angular-loading-bar', 'catalog', 'entities', 'docdown', 'metrics', 'users', 'grades'])
 
 	.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeSpinner = false;
 	}])
 
-	.run(['$anchorScroll', function($anchorScroll) {
+	.run(function($rootScope, $anchorScroll) {
 		$anchorScroll.yOffset = 80;
-	}])
+		$rootScope.$on('$stateChangeSuccess', function() {
+		  $anchorScroll();
+		});
+	})
 
 	.config(function($stateProvider, $locationProvider) {
 		$stateProvider

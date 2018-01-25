@@ -22,15 +22,19 @@ module nitin
 import nitc::interpreter
 import nitc::frontend
 import nitc::parser_util
+intrude import nitc::scope
 
 redef class ToolContext
 
 	# --no-prompt
 	var opt_no_prompt = new OptionBool("Disable writing a prompt.", "--no-prompt")
 
+	# --source-name
+	var opt_source_name = new OptionString("Set a name for the input source.", "--source-name")
+
 	redef init do
 		super
-		option_context.add_option(opt_no_prompt)
+		option_context.add_option(opt_no_prompt, opt_source_name)
 	end
 
 	# Parse a full module given as a string
@@ -38,7 +42,9 @@ redef class ToolContext
 	# Return a AModule or a AError
 	fun p_module(string: String): ANode
 	do
-		var source = new SourceFile.from_string("", string)
+		var source_name = opt_source_name.value or else ""
+		string = "\n" * last_line + string
+		var source = new SourceFile.from_string(source_name, string)
 		var lexer = new Lexer(source)
 		var parser = new Parser(lexer)
 		var tree = parser.parse
@@ -65,6 +71,9 @@ redef class ToolContext
 	# With the default implementation, the history is dropped
 	fun readline_add_history(text: String) do end
 
+	# The last line number read by `i_parse`
+	var last_line = 0
+
 	# Parse the input of the user as a module
 	fun i_parse(prompt: String): nullable ANode
 	do
@@ -79,7 +88,14 @@ redef class ToolContext
 				s = readline(prompt)
 			end
 			if s == null then return null
-			if s == "" then continue
+			if s == "" then
+				if oldtext != "" then
+					oldtext += "\n"
+				else
+					last_line += 1
+				end
+				continue
+			end
 
 			if s.chars.first == ':' then
 				var res = new TString
@@ -91,19 +107,76 @@ redef class ToolContext
 			oldtext = ""
 			var n = p_module(text)
 
-			if n isa AParserError and (n.token isa EOF) then
+			if n isa AParserError and (n.token isa EOF or n.token isa TBadTString or n.token isa TBadExtern) then
 				# Unexpected end of file, thus continuing
 				if oldtext == "" then prompt = "." * prompt.length
 				oldtext = text
 				continue
 			end
 
+			last_line = n.location.file.line_starts.length - 1
 			readline_add_history(text.chomp)
 			return n
 		end
 	end
 end
 
+redef class AMethPropdef
+	var injected_variables: nullable Map[Variable, Instance] = null is writable
+	var new_variables: nullable Array[Variable] = null
+
+	redef fun accept_scope_visitor(v)
+	do
+		var injected_variables = self.injected_variables
+		if injected_variables == null then
+			super
+			return
+		end
+
+		# Inject main variables in the initial scope
+		var scope = v.scopes.first
+		for variable in injected_variables.keys do
+			scope.variables[variable.name] = variable
+		end
+
+		super
+
+		# Gather new top-level variables as main variables
+		scope = v.scopes.first
+		var new_variables = new Array[Variable]
+		for variable in scope.variables.values do
+			if not injected_variables.has_key(variable) then
+				new_variables.add(variable)
+			end
+		end
+		self.new_variables = new_variables
+	end
+
+	redef fun call_commons(v, m, a, f)
+	do
+		var injected_variables = self.injected_variables
+		if injected_variables == null then return super
+
+		# Inject main variables in the frame
+		assert f isa InterpreterFrame
+		for variable, i in injected_variables do
+			f.map[variable] = i
+		end
+
+		var res = super
+
+		# Update the values of the variables
+		for variable in injected_variables.keys do
+			injected_variables[variable] = f.map[variable]
+		end
+		# Retrieve the values of the new main variables
+		for variable in new_variables.as(not null) do
+			injected_variables[variable] = f.map[variable]
+		end
+
+		return res
+	end
+end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -139,6 +212,8 @@ var sys_type = mainobj.mtype.as(MClassType)
 var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
 assert mainprop != null
 
+var main_variables = new Map[Variable, Instance]
+
 var l = 0
 loop
 	# Next piece of Nit code
@@ -160,7 +235,8 @@ loop
 
 	# An error
 	if n isa AError then
-		print "{n.location.colored_line("0;31")}: {n.message}"
+		modelbuilder.error(n, n.message)
+		toolcontext.check_errors
 		continue
 	end
 
@@ -173,6 +249,14 @@ loop
 	l += 1
 	var newmodule = modelbuilder.load_rt_module(mainmodule, amodule, "input-{l}")
 	if newmodule == null then continue
+
+	var main_method = null
+	if amodule.n_classdefs.not_empty and amodule.n_classdefs.last isa AMainClassdef then
+		main_method = amodule.n_classdefs.last.n_propdefs.first
+		assert main_method isa AMethPropdef
+		main_method.injected_variables = main_variables
+	end
+
 	modelbuilder.run_phases
 	if not toolcontext.check_errors then
 		toolcontext.error_count = 0
@@ -183,7 +267,7 @@ loop
 	interpreter.mainmodule = mainmodule
 
 	# Run the main if the AST contains a main
-	if amodule.n_classdefs.not_empty and amodule.n_classdefs.last isa AMainClassdef then
+	if main_method != null then
 		do
 			interpreter.catch_count += 1
 			interpreter.send(mainprop, [mainobj])

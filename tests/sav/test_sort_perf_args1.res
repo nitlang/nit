@@ -1,5 +1,7 @@
 test_prog/
 |--test_prog/README.md
+|--test_prog/examples
+|  `--test_prog/examples/game_examples.nit
 |--test_prog/game
 |  |--test_prog/game/README.md
 |  |--test_prog/game/excluded.nit

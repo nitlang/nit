@@ -23,7 +23,7 @@ redef class EulerCamera
 	# Zoom factor, default at 1.2, higher means more reactive zoom effect
 	var camera_zoom_mod = 1.2 is writable
 
-	# Scoll trigger button mask from SDL2 (1: left, 2: middle, 4: right)
+	# Scroll trigger button mask from SDL2 (1: left, 2: middle, 4: right)
 	#
 	# Set to 0 to deactivate the scrolling feature.
 	var camera_pan_mask = 2 is writable

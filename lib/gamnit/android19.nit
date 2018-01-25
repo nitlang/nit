@@ -22,6 +22,7 @@ end
 
 import android
 intrude import display_android
+intrude import gamnit_android
 intrude import android::load_image
 
 in "Java" `{

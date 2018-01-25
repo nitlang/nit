@@ -53,6 +53,7 @@ redef class App
 		android.content.IntentFilter filter = new android.content.IntentFilter();
 		filter.addAction(android.net.wifi.WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
 		final int final_self = self;
+		App_incr_ref(final_self);
 
 		context.registerReceiver(
 			new android.content.BroadcastReceiver() {

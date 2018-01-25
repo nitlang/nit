@@ -80,27 +80,27 @@ class Sprite
 	var texture: Texture is writable(texture_direct=)
 
 	# Texture drawn to screen
-	fun texture=(value: Texture)
+	fun texture=(texture: Texture)
 	do
-		if isset _texture and value != texture then
+		if isset _texture and texture != self.texture then
 			needs_update
-			if value.root != texture.root then needs_remap
+			if texture.root != self.texture.root then needs_remap
 		end
-		texture_direct = value
+		texture_direct = texture
 	end
 
 	# Center position of this sprite in world coordinates
 	var center: Point3d[Float] is writable(center_direct=), noautoinit
 
 	# Center position of this sprite in world coordinates
-	fun center=(value: Point3d[Float]) is autoinit do
-		if isset _center and value != center then
+	fun center=(center: Point3d[Float]) is autoinit do
+		if isset _center and center != self.center then
 			needs_update
-			center.sprites_remove self
+			self.center.sprites_remove self
 		end
 
-		value.sprites_add self
-		center_direct = value
+		center.sprites_add self
+		center_direct = center
 	end
 
 	# Last animation set with `animate`
@@ -378,10 +378,10 @@ redef class App
 	var ui_camera = new UICamera(app.display.as(not null)) is lazy
 
 	# World sprites drawn as seen by `world_camera`
-	var sprites: Set[Sprite] = new SpriteSet
+	var sprites = new SpriteSet
 
 	# UI sprites drawn as seen by `ui_camera`, over world `sprites`
-	var ui_sprites: Set[Sprite] = new SpriteSet
+	var ui_sprites = new SpriteSet
 
 	# Main method to refine in clients to update game logic and `sprites`
 	fun update(dt: Float) do end
@@ -399,6 +399,9 @@ redef class App
 		var display = display
 		assert display != null
 		glClear gl_COLOR_BUFFER_BIT
+
+		ui_camera.reset_height 1080.0
+		glViewport(0, 0, display.width, display.height)
 		frame_core_ui_sprites display
 		display.flip
 
@@ -417,10 +420,15 @@ redef class App
 	# Second performance clock for smaller operations
 	private var perf_clock_sprites = new Clock is lazy
 
-	redef fun on_create
+	redef fun create_gamnit
 	do
 		super
+		create_flat
+	end
 
+	# Prepare the flat framework services
+	fun create_flat
+	do
 		var display = display
 		assert display != null
 
@@ -459,10 +467,15 @@ redef class App
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
 		end
+
+		sprites.reset
+		ui_sprites.reset
 	end
 
 	redef fun on_stop
 	do
+		super
+
 		# Clean up
 		simple_2d_program.delete
 
@@ -480,6 +493,12 @@ redef class App
 
 		# Update all sprites in the UI
 		for sprite in ui_sprites do sprite.needs_update
+	end
+
+	redef fun on_resume
+	do
+		clock.lapse
+		super
 	end
 
 	redef fun frame_core(display)
@@ -532,12 +551,14 @@ redef class App
 
 		# draw
 		sprite_set.draw
+
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Draw world sprites from `sprites`
 	protected fun frame_core_world_sprites(display: GamnitDisplay)
 	do
-		frame_core_sprites(display, sprites.as(SpriteSet), world_camera)
+		frame_core_sprites(display, sprites, world_camera)
 	end
 
 	# Draw UI sprites from `ui_sprites`
@@ -546,7 +567,7 @@ redef class App
 		# Reset only the depth buffer
 		glClear gl_DEPTH_BUFFER_BIT
 
-		frame_core_sprites(display, ui_sprites.as(SpriteSet), ui_camera)
+		frame_core_sprites(display, ui_sprites, ui_camera)
 	end
 end
 
@@ -687,7 +708,7 @@ private class Simple2dProgram
 			vec3 c; // coords
 
 			float end = a_start + a_loops/a_fps*a_n_frames;
-			if (a_loops == -1.0 || time < end) {
+			if (a_fps != 0.0 && (a_loops == -1.0 || time < end)) {
 				// in animation
 				float frame = mod(floor((time-a_start)*a_fps), a_n_frames);
 				v_coord = a_tex_coord + a_tex_diff*frame;
@@ -875,17 +896,8 @@ redef class OffsetPoint3d
 end
 
 # Set of sprites sorting them into different `SpriteContext`
-private class SpriteSet
+class SpriteSet
 	super HashSet[Sprite]
-
-	# Map texture then static vs dynamic to a `SpriteContext`
-	var contexts_map = new HashMap4[RootTexture, nullable RootTexture, Bool, Int, Array[SpriteContext]]
-
-	# Contexts in `contexts_map`, sorted by draw order
-	var contexts_items = new Array[SpriteContext]
-
-	# Sprites needing resorting in `contexts_map`
-	var sprites_to_remap = new Array[Sprite]
 
 	# Animation speed multiplier (0.0 to pause, 1.0 for normal speed, etc.)
 	var time_mod = 1.0 is writable
@@ -893,8 +905,17 @@ private class SpriteSet
 	# Seconds elapsed since the launch of the program, in world time responding to `time_mod`
 	var time = 0.0
 
+	# Map texture then static vs dynamic to a `SpriteContext`
+	private var contexts_map = new HashMap4[RootTexture, nullable RootTexture, Bool, Int, Array[SpriteContext]]
+
+	# Contexts in `contexts_map`, sorted by draw order
+	private var contexts_items = new Array[SpriteContext]
+
+	# Sprites needing resorting in `contexts_map`
+	private var sprites_to_remap = new Array[Sprite]
+
 	# Add a sprite to the appropriate context
-	fun map_sprite(sprite: Sprite)
+	private fun map_sprite(sprite: Sprite)
 	do
 		assert sprite.context == null else print_error "Sprite {sprite} belongs to another SpriteSet"
 
@@ -946,7 +967,7 @@ private class SpriteSet
 	end
 
 	# Remove a sprite from its context
-	fun unmap_sprite(sprite: Sprite)
+	private fun unmap_sprite(sprite: Sprite)
 	do
 		var context = sprite.context
 		assert context != null
@@ -957,10 +978,14 @@ private class SpriteSet
 	end
 
 	# Draw all sprites by all contexts
-	fun draw
+	private fun draw
 	do
 		# Remap sprites that may need to change context
 		for sprite in sprites_to_remap do
+
+			# Skip if it was removed from this set after being modified
+			if sprite.sprite_set != self then continue
+
 			unmap_sprite sprite
 			map_sprite sprite
 		end
@@ -999,6 +1024,23 @@ private class SpriteSet
 		for c in contexts_items do c.destroy
 		contexts_map.clear
 		contexts_items.clear
+		sprites_to_remap.clear
+	end
+
+	private fun reset
+	do
+		for sprite in self do
+			sprite.context = null
+		end
+
+		for c in contexts_items do c.destroy
+		contexts_map.clear
+		contexts_items.clear
+		sprites_to_remap.clear
+
+		for sprite in self do
+			map_sprite sprite
+		end
 	end
 end
 
@@ -1211,8 +1253,12 @@ private class SpriteContext
 				data[o+36] = tc[v*2+1]
 
 				# a_tex_diff
-				var dx = animation.frames[1].texture_coords[0] - animation.frames[0].texture_coords[0]
-				var dy = animation.frames[1].texture_coords[1] - animation.frames[0].texture_coords[1]
+				var dx = 0.0
+				var dy = 0.0
+				if animation.frames.length > 1 then
+					dx = animation.frames[1].texture_coords[0] - animation.frames[0].texture_coords[0]
+					dy = animation.frames[1].texture_coords[1] - animation.frames[0].texture_coords[1]
+				end
 				data[o+37] = dx
 				data[o+38] = dy
 
@@ -1716,10 +1762,11 @@ end
 redef class GLfloatArray
 	private fun fill_from_matrix(matrix: Matrix, dst_offset: nullable Int)
 	do
-		dst_offset = dst_offset or else 0
+		dst_offset = dst_offset or else add_index
 		var mat_len = matrix.width*matrix.height
 		assert length >= mat_len + dst_offset
 		native_array.fill_from_matrix_native(matrix.items, dst_offset, mat_len)
+		add_index += mat_len
 	end
 end
 

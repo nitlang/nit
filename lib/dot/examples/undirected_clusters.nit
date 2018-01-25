@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # Example from http://www.graphviz.org/Gallery/undirected/fdpclust.html
+module undirected_clusters is example
 
 import dot
 

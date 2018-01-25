@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_session is test_suite
+module test_example_session is test
 
 import pop_tests
 import example_session
 
 class TestExampleSession
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
@@ -30,7 +31,7 @@ class TestExampleSession
 		system "curl -s {host}:{port}/products/not_found"
 	end
 
-	fun test_example_session do
+	fun test_example_session is test do
 		var app = new App
 		app.use("/*", new SessionInit)
 		app.use("/", new AppLogin)

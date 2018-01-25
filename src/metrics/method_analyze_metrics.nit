@@ -21,9 +21,9 @@ import nitsmell_toolcontext
 import mclassdef_collect
 
 
-fun call_analyze_methods(mclassdef: MClassDef, model_builder: ModelBuilder): Array[MMethodDef] do
+fun call_analyze_methods(mclassdef: MClassDef, model_builder: ModelBuilder, view: ModelView): Array[MMethodDef] do
 	var mmethoddefs = new Array[MMethodDef]
-	for m_prop in mclassdef.collect_intro_and_redef_mpropdefs(model_builder.model.private_view) do
+	for m_prop in mclassdef.collect_intro_and_redef_mpropdefs(view) do
 		var n_prop = model_builder.mpropdef2node(m_prop)
 		#Check if the property is a method definition
 		if n_prop isa AMethPropdef and m_prop isa MMethodDef then

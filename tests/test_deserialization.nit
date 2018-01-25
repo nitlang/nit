@@ -79,7 +79,7 @@ class F[N: Numeric]
 
 	var n: N
 
-	redef fun to_s do return "<E: {n}>"
+	redef fun to_s do return "<F: {n}>"
 end
 
 # Other collections
@@ -125,5 +125,5 @@ class TestEntities
 	var with_generics: Array[Serializable] = [a, b, c, d, e, fi, ff, g: Serializable]
 end
 
-# We instanciate it here so that `nitserial` detects generic types as being alive
+# We instantiate it here so that `nitserial` detects generic types as being alive
 var entities = new TestEntities

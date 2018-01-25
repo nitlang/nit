@@ -32,7 +32,7 @@ public class NitActivity extends Activity {
 	 */
 
 	static {
-		System.loadLibrary("main");
+		System.loadLibrary("nit_app");
 	}
 
 	/*

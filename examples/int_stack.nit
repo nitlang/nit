@@ -15,7 +15,7 @@
 # An example that defines and uses stacks of integers.
 # The implementation is done with a simple linked list.
 # It features: free constructors, nullable types and some adaptive typing.
-module int_stack
+module int_stack is example
 
 # A stack of integer implemented by a simple linked list.
 # Note that this is only a toy class since a real linked list will gain to use

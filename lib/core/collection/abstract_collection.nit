@@ -859,6 +859,36 @@ interface SequenceRead[E]
 		end
 	end
 
+	# Try to get an element, return `null` if the `index` is invalid.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.get_or_null(1) == 20
+	# assert a.get_or_null(3) == null
+	# assert a.get_or_null(-1) == null
+	# assert a.get_or_null(-10) == null
+	# ~~~
+	fun get_or_null(index: Int): nullable E
+	do
+		if index >= 0 and index < length then return self[index]
+		return null
+	end
+
+	# Try to get an element, return `default` if the `index` is invalid.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.get_or_default(1, -1) == 20
+	# assert a.get_or_default(3, -1) == -1
+	# assert a.get_or_default(-1, -1) == -1
+	# assert a.get_or_default(-10, -1) == -1
+	# ~~~
+	fun get_or_default(index: Int, default: E): E
+	do
+		if index >= 0 and index < length then return self[index]
+		return default
+	end
+
 	# Get the last item.
 	# Is equivalent with `self[length-1]`.
 	#

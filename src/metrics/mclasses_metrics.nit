@@ -37,24 +37,25 @@ private class MClassesMetricsPhase
 		out.mkdir
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = model.private_view
+		var filter = new ModelFilter(private_visibility)
+		var model_view = new ModelView(model, mainmodule, filter)
 
 		print toolcontext.format_h1("\n# MClasses metrics")
 
 		var metrics = new MetricSet
-		metrics.register(new CNOA(mainmodule, model_view))
-		metrics.register(new CNOP(mainmodule, model_view))
-		metrics.register(new CNOC(mainmodule, model_view))
-		metrics.register(new CNOD(mainmodule, model_view))
-		metrics.register(new CDIT(mainmodule, model_view))
-		metrics.register(new CNBP(mainmodule, model_view))
-		metrics.register(new CNBA(mainmodule, model_view))
-		metrics.register(new CNBI(mainmodule, model_view))
-		metrics.register(new CNBM(mainmodule, model_view))
-		metrics.register(new CNBV(mainmodule, model_view))
-		metrics.register(new CNBIP(mainmodule, model_view))
-		metrics.register(new CNBRP(mainmodule, model_view))
-		metrics.register(new CNBHP(mainmodule, model_view))
+		metrics.register(new CNOA(model_view))
+		metrics.register(new CNOP(model_view))
+		metrics.register(new CNOC(model_view))
+		metrics.register(new CNOD(model_view))
+		metrics.register(new CDIT(model_view))
+		metrics.register(new CNBP(model_view))
+		metrics.register(new CNBA(model_view))
+		metrics.register(new CNBI(model_view))
+		metrics.register(new CNBM(model_view))
+		metrics.register(new CNBV(model_view))
+		metrics.register(new CNBIP(model_view))
+		metrics.register(new CNBRP(model_view))
+		metrics.register(new CNBHP(model_view))
 
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
@@ -92,9 +93,6 @@ abstract class MClassMetric
 	super Metric
 	redef type ELM: MClass
 
-	# Main module used for class linearization
-	var mainmodule: MModule
-
 	# Model view used to collect and filter entities
 	var model_view: ModelView
 end
@@ -108,7 +106,7 @@ class CNOA
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.in_hierarchy(mainmodule).greaters.length - 1
+			values[mclass] = mclass.in_hierarchy(model_view.mainmodule).greaters.length - 1
 		end
 	end
 end
@@ -122,7 +120,7 @@ class CNOP
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.in_hierarchy(mainmodule).direct_greaters.length
+			values[mclass] = mclass.in_hierarchy(model_view.mainmodule).direct_greaters.length
 		end
 	end
 end
@@ -136,7 +134,7 @@ class CNOC
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.in_hierarchy(mainmodule).direct_smallers.length
+			values[mclass] = mclass.in_hierarchy(model_view.mainmodule).direct_smallers.length
 		end
 	end
 end
@@ -150,7 +148,7 @@ class CNOD
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.in_hierarchy(mainmodule).smallers.length - 1
+			values[mclass] = mclass.in_hierarchy(model_view.mainmodule).smallers.length - 1
 		end
 	end
 end
@@ -164,7 +162,7 @@ class CDIT
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.in_hierarchy(mainmodule).depth
+			values[mclass] = mclass.in_hierarchy(model_view.mainmodule).depth
 		end
 	end
 end

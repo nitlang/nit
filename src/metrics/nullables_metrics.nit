@@ -40,11 +40,12 @@ private class NullablesMetricsPhase
 		print toolcontext.format_h1("\n# Nullable metrics")
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = model.private_view
+		var filter = new ModelFilter(private_visibility)
+		var model_view = new ModelView(model, mainmodule, filter)
 
 		var metrics = new MetricSet
-		metrics.register(new CNBA(mainmodule, model_view))
-		metrics.register(new CNBNA(mainmodule, model_view))
+		metrics.register(new CNBA(model_view))
+		metrics.register(new CNBNA(model_view))
 
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do

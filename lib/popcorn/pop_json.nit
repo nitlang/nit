@@ -167,12 +167,12 @@ end
 redef class HttpResponse
 
 	# Write data as JSON and set the right content type header.
-	fun json(json: nullable Serializable, status: nullable Int) do
+	fun json(json: nullable Serializable, status: nullable Int, plain, pretty: nullable Bool) do
 		header["Content-Type"] = media_types["json"].as(not null)
 		if json == null then
 			send(null, status)
 		else
-			send(json.to_json, status)
+			send(json.serialize_to_json(plain or else true, pretty or else false), status)
 		end
 	end
 

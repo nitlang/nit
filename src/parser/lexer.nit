@@ -1326,7 +1326,7 @@ redef class TBadString
     end
 end
 
-redef class TBadChar
+redef class TBadTString
     redef fun parser_index: Int
     do
 	return 110
@@ -1338,10 +1338,34 @@ redef class TBadChar
     end
 end
 
-redef class TExternCodeSegment
+redef class TBadChar
     redef fun parser_index: Int
     do
 	return 111
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TExternCodeSegment
+    redef fun parser_index: Int
+    do
+	return 112
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TBadExtern
+    redef fun parser_index: Int
+    do
+	return 113
     end
 
     init init_tk(loc: Location)
@@ -1354,7 +1378,7 @@ end
 redef class EOF
     redef fun parser_index: Int
     do
-	return 112
+	return 114
     end
 end
 
@@ -1692,10 +1716,16 @@ redef class Lexer
 			return new TBadString.init_tk(location)
 		end
 		if accept_token == 111 then
-			return new TBadChar.init_tk(location)
+			return new TBadTString.init_tk(location)
 		end
 		if accept_token == 112 then
+			return new TBadChar.init_tk(location)
+		end
+		if accept_token == 113 then
 			return new TExternCodeSegment.init_tk(location)
+		end
+		if accept_token == 114 then
+			return new TBadExtern.init_tk(location)
 		end
 		abort # unknown token index `accept_token`
 	end

@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_router is test_suite
+module test_example_router is test
 
 import pop_tests
 import example_router
 
 class TestExampleRouter
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}"
@@ -33,7 +34,7 @@ class TestExampleRouter
 		system "curl -s {host}:{port}/products/not_found"
 	end
 
-	fun test_example_router do
+	fun test_example_router is test do
 		var user_router = new Router
 		user_router.use("/*", new UserLogger)
 		user_router.use("/", new UserHomepage)

@@ -7,6 +7,7 @@
 
 # Font support showcase
 module fonts_showcase is
+	example
 	app_name "gamnit fonts"
 	app_namespace "org.gamnit.fonts_showcase"
 	app_version(1, 0, git_revision)
@@ -22,10 +23,13 @@ redef class App
 	# Asset font used to display text
 	var font = new BMFontAsset("Josefin_Sans/font.fnt")
 
-	# Anchor texture used to identify the anchor coordinate of each `TextSprites`
+	# Anchor texture identifying the anchor coordinates of each `TextSprites`
 	var anchor = new Texture("anchor.png")
 
-	redef fun on_create
+	# Bottom right corner
+	var corner = new Texture("corner.png")
+
+	redef fun create_scene
 	do
 		super
 
@@ -170,6 +174,12 @@ redef class App
 
 		# Add the anchor effects to all TextSprites
 		for t in texts do ui_sprites.add new Sprite(anchor, t.anchor)
+
+		for t in texts do
+			# Bottom right
+			var br = t.anchor.offset(t.width*(1.0-t.align), -t.height*(1.0-t.valign), 1.0)
+			ui_sprites.add new Sprite(corner, br)
+		end
 	end
 
 	redef fun accept_event(event)

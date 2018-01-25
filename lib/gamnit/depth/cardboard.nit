@@ -80,7 +80,7 @@ redef class App
 		end
 	end
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 		initialize_head_tracker

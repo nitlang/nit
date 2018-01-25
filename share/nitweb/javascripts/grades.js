@@ -20,6 +20,25 @@
 
 		.config(function($stateProvider, $locationProvider) {
 			$stateProvider
+				.state('doc.entity.grades', {
+					url: '/grades',
+					templateUrl: 'views/doc/grades.html',
+					resolve: {
+						metrics: function(Feedback, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Feedback.loadEntityStars($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, metrics) {
+						this.mentity = mentity;
+						this.metrics = metrics;
+					},
+					controllerAs: 'vm',
+				})
 				.state('grades', {
 					url: '/grades',
 					templateUrl: 'views/grades.html',

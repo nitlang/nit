@@ -16,6 +16,7 @@
 
 # Test for app.nit's UI services
 module ui_test is
+	example
 	app_name "app.nit UI test"
 	app_version(0, 1, git_revision)
 	app_namespace "org.nitlanguage.ui_test"

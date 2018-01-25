@@ -53,8 +53,68 @@
 				.state('doc.entity.doc', {
 					url: '',
 					templateUrl: 'views/doc/doc.html',
-					controller: function(mentity) {
+					resolve: {
+						doc: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityDoc($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						parents: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityParents($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						children: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityChildren($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						intros: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityIntros($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						redefs: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityRedefs($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						meta: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityMeta($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, doc, parents, children, intros, redefs, meta) {
 						this.mentity = mentity;
+						this.doc = doc;
+						this.parents = parents;
+						this.children = children;
+						this.intros = intros;
+						this.redefs = redefs;
+						this.meta = meta;
+
+						this.date = function(date) {
+							return new Date(date);
+						}
 					},
 					controllerAs: 'vm',
 				})
@@ -69,10 +129,46 @@
 									$state.go('404', null, { location: false })
 								});
 							return d.promise;
-						}
+						},
+						ancestors: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityAncestors($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						parents: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityParents($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						children: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityChildren($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
+						descendants: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityDescendants($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						},
 					},
-					controller: function(graph, $sce) {
-						this.graph = $sce.trustAsHtml(graph);
+					controller: function(ancestors, parents, children, descendants, graph, $sce) {
+						this.graph = $sce.trustAsHtml(graph.graph);
+						this.ancestors = ancestors;
+						this.parents = parents;
+						this.children = children;
+						this.descendants = descendants;
 					},
 					controllerAs: 'vm',
 				})
@@ -139,7 +235,7 @@
 					resolve: {
 						lin: function(Model, $q, $stateParams, $state) {
 							var d = $q.defer();
-							Model.loadEntityLinearization($stateParams.id, d.resolve,
+							Model.loadEntityLin($stateParams.id, d.resolve,
 								function() {
 									$state.go('404', null, { location: false })
 								});
@@ -149,7 +245,7 @@
 					controller: function(mentity, lin, $scope, $location, $anchorScroll) {
 						var vm = this;
 						vm.focus = $location.hash() ?
-							$location.hash() : mentity.intro.full_name;
+							$location.hash() : lin.results[0].full_name;
 						vm.mentity = mentity;
 						vm.linearization = lin;
 						setTimeout(function() {
@@ -159,7 +255,7 @@
 							return $location.hash();
 						}, function (value) {
 							vm.focus = $location.hash() ?
-								$location.hash() : mentity.intro.full_name;
+								$location.hash() : lin.results[0].full_name;
 							$anchorScroll();
 						});
 					},
@@ -167,9 +263,20 @@
 				})
 				.state('doc.entity.all', {
 					url: '/all',
-					templateUrl: 'views/doc/all.html',
-					controller: function(mentity) {
+					templateUrl: 'views/doc/defs.html',
+					resolve: {
+						defs: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityAll($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, defs) {
 						this.mentity = mentity;
+						this.defs = defs;
 					},
 					controllerAs: 'vm',
 				})
@@ -186,8 +293,14 @@
 						.error(cbErr);
 				},
 
-				loadEntityLinearization: function(id, cb, cbErr) {
-					$http.get('/api/linearization/' + id)
+				loadEntityDoc: function(id, cb, cbErr) {
+					$http.get('/api/doc/' + id + '?format=html')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityLin: function(id, cb, cbErr) {
+					$http.get('/api/lin/' + id)
 						.success(cb)
 						.error(cbErr);
 				},
@@ -198,20 +311,68 @@
 						.error(cbErr);
 				},
 
+				loadEntityIntros: function(id, cb, cbErr) {
+					$http.get('/api/intros/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityRedefs: function(id, cb, cbErr) {
+					$http.get('/api/redefs/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityAll: function(id, cb, cbErr) {
+					$http.get('/api/all/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
 				loadEntityCode: function(id, cb, cbErr) {
-					$http.get('/api/code/' + id)
+					$http.get('/api/code/' + id + '?format=html')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityAncestors: function(id, cb, cbErr) {
+					$http.get('/api/ancestors/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityParents: function(id, cb, cbErr) {
+					$http.get('/api/parents/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityChildren: function(id, cb, cbErr) {
+					$http.get('/api/children/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityDescendants: function(id, cb, cbErr) {
+					$http.get('/api/descendants/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityMeta: function(id, cb, cbErr) {
+					$http.get('/api/meta/' + id)
 						.success(cb)
 						.error(cbErr);
 				},
 
 				loadEntityGraph: function(id, cb, cbErr) {
-					$http.get('/api/graph/inheritance/' + id + '?cdepth=3')
+					$http.get('/api/graph/inheritance/' + id + '?format=svg&cdepth=3')
 						.success(cb)
 						.error(cbErr);
 				},
 
-				search: function(q, n, cb, cbErr) {
-					$http.get('/api/search?q=' + q + '&n=' + n)
+				search: function(q, p, n, cb, cbErr) {
+					$http.get('/api/search?q=' + q + '&p=' + p + '&l=' + n)
 						.success(cb)
 						.error(cbErr);
 				}
@@ -226,6 +387,7 @@
 				scope: {
 					mentity: '='
 				},
+				replace: true,
 				templateUrl: '/directives/entity/link.html'
 			};
 		})
@@ -285,9 +447,13 @@
 		.directive('entityLocation', function() {
 			return {
 				restrict: 'E',
-				scope: {
-					mentity: '='
+				replace: true,
+				scope: {},
+				bindToController: {
+					loc: '='
 				},
+				controller: function() {},
+				controllerAs: 'vm',
 				templateUrl: '/directives/entity/location.html'
 			};
 		})
@@ -308,24 +474,10 @@
 			return {
 				restrict: 'E',
 				scope: {
-					mentity: '=',
-					defaultTab: '@',
-					noSynopsis: '='
+					mentity: '='
 				},
 				replace: true,
-				templateUrl: '/directives/entity/card.html',
-				link: function ($scope, element, attrs) {
-					$scope.currentTab = $scope.defaultTab ? $scope.defaultTab : 'signature';
-
-					$scope.loadEntityStars = function() {
-						Feedback.loadEntityStars($scope.mentity.full_name,
-							function(data) {
-								$scope.ratings = data;
-							}, function(message, status) {
-								$scope.error = {message: message, status: status};
-							});
-					};
-				}
+				templateUrl: '/directives/entity/card.html'
 			};
 		}])
 

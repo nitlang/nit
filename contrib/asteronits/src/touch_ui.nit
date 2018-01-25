@@ -20,13 +20,15 @@ import gamnit::virtual_gamepad
 import asteronits
 
 redef class App
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
 		var gamepad = new VirtualGamepad
-		gamepad.add_dpad
-		gamepad.controls.first.as(DPad).show_down = false
+
+		var dpad = gamepad.add_dpad
+		if dpad != null then dpad.show_down = false
+
 		gamepad.add_button("space", gamepad_spritesheet.fire)
 		gamepad.visible = true
 		self.gamepad = gamepad

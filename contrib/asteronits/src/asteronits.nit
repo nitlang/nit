@@ -17,12 +17,11 @@ module asteronits is
 	app_name "Asteronits"
 	app_namespace "org.nitlanguage.asteronits"
 	app_version(1, 0, git_revision)
-
-	android_manifest_activity """android:screenOrientation="sensorLandscape""""
-	android_api_target 10
 end
 
 import gamnit::flat
+
+import gamnit::landscape
 
 import game_logic
 import spritesheet
@@ -64,12 +63,14 @@ redef class App
 	private var fx_explosion_ship = new Sound("sounds/explosion_ship.wav")
 	private var fx_explosion_asteroids = new Sound("sounds/explosion_asteroids.wav")
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
 		# Move the camera to show all the world world in the screen range
 		world_camera.reset_height(world.half_height * 2.0)
+
+		ui_camera.reset_height 720.0
 	end
 
 	# Main spritesheet with ships, asteroids and beams
@@ -89,6 +90,8 @@ redef class App
 
 	redef fun accept_event(event)
 	do
+		if super then return true
+
 		if event isa QuitEvent then
 			exit 0
 		else if event isa KeyEvent then

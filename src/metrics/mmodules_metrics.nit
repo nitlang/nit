@@ -37,21 +37,21 @@ private class MModulesMetricsPhase
 		out.mkdir
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = model.private_view
+		var model_view = new ModelView(model, mainmodule)
 
 		print toolcontext.format_h1("\n# MModules metrics")
 
 		var metrics = new MetricSet
-		metrics.register(new MNOA(mainmodule, model_view))
-		metrics.register(new MNOP(mainmodule, model_view))
-		metrics.register(new MNOC(mainmodule, model_view))
-		metrics.register(new MNOD(mainmodule, model_view))
-		metrics.register(new MDIT(mainmodule, model_view))
-		metrics.register(new MNBI(mainmodule, model_view))
-		metrics.register(new MNBR(mainmodule, model_view))
-		metrics.register(new MNBCC(mainmodule, model_view))
-		metrics.register(new MNBAC(mainmodule, model_view))
-		metrics.register(new MNBIC(mainmodule, model_view))
+		metrics.register(new MNOA(model_view))
+		metrics.register(new MNOP(model_view))
+		metrics.register(new MNOC(model_view))
+		metrics.register(new MNOD(model_view))
+		metrics.register(new MDIT(model_view))
+		metrics.register(new MNBI(model_view))
+		metrics.register(new MNBR(model_view))
+		metrics.register(new MNBCC(model_view))
+		metrics.register(new MNBAC(model_view))
+		metrics.register(new MNBIC(model_view))
 
 		var mmodules = new HashSet[MModule]
 		for mpackage in model.mpackages do
@@ -84,9 +84,6 @@ end
 abstract class MModuleMetric
 	super Metric
 	redef type ELM: MModule
-
-	# Main module used for linearization
-	var mainmodule: MModule
 
 	# Model view used to collect and filter entities
 	var model_view: ModelView

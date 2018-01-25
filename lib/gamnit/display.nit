@@ -72,4 +72,7 @@ class GamnitDisplay
 	#
 	# The implementation varies per platform.
 	fun feed_events do end
+
+	# Extensions to OpenGL ES 2.0 supported by the current configuration
+	var gl_extensions: Array[String] is lazy do return glGetString(gl_EXTENSIONS).split(' ')
 end

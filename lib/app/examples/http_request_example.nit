@@ -14,6 +14,7 @@
 
 # Example for the `app::http_request` main service `AsyncHttpRequest`
 module http_request_example is
+	example
 	app_name "app.nit HTTP"
 	app_namespace "org.nitlanguage.http_example"
 	android_api_target 15
@@ -56,7 +57,7 @@ class MyHttpRequest
 	redef fun after do win.button_request.enabled = true
 end
 
-# Simpe window with a label and a button
+# Simple window with a label and a button
 class HttpRequestClientWindow
 	super Window
 
@@ -81,11 +82,4 @@ class HttpRequestClientWindow
 	end
 end
 
-redef class App
-	redef fun on_create
-	do
-		# Create the main window
-		push_window new HttpRequestClientWindow
-		super
-	end
-end
+redef fun root_window do return new HttpRequestClientWindow

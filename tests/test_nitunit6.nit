@@ -12,22 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_nitunit6 is test_suite
-
-import test_suite
+module test_nitunit6 is test
 
 class TestNitunit6
-	super TestSuite
+	test
 
-	fun test_foo do
+	fun test_foo is test do
 		assert true
 	end
 end
 
-redef fun before_module do
+fun before_module is before_all do
 	assert false
 end
 
-redef fun after_module do
+fun after_module is after_all do
 	assert false
 end

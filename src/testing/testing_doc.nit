@@ -44,7 +44,7 @@ class NitUnitExecutor
 	var mdproc = new MarkdownProcessor
 
 	init do
-		mdproc.emitter.decorator = new NitunitDecorator(self)
+		mdproc.decorator = new NitunitDecorator(self)
 	end
 
 	# The associated documentation object

@@ -89,6 +89,16 @@ class ParticleSystem
 	# Time-to-live of each particle
 	private var ttls = new Array[Float]
 
+	# Clear all particles
+	fun clear
+	do
+		centers.clear
+		ots.clear
+		scales.clear
+		ttls.clear
+		total_particles = 0
+	end
+
 	# Add a particle at `center` with `scale`, living for `ttl` from `time_offset`
 	#
 	# `time_offset` is added to the creation time, it can be used to delay the

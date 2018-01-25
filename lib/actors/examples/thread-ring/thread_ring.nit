@@ -17,7 +17,7 @@
 #
 # Complete description of the thread-ring :
 # http://benchmarksgame.alioth.debian.org/u64q/threadring-description.html#threadring
-module thread_ring
+module thread_ring is example
 
 import actors
 

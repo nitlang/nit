@@ -25,7 +25,7 @@ public class NitService extends Service {
 	protected int nitService = 0;
 
 	static {
-		System.loadLibrary("main");
+		System.loadLibrary("nit_app");
 	}
 
 	@Override

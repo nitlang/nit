@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module example_query_string is example
+
 import popcorn
 import template
 

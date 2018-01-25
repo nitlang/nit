@@ -26,11 +26,11 @@ var c_ns = new Namespace(graph)
 var d_ns = new Namespace(graph)
 var buffer = new Buffer
 var root_ns = graph.by_id[""].as(Namespace)
-var location: Location
+var location
 
 file.name = "Bar.java"
 file.model_id = "_Bar_8java"
-location = new Location
+location = new neo_doxygen::Location
 location.path = "a/b/Bar.java"
 file.location = location
 file.declare_class("classa_b_bar", "a::b::Bar", "package")
@@ -41,7 +41,7 @@ file.put_in_graph
 
 file_2.name = "Bar.java"
 file_2.model_id = "_Bar_8java_2"
-location = new Location
+location = new neo_doxygen::Location
 location.path = "Bar.java"
 file_2.location = location
 file_2.declare_namespace("namespacec", "c")
@@ -50,7 +50,7 @@ file_2.put_in_graph
 
 bar_class.model_id = "classa_b_bar"
 bar_class.name = "Bar"
-location = new Location
+location = new neo_doxygen::Location
 location.path = "a/b/Bar.class"
 location.line_start = 5
 location.column_start = 1
@@ -61,7 +61,7 @@ bar_class.put_in_graph
 
 baz_class.model_id = "classbaz"
 baz_class.name = "Baz"
-location = new Location
+location = new neo_doxygen::Location
 location.path = "Baz.jar"
 baz_class.location = location
 baz_class.put_in_graph

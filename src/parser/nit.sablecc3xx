@@ -218,10 +218,12 @@ start_string = id? '"' str_body '{' | id? '"' '"' '"' long_str_body lsend2;
 mid_string = '}' str_body '{' | '}' '}' '}' long_str_body lsend2;
 end_string = '}' str_body '"' id? | '}' '}' '}' long_str_body lsend1 id? ;
 char = id? ((''' [[any - '''] - '\'] ''') | (''' '\' any ''')) id?;
-bad_string = ('"'|'}') str_body | '"' '"' '"' long_str_body | ''' ''' ''' long_sstr_body;
+bad_string = ('"'|'}') str_body ;
+bad_t_string = '"' '"' '"' long_str_body | ''' ''' ''' long_sstr_body;
 bad_char = ''' '\'? any;
 
 extern_code_segment = '`' '{' extern_code_body '`' '}';
+bad_extern = '`' '{' extern_code_body;
 
 /*****************************************************************************/
 Ignored Tokens

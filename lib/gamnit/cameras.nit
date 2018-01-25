@@ -225,14 +225,14 @@ class UICamera
 	end
 
 	# Convert the position `x, y` on screen, to UI coordinates
-	fun camera_to_ui(x, y: Numeric): Point[Float]
+	fun camera_to_ui(x, y: Numeric): Point3d[Float]
 	do
 		# FIXME this kind of method should use something like a canvas
 		# instead of being hard coded on the display.
 
 		var wx = x.to_f * width / display.width.to_f - position.x
 		var wy = y.to_f * height / display.height.to_f - position.y
-		return new Point[Float](wx, -wy)
+		return new Point3d[Float](wx, -wy, 0.0)
 	end
 
 	# Center of the screen, from the point of view of the camera, at z = 0
@@ -245,10 +245,10 @@ class UICamera
 	var bottom: IPoint3d[Float] = new CameraAnchor(self, 0.5, -1.0)
 
 	# Center of the left border of the screen, at z = 0
-	var left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -1.0)
+	var left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -0.5)
 
 	# Center of the right border of the screen, at z = 0
-	var right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -1.0)
+	var right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -0.5)
 
 	# Top left corner of the screen, at z = 0
 	var top_left: IPoint3d[Float] = new CameraAnchor(self, 0.0, 0.0)

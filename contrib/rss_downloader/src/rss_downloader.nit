@@ -274,6 +274,16 @@ redef class Text
 			var title = item[tool_config.as(not null).tag_title].first.as(XMLStartTag).data
 			var link = item[tool_config.as(not null).tag_link].first.as(XMLStartTag).data
 
+			if title == null then
+				print_error "RSS Parse Error: title is null"
+				return elements
+			end
+
+			if link == null then
+				print_error "RSS Parse Error: link is null"
+				return elements
+			end
+
 			elements.add new Element(title, link)
 		end
 

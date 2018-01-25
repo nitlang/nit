@@ -20,7 +20,7 @@ import display
 # Texture composed of pixels, loaded from the assets folder by default
 #
 # Most textures should be created with `App` (as attributes)
-# for the method `on_create` to load them.
+# for the method `create_scene` to load them.
 #
 # ~~~
 # import gamnit::flat
@@ -29,9 +29,9 @@ import display
 #     # Create the texture object, it will be loaded automatically
 #     var texture = new Texture("path/in/assets.png")
 #
-#     redef fun on_create()
+#     redef fun create_scene()
 #     do
-#         # Let `on_create` load the texture
+#         # Let `create_scene` load the texture
 #         super
 #
 #         # Use the texture
@@ -41,7 +41,7 @@ import display
 # end
 # ~~~
 #
-# Otherwise, they can be loaded and error checked explicitly after `on_create`.
+# Otherwise, they can be loaded and error checked explicitly after `create_scene`.
 #
 # ~~~nitish
 # var texture = new Texture("path/in/assets.png")
@@ -154,10 +154,9 @@ class CustomTexture
 	# The argument `color` should be an array of up to 4 floats (RGBA).
 	# If `color` has less than 4 items, the missing items are replaced by 1.0.
 	#
-	# Require: `not loaded and x < width.to_i and y < height.to_i`
+	# Require: `x < width.to_i and y < height.to_i`
 	fun []=(x, y: Int, color: Array[Float])
 	do
-		assert not loaded else print_error "{class_name}::[]= already loaded"
 		assert x < width.to_i and y < height.to_i else print_error "{class_name}::[] out of bounds"
 
 		# Simple conversion from [0.0..1.0] to [0..255]
@@ -166,18 +165,16 @@ class CustomTexture
 
 		var offset = 4*(x + y*width.to_i)
 		for i in [0..4[ do cpixels[offset+i] = bytes[i]
+
+		loaded = false
 	end
 
-	# Overwrite all pixels with `color`
+	# Overwrite all pixels with `color`, return `self`
 	#
 	# The argument `color` should be an array of up to 4 floats (RGBA).
 	# If `color` has less than 4 items, the missing items are replaced by 1.0.
-	#
-	# Require: `not loaded`
-	fun fill(color: Array[Float])
+	fun fill(color: Array[Float]): SELF
 	do
-		assert not loaded else print_error "{class_name}::fill already loaded"
-
 		# Simple conversion from [0.0..1.0] to [0..255]
 		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
 		while bytes.length < 4 do bytes.add 255u8
@@ -189,11 +186,21 @@ class CustomTexture
 				i += 4
 			end
 		end
+
+		loaded = false
+		return self
 	end
 
 	redef fun load(force)
 	do
-		if loaded then return
+		force = force or else false
+		if loaded and not force then return
+
+		if force and glIsTexture(gl_texture) then
+			# Was already loaded, free the previous GL name
+			glDeleteTextures([gl_texture])
+		end
+		gl_texture = -1
 
 		# Round down the desired dimension
 		var width = width.to_i
@@ -203,7 +210,6 @@ class CustomTexture
 
 		load_from_pixels(cpixels.native_array, width, height, gl_RGBA)
 
-		cpixels.destroy
 		loaded = true
 	end
 end
@@ -236,8 +242,11 @@ class RootTexture
 	private fun load_from_pixels(pixels: Pointer, width, height: Int, format: GLPixelFormat)
 	do
 		var max_texture_size = glGetIntegerv(gl_MAX_TEXTURE_SIZE, 0)
-		if width > max_texture_size or height > max_texture_size then
-			error = new Error("Texture {self} width or height is over the GL_MAX_TEXTURE_SIZE of {max_texture_size}")
+		if width > max_texture_size then
+			error = new Error("Texture width larger than gl_MAX_TEXTURE_SIZE ({max_texture_size}) in {self} at {width}")
+			return
+		else if height > max_texture_size then
+			error = new Error("Texture height larger than gl_MAX_TEXTURE_SIZE ({max_texture_size}) in {self} at {height}")
 			return
 		end
 
@@ -333,7 +342,7 @@ abstract class Subtexture
 	# Parent texture, from which this texture was created
 	var parent: Texture
 
-	redef var root = parent.root is lateinit
+	redef fun root do return parent.root
 
 	redef fun load(force) do root.load(force)
 end
@@ -387,7 +396,7 @@ class TextureSet
 end
 
 redef class Pointer
-	# Multiply RBG values by their alpha value
+	# Multiply RGB values by their alpha value
 	private fun premultiply_alpha(width, height: Int) `{
 		uint8_t *bytes = (uint8_t *)self;
 		int x, y, i = 0;

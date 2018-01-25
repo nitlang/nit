@@ -12,18 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_bad_comp2 is test_suite
-
-import test_suite
+module test_bad_comp2 is test
 
 class TestSuiteBadComp
-	super TestSuite
+	test
 
-	fun test_good do
+	fun test_good is test do
 		assert true
 	end
 
-	fun test_bad(param: Bool) do
+	fun test_bad(param: Bool) is test do
 		assert param
 	end
 end

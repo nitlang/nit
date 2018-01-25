@@ -100,6 +100,13 @@ class CurlHTTPRequest
 	# Data for the body of a POST request
 	var data: nullable HeaderMap is writable
 
+	# Raw body string
+	#
+	# Set this value to send raw data instead of the POST formatted `data`.
+	#
+	# If `data` is set, the body will not be sent.
+	var body: nullable String is writable
+
 	# Header content of the request
 	var headers: nullable HeaderMap is writable
 
@@ -155,6 +162,9 @@ class CurlHTTPRequest
 		if data != null then
 			var postdatas = data.to_url_encoded(self.curl)
 			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		else if body != null then
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, body.as(not null))
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 

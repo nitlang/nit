@@ -15,15 +15,16 @@
 # limitations under the License.
 
 # Test module for `events.nit`
-module test_events is test_suite
+module test_events is test
 
 import test_helper
 import events
 
 class TestGame
 	super NitrpgTestHelper
+	test
 
-	fun test_add_event do
+	fun test_add_event is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event1 = new GameEvent(game, "test_kind", new JsonObject)
@@ -33,7 +34,7 @@ class TestGame
 		assert game.load_events.length == 2
 	end
 
-	fun test_load_event do
+	fun test_load_event is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event1 = new GameEvent(game, "test_kind", new JsonObject)
@@ -43,7 +44,7 @@ class TestGame
 		assert game.load_event(event2.internal_id) == null
 	end
 
-	fun test_load_events do
+	fun test_load_events is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event1 = new GameEvent(game, "test_kind", new JsonObject)
@@ -61,8 +62,9 @@ end
 
 class TestPlayer
 	super NitrpgTestHelper
+	test
 
-	fun test_add_event do
+	fun test_add_event is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
@@ -75,7 +77,7 @@ class TestPlayer
 		assert player2.load_events.length == 0
 	end
 
-	fun test_load_event do
+	fun test_load_event is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
@@ -90,7 +92,7 @@ class TestPlayer
 		assert player2.load_event(event1.internal_id) == null
 	end
 
-	fun test_load_events do
+	fun test_load_events is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
@@ -110,15 +112,16 @@ end
 
 class TestGameEvent
 	super NitrpgTestHelper
+	test
 
-	fun test_init do
+	fun test_init is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event = new GameEvent(game, "test_kind", new JsonObject)
 		assert event.to_json_object["kind"] == "test_kind"
 	end
 
-	fun test_init_from_json do
+	fun test_init_from_json is test do
 		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var json = """{

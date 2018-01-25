@@ -46,12 +46,12 @@ class FileCompound
 		super
 	end
 
-	redef fun location=(location: nullable Location) do
+	redef fun location=(location) do
 		super
 		for m in inner_namespaces do m.location = location
 	end
 
-	redef fun name=(name: String) do
+	redef fun name=(name) do
 		# Example: `MyClass.java`
 		super
 		var match = name.search_last(".")
@@ -65,7 +65,7 @@ class FileCompound
 		for m in inner_namespaces do m.update_name
 	end
 
-	redef fun declare_namespace(id: String, full_name: String) do
+	redef fun declare_namespace(id, full_name) do
 		var m: Module
 
 		assert not full_name.is_empty or id.is_empty else

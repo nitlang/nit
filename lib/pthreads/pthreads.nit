@@ -45,7 +45,7 @@ in "C" `{
 		#endif
 	#endif
 
-	#if !defined(__ANDROID__) && !defined(IOS)
+	#if !defined(IOS)
 		#define GC_THREADS
 		#include <gc.h>
 	#endif

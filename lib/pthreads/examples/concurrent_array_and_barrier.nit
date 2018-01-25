@@ -18,7 +18,7 @@
 #
 # 20 threads share an array and a barrier. They each insert 1000 strings into
 # the array and wait at a barrier before finishing.
-module concurrent_array_and_barrier
+module concurrent_array_and_barrier is example
 
 import pthreads::concurrent_collections
 

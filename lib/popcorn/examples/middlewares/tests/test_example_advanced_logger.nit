@@ -14,20 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_example_advanced_logger is test_suite
+module test_example_advanced_logger is test
 
 import pop_tests
 import example_advanced_logger
 
 class TestExampleAdvancedLogger
 	super TestPopcorn
+	test
 
 	redef fun client_test do
 		system "curl -s {host}:{port}/"
 		system "curl -s {host}:{port}/about"
 	end
 
-	fun test_example_advanced_logger do
+	fun test_example_advanced_logger is test do
 		var app = new App
 		app.use_before("/*", new RequestTimeHandler)
 		app.use("/", new AnotherHandler)

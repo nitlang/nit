@@ -28,15 +28,14 @@ import model::model_views
 class DocModel
 	super ModelView
 
+	autoinit model, mainmodule, filter
+
 	# `DocPage` composing the documentation associated to their ids.
 	#
 	# This is where `DocPhase` store and access pages to produce documentation.
 	#
 	# See `add_page`.
 	var pages: Map[String, DocPage] = new HashMap[String, DocPage]
-
-	# The entry point of the `model`.
-	var mainmodule: MModule is writable
 
 	# Add a `page` to this documentation.
 	fun add_page(page: DocPage) do

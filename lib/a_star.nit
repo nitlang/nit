@@ -90,7 +90,7 @@ class Node
 	# lifetime limited to evocation of `path_to`
 	private var open: Bool = false
 
-	# Main functionnality, returns path from `self` to `dest`
+	# Main functionality, returns path from `self` to `dest`
 	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable AStarPath[N]
 	do
 		return path_to_alts(dest, max_cost, context, null)
@@ -211,8 +211,8 @@ class Node
 	do
 		deserializer.notify_of_creation self
 
-		var graph = deserializer.deserialize_attribute("graph")
-		assert graph isa Graph[N, Link]
+		var graph = deserializer.deserialize_attribute("graph", (new GetName[Graph[N, Link]]).to_s)
+		if not graph isa Graph[N, Link] then graph = new Graph[N, Link]
 		self.graph = graph
 	end
 end
@@ -247,10 +247,10 @@ class Graph[N: Node, L: Link]
 	super Serializable
 
 	# Nodes in this graph
-	var nodes: Set[N] = new HashSet[N]
+	var nodes = new Set[N]
 
 	# Links in this graph
-	var links: Set[L] = new HashSet[L]
+	var links = new Set[L]
 
 	# Add a `node` to this graph
 	fun add_node(node: N): N
@@ -283,13 +283,17 @@ class Graph[N: Node, L: Link]
 	do
 		deserializer.notify_of_creation self
 
-		var nodes = deserializer.deserialize_attribute("nodes")
-		assert nodes isa HashSet[N]
-		self.nodes = nodes
+		var nodes = deserializer.deserialize_attribute("nodes", (new GetName[Set[N]]).to_s)
+		if deserializer.deserialize_attribute_missing then
+			deserializer.errors.add new AttributeMissingError(self, "nodes")
+		end
+		if nodes isa Set[N] then self.nodes = nodes
 
-		var links = deserializer.deserialize_attribute("links")
-		assert links isa HashSet[L]
-		for link in links do add_link link
+		var links = deserializer.deserialize_attribute("links", (new GetName[Set[L]]).to_s)
+		if deserializer.deserialize_attribute_missing then
+			deserializer.errors.add new AttributeMissingError(self, "links")
+		end
+		if links isa Set[L] then for link in links do add_link link
 	end
 end
 

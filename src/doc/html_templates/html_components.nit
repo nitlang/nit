@@ -39,6 +39,7 @@ end
 # A component that display tabbed data.
 class DocTabs
 	super BSComponent
+	autoinit(html_id, drop_text, css_classes)
 
 	# HTML id of this component.
 	var html_id: String
@@ -80,6 +81,7 @@ end
 # A list of tab regrouped in a dropdown
 class DocTabsDrop
 	super UnorderedList
+	autoinit(html_id, html_title, items, css_classes)
 
 	# HTML id used by the tabs group.
 	var html_id: String
@@ -108,6 +110,7 @@ end
 # A panel that goes in a DocTabs.
 class DocTabPanel
 	super BSComponent
+	autoinit(html_id, tab_title, html_content, is_active, css_classes)
 
 	# HTML id of this panel.
 	var html_id: String
@@ -119,7 +122,7 @@ class DocTabPanel
 	var html_content: Writable is writable
 
 	# Is this panel visible by default?
-	var is_active = false
+	var is_active = false is optional
 
 	redef fun rendering do
 		var active = ""
@@ -136,6 +139,7 @@ end
 # A ListItem that goes in a DocTabsDrop.
 private class DocTabItem
 	super ListItem
+	autoinit(text, target_id, css_classes)
 
 	# Panel id to trigger when the link is clicked.
 	var target_id: String

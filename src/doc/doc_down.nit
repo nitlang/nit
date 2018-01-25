@@ -16,7 +16,7 @@
 module doc_down
 
 import markdown
-import highlight
+import htmlight
 private import parser_util
 
 redef class MDoc
@@ -28,7 +28,7 @@ redef class MDoc
 	var comment: String is lazy do
 		var lines = content.to_a
 		if not lines.is_empty then lines.shift
-		return content.join("\n")
+		return lines.join("\n")
 	end
 
 	# Full comment HTML escaped.
@@ -48,7 +48,12 @@ redef class MDoc
 		var syn = inline_proc.process(content.first)
 		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
 		return res
+	end
 
+	# Renders the synopsis as a HTML comment block.
+	var md_synopsis: Writable is lazy do
+		if content.is_empty then return ""
+		return content.first
 	end
 
 	# Renders the comment without the synopsis as a HTML comment block.
@@ -58,13 +63,24 @@ redef class MDoc
 		return lines_to_html(lines)
 	end
 
+	#
+	var md_comment: Writable is lazy do
+		if content.is_empty then return ""
+		var lines = content.to_a
+		lines.shift
+		return lines.join("\n")
+	end
+
 	# Renders the synopsis and the comment as a HTML comment block.
 	var html_documentation: Writable is lazy do return lines_to_html(content.to_a)
+
+	# Renders the synopsis and the comment as a HTML comment block.
+	var md_documentation: Writable is lazy do return lines_to_md(content.to_a)
 
 	# Renders markdown line as a HTML comment block.
 	private fun lines_to_html(lines: Array[String]): Writable do
 		var res = new Template
-		var decorator = markdown_proc.emitter.decorator.as(NitdocDecorator)
+		var decorator = markdown_proc.decorator.as(NitdocDecorator)
 		decorator.current_mdoc = self
 		res.add "<div class=\"nitdoc\">"
 		# do not use DocUnit as synopsys
@@ -92,7 +108,20 @@ redef class MDoc
 		res.add "</div>"
 		decorator.current_mdoc = null
 		return res
+	end
 
+	private fun lines_to_md(lines: Array[String]): Writable do
+		var res = new Template
+		if not lines.is_empty then
+			var syn = lines.first
+			if not syn.has_prefix("    ") and not syn.has_prefix("\t") and
+			  not syn.trim.has_prefix("#") then
+				lines.shift
+				res.add "# {syn}\n"
+			end
+		end
+		res.add lines.join("\n")
+		return res
 	end
 end
 
@@ -131,9 +160,9 @@ class NitdocDecorator
 			return
 		end
 		v.add "<pre class=\"nitcode\"><code>"
-		var hl = new HighlightVisitor
+		var hl = new HtmlightVisitor
 		hl.line_id_prefix = ""
-		hl.enter_visit(ast)
+		hl.highlight_node(ast)
 		v.add(hl.html)
 		v.add "</code></pre>\n"
 	end
@@ -148,9 +177,9 @@ class NitdocDecorator
 			append_code(v, text, from, to)
 		else
 			v.add "<code class=\"nitcode\">"
-			var hl = new HighlightVisitor
+			var hl = new HtmlightVisitor
 			hl.line_id_prefix = ""
-			hl.enter_visit(ast)
+			hl.highlight_node(ast)
 			v.add(hl.html)
 		end
 		v.add "</code>"
@@ -188,8 +217,8 @@ private class InlineDecorator
 			return
 		end
 		v.add "<code class=\"nitcode\">"
-		var hl = new HighlightVisitor
-		hl.enter_visit(ast)
+		var hl = new HtmlightVisitor
+		hl.highlight_node(ast)
 		v.add(hl.html)
 		v.add "</code>"
 	end
@@ -199,7 +228,7 @@ redef class Model
 	# Get a markdown processor for Nitdoc comments.
 	var nitdoc_md_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new NitdocDecorator
+		proc.decorator = new NitdocDecorator
 		return proc
 	end
 
@@ -208,7 +237,7 @@ redef class Model
 	# This processor is specificaly designed to inlinable doc elements like synopsys.
 	var nitdoc_inline_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new InlineDecorator
+		proc.decorator = new InlineDecorator
 		return proc
 	end
 end

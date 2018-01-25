@@ -1,7 +1,0 @@
-json.concrete_grammar.txt
-json.dfa.dot
-json.gram.dot
-json.lr.dot
-json.lr.txt
-json.nfa.dot
-json_test_parser.nit

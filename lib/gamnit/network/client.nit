@@ -62,13 +62,17 @@ class RemoteServer
 	var socket: nullable TCPStream = null
 
 	# Is this connection connected?
-	fun connected: Bool do return socket != null and socket.connected
+	fun connected: Bool
+	do
+		var socket = socket
+		return socket != null and socket.connected
+	end
 
-	# `BinarySerializer` used to send data to this client through `socket`
-	var writer: BinarySerializer is noinit
+	# `MsgPackSerializer` used to send data to this client through `socket`
+	var writer: MsgPackSerializer is noinit
 
-	# `BinaryDeserializer` used to receive data from this client through `socket`
-	var reader: BinaryDeserializer is noinit
+	# `MsgPackDeserializer` used to receive data from this client through `socket`
+	var reader: MsgPackDeserializer is noinit
 
 	# Attempt connection with the remote server
 	fun connect: Bool
@@ -83,9 +87,9 @@ class RemoteServer
 		end
 
 		# Setup serialization
-		writer = new BinarySerializer(socket)
+		writer = new MsgPackSerializer(socket)
 		writer.cache = new AsyncCache(false)
-		reader = new BinaryDeserializer(socket)
+		reader = new MsgPackDeserializer(socket)
 		writer.link reader
 
 		return true
@@ -104,21 +108,21 @@ class RemoteServer
 
 		# App name
 		var app_name = sys.handshake_app_name
-		socket.write_string app_name
+		socket.serialize_msgpack app_name
 
-		var server_app = socket.read_string
+		var server_app = socket.deserialize_msgpack("String")
 		if server_app != app_name then
-			print_error "Handshake Error: server app name is '{server_app}'"
+			print_error "Handshake Error: server app name is '{server_app or else "<invalid>"}'"
 			socket.close
 			return false
 		end
 
 		# App version
-		socket.write_string sys.handshake_app_version
+		socket.serialize_msgpack sys.handshake_app_version
 
-		var server_version = socket.read_string
+		var server_version = socket.deserialize_msgpack("String")
 		if server_version != sys.handshake_app_version then
-			print_error "Handshake Error: server version is different '{server_version}'"
+			print_error "Handshake Error: server version is different '{server_version or else "<invalid>"}'"
 			socket.close
 			return false
 		end

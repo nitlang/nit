@@ -46,22 +46,22 @@
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 # Nit:
-<E: 2222>
+<F: 2222>
 
 # Json:
 {"__kind": "obj", "__id": 0, "__class": "F[Int]","n":2222}
 
 # Back in Nit:
-<E: 2222>
+<F: 2222>
 
 # Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Json:
 {"__kind": "obj", "__id": 0, "__class": "F[Float]","n":33.33}
 
 # Back in Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
