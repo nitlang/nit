@@ -13,10 +13,10 @@ check: bin/model_viewer
 # Android
 
 android: bin/model_viewer.apk
-bin/model_viewer.apk: $(shell ${NITLS} -M src/model_viewer.nit android) android/res/
+bin/model_viewer.apk: $(shell ${NITLS} -M src/model_viewer.nit -m android) android/res/
 	${NITC} src/model_viewer.nit -m android -o $@
 
-android-release: $(shell ${NITLS} -M src/model_viewer.nit android) android/res/
+android-release: $(shell ${NITLS} -M src/model_viewer.nit -m android) android/res/
 	${NITC} src/model_viewer.nit -m android -o bin/model_viewer.apk --release
 
 android/res/: art/icon.png
@@ -37,3 +37,10 @@ android/libs/cardboard.jar:
 	mkdir -p android/libs
 	curl --progress-bar -o android/libs/cardboard.jar \
 	https://raw.githubusercontent.com/googlevr/gvr-android-sdk/e226f15c/CardboardSample/libs/cardboard.jar
+
+# ---
+# iOS
+
+ios: bin/model_viewer.app
+bin/model_viewer.app: $(shell ${NITLS} -M src/model_viewer.nit -m ios)
+	${NITC} src/model_viewer.nit -m ios -o $@ --compile-dir nit_compile

@@ -112,7 +112,7 @@ redef class App
 		end
 
 		# Take down, bring back default values
-		glBindFramebuffer(gl_FRAMEBUFFER, shadow_context.screen_framebuffer)
+		bind_screen_framebuffer shadow_context.screen_framebuffer
 		glColorMask(true, true, true, true)
 	end
 
@@ -218,7 +218,6 @@ private class ShadowContext
 		assert gl_error == gl_NO_ERROR else print_error gl_error
 
 		resize(display, shadow_resolution)
-		assert glCheckFramebufferStatus(gl_FRAMEBUFFER) == gl_FRAMEBUFFER_COMPLETE
 
 		# Array buffer
 		buffer_array = glGenBuffers(1).first

@@ -20,6 +20,11 @@
 # Set lang do default to avoid failed tests because of locale
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
+if uname | grep Darwin 1>/dev/null 2>&1; then
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
+fi
+
 export NIT_TESTING=true
 # Use the pid as a collision prevention
 export NIT_TESTING_ID=$$
@@ -29,12 +34,21 @@ unset NIT_DIR
 
 # Get the first Java lib available
 if which_java=$(which javac 2>/dev/null); then
-	JAVA_HOME=$(dirname $(dirname $(readlink -f "$which_java")))
+
+	if sh -c "readlink -f ." 1>/dev/null 2>&1; then
+		READLINK="readlink -f"
+	else
+		# Darwin?
+		READLINK="readlink"
+	fi
+	JAVA_HOME=$(dirname $(dirname $($READLINK "$which_java")))
 
 	shopt -s nullglob
 	paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
-	paths=($paths)
-	JNI_LIB_PATH=`dirname ${paths[0]}`
+	if [ -n "$paths" ]; then
+		paths=($paths)
+		JNI_LIB_PATH=`dirname ${paths[0]}`
+	fi
 	shopt -u nullglob
 fi
 

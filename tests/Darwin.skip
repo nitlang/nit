@@ -7,3 +7,6 @@ emscripten
 ui_test
 readline
 postgres
+test_nitcorn
+test_annot_pkgconfig
+test_glsl_validation

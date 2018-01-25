@@ -32,7 +32,7 @@ private class IOSPlatform
 	super Platform
 
 	redef fun supports_libunwind do return false
-	redef fun supports_libgc do return false
+	redef fun supports_libgc do return true
 	redef fun toolchain(toolcontext, compiler) do return new IOSToolchain(toolcontext, compiler)
 end
 
@@ -53,6 +53,8 @@ private class IOSToolchain
 
 	redef fun default_outname do return "{super}.app"
 
+	private var bdwgc_dir: nullable String = null
+
 	# Compile C files in `ios_project_root/app_project.name`
 	redef fun compile_dir
 	do
@@ -65,6 +67,20 @@ private class IOSToolchain
 		# Clear the project directory before writing anything
 		if ios_project_root.file_exists then ios_project_root.rmdir
 		compile_dir.mkdir
+
+		# Download the libgc/bdwgc sources
+		var nit_dir = toolcontext.nit_dir or else "."
+		var share_dir = (nit_dir/"share").realpath
+		if not share_dir.file_exists then
+			print "iOS project error: Nit share directory not found, please use the environment variable NIT_DIR"
+			exit 1
+		end
+
+		var bdwgc_dir = "{share_dir}/android-bdwgc/bdwgc"
+		self.bdwgc_dir = bdwgc_dir
+		if not bdwgc_dir.file_exists then
+			toolcontext.exec_and_check(["{share_dir}/android-bdwgc/setup.sh"], "iOS project error")
+		end
 
 		super
 	end
@@ -101,16 +117,10 @@ private class IOSToolchain
 
 		var icons_found = false
 
-		for path in app_files do
-			var icon_dir = path / "ios" / "AppIcon.appiconset"
-			if icon_dir.file_exists then
-				icons_found = true
-
-				# Prepare the `Assets.xcassets` folder
-				var target_assets_dir = compile_dir / "Assets.xcassets"
-				if not target_assets_dir.file_exists then target_assets_dir.mkdir
-
-				"""
+		# Prepare the `Assets.xcassets` folder
+		var target_assets_dir = compile_dir / "Assets.xcassets"
+		if not target_assets_dir.file_exists then target_assets_dir.mkdir
+		"""
 {
   "info" : {
 	"version" : 1,
@@ -118,13 +128,28 @@ private class IOSToolchain
   }
 }""".write_to_file target_assets_dir / "Contents.json"
 
+		(compile_dir / "assets").mkdir
+
+		for path in app_files do
+
+			# Icon
+			var icon_dir = path / "ios" / "AppIcon.appiconset"
+			if icon_dir.file_exists then
+				icons_found = true
+
+
 				# copy the res folder to the compile dir
 				icon_dir = icon_dir.realpath
 				toolcontext.exec_and_check(["cp", "-R", icon_dir, target_assets_dir], "iOS project error")
 			end
-		end
 
-		# TODO Register asset files
+			# Assets
+			var assets_dir = path / "assets"
+			if assets_dir.file_exists then
+				assets_dir = assets_dir.realpath
+				toolcontext.exec_and_check(["cp", "-r", assets_dir, compile_dir], "iOS project error")
+			end
+		end
 
 		# ---
 		# project_folder.xcodeproj (projet meta data)
@@ -140,6 +165,20 @@ private class IOSToolchain
 		for file in cfiles do pbx.add_file new PbxFile(file)
 		for file in compiler.extern_bodies do
 			pbx.add_file new PbxFile(file.filename.basename)
+		end
+
+		# GC
+		if compiler.target_platform.supports_libgc then
+			var bdwgc_dir = bdwgc_dir
+			assert bdwgc_dir != null
+
+			pbx.cflags = "-I '{bdwgc_dir}/include/' -I '{bdwgc_dir}/libatomic_ops/src' -fno-strict-aliasing " +
+			"-DWITH_LIBGC -DNO_EXECUTE_PERMISSION -DALL_INTERIOR_POINTERS -DGC_NO_THREADS_DISCOVERY -DNO_DYLD_BIND_FULLY_IMAGE " +
+			"-DGC_DISABLE_INCREMENTAL -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DGC_GCJ_SUPPORT -DJAVA_FINALIZATION "
+
+			var gc_file = new PbxFile("{bdwgc_dir}/extra/gc.c")
+			gc_file.cflags = "-Wno-tautological-pointer-compare"
+			pbx.add_file gc_file
 		end
 
 		# Basic storyboard, mainly to have the right screen size

@@ -23,15 +23,25 @@ in "C header" `{
 
 in "C" `{
 
-#if defined(__MACH__) && !defined(CLOCK_REALTIME)
+#ifdef __APPLE__
+	#include <TargetConditionals.h>
+	#if defined(TARGET_OS_IPHONE) && __IPHONE_OS_VERSION_MIN_REQUIRED < 100000
+		// Preserve compatibility with pre-iOS 10 devices where there is no clock_get_time.
+		#undef CLOCK_REALTIME
+	#endif
+#endif
+
+#if (defined(__MACH__) || defined(TARGET_OS_IPHONE)) && !defined(CLOCK_REALTIME)
 /* OS X does not have clock_gettime, mascarade it and use clock_get_time
  * cf http://stackoverflow.com/questions/11680461/monotonic-clock-on-osx
 */
 #include <mach/clock.h>
 #include <mach/mach.h>
+#undef CLOCK_REALTIME
+#undef CLOCK_MONOTONIC
 #define CLOCK_REALTIME CALENDAR_CLOCK
 #define CLOCK_MONOTONIC SYSTEM_CLOCK
-void clock_gettime(clock_t clock_name, struct timespec *ts) {
+void nit_clock_gettime(clock_t clock_name, struct timespec *ts) {
 	clock_serv_t cclock;
 	mach_timespec_t mts;
 	host_get_clock_service(mach_host_self(), clock_name, &cclock);
@@ -40,6 +50,8 @@ void clock_gettime(clock_t clock_name, struct timespec *ts) {
 	ts->tv_sec = mts.tv_sec;
 	ts->tv_nsec = mts.tv_nsec;
 }
+#else
+	#define nit_clock_gettime clock_gettime
 #endif
 `}
 
@@ -56,7 +68,7 @@ private extern class Timespec `{struct timespec*`}
 	# Init a new Timespec from now.
 	new monotonic_now `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
-		clock_gettime( CLOCK_MONOTONIC, tv );
+		nit_clock_gettime( CLOCK_MONOTONIC, tv );
 		return tv;
 	`}
 
@@ -70,7 +82,7 @@ private extern class Timespec `{struct timespec*`}
 
 	# Update `self` clock.
 	fun update `{
-		clock_gettime(CLOCK_MONOTONIC, self);
+		nit_clock_gettime(CLOCK_MONOTONIC, self);
 	`}
 
 	# Subtract `other` from `self`
@@ -165,7 +177,7 @@ class Clock
 	# Smallest time frame reported by clock
 	private fun resolution: Timespec `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
-#if defined(__MACH__) && !defined(CLOCK_REALTIME)
+#if (defined(__MACH__) || defined(TARGET_OS_IPHONE)) && !defined(CLOCK_REALTIME)
 		clock_serv_t cclock;
 		int nsecs;
 		mach_msg_type_number_t count;

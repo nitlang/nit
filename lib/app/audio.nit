@@ -27,6 +27,7 @@ import core::error
 # Platform variations
 import linux::audio is conditional(linux)
 import android::audio is conditional(android)
+import ios::audio is conditional(ios)
 
 # Abstraction of a playable Audio
 abstract class PlayableAudio

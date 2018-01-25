@@ -23,6 +23,8 @@ import programs
 
 import gamnit_android is conditional(android)
 import gamnit_linux is conditional(linux)
+import gamnit_ios is conditional(ios)
+import input_ios is conditional(ios)
 
 redef class App
 
@@ -111,3 +113,8 @@ redef class App
 	# The framework handles resizing the viewport automatically.
 	fun on_resize(display: GamnitDisplay) do end
 end
+
+# Portable indirection to `glBindFramebuffer(gl_FRAMEBUFFER, fbo)`
+#
+# This is implemented differently on iOS.
+fun bind_screen_framebuffer(fbo: Int) do glBindFramebuffer(gl_FRAMEBUFFER, fbo)

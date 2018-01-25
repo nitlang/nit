@@ -1,4 +1,3 @@
-#!/bin/bash
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Fetch libgc/bdwgc
+# Support services for gamnit on iOS
+module gamnit_ios
 
-# cd to the installation path
-cd "`dirname "${BASH_SOURCE[0]}"`"
+import ios
+import gamnit
 
-# Download or redownload
-rm -rf bdwgc
-git clone -b android https://github.com/xymus/bdwgc.git || exit 1
+import ios::assets
 
-# Setup libatomic_ops too
-cd bdwgc || exit 1
-git submodule init || exit 1
-git submodule update || exit 1
+redef class App
+	redef fun did_finish_launching_with_options
+	do
+		create_gamnit
+		create_scene
+		return super
+	end
+
+	# Disable the game loop to rely on the GLKView callbacks on each frame instead
+	redef fun run do end
+
+	private fun frame_full_indirect do frame_full
+end
+
+redef class GamnitGLKView
+	redef fun update do app.frame_full_indirect
+end
+
+redef fun bind_screen_framebuffer(fbo)
+do
+	var display = app.display
+	assert display != null
+	display.glk_view.bind_drawable
+end

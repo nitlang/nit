@@ -54,7 +54,21 @@ redef class App
 
 	private var perf_clock_dynamic_resolution = new Clock is lazy
 
-	redef fun create_scene
+	# Real screen framebuffer
+	private var screen_framebuffer_cache: Int = -1
+
+	# Real screen framebuffer name
+	fun screen_framebuffer: Int
+	do
+		var cache = screen_framebuffer_cache
+		if cache != -1 then return cache
+
+		cache = glGetIntegerv(gl_FRAMEBUFFER_BINDING, 0)
+		self.screen_framebuffer_cache = cache
+		return cache
+	end
+
+	redef fun create_gamnit
 	do
 		super
 
@@ -62,11 +76,13 @@ redef class App
 		program.compile_and_link
 		var error = program.error
 		assert error == null else print_error error
+
+		dynamic_context_cache = null
 	end
 
 	redef fun on_resize(display)
 	do
-		dynamic_context.resize(display, max_dynamic_resolution_ratio)
+		if dynamic_context_cache != null then dynamic_context.resize(display, max_dynamic_resolution_ratio)
 		super
 	end
 
@@ -77,7 +93,7 @@ redef class App
 
 		if dynamic_resolution_ratio == 1.0 then
 			# Draw directly to the screen framebuffer
-			glBindFramebuffer(gl_FRAMEBUFFER, dynamic_context.screen_framebuffer)
+			bind_screen_framebuffer screen_framebuffer
 			glViewport(0, 0, display.width, display.height)
 			glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
 
@@ -109,7 +125,7 @@ redef class App
 		var ratio = dynamic_resolution_ratio
 		ratio = ratio.clamp(min_dynamic_resolution_ratio, max_dynamic_resolution_ratio)
 
-		glBindFramebuffer(gl_FRAMEBUFFER, dynamic_context.screen_framebuffer)
+		bind_screen_framebuffer screen_framebuffer
 		glBindBuffer(gl_ARRAY_BUFFER, dynamic_context.buffer_array)
 		glViewport(0, 0, display.width, display.height)
 		glClear gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT
@@ -148,7 +164,17 @@ redef class App
 	end
 
 	# Framebuffer and texture for dynamic resolution intermediate drawing
-	private var dynamic_context: DynamicContext = create_dynamic_context is lazy
+	private fun dynamic_context: DynamicContext
+	do
+		var cache = dynamic_context_cache
+		if cache != null then return cache
+
+		cache = create_dynamic_context
+		dynamic_context_cache = cache
+		return cache
+	end
+
+	private var dynamic_context_cache: nullable DynamicContext = null
 
 	private fun create_dynamic_context: DynamicContext
 	do
@@ -166,9 +192,6 @@ end
 # Handles to reused GL buffers and texture
 private class DynamicContext
 
-	# Real screen framebuffer
-	var screen_framebuffer: Int = -1
-
 	# Dynamic screen framebuffer
 	var dynamic_framebuffer: Int = -1
 
@@ -185,10 +208,6 @@ private class DynamicContext
 	fun prepare_once(display: GamnitDisplay, max_dynamic_resolution_ratio: Float)
 	do
 		# TODO enable antialiasing.
-
-		# Set aside the real screen framebuffer name
-		var screen_framebuffer = glGetIntegerv(gl_FRAMEBUFFER_BINDING, 0)
-		self.screen_framebuffer = screen_framebuffer
 
 		# Framebuffer
 		var framebuffer = glGenFramebuffers(1).first

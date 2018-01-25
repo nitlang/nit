@@ -38,17 +38,8 @@ in "C" `{
 	// TODO protect with: #ifdef WITH_LIBGC
 	// We might have to add the next line to gc_chooser.c too, especially
 	// if we get an error like "thread not registered with GC".
-	#ifdef __APPLE__
-		#include "TargetConditionals.h"
-		#if TARGET_OS_IPHONE == 1
-			#define IOS
-		#endif
-	#endif
-
-	#if !defined(IOS)
-		#define GC_THREADS
-		#include <gc.h>
-	#endif
+	#define GC_THREADS
+	#include <gc.h>
 `}
 
 redef class Sys

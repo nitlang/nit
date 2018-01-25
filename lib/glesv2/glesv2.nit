@@ -41,7 +41,11 @@ import android::aware
 intrude import c
 
 in "C Header" `{
+#ifdef __APPLE__
+	#include <OpenGLES/ES2/gl.h>
+#else
 	#include <GLES2/gl2.h>
+#endif
 `}
 
 # OpenGL ES program to which we attach shaders
