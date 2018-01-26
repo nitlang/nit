@@ -24,6 +24,7 @@ import c_tools
 private import annotation
 import mixin
 import counter
+import pkgconfig
 
 # Add compiling options
 redef class ToolContext
@@ -187,6 +188,8 @@ class MakefileToolchain
 
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+
+		if not toolcontext.check_errors then return
 
 		# Execute the Makefile
 
@@ -466,14 +469,19 @@ endif
 			f.close
 		end
 
-		var java_files = new Array[ExternFile]
-
+		# pkg-config annotation support
 		var pkgconfigs = new Array[String]
 		for f in compiler.extern_bodies do
 			pkgconfigs.add_all f.pkgconfigs
 		end
-		# Protect pkg-config
+
+		# Only test if pkg-config is used
 		if not pkgconfigs.is_empty then
+
+			# Check availability of pkg-config, silence the proc output
+			toolcontext.check_pkgconfig_packages pkgconfigs
+
+			# Double the check in the Makefile in case it's distributed
 			makefile.write """
 # does pkg-config exists?
 ifneq ($(shell which pkg-config >/dev/null; echo $$?), 0)
@@ -491,6 +499,7 @@ endif
 		end
 
 		# Compile each required extern body into a specific .o
+		var java_files = new Array[ExternFile]
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
 			var ff = f.filename.basename
