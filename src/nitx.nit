@@ -93,6 +93,9 @@ class Nitx
 		var line = readline(">> ", true)
 		if line != null then
 			do_command(line)
+		else
+			# EOF
+			exit 0
 		end
 		prompt
 	end
