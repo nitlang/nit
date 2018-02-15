@@ -1510,6 +1510,14 @@ redef class AAttrPropdef
 			end
 
 			mtype = mmodule.array_type(item_mtypes.first)
+		else if nexpr isa AUminusExpr and (nexpr.n_expr isa AIntegerExpr or nexpr.n_expr isa AFloatExpr) then
+			# The Int and Float unary - is defined in `kernel`, so this may
+			# result in an invalid behavior when using a custom kernel.
+			# A workaround is to declare the attribute static type.
+			# This is still very useful, especially to novice programmers.
+			mtype = infer_static_type(modelbuilder, nexpr.n_expr, mclassdef, mmodule, mreadpropdef)
+		else if nexpr isa AOnceExpr then
+			mtype = infer_static_type(modelbuilder, nexpr.n_expr, mclassdef, mmodule, mreadpropdef)
 		else
 			modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
 		end
