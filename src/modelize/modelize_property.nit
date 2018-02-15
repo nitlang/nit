@@ -1489,6 +1489,27 @@ redef class AAttrPropdef
 				abort
 			end
 			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AArrayExpr and nexpr.n_type == null and nexpr.n_exprs.not_empty then
+			# Non-empty arrays without an explicit type
+
+			var item_mtypes = new Set[MType]
+			var fails = false
+			for node in nexpr.n_exprs do
+				var item_mtype = infer_static_type(modelbuilder, node, mclassdef, mmodule, mreadpropdef)
+				if item_mtype == null then
+					fails = true
+				else
+					item_mtypes.add item_mtype
+				end
+			end
+
+			if fails then return null # Failed to infer some types
+
+			if item_mtypes.length > 1 then
+				modelbuilder.error(self, "Type Error: ambiguous array type {item_mtypes.join(" ")}")
+			end
+
+			mtype = mmodule.array_type(item_mtypes.first)
 		else
 			modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
 		end
