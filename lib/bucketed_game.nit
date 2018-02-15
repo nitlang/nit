@@ -56,7 +56,7 @@ class Buckets[G: Game]
 	type BUCKET: HashSet[Bucketable[G]]
 
 	private var next_bucket: nullable BUCKET = null
-	private var current_bucket_key: Int = -1
+	private var current_bucket_key = -1
 
 	# Number of `buckets`, default at 100
 	#

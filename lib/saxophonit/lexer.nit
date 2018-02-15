@@ -37,7 +37,7 @@ class XophonLexer
 	# Last read byte.
 	#
 	# Equals `-1` on end of file or error.
-	private var last_char: Int = -1
+	private var last_char = -1
 
 	# Before end-of-line handling, was the last read byte a CARRIAGE RETURN?
 	private var was_cr: Bool = false

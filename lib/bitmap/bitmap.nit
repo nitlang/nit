@@ -74,10 +74,10 @@ class Bitmap
 	private var image_size: Int is noinit
 
 	# 14-byte bitmap header
-	private var bitmap_header: Array[Int] = [66, 77, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0]
+	private var bitmap_header = [66, 77, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0]
 
 	# 40-byte dib header
-	private var dib_header: Array[Int] = [40, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	private var dib_header = [40, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 1, 0, 24, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
