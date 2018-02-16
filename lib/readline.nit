@@ -17,6 +17,8 @@
 # GNU readline library wrapper
 module readline is ldflags "-lreadline"
 
+import prompt
+
 in "C" `{
 	#include <readline/readline.h>
 	#include <readline/history.h>
@@ -56,3 +58,7 @@ end
 
 # Adds the data String to the history no matter what it contains
 fun add_history(data: String) do native_add_history data.to_cstring
+
+redef fun prompt(prompt, add_history) do return readline(prompt.to_s, add_history)
+
+redef fun prompt_add_history(line) do native_add_history(line.to_cstring)

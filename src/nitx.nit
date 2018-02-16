@@ -25,7 +25,7 @@ module nitx
 
 import frontend
 import doc::term
-import readline
+import prompt
 
 redef class ToolContext
 
@@ -90,9 +90,12 @@ class Nitx
 
 	# Prompts the user for a query.
 	fun prompt do
-		var line = readline(">> ", true)
+		var line = sys.prompt(">> ", true)
 		if line != null then
 			do_command(line)
+		else
+			# EOF
+			exit 0
 		end
 		prompt
 	end

@@ -19,6 +19,8 @@
 # The Nit interactive interpreter
 module nitin
 
+import prompt
+
 import nitc::interpreter
 import nitc::frontend
 import nitc::parser_util
@@ -56,21 +58,6 @@ redef class ToolContext
 		return tree.n_base.as(not null)
 	end
 
-	# Read an user-line with a given `prompt`
-	#
-	# Return `null` if end of file
-	fun readline(prompt: String): nullable String do
-		printn prompt
-		var res = stdin.read_line
-		if res == "" and stdin.eof then return null
-		return res
-	end
-
-	# Add `text` in the history for `readline`.
-	#
-	# With the default implementation, the history is dropped
-	fun readline_add_history(text: String) do end
-
 	# The last line number read by `i_parse`
 	var last_line = 0
 
@@ -85,7 +72,7 @@ redef class ToolContext
 				s = stdin.read_line
 				if s == "" and stdin.eof then s = null
 			else
-				s = readline(prompt)
+				s = sys.prompt(prompt)
 			end
 			if s == null then return null
 			if s == "" then
@@ -115,7 +102,7 @@ redef class ToolContext
 			end
 
 			last_line = n.location.file.line_starts.length - 1
-			readline_add_history(text.chomp)
+			prompt_add_history(text.chomp)
 			return n
 		end
 	end

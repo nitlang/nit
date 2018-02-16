@@ -1,3 +1,3 @@
 all:
 	mkdir -p bin
-	nitc --semi-global nitin_readline.nit -o bin/nitin
+	nitc --semi-global nitin.nit -m readline -o bin/nitin
