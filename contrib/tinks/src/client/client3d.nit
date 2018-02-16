@@ -41,23 +41,23 @@ redef class App
 	# Models
 
 	# Models of rocks
-	var models_rock = new Array[Model].with_items(
+	var models_rock = [
 		new Model("models/Tall_Rock_1_01.obj"),
 		new Model("models/Tall_Rock_2_01.obj"),
 		new Model("models/Tall_Rock_3_01.obj"),
-		new Model("models/Tall_Rock_4_01.obj"))
+		new Model("models/Tall_Rock_4_01.obj")]
 
 	# Models of trees
-	var models_tree = new Array[Model].with_items(
+	var models_tree = [
 		new Model("models/Oak_Dark_01.obj"),
 		new Model("models/Oak_Green_01.obj"),
 		new Model("models/Large_Oak_Dark_01.obj"),
-		new Model("models/Large_Oak_Green_01.obj"))
+		new Model("models/Large_Oak_Green_01.obj")]
 
 	# Models of the debris left by a destroyed tank
-	var models_debris = new Array[Model].with_items(
+	var models_debris = [
 		new Model("models/debris0.obj"),
-		new Model("models/debris1.obj"))
+		new Model("models/debris1.obj")]
 
 	# Model the health pickup
 	var model_health = new Model("models/health.obj")

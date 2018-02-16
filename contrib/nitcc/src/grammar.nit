@@ -897,7 +897,7 @@ class LRState
 	var cname: String is lazy do return name.to_cmangle
 
 	# Number
-	var number: Int = -1
+	var number = -1
 
 	# Set of all items
 	var items = new HashSet[Item]

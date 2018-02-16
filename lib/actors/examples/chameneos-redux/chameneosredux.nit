@@ -83,8 +83,8 @@ redef class Sys
 	fun blue: Int do return 0
 	fun red: Int do return 1
 	fun yellow: Int do return 2
-	var numbers: Array[String] = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-	var colors: Array[String] = ["blue", "red", "yellow"]
+	var numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+	var colors = ["blue", "red", "yellow"]
 	# Matrix for complementing colors
 	var complements: Array[Array[Int]] = [[0, 2, 1],
 	                                      [2, 1, 0],

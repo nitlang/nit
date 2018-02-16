@@ -47,7 +47,7 @@ class Config
 
 	# Super directories with wanted folder names, which will be used to sort
 	# the files (only their name are used, the files won't be copied there).
-	var regex_source_dirs: Array[String] = ["~/Videos/"]
+	var regex_source_dirs = ["~/Videos/"]
 
 	# Will only sort files older than the number of `elapsed_days`.
 	var elapsed_days = 7

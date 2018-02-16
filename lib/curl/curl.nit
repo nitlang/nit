@@ -293,7 +293,7 @@ class CurlMail
 	# Protocols supported to send mail to a server
 	#
 	# Default value at `["smtp", "smtps"]`
-	var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
+	var supported_outgoing_protocol = ["smtp", "smtps"]
 
 	# Helper method to add pair values to mail content while building it (ex: "To:", "address@mail.com")
 	private fun add_pair_to_content(str: String, att: String, val: nullable String): String

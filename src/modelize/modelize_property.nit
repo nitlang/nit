@@ -1378,66 +1378,7 @@ redef class AAttrPropdef
 		var nexpr = self.n_expr
 		if mtype == null then
 			if nexpr != null then
-				if nexpr isa ANewExpr then
-					mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
-				else if nexpr isa AAsCastExpr then
-					mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
-				else if nexpr isa AIntegerExpr then
-					var cla: nullable MClass = null
-					if nexpr.value isa Int then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
-					else if nexpr.value isa Byte then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
-					else if nexpr.value isa Int8 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int8")
-					else if nexpr.value isa Int16 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int16")
-					else if nexpr.value isa UInt16 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt16")
-					else if nexpr.value isa Int32 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int32")
-					else if nexpr.value isa UInt32 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt32")
-					else
-						# Should not happen, and should be updated as new types are added
-						abort
-					end
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa AFloatExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa ACharExpr then
-					var cla: nullable MClass
-					if nexpr.is_ascii then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
-					else if nexpr.is_code_point then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
-					else
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
-					end
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa ABoolExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa ASuperstringExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa AStringFormExpr then
-					var cla: nullable MClass
-					if nexpr.is_bytestring then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bytes")
-					else if nexpr.is_re then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Regex")
-					else if nexpr.is_string then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
-					else
-						abort
-					end
-					if cla != null then mtype = cla.mclass_type
-				else
-					modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
-				end
-
+				mtype = infer_static_type(modelbuilder, nexpr, mclassdef, mmodule, mreadpropdef)
 				if mtype == null then return
 			end
 		else if ntype != null and inherited_type == mtype then
@@ -1483,6 +1424,104 @@ redef class AAttrPropdef
 			mlazypropdef.static_mtype = mmodule.bool_type
 		end
 		check_repeated_types(modelbuilder)
+	end
+
+	# Detect the static type from the value assigned to the attribute `self`
+	#
+	# Return the static type if it can be safely inferred.
+	private fun infer_static_type(modelbuilder: ModelBuilder, nexpr: AExpr,
+		mclassdef: MClassDef, mmodule: MModule, mreadpropdef: MPropDef): nullable MType
+	do
+		var mtype = null
+		if nexpr isa ANewExpr then
+			mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
+		else if nexpr isa AAsCastExpr then
+			mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
+		else if nexpr isa AIntegerExpr then
+			var cla: nullable MClass = null
+			if nexpr.value isa Int then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+			else if nexpr.value isa Byte then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+			else if nexpr.value isa Int8 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int8")
+			else if nexpr.value isa Int16 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int16")
+			else if nexpr.value isa UInt16 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt16")
+			else if nexpr.value isa Int32 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int32")
+			else if nexpr.value isa UInt32 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt32")
+			else
+				# Should not happen, and should be updated as new types are added
+				abort
+			end
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AFloatExpr then
+			var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa ACharExpr then
+			var cla: nullable MClass
+			if nexpr.is_ascii then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+			else if nexpr.is_code_point then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+			else
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+			end
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa ABoolExpr then
+			var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa ASuperstringExpr then
+			var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AStringFormExpr then
+			var cla: nullable MClass
+			if nexpr.is_bytestring then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bytes")
+			else if nexpr.is_re then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Regex")
+			else if nexpr.is_string then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+			else
+				abort
+			end
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AArrayExpr and nexpr.n_type == null and nexpr.n_exprs.not_empty then
+			# Non-empty arrays without an explicit type
+
+			var item_mtypes = new Set[MType]
+			var fails = false
+			for node in nexpr.n_exprs do
+				var item_mtype = infer_static_type(modelbuilder, node, mclassdef, mmodule, mreadpropdef)
+				if item_mtype == null then
+					fails = true
+				else
+					item_mtypes.add item_mtype
+				end
+			end
+
+			if fails then return null # Failed to infer some types
+
+			if item_mtypes.length > 1 then
+				modelbuilder.error(self, "Type Error: ambiguous array type {item_mtypes.join(" ")}")
+			end
+
+			mtype = mmodule.array_type(item_mtypes.first)
+		else if nexpr isa AUminusExpr and (nexpr.n_expr isa AIntegerExpr or nexpr.n_expr isa AFloatExpr) then
+			# The Int and Float unary - is defined in `kernel`, so this may
+			# result in an invalid behavior when using a custom kernel.
+			# A workaround is to declare the attribute static type.
+			# This is still very useful, especially to novice programmers.
+			mtype = infer_static_type(modelbuilder, nexpr.n_expr, mclassdef, mmodule, mreadpropdef)
+		else if nexpr isa AOnceExpr then
+			mtype = infer_static_type(modelbuilder, nexpr.n_expr, mclassdef, mmodule, mreadpropdef)
+		else
+			modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
+		end
+		return mtype
 	end
 
 	redef fun check_signature(modelbuilder)
