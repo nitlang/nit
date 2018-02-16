@@ -31,6 +31,7 @@ test_nitunit4/test_bad_comp2.nit:17,7--22: Error: a class named `test_nitunit4::
 	Before Test
 	Tested method
 	After Test
+	Runtime assert: <TestTestSuite>.before
 	Runtime error: Assert failed (test_nitunit4/test_nitunit4_base.nit:28)
 
 [OK] test_nitunit4$TestTestSuite$test_bar
@@ -54,7 +55,7 @@ test_nitunit4/test_bad_comp2.nit:17,7--22: Error: a class named `test_nitunit4::
 	After Test
 
 
-Docunits: Entities: 21; Documented ones: 0; With nitunits: 0
+Docunits: Entities: 22; Documented ones: 0; With nitunits: 0
 Test suites: Classes: 3; Test Cases: 8; Failures: 7
 [FAILURE] 7/8 tests failed.
 `nitunit.out` is not removed for investigation.
@@ -65,6 +66,7 @@ Test suites: Classes: 3; Test Cases: 8; Failures: 7
 </failure></testcase></testsuite><testsuite package="test_nitunit4::test_nitunit4"></testsuite><testsuite package="test_nitunit4"><testcase classname="nitunit.test_nitunit4.TestTestSuite" name="test_foo" time="0.0"><error message="Runtime Error in file nitunit.out&#47;gen_test_nitunit4.nit">Before Test
 Tested method
 After Test
+Runtime assert: &lt;TestTestSuite&gt;.before
 Runtime error: Assert failed (test_nitunit4&#47;test_nitunit4_base.nit:28)
 </error></testcase><testcase classname="nitunit.test_nitunit4.TestTestSuite" name="test_bar" time="0.0"><system-err>Before Test
 Tested method

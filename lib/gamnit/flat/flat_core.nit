@@ -432,8 +432,7 @@ redef class App
 		var display = display
 		assert display != null
 
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Prepare program
 		var program = simple_2d_program
@@ -455,8 +454,7 @@ redef class App
 		glViewport(0, 0, display.width, display.height)
 		glClearColor(0.0, 0.0, 0.0, 1.0)
 
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Prepare to draw
 		for tex in all_root_textures do
@@ -501,8 +499,7 @@ redef class App
 	redef fun frame_core(display)
 	do
 		# Check errors
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Update game logic and set sprites
 		perf_clock_main.lapse
@@ -516,8 +513,7 @@ redef class App
 		display.flip
 
 		# Check errors
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 
 	private var frame_dt = 0.0
@@ -1128,16 +1124,14 @@ private class SpriteContext
 		buffer_array = bufs[0]
 		buffer_element = bufs[1]
 
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Destroy `buffer_array` and `buffer_element`
 	fun destroy
 	do
 		glDeleteBuffers([buffer_array, buffer_element])
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		buffer_array = -1
 		buffer_element = -1
@@ -1155,8 +1149,7 @@ private class SpriteContext
 		glBindBuffer(gl_ARRAY_BUFFER, buffer_array)
 		assert glIsBuffer(buffer_array)
 		glBufferData(gl_ARRAY_BUFFER, array_bytes, new Pointer.nul, usage)
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# GL_TRIANGLES 6 vertices * sprite
 		var n_indices = capacity * indices_per_sprite
@@ -1165,8 +1158,7 @@ private class SpriteContext
 		glBindBuffer(gl_ELEMENT_ARRAY_BUFFER, buffer_element)
 		assert glIsBuffer(buffer_element)
 		glBufferData(gl_ELEMENT_ARRAY_BUFFER, element_bytes, new Pointer.nul, usage)
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		buffer_capacity = capacity
 
@@ -1294,8 +1286,7 @@ private class SpriteContext
 		glBindBuffer(gl_ELEMENT_ARRAY_BUFFER, buffer_element)
 		glBufferSubData(gl_ELEMENT_ARRAY_BUFFER, sprite_index*6*2, 6*2, indices.native_array)
 
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 
 	# Draw all `sprites`
@@ -1365,8 +1356,7 @@ private class SpriteContext
 			glBindTexture(gl_TEXTURE_2D, texture.gl_texture)
 			app.simple_2d_program.texture.uniform 0
 		end
-		var gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		var animation = animation_texture
 		if animation != null then
@@ -1374,8 +1364,7 @@ private class SpriteContext
 			glBindTexture(gl_TEXTURE_2D, animation.gl_texture)
 			app.simple_2d_program.animation_texture.uniform 1
 		end
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Configure attributes, in order:
 		# vec4 translation, vec4 color, float scale, vec4 coord, vec2 tex_coord, vec4 rotation_row*,
@@ -1389,36 +1378,31 @@ private class SpriteContext
 		glEnableVertexAttribArray p.translation.location
 		glVertexAttribPointeri(p.translation.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 4
 		glEnableVertexAttribArray p.color.location
 		glVertexAttribPointeri(p.color.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 1
 		glEnableVertexAttribArray p.scale.location
 		glVertexAttribPointeri(p.scale.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 4
 		glEnableVertexAttribArray p.coord.location
 		glVertexAttribPointeri(p.coord.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 2
 		glEnableVertexAttribArray p.tex_coord.location
 		glVertexAttribPointeri(p.tex_coord.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 4
 		for r in [p.rotation_row0, p.rotation_row1, p.rotation_row2, p.rotation_row3] do
@@ -1427,65 +1411,56 @@ private class SpriteContext
 				glVertexAttribPointeri(r.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 			end
 			offset += size * sizeof_gl_float
-			gl_error = glGetError
-			assert gl_error == gl_NO_ERROR else print_error gl_error
+			assert glGetError == gl_NO_ERROR
 		end
 
 		size = 1
 		glEnableVertexAttribArray p.animation_fps.location
 		glVertexAttribPointeri(p.animation_fps.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 1
 		glEnableVertexAttribArray p.animation_n_frames.location
 		glVertexAttribPointeri(p.animation_n_frames.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 2
 		glEnableVertexAttribArray p.animation_coord.location
 		glVertexAttribPointeri(p.animation_coord.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 2
 		glEnableVertexAttribArray p.animation_tex_coord.location
 		glVertexAttribPointeri(p.animation_tex_coord.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 2
 		glEnableVertexAttribArray p.animation_tex_diff.location
 		glVertexAttribPointeri(p.animation_tex_diff.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 1
 		glEnableVertexAttribArray p.animation_start.location
 		glVertexAttribPointeri(p.animation_start.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		size = 1
 		glEnableVertexAttribArray p.animation_loops.location
 		glVertexAttribPointeri(p.animation_loops.location, size, gl_FLOAT, false, bytes_per_vertex, offset)
 		offset += size * sizeof_gl_float
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Actual draw
 		for s in sprites.starts, e in sprites.ends do
 			var l = e-s
 			glDrawElementsi(gl_TRIANGLES, l*indices_per_sprite, gl_UNSIGNED_SHORT, 2*s*indices_per_sprite)
-			gl_error = glGetError
-			assert gl_error == gl_NO_ERROR else print_error gl_error
+			assert glGetError == gl_NO_ERROR
 		end
 
 		# Take down
@@ -1493,14 +1468,12 @@ private class SpriteContext
 		             p.rotation_row0, p.rotation_row1, p.rotation_row2, p.rotation_row3: Attribute] do
 			if not attr.is_active then continue
 			glDisableVertexAttribArray(attr.location)
-			gl_error = glGetError
-			assert gl_error == gl_NO_ERROR else print_error gl_error
+			assert glGetError == gl_NO_ERROR
 		end
 
 		glBindBuffer(gl_ARRAY_BUFFER, 0)
 		glBindBuffer(gl_ELEMENT_ARRAY_BUFFER, 0)
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print_error gl_error
+		assert glGetError == gl_NO_ERROR
 	end
 end
 
