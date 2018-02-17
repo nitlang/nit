@@ -39,6 +39,7 @@ module loader
 
 import modelbuilder_base
 import ini
+import picnit_shared
 
 redef class ToolContext
 	# Option --path
@@ -64,6 +65,9 @@ redef class ModelBuilder
 
 		# Setup the paths value
 		paths.append(toolcontext.opt_path.value)
+
+		# Packages managed by picnit
+		paths.add picnit_lib_dir
 
 		var path_env = "NIT_PATH".environ
 		if not path_env.is_empty then
