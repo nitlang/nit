@@ -220,7 +220,7 @@ var p = new ProcessReader("inkscape", "--version")
 var version_string = p.read_all
 p.wait
 p.close
-var version_re = "([0-9]+\).([0-9]+\).[0-9]+".to_re
+var version_re = "([0-9]+)\\.([0-9]+)".to_re
 var match = version_string.search(version_re)
 assert match != null
 var major = match[1]
