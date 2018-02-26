@@ -255,6 +255,11 @@ redef class ModelBuilder
 			end
 		end
 
+		if mgroup != null then
+			var alias = mgroup.mpackage.import_alias(name)
+			if alias != null then name = alias
+		end
+
 		var loc = null
 		if anode != null then loc = anode.hot_location
 		var candidate = search_module_in_paths(loc, name, lookpaths)
@@ -287,6 +292,11 @@ redef class ModelBuilder
 	# If found, the module is returned.
 	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable MModule
 	do
+		var name_no_version
+		if name.has('=') then
+			name_no_version = name.split('=').first
+		else name_no_version = name
+
 		var res = new ArraySet[MModule]
 		for dirname in lookpaths do
 			# Try a single module file
@@ -296,7 +306,7 @@ redef class ModelBuilder
 			var g = identify_group((dirname/name).simplify_path)
 			if g != null then
 				scan_group(g)
-				res.add_all g.mmodules_by_name(name)
+				res.add_all g.mmodules_by_name(name_no_version)
 			end
 		end
 		if res.is_empty then return null
@@ -860,6 +870,13 @@ redef class ModelBuilder
 		# If no module yet, then assume that the first element of the path
 		# Is to be searched in the path.
 		var root_name = n_name.n_path.first.text
+
+		# Search for an alias in required external packages
+		if mgroup != null then
+			var alias = mgroup.mpackage.import_alias(root_name)
+			if alias != null then root_name = alias
+		end
+
 		var roots = search_group_in_paths(root_name, paths)
 		if roots.is_empty then
 			error(n_name, "Error: cannot find `{root_name}`. Tried: {paths.join(", ")}.")
@@ -1182,6 +1199,31 @@ redef class MPackage
 			if excludes.has(relpath) then return false
 		end
 		return true
+	end
+
+	# Get the name to search for, for a `root_name` declared as `import` in `ini`
+	fun import_alias(root_name: String): nullable String
+	do
+		var map = import_aliases_parsed
+		if map == null then return null
+
+		var val = map.get_or_null(root_name)
+		if val == null then return null
+
+		return val.dir_name
+	end
+
+	private var import_aliases_parsed: nullable Map[String, ExternalPackage] is lazy do
+		var ini = ini
+		if ini == null then return null
+
+		var import_line = ini["package.import"]
+		if import_line == null then return null
+
+		var map = import_line.parse_import
+		if map.is_empty then return null
+
+		return map
 	end
 end
 
