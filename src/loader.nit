@@ -826,7 +826,7 @@ redef class ModelBuilder
 	# Resolve the module identification for a given `AModuleName`.
 	#
 	# This method handles qualified names as used in `AModuleName`.
-	fun seach_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable MModule
+	fun search_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable MModule
 	do
 		var mod_name = n_name.n_id.text
 
@@ -889,7 +889,7 @@ redef class ModelBuilder
 	# Basically it check that `bar::foo` matches `bar/foo.nit` and `bar/baz/foo.nit`
 	# but not `baz/foo.nit` nor `foo/bar.nit`
 	#
-	# Is used by `seach_module_by_amodule_name` to validate qualified names.
+	# Is used by `search_module_by_amodule_name` to validate qualified names.
 	private fun match_amodulename(n_name: AModuleName, m: MModule): Bool
 	do
 		var g: nullable MGroup = m.mgroup
@@ -925,7 +925,7 @@ redef class ModelBuilder
 			end
 
 			# Load the imported module
-			var sup = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			var sup = search_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
 			if sup == null then
 				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
@@ -979,7 +979,7 @@ redef class ModelBuilder
 			var atconditionals = aimport.get_annotations("conditional")
 			if atconditionals.is_empty then continue
 
-			var suppath = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			var suppath = search_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
 			if suppath == null then continue # skip error
 
 			for atconditional in atconditionals do
