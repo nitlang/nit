@@ -22,56 +22,6 @@ import curl
 
 import picnit_shared
 
-redef class Text
-
-	# Does `self` look like a package name?
-	#
-	# ~~~
-	# assert "gamnit".is_package_name
-	# assert "n1t".is_package_name
-	# assert not ".".is_package_name
-	# assert not "./gamnit".is_package_name
-	# assert not "https://github.com/nitlang/nit.git".is_package_name
-	# assert not "git://github.com/nitlang/nit".is_package_name
-	# assert not "git@gitlab.com:xymus/gamnit.git".is_package_name
-	# assert not "4it".is_package_name
-	# ~~~
-	private fun is_package_name: Bool
-	do
-		if is_empty then return false
-		if not chars.first.is_alpha then return false
-
-		for c in chars do
-			if not (c.is_alphanumeric or c == '_') then return false
-		end
-
-		return true
-	end
-
-	# Get package name from the Git address `self`
-	#
-	# Return `null` on failure.
-	#
-	# ~~~
-	# assert "https://github.com/nitlang/nit.git".git_name == "nit"
-	# assert "git://github.com/nitlang/nit".git_name == "nit"
-	# assert "gamnit".git_name == "gamnit"
-	# assert "///".git_name == null
-	# assert "file:///".git_name == "file:"
-	# ~~~
-	private fun git_name: nullable String
-	do
-		var parts = split("/")
-		for part in parts.reverse_iterator do
-			if not part.is_empty then
-				return part.strip_extension(".git")
-			end
-		end
-
-		return null
-	end
-end
-
 # Command line action, passed after `picnit`
 abstract class Command
 
