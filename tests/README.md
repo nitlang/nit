@@ -324,6 +324,11 @@ $ cat out/zzz_test_post_proc.res
 The environment variable `NIT_TESTING` is set to `true` during the execution of program tests.
 Some libraries of programs can use it to produce specific reproducible results ; or just to exit their executions.
 
+`NIT_TESTING_TESTS_SH` is set to `true` for tests ran by `tests.sh` only, not by nitunit.
+
+`NIT_TESTING_ID` is set to an integer value unique between concurrent executions of `tests.sh`.
+Use it to name files, database entries, open sockets in order to avoid race conditions.
+
 ~~~
 $ cat zzz_tests/zzz_test_envvar.nit
 $ ./tests.sh zzz_tests/zzz_test_envvar.nit

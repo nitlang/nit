@@ -11,6 +11,7 @@ EIFGENs
 .nitpretty
 *.orig
 bin/nit*
+bin/picnit
 doc/stdlib
 doc/nitc
 
