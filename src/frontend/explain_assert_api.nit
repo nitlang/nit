@@ -12,10 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Explain failed assert to the console (service declaration only)
+#
+# The only service `assert_expr_str` is implemented by the
+# `explain_assert` module.
+module explain_assert_api
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
+import parser
+
+redef class AAssertExpr
+	# Superstring explaining `self` if the assert fails
+	#
+	# Engines should print out this superstring.
+	fun explain_assert_str: nullable ASuperstringExpr do return null
+end
