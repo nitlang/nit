@@ -30,6 +30,9 @@ export NIT_TESTING=true
 export NIT_TESTING_ID=$$
 export NIT_SRAND=0
 
+# Identify this as a tests.sh test to differentiate from a nitunit test
+export NIT_TESTING_TESTS_SH=true
+
 unset NIT_DIR
 
 # Get the first Java lib available
