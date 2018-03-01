@@ -66,8 +66,10 @@ redef class ModelBuilder
 		# Setup the paths value
 		paths.append(toolcontext.opt_path.value)
 
-		# Packages managed by picnit
-		paths.add picnit_lib_dir
+		# Packages managed by picnit, only use when not testing with tests.sh
+		if "NIT_TESTING_TESTS_SH".environ != "true" then
+			paths.add picnit_lib_dir
+		end
 
 		var path_env = "NIT_PATH".environ
 		if not path_env.is_empty then
