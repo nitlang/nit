@@ -7,4 +7,5 @@ out/hello_ios.bin/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
 out/hello_ios.bin/PkgInfo
 out/hello_ios.bin/_CodeSignature
 out/hello_ios.bin/_CodeSignature/CodeResources
+out/hello_ios.bin/assets
 out/hello_ios.bin/hello_ios

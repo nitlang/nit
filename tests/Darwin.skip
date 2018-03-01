@@ -7,6 +7,9 @@ emscripten
 ui_test
 readline
 postgres
+nitweb
+langannot
 test_nitcorn
 test_annot_pkgconfig
 test_glsl_validation
+test_restful_annot
