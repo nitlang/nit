@@ -55,7 +55,7 @@ class CommandInstall
 	super Command
 
 	redef fun name do return "install"
-	redef fun usage do return "picnit install [package0 [package1 ...]]"
+	redef fun usage do return "picnit install [package0[=version] [package1 ...]]"
 	redef fun description do return "Install packages by name, Git repository address or from the local package.ini"
 
 	redef fun apply(args)
@@ -141,12 +141,12 @@ class CommandInstall
 				abort
 			end
 
-			install_from_git(git_repo, package_id)
+			install_from_git(git_repo, package_id, version)
 		else
 			var name = package_id.git_name
 			if name != null and name != "." and not name.is_empty then
 				name = name.to_lower
-				install_from_git(package_id, name)
+				install_from_git(package_id, name, version)
 			else
 				print_error "Failed to infer the package name"
 				exit 1
@@ -154,17 +154,21 @@ class CommandInstall
 		end
 	end
 
-	private fun install_from_git(git_repo, name: String)
+	private fun install_from_git(git_repo, name: String, version: nullable String)
 	do
 		check_git
 
 		var target_dir = picnit_lib_dir / name
+		if version != null then target_dir += "=" + version
 		if target_dir.file_exists then
 			print_error "Already installed"
 			exit 1
 		end
 
-		var cmd = "git clone {git_repo.escape_to_sh} {target_dir.escape_to_sh}"
+		var cmd_branch = ""
+		if version != null then cmd_branch = "--branch '{version}'"
+
+		var cmd = "git clone --depth 1 {cmd_branch} {git_repo.escape_to_sh} {target_dir.escape_to_sh}"
 		if verbose then print "+ {cmd}"
 
 		if "NIT_TESTING".environ == "true" then
