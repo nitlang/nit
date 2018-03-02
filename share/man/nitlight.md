@@ -65,6 +65,9 @@ By default, only the modules indicated on the command line are highlighted.
 
 With the `--full` option, all imported modules (even those in standard) are also precessed.
 
+### `--no-infobox`
+Disable the generation of infoboxes.
+
 ### `--ast`
 Generate specific HTML elements for each Node of the AST.
 
