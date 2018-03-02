@@ -121,7 +121,7 @@ class CommandInstall
 
 			assert response isa CurlFileResponseSuccess
 			if response.status_code == 404 then
-				print_error "Package not found by the server"
+				print_error "Package '{package_id}' not found on the server"
 				exit 1
 			else if response.status_code != 200 then
 				print_error "Server side error: {response.status_code}"
@@ -180,8 +180,15 @@ class CommandInstall
 		proc.wait
 
 		if proc.status != 0 then
-			print_error "Install failed"
+			print_error "Install of '{name}' failed"
 			exit 1
+		end
+
+		# Recursive install
+		var ini = new ConfigTree(target_dir/"package.ini")
+		var import_line = ini["package.import"]
+		if import_line != null then
+			install_packages import_line
 		end
 	end
 end
