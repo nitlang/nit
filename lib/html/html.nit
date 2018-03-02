@@ -128,7 +128,7 @@ class HTMLTag
 	end
 
 	# Tag attributes map
-	var attrs: Map[String, String] = new HashMap[String, String] is lazy
+	var attrs: Map[String, String] = new ArrayMap[String, String] is lazy
 
 	# Get the attributed value of 'prop' or null if 'prop' is undifened
 	#
@@ -161,7 +161,7 @@ class HTMLTag
 	end
 
 	# CSS classes
-	var classes: Set[String] = new HashSet[String] is lazy
+	var classes: Set[String] = new ArraySet[String] is lazy
 
 	# Add multiple CSS classes
 	#
@@ -244,7 +244,7 @@ class HTMLTag
 	end
 
 	# List of children HTML elements
-	var children: Set[HTMLTag] = new HashSet[HTMLTag] is lazy
+	var children: Array[HTMLTag] = new Array[HTMLTag] is lazy
 
 	# Clear all child and set the text of element
 	#
