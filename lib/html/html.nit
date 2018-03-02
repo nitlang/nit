@@ -286,71 +286,61 @@ class HTMLTag
 	end
 
 	redef fun write_to(stream) do
-		var res = new Array[String]
-		render_in(res)
-		for r in res do
-			stream.write(r)
-		end
-	end
-
-	# In order to avoid recursive concatenation,
-	# this function collects in `res` all the small fragments of `String`
-	private fun render_in(res: Sequence[String])
-	do
-		res.add "<"
-		res.add tag
-		render_attrs_in(res)
+		stream.write "<"
+		stream.write tag
+		render_attrs_in(stream)
 		if is_void and (not isset _children or children.is_empty) then
-			res.add "/>"
+			stream.write "/>"
 		else
-			res.add ">"
-			if isset _children then for child in children do child.render_in(res)
-			res.add "</"
-			res.add tag
-			res.add ">"
+			stream.write ">"
+			if isset _children then for child in children do child.write_to(stream)
+			stream.write "</"
+			stream.write tag
+			stream.write ">"
 		end
 	end
 
-	private fun render_attrs_in(res: Sequence[String]) do
+	private fun render_attrs_in(stream: Writer) do
 		if not isset _attrs and not isset _classes and not isset _css_props then return
 		if attrs.has_key("class") or not classes.is_empty then
-			res.add " class=\""
+			stream.write " class=\""
+			var first = true
 			for cls in classes do
-				res.add cls.html_escape
-				res.add " "
+				if not first then stream.write " " else first = false
+				stream.write cls.html_escape
 			end
 			if attrs.has_key("class") then
-				res.add attrs["class"].html_escape
-				res.add " "
+				if not first then stream.write " " else first = false
+				stream.write attrs["class"].html_escape
 			end
-			if res.last == " " then res.pop
-			res.add "\""
+			stream.write "\""
 		end
 
 		if attrs.has_key("style") or not css_props.is_empty then
-			res.add " style=\""
+			stream.write " style=\""
+			var first = true
 			for k, v in css_props do
-				res.add k.html_escape
-				res.add ": "
-				res.add v.html_escape
-				res.add "; "
+				if not first then stream.write "; " else first = false
+				stream.write k.html_escape
+				stream.write ": "
+				stream.write v.html_escape
 			end
 			if attrs.has_key("style") then
-				res.add(attrs["style"].html_escape)
+				if not first then stream.write "; " else first = false
+				stream.write(attrs["style"].html_escape)
 			end
-			if res.last == "; " then res.pop
-			res.add "\""
+			stream.write "\""
 		end
 
 		if attrs.is_empty then return
 
 		for key, value in attrs do
 			if key == "class" or key == "style" then continue
-			res.add " "
-			res.add key.html_escape
-			res.add "=\""
-			res.add value.html_escape
-			res.add "\""
+			stream.write " "
+			stream.write key.html_escape
+			stream.write "=\""
+			stream.write value.html_escape
+			stream.write "\""
 		end
 	end
 end
@@ -359,5 +349,5 @@ private class HTMLRaw
 	super HTMLTag
 
 	var content: String
-	redef fun render_in(res) do res.add content
+	redef fun write_to(stream) do stream.write content
 end
