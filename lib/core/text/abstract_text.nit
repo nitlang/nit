@@ -905,25 +905,35 @@ abstract class Text
 	# SEE: <https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>
 	fun html_escape: String
 	do
-		var buf = new Buffer
+		var buf: nullable Buffer = null
 
 		for i in [0..length[ do
 			var c = chars[i]
+			var sub = null
 			if c == '&' then
-				buf.append "&amp;"
+				sub = "&amp;"
 			else if c == '<' then
-				buf.append "&lt;"
+				sub = "&lt;"
 			else if c == '>' then
-				buf.append "&gt;"
+				sub = "&gt;"
 			else if c == '"' then
-				buf.append "&#34;"
+				sub = "&#34;"
 			else if c == '\'' then
-				buf.append "&#39;"
+				sub = "&#39;"
 			else if c == '/' then
-				buf.append "&#47;"
-			else buf.add c
+				sub = "&#47;"
+			else
+				if buf != null then buf.add c
+				continue
+			end
+			if buf == null then
+				buf = new Buffer
+				for j in [0..i[ do buf.add chars[j]
+			end
+			buf.append sub
 		end
 
+		if buf == null then return self.to_s
 		return buf.to_s
 	end
 

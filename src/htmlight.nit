@@ -469,6 +469,7 @@ redef class MModule
 	do
 		var res = new HInfoBox(v, "module {name}")
 		res.href = v.hrefto(self)
+		if not v.show_infobox then return res
 		res.new_field("module").add(linkto(v))
 		add_doc_to_infobox(res)
 		if in_importation.greaters.length > 1 then
@@ -489,6 +490,7 @@ redef class MClassDef
 	do
 		var res = new HInfoBox(v, "class {mclass.name}")
 		res.href = v.hrefto(self)
+		if not v.show_infobox then return res
 		if is_intro then
 			res.new_field("class").text(mclass.name)
 		else
@@ -532,6 +534,7 @@ redef class MPropDef
 	do
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(self)
+		if not v.show_infobox then return res
 		if self isa MMethodDef then
 			var msignature = self.msignature
 			if msignature != null then res.new_field("fun").append(mproperty.name).add msignature.linkto(v)
@@ -566,6 +569,7 @@ redef class MClassType
 	do
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(self)
+		if not v.show_infobox then return res
 		res.new_field("class").add mclass.intro.linkto(v)
 		add_doc_to_infobox(res)
 		return res
@@ -580,6 +584,7 @@ redef class MVirtualType
 	do
 		var res = new HInfoBox(v, to_s)
 		res.href = v.hrefto(mproperty)
+		if not v.show_infobox then return res
 		var p = mproperty
 		res.new_field("virtual type").add p.intro.linkto(v)
 		add_doc_to_infobox(res)
@@ -594,6 +599,7 @@ redef class MParameterType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
+		if not v.show_infobox then return res
 		res.new_field("parameter type").append("{name} from class ").add mclass.intro.linkto(v)
 		return res
 	end
@@ -672,6 +678,7 @@ redef class CallSite
 	do
 		var res = new HInfoBox(v, "call {mpropdef}")
 		res.href = v.hrefto(mpropdef)
+		if not v.show_infobox then return res
 		res.new_field("call").add(mpropdef.linkto(v)).add(msignature.linkto(v))
 		if mpropdef.is_intro then
 		else
