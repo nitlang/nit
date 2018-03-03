@@ -29,10 +29,13 @@ all: tools man
 	@echo "To configure your shell environment, execute the following command:"
 	@echo "    source misc/nit_env.sh install"
 
+more:
+	cd src; make more
+
 # Compile all programs in `contrib`, `examples` and `src`.
 #
 # Furthermore, build the toolchain’s `man` pages.
-full: all
+full: all more
 	for directory in $(extras); do \
 		(cd "$${directory}" && $(MAKE)) || exit 1; \
 	done

@@ -16,15 +16,20 @@
 
 NITCOPT=--semi-global
 OLDNITCOPT=--semi-global
-OBJS=nitc nitpick nit nitdoc nitls nitunit picnit nitpretty nitmetrics nitx nitlight nitserial nitrestful
+OBJS=nitc nitpick nit nitls nitunit picnit nitx nitlight nitserial nitrestful
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
+MOREOBJS=nitdoc nitweb nitcatalog nitmetrics nitpretty nitweb
+MORESRCS=$(patsubst %,%.nit,$(MOREOBJS))
+MOREBINS=$(patsubst %,../bin/%,$(MOREOBJS))
 DEPS=$(wildcard *.nit */*.nit) parser/parser.nit
 
 # Workaround: Cygwin requires peflags to bootstrap
 peflags := ${shell which peflags 2>/dev/null}
 
 all: ../bin/nitc
+
+more: ../bin/nitdoc
 
 pre-build:
 	./git-gen-version.sh
@@ -46,6 +51,9 @@ endif
 	./git-gen-version.sh
 	test -d ../bin || mkdir ../bin
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
+
+../bin/nitdoc: ../bin/nitc $(DEPS)
+	../bin/nitc ${NITCOPT} -v --dir ../bin $(MORESRCS)
 
 $(OBJS): nitc_0 $(DEPS)
 	./git-gen-version.sh
