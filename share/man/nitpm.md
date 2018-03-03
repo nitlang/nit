@@ -9,42 +9,50 @@ nitpm [--help] [--verbose] <command> [<args>]
 # OPTIONS
 
 ### `-h`, `--help`
-
-Show the help message.
+Show help message.
 
 ### `-v`, `--verbose`
-
-Print more information, may be useful for debugging.
+Print more information.
 
 # COMMANDS
 
-### install
+### `install`
+Install packages by name, Git repository address or from the local package.ini.
 
-Install a package by searching for its name or directly from a Git repository URL.
-
+	# Search and install package by name, e.g. hello_nitpm:
 	nitpm install hello_nitpm
+
+	# Install package from a Git repository:
 	nitpm install https://gitlab.com/xymus/hello_nitpm.git
 
-### list
+	# Search and install a specific branch or tag of a package, e.g. 1.0:
+	nitpm install nitpm_test_versions=1.0
 
+	# Install all packages declared in the local package.ini file:
+	nitpm install
+
+To support the last command, the package.ini file should list the required packages after `[package]` on an `import=` line:
+
+	[package]
+	name=my_package
+	import=nitpm_test_versions=1.0,gamnit
+
+### `list`
 List installed packages.
 
 	nitpm list
 
-### upgrade
-
+### `upgrade`
 Upgrade a package.
 
 	nitpm upgrade hello_nitpm
 
-### uninstall
-
-Uninstall a package.
+### `uninstall`
+Uninstall packages.
 
 	nitpm uninstall hello_nitpm
 
-### help
-
+### `help`
 Show general help message or the help for a command.
 
 	nitpm help
