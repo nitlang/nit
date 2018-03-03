@@ -16,7 +16,13 @@
 module picnit_shared
 
 # Folder where are downloaded picnit packages
-fun picnit_lib_dir: String do do return "HOME".environ / ".local/lib/nit/"
+fun picnit_lib_dir: String
+do
+	var dir = "NITPM_PATH".environ
+	if not dir.is_empty then return dir
+
+	return "HOME".environ / ".local/lib/nit/"
+end
 
 redef class Text
 
