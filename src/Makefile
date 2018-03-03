@@ -23,7 +23,7 @@ BINS=$(patsubst %,../bin/%,$(OBJS))
 # Workaround: Cygwin requires peflags to bootstrap
 peflags := ${shell which peflags 2>/dev/null}
 
-all: bin/nitc
+all: ../bin/nitc
 
 pre-build:
 	./git-gen-version.sh
@@ -38,7 +38,7 @@ ifdef peflags
 	${peflags} --cygwin-heap=2048 nitc_0
 endif
 
-bin/nitc: nitc_0 parser/parser.nit
+../bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
