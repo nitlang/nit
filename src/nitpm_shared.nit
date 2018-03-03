@@ -13,10 +13,10 @@
 # limitations under the License.
 
 # Services related to the Nit package manager
-module picnit_shared
+module nitpm_shared
 
-# Folder where are downloaded picnit packages
-fun picnit_lib_dir: String
+# Folder where are downloaded nitpm packages
+fun nitpm_lib_dir: String
 do
 	var dir = "NITPM_PATH".environ
 	if not dir.is_empty then return dir

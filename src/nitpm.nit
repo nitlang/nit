@@ -13,16 +13,16 @@
 # limitations under the License.
 
 # Nit package manager command line interface
-module picnit
+module nitpm
 
 import opts
 import prompt
 import ini
 import curl
 
-import picnit_shared
+import nitpm_shared
 
-# Command line action, passed after `picnit`
+# Command line action, passed after `nitpm`
 abstract class Command
 
 	# Short name of the command, specified in the command line
@@ -55,7 +55,7 @@ class CommandInstall
 	super Command
 
 	redef fun name do return "install"
-	redef fun usage do return "picnit install [package0[=version] [package1 ...]]"
+	redef fun usage do return "nitpm install [package0[=version] [package1 ...]]"
 	redef fun description do return "Install packages by name, Git repository address or from the local package.ini"
 
 	# Packages installed in this run (identified by the full path)
@@ -108,7 +108,7 @@ class CommandInstall
 			# TODO customizable server list
 			# TODO parse ini file in memory
 
-			var url = "https://xymus.net/picnit/{package_id}.ini"
+			var url = "https://xymus.net/nitpm/{package_id}.ini"
 			var ini_path = "/tmp/{package_id}.ini"
 
 			if verbose then print "Looking for a package description at '{url}'"
@@ -161,7 +161,7 @@ class CommandInstall
 	do
 		check_git
 
-		var target_dir = picnit_lib_dir / name
+		var target_dir = nitpm_lib_dir / name
 		if version != null then target_dir += "=" + version
 		if installed.has(target_dir) then
 			# Ignore packages installed in this run
@@ -209,7 +209,7 @@ class CommandUpgrade
 	super Command
 
 	redef fun name do return "upgrade"
-	redef fun usage do return "picnit upgrade <package>"
+	redef fun usage do return "nitpm upgrade <package>"
 	redef fun description do return "Upgrade a package"
 
 	redef fun apply(args)
@@ -220,7 +220,7 @@ class CommandUpgrade
 		end
 
 		var name = args.first
-		var target_dir = picnit_lib_dir / name
+		var target_dir = nitpm_lib_dir / name
 
 		if not target_dir.file_exists or not target_dir.to_path.is_dir then
 			print_error "Package not found"
@@ -247,7 +247,7 @@ class CommandUninstall
 	super Command
 
 	redef fun name do return "uninstall"
-	redef fun usage do return "picnit uninstall <package>"
+	redef fun usage do return "nitpm uninstall <package>"
 	redef fun description do return "Uninstall a package"
 
 	redef fun apply(args)
@@ -258,7 +258,7 @@ class CommandUninstall
 		end
 
 		var name = args.first
-		var target_dir = picnit_lib_dir / name
+		var target_dir = nitpm_lib_dir / name
 
 		if not target_dir.file_exists or not target_dir.to_path.is_dir then
 			print_error "Package not found"
@@ -289,14 +289,14 @@ class CommandList
 	super Command
 
 	redef fun name do return "list"
-	redef fun usage do return "picnit list"
+	redef fun usage do return "nitpm list"
 	redef fun description do return "List installed packages"
 
 	redef fun apply(args)
 	do
-		var files = picnit_lib_dir.files
+		var files = nitpm_lib_dir.files
 		for file in files do
-			var ini_path = picnit_lib_dir / file / "package.ini"
+			var ini_path = nitpm_lib_dir / file / "package.ini"
 			if verbose then print "- Reading ini file at {ini_path}"
 			var ini = new ConfigTree(ini_path)
 			var tags = ini["package.tags"]
@@ -315,7 +315,7 @@ class CommandHelp
 	super Command
 
 	redef fun name do return "help"
-	redef fun usage do return "picnit help [command]"
+	redef fun usage do return "nitpm help [command]"
 	redef fun description do return "Show general help message or the help for a command"
 
 	redef fun apply(args)
@@ -355,17 +355,17 @@ redef class Sys
 	private var command_help = new CommandHelp(commands)
 end
 
-redef fun picnit_lib_dir
+redef fun nitpm_lib_dir
 do
 	if "NIT_TESTING".environ == "true" then
-		return "/tmp/picnit-test-" + "NIT_TESTING_ID".environ
+		return "/tmp/nitpm-test-" + "NIT_TESTING_ID".environ
 	else return super
 end
 
 # Print the general help message
 private fun print_help
 do
-	print "usage: picnit <command> [options]"
+	print "usage: nitpm <command> [options]"
 	print ""
 
 	print "commands:"

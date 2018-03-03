@@ -39,7 +39,7 @@ module loader
 
 import modelbuilder_base
 import ini
-import picnit_shared
+import nitpm_shared
 
 redef class ToolContext
 	# Option --path
@@ -66,9 +66,9 @@ redef class ModelBuilder
 		# Setup the paths value
 		paths.append(toolcontext.opt_path.value)
 
-		# Packages managed by picnit, only use when not testing with tests.sh
+		# Packages managed by nitpm, only use when not testing with tests.sh
 		if "NIT_TESTING_TESTS_SH".environ != "true" then
-			paths.add picnit_lib_dir
+			paths.add nitpm_lib_dir
 		end
 
 		var path_env = "NIT_PATH".environ

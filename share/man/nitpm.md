@@ -1,10 +1,10 @@
 # NAME
 
-picnit - Nit package manager
+nitpm - Nit package manager
 
 # SYNOPSIS
 
-picnit [--help] [--verbose] <command> [<args>]
+nitpm [--help] [--verbose] <command> [<args>]
 
 # OPTIONS
 
@@ -22,33 +22,33 @@ Print more information, may be useful for debugging.
 
 Install a package by searching for its name or directly from a Git repository URL.
 
-	picnit install hello_picnit
-	picnit install https://gitlab.com/xymus/hello_picnit.git
+	nitpm install hello_nitpm
+	nitpm install https://gitlab.com/xymus/hello_nitpm.git
 
 ### list
 
 List installed packages.
 
-	picnit list
+	nitpm list
 
 ### upgrade
 
 Upgrade a package.
 
-	picnit upgrade hello_picnit
+	nitpm upgrade hello_nitpm
 
 ### uninstall
 
 Uninstall a package.
 
-	picnit uninstall hello_picnit
+	nitpm uninstall hello_nitpm
 
 ### help
 
 Show general help message or the help for a command.
 
-	picnit help
-	picnit help install
+	nitpm help
+	nitpm help install
 
 # SEE ALSO
 
