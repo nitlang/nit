@@ -55,17 +55,50 @@ class CommandInstall
 	super Command
 
 	redef fun name do return "install"
-	redef fun usage do return "picnit install [package or git-repository]"
-	redef fun description do return "Install a package by its name or from a git-repository"
+	redef fun usage do return "picnit install [package0 [package1 ...]]"
+	redef fun description do return "Install packages by name, Git repository address or from the local package.ini"
 
 	redef fun apply(args)
 	do
-		if args.length != 1 then
-			print_local_help
-			exit 1
-		end
+		if args.not_empty then
+			# Install each package
+			for arg in args do
+				# Parse each arg as an import string, with versions and commas
+				install_packages arg
+			end
+		else
+			# Install packages from local package.ini
+			var ini_path = "package.ini"
+			if not ini_path.file_exists then
+				print_error "Local `package.ini` not found."
+				print_local_help
+				exit 1
+			end
 
-		var package_id = args.first
+			var ini = new ConfigTree(ini_path)
+			var import_line = ini["package.import"]
+			if import_line == null then
+				print_error "The local `package.ini` declares no external dependencies."
+				exit 0
+				abort
+			end
+
+			install_packages import_line
+		end
+	end
+
+	# Install packages defined by the `import_line`
+	private fun install_packages(import_line: String)
+	do
+		var imports = import_line.parse_import
+		for name, ext_package in imports do
+			install_package(ext_package.id, ext_package.version)
+		end
+	end
+
+	# Install the `package_id` at `version`
+	private fun install_package(package_id: String, version: nullable String)
+	do
 		if package_id.is_package_name then
 			# Ask a centralized server
 			# TODO choose a future safe URL
