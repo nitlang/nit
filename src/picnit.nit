@@ -58,6 +58,9 @@ class CommandInstall
 	redef fun usage do return "picnit install [package0[=version] [package1 ...]]"
 	redef fun description do return "Install packages by name, Git repository address or from the local package.ini"
 
+	# Packages installed in this run (identified by the full path)
+	private var installed = new Array[String]
+
 	redef fun apply(args)
 	do
 		if args.not_empty then
@@ -160,28 +163,36 @@ class CommandInstall
 
 		var target_dir = picnit_lib_dir / name
 		if version != null then target_dir += "=" + version
+		if installed.has(target_dir) then
+			# Ignore packages installed in this run
+			return
+		end
+		installed.add target_dir
+
 		if target_dir.file_exists then
-			print_error "Already installed"
-			exit 1
-		end
+			# Warn about packages previously installed,
+			# install dependencies anyway in case of a previous error.
+			print_error "Package '{name}' is already installed"
+		else
+			# Actually install it
+			var cmd_branch = ""
+			if version != null then cmd_branch = "--branch '{version}'"
 
-		var cmd_branch = ""
-		if version != null then cmd_branch = "--branch '{version}'"
+			var cmd = "git clone --depth 1 {cmd_branch} {git_repo.escape_to_sh} {target_dir.escape_to_sh}"
+			if verbose then print "+ {cmd}"
 
-		var cmd = "git clone --depth 1 {cmd_branch} {git_repo.escape_to_sh} {target_dir.escape_to_sh}"
-		if verbose then print "+ {cmd}"
+			if "NIT_TESTING".environ == "true" then
+				# Silence git output when testing
+				cmd += " 2> /dev/null"
+			end
 
-		if "NIT_TESTING".environ == "true" then
-			# Silence git output when testing
-			cmd += " 2> /dev/null"
-		end
+			var proc = new Process("sh", "-c", cmd)
+			proc.wait
 
-		var proc = new Process("sh", "-c", cmd)
-		proc.wait
-
-		if proc.status != 0 then
-			print_error "Install of '{name}' failed"
-			exit 1
+			if proc.status != 0 then
+				print_error "Install of '{name}' failed"
+				exit 1
+			end
 		end
 
 		# Recursive install
