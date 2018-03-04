@@ -295,17 +295,30 @@ class CommandList
 	redef fun apply(args)
 	do
 		var files = nitpm_lib_dir.files
+		var name_to_desc = new Map[String, nullable String]
+		var max_name_len = 0
+
+		# Collect package info
 		for file in files do
 			var ini_path = nitpm_lib_dir / file / "package.ini"
 			if verbose then print "- Reading ini file at {ini_path}"
 			var ini = new ConfigTree(ini_path)
 			var tags = ini["package.tags"]
 
-			if tags != null then
-				print "{file.justify(15, 0.0)} {tags}"
-			else
-				print file
-			end
+			name_to_desc[file] = tags
+			max_name_len = max_name_len.max(file.length)
+		end
+
+		# Sort in alphabetical order
+		var sorted_names = name_to_desc.keys.to_a
+		alpha_comparator.sort sorted_names
+
+		# Print with clear columns
+		for name in sorted_names do
+			var col0 = name.justify(max_name_len+1, 0.0)
+			var col1 = name_to_desc[name] or else ""
+			var line = col0 + col1
+			print line.trim
 		end
 	end
 end
