@@ -262,7 +262,19 @@ class CommandUninstall
 		end
 
 		for name in args do
-			var target_dir = nitpm_lib_dir / name
+
+			var clean_nitpm_lib_dir = nitpm_lib_dir.simplify_path
+			var target_dir = clean_nitpm_lib_dir / name
+
+			# Check validity of the package to delete
+			target_dir = target_dir.simplify_path
+			var within_dir = target_dir.has_prefix(clean_nitpm_lib_dir + "/") and
+				target_dir.length > clean_nitpm_lib_dir.length + 1
+			var valid_name = name.length > 0 and name.chars.first.is_lower
+			if not valid_name or not within_dir then
+				print_error "Package name '{name}' is invalid"
+				continue
+			end
 
 			if not target_dir.file_exists or not target_dir.to_path.is_dir then
 				print_error "Package not found"
