@@ -371,10 +371,10 @@ redef class Sys
 	var opts = new OptionContext
 
 	# Help option
-	var opt_help = new OptionBool("Show this help message", "--help", "-h")
+	var opt_help = new OptionBool("Show help message", "-h", "--help")
 
 	# Verbose mode option
-	var opt_verbose = new OptionBool("Print more information", "--verbose", "-v")
+	var opt_verbose = new OptionBool("Print more information", "-v", "--verbose")
 	private fun verbose: Bool do return opt_verbose.value
 
 	# All command line actions, mapped to their short `name`
