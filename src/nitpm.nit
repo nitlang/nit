@@ -247,39 +247,46 @@ class CommandUninstall
 	super Command
 
 	redef fun name do return "uninstall"
-	redef fun usage do return "nitpm uninstall <package>"
-	redef fun description do return "Uninstall a package"
+	redef fun usage do return "nitpm uninstall [-f] <package0>[=version] [package1 ...]"
+	redef fun description do return "Uninstall packages"
 
 	redef fun apply(args)
 	do
-		if args.length != 1 then
+		var opt_force = "-f"
+		var force = args.has(opt_force)
+		if force then args.remove(opt_force)
+
+		if args.is_empty then
 			print_local_help
 			exit 1
 		end
 
-		var name = args.first
-		var target_dir = nitpm_lib_dir / name
+		for name in args do
+			var target_dir = nitpm_lib_dir / name
 
-		if not target_dir.file_exists or not target_dir.to_path.is_dir then
-			print_error "Package not found"
-			exit 1
-		end
+			if not target_dir.file_exists or not target_dir.to_path.is_dir then
+				print_error "Package not found"
+				exit 1
+			end
 
-		# Ask confirmation
-		var response = prompt("Delete {target_dir.escape_to_sh}? [Y/n] ")
-		var accept = response != null and
-			(response.to_lower == "y" or response.to_lower == "yes" or response == "")
-		if not accept then return
+			# Ask confirmation
+			if not force then
+				var response = prompt("Delete {target_dir.escape_to_sh}? [Y/n] ")
+				var accept = response != null and
+					(response.to_lower == "y" or response.to_lower == "yes" or response == "")
+				if not accept then return
+			end
 
-		var cmd = "rm -rf {target_dir.escape_to_sh}"
-		if verbose then print "+ {cmd}"
+			var cmd = "rm -rf {target_dir.escape_to_sh}"
+			if verbose then print "+ {cmd}"
 
-		var proc = new Process("sh", "-c", cmd)
-		proc.wait
+			var proc = new Process("sh", "-c", cmd)
+			proc.wait
 
-		if proc.status != 0 then
-			print_error "Uninstall failed"
-			exit 1
+			if proc.status != 0 then
+				print_error "Uninstall failed"
+				exit 1
+			end
 		end
 	end
 end
