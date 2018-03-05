@@ -43,3 +43,4 @@ test_rubix_cube
 test_rubix_visual
 test_csv
 repeating_key_xor_solve
+nitpm
