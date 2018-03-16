@@ -13,6 +13,10 @@
 # limitations under the License.
 
 # Defines some ANSI Terminal Control Escape Sequences.
+#
+# The color methods (e.g. `Text::green`) format the text to appear colored
+# in a ANSI/VT100 terminal. By default, this coloring is skipped if stdout
+# is not a TTY, but it can be forced by setting `force_console_colors = true`.
 module console
 
 # A ANSI/VT100 escape sequence.
@@ -282,7 +286,9 @@ end
 # Services to color terminal output
 redef class Text
 	private fun apply_format(f: TermCharFormat): String do
-		return "{f}{self}{normal}"
+		if stdout_isatty or force_console_colors then
+			return "{f}{self}{normal}"
+		else return to_s
 	end
 
 	private fun normal: TermCharFormat do return new TermCharFormat
@@ -408,4 +414,13 @@ class TermProgress
 		current_value = new_current
 		display(metadata)
 	end
+end
+
+redef class Sys
+	private var stdout_isatty: Bool = 1.isatty is lazy
+
+	# Force coloring terminal output, even if stdout is not a TTY?
+	#
+	# Defaults to `false`.
+	var force_console_colors = false is writable
 end
