@@ -60,7 +60,7 @@ class TermMoveDown
 	redef fun code do return "B"
 end
 
-# ANSI/VT100 code to move the cursor foward by `magnitude` columns (CUF).
+# ANSI/VT100 code to move the cursor forward by `magnitude` columns (CUF).
 class TermMoveFoward
 	super TermDirectionalMove
 
@@ -189,7 +189,7 @@ class TermCharFormat
 		attributes.add_all(format.attributes)
 	end
 
-	redef fun to_s: String do return "{csi}{attributes.join(";")}m"
+	redef fun to_s do return "{csi}{attributes.join(";")}m"
 
 	# Apply the specified SGR and return `self`.
 	private fun apply(sgr: String): TermCharFormat do
@@ -215,7 +215,7 @@ class TermCharFormat
 	# Apply normal weight and return `self`.
 	fun normal_weight: TermCharFormat do return apply("22")
 
-	# Add the attribute that disable inderlining and return `self`.
+	# Add the attribute that disable underlining and return `self`.
 	fun not_underlined: TermCharFormat do return apply("24")
 
 	# Add the attribute that disable blinking and return `self`.
@@ -239,7 +239,7 @@ class TermCharFormat
 	# Apply a blue foreground and return `self`.
 	fun blue_fg: TermCharFormat do return apply("34")
 
-	# Apply a mangenta foreground and return `self`.
+	# Apply a magenta foreground and return `self`.
 	fun magenta_fg: TermCharFormat do return apply("35")
 
 	# Apply a cyan foreground and return `self`.
@@ -251,31 +251,31 @@ class TermCharFormat
 	# Apply the default foreground and return `self`.
 	fun default_fg: TermCharFormat do return apply("39")
 
-	# Apply a black backgroud and return `self`.
+	# Apply a black background and return `self`.
 	fun black_bg: TermCharFormat do return apply("40")
 
-	# Apply a red backgroud and return `self`.
+	# Apply a red background and return `self`.
 	fun red_bg: TermCharFormat do return apply("41")
 
-	# Apply a green backgroud and return `self`.
+	# Apply a green background and return `self`.
 	fun green_bg: TermCharFormat do return apply("42")
 
-	# Apply a yellow backgroud and return `self`.
+	# Apply a yellow background and return `self`.
 	fun yellow_bg: TermCharFormat do return apply("43")
 
-	# Apply a blue backgroud and return `self`.
+	# Apply a blue background and return `self`.
 	fun blue_bg: TermCharFormat do return apply("44")
 
-	# Apply a mangenta backgroud and return `self`.
+	# Apply a magenta background and return `self`.
 	fun magenta_bg: TermCharFormat do return apply("45")
 
-	# Apply a cyan backgroud and return `self`.
+	# Apply a cyan background and return `self`.
 	fun cyan_bg: TermCharFormat do return apply("46")
 
-	# Apply a white backgroud and return `self`.
+	# Apply a white background and return `self`.
 	fun white_bg: TermCharFormat do return apply("47")
 
-	# Apply the default backgroud and return `self`.
+	# Apply the default background and return `self`.
 	fun default_bg: TermCharFormat do return apply("49")
 end
 
@@ -289,56 +289,56 @@ redef class String
 
 	# Make the text appear in dark gray (or black) in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun gray: String do return apply_format(normal.black_fg)
 
 	# Make the text appear in red in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun red: String do return apply_format(normal.red_fg)
 
 	# Make the text appear in green in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun green: String do return apply_format(normal.green_fg)
 
 	# Make the text appear in yellow in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun yellow: String do return apply_format(normal.yellow_fg)
 
 	# Make the text appear in blue in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun blue: String do return apply_format(normal.blue_fg)
 
-	# Make the text appear in mangenta in a ANSI/VT100 terminal.
+	# Make the text appear in magenta in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun purple: String do return apply_format(normal.magenta_fg)
 
 	# Make the text appear in cyan in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun cyan: String do return apply_format(normal.cyan_fg)
 
 	# Make the text appear in light gray (or white) in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun light_gray: String do return apply_format(normal.white_fg)
 
 	# Make the text appear in bold in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun bold: String do return apply_format(normal.bold)
 
 	# Make the text underlined in a ANSI/VT100 terminal.
 	#
-	# WARNING: SEE: `TermCharFormat`
+	# SEE: `TermCharFormat`
 	fun underline: String do return apply_format(normal.underline)
 end
 
-# A dynamic progressbar displayable in console.
+# A dynamic progress bar displayable in console.
 #
 # Example:
 # ~~~nitish
@@ -355,7 +355,7 @@ end
 # print "\ndone"
 # ~~~
 #
-# Progressbar can accept metadata to display a small amount of data.
+# Progress bar can accept metadata to display a small amount of data.
 #
 # Example with metadata:
 # ~~~nitish
@@ -383,7 +383,7 @@ class TermProgress
 	# Display the progress bar.
 	#
 	# `metadata`  can be used to pass a small amount of data to display after
-	# the progressbar.
+	# the progress bar.
 	fun display(metadata: nullable String) do
 		var percent = current_percentage
 		var p = current_value * max_columns / max_value
@@ -401,7 +401,7 @@ class TermProgress
 		if metadata != null then printn " ({metadata})"
 	end
 
-	# Update and display the progresssbar.
+	# Update and display the progress bar.
 	#
 	# See `display`.
 	fun update(new_current: Int, metadata: nullable String) do
