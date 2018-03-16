@@ -279,8 +279,8 @@ class TermCharFormat
 	fun default_bg: TermCharFormat do return apply("49")
 end
 
-# Redefine the `String` class to add functions to color the string.
-redef class String
+# Services to color terminal output
+redef class Text
 	private fun apply_format(f: TermCharFormat): String do
 		return "{f}{self}{normal}"
 	end
