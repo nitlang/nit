@@ -89,7 +89,7 @@ extern class NativeCurl `{ CURL * `}
 		if obj isa Int then return native_setopt_int(opt, obj)
 		if obj == true then return native_setopt_int(opt, 1)
 		if obj == false then return native_setopt_int(opt, 0)
-		if obj isa String then return native_setopt_string(opt, obj)
+		if obj isa String then return native_setopt_string(opt, obj.to_cstring)
 		if obj isa FileWriter then return native_setopt_file(opt, obj._file.as(not null))
 		if obj isa CURLSList then return native_setopt_slist(opt, obj)
 		return once new CURLCode.unknown_option
@@ -107,9 +107,8 @@ extern class NativeCurl `{ CURL * `}
 	private fun native_setopt_slist(opt: CURLOption, list: CURLSList): CURLCode `{ return curl_easy_setopt( self, opt, list); `}
 
 	# Internal method to set options to CURL using String parameter.
-	private fun native_setopt_string(opt: CURLOption, str: String): CURLCode import String.to_cstring `{
-		char *rStr = String_to_cstring(str);
-		return curl_easy_setopt( self, opt, rStr);
+	private fun native_setopt_string(opt: CURLOption, str: CString): CURLCode `{
+		return curl_easy_setopt( self, opt, str);
 	`}
 
 	# Request Chars internal information from the CURL session
@@ -121,7 +120,7 @@ extern class NativeCurl `{ CURL * `}
 		 return answ.item.to_s
 	end
 
-	# Internal method used to get String object information initially knowns as C Chars type
+	# Internal method used to get String object information initially known as C Chars type
 	private fun native_getinfo_chars(opt: CURLInfoChars, res: Ref[CString]): CURLCode
 	import Ref[CString].item= `{
 		char *r;
