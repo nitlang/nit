@@ -752,6 +752,10 @@ extern class CURLOption `{ CURLoption `}
 #	new	`{ return CURLOPT_SSH_KEYFUNCTION; `}
 #	new	`{ return CURLOPT_SSH_KEYDATA; `}
 
+	# TELNET Options
+
+#	new	`{ return CURLOPT_TELNETOPTIONS; `}
+
 	# Other Options
 
 #	new	`{ return CURLOPT_PRIVATE; `}
@@ -759,7 +763,6 @@ extern class CURLOption `{ CURLoption `}
 #	new	`{ return CURLOPT_NEW_FILE_PERMS; `}
 #	new	`{ return CURLOPT_NEW_DIRECTORY_PERMS; `}
 
-	# TELNET Options
-
-#	new	`{ return CURLOPT_TELNETOPTIONS; `}
+	# Set the Unix domain socket
+	new unix_socket_path `{ return CURLOPT_UNIX_SOCKET_PATH; `}
 end

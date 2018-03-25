@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Data transfer with URL syntax
+# Data transfer powered by the native curl library
 #
 # Download or upload over HTTP with `CurlHTTPRequest` and send emails with `CurlMail`.
 module curl
@@ -116,6 +116,12 @@ class CurlHTTPRequest
 	# Set the user agent for all following HTTP requests
 	var user_agent: nullable String is writable
 
+	# Set the Unix domain socket path to use
+	#
+	# When not null, enables using a Unix domain socket
+	# instead of a TCP connection and DNS hostname resolution.
+	var unix_socket_path: nullable String is writable
+
 	# Execute HTTP request
 	#
 	# By default, the response body is returned in an instance of `CurlResponse`.
@@ -139,6 +145,12 @@ class CurlHTTPRequest
 		var user_agent = user_agent
 		if user_agent != null then
 			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
+
+		var unix_socket_path = unix_socket_path
+		if unix_socket_path != null then
+			err = self.curl.native.easy_setopt(new CURLOption.unix_socket_path, unix_socket_path)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
