@@ -212,11 +212,12 @@ class BinaryDeserializer
 	# Convert from simple Json object to Nit object
 	private fun deserialize_next_object: nullable Object
 	do
-		var kind = stream.read_byte
-		assert kind isa Byte else
+		var kindi = stream.read_byte
+		assert kindi >= 0 else
 			# TODO break even on keep_going
 			return null
 		end
+		var kind = kindi.to_b
 
 		# After this point, all stream reading errors are caught later
 
@@ -227,13 +228,13 @@ class BinaryDeserializer
 		if kind == kind_char then
 			var bf = char_buf
 			var b = stream.read_byte
-			if b == null then return '�'
-			var ln = b.u8len
-			bf[0] = b
+			if b < 0 then return '�'
+			var ln = b.to_b.u8len
+			bf[0] = b.to_b
 			for i in [1 .. ln[ do
 				b = stream.read_byte
-				if b == null then return '�'
-				bf[i] = b
+				if b < 0 then return '�'
+				bf[i] = b.to_b
 			end
 			return bf.to_s_unsafe(ln, copy=false)[0]
 		end
@@ -290,7 +291,7 @@ class BinaryDeserializer
 
 			# Check for the attributes end marker
 			loop
-				var next_byte = stream.read_byte
+				var next_byte = stream.read_byte.to_b
 				if next_byte == new_object_end then break
 
 				# Fetch an additional attribute, even if it isn't expected

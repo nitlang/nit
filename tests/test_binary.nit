@@ -30,7 +30,12 @@ var reader = new FileReader.open(path)
 #alt2# reader.big_endian = false
 #alt3# reader.big_endian = false
 print reader.read(5)
-print reader.read_byte or else "null"
+var b = reader.read_byte
+if b >= 0 then
+	print b
+else
+	print "null"
+end
 print reader.read_float
 print reader.read_double
 print reader.read_int64
