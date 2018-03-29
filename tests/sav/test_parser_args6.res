@@ -1,5 +1,5 @@
-[37m1	var toto: Toto = new Toto.toto(toto+toto)
-[mStart  @1,1--42
+1	var toto: Toto = new Toto.toto(toto+toto)
+Start  @1,1--42
 |--AModule  @1,1--41
 |  `--AMainClassdef  @1,1--41
 |     `--AMainMethPropdef  @1,1--41
