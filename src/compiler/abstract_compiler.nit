@@ -767,9 +767,10 @@ abstract class AbstractCompiler
 		self.header.add_decl """
 struct catch_stack_t {
 	int cursor;
-	jmp_buf envs[100];
+	int currentSize;
+	jmp_buf *envs;
 };
-extern struct catch_stack_t catchStack;
+extern __thread struct catch_stack_t catchStack;
 """
 	end
 
@@ -870,7 +871,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
-		v.add_decl("struct catch_stack_t catchStack;")
+		v.add_decl("__thread struct catch_stack_t catchStack = \{-1, 0, NULL\};")
 
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 			for tag in count_type_test_tags do
@@ -971,7 +972,6 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add "#endif"
 
 		v.add("glob_argc = argc; glob_argv = argv;")
-		v.add("catchStack.cursor = -1;")
 		v.add("initialize_gc_option();")
 
 		v.add "initialize_nitni_global_refs();"
@@ -3504,6 +3504,14 @@ redef class ADoExpr
 	redef fun stmt(v)
 	do
 		if self.n_catch != null then
+			v.add("if(catchStack.currentSize == 0) \{")
+			v.add(" 	catchStack.cursor = -1;")
+			v.add("		catchStack.currentSize = 100;")
+			v.add("		catchStack.envs = malloc(sizeof(jmp_buf)*100);")
+			v.add("\} else if(catchStack.cursor == catchStack.currentSize - 1) \{")
+			v.add("		catchStack.currentSize *= 2;")
+			v.add("		catchStack.envs = realloc(catchStack.envs, sizeof(jmp_buf)*catchStack.currentSize);")
+			v.add("\}")
 			v.add("catchStack.cursor += 1;")
 			v.add("if(!setjmp(catchStack.envs[catchStack.cursor]))\{")
 			v.stmt(self.n_block)
