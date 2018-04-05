@@ -1392,6 +1392,11 @@ abstract class AbstractCompilerVisitor
 		mtype = self.anchor(mtype)
 		var valmtype = value.mcasttype
 
+		# CPrimitive is the best you can do
+		if valmtype.is_c_primitive then
+			return value
+		end
+
 		# Do nothing if useless autocast
 		if valmtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
