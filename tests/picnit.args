@@ -1,4 +1,0 @@
-install https://gitlab.com/xymus/hello_picnit.git
-install hello_picnit
-list
-upgrade hello_picnit

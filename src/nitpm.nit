@@ -13,66 +13,16 @@
 # limitations under the License.
 
 # Nit package manager command line interface
-module picnit
+module nitpm
 
 import opts
 import prompt
 import ini
 import curl
 
-import picnit_shared
+import nitpm_shared
 
-redef class Text
-
-	# Does `self` look like a package name?
-	#
-	# ~~~
-	# assert "gamnit".is_package_name
-	# assert "n1t".is_package_name
-	# assert not ".".is_package_name
-	# assert not "./gamnit".is_package_name
-	# assert not "https://github.com/nitlang/nit.git".is_package_name
-	# assert not "git://github.com/nitlang/nit".is_package_name
-	# assert not "git@gitlab.com:xymus/gamnit.git".is_package_name
-	# assert not "4it".is_package_name
-	# ~~~
-	private fun is_package_name: Bool
-	do
-		if is_empty then return false
-		if not chars.first.is_alpha then return false
-
-		for c in chars do
-			if not (c.is_alphanumeric or c == '_') then return false
-		end
-
-		return true
-	end
-
-	# Get package name from the Git address `self`
-	#
-	# Return `null` on failure.
-	#
-	# ~~~
-	# assert "https://github.com/nitlang/nit.git".git_name == "nit"
-	# assert "git://github.com/nitlang/nit".git_name == "nit"
-	# assert "gamnit".git_name == "gamnit"
-	# assert "///".git_name == null
-	# assert "file:///".git_name == "file:"
-	# ~~~
-	private fun git_name: nullable String
-	do
-		var parts = split("/")
-		for part in parts.reverse_iterator do
-			if not part.is_empty then
-				return part.strip_extension(".git")
-			end
-		end
-
-		return null
-	end
-end
-
-# Command line action, passed after `picnit`
+# Command line action, passed after `nitpm`
 abstract class Command
 
 	# Short name of the command, specified in the command line
@@ -105,24 +55,60 @@ class CommandInstall
 	super Command
 
 	redef fun name do return "install"
-	redef fun usage do return "picnit install [package or git-repository]"
-	redef fun description do return "Install a package by its name or from a git-repository"
+	redef fun usage do return "nitpm install [package0[=version] [package1 ...]]"
+	redef fun description do return "Install packages by name, Git repository address or from the local package.ini"
+
+	# Packages installed in this run (identified by the full path)
+	private var installed = new Array[String]
 
 	redef fun apply(args)
 	do
-		if args.length != 1 then
-			print_local_help
-			exit 1
-		end
+		if args.not_empty then
+			# Install each package
+			for arg in args do
+				# Parse each arg as an import string, with versions and commas
+				install_packages arg
+			end
+		else
+			# Install packages from local package.ini
+			var ini_path = "package.ini"
+			if not ini_path.file_exists then
+				print_error "Local `package.ini` not found."
+				print_local_help
+				exit 1
+			end
 
-		var package_id = args.first
+			var ini = new ConfigTree(ini_path)
+			var import_line = ini["package.import"]
+			if import_line == null then
+				print_error "The local `package.ini` declares no external dependencies."
+				exit 0
+				abort
+			end
+
+			install_packages import_line
+		end
+	end
+
+	# Install packages defined by the `import_line`
+	private fun install_packages(import_line: String)
+	do
+		var imports = import_line.parse_import
+		for name, ext_package in imports do
+			install_package(ext_package.id, ext_package.version)
+		end
+	end
+
+	# Install the `package_id` at `version`
+	private fun install_package(package_id: String, version: nullable String)
+	do
 		if package_id.is_package_name then
 			# Ask a centralized server
 			# TODO choose a future safe URL
 			# TODO customizable server list
 			# TODO parse ini file in memory
 
-			var url = "https://xymus.net/picnit/{package_id}.ini"
+			var url = "https://xymus.net/nitpm/{package_id}.ini"
 			var ini_path = "/tmp/{package_id}.ini"
 
 			if verbose then print "Looking for a package description at '{url}'"
@@ -138,7 +124,7 @@ class CommandInstall
 
 			assert response isa CurlFileResponseSuccess
 			if response.status_code == 404 then
-				print_error "Package not found by the server"
+				print_error "Package '{package_id}' not found on the server"
 				exit 1
 			else if response.status_code != 200 then
 				print_error "Server side error: {response.status_code}"
@@ -158,12 +144,12 @@ class CommandInstall
 				abort
 			end
 
-			install_from_git(git_repo, package_id)
+			install_from_git(git_repo, package_id, version)
 		else
 			var name = package_id.git_name
 			if name != null and name != "." and not name.is_empty then
 				name = name.to_lower
-				install_from_git(package_id, name)
+				install_from_git(package_id, name, version)
 			else
 				print_error "Failed to infer the package name"
 				exit 1
@@ -171,30 +157,49 @@ class CommandInstall
 		end
 	end
 
-	private fun install_from_git(git_repo, name: String)
+	private fun install_from_git(git_repo, name: String, version: nullable String)
 	do
 		check_git
 
-		var target_dir = picnit_lib_dir / name
+		var target_dir = nitpm_lib_dir / name
+		if version != null then target_dir += "=" + version
+		if installed.has(target_dir) then
+			# Ignore packages installed in this run
+			return
+		end
+		installed.add target_dir
+
 		if target_dir.file_exists then
-			print_error "Already installed"
-			exit 1
+			# Warn about packages previously installed,
+			# install dependencies anyway in case of a previous error.
+			print_error "Package '{name}' is already installed"
+		else
+			# Actually install it
+			var cmd_branch = ""
+			if version != null then cmd_branch = "--branch '{version}'"
+
+			var cmd = "git clone --depth 1 {cmd_branch} {git_repo.escape_to_sh} {target_dir.escape_to_sh}"
+			if verbose then print "+ {cmd}"
+
+			if "NIT_TESTING".environ == "true" then
+				# Silence git output when testing
+				cmd += " 2> /dev/null"
+			end
+
+			var proc = new Process("sh", "-c", cmd)
+			proc.wait
+
+			if proc.status != 0 then
+				print_error "Install of '{name}' failed"
+				exit 1
+			end
 		end
 
-		var cmd = "git clone {git_repo.escape_to_sh} {target_dir.escape_to_sh}"
-		if verbose then print "+ {cmd}"
-
-		if "NIT_TESTING".environ == "true" then
-			# Silence git output when testing
-			cmd += " 2> /dev/null"
-		end
-
-		var proc = new Process("sh", "-c", cmd)
-		proc.wait
-
-		if proc.status != 0 then
-			print_error "Install failed"
-			exit 1
+		# Recursive install
+		var ini = new ConfigTree(target_dir/"package.ini")
+		var import_line = ini["package.import"]
+		if import_line != null then
+			install_packages import_line
 		end
 	end
 end
@@ -204,7 +209,7 @@ class CommandUpgrade
 	super Command
 
 	redef fun name do return "upgrade"
-	redef fun usage do return "picnit upgrade <package>"
+	redef fun usage do return "nitpm upgrade <package>"
 	redef fun description do return "Upgrade a package"
 
 	redef fun apply(args)
@@ -215,7 +220,7 @@ class CommandUpgrade
 		end
 
 		var name = args.first
-		var target_dir = picnit_lib_dir / name
+		var target_dir = nitpm_lib_dir / name
 
 		if not target_dir.file_exists or not target_dir.to_path.is_dir then
 			print_error "Package not found"
@@ -242,39 +247,58 @@ class CommandUninstall
 	super Command
 
 	redef fun name do return "uninstall"
-	redef fun usage do return "picnit uninstall <package>"
-	redef fun description do return "Uninstall a package"
+	redef fun usage do return "nitpm uninstall [-f] <package0>[=version] [package1 ...]"
+	redef fun description do return "Uninstall packages"
 
 	redef fun apply(args)
 	do
-		if args.length != 1 then
+		var opt_force = "-f"
+		var force = args.has(opt_force)
+		if force then args.remove(opt_force)
+
+		if args.is_empty then
 			print_local_help
 			exit 1
 		end
 
-		var name = args.first
-		var target_dir = picnit_lib_dir / name
+		for name in args do
 
-		if not target_dir.file_exists or not target_dir.to_path.is_dir then
-			print_error "Package not found"
-			exit 1
-		end
+			var clean_nitpm_lib_dir = nitpm_lib_dir.simplify_path
+			var target_dir = clean_nitpm_lib_dir / name
 
-		# Ask confirmation
-		var response = prompt("Delete {target_dir.escape_to_sh}? [Y/n] ")
-		var accept = response != null and
-			(response.to_lower == "y" or response.to_lower == "yes" or response == "")
-		if not accept then return
+			# Check validity of the package to delete
+			target_dir = target_dir.simplify_path
+			var within_dir = target_dir.has_prefix(clean_nitpm_lib_dir + "/") and
+				target_dir.length > clean_nitpm_lib_dir.length + 1
+			var valid_name = name.length > 0 and name.chars.first.is_lower
+			if not valid_name or not within_dir then
+				print_error "Package name '{name}' is invalid"
+				continue
+			end
 
-		var cmd = "rm -rf {target_dir.escape_to_sh}"
-		if verbose then print "+ {cmd}"
+			if not target_dir.file_exists or not target_dir.to_path.is_dir then
+				print_error "Package not found"
+				exit 1
+			end
 
-		var proc = new Process("sh", "-c", cmd)
-		proc.wait
+			# Ask confirmation
+			if not force then
+				var response = prompt("Delete {target_dir.escape_to_sh}? [Y/n] ")
+				var accept = response != null and
+					(response.to_lower == "y" or response.to_lower == "yes" or response == "")
+				if not accept then return
+			end
 
-		if proc.status != 0 then
-			print_error "Uninstall failed"
-			exit 1
+			var cmd = "rm -rf {target_dir.escape_to_sh}"
+			if verbose then print "+ {cmd}"
+
+			var proc = new Process("sh", "-c", cmd)
+			proc.wait
+
+			if proc.status != 0 then
+				print_error "Uninstall failed"
+				exit 1
+			end
 		end
 	end
 end
@@ -284,23 +308,36 @@ class CommandList
 	super Command
 
 	redef fun name do return "list"
-	redef fun usage do return "picnit list"
+	redef fun usage do return "nitpm list"
 	redef fun description do return "List installed packages"
 
 	redef fun apply(args)
 	do
-		var files = picnit_lib_dir.files
+		var files = nitpm_lib_dir.files
+		var name_to_desc = new Map[String, nullable String]
+		var max_name_len = 0
+
+		# Collect package info
 		for file in files do
-			var ini_path = picnit_lib_dir / file / "package.ini"
+			var ini_path = nitpm_lib_dir / file / "package.ini"
 			if verbose then print "- Reading ini file at {ini_path}"
 			var ini = new ConfigTree(ini_path)
 			var tags = ini["package.tags"]
 
-			if tags != null then
-				print "{file.justify(15, 0.0)} {tags}"
-			else
-				print file
-			end
+			name_to_desc[file] = tags
+			max_name_len = max_name_len.max(file.length)
+		end
+
+		# Sort in alphabetical order
+		var sorted_names = name_to_desc.keys.to_a
+		alpha_comparator.sort sorted_names
+
+		# Print with clear columns
+		for name in sorted_names do
+			var col0 = name.justify(max_name_len+1, 0.0)
+			var col1 = name_to_desc[name] or else ""
+			var line = col0 + col1
+			print line.trim
 		end
 	end
 end
@@ -310,7 +347,7 @@ class CommandHelp
 	super Command
 
 	redef fun name do return "help"
-	redef fun usage do return "picnit help [command]"
+	redef fun usage do return "nitpm help [command]"
 	redef fun description do return "Show general help message or the help for a command"
 
 	redef fun apply(args)
@@ -334,10 +371,10 @@ redef class Sys
 	var opts = new OptionContext
 
 	# Help option
-	var opt_help = new OptionBool("Show this help message", "--help", "-h")
+	var opt_help = new OptionBool("Show help message", "-h", "--help")
 
 	# Verbose mode option
-	var opt_verbose = new OptionBool("Print more information", "--verbose", "-v")
+	var opt_verbose = new OptionBool("Print more information", "-v", "--verbose")
 	private fun verbose: Bool do return opt_verbose.value
 
 	# All command line actions, mapped to their short `name`
@@ -350,17 +387,17 @@ redef class Sys
 	private var command_help = new CommandHelp(commands)
 end
 
-redef fun picnit_lib_dir
+redef fun nitpm_lib_dir
 do
 	if "NIT_TESTING".environ == "true" then
-		return "/tmp/picnit-test-" + "NIT_TESTING_ID".environ
+		return "/tmp/nitpm-test-" + "NIT_TESTING_ID".environ
 	else return super
 end
 
 # Print the general help message
 private fun print_help
 do
-	print "usage: picnit <command> [options]"
+	print "usage: nitpm <command> [options]"
 	print ""
 
 	print "commands:"
