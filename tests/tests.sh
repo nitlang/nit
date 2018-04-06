@@ -19,7 +19,24 @@
 
 # Set lang do default to avoid failed tests because of locale
 export LANG=C.UTF-8
-export LC_ALL=C.UTF-8
+
+# Explore candidates for LC_ALL
+#
+# If C.UTF-8, the most agnostic UTF-8 locale is supported, we
+# use it, otherwise we default to the UTF-8 system locale, and
+# if unavailable, we default on C.
+#
+# Note that C however is not guaranteed to be UTF-8, and
+# some tests may fail when relying on Unicode semantics.
+locale_candidate=C.UTF-8
+if ! locale -a 2>/dev/null | grep -q C.UTF-8; then
+	locale_candidate="$(locale -a | grep -i utf8 | head -n1)"
+	if [ -z "$locale_candidate" ]; then
+		locale_candidate=C
+	fi
+fi
+export LC_ALL="$locale_candidate"
+
 if uname | grep Darwin 1>/dev/null 2>&1; then
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
