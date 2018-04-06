@@ -29,6 +29,51 @@ end
 
 # Any kind of stream to read/write/both to or from a source
 abstract class Stream
+	# Codec used to transform raw data to text
+	#
+	# Note: defaults to UTF-8
+	var codec: Codec = utf8_codec is protected writable(set_codec)
+
+	# Lookahead buffer for codecs
+	#
+	# Since some codecs are multibyte, a lookahead may be required
+	# to store the next bytes and consume them only if a valid character
+	# is read.
+	protected var lookahead: CString is noinit
+
+	# Capacity of the lookahead
+	protected var lookahead_capacity = 0
+
+	# Current occupation of the lookahead
+	protected var lookahead_length = 0
+
+	# Buffer for writing data to a stream
+	protected var write_buffer: CString is noinit
+
+	init do
+		var lcap = codec.max_lookahead
+		lookahead = new CString(lcap)
+		write_buffer = new CString(lcap)
+		lookahead_length = 0
+		lookahead_capacity = lcap
+	end
+
+	# Change the codec for this stream.
+	fun codec=(c: Codec) do
+		if c.max_lookahead > lookahead_capacity then
+			var lcap = codec.max_lookahead
+			var lk = new CString(lcap)
+			var llen = lookahead_length
+			if llen > 0 then
+				lookahead.copy_to(lk, llen, 0, 0)
+			end
+			lookahead = lk
+			lookahead_capacity = lcap
+			write_buffer = new CString(lcap)
+		end
+		set_codec(c)
+	end
+
 	# Error produced by the file stream
 	#
 	#     var ifs = new FileReader.open("donotmakethisfile.binx")
@@ -64,9 +109,6 @@ end
 # A `Stream` that can be read from
 abstract class Reader
 	super Stream
-
-	# Decoder used to transform input bytes to UTF-8
-	var decoder: Codec = utf8_codec is writable
 
 	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
@@ -408,9 +450,6 @@ end
 # A `Stream` that can be written to
 abstract class Writer
 	super Stream
-
-	# The coder from a nit UTF-8 String to the output file
-	var coder: Codec = utf8_codec is writable
 
 	# Writes bytes from `s`
 	fun write_bytes(s: Bytes) is abstract
