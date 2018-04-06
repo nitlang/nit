@@ -60,3 +60,5 @@ nitunit.xml
 .metadata/*
 .github_data
 .DS_Store
+
+**/nit_compile/*
