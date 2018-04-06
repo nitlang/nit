@@ -1,2 +1,2 @@
-[1mexcluded[m (test_prog/game/excluded.nit)
-[1mmore[m (test_prog/game/excluded_dir/more.nit)
+excluded (test_prog/game/excluded.nit)
+more (test_prog/game/excluded_dir/more.nit)

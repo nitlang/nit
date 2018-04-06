@@ -1,66 +1,66 @@
-[34m# This file is part of NIT ( http://www.nitlanguage.org ).
-[m[34m#
-[m[34m# Copyright 2006-2008 Jean Privat <jean@pryen.org>
-[m[34m#
-[m[34m# Licensed under the Apache License, Version 2.0 (the "License");
-[m[34m# you may not use this file except in compliance with the License.
-[m[34m# You may obtain a copy of the License at
-[m[34m#
-[m[34m#     http://www.apache.org/licenses/LICENSE-2.0
-[m[34m#
-[m[34m# Unless required by applicable law or agreed to in writing, software
-[m[34m# distributed under the License is distributed on an "AS IS" BASIS,
-[m[34m# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-[m[34m# See the License for the specific language governing permissions and
-[m[34m# limitations under the License.
-[m
-[33mimport[m [33mend[m
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2006-2008 Jean Privat <jean@pryen.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-[33minterface[m [32mObject[m
-[33mend[m
+import end
 
-[33menum[m [32mBool[m
-[33mend[m
+interface Object
+end
 
-[33menum[m [32mInt[m
-	[33mfun[m output [33mis[m intern
-[33mend[m
+enum Bool
+end
 
-[33mclass[m [32mA[m
-	[33minit[m [33mdo[m [31m5[m.output
-	[33mfun[m run [33mdo[m [31m6[m.output
-[33mend[m
+enum Int
+	fun output is intern
+end
 
-[33mclass[m [32mB[m
-	[33mvar[m val: [32mInt[m
-	[33minit[m(v: [32mInt[m)
-	[33mdo[m
-		[31m7[m.output
-		[33mself[m.val = v
-	[33mend[m
-	[33mfun[m run [33mdo[m val.output
-[33mend[m
+class A
+	init do 5.output
+	fun run do 6.output
+end
 
-[33mclass[m [32mC[m
-	[33mvar[m val1: [32mInt[m
-	[33mvar[m val2: [32mInt[m = [31m10[m
-[33mend[m
+class B
+	var val: Int
+	init(v: Int)
+	do
+		7.output
+		self.val = v
+	end
+	fun run do val.output
+end
 
-[33mfun[m foo [33mdo[m [31m2[m.output
-[33mfun[m bar(i: [32mInt[m) [33mdo[m i.output
-[33mfun[m baz: [32mInt[m [33mdo[m [33mreturn[m [31m4[m
+class C
+	var val1: Int
+	var val2: Int = 10
+end
 
-[31m1[m.output
+fun foo do 2.output
+fun bar(i: Int) do i.output
+fun baz: Int do return 4
+
+1.output
 foo
-bar([31m3[m)
+bar(3)
 baz.output
 
-[33mvar[m a = [33mnew[m [32mA[m
+var a = new A
 a.run
 
-[33mvar[m b = [33mnew[m [32mB[m([31m8[m)
+var b = new B(8)
 b.run
 
-[33mvar[m c = [33mnew[m [32mC[m([31m9[m)
+var c = new C(9)
 c.val1.output
 c.val2.output

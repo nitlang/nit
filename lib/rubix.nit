@@ -664,3 +664,5 @@ class RubixCube
 		return iters
 	end
 end
+
+redef fun force_console_colors do return true

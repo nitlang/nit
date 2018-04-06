@@ -1,38 +1,38 @@
-[37m17	# Program used to test the NIT parser
-[mStart  @../src/test_parser.nit:17,1--139,1
+17	# Program used to test the NIT parser
+Start  @../src/test_parser.nit:17,1--139,1
 |--AModule  @../src/test_parser.nit:17,1--138,3
 |  |--AModuledecl  @../src/test_parser.nit:17,1--18,18
 |  |  |--ADoc  @../src/test_parser.nit:17,1--18,0
 |  |  |  `--TComment  # Program used to test the NIT parser\n @../src/test_parser.nit:17,1--18,0
-[37m18	module test_parser
-[m|  |  |--APublicVisibility  @../src/test_parser.nit:18,1
+18	module test_parser
+|  |  |--APublicVisibility  @../src/test_parser.nit:18,1
 |  |  |--TKwmodule  module @../src/test_parser.nit:18,1--6
 |  |  `--AModuleName  @../src/test_parser.nit:18,8--18
 |  |     `--TId  test_parser @../src/test_parser.nit:18,8--18
-[37m19	
+19	
 import parser
-[m[37m20	import parser
-[m|  |--AStdImport  @../src/test_parser.nit:20,1--13
+20	import parser
+|  |--AStdImport  @../src/test_parser.nit:20,1--13
 |  |  |--APublicVisibility  @../src/test_parser.nit:20,1
 |  |  |--TKwimport  import @../src/test_parser.nit:20,1--6
 |  |  `--AModuleName  @../src/test_parser.nit:20,8--13
 |  |     `--TId  parser @../src/test_parser.nit:20,8--13
-[37m21	import parser_util
-[m|  |--AStdImport  @../src/test_parser.nit:21,1--18
+21	import parser_util
+|  |--AStdImport  @../src/test_parser.nit:21,1--18
 |  |  |--APublicVisibility  @../src/test_parser.nit:21,1
 |  |  |--TKwimport  import @../src/test_parser.nit:21,1--6
 |  |  `--AModuleName  @../src/test_parser.nit:21,8--18
 |  |     `--TId  parser_util @../src/test_parser.nit:21,8--18
-[37m22	import astutil
-[m|  |--AStdImport  @../src/test_parser.nit:22,1--14
+22	import astutil
+|  |--AStdImport  @../src/test_parser.nit:22,1--14
 |  |  |--APublicVisibility  @../src/test_parser.nit:22,1
 |  |  |--TKwimport  import @../src/test_parser.nit:22,1--6
 |  |  `--AModuleName  @../src/test_parser.nit:22,8--14
 |  |     `--TId  astutil @../src/test_parser.nit:22,8--14
-[37m23	
+23	
 var no_print = false
-[m[37m24	var no_print = false
-[m|  `--AMainClassdef  @../src/test_parser.nit:24,1--138,3
+24	var no_print = false
+|  `--AMainClassdef  @../src/test_parser.nit:24,1--138,3
 |     `--AMainMethPropdef  @../src/test_parser.nit:24,1--138,3
 |        `--ABlockExpr  @../src/test_parser.nit:24,1--138,3
 |           |--AVardeclExpr  @../src/test_parser.nit:24,1--20
@@ -41,45 +41,45 @@ var no_print = false
 |           |  |--TAssign  = @../src/test_parser.nit:24,14
 |           |  `--AFalseExpr  @../src/test_parser.nit:24,16--20
 |           |     `--TKwfalse  false @../src/test_parser.nit:24,16--20
-[37m25	var only_lexer = false
-[m|           |--AVardeclExpr  @../src/test_parser.nit:25,1--22
+25	var only_lexer = false
+|           |--AVardeclExpr  @../src/test_parser.nit:25,1--22
 |           |  |--TKwvar  var @../src/test_parser.nit:25,1--3
 |           |  |--TId  only_lexer @../src/test_parser.nit:25,5--14
 |           |  |--TAssign  = @../src/test_parser.nit:25,16
 |           |  `--AFalseExpr  @../src/test_parser.nit:25,18--22
 |           |     `--TKwfalse  false @../src/test_parser.nit:25,18--22
-[37m26	var need_help = false
-[m|           |--AVardeclExpr  @../src/test_parser.nit:26,1--21
+26	var need_help = false
+|           |--AVardeclExpr  @../src/test_parser.nit:26,1--21
 |           |  |--TKwvar  var @../src/test_parser.nit:26,1--3
 |           |  |--TId  need_help @../src/test_parser.nit:26,5--13
 |           |  |--TAssign  = @../src/test_parser.nit:26,15
 |           |  `--AFalseExpr  @../src/test_parser.nit:26,17--21
 |           |     `--TKwfalse  false @../src/test_parser.nit:26,17--21
-[37m27	var no_file = false
-[m|           |--AVardeclExpr  @../src/test_parser.nit:27,1--19
+27	var no_file = false
+|           |--AVardeclExpr  @../src/test_parser.nit:27,1--19
 |           |  |--TKwvar  var @../src/test_parser.nit:27,1--3
 |           |  |--TId  no_file @../src/test_parser.nit:27,5--11
 |           |  |--TAssign  = @../src/test_parser.nit:27,13
 |           |  `--AFalseExpr  @../src/test_parser.nit:27,15--19
 |           |     `--TKwfalse  false @../src/test_parser.nit:27,15--19
-[37m28	var interactive = false
-[m|           |--AVardeclExpr  @../src/test_parser.nit:28,1--23
+28	var interactive = false
+|           |--AVardeclExpr  @../src/test_parser.nit:28,1--23
 |           |  |--TKwvar  var @../src/test_parser.nit:28,1--3
 |           |  |--TId  interactive @../src/test_parser.nit:28,5--15
 |           |  |--TAssign  = @../src/test_parser.nit:28,17
 |           |  `--AFalseExpr  @../src/test_parser.nit:28,19--23
 |           |     `--TKwfalse  false @../src/test_parser.nit:28,19--23
-[37m29	var xml = false
-[m|           |--AVardeclExpr  @../src/test_parser.nit:29,1--15
+29	var xml = false
+|           |--AVardeclExpr  @../src/test_parser.nit:29,1--15
 |           |  |--TKwvar  var @../src/test_parser.nit:29,1--3
 |           |  |--TId  xml @../src/test_parser.nit:29,5--7
 |           |  |--TAssign  = @../src/test_parser.nit:29,9
 |           |  `--AFalseExpr  @../src/test_parser.nit:29,11--15
 |           |     `--TKwfalse  false @../src/test_parser.nit:29,11--15
-[37m30	
+30	
 while not args.is_empty and args.first.chars.first == '-' do
-[m[37m31	while not args.is_empty and args.first.chars.first == '-' do
-[m|           |--AWhileExpr  @../src/test_parser.nit:31,1--51,3
+31	while not args.is_empty and args.first.chars.first == '-' do
+|           |--AWhileExpr  @../src/test_parser.nit:31,1--51,3
 |           |  |--TKwwhile  while @../src/test_parser.nit:31,1--5
 |           |  |--AAndExpr  @../src/test_parser.nit:31,7--57
 |           |  |  |--ANotExpr  @../src/test_parser.nit:31,7--23
@@ -116,8 +116,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |  |     `--ACharExpr  @../src/test_parser.nit:31,55--57
 |           |  |        `--TChar  \'-\' @../src/test_parser.nit:31,55--57
 |           |  |--TKwdo  do @../src/test_parser.nit:31,59--60
-[37m32		if args.first == "-n" then
-[m|           |  `--ABlockExpr  @../src/test_parser.nit:32,2--51,3
+32		if args.first == "-n" then
+|           |  `--ABlockExpr  @../src/test_parser.nit:32,2--51,3
 |           |     |--AIfExpr  @../src/test_parser.nit:32,2--49,4
 |           |     |  |--TKwif  if @../src/test_parser.nit:32,2--3
 |           |     |  |--AEqExpr  @../src/test_parser.nit:32,5--22
@@ -134,8 +134,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |  |  `--AStringExpr  @../src/test_parser.nit:32,19--22
 |           |     |  |     `--TString  \"-n\" @../src/test_parser.nit:32,19--22
 |           |     |  |--TKwthen  then @../src/test_parser.nit:32,24--27
-[37m33			no_print = true
-[m|           |     |  |--ABlockExpr  @../src/test_parser.nit:33,3--17
+33			no_print = true
+|           |     |  |--ABlockExpr  @../src/test_parser.nit:33,3--17
 |           |     |  |  `--ACallAssignExpr  @../src/test_parser.nit:33,3--17
 |           |     |  |     |--AImplicitSelfExpr  @../src/test_parser.nit:33,3
 |           |     |  |     |--AQid  @../src/test_parser.nit:33,3--10
@@ -144,8 +144,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |  |     |--TAssign  = @../src/test_parser.nit:33,12
 |           |     |  |     `--ATrueExpr  @../src/test_parser.nit:33,14--17
 |           |     |  |        `--TKwtrue  true @../src/test_parser.nit:33,14--17
-[37m34		else if args.first == "-l" then
-[m|           |     |  |--TKwelse  else @../src/test_parser.nit:34,2--5
+34		else if args.first == "-l" then
+|           |     |  |--TKwelse  else @../src/test_parser.nit:34,2--5
 |           |     |  `--AIfExpr  @../src/test_parser.nit:34,7--49,4
 |           |     |     |--TKwif  if @../src/test_parser.nit:34,7--8
 |           |     |     |--AEqExpr  @../src/test_parser.nit:34,10--27
@@ -162,8 +162,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |     |  `--AStringExpr  @../src/test_parser.nit:34,24--27
 |           |     |     |     `--TString  \"-l\" @../src/test_parser.nit:34,24--27
 |           |     |     |--TKwthen  then @../src/test_parser.nit:34,29--32
-[37m35			only_lexer = true
-[m|           |     |     |--ABlockExpr  @../src/test_parser.nit:35,3--19
+35			only_lexer = true
+|           |     |     |--ABlockExpr  @../src/test_parser.nit:35,3--19
 |           |     |     |  `--ACallAssignExpr  @../src/test_parser.nit:35,3--19
 |           |     |     |     |--AImplicitSelfExpr  @../src/test_parser.nit:35,3
 |           |     |     |     |--AQid  @../src/test_parser.nit:35,3--12
@@ -172,8 +172,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |     |     |--TAssign  = @../src/test_parser.nit:35,14
 |           |     |     |     `--ATrueExpr  @../src/test_parser.nit:35,16--19
 |           |     |     |        `--TKwtrue  true @../src/test_parser.nit:35,16--19
-[37m36		else if args.first == "-p" then
-[m|           |     |     |--TKwelse  else @../src/test_parser.nit:36,2--5
+36		else if args.first == "-p" then
+|           |     |     |--TKwelse  else @../src/test_parser.nit:36,2--5
 |           |     |     `--AIfExpr  @../src/test_parser.nit:36,7--49,4
 |           |     |        |--TKwif  if @../src/test_parser.nit:36,7--8
 |           |     |        |--AEqExpr  @../src/test_parser.nit:36,10--27
@@ -190,8 +190,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |        |  `--AStringExpr  @../src/test_parser.nit:36,24--27
 |           |     |        |     `--TString  \"-p\" @../src/test_parser.nit:36,24--27
 |           |     |        |--TKwthen  then @../src/test_parser.nit:36,29--32
-[37m37			only_lexer = false
-[m|           |     |        |--ABlockExpr  @../src/test_parser.nit:37,3--20
+37			only_lexer = false
+|           |     |        |--ABlockExpr  @../src/test_parser.nit:37,3--20
 |           |     |        |  `--ACallAssignExpr  @../src/test_parser.nit:37,3--20
 |           |     |        |     |--AImplicitSelfExpr  @../src/test_parser.nit:37,3
 |           |     |        |     |--AQid  @../src/test_parser.nit:37,3--12
@@ -200,8 +200,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |        |     |--TAssign  = @../src/test_parser.nit:37,14
 |           |     |        |     `--AFalseExpr  @../src/test_parser.nit:37,16--20
 |           |     |        |        `--TKwfalse  false @../src/test_parser.nit:37,16--20
-[37m38		else if args.first == "-x" then
-[m|           |     |        |--TKwelse  else @../src/test_parser.nit:38,2--5
+38		else if args.first == "-x" then
+|           |     |        |--TKwelse  else @../src/test_parser.nit:38,2--5
 |           |     |        `--AIfExpr  @../src/test_parser.nit:38,7--49,4
 |           |     |           |--TKwif  if @../src/test_parser.nit:38,7--8
 |           |     |           |--AEqExpr  @../src/test_parser.nit:38,10--27
@@ -218,8 +218,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |           |  `--AStringExpr  @../src/test_parser.nit:38,24--27
 |           |     |           |     `--TString  \"-x\" @../src/test_parser.nit:38,24--27
 |           |     |           |--TKwthen  then @../src/test_parser.nit:38,29--32
-[37m39			xml = true
-[m|           |     |           |--ABlockExpr  @../src/test_parser.nit:39,3--12
+39			xml = true
+|           |     |           |--ABlockExpr  @../src/test_parser.nit:39,3--12
 |           |     |           |  `--ACallAssignExpr  @../src/test_parser.nit:39,3--12
 |           |     |           |     |--AImplicitSelfExpr  @../src/test_parser.nit:39,3
 |           |     |           |     |--AQid  @../src/test_parser.nit:39,3--5
@@ -228,8 +228,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |           |     |--TAssign  = @../src/test_parser.nit:39,7
 |           |     |           |     `--ATrueExpr  @../src/test_parser.nit:39,9--12
 |           |     |           |        `--TKwtrue  true @../src/test_parser.nit:39,9--12
-[37m40		else if args.first == "-e" then
-[m|           |     |           |--TKwelse  else @../src/test_parser.nit:40,2--5
+40		else if args.first == "-e" then
+|           |     |           |--TKwelse  else @../src/test_parser.nit:40,2--5
 |           |     |           `--AIfExpr  @../src/test_parser.nit:40,7--49,4
 |           |     |              |--TKwif  if @../src/test_parser.nit:40,7--8
 |           |     |              |--AEqExpr  @../src/test_parser.nit:40,10--27
@@ -246,8 +246,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |              |  `--AStringExpr  @../src/test_parser.nit:40,24--27
 |           |     |              |     `--TString  \"-e\" @../src/test_parser.nit:40,24--27
 |           |     |              |--TKwthen  then @../src/test_parser.nit:40,29--32
-[37m41			no_file = true
-[m|           |     |              |--ABlockExpr  @../src/test_parser.nit:41,3--16
+41			no_file = true
+|           |     |              |--ABlockExpr  @../src/test_parser.nit:41,3--16
 |           |     |              |  `--ACallAssignExpr  @../src/test_parser.nit:41,3--16
 |           |     |              |     |--AImplicitSelfExpr  @../src/test_parser.nit:41,3
 |           |     |              |     |--AQid  @../src/test_parser.nit:41,3--9
@@ -256,8 +256,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |              |     |--TAssign  = @../src/test_parser.nit:41,11
 |           |     |              |     `--ATrueExpr  @../src/test_parser.nit:41,13--16
 |           |     |              |        `--TKwtrue  true @../src/test_parser.nit:41,13--16
-[37m42		else if args.first == "-i" then
-[m|           |     |              |--TKwelse  else @../src/test_parser.nit:42,2--5
+42		else if args.first == "-i" then
+|           |     |              |--TKwelse  else @../src/test_parser.nit:42,2--5
 |           |     |              `--AIfExpr  @../src/test_parser.nit:42,7--49,4
 |           |     |                 |--TKwif  if @../src/test_parser.nit:42,7--8
 |           |     |                 |--AEqExpr  @../src/test_parser.nit:42,10--27
@@ -274,8 +274,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |                 |  `--AStringExpr  @../src/test_parser.nit:42,24--27
 |           |     |                 |     `--TString  \"-i\" @../src/test_parser.nit:42,24--27
 |           |     |                 |--TKwthen  then @../src/test_parser.nit:42,29--32
-[37m43			interactive = true
-[m|           |     |                 |--ABlockExpr  @../src/test_parser.nit:43,3--20
+43			interactive = true
+|           |     |                 |--ABlockExpr  @../src/test_parser.nit:43,3--20
 |           |     |                 |  `--ACallAssignExpr  @../src/test_parser.nit:43,3--20
 |           |     |                 |     |--AImplicitSelfExpr  @../src/test_parser.nit:43,3
 |           |     |                 |     |--AQid  @../src/test_parser.nit:43,3--13
@@ -284,8 +284,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |                 |     |--TAssign  = @../src/test_parser.nit:43,15
 |           |     |                 |     `--ATrueExpr  @../src/test_parser.nit:43,17--20
 |           |     |                 |        `--TKwtrue  true @../src/test_parser.nit:43,17--20
-[37m44		else if args.first == "-h" or args.first == "-?" then
-[m|           |     |                 |--TKwelse  else @../src/test_parser.nit:44,2--5
+44		else if args.first == "-h" or args.first == "-?" then
+|           |     |                 |--TKwelse  else @../src/test_parser.nit:44,2--5
 |           |     |                 `--AIfExpr  @../src/test_parser.nit:44,7--49,4
 |           |     |                    |--TKwif  if @../src/test_parser.nit:44,7--8
 |           |     |                    |--AOrExpr  @../src/test_parser.nit:44,10--49
@@ -317,8 +317,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |                    |     `--AStringExpr  @../src/test_parser.nit:44,46--49
 |           |     |                    |        `--TString  \"-?\" @../src/test_parser.nit:44,46--49
 |           |     |                    |--TKwthen  then @../src/test_parser.nit:44,51--54
-[37m45			need_help = true
-[m|           |     |                    |--ABlockExpr  @../src/test_parser.nit:45,3--18
+45			need_help = true
+|           |     |                    |--ABlockExpr  @../src/test_parser.nit:45,3--18
 |           |     |                    |  `--ACallAssignExpr  @../src/test_parser.nit:45,3--18
 |           |     |                    |     |--AImplicitSelfExpr  @../src/test_parser.nit:45,3
 |           |     |                    |     |--AQid  @../src/test_parser.nit:45,3--11
@@ -327,10 +327,10 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |                    |     |--TAssign  = @../src/test_parser.nit:45,13
 |           |     |                    |     `--ATrueExpr  @../src/test_parser.nit:45,15--18
 |           |     |                    |        `--TKwtrue  true @../src/test_parser.nit:45,15--18
-[37m46		else
-[m|           |     |                    |--TKwelse  else @../src/test_parser.nit:46,2--5
-[37m47			stderr.write("Unknown option {args.first}.\n")
-[m|           |     |                    `--ABlockExpr  @../src/test_parser.nit:47,3--49,4
+46		else
+|           |     |                    |--TKwelse  else @../src/test_parser.nit:46,2--5
+47			stderr.write("Unknown option {args.first}.\n")
+|           |     |                    `--ABlockExpr  @../src/test_parser.nit:47,3--49,4
 |           |     |                       |--ACallExpr  @../src/test_parser.nit:47,3--48
 |           |     |                       |  |--ACallExpr  @../src/test_parser.nit:47,3--8
 |           |     |                       |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:47,3
@@ -356,8 +356,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |                       |     |  `--AEndStringExpr  @../src/test_parser.nit:47,43--47
 |           |     |                       |     |     `--TEndString  }.\\n\" @../src/test_parser.nit:47,43--47
 |           |     |                       |     `--TCpar  ) @../src/test_parser.nit:47,48
-[37m48			exit(0)
-[m|           |     |                       |--ACallExpr  @../src/test_parser.nit:48,3--9
+48			exit(0)
+|           |     |                       |--ACallExpr  @../src/test_parser.nit:48,3--9
 |           |     |                       |  |--AImplicitSelfExpr  @../src/test_parser.nit:48,3
 |           |     |                       |  |--AQid  @../src/test_parser.nit:48,3--6
 |           |     |                       |  |  `--TId  exit @../src/test_parser.nit:48,3--6
@@ -366,10 +366,10 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |                       |     |--AIntegerExpr  @../src/test_parser.nit:48,8
 |           |     |                       |     |  `--TInteger  0 @../src/test_parser.nit:48,8
 |           |     |                       |     `--TCpar  ) @../src/test_parser.nit:48,9
-[37m49		end
-[m|           |     |                       `--TKwend  end @../src/test_parser.nit:49,2--4
-[37m50		args.shift
-[m|           |     |--ACallExpr  @../src/test_parser.nit:50,2--11
+49		end
+|           |     |                       `--TKwend  end @../src/test_parser.nit:49,2--4
+50		args.shift
+|           |     |--ACallExpr  @../src/test_parser.nit:50,2--11
 |           |     |  |--ACallExpr  @../src/test_parser.nit:50,2--5
 |           |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:50,2
 |           |     |  |  |--AQid  @../src/test_parser.nit:50,2--5
@@ -378,12 +378,12 @@ while not args.is_empty and args.first.chars.first == '-' do
 |           |     |  |--AQid  @../src/test_parser.nit:50,7--11
 |           |     |  |  `--TId  shift @../src/test_parser.nit:50,7--11
 |           |     |  `--AListExprs  @../src/test_parser.nit:50,11
-[37m51	end
-[m|           |     `--TKwend  end @../src/test_parser.nit:51,1--3
-[37m52	
+51	end
+|           |     `--TKwend  end @../src/test_parser.nit:51,1--3
+52	
 if (args.is_empty and not interactive) or need_help then
-[m[37m53	if (args.is_empty and not interactive) or need_help then
-[m|           `--AIfExpr  @../src/test_parser.nit:53,1--138,3
+53	if (args.is_empty and not interactive) or need_help then
+|           `--AIfExpr  @../src/test_parser.nit:53,1--138,3
 |              |--TKwif  if @../src/test_parser.nit:53,1--2
 |              |--AOrExpr  @../src/test_parser.nit:53,4--51
 |              |  |--AParExpr  @../src/test_parser.nit:53,4--38
@@ -414,8 +414,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |     |  `--TId  need_help @../src/test_parser.nit:53,43--51
 |              |     `--AListExprs  @../src/test_parser.nit:53,51
 |              |--TKwthen  then @../src/test_parser.nit:53,53--56
-[37m54		print("usage:")
-[m|              |--ABlockExpr  @../src/test_parser.nit:54,2--65,30
+54		print("usage:")
+|              |--ABlockExpr  @../src/test_parser.nit:54,2--65,30
 |              |  |--ACallExpr  @../src/test_parser.nit:54,2--16
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:54,2
 |              |  |  |--AQid  @../src/test_parser.nit:54,2--6
@@ -425,8 +425,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:54,8--15
 |              |  |     |  `--TString  \"usage:\" @../src/test_parser.nit:54,8--15
 |              |  |     `--TCpar  ) @../src/test_parser.nit:54,16
-[37m55		print("  test_parser [options]... <filename.nit>...")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:55,2--54
+55		print("  test_parser [options]... <filename.nit>...")
+|              |  |--ACallExpr  @../src/test_parser.nit:55,2--54
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:55,2
 |              |  |  |--AQid  @../src/test_parser.nit:55,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:55,2--6
@@ -435,8 +435,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:55,8--53
 |              |  |     |  `--TString  \"  test_parser [options]... <filename.nit>...\" @../src/test_parser.nit:55,8--53
 |              |  |     `--TCpar  ) @../src/test_parser.nit:55,54
-[37m56		print("  test_parser -e [options]... <text>...")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:56,2--49
+56		print("  test_parser -e [options]... <text>...")
+|              |  |--ACallExpr  @../src/test_parser.nit:56,2--49
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:56,2
 |              |  |  |--AQid  @../src/test_parser.nit:56,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:56,2--6
@@ -445,8 +445,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:56,8--48
 |              |  |     |  `--TString  \"  test_parser -e [options]... <text>...\" @../src/test_parser.nit:56,8--48
 |              |  |     `--TCpar  ) @../src/test_parser.nit:56,49
-[37m57		print("  test_parser -i [options]...")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:57,2--39
+57		print("  test_parser -i [options]...")
+|              |  |--ACallExpr  @../src/test_parser.nit:57,2--39
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:57,2
 |              |  |  |--AQid  @../src/test_parser.nit:57,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:57,2--6
@@ -455,8 +455,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:57,8--38
 |              |  |     |  `--TString  \"  test_parser -i [options]...\" @../src/test_parser.nit:57,8--38
 |              |  |     `--TCpar  ) @../src/test_parser.nit:57,39
-[37m58		print("options:")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:58,2--18
+58		print("options:")
+|              |  |--ACallExpr  @../src/test_parser.nit:58,2--18
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:58,2
 |              |  |  |--AQid  @../src/test_parser.nit:58,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:58,2--6
@@ -465,8 +465,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:58,8--17
 |              |  |     |  `--TString  \"options:\" @../src/test_parser.nit:58,8--17
 |              |  |     `--TCpar  ) @../src/test_parser.nit:58,18
-[37m59		print("  -n	do not print anything")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:59,2--36
+59		print("  -n	do not print anything")
+|              |  |--ACallExpr  @../src/test_parser.nit:59,2--36
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:59,2
 |              |  |  |--AQid  @../src/test_parser.nit:59,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:59,2--6
@@ -475,8 +475,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:59,8--35
 |              |  |     |  `--TString  \"  -n\tdo not print anything\" @../src/test_parser.nit:59,8--35
 |              |  |     `--TCpar  ) @../src/test_parser.nit:59,36
-[37m60		print("  -l	only lexer")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:60,2--25
+60		print("  -l	only lexer")
+|              |  |--ACallExpr  @../src/test_parser.nit:60,2--25
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:60,2
 |              |  |  |--AQid  @../src/test_parser.nit:60,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:60,2--6
@@ -485,8 +485,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:60,8--24
 |              |  |     |  `--TString  \"  -l\tonly lexer\" @../src/test_parser.nit:60,8--24
 |              |  |     `--TCpar  ) @../src/test_parser.nit:60,25
-[37m61		print("  -p	lexer and parser (default)")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:61,2--41
+61		print("  -p	lexer and parser (default)")
+|              |  |--ACallExpr  @../src/test_parser.nit:61,2--41
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:61,2
 |              |  |  |--AQid  @../src/test_parser.nit:61,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:61,2--6
@@ -495,8 +495,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:61,8--40
 |              |  |     |  `--TString  \"  -p\tlexer and parser (default)\" @../src/test_parser.nit:61,8--40
 |              |  |     `--TCpar  ) @../src/test_parser.nit:61,41
-[37m62		print("  -x	instead of a ascii tree, output a XML document")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:62,2--61
+62		print("  -x	instead of a ascii tree, output a XML document")
+|              |  |--ACallExpr  @../src/test_parser.nit:62,2--61
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:62,2
 |              |  |  |--AQid  @../src/test_parser.nit:62,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:62,2--6
@@ -505,8 +505,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:62,8--60
 |              |  |     |  `--TString  \"  -x\tinstead of a ascii tree, output a XML document\" @../src/test_parser.nit:62,8--60
 |              |  |     `--TCpar  ) @../src/test_parser.nit:62,61
-[37m63		print("  -e	instead on files, each argument is a content to parse")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:63,2--68
+63		print("  -e	instead on files, each argument is a content to parse")
+|              |  |--ACallExpr  @../src/test_parser.nit:63,2--68
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:63,2
 |              |  |  |--AQid  @../src/test_parser.nit:63,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:63,2--6
@@ -515,8 +515,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:63,8--67
 |              |  |     |  `--TString  \"  -e\tinstead on files, each argument is a content to parse\" @../src/test_parser.nit:63,8--67
 |              |  |     `--TCpar  ) @../src/test_parser.nit:63,68
-[37m64		print("  -i	tree to parse are read interactively")
-[m|              |  |--ACallExpr  @../src/test_parser.nit:64,2--51
+64		print("  -i	tree to parse are read interactively")
+|              |  |--ACallExpr  @../src/test_parser.nit:64,2--51
 |              |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:64,2
 |              |  |  |--AQid  @../src/test_parser.nit:64,2--6
 |              |  |  |  `--TId  print @../src/test_parser.nit:64,2--6
@@ -525,8 +525,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |  |     |--AStringExpr  @../src/test_parser.nit:64,8--50
 |              |  |     |  `--TString  \"  -i\ttree to parse are read interactively\" @../src/test_parser.nit:64,8--50
 |              |  |     `--TCpar  ) @../src/test_parser.nit:64,51
-[37m65		print("  -h	print this help")
-[m|              |  `--ACallExpr  @../src/test_parser.nit:65,2--30
+65		print("  -h	print this help")
+|              |  `--ACallExpr  @../src/test_parser.nit:65,2--30
 |              |     |--AImplicitSelfExpr  @../src/test_parser.nit:65,2
 |              |     |--AQid  @../src/test_parser.nit:65,2--6
 |              |     |  `--TId  print @../src/test_parser.nit:65,2--6
@@ -535,8 +535,8 @@ if (args.is_empty and not interactive) or need_help then
 |              |        |--AStringExpr  @../src/test_parser.nit:65,8--29
 |              |        |  `--TString  \"  -h\tprint this help\" @../src/test_parser.nit:65,8--29
 |              |        `--TCpar  ) @../src/test_parser.nit:65,30
-[37m66	else if interactive then
-[m|              |--TKwelse  else @../src/test_parser.nit:66,1--4
+66	else if interactive then
+|              |--TKwelse  else @../src/test_parser.nit:66,1--4
 |              `--AIfExpr  @../src/test_parser.nit:66,6--138,3
 |                 |--TKwif  if @../src/test_parser.nit:66,6--7
 |                 |--ACallExpr  @../src/test_parser.nit:66,9--19
@@ -545,8 +545,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |  `--TId  interactive @../src/test_parser.nit:66,9--19
 |                 |  `--AListExprs  @../src/test_parser.nit:66,19
 |                 |--TKwthen  then @../src/test_parser.nit:66,21--24
-[37m67		if only_lexer then
-[m|                 |--ABlockExpr  @../src/test_parser.nit:67,2--100,4
+67		if only_lexer then
+|                 |--ABlockExpr  @../src/test_parser.nit:67,2--100,4
 |                 |  |--AIfExpr  @../src/test_parser.nit:67,2--76,4
 |                 |  |  |--TKwif  if @../src/test_parser.nit:67,2--3
 |                 |  |  |--ACallExpr  @../src/test_parser.nit:67,5--14
@@ -555,8 +555,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |  |  |  `--TId  only_lexer @../src/test_parser.nit:67,5--14
 |                 |  |  |  `--AListExprs  @../src/test_parser.nit:67,14
 |                 |  |  |--TKwthen  then @../src/test_parser.nit:67,16--19
-[37m68			print "Error: -l and -i are incompatible"
-[m|                 |  |  |--ABlockExpr  @../src/test_parser.nit:68,3--69,8
+68			print "Error: -l and -i are incompatible"
+|                 |  |  |--ABlockExpr  @../src/test_parser.nit:68,3--69,8
 |                 |  |  |  |--ACallExpr  @../src/test_parser.nit:68,3--43
 |                 |  |  |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:68,3
 |                 |  |  |  |  |--AQid  @../src/test_parser.nit:68,3--7
@@ -564,16 +564,16 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |  |  |  `--AListExprs  @../src/test_parser.nit:68,9--43
 |                 |  |  |  |     `--AStringExpr  @../src/test_parser.nit:68,9--43
 |                 |  |  |  |        `--TString  \"Error: -l and -i are incompatible\" @../src/test_parser.nit:68,9--43
-[37m69			exit 1
-[m|                 |  |  |  `--ACallExpr  @../src/test_parser.nit:69,3--8
+69			exit 1
+|                 |  |  |  `--ACallExpr  @../src/test_parser.nit:69,3--8
 |                 |  |  |     |--AImplicitSelfExpr  @../src/test_parser.nit:69,3
 |                 |  |  |     |--AQid  @../src/test_parser.nit:69,3--6
 |                 |  |  |     |  `--TId  exit @../src/test_parser.nit:69,3--6
 |                 |  |  |     `--AListExprs  @../src/test_parser.nit:69,8
 |                 |  |  |        `--AIntegerExpr  @../src/test_parser.nit:69,8
 |                 |  |  |           `--TInteger  1 @../src/test_parser.nit:69,8
-[37m70		else if no_file then
-[m|                 |  |  |--TKwelse  else @../src/test_parser.nit:70,2--5
+70		else if no_file then
+|                 |  |  |--TKwelse  else @../src/test_parser.nit:70,2--5
 |                 |  |  `--AIfExpr  @../src/test_parser.nit:70,7--76,4
 |                 |  |     |--TKwif  if @../src/test_parser.nit:70,7--8
 |                 |  |     |--ACallExpr  @../src/test_parser.nit:70,10--16
@@ -582,8 +582,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |     |  |  `--TId  no_file @../src/test_parser.nit:70,10--16
 |                 |  |     |  `--AListExprs  @../src/test_parser.nit:70,16
 |                 |  |     |--TKwthen  then @../src/test_parser.nit:70,18--21
-[37m71			print "Error: -e and -i are incompatible"
-[m|                 |  |     |--ABlockExpr  @../src/test_parser.nit:71,3--72,8
+71			print "Error: -e and -i are incompatible"
+|                 |  |     |--ABlockExpr  @../src/test_parser.nit:71,3--72,8
 |                 |  |     |  |--ACallExpr  @../src/test_parser.nit:71,3--43
 |                 |  |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:71,3
 |                 |  |     |  |  |--AQid  @../src/test_parser.nit:71,3--7
@@ -591,16 +591,16 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |     |  |  `--AListExprs  @../src/test_parser.nit:71,9--43
 |                 |  |     |  |     `--AStringExpr  @../src/test_parser.nit:71,9--43
 |                 |  |     |  |        `--TString  \"Error: -e and -i are incompatible\" @../src/test_parser.nit:71,9--43
-[37m72			exit 1
-[m|                 |  |     |  `--ACallExpr  @../src/test_parser.nit:72,3--8
+72			exit 1
+|                 |  |     |  `--ACallExpr  @../src/test_parser.nit:72,3--8
 |                 |  |     |     |--AImplicitSelfExpr  @../src/test_parser.nit:72,3
 |                 |  |     |     |--AQid  @../src/test_parser.nit:72,3--6
 |                 |  |     |     |  `--TId  exit @../src/test_parser.nit:72,3--6
 |                 |  |     |     `--AListExprs  @../src/test_parser.nit:72,8
 |                 |  |     |        `--AIntegerExpr  @../src/test_parser.nit:72,8
 |                 |  |     |           `--TInteger  1 @../src/test_parser.nit:72,8
-[37m73		else if not args.is_empty then
-[m|                 |  |     |--TKwelse  else @../src/test_parser.nit:73,2--5
+73		else if not args.is_empty then
+|                 |  |     |--TKwelse  else @../src/test_parser.nit:73,2--5
 |                 |  |     `--AIfExpr  @../src/test_parser.nit:73,7--76,4
 |                 |  |        |--TKwif  if @../src/test_parser.nit:73,7--8
 |                 |  |        |--ANotExpr  @../src/test_parser.nit:73,10--26
@@ -615,8 +615,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |        |     |  `--TId  is_empty @../src/test_parser.nit:73,19--26
 |                 |  |        |     `--AListExprs  @../src/test_parser.nit:73,26
 |                 |  |        |--TKwthen  then @../src/test_parser.nit:73,28--31
-[37m74			print "Error: -i works without arguments"
-[m|                 |  |        |--ABlockExpr  @../src/test_parser.nit:74,3--75,8
+74			print "Error: -i works without arguments"
+|                 |  |        |--ABlockExpr  @../src/test_parser.nit:74,3--75,8
 |                 |  |        |  |--ACallExpr  @../src/test_parser.nit:74,3--43
 |                 |  |        |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:74,3
 |                 |  |        |  |  |--AQid  @../src/test_parser.nit:74,3--7
@@ -624,21 +624,21 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |        |  |  `--AListExprs  @../src/test_parser.nit:74,9--43
 |                 |  |        |  |     `--AStringExpr  @../src/test_parser.nit:74,9--43
 |                 |  |        |  |        `--TString  \"Error: -i works without arguments\" @../src/test_parser.nit:74,9--43
-[37m75			exit 1
-[m|                 |  |        |  `--ACallExpr  @../src/test_parser.nit:75,3--8
+75			exit 1
+|                 |  |        |  `--ACallExpr  @../src/test_parser.nit:75,3--8
 |                 |  |        |     |--AImplicitSelfExpr  @../src/test_parser.nit:75,3
 |                 |  |        |     |--AQid  @../src/test_parser.nit:75,3--6
 |                 |  |        |     |  `--TId  exit @../src/test_parser.nit:75,3--6
 |                 |  |        |     `--AListExprs  @../src/test_parser.nit:75,8
 |                 |  |        |        `--AIntegerExpr  @../src/test_parser.nit:75,8
 |                 |  |        |           `--TInteger  1 @../src/test_parser.nit:75,8
-[37m76		end
-[m|                 |  |        `--ABlockExpr  @../src/test_parser.nit:76,2--4
+76		end
+|                 |  |        `--ABlockExpr  @../src/test_parser.nit:76,2--4
 |                 |  |           `--TKwend  end @../src/test_parser.nit:76,2--4
-[37m77	
+77	
 	var tc = new ToolContext
-[m[37m78		var tc = new ToolContext
-[m|                 |  |--AVardeclExpr  @../src/test_parser.nit:78,2--25
+78		var tc = new ToolContext
+|                 |  |--AVardeclExpr  @../src/test_parser.nit:78,2--25
 |                 |  |  |--TKwvar  var @../src/test_parser.nit:78,2--4
 |                 |  |  |--TId  tc @../src/test_parser.nit:78,6--7
 |                 |  |  |--TAssign  = @../src/test_parser.nit:78,9
@@ -648,13 +648,13 @@ if (args.is_empty and not interactive) or need_help then
 |                 |  |     |  `--AQclassid  @../src/test_parser.nit:78,15--25
 |                 |  |     |     `--TClassid  ToolContext @../src/test_parser.nit:78,15--25
 |                 |  |     `--AListExprs  @../src/test_parser.nit:78,25
-[37m79	
+79	
 	loop
-[m[37m80		loop
-[m|                 |  `--ALoopExpr  @../src/test_parser.nit:80,2--100,4
+80		loop
+|                 |  `--ALoopExpr  @../src/test_parser.nit:80,2--100,4
 |                 |     |--TKwloop  loop @../src/test_parser.nit:80,2--5
-[37m81			var n = tc.interactive_parse("-->")
-[m|                 |     `--ABlockExpr  @../src/test_parser.nit:81,3--100,4
+81			var n = tc.interactive_parse("-->")
+|                 |     `--ABlockExpr  @../src/test_parser.nit:81,3--100,4
 |                 |        |--AVardeclExpr  @../src/test_parser.nit:81,3--37
 |                 |        |  |--TKwvar  var @../src/test_parser.nit:81,3--5
 |                 |        |  |--TId  n @../src/test_parser.nit:81,7
@@ -672,8 +672,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |        |--AStringExpr  @../src/test_parser.nit:81,32--36
 |                 |        |        |  `--TString  \"-->\" @../src/test_parser.nit:81,32--36
 |                 |        |        `--TCpar  ) @../src/test_parser.nit:81,37
-[37m82			if n isa TString then
-[m|                 |        |--AIfExpr  @../src/test_parser.nit:82,3--90,5
+82			if n isa TString then
+|                 |        |--AIfExpr  @../src/test_parser.nit:82,3--90,5
 |                 |        |  |--TKwif  if @../src/test_parser.nit:82,3--4
 |                 |        |  |--AIsaExpr  @../src/test_parser.nit:82,6--18
 |                 |        |  |  |--ACallExpr  @../src/test_parser.nit:82,6
@@ -686,8 +686,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |     `--AQclassid  @../src/test_parser.nit:82,12--18
 |                 |        |  |        `--TClassid  TString @../src/test_parser.nit:82,12--18
 |                 |        |  |--TKwthen  then @../src/test_parser.nit:82,20--23
-[37m83				var s = n.text
-[m|                 |        |  |--ABlockExpr  @../src/test_parser.nit:83,4--89,11
+83				var s = n.text
+|                 |        |  |--ABlockExpr  @../src/test_parser.nit:83,4--89,11
 |                 |        |  |  |--AVardeclExpr  @../src/test_parser.nit:83,4--17
 |                 |        |  |  |  |--TKwvar  var @../src/test_parser.nit:83,4--6
 |                 |        |  |  |  |--TId  s @../src/test_parser.nit:83,8
@@ -701,8 +701,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |  |     |--AQid  @../src/test_parser.nit:83,14--17
 |                 |        |  |  |     |  `--TId  text @../src/test_parser.nit:83,14--17
 |                 |        |  |  |     `--AListExprs  @../src/test_parser.nit:83,17
-[37m84				if s == ":q" then
-[m|                 |        |  |  |--AIfExpr  @../src/test_parser.nit:84,4--88,6
+84				if s == ":q" then
+|                 |        |  |  |--AIfExpr  @../src/test_parser.nit:84,4--88,6
 |                 |        |  |  |  |--TKwif  if @../src/test_parser.nit:84,4--5
 |                 |        |  |  |  |--AEqExpr  @../src/test_parser.nit:84,7--15
 |                 |        |  |  |  |  |--ACallExpr  @../src/test_parser.nit:84,7
@@ -714,14 +714,14 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |  |  |  `--AStringExpr  @../src/test_parser.nit:84,12--15
 |                 |        |  |  |  |     `--TString  \":q\" @../src/test_parser.nit:84,12--15
 |                 |        |  |  |  |--TKwthen  then @../src/test_parser.nit:84,17--20
-[37m85					break
-[m|                 |        |  |  |  |--ABlockExpr  @../src/test_parser.nit:85,5--9
+85					break
+|                 |        |  |  |  |--ABlockExpr  @../src/test_parser.nit:85,5--9
 |                 |        |  |  |  |  `--ABreakExpr  @../src/test_parser.nit:85,5--9
 |                 |        |  |  |  |     `--TKwbreak  break @../src/test_parser.nit:85,5--9
-[37m86				else
-[m|                 |        |  |  |  |--TKwelse  else @../src/test_parser.nit:86,4--7
-[37m87					print "`:q` to quit"
-[m|                 |        |  |  |  `--ABlockExpr  @../src/test_parser.nit:87,5--88,6
+86				else
+|                 |        |  |  |  |--TKwelse  else @../src/test_parser.nit:86,4--7
+87					print "`:q` to quit"
+|                 |        |  |  |  `--ABlockExpr  @../src/test_parser.nit:87,5--88,6
 |                 |        |  |  |     |--ACallExpr  @../src/test_parser.nit:87,5--24
 |                 |        |  |  |     |  |--AImplicitSelfExpr  @../src/test_parser.nit:87,5
 |                 |        |  |  |     |  |--AQid  @../src/test_parser.nit:87,5--9
@@ -729,18 +729,18 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |  |     |  `--AListExprs  @../src/test_parser.nit:87,11--24
 |                 |        |  |  |     |     `--AStringExpr  @../src/test_parser.nit:87,11--24
 |                 |        |  |  |     |        `--TString  \"`:q` to quit\" @../src/test_parser.nit:87,11--24
-[37m88				end
-[m|                 |        |  |  |     `--TKwend  end @../src/test_parser.nit:88,4--6
-[37m89				continue
-[m|                 |        |  |  `--AContinueExpr  @../src/test_parser.nit:89,4--11
+88				end
+|                 |        |  |  |     `--TKwend  end @../src/test_parser.nit:88,4--6
+89				continue
+|                 |        |  |  `--AContinueExpr  @../src/test_parser.nit:89,4--11
 |                 |        |  |     `--TKwcontinue  continue @../src/test_parser.nit:89,4--11
-[37m90			end
-[m|                 |        |  `--ABlockExpr  @../src/test_parser.nit:90,3--5
+90			end
+|                 |        |  `--ABlockExpr  @../src/test_parser.nit:90,3--5
 |                 |        |     `--TKwend  end @../src/test_parser.nit:90,3--5
-[37m91	
+91	
 		if n isa AError then
-[m[37m92			if n isa AError then
-[m|                 |        |--AIfExpr  @../src/test_parser.nit:92,3--95,5
+92			if n isa AError then
+|                 |        |--AIfExpr  @../src/test_parser.nit:92,3--95,5
 |                 |        |  |--TKwif  if @../src/test_parser.nit:92,3--4
 |                 |        |  |--AIsaExpr  @../src/test_parser.nit:92,6--17
 |                 |        |  |  |--ACallExpr  @../src/test_parser.nit:92,6
@@ -753,8 +753,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |     `--AQclassid  @../src/test_parser.nit:92,12--17
 |                 |        |  |        `--TClassid  AError @../src/test_parser.nit:92,12--17
 |                 |        |  |--TKwthen  then @../src/test_parser.nit:92,19--22
-[37m93				print "{n.location.colored_line("0;31")}: {n.message}"
-[m|                 |        |  |--ABlockExpr  @../src/test_parser.nit:93,4--94,11
+93				print "{n.location.colored_line("0;31")}: {n.message}"
+|                 |        |  |--ABlockExpr  @../src/test_parser.nit:93,4--94,11
 |                 |        |  |  |--ACallExpr  @../src/test_parser.nit:93,4--57
 |                 |        |  |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:93,4
 |                 |        |  |  |  |--AQid  @../src/test_parser.nit:93,4--8
@@ -793,16 +793,16 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |  |        |  `--AListExprs  @../src/test_parser.nit:93,55
 |                 |        |  |  |        `--AEndStringExpr  @../src/test_parser.nit:93,56--57
 |                 |        |  |  |           `--TEndString  }\" @../src/test_parser.nit:93,56--57
-[37m94				continue
-[m|                 |        |  |  `--AContinueExpr  @../src/test_parser.nit:94,4--11
+94				continue
+|                 |        |  |  `--AContinueExpr  @../src/test_parser.nit:94,4--11
 |                 |        |  |     `--TKwcontinue  continue @../src/test_parser.nit:94,4--11
-[37m95			end
-[m|                 |        |  `--ABlockExpr  @../src/test_parser.nit:95,3--5
+95			end
+|                 |        |  `--ABlockExpr  @../src/test_parser.nit:95,3--5
 |                 |        |     `--TKwend  end @../src/test_parser.nit:95,3--5
-[37m96	
+96	
 		if not no_print then
-[m[37m97			if not no_print then
-[m|                 |        |--AIfExpr  @../src/test_parser.nit:97,3--99,5
+97			if not no_print then
+|                 |        |--AIfExpr  @../src/test_parser.nit:97,3--99,5
 |                 |        |  |--TKwif  if @../src/test_parser.nit:97,3--4
 |                 |        |  |--ANotExpr  @../src/test_parser.nit:97,6--17
 |                 |        |  |  |--TKwnot  not @../src/test_parser.nit:97,6--8
@@ -812,8 +812,8 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |     |  `--TId  no_print @../src/test_parser.nit:97,10--17
 |                 |        |  |     `--AListExprs  @../src/test_parser.nit:97,17
 |                 |        |  |--TKwthen  then @../src/test_parser.nit:97,19--22
-[37m98				n.dump_tree
-[m|                 |        |  |--ABlockExpr  @../src/test_parser.nit:98,4--14
+98				n.dump_tree
+|                 |        |  |--ABlockExpr  @../src/test_parser.nit:98,4--14
 |                 |        |  |  `--ACallExpr  @../src/test_parser.nit:98,4--14
 |                 |        |  |     |--ACallExpr  @../src/test_parser.nit:98,4
 |                 |        |  |     |  |--AImplicitSelfExpr  @../src/test_parser.nit:98,4
@@ -823,15 +823,15 @@ if (args.is_empty and not interactive) or need_help then
 |                 |        |  |     |--AQid  @../src/test_parser.nit:98,6--14
 |                 |        |  |     |  `--TId  dump_tree @../src/test_parser.nit:98,6--14
 |                 |        |  |     `--AListExprs  @../src/test_parser.nit:98,14
-[37m99			end
-[m|                 |        |  `--ABlockExpr  @../src/test_parser.nit:99,3--5
+99			end
+|                 |        |  `--ABlockExpr  @../src/test_parser.nit:99,3--5
 |                 |        |     `--TKwend  end @../src/test_parser.nit:99,3--5
-[37m100		end
-[m|                 |        `--TKwend  end @../src/test_parser.nit:100,2--4
-[37m101	else
-[m|                 |--TKwelse  else @../src/test_parser.nit:101,1--4
-[37m102		for a in args do
-[m|                 `--ABlockExpr  @../src/test_parser.nit:102,2--138,3
+100		end
+|                 |        `--TKwend  end @../src/test_parser.nit:100,2--4
+101	else
+|                 |--TKwelse  else @../src/test_parser.nit:101,1--4
+102		for a in args do
+|                 `--ABlockExpr  @../src/test_parser.nit:102,2--138,3
 |                    |--AForExpr  @../src/test_parser.nit:102,2--137,4
 |                    |  |--TKwfor  for @../src/test_parser.nit:102,2--4
 |                    |  |--AForGroup  @../src/test_parser.nit:102,6--14
@@ -843,13 +843,13 @@ if (args.is_empty and not interactive) or need_help then
 |                    |  |     |  `--TId  args @../src/test_parser.nit:102,11--14
 |                    |  |     `--AListExprs  @../src/test_parser.nit:102,14
 |                    |  |--TKwdo  do @../src/test_parser.nit:102,16--17
-[37m103			var source
-[m|                    |  `--ABlockExpr  @../src/test_parser.nit:103,3--137,4
+103			var source
+|                    |  `--ABlockExpr  @../src/test_parser.nit:103,3--137,4
 |                    |     |--AVardeclExpr  @../src/test_parser.nit:103,3--12
 |                    |     |  |--TKwvar  var @../src/test_parser.nit:103,3--5
 |                    |     |  `--TId  source @../src/test_parser.nit:103,7--12
-[37m104			if no_file then
-[m|                    |     |--AIfExpr  @../src/test_parser.nit:104,3--110,5
+104			if no_file then
+|                    |     |--AIfExpr  @../src/test_parser.nit:104,3--110,5
 |                    |     |  |--TKwif  if @../src/test_parser.nit:104,3--4
 |                    |     |  |--ACallExpr  @../src/test_parser.nit:104,6--12
 |                    |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:104,6
@@ -857,8 +857,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |  |  `--TId  no_file @../src/test_parser.nit:104,6--12
 |                    |     |  |  `--AListExprs  @../src/test_parser.nit:104,12
 |                    |     |  |--TKwthen  then @../src/test_parser.nit:104,14--17
-[37m105				source = new SourceFile.from_string("", a)
-[m|                    |     |  |--ABlockExpr  @../src/test_parser.nit:105,4--45
+105				source = new SourceFile.from_string("", a)
+|                    |     |  |--ABlockExpr  @../src/test_parser.nit:105,4--45
 |                    |     |  |  `--ACallAssignExpr  @../src/test_parser.nit:105,4--45
 |                    |     |  |     |--AImplicitSelfExpr  @../src/test_parser.nit:105,4
 |                    |     |  |     |--AQid  @../src/test_parser.nit:105,4--9
@@ -882,10 +882,10 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |           |  |  `--TId  a @../src/test_parser.nit:105,44
 |                    |     |  |           |  `--AListExprs  @../src/test_parser.nit:105,44
 |                    |     |  |           `--TCpar  ) @../src/test_parser.nit:105,45
-[37m106			else
-[m|                    |     |  |--TKwelse  else @../src/test_parser.nit:106,3--6
-[37m107				var f = new FileReader.open(a)
-[m|                    |     |  `--ABlockExpr  @../src/test_parser.nit:107,4--110,5
+106			else
+|                    |     |  |--TKwelse  else @../src/test_parser.nit:106,3--6
+107				var f = new FileReader.open(a)
+|                    |     |  `--ABlockExpr  @../src/test_parser.nit:107,4--110,5
 |                    |     |     |--AVardeclExpr  @../src/test_parser.nit:107,4--33
 |                    |     |     |  |--TKwvar  var @../src/test_parser.nit:107,4--6
 |                    |     |     |  |--TId  f @../src/test_parser.nit:107,8
@@ -905,8 +905,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |        |  |  `--TId  a @../src/test_parser.nit:107,32
 |                    |     |     |        |  `--AListExprs  @../src/test_parser.nit:107,32
 |                    |     |     |        `--TCpar  ) @../src/test_parser.nit:107,33
-[37m108				source = new SourceFile(a, f)
-[m|                    |     |     |--ACallAssignExpr  @../src/test_parser.nit:108,4--32
+108				source = new SourceFile(a, f)
+|                    |     |     |--ACallAssignExpr  @../src/test_parser.nit:108,4--32
 |                    |     |     |  |--AImplicitSelfExpr  @../src/test_parser.nit:108,4
 |                    |     |     |  |--AQid  @../src/test_parser.nit:108,4--9
 |                    |     |     |  |  `--TId  source @../src/test_parser.nit:108,4--9
@@ -930,8 +930,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |        |  |  `--TId  f @../src/test_parser.nit:108,31
 |                    |     |     |        |  `--AListExprs  @../src/test_parser.nit:108,31
 |                    |     |     |        `--TCpar  ) @../src/test_parser.nit:108,32
-[37m109				f.close
-[m|                    |     |     |--ACallExpr  @../src/test_parser.nit:109,4--10
+109				f.close
+|                    |     |     |--ACallExpr  @../src/test_parser.nit:109,4--10
 |                    |     |     |  |--ACallExpr  @../src/test_parser.nit:109,4
 |                    |     |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:109,4
 |                    |     |     |  |  |--AQid  @../src/test_parser.nit:109,4
@@ -940,10 +940,10 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |  |--AQid  @../src/test_parser.nit:109,6--10
 |                    |     |     |  |  `--TId  close @../src/test_parser.nit:109,6--10
 |                    |     |     |  `--AListExprs  @../src/test_parser.nit:109,10
-[37m110			end
-[m|                    |     |     `--TKwend  end @../src/test_parser.nit:110,3--5
-[37m111			var lexer = new Lexer(source)
-[m|                    |     |--AVardeclExpr  @../src/test_parser.nit:111,3--31
+110			end
+|                    |     |     `--TKwend  end @../src/test_parser.nit:110,3--5
+111			var lexer = new Lexer(source)
+|                    |     |--AVardeclExpr  @../src/test_parser.nit:111,3--31
 |                    |     |  |--TKwvar  var @../src/test_parser.nit:111,3--5
 |                    |     |  |--TId  lexer @../src/test_parser.nit:111,7--11
 |                    |     |  |--TAssign  = @../src/test_parser.nit:111,13
@@ -960,8 +960,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |        |  |  `--TId  source @../src/test_parser.nit:111,25--30
 |                    |     |        |  `--AListExprs  @../src/test_parser.nit:111,30
 |                    |     |        `--TCpar  ) @../src/test_parser.nit:111,31
-[37m112			if only_lexer then
-[m|                    |     |--AIfExpr  @../src/test_parser.nit:112,3--136,5
+112			if only_lexer then
+|                    |     |--AIfExpr  @../src/test_parser.nit:112,3--136,5
 |                    |     |  |--TKwif  if @../src/test_parser.nit:112,3--4
 |                    |     |  |--ACallExpr  @../src/test_parser.nit:112,6--15
 |                    |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:112,6
@@ -969,8 +969,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |  |  `--TId  only_lexer @../src/test_parser.nit:112,6--15
 |                    |     |  |  `--AListExprs  @../src/test_parser.nit:112,15
 |                    |     |  |--TKwthen  then @../src/test_parser.nit:112,17--20
-[37m113				var token = lexer.next
-[m|                    |     |  |--ABlockExpr  @../src/test_parser.nit:113,4--119,6
+113				var token = lexer.next
+|                    |     |  |--ABlockExpr  @../src/test_parser.nit:113,4--119,6
 |                    |     |  |  |--AVardeclExpr  @../src/test_parser.nit:113,4--25
 |                    |     |  |  |  |--TKwvar  var @../src/test_parser.nit:113,4--6
 |                    |     |  |  |  |--TId  token @../src/test_parser.nit:113,8--12
@@ -984,8 +984,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |  |     |--AQid  @../src/test_parser.nit:113,22--25
 |                    |     |  |  |     |  `--TId  next @../src/test_parser.nit:113,22--25
 |                    |     |  |  |     `--AListExprs  @../src/test_parser.nit:113,25
-[37m114				while not token isa EOF do
-[m|                    |     |  |  `--AWhileExpr  @../src/test_parser.nit:114,4--119,6
+114				while not token isa EOF do
+|                    |     |  |  `--AWhileExpr  @../src/test_parser.nit:114,4--119,6
 |                    |     |  |     |--TKwwhile  while @../src/test_parser.nit:114,4--8
 |                    |     |  |     |--ANotExpr  @../src/test_parser.nit:114,10--26
 |                    |     |  |     |  |--TKwnot  not @../src/test_parser.nit:114,10--12
@@ -1000,8 +1000,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |     |        `--AQclassid  @../src/test_parser.nit:114,24--26
 |                    |     |  |     |           `--TClassid  EOF @../src/test_parser.nit:114,24--26
 |                    |     |  |     |--TKwdo  do @../src/test_parser.nit:114,28--29
-[37m115					if not no_print then
-[m|                    |     |  |     `--ABlockExpr  @../src/test_parser.nit:115,5--119,6
+115					if not no_print then
+|                    |     |  |     `--ABlockExpr  @../src/test_parser.nit:115,5--119,6
 |                    |     |  |        |--AIfExpr  @../src/test_parser.nit:115,5--117,7
 |                    |     |  |        |  |--TKwif  if @../src/test_parser.nit:115,5--6
 |                    |     |  |        |  |--ANotExpr  @../src/test_parser.nit:115,8--19
@@ -1012,8 +1012,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |        |  |     |  `--TId  no_print @../src/test_parser.nit:115,12--19
 |                    |     |  |        |  |     `--AListExprs  @../src/test_parser.nit:115,19
 |                    |     |  |        |  |--TKwthen  then @../src/test_parser.nit:115,21--24
-[37m116						print("Read token at {token.location} text='{token.text}'")
-[m|                    |     |  |        |  |--ABlockExpr  @../src/test_parser.nit:116,6--64
+116						print("Read token at {token.location} text='{token.text}'")
+|                    |     |  |        |  |--ABlockExpr  @../src/test_parser.nit:116,6--64
 |                    |     |  |        |  |  `--ACallExpr  @../src/test_parser.nit:116,6--64
 |                    |     |  |        |  |     |--AImplicitSelfExpr  @../src/test_parser.nit:116,6
 |                    |     |  |        |  |     |--AQid  @../src/test_parser.nit:116,6--10
@@ -1046,11 +1046,11 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |        |  |        |  `--AEndStringExpr  @../src/test_parser.nit:116,61--63
 |                    |     |  |        |  |        |     `--TEndString  }\'\" @../src/test_parser.nit:116,61--63
 |                    |     |  |        |  |        `--TCpar  ) @../src/test_parser.nit:116,64
-[37m117					end
-[m|                    |     |  |        |  `--ABlockExpr  @../src/test_parser.nit:117,5--7
+117					end
+|                    |     |  |        |  `--ABlockExpr  @../src/test_parser.nit:117,5--7
 |                    |     |  |        |     `--TKwend  end @../src/test_parser.nit:117,5--7
-[37m118					token = lexer.next
-[m|                    |     |  |        |--ACallAssignExpr  @../src/test_parser.nit:118,5--22
+118					token = lexer.next
+|                    |     |  |        |--ACallAssignExpr  @../src/test_parser.nit:118,5--22
 |                    |     |  |        |  |--AImplicitSelfExpr  @../src/test_parser.nit:118,5
 |                    |     |  |        |  |--AQid  @../src/test_parser.nit:118,5--9
 |                    |     |  |        |  |  `--TId  token @../src/test_parser.nit:118,5--9
@@ -1065,12 +1065,12 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |  |        |     |--AQid  @../src/test_parser.nit:118,19--22
 |                    |     |  |        |     |  `--TId  next @../src/test_parser.nit:118,19--22
 |                    |     |  |        |     `--AListExprs  @../src/test_parser.nit:118,22
-[37m119				end
-[m|                    |     |  |        `--TKwend  end @../src/test_parser.nit:119,4--6
-[37m120			else
-[m|                    |     |  |--TKwelse  else @../src/test_parser.nit:120,3--6
-[37m121				var parser = new Parser(lexer)
-[m|                    |     |  `--ABlockExpr  @../src/test_parser.nit:121,4--136,5
+119				end
+|                    |     |  |        `--TKwend  end @../src/test_parser.nit:119,4--6
+120			else
+|                    |     |  |--TKwelse  else @../src/test_parser.nit:120,3--6
+121				var parser = new Parser(lexer)
+|                    |     |  `--ABlockExpr  @../src/test_parser.nit:121,4--136,5
 |                    |     |     |--AVardeclExpr  @../src/test_parser.nit:121,4--33
 |                    |     |     |  |--TKwvar  var @../src/test_parser.nit:121,4--6
 |                    |     |     |  |--TId  parser @../src/test_parser.nit:121,8--13
@@ -1088,8 +1088,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |        |  |  `--TId  lexer @../src/test_parser.nit:121,28--32
 |                    |     |     |        |  `--AListExprs  @../src/test_parser.nit:121,32
 |                    |     |     |        `--TCpar  ) @../src/test_parser.nit:121,33
-[37m122				var tree = parser.parse
-[m|                    |     |     |--AVardeclExpr  @../src/test_parser.nit:122,4--26
+122				var tree = parser.parse
+|                    |     |     |--AVardeclExpr  @../src/test_parser.nit:122,4--26
 |                    |     |     |  |--TKwvar  var @../src/test_parser.nit:122,4--6
 |                    |     |     |  |--TId  tree @../src/test_parser.nit:122,8--11
 |                    |     |     |  |--TAssign  = @../src/test_parser.nit:122,13
@@ -1102,10 +1102,10 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |     |--AQid  @../src/test_parser.nit:122,22--26
 |                    |     |     |     |  `--TId  parse @../src/test_parser.nit:122,22--26
 |                    |     |     |     `--AListExprs  @../src/test_parser.nit:122,26
-[37m123	
+123	
 			var error = tree.n_eof
-[m[37m124				var error = tree.n_eof
-[m|                    |     |     |--AVardeclExpr  @../src/test_parser.nit:124,4--25
+124				var error = tree.n_eof
+|                    |     |     |--AVardeclExpr  @../src/test_parser.nit:124,4--25
 |                    |     |     |  |--TKwvar  var @../src/test_parser.nit:124,4--6
 |                    |     |     |  |--TId  error @../src/test_parser.nit:124,8--12
 |                    |     |     |  |--TAssign  = @../src/test_parser.nit:124,14
@@ -1118,8 +1118,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |     |--AQid  @../src/test_parser.nit:124,21--25
 |                    |     |     |     |  `--TId  n_eof @../src/test_parser.nit:124,21--25
 |                    |     |     |     `--AListExprs  @../src/test_parser.nit:124,25
-[37m125				if error isa AError then
-[m|                    |     |     |--AIfExpr  @../src/test_parser.nit:125,4--128,6
+125				if error isa AError then
+|                    |     |     |--AIfExpr  @../src/test_parser.nit:125,4--128,6
 |                    |     |     |  |--TKwif  if @../src/test_parser.nit:125,4--5
 |                    |     |     |  |--AIsaExpr  @../src/test_parser.nit:125,7--22
 |                    |     |     |  |  |--ACallExpr  @../src/test_parser.nit:125,7--11
@@ -1132,8 +1132,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |  |     `--AQclassid  @../src/test_parser.nit:125,17--22
 |                    |     |     |  |        `--TClassid  AError @../src/test_parser.nit:125,17--22
 |                    |     |     |  |--TKwthen  then @../src/test_parser.nit:125,24--27
-[37m126					print("Error at {error.location}:\n\t{error.message}")
-[m|                    |     |     |  |--ABlockExpr  @../src/test_parser.nit:126,5--127,10
+126					print("Error at {error.location}:\n\t{error.message}")
+|                    |     |     |  |--ABlockExpr  @../src/test_parser.nit:126,5--127,10
 |                    |     |     |  |  |--ACallExpr  @../src/test_parser.nit:126,5--58
 |                    |     |     |  |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:126,5
 |                    |     |     |  |  |  |--AQid  @../src/test_parser.nit:126,5--9
@@ -1166,16 +1166,16 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |  |  |     |  `--AEndStringExpr  @../src/test_parser.nit:126,56--57
 |                    |     |     |  |  |     |     `--TEndString  }\" @../src/test_parser.nit:126,56--57
 |                    |     |     |  |  |     `--TCpar  ) @../src/test_parser.nit:126,58
-[37m127					return
-[m|                    |     |     |  |  `--AReturnExpr  @../src/test_parser.nit:127,5--10
+127					return
+|                    |     |     |  |  `--AReturnExpr  @../src/test_parser.nit:127,5--10
 |                    |     |     |  |     `--TKwreturn  return @../src/test_parser.nit:127,5--10
-[37m128				end
-[m|                    |     |     |  `--ABlockExpr  @../src/test_parser.nit:128,4--6
+128				end
+|                    |     |     |  `--ABlockExpr  @../src/test_parser.nit:128,4--6
 |                    |     |     |     `--TKwend  end @../src/test_parser.nit:128,4--6
-[37m129	
+129	
 			if xml then
-[m[37m130				if xml then
-[m|                    |     |     |--AIfExpr  @../src/test_parser.nit:130,4--135,6
+130				if xml then
+|                    |     |     |--AIfExpr  @../src/test_parser.nit:130,4--135,6
 |                    |     |     |  |--TKwif  if @../src/test_parser.nit:130,4--5
 |                    |     |     |  |--ACallExpr  @../src/test_parser.nit:130,7--9
 |                    |     |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:130,7
@@ -1183,8 +1183,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |  |  |  `--TId  xml @../src/test_parser.nit:130,7--9
 |                    |     |     |  |  `--AListExprs  @../src/test_parser.nit:130,9
 |                    |     |     |  |--TKwthen  then @../src/test_parser.nit:130,11--14
-[37m131					tree.parentize_tokens
-[m|                    |     |     |  |--ABlockExpr  @../src/test_parser.nit:131,5--132,32
+131					tree.parentize_tokens
+|                    |     |     |  |--ABlockExpr  @../src/test_parser.nit:131,5--132,32
 |                    |     |     |  |  |--ACallExpr  @../src/test_parser.nit:131,5--25
 |                    |     |     |  |  |  |--ACallExpr  @../src/test_parser.nit:131,5--8
 |                    |     |     |  |  |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:131,5
@@ -1194,8 +1194,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |  |  |  |--AQid  @../src/test_parser.nit:131,10--25
 |                    |     |     |  |  |  |  `--TId  parentize_tokens @../src/test_parser.nit:131,10--25
 |                    |     |     |  |  |  `--AListExprs  @../src/test_parser.nit:131,25
-[37m132					tree.to_xml.write_to(stdout)
-[m|                    |     |     |  |  `--ACallExpr  @../src/test_parser.nit:132,5--32
+132					tree.to_xml.write_to(stdout)
+|                    |     |     |  |  `--ACallExpr  @../src/test_parser.nit:132,5--32
 |                    |     |     |  |     |--ACallExpr  @../src/test_parser.nit:132,5--15
 |                    |     |     |  |     |  |--ACallExpr  @../src/test_parser.nit:132,5--8
 |                    |     |     |  |     |  |  |--AImplicitSelfExpr  @../src/test_parser.nit:132,5
@@ -1215,8 +1215,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |  |        |  |  `--TId  stdout @../src/test_parser.nit:132,26--31
 |                    |     |     |  |        |  `--AListExprs  @../src/test_parser.nit:132,31
 |                    |     |     |  |        `--TCpar  ) @../src/test_parser.nit:132,32
-[37m133				else if not no_print then
-[m|                    |     |     |  |--TKwelse  else @../src/test_parser.nit:133,4--7
+133				else if not no_print then
+|                    |     |     |  |--TKwelse  else @../src/test_parser.nit:133,4--7
 |                    |     |     |  `--AIfExpr  @../src/test_parser.nit:133,9--135,6
 |                    |     |     |     |--TKwif  if @../src/test_parser.nit:133,9--10
 |                    |     |     |     |--ANotExpr  @../src/test_parser.nit:133,12--23
@@ -1227,8 +1227,8 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |     |     |  `--TId  no_print @../src/test_parser.nit:133,16--23
 |                    |     |     |     |     `--AListExprs  @../src/test_parser.nit:133,23
 |                    |     |     |     |--TKwthen  then @../src/test_parser.nit:133,25--28
-[37m134					tree.dump_tree
-[m|                    |     |     |     |--ABlockExpr  @../src/test_parser.nit:134,5--18
+134					tree.dump_tree
+|                    |     |     |     |--ABlockExpr  @../src/test_parser.nit:134,5--18
 |                    |     |     |     |  `--ACallExpr  @../src/test_parser.nit:134,5--18
 |                    |     |     |     |     |--ACallExpr  @../src/test_parser.nit:134,5--8
 |                    |     |     |     |     |  |--AImplicitSelfExpr  @../src/test_parser.nit:134,5
@@ -1238,14 +1238,14 @@ if (args.is_empty and not interactive) or need_help then
 |                    |     |     |     |     |--AQid  @../src/test_parser.nit:134,10--18
 |                    |     |     |     |     |  `--TId  dump_tree @../src/test_parser.nit:134,10--18
 |                    |     |     |     |     `--AListExprs  @../src/test_parser.nit:134,18
-[37m135				end
-[m|                    |     |     |     `--ABlockExpr  @../src/test_parser.nit:135,4--6
+135				end
+|                    |     |     |     `--ABlockExpr  @../src/test_parser.nit:135,4--6
 |                    |     |     |        `--TKwend  end @../src/test_parser.nit:135,4--6
-[37m136			end
-[m|                    |     |     `--TKwend  end @../src/test_parser.nit:136,3--5
-[37m137		end
-[m|                    |     `--TKwend  end @../src/test_parser.nit:137,2--4
-[37m138	end
-[m|                    `--TKwend  end @../src/test_parser.nit:138,1--3
-[37m139	
-[m`--EOF   @../src/test_parser.nit:139,1
+136			end
+|                    |     |     `--TKwend  end @../src/test_parser.nit:136,3--5
+137		end
+|                    |     `--TKwend  end @../src/test_parser.nit:137,2--4
+138	end
+|                    `--TKwend  end @../src/test_parser.nit:138,1--3
+139	
+`--EOF   @../src/test_parser.nit:139,1

@@ -1,9 +1,9 @@
 
 [Client] curl -s localhost:*****/
-GET / [32m200[m (0.0s)
+GET / 200 (0.0s)
 Hello World!
 [Client] curl -s localhost:*****/about
-GET /about [33m404[m (0.0s)
+GET /about 404 (0.0s)
 		<!DOCTYPE html>
 		<html>
 		<head>
