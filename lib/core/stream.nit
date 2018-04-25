@@ -109,32 +109,71 @@ end
 abstract class Reader
 	super Stream
 
+	# Read a byte directly from the underlying stream, without
+	# considering any eventual buffer
+	protected fun raw_read_byte: Int is abstract
+
+	# Read at most `max` bytes from the underlying stream into `buf`,
+	# without considering any eventual buffer
+	#
+	# Returns how many bytes were read
+	protected fun raw_read_bytes(buf: CString, max: Int): Int do
+		var rd = 0
+		for i in [0 .. max[ do
+			var b = raw_read_byte
+			if b < 0 then break
+			buf[i] = b.to_b
+			rd += 1
+		end
+		return rd
+	end
+
 	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
 
 	# Reads a byte. Returns a negative value on error
-	fun read_byte: Int is abstract
+	fun read_byte: Int do
+		var llen = lookahead_length
+		if llen == 0 then return raw_read_byte
+		var lk = lookahead
+		var b = lk[0].to_i
+		if llen == 1 then
+			lookahead_length = 0
+		else
+			lk.lshift(1, llen - 1, 1)
+			lookahead_length -= 1
+		end
+		return b
+	end
 
 	# Reads a String of at most `i` length
-	fun read(i: Int): String do return read_bytes(i).to_s
+	fun read(i: Int): String do
+		var cs = new CString(i)
+		var rd = read_bytes_to_cstring(cs, i)
+		return codec.decode_string(cs, rd)
+	end
 
-	# Read at most i bytes
-	#
-	# If i <= 0, an empty buffer will be returned
-	fun read_bytes(i: Int): Bytes
-	do
-		if last_error != null or i <= 0 then return new Bytes.empty
-		var s = new CString(i)
-		var buf = new Bytes(s, 0, i)
-		while i > 0 and not eof do
-			var c = read_byte
-			if c < 0 then
-				continue
-			end
-			buf.add c.to_b
-			i -= 1
+	# Reads up to `max` bytes from source
+	fun read_bytes(max: Int): Bytes do
+		var cs = new CString(max)
+		var rd = read_bytes_to_cstring(cs, max)
+		return new Bytes(cs, rd, max)
+	end
+
+	# Reads up to `max` bytes from source and stores them in `bytes`
+	fun read_bytes_to_cstring(bytes: CString, max: Int): Int do
+		var llen = lookahead_length
+		if llen == 0 then return raw_read_bytes(bytes, max)
+		var rd = max.min(llen)
+		var lk = lookahead
+		lk.copy_to(bytes, rd, 0, 0)
+		if rd < llen then
+			lk.lshift(rd, llen - rd, rd)
+			lookahead_length -= rd
+		else
+			lookahead_length = 0
 		end
-		return buf
+		return rd + raw_read_bytes(bytes, max - rd)
 	end
 
 	# Read a string until the end of the line.
@@ -249,10 +288,10 @@ abstract class Reader
 	do
 		if last_error != null then return new Bytes.empty
 		var s = new Bytes.empty
+		var buf = new CString(4096)
 		while not eof do
-			var c = read_byte
-			if c < 0 then continue
-			s.add(c.to_b)
+			var rd = read_bytes_to_cstring(buf, 4096)
+			s.append_ns(buf, rd)
 		end
 		return s
 	end
@@ -550,12 +589,11 @@ abstract class BufferedReader
 		return bf
 	end
 
-	redef fun read_bytes(i)
+	redef fun read_bytes_to_cstring(buf, i)
 	do
-		if last_error != null then return new Bytes.empty
-		var buf = new Bytes.with_capacity(i)
-		read_intern(i, buf)
-		return buf
+		if last_error != null then return 0
+		var bbf = new Bytes(buf, 0, i)
+		return read_intern(i, bbf)
 	end
 
 	# Fills `buf` with at most `i` bytes read from `self`
@@ -817,6 +855,15 @@ class BytesReader
 		var res = bytes.slice_from(cursor)
 		cursor = bytes.length
 		return res
+	end
+
+	redef fun raw_read_bytes(ns, max) do
+		if cursor >= bytes.length then return 0
+
+		var copy = max.min(bytes.length - cursor)
+		bytes.items.copy_to(ns, copy, cursor, 0)
+		cursor += copy
+		return copy
 	end
 
 	redef fun eof do return cursor >= bytes.length
