@@ -163,7 +163,7 @@ class WebsocketConnection
 		while not fin do
 			var fst_byte = client.read_byte
 			var snd_byte = client.read_byte
-			if fst_byte == null or snd_byte == null then
+			if fst_byte < 0 or snd_byte < 0 then
 				last_error = new IOError("Error: bad frame")
 				client.close
 				return
@@ -181,9 +181,9 @@ class WebsocketConnection
 			#	%x9 denotes a ping
 			#	%xA denotes a pong
 			#	%xB-F are reserved for further control frames
-			var fin_flag = fst_byte & 0b1000_0000u8
+			var fin_flag = fst_byte & 0b1000_0000
 			if fin_flag != 0 then fin = true
-			var opcode = fst_byte & 0b0000_1111u8
+			var opcode = fst_byte & 0b0000_1111
 			if opcode == 9 then
 				bf.add(138u8)
 				bf.add(0u8)
@@ -199,8 +199,8 @@ class WebsocketConnection
 			# |(mask - 1bit)|(payload length - 7 bits)
 			# As specified, if the payload length is 126 or 127
 			# The next 16 or 64 bits contain an extended payload length
-			var mask_flag = snd_byte & 0b1000_0000u8
-			var len = (snd_byte & 0b0111_1111u8).to_i
+			var mask_flag = snd_byte & 0b1000_0000
+			var len = snd_byte & 0b0111_1111
 			var payload_ext_len = 0
 			if len == 126 then
 				var tmp = client.read_bytes(2)

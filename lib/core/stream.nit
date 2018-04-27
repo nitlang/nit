@@ -71,24 +71,27 @@ abstract class Reader
 	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
 
-	# Reads a byte. Returns `null` on EOF or timeout
-	fun read_byte: nullable Byte is abstract
+	# Reads a byte. Returns a negative value on error
+	fun read_byte: Int is abstract
 
 	# Reads a String of at most `i` length
 	fun read(i: Int): String do return read_bytes(i).to_s
 
 	# Read at most i bytes
+	#
+	# If i <= 0, an empty buffer will be returned
 	fun read_bytes(i: Int): Bytes
 	do
-		if last_error != null then return new Bytes.empty
+		if last_error != null or i <= 0 then return new Bytes.empty
 		var s = new CString(i)
-		var buf = new Bytes(s, 0, 0)
+		var buf = new Bytes(s, 0, i)
 		while i > 0 and not eof do
 			var c = read_byte
-			if c != null then
-				buf.add c
-				i -= 1
+			if c < 0 then
+				continue
 			end
+			buf.add c.to_b
+			i -= 1
 		end
 		return buf
 	end
@@ -229,7 +232,8 @@ abstract class Reader
 		var s = new Bytes.empty
 		while not eof do
 			var c = read_byte
-			if c != null then s.add(c)
+			if c < 0 then continue
+			s.add(c.to_b)
 		end
 		return s
 	end
@@ -478,14 +482,14 @@ abstract class BufferedReader
 
 	redef fun read_byte
 	do
-		if last_error != null then return null
+		if last_error != null then return -1
 		if eof then
 			last_error = new IOError("Stream has reached eof")
-			return null
+			return -1
 		end
 		var c = _buffer[_buffer_pos]
 		_buffer_pos += 1
-		return c
+		return c.to_i
 	end
 
 	# Resets the internal buffer
@@ -757,8 +761,8 @@ end
 # ~~~
 # var reader = new BytesReader(b"a…b")
 # assert reader.read_char == 'a'
-# assert reader.read_byte == 0xE2u8 # 1st byte of '…'
-# assert reader.read_byte == 0x80u8 # 2nd byte of '…'
+# assert reader.read_byte == 0xE2 # 1st byte of '…'
+# assert reader.read_byte == 0x80 # 2nd byte of '…'
 # assert reader.read_char == '�' # Reads the last byte as an invalid char
 # assert reader.read_all_bytes == b"b"
 # ~~~
@@ -783,11 +787,11 @@ class BytesReader
 
 	redef fun read_byte
 	do
-		if cursor >= bytes.length then return null
+		if cursor >= bytes.length then return -1
 
 		var c = bytes[cursor]
 		cursor += 1
-		return c
+		return c.to_i
 	end
 
 	redef fun close do bytes = new Bytes.empty
@@ -810,8 +814,8 @@ end
 # ~~~
 # var reader = new StringReader("a…b")
 # assert reader.read_char == 'a'
-# assert reader.read_byte == 0xE2u8 # 1st byte of '…'
-# assert reader.read_byte == 0x80u8 # 2nd byte of '…'
+# assert reader.read_byte == 0xE2 # 1st byte of '…'
+# assert reader.read_byte == 0x80 # 2nd byte of '…'
 # assert reader.read_char == '�' # Reads the last byte as an invalid char
 # assert reader.read_all == "b"
 # ~~~
