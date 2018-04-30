@@ -70,83 +70,58 @@ redef class Reader
 		else if typ == 0xC3 then
 			return true
 
-		else if typ == 0xCC then
-			# uint8
-			var val = read_byte
-			if val < 0 then return 0
-			return val
-		else if typ == 0xCD then
-			# uint16
-			return read_bytes(2).to_i
-		else if typ == 0xCE then
-			# uint32
-			return read_bytes(4).to_i
-		else if typ == 0xCF then
-			# uint64
-			return read_bytes(8).to_i
-		else if typ == 0xD0 then
-			# int8
-			return read_bytes(1).to_i(true)
-		else if typ == 0xD1 then
-			# int16
-			return read_bytes(2).to_i(true)
-		else if typ == 0xD2 then
-			# int32
-			return read_bytes(4).to_i(true)
-		else if typ == 0xD3 then
-			# int64
-			return read_int64
+		else if typ >= 0xCC and typ <= 0xCF then
+			# uint8, 16, 32 and 64
+			var len = 1 << (typ - 0xCC)
+			return read_bytes(len).to_i
+
+		else if typ >= 0xD0 and typ <= 0xD3 then
+			# int8, 16, 32 and 64
+			var len = 1 << (typ - 0xD0)
+			return read_bytes(len).to_i(true)
 
 		else if typ == 0xCA then
 			return read_float
 		else if typ == 0xCB then
 			return read_double
 
-		else if typ == 0xD9 then
-			# str8
-			var len = read_byte
+		else if typ >= 0xD9 and typ <= 0xDB then
+			# str8, 16 and 32
+			var len_ln = 1 << (typ - 0xD9)
+			var bf = read_bytes(len_ln)
+			var len = bf.to_i
 			if len < 0 then return null
-			return read_bytes(len.to_i).to_s
-		else if typ == 0xDA then
-			# str16
-			var len = read_bytes(2)
-			return read_bytes(len.to_i).to_s
-		else if typ == 0xDB then
-			# str32
-			var len = read_bytes(4)
-			return read_bytes(len.to_i).to_s
+			var rd_buf = read_bytes(len)
+			if rd_buf.length != len then
+				# Bad formatted message.
+				return null
+			end
+			return rd_buf.to_s
 
-		else if typ == 0xC4 then
-			# bin8
-			var len = read_byte
+		else if typ >= 0xC4 and typ <= 0xC6 then
+			# bin8, 16 or 32
+			var len_ln = 1 << (typ - 0xC4)
+			var bf = read_bytes(len_ln)
+			var len = bf.to_i
 			if len < 0 then return null
-			return read_bytes(len.to_i)
-		else if typ == 0xC5 then
-			# bin16
-			var len = read_bytes(2)
-			return read_bytes(len.to_i)
-		else if typ == 0xC6 then
-			# bin32
-			var len = read_bytes(4)
-			return read_bytes(len.to_i)
+			var rd_buf = read_bytes(len)
+			if rd_buf.length != len then
+				# Bad formatted message.
+				return null
+			end
+			return rd_buf
 
-		else if typ == 0xDC then
-			# array16
-			var len = read_bytes(2)
-			return read_msgpack_array_data(len.to_i)
-		else if typ == 0xDD then
-			# array32
-			var len = read_bytes(4)
-			return read_msgpack_array_data(len.to_i)
+		else if typ == 0xDC or typ == 0xDD then
+			# array16 and array32
+			var len_ln = 2 << (typ - 0xDC)
+			var lenbuf = read_bytes(len_ln)
+			return read_msgpack_array_data(lenbuf.to_i)
 
-		else if typ == 0xDE then
-			# map16
-			var len = read_bytes(2)
-			return read_msgpack_map_data(len.to_i)
-		else if typ == 0xDF then
-			# map32
-			var len = read_bytes(4)
-			return read_msgpack_map_data(len.to_i)
+		else if typ == 0xDE or typ == 0xDF then
+			# map16 and map32
+			var len_ln = 2 << (typ - 0xDE)
+			var lenbuf = read_bytes(len_ln)
+			return read_msgpack_map_data(lenbuf.to_i)
 
 		else if typ == 0xD4 then
 			# fixext1
@@ -175,7 +150,7 @@ redef class Reader
 			return read_msgpack_ext_data(4)
 		end
 
-		print_error "MessagePack Warning: Found no match for typ {typ} / 0b{typ.to_base(2)}"
+		print_error "MessagePack Warning: Found no match for typ {typ.to_base(16)} / 0b{typ.to_base(2)}"
 		return null
 	end
 
