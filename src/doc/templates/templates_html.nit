@@ -40,13 +40,15 @@ redef class MEntity
 	#
 	# You should redefine this method depending on the organization or your
 	# output.
-	fun html_link: Link do
-		var title = null
+	fun html_link(text, title: nullable String): Link do
+		if text == null then
+			text = html_name
+		end
 		var mdoc = self.mdoc_or_fallback
-		if mdoc != null then
+		if title == null and mdoc != null then
 			title = mdoc.synopsis.html_escape
 		end
-		return new Link(html_url, html_name, title)
+		return new Link(html_url, text, title)
 	end
 
 	# Returns the complete MEntity declaration decorated with HTML
@@ -273,7 +275,7 @@ redef class MMethodDef
 end
 
 redef class MVirtualTypeProp
-	redef fun html_link do return mvirtualtype.html_link
+	redef fun html_link(text, title) do return mvirtualtype.html_link(text, title)
 end
 
 redef class MVirtualTypeDef
@@ -292,7 +294,7 @@ redef class MType
 end
 
 redef class MClassType
-	redef fun html_link do return mclass.html_link
+	redef fun html_link(text, title) do return mclass.html_link(text, title)
 end
 
 redef class MNullableType
@@ -320,13 +322,15 @@ redef class MGenericType
 end
 
 redef class MParameterType
-	redef fun html_link do
-		return new Link("{mclass.html_url}#FT_{name.to_cmangle}", name, "formal type")
+	redef fun html_link(text, title) do
+		if text == null then text = name
+		if title == null then title = "formal type"
+		return new Link("{mclass.html_url}#FT_{name.to_cmangle}", text, title)
 	end
 end
 
 redef class MVirtualType
-	redef fun html_link do return mproperty.intro.html_link
+	redef fun html_link(text, title) do return mproperty.intro.html_link(text, title)
 end
 
 redef class MSignature

@@ -40,6 +40,12 @@ class TestCommandsHtml
 		print_html cmd.to_html
 	end
 
+	fun test_cmd_link is test do
+		var cmd = new CmdEntityLink(test_view, mentity_name = "test_prog::Character")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
 	# CmdInheritance
 
 	fun test_cmd_parents is test do

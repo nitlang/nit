@@ -104,6 +104,14 @@ redef class CmdComment
 	end
 end
 
+redef class CmdEntityLink
+	redef fun to_html do
+		var mentity = self.mentity
+		if mentity == null then return ""
+		return mentity.html_link(text, title).write_to_string
+	end
+end
+
 redef class CmdEntityCode
 	redef fun to_html do
 		var output = render_code(node)
