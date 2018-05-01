@@ -506,6 +506,22 @@ interface Digraph[V: Object]
 		end
 	end
 
+	# Build a path (or circuit) from the vertex `start` that visits every edge exactly once.
+	#
+	# ~~~
+	# var g = new HashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 4)
+	# assert g.eulerian_path(1) == [1, 2, 3, 4]
+	# ~~~
+	fun eulerian_path(start: V): Array[V]
+	do
+		var visited = new HashDigraph[V]
+		visited.add_graph(self)
+		return visited.remove_eulerian_path(start)
+	end
+
 	# Returns the distance between `u` and `v`
 	#
 	# If no path exists between `u` and `v`, it returns null. It is not
@@ -822,6 +838,29 @@ abstract class MutableDigraph[V: Object]
 				add_arc(v, w)
 			end
 		end
+	end
+
+	# Build a path (or circuit) that removes every edge exactly once.
+	#
+	# See `eulerian_path` for details
+	fun remove_eulerian_path(start: V): Array[V]
+	do
+		var stack = new Array[V]
+		var path = new Array[V]
+		var current = start
+		loop
+			if out_degree(current) == 0 then
+				path.unshift current
+				if stack.is_empty then break
+				current = stack.pop
+			else
+				stack.add current
+				var n = successors(current).first
+				remove_arc(current, n)
+				current = n
+			end
+		end
+		return path
 	end
 end
 # A directed graph represented by hash maps
