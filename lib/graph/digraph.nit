@@ -43,59 +43,54 @@
 #
 # To create an (empty) new graph whose keys are integers, one simply type
 # ~~~
-# import digraph
-# var g = new HashDigraph[Int]
+# var g0 = new HashDigraph[Int]
 # ~~~
 #
 # Then we can add vertices and arcs. Note that if an arc is added whose source
 # and target are not already in the digraph, the vertices are added beforehand.
 # ~~~
-# import digraph
-# var g = new HashDigraph[Int]
-# g.add_vertex(0)
-# g.add_vertex(1)
-# g.add_arc(0,1)
-# g.add_arc(1,2)
-# assert g.to_s == "Digraph of 3 vertices and 2 arcs"
+# var g1 = new HashDigraph[Int]
+# g1.add_vertex(0)
+# g1.add_vertex(1)
+# g1.add_arc(0,1)
+# g1.add_arc(1,2)
+# assert g1.to_s == "Digraph of 3 vertices and 2 arcs"
 # ~~~
 #
 # One might also create digraphs with strings in vertices, for instance to
 # represent some directed relation. However, it is currently not possible to
 # store values in the arcs.
 # ~~~
-# import digraph
-# var g = new HashDigraph[String]
-# g.add_vertex("Amy")
-# g.add_vertex("Bill")
-# g.add_vertex("Chris")
-# g.add_vertex("Diane")
-# g.add_arc("Amy", "Bill")    # Amy likes Bill
-# g.add_arc("Bill", "Amy")    # Bill likes Amy
-# g.add_arc("Chris", "Diane") # and so on
-# g.add_arc("Diane", "Amy")   # and so on
+# var g2 = new HashDigraph[String]
+# g2.add_vertex("Amy")
+# g2.add_vertex("Bill")
+# g2.add_vertex("Chris")
+# g2.add_vertex("Diane")
+# g2.add_arc("Amy", "Bill")    # Amy likes Bill
+# g2.add_arc("Bill", "Amy")    # Bill likes Amy
+# g2.add_arc("Chris", "Diane") # and so on
+# g2.add_arc("Diane", "Amy")   # and so on
 # ~~~
 #
 # `HashDigraph`s are mutable, i.e. one might remove arcs and/or vertices:
 # ~~~
-# import digraph
-# var g = new HashDigraph[Int]
-# g.add_arc(0,1)
-# g.add_arc(0,2)
-# g.add_arc(1,2)
-# g.add_arc(2,3)
-# g.add_arc(2,4)
-# g.remove_vertex(1)
-# g.remove_arc(2, 4)
-# assert g.to_s == "Digraph of 4 vertices and 2 arcs"
+# var g3 = new HashDigraph[Int]
+# g3.add_arc(0,1)
+# g3.add_arc(0,2)
+# g3.add_arc(1,2)
+# g3.add_arc(2,3)
+# g3.add_arc(2,4)
+# g3.remove_vertex(1)
+# g3.remove_arc(2, 4)
+# assert g3.to_s == "Digraph of 4 vertices and 2 arcs"
 # ~~~
 #
 # If one has installed [Graphviz](http://graphviz.org), it is easy to produce a
 # *dot* file which Graphviz process into a picture:
 # ~~~
-# import digraph
-# var g = new HashDigraph[Int]
-# g.add_arcs([[0,1],[0,2],[1,2],[2,3],[2,4]])
-# print g.to_dot
+# var g4 = new HashDigraph[Int]
+# g4.add_arcs([[0,1],[0,2],[1,2],[2,3],[2,4]])
+# print g4.to_dot
 # # Then call "dot -Tpng -o graph.png"
 # ~~~
 #
@@ -112,10 +107,9 @@
 # (https://en.wikipedia.org/wiki/Disjoint-set_data_structure) (i.e. a set of
 # sets):
 # ~~~
-# import digraph
-# var g = new HashDigraph[Int]
-# g.add_arcs([[1,2],[2,1],[2,3],[3,4],[4,5],[5,3]])
-# for component in g.strongly_connected_components.to_partitions
+# var g5 = new HashDigraph[Int]
+# g5.add_arcs([[1,2],[2,1],[2,3],[3,4],[4,5],[5,3]])
+# for component in g5.strongly_connected_components.to_partitions
 # do
 #	print component
 # end
@@ -125,13 +119,12 @@
 # It is also possible to compute a shortest (directed) path between two
 # vertices:
 # ~~~
-# import digraph
-# var g = new HashDigraph[Int]
-# g.add_arcs([[1,2],[2,1],[2,3],[3,4],[4,5],[5,3]])
-# var path = g.a_shortest_path(2, 4)
+# var g6 = new HashDigraph[Int]
+# g6.add_arcs([[1,2],[2,1],[2,3],[3,4],[4,5],[5,3]])
+# var path = g6.a_shortest_path(2, 4)
 # if path != null then print path else print "No path"
 # # Prints [2,3,4]
-# path = g.a_shortest_path(4, 2)
+# path = g6.a_shortest_path(4, 2)
 # if path != null then print path else print "No path"
 # # Prints "No path"
 # ~~~
@@ -157,7 +150,6 @@ interface Digraph[V: Object]
 	# The number of vertices in this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_vertex(0)
 	# g.add_vertex(1)
@@ -170,7 +162,6 @@ interface Digraph[V: Object]
 	# The number of arcs in this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# assert g.num_arcs == 1
@@ -184,7 +175,6 @@ interface Digraph[V: Object]
 	# Returns true if and only if `u` exists in this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_vertex(1)
 	# assert g.has_vertex(1)
@@ -198,7 +188,6 @@ interface Digraph[V: Object]
 	# Returns true if and only if `(u,v)` is an arc in this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# g.add_arc(1, 2)
@@ -213,7 +202,6 @@ interface Digraph[V: Object]
 	# If `u` does not exist, then it returns null.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# g.add_arc(1, 2)
@@ -229,7 +217,6 @@ interface Digraph[V: Object]
 	# If `u` does not exist, then an empty collection is returned.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# g.add_arc(1, 2)
@@ -243,7 +230,6 @@ interface Digraph[V: Object]
 	# Returns an iterator over the vertices of this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# g.add_arc(0, 2)
@@ -267,7 +253,6 @@ interface Digraph[V: Object]
 	# An empty graph is a graph without vertex and arc.
 	#
 	# ~~~
-	# import digraph
 	# assert (new HashDigraph[Int]).is_empty
 	# ~~~
 	fun is_empty: Bool do return num_vertices == 0 and num_arcs == 0
@@ -275,7 +260,6 @@ interface Digraph[V: Object]
 	# Returns an array containing the vertices of this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_vertices([0,2,4,5])
 	# assert g.vertices.length == 4
@@ -285,7 +269,6 @@ interface Digraph[V: Object]
 	# Returns an iterator over the arcs of this graph
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# g.add_arc(0, 2)
@@ -299,7 +282,6 @@ interface Digraph[V: Object]
 	# Returns the arcs of this graph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 3)
 	# g.add_arc(2, 3)
@@ -312,7 +294,6 @@ interface Digraph[V: Object]
 	# If `u` is not in this graph, an empty array is returned.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 3)
 	# g.add_arc(2, 3)
@@ -334,7 +315,6 @@ interface Digraph[V: Object]
 	# If `u` is not in this graph, an empty array is returned.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 3)
 	# g.add_arc(2, 3)
@@ -401,7 +381,6 @@ interface Digraph[V: Object]
 	# Returns true if and only if `u` is a predecessor of `v`.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 3)
 	# assert g.is_predecessor(1, 3)
@@ -412,7 +391,6 @@ interface Digraph[V: Object]
 	# Returns true if and only if `u` is a successor of `v`.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 3)
 	# assert not g.is_successor(1, 3)
@@ -423,7 +401,6 @@ interface Digraph[V: Object]
 	# Returns the number of arcs whose target is `u`.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 3)
 	# g.add_arc(2, 3)
@@ -435,7 +412,6 @@ interface Digraph[V: Object]
 	# Returns the number of arcs whose source is `u`.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(1, 3)
@@ -452,7 +428,6 @@ interface Digraph[V: Object]
 	# Returns true if and only if `vertices` is a path of this digraph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(2, 3)
@@ -471,7 +446,6 @@ interface Digraph[V: Object]
 	# Returns true if and only if `vertices` is a circuit of this digraph.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(2, 3)
@@ -489,7 +463,6 @@ interface Digraph[V: Object]
 	# If no path exists between `u` and `v`, it returns `null`.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(2, 3)
@@ -539,7 +512,6 @@ interface Digraph[V: Object]
 	# symmetric, i.e. we may have `dist(u, v) != dist(v, u)`.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(2, 3)
@@ -583,7 +555,6 @@ interface Digraph[V: Object]
 	# i.e. the graph obtained by replacing each arc by an edge.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(2, 3)
@@ -609,7 +580,6 @@ interface Digraph[V: Object]
 	# This is computed in linear time (Tarjan's algorithm).
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(1, 2)
 	# g.add_arc(2, 3)
@@ -736,7 +706,6 @@ abstract class MutableDigraph[V: Object]
 	# If `u` already belongs to the graph, then nothing happens.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_vertex(0)
 	# assert g.has_vertex(0)
@@ -751,7 +720,6 @@ abstract class MutableDigraph[V: Object]
 	# If the vertex does not exist in the graph, then nothing happens.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_vertex(0)
 	# g.add_vertex(1)
@@ -768,7 +736,6 @@ abstract class MutableDigraph[V: Object]
 	# graph, they are added.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# g.add_arc(1, 2)
@@ -785,7 +752,6 @@ abstract class MutableDigraph[V: Object]
 	# If the arc does not exist in the graph, then nothing happens.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_arc(0, 1)
 	# assert g.num_arcs == 1
@@ -805,7 +771,6 @@ abstract class MutableDigraph[V: Object]
 	# If vertices appear more than once, they are only added once.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# g.add_vertices([0,1,2,3])
 	# assert g.num_vertices == 4
@@ -822,7 +787,6 @@ abstract class MutableDigraph[V: Object]
 	# If arcs appear more than once, they are only added once.
 	#
 	# ~~~
-	# import digraph
 	# var g = new HashDigraph[Int]
 	# var arcs = [[0,1], [1,2], [1,2]]
 	# g.add_arcs(arcs)
