@@ -796,6 +796,33 @@ abstract class MutableDigraph[V: Object]
 	do
 		for a in arcs do add_arc(a[0], a[1])
 	end
+
+	# Add all vertices and arcs from the `other` graph.
+	#
+	# ~~~
+	# var g1 = new HashDigraph[Int]
+	# var arcs1 = [[0,1], [1,2]]
+	# g1.add_arcs(arcs1)
+	# g1.add_arcs(arcs1)
+	# g1.add_vertex(3)
+	# var g2 = new HashDigraph[Int]
+	# var arcs2 = [[0,1], [1,4]]
+	# g2.add_arcs(arcs2)
+	# g2.add_vertex(5)
+	# g2.add_graph(g1)
+	# assert g2.vertices.has_exactly([0, 1, 2, 3, 4, 5])
+	# var arcs3 = [[0,1], [1,2], [1,4]]
+	# assert g2.arcs.has_exactly(arcs3)
+	# ~~~
+	fun add_graph(other: Digraph[V])
+	do
+		for v in other.vertices do
+			add_vertex(v)
+			for w in other.successors(v) do
+				add_arc(v, w)
+			end
+		end
+	end
 end
 # A directed graph represented by hash maps
 class HashDigraph[V: Object]
