@@ -172,6 +172,7 @@ redef class ASuperPropdef
 			v.counter.inc mtype.mclass
 			v.counter.inc mtype.mclass.intro
 		end
+		visit_all(v)
 	end
 end
 
@@ -183,5 +184,6 @@ redef class ASendExpr
 		v.counter.inc callsite.mpropdef.mproperty
 		v.counter.inc callsite.mpropdef.mclassdef
 		v.counter.inc callsite.mpropdef.mclassdef.mclass
+		visit_all(v)
 	end
 end
