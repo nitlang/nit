@@ -250,7 +250,9 @@ class WebsocketConnection
 	# Checks if a connection to a client is available
 	redef fun connected do return client.connected
 
-	redef fun write_bytes(s) do client.write_bytes(frame_message(s.to_s))
+	redef fun write_bytes_from_cstring(ns, len) do
+		client.write_bytes(frame_message(ns.to_s_unsafe(len)))
+	end
 
 	redef fun write(msg) do client.write(frame_message(msg.to_s).to_s)
 

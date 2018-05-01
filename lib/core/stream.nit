@@ -467,17 +467,23 @@ end
 abstract class Writer
 	super Stream
 
-	# Writes bytes from `s`
-	fun write_bytes(s: Bytes) is abstract
+	# Write bytes from `s`
+	fun write_bytes(s: Bytes) do write_bytes_from_cstring(s.items, s.length)
 
-	# write a string
+	# Write `len` bytes from `ns`
+	fun write_bytes_from_cstring(ns: CString, len: Int) is abstract
+
+	# Write a string
 	fun write(s: Text) is abstract
 
 	# Write a single byte
 	fun write_byte(value: Byte) is abstract
 
-	# Writes a single char
-	fun write_char(c: Char) do write(c.to_s)
+	# Write a single char
+	fun write_char(c: Char) do
+		var ln = codec.add_char_to(c, write_buffer)
+		write_bytes_from_cstring(write_buffer, ln)
+	end
 
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
@@ -776,10 +782,9 @@ class BytesWriter
 		bytes.add value
 	end
 
-	redef fun write_bytes(b)
-	do
+	redef fun write_bytes_from_cstring(ns, len) do
 		if closed then return
-		bytes.append b
+		bytes.append_ns(ns, len)
 	end
 
 	# Is the stream closed?
