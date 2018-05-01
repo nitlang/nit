@@ -36,7 +36,7 @@ class CommandParser
 
 	# List of allowed command names for this parser
 	var allowed_commands: Array[String] = [
-	"doc", "code", "lin", "uml", "graph", "search",
+	"link", "doc", "code", "lin", "uml", "graph", "search",
 	"parents", "ancestors", "children", "descendants",
 	"param", "return", "new", "call", "defs", "list", "random",
 	"catalog", "stats", "tags", "tag", "person", "contrib", "maintain"] is writable
@@ -45,6 +45,7 @@ class CommandParser
 	var commands_usage: Map[String, String] do
 		var usage = new ArrayMap[String, String]
 		usage["search: <string>"] = "list entities matching `string`"
+		usage["link: <name>"] = "display the link to `name`"
 		usage["doc: <name>"] = "display the documentation for `name`"
 		usage["defs: <name>"] = "list all definitions for `name`"
 		usage["code: <name>"] = "display the code for `name`"
@@ -80,16 +81,25 @@ class CommandParser
 		error = null
 
 		# Parse command name
-		pos = string.read_until(tmp, pos, ':')
+		pos = string.read_until(tmp, pos, ':', '|')
 		var name = tmp.write_to_string.trim
 
 		# Check allowed commands
 		if name.is_empty then
-			error = new CmdParserError("empty command name", 0)
+			error = new CmdParserError("Empty command name", 0)
 			return null
 		end
-		if not allowed_commands.has(name) then
-			error = new CmdParserError("unknown command name", 0)
+		# If the command name contains two consecutive colons or there is no colon in the name,
+		# we certainly have a wiki link to a mentity
+		var is_short_link = false
+		if (pos < string.length - 2 and string[pos] == ':' and string[pos + 1] == ':') or
+		   pos == string.length then
+			is_short_link = true
+		else if pos < string.length - 1 and string[pos] == '|' then
+			is_short_link = true
+			pos -= 1
+		else if not allowed_commands.has(name) then
+			error = new CmdParserError("Unknown command name `{name}`", 0)
 			return null
 		end
 
@@ -97,6 +107,11 @@ class CommandParser
 		tmp.clear
 		pos = string.read_until(tmp, pos + 1, '|')
 		var arg = tmp.write_to_string.trim
+		if is_short_link and not arg.is_empty then
+			arg = "{name}:{arg}"
+		else if is_short_link then
+			arg = name
+		end
 
 		# Parse command options
 		var opts = new HashMap[String, String]
@@ -117,9 +132,14 @@ class CommandParser
 		end
 
 		# Build the command
-		var command = new_command(name)
+		var command
+		if is_short_link then
+			command = new CmdEntityLink(view)
+		else
+			command = new_command(name)
+		end
 		if command == null then
-			error = new CmdParserError("Unknown command name")
+			error = new CmdParserError("Unknown command name `{name}`", 0)
 			return null
 		end
 
@@ -135,6 +155,7 @@ class CommandParser
 	# You must redefine this method to add new custom commands.
 	fun new_command(name: String): nullable DocCommand do
 		# CmdEntity
+		if name == "link" then return new CmdEntityLink(view)
 		if name == "doc" then return new CmdComment(view)
 		if name == "code" then return new CmdEntityCode(view, modelbuilder)
 		if name == "lin" then return new CmdLinearization(view)
@@ -216,6 +237,14 @@ redef class CmdComment
 		full_doc = not options.has_key("only-synopsis")
 		fallback = not options.has_key("no-fallback")
 		if options.has_key("format") then format = options["format"]
+		return super
+	end
+end
+
+redef class CmdEntityLink
+	redef fun parser_init(mentity_name, options) do
+		if options.has_key("text") then text = options["text"]
+		if options.has_key("title") then title = options["title"]
 		return super
 	end
 end
