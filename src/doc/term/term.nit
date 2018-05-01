@@ -23,9 +23,8 @@ redef class CommandParser
 		var cmd = self.parse(query)
 		var error = self.error
 
-		# If not a command, try a comment query
-		if cmd == null and error isa CmdParserError then
-			error = null
+		# Translate links to doc commands
+		if cmd isa CmdEntityLink then
 			cmd = new CmdComment(view, mentity_name = query)
 			var opts = new HashMap[String, String]
 			var status = cmd.parser_init(query, opts)
@@ -36,7 +35,8 @@ redef class CommandParser
 			error.print_message(no_color)
 			print ""
 		end
-		cmd.as(not null).execute(no_color)
+		if cmd == null then return
+		cmd.execute(no_color)
 	end
 end
 
