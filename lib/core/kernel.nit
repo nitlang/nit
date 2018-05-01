@@ -918,6 +918,24 @@ universal Char
 	redef fun successor(i) is intern
 	redef fun predecessor(i) is intern
 
+	# The `i`-th char after self (in code point)
+	#
+	# ~~~
+	# assert 'A' + 5 == 'F'
+	# ~~~
+	#
+	# Alias of `successor`.
+	fun +(i: Int): Char do return successor(i)
+
+	# The `i`-th char before self (in code point)
+	#
+	# ~~~
+	# assert 'F' - 5 == 'A'
+	# ~~~
+	#
+	# Alias of `predecessor`.
+	fun -(i: Int): Char do return predecessor(i)
+
 	redef fun distance(c)
 	do
 		var d = self.code_point - c.code_point

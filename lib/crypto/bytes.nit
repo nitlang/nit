@@ -12,9 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Mix of all things cryptography-related
-module crypto
+# Mix of utilities and services related to bytes
+module bytes
 
-import basic_ciphers
-import xor_ciphers
-import bytes
+redef class Bytes
+	# PKCS#7 padding.
+	#
+	# Extends `self` by appending the number of bytes of padding to the end of the block.
+	#
+	#     assert "YELLOW SUBMARINE".to_bytes.pkcs7(20) == "YELLOW SUBMARINE\x04\x04\x04\x04".to_bytes
+	fun pkcs7(blocksize: Int): Bytes
+	do
+		var mod = length % blocksize
+		if mod == 0 then return self
+		var pad = blocksize - mod
+		var byte = pad.to_b
+		for i in [0..pad[ do add byte
+		return self
+	end
+end
