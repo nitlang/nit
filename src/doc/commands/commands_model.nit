@@ -93,6 +93,34 @@ class WarningNoMDoc
 	redef fun to_s do return "No documentation for `{mentity.full_name}`."
 end
 
+# Get the link to a MEntity API documentation
+class CmdEntityLink
+	super CmdEntity
+
+	# The link text to display
+	var text: nullable String = null is optional, writable
+
+	# The link title to display when the link is hovered
+	var title: nullable String = null is optional, writable
+
+	redef fun init_command do
+		var res = super
+		if not res isa CmdSuccess then return res
+		var mentity = self.mentity.as(not null)
+
+		if text == null then
+			text = mentity.name
+		end
+		if title == null then
+			var mdoc = mentity.mdoc_or_fallback
+			if mdoc != null then
+				title = mdoc.synopsis
+			end
+		end
+		return res
+	end
+end
+
 # MEntity ancestors command
 #
 # Retrieve all the ancestors (direct and indirect) of a MEntity.
