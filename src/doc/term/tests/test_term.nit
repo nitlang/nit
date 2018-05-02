@@ -15,6 +15,7 @@
 module test_term is test
 
 import term
+intrude import commands::commands_main
 import commands::test_commands_catalog
 
 # Nitunit test suite specific to commands
@@ -231,9 +232,53 @@ class TestTerm
 		var parser = new CommandParser(test_view, test_builder, test_catalog)
 		parser.execute("ini-license: test_prog", true)
 	end
+
+	# CmdMain
+
+	fun test_term_mains is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("mains: test_prog", true)
+	end
+
+	fun test_term_main_compile is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("main-compile: test_prog::test_prog", true)
+	end
+
+	fun test_term_man_synopsis is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("main-run: test_prog::test_prog", true)
+	end
+
+	fun test_term_man_options is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("main-opts: test_prog::test_prog", true)
+	end
+
+	fun test_term_testing is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("testing: test_prog", true)
+	end
 end
 
 redef class nitc::Location
 	# Avoid location diffs
 	redef fun to_s do return "test_location"
+end
+
+# Avoid path diff
+redef class CmdMainCompile
+	redef fun test_path(file) do
+		if file == null then return null
+		return file.filename.basename
+	end
+end
+
+# Avoid path diff
+redef class CmdTesting
+	redef fun test_path(mentity) do
+		var file = mentity.location.file
+		if file == null then return null
+		return file.filename.basename
+	end
 end

@@ -1,0 +1,3 @@
+Synopsis for `test_prog::test_prog`:
+
+test_prog [*options*] ARGS...
