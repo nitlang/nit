@@ -48,7 +48,7 @@ redef class CmdEntity
 	redef fun to_html do
 		var mentity = self.mentity
 		if mentity == null then return ""
-		return mentity.html_link
+		return mentity.html_link.write_to_string
 	end
 end
 
