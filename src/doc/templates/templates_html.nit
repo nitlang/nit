@@ -104,14 +104,12 @@ redef class MEntity
 end
 
 redef class MPackage
-	redef fun html_url do return "package_{html_id}.html"
 	redef fun html_namespace do return html_link
 	redef fun html_icon do return new BSIcon("book", ["text-muted"])
 	redef var css_classes = ["public"]
 end
 
 redef class MGroup
-	redef fun html_url do return "group_{html_id}.html"
 	redef fun html_icon do return new BSIcon("folder-close", ["text-muted"])
 
 	redef fun html_namespace do
@@ -127,7 +125,6 @@ redef class MGroup
 end
 
 redef class MModule
-	redef fun html_url do return "module_{html_id}.html"
 	redef fun html_icon do return new BSIcon("file", ["text-muted"])
 
 	redef fun html_namespace do
@@ -143,7 +140,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef fun html_url do return "class_{html_id}.html"
 	redef fun html_icon do return new BSIcon("stop", css_classes)
 	redef fun html_signature(short) do return intro.html_signature(short)
 	redef fun css_classes do return super + [visibility.to_s]
@@ -163,7 +159,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef fun html_url do return "{mclass.html_url}#{html_id}"
 	redef fun css_classes do return super + mclass.css_classes
 
 	redef fun html_namespace do
@@ -217,7 +212,6 @@ redef class MClassDef
 end
 
 redef class MProperty
-	redef fun html_url do return "property_{html_id}.html"
 	redef fun html_declaration do return intro.html_declaration
 	redef fun html_signature(short) do return intro.html_signature(short)
 	redef fun html_icon do return new BSIcon("tag", css_classes)
@@ -233,7 +227,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef fun html_url do return "{mproperty.html_url}#{html_id}"
 	redef fun css_classes do return super + mproperty.css_classes
 
 	redef fun html_namespace do
