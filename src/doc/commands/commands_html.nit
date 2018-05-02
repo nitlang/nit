@@ -112,6 +112,48 @@ redef class CmdEntityCode
 	end
 end
 
+redef class CmdAncestors
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdParents
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdChildren
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdDescendants
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdFeatures
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdLinearization
+	redef fun to_html do return super # FIXME lin
+end
+
+# Usage commands
+
+redef class CmdNew
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdCall
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdReturn
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdParam
+	redef fun to_html do return super # FIXME lin
+end
+
 # Graph commands
 
 redef class CmdGraph
