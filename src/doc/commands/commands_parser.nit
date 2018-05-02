@@ -21,6 +21,7 @@ import commands::commands_model
 import commands::commands_graph
 import commands::commands_usage
 import commands::commands_catalog
+import commands::commands_ini
 
 # Parse string commands to create DocQueries
 class CommandParser
@@ -39,6 +40,8 @@ class CommandParser
 	"link", "doc", "code", "lin", "uml", "graph", "search",
 	"parents", "ancestors", "children", "descendants",
 	"param", "return", "new", "call", "defs", "list", "random",
+	"ini-desc", "ini-git", "ini-issues", "ini-maintainer", "ini-contributors", "ini-license",
+	"license-file", "contrib-file", "license-content", "contrib-content", "git-clone",
 	"catalog", "stats", "tags", "tag", "person", "contrib", "maintain"] is writable
 
 	# List of commands usage and documentation
@@ -68,6 +71,18 @@ class CommandParser
 		usage["tag: <tag>"] = "list all packages with `tag`"
 		usage["maintain: <person>"] = "list all packages maintained by `person`"
 		usage["contrib: <person>"] = "list all packages contributed by `person`"
+		# Ini commands
+		usage["ini-desc: <package>"] = "display the description from the `package` ini file"
+		usage["ini-git: <package>"] = "display the git url from the `package` ini file"
+		usage["ini-issues: <package>"] = "display the issues url from the `package` ini file"
+		usage["ini-license: <package>"] = "display the license from the `package` ini file"
+		usage["ini-maintainer: <package>"] = "display the maintainer from the `package` ini file"
+		usage["ini-contributors: <package>"] = "display the contributors from the `package` ini file"
+		usage["license-file: <package>"] = "display the license file for the `package`"
+		usage["license-content: <package>"] = "display the license file content for the `package`"
+		usage["contrib-file: <package>"] = "display the contrib file for the `package`"
+		usage["contrib-content: <package>"] = "display the contrib file content for the `package`"
+		usage["git-clone: <package>"] = "display the git clone command for the `package`"
 		return usage
 	end
 
@@ -174,6 +189,18 @@ class CommandParser
 		# CmdModel
 		if name == "list" then return new CmdModelEntities(view)
 		if name == "random" then return new CmdRandomEntities(view)
+		# Ini
+		if name == "ini-desc" then return new CmdIniDescription(view)
+		if name == "ini-git" then return new CmdIniGitUrl(view)
+		if name == "ini-issues" then return new CmdIniIssuesUrl(view)
+		if name == "ini-license" then return new CmdIniLicense(view)
+		if name == "ini-maintainer" then return new CmdIniMaintainer(view)
+		if name == "ini-contributors" then return new CmdIniContributors(view)
+		if name == "license-file" then return new CmdLicenseFile(view)
+		if name == "license-content" then return new CmdLicenseFileContent(view)
+		if name == "contrib-file" then return new CmdContribFile(view)
+		if name == "contrib-content" then return new CmdContribFileContent(view)
+		if name == "git-clone" then return new CmdIniCloneCommand(view)
 		# CmdCatalog
 		var catalog = self.catalog
 		if catalog != null then

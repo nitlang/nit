@@ -402,4 +402,106 @@ class TestCommandsParser
 		assert cmd.person.as(not null).name == "Alexandre Terrasa"
 		assert cmd.results != null
 	end
+
+	# CmdInit
+
+	fun test_cmd_parser_ini_desc is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("ini-desc: test_prog")
+		assert cmd isa CmdIniDescription
+		assert parser.error == null
+		assert cmd.desc.as(not null) == "Dummy program used for testing Nit tools"
+	end
+
+	fun test_cmd_parser_ini_git is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("ini-git: test_prog")
+		assert cmd isa CmdIniGitUrl
+		assert parser.error == null
+		assert cmd.url == "https://github.com/nitlang/nit.git"
+	end
+
+	fun test_cmd_parser_ini_clone is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("git-clone: test_prog")
+		assert cmd isa CmdIniCloneCommand
+		assert parser.error == null
+		assert cmd.url == "https://github.com/nitlang/nit.git"
+		assert cmd.command == "git clone https://github.com/nitlang/nit.git"
+	end
+
+	fun test_cmd_parser_ini_issues is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("ini-issues: test_prog")
+		assert cmd isa CmdIniIssuesUrl
+		assert parser.error == null
+		assert cmd.url == "https://github.com/nitlang/nit/issues"
+	end
+
+	fun test_cmd_parser_ini_maintainer is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("ini-maintainer: test_prog")
+		assert cmd isa CmdIniMaintainer
+		assert parser.error == null
+		assert cmd.maintainer == "John Doe <jdoe@example.com> (http://www.example.com/~jdoe), Spider-Man"
+	end
+
+	fun test_cmd_parser_ini_contributors is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("ini-contributors: test_prog")
+		assert cmd isa CmdIniContributors
+		assert parser.error == null
+		assert cmd.contributors == [
+			"Riri <riri@example.com>",
+			"Fifi (http://www.example.com/~fifi)",
+			"Loulou"]
+	end
+
+	fun test_cmd_parser_ini_license is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("ini-license: test_prog")
+		assert cmd isa CmdIniLicense
+		assert parser.error == null
+		assert cmd.license == "Apache-2.0"
+	end
+
+	fun test_cmd_parser_ini_license_file is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("license-file: test_prog")
+		assert cmd isa CmdLicenseFile
+		assert parser.error == null
+		var file = cmd.file
+		assert file != null
+		assert file.basename == "LICENSE.md"
+	end
+
+	fun test_cmd_parser_ini_license_content is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("license-content: test_prog")
+		assert cmd isa CmdLicenseFileContent
+		assert parser.error == null
+		var content = cmd.content
+		assert content != null
+		assert not content.is_empty
+	end
+
+	fun test_cmd_parser_ini_contrib_file is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("contrib-file: test_prog")
+		assert cmd isa CmdContribFile
+		assert parser.error == null
+		var file = cmd.file
+		assert file != null
+		assert file.basename == "CONTRIBUTING.md"
+	end
+
+	fun test_cmd_parser_ini_contrib_content is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("contrib-content: test_prog")
+		assert cmd isa CmdContribFileContent
+		assert parser.error == null
+		var content = cmd.content
+		assert content != null
+		assert not content.is_empty
+	end
 end
