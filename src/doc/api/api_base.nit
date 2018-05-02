@@ -254,3 +254,19 @@ redef class MVirtualType
 	redef var web_url = mproperty.web_url is lazy
 	redef var api_url = mproperty.api_url is lazy
 end
+
+redef class CmdLicenseFile
+	redef var file_url is lazy do
+		var mentity = self.mentity
+		if mentity == null then return super
+		return "{mentity.web_url}/license"
+	end
+end
+
+redef class CmdContribFile
+	redef var file_url is lazy do
+		var mentity = self.mentity
+		if mentity == null then return super
+		return "{mentity.web_url}/contrib"
+	end
+end
