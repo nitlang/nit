@@ -20,6 +20,7 @@ import commands::commands_graph
 import commands::commands_usage
 import commands::commands_catalog
 import commands::commands_ini
+import commands::commands_main
 
 import templates::templates_json
 import catalog::catalog_json
@@ -249,6 +250,48 @@ redef class CmdContribFileContent
 	redef fun to_json do
 		var obj = super.as(JsonObject)
 		obj["content"] = content
+		return obj
+	end
+end
+
+# CmdMain
+
+redef class CmdMains
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["results"] = results
+		return obj
+	end
+end
+
+redef class CmdMainCompile
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["command"] = command
+		return obj
+	end
+end
+
+redef class CmdTesting
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["command"] = command
+		return obj
+	end
+end
+
+redef class CmdManSynopsis
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["synopsis"] = synopsis
+		return obj
+	end
+end
+
+redef class CmdManOptions
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["options"] = options
 		return obj
 	end
 end

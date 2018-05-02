@@ -15,6 +15,7 @@
 module test_commands_json is test
 
 import test_commands
+intrude import doc::commands::commands_main
 import doc::commands::commands_json
 
 class TestCommandsJson
@@ -201,6 +202,38 @@ class TestCommandsJson
 		cmd.file = cmd.file.as(not null).basename # for testing path
 		print_json cmd.to_json
 	end
+
+	# CmdMain
+
+	fun test_cmd_mains is test do
+		var cmd = new CmdMains(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_json cmd.to_json
+	end
+
+	fun test_cmd_main_compile is test do
+		var cmd = new CmdMainCompile(test_view, mentity_name = "test_prog::test_prog")
+		cmd.init_command
+		print_json cmd.to_json
+	end
+
+	fun test_cmd_testing is test do
+		var cmd = new CmdTesting(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_json cmd.to_json
+	end
+
+	fun test_cmd_man_synopsis is test do
+		var cmd = new CmdManSynopsis(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_json cmd.to_json
+	end
+
+	fun test_cmd_man_options is test do
+		var cmd = new CmdManOptions(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_json cmd.to_json
+	end
 end
 
 redef class nitc::Location
@@ -216,5 +249,22 @@ redef class nitc::Location
 		if file != null then
 			v.serialize_attribute("file", "test_location")
 		end
+	end
+end
+
+# Avoid path diff
+redef class CmdMainCompile
+	redef fun test_path(file) do
+		if file == null then return null
+		return file.filename.basename
+	end
+end
+
+# Avoid path diff
+redef class CmdTesting
+	redef fun test_path(mentity) do
+		var file = mentity.location.file
+		if file == null then return null
+		return file.filename.basename
 	end
 end
