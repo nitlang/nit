@@ -1,0 +1,1 @@
+<h3><a href="class_test_prog_58d_58dCharacter.html" title="Characters can be played by both the human or the machine.">Character</a> - <span class="synopsys nitdoc">Characters can be played by both the human or the machine.</span></h3><div class="nitdoc"></div>
