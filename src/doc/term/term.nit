@@ -347,3 +347,108 @@ redef class CmdCatalogContributing
 		print_list("Packages contributed by `{name}`:", results, no_color)
 	end
 end
+
+# CmdIni
+
+redef class CmdIni
+	# Print ini data
+	fun print_ini(title: String, data: nullable String, no_color: nullable Bool) do
+		if data == null then return
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+		print ""
+		print data
+	end
+end
+
+redef class CmdIniDescription
+	redef fun execute(no_color) do
+		var title = "Description from ini file:"
+		print_ini(title, desc, no_color)
+	end
+end
+
+redef class CmdIniGitUrl
+	redef fun execute(no_color) do
+		var title = "Git URL from ini file:"
+		print_ini(title, url, no_color)
+	end
+end
+
+redef class CmdIniCloneCommand
+	redef fun execute(no_color) do
+		var title = "Git clone command from ini file:"
+		print_ini(title, command, no_color)
+	end
+end
+
+redef class CmdIniIssuesUrl
+	redef fun execute(no_color) do
+		var title = "Issues URL from ini file:"
+		print_ini(title, url, no_color)
+	end
+end
+
+redef class CmdIniMaintainer
+	redef fun execute(no_color) do
+		var title = "Maintainer from ini file:"
+		print_ini(title, maintainer, no_color)
+	end
+end
+
+redef class CmdIniContributors
+	redef fun execute(no_color) do
+		var contributors = self.contributors
+		if contributors == null then return
+		var title = "Contributors list from ini file:"
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+		print ""
+		for contributor in contributors do
+			print " * {contributor}"
+		end
+	end
+end
+
+redef class CmdIniLicense
+	redef fun execute(no_color) do
+		var title = "License from ini file:"
+		print_ini(title, license, no_color)
+	end
+end
+
+redef class CmdEntityFile
+
+	# Print file
+	fun print_file(title: String, no_color: nullable Bool) do
+		var file = self.file
+		if file == null then return
+		title = "{title} `{file}`:"
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+		print ""
+		print file.to_path.read_all
+		print ""
+	end
+end
+
+redef class CmdLicenseFile
+	redef fun execute(no_color) do
+		print_file("License from", no_color)
+	end
+end
+
+redef class CmdContribFile
+	redef fun execute(no_color) do
+		print_file("Contributing rules from", no_color)
+	end
+end
