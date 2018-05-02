@@ -1,0 +1,16 @@
+# NAME
+
+test_prog - a test program.
+
+
+# SYNOPSIS
+
+test_prog [*options*] ARGS...
+
+# OPTIONS
+
+### `--opt1`
+Option 1.
+
+### `--opt2`
+Option 2.
