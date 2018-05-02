@@ -22,6 +22,7 @@ import commands::commands_graph
 import commands::commands_usage
 import commands::commands_catalog
 import commands::commands_ini
+import commands::commands_main
 
 # Parse string commands to create DocQueries
 class CommandParser
@@ -42,6 +43,7 @@ class CommandParser
 	"param", "return", "new", "call", "defs", "list", "random",
 	"ini-desc", "ini-git", "ini-issues", "ini-maintainer", "ini-contributors", "ini-license",
 	"license-file", "contrib-file", "license-content", "contrib-content", "git-clone",
+	"mains", "main-compile", "main-run", "main-opts", "testing",
 	"catalog", "stats", "tags", "tag", "person", "contrib", "maintain"] is writable
 
 	# List of commands usage and documentation
@@ -83,6 +85,12 @@ class CommandParser
 		usage["contrib-file: <package>"] = "display the contrib file for the `package`"
 		usage["contrib-content: <package>"] = "display the contrib file content for the `package`"
 		usage["git-clone: <package>"] = "display the git clone command for the `package`"
+		# Main
+		usage["mains: <name>"] = "display the list of main methods for `name`"
+		usage["main-compile: <name>"] = "display the nitc command to compile `name`"
+		usage["main-run: <name>"] = "display the command to run `name`"
+		usage["main-opts: <name>"] = "display the command options for `name`"
+		usage["testing: <name>"] = "display the nitunit command to test `name`"
 		return usage
 	end
 
@@ -201,6 +209,12 @@ class CommandParser
 		if name == "contrib-file" then return new CmdContribFile(view)
 		if name == "contrib-content" then return new CmdContribFileContent(view)
 		if name == "git-clone" then return new CmdIniCloneCommand(view)
+		# CmdMain
+		if name == "mains" then return new CmdMains(view)
+		if name == "main-compile" then return new CmdMainCompile(view)
+		if name == "main-run" then return new CmdManSynopsis(view)
+		if name == "main-opts" then return new CmdManOptions(view)
+		if name == "testing" then return new CmdTesting(view)
 		# CmdCatalog
 		var catalog = self.catalog
 		if catalog != null then

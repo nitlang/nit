@@ -179,7 +179,7 @@ class TestCommandsParser
 		var cmd = parser.parse("descendants: Object")
 		assert cmd isa CmdDescendants
 		assert parser.error == null
-		assert cmd.results.as(not null).length == 20
+		assert cmd.results.as(not null).length == 22
 	end
 
 	fun test_cmd_parser_descendants_without_children is test do
@@ -187,7 +187,7 @@ class TestCommandsParser
 		var cmd = parser.parse("descendants: Object | children: false")
 		assert cmd isa CmdDescendants
 		assert parser.error == null
-		assert cmd.results.as(not null).length == 8
+		assert cmd.results.as(not null).length == 9
 	end
 
 	# CmdSearch
@@ -503,5 +503,64 @@ class TestCommandsParser
 		var content = cmd.content
 		assert content != null
 		assert not content.is_empty
+	end
+
+	# CmdMain
+
+	fun test_cmd_parser_mains is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("mains: test_prog")
+		assert cmd isa CmdMains
+		assert parser.error == null
+
+		var results = cmd.results
+		assert results != null
+		assert results.length == 1
+		assert results.first.full_name == "test_prog::test_prog"
+	end
+
+	fun test_cmd_parser_main_compile is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("main-compile: test_prog::test_prog")
+		assert cmd isa CmdMainCompile
+		assert parser.error == null
+
+		var command = cmd.command
+		assert command != null
+		assert command.has_prefix("nitc ")
+		assert command.has_suffix("test_prog.nit")
+	end
+
+	fun test_cmd_parser_testing is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("testing: test_prog")
+		assert cmd isa CmdTesting
+		assert parser.error == null
+
+		var command = cmd.command
+		assert command != null
+		assert command.has_prefix("nitunit ")
+		assert command.has_suffix("/tests")
+	end
+
+	fun test_cmd_man_synopsis is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("main-run: test_prog")
+		assert cmd isa CmdManSynopsis
+		assert parser.error == null
+
+		assert cmd.synopsis == "test_prog [*options*] ARGS..."
+	end
+
+	fun test_cmd_man_opions is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		var cmd = parser.parse("main-opts: test_prog")
+		assert cmd isa CmdManOptions
+		assert parser.error == null
+
+		var options = cmd.options
+		assert options != null
+		assert options["--opt1"] == "Option 1."
+		assert options["--opt2"] == "Option 2."
 	end
 end
