@@ -169,13 +169,14 @@ class Bitmap
 			for x in [0..self.height[
 			do
 				var row = new Array[Int].with_capacity(self.width)
+				var rgb_str = new CString(3)
 				for y in [0..self.width[
 				do
-					var bts = fileReader.read_bytes(3)
-					if bts.length != 3 then return
-					var red = bts[0] << 16
-					var green = bts[1] << 8
-					var blue = bts[2]
+					var bts = fileReader.read_bytes_to_cstring(rgb_str, 3)
+					if bts < 3 then return
+					var red = rgb_str[0] << 16
+					var green = rgb_str[1] << 8
+					var blue = rgb_str[2]
 					row.add(red.to_i + green.to_i + blue.to_i)
 				end
 				self.data.add(row)
