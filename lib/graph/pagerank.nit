@@ -15,7 +15,7 @@
 # Add PageRank computation for vertices in Digraph.
 module pagerank
 
-import graphs::digraph
+import digraph
 
 redef class Digraph[V]
 
