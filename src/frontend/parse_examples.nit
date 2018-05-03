@@ -118,6 +118,7 @@ redef class ANewExpr
 	redef fun accept_example_visitor(v) do
 		var recvtype = self.recvtype
 		if recvtype != null then
+			v.counter.inc recvtype.mclass
 			v.counter.inc recvtype.mclass.intro
 		end
 		visit_all(v)
