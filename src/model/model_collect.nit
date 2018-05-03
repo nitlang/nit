@@ -235,7 +235,7 @@ redef class MPackage
 	# Collect all modules contained in `self`
 	fun collect_all_mmodules(view: ModelView): HashSet[MModule] do
 		var res = new HashSet[MModule]
-		for mgroup in collect_mgroups(view) do
+		for mgroup in collect_all_mgroups(view) do
 			res.add_all mgroup.collect_mmodules(view)
 		end
 		return res
