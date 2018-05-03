@@ -32,5 +32,6 @@ import model_hyperdoc
 import tables_metrics
 import poset_metrics
 import ast_metrics
+import readme_metrics
 import detect_variance_constraints
 import detect_covariance

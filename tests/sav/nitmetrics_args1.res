@@ -531,6 +531,9 @@ generating module_hierarchy.dot
 	  std: 0.0
 	  sum: 1
 
+# ReadMe metrics
+Warning: no source file for `base_simple3`
+
 # Inheritance metrics
 
  ## package base_simple3
@@ -951,4 +954,5 @@ model.html
 module_hierarchy.dot
 nullables/
 package_hierarchy.dot
+readme.csv
 rta/
