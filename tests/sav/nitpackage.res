@@ -1,0 +1,3 @@
+Usage: nitpackage [OPTION]... <file.nit>...
+Helpful features about packages.
+Use --help for help

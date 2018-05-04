@@ -52,4 +52,3 @@ redef class FlatBuffer
 		return "n{object_id} [label=\"FlatBuffer\\nbyte_length = {byte_length}\\nlength = {length}\\ncapacity = {capacity}\\nText = {escape_to_dot}\"];\n"
 	end
 end
-
