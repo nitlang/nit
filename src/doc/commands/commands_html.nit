@@ -48,7 +48,7 @@ redef class CmdEntity
 	redef fun to_html do
 		var mentity = self.mentity
 		if mentity == null then return ""
-		return mentity.html_link
+		return mentity.html_link.write_to_string
 	end
 end
 
@@ -110,6 +110,48 @@ redef class CmdEntityCode
 		if output == null then return ""
 		return "<pre>{output.write_to_string}</pre>"
 	end
+end
+
+redef class CmdAncestors
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdParents
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdChildren
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdDescendants
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdFeatures
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdLinearization
+	redef fun to_html do return super # FIXME lin
+end
+
+# Usage commands
+
+redef class CmdNew
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdCall
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdReturn
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdParam
+	redef fun to_html do return super # FIXME lin
 end
 
 # Graph commands
