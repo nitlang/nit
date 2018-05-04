@@ -202,6 +202,8 @@ redef class MEntity
 	# URL to `self` within the JSON api.
 	fun api_url: String do return "/api/entity/" / full_name
 
+	redef fun html_url do return web_url
+
 	redef fun core_serialize_to(v) do
 		super
 		v.serialize_attribute("web_url", web_url)

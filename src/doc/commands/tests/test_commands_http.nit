@@ -77,6 +77,44 @@ class TestCommandsHttp
 		assert res isa WarningNoMDoc
 	end
 
+	# CmdEntityLink
+
+	fun test_cmd_http_link is test do
+		var req = new_request("/test_prog::Character")
+		var cmd = new CmdEntityLink(test_view)
+		var res = cmd.http_init(req)
+		assert res isa CmdSuccess
+		assert cmd.text == "Character"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_http_link_with_text is test do
+		var req = new_request("/test_prog::Character?text=foo")
+		var cmd = new CmdEntityLink(test_view)
+		var res = cmd.http_init(req)
+		assert res isa CmdSuccess
+		assert cmd.text == "foo"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_http_link_with_title is test do
+		var req = new_request("/test_prog::Character?title=bar")
+		var cmd = new CmdEntityLink(test_view)
+		var res = cmd.http_init(req)
+		assert res isa CmdSuccess
+		assert cmd.text == "Character"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_http_link_with_text_and_title is test do
+		var req = new_request("/test_prog::Character?text=foo&title=bar")
+		var cmd = new CmdEntityLink(test_view)
+		var res = cmd.http_init(req)
+		assert res isa CmdSuccess
+		assert cmd.text == "foo"
+		assert cmd.title == "bar"
+	end
+
 	# CmdInheritance
 
 	fun test_cmd_http_parents is test do

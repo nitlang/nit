@@ -65,6 +65,41 @@ class TestCommandsModel
 		assert res isa WarningNoMDoc
 	end
 
+	# CmdLink
+
+	fun test_cmd_link is test do
+		var cmd = new CmdEntityLink(test_view, mentity_name = "test_prog::Character")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.text == "Character"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_link_with_text is test do
+		var cmd = new CmdEntityLink(test_view, mentity_name = "test_prog::Character", text = "foo")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.text == "foo"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_link_with_title is test do
+		var cmd = new CmdEntityLink(test_view, mentity_name = "test_prog::Character", title = "bar")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.text == "Character"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_link_with_text_and_title is test do
+		var cmd = new CmdEntityLink(test_view, mentity_name = "test_prog::Character",
+			text = "foo", title = "bar")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.text == "foo"
+		assert cmd.title == "bar"
+	end
+
 	# CmdInheritance
 
 	fun test_cmd_parents is test do

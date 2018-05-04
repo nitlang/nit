@@ -85,6 +85,14 @@ redef class CmdComment
 	end
 end
 
+redef class CmdEntityLink
+	redef fun http_init(req) do
+		text = req.string_arg("text")
+		title = req.string_arg("title")
+		return super
+	end
+end
+
 redef class CmdAncestors
 	redef fun http_init(req) do
 		parents = req.bool_arg("parents") or else true

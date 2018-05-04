@@ -138,7 +138,7 @@ class CmdEntity
 		end
 
 		var mentity_name = self.mentity_name
-		if mentity_name == null then return new ErrorMEntityNoName
+		if mentity_name == null or mentity_name.is_empty then return new ErrorMEntityNoName
 
 		mentity = view.mentity_by_full_name(mentity_name)
 		if mentity == null then

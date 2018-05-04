@@ -40,6 +40,12 @@ class TestCommandsJson
 		print_json cmd.to_json
 	end
 
+	fun test_cmd_link is test do
+		var cmd = new CmdEntityLink(test_view, mentity_name = "test_prog::Character")
+		cmd.init_command
+		print_json cmd.to_json
+	end
+
 	# CmdInheritance
 
 	fun test_cmd_parents is test do

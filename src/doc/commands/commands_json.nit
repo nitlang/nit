@@ -73,6 +73,17 @@ redef class CmdComment
 	end
 end
 
+redef class CmdEntityLink
+	redef fun to_json do
+		var obj = new JsonObject
+		var text = self.text
+		if text != null then obj["text"] = text
+		var title = self.title
+		if title != null then obj["title"] = title
+		return obj
+	end
+end
+
 redef class CmdEntityCode
 	redef fun to_json do
 		var obj = new JsonObject

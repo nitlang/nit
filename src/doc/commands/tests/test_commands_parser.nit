@@ -32,6 +32,114 @@ class TestCommandsParser
 		assert cmd.mdoc != null
 	end
 
+	fun test_cmd_parser_link is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("link: test_prog::Character")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "Character"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_parser_link_with_text is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("link: test_prog::Character | text: foo")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "foo"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_parser_link_with_title is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("link: test_prog::Character | title: bar")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "Character"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_parser_link_with_text_and_title is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("link: test_prog::Character | text: foo, title: bar")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "foo"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_parser_short_link is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("test_prog::Character")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "Character"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_parser_short_link_with_text is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("test_prog::Character | text: foo")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "foo"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_parser_short_link_with_title is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("test_prog::Character | title: bar")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "Character"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_parser_short_link_with_text_and_title is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("test_prog::Character | text: foo, title: bar")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "foo"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_parser_short_link_with_name is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("Character")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "Character"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_parser_short_link_with_name_and_text is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("Character | text: foo")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "foo"
+		assert cmd.title == "Characters can be played by both the human or the machine."
+	end
+
+	fun test_cmd_parser_short_link_with_name_and_title is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("Character | title: bar")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "Character"
+		assert cmd.title == "bar"
+	end
+
+	fun test_cmd_parser_short_link_with_name_and_text_and_title is test do
+		var parser = new CommandParser(test_view, test_builder)
+		var cmd = parser.parse("Character | text: foo, title: bar")
+		assert cmd isa CmdEntityLink
+		assert parser.error == null
+		assert cmd.text == "foo"
+		assert cmd.title == "bar"
+	end
+
 	# CmdInheritance
 
 	fun test_cmd_parser_parents is test do

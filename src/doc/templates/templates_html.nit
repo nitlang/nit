@@ -40,13 +40,15 @@ redef class MEntity
 	#
 	# You should redefine this method depending on the organization or your
 	# output.
-	fun html_link: Link do
-		var title = null
+	fun html_link(text, title: nullable String): Link do
+		if text == null then
+			text = html_name
+		end
 		var mdoc = self.mdoc_or_fallback
-		if mdoc != null then
+		if title == null and mdoc != null then
 			title = mdoc.synopsis.html_escape
 		end
-		return new Link(html_url, html_name, title)
+		return new Link(html_url, text, title)
 	end
 
 	# Returns the complete MEntity declaration decorated with HTML
@@ -102,14 +104,12 @@ redef class MEntity
 end
 
 redef class MPackage
-	redef fun html_url do return "package_{html_id}.html"
 	redef fun html_namespace do return html_link
 	redef fun html_icon do return new BSIcon("book", ["text-muted"])
 	redef var css_classes = ["public"]
 end
 
 redef class MGroup
-	redef fun html_url do return "group_{html_id}.html"
 	redef fun html_icon do return new BSIcon("folder-close", ["text-muted"])
 
 	redef fun html_namespace do
@@ -125,7 +125,6 @@ redef class MGroup
 end
 
 redef class MModule
-	redef fun html_url do return "module_{html_id}.html"
 	redef fun html_icon do return new BSIcon("file", ["text-muted"])
 
 	redef fun html_namespace do
@@ -141,7 +140,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef fun html_url do return "class_{html_id}.html"
 	redef fun html_icon do return new BSIcon("stop", css_classes)
 	redef fun html_signature(short) do return intro.html_signature(short)
 	redef fun css_classes do return super + [visibility.to_s]
@@ -161,7 +159,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef fun html_url do return "{mclass.html_url}#{html_id}"
 	redef fun css_classes do return super + mclass.css_classes
 
 	redef fun html_namespace do
@@ -215,7 +212,6 @@ redef class MClassDef
 end
 
 redef class MProperty
-	redef fun html_url do return "property_{html_id}.html"
 	redef fun html_declaration do return intro.html_declaration
 	redef fun html_signature(short) do return intro.html_signature(short)
 	redef fun html_icon do return new BSIcon("tag", css_classes)
@@ -231,7 +227,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef fun html_url do return "{mproperty.html_url}#{html_id}"
 	redef fun css_classes do return super + mproperty.css_classes
 
 	redef fun html_namespace do
@@ -273,7 +268,7 @@ redef class MMethodDef
 end
 
 redef class MVirtualTypeProp
-	redef fun html_link do return mvirtualtype.html_link
+	redef fun html_link(text, title) do return mvirtualtype.html_link(text, title)
 end
 
 redef class MVirtualTypeDef
@@ -292,7 +287,7 @@ redef class MType
 end
 
 redef class MClassType
-	redef fun html_link do return mclass.html_link
+	redef fun html_link(text, title) do return mclass.html_link(text, title)
 end
 
 redef class MNullableType
@@ -320,13 +315,15 @@ redef class MGenericType
 end
 
 redef class MParameterType
-	redef fun html_link do
-		return new Link("{mclass.html_url}#FT_{name.to_cmangle}", name, "formal type")
+	redef fun html_link(text, title) do
+		if text == null then text = name
+		if title == null then title = "formal type"
+		return new Link("{mclass.html_url}#FT_{name.to_cmangle}", text, title)
 	end
 end
 
 redef class MVirtualType
-	redef fun html_link do return mproperty.intro.html_link
+	redef fun html_link(text, title) do return mproperty.intro.html_link(text, title)
 end
 
 redef class MSignature
