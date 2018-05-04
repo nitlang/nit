@@ -185,10 +185,9 @@ class TCPStream
 		native.write_byte value
 	end
 
-	redef fun write_bytes(bytes) do
+	redef fun write_bytes_from_cstring(ns, len) do
 		if closed then return
-		var s = bytes.to_s
-		native.write(s.to_cstring, s.length)
+		native.write(ns, len)
 	end
 
 	fun write_ln(msg: Text)

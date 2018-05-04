@@ -241,10 +241,10 @@ class Connection
 		native_buffer_event.write_byte(byte)
 	end
 
-	redef fun write_bytes(bytes)
+	redef fun write_bytes_from_cstring(ns, len)
 	do
 		if close_requested then return
-		native_buffer_event.write(bytes.items, bytes.length)
+		native_buffer_event.write(ns, len)
 	end
 
 	# Write a file to the connection

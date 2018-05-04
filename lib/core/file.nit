@@ -210,13 +210,13 @@ class FileWriter
 	super FileStream
 	super Writer
 
-	redef fun write_bytes(s) do
+	redef fun write_bytes_from_cstring(cs, len) do
 		if last_error != null then return
 		if not _is_writable then
 			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		write_native(s.items, 0, s.length)
+		write_native(cs, 0, len)
 	end
 
 	redef fun write(s)
@@ -510,9 +510,10 @@ class Path
 		var input = open_ro
 		var output = dest.open_wo
 
+		var buffer = new CString(4096)
 		while not input.eof do
-			var buffer = input.read_bytes(4096)
-			output.write_bytes buffer
+			var read = input.read_bytes_to_cstring(buffer, 4096)
+			output.write_bytes_from_cstring(buffer, read)
 		end
 
 		input.close
