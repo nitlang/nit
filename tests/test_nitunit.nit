@@ -28,6 +28,10 @@ class X
 	#     assert !@#$%^&*()
 	fun foo1(a, b: Int) do end
 
+	# a private method (visible by nitunit)
+	#
+	#     var x = new X
+	#     assert x.foo2
 	private fun foo2: Bool do return true
 
 	var foo3: Y[X] = new Y[X]
