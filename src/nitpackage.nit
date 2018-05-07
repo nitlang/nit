@@ -34,7 +34,6 @@ private class ReadmePhase
 	super Phase
 
 	redef fun process_mainmodule(mainmodule, mmodules) do
-		var expand_packages = toolcontext.opt_expand.value
 		var mpackages = extract_mpackages(mmodules)
 
 		for mpackage in mpackages do
@@ -47,15 +46,14 @@ private class ReadmePhase
 			end
 
 			# Expand packages
+			if toolcontext.opt_expand.value and not mpackage.is_expanded then
+				var path = mpackage.expand
+				toolcontext.info("{mpackage} moved to {path}", 0)
+			end
 			if not mpackage.is_expanded then
-				if expand_packages then
-					var path = mpackage.expand
-					toolcontext.info("{mpackage} moved to {path}", 0)
-				else
-					toolcontext.warning(mpackage.location, "no-dir",
-						"Warning: `{mpackage}` has no package directory")
-					continue
-				end
+				toolcontext.warning(mpackage.location, "no-dir",
+					"Warning: `{mpackage}` has no package directory")
+				continue
 			end
 		end
 	end
