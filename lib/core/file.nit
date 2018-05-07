@@ -101,7 +101,6 @@ end
 # `Stream` that can read from a File
 class FileReader
 	super FileStream
-	super BufferedReader
 	super PollableReader
 	# Misc
 
@@ -114,62 +113,59 @@ class FileReader
 	#     assert l == f.read_line
 	fun reopen
 	do
-		if not eof and not _file.as(not null).address_is_null then close
+		var fl = _file
+		if fl != null and not fl.address_is_null then close
 		last_error = null
 		_file = new NativeFile.io_open_read(path.as(not null).to_cstring)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path.as(not null)}`: {sys.errno.strerror}")
-			end_reached = true
 			return
 		end
-		end_reached = false
-		buffer_reset
 	end
 
-	redef fun close
+	redef fun raw_read_byte
 	do
-		super
-		buffer_reset
-		end_reached = true
-	end
-
-	redef fun fill_buffer
-	do
-		var nb = _file.as(not null).io_read(_buffer, _buffer_capacity)
+		var nb = _file.as(not null).io_read(write_buffer, 1)
 		if last_error == null and _file.as(not null).ferror then
 			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
-			end_reached = true
 		end
-		if nb <= 0 then
-			end_reached = true
-			nb = 0
-		end
-		_buffer_length = nb
-		_buffer_pos = 0
+		if nb == 0 then return -1
+		return write_buffer[0].to_i
 	end
 
-	# End of file?
-	redef var end_reached = false
+	redef fun raw_read_bytes(cstr, max)
+	do
+		var nb = _file.as(not null).io_read(cstr, max)
+		if last_error == null and _file.as(not null).ferror then
+			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
+		end
+		return nb
+	end
+
+	redef fun eof do
+		if lookahead_length != 0 then
+			return false
+		end
+		return _file.as(not null).feof
+	end
 
 	# Open the file at `path` for reading.
 	#
 	#     var f = new FileReader.open("/etc/issue")
-	#     assert not f.end_reached
+	#     assert not f.eof
 	#     f.close
 	#
 	# In case of error, `last_error` is set
 	#
 	#     f = new FileReader.open("/fail/does not/exist")
-	#     assert f.end_reached
+	#     assert f.eof
 	#     assert f.last_error != null
 	init open(path: String)
 	do
 		self.path = path
-		prepare_buffer(100)
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
-			end_reached = true
 		end
 	end
 
@@ -178,11 +174,9 @@ class FileReader
 	# This is a low-level method.
 	init from_fd(fd: Int) do
 		self.path = ""
-		prepare_buffer(1)
 		_file = fd.fd_to_stream(read_only)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Error: Converting fd {fd} to stream failed with '{sys.errno.strerror}'")
-			end_reached = true
 		end
 	end
 
@@ -330,7 +324,6 @@ class Stdin
 	init do
 		_file = new NativeFile.native_stdin
 		path = "/dev/stdin"
-		prepare_buffer(1)
 	end
 end
 
@@ -1543,6 +1536,8 @@ private extern class NativeFile `{ FILE* `}
 	`}
 
 	fun ferror: Bool `{ return ferror(self); `}
+
+	fun feof: Bool `{ return feof(self); `}
 
 	fun fileno: Int `{ return fileno(self); `}
 
