@@ -40,7 +40,8 @@ shift
 
 while read -r repo name; do
 	[[ "$repo" = "#"* ]] && continue
-	[[ "$name" = "" ]] && continue
+	[[ "$repo" = "" ]] && continue
+	[[ "$name" = "" ]] && name=`basename "$repo" .git`
 	dir="oot/$name"
 	case "$cmd" in
 		list) echo "$name";;
