@@ -68,8 +68,9 @@ class ConfigTree
 		if node == null then return null
 		var map = new HashMap[String, String]
 		for k, child in node.children do
-			if child.value == null then continue
-			map[k] = child.value.to_s
+			var value = child.value
+			if value == null then continue
+			map[k] = value
 		end
 		return map
 	end
@@ -112,8 +113,9 @@ class ConfigTree
 	fun to_map: Map[String, String] do
 		var map = new HashMap[String, String]
 		for node in leaves do
-			if node.value == null then continue
-			map[node.key] = node.value.to_s
+			var value = node.value
+			if value == null then continue
+			map[node.key] = value
 		end
 		return map
 	end
@@ -234,9 +236,8 @@ class ConfigTree
 	private fun set_array(key: String, value: nullable String) do
 		key = key.substring(0, key.length - 2)
 		var len = 0
-		if has_key(key) then
-			len = get_node(key).children.length
-		end
+		var node = get_node(key)
+		if node != null then len = node.children.length
 		set_node("{key}.{len.to_s}", value)
 	end
 
@@ -306,6 +307,7 @@ private class ConfigNode
 	var value: nullable String = null
 
 	fun key: String do
+		var parent = self.parent
 		if parent == null then
 			return name
 		end
