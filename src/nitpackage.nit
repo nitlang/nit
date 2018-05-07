@@ -21,12 +21,19 @@ redef class ToolContext
 	# --expand
 	var opt_expand = new OptionBool("Move singleton packages to their own directory", "--expand")
 
+	# --gen-ini
+	var opt_gen_ini = new OptionBool("Generate package.ini files", "--gen-ini")
+
+	# --force
+	var opt_force = new OptionBool("Force update of existing files", "-f", "--force")
+
 	# README handling phase
 	var readme_phase: Phase = new ReadmePhase(self, null)
 
 	redef init do
 		super
-		option_context.add_option(opt_expand)
+		option_context.add_option(opt_expand, opt_force)
+		option_context.add_option(opt_gen_ini)
 	end
 end
 
@@ -35,7 +42,6 @@ private class ReadmePhase
 
 	redef fun process_mainmodule(mainmodule, mmodules) do
 		var mpackages = extract_mpackages(mmodules)
-
 		for mpackage in mpackages do
 
 			# Fictive and buggy packages are ignored
@@ -54,6 +60,14 @@ private class ReadmePhase
 				toolcontext.warning(mpackage.location, "no-dir",
 					"Warning: `{mpackage}` has no package directory")
 				continue
+			end
+
+			# Create INI file
+			if toolcontext.opt_gen_ini.value then
+				if not mpackage.has_ini or toolcontext.opt_force.value then
+					var path = mpackage.gen_ini
+					toolcontext.info("generated INI file `{path}`", 0)
+				end
 			end
 		end
 	end
@@ -88,6 +102,108 @@ redef class MPackage
 		end
 
 		return new_path
+	end
+
+	private var maintainer: nullable String is lazy do
+		return git_exec("git shortlog -esn . | head -n 1 | sed 's/\\s*[0-9]*\\s*//'")
+	end
+
+	private var contributors: Array[String] is lazy do
+		var contribs = git_exec("git shortlog -esn . | head -n -1 | " +
+			"sed 's/\\s*[0-9]*\\s*//'")
+		if contribs == null then return new Array[String]
+		return contribs.split("\n")
+	end
+
+	private var git_url: nullable String is lazy do
+		var git = git_exec("git remote get-url origin")
+		if git == null then return null
+		git = git.replace("git@github.com:", "https://github.com/")
+		git = git.replace("git@gitlab.com:", "https://gitlab.com/")
+		return git
+	end
+
+	private var git_dir: nullable String is lazy do
+		return git_exec("git rev-parse --show-prefix")
+	end
+
+	private var browse_url: nullable String is lazy do
+		var git = git_url
+		if git == null then return null
+		var browse = git.replace(".git", "")
+		var dir = git_dir
+		if dir == null or dir.is_empty then return browse
+		return "{browse}/tree/master/{dir}"
+	end
+
+	private var homepage_url: nullable String is lazy do
+		var git = git_url
+		if git == null then return null
+		# Special case for nit files
+		if git.has_suffix("/nit.git") then
+			return "http://nitlanguage.org"
+		end
+		return git.replace(".git", "")
+	end
+
+	private var issues_url: nullable String is lazy do
+		var git = git_url
+		if git == null then return null
+		return "{git.replace(".git", "")}/issues"
+	end
+
+	private var license: nullable String is lazy do
+		var git = git_url
+		if git == null then return null
+		# Special case for nit files
+		if git.has_suffix("/nit.git") then
+			return "Apache-2.0"
+		end
+		return null
+	end
+
+	private fun git_exec(cmd: String): nullable String do
+		var path = package_path
+		if path == null then return null
+		if not is_expanded then path = path.dirname
+		with pr = new ProcessReader("sh", "-c", "cd {path} && {cmd}") do
+			return pr.read_all.trim
+		end
+	end
+
+	private fun gen_ini: String do
+		var ini_path = self.ini_path.as(not null)
+		var ini = new ConfigTree(ini_path)
+
+		ini.update_value("package.name", name)
+		ini.update_value("package.desc", "")
+		ini.update_value("package.tags", "")
+		ini.update_value("package.maintainer", maintainer)
+		ini.update_value("package.more_contributors", contributors.join(","))
+		ini.update_value("package.license", license or else "")
+
+		ini.update_value("upstream.browse", browse_url)
+		ini.update_value("upstream.git", git_url)
+		ini.update_value("upstream.git.directory", git_dir)
+		ini.update_value("upstream.homepage", homepage_url)
+		ini.update_value("upstream.issues", issues_url)
+
+		ini.save
+		return ini_path
+	end
+end
+
+redef class ConfigTree
+	private fun update_value(key: String, value: nullable String) do
+		if value == null then return
+		if not has_key(key) then
+			self[key] = value
+		else
+			var old_value = self[key]
+			if not value.is_empty and old_value != value then
+				self[key] = value
+			end
+		end
 	end
 end
 
