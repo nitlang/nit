@@ -721,6 +721,9 @@ for p in mpackages do
 	var f = "p/{p.name}.html"
 	catalog.package_page(p)
 	catalog.generate_page(p).write_to_file(out/f)
+	# copy ini
+	var ini = p.ini
+	if ini != null then ini.write_to_file(out/"p/{p.name}.ini")
 end
 
 # INDEX

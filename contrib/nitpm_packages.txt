@@ -1,0 +1,6 @@
+# List of official nitpm-compatible repositories
+https://gitlab.com/xymus/gamnit.git
+https://gitlab.com/xymus/hello_nitpm.git
+https://gitlab.com/xymus/nitpm_test_cycle.git
+https://gitlab.com/xymus/nitpm_test_imports.git
+https://gitlab.com/xymus/nitpm_test_versions.git
