@@ -63,24 +63,11 @@ end
 
 redef class MPackage
 
-	# Does `self` have a source file?
-	private var has_source: Bool is lazy do
-		return location.file != null
-	end
-
-	# Is `self` in its own directory?
-	private var is_expanded: Bool is lazy do
-		if not has_source then return false
-		var path = location.file.as(not null).filename
-		if path.has_suffix(".nit") then return false
-		return true
-	end
-
 	# Expand `self` in its own directory
 	private fun expand: String do
 		assert not is_expanded
 
-		var ori_path = location.file.as(not null).filename
+		var ori_path = package_path.as(not null)
 		var new_path = ori_path.dirname / name
 
 		new_path.mkdir

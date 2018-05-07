@@ -61,6 +61,22 @@ class MPackage
 		if root != null then return root.mdoc_or_fallback
 		return null
 	end
+
+	# Does `self` have a source file?
+	fun has_source: Bool do return location.file != null
+
+	# The path to `self`
+	fun package_path: nullable String do
+		if not has_source then return null
+		return location.file.as(not null).filename
+	end
+
+	# Is `self` in its own directory?
+	fun is_expanded: Bool do
+		var path = package_path
+		if path == null then return false
+		return not path.has_suffix(".nit")
+	end
 end
 
 # A group of modules in a package
