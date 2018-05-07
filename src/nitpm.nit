@@ -104,11 +104,10 @@ class CommandInstall
 	do
 		if package_id.is_package_name then
 			# Ask a centralized server
-			# TODO choose a future safe URL
 			# TODO customizable server list
 			# TODO parse ini file in memory
 
-			var url = "https://xymus.net/nitpm/{package_id}.ini"
+			var url = "https://nitlanguage.org/catalog/p/{package_id}.ini"
 			var ini_path = "/tmp/{package_id}.ini"
 
 			if verbose then print "Looking for a package description at '{url}'"
