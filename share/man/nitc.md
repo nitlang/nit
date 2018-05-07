@@ -38,7 +38,7 @@ To combine files into a single program, use the `-m` option.
     $ nitc prog1.nit -m other_module.nit
 
 nitc can produces executables for various platforms when specific modules are used.
-Currently, android, pnacl and emscripten are supported.
+Currently, android and emscripten are supported.
 See the documentation of these specific modules for details.
 
 

@@ -27,10 +27,6 @@ in "C" `{
 	#define be32toh(val) _byteswap_ulong(val)
 #endif
 
-#ifdef __pnacl__
-	#define be16toh(val) (((val) >> 8) | ((val) << 8))
-	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))
-#endif
 #ifndef be32toh
 	#define be32toh(val) betoh32(val)
 #endif
