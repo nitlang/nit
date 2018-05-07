@@ -122,10 +122,32 @@ class ConfigTree
 
 	redef fun to_s do return to_map.join(", ", ":")
 
+	# Write `self` in `stream`
+	#
+	#     var config = new ConfigTree("config.ini")
+	#     var out = new StringWriter
+	#     config.write_to(out)
+	#     assert out.to_s == """
+	#     goo=goo
+	#     [foo]
+	#     bar=foobar
+	#     baz=foobaz
+	#     """
 	redef fun write_to(stream) do
-		for node in leaves do
-			if node.value == null then continue
-			stream.write("{node.key}={node.value.to_s}\n")
+		var todo = new Array[ConfigNode].from(roots.reversed)
+		while not todo.is_empty do
+			var node = todo.pop
+			if node.children.not_empty then
+				todo.add_all node.children.values.to_a.reversed
+			end
+			if node.children.not_empty and node.parent == null then
+				stream.write("[{node.name}]\n")
+			end
+			var value = node.value
+			if value == null then continue
+			var path = node.path
+			if path.length > 1 then path.shift
+			stream.write("{path.join(".")}={value}\n")
 		end
 	end
 
@@ -312,6 +334,16 @@ private class ConfigNode
 			return name
 		end
 		return "{parent.key}.{name}"
+	end
+
+	fun path: Array[String] do
+		var parent = self.parent
+		if parent == null then
+			return [name]
+		end
+		var res = new Array[String].from(parent.path)
+		res.add name
+		return res
 	end
 
 	fun get_child(name: String): nullable ConfigNode do
