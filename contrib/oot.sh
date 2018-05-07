@@ -38,6 +38,7 @@ trymake_oot() {
 cmd="$1"
 shift
 
+process_list() {
 while read -r repo name; do
 	[[ "$repo" = "#"* ]] && continue
 	[[ "$repo" = "" ]] && continue
@@ -52,4 +53,8 @@ while read -r repo name; do
 		""|help) echo "usage: oot.sh command [arg...]"; exit 0;;
 		*) echo >&2 "unknown command: $cmd"; exit 1;;
 	esac
-done < oot.txt
+done
+}
+
+process_list < oot.txt
+process_list < nitpm_packages.txt
