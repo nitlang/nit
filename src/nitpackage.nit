@@ -35,9 +35,9 @@ private class ReadmePhase
 
 	redef fun process_mainmodule(mainmodule, mmodules) do
 		var expand_packages = toolcontext.opt_expand.value
-		var model = toolcontext.modelbuilder.model
+		var mpackages = extract_mpackages(mmodules)
 
-		for mpackage in model.mpackages do
+		for mpackage in mpackages do
 
 			# Fictive and buggy packages are ignored
 			if not mpackage.has_source then
@@ -58,6 +58,17 @@ private class ReadmePhase
 				end
 			end
 		end
+	end
+
+	# Extract the list of packages from the mmodules passed as arguments
+	fun extract_mpackages(mmodules: Collection[MModule]): Collection[MPackage] do
+		var mpackages = new ArraySet[MPackage]
+		for mmodule in mmodules do
+			var mpackage = mmodule.mpackage
+			if mpackage == null then continue
+			mpackages.add mpackage
+		end
+		return mpackages.to_a
 	end
 end
 
