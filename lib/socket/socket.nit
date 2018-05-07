@@ -74,7 +74,7 @@ class TCPStream
 		_buffer = new CString(1024)
 		_buffer_pos = 0
 		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
-			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
+			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_unspec)
 		if native.address_is_null then
 			end_reached = true
 			closed = true
@@ -135,7 +135,7 @@ class TCPStream
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	private fun pollin(event_types: Array[NativeSocketPollValues], timeout: Int): Array[NativeSocketPollValues] do
 		if end_reached then return new Array[NativeSocketPollValues]
-		return native.socket_poll(new PollFD(native.descriptor, event_types), timeout)
+		return native.socket_poll(new PollFD.from_poll_values(native.descriptor, event_types), timeout)
 	end
 
 	# Easier use of pollin to check for something to read on all channels of any priority
@@ -190,6 +190,7 @@ class TCPStream
 		native.write(ns, len)
 	end
 
+	# Write `msg`, with a trailing `\n`
 	fun write_ln(msg: Text)
 	do
 		if closed then return
@@ -211,6 +212,7 @@ class TCPStream
 		_buffer_pos = 0
 	end
 
+	# Enlarge `_buffer` to at least `len` bytes
 	fun enlarge(len: Int) do
 		if _buffer_capacity >= len then return
 		_buffer_capacity = len
@@ -251,7 +253,7 @@ class TCPServer
 	init
 	do
 		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
-			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
+			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_unspec)
 		assert not native.address_is_null
 		if not native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
 			closed = true
@@ -333,26 +335,33 @@ end
 class SocketObserver
 	private var native = new NativeSocketObserver
 
+	# Set of file descriptors on which to watch read events
 	var read_set: nullable SocketSet = null
 
+	# Set of file descriptors on which to watch write events
 	var write_set: nullable SocketSet = null
 
+	# Set of file descriptors on which to watch exception events
 	var except_set: nullable SocketSet = null
 
-	init(read: Bool, write: Bool, except: Bool)
-	is old_style_init do
+	# Initialize a socket observer
+	init with_sets(read: Bool, write: Bool, except: Bool) do
 		if read then read_set = new SocketSet
 		if write then write_set = new SocketSet
 		if except then except_set = new SocketSet
 	end
 
+	# Watch for changes in the states of several sockets.
 	fun select(max: Socket, seconds: Int, microseconds: Int): Bool
 	do
 		# FIXME this implementation (see the call to nullable attributes below) and
 		# `NativeSockectObserver::select` is not stable.
 
 		var timeval = new NativeTimeval(seconds, microseconds)
-		return native.select(max.native, read_set.native, write_set.native, except_set.native, timeval) > 0
+		var rd = if read_set != null then read_set.as(not null).native else null
+		var wrt = if write_set != null then write_set.as(not null).native else null
+		var expt = if except_set != null then except_set.as(not null).native else null
+		return native.select(max.native, rd, wrt, expt, timeval) > 0
 	end
 end
 
@@ -366,7 +375,7 @@ class UDPSocket
 	init do native = new NativeSocket.socket(
 			new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_dgram,
-			new NativeSocketProtocolFamilies.pf_null)
+			new NativeSocketProtocolFamilies.pf_unspec)
 
 	# Bind this socket to an `address`, on `port` (to all addresses if `null`)
 	#
