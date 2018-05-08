@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services to read JSON: `from_json_string` and `JsonDeserializer`
+# Services to read JSON: `deserialize_json` and `JsonDeserializer`
 module serialization_read
 
 import serialization::caching
@@ -364,15 +364,17 @@ redef class Text
 
 	# Deserialize a `nullable Object` from this JSON formatted string
 	#
+	# If a `static_type` is given, only subtypes of the `static_type` are accepted.
+	#
 	# Warning: Deserialization errors are reported with `print_error` and
 	# may be returned as a partial object or as `null`.
 	#
 	# This method is not appropriate when errors need to be handled programmatically,
 	# manually use a `JsonDeserializer` in such cases.
-	fun from_json_string: nullable Object
+	fun deserialize_json(static_type: nullable String): nullable Object
 	do
 		var deserializer = new JsonDeserializer(self)
-		var res = deserializer.deserialize
+		var res = deserializer.deserialize(static_type)
 		if deserializer.errors.not_empty then
 			print_error "Deserialization Errors: {deserializer.errors.join(", ")}"
 		end
