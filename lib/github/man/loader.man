@@ -1,0 +1,54 @@
+# NAME
+
+loader - Load a GitHub repo into a MongoDb.
+
+# SYNOPSIS
+
+loader <repo_name>
+
+# OPTIONS
+
+### `-h`, `-?`, `--help`
+Show this help message.
+
+### `--config`
+Path to config file.
+
+### `--db-host`
+MongoDb host.
+
+### `--db-name`
+MongoDb database name.
+
+### `--tokens`
+Token list.
+
+### `--show-wallet`
+Show wallet status.
+
+### `-v`, `--verbose`
+Verbosity level.
+
+### `--no-colors`
+Do not use colors in output.
+
+### `--show-jobs`
+Show jobs status.
+
+### `--no-commits`
+Do not load commits from default branch.
+
+### `--no-issues`
+Do not load issues.
+
+### `--no-comments`
+Do not load issue comments.
+
+### `--no-events`
+Do not load issues events.
+
+### `--from`
+Start loading issues from a number.
+
+### `--clear`
+Clear job for given repo name.
