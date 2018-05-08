@@ -103,6 +103,22 @@
 	}]
 }
 {
+	"name": "Sys",
+	"synopsis": "Sys",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}],
+	"class_name": "MClass",
+	"full_name": "test_prog::Sys",
+	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Sys</span>",
+	"modifiers": ["class"]
+}
+{
 	"name": "Career",
 	"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
 	"namespace": [{
@@ -324,15 +340,28 @@
 	"modifiers": ["class"]
 }
 {
-	"name": "Sys",
+	"name": "TestGame",
 	"namespace": [{
 		"name": "test_prog",
 		"synopsis": "Test program for model tools."
 	}, "::", {
-		"name": "Sys"
+		"name": "TestGame"
 	}],
 	"class_name": "MClass",
-	"full_name": "test_prog::Sys",
+	"full_name": "test_prog::TestGame",
+	"visibility": "public",
+	"modifiers": ["class"]
+}
+{
+	"name": "GameTest",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "GameTest"
+	}],
+	"class_name": "MClass",
+	"full_name": "test_prog::GameTest",
 	"visibility": "public",
 	"modifiers": ["class"]
 }

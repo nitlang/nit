@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_game_examples is test
+module test_game is test
 
 import game
 
@@ -26,7 +26,8 @@ class GameTest
 	test
 
 	fun test_game is test do
-		var game = new TestGame
-		assert game.player_characters isa List[Character]
+		var game1 = new TestGame
+		var game2 = new TestGame
+		assert game1 != game2
 	end
 end

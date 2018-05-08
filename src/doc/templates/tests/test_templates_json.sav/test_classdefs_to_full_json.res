@@ -109,6 +109,42 @@
 	}]
 }
 {
+	"name": "Sys",
+	"synopsis": "Sys",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}],
+	"class_name": "MClassDef",
+	"full_name": "test_prog$Sys",
+	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Sys</span>",
+	"modifiers": ["class"],
+	"is_intro": true
+}
+{
+	"name": "Sys",
+	"synopsis": "Sys",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "test_prog",
+		"synopsis": "A test program with a fake model to check model tools."
+	}, "$", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}],
+	"class_name": "MClassDef",
+	"full_name": "test_prog::test_prog$Sys",
+	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Sys</span>",
+	"modifiers": ["redef", "class"]
+}
+{
 	"name": "Career",
 	"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
 	"namespace": [{
@@ -382,15 +418,29 @@
 	"is_intro": true
 }
 {
-	"name": "Sys",
+	"name": "TestGame",
 	"namespace": [{
 		"name": "test_prog",
 		"synopsis": "Test program for model tools."
 	}, "$", {
-		"name": "Sys"
+		"name": "TestGame"
 	}],
 	"class_name": "MClassDef",
-	"full_name": "test_prog$Sys",
+	"full_name": "test_prog$TestGame",
+	"visibility": "public",
+	"modifiers": ["class"],
+	"is_intro": true
+}
+{
+	"name": "GameTest",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "GameTest"
+	}],
+	"class_name": "MClassDef",
+	"full_name": "test_prog$GameTest",
 	"visibility": "public",
 	"modifiers": ["class"],
 	"is_intro": true

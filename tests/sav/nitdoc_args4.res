@@ -1,6 +1,8 @@
 Empty README for group `examples` (readme-warning)
+Empty README for group `man` (readme-warning)
+Empty README for group `tests` (readme-warning)
 Empty README for group `excluded` (readme-warning)
-Errors: 0. Warnings: 2.
+Errors: 0. Warnings: 4.
 MGroupPage excluded
 	# excluded.section
 		## excluded.intro
@@ -39,11 +41,15 @@ ReadmePage examples
 ReadmePage game
 	# mdarticle-0
 
+ReadmePage man
+
 ReadmePage platform
 	# mdarticle-0
 
 ReadmePage rpg
 	# mdarticle-0
+
+ReadmePage tests
 
 SearchPage Index
 	# index.article
@@ -79,7 +85,10 @@ MModulePage test_prog
 						###### list.group
 							####### test_prog-__Starter.intros
 							####### test_prog-__Starter.redefs
-			### test_prog-__Sys.definition-list
+		## test_prog__platform.concern
+		## test_prog__platform-.concern
+			### test_prog__platform-__Sys.definition-list
+				#### test_prog__platform-__Sys.definition
 				#### test_prog-__Sys.definition
 					##### test_prog-__Sys.intros_redefs
 						###### list.group
@@ -107,27 +116,6 @@ MClassPage Starter
 MPropertyPage start
 	# start.section
 		## test_prog-__Starter__start.intro
-
-MClassPage Sys
-	# Sys.section
-		## test_prog-__Sys.intro
-		## test_prog-__Sys.inheritance
-			### test_prog-__Sys.graph
-			### list.group
-				#### test_prog-__Sys.parents
-				#### test_prog-__Sys.ancestors
-				#### test_prog-__Sys.children
-				#### test_prog-__Sys.descendants
-		## test_prog-__Sys.constructors
-		## test_prog-__Sys.concerns
-		## test_prog.concern
-		## test_prog.concern
-		## test_prog-.concern
-			### test_prog-__Sys__main.definition
-
-MPropertyPage main
-	# main.section
-		## test_prog-__Sys__main.intro
 
 MGroupPage examples
 	# examples.section
@@ -287,6 +275,9 @@ MPropertyPage player_characters
 		## test_prog__examples.concern
 		## test_prog__examples-.concern
 			### test_prog__examples-__MyGame__player_characters.definition
+		## test_prog__tests.concern
+		## test_prog__tests-.concern
+			### test_prog__tests-__TestGame__player_characters.definition
 
 MPropertyPage start_game
 	# start_game.section
@@ -307,6 +298,10 @@ MPropertyPage stop_game
 		## test_prog__examples.concern
 		## test_prog__examples-.concern
 			### test_prog__examples-__MyGame__stop_game.definition
+
+MGroupPage man
+	# man.section
+		## test_prog__man.intro
 
 MGroupPage platform
 	# platform.section
@@ -371,6 +366,12 @@ MModulePage platform
 						###### list.group
 							####### test_prog__platform-__String.intros
 							####### test_prog__platform-__String.redefs
+			### test_prog__platform-__Sys.definition-list
+				#### test_prog__platform-__Sys.definition
+					##### test_prog__platform-__Sys.intros_redefs
+						###### list.group
+							####### test_prog__platform-__Sys.intros
+							####### test_prog__platform-__Sys.redefs
 
 MClassPage Bool
 	# Bool.section
@@ -553,6 +554,38 @@ MClassPage String
 				#### test_prog__platform-__String.ancestors
 				#### test_prog__platform-__String.children
 				#### test_prog__platform-__String.descendants
+
+MClassPage Sys
+	# Sys.section
+		## test_prog__platform-__Sys.intro
+		## test_prog__platform-__Sys.inheritance
+			### test_prog__platform-__Sys.graph
+			### list.group
+				#### test_prog__platform-__Sys.parents
+				#### test_prog__platform-__Sys.ancestors
+				#### test_prog__platform-__Sys.children
+				#### test_prog__platform-__Sys.descendants
+		## test_prog__platform-__Sys.constructors
+			### test_prog__platform-__Object__init.definition
+		## test_prog__platform-__Sys.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__platform.concern
+		## test_prog__platform-.concern
+			### test_prog__platform-__Sys__main.definition
+				#### test_prog__platform-__Sys__main.lin
+		## test_prog-.concern
+			### test_prog-__Sys__main.definition
+				#### test_prog-__Sys__main.lin
+
+MPropertyPage main
+	# main.section
+		## test_prog__platform-__Sys__main.intro
+		## test_prog__platform-__Sys__main.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog-.concern
+			### test_prog-__Sys__main.definition
 
 MGroupPage rpg
 	# rpg.section
@@ -1139,24 +1172,112 @@ MModulePage rpg
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
 
-Generated 105 pages
+MGroupPage tests
+	# tests.section
+		## test_prog__tests.intro
+		## test_prog__tests.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__tests.concern
+		## test_prog__tests-.concern
+			### test_prog__tests-.definition
+				#### test_prog__tests-.intros_redefs
+					##### list.group
+						###### test_prog__tests-.intros
+						###### test_prog__tests-.redefs
+
+MModulePage test_game
+	# test_game.section
+		## test_prog__tests-.intro
+		## test_prog__tests-.importation
+			### test_prog__tests-.graph
+			### list.group
+				#### test_prog__tests-.imports
+				#### test_prog__tests-.clients
+		## test_prog__tests-.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__tests.concern
+		## test_prog__tests-.concern
+			### test_prog__tests-__GameTest.definition-list
+				#### test_prog__tests-__GameTest.definition
+					##### test_prog__tests-__GameTest.intros_redefs
+						###### list.group
+							####### test_prog__tests-__GameTest.intros
+							####### test_prog__tests-__GameTest.redefs
+			### test_prog__tests-__TestGame.definition-list
+				#### test_prog__tests-__TestGame.definition
+					##### test_prog__tests-__TestGame.intros_redefs
+						###### list.group
+							####### test_prog__tests-__TestGame.intros
+							####### test_prog__tests-__TestGame.redefs
+
+MClassPage GameTest
+	# GameTest.section
+		## test_prog__tests-__GameTest.intro
+		## test_prog__tests-__GameTest.inheritance
+			### test_prog__tests-__GameTest.graph
+			### list.group
+				#### test_prog__tests-__GameTest.parents
+				#### test_prog__tests-__GameTest.ancestors
+				#### test_prog__tests-__GameTest.children
+				#### test_prog__tests-__GameTest.descendants
+		## test_prog__tests-__GameTest.constructors
+			### test_prog__platform-__Object__init.definition
+		## test_prog__tests-__GameTest.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__tests.concern
+		## test_prog__tests-.concern
+			### test_prog__tests-__GameTest__test_game.definition
+
+MPropertyPage test_game
+	# test_game.section
+		## test_prog__tests-__GameTest__test_game.intro
+
+MClassPage TestGame
+	# TestGame.section
+		## test_prog__tests-__TestGame.intro
+		## test_prog__tests-__TestGame.inheritance
+			### test_prog__tests-__TestGame.graph
+			### list.group
+				#### test_prog__tests-__TestGame.parents
+				#### test_prog__tests-__TestGame.ancestors
+				#### test_prog__tests-__TestGame.children
+				#### test_prog__tests-__TestGame.descendants
+		## test_prog__tests-__TestGame.constructors
+			### test_prog__platform-__Object__init.definition
+		## test_prog__tests-__TestGame.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__tests.concern
+		## test_prog__tests-.concern
+			### test_prog__tests-__TestGame__player_characters.definition
+				#### test_prog__tests-__TestGame__player_characters.lin
+			### test_prog__tests-__TestGame__player_characters_61d.definition
+
+MPropertyPage player_characters=
+	# player_characters=.section
+		## test_prog__tests-__TestGame__player_characters_61d.intro
+
+Generated 114 pages
  list:
-  MPropertyPage: 60 (57.14%)
-  MClassPage: 21 (20.00%)
-  MModulePage: 10 (9.52%)
-  ReadmePage: 6 (5.71%)
-  MGroupPage: 6 (5.71%)
-  SearchPage: 1 (0.95%)
-  OverviewPage: 1 (0.95%)
-Found 198 mentities
+  MPropertyPage: 62 (54.38%)
+  MClassPage: 23 (20.17%)
+  MModulePage: 11 (9.64%)
+  ReadmePage: 8 (7.01%)
+  MGroupPage: 8 (7.01%)
+  SearchPage: 1 (0.87%)
+  OverviewPage: 1 (0.87%)
+Found 212 mentities
  list:
-  MMethodDef: 75 (37.87%)
-  MMethod: 59 (29.79%)
-  MClassDef: 23 (11.61%)
-  MClass: 21 (10.60%)
-  MModule: 10 (5.05%)
-  MGroup: 6 (3.03%)
-  MPackage: 2 (1.01%)
-  MVirtualTypeDef: 1 (0.50%)
-  MVirtualTypeProp: 1 (0.50%)
+  MMethodDef: 79 (37.26%)
+  MMethod: 61 (28.77%)
+  MClassDef: 26 (12.26%)
+  MClass: 23 (10.84%)
+  MModule: 11 (5.18%)
+  MGroup: 8 (3.77%)
+  MPackage: 2 (0.94%)
+  MVirtualTypeDef: 1 (0.47%)
+  MVirtualTypeProp: 1 (0.47%)
 quicksearch-list.js

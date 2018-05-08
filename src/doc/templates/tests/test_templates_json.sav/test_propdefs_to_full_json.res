@@ -728,6 +728,52 @@
 	}
 }
 {
+	"name": "main",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}, "$", {
+		"name": "main"
+	}],
+	"class_name": "MMethodDef",
+	"full_name": "test_prog$Sys$main",
+	"visibility": "public",
+	"modifiers": ["intern", "fun"],
+	"is_intro": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "main",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "test_prog",
+		"synopsis": "A test program with a fake model to check model tools."
+	}, "$", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}, "$", {
+		"name": "main"
+	}],
+	"class_name": "MMethodDef",
+	"full_name": "test_prog::test_prog$Sys$main",
+	"visibility": "public",
+	"modifiers": ["redef", "fun"],
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "_strength_bonus",
 	"namespace": [{
 		"name": "test_prog",
@@ -2195,6 +2241,36 @@
 	}
 }
 {
+	"name": "player_characters",
+	"synopsis": "Characters played by human players.",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "TestGame"
+	}, "$", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "player_characters",
+		"synopsis": "Characters played by human players."
+	}],
+	"class_name": "MMethodDef",
+	"full_name": "test_prog$TestGame$Game::player_characters",
+	"visibility": "public",
+	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters played by human players.</span>",
+	"modifiers": ["redef", "fun"],
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": {
+			"name": "List[Character]",
+			"synopsis": "List of things.",
+			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		}
+	}
+}
+{
 	"name": "computer_characters",
 	"synopsis": "Characters players by computer.",
 	"namespace": [{
@@ -2536,17 +2612,67 @@
 	}
 }
 {
-	"name": "main",
+	"name": "_player_characters",
 	"namespace": [{
 		"name": "test_prog",
 		"synopsis": "Test program for model tools."
 	}, "$", {
-		"name": "Sys"
+		"name": "TestGame"
 	}, "$", {
-		"name": "main"
+		"name": "_player_characters"
+	}],
+	"class_name": "MAttributeDef",
+	"full_name": "test_prog$TestGame$_player_characters",
+	"visibility": "private",
+	"modifiers": ["private", "var"],
+	"is_intro": true,
+	"static_mtype": {
+		"name": "List[Character]",
+		"synopsis": "List of things.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+	}
+}
+{
+	"name": "player_characters=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "TestGame"
+	}, "$", {
+		"name": "player_characters="
 	}],
 	"class_name": "MMethodDef",
-	"full_name": "test_prog$Sys$main",
+	"full_name": "test_prog$TestGame$player_characters=",
+	"visibility": "protected",
+	"modifiers": ["protected", "fun"],
+	"is_intro": true,
+	"msignature": {
+		"arity": 1,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "player_characters",
+			"mtype": {
+				"name": "List[Character]",
+				"synopsis": "List of things.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "test_game",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "$", {
+		"name": "GameTest"
+	}, "$", {
+		"name": "test_game"
+	}],
+	"class_name": "MMethodDef",
+	"full_name": "test_prog$GameTest$test_game",
 	"visibility": "public",
 	"modifiers": ["fun"],
 	"is_intro": true,
