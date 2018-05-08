@@ -21,7 +21,6 @@ import literal
 import semantize
 private import parser::tables
 import mixin
-import primitive_types
 private import model::serialize_model
 private import frontend::explain_assert_api
 
