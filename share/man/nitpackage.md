@@ -60,6 +60,12 @@ Generate Makefile files.
 ### `--check-makefile`
 Check Makefile files.
 
+### `--check-man`
+Check manpages files.
+
+### `--gen-man`
+Generate manpages files.
+
 ### `-f`, `--force`
 Force update of existing files.
 
