@@ -186,7 +186,7 @@ class Config
 	var opts = new OptionContext
 
 	# Help option
-	var opt_help = new OptionBool("Show this help message", "-h", "--help")
+	var opt_help = new OptionBool("Show this help message", "-h", "-?", "--help")
 
 	# Redefine this init to add your options
 	init do
