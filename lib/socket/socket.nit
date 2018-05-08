@@ -55,33 +55,28 @@ end
 # Simple communication stream with a remote socket
 class TCPStream
 	super TCPSocket
-	super BufferedReader
-	super Writer
 	super PollableReader
+	super Duplex
 
 	# Real canonical name of the host to which `self` is connected
 	var host: String
 
 	private var addrin: NativeSocketAddrIn is noinit
 
-	redef var end_reached = false
+	redef var closed = false
 
 	# TODO make init private
 
 	# Creates a socket connection to host `host` on port `port`
 	init connect(host: String, port: Int)
 	do
-		_buffer = new CString(1024)
-		_buffer_pos = 0
 		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_unspec)
 		if native.address_is_null then
-			end_reached = true
 			closed = true
 			return
 		end
 		if not native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
-			end_reached = true
 			closed = true
 			return
 		end
@@ -92,7 +87,6 @@ class TCPStream
 			last_error = new IOError.from_h_errno
 
 			closed = true
-			end_reached = true
 
 			return
 		end
@@ -105,13 +99,10 @@ class TCPStream
 		init(addrin.port, hostent.h_name.to_s)
 
 		closed = not internal_connect
-		end_reached = closed
 		if closed then
 			# Connection failed
 			last_error = new IOError.from_errno
 		end
-
-		prepare_buffer(1024)
 	end
 
 	# Creates a client socket, this is meant to be used by accept only
@@ -122,8 +113,6 @@ class TCPStream
 		address = addrin.address.to_s
 
 		init(addrin.port, address)
-
-		prepare_buffer(1024)
 	end
 
 	redef fun poll_in do return ready_to_read(0)
@@ -134,7 +123,7 @@ class TCPStream
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	private fun pollin(event_types: Array[NativeSocketPollValues], timeout: Int): Array[NativeSocketPollValues] do
-		if end_reached then return new Array[NativeSocketPollValues]
+		if closed then return new Array[NativeSocketPollValues]
 		return native.socket_poll(new PollFD.from_poll_values(native.descriptor, event_types), timeout)
 	end
 
@@ -143,8 +132,6 @@ class TCPStream
 	# timeout : Time in milliseconds before stopping to wait for events
 	fun ready_to_read(timeout: Int): Bool
 	do
-		if _buffer_pos < _buffer_length then return true
-		if end_reached then return false
 		var events = [new NativeSocketPollValues.pollin]
 		return pollin(events, timeout).length != 0
 	end
@@ -161,7 +148,7 @@ class TCPStream
 		end
 	end
 
-	redef fun is_writable do return not end_reached
+	redef fun is_writable do return not closed
 
 	# Establishes a connection to socket addrin
 	#
@@ -170,6 +157,19 @@ class TCPStream
 	do
 		assert not closed
 		return native.connect(addrin) >= 0
+	end
+
+	redef fun raw_read_byte do
+		var rd = native.read(write_buffer, 1)
+		if rd < 1 then return -1
+		return write_buffer[0].to_i
+	end
+
+	redef fun raw_read_bytes(ns, max) do
+		var rd = native.read(ns, max)
+		print "Read {rd} bytes"
+		if rd < 0 then return -1
+		return rd
 	end
 
 	# If socket.end_reached, nothing will happen
@@ -198,36 +198,11 @@ class TCPStream
 		write "\n"
 	end
 
-	redef fun fill_buffer
-	do
-		if not connected then return
-
-		var read = native.read(_buffer, _buffer_capacity)
-		if read == -1 then
-			close
-			end_reached = true
-		end
-
-		_buffer_length = read
-		_buffer_pos = 0
-	end
-
-	# Enlarge `_buffer` to at least `len` bytes
-	fun enlarge(len: Int) do
-		if _buffer_capacity >= len then return
-		_buffer_capacity = len
-
-		var ns = new CString(_buffer_capacity)
-		_buffer.copy_to(ns, _buffer_length - _buffer_pos, _buffer_pos, 0)
-		_buffer = ns
-	end
-
 	redef fun close
 	do
 		if closed then return
 		if native.close >= 0 then
 			closed = true
-			end_reached = true
 		end
 	end
 
