@@ -342,6 +342,18 @@ class NaiveInterpreter
 		return instance
 	end
 
+	# Return a new C string instance sharing the same data space as `txt`
+	fun c_string_instance_fast_cstr(txt: CString, from: Int): Instance
+	do
+		var ncstr = txt.fast_cstring(from)
+		var t = mainmodule.c_string_type
+
+		var instance = new PrimitiveInstance[CString](t, ncstr)
+		init_instance_primitive(instance)
+
+		return instance
+	end
+
 	# Return a new C string initialized of `length`
 	fun c_string_instance_len(length: Int): PrimitiveInstance[CString]
 	do
@@ -1194,8 +1206,7 @@ redef class AMethPropdef
 			else if pname == "atoi" then
 				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
-				var ns = recvval.fast_cstring(args[1].to_i)
-				return v.c_string_instance(ns.to_s)
+				return v.c_string_instance_fast_cstr(args[0].val.as(CString), args[1].to_i)
 			else if pname == "fetch_4_chars" then
 				return v.uint32_instance(args[0].val.as(CString).fetch_4_chars(args[1].to_i))
 			else if pname == "fetch_4_hchars" then
