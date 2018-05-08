@@ -74,10 +74,10 @@ class Bitmap
 	private var image_size: Int is noinit
 
 	# 14-byte bitmap header
-	private var bitmap_header = [66, 77, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0]
+	private var bitmap_header: Array[Int] = [66, 77, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0]
 
 	# 40-byte dib header
-	private var dib_header = [40, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	private var dib_header: Array[Int] = [40, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 1, 0, 24, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -130,9 +130,6 @@ class Bitmap
 		# =============== Bitmap header ================
 		for x in [0..13] do
 			var b = fileReader.read_byte
-			if b == null then
-				return
-			end
 			bitmap_header[x] = b.to_i
 		end
 		self.file_size = get_value(bitmap_header.subarray(2, 4))
@@ -141,7 +138,6 @@ class Bitmap
 		# =============== DIB header ================
 		for x in [0..39] do
 			var b = fileReader.read_byte
-			if b == null then return
 			dib_header[x] = b.to_i
 		end
 		var dib_size = get_value(dib_header.subarray(0, 4))
