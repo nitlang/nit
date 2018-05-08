@@ -30,8 +30,8 @@ redef class ToolContext
 	# --force
 	var opt_force = new OptionBool("Force update of existing files", "-f", "--force")
 
-	# README handling phase
-	var readme_phase: Phase = new ReadmePhase(self, null)
+	# nitpackage phase
+	var nitpackage_phase: Phase = new NitPackagePhase(self, null)
 
 	redef init do
 		super
@@ -40,7 +40,7 @@ redef class ToolContext
 	end
 end
 
-private class ReadmePhase
+private class NitPackagePhase
 	super Phase
 
 	redef fun process_mainmodule(mainmodule, mmodules) do
