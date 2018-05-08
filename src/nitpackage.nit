@@ -21,6 +21,9 @@ redef class ToolContext
 	# --expand
 	var opt_expand = new OptionBool("Move singleton packages to their own directory", "--expand")
 
+	# --check-ini
+	var opt_check_ini = new OptionBool("Check package.ini files", "--check-ini")
+
 	# --gen-ini
 	var opt_gen_ini = new OptionBool("Generate package.ini files", "--gen-ini")
 
@@ -33,7 +36,7 @@ redef class ToolContext
 	redef init do
 		super
 		option_context.add_option(opt_expand, opt_force)
-		option_context.add_option(opt_gen_ini)
+		option_context.add_option(opt_check_ini, opt_gen_ini)
 	end
 end
 
@@ -48,6 +51,12 @@ private class ReadmePhase
 			if not mpackage.has_source then
 				toolcontext.warning(mpackage.location, "no-source",
 					"Warning: `{mpackage}` has no source file")
+				continue
+			end
+
+			# Check package INI files
+			if toolcontext.opt_check_ini.value then
+				mpackage.check_ini(toolcontext)
 				continue
 			end
 
@@ -171,6 +180,59 @@ redef class MPackage
 		end
 	end
 
+	private var allowed_ini_keys = [
+		"package.name", "package.desc", "package.tags", "package.license",
+		"package.maintainer", "package.more_contributors",
+		"upstream.browse", "upstream.git", "upstream.git.directory",
+		"upstream.homepage", "upstream.issues"
+		]
+
+	private fun check_ini(toolcontext: ToolContext) do
+		if not has_ini then
+			toolcontext.error(location, "No `package.ini` file for `{name}`")
+			return
+		end
+
+		var pkg_path = package_path
+		if pkg_path == null then return
+
+		var ini_path = ini_path
+		if ini_path == null then return
+
+		var ini = new ConfigTree(ini_path)
+
+		ini.check_key(toolcontext, self, "package.name", name)
+		ini.check_key(toolcontext, self, "package.desc")
+		ini.check_key(toolcontext, self, "package.tags")
+
+		# FIXME since `git reflog --follow` seems bugged
+		ini.check_key(toolcontext, self, "package.maintainer")
+		# var maint = mpackage.maintainer
+		# if maint != null then
+			# ini.check_key(toolcontext, self, "package.maintainer", maint)
+		# end
+
+		# FIXME since `git reflog --follow` seems bugged
+		# var contribs = mpackage.contributors
+		# if contribs.not_empty then
+			# ini.check_key(toolcontext, self, "package.more_contributors", contribs.join(", "))
+		# end
+
+		ini.check_key(toolcontext, self, "package.license", license)
+		ini.check_key(toolcontext, self, "upstream.browse", browse_url)
+		ini.check_key(toolcontext, self, "upstream.git", git_url)
+		ini.check_key(toolcontext, self, "upstream.git.directory", git_dir)
+		ini.check_key(toolcontext, self, "upstream.homepage", homepage_url)
+		ini.check_key(toolcontext, self, "upstream.issues", issues_url)
+
+		for key in ini.to_map.keys do
+			if not allowed_ini_keys.has(key) then
+				toolcontext.warning(location, "unknown-ini-key",
+					"Warning: ignoring unknown `{key}` key in `{ini.ini_file}`")
+			end
+		end
+	end
+
 	private fun gen_ini: String do
 		var ini_path = self.ini_path.as(not null)
 		var ini = new ConfigTree(ini_path)
@@ -194,6 +256,24 @@ redef class MPackage
 end
 
 redef class ConfigTree
+	private fun check_key(toolcontext: ToolContext, mpackage: MPackage, key: String, value: nullable String) do
+		if not has_key(key) then
+			toolcontext.warning(mpackage.location, "missing-ini-key",
+				"Warning: missing `{key}` key in `{ini_file}`")
+			return
+		end
+		if self[key].as(not null).is_empty then
+			toolcontext.warning(mpackage.location, "missing-ini-value",
+				"Warning: empty `{key}` key in `{ini_file}`")
+			return
+		end
+		if value != null and self[key] != value then
+			toolcontext.warning(mpackage.location, "wrong-ini-value",
+				"Warning: wrong value for `{key}` in `{ini_file}`. " +
+				"Expected `{value}`, got `{self[key] or else ""}`")
+		end
+	end
+
 	private fun update_value(key: String, value: nullable String) do
 		if value == null then return
 		if not has_key(key) then
