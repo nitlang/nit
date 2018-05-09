@@ -68,8 +68,9 @@ class ConfigTree
 		if node == null then return null
 		var map = new HashMap[String, String]
 		for k, child in node.children do
-			if child.value == null then continue
-			map[k] = child.value.to_s
+			var value = child.value
+			if value == null then continue
+			map[k] = value
 		end
 		return map
 	end
@@ -112,18 +113,41 @@ class ConfigTree
 	fun to_map: Map[String, String] do
 		var map = new HashMap[String, String]
 		for node in leaves do
-			if node.value == null then continue
-			map[node.key] = node.value.to_s
+			var value = node.value
+			if value == null then continue
+			map[node.key] = value
 		end
 		return map
 	end
 
 	redef fun to_s do return to_map.join(", ", ":")
 
+	# Write `self` in `stream`
+	#
+	#     var config = new ConfigTree("config.ini")
+	#     var out = new StringWriter
+	#     config.write_to(out)
+	#     assert out.to_s == """
+	#     goo=goo
+	#     [foo]
+	#     bar=foobar
+	#     baz=foobaz
+	#     """
 	redef fun write_to(stream) do
-		for node in leaves do
-			if node.value == null then continue
-			stream.write("{node.key}={node.value.to_s}\n")
+		var todo = new Array[ConfigNode].from(roots.reversed)
+		while not todo.is_empty do
+			var node = todo.pop
+			if node.children.not_empty then
+				todo.add_all node.children.values.to_a.reversed
+			end
+			if node.children.not_empty and node.parent == null then
+				stream.write("[{node.name}]\n")
+			end
+			var value = node.value
+			if value == null then continue
+			var path = node.path
+			if path.length > 1 then path.shift
+			stream.write("{path.join(".")}={value}\n")
 		end
 	end
 
@@ -234,9 +258,8 @@ class ConfigTree
 	private fun set_array(key: String, value: nullable String) do
 		key = key.substring(0, key.length - 2)
 		var len = 0
-		if has_key(key) then
-			len = get_node(key).children.length
-		end
+		var node = get_node(key)
+		if node != null then len = node.children.length
 		set_node("{key}.{len.to_s}", value)
 	end
 
@@ -306,10 +329,21 @@ private class ConfigNode
 	var value: nullable String = null
 
 	fun key: String do
+		var parent = self.parent
 		if parent == null then
 			return name
 		end
 		return "{parent.key}.{name}"
+	end
+
+	fun path: Array[String] do
+		var parent = self.parent
+		if parent == null then
+			return [name]
+		end
+		var res = new Array[String].from(parent.path)
+		res.add name
+		return res
 	end
 
 	fun get_child(name: String): nullable ConfigNode do
