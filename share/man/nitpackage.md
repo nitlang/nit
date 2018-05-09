@@ -25,10 +25,37 @@ use the following command.
 nitpackage --expand lib/
 ~~~
 
+## Generating `package.ini` files
+
+The `--gen-ini` option is used to create `package.ini` files.
+
+For example, the following command will create a `package.ini` stub for each package
+that does not already have a one.
+
+~~~sh
+nitpackage --gen-ini lib/
+~~~
+
+The `--force` option can be used to force the creation of the INI stub even if the package
+already contains one.
+
+~~~sh
+nitpackage --gen-ini -f lib/
+~~~
+
 # OPTIONS
 
 ### `--expand`
 Move singleton packages to their own directory.
+
+### `--gen-ini`
+Generate package.ini files.
+
+### `--check-ini`
+Check package.ini files.
+
+### `-f`, `--force`
+Force update of existing files.
 
 ### `-h`, `-?`, `--help`
 Show Help (the list of options).
