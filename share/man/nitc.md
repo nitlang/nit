@@ -246,6 +246,11 @@ Also preserves the source-files directory for C-debuggers.
 
 For more debugging-related options, see also `--hardening` and `NIT_GC_OPTION`
 
+### `--trace`
+Compile with lttng's instrumentation.
+
+Currently add a lttng trace provider and add tracepoint into object instances.
+
 ## COMPILATION MODES
 
 ### `nitc` includes distinct compilation modes.
