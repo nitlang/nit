@@ -143,10 +143,15 @@ class FileReader
 	end
 
 	redef fun eof do
-		if lookahead_length != 0 then
-			return false
+		var fl = _file
+		if fl == null then return true
+		if fl.address_is_null then return true
+		if last_error != null then return true
+		if super then
+			if last_error != null then return true
+			return fl.feof
 		end
-		return _file.as(not null).feof
+		return false
 	end
 
 	# Open the file at `path` for reading.

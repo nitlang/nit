@@ -412,7 +412,11 @@ abstract class Reader
 
 	# Is there something to read.
 	# This function returns 'false' if there is something to read.
-	fun eof: Bool is abstract
+	fun eof: Bool do
+		if lookahead_length > 0 then return false
+		lookahead_length = raw_read_bytes(lookahead, 1)
+		return lookahead_length <= 0
+	end
 
 	# Read the next sequence of non whitespace characters.
 	#
