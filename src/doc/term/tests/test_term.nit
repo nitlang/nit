@@ -194,6 +194,43 @@ class TestTerm
 		var parser = new CommandParser(test_view, test_builder, test_catalog)
 		parser.execute("contrib: Alexandre Terrasa", true)
 	end
+
+	# CmdIni
+
+	fun test_term_ini_desc is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("ini-desc: test_prog", true)
+	end
+
+	fun test_term_ini_git is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("ini-git: test_prog", true)
+	end
+
+	fun test_term_ini_clone is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("git-clone: test_prog", true)
+	end
+
+	fun test_term_ini_issues is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("ini-issues: test_prog", true)
+	end
+
+	fun test_term_ini_maintainer is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("ini-maintainer: test_prog", true)
+	end
+
+	fun test_term_ini_contributors is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("ini-contributors: test_prog", true)
+	end
+
+	fun test_term_ini_license is test do
+		var parser = new CommandParser(test_view, test_builder, test_catalog)
+		parser.execute("ini-license: test_prog", true)
+	end
 end
 
 redef class nitc::Location

@@ -129,4 +129,76 @@ class TestCommandsHtml
 		cmd.init_command
 		print_html cmd.to_html
 	end
+
+	# CmdIni
+
+	fun test_cmd_ini_desc is test do
+		var cmd = new CmdIniDescription(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_git is test do
+		var cmd = new CmdIniGitUrl(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_clone is test do
+		var cmd = new CmdIniCloneCommand(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_issues is test do
+		var cmd = new CmdIniIssuesUrl(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_maintainer is test do
+		var cmd = new CmdIniMaintainer(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_contributors is test do
+		var cmd = new CmdIniContributors(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_license is test do
+		var cmd = new CmdIniLicense(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_license_file is test do
+		var cmd = new CmdLicenseFile(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		cmd.file = cmd.file.as(not null).basename # for testing path
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_license_file_content is test do
+		var cmd = new CmdLicenseFileContent(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		cmd.file = cmd.file.as(not null).basename # for testing path
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_contrib_file is test do
+		var cmd = new CmdContribFile(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		cmd.file = cmd.file.as(not null).basename # for testing path
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_ini_contrib_file_content is test do
+		var cmd = new CmdContribFileContent(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		cmd.file = cmd.file.as(not null).basename # for testing path
+		print_html cmd.to_html
+	end
 end

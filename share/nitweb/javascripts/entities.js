@@ -280,6 +280,44 @@
 					},
 					controllerAs: 'vm',
 				})
+				.state('doc.entity.license', {
+					url: '/license',
+					templateUrl: 'views/doc/license.html',
+					resolve: {
+						content: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityLicenseContent($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, content) {
+						this.mentity = mentity;
+						this.content = content;
+					},
+					controllerAs: 'vm',
+				})
+				.state('doc.entity.contrib', {
+					url: '/contrib',
+					templateUrl: 'views/doc/contrib.html',
+					resolve: {
+						content: function(Model, $q, $stateParams, $state) {
+							var d = $q.defer();
+							Model.loadEntityContribContent($stateParams.id, d.resolve,
+								function() {
+									$state.go('404', null, { location: false })
+								});
+							return d.promise;
+						}
+					},
+					controller: function(mentity, content) {
+						this.mentity = mentity;
+						this.content = content;
+					},
+					controllerAs: 'vm',
+				})
 		})
 
 		/* Model */
@@ -361,6 +399,24 @@
 
 				loadEntityMeta: function(id, cb, cbErr) {
 					$http.get('/api/meta/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityGraph: function(id, cb, cbErr) {
+					$http.get('/api/graph/inheritance/' + id + '?format=svg&cdepth=3')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityLicenseContent: function(id, cb, cbErr) {
+					$http.get('/api/ini/license-content/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadEntityContribContent: function(id, cb, cbErr) {
+					$http.get('/api/ini/contrib-content/' + id)
 						.success(cb)
 						.error(cbErr);
 				},

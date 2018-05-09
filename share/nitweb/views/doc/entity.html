@@ -87,6 +87,22 @@
 				<span class='glyphicon glyphicon-star'/> Grades
 			</a>
 		</li>
+
+		<!-- license -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage"'>
+			<a ui-sref='.license'>
+				<span class='glyphicon glyphicon-copyright-mark'/> License
+			</a>
+		</li>
+
+		<!-- contrib -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage"'>
+			<a ui-sref='.contrib'>
+				<span class='glyphicon glyphicon-gift'/> Contributing
+			</a>
+		</li>
 	</ul>
 	<br>
 	<ui-view />

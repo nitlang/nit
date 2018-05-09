@@ -19,6 +19,7 @@ import commands::commands_model
 import commands::commands_graph
 import commands::commands_usage
 import commands::commands_catalog
+import commands::commands_ini
 
 import templates::templates_json
 import catalog::catalog_json
@@ -158,6 +159,96 @@ redef class CmdCatalogContributing
 		obj["count"] = count
 		obj["limit"] = limit
 		obj["max"] = max
+		return obj
+	end
+end
+
+# CmdIni
+
+redef class CmdIniDescription
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["desc"] = desc
+		return obj
+	end
+end
+
+redef class CmdIniGitUrl
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["url"] = url
+		return obj
+	end
+end
+
+redef class CmdIniCloneCommand
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["command"] = command
+		return obj
+	end
+end
+
+redef class CmdIniIssuesUrl
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["url"] = url
+		return obj
+	end
+end
+
+redef class CmdIniMaintainer
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["maintainer"] = maintainer
+		return obj
+	end
+end
+
+redef class CmdIniContributors
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["contributors"] = contributors
+		return obj
+	end
+end
+
+redef class CmdIniLicense
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["license"] = license
+		return obj
+	end
+end
+
+redef class CmdLicenseFile
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["file"] = file
+		return obj
+	end
+end
+
+redef class CmdLicenseFileContent
+	redef fun to_json do
+		var obj = super.as(JsonObject)
+		obj["content"] = content
+		return obj
+	end
+end
+
+redef class CmdContribFile
+	redef fun to_json do
+		var obj = new JsonObject
+		obj["file"] = file
+		return obj
+	end
+end
+
+redef class CmdContribFileContent
+	redef fun to_json do
+		var obj = super.as(JsonObject)
+		obj["content"] = content
 		return obj
 	end
 end

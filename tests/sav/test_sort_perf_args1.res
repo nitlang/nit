@@ -1,4 +1,6 @@
 test_prog/
+|--test_prog/CONTRIBUTING.md
+|--test_prog/LICENSE.md
 |--test_prog/README.md
 |--test_prog/examples
 |  `--test_prog/examples/game_examples.nit

@@ -48,6 +48,18 @@ redef class APIRouter
 		use("/catalog/person/:pid", new APICatalogPerson(config))
 		use("/catalog/person/:pid/maintaining", new APICatalogMaintaining(config))
 		use("/catalog/person/:pid/contributing", new APICatalogContributing(config))
+
+		use("/ini/desc/:id", new APIIniDesc(config))
+		use("/ini/git/:id", new APIIniGit(config))
+		use("/ini/clone/:id", new APIIniClone(config))
+		use("/ini/issues/:id", new APIIniIssues(config))
+		use("/ini/maintainer/:id", new APIIniMaintainer(config))
+		use("/ini/contributors/:id", new APIIniContributors(config))
+		use("/ini/license/:id", new APIIniLicense(config))
+		use("/ini/license-file/:id", new APIIniLicenseFile(config))
+		use("/ini/license-content/:id", new APIIniLicenseFileContent(config))
+		use("/ini/contrib-file/:id", new APIIniContribFile(config))
+		use("/ini/contrib-content/:id", new APIIniContribFileContent(config))
 	end
 end
 
@@ -298,4 +310,105 @@ class APICatalogContributing
 	super APICommand
 
 	redef fun command do return new CmdCatalogContributing(config.view, config.catalog)
+end
+
+# CmdIni
+
+# Get the package description from the ini file
+#
+# `GET /ini/desc/:pid`: return the package description
+class APIIniDesc
+	super APICommand
+
+	redef fun command do return new CmdIniDescription(config.view)
+end
+
+# Get the package Git URL from the ini file
+#
+# `GET /ini/git/:pid`: return the package Git URL
+class APIIniGit
+	super APICommand
+
+	redef fun command do return new CmdIniGitUrl(config.view)
+end
+
+# Get the package Git clone command from the ini file
+#
+# `GET /ini/clone/:pid`: return the package Git clone command
+class APIIniClone
+	super APICommand
+
+	redef fun command do return new CmdIniCloneCommand(config.view)
+end
+
+# Get the package issues URL from the ini file
+#
+# `GET /ini/issues/:pid`: return the package issues URL
+class APIIniIssues
+	super APICommand
+
+	redef fun command do return new CmdIniIssuesUrl(config.view)
+end
+
+# Get the package maintainer from the ini file
+#
+# `GET /ini/maintainer/:pid`: return the package maintainer
+class APIIniMaintainer
+	super APICommand
+
+	redef fun command do return new CmdIniMaintainer(config.view)
+end
+
+# Get the package contributors from the ini file
+#
+# `GET /ini/clone/:pid`: return the package contributors
+class APIIniContributors
+	super APICommand
+
+	redef fun command do return new CmdIniContributors(config.view)
+end
+
+# Get the package license from the ini file
+#
+# `GET /ini/clone/:pid`: return the package license
+class APIIniLicense
+	super APICommand
+
+	redef fun command do return new CmdIniLicense(config.view)
+end
+
+# Get the package license file
+#
+# `GET /ini/license-file/:pid`: return the package license file
+class APIIniLicenseFile
+	super APICommand
+
+	redef fun command do return new CmdLicenseFile(config.view)
+end
+
+# Get the package contrib file
+#
+# `GET /ini/contrib-file/:pid`: return the package contrib file
+class APIIniContribFile
+	super APICommand
+
+	redef fun command do return new CmdContribFile(config.view)
+end
+
+# Get the package license file content
+#
+# `GET /ini/license-file/:pid`: return the package license file content
+class APIIniLicenseFileContent
+	super APICommand
+
+	redef fun command do return new CmdLicenseFileContent(config.view)
+end
+
+# Get the package contrib file content
+#
+# `GET /ini/contrib-file/:pid`: return the package contrib file content
+class APIIniContribFileContent
+	super APICommand
+
+	redef fun command do return new CmdContribFileContent(config.view)
 end
