@@ -129,7 +129,74 @@ abstract class Reader
 	end
 
 	# Reads a character. Returns `null` on EOF or timeout
-	fun read_char: nullable Char is abstract
+	#
+	# Returns unicode replacement character '�' if an
+	# invalid byte sequence is read.
+	#
+	# `read_char` may block if:
+	#
+	# * No byte could be read from the current buffer
+	# * An incomplete char is partially read, and more bytes are
+	#   required for full decoding.
+	fun read_char: nullable Char do
+		if eof then return null
+		var cod = codec
+		var codet_sz = cod.codet_size
+		var lk = lookahead
+		var llen = lookahead_length
+		if llen < codet_sz then
+			llen += raw_read_bytes(lk.fast_cstring(llen), codet_sz - llen)
+		end
+		if llen < codet_sz then
+			lookahead_length = 0
+			return 0xFFFD.code_point
+		end
+		var ret = cod.is_valid_char(lk, codet_sz)
+		var max_llen = cod.max_lookahead
+		while ret == 1 and llen < max_llen do
+			var rd = raw_read_bytes(lk.fast_cstring(llen), codet_sz)
+			if rd < codet_sz then
+				llen -= codet_sz
+				if llen > 0 then
+					lookahead.lshift(codet_sz, llen, codet_sz)
+				end
+				lookahead_length = llen.max(0)
+				return 0xFFFD.code_point
+			end
+			llen += codet_sz
+			ret = cod.is_valid_char(lk, llen)
+		end
+		if ret == 0 then
+			var c = cod.decode_char(lk)
+			var clen = c.u8char_len
+			llen -= clen
+			if llen > 0 then
+				lookahead.lshift(clen, llen, clen)
+			end
+			lookahead_length = llen
+			return c
+		end
+		if ret == 2 or ret == 1 then
+			llen -= codet_sz
+			if llen > 0 then
+				lookahead.lshift(codet_sz, llen, codet_sz)
+			end
+			lookahead_length = llen
+			return 0xFFFD.code_point
+		end
+		# Should not happen if the decoder works properly
+		var arr = new Array[Object]
+		arr.push "Decoder error: could not decode nor recover from byte sequence ["
+		for i in [0 .. llen[ do
+			arr.push lk[i]
+			arr.push ", "
+		end
+		arr.push "]"
+		var err = new IOError(arr.plain_to_s)
+		err.cause = last_error
+		last_error = err
+		return 0xFFFD.code_point
+	end
 
 	# Reads a byte. Returns a negative value on error
 	fun read_byte: Int do
@@ -528,20 +595,8 @@ end
 # Input streams with a buffered input for efficiency purposes
 abstract class BufferedReader
 	super Reader
-	redef fun read_char
-	do
-		if last_error != null then return null
-		if eof then
-			last_error = new IOError("Stream has reached eof")
-			return null
-		end
-		# TODO: Fix when supporting UTF-8
-		var c = _buffer[_buffer_pos].to_i.code_point
-		_buffer_pos += 1
-		return c
-	end
 
-	redef fun read_byte
+	redef fun raw_read_byte
 	do
 		if last_error != null then return -1
 		if eof then
@@ -834,17 +889,7 @@ class BytesReader
 	# The current position in `bytes`
 	private var cursor = 0
 
-	redef fun read_char
-	do
-		if cursor >= bytes.length then return null
-
-		var len = bytes.items.length_of_char_at(cursor)
-		var char = bytes.items.char_at(cursor)
-		cursor += len
-		return char
-	end
-
-	redef fun read_byte
+	redef fun raw_read_byte
 	do
 		if cursor >= bytes.length then return -1
 
