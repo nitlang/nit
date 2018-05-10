@@ -240,7 +240,7 @@ abstract class Reader
 		else
 			lookahead_length = 0
 		end
-		return rd + raw_read_bytes(bytes, max - rd)
+		return rd + raw_read_bytes(bytes.fast_cstring(rd), max - rd)
 	end
 
 	# Read a string until the end of the line.
