@@ -107,7 +107,7 @@ The type to recreate is either declared or inferred:
 3. If all else fails, `JsonDeserializer` uses the static type of the attribute,
    or the type name passed to `deserialize`.
 
-The method `from_json_string` is a shortcut to `JsonDeserializer` which prints
+The method `deserialize_json` is a shortcut to `JsonDeserializer` which prints
 errors to the console. It is fit only for small scripts and other quick and dirty usage.
 
 ### Example
