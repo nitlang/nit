@@ -30,6 +30,9 @@ in "C" `{
 #ifndef be32toh
 	#define be32toh(val) betoh32(val)
 #endif
+
+#include <assert.h>
+#include <string.h>
 `}
 
 redef class Byte
@@ -313,4 +316,10 @@ extern class CString `{ char* `}
 	fun lshift(sh, len, pos: Int) do
 		copy_to(self, len, pos, pos - sh)
 	end
+
+	# Sets the contents of `self` to `value` for `len` bytes
+	fun memset(value, len: Int) `{
+		assert(len >= 0);
+		memset(self, value, len);
+	`}
 end
