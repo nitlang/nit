@@ -452,3 +452,91 @@ redef class CmdContribFile
 		print_file("Contributing rules from", no_color)
 	end
 end
+
+# CmdMain
+
+redef class CmdMains
+	redef fun execute(no_color) do
+		var mentity = self.mentity.as(not null).full_name
+		if no_color == null or not no_color then mentity = mentity.blue.bold
+		print_list("Mains in `{mentity}`:", results, no_color)
+	end
+end
+
+redef class CmdMainCompile
+	redef fun execute(no_color) do
+		var mentity = self.mentity.as(not null).full_name
+		if no_color == null or not no_color then mentity = mentity.blue.bold
+		var title = "Compiling `{mentity}`:"
+
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+
+		print ""
+		var command = self.command
+		if command != null then print command
+	end
+end
+
+redef class CmdTesting
+	redef fun execute(no_color) do
+		var mentity = self.mentity.as(not null).full_name
+		if no_color == null or not no_color then mentity = mentity.blue.bold
+		var title = "Testing `{mentity}`:"
+
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+
+		print ""
+		var command = self.command
+		if command != null then print command
+	end
+end
+
+redef class CmdManSynopsis
+	redef fun execute(no_color) do
+		var mentity = self.mentity.as(not null).full_name
+		if no_color == null or not no_color then mentity = mentity.blue.bold
+		var title = "Synopsis for `{mentity}`:"
+
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+
+		print ""
+		var synopsis = self.synopsis
+		if synopsis != null then print synopsis
+	end
+end
+
+redef class CmdManOptions
+	redef fun execute(no_color) do
+		var mentity = self.mentity.as(not null).full_name
+		if no_color == null or not no_color then mentity = mentity.blue.bold
+		var title = "Options for `{mentity}`:"
+
+		if no_color == null or not no_color then
+			print title.bold
+		else
+			print title
+		end
+
+		print ""
+		var options = self.options.as(not null)
+		for opt, desc in options do
+			if no_color == null or not no_color then
+				print " * {opt.blue.bold}: {desc}"
+			else
+				print " * {opt}: {desc}"
+			end
+		end
+	end
+end

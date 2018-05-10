@@ -204,7 +204,7 @@ class TestCommandsModel
 		var cmd = new CmdModelEntities(test_view, kind = "modules")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 10
+		assert cmd.results.as(not null).length == 11
 	end
 
 	fun test_cmd_results_random is test do

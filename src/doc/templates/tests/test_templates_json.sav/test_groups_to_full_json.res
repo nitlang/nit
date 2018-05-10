@@ -41,6 +41,19 @@
 	"modifiers": ["group"]
 }
 {
+	"name": "man",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, ">", {
+		"name": "man"
+	}, ">"],
+	"class_name": "MGroup",
+	"full_name": "test_prog>man>",
+	"visibility": "public",
+	"modifiers": ["group"]
+}
+{
 	"name": "platform",
 	"synopsis": "Fictive Crappy Platform.",
 	"namespace": [{
@@ -70,6 +83,19 @@
 	"full_name": "test_prog>rpg>",
 	"visibility": "public",
 	"html_synopsis": "<span class=\"synopsys nitdoc\">Role Playing Game group</span>",
+	"modifiers": ["group"]
+}
+{
+	"name": "tests",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, ">", {
+		"name": "tests"
+	}, ">"],
+	"class_name": "MGroup",
+	"full_name": "test_prog>tests>",
+	"visibility": "public",
 	"modifiers": ["group"]
 }
 {

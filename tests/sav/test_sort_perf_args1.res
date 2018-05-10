@@ -10,6 +10,8 @@ test_prog/
 |  |--test_prog/game/excluded_dir
 |  |  `--test_prog/game/excluded_dir/more.nit
 |  `--test_prog/game/game.nit
+|--test_prog/man
+|  `--test_prog/man/test_prog.man
 |--test_prog/package.ini
 |--test_prog/platform
 |  |--test_prog/platform/README.md
@@ -21,4 +23,6 @@ test_prog/
 |  |--test_prog/rpg/combat.nit
 |  |--test_prog/rpg/races.nit
 |  `--test_prog/rpg/rpg.nit
-`--test_prog/test_prog.nit
+|--test_prog/test_prog.nit
+`--test_prog/tests
+   `--test_prog/tests/test_game.nit

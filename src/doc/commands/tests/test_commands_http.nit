@@ -287,7 +287,7 @@ class TestCommandsHttp
 	# CmdCatalog
 
 	fun test_cmd_http_catalog_search is test do
-		var req = new_request("/?q=test&l=1")
+		var req = new_request("/?q=testprog&l=1")
 		var cmd = new CmdCatalogSearch(test_view, test_catalog)
 		var res = cmd.http_init(req)
 		assert res isa CmdSuccess

@@ -497,6 +497,27 @@
 	}
 }
 {
+	"name": "main",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}, "::", {
+		"name": "main"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Sys::main",
+	"visibility": "public",
+	"modifiers": ["intern", "fun"],
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "_strength_bonus",
 	"namespace": [{
 		"name": "test_prog",
@@ -2077,17 +2098,67 @@
 	}
 }
 {
-	"name": "main",
+	"name": "_player_characters",
 	"namespace": [{
 		"name": "test_prog",
 		"synopsis": "Test program for model tools."
 	}, "::", {
-		"name": "Sys"
+		"name": "test_game"
 	}, "::", {
-		"name": "main"
+		"name": "TestGame"
+	}, "::", {
+		"name": "_player_characters"
+	}],
+	"class_name": "MAttribute",
+	"full_name": "test_prog::test_game::TestGame::_player_characters",
+	"visibility": "private",
+	"modifiers": ["private", "var"],
+	"static_mtype": {
+		"name": "List[Character]",
+		"synopsis": "List of things.",
+		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+	}
+}
+{
+	"name": "player_characters=",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "TestGame"
+	}, "::", {
+		"name": "player_characters="
 	}],
 	"class_name": "MMethod",
-	"full_name": "test_prog::Sys::main",
+	"full_name": "test_prog::TestGame::player_characters=",
+	"visibility": "protected",
+	"modifiers": ["protected", "fun"],
+	"msignature": {
+		"arity": 1,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "player_characters",
+			"mtype": {
+				"name": "List[Character]",
+				"synopsis": "List of things.",
+				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "test_game",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "GameTest"
+	}, "::", {
+		"name": "test_game"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::GameTest::test_game",
 	"visibility": "public",
 	"modifiers": ["fun"],
 	"msignature": {

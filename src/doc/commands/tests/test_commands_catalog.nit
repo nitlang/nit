@@ -57,7 +57,7 @@ class TestCommandsCatalog
 	end
 
 	fun test_cmd_catalog_search is test do
-		var cmd = new CmdCatalogSearch(test_view, test_catalog, "test")
+		var cmd = new CmdCatalogSearch(test_view, test_catalog, "testprog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results.as(not null).first.full_name == "test_prog"

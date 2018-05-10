@@ -58,7 +58,7 @@ class TestCommands
 		var filters = new ModelFilter(
 			private_visibility,
 			accept_fictive = false,
-			accept_test = false)
+			accept_test = true)
 
 		test_builder = modelbuilder
 		test_view = new ModelView(model, mainmodule, filters)

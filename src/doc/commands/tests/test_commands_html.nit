@@ -15,6 +15,7 @@
 module test_commands_html is test
 
 import test_commands
+intrude import doc::commands::commands_main
 import doc::commands::commands_html
 
 class TestCommandsHtml
@@ -200,5 +201,54 @@ class TestCommandsHtml
 		cmd.init_command
 		cmd.file = cmd.file.as(not null).basename # for testing path
 		print_html cmd.to_html
+	end
+
+	# CmdMain
+
+	fun test_cmd_mains is test do
+		var cmd = new CmdMains(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_main_compile is test do
+		var cmd = new CmdMainCompile(test_view, mentity_name = "test_prog::test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_testing is test do
+		var cmd = new CmdTesting(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_man_synopsis is test do
+		var cmd = new CmdManSynopsis(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+
+	fun test_cmd_man_options is test do
+		var cmd = new CmdManOptions(test_view, mentity_name = "test_prog")
+		cmd.init_command
+		print_html cmd.to_html
+	end
+end
+
+# Avoid path diff
+redef class CmdMainCompile
+	redef fun test_path(file) do
+		if file == null then return null
+		return file.filename.basename
+	end
+end
+
+# Avoid path diff
+redef class CmdTesting
+	redef fun test_path(mentity) do
+		var file = mentity.location.file
+		if file == null then return null
+		return file.filename.basename
 	end
 end

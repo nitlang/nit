@@ -380,6 +380,15 @@ redef class MGroup
 	end
 
 	# Collect all modules contained in `self`
+	fun collect_all_mmodules(view: ModelView): HashSet[MModule] do
+		var res = new HashSet[MModule]
+		for mgroup in collect_mgroups(view) do
+			res.add_all mgroup.collect_all_mmodules(view)
+		end
+		return res
+	end
+
+	# Collect all modules contained in `self`
 	fun collect_mmodules(view: ModelView): HashSet[MModule] do
 		var res = new HashSet[MModule]
 		for mmodule in mmodules do

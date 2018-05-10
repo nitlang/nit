@@ -18,6 +18,7 @@ module commands_html
 import commands::commands_graph
 import commands::commands_usage
 import commands::commands_ini
+import commands::commands_main
 
 import templates::templates_html
 import doc_down
@@ -265,5 +266,59 @@ redef class CmdEntityFileContent
 		if content == null then return ""
 
 		return "<pre>{content}</pre>"
+	end
+end
+
+# Main commands
+
+redef class CmdMains
+	redef fun to_html do return super # FIXME lin
+end
+
+redef class CmdMainCompile
+	redef fun to_html do
+		var command = self.command
+		if command == null then return ""
+
+		return "<pre>{command}</pre>"
+	end
+end
+
+redef class CmdManSynopsis
+	redef fun to_html do
+		var synopsis = self.synopsis
+		if synopsis == null then return ""
+
+		return "<pre>{synopsis}</pre>"
+	end
+end
+
+redef class CmdManOptions
+	redef fun to_html do
+		var options = self.options
+		if options == null or options.is_empty then return ""
+
+		var tpl = new Template
+		tpl.addn "<pre>"
+		tpl.addn "<table width='100%'>"
+		for opt, desc in options do
+			tpl.addn "<tr>"
+			tpl.addn "<th valign='top' width='30%'>{opt}</th>"
+			tpl.addn "<td width='70%'>{desc}</td>"
+			tpl.addn "</tr>"
+		end
+		tpl.addn "</table>"
+		tpl.addn "</pre>"
+
+		return tpl.write_to_string
+	end
+end
+
+redef class CmdTesting
+	redef fun to_html do
+		var command = self.command
+		if command == null then return ""
+
+		return "<pre>{command}</pre>"
 	end
 end
