@@ -122,71 +122,158 @@ class CurlHTTPRequest
 	# instead of a TCP connection and DNS hostname resolution.
 	var unix_socket_path: nullable String is writable
 
+	# The HTTP method, GET by default
+	#
+	# Must be a capitalized string with request name complying with RFC7231
+	var method: String = "GET" is optional, writable
+
 	# Execute HTTP request
 	#
 	# By default, the response body is returned in an instance of `CurlResponse`.
 	# This behavior can be customized by setting a custom `delegate`.
 	fun execute: CurlResponse
 	do
+		# Reset libcurl parameters as the lib is shared and options
+		# might affect requests from one another.
+		self.curl.native = new NativeCurl.easy_init
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var success_response = new CurlResponseSuccess
 		var callback_receiver: CurlCallbacks = success_response
-		if self.delegate != null then callback_receiver = self.delegate.as(not null)
+		var err : CURLCode
 
-		var err
-
-		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
+		# Prepare request
+		err = prepare_request(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.native.easy_setopt(new CURLOption.url, url)
-		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-
-		var user_agent = user_agent
-		if user_agent != null then
-			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
-		var unix_socket_path = unix_socket_path
-		if unix_socket_path != null then
-			err = self.curl.native.easy_setopt(new CURLOption.unix_socket_path, unix_socket_path)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
-		# Callbacks
-		err = self.curl.native.register_callback_header(callback_receiver)
-		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-
-		err = self.curl.native.register_callback_body(callback_receiver)
-		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-
-		# HTTP Header
-		var headers = self.headers
-		if headers != null then
-			var headers_joined = headers.join_pairs(": ")
-			err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
-		# Datas
-		var data = self.data
-		if data != null then
-			var postdatas = data.to_url_encoded(self.curl)
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		else if body != null then
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, body.as(not null))
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
+		# Perform request
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
 		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
 		if not st_code == null then success_response.status_code = st_code
 
+		self.curl.native.easy_clean
+
 		return success_response
+	end
+
+	# Internal function that sets cURL options and request' parameters
+	private fun prepare_request(callback_receiver: CurlCallbacks) : CURLCode
+	do
+		var err
+
+		# cURL options and delegates
+		err = set_curl_options
+		if not err.is_ok then return err
+
+		# Callbacks
+		err = set_curl_callback(callback_receiver)
+		if not err.is_ok then return err
+
+		# HTTP Header
+		err = set_curl_http_header
+		if not err.is_ok then return err
+
+		# Set HTTP method and body
+		err = set_method
+		if not err.is_ok then return err
+		err = set_body
+
+		return err
+	end
+
+	# Set cURL parameters according to assigned HTTP method set in method
+	# attribute and body if the method allows it according to RFC7231
+	private fun set_method : CURLCode
+	do
+		var err : CURLCode
+
+		if self.method=="GET" then
+			err=self.curl.native.easy_setopt(new CURLOption.get, 1)
+
+		else if self.method=="POST" then
+			err=self.curl.native.easy_setopt(new CURLOption.post, 1)
+
+		else if self.method=="HEAD" then
+			err=self.curl.native.easy_setopt(new CURLOption.no_body,1)
+
+		else
+			err=self.curl.native.easy_setopt(new CURLOption.custom_request,self.method)
+		end
+		return err
+	end
+
+	# Set request's body
+	private fun set_body : CURLCode
+	do
+		var err
+		var data = self.data
+		var body = self.body
+
+		if data != null then
+			var postdatas = data.to_url_encoded(self.curl)
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
+			if not err.is_ok then return err
+		else if body != null then
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, body)
+			if not err.is_ok then return err
+		end
+		return new CURLCode.ok
+	end
+
+	# Set cURL options
+	# such as delegate, follow location, URL, user agent and address family
+	private fun set_curl_options : CURLCode
+	do
+		var err
+
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return err
+
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
+		if not err.is_ok then return err
+
+		var user_agent = user_agent
+		if user_agent != null then
+			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
+			if not err.is_ok then return err
+		end
+
+		var unix_socket_path = unix_socket_path
+		if unix_socket_path != null then
+			err = self.curl.native.easy_setopt(new CURLOption.unix_socket_path, unix_socket_path)
+			if not err.is_ok then return err
+		end
+		return err
+	end
+
+	# Set cURL callback
+	private fun set_curl_callback(callback_receiver : CurlCallbacks) : CURLCode
+	do
+		var err
+
+		if self.delegate != null then callback_receiver = self.delegate.as(not null)
+
+		err = self.curl.native.register_callback_header(callback_receiver)
+		if not err.is_ok then return err
+
+		err = self.curl.native.register_callback_body(callback_receiver)
+		if not err.is_ok then return err
+
+		return err
+	end
+
+	# Set cURL request header according to attribute headers
+	private fun set_curl_http_header : CURLCode
+	do
+		var headers = self.headers
+		if headers != null then
+			var headers_joined = headers.join_pairs(": ")
+			var err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
+			if not err.is_ok then return err
+		end
+		return new CURLCode.ok
 	end
 
 	# Download to file given resource
@@ -245,6 +332,7 @@ class CurlHTTPRequest
 		return success_response
 	end
 end
+
 
 # CURL Mail Request
 #
@@ -359,6 +447,7 @@ class CurlMail
 	# Execute Mail request with settings configured through attribute
 	fun execute: nullable CurlResponseFailed
 	do
+		self.curl.native = new NativeCurl.easy_init
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var lines = new Array[String]
@@ -431,6 +520,8 @@ class CurlMail
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
+
+		self.curl.native.easy_clean
 
 		return null
 	end
