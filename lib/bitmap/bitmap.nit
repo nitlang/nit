@@ -130,10 +130,8 @@ class Bitmap
 		# =============== Bitmap header ================
 		for x in [0..13] do
 			var b = fileReader.read_byte
-			if b == null then
-				return
-			end
-			bitmap_header[x] = b.to_i
+			if b < 0 then return
+			bitmap_header[x] = b
 		end
 		self.file_size = get_value(bitmap_header.subarray(2, 4))
 		self.data_offset = get_value(bitmap_header.subarray(10, 4))
@@ -141,8 +139,8 @@ class Bitmap
 		# =============== DIB header ================
 		for x in [0..39] do
 			var b = fileReader.read_byte
-			if b == null then return
-			dib_header[x] = b.to_i
+			if b < 0 then return
+			dib_header[x] = b
 		end
 		var dib_size = get_value(dib_header.subarray(0, 4))
 		# only support BITMAPINFOHEADER
