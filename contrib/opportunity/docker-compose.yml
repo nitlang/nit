@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+        app:
+                build: docker
+                restart: unless-stopped
+                volumes:
+                        - ./volumes/db:/nit/contrib/opportunity/db/
+                ports:
+                        - "8080:8080"
