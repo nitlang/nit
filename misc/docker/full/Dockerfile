@@ -8,7 +8,6 @@ MAINTAINER Jean Privat <jean@pryen.org>
 RUN dpkg --add-architecture i386 \
 	&& apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		# Packages needed for lib/
-		libcurl4-openssl-dev \
 		libegl1-mesa-dev \
 		libevent-dev \
 		libgles1-mesa-dev \
