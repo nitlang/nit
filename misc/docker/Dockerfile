@@ -16,6 +16,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 		git \
 		ca-certificates \
 		curl \
+		libcurl4-openssl-dev \
 		# For nit manpages :)
 		man \
 	&& rm -rf /var/lib/apt/lists/*
