@@ -169,7 +169,7 @@ android {
         versionCode {{{project.version_code}}}
         versionName "{{{app_version}}}"
         ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+            abiFilters 'armeabi-v7a', 'x86'
         }
         externalNativeBuild {
             cmake {
