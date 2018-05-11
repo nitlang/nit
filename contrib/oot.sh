@@ -32,8 +32,18 @@ update_oot() {
 # Run trymake with arguments
 trymake_oot() {
 	echo "$name: trymake $@"
+	if [ ! -f "$dir/Makefile" ]; then
+		echo "no makefile"
+		return
+	fi
 	../misc/jenkins/trymake.sh "$name" "$dir" "$@"
 }
+
+list=
+if [ -f "$1" ]; then
+	list=$1
+	shift
+fi
 
 cmd="$1"
 shift
@@ -50,11 +60,15 @@ while read -r repo name; do
 		trymake) trymake_oot "$@";;
 		pre-build) trymake_oot pre-build;;
 		all) update_oot; trymake_oot pre-build all check;;
-		""|help) echo "usage: oot.sh command [arg...]"; exit 0;;
+		""|help) echo "usage: oot.sh [list] command [arg...]"; exit 0;;
 		*) echo >&2 "unknown command: $cmd"; exit 1;;
 	esac
 done
 }
 
-process_list < oot.txt
-process_list < nitpm_packages.txt
+if [ -n "$list" ]; then
+	process_list < "$list"
+else
+	process_list < oot.txt
+	process_list < nitpm_packages.txt
+fi
