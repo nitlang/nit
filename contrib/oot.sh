@@ -32,6 +32,10 @@ update_oot() {
 # Run trymake with arguments
 trymake_oot() {
 	echo "$name: trymake $@"
+	if [ ! -f "$dir/Makefile" ]; then
+		echo "no makefile"
+		return
+	fi
 	../misc/jenkins/trymake.sh "$name" "$dir" "$@"
 }
 
