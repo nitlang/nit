@@ -215,13 +215,16 @@ abstract class Reader
 
 	# Reads a String of at most `i` length
 	fun read(i: Int): String do
+		assert i >= 0
 		var cs = new CString(i)
 		var rd = read_bytes_to_cstring(cs, i)
+		if rd < 0 then return ""
 		return codec.decode_string(cs, rd)
 	end
 
 	# Reads up to `max` bytes from source
 	fun read_bytes(max: Int): Bytes do
+		assert max >= 0
 		var cs = new CString(max)
 		var rd = read_bytes_to_cstring(cs, max)
 		return new Bytes(cs, rd, max)

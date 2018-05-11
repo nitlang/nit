@@ -68,6 +68,7 @@ private class UTF8Codec
 	end
 
 	redef fun decode_string(ns, len) do
+		assert len >= 0
 		var ret = ns.to_s_unsafe(len, copy=false)
 		var rit = ret.as(FlatString).items
 		if rit == ns then
