@@ -8,6 +8,7 @@ ui_test
 readline
 postgres
 nitweb
+nitpm_arg3
 langannot
 test_nitcorn
 test_annot_pkgconfig
