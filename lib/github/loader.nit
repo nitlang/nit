@@ -78,7 +78,7 @@ class LoaderConfig
 
 	init do
 		super
-		tool_description = "Usage: loader <repo_name>"
+		tool_description = "Usage: loader <repo_name>\nLoad a GitHub repo into a MongoDb."
 		add_option(opt_db_host, opt_db_name)
 		add_option(opt_tokens, opt_show_wallet)
 		add_option(opt_verbose, opt_no_colors)

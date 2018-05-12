@@ -186,11 +186,15 @@ class Config
 	var opts = new OptionContext
 
 	# Help option
-	var opt_help = new OptionBool("Show this help message", "-h", "--help")
+	var opt_help = new OptionBool("Show this help message", "-h", "-?", "--help")
+
+	# Option --stub-man
+	var opt_stub_man = new OptionBool("Generate a stub manpage in markdown format", "--stub-man")
 
 	# Redefine this init to add your options
 	init do
-		add_option(opt_help)
+		add_option(opt_help, opt_stub_man)
+		opt_stub_man.hidden = true
 	end
 
 	# Add an option to `self`
@@ -201,6 +205,11 @@ class Config
 	# Initialize `self` options from `args`
 	fun parse_options(args: Collection[String]) do
 		opts.parse(args)
+
+		if opt_stub_man.value then
+			stub_man_options
+			exit 0
+		end
 	end
 
 	# Return the remaining args once options are parsed by `from_args`
@@ -220,7 +229,41 @@ class Config
 	# Display `tool_description` and options usage in console
 	fun usage do
 		print tool_description
+		print "\nOptions:"
 		opts.usage
+	end
+
+	# Generate a manpage stub from `self`
+	fun stub_man_options do
+		var lines = tool_description.split("\n")
+		var name = sys.program_name.basename
+		var syn = lines.shift
+		print "# NAME"
+		print ""
+		if lines.not_empty then
+			printn "{name} - "
+			print lines.join("\n")
+			print ""
+		end
+		print "# SYNOPSIS"
+		print ""
+		print syn.replace("Usage: ", "")
+		print ""
+		print "# OPTIONS"
+		for o in opts.options do
+			if o.hidden then continue
+
+			var first = true
+			print ""
+			printn "### "
+			for n in o.names do
+				if first then first = false else printn ", "
+				printn "`{n}`"
+			end
+			print ""
+			print "{o.helptext}."
+		end
+		exit 0
 	end
 end
 
