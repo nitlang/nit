@@ -183,4 +183,3 @@ for arg in args do
 	print "The merge is made"
 	mergemsg.write_to(stdout)
 end
-
