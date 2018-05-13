@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014-2015 Alexandre Terrasa <alexandre@moz-code.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,23 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITC=nitc
-NITU=nitunit
+NITC ?= nitc
+NITLS ?= nitls
+NITUNIT ?= nitunit
+NITDOC ?= nitdoc
 
-all: listener web
+.PHONY: all
+all: bin/listener bin/web
 
-listener:
-	$(NITC) src/listener.nit
+bin/listener: $(shell $(NITLS) -M src/listener.nit)
+	mkdir -p bin/
+	$(NITC) src/listener.nit -o bin/listener
 
-web:
-	$(NITC) src/web.nit
+bin/web: $(shell $(NITLS) -M src/web.nit)
+	mkdir -p bin/
+	$(NITC) src/web.nit -o bin/web
 
+.PHONY: check
 check:
-	$(NITU) src/game.nit
-	$(NITU) src/events.nit
-	$(NITU) src/statistics.nit
-	$(NITU) src/achievements.nit
-	$(NITU) src/listener.nit
+	$(NITUNIT) .
 
+.PHONY: doc
+doc:
+	$(NITDOC) . -o doc/
+
+.PHONY: clean
 clean:
-	rm listener web
+	rm -rf bin/
+	rm -rf doc/

@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2015 Alexandre Terrasa <alexandre@moz-code.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,15 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: refund
+NITC ?= nitc
+NITLS ?= nitls
+NITUNIT ?= nitunit
+NITDOC ?= nitdoc
 
-refund:
-	mkdir -p bin
-	nitc src/refund.nit -o bin/refund
+.PHONY: all
+all: bin/refund
 
-check: refund
+bin/refund: $(shell $(NITLS) -M src/refund.nit)
+	mkdir -p bin/
+	$(NITC) src/refund.nit -o bin/refund
+
+.PHONY: check
+check: bin/refund
+	$(NITUNIT) .
 	cd tests; make
 
+.PHONY: doc
+doc:
+	$(NITDOC) . -o doc/
+
+.PHONY: clean
 clean:
-	rm -rf bin
+	rm -rf bin/
+	rm -rf doc/
 	cd tests; make clean
