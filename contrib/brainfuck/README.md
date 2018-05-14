@@ -28,7 +28,7 @@ Brainfuck a small instruction set, only eight instructions :
 First, compile the interpreter with the Nit compiler/interpreter, and launch the program on a brainfuck source file for interpretation.
 
 Example:
-~~~
+~~~sh
 nitc ./brainfuck.nit
 ./brainfuck ./examples/hello.bf
 ~~~
