@@ -54,8 +54,8 @@ class Worker
 		return res ^-1
 	end
 
-	fun put_line(y: Int, line: Array[Byte]) do
-		for i in [0..line.length[ do line[i] = get_byte(i * 8, y).to_b
+	fun put_line(y: Int, line: Array[Int]) do
+		for i in [0..line.length[ do line[i] = get_byte(i * 8, y)
 	end
 
 	fun work do
@@ -70,7 +70,7 @@ end
 redef class Sys
 	var n = 0
 	var inv_n: Float is noautoinit
-	var data: Array[Array[Byte]] is noautoinit
+	var data: Array[Array[Int]] is noautoinit
 	var crb: Array[Float] is noautoinit
 	var cib: Array[Float] is noautoinit
 	var atomic = new AtomicInt(0)
@@ -89,8 +89,8 @@ for i in [0..n[ do
 	sys.cib[i] = i.to_f * inv_n - 1.0
 	sys.crb[i] = i.to_f * inv_n - 1.5
 end
-sys.data = new Array[Array[Byte]].with_capacity(n)
-for i in [0..n[ do sys.data[i] = new Array[Byte].filled_with(0.to_b, (n) / 8)
+sys.data = new Array[Array[Int]].with_capacity(n)
+for i in [0..n[ do sys.data[i] = new Array[Int].filled_with(0, (n) / 8)
 
 # Parallel Approach
 var actors = new Array[Worker]

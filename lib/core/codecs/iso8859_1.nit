@@ -35,7 +35,7 @@ private class ISO88591Codec
 
 	redef fun add_char_to(c, stream) do
 		var cp = if c.code_point <= 255 then c else '?'
-		stream[0] = cp.ascii
+		stream[0] = cp.code_point
 		return 1
 	end
 
@@ -50,9 +50,9 @@ private class ISO88591Codec
 		for i in s.chars do
 			var cp = i.code_point
 			if cp <= 255 then
-				b[pos] = cp.to_b
+				b[pos] = cp
 			else
-				b[pos] = 0x3Fu8
+				b[pos] = 0x3F
 			end
 			pos += 1
 		end

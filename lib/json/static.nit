@@ -128,7 +128,7 @@ redef class FlatText
 	redef fun json_need_escape do
 		var its = items
 		for i in [first_byte .. last_byte] do
-			if its[i] == 0x5Cu8 then return true
+			if its[i] == 0x5C then return true
 		end
 		return false
 	end

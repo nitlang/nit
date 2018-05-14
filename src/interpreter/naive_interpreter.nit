@@ -325,7 +325,7 @@ class NaiveInterpreter
 	do
 		var instance = c_string_instance_len(txt.byte_length+1)
 		var val = instance.val
-		val[txt.byte_length] = 0u8
+		val[txt.byte_length] = 0
 		txt.to_cstring.copy_to(val, txt.byte_length, 0, 0)
 
 		return instance
@@ -1189,10 +1189,10 @@ redef class AMethPropdef
 			var recvval = args.first.val.as(CString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
-				return v.byte_instance(recvval[arg1])
+				return v.int_instance(recvval[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
-				recvval[arg1] = args[2].val.as(Byte)
+				recvval[arg1] = args[2].val.as(Int)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: CString, length: Int, from: Int, to: Int)
@@ -1991,7 +1991,7 @@ end
 redef class ACharExpr
 	redef fun expr(v)
 	do
-		if is_ascii then return v.byte_instance(self.value.as(not null).ascii)
+		if is_ascii then return v.int_instance(self.value.as(not null).ascii)
 		if is_code_point then return v.int_instance(self.value.as(not null).code_point)
 		return v.char_instance(self.value.as(not null))
 	end

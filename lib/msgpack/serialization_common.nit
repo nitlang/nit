@@ -19,14 +19,14 @@ module serialization_common
 abstract class MsgPackEngine
 
 	# *ext type* byte for object definitions, defaults to 0x7Bu8 or '{'
-	var ext_typ_obj: Byte = 0x7Bu8 is writable
+	var ext_typ_obj: Int = 0x7B is writable
 
 	# *ext type* byte for object references, defaults to 0x7Du8 or '}'
-	var ext_typ_ref: Byte = 0x7Du8 is writable
+	var ext_typ_ref: Int = 0x7D is writable
 
 	# *ext type* byte to identify a char, defaults to 0x7Cu8 or '~'
-	var ext_typ_char: Byte = 0x7Cu8 is writable
+	var ext_typ_char: Int = 0x7C is writable
 
 	# *ext type* byte to identify a byte, defaults to 0x7Eu8 or '|'
-	var ext_typ_byte: Byte = 0x7Eu8 is writable
+	var ext_typ_byte: Int = 0x7E is writable
 end

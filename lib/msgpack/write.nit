@@ -20,11 +20,11 @@ import binary
 redef class Writer
 
 	# Write `null`, or nil, in MessagePack format
-	fun write_msgpack_null do write_byte 0xC0u8
+	fun write_msgpack_null do write_byte 0xC0
 
 	# Write `bool` in MessagePack format
 	fun write_msgpack_bool(bool: Bool)
-	do write_byte(if bool then 0xC3u8 else 0xC2u8)
+	do write_byte(if bool then 0xC3 else 0xC2)
 
 	# ---
 	# Integers
@@ -61,7 +61,7 @@ redef class Writer
 	fun write_msgpack_fixint(value: Int)
 	do
 		assert value >= -0x20 and value <= 0x7F
-		write_byte value.to_b
+		write_byte value
 	end
 
 	# Write `value` over one unsigned byte, following 1 metadata byte
@@ -69,7 +69,7 @@ redef class Writer
 	# Require: `value >= 0x00 and value <= 0xFF`
 	fun write_msgpack_uint8(value: Int)
 	do
-		write_byte 0xCCu8
+		write_byte 0xCC
 		write_bytes value.to_bytes(n_bytes=1)
 	end
 
@@ -78,7 +78,7 @@ redef class Writer
 	# Require: `value >= 0x00 and value <= 0xFFFF`
 	fun write_msgpack_uint16(value: Int)
 	do
-		write_byte 0xCDu8
+		write_byte 0xCD
 		write_bytes value.to_bytes(n_bytes=2)
 	end
 
@@ -87,7 +87,7 @@ redef class Writer
 	# Require: `value >= 0x00 and value <= 0xFFFF_FFFF`
 	fun write_msgpack_uint32(value: Int)
 	do
-		write_byte 0xCEu8
+		write_byte 0xCE
 		write_bytes value.to_bytes(n_bytes=4)
 	end
 
@@ -96,7 +96,7 @@ redef class Writer
 	# Require: `value >= 0x00 and value <= 0xFFFF_FFFF_FFFF_FFFF`
 	fun write_msgpack_uint64(value: Int)
 	do
-		write_byte 0xCFu8
+		write_byte 0xCF
 		write_bytes value.to_bytes(n_bytes=8)
 	end
 
@@ -105,28 +105,28 @@ redef class Writer
 	# Require: `value >= -128  and value <= 127`
 	fun write_msgpack_int8(value: Int)
 	do
-		write_byte 0xD0u8
+		write_byte 0xD0
 		write_bytes value.to_bytes(n_bytes=1)
 	end
 
 	# Write `value` over two signed bytes, following 1 metadata byte
 	fun write_msgpack_int16(value: Int)
 	do
-		write_byte 0xD1u8
+		write_byte 0xD1
 		write_bytes value.to_bytes(n_bytes=2)
 	end
 
 	# Write `value` over 4 signed bytes, following 1 metadata byte
 	fun write_msgpack_int32(value: Int)
 	do
-		write_byte 0xD2u8
+		write_byte 0xD2
 		write_bytes value.to_bytes(n_bytes=4)
 	end
 
 	# Write `value` over 8 signed bytes, following 1 metadata byte
 	fun write_msgpack_int64(value: Int)
 	do
-		write_byte 0xD3u8
+		write_byte 0xD3
 		write_int64 value
 	end
 
@@ -136,14 +136,14 @@ redef class Writer
 	# Write `value` as a MessagePack float (losing precision)
 	fun write_msgpack_float(value: Float)
 	do
-		write_byte 0xCAu8
+		write_byte 0xCA
 		write_float value
 	end
 
 	# Write `value` as a MessagePack double
 	fun write_msgpack_double(value: Float)
 	do
-		write_byte 0xCBu8
+		write_byte 0xCB
 		write_double value
 	end
 
@@ -177,7 +177,7 @@ redef class Writer
 		var len = text.byte_length
 		assert len <= 0x1F
 
-		var b = 0b1010_0000u8 | len.to_b
+		var b = 0b1010_0000 | len
 		write_byte b
 
 		write text
@@ -191,8 +191,8 @@ redef class Writer
 		var len = text.byte_length
 		assert len <= 0xFF
 
-		write_byte 0xD9u8
-		write_byte len.to_b
+		write_byte 0xD9
+		write_byte len
 		write text
 	end
 
@@ -204,10 +204,10 @@ redef class Writer
 		var len = text.byte_length
 		assert len <= 0xFFFF
 
-		write_byte 0xDAu8
+		write_byte 0xDA
 		var len_bytes = len.to_bytes
 		write_byte len_bytes[0]
-		write_byte if len_bytes.length > 1 then len_bytes[1] else 0u8
+		write_byte if len_bytes.length > 1 then len_bytes[1] else 0
 		write text
 	end
 
@@ -219,11 +219,11 @@ redef class Writer
 		var len = text.byte_length
 		assert len <= 0xFFFF_FFFF
 
-		write_byte 0xDBu8
+		write_byte 0xDB
 		var len_bytes = len.to_bytes
 		write_byte len_bytes[0]
 		for i in [1..4[ do
-			write_byte if len_bytes.length > i then len_bytes[i] else 0u8
+			write_byte if len_bytes.length > i then len_bytes[i] else 0
 		end
 		write text
 	end
@@ -254,8 +254,8 @@ redef class Writer
 		var len = data.length
 		assert len <= 0xFF
 
-		write_byte 0xC4u8
-		write_byte len.to_b
+		write_byte 0xC4
+		write_byte len
 		write_bytes data
 	end
 
@@ -267,7 +267,7 @@ redef class Writer
 		var len = data.length
 		assert len <= 0xFFFF
 
-		write_byte 0xC5u8
+		write_byte 0xC5
 		write_bytes len.to_bytes(n_bytes=2)
 		write_bytes data
 	end
@@ -280,7 +280,7 @@ redef class Writer
 		var len = data.length
 		assert len <= 0xFFFF_FFFF
 
-		write_byte 0xC6u8
+		write_byte 0xC6
 		write_bytes len.to_bytes(n_bytes=4)
 		write_bytes data
 	end
@@ -314,7 +314,7 @@ redef class Writer
 	fun write_msgpack_fixarray(len: Int)
 	do
 		assert len <= 0x0F
-		write_byte 0b1001_0000u8 | len.to_b
+		write_byte 0b1001_0000 | len
 	end
 
 	# Write an array header for `len` items, max of 0xFFFF items
@@ -325,7 +325,7 @@ redef class Writer
 	fun write_msgpack_array16(len: Int)
 	do
 		assert len <= 0xFFFF
-		write_byte 0xDCu8
+		write_byte 0xDC
 		write_bytes len.to_bytes(n_bytes=2)
 	end
 
@@ -337,7 +337,7 @@ redef class Writer
 	fun write_msgpack_array32(len: Int)
 	do
 		assert len <= 0xFFFF_FFFF
-		write_byte 0xDDu8
+		write_byte 0xDD
 		write_bytes len.to_bytes(n_bytes=4)
 	end
 
@@ -372,7 +372,7 @@ redef class Writer
 	fun write_msgpack_fixmap(len: Int)
 	do
 		assert len <= 0x0F
-		write_byte 0b1000_0000u8 | len.to_b
+		write_byte 0b1000_0000 | len
 	end
 
 	# Write a map header for `len` key/value pairs, max of 0xFFFF pairs
@@ -384,7 +384,7 @@ redef class Writer
 	fun write_msgpack_map16(len: Int)
 	do
 		assert len <= 0xFFFF
-		write_byte 0xDEu8
+		write_byte 0xDE
 		write_bytes len.to_bytes(n_bytes=2)
 	end
 
@@ -397,7 +397,7 @@ redef class Writer
 	fun write_msgpack_map32(len: Int)
 	do
 		assert len <= 0xFFFF_FFFF
-		write_byte 0xDFu8
+		write_byte 0xDF
 		write_bytes len.to_bytes(n_bytes=4)
 	end
 
@@ -410,10 +410,10 @@ redef class Writer
 	#
 	# ~~~
 	# var writer = new BytesWriter
-	# writer.write_msgpack_ext(0x0Au8, b"\x0B\x0C\x0D")
+	# writer.write_msgpack_ext(0x0A, b"\x0B\x0C\x0D")
 	# assert writer.bytes == b"\xC7\x03\x0A\x0B\x0C\x0D"
 	# ~~~
-	fun write_msgpack_ext(typ: Byte, bytes: Bytes)
+	fun write_msgpack_ext(typ: Int, bytes: Bytes)
 	do
 		var len = bytes.length
 		if len == 1 then
@@ -448,45 +448,45 @@ redef class Writer
 	# Write the header for an application-specific extension of one data byte
 	#
 	# After writing the header, clients should write the data byte.
-	fun write_msgpack_fixext1(typ: Byte)
+	fun write_msgpack_fixext1(typ: Int)
 	do
-		write_byte 0xD4u8
+		write_byte 0xD4
 		write_byte typ
 	end
 
 	# Write the header for an application-specific extension of two data bytes
 	#
 	# After writing the header, clients should write the two data bytes.
-	fun write_msgpack_fixext2(typ: Byte)
+	fun write_msgpack_fixext2(typ: Int)
 	do
-		write_byte 0xD5u8
+		write_byte 0xD5
 		write_byte typ
 	end
 
 	# Write the header for an application-specific extension of 4 data bytes
 	#
 	# After writing the header, clients should write the 4 data bytes.
-	fun write_msgpack_fixext4(typ: Byte)
+	fun write_msgpack_fixext4(typ: Int)
 	do
-		write_byte 0xD6u8
+		write_byte 0xD6
 		write_byte typ
 	end
 
 	# Write the header for an application-specific extension of 8 data bytes
 	#
 	# After writing the header, clients should write the 8 data bytes.
-	fun write_msgpack_fixext8(typ: Byte)
+	fun write_msgpack_fixext8(typ: Int)
 	do
-		write_byte 0xD7u8
+		write_byte 0xD7
 		write_byte typ
 	end
 
 	# Write the header for an application-specific extension of 16 data bytes
 	#
 	# After writing the header, clients should write the 16 data bytes.
-	fun write_msgpack_fixext16(typ: Byte)
+	fun write_msgpack_fixext16(typ: Int)
 	do
-		write_byte 0xD8u8
+		write_byte 0xD8
 		write_byte typ
 	end
 
@@ -495,11 +495,11 @@ redef class Writer
 	# After writing the header, clients should write the data bytes.
 	#
 	# Require: `len >= 0 and <= 0xFF`
-	fun write_msgpack_ext8(typ: Byte, len: Int)
+	fun write_msgpack_ext8(typ, len: Int)
 	do
 		assert len >= 0 and len <= 0xFF
-		write_byte 0xC7u8
-		write_byte len.to_b
+		write_byte 0xC7
+		write_byte len
 		write_byte typ
 	end
 
@@ -508,10 +508,10 @@ redef class Writer
 	# After writing the header, clients should write the data bytes.
 	#
 	# Require: `len >= 0 and <= 0xFFFF`
-	fun write_msgpack_ext16(typ: Byte, len: Int)
+	fun write_msgpack_ext16(typ, len: Int)
 	do
 		assert len >= 0 and len <= 0xFFFF
-		write_byte 0xC8u8
+		write_byte 0xC8
 		write_bytes len.to_bytes(n_bytes=2)
 		write_byte typ
 	end
@@ -521,10 +521,10 @@ redef class Writer
 	# After writing the header, clients should write the data bytes.
 	#
 	# Require: `len >= 0 and <= 0xFFFF_FFFF`
-	fun write_msgpack_ext32(typ: Byte, len: Int)
+	fun write_msgpack_ext32(typ, len: Int)
 	do
 		assert len >= 0 and len <= 0xFFFF_FFFF
-		write_byte 0xC9u8
+		write_byte 0xC9
 		write_bytes len.to_bytes(n_bytes=4)
 		write_byte typ
 	end

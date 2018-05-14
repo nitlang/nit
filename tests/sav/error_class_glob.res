@@ -6,8 +6,8 @@
 ../lib/core/kernel.nit:431,1--486,3: Error: `kernel$Numeric` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
 ../lib/core/kernel.nit:492,1--515,3: Error: `kernel$Bool` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
 ../lib/core/kernel.nit:517,1--599,3: Error: `kernel$Float` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
-../lib/core/kernel.nit:601,1--705,3: Error: `kernel$Byte` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
-../lib/core/kernel.nit:707,1--885,3: Error: `kernel$Int` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
-../lib/core/kernel.nit:887,1--1074,3: Error: `kernel$Char` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
-../lib/core/kernel.nit:1076,1--1093,3: Error: `kernel$Pointer` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
-../lib/core/kernel.nit:1095,1--1104,3: Error: `kernel$Task` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
+../lib/core/kernel.nit:601,1--700,3: Error: `kernel$Byte` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
+../lib/core/kernel.nit:702,1--883,3: Error: `kernel$Int` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
+../lib/core/kernel.nit:885,1--1064,3: Error: `kernel$Char` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
+../lib/core/kernel.nit:1066,1--1083,3: Error: `kernel$Pointer` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?
+../lib/core/kernel.nit:1085,1--1094,3: Error: `kernel$Task` does not specialize `module_0$Object`. Possible duplication of the root class `Object`?

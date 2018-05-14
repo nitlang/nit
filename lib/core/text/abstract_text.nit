@@ -42,9 +42,9 @@ abstract class Text
 	# Gets a view on the bytes of the Text object
 	#
 	# ~~~
-	# assert "hello".bytes.to_a == [104u8, 101u8, 108u8, 108u8, 111u8]
+	# assert "hello".bytes.to_a == [104, 101, 108, 108, 111]
 	# ~~~
-	fun bytes: SequenceRead[Byte] is abstract
+	fun bytes: SequenceRead[Int] is abstract
 
 	# Number of characters contained in self.
 	#
@@ -957,21 +957,21 @@ abstract class Text
 			if c == '%' then
 				if i + 2 >= length then
 					# What follows % has been cut off
-					buf[l] = '%'.ascii
+					buf[l] = u'%'
 				else
 					i += 1
 					var hex_s = substring(i, 2)
 					if hex_s.is_hex then
 						var hex_i = hex_s.to_hex
-						buf[l] = hex_i.to_b
+						buf[l] = hex_i
 						i += 1
 					else
 						# What follows a % is not Hex
-						buf[l] = '%'.ascii
+						buf[l] = u'%'
 						i -= 1
 					end
 				end
-			else buf[l] = c.ascii
+			else buf[l] = c.code_point
 
 			i += 1
 			l += 1
@@ -1462,7 +1462,7 @@ end
 # Abstract class for the SequenceRead compatible
 # views on the bytes of any Text
 private abstract class StringByteView
-	super SequenceRead[Byte]
+	super SequenceRead[Int]
 
 	type SELFTYPE: Text
 
@@ -1946,7 +1946,7 @@ redef class Byte
 	redef fun to_s do
 		var nslen = byte_to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_byte_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen, copy=false, clean=false)
 	end
@@ -2094,10 +2094,10 @@ redef class Char
 	# Returns a sequence with the UTF-8 bytes of `self`
 	#
 	# ~~~
-	# assert 'a'.bytes == [0x61u8]
-	# assert 'ま'.bytes == [0xE3u8, 0x81u8, 0xBEu8]
+	# assert 'a'.bytes == [0x61]
+	# assert 'ま'.bytes == [0xE3, 0x81, 0xBE]
 	# ~~~
-	fun bytes: SequenceRead[Byte] do return to_s.bytes
+	fun bytes: SequenceRead[Int] do return to_s.bytes
 
 	# Is `self` an UTF-16 surrogate pair ?
 	fun is_surrogate: Bool do

@@ -212,12 +212,12 @@ redef class Bytes
 	#     assert "this is a test".to_bytes.hamming_distance("wokka wokka!!!".bytes) == 37
 	#     assert "this is a test".to_bytes.hamming_distance("this is a test".bytes) == 0
 	#
-	fun hamming_distance(other: SequenceRead[Byte]): Int do
+	fun hamming_distance(other: SequenceRead[Int]): Int do
 		var diff = 0
 		for idx in self.length.times do
 			var res_byte = self[idx] ^ other[idx]
 			for bit in [0..8[ do
-				if res_byte & 1u8 == 1u8 then diff += 1
+				if res_byte & 1 == 1 then diff += 1
 				res_byte = res_byte >> 1
 			end
 		end

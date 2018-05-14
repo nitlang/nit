@@ -17,20 +17,20 @@ class Bitarray
 	var narr: Bytes
 
 	init do
-		for x in [0 .. narr.length[ do narr[x] = 0xFFu8
+		for x in [0 .. narr.length[ do narr[x] = 0xFF
 	end
 
 	fun [](pos: Int): Bool do
 		pos -= 2
-		return (narr[pos / 8] & (1u8 << (7 - pos % 8))) != 0u8
+		return (narr[pos / 8] & (1 << (7 - pos % 8))) != 0
 	end
 
 	fun []=(pos: Int, val: Bool) do
 		pos -= 2
 		if val then
-			narr[pos / 8] |= 1u8 << (7 - pos % 8)
+			narr[pos / 8] |= 1 << (7 - pos % 8)
 		else
-			narr[pos / 8] &= 0xFFu8 - (1u8 << (7 - pos % 8))
+			narr[pos / 8] &= 0xFF - (1 << (7 - pos % 8))
 		end
 	end
 end

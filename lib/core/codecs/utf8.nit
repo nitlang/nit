@@ -54,7 +54,7 @@ private class UTF8Codec
 	redef fun is_valid_char(ns, len) do
 		if len == 0 then return 2
 		if not ns[0].is_valid_utf8_start then return 2
-		for i in [1 .. len[ do if ns[i] & 0b1100_0000u8 != 0b1000_0000u8 then return 2
+		for i in [1 .. len[ do if ns[i] & 0b1100_0000 != 0b1000_0000 then return 2
 		if len != ns[0].u8len then return 1
 		return 0
 	end

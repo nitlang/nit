@@ -91,7 +91,7 @@ private class Concat
 	redef fun to_cstring do
 		var len = _byte_length
 		var ns = new CString(len + 1)
-		ns[len] = 0u8
+		ns[len] = 0
 		var off = 0
 		for i in substrings do
 			var ilen = i._byte_length
@@ -331,7 +331,7 @@ end
 
 # A reverse iterator capable of working with `Rope` objects
 private class RopeByteReverseIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	# Current CString
 	var ns: CString is noautoinit
@@ -372,7 +372,7 @@ end
 
 # Forward iterator on the bytes of a `Rope`
 private class RopeByteIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	# Position in current `String`
 	var pns: Int is noautoinit

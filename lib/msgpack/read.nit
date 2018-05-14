@@ -45,7 +45,7 @@ redef class Reader
 		else if typ & 0b1000_0000 == 0 or typ & 0b1110_0000 == 0b1110_0000 then
 			# fixint
 			var bytes = new Bytes.with_capacity(1)
-			bytes.add typ.to_b
+			bytes.add typ
 			return bytes.to_i(signed=true)
 
 		else if typ & 0b1111_0000 == 0b1000_0000 then
@@ -174,7 +174,7 @@ redef class Reader
 	# var reader = new BytesReader(b"\xC7\x03\x0A\x0B\x0C\x0D")
 	# var ext = reader.read_msgpack
 	# assert ext isa MsgPackExt
-	# assert ext.typ == 0x0Au8
+	# assert ext.typ == 0x0a
 	# assert ext.data == b"\x0B\x0C\x0D"
 	# ~~~
 	private fun read_msgpack_fixext_data(len: Int): MsgPackExt
@@ -182,7 +182,7 @@ redef class Reader
 		var exttyp = read_byte
 		if exttyp < 0 then exttyp = 0
 		var data = read_bytes(len)
-		return new MsgPackExt(exttyp.to_b, data)
+		return new MsgPackExt(exttyp, data)
 	end
 
 	# Read the content of a dynamic *ext* including the length on `len_len` bytes

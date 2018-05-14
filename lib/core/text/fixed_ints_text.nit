@@ -40,7 +40,7 @@ redef class Int8
 	redef fun to_s do
 		var nslen = to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen, copy=false)
 	end
@@ -63,7 +63,7 @@ redef class Int16
 	redef fun to_s do
 		var nslen = to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen, copy=false)
 	end
@@ -87,7 +87,7 @@ redef class UInt16
 	redef fun to_s do
 		var nslen = to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen, copy=false)
 	end
@@ -111,7 +111,7 @@ redef class Int32
 	redef fun to_s do
 		var nslen = to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen, copy=false)
 	end
@@ -135,7 +135,7 @@ redef class UInt32
 	redef fun to_s do
 		var nslen = to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_to_s(ns, nslen + 1)
 		return ns.to_s_unsafe(nslen, copy=false)
 	end

@@ -1362,7 +1362,7 @@ redef class FlatString
 		var p = last_byte
 		var c = its[p]
 		var st = _first_byte
-		while p >= st and c != '.'.ascii do
+		while p >= st and c != u'.' do
 			p -= 1
 			c = its[p]
 		end
@@ -1379,7 +1379,7 @@ redef class FlatString
 		var l = s.last_byte
 		var its = s._items
 		var min = s._first_byte
-		var sl = '/'.ascii
+		var sl = u'/'
 		while l > min and its[l] == sl do l -= 1
 		if l == min then return "/"
 		var ns = l
@@ -1523,7 +1523,7 @@ private extern class NativeFile `{ FILE* `}
 		return (long)res;
 	`}
 
-	fun write_byte(value: Byte): Int `{
+	fun write_byte(value: Int): Int `{
 		unsigned char b = (unsigned char)value;
 		return fwrite(&b, 1, 1, self);
 	`}

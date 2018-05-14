@@ -651,11 +651,6 @@ universal Byte
 	#     assert 5u8 >> 1    == 2u8
 	fun >>(i: Int): Byte is intern `{ return self >> i; `}
 
-	# Returns the character equivalent of `self`
-	#
-	# REQUIRE: `self <= 127u8`
-	fun ascii: Char is intern `{ return (uint32_t)self; `}
-
 	redef fun to_i is intern
 	redef fun to_f is intern
 	redef fun to_b do return self
@@ -812,6 +807,11 @@ universal Int
 	#     assert 0x220B.code_point == '∋'
 	fun code_point: Char is intern `{ return (uint32_t)self; `}
 
+	# Returns the character equivalent of `self`
+	#
+	# REQUIRE: `self <= 127`
+	fun ascii: Char do return code_point
+
 	# Number of digits of an integer in base `b` (plus one if negative)
 	#
 	#     assert 123.digit_count(10) == 3
@@ -882,6 +882,9 @@ universal Int
 	#     assert 10.abs    == 10
 	#     assert 0.abs     == 0
 	fun abs: Int do return if self >= 0 then self else -self
+
+	# Is `self` an ASCII whitespace ?
+	fun is_whitespace: Bool do return self == 0x7F or self <= 0x20
 end
 
 # Native characters.
@@ -963,11 +966,11 @@ universal Char
 
 	# The ascii value of `self`
 	#
-	#     assert 'a'.ascii    == 97u8
-	#     assert '\n'.ascii   == 10u8
+	#     assert 'a'.ascii    == 97
+	#     assert '\n'.ascii   == 10
 	#
 	# REQUIRE: `is_ascii`
-	fun ascii: Byte do return code_point.to_b
+	fun ascii: Int do return code_point
 
 	# The unicode code point value of `self`
 	#

@@ -22,12 +22,12 @@ class MsgPackExt
 	serialize
 
 	# Custom type code, in [0..127]
-	var typ: Byte
+	var typ: Int
 
 	# Data bytes
 	var data: Bytes
 
 	redef fun hash do return typ.hash + data.hash*8
 	redef fun ==(o) do return o isa MsgPackExt and o.typ == typ and o.data == data
-	redef fun to_s do return "<{class_name} typ: {typ}, data: {data.chexdigest}>"
+	redef fun to_s do return "<{class_name} typ: {typ.to_b}, data: {data.chexdigest}>"
 end
