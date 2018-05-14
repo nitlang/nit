@@ -17,7 +17,7 @@ module github_merge
 
 import github::github_curl
 import template
-import opts
+import config
 
 redef class Object
 	# Factorize cast
@@ -102,11 +102,23 @@ var opt_query = new OptionString("Query to get issues (e.g. label=ok_will_merge)
 var opt_keepgoing = new OptionBool("Skip merge conflicts", "-k", "--keep-going")
 var opt_all = new OptionBool("Merge all", "-a", "--all")
 var opt_status = new OptionArray("A status context that must be \"success\" (e.g. default)", "--status")
-var opts = new OptionContext
-opts.add_option(opt_repo, opt_auth, opt_query, opt_status, opt_all, opt_keepgoing)
 
-opts.parse(sys.args)
-var args = opts.rest
+var usage = new Buffer
+usage.append "Usage: github_merge [OPTION]... <PR number...>\n"
+usage.append "Query the Github PR API to perform a merge."
+
+var config = new Config
+config.tool_description = usage.write_to_string
+config.add_option(opt_repo, opt_auth, opt_query, opt_status, opt_all, opt_keepgoing)
+
+config.parse_options(sys.args)
+
+if config.opt_help.value then
+	config.usage
+	exit 0
+end
+
+var args = config.args
 
 var auth = opt_auth.value or else ""
 if auth == "" then auth = get_github_oauth
