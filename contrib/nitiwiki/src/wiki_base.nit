@@ -16,7 +16,6 @@
 module wiki_base
 
 import template::macro
-import opts
 import ini
 
 # A Nitiwiki instance.
