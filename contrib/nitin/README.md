@@ -162,7 +162,7 @@ A:bar
 
 ### Dynamic importation
 
-~~~
+~~~raw
 -->print([0..10[.to_a.to_json)
 1,20--26: Error: method `to_json` does not exists in `Array[Int]`.
 	print([0..10[.to_a.to_json)
