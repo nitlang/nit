@@ -24,21 +24,21 @@ class TestCommandsIni
 	# CmdIni
 
 	fun test_cmd_ini_desc is test do
-		var cmd = new CmdIniDescription(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniDescription(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.desc == "Dummy program used for testing Nit tools"
 	end
 
 	fun test_cmd_ini_git is test do
-		var cmd = new CmdIniGitUrl(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniGitUrl(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.url == "https://github.com/nitlang/nit.git"
 	end
 
 	fun test_cmd_ini_clone is test do
-		var cmd = new CmdIniCloneCommand(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniCloneCommand(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.url == "https://github.com/nitlang/nit.git"
@@ -46,21 +46,21 @@ class TestCommandsIni
 	end
 
 	fun test_cmd_ini_issues is test do
-		var cmd = new CmdIniIssuesUrl(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniIssuesUrl(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.url == "https://github.com/nitlang/nit/issues"
 	end
 
 	fun test_cmd_ini_maintainer is test do
-		var cmd = new CmdIniMaintainer(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniMaintainer(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.maintainer == "John Doe <jdoe@example.com> (http://www.example.com/~jdoe), Spider-Man"
 	end
 
 	fun test_cmd_ini_contributors is test do
-		var cmd = new CmdIniContributors(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniContributors(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.contributors == [
@@ -70,14 +70,14 @@ class TestCommandsIni
 	end
 
 	fun test_cmd_ini_license is test do
-		var cmd = new CmdIniLicense(test_view, mentity_name = "test_prog")
+		var cmd = new CmdIniLicense(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.license == "Apache-2.0"
 	end
 
 	fun test_cmd_ini_license_file is test do
-		var cmd = new CmdLicenseFile(test_view, mentity_name = "test_prog")
+		var cmd = new CmdLicenseFile(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 
@@ -87,7 +87,7 @@ class TestCommandsIni
 	end
 
 	fun test_cmd_ini_license_file_content is test do
-		var cmd = new CmdLicenseFileContent(test_view, mentity_name = "test_prog")
+		var cmd = new CmdLicenseFileContent(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 
@@ -97,7 +97,7 @@ class TestCommandsIni
 	end
 
 	fun test_cmd_ini_contrib_file is test do
-		var cmd = new CmdContribFile(test_view, mentity_name = "test_prog")
+		var cmd = new CmdContribFile(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 
@@ -107,7 +107,7 @@ class TestCommandsIni
 	end
 
 	fun test_cmd_ini_contrib_file_content is test do
-		var cmd = new CmdContribFileContent(test_view, mentity_name = "test_prog")
+		var cmd = new CmdContribFileContent(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 

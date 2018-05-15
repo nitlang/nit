@@ -68,15 +68,18 @@ class CmdDecorator
 
 	redef type PROCESSOR: CmdMarkdownProcessor
 
-	# View used by wikilink commands to find model entities
-	var view: ModelView
+	# Model used by wikilink commands to find entities
+	var model: Model
+
+	# Filter to apply if any
+	var filter: nullable ModelFilter
 
 	redef fun add_span_code(v, buffer, from, to) do
 		var text = new FlatBuffer
 		buffer.read(text, from, to)
 		var name = text.write_to_string
 		name = name.replace("nullable ", "")
-		var mentity = try_find_mentity(view, name)
+		var mentity = try_find_mentity(name)
 		if mentity == null then
 			super
 		else
@@ -86,11 +89,11 @@ class CmdDecorator
 		end
 	end
 
-	private fun try_find_mentity(view: ModelView, text: String): nullable MEntity do
-		var mentity = view.mentity_by_full_name(text)
+	private fun try_find_mentity(text: String): nullable MEntity do
+		var mentity = model.mentity_by_full_name(text, filter)
 		if mentity != null then return mentity
 
-		var mentities = view.mentities_by_name(text)
+		var mentities = model.mentities_by_name(text, filter)
 		if mentities.is_empty then
 			return null
 		else if mentities.length > 1 then
@@ -100,7 +103,7 @@ class CmdDecorator
 	end
 
 	redef fun add_wikilink(v, token) do
-		v.render_wikilink(token, view)
+		v.render_wikilink(token, model)
 	end
 end
 
@@ -110,11 +113,11 @@ class CmdInlineDecorator
 
 	redef type PROCESSOR: CmdMarkdownProcessor
 
-	# View used by wikilink commands to find model entities
-	var view: ModelView
+	# Model used by wikilink commands to find entities
+	var model: Model
 
 	redef fun add_wikilink(v, token) do
-		v.render_wikilink(token, view)
+		v.render_wikilink(token, model)
 	end
 end
 
@@ -126,7 +129,7 @@ class CmdMarkdownProcessor
 	var parser: CommandParser
 
 	# Render a wikilink
-	fun render_wikilink(token: TokenWikiLink, model: ModelView) do
+	fun render_wikilink(token: TokenWikiLink, model: Model) do
 		var link = token.link
 		if link == null then return
 		var name = token.name

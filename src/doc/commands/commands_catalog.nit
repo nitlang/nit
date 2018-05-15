@@ -21,6 +21,8 @@ import commands_model
 abstract class CmdCatalog
 	super DocCommand
 
+	autoinit(model, catalog, filter)
+
 	# Catalog to query at
 	var catalog: Catalog
 end
@@ -30,7 +32,7 @@ class CmdCatalogSearch
 	super CmdCatalog
 	super CmdSearch
 
-	autoinit(view, catalog, query, limit, page, count, max)
+	autoinit(model, catalog, filter, query, limit, page, count, max)
 
 	redef fun init_results do
 		if results != null then return new CmdSuccess
@@ -42,7 +44,7 @@ class CmdCatalogSearch
 		if query == null then return new ErrorNoQuery
 		sorter = null
 
-		var index = view.index
+		var index = model.index
 
 		# lookup by name prefix
 		var matches = index.find_by_name_prefix(query).uniq.
@@ -130,7 +132,7 @@ class CmdCatalogPackages
 	super CmdCatalog
 	super CmdEntities
 
-	autoinit(view, catalog, limit, page, count, max)
+	autoinit(model, catalog, filter, limit, page, count, max)
 
 	redef var sorter = new CatalogScoreSorter(catalog) is lazy
 
@@ -187,7 +189,7 @@ end
 class CmdCatalogTag
 	super CmdCatalogPackages
 
-	autoinit(view, catalog, tag, limit, page, count, max)
+	autoinit(model, catalog, filter, tag, limit, page, count, max)
 
 	# The tag to retrieve
 	var tag: nullable String = null is optional, writable
@@ -285,7 +287,7 @@ class CmdCatalogMaintaining
 	super CmdCatalogPerson
 	super CmdCatalogPackages
 
-	autoinit(view, catalog, person, person_name, limit, page, count, max)
+	autoinit(model, catalog, filter, person, person_name, limit, page, count, max)
 
 	redef fun init_command do return super
 
@@ -306,7 +308,7 @@ class CmdCatalogContributing
 	super CmdCatalogPerson
 	super CmdCatalogPackages
 
-	autoinit(view, catalog, person, person_name, limit, page, count, max)
+	autoinit(model, catalog, filter, person, person_name, limit, page, count, max)
 
 	# Include maintained packages?
 	#

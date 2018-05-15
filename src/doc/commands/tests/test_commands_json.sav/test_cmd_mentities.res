@@ -128,18 +128,6 @@
 		"html_synopsis": "<span class=\"synopsys nitdoc\">A worlg RPG abstraction.</span>",
 		"modifiers": ["module"]
 	}, {
-		"name": "test_game",
-		"namespace": [{
-			"name": "test_prog",
-			"synopsis": "Test program for model tools."
-		}, "::", {
-			"name": "test_game"
-		}],
-		"class_name": "MModule",
-		"full_name": "test_prog::test_game",
-		"visibility": "public",
-		"modifiers": ["module"]
-	}, {
 		"name": "test_prog",
 		"synopsis": "A test program with a fake model to check model tools.",
 		"namespace": [{

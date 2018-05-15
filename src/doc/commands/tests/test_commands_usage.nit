@@ -22,40 +22,40 @@ class TestCommandsUsage
 	test
 
 	fun test_cmd_new is test do
-		var cmd = new CmdNew(test_view, test_builder, mentity_name = "test_prog::Character")
+		var cmd = new CmdNew(test_model, test_builder, test_filter, mentity_name = "test_prog::Character")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results != null
 	end
 
 	fun test_cmd_new_not_class is test do
-		var cmd = new CmdNew(test_view, test_builder, mentity_name = "strength_bonus")
+		var cmd = new CmdNew(test_model, test_builder, test_filter, mentity_name = "strength_bonus")
 		var res = cmd.init_command
 		assert res isa ErrorNotClass
 	end
 
 	fun test_cmd_call is test do
-		var cmd = new CmdCall(test_view, test_builder, mentity_name = "strength_bonus")
+		var cmd = new CmdCall(test_model, test_builder, test_filter, mentity_name = "strength_bonus")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results != null
 	end
 
 	fun test_cmd_call_not_prop is test do
-		var cmd = new CmdCall(test_view, test_builder, mentity_name = "test_prog::Character")
+		var cmd = new CmdCall(test_model, test_builder, test_filter, mentity_name = "test_prog::Character")
 		var res = cmd.init_command
 		assert res isa ErrorNotProperty
 	end
 
 	fun test_cmd_return is test do
-		var cmd = new CmdReturn(test_view, mentity_name = "test_prog::Character")
+		var cmd = new CmdReturn(test_model, test_filter, mentity_name = "test_prog::Character")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results != null
 	end
 
 	fun test_cmd_param is test do
-		var cmd = new CmdParam(test_view, mentity_name = "test_prog::Character")
+		var cmd = new CmdParam(test_model, test_filter, mentity_name = "test_prog::Character")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results != null

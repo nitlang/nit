@@ -29,11 +29,11 @@ class CmdMains
 		var mentities = new Array[MEntity]
 
 		if mentity isa MPackage then
-			for mmodule in mentity.collect_all_mmodules(view) do
+			for mmodule in mentity.collect_all_mmodules(filter) do
 				if mmodule_has_main(mmodule) then mentities.add mmodule
 			end
 		else if mentity isa MGroup then
-			for mmodule in mentity.collect_all_mmodules(view) do
+			for mmodule in mentity.collect_all_mmodules(filter) do
 				if mmodule_has_main(mmodule) then mentities.add mmodule
 			end
 		else if mentity isa MModule then
@@ -50,9 +50,9 @@ class CmdMains
 
 	# Does `mmodule` has a `main` method?
 	private fun mmodule_has_main(mmodule: MModule): Bool do
-		for mclassdef in mmodule.collect_redef_mclassdefs(view) do
+		for mclassdef in mmodule.collect_redef_mclassdefs(filter) do
 			if mclassdef.name != "Sys" then continue
-			for mpropdef in mclassdef.collect_redef_mpropdefs(view) do
+			for mpropdef in mclassdef.collect_redef_mpropdefs(filter) do
 				if mpropdef.name == "main" then return true
 			end
 		end
@@ -156,12 +156,12 @@ class CmdTesting
 		var mentities = new Array[MEntity]
 		if not mentity isa MPackage then return new WarningNoTest(mentity)
 
-		for mgroup in mentity.collect_all_mgroups(view) do
+		for mgroup in mentity.collect_all_mgroups(filter) do
 			if mgroup.is_test then
 				mentities.add mgroup
 				continue
 			end
-			for mmodule in mgroup.collect_mmodules(view) do
+			for mmodule in mgroup.collect_mmodules(filter) do
 				if mmodule.is_test then mentities.add mmodule
 			end
 		end
