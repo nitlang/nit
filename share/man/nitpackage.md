@@ -54,6 +54,12 @@ Generate package.ini files.
 ### `--check-ini`
 Check package.ini files.
 
+### `--gen-makefile`
+Generate Makefile files.
+
+### `--check-makefile`
+Check Makefile files.
+
 ### `-f`, `--force`
 Force update of existing files.
 

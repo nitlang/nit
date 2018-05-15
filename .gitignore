@@ -41,6 +41,8 @@ csrc2/
 lib/*.log
 lib/*.dot
 
+lib/*/bin
+
 examples/*/doc
 examples/*/bin
 

@@ -18,11 +18,11 @@ NITUNIT ?= nitunit
 NITDOC ?= nitdoc
 
 .PHONY: all
-all: bin/nitmd
+all: bin/loader
 
-bin/nitmd: $(shell $(NITLS) -M nitmd.nit)
+bin/loader: $(shell $(NITLS) -M loader.nit)
 	mkdir -p bin/
-	$(NITC) nitmd.nit -o bin/nitmd
+	$(NITC) loader.nit -o bin/loader
 
 .PHONY: check
 check:
