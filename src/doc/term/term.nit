@@ -25,7 +25,7 @@ redef class CommandParser
 
 		# Translate links to doc commands
 		if cmd isa CmdEntityLink then
-			cmd = new CmdComment(model, filter, mentity_name = query)
+			cmd = new CmdComment(model, mentity_name = query)
 			var opts = new HashMap[String, String]
 			var status = cmd.parser_init(query, opts)
 			if not status isa CmdSuccess then error = status
