@@ -649,32 +649,46 @@ redef class MClass
 		return mclassdefs
 	end
 
+	# Collect all ancestors of `self`
+	redef fun collect_ancestors(mainmodule, filter) do
+		var res = new HashSet[MENTITY]
+		if not mainmodule.flatten_mclass_hierarchy.has(self) then return res
+		for mclass in in_hierarchy(mainmodule).greaters do
+			if mclass == self then continue
+			if filter == null or filter.accept_mentity(mclass) then res.add mclass
+		end
+		return res
+	end
+
 	# Collect all direct parents of `self`
-	#
-	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_parents(mainmodule, filter) do
 		var res = new HashSet[MENTITY]
 		if not mainmodule.flatten_mclass_hierarchy.has(self) then return res
 		for mclass in in_hierarchy(mainmodule).direct_greaters do
-			if mclass == self or (filter != null and not filter.accept_mentity(mclass)) then
-				continue
-			end
-			res.add mclass
+			if mclass == self then continue
+			if filter == null or filter.accept_mentity(mclass) then res.add mclass
 		end
 		return res
 	end
 
 	# Collect all direct children of `self`
-	#
-	# This method uses a flattened hierarchy containing all the mclassdefs.
 	redef fun collect_children(mainmodule, filter) do
 		var res = new HashSet[MENTITY]
 		if not mainmodule.flatten_mclass_hierarchy.has(self) then return res
 		for mclass in in_hierarchy(mainmodule).direct_smallers do
-			if mclass == self or (filter != null and not filter.accept_mentity(mclass)) then
-				continue
-			end
-			res.add mclass
+			if mclass == self then continue
+			if filter == null or filter.accept_mentity(mclass) then res.add mclass
+		end
+		return res
+	end
+
+	# Collect all descendants of `self`
+	redef fun collect_descendants(mainmodule, filter) do
+		var res = new HashSet[MENTITY]
+		if not mainmodule.flatten_mclass_hierarchy.has(self) then return res
+		for mclass in in_hierarchy(mainmodule).smallers do
+			if mclass == self then continue
+			if filter == null or filter.accept_mentity(mclass) then res.add mclass
 		end
 		return res
 	end
