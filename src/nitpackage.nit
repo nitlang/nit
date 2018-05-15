@@ -40,11 +40,18 @@ redef class ToolContext
 	# nitpackage phase
 	var nitpackage_phase: Phase = new NitPackagePhase(self, null)
 
+	# --check-man
+	var opt_check_man = new OptionBool("Check manpages files", "--check-man")
+
+	# --gen-man
+	var opt_gen_man = new OptionBool("Generate manpages files", "--gen-man")
+
 	redef init do
 		super
 		option_context.add_option(opt_expand, opt_force)
 		option_context.add_option(opt_check_ini, opt_gen_ini)
 		option_context.add_option(opt_check_makefile, opt_gen_makefile)
+		option_context.add_option(opt_check_man, opt_gen_man)
 	end
 end
 
@@ -71,6 +78,12 @@ private class NitPackagePhase
 			# Check package Makefiles
 			if toolcontext.opt_check_makefile.value then
 				mpackage.check_makefile(toolcontext, mainmodule)
+				continue
+			end
+
+			# Check manpages
+			if toolcontext.opt_check_man.value then
+				mpackage.check_man(toolcontext, mainmodule)
 				continue
 			end
 
@@ -101,6 +114,11 @@ private class NitPackagePhase
 						toolcontext.info("generated Makefile `{path}`", 0)
 					end
 				end
+			end
+
+			# Create manpages
+			if toolcontext.opt_gen_man.value then
+				mpackage.gen_man(toolcontext, mainmodule)
 			end
 		end
 	end
@@ -349,6 +367,55 @@ redef class MPackage
 		make.render.write_to_file(makefile_path)
 		return makefile_path
 	end
+
+	# Manpages
+
+	# The path to `self` manpage files
+	private fun man_path: nullable String do
+		var path = package_path
+		if path == null then return null
+		if not is_expanded then return null
+		return path / "man"
+	end
+
+	# Does `self` have a manpage files?
+	private fun has_man: Bool do
+		var man_path = self.man_path
+		if man_path == null then return false
+		return man_path.file_exists
+	end
+
+	private fun check_man(toolcontext: ToolContext, mainmodule: MModule) do
+		var model = toolcontext.modelbuilder.model
+		var filter = new ModelFilter(accept_example = false, accept_test = false)
+		var view = new ModelView(model, mainmodule, filter)
+
+		var cmd = new CmdMains(view, mentity = self)
+		var res = cmd.init_command
+		if not res isa CmdSuccess then return
+
+		for mmodule in cmd.results.as(not null) do
+			if not mmodule isa MModule then continue
+			mmodule.check_man(toolcontext)
+		end
+	end
+
+	private fun gen_man(toolcontext: ToolContext, mainmodule: MModule) do
+		var model = toolcontext.modelbuilder.model
+		var filter = new ModelFilter(accept_example = false, accept_test = false)
+		var view = new ModelView(model, mainmodule, filter)
+
+		var cmd = new CmdMains(view, mentity = self)
+		var res = cmd.init_command
+		if not res isa CmdSuccess then return
+
+		var pkg_man = man_path.as(not null)
+		for mmodule in cmd.results.as(not null) do
+			if not mmodule isa MModule then continue
+			if not has_man then pkg_man.mkdir
+			mmodule.gen_man(toolcontext)
+		end
+	end
 end
 
 redef class MModule
@@ -364,6 +431,85 @@ redef class MModule
 			if line.has_prefix("{name}:") then return makefile
 		end
 		return null
+	end
+
+	private fun man_path: nullable String do
+		var mpackage = self.mpackage
+		if mpackage == null then return null
+		var path = mpackage.man_path
+		if path == null then return null
+		return path / "{name}.man"
+	end
+
+	# Does `self` have a manpage?
+	private fun has_man: Bool do
+		var man_path = self.man_path
+		if man_path == null then return false
+		return man_path.file_exists
+	end
+
+	private fun make_module(toolcontext: ToolContext): Bool do
+		var mpackage = self.mpackage
+		if mpackage == null then return false
+		if not mpackage.is_expanded then return false
+
+		var pkg_path = mpackage.package_path
+		if pkg_path == null then return false
+
+		var pr = new ProcessReader("sh", "-c", "cd {pkg_path} && make -Bs bin/{name}")
+		var out = pr.read_all.trim
+		pr.close
+		pr.wait
+		if pr.status > 0 then
+			toolcontext.error(location, "unable to compile `{name}`")
+			print out
+			return false
+		end
+		return true
+	end
+
+	private fun stub_man(toolcontext: ToolContext): nullable String do
+		if not make_module(toolcontext) then return null
+		var mpackage = self.mpackage
+		if mpackage == null then return null
+		if not mpackage.is_expanded then return null
+
+		var pkg_path = mpackage.package_path
+		if pkg_path == null then return null
+
+		var pr = new ProcessReader("{pkg_path}/bin/{name}", "--stub-man")
+		var man = pr.read_all.trim
+		pr.close
+		pr.wait
+		if pr.status > 0 then
+			toolcontext.error(location, "unable to run `{pkg_path}/bin/{name} --stub-man`")
+			print man
+			return null
+		end
+		return man
+	end
+
+	private fun check_man(toolcontext: ToolContext) do
+		if not has_man then
+			toolcontext.error(location, "No manpage for bin {full_name}")
+			return
+		end
+		var man_path = self.man_path.as(not null)
+		var man = stub_man(toolcontext)
+		if man == null or man.is_empty then return
+
+		var old_man = new ManPage.from_file(self, man_path)
+		var new_man = new ManPage.from_string(self, man)
+		old_man.diff(toolcontext, new_man)
+	end
+
+	private fun gen_man(toolcontext: ToolContext) do
+		var man = stub_man(toolcontext)
+		if man == null or man.is_empty then return
+		var man_path = self.man_path
+		if man_path == null then return
+		man.write_to_file(man_path)
+		toolcontext.info("created manpage `{man_path}`", 0)
 	end
 end
 
@@ -505,6 +651,106 @@ class MakeRule
 			tpl.addn "\t{line}"
 		end
 		return tpl
+	end
+end
+
+private class ManPage
+	var mmodule: MModule
+	var name: nullable String is noinit
+	var synopsis: nullable String is noinit
+	var options = new HashMap[Array[String], String]
+
+	init from_file(mmodule: MModule, file: String) do
+		from_lines(mmodule, file.to_path.read_lines)
+	end
+
+	init from_string(mmodule: MModule, string: String) do
+		from_lines(mmodule, string.split("\n"))
+	end
+
+	init from_lines(mmodule: MModule, lines: Array[String]) do
+		init mmodule
+
+		var section = null
+		for i in [0..lines.length[ do
+			var line = lines[i]
+			if line.is_empty then continue
+
+			if line == "# NAME" then
+				section = "name"
+				continue
+			end
+			if line == "# SYNOPSIS" then
+				section = "synopsis"
+				continue
+			end
+			if line == "# OPTIONS" then
+				section = "options"
+				continue
+			end
+
+			if section == "name" and name == null then
+				name = line.trim
+			end
+			if section == "synopsis" and synopsis == null then
+				synopsis = line.trim
+			end
+			if section == "options" and line.has_prefix("###") then
+				var opts = new Array[String]
+				for opt in line.substring(3, line.length).trim.replace("`", "").split(",") do
+					opts.add opt.trim
+				end
+				var desc = ""
+				if i < lines.length - 1 then
+					desc = lines[i + 1].trim
+				end
+				options[opts] = desc
+			end
+		end
+	end
+
+	fun diff(toolcontext: ToolContext, ref: ManPage) do
+		if name != ref.name then
+			toolcontext.warning(mmodule.location, "diff-man",
+				"Warning: outdated man description. " +
+				"Expected `{ref.name or else ""}` got `{name or else ""}`.")
+		end
+		if synopsis != ref.synopsis then
+			toolcontext.warning(mmodule.location, "diff-man",
+				"Warning: outdated man synopsis. " +
+				"Expected `{ref.synopsis or else ""}` got `{synopsis or else ""}`.")
+		end
+		for name, desc in options do
+			if not ref.options.has_key(name) then
+				toolcontext.warning(mmodule.location, "diff-man",
+					"Warning: unknown man option `{name}`.`")
+				continue
+			end
+			var ref_desc = ref.options[name]
+			if desc != ref_desc then
+				toolcontext.warning(mmodule.location, "diff-man",
+					"Warning: outdated man option description. Expected `{ref_desc}` got `{desc}`.")
+			end
+		end
+		for ref_name, ref_desc in ref.options do
+			if not options.has_key(ref_name) then
+				toolcontext.warning(mmodule.location, "diff-man",
+					"Warning: missing man option `{ref_name}`.`")
+			end
+		end
+	end
+
+	redef fun to_s do
+		var tpl = new Template
+		tpl.addn "# NAME"
+		tpl.addn name or else ""
+		tpl.addn "# SYNOPSIS"
+		tpl.addn synopsis or else ""
+		tpl.addn "# OPTIONS"
+		for name, desc in options do
+			tpl.addn " * {name}: {desc}"
+		end
+		return tpl.write_to_string
 	end
 end
 

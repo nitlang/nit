@@ -1,0 +1,42 @@
+# NAME
+
+nitiwiki - A wiki engine based on markdown files and git.
+
+# SYNOPSIS
+
+nitiwiki [OPTION]...
+
+# OPTIONS
+
+### `-h`, `-?`, `--help`
+Show this help message.
+
+### `-v`
+Verbose level.
+
+### `-c`, `--config`
+Path to config.ini file.
+
+### `--init`
+Initialize a new wiki in the current directory.
+
+### `--status`
+Display wiki status.
+
+### `-r`, `--render`
+Render the out directory from markdown sources.
+
+### `-f`, `--force`
+Force render even if source files are unchanged.
+
+### `--clean`
+Clean the output directory.
+
+### `-s`, `--rsync`
+Synchronize outdir with distant wiki using rsync.
+
+### `--fetch`
+Render local source from git repo.
+
+### `--nit-dir`
+Nit base directory.
