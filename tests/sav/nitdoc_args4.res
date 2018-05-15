@@ -1,37 +1,11 @@
 Empty README for group `examples` (readme-warning)
 Empty README for group `man` (readme-warning)
 Empty README for group `tests` (readme-warning)
-Empty README for group `excluded` (readme-warning)
-Errors: 0. Warnings: 4.
-MGroupPage excluded
-	# excluded.section
-		## excluded.intro
-		## excluded.concerns
-		## excluded.concern
-		## excluded.concern
-		## excluded-.concern
-			### excluded-.definition
-				#### excluded-.intros_redefs
-					##### list.group
-						###### excluded-.intros
-						###### excluded-.redefs
-
-MModulePage excluded
-	# excluded.section
-		## excluded-.intro
-		## excluded-.importation
-			### excluded-.graph
-			### list.group
-				#### excluded-.imports
-				#### excluded-.clients
-
+Errors: 0. Warnings: 3.
 OverviewPage Overview
 	# home.article
 		## packages.section
-			### excluded.definition
 			### test_prog.definition
-
-ReadmePage excluded
 
 ReadmePage test_prog
 	# mdarticle-0
@@ -1260,24 +1234,24 @@ MPropertyPage player_characters=
 	# player_characters=.section
 		## test_prog__tests-__TestGame__player_characters_61d.intro
 
-Generated 114 pages
+Generated 111 pages
  list:
-  MPropertyPage: 62 (54.38%)
-  MClassPage: 23 (20.17%)
-  MModulePage: 11 (9.64%)
-  ReadmePage: 8 (7.01%)
-  MGroupPage: 8 (7.01%)
-  SearchPage: 1 (0.87%)
-  OverviewPage: 1 (0.87%)
-Found 212 mentities
+  MPropertyPage: 62 (55.85%)
+  MClassPage: 23 (20.72%)
+  MModulePage: 10 (9.00%)
+  MGroupPage: 7 (6.30%)
+  ReadmePage: 7 (6.30%)
+  SearchPage: 1 (0.90%)
+  OverviewPage: 1 (0.90%)
+Found 209 mentities
  list:
-  MMethodDef: 79 (37.26%)
-  MMethod: 61 (28.77%)
-  MClassDef: 26 (12.26%)
-  MClass: 23 (10.84%)
-  MModule: 11 (5.18%)
-  MGroup: 8 (3.77%)
-  MPackage: 2 (0.94%)
+  MMethodDef: 79 (37.79%)
+  MMethod: 61 (29.18%)
+  MClassDef: 26 (12.44%)
+  MClass: 23 (11.00%)
+  MModule: 10 (4.78%)
+  MGroup: 7 (3.34%)
   MVirtualTypeDef: 1 (0.47%)
   MVirtualTypeProp: 1 (0.47%)
+  MPackage: 1 (0.47%)
 quicksearch-list.js
