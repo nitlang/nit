@@ -80,15 +80,18 @@ redef class CmdComment
 	redef fun http_init(req) do
 		full_doc = req.bool_arg("full_doc") or else true
 		fallback = req.bool_arg("fallback") or else true
-		format = req.string_arg("format") or else "raw"
+		var opt_format = req.string_arg("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
 
 redef class CmdEntityLink
 	redef fun http_init(req) do
-		text = req.string_arg("text")
-		title = req.string_arg("title")
+		var opt_text = req.string_arg("text")
+		if opt_text != null then text = opt_text
+		var opt_title = req.string_arg("title")
+		if opt_title != null then title = opt_title
 		return super
 	end
 end
@@ -121,14 +124,16 @@ end
 
 redef class CmdModelEntities
 	redef fun http_init(req) do
-		kind = req.string_arg("kind") or else "all"
+		var opt_kind = req.string_arg("kind")
+		if opt_kind != null then kind = opt_kind
 		return super
 	end
 end
 
 redef class CmdCode
 	redef fun http_init(req) do
-		format = req.string_arg("format") or else "raw"
+		var opt_format = req.string_arg("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
@@ -140,7 +145,8 @@ redef class CmdEntityCode
 		if name != null then name = name.from_percent_encoding
 		mentity_name = name
 
-		format = req.string_arg("format") or else "raw"
+		var opt_format = req.string_arg("format")
+		if opt_format != null then format = opt_format
 		return init_command
 	end
 end
@@ -149,7 +155,8 @@ end
 
 redef class CmdGraph
 	redef fun http_init(req) do
-		format = req.string_arg("format") or else "dot"
+		var opt_format = req.string_arg("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
