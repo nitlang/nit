@@ -64,6 +64,23 @@ class TestCommandsCatalog
 		assert cmd.results.as(not null).first isa MPackage
 	end
 
+	fun test_cmd_catalog_search_without_filter is test do
+		var cmd = new CmdCatalogSearch(test_model, test_catalog, query = "MyGame")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).first.full_name == "test_prog::MyGame"
+		assert cmd.results.as(not null).first isa MClass
+	end
+
+	fun test_cmd_catalog_search_with_filter is test do
+		var filter = new ModelFilter(accept_example = false)
+		var cmd = new CmdCatalogSearch(test_model, test_catalog, filter, query = "MyGame")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).first.full_name == "test_prog::Game" # not MyGame
+		assert cmd.results.as(not null).first isa MClass
+	end
+
 	fun test_cmd_catalog_stats is test do
 		var cmd = new CmdCatalogStats(test_model, test_catalog)
 		var res = cmd.init_command

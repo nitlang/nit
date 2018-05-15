@@ -17,6 +17,7 @@ module test_commands
 
 import commands_base
 import frontend
+import frontend::parse_examples
 
 # Nitunit test suite specific to commands
 class TestCommands

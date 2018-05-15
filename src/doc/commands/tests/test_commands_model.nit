@@ -130,6 +130,29 @@ class TestCommandsModel
 		assert cmd.results.as(not null).length == 3
 	end
 
+	fun test_cmd_children_without_filter is test do
+		var cmd = new CmdDescendants(test_model, test_main, mentity_name = "test_prog::Game")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 2
+	end
+
+	fun test_cmd_children_with_filter_example is test do
+		var filter = new ModelFilter(accept_example = false)
+		var cmd = new CmdDescendants(test_model, test_main, filter, mentity_name = "test_prog::Game")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 1
+	end
+
+	fun test_cmd_children_with_filter_match is test do
+		var filter = new ModelFilter(accept_full_name = "MyGame")
+		var cmd = new CmdDescendants(test_model, test_main, filter, mentity_name = "test_prog::Game")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 1
+	end
+
 	fun test_cmd_descendants is test do
 		var cmd = new CmdDescendants(test_model, test_main, mentity_name = "test_prog::Career", children = false)
 		var res = cmd.init_command
@@ -159,6 +182,39 @@ class TestCommandsModel
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results.as(not null).length == 10
+	end
+
+	fun test_cmd_features_with_filter_attribute is test do
+		var filter = new ModelFilter(accept_attribute = false)
+		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::Career")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 7
+	end
+
+	fun test_cmd_features_with_filter_public is test do
+		var filter = new ModelFilter(min_visibility = public_visibility)
+		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::Career")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 4
+	end
+
+	fun test_cmd_features_with_filter_match is test do
+		var filter = new ModelFilter(accept_full_name = "endurance")
+		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::Career")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 3
+	end
+
+	fun test_cmd_features_with_filter_inh is test do
+		var context = test_model.mentity_by_full_name("test_prog::TestGame").as(not null)
+		var filter = new ModelFilter(accept_inherited = context)
+		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::TestGame")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 3
 	end
 
 	fun test_cmd_features_no_features is test do
@@ -203,7 +259,16 @@ class TestCommandsModel
 		var cmd = new CmdModelEntities(test_model, kind = "modules")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 10
+		assert cmd.results.as(not null).length == 11
+	end
+
+	fun test_cmd_results_with_filter is test do
+		var filter = new ModelFilter(accept_test = false, accept_example = false)
+		var cmd = new CmdModelEntities(test_model, filter, kind = "modules")
+		var res = cmd.init_command
+		assert res isa CmdSuccess
+		print cmd.results.as(not null)
+		assert cmd.results.as(not null).length == 9
 	end
 
 	fun test_cmd_results_random is test do
