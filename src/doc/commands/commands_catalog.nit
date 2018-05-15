@@ -72,7 +72,7 @@ class CmdCatalogSearch
 		# lookup by similarity
 		malus = matches.length
 		var sim_matches = new IndexMatches
-		for match in index.find_by_similarity(query).sort(score_sorter, lname_sorter, name_sorter) do
+		for match in index.find_by_similarity(query).sort(score_sorter, kind_sorter, lname_sorter, name_sorter) do
 			if match.score > query.length then break
 			match.score += 1
 			sim_matches.add match
