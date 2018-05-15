@@ -16,7 +16,7 @@ module test_examples is test
 
 import frontend
 import parse_examples
-import model_views
+import model_collect
 
 class TestExample
 	test
@@ -42,13 +42,9 @@ class TestExample
 		# process
 		modelbuilder.run_phases
 		toolcontext.run_global_phases(mmodules)
-		var mainmodule = toolcontext.make_main_module(mmodules)
 
 		var filters = new ModelFilter(accept_example = true)
-
-		var view = new ModelView(model, mainmodule, filters)
-
-		for mentity in view.mentities do
+		for mentity in model.collect_mentities(filters) do
 			if not mentity.is_example then continue
 
 			var mexample = mentity.mexample
