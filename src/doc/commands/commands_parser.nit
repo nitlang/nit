@@ -269,7 +269,10 @@ end
 
 redef class CmdList
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("limit") and options["limit"].is_int then limit = options["limit"].to_i
+		var opt_page = options.opt_int("page")
+		if opt_page != null then page = opt_page
+		var opt_limit = options.opt_int("limit")
+		if opt_limit != null then limit = opt_limit
 		return super
 	end
 end
@@ -307,7 +310,6 @@ end
 redef class CmdSearch
 	redef fun parser_init(mentity_name, options) do
 		query = mentity_name
-		if options.has_key("page") and options["page"].is_int then page = options["page"].to_i
 		return super
 	end
 end
@@ -343,12 +345,10 @@ end
 
 redef class CmdInheritanceGraph
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("pdepth") and options["pdepth"].is_int then
-			pdepth = options["pdepth"].to_i
-		end
-		if options.has_key("cdepth") and options["cdepth"].is_int then
-			cdepth = options["cdepth"].to_i
-		end
+		var opt_pdepth = options.opt_int("pdepth")
+		if opt_pdepth != null then pdepth = opt_pdepth
+		var opt_cdepth = options.opt_int("cdepth")
+		if opt_cdepth != null then cdepth = opt_cdepth
 		return super
 	end
 end
@@ -383,6 +383,16 @@ class CmdOptions
 		var value = self[key]
 		if value.is_empty then return null
 		return value
+	end
+
+	# Get option value for `key` as Int
+	#
+	# Return `null` if no option with that `key` or if value is not an Int.
+	fun opt_int(key: String): nullable Int do
+		if not has_key(key) then return null
+		var value = self[key]
+		if not value.is_int then return null
+		return value.to_i
 	end
 end
 
