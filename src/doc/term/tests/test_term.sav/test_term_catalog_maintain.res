@@ -5,7 +5,3 @@ Packages maintained by `Alexandre Terrasa`:
    package test_prog
    test_location
 
- + excluded
-   package excluded
-   test_location
-
