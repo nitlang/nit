@@ -39,8 +39,10 @@ end
 
 redef class CmdList
 	redef fun http_init(req) do
-		limit = req.int_arg("l")
-		page = req.int_arg("p")
+		var opt_limit = req.int_arg("l")
+		if opt_limit != null then limit = opt_limit
+		var opt_page = req.int_arg("p")
+		if opt_page != null then page = opt_page
 		return super
 	end
 end
@@ -163,8 +165,10 @@ end
 
 redef class CmdInheritanceGraph
 	redef fun http_init(req) do
-		pdepth = req.int_arg("pdepth")
-		cdepth = req.int_arg("cdepth")
+		var opt_pdepth = req.int_arg("pdepth")
+		if opt_pdepth != null then pdepth = opt_pdepth
+		var opt_cdepth = req.int_arg("cdepth")
+		if opt_cdepth != null then cdepth = opt_cdepth
 		return super
 	end
 end
