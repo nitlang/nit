@@ -184,7 +184,7 @@ class ModelFilter
 	# Accept examples?
 	#
 	# Default is `true`.
-	var accept_example = true is optional
+	var accept_example = true is optional, writable
 
 	# Accept only entities that are not example related
 	fun accept_mentity_example(mentity: MEntity): Bool do
@@ -193,7 +193,7 @@ class ModelFilter
 	end
 
 	# If set, accept only entities local to `accept_inherited`
-	var accept_inherited: nullable MEntity = null is optional
+	var accept_inherited: nullable MEntity = null is optional, writable
 
 	# Accept only entities local to `accept_inherited`
 	#
