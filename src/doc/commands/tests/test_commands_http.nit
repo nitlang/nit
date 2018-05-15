@@ -157,6 +157,14 @@ class TestCommandsHttp
 		assert cmd.results.as(not null).length == 0
 	end
 
+	fun test_cmd_http_ancestors_with_filter_match is test do
+		var req = new_request("/test_prog::Warrior?match=Object")
+		var cmd = new CmdAncestors(test_model, test_main)
+		var res = cmd.http_init(req)
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 1
+	end
+
 	# CmdSearch
 
 	fun test_cmd_http_search is test do
@@ -190,6 +198,14 @@ class TestCommandsHttp
 		var cmd = new CmdFeatures(test_model)
 		var res = cmd.http_init(req)
 		assert res isa WarningNoFeatures
+	end
+
+	fun test_cmd_http_features_with_filter_inherited is test do
+		var req = new_request("/test_prog::TestGame?inherited=TestGame")
+		var cmd = new CmdFeatures(test_model)
+		var res = cmd.http_init(req)
+		assert res isa CmdSuccess
+		assert cmd.results.as(not null).length == 3
 	end
 
 	# CmdLinearization

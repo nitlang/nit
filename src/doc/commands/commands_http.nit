@@ -24,7 +24,31 @@ import nitcorn::vararg_routes
 
 redef class DocCommand
 	# Init the command from an HTTPRequest
-	fun http_init(req: HttpRequest): CmdMessage do return init_command
+	fun http_init(req: HttpRequest): CmdMessage do
+		var filter = cmd_filter
+		var opt_vis = req.visibility_arg("min-visibility")
+		if opt_vis != null then filter.min_visibility = opt_vis
+		var opt_fictive = req.bool_arg("no-fictive")
+		if opt_fictive != null then filter.accept_fictive = not opt_fictive
+		var opt_test = req.bool_arg("no-test")
+		if opt_test != null then filter.accept_test = not opt_test
+		var opt_redef = req.bool_arg("no-redef")
+		if opt_redef != null then filter.accept_redef = not opt_redef
+		var opt_extern = req.bool_arg("no-extern")
+		if opt_extern != null then filter.accept_extern = not opt_extern
+		var opt_example = req.bool_arg("no-example")
+		if opt_example != null then filter.accept_example = not opt_example
+		var opt_attr = req.bool_arg("no-attribute")
+		if opt_attr != null then filter.accept_attribute = not opt_attr
+		var opt_doc = req.bool_arg("no-empty-doc")
+		if opt_doc != null then filter.accept_empty_doc = not opt_doc
+		var opt_inh = req.mentity_arg(model, "inherit")
+		if opt_inh != null then filter.accept_inherited = opt_inh
+		var opt_match = req.string_arg("match")
+		if opt_match != null then filter.accept_full_name = opt_match
+		self.filter = filter
+		return init_command
+	end
 end
 
 redef class CmdEntity
@@ -194,5 +218,46 @@ redef class CmdCatalogPerson
 		if name != null then name = name.from_percent_encoding
 		self.person_name = name
 		return super
+	end
+end
+
+# Util
+
+redef class HttpRequest
+
+	# Map String visiblity name to MVisibility object
+	var allowed_visibility: HashMap[String, MVisibility] is lazy do
+		var res = new HashMap[String, MVisibility]
+		res["public"] = public_visibility
+		res["protected"] = protected_visibility
+		res["private"] = private_visibility
+		return res
+	end
+
+	# Get arg as a MVisibility
+	#
+	# Return `null` if no option with that `key` or if the value is not in
+	# `allowed_visibility`.
+	fun visibility_arg(key: String): nullable MVisibility do
+		var value = string_arg(key)
+		if value == null then return null
+		if not allowed_visibility.keys.has(key) then return null
+		return allowed_visibility[value]
+	end
+
+	# Get arg as a MEntity
+	#
+	# Lookup first by `MEntity::full_name` then by `MEntity::name`.
+	# Return `null` if the mentity name does not exist or return a conflict.
+	private fun mentity_arg(model: Model, key: String): nullable MEntity do
+		var value = string_arg(key)
+		if value == null or value.is_empty then return null
+
+		var mentity = model.mentity_by_full_name(value)
+		if mentity != null then return mentity
+
+		var mentities = model.mentities_by_name(value)
+		if mentities.is_empty or mentities.length > 1 then return null
+		return mentities.first
 	end
 end
