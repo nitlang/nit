@@ -226,7 +226,8 @@ redef class MPackage
 		"package.name", "package.desc", "package.tags", "package.license",
 		"package.maintainer", "package.more_contributors",
 		"upstream.browse", "upstream.git", "upstream.git.directory",
-		"upstream.homepage", "upstream.issues"
+		"upstream.homepage", "upstream.issues", "upstream.apk", "upstream.tryit",
+		"source.exclude"
 		]
 
 	private fun check_ini(toolcontext: ToolContext) do
