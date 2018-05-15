@@ -18,7 +18,7 @@ import test_commands
 intrude import doc::commands::commands_main
 import doc::commands::commands_md
 
-class TestCommandsHtml
+class TestCommandsMd
 	super TestCommands
 	test
 
