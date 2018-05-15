@@ -72,9 +72,9 @@ private class NitwebPhase
 			accept_attribute = not toolcontext.opt_no_attribute.value
 		)
 
-		var view = new ModelView(model, mainmodule, filter)
+		var catalog = build_catalog(toolcontext.modelbuilder, filter)
 
-		var config = new NitwebConfig(model, mainmodule, toolcontext.modelbuilder, view)
+		var config = new NitwebConfig(model, mainmodule, toolcontext.modelbuilder, filter, catalog)
 		var config_file = toolcontext.opt_config.value
 		if config_file == null then config.default_config_file = "nitweb.ini"
 		config.parse_options(args)
@@ -89,7 +89,6 @@ private class NitwebPhase
 	do
 		var config = build_config(toolcontext, mainmodule)
 		config.model.nitdoc_md_processor = config.md_processor
-		config.build_catalog
 
 		var app = new App
 
@@ -104,6 +103,37 @@ private class NitwebPhase
 
 		app.listen(config.app_host, config.app_port)
 	end
+
+	# Build the catalog
+	#
+	# This method should be called at nitweb startup.
+	fun build_catalog(modelbuilder: ModelBuilder, filter: nullable ModelFilter): Catalog do
+		var catalog = new Catalog(modelbuilder)
+		var mpackages = modelbuilder.model.collect_mpackages(filter)
+		# Compute the poset
+		for p in mpackages do
+			var g = p.root
+			assert g != null
+			modelbuilder.scan_group(g)
+
+			catalog.deps.add_node(p)
+			for gg in p.mgroups do for m in gg.mmodules do
+				for im in m.in_importation.direct_greaters do
+					var ip = im.mpackage
+					if ip == null or ip == p then continue
+					catalog.deps.add_edge(p, ip)
+				end
+			end
+		end
+		# Build the catalog
+		for mpackage in mpackages do
+			catalog.package_page(mpackage)
+			catalog.git_info(mpackage)
+			catalog.mpackage_stats(mpackage)
+		end
+		return catalog
+	end
+
 end
 
 # build toolcontext

@@ -89,7 +89,7 @@ end
 class APIList
 	super APICommand
 
-	redef fun command do return new CmdModelEntities(config.view)
+	redef fun command do return new CmdModelEntities(config.model)
 end
 
 # Return a random list of MEntities.
@@ -98,7 +98,7 @@ end
 class APIRandom
 	super APICommand
 
-	redef fun command do return new CmdRandomEntities(config.view)
+	redef fun command do return new CmdRandomEntities(config.model)
 end
 
 # Search mentities from a cmd string.
@@ -107,7 +107,7 @@ end
 class APISearch
 	super APIList
 
-	redef fun command do return new CmdCatalogSearch(config.view, config.catalog)
+	redef fun command do return new CmdCatalogSearch(config.model, config.catalog)
 end
 
 # CmdEntity
@@ -118,7 +118,7 @@ end
 class APIEntity
 	super APICommand
 
-	redef fun command do return new CmdEntity(config.view)
+	redef fun command do return new CmdEntity(config.model)
 end
 
 # Return the full MDoc of a MEntity.
@@ -127,7 +127,7 @@ end
 class APIEntityDoc
 	super APICommand
 
-	redef fun command do return new CmdComment(config.view)
+	redef fun command do return new CmdComment(config.model)
 end
 
 # List MEntity ancestors
@@ -136,7 +136,7 @@ end
 class APIEntityAncestors
 	super APICommand
 
-	redef fun command do return new CmdAncestors(config.view)
+	redef fun command do return new CmdAncestors(config.model, config.mainmodule)
 end
 
 # List MEntity parents
@@ -145,7 +145,7 @@ end
 class APIEntityParents
 	super APICommand
 
-	redef fun command do return new CmdParents(config.view)
+	redef fun command do return new CmdParents(config.model, config.mainmodule)
 end
 
 # List MEntity children
@@ -154,7 +154,7 @@ end
 class APIEntityChildren
 	super APICommand
 
-	redef fun command do return new CmdChildren(config.view)
+	redef fun command do return new CmdChildren(config.model, config.mainmodule)
 end
 
 # List MEntity descendants
@@ -163,7 +163,7 @@ end
 class APIEntityDescendants
 	super APICommand
 
-	redef fun command do return new CmdDescendants(config.view)
+	redef fun command do return new CmdDescendants(config.model, config.mainmodule)
 end
 
 # Linearize super definitions of a MClassDef or a MPropDef if any.
@@ -172,7 +172,7 @@ end
 class APIEntityLinearization
 	super APICommand
 
-	redef fun command do return new CmdLinearization(config.view)
+	redef fun command do return new CmdLinearization(config.model, config.mainmodule)
 end
 
 # List definitions of a MEntity.
@@ -181,7 +181,7 @@ end
 class APIEntityDefs
 	super APICommand
 
-	redef fun command do return new CmdFeatures(config.view)
+	redef fun command do return new CmdFeatures(config.model)
 end
 
 # List intro definitions of a MEntity.
@@ -190,7 +190,7 @@ end
 class APIEntityIntros
 	super APICommand
 
-	redef fun command do return new CmdIntros(config.view)
+	redef fun command do return new CmdIntros(config.model, config.mainmodule)
 end
 
 # List redef definitions of a MEntity.
@@ -199,7 +199,7 @@ end
 class APIEntityRedefs
 	super APICommand
 
-	redef fun command do return new CmdRedefs(config.view)
+	redef fun command do return new CmdRedefs(config.model, config.mainmodule)
 end
 
 # List all definitions accessible from a MEntity.
@@ -208,7 +208,7 @@ end
 class APIEntityAll
 	super APICommand
 
-	redef fun command do return new CmdAllProps(config.view)
+	redef fun command do return new CmdAllProps(config.model, config.mainmodule)
 end
 
 # Return the source code of MEntity.
@@ -217,7 +217,7 @@ end
 class APIEntityCode
 	super APICommand
 
-	redef fun command do return new CmdEntityCode(config.view, config.modelbuilder)
+	redef fun command do return new CmdEntityCode(config.model, config.modelbuilder)
 end
 
 # Return the UML diagram for MEntity.
@@ -226,7 +226,7 @@ end
 class APIEntityUML
 	super APICommand
 
-	redef fun command do return new CmdUML(config.view)
+	redef fun command do return new CmdUML(config.model, config.mainmodule)
 end
 
 # Return the inheritance graph for MEntity.
@@ -235,7 +235,7 @@ end
 class APIInheritanceGraph
 	super APICommand
 
-	redef fun command do return new CmdInheritanceGraph(config.view)
+	redef fun command do return new CmdInheritanceGraph(config.model, config.mainmodule)
 end
 
 # CmdCatalog
@@ -246,7 +246,7 @@ end
 class APICatalogPackages
 	super APICommand
 
-	redef fun command do return new CmdCatalogPackages(config.view, config.catalog)
+	redef fun command do return new CmdCatalogPackages(config.model, config.catalog)
 end
 
 # Get the catalog statistics
@@ -255,7 +255,7 @@ end
 class APICatalogStats
 	super APICommand
 
-	redef fun command do return new CmdCatalogStats(config.view, config.catalog)
+	redef fun command do return new CmdCatalogStats(config.model, config.catalog)
 end
 
 # Get the package metadata
@@ -264,7 +264,7 @@ end
 class APIEntityMetadata
 	super APICommand
 
-	redef fun command do return new CmdMetadata(config.view)
+	redef fun command do return new CmdMetadata(config.model)
 end
 
 # Get all the tags from the catalog
@@ -273,7 +273,7 @@ end
 class APICatalogTags
 	super APICommand
 
-	redef fun command do return new CmdCatalogTags(config.view, config.catalog)
+	redef fun command do return new CmdCatalogTags(config.model, config.catalog)
 end
 
 # Get the packages related to a tag
@@ -282,7 +282,7 @@ end
 class APICatalogTag
 	super APICommand
 
-	redef fun command do return new CmdCatalogTag(config.view, config.catalog)
+	redef fun command do return new CmdCatalogTag(config.model, config.catalog)
 end
 
 # Get a person existing in the catalog
@@ -291,7 +291,7 @@ end
 class APICatalogPerson
 	super APICommand
 
-	redef fun command do return new CmdCatalogPerson(config.view, config.catalog)
+	redef fun command do return new CmdCatalogPerson(config.model, config.catalog)
 end
 
 # Get the list of mpackages maintained by a person
@@ -300,7 +300,7 @@ end
 class APICatalogMaintaining
 	super APICommand
 
-	redef fun command do return new CmdCatalogMaintaining(config.view, config.catalog)
+	redef fun command do return new CmdCatalogMaintaining(config.model, config.catalog)
 end
 
 # Get the list of mpackages contributed by a person
@@ -309,7 +309,7 @@ end
 class APICatalogContributing
 	super APICommand
 
-	redef fun command do return new CmdCatalogContributing(config.view, config.catalog)
+	redef fun command do return new CmdCatalogContributing(config.model, config.catalog)
 end
 
 # CmdIni
@@ -320,7 +320,7 @@ end
 class APIIniDesc
 	super APICommand
 
-	redef fun command do return new CmdIniDescription(config.view)
+	redef fun command do return new CmdIniDescription(config.model)
 end
 
 # Get the package Git URL from the ini file
@@ -329,7 +329,7 @@ end
 class APIIniGit
 	super APICommand
 
-	redef fun command do return new CmdIniGitUrl(config.view)
+	redef fun command do return new CmdIniGitUrl(config.model)
 end
 
 # Get the package Git clone command from the ini file
@@ -338,7 +338,7 @@ end
 class APIIniClone
 	super APICommand
 
-	redef fun command do return new CmdIniCloneCommand(config.view)
+	redef fun command do return new CmdIniCloneCommand(config.model)
 end
 
 # Get the package issues URL from the ini file
@@ -347,7 +347,7 @@ end
 class APIIniIssues
 	super APICommand
 
-	redef fun command do return new CmdIniIssuesUrl(config.view)
+	redef fun command do return new CmdIniIssuesUrl(config.model)
 end
 
 # Get the package maintainer from the ini file
@@ -356,7 +356,7 @@ end
 class APIIniMaintainer
 	super APICommand
 
-	redef fun command do return new CmdIniMaintainer(config.view)
+	redef fun command do return new CmdIniMaintainer(config.model)
 end
 
 # Get the package contributors from the ini file
@@ -365,7 +365,7 @@ end
 class APIIniContributors
 	super APICommand
 
-	redef fun command do return new CmdIniContributors(config.view)
+	redef fun command do return new CmdIniContributors(config.model)
 end
 
 # Get the package license from the ini file
@@ -374,7 +374,7 @@ end
 class APIIniLicense
 	super APICommand
 
-	redef fun command do return new CmdIniLicense(config.view)
+	redef fun command do return new CmdIniLicense(config.model)
 end
 
 # Get the package license file
@@ -383,7 +383,7 @@ end
 class APIIniLicenseFile
 	super APICommand
 
-	redef fun command do return new CmdLicenseFile(config.view)
+	redef fun command do return new CmdLicenseFile(config.model)
 end
 
 # Get the package contrib file
@@ -392,7 +392,7 @@ end
 class APIIniContribFile
 	super APICommand
 
-	redef fun command do return new CmdContribFile(config.view)
+	redef fun command do return new CmdContribFile(config.model)
 end
 
 # Get the package license file content
@@ -401,7 +401,7 @@ end
 class APIIniLicenseFileContent
 	super APICommand
 
-	redef fun command do return new CmdLicenseFileContent(config.view)
+	redef fun command do return new CmdLicenseFileContent(config.model)
 end
 
 # Get the package contrib file content
@@ -410,5 +410,5 @@ end
 class APIIniContribFileContent
 	super APICommand
 
-	redef fun command do return new CmdContribFileContent(config.view)
+	redef fun command do return new CmdContribFileContent(config.model)
 end
