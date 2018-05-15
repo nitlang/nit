@@ -190,6 +190,14 @@ class TestCommandsParser
 		assert cmd.results.as(not null).length == 9
 	end
 
+	fun test_cmd_parser_ancestors_with_filter_match is test do
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
+		var cmd = parser.parse("ancestors: test_prog::Warrior | match: Object")
+		assert cmd isa CmdAncestors
+		assert parser.error == null
+		assert cmd.results.as(not null).length == 1
+	end
+
 	# CmdSearch
 
 	fun test_cmd_parser_search is test do
@@ -224,6 +232,14 @@ class TestCommandsParser
 		assert cmd isa CmdFeatures
 		assert parser.error == null
 		assert cmd.results.as(not null).length == 2
+	end
+
+	fun test_cmd_parser_with_filter_inherited is test do
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
+		var cmd = parser.parse("defs: test_prog::TestGame | inherited: TestGame")
+		assert cmd isa CmdFeatures
+		assert parser.error == null
+		assert cmd.results.as(not null).length == 3
 	end
 
 	# CmdLinearization
