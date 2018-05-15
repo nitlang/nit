@@ -58,13 +58,13 @@ redef class MGroupPage
 		var doc = v.doc
 		var mmodules = new HashSet[MModule]
 		for mmodule in mentity.mmodules do
-			if doc.mmodules.has(mmodule) then mmodules.add mmodule
+			if doc.filter.accept_mentity(mmodule) then mmodules.add mmodule
 			# collect mclasses
 			for mclass in mmodule.intro_mclasses do
-				if doc.mclasses.has(mclass) then intros.add mclass
+				if doc.filter.accept_mentity(mclass) then intros.add mclass
 			end
-			for mclass in mmodule.collect_redef_mclasses(v.doc) do
-				if doc.mclasses.has(mclass) then redefs.add mclass
+			for mclass in mmodule.collect_redef_mclasses(doc.filter) do
+				if doc.filter.accept_mentity(mclass) then redefs.add mclass
 			end
 		end
 		concerns = doc.model.concerns_tree(mmodules)
@@ -83,18 +83,18 @@ redef class MModulePage
 		var doc = v.doc
 		# extract mclassdefs in mmodule
 		for mclassdef in mentity.mclassdefs do
-			if doc.mclassdefs.has(mclassdef) then mclassdefs.add mclassdef
+			if doc.filter.accept_mentity(mclassdef) then mclassdefs.add mclassdef
 		end
 		# extract mclasses in mmodule
 		for mclassdef in mclassdefs do
 			var mclass = mclassdef.mclass
-			if doc.mclasses.has(mclass) then mclasses.add mclass
+			if doc.filter.accept_mentity(mclass) then mclasses.add mclass
 		end
 		# extract concerns
 		var mods = new HashSet[MModule]
 		for mclass in mclasses do
 			var mod = mclass.intro_mmodule
-			if doc.mmodules.has(mod) then mods.add mod
+			if doc.filter.accept_mentity(mod) then mods.add mod
 		end
 		concerns = doc.model.concerns_tree(mods)
 	end
@@ -112,19 +112,19 @@ redef class MClassPage
 		var doc = v.doc
 		# collect mclassdefs
 		for mclassdef in mentity.mclassdefs do
-			if doc.mclassdefs.has(mclassdef) then mclassdefs.add mclassdef
+			if doc.filter.accept_mentity(mclassdef) then mclassdefs.add mclassdef
 		end
 		# collect mpropdefs
 		for mclassdef in mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if doc.mpropdefs.has(mpropdef) then mpropdefs.add mpropdef
+				if doc.filter.accept_mentity(mpropdef) then mpropdefs.add mpropdef
 			end
 		end
 		# collect concerns
 		var mods = new HashSet[MModule]
 		for mpropdef in mpropdefs do
 			var mod = mpropdef.mclassdef.mmodule
-			if doc.mmodules.has(mod) then mods.add mod
+			if doc.filter.accept_mentity(mod) then mods.add mod
 		end
 		concerns = doc.model.concerns_tree(mods)
 	end
@@ -141,13 +141,13 @@ redef class MPropertyPage
 		for mpropdef in mentity.mpropdefs do
 			# FIXME diff hack
 			if mpropdef.is_intro then continue
-			if doc.mpropdefs.has(mpropdef) then mpropdefs.add mpropdef
+			if doc.filter.accept_mentity(mpropdef) then mpropdefs.add mpropdef
 		end
 		# collect concerns
 		var mods = new HashSet[MModule]
 		for mpropdef in mpropdefs do
 			var mod = mpropdef.mclassdef.mmodule
-			if doc.mmodules.has(mod) then mods.add mod
+			if doc.filter.accept_mentity(mod) then mods.add mod
 		end
 		concerns = doc.model.concerns_tree(mods)
 	end

@@ -25,17 +25,17 @@ class MakePagePhase
 	redef fun apply do
 		doc.add_page new OverviewPage("overview", "Overview")
 		doc.add_page new SearchPage("search", "Index")
-		for mgroup in doc.mgroups do
+		for mgroup in doc.model.collect_mgroups(doc.filter) do
 			doc.add_page new ReadmePage(mgroup)
 			doc.add_page new MGroupPage(mgroup)
 		end
-		for mmodule in doc.mmodules do
+		for mmodule in doc.model.mmodules do
 			doc.add_page new MModulePage(mmodule)
 		end
-		for mclass in doc.mclasses do
+		for mclass in doc.model.mclasses do
 			doc.add_page new MClassPage(mclass)
 		end
-		for mproperty in doc.mproperties do
+		for mproperty in doc.model.mproperties do
 			doc.add_page new MPropertyPage(mproperty)
 		end
 	end

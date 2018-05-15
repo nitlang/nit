@@ -50,7 +50,7 @@ private class Nitdoc
 			min_visibility,
 			accept_attribute = accept_attribute,
 			accept_fictive = false)
-		var doc = new DocModel(mainmodule.model, mainmodule, filters)
+		var doc = new DocModel(toolcontext.modelbuilder.model, mainmodule, filters)
 
 		var phases = [
 			new IndexingPhase(toolcontext, doc),

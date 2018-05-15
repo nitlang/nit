@@ -50,10 +50,10 @@ class DocTestPhase
 		page_counter.print_elements(100)
 		# Model metrics
 		var model_counter = new Counter[String]
-		for mentity in doc.mentities do
+		for mentity in doc.model.collect_mentities(doc.filter) do
 			model_counter.inc mentity.class_name
 		end
-		print "Found {doc.mentities.length} mentities"
+		print "Found {doc.model.collect_mentities(doc.filter).length} mentities"
 		model_counter.print_elements(100)
 	end
 end

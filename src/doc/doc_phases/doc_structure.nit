@@ -63,11 +63,11 @@ end
 
 redef class SearchPage
 	redef fun apply_structure(v, doc) do
-		var mmodules = doc.mmodules.to_a
+		var mmodules = doc.model.mmodules.to_a
 		v.name_sorter.sort(mmodules)
-		var mclasses = doc.mclasses.to_a
+		var mclasses = doc.model.mclasses.to_a
 		v.name_sorter.sort(mclasses)
-		var mprops = doc.mproperties.to_a
+		var mprops = doc.model.mproperties.to_a
 		v.name_sorter.sort(mprops)
 		root.add_child new IndexArticle("index.article", null, mmodules, mclasses, mprops)
 	end
