@@ -18,11 +18,11 @@ NITUNIT ?= nitunit
 NITDOC ?= nitdoc
 
 .PHONY: all
-all: bin/nitester
+all: bin/brainfuck
 
-bin/nitester: $(shell $(NITLS) -M src/nitester.nit)
+bin/brainfuck: $(shell $(NITLS) -M brainfuck.nit)
 	mkdir -p bin/
-	$(NITC) src/nitester.nit -o bin/nitester
+	$(NITC) brainfuck.nit -o bin/brainfuck
 
 .PHONY: check
 check:

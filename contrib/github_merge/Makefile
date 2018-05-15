@@ -18,11 +18,11 @@ NITUNIT ?= nitunit
 NITDOC ?= nitdoc
 
 .PHONY: all
-all: bin/nitester
+all: bin/github_merge
 
-bin/nitester: $(shell $(NITLS) -M src/nitester.nit)
+bin/github_merge: $(shell $(NITLS) -M github_merge.nit)
 	mkdir -p bin/
-	$(NITC) src/nitester.nit -o bin/nitester
+	$(NITC) github_merge.nit -o bin/github_merge
 
 .PHONY: check
 check:

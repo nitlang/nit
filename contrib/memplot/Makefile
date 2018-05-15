@@ -18,11 +18,11 @@ NITUNIT ?= nitunit
 NITDOC ?= nitdoc
 
 .PHONY: all
-all: bin/nitester
+all: bin/memplot
 
-bin/nitester: $(shell $(NITLS) -M src/nitester.nit)
+bin/memplot: $(shell $(NITLS) -M memplot.nit)
 	mkdir -p bin/
-	$(NITC) src/nitester.nit -o bin/nitester
+	$(NITC) memplot.nit -o bin/memplot
 
 .PHONY: check
 check:
