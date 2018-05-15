@@ -112,10 +112,13 @@ end
 # Documents can then be matched to query vectors.
 class VSMIndex
 
-	# Documents index
+	# Kind of documents stored in this index
 	#
-	# TODO use a more efficient representation.
-	var documents = new HashSet[Document]
+	# Clients can redefine this type to specialize the index.
+	type DOC: Document
+
+	# Documents index
+	var documents = new HashSet[DOC]
 
 	# Count for all terms in all indexed documents
 	#
@@ -137,12 +140,12 @@ class VSMIndex
 	#
 	# Returns an `IndexMatch` for each indexed document.
 	# Results are ordered by descending similarity.
-	fun match_vector(query: Vector): Array[IndexMatch] do
-		var matches = new Array[IndexMatch]
+	fun match_vector(query: Vector): Array[IndexMatch[DOC]] do
+		var matches = new Array[IndexMatch[DOC]]
 		for doc in documents do
 			var sim = query.cosine_similarity(doc.tfidf)
 			if sim == 0.0 then continue
-			matches.add new IndexMatch(doc, sim)
+			matches.add new IndexMatch[DOC](doc, sim)
 		end
 		sorter.sort(matches)
 		return matches
@@ -156,7 +159,7 @@ class VSMIndex
 	#
 	# When processing batch documents, use `auto_update = false` to disable
 	# the auto update of the index.
-	fun index_document(doc: Document, auto_update: nullable Bool) do
+	fun index_document(doc: DOC, auto_update: nullable Bool) do
 		for term, count in doc.terms_count do
 			if not terms_doc_count.has_key(term) then
 				terms_doc_count[term] = 1.0
@@ -196,7 +199,7 @@ class StringIndex
 	# Return the Document created.
 	#
 	# See `index_document`.
-	fun index_string(title, uri, string: String, auto_update: nullable Bool): Document do
+	fun index_string(title, uri, string: String, auto_update: nullable Bool): DOC do
 		var vector = parse_string(string)
 		var doc = new Document(title, uri, vector)
 		index_document(doc, auto_update)
@@ -206,7 +209,7 @@ class StringIndex
 	# Match the `query` string against all indexed documents
 	#
 	# See `match_vector`.
-	fun match_string(query: String): Array[IndexMatch] do
+	fun match_string(query: String): Array[IndexMatch[DOC]] do
 		var vector = parse_string(query)
 		var doc = new Document("", "", vector)
 		return match_vector(doc.terms_frequency)
@@ -241,7 +244,7 @@ class FileIndex
 	# Return the created document or null if `path` is not accepted by `accept_file`.
 	#
 	# See `index_document`.
-	fun index_file(path: String, auto_update: nullable Bool): nullable Document do
+	fun index_file(path: String, auto_update: nullable Bool): nullable DOC do
 		if not accept_file(path) then return null
 		var vector = parse_file(path)
 		var doc = new Document(path, path, vector)
@@ -353,11 +356,11 @@ class Document
 end
 
 # A match to a `request` in an `Index`
-class IndexMatch
+class IndexMatch[DOC: Document]
 	super Comparable
 
 	# Document matching the `request_vector`
-	var document: Document
+	var document: DOC
 
 	# Similarity between the `request` and the `doc`.
 	#
@@ -372,7 +375,7 @@ end
 class IndexMatchSorter
 	super DefaultComparator
 
-	redef type COMPARED: IndexMatch
+	redef type COMPARED: IndexMatch[Document]
 
 	redef fun compare(a, b) do
 		return b.similarity <=> a.similarity
