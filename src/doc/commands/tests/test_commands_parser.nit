@@ -25,7 +25,7 @@ class TestCommandsParser
 	# CmdEntity
 
 	fun test_cmd_parser_comment is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("doc: test_prog::Character")
 		assert cmd isa CmdComment
 		assert parser.error == null
@@ -193,7 +193,7 @@ class TestCommandsParser
 	# CmdSearch
 
 	fun test_cmd_parser_search is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("search: Caracter")
 		assert cmd isa CmdSearch
 		assert parser.error == null
@@ -201,7 +201,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_search_limit is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("search: Caracter | limit: 2")
 		assert cmd isa CmdSearch
 		assert parser.error == null
@@ -211,7 +211,7 @@ class TestCommandsParser
 	# CmdFeatures
 
 	fun test_cmd_parser_features is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("defs: test_prog::Character")
 		assert cmd isa CmdFeatures
 		assert parser.error == null
@@ -219,7 +219,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_features_limit is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("defs: test_prog::Character | limit: 2")
 		assert cmd isa CmdFeatures
 		assert parser.error == null
@@ -229,7 +229,7 @@ class TestCommandsParser
 	# CmdLinearization
 
 	fun test_cmd_parser_lin is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("lin: test_prog::Character")
 		assert cmd isa CmdLinearization
 		assert parser.error == null
@@ -237,7 +237,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_lin_limit is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("lin: test_prog::Character | limit: 2")
 		assert cmd isa CmdLinearization
 		assert parser.error == null
@@ -247,7 +247,7 @@ class TestCommandsParser
 	# CmdCode
 
 	fun test_cmd_parser_code is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("code: test_prog::Character")
 		assert cmd isa CmdEntityCode
 		assert parser.error == null
@@ -257,7 +257,7 @@ class TestCommandsParser
 	# CmdModel
 
 	fun test_cmd_parser_mentities is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("list: modules")
 		assert cmd isa CmdModelEntities
 		assert parser.error == null
@@ -265,7 +265,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_results_mentities is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("random: modules")
 		assert cmd isa CmdRandomEntities
 		assert parser.error == null
@@ -275,7 +275,7 @@ class TestCommandsParser
 	# CmdGraph
 
 	fun test_cmd_parser_uml is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("uml: test_prog::Career")
 		assert cmd isa CmdUML
 		assert parser.error == null
@@ -283,7 +283,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_inh_graph is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("graph: test_prog::Career")
 		assert cmd isa CmdInheritanceGraph
 		assert parser.error == null
@@ -291,7 +291,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_inh_graph_opts is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("graph: test_prog::Career | cdepth: 2, pdepth: 5")
 		assert cmd isa CmdInheritanceGraph
 		assert parser.error == null
@@ -303,7 +303,7 @@ class TestCommandsParser
 	# CmdUsage
 
 	fun test_cmd_parser_new is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("new: test_prog::Career")
 		assert cmd isa CmdNew
 		assert parser.error == null
@@ -311,7 +311,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_call is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("call: strength_bonus")
 		assert cmd isa CmdCall
 		assert parser.error == null
@@ -319,7 +319,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_return is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("return: test_prog::Career")
 		assert cmd isa CmdReturn
 		assert parser.error == null
@@ -327,7 +327,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_param is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("param: test_prog::Career")
 		assert cmd isa CmdParam
 		assert parser.error == null
@@ -337,7 +337,7 @@ class TestCommandsParser
 	# CmdCatalog
 
 	fun test_parser_catalog_search is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("search: Caracter")
 		assert cmd isa CmdSearch
 		assert parser.error == null
@@ -345,7 +345,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_packages is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("catalog:")
 		assert cmd isa CmdCatalogPackages
 		assert parser.error == null
@@ -353,7 +353,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_stats is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("stats:")
 		assert cmd isa CmdCatalogStats
 		assert parser.error == null
@@ -361,7 +361,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_tags is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("tags:")
 		assert cmd isa CmdCatalogTags
 		assert parser.error == null
@@ -369,7 +369,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_tag is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("tag: test")
 		assert cmd isa CmdCatalogTag
 		assert parser.error == null
@@ -378,7 +378,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_person is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("person: Alexandre Terrasa")
 		assert cmd isa CmdCatalogPerson
 		assert parser.error == null
@@ -386,7 +386,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_contributing is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("contrib: Alexandre Terrasa")
 		assert cmd isa CmdCatalogContributing
 		assert parser.error == null
@@ -395,7 +395,7 @@ class TestCommandsParser
 	end
 
 	fun test_cmd_parser_catalog_maintaining is test do
-		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog, test_filter)
+		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
 		var cmd = parser.parse("maintain: Alexandre Terrasa")
 		assert cmd isa CmdCatalogMaintaining
 		assert parser.error == null
