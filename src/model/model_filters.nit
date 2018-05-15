@@ -41,6 +41,22 @@ import parse_annotations
 # ~~~
 class ModelFilter
 
+	# Initialize `self` by copying the options from another `filter`
+	init from(filter: ModelFilter) do
+		init(
+			min_visibility = filter.min_visibility,
+			accept_fictive = filter.accept_fictive,
+			accept_test = filter.accept_test,
+			accept_redef = filter.accept_redef,
+			accept_extern = filter.accept_extern,
+			accept_example = filter.accept_example,
+			accept_attribute = filter.accept_attribute,
+			accept_empty_doc = filter.accept_empty_doc,
+			accept_inherited = filter.accept_inherited,
+			accept_full_name = filter.accept_full_name
+		)
+	end
+
 	# Accept `mentity` based on all the options from `self`?
 	#
 	# If one of the filter returns `false` then the `mentity` is not accepted.
