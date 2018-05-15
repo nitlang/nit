@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module wiringPi is example
+module shift is example
 
 import wiringPi
 
