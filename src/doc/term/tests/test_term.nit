@@ -71,12 +71,12 @@ class TestTerm
 
 	fun test_ancestors is test do
 		var parser = new CommandParser(test_model, test_main, test_builder)
-		parser.execute("ancestors: Warrior | parents: true", true)
+		parser.execute("ancestors: Warrior | no-parents: false", true)
 	end
 
 	fun test_ancestors_without_parents is test do
 		var parser = new CommandParser(test_model, test_main, test_builder)
-		parser.execute("ancestors: Warrior | parents: false", true)
+		parser.execute("ancestors: Warrior | no-parents", true)
 	end
 
 	fun test_parents is test do
@@ -96,7 +96,7 @@ class TestTerm
 
 	fun test_descendants_without_children is test do
 		var parser = new CommandParser(test_model, test_main, test_builder)
-		parser.execute("descendants: Career | children: false", true)
+		parser.execute("descendants: Career | no-children", true)
 	end
 
 	# CmdLin

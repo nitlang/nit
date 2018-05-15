@@ -160,7 +160,7 @@ class TestCommandsParser
 
 	fun test_cmd_parser_ancestors_without_parents is test do
 		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
-		var cmd = parser.parse("ancestors: test_prog::Warrior | parents: false")
+		var cmd = parser.parse("ancestors: test_prog::Warrior | no-parents")
 		assert cmd isa CmdAncestors
 		assert parser.error == null
 		assert cmd.results.as(not null).length == 1
@@ -184,7 +184,7 @@ class TestCommandsParser
 
 	fun test_cmd_parser_descendants_without_children is test do
 		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
-		var cmd = parser.parse("descendants: Object | children: false")
+		var cmd = parser.parse("descendants: Object | no-children: true")
 		assert cmd isa CmdDescendants
 		assert parser.error == null
 		assert cmd.results.as(not null).length == 9

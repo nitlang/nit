@@ -281,8 +281,10 @@ end
 
 redef class CmdComment
 	redef fun parser_init(mentity_name, options) do
-		full_doc = not options.has_key("only-synopsis")
-		fallback = not options.has_key("no-fallback")
+		var opt_full_doc = options.opt_bool("only-synopsis")
+		if opt_full_doc != null then full_doc = not opt_full_doc
+		var opt_fallback = options.opt_bool("no-fallback")
+		if opt_fallback != null then fallback = not opt_fallback
 		var opt_format = options.opt_string("format")
 		if opt_format != null then format = opt_format
 		return super
@@ -316,14 +318,16 @@ end
 
 redef class CmdAncestors
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("parents") and options["parents"] == "false" then parents = false
+		var opt_parents = options.opt_bool("no-parents")
+		if opt_parents != null then parents = not opt_parents
 		return super
 	end
 end
 
 redef class CmdDescendants
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("children") and options["children"] == "false" then children = false
+		var opt_children = options.opt_bool("no-children")
+		if opt_children != null then children = not opt_children
 		return super
 	end
 end
@@ -393,6 +397,19 @@ class CmdOptions
 		var value = self[key]
 		if not value.is_int then return null
 		return value.to_i
+	end
+
+	# Get option value as bool
+	#
+	# Return `true` if the value with that `key` is empty or equals `"true"`.
+	# Return `false` if the value with that `key` equals `"false"`.
+	# Return `null` in any other case.
+	fun opt_bool(key: String): nullable Bool do
+		if not has_key(key) then return null
+		var value = self[key]
+		if value.is_empty or value == "true" then return true
+		if value == "false" then return false
+		return null
 	end
 end
 
