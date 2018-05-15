@@ -12,18 +12,6 @@
 	"modifiers": ["module"]
 }
 {
-	"name": "excluded",
-	"namespace": [{
-		"name": "excluded"
-	}, "::", {
-		"name": "excluded"
-	}],
-	"class_name": "MModule",
-	"full_name": "excluded::excluded",
-	"visibility": "public",
-	"modifiers": ["module"]
-}
-{
 	"name": "game",
 	"synopsis": "A game abstraction for RPG.",
 	"namespace": [{
