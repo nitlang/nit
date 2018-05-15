@@ -53,7 +53,7 @@ redef class MEntity
 	private fun field_separator: String do return "#====#"
 	private fun line_separator: String do return "#nnnn#"
 
-	private fun write_doc(view: ModelView, stream: Writer)
+	private fun write_doc(model: Model, mainmodule: MModule, stream: Writer)
 	do
 		# 1. Short name for autocompletion
 		stream.write complete_name
@@ -80,9 +80,9 @@ redef class MEntity
 			stream.write mdoc.content.join(line_separator)
 		end
 
-		write_location(view.mainmodule, stream)
+		write_location(mainmodule, stream)
 
-		write_extra_doc(view, stream)
+		write_extra_doc(model, mainmodule, stream)
 
 		stream.write "\n"
 	end
@@ -96,7 +96,7 @@ redef class MEntity
 	private fun complete_mdoc: nullable MDoc do return mdoc
 
 	# Extra auto documentation to append to the `stream`
-	private fun write_extra_doc(view: ModelView, stream: Writer) do end
+	private fun write_extra_doc(model: Model, mainmodule: MModule, stream: Writer) do end
 
 	# Location (file and line when available) of related declarations
 	private fun write_location(mainmodule: MModule, stream: Writer)
@@ -186,13 +186,13 @@ redef class MClassDef
 end
 
 redef class MClassType
-	redef fun write_extra_doc(view, stream)
+	redef fun write_extra_doc(model, mainmodule, stream)
 	do
 		# Super classes
 		stream.write line_separator*2
 		stream.write "## Class hierarchy"
 
-		var direct_supers = [for s in mclass.in_hierarchy(view.mainmodule).direct_greaters do s.name]
+		var direct_supers = [for s in mclass.in_hierarchy(mainmodule).direct_greaters do s.name]
 		if not direct_supers.is_empty then
 			alpha_comparator.sort direct_supers
 			stream.write line_separator
@@ -200,7 +200,7 @@ redef class MClassType
 			stream.write direct_supers.join(", ")
 		end
 
-		var supers = [for s in mclass.in_hierarchy(view.mainmodule).greaters do s.name]
+		var supers = [for s in mclass.in_hierarchy(mainmodule).greaters do s.name]
 		supers.remove mclass.name
 		if not supers.is_empty then
 			alpha_comparator.sort supers
@@ -209,7 +209,7 @@ redef class MClassType
 			stream.write supers.join(", ")
 		end
 
-		var direct_subs = [for s in mclass.in_hierarchy(view.mainmodule).direct_smallers do s.name]
+		var direct_subs = [for s in mclass.in_hierarchy(mainmodule).direct_smallers do s.name]
 		if not direct_subs.is_empty then
 			alpha_comparator.sort direct_subs
 			stream.write line_separator
@@ -217,7 +217,7 @@ redef class MClassType
 			stream.write direct_subs.join(", ")
 		end
 
-		var subs = [for s in mclass.in_hierarchy(view.mainmodule).smallers do s.name]
+		var subs = [for s in mclass.in_hierarchy(mainmodule).smallers do s.name]
 		subs.remove mclass.name
 		if not subs.is_empty then
 			alpha_comparator.sort subs
@@ -230,11 +230,11 @@ redef class MClassType
 		stream.write line_separator*2
 		stream.write "## Properties"
 		stream.write line_separator
-		var props = mclass.collect_accessible_mproperties(view).to_a
+		var props = mclass.collect_accessible_mproperties(mainmodule).to_a
 		alpha_comparator.sort props
 		for prop in props do
 			if mclass.name == "Object" or prop.intro.mclassdef.mclass.name != "Object" then
-				prop.write_synopsis(view.mainmodule, stream)
+				prop.write_synopsis(mainmodule, stream)
 			end
 		end
 	end
@@ -271,9 +271,8 @@ private class AutocompletePhase
 
 		# Got all known modules
 		var model = mainmodule.model
-		var view = new ModelView(model, mainmodule)
 		for mmodule in model.mmodules do
-			mmodule.write_doc(view, modules_stream)
+			mmodule.write_doc(model, mainmodule, modules_stream)
 		end
 
 		# TODO list other modules from the Nit lib
@@ -286,18 +285,18 @@ private class AutocompletePhase
 			# Can it be instantiated?
 			if mclass.kind != interface_kind and mclass.kind != abstract_kind then
 
-				for prop in mclass.collect_accessible_mproperties(view) do
+				for prop in mclass.collect_accessible_mproperties(mainmodule) do
 					if prop isa MMethod and prop.is_init then
 						mclass_intro.target_constructor = prop.intro
-						mclass_intro.write_doc(view, constructors_stream)
+						mclass_intro.write_doc(model, mainmodule, constructors_stream)
 					end
 				end
 				mclass_intro.target_constructor = null
 			end
 
 			# Always add to types and classes
-			mclass.mclass_type.write_doc(view, classes_stream)
-			mclass.mclass_type.write_doc(view, types_stream)
+			mclass.mclass_type.write_doc(model, mainmodule, classes_stream)
+			mclass.mclass_type.write_doc(model, mainmodule, types_stream)
 		end
 
 		# Get all known properties
@@ -307,7 +306,7 @@ private class AutocompletePhase
 
 			# Is it a virtual type?
 			if mproperty isa MVirtualTypeProp then
-				mproperty.intro.write_doc(view, types_stream)
+				mproperty.intro.write_doc(model, mainmodule, types_stream)
 				continue
 			end
 
@@ -315,7 +314,7 @@ private class AutocompletePhase
 			var first_letter = mproperty.name.chars.first
 			if first_letter == '@' or first_letter == '_' then continue
 
-			mproperty.intro.write_doc(view, properties_stream)
+			mproperty.intro.write_doc(model, mainmodule, properties_stream)
 		end
 
 		# Close streams
@@ -332,10 +331,10 @@ private class AutocompletePhase
 end
 
 redef class MModule
-	redef fun write_extra_doc(view, stream)
+	redef fun write_extra_doc(model, mainmodule, stream)
 	do
 		# Introduced classes
-		var class_intros = collect_intro_mclasses(view).to_a
+		var class_intros = collect_intro_mclasses.to_a
 		if class_intros.not_empty then
 			alpha_comparator.sort class_intros
 			stream.write line_separator*2
@@ -352,7 +351,7 @@ redef class MModule
 		# Introduced properties
 		var prop_intros = new Array[MPropDef]
 		for c in mclassdefs do
-			prop_intros.add_all c.collect_intro_mpropdefs(view)
+			prop_intros.add_all c.collect_intro_mpropdefs
 		end
 
 		if prop_intros.not_empty then
@@ -362,7 +361,7 @@ redef class MModule
 			stream.write line_separator
 
 			for p in prop_intros do
-				p.mproperty.write_synopsis(view.mainmodule, stream)
+				p.mproperty.write_synopsis(mainmodule, stream)
 			end
 		end
 	end
