@@ -80,8 +80,10 @@ end
 
 redef class CmdComment
 	redef fun http_init(req) do
-		full_doc = req.bool_arg("full_doc") or else true
-		fallback = req.bool_arg("fallback") or else true
+		var opt_full_doc = req.bool_arg("full_doc")
+		if opt_full_doc != null then full_doc = opt_full_doc
+		var opt_fallback = req.bool_arg("fallback")
+		if opt_fallback != null then fallback = opt_fallback
 		var opt_format = req.string_arg("format")
 		if opt_format != null then format = opt_format
 		return super
@@ -100,14 +102,16 @@ end
 
 redef class CmdAncestors
 	redef fun http_init(req) do
-		parents = req.bool_arg("parents") or else true
+		var opt_parents = req.bool_arg("parents")
+		if opt_parents != null then parents = opt_parents
 		return super
 	end
 end
 
 redef class CmdDescendants
 	redef fun http_init(req) do
-		children = req.bool_arg("children") or else true
+		var opt_children = req.bool_arg("children")
+		if opt_children != null then children = opt_children
 		return super
 	end
 end
