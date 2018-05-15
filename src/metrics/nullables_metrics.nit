@@ -41,11 +41,10 @@ private class NullablesMetricsPhase
 
 		var model = toolcontext.modelbuilder.model
 		var filter = new ModelFilter(private_visibility)
-		var model_view = new ModelView(model, mainmodule, filter)
 
 		var metrics = new MetricSet
-		metrics.register(new CNBA(model_view))
-		metrics.register(new CNBNA(model_view))
+		metrics.register(new CNBA(model, mainmodule, filter))
+		metrics.register(new CNBNA(model, mainmodule, filter))
 
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
@@ -89,7 +88,7 @@ class CNBNA
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var all = mclass.collect_accessible_mattributes(model_view)
+			var all = mclass.collect_accessible_mattributes(mainmodule, filter)
 			for mattr in all do
 				if mattr.is_nullable then values.inc(mclass)
 			end

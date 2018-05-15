@@ -37,21 +37,20 @@ private class MModulesMetricsPhase
 		out.mkdir
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = new ModelView(model, mainmodule)
 
 		print toolcontext.format_h1("\n# MModules metrics")
 
 		var metrics = new MetricSet
-		metrics.register(new MNOA(model_view))
-		metrics.register(new MNOP(model_view))
-		metrics.register(new MNOC(model_view))
-		metrics.register(new MNOD(model_view))
-		metrics.register(new MDIT(model_view))
-		metrics.register(new MNBI(model_view))
-		metrics.register(new MNBR(model_view))
-		metrics.register(new MNBCC(model_view))
-		metrics.register(new MNBAC(model_view))
-		metrics.register(new MNBIC(model_view))
+		metrics.register(new MNOA(model, mainmodule))
+		metrics.register(new MNOP(model, mainmodule))
+		metrics.register(new MNOC(model, mainmodule))
+		metrics.register(new MNOD(model, mainmodule))
+		metrics.register(new MDIT(model, mainmodule))
+		metrics.register(new MNBI(model, mainmodule))
+		metrics.register(new MNBR(model, mainmodule))
+		metrics.register(new MNBCC(model, mainmodule))
+		metrics.register(new MNBAC(model, mainmodule))
+		metrics.register(new MNBIC(model, mainmodule))
 
 		var mmodules = new HashSet[MModule]
 		for mpackage in model.mpackages do
@@ -86,7 +85,13 @@ abstract class MModuleMetric
 	redef type ELM: MModule
 
 	# Model view used to collect and filter entities
-	var model_view: ModelView
+	var model: Model
+
+	# Mainmodule used for linearization
+	var mainmodule: MModule
+
+	# Filter to apply on model if any
+	var filter: nullable ModelFilter
 end
 
 # Module Metric: Number of Ancestors
@@ -171,7 +176,7 @@ class MNBD
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			values[mmodule] = 0
-			for a in mmodule.collect_ancestors(model_view) do
+			for a in mmodule.collect_ancestors(mainmodule, filter) do
 				values[mmodule] += a.intro_mclasses.length
 			end
 		end

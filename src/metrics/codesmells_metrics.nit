@@ -34,10 +34,10 @@ class CodeSmellsMetricsPhase
 	redef fun process_mainmodule(mainmodule, given_mmodules) do
 		print toolcontext.format_h1("--- Code Smells Metrics ---")
 
+		var model = toolcontext.modelbuilder.model
 		var filter = new ModelFilter(private_visibility)
-		var view = new ModelView(toolcontext.modelbuilder.model, mainmodule, filter)
-		self.set_all_average_metrics(view)
-		var mclass_codesmell = new BadConceptonController(view)
+		self.set_all_average_metrics(model)
+		var mclass_codesmell = new BadConceptonController(model, filter)
 		var collect = new Counter[MClassDef]
 		var mclassdefs = new Array[MClassDef]
 
@@ -51,18 +51,20 @@ class CodeSmellsMetricsPhase
 		end
 	end
 
-	fun set_all_average_metrics(view: ModelView) do
+	fun set_all_average_metrics(model: Model) do
 		var model_builder = toolcontext.modelbuilder
-		self.average_number_of_lines = view.get_avg_linenumber(model_builder)
-		self.average_number_of_parameter = view.get_avg_parameter
-		self.average_number_of_method = view.get_avg_method
-		self.average_number_of_attribute = view.get_avg_attribut
+		self.average_number_of_lines = model.get_avg_linenumber(model_builder)
+		self.average_number_of_parameter = model.get_avg_parameter
+		self.average_number_of_method = model.get_avg_method
+		self.average_number_of_attribute = model.get_avg_attribut
 	end
 end
 
 class BadConceptonController
 
-	var view: ModelView
+	var model: Model
+
+	var filter: ModelFilter
 
 	# Code smell list
 	var bad_conception_elements = new Array[BadConceptionFinder]
@@ -84,7 +86,7 @@ class BadConceptonController
 	# Collect method take Array of mclassdef to find the code smells for every class
 	fun collect(mclassdefs: Array[MClassDef],phase: CodeSmellsMetricsPhase) do
 		for mclassdef in mclassdefs do
-			var bad_conception_class = new BadConceptionFinder(mclassdef, phase, view)
+			var bad_conception_class = new BadConceptionFinder(mclassdef, phase, model, filter)
 			bad_conception_class.collect
 			bad_conception_elements.add(bad_conception_class)
 		end
@@ -117,18 +119,19 @@ class BadConceptionFinder
 	var mclassdef: MClassDef
 	var array_badconception = new Array[BadConception]
 	var phase: CodeSmellsMetricsPhase
-	var view: ModelView
+	var model: Model
+	var filter: ModelFilter
 	var score = 0.0
 
 	# Collect code smell with selected toolcontext option
 	fun collect do
 		var bad_conception_elements = new Array[BadConception]
 		# Check toolcontext option
-		if phase.toolcontext.opt_feature_envy.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new FeatureEnvy(phase, view))
-		if phase.toolcontext.opt_long_method.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LongMethod(phase, view))
-		if phase.toolcontext.opt_long_params.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LongParameterList(phase, view))
-		if phase.toolcontext.opt_no_abstract_implementation.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new NoAbstractImplementation(phase, view))
-		if phase.toolcontext.opt_large_class.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LargeClass(phase, view))
+		if phase.toolcontext.opt_feature_envy.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new FeatureEnvy(phase, model, filter))
+		if phase.toolcontext.opt_long_method.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LongMethod(phase, model, filter))
+		if phase.toolcontext.opt_long_params.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LongParameterList(phase, model, filter))
+		if phase.toolcontext.opt_no_abstract_implementation.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new NoAbstractImplementation(phase, model, filter))
+		if phase.toolcontext.opt_large_class.value or phase.toolcontext.opt_all.value then bad_conception_elements.add(new LargeClass(phase, model, filter))
 		# Collected all code smell if their state is true
 		for bad_conception_element in bad_conception_elements do
 			if bad_conception_element.collect(self.mclassdef,phase.toolcontext.modelbuilder) then array_badconception.add(bad_conception_element)
@@ -159,7 +162,9 @@ end
 abstract class BadConception
 	var phase: CodeSmellsMetricsPhase
 
-	var view: ModelView
+	var model: Model
+
+	var filter: ModelFilter
 
 	var score = 0.0
 
@@ -192,9 +197,9 @@ class LargeClass
 	redef fun desc do return "Large class"
 
 	redef fun collect(mclassdef, model_builder): Bool do
-		self.number_attribut = mclassdef.collect_intro_and_redef_mattributes(view).length
+		self.number_attribut = mclassdef.collect_intro_and_redef_mattributes(filter).length
 		# Get the number of methods (Accessor include) (subtract the get and set of attibutes with (numberAtribut*2))
-		self.number_method = mclassdef.collect_intro_and_redef_methods(view).length
+		self.number_method = mclassdef.collect_intro_and_redef_methods(filter).length
 		self.score_rate
 		return self.number_method.to_f > phase.average_number_of_method and self.number_attribut.to_f > phase.average_number_of_attribute
 	end
@@ -217,7 +222,7 @@ class LongParameterList
 	redef fun desc do return "Long parameter list"
 
 	redef fun collect(mclassdef, model_builder): Bool do
-		for meth in mclassdef.collect_intro_and_redef_mpropdefs(view) do
+		for meth in mclassdef.collect_intro_and_redef_mpropdefs(filter) do
 			var threshold_value = 4
 			# Get the threshold value from the toolcontext command
 			if phase.toolcontext.opt_long_params_threshold.value != 0 then threshold_value = phase.toolcontext.opt_long_params_threshold.value
@@ -258,7 +263,7 @@ class FeatureEnvy
 	redef fun desc do return "Feature envy"
 
 	redef fun collect(mclassdef, model_builder): Bool do
-		var mmethoddefs = call_analyze_methods(mclassdef,model_builder, view)
+		var mmethoddefs = call_analyze_methods(mclassdef,model_builder, filter)
 		for mmethoddef in mmethoddefs do
 			var max_class_call = mmethoddef.class_call.max
 			# Check if the class with the maximum call is >= auto-call and the maximum call class is != of this class
@@ -303,7 +308,7 @@ class LongMethod
 	redef fun desc do return "Long method"
 
 	redef fun collect(mclassdef, model_builder): Bool do
-		var mmethoddefs = call_analyze_methods(mclassdef,model_builder, view)
+		var mmethoddefs = call_analyze_methods(mclassdef,model_builder, filter)
 		var threshold_value = phase.average_number_of_lines.to_i
 		# Get the threshold value from the toolcontext command
 		if phase.toolcontext.opt_long_method_threshold.value != 0 then threshold_value = phase.toolcontext.opt_long_method_threshold.value
@@ -343,8 +348,8 @@ class NoAbstractImplementation
 
 	redef fun collect(mclassdef, model_builder): Bool do
 		if not mclassdef.mclass.is_abstract and not mclassdef.mclass.is_interface then
-			if mclassdef.collect_abstract_methods(view).not_empty then
-				bad_methods.add_all(mclassdef.collect_not_define_properties(view))
+			if mclassdef.collect_abstract_methods(filter).not_empty then
+				bad_methods.add_all(mclassdef.collect_not_define_properties(filter))
 			end
 		end
 		self.score_rate
@@ -368,11 +373,12 @@ class NoAbstractImplementation
 	end
 end
 
-redef class ModelView
+redef class Model
 	fun get_avg_parameter: Float do
 		var counter = new Counter[MMethodDef]
-		for mclassdef in mclassdefs do
-			for method in mclassdef.collect_intro_and_redef_mpropdefs(self) do
+		var filter = new ModelFilter
+		for mclassdef in collect_mclassdefs(filter) do
+			for method in mclassdef.collect_intro_and_redef_mpropdefs(filter) do
 			# check if the property is a method definition
 				if not method isa MMethodDef then continue
 				#Check if method has a signature
@@ -386,8 +392,9 @@ redef class ModelView
 
 	fun get_avg_attribut: Float do
 		var counter = new Counter[MClassDef]
-		for mclassdef in mclassdefs do
-			var number_attributs = mclassdef.collect_intro_and_redef_mattributes(self).length
+		var filter = new ModelFilter
+		for mclassdef in collect_mclassdefs(filter) do
+			var number_attributs = mclassdef.collect_intro_and_redef_mattributes(filter).length
 			if number_attributs != 0 then counter[mclassdef] = number_attributs
 		end
 		return counter.avg + counter.std_dev
@@ -395,8 +402,9 @@ redef class ModelView
 
 	fun get_avg_method: Float do
 		var counter = new Counter[MClassDef]
-		for mclassdef in mclassdefs do
-			var number_methodes = mclassdef.collect_intro_and_redef_methods(self).length
+		var filter = new ModelFilter
+		for mclassdef in collect_mclassdefs(filter) do
+			var number_methodes = mclassdef.collect_intro_and_redef_methods(filter).length
 			if number_methodes != 0 then counter[mclassdef] = number_methodes
 		end
 		return counter.avg + counter.std_dev
@@ -404,15 +412,16 @@ redef class ModelView
 
 	fun get_avg_linenumber(model_builder: ModelBuilder): Float do
 		var methods_analyse_metrics = new Counter[MClassDef]
-		for mclassdef in mclassdefs do
+		var filter = new ModelFilter
+		for mclassdef in collect_mclassdefs(filter) do
 			var result = 0
 			var count = 0
-			for mmethoddef in call_analyze_methods(mclassdef,model_builder, self) do
+			for mmethoddef in call_analyze_methods(mclassdef,model_builder, filter) do
 				result += mmethoddef.line_number
 				if mmethoddef.line_number == 0 then continue
 				count += 1
 			end
-			if not mclassdef.collect_local_mproperties(self).length != 0 then continue
+			if not mclassdef.collect_local_mproperties(filter).length != 0 then continue
 			if count == 0 then continue
 			methods_analyse_metrics[mclassdef] = (result/count).to_i
 		end
