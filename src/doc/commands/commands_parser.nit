@@ -140,7 +140,7 @@ class CommandParser
 		end
 
 		# Parse command options
-		var opts = new HashMap[String, String]
+		var opts = new CmdOptions
 		while pos < string.length do
 			# Parse option name
 			tmp.clear
@@ -255,7 +255,7 @@ end
 redef class DocCommand
 
 	# Initialize the command from the CommandParser data
-	fun parser_init(arg: String, options: Map[String, String]): CmdMessage do
+	fun parser_init(arg: String, options: CmdOptions): CmdMessage do
 		return init_command
 	end
 end
@@ -280,22 +280,26 @@ redef class CmdComment
 	redef fun parser_init(mentity_name, options) do
 		full_doc = not options.has_key("only-synopsis")
 		fallback = not options.has_key("no-fallback")
-		if options.has_key("format") then format = options["format"]
+		var opt_format = options.opt_string("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
 
 redef class CmdEntityLink
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("text") then text = options["text"]
-		if options.has_key("title") then title = options["title"]
+		var opt_text = options.opt_string("text")
+		if opt_text != null then text = opt_text
+		var opt_title = options.opt_string("title")
+		if opt_title != null then title = opt_title
 		return super
 	end
 end
 
 redef class CmdCode
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("format") then format = options["format"]
+		var opt_format = options.opt_string("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
@@ -331,7 +335,8 @@ end
 
 redef class CmdGraph
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("format") then format = options["format"]
+		var opt_format = options.opt_string("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
@@ -365,6 +370,21 @@ redef class CmdCatalogPerson
 end
 
 # Utils
+
+# Commands options
+class CmdOptions
+	super HashMap[String,  String]
+
+	# Get option value for `key` as String
+	#
+	# Return `null` if no option with that `key` or if value is empty.
+	fun opt_string(key: String): nullable String do
+		if not has_key(key) then return null
+		var value = self[key]
+		if value.is_empty then return null
+		return value
+	end
+end
 
 redef class Text
 	# Read `self` as raw text until `nend` and append it to the `out` buffer.
