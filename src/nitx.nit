@@ -43,8 +43,11 @@ end
 # Using `prompt`, the command line can be turned on an interactive tool.
 class Nitx
 
-	# ModelView that contains the informations to display
-	var view: ModelView
+	# Model that contains the informations to display
+	var model: Model
+
+	# Mainmodule for class linearization
+	var mainmodule: MModule
 
 	# ModelBuilder to access AST nodes
 	var modelbuilder: ModelBuilder
@@ -66,7 +69,7 @@ class Nitx
 		print "Welcome in the Nit Index!"
 		print ""
 		print "Loaded packages:\n"
-		var cmd = new CmdModelEntities(view, kind = "packages")
+		var cmd = new CmdModelEntities(model, kind = "packages")
 		cmd.init_command
 		for mpackage in cmd.results.as(not null) do
 			print " * {mpackage.full_name}"
@@ -101,7 +104,7 @@ class Nitx
 	end
 
 	# Parser used to process doc commands
-	var parser = new CommandParser(view, modelbuilder, catalog) is lazy
+	var parser = new CommandParser(model, mainmodule, modelbuilder, catalog) is lazy
 
 	# Processes the query string and performs it.
 	fun do_command(str: String) do
@@ -117,9 +120,9 @@ end
 
 redef class Catalog
 	# Build the catalog for Nitx
-	private fun build_catalog(view: ModelView) do
+	private fun build_catalog(model: Model, filter: nullable ModelFilter) do
 		# Compute the poset
-		for p in view.mpackages do
+		for p in model.collect_mpackages(filter) do
 			var g = p.root
 			assert g != null
 			modelbuilder.scan_group(g)
@@ -134,7 +137,7 @@ redef class Catalog
 			end
 		end
 		# Build the catalog
-		for mpackage in view.mpackages do
+		for mpackage in model.collect_mpackages(filter) do
 			package_page(mpackage)
 			git_info(mpackage)
 			mpackage_stats(mpackage)
@@ -165,15 +168,14 @@ toolcontext.run_global_phases(mmodules)
 var mainmodule = toolcontext.make_main_module(mmodules)
 
 # build views
-var view = new ModelView(model, mainmodule)
 var catalog = null
 if toolcontext.opt_catalog.value then
 	catalog = new Catalog(mbuilder)
-	catalog.build_catalog(view)
+	catalog.build_catalog(model)
 end
 
 # start nitx
-var nitx = new Nitx(view, mbuilder, catalog, toolcontext.opt_no_color.value)
+var nitx = new Nitx(model, mainmodule, mbuilder, catalog, toolcontext.opt_no_color.value)
 var q = toolcontext.opt_command.value
 if q != null then # shortcut prompt
 	print ""
