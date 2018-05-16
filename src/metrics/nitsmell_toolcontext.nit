@@ -36,6 +36,8 @@ redef class ToolContext
 	var opt_no_abstract_implementation = new OptionBool("Print the no implemented abstract method", "--no-abstract-implementation")
 	# --long-params
 	var opt_long_params = new OptionBool("Print long parameters", "--long-params")
+	# --long-params
+	var opt_print_stats = new OptionBool("Print global statistics", "--stats")
 	# --move-generics
 	var opt_move_generics = new OptionBool("Print the move proposition for generic class", "--move-generics")
 	# --move-generics
@@ -45,12 +47,12 @@ redef class ToolContext
 	# --long-params-threshold
 	var opt_nocolors = new OptionBool("Disable colors in console outputs", "--no-colors")
 
-	redef init
-	do
+	redef init do
 		super
 		self.option_context.add_option(opt_all)
 		self.option_context.add_option(opt_large_class)
 		self.option_context.add_option(opt_get_all)
+		self.option_context.add_option(opt_print_stats)
 		self.option_context.add_option(opt_feature_envy)
 		self.option_context.add_option(opt_long_method)
 		self.option_context.add_option(opt_no_abstract_implementation)

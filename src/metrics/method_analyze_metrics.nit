@@ -42,6 +42,7 @@ fun set_analyse_result_methoddef(mmethoddef: MMethodDef, visitor: MethodAnalyzeM
 	mmethoddef.line_number = visitor.line_number.length
 	mmethoddef.total_self_call = visitor.total_self_call
 	mmethoddef.class_call = visitor.class_call
+	mmethoddef.count_call_self_attribut = visitor.count_call_self_attribut
 	return mmethoddef
 end
 
@@ -51,6 +52,7 @@ public class MethodAnalyzeMetrics
 	var line_number = new Counter[nullable Int]
 	var total_self_call = 0
 	var class_call = new Counter[MClassType]
+	var count_call_self_attribut = new Counter[MMethod]
 
 	redef fun visit(n) do
 		n.visit_all(self)
@@ -64,9 +66,12 @@ public class MethodAnalyzeMetrics
 		if n isa ASendExpr then
 			var callsite = n.callsite
 			if callsite != null then
-				var class_site_recv = callsite.recv
-				if class_site_recv isa MClassType then class_call.inc(class_site_recv)
-				if callsite.recv_is_self then self.total_self_call += 1
+				var classsite_recv = callsite.recv
+				if classsite_recv isa MClassType then class_call.inc(classsite_recv)
+				if callsite.recv_is_self then
+					self.total_self_call += 1
+					count_call_self_attribut.inc(callsite.mproperty)
+				end
 			end
 		end
 	end
@@ -76,4 +81,5 @@ redef class MMethodDef
 	var line_number = 0
 	var total_self_call = 0
 	var class_call = new Counter[MClassType]
+	var count_call_self_attribut = new Counter[MMethod]
 end
