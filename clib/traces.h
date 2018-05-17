@@ -8,18 +8,32 @@
 #define _TRACES_H
 
 #include <lttng/tracepoint.h>
+#include <gc.h>
 
 TRACEPOINT_EVENT(
-    Nit_Compiler,
-    Object_Instance,
-    TP_ARGS(
-        char*, object_class_arg,
-        int, object_id_arg
-    ),
-    TP_FIELDS(
-        ctf_string(object_class, object_class_arg)
-        ctf_integer(int, object_id, object_id_arg)
-    )
+	Nit_Compiler,
+	Object_Instance,
+	TP_ARGS(
+		char*, object_class_arg,
+		int, object_id_arg
+	),
+	TP_FIELDS(
+		ctf_string(object_class, object_class_arg)
+		ctf_integer(int, object_id, object_id_arg)
+	)
+)
+
+TRACEPOINT_EVENT(
+	Nit_Compiler,
+	Object_Destroy,
+	TP_ARGS(
+		char*, object_class_arg,
+		int, object_id_arg
+	),
+	TP_FIELDS(
+		ctf_string(object_class, object_class_arg)
+		ctf_integer(int, object_id, object_id_arg)
+	)
 )
 
 #endif

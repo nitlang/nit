@@ -982,7 +982,10 @@ class SeparateCompiler
 				var alloc = v.nit_alloc("sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t)", mclass.full_name)
 				v.add("{res} = {alloc};")
 			end
-			if modelbuilder.toolcontext.opt_trace.value then v.add("tracepoint(Nit_Compiler, Object_Instance,\"{mtype}\", (intptr_t)self);")
+			if modelbuilder.toolcontext.opt_trace.value then
+				v.add("tracepoint(Nit_Compiler, Object_Instance,\"{mtype}\", (uintptr_t)self);")
+				v.add("GC_register_finalizer(self, object_destroy_callback, NULL, NULL, NULL);")
+			end
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
