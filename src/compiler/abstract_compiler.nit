@@ -782,7 +782,7 @@ struct catch_stack_t {
 	int currentSize;
 	jmp_buf *envs;
 };
-extern __thread struct catch_stack_t catchStack;
+extern struct catch_stack_t *getCatchStack();
 """
 	end
 
@@ -883,7 +883,44 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
-		v.add_decl("__thread struct catch_stack_t catchStack = \{-1, 0, NULL\};")
+
+		# Store catch stack in thread local storage
+		v.add_decl """
+#if defined(TARGET_OS_IPHONE)
+	// Use pthread_key_create and others for iOS
+	#include <pthread.h>
+
+	static pthread_key_t catch_stack_key;
+	static pthread_once_t catch_stack_key_created = PTHREAD_ONCE_INIT;
+
+	static void create_catch_stack()
+	{
+		pthread_key_create(&catch_stack_key, NULL);
+	}
+
+	struct catch_stack_t *getCatchStack()
+	{
+		pthread_once(&catch_stack_key_created, &create_catch_stack);
+		struct catch_stack_t *data = pthread_getspecific(catch_stack_key);
+		if (data == NULL) {
+			data = malloc(sizeof(struct catch_stack_t));
+			data->cursor = -1;
+			data->currentSize = 0;
+			data->envs = NULL;
+			pthread_setspecific(catch_stack_key, data);
+		}
+		return data;
+	}
+#else
+	// Use __thread when available
+	__thread struct catch_stack_t catchStack = {-1, 0, NULL};
+
+	struct catch_stack_t *getCatchStack()
+	{
+		return &catchStack;
+	}
+#endif
+"""
 
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 			for tag in count_type_test_tags do
@@ -1876,8 +1913,11 @@ abstract class AbstractCompilerVisitor
 	# This method should be called before the error messages and before a `add_raw_abort`.
 	fun add_raw_throw
 	do
-		self.add("if(catchStack.cursor >= 0)\{")
-		self.add("longjmp(catchStack.envs[catchStack.cursor], 1);")
+		self.add("\{")
+		self.add("struct catch_stack_t *catchStack = getCatchStack();")
+		self.add("if(catchStack->cursor >= 0)\{")
+		self.add("	longjmp(catchStack->envs[catchStack->cursor], 1);")
+		self.add("\}")
 		self.add("\}")
 	end
 
@@ -3521,21 +3561,24 @@ redef class ADoExpr
 	redef fun stmt(v)
 	do
 		if self.n_catch != null then
-			v.add("if(catchStack.currentSize == 0) \{")
-			v.add(" 	catchStack.cursor = -1;")
-			v.add("		catchStack.currentSize = 100;")
-			v.add("		catchStack.envs = malloc(sizeof(jmp_buf)*100);")
-			v.add("\} else if(catchStack.cursor == catchStack.currentSize - 1) \{")
-			v.add("		catchStack.currentSize *= 2;")
-			v.add("		catchStack.envs = realloc(catchStack.envs, sizeof(jmp_buf)*catchStack.currentSize);")
+			v.add("\{")
+			v.add("struct catch_stack_t *catchStack = getCatchStack();")
+			v.add("if(catchStack->currentSize == 0) \{")
+			v.add("		catchStack->cursor = -1;")
+			v.add("		catchStack->currentSize = 100;")
+			v.add("		catchStack->envs = malloc(sizeof(jmp_buf)*100);")
+			v.add("\} else if(catchStack->cursor == catchStack->currentSize - 1) \{")
+			v.add("		catchStack->currentSize *= 2;")
+			v.add("		catchStack->envs = realloc(catchStack->envs, sizeof(jmp_buf)*catchStack->currentSize);")
 			v.add("\}")
-			v.add("catchStack.cursor += 1;")
-			v.add("if(!setjmp(catchStack.envs[catchStack.cursor]))\{")
+			v.add("catchStack->cursor += 1;")
+			v.add("if(!setjmp(catchStack->envs[catchStack->cursor]))\{")
 			v.stmt(self.n_block)
-			v.add("catchStack.cursor -= 1;")
+			v.add("catchStack->cursor -= 1;")
 			v.add("\}else \{")
-			v.add("catchStack.cursor -= 1;")
+			v.add("catchStack->cursor -= 1;")
 			v.stmt(self.n_catch)
+			v.add("\}")
 			v.add("\}")
 		else
 			v.stmt(self.n_block)
