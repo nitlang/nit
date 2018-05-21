@@ -19,7 +19,7 @@ import pthreads
 class CatchThread
 	super Thread
 
-	var x = 100000
+	var x = 10000
 	var caught = 0
 
 	redef fun main do
