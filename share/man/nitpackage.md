@@ -66,6 +66,9 @@ Check manpages files.
 ### `--gen-man`
 Generate manpages files.
 
+### `--check-readme`
+Check README.md files.
+
 ### `-f`, `--force`
 Force update of existing files.
 

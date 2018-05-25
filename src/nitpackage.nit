@@ -19,6 +19,10 @@ import frontend
 import doc::commands::commands_main
 
 redef class ToolContext
+
+	# nitpackage phase
+	var nitpackage_phase: Phase = new NitPackagePhase(self, null)
+
 	# --expand
 	var opt_expand = new OptionBool("Move singleton packages to their own directory", "--expand")
 
@@ -37,14 +41,14 @@ redef class ToolContext
 	# --gen-makefile
 	var opt_gen_makefile = new OptionBool("Generate Makefile files", "--gen-makefile")
 
-	# nitpackage phase
-	var nitpackage_phase: Phase = new NitPackagePhase(self, null)
-
 	# --check-man
 	var opt_check_man = new OptionBool("Check manpages files", "--check-man")
 
 	# --gen-man
 	var opt_gen_man = new OptionBool("Generate manpages files", "--gen-man")
+
+	# --check-readme
+	var opt_check_readme = new OptionBool("Check README.md files", "--check-readme")
 
 	redef init do
 		super
@@ -52,6 +56,7 @@ redef class ToolContext
 		option_context.add_option(opt_check_ini, opt_gen_ini)
 		option_context.add_option(opt_check_makefile, opt_gen_makefile)
 		option_context.add_option(opt_check_man, opt_gen_man)
+		option_context.add_option(opt_check_readme)
 	end
 end
 
@@ -84,6 +89,12 @@ private class NitPackagePhase
 			# Check manpages
 			if toolcontext.opt_check_man.value then
 				mpackage.check_man(toolcontext, mainmodule)
+				continue
+			end
+
+			# Check README.md
+			if toolcontext.opt_check_readme.value then
+				mpackage.check_readme(toolcontext)
 				continue
 			end
 
@@ -415,6 +426,15 @@ redef class MPackage
 			if not mmodule isa MModule then continue
 			if not has_man then pkg_man.mkdir
 			mmodule.gen_man(toolcontext)
+		end
+	end
+
+	# README
+
+	private fun check_readme(toolcontext: ToolContext) do
+		if not has_readme then
+			toolcontext.error(location, "No `README.md` file for `{name}`")
+			return
 		end
 	end
 end
