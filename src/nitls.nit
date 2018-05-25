@@ -196,7 +196,9 @@ end
 if opt_source.value then
 	alpha_comparator.sort(mmodules)
 	for mp in mmodules do
-		if opt_paths.value then
+		if opt_make.value then
+			print mp.filepath.escape_to_mk
+		else if opt_paths.value then
 			print mp.filepath.as(not null)
 		else
 			print "{mp.mgroup.full_name}{ot.display(mp)}"
