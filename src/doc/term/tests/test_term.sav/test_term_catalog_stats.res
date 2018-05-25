@@ -1,6 +1,6 @@
 Catalog statistics:
- * 2 packages
- * 11 modules
+ * 1 packages
+ * 10 modules
  * 79 methods
  * 26 classes
  * 509 lines of code

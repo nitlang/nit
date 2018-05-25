@@ -1,7 +1,6 @@
 * `careers` - Careers of the game.
 * `character` - Characters are playable entity in the world.
 * `combat` - COmbat interactions between characters.
-* `excluded`
 * `game` - A game abstraction for RPG.
 * `game_examples`
 * `platform` - Declares base types allowed on the platform.

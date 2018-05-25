@@ -464,6 +464,7 @@ redef class ModelBuilder
 			if not mpackage.accept(path) then
 				mgroup = null
 				toolcontext.info("module `{path}` excluded from package `{mpackage}`", 2)
+				return null
 			end
 		end
 		if mgroup == null then

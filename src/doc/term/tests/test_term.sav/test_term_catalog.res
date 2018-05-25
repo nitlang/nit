@@ -5,7 +5,3 @@ Packages from catalog:
    package test_prog
    test_location
 
- + excluded
-   package excluded
-   test_location
-

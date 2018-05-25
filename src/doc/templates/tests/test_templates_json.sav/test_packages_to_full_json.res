@@ -13,13 +13,3 @@
 	"license": "Apache-2.0",
 	"tags": ["test", "game"]
 }
-{
-	"name": "excluded",
-	"namespace": [{
-		"name": "excluded"
-	}],
-	"class_name": "MPackage",
-	"full_name": "excluded",
-	"visibility": "public",
-	"modifiers": ["package"]
-}

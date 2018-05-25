@@ -108,6 +108,6 @@ class TestCommandsCatalog
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.person.as(not null).name == "Alexandre Terrasa"
-		assert cmd.results.as(not null).length == 2
+		assert cmd.results.as(not null).length == 1
 	end
 end

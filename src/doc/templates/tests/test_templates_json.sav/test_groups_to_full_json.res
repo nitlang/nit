@@ -98,13 +98,3 @@
 	"visibility": "public",
 	"modifiers": ["group"]
 }
-{
-	"name": "excluded",
-	"namespace": [{
-		"name": "excluded"
-	}, ">"],
-	"class_name": "MGroup",
-	"full_name": "excluded>",
-	"visibility": "public",
-	"modifiers": ["group"]
-}

@@ -1,7 +1,6 @@
 *** METRICS ***
 
 # ReadMe metrics
-Warning: no source file for `excluded`
 
  ## package test_prog (test_prog/README.md)
   * has_package 1
