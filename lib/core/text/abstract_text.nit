@@ -530,6 +530,8 @@ abstract class Text
 	# * Never ends with an underscore.
 	# * Never contains two contiguous underscores.
 	#
+	# Examples:
+	#
 	#     assert "42_is/The answer!".to_cmangle == "_52d2_is_47dThe_32danswer_33d"
 	#     assert "__".to_cmangle == "_95d_95d"
 	#     assert "__d".to_cmangle == "_95d_d"
@@ -969,7 +971,7 @@ abstract class Text
 
 	# Escape string used in labels for graphviz
 	#
-	#   assert ">><<".escape_to_dot == "\\>\\>\\<\\<"
+	#     assert ">><<".escape_to_dot == "\\>\\>\\<\\<"
 	fun escape_to_dot: String
 	do
 		return escape_more_to_c("|\{\}<>")
