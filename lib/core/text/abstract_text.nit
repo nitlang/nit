@@ -87,37 +87,27 @@ abstract class Text
 	fun to_buffer: Buffer is abstract
 
 	# Gets the first char of the Text
-	#
-	# DEPRECATED : Use self.chars.first instead
 	fun first: Char do return self.chars[0]
 
 	# Access a character at `index` in the string.
 	#
 	#     assert "abcd"[2]         == 'c'
-	#
-	# DEPRECATED : Use self.chars.[] instead
 	fun [](index: Int): Char do return self.chars[index]
 
 	# Gets the index of the first occurence of 'c'
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.index_of instead
 	fun index_of(c: Char): Int
 	do
 		return index_of_from(c, 0)
 	end
 
 	# Gets the last char of self
-	#
-	# DEPRECATED : Use self.chars.last instead
 	fun last: Char do return self.chars[length-1]
 
 	# Gets the index of the first occurence of ´c´ starting from ´pos´
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.index_of_from instead
 	fun index_of_from(c: Char, pos: Int): Int
 	do
 		var iter = self.chars.iterator_from(pos)
@@ -131,8 +121,6 @@ abstract class Text
 	# Gets the last index of char ´c´
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.last_index_of instead
 	fun last_index_of(c: Char): Int
 	do
 		return last_index_of_from(c, length - 1)
@@ -148,8 +136,6 @@ abstract class Text
 	#     assert s.last_index_of_from('/', 12)         == 8
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.last_index_of_from instead
 	fun last_index_of_from(item: Char, pos: Int): Int do return chars.last_index_of_from(item, pos)
 
 	# Concatenates `o` to `self`
@@ -159,8 +145,6 @@ abstract class Text
 	fun +(o: Text): SELFTYPE is abstract
 
 	# Gets an iterator on the chars of self
-	#
-	# DEPRECATED : Use self.chars.iterator instead
 	fun iterator: Iterator[Char]
 	do
 		return self.chars.iterator
@@ -168,8 +152,6 @@ abstract class Text
 
 
 	# Gets an Array containing the chars of self
-	#
-	# DEPRECATED : Use self.chars.to_a instead
 	fun to_a: Array[Char] do return chars.to_a
 
 	# Create a substring from `self` beginning at the `from` position
@@ -1419,8 +1401,6 @@ abstract class Buffer
 	protected var written = false
 
 	# Modifies the char contained at pos `index`
-	#
-	# DEPRECATED : Use self.chars.[]= instead
 	fun []=(index: Int, item: Char) is abstract
 
 	redef fun to_buffer do return clone
@@ -1438,8 +1418,6 @@ abstract class Buffer
 	end
 
 	# Adds a char `c` at the end of self
-	#
-	# DEPRECATED : Use self.chars.add instead
 	fun add(c: Char) is abstract
 
 	# Clears the buffer
