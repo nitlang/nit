@@ -17,6 +17,7 @@ module markdown_html_rendering
 
 import markdown_rendering
 import markdown_github
+import markdown_wikilinks
 
 # Markdown document renderer to HTML
 class HtmlRenderer
@@ -439,5 +440,19 @@ redef class MdSuper
 		v.add_raw "<sup>"
 		visit_all(v)
 		v.add_raw "</sup>"
+	end
+end
+
+# Wikilinks mode
+
+redef class MdWikilink
+
+	# Dummy rendering of wikilinks
+	#
+	# Clients should redefine this.
+	redef fun render_html(v) do
+		v.add_raw "<wiki link=\"{v.encode_uri(link)}\">"
+		visit_all(v)
+		v.add_raw "</wiki>"
 	end
 end

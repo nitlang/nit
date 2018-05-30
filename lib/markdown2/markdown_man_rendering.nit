@@ -17,6 +17,7 @@ module markdown_man_rendering
 
 import markdown_rendering
 import markdown_github
+import markdown_wikilinks
 
 # Markdown document renderer to Manpage
 class ManRenderer
@@ -239,5 +240,19 @@ redef class MdStrike
 		v.add "[STRIKEOUT:"
 		visit_all(v)
 		v.add "]"
+	end
+end
+
+# Wikilinks
+
+redef class MdWikilink
+	redef fun render_man(v) do
+		v.add "("
+		var title = self.title
+		if title != null then
+			v.add "{title} | "
+		end
+		v.add link
+		v.add ")"
 	end
 end

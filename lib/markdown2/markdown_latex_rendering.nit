@@ -17,6 +17,7 @@ module markdown_latex_rendering
 
 import markdown_rendering
 import markdown_github
+import markdown_wikilinks
 
 # Markdown document renderer to LaTeX
 class LatexRenderer
@@ -418,6 +419,20 @@ redef class MdSuper
 	redef fun render_latex(v) do
 		v.add_raw "\\textsuperscript\{"
 		visit_all(v)
+		v.add_raw "\}"
+	end
+end
+
+# Wikilinks
+
+redef class MdWikilink
+	redef fun render_latex(v) do
+		v.add_raw "\\texttt\{"
+		var title = self.title
+		if title != null then
+			v.add_text "{title} | "
+		end
+		v.add_text link
 		v.add_raw "\}"
 	end
 end
