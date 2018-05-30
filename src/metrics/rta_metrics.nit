@@ -39,25 +39,24 @@ private class RTAMetricsPhase
 
 		var model = toolcontext.modelbuilder.model
 		var filter = new ModelFilter(min_visibility = protected_visibility)
-		var model_view = new ModelView(model, mainmodule, filter)
 
 		print toolcontext.format_h1("\n# RTA metrics")
 
 		print toolcontext.format_h2("\n ## Live instances by mainmodules")
 		var mmetrics = new MetricSet
-		mmetrics.register(new MNLC(model_view, toolcontext.modelbuilder))
-		mmetrics.register(new MNLT(model_view, toolcontext.modelbuilder))
-		mmetrics.register(new MNCT(model_view, toolcontext.modelbuilder))
-		mmetrics.register(new MNLI(model_view, toolcontext.modelbuilder))
-		mmetrics.register(new MNLM(model_view, toolcontext.modelbuilder))
-		mmetrics.register(new MNLMD(model_view, toolcontext.modelbuilder))
-		mmetrics.register(new MNLDD(model_view, toolcontext.modelbuilder))
+		mmetrics.register(new MNLC(model, mainmodule, filter, toolcontext.modelbuilder))
+		mmetrics.register(new MNLT(model, mainmodule, filter, toolcontext.modelbuilder))
+		mmetrics.register(new MNCT(model, mainmodule, filter, toolcontext.modelbuilder))
+		mmetrics.register(new MNLI(model, mainmodule, filter, toolcontext.modelbuilder))
+		mmetrics.register(new MNLM(model, mainmodule, filter, toolcontext.modelbuilder))
+		mmetrics.register(new MNLMD(model, mainmodule, filter, toolcontext.modelbuilder))
+		mmetrics.register(new MNLDD(model, mainmodule, filter, toolcontext.modelbuilder))
 		mmetrics.collect(new HashSet[MModule].from([mainmodule]))
 		mmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 		if csv then mmetrics.to_csv.write_to_file("{out}/{mainmodule}.csv")
 
 		var mtypes = new HashSet[MType]
-		var analysis = new MetricsRapidTypeAnalysis(toolcontext.modelbuilder, mainmodule, model_view)
+		var analysis = new MetricsRapidTypeAnalysis(toolcontext.modelbuilder, mainmodule)
 		analysis.run_analysis
 		mtypes.add_all(analysis.live_types)
 		mtypes.add_all(analysis.live_cast_types)
@@ -140,7 +139,7 @@ class MNLI
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			values[mainmodule] = analysis.tnli.sum
 		end
@@ -156,7 +155,7 @@ class MNLT
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			values[mainmodule] = analysis.live_types.length
 		end
@@ -172,7 +171,7 @@ class MNCT
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			values[mainmodule] = analysis.live_cast_types.length
 		end
@@ -189,7 +188,7 @@ class MNLC
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
 			var live = new HashSet[MClass]
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			for mtype in analysis.live_types do
 				live.add(mtype.mclass)
@@ -208,7 +207,7 @@ class MNLM
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			values[mainmodule] = analysis.live_methods.length
 		end
@@ -224,7 +223,7 @@ class MNLMD
 
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			values[mainmodule] = analysis.live_methoddefs.length
 		end
@@ -241,7 +240,7 @@ class MNLDD
 	redef fun collect(mainmodules) do
 		for mainmodule in mainmodules do
 			var dead = 0
-			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule, model_view)
+			var analysis = new MetricsRapidTypeAnalysis(modelbuilder, mainmodule)
 			analysis.run_analysis
 			for mmethod in analysis.live_methods do
 				for mdef in mmethod.mpropdefs do
@@ -356,14 +355,11 @@ end
 class MetricsRapidTypeAnalysis
 	super RapidTypeAnalysis
 
-	# Model view used to linearize classes
-	var view: ModelView
-
 	# Class Live Instances
-	var cnli: CNLI is lazy do return new CNLI(view)
+	var cnli: CNLI is lazy do return new CNLI(modelbuilder.model, mainmodule)
 
 	# Class Live Casts
-	var cnlc: CNLC is lazy do return new CNLC(view)
+	var cnlc: CNLC is lazy do return new CNLC(modelbuilder.model, mainmodule)
 
 	# Type Live Instances
 	var tnli = new TNLI

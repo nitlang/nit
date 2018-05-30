@@ -21,9 +21,9 @@ import commands::commands_docdown
 redef class NitwebConfig
 	# Specific Markdown processor to use within Nitweb
 	var md_processor: MarkdownProcessor is lazy do
-		var parser = new CommandParser(view, modelbuilder)
+		var parser = new CommandParser(model, mainmodule, modelbuilder, catalog, filter)
 		var proc = new CmdMarkdownProcessor(parser)
-		proc.decorator = new CmdDecorator(view)
+		proc.decorator = new CmdDecorator(model)
 		return proc
 	end
 end

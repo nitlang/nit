@@ -117,6 +117,15 @@ MPropertyPage start
 	# start.section
 		## test_prog-__Starter__start.intro
 
+MModulePage test_prog-m
+	# test_prog-m.section
+		## test_prog_45dm.intro
+		## test_prog_45dm.importation
+			### test_prog_45dm.graph
+			### list.group
+				#### test_prog_45dm.imports
+				#### test_prog_45dm.clients
+
 MGroupPage examples
 	# examples.section
 		## test_prog__examples.intro
@@ -180,6 +189,14 @@ MClassPage MyGame
 				#### test_prog__examples-__MyGame__start_game.lin
 			### test_prog__examples-__MyGame__stop_game.definition
 				#### test_prog__examples-__MyGame__stop_game.lin
+
+MPropertyPage _computer_characters
+	# _computer_characters.section
+		## test_prog__examples-__MyGame___computer_characters.intro
+
+MPropertyPage _player_characters
+	# _player_characters.section
+		## test_prog__examples-__MyGame___player_characters.intro
 
 MPropertyPage computer_characters=
 	# computer_characters=.section
@@ -707,6 +724,18 @@ MClassPage Career
 			### test_prog__rpg__careers__Career__strength_bonus.definition
 			### test_prog__rpg__careers__Career__strength_bonus_61d.definition
 
+MPropertyPage _endurance_bonus
+	# _endurance_bonus.section
+		## test_prog__rpg__careers__Career___endurance_bonus.intro
+
+MPropertyPage _intelligence_bonus
+	# _intelligence_bonus.section
+		## test_prog__rpg__careers__Career___intelligence_bonus.intro
+
+MPropertyPage _strength_bonus
+	# _strength_bonus.section
+		## test_prog__rpg__careers__Career___strength_bonus.intro
+
 MPropertyPage endurance_bonus
 	# endurance_bonus.section
 		## test_prog__rpg__careers__Career__endurance_bonus.intro
@@ -827,6 +856,30 @@ MClassPage Character
 		## test_prog__rpg__combat.concern
 			### test_prog__rpg__combat__Character__hit_points.definition
 				#### test_prog__rpg__combat__Character__hit_points.lin
+
+MPropertyPage _age
+	# _age.section
+		## test_prog__rpg__character__Character___age.intro
+
+MPropertyPage _career
+	# _career.section
+		## test_prog__rpg__character__Character___career.intro
+
+MPropertyPage _health
+	# _health.section
+		## test_prog__rpg__character__Character___health.intro
+
+MPropertyPage _name
+	# _name.section
+		## test_prog__rpg__character__Character___name.intro
+
+MPropertyPage _race
+	# _race.section
+		## test_prog__rpg__character__Character___race.intro
+
+MPropertyPage _sex
+	# _sex.section
+		## test_prog__rpg__character__Character___sex.intro
 
 MPropertyPage age
 	# age.section
@@ -1139,6 +1192,18 @@ MClassPage Race
 			### test_prog__rpg__races__Race__base_strength.definition
 			### test_prog__rpg__races__Race__base_strength_61d.definition
 
+MPropertyPage _base_endurance
+	# _base_endurance.section
+		## test_prog__rpg__races__Race___base_endurance.intro
+
+MPropertyPage _base_intelligence
+	# _base_intelligence.section
+		## test_prog__rpg__races__Race___base_intelligence.intro
+
+MPropertyPage _base_strength
+	# _base_strength.section
+		## test_prog__rpg__races__Race___base_strength.intro
+
 MPropertyPage base_endurance
 	# base_endurance.section
 		## test_prog__rpg__races__Race__base_endurance.intro
@@ -1256,19 +1321,23 @@ MClassPage TestGame
 				#### test_prog__tests-__TestGame__player_characters.lin
 			### test_prog__tests-__TestGame__player_characters_61d.definition
 
+MPropertyPage _player_characters
+	# _player_characters.section
+		## test_prog__tests-__TestGame___player_characters.intro
+
 MPropertyPage player_characters=
 	# player_characters=.section
 		## test_prog__tests-__TestGame__player_characters_61d.intro
 
-Generated 114 pages
+Generated 130 pages
  list:
-  MPropertyPage: 62 (54.38%)
-  MClassPage: 23 (20.17%)
-  MModulePage: 11 (9.64%)
-  ReadmePage: 8 (7.01%)
-  MGroupPage: 8 (7.01%)
-  SearchPage: 1 (0.87%)
-  OverviewPage: 1 (0.87%)
+  MPropertyPage: 77 (59.23%)
+  MClassPage: 23 (17.69%)
+  MModulePage: 12 (9.23%)
+  ReadmePage: 8 (6.15%)
+  MGroupPage: 8 (6.15%)
+  SearchPage: 1 (0.76%)
+  OverviewPage: 1 (0.76%)
 Found 212 mentities
  list:
   MMethodDef: 79 (37.26%)

@@ -40,42 +40,10 @@ class NitwebConfig
 	var modelbuilder: ModelBuilder
 
 	# The JSON API does not filter anything by default.
-	#
-	# So we can cache the model view.
-	var view: ModelView
+	var filter: nullable ModelFilter
 
 	# Catalog to pass to handlers.
-	var catalog: Catalog is noinit
-
-	# Build the catalog
-	#
-	# This method should be called at nitweb startup.
-	# TODO move to nitweb
-	fun build_catalog do
-		var catalog = new Catalog(modelbuilder)
-		# Compute the poset
-		for p in view.mpackages do
-			var g = p.root
-			assert g != null
-			modelbuilder.scan_group(g)
-
-			catalog.deps.add_node(p)
-			for gg in p.mgroups do for m in gg.mmodules do
-				for im in m.in_importation.direct_greaters do
-					var ip = im.mpackage
-					if ip == null or ip == p then continue
-					catalog.deps.add_edge(p, ip)
-				end
-			end
-		end
-		# Build the catalog
-		for mpackage in view.mpackages do
-			catalog.package_page(mpackage)
-			catalog.git_info(mpackage)
-			catalog.mpackage_stats(mpackage)
-		end
-		self.catalog = catalog
-	end
+	var catalog: Catalog
 end
 
 # Specific handler for the nitweb API.
@@ -86,11 +54,13 @@ abstract class APIHandler
 	var config: NitwebConfig
 
 	# Find the MEntity ` with `full_name`.
-	fun find_mentity(model: ModelView, full_name: nullable String): nullable MEntity do
+	fun find_mentity(full_name: nullable String): nullable MEntity do
 		if full_name == null then return null
-		var mentity = model.mentity_by_full_name(full_name.from_percent_encoding)
+		var mentity = config.model.mentity_by_full_name(full_name.from_percent_encoding, config.filter)
 		if mentity == null then return null
-		if config.view.accept_mentity(mentity) then return mentity
+
+		var filter = config.filter
+		if filter == null or filter.accept_mentity(mentity) then return mentity
 		return null
 	end
 
@@ -105,7 +75,7 @@ abstract class APIHandler
 			res.api_error(400, "Expected mentity full name")
 			return null
 		end
-		var mentity = find_mentity(config.view, id)
+		var mentity = find_mentity(id)
 		if mentity == null then
 			res.api_error(404, "MEntity `{id}` not found")
 		end

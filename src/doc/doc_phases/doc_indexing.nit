@@ -33,15 +33,15 @@ class IndexingPhase
 	super DocPhase
 
 	redef fun apply do
-		for mmodule in doc.mmodules do
+		for mmodule in doc.model.mmodules do
 			add_result_for(mmodule.name, mmodule.full_name, mmodule.nitdoc_url)
 		end
-		for mclass in doc.mclasses do
+		for mclass in doc.model.mclasses do
 			add_result_for(mclass.name, mclass.full_name, mclass.nitdoc_url)
 		end
-		for mproperty in doc.mproperties do
+		for mproperty in doc.model.mproperties do
 			for mpropdef in mproperty.mpropdefs do
-				if not doc.mpropdefs.has(mpropdef) then continue
+				if not doc.filter.accept_mentity(mpropdef) then continue
 				var full_name = mpropdef.mclassdef.mclass.full_name
 				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
 				var def_url = "{cls_url}#{mpropdef.nitdoc_id}.definition"

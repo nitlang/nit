@@ -8,5 +8,5 @@
  * 3: Sys (test_prog::Sys)
  * 3: rpg (test_prog::rpg)
  * 3: test_prog (test_prog>)
- * 3: test_prog (test_prog)
  * 3: test_prog (test_prog::test_prog)
+ * 3: test_prog (test_prog)

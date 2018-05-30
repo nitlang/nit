@@ -22,7 +22,7 @@ class TestCommandsMain
 	test
 
 	fun test_cmd_mains is test do
-		var cmd = new CmdMains(test_view, mentity_name = "test_prog")
+		var cmd = new CmdMains(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		var results = cmd.results
@@ -32,7 +32,7 @@ class TestCommandsMain
 	end
 
 	fun test_cmd_main_compile is test do
-		var cmd = new CmdMainCompile(test_view, mentity_name = "test_prog::test_prog")
+		var cmd = new CmdMainCompile(test_model, mentity_name = "test_prog::test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 
@@ -43,7 +43,7 @@ class TestCommandsMain
 	end
 
 	fun test_cmd_testing is test do
-		var cmd = new CmdTesting(test_view, mentity_name = "test_prog")
+		var cmd = new CmdTesting(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 
@@ -54,14 +54,14 @@ class TestCommandsMain
 	end
 
 	fun test_cmd_man_synopsis is test do
-		var cmd = new CmdManSynopsis(test_view, mentity_name = "test_prog")
+		var cmd = new CmdManSynopsis(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.synopsis == "test_prog [*options*] ARGS..."
 	end
 
 	fun test_cmd_man_options is test do
-		var cmd = new CmdManOptions(test_view, mentity_name = "test_prog")
+		var cmd = new CmdManOptions(test_model, mentity_name = "test_prog")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 

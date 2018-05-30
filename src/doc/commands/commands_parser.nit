@@ -27,14 +27,20 @@ import commands::commands_main
 # Parse string commands to create DocQueries
 class CommandParser
 
-	# ModelView used to retrieve mentities
-	var view: ModelView
+	# Model used to retrieve mentities
+	var model: Model
+
+	# Main module for linearization
+	var mainmodule: MModule
 
 	# ModelBuilder used to retrieve AST nodes
 	var modelbuilder: ModelBuilder
 
 	# Catalog used for catalog commands
 	var catalog: nullable Catalog
+
+	# Filter to apply on model if any
+	var filter: nullable ModelFilter
 
 	# List of allowed command names for this parser
 	var allowed_commands: Array[String] = [
@@ -157,7 +163,7 @@ class CommandParser
 		# Build the command
 		var command
 		if is_short_link then
-			command = new CmdEntityLink(view)
+			command = new CmdEntityLink(model, filter)
 		else
 			command = new_command(name)
 		end
@@ -178,56 +184,56 @@ class CommandParser
 	# You must redefine this method to add new custom commands.
 	fun new_command(name: String): nullable DocCommand do
 		# CmdEntity
-		if name == "link" then return new CmdEntityLink(view)
-		if name == "doc" then return new CmdComment(view)
-		if name == "code" then return new CmdEntityCode(view, modelbuilder)
-		if name == "lin" then return new CmdLinearization(view)
-		if name == "defs" then return new CmdFeatures(view)
-		if name == "parents" then return new CmdParents(view)
-		if name == "ancestors" then return new CmdAncestors(view)
-		if name == "children" then return new CmdChildren(view)
-		if name == "descendants" then return new CmdDescendants(view)
-		if name == "param" then return new CmdParam(view)
-		if name == "return" then return new CmdReturn(view)
-		if name == "new" then return new CmdNew(view, modelbuilder)
-		if name == "call" then return new CmdCall(view, modelbuilder)
+		if name == "link" then return new CmdEntityLink(model, filter)
+		if name == "doc" then return new CmdComment(model, filter)
+		if name == "code" then return new CmdEntityCode(model, modelbuilder, filter)
+		if name == "lin" then return new CmdLinearization(model, mainmodule, filter)
+		if name == "defs" then return new CmdFeatures(model, filter)
+		if name == "parents" then return new CmdParents(model, mainmodule, filter)
+		if name == "ancestors" then return new CmdAncestors(model, mainmodule, filter)
+		if name == "children" then return new CmdChildren(model, mainmodule, filter)
+		if name == "descendants" then return new CmdDescendants(model, mainmodule, filter)
+		if name == "param" then return new CmdParam(model, filter)
+		if name == "return" then return new CmdReturn(model, filter)
+		if name == "new" then return new CmdNew(model, modelbuilder, filter)
+		if name == "call" then return new CmdCall(model, modelbuilder, filter)
 		# CmdGraph
-		if name == "uml" then return new CmdUML(view)
-		if name == "graph" then return new CmdInheritanceGraph(view)
+		if name == "uml" then return new CmdUML(model, mainmodule, filter)
+		if name == "graph" then return new CmdInheritanceGraph(model, mainmodule, filter)
 		# CmdModel
-		if name == "list" then return new CmdModelEntities(view)
-		if name == "random" then return new CmdRandomEntities(view)
+		if name == "list" then return new CmdModelEntities(model, filter)
+		if name == "random" then return new CmdRandomEntities(model, filter)
 		# Ini
-		if name == "ini-desc" then return new CmdIniDescription(view)
-		if name == "ini-git" then return new CmdIniGitUrl(view)
-		if name == "ini-issues" then return new CmdIniIssuesUrl(view)
-		if name == "ini-license" then return new CmdIniLicense(view)
-		if name == "ini-maintainer" then return new CmdIniMaintainer(view)
-		if name == "ini-contributors" then return new CmdIniContributors(view)
-		if name == "license-file" then return new CmdLicenseFile(view)
-		if name == "license-content" then return new CmdLicenseFileContent(view)
-		if name == "contrib-file" then return new CmdContribFile(view)
-		if name == "contrib-content" then return new CmdContribFileContent(view)
-		if name == "git-clone" then return new CmdIniCloneCommand(view)
+		if name == "ini-desc" then return new CmdIniDescription(model, filter)
+		if name == "ini-git" then return new CmdIniGitUrl(model, filter)
+		if name == "ini-issues" then return new CmdIniIssuesUrl(model, filter)
+		if name == "ini-license" then return new CmdIniLicense(model, filter)
+		if name == "ini-maintainer" then return new CmdIniMaintainer(model, filter)
+		if name == "ini-contributors" then return new CmdIniContributors(model, filter)
+		if name == "license-file" then return new CmdLicenseFile(model, filter)
+		if name == "license-content" then return new CmdLicenseFileContent(model, filter)
+		if name == "contrib-file" then return new CmdContribFile(model, filter)
+		if name == "contrib-content" then return new CmdContribFileContent(model, filter)
+		if name == "git-clone" then return new CmdIniCloneCommand(model, filter)
 		# CmdMain
-		if name == "mains" then return new CmdMains(view)
-		if name == "main-compile" then return new CmdMainCompile(view)
-		if name == "main-run" then return new CmdManSynopsis(view)
-		if name == "main-opts" then return new CmdManOptions(view)
-		if name == "testing" then return new CmdTesting(view)
+		if name == "mains" then return new CmdMains(model, filter)
+		if name == "main-compile" then return new CmdMainCompile(model, filter)
+		if name == "main-run" then return new CmdManSynopsis(model, filter)
+		if name == "main-opts" then return new CmdManOptions(model, filter)
+		if name == "testing" then return new CmdTesting(model, filter)
 		# CmdCatalog
 		var catalog = self.catalog
 		if catalog != null then
-			if name == "catalog" then return new CmdCatalogPackages(view, catalog)
-			if name == "stats" then return new CmdCatalogStats(view, catalog)
-			if name == "tags" then return new CmdCatalogTags(view, catalog)
-			if name == "tag" then return new CmdCatalogTag(view, catalog)
-			if name == "person" then return new CmdCatalogPerson(view, catalog)
-			if name == "contrib" then return new CmdCatalogContributing(view, catalog)
-			if name == "maintain" then return new CmdCatalogMaintaining(view, catalog)
-			if name == "search" then return new CmdCatalogSearch(view, catalog)
+			if name == "catalog" then return new CmdCatalogPackages(model, catalog, filter)
+			if name == "stats" then return new CmdCatalogStats(model, catalog, filter)
+			if name == "tags" then return new CmdCatalogTags(model, catalog, filter)
+			if name == "tag" then return new CmdCatalogTag(model, catalog, filter)
+			if name == "person" then return new CmdCatalogPerson(model, catalog, filter)
+			if name == "contrib" then return new CmdCatalogContributing(model, catalog, filter)
+			if name == "maintain" then return new CmdCatalogMaintaining(model, catalog, filter)
+			if name == "search" then return new CmdCatalogSearch(model, catalog, filter)
 		else
-			if name == "search" then return new CmdSearch(view)
+			if name == "search" then return new CmdSearch(model, filter)
 		end
 		return null
 	end

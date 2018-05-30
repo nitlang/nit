@@ -28,7 +28,7 @@ import catalog
 
 # Documentation command
 #
-# An abstract command that works on a ModelView.
+# An abstract command that works on a Model.
 #
 # Since they are used by a wide variety of clients, initialization of DocCommands
 # works in two steps.
@@ -53,10 +53,11 @@ import catalog
 # See `init_command` for more details about the returned statuses.
 abstract class DocCommand
 
-	# ModelView
-	#
-	# Set of entities and filters used to retrieve data from the model.
-	var view: ModelView
+	# Model to retrieve data for
+	var model: Model
+
+	# ModelFilter to apply if any
+	var filter: nullable ModelFilter
 
 	# Initialize the command
 	#
@@ -140,11 +141,11 @@ class CmdEntity
 		var mentity_name = self.mentity_name
 		if mentity_name == null or mentity_name.is_empty then return new ErrorMEntityNoName
 
-		mentity = view.mentity_by_full_name(mentity_name)
+		mentity = model.mentity_by_full_name(mentity_name)
 		if mentity == null then
-			var mentities = view.mentities_by_name(mentity_name)
+			var mentities = model.mentities_by_name(mentity_name)
 			if mentities.is_empty then
-				var suggest = view.find(mentity_name, 3)
+				var suggest = model.find(mentity_name, 3)
 				return new ErrorMEntityNotFound(mentity_name, suggest)
 			else if mentities.length > 1 then
 				return new ErrorMEntityConflict(mentity_name, mentities)
@@ -312,7 +313,7 @@ abstract class CmdEntityList
 	super CmdEntity
 	super CmdEntities
 
-	autoinit(view, mentity, mentity_name, limit, page, count, max)
+	autoinit(model, filter, mentity, mentity_name, limit, page, count, max)
 
 	redef fun init_command do
 		var res = init_mentity

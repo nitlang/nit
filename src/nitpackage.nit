@@ -328,9 +328,8 @@ redef class MPackage
 	private fun check_makefile(toolcontext: ToolContext, mainmodule: MModule) do
 		var model = toolcontext.modelbuilder.model
 		var filter = new ModelFilter(accept_example = false, accept_test = false)
-		var view = new ModelView(model, mainmodule, filter)
 
-		var cmd_bin = new CmdMains(view, mentity = self)
+		var cmd_bin = new CmdMains(model, filter, mentity = self)
 		var res_bin = cmd_bin.init_command
 		if not res_bin isa CmdSuccess then return
 
@@ -346,13 +345,12 @@ redef class MPackage
 
 	private fun gen_makefile(model: Model, mainmodule: MModule): nullable String do
 		var filter = new ModelFilter(accept_example = false, accept_test = false)
-		var view = new ModelView(model, mainmodule, filter)
 
 		var pkg_path = package_path.as(not null)
 		var makefile_path = makefile_path.as(not null)
 
 		var bins = new Array[String]
-		var cmd_bin = new CmdMains(view, mentity = self)
+		var cmd_bin = new CmdMains(model, filter, mentity = self)
 		var res_bin = cmd_bin.init_command
 		if res_bin isa CmdSuccess then
 			for mmodule in cmd_bin.results.as(not null) do
@@ -400,9 +398,7 @@ redef class MPackage
 	private fun check_man(toolcontext: ToolContext, mainmodule: MModule) do
 		var model = toolcontext.modelbuilder.model
 		var filter = new ModelFilter(accept_example = false, accept_test = false)
-		var view = new ModelView(model, mainmodule, filter)
-
-		var cmd = new CmdMains(view, mentity = self)
+		var cmd = new CmdMains(model, filter, mentity = self)
 		var res = cmd.init_command
 		if not res isa CmdSuccess then return
 
@@ -415,9 +411,7 @@ redef class MPackage
 	private fun gen_man(toolcontext: ToolContext, mainmodule: MModule) do
 		var model = toolcontext.modelbuilder.model
 		var filter = new ModelFilter(accept_example = false, accept_test = false)
-		var view = new ModelView(model, mainmodule, filter)
-
-		var cmd = new CmdMains(view, mentity = self)
+		var cmd = new CmdMains(model, filter, mentity = self)
 		var res = cmd.init_command
 		if not res isa CmdSuccess then return
 

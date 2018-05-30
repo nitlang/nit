@@ -154,15 +154,15 @@ class ReadmeMdProcessor
 	# Find mentities matching `query`.
 	fun find_mentities(query: String): Array[MEntity] do
 		# search MEntities by full_name
-		var mentity = phase.doc.mentity_by_full_name(query)
+		var mentity = phase.doc.model.mentity_by_full_name(query)
 		if mentity != null then return [mentity]
 		# search MEntities by name
-		return phase.doc.mentities_by_name(query)
+		return phase.doc.model.mentities_by_name(query)
 	end
 
 	# Suggest mentities based on `query`.
 	fun suggest_mentities(query: String): Array[MEntity] do
-		return phase.doc.find(query, 3)
+		return phase.doc.model.find(query, 3)
 	end
 
 	# Display a warning message with suggestions.
@@ -274,7 +274,7 @@ redef class ListCommand
 		if mentity isa MModule then
 			v.add_article new MEntitiesListArticle("Classes", null, mentity.mclassdefs)
 		else if mentity isa MClass then
-			var mprops = mentity.collect_intro_mproperties(v.phase.doc)
+			var mprops = mentity.collect_intro_mproperties(v.phase.doc.filter)
 			v.add_article new MEntitiesListArticle("Methods", null, mprops.to_a)
 		else if mentity isa MClassDef then
 			v.add_article new MEntitiesListArticle("Methods", null, mentity.mpropdefs)

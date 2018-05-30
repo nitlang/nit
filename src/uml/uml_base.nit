@@ -21,9 +21,12 @@ import model::model_collect
 # UML model builder.
 class UMLModel
 
-	# Model view
-	var view: ModelView
+	# Model to access mentities
+	var model: Model
 
 	# Main module used for linearization.
 	var mainmodule: MModule
+
+	# Filters to apply on model if any
+	var filter: nullable ModelFilter
 end

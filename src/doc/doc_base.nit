@@ -17,7 +17,7 @@ module doc_base
 
 import toolcontext
 import model_ext
-import model::model_views
+import model::model_collect
 
 # The model of a Nitdoc documentation.
 #
@@ -26,9 +26,15 @@ import model::model_views
 # The model is populated through `DocPhase` to be constructed.
 # It is a placeholder to share data between each phase.
 class DocModel
-	super ModelView
 
-	autoinit model, mainmodule, filter
+	# Model to generate the documentation for
+	var model: Model
+
+	# Main module of the sources behing documented
+	var mainmodule: MModule
+
+	# Model filters to apply
+	var filter: ModelFilter
 
 	# `DocPage` composing the documentation associated to their ids.
 	#

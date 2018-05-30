@@ -54,7 +54,7 @@ redef class MModulePage
 		# collect importation
 		for dep in mentity.in_importation.greaters do
 			if dep == mentity then continue
-			if not doc.mmodules.has(dep) then continue
+			if not doc.filter.accept_mentity(dep) then continue
 			imports.add dep
 		end
 		# FIXME avoid diff
@@ -63,21 +63,21 @@ redef class MModulePage
 			imports.clear
 			for dep in mentity.in_importation.direct_greaters do
 				if dep == mentity then continue
-				if not doc.mmodules.has(dep) then continue
+				if not doc.filter.accept_mentity(dep) then continue
 				imports.add dep
 			end
 		end
 		# collect clients
 		for dep in mentity.in_importation.smallers do
 			if dep == mentity then continue
-			if not doc.mmodules.has(dep) then continue
+			if not doc.filter.accept_mentity(dep) then continue
 			clients.add dep
 		end
 		if clients.length > 10 then
 			clients.clear
 			for dep in mentity.in_importation.direct_smallers do
 				if dep == mentity then continue
-				if not doc.mmodules.has(dep) then continue
+				if not doc.filter.accept_mentity(dep) then continue
 				clients.add dep
 			end
 		end
@@ -96,10 +96,10 @@ redef class MModulePage
 	# Build the POSet of importation from a list of `mmodules`.
 	private fun build_importation_poset(doc: DocModel, mmodules: Set[MModule]): POSet[MModule] do
 		for mmodule in mmodules do
-			if not doc.mmodules.has(mmodule) then continue
+			if not doc.filter.accept_mentity(mmodule) then continue
 			poset.add_node mmodule
 			for omodule in mmodules do
-				if not doc.mmodules.has(omodule) then continue
+				if not doc.filter.accept_mentity(omodule) then continue
 				poset.add_node mmodule
 				if mmodule.in_importation < omodule then
 					poset.add_edge(mmodule, omodule)
@@ -136,23 +136,23 @@ redef class MClassPage
 		var h = mentity.in_hierarchy(doc.mainmodule)
 		# parents
 		for mclass in h.direct_greaters do
-			if doc.mclasses.has(mclass) then parents.add mclass
+			if doc.filter.accept_mentity(mclass) then parents.add mclass
 		end
 		# ancestors
 		for mclass in h.greaters do
 			if mclass == mentity then continue
-			if not doc.mclasses.has(mclass) then continue
+			if not doc.filter.accept_mentity(mclass) then continue
 			if parents.has(mclass) then continue
 			ancestors.add mclass
 		end
 		# children
 		for mclass in h.direct_smallers do
-			if doc.mclasses.has(mclass) then children.add mclass
+			if doc.filter.accept_mentity(mclass) then children.add mclass
 		end
 		# descendants
 		for mclass in h.smallers do
 			if mclass == mentity then continue
-			if not doc.mclasses.has(mclass) then continue
+			if not doc.filter.accept_mentity(mclass) then continue
 			if children.has(mclass) then continue
 			descendants.add mclass
 		end

@@ -38,28 +38,28 @@ private class InheritanceMetricsPhase
 		out.mkdir
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = new ModelView(model, mainmodule)
+		var filter = new ModelFilter(min_visibility = private_visibility)
 
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
 		var hmetrics = new MetricSet
-		hmetrics.register(new MDUI(model_view))
-		hmetrics.register(new MDUIC(model_view))
-		hmetrics.register(new MDUII(model_view))
-		hmetrics.register(new MIF(model_view))
-		hmetrics.register(new MIFC(model_view))
-		hmetrics.register(new MIFI(model_view))
+		hmetrics.register(new MDUI(model, mainmodule))
+		hmetrics.register(new MDUIC(model, mainmodule))
+		hmetrics.register(new MDUII(model, mainmodule))
+		hmetrics.register(new MIF(model, mainmodule))
+		hmetrics.register(new MIFC(model, mainmodule))
+		hmetrics.register(new MIFI(model, mainmodule))
 
 		var cmetrics = new MetricSet
-		cmetrics.register(new CNOAC(model_view))
-		cmetrics.register(new CNOPC(model_view))
-		cmetrics.register(new CNOCC(model_view))
-		cmetrics.register(new CNODC(model_view))
-		cmetrics.register(new CNOPI(model_view))
-		cmetrics.register(new CNOCI(model_view))
-		cmetrics.register(new CNODI(model_view))
-		cmetrics.register(new CDITC(model_view))
-		cmetrics.register(new CDITI(model_view))
+		cmetrics.register(new CNOAC(model, mainmodule, filter))
+		cmetrics.register(new CNOPC(model, mainmodule, filter))
+		cmetrics.register(new CNOCC(model, mainmodule, filter))
+		cmetrics.register(new CNODC(model, mainmodule, filter))
+		cmetrics.register(new CNOPI(model, mainmodule, filter))
+		cmetrics.register(new CNOCI(model, mainmodule, filter))
+		cmetrics.register(new CNODI(model, mainmodule, filter))
+		cmetrics.register(new CDITC(model, mainmodule, filter))
+		cmetrics.register(new CDITI(model, mainmodule, filter))
 
 		var mmodules = new HashSet[MModule]
 		var mclasses = new HashSet[MClass]
@@ -116,7 +116,7 @@ class MDUI
 		for mmodule in mmodules do
 			var count = 0
 			for mclass in mmodule.intro_mclasses do
-				if mclass.in_hierarchy(model_view.mainmodule).greaters.length > 2 then count += 1
+				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
 			end
 			if mmodule.intro_mclasses.is_empty then
 				values[mmodule] = 0.0
@@ -142,7 +142,7 @@ class MDUIC
 			var nb = 0
 			for mclass in mmodule.intro_mclasses do
 				if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
-					if mclass.in_hierarchy(model_view.mainmodule).greaters.length > 2 then count += 1
+					if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
 				end
 				nb += 1
 			end
@@ -170,7 +170,7 @@ class MDUII
 			var nb = 0
 			for mclass in mmodule.intro_mclasses do
 				if mclass.kind == interface_kind then
-					if mclass.in_hierarchy(model_view.mainmodule).greaters.length > 2 then count += 1
+					if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
 				end
 				nb += 1
 			end
@@ -196,7 +196,7 @@ class MIF
 		for mmodule in mmodules do
 			var count = 0
 			for mclass in mmodule.intro_mclasses do
-				if mclass.in_hierarchy(model_view.mainmodule).direct_smallers.length > 0 then count += 1
+				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
 			end
 			if mmodule.intro_mclasses.is_empty then
 				values[mmodule] = 0.0
@@ -222,7 +222,7 @@ class MIFC
 			var nb = 0
 			for mclass in mmodule.intro_mclasses do
 				if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
-					if mclass.in_hierarchy(model_view.mainmodule).direct_smallers.length > 0 then count += 1
+					if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
 				end
 				nb += 1
 			end
@@ -250,7 +250,7 @@ class MIFI
 			var nb = 0
 			for mclass in mmodule.intro_mclasses do
 				if mclass.kind == interface_kind then
-					if mclass.in_hierarchy(model_view.mainmodule).direct_smallers.length > 0 then count += 1
+					if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
 				end
 				nb += 1
 			end
@@ -275,7 +275,7 @@ class CNOAC
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).greaters do
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
 				if parent == mclass then continue
 				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
 					count += 1
@@ -298,7 +298,7 @@ class CNOPC
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).direct_greaters do
+			for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
 				if parent == mclass then continue
 				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
 					count += 1
@@ -321,7 +321,7 @@ class CNOCC
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).direct_smallers do
+			for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
 				if parent == mclass then continue
 				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
 					count += 1
@@ -344,7 +344,7 @@ class CNODC
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).smallers do
+			for parent in mclass.in_hierarchy(mainmodule).smallers do
 				if parent == mclass then continue
 				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
 					count += 1
@@ -367,7 +367,7 @@ class CNOAA
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).greaters do
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
 				if parent == mclass then continue
 				if parent.kind == abstract_kind then
 					count += 1
@@ -390,7 +390,7 @@ class CNOAI
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).greaters do
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
 				if parent == mclass then continue
 				if parent.kind == interface_kind then
 					count += 1
@@ -413,7 +413,7 @@ class CNOPI
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).direct_greaters do
+			for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
 				if parent == mclass then continue
 				if parent.kind == interface_kind then
 					count += 1
@@ -436,7 +436,7 @@ class CNOCI
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).direct_smallers do
+			for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
 				if parent == mclass then continue
 				if parent.kind == interface_kind then
 					count += 1
@@ -459,7 +459,7 @@ class CNODI
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
-			for parent in mclass.in_hierarchy(model_view.mainmodule).smallers do
+			for parent in mclass.in_hierarchy(mainmodule).smallers do
 				if parent == mclass then continue
 				if parent.kind == interface_kind then
 					count += 1
@@ -481,7 +481,7 @@ class CDITC
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.ditc(model_view.mainmodule)
+			values[mclass] = mclass.ditc(mainmodule)
 		end
 	end
 end
@@ -497,7 +497,7 @@ class CDITI
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.diti(model_view.mainmodule)
+			values[mclass] = mclass.diti(mainmodule)
 		end
 	end
 end

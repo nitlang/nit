@@ -31,11 +31,20 @@ class TestCommands
 	# Default is `$NIT_DIR/tests/test_prog`.
 	var test_src: String = test_path / "../../../../tests/test_prog" is lazy
 
-	# ModelView used for tests
-	var test_view: ModelView is noinit
+	# Model used for tests
+	var test_model: Model is noinit
 
 	# ModelBuilder used for tests
 	var test_builder: ModelBuilder is noinit
+
+	# Mainmodule used for tests
+	var test_main: MModule is noinit
+
+	# Filters used for tests
+	var test_filter = new ModelFilter(
+		private_visibility,
+		accept_fictive = false,
+		accept_test = false)
 
 	# Initialize test variables
 	#
@@ -54,13 +63,8 @@ class TestCommands
 		toolcontext.run_global_phases(mmodules)
 		var mainmodule = toolcontext.make_main_module(mmodules)
 
-		# Build index
-		var filters = new ModelFilter(
-			private_visibility,
-			accept_fictive = false,
-			accept_test = true)
-
+		test_main = mainmodule
+		test_model = model
 		test_builder = modelbuilder
-		test_view = new ModelView(model, mainmodule, filters)
 	end
 end

@@ -46,8 +46,7 @@ private class UMLPhase
 			filters.min_visibility = protected_visibility
 		end
 
-		var view = new ModelView(mainmodule.model, mainmodule, filters)
-		var d = new UMLModel(view, mainmodule)
+		var d = new UMLModel(toolcontext.modelbuilder.model, mainmodule, filters)
 		if toolcontext.opt_gen.value == 0 then
 			print d.generate_class_uml.write_to_string
 		else if toolcontext.opt_gen.value == 1 then

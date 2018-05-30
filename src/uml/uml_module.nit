@@ -52,7 +52,7 @@ redef class MModule
 		t.add "subgraph cluster{name} \{\n"
 		t.add "label = \"{name}\"\n"
 		for i in mclassdefs do
-			if not model.view.accept_mentity(i) then continue
+			if not model.filter.accept_mentity(i) then continue
 			t.add i.tpl_module(model)
 		end
 		t.add "\}\n"
@@ -96,14 +96,14 @@ redef class MClassDef
 		t.add "|"
 		for i in mpropdefs do
 			if not i isa MAttributeDef then continue
-			if not model.view.accept_mentity(i) then continue
+			if not model.filter.accept_mentity(i) then continue
 			t.add i.tpl_module(model)
 			t.add "\\l"
 		end
 		t.add "|"
 		for i in mpropdefs do
 			if not i isa MMethodDef then continue
-			if not model.view.accept_mentity(i) then continue
+			if not model.filter.accept_mentity(i) then continue
 			t.add i.tpl_module(model)
 			t.add "\\l"
 		end
