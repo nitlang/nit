@@ -396,6 +396,7 @@ interface SimpleCollection[E]
 	fun add(item: E) is abstract
 
 	# Add each item of `coll`.
+	#
 	#     var a = [1,2]
 	#     a.add_all([3..5])
 	#     assert a.has(4)  == true
