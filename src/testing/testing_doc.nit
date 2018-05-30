@@ -58,8 +58,10 @@ class NitUnitExecutor
 	# Is used because a new code-block might just be added to it.
 	var last_docunit: nullable DocUnit = null
 
+	# Unit class name in XML output
 	var xml_classname: String is noautoinit
 
+	# Unit name in xml output
 	var xml_name: String is noautoinit
 
 	# The entry point for a new `ndoc` node
@@ -79,11 +81,10 @@ class NitUnitExecutor
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
-	fun show_status
-	do
-		toolcontext.show_unit_status(name, docunits)
-	end
+	# Display current testing status
+	fun show_status do toolcontext.show_unit_status(name, docunits)
 
+	# Update display when a test case is done
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
@@ -274,6 +275,7 @@ class NitUnitExecutor
 	# `file` should be a valid filepath for a Nit source file.
 	private fun create_unitfile(file: String): Writer
 	do
+		var mmodule = self.mmodule
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
 		var f
@@ -292,11 +294,12 @@ class NitUnitExecutor
 	# Can terminate the program if the compiler is not found
 	private fun compile_unitfile(file: String): Int
 	do
+		var mmodule = self.mmodule
 		var nitc = toolcontext.find_nitc
 		var opts = new Array[String]
 		if mmodule != null then
 			# FIXME playing this way with the include dir is not safe nor robust
-			opts.add "-I {mmodule.filepath.dirname}"
+			opts.add "-I {mmodule.filepath.as(not null).dirname}"
 		end
 		var cmd = "{nitc} --ignore-visibility --no-color -q '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = toolcontext.safe_exec(cmd)
@@ -639,7 +642,7 @@ redef class ModelBuilder
 	fun test_mdoc(mdoc: MDoc): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")
-		var file = mdoc.location.file.filename
+		var file = mdoc.location.file.as(not null).filename
 
 		toolcontext.info("nitunit: doc-unit file {file}", 2)
 
