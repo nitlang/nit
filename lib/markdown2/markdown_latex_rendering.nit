@@ -16,6 +16,7 @@
 module markdown_latex_rendering
 
 import markdown_rendering
+import markdown_github
 
 # Markdown document renderer to LaTeX
 class LatexRenderer
@@ -400,5 +401,23 @@ end
 redef class MdText
 	redef fun render_latex(v) do
 		v.add_text literal
+	end
+end
+
+# Github mode
+
+redef class MdStrike
+	redef fun render_latex(v) do
+		v.add_raw "\\sout\{"
+		visit_all(v)
+		v.add_raw "\}"
+	end
+end
+
+redef class MdSuper
+	redef fun render_latex(v) do
+		v.add_raw "\\textsuperscript\{"
+		visit_all(v)
+		v.add_raw "\}"
 	end
 end

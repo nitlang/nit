@@ -16,6 +16,7 @@
 module markdown_man_rendering
 
 import markdown_rendering
+import markdown_github
 
 # Markdown document renderer to Manpage
 class ManRenderer
@@ -228,5 +229,15 @@ end
 redef class MdText
 	redef fun render_man(v) do
 		v.add literal
+	end
+end
+
+# Github
+
+redef class MdStrike
+	redef fun render_man(v) do
+		v.add "[STRIKEOUT:"
+		visit_all(v)
+		v.add "]"
 	end
 end

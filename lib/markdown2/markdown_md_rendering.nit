@@ -16,6 +16,7 @@
 module markdown_md_rendering
 
 import markdown_rendering
+import markdown_github
 
 # Markdown document renderer to Markdown
 class MarkdownRenderer

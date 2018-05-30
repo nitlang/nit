@@ -16,6 +16,7 @@
 module markdown_html_rendering
 
 import markdown_rendering
+import markdown_github
 
 # Markdown document renderer to HTML
 class HtmlRenderer
@@ -420,5 +421,23 @@ end
 redef class MdText
 	redef fun render_html(v) do
 		v.add_text literal
+	end
+end
+
+# Github mode
+
+redef class MdStrike
+	redef fun render_html(v) do
+		v.add_raw "<del>"
+		visit_all(v)
+		v.add_raw "</del>"
+	end
+end
+
+redef class MdSuper
+	redef fun render_html(v) do
+		v.add_raw "<sup>"
+		visit_all(v)
+		v.add_raw "</sup>"
 	end
 end
