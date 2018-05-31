@@ -20,6 +20,7 @@
 module http_response
 
 import serialization
+private import template
 
 # A response to send over HTTP
 class HttpResponse
@@ -77,17 +78,18 @@ class HttpResponse
 	end
 
 	# Get this reponse as a string according to HTTP protocol
-	redef fun to_s
+	fun render: Writable
 	do
 		finalize
 
-		var buf = new FlatBuffer
-		buf.append("{http_version} {status_code} {status_message or else ""}\r\n")
+		var buf = new Template
+		buf.add("{http_version} {status_code} {status_message or else ""}\r\n")
 		for key, value in header do
-			buf.append("{key}: {value}\r\n")
+			buf.add("{key}: {value}\r\n")
 		end
-		buf.append("\r\n{body}")
-		return buf.to_s
+		buf.add("\r\n")
+		buf.add body
+		return buf
 	end
 end
 

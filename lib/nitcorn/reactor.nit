@@ -91,7 +91,7 @@ class HttpServer
 	# Send back `response` to the client
 	fun respond(response: HttpResponse)
 	do
-		write response.to_s
+		response.render.write_to(self)
 		for path in response.files do write_file path
 	end
 end
