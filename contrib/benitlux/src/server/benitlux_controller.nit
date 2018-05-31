@@ -77,7 +77,7 @@ class BenitluxSubscriptionAction
 		end
 
 		var response = new HttpResponse(200)
-		response.body = template.write_to_string
+		response.body = template
 		return response
 	end
 end

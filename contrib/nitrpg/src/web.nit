@@ -50,7 +50,7 @@ class RpgAction
 		var page = new NitRpgPage(root_url)
 		var error = new ErrorPanel(msg)
 		page.flow_panels.add error
-		rsp.body = page.write_to_string
+		rsp.body = page
 		return rsp
 	end
 
@@ -95,7 +95,7 @@ class RpgHome
 		page = new NitRpgPage(root_url)
 		page.side_panels.add new GamesShortListPanel(root_url, games)
 		page.flow_panels.add new MDPanel(readme)
-		response.body = page.write_to_string
+		response.body = page
 		return response
 	end
 
@@ -126,7 +126,7 @@ class ListGames
 		page.breadcrumbs = new Breadcrumbs
 		page.breadcrumbs.add_link(root_url / "games", "games")
 		page.flow_panels.add new GamesListPanel(root_url, games)
-		response.body = page.write_to_string
+		response.body = page
 		return response
 	end
 end
@@ -196,7 +196,7 @@ class RepoHome
 		page.flow_panels.add new PodiumPanel(game)
 		page.flow_panels.add new EventListPanel(game, list_limit, list_from)
 		page.flow_panels.add new AchievementsListPanel(game)
-		rsp.body = page.write_to_string
+		rsp.body = page
 		return rsp
 	end
 end
@@ -210,7 +210,7 @@ class ListPlayers
 		if is_response_error(rsp) then return rsp
 		page.breadcrumbs.add_link(game.url / "players", "players")
 		page.flow_panels.add new ListPlayersPanel(game)
-		rsp.body = page.write_to_string
+		rsp.body = page
 		return rsp
 	end
 end
@@ -239,7 +239,7 @@ class PlayerHome
 		page.flow_panels.add new PlayerWorkPanel(game, player)
 		page.flow_panels.add new AchievementsListPanel(player)
 		page.flow_panels.add new EventListPanel(player, list_limit, list_from)
-		rsp.body = page.write_to_string
+		rsp.body = page
 		return rsp
 	end
 end
@@ -253,7 +253,7 @@ class ListAchievements
 		if is_response_error(rsp) then return rsp
 		page.breadcrumbs.add_link(game.url / "achievements", "achievements")
 		page.flow_panels.add new AchievementsListPanel(game)
-		rsp.body = page.write_to_string
+		rsp.body = page
 		return rsp
 	end
 end
@@ -278,7 +278,7 @@ class AchievementHome
 		page.breadcrumbs.add_link(achievement.url, achievement.name)
 		page.flow_panels.add new AchievementPanel(achievement)
 		page.flow_panels.add new EventListPanel(achievement, list_limit, list_from)
-		rsp.body = page.write_to_string
+		rsp.body = page
 		return rsp
 	end
 end
