@@ -568,7 +568,7 @@ redef class MClassType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		res.href = v.hrefto(self)
+		res.href = v.hrefto(mclass.intro)
 		if not v.show_infobox then return res
 		res.new_field("class").add mclass.intro.linkto(v)
 		add_doc_to_infobox(res)
