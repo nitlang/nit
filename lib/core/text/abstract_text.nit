@@ -34,34 +34,44 @@ abstract class Text
 
 	# Gets a view on the chars of the Text object
 	#
-	#     assert "hello".chars.to_a == ['h', 'e', 'l', 'l', 'o']
+	# ~~~
+	# assert "hello".chars.to_a == ['h', 'e', 'l', 'l', 'o']
+	# ~~~
 	fun chars: SequenceRead[Char] is abstract
 
 	# Gets a view on the bytes of the Text object
 	#
-	#     assert "hello".bytes.to_a == [104u8, 101u8, 108u8, 108u8, 111u8]
+	# ~~~
+	# assert "hello".bytes.to_a == [104u8, 101u8, 108u8, 108u8, 111u8]
+	# ~~~
 	fun bytes: SequenceRead[Byte] is abstract
 
 	# Number of characters contained in self.
 	#
-	#     assert "12345".length == 5
-	#     assert "".length == 0
-	#     assert "あいうえお".length == 5
+	# ~~~
+	# assert "12345".length == 5
+	# assert "".length == 0
+	# assert "あいうえお".length == 5
+	# ~~~
 	fun length: Int is abstract
 
 	# Number of bytes in `self`
 	#
-	#     assert "12345".byte_length == 5
-	#     assert "あいうえお".byte_length == 15
+	# ~~~
+	# assert "12345".byte_length == 5
+	# assert "あいうえお".byte_length == 15
+	# ~~~
 	fun byte_length: Int is abstract
 
 	# Create a substring.
 	#
-	#     assert "abcd".substring(1, 2)      ==  "bc"
-	#     assert "abcd".substring(-1, 2)     ==  "a"
-	#     assert "abcd".substring(1, 0)      ==  ""
-	#     assert "abcd".substring(2, 5)      ==  "cd"
-	#     assert "あいうえお".substring(1,3) ==  "いうえ"
+	# ~~~
+	# assert "abcd".substring(1, 2)      ==  "bc"
+	# assert "abcd".substring(-1, 2)     ==  "a"
+	# assert "abcd".substring(1, 0)      ==  ""
+	# assert "abcd".substring(2, 5)      ==  "cd"
+	# assert "あいうえお".substring(1,3) ==  "いうえ"
+	# ~~~
 	#
 	# A `from` index < 0 will be replaced by 0.
 	# Unless a `count` value is > 0 at the same time.
@@ -73,8 +83,10 @@ abstract class Text
 
 	# Is the current Text empty (== "")
 	#
-	#     assert "".is_empty
-	#     assert not "foo".is_empty
+	# ~~~
+	# assert "".is_empty
+	# assert not "foo".is_empty
+	# ~~~
 	fun is_empty: Bool do return self.length == 0
 
 	# Returns an empty Text of the right type
@@ -87,37 +99,29 @@ abstract class Text
 	fun to_buffer: Buffer is abstract
 
 	# Gets the first char of the Text
-	#
-	# DEPRECATED : Use self.chars.first instead
 	fun first: Char do return self.chars[0]
 
 	# Access a character at `index` in the string.
 	#
-	#     assert "abcd"[2]         == 'c'
-	#
-	# DEPRECATED : Use self.chars.[] instead
+	# ~~~
+	# assert "abcd"[2]         == 'c'
+	# ~~~
 	fun [](index: Int): Char do return self.chars[index]
 
 	# Gets the index of the first occurence of 'c'
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.index_of instead
 	fun index_of(c: Char): Int
 	do
 		return index_of_from(c, 0)
 	end
 
 	# Gets the last char of self
-	#
-	# DEPRECATED : Use self.chars.last instead
 	fun last: Char do return self.chars[length-1]
 
 	# Gets the index of the first occurence of ´c´ starting from ´pos´
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.index_of_from instead
 	fun index_of_from(c: Char, pos: Int): Int
 	do
 		var iter = self.chars.iterator_from(pos)
@@ -131,8 +135,6 @@ abstract class Text
 	# Gets the last index of char ´c´
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.last_index_of instead
 	fun last_index_of(c: Char): Int
 	do
 		return last_index_of_from(c, length - 1)
@@ -143,24 +145,24 @@ abstract class Text
 
 	# The index of the last occurrence of an element starting from pos (in reverse order).
 	#
-	#     var s = "/etc/bin/test/test.nit"
-	#     assert s.last_index_of_from('/', s.length-1) == 13
-	#     assert s.last_index_of_from('/', 12)         == 8
+	# ~~~
+	# var s = "/etc/bin/test/test.nit"
+	# assert s.last_index_of_from('/', s.length-1) == 13
+	# assert s.last_index_of_from('/', 12)         == 8
+	# ~~~
 	#
 	# Returns -1 if not found
-	#
-	# DEPRECATED : Use self.chars.last_index_of_from instead
 	fun last_index_of_from(item: Char, pos: Int): Int do return chars.last_index_of_from(item, pos)
 
 	# Concatenates `o` to `self`
 	#
-	#     assert "hello" + "world"  == "helloworld"
-	#     assert "" + "hello" + ""  == "hello"
+	# ~~~
+	# assert "hello" + "world"  == "helloworld"
+	# assert "" + "hello" + ""  == "hello"
+	# ~~~
 	fun +(o: Text): SELFTYPE is abstract
 
 	# Gets an iterator on the chars of self
-	#
-	# DEPRECATED : Use self.chars.iterator instead
 	fun iterator: Iterator[Char]
 	do
 		return self.chars.iterator
@@ -168,15 +170,15 @@ abstract class Text
 
 
 	# Gets an Array containing the chars of self
-	#
-	# DEPRECATED : Use self.chars.to_a instead
 	fun to_a: Array[Char] do return chars.to_a
 
 	# Create a substring from `self` beginning at the `from` position
 	#
-	#     assert "abcd".substring_from(1)    ==  "bcd"
-	#     assert "abcd".substring_from(-1)   ==  "abcd"
-	#     assert "abcd".substring_from(2)    ==  "cd"
+	# ~~~
+	# assert "abcd".substring_from(1)    ==  "bcd"
+	# assert "abcd".substring_from(-1)   ==  "abcd"
+	# assert "abcd".substring_from(2)    ==  "cd"
+	# ~~~
 	#
 	# As with substring, a `from` index < 0 will be replaced by 0
 	fun substring_from(from: Int): SELFTYPE
@@ -188,8 +190,10 @@ abstract class Text
 
 	# Does self have a substring `str` starting from position `pos`?
 	#
-	#     assert "abcd".has_substring("bc",1)	     ==  true
-	#     assert "abcd".has_substring("bc",2)	     ==  false
+	# ~~~
+	# assert "abcd".has_substring("bc",1)	     ==  true
+	# assert "abcd".has_substring("bc",2)	     ==  false
+	# ~~~
 	#
 	# Returns true iff all characters of `str` are presents
 	# at the expected index in `self.`
@@ -198,13 +202,17 @@ abstract class Text
 	#
 	# This means that all characters of `str` need to be inside `self`.
 	#
-	#     assert "abcd".has_substring("xab", -1)         == false
-	#     assert "abcd".has_substring("cdx", 2)          == false
+	# ~~~
+	# assert "abcd".has_substring("xab", -1)         == false
+	# assert "abcd".has_substring("cdx", 2)          == false
+	# ~~~
 	#
 	# And that the empty string is always a valid substring.
 	#
-	#     assert "abcd".has_substring("", 2)             == true
-	#     assert "abcd".has_substring("", 200)           == true
+	# ~~~
+	# assert "abcd".has_substring("", 2)             == true
+	# assert "abcd".has_substring("", 200)           == true
+	# ~~~
 	fun has_substring(str: String, pos: Int): Bool
 	do
 		if str.is_empty then return true
@@ -222,33 +230,41 @@ abstract class Text
 
 	# Is this string prefixed by `prefix`?
 	#
-	#     assert "abcd".has_prefix("ab")           ==  true
-	#     assert "abcbc".has_prefix("bc")          ==  false
-	#     assert "ab".has_prefix("abcd")           ==  false
+	# ~~~
+	# assert "abcd".has_prefix("ab")           ==  true
+	# assert "abcbc".has_prefix("bc")          ==  false
+	# assert "ab".has_prefix("abcd")           ==  false
+	# ~~~
 	fun has_prefix(prefix: String): Bool do return has_substring(prefix,0)
 
 	# Is this string suffixed by `suffix`?
 	#
-	#     assert "abcd".has_suffix("abc")	     ==  false
-	#     assert "abcd".has_suffix("bcd")	     ==  true
+	# ~~~
+	# assert "abcd".has_suffix("abc")	     ==  false
+	# assert "abcd".has_suffix("bcd")	     ==  true
+	# ~~~
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
 	# Returns `self` as the corresponding integer
 	#
-	#     assert "123".to_i        == 123
-	#     assert "-1".to_i         == -1
-	#     assert "0x64".to_i       == 100
-	#     assert "0b1100_0011".to_i== 195
-	#     assert "--12".to_i       == 12
+	# ~~~
+	# assert "123".to_i        == 123
+	# assert "-1".to_i         == -1
+	# assert "0x64".to_i       == 100
+	# assert "0b1100_0011".to_i== 195
+	# assert "--12".to_i       == 12
+	# ~~~
 	#
 	# REQUIRE: `self`.`is_int`
 	fun to_i: Int is abstract
 
 	# If `self` contains a float, return the corresponding float
 	#
-	#     assert "123".to_f        == 123.0
-	#     assert "-1".to_f         == -1.0
-	#     assert "-1.2e-3".to_f    == -0.0012
+	# ~~~
+	# assert "123".to_f        == 123.0
+	# assert "-1".to_f         == -1.0
+	# assert "-1.2e-3".to_f    == -0.0012
+	# ~~~
 	fun to_f: Float
 	do
 		# Shortcut
@@ -257,7 +273,9 @@ abstract class Text
 
 	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	#
-	#     assert "ff".to_hex == 255
+	# ~~~
+	# assert "ff".to_hex == 255
+	# ~~~
 	fun to_hex(pos, ln: nullable Int): Int do
 		var res = 0
 		if pos == null then pos = 0
@@ -272,22 +290,30 @@ abstract class Text
 
 	# If `self` contains only digits <= '7', return the corresponding integer.
 	#
-	#     assert "714".to_oct == 460
+	# ~~~
+	# assert "714".to_oct == 460
+	# ~~~
 	fun to_oct: Int do return a_to(8)
 
 	# If `self` contains only '0' et '1', return the corresponding integer.
 	#
-	#     assert "101101".to_bin == 45
+	# ~~~
+	# assert "101101".to_bin == 45
+	# ~~~
 	fun to_bin: Int do return a_to(2)
 
 	# If `self` contains only digits '0' .. '9', return the corresponding integer.
 	#
-	#     assert "108".to_dec == 108
+	# ~~~
+	# assert "108".to_dec == 108
+	# ~~~
 	fun to_dec: Int do return a_to(10)
 
 	# If `self` contains only digits and letters, return the corresponding integer in a given base
 	#
-	#     assert "120".a_to(3)     == 15
+	# ~~~
+	# assert "120".a_to(3)     == 15
+	# ~~~
 	fun a_to(base: Int) : Int
 	do
 		var i = 0
@@ -317,12 +343,14 @@ abstract class Text
 
 	# Is this string in a valid numeric format compatible with `to_f`?
 	#
-	#     assert "123".is_numeric  == true
-	#     assert "1.2".is_numeric  == true
-	#     assert "-1.2".is_numeric == true
-	#     assert "-1.23e-2".is_numeric == true
-	#     assert "1..2".is_numeric == false
-	#     assert "".is_numeric     == false
+	# ~~~
+	# assert "123".is_numeric  == true
+	# assert "1.2".is_numeric  == true
+	# assert "-1.2".is_numeric == true
+	# assert "-1.23e-2".is_numeric == true
+	# assert "1..2".is_numeric == false
+	# assert "".is_numeric     == false
+	# ~~~
 	fun is_numeric: Bool
 	do
 		var has_point = false
@@ -345,9 +373,11 @@ abstract class Text
 
 	# Returns `true` if the string contains only Hex chars
 	#
-	#     assert "048bf".is_hex  == true
-	#     assert "ABCDEF".is_hex  == true
-	#     assert "0G".is_hex == false
+	# ~~~
+	# assert "048bf".is_hex  == true
+	# assert "ABCDEF".is_hex  == true
+	# assert "0G".is_hex == false
+	# ~~~
 	fun is_hex: Bool
 	do
 		for i in [0..length[ do
@@ -361,8 +391,10 @@ abstract class Text
 
 	# Returns `true` if the string contains only Binary digits
 	#
-	#     assert "1101100".is_bin  == true
-	#     assert "1101020".is_bin  == false
+	# ~~~
+	# assert "1101100".is_bin  == true
+	# assert "1101020".is_bin  == false
+	# ~~~
 	fun is_bin: Bool do
 		for i in chars do if i != '0' and i != '1' then return false
 		return true
@@ -370,8 +402,10 @@ abstract class Text
 
 	# Returns `true` if the string contains only Octal digits
 	#
-	#     assert "213453".is_oct  == true
-	#     assert "781".is_oct     == false
+	# ~~~
+	# assert "213453".is_oct  == true
+	# assert "781".is_oct     == false
+	# ~~~
 	fun is_oct: Bool do
 		for i in chars do if i < '0' or i > '7' then return false
 		return true
@@ -379,8 +413,10 @@ abstract class Text
 
 	# Returns `true` if the string contains only Decimal digits
 	#
-	#     assert "10839".is_dec == true
-	#     assert "164F".is_dec  == false
+	# ~~~
+	# assert "10839".is_dec == true
+	# assert "164F".is_dec  == false
+	# ~~~
 	fun is_dec: Bool do
 		for i in chars do if i < '0' or i > '9' then return false
 		return true
@@ -388,10 +424,12 @@ abstract class Text
 
 	# Are all letters in `self` upper-case ?
 	#
-	#     assert "HELLO WORLD".is_upper == true
-	#     assert "%$&%!".is_upper       == true
-	#     assert "hello world".is_upper == false
-	#     assert "Hello World".is_upper == false
+	# ~~~
+	# assert "HELLO WORLD".is_upper == true
+	# assert "%$&%!".is_upper       == true
+	# assert "hello world".is_upper == false
+	# assert "Hello World".is_upper == false
+	# ~~~
 	fun is_upper: Bool
 	do
 		for i in [0..length[ do
@@ -403,9 +441,11 @@ abstract class Text
 
 	# Are all letters in `self` lower-case ?
 	#
-	#     assert "hello world".is_lower == true
-	#     assert "%$&%!".is_lower       == true
-	#     assert "Hello World".is_lower == false
+	# ~~~
+	# assert "hello world".is_lower == true
+	# assert "%$&%!".is_lower       == true
+	# assert "Hello World".is_lower == false
+	# ~~~
 	fun is_lower: Bool
 	do
 		for i in [0..length[ do
@@ -417,7 +457,9 @@ abstract class Text
 
 	# Removes the whitespaces at the beginning of self
 	#
-	#     assert " \n\thello \n\t".l_trim == "hello \n\t"
+	# ~~~
+	# assert " \n\thello \n\t".l_trim == "hello \n\t"
+	# ~~~
 	#
 	# `Char::is_whitespace` determines what is a whitespace.
 	fun l_trim: SELFTYPE
@@ -433,7 +475,9 @@ abstract class Text
 
 	# Removes the whitespaces at the end of self
 	#
-	#     assert " \n\thello \n\t".r_trim == " \n\thello"
+	# ~~~
+	# assert " \n\thello \n\t".r_trim == " \n\thello"
+	# ~~~
 	#
 	# `Char::is_whitespace` determines what is a whitespace.
 	fun r_trim: SELFTYPE
@@ -449,17 +493,21 @@ abstract class Text
 
 	# Trims trailing and preceding white spaces
 	#
-	#     assert "  Hello  World !  ".trim   == "Hello  World !"
-	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
+	# ~~~
+	# assert "  Hello  World !  ".trim   == "Hello  World !"
+	# assert "\na\nb\tc\t".trim          == "a\nb\tc"
+	# ~~~
 	#
 	# `Char::is_whitespace` determines what is a whitespace.
 	fun trim: SELFTYPE do return (self.l_trim).r_trim
 
 	# Is the string non-empty but only made of whitespaces?
 	#
-	#     assert " \n\t ".is_whitespace    == true
-	#     assert "  hello  ".is_whitespace == false
-	#     assert "".is_whitespace          == false
+	# ~~~
+	# assert " \n\t ".is_whitespace    == true
+	# assert "  hello  ".is_whitespace == false
+	# assert "".is_whitespace          == false
+	# ~~~
 	#
 	# `Char::is_whitespace` determines what is a whitespace.
 	fun is_whitespace: Bool
@@ -473,19 +521,23 @@ abstract class Text
 
 	# Returns `self` removed from its last line terminator (if any).
 	#
-	#     assert "Hello\n".chomp == "Hello"
-	#     assert "Hello".chomp   == "Hello"
+	# ~~~
+	# assert "Hello\n".chomp == "Hello"
+	# assert "Hello".chomp   == "Hello"
 	#
-	#     assert "\n".chomp == ""
-	#     assert "".chomp   == ""
+	# assert "\n".chomp == ""
+	# assert "".chomp   == ""
+	# ~~~
 	#
 	# Line terminators are `"\n"`, `"\r\n"` and `"\r"`.
 	# A single line terminator, the last one, is removed.
 	#
-	#     assert "\r\n".chomp     == ""
-	#     assert "\r\n\n".chomp   == "\r\n"
-	#     assert "\r\n\r\n".chomp == "\r\n"
-	#     assert "\r\n\r".chomp   == "\r\n"
+	# ~~~
+	# assert "\r\n".chomp     == ""
+	# assert "\r\n\n".chomp   == "\r\n"
+	# assert "\r\n\r\n".chomp == "\r\n"
+	# assert "\r\n\r".chomp   == "\r\n"
+	# ~~~
 	#
 	# Note: unlike with most IO methods like `Reader::read_line`,
 	# a single `\r` is considered here to be a line terminator and will be removed.
@@ -516,14 +568,18 @@ abstract class Text
 	#
 	# Examples
 	#
-	#     assert "hello".justify(10, 0.0)  == "hello     "
-	#     assert "hello".justify(10, 1.0)  == "     hello"
-	#     assert "hello".justify(10, 0.5)  == "  hello   "
-	#     assert "hello".justify(10, 0.5, '.') == "..hello..."
+	# ~~~
+	# assert "hello".justify(10, 0.0)  == "hello     "
+	# assert "hello".justify(10, 1.0)  == "     hello"
+	# assert "hello".justify(10, 0.5)  == "  hello   "
+	# assert "hello".justify(10, 0.5, '.') == "..hello..."
+	# ~~~
 	#
 	# If `length` is not enough, `self` is returned as is.
 	#
-	#     assert "hello".justify(2, 0.0)   == "hello"
+	# ~~~
+	# assert "hello".justify(2, 0.0)   == "hello"
+	# ~~~
 	#
 	# REQUIRE: `left >= 0.0 and left <= 1.0`
 	# ENSURE: `self.length <= length implies result.length == length`
@@ -548,13 +604,17 @@ abstract class Text
 	# * Never ends with an underscore.
 	# * Never contains two contiguous underscores.
 	#
-	#     assert "42_is/The answer!".to_cmangle == "_52d2_is_47dThe_32danswer_33d"
-	#     assert "__".to_cmangle == "_95d_95d"
-	#     assert "__d".to_cmangle == "_95d_d"
-	#     assert "_d_".to_cmangle == "_d_95d"
-	#     assert "_42".to_cmangle == "_95d42"
-	#     assert "foo".to_cmangle == "foo"
-	#     assert "".to_cmangle == ""
+	# Examples:
+	#
+	# ~~~
+	# assert "42_is/The answer!".to_cmangle == "_52d2_is_47dThe_32danswer_33d"
+	# assert "__".to_cmangle == "_95d_95d"
+	# assert "__d".to_cmangle == "_95d_d"
+	# assert "_d_".to_cmangle == "_d_95d"
+	# assert "_42".to_cmangle == "_95d42"
+	# assert "foo".to_cmangle == "foo"
+	# assert "".to_cmangle == ""
+	# ~~~
 	fun to_cmangle: String
 	do
 		if is_empty then return ""
@@ -602,17 +662,21 @@ abstract class Text
 
 	# Escape `"` `\` `'`, trigraphs and non printable characters using the rules of literal C strings and characters
 	#
-	#     assert "abAB12<>&".escape_to_c       == "abAB12<>&"
-	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
-	#     assert "allo???!".escape_to_c        == "allo??\\?!"
-	#     assert "??=??/??'??(??)".escape_to_c == "?\\?=?\\?/??\\'?\\?(?\\?)"
-	#     assert "??!??<??>??-".escape_to_c    == "?\\?!?\\?<?\\?>?\\?-"
+	# ~~~
+	# assert "abAB12<>&".escape_to_c       == "abAB12<>&"
+	# assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
+	# assert "allo???!".escape_to_c        == "allo??\\?!"
+	# assert "??=??/??'??(??)".escape_to_c == "?\\?=?\\?/??\\'?\\?(?\\?)"
+	# assert "??!??<??>??-".escape_to_c    == "?\\?!?\\?<?\\?>?\\?-"
+	# ~~~
 	#
 	# Most non-printable characters (bellow ASCII 32) are escaped to an octal form `\nnn`.
 	# Three digits are always used to avoid following digits to be interpreted as an element
 	# of the octal sequence.
 	#
-	#     assert "{0.code_point}{1.code_point}{8.code_point}{31.code_point}{32.code_point}".escape_to_c == "\\000\\001\\010\\037 "
+	# ~~~
+	# assert "{0.code_point}{1.code_point}{8.code_point}{31.code_point}{32.code_point}".escape_to_c == "\\000\\001\\010\\037 "
+	# ~~~
 	#
 	# The exceptions are the common `\t` and `\n`.
 	fun escape_to_c: String
@@ -670,8 +734,10 @@ abstract class Text
 	# Escape additionnal characters
 	# The result might no be legal in C but be used in other languages
 	#
-	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
-	#     assert "allo???!".escape_more_to_c("")     == "allo??\\?!"
+	# ~~~
+	# assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
+	# assert "allo???!".escape_more_to_c("")     == "allo??\\?!"
+	# ~~~
 	fun escape_more_to_c(chars: String): String
 	do
 		var b = new Buffer
@@ -686,14 +752,18 @@ abstract class Text
 
 	# Escape to C plus braces
 	#
-	#     assert "\n\"'\\\{\}".escape_to_nit      == "\\n\\\"\\'\\\\\\\{\\\}"
+	# ~~~
+	# assert "\n\"'\\\{\}".escape_to_nit      == "\\n\\\"\\'\\\\\\\{\\\}"
+	# ~~~
 	fun escape_to_nit: String do return escape_more_to_c("\{\}")
 
 	# Escape to POSIX Shell (sh).
 	#
 	# Abort if the text contains a null byte.
 	#
-	#     assert "\n\"'\\\{\}0".escape_to_sh == "'\n\"'\\''\\\{\}0'"
+	# ~~~
+	# assert "\n\"'\\\{\}0".escape_to_sh == "'\n\"'\\''\\\{\}0'"
+	# ~~~
 	fun escape_to_sh: String do
 		var b = new Buffer
 		b.chars.add '\''
@@ -735,11 +805,13 @@ abstract class Text
 
 	# Return a string where Nit escape sequences are transformed.
 	#
-	#     var s = "\\n"
-	#     assert s.length        ==  2
-	#     var u = s.unescape_nit
-	#     assert u.length        ==  1
-	#     assert u.chars[0].code_point      ==  10 # (the ASCII value of the "new line" character)
+	# ~~~
+	# var s = "\\n"
+	# assert s.length        ==  2
+	# var u = s.unescape_nit
+	# assert u.length        ==  1
+	# assert u.chars[0].code_point      ==  10 # (the ASCII value of the "new line" character)
+	# ~~~
 	fun unescape_nit: String
 	do
 		var res = new Buffer.with_cap(self.length)
@@ -772,7 +844,9 @@ abstract class Text
 
 	# Returns `self` with all characters escaped with their UTF-16 representation
 	#
-	#     assert "Aèあ𐏓".escape_to_utf16 == "\\u0041\\u00e8\\u3042\\ud800\\udfd3"
+	# ~~~
+	# assert "Aèあ𐏓".escape_to_utf16 == "\\u0041\\u00e8\\u3042\\ud800\\udfd3"
+	# ~~~
 	fun escape_to_utf16: String do
 		var buf = new Buffer
 		for i in chars do buf.append i.escape_to_utf16
@@ -781,10 +855,12 @@ abstract class Text
 
 	# Returns the Unicode char escaped by `self`
 	#
-	#     assert "\\u0041".from_utf16_escape == 'A'
-	#     assert "\\ud800\\udfd3".from_utf16_escape == '𐏓'
-	#     assert "\\u00e8".from_utf16_escape == 'è'
-	#     assert "\\u3042".from_utf16_escape == 'あ'
+	# ~~~
+	# assert "\\u0041".from_utf16_escape == 'A'
+	# assert "\\ud800\\udfd3".from_utf16_escape == '𐏓'
+	# assert "\\u00e8".from_utf16_escape == 'è'
+	# assert "\\u3042".from_utf16_escape == 'あ'
+	# ~~~
 	fun from_utf16_escape(pos, ln: nullable Int): Char do
 		if pos == null then pos = 0
 		if ln == null then ln = length - pos
@@ -805,9 +881,11 @@ abstract class Text
 
 	# Returns a UTF-16 escape value
 	#
-	#     var s = "\\ud800\\udfd3"
-	#     assert s.from_utf16_digit(2) == 0xD800
-	#     assert s.from_utf16_digit(8) == 0xDFD3
+	# ~~~
+	# var s = "\\ud800\\udfd3"
+	# assert s.from_utf16_digit(2) == 0xD800
+	# assert s.from_utf16_digit(8) == 0xDFD3
+	# ~~~
 	fun from_utf16_digit(pos: nullable Int): Int do
 		if pos == null then pos = 0
 		return to_hex(pos, 4)
@@ -815,10 +893,12 @@ abstract class Text
 
 	# Encode `self` to percent (or URL) encoding
 	#
-	#     assert "aBc09-._~".to_percent_encoding == "aBc09-._~"
-	#     assert "%()< >".to_percent_encoding == "%25%28%29%3c%20%3e"
-	#     assert ".com/post?e=asdf&f=123".to_percent_encoding == ".com%2fpost%3fe%3dasdf%26f%3d123"
-	#     assert "éあいう".to_percent_encoding == "%c3%a9%e3%81%82%e3%81%84%e3%81%86"
+	# ~~~
+	# assert "aBc09-._~".to_percent_encoding == "aBc09-._~"
+	# assert "%()< >".to_percent_encoding == "%25%28%29%3c%20%3e"
+	# assert ".com/post?e=asdf&f=123".to_percent_encoding == ".com%2fpost%3fe%3dasdf%26f%3d123"
+	# assert "éあいう".to_percent_encoding == "%c3%a9%e3%81%82%e3%81%84%e3%81%86"
+	# ~~~
 	fun to_percent_encoding: String
 	do
 		var buf = new Buffer
@@ -845,14 +925,16 @@ abstract class Text
 	#
 	# Invalid '%' are not decoded.
 	#
-	#     assert "aBc09-._~".from_percent_encoding == "aBc09-._~"
-	#     assert "%25%28%29%3c%20%3e".from_percent_encoding == "%()< >"
-	#     assert ".com%2fpost%3fe%3dasdf%26f%3d123".from_percent_encoding == ".com/post?e=asdf&f=123"
-	#     assert "%25%28%29%3C%20%3E".from_percent_encoding == "%()< >"
-	#     assert "incomplete %".from_percent_encoding == "incomplete %"
-	#     assert "invalid % usage".from_percent_encoding == "invalid % usage"
-	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
-	#     assert "%1 %A %C3%A9A9".from_percent_encoding == "%1 %A éA9"
+	# ~~~
+	# assert "aBc09-._~".from_percent_encoding == "aBc09-._~"
+	# assert "%25%28%29%3c%20%3e".from_percent_encoding == "%()< >"
+	# assert ".com%2fpost%3fe%3dasdf%26f%3d123".from_percent_encoding == ".com/post?e=asdf&f=123"
+	# assert "%25%28%29%3C%20%3E".from_percent_encoding == "%()< >"
+	# assert "incomplete %".from_percent_encoding == "incomplete %"
+	# assert "invalid % usage".from_percent_encoding == "invalid % usage"
+	# assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
+	# assert "%1 %A %C3%A9A9".from_percent_encoding == "%1 %A éA9"
+	# ~~~
 	fun from_percent_encoding: String
 	do
 		var len = byte_length
@@ -900,7 +982,9 @@ abstract class Text
 
 	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
 	#
-	#     assert "a&b-<>\"x\"/'".html_escape      ==  "a&amp;b-&lt;&gt;&#34;x&#34;&#47;&#39;"
+	# ~~~
+	# assert "a&b-<>\"x\"/'".html_escape      ==  "a&amp;b-&lt;&gt;&#34;x&#34;&#47;&#39;"
+	# ~~~
 	#
 	# SEE: <https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>
 	fun html_escape: String
@@ -940,19 +1024,23 @@ abstract class Text
 	# Equality of text
 	# Two pieces of text are equals if thez have the same characters in the same order.
 	#
-	#     assert "hello" == "hello"
-	#     assert "hello" != "HELLO"
-	#     assert "hello" == "hel"+"lo"
+	# ~~~
+	# assert "hello" == "hello"
+	# assert "hello" != "HELLO"
+	# assert "hello" == "hel"+"lo"
+	# ~~~
 	#
 	# Things that are not Text are not equal.
 	#
-	#     assert "9" != '9'
-	#     assert "9" != ['9']
-	#     assert "9" != 9
+	# ~~~
+	# assert "9" != '9'
+	# assert "9" != ['9']
+	# assert "9" != 9
 	#
-	#     assert "9".chars.first == '9'   # equality of Char
-	#     assert "9".chars       == ['9'] # equality of Sequence
-	#     assert "9".to_i        == 9     # equality of Int
+	# assert "9".chars.first == '9'   # equality of Char
+	# assert "9".chars       == ['9'] # equality of Sequence
+	# assert "9".to_i        == 9     # equality of Int
+	# ~~~
 	redef fun ==(o)
 	do
 		if o == null then return false
@@ -964,8 +1052,10 @@ abstract class Text
 
 	# Lexicographical comparaison
 	#
-	#     assert "abc" < "xy"
-	#     assert "ABC" < "abc"
+	# ~~~
+	# assert "abc" < "xy"
+	# assert "ABC" < "abc"
+	# ~~~
 	redef fun <(other)
 	do
 		var self_chars = self.chars.iterator
@@ -987,7 +1077,9 @@ abstract class Text
 
 	# Escape string used in labels for graphviz
 	#
-	#   assert ">><<".escape_to_dot == "\\>\\>\\<\\<"
+	# ~~~
+	# assert ">><<".escape_to_dot == "\\>\\>\\<\\<"
+	# ~~~
 	fun escape_to_dot: String
 	do
 		return escape_more_to_c("|\{\}<>")
@@ -1016,8 +1108,10 @@ abstract class Text
 	# The character `%` followed by something other than a number are left as is.
 	# To represent a `%` followed by a number, double the `%`, as in `%%7`.
 	#
-	#     assert "This %0 is a %1.".format("String", "formatted String") == "This String is a formatted String."
-	#     assert "Do not escape % nor %%1".format("unused") == "Do not escape % nor %1"
+	# ~~~
+	# assert "This %0 is a %1.".format("String", "formatted String") == "This String is a formatted String."
+	# assert "Do not escape % nor %%1".format("unused") == "Do not escape % nor %1"
+	# ~~~
 	fun format(args: Object...): String do
 		var s = new Array[Text]
 		var curr_st = 0
@@ -1123,10 +1217,11 @@ abstract class Text
 	#
 	# REQUIRE: `n` must be large enough to contain `len` bytes
 	#
-	#	var ns = new CString(8)
-	#	"Text is String".copy_to_native(ns, 8, 2, 0)
-	#	assert ns.to_s_with_length(8) == "xt is St"
-	#
+	# ~~~
+	# var ns = new CString(8)
+	# "Text is String".copy_to_native(ns, 8, 2, 0)
+	# assert ns.to_s_with_length(8) == "xt is St"
+	# ~~~
 	fun copy_to_native(dest: CString, n, src_offset, dest_offset: Int) do
 		var mypos = src_offset
 		var itspos = dest_offset
@@ -1141,7 +1236,7 @@ abstract class Text
 	# Packs the content of a string in packs of `ln` chars.
 	# This variant ensures that only the last element might be smaller than `ln`
 	#
-	# ~~~nit
+	# ~~~
 	# var s = "abcdefghijklmnopqrstuvwxyz"
 	# assert s.pack_l(4) == ["abcd","efgh","ijkl","mnop","qrst","uvwx","yz"]
 	# ~~~
@@ -1158,7 +1253,7 @@ abstract class Text
 	# Packs the content of a string in packs of `ln` chars.
 	# This variant ensures that only the first element might be smaller than `ln`
 	#
-	# ~~~nit
+	# ~~~
 	# var s = "abcdefghijklmnopqrstuvwxyz"
 	# assert s.pack_r(4) == ["ab","cdef","ghij","klmn","opqr","stuv","wxyz"]
 	# ~~~
@@ -1174,83 +1269,107 @@ abstract class Text
 
 	# Concatenates self `i` times
 	#
-	#~~~nit
-	#	assert "abc" * 4 == "abcabcabcabc"
-	#	assert "abc" * 1 == "abc"
-	#	assert "abc" * 0 == ""
-	#	var b = new Buffer
-	#	b.append("天地")
-	#	b = b * 4
-	#	assert b == "天地天地天地天地"
-	#~~~
+	# ~~~
+	# assert "abc" * 4 == "abcabcabcabc"
+	# assert "abc" * 1 == "abc"
+	# assert "abc" * 0 == ""
+	# var b = new Buffer
+	# b.append("天地")
+	# b = b * 4
+	# assert b == "天地天地天地天地"
+	# ~~~
 	fun *(i: Int): SELFTYPE is abstract
 
 	# Insert `s` at `pos`.
 	#
-	#~~~nit
-	#	assert "helloworld".insert_at(" ", 5)	== "hello world"
-	#	var b = new Buffer
-	#	b.append("Hello世界")
-	#	b = b.insert_at(" beautiful ", 5)
-	#	assert b == "Hello beautiful 世界"
-	#~~~
+	# ~~~
+	# assert "helloworld".insert_at(" ", 5)	== "hello world"
+	# var b = new Buffer
+	# b.append("Hello世界")
+	# b = b.insert_at(" beautiful ", 5)
+	# assert b == "Hello beautiful 世界"
+	# ~~~
 	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
 
 	# Returns a reversed version of self
 	#
-	#     assert "hello".reversed  == "olleh"
-	#     assert "bob".reversed    == "bob"
-	#     assert "".reversed       == ""
+	# ~~~
+	# assert "hello".reversed  == "olleh"
+	# assert "bob".reversed    == "bob"
+	# assert "".reversed       == ""
+	# ~~~
 	fun reversed: SELFTYPE is abstract
 
 	# A upper case version of `self`
 	#
-	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
+	# ~~~
+	# assert "Hello World!".to_upper     == "HELLO WORLD!"
+	# ~~~
 	fun to_upper: SELFTYPE is abstract
 
 	# A lower case version of `self`
 	#
-	#     assert "Hello World!".to_lower     == "hello world!"
+	# ~~~
+	# assert "Hello World!".to_lower     == "hello world!"
+	# ~~~
 	fun to_lower : SELFTYPE is abstract
 
 	# Takes a camel case `self` and converts it to snake case
 	#
-	#     assert "randomMethodId".to_snake_case == "random_method_id"
+	# ~~~
+	# assert "randomMethodId".to_snake_case == "random_method_id"
+	# ~~~
 	#
 	# The rules are the following:
 	#
 	# An uppercase is always converted to a lowercase
 	#
-	#     assert "HELLO_WORLD".to_snake_case == "hello_world"
+	# ~~~
+	# assert "HELLO_WORLD".to_snake_case == "hello_world"
+	# ~~~
 	#
 	# An uppercase that follows a lowercase is prefixed with an underscore
 	#
-	#     assert "HelloTheWORLD".to_snake_case == "hello_the_world"
+	# ~~~
+	# assert "HelloTheWORLD".to_snake_case == "hello_the_world"
+	# ~~~
 	#
 	# An uppercase that follows an uppercase and is followed by a lowercase, is prefixed with an underscore
 	#
-	#     assert "HelloTHEWorld".to_snake_case == "hello_the_world"
+	# ~~~
+	# assert "HelloTHEWorld".to_snake_case == "hello_the_world"
+	# ~~~
 	#
 	# All other characters are kept as is; `self` does not need to be a proper CamelCased string.
 	#
-	#     assert "=-_H3ll0Th3W0rld_-=".to_snake_case == "=-_h3ll0th3w0rld_-="
+	# ~~~
+	# assert "=-_H3ll0Th3W0rld_-=".to_snake_case == "=-_h3ll0th3w0rld_-="
+	# ~~~
 	fun to_snake_case: SELFTYPE is abstract
 
 	# Takes a snake case `self` and converts it to camel case
 	#
-	#     assert "random_method_id".to_camel_case == "randomMethodId"
+	# ~~~
+	# assert "random_method_id".to_camel_case == "randomMethodId"
+	# ~~~
 	#
 	# If the identifier is prefixed by an underscore, the underscore is ignored
 	#
-	#     assert "_private_field".to_camel_case == "_privateField"
+	# ~~~
+	# assert "_private_field".to_camel_case == "_privateField"
+	# ~~~
 	#
 	# If `self` is upper, it is returned unchanged
 	#
-	#     assert "RANDOM_ID".to_camel_case == "RANDOM_ID"
+	# ~~~
+	# assert "RANDOM_ID".to_camel_case == "RANDOM_ID"
+	# ~~~
 	#
 	# If there are several consecutive underscores, they are considered as a single one
 	#
-	#     assert "random__method_id".to_camel_case == "randomMethodId"
+	# ~~~
+	# assert "random__method_id".to_camel_case == "randomMethodId"
+	# ~~~
 	fun to_camel_case: SELFTYPE is abstract
 
 	# Returns a capitalized `self`
@@ -1262,10 +1381,12 @@ abstract class Text
 	#
 	# SEE : `Char::is_letter` for the definition of letter.
 	#
-	#     assert "jAVASCRIPT".capitalized == "Javascript"
-	#     assert "i am root".capitalized == "I Am Root"
-	#     assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
-	#     assert "preserve my ACRONYMS".capitalized(keep_upper=true) == "Preserve My ACRONYMS"
+	# ~~~
+	# assert "jAVASCRIPT".capitalized == "Javascript"
+	# assert "i am root".capitalized == "I Am Root"
+	# assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
+	# assert "preserve my ACRONYMS".capitalized(keep_upper=true) == "Preserve My ACRONYMS"
+	# ~~~
 	fun capitalized(keep_upper: nullable Bool): SELFTYPE do
 		if length == 0 then return self
 
@@ -1360,7 +1481,9 @@ end
 #
 # String objects may be created using literals.
 #
-#     assert "Hello World!" isa String
+# ~~~
+# assert "Hello World!" isa String
+# ~~~
 abstract class String
 	super Text
 
@@ -1419,18 +1542,16 @@ abstract class Buffer
 	protected var written = false
 
 	# Modifies the char contained at pos `index`
-	#
-	# DEPRECATED : Use self.chars.[]= instead
 	fun []=(index: Int, item: Char) is abstract
 
 	redef fun to_buffer do return clone
 
-	#~~~nit
-	#	var b = new Buffer
-	#	b.append("Buffer!")
-	#	var c = b.clone
-	#	assert b == c
-	#~~~
+	# ~~~
+	# var b = new Buffer
+	# b.append("Buffer!")
+	# var c = b.clone
+	# assert b == c
+	# ~~~
 	redef fun clone do
 		var cln = new Buffer.with_cap(byte_length)
 		cln.append self
@@ -1438,17 +1559,17 @@ abstract class Buffer
 	end
 
 	# Adds a char `c` at the end of self
-	#
-	# DEPRECATED : Use self.chars.add instead
 	fun add(c: Char) is abstract
 
 	# Clears the buffer
 	#
-	#     var b = new Buffer
-	#     b.append "hello"
-	#     assert not b.is_empty
-	#     b.clear
-	#     assert b.is_empty
+	# ~~~
+	# var b = new Buffer
+	# b.append "hello"
+	# assert not b.is_empty
+	# b.clear
+	# assert b.is_empty
+	# ~~~
 	fun clear is abstract
 
 	# Enlarges the subsequent array containing the chars of self
@@ -1456,42 +1577,52 @@ abstract class Buffer
 
 	# Adds the content of text `s` at the end of self
 	#
-	#     var b = new Buffer
-	#     b.append "hello"
-	#     b.append "world"
-	#     assert b == "helloworld"
+	# ~~~
+	# var b = new Buffer
+	# b.append "hello"
+	# b.append "world"
+	# assert b == "helloworld"
+	# ~~~
 	fun append(s: Text) is abstract
 
 	# `self` is appended in such a way that `self` is repeated `r` times
 	#
-	#     var b = new Buffer
-	#     b.append "hello"
-	#     b.times 3
-	#     assert b == "hellohellohello"
+	# ~~~
+	# var b = new Buffer
+	# b.append "hello"
+	# b.times 3
+	# assert b == "hellohellohello"
+	# ~~~
 	fun times(r: Int) is abstract
 
 	# Reverses itself in-place
 	#
-	#     var b = new Buffer
-	#     b.append("hello")
-	#     b.reverse
-	#     assert b == "olleh"
+	# ~~~
+	# var b = new Buffer
+	# b.append("hello")
+	# b.reverse
+	# assert b == "olleh"
+	# ~~~
 	fun reverse is abstract
 
 	# Changes each lower-case char in `self` by its upper-case variant
 	#
-	#     var b = new Buffer
-	#     b.append("Hello World!")
-	#     b.upper
-	#     assert b == "HELLO WORLD!"
+	# ~~~
+	# var b = new Buffer
+	# b.append("Hello World!")
+	# b.upper
+	# assert b == "HELLO WORLD!"
+	# ~~~
 	fun upper is abstract
 
 	# Changes each upper-case char in `self` by its lower-case variant
 	#
-	#     var b = new Buffer
-	#     b.append("Hello World!")
-	#     b.lower
-	#     assert b == "hello world!"
+	# ~~~
+	# var b = new Buffer
+	# b.append("Hello World!")
+	# b.lower
+	# assert b == "hello world!"
+	# ~~~
 	fun lower is abstract
 
 	# Capitalizes each word in `self`
@@ -1508,23 +1639,25 @@ abstract class Buffer
 	#
 	# SEE: `Char::is_letter` for the definition of a letter.
 	#
-	#     var b = new FlatBuffer.from("jAVAsCriPt")
-	#     b.capitalize
-	#     assert b == "Javascript"
-	#     b = new FlatBuffer.from("i am root")
-	#     b.capitalize
-	#     assert b == "I Am Root"
-	#     b = new FlatBuffer.from("ab_c -ab0c ab\nc")
-	#     b.capitalize
-	#     assert b == "Ab_C -Ab0C Ab\nC"
+	# ~~~
+	# var b = new FlatBuffer.from("jAVAsCriPt")
+	# b.capitalize
+	# assert b == "Javascript"
+	# b = new FlatBuffer.from("i am root")
+	# b.capitalize
+	# assert b == "I Am Root"
+	# b = new FlatBuffer.from("ab_c -ab0c ab\nc")
+	# b.capitalize
+	# assert b == "Ab_C -Ab0C Ab\nC"
 	#
-	#     b = new FlatBuffer.from("12345")
-	#     b.capitalize(src="foo")
-	#     assert b == "Foo45"
+	# b = new FlatBuffer.from("12345")
+	# b.capitalize(src="foo")
+	# assert b == "Foo45"
 	#
-	#     b = new FlatBuffer.from("preserve my ACRONYMS")
-	#     b.capitalize(keep_upper=true)
-	#     assert b == "Preserve My ACRONYMS"
+	# b = new FlatBuffer.from("preserve my ACRONYMS")
+	# b.capitalize(keep_upper=true)
+	# assert b == "Preserve My ACRONYMS"
+	# ~~~
 	fun capitalize(keep_upper: nullable Bool, src: nullable Text) do
 		src = src or else self
 		var length = src.length
@@ -1555,16 +1688,16 @@ abstract class Buffer
 
 	# Appends `length` chars from `s` starting at index `from`
 	#
-	# ~~~nit
-	#	var b = new Buffer
-	#	b.append_substring("abcde", 1, 2)
-	#	assert b == "bc"
-	#	b.append_substring("vwxyz", 2, 3)
-	#	assert b == "bcxyz"
-	#	b.append_substring("ABCDE", 4, 300)
-	#	assert b == "bcxyzE"
-	#	b.append_substring("VWXYZ", 400, 1)
-	#	assert b == "bcxyzE"
+	# ~~~
+	# var b = new Buffer
+	# b.append_substring("abcde", 1, 2)
+	# assert b == "bc"
+	# b.append_substring("vwxyz", 2, 3)
+	# assert b == "bcxyz"
+	# b.append_substring("ABCDE", 4, 300)
+	# assert b == "bcxyzE"
+	# b.append_substring("VWXYZ", 400, 1)
+	# assert b == "bcxyzE"
 	# ~~~
 	fun append_substring(s: Text, from, length: Int) do
 		if from < 0 then
@@ -1602,36 +1735,36 @@ abstract class Buffer
 
 	# Inserts `s` at position `pos`
 	#
-	#~~~nit
-	#	var b = new Buffer
-	#	b.append "美しい世界"
-	#	b.insert(" nit ", 3)
-	#	assert b == "美しい nit 世界"
-	#~~~
+	# ~~~
+	# var b = new Buffer
+	# b.append "美しい世界"
+	# b.insert(" nit ", 3)
+	# assert b == "美しい nit 世界"
+	# ~~~
 	fun insert(s: Text, pos: Int) is abstract
 
 	# Inserts `c` at position `pos`
 	#
-	#~~~nit
-	#	var b = new Buffer
-	#	b.append "美しい世界"
-	#	b.insert_char(' ', 3)
-	#	assert b == "美しい 世界"
-	#~~~
+	# ~~~
+	# var b = new Buffer
+	# b.append "美しい世界"
+	# b.insert_char(' ', 3)
+	# assert b == "美しい 世界"
+	# ~~~
 	fun insert_char(c: Char, pos: Int) is abstract
 
 	# Removes a substring from `self` at position `pos`
 	#
 	# NOTE: `length` defaults to 1, expressed in chars
 	#
-	#~~~nit
-	#	var b = new Buffer
-	#	b.append("美しい 世界")
-	#	b.remove_at(3)
-	#	assert b == "美しい世界"
-	#	b.remove_at(1, 2)
-	#	assert b == "美世界"
-	#~~~
+	# ~~~
+	# var b = new Buffer
+	# b.append("美しい 世界")
+	# b.remove_at(3)
+	# assert b == "美しい世界"
+	# b.remove_at(1, 2)
+	# assert b == "美世界"
+	# ~~~
 	fun remove_at(pos: Int, length: nullable Int) is abstract
 
 	redef fun reversed do
@@ -1758,7 +1891,9 @@ redef class Object
 
 	# The class name of the object.
 	#
-	#     assert 5.class_name == "Int"
+	# ~~~
+	# assert 5.class_name == "Int"
+	# ~~~
 	fun class_name: String do return native_class_name.to_s
 
 	# Developer readable representation of `self`.
@@ -1777,8 +1912,10 @@ redef class Object
 end
 
 redef class Bool
-	#     assert true.to_s         == "true"
-	#     assert false.to_s        == "false"
+	# ~~~
+	# assert true.to_s         == "true"
+	# assert false.to_s        == "false"
+	# ~~~
 	redef fun to_s
 	do
 		if self then
@@ -1802,8 +1939,10 @@ redef class Byte
 
 	# Displayable byte in its hexadecimal form (0x..)
 	#
-	#     assert 1.to_b.to_s       == "0x01"
-	#     assert (-123).to_b.to_s  == "0x85"
+	# ~~~
+	# assert 1.to_b.to_s       == "0x01"
+	# assert (-123).to_b.to_s  == "0x85"
+	# ~~~
 	redef fun to_s do
 		var nslen = byte_to_s_len
 		var ns = new CString(nslen + 1)
@@ -1876,16 +2015,20 @@ redef class Int
 
 	# return displayable int in hexadecimal
 	#
-	#     assert 1.to_hex  == "1"
-	#     assert (-255).to_hex  == "-ff"
+	# ~~~
+	# assert 1.to_hex  == "1"
+	# assert (-255).to_hex  == "-ff"
+	# ~~~
 	fun to_hex: String do return to_base(16)
 end
 
 redef class Float
 	# Pretty representation of `self`, with decimals as needed from 1 to a maximum of 3
 	#
-	#     assert 12.34.to_s       == "12.34"
-	#     assert (-0120.030).to_s == "-120.03"
+	# ~~~
+	# assert 12.34.to_s       == "12.34"
+	# assert (-0120.030).to_s == "-120.03"
+	# ~~~
 	#
 	# see `to_precision` for a custom precision.
 	redef fun to_s do
@@ -1908,12 +2051,14 @@ redef class Float
 
 	# `String` representation of `self` with the given number of `decimals`
 	#
-	#     assert 12.345.to_precision(0)    == "12"
-	#     assert 12.345.to_precision(3)    == "12.345"
-	#     assert (-12.345).to_precision(3) == "-12.345"
-	#     assert (-0.123).to_precision(3)  == "-0.123"
-	#     assert 0.999.to_precision(2)     == "1.00"
-	#     assert 0.999.to_precision(4)     == "0.9990"
+	# ~~~
+	# assert 12.345.to_precision(0)    == "12"
+	# assert 12.345.to_precision(3)    == "12.345"
+	# assert (-12.345).to_precision(3) == "-12.345"
+	# assert (-0.123).to_precision(3)  == "-0.123"
+	# assert 0.999.to_precision(2)     == "1.00"
+	# assert 0.999.to_precision(4)     == "0.9990"
+	# ~~~
 	fun to_precision(decimals: Int): String
 	do
 		if is_nan then return "nan"
@@ -1948,8 +2093,10 @@ redef class Char
 
 	# Returns a sequence with the UTF-8 bytes of `self`
 	#
-	#     assert 'a'.bytes == [0x61u8]
-	#     assert 'ま'.bytes == [0xE3u8, 0x81u8, 0xBEu8]
+	# ~~~
+	# assert 'a'.bytes == [0x61u8]
+	# assert 'ま'.bytes == [0xE3u8, 0x81u8, 0xBEu8]
+	# ~~~
 	fun bytes: SequenceRead[Byte] do return to_s.bytes
 
 	# Is `self` an UTF-16 surrogate pair ?
@@ -1981,7 +2128,9 @@ redef class Char
 		return 1
 	end
 
-	#     assert 'x'.to_s    == "x"
+	# ~~~
+	# assert 'x'.to_s    == "x"
+	# ~~~
 	redef fun to_s do
 		var ln = u8char_len
 		var ns = new CString(ln + 1)
@@ -1994,10 +2143,12 @@ redef class Char
 	# i.e. Represents `self`.`code_point` using UTF-16 codets escaped
 	# with a `\u`
 	#
-	#     assert 'A'.escape_to_utf16 == "\\u0041"
-	#     assert 'è'.escape_to_utf16 == "\\u00e8"
-	#     assert 'あ'.escape_to_utf16 == "\\u3042"
-	#     assert '𐏓'.escape_to_utf16 == "\\ud800\\udfd3"
+	# ~~~
+	# assert 'A'.escape_to_utf16 == "\\u0041"
+	# assert 'è'.escape_to_utf16 == "\\u00e8"
+	# assert 'あ'.escape_to_utf16 == "\\u3042"
+	# assert '𐏓'.escape_to_utf16 == "\\ud800\\udfd3"
+	# ~~~
 	fun escape_to_utf16: String do
 		var cp = code_point
 		var buf: Buffer
@@ -2055,10 +2206,12 @@ redef class Char
 
 	# Returns true if the char is a numerical digit
 	#
-	#     assert '0'.is_numeric
-	#     assert '9'.is_numeric
-	#     assert not 'a'.is_numeric
-	#     assert not '?'.is_numeric
+	# ~~~
+	# assert '0'.is_numeric
+	# assert '9'.is_numeric
+	# assert not 'a'.is_numeric
+	# assert not '?'.is_numeric
+	# ~~~
 	#
 	# FIXME: Works on ASCII-range only
 	fun is_numeric: Bool
@@ -2068,10 +2221,12 @@ redef class Char
 
 	# Returns true if the char is an alpha digit
 	#
-	#     assert 'a'.is_alpha
-	#     assert 'Z'.is_alpha
-	#     assert not '0'.is_alpha
-	#     assert not '?'.is_alpha
+	# ~~~
+	# assert 'a'.is_alpha
+	# assert 'Z'.is_alpha
+	# assert not '0'.is_alpha
+	# assert not '?'.is_alpha
+	# ~~~
 	#
 	# FIXME: Works on ASCII-range only
 	fun is_alpha: Bool
@@ -2081,21 +2236,25 @@ redef class Char
 
 	# Is `self` an hexadecimal digit ?
 	#
-	#     assert 'A'.is_hexdigit
-	#     assert not 'G'.is_hexdigit
-	#     assert 'a'.is_hexdigit
-	#     assert not 'g'.is_hexdigit
-	#     assert '5'.is_hexdigit
+	# ~~~
+	# assert 'A'.is_hexdigit
+	# assert not 'G'.is_hexdigit
+	# assert 'a'.is_hexdigit
+	# assert not 'g'.is_hexdigit
+	# assert '5'.is_hexdigit
+	# ~~~
 	fun is_hexdigit: Bool do return (self >= '0' and self <= '9') or (self >= 'A' and self <= 'F') or
 					(self >= 'a' and self <= 'f')
 
 	# Returns true if the char is an alpha or a numeric digit
 	#
-	#     assert 'a'.is_alphanumeric
-	#     assert 'Z'.is_alphanumeric
-	#     assert '0'.is_alphanumeric
-	#     assert '9'.is_alphanumeric
-	#     assert not '?'.is_alphanumeric
+	# ~~~
+	# assert 'a'.is_alphanumeric
+	# assert 'Z'.is_alphanumeric
+	# assert '0'.is_alphanumeric
+	# assert '9'.is_alphanumeric
+	# assert not '?'.is_alphanumeric
+	# ~~~
 	#
 	# FIXME: Works on ASCII-range only
 	fun is_alphanumeric: Bool
@@ -2152,13 +2311,17 @@ redef class Collection[E]
 	#
 	# Only concatenate if `separator == null`.
 	#
-	#     assert [1, 2, 3].join(":")    == "1:2:3"
-	#     assert [1..3].join(":")       == "1:2:3"
-	#     assert [1..3].join            == "123"
+	# ~~~
+	# assert [1, 2, 3].join(":")    == "1:2:3"
+	# assert [1..3].join(":")       == "1:2:3"
+	# assert [1..3].join            == "123"
+	# ~~~
 	#
 	# if `last_separator` is given, then it is used to separate the last element.
 	#
-	#     assert [1, 2, 3, 4].join(", ", " and ")    == "1, 2, 3 and 4"
+	# ~~~
+	# assert [1, 2, 3, 4].join(", ", " and ")    == "1, 2, 3 and 4"
+	# ~~~
 	fun join(separator: nullable Text, last_separator: nullable Text): String
 	do
 		if is_empty then return ""
@@ -2193,10 +2356,12 @@ redef class Map[K,V]
 	# Key and value are separated by `couple_sep`.
 	# Couples are separated by `sep`.
 	#
-	#     var m = new HashMap[Int, String]
-	#     m[1] = "one"
-	#     m[10] = "ten"
-	#     assert m.join("; ", "=") == "1=one; 10=ten"
+	# ~~~
+	# var m = new HashMap[Int, String]
+	# m[1] = "one"
+	# m[10] = "ten"
+	# assert m.join("; ", "=") == "1=one; 10=ten"
+	# ~~~
 	fun join(sep, couple_sep: String): String is abstract
 end
 
@@ -2240,9 +2405,11 @@ end
 #
 # The comparaison call `to_s` on object and use the result to order things.
 #
-#     var a = [1, 2, 3, 10, 20]
-#     (new CachedAlphaComparator).sort(a)
-#     assert a == [1, 10, 2, 20, 3]
+# ~~~
+# var a = [1, 2, 3, 10, 20]
+# (new CachedAlphaComparator).sort(a)
+# assert a == [1, 10, 2, 20, 3]
+# ~~~
 #
 # Internally the result of `to_s` is cached in a HashMap to counter
 # uneficient implementation of `to_s`.
@@ -2282,9 +2449,11 @@ end
 # Note: the result of `to_s` is not cached, thus can be invoked a lot
 # on a single instace. See `CachedAlphaComparator` as an alternative.
 #
-#     var a = [1, 2, 3, 10, 20]
-#     alpha_comparator.sort(a)
-#     assert a == [1, 10, 2, 20, 3]
+# ~~~
+# var a = [1, 2, 3, 10, 20]
+# alpha_comparator.sort(a)
+# assert a == [1, 10, 2, 20, 3]
+# ~~~
 fun alpha_comparator: Comparator do return once new AlphaComparator
 
 # The arguments of the program as given by the OS
