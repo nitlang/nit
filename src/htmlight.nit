@@ -126,6 +126,14 @@ class HtmlightVisitor
 			end
 		end
 		if infobox != null and not show_infobox then
+			var href = infobox.href
+			if href != null then
+				# If there is an href, we inject a link around
+				var tag2 = new HTMLTag("a")
+				tag2.add tag
+				tag = tag2
+				tag.attr("href", href)
+			end
 			tag.attr("title", infobox.title)
 			tag.classes.add "titled"
 			infobox = null
