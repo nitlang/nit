@@ -1,7 +1,7 @@
 ==== Docunits of module test_nitunit::test_nitunit | tests: 4
 [OK] test_nitunit::test_nitunit
 [KO] test_nitunit$X
-     test_nitunit.nit:21,7--22,0: Runtime error in nitunit.out/test_nitunit-2.nit
+     test_nitunit.nit:21,7--22,0: Runtime error in nitunit.out/test_nitunit-2.nit with argument 0
      Output
 	Runtime error: Assert failed (nitunit.out/test_nitunit-2.nit:5)
 
@@ -27,7 +27,7 @@ Test suites: Classes: 1; Test Cases: 3; Failures: 1
 [FAILURE] 4/7 tests failed.
 `nitunit.out` is not removed for investigation.
 <testsuites><testsuite package="test_nitunit::test_nitunit"><testcase classname="nitunit.test_nitunit::test_nitunit.&lt;module&gt;" name="&lt;module&gt;" time="0.0"><system-err></system-err><system-out>assert true
-</system-out></testcase><testcase classname="nitunit.test_nitunit.X" name="&lt;class&gt;" time="0.0"><error message="Runtime error in nitunit.out&#47;test_nitunit-2.nit">Runtime error: Assert failed (nitunit.out&#47;test_nitunit-2.nit:5)
+</system-out></testcase><testcase classname="nitunit.test_nitunit.X" name="&lt;class&gt;" time="0.0"><error message="Runtime error in nitunit.out&#47;test_nitunit-2.nit with argument 0">Runtime error: Assert failed (nitunit.out&#47;test_nitunit-2.nit:5)
 </error><system-out>assert false
 </system-out></testcase><testcase classname="nitunit.test_nitunit.X" name="foo" time="0.0"><failure message="Compilation error in nitunit.out&#47;test_nitunit-3.nit">nitunit.out&#47;test_nitunit-3.nit:5,8--27: Error: method or variable `undefined_identifier` unknown in `Sys`.
 </failure><system-out>assert undefined_identifier
