@@ -128,3 +128,10 @@ Content-Length: 0
 Server: nitcorn
 Set-Cookie: nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT
 
+
+[Client] curl -s localhost:*****/simple_binary/
+сту
+
+[Client] curl -s localhost:*****/simple_template/
+Hello
+сту
