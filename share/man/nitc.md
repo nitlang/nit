@@ -249,7 +249,25 @@ For more debugging-related options, see also `--hardening` and `NIT_GC_OPTION`
 ### `--trace`
 Compile with lttng's instrumentation.
 
-Currently add a lttng trace provider and add tracepoint into object instances.
+Currently add a lttng trace provider and add tracepoint into object instances and destructions.
+
+The lttng nit/misc/Nit_Compiler.lttng file is a template that you can use instead of configure channels by yourself. You have to configure the path of the destination tracefile. <destination> <path> "your path" </path> </destination>
+
+To create a channel with template :
+	lttng-sessiond --daemonize
+	lttng load -i=~/nit/misc/Nit_Compiler.lttng Nit_Compiler
+To create a channel without template :
+	lttng create session_name
+	lttng enable-event --userspace Nit_Compiler:Object_Instance
+	lttng enable-event --userspace Nit_Compiler:Object_Destroy
+To record some traces :
+	lttng start
+	--> run your program
+	lttng stop
+To read some traces :
+	babeltrace ~/session_name
+To destroy your current tracing session :
+	lttng destroy
 
 ## COMPILATION MODES
 

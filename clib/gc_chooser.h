@@ -22,5 +22,6 @@ void initialize_gc_option(void); /* Select the wanted GC using envvar `NIT_GC_OP
 
 void gc_register_finalizer(void*); /* Tag a pointer for finalization */
 void gc_finalize(void*, void*); /* Finalize a pointer, implemented in the generated code. */
+void object_destroy_callback(void*, void*); /* call into an object finalizer to record some traces. */
 
 #endif
