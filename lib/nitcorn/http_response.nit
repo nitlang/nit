@@ -38,7 +38,7 @@ class HttpResponse
 	var header = new HashMap[String, String]
 
 	# Body of this response
-	var body = "" is writable
+	var body : Writable = "" is writable
 
 	# Files appended after `body`
 	var files = new Array[String]
@@ -48,8 +48,14 @@ class HttpResponse
 	do
 		# Set the content length if not already set
 		if not header.keys.has("Content-Length") then
+
+			var len : Int = 0
 			# Size of the body
-			var len = body.byte_length
+			if body isa Text then
+				len = body.as(Text).byte_length
+			else if body isa Bytes then
+				len = body.as(Bytes).length
+			end
 
 			# Size of included files
 			for path in files do
