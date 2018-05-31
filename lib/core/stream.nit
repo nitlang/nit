@@ -574,16 +574,31 @@ interface Writable
 	# The specific logic it let to the concrete subclasses
 	fun write_to(stream: Writer) is abstract
 
-	# Like `write_to` but return a new String (may be quite large)
+	# Like `write_to` but return a new String (may be quite large).
 	#
-	# This funtionality is anectodical, since the point
-	# of streamable object to to be efficienlty written to a
-	# stream without having to allocate and concatenate strings
+	# This functionality is anecdotal, since the point
+	# of a streamable object is to be efficiently written to a
+	# stream without having to allocate and concatenate strings.
 	fun write_to_string: String
 	do
 		var stream = new StringWriter
 		write_to(stream)
 		return stream.to_s
+	end
+
+	# Like `write_to` but return a new Bytes (may be quite large)
+	#
+	# This functionality is anecdotal, since the point
+	# of a streamable object is to be efficiently written to a
+	# stream without having to allocate and concatenate buffers.
+	#
+	# Nevertheless, you might need this method if you want to know
+	# the byte size of a writable object.
+	fun write_to_bytes: Bytes
+	do
+		var stream = new BytesWriter
+		write_to(stream)
+		return stream.bytes
 	end
 end
 
