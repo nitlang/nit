@@ -30,23 +30,24 @@ class MyAction
 	redef fun answer(request, turi)
 	do
 		var rep = new HttpResponse(200)
-		rep.body = """
+		var body = """
 [Response] Simple answer
 Method: {{{request.method}}}, URI: {{{request.uri}}}, trailing: {{{turi}}}"""
 
 		if request.get_args.not_empty
-		then rep.body += "\nGET args: {request.get_args.join(", ", ":")}"
+		then body += "\nGET args: {request.get_args.join(", ", ":")}"
 
 		if request.post_args.not_empty
-		then rep.body += "\nPOST args: {request.post_args.join(", ", ":")}"
+		then body += "\nPOST args: {request.post_args.join(", ", ":")}"
 
 		if request.uri_params.not_empty
-		then rep.body += "\nParams args: {request.uri_params.join(", ", ":")}"
+		then body += "\nParams args: {request.uri_params.join(", ", ":")}"
 
 		if request.cookie.not_empty
-		then rep.body += "\nCookie: {request.cookie.join(", ", ":")}"
+		then body += "\nCookie: {request.cookie.join(", ", ":")}"
 
-		rep.body += "\n"
+		body += "\n"
+		rep.body=body
 		return rep
 	end
 end
