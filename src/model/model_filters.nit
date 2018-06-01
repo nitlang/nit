@@ -15,6 +15,7 @@
 module model_filters
 
 import model_examples
+import parse_annotations
 
 # A list of filters that can be applied on a MEntity
 #
@@ -47,6 +48,7 @@ class ModelFilter
 		if not accept_mentity_broken(mentity) then return false
 		if not accept_mentity_visibility(mentity) then return false
 		if not accept_mentity_fictive(mentity) then return false
+		if not accept_mentity_generated(mentity) then return false
 		if not accept_mentity_test(mentity) then return false
 		if not accept_mentity_redef(mentity) then return false
 		if not accept_mentity_extern(mentity) then return false
@@ -79,6 +81,28 @@ class ModelFilter
 	fun accept_mentity_fictive(mentity: MEntity): Bool do
 		if accept_fictive then return true
 		return not mentity.is_fictive
+	end
+
+	# Accept generated entities?
+	#
+	# Default is `true`.
+	var accept_generated = true is optional, writable
+
+	# Accept only non-generated entities
+	#
+	# See `MEntity::is_generated`.
+	fun accept_mentity_generated(mentity: MEntity): Bool do
+		if accept_generated then return true
+		if mentity isa MClass then mentity = mentity.intro
+		if mentity isa MProperty then mentity = mentity.intro
+		if mentity isa MModule then
+			return not mentity.has_annotation("generated")
+		else if mentity isa MClassDef then
+			return not mentity.has_annotation("generated")
+		else if mentity isa MPropDef then
+			return not mentity.has_annotation("generated")
+		end
+		return true
 	end
 
 	# Accept nitunit test suites?
