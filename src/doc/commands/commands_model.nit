@@ -447,7 +447,8 @@ abstract class CmdCode
 	fun render_code(node: nullable ANode): nullable Writable do
 		if node == null then return null
 		if format == "html" then
-			var hl = new HtmlightVisitor
+			var hl = new CmdHtmlightVisitor
+			hl.show_infobox = false
 			hl.highlight_node node
 			return hl.html
 		else if format == "ansi" then
@@ -457,6 +458,14 @@ abstract class CmdCode
 		end
 		return node.location.text
 	end
+end
+
+# Custom HtmlightVisitor for commands
+#
+# We create a new subclass so its behavior can be refined in clients without
+# breaking the main implementation.
+class CmdHtmlightVisitor
+	super HtmlightVisitor
 end
 
 # Cmd that finds the source code related to an `mentity`

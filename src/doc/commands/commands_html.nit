@@ -322,3 +322,13 @@ redef class CmdTesting
 		return "<pre>{command}</pre>"
 	end
 end
+
+# Misc
+
+redef class CmdHtmlightVisitor
+	redef fun hrefto(mentity) do
+		if mentity isa MClassDef then return mentity.mclass.html_url
+		if mentity isa MPropDef then return mentity.mproperty.html_url
+		return mentity.html_url
+	end
+end
