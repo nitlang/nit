@@ -251,6 +251,21 @@ class Bytes
 		return slice(from, length)
 	end
 
+	# Reverse the byte array in place
+	#
+	#     var b = "abcd".to_bytes
+	#     b.reverse
+	#     assert b.to_s == "dcba"
+	fun reverse
+	do
+		var l = length
+		for i in [0..l/2[ do
+			var tmp = self[i]
+			self[i] = self[l-i-1]
+			self[l-i-1] = tmp
+		end
+	end
+
 	# Returns self as an hexadecimal digest.
 	#
 	# Also known as plain hexdump or postscript hexdump.

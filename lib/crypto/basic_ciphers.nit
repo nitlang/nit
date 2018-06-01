@@ -154,6 +154,56 @@ redef class Text
 		end
 		return arr.to_s
 	end
+
+	# Vigenere encoder on ASCII letters.
+	#
+	# Only the letters in '[A-Za-z]' are encoded while keeping the case.
+	#
+	#     assert "Hello, World!".vigenere("abc") == "Hfnlp, Yosnd!"
+	#
+	# REQUIRE `key` contains only lowercases '[a-z]'
+	fun vigenere(key: String): String
+	do
+		var res = new Buffer
+		res.enlarge(length)
+		var i = 0
+		for c in self do
+			var k = key[i%key.length]
+			assert k >= 'a' and k <= 'z'
+			if c.is_letter then
+				var d = k.code_point - 'a'.code_point
+				c = c.rot(d)
+				i += 1
+			end
+			res.add c
+		end
+		return res.to_s
+	end
+
+	# Vigenere decoder on ASCII letters.
+	#
+	# Only the letters in '[A-Za-z]' are decoded while keeping the case.
+	#
+	#     assert "Hfnlp, Yosnd!".uvigenere("abc") == "Hello, World!"
+	#
+	# REQUIRE `key` contains only lowercases '[a-z]'
+	fun uvigenere(key: String): String
+	do
+		var res = new Buffer
+		res.enlarge(length)
+		var i = 0
+		for c in self do
+			var k = key[i%key.length]
+			assert k >= 'a' and k <= 'z'
+			if c.is_letter then
+				var d = k.code_point - 'a'.code_point
+				c = c.rot(-d)
+				i += 1
+			end
+			res.add c
+		end
+		return res.to_s
+	end
 end
 
 redef class Bytes
