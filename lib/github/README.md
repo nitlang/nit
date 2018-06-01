@@ -18,17 +18,17 @@ Token can also be recovered from user config with `get_github_oauth`.
 
 [[doc: load_user]]
 [[doc: User]]
-[[list: User]]
+[[defs: User]]
 
 ### Retrieving repo data
 
 [[doc: load_repo]]
 [[doc: Repo]]
-[[list: Repo]]
+[[defs: Repo]]
 
 ### Other data
 
-[[list: github::api]]
+[[defs: github::api]]
 
 ### Advanced uses
 
@@ -68,4 +68,4 @@ GithubAPI can trigger different events depending on the hook configuration.
 
 [[doc: GithubEvent]]
 
-[[list: github::events]]
+[[defs: github::events]]
