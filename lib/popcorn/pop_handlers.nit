@@ -431,7 +431,7 @@ redef class HttpResponse
 	# Write data in body response and send it.
 	fun send(raw_data: nullable Writable, status: nullable Int) do
 		if raw_data != null then
-			body += raw_data.write_to_string
+			body = raw_data
 		end
 		if status != null then
 			status_code = status

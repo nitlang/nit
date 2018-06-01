@@ -50,7 +50,7 @@ class WikiEditForm
 	fun to_http_response: HttpResponse
 	do
 		var resp = new HttpResponse(200)
-		resp.body = tpl_page.write_to_string
+		resp.body = tpl_page
 		return resp
 	end
 end

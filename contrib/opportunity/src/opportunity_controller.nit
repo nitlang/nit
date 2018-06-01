@@ -31,7 +31,7 @@ abstract class OpportunityAction
 	# TODO: Add a specific body to the bad request page.
 	fun bad_req: HttpResponse do
 		var rsp = new HttpResponse(400)
-		rsp.body = (new OpportunityHomePage).write_to_string
+		rsp.body = new OpportunityHomePage
 		return rsp
 	end
 end
@@ -73,7 +73,7 @@ class OpportunityWelcome
 				meetpage.ans = ansset
 				meetpage.meet = meet
 				meetpage.error = "'Meetup name' is a mandatory fields."
-				rsp.body = meetpage.write_to_string
+				rsp.body = meetpage
 				return rsp
 
 			end
@@ -85,7 +85,7 @@ class OpportunityWelcome
 				var meetpage = new MeetupCreationPage
 				meetpage.meet = meet
 				meetpage.error = "You need to input at least one answer."
-				rsp.body = meetpage.write_to_string
+				rsp.body = meetpage
 				return rsp
 			end
 
@@ -100,7 +100,7 @@ class OpportunityWelcome
 <p>Failed to create event</p>
 <p>This is a server side error, it has been logged.
    You may still want to contact the maintainers of this website.</p>"""
-				rsp.body = meetpage.write_to_string
+				rsp.body = meetpage
 				return rsp
 			end
 
@@ -111,22 +111,22 @@ class OpportunityWelcome
 			end
 			db.close
 			var rsp = new HttpResponse(200)
-			rsp.body = (new MeetupConfirmation(meet)).write_to_string
+			rsp.body = new MeetupConfirmation(meet)
 			return rsp
 		end
 		if rq.has("new_meetup") then
 			var rsp = new HttpResponse(200)
 			var page = new MeetupCreationPage
-			rsp.body = page.write_to_string
+			rsp.body = page
 			return rsp
 		end
 		if get.has_key("meetup_id") then
 			var rsp = new HttpResponse(200)
-			rsp.body = (new OpportunityMeetupPage.from_id(get["meetup_id"])).write_to_string
+			rsp.body = new OpportunityMeetupPage.from_id(get["meetup_id"])
 			return rsp
 		end
 		var rsp = new HttpResponse(200)
-		rsp.body = (new OpportunityHomePage).write_to_string
+		rsp.body = new OpportunityHomePage
 		return rsp
 	end
 

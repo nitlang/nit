@@ -125,7 +125,7 @@ class FileServer
 		if response.status_code != 200 then
 			var tmpl = error_page(response.status_code)
 			if header != null and tmpl isa ErrorTemplate then tmpl.header = header
-			response.body = tmpl.to_s
+			response.body = tmpl
 		end
 
 		return response
