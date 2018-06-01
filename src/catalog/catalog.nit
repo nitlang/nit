@@ -586,6 +586,20 @@ class CatalogStats
 
 	# Number of line of codes
 	var loc = 0
+
+	# Return the stats as a Map associating each stat key to its value
+	fun to_map: Map[String, Int] do
+		var map = new HashMap[String, Int]
+		map["packages"] = packages
+		map["maintainers"] = maintainers
+		map["contributors"] = contributors
+		map["tags"] = tags
+		map["modules"] = modules
+		map["classes"] = classes
+		map["methods"] = methods
+		map["loc"] = loc
+		return map
+	end
 end
 
 # MPackage statistics for the catalog
