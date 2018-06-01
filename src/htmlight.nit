@@ -126,6 +126,14 @@ class HtmlightVisitor
 			end
 		end
 		if infobox != null and not show_infobox then
+			var href = infobox.href
+			if href != null then
+				# If there is an href, we inject a link around
+				var tag2 = new HTMLTag("a")
+				tag2.add tag
+				tag = tag2
+				tag.attr("href", href)
+			end
 			tag.attr("title", infobox.title)
 			tag.classes.add "titled"
 			infobox = null
@@ -568,7 +576,7 @@ redef class MClassType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		res.href = v.hrefto(self)
+		res.href = v.hrefto(mclass.intro)
 		if not v.show_infobox then return res
 		res.new_field("class").add mclass.intro.linkto(v)
 		add_doc_to_infobox(res)
