@@ -44,6 +44,7 @@ class ModelFilter
 	#
 	# If one of the filter returns `false` then the `mentity` is not accepted.
 	fun accept_mentity(mentity: MEntity): Bool do
+		if not accept_mentity_broken(mentity) then return false
 		if not accept_mentity_visibility(mentity) then return false
 		if not accept_mentity_fictive(mentity) then return false
 		if not accept_mentity_test(mentity) then return false
@@ -206,5 +207,16 @@ class ModelFilter
 		var string = accept_full_name
 		if string == null then return true
 		return mentity.full_name.has(string)
+	end
+
+	# Accept broken classes and properties?
+	#
+	# Default is `false`.
+	var accept_broken = false is optional, writable
+
+	# Accept only non broken entities
+	fun accept_mentity_broken(mentity: MEntity): Bool do
+		if accept_broken then return true
+		return not mentity.is_broken
 	end
 end
