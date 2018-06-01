@@ -369,7 +369,7 @@ end
 class CmdRedefs
 	super CmdInheritance
 
-	redef fun init_command do
+	redef fun init_results do
 		if results != null then return new CmdSuccess
 
 		var res = super
@@ -377,10 +377,10 @@ class CmdRedefs
 		var mentity = self.mentity.as(not null)
 
 		if mentity isa MModule then
-			var mentities = mentity.collect_redef_mclasses(filter).to_a
+			var mentities = mentity.collect_redef_mclassdefs(filter).to_a
 			self.results = mentities
 		else if mentity isa MClass then
-			var mentities = mentity.collect_redef_mproperties(filter).to_a
+			var mentities = mentity.collect_redef_mpropdefs(filter).to_a
 			self.results = mentities
 		else if mentity isa MClassDef then
 			var mentities = mentity.collect_redef_mpropdefs(filter).to_a
