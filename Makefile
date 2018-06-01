@@ -60,9 +60,6 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--github-upstream "nitlang:nit:master" \
-		--github-base-sha1 "$$(git rev-parse HEAD)" \
-		--github-gitdir "." \
 		--source "https://github.com/nitlang/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "2" \
@@ -74,9 +71,6 @@ doc/nitc/index.html: bin/nitdoc bin/nitls
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the Nit tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit tools. Version $$(git describe)." \
-		--github-upstream "nitlang:nit:master" \
-		--github-base-sha1 "$$(git rev-parse HEAD)" \
-		--github-gitdir "." \
 		--source "https://github.com/nitlang/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "3"
