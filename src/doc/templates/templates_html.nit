@@ -263,7 +263,9 @@ redef class MMethodDef
 		if mproperty.is_root_init and new_msignature != null then
 			return new_msignature.html_signature(short)
 		end
-		return msignature.as(not null).html_signature(short)
+		var msignature = self.msignature
+		if msignature == null then return new Template
+		return msignature.html_signature(short)
 	end
 end
 
