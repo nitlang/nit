@@ -2,6 +2,7 @@
 #
 # Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2018 Matthieu Le Guellaut <leguellaut.matthieu@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +39,8 @@ in "C" `{
 	#include <arpa/inet.h>
 	#include <netinet/in.h>
 	#include <netinet/ip.h>
+	#include <sys/un.h>
+	#include <unistd.h>
 
 // Protect callbacks for compatibility with light FFI
 #ifdef Connection_decr_ref
@@ -421,7 +424,7 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 	private new bind_to(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
 	import ConnectionFactory.accept_connection, error_callback `{
 
-		struct sockaddr_in sin;
+		struct sockaddr_in sin = {0};
 		struct evconnlistener *listener;
 		ConnectionFactory_incr_ref(factory);
 
@@ -431,7 +434,6 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 			return NULL;
 		}
 
-		memset(&sin, 0, sizeof(sin));
 		sin.sin_family = hostent->h_addrtype;
 		sin.sin_port = htons(port);
 		memcpy( &(sin.sin_addr.s_addr), (const void*)hostent->h_addr, hostent->h_length );
@@ -443,6 +445,27 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 
 		if (listener != NULL) {
 			evconnlistener_set_error_cb(listener, (evconnlistener_errorcb)ConnectionListener_error_callback);
+		}
+
+		return listener;
+	`}
+
+	private new bind_unix(base: NativeEventBase, file: CString, factory: ConnectionFactory)
+	import ConnectionFactory.accept_connection, error_callback `{
+
+		ConnectionFactory_incr_ref(factory);
+
+		struct sockaddr_un sun = {0};
+		sun.sun_family = AF_UNIX;
+		strncpy(sun.sun_path, file, sizeof(sun.sun_path) - 1);
+
+		struct evconnlistener *listener = evconnlistener_new_bind(base,
+			(evconnlistener_cb)accept_connection_cb, factory,
+			LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, -1,
+			(struct sockaddr*)&sun, sizeof(sun));
+		if (listener != NULL) {
+			evconnlistener_set_error_cb(listener,
+				(evconnlistener_errorcb)ConnectionListener_error_callback);
 		}
 
 		return listener;
@@ -497,6 +520,28 @@ class ConnectionFactory
 		if listener.address_is_null then
 			sys.stderr.write "libevent warning: Opening {address}:{port} failed\n"
 		end
+
+		return listener
+	end
+
+	# Listen on a UNIX domain socket for new connections
+	#
+	# On new connections, libevent callbacks `spawn_connection`.
+	fun bind_unix(path: String): nullable ConnectionListener
+	do
+		# Delete the socket if it already exists
+		var stat = path.file_stat
+		if stat != null and stat.is_sock then path.file_delete
+
+		var listener = new ConnectionListener.bind_unix(
+			event_base, path.to_cstring, self)
+
+		if listener.address_is_null then
+			print_error "libevent warning: Opening UNIX domain socket {path} failed, " +
+				evutil_socket_error_to_string(evutil_socket_error).to_s
+			return null
+		end
+
 		return listener
 	end
 
