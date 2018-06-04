@@ -16,7 +16,7 @@
 
 NITCOPT=--semi-global
 OLDNITCOPT=--semi-global
-OBJS=nitc nitpick nit nitls nitunit nitpm nitx nitlight nitserial nitrestful
+OBJS=nitc nitpick nit nitls nitunit nitpm nitx nitlight nitserial nitrestful nitpackage
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 MOREOBJS=nitdoc nitweb nitcatalog nitmetrics nitpretty nitweb
