@@ -240,6 +240,22 @@ Average size of table by runtime class: 3.83
 Values never redefined: 17 (73.91%)
 generating package_hierarchy.dot
 generating module_hierarchy.dot
+--- Metrics of the explitic static types ---
+Total number of explicit static types: 9
+Statistics of type usage:
+ population: 4
+ minimum value: 1
+ maximum value: 6
+ total value: 9
+ average value: 2.25
+ distribution:
+  <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
+  <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
+ list:
+  Int: 6 (66.66%)
+  C: 1 (11.11%)
+  B: 1 (11.11%)
+  A: 1 (11.11%)
 
 # MClasses metrics
 
@@ -720,22 +736,6 @@ Warning: no source file for `base_simple3`
 	  min: base_simple3 (0.143)
 	  std: 0.0
 	  sum: 0.143
---- Metrics of the explitic static types ---
-Total number of explicit static types: 9
-Statistics of type usage:
- population: 4
- minimum value: 1
- maximum value: 6
- total value: 9
- average value: 2.25
- distribution:
-  <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
-  <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
- list:
-  Int: 6 (66.66%)
-  C: 1 (11.11%)
-  B: 1 (11.11%)
-  A: 1 (11.11%)
 
 # Mendel metrics
 	large mclasses (threshold: 3.915)
