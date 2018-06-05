@@ -3809,8 +3809,9 @@ end
 
 redef class ACharExpr
 	redef fun expr(v) do
-		if is_ascii then return v.int_instance(value.as(not null).ascii)
-		if is_code_point then return v.int_instance(value.as(not null).code_point)
+		if is_code_point then
+			return v.int_instance(value.as(not null).code_point)
+		end
 		return v.char_instance(self.value.as(not null))
 	end
 end

@@ -807,11 +807,6 @@ universal Int
 	#     assert 0x220B.code_point == '∋'
 	fun code_point: Char is intern `{ return (uint32_t)self; `}
 
-	# Returns the character equivalent of `self`
-	#
-	# REQUIRE: `self <= 127`
-	fun ascii: Char do return code_point
-
 	# Number of digits of an integer in base `b` (plus one if negative)
 	#
 	#     assert 123.digit_count(10) == 3
@@ -963,14 +958,6 @@ universal Char
 			return self.to_lower.code_point - 'a'.code_point + 10
 		end
 	end
-
-	# The ascii value of `self`
-	#
-	#     assert 'a'.ascii    == 97
-	#     assert '\n'.ascii   == 10
-	#
-	# REQUIRE: `is_ascii`
-	fun ascii: Int do return code_point
 
 	# The unicode code point value of `self`
 	#

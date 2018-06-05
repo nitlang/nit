@@ -26,7 +26,7 @@ redef class Bytes
 		var mod = length % blocksize
 		if mod == 0 then return self
 		var pad = blocksize - mod
-		var byte = pad.to_b
+		var byte = pad
 		for i in [0..pad[ do add byte
 		return self
 	end
