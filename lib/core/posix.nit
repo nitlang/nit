@@ -111,8 +111,3 @@ extern class Group `{struct group*`}
 		return ret;
 	`}
 end
-
-redef class Int
-	# Does the file descriptor `self` refer to a terminal?
-	fun isatty: Bool `{ return isatty(self); `}
-end
