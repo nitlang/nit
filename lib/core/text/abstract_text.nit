@@ -794,7 +794,7 @@ abstract class Text
 			else if c == ':' or c == ' ' or c == '#' then
 				b.add('\\')
 				b.add(c)
-			else if c.code_point < 32 or c == ';' or c == '|' or c == '\\' or c == '=' then
+			else if c.code_point < 32 or c == ';' or c == '|' or c == '\\' then
 				b.append("?{c.code_point.to_base(16)}")
 			else
 				b.add(c)
