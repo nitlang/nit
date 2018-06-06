@@ -1267,6 +1267,30 @@ abstract class Text
 		return retarr.reversed
 	end
 
+	# Pad `self` to `ln` characters with `char` as padding character
+	#
+	# If `char` is null, defaults to ' '.
+	#
+	# ~~~
+	# var s = "Sample"
+	# assert s.l_pad(20, '0') == "00000000000000Sample"
+	# var b = new Buffer.from_text("Sample")
+	# assert b.l_pad(20, '0') == "00000000000000Sample"
+	# ~~~
+	fun l_pad(ln: Int, char: nullable Char): String do return justify(ln, 1.0, char)
+
+	# Pad `self` to `ln` characters with `char` as padding character
+	#
+	# If `char` is null, defaults to ' '.
+	#
+	# ~~~
+	# var s = "Sample"
+	# assert s.r_pad(20, '0') == "Sample00000000000000"
+	# var b = new Buffer.from_text("Sample")
+	# assert b.r_pad(20, '0') == "Sample00000000000000"
+	# ~~~
+	fun r_pad(ln: Int, char: nullable Char): String do return justify(ln, 0.0, char)
+
 	# Concatenates self `i` times
 	#
 	# ~~~
