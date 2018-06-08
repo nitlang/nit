@@ -654,6 +654,7 @@ class SeparateErasureCompilerVisitor
 		var res = self.new_var(mtype)
 		res.is_exact = true
 		self.require_declaration("NEW_{nclass.c_name}")
+		length = autobox(length, compiler.mainmodule.int_type)
 		self.add("{res} = NEW_{nclass.c_name}({length});")
 		return res
 	end
