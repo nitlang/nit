@@ -266,7 +266,7 @@ redef class Byte
 		else
 			# Write as ext
 			var bytes = new Bytes.with_capacity(1)
-			bytes.add self
+			bytes.add self.to_i
 			v.stream.write_msgpack_ext(v.ext_typ_byte, bytes)
 		end
 	end

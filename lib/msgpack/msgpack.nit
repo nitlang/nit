@@ -107,7 +107,7 @@
 #
 # ~~~
 # assert 0x01u8.serialize_msgpack                   == b"\xD4\x7E\x01"
-# assert b"\xD4\x7E\x01".deserialize_msgpack == 0x01u8
+# assert b"\xD4\x7E\x01".deserialize_msgpack == 1
 # ~~~
 #
 # ## Full objects

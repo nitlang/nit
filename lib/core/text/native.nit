@@ -35,16 +35,16 @@ in "C" `{
 #include <string.h>
 `}
 
-redef class Byte
+redef class Int
 	# Gives the length of the UTF-8 char starting with `self`
 	fun u8len: Int do
-		if self & 0b1000_0000u8 == 0u8 then
+		if self & 0b1000_0000 == 0 then
 			return 1
-		else if self & 0b1110_0000u8 == 0b1100_0000u8 then
+		else if self & 0b1110_0000 == 0b1100_0000 then
 			return 2
-		else if self & 0b1111_0000u8 == 0b1110_0000u8 then
+		else if self & 0b1111_0000 == 0b1110_0000 then
 			return 3
-		else if self & 0b1111_1000u8 == 0b1111_0000u8 then
+		else if self & 0b1111_1000 == 0b1111_0000 then
 			return 4
 		else
 			return 1
@@ -54,16 +54,16 @@ redef class Byte
 	# Is `self` a valid UTF-8 sequence start ?
 	#
 	# ~~~nit
-	# assert 0u8.is_valid_utf8_start
-	# assert 0xC0u8.is_valid_utf8_start
-	# assert 0xE0u8.is_valid_utf8_start
-	# assert 0xF0u8.is_valid_utf8_start
+	# assert 0.is_valid_utf8_start
+	# assert 0xC0.is_valid_utf8_start
+	# assert 0xE0.is_valid_utf8_start
+	# assert 0xF0.is_valid_utf8_start
 	# ~~~
 	fun is_valid_utf8_start: Bool do
-		if self & 0x80u8 == 0u8 then return true
-		if self & 0b1110_0000u8 == 0b1100_0000u8 then return true
-		if self & 0b1111_0000u8 == 0b1110_0000u8 then return true
-		if self & 0b1111_1000u8 == 0b1111_0000u8 then return true
+		if self & 0x80 == 0 then return true
+		if self & 0b1110_0000 == 0b1100_0000 then return true
+		if self & 0b1111_0000 == 0b1110_0000 then return true
+		if self & 0b1111_1000 == 0b1111_0000 then return true
 		return false
 	end
 end
@@ -104,10 +104,10 @@ extern class CString `{ char* `}
 	fun fast_cstring(index: Int): CString is intern
 
 	# Get char at `index`.
-	fun [](index: Int): Byte is intern
+	fun [](index: Int): Int is intern
 
 	# Set char `item` at index.
-	fun []=(index: Int, item: Byte) is intern
+	fun []=(index: Int, item: Int) is intern
 
 	# Copy `self` to `dest`.
 	fun copy_to(dest: CString, length: Int, from: Int, to: Int) is intern
@@ -120,7 +120,7 @@ extern class CString `{ char* `}
 	fun cstring_length: Int
 	do
 		var l = 0
-		while self[l] != 0u8 do l += 1
+		while self[l] != 0 do l += 1
 		return l
 	end
 
@@ -146,7 +146,7 @@ extern class CString `{ char* `}
 	# ~~~
 	fun char_at(pos: Int): Char do
 		var c = self[pos]
-		if c & 0x80u8 == 0u8 then return c.ascii
+		if c & 0x80 == 0 then return c.code_point
 		var b = fetch_4_hchars(pos)
 		var ret = 0u32
 		if b & 0xC00000u32 != 0x800000u32 then return 0xFFFD.code_point
@@ -179,13 +179,13 @@ extern class CString `{ char* `}
 	# Gets the length of the character at position `pos` (1 if invalid sequence)
 	fun length_of_char_at(pos: Int): Int do
 		var c = self[pos]
-		if c & 0x80u8 == 0x00u8 then
+		if c & 0x80 == 0x00 then
 			return 1
-		else if c & 0xE0u8 == 0xC0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 then
+		else if c & 0xE0 == 0xC0 and self[pos + 1] & 0xC0 == 0x80 then
 			return 2
-		else if c & 0xF0u8 == 0xE0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 then
+		else if c & 0xF0 == 0xE0 and self[pos + 1] & 0xC0 == 0x80 and self[pos + 2] & 0xC0 == 0x80 then
 			return 3
-		else if c & 0xF8u8 == 0xF0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 and self[pos + 3] & 0xC0u8 == 0x80u8 then
+		else if c & 0xF8 == 0xF0 and self[pos + 1] & 0xC0 == 0x80 and self[pos + 2] & 0xC0 == 0x80 and self[pos + 3] & 0xC0 == 0x80 then
 			return 4
 		else
 			return 1
@@ -265,13 +265,13 @@ extern class CString `{ char* `}
 	# ~~~raw
 	#	assert "abc".items.find_beginning_of_char_at(2) == 2
 	#	assert "か".items.find_beginning_of_char_at(1) == 0
-	#	assert [0x41u8, 233u8].to_s.items.find_beginning_of_char_at(1) == 1
+	#	assert [0x41, 233].to_s.items.find_beginning_of_char_at(1) == 1
 	# ~~~
 	fun find_beginning_of_char_at(pos: Int): Int do
 		var endpos = pos
 		var c = self[pos]
-		if c & 0x80u8 == 0x00u8 then return pos
-		while c & 0xC0u8 == 0x80u8 do
+		if c & 0x80 == 0x00 then return pos
+		while c & 0xC0 == 0x80 do
 			pos -= 1
 			c = self[pos]
 		end

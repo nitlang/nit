@@ -1,5 +1,5 @@
 CString
-0x4e
+78
 Nit
 NativeArray[Int]
 3

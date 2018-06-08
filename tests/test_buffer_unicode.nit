@@ -34,7 +34,7 @@ end
 l = 0
 
 for i in fb.bytes do
-	print "Byte {l} = {i}"
+	print "Byte {l} = 0x{i.to_hex}"
 	l += 1
 end
 
@@ -48,6 +48,6 @@ end
 l = fb.byte_length - 1
 
 for i in fb.bytes.reverse_iterator do
-	print "Byte {l} = {i}"
+	print "Byte {l} = 0x{i.to_hex}"
 	l -= 1
 end

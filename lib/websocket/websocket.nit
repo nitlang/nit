@@ -148,14 +148,14 @@ class WebsocketConnection
 		var ans_buffer = new Bytes.with_capacity(msg.byte_length + 2)
 		# Flag for final frame set to 1
 		# opcode set to 1 (for text)
-		ans_buffer.add(129u8)
+		ans_buffer.add(129)
 		if msg.length < 126 then
-			ans_buffer.add(msg.length.to_b)
+			ans_buffer.add(msg.length)
 		end
 		if msg.length >= 126 and msg.length <= 65535 then
-			ans_buffer.add(126u8)
-			ans_buffer.add((msg.length >> 8).to_b)
-			ans_buffer.add(msg.length.to_b)
+			ans_buffer.add(126)
+			ans_buffer.add(msg.length >> 8)
+			ans_buffer.add(msg.length)
 		end
 		msg.append_to_bytes(ans_buffer)
 		return ans_buffer

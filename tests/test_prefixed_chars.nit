@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var ascii_char = b'A'
+var ascii_char = u'A'
 var unicode_char = u'𐏓'
-
-#alt1 var bug_ascii = b'𐏓'
 
 print ascii_char
 print unicode_char

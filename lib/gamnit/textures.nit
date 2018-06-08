@@ -161,10 +161,10 @@ class CustomTexture
 
 		# Simple conversion from [0.0..1.0] to [0..255]
 		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
-		while bytes.length < 4 do bytes.add 255u8
+		while bytes.length < 4 do bytes.add 255
 
 		var offset = 4*(x + y*width.to_i)
-		for i in [0..4[ do cpixels[offset+i] = bytes[i]
+		for i in [0..4[ do cpixels[offset+i] = bytes[i].to_b
 
 		loaded = false
 	end
@@ -177,12 +177,12 @@ class CustomTexture
 	do
 		# Simple conversion from [0.0..1.0] to [0..255]
 		var bytes = [for c in color do (c*255.0).round.to_i.clamp(0, 255).to_bytes.last]
-		while bytes.length < 4 do bytes.add 255u8
+		while bytes.length < 4 do bytes.add 255
 
 		var i = 0
 		for x in [0..width.to_i[ do
 			for y in [0..height.to_i[ do
-				for j in [0..4[ do cpixels[i+j] = bytes[j]
+				for j in [0..4[ do cpixels[i+j] = bytes[j].to_b
 				i += 4
 			end
 		end

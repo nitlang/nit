@@ -158,9 +158,6 @@ universal Int8
 	redef fun to_i32 is intern
 	redef fun to_u32 is intern
 
-	# Returns `self` as a Char according to its ASCII value.
-	fun ascii: Char `{ return (uint32_t)self; `}
-
 	redef fun distance(i) do return (self - i).to_i
 
 	redef fun <=>(other)
@@ -251,9 +248,6 @@ universal Int16
 	redef fun -(i) is intern
 	redef fun *(i) is intern
 	redef fun /(i) is intern
-
-	# Returns `self` as a Char according to its ASCII value.
-	fun ascii: Char `{ return (uint32_t)self; `}
 
 	# Modulo of `self` with `i`.
 	#
@@ -387,9 +381,6 @@ universal UInt16
 	redef fun zero do return 0.to_u16
 	redef fun value_of(val) do return val.to_u16
 
-	# Returns `self` as a Char according to its ASCII value.
-	fun ascii: Char `{ return (uint32_t)self; `}
-
 	# `i` bits shift to the left
 	#
 	#     assert 5u16 << 1    == 10u16
@@ -499,9 +490,6 @@ universal Int32
 	redef fun -(i) is intern
 	redef fun *(i) is intern
 	redef fun /(i) is intern
-
-	# Returns `self` as a Char according to its ASCII value.
-	fun ascii: Char `{ return (uint32_t)self; `}
 
 	# Modulo of `self` with `i`.
 	#
@@ -623,9 +611,6 @@ universal UInt32
 	redef fun -(i) is intern
 	redef fun *(i) is intern
 	redef fun /(i) is intern
-
-	# Returns `self` as a Char according to its ASCII value.
-	fun ascii: Char `{ return (uint32_t)self; `}
 
 	# Modulo of `self` with `i`.
 	#

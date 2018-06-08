@@ -1577,9 +1577,7 @@ end
 redef class ACharExpr
 	redef fun accept_typing(v) do
 		var mclass: nullable MClass = null
-		if is_ascii then
-			mclass = v.get_mclass(self, "Byte")
-		else if is_code_point then
+		if is_code_point then
 			mclass = v.get_mclass(self, "Int")
 		else
 			mclass = v.get_mclass(self, "Char")

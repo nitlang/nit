@@ -18,7 +18,7 @@
 # var w = new FileWriter.open("/tmp/data.bin")
 # w.write "hello"
 # w.write_int64 123456789
-# w.write_byte 3u8
+# w.write_byte 3
 # w.write_float 1.25
 # w.write_double 1.234567
 # w.write_bits(true, false, true)
@@ -70,7 +70,7 @@ redef abstract class Writer
 	super BinaryStream
 
 	# Write a boolean `value` on a byte, using 0 for `false` and 1 for `true`
-	fun write_bool(value: Bool) do write_byte if value then 1u8 else 0u8
+	fun write_bool(value: Bool) do write_byte if value then 1 else 0
 
 	# Write up to 8 `Bool` in a byte
 	#
@@ -81,9 +81,9 @@ redef abstract class Writer
 	do
 		assert bits.length <= 8
 
-		var int = 0u8
+		var int = 0
 		for b in bits.length.times do
-			if bits[b] then int |= 1u8 << (7 - b)
+			if bits[b] then int |= 1 << (7 - b)
 		end
 
 		write_byte int
@@ -97,7 +97,7 @@ redef abstract class Writer
 	fun write_string(text: Text)
 	do
 		write text
-		write_byte 0x00u8
+		write_byte 0x00
 	end
 
 	# Write the length as a 64 bits integer, then the content of `text`
@@ -184,7 +184,7 @@ redef abstract class Reader
 			if byte <= 0 then
 				return buf.to_s
 			end
-			buf.add byte.to_b
+			buf.add byte
 		end
 	end
 
@@ -341,7 +341,7 @@ end
 
 redef class Int
 	# Utility for `BinaryWriter`
-	private fun int64_byte_at(index: Int, big_endian: Bool): Byte `{
+	private fun int64_byte_at(index: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char bytes[8];
 			int64_t val;
@@ -360,7 +360,7 @@ end
 
 redef class Float
 	# Utility for `BinaryWriter`
-	private fun float_byte_at(index: Int, big_endian: Bool): Byte `{
+	private fun float_byte_at(index: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char bytes[4];
 			float val;
@@ -377,7 +377,7 @@ redef class Float
 	`}
 
 	# Utility for `BinaryWriter`
-	private fun double_byte_at(index: Int, big_endian: Bool): Byte `{
+	private fun double_byte_at(index: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char bytes[8];
 			double val;

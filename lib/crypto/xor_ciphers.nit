@@ -69,7 +69,7 @@ class SingleByteXorCipher
 	super Cipher
 
 	# Cryptographic key used in encryption and decryption.
-	var key: Byte = 0.to_b
+	var key: Int = 0
 
 	redef fun encrypt do
 		var key_bytes = new Bytes.with_capacity(1)

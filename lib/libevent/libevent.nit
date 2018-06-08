@@ -366,7 +366,7 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 	`}
 
 	# Write the byte `value`
-	fun write_byte(value: Byte): Int `{
+	fun write_byte(value: Int): Int `{
 		unsigned char byt = (unsigned char)value;
 		return bufferevent_write(self, &byt, 1);
 	`}

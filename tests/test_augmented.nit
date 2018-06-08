@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var c1 = b'G'
+var c1 = u'G'
 var c2 = u'𐏓'
 
 var s = b"String\x41\x42"

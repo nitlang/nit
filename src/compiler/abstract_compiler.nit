@@ -1789,7 +1789,7 @@ abstract class AbstractCompilerVisitor
 		var nat = new_var(mtype)
 		var byte_esc = new Buffer.with_cap(len * 4)
 		for i in [0 .. len[ do
-			byte_esc.append("\\x{ns[i].to_s.substring_from(2)}")
+			byte_esc.append("\\x{ns[i].to_hex}")
 		end
 		self.add("{nat} = \"{byte_esc}\";")
 		return nat
@@ -3809,8 +3809,9 @@ end
 
 redef class ACharExpr
 	redef fun expr(v) do
-		if is_ascii then return v.byte_instance(value.as(not null).ascii)
-		if is_code_point then return v.int_instance(value.as(not null).code_point)
+		if is_code_point then
+			return v.int_instance(value.as(not null).code_point)
+		end
 		return v.char_instance(self.value.as(not null))
 	end
 end

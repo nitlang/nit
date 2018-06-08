@@ -122,7 +122,7 @@ abstract class Reader
 		for i in [0 .. max[ do
 			var b = raw_read_byte
 			if b < 0 then break
-			buf[i] = b.to_b
+			buf[i] = b
 			rd += 1
 		end
 		return rd
@@ -551,7 +551,7 @@ abstract class Writer
 	fun write(s: Text) is abstract
 
 	# Write a single byte
-	fun write_byte(value: Byte) is abstract
+	fun write_byte(value: Int) is abstract
 
 	# Write a single char
 	fun write_char(c: Char) do
@@ -627,7 +627,7 @@ end
 #
 # writer.write "Strings "
 # writer.write_char '&'
-# writer.write_byte 0x20u8
+# writer.write_byte 0x20
 # writer.write_bytes "bytes".to_bytes
 #
 # assert writer.to_s == "\\x53\\x74\\x72\\x69\\x6E\\x67\\x73\\x20\\x26\\x20\\x62\\x79\\x74\\x65\\x73"
@@ -641,12 +641,12 @@ end
 # writer = new BytesWriter
 #
 # # Write just the character first half
-# writer.write_byte 0xC2u8
+# writer.write_byte 0xC2
 # assert writer.to_s == "\\xC2"
 # assert writer.bytes.to_s == "�"
 #
 # # Complete the character
-# writer.write_byte 0xA2u8
+# writer.write_byte 0xA2
 # assert writer.to_s == "\\xC2\\xA2"
 # assert writer.bytes.to_s == "¢"
 # ~~~
@@ -698,7 +698,7 @@ end
 #
 # writer.write "Strings "
 # writer.write_char '&'
-# writer.write_byte 0x20u8
+# writer.write_byte 0x20
 # writer.write_bytes "bytes".to_bytes
 #
 # assert writer.to_s == "Strings & bytes"

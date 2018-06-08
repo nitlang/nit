@@ -55,7 +55,7 @@ redef class FlatText
 		var its = _items
 
 		if dpos == 1 then
-			if its[b] & 0x80u8 == 0x00u8 then
+			if its[b] & 0x80 == 0x00 then
 				b += 1
 			else
 				b += its.length_of_char_at(b)
@@ -113,17 +113,17 @@ redef class FlatText
 		var endlen = 0
 		while pos <= max do
 			var c = its[pos]
-			if c == b'<' then
+			if c == u'<' then
 				endlen += 3
-			else if c == b'>' then
+			else if c == u'>' then
 				endlen += 3
-			else if c == b'&' then
+			else if c == u'&' then
 				endlen += 4
-			else if c == b'"' then
+			else if c == u'"' then
 				endlen += 4
-			else if c == b'\'' then
+			else if c == u'\'' then
 				endlen += 4
-			else if c == 0x2Fu8 then
+			else if c == 0x2F then
 				endlen += 4
 			end
 			pos += 1
@@ -146,45 +146,45 @@ redef class FlatText
 			# Special codes:
 			# Some HTML characters are used as meta-data, they need
 			# to be replaced by an HTML-Escaped equivalent
-			if c == b'<' then
-				nits[outpos] = b'&'
-				nits[outpos + 1] = b'l'
-				nits[outpos + 2] = b't'
-				nits[outpos + 3] = b';'
+			if c == u'<' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'l'
+				nits[outpos + 2] = u't'
+				nits[outpos + 3] = u';'
 				outpos += 4
-			else if c == b'>' then
-				nits[outpos] = b'&'
-				nits[outpos + 1] = b'g'
-				nits[outpos + 2] = b't'
-				nits[outpos + 3] = b';'
+			else if c == u'>' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'g'
+				nits[outpos + 2] = u't'
+				nits[outpos + 3] = u';'
 				outpos += 4
-			else if c == b'&' then
-				nits[outpos] = b'&'
-				nits[outpos + 1] = b'a'
-				nits[outpos + 2] = b'm'
-				nits[outpos + 3] = b'p'
-				nits[outpos + 4] = b';'
+			else if c == u'&' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'a'
+				nits[outpos + 2] = u'm'
+				nits[outpos + 3] = u'p'
+				nits[outpos + 4] = u';'
 				outpos += 5
-			else if c == b'"' then
-				nits[outpos] = b'&'
-				nits[outpos + 1] = b'#'
-				nits[outpos + 2] = b'3'
-				nits[outpos + 3] = b'4'
-				nits[outpos + 4] = b';'
+			else if c == u'"' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'#'
+				nits[outpos + 2] = u'3'
+				nits[outpos + 3] = u'4'
+				nits[outpos + 4] = u';'
 				outpos += 5
-			else if c == b'\'' then
-				nits[outpos] = b'&'
-				nits[outpos + 1] = b'#'
-				nits[outpos + 2] = b'3'
-				nits[outpos + 3] = b'9'
-				nits[outpos + 4] = b';'
+			else if c == u'\'' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'#'
+				nits[outpos + 2] = u'3'
+				nits[outpos + 3] = u'9'
+				nits[outpos + 4] = u';'
 				outpos += 5
-			else if c == 0x2Fu8 then
-				nits[outpos] = b'&'
-				nits[outpos + 1] = b'#'
-				nits[outpos + 2] = b'4'
-				nits[outpos + 3] = b'7'
-				nits[outpos + 4] = b';'
+			else if c == u'/' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'#'
+				nits[outpos + 2] = u'4'
+				nits[outpos + 3] = u'7'
+				nits[outpos + 4] = u';'
 				outpos += 5
 			else
 				nits[outpos] = c
@@ -208,33 +208,33 @@ redef class FlatText
 		var req_esc = 0
 		while pos <= max do
 			var c = its[pos]
-			if c == b'\n' then
+			if c == u'\n' then
 				req_esc += 1
-			else if c == b'\t' then
+			else if c == u'\t' then
 				req_esc += 1
-			else if c == b'"' then
+			else if c == u'"' then
 				req_esc += 1
-			else if c == b'\'' then
+			else if c == u'\'' then
 				req_esc += 1
-			else if c == b'\\' then
+			else if c == u'\\' then
 				req_esc += 1
-			else if c == 0x3Fu8 then
+			else if c == u'?' then
 				var j = pos + 1
 				if j < length then
 					var next = its[j]
 					# We ignore `??'` because it will be escaped as `??\'`.
 					if
-						next == 0x21u8 or
-						next == 0x28u8 or
-						next == 0x29u8 or
-						next == 0x2Du8 or
-						next == 0x2Fu8 or
-						next == 0x3Cu8 or
-						next == 0x3Du8 or
-						next == 0x3Eu8
+						next == 0x21 or
+						next == 0x28 or
+						next == 0x29 or
+						next == 0x2D or
+						next == 0x2F or
+						next == 0x3C or
+						next == 0x3D or
+						next == 0x3E
 					then req_esc += 1
 				end
-			else if c < 32u8 then
+			else if c < 32 then
 				req_esc += 3
 			end
 			pos += 1
@@ -269,52 +269,52 @@ redef class FlatText
 			# * 0x22 => \"
 			# * 0x27 => \'
 			# * 0x5C => \\
-			if c == b'\t' then
-				nns[opos] = b'\\'
-				nns[opos + 1] = b't'
+			if c == u'\t' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u't'
 				opos += 2
-			else if c == b'\n' then
-				nns[opos] = b'\\'
-				nns[opos + 1] = b'n'
+			else if c == u'\n' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'n'
 				opos += 2
-			else if c == b'"' then
-				nns[opos] = b'\\'
-				nns[opos + 1] = b'"'
+			else if c == u'"' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'"'
 				opos += 2
-			else if c == b'\'' then
-				nns[opos] = b'\\'
-				nns[opos + 1] = b'\''
+			else if c == u'\'' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'\''
 				opos += 2
-			else if c == b'\\' then
-				nns[opos] = b'\\'
-				nns[opos + 1] = b'\\'
+			else if c == u'\\' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'\\'
 				opos += 2
-			else if c == 0x3Fu8 then
+			else if c == u'?' then
 				var j = pos + 1
 				if j < length then
 					var next = its[j]
 					# We ignore `??'` because it will be escaped as `??\'`.
 					if
-						next == 0x21u8 or
-						next == 0x28u8 or
-						next == 0x29u8 or
-						next == 0x2Du8 or
-						next == 0x2Fu8 or
-						next == 0x3Cu8 or
-						next == 0x3Du8 or
-						next == 0x3Eu8
+						next == 0x21 or
+						next == 0x28 or
+						next == 0x29 or
+						next == 0x2D or
+						next == 0x2F or
+						next == 0x3C or
+						next == 0x3D or
+						next == 0x3E
 					then
-						nns[opos] = 0x5Cu8
+						nns[opos] = 0x5C
 						opos += 1
 					end
 				end
-				nns[opos] = 0x3Fu8
+				nns[opos] = 0x3F
 				opos += 1
-			else if c < 32u8 then
-				nns[opos] = b'\\'
-				nns[opos + 1] = b'0'
-				nns[opos + 2] = ((c & 0x38u8) >> 3) + b'0'
-				nns[opos + 3] = (c & 0x07u8) + b'0'
+			else if c < 32 then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'0'
+				nns[opos + 2] = ((c & 0x38) >> 3) + u'0'
+				nns[opos + 3] = (c & 0x07) + u'0'
 				opos += 4
 			else
 				nns[opos] = c
@@ -339,7 +339,7 @@ redef class FlatText
 		if dpos == 1 and index < len - 1 then
 			var its = _items
 			var c = its[b]
-			if c & 0x80u8 == 0x00u8 then
+			if c & 0x80 == 0x00 then
 				# We want the next, and current is easy.
 				# So next is easy to find!
 				b += 1
@@ -351,20 +351,20 @@ redef class FlatText
 		else if dpos == -1 and index > 1 then
 			var its = _items
 			var c = its[b-1]
-			if c & 0x80u8 == 0x00u8 then
+			if c & 0x80 == 0x00 then
 				# We want the previous, and it is easy.
 				b -= 1
 				dpos = 0
 				_position = index
 				_bytepos = b
-				return c.ascii
+				return c.code_point
 			end
 		end
 		if dpos == 0 then
 			# We know what we want (+0 or +1) just get it now!
 			var its = _items
 			var c = its[b]
-			if c & 0x80u8 == 0x00u8 then return c.ascii
+			if c & 0x80 == 0x00 then return c.code_point
 			return items.char_at(b)
 		end
 
@@ -379,7 +379,7 @@ redef class FlatText
 		var i = char_to_byte_index(index)
 		var items = _items
 		var b = items[i]
-		if b & 0x80u8 == 0x00u8 then return b.ascii
+		if b & 0x80 == 0x00 then return b.code_point
 		return items.char_at(i)
 	end
 
@@ -395,7 +395,7 @@ redef class FlatText
 		var max = pos + ln
 		for i in [pos .. max[ do
 			res <<= 4
-			res += its[i].ascii.from_hex
+			res += its[i].code_point.from_hex
 		end
 		return res
 	end
@@ -421,7 +421,7 @@ abstract class FlatString
 		var blen = _byte_length
 		var new_items = new CString(blen + 1)
 		_items.copy_to(new_items, blen, _first_byte, 0)
-		new_items[blen] = 0u8
+		new_items[blen] = 0
 		return new_items
 	end
 
@@ -624,7 +624,7 @@ abstract class FlatString
 		var its = _items
 		var fb = _first_byte
 		var ns = new CString(new_byte_length + 1)
-		ns[new_byte_length] = 0u8
+		ns[new_byte_length] = 0
 		var offset = 0
 		while i > 0 do
 			its.copy_to(ns, mybtlen, fb, offset)
@@ -696,7 +696,7 @@ private class ASCIIFlatString
 
 	redef fun [](idx) do
 		assert idx < _byte_length and idx >= 0
-		return _items[idx + _first_byte].ascii
+		return _items[idx + _first_byte].code_point
 	end
 
 	redef fun substring(from, count) do
@@ -729,7 +729,7 @@ private class ASCIIFlatString
 		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
 	end
 
-	redef fun fetch_char_at(i) do return _items[i + _first_byte].ascii
+	redef fun fetch_char_at(i) do return _items[i + _first_byte].code_point
 end
 
 private class FlatStringCharReverseIterator
@@ -784,7 +784,7 @@ private class FlatStringCharView
 end
 
 private class FlatStringByteReverseIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatString
 
@@ -810,7 +810,7 @@ private class FlatStringByteReverseIterator
 end
 
 private class FlatStringByteIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatString
 
@@ -1019,7 +1019,7 @@ class FlatBuffer
 	do
 		var bln = _byte_length
 		var new_native = new CString(bln + 1)
-		new_native[bln] = 0u8
+		new_native[bln] = 0
 		if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
 		return new_native
 	end
@@ -1163,7 +1163,7 @@ class FlatBuffer
 end
 
 private class FlatBufferByteReverseIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatBuffer
 
@@ -1197,7 +1197,7 @@ private class FlatBufferByteView
 end
 
 private class FlatBufferByteIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatBuffer
 
@@ -1331,7 +1331,7 @@ redef class CString
 		if copy and (str == null or str.items == self) then
 			var new_cstr = new CString(byte_length + 1)
 			copy_to(new_cstr, byte_length, 0, 0)
-			new_cstr[byte_length] = 0u8
+			new_cstr[byte_length] = 0
 			str = new FlatString.full(new_cstr, byte_length, 0, char_length)
 		end
 
@@ -1359,7 +1359,7 @@ redef class CString
 			end
 			if rem == 0 then break
 			var b = self[pos]
-			if b & 0x80u8 == 0x00u8 then
+			if b & 0x80 == 0x00 then
 				pos += 1
 				chr_ln += 1
 				rem -= 1
@@ -1368,13 +1368,13 @@ redef class CString
 			var nxst = length_of_char_at(pos)
 			var ok_st: Bool
 			if nxst == 1 then
-				ok_st = b & 0x80u8 == 0u8
+				ok_st = b & 0x80 == 0
 			else if nxst == 2 then
-				ok_st = b & 0xE0u8 == 0xC0u8
+				ok_st = b & 0xE0 == 0xC0
 			else if nxst == 3 then
-				ok_st = b & 0xF0u8 == 0xE0u8
+				ok_st = b & 0xF0 == 0xE0
 			else
-				ok_st = b & 0xF8u8 == 0xF0u8
+				ok_st = b & 0xF8 == 0xF0
 			end
 			if not ok_st then
 				if replacements == null then replacements = new Array[Int]
@@ -1425,9 +1425,9 @@ redef class CString
 				var chkln = repl_pos - old_repl
 				copy_to(ret, chkln, old_repl, off)
 				off += chkln
-				ret[off] = 0xEFu8
-				ret[off + 1] = 0xBFu8
-				ret[off + 2] = 0xBDu8
+				ret[off] = 0xEF
+				ret[off + 1] = 0xBF
+				ret[off + 2] = 0xBD
 				old_repl = repl_pos + 1
 				off += 3
 			end
@@ -1442,22 +1442,22 @@ redef class CString
 	private fun set_char_at(pos: Int, c: Char) do
 		var cp = c.code_point
 		if cp < 128 then
-			self[pos] = cp.to_b
+			self[pos] = cp
 			return
 		end
 		var ln = c.u8char_len
 		if ln == 2 then
-			self[pos] = (0xC0 | ((cp & 0x7C0) >> 6)).to_b
-			self[pos + 1] = (0x80 | (cp & 0x3F)).to_b
+			self[pos] = 0xC0 | ((cp & 0x7C0) >> 6)
+			self[pos + 1] = 0x80 | (cp & 0x3F)
 		else if ln == 3 then
-			self[pos] = (0xE0 | ((cp & 0xF000) >> 12)).to_b
-			self[pos + 1] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
-			self[pos + 2] = (0x80 | (cp & 0x3F)).to_b
+			self[pos] = 0xE0 | ((cp & 0xF000) >> 12)
+			self[pos + 1] = 0x80 | ((cp & 0xFC0) >> 6)
+			self[pos + 2] = 0x80 | (cp & 0x3F)
 		else if ln == 4 then
-			self[pos] = (0xF0 | ((cp & 0x1C0000) >> 18)).to_b
-			self[pos + 1] = (0x80 | ((cp & 0x3F000) >> 12)).to_b
-			self[pos + 2] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
-			self[pos + 3] = (0x80 | (cp & 0x3F)).to_b
+			self[pos] = 0xF0 | ((cp & 0x1C0000) >> 18)
+			self[pos + 1] = 0x80 | ((cp & 0x3F000) >> 12)
+			self[pos + 2] = 0x80 | ((cp & 0xFC0) >> 6)
+			self[pos + 3] = 0x80 | (cp & 0x3F)
 		end
 	end
 end
@@ -1474,7 +1474,7 @@ redef class Int
 
 		var nslen = int_to_s_len
 		var ns = new CString(nslen + 1)
-		ns[nslen] = 0u8
+		ns[nslen] = 0
 		native_int_to_s(ns, nslen + 1)
 		return new FlatString.full(ns, nslen, 0, nslen)
 	end
@@ -1507,7 +1507,7 @@ redef class Array[E]
 			mypos += 1
 		end
 		var ns = new CString(sl + 1)
-		ns[sl] = 0u8
+		ns[sl] = 0
 		i = 0
 		var off = 0
 		while i < mypos do
@@ -1544,7 +1544,7 @@ redef class NativeArray[E]
 			mypos += 1
 		end
 		var ns = new CString(sl + 1)
-		ns[sl] = 0u8
+		ns[sl] = 0
 		i = 0
 		var off = 0
 		while i < mypos do
