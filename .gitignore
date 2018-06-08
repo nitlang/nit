@@ -31,10 +31,12 @@ src/*.dat
 src/*.gnu
 src/*.bin
 src/nitc_0
+src/nitc_0.exe
 
 c_src/*.o
 c_src/*.cksum
 c_src/nitc
+c_src/nitc.exe
 
 csrc2/
 
