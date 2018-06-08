@@ -39,6 +39,8 @@ redef class ToolContext
 	var opt_no_cc = new OptionBool("Do not invoke the C compiler", "--no-cc")
 	# --no-main
 	var opt_no_main = new OptionBool("Do not generate main entry point", "--no-main")
+	# --shared-lib
+	var opt_shared_lib = new OptionBool("Compile to a native shared library", "--shared-lib")
 	# --make-flags
 	var opt_make_flags = new OptionString("Additional options to the `make` command", "--make-flags")
 	# --max-c-lines
@@ -81,7 +83,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_run, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_run, self.opt_no_cc, self.opt_no_main, self.opt_shared_lib, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_no_stacktrace)
@@ -92,6 +94,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_trace)
 
 		opt_no_main.hidden = true
+		opt_shared_lib.hidden = true
 	end
 
 	redef fun process_options(args)
@@ -390,6 +393,13 @@ LDLIBS  ?= -lm {{{linker_options.join(" ")}}}
 \n"""
 
 		if self.toolcontext.opt_trace.value then makefile.write "LDLIBS += -llttng-ust -ldl\n"
+
+		if toolcontext.opt_shared_lib.value then
+			makefile.write """
+CFLAGS += -fPIC
+LDFLAGS += -shared -Wl,-soname,{{{outname}}}
+"""
+		end
 
 		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
 		if platform.supports_libunwind then
