@@ -89,6 +89,17 @@ redef class CmdComment
 		end
 		return tpl.write_to_string
 	end
+
+	redef fun render_comment do
+		var mdoc = self.mdoc
+		if mdoc == null then return null
+
+		if format == "md" then
+			if full_doc then return mdoc.md_documentation
+			return mdoc.md_synopsis
+		end
+		return super
+	end
 end
 
 redef class CmdEntityLink
