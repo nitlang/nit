@@ -47,7 +47,7 @@ redef class MEntity
 		end
 		var mdoc = self.mdoc_or_fallback
 		if title == null and mdoc != null then
-			title = mdoc.synopsis.html_escape
+			title = mdoc.synopsis
 		end
 		return new Link(html_url, text, title)
 	end

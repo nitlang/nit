@@ -22,7 +22,7 @@ private import parser_util
 redef class MDoc
 
 	# Synopsis HTML escaped.
-	var synopsis: String is lazy do return content.first.html_escape
+	var synopsis: String is lazy do return content.first
 
 	# Comment without synopsis HTML escaped
 	var comment: String is lazy do
