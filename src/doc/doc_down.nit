@@ -21,19 +21,6 @@ private import parser_util
 
 redef class MDoc
 
-	# Synopsis HTML escaped.
-	var synopsis: String is lazy do return content.first
-
-	# Comment without synopsis HTML escaped
-	var comment: String is lazy do
-		var lines = content.to_a
-		if not lines.is_empty then lines.shift
-		return lines.join("\n")
-	end
-
-	# Full comment HTML escaped.
-	var documentation: String is lazy do return content.join("\n")
-
 	private var markdown_proc: MarkdownProcessor is lazy, writable do
 		return original_mentity.as(not null).model.nitdoc_md_processor
 	end
