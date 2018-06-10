@@ -86,18 +86,6 @@ redef class MEntity
 	# An icon representative of the mentity
 	fun html_icon: BSIcon do return new BSIcon("tag", ["text-muted"])
 
-	# A li element that can go in a `HTMLList`
-	fun html_list_item: ListItem do
-		var tpl = new Template
-		tpl.add html_namespace
-		var comment = mdoc_or_fallback
-		if comment != null then
-			tpl.add ": "
-			tpl.add comment.html_synopsis
-		end
-		return new ListItem(tpl)
-	end
-
 	# CSS classes used to decorate `self`
 	#
 	# Mainly used for icons.

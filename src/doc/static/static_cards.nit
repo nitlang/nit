@@ -282,9 +282,20 @@ class CardInheritance
 		addn "<h4 id='{id}'>{title}</h4>"
 		addn "<ul class='list-unstyled'>"
 		for mentity in mentities do
-			addn mentity.html_list_item
+			addn html_list_item(mentity)
 		end
 		addn "</ul>"
+	end
+
+	private fun html_list_item(mentity: MEntity): ListItem do
+		var tpl = new Template
+		tpl.add mentity.html_namespace
+		var comment = mentity.mdoc_or_fallback
+		if comment != null then
+			tpl.add ": "
+			tpl.add comment.html_synopsis
+		end
+		return new ListItem(tpl)
 	end
 end
 
