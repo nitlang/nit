@@ -18,8 +18,12 @@
 # To be more generic, param names should be extracted as variables.
 module commands_http
 
-import commands
-import commands::commands_catalog
+import commands_catalog
+import commands_graph
+import commands_ini
+import commands_main
+import commands_usage
+
 import nitcorn::vararg_routes
 
 redef class DocCommand

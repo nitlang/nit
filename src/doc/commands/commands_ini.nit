@@ -14,7 +14,7 @@
 
 module commands_ini
 
-import doc::commands::commands_model
+import commands_model
 
 # Cmd that finds the ini file related to an `mentity`
 abstract class CmdIni

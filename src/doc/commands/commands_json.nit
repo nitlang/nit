@@ -15,12 +15,11 @@
 # Translate command results to json
 module commands_json
 
-import commands::commands_model
-import commands::commands_graph
-import commands::commands_usage
-import commands::commands_catalog
-import commands::commands_ini
-import commands::commands_main
+import commands_catalog
+import commands_graph
+import commands_ini
+import commands_main
+import commands_usage
 
 import templates::templates_json
 import catalog::catalog_json
