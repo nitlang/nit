@@ -15,5 +15,5 @@
 # Interpretation of Nit programs
 module interpreter
 
-import naive_interpreter
+import step_interpreter
 import dynamic_loading_ffi
