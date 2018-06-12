@@ -112,14 +112,24 @@ end
 
 redef class CmdCode
 	redef fun to_md do
-		var output = render_code(node)
-		if output == null then return ""
+		var node = self.node
+		if node == null then return ""
 
+		var code = render_code(node)
 		var tpl = new Template
 		tpl.addn "~~~nit"
-		tpl.add output.write_to_string
+		tpl.add code.write_to_string
 		tpl.addn "~~~"
 		return tpl.write_to_string
+	end
+
+	redef fun render_code(node) do
+		if format == "ansi" then
+			var hl = new AnsiHighlightVisitor
+			hl.highlight_node node
+			return hl.result
+		end
+		return super
 	end
 end
 

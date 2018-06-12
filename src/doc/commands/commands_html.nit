@@ -127,9 +127,35 @@ end
 
 redef class CmdCode
 	redef fun to_html do
-		var output = render_code(node)
-		if output == null then return ""
-		return "<pre>{output.write_to_string}</pre>"
+		var node = self.node
+		if node == null then return ""
+
+		var code = render_code(node)
+		return "<pre>{code.write_to_string}</pre>"
+	end
+
+	redef fun render_code(node) do
+		if format == "html" then
+			var hl = new CmdHtmlightVisitor
+			hl.show_infobox = false
+			hl.highlight_node node
+			return hl.html
+		end
+		return super
+	end
+end
+
+# Custom HtmlightVisitor for commands
+#
+# We create a new subclass so its behavior can be refined in clients without
+# breaking the main implementation.
+class CmdHtmlightVisitor
+	super HtmlightVisitor
+
+	redef fun hrefto(mentity) do
+		if mentity isa MClassDef then return mentity.mclass.html_url
+		if mentity isa MPropDef then return mentity.mproperty.html_url
+		return mentity.html_url
 	end
 end
 
@@ -331,15 +357,5 @@ redef class CmdTesting
 		if command == null then return ""
 
 		return "<pre>{command}</pre>"
-	end
-end
-
-# Misc
-
-redef class CmdHtmlightVisitor
-	redef fun hrefto(mentity) do
-		if mentity isa MClassDef then return mentity.mclass.html_url
-		if mentity isa MPropDef then return mentity.mproperty.html_url
-		return mentity.html_url
 	end
 end

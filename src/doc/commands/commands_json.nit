@@ -90,13 +90,11 @@ redef class CmdCode
 	redef fun to_json do
 		var obj = new JsonObject
 		var node = self.node
-		if node != null then
-			obj["location"] = node.location
-		end
-		var output = render_code(node)
-		if output != null then
-			obj["code"] = output.write_to_string
-		end
+		if node == null then return obj
+
+		var code = render_code(node)
+		obj["location"] = node.location
+		obj["code"] = code.write_to_string
 		return obj
 	end
 end
