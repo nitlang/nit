@@ -44,7 +44,9 @@ redef class NaiveInterpreter
 		print "∣You enter in the step-by-step mode"
 		print "∣Enter " + "'step'".yellow  + " to do a step-into"
 		print "∣Press " + "'enter'".yellow  + " to do a step-over"
+		print "∣Enter " + "'backtrace full'".yellow  + " to print the locals variables"
 		print "∣Enter " + "'watch'".yellow  + " to print the watch list variables"
+		print "∣Enter " + "'continue'".yellow  + " to execute the code until the next breakpoint "
 		print "∣Enter something else to exit the step-by-step mode"
 		print "────────────────────────────────────────────────────────────────────"
 	end
@@ -92,6 +94,17 @@ redef class NaiveInterpreter
 				self.step_over
 			else if user_entry == "step" then
 				self.step_into
+			else if user_entry == "backtrace full" then
+				self.object_inspector.print_all_frame_value(frame.as(InterpreterFrame))
+				self.user_entry = stdin.read_line
+				self.step_execution(recv)
+			else if user_entry == "watch" then
+				self.object_inspector.print_pin_list_value
+				self.user_entry = stdin.read_line
+				self.step_execution(recv)
+			else if user_entry == "continue" then
+				self.user_entry = ""
+				self.debug_flag = false
 			else
 				self.debug_flag = false
 			end
@@ -165,6 +178,14 @@ class ObjectInspector
 		print "────────────────────────────────────────────────────────────────────"
 		tree.write_to(stdout)
 		print "────────────────────────────────────────────────────────────────────"
+	end
+
+	# Display all local frames values
+	fun print_all_frame_value(frame : InterpreterFrame) do
+		for variable, instance in frame.map do
+			var tree = inspect_object(instance,new OrderedTree[ObjectInspected],new ObjectInspected(instance,variable.name),new List[Instance])
+			print_inspected_element(tree)
+		end
 	end
 
 	# Display the pin values
