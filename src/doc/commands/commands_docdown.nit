@@ -15,11 +15,8 @@
 # Doc down related queries
 module commands_docdown
 
-import commands::commands_parser
 import commands::commands_html
 import commands::commands_md
-
-intrude import markdown::wikilinks
 
 # Retrieve the MDoc summary
 #
@@ -59,105 +56,5 @@ class CmdSummary
 		summary.add_all markdown_processor.decorator.headlines
 		self.summary = summary
 		return res
-	end
-end
-
-# Custom Markdown processor able to process doc commands
-class CmdDecorator
-	super NitdocDecorator
-
-	redef type PROCESSOR: CmdMarkdownProcessor
-
-	# Model used by wikilink commands to find entities
-	var model: Model
-
-	# Filter to apply if any
-	var filter: nullable ModelFilter
-
-	redef fun add_span_code(v, buffer, from, to) do
-		var text = new FlatBuffer
-		buffer.read(text, from, to)
-		var name = text.write_to_string
-		name = name.replace("nullable ", "")
-		var mentity = try_find_mentity(name)
-		if mentity == null then
-			super
-		else
-			v.add "<code>"
-			v.emit_text mentity.html_link.write_to_string
-			v.add "</code>"
-		end
-	end
-
-	private fun try_find_mentity(text: String): nullable MEntity do
-		var mentity = model.mentity_by_full_name(text, filter)
-		if mentity != null then return mentity
-
-		var mentities = model.mentities_by_name(text, filter)
-		if mentities.is_empty then
-			return null
-		else if mentities.length > 1 then
-			# TODO smart resolve conflicts
-		end
-		return mentities.first
-	end
-
-	redef fun add_wikilink(v, token) do
-		v.render_wikilink(token, model)
-	end
-end
-
-# Same as `InlineDecorator` but with wikilink commands handling
-class CmdInlineDecorator
-	super InlineDecorator
-
-	redef type PROCESSOR: CmdMarkdownProcessor
-
-	# Model used by wikilink commands to find entities
-	var model: Model
-
-	redef fun add_wikilink(v, token) do
-		v.render_wikilink(token, model)
-	end
-end
-
-# Custom MarkdownEmitter for commands
-class CmdMarkdownProcessor
-	super MarkdownProcessor
-
-	# Parser used to process doc commands
-	var parser: CommandParser
-
-	# Render a wikilink
-	fun render_wikilink(token: TokenWikiLink, model: Model) do
-		var link = token.link
-		if link == null then return
-		var name = token.name
-		if name != null then link = "{name} | {link}"
-
-		var command = parser.parse(link.write_to_string)
-		var error = parser.error
-
-		if error isa CmdError then
-			emit_text error.to_html.write_to_string
-			return
-		end
-		if error isa CmdWarning then
-			emit_text error.to_html.write_to_string
-		end
-		add command.as(not null).to_html
-	end
-end
-
-redef class Text
-	# Read `self` between `nstart` and `nend` (excluded) and writte chars to `out`.
-	private fun read(out: FlatBuffer, nstart, nend: Int): Int do
-		var pos = nstart
-		while pos < length and pos < nend do
-			out.add self[pos]
-			pos += 1
-		end
-		if pos == length then return -1
-		return pos
 	end
 end
