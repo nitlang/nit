@@ -27,11 +27,14 @@ private import frontend::explain_assert_api
 redef class ToolContext
 	# --discover-call-trace
 	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of methods", "--discover-call-trace")
+	# --stop-at
+	var opt_stop = new OptionBool("Start the program to indicate the breakpoints for the interpretation","--break")
 
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_discover_call_trace)
+		self.option_context.add_option(self.opt_stop)
 	end
 end
 

@@ -36,7 +36,19 @@ redef class NaiveInterpreter
 	# This flag is used to launch setp by step interpreter
 	var debug_flag = false
 
+	# The breakpoint tool
+	private var breakpoint : Breakpoints
+
+	# The user entry is use for the step by step execution
 	private var user_entry = ""
+
+	init do
+		super
+		breakpoint = new Breakpoints(self.modelbuilder)
+		if modelbuilder.toolcontext.opt_stop.value then
+			breakpoint.define_breakpoints
+		end
+	end
 
 	# Print the commands to execute step-by-step execution
 	fun print_instruction_debug do
@@ -85,6 +97,10 @@ redef class NaiveInterpreter
 
 	# Main function of the step-by-step execution this method is called after each instruction
 	fun step_execution(recv : nullable Instance) do
+		if frame isa InterpreterFrame and breakpoint.is_breakpoint(frame.current_node.location) then
+			self.deep_old_frame = frames.length
+			self.debug_flag = true
+		end
 		if self.debug_flag then
 			init_debug_mode
 			if recv != null then
@@ -102,6 +118,9 @@ redef class NaiveInterpreter
 				self.object_inspector.print_pin_list_value
 				self.user_entry = stdin.read_line
 				self.step_execution(recv)
+			else if user_entry == "break" then
+				self.user_entry = ""
+				self.breakpoint.define_breakpoints
 			else if user_entry == "continue" then
 				self.user_entry = ""
 				self.debug_flag = false
@@ -111,6 +130,8 @@ redef class NaiveInterpreter
 		end
 	end
 
+	# Step into method
+	# He execute the step-by-step execution in the method
 	fun step_into do
 		print "{self.get_color_line}"
 		deep_old_frame = frames.length
@@ -118,6 +139,8 @@ redef class NaiveInterpreter
 		old_line_number = frame.current_node.location.line_start
 	end
 
+	# Step over method
+	# He keep the step-by-step execution in the method
 	fun step_over do
 		# Check if the new instruction is in the same method or the new instruction is in the appellant method
 		# Check the line to execute all instruction line
@@ -126,7 +149,7 @@ redef class NaiveInterpreter
 		end
 	end
 
-	redef fun expr(n: AExpr): nullable Instance
+	redef fun expr(n)
 	do
 		var i = super
 		if i != null then step_execution(i)
@@ -142,6 +165,105 @@ redef class NaiveInterpreter
 		super
 	end
 end
+
+class Breakpoints
+
+	# The map representing the breakpoints with the links of the source file and array of lines
+	private var breakpoints_list = new ArrayMap[SourceFile,Array[Int]]
+
+	# The modelbuilder is stored to check the module
+	var modelbuilder: ModelBuilder
+
+	redef fun to_s do
+		var return_list = ""
+		for file, lines in breakpoints_list do
+			return_list += "File : {file.filename} lines : {lines} \n"
+		end
+		return return_list
+	end
+
+	# Is there location is a breakpoint?
+	fun is_breakpoint(location : Location): Bool do
+		if breakpoints_list.has_key(location.file) then
+			return breakpoints_list[location.file].has(location.line_start)
+		end
+		return false
+	end
+
+	# Method to interact with the breakpoints list
+	fun define_breakpoints do
+		print "────────────────────────────────────────────────────────────────────"
+		print "Breakpoints list"
+		print "{self.to_s}"
+		print "For add enter" + " 'break [file name] [line number,...]'".yellow + " for remove " + "'clear [file name] [line number,...]'".yellow
+		print "To leave the breakpoint mode enter " + "leave".yellow
+		print "────────────────────────────────────────────────────────────────────"
+		var user_entry = stdin.read_line.split(" ")
+		if user_entry.length%3 == 0 then
+			for x in [0 .. user_entry.length[.step(3) do
+				var action = user_entry[x]
+				var file = check_file(user_entry[x+1])
+				var lines = check_line(user_entry[x+2])
+				if file != null then
+					if action == "break" then
+						add_breakpoints(file,lines)
+					else if action == "clear" then
+						remove_breakpoint(file,lines)
+					else
+						print "Command unknown"
+					end
+				end
+			end
+		else
+			print "Error on the number of parameters"
+		end
+	end
+
+	# Check in the list of modules the source file exists with the name of the parameter.
+	# If it exists, return this.
+	fun check_file(name: String) : nullable SourceFile do
+		for mmodule in modelbuilder.identified_modules do
+			if mmodule.location.file.filename.search(name) != null then return mmodule.location.file
+		end
+		print "File not found"
+		return null
+	end
+
+	# Check the user input line.
+	fun check_line(string_line: String) : Array[Int] do
+		var lines = string_line.split(",")
+		var return_array = new Array[Int]
+		for line in lines do
+			if line.is_int then
+				return_array.add(line.to_i)
+			end
+		end
+		return return_array
+	end
+
+	# Method to add an breakpoint
+	# Take a source file and an lines array representing the breakpoints
+	fun add_breakpoints(file : SourceFile,lines : Array[Int])do
+		if not lines.is_empty then
+			if breakpoints_list.has_key(file) then
+				breakpoints_list[file].add_all(lines)
+			else
+				breakpoints_list[file] = lines
+			end
+		end
+	end
+
+	# Method to remove an breakpoint
+	# Take a source file and an lines array representing the breakpoints
+	fun remove_breakpoint(file : SourceFile,lines : Array[Int])do
+		if not lines.is_empty then
+			for line in lines do
+				breakpoints_list[file].remove_all(line)
+			end
+		end
+	end
+end
+
 # Represents the inspected object with the relationship between the instance and the name of the object (if it exists)
 class ObjectInspected
 	# The instance of the inspected object.
@@ -313,7 +435,7 @@ class ObjectInspector
 end
 
 redef class AMethPropdef
-	redef fun intern_call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	redef fun intern_call(v,mpropdef,args)
 	do
 		var pname = mpropdef.mproperty.name
 		if pname == "inspect_o" then
