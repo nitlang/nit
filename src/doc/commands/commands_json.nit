@@ -86,7 +86,7 @@ redef class CmdEntityLink
 	end
 end
 
-redef class CmdEntityCode
+redef class CmdCode
 	redef fun to_json do
 		var obj = new JsonObject
 		var node = self.node

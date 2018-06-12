@@ -221,13 +221,12 @@ redef class CmdEntityCode
 		else
 			print title
 		end
-		if no_color == null or not no_color then
+		var node = self.node
+		if (no_color == null or not no_color) and node != null then
 			var ansi = render_code(node)
-			if ansi != null then
-				print "~~~"
-				print ansi.write_to_string
-				print "~~~"
-			end
+			print "~~~"
+			print ansi.write_to_string
+			print "~~~"
 		else
 			printn mentity.cs_source_code
 		end

@@ -125,7 +125,7 @@ redef class CmdEntityLink
 	end
 end
 
-redef class CmdEntityCode
+redef class CmdCode
 	redef fun to_html do
 		var output = render_code(node)
 		if output == null then return ""

@@ -422,10 +422,10 @@ end
 abstract class CmdCode
 	super DocCommand
 
-	autoinit(model, modelbuilder, filter, format)
+	autoinit(model, filter, node, format)
 
-	# ModelBuilder used to get AST nodes
-	var modelbuilder: ModelBuilder
+	# AST node to display code from
+	var node: nullable ANode = null is optional, writable
 
 	# Rendering format
 	#
@@ -470,8 +470,8 @@ class CmdEntityCode
 
 	autoinit(model, modelbuilder, filter, mentity, mentity_name, format)
 
-	# AST node to return
-	var node: nullable ANode = null is optional, writable
+	# ModelBuilder used to get AST nodes from entities
+	var modelbuilder: ModelBuilder
 
 	# Same as `CmdEntity::init_mentity`
 	#
