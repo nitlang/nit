@@ -16,6 +16,7 @@
 module commands_catalog
 
 import commands_model
+import catalog
 
 # A DocCommand based on a Catalog
 abstract class CmdCatalog

@@ -24,7 +24,6 @@
 module commands_base
 
 import model::model_index
-import catalog
 
 # Documentation command
 #
