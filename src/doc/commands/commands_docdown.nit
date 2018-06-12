@@ -15,8 +15,8 @@
 # Doc down related queries
 module commands_docdown
 
-import commands::commands_html
-import commands::commands_md
+import commands_md
+import markdown
 
 # Retrieve the MDoc summary
 #
@@ -25,7 +25,7 @@ class CmdSummary
 	super CmdComment
 
 	# Markdown processor used to parse the headlines
-	var markdown_processor: nullable MarkdownProcessor = null is optional, writable
+	var markdown_processor: MarkdownProcessor is writable
 
 	# Resulting summary
 	#
@@ -36,12 +36,6 @@ class CmdSummary
 		var res = super
 		if not res isa CmdSuccess then return res
 		var mentity = self.mentity.as(not null)
-
-		var markdown_processor = self.markdown_processor
-		if markdown_processor == null then
-			markdown_processor = new MarkdownProcessor
-			self.markdown_processor = markdown_processor
-		end
 
 		var mdoc = self.mdoc
 		if mdoc == null then
