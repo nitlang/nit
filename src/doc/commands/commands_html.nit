@@ -22,8 +22,6 @@ import commands_main
 import commands_usage
 
 import templates::templates_html
-import doc_down
-import highlight
 
 redef class DocCommand
 

@@ -19,7 +19,6 @@ import commands::commands_parser
 import commands::commands_html
 import commands::commands_md
 
-intrude import doc_down
 intrude import markdown::wikilinks
 
 # Retrieve the MDoc summary

@@ -27,7 +27,8 @@ module templates_json
 import model::model_collect
 import json::serialization_write
 import catalog
-import doc_down
+
+import templates_html
 
 redef class MEntity
 	serialize

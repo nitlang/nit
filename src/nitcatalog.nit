@@ -22,8 +22,9 @@
 module nitcatalog
 
 import loader # Scan&load packages, groups and modules
-import doc::doc_down # Display mdoc
 import catalog
+
+import templates_html
 
 # A HTML page in a catalog
 #
