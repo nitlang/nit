@@ -44,6 +44,7 @@ redef class NaiveInterpreter
 		print "∣You enter in the step-by-step mode"
 		print "∣Enter " + "'step'".yellow  + " to do a step-into"
 		print "∣Press " + "'enter'".yellow  + " to do a step-over"
+		print "∣Enter " + "'watch'".yellow  + " to print the watch list variables"
 		print "∣Enter something else to exit the step-by-step mode"
 		print "────────────────────────────────────────────────────────────────────"
 	end
@@ -65,7 +66,8 @@ redef class NaiveInterpreter
 
 	# Method used when intercepting the method inspect_o
 	fun inspect_object(instance: Instance) do
-		print "{object_inspector.inspect_object(instance,new OrderedTree[ObjectInspected],new ObjectInspected(instance,variable.name),new List[Instance])}"
+		object_inspector.add_object_watch_list(instance)
+		object_inspector.mark_watch_list(instance,read_instance(instance),self)
 		init_debug_mode
 		deep_old_frame = frames.length
 		self.debug_flag = true
@@ -83,6 +85,9 @@ redef class NaiveInterpreter
 	fun step_execution(recv : nullable Instance) do
 		if self.debug_flag then
 			init_debug_mode
+			if recv != null then
+				self.object_inspector.mark_watch_list(recv,read_instance(recv),self)
+			end
 			if user_entry == "" or user_entry == "next" then
 				self.step_over
 			else if user_entry == "step" then
@@ -146,6 +151,96 @@ class ObjectInspected
 end
 
 class ObjectInspector
+
+	# This HashMap is used to store the inspected objects
+	var object_watch_list = new HashMap[Instance,OrderedTree[ObjectInspected]]
+
+	# This HashMap is used to store the inspected variable
+	var variable_watch_list = new HashMap[Variable,OrderedTree[ObjectInspected]]
+
+	# This list contains all the instances of the same line
+	var mark_list = new Array[Object]
+
+	fun print_inspected_element(tree : OrderedTree[ObjectInspected]) do
+		print "────────────────────────────────────────────────────────────────────"
+		tree.write_to(stdout)
+		print "────────────────────────────────────────────────────────────────────"
+	end
+
+	# Display the pin values
+	fun print_pin_list_value do
+		for instance , tree in object_watch_list do
+			print_inspected_element(tree)
+		end
+		for instance , tree in variable_watch_list do
+			print_inspected_element(tree)
+		end
+	end
+
+	# Method to add an instance in the object_watch_list
+	fun add_object_watch_list(instance: Instance) do
+		object_watch_list[instance] = inspect_object(instance,new OrderedTree[ObjectInspected],new ObjectInspected(instance,""),new List[Instance])
+	end
+
+	# Method called for each new instance visited to indicate which may have been modified
+	fun mark_watch_list(instance: Instance, variable : nullable Variable,v : NaiveInterpreter) do
+		if not instance.mtype isa MNullType then
+			check_refrech(v)
+			if not mark_list.has(variable) and variable != null then
+				mark_list.add(variable)
+			else if not mark_list.has(instance) and variable == null then
+				mark_list.add(instance)
+			end
+		end
+	end
+
+	# Method called to verify if the line have changed
+	fun check_refrech(v: NaiveInterpreter)do
+		if v.frames.length <= v.deep_old_frame and v.old_line_number != v.frame.current_node.location.line_start then
+			refrech_object_watch_list(v)
+		end
+	end
+
+	# Update the watchs list (instance and variable)
+	fun refrech_object_watch_list(interpreter : NaiveInterpreter) do
+		for item in mark_list do
+			if item isa Instance then
+				var variable = interpreter.read_instance(item)
+				refrech_instance_watch_list(variable,item)
+			else if item isa Variable then
+				var instance = interpreter.read_null_variable(item)
+				refrech_variable_watch_list(item,instance)
+			end
+		end
+		mark_list.clear
+	end
+
+	# Update the instance watch list
+	fun refrech_instance_watch_list(variable : nullable Variable , instance : Instance) do
+		if variable != null then
+			refrech_variable_watch_list(variable,instance)
+		else if object_watch_list.has_key(instance) then
+			object_watch_list[instance].roots.first.name = "Return value"
+			print_inspected_element(object_watch_list[instance])
+			self.object_watch_list.keys.remove(instance)
+		end
+	end
+
+	# Update the variable watch list
+	fun refrech_variable_watch_list(variable : Variable , instance : nullable Instance) do
+		if variable_watch_list.has_key(variable) and instance != null then
+			var update = inspect_object(instance,new OrderedTree[ObjectInspected],new ObjectInspected(instance,variable.name),new List[Instance])
+			if self.variable_watch_list[variable].to_s != update.to_s then
+				self.variable_watch_list[variable] = update
+				print_inspected_element(update)
+			end
+		else if object_watch_list.has_key(instance) then
+			object_watch_list[instance].roots.first.name = variable.name
+			variable_watch_list[variable] = object_watch_list[instance]
+			print_inspected_element(object_watch_list[instance])
+			self.object_watch_list.keys.remove(instance)
+		end
+	end
 
 	# Execute the object inspection.
 	# Return a OrderedTree[ObjectInspected] that represents the hierarchy of the inspected object
