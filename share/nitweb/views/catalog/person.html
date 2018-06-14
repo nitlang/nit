@@ -13,7 +13,7 @@
 <br><br>
 <div class='container'>
 	<div ng-if='vm.maintaining.results.length > 0'>
-		<h3 id='maintaining'>{{vm.maintaining.total}} maintained projects</h3>
+		<h3 id='maintaining'>{{vm.maintaining.count}} maintained projects</h3>
 		<div class='card-list'>
 			<entity-card mentity='package' ng-repeat='package in vm.maintaining.results' />
 		</div>
@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div ng-if='vm.contributing.results.length > 0'>
-		<h3 id='contributing'>{{vm.contributing.total}} contributed projects</h3>
+		<h3 id='contributing'>{{vm.contributing.count}} contributed projects</h3>
 		<div class='card-list'>
 			<entity-card mentity='package' ng-repeat='package in vm.contributing.results' />
 		</div>
