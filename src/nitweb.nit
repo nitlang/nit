@@ -87,6 +87,7 @@ private class NitwebPhase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
 		var config = build_config(toolcontext, mainmodule)
+		config.model.index # pre load model index
 		config.model.nitdoc_md_processor = config.md_processor
 
 		var app = new App
