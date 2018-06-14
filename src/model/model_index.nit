@@ -140,7 +140,7 @@ redef class Model
 	end
 
 	# ModelIndex used to perform searches
-	var index: ModelIndex is lazy do
+	var index: ModelIndex is lazy, writable do
 		var index = new ModelIndex
 		for mentity in collect_mentities do
 			if mentity isa MClassDef or mentity isa MPropDef then continue
@@ -151,12 +151,9 @@ redef class Model
 
 	redef fun mentities_by_name(name, filter) do
 		var res = new Array[MEntity]
-		if index.name_prefixes.has_key(name) then
-			for mentity in index.name_prefixes[name] do
-				if filter == null or filter.accept_mentity(mentity) then
-					res.add mentity
-				end
-			end
+		if not index.names.has_key(name) then return res
+		for mentity in index.names[name] do
+			if filter == null or filter.accept_mentity(mentity) then res.add mentity
 		end
 		return res
 	end
@@ -248,6 +245,9 @@ class ModelIndex
 	# Faster than traversing the tries.
 	var mentities = new Array[MEntity]
 
+	# Map of all mentities indexed by their `name`
+	var names = new HashMap[String, Array[MEntity]]
+
 	# Prefix tree for mentities `name`
 	#
 	# Because multiple mentities can share the same `name`, we use a Trie of
@@ -256,6 +256,9 @@ class ModelIndex
 	# As for now, we do not index class and property definitions.
 	# TODO add an option.
 	var name_prefixes = new Trie[Array[MEntity]]
+
+	# Map of all mentities indexed by their `full_name`
+	var full_names = new HashMap[String, MEntity]
 
 	# Prefix tree for mentities `full_name`
 	#
@@ -268,6 +271,14 @@ class ModelIndex
 	# See `name_prefixes`.
 	private fun index_by_name(mentity: MEntity) do
 		var name = mentity.name
+
+		# Index name
+		if not names.has_key(name) then
+			names[name] = new Array[MEntity]
+		end
+		names[name].add mentity
+
+		# Index prefix
 		if not name_prefixes.has_key(name) then
 			name_prefixes[name] = new Array[MEntity]
 		end
@@ -277,6 +288,11 @@ class ModelIndex
 	# Index `mentity` by its `MEntity::full_name`
 	private fun index_by_full_name(mentity: MEntity) do
 		var name = mentity.full_name
+
+		# Index full name
+		full_names[name] = mentity
+
+		# Index prefix
 		if not full_name_prefixes.has_key(name) then
 			full_name_prefixes[name] = new Array[MEntity]
 		end
