@@ -74,7 +74,7 @@ class TestCommandsCatalog
 
 	fun test_cmd_catalog_search_with_filter is test do
 		var filter = new ModelFilter(accept_example = false)
-		var cmd = new CmdCatalogSearch(test_model, test_catalog, filter, query = "MyGame")
+		var cmd = new CmdCatalogSearch(test_model, test_catalog, filter, query = "MGame")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.results.as(not null).first.full_name == "test_prog::Game" # not MyGame

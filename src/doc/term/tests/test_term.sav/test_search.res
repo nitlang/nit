@@ -5,8 +5,3 @@ Search results for `Caracter`:
    class Character
    test_location
 
- + test_prog::character
-   # Characters are playable entity in the world.
-   module character
-   test_location
-

@@ -31,7 +31,7 @@ class TestCommandsModel
 	end
 
 	fun test_cmd_entity_not_found is test do
-		var cmd = new CmdEntity(test_model, mentity_name = "test_prog::Characterzz")
+		var cmd = new CmdEntity(test_model, mentity_name = "test_prog::Characterz")
 		var res = cmd.init_command
 		assert res isa ErrorMEntityNotFound
 		assert res.suggestions.first.full_name == "test_prog::Character"
