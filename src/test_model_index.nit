@@ -45,6 +45,40 @@ redef class MEntity
 	end
 end
 
+fun search(index: ModelIndex, toolcontext: ToolContext, query: String) do
+	print "# {query}\n"
+
+	var res
+	if toolcontext.opt_name_prefix.value then
+		res = index.find_by_name_prefix(query)
+	else if toolcontext.opt_full_name_prefix.value then
+		res = index.find_by_full_name_prefix(query)
+	else if toolcontext.opt_name_similarity.value then
+		res = index.find_by_name_similarity(query)
+	else if toolcontext.opt_full_name_similarity.value then
+		res = index.find_by_full_name_similarity(query)
+	else if toolcontext.opt_name.value then
+		res = index.find_by_name(query)
+	else if toolcontext.opt_full_name.value then
+		res = index.find_by_full_name(query)
+	else
+		res = index.find(query)
+	end
+
+	res = res.sort(new ScoreComparator, new MEntityComparator).
+			uniq.
+			limit(10).
+			sort(new VisibilityComparator, new NameComparator)
+
+	for e in res do
+		if toolcontext.opt_no_color.value then
+			print " * {e.score}: {e.mentity.name} ({e.mentity.full_name})"
+		else
+			print " * {e.score}: {e.mentity.color} ({e.mentity.full_name})"
+		end
+	end
+end
+
 # build toolcontext
 var toolcontext = new ToolContext
 toolcontext.process_options(args)
@@ -79,40 +113,17 @@ end
 
 var query = toolcontext.opt_query.value
 if query == null then
-	# TODO add interactive mode
-	print "usage: test_model_index nitfiles... -q query"
-	exit 1
+	print "# Interactive mode, type `:q` to quit\n\n"
+	printn "> "
+	var line = stdin.read_line
+	while line != ":q" do
+		print ""
+		search(index, toolcontext, line.trim)
+		print ""
+		printn "> "
+		line = stdin.read_line
+	end
 	return
 end
 
-print "# {query}\n"
-
-var res
-if toolcontext.opt_name_prefix.value then
-	res = index.find_by_name_prefix(query)
-else if toolcontext.opt_full_name_prefix.value then
-	res = index.find_by_full_name_prefix(query)
-else if toolcontext.opt_name_similarity.value then
-	res = index.find_by_name_similarity(query)
-else if toolcontext.opt_full_name_similarity.value then
-	res = index.find_by_full_name_similarity(query)
-else if toolcontext.opt_name.value then
-	res = index.find_by_name(query)
-else if toolcontext.opt_full_name.value then
-	res = index.find_by_full_name(query)
-else
-	res = index.find(query)
-end
-
-res = res.sort(new ScoreComparator, new MEntityComparator).
-		uniq.
-		limit(10).
-		sort(new VisibilityComparator, new NameComparator)
-
-for e in res do
-	if toolcontext.opt_no_color.value then
-		print " * {e.score}: {e.mentity.name} ({e.mentity.full_name})"
-	else
-		print " * {e.score}: {e.mentity.color} ({e.mentity.full_name})"
-	end
-end
+search(index, toolcontext, query)
