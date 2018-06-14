@@ -15,6 +15,7 @@
 import frontend
 import model_index
 import console
+import realtime
 
 redef class ToolContext
 	var opt_query = new OptionString("String to search", "-q", "--query")
@@ -45,7 +46,8 @@ redef class MEntity
 	end
 end
 
-fun search(index: ModelIndex, toolcontext: ToolContext, query: String) do
+fun search(index: ModelIndex, toolcontext: ToolContext, query: String): Float do
+	var clock = new Clock
 	print "# {query}\n"
 
 	var res
@@ -77,6 +79,7 @@ fun search(index: ModelIndex, toolcontext: ToolContext, query: String) do
 			print " * {e.score}: {e.mentity.color} ({e.mentity.full_name})"
 		end
 	end
+	return clock.total
 end
 
 # build toolcontext
@@ -118,7 +121,9 @@ if query == null then
 	var line = stdin.read_line
 	while line != ":q" do
 		print ""
-		search(index, toolcontext, line.trim)
+		var time = search(index, toolcontext, line.trim)
+		print ""
+		print "Query executed in {time} seconds."
 		print ""
 		printn "> "
 		line = stdin.read_line
