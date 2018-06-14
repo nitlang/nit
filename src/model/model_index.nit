@@ -126,7 +126,9 @@
 module model_index
 
 import model::model_collect
+
 import trees::trie
+import trees::bktree
 
 redef class Model
 
@@ -257,6 +259,9 @@ class ModelIndex
 	# TODO add an option.
 	var name_prefixes = new Trie[Array[MEntity]]
 
+	# Distance tree for mentities `name`
+	var name_distances = new BKTree
+
 	# Map of all mentities indexed by their `full_name`
 	var full_names = new HashMap[String, MEntity]
 
@@ -265,6 +270,9 @@ class ModelIndex
 	# Even if two mentities cannot share the same `full_name`, we use a Trie of
 	# arrays of mentities to be consistent with `name_prefixes`.
 	var full_name_prefixes = new Trie[Array[MEntity]]
+
+	# Distance tree for mentities `full_name`
+	var full_name_distances = new BKTree
 
 	# Index `mentity` by it's `MEntity::name`
 	#
@@ -283,6 +291,9 @@ class ModelIndex
 			name_prefixes[name] = new Array[MEntity]
 		end
 		name_prefixes[name].add mentity
+
+		# Index distance
+		name_distances.add(name)
 	end
 
 	# Index `mentity` by its `MEntity::full_name`
@@ -297,6 +308,9 @@ class ModelIndex
 			full_name_prefixes[name] = new Array[MEntity]
 		end
 		full_name_prefixes[name].add mentity
+
+		# Index distance
+		full_name_distances.add(name)
 	end
 
 	# Index `mentity` so it can be retrieved by a find query
@@ -345,10 +359,15 @@ class ModelIndex
 	# Warning: may not scale to large indexes.
 	fun find_by_name_similarity(name: String, filter: nullable ModelFilter): IndexMatches do
 		var results = new IndexMatches
-		for mentity in mentities do
-			if filter != null and not filter.accept_mentity(mentity) then continue
-			if mentity isa MClassDef or mentity isa MPropDef then continue
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.name))
+		for match in name_distances.search(name) do
+			var dist = match.distance
+			var mname = match.key
+			if not names.has_key(mname) then continue
+			for mentity in names[mname] do
+				if mentity isa MClassDef or mentity isa MPropDef then continue
+				if filter != null and not filter.accept_mentity(mentity) then continue
+				results.add new IndexMatch(mentity, dist)
+			end
 		end
 		return results
 	end
@@ -359,10 +378,14 @@ class ModelIndex
 	# Warning: may not scale to large indexes.
 	fun find_by_full_name_similarity(name: String, filter: nullable ModelFilter): IndexMatches do
 		var results = new IndexMatches
-		for mentity in mentities do
-			if filter != null and not filter.accept_mentity(mentity) then continue
+		for match in full_name_distances.search(name) do
+			var dist = match.distance
+			var mname = match.key
+			if not full_names.has_key(mname) then continue
+			var mentity = full_names[mname]
 			if mentity isa MClassDef or mentity isa MPropDef then continue
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.full_name))
+			if filter != null and not filter.accept_mentity(mentity) then continue
+			results.add new IndexMatch(mentity, dist)
 		end
 		return results
 	end
@@ -370,34 +393,22 @@ class ModelIndex
 	# Rank all mentities by the distance between `name` and both the mentity name and full name
 	fun find_by_similarity(name: String, filter: nullable ModelFilter): IndexMatches do
 		var results = new IndexMatches
-		for mentity in mentities do
-			if filter != null and not filter.accept_mentity(mentity) then continue
-			if mentity isa MClassDef or mentity isa MPropDef then continue
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.name))
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.full_name))
-		end
+		results.add_all find_by_full_name_similarity(name, filter)
+		results.add_all find_by_name_similarity(name, filter)
 		return results
 	end
 
 	# Find mentities by name trying first by prefix then by similarity
 	fun find_by_name(name: String, filter: nullable ModelFilter): IndexMatches do
-		var results = find_by_name_prefix(name)
-		for mentity in mentities do
-			if filter != null and not filter.accept_mentity(mentity) then continue
-			if mentity isa MClassDef or mentity isa MPropDef then continue
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.name))
-		end
+		var results = find_by_name_prefix(name, filter)
+		results.add_all find_by_name_similarity(name, filter)
 		return results
 	end
 
 	# Find mentities by full name trying firt by prefix then by similarity
 	fun find_by_full_name(name: String, filter: nullable ModelFilter): IndexMatches do
 		var results = find_by_full_name_prefix(name)
-		for mentity in mentities do
-			if filter != null and not filter.accept_mentity(mentity) then continue
-			if mentity isa MClassDef or mentity isa MPropDef then continue
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.full_name))
-		end
+		results.add_all find_by_full_name_similarity(name, filter)
 		return results
 	end
 
@@ -409,17 +420,8 @@ class ModelIndex
 	# 4. try similarity by full_name
 	fun find(name: String, filter: nullable ModelFilter): IndexMatches do
 		var results = find_by_name_prefix(name, filter)
-
-		for result in find_by_full_name_prefix(name, filter) do
-			results.add result
-		end
-
-		for mentity in mentities do
-			if filter != null and not filter.accept_mentity(mentity) then continue
-			if mentity isa MClassDef or mentity isa MPropDef then continue
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.name))
-			results.add new IndexMatch(mentity, name.levenshtein_distance(mentity.full_name))
-		end
+		results.add_all find_by_full_name_prefix(name, filter)
+		results.add_all find_by_similarity(name, filter)
 		return results
 	end
 end
