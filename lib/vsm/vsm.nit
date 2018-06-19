@@ -120,6 +120,11 @@ class VSMIndex
 	# Documents index
 	var documents = new HashSet[DOC]
 
+	# Inversed index
+	#
+	# Link documents to existing terms.
+	var inversed_index = new HashMap[nullable Object, Array[DOC]]
+
 	# Count for all terms in all indexed documents
 	#
 	# Used to compute the `inverse_doc_frequency`.
@@ -141,6 +146,12 @@ class VSMIndex
 	# Returns an `IndexMatch` for each indexed document.
 	# Results are ordered by descending similarity.
 	fun match_vector(query: Vector): Array[IndexMatch[DOC]] do
+		var documents = new HashSet[DOC]
+		for term, count in query do
+			if inversed_index.has_key(term) then
+				documents.add_all inversed_index[term]
+			end
+		end
 		var matches = new Array[IndexMatch[DOC]]
 		for doc in documents do
 			var sim = query.cosine_similarity(doc.tfidf)
@@ -166,6 +177,10 @@ class VSMIndex
 			else
 				terms_doc_count[term] += 1.0
 			end
+			if not inversed_index.has_key(term) then
+				inversed_index[term] = new Array[DOC]
+			end
+			inversed_index[term].add doc
 		end
 		documents.add doc
 		if auto_update == null or auto_update then update_index
