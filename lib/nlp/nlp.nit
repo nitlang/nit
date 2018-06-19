@@ -30,7 +30,7 @@ class NLPIndex
 	redef fun parse_string(string) do
 		var vector = new Vector
 		if string.trim.is_empty then return vector
-		var doc = nlp_processor.process(string)
+		var doc = nlp_processor.process(string.to_lower)
 		for sentence in doc.sentences do
 			for token in sentence.tokens do
 				if not accept_token(token) then continue
