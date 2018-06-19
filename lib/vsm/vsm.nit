@@ -367,7 +367,7 @@ class Document
 	# A high weight in tf–idf is reached by a high term frequency
 	# (in the given document) and a low document frequency of the term in the
 	# whole collection of documents
-	var tfidf = new Vector
+	var tfidf: Vector = terms_count is lazy
 
 	redef fun to_s do return "{title}"
 end
