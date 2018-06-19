@@ -77,6 +77,17 @@ class Vector
 		return super
 	end
 
+	# Increment value for `obj` term
+	#
+	# If the term isn't already in the vector, the new value is 1.0.
+	fun inc(obj: nullable Object) do
+		if has_key(obj) then
+			self[obj] += 1.0
+		else
+			self[obj] = 1.0
+		end
+	end
+
 	# The norm of the vector.
 	#
 	# `||x|| = (x1 ** 2 ... + xn ** 2).sqrt`
@@ -172,11 +183,7 @@ class VSMIndex
 	# the auto update of the index.
 	fun index_document(doc: DOC, auto_update: nullable Bool) do
 		for term, count in doc.terms_count do
-			if not terms_doc_count.has_key(term) then
-				terms_doc_count[term] = 1.0
-			else
-				terms_doc_count[term] += 1.0
-			end
+			terms_doc_count.inc(term)
 			if not inversed_index.has_key(term) then
 				inversed_index[term] = new Array[DOC]
 			end
@@ -239,12 +246,7 @@ class StringIndex
 		loop
 			var token = reader.read_word
 			if token == "" then break
-
-			if not vector.has_key(token) then
-				vector[token] = 1.0
-			else
-				vector[token] += 1.0
-			end
+			vector.inc(token)
 		end
 		return vector
 	end
