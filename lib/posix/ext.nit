@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -15,7 +13,9 @@
 # limitations under the License.
 
 # Services not defined in POSIX but provided by most implementations
-module posix_ext
+module ext
+
+import posix
 
 redef extern class Passwd
 	# User information

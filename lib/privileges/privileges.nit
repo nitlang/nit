@@ -21,6 +21,7 @@
 module privileges
 
 import opts
+import posix
 
 redef class Text
 	# Does the operating system know the user named `self`?

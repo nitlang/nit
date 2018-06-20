@@ -306,6 +306,9 @@ redef class Int
 	private fun fd_to_stream(mode: CString): NativeFile `{
 		return fdopen((int)self, mode);
 	`}
+
+	# Does the file descriptor `self` refer to a terminal?
+	fun isatty: Bool `{ return isatty(self); `}
 end
 
 # Constant for read-only file streams
