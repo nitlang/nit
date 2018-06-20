@@ -9,7 +9,7 @@
 		<entity-card ng-click='vm.selectEnter()' ng-class='{active: vm.activeItem == $index}' ng-mouseover='vm.setActive($index)' mentity='mentity' ng-repeat='mentity in vm.results.results' />
 		<div class='card' ng-click='vm.selectEnter()' ng-mouseover='vm.setActive(vm.results.results.length)' ng-class='{active: vm.activeItem == vm.results.results.length}'>
 			<div class='card-body'>
-				Show all {{vm.results.total}} results for <a>"{{vm.query}}"</a>
+				Show all {{vm.results.count}} results for <a>"{{vm.query}}"</a>
 			</div>
 		</div>
 	</div>
