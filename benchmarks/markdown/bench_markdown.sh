@@ -97,6 +97,30 @@ function bench_nitmd-o()
 }
 bench_nitmd-o
 
+function bench_nitmd2()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/nitmd2.dat "nitmd2" "nitmd2"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "$engdir/nitmd2/nitmd2" "$file" "$s"
+	done
+}
+bench_nitmd2
+
+function bench_nitmd2-o()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/nitmd2-o.dat "nitmd2-o" "nitmd2-o"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "$engdir/nitmd2/nitmd2-o" "$file" "$s"
+	done
+}
+bench_nitmd2-o
+
 function bench_txtmark()
 {
 	name="$FUNCNAME"
