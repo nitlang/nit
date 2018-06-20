@@ -18,6 +18,7 @@ module templates_html
 import model::model_collect
 import doc::doc_down
 import html::bootstrap
+import catalog
 
 redef class MEntity
 
@@ -263,7 +264,9 @@ redef class MMethodDef
 		if mproperty.is_root_init and new_msignature != null then
 			return new_msignature.html_signature(short)
 		end
-		return msignature.as(not null).html_signature(short)
+		var msignature = self.msignature
+		if msignature == null then return new Template
+		return msignature.html_signature(short)
 	end
 end
 
@@ -358,5 +361,31 @@ redef class MParameter
 		end
 		if is_vararg then tpl.add "..."
 		return tpl
+	end
+end
+
+redef class Person
+
+	# HTML uniq id
+	fun html_id: String do return name.to_cmangle
+
+	# HTML default URL
+	#
+	# Should be redefined in clients.
+	fun html_url: String do return "person_{html_id}.html"
+
+	# Link to this person `html_url`
+	fun html_link: Link do return new Link(html_url, name)
+
+	redef fun to_html do
+		var tpl = new Template
+		tpl.addn "<span>"
+		var gravatar = self.gravatar
+		if gravatar != null then
+			tpl.addn "<img class='avatar' src='https://secure.gravatar.com/avatar/{gravatar}?size=14&amp;default=retro' />"
+		end
+		tpl.addn html_link
+		tpl.addn "</span>"
+		return tpl.write_to_string
 	end
 end

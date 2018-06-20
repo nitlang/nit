@@ -47,3 +47,4 @@ test_explain_assert
 base_notnull_lit_alt2
 assertions
 nitpm
+nitdoc

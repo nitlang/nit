@@ -225,6 +225,10 @@ redef class MVirtualType
 	redef var api_url = mproperty.api_url is lazy
 end
 
+redef class HtmlightVisitor
+	redef fun hrefto(mentity) do return mentity.html_url
+end
+
 redef class CmdLicenseFile
 	redef var file_url is lazy do
 		var mentity = self.mentity

@@ -204,6 +204,14 @@ private class InlineDecorator
 	end
 
 	redef fun add_headline(v, block) do
+		# save headline
+		var line = block.block.first_line
+		if line == null then return
+		var txt = line.value
+		var id = strip_id(txt)
+		var lvl = block.depth
+		headlines[id] = new HeadLine(id, txt, lvl)
+
 		v.emit_in block
 	end
 
