@@ -17,6 +17,7 @@
 	<div class='card-body' ng-if='mentity.class_name != "MPackage"'>
 		<h5 class='card-heading'>
 			<entity-signature mentity='mentity' />
+			<small><br/><entity-namespace namespace='mentity.namespace' /></small>
 		</h5>
 		<span class='synopsis' ng-bind-html='mentity.html_synopsis' />
 	</div>
