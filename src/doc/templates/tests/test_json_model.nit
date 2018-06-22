@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_templates_json is test
+module test_json_model is test
 
-import templates_json
+import json_model
 import frontend
 
 class TestModelSerialization

@@ -21,7 +21,7 @@ import commands_ini
 import commands_main
 import commands_usage
 
-import templates::templates_json
+import templates::json_model
 import json::static
 
 redef class DocCommand
