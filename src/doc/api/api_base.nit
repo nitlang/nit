@@ -22,7 +22,7 @@ import popcorn::pop_json
 
 import commands::commands_http
 import commands::commands_json
-import commands::commands_html
+import templates::html_commands
 
 # Nitweb config file.
 class NitwebConfig

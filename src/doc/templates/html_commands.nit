@@ -13,9 +13,10 @@
 # limitations under the License.
 
 # Render commands results as HTML
-module commands_html
+module html_commands
 
 import commands_catalog
+import commands_docdown
 import commands_graph
 import commands_ini
 import commands_main
@@ -284,12 +285,6 @@ redef class CmdIniLicense
 end
 
 redef class CmdEntityFile
-
-	# URL to the file
-	#
-	# Can be refined in subtools.
-	var file_url: nullable String = file is lazy, writable
-
 	redef fun to_html do
 		var file = self.file
 		if file == null then return ""
