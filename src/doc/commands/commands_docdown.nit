@@ -15,7 +15,7 @@
 # Doc down related queries
 module commands_docdown
 
-import commands_md
+import templates::md_commands
 import markdown
 
 # Retrieve the MDoc summary

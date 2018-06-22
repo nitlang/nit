@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_commands_md is test
+module test_md_commands is test
 
 import test_commands
 intrude import doc::commands::commands_main
-import doc::commands::commands_md
+import md_commands
 
 class TestCommandsMd
 	super TestCommands

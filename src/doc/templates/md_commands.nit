@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Render commands results as Markdown
-module commands_md
+module md_commands
 
 import commands_catalog
 import commands_graph
