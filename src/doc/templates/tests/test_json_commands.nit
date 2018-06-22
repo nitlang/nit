@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_commands_json is test
+module test_json_commands is test
 
 import test_commands
 intrude import doc::commands::commands_main
-import doc::commands::commands_json
+import json_commands
 
 class TestCommandsJson
 	super TestCommands

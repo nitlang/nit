@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Translate command results to json
-module commands_json
+module json_commands
 
 import commands_catalog
 import commands_graph
