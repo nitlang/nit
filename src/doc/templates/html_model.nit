@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Translate mentities to html blocks.
-module templates_html
+module html_model
 
 import model::model_collect
 import catalog
@@ -370,7 +370,8 @@ redef class Person
 	# Link to this person `html_url`
 	fun html_link: Link do return new Link(html_url, name)
 
-	redef fun to_html do
+	# Render `self` as HTML
+	fun to_html: String do
 		var tpl = new Template
 		tpl.addn "<span>"
 		var gravatar = self.gravatar

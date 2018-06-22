@@ -24,7 +24,7 @@ module nitcatalog
 import loader # Scan&load packages, groups and modules
 import catalog
 
-import templates_html
+import doc::templates::html_model
 
 # A HTML page in a catalog
 #
@@ -530,6 +530,24 @@ redef class Catalog
 	# Piwik site ID
 	# Used when `piwik_tracker` is set
 	var piwik_site_id: Int = 1
+end
+
+redef class Person
+	redef fun to_html do
+		var res = ""
+		var e = name.html_escape
+		var page = self.page
+		if page != null then
+			res += "<a href=\"{page.html_escape}\">"
+		end
+		var gravatar = self.gravatar
+		if gravatar != null then
+			res += "<img src=\"https://secure.gravatar.com/avatar/{gravatar}?size=20&amp;default=retro\">&nbsp;"
+		end
+		res += e
+		if page != null then res += "</a>"
+		return res
+	end
 end
 
 var model = new Model

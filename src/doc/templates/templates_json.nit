@@ -28,7 +28,7 @@ import model::model_collect
 import json::serialization_write
 import catalog
 
-import templates_html
+import html_model
 
 redef class MEntity
 	serialize

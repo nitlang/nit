@@ -18,8 +18,6 @@ module static_base
 import static_cards
 import modelize
 
-intrude import markdown::wikilinks
-
 # The model of a Nitdoc documentation
 class DocModel
 

@@ -15,10 +15,7 @@
 # Cards templates for the static documentation
 module static_cards
 
-import doc::commands::commands_graph
-import doc::commands::commands_catalog
-import doc::commands::commands_docdown
-import templates_html
+import templates::html_commands
 
 # A card that can be rendered to HTML
 #

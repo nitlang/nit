@@ -22,7 +22,7 @@ import commands_main
 import commands_parser
 import commands_usage
 
-import templates::templates_html
+import templates::html_model
 intrude import markdown::wikilinks
 
 redef class DocCommand
