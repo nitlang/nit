@@ -13,16 +13,18 @@
 # limitations under the License.
 
 # Render commands results as HTML
-module commands_html
+module html_commands
 
-import commands::commands_graph
-import commands::commands_usage
-import commands::commands_ini
-import commands::commands_main
+import commands_catalog
+import commands_docdown
+import commands_graph
+import commands_ini
+import commands_main
+import commands_parser
+import commands_usage
 
-import templates::templates_html
-import doc_down
-import highlight
+import templates::html_model
+intrude import markdown::wikilinks
 
 redef class DocCommand
 
@@ -104,6 +106,17 @@ redef class CmdComment
 		end
 		return tpl.write_to_string
 	end
+
+	redef fun render_comment do
+		var mdoc = self.mdoc
+		if mdoc == null then return null
+
+		if format == "html" then
+			if full_doc then return mdoc.html_documentation
+			return mdoc.html_synopsis
+		end
+		return super
+	end
 end
 
 redef class CmdEntityLink
@@ -114,11 +127,37 @@ redef class CmdEntityLink
 	end
 end
 
-redef class CmdEntityCode
+redef class CmdCode
 	redef fun to_html do
-		var output = render_code(node)
-		if output == null then return ""
-		return "<pre>{output.write_to_string}</pre>"
+		var node = self.node
+		if node == null then return ""
+
+		var code = render_code(node)
+		return "<pre>{code.write_to_string}</pre>"
+	end
+
+	redef fun render_code(node) do
+		if format == "html" then
+			var hl = new CmdHtmlightVisitor
+			hl.show_infobox = false
+			hl.highlight_node node
+			return hl.html
+		end
+		return super
+	end
+end
+
+# Custom HtmlightVisitor for commands
+#
+# We create a new subclass so its behavior can be refined in clients without
+# breaking the main implementation.
+class CmdHtmlightVisitor
+	super HtmlightVisitor
+
+	redef fun hrefto(mentity) do
+		if mentity isa MClassDef then return mentity.mclass.html_url
+		if mentity isa MPropDef then return mentity.mproperty.html_url
+		return mentity.html_url
 	end
 end
 
@@ -246,12 +285,6 @@ redef class CmdIniLicense
 end
 
 redef class CmdEntityFile
-
-	# URL to the file
-	#
-	# Can be refined in subtools.
-	var file_url: nullable String = file is lazy, writable
-
 	redef fun to_html do
 		var file = self.file
 		if file == null then return ""
@@ -323,12 +356,104 @@ redef class CmdTesting
 	end
 end
 
-# Misc
+# MDoc
 
-redef class CmdHtmlightVisitor
-	redef fun hrefto(mentity) do
-		if mentity isa MClassDef then return mentity.mclass.html_url
-		if mentity isa MPropDef then return mentity.mproperty.html_url
-		return mentity.html_url
+# Custom Markdown processor able to process doc commands
+class CmdDecorator
+	super NitdocDecorator
+
+	redef type PROCESSOR: CmdMarkdownProcessor
+
+	# Model used by wikilink commands to find entities
+	var model: Model
+
+	# Filter to apply if any
+	var filter: nullable ModelFilter
+
+	redef fun add_span_code(v, buffer, from, to) do
+		var text = new FlatBuffer
+		buffer.read(text, from, to)
+		var name = text.write_to_string
+		name = name.replace("nullable ", "")
+		var mentity = try_find_mentity(name)
+		if mentity == null then
+			super
+		else
+			v.add "<code>"
+			v.emit_text mentity.html_link.write_to_string
+			v.add "</code>"
+		end
+	end
+
+	private fun try_find_mentity(text: String): nullable MEntity do
+		var mentity = model.mentity_by_full_name(text, filter)
+		if mentity != null then return mentity
+
+		var mentities = model.mentities_by_name(text, filter)
+		if mentities.is_empty then
+			return null
+		else if mentities.length > 1 then
+			# TODO smart resolve conflicts
+		end
+		return mentities.first
+	end
+
+	redef fun add_wikilink(v, token) do
+		v.render_wikilink(token, model)
+	end
+end
+
+# Same as `InlineDecorator` but with wikilink commands handling
+class CmdInlineDecorator
+	super InlineDecorator
+
+	redef type PROCESSOR: CmdMarkdownProcessor
+
+	# Model used by wikilink commands to find entities
+	var model: Model
+
+	redef fun add_wikilink(v, token) do
+		v.render_wikilink(token, model)
+	end
+end
+
+# Custom MarkdownEmitter for commands
+class CmdMarkdownProcessor
+	super MarkdownProcessor
+
+	# Parser used to process doc commands
+	var parser: CommandParser
+
+	# Render a wikilink
+	fun render_wikilink(token: TokenWikiLink, model: Model) do
+		var link = token.link
+		if link == null then return
+		var name = token.name
+		if name != null then link = "{name} | {link}"
+
+		var command = parser.parse(link.write_to_string)
+		var error = parser.error
+
+		if error isa CmdError then
+			emit_text error.to_html.write_to_string
+			return
+		end
+		if error isa CmdWarning then
+			emit_text error.to_html.write_to_string
+		end
+		add command.as(not null).to_html
+	end
+end
+
+redef class Text
+	# Read `self` between `nstart` and `nend` (excluded) and writte chars to `out`.
+	private fun read(out: FlatBuffer, nstart, nend: Int): Int do
+		var pos = nstart
+		while pos < length and pos < nend do
+			out.add self[pos]
+			pos += 1
+		end
+		if pos == length then return -1
+		return pos
 	end
 end

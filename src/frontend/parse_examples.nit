@@ -22,7 +22,6 @@ module parse_examples
 import counter
 import typing
 import parse_annotations
-import doc_down
 import model::model_examples
 
 redef class ToolContext

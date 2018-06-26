@@ -72,7 +72,7 @@ class Link
 	redef fun rendering do
 		add "<a{render_css_classes} href=\"{href}\""
 		var title = self.title
-		if title != null then add " title=\"{title.write_to_string}\""
+		if title != null then add " title=\"{title.html_escape}\""
 		add ">{text}</a>"
 	end
 end

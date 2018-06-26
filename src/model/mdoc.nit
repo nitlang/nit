@@ -31,6 +31,19 @@ class MDoc
 
 	# The original location of the doc for error messages
 	var location: Location
+
+	# The comment first line
+	var synopsis: String is lazy do return content.first
+
+	# All comment lines except for the synopsis
+	var comment: String is lazy do
+		var lines = content.to_a
+		if not lines.is_empty then lines.shift
+		return lines.join("\n")
+	end
+
+	# Full comment
+	var documentation: String is lazy do return content.join("\n")
 end
 
 redef class MEntity

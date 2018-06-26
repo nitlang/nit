@@ -165,24 +165,6 @@ class Person
 		return email.md5.to_lower
 	end
 
-	# Return a full-featured link to a person
-	fun to_html: String
-	do
-		var res = ""
-		var e = name.html_escape
-		var page = self.page
-		if page != null then
-			res += "<a href=\"{page.html_escape}\">"
-		end
-		var gravatar = self.gravatar
-		if gravatar != null then
-			res += "<img src=\"https://secure.gravatar.com/avatar/{gravatar}?size=20&amp;default=retro\">&nbsp;"
-		end
-		res += e
-		if page != null then res += "</a>"
-		return res
-	end
-
 	# The standard representation of a person.
 	#
 	# ~~~

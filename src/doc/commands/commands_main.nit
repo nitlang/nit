@@ -14,7 +14,7 @@
 
 module commands_main
 
-import doc::commands::commands_model
+import commands_model
 
 # Cmd that finds the mains of an `mentity`
 class CmdMains

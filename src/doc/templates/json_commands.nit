@@ -13,17 +13,16 @@
 # limitations under the License.
 
 # Translate command results to json
-module commands_json
+module json_commands
 
-import commands::commands_model
-import commands::commands_graph
-import commands::commands_usage
-import commands::commands_catalog
-import commands::commands_ini
-import commands::commands_main
+import commands_catalog
+import commands_graph
+import commands_ini
+import commands_main
+import commands_usage
 
-import templates::templates_json
-import catalog::catalog_json
+import templates::json_model
+import json::static
 
 redef class DocCommand
 	# Return a JSON Serializable representation of `self` results
@@ -86,17 +85,15 @@ redef class CmdEntityLink
 	end
 end
 
-redef class CmdEntityCode
+redef class CmdCode
 	redef fun to_json do
 		var obj = new JsonObject
 		var node = self.node
-		if node != null then
-			obj["location"] = node.location
-		end
-		var output = render_code(node)
-		if output != null then
-			obj["code"] = output.write_to_string
-		end
+		if node == null then return obj
+
+		var code = render_code(node)
+		obj["location"] = node.location
+		obj["code"] = code.write_to_string
 		return obj
 	end
 end

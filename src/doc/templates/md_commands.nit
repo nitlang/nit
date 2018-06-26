@@ -13,14 +13,15 @@
 # limitations under the License.
 
 # Render commands results as Markdown
-module commands_md
+module md_commands
 
-import commands::commands_graph
-import commands::commands_usage
-import commands::commands_ini
-import commands::commands_main
+import commands_catalog
+import commands_graph
+import commands_ini
+import commands_main
+import commands_usage
 
-import doc_down
+import highlight
 
 redef class DocCommand
 
@@ -89,6 +90,17 @@ redef class CmdComment
 		end
 		return tpl.write_to_string
 	end
+
+	redef fun render_comment do
+		var mdoc = self.mdoc
+		if mdoc == null then return null
+
+		if format == "md" then
+			if full_doc then return mdoc.md_documentation
+			return mdoc.md_synopsis
+		end
+		return super
+	end
 end
 
 redef class CmdEntityLink
@@ -99,16 +111,26 @@ redef class CmdEntityLink
 	end
 end
 
-redef class CmdEntityCode
+redef class CmdCode
 	redef fun to_md do
-		var output = render_code(node)
-		if output == null then return ""
+		var node = self.node
+		if node == null then return ""
 
+		var code = render_code(node)
 		var tpl = new Template
 		tpl.addn "~~~nit"
-		tpl.add output.write_to_string
+		tpl.add code.write_to_string
 		tpl.addn "~~~"
 		return tpl.write_to_string
+	end
+
+	redef fun render_code(node) do
+		if format == "ansi" then
+			var hl = new AnsiHighlightVisitor
+			hl.highlight_node node
+			return hl.result
+		end
+		return super
 	end
 end
 
@@ -318,5 +340,41 @@ redef class CmdTesting
 		tpl.addn command
 		tpl.addn "~~~"
 		return tpl.write_to_string
+	end
+end
+
+# MDoc
+
+redef class MDoc
+
+	# Renders the synopsis as a HTML comment block.
+	var md_synopsis: Writable is lazy do
+		if content.is_empty then return ""
+		return content.first
+	end
+
+	#
+	var md_comment: Writable is lazy do
+		if content.is_empty then return ""
+		var lines = content.to_a
+		lines.shift
+		return lines.join("\n")
+	end
+
+	# Renders the synopsis and the comment as a HTML comment block.
+	var md_documentation: Writable is lazy do return lines_to_md(content.to_a)
+
+	private fun lines_to_md(lines: Array[String]): Writable do
+		var res = new Template
+		if not lines.is_empty then
+			var syn = lines.first
+			if not syn.has_prefix("    ") and not syn.has_prefix("\t") and
+			  not syn.trim.has_prefix("#") then
+				lines.shift
+				res.add "# {syn}\n"
+			end
+		end
+		res.add lines.join("\n")
+		return res
 	end
 end

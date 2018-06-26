@@ -18,12 +18,7 @@
 module commands_model
 
 import commands_base
-
-import model::model_collect
 import modelize
-import modelbuilder
-import htmlight
-import doc_down
 
 # Retrieve the MDoc related to a MEntity
 class CmdComment
@@ -47,7 +42,7 @@ class CmdComment
 
 	# Format to render the comment
 	#
-	# Can be one of `raw` or `html`.
+	# Can be one of `raw`, `html` or `md`.
 	# Default is `raw`.
 	var format = "raw" is optional, writable
 
@@ -74,10 +69,6 @@ class CmdComment
 		var mdoc = self.mdoc
 		if mdoc == null then return null
 
-		if format == "html" then
-			if full_doc then return mdoc.html_documentation
-			return mdoc.html_synopsis
-		end
 		if full_doc then return mdoc.documentation
 		return mdoc.synopsis
 	end
@@ -427,10 +418,10 @@ end
 abstract class CmdCode
 	super DocCommand
 
-	autoinit(model, modelbuilder, filter, format)
+	autoinit(model, filter, node, format)
 
-	# ModelBuilder used to get AST nodes
-	var modelbuilder: ModelBuilder
+	# AST node to display code from
+	var node: nullable ANode = null is optional, writable
 
 	# Rendering format
 	#
@@ -444,28 +435,9 @@ abstract class CmdCode
 	var format = "raw" is optional, writable
 
 	# Render `node` depending on the selected `format`
-	fun render_code(node: nullable ANode): nullable Writable do
-		if node == null then return null
-		if format == "html" then
-			var hl = new CmdHtmlightVisitor
-			hl.show_infobox = false
-			hl.highlight_node node
-			return hl.html
-		else if format == "ansi" then
-			var hl = new AnsiHighlightVisitor
-			hl.highlight_node node
-			return hl.result
-		end
+	fun render_code(node: ANode): Writable do
 		return node.location.text
 	end
-end
-
-# Custom HtmlightVisitor for commands
-#
-# We create a new subclass so its behavior can be refined in clients without
-# breaking the main implementation.
-class CmdHtmlightVisitor
-	super HtmlightVisitor
 end
 
 # Cmd that finds the source code related to an `mentity`
@@ -475,8 +447,8 @@ class CmdEntityCode
 
 	autoinit(model, modelbuilder, filter, mentity, mentity_name, format)
 
-	# AST node to return
-	var node: nullable ANode = null is optional, writable
+	# ModelBuilder used to get AST nodes from entities
+	var modelbuilder: ModelBuilder
 
 	# Same as `CmdEntity::init_mentity`
 	#

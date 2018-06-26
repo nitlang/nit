@@ -16,7 +16,7 @@
 #
 # This module introduces Markdown rendering services in model entities.
 # With the `no_color` option set to `false`, the output can be highlighted for console.
-module templates_term
+module term_model
 
 import model_collect
 import console
