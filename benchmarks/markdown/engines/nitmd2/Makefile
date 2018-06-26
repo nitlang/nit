@@ -14,26 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd nitmd2/nitmd2 txtmark/Txtmark.class markdown4j/Markdown4j.class
+NITC=../../../../bin/nitc
 
-nitmd/nitmd:
-	make -C nitmd
+all: nitmd2 nitmd2-o
 
-nitmd2/nitmd2:
-	make -C nitmd2
+nitmd2:
+	$(NITC) nitmd2.nit
 
-txtmark/Txtmark.class:
-	make -C txtmark
+nitmd2-o:
+	$(NITC) --semi-global nitmd2.nit -o $@
 
-markdown4j/Markdown4j.class:
-	make -C markdown4j
-
-pandoc/pandoc:
-	make -C pandoc
+test: all
+	./nitmd2 ../../benches/hello.md 5
+	./nitmd2-o ../../benches/hello.md 5
 
 clean:
-	make -C nitmd clean
-	make -C nitmd2 clean
-	make -C txtmark clean
-	make -C markdown4j clean
-	make -C pandoc clean
+	rm -rf nitmd2 nitmd2-o

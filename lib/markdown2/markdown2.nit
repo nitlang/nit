@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2015 Alexandre Terrasa <alexandre@moz-code.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,26 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd nitmd2/nitmd2 txtmark/Txtmark.class markdown4j/Markdown4j.class
+module markdown2
 
-nitmd/nitmd:
-	make -C nitmd
+import markdown_block_parsing
+import markdown_html_rendering
 
-nitmd2/nitmd2:
-	make -C nitmd2
-
-txtmark/Txtmark.class:
-	make -C txtmark
-
-markdown4j/Markdown4j.class:
-	make -C markdown4j
-
-pandoc/pandoc:
-	make -C pandoc
-
-clean:
-	make -C nitmd clean
-	make -C nitmd2 clean
-	make -C txtmark clean
-	make -C markdown4j clean
-	make -C pandoc clean
+redef class String
+	fun md_to_html2: String do
+		var parser = new MdParser
+		var doc = parser.parse(self)
+		var renderer = new HtmlRenderer
+		return renderer.render(doc)
+	end
+end

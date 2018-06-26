@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2015 Alexandre Terrasa <alexandre@moz-code.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,26 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd nitmd2/nitmd2 txtmark/Txtmark.class markdown4j/Markdown4j.class
+module test_commonmark_blank_lines is test
 
-nitmd/nitmd:
-	make -C nitmd
+import test_markdown
 
-nitmd2/nitmd2:
-	make -C nitmd2
+class TestCommonmarkBlankLines
+	super TestMarkdownHtml
+	test
 
-txtmark/Txtmark.class:
-	make -C txtmark
-
-markdown4j/Markdown4j.class:
-	make -C markdown4j
-
-pandoc/pandoc:
-	make -C pandoc
-
-clean:
-	make -C nitmd clean
-	make -C nitmd2 clean
-	make -C txtmark clean
-	make -C markdown4j clean
-	make -C pandoc clean
+	fun test190 is test do
+		var md = """  \n\naaa\n  \n\n# aaa\n\n  \n"""
+		var html = """<p>aaa</p>\n<h1>aaa</h1>\n"""
+		assert md_to_html(md) == html
+	end
+end
