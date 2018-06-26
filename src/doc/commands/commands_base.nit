@@ -70,6 +70,13 @@ abstract class DocCommand
 	#
 	# Warnings are generally used to distinguish empty list or mdoc from no data at all.
 	fun init_command: CmdMessage do return new CmdSuccess
+
+	# Return a new filter for that command execution.
+	fun cmd_filter: ModelFilter do
+		var filter = self.filter
+		if filter == null then return new ModelFilter
+		return new ModelFilter.from(filter)
+	end
 end
 
 # Command message

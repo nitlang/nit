@@ -39,9 +39,6 @@ class CommandParser
 	# Catalog used for catalog commands
 	var catalog: nullable Catalog
 
-	# Filter to apply on model if any
-	var filter: nullable ModelFilter
-
 	# List of allowed command names for this parser
 	var allowed_commands: Array[String] = [
 	"link", "doc", "code", "lin", "uml", "graph", "search",
@@ -143,7 +140,7 @@ class CommandParser
 		end
 
 		# Parse command options
-		var opts = new HashMap[String, String]
+		var opts = new CmdOptions
 		while pos < string.length do
 			# Parse option name
 			tmp.clear
@@ -163,7 +160,7 @@ class CommandParser
 		# Build the command
 		var command
 		if is_short_link then
-			command = new CmdEntityLink(model, filter)
+			command = new CmdEntityLink(model)
 		else
 			command = new_command(name)
 		end
@@ -184,56 +181,56 @@ class CommandParser
 	# You must redefine this method to add new custom commands.
 	fun new_command(name: String): nullable DocCommand do
 		# CmdEntity
-		if name == "link" then return new CmdEntityLink(model, filter)
-		if name == "doc" then return new CmdComment(model, filter)
-		if name == "code" then return new CmdEntityCode(model, modelbuilder, filter)
-		if name == "lin" then return new CmdLinearization(model, mainmodule, filter)
-		if name == "defs" then return new CmdFeatures(model, filter)
-		if name == "parents" then return new CmdParents(model, mainmodule, filter)
-		if name == "ancestors" then return new CmdAncestors(model, mainmodule, filter)
-		if name == "children" then return new CmdChildren(model, mainmodule, filter)
-		if name == "descendants" then return new CmdDescendants(model, mainmodule, filter)
-		if name == "param" then return new CmdParam(model, filter)
-		if name == "return" then return new CmdReturn(model, filter)
-		if name == "new" then return new CmdNew(model, modelbuilder, filter)
-		if name == "call" then return new CmdCall(model, modelbuilder, filter)
+		if name == "link" then return new CmdEntityLink(model)
+		if name == "doc" then return new CmdComment(model)
+		if name == "code" then return new CmdEntityCode(model, modelbuilder)
+		if name == "lin" then return new CmdLinearization(model, mainmodule)
+		if name == "defs" then return new CmdFeatures(model)
+		if name == "parents" then return new CmdParents(model, mainmodule)
+		if name == "ancestors" then return new CmdAncestors(model, mainmodule)
+		if name == "children" then return new CmdChildren(model, mainmodule)
+		if name == "descendants" then return new CmdDescendants(model, mainmodule)
+		if name == "param" then return new CmdParam(model)
+		if name == "return" then return new CmdReturn(model)
+		if name == "new" then return new CmdNew(model, modelbuilder)
+		if name == "call" then return new CmdCall(model, modelbuilder)
 		# CmdGraph
-		if name == "uml" then return new CmdUML(model, mainmodule, filter)
-		if name == "graph" then return new CmdInheritanceGraph(model, mainmodule, filter)
+		if name == "uml" then return new CmdUML(model, mainmodule)
+		if name == "graph" then return new CmdInheritanceGraph(model, mainmodule)
 		# CmdModel
-		if name == "list" then return new CmdModelEntities(model, filter)
-		if name == "random" then return new CmdRandomEntities(model, filter)
+		if name == "list" then return new CmdModelEntities(model)
+		if name == "random" then return new CmdRandomEntities(model)
 		# Ini
-		if name == "ini-desc" then return new CmdIniDescription(model, filter)
-		if name == "ini-git" then return new CmdIniGitUrl(model, filter)
-		if name == "ini-issues" then return new CmdIniIssuesUrl(model, filter)
-		if name == "ini-license" then return new CmdIniLicense(model, filter)
-		if name == "ini-maintainer" then return new CmdIniMaintainer(model, filter)
-		if name == "ini-contributors" then return new CmdIniContributors(model, filter)
-		if name == "license-file" then return new CmdLicenseFile(model, filter)
-		if name == "license-content" then return new CmdLicenseFileContent(model, filter)
-		if name == "contrib-file" then return new CmdContribFile(model, filter)
-		if name == "contrib-content" then return new CmdContribFileContent(model, filter)
-		if name == "git-clone" then return new CmdIniCloneCommand(model, filter)
+		if name == "ini-desc" then return new CmdIniDescription(model)
+		if name == "ini-git" then return new CmdIniGitUrl(model)
+		if name == "ini-issues" then return new CmdIniIssuesUrl(model)
+		if name == "ini-license" then return new CmdIniLicense(model)
+		if name == "ini-maintainer" then return new CmdIniMaintainer(model)
+		if name == "ini-contributors" then return new CmdIniContributors(model)
+		if name == "license-file" then return new CmdLicenseFile(model)
+		if name == "license-content" then return new CmdLicenseFileContent(model)
+		if name == "contrib-file" then return new CmdContribFile(model)
+		if name == "contrib-content" then return new CmdContribFileContent(model)
+		if name == "git-clone" then return new CmdIniCloneCommand(model)
 		# CmdMain
-		if name == "mains" then return new CmdMains(model, filter)
-		if name == "main-compile" then return new CmdMainCompile(model, filter)
-		if name == "main-run" then return new CmdManSynopsis(model, filter)
-		if name == "main-opts" then return new CmdManOptions(model, filter)
-		if name == "testing" then return new CmdTesting(model, filter)
+		if name == "mains" then return new CmdMains(model)
+		if name == "main-compile" then return new CmdMainCompile(model)
+		if name == "main-run" then return new CmdManSynopsis(model)
+		if name == "main-opts" then return new CmdManOptions(model)
+		if name == "testing" then return new CmdTesting(model)
 		# CmdCatalog
 		var catalog = self.catalog
 		if catalog != null then
-			if name == "catalog" then return new CmdCatalogPackages(model, catalog, filter)
-			if name == "stats" then return new CmdCatalogStats(model, catalog, filter)
-			if name == "tags" then return new CmdCatalogTags(model, catalog, filter)
-			if name == "tag" then return new CmdCatalogTag(model, catalog, filter)
-			if name == "person" then return new CmdCatalogPerson(model, catalog, filter)
-			if name == "contrib" then return new CmdCatalogContributing(model, catalog, filter)
-			if name == "maintain" then return new CmdCatalogMaintaining(model, catalog, filter)
-			if name == "search" then return new CmdCatalogSearch(model, catalog, filter)
+			if name == "catalog" then return new CmdCatalogPackages(model, catalog)
+			if name == "stats" then return new CmdCatalogStats(model, catalog)
+			if name == "tags" then return new CmdCatalogTags(model, catalog)
+			if name == "tag" then return new CmdCatalogTag(model, catalog)
+			if name == "person" then return new CmdCatalogPerson(model, catalog)
+			if name == "contrib" then return new CmdCatalogContributing(model, catalog)
+			if name == "maintain" then return new CmdCatalogMaintaining(model, catalog)
+			if name == "search" then return new CmdCatalogSearch(model, catalog)
 		else
-			if name == "search" then return new CmdSearch(model, filter)
+			if name == "search" then return new CmdSearch(model)
 		end
 		return null
 	end
@@ -258,7 +255,29 @@ end
 redef class DocCommand
 
 	# Initialize the command from the CommandParser data
-	fun parser_init(arg: String, options: Map[String, String]): CmdMessage do
+	fun parser_init(arg: String, options: CmdOptions): CmdMessage do
+		var filter = cmd_filter
+		var opt_vis = options.opt_visibility("min-visibility")
+		if opt_vis != null then filter.min_visibility = opt_vis
+		var opt_fictive = options.opt_bool("no-fictive")
+		if opt_fictive != null then filter.accept_fictive = not opt_fictive
+		var opt_test = options.opt_bool("no-test")
+		if opt_test != null then filter.accept_test = not opt_test
+		var opt_redef = options.opt_bool("no-redef")
+		if opt_redef != null then filter.accept_redef = not opt_redef
+		var opt_extern = options.opt_bool("no-extern")
+		if opt_extern != null then filter.accept_extern = not opt_extern
+		var opt_example = options.opt_bool("no-example")
+		if opt_example != null then filter.accept_example = not opt_example
+		var opt_attr = options.opt_bool("no-attribute")
+		if opt_attr != null then filter.accept_attribute = not opt_attr
+		var opt_doc = options.opt_bool("no-empty-doc")
+		if opt_doc != null then filter.accept_empty_doc = not opt_doc
+		var opt_inh = options.opt_mentity(model, "inherit")
+		if opt_inh != null then filter.accept_inherited = opt_inh
+		var opt_match = options.opt_string("match")
+		if opt_match != null then filter.accept_full_name = opt_match
+		self.filter = filter
 		return init_command
 	end
 end
@@ -272,7 +291,10 @@ end
 
 redef class CmdList
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("limit") and options["limit"].is_int then limit = options["limit"].to_i
+		var opt_page = options.opt_int("page")
+		if opt_page != null then page = opt_page
+		var opt_limit = options.opt_int("limit")
+		if opt_limit != null then limit = opt_limit
 		return super
 	end
 end
@@ -281,24 +303,30 @@ end
 
 redef class CmdComment
 	redef fun parser_init(mentity_name, options) do
-		full_doc = not options.has_key("only-synopsis")
-		fallback = not options.has_key("no-fallback")
-		if options.has_key("format") then format = options["format"]
+		var opt_full_doc = options.opt_bool("only-synopsis")
+		if opt_full_doc != null then full_doc = not opt_full_doc
+		var opt_fallback = options.opt_bool("no-fallback")
+		if opt_fallback != null then fallback = not opt_fallback
+		var opt_format = options.opt_string("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
 
 redef class CmdEntityLink
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("text") then text = options["text"]
-		if options.has_key("title") then title = options["title"]
+		var opt_text = options.opt_string("text")
+		if opt_text != null then text = opt_text
+		var opt_title = options.opt_string("title")
+		if opt_title != null then title = opt_title
 		return super
 	end
 end
 
 redef class CmdCode
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("format") then format = options["format"]
+		var opt_format = options.opt_string("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
@@ -306,21 +334,22 @@ end
 redef class CmdSearch
 	redef fun parser_init(mentity_name, options) do
 		query = mentity_name
-		if options.has_key("page") and options["page"].is_int then page = options["page"].to_i
 		return super
 	end
 end
 
 redef class CmdAncestors
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("parents") and options["parents"] == "false" then parents = false
+		var opt_parents = options.opt_bool("no-parents")
+		if opt_parents != null then parents = not opt_parents
 		return super
 	end
 end
 
 redef class CmdDescendants
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("children") and options["children"] == "false" then children = false
+		var opt_children = options.opt_bool("no-children")
+		if opt_children != null then children = not opt_children
 		return super
 	end
 end
@@ -334,19 +363,18 @@ end
 
 redef class CmdGraph
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("format") then format = options["format"]
+		var opt_format = options.opt_string("format")
+		if opt_format != null then format = opt_format
 		return super
 	end
 end
 
 redef class CmdInheritanceGraph
 	redef fun parser_init(mentity_name, options) do
-		if options.has_key("pdepth") and options["pdepth"].is_int then
-			pdepth = options["pdepth"].to_i
-		end
-		if options.has_key("cdepth") and options["cdepth"].is_int then
-			cdepth = options["cdepth"].to_i
-		end
+		var opt_pdepth = options.opt_int("pdepth")
+		if opt_pdepth != null then pdepth = opt_pdepth
+		var opt_cdepth = options.opt_int("cdepth")
+		if opt_cdepth != null then cdepth = opt_cdepth
 		return super
 	end
 end
@@ -368,6 +396,80 @@ redef class CmdCatalogPerson
 end
 
 # Utils
+
+# Commands options
+class CmdOptions
+	super HashMap[String,  String]
+
+	# Map String visiblity name to MVisibility object
+	var allowed_visibility: HashMap[String, MVisibility] is lazy do
+		var res = new HashMap[String, MVisibility]
+		res["public"] = public_visibility
+		res["protected"] = protected_visibility
+		res["private"] = private_visibility
+		return res
+	end
+
+	# Get option value for `key` as String
+	#
+	# Return `null` if no option with that `key` or if value is empty.
+	fun opt_string(key: String): nullable String do
+		if not has_key(key) then return null
+		var value = self[key]
+		if value.is_empty then return null
+		return value
+	end
+
+	# Get option value for `key` as Int
+	#
+	# Return `null` if no option with that `key` or if value is not an Int.
+	fun opt_int(key: String): nullable Int do
+		if not has_key(key) then return null
+		var value = self[key]
+		if not value.is_int then return null
+		return value.to_i
+	end
+
+	# Get option value as bool
+	#
+	# Return `true` if the value with that `key` is empty or equals `"true"`.
+	# Return `false` if the value with that `key` equals `"false"`.
+	# Return `null` in any other case.
+	fun opt_bool(key: String): nullable Bool do
+		if not has_key(key) then return null
+		var value = self[key]
+		if value.is_empty or value == "true" then return true
+		if value == "false" then return false
+		return null
+	end
+
+	# Get option as a MVisibility
+	#
+	# Return `null` if no option with that `key` or if the value is not in
+	# `allowed_visibility`.
+	fun opt_visibility(key: String): nullable MVisibility do
+		var value = opt_string(key)
+		if value == null then return null
+		if not allowed_visibility.keys.has(key) then return null
+		return allowed_visibility[value]
+	end
+
+	# Get option as a MEntity
+	#
+	# Lookup first by `MEntity::full_name` then by `MEntity::name`.
+	# Return `null` if the mentity name does not exist or return a conflict.
+	private fun opt_mentity(model: Model, key: String): nullable MEntity do
+		var value = opt_string(key)
+		if value == null or value.is_empty then return null
+
+		var mentity = model.mentity_by_full_name(value)
+		if mentity != null then return mentity
+
+		var mentities = model.mentities_by_name(value)
+		if mentities.is_empty or mentities.length > 1 then return null
+		return mentities.first
+	end
+end
 
 redef class Text
 	# Read `self` as raw text until `nend` and append it to the `out` buffer.

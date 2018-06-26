@@ -17,6 +17,7 @@ module test_commands
 
 import commands_base
 import frontend
+import frontend::parse_examples
 
 # Nitunit test suite specific to commands
 class TestCommands
@@ -39,12 +40,6 @@ class TestCommands
 
 	# Mainmodule used for tests
 	var test_main: MModule is noinit
-
-	# Filters used for tests
-	var test_filter = new ModelFilter(
-		private_visibility,
-		accept_fictive = false,
-		accept_test = false)
 
 	# Initialize test variables
 	#

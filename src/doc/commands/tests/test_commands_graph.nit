@@ -22,28 +22,28 @@ class TestCommandsGraph
 	test
 
 	fun test_cmd_uml is test do
-		var cmd = new CmdUML(test_model, test_main, test_filter, mentity_name = "test_prog::Character")
+		var cmd = new CmdUML(test_model, test_main, mentity_name = "test_prog::Character")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.uml != null
 	end
 
 	fun test_cmd_uml_bad_format is test do
-		var cmd = new CmdUML(test_model, test_main, test_filter, mentity_name = "test_prog::Character", format = "foo")
+		var cmd = new CmdUML(test_model, test_main, mentity_name = "test_prog::Character", format = "foo")
 		var res = cmd.init_command
 		assert res isa ErrorBadGraphFormat
 		assert cmd.uml == null
 	end
 
 	fun test_cmd_uml_not_found is test do
-		var cmd = new CmdUML(test_model, test_main, test_filter, mentity_name = "strength_bonus")
+		var cmd = new CmdUML(test_model, test_main, mentity_name = "strength_bonus")
 		var res = cmd.init_command
 		assert res isa WarningNoUML
 		assert cmd.uml == null
 	end
 
 	fun test_cmd_inh_graph is test do
-		var cmd = new CmdInheritanceGraph(test_model, test_main, test_filter, mentity_name = "test_prog::Character")
+		var cmd = new CmdInheritanceGraph(test_model, test_main, mentity_name = "test_prog::Character")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
 		assert cmd.graph != null
