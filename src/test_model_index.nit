@@ -15,8 +15,10 @@
 import frontend
 import model_index
 import console
+import realtime
 
 redef class ToolContext
+	var opt_query = new OptionString("String to search", "-q", "--query")
 	var opt_name_prefix = new OptionBool("", "--name-prefix")
 	var opt_full_name_prefix = new OptionBool("", "--full-name-prefix")
 	var opt_name_similarity = new OptionBool("", "--name-similarity")
@@ -25,6 +27,7 @@ redef class ToolContext
 	var opt_full_name = new OptionBool("", "--full-name")
 
 	redef init do
+		option_context.add_option(opt_query)
 		option_context.add_option(opt_name_prefix, opt_full_name_prefix)
 		option_context.add_option(opt_name_similarity, opt_full_name_similarity)
 		option_context.add_option(opt_name, opt_full_name)
@@ -43,20 +46,57 @@ redef class MEntity
 	end
 end
 
+fun search(index: ModelIndex, toolcontext: ToolContext, query: String): Float do
+	var clock = new Clock
+	print "# {query}\n"
+
+	var res
+	if toolcontext.opt_name_prefix.value then
+		res = index.find_by_name_prefix(query)
+	else if toolcontext.opt_full_name_prefix.value then
+		res = index.find_by_full_name_prefix(query)
+	else if toolcontext.opt_name_similarity.value then
+		res = index.find_by_name_similarity(query)
+	else if toolcontext.opt_full_name_similarity.value then
+		res = index.find_by_full_name_similarity(query)
+	else if toolcontext.opt_name.value then
+		res = index.find_by_name(query)
+	else if toolcontext.opt_full_name.value then
+		res = index.find_by_full_name(query)
+	else
+		res = index.find(query)
+	end
+
+	res = res.sort(new ScoreComparator, new MEntityComparator).
+			uniq.
+			limit(10).
+			sort(new VisibilityComparator, new NameComparator)
+
+	for e in res do
+		if toolcontext.opt_no_color.value then
+			print " * {e.score}: {e.mentity.name} ({e.mentity.full_name})"
+		else
+			print " * {e.score}: {e.mentity.color} ({e.mentity.full_name})"
+		end
+	end
+	return clock.total
+end
+
 # build toolcontext
 var toolcontext = new ToolContext
 toolcontext.process_options(args)
 var args = toolcontext.option_context.rest
 
-if not args.length == 2 then
-	print "usage: test_model_index <nitfile> <search_query>"
+if args.is_empty then
+	print "usage: test_model_index nitfiles..."
 	exit 1
+	return
 end
 
 # build model
 var model = new Model
 var mbuilder = new ModelBuilder(model, toolcontext)
-var mmodules = mbuilder.parse_full([args.first])
+var mmodules = mbuilder.parse_full(args)
 
 # process
 if mmodules.is_empty then return
@@ -74,36 +114,21 @@ for mentity in model.collect_mentities(filters) do
 	index.index(mentity)
 end
 
-var q = args[1]
-
-print "# {q}\n"
-
-var res
-if toolcontext.opt_name_prefix.value then
-	res = index.find_by_name_prefix(q)
-else if toolcontext.opt_full_name_prefix.value then
-	res = index.find_by_full_name_prefix(q)
-else if toolcontext.opt_name_similarity.value then
-	res = index.find_by_name_similarity(q)
-else if toolcontext.opt_full_name_similarity.value then
-	res = index.find_by_full_name_similarity(q)
-else if toolcontext.opt_name.value then
-	res = index.find_by_name(q)
-else if toolcontext.opt_full_name.value then
-	res = index.find_by_full_name(q)
-else
-	res = index.find(q)
-end
-
-res = res.sort(new ScoreComparator, new MEntityComparator).
-		uniq.
-		limit(10).
-		sort(new VisibilityComparator, new NameComparator)
-
-for e in res do
-	if toolcontext.opt_no_color.value then
-		print " * {e.score}: {e.mentity.name} ({e.mentity.full_name})"
-	else
-		print " * {e.score}: {e.mentity.color} ({e.mentity.full_name})"
+var query = toolcontext.opt_query.value
+if query == null then
+	print "# Interactive mode, type `:q` to quit\n\n"
+	printn "> "
+	var line = stdin.read_line
+	while line != ":q" do
+		print ""
+		var time = search(index, toolcontext, line.trim)
+		print ""
+		print "Query executed in {time} seconds."
+		print ""
+		printn "> "
+		line = stdin.read_line
 	end
+	return
 end
+
+search(index, toolcontext, query)

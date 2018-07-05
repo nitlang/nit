@@ -5,13 +5,3 @@ Search results for `Caracter`:
    class Character
    test_location
 
- + test_prog::character
-   # Characters are playable entity in the world.
-   module character
-   test_location
-
- + test_prog::Career
-   # A `Career` gives a characteristic bonus or malus to the character.
-   abstract class Career
-   test_location
-

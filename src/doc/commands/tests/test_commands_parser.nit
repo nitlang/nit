@@ -210,7 +210,7 @@ class TestCommandsParser
 
 	fun test_cmd_parser_search_limit is test do
 		var parser = new CommandParser(test_model, test_main, test_builder, test_catalog)
-		var cmd = parser.parse("search: Caracter | limit: 2")
+		var cmd = parser.parse("search: strength | limit: 2")
 		assert cmd isa CmdSearch
 		assert parser.error == null
 		assert cmd.results.as(not null).length == 2

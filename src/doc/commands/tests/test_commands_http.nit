@@ -45,7 +45,7 @@ class TestCommandsHttp
 	end
 
 	fun test_cmd_http_entity_not_found is test do
-		var req = new_request("/Characterzzz")
+		var req = new_request("/Characterz")
 		var cmd = new CmdEntity(test_model)
 		var res = cmd.http_init(req)
 		assert res isa ErrorMEntityNotFound
