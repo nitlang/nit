@@ -148,8 +148,6 @@ interface EventCallback
 end
 
 # Spawned to manage a specific connection
-#
-# TODO, use polls
 class Connection
 	super Writer
 
@@ -424,27 +422,25 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 	private new bind_to(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
 	import ConnectionFactory.accept_connection, error_callback `{
 
-		struct sockaddr_in sin = {0};
-		struct evconnlistener *listener;
 		ConnectionFactory_incr_ref(factory);
 
 		struct hostent *hostent = gethostbyname(address);
-
 		if (!hostent) {
 			return NULL;
 		}
 
+		struct sockaddr_in sin = {0};
 		sin.sin_family = hostent->h_addrtype;
 		sin.sin_port = htons(port);
 		memcpy( &(sin.sin_addr.s_addr), (const void*)hostent->h_addr, hostent->h_length );
 
-		listener = evconnlistener_new_bind(base,
+		struct evconnlistener *listener = evconnlistener_new_bind(base,
 			(evconnlistener_cb)accept_connection_cb, factory,
 			LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, -1,
 			(struct sockaddr*)&sin, sizeof(sin));
-
 		if (listener != NULL) {
-			evconnlistener_set_error_cb(listener, (evconnlistener_errorcb)ConnectionListener_error_callback);
+			evconnlistener_set_error_cb(listener,
+				(evconnlistener_errorcb)ConnectionListener_error_callback);
 		}
 
 		return listener;
@@ -474,15 +470,17 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 	# Get the `NativeEventBase` associated to `self`
 	fun base: NativeEventBase `{ return evconnlistener_get_base(self); `}
 
-	# Callback method on listening error
-	fun error_callback do
+	# Callback on listening error
+	fun error_callback
+	do
 		var cstr = evutil_socket_error_to_string(evutil_socket_error)
-		print_error "libevent error: '{cstr}'"
+		print_error "libevent error: {cstr}"
 	end
 end
 
 # Factory to listen on sockets and create new `Connection`
 class ConnectionFactory
+
 	# The `NativeEventBase` for the dispatch loop of this factory
 	var event_base: NativeEventBase
 
@@ -513,12 +511,18 @@ class ConnectionFactory
 		return new Connection(buffer_event)
 	end
 
-	# Listen on `address`:`port` for new connection, which will callback `spawn_connection`
+	# Listen on the TCP socket at `address`:`port` for new connections
+	#
+	# On new connections, libevent callbacks `spawn_connection`.
 	fun bind_to(address: String, port: Int): nullable ConnectionListener
 	do
-		var listener = new ConnectionListener.bind_to(event_base, address.to_cstring, port, self)
+		var listener = new ConnectionListener.bind_to(
+			event_base, address.to_cstring, port, self)
+
 		if listener.address_is_null then
-			sys.stderr.write "libevent warning: Opening {address}:{port} failed\n"
+			print_error "libevent warning: Opening {address}:{port} failed, " +
+				evutil_socket_error_to_string(evutil_socket_error).to_s
+			return null
 		end
 
 		return listener
@@ -545,7 +549,7 @@ class ConnectionFactory
 		return listener
 	end
 
-	# Put string representation of source `address` into `buf`
+	# Put a human readable string representation of `address` into `buf`
 	private fun addrin_to_address(address: Pointer, buf: CString, buf_len: Int): CString `{
 		struct sockaddr *addrin = (struct sockaddr*)address;
 
