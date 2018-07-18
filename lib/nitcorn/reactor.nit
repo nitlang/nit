@@ -176,7 +176,7 @@ redef class Sys
 
 		var listener = listeners[name, port]
 		if listener == null then
-			listener = factory.bind_to(name, port)
+			listener = factory.bind_tcp(name, port)
 			if listener != null then
 				sys.listeners[name, port] = listener
 				listeners_count[name, port] = 1

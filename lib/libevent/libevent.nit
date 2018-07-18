@@ -419,7 +419,7 @@ end
 # A listener acting on an interface and port, spawns `Connection` on new connections
 extern class ConnectionListener `{ struct evconnlistener * `}
 
-	private new bind_to(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
+	private new bind_tcp(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
 	import ConnectionFactory.accept_connection, error_callback `{
 
 		ConnectionFactory_incr_ref(factory);
@@ -514,9 +514,9 @@ class ConnectionFactory
 	# Listen on the TCP socket at `address`:`port` for new connections
 	#
 	# On new connections, libevent callbacks `spawn_connection`.
-	fun bind_to(address: String, port: Int): nullable ConnectionListener
+	fun bind_tcp(address: String, port: Int): nullable ConnectionListener
 	do
-		var listener = new ConnectionListener.bind_to(
+		var listener = new ConnectionListener.bind_tcp(
 			event_base, address.to_cstring, port, self)
 
 		if listener.address_is_null then
