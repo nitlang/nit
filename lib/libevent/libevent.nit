@@ -557,6 +557,14 @@ class ConnectionFactory
 			struct in6_addr *src = &((struct sockaddr_in6*)addrin)->sin6_addr;
 			return (char *)inet_ntop(addrin->sa_family, src, buf, buf_len);
 		}
+		else if (addrin->sa_family == AF_UNIX) {
+			struct sockaddr_un *src = (struct sockaddr_un*)addrin;
+			char *path = src->sun_path;
+			if (path == NULL) return "Unnamed UNIX domain socket";
+			if (path[0] == '\0') return "Abstract UNIX domain socket";
+			return path;
+		}
+
 		return NULL;
 	`}
 end
