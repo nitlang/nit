@@ -86,6 +86,11 @@ Each time a method is invoked for the first time, its information is printed on 
 
 This option helps the user to have a simplified but humanly readable overview of the behavior of a particular program execution.
 
+### `--break`
+Start the program to indicate the breakpoints for the interpretation.
+
+Print the menu to add or remove some breakpoint
+
 ## DEBUGGER OPTIONS
 
 ### `-d`

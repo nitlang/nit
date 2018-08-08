@@ -27,11 +27,14 @@ private import frontend::explain_assert_api
 redef class ToolContext
 	# --discover-call-trace
 	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of methods", "--discover-call-trace")
+	# --stop-at
+	var opt_stop = new OptionBool("Start the program to indicate the breakpoints for the interpretation","--break")
 
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_discover_call_trace)
+		self.option_context.add_option(self.opt_stop)
 	end
 end
 
@@ -446,11 +449,31 @@ class NaiveInterpreter
 		return f.map[v]
 	end
 
+	# Retrieve the value of the variable in the current frame
+	fun read_null_variable(v: Variable):nullable Instance
+	do
+		var f = frames.first.as(InterpreterFrame)
+		if f.map.has_key(v) then return f.map[v]
+		return null
+	end
+
 	# Assign the value of the variable in the current frame
 	fun write_variable(v: Variable, value: Instance)
 	do
 		var f = frames.first.as(InterpreterFrame)
 		f.map[v] = value
+	end
+
+	# Retrieve the variable of the Instance in the current frame
+	fun read_instance(i: nullable Instance): nullable Variable
+	do
+		if i != null then
+			var f = frames.first.as(InterpreterFrame)
+			for key, value in f.map do
+				if value == i then return key
+			end
+		end
+		return null
 	end
 
 	# Store known methods, used to trace methods as they are reached

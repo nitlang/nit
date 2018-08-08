@@ -222,6 +222,11 @@ interface Object
 	#
 	# Without redefinition, `hash` is based on the `object_id` of the instance.
 	fun hash: Int do return object_id
+
+	# Method catch by the interpreter to display the object value and to start the step-by-step execution.
+	#
+	# This method MUST not be used by programs, it is here for debugging in the interpreter
+	fun inspect_o is intern
 end
 
 # The main class of the program.
