@@ -2,6 +2,7 @@
 #
 # Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2018 Matthieu Le Guellaut <leguellaut.matthieu@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +39,8 @@ in "C" `{
 	#include <arpa/inet.h>
 	#include <netinet/in.h>
 	#include <netinet/ip.h>
+	#include <sys/un.h>
+	#include <unistd.h>
 
 // Protect callbacks for compatibility with light FFI
 #ifdef Connection_decr_ref
@@ -145,8 +148,6 @@ interface EventCallback
 end
 
 # Spawned to manage a specific connection
-#
-# TODO, use polls
 class Connection
 	super Writer
 
@@ -418,31 +419,49 @@ end
 # A listener acting on an interface and port, spawns `Connection` on new connections
 extern class ConnectionListener `{ struct evconnlistener * `}
 
-	private new bind_to(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
+	private new bind_tcp(base: NativeEventBase, address: CString, port: Int, factory: ConnectionFactory)
 	import ConnectionFactory.accept_connection, error_callback `{
 
-		struct sockaddr_in sin;
-		struct evconnlistener *listener;
 		ConnectionFactory_incr_ref(factory);
 
 		struct hostent *hostent = gethostbyname(address);
-
 		if (!hostent) {
 			return NULL;
 		}
 
-		memset(&sin, 0, sizeof(sin));
+		struct sockaddr_in sin = {0};
 		sin.sin_family = hostent->h_addrtype;
 		sin.sin_port = htons(port);
 		memcpy( &(sin.sin_addr.s_addr), (const void*)hostent->h_addr, hostent->h_length );
 
-		listener = evconnlistener_new_bind(base,
+		struct evconnlistener *listener = evconnlistener_new_bind(base,
 			(evconnlistener_cb)accept_connection_cb, factory,
 			LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, -1,
 			(struct sockaddr*)&sin, sizeof(sin));
-
 		if (listener != NULL) {
-			evconnlistener_set_error_cb(listener, (evconnlistener_errorcb)ConnectionListener_error_callback);
+			evconnlistener_set_error_cb(listener,
+				(evconnlistener_errorcb)ConnectionListener_error_callback);
+		}
+
+		return listener;
+	`}
+
+	private new bind_unix(base: NativeEventBase, file: CString, factory: ConnectionFactory)
+	import ConnectionFactory.accept_connection, error_callback `{
+
+		ConnectionFactory_incr_ref(factory);
+
+		struct sockaddr_un sun = {0};
+		sun.sun_family = AF_UNIX;
+		strncpy(sun.sun_path, file, sizeof(sun.sun_path) - 1);
+
+		struct evconnlistener *listener = evconnlistener_new_bind(base,
+			(evconnlistener_cb)accept_connection_cb, factory,
+			LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, -1,
+			(struct sockaddr*)&sun, sizeof(sun));
+		if (listener != NULL) {
+			evconnlistener_set_error_cb(listener,
+				(evconnlistener_errorcb)ConnectionListener_error_callback);
 		}
 
 		return listener;
@@ -451,15 +470,17 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 	# Get the `NativeEventBase` associated to `self`
 	fun base: NativeEventBase `{ return evconnlistener_get_base(self); `}
 
-	# Callback method on listening error
-	fun error_callback do
+	# Callback on listening error
+	fun error_callback
+	do
 		var cstr = evutil_socket_error_to_string(evutil_socket_error)
-		print_error "libevent error: '{cstr}'"
+		print_error "libevent error: {cstr}"
 	end
 end
 
 # Factory to listen on sockets and create new `Connection`
 class ConnectionFactory
+
 	# The `NativeEventBase` for the dispatch loop of this factory
 	var event_base: NativeEventBase
 
@@ -490,17 +511,45 @@ class ConnectionFactory
 		return new Connection(buffer_event)
 	end
 
-	# Listen on `address`:`port` for new connection, which will callback `spawn_connection`
-	fun bind_to(address: String, port: Int): nullable ConnectionListener
+	# Listen on the TCP socket at `address`:`port` for new connections
+	#
+	# On new connections, libevent callbacks `spawn_connection`.
+	fun bind_tcp(address: String, port: Int): nullable ConnectionListener
 	do
-		var listener = new ConnectionListener.bind_to(event_base, address.to_cstring, port, self)
+		var listener = new ConnectionListener.bind_tcp(
+			event_base, address.to_cstring, port, self)
+
 		if listener.address_is_null then
-			sys.stderr.write "libevent warning: Opening {address}:{port} failed\n"
+			print_error "libevent warning: Opening {address}:{port} failed, " +
+				evutil_socket_error_to_string(evutil_socket_error).to_s
+			return null
 		end
+
 		return listener
 	end
 
-	# Put string representation of source `address` into `buf`
+	# Listen on a UNIX domain socket for new connections
+	#
+	# On new connections, libevent callbacks `spawn_connection`.
+	fun bind_unix(path: String): nullable ConnectionListener
+	do
+		# Delete the socket if it already exists
+		var stat = path.file_stat
+		if stat != null and stat.is_sock then path.file_delete
+
+		var listener = new ConnectionListener.bind_unix(
+			event_base, path.to_cstring, self)
+
+		if listener.address_is_null then
+			print_error "libevent warning: Opening UNIX domain socket {path} failed, " +
+				evutil_socket_error_to_string(evutil_socket_error).to_s
+			return null
+		end
+
+		return listener
+	end
+
+	# Put a human readable string representation of `address` into `buf`
 	private fun addrin_to_address(address: Pointer, buf: CString, buf_len: Int): CString `{
 		struct sockaddr *addrin = (struct sockaddr*)address;
 
@@ -512,6 +561,14 @@ class ConnectionFactory
 			struct in6_addr *src = &((struct sockaddr_in6*)addrin)->sin6_addr;
 			return (char *)inet_ntop(addrin->sa_family, src, buf, buf_len);
 		}
+		else if (addrin->sa_family == AF_UNIX) {
+			struct sockaddr_un *src = (struct sockaddr_un*)addrin;
+			char *path = src->sun_path;
+			if (path == NULL) return "Unnamed UNIX domain socket";
+			if (path[0] == '\0') return "Abstract UNIX domain socket";
+			return path;
+		}
+
 		return NULL;
 	`}
 end
