@@ -858,8 +858,11 @@ universal Int
 
 	# Return the corresponding digit character
 	# If 0 <= `self` <= 9, return the corresponding character.
+	#
 	#     assert 5.to_c    == '5'
+	#
 	# If 10 <= `self` <= 36, return the corresponding letter [a..z].
+	#
 	#     assert 15.to_c   == 'f'
 	fun to_c: Char
 	do

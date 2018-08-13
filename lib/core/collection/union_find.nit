@@ -14,6 +14,7 @@ module union_find
 import hash_collection
 
 # Data structure to keeps track of elements partitioned into disjoint subsets
+#
 #     var s = new DisjointSet[Int]
 #     s.add(1)
 #     s.add(2)
@@ -139,6 +140,7 @@ class DisjointSet[E]
 	end
 
 	# Are all elements of `es` in the same subset?
+	#
 	#     var s = new DisjointSet[Int]
 	#     s.add_all([1,2,3,4,5,6])
 	#     s.union_all([1,2,3])

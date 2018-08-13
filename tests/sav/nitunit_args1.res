@@ -1,17 +1,17 @@
 ==== Docunits of module test_nitunit::test_nitunit | tests: 5
 [OK] test_nitunit::test_nitunit
 [KO] test_nitunit$X
-     test_nitunit.nit:21,7--22,0: Runtime error in nitunit.out/test_nitunit-2.nit with argument 0
+     test_nitunit.nit:23,7--24,0: Runtime error in nitunit.out/test_nitunit-2.nit with argument 0
      Output
 	Runtime error: Assert failed (nitunit.out/test_nitunit-2.nit:5)
 
 [KO] test_nitunit$X$foo
-     test_nitunit.nit:24,8--25,0: Compilation error in nitunit.out/test_nitunit-3.nit
+     test_nitunit.nit:27,8--28,0: Compilation error in nitunit.out/test_nitunit-3.nit
      Output
 	nitunit.out/test_nitunit-3.nit:5,8--27: Error: method or variable `undefined_identifier` unknown in `Sys`.
 
 [KO] test_nitunit$X$foo1
-     test_nitunit.nit:28,15: Syntax Error: unexpected operator '!'.
+     test_nitunit.nit:32,15: Syntax Error: unexpected operator '!'.
 [OK] test_nitunit$X$foo2
 
 ==== Test-suite of module test_test_nitunit::test_test_nitunit | tests: 3

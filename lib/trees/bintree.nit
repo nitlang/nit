@@ -36,6 +36,7 @@ import abstract_tree
 #  * delete average O(lg n) worst O(n)
 #
 # Usage:
+#
 #     var tree = new BinTreeMap[Int, String]
 #     tree[1] = "n1"
 #     assert tree.min == "n1"

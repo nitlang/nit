@@ -101,6 +101,7 @@ class Perfecthashing
 	# n : number of required free identifiers
 	# idc : This array will be filled with n free identifiers
 	# return the size of hashTable to create for theses identifiers (mask + 1)
+	#
 	#     var ph = new Perfecthashing
 	#     var idc = new Array[Int]
 	#     assert ph.pnand([3, 7, 10], 1, idc) == 6

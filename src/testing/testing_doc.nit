@@ -17,13 +17,12 @@ module testing_doc
 
 private import parser_util
 import testing_base
-import markdown
+import markdown2
 import html
 import realtime
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor
-	super HTMLDecorator
 
 	# Toolcontext used to parse Nit code blocks.
 	var toolcontext: ToolContext
@@ -40,12 +39,11 @@ class NitUnitExecutor
 	# The name of the suite
 	var name: String
 
-	# Markdown processor used to parse markdown comments and extract code.
-	var mdproc = new MarkdownProcessor
+	# Markdown parse used to parse markdown comments and extract code
+	private var md_parser = new MdParser
 
-	init do
-		mdproc.decorator = new NitunitDecorator(self)
-	end
+	# Markdown visitor used to extract markdown code blocks
+	private var md_visitor = new NitunitMdVisitor(self) is lazy
 
 	# The associated documentation object
 	var mdoc: nullable MDoc = null
@@ -58,8 +56,10 @@ class NitUnitExecutor
 	# Is used because a new code-block might just be added to it.
 	var last_docunit: nullable DocUnit = null
 
+	# Unit class name in XML output
 	var xml_classname: String is noautoinit
 
+	# Unit name in xml output
 	var xml_name: String is noautoinit
 
 	# The entry point for a new `ndoc` node
@@ -73,17 +73,17 @@ class NitUnitExecutor
 		self.mdoc = mdoc
 
 		# Populate `blocks` from the markdown decorator
-		mdproc.process(mdoc.content.join("\n"))
+		var md_node = md_parser.parse(mdoc.content.join("\n"))
+		md_visitor.enter_visit(md_node)
 	end
 
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
-	fun show_status
-	do
-		toolcontext.show_unit_status(name, docunits)
-	end
+	# Display current testing status
+	fun show_status do toolcontext.show_unit_status(name, docunits)
 
+	# Update display when a test case is done
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
@@ -274,6 +274,7 @@ class NitUnitExecutor
 	# `file` should be a valid filepath for a Nit source file.
 	private fun create_unitfile(file: String): Writer
 	do
+		var mmodule = self.mmodule
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
 		var f
@@ -292,11 +293,12 @@ class NitUnitExecutor
 	# Can terminate the program if the compiler is not found
 	private fun compile_unitfile(file: String): Int
 	do
+		var mmodule = self.mmodule
 		var nitc = toolcontext.find_nitc
 		var opts = new Array[String]
 		if mmodule != null then
 			# FIXME playing this way with the include dir is not safe nor robust
-			opts.add "-I {mmodule.filepath.dirname}"
+			opts.add "-I {mmodule.filepath.as(not null).dirname}"
 		end
 		var cmd = "{nitc} --ignore-visibility --no-color -q '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = toolcontext.safe_exec(cmd)
@@ -343,17 +345,23 @@ class NitUnitExecutor
 	end
 end
 
-private class NitunitDecorator
-	super HTMLDecorator
+private class NitunitMdVisitor
+	super MdVisitor
 
 	var executor: NitUnitExecutor
 
-	redef fun add_code(v, block) do
-		var code = block.raw_content
-		var meta = block.meta or else "nit"
+	redef fun visit(node) do node.accept_nitunit(self)
+
+	fun parse_code(block: MdCodeBlock) do
+		var code = block.literal
+		if code == null then return
+
+		var meta = block.info or else "nit"
 		# Do not try to test non-nit code.
 		if meta != "nit" then return
+
 		# Try to parse code blocks
+		var executor = self.executor
 		var ast = executor.toolcontext.parse_something(code)
 
 		var mdoc = executor.mdoc
@@ -364,12 +372,12 @@ private class NitunitDecorator
 
 		# The location is computed according to the starts of the mdoc and the block
 		# Note, the following assumes that all the comments of the mdoc are correctly aligned.
-		var loc = block.block.location
+		var loc = block.location
 		var line_offset = loc.line_start + mdoc.location.line_start - 2
 		var column_offset = loc.column_start + mdoc.location.column_start
 		# Hack to handle precise location in blocks
 		# TODO remove when markdown is more reliable
-		if block isa BlockFence then
+		if block isa MdFencedCodeBlock then
 			# Skip the starting fence
 			line_offset += 1
 		else
@@ -423,8 +431,7 @@ private class NitunitDecorator
 	end
 
 	# Return and register a new empty docunit
-	fun new_docunit: DocUnit
-	do
+	fun new_docunit: DocUnit do
 		var mdoc = executor.mdoc
 		assert mdoc != null
 
@@ -440,6 +447,14 @@ private class NitunitDecorator
 		executor.toolcontext.modelbuilder.unit_entities += 1
 		return res
 	end
+end
+
+redef class MdNode
+	private fun accept_nitunit(v: NitunitMdVisitor) do visit_all(v)
+end
+
+redef class MdCodeBlock
+	redef fun accept_nitunit(v) do v.parse_code(self)
 end
 
 # A unit-test extracted from some documentation.
@@ -511,10 +526,13 @@ class DocUnit
 	fun real_location(ast_location: Location): Location
 	do
 		var mdoc = self.mdoc
-		var res = new Location(mdoc.location.file, lines[ast_location.line_start-1],
+
+		var res = new Location(mdoc.location.file,
+			lines[ast_location.line_start-1],
 			lines[ast_location.line_end-1],
 			columns[ast_location.line_start-1] + ast_location.column_start,
 			columns[ast_location.line_end-1] + ast_location.column_end)
+
 		return res
 	end
 
@@ -639,7 +657,7 @@ redef class ModelBuilder
 	fun test_mdoc(mdoc: MDoc): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")
-		var file = mdoc.location.file.filename
+		var file = mdoc.location.file.as(not null).filename
 
 		toolcontext.info("nitunit: doc-unit file {file}", 2)
 
