@@ -38,7 +38,7 @@
 <li>or others <code class="nitcode"><span class="nitcode"><span class="line"><span class="nc_i">modelbuilder</span></span></span></code>.</li>
 </ul>
 <p>An image:</p>
-<p><img src="../res/c94d8a73ccfe143ebde7599e88f5f5ce.png" alt="Tinks3D"/></p>
+<p><img src="../../contrib/tinks/doc/tinks3d.png" alt="Tinks3D"/></p>
 </div><h2>Content</h2><ul>
 <li><strong>test_prog</strong>: <span class="synopsys nitdoc">Test program for model tools.</span> (test_prog)<ul>
 <li><strong>examples</strong> (test_prog/examples)<ul>
