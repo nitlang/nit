@@ -83,6 +83,8 @@ clean:
 	cd src; make clean
 	cd tests; make clean
 	cd share/man; make clean
-	for directory in $(extras); do \
-		(cd "$$directory" && $(MAKE) clean); \
+	-for directory in $(extras); do \
+		(echo "CLEANING $$directory" && cd "$$directory" && $(MAKE) clean); \
 	done
+	@echo ""
+	@echo "Nit was succesfully cleaned."
