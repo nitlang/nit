@@ -208,6 +208,8 @@ redef class Text
 	#
 	#     assert "123".is_int
 	#     assert "0b1011".is_int
+	#     assert "-34".is_int
+	#     assert "+45".is_int
 	#     assert not "0x_".is_int
 	#     assert not "0xGE".is_int
 	#     assert not "".is_int
@@ -218,7 +220,7 @@ redef class Text
 		var s = remove_all('_')
 		var pos = 0
 		var len = s.length
-		while pos < len and s[pos] == '-' do
+		while pos < len and (s[pos] == '-' or s[pos] == '+') do
 			pos += 1
 		end
 		s = s.substring_from(pos)
@@ -238,9 +240,15 @@ redef class Text
 		var val = 0
 		var neg = false
 		var pos = 0
-		while s[pos] == '-' do
-			neg = not neg
-			pos += 1
+		loop
+			if s[pos] == '-' then
+				neg = not neg
+				pos += 1
+			else if s[pos] == '+' then
+				pos += 1
+			else
+				break
+			end
 		end
 		s = s.substring_from(pos)
 		if s.length >= 2 then
