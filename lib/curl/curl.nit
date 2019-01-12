@@ -21,22 +21,13 @@ module curl
 
 import native_curl
 
-redef class Sys
-	# Shared Curl library handle
-	#
-	# Usually, you do not have to use this attribute, it instancied by `CurlHTTPRequest` and `CurlMail`.
-	# But in some cases you may want to finalize it to free some small resources.
-	# However, if Curl services are needed once again, this attribute must be manually set.
-	var curl: Curl = new Curl is lazy, writable
-end
-
-# Curl library handle, it is initialized and released with this class
-class Curl
+# Curl library handle
+private class Curl
 	super FinalizableOnce
 
-	private var native = new NativeCurl.easy_init
+	var native = new NativeCurl.easy_init
 
-	# Check for correct initialization
+	# Is this instance correctly initialized?
 	fun is_ok: Bool do return self.native.is_init
 
 	redef fun finalize_once do if is_ok then native.easy_clean
@@ -45,7 +36,7 @@ end
 # CURL Request
 class CurlRequest
 
-	private var curl: Curl = sys.curl
+	private var curl = new Curl
 
 	# Shall this request be verbose?
 	var verbose: Bool = false is writable
@@ -71,6 +62,14 @@ class CurlRequest
 	do
 		return new CurlResponseFailed(error_code, error_msg)
 	end
+
+	# Close low-level resources associated to this request
+	#
+	# Once closed, this request can't be used again.
+	#
+	# If this service isn't called explicitly, low-level resources
+	# may be freed automatically by the GC.
+	fun close do curl.finalize
 end
 
 # HTTP request builder
@@ -135,7 +134,6 @@ class CurlHTTPRequest
 	do
 		# Reset libcurl parameters as the lib is shared and options
 		# might affect requests from one another.
-		self.curl.native = new NativeCurl.easy_init
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var success_response = new CurlResponseSuccess
@@ -152,8 +150,6 @@ class CurlHTTPRequest
 
 		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
 		if not st_code == null then success_response.status_code = st_code
-
-		self.curl.native.easy_clean
 
 		return success_response
 	end
@@ -279,6 +275,8 @@ class CurlHTTPRequest
 	# Download to file given resource
 	fun download_to_file(output_file_name: nullable String): CurlResponse
 	do
+		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
+
 		var success_response = new CurlFileResponseSuccess
 
 		var callback_receiver: CurlCallbacks = success_response
@@ -447,7 +445,6 @@ class CurlMail
 	# Execute Mail request with settings configured through attribute
 	fun execute: nullable CurlResponseFailed
 	do
-		self.curl.native = new NativeCurl.easy_init
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var lines = new Array[String]
@@ -520,8 +517,6 @@ class CurlMail
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
-
-		self.curl.native.easy_clean
 
 		return null
 	end
