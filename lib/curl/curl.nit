@@ -16,7 +16,9 @@
 
 # Data transfer powered by the native curl library
 #
-# Download or upload over HTTP with `CurlHTTPRequest` and send emails with `CurlMail`.
+# Download or upload data over HTTP with `CurlHTTPRequest` and send emails
+# with `CurlMail`. Scripts can use the easier (but limited) services on `Text`,
+# `http_get` and `http_download`, provided by `curl::extra`.
 module curl
 
 import native_curl
