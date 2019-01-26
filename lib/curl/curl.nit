@@ -540,7 +540,10 @@ end
 class CurlResponseFailed
 	super CurlResponse
 
+	# Curl error code
 	var error_code: Int
+
+	# Curl error message
 	var error_msg: String
 
 	redef fun to_s do return "{error_msg} ({error_code})"
@@ -568,23 +571,27 @@ end
 class CurlResponseSuccess
 	super CurlResponseSuccessIntern
 
-	var body_str = ""
+	# Server HTTP response code
 	var status_code = 0
 
-	# Receive body from request due to body callback registering
-	redef fun body_callback(line) do
-		self.body_str = "{self.body_str}{line}"
-	end
+	# Response body as a `String`
+	var body_str = ""
+
+	# Accept part of the response body
+	redef fun body_callback(line) do self.body_str += line
 end
 
 # Success Response Class of a downloaded File
 class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
+	# Server HTTP response code
 	var status_code = 0
+
 	var speed_download = 0.0
 	var size_download = 0.0
 	var total_time = 0.0
+
 	private var file: nullable FileWriter = null
 
 	# Receive bytes stream from request due to stream callback registering
@@ -621,7 +628,7 @@ class HeaderMap
 	# Get `self` as a single string for HTTP POST
 	#
 	# Require: `curl.is_ok`
-	fun to_url_encoded(curl: Curl): String
+	private fun to_url_encoded(curl: Curl): String
 	do
 		assert curl.is_ok
 
