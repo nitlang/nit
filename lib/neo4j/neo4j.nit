@@ -111,8 +111,6 @@ class Neo4jClient
 	# REST service to send cypher requests
 	private var cypher_url: String
 
-	private var curl = new Curl
-
 	init(base_url: String) do
 		self.base_url = base_url
 		var root = service_root
