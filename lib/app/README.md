@@ -163,7 +163,7 @@ The _app.nit_ framework defines three annotations to customize the application p
 
 ## Usage Example
 
-~~~
+~~~nitish
 module my_module is
     app_name "My App"
     app_namespace "org.example.my_app"
@@ -183,7 +183,7 @@ There is two main ways to achieve this goal:
 * The mixin option (`-m module`) imports an additional module before compiling.
   It can be used to load platform specific implementations of the _app.nit_ portable UI.
 
-  ~~~
+  ~~~raw
   # GNU/Linux version, using GTK
   nitc calculator.nit -m linux
 
@@ -198,7 +198,7 @@ There is two main ways to achieve this goal:
   Continuing with the calculator example, it is adapted for Android by the module `android_calculator.nit`.
   This module imports both `calculator` and `android`, it can then use Android specific code.
 
-  ~~~
+  ~~~nitish
   module android_calculator
 
   import calculator

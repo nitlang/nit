@@ -14,21 +14,21 @@ Portable calculator built using _app.nit_
 
 * Compile and run on the desktop (GNU/Linux and OS X) with:
 
-	~~~
+	~~~raw
 	make
 	bin/calculator
 	~~~
 
 * Compile for Android and install on a device or emulator with:
 
-	~~~
+	~~~raw
 	make bin/android.apk
 	adb install -r bin/calculator.apk
 	~~~
 
 * Compile for iOS and run on the simulator with:
 
-	~~~
+	~~~raw
 	make bin/android.app
 	ios-sim launch bin/calculator.app
 	~~~
