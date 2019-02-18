@@ -407,6 +407,11 @@ need_skip()
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
+	if test -n "GITLAB_CI" && echo "$1" | grep -f "gitlab_ci.skip" >/dev/null 2>&1; then
+		echo "=> $2: [skip gitlab ci]"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
+		return 0
+	fi
 
 	# Skip by OS
 	local os_skip_file=$UNAME.skip
@@ -572,6 +577,7 @@ case $engine in
 esac
 
 savdirs="sav/`$HOSTNAME` sav/$UNAME sav/$engine $savdirs sav/"
+test -n "$GITLAB_CI" && savdirs="sav/gitlab_ci $savdirs"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
