@@ -253,6 +253,7 @@ abstract class Text
 	# assert "0x64".to_i       == 100
 	# assert "0b1100_0011".to_i== 195
 	# assert "--12".to_i       == 12
+	# assert "+45".to_i        == 45
 	# ~~~
 	#
 	# REQUIRE: `self`.`is_int`
