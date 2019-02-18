@@ -26,7 +26,7 @@ intrude import json::serialization_read
 #
 # To access the API you need an instance of a `GithubAPI` client.
 #
-# ~~~
+# ~~~nitish
 # # Get Github authentification token.
 # var token = get_github_oauth
 # assert not token.is_empty
@@ -37,7 +37,7 @@ intrude import json::serialization_read
 #
 # The API client allows you to get Github API entities.
 #
-# ~~~
+# ~~~nitish
 # var repo = api.load_repo("nitlang/nit")
 # assert repo != null
 # assert repo.name == "nit"

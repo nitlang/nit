@@ -31,7 +31,7 @@
 # Repositories can be used in Popcorn app to manage your data persistence.
 # Here an example with a book management app:
 #
-# ~~~
+# ~~~nitish
 # # First we declare the `Book` class. It has to be serializable so it can be used
 # # within a `Repository`.
 #
@@ -252,7 +252,7 @@ end
 
 # A Repository that uses MongoDB as backend.
 #
-# ~~~
+# ~~~nitish
 # import popcorn
 # import popcorn::pop_repos
 # import popcorn::pop_json
