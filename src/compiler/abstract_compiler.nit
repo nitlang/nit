@@ -556,9 +556,9 @@ endif
 		end
 		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath.escape_to_sh} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
 		# Clean
-		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n")
+		makefile.write("clean:\n\trm -f {ofiles.join(" ")} 2>/dev/null\n")
 		if outpath != real_outpath then
-			makefile.write("\trm -- {outpath.escape_to_sh} 2>/dev/null\n")
+			makefile.write("\trm -f -- {outpath.escape_to_sh} 2>/dev/null\n")
 		end
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
