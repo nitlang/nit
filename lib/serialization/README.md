@@ -51,6 +51,8 @@ class Partnership
 	redef fun ==(o) do return o isa SELF and partner_a == o.partner_a and partner_b == o.partner_b
 	redef fun hash do return partner_a.hash + 1024*partner_b.hash
 end
+class Person
+end
 ~~~
 
 ### Scope of the `serialize` annotation
@@ -64,7 +66,7 @@ end
 * A module declaration annotated with `serialize` states that all its class definitions
   and locally declared attributes are serializable.
 
-  ~~~
+  ~~~nitish
   module shared_between_clients is serialize
   ~~~
 
@@ -155,7 +157,7 @@ For this customization, the following code snippet implements
 two serialization services: `User::core_serialize_to` and
 `Deserializer::deserialize_class`.
 
-~~~
+~~~nitish
 module user_credentials
 
 # User credentials for a website
@@ -233,7 +235,7 @@ you must use implementations of `Serializer` and `Deserializer`.
 The main implementations of these services are `JsonSerializer` and `JsonDeserializer`,
 from the `json_serialization` module.
 
-~~~
+~~~nitish
 import json
 import user_credentials
 
