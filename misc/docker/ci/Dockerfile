@@ -71,11 +71,37 @@ RUN dpkg --add-architecture i386 \
 	&& apt-get install -y nodejs \
 	&& rm -rf /var/lib/apt/lists/*
 
+# Install OpenGL validator
+RUN git clone https://github.com/KhronosGroup/glslang.git --depth=1 \
+	&& mkdir -p glslang/build \
+	&& cd glslang/build \
+	&& cmake .. \
+	&& make \
+	&& make install
+
+# Install android sdk/ndk
+RUN mkdir -p /opt \
+	&& cd /opt \
+	# Android SDK
+	&& curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -o android-sdk-linux.zip \
+	&& unzip -q android-sdk-linux.zip -d android-sdk-linux \
+	# Download a specific ndk version because old versions are not available trough sdkmanager
+	&& curl https://dl.google.com/android/repository/android-ndk-r17c-linux-x86_64.zip -o android-ndk-linux.zip \
+	&& unzip -q android-ndk-linux.zip \
+	&& mv android-ndk-r17c android-sdk-linux/ndk-bundle \
+	&& rm android-sdk-linux.zip android-ndk-linux.zip
+RUN cd /opt \
+	&& yes | android-sdk-linux/tools/bin/sdkmanager "build-tools;27.0.0" "cmake;3.6.4111459" platform-tools tools  --verbose\
+	&& yes | android-sdk-linux/tools/bin/sdkmanager --licenses --verbose
+# TODO: predownload bwdgc and gradle?
+
 # Setup environment variables
+ENV ANDROID_HOME=/opt/android-sdk-linux/
 ENV JAVA_HOME=/usr/lib/jvm/default-java/
 ENV JNI_LIB_PATH=$JAVA_HOME/jre/lib/amd64/server/
 ENV LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/amd64/server/
 
+# Used by CI to render junit files to html
 RUN pip3 install junit2html
 
 #  Prepare to install npm (npm is not packaged for debian:stretch)
