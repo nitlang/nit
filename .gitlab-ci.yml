@@ -81,7 +81,7 @@ nitunit_some:
   dependencies:
     - build_tools
   script:
-    - git diff --name-only origin/master..HEAD -- "*.nit" "*.res" "README.*" | grep -v "^tests/" > list0.txt
+    - git diff --name-only origin/master..HEAD -- "*.nit" "*.res" "README.*" | grep -v "^tests/" > list0.txt || true
     - xargs nitls -pP < list0.txt > list.txt
     - xargs nitunit < list.txt
   artifacts:
@@ -98,7 +98,7 @@ nitpick_full:
     - build_tools
   script:
     - nitls lib src examples contrib
-    - nitls -Pp lib src examples | grep -v -f tests/gitlab_ci.skip > list.txt # filter what is skipped by tests.sh
+    - nitls -Pp lib src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
     - xargs nitpick < list.txt
 
 basic_android:
@@ -210,7 +210,7 @@ nitunit_lib:
   dependencies:
     - build_tools
   script:
-    - nitls -Pp lib | grep -v -f tests/gitlab_ci.skip > list.txt # filter what is skipped by tests.sh
+    - nitls -Pp lib | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
     - xargs nitunit -v < list.txt| tee log.txt
     - grep -e KO log.txt > status.txt || true
     - tail -3 log.txt >> status.txt
@@ -227,7 +227,7 @@ nitunit_src:
   dependencies:
     - build_tools
   script:
-    - nitls -Pp src examples | grep -v -f tests/gitlab_ci.skip > list.txt # filter what is skipped by tests.sh
+    - nitls -Pp src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
     - xargs nitunit -v < list.txt| tee log.txt
     - grep -e KO log.txt > status.txt || true
     - tail -3 log.txt >> status.txt
