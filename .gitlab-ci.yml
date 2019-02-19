@@ -101,6 +101,16 @@ nitpick_full:
     - nitls -Pp lib src examples | grep -v -f tests/gitlab_ci.skip > list.txt # filter what is skipped by tests.sh
     - xargs nitpick < list.txt
 
+basic_android:
+  stage: test
+  dependencies:
+    - build_tools
+  script:
+    - make -C contrib/asteronits android
+  artifacts:
+    paths:
+      - contrib/asteronits/bin/*.apk
+
 # TEST FULL #########################################################
 
 test_full_nitcs:
