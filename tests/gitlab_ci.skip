@@ -1,4 +1,3 @@
-android
 emscripten
 java
 glsl
@@ -7,7 +6,5 @@ mpi
 neo
 objc
 postgres
-action_nitro
-asteronits
 nitrpg
 wiringPi
