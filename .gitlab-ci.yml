@@ -3,6 +3,8 @@ image: nitlang/nit-ci
 cache:
   paths:
     - .ccache
+    - .gradle/caches
+    - .gradle/wrapper
   key: "$CI_JOB_NAME"
 
 stages:
@@ -14,16 +16,19 @@ stages:
 before_script:
   - date
   - export CCACHE_DIR=$PWD/.ccache
+  - export GRADLE_USER_HOME=$PWD/.gradle
   - export PATH=$PWD/bin:$PATH
   - pwd
   - ccache -s
   - ccache -M 500M
+  - du -sh .gradle || true
   - type -a nitc nitdoc || true # is there some nit tools?
   - "> status.txt"
 
 after_script:
   - export CCACHE_DIR=$PWD/.ccache
   - ccache -s
+  - du -sh .gradle || true
   - git status --ignored
   - date
   - tail status.txt
