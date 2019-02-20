@@ -60,7 +60,7 @@ class UserList
 	end
 end
 
-var mongo = new MongoClient("mongodb://localhost:27017/")
+var mongo = new MongoClient("mongodb://mongo:27017/")
 var db = mongo.database("mongo_example")
 
 var app = new App

@@ -31,7 +31,7 @@ abstract class NitrpgTestHelper
 	end
 
 	# Mongo API client
-	var mongo = new MongoClient("mongodb://localhost:27017/")
+	var mongo = new MongoClient("mongodb://mongo:27017/")
 
 	# Load a new test database by with a name
 	private fun load_db(name: String): MongoDb do return mongo.database(name)
