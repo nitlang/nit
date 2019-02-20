@@ -56,21 +56,13 @@ build_tools:
     - make 2>> status.txt
     - nitc --version
     - misc/jenkins/check_manpages.sh
-    - "{ cd tests && ./tests.sh base_sim*.nit ../src/nitlight.nit; }"
-    - nitunit -v lib/core
   artifacts:
     paths:
       - bin/*
       - c_src/nitc
       - src/version.nit
       - src/nitc_0
-      - nitunit.xml*
-      - tests/*.xml*
     when: always
-    reports:
-      junit:
-        - tests/*.xml
-        - nitunit.xml
 
 test_some:
   stage: test
