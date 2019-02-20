@@ -14,16 +14,10 @@
 
 # Neo4j connector through its JSON REST API using curl.
 #
-# For ease of use and testing this module provide a wrapper to the `neo4j` command:
-#
-#     # Start the Neo4j server
-#     var srv = new Neo4jServer
-#     assert srv.start_quiet
-#
 # In order to connect to Neo4j you need a connector:
 #
 #     # Create new Neo4j client
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     assert client.is_ok
 #
 # The fundamental units that form a graph are nodes and relationships.
@@ -66,39 +60,9 @@ module neo4j
 import curl_json
 import error
 
-# Handles Neo4j server start and stop command
-#
-# `neo4j` binary must be in `PATH` in order to work
-class Neo4jServer
-
-	# Start the local Neo4j server instance
-	fun start: Bool do
-		sys.system("neo4j start console")
-		return true
-	end
-
-	# Like `start` but redirect the console output to `/dev/null`
-	fun start_quiet: Bool do
-		sys.system("neo4j start console > /dev/null")
-		return true
-	end
-
-	# Stop the local Neo4j server instance
-	fun stop: Bool do
-		sys.system("neo4j stop")
-		return true
-	end
-
-	# Like `stop` but redirect the console output to `/dev/null`
-	fun stop_quiet: Bool do
-		sys.system("neo4j stop > /dev/null")
-		return true
-	end
-end
-
 # `Neo4jClient` is needed to communicate through the REST API
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     assert client.is_ok
 class Neo4jClient
 
@@ -142,7 +106,7 @@ class Neo4jClient
 
 	# Save the node in base
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     # Create a node
 	#     var andres = new NeoNode
@@ -198,7 +162,7 @@ class Neo4jClient
 	# Save the edge in base
 	# From and to nodes will be created.
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     var andres = new NeoNode
 	#     var kate = new NeoNode
@@ -247,7 +211,7 @@ class Neo4jClient
 
 	# Retrieve all nodes with specified `lbl`
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
@@ -273,7 +237,7 @@ class Neo4jClient
 
 	# Retrieve nodes belonging to all the specified `labels`.
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
@@ -389,7 +353,7 @@ end
 #
 # Example:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     var query = new CypherQuery
 #     query.nmatch("(n)-[r:LOVES]->(m)")
 #     query.nwhere("n.name=\"Andres\"")
@@ -508,7 +472,7 @@ end
 # Then we can link the entity to the base:
 #
 #     # Init client
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     client.save_node(andres)
 #     # The node is now linked
 #     assert andres.is_linked
@@ -600,7 +564,7 @@ end
 #
 # Creating new nodes:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #
 #     var andres = new NeoNode
 #     andres.labels.add "Person"
@@ -713,7 +677,7 @@ end
 #
 # Create a relationship:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     # Create nodes
 #     var andres = new NeoNode
 #     andres["name"] = "Andres"
@@ -806,7 +770,7 @@ end
 #
 # Example:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #
 #     var node1 = new NeoNode
 #     var node2 = new NeoNode
@@ -1013,7 +977,7 @@ end
 # This is a representation of a neo job in JSON Format
 #
 # Each job description should contain a `to` attribute, with a value relative to the data API root
-# (so http://localhost:7474/db/data/node becomes just /node), and a `method` attribute containing
+# (so http://neo4j:7474/db/data/node becomes just /node), and a `method` attribute containing
 # HTTP verb to use.
 #
 # Optionally you may provide a `body` attribute, and an `id` attribute to help you keep track

@@ -17,12 +17,9 @@ import neo4j
 # key used to loosely assume unicity and prevent conflicting db accesses
 var key = "NIT_TESTING_ID".environ.to_i
 
-var srv = new Neo4jServer
-srv.start_quiet
-
 print "# Test local\n"
 
-var client = new Neo4jClient("http://localhost:7474")
+var client = new Neo4jClient("http://neo4j:7474")
 assert client.is_ok
 
 # Clear the previous objects, if any
@@ -91,7 +88,7 @@ print "{kate["name"].to_s} IS LOVED BY {kate.in_nodes("LOVES").first["name"].to_
 
 print "\n# Test lazy\n"
 
-client = new Neo4jClient("http://localhost:7474/")
+client = new Neo4jClient("http://neo4j:7474/")
 assert client.is_ok
 
 # Read Andres

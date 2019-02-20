@@ -2,7 +2,11 @@ image: nitlang/nit-ci
 
 services:
   - mongo
+  - neo4j:2.3
   - postgres
+
+variables:
+  NEO4J_AUTH: none
 
 cache:
   paths:
