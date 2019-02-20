@@ -2,6 +2,7 @@ image: nitlang/nit-ci
 
 services:
   - mongo
+  - postgres
 
 cache:
   paths:

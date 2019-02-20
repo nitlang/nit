@@ -37,7 +37,7 @@
 # animals.add(turtle)
 #
 # var db_suffix = "NIT_TESTING_ID".environ
-# var db = new Postgres.open("dbname=postgres")
+# var db = new Postgres.open("host=postgres user=postgres dbname=postgres")
 #
 # assert db_is_open: not db.is_closed
 # assert create_table: db.create_table("IF NOT EXISTS animals_{db_suffix} (aname TEXT PRIMARY KEY, kind TEXT NOT NULL, age INT NOT NULL)") else print db.error

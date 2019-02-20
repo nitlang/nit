@@ -19,7 +19,7 @@ module test_postgres_nity
 import postgresql::postgres
 
 var db_suffix = "NIT_TESTING_ID".environ
-var db = new Postgres.open("dbname=postgres")
+var db = new Postgres.open("host=postgres user=postgres dbname=postgres")
 assert open_db: not db.is_closed else print db.error
 
 assert create_table: db.create_table("IF NOT EXISTS users_{db_suffix} (uname TEXT PRIMARY KEY, pass TEXT NOT NULL, activated INTEGER, perc FLOAT)") else
