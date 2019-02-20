@@ -1,5 +1,8 @@
 image: nitlang/nit-ci
 
+services:
+  - mongo
+
 cache:
   paths:
     - .ccache
