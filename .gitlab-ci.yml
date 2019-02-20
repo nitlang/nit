@@ -254,6 +254,21 @@ test_contribs:
     - test ! -s status.txt # no lines, no errors
   allow_failure: true
 
+test_contribs_android:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - misc/jenkins/check_contrib.sh android
+    - grep 'error message' *.xml > status.txt || true
+    - mkdir -p apk
+    - find . -name '*.apk' -exec cp {} apk/ ";"
+    - test ! -s status.txt # no lines, no errors
+  artifacts:
+    paths:
+      - "apk"
+    when: always
+
 build_oot:
   stage: more_test
   dependencies:
