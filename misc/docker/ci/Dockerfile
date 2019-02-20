@@ -56,6 +56,7 @@ RUN dpkg --add-architecture i386 \
 		file \
 		gnupg \
 		gnuplot-nox \
+		imagemagick \
 		inkscape \
 		libopenmpi-dev \
 		time \
