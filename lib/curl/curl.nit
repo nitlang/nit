@@ -16,27 +16,20 @@
 
 # Data transfer powered by the native curl library
 #
-# Download or upload over HTTP with `CurlHTTPRequest` and send emails with `CurlMail`.
+# Download or upload data over HTTP with `CurlHTTPRequest` and send emails
+# with `CurlMail`. Scripts can use the easier (but limited) services on `Text`,
+# `http_get` and `http_download`, provided by `curl::extra`.
 module curl
 
 import native_curl
 
-redef class Sys
-	# Shared Curl library handle
-	#
-	# Usually, you do not have to use this attribute, it instancied by `CurlHTTPRequest` and `CurlMail`.
-	# But in some cases you may want to finalize it to free some small resources.
-	# However, if Curl services are needed once again, this attribute must be manually set.
-	var curl: Curl = new Curl is lazy, writable
-end
-
-# Curl library handle, it is initialized and released with this class
-class Curl
+# Curl library handle
+private class Curl
 	super FinalizableOnce
 
-	private var native = new NativeCurl.easy_init
+	var native = new NativeCurl.easy_init
 
-	# Check for correct initialization
+	# Is this instance correctly initialized?
 	fun is_ok: Bool do return self.native.is_init
 
 	redef fun finalize_once do if is_ok then native.easy_clean
@@ -45,7 +38,7 @@ end
 # CURL Request
 class CurlRequest
 
-	private var curl: Curl = sys.curl
+	private var curl = new Curl
 
 	# Shall this request be verbose?
 	var verbose: Bool = false is writable
@@ -71,6 +64,14 @@ class CurlRequest
 	do
 		return new CurlResponseFailed(error_code, error_msg)
 	end
+
+	# Close low-level resources associated to this request
+	#
+	# Once closed, this request can't be used again.
+	#
+	# If this service isn't called explicitly, low-level resources
+	# may be freed automatically by the GC.
+	fun close do curl.finalize
 end
 
 # HTTP request builder
@@ -135,7 +136,6 @@ class CurlHTTPRequest
 	do
 		# Reset libcurl parameters as the lib is shared and options
 		# might affect requests from one another.
-		self.curl.native = new NativeCurl.easy_init
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var success_response = new CurlResponseSuccess
@@ -152,8 +152,6 @@ class CurlHTTPRequest
 
 		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
 		if not st_code == null then success_response.status_code = st_code
-
-		self.curl.native.easy_clean
 
 		return success_response
 	end
@@ -279,6 +277,8 @@ class CurlHTTPRequest
 	# Download to file given resource
 	fun download_to_file(output_file_name: nullable String): CurlResponse
 	do
+		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
+
 		var success_response = new CurlFileResponseSuccess
 
 		var callback_receiver: CurlCallbacks = success_response
@@ -447,7 +447,6 @@ class CurlMail
 	# Execute Mail request with settings configured through attribute
 	fun execute: nullable CurlResponseFailed
 	do
-		self.curl.native = new NativeCurl.easy_init
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var lines = new Array[String]
@@ -521,8 +520,6 @@ class CurlMail
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		self.curl.native.easy_clean
-
 		return null
 	end
 end
@@ -540,7 +537,10 @@ end
 class CurlResponseFailed
 	super CurlResponse
 
+	# Curl error code
 	var error_code: Int
+
+	# Curl error message
 	var error_msg: String
 
 	redef fun to_s do return "{error_msg} ({error_code})"
@@ -568,23 +568,27 @@ end
 class CurlResponseSuccess
 	super CurlResponseSuccessIntern
 
-	var body_str = ""
+	# Server HTTP response code
 	var status_code = 0
 
-	# Receive body from request due to body callback registering
-	redef fun body_callback(line) do
-		self.body_str = "{self.body_str}{line}"
-	end
+	# Response body as a `String`
+	var body_str = ""
+
+	# Accept part of the response body
+	redef fun body_callback(line) do self.body_str += line
 end
 
 # Success Response Class of a downloaded File
 class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
+	# Server HTTP response code
 	var status_code = 0
+
 	var speed_download = 0.0
 	var size_download = 0.0
 	var total_time = 0.0
+
 	private var file: nullable FileWriter = null
 
 	# Receive bytes stream from request due to stream callback registering
@@ -621,7 +625,7 @@ class HeaderMap
 	# Get `self` as a single string for HTTP POST
 	#
 	# Require: `curl.is_ok`
-	fun to_url_encoded(curl: Curl): String
+	private fun to_url_encoded(curl: Curl): String
 	do
 		assert curl.is_ok
 
