@@ -25,4 +25,4 @@ git clone --depth=1 -b android https://github.com/xymus/bdwgc.git || exit 1
 # Setup libatomic_ops too
 cd bdwgc || exit 1
 git submodule init || exit 1
-git submodule update --depth=1 || exit 1
+git submodule update || exit 1
