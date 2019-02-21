@@ -47,7 +47,8 @@ RUN dpkg --add-architecture i386 \
 		libsqlite3-dev \
 		libx11-dev \
 		libxdg-basedir-dev \
-		postgresql \
+		netcat \
+		psmisc \
 		# Packages needed for contrib, platforms and FFI
 		ant \
 		clang \
