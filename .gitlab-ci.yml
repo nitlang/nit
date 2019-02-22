@@ -261,8 +261,13 @@ test_contribs_android:
   script:
     - misc/jenkins/check_contrib.sh android
     - grep 'error message' *.xml > status.txt || true
-    - mkdir -p apk
-    - find . -name '*.apk' -exec cp {} apk/ ";"
+    - mkdir -p apk/debug
+    - find . -name '*.apk' -exec mv {} apk/debug/ ";"
+    - test ! -s status.txt # no lines, no errors
+    - misc/jenkins/check_contrib.sh android-release
+    - grep 'error message' *.xml > status.txt || true
+    - mkdir -p apk/release
+    - find . -name '*.apk' -exec mv {} apk/release ";"
     - test ! -s status.txt # no lines, no errors
   artifacts:
     paths:
