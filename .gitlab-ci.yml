@@ -253,7 +253,6 @@ test_contribs:
     - misc/jenkins/check_contrib.sh all check
     - grep 'error message' *.xml > status.txt || true
     - test ! -s status.txt # no lines, no errors
-  allow_failure: true
 
 test_contribs_android:
   stage: more_test
@@ -278,8 +277,7 @@ build_oot:
     - cd contrib
     - ./oot.sh all
     - grep 'error message' *.xml > ../status.txt || true
-    - test ! -s ../status.txt # no lines, no errors
-  allow_failure: true
+    # Errors are somewhat expected
 
 # MISC ##############################################################
 
