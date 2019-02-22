@@ -26,6 +26,7 @@ before_script:
   - export CCACHE_DIR=$PWD/.ccache
   - export GRADLE_USER_HOME=$PWD/.gradle
   - export PATH=$PWD/bin:$PATH
+  - git config --add github.oauthtoken "$GITHUB_OAUTHTOKEN" # needed for github api rate limit
   - pwd
   - ccache -s
   - ccache -M 500M
@@ -56,21 +57,13 @@ build_tools:
     - make 2>> status.txt
     - nitc --version
     - misc/jenkins/check_manpages.sh
-    - "{ cd tests && ./tests.sh base_sim*.nit ../src/nitlight.nit; }"
-    - nitunit -v lib/core
   artifacts:
     paths:
       - bin/*
       - c_src/nitc
       - src/version.nit
       - src/nitc_0
-      - nitunit.xml*
-      - tests/*.xml*
     when: always
-    reports:
-      junit:
-        - tests/*.xml
-        - nitunit.xml
 
 test_some:
   stage: test
@@ -260,7 +253,6 @@ test_contribs:
     - misc/jenkins/check_contrib.sh all check
     - grep 'error message' *.xml > status.txt || true
     - test ! -s status.txt # no lines, no errors
-  allow_failure: true
 
 test_contribs_android:
   stage: more_test
@@ -269,8 +261,13 @@ test_contribs_android:
   script:
     - misc/jenkins/check_contrib.sh android
     - grep 'error message' *.xml > status.txt || true
-    - mkdir -p apk
-    - find . -name '*.apk' -exec cp {} apk/ ";"
+    - mkdir -p apk/debug
+    - find . -name '*.apk' -exec mv {} apk/debug/ ";"
+    - test ! -s status.txt # no lines, no errors
+    - misc/jenkins/check_contrib.sh android-release
+    - grep 'error message' *.xml > status.txt || true
+    - mkdir -p apk/release
+    - find . -name '*.apk' -exec mv {} apk/release ";"
     - test ! -s status.txt # no lines, no errors
   artifacts:
     paths:
@@ -285,8 +282,7 @@ build_oot:
     - cd contrib
     - ./oot.sh all
     - grep 'error message' *.xml > ../status.txt || true
-    - test ! -s ../status.txt # no lines, no errors
-  allow_failure: true
+    # Errors are somewhat expected
 
 # MISC ##############################################################
 
@@ -314,7 +310,6 @@ bench_fast:
       - benchmarks/*.dat
       - benchmarks/*.gnu
     when: always
-  allow_failure: true
 
 
 # MORE TOOLS ########################################################
