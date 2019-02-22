@@ -307,7 +307,6 @@ bench_fast:
       - benchmarks/*.dat
       - benchmarks/*.gnu
     when: always
-  allow_failure: true
 
 
 # MORE TOOLS ########################################################
