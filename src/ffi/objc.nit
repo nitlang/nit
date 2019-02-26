@@ -156,7 +156,7 @@ private class ObjCCompilationUnit
 
 		mmodule.ldflags.add_one("", "-lobjc")
 
-		return new ExternObjCFile(compdir/c_file, mmodule)
+		return new ExternObjCFile(c_file, mmodule)
 	end
 end
 
@@ -169,7 +169,7 @@ class ExternObjCFile
 
 	redef fun makefile_rule_name do return "{filename.basename(".m")}_m.o"
 	redef fun makefile_rule_content do
-		return "clang $(CFLAGS) -c {filename.basename} -o {makefile_rule_name}"
+		return "clang $(CFLAGS) -c {filename} -o {makefile_rule_name}"
 	end
 	redef fun compiles_to_o_file do return true
 end

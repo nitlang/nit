@@ -105,7 +105,8 @@ end
 
 # An extern file to compile
 class ExternFile
-	# The filename of the file
+
+	# Filename relative to the nit-compile folder
 	var filename: String
 
 	# The name of the target in the Makefile

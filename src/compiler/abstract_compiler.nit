@@ -528,8 +528,7 @@ endif
 		var java_files = new Array[ExternFile]
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
-			var ff = f.filename.basename
-			makefile.write("{o}: {ff}\n")
+			makefile.write("{o}: {f.filename}\n")
 			makefile.write("\t{f.makefile_rule_content}\n\n")
 			dep_rules.add(f.makefile_rule_name)
 
@@ -712,7 +711,7 @@ abstract class AbstractCompiler
 		stream.write("const char* get_nit_name(register const char* procname, register unsigned int len);\n")
 		stream.close
 
-		extern_bodies.add(new ExternCFile("{compile_dir}/c_functions_hash.c", ""))
+		extern_bodies.add(new ExternCFile("c_functions_hash.c", ""))
 	end
 
 	# Compile C headers

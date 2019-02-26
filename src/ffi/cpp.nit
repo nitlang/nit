@@ -171,7 +171,7 @@ class CPPCompilationUnit
 
 		files.add("{compdir}/{c_file}")
 
-		return new ExternCppFile("{compdir}/{c_file}", mmodule)
+		return new ExternCppFile(c_file, mmodule)
 	end
 end
 
@@ -180,8 +180,8 @@ class ExternCppFile
 
 	var mmodule: MModule
 
-	redef fun makefile_rule_name do return "{filename.basename}.o"
-	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename.basename} -o {filename.basename}.o"
+	redef fun makefile_rule_name do return "{filename}.o"
+	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename} -o {filename}.o"
 	redef fun compiles_to_o_file do return true
 end
 
