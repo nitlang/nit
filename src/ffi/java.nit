@@ -165,6 +165,9 @@ class JavaLanguage
 
 	redef fun compile_to_files(mmodule, compdir)
 	do
+		var ffi_ccu = ffi_ccu
+		assert ffi_ccu != null
+
 		# Make sure we have a .java file
 		mmodule.ensure_java_files
 
@@ -172,7 +175,7 @@ class JavaLanguage
 		mmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		mmodule.ensure_linking_callback_methods(ffi_ccu.as(not null))
+		mmodule.ensure_linking_callback_methods(ffi_ccu)
 
 		# Java implementation code
 		var java_file = mmodule.java_file
@@ -343,7 +346,7 @@ class JavaClassTemplate
 	fun write_to_files(compdir: String): ExternFile
 	do
 		var filename = "{java_class_name}.java"
-		var filepath = "{compdir}/{filename}"
+		var filepath = compdir/filename
 
 		write_to_file filepath
 

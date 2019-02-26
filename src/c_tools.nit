@@ -119,6 +119,7 @@ class ExternFile
 
 	fun compiles_to_o_file: Bool do return false
 
+	# Is `self` a Java file to include in the JAR archive?
 	fun add_to_jar: Bool do return false
 
 	# Additional libraries needed for the compilation

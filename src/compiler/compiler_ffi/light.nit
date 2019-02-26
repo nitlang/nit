@@ -29,7 +29,7 @@ redef class MModule
 		return v.compiler.modelbuilder.mmodule2node(self)
 	end
 
-	redef fun finalize_ffi(compiler: AbstractCompiler)
+	redef fun finalize_ffi(compiler)
 	do
 		if not uses_ffi then return
 
