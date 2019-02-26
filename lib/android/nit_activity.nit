@@ -36,7 +36,7 @@
 # the Java virtual machine. For this reason, the main _must_ execute quickly,
 # on the main UI thread at least.
 module nit_activity is
-	extra_java_files "NitActivity.java"
+	extra_java_files "nit.app.NitActivity"
 	android_activity "nit.app.NitActivity"
 end
 

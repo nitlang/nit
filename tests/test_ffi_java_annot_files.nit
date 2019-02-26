@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module test_ffi_java_annot_files is
-	extra_java_files("test_ffi_java_annot_files_a.java")
+	extra_java_files("test_ffi_java_annot_files_a")
 end
 
 import java

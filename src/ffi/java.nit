@@ -367,8 +367,11 @@ end
 class JavaFile
 	super ExternFile
 
-	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
-	redef fun makefile_rule_content do return "javac {filename.basename} -d ."
+	# Full Java class name: package and class
+	fun full_name: String do return filename.basename(".java")
+
+	redef fun makefile_rule_name do return full_name.replace(".", "/") + ".class"
+	redef fun makefile_rule_content do return "javac {filename} -d ."
 	redef fun add_to_jar do return true
 end
 

@@ -14,7 +14,7 @@
 
 # Import this module to launch `Service` at device boot
 module at_boot is
-	extra_java_files "NitBroadcastReceiver.java"
+	extra_java_files "nit.app.NitBroadcastReceiver"
 	android_manifest """
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 """

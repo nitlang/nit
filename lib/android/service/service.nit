@@ -14,7 +14,7 @@
 
 # Android service support for _app.nit_ centered around the class `Service`
 module service is
-	extra_java_files "NitService.java"
+	extra_java_files "nit.app.NitService"
 	android_manifest_application """<service android:name="nit.app.NitService"></service>"""
 end
 
