@@ -51,7 +51,7 @@ sanity_checks:
     - misc/jenkins/checksignedoffby.sh | tee -a status.txt
     - misc/jenkins/checklicense.sh | tee -a status.txt
 
-build_tools:
+build_tools: &build_tools
   stage: build
   script:
     - make 2>> status.txt
@@ -65,7 +65,7 @@ build_tools:
       - src/nitc_0
     when: always
 
-test_some:
+test_some: &test_some
   stage: test
   dependencies:
     - build_tools
@@ -119,7 +119,7 @@ basic_android:
 
 # TEST FULL #########################################################
 
-test_full_nitcs:
+test_full_nitcs: &test_full_nitcs
   stage: more_test
   dependencies:
     - build_tools
@@ -356,11 +356,21 @@ build_catalog:
     paths:
       - catalog.out
 
-.test_macos:
-  script:
-    - uname
-    - pwd
-    - ls /
-  stage: build
+build_tools_macos:
+  <<: *build_tools
   tags:
     - macos
+
+test_some_macos:
+  <<: *test_some
+  tags:
+    - macos
+  dependencies:
+    - build_tools_macos
+
+test_full_nitcs_macos:
+  <<: *test_full_nitcs
+  tags:
+    - macos
+  dependencies:
+    - build_tools_macos
