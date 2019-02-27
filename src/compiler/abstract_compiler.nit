@@ -465,6 +465,13 @@ ifneq ($(findstring MINGW64,$(uname_S)),)
 	CFLAGS += -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
 endif
 
+# Add the compilation dir to the Java CLASSPATH
+ifeq ($(CLASSPATH),)
+	CLASSPATH := .
+else
+	CLASSPATH := $(CLASSPATH):.
+endif
+
 """
 
 		makefile.write("all: {outpath}\n")
