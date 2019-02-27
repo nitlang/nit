@@ -159,6 +159,14 @@ redef class AExpr
 		print "add not implemented in {inspect}"
 		abort
 	end
+
+	redef fun accept_ast_validation(v)
+	do
+		super
+		if mtype == null and not is_typed then
+			#debug "TYPING: untyped expression"
+		end
+	end
 end
 
 # A placeholder for a `AExpr` node
@@ -172,6 +180,12 @@ class APlaceholderExpr
 	super AExpr
 	private init make
 	do
+	end
+
+	redef fun accept_ast_validation(v)
+	do
+		super
+		debug "PARENT: remaining placeholder"
 	end
 end
 
@@ -354,3 +368,66 @@ redef class AVarAssignExpr
 	end
 end
 
+# Check the consitency of AST
+class ASTValidationVisitor
+	super Visitor
+	redef fun visit(node)
+	do
+		node.accept_ast_validation(self)
+	end
+	private var path = new CircularArray[ANode]
+	private var seen = new HashSet[ANode]
+end
+
+redef class ANode
+	# Recursively validate a AST node.
+	# This ensure that location and parenting are defined and coherent.
+	#
+	# After complex low-level AST manipulation and construction,
+	# it is recommended to call it.
+	#
+	# Note: this just instantiate and run an `ASTValidationVisitor`.
+	fun validate
+	do
+		(new ASTValidationVisitor).enter_visit(self)
+	end
+
+	private fun accept_ast_validation(v: ASTValidationVisitor)
+	do
+		var parent = self.parent
+		var path = v.path
+
+		if path.length > 0 then
+			var path_parent = v.path.first
+			if parent == null then
+				self.parent = path_parent
+				#debug "PARENT: expected parent: {path_parent}"
+				v.seen.add(self)
+			else if parent != path_parent then
+				self.parent = path_parent
+				if v.seen.has(self) then
+					debug "DUPLICATE (NOTATREE): already seen node with parent {parent} now with {path_parent}."
+				else
+					v.seen.add(self)
+					debug "PARENT: expected parent: {path_parent}, got {parent}"
+				end
+			end
+		end
+
+		if not isset _location then
+			#debug "LOCATION: unlocated node {v.path.join(", ")}"
+			_location = self.parent.location
+		end
+
+		path.unshift(self)
+		visit_all(v)
+		path.shift
+	end
+end
+
+redef class AAnnotation
+	redef fun accept_ast_validation(v)
+	do
+		# Do not enter in annotations
+	end
+end

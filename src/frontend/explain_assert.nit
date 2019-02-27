@@ -35,7 +35,6 @@ module explain_assert
 import astbuilder
 intrude import literal # for value=
 intrude import typing # for mtype=
-import astvalidation
 
 import explain_assert_api
 
