@@ -124,6 +124,7 @@ test_full_nitcs: &test_full_nitcs
   dependencies:
     - build_tools
   script:
+    - share/android-bdwgc/setup.sh
     - cd tests
     - ./testfull.sh | tee log.txt
     - grep -v '=>' log.txt > ../status.txt || true
