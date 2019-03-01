@@ -59,7 +59,7 @@ for bin in bin/nit*; do
 		fi
 
 		# Test what is expected
-		if ! diff -q <(sed 's/\s*(.*)//' check_manpages-from_help.out) <(sed  's/\s*(.*)//' check_manpages-from_man.out) > /dev/null; then
+		if ! diff -q <(sed -E 's/\s*(.*)//' check_manpages-from_help.out) <(sed -E 's/\s*(.*)//' check_manpages-from_man.out) > /dev/null; then
 			echo "$opt: mismatch documentation in the manpage $man. Here the word diff:"
 			echo ""
 			wdiff check_manpages-from_help.out check_manpages-from_man.out | colordiff

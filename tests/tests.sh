@@ -37,9 +37,13 @@ if ! locale -a 2>/dev/null | grep -q C.UTF-8; then
 fi
 export LC_ALL="$locale_candidate"
 
+# Darwin / macOS
 if uname | grep Darwin 1>/dev/null 2>&1; then
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
+
+	# Fix for errors on some libevent/nitcorn clients
+	export EVENT_NOKQUEUE=1
 fi
 
 export NIT_TESTING=true
