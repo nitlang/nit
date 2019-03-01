@@ -328,6 +328,21 @@ build_more_tools:
       - src/version.nit
       - src/nitc_0
 
+valgrind:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - mkdir -p valgrind.out
+    - nitc src/nitc.nit # To warm-up the cache
+    - src/valgrind.sh --callgrind-out-file=valgrind.out/nitc.nitc.out nitc src/nitc.nit -vv
+    - callgrind_annotate valgrind.out/nitc.nitc.out > valgrind.out/nitc.nitc.txt
+    - src/valgrind.sh --callgrind-out-file=valgrind.out/niti.niti.out nit -- src/nit.nit tests/base_simple3.nit -vv
+    - callgrind_annotate valgrind.out/niti.niti.out > valgrind.out/niti.niti.txt
+  artifacts:
+    paths:
+      - valgrind.out
+
 build_doc:
   stage: more_test
   dependencies:
