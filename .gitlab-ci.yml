@@ -354,6 +354,16 @@ build_doc:
     paths:
       - nitdoc.out
 
+nitmetrics:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src
+  artifacts:
+    paths:
+      - nitmetrics.out
+
 build_catalog:
   stage: more_test
   dependencies:
