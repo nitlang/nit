@@ -842,6 +842,10 @@ fi
 
 echo >>$xml "</testsuite></testsuites>"
 
+if type junit2html >/dev/null; then
+	junit2html "$xml"
+fi
+
 if [ -n "$nok" ]; then
 	exit 1
 else

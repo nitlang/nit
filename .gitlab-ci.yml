@@ -77,7 +77,7 @@ test_some:
   artifacts:
     paths:
       - tests/errlist
-      - tests/*.xml
+      - tests/*.xml*
     when: always
     reports:
       junit: tests/*.xml
@@ -90,6 +90,7 @@ nitunit_some:
     - git diff --name-only origin/master..HEAD -- "*.nit" "*.res" "README.*" | grep -v "^tests/" > list0.txt || true
     - xargs nitls -pP < list0.txt > list.txt
     - xargs nitunit < list.txt
+    - junit2html nitunit.xml
   artifacts:
     paths:
       - nitunit.xml*
@@ -220,6 +221,7 @@ nitunit_lib:
     - xargs nitunit -v < list.txt| tee log.txt
     - grep -e KO log.txt > status.txt || true
     - tail -3 log.txt >> status.txt
+    - junit2html nitunit.xml
   artifacts:
     paths:
       - nitunit.xml*
@@ -237,6 +239,7 @@ nitunit_src:
     - xargs nitunit -v < list.txt| tee log.txt
     - grep -e KO log.txt > status.txt || true
     - tail -3 log.txt >> status.txt
+    - junit2html nitunit.xml
   artifacts:
     paths:
       - nitunit.xml*
