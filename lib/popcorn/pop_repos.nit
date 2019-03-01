@@ -106,7 +106,7 @@
 # # Let's wrap it all together in a Popcorn app:
 #
 # # Init database
-# var mongo = new MongoClient("mongodb://localhost:27017/")
+# var mongo = new MongoClient("mongodb://mongo:27017/")
 # var db = mongo.database("tests_app_{100000.rand}")
 # var coll = db.collection("books")
 #
@@ -126,7 +126,7 @@ import mongodb::queries
 redef class AppConfig
 
 	# Default database host string for MongoDb
-	var default_db_host = "mongodb://localhost:27017/"
+	var default_db_host = "mongodb://mongo:27017/"
 
 	# Default database hostname
 	var default_db_name = "popcorn"
@@ -290,7 +290,7 @@ end
 # # The repository can then be used with User instances:
 #
 # # Init database
-# var mongo = new MongoClient("mongodb://localhost:27017/")
+# var mongo = new MongoClient("mongodb://mongo:27017/")
 # var db = mongo.database("tests")
 # var coll = db.collection("test_pop_repo_{100000.rand}")
 #

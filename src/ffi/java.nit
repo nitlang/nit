@@ -105,7 +105,7 @@ class JavaLanguage
 			jni_signature_alt = mclass_type.jni_signature_alt
 			return_type = mclass_type
 		else
-			params.add "self"
+			params.add to_java_call_context.cast_to(mclass_type, "self")
 			if signature.return_mtype != null then
 				var ret_mtype = signature.return_mtype
 				ret_mtype = ret_mtype.resolve_for(mclass_type, mclass_type, mmodule, true)
@@ -165,6 +165,9 @@ class JavaLanguage
 
 	redef fun compile_to_files(mmodule, compdir)
 	do
+		var ffi_ccu = ffi_ccu
+		assert ffi_ccu != null
+
 		# Make sure we have a .java file
 		mmodule.ensure_java_files
 
@@ -172,7 +175,65 @@ class JavaLanguage
 		mmodule.insert_compiler_options
 
 		# Enable linking C callbacks to java native methods
-		mmodule.ensure_linking_callback_methods(ffi_ccu.as(not null))
+		mmodule.ensure_linking_callback_methods(ffi_ccu)
+
+		# Function to build instances to the Java class NitObject
+		var callbacks = mmodule.callbacks_used_from_java.callbacks
+		if callbacks.not_empty then
+			var cf = new CFunction("jobject nit_ffi_with_java_new_nit_object(JNIEnv *env, void *data)")
+			cf.exprs.add """
+	// retrieve the current JVM
+	Sys sys = Pointer_sys(NULL);
+
+	jclass java_class = Sys_load_jclass(sys, "nit/app/NitObject");
+	if (java_class == NULL) {
+		PRINT_ERROR("Nit FFI with Java error: failed to load class NitObject.\\n");
+		(*env)->ExceptionDescribe(env);
+		exit(1);
+	}
+
+	jmethodID java_init = (*env)->GetMethodID(env, java_class, "<init>", "(J)V");
+	if (java_init == NULL) {
+		PRINT_ERROR("Nit FFI with Java error: NitObject constructor not found.\\n");
+		(*env)->ExceptionDescribe(env);
+		exit(1);
+	}
+
+	jobject nit_object = (*env)->NewObject(env, java_class, java_init, (jlong)data);
+	if (nit_object == NULL) {
+		PRINT_ERROR("Nit FFI with Java error: NitObject construction failed.\\n");
+		(*env)->ExceptionDescribe(env);
+		exit(1);
+	}
+
+	return nit_object;
+	"""
+			ffi_ccu.add_local_function cf
+
+			# Function to extract the pointer held by instances of the Java class NitObject
+			cf = new CFunction("void *nit_ffi_with_java_nit_object_data(JNIEnv *env, jobject nit_object)")
+			cf.exprs.add """
+	Sys sys = Pointer_sys(NULL);
+	jclass java_class = Sys_load_jclass(sys, "nit/app/NitObject");
+	if (java_class == NULL) {
+		PRINT_ERROR("Nit FFI with Java error: failed to load class NitObject.\\n");
+		(*env)->ExceptionDescribe(env);
+		exit(1);
+	}
+
+	jfieldID java_field = (*env)->GetFieldID(env, java_class, "pointer", "J");
+	if (java_field == NULL) {
+		PRINT_ERROR("Nit FFI with Java error: NitObject field not found.\\n");
+		(*env)->ExceptionDescribe(env);
+		exit(1);
+	}
+
+	jlong data = (*env)->GetLongField(env, nit_object, java_field);
+
+	return (void*)data;
+	"""
+			ffi_ccu.add_local_function cf
+		end
 
 		# Java implementation code
 		var java_file = mmodule.java_file
@@ -343,7 +404,7 @@ class JavaClassTemplate
 	fun write_to_files(compdir: String): ExternFile
 	do
 		var filename = "{java_class_name}.java"
-		var filepath = "{compdir}/{filename}"
+		var filepath = compdir/filename
 
 		write_to_file filepath
 
@@ -364,8 +425,11 @@ end
 class JavaFile
 	super ExternFile
 
-	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
-	redef fun makefile_rule_content do return "javac {filename.basename} -d ."
+	# Full Java class name: package and class
+	fun full_name: String do return filename.basename(".java")
+
+	redef fun makefile_rule_name do return full_name.replace(".", "/") + ".class"
+	redef fun makefile_rule_content do return "javac {filename} -d ."
 	redef fun add_to_jar do return true
 end
 
@@ -380,8 +444,24 @@ end
 private class ToJavaCallContext
 	super CallContext
 
-	redef fun cast_to(mtype, name) do return "({mtype.jni_type})({name})"
-	redef fun cast_from(mtype, name) do return "({mtype.cname})({name})"
+	redef fun cast_to(mtype, name)
+	do
+		if mtype.java_is_nit_object then
+			return "nit_ffi_with_java_new_nit_object(nit_ffi_jni_env, {name})"
+		else
+			return "({mtype.jni_type})({name})"
+		end
+	end
+
+	redef fun cast_from(mtype, name)
+	do
+		if mtype.java_is_nit_object then
+			return "({mtype.cname})nit_ffi_with_java_nit_object_data(nit_ffi_jni_env, {name})"
+		else
+			return "({mtype.cname})({name})"
+		end
+	end
+
 	redef fun name_mtype(mtype) do return mtype.jni_type
 end
 
@@ -389,8 +469,24 @@ end
 private class FromJavaCallContext
 	super CallContext
 
-	redef fun cast_to(mtype, name) do return "({mtype.cname})({name})"
-	redef fun cast_from(mtype, name) do return "({mtype.jni_type})({name})"
+	redef fun cast_to(mtype, name)
+	do
+		if mtype.java_is_nit_object then
+			return "({mtype.cname})nit_ffi_with_java_nit_object_data(nit_ffi_jni_env, {name})"
+		else
+			return "({mtype.cname})({name})"
+		end
+	end
+
+	redef fun cast_from(mtype, name)
+	do
+		if mtype.java_is_nit_object then
+			return "nit_ffi_with_java_new_nit_object(nit_ffi_jni_env, {name})"
+		else
+			return "({mtype.jni_type})({name})"
+		end
+	end
+
 	redef fun name_mtype(mtype) do return mtype.jni_type
 end
 
@@ -452,21 +548,23 @@ redef class MType
 	#
 	# * Primitives common to both languages use their Java primitive type
 	# * Nit extern Java classes are represented by their full Java type
-	# * Other Nit objects are represented by `int` in Java. It holds the
-	#	pointer to the underlying C structure.
-	#	TODO create static Java types to store and hide the pointer
-	private fun java_type: String do return "int"
+	# * Other Nit objects are represented by `NitObject` in Java, a class
+	#   encapsulating the pointer to the underlying C structure.
+	private fun java_type: String do return "nit.app.NitObject"
+
+	# Is this type opaque in Java? As so it is represented by `nit.app.NitObject`.
+	private fun java_is_nit_object: Bool do return true
 
 	# JNI type name (in C)
 	#
 	# So this is a C type, usually defined in `jni.h`
-	private fun jni_type: String do return "long"
+	private fun jni_type: String do return "jobject"
 
 	# JNI short type name (for signatures)
 	#
 	# Is used by `MMethod::build_jni_format` to pass a Java method signature
 	# to the JNI function `GetStaticMetodId`.
-	private fun jni_format: String do return "I"
+	private fun jni_format: String do return "Lnit/app/NitObject;"
 
 	# Type name appearing within JNI function names.
 	#
@@ -476,20 +574,22 @@ redef class MType
 
 	redef fun compile_callback_to_java(mmodule, mainmodule, ccu)
 	do
+		if self isa MClassType and mclass.ftype isa ForeignJavaType then return
+
 		var java_file = mmodule.java_file
-		if java_file == null then return
+		if java_file == null or mmodule.callbacks_used_from_java.callbacks.is_empty then return
 
 		for variation in ["incr", "decr"] do
 			var friendly_name = "{mangled_cname}_{variation}_ref"
 
 			# C
-			var csignature = "void {mmodule.impl_java_class_name}_{friendly_name}(JNIEnv *env, jclass clazz, jint object)"
+			var csignature = "void {mmodule.impl_java_class_name}_{friendly_name}(JNIEnv *nit_ffi_jni_env, jclass clazz, jobject object)"
 			var cf = new CFunction("JNIEXPORT {csignature}")
-			cf.exprs.add "\tnitni_global_ref_{variation}((void*)(long)object);"
+			cf.exprs.add "\tnitni_global_ref_{variation}(nit_ffi_with_java_nit_object_data(nit_ffi_jni_env, object));"
 			ccu.add_non_static_local_function cf
 
 			# Java
-			java_file.class_content.add "private native static void {friendly_name}(int object);\n"
+			java_file.class_content.add "private native static void {friendly_name}(nit.app.NitObject object);\n"
 		end
 	end
 
@@ -498,7 +598,7 @@ redef class MType
 		var arr = new Array[String]
 		for variation in ["incr", "decr"] do
 			var friendly_name = "{mangled_cname}_{variation}_ref"
-			var jni_format = "(I)V"
+			var jni_format = "(Lnit/app/NitObject;)V"
 			var cname = "{from_mmodule.impl_java_class_name}_{friendly_name}"
 			arr.add """{"{{{friendly_name}}}", "{{{jni_format}}}", {{{cname}}}}"""
 		end
@@ -524,6 +624,16 @@ redef class MClassType
 		if mclass.name == "Int32" then return "int"
 		if mclass.name == "UInt32" then return "int"
 		return super
+	end
+
+	redef fun java_is_nit_object
+	do
+		var ftype = mclass.ftype
+		if ftype isa ForeignJavaType then return false
+
+		var java_primitives = once new HashSet[String].from(
+			["Bool", "Char", "Int", "Float", "Byte", "Int8", "Int16", "UInt16", "Int32", "UInt32"])
+		return not java_primitives.has(mclass.name)
 	end
 
 	redef fun jni_type
@@ -625,6 +735,22 @@ redef class MClassType
 		if mclass.name == "UInt32" then return "Int"
 		return super
 	end
+
+	redef fun compile_callback_to_java(mmodule, mainmodule, ccu)
+	do
+		# Don't generate functions for reference counters on extern classes
+		if mclass.ftype != null then return
+
+		super
+	end
+
+	redef fun jni_methods_declaration(from_mmodule)
+	do
+		# Don't generate functions for reference counters on extern classes
+		if mclass.ftype != null then return new Array[String]
+
+		return super
+	end
 end
 
 redef class MMethod
@@ -690,8 +816,7 @@ redef class MMethod
 
 		var cparams = new List[String]
 
-		# This is different
-		cparams.add "JNIEnv *env"
+		cparams.add "JNIEnv *nit_ffi_jni_env"
 		cparams.add "jclass clazz"
 
 		if not self.is_init then

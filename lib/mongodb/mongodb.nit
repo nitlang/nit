@@ -22,7 +22,7 @@
 #
 # ~~~
 # # Opens the connexion with the Mongo server.
-# var client = new MongoClient("mongodb://localhost:27017/")
+# var client = new MongoClient("mongodb://mongo:27017/")
 #
 # # Select the database.
 # var db_suffix = "NIT_TESTING_ID".environ
@@ -197,7 +197,7 @@ end
 # Usage:
 #
 # ~~~
-# var uri = "mongodb://localhost:27017/"
+# var uri = "mongodb://mongo:27017/"
 # var client = new MongoClient(uri)
 # assert client.server_uri == uri
 # ~~~
@@ -216,7 +216,7 @@ class MongoClient
 	# Returns `null` if an error occured. See `last_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# assert client.server_status["process"] == "mongod"
 	# ~~~
 	fun server_status: nullable JsonObject do
@@ -230,7 +230,7 @@ class MongoClient
 	# Lists available database names.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -259,7 +259,7 @@ class MongoClient
 	# There is no need to create a database manually.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -321,7 +321,7 @@ class MongoDb
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -346,7 +346,7 @@ class MongoDb
 	# Loads or creates a collection by its `name`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -360,7 +360,7 @@ class MongoDb
 	# Checks if a collection named `name` exists.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -420,7 +420,7 @@ class MongoCollection
 	# Returns `false` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -455,7 +455,7 @@ class MongoCollection
 	# Returns `false` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -488,7 +488,7 @@ class MongoCollection
 	# Returns `false` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -513,7 +513,7 @@ class MongoCollection
 	# No upsert is done, see `save` instead.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -544,7 +544,7 @@ class MongoCollection
 	# Returns `-1` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -566,7 +566,7 @@ class MongoCollection
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -599,7 +599,7 @@ class MongoCollection
 	# * `limit` number of documents to return
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -625,7 +625,7 @@ class MongoCollection
 	# Applies an aggregation `pipeline` over the collection.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)
@@ -665,7 +665,7 @@ class MongoCollection
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# var db_suffix = "NIT_TESTING_ID".environ
 	# var db_name = "test_{db_suffix}"
 	# var db = client.database(db_name)

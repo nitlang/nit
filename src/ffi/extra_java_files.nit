@@ -29,7 +29,7 @@ end
 
 redef class MModule
 	# Extra Java files to compile with the module
-	private var extra_java_files: nullable Array[JavaFile] = null
+	private var extra_java_files: nullable Array[ExtraJavaFile] = null
 end
 
 private class JavaExtraFilesPhase
@@ -60,17 +60,19 @@ private class JavaExtraFilesPhase
 		var mmodule = nmodule.mmodule.as(not null)
 		var java_files = mmodule.extra_java_files
 		if java_files == null then
-			java_files = new Array[JavaFile]
+			java_files = new Array[ExtraJavaFile]
 			mmodule.extra_java_files = java_files
 		end
 
 		var format_error = "Syntax Error: `{annot_name}` expects its arguments to be paths to java files."
 		for arg in args do
-			var path = arg.as_string
-			if path == null then
+			var name = arg.as_string
+			if name == null or name.is_empty then
 				modelbuilder.error(arg, format_error)
 				return
 			end
+
+			var path = name.split(".").last + ".java"
 
 			# Append specified path to directory of the Nit source file
 			var source_file = nat.location.file
@@ -81,7 +83,7 @@ private class JavaExtraFilesPhase
 				continue
 			end
 
-			var file = new JavaFile(path)
+			var file = new ExtraJavaFile(name, path)
 			mmodule.ffi_files.add file
 			java_files.add file
 		end
@@ -93,11 +95,28 @@ redef class JavaLanguage
 	do
 		super
 
-		# also copy over the java files
+		# Also copy over the extra Java files
 		var extra_java_files = mmodule.extra_java_files
 		if extra_java_files != null then for file in extra_java_files do
-			var path = file.filename
-			path.file_copy_to("{compdir}/{path.basename}")
+
+			var dir = compdir / file.filename.dirname
+			dir.mkdir
+
+			file.src_path.file_copy_to(compdir/file.filename)
 		end
 	end
+end
+
+# User supplied Java file to include with the app for use from the FFI
+class ExtraJavaFile
+	super JavaFile
+
+	autoinit full_name, src_path
+
+	redef var full_name
+
+	# Path to the original user file
+	var src_path: String
+
+	redef fun filename do return full_name.replace(".", "/") + ".java"
 end

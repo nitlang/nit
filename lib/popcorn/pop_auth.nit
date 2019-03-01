@@ -197,9 +197,6 @@ class GithubOAuthCallBack
 			return
 		end
 
-		# FIXME reinit curl before next request to avoid weird 404
-		curl = new Curl
-
 		# Load github user
 		var gh_api = new GithubAPI(access_token)
 		var user = gh_api.load_auth_user

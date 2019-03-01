@@ -23,33 +23,33 @@ it may be possible to support other platforms with some tweaks.
 		You will probably need to tweak it to you system or update the download URL
 		to the latest SDK tools from https://developer.android.com/studio/index.html#command-tools
 
-		~~~
-		# Fetch and extract SDK tools
-		mkdir -p ~/Android/Sdk
-		cd ~/Android/Sdk
-		wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
-		unzip sdk-tools-linux-3859397.zip
+	~~~raw
+	# Fetch and extract SDK tools
+	mkdir -p ~/Android/Sdk
+	cd ~/Android/Sdk
+	wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+	unzip sdk-tools-linux-3859397.zip
 
-		# Update tools
-		tools/bin/sdkmanager --update
+	# Update tools
+	tools/bin/sdkmanager --update
 
-		# Accept the licenses
-		tools/bin/sdkmanager --licenses
+	# Accept the licenses
+	tools/bin/sdkmanager --licenses
 
-		# Install the basic build tools
-		tools/bin/sdkmanager "build-tools;27.0.0" ndk-bundle
-		~~~
+	# Install the basic build tools
+	tools/bin/sdkmanager "build-tools;27.0.0" ndk-bundle
+	~~~
 
 3.	Set the environment variable ANDROID_HOME to the SDK installation directory, usually `~/Android/Sdk/`.
 	Use the following command to setup the variable for bash.
 
-	~~~
+	~~~raw
 	echo "export ANDROID_HOME=~/Android/Sdk/" >> ~/.bashrc
 	~~~
 
 4.	Install Java 8 JDK, on Debian/Ubuntu systems you can use the following command:
 
-	~~~
+	~~~raw
 	sudo apt install openjdk-8-jdk
 	~~~
 
@@ -71,7 +71,7 @@ and `android_manifest_activity`.
 
     Example usage to specify an extra permission:
 
-    ~~~
+    ~~~raw
     android_manifest """<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>"""
     ~~~
 
@@ -143,7 +143,7 @@ as they change between versions of the Java SDK. You should instead use a
 command similar to the following, replacing `KEYSTORE_PATH` and `KEY_ALIAS`
 with the desired values.
 
-    ~~~
+    ~~~raw
     keytool -genkey -keystore KEYSTORE_PATH -alias KEY_ALIAS -sigalg MD5withRSA -keyalg RSA -keysize 1024 -validity 10000
     ~~~
 
@@ -154,7 +154,7 @@ optionally `TSA_SERVER`. These settings can be set in a startup script such as
     You can use the following commands by replacing the right-hand values
 to your own configuration.
 
-    ~~~
+    ~~~raw
     export KEYSTORE=keystore_path
     export KEY_ALIAS=key_alias
     export TSA_SERVER=timestamp_authority_server_url # Optional

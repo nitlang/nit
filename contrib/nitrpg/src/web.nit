@@ -67,7 +67,7 @@ class RpgAction
 	fun load_games: Array[Game] do
 		var res = new Array[Game]
 		# TODO should be option
-		var mongo = new MongoClient("mongodb://localhost:27017")
+		var mongo = new MongoClient("mongodb://mongo:27017")
 		var db = mongo.database("nitrpg")
 		for obj in db.collection("games").find_all(new JsonObject) do
 			var repo = api.load_repo(obj["name"].to_s)

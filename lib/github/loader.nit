@@ -29,7 +29,7 @@ class LoaderConfig
 	redef var default_config_file = "loader.ini"
 
 	# Default database host string for MongoDb
-	var default_db_host = "mongodb://localhost:27017/"
+	var default_db_host = "mongodb://mongo:27017/"
 
 	# Default database hostname
 	var default_db_name = "github_loader"

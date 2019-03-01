@@ -75,7 +75,7 @@ class Game
 	redef var key = name is lazy
 
 	# Mongo server url where this game data are stored.
-	var mongo_url = "mongodb://localhost:27017" is writable
+	var mongo_url = "mongodb://mongo:27017" is writable
 
 	# Mongo db client.
 	var client = new MongoClient(mongo_url) is lazy

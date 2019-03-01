@@ -19,7 +19,7 @@ module test_postgres_native
 import postgresql::native_postgres
 
 var db_suffix = "NIT_TESTING_ID".environ
-var db = new NativePostgres.connectdb("dbname=postgres")
+var db = new NativePostgres.connectdb("host=postgres user=postgres dbname=postgres")
 assert postgres_open: db.status.is_ok else print_error db.error
 
 var result = db.exec("CREATE TABLE IF NOT EXISTS animals_{db_suffix} (aname TEXT PRIMARY KEY, class TEXT NOT NULL, sex INTEGER)")

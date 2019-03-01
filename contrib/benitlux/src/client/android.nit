@@ -52,7 +52,7 @@ redef class App
 
 		android.content.IntentFilter filter = new android.content.IntentFilter();
 		filter.addAction(android.net.wifi.WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-		final int final_self = self;
+		final nit.app.NitObject final_self = self;
 		App_incr_ref(final_self);
 
 		context.registerReceiver(
@@ -197,7 +197,7 @@ redef class BeerView
 		final String final_title = title;
 		final boolean final_loggedin = loggedin;
 
-		final int final_self = self;
+		final nit.app.NitObject final_self = self;
 		BeerView_incr_ref(self); // Nit GC
 
 		view.setOnTouchListener(new android.view.View.OnTouchListener() {

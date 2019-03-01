@@ -1,1 +1,1 @@
-localhost 7474 test_prog/test_prog.nit
+neo4j 7474 test_prog/test_prog.nit
