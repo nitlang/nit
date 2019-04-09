@@ -183,6 +183,10 @@ redef class MModule
 		return new MPropDefSorter(self)
 	end
 
+	private var mpropdef_multi_sorter: MPropDefMultiSorter is lazy do
+		return new MPropDefMultiSorter(self)
+	end
+
 	# Does the current module has a given class `mclass`?
 	# Return true if the mmodule introduces, refines or imports a class.
 	# Visibility is not considered.
@@ -239,6 +243,11 @@ redef class MModule
 	fun linearize_mpropdefs(mpropdefs: Array[MPropDef])
 	do
 		mpropdef_sorter.sort(mpropdefs)
+	end
+
+	fun linearize_mpropdefs_multidispatch(mpropdefs: Array[MMethodDef])
+	do
+		mpropdef_multi_sorter.sort(mpropdefs)
 	end
 
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
@@ -388,6 +397,56 @@ private class MPropDefSorter
 		var a = pa.mclassdef
 		var b = pb.mclassdef
 		return mmodule.mclassdef_sorter.compare(a, b)
+	end
+end
+
+private class MPropDefMultiSorter
+	super Comparator
+	redef type COMPARED: MMethodDef
+	var mmodule: MModule
+
+	# Compares the methods definitions by comparing the neting of specialisation
+	# if nesting is the same. Looks at each individual parameters and prioritizing
+	# the last one.
+	redef fun compare(pa, pb)
+	do
+		var a = pa.msignature.mparameters
+		var b = pb.msignature.mparameters
+
+		var list_length_a = new Array[Int]
+		var list_length_b = new Array[Int]
+		var sum_length_a = 0
+		var sum_length_b = 0
+		assert a.length == b.length
+
+		for i in [0..a.length[ do
+			var length_a = a[i].mtype.collect_mclassdefs(mmodule).length
+			var length_b = b[i].mtype.collect_mclassdefs(mmodule).length
+			sum_length_a += length_a
+			sum_length_b += length_b
+			list_length_a.push(length_a)
+			list_length_b.push(length_b)
+		end
+
+		if not sum_length_a  == sum_length_b then
+			if sum_length_a < sum_length_b then
+				return -1
+			else
+				return 1
+			end
+		else
+			for i in [a.length-1..0].step(-1) do
+				if not list_length_a[i] == list_length_b[i] then
+					if list_length_a[i] < list_length_b[i] then
+						return -1
+					else
+						return 1
+					end
+				end
+			end
+		end
+
+		return 0
 	end
 end
 
@@ -2181,7 +2240,6 @@ abstract class MProperty
 		var cache = self.lookup_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
 
-		#print "select prop {mproperty} for {mtype} in {self}"
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
 
@@ -2410,6 +2468,28 @@ class MMethod
 
 	# Is this method a getter or a setter?
 	fun is_accessor: Bool do return is_getter or is_setter
+
+	fun lookup_multi_definition(mmodule: MModule, mtypes: Array[MType]): MPROPDEF do
+		var candidates = new Array[MPROPDEF]
+
+		#print mtypes
+		#print mpropdefs[2].msignature.as_notnull
+		#print "Le soustype est {mtypes[0].is_subtype(mmodule, null, mpropdefs[2].msignature.mparameters[0].mtype)}"
+		for i in [0..mpropdefs.length[ do
+			var valid_propdef = true
+			for j in [0..mtypes.length[ do
+				if not mtypes[j].is_subtype(mmodule, null, mpropdefs[i].msignature.mparameters[j].mtype) then
+					valid_propdef = false
+					break
+				end
+			end
+
+			if valid_propdef then
+				candidates.push(mpropdefs[i])
+			end
+		end
+		return candidates.last
+	end
 end
 
 # A global attribute
@@ -2478,7 +2558,7 @@ abstract class MPropDef
 		mproperty.mpropdefs.add(self)
 		mclassdef.mpropdefs_by_property[mproperty] = self
 		if mproperty.intro_mclassdef == mclassdef then
-			assert not isset mproperty._intro
+			#assert not isset mproperty._intro
 			mproperty.intro = self
 		end
 		self.to_s = "{mclassdef}${mproperty}"

@@ -469,7 +469,7 @@ class NaiveInterpreter
 		if msignature.arity == 0 then return res
 
 		if map == null then
-			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
+			# assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
 			for ne in args do
 				var e = self.expr(ne)
 				if e == null then return null
@@ -629,6 +629,16 @@ class NaiveInterpreter
 		var ret = send_commons(mproperty, args, mtype)
 		if ret != null then return ret
 		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
+
+		if mproperty.to_s == "toto" then
+			var mtypes = new Array[MType]
+			# Skip recv
+			for i in [1..args.length[ do
+				mtypes.push(args[i].mtype)
+			end
+			propdef=  mproperty.lookup_multi_definition(self.mainmodule, mtypes)
+		end
+		
 		return self.call(propdef, args)
 	end
 

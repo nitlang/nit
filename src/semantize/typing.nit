@@ -114,7 +114,7 @@ private class TypeVisitor
 			var u = anchor_to(sub)
 			self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}: {u}`.")
 		else
-			self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}`.")
+			# self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}`.")
 		end
 		return null
 	end
@@ -359,13 +359,14 @@ private class TypeVisitor
 
 		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
 		var mpropdef
+
 		if propdefs.length == 0 then
 			self.modelbuilder.error(node, "Type Error: no definition found for property `{name}` in `{unsafe_type}`.")
 			return null
 		else if propdefs.length == 1 then
 			mpropdef = propdefs.first
 		else
-			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{name}` in `{unsafe_type}`: {propdefs.join(" ")}")
+			# self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{name}` in `{unsafe_type}`: {propdefs.join(" ")}")
 			mpropdef = mproperty.intro
 		end
 

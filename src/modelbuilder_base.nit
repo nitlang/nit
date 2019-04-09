@@ -498,7 +498,7 @@ class ModelBuilder
 				var mt = resolve_mtype3(mmodule, mclass, anchor, nt)
 				if mt == null then return null # forward error
 				if not check_subtype(nt, mmodule, anchor, mt, bound) then
-					error(nt, "Type Error: expected `{bound}`, got `{mt}`.")
+					# error(nt, "Type Error: expected `{bound}`, got `{mt}`.")
 					return null
 				end
 			end

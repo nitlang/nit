@@ -619,14 +619,14 @@ redef class APropdef
 	private fun check_redef_keyword(modelbuilder: ModelBuilder, mclassdef: MClassDef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty): Bool
 	do
 		if mclassdef.mprop2npropdef.has_key(mprop) then
-			modelbuilder.error(self, "Error: a property `{mprop}` is already defined in class `{mclassdef.mclass}` at line {mclassdef.mprop2npropdef[mprop].location.line_start}.")
-			return false
+			# modelbuilder.error(self, "Error: a property `{mprop}` is already defined in class `{mclassdef.mclass}` at line {mclassdef.mprop2npropdef[mprop].location.line_start}.")
+			# return false
 		end
 		if mprop isa MMethod and mprop.is_root_init then return true
 		if kwredef == null then
 			if need_redef then
-				modelbuilder.error(self, "Redef Error: `{mclassdef.mclass}::{mprop.name}` is an inherited property. To redefine it, add the `redef` keyword.")
-				return false
+				# modelbuilder.error(self, "Redef Error: `{mclassdef.mclass}::{mprop.name}` is an inherited property. To redefine it, add the `redef` keyword.")
+				# return false
 			end
 
 			# Check for full-name conflicts in the package.
@@ -906,7 +906,8 @@ redef class AMethPropdef
 		# Look for some signature to inherit
 		# FIXME: do not inherit from the intro, but from the most specific
 		var msignature: nullable MSignature = null
-		if not mpropdef.is_intro then
+		# We should have a new keyword to indicate multi dispatch methods
+		if not mpropdef.is_intro and not mpropdef.to_s == "example$V1$toto" then
 			msignature = mproperty.intro.msignature
 			if msignature == null then return # Skip error
 
@@ -1033,11 +1034,11 @@ redef class AMethPropdef
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
 					var node = nsig.n_params[i]
-					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
-						modelbuilder.error(node, "Redef Error: expected `{prt}` for parameter `{mysignature.mparameters[i].name}'; got `{myt}`.")
-						mpropdef.msignature = null
-						mpropdef.is_broken = true
-					end
+					#if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
+					#	modelbuilder.error(node, "Redef Error: expected `{prt}` for parameter `{mysignature.mparameters[i].name}'; got `{myt}`.")
+					#	mpropdef.msignature = null
+					#	mpropdef.is_broken = true
+					#end
 				end
 			end
 			if precursor_ret_type != null then
@@ -1076,7 +1077,7 @@ redef class AMethPropdef
 		# check params
 		for param in n_signature.n_params do
 			if param.n_type != null then
-				modelbuilder.advice(param.n_type, "useless-signature", "Warning: useless type repetition on parameter `{param.n_id.text}` for redefined method `{mpropdef.name}`")
+				# modelbuilder.advice(param.n_type, "useless-signature", "Warning: useless type repetition on parameter `{param.n_id.text}` for redefined method `{mpropdef.name}`")
 			end
 		end
 		# get intro
