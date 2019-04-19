@@ -42,6 +42,14 @@ redef class ModelBuilder
 	# Public clients need to use `mpropdef2node` to access stuff.
 	private var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
 
+	# Associate a `npropdef` with its `mpropdef`
+	#
+	# See `mpropdef2npropdef`
+	fun add_mpropdef2npropdef(mpropdef: MPropDef,npropdef: APropdef)
+	do
+		mpropdef2npropdef[mpropdef] = npropdef
+	end
+
 	# Retrieve the associated AST node of a mpropertydef.
 	# This method is used to associate model entity with syntactic entities.
 	#
