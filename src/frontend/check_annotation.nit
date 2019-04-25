@@ -113,6 +113,7 @@ after_all
 example
 
 expects
+ensures
 """
 
 	# Efficient set build from `primtives_annotations_list`
