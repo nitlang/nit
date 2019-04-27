@@ -9,7 +9,7 @@ Allocations, by type:
 	-Concat = 0
 
 Calls to length, by type:
-	FlatString = 20
+	FlatString = 22
 Indexed accesses, by type:
 Calls to byte_length for each type:
 	FlatString = 45
