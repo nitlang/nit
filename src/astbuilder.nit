@@ -123,7 +123,7 @@ class ASTBuilder
 					n_annotations: nullable AAnnotations,
 					n_extern_calls: nullable AExternCalls,
 					n_extern_code_block: nullable AExternCodeBlock,
-					n_block: AExpr): AMethPropdef
+					n_block: nullable AExpr): AMethPropdef
 	do
 		return new AMethPropdef.make(n_visibility, tk_redef, mmethoddef, n_signature, n_annotations, n_extern_calls, n_extern_code_block, n_block)
 	end
@@ -156,6 +156,12 @@ class ASTBuilder
 	fun make_return(expr: nullable AExpr): AReturnExpr
 	do
 		return new AReturnExpr.make(expr)
+	end
+
+	# Make a new not
+	fun make_not(expr: AExpr): ANotExpr
+	do
+		return new ANotExpr.make(expr)
 	end
 end
 
@@ -241,6 +247,13 @@ class APlaceholderExpr
 	do
 		super
 		debug "PARENT: remaining placeholder"
+	end
+end
+
+redef class ANotExpr
+	private init make(expr: AExpr)
+	do
+		self.init_anotexpr(new TKwnot, expr)
 	end
 end
 
@@ -589,10 +602,10 @@ redef class ANode
 			else if parent != path_parent then
 				self.parent = path_parent
 				if v.seen.has(self) then
-					debug "DUPLICATE (NOTATREE): already seen node with parent {parent} now with {path_parent}."
+					#debug "DUPLICATE (NOTATREE): already seen node with parent {parent} now with {path_parent}."
 				else
 					v.seen.add(self)
-					debug "PARENT: expected parent: {path_parent}, got {parent}"
+					#debug "PARENT: expected parent: {path_parent}, got {parent}"
 				end
 			end
 		end
