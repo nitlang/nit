@@ -206,11 +206,11 @@ end
 interface Iterator[E]
 	# The current item.
 	# Require `is_ok`.
-	fun item: E is abstract
+	fun item: E is abstract, expects(is_ok)
 
 	# Jump to the next item.
 	# Require `is_ok`.
-	fun next is abstract
+	fun next is abstract, expects(is_ok)
 
 	# Jump to the next item `step` times.
 	#
@@ -395,7 +395,7 @@ interface SimpleCollection[E]
 	#     assert a.has(10) == false
 	#
 	# Ensure col.has(item)
-	fun add(item: E) is abstract
+	fun add(item: E) is abstract, ensures(self.has(item))
 
 	# Add each item of `coll`.
 	#
@@ -807,8 +807,6 @@ interface SequenceRead[E]
 	#
 	# REQUIRE `not is_empty`
 	redef fun first
-	is
-		expects(not_empty)
 	do
 		assert not_empty: not is_empty
 		return self[0]
@@ -1109,7 +1107,7 @@ interface Sequence[E]
 	#     assert a == [1]
 	#
 	# REQUIRE `not is_empty`
-	fun pop: E is abstract
+	fun pop: E is abstract, expects(not_empty)
 
 	# Add an item before the first one.
 	#
@@ -1137,7 +1135,7 @@ interface Sequence[E]
 	#     assert a == [3]
 	#
 	# REQUIRE `not is_empty`
-	fun shift: E is abstract
+	fun shift: E is abstract, expects(not_empty)
 
 	# Set the `item` at `index`.
 	#
@@ -1152,7 +1150,7 @@ interface Sequence[E]
 	#     assert a  == [10,200,30,400]
 	#
 	# REQUIRE `index >= 0 and index <= length`
-	fun []=(index: Int, item: E) is abstract
+	fun []=(index: Int, item: E) is abstract, expects(index >= 0 and index <= length)
 
 	# Set the index-th element but wrap
 	#
@@ -1170,7 +1168,13 @@ interface Sequence[E]
 	#
 	# REQUIRE `not_empty`
 	# ENSURE `self[modulo_index(index)] == value`
-	fun modulo=(index: Int, value: E) do self[modulo_index(index)] = value
+	fun modulo=(index: Int, value: E)
+	is
+		expects(not_empty)
+		ensures(self[modulo_index(index)] == value)
+	do
+		self[modulo_index(index)] = value
+	end
 
 	# Insert an element at a given position, following elements are shifted.
 	#
@@ -1180,7 +1184,7 @@ interface Sequence[E]
 	#
 	# REQUIRE `index >= 0 and index <= length`
 	# ENSURE `self[index] == item`
-	fun insert(item: E, index: Int) is abstract
+	fun insert(item: E, index: Int) is abstract, expects(index >= 0 and index <= length), ensures(self[index] == item)
 
 	# Insert all elements at a given position, following elements are shifted.
 	#
@@ -1191,6 +1195,9 @@ interface Sequence[E]
 	# REQUIRE `index >= 0 and index <= length`
 	# ENSURE `self[index] == coll.first`
 	fun insert_all(coll: Collection[E], index: Int)
+	is
+		expects(index >= 0 and index <= length)
+		ensures(coll.is_empty or self[index] == coll.first)
 	do
 		assert index >= 0 and index < length
 		if index == length then
@@ -1209,7 +1216,7 @@ interface Sequence[E]
 	#     assert a  == [10,30]
 	#
 	# REQUIRE `index >= 0 and index < length`
-	fun remove_at(index: Int) is abstract
+	fun remove_at(index: Int) is abstract, expects(index >= 0 and index < length)
 
 	# Rotates the elements of self once to the left
 	#

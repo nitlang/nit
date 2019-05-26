@@ -251,17 +251,14 @@ abstract class AbstractArray[E]
 
 	redef fun insert_all(coll, pos)
 	do
-		# This attribute was added to keep the parameter in the initial state to ensure condition
-		# FIXME: Fix this when the old will be added to the contract
-		var old_pos = pos
 		var l = coll.length
 		if l == 0 then return
 		enlarge(length + l)
 		_length += l
-		copy_to(old_pos, length-pos-l, self, old_pos + l)
+		copy_to(pos, length-pos-l, self, pos + l)
 		for c in coll do
-			self[old_pos] = c
-			old_pos += 1
+			self[pos] = c
+			pos += 1
 		end
 	end
 
@@ -322,15 +319,11 @@ class Array[E]
 	super Cloneable
 
 	redef fun [](index)
-	is
-		expects(index >= 0 and index < length)
 	do
 		return _items.as(not null)[index]
 	end
 
 	redef fun []=(index, item)
-	is
-		expects(index >= 0 and index < length + 1)
 	do
 		#assert index: index >= 0 and index < _length + 1
 		if _capacity <= index then
