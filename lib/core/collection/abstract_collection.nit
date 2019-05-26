@@ -235,8 +235,10 @@ interface Iterator[E]
 	#
 	# Require `is_ok`
 	fun next_by(step: Int)
+	is
+		expects(is_ok and step >= 0)
 	do
-		assert step >= 0
+		#assert step >= 0
 		while is_ok and step > 0 do
 			next
 			step -= 1
@@ -364,7 +366,7 @@ interface RemovableCollection[E]
 	#     assert a.length == 0
 	#
 	# ENSURE `is_empty`
-	fun clear is abstract
+	fun clear is abstract, ensures(is_empty)
 
 	# Remove an occurrence of `item`
 	#
@@ -719,7 +721,7 @@ interface Map[K, V]
 	#     assert x.keys.has("four") == false
 	#
 	# ENSURE `is_empty`
-	fun clear is abstract
+	fun clear is abstract, ensures(is_empty)
 
 	redef fun values: RemovableCollection[V] is abstract
 
@@ -730,15 +732,15 @@ end
 interface MapIterator[K, V]
 	# The current item.
 	# Require `is_ok`.
-	fun item: V is abstract
+	fun item: V is abstract, expects(is_ok)
 
 	# The key of the current item.
 	# Require `is_ok`.
-	fun key: K is abstract
+	fun key: K is abstract, expects(is_ok)
 
 	# Jump to the next item.
 	# Require `is_ok`.
-	fun next is abstract
+	fun next is abstract, expects(is_ok)
 
 	# Is there a current item ?
 	fun is_ok: Bool is abstract
@@ -805,6 +807,8 @@ interface SequenceRead[E]
 	#
 	# REQUIRE `not is_empty`
 	redef fun first
+	is
+		expects(not_empty)
 	do
 		assert not_empty: not is_empty
 		return self[0]
@@ -820,7 +824,7 @@ interface SequenceRead[E]
 	#     assert a[2]   == 30
 	#
 	# REQUIRE `index >= 0 and index < length`
-	fun [](index: Int): E is abstract
+	fun [](index: Int): E is abstract, expects(index >= 0 and index < length)
 
 	# Return the index-th element but wrap
 	#
@@ -837,7 +841,13 @@ interface SequenceRead[E]
 	#
 	# REQUIRE `not_empty`
 	# ENSURE `result == self[modulo_index(index)]`
-	fun modulo(index: Int): E do return self[modulo_index(index)]
+	fun modulo(index: Int): E
+	is
+		expects(not_empty)
+		ensures(result == self[modulo_index(index)])
+	do
+		return self[modulo_index(index)]
+	end
 
 	# Returns the real index for a modulo index.
 	#
@@ -851,6 +861,8 @@ interface SequenceRead[E]
 	#
 	# REQUIRE `not_empty`
 	fun modulo_index(index: Int): Int
+	is
+		expects(not_empty)
 	do
 		var length = self.length
 		if index >= 0 then
@@ -898,8 +910,10 @@ interface SequenceRead[E]
 	#
 	# REQUIRE `not is_empty`
 	fun last: E
+	is
+		expects(not_empty)
 	do
-		assert not_empty: not is_empty
+		#assert not_empty: not is_empty
 		return self[length-1]
 	end
 

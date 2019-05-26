@@ -217,7 +217,7 @@ abstract class AbstractArray[E]
 
 	redef fun pop
 	do
-		assert not_empty: not is_empty
+		#assert not_empty: not is_empty
 		var r = last
 		_length -= 1
 		return r
@@ -225,7 +225,7 @@ abstract class AbstractArray[E]
 
 	redef fun shift
 	do
-		assert not_empty: not is_empty
+		#assert not_empty: not is_empty
 		var r = first
 		var l = length-1
 		copy_to(1, l, self, 0)
@@ -251,14 +251,17 @@ abstract class AbstractArray[E]
 
 	redef fun insert_all(coll, pos)
 	do
+		# This attribute was added to keep the parameter in the initial state to ensure condition
+		# FIXME: Fix this when the old will be added to the contract
+		var old_pos = pos
 		var l = coll.length
 		if l == 0 then return
 		enlarge(length + l)
 		_length += l
-		copy_to(pos, length-pos-l, self, pos + l)
+		copy_to(old_pos, length-pos-l, self, old_pos + l)
 		for c in coll do
-			self[pos] = c
-			pos += 1
+			self[old_pos] = c
+			old_pos += 1
 		end
 	end
 
@@ -319,14 +322,17 @@ class Array[E]
 	super Cloneable
 
 	redef fun [](index)
+	is
+		expects(index >= 0 and index < length)
 	do
-		assert index: index >= 0 and index < _length
 		return _items.as(not null)[index]
 	end
 
 	redef fun []=(index, item)
+	is
+		expects(index >= 0 and index < length + 1)
 	do
-		assert index: index >= 0 and index < _length + 1
+		#assert index: index >= 0 and index < _length + 1
 		if _capacity <= index then
 			enlarge(index + 1)
 		end
@@ -433,7 +439,7 @@ class Array[E]
 	# Create an empty array with a given capacity.
 	init with_capacity(cap: Int)
 	do
-		assert positive: cap >= 0
+		#assert positive: cap >= 0
 		_items = new NativeArray[E](cap)
 		_capacity = cap
 		_length = 0
@@ -442,7 +448,7 @@ class Array[E]
 	# Create an array of `count` elements
 	init filled_with(value: E, count: Int)
 	do
-		assert positive: count >= 0
+		#assert positive: count >= 0
 		_items = new NativeArray[E](count)
 		_capacity = count
 		_length = count
@@ -456,7 +462,7 @@ class Array[E]
 	# Create a array filled with a given native array.
 	init with_native(nat: NativeArray[E], size: Int)
 	do
-		assert positive: size >= 0
+		#assert positive: size >= 0
 		_items = nat
 		_capacity = size
 		_length = size
@@ -542,8 +548,10 @@ class Array[E]
 	#     assert a * 2  ==  [1,2,3,1,2,3]
 	#     assert (a * 10).length  ==  30
 	fun *(repeat: Int): Array[E]
+	is
+		expects(repeat >= 0)
 	do
-		assert repeat >= 0
+		#assert repeat >= 0
 		var res = new Array[E].with_capacity(length * repeat)
 		while repeat > 0 do
 			res.add_all(self)
@@ -607,7 +615,7 @@ class ArraySet[E]
 
 	redef fun first
 	do
-		assert _array.length > 0
+		#assert _array.length > 0
 		return _array.first
 	end
 
