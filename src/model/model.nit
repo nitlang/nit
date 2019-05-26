@@ -2300,6 +2300,18 @@ abstract class MProperty
 		return lookup_all_definitions(mmodule, mtype).first
 	end
 
+
+	# Return the most specific definition in the linearization of `mtype` if none exist return null.
+	#
+	# See `lookup_first_definition` for more details.
+	fun lookup_first_or_null_definition(mmodule: MModule, mtype: MType): nullable MPROPDEF
+	do
+		if not mtype.need_anchor and mtype.has_mproperty(mmodule, self) then
+			return lookup_first_definition(mmodule, mtype)
+		end
+		return null
+	end
+
 	# Return all definitions in a linearization order
 	# Most specific first, most general last
 	#
