@@ -421,6 +421,14 @@ class ConcurrentArray[E]
 		mutex.unlock
 	end
 
+	redef fun has(e)
+	do
+		mutex.lock
+		var result = real_collection.has(e)
+		mutex.unlock
+		return result
+	end
+
 	#
 	## The following method defs are conflict resolutions
 	#
