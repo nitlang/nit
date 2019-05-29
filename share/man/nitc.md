@@ -539,6 +539,9 @@ Force lazy semantic analysis of the source-code.
 Analysis of methods is thus done only when required.
 This option breaks the behavior of most of the tools since errors in methods are undetected until the method is required in some processing.
 
+### `--no-contract`
+Option used to disable the contracts(ensures and expects) usage.
+
 # ENVIRONMENT VARIABLES
 
 ### `NIT_DIR`
