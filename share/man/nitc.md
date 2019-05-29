@@ -539,6 +539,15 @@ Force lazy semantic analysis of the source-code.
 Analysis of methods is thus done only when required.
 This option breaks the behavior of most of the tools since errors in methods are undetected until the method is required in some processing.
 
+## Contract
+By default the contracts can be defined as "semi-global". I.E. All contracts (ensures, expects) used in the main package are enabled, the `expects` contracts are enabled (`ensures` contracts are disable) in direct imported package. Other indirected imported package has no active contract.
+
+### `--no-contract`
+Option used to disable the contracts(ensures, expects) usage.
+
+### `--full-contract`
+Option used to enables contracts (ensures, expects) on all classes. Warning this is an expensive option at runtime.
+
 # ENVIRONMENT VARIABLES
 
 ### `NIT_DIR`
