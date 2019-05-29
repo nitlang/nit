@@ -29,6 +29,12 @@ class ASTBuilder
 	# The anchor used for some mechanism relying on types
 	var anchor: nullable MClassType
 
+	# Check mmodule to avoid a new instantiation of ASTBuilder
+	fun check_mmodule(mmodule: MModule)
+	do
+		if self.mmodule != mmodule then self.mmodule = mmodule
+	end
+
 	# Make a new Int literal
 	fun make_int(value: Int): AIntegerExpr
 	do
@@ -101,6 +107,55 @@ class ASTBuilder
 	fun make_if(condition: AExpr, mtype: nullable MType): AIfExpr
 	do
 		return new AIfExpr.make(condition, mtype)
+	end
+
+	# Make a new assert
+	fun make_assert(n_id : nullable TId , n_expr : AExpr , n_else : nullable AExpr): AAssertExpr
+	do
+		return new AAssertExpr.make(n_id , n_expr , n_else)
+	end
+
+	# Make a new method
+	fun make_method(n_visibility: nullable APublicVisibility,
+					tk_redef: nullable TKwredef,
+					mmethoddef: MMethodDef,
+					n_signature: nullable ASignature,
+					n_annotations: nullable AAnnotations,
+					n_extern_calls: nullable AExternCalls,
+					n_extern_code_block: nullable AExternCodeBlock,
+					n_block: AExpr): AMethPropdef
+	do
+		return new AMethPropdef.make(n_visibility, tk_redef, mmethoddef, n_signature, n_annotations, n_extern_calls, n_extern_code_block, n_block)
+	end
+
+	# Make a new or with two expr
+	fun make_or(right_expr: AExpr, left_expr: AExpr): AOrExpr
+	do
+		return new AOrExpr.make(right_expr,left_expr)
+	end
+
+	# Make a new and with two expr
+	fun make_and(right_expr: AExpr, left_expr: AExpr): AAndExpr
+	do
+		return new AAndExpr.make(right_expr,left_expr)
+	end
+
+	# Make a new parenthesis expr
+	fun make_parenthesis(expr: AExpr, annotations: nullable AAnnotations): AParExpr
+	do
+		return new AParExpr.make(expr,annotations)
+	end
+
+	# Make a new message super
+	fun make_super_call(args: nullable Array[AExpr], n_qualified: nullable AQualified): ASuperExpr
+	do
+		return new ASuperExpr.make(args,n_qualified)
+	end
+
+	# Make a new return
+	fun make_return(expr: nullable AExpr): AReturnExpr
+	do
+		return new AReturnExpr.make(expr)
 	end
 end
 
@@ -186,6 +241,76 @@ class APlaceholderExpr
 	do
 		super
 		debug "PARENT: remaining placeholder"
+	end
+end
+
+redef class AReturnExpr
+	private init make(expr: nullable AExpr)
+	do
+		self.init_areturnexpr(null, expr)
+	end
+end
+
+redef class ASuperExpr
+	private init make(args: nullable Array[AExpr], n_qualified: nullable AQualified)
+	do
+		var n_args = new AListExprs
+		if args != null then
+			n_args.n_exprs.add_all(args)
+		end
+		self.init_asuperexpr(n_qualified, new TKwsuper, n_args)
+	end
+end
+
+redef class AParExpr
+	private init make(expr: AExpr, annotations: nullable AAnnotations)
+	do
+		self.location = expr.location
+		self.init_aparexpr(new TOpar, expr, new TCpar, annotations)
+	end
+end
+
+redef class AOrExpr
+	private init make(right_expr: AExpr, left_expr: AExpr)
+	do
+		self.init_aorexpr(right_expr,new TKwor,left_expr)
+	end
+end
+
+redef class AAndExpr
+	private init make(right_expr: AExpr, left_expr: AExpr)
+	do
+		self.init_aandexpr(right_expr,new TKwand ,left_expr)
+	end
+end
+
+redef class AMethPropdef
+	private init make(n_visibility: nullable APublicVisibility,
+					tk_redef: nullable TKwredef,
+					mmethoddef: MMethodDef,
+					n_signature: nullable ASignature,
+					n_annotations: nullable AAnnotations,
+					n_extern_calls: nullable AExternCalls,
+					n_extern_code_block: nullable AExternCodeBlock,
+					n_block: nullable AExpr)
+	do
+		var n_tid = new TId
+		n_tid.text = mmethoddef.name
+		var n_methid = new AIdMethid.init_aidmethid(n_tid)
+		if n_signature == null then n_signature = new ASignature
+		if n_visibility == null then n_visibility = new APublicVisibility
+		self.init_amethpropdef(null,tk_redef,n_visibility,new TKwmeth,null,null,null,n_methid,n_signature,n_annotations,n_extern_calls,n_extern_code_block,new TKwdo,n_block,new TKwend)
+		self.mpropdef = mmethoddef
+	end
+end
+
+redef class AAssertExpr
+	private init make(n_id : nullable TId , n_expr : nullable AExpr , n_else : nullable AExpr)
+	do
+		n_kwassert = new TKwassert
+		n_kwelse = null
+		if n_else != null then n_kwelse = new TKwelse
+		self.init_aassertexpr(n_kwassert, n_id , n_expr , n_kwelse , n_else)
 	end
 end
 
@@ -313,6 +438,7 @@ redef class ACallExpr
 		_n_args = new AListExprs
 		_n_qid = new AQid
 		_n_qid.n_id = new TId
+		_n_qid.n_id.text = callsite.mproperty.name
 		if args != null then
 			self.n_args.n_exprs.add_all(args)
 		end
