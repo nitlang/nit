@@ -76,7 +76,10 @@ class Mailbox[E]
 	end
 
 	# Adding the signal to release eventual waiting thread(s)
-	redef fun push(e) do
+	redef fun push(e)
+	is
+		no_contract
+	do
 		mutex.lock
 		if real_collection.is_empty and not actor.working then
 			actor.working = true
@@ -97,7 +100,10 @@ class Mailbox[E]
 	end
 
 	# If empty, blocks until an item is inserted with `push` or `unshift`
-	redef fun shift do
+	redef fun shift
+	is
+		no_contract
+	do
 		mutex.lock
 		if real_collection.is_empty then
 			actor.working = false
