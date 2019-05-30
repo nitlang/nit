@@ -307,6 +307,45 @@ private class StepIterator[E]
 	redef fun next_by(step) do real.next_by(step * self.step)
 end
 
+# An iterator that lazyly cache the current item.
+#
+# This class can be used as an helper to build simple iterator with a single and simplier `next_item` method.
+# The only constraint is that `next_item` returns null on the last item, so `null` cannot be a valid element.
+abstract class CachedIterator[E: Object]
+	super Iterator[E]
+
+	# Get the next item if any.
+	# Returns null if there is no next item.
+	fun next_item: nullable E is abstract
+
+	# The last item effectively read.
+	# `null` if on start, after a next of if no more items are available.
+	protected var cache: nullable E = null
+
+	# The current item, if any.
+	# If not, the cache is effectively filled (with `next_item`).
+	# Return `null` iff there is no more elements.
+	protected fun current_item: nullable E
+	do
+		var cache = self.cache
+		if cache != null then return cache
+		cache = next_item
+		self.cache = cache
+		return cache
+	end
+
+	redef fun item do return current_item.as(not null)
+
+	redef fun is_ok do return current_item != null
+
+	redef fun next do
+		# If needed, fill the cache (an consume the current element)
+		current_item
+		# Empty the cache (so the next element will be read)
+		cache = null
+	end
+end
+
 # A collection that contains only one item.
 #
 # Used to pass arguments by reference.
