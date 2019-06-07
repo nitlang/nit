@@ -538,6 +538,12 @@ class Bytes
 		length += cln
 	end
 
+	redef fun has(c)
+	do
+		if not c isa Int then return false
+		return super(c&255)
+	end
+
 	#     var b = new Bytes.empty
 	#     b.append([104, 101, 108, 108, 111])
 	#     assert b.to_s == "hello"
