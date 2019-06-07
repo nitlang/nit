@@ -484,37 +484,18 @@ end
 # Iterator returned by `Reader::each_line`.
 # See the aforementioned method for details.
 class LineIterator
-	super Iterator[String]
+	super CachedIterator[String]
 
 	# The original stream
 	var stream: Reader
 
-	redef fun is_ok
+	redef fun next_item
 	do
-		var res = not stream.eof
-		if not res and close_on_finish then stream.close
-		return res
-	end
-
-	redef fun item
-	do
-		var line = self.line
-		if line == null then
-			line = stream.read_line
+		if stream.eof then
+			if close_on_finish then stream.close
+			return null
 		end
-		self.line = line
-		return line
-	end
-
-	# The last line read (cache)
-	private var line: nullable String = null
-
-	redef fun next
-	do
-		# force the read
-		if line == null then item
-		# drop the line
-		line = null
+		return stream.read_line
 	end
 
 	# Close the stream when the stream is at the EOF.
