@@ -13,4 +13,4 @@ Docunits: Entities: 5; Documented ones: 0; With nitunits: 0
 Test suites: Classes: 1; Test Cases: 3; Failures: 3
 [FAILURE] 3/3 tests failed.
 `nitunit.out` is not removed for investigation.
-<testsuites><testsuite package="test_nitunit6::test_nitunit6"></testsuite><testsuite package="test_nitunit6"><testcase classname="nitunit.test_nitunit6.TestNitunit6" name="test_foo" time="0.0"><failure message="Nitunit Error: before module test failed"></failure></testcase></testsuite></testsuites>
+<testsuites><testsuite package="test_nitunit6"><testcase classname="nitunit.test_nitunit6.TestNitunit6" name="test_foo" time="0.0"><failure message="Nitunit Error: before module test failed"></failure></testcase></testsuite></testsuites>
