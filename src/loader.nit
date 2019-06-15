@@ -477,7 +477,7 @@ redef class ModelBuilder
 			# Attach homonymous `ini` file to the package
 			var inipath = path.dirname / "{pn}.ini"
 			if inipath.file_exists then
-				var ini = new ConfigTree(inipath)
+				var ini = new IniFile.from_file(inipath)
 				mpackage.ini = ini
 			end
 		end
@@ -543,7 +543,7 @@ redef class ModelBuilder
 		var parent = null
 		var inipath = dirpath / "package.ini"
 		if inipath.file_exists then
-			ini = new ConfigTree(inipath)
+			ini = new IniFile.from_file(inipath)
 		end
 
 		if ini == null then
@@ -1178,7 +1178,7 @@ redef class MPackage
 	# The `ini` file is given as is and might contain invalid or missing information.
 	#
 	# Some packages, like stand-alone packages or virtual packages have no `ini` file associated.
-	var ini: nullable ConfigTree = null
+	var ini: nullable IniFile = null
 
 	# Array of relative source paths excluded according to the `source.exclude` key of the `ini`
 	var excludes: nullable Array[String] is lazy do
