@@ -128,15 +128,19 @@ class LoaderConfig
 	# Verbosity level (the higher the more verbose)
 	fun verbose_level: Int do
 		var opt = opt_start.value
-		if opt > 0 then return opt
+		if opt > 0 then
+			return info_level
+		end
 		var v = ini["loader.verbose"]
-		if v != null then return v.to_i
-		return 4
+		if v != null and v.to_i > 0 then
+			return info_level
+		end
+		return warn_level
 	end
 
 	# Logger used to print things
-	var logger: ConsoleLog is lazy do
-		var logger = new ConsoleLog
+	var logger: PopLogger is lazy do
+		var logger = new PopLogger
 		logger.level = verbose_level
 		return logger
 	end
@@ -412,7 +416,7 @@ class Loader
 	end
 
 	# Logger shortcut
-	fun log: ConsoleLog do return config.logger
+	fun log: PopLogger do return config.logger
 
 	# Display a error and exit
 	fun error(msg: String) do
