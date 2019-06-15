@@ -299,7 +299,7 @@ class IniConfig
 	super Config
 
 	# Config tree used to store config options
-	var ini: ConfigTree is noinit
+	var ini: IniFile is noinit
 
 	# Path to app config file
 	var opt_config = new OptionString("Path to config file", "--config")
@@ -311,7 +311,7 @@ class IniConfig
 
 	redef fun parse_options(args) do
 		super
-		ini = new ConfigTree(config_file)
+		ini = new IniFile.from_file(config_file)
 	end
 
 	# Default config file path
