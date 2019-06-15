@@ -612,7 +612,13 @@ end
 #
 # This class provides services that ensure static typing when accessing the `config.ini` file.
 class WikiConfig
-	super ConfigTree
+	super IniFile
+	autoinit ini_file
+
+	# Path to this file
+	var ini_file: String
+
+	init do load_file(ini_file)
 
 	# Returns the config value at `key` or return `default` if no key was found.
 	protected fun value_or_default(key: String, default: String): String do
@@ -779,8 +785,8 @@ class WikiConfig
 	var sidebar_blocks: Array[String] is lazy do
 		var res = new Array[String]
 		if not has_key("wiki.sidebar.blocks") then return res
-		for val in at("wiki.sidebar.blocks").as(not null).values do
-			res.add val
+		for val in section("wiki.sidebar.blocks").as(not null).values do
+			res.add val.as(not null)
 		end
 		return res
 	end
@@ -834,7 +840,13 @@ end
 # Each section can provide its own config file to customize
 # appearance or behavior.
 class SectionConfig
-	super ConfigTree
+	super IniFile
+	autoinit ini_file
+
+	# Path to this file
+	var ini_file: String
+
+	init do load_file(ini_file)
 
 	# Returns the config value at `key` or `null` if no key was found.
 	private fun value_or_null(key: String): nullable String do
