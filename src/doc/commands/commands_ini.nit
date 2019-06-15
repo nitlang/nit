@@ -21,7 +21,7 @@ abstract class CmdIni
 	super CmdEntity
 
 	# Ini file
-	var ini: nullable ConfigTree = null
+	var ini: nullable IniFile = null
 
 	redef fun init_command do
 		var res = super
