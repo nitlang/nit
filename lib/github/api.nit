@@ -60,34 +60,30 @@ class GithubAPI
 	#
 	# Be aware that there is [rate limits](https://developer.github.com/v3/rate_limit/)
 	# associated to the key.
-	var auth: String
-
-	# Github API base url.
-	#
-	# Default is `https://api.github.com` and should not be changed.
-	var api_url = "https://api.github.com"
+	var auth: nullable String = null is optional
 
 	# User agent used for HTTP requests.
 	#
 	# Default is `nit_github_api`.
 	#
 	# See <https://developer.github.com/v3/#user-agent-required>
-	var user_agent = "nit_github_api"
+	var user_agent: String = "nit_github_api" is optional
 
 	# Curl instance.
 	#
 	# Internal Curl instance used to perform API calls.
-	private var ghcurl: GithubCurl is noinit
+	private var ghcurl = new GithubCurl(auth or else "", user_agent) is lazy
+
+	# Github API base url.
+	#
+	# Default is `https://api.github.com` and should not be changed.
+	var api_url = "https://api.github.com"
 
 	# Verbosity level.
 	#
 	# * `0`: only errors (default)
 	# * `1`: verbose
 	var verbose_lvl = 0 is public writable
-
-	init do
-		ghcurl = new GithubCurl(auth, user_agent)
-	end
 
 	# Deserialize an object
 	fun deserialize(string: String): nullable Object do
