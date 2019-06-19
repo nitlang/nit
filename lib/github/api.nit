@@ -201,8 +201,12 @@ class GithubAPI
 		var res = new Array[Branch]
 		if not array isa JsonArray then return res
 		var deser = deserialize(array.to_json)
-		if deser isa Array[Object] then return res # empty array
-		return deser.as(Array[Branch])
+		if not deser isa Array[Object] then return res # empty array
+		for branch in deser do
+			if not branch isa Branch then continue
+			res.add branch
+		end
+		return res
 	end
 
 	# List of issues associated with their ids.
