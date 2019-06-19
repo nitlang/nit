@@ -102,20 +102,24 @@ class GithubAPI
 	# This method returns raw json data.
 	# See other `load_*` methods to use more expressive types.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var obj = api.get("/repos/nitlang/nit")
-	#     assert obj isa JsonObject
-	#     assert obj["name"] == "nit"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var obj = api.get("/repos/nitlang/nit")
+	# assert obj isa JsonObject
+	# assert obj["name"] == "nit"
+	# ~~~
 	#
 	# Returns `null` in case of `error`.
 	#
-	#     obj = api.get("/foo/bar/baz")
-	#     assert obj == null
-	#     assert api.was_error
-	#     var err = api.last_error
-	#     assert err isa GithubError
-	#     assert err.name == "GithubAPIError"
-	#     assert err.message == "Not Found"
+	# ~~~nitish
+	# obj = api.get("/foo/bar/baz")
+	# assert obj == null
+	# assert api.was_error
+	# var err = api.last_error
+	# assert err isa GithubError
+	# assert err.name == "GithubAPIError"
+	# assert err.message == "Not Found"
+	# ~~~
 	fun get(path: String): nullable Serializable do
 		path = sanitize_uri(path)
 		var res = ghcurl.get_and_parse("{api_url}{path}")
@@ -173,10 +177,12 @@ class GithubAPI
 	#
 	# Loads the `User` from the API or returns `null` if the user cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var user = api.load_user("Morriar")
-	#     print user or else "null"
-	#     assert user.login == "Morriar"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var user = api.load_user("Morriar")
+	# print user or else "null"
+	# assert user.login == "Morriar"
+	# ~~~
 	fun load_user(login: String): nullable User do
 		return load_from_github("/users/{login}").as(nullable User)
 	end
@@ -185,11 +191,13 @@ class GithubAPI
 	#
 	# Loads the `Repo` from the API or returns `null` if the repo cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo.name == "nit"
-	#     assert repo.owner.login == "nitlang"
-	#     assert repo.default_branch == "master"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo.name == "nit"
+	# assert repo.owner.login == "nitlang"
+	# assert repo.default_branch == "master"
+	# ~~~
 	fun load_repo(full_name: String): nullable Repo do
 		return load_from_github("/repos/{full_name}").as(nullable Repo)
 	end
@@ -305,12 +313,14 @@ class GithubAPI
 	#
 	# Returns `null` if the branch cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var branch = api.load_branch(repo, "master")
-	#     assert branch.name == "master"
-	#     assert branch.commit isa Commit
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var branch = api.load_branch(repo, "master")
+	# assert branch.name == "master"
+	# assert branch.commit isa Commit
+	# ~~~
 	fun load_branch(repo: Repo, name: String): nullable Branch do
 		return load_from_github("/repos/{repo.full_name}/branches/{name}").as(nullable Branch)
 	end
@@ -343,11 +353,13 @@ class GithubAPI
 	#
 	# Returns `null` if the commit cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var commit = api.load_commit(repo, "64ce1f")
-	#     assert commit isa Commit
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var commit = api.load_commit(repo, "64ce1f")
+	# assert commit isa Commit
+	# ~~~
 	fun load_commit(repo: Repo, sha: String): nullable Commit do
 		return load_from_github("/repos/{repo.full_name}/commits/{sha}").as(nullable Commit)
 	end
@@ -356,11 +368,13 @@ class GithubAPI
 	#
 	# Returns `null` if the issue cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var issue = api.load_issue(repo, 1)
-	#     assert issue.title == "Doc"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var issue = api.load_issue(repo, 1)
+	# assert issue.title == "Doc"
+	# ~~~
 	fun load_issue(repo: Repo, number: Int): nullable Issue do
 		return load_from_github("/repos/{repo.full_name}/issues/{number}").as(nullable Issue)
 	end
@@ -410,12 +424,14 @@ class GithubAPI
 	#
 	# Returns `null` if the pull request cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var pull = api.load_pull(repo, 1)
-	#     assert pull.title == "Doc"
-	#     assert pull.user.login == "Morriar"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var pull = api.load_pull(repo, 1)
+	# assert pull.title == "Doc"
+	# assert pull.user.login == "Morriar"
+	# ~~~
 	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
 		return load_from_github("/repos/{repo.full_name}/pulls/{number}").as(nullable PullRequest)
 	end
@@ -424,11 +440,13 @@ class GithubAPI
 	#
 	# Returns `null` if the label cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var labl = api.load_label(repo, "ok_will_merge")
-	#     assert labl != null
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var labl = api.load_label(repo, "ok_will_merge")
+	# assert labl != null
+	# ~~~
 	fun load_label(repo: Repo, name: String): nullable Label do
 		return load_from_github("/repos/{repo.full_name}/labels/{name}").as(nullable Label)
 	end
@@ -437,11 +455,13 @@ class GithubAPI
 	#
 	# Returns `null` if the milestone cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var stone = api.load_milestone(repo, 4)
-	#     assert stone.title == "v1.0prealpha"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var stone = api.load_milestone(repo, 4)
+	# assert stone.title == "v1.0prealpha"
+	# ~~~
 	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
 		return load_from_github("/repos/{repo.full_name}/milestones/{id}").as(nullable Milestone)
 	end
@@ -450,15 +470,17 @@ class GithubAPI
 	#
 	# Returns `null` if the event cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo isa Repo
-	#     var event = api.load_issue_event(repo, 199674194)
-	#     assert event isa IssueEvent
-	#     assert event.actor.login == "privat"
-	#     assert event.event == "labeled"
-	#     assert event.labl isa Label
-	#     assert event.labl.name == "need_review"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo isa Repo
+	# var event = api.load_issue_event(repo, 199674194)
+	# assert event isa IssueEvent
+	# assert event.actor.login == "privat"
+	# assert event.event == "labeled"
+	# assert event.labl isa Label
+	# assert event.labl.name == "need_review"
+	# ~~~
 	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
 		return load_from_github("/repos/{repo.full_name}/issues/events/{id}").as(nullable IssueEvent)
 	end
@@ -467,13 +489,15 @@ class GithubAPI
 	#
 	# Returns `null` if the comment cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var comment = api.load_commit_comment(repo, 8982707)
-	#     assert comment.user.login == "Morriar"
-	#     assert comment.body == "For testing purposes...\n"
-	#     assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var comment = api.load_commit_comment(repo, 8982707)
+	# assert comment.user.login == "Morriar"
+	# assert comment.body == "For testing purposes...\n"
+	# assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
+	# ~~~
 	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
 		return load_from_github("/repos/{repo.full_name}/comments/{id}").as(nullable CommitComment)
 	end
@@ -482,13 +506,15 @@ class GithubAPI
 	#
 	# Returns `null` if the comment cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var comment = api.load_issue_comment(repo, 6020149)
-	#     assert comment.user.login == "privat"
-	#     assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
-	#     assert comment.issue_number == 10
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var comment = api.load_issue_comment(repo, 6020149)
+	# assert comment.user.login == "privat"
+	# assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
+	# assert comment.issue_number == 10
+	# ~~~
 	fun load_issue_comment(repo: Repo, id: Int): nullable IssueComment do
 		return load_from_github("/repos/{repo.full_name}/issues/comments/{id}").as(nullable IssueComment)
 	end
@@ -497,13 +523,15 @@ class GithubAPI
 	#
 	# Returns `null` if the comment cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var comment = api.load_review_comment(repo, 21010363)
-	#     assert comment.path == "src/modelize/modelize_property.nit"
-	#     assert comment.original_position == 26
-	#     assert comment.pull_number == 945
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.load_repo("nitlang/nit")
+	# assert repo != null
+	# var comment = api.load_review_comment(repo, 21010363)
+	# assert comment.path == "src/modelize/modelize_property.nit"
+	# assert comment.original_position == 26
+	# assert comment.pull_number == 945
+	# ~~~
 	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
 		return load_from_github("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
 	end
