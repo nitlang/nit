@@ -13,6 +13,7 @@ RUN dpkg --add-architecture i386 \
 		graphviz \
 		libunwind-dev \
 		pkg-config \
+		libicu-dev \
 		# Get the code!
 		git \
 		ca-certificates \
