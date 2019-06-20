@@ -2707,6 +2707,17 @@ class ASuperstringExpr
 	var n_exprs = new ANodes[AExpr](self)
 end
 
+# A method reference. eg `&foo::Bar::baz`
+class AFunrefExpr
+	super AExpr
+
+	# The prefix &
+	var n_amp: TAmp is writable, noinit
+
+	# The qualified method name
+	var n_qid: AQid is writable, noinit
+end
+
 # A simple parenthesis. eg `(x)`
 class AParExpr
 	super AExpr
