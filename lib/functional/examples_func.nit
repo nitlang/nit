@@ -81,6 +81,46 @@ class CharsFn
         end
 end
 
+class A
+
+        fun titi: A
+        do
+                return new A
+        end
+end
+
+class B
+        super A
+
+        fun toto
+        do
+                print "B::toto"
+        end
+
+        redef fun titi: B
+        do
+                return new B
+        end
+end
+
+class TotoFn
+        super Func1[B, Unit]
+
+        redef fun call(b: B): Unit
+        do
+                b.toto
+                return new Unit
+        end
+end
+
+class TitiFn
+        super Func1[A,A]
+        redef fun call(a: A): A
+        do
+                return a.titi
+        end
+end
+
 fun sum_fn: SumFn
 do
         return new SumFn
@@ -158,6 +198,13 @@ print xs.iterator.enumerate.to_array
 zs = ["aaa","bbb","ccc"]
 assert zs.iterator.flat_map(chars_fn).collect(new StringCollector) == "aaabbbccc"
 
-############
-# Problems #
-############
+
+
+
+#var ls = [new A, new A, new A]
+#ls.iterator.for_each(new TotoFn)
+
+var b: A = new B
+var ls = [b, new A, new A]
+
+print ls.iterator.map(new TitiFn).to_array
