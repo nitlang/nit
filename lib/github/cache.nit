@@ -28,9 +28,9 @@
 #
 # var name = "nitlang/nit"
 # assert not api.has_cache(name)
-# var repo = api.load_repo(name) # load from GitHub
+# var repo = api.get_repo(name) # load from GitHub
 # #assert api.has_cache(name) FIXME bring back this assert
-# repo = api.load_repo(name) # load from cache
+# repo = api.get_repo(name) # load from cache
 #
 # api.clear_cache
 # assert not api.has_cache(name)

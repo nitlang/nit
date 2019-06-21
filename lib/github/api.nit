@@ -43,11 +43,11 @@ import json
 # The API client allows you to get Github API entities.
 #
 # ~~~nitish
-# var repo = api.load_repo("nitlang/nit")
+# var repo = api.get_repo("nitlang/nit")
 # assert repo != null
 # assert repo.name == "nit"
 #
-# var user = api.load_user("Morriar")
+# var user = api.get_user("Morriar")
 # assert user != null
 # assert user.login == "Morriar"
 # ~~~
@@ -193,10 +193,10 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var user = api.load_auth_user
+	# var user = api.get_auth_user
 	# assert user.login == "Morriar"
 	# ~~~
-	fun load_auth_user: nullable User do
+	fun get_auth_user: nullable User do
 		return get("/user").as(nullable User)
 	end
 
@@ -206,11 +206,11 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var user = api.load_user("Morriar")
+	# var user = api.get_user("Morriar")
 	# print user or else "null"
 	# assert user.login == "Morriar"
 	# ~~~
-	fun load_user(login: String): nullable User do
+	fun get_user(login: String): nullable User do
 		return get("/users/{login}").as(nullable User)
 	end
 
@@ -220,17 +220,17 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo.name == "nit"
 	# assert repo.owner.login == "nitlang"
 	# assert repo.default_branch == "master"
 	# ~~~
-	fun load_repo(full_name: String): nullable Repo do
+	fun get_repo(full_name: String): nullable Repo do
 		return get("/repos/{full_name}").as(nullable Repo)
 	end
 
 	# List of branches associated with their names.
-	fun load_repo_branches(repo: Repo): Array[Branch] do
+	fun get_repo_branches(repo: Repo): Array[Branch] do
 		message(1, "Get branches for {repo.full_name}")
 		var array = get("/repos/{repo.full_name}/branches")
 		var res = new Array[Branch]
@@ -243,14 +243,14 @@ class GithubAPI
 	end
 
 	# List of issues associated with their ids.
-	fun load_repo_issues(repo: Repo): Array[Issue] do
+	fun get_repo_issues(repo: Repo): Array[Issue] do
 		message(1, "Get issues for {repo.full_name}")
 		var res = new Array[Issue]
-		var issue = load_repo_last_issue(repo)
+		var issue = get_repo_last_issue(repo)
 		if issue == null then return res
 		res.add issue
 		while issue != null and issue.number > 1 do
-			issue = load_issue(repo, issue.number - 1)
+			issue = get_issue(repo, issue.number - 1)
 			if issue == null then continue
 			res.add issue
 		end
@@ -276,7 +276,7 @@ class GithubAPI
 	end
 
 	# Get the last published issue.
-	fun load_repo_last_issue(repo: Repo): nullable Issue do
+	fun get_repo_last_issue(repo: Repo): nullable Issue do
 		var array = get("/repos/{repo.full_name}/issues")
 		if not array isa JsonArray then return null
 		if array.is_empty then return null
@@ -286,7 +286,7 @@ class GithubAPI
 	end
 
 	# List of labels associated with their names.
-	fun load_repo_labels(repo: Repo): Array[Label] do
+	fun get_repo_labels(repo: Repo): Array[Label] do
 		message(1, "Get labels for {repo.full_name}")
 		var array = get("repos/{repo.full_name}/labels")
 		if not array isa JsonArray then return new Array[Label]
@@ -294,7 +294,7 @@ class GithubAPI
 	end
 
 	# List of milestones associated with their ids.
-	fun load_repo_milestones(repo: Repo): Array[Milestone] do
+	fun get_repo_milestones(repo: Repo): Array[Milestone] do
 		message(1, "Get milestones for {repo.full_name}")
 		var array = get("/repos/{repo.full_name}/milestones")
 		if not array isa JsonArray then return new Array[Milestone]
@@ -306,7 +306,7 @@ class GithubAPI
 	# Implementation notes: because PR numbers are not consecutive,
 	# PR are loaded from pages.
 	# See: https://developer.github.com/v3/pulls/#list-pull-requests
-	fun load_repo_pulls(repo: Repo): Array[PullRequest] do
+	fun get_repo_pulls(repo: Repo): Array[PullRequest] do
 		message(1, "Get pulls for {repo.full_name}")
 		var key = "/repos/{repo.full_name}"
 		var res = new Array[PullRequest]
@@ -326,7 +326,7 @@ class GithubAPI
 	end
 
 	# List of contributor related statistics.
-	fun load_repo_contrib_stats(repo: Repo): Array[ContributorStats] do
+	fun get_repo_contrib_stats(repo: Repo): Array[ContributorStats] do
 		message(1, "Get contributor stats for {repo.full_name}")
 		var res = new Array[ContributorStats]
 		var array = get("/repos/{repo.full_name}/stats/contributors")
@@ -340,13 +340,13 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var branch = api.load_branch(repo, "master")
+	# var branch = api.get_branch(repo, "master")
 	# assert branch.name == "master"
 	# assert branch.commit isa Commit
 	# ~~~
-	fun load_branch(repo: Repo, name: String): nullable Branch do
+	fun get_branch(repo: Repo, name: String): nullable Branch do
 		return get("/repos/{repo.full_name}/branches/{name}").as(nullable Branch)
 	end
 
@@ -354,7 +354,7 @@ class GithubAPI
 	#
 	# This can be long depending on the branch size.
 	# Commit are returned in an unspecified order.
-	fun load_branch_commits(branch: Branch): Array[Commit] do
+	fun get_branch_commits(branch: Branch): Array[Commit] do
 		var res = new Array[Commit]
 		var done = new HashSet[String]
 		var todos = new Array[Commit]
@@ -380,12 +380,12 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var commit = api.load_commit(repo, "64ce1f")
+	# var commit = api.get_commit(repo, "64ce1f")
 	# assert commit isa Commit
 	# ~~~
-	fun load_commit(repo: Repo, sha: String): nullable Commit do
+	fun get_commit(repo: Repo, sha: String): nullable Commit do
 		return get("/repos/{repo.full_name}/commits/{sha}").as(nullable Commit)
 	end
 
@@ -395,17 +395,17 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var issue = api.load_issue(repo, 1)
+	# var issue = api.get_issue(repo, 1)
 	# assert issue.title == "Doc"
 	# ~~~
-	fun load_issue(repo: Repo, number: Int): nullable Issue do
+	fun get_issue(repo: Repo, number: Int): nullable Issue do
 		return get("/repos/{repo.full_name}/issues/{number}").as(nullable Issue)
 	end
 
 	# List of event on this issue.
-	fun load_issue_comments(repo: Repo, issue: Issue): Array[IssueComment] do
+	fun get_issue_comments(repo: Repo, issue: Issue): Array[IssueComment] do
 		var res = new Array[IssueComment]
 		var count = issue.comments or else 0
 		var page = 1
@@ -416,7 +416,7 @@ class GithubAPI
 			for obj in array do
 				if not obj isa JsonObject then continue
 				var id = obj["id"].as(Int)
-				var comment = load_issue_comment(repo, id)
+				var comment = get_issue_comment(repo, id)
 				if comment == null then continue
 				res.add(comment)
 			end
@@ -427,7 +427,7 @@ class GithubAPI
 	end
 
 	# List of events on this issue.
-	fun load_issue_events(repo: Repo, issue: Issue): Array[IssueEvent] do
+	fun get_issue_events(repo: Repo, issue: Issue): Array[IssueEvent] do
 		var res = new Array[IssueEvent]
 		var key = "/repos/{repo.full_name}/issues/{issue.number}"
 		var page = 1
@@ -451,13 +451,13 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var pull = api.load_pull(repo, 1)
+	# var pull = api.get_pull(repo, 1)
 	# assert pull.title == "Doc"
 	# assert pull.user.login == "Morriar"
 	# ~~~
-	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
+	fun get_pull(repo: Repo, number: Int): nullable PullRequest do
 		return get("/repos/{repo.full_name}/pulls/{number}").as(nullable PullRequest)
 	end
 
@@ -467,12 +467,12 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var labl = api.load_label(repo, "ok_will_merge")
+	# var labl = api.get_label(repo, "ok_will_merge")
 	# assert labl != null
 	# ~~~
-	fun load_label(repo: Repo, name: String): nullable Label do
+	fun get_label(repo: Repo, name: String): nullable Label do
 		return get("/repos/{repo.full_name}/labels/{name}").as(nullable Label)
 	end
 
@@ -482,12 +482,12 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var stone = api.load_milestone(repo, 4)
+	# var stone = api.get_milestone(repo, 4)
 	# assert stone.title == "v1.0prealpha"
 	# ~~~
-	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
+	fun get_milestone(repo: Repo, id: Int): nullable Milestone do
 		return get("/repos/{repo.full_name}/milestones/{id}").as(nullable Milestone)
 	end
 
@@ -497,16 +497,16 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo isa Repo
-	# var event = api.load_issue_event(repo, 199674194)
+	# var event = api.get_issue_event(repo, 199674194)
 	# assert event isa IssueEvent
 	# assert event.actor.login == "privat"
 	# assert event.event == "labeled"
 	# assert event.labl isa Label
 	# assert event.labl.name == "need_review"
 	# ~~~
-	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
+	fun get_issue_event(repo: Repo, id: Int): nullable IssueEvent do
 		return get("/repos/{repo.full_name}/issues/events/{id}").as(nullable IssueEvent)
 	end
 
@@ -516,14 +516,14 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var comment = api.load_commit_comment(repo, 8982707)
+	# var comment = api.get_commit_comment(repo, 8982707)
 	# assert comment.user.login == "Morriar"
 	# assert comment.body == "For testing purposes...\n"
 	# assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
 	# ~~~
-	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
+	fun get_commit_comment(repo: Repo, id: Int): nullable CommitComment do
 		return get("/repos/{repo.full_name}/comments/{id}").as(nullable CommitComment)
 	end
 
@@ -533,14 +533,14 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var comment = api.load_issue_comment(repo, 6020149)
+	# var comment = api.get_issue_comment(repo, 6020149)
 	# assert comment.user.login == "privat"
 	# assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
 	# assert comment.issue_number == 10
 	# ~~~
-	fun load_issue_comment(repo: Repo, id: Int): nullable IssueComment do
+	fun get_issue_comment(repo: Repo, id: Int): nullable IssueComment do
 		return get("/repos/{repo.full_name}/issues/comments/{id}").as(nullable IssueComment)
 	end
 
@@ -550,14 +550,14 @@ class GithubAPI
 	#
 	# ~~~nitish
 	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.load_repo("nitlang/nit")
+	# var repo = api.get_repo("nitlang/nit")
 	# assert repo != null
-	# var comment = api.load_review_comment(repo, 21010363)
+	# var comment = api.get_review_comment(repo, 21010363)
 	# assert comment.path == "src/modelize/modelize_property.nit"
 	# assert comment.original_position == 26
 	# assert comment.pull_number == 945
 	# ~~~
-	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
+	fun get_review_comment(repo: Repo, id: Int): nullable ReviewComment do
 		return get("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
 	end
 end
@@ -605,7 +605,7 @@ end
 # A Github user
 #
 # Provides access to [Github user data](https://developer.github.com/v3/users/).
-# Should be accessed from `GithubAPI::load_user`.
+# Should be accessed from `GithubAPI::get_user`.
 class User
 	super GitUser
 	serialize
@@ -629,7 +629,7 @@ end
 # A Github repository.
 #
 # Provides access to [Github repo data](https://developer.github.com/v3/repos/).
-# Should be accessed from `GithubAPI::load_repo`.
+# Should be accessed from `GithubAPI::get_repo`.
 class Repo
 	super GithubEntity
 	serialize
@@ -649,7 +649,7 @@ end
 
 # A Github branch.
 #
-# Should be accessed from `GithubAPI::load_branch`.
+# Should be accessed from `GithubAPI::get_branch`.
 #
 # See <https://developer.github.com/v3/repos/#list-branches>.
 class Branch
@@ -665,7 +665,7 @@ end
 
 # A Github commit.
 #
-# Should be accessed from `GithubAPI::load_commit`.
+# Should be accessed from `GithubAPI::get_commit`.
 #
 # See <https://developer.github.com/v3/repos/commits/>.
 class Commit
@@ -753,7 +753,7 @@ end
 
 # A Github issue.
 #
-# Should be accessed from `GithubAPI::load_issue`.
+# Should be accessed from `GithubAPI::get_issue`.
 #
 # See <https://developer.github.com/v3/issues/>.
 class Issue
@@ -830,7 +830,7 @@ end
 
 # A Github pull request.
 #
-# Should be accessed from `GithubAPI::load_pull`.
+# Should be accessed from `GithubAPI::get_pull`.
 #
 # PullRequest are basically Issues with more data.
 # See <https://developer.github.com/v3/pulls/>.
@@ -914,7 +914,7 @@ end
 
 # A Github label.
 #
-# Should be accessed from `GithubAPI::load_label`.
+# Should be accessed from `GithubAPI::get_label`.
 #
 # See <https://developer.github.com/v3/issues/labels/>.
 class Label
@@ -930,7 +930,7 @@ end
 
 # A Github milestone.
 #
-# Should be accessed from `GithubAPI::load_milestone`.
+# Should be accessed from `GithubAPI::get_milestone`.
 #
 # See <https://developer.github.com/v3/issues/milestones/>.
 class Milestone
@@ -1063,7 +1063,7 @@ end
 
 # Comments made on Github issue and pull request pages.
 #
-# Should be accessed from `GithubAPI::load_issue_comment`.
+# Should be accessed from `GithubAPI::get_issue_comment`.
 #
 # See <https://developer.github.com/v3/issues/comments/>.
 class IssueComment
@@ -1079,7 +1079,7 @@ end
 
 # Comments made on Github pull request diffs.
 #
-# Should be accessed from `GithubAPI::load_diff_comment`.
+# Should be accessed from `GithubAPI::get_diff_comment`.
 #
 # See <https://developer.github.com/v3/pulls/comments/>.
 class ReviewComment
@@ -1113,7 +1113,7 @@ end
 
 # An event that occurs on a Github `Issue`.
 #
-# Should be accessed from `GithubAPI::load_issue_event`.
+# Should be accessed from `GithubAPI::get_issue_event`.
 #
 # See <https://developer.github.com/v3/issues/events/>.
 class IssueEvent

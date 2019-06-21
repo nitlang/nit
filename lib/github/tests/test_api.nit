@@ -184,7 +184,7 @@ class TestGithubAPI
 	# TODO test more error cases
 
 	fun test_get_auth_user is test do
-		var user = api.load_auth_user
+		var user = api.get_auth_user
 		assert user isa User
 		assert user.login == "Morriar"
 		assert user.avatar_url == "https://avatars2.githubusercontent.com/u/583144?v=4"
@@ -194,7 +194,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_user is test do
-		var user = api.load_user("Morriar")
+		var user = api.get_user("Morriar")
 		assert user isa User
 		assert user.login == "Morriar"
 		assert user.avatar_url == "https://avatars2.githubusercontent.com/u/583144?v=4"
@@ -204,7 +204,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_repo is test do
-		var repo = api.load_repo("nitlang/nit")
+		var repo = api.get_repo("nitlang/nit")
 		assert repo isa Repo
 		assert repo.full_name == "nitlang/nit"
 		assert repo.name == "nit"
@@ -212,10 +212,10 @@ class TestGithubAPI
 		assert repo.default_branch == "master"
 	end
 
-	private var repo: Repo is lazy do return api.load_repo("nitlang/nit").as(not null)
+	private var repo: Repo is lazy do return api.get_repo("nitlang/nit").as(not null)
 
 	fun test_get_branches is test do
-		var branches = api.load_repo_branches(repo)
+		var branches = api.get_repo_branches(repo)
 		assert branches.length == 2
 		assert branches.first.name == "master"
 		assert branches.last.name == "next"
@@ -229,7 +229,7 @@ class TestGithubAPI
 	# TODO contrib_stats
 
 	fun test_get_branch is test do
-		var branch = api.load_branch(repo, "master")
+		var branch = api.get_branch(repo, "master")
 		assert branch isa Branch
 		assert branch.name == "master"
 	end
@@ -237,14 +237,14 @@ class TestGithubAPI
 	# TODO branch commits
 
 	fun test_get_commit is test do
-		var commit = api.load_commit(repo, "64ce1f")
+		var commit = api.get_commit(repo, "64ce1f")
 		assert commit isa Commit
 		assert commit.sha == "64ce1f587209024f5de46d06c70526a569ff537f"
 		# TODO other fields
 	end
 
 	fun test_get_issue is test do
-		var issue = api.load_issue(repo, 1000)
+		var issue = api.get_issue(repo, 1000)
 		assert issue isa Issue
 		assert issue.number == 1000
 		assert issue.title == "Raise nitc from the dead"
@@ -261,7 +261,7 @@ class TestGithubAPI
 	# TODO issue events
 
 	fun test_get_pull is test do
-		var pull = api.load_pull(repo, 1000)
+		var pull = api.get_pull(repo, 1000)
 		assert pull isa Issue
 		assert pull.number == 1000
 		assert pull.title == "Raise nitc from the dead"
@@ -274,20 +274,20 @@ class TestGithubAPI
 	end
 
 	fun test_get_label is test do
-		var labl = api.load_label(repo, "ok_will_merge")
+		var labl = api.get_label(repo, "ok_will_merge")
 		assert labl isa Label
 		assert labl.name == "ok_will_merge"
 	end
 
 	fun test_get_milestone is test do
-		var milestone = api.load_milestone(repo, 4)
+		var milestone = api.get_milestone(repo, 4)
 		assert milestone isa Milestone
 		assert milestone.title == "v1.0prealpha"
 		# TODO other fields
 	end
 
 	fun test_get_issue_event is test do
-		var event = api.load_issue_event(repo, 199674194)
+		var event = api.get_issue_event(repo, 199674194)
 		assert event isa IssueEvent
 		assert event.actor.login == "privat"
 		assert event.event == "labeled"
@@ -295,7 +295,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_issue_comment is test do
-		var comment = api.load_issue_comment(repo, 6020149)
+		var comment = api.get_issue_comment(repo, 6020149)
 		assert comment isa IssueComment
 		assert comment.user.login == "privat"
 		assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
@@ -303,7 +303,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_comment is test do
-		var comment = api.load_commit_comment(repo, 8982707)
+		var comment = api.get_commit_comment(repo, 8982707)
 		assert comment isa CommitComment
 		assert comment.user.login == "Morriar"
 		assert comment.body == "For testing purposes...\n"
@@ -311,7 +311,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_review_comments is test do
-		var comment = api.load_review_comment(repo, 21010363)
+		var comment = api.get_review_comment(repo, 21010363)
 		assert comment isa ReviewComment
 		assert comment.path == "src/modelize/modelize_property.nit"
 		assert comment.original_position == 26

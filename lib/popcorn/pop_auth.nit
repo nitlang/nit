@@ -199,7 +199,7 @@ class GithubOAuthCallBack
 
 		# Load github user
 		var gh_api = new GithubAPI(access_token)
-		var user = gh_api.load_auth_user
+		var user = gh_api.get_auth_user
 		if user == null then
 			res.error 401
 			return

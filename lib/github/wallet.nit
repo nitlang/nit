@@ -153,7 +153,7 @@ class GithubWallet
 	fun check_token(token: String): Bool do
 		message "Try token {token}"
 		var api = new GithubAPI(token)
-		api.load_repo("nitlang/nit")
+		api.get_repo("nitlang/nit")
 		return not api.was_error
 	end
 
