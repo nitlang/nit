@@ -2557,3 +2557,29 @@ redef class ADebugTypeExpr
 		self.is_typed = true
 	end
 end
+
+
+redef class AFunrefExpr
+
+        redef fun accept_typing(v)
+        do
+                var prop_name = n_qid.n_id.text.escape_to_c
+                var props = v.modelbuilder.model.get_mproperties_by_name(prop_name)
+
+                var prop: nullable MMethod = null
+                for p in props do
+                        if p isa MMethod then
+                                prop = p
+                                print p
+                        end
+                end
+
+                if prop == null then
+                        v.error(self, "Error: function `{prop_name}` does not exists")
+                end
+
+                self.is_typed = true
+                #print v.modelbuilder.model.mproperties_by_name[]
+                #self.is_typed = true
+        end
+end
