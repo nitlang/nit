@@ -272,8 +272,6 @@ class TestGithubAPI
 		assert branch.name == "master"
 	end
 
-	# TODO branch commits
-
 	fun test_get_commit is test do
 		var commit = api.get_commit(repo, "64ce1f")
 		assert commit isa Commit

@@ -305,30 +305,6 @@ class GithubAPI
 		return get("/repos/{repo.full_name}/branches/{name}").as(nullable Branch)
 	end
 
-	# List all commits in `self`.
-	#
-	# This can be long depending on the branch size.
-	# Commit are returned in an unspecified order.
-	fun get_branch_commits(branch: Branch): Array[Commit] do
-		var res = new Array[Commit]
-		var done = new HashSet[String]
-		var todos = new Array[Commit]
-		todos.add branch.commit
-		loop
-			if todos.is_empty then break
-			var commit = todos.pop
-			if done.has(commit.sha) then continue
-			done.add commit.sha
-			res.add commit
-			var parents = commit.parents
-			if parents == null then continue
-			for parent in parents do
-				todos.add parent
-			end
-		end
-		return res
-	end
-
 	# Get the Github commit with `sha`.
 	#
 	# Returns `null` if the commit cannot be found.
