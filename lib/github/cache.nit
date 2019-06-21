@@ -60,7 +60,7 @@ redef class GithubAPI
 		if store.has_key(key) then
 			message(1, "Get {key} (cache)")
 			was_error = false
-			return deserialize(store.load_object(key).to_json).as(nullable GithubEntity)
+			return deserialize(store.load_object(key).to_json)
 		end
 		var obj = super
 		if not was_error and obj isa Serializable then

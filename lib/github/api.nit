@@ -507,22 +507,12 @@ class GithubAPIError
 	var requested_uri: String
 end
 
-# An Error returned while deserializing GithubEntity objects
+# An Error returned while deserializing objects from the API
 class GithubDeserializerErrors
 	super GithubError
 
 	# Errors returned by the deserizalization process
 	var deserizalization_errors: Array[Error]
-end
-
-# Something returned by the Github API.
-#
-# Mainly a Nit wrapper around a JSON objet.
-abstract class GithubEntity
-	serialize
-
-	# Github page url.
-	var html_url: nullable String is writable
 end
 
 # A Github user
@@ -554,7 +544,6 @@ end
 # Provides access to [Github repo data](https://developer.github.com/v3/repos/).
 # Should be accessed from `GithubAPI::get_repo`.
 class Repo
-	super GithubEntity
 	serialize
 
 	# Repo full name on Github.
@@ -576,7 +565,6 @@ end
 #
 # See <https://developer.github.com/v3/repos/#list-branches>.
 class Branch
-	super GithubEntity
 	serialize
 
 	# Branch name.
@@ -592,7 +580,6 @@ end
 #
 # See <https://developer.github.com/v3/repos/commits/>.
 class Commit
-	super GithubEntity
 	serialize
 
 	# Commit SHA.
@@ -639,7 +626,6 @@ end
 
 # A Git Commit representation
 class GitCommit
-	super GithubEntity
 	serialize
 
 	# Commit SHA.
@@ -660,7 +646,6 @@ end
 
 # Git user authoring data
 class GitUser
-	super GithubEntity
 	serialize
 
 	# Authoring date.
@@ -680,7 +665,6 @@ end
 #
 # See <https://developer.github.com/v3/issues/>.
 class Issue
-	super GithubEntity
 	serialize
 
 	# Issue Github ID.
@@ -841,7 +825,6 @@ end
 #
 # See <https://developer.github.com/v3/issues/labels/>.
 class Label
-	super GithubEntity
 	serialize
 
 	# Label name.
@@ -857,7 +840,6 @@ end
 #
 # See <https://developer.github.com/v3/issues/milestones/>.
 class Milestone
-	super GithubEntity
 	serialize
 
 	# The milestone id on Github.
@@ -930,7 +912,6 @@ end
 # * `IssueComment` are made on an issue or pull request page.
 # * `ReviewComment` are made on the diff associated to a pull request.
 abstract class Comment
-	super GithubEntity
 	serialize
 
 	# Identifier of this comment.
@@ -1040,7 +1021,6 @@ end
 #
 # See <https://developer.github.com/v3/issues/events/>.
 class IssueEvent
-	super GithubEntity
 	serialize
 
 	# Event id on Github.
