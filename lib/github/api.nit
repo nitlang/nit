@@ -597,22 +597,8 @@ class Commit
 	# Authoring date as String.
 	var author_date: nullable String is writable
 
-	# Authoring date as ISODate.
-	fun iso_author_date: nullable ISODate do
-		var author_date = self.author_date
-		if author_date == null then return null
-		return new ISODate.from_string(author_date)
-	end
-
 	# Commit date as String.
 	var commit_date: nullable String is writable
-
-	# Commit date as ISODate.
-	fun iso_commit_date: nullable ISODate do
-		var commit_date = self.commit_date
-		if commit_date == null then return null
-		return new ISODate.from_string(commit_date)
-	end
 
 	# List files staged in this commit.
 	var files: nullable Array[GithubFile] = null is optional, writable
@@ -650,13 +636,6 @@ class GitUser
 
 	# Authoring date.
 	var date: nullable String = null is writable
-
-	# Authoring date as ISODate.
-	fun iso_date: nullable ISODate do
-		var date = self.date
-		if date == null then return null
-		return new ISODate.from_string(date)
-	end
 end
 
 # A Github issue.
@@ -700,30 +679,11 @@ class Issue
 	# Creation time as String.
 	var created_at: String is writable
 
-	# Creation time as ISODate.
-	fun iso_created_at: ISODate do
-		return new ISODate.from_string(created_at)
-	end
-
 	# Last update time as String (if any).
 	var updated_at: nullable String is writable
 
-	# Last update date as ISODate.
-	fun iso_updated_at: nullable ISODate do
-		var updated_at = self.updated_at
-		if updated_at == null then return null
-		return new ISODate.from_string(updated_at)
-	end
-
 	# Close time as String (if any).
 	var closed_at: nullable String is writable
-
-	# Close time as ISODate.
-	fun iso_closed_at: nullable ISODate do
-		var closed_at = self.closed_at
-		if closed_at == null then return null
-		return new ISODate.from_string(closed_at)
-	end
 
 	# Full description of the issue.
 	var body: nullable String is writable
@@ -747,13 +707,6 @@ class PullRequest
 
 	# Merge time as String (if any).
 	var merged_at: nullable String is writable
-
-	# Merge time as ISODate.
-	fun iso_merged_at: nullable ISODate do
-		var merged_at = self.merged_at
-		if merged_at == null then return null
-		return new ISODate.from_string(merged_at)
-	end
 
 	# Merge commit SHA.
 	var merge_commit_sha: nullable String is writable
@@ -863,45 +816,17 @@ class Milestone
 	# Creation time as String.
 	var created_at: nullable String is writable
 
-	# Creation time as ISODate.
-	fun iso_created_at: nullable ISODate do
-		var created_at = self.created_at
-		if created_at == null then return null
-		return new ISODate.from_string(created_at)
-	end
-
 	# User that created this milestone.
 	var creator: nullable User is writable
 
 	# Due time as String (if any).
 	var due_on: nullable String is writable
 
-	# Due time in ISODate format (if any).
-	fun iso_due_on: nullable ISODate do
-		var due_on = self.due_on
-		if due_on == null then return null
-		return new ISODate.from_string(due_on)
-	end
-
 	# Last update time as String (if any).
 	var updated_at: nullable String is writable
 
-	# Last update date as ISODate.
-	fun iso_updated_at: nullable ISODate do
-		var updated_at = self.updated_at
-		if updated_at == null then return null
-		return new ISODate.from_string(updated_at)
-	end
-
 	# Close time as String (if any).
 	var closed_at: nullable String is writable
-
-	# Close time as ISODate.
-	fun iso_closed_at: nullable ISODate do
-		var closed_at = self.closed_at
-		if closed_at == null then return null
-		return new ISODate.from_string(closed_at)
-	end
 end
 
 # A Github comment
@@ -923,20 +848,8 @@ abstract class Comment
 	# Creation time as String.
 	var created_at: String is writable
 
-	# Creation time as ISODate.
-	fun iso_created_at: nullable ISODate do
-		return new ISODate.from_string(created_at)
-	end
-
 	# Last update time as String (if any).
 	var updated_at: nullable String is writable
-
-	# Last update date as ISODate.
-	fun iso_updated_at: nullable ISODate do
-		var updated_at = self.updated_at
-		if updated_at == null then return null
-		return new ISODate.from_string(updated_at)
-	end
 
 	# Comment body text.
 	var body: String is writable
@@ -1032,11 +945,6 @@ class IssueEvent
 	# Creation time as String.
 	var created_at: String is writable
 
-	# Creation time as ISODate.
-	fun iso_created_at: nullable ISODate do
-		return new ISODate.from_string(created_at)
-	end
-
 	# Event descriptor.
 	var event: String is writable
 
@@ -1115,11 +1023,6 @@ class SearchResults
 
 	# Results in this page
 	var items: Array[Object]
-end
-
-# Make ISO Datew serilizable
-redef class ISODate
-	serialize
 end
 
 # JsonDeserializer specific for Github objects.
