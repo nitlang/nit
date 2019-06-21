@@ -225,8 +225,8 @@ class GithubAPI
 	# assert repo.owner.login == "nitlang"
 	# assert repo.default_branch == "master"
 	# ~~~
-	fun get_repo(full_name: String): nullable Repo do
-		return get("/repos/{full_name}").as(nullable Repo)
+	fun get_repo(repo_slug: String): nullable Repo do
+		return get("/repos/{repo_slug}").as(nullable Repo)
 	end
 
 	# List of repo branches.
@@ -234,15 +234,15 @@ class GithubAPI
 	# Pagination:
 	#	* `page`: page to fetch (default: 1)
 	#	* `per_page`: number of branches by page (default: 30)
-	fun get_repo_branches(repo: Repo, page, per_page: nullable Int): Array[Branch] do
+	fun get_repo_branches(repo_slug: String, page, per_page: nullable Int): Array[Branch] do
 		return new GithubArray[Branch].from(get(
-			"/repos/{repo.full_name}/branches?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/branches?{pagination(page, per_page)}"))
 	end
 
 	# List of issues associated with their ids.
-	fun get_repo_issues(repo: Repo, page, per_page: nullable Int): Array[Issue] do
+	fun get_repo_issues(repo_slug: String, page, per_page: nullable Int): Array[Issue] do
 		return new GithubArray[Issue].from(get(
-			"/repos/{repo.full_name}/issues?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/issues?{pagination(page, per_page)}"))
 	end
 
 	# Search issues in this repo form an advanced query.
@@ -254,20 +254,20 @@ class GithubAPI
 	# ~~~
 	#
 	# See <https://developer.github.com/v3/search/#search-issues>.
-	fun search_repo_issues(repo: Repo, query: String, page, per_page: nullable Int): nullable SearchResults do
-		return get("/search/issues?q={query} repo:{repo.full_name}&{pagination(page, per_page)}").as(nullable SearchResults)
+	fun search_repo_issues(repo_slug: String, query: String, page, per_page: nullable Int): nullable SearchResults do
+		return get("/search/issues?q={query} repo:{repo_slug}&{pagination(page, per_page)}").as(nullable SearchResults)
 	end
 
 	# List of labels associated with their names.
-	fun get_repo_labels(repo: Repo, page, per_page: nullable Int): Array[Label] do
+	fun get_repo_labels(repo_slug: String, page, per_page: nullable Int): Array[Label] do
 		return new GithubArray[Label].from(get(
-			"/repos/{repo.full_name}/labels?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/labels?{pagination(page, per_page)}"))
 	end
 
 	# List of milestones associated with their ids.
-	fun get_repo_milestones(repo: Repo, page, per_page: nullable Int): Array[Milestone] do
+	fun get_repo_milestones(repo_slug: String, page, per_page: nullable Int): Array[Milestone] do
 		return new GithubArray[Milestone].from(get(
-			"/repos/{repo.full_name}/milestones?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/milestones?{pagination(page, per_page)}"))
 	end
 
 	# List of pull-requests associated with their ids.
@@ -275,16 +275,16 @@ class GithubAPI
 	# Implementation notes: because PR numbers are not consecutive,
 	# PR are loaded from pages.
 	# See: https://developer.github.com/v3/pulls/#list-pull-requests
-	fun get_repo_pulls(repo: Repo, page, per_page: nullable Int): Array[PullRequest] do
+	fun get_repo_pulls(repo_slug: String, page, per_page: nullable Int): Array[PullRequest] do
 		return new GithubArray[PullRequest].from(get(
-			"/repos/{repo.full_name}/pulls?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/pulls?{pagination(page, per_page)}"))
 	end
 
 	# List of contributor related statistics.
-	fun get_repo_contrib_stats(repo: Repo): Array[ContributorStats] do
-		message(1, "Get contributor stats for {repo.full_name}")
+	fun get_repo_contrib_stats(repo_slug: String): Array[ContributorStats] do
+		message(1, "Get contributor stats for {repo_slug}")
 		var res = new Array[ContributorStats]
-		var array = get("/repos/{repo.full_name}/stats/contributors")
+		var array = get("/repos/{repo_slug}/stats/contributors")
 		if not array isa JsonArray then return res
 		return deserialize(array.to_json).as(Array[ContributorStats])
 	end
@@ -301,8 +301,8 @@ class GithubAPI
 	# assert branch.name == "master"
 	# assert branch.commit isa Commit
 	# ~~~
-	fun get_branch(repo: Repo, name: String): nullable Branch do
-		return get("/repos/{repo.full_name}/branches/{name}").as(nullable Branch)
+	fun get_branch(repo_slug: String, name: String): nullable Branch do
+		return get("/repos/{repo_slug}/branches/{name}").as(nullable Branch)
 	end
 
 	# Get the Github commit with `sha`.
@@ -316,8 +316,8 @@ class GithubAPI
 	# var commit = api.get_commit(repo, "64ce1f")
 	# assert commit isa Commit
 	# ~~~
-	fun get_commit(repo: Repo, sha: String): nullable Commit do
-		return get("/repos/{repo.full_name}/commits/{sha}").as(nullable Commit)
+	fun get_commit(repo_slug: String, sha: String): nullable Commit do
+		return get("/repos/{repo_slug}/commits/{sha}").as(nullable Commit)
 	end
 
 	# Get the Github issue #`number`.
@@ -331,20 +331,20 @@ class GithubAPI
 	# var issue = api.get_issue(repo, 1)
 	# assert issue.title == "Doc"
 	# ~~~
-	fun get_issue(repo: Repo, number: Int): nullable Issue do
-		return get("/repos/{repo.full_name}/issues/{number}").as(nullable Issue)
+	fun get_issue(repo_slug: String, number: Int): nullable Issue do
+		return get("/repos/{repo_slug}/issues/{number}").as(nullable Issue)
 	end
 
 	# List of event on this issue.
-	fun get_issue_comments(repo: Repo, issue: Issue, page, per_page: nullable Int): Array[IssueComment] do
+	fun get_issue_comments(repo_slug: String, issue_number: Int, page, per_page: nullable Int): Array[IssueComment] do
 		return new GithubArray[IssueComment].from(get(
-			"/repos/{repo.full_name}/issues/{issue.number}/comments?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/issues/{issue_number}/comments?{pagination(page, per_page)}"))
 	end
 
 	# List of events on this issue.
-	fun get_issue_events(repo: Repo, issue: Issue, page, per_page: nullable Int): Array[IssueEvent] do
+	fun get_issue_events(repo_slug: String, issue_number: Int, page, per_page: nullable Int): Array[IssueEvent] do
 		return new GithubArray[IssueEvent].from(get(
-			"/repos/{repo.full_name}/issues/{issue.number}/events?{pagination(page, per_page)}"))
+			"/repos/{repo_slug}/issues/{issue_number}/events?{pagination(page, per_page)}"))
 	end
 
 	# Get the Github pull request #`number`.
@@ -359,8 +359,8 @@ class GithubAPI
 	# assert pull.title == "Doc"
 	# assert pull.user.login == "Morriar"
 	# ~~~
-	fun get_pull(repo: Repo, number: Int): nullable PullRequest do
-		return get("/repos/{repo.full_name}/pulls/{number}").as(nullable PullRequest)
+	fun get_pull(repo_slug: String, number: Int): nullable PullRequest do
+		return get("/repos/{repo_slug}/pulls/{number}").as(nullable PullRequest)
 	end
 
 	# Get the Github label with `name`.
@@ -374,8 +374,8 @@ class GithubAPI
 	# var labl = api.get_label(repo, "ok_will_merge")
 	# assert labl != null
 	# ~~~
-	fun get_label(repo: Repo, name: String): nullable Label do
-		return get("/repos/{repo.full_name}/labels/{name}").as(nullable Label)
+	fun get_label(repo_slug: String, name: String): nullable Label do
+		return get("/repos/{repo_slug}/labels/{name}").as(nullable Label)
 	end
 
 	# Get the Github milestone with `id`.
@@ -389,8 +389,8 @@ class GithubAPI
 	# var stone = api.get_milestone(repo, 4)
 	# assert stone.title == "v1.0prealpha"
 	# ~~~
-	fun get_milestone(repo: Repo, id: Int): nullable Milestone do
-		return get("/repos/{repo.full_name}/milestones/{id}").as(nullable Milestone)
+	fun get_milestone(repo_slug: String, id: Int): nullable Milestone do
+		return get("/repos/{repo_slug}/milestones/{id}").as(nullable Milestone)
 	end
 
 	# Get the Github issue event with `id`.
@@ -408,8 +408,8 @@ class GithubAPI
 	# assert event.labl isa Label
 	# assert event.labl.name == "need_review"
 	# ~~~
-	fun get_issue_event(repo: Repo, id: Int): nullable IssueEvent do
-		return get("/repos/{repo.full_name}/issues/events/{id}").as(nullable IssueEvent)
+	fun get_issue_event(repo_slug: String, id: Int): nullable IssueEvent do
+		return get("/repos/{repo_slug}/issues/events/{id}").as(nullable IssueEvent)
 	end
 
 	# Get the Github commit comment with `id`.
@@ -425,8 +425,8 @@ class GithubAPI
 	# assert comment.body == "For testing purposes...\n"
 	# assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
 	# ~~~
-	fun get_commit_comment(repo: Repo, id: Int): nullable CommitComment do
-		return get("/repos/{repo.full_name}/comments/{id}").as(nullable CommitComment)
+	fun get_commit_comment(repo_slug: String, id: Int): nullable CommitComment do
+		return get("/repos/{repo_slug}/comments/{id}").as(nullable CommitComment)
 	end
 
 	# Get the Github issue comment with `id`.
@@ -442,8 +442,8 @@ class GithubAPI
 	# assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
 	# assert comment.issue_number == 10
 	# ~~~
-	fun get_issue_comment(repo: Repo, id: Int): nullable IssueComment do
-		return get("/repos/{repo.full_name}/issues/comments/{id}").as(nullable IssueComment)
+	fun get_issue_comment(repo_slug: String, id: Int): nullable IssueComment do
+		return get("/repos/{repo_slug}/issues/comments/{id}").as(nullable IssueComment)
 	end
 
 	# Get the Github diff comment with `id`.
@@ -459,8 +459,8 @@ class GithubAPI
 	# assert comment.original_position == 26
 	# assert comment.pull_number == 945
 	# ~~~
-	fun get_review_comment(repo: Repo, id: Int): nullable ReviewComment do
-		return get("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
+	fun get_review_comment(repo_slug: String, id: Int): nullable ReviewComment do
+		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable ReviewComment)
 	end
 
 	private fun pagination(page, per_page: nullable Int): String do

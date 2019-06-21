@@ -219,24 +219,22 @@ class TestGithubAPI
 		assert repo.default_branch == "master"
 	end
 
-	private var repo: Repo is lazy do return api.get_repo("nitlang/nit").as(not null)
-
 	fun test_get_branches is test do
-		var branches = api.get_repo_branches(repo, 1, 2)
+		var branches = api.get_repo_branches("nitlang/nit", 1, 2)
 		assert branches.length == 2
 		assert branches.first.name == "master"
 		assert branches.last.name == "next"
 	end
 
 	fun test_get_issues is test do
-		var issues = api.get_repo_issues(repo, 1, 3)
+		var issues = api.get_repo_issues("nitlang/nit", 1, 3)
 		assert issues.length == 3
 		assert issues.first.title == "nitrpg: Move `nitrpg` to its own repository"
 		assert issues.last.title == "Mock Github API tests"
 	end
 
 	fun test_search_issues is test do
-		var results = api.search_repo_issues(repo, "foo", 1, 3)
+		var results = api.search_repo_issues("nitlang/nit", "foo", 1, 3)
 		assert results isa SearchResults
 		assert results.items.length == 3
 		assert results.items.first.as(Issue).title == "Introduction of contracts in Nit"
@@ -244,21 +242,21 @@ class TestGithubAPI
 	end
 
 	fun test_get_labels is test do
-		var labels = api.get_repo_labels(repo, 1, 3)
+		var labels = api.get_repo_labels("nitlang/nit", 1, 3)
 		assert labels.length == 3
 		assert labels.first.name == "API"
 		assert labels.last.name == "NEP"
 	end
 
 	fun test_get_milestones is test do
-		var milestones = api.get_repo_milestones(repo, 1, 3)
+		var milestones = api.get_repo_milestones("nitlang/nit", 1, 3)
 		assert milestones.length == 3
 		assert milestones.first.title == "v1.0prealpha"
 		assert milestones.last.title == "nitdoc - Abstraction levels"
 	end
 
 	fun test_get_pulls is test do
-		var pulls = api.get_repo_pulls(repo, 1, 3)
+		var pulls = api.get_repo_pulls("nitlang/nit", 1, 3)
 		assert pulls.length == 3
 		assert pulls.first.title == "nitrpg: Move `nitrpg` to its own repository"
 		assert pulls.last.title == "Mock Github API tests"
@@ -267,20 +265,20 @@ class TestGithubAPI
 	# TODO contrib_stats
 
 	fun test_get_branch is test do
-		var branch = api.get_branch(repo, "master")
+		var branch = api.get_branch("nitlang/nit", "master")
 		assert branch isa Branch
 		assert branch.name == "master"
 	end
 
 	fun test_get_commit is test do
-		var commit = api.get_commit(repo, "64ce1f")
+		var commit = api.get_commit("nitlang/nit", "64ce1f")
 		assert commit isa Commit
 		assert commit.sha == "64ce1f587209024f5de46d06c70526a569ff537f"
 		# TODO other fields
 	end
 
 	fun test_get_issue is test do
-		var issue = api.get_issue(repo, 1000)
+		var issue = api.get_issue("nitlang/nit", 1000)
 		assert issue isa Issue
 		assert issue.number == 1000
 		assert issue.title == "Raise nitc from the dead"
@@ -294,25 +292,21 @@ class TestGithubAPI
 	end
 
 	fun test_get_issue_comments is test do
-		var issue = api.get_issue(repo, 1000)
-		assert issue isa Issue
-		var comments = api.get_issue_comments(repo, issue, 1, 3)
+		var comments = api.get_issue_comments("nitlang/nit", 1000, 1, 3)
 		assert comments.length == 3
 		assert comments.first.user.login == "R4PaSs"
 		assert comments.last.user.login == "xymus"
 	end
 
 	fun test_get_issue_events is test do
-		var issue = api.get_issue(repo, 1000)
-		assert issue isa Issue
-		var events = api.get_issue_events(repo, issue, 1, 3)
+		var events = api.get_issue_events("nitlang/nit", 1000, 1, 3)
 		assert events.length == 3
 		assert events.first.actor.login == "privat"
 		assert events.last.actor.login == "xymus"
 	end
 
 	fun test_get_pull is test do
-		var pull = api.get_pull(repo, 1000)
+		var pull = api.get_pull("nitlang/nit", 1000)
 		assert pull isa Issue
 		assert pull.number == 1000
 		assert pull.title == "Raise nitc from the dead"
@@ -325,20 +319,20 @@ class TestGithubAPI
 	end
 
 	fun test_get_label is test do
-		var labl = api.get_label(repo, "ok_will_merge")
+		var labl = api.get_label("nitlang/nit", "ok_will_merge")
 		assert labl isa Label
 		assert labl.name == "ok_will_merge"
 	end
 
 	fun test_get_milestone is test do
-		var milestone = api.get_milestone(repo, 4)
+		var milestone = api.get_milestone("nitlang/nit", 4)
 		assert milestone isa Milestone
 		assert milestone.title == "v1.0prealpha"
 		# TODO other fields
 	end
 
 	fun test_get_issue_event is test do
-		var event = api.get_issue_event(repo, 199674194)
+		var event = api.get_issue_event("nitlang/nit", 199674194)
 		assert event isa IssueEvent
 		assert event.actor.login == "privat"
 		assert event.event == "labeled"
@@ -346,7 +340,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_issue_comment is test do
-		var comment = api.get_issue_comment(repo, 6020149)
+		var comment = api.get_issue_comment("nitlang/nit", 6020149)
 		assert comment isa IssueComment
 		assert comment.user.login == "privat"
 		assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
@@ -354,7 +348,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_comment is test do
-		var comment = api.get_commit_comment(repo, 8982707)
+		var comment = api.get_commit_comment("nitlang/nit", 8982707)
 		assert comment isa CommitComment
 		assert comment.user.login == "Morriar"
 		assert comment.body == "For testing purposes...\n"
@@ -362,7 +356,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_review_comments is test do
-		var comment = api.get_review_comment(repo, 21010363)
+		var comment = api.get_review_comment("nitlang/nit", 21010363)
 		assert comment isa ReviewComment
 		assert comment.path == "src/modelize/modelize_property.nit"
 		assert comment.original_position == 26
