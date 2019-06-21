@@ -229,32 +229,20 @@ class GithubAPI
 		return get("/repos/{full_name}").as(nullable Repo)
 	end
 
-	# List of branches associated with their names.
-	fun get_repo_branches(repo: Repo): Array[Branch] do
-		message(1, "Get branches for {repo.full_name}")
-		var array = get("/repos/{repo.full_name}/branches")
-		var res = new Array[Branch]
-		if not array isa Array[Object] then return res # empty array
-		for branch in array do
-			if not branch isa Branch then continue
-			res.add branch
-		end
-		return res
+	# List of repo branches.
+	#
+	# Pagination:
+	#	* `page`: page to fetch (default: 1)
+	#	* `per_page`: number of branches by page (default: 30)
+	fun get_repo_branches(repo: Repo, page, per_page: nullable Int): Array[Branch] do
+		return new GithubArray[Branch].from(get(
+			"/repos/{repo.full_name}/branches?{pagination(page, per_page)}"))
 	end
 
 	# List of issues associated with their ids.
-	fun get_repo_issues(repo: Repo): Array[Issue] do
-		message(1, "Get issues for {repo.full_name}")
-		var res = new Array[Issue]
-		var issue = get_repo_last_issue(repo)
-		if issue == null then return res
-		res.add issue
-		while issue != null and issue.number > 1 do
-			issue = get_issue(repo, issue.number - 1)
-			if issue == null then continue
-			res.add issue
-		end
-		return res
+	fun get_repo_issues(repo: Repo, page, per_page: nullable Int): Array[Issue] do
+		return new GithubArray[Issue].from(get(
+			"/repos/{repo.full_name}/issues?{pagination(page, per_page)}"))
 	end
 
 	# Search issues in this repo form an advanced query.
@@ -286,19 +274,15 @@ class GithubAPI
 	end
 
 	# List of labels associated with their names.
-	fun get_repo_labels(repo: Repo): Array[Label] do
-		message(1, "Get labels for {repo.full_name}")
-		var array = get("repos/{repo.full_name}/labels")
-		if not array isa JsonArray then return new Array[Label]
-		return deserialize(array.to_json).as(Array[Label])
+	fun get_repo_labels(repo: Repo, page, per_page: nullable Int): Array[Label] do
+		return new GithubArray[Label].from(get(
+			"/repos/{repo.full_name}/labels?{pagination(page, per_page)}"))
 	end
 
 	# List of milestones associated with their ids.
-	fun get_repo_milestones(repo: Repo): Array[Milestone] do
-		message(1, "Get milestones for {repo.full_name}")
-		var array = get("/repos/{repo.full_name}/milestones")
-		if not array isa JsonArray then return new Array[Milestone]
-		return deserialize(array.to_json).as(Array[Milestone])
+	fun get_repo_milestones(repo: Repo, page, per_page: nullable Int): Array[Milestone] do
+		return new GithubArray[Milestone].from(get(
+			"/repos/{repo.full_name}/milestones?{pagination(page, per_page)}"))
 	end
 
 	# List of pull-requests associated with their ids.
@@ -306,23 +290,9 @@ class GithubAPI
 	# Implementation notes: because PR numbers are not consecutive,
 	# PR are loaded from pages.
 	# See: https://developer.github.com/v3/pulls/#list-pull-requests
-	fun get_repo_pulls(repo: Repo): Array[PullRequest] do
-		message(1, "Get pulls for {repo.full_name}")
-		var key = "/repos/{repo.full_name}"
-		var res = new Array[PullRequest]
-		var page = 1
-		loop
-			var array = get("{key}/pulls?page={page}").as(JsonArray)
-			if array.is_empty then break
-			for obj in array do
-				if not obj isa JsonObject then continue
-				var pr = deserialize(array.to_json).as(nullable PullRequest)
-				if pr == null then continue
-				res.add pr
-			end
-			page += 1
-		end
-		return res
+	fun get_repo_pulls(repo: Repo, page, per_page: nullable Int): Array[PullRequest] do
+		return new GithubArray[PullRequest].from(get(
+			"/repos/{repo.full_name}/pulls?{pagination(page, per_page)}"))
 	end
 
 	# List of contributor related statistics.
@@ -405,44 +375,15 @@ class GithubAPI
 	end
 
 	# List of event on this issue.
-	fun get_issue_comments(repo: Repo, issue: Issue): Array[IssueComment] do
-		var res = new Array[IssueComment]
-		var count = issue.comments or else 0
-		var page = 1
-		loop
-			var array = get("/repos/{repo.full_name}/issues/{issue.number}/comments?page={page}")
-			if not array isa JsonArray then break
-			if array.is_empty then break
-			for obj in array do
-				if not obj isa JsonObject then continue
-				var id = obj["id"].as(Int)
-				var comment = get_issue_comment(repo, id)
-				if comment == null then continue
-				res.add(comment)
-			end
-			if res.length >= count then break
-			page += 1
-		end
-		return res
+	fun get_issue_comments(repo: Repo, issue: Issue, page, per_page: nullable Int): Array[IssueComment] do
+		return new GithubArray[IssueComment].from(get(
+			"/repos/{repo.full_name}/issues/{issue.number}/comments?{pagination(page, per_page)}"))
 	end
 
 	# List of events on this issue.
-	fun get_issue_events(repo: Repo, issue: Issue): Array[IssueEvent] do
-		var res = new Array[IssueEvent]
-		var key = "/repos/{repo.full_name}/issues/{issue.number}"
-		var page = 1
-		loop
-			var array = get("{key}/events?page={page}")
-			if not array isa JsonArray or array.is_empty then break
-			for obj in array do
-				if not obj isa JsonObject then continue
-				var event = deserialize(obj.to_json).as(nullable IssueEvent)
-				if event == null then continue
-				res.add event
-			end
-			page += 1
-		end
-		return res
+	fun get_issue_events(repo: Repo, issue: Issue, page, per_page: nullable Int): Array[IssueEvent] do
+		return new GithubArray[IssueEvent].from(get(
+			"/repos/{repo.full_name}/issues/{issue.number}/events?{pagination(page, per_page)}"))
 	end
 
 	# Get the Github pull request #`number`.
@@ -559,6 +500,27 @@ class GithubAPI
 	# ~~~
 	fun get_review_comment(repo: Repo, id: Int): nullable ReviewComment do
 		return get("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
+	end
+
+	private fun pagination(page, per_page: nullable Int): String do
+		return "page={page or else 1}&per_page={per_page or else 30}"
+	end
+end
+
+# Return deserialization as an array of E
+#
+# Non-subtypes will be ignored.
+private class GithubArray[E]
+	super Array[E]
+
+	# Create `self` from an Array of objects
+	#
+	# Objects non-subtyping E will be ignored.
+	init from(res: nullable Object) do
+		if not res isa Array[Object] then return
+		for obj in res do
+			if obj isa E then add obj
+		end
 	end
 end
 
@@ -852,7 +814,7 @@ class PullRequest
 	var merge_commit_sha: nullable String is writable
 
 	# Count of comments made on the pull request diff.
-	var review_comments: Int is writable
+	var review_comments: nullable Int is writable
 
 	# Pull request head (can be a commit SHA or a branch name).
 	var head: PullRef is writable
@@ -861,7 +823,7 @@ class PullRequest
 	var base: PullRef is writable
 
 	# Is this pull request merged?
-	var merged: Bool is writable
+	var merged: nullable Bool is writable
 
 	# Is this pull request mergeable?
 	var mergeable: nullable Bool is writable
@@ -869,22 +831,22 @@ class PullRequest
 	# Mergeable state of this pull request.
 	#
 	# See <https://developer.github.com/v3/pulls/#list-pull-requests>.
-	var mergeable_state: String is writable
+	var mergeable_state: nullable String is writable
 
 	# User that merged this pull request (if any).
 	var merged_by: nullable User is writable
 
 	# Count of commits in this pull request.
-	var commits: Int is writable
+	var commits: nullable Int is writable
 
 	# Added line count.
-	var additions: Int is writable
+	var additions: nullable Int is writable
 
 	# Deleted line count.
-	var deletions: Int is writable
+	var deletions: nullable Int is writable
 
 	# Changed files count.
-	var changed_files: Int is writable
+	var changed_files: nullable Int is writable
 
 	# URL to patch file
 	var patch_url: nullable String is writable

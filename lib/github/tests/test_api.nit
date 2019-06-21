@@ -57,13 +57,19 @@ class MockGithubAPI
 		map["/user"] = "user_Morriar"
 		map["/users/Morriar"] = "user_Morriar"
 		map["/repos/nitlang/nit"] = "repo_nit"
+		map["/repos/nitlang/nit/labels?page=1&per_page=3"] = "repo_labels_nit"
 		map["/repos/nitlang/nit/labels/ok_will_merge"] = "repo_labels_ok_will_merge"
+		map["/repos/nitlang/nit/milestones?page=1&per_page=3"] = "repo_milestones_nit"
 		map["/repos/nitlang/nit/milestones/4"] = "repo_milestones_4"
-		map["/repos/nitlang/nit/branches"] = "repo_branches_nit"
+		map["/repos/nitlang/nit/branches?page=1&per_page=2"] = "repo_branches_nit"
 		map["/repos/nitlang/nit/branches/master"] = "repo_branches_master"
+		map["/repos/nitlang/nit/issues?page=1&per_page=3"] = "repo_issues_nit"
 		map["/repos/nitlang/nit/issues/1000"] = "repo_issues_1000"
+		map["/repos/nitlang/nit/issues/1000/comments?page=1&per_page=3"] = "repo_issues_comments_nit"
 		map["/repos/nitlang/nit/issues/comments/6020149"] = "repo_issues_comments_6020149"
+		map["/repos/nitlang/nit/issues/1000/events?page=1&per_page=3"] = "repo_issues_events_nit"
 		map["/repos/nitlang/nit/issues/events/199674194"] = "repo_issues_events_199674194"
+		map["/repos/nitlang/nit/pulls?page=1&per_page=3"] = "repo_pulls_nit"
 		map["/repos/nitlang/nit/pulls/1000"] = "repo_pulls_1000"
 		map["/repos/nitlang/nit/commits/64ce1f"] = "repo_commits_64ce1f"
 		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
@@ -215,17 +221,48 @@ class TestGithubAPI
 	private var repo: Repo is lazy do return api.get_repo("nitlang/nit").as(not null)
 
 	fun test_get_branches is test do
-		var branches = api.get_repo_branches(repo)
+		var branches = api.get_repo_branches(repo, 1, 2)
 		assert branches.length == 2
 		assert branches.first.name == "master"
 		assert branches.last.name == "next"
 	end
 
-	# TODO issues
-	# TODO repo_last_issue
-	# TODO labels
-	# TODO milestones
-	# TODO pulls
+	fun test_get_issues is test do
+		var issues = api.get_repo_issues(repo, 1, 3)
+		assert issues.length == 3
+		assert issues.first.title == "nitrpg: Move `nitrpg` to its own repository"
+		assert issues.last.title == "Mock Github API tests"
+	end
+
+	fun test_search_issues is test do
+		var results = api.search_repo_issues(repo, "foo", 1, 3)
+		assert results isa SearchResults
+		assert results.items.length == 3
+		assert results.items.first.as(Issue).title == "Introduction of contracts in Nit"
+		assert results.items.last.as(Issue).title == "Appel de méthodes abstraites non redéfinies"
+	end
+
+	fun test_get_labels is test do
+		var labels = api.get_repo_labels(repo, 1, 3)
+		assert labels.length == 3
+		assert labels.first.name == "API"
+		assert labels.last.name == "NEP"
+	end
+
+	fun test_get_milestones is test do
+		var milestones = api.get_repo_milestones(repo, 1, 3)
+		assert milestones.length == 3
+		assert milestones.first.title == "v1.0prealpha"
+		assert milestones.last.title == "nitdoc - Abstraction levels"
+	end
+
+	fun test_get_pulls is test do
+		var pulls = api.get_repo_pulls(repo, 1, 3)
+		assert pulls.length == 3
+		assert pulls.first.title == "nitrpg: Move `nitrpg` to its own repository"
+		assert pulls.last.title == "Mock Github API tests"
+	end
+
 	# TODO contrib_stats
 
 	fun test_get_branch is test do
@@ -257,8 +294,23 @@ class TestGithubAPI
 		assert issue.is_pull_request
 	end
 
-	# TODO issue comments
-	# TODO issue events
+	fun test_get_issue_comments is test do
+		var issue = api.get_issue(repo, 1000)
+		assert issue isa Issue
+		var comments = api.get_issue_comments(repo, issue, 1, 3)
+		assert comments.length == 3
+		assert comments.first.user.login == "R4PaSs"
+		assert comments.last.user.login == "xymus"
+	end
+
+	fun test_get_issue_events is test do
+		var issue = api.get_issue(repo, 1000)
+		assert issue isa Issue
+		var events = api.get_issue_events(repo, issue, 1, 3)
+		assert events.length == 3
+		assert events.first.actor.login == "privat"
+		assert events.last.actor.login == "xymus"
+	end
 
 	fun test_get_pull is test do
 		var pull = api.get_pull(repo, 1000)
