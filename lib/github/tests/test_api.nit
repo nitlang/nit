@@ -23,31 +23,31 @@ intrude import api
 #
 # Cache files can be automatically created and updated by setting
 # `update_responses_cache` to `true` then running `nitunit`.
-class MockGithubCurl
-	super GithubCurl
+class MockGithubAPI
+	super GithubAPI
 
 	# Mock so it returns the response from a file
 	#
 	# See `update_responses_cache`.
-	redef fun get_and_parse(uri) do
-		print uri # for debugging
+	redef fun send(method, path, headers, body) do
+		print path # for debugging
 
-		var path = uri.replace("https://api.github.com/", "/")
 		assert has_response(path)
 
 		if update_responses_cache then
 			var file = response_file(path)
-			save_actual_response(uri, file)
+			save_actual_response(path, file)
 		end
 
-		var response = response_string(path).parse_json
+		var response = response_string(path)
 		if response_is_error(path) then
-			var title = "GithubAPIError"
-			var msg = response.as(JsonObject)["message"].as(String)
-			var err = new GithubError(msg, title)
-			err.json["requested_uri"] = uri
-			err.json["status_code"] = response_code(path)
-			return err
+			last_error = new GithubAPIError(
+				response.parse_json.as(JsonObject)["message"].as(String),
+				response_code(path).to_i,
+				path
+			)
+			was_error = true
+			return null
 		end
 		return response
 	end
@@ -126,9 +126,9 @@ class MockGithubCurl
 	private fun save_actual_response(uri, file: String) do
 		assert update_responses_cache
 
-		var request = new CurlHTTPRequest(uri)
-		request.user_agent = actual_curl.user_agent
-		request.headers = actual_curl.header
+		var request = new CurlHTTPRequest("{api_url}{sanitize_uri(uri)}")
+		request.user_agent = actual_api.user_agent
+		request.headers = actual_api.new_headers
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
@@ -141,22 +141,16 @@ class MockGithubCurl
 	end
 
 	# Actual GithubCurl instance used for caching
-	private var actual_curl = new GithubCurl(get_github_oauth, "nitunit")
+	private var actual_api = new GithubAPI(get_github_oauth, "nitunit")
 end
 
 class TestGithubAPI
 	test
 
-	var mock = new MockGithubCurl("test", "test")
-
-	fun api: GithubAPI do
-		var api = new GithubAPI("test")
-		api.ghcurl = mock
-		return api
-	end
+	fun api: MockGithubAPI do return new MockGithubAPI("test", "test")
 
 	fun test_deserialize is test do
-		var response = mock.response_string("/users/Morriar")
+		var response = api.response_string("/users/Morriar")
 		var obj = api.deserialize(response)
 		assert obj isa User
 		assert obj.login == "Morriar"
@@ -172,8 +166,8 @@ class TestGithubAPI
 		var obj = api.get("/users/Morriar")
 		assert not api.was_error
 		assert api.last_error == null
-		assert obj isa JsonObject
-		assert obj["login"] == "Morriar"
+		assert obj != null
+		assert obj.parse_json.as(JsonObject)["login"] == "Morriar"
 	end
 
 	fun test_get_404 is test do
@@ -182,8 +176,8 @@ class TestGithubAPI
 		assert res == null
 		assert api.was_error
 		var err = api.last_error
-		assert err isa GithubError
-		assert err.name == "GithubAPIError"
+		assert err isa GithubAPIError
+		assert err.status_code == 404
 		assert err.message == "Not Found"
 	end
 
@@ -202,8 +196,8 @@ class TestGithubAPI
 		assert res == null
 		assert api.was_error
 		var err = api.last_error
-		assert err isa GithubError
-		assert err.name == "GithubAPIError"
+		assert err isa GithubAPIError
+		assert err.status_code == 404
 		assert err.message == "Not Found"
 	end
 

@@ -19,8 +19,13 @@
 # For most use-cases you need to use the `GithubAPI` client.
 module api
 
-import github_curl
+# TODO to remove
 intrude import json::serialization_read
+import json::static
+
+import base64
+import curl
+import json
 
 # Client to Github API
 #
@@ -69,10 +74,19 @@ class GithubAPI
 	# See <https://developer.github.com/v3/#user-agent-required>
 	var user_agent: String = "nit_github_api" is optional
 
-	# Curl instance.
-	#
-	# Internal Curl instance used to perform API calls.
-	private var ghcurl = new GithubCurl(auth or else "", user_agent) is lazy
+	# Headers to use on all requests
+	fun new_headers: HeaderMap do
+		var map = new HeaderMap
+		var auth = self.auth
+		if auth != null then
+			map["Authorization"] = "token {auth}"
+		end
+		map["User-Agent"] = user_agent
+		# FIXME remove when projects and team are no more in beta
+		map["Accept"] = "application/vnd.github.inertia-preview+json"
+		map["Accept"] = "application/vnd.github.hellcat-preview+json"
+		return map
+	end
 
 	# Github API base url.
 	#
@@ -85,11 +99,49 @@ class GithubAPI
 	# * `1`: verbose
 	var verbose_lvl = 0 is public writable
 
+	# Send a HTTPRequest to the Github API
+	fun send(method, path: String, headers: nullable HeaderMap, body: nullable String): nullable String do
+		last_error = null
+		path = sanitize_uri(path)
+		var uri = "{api_url}{path}"
+		var request = new CurlHTTPRequest(uri)
+		request.method = method
+		request.user_agent = user_agent
+		request.headers = headers or else self.new_headers
+		request.body = body
+		return check_response(uri, request.execute)
+	end
+
+	private fun check_response(uri: String, response: CurlResponse): nullable String do
+		if response isa CurlResponseSuccess then
+			was_error = false
+			return response.body_str
+		else if response isa CurlResponseFailed then
+			last_error = new GithubAPIError(
+				response.error_msg,
+				response.error_code,
+				uri
+			)
+			was_error = true
+			return null
+		else abort
+	end
+
 	# Deserialize an object
-	fun deserialize(string: String): nullable Object do
-		var deserializer = new GithubDeserializer(string)
+	fun deserialize(string: nullable Serializable): nullable Object do
+		if string == null then return null
+		var deserializer = new GithubDeserializer(string.to_s)
 		var res = deserializer.deserialize
-		# print deserializer.errors.join("\n") # DEBUG
+		if deserializer.errors.not_empty then
+			was_error = true
+			last_error = new GithubDeserializerErrors("Deserialization failed", deserializer.errors)
+			return null
+		else if res isa GithubError then
+			was_error = true
+			last_error = res
+			return null
+		end
+		was_error = false
 		return res
 	end
 
@@ -116,16 +168,8 @@ class GithubAPI
 	# assert err.name == "GithubAPIError"
 	# assert err.message == "Not Found"
 	# ~~~
-	fun get(path: String): nullable Serializable do
-		path = sanitize_uri(path)
-		var res = ghcurl.get_and_parse("{api_url}{path}")
-		if res isa Error then
-			last_error = res
-			was_error = true
-			return null
-		end
-		was_error = false
-		return res
+	fun get(path: String): nullable String do
+		return send("GET", path)
 	end
 
 	# Display a message depending on `verbose_lvl`.
@@ -150,8 +194,8 @@ class GithubAPI
 	protected fun load_from_github(key: String): nullable GithubEntity do
 		message(1, "Get {key} (github)")
 		var res = get(key)
-		if was_error then return null
-		return deserialize(res.as(JsonObject).to_json).as(nullable GithubEntity)
+		if res == null then return null
+		return deserialize(res).as(nullable GithubEntity)
 	end
 
 	# Get the Github logged user from `auth` token.
@@ -203,8 +247,8 @@ class GithubAPI
 		message(1, "Get branches for {repo.full_name}")
 		var array = get("/repos/{repo.full_name}/branches")
 		var res = new Array[Branch]
-		if not array isa JsonArray then return res
-		var deser = deserialize(array.to_json)
+		if array == null then return res
+		var deser = deserialize(array)
 		if not deser isa Array[Object] then return res # empty array
 		for branch in deser do
 			if not branch isa Branch then continue
@@ -531,6 +575,36 @@ class GithubAPI
 	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
 		return load_from_github("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
 	end
+end
+
+# An Error returned by GithubAPI
+class GithubError
+	super Error
+end
+
+# An Error returned by https://api.github.com
+#
+# Anything that can occurs when sending request to the API:
+# * Can't connect to API
+# * Ressource not found
+# * Validation error
+# * ...
+class GithubAPIError
+	super GithubError
+
+	# Status code obtained
+	var status_code: Int
+
+	# URI that returned the error
+	var requested_uri: String
+end
+
+# An Error returned while deserializing GithubEntity objects
+class GithubDeserializerErrors
+	super GithubError
+
+	# Errors returned by the deserizalization process
+	var deserizalization_errors: Array[Error]
 end
 
 # Something returned by the Github API.
@@ -1200,4 +1274,17 @@ class GithubDeserializer
 		end
 		return super
 	end
+end
+
+# Gets the Github token from `git` configuration
+#
+# Return the value of `git config --get github.oauthtoken`
+# or `""` if no key exists.
+fun get_github_oauth: String
+do
+	var p = new ProcessReader("git", "config", "--get", "github.oauthtoken")
+	var token = p.read_line
+	p.wait
+	p.close
+	return token.trim
 end
