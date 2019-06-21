@@ -145,33 +145,6 @@ class GithubAPI
 		return res
 	end
 
-	# Execute a GET request on Github API.
-	#
-	# This method returns raw json data.
-	# See other `load_*` methods to use more expressive types.
-	#
-	# ~~~nitish
-	# var api = new GithubAPI(get_github_oauth)
-	# var obj = api.get("/repos/nitlang/nit")
-	# assert obj isa JsonObject
-	# assert obj["name"] == "nit"
-	# ~~~
-	#
-	# Returns `null` in case of `error`.
-	#
-	# ~~~nitish
-	# obj = api.get("/foo/bar/baz")
-	# assert obj == null
-	# assert api.was_error
-	# var err = api.last_error
-	# assert err isa GithubError
-	# assert err.name == "GithubAPIError"
-	# assert err.message == "Not Found"
-	# ~~~
-	fun get(path: String): nullable String do
-		return send("GET", path)
-	end
-
 	# Display a message depending on `verbose_lvl`.
 	fun message(lvl: Int, message: String) do
 		if lvl <= verbose_lvl then print message
@@ -189,13 +162,29 @@ class GithubAPI
 	# Does the last request provoqued an error?
 	var was_error = false is protected writable
 
-	# Load the json object from Github.
-	# See `GithubEntity::load_from_github`.
-	protected fun load_from_github(key: String): nullable GithubEntity do
-		message(1, "Get {key} (github)")
-		var res = get(key)
-		if res == null then return null
-		return deserialize(res).as(nullable GithubEntity)
+	# Execute a GET request on Github API.
+	#
+	# This method returns a deserialized result.
+	#
+	# For raw data see `send`.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var obj = api.get("/repos/nitlang/nit")
+	# assert obj isa Repo
+	# assert obj.name == "nit"
+	# ~~~
+	#
+	# Returns `null` in case of `error`.
+	#
+	# ~~~nitish
+	# obj = api.get("/foo/bar/baz")
+	# assert obj == null
+	# assert api.was_error
+	# assert api.last_error isa GithubError
+	# ~~~
+	fun get(path: String, headers: nullable HeaderMap, data: nullable String): nullable Object do
+		return deserialize(send("GET", path, headers, data))
 	end
 
 	# Get the Github logged user from `auth` token.
@@ -208,9 +197,7 @@ class GithubAPI
 	# assert user.login == "Morriar"
 	# ~~~
 	fun load_auth_user: nullable User do
-		var user = load_from_github("/user")
-		if was_error then return null
-		return user.as(nullable User)
+		return get("/user").as(nullable User)
 	end
 
 	# Get the Github user with `login`
@@ -224,7 +211,7 @@ class GithubAPI
 	# assert user.login == "Morriar"
 	# ~~~
 	fun load_user(login: String): nullable User do
-		return load_from_github("/users/{login}").as(nullable User)
+		return get("/users/{login}").as(nullable User)
 	end
 
 	# Get the Github repo with `full_name`.
@@ -239,7 +226,7 @@ class GithubAPI
 	# assert repo.default_branch == "master"
 	# ~~~
 	fun load_repo(full_name: String): nullable Repo do
-		return load_from_github("/repos/{full_name}").as(nullable Repo)
+		return get("/repos/{full_name}").as(nullable Repo)
 	end
 
 	# List of branches associated with their names.
@@ -247,10 +234,8 @@ class GithubAPI
 		message(1, "Get branches for {repo.full_name}")
 		var array = get("/repos/{repo.full_name}/branches")
 		var res = new Array[Branch]
-		if array == null then return res
-		var deser = deserialize(array)
-		if not deser isa Array[Object] then return res # empty array
-		for branch in deser do
+		if not array isa Array[Object] then return res # empty array
+		for branch in array do
 			if not branch isa Branch then continue
 			res.add branch
 		end
@@ -362,7 +347,7 @@ class GithubAPI
 	# assert branch.commit isa Commit
 	# ~~~
 	fun load_branch(repo: Repo, name: String): nullable Branch do
-		return load_from_github("/repos/{repo.full_name}/branches/{name}").as(nullable Branch)
+		return get("/repos/{repo.full_name}/branches/{name}").as(nullable Branch)
 	end
 
 	# List all commits in `self`.
@@ -401,7 +386,7 @@ class GithubAPI
 	# assert commit isa Commit
 	# ~~~
 	fun load_commit(repo: Repo, sha: String): nullable Commit do
-		return load_from_github("/repos/{repo.full_name}/commits/{sha}").as(nullable Commit)
+		return get("/repos/{repo.full_name}/commits/{sha}").as(nullable Commit)
 	end
 
 	# Get the Github issue #`number`.
@@ -416,7 +401,7 @@ class GithubAPI
 	# assert issue.title == "Doc"
 	# ~~~
 	fun load_issue(repo: Repo, number: Int): nullable Issue do
-		return load_from_github("/repos/{repo.full_name}/issues/{number}").as(nullable Issue)
+		return get("/repos/{repo.full_name}/issues/{number}").as(nullable Issue)
 	end
 
 	# List of event on this issue.
@@ -473,7 +458,7 @@ class GithubAPI
 	# assert pull.user.login == "Morriar"
 	# ~~~
 	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
-		return load_from_github("/repos/{repo.full_name}/pulls/{number}").as(nullable PullRequest)
+		return get("/repos/{repo.full_name}/pulls/{number}").as(nullable PullRequest)
 	end
 
 	# Get the Github label with `name`.
@@ -488,7 +473,7 @@ class GithubAPI
 	# assert labl != null
 	# ~~~
 	fun load_label(repo: Repo, name: String): nullable Label do
-		return load_from_github("/repos/{repo.full_name}/labels/{name}").as(nullable Label)
+		return get("/repos/{repo.full_name}/labels/{name}").as(nullable Label)
 	end
 
 	# Get the Github milestone with `id`.
@@ -503,7 +488,7 @@ class GithubAPI
 	# assert stone.title == "v1.0prealpha"
 	# ~~~
 	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
-		return load_from_github("/repos/{repo.full_name}/milestones/{id}").as(nullable Milestone)
+		return get("/repos/{repo.full_name}/milestones/{id}").as(nullable Milestone)
 	end
 
 	# Get the Github issue event with `id`.
@@ -522,7 +507,7 @@ class GithubAPI
 	# assert event.labl.name == "need_review"
 	# ~~~
 	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
-		return load_from_github("/repos/{repo.full_name}/issues/events/{id}").as(nullable IssueEvent)
+		return get("/repos/{repo.full_name}/issues/events/{id}").as(nullable IssueEvent)
 	end
 
 	# Get the Github commit comment with `id`.
@@ -539,7 +524,7 @@ class GithubAPI
 	# assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
 	# ~~~
 	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
-		return load_from_github("/repos/{repo.full_name}/comments/{id}").as(nullable CommitComment)
+		return get("/repos/{repo.full_name}/comments/{id}").as(nullable CommitComment)
 	end
 
 	# Get the Github issue comment with `id`.
@@ -556,7 +541,7 @@ class GithubAPI
 	# assert comment.issue_number == 10
 	# ~~~
 	fun load_issue_comment(repo: Repo, id: Int): nullable IssueComment do
-		return load_from_github("/repos/{repo.full_name}/issues/comments/{id}").as(nullable IssueComment)
+		return get("/repos/{repo.full_name}/issues/comments/{id}").as(nullable IssueComment)
 	end
 
 	# Get the Github diff comment with `id`.
@@ -573,7 +558,7 @@ class GithubAPI
 	# assert comment.pull_number == 945
 	# ~~~
 	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
-		return load_from_github("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
+		return get("/repos/{repo.full_name}/pulls/comments/{id}").as(nullable ReviewComment)
 	end
 end
 

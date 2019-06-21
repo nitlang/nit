@@ -55,7 +55,7 @@ redef class GithubAPI
 	fun clear_cache do store.clear
 
 	# If no cache data is found for `key` then json is loaded from Github API.
-	redef fun load_from_github(key) do
+	redef fun get(key, headers, data) do
 		if not enable_cache then return super
 		if store.has_key(key) then
 			message(1, "Get {key} (cache)")
@@ -63,14 +63,14 @@ redef class GithubAPI
 			return deserialize(store.load_object(key).to_json).as(nullable GithubEntity)
 		end
 		var obj = super
-		if not was_error then
-			cache(key, obj.as(not null))
+		if not was_error and obj isa Serializable then
+			cache(key, obj)
 		end
 		return obj
 	end
 
 	# Save `json` data in cache under `key`.
-	private fun cache(key: String, obj: GithubEntity) do
+	private fun cache(key: String, obj: Serializable) do
 		message(2, "Cache key {key}")
 		store.store_object(key, obj.to_json.parse_json.as(JsonObject))
 	end

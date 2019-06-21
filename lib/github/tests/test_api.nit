@@ -166,33 +166,13 @@ class TestGithubAPI
 		var obj = api.get("/users/Morriar")
 		assert not api.was_error
 		assert api.last_error == null
-		assert obj != null
-		assert obj.parse_json.as(JsonObject)["login"] == "Morriar"
+		assert obj isa User
+		assert obj.login == "Morriar"
 	end
 
 	fun test_get_404 is test do
 		var api = self.api
 		var res = api.get("/users/not_found/not_found")
-		assert res == null
-		assert api.was_error
-		var err = api.last_error
-		assert err isa GithubAPIError
-		assert err.status_code == 404
-		assert err.message == "Not Found"
-	end
-
-	fun test_load_from_github is test do
-		var api = self.api
-		var obj = api.load_from_github("/users/Morriar")
-		assert not api.was_error
-		assert api.last_error == null
-		assert obj isa User
-		assert obj.login == "Morriar"
-	end
-
-	fun test_load_from_github_404 is test do
-		var api = self.api
-		var res = api.load_from_github("/users/not_found/not_found")
 		assert res == null
 		assert api.was_error
 		var err = api.last_error
