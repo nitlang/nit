@@ -46,7 +46,6 @@ module pop_tracker
 
 import popcorn
 import popcorn::pop_config
-import popcorn::pop_logging
 import popcorn::pop_json
 import popcorn::pop_repos
 
@@ -91,7 +90,6 @@ end
 
 # Saves logs into a MongoDB collection
 class PopTracker
-	super ConsoleLog
 	super TrackerHandler
 
 	redef fun all(req, res) do

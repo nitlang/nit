@@ -99,7 +99,7 @@ private class NitwebPhase
 		app.use("/oauth", new GithubOAuthCallBack(config.github_client_id, config.github_client_secret))
 		app.use("/logout", new GithubLogout)
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
-		app.use_after("/*", new ConsoleLog)
+		app.use_after("/*", new PopLogger(info_level))
 
 		app.listen(config.app_host, config.app_port)
 	end
