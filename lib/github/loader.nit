@@ -104,12 +104,18 @@ class LoaderConfig
 
 	# Github tokens used to access data.
 	var tokens: Array[String] is lazy do
-		var arr = opt_tokens.value
-		if arr.is_empty then
-			var iarr = ini.at("tokens")
-			if iarr != null then arr = iarr.values.to_a
+		var opt_tokens = self.opt_tokens.value
+		if opt_tokens.not_empty then return opt_tokens
+
+		var res = new Array[String]
+		var ini_tokens = ini.section("tokens")
+		if ini_tokens == null then return res
+
+		for token in ini_tokens.values do
+			if token == null then continue
+			res.add token
 		end
-		return arr or else new Array[String]
+		return res
 	end
 
 	# Github tokens wallet

@@ -253,14 +253,14 @@ redef class MPackage
 		var ini_path = ini_path
 		if ini_path == null then return
 
-		var ini = new ConfigTree(ini_path)
+		var ini = new IniFile.from_file(ini_path)
 
-		ini.check_key(toolcontext, self, "package.name", name)
-		ini.check_key(toolcontext, self, "package.desc")
-		ini.check_key(toolcontext, self, "package.tags")
+		ini.check_key(ini_path, toolcontext, self, "package.name", name)
+		ini.check_key(ini_path, toolcontext, self, "package.desc")
+		ini.check_key(ini_path, toolcontext, self, "package.tags")
 
 		# FIXME since `git reflog --follow` seems bugged
-		ini.check_key(toolcontext, self, "package.maintainer")
+		ini.check_key(ini_path, toolcontext, self, "package.maintainer")
 		# var maint = mpackage.maintainer
 		# if maint != null then
 			# ini.check_key(toolcontext, self, "package.maintainer", maint)
@@ -272,24 +272,24 @@ redef class MPackage
 			# ini.check_key(toolcontext, self, "package.more_contributors", contribs.join(", "))
 		# end
 
-		ini.check_key(toolcontext, self, "package.license", license)
-		ini.check_key(toolcontext, self, "upstream.browse", browse_url)
-		ini.check_key(toolcontext, self, "upstream.git", git_url)
-		ini.check_key(toolcontext, self, "upstream.git.directory", git_dir)
-		ini.check_key(toolcontext, self, "upstream.homepage", homepage_url)
-		ini.check_key(toolcontext, self, "upstream.issues", issues_url)
+		ini.check_key(ini_path, toolcontext, self, "package.license", license)
+		ini.check_key(ini_path, toolcontext, self, "upstream.browse", browse_url)
+		ini.check_key(ini_path, toolcontext, self, "upstream.git", git_url)
+		ini.check_key(ini_path, toolcontext, self, "upstream.git.directory", git_dir)
+		ini.check_key(ini_path, toolcontext, self, "upstream.homepage", homepage_url)
+		ini.check_key(ini_path, toolcontext, self, "upstream.issues", issues_url)
 
-		for key in ini.to_map.keys do
+		for key in ini.flatten.keys do
 			if not allowed_ini_keys.has(key) then
 				toolcontext.warning(location, "unknown-ini-key",
-					"Warning: ignoring unknown `{key}` key in `{ini.ini_file}`")
+					"Warning: ignoring unknown `{key}` key in `{ini_path}`")
 			end
 		end
 	end
 
 	private fun gen_ini: String do
 		var ini_path = self.ini_path.as(not null)
-		var ini = new ConfigTree(ini_path)
+		var ini = new IniFile.from_file(ini_path)
 
 		ini.update_value("package.name", name)
 		ini.update_value("package.desc", "")
@@ -304,7 +304,7 @@ redef class MPackage
 		ini.update_value("upstream.homepage", homepage_url)
 		ini.update_value("upstream.issues", issues_url)
 
-		ini.save
+		ini.write_to_file(ini_path)
 		return ini_path
 	end
 
@@ -528,8 +528,8 @@ redef class MModule
 	end
 end
 
-redef class ConfigTree
-	private fun check_key(toolcontext: ToolContext, mpackage: MPackage, key: String, value: nullable String) do
+redef class IniFile
+	private fun check_key(ini_file: String, toolcontext: ToolContext, mpackage: MPackage, key: String, value: nullable String) do
 		if not has_key(key) then
 			toolcontext.warning(mpackage.location, "missing-ini-key",
 				"Warning: missing `{key}` key in `{ini_file}`")
