@@ -1,0 +1,1 @@
+{"id":81916206,"node_id":"MDU6TGFiZWw4MTkxNjIwNg==","url":"https://api.github.com/repos/nitlang/nit/labels/ok_will_merge","name":"ok_will_merge","color":"009800","default":false}
