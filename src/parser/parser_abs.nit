@@ -1162,6 +1162,13 @@ class ASuperstringExpr
 	var n_exprs: List[AExpr] = new List[AExpr]
 	var n_annotations: nullable AAnnotations = null is writable
 end
+class ALambdaExpr
+	super AExpr
+	var n_kwmeth: TKwmeth is writable, noinit
+	var n_signature: ASignature is writable, noinit
+	var n_kwdo: TKwdo is writable, noinit
+	var n_expr: AExpr is writable, noinit
+end
 class AParExpr
 	super AExpr
 	var n_opar: TOpar is writable, noinit
