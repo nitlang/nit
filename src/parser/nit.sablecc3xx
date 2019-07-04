@@ -671,6 +671,8 @@ expr_single~nopar~nobra {-> expr}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
 	| {superstring} superstring  {-> superstring.expr}
+	| {lambdan} kwmeth signature kwdo no stmts [n2]:no kwend {-> New expr.lambda(kwmeth, signature, kwdo, stmts.expr)}
+	| {lambda0} kwmeth signature kwdo no endblock {-> New expr.lambda(kwmeth, signature, kwdo, endblock.expr)}
 !nopar	| {par} expr_par {-> expr_par.expr}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, dotdot, expr2.expr, cbra, annotations_o.annotations)}
@@ -1050,6 +1052,7 @@ expr	= {block} expr* kwend?
 	| {mid_string} [string]:mid_string
 	| {end_string} [string]:end_string
 	| {superstring} [exprs]:expr* annotations?
+	| {lambda} kwmeth signature kwdo expr
 	| {par} opar expr cpar annotations?
         | {as_cast} expr kwas opar? type cpar?
         | {as_notnull} expr kwas opar? kwnot kwnull cpar?
