@@ -180,7 +180,9 @@ var zs = ["helloWorld", "worldHello", "testCase"]
 print zs.iterator.map(snake_case_fn).map(upper_fn).to_array
 
 var hmap = new HashMap[Int, Array[Int]]
-var vs = hmap.entry(1).or_insert_with(new_int_arr(1))
+var vs = hmap.entry(1)
+        .or_insert_with(new_int_arr(1))
+        .
 print hmap[1]
 
 
