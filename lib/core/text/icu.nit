@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Module wrapping locale-aware functions from the ICU library
+# This module includes modules such as : `case_modification`, `locale`, `collation`, `string_sorter` and `number_format`
 module icu
 
 import icu::locale
-import icu::caseModification
+import icu::case_modification
