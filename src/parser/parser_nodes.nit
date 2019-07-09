@@ -2456,6 +2456,27 @@ class ACallReassignExpr
 	super ASendReassignFormExpr
 end
 
+# A reference to a method with a captured receiver. eg. `&x.foo` or just `&foo` is self is captured.
+#
+# Currently, the syntax is analogous to a simple call (`recv.foo`) with a prefix `&`.
+# On chains, only the last call is captured (`.` has a higher precedence than `&`).
+#
+# The syntax is analogous to a call (except the &), there is always a receiver (including the implicit self or sys) and arguments are accepted by the parser.
+#
+# TODO There is no clear syntax proposal
+#
+# * to avoid the capture of a receiver since a receiver is statically expected to resolve the method name
+# * for special method names (setters, brackets and operators)
+#
+# Note: The class specializes `ASendExpr` (trough `ACallFormExpr`) so some behavior of a genuine send expression must be redefined.
+class ACallrefExpr
+       super ACallFormExpr
+
+       # The `&` operator
+       var n_amp: TAmp is writable, noinit
+end
+
+
 # A call to `super`. OR a call of a super-constructor
 class ASuperExpr
 	super AExpr
