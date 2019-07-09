@@ -5433,6 +5433,74 @@ redef class ACallExpr
 		v.enter_visit(_n_args)
 	end
 end
+redef class ACallrefExpr
+	init init_acallrefexpr (
+		n_amp: nullable TAmp,
+		n_expr: nullable AExpr,
+		n_qid: nullable AQid,
+		n_args: nullable AExprs
+	)
+	do
+		_n_amp = n_amp.as(not null)
+		n_amp.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_qid = n_qid.as(not null)
+		n_qid.parent = self
+		_n_args = n_args.as(not null)
+		n_args.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_amp == old_child then
+			n_amp = new_child.as(TAmp)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_qid == old_child then
+			n_qid = new_child.as(AQid)
+			return
+		end
+		if _n_args == old_child then
+			n_args = new_child.as(AExprs)
+			return
+		end
+	end
+
+	redef fun n_amp=(node)
+	do
+		_n_amp = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_qid=(node)
+	do
+		_n_qid = node
+		node.parent = self
+	end
+	redef fun n_args=(node)
+	do
+		_n_args = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_amp)
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_qid)
+		v.enter_visit(_n_args)
+	end
+end
 redef class ACallAssignExpr
 	init init_acallassignexpr (
 		n_expr: nullable AExpr,
