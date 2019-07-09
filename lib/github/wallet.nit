@@ -81,7 +81,7 @@
 module wallet
 
 import github
-import console
+import logger
 
 # Github OAuth tokens wallet
 class GithubWallet
@@ -89,11 +89,8 @@ class GithubWallet
 	# Github API tokens
 	var tokens = new Array[String] is optional
 
-	# Do not use colors in console output
-	var no_colors = false is writable
-
-	# Display debug information about the token processing
-	var verbose = false is writable
+	# Logger used to display info about tokens state
+	var logger = new Logger is optional, writable
 
 	# Add a new token in the wallet
 	fun add(token: String) do tokens.add token
@@ -104,14 +101,14 @@ class GithubWallet
 	fun api: GithubAPI do
 		var token
 		if tokens.is_empty then
-			message "No tokens, using `get_github_oauth`"
+			logger.warn "No tokens, using `get_github_oauth`"
 			token = get_github_oauth
 		else
 			token = get_next_token
 			var tried = 0
 			while not check_token(token) do
 				if tried >= tokens.length - 1 then
-					message "Exhausted all tokens, using {token}"
+					logger.warn "Exhausted all tokens, using {token}"
 					break
 				end
 				tried += 1
@@ -148,17 +145,16 @@ class GithubWallet
 
 	# Check if a token is valid
 	fun check_token(token: String): Bool do
-		message "Try token {token}"
+		logger.debug "Try token {token}"
 		var api = new GithubAPI(token)
 		api.get_auth_user
 		return not api.was_error
 	end
 
-	# Print a message depending on `verbose`
-	fun message(message: String) do if verbose then print "[Github Wallet] {message}"
-
 	# Show wallet status in console
-	fun show_status do
+	fun show_status(no_color: nullable Bool) do
+		no_color = no_color or else false
+
 		if tokens.is_empty then
 			print "Wallet is empty"
 			return
@@ -167,9 +163,9 @@ class GithubWallet
 		for token in tokens do
 			var status
 			if check_token(token) then
-				status = if no_colors then "OK" else "OK".green
+				status = if no_color then "OK" else "OK".green
 			else
-				status = if no_colors then "KO" else "KO".red
+				status = if no_color then "KO" else "KO".red
 			end
 			print " * [{status}] {token}"
 		end

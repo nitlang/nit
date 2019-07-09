@@ -120,9 +120,7 @@ class LoaderConfig
 
 	# Github tokens wallet
 	var wallet: GithubWallet is lazy do
-		var wallet = new GithubWallet(tokens)
-		wallet.no_colors = no_colors
-		return wallet
+		return new GithubWallet(tokens)
 	end
 
 	# Use colors in console display
@@ -261,7 +259,7 @@ class Loader
 	end
 
 	# Show wallet status
-	fun show_wallet do config.wallet.show_status
+	fun show_wallet do config.wallet.show_status(config.no_colors)
 
 	# Show jobs status
 	fun show_jobs do
