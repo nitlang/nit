@@ -120,7 +120,7 @@ class LoaderConfig
 
 	# Github tokens wallet
 	var wallet: GithubWallet is lazy do
-		var wallet = new GithubWallet.from_tokens(tokens)
+		var wallet = new GithubWallet(tokens)
 		wallet.no_colors = no_colors
 		return wallet
 	end

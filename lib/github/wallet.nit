@@ -45,7 +45,7 @@
 # or
 #
 # ~~~
-# wallet = new GithubWallet.from_tokens(["token 1", "token 2"])
+# wallet = new GithubWallet(["token 1", "token 2"])
 # ~~~
 #
 # The `show_status` method can be used to display a summary of the validity of
@@ -69,7 +69,7 @@
 # instance with a fresh rate limit.
 #
 # ~~~
-# wallet = new GithubWallet.from_tokens(["token 1", "token 2"])
+# wallet = new GithubWallet(["token 1", "token 2"])
 # var api = wallet.api
 # ~~~
 #
@@ -87,10 +87,7 @@ import console
 class GithubWallet
 
 	# Github API tokens
-	var tokens = new Array[String]
-
-	# Init `self` from a collection of tokens
-	init from_tokens(tokens: Collection[String]) do self.tokens.add_all tokens
+	var tokens = new Array[String] is optional
 
 	# Do not use colors in console output
 	var no_colors = false is writable

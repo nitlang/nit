@@ -46,7 +46,7 @@ class TestGithubWallet
 	test
 
 	fun test_get_next_token is test do
-		var wallet = new GithubWallet.from_tokens(["t1", "t2", "t3"])
+		var wallet = new GithubWallet(["t1", "t2", "t3"])
 
 		for j in [1..3] do
 			for i in [1..3] do assert wallet.get_next_token == "t{i}"
@@ -60,7 +60,7 @@ class TestGithubWallet
 	end
 
 	fun test_get_api is test do
-		var wallet = new GithubWallet.from_tokens(["bad1", "t1", "t2", "bad2"])
+		var wallet = new GithubWallet(["bad1", "t1", "t2", "bad2"])
 		assert wallet.api.auth == "t1"
 		assert wallet.api.auth == "t2"
 		assert wallet.api.auth == "t1"
