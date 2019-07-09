@@ -17,7 +17,8 @@
 # Script to scan Github for repositories possibly using JNI.
 module github_search_for_jni
 
-import github::github_curl
+import github::api
+import json::static
 
 # The proprieties introduced by this redef are to be used only on a JSON object
 # representing a Github repository.
@@ -51,8 +52,8 @@ end
 # Query sent to Github
 var main_query = "language:java"
 
-# Curl instance use for all requests
-var curl = new GithubCurl("OAUTH TOKEN (replace with your own)", "JNI project finder (nitlanguage.org)")
+# API client instance use for all requests
+var api = new GithubAPI("OAUTH TOKEN (replace with your own)", "JNI project finder (nitlanguage.org)")
 
 if "NIT_TESTING".environ == "true" then exit 0
 
@@ -61,8 +62,8 @@ var page = 0
 var per_page = 100
 loop
 	# Get a page of the main query
-	var uri = "https://api.github.com/search/repositories?q={main_query}&page={page}&per_page={per_page}&sort=stars"
-	var obj = curl.get_and_check(uri).as(JsonObject)
+	var uri = "/search/repositories?q={main_query}&page={page}&per_page={per_page}&sort=stars"
+	var obj = api.send("GET", uri).parse_json.as(JsonObject)
 
 	# Main object has "total_count" and "items"
 	var items = obj["items"].as(JsonArray)
@@ -77,7 +78,7 @@ loop
 
 		# Download the language list
 		var lang_url = item["languages_url"].as(String)
-		var langs = curl.get_and_check(lang_url).as(JsonObject)
+		var langs = api.send("GET", lang_url).parse_json.as(JsonObject)
 
 		# The project is of interest if it has lots of Java and at least some C
 		var may_be_of_interest = langs.has_lots_of_java and langs.has_some_c
