@@ -2179,7 +2179,6 @@ redef class ACallrefExpr
 
 		# TODO: return a functionnal type
 		self.mtype = null
-		v.error(self, "Error: NOT YET IMPLEMENTED callref expressions.")
 	end
 end
 
