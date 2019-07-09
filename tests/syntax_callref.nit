@@ -30,10 +30,6 @@ redef class Object
 	end
 end
 
-class Y
-	var quux: Object = self
-end
-
 var x
 
 # self is the implicit receiver
@@ -43,12 +39,10 @@ x = &foo.bar.baz
 x = (&foo.bar).baz
 x = &(foo.bar).baz
 
-var y = new Y
+var y = 1
 #alt1#x = &y # error since y is a variable
 x = &y.foo
 x = &y.foo.bar
 x = &y.foo.bar.baz
 x = (&y.foo.bar).baz
 x = &(y.foo.bar).baz
-
-x = &y.quux
