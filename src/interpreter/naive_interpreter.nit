@@ -456,6 +456,23 @@ class NaiveInterpreter
 	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
+        # Consumes an iterator of expressions and tries to map each element to
+        # its corresponding Instance.
+        #
+        # If any AExprs doesn't resolve to an Instance, then it returns null.
+        # Otherwise return an array of instances
+        fun aexprs_to_instances(aexprs: Iterator[AExpr]): nullable Array[Instance]
+        do
+                var accumulator = new Array[Instance]
+                for aexpr in aexprs do
+                        var instance = expr(aexpr)
+                        if instance == null then return null
+                        accumulator.push(instance)
+                end
+                return accumulator
+        end
+
+
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
 	# of instances to use in the call.
@@ -470,21 +487,15 @@ class NaiveInterpreter
 
 		if map == null then
 			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
-			for ne in args do
-				var e = self.expr(ne)
-				if e == null then return null
-				res.add e
-			end
-			return res
+			var rest_args = aexprs_to_instances(args.iterator)
+                        if rest_args == null then return null
+                        res.append(rest_args)
+                        return res
 		end
 
 		# Eval in order of arguments, not parameters
-		var exprs = new Array[Instance].with_capacity(args.length)
-		for ne in args do
-			var e = self.expr(ne)
-			if e == null then return null
-			exprs.add e
-		end
+		var exprs = aexprs_to_instances(args.iterator)
+                if exprs == null then return null
 
 
 		# Fill `res` with the result of the evaluation according to the mapping
@@ -774,6 +785,27 @@ class MutableInstance
 
 	# The values of the attributes
 	var attributes: Map[MAttribute, Instance] = new HashMap[MAttribute, Instance]
+end
+
+# An instance with the original receiver and callsite (for function reference)
+class CallrefInstance
+        super Instance
+
+        # The original receiver
+        #
+        # ~~~~
+        # var a = new A
+        # var f = &a.toto <- `a` is the original receiver
+        # ~~~~
+        var recv: Instance
+
+        # The original callsite
+        #
+        # ~~~~
+        # var a = new A
+        # var f = &a.toto <- `toto` is the original callsite
+        # ~~~~
+        var callsite: CallSite
 end
 
 # Special instance to handle primitives values (int, bool, etc.)
@@ -2222,17 +2254,16 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-
-		# Safe call shortcut if recv is null
-		if is_safe and recv.is_null then
-			return recv
-		end
-
-		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
-		if args == null then return null
-
-		var res = v.callsite(callsite, args)
-		return res
+                var my_callsite = callsite
+                if recv isa CallrefInstance then
+                        my_callsite = recv.callsite
+                        # get the original receiver
+                        recv = recv.recv
+                end
+                var args = v.varargize(my_callsite.mpropdef, my_callsite.signaturemap, recv, self.raw_arguments)
+                if args == null then return null
+                var res = v.callsite(my_callsite, args)
+                return res
 	end
 end
 
@@ -2241,9 +2272,10 @@ redef class ACallrefExpr
         do
                 var recv = v.expr(self.n_expr)
                 if recv == null then return null
-                debug "recv for ACallrefExpr {recv}"
-                fatal(v, "NOT YET IMPLEMENTED intern")
-                return null
+                assert mtype != null
+                var inst = new CallrefInstance(mtype.as(not null), recv, callsite.as(not null))
+                #fatal(v, "NOT YET IMPLEMENTED intern")
+                return inst
         end
 end
 

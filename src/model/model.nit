@@ -312,7 +312,7 @@ redef class MModule
 	# A primitive type of `NativeArray`
 	fun native_array_type(elt_type: MType): MClassType do return native_array_class.get_mtype([elt_type])
 
-	# The primitive class `NativeArray`
+	# The class `NativeArray`
 	var native_array_class: MClass = self.get_primitive_class("NativeArray") is lazy
 
 	# The primitive type `Sys`, the main type of the program, if any
@@ -1930,6 +1930,8 @@ end
 class MSignature
 	super MType
 
+        redef var need_anchor = false
+
 	# The each parameter (in order)
 	var mparameters: Array[MParameter]
 
@@ -1971,6 +1973,16 @@ class MSignature
 	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
 	init
 	do
+                # This test is useful to pass assertions when calling `resolve_for`
+                # on a signature
+                for param in mparameters do
+                        if param.mtype.need_anchor then
+                                need_anchor = true
+                                break
+                        end
+                end
+                need_anchor = need_anchor and (return_mtype == null or not return_mtype.need_anchor)
+
 		var vararg_rank = -1
 		for i in [0..mparameters.length[ do
 			var parameter = mparameters[i]
@@ -2710,9 +2722,11 @@ class MClassKind
 		if other == interface_kind then
 			# everybody can specialize interfaces
 			return true
-		else if self == interface_kind or self == enum_kind then
+                else if self == interface_kind then #or self == enum_kind then
 			# no other case for interfaces and enums
 			return false
+                else if not self == enum_kind and other == enum_kind then
+                        return false
 		else if self == subset_kind then
 			# A subset may specialize anything, except another subset.
 			# TODO: Allow sub-subsets once we can handle them.
@@ -2722,7 +2736,8 @@ class MClassKind
 			return self == other
 		else
 			# assert self == abstract_kind or self == concrete_kind
-			return other == abstract_kind or other == concrete_kind
+                        # TODO: check if we should really allow enum_kind
+			return other == abstract_kind or other == concrete_kind or other == enum_kind
 		end
 	end
 end
@@ -2730,6 +2745,7 @@ end
 # The class kind `abstract`
 fun abstract_kind: MClassKind do return once new MClassKind("abstract class", false, true, true)
 # The class kind `concrete`
+
 fun concrete_kind: MClassKind do return once new MClassKind("class", false, true, true)
 # The class kind `interface`
 fun interface_kind: MClassKind do return once new MClassKind("interface", false, true, false)

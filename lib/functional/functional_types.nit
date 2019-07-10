@@ -27,6 +27,8 @@ end
 interface Proc
 	super Routine
 end
+universal RoutineRef
+end
 interface Fun0[RESULT]
 	super Fun
 	fun call: RESULT is abstract
@@ -186,4 +188,204 @@ end
 interface Proc19[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18]
 	super Proc
 	fun call(a0: A0,a1: A1,a2: A2,a3: A3,a4: A4,a5: A5,a6: A6,a7: A7,a8: A8,a9: A9,a10: A10,a11: A11,a12: A12,a13: A13,a14: A14,a15: A15,a16: A16,a17: A17,a18: A18) is abstract
+end
+universal FunRef0[RESULT]
+	super Fun0[RESULT]
+	super RoutineRef
+	redef fun call is intern
+end
+universal FunRef1[A0,RESULT]
+	super Fun1[A0,RESULT]
+	super RoutineRef
+	redef fun call(a0) is intern
+end
+universal FunRef2[A0,A1,RESULT]
+	super Fun2[A0,A1,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1) is intern
+end
+universal FunRef3[A0,A1,A2,RESULT]
+	super Fun3[A0,A1,A2,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2) is intern
+end
+universal FunRef4[A0,A1,A2,A3,RESULT]
+	super Fun4[A0,A1,A2,A3,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3) is intern
+end
+universal FunRef5[A0,A1,A2,A3,A4,RESULT]
+	super Fun5[A0,A1,A2,A3,A4,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4) is intern
+end
+universal FunRef6[A0,A1,A2,A3,A4,A5,RESULT]
+	super Fun6[A0,A1,A2,A3,A4,A5,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5) is intern
+end
+universal FunRef7[A0,A1,A2,A3,A4,A5,A6,RESULT]
+	super Fun7[A0,A1,A2,A3,A4,A5,A6,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6) is intern
+end
+universal FunRef8[A0,A1,A2,A3,A4,A5,A6,A7,RESULT]
+	super Fun8[A0,A1,A2,A3,A4,A5,A6,A7,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7) is intern
+end
+universal FunRef9[A0,A1,A2,A3,A4,A5,A6,A7,A8,RESULT]
+	super Fun9[A0,A1,A2,A3,A4,A5,A6,A7,A8,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8) is intern
+end
+universal FunRef10[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,RESULT]
+	super Fun10[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) is intern
+end
+universal FunRef11[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,RESULT]
+	super Fun11[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) is intern
+end
+universal FunRef12[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,RESULT]
+	super Fun12[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) is intern
+end
+universal FunRef13[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,RESULT]
+	super Fun13[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12) is intern
+end
+universal FunRef14[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,RESULT]
+	super Fun14[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13) is intern
+end
+universal FunRef15[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,RESULT]
+	super Fun15[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) is intern
+end
+universal FunRef16[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,RESULT]
+	super Fun16[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) is intern
+end
+universal FunRef17[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,RESULT]
+	super Fun17[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16) is intern
+end
+universal FunRef18[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,RESULT]
+	super Fun18[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17) is intern
+end
+universal FunRef19[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,RESULT]
+	super Fun19[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,RESULT]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18) is intern
+end
+universal ProcRef0[]
+	super Proc0
+	super RoutineRef
+	redef fun call is intern
+end
+universal ProcRef1[A0]
+	super Proc1[A0]
+	super RoutineRef
+	redef fun call(a0) is intern
+end
+universal ProcRef2[A0,A1]
+	super Proc2[A0,A1]
+	super RoutineRef
+	redef fun call(a0,a1) is intern
+end
+universal ProcRef3[A0,A1,A2]
+	super Proc3[A0,A1,A2]
+	super RoutineRef
+	redef fun call(a0,a1,a2) is intern
+end
+universal ProcRef4[A0,A1,A2,A3]
+	super Proc4[A0,A1,A2,A3]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3) is intern
+end
+universal ProcRef5[A0,A1,A2,A3,A4]
+	super Proc5[A0,A1,A2,A3,A4]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4) is intern
+end
+universal ProcRef6[A0,A1,A2,A3,A4,A5]
+	super Proc6[A0,A1,A2,A3,A4,A5]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5) is intern
+end
+universal ProcRef7[A0,A1,A2,A3,A4,A5,A6]
+	super Proc7[A0,A1,A2,A3,A4,A5,A6]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6) is intern
+end
+universal ProcRef8[A0,A1,A2,A3,A4,A5,A6,A7]
+	super Proc8[A0,A1,A2,A3,A4,A5,A6,A7]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7) is intern
+end
+universal ProcRef9[A0,A1,A2,A3,A4,A5,A6,A7,A8]
+	super Proc9[A0,A1,A2,A3,A4,A5,A6,A7,A8]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8) is intern
+end
+universal ProcRef10[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9]
+	super Proc10[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) is intern
+end
+universal ProcRef11[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10]
+	super Proc11[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) is intern
+end
+universal ProcRef12[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11]
+	super Proc12[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) is intern
+end
+universal ProcRef13[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12]
+	super Proc13[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12) is intern
+end
+universal ProcRef14[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13]
+	super Proc14[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13) is intern
+end
+universal ProcRef15[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14]
+	super Proc15[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14) is intern
+end
+universal ProcRef16[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15]
+	super Proc16[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) is intern
+end
+universal ProcRef17[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16]
+	super Proc17[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16) is intern
+end
+universal ProcRef18[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17]
+	super Proc18[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17) is intern
+end
+universal ProcRef19[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18]
+	super Proc19[A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18]
+	super RoutineRef
+	redef fun call(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18) is intern
 end

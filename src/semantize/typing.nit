@@ -2596,17 +2596,18 @@ redef class ACallrefExpr
 	redef fun accept_typing(v)
 	do
                 super # do the job as if it was a real call
-		# TODO: inspect self.callsite to get information about the method
 		var res = callsite.mproperty
 
                 var msignature = callsite.mpropdef.msignature
+                var recv = callsite.recv
                 assert msignature != null
-                debug "signature of callref: {msignature}"
                 var arity = msignature.mparameters.length
-                var routine_type_name = "Proc"
+
+                var routine_type_name = "ProcRef"
                 if msignature.return_mtype != null then
-                        routine_type_name = "Fun"
+                        routine_type_name = "FunRef"
                 end
+
                 var target_routine_class = "{routine_type_name}{arity}"
                 var routine_mclass = v.get_mclass(self, target_routine_class)
 
@@ -2623,11 +2624,20 @@ redef class ACallrefExpr
                         types_list.push(msignature.return_mtype.as(not null))
                 end
 
-                var routine_type = routine_mclass.get_mtype(types_list)
+                # Why we need to anchor :
+                #
+                # ~~~~nitish
+                # class A[E]
+                #       def toto(x: E) do print "{x}"
+                # end
+                #
+                # var a = new A[Int]
+                # var f = &a.toto <- without anchor : ProcRef1[E]
+                #               ^--- with anchor : ProcRef[Int]
+                # ~~~~
+                var routine_type = routine_mclass.get_mtype(types_list).anchor_to(v.mmodule, recv.as(MClassType))
 
                 is_typed = true
-		# TODO: return a functionnal type
-                debug "type of callref: {routine_type}"
 		self.mtype = routine_type
 	end
 end

@@ -204,6 +204,23 @@ class GlobalCompiler
 			v.add_decl("{mtype.arguments.first.ctype} values[1];")
 		end
 
+                if all_routine_types_name.has(mtype.mclass.name) then
+                        v.add_decl("val* recv;")
+                        var c_args = ["val* self"]
+                        var c_ret = "void"
+                        var k = mtype.arguments.length
+                        if mtype.mclass.name.has("Fun") then
+                                c_ret = mtype.arguments.last.ctype
+                                k -= 1
+                        end
+                        for i in [0..k[ do
+                                var t = mtype.arguments[i]
+                                c_args.push("{t.ctype} p{i}")
+                        end
+                        var c_sig = c_args.join(", ")
+                        v.add_decl("{c_ret} (*method)({c_sig});")
+                end
+
 		if mtype.ctype_extern != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
 			# * the `classid` to be polymorph
@@ -232,13 +249,29 @@ class GlobalCompiler
 		var v = self.new_visitor
 
 		var is_native_array = mtype.mclass.name == "NativeArray"
-
+                var is_routine_ref = all_routine_types_name.has(mtype.mclass.name)
 		var sig
 		if is_native_array then
 			sig = "int length"
 		else
 			sig = "void"
 		end
+                if is_routine_ref then
+                        var c_args = ["val* self"]
+                        var c_ret = "void"
+                        var k = mtype.arguments.length
+                        if mtype.mclass.name.has("Fun") then
+                                c_ret = mtype.arguments.last.ctype
+                                k -= 1
+                        end
+                        for i in [0..k[ do
+                                var t = mtype.arguments[i]
+                                c_args.push("{t.ctype} p{i}")
+                        end
+                        # The underlying method signature
+                        var method_sig = "{c_ret} (*method)({c_args.join(", ")})"
+                        sig = "val* recv, {method_sig}"
+                end
 
 		self.header.add_decl("{mtype.ctype} NEW_{mtype.c_name}({sig});")
 		v.add_decl("/* allocate {mtype} */")
@@ -251,6 +284,10 @@ class GlobalCompiler
 		else
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}));")
 		end
+                if is_routine_ref then
+			v.add("((struct {mtype.c_name}*){res})->recv = recv;")
+                        v.add("((struct {mtype.c_name}*){res})->method = method;")
+                end
 		v.add("{res}->classid = {self.classid(mtype)};")
 
 		self.generate_init_attr(v, res, mtype)
@@ -426,6 +463,57 @@ class GlobalCompilerVisitor
 		self.add("{recv}[{i}]={val};")
 	end
 
+        redef fun routine_ref_instance(routine_mclass_type, recv, mmethoddef)
+        do
+                var method = new CustomizedRuntimeFunction(mmethoddef, recv.mcasttype.as(MClassType))
+                var my_recv = recv
+                if recv.mtype.is_c_primitive then
+                        var object_type = mmodule.object_type
+                        my_recv = autobox(recv, object_type)
+                end
+                var thunk = new CustomizedThunkFunction(mmethoddef, my_recv.mtype.as(MClassType))
+                compiler.todo(method)
+                compiler.todo(thunk)
+
+                var res = self.new_expr("NEW_{routine_mclass_type.c_name}({my_recv}, &{thunk.c_name})", routine_mclass_type)
+                return res
+        end
+
+        redef fun routine_ref_call(mmethoddef, arguments)
+        do
+                var routine = arguments.first
+                var routine_type = routine.mtype.as(MClassType)
+                var routine_class = routine_type.mclass
+                var underlying_recv = "((struct {routine.mcasttype.c_name}*){routine})->recv"
+                var underlying_method = "((struct {routine.mcasttype.c_name}*){routine})->method"
+                adapt_signature(mmethoddef, arguments)
+                arguments.shift
+                var ss = "{underlying_recv}"
+                if arguments.length > 0 then
+                        ss = "{ss}, {arguments.join(", ")}"
+                end
+                arguments.unshift routine
+
+
+                var ret_mtype = mmethoddef.msignature.return_mtype
+
+                if ret_mtype != null then
+                        # TODO check for separate compiler
+                        ret_mtype = resolve_for(ret_mtype, routine)
+                        # var temp = ret_mtype
+                        # If mmethoddef has a return type, use the type defined
+                        # in the routine instance instead.
+                        #ret_mtype = routine_type.arguments.last
+                end
+                var callsite = "{underlying_method}({ss})"
+                if ret_mtype != null then
+                        var subres = new_expr("{callsite}", ret_mtype)
+                        ret(subres)
+                else
+                        add("{callsite};")
+		end
+        end
+
 	redef fun send(m, args)
 	do
 		var types = self.collect_types(args.first)
@@ -494,6 +582,7 @@ class GlobalCompilerVisitor
 		var last = types.last
 		var defaultpropdef: nullable MMethodDef = null
 		for t in types do
+                        # TODO remove this comment
 			var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
 			if propdef.mclassdef.mclass.name == "Object" and not t.is_c_primitive then
 				defaultpropdef = propdef
@@ -971,74 +1060,51 @@ private class CustomizedRuntimeFunction
 		end
 	end
 
-	# compile the code customized for the reciever
-	redef fun compile_to_c(compiler)
-	do
-		var recv = self.recv
-		var mmethoddef = self.mmethoddef
-		if not recv.is_subtype(compiler.mainmodule, null, mmethoddef.mclassdef.bound_mtype) then
-			print("problem: why do we compile {self} for {recv}?")
-			abort
-		end
+        redef fun recv_mtype
+        do
+                return recv
+        end
 
-		var v = compiler.new_visitor
-		var selfvar = new RuntimeVariable("self", recv, recv)
-		if compiler.runtime_type_analysis.live_types.has(recv) then
+        redef var return_mtype
+
+        redef fun resolve_receiver(v)
+        do
+                var selfvar = new RuntimeVariable("self", recv, recv)
+		if v.compiler.runtime_type_analysis.live_types.has(recv) then
 			selfvar.is_exact = true
 		end
-		var arguments = new Array[RuntimeVariable]
-		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
-		v.frame = frame
+                return selfvar
+        end
 
-		var sig = new FlatBuffer
-		var comment = new FlatBuffer
-		var ret = mmethoddef.msignature.return_mtype
-		if ret != null then
-			ret = v.resolve_for(ret, selfvar)
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		sig.append("({recv.ctype} {selfvar}")
-		comment.append("(self: {recv}")
-		arguments.add(selfvar)
-		for i in [0..mmethoddef.msignature.arity[ do
-			var mp = mmethoddef.msignature.mparameters[i]
-			var mtype = mp.mtype
-			if mp.is_vararg then
-				mtype = v.mmodule.array_type(mtype)
-			end
-			mtype = v.resolve_for(mtype, selfvar)
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
+        redef fun resolve_return_mtype(v)
+        do
+                var selfvar = v.frame.selfvar
+                if has_return then
+                        var ret = msignature.return_mtype.as(not null)
+                        return_mtype = v.resolve_for(ret, selfvar)
+                end
+        end
+        redef fun resolve_ith_parameter(v, i)
+        do
+                var selfvar = v.frame.selfvar
+                var mp = msignature.mparameters[i]
+                var mtype = mp.mtype
+                if mp.is_vararg then
+                        mtype = v.mmodule.array_type(mtype)
+                end
+                mtype = v.resolve_for(mtype, selfvar)
+                return new RuntimeVariable("p{i}", mtype, mtype)
+        end
 
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		#v.add("printf(\"method {self} for {comment}\\n\");")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
+        redef fun declare_signature(v, sig)
+        do
+                v.compiler.header.add_decl("{sig};")
+        end
 
-		mmethoddef.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
-	end
+        redef fun end_compile_to_c(v)
+        do
+	        if not self.c_name.has_substring("VIRTUAL", 0) then v.compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
+        end
 
 	redef fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
@@ -1046,7 +1112,31 @@ private class CustomizedRuntimeFunction
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
 		end
-		if self.mmethoddef.can_inline(v) then
+
+                # WARNING: the next two lines of code is used to prevent inlining.
+                # Inlining of a callref seems to work all the time. However,
+                # it will produce some deadcode in certain scenarios (when using nullable type).
+                #
+                # ~~~~nitish
+                # class A[E]
+                #       fun toto(x: E)
+                #       do
+                #               ...do something with x...
+                #       end
+                # end
+                # end
+                # var a = new A[nullable Int]
+                # var f = &a.toto
+                # f.call(null) <-- Will produce a proper C callsite, but it will
+                #               -- produce unreachable (dead code) for type checking
+                #               -- and covariance. Thus, creating warnings when
+                #               -- compiling in global. However, if you ignore
+                #               -- those warnings, the binary works perfectly fine.
+                # ~~~~
+                var intromclassdef = self.mmethoddef.mproperty.intro_mclassdef
+                var is_callref = v.compiler.all_routine_types_name.has(intromclassdef.name)
+
+                if self.mmethoddef.can_inline(v) and not is_callref then
 			var frame = new StaticFrame(v, self.mmethoddef, self.recv, arguments)
 			frame.returnlabel = v.get_name("RET_LABEL")
 			if ret != null then
@@ -1072,4 +1162,26 @@ private class CustomizedRuntimeFunction
 			return res
 		end
 	end
+end
+
+
+class CustomizedThunkFunction
+        super ThunkFunction
+        super CustomizedRuntimeFunction
+        redef fun c_name
+        do
+                return "THUNK_" + super
+        end
+
+
+        redef fun hash
+        do
+                return super + c_name.hash
+        end
+
+
+        redef fun target_recv
+        do
+                return recv_mtype
+        end
 end

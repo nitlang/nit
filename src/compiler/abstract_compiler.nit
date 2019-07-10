@@ -625,10 +625,25 @@ abstract class AbstractCompiler
 	# The targeted specific platform
 	var target_platform: Platform is noinit
 
+        # All methods who already has a callref_thunk generated for
+        var compiled_callref_thunk = new HashSet[MMethodDef]
+
+        var all_routine_types_name: Set[String] do
+                var res = new HashSet[String]
+                for name in ["Fun", "Proc", "FunRef", "ProcRef"] do
+                        # Currently there's 20 arity per func type
+                        for i in [0..20[ do
+                                res.add("{name}{i}")
+                        end
+                end
+                return res
+        end
+
 	init
 	do
 		self.realmainmodule = mainmodule
 		target_platform = mainmodule.target_platform or else new Platform
+
 	end
 
 	# Do the full code generation of the program `mainmodule`
@@ -1377,6 +1392,12 @@ abstract class AbstractCompilerVisitor
 	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
 
+        # Instantiate a new routine pointer
+        fun routine_ref_instance(routine_mclass_type: MClassType, recv: RuntimeVariable, mmethoddef: MMethodDef): RuntimeVariable is abstract
+
+        # Call the underlying referenced function
+        fun routine_ref_call(mmethoddef: MMethodDef, args: Array[RuntimeVariable]) is abstract
+
 	# Allocate `size` bytes with the low_level `nit_alloc` C function
 	#
 	# This method can be redefined to inject statistic or tracing code.
@@ -1445,7 +1466,8 @@ abstract class AbstractCompilerVisitor
 	fun resolve_for(mtype: MType, recv: RuntimeVariable): MType
 	do
 		if not mtype.need_anchor then return mtype
-		return mtype.resolve_for(recv.mcasttype, self.frame.receiver, self.compiler.mainmodule, true)
+                var res = mtype.resolve_for(recv.mcasttype, self.frame.receiver, self.compiler.mainmodule, true)
+                return res
 	end
 
 	# Unsafely cast a value to a new type
@@ -2030,6 +2052,7 @@ abstract class AbstractCompilerVisitor
 			res = self.autobox(res, mtype)
 		end
 		res = autoadapt(res, nexpr.mtype.as(not null))
+
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
 			add_cast(res, implicit_cast_to, "auto")
@@ -2055,8 +2078,28 @@ abstract class AbstractCompilerVisitor
 	end
 end
 
+
 # A C function associated to a Nit method
-# Because of customization, a given Nit method can be compiler more that once
+# This is the base class for all runtime representation of a nit method.
+# It implements the Template Design Pattern whose steps are :
+#       1. create the receiver `RuntimeVariable` (selfvar)
+#       2. create a `StaticFrame`
+#       3. resolve the return type.
+#       4. write the function signature
+#       5. Declare the function signature (for C header files)
+#       6. writer the function body
+#       7. post-compiler hook (optional)
+# Each step is called in `AbstractRuntimeFunction::compile_to_c`. A default
+# body is provided foreach step except for compilation hooks. Subclasses may
+# redefine any of the above mentioned steps. However, it's not recommanded
+# to override `compile_to_c` since there's an ordering of the compilation steps.
+# Any information between steps must be saved in the visitor. Currently most
+# of the future runtime info are stored in the `StaticFrame` of the visitor,
+# e.g. the receiver (selfvar), the arguments, etc.
+#
+# Moreover, any subclass may redefine : the receiver type, the return type and
+# the signature. This allow for a better customization for the final implementation.
+# Because of customization, a given Nit method can be compile more that once.
 abstract class AbstractRuntimeFunction
 
 	type COMPILER: AbstractCompiler
@@ -2064,6 +2107,8 @@ abstract class AbstractRuntimeFunction
 
 	# The associated Nit method
 	var mmethoddef: MMethodDef
+
+        protected var return_mtype: nullable MType = null
 
 	# The mangled c name of the runtime_function
 	# Subclasses should redefine `build_c_name` instead
@@ -2076,6 +2121,8 @@ abstract class AbstractRuntimeFunction
 		return res
 	end
 
+        fun c_ref: String do return "&{c_name}"
+
 	# Non cached version of `c_name`
 	protected fun build_c_name: String is abstract
 
@@ -2085,9 +2132,231 @@ abstract class AbstractRuntimeFunction
 	# May inline the body or generate a C function call
 	fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
+        # Returns `true` if the associated `mmethoddef`'s return type isn't null,
+        # otherwise `false`.
+        fun has_return: Bool
+        do
+                return mmethoddef.msignature.return_mtype != null
+        end
+
+        # The current msignature to use when compiling : `signature_to_c` and `body_to_c`.
+        # This method is useful since most concrete implementation doesn't use the
+        # mmethoddef's signature. By providing a definition in the abstract class,
+        # subclasses can use any msignature.
+        protected fun msignature: MSignature
+        do
+                return mmethoddef.msignature.as(not null)
+        end
+
+        # The current receiver type to compile : `signature_to_c` and `body_to_c`.
+        # See `msignature` method for more information.
+        protected fun recv_mtype: MType
+        do
+                return mmethoddef.mclassdef.bound_mtype
+        end
+
+        # Prepare the `self` runtime variable to be used by the rest of
+        # compilation steps.
+        # Step 1
+        protected fun resolve_receiver(v: VISITOR): RuntimeVariable
+        do
+                var casttype = mmethoddef.mclassdef.bound_mtype
+                return new RuntimeVariable("self", recv_mtype, casttype)
+        end
+
+        # Builds the static frame for current runtime method
+        # Step 2
+        protected fun build_frame(v: VISITOR, arguments: Array[RuntimeVariable]): StaticFrame
+        do
+                return new StaticFrame(v, mmethoddef, recv_mtype.as(MClassType), arguments)
+        end
+
+        # Step 3
+        protected fun resolve_return_mtype(v: VISITOR)
+        do
+                return_mtype = msignature.return_mtype
+        end
+
+        private fun fill_parameters(v: VISITOR)
+        do
+                var selfvar = v.frame.selfvar
+                for i in [0..msignature.arity[ do
+                        var arg = resolve_ith_parameter(v, i)
+			v.frame.arguments.add(arg)
+		end
+        end
+
+        # Step 4
+        protected fun resolve_ith_parameter(v: VISITOR, i: Int): RuntimeVariable
+        do
+                var mp = msignature.mparameters[i]
+                var mtype = mp.mtype
+                if mp.is_vararg then
+			mtype = v.mmodule.array_type(mtype)
+		end
+                return new RuntimeVariable("p{i}", mtype, mtype)
+        end
+
+        # Generate the code for the signature with an open curly brace
+        #
+        # Returns the generated signature without a semicolon and curly brace,
+        # e.g `RES f(T0 p0, T1 p1, ..., TN pN)`
+        # Step 5
+        protected fun signature_to_c(v: VISITOR): String
+        do
+                var arguments = v.frame.arguments
+                var comment = new FlatBuffer
+                var selfvar = v.frame.selfvar
+                var c_ret = "void"
+                if has_return then
+                        c_ret = "{return_mtype.ctype}"
+                end
+                var sig = new FlatBuffer
+                sig.append("{c_ret} {c_name}({recv_mtype.ctype} self")
+		comment.append("({selfvar}: {selfvar.mtype}")
+
+                for i in [0..arguments.length-1[ do
+                        # Skip the receiver
+                        var arg = arguments[i+1]
+			comment.append(", {arg.mtype}")
+                        sig.append(", {arg.mtype.ctype} p{i}")
+		end
+                sig.append(")")
+		comment.append(")")
+                if has_return then
+                        comment.append(": {return_mtype.as(not null)}")
+                end
+                v.add_decl("/* method {self} for {comment} */")
+                v.add_decl("{sig} \{")
+                return sig.to_s
+        end
+
+        # How the concrete compiler will declare the method, e.g inside a global header file,
+        # extern signature, etc.
+        # Step 6
+        protected fun declare_signature(v: VISITOR, signature: String) is abstract
+
+
+        # Generate the code for the body without return statement at the end and
+        # no curly brace.
+        # Step 7
+        protected fun body_to_c(v: VISITOR)
+        do
+                mmethoddef.compile_inside_to_c(v, v.frame.arguments)
+        end
+
+        # Hook called at the end of `compile_to_c` function. This function
+        # is useful if you need to register any function compiled to c.
+        # Step 8 (optional).
+        protected fun end_compile_to_c(v: VISITOR)
+        do
+                # Nothing to do by default
+        end
+
 	# Generate the code for the `AbstractRuntimeFunction`
 	# Warning: compile more than once compilation makes CC unhappy
-	fun compile_to_c(compiler: COMPILER) is abstract
+        fun compile_to_c(compiler: COMPILER)
+        do
+                var v = compiler.new_visitor
+                var selfvar = resolve_receiver(v)
+                var arguments = [selfvar]
+                var frame = build_frame(v, arguments)
+                v.frame = frame
+
+                resolve_return_mtype(v)
+                fill_parameters(v)
+
+                # WARNING: the signature must be declared before creating
+                # any returnlabel and returnvar (`StaticFrame`). Otherwise,
+                # you could end up with variable outside the function.
+                var sig = signature_to_c(v)
+                declare_signature(v, sig)
+
+                frame.returnlabel = v.get_name("RET_LABEL")
+                if has_return then
+                        var ret_mtype = return_mtype
+                        assert ret_mtype != null
+                        frame.returnvar = v.new_var(ret_mtype)
+                end
+
+                body_to_c(v)
+                v.add("{frame.returnlabel.as(not null)}:;")
+		if has_return then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+                v.add "\}"
+                end_compile_to_c(v)
+        end
+end
+
+# Base class for all thunk-like function. A thunk is a function whose purpose
+# is to call another function. Like a class wrapper or decorator, a thunk is used
+# to computer things (conversions, log, etc) before or after a function call. It's
+# an intermediary between the caller and the callee.
+#
+# The most basic use of a thunk is to unbox its argument before invoking the real callee.
+# Virtual functions are a use case of thunk function:
+#
+# ~~~~nitish
+# redef class Object
+#       fun toto(x: Int): Int do return 1 + x
+# end
+# redef class Int
+#       redef fun toto(x) do return x + self
+# end
+#
+# ```generated C code
+# long Object__toto(val* self, long x) { return 1 + x }
+# long Int__toto(long self, long x) { return x + self }
+# long THUNK_Int__toto(val* self, long x) {
+#       long self2 = (long)(self)>>2    // Unboxing from Object to Int
+#       return Int_toto(self2, x)
+# }
+#
+# ```
+# ~~~~
+#
+# A thunk has its OWN SIGNATURE and is considered like any other `AbstractRuntimeFunction`.
+# Thus, one might need to be careful when overriding parent's method. Since most usage of
+# thunks in Nit is to unbox and box things between a caller and a callee, the default
+# implementation is doing just that. In other words, a thunk takes a signature and a method
+# and tries to cast its signature to the method's signature.
+# A virtual function is simply the exact same signature as its `mmethoddef` field, except for
+# its receiver is of type `Object`.
+# In the same vibe, a call reference has all of its argument boxed as `Object`.
+abstract class ThunkFunction
+        super AbstractRuntimeFunction
+
+        fun target_recv: MType is abstract
+
+        redef fun body_to_c(v)
+        do
+                assert not target_recv.need_anchor
+                var frame = v.frame
+                var selfvar = frame.selfvar
+                var arguments = frame.arguments
+                var arguments2 = new Array[RuntimeVariable]
+                arguments2.push(v.autobox(selfvar, target_recv))
+                var resolved_sig = msignature.resolve_for(target_recv, target_recv.as(MClassType), v.mmodule, true)
+                for i in [0..resolved_sig.arity[ do
+                var param = resolved_sig.mparameters[i]
+                        var mtype = param.mtype
+                        if param.is_vararg then
+				mtype = v.mmodule.array_type(mtype)
+			end
+                        var temp = v.autobox(arguments[i+1], mtype)
+                        arguments2.push(temp)
+                end
+                v.add("/* {mmethoddef}, {recv_mtype.ctype} */")
+                var subret = v.call(mmethoddef, arguments2[0].mcasttype.as(MClassType), arguments2)
+                if has_return then
+                        assert subret != null
+                        var subret2 = v.autobox(subret, return_mtype.as(not null))
+                        v.assign(frame.returnvar.as(not null), subret2)
+                end
+
+        end
+
 end
 
 # A runtime variable hold a runtime value in C.
@@ -2164,6 +2433,14 @@ class StaticFrame
 
 	# The array comprehension currently filled, if any
 	private var comprehension: nullable RuntimeVariable = null
+
+        # Returns the first argument (the receiver) of a frame.
+        # REQUIRES arguments.length >= 1
+        fun selfvar: RuntimeVariable
+        do
+                assert arguments.length >= 1
+                return arguments.first
+        end
 end
 
 redef class MType
@@ -2256,6 +2533,19 @@ redef class MClassType
 			return "val"
 		end
 	end
+end
+
+redef class MSignature
+        fun change_all_mtype_for(mtype: MType): MSignature
+        do
+                var ps = new Array[MParameter]
+                for p in mparameters do
+                        ps.push(new MParameter(p.name, mtype, p.is_vararg))
+                end
+                var ret: nullable MType = null
+                if return_mtype != null then ret = mtype
+                return new MSignature(ps, ret)
+        end
 end
 
 redef class MPropDef
@@ -2423,10 +2713,15 @@ redef class AMethPropdef
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
 		var ret = mpropdef.msignature.return_mtype
-		if ret != null then
+                var compiler = v.compiler
+                # WARNING: we must not resolve the return type when it's a functional type.
+                # Otherwise, we get a compile error exactly here. This weird behavior doesn't affect
+                # the inner mecanics of callref since the return type is already solved by
+                # `routine_ref_call`
+                if ret != null and not compiler.all_routine_types_name.has(cname) then
 			ret = v.resolve_for(ret, arguments.first)
 		end
-		if pname != "==" and pname != "!=" then
+		if pname != "==" and pname != "!=" and pname != "call" and not compiler.all_routine_types_name.has(cname) then
 			v.adapt_signature(mpropdef, arguments)
 			v.unbox_signature_extern(mpropdef, arguments)
 		end
@@ -3189,6 +3484,9 @@ redef class AMethPropdef
 				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
 				return true
 			end
+                else if compiler.all_routine_types_name.has(cname) then
+                        v.routine_ref_call(mpropdef, arguments)
+                        return true
 		end
 		if pname == "exit" then
 			v.add("exit((int){arguments[1]});")
@@ -4104,6 +4402,15 @@ redef class ASendExpr
 		end
 		return res
 	end
+end
+
+redef class ACallrefExpr
+        redef fun expr(v)
+        do
+                var recv = v.expr(self.n_expr, null)
+                var res = v.routine_ref_instance(mtype.as(MClassType), recv, callsite.as(not null).mpropdef)
+                return res
+        end
 end
 
 redef class ASendReassignFormExpr

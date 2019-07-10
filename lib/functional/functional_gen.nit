@@ -77,7 +77,7 @@ class FunTypeWriter
                 if with_return then
                         generics.push("RESULT")
                 end
-                writer.write("interface {name}{i}")
+                writer.write("{class_kind} {name}{i}")
                 writer.writeln("[" + generics.join(",") + "]")
                 writer.tabs += 1
                 for zuper in supers do
@@ -90,16 +90,25 @@ class FunTypeWriter
                 end
                 var params = new Array[String]
                 for g in generics do
-                        params.push(g.to_lower + ": " + g)
+                        var param = g.to_lower
+                        if not is_redef then
+                                param += ": {g}"
+                        end
+                        params.push(param)
                 end
 
                 var signature = params.join(",")
-                if i == 0 then
-                        writer.write("\tfun call")
+                if is_redef then
+                        writer.write("\tredef ")
                 else
-                        writer.write("\tfun call(" + signature + ")")
+                        writer.write("\t")
                 end
-                if with_return then
+                if i == 0 then
+                        writer.write("fun call")
+                else
+                        writer.write("fun call(" + signature + ")")
+                end
+                if with_return and not is_redef then
                         writer.write(": {output}")
                 end
                 writer.writeln(" {annotation}")
@@ -150,15 +159,42 @@ module functional_types
         writer.tabs -= 1
         writer.writeln("end")
 
+        writer.writeln("universal RoutineRef")
+        writer.writeln("end")
+
         for i in [0..n[ do
-                var funwriter = new FunTypeWriter("Fun", ["Fun"], i)
+                var funwriter = new FunTypeWriter("interface", "Fun", ["Fun"], i)
                 funwriter.with_return = true
                 funwriter.write(writer)
         end
 
         for i in [0..n[ do
-                var procwriter = new FunTypeWriter("Proc", ["Proc"], i)
+                var procwriter = new FunTypeWriter("interface", "Proc", ["Proc"], i)
                 procwriter.write(writer)
+        end
+
+        # universal `FunRef`
+        for i in [0..n[ do
+                var generics = gen_generics(i)
+                generics.push("RESULT")
+                var zuper =  "Fun{i}[{generics.join(",")}]"
+                var funrefwriter = new FunTypeWriter("universal", "FunRef", [zuper, "RoutineRef"], i)
+                funrefwriter.with_return = true
+                funrefwriter.is_redef = true
+                funrefwriter.annotation = "is intern"
+                funrefwriter.write(writer)
+        end
+
+        # universal `ProcRef`
+        for i in [0..n[ do
+                var zuper = "Proc{i}"
+                if i > 0 then
+                        zuper =  "Proc{i}[{gen_generics(i).join(",")}]"
+                end
+                var procrefwriter = new FunTypeWriter("universal", "ProcRef", [zuper, "RoutineRef"], i)
+                procrefwriter.annotation = "is intern"
+                procrefwriter.is_redef = true
+                procrefwriter.write(writer)
         end
 end
 
