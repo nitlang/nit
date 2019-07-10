@@ -2222,6 +2222,12 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
+
+		# Safe call shortcut if recv is null
+		if is_safe and recv.is_null then
+			return recv
+		end
+
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 		if args == null then return null
 
@@ -2365,6 +2371,13 @@ redef class AIssetAttrExpr
 end
 
 redef class AVarargExpr
+	redef fun expr(v)
+	do
+		return v.expr(self.n_expr)
+	end
+end
+
+redef class ASafeExpr
 	redef fun expr(v)
 	do
 		return v.expr(self.n_expr)
