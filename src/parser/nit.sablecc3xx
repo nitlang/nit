@@ -204,6 +204,7 @@ ge = '>=';
 gg = '>>';
 starship = '<=>';
 bang='!';
+quest='?';
 at='@';
 semi=';';
 
@@ -792,6 +793,7 @@ atid~forclass {-> atid}
 
 recv~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra dot no {-> expr_atom~nopar~nobra.expr}
+	| {safe} expr_atom~nopar~nobra quest dot no {-> New expr.safe(expr_atom~nopar~nobra.expr, quest)}
 	| {implicit} {-> New expr.implicit_self()}
 	;
 
@@ -1053,6 +1055,7 @@ expr	= {block} expr* kwend?
 	| {debug_type} kwdebug kwtype expr type
 	| {vararg} expr dotdotdot
 	| {namedarg} id assign expr
+	| {safe} expr quest
 	| {type} type
 	| {methid} expr [id]:methid
 	| {at} annotations

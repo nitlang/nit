@@ -295,6 +295,9 @@ end
 class TBang
 	super Token
 end
+class TQuest
+	super Token
+end
 class TAt
 	super Token
 end
@@ -1199,6 +1202,11 @@ class ANamedargExpr
 	var n_id: TId is writable, noinit
 	var n_assign: TAssign is writable, noinit
 	var n_expr: AExpr is writable, noinit
+end
+class ASafeExpr
+	super AExpr
+	var n_expr: AExpr is writable, noinit
+	var n_quest: TQuest is writable, noinit
 end
 class ATypeExpr
 	super AExpr
