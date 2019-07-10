@@ -7271,6 +7271,48 @@ redef class ANamedargExpr
 		v.enter_visit(_n_expr)
 	end
 end
+redef class ASafeExpr
+	init init_asafeexpr (
+		n_expr: nullable AExpr,
+		n_quest: nullable TQuest
+	)
+	do
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_quest = n_quest.as(not null)
+		n_quest.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_quest == old_child then
+			n_quest = new_child.as(TQuest)
+			return
+		end
+	end
+
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_quest=(node)
+	do
+		_n_quest = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_quest)
+	end
+end
 redef class ATypeExpr
 	init init_atypeexpr (
 		n_type: nullable AType
