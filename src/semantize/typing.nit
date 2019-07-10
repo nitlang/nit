@@ -1989,8 +1989,9 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, node, args)
-
+                if not self isa ACallrefExpr then
+			callsite.check_signature(v, node, args)
+                end
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
 			if not (vmpropdef isa MMethodDef and vmpropdef.mproperty.is_init) then
@@ -2165,22 +2166,6 @@ redef class AInitExpr
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
-redef class ACallrefExpr
-	redef fun property_name do return n_qid.n_id.text
-	redef fun property_node do return n_qid
-	redef fun compute_raw_arguments do return n_args.to_a
-
-	redef fun accept_typing(v)
-	do
-		super # do the job as if it was a real call
-
-		# TODO: inspect self.callsite to get information about the method
-		var res = callsite.mproperty
-
-		# TODO: return a functionnal type
-		self.mtype = null
-	end
-end
 
 redef class AExprs
 	fun to_a: Array[AExpr] do return self.n_exprs.to_a
@@ -2558,35 +2543,74 @@ redef class ADebugTypeExpr
 end
 
 
-redef class AFunrefExpr
+#redef class AFunrefExpr
+#       redef fun accept_typing(v: TypingVisitor)
+#       do
+#                var fun_name = n_qid.n_id.text
+#                #var props = v.modelbuilder.model.get_mproperties_by_name(fun_name)
+#
+#                # top level function are stored in object
+#                var mclass_sys = v.get_mclass(self, "Sys")
+#                if mclass_sys == null then
+#                        v.error(self, "Error: class `Sys` does not exists")
+#                        return
+#                end
+#
+#                var sys_type = mclass_sys.mclass_type
+#                var callsite = v.get_method(self, sys_type, fun_name, false)
+#
+#                if callsite == null then
+#                        v.error(self, "Error: function `{fun_name}`")
+#                        return
+#                end
+#
+#                var msignature = callsite.msignature
+#                var arity = msignature.mparameters.length
+#                var target_func_class = "Func" + arity.to_s
+#                var func_class = v.get_mclass(self, target_func_class)
+#                var unit_class = v.get_mclass(self, "Unit")
+#
+#                if unit_class == null or func_class == null then
+#                        v.error(self, "Error: missing functional types, try : `import functional`")
+#                        return
+#                end
+#
+#                var types_list = new Array[MType]
+#                for param in msignature.mparameters do
+#                        types_list.push(param.mtype)
+#                end
+#                types_list.push(unit_class.mclass_type)
+#
+#                var func_type = func_class.get_mtype(types_list)
+#
+#                mtype = func_type
+#                is_typed = true
+#        end
+#end
 
-        redef fun accept_typing(v)
-        do
-                var fun_name = n_qid.n_id.text
-                #var props = v.modelbuilder.model.get_mproperties_by_name(fun_name)
+redef class ACallrefExpr
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid
+	redef fun compute_raw_arguments do return n_args.to_a
 
-                # top level function are stored in object
-                var mclass_sys = v.get_mclass(self, "Sys")
-                if mclass_sys == null then
-                        v.error(self, "Error: class `Sys` does not exists")
-                        return
-                end
+	redef fun accept_typing(v)
+	do
+                super # do the job as if it was a real call
+		# TODO: inspect self.callsite to get information about the method
+		var res = callsite.mproperty
 
-                var sys_type = mclass_sys.mclass_type
-                var callsite = v.get_method(self, sys_type, fun_name, false)
-
-                if callsite == null then
-                        v.error(self, "Error: function `{fun_name}`")
-                        return
-                end
-
-                var msignature = callsite.msignature
+                var msignature = callsite.mpropdef.msignature
+                assert msignature != null
+                debug "signature of callref: {msignature}"
                 var arity = msignature.mparameters.length
-                var target_func_class = "Func" + arity.to_s
-                var func_class = v.get_mclass(self, target_func_class)
-                var unit_class = v.get_mclass(self, "Unit")
+                var routine_type_name = "Proc"
+                if msignature.return_mtype != null then
+                        routine_type_name = "Fun"
+                end
+                var target_routine_class = "{routine_type_name}{arity}"
+                var routine_mclass = v.get_mclass(self, target_routine_class)
 
-                if unit_class == null or func_class == null then
+                if routine_mclass == null then
                         v.error(self, "Error: missing functional types, try : `import functional`")
                         return
                 end
@@ -2595,11 +2619,15 @@ redef class AFunrefExpr
                 for param in msignature.mparameters do
                         types_list.push(param.mtype)
                 end
-                types_list.push(unit_class.mclass_type)
+                if msignature.return_mtype != null then
+                        types_list.push(msignature.return_mtype.as(not null))
+                end
 
-                var func_type = func_class.get_mtype(types_list)
+                var routine_type = routine_mclass.get_mtype(types_list)
 
-                mtype = func_type
                 is_typed = true
-        end
+		# TODO: return a functionnal type
+                debug "type of callref: {routine_type}"
+		self.mtype = routine_type
+	end
 end

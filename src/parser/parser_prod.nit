@@ -6876,48 +6876,6 @@ redef class ASuperstringExpr
 		v.enter_visit(_n_annotations)
 	end
 end
-redef class AFunrefExpr
-	init init_afunrefexpr (
-		n_amp: nullable TAmp,
-		n_qid: nullable AQid
-	)
-	do
-		_n_amp = n_amp.as(not null)
-		n_amp.parent = self
-		_n_qid = n_qid.as(not null)
-		n_qid.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_amp == old_child then
-			n_amp = new_child.as(TAmp)
-			return
-		end
-		if _n_qid == old_child then
-			n_qid = new_child.as(AQid)
-			return
-		end
-	end
-
-	redef fun n_amp=(node)
-	do
-		_n_amp = node
-		node.parent = self
-	end
-	redef fun n_qid=(node)
-	do
-		_n_qid = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_amp)
-		v.enter_visit(_n_qid)
-	end
-end
 redef class AParExpr
 	init init_aparexpr (
 		n_opar: nullable TOpar,

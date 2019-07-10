@@ -2236,6 +2236,17 @@ redef class ASendExpr
 	end
 end
 
+redef class ACallrefExpr
+        redef fun expr(v)
+        do
+                var recv = v.expr(self.n_expr)
+                if recv == null then return null
+                debug "recv for ACallrefExpr {recv}"
+                fatal(v, "NOT YET IMPLEMENTED intern")
+                return null
+        end
+end
+
 redef class ASendReassignFormExpr
 	redef fun stmt(v)
 	do
