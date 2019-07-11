@@ -369,6 +369,11 @@ class GithubAPI
 		return get("/repos/{repo_slug}/pulls/{number}").as(nullable PullRequest)
 	end
 
+	# Get a specific pull request comment
+	fun get_pull_comment(repo_slug: String, id: Int): nullable ReviewComment do
+		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable ReviewComment)
+	end
+
 	# Get the Github label with `name`.
 	#
 	# Returns `null` if the label cannot be found.
@@ -450,23 +455,6 @@ class GithubAPI
 	# ~~~
 	fun get_issue_comment(repo_slug: String, id: Int): nullable IssueComment do
 		return get("/repos/{repo_slug}/issues/comments/{id}").as(nullable IssueComment)
-	end
-
-	# Get the Github diff comment with `id`.
-	#
-	# Returns `null` if the comment cannot be found.
-	#
-	# ~~~nitish
-	# var api = new GithubAPI(get_github_oauth)
-	# var repo = api.get_repo("nitlang/nit")
-	# assert repo != null
-	# var comment = api.get_review_comment(repo, 21010363)
-	# assert comment.path == "src/modelize/modelize_property.nit"
-	# assert comment.original_position == 26
-	# assert comment.pull_number == 945
-	# ~~~
-	fun get_review_comment(repo_slug: String, id: Int): nullable ReviewComment do
-		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable ReviewComment)
 	end
 
 	private fun pagination(page, per_page: nullable Int): String do

@@ -336,6 +336,15 @@ class TestGithubAPI
 		assert pull.body == "Raise dead on `nitc`.\nIt's super effective...\n"
 	end
 
+	fun test_get_pull_comment is test do
+		var comment = api.get_pull_comment("nitlang/nit", 21010363)
+		assert comment isa ReviewComment
+		assert comment.path == "src/modelize/modelize_property.nit"
+		assert comment.original_position == 26
+		assert comment.pull_number == 945
+		# TODO other fields
+	end
+
 	fun test_get_label is test do
 		var labl = api.get_label("nitlang/nit", "ok_will_merge")
 		assert labl isa Label
@@ -371,13 +380,5 @@ class TestGithubAPI
 		assert comment.user.login == "Morriar"
 		assert comment.body == "For testing purposes...\n"
 		assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
-	end
-
-	fun test_get_review_comments is test do
-		var comment = api.get_review_comment("nitlang/nit", 21010363)
-		assert comment isa ReviewComment
-		assert comment.path == "src/modelize/modelize_property.nit"
-		assert comment.original_position == 26
-		assert comment.pull_number == 945
 	end
 end
