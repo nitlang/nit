@@ -555,7 +555,7 @@ class Repo
 	var owner: User is writable
 
 	# Repo default branch name.
-	var default_branch: String is writable
+	var default_branch: nullable String = null is optional, writable
 end
 
 # A Github branch.
