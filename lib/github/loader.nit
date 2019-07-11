@@ -329,22 +329,16 @@ class Loader
 	fun get_issues(job: LoaderJob) do
 		if config.no_issues then return
 
-		var i = job.last_issue
-		var last_issue = get_last_issue(job)
-		if last_issue != null then
-			while i <= last_issue.number do
-				get_issue(job, i)
-				job.last_issue = i
+		var api = config.wallet.api
+		var page = 1
+		var issues = api.get_repo_issues(job.repo.full_name, page, 100)
+		while issues.not_empty do
+			for issue in issues do
+				get_issue(job, issue.number)
+				job.last_issue = issue.number
 				jobs.save job
-				i += 1
 			end
 		end
-	end
-
-	# Load the `repo` last issue or abort.
-	private fun get_last_issue(job: LoaderJob): nullable Issue do
-		var api = config.wallet.api
-		return api.get_repo_last_issue(job.repo)
 	end
 
 	# Load an issue or abort.

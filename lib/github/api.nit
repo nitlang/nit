@@ -263,16 +263,6 @@ class GithubAPI
 		return deserialize(arr.to_json).as(Array[Issue])
 	end
 
-	# Get the last published issue.
-	fun get_repo_last_issue(repo: Repo): nullable Issue do
-		var array = get("/repos/{repo.full_name}/issues")
-		if not array isa JsonArray then return null
-		if array.is_empty then return null
-		var obj = array.first
-		if not obj isa JsonObject then return null
-		return deserialize(obj.to_json).as(nullable Issue)
-	end
-
 	# List of labels associated with their names.
 	fun get_repo_labels(repo: Repo, page, per_page: nullable Int): Array[Label] do
 		return new GithubArray[Label].from(get(
