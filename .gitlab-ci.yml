@@ -29,6 +29,7 @@ before_script:
   - git config --add github.oauthtoken "$GITHUB_OAUTHTOKEN" # needed for github api rate limit
   - pwd
   - ccache -s
+  - ccache -z
   - ccache -M 500M
   - du -sh .gradle || true
   - type -a nitc nitdoc || true # is there some nit tools?
