@@ -20,7 +20,6 @@
 module api
 
 intrude import json::serialization_read
-import json::static
 
 import base64
 import curl
@@ -281,11 +280,7 @@ class GithubAPI
 
 	# List of contributor related statistics.
 	fun get_repo_contrib_stats(repo_slug: String): Array[ContributorStats] do
-		message(1, "Get contributor stats for {repo_slug}")
-		var res = new Array[ContributorStats]
-		var array = get("/repos/{repo_slug}/stats/contributors")
-		if not array isa JsonArray then return res
-		return deserialize(array.to_json).as(Array[ContributorStats])
+		return new GithubArray[ContributorStats].from(get("/repos/{repo_slug}/stats/contributors"))
 	end
 
 	# Get the Github branch with `name`.
@@ -1034,20 +1029,34 @@ class ContributorStats
 
 	redef type OTHER: ContributorStats
 
-	# Github API client.
-	var api: GithubAPI is writable
-
 	# User these statistics are about.
 	var author: User is writable
 
 	# Total number of commit.
 	var total: Int is writable
 
-	# Are of weeks of activity with detailed statistics.
-	var weeks: JsonArray is writable
+	# Array of weeks of activity with detailed statistics.
+	var weeks: Array[ContributorWeek] is writable
 
 	# ContributorStats can be compared on the total amount of commits.
 	redef fun <(o) do return total < o.total
+end
+
+# Contributor stats weekly hash
+class ContributorWeek
+	serialize
+
+	# Start of week given a Unix timestamp
+	var w: Int
+
+	# Number of additions
+	var a: Int
+
+	# Number of deletions
+	var d: Int
+
+	# Number of commits
+	var c: Int
 end
 
 # A Github file representation.
@@ -1122,6 +1131,10 @@ class GithubDeserializer
 			return "Branch"
 		else if raw.has_key("total_count") and raw.has_key("items") then
 			return "SearchResults"
+		else if raw.has_key("total") and raw.has_key("weeks") then
+			return "ContributorStats"
+		else if raw.has_key("a") and raw.has_key("d") and raw.has_key("c") then
+			return "ContributorWeek"
 		end
 		return null
 	end

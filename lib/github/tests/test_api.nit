@@ -77,6 +77,7 @@ class MockGithubAPI
 		map["/repos/nitlang/nit/commits/4e3c688d/status"] = "repo_commits_4e3c68_status"
 		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
 		map["/search/issues?q=foo repo:nitlang/nit&page=1&per_page=3"] = "repo_search_issues_nit"
+		map["/repos/nitlang/nit/stats/contributors"] = "repo_nit_contributors"
 		# errors
 		map["/users/not_found/not_found"] = "errors_404"
 		return map
@@ -264,8 +265,6 @@ class TestGithubAPI
 		assert pulls.last.title == "Mock Github API tests"
 	end
 
-	# TODO contrib_stats
-
 	fun test_get_branch is test do
 		var branch = api.get_branch("nitlang/nit", "master")
 		assert branch isa Branch
@@ -387,5 +386,12 @@ class TestGithubAPI
 		assert comment.user.login == "Morriar"
 		assert comment.body == "For testing purposes...\n"
 		assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
+	end
+
+	fun test_contributor_stats is test do
+		var stats = api.get_repo_contrib_stats("nitlang/nit")
+		assert stats.last.author.login == "privat"
+		assert stats.last.total == 4536
+		assert stats.last.weeks.length == 575
 	end
 end
