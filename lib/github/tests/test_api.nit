@@ -338,7 +338,7 @@ class TestGithubAPI
 
 	fun test_get_pull_comment is test do
 		var comment = api.get_pull_comment("nitlang/nit", 21010363)
-		assert comment isa ReviewComment
+		assert comment isa PullComment
 		assert comment.path == "src/modelize/modelize_property.nit"
 		assert comment.original_position == 26
 		assert comment.pull_number == 945

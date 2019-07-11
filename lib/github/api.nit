@@ -370,8 +370,8 @@ class GithubAPI
 	end
 
 	# Get a specific pull request comment
-	fun get_pull_comment(repo_slug: String, id: Int): nullable ReviewComment do
-		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable ReviewComment)
+	fun get_pull_comment(repo_slug: String, id: Int): nullable PullComment do
+		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable PullComment)
 	end
 
 	# Get the Github label with `name`.
@@ -829,7 +829,7 @@ end
 #
 # * `CommitComment` are made on a commit page.
 # * `IssueComment` are made on an issue or pull request page.
-# * `ReviewComment` are made on the diff associated to a pull request.
+# * `PullComment` are made on the diff associated to a pull request.
 abstract class Comment
 	serialize
 
@@ -942,7 +942,7 @@ end
 # Should be accessed from `GithubAPI::get_diff_comment`.
 #
 # See <https://developer.github.com/v3/pulls/comments/>.
-class ReviewComment
+class PullComment
 	super Comment
 	serialize
 
@@ -1085,7 +1085,7 @@ class GithubDeserializer
 		map["{pattern_base}/repos/[^/]*/[^/]*/issues/comments/[0-9]+$".to_re] = "IssueComment"
 		map["{pattern_base}/repos/[^/]*/[^/]*/issues/events/[0-9]+$".to_re] = "IssueEvent"
 		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/[0-9]+$".to_re] = "PullRequest"
-		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/comments/[0-9]+$".to_re] = "ReviewComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/comments/[0-9]+$".to_re] = "PullComment"
 		map["{pattern_base}/repos/[^/]*/[^/]*/comments/[0-9]+$".to_re] = "CommitComment"
 		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+$".to_re] = "Commit"
 		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+/status$".to_re] = "CommitStatus"

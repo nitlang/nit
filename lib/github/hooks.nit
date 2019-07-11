@@ -110,7 +110,7 @@ abstract class HookListener
 		else if kind == "pull_request" then
 			return api.deserialize(json).as(PullRequestEvent)
 		else if kind == "pull_request_review_comment" then
-			return api.deserialize(json).as(PullRequestReviewCommentEvent)
+			return api.deserialize(json).as(PullRequestPullCommentEvent)
 		else if kind == "push" then
 			return api.deserialize(json).as(PushEvent)
 		else if kind == "status" then
