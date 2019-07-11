@@ -74,6 +74,7 @@ class MockGithubAPI
 		map["/repos/nitlang/nit/commits/64ce1f"] = "repo_commits_64ce1f"
 		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
 		map["/repos/nitlang/nit/pulls/comments/21010363"] = "repo_pulls_comment_21010363"
+		map["/search/issues?q=foo repo:nitlang/nit&page=1&per_page=3"] = "repo_search_issues_nit"
 		# errors
 		map["/users/not_found/not_found"] = "errors_404"
 		return map

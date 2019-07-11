@@ -254,13 +254,8 @@ class GithubAPI
 	# ~~~
 	#
 	# See <https://developer.github.com/v3/search/#search-issues>.
-	fun search_repo_issues(repo: Repo, query: String): Array[Issue] do
-		query = "/search/issues?q={query} repo:{repo.full_name}"
-		var res = new Array[Issue]
-		var response = get(query)
-		if was_error then return res
-		var arr = response.as(JsonObject)["items"].as(JsonArray)
-		return deserialize(arr.to_json).as(Array[Issue])
+	fun search_repo_issues(repo: Repo, query: String, page, per_page: nullable Int): nullable SearchResults do
+		return get("/search/issues?q={query} repo:{repo.full_name}&{pagination(page, per_page)}").as(nullable SearchResults)
 	end
 
 	# List of labels associated with their names.
@@ -1152,6 +1147,20 @@ class GithubFile
 	var filename: String is writable
 end
 
+# A list of results returned buy `/search`
+class SearchResults
+	serialize
+
+	# Total count with other pages
+	var total_count: Int
+
+	# Does this page contain all the results?
+	var incomplete_results: Bool
+
+	# Results in this page
+	var items: Array[Object]
+end
+
 # Make ISO Datew serilizable
 redef class ISODate
 	serialize
@@ -1192,6 +1201,8 @@ class GithubDeserializer
 			return "CommitComment"
 		else if json_object.has_key("issue_url") then
 			return "IssueComment"
+		else if json_object.has_key("total_count") then
+			return "SearchResults"
 		end
 		return null
 	end
