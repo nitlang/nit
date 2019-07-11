@@ -19,7 +19,6 @@
 # For most use-cases you need to use the `GithubAPI` client.
 module api
 
-# TODO to remove
 intrude import json::serialization_read
 import json::static
 
@@ -1029,38 +1028,47 @@ end
 class GithubDeserializer
 	super JsonDeserializer
 
-	redef fun class_name_heuristic(json_object) do
-		if json_object.has_key("login") then
-			return "User"
-		else if json_object.has_key("full_name") then
-			return "Repo"
-		else if json_object.has_key("name") and json_object.has_key("commit") then
+	private var pattern_base = "https://api.github.com"
+
+	# Url patterns to class names
+	var url_patterns: Map[Regex, String] is lazy do
+		var map = new HashMap[Regex, String]
+		map["{pattern_base}/users/[^/]*$".to_re] = "User"
+		map["{pattern_base}/repos/[^/]*/[^/]*$".to_re] = "Repo"
+		map["{pattern_base}/repos/[^/]*/[^/]*/labels/[^/]+$".to_re] = "Label"
+		map["{pattern_base}/repos/[^/]*/[^/]*/milestones/[0-9]+$".to_re] = "Milestone"
+		map["{pattern_base}/repos/[^/]*/[^/]*/issues/[0-9]+$".to_re] = "Issue"
+		map["{pattern_base}/repos/[^/]*/[^/]*/issues/comments/[0-9]+$".to_re] = "IssueComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/issues/events/[0-9]+$".to_re] = "IssueEvent"
+		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/[0-9]+$".to_re] = "PullRequest"
+		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/comments/[0-9]+$".to_re] = "ReviewComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/comments/[0-9]+$".to_re] = "CommitComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+$".to_re] = "Commit"
+		return map
+	end
+
+	# Match `url` property in object to a class name
+	fun url_heuristic(raw: Map[String, nullable Object]): nullable String do
+		if not raw.has_key("url") then return null
+
+		var url = raw["url"].as(String)
+		for re, class_name in url_patterns do
+			if url.has(re) then return class_name
+		end
+		return null
+	end
+
+	redef fun class_name_heuristic(raw) do
+		# Try with url
+		var class_name = url_heuristic(raw)
+		if class_name != null then return class_name
+
+		# print raw.serialize_to_json(true, true) # debug
+
+		# Use properties heuristics
+		if raw.has_key("name") and raw.has_key("commit") then
 			return "Branch"
-		else if json_object.has_key("sha") and json_object.has_key("ref") then
-			return "PullRef"
-		else if (json_object.has_key("sha") and json_object.has_key("commit")) or (json_object.has_key("id") and json_object.has_key("tree_id")) then
-			return "Commit"
-		else if json_object.has_key("sha") and json_object.has_key("tree") then
-			return "GitCommit"
-		else if json_object.has_key("name") and json_object.has_key("date") then
-			return "GitUser"
-		else if json_object.has_key("number") and json_object.has_key("patch_url") then
-			return "PullRequest"
-		else if json_object.has_key("open_issues") and json_object.has_key("closed_issues") then
-			return "Milestone"
-		else if json_object.has_key("number") and json_object.has_key("title") then
-			return "Issue"
-		else if json_object.has_key("color") then
-			return "Label"
-		else if json_object.has_key("event") then
-			return "IssueEvent"
-		else if json_object.has_key("original_commit_id") then
-			return "ReviewComment"
-		else if json_object.has_key("commit_id") then
-			return "CommitComment"
-		else if json_object.has_key("issue_url") then
-			return "IssueComment"
-		else if json_object.has_key("total_count") then
+		else if raw.has_key("total_count") and raw.has_key("items") then
 			return "SearchResults"
 		end
 		return null

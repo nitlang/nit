@@ -307,7 +307,7 @@ class TestGithubAPI
 
 	fun test_get_pull is test do
 		var pull = api.get_pull("nitlang/nit", 1000)
-		assert pull isa Issue
+		assert pull isa PullRequest
 		assert pull.number == 1000
 		assert pull.title == "Raise nitc from the dead"
 		assert pull.user.as(User).login == "privat"
