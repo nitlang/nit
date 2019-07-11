@@ -58,7 +58,7 @@ redef class GithubAPI
 	redef fun get(key, headers, data) do
 		if not enable_cache then return super
 		if store.has_key(key) then
-			message(1, "Get {key} (cache)")
+			# print "Get {key} (cache)" # debug
 			was_error = false
 			return deserialize(store.load_object(key).to_json)
 		end
@@ -71,7 +71,7 @@ redef class GithubAPI
 
 	# Save `json` data in cache under `key`.
 	private fun cache(key: String, obj: Serializable) do
-		message(2, "Cache key {key}")
+		# print "Cache key {key}" # debug
 		store.store_object(key, obj.to_json.parse_json.as(JsonObject))
 	end
 

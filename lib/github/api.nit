@@ -91,12 +91,6 @@ class GithubAPI
 	# Default is `https://api.github.com` and should not be changed.
 	var api_url = "https://api.github.com"
 
-	# Verbosity level.
-	#
-	# * `0`: only errors (default)
-	# * `1`: verbose
-	var verbose_lvl = 0 is public writable
-
 	# Send a HTTPRequest to the Github API
 	fun send(method, path: String, headers: nullable HeaderMap, body: nullable String): nullable String do
 		last_error = null
@@ -141,11 +135,6 @@ class GithubAPI
 		end
 		was_error = false
 		return res
-	end
-
-	# Display a message depending on `verbose_lvl`.
-	fun message(lvl: Int, message: String) do
-		if lvl <= verbose_lvl then print message
 	end
 
 	# Escape `uri` in an acceptable format for Github.
