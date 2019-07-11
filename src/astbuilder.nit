@@ -116,7 +116,7 @@ class ASTBuilder
 	end
 
 	# Make a new method
-	fun make_method(n_visibility: nullable APublicVisibility,
+	fun make_method(n_visibility: nullable AVisibility,
 					tk_redef: nullable TKwredef,
 					mmethoddef: MMethodDef,
 					n_signature: nullable ASignature,
@@ -249,6 +249,11 @@ redef class AReturnExpr
 	do
 		self.init_areturnexpr(null, expr)
 	end
+
+	redef fun clone: SELF
+	do
+		return new AReturnExpr.make(self.n_expr.clone)
+	end
 end
 
 redef class ASuperExpr
@@ -285,7 +290,7 @@ redef class AAndExpr
 end
 
 redef class AMethPropdef
-	private init make(n_visibility: nullable APublicVisibility,
+	private init make(n_visibility: nullable AVisibility,
 					tk_redef: nullable TKwredef,
 					mmethoddef: MMethodDef,
 					n_signature: nullable ASignature,
@@ -323,6 +328,15 @@ redef class ABlockExpr
 	redef fun add(expr)
 	do
 		n_expr.add expr
+	end
+
+	redef fun clone: SELF
+	do
+		var clone = new ABlockExpr.make
+		for expr in self.n_expr do
+			clone.add(expr.clone)
+		end
+		return clone
 	end
 end
 
@@ -446,6 +460,15 @@ redef class ACallExpr
 		self.mtype = callsite.msignature.return_mtype
 		self.is_typed = true
 	end
+
+	redef fun clone: SELF
+	do
+		var args = new Array[AExpr]
+		for arg in n_args.n_exprs do
+			args.add(arg.clone)
+		end
+		return new ACallExpr.make(n_expr.clone, callsite.as(not null), n_args.to_a)
+	end
 end
 
 redef class AAttrExpr
@@ -480,6 +503,11 @@ redef class AVarExpr
 		variable = v
 		self.mtype = mtype
 	end
+
+	redef fun clone: SELF
+	do
+		return new AVarExpr.make(variable.as(not null), mtype.as(not null))
+	end
 end
 
 redef class AVarAssignExpr
@@ -491,6 +519,27 @@ redef class AVarAssignExpr
 		_n_assign = new TAssign
 		variable = v
 		mtype = value.mtype
+	end
+
+	redef fun clone: SELF
+	do
+		return new AVarAssignExpr.make(variable.as(not null), n_value.clone)
+	end
+end
+
+redef class ASelfExpr
+
+	private init make
+	do
+		init_aselfexpr(new TKwself, null)
+	end
+
+	redef fun clone: SELF
+	do
+		var clone_self = new ASelfExpr.make
+		clone_self.variable = self.variable
+		clone_self.mtype = self.mtype
+		return new ASelfExpr.make
 	end
 end
 
@@ -506,6 +555,14 @@ class ASTValidationVisitor
 end
 
 redef class ANode
+	super Cloneable
+
+	redef fun clone: SELF
+	do
+		# By default the clone abort to avoid surprises
+		print self
+		abort
+	end
 	# Recursively validate a AST node.
 	# This ensure that location and parenting are defined and coherent.
 	#
