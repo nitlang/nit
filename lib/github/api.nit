@@ -319,6 +319,13 @@ class GithubAPI
 		return get("/repos/{repo_slug}/commits/{sha}").as(nullable Commit)
 	end
 
+	# Get the status of a commit
+	#
+	# The status holds the result of each check ran on a commit like CI, reviews etc.
+	fun get_commit_status(repo_slug: String, sha: String): nullable CommitStatus do
+		return get("/repos/{repo_slug}/commits/{sha}/status").as(nullable CommitStatus)
+	end
+
 	# Get the Github issue #`number`.
 	#
 	# Returns `null` if the issue cannot be found.
@@ -877,6 +884,55 @@ class CommitComment
 	var path: nullable String is writable
 end
 
+# Status of a commit
+#
+# Can contain sub-status for reviews, CI etc.
+class CommitStatus
+	serialize
+
+	# Global state of this commit
+	var state: nullable String = null is optional, writable
+
+	# Sha of the commit this status is for
+	var sha: nullable String = null is optional, writable
+
+	# Repository the commit belongs to
+	var repository: nullable Repo = null is optional, writable
+
+	# All sub statuses (one for each check)
+	var statuses = new Array[RepoStatus] is optional, writable
+
+	# Total count of sub statuses
+	var total_count: nullable Int = null is optional, writable
+end
+
+# Sub status of a CommitStatus
+#
+# Represents a check applied to a commit (reviews, CI, ...).
+class RepoStatus
+	serialize
+
+	# State of this check
+	var state: nullable String = null is optional, writable
+
+	# Description of this check
+	var description: nullable String = null is optional, writable
+
+	# External URL
+	var target_url: nullable String = null is optional, writable
+
+	# Context this status is related to
+	#
+	# Used to hold the name of the check applied.
+	var context: nullable String = null is optional, writable
+
+	# Date when this status was created
+	var created_at: nullable String = null is optional, writable
+
+	# Last date this status was updated
+	var updated_at: nullable String = null is optional, writable
+end
+
 # Comments made on Github issue and pull request pages.
 #
 # Should be accessed from `GithubAPI::get_issue_comment`.
@@ -1044,6 +1100,8 @@ class GithubDeserializer
 		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/comments/[0-9]+$".to_re] = "ReviewComment"
 		map["{pattern_base}/repos/[^/]*/[^/]*/comments/[0-9]+$".to_re] = "CommitComment"
 		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+$".to_re] = "Commit"
+		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+/status$".to_re] = "CommitStatus"
+		map["{pattern_base}/repos/[^/]*/[^/]*/statuses/[a-f0-9]+$".to_re] = "RepoStatus"
 		return map
 	end
 

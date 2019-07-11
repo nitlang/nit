@@ -72,6 +72,7 @@ class MockGithubAPI
 		map["/repos/nitlang/nit/pulls?page=1&per_page=3"] = "repo_pulls_nit"
 		map["/repos/nitlang/nit/pulls/1000"] = "repo_pulls_1000"
 		map["/repos/nitlang/nit/commits/64ce1f"] = "repo_commits_64ce1f"
+		map["/repos/nitlang/nit/commits/4e3c688d/status"] = "repo_commits_4e3c68_status"
 		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
 		map["/repos/nitlang/nit/pulls/comments/21010363"] = "repo_pulls_comment_21010363"
 		map["/search/issues?q=foo repo:nitlang/nit&page=1&per_page=3"] = "repo_search_issues_nit"
@@ -275,6 +276,23 @@ class TestGithubAPI
 		assert commit isa Commit
 		assert commit.sha == "64ce1f587209024f5de46d06c70526a569ff537f"
 		# TODO other fields
+	end
+
+	fun test_get_commit_status is test do
+		var status = api.get_commit_status("nitlang/nit", "4e3c688d")
+		assert status isa CommitStatus
+		assert status.state == "failure"
+		assert status.sha == "4e3c688d2c4b875c00f206eb4c4b6f2c4f34c096"
+		assert status.total_count == 1
+
+		var sub = status.statuses.first
+		assert sub.state == "failure"
+		assert sub.description == "Merged pipeline on gitlab: failed"
+		assert sub.context == "gitlab-ci"
+
+		var repo = status.repository
+		assert repo isa Repo
+		assert repo.full_name == "nitlang/nit"
 	end
 
 	fun test_get_issue is test do
