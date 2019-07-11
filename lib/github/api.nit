@@ -369,6 +369,12 @@ class GithubAPI
 		return get("/repos/{repo_slug}/pulls/{number}").as(nullable PullRequest)
 	end
 
+	# List of comments on a pull request
+	fun get_pull_comments(repo_slug: String, pull_number: Int, page, per_page: nullable Int): Array[PullComment] do
+		return new GithubArray[PullComment].from(get(
+			"/repos/{repo_slug}/pulls/{pull_number}/comments?{pagination(page, per_page)}"))
+	end
+
 	# Get a specific pull request comment
 	fun get_pull_comment(repo_slug: String, id: Int): nullable PullComment do
 		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable PullComment)

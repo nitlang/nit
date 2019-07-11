@@ -71,10 +71,11 @@ class MockGithubAPI
 		map["/repos/nitlang/nit/issues/events/199674194"] = "repo_issues_events_199674194"
 		map["/repos/nitlang/nit/pulls?page=1&per_page=3"] = "repo_pulls_nit"
 		map["/repos/nitlang/nit/pulls/1000"] = "repo_pulls_1000"
+		map["/repos/nitlang/nit/pulls/945/comments?page=1&per_page=3"] = "repo_pulls_945_comments"
+		map["/repos/nitlang/nit/pulls/comments/21010363"] = "repo_pulls_comment_21010363"
 		map["/repos/nitlang/nit/commits/64ce1f"] = "repo_commits_64ce1f"
 		map["/repos/nitlang/nit/commits/4e3c688d/status"] = "repo_commits_4e3c68_status"
 		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
-		map["/repos/nitlang/nit/pulls/comments/21010363"] = "repo_pulls_comment_21010363"
 		map["/search/issues?q=foo repo:nitlang/nit&page=1&per_page=3"] = "repo_search_issues_nit"
 		# errors
 		map["/users/not_found/not_found"] = "errors_404"
@@ -334,6 +335,12 @@ class TestGithubAPI
 		assert pull.closed_at == "2014-12-13T15:38:09Z"
 		assert pull.merged_by.as(User).login == "privat"
 		assert pull.body == "Raise dead on `nitc`.\nIt's super effective...\n"
+	end
+
+	fun test_get_pull_comments is test do
+		var comments = api.get_pull_comments("nitlang/nit", 945, 1, 3)
+		assert comments.length == 2
+		assert comments.first.path == "src/modelize/modelize_property.nit"
 	end
 
 	fun test_get_pull_comment is test do
