@@ -379,8 +379,6 @@ build_catalog:
     - ./oot.sh pre-build
     - cd ..
     - nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/
-  dependencies:
-    - build_more_tools
   artifacts:
     paths:
       - catalog.out
@@ -403,3 +401,14 @@ test_full_nitcs_macos:
     - macos
   dependencies:
     - build_tools_macos
+
+bench_old:
+  stage: more_test
+  tags:
+    - perf
+  dependencies:
+    - build_tools
+  script:
+    - benchmarks/bench_old.sh
+  allow_failure: true # time is unreliable. manual check required
+  services: []
