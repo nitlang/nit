@@ -6,3 +6,4 @@ base_simple3.nit
 -n -e 'print line' test_prog/README.md test_prog/test_prog.nit
 test_ffi_c_interpreter.nit
 -
+--keep-going test_keep_going.nit --run --dir out/

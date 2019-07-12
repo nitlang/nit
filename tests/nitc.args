@@ -9,3 +9,4 @@ test_define.nit -D text=hello -D num=42 -D flag --dir out/ ; out/test_define
 --log --log-dir $WRITE test_prog -o out/test_prog.bin
 test_define.nit --semi-global -D text=hello -D num=42 -D flag --dir out/ ; out/test_define
 --run ../examples/print_arguments.nit 1 2 3 --dir out/
+--keep-going test_keep_going.nit --run --dir out/

@@ -196,7 +196,7 @@ class MakefileToolchain
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
 
-		if not toolcontext.check_errors then return
+		toolcontext.check_errors
 
 		# Execute the Makefile
 
