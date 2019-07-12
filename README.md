@@ -19,20 +19,19 @@ Requirements:
  * pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
  * ccache	http://ccache.samba.org/	to improve recompilation
  * libgc-dev	http://hboehm.info/gc/
- * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
  * libunwind	http://nongnu.org/libunwind
 
 Those are available in most Linux distributions
 
-    $ sudo apt-get install build-essential ccache libgc-dev graphviz libunwind-dev pkg-config
+    $ sudo apt-get install build-essential ccache libgc-dev libunwind-dev pkg-config
 
 and on OS X using brew
 
-    $ brew install ccache bdw-gc graphviz libunwind-headers pkgconfig
+    $ brew install ccache bdw-gc libunwind-headers pkgconfig
 
 or with MacPorts
 
-    $ sudo port install ccache boehmgc graphviz libunwind-headers pkgconfig
+    $ sudo port install ccache boehmgc libunwind-headers pkgconfig
 
 Important files and directories:
 
@@ -64,6 +63,20 @@ You can source `misc/nit_env.sh` to setup your environment like PATH, MANPATH an
 To have your environment automatically configured at login, just source it with `install` as argument.
 
     $ . misc/nit_env.sh install
+
+
+More tools:
+
+Additional tools can also be compiled but require more dependencies.
+
+ * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
+ * libcurl      https://curl.haxx.se/libcurl/   for the nit package manager nitpm
+ * libevent	https://libevent.org/           for the nit documentation server nitweb
+ * libmongoc    http://mongoc.org/              also for nitweb
+
+    $ sudo apt-get install graphviz libcurl4-openssl-dev libevent-dev libmongoc-dev
+    $ make more
+
 
 Contributing:
 
