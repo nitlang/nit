@@ -19,7 +19,7 @@ module readme_metrics
 
 import metrics_base
 import model::model_collect
-import markdown
+import markdown2
 
 redef class ToolContext
 
@@ -47,69 +47,21 @@ private class ReadmeMetricsPhase
 end
 
 # A Markdown decorator that collects metrics about a Readme content
-class MetricsDecorator
-	super HTMLDecorator
+class MarkdownMetrics
+	super MdVisitor
 
-	# Count blocks
-	var block_counter = new Counter[String]
+	# Count nodes
+	var nodes_counter = new Counter[String]
 
-	# Count sections
-	var headline_counter = new Counter[Int]
+	# Count heading levels
+	var headings_counter = new Counter[Int]
 
-	redef fun add_ruler(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_headline(v, block) do
-		block_counter.inc block.class_name
-		headline_counter.inc block.depth
-		super
-	end
-
-	redef fun add_paragraph(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_code(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_blockquote(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_unorderedlist(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_orderedlist(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_listitem(v, block) do
-		block_counter.inc block.class_name
-		super
-	end
-
-	redef fun add_image(v, link, name, comment) do
-		block_counter.inc "Image"
-		super
-	end
-
-	redef fun add_link(v, link, name, comment) do
-		block_counter.inc "Link"
-		super
-	end
-
-	redef fun add_span_code(v, text, from, to) do
-		block_counter.inc "SpanCode"
-		super
+	redef fun visit(node) do
+		nodes_counter.inc node.class_name
+		if node isa MdHeading then
+			headings_counter.inc node.level
+		end
+		node.visit_all self
 	end
 end
 
@@ -206,8 +158,16 @@ class ReadmeMetric
 		self["has_readme"] = 1
 		self["md_lines"] = md_lines.length
 
-		collect_sections_metrics
-		collect_blocs_metrics
+		var parser = new MdParser
+		var node = parser.parse(md_lines.join("\n"))
+		var v = new MarkdownMetrics
+		v.enter_visit(node)
+		for md_node, value in v.nodes_counter do
+			self[md_node] = value
+		end
+		for level, value in v.headings_counter do
+			self["HL {level}"] = value
+		end
 	end
 
 	# Path to the package
@@ -241,30 +201,5 @@ class ReadmeMetric
 		var path = readme_path
 		if path == null then return new Array[String]
 		return path.to_path.read_lines
-	end
-
-	# Markdown decorator used to visit Markdown content
-	var md_decorator: MetricsDecorator is lazy do
-		var md_decorator = new MetricsDecorator
-		var md_proc = new MarkdownProcessor
-		md_proc.decorator = md_decorator
-		md_proc.process(md_lines.join("\n"))
-		return md_decorator
-	end
-
-	# Collect metrics related to section headings
-	fun collect_sections_metrics do
-		self["nb_section"] = md_decorator.headline_counter.sum
-		for lvl, count in md_decorator.headline_counter do
-			self["HL {lvl}"] = count
-		end
-	end
-
-	# Collect metrics related to Markdown blocks
-	fun collect_blocs_metrics do
-		self["md_blocks"] = md_decorator.block_counter.sum
-		for block, count in md_decorator.block_counter do
-			self[block] = count
-		end
 	end
 end
