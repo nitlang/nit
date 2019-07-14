@@ -174,3 +174,13 @@
 	"visibility": "public",
 	"modifiers": ["module"]
 }
+{
+	"name": "test_prog-m",
+	"namespace": [{
+		"name": "test_prog-m"
+	}],
+	"class_name": "MModule",
+	"full_name": "test_prog-m",
+	"visibility": "public",
+	"modifiers": ["module"]
+}
