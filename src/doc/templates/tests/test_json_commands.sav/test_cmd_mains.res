@@ -12,7 +12,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::test_prog",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">A test program with a fake model to check model tools.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">A test program with a fake model to check model tools.</span>",
 		"modifiers": ["module"]
 	}]
 }

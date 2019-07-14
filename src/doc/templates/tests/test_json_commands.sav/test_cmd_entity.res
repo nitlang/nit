@@ -11,6 +11,6 @@
 	"class_name": "MClass",
 	"full_name": "test_prog::Character",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters can be played by both the human or the machine.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Characters can be played by both the human or the machine.</span>",
 	"modifiers": ["class"]
 }

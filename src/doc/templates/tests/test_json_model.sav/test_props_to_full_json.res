@@ -14,12 +14,12 @@
 	"class_name": "MVirtualTypeProp",
 	"full_name": "test_prog::Object::OTHER",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used for comparisons.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used for comparisons.</span>",
 	"modifiers": ["type"],
 	"bound": {
 		"name": "nullable Object",
 		"synopsis": "Root of everything.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Root of everything.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Root of everything.</span>"
 	}
 }
 {
@@ -38,7 +38,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Object::==",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Is <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">other</span></span></span></code> equqls to <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">self</span></span></span></code>?</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Is <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">other</span></span></span></code> equqls to <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">self</span></span></span></code>?</span>",
 	"modifiers": ["intern", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -48,13 +48,13 @@
 			"mtype": {
 				"name": "OTHER",
 				"synopsis": "Used for comparisons.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Used for comparisons.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Used for comparisons.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Bool",
 			"synopsis": "Booleans, `true` or `false`.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 		}
 	}
 }
@@ -74,7 +74,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Object::!=",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Is <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">other</span></span></span></code> different from <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">self</span></span></span></code>?</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Is <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">other</span></span></span></code> different from <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">self</span></span></span></code>?</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 1,
@@ -84,13 +84,13 @@
 			"mtype": {
 				"name": "OTHER",
 				"synopsis": "Used for comparisons.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Used for comparisons.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Used for comparisons.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Bool",
 			"synopsis": "Booleans, `true` or `false`.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 		}
 	}
 }
@@ -137,7 +137,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -164,13 +164,13 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -197,13 +197,13 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -230,13 +230,13 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -263,13 +263,13 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -296,13 +296,13 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Bool",
 			"synopsis": "Booleans, `true` or `false`.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 		}
 	}
 }
@@ -327,7 +327,7 @@
 		"return_mtype": {
 			"name": "Float",
 			"synopsis": "Some services about Floats.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
 	}
 }
@@ -354,13 +354,13 @@
 			"mtype": {
 				"name": "Float",
 				"synopsis": "Some services about Floats.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Float",
 			"synopsis": "Some services about Floats.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
 	}
 }
@@ -387,13 +387,13 @@
 			"mtype": {
 				"name": "Float",
 				"synopsis": "Some services about Floats.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Float",
 			"synopsis": "Some services about Floats.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
 	}
 }
@@ -420,13 +420,13 @@
 			"mtype": {
 				"name": "Float",
 				"synopsis": "Some services about Floats.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Float",
 			"synopsis": "Some services about Floats.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
 	}
 }
@@ -453,13 +453,13 @@
 			"mtype": {
 				"name": "Float",
 				"synopsis": "Some services about Floats.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Float",
 			"synopsis": "Some services about Floats.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
 	}
 }
@@ -486,13 +486,13 @@
 			"mtype": {
 				"name": "Float",
 				"synopsis": "Some services about Floats.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Bool",
 			"synopsis": "Booleans, `true` or `false`.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 		}
 	}
 }
@@ -538,7 +538,7 @@
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -562,7 +562,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -589,7 +589,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -616,7 +616,7 @@
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -640,7 +640,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -667,7 +667,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -694,7 +694,7 @@
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -718,7 +718,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -745,7 +745,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -770,12 +770,12 @@
 	"class_name": "MAttribute",
 	"full_name": "test_prog::races::Race::_base_strength",
 	"visibility": "private",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how strong the race is.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used to represents how strong the race is.</span>",
 	"modifiers": ["private", "var"],
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -794,7 +794,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Race::base_strength",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how strong the race is.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used to represents how strong the race is.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -802,7 +802,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -822,7 +822,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Race::base_strength=",
 	"visibility": "protected",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how strong the race is.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used to represents how strong the race is.</span>",
 	"modifiers": ["protected", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -832,7 +832,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -857,12 +857,12 @@
 	"class_name": "MAttribute",
 	"full_name": "test_prog::races::Race::_base_endurance",
 	"visibility": "private",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how the race can absorb damage.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used to represents how the race can absorb damage.</span>",
 	"modifiers": ["private", "var"],
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -881,7 +881,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Race::base_endurance",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how the race can absorb damage.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used to represents how the race can absorb damage.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -889,7 +889,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -909,7 +909,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Race::base_endurance=",
 	"visibility": "protected",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Used to represents how the race can absorb damage.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Used to represents how the race can absorb damage.</span>",
 	"modifiers": ["protected", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -919,7 +919,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -944,12 +944,12 @@
 	"class_name": "MAttribute",
 	"full_name": "test_prog::races::Race::_base_intelligence",
 	"visibility": "private",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Is this race smart?</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Is this race smart?</span>",
 	"modifiers": ["private", "var"],
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -968,7 +968,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Race::base_intelligence",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Is this race smart?</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Is this race smart?</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -976,7 +976,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -996,7 +996,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Race::base_intelligence=",
 	"visibility": "protected",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Is this race smart?</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Is this race smart?</span>",
 	"modifiers": ["protected", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -1006,7 +1006,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1031,12 +1031,12 @@
 	"class_name": "MAttribute",
 	"full_name": "test_prog::character::Character::_race",
 	"visibility": "private",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
 	"modifiers": ["private", "var"],
 	"static_mtype": {
 		"name": "Race",
 		"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
 	}
 }
 {
@@ -1055,7 +1055,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::race",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1063,7 +1063,7 @@
 		"return_mtype": {
 			"name": "Race",
 			"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
 		}
 	}
 }
@@ -1083,7 +1083,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::race=",
 	"visibility": "protected",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Race</span></span></span></code> of the character.</span>",
 	"modifiers": ["protected", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -1093,7 +1093,7 @@
 			"mtype": {
 				"name": "Race",
 				"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1118,12 +1118,12 @@
 	"class_name": "MAttribute",
 	"full_name": "test_prog::character::Character::_career",
 	"visibility": "private",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 	"modifiers": ["private", "var"],
 	"static_mtype": {
 		"name": "nullable Career",
 		"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
 	}
 }
 {
@@ -1142,7 +1142,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::career",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1150,7 +1150,7 @@
 		"return_mtype": {
 			"name": "nullable Career",
 			"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
 		}
 	}
 }
@@ -1170,7 +1170,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::career=",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 1,
@@ -1180,7 +1180,7 @@
 			"mtype": {
 				"name": "nullable Career",
 				"synopsis": "A `Career` gives a characteristic bonus or malus to the character.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1228,7 +1228,7 @@
 	"static_mtype": {
 		"name": "String",
 		"synopsis": "Strings (there is no chars...).",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Strings (there is no chars...).</span>"
 	}
 }
 {
@@ -1252,7 +1252,7 @@
 		"return_mtype": {
 			"name": "String",
 			"synopsis": "Strings (there is no chars...).",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Strings (there is no chars...).</span>"
 		}
 	}
 }
@@ -1279,7 +1279,7 @@
 			"mtype": {
 				"name": "String",
 				"synopsis": "Strings (there is no chars...).",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Strings (there is no chars...).</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1306,7 +1306,7 @@
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -1330,7 +1330,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1357,7 +1357,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1384,7 +1384,7 @@
 	"static_mtype": {
 		"name": "Bool",
 		"synopsis": "Booleans, `true` or `false`.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 	}
 }
 {
@@ -1408,7 +1408,7 @@
 		"return_mtype": {
 			"name": "Bool",
 			"synopsis": "Booleans, `true` or `false`.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 		}
 	}
 }
@@ -1435,7 +1435,7 @@
 			"mtype": {
 				"name": "Bool",
 				"synopsis": "Booleans, `true` or `false`.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1457,7 +1457,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::total_strengh",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The actual strength of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The actual strength of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1465,7 +1465,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1485,7 +1485,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::total_endurance",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The actual endurance of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The actual endurance of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1493,7 +1493,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1513,7 +1513,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::total_intelligence",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The acutal intelligence of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The acutal intelligence of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1521,7 +1521,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1541,7 +1541,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::max_health",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Maximum health of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Maximum health of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1549,7 +1549,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1572,12 +1572,12 @@
 	"class_name": "MAttribute",
 	"full_name": "test_prog::character::Character::_health",
 	"visibility": "private",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
 	"modifiers": ["private", "var"],
 	"static_mtype": {
 		"name": "Int",
 		"synopsis": "Some services about Integers.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 	}
 }
 {
@@ -1596,7 +1596,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::health",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1604,7 +1604,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1624,7 +1624,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Character::health=",
 	"visibility": "protected",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">The current <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">health</span></span></span></code> of the character.</span>",
 	"modifiers": ["protected", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -1634,7 +1634,7 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -1656,7 +1656,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Weapon::dps",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Damage per second inflicted by this weapon.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Damage per second inflicted by this weapon.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 0,
@@ -1664,7 +1664,7 @@
 		"return_mtype": {
 			"name": "Float",
 			"synopsis": "Some services about Floats.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
 	}
 }
@@ -1689,7 +1689,7 @@
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1709,7 +1709,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Combatable::attack",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code> can attack a <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">target</span></span></span></code> that is also a <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code>.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code> can attack a <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">target</span></span></span></code> that is also a <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code>.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 2,
@@ -1719,7 +1719,7 @@
 			"mtype": {
 				"name": "Combatable",
 				"synopsis": "Something that can be combatted, it can `attack` and `defend`.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>"
 			}
 		}, {
 			"is_vararg": false,
@@ -1727,13 +1727,13 @@
 			"mtype": {
 				"name": "Weapon",
 				"synopsis": "Something that can be used to attack someone and inflict damage.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be used to attack someone and inflict damage.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Something that can be used to attack someone and inflict damage.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1753,7 +1753,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Combatable::direct_attack",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Like <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> but cannot be defended.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Like <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> but cannot be defended.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 2,
@@ -1763,7 +1763,7 @@
 			"mtype": {
 				"name": "Combatable",
 				"synopsis": "Something that can be combatted, it can `attack` and `defend`.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>"
 			}
 		}, {
 			"is_vararg": false,
@@ -1771,13 +1771,13 @@
 			"mtype": {
 				"name": "Weapon",
 				"synopsis": "Something that can be used to attack someone and inflict damage.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be used to attack someone and inflict damage.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Something that can be used to attack someone and inflict damage.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1797,7 +1797,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Combatable::defend",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\"><code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code> can defend against attacks.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\"><code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Combatable</span></span></span></code> can defend against attacks.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 1,
@@ -1807,13 +1807,13 @@
 			"mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}],
 		"return_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}
 }
@@ -1833,7 +1833,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Combatable::is_dead",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Is the character still have hit_points?</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Is the character still have hit_points?</span>",
 	"modifiers": ["fun"],
 	"msignature": {
 		"arity": 0,
@@ -1841,7 +1841,7 @@
 		"return_mtype": {
 			"name": "Bool",
 			"synopsis": "Booleans, `true` or `false`.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
 		}
 	}
 }
@@ -1861,7 +1861,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Game::player_characters",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters played by human players.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Characters played by human players.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 0,
@@ -1869,7 +1869,7 @@
 		"return_mtype": {
 			"name": "List[Character]",
 			"synopsis": "List of things.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 		}
 	}
 }
@@ -1889,7 +1889,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Game::computer_characters",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters players by computer.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Characters players by computer.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 0,
@@ -1897,7 +1897,7 @@
 		"return_mtype": {
 			"name": "List[Character]",
 			"synopsis": "List of things.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 		}
 	}
 }
@@ -1917,7 +1917,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Game::start_game",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Start the game.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Start the game.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 0,
@@ -1941,7 +1941,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Game::pause_game",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Pause the game.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Pause the game.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 0,
@@ -1965,7 +1965,7 @@
 	"class_name": "MMethod",
 	"full_name": "test_prog::Game::stop_game",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Stop the game.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Stop the game.</span>",
 	"modifiers": ["abstract", "fun"],
 	"msignature": {
 		"arity": 0,
@@ -1993,7 +1993,7 @@
 	"static_mtype": {
 		"name": "List[Character]",
 		"synopsis": "List of things.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 	}
 }
 {
@@ -2019,7 +2019,7 @@
 			"mtype": {
 				"name": "List[Character]",
 				"synopsis": "List of things.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -2045,7 +2045,7 @@
 	"static_mtype": {
 		"name": "List[Character]",
 		"synopsis": "List of things.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 	}
 }
 {
@@ -2071,7 +2071,7 @@
 			"mtype": {
 				"name": "List[Character]",
 				"synopsis": "List of things.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 			}
 		}],
 		"return_mtype": null
@@ -2116,7 +2116,7 @@
 	"static_mtype": {
 		"name": "List[Character]",
 		"synopsis": "List of things.",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+		"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 	}
 }
 {
@@ -2141,7 +2141,7 @@
 			"mtype": {
 				"name": "List[Character]",
 				"synopsis": "List of things.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>"
 			}
 		}],
 		"return_mtype": null
