@@ -185,12 +185,12 @@ class PullRequestEvent
 end
 
 # Triggered when a comment is created on a pull request diff.
-class PullRequestReviewCommentEvent
+class PullRequestPullCommentEvent
 	super GithubEvent
 	serialize
 
 	# The `Comment` itself.
-	var comment: ReviewComment is writable
+	var comment: PullComment is writable
 
 	# `PullRequest` the `comment` belongs to.
 	var pull: PullRequest is writable
@@ -268,7 +268,7 @@ redef class GithubDeserializer
 		else if json_object.has_key("action") and json_object.has_key("number") then
 			return "PullRequestEvent"
 		else if json_object.has_key("action") and json_object.has_key("pull") and json_object.has_key("comment") then
-			return "PullRequestReviewCommentEvent"
+			return "PullRequestPullCommentEvent"
 		else if json_object.has_key("head_commit") and json_object.has_key("commits") then
 			return "PushEvent"
 		else if json_object.has_key("action") and json_object.has_key("branches") then

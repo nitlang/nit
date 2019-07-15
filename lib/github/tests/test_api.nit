@@ -23,31 +23,31 @@ intrude import api
 #
 # Cache files can be automatically created and updated by setting
 # `update_responses_cache` to `true` then running `nitunit`.
-class MockGithubCurl
-	super GithubCurl
+class MockGithubAPI
+	super GithubAPI
 
 	# Mock so it returns the response from a file
 	#
 	# See `update_responses_cache`.
-	redef fun get_and_parse(uri) do
-		print uri # for debugging
+	redef fun send(method, path, headers, body) do
+		print path # for debugging
 
-		var path = uri.replace("https://api.github.com/", "/")
 		assert has_response(path)
 
 		if update_responses_cache then
 			var file = response_file(path)
-			save_actual_response(uri, file)
+			save_actual_response(path, file)
 		end
 
-		var response = response_string(path).parse_json
+		var response = response_string(path)
 		if response_is_error(path) then
-			var title = "GithubAPIError"
-			var msg = response.as(JsonObject)["message"].as(String)
-			var err = new GithubError(msg, title)
-			err.json["requested_uri"] = uri
-			err.json["status_code"] = response_code(path)
-			return err
+			last_error = new GithubAPIError(
+				response.parse_json.as(JsonObject)["message"].as(String),
+				response_code(path).to_i,
+				path
+			)
+			was_error = true
+			return null
 		end
 		return response
 	end
@@ -57,17 +57,27 @@ class MockGithubCurl
 		map["/user"] = "user_Morriar"
 		map["/users/Morriar"] = "user_Morriar"
 		map["/repos/nitlang/nit"] = "repo_nit"
+		map["/repos/nitlang/nit/labels?page=1&per_page=3"] = "repo_labels_nit"
 		map["/repos/nitlang/nit/labels/ok_will_merge"] = "repo_labels_ok_will_merge"
+		map["/repos/nitlang/nit/milestones?page=1&per_page=3"] = "repo_milestones_nit"
 		map["/repos/nitlang/nit/milestones/4"] = "repo_milestones_4"
-		map["/repos/nitlang/nit/branches"] = "repo_branches_nit"
+		map["/repos/nitlang/nit/branches?page=1&per_page=2"] = "repo_branches_nit"
 		map["/repos/nitlang/nit/branches/master"] = "repo_branches_master"
+		map["/repos/nitlang/nit/issues?page=1&per_page=3"] = "repo_issues_nit"
 		map["/repos/nitlang/nit/issues/1000"] = "repo_issues_1000"
+		map["/repos/nitlang/nit/issues/1000/comments?page=1&per_page=3"] = "repo_issues_comments_nit"
 		map["/repos/nitlang/nit/issues/comments/6020149"] = "repo_issues_comments_6020149"
+		map["/repos/nitlang/nit/issues/1000/events?page=1&per_page=3"] = "repo_issues_events_nit"
 		map["/repos/nitlang/nit/issues/events/199674194"] = "repo_issues_events_199674194"
+		map["/repos/nitlang/nit/pulls?page=1&per_page=3"] = "repo_pulls_nit"
 		map["/repos/nitlang/nit/pulls/1000"] = "repo_pulls_1000"
-		map["/repos/nitlang/nit/commits/64ce1f"] = "repo_commits_64ce1f"
-		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
+		map["/repos/nitlang/nit/pulls/945/comments?page=1&per_page=3"] = "repo_pulls_945_comments"
 		map["/repos/nitlang/nit/pulls/comments/21010363"] = "repo_pulls_comment_21010363"
+		map["/repos/nitlang/nit/commits/64ce1f"] = "repo_commits_64ce1f"
+		map["/repos/nitlang/nit/commits/4e3c688d/status"] = "repo_commits_4e3c68_status"
+		map["/repos/nitlang/nit/comments/8982707"] = "repo_comments_8982707"
+		map["/search/issues?q=foo repo:nitlang/nit&page=1&per_page=3"] = "repo_search_issues_nit"
+		map["/repos/nitlang/nit/stats/contributors"] = "repo_nit_contributors"
 		# errors
 		map["/users/not_found/not_found"] = "errors_404"
 		return map
@@ -126,9 +136,9 @@ class MockGithubCurl
 	private fun save_actual_response(uri, file: String) do
 		assert update_responses_cache
 
-		var request = new CurlHTTPRequest(uri)
-		request.user_agent = actual_curl.user_agent
-		request.headers = actual_curl.header
+		var request = new CurlHTTPRequest("{api_url}{sanitize_uri(uri)}")
+		request.user_agent = actual_api.user_agent
+		request.headers = actual_api.new_headers
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
@@ -141,22 +151,16 @@ class MockGithubCurl
 	end
 
 	# Actual GithubCurl instance used for caching
-	private var actual_curl = new GithubCurl(get_github_oauth, "nitunit")
+	private var actual_api = new GithubAPI(get_github_oauth, "nitunit")
 end
 
 class TestGithubAPI
 	test
 
-	var mock = new MockGithubCurl("test", "test")
-
-	fun api: GithubAPI do
-		var api = new GithubAPI("test")
-		api.ghcurl = mock
-		return api
-	end
+	fun api: MockGithubAPI do return new MockGithubAPI("test", "test")
 
 	fun test_deserialize is test do
-		var response = mock.response_string("/users/Morriar")
+		var response = api.response_string("/users/Morriar")
 		var obj = api.deserialize(response)
 		assert obj isa User
 		assert obj.login == "Morriar"
@@ -172,8 +176,8 @@ class TestGithubAPI
 		var obj = api.get("/users/Morriar")
 		assert not api.was_error
 		assert api.last_error == null
-		assert obj isa JsonObject
-		assert obj["login"] == "Morriar"
+		assert obj isa User
+		assert obj.login == "Morriar"
 	end
 
 	fun test_get_404 is test do
@@ -182,35 +186,15 @@ class TestGithubAPI
 		assert res == null
 		assert api.was_error
 		var err = api.last_error
-		assert err isa GithubError
-		assert err.name == "GithubAPIError"
-		assert err.message == "Not Found"
-	end
-
-	fun test_load_from_github is test do
-		var api = self.api
-		var obj = api.load_from_github("/users/Morriar")
-		assert not api.was_error
-		assert api.last_error == null
-		assert obj isa User
-		assert obj.login == "Morriar"
-	end
-
-	fun test_load_from_github_404 is test do
-		var api = self.api
-		var res = api.load_from_github("/users/not_found/not_found")
-		assert res == null
-		assert api.was_error
-		var err = api.last_error
-		assert err isa GithubError
-		assert err.name == "GithubAPIError"
+		assert err isa GithubAPIError
+		assert err.status_code == 404
 		assert err.message == "Not Found"
 	end
 
 	# TODO test more error cases
 
 	fun test_get_auth_user is test do
-		var user = api.load_auth_user
+		var user = api.get_auth_user
 		assert user isa User
 		assert user.login == "Morriar"
 		assert user.avatar_url == "https://avatars2.githubusercontent.com/u/583144?v=4"
@@ -220,7 +204,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_user is test do
-		var user = api.load_user("Morriar")
+		var user = api.get_user("Morriar")
 		assert user isa User
 		assert user.login == "Morriar"
 		assert user.avatar_url == "https://avatars2.githubusercontent.com/u/583144?v=4"
@@ -230,7 +214,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_repo is test do
-		var repo = api.load_repo("nitlang/nit")
+		var repo = api.get_repo("nitlang/nit")
 		assert repo isa Repo
 		assert repo.full_name == "nitlang/nit"
 		assert repo.name == "nit"
@@ -238,39 +222,81 @@ class TestGithubAPI
 		assert repo.default_branch == "master"
 	end
 
-	private var repo: Repo is lazy do return api.load_repo("nitlang/nit").as(not null)
-
 	fun test_get_branches is test do
-		var branches = api.load_repo_branches(repo)
+		var branches = api.get_repo_branches("nitlang/nit", 1, 2)
 		assert branches.length == 2
 		assert branches.first.name == "master"
 		assert branches.last.name == "next"
 	end
 
-	# TODO issues
-	# TODO repo_last_issue
-	# TODO labels
-	# TODO milestones
-	# TODO pulls
-	# TODO contrib_stats
+	fun test_get_issues is test do
+		var issues = api.get_repo_issues("nitlang/nit", 1, 3)
+		assert issues.length == 3
+		assert issues.first.title == "nitrpg: Move `nitrpg` to its own repository"
+		assert issues.last.title == "Mock Github API tests"
+	end
+
+	fun test_search_issues is test do
+		var results = api.search_repo_issues("nitlang/nit", "foo", 1, 3)
+		assert results isa SearchResults
+		assert results.items.length == 3
+		assert results.items.first.as(Issue).title == "Introduction of contracts in Nit"
+		assert results.items.last.as(Issue).title == "Appel de méthodes abstraites non redéfinies"
+	end
+
+	fun test_get_labels is test do
+		var labels = api.get_repo_labels("nitlang/nit", 1, 3)
+		assert labels.length == 3
+		assert labels.first.name == "API"
+		assert labels.last.name == "NEP"
+	end
+
+	fun test_get_milestones is test do
+		var milestones = api.get_repo_milestones("nitlang/nit", 1, 3)
+		assert milestones.length == 3
+		assert milestones.first.title == "v1.0prealpha"
+		assert milestones.last.title == "nitdoc - Abstraction levels"
+	end
+
+	fun test_get_pulls is test do
+		var pulls = api.get_repo_pulls("nitlang/nit", 1, 3)
+		assert pulls.length == 3
+		assert pulls.first.title == "nitrpg: Move `nitrpg` to its own repository"
+		assert pulls.last.title == "Mock Github API tests"
+	end
 
 	fun test_get_branch is test do
-		var branch = api.load_branch(repo, "master")
+		var branch = api.get_branch("nitlang/nit", "master")
 		assert branch isa Branch
 		assert branch.name == "master"
 	end
 
-	# TODO branch commits
-
 	fun test_get_commit is test do
-		var commit = api.load_commit(repo, "64ce1f")
+		var commit = api.get_commit("nitlang/nit", "64ce1f")
 		assert commit isa Commit
 		assert commit.sha == "64ce1f587209024f5de46d06c70526a569ff537f"
 		# TODO other fields
 	end
 
+	fun test_get_commit_status is test do
+		var status = api.get_commit_status("nitlang/nit", "4e3c688d")
+		assert status isa CommitStatus
+		assert status.state == "failure"
+		assert status.sha == "4e3c688d2c4b875c00f206eb4c4b6f2c4f34c096"
+		assert status.total_count == 1
+
+		var sub = status.statuses.first
+		assert sub.state == "failure"
+		assert sub.description == "Merged pipeline on gitlab: failed"
+		assert sub.context == "gitlab-ci"
+
+		var repo = status.repository
+		assert repo isa Repo
+		assert repo.full_name == "nitlang/nit"
+	end
+
 	fun test_get_issue is test do
-		var issue = api.load_issue(repo, 1000)
+		var issue = api.get_issue("nitlang/nit", 1000)
 		assert issue isa Issue
 		assert issue.number == 1000
 		assert issue.title == "Raise nitc from the dead"
@@ -283,12 +309,23 @@ class TestGithubAPI
 		assert issue.is_pull_request
 	end
 
-	# TODO issue comments
-	# TODO issue events
+	fun test_get_issue_comments is test do
+		var comments = api.get_issue_comments("nitlang/nit", 1000, 1, 3)
+		assert comments.length == 3
+		assert comments.first.user.login == "R4PaSs"
+		assert comments.last.user.login == "xymus"
+	end
+
+	fun test_get_issue_events is test do
+		var events = api.get_issue_events("nitlang/nit", 1000, 1, 3)
+		assert events.length == 3
+		assert events.first.actor.login == "privat"
+		assert events.last.actor.login == "xymus"
+	end
 
 	fun test_get_pull is test do
-		var pull = api.load_pull(repo, 1000)
-		assert pull isa Issue
+		var pull = api.get_pull("nitlang/nit", 1000)
+		assert pull isa PullRequest
 		assert pull.number == 1000
 		assert pull.title == "Raise nitc from the dead"
 		assert pull.user.as(User).login == "privat"
@@ -299,21 +336,36 @@ class TestGithubAPI
 		assert pull.body == "Raise dead on `nitc`.\nIt's super effective...\n"
 	end
 
+	fun test_get_pull_comments is test do
+		var comments = api.get_pull_comments("nitlang/nit", 945, 1, 3)
+		assert comments.length == 2
+		assert comments.first.path == "src/modelize/modelize_property.nit"
+	end
+
+	fun test_get_pull_comment is test do
+		var comment = api.get_pull_comment("nitlang/nit", 21010363)
+		assert comment isa PullComment
+		assert comment.path == "src/modelize/modelize_property.nit"
+		assert comment.original_position == 26
+		assert comment.pull_number == 945
+		# TODO other fields
+	end
+
 	fun test_get_label is test do
-		var labl = api.load_label(repo, "ok_will_merge")
+		var labl = api.get_label("nitlang/nit", "ok_will_merge")
 		assert labl isa Label
 		assert labl.name == "ok_will_merge"
 	end
 
 	fun test_get_milestone is test do
-		var milestone = api.load_milestone(repo, 4)
+		var milestone = api.get_milestone("nitlang/nit", 4)
 		assert milestone isa Milestone
 		assert milestone.title == "v1.0prealpha"
 		# TODO other fields
 	end
 
 	fun test_get_issue_event is test do
-		var event = api.load_issue_event(repo, 199674194)
+		var event = api.get_issue_event("nitlang/nit", 199674194)
 		assert event isa IssueEvent
 		assert event.actor.login == "privat"
 		assert event.event == "labeled"
@@ -321,7 +373,7 @@ class TestGithubAPI
 	end
 
 	fun test_get_issue_comment is test do
-		var comment = api.load_issue_comment(repo, 6020149)
+		var comment = api.get_issue_comment("nitlang/nit", 6020149)
 		assert comment isa IssueComment
 		assert comment.user.login == "privat"
 		assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
@@ -329,18 +381,17 @@ class TestGithubAPI
 	end
 
 	fun test_get_comment is test do
-		var comment = api.load_commit_comment(repo, 8982707)
+		var comment = api.get_commit_comment("nitlang/nit", 8982707)
 		assert comment isa CommitComment
 		assert comment.user.login == "Morriar"
 		assert comment.body == "For testing purposes...\n"
 		assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
 	end
 
-	fun test_get_review_comments is test do
-		var comment = api.load_review_comment(repo, 21010363)
-		assert comment isa ReviewComment
-		assert comment.path == "src/modelize/modelize_property.nit"
-		assert comment.original_position == 26
-		assert comment.pull_number == 945
+	fun test_contributor_stats is test do
+		var stats = api.get_repo_contrib_stats("nitlang/nit")
+		assert stats.last.author.login == "privat"
+		assert stats.last.total == 4536
+		assert stats.last.weeks.length == 575
 	end
 end
