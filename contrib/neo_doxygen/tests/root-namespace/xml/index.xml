@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.8">
-  <compound refid="class_foo" kind="class"><name>Foo</name>
-  </compound>
-  <compound refid="_foo_8java" kind="file"><name>Foo.java</name>
-  </compound>
-  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
-  </compound>
-</doxygenindex>
