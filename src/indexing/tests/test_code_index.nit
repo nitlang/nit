@@ -15,37 +15,21 @@
 module test_code_index is test
 
 import code_index
-import frontend
+import test_frontend
 
 class TestCodeIndex
+	super TestModel
 	test
 
 	# CodeIndex used in tests
-	var test_index: CodeIndex is noinit
+	var test_index = new CodeIndex(test_context)
 
-	# Initialize test variables
-	#
-	# Must be called before test execution.
-	# FIXME should be before_all
-	fun build_test_env is before do
-		var test_path = "NIT_TESTING_PATH".environ.dirname
-		var test_src = test_path / "../../../tests/test_prog"
-
-		# build model
-		var toolcontext = new ToolContext
-		var model = new Model
-		var modelbuilder = new ModelBuilder(model, toolcontext)
-		var mmodules = modelbuilder.parse_full([test_src])
-		modelbuilder.run_phases
-		toolcontext.run_global_phases(mmodules)
-
-		# create index
-		var index = new CodeIndex(toolcontext)
-		for mmodule in mmodules do
-			index.index_mentity(mmodule)
+	redef fun build_test_env do
+		super
+		for mmodule in test_model.mmodules do
+			test_index.index_mentity(mmodule)
 		end
-		test_index = index
-		modelbuilder.paths.add test_src
+		test_builder.paths.add test_src
 	end
 
 	fun test_find1 is test do
