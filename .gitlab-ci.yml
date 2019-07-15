@@ -391,7 +391,8 @@ nitmetrics:
   dependencies:
     - build_more_tools
   script:
-    - nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src
+    - mkdir -p nitmetrics.out
+    - nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src | tee nitmetrics.out/metrics.txt
   artifacts:
     paths:
       - nitmetrics.out
