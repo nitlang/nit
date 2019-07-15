@@ -1,1 +1,1 @@
-<ul><li><a href="test_prog_58d_58dtest_prog" title="A test program with a fake model to check model tools.">test_prog</a> - <span class="synopsys nitdoc">A test program with a fake model to check model tools.</span></li></ul>
+<ul><li><a href="test_prog_58d_58dtest_prog" title="A test program with a fake model to check model tools.">test_prog</a> - <span class="synopsis nitdoc">A test program with a fake model to check model tools.</span></li></ul>

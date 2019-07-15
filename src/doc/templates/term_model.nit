@@ -35,7 +35,7 @@ redef class MDoc
 		return res.write_to_string
 	end
 
-	# Returns the synopsys formatted for the console
+	# Returns the synopsis formatted for the console
 	fun cs_short_comment(no_color: nullable Bool): String do
 		if no_color == null or not no_color then
 			return content.first.green

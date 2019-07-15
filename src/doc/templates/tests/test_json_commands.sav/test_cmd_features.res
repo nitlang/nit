@@ -20,7 +20,7 @@
 		"static_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}, {
 		"name": "_intelligence_bonus",
@@ -43,7 +43,7 @@
 		"static_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}, {
 		"name": "_strength_bonus",
@@ -66,7 +66,7 @@
 		"static_mtype": {
 			"name": "Int",
 			"synopsis": "Some services about Integers.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}, {
 		"name": "endurance_bonus",
@@ -89,7 +89,7 @@
 			"return_mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}
 	}, {
@@ -115,7 +115,7 @@
 				"mtype": {
 					"name": "Int",
 					"synopsis": "Some services about Integers.",
-					"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+					"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 				}
 			}],
 			"return_mtype": null
@@ -164,7 +164,7 @@
 			"return_mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}
 	}, {
@@ -190,7 +190,7 @@
 				"mtype": {
 					"name": "Int",
 					"synopsis": "Some services about Integers.",
-					"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+					"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 				}
 			}],
 			"return_mtype": null
@@ -216,7 +216,7 @@
 			"return_mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}
 	}, {
@@ -242,7 +242,7 @@
 				"mtype": {
 					"name": "Int",
 					"synopsis": "Some services about Integers.",
-					"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+					"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 				}
 			}],
 			"return_mtype": null

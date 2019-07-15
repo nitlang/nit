@@ -11,7 +11,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Object",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Root of everything.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Root of everything.</span>",
 	"modifiers": ["interface"],
 	"is_intro": true
 }
@@ -28,7 +28,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Int",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -45,7 +45,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Float",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Floats.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -62,7 +62,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Bool",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -79,7 +79,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$String",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Strings (there is no chars...).</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Strings (there is no chars...).</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -96,7 +96,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$List",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">List of things.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">List of things.</span>",
 	"modifiers": ["class"],
 	"is_intro": true,
 	"mparameters": [{
@@ -104,7 +104,7 @@
 		"mtype": {
 			"name": "nullable Object",
 			"synopsis": "Root of everything.",
-			"html_synopsis": "<span class=\"synopsys nitdoc\">Root of everything.</span>"
+			"html_synopsis": "<span class=\"synopsis nitdoc\">Root of everything.</span>"
 		}
 	}]
 }
@@ -121,7 +121,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Sys",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Sys</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Sys</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -141,7 +141,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog::test_prog$Sys",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Sys</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Sys</span>",
 	"modifiers": ["redef", "class"]
 }
 {
@@ -157,7 +157,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Career",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">A <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Career</span></span></span></code> gives a characteristic bonus or malus to the character.</span>",
 	"modifiers": ["abstract class"],
 	"is_intro": true
 }
@@ -174,7 +174,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Warrior",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Warriors are good for fighting.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Warriors are good for fighting.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -191,7 +191,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Magician",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Magicians know magic and how to use it.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Magicians know magic and how to use it.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -208,7 +208,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Alcoholic",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Alcoholics are good to nothing escept taking punches.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Alcoholics are good to nothing escept taking punches.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -225,7 +225,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Race",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>",
 	"modifiers": ["abstract class"],
 	"is_intro": true
 }
@@ -242,7 +242,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Human",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Humans are able to do everithing.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Humans are able to do everithing.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -259,7 +259,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Dwarf",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Dwarves make strong warriors.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Dwarves make strong warriors.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -279,7 +279,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog::combat$Dwarf",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Dwarves can be used as weapons.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Dwarves can be used as weapons.</span>",
 	"modifiers": ["redef", "class"]
 }
 {
@@ -295,7 +295,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Elf",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Elves make good magicians.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Elves make good magicians.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -312,7 +312,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Character",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters can be played by both the human or the machine.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Characters can be played by both the human or the machine.</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }
@@ -332,7 +332,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog::combat$Character",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Characters are now <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Comabatable</span></span></span></code></span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Characters are now <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_t\">Comabatable</span></span></span></code></span>",
 	"modifiers": ["redef", "class"]
 }
 {
@@ -348,7 +348,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Weapon",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be used to attack someone and inflict damage.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Something that can be used to attack someone and inflict damage.</span>",
 	"modifiers": ["interface"],
 	"is_intro": true
 }
@@ -365,7 +365,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Combatable",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Something that can be combatted, it can <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">attack</span></span></span></code> and <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_i\">defend</span></span></span></code>.</span>",
 	"modifiers": ["interface"],
 	"is_intro": true
 }
@@ -382,7 +382,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$Game",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">This is the interface you have to implement to use ure gaming platform.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">This is the interface you have to implement to use ure gaming platform.</span>",
 	"modifiers": ["interface"],
 	"is_intro": true
 }
@@ -399,7 +399,7 @@
 	"class_name": "MClassDef",
 	"full_name": "test_prog$MyGame",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">This is an example of how to implement the Game interface</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">This is an example of how to implement the Game interface</span>",
 	"modifiers": ["class"],
 	"is_intro": true
 }

@@ -8,7 +8,7 @@
 	"class_name": "MPackage",
 	"full_name": "test_prog",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Test program for model tools.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Test program for model tools.</span>",
 	"modifiers": ["package"],
 	"license": "Apache-2.0",
 	"tags": ["test", "game"]

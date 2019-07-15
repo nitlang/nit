@@ -12,7 +12,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::careers",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Careers of the game.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Careers of the game.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "character",
@@ -27,7 +27,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::character",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Characters are playable entity in the world.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Characters are playable entity in the world.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "combat",
@@ -42,7 +42,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::combat",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">COmbat interactions between characters.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">COmbat interactions between characters.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "excluded",
@@ -68,7 +68,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::game",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">A game abstraction for RPG.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">A game abstraction for RPG.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "game_examples",
@@ -95,7 +95,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::platform",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Declares base types allowed on the platform.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Declares base types allowed on the platform.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "races",
@@ -110,7 +110,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::races",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Races of the game.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Races of the game.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "rpg",
@@ -125,7 +125,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::rpg",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">A worlg RPG abstraction.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">A worlg RPG abstraction.</span>",
 		"modifiers": ["module"]
 	}, {
 		"name": "test_game",
@@ -152,7 +152,7 @@
 		"class_name": "MModule",
 		"full_name": "test_prog::test_prog",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">A test program with a fake model to check model tools.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">A test program with a fake model to check model tools.</span>",
 		"modifiers": ["module"]
 	}],
 	"page": null,

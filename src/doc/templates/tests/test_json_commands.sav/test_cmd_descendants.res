@@ -12,7 +12,7 @@
 		"class_name": "MClass",
 		"full_name": "test_prog::Alcoholic",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Alcoholics are good to nothing escept taking punches.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Alcoholics are good to nothing escept taking punches.</span>",
 		"modifiers": ["class"]
 	}, {
 		"name": "Magician",
@@ -27,7 +27,7 @@
 		"class_name": "MClass",
 		"full_name": "test_prog::Magician",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Magicians know magic and how to use it.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Magicians know magic and how to use it.</span>",
 		"modifiers": ["class"]
 	}, {
 		"name": "Warrior",
@@ -42,7 +42,7 @@
 		"class_name": "MClass",
 		"full_name": "test_prog::Warrior",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Warriors are good for fighting.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Warriors are good for fighting.</span>",
 		"modifiers": ["class"]
 	}],
 	"page": null,

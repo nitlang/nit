@@ -400,7 +400,7 @@ redef class MDoc
 	var html_synopsis: Writable is lazy do
 		var res = new Template
 		var syn = inline_proc.process(content.first)
-		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
+		res.add "<span class=\"synopsis nitdoc\">{syn}</span>"
 		return res
 	end
 
@@ -420,13 +420,13 @@ redef class MDoc
 		var decorator = markdown_proc.decorator.as(NitdocDecorator)
 		decorator.current_mdoc = self
 		res.add "<div class=\"nitdoc\">"
-		# do not use DocUnit as synopsys
+		# do not use DocUnit as synopsis
 		if not lines.is_empty then
 			if not lines.first.has_prefix("    ") and
 			   not lines.first.has_prefix("\t") then
-				# parse synopsys
+				# parse synopsis
 				var syn = inline_proc.process(lines.shift)
-				res.add "<h1 class=\"synopsys\">{syn}</h1>"
+				res.add "<h1 class=\"synopsis\">{syn}</h1>"
 			end
 		end
 		# check for annotations
@@ -565,7 +565,7 @@ redef class Model
 
 	# Get a markdown inline processor for Nitdoc comments.
 	#
-	# This processor is specificaly designed to inlinable doc elements like synopsys.
+	# This processor is specificaly designed to inlinable doc elements like synopsis.
 	var nitdoc_inline_processor: MarkdownProcessor is lazy, writable do
 		var proc = new MarkdownProcessor
 		proc.decorator = new InlineDecorator
