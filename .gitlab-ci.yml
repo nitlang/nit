@@ -38,7 +38,7 @@ after_script:
   - export CCACHE_DIR=$PWD/.ccache
   - ccache -s
   - du -sh .gradle || true
-  - git status --ignored
+  - git status --ignored || true
   - date
   - tail status.txt
 
@@ -289,6 +289,22 @@ build_oot:
     # Errors are somewhat expected
 
 # MISC ##############################################################
+
+check_requirments:
+  stage: more_test
+  image: debian:buster
+  before_script:
+    - date # cancel the default `before_script`, an empty list does nothing
+  script: # from the README
+    - apt-get update && apt-get install --yes --no-install-recommends build-essential ccache libgc-dev libunwind-dev pkg-config
+    - make
+    - bin/nitc examples/hello_world.nit
+    - ./hello_world
+    - . misc/nit_env.sh install
+    - nitc examples/hello_world.nit
+    - ./hello_world
+    - apt-get update && apt-get install --yes --no-install-recommends graphviz libcurl4-openssl-dev libevent-dev libmongoc-dev
+    - make more
 
 bootstrap_full:
   stage: more_test

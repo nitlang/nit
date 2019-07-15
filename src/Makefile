@@ -16,10 +16,10 @@
 
 NITCOPT=--semi-global
 OLDNITCOPT=--semi-global
-OBJS=nitc nitpick nit nitls nitunit nitpm nitx nitlight nitserial nitrestful nitpackage
+OBJS=nitc nitpick nit nitls nitunit nitx nitlight nitserial nitrestful nitpackage
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
-MOREOBJS=nitdoc nitweb nitcatalog nitmetrics nitpretty nitweb
+MOREOBJS=nitdoc nitweb nitcatalog nitmetrics nitpretty nitweb nitpm
 MORESRCS=$(patsubst %,%.nit,$(MOREOBJS))
 MOREBINS=$(patsubst %,../bin/%,$(MOREOBJS))
 DEPS=$(wildcard *.nit */*.nit) parser/parser.nit
