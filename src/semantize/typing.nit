@@ -297,7 +297,13 @@ private class TypeVisitor
 		return mclass.mclass_type
 	end
 
-	fun get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
+	# Construction of a specific callsite according to the current context.
+	# Three entry points exist to create a callsite based on knowledge.
+	# The `build_callsite_by_name` is a top entry point, the method find the mpropdefs to call by the name of this.
+	# see `build_callsite_by_property` and `build_callsite_by_propdef` for more detail.
+	# If you already know the mpropdef to call use directly the `get_method_by_propdef` method
+	# If you just know the mproperty use the `build_callsite_by_property` method to display error if no `mpropdef` is found in the context
+	fun build_callsite_by_name(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
 		var unsafe_type = self.anchor_to(recvtype)
 
@@ -327,23 +333,37 @@ private class TypeVisitor
 
 		assert mproperty isa MMethod
 
+		return build_callsite_by_property(node, recvtype, mproperty, recv_is_self)
+	end
+
+	# The `build_callsite_by_property` finds the mpropdefs to call by the `MMethod`.
+	# If the mpropdef is found in the context it builds a new `Callsite`.
+	fun build_callsite_by_property(node: ANode, recvtype: MType, mproperty: MMethod, recv_is_self: Bool): nullable CallSite
+	do
+		var unsafe_type = self.anchor_to(recvtype)
+
+		if recvtype isa MNullType then
+			var objclass = get_mclass(node, "Object")
+			if objclass == null then return null # Forward error
+			unsafe_type = objclass.mclass_type
+		end
 		# `null` only accepts some methods of object.
 		if recvtype isa MNullType and not mproperty.is_null_safe then
-			self.error(node, "Error: method `{name}` called on `null`.")
+			self.error(node, "Error: method `{mproperty.name}` called on `null`.")
 			return null
 		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
 			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
 		end
 
 		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel then
-			error(node, "Error: `{name}` is not a top-level method, thus need a receiver.")
+			error(node, "Error: `{mproperty.name}` is not a top-level method, thus need a receiver.")
 		end
 		if not recv_is_self and mproperty.is_toplevel then
-			error(node, "Error: cannot call `{name}`, a top-level method, with a receiver.")
+			error(node, "Error: cannot call `{mproperty.name}`, a top-level method, with a receiver.")
 		end
 
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
-			self.modelbuilder.error(node, "Error: method `{name}` is protected and can only accessed by `self`.")
+			self.modelbuilder.error(node, "Error: method `{mproperty.name}` is protected and can only accessed by `self`.")
 			return null
 		end
 
@@ -351,25 +371,31 @@ private class TypeVisitor
 		if info != null and self.mpropdef.mproperty.deprecation == null then
 			var mdoc = info.mdoc
 			if mdoc != null then
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{name}` is deprecated: {mdoc.content.first}")
+				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated: {mdoc.content.first}")
 			else
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{name}` is deprecated.")
+				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated.")
 			end
 		end
 
 		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
 		var mpropdef
 		if propdefs.length == 0 then
-			self.modelbuilder.error(node, "Type Error: no definition found for property `{name}` in `{unsafe_type}`.")
-			return null
+			self.modelbuilder.error(node, "Type Error: no definition found for property `{mproperty.name}` in `{unsafe_type}`.")
+			abort
+			#return null
 		else if propdefs.length == 1 then
 			mpropdef = propdefs.first
 		else
-			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{name}` in `{unsafe_type}`: {propdefs.join(" ")}")
+			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
 			mpropdef = mproperty.intro
 		end
 
+		return build_callsite_by_propdef(node, recvtype, mpropdef, recv_is_self)
+	end
 
+	# The `build_callsite_by_propdef` builds the callsite directly with the `mprodef` passed in argument.
+	fun build_callsite_by_propdef(node: ANode, recvtype: MType, mpropdef: MMethodDef, recv_is_self: Bool): nullable CallSite
+	do
 		var msignature = mpropdef.new_msignature or else mpropdef.msignature
 		if msignature == null then return null # skip error
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
@@ -386,16 +412,16 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mpropdef.mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
-	fun try_get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
+	fun try_build_callsite_by_name(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
 		var unsafe_type = self.anchor_to(recvtype)
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if mproperty == null then return null
-		return get_method(node, recvtype, name, recv_is_self)
+		return build_callsite_by_name(node, recvtype, name, recv_is_self)
 	end
 
 
@@ -1113,7 +1139,7 @@ redef class AReassignFormExpr
 
 		self.read_type = readtype
 
-		var callsite = v.get_method(self.n_assign_op, readtype, reassign_name, false)
+		var callsite = v.build_callsite_by_name(self.n_assign_op, readtype, reassign_name, false)
 		if callsite == null then return null # Skip error
 		self.reassign_callsite = callsite
 
@@ -1318,7 +1344,7 @@ redef class AForGroup
 		if objcla == null then return
 
 		# check iterator method
-		var itdef = v.get_method(self, mtype, "iterator", n_expr isa ASelfExpr)
+		var itdef = v.build_callsite_by_name(self, mtype, "iterator", n_expr isa ASelfExpr)
 		if itdef == null then
 			v.error(self, "Type Error: `for` expects a type providing an `iterator` method, got `{mtype}`.")
 			return
@@ -1375,31 +1401,31 @@ redef class AForGroup
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
-		var ikdef = v.get_method(self, ittype, "is_ok", false)
+		var ikdef = v.build_callsite_by_name(self, ittype, "is_ok", false)
 		if ikdef == null then
 			v.error(self, "Type Error: `for` expects a method `is_ok` in type `{ittype}`.")
 			return
 		end
 		self.method_is_ok = ikdef
 
-		var itemdef = v.get_method(self, ittype, "item", false)
+		var itemdef = v.build_callsite_by_name(self, ittype, "item", false)
 		if itemdef == null then
 			v.error(self, "Type Error: `for` expects a method `item` in type `{ittype}`.")
 			return
 		end
 		self.method_item = itemdef
 
-		var nextdef = v.get_method(self, ittype, "next", false)
+		var nextdef = v.build_callsite_by_name(self, ittype, "next", false)
 		if nextdef == null then
 			v.error(self, "Type Error: `for` expects a method `next` in type {ittype}.")
 			return
 		end
 		self.method_next = nextdef
 
-		self.method_finish = v.try_get_method(self, ittype, "finish", false)
+		self.method_finish = v.try_build_callsite_by_name(self, ittype, "finish", false)
 
 		if is_map then
-			var keydef = v.get_method(self, ittype, "key", false)
+			var keydef = v.build_callsite_by_name(self, ittype, "key", false)
 			if keydef == null then
 				v.error(self, "Type Error: `for` expects a method `key` in type `{ittype}`.")
 				return
@@ -1412,12 +1438,12 @@ redef class AForGroup
 			var vtype = variable.declared_type.as(not null)
 
 			if n_expr isa AOrangeExpr then
-				self.method_lt = v.get_method(self, vtype, "<", false)
+				self.method_lt = v.build_callsite_by_name(self, vtype, "<", false)
 			else
-				self.method_lt = v.get_method(self, vtype, "<=", false)
+				self.method_lt = v.build_callsite_by_name(self, vtype, "<=", false)
 			end
 
-			self.method_successor = v.get_method(self, vtype, "successor", false)
+			self.method_successor = v.build_callsite_by_name(self, vtype, "successor", false)
 		end
 	end
 end
@@ -1431,8 +1457,8 @@ redef class AWithExpr
 		var mtype = v.visit_expr(n_expr)
 		if mtype == null then return
 
-		method_start = v.get_method(self, mtype, "start", n_expr isa ASelfExpr)
-		method_finish = v.get_method(self, mtype, "finish", n_expr isa ASelfExpr)
+		method_start = v.build_callsite_by_name(self, mtype, "start", n_expr isa ASelfExpr)
+		method_finish = v.build_callsite_by_name(self, mtype, "finish", n_expr isa ASelfExpr)
 
 		v.visit_stmt(n_block)
 		self.mtype = n_block.mtype
@@ -1605,10 +1631,10 @@ redef class AugmentedStringFormExpr
 		var mclass = v.get_mclass(self, "String")
 		if mclass == null then return # Forward error
 		if is_bytestring then
-			to_bytes_with_copy = v.get_method(self, v.mmodule.c_string_type, "to_bytes_with_copy", false)
+			to_bytes_with_copy = v.build_callsite_by_name(self, v.mmodule.c_string_type, "to_bytes_with_copy", false)
 			mclass = v.get_mclass(self, "Bytes")
 		else if is_re then
-			to_re = v.get_method(self, mclass.mclass_type, "to_re", false)
+			to_re = v.build_callsite_by_name(self, mclass.mclass_type, "to_re", false)
 			for i in suffix.chars do
 				mclass = v.get_mclass(self, "Regex")
 				if mclass == null then
@@ -1618,13 +1644,13 @@ redef class AugmentedStringFormExpr
 				var service = ""
 				if i == 'i' then
 					service = "ignore_case="
-					ignore_case = v.get_method(self, mclass.mclass_type, service, false)
+					ignore_case = v.build_callsite_by_name(self, mclass.mclass_type, service, false)
 				else if i == 'm' then
 					service = "newline="
-					newline = v.get_method(self, mclass.mclass_type, service, false)
+					newline = v.build_callsite_by_name(self, mclass.mclass_type, service, false)
 				else if i == 'b' then
 					service = "extended="
-					extended = v.get_method(self, mclass.mclass_type, service, false)
+					extended = v.build_callsite_by_name(self, mclass.mclass_type, service, false)
 				else
 					v.error(self, "Type Error: Unrecognized suffix {i} in prefixed Regex")
 					abort
@@ -1718,8 +1744,8 @@ redef class AArrayExpr
 		if mclass == null then return # Forward error
 		var array_mtype = mclass.get_mtype([mtype])
 
-		with_capacity_callsite = v.get_method(self, array_mtype, "with_capacity", false)
-		push_callsite = v.get_method(self, array_mtype, "push", false)
+		with_capacity_callsite = v.build_callsite_by_name(self, array_mtype, "with_capacity", false)
+		push_callsite = v.build_callsite_by_name(self, array_mtype, "push", false)
 
 		self.mtype = array_mtype
 	end
@@ -1753,9 +1779,9 @@ redef class ARangeExpr
 		# get the constructor
 		var callsite
 		if self isa ACrangeExpr then
-			callsite = v.get_method(self, mtype, "init", false)
+			callsite = v.build_callsite_by_name(self, mtype, "init", false)
 		else if self isa AOrangeExpr then
-			callsite = v.get_method(self, mtype, "without_last", false)
+			callsite = v.build_callsite_by_name(self, mtype, "without_last", false)
 		else
 			abort
 		end
@@ -1930,7 +1956,7 @@ redef class ASendExpr
 				var systype = sysclass.mclass_type
 				mproperty = v.try_get_mproperty_by_name2(node, systype, name)
 				if mproperty != null then
-					callsite = v.get_method(node, systype, name, false)
+					callsite = v.build_callsite_by_name(node, systype, name, false)
 					if callsite == null then return # Forward error
 					# Update information, we are looking at `sys` now, not `self`
 					nrecv.is_sys = true
@@ -1942,7 +1968,7 @@ redef class ASendExpr
 		end
 		if callsite == null then
 			# If still nothing, just exit
-			callsite = v.get_method(node, recvtype, name, nrecv isa ASelfExpr)
+			callsite = v.build_callsite_by_name(node, recvtype, name, nrecv isa ASelfExpr)
 			if callsite == null then return
 		end
 
@@ -2076,7 +2102,7 @@ redef class ASendReassignFormExpr
 		if recvtype == null then return # Forward error
 
 		var for_self = self.n_expr isa ASelfExpr
-		var callsite = v.get_method(node, recvtype, name, for_self)
+		var callsite = v.build_callsite_by_name(node, recvtype, name, for_self)
 
 		if callsite == null then return
 		self.callsite = callsite
@@ -2091,7 +2117,7 @@ redef class ASendReassignFormExpr
 			return
 		end
 
-		var wcallsite = v.get_method(node, recvtype, name + "=", self.n_expr isa ASelfExpr)
+		var wcallsite = v.build_callsite_by_name(node, recvtype, name + "=", self.n_expr isa ASelfExpr)
 		if wcallsite == null then return
 		self.write_callsite = wcallsite
 
@@ -2314,7 +2340,7 @@ redef class ANewExpr
 			return
 		end
 
-		var callsite = v.get_method(node, recvtype, name, false)
+		var callsite = v.build_callsite_by_name(node, recvtype, name, false)
 		if callsite == null then return
 
 		if not callsite.mproperty.is_new then

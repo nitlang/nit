@@ -38,7 +38,7 @@
 		"class_name": "MMethodDef",
 		"full_name": "test_prog$Character$total_strengh",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">The actual strength of the character.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">The actual strength of the character.</span>",
 		"modifiers": ["fun"],
 		"is_intro": true,
 		"msignature": {
@@ -47,7 +47,7 @@
 			"return_mtype": {
 				"name": "Int",
 				"synopsis": "Some services about Integers.",
-				"html_synopsis": "<span class=\"synopsys nitdoc\">Some services about Integers.</span>"
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 			}
 		}
 	}],

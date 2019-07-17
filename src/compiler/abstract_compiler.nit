@@ -196,7 +196,7 @@ class MakefileToolchain
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
 
-		if not toolcontext.check_errors then return
+		toolcontext.check_errors
 
 		# Execute the Makefile
 
@@ -465,6 +465,13 @@ ifneq ($(findstring MINGW64,$(uname_S)),)
 	CFLAGS += -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
 endif
 
+# Add the compilation dir to the Java CLASSPATH
+ifeq ($(CLASSPATH),)
+	CLASSPATH := .
+else
+	CLASSPATH := $(CLASSPATH):.
+endif
+
 """
 
 		makefile.write("all: {outpath}\n")
@@ -528,8 +535,7 @@ endif
 		var java_files = new Array[ExternFile]
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
-			var ff = f.filename.basename
-			makefile.write("{o}: {ff}\n")
+			makefile.write("{o}: {f.filename}\n")
 			makefile.write("\t{f.makefile_rule_content}\n\n")
 			dep_rules.add(f.makefile_rule_name)
 
@@ -712,7 +718,7 @@ abstract class AbstractCompiler
 		stream.write("const char* get_nit_name(register const char* procname, register unsigned int len);\n")
 		stream.close
 
-		extern_bodies.add(new ExternCFile("{compile_dir}/c_functions_hash.c", ""))
+		extern_bodies.add(new ExternCFile("c_functions_hash.c", ""))
 	end
 
 	# Compile C headers

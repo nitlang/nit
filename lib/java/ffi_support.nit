@@ -21,6 +21,7 @@ module ffi_support is
 	cflags "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
 	ldflags "-L $(JNI_LIB_PATH) -ljvm"
 	new_annotation extra_java_files
+	extra_java_files "nit.app.NitObject"
 end
 
 import jvm

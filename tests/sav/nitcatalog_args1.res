@@ -30,7 +30,7 @@
 <div class="content"><div style="float: left">
 	<h1 class="package-name">test_prog&nbsp;-&nbsp;</h1>
 </div>
-<div class="nitdoc"><h1 class="synopsys">Test program for model tools.</h1><p>This program creates a fake model that can be used to test tools like:</p>
+<div class="nitdoc"><h1 class="synopsis">Test program for model tools.</h1><p>This program creates a fake model that can be used to test tools like:</p>
 <ul>
 <li><code class="nitcode"><span class="nitcode"><span class="line"><span class="nc_i">nitdoc</span></span></span></code></li>
 <li><code class="nitcode"><span class="nitcode"><span class="line"><span class="nc_i">nitmetrics</span></span></span></code></li>
@@ -40,28 +40,28 @@
 <p>An image:</p>
 <p><img src="../res/c94d8a73ccfe143ebde7599e88f5f5ce.png" alt="Tinks3D"/></p>
 </div><h2>Content</h2><ul>
-<li><strong>test_prog</strong>: <span class="synopsys nitdoc">Test program for model tools.</span> (test_prog)<ul>
+<li><strong>test_prog</strong>: <span class="synopsis nitdoc">Test program for model tools.</span> (test_prog)<ul>
 <li><strong>examples</strong> (test_prog/examples)<ul>
 <li><strong>game_examples</strong> (test_prog/examples/game_examples.nit)</li>
 </ul>
 </li>
-<li><strong>game</strong>: <span class="synopsys nitdoc">Gaming group</span> (test_prog/game)<ul>
-<li><strong>game</strong>: <span class="synopsys nitdoc">A game abstraction for RPG.</span> (test_prog/game/game.nit)</li>
+<li><strong>game</strong>: <span class="synopsis nitdoc">Gaming group</span> (test_prog/game)<ul>
+<li><strong>game</strong>: <span class="synopsis nitdoc">A game abstraction for RPG.</span> (test_prog/game/game.nit)</li>
 </ul>
 </li>
-<li><strong>platform</strong>: <span class="synopsys nitdoc">Fictive Crappy Platform.</span> (test_prog/platform)<ul>
-<li><strong>platform</strong>: <span class="synopsys nitdoc">Declares base types allowed on the platform.</span> (test_prog/platform/platform.nit)</li>
+<li><strong>platform</strong>: <span class="synopsis nitdoc">Fictive Crappy Platform.</span> (test_prog/platform)<ul>
+<li><strong>platform</strong>: <span class="synopsis nitdoc">Declares base types allowed on the platform.</span> (test_prog/platform/platform.nit)</li>
 </ul>
 </li>
-<li><strong>rpg</strong>: <span class="synopsys nitdoc">Role Playing Game group</span> (test_prog/rpg)<ul>
-<li><strong>careers</strong>: <span class="synopsys nitdoc">Careers of the game.</span> (test_prog/rpg/careers.nit)</li>
-<li><strong>character</strong>: <span class="synopsys nitdoc">Characters are playable entity in the world.</span> (test_prog/rpg/character.nit)</li>
-<li><strong>combat</strong>: <span class="synopsys nitdoc">COmbat interactions between characters.</span> (test_prog/rpg/combat.nit)</li>
-<li><strong>races</strong>: <span class="synopsys nitdoc">Races of the game.</span> (test_prog/rpg/races.nit)</li>
-<li><strong>rpg</strong>: <span class="synopsys nitdoc">A worlg RPG abstraction.</span> (test_prog/rpg/rpg.nit)</li>
+<li><strong>rpg</strong>: <span class="synopsis nitdoc">Role Playing Game group</span> (test_prog/rpg)<ul>
+<li><strong>careers</strong>: <span class="synopsis nitdoc">Careers of the game.</span> (test_prog/rpg/careers.nit)</li>
+<li><strong>character</strong>: <span class="synopsis nitdoc">Characters are playable entity in the world.</span> (test_prog/rpg/character.nit)</li>
+<li><strong>combat</strong>: <span class="synopsis nitdoc">COmbat interactions between characters.</span> (test_prog/rpg/combat.nit)</li>
+<li><strong>races</strong>: <span class="synopsis nitdoc">Races of the game.</span> (test_prog/rpg/races.nit)</li>
+<li><strong>rpg</strong>: <span class="synopsis nitdoc">A worlg RPG abstraction.</span> (test_prog/rpg/rpg.nit)</li>
 </ul>
 </li>
-<li><strong>test_prog</strong>: <span class="synopsys nitdoc">A test program with a fake model to check model tools.</span> (test_prog/test_prog.nit)</li>
+<li><strong>test_prog</strong>: <span class="synopsis nitdoc">A test program with a fake model to check model tools.</span> (test_prog/test_prog.nit)</li>
 <li><strong>tests</strong> (test_prog/tests)<ul>
 <li><strong>test_game</strong> (test_prog/tests/test_game.nit)</li>
 </ul>

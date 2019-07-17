@@ -15,90 +15,77 @@
 # Query the Github PR API to perform a merge
 module github_merge
 
-import github::github_curl
+import github::api
 import template
 import config
 
-redef class Object
-	# Factorize cast
-	fun json_as_a: JsonArray do return self.as(JsonArray)
-	# Factorize cast
-	fun json_as_map: JsonObject do return self.as(JsonObject)
-end
+redef class GithubAPI
 
-redef class GithubCurl
-	# Get a given pull request (PR)
-	fun getpr(repo: String, number: Int): nullable JsonObject
-	do
-		var ir = get_and_check("https://api.github.com/repos/{repo}/issues/{number}")
-		var irm = ir.json_as_map
-		if not irm.has_key("pull_request") then return null
-		var pr = get_and_check("https://api.github.com/repos/{repo}/pulls/{number}")
-		var prm = pr.json_as_map
-		var sha = prm["head"].json_as_map["sha"].to_s
-		var statuses = get_and_check("https://api.github.com/repos/{repo}/commits/{sha}/status")
-		statuses = statuses.json_as_map
-		prm["statuses"] = statuses
-		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
-		var mergeable = prm["mergeable"]
-		if mergeable != null then
-			print "\tmergeable: {mergeable.to_s}"
-		else
-			print "\tmergeable: unknown"
-		end
-		var state = statuses["state"]
-		if state == null then
-			print "\tstatus: not tested"
-		else
-			print "\tstatus: {state}"
-			var sts = statuses["statuses"].json_as_a
-			for st in sts do
-				st = st.json_as_map
-				var ctx = st["context"].to_s
-				state = st["state"].to_s
-				print "\tstatus {ctx}: {state}"
-				prm["status-{ctx}"] = state
-			end
-		end
-		return prm
+	# Get a given pull request and its state
+	private fun get_pull_with_state(repo: String, number: Int): nullable PullState do
+		var pull = get_pull(repo, number)
+		if not pull isa PullRequest then return null
+
+		var statuses = get_commit_status(repo, pull.head.sha)
+		if not statuses isa CommitStatus then return null
+
+		return new PullState(pull, statuses)
 	end
 
 	# Get reviewers of a PR
-	fun getrev(repo: String, pr: JsonObject): Array[String]
-	do
-		var number = pr["number"].as(Int)
-		var user = pr["user"].json_as_map["login"].as(String)
-		var comments = new Array[nullable Object]
-		comments.add_all(get_and_check("https://api.github.com/repos/{repo}/issues/{number}/comments").json_as_a)
-		comments.add_all(get_and_check("https://api.github.com/repos/{repo}/pulls/{number}/comments").json_as_a)
+	private fun get_pull_reviewers(repo: String, pull: PullRequest): Array[String] do
+		var user = pull.user.as(not null).login
+
+		var comments = new Array[Comment]
+		comments.add_all(get_issue_comments(repo, pull.number))
+		comments.add_all(get_pull_comments(repo, pull.number))
+
 		var logins = new Array[String]
-		for c in comments do
-			var cm = c.json_as_map
-			var l = cm["user"].json_as_map["login"]
-			assert l isa String
-			if l != user and not logins.has(l) then logins.add(l)
+		for comment in comments do
+			var login = comment.user.login
+			if login != user and not logins.has(login) then logins.add(login)
 		end
 		var res = new Array[String]
-		for l in logins do
-			var u = get_and_check("https://api.github.com/users/{l}").json_as_map
-			if not u.has_key("name") or u["name"] == null or not u.has_key("email")or u["email"] == null then
-				print "No public name/email for user {l}"
+		for login in logins do
+			var rev = get_user(login)
+			if rev == null or rev.name == null or rev.email == null then
+				print "No public name/email for user {login}"
 				continue
 			end
-			var r = "{u["name"].to_s} <{u["email"].to_s}>"
-			res.add r
-
+			res.add "{rev.name or else "N/A"} <{rev.email or else "N/A"}>"
 		end
 		return res
 	end
+end
 
+private class PullState
+	var pull: PullRequest
+	var status: CommitStatus
+
+	fun pretty: String do
+		var s = new Buffer
+		s.append "{pull.title}: by {pull.user.as(not null).login} (# {pull.number})\n"
+		s.append "\tmergeable: {pull.mergeable or else "unknown"}\n"
+		s.append "\tstatus: {status.state or else "not tested"}\n"
+		for sub in status.statuses do
+			s.append "\tstatus {sub.context or else "N/A"}: {sub.state or else "N/A"}\n"
+		end
+		return s.write_to_string
+	end
+
+	fun state_for(context: String): nullable String do
+		for sub in status.statuses do
+			if sub.context == context then return sub.state
+		end
+		return null
+	end
 end
 
 if "NIT_TESTING".environ == "true" then exit 0
 
 var opt_repo = new OptionString("Repository (e.g. nitlang/nit)", "-r", "--repo")
 var opt_auth = new OptionString("OAuth token", "--auth")
-var opt_query = new OptionString("Query to get issues (e.g. label=ok_will_merge)", "-q", "--query")
+var opt_query = new OptionString("Query to get issues (e.g. label:ok_will_merge)", "-q", "--query")
 var opt_keepgoing = new OptionBool("Skip merge conflicts", "-k", "--keep-going")
 var opt_all = new OptionBool("Merge all", "-a", "--all")
 var opt_status = new OptionArray("A status context that must be \"success\" (e.g. default)", "--status")
@@ -131,23 +118,32 @@ var repo = opt_repo.value or else "nitlang/nit"
 
 var query = opt_query.value or else "labels=ok_will_merge"
 
-var curl = new GithubCurl(auth, "Merge-o-matic (nitlang/nit)")
+var api = new GithubAPI(auth, "Merge-o-matic (nitlang/nit)")
 
 if args.is_empty then
 	# Without args, list `ok_will_merge`
-	var x = curl.get_and_check("https://api.github.com/repos/{repo}/issues?{query}")
+	var issues = api.search_repo_issues(repo, query)
+	if issues == null or issues.items.is_empty then
+		print "No issues for query `{query}`."
+		exit 1
+	end
 	var list = new Array[String]
-	for y in x.json_as_a do
-		var number = y.json_as_map["number"].as(Int)
-		var pr = curl.getpr(repo, number)
-		if pr == null then continue
+	for issue in issues.as(not null).items do
+		if not issue isa Issue then continue
+		if not issue.is_pull_request then continue
+
+		var state = api.get_pull_with_state(repo, issue.number)
+		if not state isa PullState then continue
+
+		print state.pretty
 		for ctx in opt_status.value do
-			if pr.get_or_null("status-{ctx}") != "success" then
+			if state.state_for(ctx) != "success" then
 				print "No \"success\" for {ctx}. Skip."
-				continue label
+				# continue label
 			end
 		end
-		list.add number.to_s
+
+		list.add issue.number.to_s
 	end label
 
 	if not opt_all.value then return
@@ -157,23 +153,24 @@ end
 for arg in args do
 	# With a arg, merge the PR
 	var number = arg.to_i
-	var pr = curl.getpr(repo, number)
-	if pr == null then
+	var pull = api.get_pull(repo, number)
+	if pull == null then
 		print "Not a PR: {number}"
 		return
 	end
-	var revs = curl.getrev(repo, pr)
+
+	var revs = api.get_pull_reviewers(repo, pull)
 
 	var mergemsg = new Template
-	mergemsg.add "Merge: {pr["title"].to_s}\n\n"
-	mergemsg.add "{pr["body"].to_s}\n\n"
-	mergemsg.add "Pull-Request: #{pr["number"].to_s}\n"
-	for r in revs do
-		mergemsg.add "Reviewed-by: {r}\n"
+	mergemsg.add "Merge: {pull.title}\n\n"
+	mergemsg.add "{pull.body or else "N/A"}\n\n"
+	mergemsg.add "Pull-Request: #{pull.number}\n"
+	for rev in revs do
+		mergemsg.add "Reviewed-by: {rev}\n"
 	end
 	mergemsg.write_to_file("mergemsg")
 
-	var sha = pr["head"].json_as_map["sha"].as(String)
+	var sha = pull.head.sha
 	if system("git show -s --pretty=format:%h {sha}") != 0 then
 		print "Commit {sha} not in local repository; did you fetch github?"
 		return

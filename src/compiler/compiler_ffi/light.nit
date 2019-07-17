@@ -29,7 +29,7 @@ redef class MModule
 		return v.compiler.modelbuilder.mmodule2node(self)
 	end
 
-	redef fun finalize_ffi(compiler: AbstractCompiler)
+	redef fun finalize_ffi(compiler)
 	do
 		if not uses_ffi then return
 
@@ -53,7 +53,7 @@ extern void nitni_global_ref_decr(void*);
 		nitni_ccu.write_as_nitni(self, v.compiler.toolchain.compile_dir)
 
 		for file in nitni_ccu.files do
-			var f = new ExternCFile(file, cflags)
+			var f = new ExternCFile(file.basename, cflags)
 			f.pkgconfigs.add_all pkgconfigs
 			v.compiler.extern_bodies.add(f)
 		end

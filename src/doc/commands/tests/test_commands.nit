@@ -16,50 +16,9 @@
 module test_commands
 
 import commands_base
-import frontend
-import frontend::parse_examples
+import test_frontend
 
 # Nitunit test suite specific to commands
 class TestCommands
-
-	# The path to the testunit being executed
-	#
-	# Used to retrieve the path to sources to compile.
-	var test_path: String = "NIT_TESTING_PATH".environ.dirname is lazy
-
-	# Test program to compile
-	#
-	# Default is `$NIT_DIR/tests/test_prog`.
-	var test_src: String = test_path / "../../../../tests/test_prog" is lazy
-
-	# Model used for tests
-	var test_model: Model is noinit
-
-	# ModelBuilder used for tests
-	var test_builder: ModelBuilder is noinit
-
-	# Mainmodule used for tests
-	var test_main: MModule is noinit
-
-	# Initialize test variables
-	#
-	# Must be called before test execution.
-	# FIXME should be before_all
-	fun build_test_env is before do
-		var toolcontext = new ToolContext
-
-		# build model
-		var model = new Model
-		var modelbuilder = new ModelBuilder(model, toolcontext)
-		var mmodules = modelbuilder.parse_full([test_src])
-
-		# process
-		modelbuilder.run_phases
-		toolcontext.run_global_phases(mmodules)
-		var mainmodule = toolcontext.make_main_module(mmodules)
-
-		test_main = mainmodule
-		test_model = model
-		test_builder = modelbuilder
-	end
+	super TestModel
 end

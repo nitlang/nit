@@ -14,7 +14,7 @@
 
 # Android service support for _app.nit_ centered around the class `Service`
 module service is
-	extra_java_files "NitService.java"
+	extra_java_files "nit.app.NitService"
 	android_manifest_application """<service android:name="nit.app.NitService"></service>"""
 end
 
@@ -24,7 +24,7 @@ in "C" `{
 	// Nit's App running instance, declared in `nit_activity`
 	extern App global_app;
 
-	JNIEXPORT jint JNICALL Java_nit_app_NitService_nitNewService
+	JNIEXPORT jlong JNICALL Java_nit_app_NitService_nitNewService
 		(JNIEnv *env, jobject java_service)
 	{
 		// Pin a ref to the Java service in the Java GC
@@ -39,23 +39,23 @@ in "C" `{
 
 		Service_incr_ref(nit_service);
 
-		return (jint)(void*)nit_service;
+		return (jlong)(void*)nit_service;
 	}
 
 	JNIEXPORT jint JNICALL Java_nit_app_NitService_nitOnStartCommand
-		(JNIEnv *env, jobject java_service, jint nit_service, jobject intent, jint flags, jint id)
+		(JNIEnv *env, jobject java_service, jlong nit_service, jobject intent, jint flags, jint id)
 	{
 		return Service_on_start_command((Service)nit_service, intent, flags, id);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitService_nitOnCreate
-		(JNIEnv *env, jobject java_service, jint nit_service)
+		(JNIEnv *env, jobject java_service, jlong nit_service)
 	{
 		Service_on_create((Service)nit_service);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitService_nitOnDestroy
-		(JNIEnv *env, jobject java_service, jint nit_service)
+		(JNIEnv *env, jobject java_service, jlong nit_service)
 	{
 		Service_on_destroy((Service)nit_service);
 

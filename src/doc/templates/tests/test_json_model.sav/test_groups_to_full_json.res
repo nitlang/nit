@@ -8,7 +8,7 @@
 	"class_name": "MGroup",
 	"full_name": "test_prog>",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Test program for model tools.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Test program for model tools.</span>",
 	"modifiers": ["group"]
 }
 {
@@ -37,7 +37,7 @@
 	"class_name": "MGroup",
 	"full_name": "test_prog>game>",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Gaming group</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Gaming group</span>",
 	"modifiers": ["group"]
 }
 {
@@ -66,7 +66,7 @@
 	"class_name": "MGroup",
 	"full_name": "test_prog>platform>",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Fictive Crappy Platform.</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Fictive Crappy Platform.</span>",
 	"modifiers": ["group"]
 }
 {
@@ -82,7 +82,7 @@
 	"class_name": "MGroup",
 	"full_name": "test_prog>rpg>",
 	"visibility": "public",
-	"html_synopsis": "<span class=\"synopsys nitdoc\">Role Playing Game group</span>",
+	"html_synopsis": "<span class=\"synopsis nitdoc\">Role Playing Game group</span>",
 	"modifiers": ["group"]
 }
 {

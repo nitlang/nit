@@ -38,7 +38,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_all: HashMap[JavaString, JavaObject] import HashMap[JavaString, JavaObject],
 		HashMap[JavaString, JavaObject].[]= in "Java" `{
 		Map<String, ?> java_map = null;
-		int nit_hashmap = new_HashMap_of_JavaString_JavaObject();
+		nit.app.NitObject nit_hashmap = new_HashMap_of_JavaString_JavaObject();
 		try {
 			java_map = self.getAll();
 		} catch (NullPointerException e) {

@@ -15,46 +15,30 @@
 module test_json_model is test
 
 import json_model
-import frontend
+import test_frontend
 
 class TestModelSerialization
+	super TestModel
 	test
-
-	var suite_path: String = "NIT_TESTING_PATH".environ
-	var lib_path: String = "{suite_path.dirname}/../../../../tests/test_prog"
-
-	var mainmodule: MModule is noinit
-
-	private var model: Model do
-		var toolcontext = new ToolContext
-		var model = new Model
-		var mbuilder = new ModelBuilder(model, toolcontext)
-		var mmodules = mbuilder.parse_full([lib_path])
-		if mmodules.is_empty then return model
-		mbuilder.run_phases
-		toolcontext.run_global_phases(mmodules)
-		mainmodule = mmodules.first
-		return model
-	end
 
 	fun test_refs_to_full_json is test do
 		var mentities = new Array[MEntity]
-		mentities.add model.mpackages.first
-		mentities.add model.mmodules.first
-		mentities.add model.mclasses.first
+		mentities.add test_model.mpackages.first
+		mentities.add test_model.mmodules.first
+		mentities.add test_model.mclasses.first
 		for mentity in mentities do
 			print ((new MEntityRef(mentity)).serialize_to_json(pretty = true, plain = true))
 		end
 	end
 
 	fun test_packages_to_full_json is test do
-		for mentity in model.mpackages do
+		for mentity in test_model.mpackages do
 			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_groups_to_full_json is test do
-		for mpackage in model.mpackages do
+		for mpackage in test_model.mpackages do
 			for mentity in mpackage.mgroups do
 				print mentity.serialize_to_json(pretty = true, plain = true)
 			end
@@ -62,19 +46,19 @@ class TestModelSerialization
 	end
 
 	fun test_modules_to_full_json is test do
-		for mentity in model.mmodules do
+		for mentity in test_model.mmodules do
 			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_classes_to_full_json is test do
-		for mentity in model.mclasses do
+		for mentity in test_model.mclasses do
 			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_classdefs_to_full_json is test do
-		for mclass in model.mclasses do
+		for mclass in test_model.mclasses do
 			for mentity in mclass.mclassdefs do
 				print mentity.serialize_to_json(pretty = true, plain = true)
 			end
@@ -82,13 +66,13 @@ class TestModelSerialization
 	end
 
 	fun test_props_to_full_json is test do
-		for mentity in model.mproperties do
+		for mentity in test_model.mproperties do
 			print mentity.serialize_to_json(pretty = true, plain = true)
 		end
 	end
 
 	fun test_propdefs_to_full_json is test do
-		for mprop in model.mproperties do
+		for mprop in test_model.mproperties do
 			for mentity in mprop.mpropdefs do
 				print mentity.serialize_to_json(pretty = true, plain = true)
 			end

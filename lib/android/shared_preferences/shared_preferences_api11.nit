@@ -32,7 +32,7 @@ redef extern class NativeSharedPreferences
 		HashSet[JavaString].add in "Java" `{
 		Set<String> def_value = new HashSet<String>();
 		Set<String> java_set = self.getStringSet(key, def_value);
-		int nit_hashset = new_HashSet_of_JavaString();
+		nit.app.NitObject nit_hashset = new_HashSet_of_JavaString();
 
 		for (String element: java_set)
 			HashSet_of_JavaString_add(nit_hashset, element);
@@ -47,7 +47,7 @@ redef extern class NativeSharedPreferencesEditor
 		import HashSet[JavaString], HashSet[JavaString].iterator, Iterator[JavaString].is_ok,
 		Iterator[JavaString].item, Iterator[JavaString].next in "Java" `{
 		Set<String> java_set = new HashSet<String>();
-		int itr = HashSet_of_JavaString_iterator(value);
+		nit.app.NitObject itr = HashSet_of_JavaString_iterator(value);
 
 		while (Iterator_of_JavaString_is_ok(itr)) {
 			java_set.add(Iterator_of_JavaString_item(itr));

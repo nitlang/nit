@@ -7,11 +7,11 @@ Warning: no source file for `excluded`
   * has_package 1
   * has_readme 1
   * md_lines 12
-  * nb_section 0
-  * md_blocks 14
-  * BlockParagraph 4
-  * BlockUnorderedList 1
-  * BlockListItem 4
-  * SpanCode 4
-  * Image 1
+  * MdDocument 1
+  * MdParagraph 8
+  * MdText 6
+  * MdUnorderedList 1
+  * MdListItem 4
+  * MdCode 4
+  * MdImage 1
 readme.csv

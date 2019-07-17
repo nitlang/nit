@@ -29,6 +29,7 @@ before_script:
   - git config --add github.oauthtoken "$GITHUB_OAUTHTOKEN" # needed for github api rate limit
   - pwd
   - ccache -s
+  - ccache -z
   - ccache -M 500M
   - du -sh .gradle || true
   - type -a nitc nitdoc || true # is there some nit tools?
@@ -38,7 +39,7 @@ after_script:
   - export CCACHE_DIR=$PWD/.ccache
   - ccache -s
   - du -sh .gradle || true
-  - git status --ignored
+  - git status --ignored || true
   - date
   - tail status.txt
 
@@ -51,7 +52,7 @@ sanity_checks:
     - misc/jenkins/checksignedoffby.sh | tee -a status.txt
     - misc/jenkins/checklicense.sh | tee -a status.txt
 
-build_tools:
+build_tools: &build_tools
   stage: build
   script:
     - make 2>> status.txt
@@ -65,7 +66,7 @@ build_tools:
       - src/nitc_0
     when: always
 
-test_some:
+test_some: &test_some
   stage: test
   dependencies:
     - build_tools
@@ -77,7 +78,7 @@ test_some:
   artifacts:
     paths:
       - tests/errlist
-      - tests/*.xml
+      - tests/*.xml*
     when: always
     reports:
       junit: tests/*.xml
@@ -89,7 +90,9 @@ nitunit_some:
   script:
     - git diff --name-only origin/master..HEAD -- "*.nit" "*.res" "README.*" | grep -v "^tests/" > list0.txt || true
     - xargs nitls -pP < list0.txt > list.txt
+    - test -s list.txt || exit 0
     - xargs nitunit < list.txt
+    - junit2html nitunit.xml
   artifacts:
     paths:
       - nitunit.xml*
@@ -119,11 +122,12 @@ basic_android:
 
 # TEST FULL #########################################################
 
-test_full_nitcs:
+test_full_nitcs: &test_full_nitcs
   stage: more_test
   dependencies:
     - build_tools
   script:
+    - share/android-bdwgc/setup.sh
     - cd tests
     - ./testfull.sh | tee log.txt
     - grep -v '=>' log.txt > ../status.txt || true
@@ -220,6 +224,7 @@ nitunit_lib:
     - xargs nitunit -v < list.txt| tee log.txt
     - grep -e KO log.txt > status.txt || true
     - tail -3 log.txt >> status.txt
+    - junit2html nitunit.xml
   artifacts:
     paths:
       - nitunit.xml*
@@ -237,6 +242,7 @@ nitunit_src:
     - xargs nitunit -v < list.txt| tee log.txt
     - grep -e KO log.txt > status.txt || true
     - tail -3 log.txt >> status.txt
+    - junit2html nitunit.xml
   artifacts:
     paths:
       - nitunit.xml*
@@ -286,6 +292,22 @@ build_oot:
 
 # MISC ##############################################################
 
+check_requirments:
+  stage: more_test
+  image: debian:buster
+  before_script:
+    - date # cancel the default `before_script`, an empty list does nothing
+  script: # from the README
+    - apt-get update && apt-get install --yes --no-install-recommends build-essential ccache libgc-dev libunwind-dev pkg-config
+    - make
+    - bin/nitc examples/hello_world.nit
+    - ./hello_world
+    - . misc/nit_env.sh install
+    - nitc examples/hello_world.nit
+    - ./hello_world
+    - apt-get update && apt-get install --yes --no-install-recommends graphviz libcurl4-openssl-dev libevent-dev libmongoc-dev
+    - make more
+
 bootstrap_full:
   stage: more_test
   dependencies:
@@ -328,6 +350,21 @@ build_more_tools:
       - src/version.nit
       - src/nitc_0
 
+valgrind:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - mkdir -p valgrind.out
+    - nitc src/nitc.nit # To warm-up the cache
+    - src/valgrind.sh --callgrind-out-file=valgrind.out/nitc.nitc.out nitc src/nitc.nit -vv
+    - callgrind_annotate valgrind.out/nitc.nitc.out > valgrind.out/nitc.nitc.txt
+    - src/valgrind.sh --callgrind-out-file=valgrind.out/niti.niti.out nit -- src/nit.nit tests/base_simple3.nit -vv
+    - callgrind_annotate valgrind.out/niti.niti.out > valgrind.out/niti.niti.txt
+  artifacts:
+    paths:
+      - valgrind.out
+
 build_doc:
   stage: more_test
   dependencies:
@@ -338,6 +375,27 @@ build_doc:
   artifacts:
     paths:
       - nitdoc.out
+
+build_manual:
+  stage: more_test
+  script:
+    - apt-get update && apt-get install --yes --no-install-recommends pandoc texlive texlive-latex-extra lmodern
+    - make -C doc/manual
+  artifacts:
+    paths:
+      - doc/manual/*.pdf
+      - doc/manual/*.epub
+
+nitmetrics:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - mkdir -p nitmetrics.out
+    - nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src | tee nitmetrics.out/metrics.txt
+  artifacts:
+    paths:
+      - nitmetrics.out
 
 build_catalog:
   stage: more_test
@@ -350,17 +408,36 @@ build_catalog:
     - ./oot.sh pre-build
     - cd ..
     - nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/
-  dependencies:
-    - build_more_tools
   artifacts:
     paths:
       - catalog.out
 
-.test_macos:
-  script:
-    - uname
-    - pwd
-    - ls /
-  stage: build
+build_tools_macos:
+  <<: *build_tools
   tags:
     - macos
+
+test_some_macos:
+  <<: *test_some
+  tags:
+    - macos
+  dependencies:
+    - build_tools_macos
+
+test_full_nitcs_macos:
+  <<: *test_full_nitcs
+  tags:
+    - macos
+  dependencies:
+    - build_tools_macos
+
+bench_old:
+  stage: more_test
+  tags:
+    - perf
+  dependencies:
+    - build_tools
+  script:
+    - benchmarks/bench_old.sh
+  allow_failure: true # time is unreliable. manual check required
+  services: []

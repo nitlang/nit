@@ -404,7 +404,7 @@ redef class ExternCFile
 		var cflags = mmodule.cflags[""].join(" ") + " " + pkg_cflags
 		var obj = compile_dir / filename.basename(".c") + ".o"
 
-		var cmd = "{v.c_compiler} -Wall -c -fPIC -I {compile_dir} -g -o {obj} {filename} {cflags}"
+		var cmd = "{v.c_compiler} -Wall -c -fPIC -I {compile_dir} -g -o {obj} {compile_dir / filename} {cflags}"
 		if sys.system(cmd) != 0 then
 			 v.fatal "FFI Error: Failed to compile C code using `{cmd}`"
 			 return false

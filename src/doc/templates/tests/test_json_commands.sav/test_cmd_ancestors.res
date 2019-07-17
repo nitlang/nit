@@ -12,7 +12,7 @@
 		"class_name": "MClass",
 		"full_name": "test_prog::Object",
 		"visibility": "public",
-		"html_synopsis": "<span class=\"synopsys nitdoc\">Root of everything.</span>",
+		"html_synopsis": "<span class=\"synopsis nitdoc\">Root of everything.</span>",
 		"modifiers": ["interface"]
 	}],
 	"page": null,

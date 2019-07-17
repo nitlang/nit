@@ -104,19 +104,23 @@ class LoaderConfig
 
 	# Github tokens used to access data.
 	var tokens: Array[String] is lazy do
-		var arr = opt_tokens.value
-		if arr.is_empty then
-			var iarr = ini.at("tokens")
-			if iarr != null then arr = iarr.values.to_a
+		var opt_tokens = self.opt_tokens.value
+		if opt_tokens.not_empty then return opt_tokens
+
+		var res = new Array[String]
+		var ini_tokens = ini.section("tokens")
+		if ini_tokens == null then return res
+
+		for token in ini_tokens.values do
+			if token == null then continue
+			res.add token
 		end
-		return arr or else new Array[String]
+		return res
 	end
 
 	# Github tokens wallet
 	var wallet: GithubWallet is lazy do
-		var wallet = new GithubWallet.from_tokens(tokens)
-		wallet.no_colors = no_colors
-		return wallet
+		return new GithubWallet(tokens)
 	end
 
 	# Use colors in console display
@@ -128,15 +132,19 @@ class LoaderConfig
 	# Verbosity level (the higher the more verbose)
 	fun verbose_level: Int do
 		var opt = opt_start.value
-		if opt > 0 then return opt
+		if opt > 0 then
+			return info_level
+		end
 		var v = ini["loader.verbose"]
-		if v != null then return v.to_i
-		return 4
+		if v != null and v.to_i > 0 then
+			return info_level
+		end
+		return warn_level
 	end
 
 	# Logger used to print things
-	var logger: ConsoleLog is lazy do
-		var logger = new ConsoleLog
+	var logger: PopLogger is lazy do
+		var logger = new PopLogger
 		logger.level = verbose_level
 		return logger
 	end
@@ -226,32 +234,32 @@ class Loader
 		return new IssueEventRepo(config.db.collection("issue_events"))
 	end
 
-	fun start(repo_full_name: String) do
-		var job = jobs.find_by_id(repo_full_name)
+	fun start(repo_slug: String) do
+		var job = jobs.find_by_id(repo_slug)
 		if job == null then
-			log.info "Creating new job for `{repo_full_name}`"
-			job = add_job(repo_full_name)
+			log.info "Creating new job for `{repo_slug}`"
+			job = add_job(repo_slug)
 		else
-			log.info "Resuming pending job for `{repo_full_name}`"
+			log.info "Resuming pending job for `{repo_slug}`"
 		end
 		print "Load history for {job}..."
-		load_branches(job)
-		load_issues(job)
+		get_branches(job)
+		get_issues(job)
 		finish_job(job)
 	end
 
-	fun remove(repo_full_name: String) do
-		var job = jobs.find_by_id(repo_full_name)
+	fun remove(repo_slug: String) do
+		var job = jobs.find_by_id(repo_slug)
 		if job == null then
-			log.info "No job found for `{repo_full_name}`"
+			log.info "No job found for `{repo_slug}`"
 		else
-			jobs.remove_by_id(repo_full_name)
-			log.info "Deleted job for `{repo_full_name}`"
+			jobs.remove_by_id(repo_slug)
+			log.info "Deleted job for `{repo_slug}`"
 		end
 	end
 
 	# Show wallet status
-	fun show_wallet do config.wallet.show_status
+	fun show_wallet do config.wallet.show_status(config.no_colors)
 
 	# Show jobs status
 	fun show_jobs do
@@ -264,10 +272,10 @@ class Loader
 	end
 
 	# Add a new job
-	fun add_job(repo_full_name: String): LoaderJob do
-		var repo = config.wallet.api.load_repo(repo_full_name)
+	fun add_job(repo_slug: String): LoaderJob do
+		var repo = config.wallet.api.get_repo(repo_slug)
 		assert repo != null else
-			error "Repository `{repo_full_name}` not found"
+			error "Repository `{repo_slug}` not found"
 		end
 		repos.save repo
 		var job = new LoaderJob(repo, config.start_from_issue)
@@ -281,27 +289,27 @@ class Loader
 		jobs.remove_by_id(job.id)
 	end
 
-	fun load_branches(job: LoaderJob) do
+	fun get_branches(job: LoaderJob) do
 		if config.no_branches then return
 
 		var api = config.wallet.api
 		var repo = job.repo
-		for branch in api.load_repo_branches(repo) do
+		for branch in api.get_repo_branches(repo.full_name) do
 			branch.repo = repo
 			branches.save branch
-			load_commits(job, branch)
+			get_commits(job, branch)
 		end
 	end
 
-	fun load_commits(job: LoaderJob, branch: Branch) do
+	fun get_commits(job: LoaderJob, branch: Branch) do
 		if config.no_commits then return
-		load_commit(job, branch.commit.sha)
+		get_commit(job, branch.commit.sha)
 	end
 
-	fun load_commit(job: LoaderJob, commit_sha: String) do
+	fun get_commit(job: LoaderJob, commit_sha: String) do
 		if commits.find_by_id(commit_sha) != null then return
 		var api = config.wallet.api
-		var commit = api.load_commit(job.repo, commit_sha)
+		var commit = api.get_commit(job.repo.full_name, commit_sha)
 		# print commit or else "NULL"
 		if commit == null then return
 		var message = commit.message or else "no message"
@@ -311,93 +319,87 @@ class Loader
 		var parents = commit.parents
 		if parents == null then return
 		for parent in parents do
-			load_commit(job, parent.sha)
+			get_commit(job, parent.sha)
 		end
 	end
 
 	# Load game for `repo_name`.
-	fun load_issues(job: LoaderJob) do
+	fun get_issues(job: LoaderJob) do
 		if config.no_issues then return
 
-		var i = job.last_issue
-		var last_issue = load_last_issue(job)
-		if last_issue != null then
-			while i <= last_issue.number do
-				load_issue(job, i)
-				job.last_issue = i
+		var api = config.wallet.api
+		var page = 1
+		var issues = api.get_repo_issues(job.repo.full_name, page, 100)
+		while issues.not_empty do
+			for issue in issues do
+				get_issue(job, issue.number)
+				job.last_issue = issue.number
 				jobs.save job
-				i += 1
 			end
 		end
 	end
 
-	# Load the `repo` last issue or abort.
-	private fun load_last_issue(job: LoaderJob): nullable Issue do
-		var api = config.wallet.api
-		return api.load_repo_last_issue(job.repo)
-	end
-
 	# Load an issue or abort.
-	private fun load_issue(job: LoaderJob, issue_number: Int) do
+	private fun get_issue(job: LoaderJob, issue_number: Int) do
 		if issues.find_by_id("{job.repo.mongo_id}/{issue_number}") != null then return
 
 		var api = config.wallet.api
-		var issue = api.load_issue(job.repo, issue_number)
+		var issue = api.get_issue(job.repo.full_name, issue_number)
 		assert issue != null else
 			check_error(api, "Issue #{issue_number} not found")
 		end
 		if issue.is_pull_request then
-			load_pull(job, issue)
+			get_pull(job, issue)
 		else
 			log.info "Load issue #{issue.number}: {issue.title.split("\n").first}"
 			issue.repo = job.repo
 			issues.save issue
-			load_issue_events(job, issue)
+			get_issue_events(job, issue)
 		end
-		load_issue_comments(job, issue)
+		get_issue_comments(job, issue)
 	end
 
 	# Load issue comments.
-	private fun load_issue_comments(job: LoaderJob, issue: Issue) do
+	private fun get_issue_comments(job: LoaderJob, issue: Issue) do
 		if config.no_comments then return
 		var api = config.wallet.api
-		for comment in api.load_issue_comments(job.repo, issue) do
+		for comment in api.get_issue_comments(job.repo.full_name, issue.number) do
 			comment.repo = job.repo
 			issue_comments.save comment
 		end
 	end
 
 	# Load issue events.
-	private fun load_issue_events(job: LoaderJob, issue: Issue) do
+	private fun get_issue_events(job: LoaderJob, issue: Issue) do
 		if config.no_events then return
 
 		var api = config.wallet.api
-		for event in api.load_issue_events(job.repo, issue) do
+		for event in api.get_issue_events(job.repo.full_name, issue.number) do
 			event.repo = job.repo
 			issue_events.save event
 		end
 	end
 
 	# Load a pull request or abort.
-	private fun load_pull(job: LoaderJob, issue: Issue): PullRequest do
+	private fun get_pull(job: LoaderJob, issue: Issue): PullRequest do
 		var api = config.wallet.api
-		var pr = api.load_pull(job.repo, issue.number)
+		var pr = api.get_pull(job.repo.full_name, issue.number)
 		assert pr != null else
 			check_error(api, "Pull request #{issue.number} not found")
 		end
 		log.info "Load pull request #{issue.number}: {pr.title.split("\n").first}"
 		pr.repo = job.repo
 		pulls.save pr
-		load_pull_events(job, pr)
+		get_pull_events(job, pr)
 		return pr
 	end
 
 	# Load pull events.
-	private fun load_pull_events(job: LoaderJob, pull: PullRequest) do
+	private fun get_pull_events(job: LoaderJob, pull: PullRequest) do
 		if config.no_events then return
 
 		var api = config.wallet.api
-		for event in api.load_issue_events(job.repo, pull) do
+		for event in api.get_issue_events(job.repo.full_name, pull.number) do
 			event.repo = job.repo
 			issue_events.save event
 		end
@@ -412,7 +414,7 @@ class Loader
 	end
 
 	# Logger shortcut
-	fun log: ConsoleLog do return config.logger
+	fun log: PopLogger do return config.logger
 
 	# Display a error and exit
 	fun error(msg: String) do
@@ -583,7 +585,7 @@ if loader.config.opt_clear.value then
 else
 	loader.start args.first
 
-	var repo = loader.config.wallet.api.load_repo(args.first)
+	var repo = loader.config.wallet.api.get_repo(args.first)
 	if repo == null then return
 	print "Loaded"
 	print "* {if loader.repos.find_by_id(args.first) != null then 1 else 0} repos"

@@ -511,7 +511,7 @@ with the `use_before` method.
 Next, we’ll create a middleware handler called “LogHandler” that prints the requested
 uri, the response status and the time it took to Popcorn to process the request.
 
-This example gives a simplified version of the `RequestClock` and `ConsoleLog` middlewares.
+This example gives a simplified version of the `RequestClock` and `PopLogger` middlewares.
 
 ~~~
 import popcorn
@@ -584,7 +584,7 @@ Starting with version 0.1, Popcorn provide a set of built-in middleware that can
 be used to develop your app faster.
 
 * `RequestClock`: initializes requests clock.
-* `ConsoleLog`: displays resquest and response status in console (can be used with `RequestClock`).
+* `PopLogger`: displays resquest and response status in console (can be used with `RequestClock`).
 * `SessionInit`: initializes requests session (see the `Sessions` section).
 * `StaticServer`: serves static files (see the `Serving static files with Popcorn` section).
 * `Router`: a mountable mini-app (see the `Mountable routers` section).

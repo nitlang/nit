@@ -22,7 +22,7 @@ import android.os.IBinder;
 // Service implemented in Nit
 public class NitService extends Service {
 
-	protected int nitService = 0;
+	protected long nitService = 0;
 
 	static {
 		System.loadLibrary("nit_app");
@@ -51,8 +51,8 @@ public class NitService extends Service {
 		return null;
 	}
 
-	protected native int nitNewService();
-	protected native int nitOnStartCommand(int nitService, Intent intent, int flags, int id);
-	protected native void nitOnCreate(int nitService);
-	protected native void nitOnDestroy(int nitService);
+	protected native long nitNewService();
+	protected native int nitOnStartCommand(long nitService, Intent intent, int flags, int id);
+	protected native void nitOnCreate(long nitService);
+	protected native void nitOnDestroy(long nitService);
 }

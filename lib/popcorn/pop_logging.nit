@@ -17,7 +17,7 @@
 module pop_logging
 
 import pop_handlers
-import console
+import logger
 import realtime
 
 # Initialize a clock for the resquest.
@@ -30,72 +30,70 @@ class RequestClock
 end
 
 # Display log info about request processing.
-class ConsoleLog
+class PopLogger
+	super Logger
 	super Handler
 
-	# Logger level
-	#
-	# * `0`: silent
-	# * `1`: errors
-	# * `2`: warnings
-	# * `3`: info
-	# * `4`: debug
-	#
-	# Request status are always logged, whatever the logger level is.
-	var level = 4 is writable
-
 	# Do we want colors in the console output?
-	var no_colors = false
+	var no_color = false is optional
+
+	redef var default_formatter = new PopFormatter(no_color) is optional
 
 	redef fun all(req, res) do
 		var clock = req.clock
 		if clock != null then
-			log "{req.method} {req.url} {status(res)} ({clock.total}s)"
+			add_raw(info_level, "{req.method} {req.url} {status(res)} ({clock.total}s)")
 		else
-			log "{req.method} {req.url} {status(res)}"
+			add_raw(info_level, "{req.method} {req.url} {status(res)}")
 		end
 	end
 
 	# Colorize the request status.
 	private fun status(res: HttpResponse): String do
-		if no_colors then return res.status_code.to_s
+		if no_color then return res.status_code.to_s
 		return res.color_status
 	end
-
-	# Display a `message` with `level`.
-	#
-	# Message will only be displayed if `level <= self.level`.
-	# Colors will be used depending on `colors`.
-	#
-	# Use `0` for no coloration.
-	private fun display(level: Int, message: String) do
-		if level > self.level then return
-		if no_colors then
-			print message
-			return
-		end
-		if level == 0 then print message
-		if level == 1 then print message.red
-		if level == 2 then print message.yellow
-		if level == 3 then print message.blue
-		if level == 4 then print message.gray
-	end
-
-	# Display a message wathever the `level`
-	fun log(message: String) do display(0, message)
-
-	# Display a red error `message`.
-	fun error(message: String) do display(1, "[ERROR] {message}")
-
-	# Display a yellow warning `message`.
-	fun warning(message: String) do display(2, "[WARN] {message}")
-
-	# Display a blue info `message`.
-	fun info(message: String) do display(3, "[INFO] {message}")
-
-	# Display a gray debug `message`.
-	fun debug(message: String) do display(4, "[DEBUG] {message}")
 end
+
+class PopFormatter
+	super Formatter
+
+	# Do not decorate messages with colors
+	var no_color = false is optional, writable
+
+	redef fun format(level, message) do
+		var string = message.write_to_string
+
+		if level == fatal_level then
+			string = "[FATAL] {string}"
+		else if level == error_level then
+			string = "[ERROR] {string}"
+		else if level == warn_level then
+			string = "[WARN] {string}"
+		else if level == info_level then
+			string = "[INFO] {string}"
+		else if level == debug_level then
+			string = "[DEBUG] {string}"
+		end
+
+		if no_color then return string
+
+		if level == fatal_level then
+			return string.red
+		else if level == error_level then
+			return string.red
+		else if level == warn_level then
+			return string.yellow
+		else if level == info_level then
+			return string.blue
+		else if level == debug_level then
+			return string.gray
+		end
+
+		return string
+	end
+end
+
 
 redef class HttpRequest
 	# Time that request was received by the Popcorn app.

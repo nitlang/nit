@@ -78,7 +78,7 @@ class CommandInstall
 				exit 1
 			end
 
-			var ini = new ConfigTree(ini_path)
+			var ini = new IniFile.from_file(ini_path)
 			var import_line = ini["package.import"]
 			if import_line == null then
 				print_error "The local `package.ini` declares no external dependencies."
@@ -135,7 +135,7 @@ class CommandInstall
 				print ini_path.to_path.read_all
 			end
 
-			var ini = new ConfigTree(ini_path)
+			var ini = new IniFile.from_file(ini_path)
 			var git_repo = ini["upstream.git"]
 			if git_repo == null then
 				print_error "Package description invalid, or it does not declare a Git repository"
@@ -195,7 +195,7 @@ class CommandInstall
 		end
 
 		# Recursive install
-		var ini = new ConfigTree(target_dir/"package.ini")
+		var ini = new IniFile.from_file(target_dir/"package.ini")
 		var import_line = ini["package.import"]
 		if import_line != null then
 			install_packages import_line
@@ -320,7 +320,7 @@ class CommandList
 		for file in files do
 			var ini_path = nitpm_lib_dir / file / "package.ini"
 			if verbose then print "- Reading ini file at {ini_path}"
-			var ini = new ConfigTree(ini_path)
+			var ini = new IniFile.from_file(ini_path)
 			var tags = ini["package.tags"]
 
 			name_to_desc[file] = tags

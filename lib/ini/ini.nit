@@ -12,344 +12,547 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Handle ini config files.
+# Read and write INI configuration files
 module ini
 
-# A configuration tree that can read and store data in ini format
+import core
+intrude import core::collection::hash_collection
+
+# Read and write INI configuration files
 #
-# Write example:
+# In an INI file, properties (or keys) are associated to values thanks to the
+# equals symbol (`=`).
+# Properties may be grouped into section marked between brackets (`[` and `]`).
 #
-#     var config = new ConfigTree("config.ini")
-#     config["goo"] = "goo"
-#     config["foo.bar"] = "foobar"
-#     config["foo.baz"] = "foobaz"
-#     config.save
-#     assert config.to_map.length == 3
+# ~~~
+# var ini_string = """
+# ; Example INI
+# key=value1
+# [section1]
+# key=value2
+# [section2]
+# key=value3
+# """
+# ~~~
 #
-# Read example:
+# The main class, `IniFile`, can be created from an INI string and allows easy
+# access to its content.
 #
-#     config = new ConfigTree("config.ini")
-#     assert config.has_key("foo.bar")
-#     assert config["foo.bar"] == "foobar"
-class ConfigTree
+# ~~~
+# # Read INI from string
+# var ini = new IniFile.from_string(ini_string)
+#
+# # Check keys presence
+# assert ini.has_key("key")
+# assert ini.has_key("section1.key")
+# assert not ini.has_key("not.found")
+#
+# # Access values
+# assert ini["key"] == "value1"
+# assert ini["section2.key"] == "value3"
+# assert ini["not.found"] == null
+#
+# # Access sections
+# assert ini.sections.length == 2
+# assert ini.section("section1")["key"] == "value2"
+# ~~~
+#
+# `IniFile` can also be used to create new INI files from scratch, or edit
+# existing ones through its API.
+#
+# ~~~
+# # Create a new INI file and write it to disk
+# ini = new IniFile
+# ini["key"] = "value1"
+# ini["section1.key"] = "value2"
+# ini["section2.key"] = "value3"
+# ini.write_to_file("my_config.ini")
+#
+# # Load the INI file from disk
+# ini = new IniFile.from_file("my_config.ini")
+# assert ini["key"] == "value1"
+# assert ini["section1.key"] == "value2"
+# assert ini["section2.key"] == "value3"
+#
+# "my_config.ini".to_path.delete
+# ~~~
+class IniFile
 	super Writable
+	super HashMap[String, nullable String]
 
-	# The ini file used to read/store data
-	var ini_file: String
-
-	init do if ini_file.file_exists then load
-
-	# Get the config value for `key`
+	# Create a IniFile from a `string` content
 	#
-	#     var config = new ConfigTree("config.ini")
-	#     assert config["goo"] == "goo"
-	#     assert config["foo.bar"] == "foobar"
-	#     assert config["foo.baz"] == "foobaz"
-	#     assert config["fail.fail"] == null
-	fun [](key: String): nullable String do
-		var node = get_node(key)
-		if node == null then return null
-		return node.value
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# key1=value1
+	# [section1]
+	# key2=value2
+	# """)
+	# assert ini["key1"] == "value1"
+	# assert ini["section1.key2"] == "value2"
+	# ~~~
+	#
+	# See also `stop_on_first_error` and `errors`.
+	init from_string(string: String, stop_on_first_error: nullable Bool) do
+		init stop_on_first_error or else false
+		load_string(string)
 	end
 
-	# Get the config values under `key`
+	# Create a IniFile from a `file` content
 	#
-	#     var config = new ConfigTree("config.ini")
-	#     var values = config.at("foo")
-	#     assert values.has_key("bar")
-	#     assert values.has_key("baz")
-	#     assert not values.has_key("goo")
+	# ~~~
+	# """
+	# key1=value1
+	# [section1]
+	# key2=value2
+	# """.write_to_file("my_config.ini")
 	#
-	# Return null if the key does not exists.
+	# var ini = new IniFile.from_file("my_config.ini")
+	# assert ini["key1"] == "value1"
+	# assert ini["section1.key2"] == "value2"
 	#
-	#     assert config.at("fail.fail") == null
-	fun at(key: String): nullable Map[String, String] do
-		var node = get_node(key)
-		if node == null then return null
+	# "my_config.ini".to_path.delete
+	# ~~~
+	#
+	# See also `stop_on_first_error` and `errors`.
+	init from_file(file: String, stop_on_first_error: nullable Bool) do
+		init stop_on_first_error or else false
+		load_file(file)
+	end
+
+	# Sections composing this IniFile
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# [section1]
+	# key1=value1
+	# [ section 2 ]
+	# key2=value2
+	# """)
+	# assert ini.sections.length == 2
+	# assert ini.sections.first.name == "section1"
+	# assert ini.sections.last.name == "section 2"
+	# ~~~
+	var sections = new Array[IniSection]
+
+	# Get a section by its `name`
+	#
+	# Returns `null` if the section is not found.
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# [section1]
+	# key1=value1
+	# [section2]
+	# key2=value2
+	# """)
+	# assert ini.section("section1") isa IniSection
+	# assert ini.section("section2").name == "section2"
+	# assert ini.section("not.found") == null
+	# ~~~
+	fun section(name: String): nullable IniSection do
+		for section in sections do
+			if section.name == name then return section
+		end
+		return null
+	end
+
+	# Does this file contains no properties and no sections?
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("")
+	# assert ini.is_empty
+	#
+	# ini = new IniFile.from_string("""
+	# key=value
+	# """)
+	# assert not ini.is_empty
+	#
+	# ini = new IniFile.from_string("""
+	# [section]
+	# """)
+	# assert not ini.is_empty
+	# ~~~
+	redef fun is_empty do return super and sections.is_empty
+
+	# Is there a property located at `key`?
+	#
+	# Returns `true` if the `key` is not found of if its associated value is `null`.
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# key=value1
+	# [section1]
+	# key=value2
+	# [section2]
+	# key=value3
+	# """)
+	# assert ini.has_key("key")
+	# assert ini.has_key("section1.key")
+	# assert ini.has_key("section2.key")
+	# assert not ini.has_key("section1")
+	# assert not ini.has_key("not.found")
+	# ~~~
+	redef fun has_key(key) do return self[key] != null
+
+	# Get the value associated with a property (`key`)
+	#
+	# Returns `null` if the key is not found.
+	# Section properties can be accessed with the `.` notation.
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# key=value1
+	# [section1]
+	# key=value2
+	# [section2]
+	# key=value3
+	# """)
+	# assert ini["key"] == "value1"
+	# assert ini["section1.key"] == "value2"
+	# assert ini["section2.key"] == "value3"
+	# assert ini["section1"] == null
+	# assert ini["not.found"] == null
+	# ~~~
+	redef fun [](key) do
+		if key == null then return null
+		key = key.to_s.trim
+
+		# Look in root
+		var node = node_at(key)
+		if node != null then return node.value
+
+		# Look in sections
+		for section in sections do
+			# Matched if the section name is a prefix of the key
+			if not key.has_prefix(section.name) then continue
+			var skey = key.substring(section.name.length + 1, key.length)
+			if section.has_key(skey) then return section[skey]
+		end
+		return null
+	end
+
+	# Set the `value` for the property locaated at `key`
+	#
+	# ~~~
+	# var ini = new IniFile
+	# ini["key"] = "value1"
+	# ini["section1.key"] = "value2"
+	# ini["section2.key"] = "value3"
+	#
+	# assert ini["key"] == "value1"
+	# assert ini["section1.key"] == "value2"
+	# assert ini["section2.key"] == "value3"
+	# assert ini.section("section1").name == "section1"
+	# assert ini.section("section2")["key"] == "value3"
+	# ~~~
+	redef fun []=(key, value) do
+		if value == null then return
+		var parts = key.split_once_on(".")
+
+		# No dot notation, store value in root
+		if parts.length == 1 then
+			super(key.trim, value.trim)
+			return
+		end
+
+		# First part matches a section, store value in it
+		var section = self.section(parts.first.trim)
+		if section != null then
+			section[parts.last.trim] = value.trim
+			return
+		end
+
+		# No section matched, create a new one and store value in it
+		section = new IniSection(parts.first.trim)
+		section[parts.last.trim] = value.trim
+		sections.add section
+	end
+
+	# Flatten `self` and its subsection in a `Map` of keys => values
+	#
+	# Properties from section are prefixed with their section names with the
+	# dot (`.`) notation.
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# key=value1
+	# [section]
+	# key=value2
+	# """)
+	# assert ini.flatten.join(", ", ": ") == "key: value1, section.key: value2"
+	# ~~~
+	fun flatten: Map[String, String] do
 		var map = new HashMap[String, String]
-		for k, child in node.children do
-			var value = child.value
+		for key, value in self do
 			if value == null then continue
-			map[k] = value
+			map[key] = value
+		end
+		for section in sections do
+			for key, value in section do
+				if value == null then continue
+				map["{section.name}.{key}"] = value
+			end
 		end
 		return map
 	end
 
-	# Set `value` at `key`
+	# Write `self` to a `stream`
 	#
-	#     var config = new ConfigTree("config.ini")
-	#     assert config["foo.bar"] == "foobar"
-	#     config["foo.bar"] = "baz"
-	#     assert config["foo.bar"] == "baz"
-	fun []=(key: String, value: nullable String) do
-		set_node(key, value)
-	end
-
-	# Is `key` in the config?
+	# Key with `null` values are ignored.
+	# The empty string can be used to represent an empty value.
 	#
-	#     var config = new ConfigTree("config.ini")
-	#     assert config.has_key("goo")
-	#     assert config.has_key("foo.bar")
-	#     assert not config.has_key("zoo")
-	fun has_key(key: String): Bool do
-		var parts = key.split(".").reversed
-		var node = get_root(parts.pop)
-		if node == null then return false
-		while not parts.is_empty do
-			node = node.get_child(parts.pop)
-			if node == null then return false
-		end
-		return true
-	end
-
-	# Get `self` as a Map of `key`, `value`
+	# ~~~
+	# var ini = new IniFile
+	# ini["key"] = "value1"
+	# ini["key2"] = null
+	# ini["key3"] = ""
+	# ini["section1.key"] = "value2"
+	# ini["section1.key2"] = null
+	# ini["section2.key"] = "value3"
 	#
-	#     var config = new ConfigTree("config.ini")
-	#     var map = config.to_map
-	#     assert map.has_key("goo")
-	#     assert map.has_key("foo.bar")
-	#     assert map.has_key("foo.baz")
-	#     assert map.length == 3
-	fun to_map: Map[String, String] do
-		var map = new HashMap[String, String]
-		for node in leaves do
-			var value = node.value
-			if value == null then continue
-			map[node.key] = value
-		end
-		return map
-	end
-
-	redef fun to_s do return to_map.join(", ", ":")
-
-	# Write `self` in `stream`
+	# var stream = new StringWriter
+	# ini.write_to(stream)
 	#
-	#     var config = new ConfigTree("config.ini")
-	#     var out = new StringWriter
-	#     config.write_to(out)
-	#     assert out.to_s == """
-	#     goo=goo
-	#     [foo]
-	#     bar=foobar
-	#     baz=foobaz
-	#     """
+	# assert stream.to_s == """
+	# key=value1
+	# key3=
+	# [section1]
+	# key=value2
+	# [section2]
+	# key=value3
+	# """
+	# ~~~
 	redef fun write_to(stream) do
-		var todo = new Array[ConfigNode].from(roots.reversed)
-		while not todo.is_empty do
-			var node = todo.pop
-			if node.children.not_empty then
-				todo.add_all node.children.values.to_a.reversed
-			end
-			if node.children.not_empty and node.parent == null then
-				stream.write("[{node.name}]\n")
-			end
-			var value = node.value
+		for key, value in self do
 			if value == null then continue
-			var path = node.path
-			if path.length > 1 then path.shift
-			stream.write("{path.join(".")}={value}\n")
+			stream.write "{key}={value}\n"
+		end
+		for section in sections do
+			stream.write "[{section.name}]\n"
+			for key, value in section do
+				if value == null then continue
+				stream.write "{key}={value}\n"
+			end
 		end
 	end
 
-	# Reload config from file
-	# Done automatically at init
+	# Read INI content from `string`
 	#
-	# Example with hierarchical ini file:
+	# ~~~
+	# var ini = new IniFile
+	# ini.load_string("""
+	# section1.key1=value1
+	# section1.key2=value2
+	# [section2]
+	# key=value3
+	# """)
+	# assert ini["section1.key1"] == "value1"
+	# assert ini["section1.key2"] == "value2"
+	# assert ini["section2.key"] == "value3"
+	# ~~~
 	#
-	#     # init file
-	#     var str = """
-	#     foo.bar=foobar
-	#     foo.baz=foobaz
-	#     goo=goo"""
-	#     str.write_to_file("config1.ini")
-	#     # load file
-	#     var config = new ConfigTree("config1.ini")
-	#     assert config["foo.bar"] == "foobar"
+	# Returns `true` if the parsing finished correctly.
 	#
-	# Example with sections:
-	#
-	#     # init file
-	#     str = """
-	#     goo=goo
-	#     [foo]
-	#     bar=foobar
-	#     baz=foobaz
-	#     [boo]
-	#     bar=boobar"""
-	#     str.write_to_file("config2.ini")
-	#     # load file
-	#     config = new ConfigTree("config2.ini")
-	#     assert config["foo.bar"] == "foobar"
-	#     assert config["boo.bar"] == "boobar"
-	#
-	# Example with both hierarchy and section:
-	#
-	#     # init file
-	#     str = """
-	#     goo=goo
-	#     [foo]
-	#     bar.baz=foobarbaz
-	#     [goo.boo]
-	#     bar=gooboobar
-	#     baz.bar=gooboobazbar"""
-	#     str.write_to_file("config3.ini")
-	#     # load file
-	#     config = new ConfigTree("config3.ini")
-	#     assert config["goo"] == "goo"
-	#     assert config["foo.bar.baz"] == "foobarbaz"
-	#     assert config["goo.boo.bar"] == "gooboobar"
-	#     assert config["goo.boo.baz.bar"] == "gooboobazbar"
-	#
-	# Using the array notation
-	#
-	#     str = """
-	#     foo[]=a
-	#     foo[]=b
-	#     foo[]=c"""
-	#     str.write_to_file("config4.ini")
-	#     # load file
-	#     config = new ConfigTree("config4.ini")
-	#     print config.to_map.join(":", ",")
-	#     assert config["foo.0"] == "a"
-	#     assert config["foo.1"] == "b"
-	#     assert config["foo.2"] == "c"
-	#     assert config.at("foo").values.join(",") == "a,b,c"
-	fun load do
-		roots.clear
-		var stream = new FileReader.open(ini_file)
-		var path: nullable String = null
-		var line_number = 0
+	# See also `stop_on_first_error` and `errors`.
+	fun load_string(string: String): Bool do
+		var stream = new StringReader(string)
+		var last_section = null
+		var was_error = false
+		var i = 0
 		while not stream.eof do
-			var line = stream.read_line
-			line_number += 1
+			i += 1
+			var line = stream.read_line.trim
 			if line.is_empty then
 				continue
 			else if line.has_prefix(";") then
 				continue
+			else if line.has_prefix("#") then
+				continue
 			else if line.has_prefix("[") then
-				line = line.trim
-				var key = line.substring(1, line.length - 2)
-				path = key
-				set_node(path, null)
+				var section = new IniSection(line.substring(1, line.length - 2).trim)
+				sections.add section
+				last_section = section
+				continue
 			else
 				var parts = line.split_once_on("=")
-				if parts.length == 1 then
+				if parts.length != 2 then
+					# FIXME silent skip?
+					# we definitely need exceptions...
+					was_error = true
+					errors.add new IniError("Unexpected string `{line}` at line {i}.")
+					if stop_on_first_error then return was_error
 					continue
 				end
 				var key = parts[0].trim
-				var val = parts[1].trim
-				if path != null then key = "{path}.{key}"
-				if key.has_suffix("[]") then
-					set_array(key, val)
+				var value = parts[1].trim
+
+				if last_section != null then
+					last_section[key] = value
 				else
-					set_node(key,val)
+					self[key] = value
 				end
 			end
 		end
 		stream.close
+		return was_error
 	end
 
-	# Save config to file
-	fun save do write_to_file(ini_file)
+	# Load a `file` content as INI
+	#
+	# New properties will be appended to the `self`, existing properties will be
+	# overwrote by the values contained in `file`.
+	#
+	# ~~~
+	# var ini = new IniFile
+	# ini["key1"] = "value1"
+	# ini["key2"] = "value2"
+	#
+	# """
+	# key2=changed
+	# key3=added
+	# """.write_to_file("load_config.ini")
+	#
+	# ini.load_file("load_config.ini")
+	# assert ini["key1"] == "value1"
+	# assert ini["key2"] == "changed"
+	# assert ini["key3"] == "added"
+	#
+	# "load_config.ini".to_path.delete
+	# ~~~
+	#
+	# The process fails silently if the file does not exist.
+	#
+	# ~~~
+	# ini = new IniFile
+	# ini.load_file("ini_not_found.ini")
+	# assert ini.is_empty
+	# ~~~
+	#
+	# Returns `true` if the parsing finished correctly.
+	#
+	# See also `stop_on_first_error` and `errors`.
+	fun load_file(file: String): Bool do return load_string(file.to_path.read_all)
 
-	private var roots = new Array[ConfigNode]
+	# Stop parsing on the first error
+	#
+	# By default, `load_string` will skip unparsable properties so the string can
+	# be loaded.
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# key1=value1
+	# key2
+	# key3=value3
+	# """)
+    #
+	# assert ini.length == 2
+	# assert ini["key1"] == "value1"
+	# assert ini["key2"] == null
+	# assert ini["key3"] == "value3"
+	# ~~~
+	#
+	# Set `stop_on_first_error` to `true` to force the parsing to stop.
+	#
+	# ~~~
+	# ini = new IniFile
+	# ini.stop_on_first_error = true
+	# ini.load_string("""
+	# key1=value1
+	# key2
+	# key3=value3
+	# """)
+    #
+	# assert ini.length == 1
+	# assert ini["key1"] == "value1"
+	# assert ini["key2"] == null
+	# assert ini["key3"] == null
+	# ~~~
+	#
+	# See also `errors`.
+	var stop_on_first_error = false is optional, writable
 
-	# Append `value` to array at `key`
-	private fun set_array(key: String, value: nullable String) do
-		key = key.substring(0, key.length - 2)
-		var len = 0
-		var node = get_node(key)
-		if node != null then len = node.children.length
-		set_node("{key}.{len.to_s}", value)
-	end
+	# Errors found during parsing
+	#
+	# Wathever the value of `stop_on_first_error`, errors from parsing a string
+	# or a file are logged into `errors`.
+	#
+	# ~~~
+	# var ini = new IniFile.from_string("""
+	# key1=value1
+	# key2
+	# key3=value3
+	# """)
+    #
+	# assert ini.errors.length == 1
+	# assert ini.errors.first.message == "Unexpected string `key2` at line 2."
+	# ~~~
+	#
+	# `errors` is not cleared between two parsing:
+	#
+	# ~~~
+	# ini.load_string("""
+	# key4
+	# key5=value5
+	# """)
+    #
+	# assert ini.errors.length == 2
+	# assert ini.errors.last.message == "Unexpected string `key4` at line 1."
+	# ~~~
+	#
+	# See also `stop_on_first_error`.
+	var errors = new Array[IniError]
+end
 
-	private fun set_node(key: String, value: nullable String) do
-		var parts = key.split(".").reversed
-		var k = parts.pop
-		var root = get_root(k)
-		if root == null then
-			root = new ConfigNode(k)
-			if parts.is_empty then
-				root.value = value
-			end
-			roots.add root
-		end
-		while not parts.is_empty do
-			k = parts.pop
-			var node = root.get_child(k)
-			if node == null then
-				node = new ConfigNode(k)
-				node.parent = root
-				root.children[node.name] = node
-			end
-			if parts.is_empty then
-				node.value = value
-			end
-			root = node
-		end
-	end
+# A section in a IniFile
+#
+# Section properties values are strings associated keys.
+# Sections cannot be nested.
+#
+# ~~~
+# var section = new IniSection("section")
+# section["key1"] = "value1"
+# section["key2"] = "value2"
+#
+# assert section.length == 2
+# assert section["key1"] == "value1"
+# assert section["not.found"] == null
+# assert section.join(", ", ": ") == "key1: value1, key2: value2"
+#
+# var i = 0
+# for key, value in section do
+#	assert key.has_prefix("key")
+#	assert value.has_prefix("value")
+#	i += 1
+# end
+# assert i == 2
+# ~~~
+class IniSection
+	super HashMap[String, nullable String]
 
-	private fun get_node(key: String): nullable ConfigNode do
-		var parts = key.split(".").reversed
-		var node = get_root(parts.pop)
-		while node != null and not parts.is_empty do
-			node = node.get_child(parts.pop)
-		end
-		return node
-	end
+	# Section name
+	var name: String
 
-	private fun get_root(name: String): nullable ConfigNode do
-		for root in roots do
-			if root.name == name then return root
-		end
-		return null
-	end
-
-	private fun leaves: Array[ConfigNode] do
-		var res = new Array[ConfigNode]
-		var todo = new Array[ConfigNode]
-		todo.add_all roots
-		while not todo.is_empty do
-			var node = todo.pop
-			if node.children.is_empty then
-				res.add node
-			else
-				todo.add_all node.children.values
-			end
-		end
-		return res
+	# Get the value associated with `key`
+	#
+	# Returns `null` if the `key` is not found.
+	#
+	# ~~~
+	# var section = new IniSection("section")
+	# section["key"] = "value1"
+	# section["sub.key"] = "value2"
+	#
+	# assert section["key"] == "value1"
+	# assert section["sub.key"] == "value2"
+	# assert section["not.found"] == null
+	# ~~~
+	redef fun [](key) do
+		if not has_key(key) then return null
+		return super
 	end
 end
 
-private class ConfigNode
-
-	var parent: nullable ConfigNode = null
-	var children = new HashMap[String, ConfigNode]
-	var name: String is writable
-	var value: nullable String = null
-
-	fun key: String do
-		var parent = self.parent
-		if parent == null then
-			return name
-		end
-		return "{parent.key}.{name}"
-	end
-
-	fun path: Array[String] do
-		var parent = self.parent
-		if parent == null then
-			return [name]
-		end
-		var res = new Array[String].from(parent.path)
-		res.add name
-		return res
-	end
-
-	fun get_child(name: String): nullable ConfigNode do
-		if children.has_key(name) then
-			return children[name]
-		end
-		return null
-	end
+# Error for `IniFile` parsing
+class IniError
+	super Error
 end

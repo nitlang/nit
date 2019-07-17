@@ -59,11 +59,11 @@ Docunits: Entities: 22; Documented ones: 0; With nitunits: 0
 Test suites: Classes: 3; Test Cases: 8; Failures: 7
 [FAILURE] 7/8 tests failed.
 `nitunit.out` is not removed for investigation.
-<testsuites><testsuite package="test_nitunit4&gt;"></testsuite><testsuite package="test_nitunit4::nitunit4"></testsuite><testsuite package="test_nitunit4::test_bad_comp"></testsuite><testsuite package="test_bad_comp"><testcase classname="nitunit.test_nitunit4.TestSuiteBadComp" name="test_good" time="0.0"><failure message="Compilation Error">test_nitunit4&#47;test_bad_comp.nit:25,10--19: Error: method or variable `bad_method` unknown in `TestSuiteBadComp`.
+<testsuites><testsuite package="test_bad_comp"><testcase classname="nitunit.test_nitunit4.TestSuiteBadComp" name="test_good" time="0.0"><failure message="Compilation Error">test_nitunit4&#47;test_bad_comp.nit:25,10--19: Error: method or variable `bad_method` unknown in `TestSuiteBadComp`.
 </failure></testcase><testcase classname="nitunit.test_nitunit4.TestSuiteBadComp" name="test_bad" time="0.0"><failure message="Compilation Error">test_nitunit4&#47;test_bad_comp.nit:25,10--19: Error: method or variable `bad_method` unknown in `TestSuiteBadComp`.
-</failure></testcase></testsuite><testsuite package="test_nitunit4::test_bad_comp2"></testsuite><testsuite package="test_bad_comp2"><testcase classname="nitunit.test_nitunit4.TestSuiteBadComp" name="test_good" time="0.0"><failure message="Compilation Error">nitunit.out&#47;gen_test_bad_comp2.nit:11,10--17: Error: expected 1 argument(s) for `test_bad(param: Bool)`; got 0. See introduction at `test_nitunit4::TestSuiteBadComp::test_bad`.
+</failure></testcase></testsuite><testsuite package="test_bad_comp2"><testcase classname="nitunit.test_nitunit4.TestSuiteBadComp" name="test_good" time="0.0"><failure message="Compilation Error">nitunit.out&#47;gen_test_bad_comp2.nit:11,10--17: Error: expected 1 argument(s) for `test_bad(param: Bool)`; got 0. See introduction at `test_nitunit4::TestSuiteBadComp::test_bad`.
 </failure></testcase><testcase classname="nitunit.test_nitunit4.TestSuiteBadComp" name="test_bad" time="0.0"><failure message="Compilation Error">nitunit.out&#47;gen_test_bad_comp2.nit:11,10--17: Error: expected 1 argument(s) for `test_bad(param: Bool)`; got 0. See introduction at `test_nitunit4::TestSuiteBadComp::test_bad`.
-</failure></testcase></testsuite><testsuite package="test_nitunit4::test_nitunit4"></testsuite><testsuite package="test_nitunit4"><testcase classname="nitunit.test_nitunit4.TestTestSuite" name="test_foo" time="0.0"><error message="Runtime Error in file nitunit.out&#47;gen_test_nitunit4.nit">Before Test
+</failure></testcase></testsuite><testsuite package="test_nitunit4"><testcase classname="nitunit.test_nitunit4.TestTestSuite" name="test_foo" time="0.0"><error message="Runtime Error in file nitunit.out&#47;gen_test_nitunit4.nit">Before Test
 Tested method
 After Test
 Runtime assert: &lt;TestTestSuite&gt;.before
@@ -82,4 +82,4 @@ After Test
 </error></testcase><testcase classname="nitunit.test_nitunit4.TestTestSuite" name="test_sav_conflict" time="0.0"><error message="Conflicting expected output: test_nitunit4&#47;test_nitunit4.sav&#47;test_sav_conflict.res, test_nitunit4&#47;sav&#47;test_sav_conflict.res and test_nitunit4&#47;test_sav_conflict.res all exist">Before Test
 Tested method
 After Test
-</error></testcase></testsuite><testsuite package="test_nitunit4::test_nitunit4_base"></testsuite></testsuites>
+</error></testcase></testsuite></testsuites>

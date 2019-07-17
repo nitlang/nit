@@ -207,7 +207,7 @@ end
 redef class Android_widget_ArrayAdapter
 	private new (context: NativeContext, res: Int, sender: ListLayout)
 	import ListLayout.create_view in "Java" `{
-		final int final_sender_object = sender;
+		final nit.app.NitObject final_sender_object = sender;
 		ListLayout_incr_ref(sender);
 
 		return new android.widget.ArrayAdapter(context, (int)res) {
@@ -276,7 +276,7 @@ redef class CheckBox
 
 	private fun set_callback_on_toggle(view: NATIVE)
 	import on_toggle in "Java" `{
-		final int final_sender_object = self;
+		final nit.app.NitObject final_sender_object = self;
 		CheckBox_incr_ref(final_sender_object);
 
 		view.setOnCheckedChangeListener(
@@ -328,7 +328,7 @@ end
 redef class NativeButton
 	private new (context: NativeActivity, sender_object: Button)
 	import Button.on_click in "Java" `{
-		final int final_sender_object = sender_object;
+		final nit.app.NitObject final_sender_object = sender_object;
 		Button_incr_ref(final_sender_object);
 
 		return new android.widget.Button(context) {
@@ -349,7 +349,7 @@ end
 redef class Android_app_Fragment
 	private new (nit_window: Window)
 	import Window.on_create_fragment in "Java" `{
-		final int final_nit_window = nit_window;
+		final nit.app.NitObject final_nit_window = nit_window;
 		Window_incr_ref(nit_window);
 
 		return new android.app.Fragment(){

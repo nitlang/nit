@@ -13,6 +13,7 @@ RUN dpkg --add-architecture i386 \
 		graphviz \
 		libunwind-dev \
 		pkg-config \
+		libicu-dev \
 		# Get the code!
 		git \
 		ca-certificates \
@@ -108,3 +109,6 @@ RUN pip3 install junit2html
 
 #  Prepare to install npm (npm is not packaged for debian:stretch)
 RUN npm install pug-cli -g
+
+# Some tools, like gradle, need an explitit UTF8 environement
+ENV LANG C.UTF-8
