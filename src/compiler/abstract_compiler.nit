@@ -4085,10 +4085,24 @@ redef class ASendExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr, null)
+		if is_safe then
+			v.add "if ({recv}!=NULL) \{"
+		end
 		var callsite = self.callsite.as(not null)
 		if callsite.is_broken then return null
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
-		return v.compile_callsite(callsite, args)
+		var res = v.compile_callsite(callsite, args)
+		if is_safe then
+			if res != null then
+				var orig_res = res
+				res = v.new_var(self.mtype.as(not null))
+				v.add("{res} = {orig_res};")
+				v.add("\} else \{")
+				v.add("{res} = NULL;")
+			end
+			v.add("\}")
+		end
+		return res
 	end
 end
 
@@ -4250,6 +4264,13 @@ redef class AIssetAttrExpr
 end
 
 redef class AVarargExpr
+	redef fun expr(v)
+	do
+		return v.expr(self.n_expr, null)
+	end
+end
+
+redef class ASafeExpr
 	redef fun expr(v)
 	do
 		return v.expr(self.n_expr, null)

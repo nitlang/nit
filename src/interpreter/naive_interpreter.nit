@@ -721,6 +721,10 @@ abstract class Instance
 	# Abort if the instance is not a boolean value.
 	fun is_true: Bool do abort
 
+	# Return `true` if the instance is null.
+	# Return `false` otherwise.
+	fun is_null: Bool do return mtype isa MNullType
+
 	# Return true if `self` IS `o` (using the Nit semantic of is)
 	fun eq_is(o: Instance): Bool do return self.is_same_instance(o)
 
@@ -1529,7 +1533,7 @@ redef class AAttrPropdef
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			var arg = args[1]
-			if is_optional and arg.mtype isa MNullType then
+			if is_optional and arg.is_null then
 				var f = v.new_frame(self, mpropdef, args)
 				arg = evaluate_expr(v, recv, f)
 			end
@@ -1824,7 +1828,7 @@ redef class AForExpr
 		for g in n_groups do
 			var col = v.expr(g.n_expr)
 			if col == null then return
-			if col.mtype isa MNullType then fatal(v, "Receiver is null")
+			if col.is_null then fatal(v, "Receiver is null")
 
 			var iter = v.callsite(g.method_iterator, [col]).as(not null)
 			iters.add iter
@@ -2185,7 +2189,7 @@ redef class AAsNotnullExpr
 	do
 		var i = v.expr(self.n_expr)
 		if i == null then return null
-		if i.mtype isa MNullType then
+		if i.is_null then
 			fatal(v, "Cast failed")
 		end
 		return i
@@ -2218,6 +2222,12 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
+
+		# Safe call shortcut if recv is null
+		if is_safe and recv.is_null then
+			return recv
+		end
+
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 		if args == null then return null
 
@@ -2314,7 +2324,7 @@ redef class AAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.read_attribute(mproperty, recv)
 	end
@@ -2325,7 +2335,7 @@ redef class AAttrAssignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -2338,7 +2348,7 @@ redef class AAttrReassignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -2354,13 +2364,20 @@ redef class AIssetAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.bool_instance(v.isset_attribute(mproperty, recv))
 	end
 end
 
 redef class AVarargExpr
+	redef fun expr(v)
+	do
+		return v.expr(self.n_expr)
+	end
+end
+
+redef class ASafeExpr
 	redef fun expr(v)
 	do
 		return v.expr(self.n_expr)

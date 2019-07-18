@@ -1929,6 +1929,11 @@ redef class ASendExpr
 	# The property invoked by the send.
 	var callsite: nullable CallSite
 
+	# Is self a safe call (with `x?.foo`)?
+	# If so and the receiver is null, then the arguments won't be evaluated
+	# and the call skipped (replaced with null).
+	var is_safe: Bool = false
+
 	redef fun bad_expr_message(child)
 	do
 		if child == self.n_expr then
@@ -1941,6 +1946,13 @@ redef class ASendExpr
 	do
 		var nrecv = self.n_expr
 		var recvtype = v.visit_expr(nrecv)
+
+		if nrecv isa ASafeExpr then
+			# Has the receiver the form `x?.foo`?
+			# For parsing "reasons" the `?` is in the receiver node, not the call node.
+			is_safe = true
+		end
+
 		var name = self.property_name
 		var node = self.property_node
 
@@ -1991,6 +2003,10 @@ redef class ASendExpr
 
 		var ret = msignature.return_mtype
 		if ret != null then
+			if is_safe then
+				# A safe receiver makes that the call is not executed and returns null
+				ret = ret.as_nullable
+			end
 			self.mtype = ret
 		else
 			self.is_typed = true
@@ -2471,6 +2487,28 @@ redef class AIssetAttrExpr
 			v.error(n_id, "Type Error: `isset` on a nullable attribute.")
 		end
 		self.mtype = v.type_bool(self)
+	end
+end
+
+redef class ASafeExpr
+	redef fun accept_typing(v)
+	do
+		var mtype = v.visit_expr(n_expr)
+		if mtype == null then return # Skip error
+
+		if mtype isa MNullType then
+			# While `null?.foo` is semantically well defined and should not execute `foo` and just return `null`,
+			# currently `null.foo` is forbidden so it seems coherent to also forbid `null?.foo`
+			v.modelbuilder.error(self, "Error: safe operator `?` on `null`.")
+			return
+		end
+
+		self.mtype = mtype.as_notnull
+
+		if not v.can_be_null(mtype) then
+			v.modelbuilder.warning(self, "useless-safe", "Warning: useless safe operator `?` on non-nullable value.")
+			return
+		end
 	end
 end
 

@@ -983,6 +983,11 @@ class TStarship
 	super TokenOperator
 end
 
+# The operator `?`
+class TQuest
+	super TokenOperator
+end
+
 # The operator `!`
 class TBang
 	super TokenOperator
@@ -2748,6 +2753,17 @@ class AVarargExpr
 
 	# The `...` symbol
 	var n_dotdotdot: TDotdotdot is writable, noinit
+end
+
+# A receiver with a `?` suffix used in safe call operator.
+class ASafeExpr
+	super AExpr
+
+	# The expression made safe
+	var n_expr: AExpr is writable, noinit
+
+	# The `?` symbol
+	var n_quest: TQuest is writable, noinit
 end
 
 # An named notation used to pass an expression by name in a parameter
