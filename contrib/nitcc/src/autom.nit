@@ -358,10 +358,14 @@ class Automaton
 			if not goods.has(s) then bads.add(s)
 		end
 
-		# Remove their transitions
+		# Remove their transitions and tags
 		for s in bads do
 			for t in s.ins.to_a do t.delete
 			for t in s.outs.to_a do t.delete
+			if tags.has_key(s) then
+				for t in tags[s] do retrotags[t].remove(s)
+				tags.keys.remove(s)
+			end
 		end
 
 		# Keep only the good stuff
