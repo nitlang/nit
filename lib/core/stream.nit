@@ -272,13 +272,22 @@ abstract class Reader
 	# assert i2.eof
 	# ~~~
 	#
+	# When `max` is given, it indicates the maximum number of read bytes (including \n).
+	#
+	# ~~~
+	# txt = "Hello\nWorld"
+	# i = new StringReader(txt)
+	# assert i.read_line(50) == "Hello"
+	# assert i.read_line(2) == "Wo"
+	# ~~~
+	#
 	# NOTE: Use `append_line_to` if the line terminator needs to be preserved.
-	fun read_line: String
+	fun read_line(max: nullable Int): String
 	do
 		if last_error != null then return ""
 		if eof then return ""
 		var s = new FlatBuffer
-		append_line_to(s)
+		append_line_to(s, max)
 		return s.to_s.chomp
 	end
 
@@ -385,8 +394,20 @@ abstract class Reader
 	# assert i.eof
 	# ~~~
 	#
+	# when `max` is given it is the maximum of characters to read.
+	#
+	# ~~~
+	# txt = "Hello\nWorld\n"
+	# i = new StringReader(txt)
+	# b = new FlatBuffer
+	# i.append_line_to(b, 50)
+	# assert b == "Hello\n"
+	# i.append_line_to(b, 2)
+	# assert b == "Hello\nWo"
+	# ~~~
+	#
 	# If `\n` is not present at the end of the result, it means that
-	# a non-eol terminated last line was returned.
+	# a non-eol terminated last line was returned or that `max` characters where read.
 	#
 	# ~~~
 	# var i2 = new StringReader("hello")
@@ -399,10 +420,14 @@ abstract class Reader
 	#
 	# NOTE: The single character LINE FEED (`\n`) delimits the end of lines.
 	# Therefore CARRIAGE RETURN & LINE FEED (`\r\n`) is also recognized.
-	fun append_line_to(s: Buffer)
+	fun append_line_to(s: Buffer, max: nullable Int)
 	do
 		if last_error != null then return
 		loop
+			if max != null then
+				if max <= 0 then return
+				max -= 1
+			end
 			var x = read_char
 			if x == null then
 				if eof then return
