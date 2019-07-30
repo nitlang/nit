@@ -71,6 +71,9 @@ class NaiveInterpreter
 	# The main Sys instance
 	var mainobj: nullable Instance is noinit
 
+        # Name of all supported functional names
+        var routine_types: Set[String] = new HashSet[String]
+
 	init
 	do
 		if mainmodule.model.get_mclasses_by_name("Bool") != null then
@@ -80,6 +83,15 @@ class NaiveInterpreter
 			init_instance_primitive(self.false_instance)
 		end
 		self.null_instance = new PrimitiveInstance[nullable Object](mainmodule.model.null_type, null)
+
+                routine_types.add("RoutineRef")
+                for name in ["Proc", "Fun", "ProcRef", "FunRef"] do
+                        # 20 is a magic number = upper limit of the arity of each functional class.
+                        # i.e. Proc0, Proc1, ... Proc19
+                        for i  in [0..20[ do
+                                routine_types.add("{name}{i}")
+                        end
+                end
 	end
 
 	# Starts the interpreter on the main module of a program
@@ -993,6 +1005,19 @@ redef class AMethPropdef
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
+
+                if pname == "call" and v.routine_types.has(cname) then
+                        var routine = args.shift
+                        assert routine isa CallrefInstance
+                        # Swap the receiver position with the original recv of the call form.
+                        args.unshift routine.recv
+                        var res = v.callsite(routine.callsite, args)
+                        # recover the old args state
+                        args.shift
+                        args.unshift routine
+                        return res
+                end
+
 		if pname == "output" then
 			var recv = args.first
 			recv.val.output
@@ -2274,7 +2299,6 @@ redef class ACallrefExpr
                 if recv == null then return null
                 assert mtype != null
                 var inst = new CallrefInstance(mtype.as(not null), recv, callsite.as(not null))
-                #fatal(v, "NOT YET IMPLEMENTED intern")
                 return inst
         end
 end

@@ -55,6 +55,10 @@ var w = &a.tutu
 var h = &b.tete
 var z = &b2.tata
 h.call(10000)
+h.call(1000)
+h.call(100)
+h.call(10)
+h.call(10000)
 var y: Fun1[Int,Int] = w
 var l: Fun1[Object,Object] = y
 print l.call(10)

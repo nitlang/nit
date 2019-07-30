@@ -2171,22 +2171,24 @@ abstract class AbstractRuntimeFunction
                 return new StaticFrame(v, mmethoddef, recv_mtype.as(MClassType), arguments)
         end
 
-        # Step 3
+        # Step 3 : Returns the return type used by the runtime function.
         protected fun resolve_return_mtype(v: VISITOR)
         do
                 return_mtype = msignature.return_mtype
         end
 
+        # Fills the argument array inside v.frame.arguments, calling `resolve_ith_parameter`
+        # for each parameter.
         private fun fill_parameters(v: VISITOR)
         do
-                var selfvar = v.frame.selfvar
+                assert v.frame != null
                 for i in [0..msignature.arity[ do
                         var arg = resolve_ith_parameter(v, i)
 			v.frame.arguments.add(arg)
 		end
         end
 
-        # Step 4
+        # Step 4 : Creates `RuntimeVariable` for each method argument.
         protected fun resolve_ith_parameter(v: VISITOR, i: Int): RuntimeVariable
         do
                 var mp = msignature.mparameters[i]
@@ -2204,6 +2206,7 @@ abstract class AbstractRuntimeFunction
         # Step 5
         protected fun signature_to_c(v: VISITOR): String
         do
+                assert v.frame != null
                 var arguments = v.frame.arguments
                 var comment = new FlatBuffer
                 var selfvar = v.frame.selfvar
@@ -2327,12 +2330,15 @@ end
 abstract class ThunkFunction
         super AbstractRuntimeFunction
 
+        # The type expected by the callee. Used to resolve `mmethoddef`'s formal
+        # parameters and virtual type. This type must NOT need anchor.
         fun target_recv: MType is abstract
 
         redef fun body_to_c(v)
         do
                 assert not target_recv.need_anchor
                 var frame = v.frame
+                assert frame != null
                 var selfvar = frame.selfvar
                 var arguments = frame.arguments
                 var arguments2 = new Array[RuntimeVariable]

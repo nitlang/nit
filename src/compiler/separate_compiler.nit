@@ -149,7 +149,7 @@ class SeparateCompiler
 	private var type_ids: Map[MType, Int] is noinit
 	private var type_colors: Map[MType, Int] is noinit
 	private var opentype_colors: Map[MType, Int] is noinit
-        private var thunks_to_compile: Set[SeparateThunkFunction] = new HashSet[SeparateThunkFunction]
+        private var thunks_to_compile: Set[SeparateRuntimeFunction] = new HashSet[SeparateRuntimeFunction]
 
         init do
 		var file = new_file("nit.common")
@@ -194,16 +194,15 @@ class SeparateCompiler
 		modelbuilder.toolcontext.info("Type coloring", 2)
 		compiler.new_file("{c_name}.types")
 		compiler.compile_types
-
-
-                for thunk in thunks_to_compile do
-                        thunk.compile_to_c(self)
-                end
 	end
 
-        fun thunk_todo(thunk: SeparateThunkFunction)
+        fun thunk_todo(thunk: SeparateRuntimeFunction)
         do
-                thunks_to_compile.add(thunk)
+                # Concrete instance of `SeparateRuntimeFunction` are already
+                # handled by the compiler. Avoid duplicate compilation.
+                if thunk isa SeparateThunkFunction then
+                        thunks_to_compile.add(thunk)
+                end
         end
 
 	# Color and compile type structures and cast information
@@ -651,6 +650,15 @@ class SeparateCompiler
 				end
 			end
 		end
+                var compiled_thunks = new Array[SeparateRuntimeFunction]
+                # Compile thunks here to write them in the same module they are declared.
+                for thunk in thunks_to_compile do
+                        if thunk.mmethoddef.mclassdef.mmodule == mmodule then
+                                thunk.compile_to_c(self)
+                                compiled_thunks.add(thunk)
+                        end
+                end
+                thunks_to_compile.remove_all(compiled_thunks)
 		self.mainmodule = old_module
 	end
 
@@ -2248,22 +2256,15 @@ class SeparateCompilerVisitor
                 var original_recv_c = "(((struct instance_{nclass.c_name}*){arguments[0]})->recv)"
                 var nitmethod = "(({runtime_function.c_funptrtype})(((struct instance_{nclass.c_name}*){arguments[0]})->method))"
                 if arguments.length > 1 then
-                        # Here mmethoddef's signature is always nullable Object
                         adapt_signature(mmethoddef, arguments)
                 end
 
-                #var ret = msignature.return_mtype
                 var ret_mtype = runtime_function.called_signature.return_mtype
 
                 if ret_mtype != null then
-                        # `ret` is actually always nullable Object, the most specific
-                        # return type is inside the current routine_mclass.
-                        # At this point, we don't have any information
-                        # on the original callsite which has the return type.
-                        # Therefore, we need to recompute it using the current routine
-                        # receiver whose last formal parameter (Generic Class) is the
-                        # return type. This is why we pass a `MMethodDef` instead of
-                        # `CallSite`.
+                        # `ret` is actually always nullable Object. When invoking
+                        # a callref, we don't have the original callsite information.
+                        # Thus, we need to recompute the return type of the callsite.
                         ret_mtype = resolve_for(ret_mtype, routine)
                 end
 
@@ -2286,7 +2287,6 @@ class SeparateCompilerVisitor
                 else
                         add("{callsite};")
 		end
-                #debug "LEAVING ref_call"
         end
 
 	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
@@ -2313,14 +2313,22 @@ redef class MMethodDef
 		return res
 	end
 
-
-        fun callref_thunk(recv_mtype: MClassType): SeparateThunkFunction
+        # The C thunk function associated to a mmethoddef. Receives only nullable
+        # Object and cast them to the original mmethoddef signature.
+        fun callref_thunk(recv_mtype: MClassType): SeparateRuntimeFunction
         do
                 var res = callref_thunk_cache
                 if res == null then
+                        var runtime_function = virtual_runtime_function
                         var object_type = mclassdef.mmodule.object_type
                         var nullable_object = object_type.as_nullable
                         var msignature2 = msignature.change_all_mtype_for(nullable_object)
+                        # If the thunk signature is equivalent to its
+                        # virtual counterpart, then nothing to do.
+                        if msignature2.c_equiv(runtime_function.called_signature) then
+                                callref_thunk_cache = res
+                                return runtime_function
+                        end
                         # receiver cannot be null
                         res = new SeparateThunkFunction(self, recv_mtype, msignature2, "THUNK_{c_name}", mclassdef.bound_mtype)
                         callref_thunk_cache = res
