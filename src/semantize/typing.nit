@@ -1992,6 +1992,7 @@ redef class ASendExpr
                 if not self isa ACallrefExpr then
 			callsite.check_signature(v, node, args)
                 end
+
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
 			if not (vmpropdef isa MMethodDef and vmpropdef.mproperty.is_init) then
@@ -2618,7 +2619,11 @@ redef class ACallrefExpr
 
                 var types_list = new Array[MType]
                 for param in msignature.mparameters do
-                        types_list.push(param.mtype)
+                        if param.is_vararg then
+                                types_list.push(v.mmodule.array_type(param.mtype))
+                        else
+                                types_list.push(param.mtype)
+                        end
                 end
                 if msignature.return_mtype != null then
                         types_list.push(msignature.return_mtype.as(not null))
