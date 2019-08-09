@@ -1,10 +1,6 @@
-module func_collections
-import iter_extras
-
-
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2019-2020 Louis-Vincent Boudreault <lv.boudreault95@gmail.com>
+# Copyright 2019 Louis-Vincent Boudreault <lv.boudreault95@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +20,10 @@ import iter_extras
 # Warning: The Entry API is not thread-safe, i.e concurrent entry manipulation
 # might put the Map in a inconsistent state. In multithreading environment, you
 # should use guards before creating an `Entry`.
+
+module func_collections
+import iter_extras
+
 abstract class Entry[K,V]
         var map: Map[K,V]
         var key: K
@@ -85,6 +85,18 @@ end
 redef interface Map[K,V]
 
         # A view over a key-value pair.
+        #
+        # ~~~~nitish
+        # fun square(x: Int): Int do return x * x
+        #
+        # var m = new HashMap[String, Int]
+        # m.entry("ten").or_insert(10)
+        # assert m["ten"] == 10
+        # m.entry("ten").or_insert(100)
+        # assert m["ten"] == 10
+        # m.entry("ten").and_do(&square).and_do(&square)
+        # assert m["ten"] == 10000
+        # ~~~~
         fun entry(k: K): Entry[K,V] do
                 if has_key(k) then
                         return new Occupied[K,V](self, k)
