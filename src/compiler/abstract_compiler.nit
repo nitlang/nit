@@ -1776,10 +1776,10 @@ abstract class AbstractCompilerVisitor
 	# Generate a float value
 	#
 	# FIXME pass a Float, not a string
-	fun float_instance(value: String): RuntimeVariable
+	fun float_instance(value: Float): RuntimeVariable
 	do
 		var t = mmodule.float_type
-		var res = new RuntimeVariable("{value}", t, t)
+		var res = new RuntimeVariable("{value.to_hexa_exponential_notation}", t, t)
 		return res
 	end
 
@@ -3820,7 +3820,7 @@ redef class AIntegerExpr
 end
 
 redef class AFloatExpr
-	redef fun expr(v) do return v.float_instance("{self.n_float.text}") # FIXME use value, not n_float
+	redef fun expr(v) do return v.float_instance(self.value.as(Float))
 end
 
 redef class ACharExpr
