@@ -204,19 +204,37 @@ redef class MModule
 	do
 		var res = self.flatten_mclass_hierarchy_cache
 		if res != null then return res
-		res = new POSet[MClass]
+                self.flatten_mclass_hierarchy_cache = new POSet[MClass]
 		for m in self.in_importation.greaters do
 			for cd in m.mclassdefs do
-				var c = cd.mclass
-				res.add_node(c)
-				for s in cd.supertypes do
-					res.add_edge(c, s.mclass)
-				end
+                                unsafe_update_hierarchy_cache(cd)
 			end
 		end
-		self.flatten_mclass_hierarchy_cache = res
-		return res
+		return self.flatten_mclass_hierarchy_cache.as(not null)
 	end
+
+        # Adds another class definition in the modue.
+        # Updates the class hierarchy cache.
+        fun add_mclassdef(mclassdef: MClassDef)
+        do
+                self.mclassdefs.add(mclassdef)
+                if self.flatten_mclass_hierarchy_cache != null then
+                        unsafe_update_hierarchy_cache(mclassdef)
+                end
+        end
+
+        # Adds a class definition inside `flatten_mclass_hierarchy_cache` without
+        # null check. The caller must have initialized the cache.
+        protected fun unsafe_update_hierarchy_cache(mclassdef: MClassDef)
+        do
+                var hierarchy = self.flatten_mclass_hierarchy_cache.as(not null)
+                # Update the cache
+                var c = mclassdef.mclass
+                hierarchy.add_node(c)
+                for s in mclassdef.supertypes do
+                        hierarchy.add_edge(c, s.mclass)
+                end
+        end
 
 	# Sort a given array of classes using the linearization order of the module
 	# The most general is first, the most specific is last
@@ -651,7 +669,7 @@ class MClassDef
 	init
 	do
 		self.mclass = bound_mtype.mclass
-		mmodule.mclassdefs.add(self)
+		mmodule.add_mclassdef(self)
 		mclass.mclassdefs.add(self)
 		if mclass.intro_mmodule == mmodule then
 			assert not isset mclass._intro
