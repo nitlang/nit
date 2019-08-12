@@ -2033,7 +2033,7 @@ redef class Float
 	#
 	# see `to_precision` for a custom precision.
 	redef fun to_s do
-		var str = to_precision( 3 )
+		var str = to_precision(3)
 		if is_inf != 0 or is_nan then return str
 		var len = str.length
 		for i in [0..len-1] do
@@ -2072,9 +2072,23 @@ redef class Float
 		end
 
 		var size = to_precision_size(decimals)
-		var cstr = new CString(size+1)
-		to_precision_fill(decimals, size+1, cstr)
-		return cstr.to_s_unsafe(byte_length=size, copy=false)
+		var cstr = new CString(size + 1)
+		to_precision_fill(decimals, size + 1, cstr)
+		return cstr.to_s_unsafe(byte_length = size, copy = false)
+	end
+
+	# Returns the hexadecimal (`String`) representation of `self` in exponential notation
+	#
+	# ~~~
+	# assert 12.345.to_hexa_exponential_notation    == "0x1.8b0a3d70a3d71p+3"
+	# assert 12.345.to_hexa_exponential_notation.to_f == 12.345
+	# ~~~
+	fun to_hexa_exponential_notation: String
+	do
+		var size = to_precision_size_hexa
+		var cstr = new CString(size + 1)
+		to_precision_fill_hexa(size + 1, cstr)
+		return cstr.to_s_unsafe(byte_length = size, copy = false)
 	end
 
 	# Required string length to hold `self` with `nb` decimals
@@ -2087,6 +2101,16 @@ redef class Float
 	# Fill `cstr` with `self` and `nb` decimals
 	private fun to_precision_fill(nb, size: Int, cstr: CString) `{
 		snprintf(cstr, size, "%.*f", (int)nb, self);
+	`}
+
+	# The lenght of `self` in exponential hexadecimal notation
+	private fun to_precision_size_hexa: Int`{
+		return snprintf(NULL, 0, "%a", self);
+	`}
+
+	# Fill `cstr` with `self` in exponential hexadecimal notation
+	private fun to_precision_fill_hexa(size: Int, cstr: CString) `{
+		snprintf(cstr, size, "%a", self);
 	`}
 end
 
