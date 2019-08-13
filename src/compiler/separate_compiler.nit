@@ -2216,6 +2216,7 @@ class SeparateCompilerVisitor
                 self.require_declaration("class_{routine_mclass.c_name}")
                 self.require_declaration("type_{routine_type.c_name}")
 
+                compiler.undead_types.add(routine_type)
                 self.require_declaration(mmethoddef.c_name)
                 self.require_declaration(mmethoddef.callref_thunk(my_recv_mclass_type).c_name)
 
