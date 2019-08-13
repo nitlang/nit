@@ -116,14 +116,14 @@ class ASTBuilder
 	end
 
 	# Make a new method
-	fun make_method(n_visibility: nullable APublicVisibility,
+	fun make_method(n_visibility: nullable AVisibility,
 					tk_redef: nullable TKwredef,
-					mmethoddef: MMethodDef,
+					mmethoddef: nullable MMethodDef,
 					n_signature: nullable ASignature,
 					n_annotations: nullable AAnnotations,
 					n_extern_calls: nullable AExternCalls,
 					n_extern_code_block: nullable AExternCodeBlock,
-					n_block: AExpr): AMethPropdef
+					n_block: nullable AExpr): AMethPropdef
 	do
 		return new AMethPropdef.make(n_visibility, tk_redef, mmethoddef, n_signature, n_annotations, n_extern_calls, n_extern_code_block, n_block)
 	end
@@ -285,9 +285,9 @@ redef class AAndExpr
 end
 
 redef class AMethPropdef
-	private init make(n_visibility: nullable APublicVisibility,
+	private init make(n_visibility: nullable AVisibility,
 					tk_redef: nullable TKwredef,
-					mmethoddef: MMethodDef,
+					mmethoddef: nullable MMethodDef,
 					n_signature: nullable ASignature,
 					n_annotations: nullable AAnnotations,
 					n_extern_calls: nullable AExternCalls,
@@ -295,12 +295,15 @@ redef class AMethPropdef
 					n_block: nullable AExpr)
 	do
 		var n_tid = new TId
-		n_tid.text = mmethoddef.name
 		var n_methid = new AIdMethid.init_aidmethid(n_tid)
 		if n_signature == null then n_signature = new ASignature
 		if n_visibility == null then n_visibility = new APublicVisibility
 		self.init_amethpropdef(null,tk_redef,n_visibility,new TKwmeth,null,null,null,n_methid,n_signature,n_annotations,n_extern_calls,n_extern_code_block,new TKwdo,n_block,new TKwend)
-		self.mpropdef = mmethoddef
+
+		if mmethoddef != null then
+			self.n_methid.as(AIdMethid).n_id.text = mmethoddef.name
+			self.mpropdef = mmethoddef
+		end
 	end
 end
 
