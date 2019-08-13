@@ -157,6 +157,14 @@ class ASTBuilder
 	do
 		return new AReturnExpr.make(expr)
 	end
+	# Create a callsite with the given `mproperty`. Take the current method `actual_method` as a context
+	fun create_callsite(modelbuilder: ModelBuilder, actual_method : AMethPropdef, mproperty: MMethod, is_self_call: Bool): CallSite
+	do
+		var type_visitor = new TypeVisitor(modelbuilder, actual_method.mpropdef.as(not null))
+		var callsite = type_visitor.build_callsite_by_property(actual_method, mproperty.intro_mclassdef.bound_mtype, mproperty, is_self_call)
+		assert callsite != null
+		return callsite
+	end
 end
 
 redef class AExpr
