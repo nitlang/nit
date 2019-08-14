@@ -48,17 +48,6 @@ class B
         end
 end
 
-class C[E]
-        var x: E
-        redef fun to_s
-        do
-                if x != null then
-                        return "x is {x.as(not null)}"
-                end
-                return "x is null"
-        end
-end
-
 class Counter
         var x = 0
         fun incr do x += 1
@@ -93,17 +82,3 @@ var ps = [p1,p1,p1,p1,p1]
 
 for p in ps do p.call
 assert cnt.x == 5
-
-var c1 = new C[nullable Object](null)
-var c2 = new C[nullable Int](null)
-var f6 = &c1.to_s
-var f7 = &c2.to_s
-
-assert f6.call == "x is null"
-assert f7.call == "x is null"
-
-c1.x = "test"
-c2.x = 100
-
-assert f6.call == "x is test"
-assert f7.call == "x is 100"

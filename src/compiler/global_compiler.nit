@@ -472,6 +472,7 @@ class GlobalCompilerVisitor
                         my_recv = autobox(recv, object_type)
                 end
                 var thunk = new CustomizedThunkFunction(mmethoddef, my_recv.mtype.as(MClassType))
+                thunk.force_polymorphism = not my_recv.is_exact
                 compiler.todo(method)
                 compiler.todo(thunk)
 
@@ -1168,6 +1169,9 @@ end
 class CustomizedThunkFunction
         super ThunkFunction
         super CustomizedRuntimeFunction
+
+        var force_polymorphism = false
+
         redef fun c_name
         do
                 return "THUNK_" + super
@@ -1179,9 +1183,50 @@ class CustomizedThunkFunction
                 return super + c_name.hash
         end
 
+        redef fun resolve_receiver(v)
+        do
+                var res = super(v)
+                if res.is_exact then res.is_exact = not force_polymorphism
+                return res
+        end
 
         redef fun target_recv
         do
+                # If the class that introduce the targeted method is a primitive
+                # type, then target_recv must be set to it. Otherwise, there will
+                # be missing cast. Here's an example:
+                #
+                # ~~~~nitish
+                # class Int
+                #       fun mult_by(x:Int):Int do return x * self
+                # end
+                #
+                # var f = &10.mult_by
+                # ~~~~
+                # Here the thunk `f` must box the receiver `10` into an object.
+                # This is due to the memory representation of a call ref which
+                # has a pointer to an opaque type `val*`:
+                #
+                # ```C
+                # struct Mult_by_callref_struct {
+                #       classid;
+                #       // The receiver `10` would be here
+                #       val* recv;
+                #       // the targeted receiver is a `long`
+                #       long (*pointer_to_mult_by)(long, long);
+                # }
+                # ```
+                #
+                # Thus, every primitive type must be boxed into an `Object` when
+                # instantiating a callref.
+                #
+                # However, if the underlying method was introduced by a primitive
+                # type then a cast must be invoked to convert our boxed receiver
+                # to its original primitive type.
+                var intro_recv = mmethoddef.mproperty.intro_mclassdef.bound_mtype
+                if intro_recv.is_c_primitive then
+                        return intro_recv
+                end
                 return recv_mtype
         end
 end
