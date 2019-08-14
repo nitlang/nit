@@ -1000,6 +1000,13 @@ class ACallExpr
 	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 end
+class ACallrefExpr
+	super AExpr
+	var n_amp: TAmp is writable, noinit
+	var n_expr: AExpr is writable, noinit
+	var n_qid: AQid is writable, noinit
+	var n_args: AExprs is writable, noinit
+end
 class ACallAssignExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit

@@ -2165,6 +2165,24 @@ redef class AInitExpr
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
+redef class ACallrefExpr
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid
+	redef fun compute_raw_arguments do return n_args.to_a
+
+	redef fun accept_typing(v)
+	do
+		super # do the job as if it was a real call
+
+		# TODO: inspect self.callsite to get information about the method
+		var res = callsite.mproperty
+
+		# TODO: return a functionnal type
+		self.mtype = null
+		v.error(self, "Error: NOT YET IMPLEMENTED callref expressions.")
+	end
+end
+
 redef class AExprs
 	fun to_a: Array[AExpr] do return self.n_exprs.to_a
 end

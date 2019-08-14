@@ -482,7 +482,7 @@ redef class ACallFormExpr
 			var variable = v.search_variable(name)
 			if variable != null then
 				var n: AExpr
-				if not n_args.n_exprs.is_empty or n_args isa AParExprs then
+				if not n_args.n_exprs.is_empty or n_args isa AParExprs or self isa ACallrefExpr then
 					v.error(self, "Error: `{name}` is a variable, not a method.")
 					return
 				end
