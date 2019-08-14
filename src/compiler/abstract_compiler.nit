@@ -2354,7 +2354,8 @@ abstract class ThunkFunction
                         arguments2.push(temp)
                 end
                 v.add("/* {mmethoddef}, {recv_mtype.ctype} */")
-                var subret = v.call(mmethoddef, arguments2[0].mcasttype.as(MClassType), arguments2)
+                #var subret = v.call(mmethoddef, arguments2[0].mcasttype.as(MClassType), arguments2)
+                var subret = v.send(mmethoddef.mproperty, arguments2)
                 if has_return then
                         assert subret != null
                         var subret2 = v.autobox(subret, return_mtype.as(not null))

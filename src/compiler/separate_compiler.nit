@@ -2204,7 +2204,6 @@ class SeparateCompilerVisitor
                 self.require_declaration("NEW_{base_routine_mclass.c_name}")
 
                 var recv_class_cname = recv.mcasttype.as(MClassType).mclass.c_name
-
                 var my_recv = recv
 
                 if recv.mtype.is_c_primitive then
@@ -2327,8 +2326,8 @@ redef class MMethodDef
                         # If the thunk signature is equivalent to its
                         # virtual counterpart, then nothing to do.
                         if msignature2.c_equiv(runtime_function.called_signature) then
-                                callref_thunk_cache = res
-                                return runtime_function
+                                #callref_thunk_cache = res
+                                #return runtime_function
                         end
                         # receiver cannot be null
                         res = new SeparateThunkFunction(self, recv_mtype, msignature2, "THUNK_{c_name}", mclassdef.bound_mtype)
