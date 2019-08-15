@@ -705,13 +705,25 @@ class SeparateErasureCompilerVisitor
                 self.require_declaration("class_{routine_mclass.c_name}")
 
                 self.require_declaration(mmethoddef.c_name)
-                self.require_declaration(mmethoddef.callref_thunk(my_recv_mclass_type).c_name)
 
                 var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
+                var runtime_function = mmethoddef.virtual_runtime_function
+
+                var is_c_equiv = runtime_function.msignature.c_equiv(thunk_function.msignature)
+
+                var c_ref = thunk_function.c_ref
+                if is_c_equiv then
+                        var const_color = mmethoddef.mproperty.const_color
+                        c_ref = "{class_info(my_recv)}->vft[{const_color}]"
+                        self.require_declaration(const_color)
+                else
+                        self.require_declaration(thunk_function.c_name)
+                        compiler.thunk_todo(thunk_function)
+                end
                 compiler.thunk_todo(thunk_function)
 
                 # Each RoutineRef points to a receiver AND a callref_thunk
-                var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){thunk_function.c_ref}, &class_{routine_mclass.c_name})", routine_type)
+                var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name})", routine_type)
                 #debug "LEAVING ref_instance"
                 return res
 

@@ -2143,7 +2143,7 @@ abstract class AbstractRuntimeFunction
         # This method is useful since most concrete implementation doesn't use the
         # mmethoddef's signature. By providing a definition in the abstract class,
         # subclasses can use any msignature.
-        protected fun msignature: MSignature
+        fun msignature: MSignature
         do
                 return mmethoddef.msignature.as(not null)
         end

@@ -2217,13 +2217,27 @@ class SeparateCompilerVisitor
 
                 compiler.undead_types.add(routine_type)
                 self.require_declaration(mmethoddef.c_name)
-                self.require_declaration(mmethoddef.callref_thunk(my_recv_mclass_type).c_name)
 
                 var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
-                compiler.thunk_todo(thunk_function)
+                # If the receiver is exact, then there's no need to make a
+                # polymorph call to the underlying method.
+                thunk_function.polymorph_call_flag = not my_recv.is_exact
+                var runtime_function = mmethoddef.virtual_runtime_function
+
+                var is_c_equiv = runtime_function.msignature.c_equiv(thunk_function.msignature)
+
+                var c_ref = thunk_function.c_ref
+                if is_c_equiv then
+                        var const_color = mmethoddef.mproperty.const_color
+                        c_ref = "{class_info(my_recv)}->vft[{const_color}]"
+                        self.require_declaration(const_color)
+                else
+                        self.require_declaration(thunk_function.c_name)
+                        compiler.thunk_todo(thunk_function)
+                end
 
                 # Each RoutineRef points to a receiver AND a callref_thunk
-                var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){thunk_function.c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
+                var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
                 #debug "LEAVING ref_instance"
                 return res
         end
@@ -2313,22 +2327,35 @@ redef class MMethodDef
 		return res
 	end
 
+        # Returns true if the current method definition differ from
+        # its original introduction in terms of receiver type.
+        fun recv_differ_from_intro: Bool
+        do
+                var intromclassdef = mproperty.intro.mclassdef
+	        var introrecv = intromclassdef.bound_mtype
+                return self.mclassdef.bound_mtype != introrecv
+        end
+
         # The C thunk function associated to a mmethoddef. Receives only nullable
         # Object and cast them to the original mmethoddef signature.
-        fun callref_thunk(recv_mtype: MClassType): SeparateRuntimeFunction
+        fun callref_thunk(recv_mtype: MClassType): SeparateThunkFunction
         do
                 var res = callref_thunk_cache
                 if res == null then
-                        var runtime_function = virtual_runtime_function
+                        #var runtime_function = virtual_runtime_function
                         var object_type = mclassdef.mmodule.object_type
                         var nullable_object = object_type.as_nullable
                         var msignature2 = msignature.change_all_mtype_for(nullable_object)
-                        # If the thunk signature is equivalent to its
-                        # virtual counterpart, then nothing to do.
-                        if msignature2.c_equiv(runtime_function.called_signature) then
-                                #callref_thunk_cache = res
-                                #return runtime_function
-                        end
+                        var intromclassdef = mproperty.intro.mclassdef
+
+                        #var introrecv = intromclassdef.bound_mtype
+                        ## If the thunk signature is equivalent to its
+                        ## virtual counterpart, then nothing to do.
+                        #print "recv vs intro : {recv_mtype} vs {introrecv}"
+                        #if msignature2.c_equiv(runtime_function.called_signature) and recv_mtype == introrecv then
+                        #        callref_thunk_cache = res
+                        #        return runtime_function
+                        #end
                         # receiver cannot be null
                         res = new SeparateThunkFunction(self, recv_mtype, msignature2, "THUNK_{c_name}", mclassdef.bound_mtype)
                         res.polymorph_call_flag = true
