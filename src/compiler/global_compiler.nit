@@ -926,7 +926,7 @@ class GlobalCompilerVisitor
 	end
 end
 
-# A runtime function customized on a specific monomrph receiver type
+# A runtime function customized on a specific monomorph receiver type
 private class CustomizedRuntimeFunction
 	super AbstractRuntimeFunction
 
@@ -971,74 +971,51 @@ private class CustomizedRuntimeFunction
 		end
 	end
 
-	# compile the code customized for the reciever
-	redef fun compile_to_c(compiler)
-	do
-		var recv = self.recv
-		var mmethoddef = self.mmethoddef
-		if not recv.is_subtype(compiler.mainmodule, null, mmethoddef.mclassdef.bound_mtype) then
-			print("problem: why do we compile {self} for {recv}?")
-			abort
-		end
+        redef fun recv_mtype
+        do
+                return recv
+        end
 
-		var v = compiler.new_visitor
-		var selfvar = new RuntimeVariable("self", recv, recv)
-		if compiler.runtime_type_analysis.live_types.has(recv) then
+        redef var return_mtype
+
+        redef fun resolve_receiver(v)
+        do
+                var selfvar = new RuntimeVariable("self", recv, recv)
+		if v.compiler.runtime_type_analysis.live_types.has(recv) then
 			selfvar.is_exact = true
 		end
-		var arguments = new Array[RuntimeVariable]
-		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
-		v.frame = frame
+                return selfvar
+        end
 
-		var sig = new FlatBuffer
-		var comment = new FlatBuffer
-		var ret = mmethoddef.msignature.return_mtype
-		if ret != null then
-			ret = v.resolve_for(ret, selfvar)
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		sig.append("({recv.ctype} {selfvar}")
-		comment.append("(self: {recv}")
-		arguments.add(selfvar)
-		for i in [0..mmethoddef.msignature.arity[ do
-			var mp = mmethoddef.msignature.mparameters[i]
-			var mtype = mp.mtype
-			if mp.is_vararg then
-				mtype = v.mmodule.array_type(mtype)
-			end
-			mtype = v.resolve_for(mtype, selfvar)
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
+        redef fun resolve_return_mtype(v)
+        do
+                var selfvar = v.frame.selfvar
+                if has_return then
+                        var ret = msignature.return_mtype.as(not null)
+                        return_mtype = v.resolve_for(ret, selfvar)
+                end
+        end
+        redef fun resolve_ith_parameter(v, i)
+        do
+                var selfvar = v.frame.selfvar
+                var mp = msignature.mparameters[i]
+                var mtype = mp.mtype
+                if mp.is_vararg then
+                        mtype = v.mmodule.array_type(mtype)
+                end
+                mtype = v.resolve_for(mtype, selfvar)
+                return new RuntimeVariable("p{i}", mtype, mtype)
+        end
 
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		#v.add("printf(\"method {self} for {comment}\\n\");")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
+        redef fun declare_signature(v, sig)
+        do
+                v.compiler.header.add_decl("{sig};")
+        end
 
-		mmethoddef.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
-	end
+        redef fun end_compile_to_c(v)
+        do
+	        if not self.c_name.has_substring("VIRTUAL", 0) then v.compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
+        end
 
 	redef fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
