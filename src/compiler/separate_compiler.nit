@@ -2331,6 +2331,7 @@ redef class MMethodDef
                         end
                         # receiver cannot be null
                         res = new SeparateThunkFunction(self, recv_mtype, msignature2, "THUNK_{c_name}", mclassdef.bound_mtype)
+                        res.polymorph_call_flag = true
                         callref_thunk_cache = res
                 end
                 return res

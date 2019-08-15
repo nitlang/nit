@@ -472,7 +472,8 @@ class GlobalCompilerVisitor
                         my_recv = autobox(recv, object_type)
                 end
                 var thunk = new CustomizedThunkFunction(mmethoddef, my_recv.mtype.as(MClassType))
-                thunk.force_polymorphism = not my_recv.is_exact
+                thunk.polymorph_call_flag = not my_recv.is_exact #true
+                #thunk.force_polymorphism = not my_recv.is_exact
                 compiler.todo(method)
                 compiler.todo(thunk)
 
@@ -1170,7 +1171,7 @@ class CustomizedThunkFunction
         super ThunkFunction
         super CustomizedRuntimeFunction
 
-        var force_polymorphism = false
+        #var force_polymorphism = false
 
         redef fun c_name
         do
@@ -1186,15 +1187,15 @@ class CustomizedThunkFunction
         redef fun resolve_receiver(v)
         do
                 var res = super(v)
-                if res.is_exact then res.is_exact = not force_polymorphism
+                if res.is_exact then res.is_exact = not polymorph_call_flag
                 return res
         end
 
         redef fun target_recv
         do
-                # If the class that introduce the targeted method is a primitive
-                # type, then target_recv must be set to it. Otherwise, there will
-                # be missing cast. Here's an example:
+                # If the targeted method was introduced by a primitive type,
+                # then target_recv must be set to it. Otherwise, there will
+                # be a missing cast. Here's an example:
                 #
                 # ~~~~nitish
                 # class Int

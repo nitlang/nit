@@ -2330,6 +2330,9 @@ end
 abstract class ThunkFunction
         super AbstractRuntimeFunction
 
+        # Determines if the callsite should be polymorphic or static.
+        var polymorph_call_flag = false is writable
+
         # The type expected by the callee. Used to resolve `mmethoddef`'s formal
         # parameters and virtual type. This type must NOT need anchor.
         fun target_recv: MType is abstract
@@ -2354,8 +2357,12 @@ abstract class ThunkFunction
                         arguments2.push(temp)
                 end
                 v.add("/* {mmethoddef}, {recv_mtype.ctype} */")
-                #var subret = v.call(mmethoddef, arguments2[0].mcasttype.as(MClassType), arguments2)
-                var subret = v.send(mmethoddef.mproperty, arguments2)
+                var subret: nullable RuntimeVariable = null
+                if polymorph_call_flag then
+                        subret = v.send(mmethoddef.mproperty, arguments2)
+                else
+                        subret = v.call(mmethoddef, arguments2[0].mcasttype.as(MClassType), arguments2)
+                end
                 if has_return then
                         assert subret != null
                         var subret2 = v.autobox(subret, return_mtype.as(not null))
