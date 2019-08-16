@@ -946,3 +946,134 @@ class HashDigraph[V: Object]
 
 	redef fun vertices_iterator: Iterator[V] do return outgoing_vertices_map.keys.iterator
 end
+
+# A reflexive directed graph
+# i.e an element is in relation with itself (ie is implies `self.has_arc(u,u)`))
+# This class avoids manually adding the reflexive vertices and at the same time it's avoids adding useless data to the hashmap.
+class ReflexiveHashDigraph[V: Object]
+	super HashDigraph[V]
+
+	# Adds the arc (u,v) to this graph.
+	# if `u` is the same as `v` do nothing
+	#
+	# ~~~
+	# var g = new ReflexiveHashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(3, 1)
+	# assert g.has_arc(2,2)
+	# assert g.has_arc(1,2)
+	# assert g.has_arc(3,1)
+	# ~~~
+	redef fun add_arc(u, v)
+	do
+		# Check `u` is the same as `v`
+		if u != v then
+			super
+		end
+	end
+
+	# Is (u,v) an arc in this graph?
+	# If `u` is the same as `v` return true
+	#
+	# ~~~
+	# var g = new ReflexiveHashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(3, 1)
+	# g.add_vertex(4)
+	# assert g.has_arc(1,1)
+	# assert g.has_arc(2,2)
+	# assert g.has_arc(2,2)
+	# assert g.has_arc(3,2) == false
+	# assert g.has_arc(4,4)
+	# ~~~
+	redef fun has_arc(u, v)
+	do
+		return u == v or super
+	end
+
+	redef fun show_dot
+	do
+		var f = new ProcessWriter("dot", "-Txlib")
+		f.write to_dot
+		f.close
+		f.wait
+	end
+
+	# Returns a shortest path from vertex `u` to `v`.
+	#
+	# If `u` is the same as `v` return `[u]`
+	#
+	# ~~~
+	# var g = new ReflexiveHashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 4)
+	# assert g.a_shortest_path(1, 4).length == 4
+	# assert g.a_shortest_path(1, 1).length == 1
+	# ~~~
+	redef fun a_shortest_path(u, v)
+	do
+		if u == v then
+			var path = new List[V]
+			path.add(u)
+			return path
+		end
+		return super
+	end
+
+	# Returns the distance between `u` and `v`
+	#
+	# If `u` is the same as `v` return `1`
+	#
+	# ~~~
+	# var g = new ReflexiveHashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 4)
+	# assert g.distance(1, 1) == 1
+	# assert g.distance(2, 2) == 1
+	# ~~~
+	redef fun distance(u, v)
+	do
+		if has_arc(u, v) and u == v then return 1
+		return super
+	end
+
+	# Returns the predecessors of `u`.
+	#
+	# `u` is include in the returned collection
+	#
+	# ~~~
+	# var g = new ReflexiveHashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 1)
+	# assert g.predecessors(2).has(1)
+	# assert g.predecessors(2).has(2)
+	# ~~~
+	redef fun predecessors(u)
+	do
+		var super_predecessors = super
+		if incoming_vertices_map.has_key(u) then super_predecessors.add(u)
+		return super_predecessors
+	end
+
+	# Returns the successors of `u`.
+	#
+	# `u` is include in the returned collection
+	#
+	# ~~~
+	# var g = new ReflexiveHashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 1)
+	# assert g.successors(2).has(3)
+	# assert g.successors(2).has(2)
+	# ~~~
+	redef fun successors(u: V)
+	do
+		var super_successors = super
+		if outgoing_vertices_map.has_key(u) then super_successors.add(u)
+		return super_successors
+	end
+end
