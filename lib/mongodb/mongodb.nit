@@ -640,11 +640,12 @@ class MongoCollection
 	#
 	# var res = col.aggregate("""[
 	#	{ "$match": { "status": "A" } },
-	#	{ "$group": { "_id": "$cust_id", "total": { "$sum": "$amount" } } }
+	#	{ "$group": { "_id": "$cust_id", "total": { "$sum": "$amount" } } },
+        #       { "$sort" : { "_id": 1 } }
 	# ]""".parse_json.as(JsonArray))
 	#
-	# assert res[0].to_json == """{"_id":"B212","total":200}"""
-	# assert res[1].to_json == """{"_id":"A123","total":750}"""
+        # assert res[0].to_json == """{"_id":"A123","total":750}"""
+	# assert res[1].to_json == """{"_id":"B212","total":200}"""
 	# ~~~
 	fun aggregate(pipeline: JsonArray): Array[JsonObject] do
 		var q = new JsonObject
