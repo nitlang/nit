@@ -185,12 +185,19 @@ class MModule
 		self.in_importation = model.mmodule_importation_hierarchy.add_node(self)
 	end
 
-	# Register the imported modules (ie "import some_module")
+	# Register the imported modules (ie "import some_module") and packages importation graph
+	# In the same time it register the imported package
 	# The visibility must be set with `set_visibility_for`.
 	fun set_imported_mmodules(imported_mmodules: Array[MModule])
 	do
 		for m in imported_mmodules do
 			self.model.mmodule_importation_hierarchy.add_edge(self, m)
+			var actual_mpackage = self.mpackage
+			var imported_mpackage = m.mpackage
+			if actual_mpackage != null and imported_mpackage != null then
+				# Register the imported package
+				self.model.mpackage_importation_graph.add_arc(actual_mpackage, imported_mpackage)
+			end
 		end
 	end
 
