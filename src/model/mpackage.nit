@@ -19,6 +19,7 @@ import model_base
 private import more_collections
 import poset
 import mdoc
+import graph::digraph
 
 # A Nit package, that encompass a product
 class MPackage
@@ -47,6 +48,8 @@ class MPackage
 	init
 	do
 		model.mpackages.add(self)
+		# Add `self` to the importation graph
+		model.mpackage_importation_graph.add_vertex(self)
 		model.mpackage_by_name.add_one(name, self)
 	end
 
@@ -177,6 +180,11 @@ class MGroup
 end
 
 redef class Model
+
+	# Full package importation graph
+	# Each package is in relation with itself
+	var mpackage_importation_graph = new HashDigraph[MPackage]
+
 	# packages of the model
 	var mpackages = new Array[MPackage]
 
