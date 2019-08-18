@@ -2050,6 +2050,34 @@ redef class Float
 		return str
 	end
 
+	# Return the representation of `self`, with scientific notation
+	#
+	# Adpat the number of decimals as needed from 1 to a maximum of 6
+	# ~~~
+	# assert 12.34.to_se       == "1.234000e+01"
+	# assert 123.45.to_se.to_f.to_se  == "1.234500e+02"
+	# assert 0.001234.to_se  == "1.234000e-03"
+	# assert (inf).to_se == "inf"
+	# assert (nan).to_se == "nan"
+	# ~~~
+	fun to_sci: String
+	do
+		if is_nan then return "nan"
+
+		var isinf = self.is_inf
+		if isinf == 1 then
+			return "inf"
+		else if isinf == -1 then
+			return  "-inf"
+		end
+
+		var format = "%e".to_cstring
+		var size = to_precision_size_with_format(format)
+		var cstr = new CString(size + 1)
+		to_precision_fill_with_format(format, size + 1, cstr)
+		return cstr.to_s_unsafe(byte_length = size, copy = false)
+	end
+
 	# `String` representation of `self` with the given number of `decimals`
 	#
 	# ~~~
@@ -2111,6 +2139,16 @@ redef class Float
 	# Fill `cstr` with `self` in exponential hexadecimal notation
 	private fun to_precision_fill_hexa(size: Int, cstr: CString) `{
 		snprintf(cstr, size, "%a", self);
+	`}
+
+	# The lenght of `self` in the specific given c `format`
+	private fun to_precision_size_with_format(format: CString): Int`{
+		return snprintf(NULL, 0, format, self);
+	`}
+
+	# Fill `cstr` with `self` in the specific given c `format`
+	private fun to_precision_fill_with_format(format: CString, size: Int, cstr: CString) `{
+		snprintf(cstr, size, format, self);
 	`}
 end
 
