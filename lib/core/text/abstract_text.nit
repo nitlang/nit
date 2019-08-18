@@ -2029,38 +2029,66 @@ redef class Float
 	# ~~~
 	# assert 12.34.to_s       == "12.34"
 	# assert (-0120.030).to_s == "-120.03"
+	# assert (-inf).to_s == "-inf"
+	# assert (nan).to_s == "nan"
 	# ~~~
 	#
 	# see `to_precision` for a custom precision.
 	redef fun to_s do
 		var str = to_precision(3)
-		if is_inf != 0 or is_nan then return str
-		var len = str.length
-		for i in [0..len-1] do
-			var j = len-1-i
-			var c = str.chars[j]
-			if c == '0' then
-				continue
-			else if c == '.' then
-				return str.substring( 0, j+2 )
-			else
-				return str.substring( 0, j+1 )
-			end
-		end
-		return str
+		return adapt_number_of_decimal(str, false)
 	end
 
 	# Return the representation of `self`, with scientific notation
 	#
 	# Adpat the number of decimals as needed from 1 to a maximum of 6
 	# ~~~
-	# assert 12.34.to_se       == "1.234000e+01"
-	# assert 123.45.to_se.to_f.to_se  == "1.234500e+02"
-	# assert 0.001234.to_se  == "1.234000e-03"
-	# assert (inf).to_se == "inf"
-	# assert (nan).to_se == "nan"
+	# assert 12.34.to_sci       == "1.234e+01"
+	# assert 123.45.to_sci.to_f.to_sci  == "1.2345e+02"
+	# assert 0.001234.to_sci  == "1.234e-03"
+	# assert (inf).to_sci == "inf"
+	# assert (nan).to_sci == "nan"
 	# ~~~
 	fun to_sci: String
+	do
+		var is_inf_or_nan = check_inf_or_nan
+		if is_inf_or_nan != null then return is_inf_or_nan
+		return adapt_number_of_decimal(return_from_specific_format("%e".to_cstring), true)
+	end
+
+	# Return the `string_number` with the adapted number of decimal (i.e the fonction remove the useless `0`)
+	# `is_expo` it's here to specifi if the given `string_number` is in scientific notation
+	private fun adapt_number_of_decimal(string_number: String, is_expo: Bool): String
+	do
+		# check if `self` does not need an adaptation of the decimal
+		if is_inf != 0 or is_nan then return string_number
+		var len = string_number.length
+		var expo_value = ""
+		var numeric_value = ""
+		for i in [0..len-1] do
+			var j = len - 1 - i
+			var c = string_number.chars[j]
+			if not is_expo then
+				if c == '0' then
+					continue
+				else if c == '.' then
+					numeric_value = string_number.substring( 0, j + 2)
+					break
+				else
+					numeric_value = string_number.substring( 0, j + 1)
+					break
+				end
+			else if c == 'e' then
+				expo_value = string_number.substring( j, len - 1 )
+				is_expo = false
+			end
+		end
+		return numeric_value + expo_value
+	end
+
+	# Return a string representation of `self` in fonction if it is not a number or infinity.
+	# Return `null` if `self` is not a not a number or an infinity
+	private fun check_inf_or_nan: nullable String
 	do
 		if is_nan then return "nan"
 
@@ -2070,12 +2098,7 @@ redef class Float
 		else if isinf == -1 then
 			return  "-inf"
 		end
-
-		var format = "%e".to_cstring
-		var size = to_precision_size_with_format(format)
-		var cstr = new CString(size + 1)
-		to_precision_fill_with_format(format, size + 1, cstr)
-		return cstr.to_s_unsafe(byte_length = size, copy = false)
+		return null
 	end
 
 	# `String` representation of `self` with the given number of `decimals`
@@ -2090,19 +2113,9 @@ redef class Float
 	# ~~~
 	fun to_precision(decimals: Int): String
 	do
-		if is_nan then return "nan"
-
-		var isinf = self.is_inf
-		if isinf == 1 then
-			return "inf"
-		else if isinf == -1 then
-			return  "-inf"
-		end
-
-		var size = to_precision_size(decimals)
-		var cstr = new CString(size + 1)
-		to_precision_fill(decimals, size + 1, cstr)
-		return cstr.to_s_unsafe(byte_length = size, copy = false)
+		var is_inf_or_nan = check_inf_or_nan
+		if is_inf_or_nan != null then return is_inf_or_nan
+		return return_from_specific_format("%.{decimals}f".to_cstring)
 	end
 
 	# Returns the hexadecimal (`String`) representation of `self` in exponential notation
@@ -2113,33 +2126,17 @@ redef class Float
 	# ~~~
 	fun to_hexa_exponential_notation: String
 	do
-		var size = to_precision_size_hexa
-		var cstr = new CString(size + 1)
-		to_precision_fill_hexa(size + 1, cstr)
-		return cstr.to_s_unsafe(byte_length = size, copy = false)
+		return return_from_specific_format("%a".to_cstring)
 	end
 
-	# Required string length to hold `self` with `nb` decimals
-	#
-	# The length does not include the terminating null byte.
-	private fun to_precision_size(nb: Int): Int `{
-		return snprintf(NULL, 0, "%.*f", (int)nb, self);
-	`}
-
-	# Fill `cstr` with `self` and `nb` decimals
-	private fun to_precision_fill(nb, size: Int, cstr: CString) `{
-		snprintf(cstr, size, "%.*f", (int)nb, self);
-	`}
-
-	# The lenght of `self` in exponential hexadecimal notation
-	private fun to_precision_size_hexa: Int`{
-		return snprintf(NULL, 0, "%a", self);
-	`}
-
-	# Fill `cstr` with `self` in exponential hexadecimal notation
-	private fun to_precision_fill_hexa(size: Int, cstr: CString) `{
-		snprintf(cstr, size, "%a", self);
-	`}
+	# Return the representation of `self`, with the specific given c `format`.
+	private fun return_from_specific_format(format: CString): String
+	do
+		var size = to_precision_size_with_format(format)
+		var cstr = new CString(size + 1)
+		to_precision_fill_with_format(format, size + 1, cstr)
+		return cstr.to_s_unsafe(byte_length = size, copy = false)
+	end
 
 	# The lenght of `self` in the specific given c `format`
 	private fun to_precision_size_with_format(format: CString): Int`{
