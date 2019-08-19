@@ -2197,10 +2197,7 @@ redef class MMethodDef
 				self.virtual_runtime_function_cache = res
 				return res
 			end
-
-			res = new SeparateRuntimeFunction(self, recv, msignature, "VIRTUAL_{c_name}")
-			self.virtual_runtime_function_cache = res
-			res.is_thunk = true
+                        res = new SeparateThunkFunction(self, recv, msignature, "VIRTUAL_{c_name}", mclassdef.bound_mtype)
 		end
 		return res
 	end
@@ -2237,10 +2234,22 @@ class SeparateRuntimeFunction
 	# The name on the compiled method
 	redef var build_c_name: String
 
-	# Statically call the original body instead
-	var is_thunk = false
-
 	redef fun to_s do return self.mmethoddef.to_s
+
+        redef fun msignature
+        do
+                return called_signature
+        end
+
+        redef fun recv_mtype
+        do
+                return called_recv
+        end
+
+        redef fun return_mtype
+        do
+                return called_signature.return_mtype
+        end
 
 	# The C return type (something or `void`)
 	var c_ret: String is lazy do
@@ -2271,69 +2280,33 @@ class SeparateRuntimeFunction
 	# The C type for the function pointer.
 	var c_funptrtype: String is lazy do return "{c_ret}(*){c_sig}"
 
-	redef fun compile_to_c(compiler)
-	do
-		var mmethoddef = self.mmethoddef
+        redef fun declare_signature(v, sig)
+        do
+                v.compiler.provide_declaration(c_name, "{sig};")
+        end
 
-		var sig = "{c_ret} {c_name}{c_sig}"
-		compiler.provide_declaration(self.c_name, "{sig};")
-
-		var rta = compiler.as(SeparateCompiler).runtime_type_analysis
-
-		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = compiler.new_visitor
-		var selfvar = new RuntimeVariable("self", called_recv, recv)
-		var arguments = new Array[RuntimeVariable]
-		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
-		v.frame = frame
-
-		var msignature = called_signature
-		var ret = called_signature.return_mtype
-
-		var comment = new FlatBuffer
-		comment.append("({selfvar}: {selfvar.mtype}")
-		arguments.add(selfvar)
-		for i in [0..msignature.arity[ do
-			var mp = msignature.mparameters[i]
-			var mtype = mp.mtype
-			if mp.is_vararg then
-				mtype = v.mmodule.array_type(mtype)
-			end
-			comment.append(", {mtype}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if is_thunk then
-			var subret = v.call(mmethoddef, recv, arguments)
-			if ret != null then
-				assert subret != null
-				v.assign(frame.returnvar.as(not null), subret)
-			end
-		else if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
+        redef fun body_to_c(v)
+        do
+                var rta = v.compiler.as(SeparateCompiler).runtime_type_analysis
+                if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
 			v.add_abort("FATAL: Dead method executed.")
-		else
-			mmethoddef.compile_inside_to_c(v, arguments)
-		end
+                else
+                        super
+                end
+        end
 
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-		compiler.names[self.c_name] = "{mmethoddef.full_name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
-	end
+
+        redef fun end_compile_to_c(v)
+        do
+                var compiler = v.compiler
+                compiler.names[self.c_name] = "{mmethoddef.full_name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
+        end
+
+        redef fun build_frame(v, arguments)
+        do
+                var recv = mmethoddef.mclassdef.bound_mtype
+                return new StaticFrame(v, mmethoddef, recv, arguments)
+        end
 
 	# Compile the trampolines used to implement late-binding.
 	#
@@ -2380,6 +2353,12 @@ class SeparateRuntimeFunction
 			v2.add "\}"
 		end
 	end
+end
+
+class SeparateThunkFunction
+        super ThunkFunction
+        super SeparateRuntimeFunction
+        redef var target_recv
 end
 
 redef class MType
