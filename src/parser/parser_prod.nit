@@ -6876,6 +6876,74 @@ redef class ASuperstringExpr
 		v.enter_visit(_n_annotations)
 	end
 end
+redef class ALambdaExpr
+	init init_alambdaexpr (
+		n_kwmeth: nullable TKwmeth,
+		n_signature: nullable ASignature,
+		n_kwdo: nullable TKwdo,
+		n_expr: nullable AExpr
+	)
+	do
+		_n_kwmeth = n_kwmeth.as(not null)
+		n_kwmeth.parent = self
+		_n_signature = n_signature.as(not null)
+		n_signature.parent = self
+		_n_kwdo = n_kwdo.as(not null)
+		n_kwdo.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_kwmeth == old_child then
+			n_kwmeth = new_child.as(TKwmeth)
+			return
+		end
+		if _n_signature == old_child then
+			n_signature = new_child.as(ASignature)
+			return
+		end
+		if _n_kwdo == old_child then
+			n_kwdo = new_child.as(TKwdo)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_kwmeth=(node)
+	do
+		_n_kwmeth = node
+		node.parent = self
+	end
+	redef fun n_signature=(node)
+	do
+		_n_signature = node
+		node.parent = self
+	end
+	redef fun n_kwdo=(node)
+	do
+		_n_kwdo = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_kwmeth)
+		v.enter_visit(_n_signature)
+		v.enter_visit(_n_kwdo)
+		v.enter_visit(_n_expr)
+	end
+end
 redef class AParExpr
 	init init_aparexpr (
 		n_opar: nullable TOpar,

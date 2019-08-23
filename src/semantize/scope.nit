@@ -523,3 +523,11 @@ redef class ACallReassignExpr
 		return new AVarReassignExpr.init_avarreassignexpr(n_qid.n_id, n_assign_op, n_value)
 	end
 end
+
+redef class ALambdaExpr
+	redef fun accept_scope_visitor(v)
+	do
+		# TODO
+		return
+	end
+end

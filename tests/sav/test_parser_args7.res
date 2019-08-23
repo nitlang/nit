@@ -103,8 +103,8 @@ AModule  @1,1--5,3
          |     `--TKwend  end @4,1--3
 5	end
          `--TKwend  end @5,1--3
---> ... 	[0;31mfun[0m fun fun fu
-	^: Syntax Error: unexpected keyword 'fun'.
+--> ... 	fun [0;31mfun[0m fun fu
+	    ^: Syntax Error: unexpected keyword 'fun'.
 --> 	%[0;31m$[0m&^*
 	 ^: Syntax Error: unknown token `$`.
 --> 

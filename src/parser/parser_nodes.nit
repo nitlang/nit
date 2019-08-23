@@ -2707,6 +2707,14 @@ class ASuperstringExpr
 	var n_exprs = new ANodes[AExpr](self)
 end
 
+class ALambdaExpr
+	super AExpr
+	var n_kwmeth: TKwmeth is writable, noinit
+	var n_signature: ASignature is writable, noinit
+	var n_kwdo: TKwdo is writable, noinit
+	var n_expr: AExpr is writable, noinit
+end
+
 # A simple parenthesis. eg `(x)`
 class AParExpr
 	super AExpr
