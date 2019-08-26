@@ -318,12 +318,16 @@ propdef~toplevel {-> propdef}
 	;
 annotation_withend~nonull {-> annotations?}
 	= {oneliner} kwis annotation_list {-> New annotations(kwis, Null, Null, [annotation_list.annotation], Null, Null)}
-	| {more} kwis n1 line_annotation+ kwend {-> New annotations(kwis, Null, Null, [line_annotation.annotation], Null, kwend) }
+	| {more} kwis n1 line_annotations kwend {-> New annotations(kwis, Null, Null, [line_annotations.annotation], Null, kwend) }
 !nonull	| {null} {-> Null}
 	;
 annotation_noend {-> annotations}
 	= {oneliner} kwis annotation_list {-> New annotations(kwis, Null, Null, [annotation_list.annotation], Null, Null)}
-	| {more} kwis n1 line_annotation+ {-> New annotations(kwis, Null, Null, [line_annotation.annotation], Null, Null) }
+	| {more} kwis n1 line_annotations {-> New annotations(kwis, Null, Null, [line_annotations.annotation], Null, Null) }
+	;
+
+line_annotations {-> annotation*}
+	= {some} line_annotation* n? {-> [line_annotation.annotation] }
 	;
 
 visibility
