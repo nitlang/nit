@@ -340,8 +340,8 @@ redef class Catalog
 		end
 		res.add_list(ts2, ", ", ", ")
 
-		if deps.has(mpackage) then
-			var reqs = deps[mpackage].greaters.to_a
+		if deps.vertices.has(mpackage) then
+			var reqs = deps.get_all_successors(mpackage)
 			reqs.remove(mpackage)
 			alpha_comparator.sort(reqs)
 			res.add "<h3>Requirements</h3>\n"
@@ -350,7 +350,7 @@ redef class Catalog
 			else
 				var list = new Array[String]
 				for r in reqs do
-					var direct = deps.has_direct_edge(mpackage, r)
+					var direct = deps.has_arc(mpackage, r)
 					var s = "<a href=\"{r}.html\">"
 					if direct then s += "<strong>"
 					s += r.to_s
@@ -361,7 +361,7 @@ redef class Catalog
 				res.add_list(list, ", ", " and ")
 			end
 
-			reqs = deps[mpackage].smallers.to_a
+			reqs = deps.get_all_predecessors(mpackage)
 			reqs.remove(mpackage)
 			alpha_comparator.sort(reqs)
 			res.add "<h3>Clients</h3>\n"
@@ -370,7 +370,7 @@ redef class Catalog
 			else
 				var list = new Array[String]
 				for r in reqs do
-					var direct = deps.has_direct_edge(r, mpackage)
+					var direct = deps.has_arc(r, mpackage)
 					var s = "<a href=\"{r}.html\">"
 					if direct then s += "<strong>"
 					s += r.to_s
@@ -480,7 +480,7 @@ redef class Catalog
 		res.add "<th data-field=\"name\" data-sortable=\"true\">name</th>\n"
 		res.add "<th data-field=\"maint\" data-sortable=\"true\">maint</th>\n"
 		res.add "<th data-field=\"contrib\" data-sortable=\"true\">contrib</th>\n"
-		if deps.not_empty then
+		if deps.vertices.not_empty then
 			res.add "<th data-field=\"reqs\" data-sortable=\"true\">reqs</th>\n"
 			res.add "<th data-field=\"dreqs\" data-sortable=\"true\">direct<br>reqs</th>\n"
 			res.add "<th data-field=\"cli\" data-sortable=\"true\">clients</th>\n"
@@ -503,11 +503,11 @@ redef class Catalog
 			if p.metadata.maintainers.not_empty then maint = p.metadata.maintainers.first.name.html_escape
 			res.add "<td>{maint}</td>"
 			res.add "<td>{p.metadata.contributors.length}</td>"
-			if deps.not_empty then
-				res.add "<td>{deps[p].greaters.length-1}</td>"
-				res.add "<td>{deps[p].direct_greaters.length}</td>"
-				res.add "<td>{deps[p].smallers.length-1}</td>"
-				res.add "<td>{deps[p].direct_smallers.length}</td>"
+			if deps.vertices.not_empty then
+				res.add "<td>{deps.get_all_successors(p).length-1}</td>"
+				res.add "<td>{deps.successors(p).length}</td>"
+				res.add "<td>{deps.get_all_predecessors(p).length-1}</td>"
+				res.add "<td>{deps.predecessors(p).length}</td>"
 			end
 			res.add "<td>{mmodules[p]}</td>"
 			res.add "<td>{mclasses[p]}</td>"
@@ -593,29 +593,13 @@ if opt_no_parse.value then
 else
 	mmodules = modelbuilder.parse_full(args)
 end
-var mpackages = new Set[MPackage]
-for m in mmodules do
-	var p = m.mpackage
-	if p != null then mpackages.add p
-end
+var mpackages = modelbuilder.model.mpackage_importation_graph.vertices
 
 # Scan packages and compute information
-for p in model.mpackages do
+for p in mpackages do
 	var g = p.root
 	assert g != null
 	modelbuilder.scan_group(g)
-
-	# Load the module to process importation information
-	if opt_no_parse.value then continue
-
-	catalog.deps.add_node(p)
-	for gg in p.mgroups do for m in gg.mmodules do
-		for im in m.in_importation.direct_greaters do
-			var ip = im.mpackage
-			if ip == null or ip == p then continue
-			catalog.deps.add_edge(p, ip)
-		end
-	end
 end
 
 if not opt_no_git.value then for p in mpackages do
@@ -758,11 +742,11 @@ index.add """
 index.add "<h2>Highlighted Packages</h2>\n"
 index.add catalog.list_best(catalog.score)
 
-if catalog.deps.not_empty then
+if catalog.deps.vertices.not_empty then
 	index.add "<h2>Most Required</h2>\n"
 	var reqs = new Counter[MPackage]
 	for p in mpackages do
-		reqs[p] = catalog.deps[p].smallers.length - 1
+		reqs[p] = catalog.deps.get_all_successors(p).length - 1
 	end
 	index.add catalog.list_best(reqs)
 end
