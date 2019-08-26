@@ -266,7 +266,7 @@ class Catalog
 	var contrib2proj = new MultiHashMap[Person, MPackage]
 
 	# Dependency between packages
-	var deps = new POSet[MPackage]
+	fun deps: HashDigraph[MPackage] do return modelbuilder.model.mpackage_importation_graph
 
 	# Number of modules by package
 	var mmodules = new Counter[MPackage]
@@ -382,11 +382,11 @@ class Catalog
 			cat2proj[cat].add mpackage
 			score += tags.length.score
 		end
-		if deps.has(mpackage) then
-			score += deps[mpackage].greaters.length.score
-			score += deps[mpackage].direct_greaters.length.score
-			score += deps[mpackage].smallers.length.score
-			score += deps[mpackage].direct_smallers.length.score
+		if deps.has_vertex(mpackage) then
+			score += deps.predecessors(mpackage).length.score
+			score += deps.get_all_predecessors(mpackage).length.score
+			score += deps.successors(mpackage).length.score
+			score += deps.get_all_successors(mpackage).length.score
 		end
 
 		var contributors = mpackage.metadata.contributors
