@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import functional
 
 redef class Object
 	fun foo: Object
@@ -44,7 +45,7 @@ x = (&foo.bar).baz
 x = &(foo.bar).baz
 
 var y = new Y
-#alt1#x = &y # error since y is a variable
+#_lt1#x = &y # error since y is a variable TODO: put `alt1` back
 x = &y.foo
 x = &y.foo.bar
 x = &y.foo.bar.baz

@@ -136,6 +136,11 @@ end
                 templates2.push(t4.to_s)
         end
         templates.add_all(templates2)
+        templates.add(
+"""
+universal RoutineRef
+end
+""")
         writer.write(templates.join("\n"))
 end
 

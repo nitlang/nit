@@ -486,7 +486,6 @@ class NaiveInterpreter
 			exprs.add e
 		end
 
-
 		# Fill `res` with the result of the evaluation according to the mapping
 		for i in [0..msignature.arity[ do
 			var param = msignature.mparameters[i]
@@ -2234,6 +2233,14 @@ redef class ASendExpr
 		var res = v.callsite(callsite, args)
 		return res
 	end
+end
+
+redef class ACallrefExpr
+        redef fun expr(v)
+        do
+                fatal(v, "NOT YET IMPLEMENTED callref expressions.")
+                return null
+        end
 end
 
 redef class ASendReassignFormExpr

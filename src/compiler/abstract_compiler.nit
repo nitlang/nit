@@ -2215,7 +2215,6 @@ abstract class AbstractRuntimeFunction
         # Step 6
         protected fun declare_signature(v: VISITOR, signature: String) is abstract
 
-
         # Generate the code for the body without return statement at the end and
         # no curly brace.
         # Step 7
@@ -2348,7 +2347,6 @@ abstract class ThunkFunction
         end
 
 end
-
 
 # A runtime variable hold a runtime value in C.
 # Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
@@ -4372,6 +4370,14 @@ redef class ASendExpr
 		end
 		return res
 	end
+end
+
+redef class ACallrefExpr
+        redef fun expr(v)
+        do
+                v.add_abort("NOT YET IMPLEMENTED callref expressions.")
+                return null
+        end
 end
 
 redef class ASendReassignFormExpr
