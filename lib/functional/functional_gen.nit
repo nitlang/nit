@@ -29,35 +29,54 @@ do
 end
 
 class RoutineTemplate
+        var classkind: String
         var classname: String
         var nb_generics: Int
         var supers: Array[String]
         var has_return: Bool
+        var is_redef = false
         var annotation = "is abstract"
 
-        redef fun to_s
+        fun callparams: Array[String]
         do
                 var generics = gen_generics(nb_generics)
                 var params = new Array[String]
                 for g in generics do
-                        params.push(g.to_lower + ": " + g)
+                        if is_redef then
+                                params.push(g.to_lower)
+                        else
+                                params.push(g.to_lower + ": " + g)
+                        end
                 end
+                return params
+        end
+
+        fun classparams: Array[String]
+        do
+                var res = gen_generics(nb_generics)
+                if has_return then res.add("RESULT")
+                return res
+        end
+
+        redef fun to_s
+        do
                 var signature = ""
-                if params.length > 0 then signature = "({params.join(",")})"
-                if has_return then
-                        signature += ": RESULT"
-                        generics.push("RESULT")
-                end
-                var classparam = ""
-                if generics.length > 0 then
-                        classparam = "[{generics.join(",")}]"
-                end
+                var callparams = self.callparams
+                var classparams = self.classparams
+
+                if callparams.length > 0 then signature = "({callparams.join(",")})"
+                if has_return then signature += ": RESULT"
+                var classdecl = "{classkind} {classname}"
+                if classparams.length > 0 then classdecl += "[{classparams.join(",")}]"
                 var superdecls = new Array[String]
                 for s in supers do superdecls.add("\tsuper {s}")
+
                 var classdef = new Array[String]
-                classdef.add("class {classname}{classparam}")
+                var redefkw = ""
+                if is_redef then redefkw = "redef "
+                classdef.add("{classdecl}")
                 classdef.add("{superdecls.join("\n")}")
-                classdef.add("\tfun call{signature} {annotation}")
+                classdef.add("\t{redefkw}fun call{signature} {annotation}")
                 classdef.add("end")
                 return classdef.join("\n")
         end
@@ -97,12 +116,26 @@ interface Proc
 end
 """)
         var templates = new Array[String]
+        var templates2 = new Array[String]
         for i in [0..n[ do
-                var t1 = new RoutineTemplate("Fun{i}", i, ["Fun"], true)
-                var t2 = new RoutineTemplate("Proc{i}", i, ["Proc"], false)
+                var t1 = new RoutineTemplate("interface", "Fun{i}", i, ["Fun"], true)
+                var t2 = new RoutineTemplate("interface", "Proc{i}", i, ["Proc"], false)
                 templates.push(t1.to_s)
                 templates.push(t2.to_s)
+
+                # We want routine ref to be at the end of the file
+                var t3 = new RoutineTemplate("universal", "FunRef{i}", i, ["Fun{i}{t1.classparams}"], true)
+                var procsuper = "Proc{i}"
+                if i > 0 then procsuper = "Proc{i}{t2.classparams}"
+                var t4 = new RoutineTemplate("universal", "ProcRef{i}", i, [procsuper], false)
+                t3.annotation = "is intern"
+                t3.is_redef = true
+                t4.annotation = "is intern"
+                t4.is_redef = true
+                templates2.push(t3.to_s)
+                templates2.push(t4.to_s)
         end
+        templates.add_all(templates2)
         writer.write(templates.join("\n"))
 end
 
