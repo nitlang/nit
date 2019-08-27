@@ -232,8 +232,8 @@ redef class PageMPackage
 		super
 		main_tab.metadata.cards.add new CardMetadata(mentity, mentity.metadata,
 			doc.catalog.mpackages_stats[mentity],
-			doc.catalog.deps[mentity].direct_greaters.to_a,
-			doc.catalog.deps[mentity].direct_smallers.to_a)
+			doc.catalog.deps.successors(mentity).to_a,
+			doc.catalog.deps.predecessors(mentity).to_a)
 	end
 end
 
