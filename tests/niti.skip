@@ -45,3 +45,4 @@ test_csv
 repeating_key_xor_solve
 nitpm
 nitdoc
+test_astbuilder
