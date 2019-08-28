@@ -233,15 +233,6 @@ redef class Catalog
 			var g = p.root
 			assert g != null
 			modelbuilder.scan_group(g)
-
-			deps.add_node(p)
-			for gg in p.mgroups do for m in gg.mmodules do
-				for im in m.in_importation.direct_greaters do
-					var ip = im.mpackage
-					if ip == null or ip == p then continue
-					deps.add_edge(p, ip)
-				end
-			end
 		end
 		# Build the catalog
 		for mpackage in mpackages do
