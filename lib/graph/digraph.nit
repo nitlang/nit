@@ -862,6 +862,79 @@ abstract class MutableDigraph[V: Object]
 		end
 		return path
 	end
+
+	# Cache of all predecessors for each vertex.
+	# This attribute are lazy to compute the list use `get_all_predecessors` for each needed vertexe.
+	# Warning the cache must be invalidated after `add_arc`
+	private var cache_all_predecessors = new HashMap[V, Set[V]]
+
+	# Cache of all successors for each vertex.
+	# This attribute are lazy to compute the list use `get_all_successors` for each needed vertexe.
+	# Warning the cache must be invalidated after `add_arc`
+	private var cache_all_successors = new HashMap[V, Set[V]]
+
+	# Invalid all cache `cache_all_predecessors` and `cache_all_successors`
+	private fun invalidated_all_cache
+	do
+		if not cache_all_successors.is_empty then cache_all_successors = new HashMap[V, Set[V]]
+		if not cache_all_predecessors.is_empty then cache_all_predecessors = new HashMap[V, Set[V]]
+	end
+
+	# Returns the all predecessors of `u`.
+	#
+	# `u` is include in the returned collection
+	#
+	# Returns an empty Array is the `u` does not exist
+	# ~~~
+	# var g = new HashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 4)
+	# assert g.get_all_predecessors(4).has(4)
+	# assert g.get_all_predecessors(4).has(3)
+	# assert g.get_all_predecessors(4).has(2)
+	# assert g.get_all_predecessors(4).has(1)
+	# ~~~
+	fun get_all_predecessors(u: V): Array[V]
+	do
+		if not vertices.has(u) then return new Array[V]
+		if not cache_all_predecessors.has_key(u) then compute_all_link(u)
+		return cache_all_predecessors[u].clone.to_a
+	end
+
+	# Returns the all successors of `u`.
+	#
+	# `u` is include in the returned collection
+	#
+	# Returns an empty Array is the `u` does not exist
+	# ~~~
+	# var g = new HashDigraph[Int]
+	# g.add_arc(1, 2)
+	# g.add_arc(2, 3)
+	# g.add_arc(3, 4)
+	# assert g.get_all_successors(2).has(3)
+	# assert g.get_all_successors(2).has(4)
+	# assert g.get_all_successors(2).has(2)
+	# ~~~
+	fun get_all_successors(u: V): Array[V]
+	do
+		if not vertices.has(u) then return new Array[V]
+		if not cache_all_successors.has_key(u) then compute_all_link(u)
+		return cache_all_successors[u].clone.to_a
+	end
+
+	# Compute all succesors and all predecessors for the given `u`
+	# The result is stocked in `cache_all_predecessors` and `cache_all_predecessors`
+	private fun compute_all_link(u: V)
+	do
+		if not vertices.has(u) then return
+		if not cache_all_predecessors.has_key(u) then cache_all_predecessors[u] = new Set[V]
+		if not cache_all_successors.has_key(u) then cache_all_successors[u] = new Set[V]
+		for v in vertices do
+			if distance(v, u) != null then cache_all_predecessors[u].add(v)
+			if distance(u, v) != null then cache_all_successors[u].add(v)
+		end
+	end
 end
 # A directed graph represented by hash maps
 class HashDigraph[V: Object]
@@ -908,6 +981,7 @@ class HashDigraph[V: Object]
 		if not has_arc(u, v) then
 			incoming_vertices_map[v].add(u)
 			outgoing_vertices_map[u].add(v)
+			invalidated_all_cache
 			number_of_arcs += 1
 		end
 	end
