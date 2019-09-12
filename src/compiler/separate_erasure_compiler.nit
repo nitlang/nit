@@ -322,6 +322,26 @@ class SeparateErasureCompiler
 			v.add("return (val*){res};")
 			v.add("\}")
 			return
+                else if mclass.name == "RoutineRef" then
+                        self.header.add_decl("struct instance_{c_name} \{")
+                        self.header.add_decl("const struct class *class;")
+                        self.header.add_decl("val* recv;")
+                        self.header.add_decl("nitmethod_t method;")
+                        self.header.add_decl("\};")
+
+                        self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(val* recv, nitmethod_t method, const struct class* class);")
+                        v.add_decl("/* allocate {mtype} */")
+                        v.add_decl("{mtype.ctype} NEW_{c_name}(val* recv, nitmethod_t method, const struct class* class)\{")
+                        var res = v.get_name("self")
+                        v.add_decl("struct instance_{c_name} *{res};")
+                        var alloc = v.nit_alloc("sizeof(struct instance_{c_name})", mclass.full_name)
+                        v.add("{res} = {alloc};")
+                        v.add("{res}->class = class;")
+                        v.add("{res}->recv = recv;")
+                        v.add("{res}->method = method;")
+                        v.add("return (val*){res};")
+                        v.add("\}")
+                        return
 		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
 			var pointer_type = mainmodule.pointer_type
 
@@ -658,4 +678,54 @@ class SeparateErasureCompilerVisitor
 		self.add("{res} = NEW_{nclass.c_name}({length});")
 		return res
 	end
+
+        redef fun routine_ref_instance(routine_type, recv, mmethoddef)
+        do
+                #debug "ENTER ref_instance"
+                var mmethod = mmethoddef.mproperty
+                # routine_mclass is the specialized one, e.g: FunRef1, ProcRef2, etc..
+                var routine_mclass = routine_type.mclass
+
+                var nclasses = mmodule.model.get_mclasses_by_name("RoutineRef").as(not null)
+                var base_routine_mclass = nclasses.first
+
+                # All routine classes use the same `NEW` constructor.
+                # However, they have different declared `class` and `type` value.
+                self.require_declaration("NEW_{base_routine_mclass.c_name}")
+
+                var recv_class_cname = recv.mcasttype.as(MClassType).mclass.c_name
+                var my_recv = recv
+
+                if recv.mtype.is_c_primitive then
+                        my_recv = autobox(recv, mmodule.object_type)
+                end
+                var my_recv_mclass_type = my_recv.mtype.as(MClassType)
+
+                # The class of the concrete Routine must exist (e.g ProcRef0, FunRef0, etc.)
+                self.require_declaration("class_{routine_mclass.c_name}")
+
+                self.require_declaration(mmethoddef.c_name)
+
+                var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
+                var runtime_function = mmethoddef.virtual_runtime_function
+
+                var is_c_equiv = runtime_function.msignature.c_equiv(thunk_function.msignature)
+
+                var c_ref = thunk_function.c_ref
+                if is_c_equiv then
+                        var const_color = mmethoddef.mproperty.const_color
+                        c_ref = "{class_info(my_recv)}->vft[{const_color}]"
+                        self.require_declaration(const_color)
+                else
+                        self.require_declaration(thunk_function.c_name)
+                        compiler.thunk_todo(thunk_function)
+                end
+                compiler.thunk_todo(thunk_function)
+
+                # Each RoutineRef points to a receiver AND a callref_thunk
+                var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name})", routine_type)
+                #debug "LEAVING ref_instance"
+                return res
+
+        end
 end
