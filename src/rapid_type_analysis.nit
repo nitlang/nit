@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # Rapid type analysis on the AST
 #
 # Rapid type analysis is an analyse that aproximates the set of live classes
@@ -701,6 +700,15 @@ redef class ASendExpr
 	end
 end
 
+redef class ACallrefExpr
+        redef fun accept_rapid_type_visitor(v)
+        do
+                super
+                var b = v.analysis.live_types.has(callsite.recv)
+                v.add_type(callsite.recv.as(MClassType))
+                v.add_type(mtype.as(MClassType))
+        end
+end
 
 redef class ASendReassignFormExpr
 	redef fun accept_rapid_type_visitor(v)
