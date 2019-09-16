@@ -49,3 +49,4 @@ base_notnull_lit_alt2
 assertions
 nitpm
 nitdoc
+test_astbuilder
