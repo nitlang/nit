@@ -1989,7 +1989,9 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, node, args)
+                if not self isa ACallrefExpr then
+			callsite.check_signature(v, node, args)
+                end
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
@@ -2173,13 +2175,53 @@ redef class ACallrefExpr
 	redef fun accept_typing(v)
 	do
 		super # do the job as if it was a real call
-
-		# TODO: inspect self.callsite to get information about the method
 		var res = callsite.mproperty
 
-		# TODO: return a functionnal type
-		self.mtype = null
-		v.error(self, "Error: NOT YET IMPLEMENTED callref expressions.")
+                var msignature = callsite.mpropdef.msignature
+                var recv = callsite.recv
+                assert msignature != null
+                var arity = msignature.mparameters.length
+
+                var routine_type_name = "ProcRef"
+                if msignature.return_mtype != null then
+                        routine_type_name = "FunRef"
+                end
+
+                var target_routine_class = "{routine_type_name}{arity}"
+                var routine_mclass = v.get_mclass(self, target_routine_class)
+
+                if routine_mclass == null then
+                        v.error(self, "Error: missing functional types, try `import functional`")
+                        return
+                end
+
+                var types_list = new Array[MType]
+                for param in msignature.mparameters do
+                        if param.is_vararg then
+                                types_list.push(v.mmodule.array_type(param.mtype))
+                        else
+                                types_list.push(param.mtype)
+                        end
+                end
+                if msignature.return_mtype != null then
+                        types_list.push(msignature.return_mtype.as(not null))
+                end
+
+                # Why we need an anchor :
+                #
+                # ~~~~nitish
+                # class A[E]
+                #       def toto(x: E) do print "{x}"
+                # end
+                #
+                # var a = new A[Int]
+                # var f = &a.toto <- without anchor : ProcRef1[E]
+                #               ^--- with anchor : ProcRef[Int]
+                # ~~~~
+                var routine_type = routine_mclass.get_mtype(types_list).anchor_to(v.mmodule, recv.as(MClassType))
+
+                is_typed = true
+		self.mtype = routine_type
 	end
 end
 
