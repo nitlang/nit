@@ -29,6 +29,13 @@ redef class Object
 		print "baz{self}"
 		return self
 	end
+
+        redef fun to_s
+        do
+		# cname without generics (for erasure compiler)
+		var cname = class_name.split('[')[0]
+		return "<{cname}>"
+        end
 end
 
 class Y
@@ -45,7 +52,7 @@ x = (&foo.bar).baz
 x = &(foo.bar).baz
 
 var y = new Y
-#_lt1#x = &y # error since y is a variable TODO: put `alt1` back
+#alt1#x = &y # error since y is a variable
 x = &y.foo
 x = &y.foo.bar
 x = &y.foo.bar.baz

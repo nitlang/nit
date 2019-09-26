@@ -1,11 +1,14 @@
-syntax_callref.nit:40,5--8: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:41,5--12: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:42,5--16: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:43,6--13: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:44,5--18: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:48,5--10: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:49,5--14: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:50,5--18: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:51,6--15: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:52,5--20: Error: NOT YET IMPLEMENTED callref expressions.
-syntax_callref.nit:54,5--11: Error: NOT YET IMPLEMENTED callref expressions.
+foo<Sys>
+foo<Sys>
+baz<Sys>
+foo<Sys>
+baz<FunRef0>
+foo<Sys>
+baz<Sys>
+foo<Y>
+foo<Y>
+baz<Y>
+foo<Y>
+baz<FunRef0>
+foo<Y>
+baz<Y>

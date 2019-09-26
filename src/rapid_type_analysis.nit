@@ -704,8 +704,6 @@ redef class ACallrefExpr
         redef fun accept_rapid_type_visitor(v)
         do
                 super
-                var b = v.analysis.live_types.has(callsite.recv)
-                v.add_type(callsite.recv.as(MClassType))
                 v.add_type(mtype.as(MClassType))
         end
 end

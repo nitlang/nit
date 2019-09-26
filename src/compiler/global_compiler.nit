@@ -472,8 +472,7 @@ class GlobalCompilerVisitor
                         my_recv = autobox(recv, object_type)
                 end
                 var thunk = new CustomizedThunkFunction(mmethoddef, my_recv.mtype.as(MClassType))
-                thunk.polymorph_call_flag = not my_recv.is_exact #true
-                #thunk.force_polymorphism = not my_recv.is_exact
+                thunk.polymorph_call_flag = not my_recv.is_exact
                 compiler.todo(method)
                 compiler.todo(thunk)
 
@@ -499,12 +498,7 @@ class GlobalCompilerVisitor
                 var ret_mtype = mmethoddef.msignature.return_mtype
 
                 if ret_mtype != null then
-                        # TODO check for separate compiler
                         ret_mtype = resolve_for(ret_mtype, routine)
-                        # var temp = ret_mtype
-                        # If mmethoddef has a return type, use the type defined
-                        # in the routine instance instead.
-                        #ret_mtype = routine_type.arguments.last
                 end
                 var callsite = "{underlying_method}({ss})"
                 if ret_mtype != null then
@@ -1122,17 +1116,17 @@ private class CustomizedRuntimeFunction
                 # class A[E]
                 #       fun toto(x: E)
                 #       do
-                #               ...do something with x...
+                #               # ...do something with x...
                 #       end
                 # end
                 # end
                 # var a = new A[nullable Int]
                 # var f = &a.toto
-                # f.call(null) <-- Will produce a proper C callsite, but it will
-                #               -- produce unreachable (dead code) for type checking
-                #               -- and covariance. Thus, creating warnings when
-                #               -- compiling in global. However, if you ignore
-                #               -- those warnings, the binary works perfectly fine.
+                # f.call(null)  # Will produce a proper C callsite, but it will
+                #               # produce unreachable (dead code) for type checking
+                #               # and covariance. Thus, creating warnings when
+                #               # compiling in global. However, if you ignore
+                #               # those warnings, the binary works perfectly fine.
                 # ~~~~
                 var intromclassdef = self.mmethoddef.mproperty.intro_mclassdef
                 var is_callref = v.compiler.all_routine_types_name.has(intromclassdef.name)
@@ -1165,11 +1159,11 @@ private class CustomizedRuntimeFunction
 	end
 end
 
+# Thunk implementation for global compiler.
+# For more detail see `abstract_compiler::ThunkFunction` documentation.
 class CustomizedThunkFunction
         super ThunkFunction
         super CustomizedRuntimeFunction
-
-        #var force_polymorphism = false
 
         redef fun c_name
         do
