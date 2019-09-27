@@ -27,6 +27,11 @@ assert p.id == "ABC"
 In subclasses, additional attributes are automatically collected.
 
 ~~~
+class Product
+	var id: String
+	var description: String
+	var price: Float
+end
 class Book
 	super Product
 	var author: String
@@ -44,6 +49,11 @@ It is used to perform additional systematic tasks.
 Because the `init` is run at the end of the initialization sequence, initialized attributes are usable in the body.
 
 ~~~
+class Product
+	var id: String
+	var description: String
+	var price: Float
+end
 class OverpricedProduct
 	super Product
 	init
@@ -52,7 +62,7 @@ class OverpricedProduct
 	end
 end
 var op = new OverpricedProduct("ABC", "Bla bla", 15.95)
-assert op.price == 159.50
+assert op.price.is_approx(159.50, 0.001)
 ~~~
 
 
@@ -65,6 +75,11 @@ There is three cases for an attributes to not be collected in the `new`.
 * Attributes introduced in refinement of classes
 
 ~~~
+class Product
+	var id: String
+	var description: String
+	var price: Float
+end
 class TaxedProduct
 	super Product
 	var tax_rate = 9.90
@@ -75,7 +90,7 @@ class TaxedProduct
 	end
 end
 var tp = new TaxedProduct("ABC", "Bla bla", 15.95)
-assert tp.total_price == 17.52905
+assert tp.total_price.is_approx(17.52905, 0.00001)
 ~~~
 
 Note: The orchestration here is important. In order, the following is executed:
@@ -95,6 +110,11 @@ In fact, by default, the setter of an attribute is used as a initializer.
 `autoinit` is used to register a method as a setter.
 
 ~~~
+class Product
+	var id: String
+	var description: String
+	var price: Float
+end
 class FooProduct
 	super Product
 	fun set_xy(x, y: Int) is autoinit do z = x * 10 + y
@@ -113,6 +133,32 @@ In most case, there is no reason that an argument of a `new` construction is not
 As explained above, one of the main advantage of these constructors is their compatibility with multiple inheritance.
 
 ~~~
+class Product
+	var id: String
+	var description: String
+	var price: Float
+end
+class OverpricedProduct
+	super Product
+	init
+	do
+		price = price * 10.0
+	end
+end
+class TaxedProduct
+	super Product
+	var tax_rate = 9.90
+	var total_price: Float is noinit
+	init
+	do
+		total_price = price * (1.0 + tax_rate/100.0)
+	end
+end
+class FooProduct
+	super Product
+	fun set_xy(x, y: Int) is autoinit do z = x * 10 + y
+	var z: Int is noinit
+end
 class MultiProduct
 	super OverpricedProduct
 	super TaxedProduct
