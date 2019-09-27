@@ -12,11 +12,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Verification if it's possible to add a other contract type on existing method.
+# Only the expect contract display a warning when none expect contract are not defined at the introduction
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int)
+	is
+		expects(x == 1)
+	do
+		x=1
+	end
+
+	fun bar(x: Float): Bool
+	is
+		ensures(result)
+	do
+		return true
+	end
+end
+
+class MyClass2
+	super MyClass
+
+	redef fun foo(x: Int)
+	is
+		ensures(x == 0)
+	do
+		x=0
+	end
+
+	redef fun bar(x: Float)
+	is
+		expects(x == 1)
+	do
+		return true
+	end
+end
+
+var first = new MyClass2
+first.foo(1)
+first.bar(1.0)
+first.foo(0)# Fail because the expect is x == 1

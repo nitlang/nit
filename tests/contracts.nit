@@ -12,11 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Test the creation ans the usage on simply contract, in the same time check the no modification of the parameter.
+# See the `foo` method in `Myclass` the change of x in a body method has no effect on the ensure because x is a primitive type and it's given by copy and not by reference.
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int)
+	is
+		expects(x == 1)
+		ensures(x > 0)
+	do
+		x = 0
+	end
+end
+
+class MyClass2
+	fun foo(bool: Bool)
+	is
+		expects(not bool)
+		ensures(not bool)
+	do
+		if bool then print "Error"
+	end
+end
+
+var first = new MyClass
+first.foo(1)
+var second = new MyClass2
+second.foo(true) #Fail

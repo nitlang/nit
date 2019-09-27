@@ -12,11 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Test the error if the annotation parameter is not an good expression (ie is not a comparisons or a method calls returning bouleans)
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+
+	fun bar_no_return do end
+
+	fun foo(x: Int)
+	is
+		expects(bar_no_return)
+		ensures(assert x == 1)
+	do
+		x = 0
+	end
+end
+
+var first = new MyClass
+first.foo(1)

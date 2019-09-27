@@ -12,11 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Check the result with the super call
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int): Bool
+	is
+		ensures(x > 0, result)
+	do
+		return true
+	end
+end
+
+class MySubClass
+	super MyClass
+
+	redef fun foo(x: Int)
+	is
+		ensures(not result)
+	do
+		return super
+	end
+end
+
+var first = new MyClass
+first.foo(1)
+var second = new MySubClass
+second.foo(2) #Fail

@@ -12,11 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+class MyClass
+	fun foo(x: Int, y: Float)
+	is
+		ensures(x > 2)
+	do
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+	end
+end
+
+class MySubClass
+	super MyClass
+
+	redef fun foo(x: Int, y: Float)
+	is
+		ensures(y > 1.0)
+	do
+
+	end
+end
+
+var first = new MyClass
+first.foo(2, 1.1)
+var second = new MySubClass
+second.foo(1, 0.5) #Fail

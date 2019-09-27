@@ -12,11 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Check if the expects contract is redef with `and`
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int, y: Float)
+	is
+		ensures(x > 0)
+	do
+		print "Good"
+	end
+end
+
+class SubClass
+	super MyClass
+
+	redef fun foo(x: Int, y: Float)
+	is
+		ensures(y == 1.2)
+	do
+		print "Good"
+	end
+end
+
+var first = new MyClass
+first.foo(1,1.2) # OK
+var sub = new SubClass
+sub.foo(1,1.2) # OK
+sub.foo(1,1.0) # Fail

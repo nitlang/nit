@@ -12,11 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Check the ensures with a contract on a result (the return result of the method)
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int): Int
+	is
+		ensures(result > 0)
+	do
+		return x
+	end
+end
+
+var first = new MyClass
+first.foo(1) # OK
+first.foo(0) # FAIL

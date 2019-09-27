@@ -12,11 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Verification if it's possible to define a simple expects contract.
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int)
+	is
+		expects(x > 0)
+	do
+		if x <= 0 then print "FAIL"
+	end
+end
+
+class MyClass2
+	fun foo(bool: Bool)
+	is
+		expects(not bool)
+	do
+		if bool then print "FAIL"
+	end
+end
+
+var first = new MyClass
+first.foo(1) # OK
+var second = new MyClass2
+second.foo(false) # OK

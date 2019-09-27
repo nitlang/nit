@@ -268,6 +268,11 @@ redef class AParam
 	var variable: nullable Variable
 	redef fun accept_scope_visitor(v)
 	do
+		if variable != null then
+			v.register_variable(self.n_id, variable.as(not null))
+			return
+		end
+
 		super
 		var nid = self.n_id
 		var variable = new Variable(nid.text)

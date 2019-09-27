@@ -12,11 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Test when to same contracts are use in a same method definition
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+
+	fun foo(x: Int)
+	is
+		expects(x == 10)
+		expects(x >= 10)
+	do
+		x = 0
+	end
+end
+
+var first = new MyClass
+first.foo(10)

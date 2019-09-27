@@ -12,11 +12,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Check usage of contract on a diamond inheritance
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class ArrayInt
+	super Array[Int]
+
+	fun toto(e: Int)
+	do
+		print "toto ArrayInt"
+	end
+end
+
+
+class MyArrayInt
+	super ArrayInt
+
+	redef fun toto(e)
+	is
+		ensures(e == 12)
+	do
+		print "toto MyArrayInt"
+		super e
+	end
+end
+
+class MyArrayInt2
+	super ArrayInt
+
+	redef fun toto(e)
+	is
+		ensures(e == 11)
+	do
+		print "toto MyArrayInt2"
+		super e
+		print "Good"
+	end
+end
+
+class MySubArray
+	super MyArrayInt
+	super MyArrayInt2
+end
+
+var test = new MySubArray
+test.toto(11)# fail contract on MyArrayInt define e == 12

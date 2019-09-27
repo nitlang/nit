@@ -12,11 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Verification if it's possible to define a simple ensures contract.
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+	fun foo(x: Int)
+	is
+		ensures(x > 0)
+	do
+
+	end
+end
+
+class MyClass2
+	fun foo(bool: Bool)
+	is
+		ensures(not bool)
+	do
+
+	end
+end
+
+var first = new MyClass
+first.foo(1)
+var second = new MyClass2
+second.foo(true) #Fail because the ensure is bool == false

@@ -12,11 +12,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Main frontend phases plus code generation phases
-module code_gen
+# Verification if it's possible to define a contract with a call of an attribute and a method call
 
-import frontend
-import actors_generation_phase
-import serialization_code_gen_phase
-import explain_assert
-import contracts
+class MyClass
+
+	var bar = 10
+
+	fun foo(x: Int)
+	is
+		expects(bar == 10)
+		ensures(x > 0)
+	do
+		if bar != 10 then print "Error"
+	end
+end
+
+class MyClass2
+
+	var my_class: MyClass
+
+	fun baz: Bool
+	do
+		return false
+	end
+
+	fun foo(bool: Bool)
+	is
+		expects(not self.baz)
+		ensures(my_class.bar == 11)
+	do
+		if baz then print "Error"
+		my_class.bar = 11
+	end
+end
+
+var first = new MyClass
+first.foo(1) # Ok
+var second = new MyClass2(first)
+second.foo(false) # Ok

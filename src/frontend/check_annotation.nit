@@ -111,6 +111,10 @@ before_all
 after
 after_all
 example
+
+expects
+ensures
+no_contract
 """
 
 	# Efficient set build from `primtives_annotations_list`
