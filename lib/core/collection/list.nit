@@ -70,9 +70,12 @@ class List[E]
 	end
 
 	# Return a list of elements between 'from' and 'to'.
-	fun slice(from: Int, to: Int): List[E] do
-		assert from >= 0 and from < length
-		assert to >= 0 and to < length and from <= to
+	#
+	# EXPECT: `from >= 0 and from < length and to >= 0 and to < length and from <= to`
+	fun slice(from: Int, to: Int): List[E]
+	is
+		expect(from >= 0 and from < length and to >= 0 and to < length and from <= to)
+	do
 		var list = new List[E]
 		while from <= to do
 			list.add(self[from])
