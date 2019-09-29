@@ -65,10 +65,11 @@ class CircularArray[E]
 	#
 	# The method takes care of the initial gap and the possible wrapping.
 	#
-	# REQUIRE: `0 <= index and index < length`
+	# EXPECT: `0 <= index and index < length`
 	private fun offset(index: Int): Int
+	is
+		expect(0 <= index and index < length)
 	do
-		assert index >= 0
 		var head = self._head
 		var tail = self._tail
 		var offset = head + index
@@ -116,10 +117,9 @@ class CircularArray[E]
 		super
 	end
 
+	# EXPECT `not_empty`
 	redef fun pop do
-		var l = length - 1
-		assert l >= 0
-		length = l
+		length = length - 1
 
 		var native = _native
 		var t = tail
@@ -145,10 +145,9 @@ class CircularArray[E]
 		head = h
 	end
 
+	# EXPECT `not_empty`
 	redef fun shift do
-		var l = length - 1
-		assert l >= 0
-		length = l
+		length = length - 1
 
 		var native = _native
 		var h = head
@@ -197,7 +196,11 @@ class CircularArray[E]
 		native = new_native
 	end
 
+	# ENSURE `self[index] == item`
 	redef fun insert(item, index)
+	is
+		expect(index >= 0) # Since this is a circular structure, the expected condition only need to be `index >= 0`.
+		ensure(self[index] == item)
 	do
 		# Special insertion at the end (is push)
 		if index >= length then
@@ -205,7 +208,6 @@ class CircularArray[E]
 			push(item)
 			return
 		end
-		assert index >= 0
 
 		var new_len = length + 1
 
