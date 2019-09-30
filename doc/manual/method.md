@@ -2,8 +2,8 @@
 
 `fun` declares methods. Methods must have a name, may have parameters, and may have a return type. Parameters are typed; however, a single type can be used for multiple parameters.
 
-~~~
-fun foo(x, y: Int, s: String): Bool ...
+~~~nitish
+fun foo(x, y: Int, s: String): Bool # ...
 ~~~
 
 `do` declares the body of methods. Alike control structures, a one-liner version is available.
@@ -38,7 +38,7 @@ print a.length # no () for length, no () for print
 
 However, this last facility requires that the first argument does not start with a parenthesis or a bracket.
 
-~~~
+~~~nitish
 foo (x).bar # will be interpreted as (foo(x)).bar
 foo [x].bar # will be interpreted as (foo[x]).bar
 ~~~
@@ -140,7 +140,7 @@ Operators and setters are methods that require a special syntax for their defini
 
 <!-- -->
 
-~~~
+~~~nitish
 class Foo
     fun +(a: Bar): Baz do ...
     fun -: Baz do ...
@@ -162,7 +162,7 @@ a[b] = c # The bracket setter '[]='
 
 `+=` and `-=` are combinations of the assignment (`=`) and a binary operator. These feature are extended to setters where a single `+=` is in fact three method calls: a function call, the operator call, then a setter call.
 
-~~~
+~~~nitish
 a += c # equiv. a = a + c
 a[b] += c # equiv. a[b] = a[b] + c
 a.foo += c # equiv. a.foo = a.foo + c

@@ -31,7 +31,7 @@ intrude importers), there is still no restriction.
 
 Visibility of attributes is more specific and is detailed in its own section.
 
-~~~
+~~~nitish
 module m1
 class Foo
     fun pub do ...
@@ -55,7 +55,7 @@ y.pri2
 
 <!-- -->
 
-~~~
+~~~nitish
 module m2
 import m1
 class Baz
