@@ -158,7 +158,7 @@ private class CallSiteVisitor
 			var visited_mpropdef = visited_method.mpropdef
 			assert contract_facet != null and visited_mpropdef != null
 
-			var unsafe_mtype = callsite.recv.resolve_for(callsite.recv, callsite.anchor, visited_mpropdef.mclassdef.mmodule, false)
+			var unsafe_mtype = callsite.recv.resolve_for(visited_mpropdef.mclassdef.bound_mtype, callsite.anchor, visited_mpropdef.mclassdef.mmodule, true)
 
 			# This check is needed because the contract can appear after the introduction.
 			if unsafe_mtype.has_mproperty(visited_method.mpropdef.mclassdef.mmodule, contract_facet) then
