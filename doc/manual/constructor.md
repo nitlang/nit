@@ -166,8 +166,8 @@ class MultiProduct
 end
 var mp = new MultiProduct("ABC", "Bla bla", 15.96, 1, 3)
 assert mp.id == "ABC"
-assert mp.price == 159.6
-assert mp.total_price == 175.4
+assert mp.price.is_approx(159.6, 0.001)
+assert mp.total_price.is_approx(175.4, 0.001)
 assert mp.z == 13
 ~~~
 
@@ -197,11 +197,11 @@ class Point
 	redef fun to_s do return "({x},{y})"
 end
 var p1 = new Point(1.0, 2.0)
-assert p1.to_s ==  "(1,2)"
+assert p1.to_s ==  "(1.0,2.0)"
 var p2 = new Point.origin
-assert p2.to_s ==  "(0,0)"
+assert p2.to_s ==  "(0.0,0.0)"
 var p3 = new Point.polar(1.0, 2.0)
-assert p3.to_s ==  "(-0.4161,0.9092)"
+assert p3.to_s ==  "(-0.416,0.909)"
 ~~~
 
 
