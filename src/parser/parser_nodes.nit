@@ -789,6 +789,16 @@ class TCbra
 	super Token
 end
 
+# The symbol '{'
+class TObrace
+	super Token
+end
+
+# The symbol '}'
+class TCbrace
+	super Token
+end
+
 # The symbol `,`
 class TComma
 	super Token
@@ -1472,7 +1482,6 @@ class ASuperPropdef
 	# The super-class (indicated as a type)
 	var n_type: AType is writable, noinit
 end
-
 
 # Declaration of callbacks for extern methods
 class AExternCalls
@@ -2474,8 +2483,10 @@ class ACallrefExpr
 
        # The `&` operator
        var n_amp: TAmp is writable, noinit
-end
 
+       # The `type` of the receiver if not any.
+       var n_type: nullable AType = null is writable
+end
 
 # A call to `super`. OR a call of a super-constructor
 class ASuperExpr

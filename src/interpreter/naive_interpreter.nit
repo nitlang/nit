@@ -2293,6 +2293,10 @@ end
 redef class ACallrefExpr
 	redef fun expr(v)
 	do
+		var ntype = self.n_type
+		if ntype != null then
+			fatal(v, "NOT YET IMPLEMENTED callref without receiver.")
+		end
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 		var mtype = self.mtype
