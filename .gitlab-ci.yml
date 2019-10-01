@@ -453,4 +453,4 @@ build_tools_windows:
   script:
     - $project_dir = "$CI_PROJECT_DIR" -replace "\\", "\\\"
     - $converted_project_dir = $(c:\msys64\usr\bin\bash -l -c "cygpath -u $project_dir")
-    - c:\msys64\usr\bin\env MSYSTEM=MINGW64 c:\msys64\usr\bin\bash -l -c "cd $converted_project_dir; make"
+    - c:\msys64\usr\bin\env MSYSTEM=MINGW64 c:\msys64\usr\bin\bash -l -c "cd $converted_project_dir && ./misc/jenkins/windows_ci.sh"
