@@ -132,6 +132,36 @@ private class ContractsVisitor
 		assert contract_propdef != null
 		return contract_propdef
 	end
+
+	# Verification if the construction of the contract is necessary.
+	# Three cases are checked for `expects`:
+	#
+	# - Is the `--full-contract` option it's use?
+	# - Is the method is in the main package
+	# - Is the method is in a direct imported package.
+	#
+	fun check_usage_expects(actual_mmodule: MModule): Bool
+	do
+		var main_package = mainmodule.mpackage
+		var actual_package = actual_mmodule.mpackage
+		if main_package != null and actual_package != null then
+			var condition_direct_arc = toolcontext.modelbuilder.model.mpackage_importation_graph.has_arc(main_package, actual_package)
+			return toolcontext.opt_full_contract.value or condition_direct_arc or main_package == actual_package
+		end
+		return false
+	end
+
+	# Verification if the construction of the contract is necessary.
+	# Two cases are checked for `ensures`:
+	#
+	# - Is the `--full-contract` option it's use?
+	# - Is the method is in the main package
+	#
+	fun check_usage_ensures(actual_mmodule: MModule): Bool
+	do
+		return toolcontext.opt_full_contract.value or mainmodule.mpackage == actual_mmodule.mpackage
+	end
+
 end
 
 # This visitor checks the `callsite` to see if the target `mpropdef` has a contract.
@@ -202,9 +232,6 @@ abstract class MContract
 
 	# Define the name of the contract
 	fun contract_name: String is abstract
-
-	# Checking if the use of the contract is necessary
-	private fun check_usage(v: ContractsVisitor, actual_mmodule: MModule): Bool is abstract
 
 	# Method use to diplay warning when the contract is not present at the introduction
 	private fun no_intro_contract(v: ContractsVisitor, a: AAnnotation)do end
@@ -293,24 +320,6 @@ class MExpect
 	# Define the name of the contract
 	redef fun contract_name: String do return "expects"
 
-	# Verification if the construction of the contract is necessary.
-	# Three cases are checked for `expects`:
-	#
-	# - Is the `--full-contract` option it's use?
-	# - Is the method is in the main package
-	# - Is the method is in a direct imported package.
-	#
-	redef fun check_usage(v: ContractsVisitor, actual_mmodule: MModule): Bool
-	do
-		var main_package = v.mainmodule.mpackage
-		var actual_package = actual_mmodule.mpackage
-		if main_package != null and actual_package != null then
-			var condition_direct_arc = v.toolcontext.modelbuilder.model.mpackage_importation_graph.has_arc(main_package, actual_package)
-			return v.toolcontext.opt_full_contract.value or condition_direct_arc or main_package == actual_package
-		end
-		return false
-	end
-
 	# Display warning if no contract is defined at introduction `expect`,
 	# because if no contract is defined at the introduction the added
 	# contracts will not cause any error even if they are not satisfied.
@@ -374,17 +383,6 @@ end
 # The root of all contracts where the call is after the execution of the original method (`invariants` and `ensures`).
 abstract class BottomMContract
 	super MContract
-
-	# Verification if the construction of the contract is necessary.
-	# Two cases are checked for `expects`:
-	#
-	# - Is the `--full-contract` option it's use?
-	# - Is the method is in the main package
-	#
-	redef fun check_usage(v: ContractsVisitor, actual_mmodule: MModule): Bool
-	do
-		return v.toolcontext.opt_full_contract.value or v.mainmodule.mpackage == actual_mmodule.mpackage
-	end
 
 	redef fun create_nblock(v: ContractsVisitor, n_condition: AExpr, args: Array[AExpr]): ABlockExpr
 	do
@@ -645,8 +643,6 @@ redef class MMethodDef
 	private fun construct_contract(v: ContractsVisitor, n_signature: ASignature, n_annotation: AAnnotation, mcontract: MContract, exist_contract: Bool)
 	do
 		if check_same_contract(v, n_annotation, mcontract) then return
-		# Check if the contract is necessary
-		if not mcontract.check_usage(v, mclassdef.mmodule) then return
 		if not exist_contract and not is_intro then no_intro_contract(v, n_signature, mcontract, n_annotation)
 		v.define_signature(mcontract, n_signature, mproperty.intro.msignature)
 
@@ -732,9 +728,11 @@ redef class AMethPropdef
 	private fun check_annotation(v: ContractsVisitor, n_annotation: AAnnotation)
 	do
 		if n_annotation.name == "expects" then
+			if not v.check_usage_expects(mpropdef.mclassdef.mmodule) then return
 			var exist_contract = mpropdef.mproperty.check_exist_expect
 			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mexpect.as(not null), exist_contract)
 		else if n_annotation.name == "ensures" then
+			if not v.check_usage_ensures(mpropdef.mclassdef.mmodule) then return
 			var exist_contract = mpropdef.mproperty.check_exist_ensure
 			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mensure.as(not null), exist_contract)
 		else if n_annotation.name == "no_contract" then
