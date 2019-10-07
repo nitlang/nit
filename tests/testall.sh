@@ -15,7 +15,7 @@
 
 # Run some tests on each engine
 
-engine=(nitcg nitcg nitcs nitcsg nitce niti nitvm)
+engine=(nitcg nitcg nitcs nitcsg nitce niti)
 if uname | grep MINGW64 1>/dev/null 2>&1; then
 	engine=(nitcg nitcg nitcs nitcsg nitce)
 fi

@@ -1392,7 +1392,7 @@ abstract class AbstractCompilerVisitor
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
 
 	# Instantiate a new routine pointer
-	fun routine_ref_instance(routine_mclass_type: MClassType, recv: RuntimeVariable, mmethoddef: MMethodDef): RuntimeVariable is abstract
+	fun routine_ref_instance(routine_mclass_type: MClassType, recv: RuntimeVariable, callsite: CallSite): RuntimeVariable is abstract
 
 	# Call the underlying referenced function
 	fun routine_ref_call(mmethoddef: MMethodDef, args: Array[RuntimeVariable]) is abstract
@@ -4406,7 +4406,7 @@ redef class ACallrefExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr, null)
-		var res = v.routine_ref_instance(mtype.as(MClassType), recv, callsite.as(not null).mpropdef)
+		var res = v.routine_ref_instance(mtype.as(MClassType), recv, callsite.as(not null))
 		return res
 	end
 end

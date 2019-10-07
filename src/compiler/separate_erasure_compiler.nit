@@ -679,8 +679,9 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
-        redef fun routine_ref_instance(routine_type, recv, mmethoddef)
+        redef fun routine_ref_instance(routine_type, recv, callsite)
         do
+		var mmethoddef = callsite.mpropdef
                 #debug "ENTER ref_instance"
                 var mmethod = mmethoddef.mproperty
                 # routine_mclass is the specialized one, e.g: FunRef1, ProcRef2, etc..

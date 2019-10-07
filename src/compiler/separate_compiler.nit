@@ -2188,9 +2188,10 @@ class SeparateCompilerVisitor
 		self.add("{recv}[{i}]={val};")
 	end
 
-	redef fun routine_ref_instance(routine_type, recv, mmethoddef)
+	redef fun routine_ref_instance(routine_type, recv, callsite)
 	do
 		#debug "ENTER ref_instance"
+		var mmethoddef = callsite.mpropdef
 		var mmethod = mmethoddef.mproperty
 		# routine_mclass is the specialized one, e.g: FunRef1, ProcRef2, etc..
 		var routine_mclass = routine_type.mclass

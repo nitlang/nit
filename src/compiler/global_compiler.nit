@@ -463,8 +463,9 @@ class GlobalCompilerVisitor
 		self.add("{recv}[{i}]={val};")
 	end
 
-        redef fun routine_ref_instance(routine_mclass_type, recv, mmethoddef)
+        redef fun routine_ref_instance(routine_mclass_type, recv, callsite)
         do
+		var mmethoddef = callsite.mpropdef
                 var method = new CustomizedRuntimeFunction(mmethoddef, recv.mcasttype.as(MClassType))
                 var my_recv = recv
                 if recv.mtype.is_c_primitive then
