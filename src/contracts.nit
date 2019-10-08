@@ -183,21 +183,16 @@ private class CallSiteVisitor
 	# If it's the case the callsite is replaced by another callsite to the contract method.
 	private fun drive_method_contract(callsite: CallSite): CallSite
 	do
-		if callsite.mpropdef.has_contract then
+		if callsite.mproperty.mcontract_facet != null then
 			var contract_facet = callsite.mproperty.mcontract_facet
 			var visited_mpropdef = visited_method.mpropdef
 			assert contract_facet != null and visited_mpropdef != null
 
-			var unsafe_mtype = callsite.recv.resolve_for(visited_mpropdef.mclassdef.bound_mtype, callsite.anchor, visited_mpropdef.mclassdef.mmodule, true)
-
-			# This check is needed because the contract can appear after the introduction.
-			if unsafe_mtype.has_mproperty(visited_method.mpropdef.mclassdef.mmodule, contract_facet) then
-				var type_visitor = new TypeVisitor(toolcontext.modelbuilder, visited_mpropdef)
-				var drived_callsite = type_visitor.build_callsite_by_property(visited_method, callsite.recv, contract_facet, callsite.recv_is_self)
-				# This never happen this check is here for debug
-				assert drived_callsite != null
-				return drived_callsite
-			end
+			var type_visitor = new TypeVisitor(toolcontext.modelbuilder, visited_mpropdef)
+			var drived_callsite = type_visitor.build_callsite_by_property(visited_method, callsite.recv, contract_facet, callsite.recv_is_self)
+			# This never happen this check is here for debug
+			assert drived_callsite != null
+			return drived_callsite
 		end
 		return callsite
 	end
@@ -561,7 +556,7 @@ redef class MMethod
 	do
 		if self.mcontract_facet != null then return true
 		# build a new `MMethod` contract
-		self.mcontract_facet = new MMethod(mpropdef.mclassdef, "_contract_{name}", mpropdef.mclassdef.location, public_visibility)
+		self.mcontract_facet = new MMethod(intro_mclassdef, "_contract_{name}", intro_mclassdef.location, public_visibility)
 		return false
 	end
 end
@@ -570,23 +565,25 @@ redef class MMethodDef
 
 	# Verification of the contract facet
 	# Check if a contract facet already exists to use it again or if it is necessary to create it.
-	private fun check_contract_facet(v: ContractsVisitor, n_signature: ASignature, mcontract: MContract, exist_contract: Bool)
+	private fun check_contract_facet(v: ContractsVisitor, n_signature: ASignature, classdef: MClassDef, mcontract: MContract, exist_contract: Bool)
 	do
 		var exist_contract_facet = mproperty.check_exist_contract_facet(self)
 		if exist_contract_facet and exist_contract then return
 
 		var contract_facet: AMethPropdef
 		if not exist_contract_facet then
+			# If has no contract facet in intro just create it
+			if classdef != mproperty.intro_mclassdef then create_contract_facet(v, mproperty.intro_mclassdef, n_signature)
 			# If has no contract facet just create it
-			contract_facet = create_contract_facet(v, n_signature)
+			contract_facet = create_contract_facet(v, classdef, n_signature)
 		else
-			# Check if the contract facet already exist in this context (in this mclassdef)
-			if mclassdef.mpropdefs_by_property.has_key(mproperty.mcontract_facet) then
+			# Check if the contract facet already exist in this context (in this classdef)
+			if classdef.mpropdefs_by_property.has_key(mproperty.mcontract_facet) then
 				# get the define
-				contract_facet = v.toolcontext.modelbuilder.mpropdef2node(mclassdef.mpropdefs_by_property[mproperty.mcontract_facet]).as(AMethPropdef)
+				contract_facet = v.toolcontext.modelbuilder.mpropdef2node(classdef.mpropdefs_by_property[mproperty.mcontract_facet]).as(AMethPropdef)
 			else
 				# create a new contract facet definition
-				contract_facet = create_contract_facet(v, n_signature)
+				contract_facet = create_contract_facet(v, classdef, n_signature)
 				var block = v.ast_builder.make_block
 				# super call to the contract facet
 				var n_super_call = v.ast_builder.make_super_call(n_signature.make_parameter_read(v.ast_builder), null)
@@ -605,7 +602,7 @@ redef class MMethodDef
 	end
 
 	# Method to create a contract facet of the method
-	private fun create_contract_facet(v: ContractsVisitor, n_signature: ASignature): AMethPropdef
+	private fun create_contract_facet(v: ContractsVisitor, classdef: MClassDef, n_signature: ASignature): AMethPropdef
 	do
 		var contract_facet = mproperty.mcontract_facet
 		assert contract_facet != null
@@ -617,7 +614,7 @@ redef class MMethodDef
 		var m_signature: nullable MSignature = null
 		if mproperty.intro.msignature != null then m_signature = mproperty.intro.msignature.clone
 
-		var n_contractdef = mclassdef.mclass.create_empty_method(v, contract_facet, mclassdef, m_signature, n_signature)
+		var n_contractdef = classdef.mclass.create_empty_method(v, contract_facet, classdef, m_signature, n_signature)
 		# FIXME set the location because the callsite creation need the node location
 		n_contractdef.location = v.current_location
 		n_contractdef.validate
@@ -647,7 +644,7 @@ redef class MMethodDef
 		v.define_signature(mcontract, n_signature, mproperty.intro.msignature)
 
 		var conditiondef = v.build_contract(n_annotation, mcontract, mclassdef)
-		check_contract_facet(v, n_signature.clone, mcontract, exist_contract)
+		check_contract_facet(v, n_signature.clone, mclassdef, mcontract, exist_contract)
 		has_contract = true
 	end
 
