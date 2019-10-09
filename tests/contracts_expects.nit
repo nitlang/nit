@@ -17,7 +17,7 @@
 class MyClass
 	fun foo(x: Int)
 	is
-		expects(x > 0)
+		expect(x > 0)
 	do
 		if x <= 0 then print "FAIL"
 	end
@@ -26,7 +26,7 @@ end
 class MyClass2
 	fun foo(bool: Bool)
 	is
-		expects(not bool)
+		expect(not bool)
 	do
 		if bool then print "FAIL"
 	end

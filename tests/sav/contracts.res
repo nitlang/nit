@@ -1,1 +1,1 @@
-Runtime error: Assert 'expects' failed (contracts.nit:31)
+Runtime error: Assert 'expect' failed (contracts.nit:31)

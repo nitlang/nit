@@ -15,15 +15,15 @@
 # Verification if it's possible to define a contract in different context (abstract class, interface and class) and it's possible to inherit it.
 
 class MyClass
-	fun foo(x: Int, y: Float)is abstract, expects(x != 10)
+	fun foo(x: Int, y: Float)is abstract, expect(x != 10)
 end
 
 abstract class AbstractClass
-	fun bar(x: Int, y: Float)is abstract, expects(x >= 1), ensures(y == 10.0)
+	fun bar(x: Int, y: Float)is abstract, expect(x >= 1), ensure(y == 10.0)
 end
 
 interface Interface
-	fun baz(x: Int, y: Float)is abstract, ensures(y <= 10.0, y == 42.0)
+	fun baz(x: Int, y: Float)is abstract, ensure(y <= 10.0, y == 42.0)
 end
 
 

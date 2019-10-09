@@ -17,7 +17,7 @@
 class MyClass
 	fun foo(x: Int): Bool
 	is
-		ensures(x > 0, result)
+		ensure(x > 0, result)
 	do
 		return true
 	end
@@ -28,7 +28,7 @@ class MySubClass
 
 	redef fun foo(x: Int)
 	is
-		ensures(not result)
+		ensure(not result)
 	do
 		return super
 	end

@@ -18,8 +18,8 @@
 class MyClass
 	fun foo(x: Int)
 	is
-		expects(x == 1)
-		ensures(x > 0)
+		expect(x == 1)
+		ensure(x > 0)
 	do
 		x = 0
 	end
@@ -28,8 +28,8 @@ end
 class MyClass2
 	fun foo(bool: Bool)
 	is
-		expects(not bool)
-		ensures(not bool)
+		expect(not bool)
+		ensure(not bool)
 	do
 		if bool then print "Error"
 	end

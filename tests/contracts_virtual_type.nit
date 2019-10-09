@@ -20,7 +20,7 @@ class MyClass
 
 	fun foo(x: VIRTUAL)
 	is
-		expects(x == 1)
+		expect(x == 1)
 	do
 
 	end

@@ -17,7 +17,7 @@
 class MyClass
 	fun foo(x: Int)
 	is
-		ensures(x > 0)
+		ensure(x > 0)
 	do
 
 	end
@@ -26,7 +26,7 @@ end
 class MyClass2
 	fun foo(bool: Bool)
 	is
-		ensures(not bool)
+		ensure(not bool)
 	do
 
 	end

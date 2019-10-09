@@ -1,1 +1,1 @@
-contracts_same_contract.nit:22,3--18: The method already has a defined `expects` contract at line 21
+contracts_same_contract.nit:22,3--17: The method already has a defined `expect` contract at line 21

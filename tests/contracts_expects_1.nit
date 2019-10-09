@@ -17,7 +17,7 @@
 class MyClass
 	fun foo(x: Int)
 	is
-		expects(x > 0)
+		expect(x > 0)
 	do
 		if x <= 0 then print "FAIL"
 	end

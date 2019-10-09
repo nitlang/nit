@@ -17,7 +17,7 @@
 class MyClass
 	fun foo(x: Int): Int
 	is
-		ensures(result > 0)
+		ensure(result > 0)
 	do
 		return x
 	end

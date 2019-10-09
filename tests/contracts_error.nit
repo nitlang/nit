@@ -20,8 +20,8 @@ class MyClass
 
 	fun foo(x: Int)
 	is
-		expects(bar_no_return)
-		ensures(assert x == 1)
+		expect(bar_no_return)
+		ensure(assert x == 1)
 	do
 		x = 0
 	end

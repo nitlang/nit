@@ -50,7 +50,7 @@ redef class AModule
 	# The implementation of the contracts is done in two visits.
 	#
 	# - First step, the visitor analyzes and constructs the contracts
-	#   for each class (invariant) and method (expects, ensures).
+	#   for each class (invariant) and method (expect, ensure).
 	#
 	# - Second step the visitor analyzes each `ASendExpr` to see
 	#   if the callsite calls a method with a contract. If this is
@@ -134,13 +134,13 @@ private class ContractsVisitor
 	end
 
 	# Verification if the construction of the contract is necessary.
-	# Three cases are checked for `expects`:
+	# Three cases are checked for `expect`:
 	#
 	# - Is the `--full-contract` option it's use?
 	# - Is the method is in the main package
 	# - Is the method is in a direct imported package.
 	#
-	fun check_usage_expects(actual_mmodule: MModule): Bool
+	fun check_usage_expect(actual_mmodule: MModule): Bool
 	do
 		var main_package = mainmodule.mpackage
 		var actual_package = actual_mmodule.mpackage
@@ -152,12 +152,12 @@ private class ContractsVisitor
 	end
 
 	# Verification if the construction of the contract is necessary.
-	# Two cases are checked for `ensures`:
+	# Two cases are checked for `ensure`:
 	#
 	# - Is the `--full-contract` option it's use?
 	# - Is the method is in the main package
 	#
-	fun check_usage_ensures(actual_mmodule: MModule): Bool
+	fun check_usage_ensure(actual_mmodule: MModule): Bool
 	do
 		return toolcontext.opt_full_contract.value or mainmodule.mpackage == actual_mmodule.mpackage
 	end
@@ -207,7 +207,7 @@ redef class AAnnotation
 
 	# Returns the conditions of annotation parameters in the form of and expr
 	# exemple:
-	# the contract ensures(true, i == 10, f >= 1.0)
+	# the contract ensure(true, i == 10, f >= 1.0)
 	# return this condition (true and i == 10 and f >= 1.0)
 	private fun construct_condition(v : ContractsVisitor): AExpr
 	do
@@ -313,7 +313,7 @@ class MExpect
 	super MContract
 
 	# Define the name of the contract
-	redef fun contract_name: String do return "expects"
+	redef fun contract_name: String do return "expect"
 
 	# Display warning if no contract is defined at introduction `expect`,
 	# because if no contract is defined at the introduction the added
@@ -323,15 +323,15 @@ class MExpect
 	# ~~~nitish
 	# class A
 	# 	fun bar [...]
-	# 	fun _bar_expects([...])
+	# 	fun _bar_expect([...])
 	# 	do
 	# 		[empty contract]
 	# 	end
 	# end
 	#
 	# redef class A
-	# 	redef fun bar is expects(contract_condition)
-	# 	redef fun _bar_expects([...])
+	# 	redef fun bar is expect(contract_condition)
+	# 	redef fun _bar_expect([...])
 	# 	do
 	# 		if not (contract_condition) then super
 	# 	end
@@ -375,7 +375,7 @@ class MExpect
 	end
 end
 
-# The root of all contracts where the call is after the execution of the original method (`invariants` and `ensures`).
+# The root of all contracts where the call is after the execution of the original method (`invariant` and `ensure`).
 abstract class BottomMContract
 	super MContract
 
@@ -441,7 +441,7 @@ class MEnsure
 	super BottomMContract
 
 	# Define the name of the contract
-	redef fun contract_name: String do return "ensures"
+	redef fun contract_name: String do return "ensure"
 
 	redef fun adapt_specific_msignature(m_signature: MSignature): MSignature
 	do
@@ -535,7 +535,7 @@ redef class MMethod
 	do
 		if self.mensure != null then return true
 		# build a new `MEnsure` contract
-		self.mensure = new MEnsure(intro_mclassdef, "_ensures_{name}", intro_mclassdef.location, public_visibility)
+		self.mensure = new MEnsure(intro_mclassdef, "_ensure_{name}", intro_mclassdef.location, public_visibility)
 		return false
 	end
 
@@ -546,7 +546,7 @@ redef class MMethod
 	do
 		if self.mexpect != null then return true
 		# build a new `MExpect` contract
-		self.mexpect = new MExpect(intro_mclassdef, "_expects_{name}", intro_mclassdef.location, public_visibility)
+		self.mexpect = new MExpect(intro_mclassdef, "_expect_{name}", intro_mclassdef.location, public_visibility)
 		return false
 	end
 
@@ -660,9 +660,9 @@ redef class MMethodDef
 	# Is the contract already defined in the context
 	#
 	# Exemple :
-	# fun foo is expects([...]), expects([...])
+	# fun foo is expect([...]), expect([...])
 	#
-	# Here `check_same_contract` display an error when the second expects is processed
+	# Here `check_same_contract` display an error when the second expect is processed
 	private fun check_same_contract(v: ContractsVisitor, n_annotation: AAnnotation ,mcontract: MContract): Bool
 	do
 		if self.mclassdef.mpropdefs_by_property.has_key(mcontract) then
@@ -724,12 +724,12 @@ redef class AMethPropdef
 	# If this is the case, we built the appropriate contract.
 	private fun check_annotation(v: ContractsVisitor, n_annotation: AAnnotation)
 	do
-		if n_annotation.name == "expects" then
-			if not v.check_usage_expects(mpropdef.mclassdef.mmodule) then return
+		if n_annotation.name == "expect" then
+			if not v.check_usage_expect(mpropdef.mclassdef.mmodule) then return
 			var exist_contract = mpropdef.mproperty.check_exist_expect
 			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mexpect.as(not null), exist_contract)
-		else if n_annotation.name == "ensures" then
-			if not v.check_usage_ensures(mpropdef.mclassdef.mmodule) then return
+		else if n_annotation.name == "ensure" then
+			if not v.check_usage_ensure(mpropdef.mclassdef.mmodule) then return
 			var exist_contract = mpropdef.mproperty.check_exist_ensure
 			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mensure.as(not null), exist_contract)
 		else if n_annotation.name == "no_contract" then
