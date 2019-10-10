@@ -1940,7 +1940,6 @@ redef class ASendExpr
 	# Tries to build the callsite, if it can't then `self.callsite == null`.
 	private fun build_callsite(v: TypeVisitor)
 	do
-		if self.callsite != null then return
 		var nrecv = self.n_expr
 		var recvtype = v.visit_expr(nrecv)
 		var name = self.property_name
@@ -2183,10 +2182,20 @@ redef class ACallrefExpr
 	do
 		var ntype = self.n_type
 		if ntype != null then
+			if ntype.n_kwnullable != null then
+				v.error(self, "Error: receiver type can not be nullable in a callref expression.")
+				return
+			end
 			# If no receiver, then we need to build with the provided
 			# type information about the receiver : `var f = &TYPE.method`
 			var recvtype = v.resolve_mtype(ntype)
-			assert recvtype != null
+			# Weird behavior of `resolve_mtype`: return null + put the error
+			# inside the `n_type` node. Thus, we only need to return if the
+			# result is null.
+			# TODO: It would be nice to have proper error message when
+			# someone tries to create a callref with an unresolved generic receiver.
+			if recvtype == null then return
+
 			var name = self.property_name
 			var node = self.property_node
 			# If still nothing, just exit
@@ -2202,6 +2211,8 @@ redef class ACallrefExpr
 	redef fun accept_typing(v)
 	do
 		super # do the job as if it was a real call
+		if self.callsite == null then return
+
 		var ntype = self.n_type
 		var res = callsite.mproperty
 
@@ -2248,7 +2259,7 @@ redef class ACallrefExpr
 			end
 		end
 
-                # Why we need an anchor :
+                # Why we need an anchor for the routine :
                 #
                 # ~~~~nitish
                 # class A[E]
@@ -2259,8 +2270,10 @@ redef class ACallrefExpr
                 # var f = &a.toto # without anchor : ProcRef1[E]
                 #		  # with anchor : ProcRef[Int]
                 # ~~~~
+		#
 		# However, we can only anchor if we can resolve every formal
 		# parameter, here's an example where we can't.
+		#
 		# ~~~~nitish
 		# class A[E]
 		#	fun bar: A[E] do return self
@@ -2282,8 +2295,6 @@ end
 redef class AExprs
 	fun to_a: Array[AExpr] do return self.n_exprs.to_a
 end
-
-###
 
 redef class ASuperExpr
 	# The method to call if the super is in fact a 'super init call'

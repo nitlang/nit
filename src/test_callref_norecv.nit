@@ -9,6 +9,20 @@ class Toto
 	fun f5 do self.x += 10
 end
 
+class A[E]
+
+	fun bar
+	do
+		print "{class_name}"
+	end
+
+	fun foo
+	do
+		var h1 = &A[E].bar
+		h1.call(self)
+	end
+end
+
 var f1 = &Toto.f1
 var f2 = &Toto.f2
 var f3 = &Toto.f3
@@ -30,3 +44,11 @@ f4.call(t1, "test")	# 1, test
 f5.call(t1)
 
 print t1.x		# 11
+
+var g1 = &Array[Int].length
+#alt1# var g2 = &nullable Array[Int].length
+#alt2# var g3 = &Array[E].length
+print g1.call([1,2,3,4]) # 4
+
+var a1 = new A[Int]
+a1.foo
