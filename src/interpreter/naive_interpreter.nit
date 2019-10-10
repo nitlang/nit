@@ -804,10 +804,14 @@ class CallrefInstance
 	# The original receiver
 	#
 	# ~~~nitish
+	# class A
+	#	fun toto do print "A::toto"
+	# end
 	# var a = new A
 	# var f = &a.toto # `a` is the original receiver
+	#
 	# ~~~
-	var recv: Instance
+	var recv: nullable Instance
 
 	# The original callsite
 	#
@@ -1007,8 +1011,14 @@ redef class AMethPropdef
 		if pname == "call" and v.routine_types.has(cname) then
 			var routine = args.shift
 			assert routine isa CallrefInstance
-			# Swap the receiver position with the original recv of the call form.
-			args.unshift routine.recv
+			if routine.recv != null	then
+				# Swap the receiver position with the original
+				# recv of the call form
+				args.unshift routine.recv.as(not null)
+
+				# Otherwise, if routine.recv is null then
+				# the receiver is at args[1]
+			end
 			var res = v.callsite(routine.callsite, args)
 			# recover the old args state
 			args.shift
@@ -2294,11 +2304,12 @@ redef class ACallrefExpr
 	redef fun expr(v)
 	do
 		var ntype = self.n_type
-		if ntype != null then
-			fatal(v, "NOT YET IMPLEMENTED callref without receiver.")
+		var recv: nullable Instance = null
+		# If it has a receiver
+		if ntype == null then
+			recv = v.expr(self.n_expr)
+			if recv == null then return null
 		end
-		var recv = v.expr(self.n_expr)
-		if recv == null then return null
 		var mtype = self.mtype
 		assert mtype != null
 		# In case we are in generic class where formal parameter can not
