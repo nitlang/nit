@@ -2203,30 +2203,50 @@ class SeparateCompilerVisitor
 		# However, they have different declared `class` and `type` value.
 		self.require_declaration("NEW_{base_routine_mclass.c_name}")
 
-		var recv_class_cname = recv.mcasttype.as(MClassType).mclass.c_name
-		var my_recv = recv
+		# By default we assume the callref has no receiver
+		var recv_class_cname = callsite.recv.as(MClassType).mclass.c_name
+		var my_recv: nullable RuntimeVariable = null
+		var my_recv_mclass_type = callsite.recv.as(MClassType)
 
-		if recv.mtype.is_c_primitive then
-			my_recv = autobox(recv, mmodule.object_type)
+		# If the callref has a receiver
+		if recv != null then
+			recv_class_cname = recv.mcasttype.as(MClassType).mclass.c_name
+			my_recv = recv
+			if my_recv.mtype.is_c_primitive then
+				my_recv = autobox(my_recv, mmodule.object_type)
+			end
+			my_recv_mclass_type = my_recv.mtype.as(MClassType)
+		else
+			self.require_declaration("class_{recv_class_cname}")
 		end
-		var my_recv_mclass_type = my_recv.mtype.as(MClassType)
 
 		# The class of the concrete Routine must exist (e.g ProcRef0, FunRef0, etc.)
+
 		self.require_declaration("class_{routine_mclass.c_name}")
 		self.require_declaration(mmethoddef.c_name)
 
 		var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
 		# If the receiver is exact, then there's no need to make a
-		# polymorph call to the underlying method.
-		thunk_function.polymorph_call_flag = not my_recv.is_exact
+		# polymorph call to the underlying method. If the callref has
+		# no receiver, then we always want a polymorph call.
+		thunk_function.polymorph_call_flag = my_recv == null or not my_recv.is_exact
 		var runtime_function = mmethoddef.virtual_runtime_function
 
 		var is_c_equiv = runtime_function.msignature.c_equiv(thunk_function.msignature)
 
 		var c_ref = thunk_function.c_ref
 		if is_c_equiv then
+			# If the thunk and the virtual function has the same signature
+			# then we points directly to the virtual one. No need to create
+			# a new thunk.
 			var const_color = mmethoddef.mproperty.const_color
-			c_ref = "{class_info(my_recv)}->vft[{const_color}]"
+			# If it has no receiver
+			var classinfo =  "(&class_{recv_class_cname})"
+			if my_recv != null then
+				# With receiver
+				classinfo = "{class_info(my_recv)}"
+			end
+			c_ref = "{classinfo}->vft[{const_color}]"
 			self.require_declaration(const_color)
 		else
 			self.require_declaration(thunk_function.c_name)
@@ -2239,13 +2259,30 @@ class SeparateCompilerVisitor
 			var recv2 = self.frame.arguments.first
 			var recv2_type_info = self.type_info(recv2)
 			self.require_declaration(routine_type.const_color)
-			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, {recv2_type_info}->resolution_table->types[{routine_type.const_color}])", routine_type)
+			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv or else "(val*)NULL"}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, {recv2_type_info}->resolution_table->types[{routine_type.const_color}])", routine_type)
 		else
 			self.require_declaration("type_{routine_type.c_name}")
 			compiler.undead_types.add(routine_type)
-			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
+			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv or else "(val*)NULL"}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
 		end
 		return res
+	end
+
+	private fun callref_struct(callref: RuntimeVariable): String
+	do
+		var nclasses = mmodule.model.get_mclasses_by_name("RoutineRef").as(not null)
+		var nclass = nclasses.first
+		return "((struct instance_{nclass.c_name}*){callref})"
+	end
+
+	private fun callref_recv_field(callref: RuntimeVariable): String
+	do
+		return "({callref_struct(callref)}->recv)"
+	end
+
+	private fun callref_method_field(callref: RuntimeVariable): String
+	do
+		return "({callref_struct(callref)}->method)"
 	end
 
 	redef fun routine_ref_call(mmethoddef, arguments)
@@ -2257,11 +2294,11 @@ class SeparateCompilerVisitor
 		var nclass = nclasses.first
 		var runtime_function = mmethoddef.virtual_runtime_function
 
-		# Save the current receiver since adapt_signature will autobox
-		# the routine receiver which is not the underlying receiver.
-		# The underlying receiver has already been adapted in the
-		# `routine_ref_instance` method. Here we just want to adapt the
-		# rest of the signature, but it's easier to pass the wrong
+		# Save the current receiver (the callref instance) since `adapt_signature`
+		# will autobox the callref instead of the underlying receiver.
+		# Morever, the underlying receiver has already been adapted in the
+		# `routine_ref_instance` method. Here we just want to adapt
+		# the rest of the signature, but it's easier to pass the wrong
 		# receiver in adapt_signature then discards it with `shift`.
 		#
 		# ~~~~nitish
@@ -2270,43 +2307,72 @@ class SeparateCompilerVisitor
 		# var f = &a.toto # `a` is the underlying receiver
 		# f.call # here `f` is the routine receiver
 		# ~~~~
-		var routine = arguments.first
+		var callref = arguments.first
 
 		# Retrieve the concrete routine type
-		var original_recv_c = "(((struct instance_{nclass.c_name}*){arguments[0]})->recv)"
-		var nitmethod = "(({runtime_function.c_funptrtype})(((struct instance_{nclass.c_name}*){arguments[0]})->method))"
-		if arguments.length > 1 then
-			adapt_signature(mmethoddef, arguments)
-		end
-
+		var recv_field = "{callref_recv_field(callref)}"
+		var method_field = "{callref_method_field(callref)}"
+		var c_recv = recv_field
+		var nitmethod = "(({runtime_function.c_funptrtype}){method_field})"
 		var ret_mtype = runtime_function.called_signature.return_mtype
 
 		if ret_mtype != null then
 			# `ret` is actually always nullable Object. When invoking
 			# a callref, we don't have the original callsite information.
 			# Thus, we need to recompute the return type of the callsite.
-			ret_mtype = resolve_for(ret_mtype, routine)
+			ret_mtype = resolve_for(ret_mtype, callref)
 		end
 
-		# remove the routine's receiver
+		# If the arguments length < 1, then the callref must have an
+		# underlying receiver (Fun0, Proc0).
+		if arguments.length > 1 then
+			self.adapt_signature(mmethoddef, arguments)
+		end
+
+		# remove the first receiver of a call
 		arguments.shift
-		var ss = arguments.join(", ")
+		# First, compile the case when we need arguments[from: 2, to: n]
+		self.add("if({recv_field} == NULL) \{")
+		if arguments.length >= 1 then
+			var funptr2 = "{runtime_function.c_ret}(*)({runtime_function.c_args})"
+			var nitmethod2 = "(({funptr2}){method_field})"
+			# Remove the arguments[1]
+			#var arg1 = arguments.shift
+			var ss1 = arguments.join(", ")
+			var callsite1 = "{nitmethod2}({ss1})"
+			if ret_mtype != null then
+				var subres = self.new_var(ret_mtype)
+				self.add("{subres} = {callsite1};")
+				#var subres = new_expr("{callsite1}", ret_mtype)
+				ret(subres)
+			else
+				self.add("{callsite1};")
+			end
+			#arguments.unshift arg1
+		end
+		# -----------------END CASE 1: CALLREF W/O RECEIVER-----------------
+		# Then, compile when we need arguments[from:1, to: n]
+		self.add("\} else \{")
+
+		var ss2 = arguments.join(", ")
 		# replace the receiver with the original one
 		if arguments.length > 0 then
-			ss = "{original_recv_c}, {ss}"
+			ss2 = "{c_recv}, {ss2}"
 		else
-			ss = original_recv_c
+			ss2 = c_recv
 		end
-
-		arguments.unshift routine # put back the routine ref receiver
-		add "/* {mmethoddef.mproperty} on {arguments.first.inspect}*/"
-		var callsite = "{nitmethod}({ss})"
+		var callsite2 = "{nitmethod}({ss2})"
 		if ret_mtype != null then
-			var subres = new_expr("{callsite}", ret_mtype)
+			var subres = self.new_var(ret_mtype)
+			self.add("{subres} = {callsite2};")
+			#var subres = new_expr("{callsite1}", ret_mtype)
 			ret(subres)
 		else
-			add("{callsite};")
+			self.add("{callsite2};")
 		end
+		self.add("\}")
+		arguments.unshift callref
+		# -----------------END CASE 2: CALLREF W/O RECEIVER-----------------
 	end
 
 	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
@@ -2458,20 +2524,47 @@ class SeparateRuntimeFunction
 		end
 	end
 
-	# The C signature (only the parmeter part)
-	var c_sig: String is lazy do
-		var sig = new FlatBuffer
-		sig.append("({called_recv.ctype} self")
+	# The C signature (only the arguments w/o receiver)
+	#
+	# `
+	# void f(val* self, val* p0, val* p1, ..., val* pn) { ... }
+	# `
+	# Calling `c_args` will produce the following string:
+	# `val* p0, val* p1, ..., val* pn`
+	# ~~~~
+	var c_args: String is lazy do
+		var sig = new Array[String]
 		for i in [0..called_signature.arity[ do
 			var mp = called_signature.mparameters[i]
 			var mtype = mp.mtype
 			if mp.is_vararg then
 				mtype = mmethoddef.mclassdef.mmodule.array_type(mtype)
 			end
-			sig.append(", {mtype.ctype} p{i}")
+			sig.push("{mtype.ctype} p{i}")
 		end
-		sig.append(")")
-		return sig.to_s
+		return sig.join(", ")
+	end
+
+	# The C signature (arguments including the receiver)
+	var c_sig: String is lazy do
+		#var sig = new FlatBuffer
+		#sig.append("({called_recv.ctype} self")
+		#for i in [0..called_signature.arity[ do
+		#	var mp = called_signature.mparameters[i]
+		#	var mtype = mp.mtype
+		#	if mp.is_vararg then
+		#		mtype = mmethoddef.mclassdef.mmodule.array_type(mtype)
+		#	end
+		#	sig.append(", {mtype.ctype} p{i}")
+		#end
+		#sig.append(")")
+		#return sig.to_s
+		var cargs = self.c_args
+		if cargs.length == 0 then
+			return "({called_recv.ctype} self)"
+		else
+			return "({called_recv.ctype} self, {c_args})"
+		end
 	end
 
 	# The C type for the function pointer.

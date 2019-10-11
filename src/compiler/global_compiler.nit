@@ -465,6 +465,10 @@ class GlobalCompilerVisitor
 
         redef fun routine_ref_instance(routine_mclass_type, recv, callsite)
         do
+		if recv == null then
+			debug "NOT YET IMPLEMENTED callref with no receiver in global compiler."
+			abort
+		end
 		var mmethoddef = callsite.mpropdef
                 var method = new CustomizedRuntimeFunction(mmethoddef, recv.mcasttype.as(MClassType))
                 var my_recv = recv

@@ -681,6 +681,10 @@ class SeparateErasureCompilerVisitor
 
         redef fun routine_ref_instance(routine_type, recv, callsite)
         do
+		if recv == null then
+			debug "NOT YET IMPLEMENTED callref with no receiver in `--erasure` compiler"
+			abort
+		end
 		var mmethoddef = callsite.mpropdef
                 #debug "ENTER ref_instance"
                 var mmethod = mmethoddef.mproperty

@@ -9,17 +9,44 @@ class Toto
 	fun f5 do self.x += 10
 end
 
+redef class Int
+	fun fizz: Proc1[A[Int]]
+	do
+		var a1 = new A[Int]("Int")
+		return a1.baz
+	end
+end
+
 class A[E]
+	var ename: String
+
+	redef fun to_s do return "A[{ename}]"
 
 	fun bar
 	do
-		print "{class_name}"
+		print self.to_s
 	end
 
 	fun foo
 	do
 		var h1 = &A[E].bar
 		h1.call(self)
+	end
+
+	fun bad: A[E]
+	do
+		return self
+	end
+
+	fun baz: Proc1[A[E]]
+	do
+		var h1 = &A[E].foo
+		return h1
+	end
+
+	fun fun_to_s: Fun1[A[E], String]
+	do
+		return &A[E].to_s
 	end
 end
 
@@ -50,5 +77,18 @@ var g1 = &Array[Int].length
 #alt2# var g3 = &Array[E].length
 print g1.call([1,2,3,4]) # 4
 
-var a1 = new A[Int]
-a1.foo
+var a1 = new A[Int]("Int")
+var a2 = new A[Int]("Int")
+a1.foo # A[Int]
+var h1: Proc1[A[Int]] = a1.baz
+h1.call(a1) # A[Int]
+
+var h2 = 10.fizz
+h2.call(a1) # A[Int]
+
+var aint_to_s = a1.fun_to_s
+
+print aint_to_s.call(a2) # A[Int]
+
+var h3: Proc1[A[Object]] = a1.baz
+h3.call(a1) # A[Int]
