@@ -2213,9 +2213,6 @@ class SeparateCompilerVisitor
 
 		# The class of the concrete Routine must exist (e.g ProcRef0, FunRef0, etc.)
 		self.require_declaration("class_{routine_mclass.c_name}")
-		self.require_declaration("type_{routine_type.c_name}")
-
-		compiler.undead_types.add(routine_type)
 		self.require_declaration(mmethoddef.c_name)
 
 		var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
@@ -2235,10 +2232,19 @@ class SeparateCompilerVisitor
 			self.require_declaration(thunk_function.c_name)
 			compiler.thunk_todo(thunk_function)
 		end
-
-		# Each RoutineRef points to a receiver AND a callref_thunk
-		var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
-		#debug "LEAVING ref_instance"
+		var res: RuntimeVariable
+		if routine_type.need_anchor then
+			hardening_live_open_type(routine_type)
+			link_unresolved_type(self.frame.mpropdef.mclassdef, routine_type)
+			var recv2 = self.frame.arguments.first
+			var recv2_type_info = self.type_info(recv2)
+			self.require_declaration(routine_type.const_color)
+			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, {recv2_type_info}->resolution_table->types[{routine_type.const_color}])", routine_type)
+		else
+			self.require_declaration("type_{routine_type.c_name}")
+			compiler.undead_types.add(routine_type)
+			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
+		end
 		return res
 	end
 

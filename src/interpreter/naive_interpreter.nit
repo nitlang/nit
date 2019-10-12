@@ -2295,8 +2295,12 @@ redef class ACallrefExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
+		var mtype = self.mtype
 		assert mtype != null
-		var inst = new CallrefInstance(mtype.as(not null), recv, callsite.as(not null))
+		# In case we are in generic class where formal parameter can not
+		# be resolved.
+		var mtype2 = v.unanchor_type(mtype)
+		var inst = new CallrefInstance(mtype2, recv, callsite.as(not null))
 		return inst
 	end
 end

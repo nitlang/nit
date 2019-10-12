@@ -476,8 +476,8 @@ class GlobalCompilerVisitor
                 thunk.polymorph_call_flag = not my_recv.is_exact
                 compiler.todo(method)
                 compiler.todo(thunk)
-
-                var res = self.new_expr("NEW_{routine_mclass_type.c_name}({my_recv}, &{thunk.c_name})", routine_mclass_type)
+		var ret_type = self.anchor(routine_mclass_type).as(MClassType)
+                var res = self.new_expr("NEW_{ret_type.c_name}({my_recv}, &{thunk.c_name})", ret_type)
                 return res
         end
 

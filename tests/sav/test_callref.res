@@ -11,3 +11,4 @@ x is null
 x is null
 x is test
 x is 100
+x is 100

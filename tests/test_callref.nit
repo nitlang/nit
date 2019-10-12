@@ -57,6 +57,9 @@ class C[E]
 		end
 		return "x is null"
 	end
+
+	fun bar: C[E] do return self
+	fun foo: Fun0[C[E]] do return &bar
 end
 
 var a = new A
@@ -102,3 +105,6 @@ c2.x = 100
 
 print f6.call	# "x is test"
 print f7.call	# "x is 100"
+
+var f8 = c2.foo
+print f8.call	# "x is 100"
