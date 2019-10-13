@@ -2474,7 +2474,15 @@ class Signature
 		return res
 	end
 
-	fun ret_ctype: String do return self.return_type?.ctype or else "void"
+	fun ret_ctype: String
+	do
+		var ret = self.return_type
+		if ret != null then
+			return ret.ctype
+		else
+			return "void"
+		end
+	end
 end
 
 redef class MSignature
