@@ -257,17 +257,10 @@ class GlobalCompiler
 			sig = "void"
 		end
                 if is_routine_ref then
-                        var c_args = ["val* self"]
-                        var c_ret = "void"
-                        var k = mtype.arguments.length
-                        if mtype.mclass.name.has("Fun") then
-                                c_ret = mtype.arguments.last.ctype
-                                k -= 1
-                        end
-                        for i in [0..k[ do
-                                var t = mtype.arguments[i]
-                                c_args.push("{t.ctype} p{i}")
-                        end
+			var signature = mtype.decompose_as_function
+                        var c_args = signature.args_named_ctype("p")
+			c_args.unshift "val* self"
+                        var c_ret = signature.ret_ctype
                         # The underlying method signature
                         var method_sig = "{c_ret} (*method)({c_args.join(", ")})"
                         sig = "val* recv, {method_sig}"
@@ -488,18 +481,10 @@ class GlobalCompilerVisitor
 		var ret_type = self.anchor(routine_mclass_type).as(MClassType)
 		var res: RuntimeVariable
 		if my_recv == null then
-			# NOTE: duplicate code from `generate_init_instance`
-			var c_args = ["val* self"]
-                        var c_ret = "void"
-                        var k = routine_mclass_type.arguments.length
-                        if routine_mclass_type.mclass.name.has("Fun") then
-                                c_ret = routine_mclass_type.arguments.last.ctype
-                                k -= 1
-                        end
-                        for i in [0..k[ do
-                                var t = routine_mclass_type.arguments[i]
-                                c_args.push("{t.ctype} p{i}")
-                        end
+			var signature = routine_mclass_type.decompose_as_function
+			var c_args = signature.args_named_ctype("p")
+			c_args.unshift("val* self")
+                        var c_ret = signature.ret_ctype
                         # The underlying method signature
                         var method_sig = "{c_ret} (*)({c_args.join(", ")})"
 			var casted_thunk = "({method_sig})((void*) &{thunk.c_name})"
@@ -532,19 +517,11 @@ class GlobalCompilerVisitor
 		# If no more arguments are available, then
 		# the current callref has an underlying receiver.
 		if arguments.length > 0 then
-			# NOTE: duplicate code from `generate_init_instance`.
-			var c_args = new Array[String]
-                        var c_ret = "void"
-                        var k = mmethoddef.msignature.mparameters.length
-			if ret_mtype != null then
-                                c_ret = ret_mtype.ctype
-                        end
-                        for i in [0..k[ do
-                                var t = mmethoddef.msignature.mparameters[i]
-                                c_args.push("{t.mtype.ctype} p{i}")
-                        end
+			var signature = mmethoddef.msignature.decompose_default
+			var c_args = signature.args_named_ctype("p")
+                        var c_ret = signature.ret_ctype
 			# The underlying method signature without `val* self`
-                        var method_sig = "{c_ret} (*)({c_args.join(", ")})"
+			var method_sig = "{c_ret} (*)({c_args.join(", ")})"
 			var casted_method = "(({method_sig})((void*){method_field}))"
 			var ss1 = arguments.join(", ")
 			var callsite1 = "{casted_method}({ss1})"

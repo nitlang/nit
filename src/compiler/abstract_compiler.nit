@@ -2452,6 +2452,45 @@ class StaticFrame
 	end
 end
 
+class Signature
+	var arguments: Sequence[MType] is protected writable
+	var return_type: nullable MType is protected writable
+
+	fun args_ctype: Sequence[String]
+	do
+		var res = new Array[String]
+		for a in self.arguments do res.push(a.ctype)
+		return res
+	end
+
+	fun args_named_ctype(name_prefix: String): Sequence[String]
+	do
+		var res = new Array[String]
+		var i = 0
+		for a in self.args_ctype do
+			res.push "{a} {name_prefix}{i}"
+			i += 1
+		end
+		return res
+	end
+
+	fun ret_ctype: String do return self.return_type?.ctype or else "void"
+end
+
+redef class MSignature
+
+	redef fun decompose_as_function do return decompose_default
+
+	redef fun decompose_default
+	do
+		var mparameters = self.mparameters
+		var args = new Array[MType]
+		for mparam in mparameters do args.push(mparam.mtype)
+		var ret_type = self.return_mtype
+		return new Signature(args, ret_type)
+	end
+end
+
 redef class MType
 	# Return the C type associated to a given Nit static type
 	fun ctype: String do return "val*"
@@ -2466,6 +2505,12 @@ redef class MType
 	#
 	# ENSURE `result == (ctype != "val*")`
 	fun is_c_primitive: Bool do return false
+
+	# Decompose the type into a signature as if it was a function.
+	fun decompose_as_function: Signature is abstract
+
+	# Decompose a type into a signature in its natural way.
+	fun decompose_default: Signature is abstract
 end
 
 redef class MClassType
@@ -2542,6 +2587,22 @@ redef class MClassType
 			return "val"
 		end
 	end
+
+	redef fun decompose_as_function
+	do
+		var ret_type: nullable MType = null
+		var k = self.arguments.length
+		if k > 0 and self.mclass.name.has("Fun") then
+			ret_type = arguments.last
+			k -= 1
+		end
+		var args = new Array[MType]
+		for i in [0..k[ do args.push(self.arguments[i])
+		return new Signature(args, ret_type)
+	end
+
+	redef fun decompose_default do return new Signature(self.arguments, self)
+
 end
 
 redef class MPropDef
