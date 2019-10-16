@@ -1,1 +1,1 @@
-Runtime error: Assert 'ensures' failed (contracts_ensures_sequence.nit:18)
+Runtime error: Assert 'ensure' failed (contracts_ensures_sequence.nit:18)

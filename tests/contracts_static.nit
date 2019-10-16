@@ -12,38 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Check if the adding expects contract in a redefinition on an existing method return a warning
+# Test the resolution of contract when the static mpropdef does not have contract and the dynamic has one
 
 class MyClass
 	fun foo(x: Int)
 	do
-		print "Good"
+		x = 0
 	end
 end
 
-class SubClass
+class MySubClass
 	super MyClass
 
-	redef fun foo(x: Int)
+	redef fun foo(x)
 	is
-		expect(x == 0)
+		ensure(x > 10)
 	do
-		if x != 0 then print "Good"
-	end
-end
-
-class SubSubClass
-	super SubClass
-
-	redef fun foo(x: Int)
-	do
-		if x != 0 then print "Good"
+		if x < 10 then print "Error"
 	end
 end
 
 var first = new MyClass
-first.foo(1) # OK
-var sub = new SubClass
-sub.foo(0) # OK
-var subsub = new SubSubClass
-subsub.foo(1) # Ok
+first.foo(1) # No contract on the mpropdef
+var second: MyClass = new MySubClass
+second.foo(2) #Fail

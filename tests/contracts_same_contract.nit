@@ -18,8 +18,8 @@ class MyClass
 
 	fun foo(x: Int)
 	is
-		expects(x == 10)
-		expects(x >= 10)
+		expect(x == 10)
+		expect(x >= 10)
 	do
 		x = 0
 	end

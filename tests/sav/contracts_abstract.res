@@ -1,1 +1,1 @@
-Runtime error: Assert 'ensures' failed (contracts_abstract.nit:26)
+Runtime error: Assert 'ensure' failed (contracts_abstract.nit:26)

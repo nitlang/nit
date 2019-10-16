@@ -18,7 +18,7 @@ class MyGenericClass[E]
 
 	fun foo(x: E)
 	is
-		expects(x == 1)
+		expect(x == 1)
 	do
 		if x != 1 then print "Error x != 1"
 	end
@@ -30,7 +30,7 @@ class MyGenericClass2[E]
 
 	fun add_all(x: Array[Object])
 	is
-		expects(x.length != 0)
+		expect(x.length != 0)
 	do
 		real.add_all x
 	end
