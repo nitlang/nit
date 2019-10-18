@@ -1,1 +1,1 @@
-Runtime error: Assert 'ensure' failed (contracts_ensures.nit:29)
+Runtime error: Assert 'ensure(not bool)' failed (contracts_ensures.nit:29)
