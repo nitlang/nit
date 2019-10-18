@@ -114,6 +114,7 @@ example
 
 expect
 ensure
+invariant
 no_contract
 """
 
