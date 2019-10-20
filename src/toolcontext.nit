@@ -411,12 +411,18 @@ class ToolContext
 	# Option --full-contract
 	var opt_full_contract = new OptionBool("Enable all contracts usage", "--full-contract")
 
+	# Option --in-out-invariant
+	var opt_in_out_invariant = new OptionBool("Enable the verification of invariant contracts in enter and exit", "--in-out-invariant")
+
+	# Option --self-contract
+	var opt_no_self_contract = new OptionBool("Disable the verification of contracts in self", "--no-self-contract")
+
 	# Verbose level
 	var verbose_level: Int = 0
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man, opt_no_contract, opt_full_contract)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man, opt_no_contract, opt_full_contract, opt_in_out_invariant, opt_no_self_contract)
 
 		# Hide some internal options
 		opt_stub_man.hidden = true

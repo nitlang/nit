@@ -14,6 +14,8 @@ Test for ToolContext, try --bash-completion.
   -v, --verbose           Additional messages from the tool
   --no-contract           Disable the contracts usage
   --full-contract         Enable all contracts usage
+  --in-out-invariant      Enable the verification of invariant contracts in enter and exit
+  --no-self-contract      Disable the verification of contracts in self
   -a, --option-a          option a, do nothing
   -b, --option-b          option b, do nothing
   -c                      option c, do nothing

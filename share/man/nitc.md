@@ -546,7 +546,13 @@ By default the contracts can be defined as "semi-global". I.E. All contracts (en
 Option used to disable the contracts(ensures, expects) usage.
 
 ### `--full-contract`
-Option used to enables contracts (ensures, expects) on all classes. Warning this is an expensive option at runtime.
+Enable contracts (ensures, expects) on all classes. Warning this is an expensive option at runtime.
+
+### `--in-out-invariant`
+Enable invariants checking on enter and exit (by default invariants are only checked at exit).
+
+### `--no-self-contract`
+Disable contracts checking for methods called on `self`.
 
 # ENVIRONMENT VARIABLES
 
