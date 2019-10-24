@@ -38,6 +38,8 @@ redef class Array
 	var mutex = new Mutex
 
 	redef fun add(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
@@ -45,6 +47,8 @@ redef class Array
 	end
 
 	redef fun []=(index, e)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
@@ -52,6 +56,8 @@ redef class Array
 	end
 
 	redef fun [](index)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = super
@@ -60,6 +66,8 @@ redef class Array
 	end
 
 	redef fun remove_at(index)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
@@ -67,6 +75,8 @@ redef class Array
 	end
 
 	redef fun shift
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = super
@@ -75,6 +85,8 @@ redef class Array
 	end
 
 	redef fun unshift(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
@@ -82,6 +94,8 @@ redef class Array
 	end
 
 	redef fun insert_all(from, pos)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
@@ -89,6 +103,8 @@ redef class Array
 	end
 
 	redef fun swap_at(a, b)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
@@ -96,6 +112,8 @@ redef class Array
 	end
 
 	redef fun ==(o)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = super
@@ -104,6 +122,8 @@ redef class Array
 	end
 
 	redef fun enlarge(cap)
+	is
+		no_contract
 	do
 		mutex.lock
 		super
