@@ -204,6 +204,23 @@ class GlobalCompiler
 			v.add_decl("{mtype.arguments.first.ctype} values[1];")
 		end
 
+                if all_routine_types_name.has(mtype.mclass.name) then
+                        v.add_decl("val* recv;")
+                        var c_args = ["val* self"]
+                        var c_ret = "void"
+                        var k = mtype.arguments.length
+                        if mtype.mclass.name.has("Fun") then
+                                c_ret = mtype.arguments.last.ctype
+                                k -= 1
+                        end
+                        for i in [0..k[ do
+                                var t = mtype.arguments[i]
+                                c_args.push("{t.ctype} p{i}")
+                        end
+                        var c_sig = c_args.join(", ")
+                        v.add_decl("{c_ret} (*method)({c_sig});")
+                end
+
 		if mtype.ctype_extern != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
 			# * the `classid` to be polymorph
@@ -232,13 +249,29 @@ class GlobalCompiler
 		var v = self.new_visitor
 
 		var is_native_array = mtype.mclass.name == "NativeArray"
-
+                var is_routine_ref = all_routine_types_name.has(mtype.mclass.name)
 		var sig
 		if is_native_array then
 			sig = "int length"
 		else
 			sig = "void"
 		end
+                if is_routine_ref then
+                        var c_args = ["val* self"]
+                        var c_ret = "void"
+                        var k = mtype.arguments.length
+                        if mtype.mclass.name.has("Fun") then
+                                c_ret = mtype.arguments.last.ctype
+                                k -= 1
+                        end
+                        for i in [0..k[ do
+                                var t = mtype.arguments[i]
+                                c_args.push("{t.ctype} p{i}")
+                        end
+                        # The underlying method signature
+                        var method_sig = "{c_ret} (*method)({c_args.join(", ")})"
+                        sig = "val* recv, {method_sig}"
+                end
 
 		self.header.add_decl("{mtype.ctype} NEW_{mtype.c_name}({sig});")
 		v.add_decl("/* allocate {mtype} */")
@@ -251,6 +284,10 @@ class GlobalCompiler
 		else
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}));")
 		end
+                if is_routine_ref then
+			v.add("((struct {mtype.c_name}*){res})->recv = recv;")
+                        v.add("((struct {mtype.c_name}*){res})->method = method;")
+                end
 		v.add("{res}->classid = {self.classid(mtype)};")
 
 		self.generate_init_attr(v, res, mtype)
@@ -425,6 +462,53 @@ class GlobalCompilerVisitor
 		var recv = "((struct {nat.mcasttype.c_name}*){nat})->values"
 		self.add("{recv}[{i}]={val};")
 	end
+
+        redef fun routine_ref_instance(routine_mclass_type, recv, callsite)
+        do
+		var mmethoddef = callsite.mpropdef
+                var method = new CustomizedRuntimeFunction(mmethoddef, recv.mcasttype.as(MClassType))
+                var my_recv = recv
+                if recv.mtype.is_c_primitive then
+                        var object_type = mmodule.object_type
+                        my_recv = autobox(recv, object_type)
+                end
+                var thunk = new CustomizedThunkFunction(mmethoddef, my_recv.mtype.as(MClassType))
+                thunk.polymorph_call_flag = not my_recv.is_exact
+                compiler.todo(method)
+                compiler.todo(thunk)
+		var ret_type = self.anchor(routine_mclass_type).as(MClassType)
+                var res = self.new_expr("NEW_{ret_type.c_name}({my_recv}, &{thunk.c_name})", ret_type)
+                return res
+        end
+
+        redef fun routine_ref_call(mmethoddef, arguments)
+        do
+                var routine = arguments.first
+                var routine_type = routine.mtype.as(MClassType)
+                var routine_class = routine_type.mclass
+                var underlying_recv = "((struct {routine.mcasttype.c_name}*){routine})->recv"
+                var underlying_method = "((struct {routine.mcasttype.c_name}*){routine})->method"
+                adapt_signature(mmethoddef, arguments)
+                arguments.shift
+                var ss = "{underlying_recv}"
+                if arguments.length > 0 then
+                        ss = "{ss}, {arguments.join(", ")}"
+                end
+                arguments.unshift routine
+
+                var ret_mtype = mmethoddef.msignature.return_mtype
+
+                if ret_mtype != null then
+                        ret_mtype = resolve_for(ret_mtype, routine)
+                end
+                var callsite = "{underlying_method}({ss})"
+                if ret_mtype != null then
+                        var subres = new_expr("{callsite}", ret_mtype)
+                        ret(subres)
+                else
+                        add("{callsite};")
+		end
+        end
 
 	redef fun send(m, args)
 	do
@@ -1023,7 +1107,32 @@ private class CustomizedRuntimeFunction
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
 		end
-		if self.mmethoddef.can_inline(v) then
+
+                # TODO: remove this guard when gcc warning issue (#2781) is resolved
+                # WARNING: the next two lines of code is used to prevent inlining.
+                # Inlining of a callref seems to work all the time. However,
+                # it will produce some deadcode in certain scenarios (when using nullable type).
+                #
+                # ~~~~nitish
+                # class A[E]
+                #       fun toto(x: E)
+                #       do
+                #               # ...do something with x...
+                #       end
+                # end
+                # end
+                # var a = new A[nullable Int]
+                # var f = &a.toto
+                # f.call(null)  # Will produce a proper C callsite, but it will
+                #               # produce unreachable (dead code) for type checking
+                #               # and covariance. Thus, creating warnings when
+                #               # compiling in global. However, if you ignore
+                #               # those warnings, the binary works perfectly fine.
+                # ~~~~
+                var intromclassdef = self.mmethoddef.mproperty.intro_mclassdef
+                var is_callref = v.compiler.all_routine_types_name.has(intromclassdef.name)
+
+                if self.mmethoddef.can_inline(v) and not is_callref then
 			var frame = new StaticFrame(v, self.mmethoddef, self.recv, arguments)
 			frame.returnlabel = v.get_name("RET_LABEL")
 			if ret != null then
@@ -1049,4 +1158,68 @@ private class CustomizedRuntimeFunction
 			return res
 		end
 	end
+end
+
+# Thunk implementation for global compiler.
+# For more detail see `abstract_compiler::ThunkFunction` documentation.
+class CustomizedThunkFunction
+        super ThunkFunction
+        super CustomizedRuntimeFunction
+
+        redef fun c_name
+        do
+                return "THUNK_" + super
+        end
+
+        redef fun hash
+        do
+                return super + c_name.hash
+        end
+
+        redef fun resolve_receiver(v)
+        do
+                var res = super(v)
+                if res.is_exact then res.is_exact = not polymorph_call_flag
+                return res
+        end
+
+        redef fun target_recv
+        do
+                # If the targeted method was introduced by a primitive type,
+                # then target_recv must be set to it. Otherwise, there will
+                # be a missing cast. Here's an example:
+                #
+                # ~~~~nitish
+                # class Int
+                #       fun mult_by(x:Int):Int do return x * self
+                # end
+                #
+                # var f = &10.mult_by
+                # ~~~~
+                # Here the thunk `f` must box the receiver `10` into an object.
+                # This is due to the memory representation of a call ref which
+                # has a pointer to an opaque type `val*`:
+                #
+                # ```C
+                # struct Mult_by_callref_struct {
+                #       classid;
+                #       // The receiver `10` would be here
+                #       val* recv;
+                #       // the targeted receiver is a `long`
+                #       long (*pointer_to_mult_by)(long, long);
+                # }
+                # ```
+                #
+                # Thus, every primitive type must be boxed into an `Object` when
+                # instantiating a callref.
+                #
+                # However, if the underlying method was introduced by a primitive
+                # type then a cast must be invoked to convert our boxed receiver
+                # to its original primitive type.
+                var intro_recv = mmethoddef.mproperty.intro_mclassdef.bound_mtype
+                if intro_recv.is_c_primitive then
+                        return intro_recv
+                end
+                return recv_mtype
+        end
 end

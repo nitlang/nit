@@ -181,7 +181,6 @@ private class TypeVisitor
 		return self.visit_expr_subtype(nexpr, self.type_bool(nexpr))
 	end
 
-
 	fun check_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
 		var sub = nexpr.mtype
@@ -424,7 +423,6 @@ private class TypeVisitor
 		return build_callsite_by_name(node, recvtype, name, recv_is_self)
 	end
 
-
 	# Visit the expressions of args and check their conformity with the corresponding type in signature
 	# The point of this method is to handle varargs correctly
 	# Note: The signature must be correctly adapted
@@ -444,7 +442,6 @@ private class TypeVisitor
 			end
 			# Other cases are managed later
 		end
-
 
 		#debug("CALL {unsafe_type}.{msignature}")
 
@@ -1177,7 +1174,6 @@ redef class AVarReassignExpr
 	end
 end
 
-
 redef class AContinueExpr
 	redef fun accept_typing(v)
 	do
@@ -1502,7 +1498,6 @@ redef class AAndExpr
 		self.mtype = v.type_bool(self)
 	end
 end
-
 
 redef class ANotExpr
 	redef fun accept_typing(v)
@@ -2074,7 +2069,6 @@ redef class AUnaryopExpr
 	redef fun compute_raw_arguments do return new Array[AExpr]
 end
 
-
 redef class ACallExpr
 	redef fun property_name do return n_qid.n_id.text
 	redef fun property_node do return n_qid
@@ -2215,11 +2209,24 @@ redef class ACallrefExpr
                 # end
                 #
                 # var a = new A[Int]
-                # var f = &a.toto <- without anchor : ProcRef1[E]
-                #               ^--- with anchor : ProcRef[Int]
+                # var f = &a.toto # without anchor : ProcRef1[E]
+                #		  # with anchor : ProcRef[Int]
                 # ~~~~
-                var routine_type = routine_mclass.get_mtype(types_list).anchor_to(v.mmodule, recv.as(MClassType))
-
+		# However, we can only anchor if we can resolve every formal
+		# parameter, here's an example where we can't.
+		# ~~~~nitish
+		# class A[E]
+		#	fun bar: A[E] do return self
+		#	fun foo: Fun0[A[E]] do return &bar # here we can't anchor
+		# end
+		# var f1 = a1.foo # when this expression will be evaluated,
+		#		  # `a1` will anchor `&bar` returned by `foo`.
+		# print f1.call
+		# ~~~~
+		var routine_type = routine_mclass.get_mtype(types_list)
+		if not recv.need_anchor then
+			routine_type = routine_type.anchor_to(v.mmodule, recv.as(MClassType))
+		end
                 is_typed = true
 		self.mtype = routine_type
 	end
@@ -2508,7 +2515,6 @@ redef class AAttrExpr
 		self.mtype = self.attr_type
 	end
 end
-
 
 redef class AAttrAssignExpr
 	redef fun accept_typing(v)
