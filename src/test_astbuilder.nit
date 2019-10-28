@@ -22,15 +22,14 @@ module test_astbuilder
 import nit
 import astbuilder
 
-redef class ModelBuilder
-	redef fun run_naive_interpreter(mainmodule: MModule, arguments: Array[String])
-	do
-		var clone_visitor = new CloneVisitor
-		for nmodule in self.nmodules do
-			clone_visitor.enter_visit(nmodule)
-		end
-		super
+redef fun build_interpreter(is_vm, mb, mmodule, args)
+do
+
+	var clone_visitor = new CloneVisitor
+	for nmodule in mb.nmodules do
+		clone_visitor.enter_visit(nmodule)
 	end
+	return super
 end
 
 private class CloneVisitor

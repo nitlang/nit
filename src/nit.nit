@@ -22,6 +22,16 @@ import frontend::code_gen
 import parser_util
 import vm
 
+# Factory method used to build an interpreter.
+fun build_interpreter(is_vm: Bool, mb: ModelBuilder, mmodule: MModule, args: Array[String]): NaiveInterpreter
+do
+	if is_vm then
+		return new VirtualMachine(mb, mmodule, args)
+	else
+		return new NaiveInterpreter(mb, mmodule, args)
+	end
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.option_context.options_before_rest = true
@@ -83,9 +93,19 @@ var mainmodule = toolcontext.make_main_module(mmodules)
 var self_mm = mainmodule
 var self_args = arguments
 
+var interpreter = build_interpreter(opt_vm.value, modelbuilder, self_mm, self_args)
 if opt_vm.value then
-	modelbuilder.run_virtual_machine(self_mm, self_args)
+	toolcontext.info("*** NITVM STARTING ***", 1)
 else
-	modelbuilder.run_naive_interpreter(self_mm, self_args)
+	toolcontext.info("*** START INTERPRETING ***", 1)
+end
+var time0 = get_time
+interpreter.start(self_mm)
+var time1 = get_time
+
+if opt_vm.value then
+	toolcontext.info("*** NITVM STOPPING : {time1-time0} ***", 2)
+else
+	toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
 end
 

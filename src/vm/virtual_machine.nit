@@ -20,20 +20,6 @@ module virtual_machine
 import interpreter::naive_interpreter
 import perfect_hashing
 
-redef class ModelBuilder
-	fun run_virtual_machine(mainmodule: MModule, arguments: Array[String])
-	do
-		var time0 = get_time
-		self.toolcontext.info("*** NITVM STARTING ***", 1)
-
-		var interpreter = new VirtualMachine(self, mainmodule, arguments)
-		interpreter.start(mainmodule)
-
-		var time1 = get_time
-		self.toolcontext.info("*** NITVM STOPPING : {time1-time0} ***", 2)
-	end
-end
-
 # A virtual machine based on the naive_interpreter
 class VirtualMachine super NaiveInterpreter
 

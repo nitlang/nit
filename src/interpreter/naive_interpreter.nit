@@ -35,26 +35,6 @@ redef class ToolContext
 	end
 end
 
-redef class ModelBuilder
-	# Execute the program from the entry point (`Sys::main`) of the `mainmodule`
-	# `arguments` are the command-line arguments in order
-	# REQUIRE that:
-	#   1. the AST is fully loaded.
-	#   2. the model is fully built.
-	#   3. the instructions are fully analysed.
-	fun run_naive_interpreter(mainmodule: MModule, arguments: Array[String])
-	do
-		var time0 = get_time
-		self.toolcontext.info("*** START INTERPRETING ***", 1)
-
-		var interpreter = new NaiveInterpreter(self, mainmodule, arguments)
-		interpreter.start(mainmodule)
-
-		var time1 = get_time
-		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
-	end
-end
-
 # The visitor that interprets the Nit Program by walking on the AST
 class NaiveInterpreter
 	# The modelbuilder that know the AST and its associations with the model
