@@ -13,7 +13,7 @@ digraph G {
 subgraph clusterbase_prot_sig2 {
 label = "base_prot_sig2"
 base_prot_sig2C [
-	label = "{C||+ init()\l+ autoinit()\l}"color="#58B26A"
+	label = "{C||+ init()\l+ defaultinit()\l}"color="#58B26A"
 ]
 }
 }

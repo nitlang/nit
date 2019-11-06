@@ -7,7 +7,7 @@ Features for `base_simple3::base_simple3`:
 
  + base_simple3$B
    class B
-   base_simple3.nit:34,1--42,3
+   base_simple3.nit:34,1--38,3
 
  + base_simple3$Bool
    enum Bool
@@ -15,7 +15,7 @@ Features for `base_simple3::base_simple3`:
 
  + base_simple3$C
    class C
-   base_simple3.nit:44,1--47,3
+   base_simple3.nit:40,1--43,3
 
  + base_simple3$Int
    enum Int
@@ -27,5 +27,5 @@ Features for `base_simple3::base_simple3`:
 
  + base_simple3$Sys
    class Sys
-   base_simple3.nit:49,1--19
+   base_simple3.nit:45,1--19
 

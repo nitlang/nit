@@ -33,11 +33,7 @@ end
 
 class B
 	var val: Int
-	init(v: Int)
-	do
-		7.output
-		self.val = v
-	end
+	init do 7.output
 	fun run do val.output
 end
 

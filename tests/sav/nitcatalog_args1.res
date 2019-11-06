@@ -84,7 +84,7 @@
 </ul>
 <h3>Quality</h3>
 <ul class="box">
-<li>28 warnings (55/kloc)</li>
+<li>26 warnings (51/kloc)</li>
 <li>73% documented</li>
 </ul>
 <h3>Tags</h3>
@@ -95,7 +95,7 @@ none<h3>Contributors</h3>
 <ul class="box">
 <li>10 modules</li>
 <li>26 classes</li>
-<li>79 methods</li>
+<li>101 methods</li>
 <li>509 lines of code</li>
 </ul>
 </div>

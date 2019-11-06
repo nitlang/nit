@@ -6,5 +6,4 @@
 * `careers$Warrior$init`
 * `careers$Magician$init`
 * `careers$Alcoholic$init`
-* `character$Character$init`
 * `races$Dwarf$init`
