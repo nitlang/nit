@@ -363,7 +363,6 @@ redef class ModelBuilder
 			mpropdef.msignature = msignature
 			mclassdef.auto_init = mpropdef
 			self.toolcontext.info("{mclassdef} gets a free auto constructor `{mpropdef}{msignature}`. {spropdefs}", 3)
-			#mclassdef.mclass.root_init = mpropdef
 			mclassdef.mclass.the_root_init_mmethod = the_root_init_mmethod
 		end
 	end
@@ -498,12 +497,6 @@ redef class AClassdef
 end
 
 redef class MClass
-	# The base init of the class.
-	#
-	# TODO: Where to put this information is not clear because unlike other
-	# informations, the initialisers are stable in a same class.
-	var root_init: nullable MMethodDef = null
-
 	# The base init of the class.
 	#
 	# TODO: merge with `root_init` and `ModelBuilder::the_root_init_mmethod` if possible
@@ -898,15 +891,6 @@ redef class AMethPropdef
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
-
-		if mpropdef.mproperty.is_root_init and not mclassdef.is_intro then
-			var root_init = mclassdef.mclass.root_init
-			if root_init != null then
-				# Inherit the initializers by refinement
-				assert mpropdef.initializers.is_empty
-				mpropdef.initializers.add_all root_init.initializers
-			end
-		end
 
 		var accept_special_last_parameter = self.n_methid == null or self.n_methid.accept_special_last_parameter
 		var return_is_mandatory = self.n_methid != null and self.n_methid.return_is_mandatory
