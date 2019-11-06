@@ -19,7 +19,7 @@ module benitlux_controller
 
 import nitcorn
 import nitcorn::restful
-private import json::serialization
+private import json
 
 import benitlux_model
 import benitlux_db
@@ -77,7 +77,7 @@ class BenitluxSubscriptionAction
 		end
 
 		var response = new HttpResponse(200)
-		response.body = template.write_to_string
+		response.body = template
 		return response
 	end
 end

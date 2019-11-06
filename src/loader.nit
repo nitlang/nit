@@ -39,6 +39,7 @@ module loader
 
 import modelbuilder_base
 import ini
+import nitpm_shared
 
 redef class ToolContext
 	# Option --path
@@ -64,6 +65,11 @@ redef class ModelBuilder
 
 		# Setup the paths value
 		paths.append(toolcontext.opt_path.value)
+
+		# Packages managed by nitpm, only use when not testing with tests.sh
+		if "NIT_TESTING_TESTS_SH".environ != "true" then
+			paths.add nitpm_lib_dir
+		end
 
 		var path_env = "NIT_PATH".environ
 		if not path_env.is_empty then
@@ -135,6 +141,7 @@ redef class ModelBuilder
 				alpha_comparator.sort(fs)
 				# Try each entry as a group or a module
 				for f in fs do
+					if f.first == '.' then continue
 					var af = a/f
 					mgroup = identify_group(af)
 					if mgroup != null then
@@ -248,6 +255,11 @@ redef class ModelBuilder
 			end
 		end
 
+		if mgroup != null then
+			var alias = mgroup.mpackage.import_alias(name)
+			if alias != null then name = alias
+		end
+
 		var loc = null
 		if anode != null then loc = anode.hot_location
 		var candidate = search_module_in_paths(loc, name, lookpaths)
@@ -280,6 +292,11 @@ redef class ModelBuilder
 	# If found, the module is returned.
 	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable MModule
 	do
+		var name_no_version
+		if name.has('=') then
+			name_no_version = name.split('=').first
+		else name_no_version = name
+
 		var res = new ArraySet[MModule]
 		for dirname in lookpaths do
 			# Try a single module file
@@ -289,7 +306,7 @@ redef class ModelBuilder
 			var g = identify_group((dirname/name).simplify_path)
 			if g != null then
 				scan_group(g)
-				res.add_all g.mmodules_by_name(name)
+				res.add_all g.mmodules_by_name(name_no_version)
 			end
 		end
 		if res.is_empty then return null
@@ -460,7 +477,7 @@ redef class ModelBuilder
 			# Attach homonymous `ini` file to the package
 			var inipath = path.dirname / "{pn}.ini"
 			if inipath.file_exists then
-				var ini = new ConfigTree(inipath)
+				var ini = new IniFile.from_file(inipath)
 				mpackage.ini = ini
 			end
 		end
@@ -526,7 +543,7 @@ redef class ModelBuilder
 		var parent = null
 		var inipath = dirpath / "package.ini"
 		if inipath.file_exists then
-			ini = new ConfigTree(inipath)
+			ini = new IniFile.from_file(inipath)
 		end
 
 		if ini == null then
@@ -636,6 +653,7 @@ redef class ModelBuilder
 		var files = p.files
 		alpha_comparator.sort(files)
 		for f in files do
+			if f.first == '.' then continue
 			var fp = p/f
 			var g = identify_group(fp)
 			# Recursively scan for groups of the same package
@@ -742,7 +760,7 @@ redef class ModelBuilder
 
 	# Injection of a new module without source.
 	# Used by the interpreter.
-	fun load_rt_module(parent: nullable MModule, nmodule: AModule, mod_name: String): nullable AModule
+	fun load_rt_module(parent: nullable MModule, nmodule: AModule, mod_name: String): nullable MModule
 	do
 		# Create the module
 
@@ -759,11 +777,10 @@ redef class ModelBuilder
 			imported_modules.add(parent)
 			mmodule.set_visibility_for(parent, intrude_visibility)
 			mmodule.set_imported_mmodules(imported_modules)
-		else
-			build_module_importation(nmodule)
 		end
+		build_module_importation(nmodule)
 
-		return nmodule
+		return mmodule
 	end
 
 	# Visit the AST and create the `MModule` object
@@ -811,15 +828,15 @@ redef class ModelBuilder
 				mmodule.mdoc = mdoc
 				mdoc.original_mentity = mmodule
 			end
-			# Is the module a test suite?
-			mmodule.is_test_suite = not decl.get_annotations("test_suite").is_empty
+			# Is the module generated?
+			mmodule.is_generated = not decl.get_annotations("generated").is_empty
 		end
 	end
 
 	# Resolve the module identification for a given `AModuleName`.
 	#
 	# This method handles qualified names as used in `AModuleName`.
-	fun seach_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable MModule
+	fun search_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable MModule
 	do
 		var mod_name = n_name.n_id.text
 
@@ -853,6 +870,13 @@ redef class ModelBuilder
 		# If no module yet, then assume that the first element of the path
 		# Is to be searched in the path.
 		var root_name = n_name.n_path.first.text
+
+		# Search for an alias in required external packages
+		if mgroup != null then
+			var alias = mgroup.mpackage.import_alias(root_name)
+			if alias != null then root_name = alias
+		end
+
 		var roots = search_group_in_paths(root_name, paths)
 		if roots.is_empty then
 			error(n_name, "Error: cannot find `{root_name}`. Tried: {paths.join(", ")}.")
@@ -882,7 +906,7 @@ redef class ModelBuilder
 	# Basically it check that `bar::foo` matches `bar/foo.nit` and `bar/baz/foo.nit`
 	# but not `baz/foo.nit` nor `foo/bar.nit`
 	#
-	# Is used by `seach_module_by_amodule_name` to validate qualified names.
+	# Is used by `search_module_by_amodule_name` to validate qualified names.
 	private fun match_amodulename(n_name: AModuleName, m: MModule): Bool
 	do
 		var g: nullable MGroup = m.mgroup
@@ -918,7 +942,7 @@ redef class ModelBuilder
 			end
 
 			# Load the imported module
-			var sup = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			var sup = search_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
 			if sup == null then
 				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
@@ -972,7 +996,7 @@ redef class ModelBuilder
 			var atconditionals = aimport.get_annotations("conditional")
 			if atconditionals.is_empty then continue
 
-			var suppath = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			var suppath = search_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
 			if suppath == null then continue # skip error
 
 			for atconditional in atconditionals do
@@ -1045,7 +1069,7 @@ redef class ModelBuilder
 	# (and `build_module_importation` that calls it).
 	#
 	# TODO (when the loader will be rewritten): use a better representation and move up rules in the model.
-	private var conditional_importations = new Array[SequenceRead[MModule]]
+	var conditional_importations = new Array[SequenceRead[MModule]]
 
 	# Extends the current importations according to imported rules about conditional importation
 	fun apply_conditional_importations(mmodule: MModule)
@@ -1061,7 +1085,7 @@ redef class ModelBuilder
 				for i in [1..ci.length[ do
 					var m = ci[i]
 					# Is imported?
-					if not mmodule.in_importation.greaters.has(m) then continue label
+					if mmodule == m or not mmodule.in_importation.greaters.has(m) then continue label
 				end
 				# Still here? It means that all conditions modules are loaded and imported
 
@@ -1154,7 +1178,7 @@ redef class MPackage
 	# The `ini` file is given as is and might contain invalid or missing information.
 	#
 	# Some packages, like stand-alone packages or virtual packages have no `ini` file associated.
-	var ini: nullable ConfigTree = null
+	var ini: nullable IniFile = null
 
 	# Array of relative source paths excluded according to the `source.exclude` key of the `ini`
 	var excludes: nullable Array[String] is lazy do
@@ -1175,6 +1199,31 @@ redef class MPackage
 			if excludes.has(relpath) then return false
 		end
 		return true
+	end
+
+	# Get the name to search for, for a `root_name` declared as `import` in `ini`
+	fun import_alias(root_name: String): nullable String
+	do
+		var map = import_aliases_parsed
+		if map == null then return null
+
+		var val = map.get_or_null(root_name)
+		if val == null then return null
+
+		return val.dir_name
+	end
+
+	private var import_aliases_parsed: nullable Map[String, ExternalPackage] is lazy do
+		var ini = ini
+		if ini == null then return null
+
+		var import_line = ini["package.import"]
+		if import_line == null then return null
+
+		var map = import_line.parse_import
+		if map.is_empty then return null
+
+		return map
 	end
 end
 

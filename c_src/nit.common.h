@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <setjmp.h>
+
 #include <sys/types.h>
 
 #include <unistd.h>
@@ -14,17 +16,26 @@
 
 #include "gc_chooser.h"
 #ifdef __APPLE__
+	#include <TargetConditionals.h>
+	#include <syslog.h>
 	#include <libkern/OSByteOrder.h>
 	#define be32toh(x) OSSwapBigToHostInt32(x)
+#endif
+#ifdef _WIN32
+	#define be32toh(val) _byteswap_ulong(val)
 #endif
 #ifdef __pnacl__
 	#define be16toh(val) (((val) >> 8) | ((val) << 8))
 	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))
 #endif
 #ifdef ANDROID
-	#define be32toh(val) betoh32(val)
+	#ifndef be32toh
+		#define be32toh(val) betoh32(val)
+	#endif
 	#include <android/log.h>
 	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, "Nit", __VA_ARGS__)
+#elif TARGET_OS_IPHONE
+	#define PRINT_ERROR(...) syslog(LOG_ERR, __VA_ARGS__)
 #else
 	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #endif
@@ -87,13 +98,19 @@ extern void nitni_global_ref_incr( struct nitni_ref *ref );
 /* Decrease count on an existing global reference */
 extern void nitni_global_ref_decr( struct nitni_ref *ref );
 
+struct catch_stack_t {
+	int cursor;
+	jmp_buf envs[100];
+};
+extern struct catch_stack_t catchStack;
+
 void fatal_exit(int) __attribute__ ((noreturn));
 #define likely(x)       __builtin_expect((x),1)
 #define unlikely(x)     __builtin_expect((x),0)
 extern int glob_argc;
 extern char **glob_argv;
 extern val *glob_sys;
-struct instance_core__NativeString {
+struct instance_core__CString {
 const struct type *type;
 const struct class *class;
 void* value;

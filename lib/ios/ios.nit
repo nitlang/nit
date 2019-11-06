@@ -17,3 +17,16 @@ module ios
 
 import platform
 import app
+
+import cocoa::foundation
+
+redef fun print(msg) do msg.to_s.nslog
+redef fun print_error(msg) do msg.to_s.nslog
+
+redef class Text
+	private fun nslog do to_nsstring.nslog
+end
+
+redef class NSString
+	private fun nslog in "ObjC" `{ NSLog(@"%@", self); `}
+end

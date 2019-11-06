@@ -1,213 +1,380 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+	This file is part of NIT ( http://www.nitlanguage.org ).
 
- Author: Alexis Laferrière <alexis.laf@xymus.net>
- Copyright (C) 2009 Alexis Laferrière <alexis.laf@xymus.net>
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
 
- Based on ruby.lang
- Copyright (C) 2004 Archit Baweja <bighead@users.sourceforge.net>
- Copyright (C) 2005 Michael Witrant <mike@lepton.fr>
- Copyright (C) 2006 Gabriel Bauman <gbauman@gmail.com>
+		http://www.apache.org/licenses/LICENSE-2.0
 
- This library is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
 -->
-<language id="nit" _name="Nit" version="2.0" _section="Sources">
-  <metadata>
-    <property name="mimetypes">text/x-nit</property>
-    <property name="globs">*.nit</property>
-    <property name="line-comment-start">#</property>
-  </metadata>
+<language id="nit" _name="Nit" version="2.0" _section="Source">
+	<metadata>
+		<!-- TODO: Register the media type -->
+		<property name="mimetypes">text/x-nit</property>
+		<property name="globs">*.nit</property>
+		<property name="line-comment-start">#</property>
+	</metadata>
 
-  <styles>
-    <style id="escape"               _name="Escaped Character"     map-to="def:special-char"/>
-    <style id="comment"              _name="Comment"               map-to="def:comment"/>
-    <style id="attribute-definition" _name="Attribute Definition"  map-to="def:statement"/>
-    <style id="module-handler"       _name="Module handler"        map-to="def:preprocessor"/>
-    <style id="keyword"              _name="Keyword"               map-to="def:keyword"/>
-    <style id="null-value"           _name="Nil Constant"          map-to="def:special-constant"/>
-    <style id="boolean"              _name="Boolean value"         map-to="def:boolean"/>
-    <style id="floating-point"       _name="Floating point number" map-to="def:floating-point"/>
-    <style id="decimal"              _name="Decimal number"        map-to="def:decimal"/>
-    <style id="base-n-integer"       _name="Base-N number"         map-to="def:base-n-integer"/>
-    <style id="string"               _name="String"                map-to="def:string"/>
-    <style id="builtin"              _name="Builtin"               map-to="def:type"/>
-    <style id="class-name"           _name="Constant"              map-to="def:type"/>
-    <style id="symbol"               _name="Symbol"                map-to="def:string"/>
-    <style id="special-variable"     _name="Special Variable"      map-to="def:identifier"/>
-    <style id="predefined-variable"  _name="Predefined Variable"   map-to="def:identifier"/>
-    <style id="variable"             _name="Variable"              map-to="def:identifier"/>
-    <style id="extern-code"          _name="Extern code"           map-to="def:comment"/>
-  </styles>
+	<styles>
+		<style id="attribute"          _name="Attribute"             map-to="def:builtin"/>
+		<style id="boolean"            _name="Boolean value"         map-to="def:boolean"/>
+		<style id="binary"             _name="Binary number"         map-to="def:base-n-integer"/>
+		<style id="builtin-annotation" _name="Built-in Annotation"   map-to="def:keyword"/>
+		<style id="character"          _name="Character"             map-to="def:character"/>
+		<style id="decimal"            _name="Decimal number"        map-to="def:decimal"/>
+		<style id="escaped-character"  _name="Escaped Character"     map-to="def:special-char"/>
+		<style id="extern-code"        _name="Extern Code"           map-to="def:preprocessor"/>
+		<style id="floating-point"     _name="Floating point number" map-to="def:floating-point"/>
+		<style id="hexadecimal"        _name="Hexadecimal number"    map-to="def:base-n-integer"/>
+		<style id="keyword"            _name="Keyword"               map-to="def:keyword"/>
+		<style id="octal"              _name="Octal number"          map-to="def:base-n-integer"/>
+		<style id="module-handler"     _name="Module Handler"        map-to="def:preprocessor"/>
+		<style id="null-value"         _name="Null Value"            map-to="def:special-constant"/>
+		<style id="reserved"           _name="Reserved keyword"      map-to="def:reserved"/>
+		<style id="special-variable"   _name="Special Variable"      map-to="def:builtin"/>
+		<style id="string"             _name="String"                map-to="def:string"/>
+		<style id="type"               _name="Data Type"             map-to="def:type"/>
 
-  <definitions>
+		<!--
+			The following styles do not inherit from `def` because most style
+			schemes highlight them too much.
+		-->
+		<style id="operator"           _name="Operator"/>              <!-- "def:operator" -->
+		<style id="variable"           _name="Variable or Method"/>    <!-- "def:identifier" -->
 
-    <context id="escape" style-ref="escape">
-      <match>\\((0-7){3}|(x[a-fA-F0-9]{2})|(c\S)|([CM]-\S)|(M-C-\S)|.)</match>
-    </context>
+		<!-- TODO: Implement `bad_string` and `bad_char`?
+		<style id="error"              _name="Error"                 map-to="def:error"/>
+		-->
+	</styles>
 
-    <context id="extern-code" style-ref="extern-code">
-        <start>`\{</start>
-        <end>`\}</end>
-        <include>
-            <context ref="def:in-comment"/>
-        </include>
-    </context>
+	<default-regex-options extended="true"/>
+	<keyword-char-class>[A-Za-z0-9_]</keyword-char-class>
 
-    <context id="definitions" style-ref="keyword">
-      <keyword>class</keyword>
-      <keyword>fun</keyword>
-      <keyword>redef</keyword>
-      <keyword>var</keyword>
-      <keyword>module</keyword>
-      <keyword>type</keyword>
-      <keyword>universal</keyword>
-      <keyword>enum</keyword>
-    </context>
+	<definitions>
+		<define-regex id="space" extended="false">[ \n\r\t]</define-regex>
 
-    <context id="module-handlers" style-ref="module-handler">
-      <keyword>import</keyword>
-    </context>
+		<!-- Keywords and operators -->
 
-    <context id="keywords" style-ref="keyword">
-      <keyword>do</keyword>
-      <keyword>end</keyword>
-      <keyword>intrude</keyword>
-      <keyword>private</keyword>
-      <keyword>if</keyword>
-      <keyword>then</keyword>
-      <keyword>else</keyword>
-      <keyword>while</keyword>
-      <keyword>for</keyword>
-      <keyword>assert</keyword>
-      <keyword>is</keyword>
-      <keyword>abstract</keyword>
-      <keyword>intern</keyword>
-      <keyword>extern</keyword>
-      <keyword>public</keyword>
-      <keyword>protected</keyword>
-      <keyword>or</keyword>
-      <keyword>as</keyword>
-      <keyword>isa</keyword>
-      <keyword>break</keyword>
-      <keyword>continue</keyword>
-      <keyword>return</keyword>
-      <keyword>label</keyword>
-      <keyword>abort</keyword>
-      <keyword>nullable</keyword>
-      <keyword>new</keyword>
-      <keyword>special</keyword>
-      <keyword>super</keyword>
-      <keyword>init</keyword>
-      <keyword>in</keyword>
-      <keyword>or</keyword>
-      <keyword>and</keyword>
-      <keyword>not</keyword>
-      <keyword>writable</keyword>
-      <keyword>readable</keyword>
-    </context>
+		<context id="reserved" style-ref="reserved">
+			<keyword>package</keyword>
+			<keyword>yield</keyword>
+		</context>
 
-    <context id="special-variables" style-ref="special-variable">
-      <keyword>self</keyword>
-    </context>
+		<context id="kwimport" style-ref="module-handler">
+			<keyword>import</keyword>
+		</context>
 
-    <context id="instance-variables" style-ref="variable">
-      <match>(::)?\b_[a-zA-Z_][a-zA-Z0-9_]*</match>
-    </context>
+		<context id="kwnull" style-ref="null-value">
+			<keyword>null</keyword>
+		</context>
 
-    <context id="class-name" style-ref="class-name">
-      <match>(::)?\b[A-Z][A-Za-z0-9_]*\b</match>
-    </context>
+		<context id="keyword" style-ref="keyword">
+			<keyword>abort</keyword>
+			<keyword>abstract</keyword>
+			<keyword>as</keyword>
+			<keyword>assert</keyword>
+			<keyword>break</keyword>
+			<keyword>catch</keyword>
+			<keyword>class</keyword>
+			<keyword>continue</keyword>
+			<keyword>__debug__</keyword>
+			<keyword>do</keyword>
+			<keyword>else</keyword>
+			<keyword>end</keyword>
+			<keyword>enum</keyword>
+			<keyword>extern</keyword>
+			<keyword>for</keyword>
+			<keyword>fun</keyword>
+			<keyword>if</keyword>
+			<keyword>init</keyword>
+			<keyword>in</keyword>
+			<keyword>interface</keyword>
+			<keyword>intrude</keyword>
+			<keyword>isa</keyword>
+			<keyword>is</keyword>
+			<keyword>isset</keyword>
+			<keyword>label</keyword>
+			<keyword>loop</keyword>
+			<keyword>module</keyword>
+			<keyword>new</keyword>
+			<keyword>nullable</keyword>
+			<keyword>once</keyword>
+			<keyword>private</keyword>
+			<keyword>protected</keyword>
+			<keyword>public</keyword>
+			<keyword>redef</keyword>
+			<keyword>return</keyword>
+			<keyword>subset</keyword>
+			<keyword>super</keyword>
+			<keyword>then</keyword>
+			<keyword>type</keyword>
+			<keyword>universal</keyword>
+			<keyword>var</keyword>
+			<keyword>while</keyword>
+			<keyword>with</keyword>
+		</context>
 
-    <context id="null-value" style-ref="null-value">
-      <keyword>null</keyword>
-    </context>
+		<context id="builtin-annotation" style-ref="builtin-annotation">
+			<keyword>autoinit</keyword>
+			<keyword>auto_inspect</keyword>
+			<keyword>cflags</keyword>
+			<keyword>conditional</keyword>
+			<keyword>deprecated</keyword>
+			<keyword>fixed</keyword>
+			<keyword>generated</keyword>
+			<keyword>intern</keyword>
+			<keyword>lateinit</keyword>
+			<keyword>lazy</keyword>
+			<keyword>ldflags</keyword>
+			<keyword>light_ffi</keyword>
+			<keyword>new_annotation</keyword>
+			<keyword>noautoinit</keyword>
+			<keyword>noinit</keyword>
+			<keyword>nosuper</keyword>
+			<keyword>no_warning</keyword>
+			<keyword>old_style_init</keyword>
+			<keyword>optional</keyword>
+			<keyword>pkgconfig</keyword>
+			<keyword>platform</keyword>
+			<keyword>readonly</keyword>
+			<keyword>writable</keyword>
+		</context>
 
-    <context id="boolean" style-ref="boolean">
-      <keyword>false</keyword>
-      <keyword>true</keyword>
-    </context>
-    
-    <define-regex id="underscore_num">\d(_?\d)*</define-regex>
+		<context id="boolean" style-ref="boolean">
+			<keyword>true</keyword>
+			<keyword>false</keyword>
+		</context>
 
-    <define-regex id="float" extended="true">
-      ( (\%{underscore_num})?\.\%{underscore_num} | \%{underscore_num}\. ) |
-      ( (\%{underscore_num}|(\%{underscore_num})?\.\%{underscore_num}|\%{underscore_num}\.)[eE][+-]?\%{underscore_num} )
-    </define-regex>
+		<context id="special-variable" style-ref="special-variable">
+			<keyword>self</keyword>
+		</context>
 
-    <context id="float" style-ref="floating-point">
-      <match>(?&lt;![\w\.])\%{float}(?![\w\.])</match>
-    </context>
+		<context id="operator-keyword" style-ref="keyword">
+			<keyword>and</keyword>
+			<keyword>implies</keyword>
+			<keyword>not</keyword>
+			<keyword>or</keyword>
+		</context>
 
-    <context id="decimal" style-ref="decimal">
-      <match>(?&lt;![\w\.])([1-9](_?[0-9])*|0)(?![\w\.])</match>
-    </context>
+		<context id="operator-punctuation" style-ref="operator">
+			<match>
+				\^=? |
+				~ |
+				&lt;&lt;?=? |
+				&lt;=&gt; |
+				==? |
+				&gt;&gt;?=? |
+				\| |
+				-=? |
+				, |
+				; |
+				::? |
+				!=? |
+				/=? |
+				\.{1,3} |
+				\( |
+				\) |
+				\[ |
+				\] |
+				@ |
+				\*\*?=? |
+				&amp;=? |
+				%=? |
+				\+=?
+			</match>
+		</context>
 
-    <!-- in double quotes and backticks -->
-    <!-- FIXME: really would like for the syntax highlight to go back
-         to none here, as any ruby code could go here -->
-    <context id="complex-interpolation" style-ref="escape">
-      <start>{</start>
-      <end>}</end>
-      <include>
-        <context ref="nit:*"/>
-      </include>
-    </context>
+		<!-- Identifiers -->
 
-    <!-- ruby strings do not end at line end,
-         so we cannot use def:string
-         (parts lifted from perl.lang) -->
-    <context id="double-quoted-string" style-ref="string">
-      <start>"</start>
-      <end>"</end>
-      <include>
-        <context ref="escape"/>
-        <context ref="def:line-continue"/>
-        <context ref="complex-interpolation"/>
-      </include>
-    </context>
+		<context id="attribute" style-ref="attribute">
+			<match>\%[ _[a-z][A-Za-z0-9_]* \%]</match>
+		</context>
 
-    <context id="single-quoted-string" style-ref="string">
-      <start>'</start>
-      <end>'</end>
-      <include>
-        <context style-ref="escape">
-          <match>\\['\\]</match>
-        </context>
-      </include>
-    </context>
+		<context id="type" style-ref="type">
+			<match>\%[ [A-Z][A-Za-z0-9_]* \%]</match>
+		</context>
 
-    <context id="nit">
-      <include>
-        <context ref="def:shebang"/>
-        <context ref="def:shell-like-comment"/>
-        <context ref="double-quoted-string"/>
-        <context ref="single-quoted-string"/>
-        <context ref="definitions"/>
-        <context ref="module-handlers"/>
-        <context ref="keywords"/>
-        <context ref="special-variables"/>
-        <context ref="instance-variables"/>
-        <context ref="class-name"/>
-        <context ref="null-value"/>
-        <context ref="boolean"/>
-        <context ref="float"/>
-        <context ref="decimal"/>
-        <context ref="extern-code"/>
-      </include>
-    </context>
+		<context id="variable" style-ref="variable">
+			<match>\%[ [a-z][A-Za-z0-9_]* \%]</match>
+		</context>
 
-  </definitions>
+		<!-- Numbers -->
+
+		<define-regex id="integer-suffix">
+			(?:[iu](?:8|16|32))?
+		</define-regex>
+
+		<context id="binary" style-ref="binary">
+			<match>[+-]?0[Bb][01_]+\%{integer-suffix}</match>
+		</context>
+
+		<context id="octal" style-ref="octal">
+			<match>[+-]?0[Oo][0-7_]+\%{integer-suffix}</match>
+		</context>
+
+		<context id="hexadecimal" style-ref="hexadecimal">
+			<match>[+-]?0[Xx][0-9A-Fa-f_]+\%{integer-suffix}</match>
+		</context>
+
+		<context id="decimal" style-ref="decimal">
+			<match>[+-]?[0-9][0-9_]*\%{integer-suffix}</match>
+		</context>
+
+		<context id="floating-point" style-ref="floating-point">
+			<match>[+-]?(?:[0-9]+|[0-9]*\.[0-9]+)(?:[Ee][+-]?[0-9]+)?</match>
+		</context>
+
+		<!-- Strings and characters -->
+
+		<context id="escaped-apostrophe" style-ref="escaped-character">
+			<match>\\'</match>
+		</context>
+
+		<context id="escaped-character" style-ref="escaped-character">
+			<match>\\.</match>
+		</context>
+
+		<context id="interpolation" style-ref="escaped-character">
+			<start>\{</start>
+			<end>\}</end>
+			<include>
+				<!-- FIXME: Reset style -->
+				<context ref="nit" />
+			</include>
+		</context>
+
+		<context id="long-interpolation" style-ref="escaped-character">
+			<start>\{\{\{</start>
+			<end>\}\}\}</end>
+			<include>
+				<!-- FIXME: Reset style -->
+				<context ref="nit" />
+			</include>
+		</context>
+
+		<context id="long-string" style-ref="string" class="string">
+			<start>"""|'''</start>
+			<end>\%{0@start}</end>
+			<include>
+				<context ref="escaped-character"/>
+				<context ref="long-interpolation"/>
+			</include>
+		</context>
+
+		<context id="character" style-ref="character" class="string">
+			<start>'</start>
+			<end>'</end>
+			<include>
+				<context ref="escaped-apostrophe"/>
+			</include>
+		</context>
+
+		<context id="string" style-ref="string" class="string">
+			<start>"</start>
+			<end>"</end>
+			<include>
+				<context ref="escaped-character"/>
+				<context ref="interpolation"/>
+			</include>
+		</context>
+
+		<!-- Extern code -->
+
+		<context id="extern-code-cpp" style-ref="extern-code">
+			<start case-sensitive="false">
+				(?'cpp_kwin' in) \%{space}*
+				(?'cpp_language_name' "c\+\+(?: [^"]*)?") \%{space}*
+				`\{
+			</start>
+			<end>`\}</end>
+			<include>
+				<context sub-pattern="cpp_kwin" where="start" style-ref="keyword"/>
+				<context sub-pattern="cpp_language_name" where="start"
+						style-ref="string" class="string" />
+				<!-- FIXME: Reset style -->
+				<context ref="cpp:cpp"/>
+			</include>
+		</context>
+
+		<context id="extern-code-java" style-ref="extern-code">
+			<start case-sensitive="false">
+				(?'java_kwin' in) \%{space}*
+				(?'java_language_name' "java(?: [^"]*)?") \%{space}*
+				`\{
+			</start>
+			<end>`\}</end>
+			<include>
+				<context sub-pattern="java_kwin" where="start" style-ref="keyword"/>
+				<context sub-pattern="java_language_name" where="start"
+						style-ref="string" class="string" />
+				<!-- FIXME: Reset style -->
+				<context ref="java:java"/>
+			</include>
+		</context>
+
+		<context id="extern-code-objc" style-ref="extern-code">
+			<start case-sensitive="false">
+				(?'objc_kwin' in) \%{space}*
+				(?'objc_language_name' "objc(?: [^"]*)?") \%{space}*
+				`\{
+			</start>
+			<end>`\}</end>
+			<include>
+				<context sub-pattern="objc_kwin" where="start" style-ref="keyword"/>
+				<context sub-pattern="objc_language_name" where="start"
+						style-ref="string" class="string" />
+				<!-- FIXME: Reset style -->
+				<context ref="objc:objc"/>
+			</include>
+		</context>
+
+		<context id="extern-code-default" style-ref="extern-code">
+			<!-- By default, the embedded language is C. -->
+			<start>`\{</start>
+			<end>`\}</end>
+			<include>
+				<!-- FIXME: Reset style -->
+				<context ref="c:c"/>
+			</include>
+		</context>
+
+		<!-- Main context -->
+		<context id="nit" class="no-spell-check">
+			<include>
+				<context ref="def:shebang"/>
+				<context ref="def:shell-like-comment"/>
+				<context ref="extern-code-cpp"/>
+				<context ref="extern-code-java"/>
+				<context ref="extern-code-objc"/>
+				<context ref="extern-code-default"/>
+				<context ref="long-string"/>
+				<context ref="character"/>
+				<context ref="string"/>
+				<context ref="reserved"/>
+				<context ref="kwimport"/>
+				<context ref="kwnull"/>
+				<context ref="keyword"/>
+				<context ref="builtin-annotation"/>
+				<context ref="boolean"/>
+				<context ref="special-variable"/>
+				<context ref="operator-keyword"/>
+				<context ref="attribute"/>
+				<context ref="type"/>
+				<context ref="variable"/>
+				<context ref="binary"/>
+				<context ref="octal"/>
+				<context ref="hexadecimal"/>
+				<context ref="decimal"/>
+				<context ref="floating-point"/>
+				<context ref="operator-punctuation"/>
+			</include>
+		</context>
+	</definitions>
 </language>

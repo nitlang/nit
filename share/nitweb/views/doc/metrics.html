@@ -1,0 +1,157 @@
+<div id='metrics'>
+
+	<!-- packages, groups -->
+
+	<metrics-list
+		ng-if='vm.mentity.class_name == "MPackage" || vm.mentity.class_name == "MGroup"'
+		list-id='modules_importation'
+		list-title='Modules importation'
+		list-metrics='vm.metrics.mmodules'
+		list-metrics-names='["mdit", "mnoa", "mnop", "mnoc", "mnod"]'
+		list-metrics-default='"mdit"' />
+	<metrics-list
+		ng-if='vm.mentity.class_name == "MPackage" || vm.mentity.class_name == "MGroup"'
+		list-id='modules_definitions'
+		list-title='Modules content'
+		list-metrics='vm.metrics.mmodules'
+		list-metrics-names='["mnbi", "mnbr", "mnbic", "mnbac", "mnbcc"]'
+		list-metrics-default='"mnbi"' />
+	<metrics-list
+		ng-if='vm.mentity.class_name == "MPackage" || vm.mentity.class_name == "MGroup"'
+		list-id='classes_inheritance'
+		list-title='Classes inheritance'
+		list-metrics='vm.metrics.mclasses'
+		list-metrics-names='["cdit", "cnoa", "cnop", "cnoc", "cnod"]'
+		list-metrics-default='"cdit"' />
+	<metrics-list
+		ng-if='vm.mentity.class_name == "MPackage" || vm.mentity.class_name == "MGroup"'
+		list-id='classes_properties'
+		list-title='Classes properties'
+		list-metrics='vm.metrics.mclasses'
+		list-metrics-names='["cnbp", "cnba", "cnbip", "cnbrp", "cnbhp", "cnblp"]'
+		list-metrics-default='"cnbp"' />
+
+	<!-- module -->
+
+	<div class='card' ng-if='vm.mentity.class_name == "MModule"'>
+		<div class='card-body container-fluid'>
+			<h3 class='card-heading'>Module importation</h3>
+			<div class='col-sm-6'>
+				<h4>
+					Importation metrics
+				</h4>
+				<dl class='dl-horizontal'>
+					<dt>{{vm.metrics.mmodule.mnoa.values[vm.mentity.full_name].value}}</dt>
+					<dd>ancestors</dd>
+					<dt>{{vm.metrics.mmodule.mnop.values[vm.mentity.full_name].value}}</dt>
+					<dd>direct parents</dd>
+					<dt>{{vm.metrics.mmodule.mnoc.values[vm.mentity.full_name].value}}</dt>
+					<dd>direct children</dd>
+					<dt>{{vm.metrics.mmodule.mnod.values[vm.mentity.full_name].value}}</dt>
+					<dd>descendants</dd>
+				</dl>
+				<dl class='dl-horizontal'>
+					<dt>{{vm.metrics.mmodule.mdit.values[vm.mentity.full_name].value}}</dt>
+					<dd>Depth in Inheritance Tree</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class='card' ng-if='vm.mentity.class_name == "MModule"'>
+		<div class='card-body container-fluid'>
+			<h3 class='card-heading'>Module definitions</h3>
+			<div class='col-sm-6'>
+				<h4>
+					Class definition kinds
+					<small>({{vm.metrics.mmodule['mnbi'].values[vm.mentity.full_name].value +
+						vm.metrics.mclass['mnbc'].values[vm.mentity.full_name].value}}
+					class definitions)</small>
+				</h4>
+				<chart-module-definitions-kind chart-id='chartDefinitionsKind'
+					chart-metrics='vm.metrics.mmodule' />
+			</div>
+			<div class='col-sm-6'>
+				<h4>
+					Class definition inheritance
+					<small>({{vm.metrics.mmodule['mnbd'].values[vm.mentity.full_name].value}}
+					accessible definitions)</small>
+				</h4>
+				<chart-module-definitions-inh chart-id='chartDefinitionsInh'
+					chart-metrics='vm.metrics.mmodule' />
+			</div>
+		</div>
+	</div>
+	<metrics-list
+		ng-if='vm.mentity.class_name == "MModule"'
+		list-id='classes_inheritance'
+		list-title='Classes inheritance'
+		list-metrics='vm.metrics.mclasses'
+		list-metrics-names='["cdit", "cnoa", "cnop", "cnoc", "cnod"]'
+		list-metrics-default='"cdit"' />
+	<metrics-list
+		ng-if='vm.mentity.class_name == "MModule"'
+		list-id='classes_properties'
+		list-title='Classes properties'
+		list-metrics='vm.metrics.mclasses'
+		list-metrics-names='["cnbp", "cnba", "cnbip", "cnbrp", "cnbhp", "cnblp"]'
+		list-metrics-default='"cnbp"' />
+
+	<!-- mclass -->
+
+	<div class='card' ng-if='vm.mentity.class_name == "MClass"'>
+		<div class='card-body container-fluid'>
+			<h3 class='card-heading'>Class inheritance</h3>
+			<div class='col-sm-6'>
+				<h4>
+					Inheritance kind
+					<small>({{vm.metrics.mclass['cnoa'].values[vm.mentity.full_name].value}}
+					ancestors)</small>
+				</h4>
+				<chart-class-inheritance-kind chart-id='chartInheritanceKind'
+					chart-metrics='vm.metrics.mclass' />
+			</div>
+			<div class='col-sm-6'>
+				<h4>
+					Inheritance metrics
+				</h4>
+				<dl class='dl-horizontal'>
+					<dt>{{vm.metrics.mclass.cnoa.values[vm.mentity.full_name].value}}</dt>
+					<dd>ancestors</dd>
+					<dt>{{vm.metrics.mclass.cnop.values[vm.mentity.full_name].value}}</dt>
+					<dd>direct parents</dd>
+					<dt>{{vm.metrics.mclass.cnoc.values[vm.mentity.full_name].value}}</dt>
+					<dd>direct children</dd>
+					<dt>{{vm.metrics.mclass.cnod.values[vm.mentity.full_name].value}}</dt>
+					<dd>descendants</dd>
+				</dl>
+				<dl class='dl-horizontal'>
+					<dt>{{vm.metrics.mclass.cdit.values[vm.mentity.full_name].value}}</dt>
+					<dd>Depth in Inheritance Tree</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class='card' ng-if='vm.mentity.class_name == "MClass"'>
+		<div class='card-body container-fluid'>
+			<h3 class='card-heading'>Class properties</h3>
+			<div class='col-sm-6'>
+				<h4>
+					Properties kind
+					<small>({{vm.metrics.mclass['cnbp'].values[vm.mentity.full_name].value}}
+					accessible properties)</small>
+				</h4>
+				<chart-class-properties-kind chart-id='chartPropertiesKind'
+					chart-metrics='vm.metrics.mclass' />
+			</div>
+			<div class='col-sm-6'>
+				<h4>
+					Properties inheritance
+					<small>({{vm.metrics.mclass['cnbp'].values[vm.mentity.full_name].value}}
+					accessible properties)</small>
+				</h4>
+				<chart-class-properties-inh chart-id='chartPropertiesInh'
+					chart-metrics='vm.metrics.mclass' />
+			</div>
+		</div>
+	</div>
+</div>

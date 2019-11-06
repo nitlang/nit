@@ -20,6 +20,7 @@ import mnit::input
 
 import display_linux is conditional(linux)
 import display_android is conditional(android)
+import display_ios is conditional(ios)
 
 # Should Gamnit be more verbose?
 fun debug_gamnit: Bool do return false
@@ -34,7 +35,7 @@ class GamnitDisplay
 	fun height: Int is abstract
 
 	# Aspect ratio of the screen, `width / height`
-	var aspect_ratio: Float is lazy do return width.to_f / height.to_f
+	fun aspect_ratio: Float do return width.to_f / height.to_f
 
 	# Is the cursor locked et the center of the screen?
 	var lock_cursor = false is writable
@@ -72,4 +73,7 @@ class GamnitDisplay
 	#
 	# The implementation varies per platform.
 	fun feed_events do end
+
+	# Extensions to OpenGL ES 2.0 supported by the current configuration
+	var gl_extensions: Array[String] is lazy do return glGetString(gl_EXTENSIONS).split(' ')
 end

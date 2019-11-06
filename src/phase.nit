@@ -86,6 +86,11 @@ redef class ToolContext
 	# Set of already analyzed modules.
 	private var phased_modules = new HashSet[AModule]
 
+	# List of module to process according to `run_phases`
+	#
+	# This allow some new modules to be found and added while analysing the code.
+	var todo_nmodules: Sequence[AModule]
+
 	# Run all registered phases on a set of modules
 	fun run_phases(nmodules: Collection[AModule])
 	do
@@ -99,7 +104,11 @@ redef class ToolContext
 			self.info(" registered phases: {phase}", 2)
 		end
 
-		for nmodule in nmodules do
+		var todo_nmodules = nmodules.to_a
+		self.todo_nmodules = todo_nmodules
+
+		while not todo_nmodules.is_empty do
+			var nmodule = todo_nmodules.shift
 			if phased_modules.has(nmodule) then continue
 			phased_modules.add nmodule
 
@@ -137,6 +146,7 @@ redef class ToolContext
 				if errcount != self.error_count then
 					self.check_errors
 				end
+				phase.process_nmodule_after(nmodule)
 			end
 			self.check_errors
 		end
@@ -245,4 +255,10 @@ abstract class Phase
 	# Note that the order of the visit is the one of the file
 	# @toimplement
 	fun process_annotated_node(node: ANode, nat: AAnnotation) do end
+
+	# Specific actions to execute on the whole tree of a module
+	# Called at the end of a phase on a module
+	# Last called hook
+	# @toimplement
+	fun process_nmodule_after(nmodule: AModule) do end
 end

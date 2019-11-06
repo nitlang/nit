@@ -1,0 +1,470 @@
+image: nitlang/nit-ci
+
+services:
+  - mongo
+  - neo4j:2.3
+  - postgres
+
+variables:
+  NEO4J_AUTH: none
+
+cache:
+  paths:
+    - .ccache
+    - .gradle/caches
+    - .gradle/wrapper
+  key: "$CI_JOB_NAME"
+
+stages:
+  - build
+  - test
+  - more_test
+  - deploy
+
+before_script:
+  - date
+  - export CCACHE_DIR=$PWD/.ccache
+  - export GRADLE_USER_HOME=$PWD/.gradle
+  - export PATH=$PWD/bin:$PATH
+  - git config --add github.oauthtoken "$GITHUB_OAUTHTOKEN" # needed for github api rate limit
+  - pwd
+  - ccache -s
+  - ccache -z
+  - ccache -M 500M
+  - du -sh .gradle || true
+  - type -a nitc nitdoc || true # is there some nit tools?
+  - "> status.txt"
+
+after_script:
+  - export CCACHE_DIR=$PWD/.ccache
+  - ccache -s
+  - du -sh .gradle || true
+  - git status --ignored || true
+  - date
+  - tail status.txt
+
+# BASIC JOBS ########################################################
+
+sanity_checks:
+  stage: build
+  script:
+    - misc/jenkins/checkwhitespaces.sh | tee -a status.txt
+    - misc/jenkins/checksignedoffby.sh | tee -a status.txt
+    - misc/jenkins/checklicense.sh | tee -a status.txt
+
+build_tools: &build_tools
+  stage: build
+  script:
+    - make 2>> status.txt
+    - nitc --version
+    - misc/jenkins/check_manpages.sh
+  artifacts:
+    paths:
+      - bin/*
+      - c_src/nitc
+      - src/version.nit
+      - src/nitc_0
+    when: always
+
+test_some: &test_some
+  stage: test
+  dependencies:
+    - build_tools
+  script:
+    - cd tests
+    - ./search_tests_git.sh origin/master HEAD > list
+    - ./testall.sh `cat list` | tee log.txt
+    - grep -v '=>' log.txt > ../status.txt || true
+  artifacts:
+    paths:
+      - tests/errlist
+      - tests/*.xml*
+    when: always
+    reports:
+      junit: tests/*.xml
+
+nitunit_some:
+  stage: test
+  dependencies:
+    - build_tools
+  script:
+    - git diff --name-only origin/master..HEAD -- "*.nit" "*.res" "README.*" | grep -v "^tests/\|contrib/" > list0.txt || true
+    - xargs nitls -pP < list0.txt > list.txt
+    - test -s list.txt || exit 0
+    - xargs nitunit < list.txt
+    - junit2html nitunit.xml
+  artifacts:
+    paths:
+      - nitunit.xml*
+    when: always
+    reports:
+      junit:
+        - nitunit.xml
+
+nitpick_full:
+  stage: test
+  dependencies:
+    - build_tools
+  script:
+    - nitls lib src examples contrib
+    - nitls -Pp lib src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
+    - xargs nitpick < list.txt
+
+basic_android:
+  stage: test
+  dependencies:
+    - build_tools
+  script:
+    - make -C contrib/asteronits android
+  artifacts:
+    paths:
+      - contrib/asteronits/bin/*.apk
+
+# TEST FULL #########################################################
+
+test_full_nitcs: &test_full_nitcs
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - share/android-bdwgc/setup.sh
+    - cd tests
+    - ./testfull.sh | tee log.txt
+    - grep -v '=>' log.txt > ../status.txt || true
+  artifacts:
+    paths:
+      - tests/errlist
+      - tests/*.xml*
+      - tests/out/*.res
+      - tests/out/*.log
+    when: always
+    reports:
+      junit: tests/*.xml
+
+test_full_niti:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - cd tests
+    - ./testfull.sh --engine niti | tee log.txt
+    - grep -v '=>' log.txt > ../status.txt || true
+  artifacts:
+    paths:
+      - tests/errlist
+      - tests/*.xml*
+      - tests/out/*.res
+      - tests/out/*.log
+    when: always
+    reports:
+      junit: tests/*.xml
+
+test_full_nitcg:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - cd tests
+    - ./testfull.sh --engine nitcg | tee log.txt
+    - grep -v '=>' log.txt > ../status.txt || true
+  artifacts:
+    paths:
+      - tests/errlist
+      - tests/*.xml*
+      - tests/out/*.res
+      - tests/out/*.log
+    when: always
+    reports:
+      junit: tests/*.xml
+
+test_full_nitce:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - cd tests
+    - ./testfull.sh --engine nitce | tee log.txt
+    - grep -v '=>' log.txt > ../status.txt || true
+  artifacts:
+    paths:
+      - tests/errlist
+      - tests/*.xml*
+      - tests/out/*.res
+      - tests/out/*.log
+    when: always
+    reports:
+      junit: tests/*.xml
+
+test_full_nitcsg:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - cd tests
+    - ./testfull.sh --engine nitcsg | tee log.txt
+    - grep -v '=>' log.txt > ../status.txt || true
+  artifacts:
+    paths:
+      - tests/errlist
+      - tests/*.xml*
+      - tests/out/*.res
+      - tests/out/*.log
+    when: always
+    reports:
+      junit: tests/*.xml
+
+# LIB, CONTRIB AND OOT ##############################################
+
+nitunit_lib:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - nitls -Pp lib | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
+    - xargs nitunit -v < list.txt| tee log.txt
+    - grep -e KO log.txt > status.txt || true
+    - tail -3 log.txt >> status.txt
+    - junit2html nitunit.xml
+  artifacts:
+    paths:
+      - nitunit.xml*
+    when: always
+    reports:
+      junit:
+        - nitunit.xml
+
+nitunit_src:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - nitls -Pp src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
+    - xargs nitunit -v < list.txt| tee log.txt
+    - grep -e KO log.txt > status.txt || true
+    - tail -3 log.txt >> status.txt
+    - junit2html nitunit.xml
+  artifacts:
+    paths:
+      - nitunit.xml*
+    when: always
+    reports:
+      junit:
+        - nitunit.xml
+
+test_contribs:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - misc/jenkins/check_contrib.sh all check
+    - grep 'error message' *.xml > status.txt || true
+    - test ! -s status.txt # no lines, no errors
+
+test_contribs_android:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - misc/jenkins/check_contrib.sh android
+    - grep 'error message' *.xml > status.txt || true
+    - mkdir -p apk/debug
+    - find . -name '*.apk' -exec mv {} apk/debug/ ";"
+    - test ! -s status.txt # no lines, no errors
+    - misc/jenkins/check_contrib.sh android-release
+    - grep 'error message' *.xml > status.txt || true
+    - mkdir -p apk/release
+    - find . -name '*.apk' -exec mv {} apk/release ";"
+    - test ! -s status.txt # no lines, no errors
+  artifacts:
+    paths:
+      - "apk"
+    when: always
+
+build_oot:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - cd contrib
+    - ./oot.sh all
+    - grep 'error message' *.xml > ../status.txt || true
+    # Errors are somewhat expected
+
+# MISC ##############################################################
+
+check_requirments:
+  stage: more_test
+  image: debian:buster
+  before_script:
+    - date # cancel the default `before_script`, an empty list does nothing
+  script: # from the README
+    - apt-get update && apt-get install --yes --no-install-recommends build-essential ccache libgc-dev libunwind-dev pkg-config
+    - make
+    - bin/nitc examples/hello_world.nit
+    - ./hello_world
+    - . misc/nit_env.sh install
+    - nitc examples/hello_world.nit
+    - ./hello_world
+    - apt-get update && apt-get install --yes --no-install-recommends graphviz libcurl4-openssl-dev libevent-dev libmongoc-dev
+    - make more
+
+bootstrap_full:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - cd src
+    - ./full_bootstrap
+    - ./ncall.sh
+
+bench_fast:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - cd benchmarks
+    - ./bench_engines.sh --fast --fast --html options
+    - grep -B1 'error message' *.xml | grep testcase > ../status.txt || true
+  artifacts:
+    paths:
+      - benchmarks/*.html
+      - benchmarks/*.png
+      - benchmarks/*.dat
+      - benchmarks/*.gnu
+    when: always
+
+nitunit_manual:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - nitunit doc/manual/*.nit
+    - junit2html nitunit.xml
+  artifacts:
+    paths:
+      - nitunit.xml*
+    when: always
+    reports:
+      junit:
+        - nitunit.xml
+
+# MORE TOOLS ########################################################
+
+build_more_tools:
+  stage: test
+  dependencies:
+    - build_tools
+  script:
+    - make more
+    - make -C "contrib/nitcc"
+  artifacts:
+    paths:
+      - bin/*
+      - c_src/nitc
+      - src/version.nit
+      - src/nitc_0
+
+valgrind:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - mkdir -p valgrind.out
+    - nitc src/nitc.nit # To warm-up the cache
+    - src/valgrind.sh --callgrind-out-file=valgrind.out/nitc.nitc.out nitc src/nitc.nit -vv
+    - callgrind_annotate valgrind.out/nitc.nitc.out > valgrind.out/nitc.nitc.txt
+    - src/valgrind.sh --callgrind-out-file=valgrind.out/niti.niti.out nit -- src/nit.nit tests/base_simple3.nit -vv
+    - callgrind_annotate valgrind.out/niti.niti.out > valgrind.out/niti.niti.txt
+  artifacts:
+    paths:
+      - valgrind.out
+
+build_doc:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - nitls -r -t .
+    - nitdoc -d nitdoc.out --keep-going lib src
+  artifacts:
+    paths:
+      - nitdoc.out
+
+build_manual:
+  stage: more_test
+  script:
+    - apt-get update && apt-get install --yes --no-install-recommends pandoc texlive texlive-latex-extra lmodern
+    - make -C doc/manual
+  artifacts:
+    paths:
+      - doc/manual/*.pdf
+      - doc/manual/*.epub
+
+nitmetrics:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - mkdir -p nitmetrics.out
+    - nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src | tee nitmetrics.out/metrics.txt
+  artifacts:
+    paths:
+      - nitmetrics.out
+
+build_catalog:
+  stage: more_test
+  dependencies:
+    - build_more_tools
+  script:
+    - misc/jenkins/check_contrib.sh pre-build
+    - cd contrib
+    - ./oot.sh update
+    - ./oot.sh pre-build
+    - cd ..
+    - nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/
+  artifacts:
+    paths:
+      - catalog.out
+
+build_tools_macos:
+  <<: *build_tools
+  tags:
+    - macos
+
+test_some_macos:
+  <<: *test_some
+  tags:
+    - macos
+  dependencies:
+    - build_tools_macos
+
+test_full_nitcs_macos:
+  <<: *test_full_nitcs
+  tags:
+    - macos
+  dependencies:
+    - build_tools_macos
+
+bench_old:
+  stage: more_test
+  tags:
+    - perf
+  dependencies:
+    - build_tools
+  script:
+    - benchmarks/bench_old.sh
+  allow_failure: true # time is unreliable. manual check required
+  services: []
+
+build_tools_windows:
+  stage: build
+  before_script:
+    - date
+  after_script:
+    - date
+  tags:
+    - windows
+  script:
+    - $project_dir = "$CI_PROJECT_DIR" -replace "\\", "\\\"
+    - $converted_project_dir = $(c:\msys64\usr\bin\bash -l -c "cygpath -u $project_dir")
+    - c:\msys64\usr\bin\env MSYSTEM=MINGW64 c:\msys64\usr\bin\bash -l -c "cd $converted_project_dir; make"

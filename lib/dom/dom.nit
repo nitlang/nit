@@ -30,9 +30,9 @@ redef class XMLEntity
 	# assert xml["animal"].length == 1
 	# assert xml["animal"].first["cat"].length == 2
 	# ~~~
-	fun [](tag_name: String): Array[XMLEntity]
+	fun [](tag_name: String): Array[XMLTag]
 	do
-		var res = new Array[XMLEntity]
+		var res = new Array[XMLTag]
 		for child in children do
 			if child isa XMLTag and child.tag_name == tag_name then
 				res.add child
@@ -58,12 +58,36 @@ redef class XMLStartTag
 	# var xml = code.to_xml
 	# assert xml["animal"].first["tiger"].first.as(XMLStartTag).data == "This is a white tiger!"
 	# ~~~
-	fun data: String
+	fun data: nullable String
 	do
 		for child in children do
 			if child isa PCDATA then return child.content
 			if child isa CDATA then return child.content
 		end
-		abort
+		return null
+	end
+end
+
+redef class XMLAttrTag
+
+	# Attributes as a map (ignoring malformed attributes)
+	#
+	# ~~~
+	# var xml = """
+	# <student first="Snow" last="Man"/>
+	# """.to_xml
+	#
+	# var attributes = xml["student"].first.as(XMLAttrTag).attributes_to_map
+	# assert attributes.join(", ", ":") == "first:Snow, last:Man"
+	# ~~~
+	fun attributes_to_map: Map[String, String]
+	do
+		var m = new Map[String, String]
+		for a in attributes do
+			if a isa XMLStringAttr then
+				m[a.name] = a.value
+			end
+		end
+		return m
 	end
 end

@@ -21,6 +21,8 @@ import markdown
 class ManDecorator
 	super Decorator
 
+	redef var headlines = new ArrayMap[String, HeadLine]
+
 	redef fun add_ruler(v, block) do v.add "***\n"
 
 	redef fun add_headline(v, block) do

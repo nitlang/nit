@@ -50,6 +50,13 @@ redef class Model
 	#
 	# Each classdef is associated with its super-classdefs in regard to
 	# its module of definition.
+	#
+	# ~~~
+	# var m = new ModelDiamond
+	# assert     m.mclassdef_hierarchy.has_edge(m.mclassdef_b, m.mclassdef_a)
+	# assert not m.mclassdef_hierarchy.has_edge(m.mclassdef_a, m.mclassdef_b)
+	# assert not m.mclassdef_hierarchy.has_edge(m.mclassdef_b, m.mclassdef_c)
+	# ~~~
 	var mclassdef_hierarchy = new POSet[MClassDef]
 
 	# Class-type hierarchy restricted to the introduction.
@@ -75,12 +82,18 @@ redef class Model
 	# Collections of classes grouped by their short name
 	private var mclasses_by_name = new MultiHashMap[String, MClass]
 
-	# Return all class named `name`.
+	# Return all classes named `name`.
 	#
 	# If such a class does not exist, null is returned
 	# (instead of an empty array)
 	#
 	# Visibility or modules are not considered
+	#
+	# ~~~
+	# var m = new ModelStandalone
+	# assert m.get_mclasses_by_name("Object") == [m.mclass_o]
+	# assert m.get_mclasses_by_name("Fail") == null
+	# ~~~
 	fun get_mclasses_by_name(name: String): nullable Array[MClass]
 	do
 		return mclasses_by_name.get_or_null(name)
@@ -102,6 +115,9 @@ redef class Model
 
 	# The only null type
 	var null_type = new MNullType(self)
+
+	# The only bottom type
+	var bottom_type: MBottomType = null_type.as_notnull
 
 	# Build an ordered tree with from `concerns`
 	fun concerns_tree(mconcerns: Collection[MConcern]): ConcernsTree do
@@ -143,6 +159,14 @@ class ConcernsTree
 	super OrderedTree[MConcern]
 end
 
+redef class MGroup
+	redef var is_test is lazy do
+		var parent = self.parent
+		if parent != null and parent.is_test then return true
+		return name == "tests"
+	end
+end
+
 redef class MModule
 	# All the classes introduced in the module
 	var intro_mclasses = new Array[MClass]
@@ -150,6 +174,14 @@ redef class MModule
 	# All the class definitions of the module
 	# (introduction and refinement)
 	var mclassdefs = new Array[MClassDef]
+
+	private var mclassdef_sorter: MClassDefSorter is lazy do
+		return new MClassDefSorter(self)
+	end
+
+	private var mpropdef_sorter: MPropDefSorter is lazy do
+		return new MPropDefSorter(self)
+	end
 
 	# Does the current module has a given class `mclass`?
 	# Return true if the mmodule introduces, refines or imports a class.
@@ -159,32 +191,50 @@ redef class MModule
 		return self.in_importation <= mclass.intro_mmodule
 	end
 
-	# Full hierarchy of introduced ans imported classes.
+	# Full hierarchy of introduced and imported classes.
 	#
 	# Create a new hierarchy got by flattening the classes for the module
 	# and its imported modules.
 	# Visibility is not considered.
 	#
 	# Note: this function is expensive and is usually used for the main
-	# module of a program only. Do not use it to do you own subtype
+	# module of a program only. Do not use it to do your own subtype
 	# functions.
 	fun flatten_mclass_hierarchy: POSet[MClass]
 	do
 		var res = self.flatten_mclass_hierarchy_cache
 		if res != null then return res
-		res = new POSet[MClass]
+                self.flatten_mclass_hierarchy_cache = new POSet[MClass]
 		for m in self.in_importation.greaters do
 			for cd in m.mclassdefs do
-				var c = cd.mclass
-				res.add_node(c)
-				for s in cd.supertypes do
-					res.add_edge(c, s.mclass)
-				end
+                                unsafe_update_hierarchy_cache(cd)
 			end
 		end
-		self.flatten_mclass_hierarchy_cache = res
-		return res
+		return self.flatten_mclass_hierarchy_cache.as(not null)
 	end
+
+        # Adds another class definition in the modue.
+        # Updates the class hierarchy cache.
+        fun add_mclassdef(mclassdef: MClassDef)
+        do
+                self.mclassdefs.add(mclassdef)
+                if self.flatten_mclass_hierarchy_cache != null then
+                        unsafe_update_hierarchy_cache(mclassdef)
+                end
+        end
+
+        # Adds a class definition inside `flatten_mclass_hierarchy_cache` without
+        # null check. The caller must have initialized the cache.
+        protected fun unsafe_update_hierarchy_cache(mclassdef: MClassDef)
+        do
+                var hierarchy = self.flatten_mclass_hierarchy_cache.as(not null)
+                # Update the cache
+                var c = mclassdef.mclass
+                hierarchy.add_node(c)
+                for s in mclassdef.supertypes do
+                        hierarchy.add_edge(c, s.mclass)
+                end
+        end
 
 	# Sort a given array of classes using the linearization order of the module
 	# The most general is first, the most specific is last
@@ -198,8 +248,7 @@ redef class MModule
 	# The most general is first, the most specific is last
 	fun linearize_mclassdefs(mclassdefs: Array[MClassDef])
 	do
-		var sorter = new MClassDefSorter(self)
-		sorter.sort(mclassdefs)
+		mclassdef_sorter.sort(mclassdefs)
 	end
 
 	# Sort a given array of property definitions using the linearization order of the module
@@ -207,8 +256,7 @@ redef class MModule
 	# The most general is first, the most specific is last
 	fun linearize_mpropdefs(mpropdefs: Array[MPropDef])
 	do
-		var sorter = new MPropDefSorter(self)
-		sorter.sort(mpropdefs)
+		mpropdef_sorter.sort(mpropdefs)
 	end
 
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
@@ -252,8 +300,8 @@ redef class MModule
 	# The primitive type `String`
 	var string_type: MClassType = self.get_primitive_class("String").mclass_type is lazy
 
-	# The primitive type `NativeString`
-	var native_string_type: MClassType = self.get_primitive_class("NativeString").mclass_type is lazy
+	# The primitive type `CString`
+	var c_string_type: MClassType = self.get_primitive_class("CString").mclass_type is lazy
 
 	# A primitive type of `Array`
 	fun array_type(elt_type: MType): MClassType do return array_class.get_mtype([elt_type])
@@ -301,14 +349,14 @@ redef class MModule
 				cladef.add_in_hierarchy
 				return c
 			end
-			print("Fatal Error: no primitive class {name} in {self}")
+			print_error("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
 			abort
 		end
 		if cla.length != 1 then
 			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
 			for c in cla do msg += " {c.full_name}"
-			print msg
+			print_error msg
 			#exit(1)
 		end
 		return cla.first
@@ -327,7 +375,7 @@ redef class MModule
 			if res == null then
 				res = mprop
 			else if res != mprop then
-				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
+				print_error("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
 				abort
 			end
 		end
@@ -352,21 +400,19 @@ private class MPropDefSorter
 	super Comparator
 	redef type COMPARED: MPropDef
 	var mmodule: MModule
+
 	redef fun compare(pa, pb)
 	do
 		var a = pa.mclassdef
 		var b = pb.mclassdef
-		var ca = a.mclass
-		var cb = b.mclass
-		if ca != cb then return mmodule.flatten_mclass_hierarchy.compare(ca, cb)
-		return mmodule.model.mclassdef_hierarchy.compare(a, b)
+		return mmodule.mclassdef_sorter.compare(a, b)
 	end
 end
 
 # A named class
 #
-# `MClass` are global to the model; it means that a `MClass` is not bound to a
-# specific `MModule`.
+# `MClass`es are global to the model; it means that a `MClass` is not bound
+# to a specific `MModule`.
 #
 # This characteristic helps the reasoning about classes in a program since a
 # single `MClass` object always denote the same class.
@@ -470,11 +516,13 @@ class MClass
 	end
 
 	# The kind of the class (interface, abstract class, etc.)
-	# In Nit, the kind of a class cannot evolve in refinements
+	#
+	# In Nit, the kind of a class cannot evolve in refinements.
 	var kind: MClassKind
 
 	# The visibility of the class
-	# In Nit, the visibility of a class cannot evolve in refinements
+	#
+	# In Nit, the visibility of a class cannot evolve in refinements.
 	redef var visibility
 
 	init
@@ -498,12 +546,12 @@ class MClass
 	# Warning: such a definition may not exist in the early life of the object.
 	# In this case, the method will abort.
 	#
-	# Use `try_intro` instead
+	# Use `try_intro` instead.
 	var intro: MClassDef is noinit
 
-	# The definition that introduces the class or null if not yet known.
+	# The definition that introduces the class or `null` if not yet known.
 	#
-	# See `intro`
+	# SEE: `intro`
 	fun try_intro: nullable MClassDef do
 		if isset _intro then return _intro else return null
 	end
@@ -566,7 +614,14 @@ class MClass
 	# Is `self` and abstract class?
 	var is_abstract: Bool is lazy do return kind == abstract_kind
 
-	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+	redef var is_test is lazy do return intro.is_test
+
+	redef fun mdoc_or_fallback
+	do
+		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
+		# recursion.
+		return intro.mdoc
+	end
 end
 
 
@@ -603,7 +658,7 @@ class MClassDef
 	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
-	redef var location: Location
+	redef var location
 
 	redef fun visibility do return mclass.visibility
 
@@ -614,7 +669,7 @@ class MClassDef
 	init
 	do
 		self.mclass = bound_mtype.mclass
-		mmodule.mclassdefs.add(self)
+		mmodule.add_mclassdef(self)
 		mclass.mclassdefs.add(self)
 		if mclass.intro_mmodule == mmodule then
 			assert not isset mclass._intro
@@ -720,11 +775,16 @@ class MClassDef
 	# All properties introduced by the classdef
 	var intro_mproperties = new Array[MProperty]
 
-	# All property definitions in the class (introductions and redefinitions)
+	# All property introductions and redefinitions in `self` (not inheritance).
 	var mpropdefs = new Array[MPropDef]
 
 	# The special autoinit constructor
 	var auto_init: nullable MMethodDef = null is writable
+
+	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
+	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
+
+	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 end
 
 # A global static type
@@ -835,19 +895,19 @@ abstract class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
-		if sub isa MBottomType then
+		if sub isa MBottomType or sub isa MErrorType then
 			return true
 		end
 
-		assert sub isa MClassType else print "{sub} <? {sub}" # It is the only remaining type
+		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
 
 		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
-		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType then
+		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType or sup isa MErrorType then
 			# These types are not super-types of Class-based types.
 			return false
 		end
 
-		assert sup isa MClassType else print "got {sup} {sub.inspect}" # It is the only remaining type
+		assert sup isa MClassType else print_error "got {sup} {sub.inspect}" # It is the only remaining type
 
 		# Now both are MClassType, we need to dig
 
@@ -856,7 +916,7 @@ abstract class MType
 		if anchor == null then anchor = sub # UGLY: any anchor will work
 		var resolved_sub = sub.anchor_to(mmodule, anchor)
 		var res = resolved_sub.collect_mclasses(mmodule).has(sup.mclass)
-		if res == false then return false
+		if not res then return false
 		if not sup isa MGenericType then return true
 		var sub2 = sub.supertype_to(mmodule, anchor, sup.mclass)
 		assert sub2.mclass == sup.mclass
@@ -864,7 +924,7 @@ abstract class MType
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
 			res = sub_arg.is_subtype(mmodule, anchor, sup_arg)
-			if res == false then return false
+			if not res then return false
 		end
 		return true
 	end
@@ -898,15 +958,16 @@ abstract class MType
 	#
 	# Explanation of the example:
 	# In H, T is set to B, because "H super G[B]", and U is bound to Y,
-        # because "redef type U: Y". Therefore, Map[T, U] is bound to
+	# because "redef type U: Y". Therefore, Map[T, U] is bound to
 	# Map[B, Y]
 	#
+	# REQUIRE: `self.need_anchor implies anchor != null`
 	# ENSURE: `not self.need_anchor implies result == self`
 	# ENSURE: `not result.need_anchor`
-	fun anchor_to(mmodule: MModule, anchor: MClassType): MType
+	fun anchor_to(mmodule: MModule, anchor: nullable MClassType): MType
 	do
 		if not need_anchor then return self
-		assert not anchor.need_anchor
+		assert anchor != null and not anchor.need_anchor
 		# Just resolve to the anchor and clear all the virtual types
 		var res = self.resolve_for(anchor, null, mmodule, true)
 		assert not res.need_anchor
@@ -1036,7 +1097,7 @@ abstract class MType
 	# The result is returned exactly as declared in the "type" property (verbatim).
 	# So it could be another formal type.
 	#
-	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
+	# In case of conflicts or inconsistencies in the model, the method returns a `MErrorType`.
 	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Resolve the formal type to its simplest equivalent form.
@@ -1051,8 +1112,23 @@ abstract class MType
 	# By default, return self.
 	# See the redefinitions for specific behavior in each kind of type.
 	#
-	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
+	# In case of conflicts or inconsistencies in the model, the method returns a `MErrorType`.
 	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
+
+	# Is the type a `MErrorType` or contains an `MErrorType`?
+	#
+	# `MErrorType` are used in result with conflict or inconsistencies.
+	#
+	# See `is_legal_in` to check conformity with generic bounds.
+	fun is_ok: Bool do return true
+
+	# Is the type legal in a given `mmodule` (with an optional `anchor`)?
+	#
+	# A type is valid if:
+	#
+	# * it does not contain a `MErrorType` (see `is_ok`).
+	# * its generic formal arguments are within their bounds.
+	fun is_legal_in(mmodule: MModule, anchor: nullable MClassType): Bool do return is_ok
 
 	# Can the type be resolved?
 	#
@@ -1121,6 +1197,7 @@ abstract class MType
 	# * H[G[A], B] -> 3
 	#
 	# Formal types have a depth of 1.
+	# Only `MClassType` and `MFormalType` nodes are counted.
 	fun depth: Int
 	do
 		return 1
@@ -1134,6 +1211,7 @@ abstract class MType
 	# * H[G[A], B] -> 4
 	#
 	# Formal types have a length of 1.
+	# Only `MClassType` and `MFormalType` nodes are counted.
 	fun length: Int
 	do
 		return 1
@@ -1200,7 +1278,7 @@ class MClassType
 
 	redef fun need_anchor do return false
 
-	redef fun anchor_to(mmodule: MModule, anchor: MClassType): MClassType
+	redef fun anchor_to(mmodule, anchor): MClassType
 	do
 		return super.as(MClassType)
 	end
@@ -1280,6 +1358,7 @@ class MClassType
 	private var collect_mclasses_cache = new HashMap[MModule, Set[MClass]]
 	private var collect_mtypes_cache = new HashMap[MModule, Set[MClassType]]
 
+	redef fun mdoc_or_fallback do return mclass.mdoc_or_fallback
 end
 
 # A type based on a generic class.
@@ -1352,6 +1431,24 @@ class MGenericType
 		return true
 	end
 
+	redef fun is_ok
+	do
+		for t in arguments do if not t.is_ok then return false
+		return super
+	end
+
+	redef fun is_legal_in(mmodule, anchor)
+	do
+		var mtype
+		if need_anchor then
+			assert anchor != null
+			mtype = anchor_to(mmodule, anchor)
+		else
+			mtype = self
+		end
+		if not mtype.is_ok then return false
+		return mtype.is_subtype(mmodule, null, mtype.mclass.intro.bound_mtype)
+	end
 
 	redef fun depth
 	do
@@ -1395,9 +1492,11 @@ class MVirtualType
 
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
-	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
+	redef fun lookup_bound(mmodule, resolved_receiver)
 	do
-		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MBottomType(model)
+		# There is two possible invalid cases: the vt does not exists in resolved_receiver or the bound is broken
+		if not resolved_receiver.has_mproperty(mmodule, mproperty) then return new MErrorType(model)
+		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MErrorType(model)
 	end
 
 	private fun lookup_single_definition(mmodule: MModule, resolved_receiver: MType): MVirtualTypeDef
@@ -1423,8 +1522,8 @@ class MVirtualType
 
 	# A VT is fixed when:
 	# * the VT is (re-)defined with the annotation `is fixed`
-	# * the VT is (indirectly) bound to an enum class (see `enum_kind`) since there is no subtype possible
-	# * the receiver is an enum class since there is no subtype possible
+	# * the receiver is an enum class since there is no subtype that can
+	#   redefine this virtual type
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
@@ -1433,18 +1532,15 @@ class MVirtualType
 
 		var prop = lookup_single_definition(mmodule, resolved_receiver)
 		var res = prop.bound
-		if res == null then return new MBottomType(model)
+		if res == null then return new MErrorType(model)
 
 		# Recursively lookup the fixed result
 		res = res.lookup_fixed(mmodule, resolved_receiver)
 
-		# 1. For a fixed VT, return the resolved bound
+		# For a fixed VT, return the resolved bound
 		if prop.is_fixed then return res
 
-		# 2. For a enum boud, return the bound
-		if res isa MClassType and res.mclass.kind == enum_kind then return res
-
-		# 3. for a enum receiver return the bound
+		# For a enum receiver return the bound
 		if resolved_receiver.mclass.kind == enum_kind then return res
 
 		return self
@@ -1454,6 +1550,9 @@ class MVirtualType
 	do
 		if not cleanup_virtual then return self
 		assert can_resolve_for(mtype, anchor, mmodule)
+
+		if mproperty.is_selftype then return mtype
+
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
@@ -1487,6 +1586,8 @@ class MVirtualType
 	redef fun full_name do return self.mproperty.full_name
 
 	redef fun c_name do return self.mproperty.c_name
+
+	redef fun mdoc_or_fallback do return mproperty.mdoc_or_fallback
 end
 
 # The type associated to a formal parameter generic type of a class
@@ -1555,13 +1656,12 @@ class MParameterType
 				return res
 			end
 		end
-		abort
+		# Cannot found `self` in `resolved_receiver`
+		return new MErrorType(model)
 	end
 
 	# A PT is fixed when:
-	# * Its bound is a enum class (see `enum_kind`).
-	#   The PT is just useless, but it is still a case.
-	# * More usually, the `resolved_receiver` is a subclass of `self.mclass`,
+	# * The `resolved_receiver` is a subclass of `self.mclass`,
 	#   so it is necessarily fixed in a `super` clause, either with a normal type
 	#   or with another PT.
 	#   See `resolve_for` for examples about related issues.
@@ -1580,13 +1680,7 @@ class MParameterType
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
 
 		if mtype isa MGenericType and mtype.mclass == self.mclass then
-			var res = mtype.arguments[self.rank]
-			if anchor != null and res.need_anchor then
-				# Maybe the result can be resolved more if are bound to a final class
-				var r2 = res.anchor_to(mmodule, anchor)
-				if r2 isa MClassType and r2.mclass.kind == enum_kind then return r2
-			end
-			return res
+			return mtype.arguments[self.rank]
 		end
 
 		# self is a parameter type of mtype (or of a super-class of mtype)
@@ -1668,6 +1762,10 @@ abstract class MProxyType
 		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
 	end
 
+	redef fun is_ok do return mtype.is_ok
+
+	redef fun is_legal_in(mmodule, anchor) do return mtype.is_legal_in(mmodule, anchor)
+
 	redef fun lookup_fixed(mmodule, resolved_receiver)
 	do
 		var t = mtype.lookup_fixed(mmodule, resolved_receiver)
@@ -1726,6 +1824,8 @@ class MNullableType
 		if t == mtype then return self
 		return t.as_nullable
 	end
+
+	redef fun mdoc_or_fallback do return mtype.mdoc_or_fallback
 end
 
 # A non-null version of a formal type.
@@ -1766,7 +1866,7 @@ class MNullType
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 
-	redef var as_notnull = new MBottomType(model) is lazy
+	redef var as_notnull: MBottomType = new MBottomType(model) is lazy
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
@@ -1781,9 +1881,10 @@ end
 # The special universal most specific type.
 #
 # This type is intended to be only used internally for type computation or analysis and should not be exposed to the user.
-# The bottom type can de used to denote things that are absurd, dead, or the absence of knowledge.
+# The bottom type can de used to denote things that are dead (no instance).
 #
 # Semantically it is the singleton `null.as_notnull`.
+# Is also means that `self.as_nullable == null`.
 class MBottomType
 	super MType
 	redef var model
@@ -1795,6 +1896,31 @@ class MBottomType
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
+	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
+
+	redef fun collect_mclasses(mmodule) do return new HashSet[MClass]
+
+	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
+end
+
+# A special type used as a silent error marker when building types.
+#
+# This type is intended to be only used internally for type operation and should not be exposed to the user.
+# The error type can de used to denote things that are conflicting or inconsistent.
+#
+# Some methods on types can return a `MErrorType` to denote a broken or a conflicting result.
+# Use `is_ok` to check if a type is (or contains) a `MErrorType` .
+class MErrorType
+	super MType
+	redef var model
+	redef fun to_s do return "error"
+	redef fun full_name do return "error"
+	redef fun c_name do return "error"
+	redef fun need_anchor do return false
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+	redef fun is_ok do return false
 
 	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
 
@@ -1882,16 +2008,34 @@ class MSignature
 		var b = new FlatBuffer
 		if not mparameters.is_empty then
 			b.append("(")
+			var last_mtype = null
 			for i in [0..mparameters.length[ do
 				var mparameter = mparameters[i]
+
+				# Group types that are common to contiguous parameters
+				if mparameter.mtype != last_mtype and last_mtype != null then
+					b.append(": ")
+					b.append(last_mtype.to_s)
+				end
+
 				if i > 0 then b.append(", ")
 				b.append(mparameter.name)
-				b.append(": ")
-				b.append(mparameter.mtype.to_s)
+
 				if mparameter.is_vararg then
+					b.append(": ")
+					b.append(mparameter.mtype.to_s)
 					b.append("...")
+					last_mtype = null
+				else
+					last_mtype = mparameter.mtype
 				end
 			end
+
+			if last_mtype != null then
+				b.append(": ")
+				b.append(last_mtype.to_s)
+			end
+
 			b.append(")")
 		end
 		var ret = self.return_mtype
@@ -1980,7 +2124,12 @@ abstract class MProperty
 
 	redef var location
 
-	redef fun mdoc_or_fallback do return intro.mdoc_or_fallback
+	redef fun mdoc_or_fallback
+	do
+		# Don’t use `intro.mdoc_or_fallback` because it would create an infinite
+		# recursion.
+		return intro.mdoc
+	end
 
 	# The canonical name of the property.
 	#
@@ -2056,14 +2205,27 @@ abstract class MProperty
 		#print "select prop {mproperty} for {mtype} in {self}"
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
-		for mpropdef in self.mpropdefs do
-			# If the definition is not imported by the module, then skip
-			if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
-			# If the definition is not inherited by the type, then skip
-			if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
-			# Else, we keep it
-			candidates.add(mpropdef)
+
+		# Here we have two strategies: iterate propdefs or iterate classdefs.
+		var mpropdefs = self.mpropdefs
+		if mpropdefs.length <= 1 or mpropdefs.length < mtype.collect_mclassdefs(mmodule).length then
+			# Iterate on all definitions of `self`, keep only those inherited by `mtype` in `mmodule`
+			for mpropdef in mpropdefs do
+				# If the definition is not imported by the module, then skip
+				if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
+				# If the definition is not inherited by the type, then skip
+				if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
+				# Else, we keep it
+				candidates.add(mpropdef)
+			end
+		else
+			# Iterate on all super-classdefs of `mtype`, keep only the definitions of `self`, if any.
+			for mclassdef in mtype.collect_mclassdefs(mmodule) do
+				var p = mclassdef.mpropdefs_by_property.get_or_null(self)
+				if p != null then candidates.add p
+			end
 		end
+
 		# Fast track for only one candidate
 		if candidates.length <= 1 then
 			self.lookup_definitions_cache[mmodule, mtype] = candidates
@@ -2139,7 +2301,7 @@ abstract class MProperty
 			end
 		end
 		if res.is_empty then
-			print "All lost! {candidates.join(", ")}"
+			print_error "All lost! {candidates.join(", ")}"
 			# FIXME: should be abort!
 		end
 		return res
@@ -2198,6 +2360,20 @@ abstract class MProperty
 	end
 
 	private var lookup_all_definitions_cache = new HashMap2[MModule, MType, Array[MPROPDEF]]
+
+	redef var is_test is lazy do return intro.is_test
+
+	# Does self have the `before` annotation?
+	var is_before: Bool is lazy do return intro.is_before
+
+	# Does self have the `before_all` annotation?
+	var is_before_all: Bool is lazy do return intro.is_before_all
+
+	# Does self have the `after` annotation?
+	var is_after: Bool is lazy do return intro.is_after
+
+	# Does self have the `after_all` annotation?
+	var is_after_all: Bool is lazy do return intro.is_after_all
 end
 
 # A global method
@@ -2232,6 +2408,29 @@ class MMethod
 	# A specific method that is safe to call on null.
 	# Currently, only `==`, `!=` and `is_same_instance` are safe
 	fun is_null_safe: Bool do return name == "==" or name == "!=" or name == "is_same_instance"
+
+	# Is this method a getter (auto or not)?
+	#
+	# See `getter_for`.
+	fun is_getter: Bool do return getter_for != null
+
+	# The attribute this getter is for
+	#
+	# Return `null` is this method is not a getter.
+	var getter_for: nullable MAttribute = null is writable
+
+	# Is this method a setter (auto or not)?
+	#
+	# See `setter_for`.
+	fun is_setter: Bool do return setter_for != null
+
+	# The attribute this setter is for
+	#
+	# Return `null` is this method is not a setter.
+	var setter_for: nullable MAttribute = null is writable
+
+	# Is this method a getter or a setter?
+	fun is_accessor: Bool do return is_getter or is_setter
 end
 
 # A global attribute
@@ -2240,6 +2439,21 @@ class MAttribute
 
 	redef type MPROPDEF: MAttributeDef
 
+	# Does this attribute have a getter (auto or not)?
+	#
+	# See `getter`.
+	fun has_getter: Bool do return getter != null
+
+	# The getter of this attribute (if any)
+	var getter: nullable MProperty = null is writable
+
+	# Does this attribute have a setter (auto or not)?
+	#
+	# See `setter`.
+	fun has_setter: Bool do return setter != null
+
+	# The setter of this attribute (if any)
+	var setter: nullable MProperty = null is writable
 end
 
 # A global virtual type
@@ -2250,6 +2464,9 @@ class MVirtualTypeProp
 
 	# The formal type associated to the virtual type property
 	var mvirtualtype = new MVirtualType(self)
+
+	# Is `self` the special virtual type `SELF`?
+	var is_selftype: Bool is lazy do return name == "SELF"
 end
 
 # A definition of a property (local property)
@@ -2272,7 +2489,7 @@ abstract class MPropDef
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	redef var location: Location
+	redef var location
 
 	redef fun visibility do return mproperty.visibility
 
@@ -2280,6 +2497,7 @@ abstract class MPropDef
 	do
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
+		mclassdef.mpropdefs_by_property[mproperty] = self
 		if mproperty.intro_mclassdef == mclassdef then
 			assert not isset mproperty._intro
 			mproperty.intro = self
@@ -2328,11 +2546,9 @@ abstract class MPropDef
 					res.append "::"
 				end
 			end
-			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
-				# precise "B" only if not the same class than "A"
-				res.append mproperty.intro_mclassdef.name
-				res.append "::"
-			end
+			# precise "B" because it is not the same class than "A"
+			res.append mproperty.intro_mclassdef.name
+			res.append "::"
 			# Always use the property name "x"
 			res.append mproperty.name
 		end
@@ -2350,10 +2566,8 @@ abstract class MPropDef
 				res.append mproperty.intro_mclassdef.mmodule.c_name
 				res.append "__"
 			end
-			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
-				res.append mproperty.intro_mclassdef.name.to_cmangle
-				res.append "__"
-			end
+			res.append mproperty.intro_mclassdef.name.to_cmangle
+			res.append "__"
 			res.append mproperty.name.to_cmangle
 		end
 		return res.to_s
@@ -2385,6 +2599,20 @@ abstract class MPropDef
 		assert has_next_property: i.is_ok
 		return i.item
 	end
+
+	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
+
+	# Does self have the `before` annotation?
+	var is_before = false is writable
+
+	# Does self have the `before_all` annotation?
+	var is_before_all = false is writable
+
+	# Does self have the `after` annotation?
+	var is_after = false is writable
+
+	# Does self have the `after_all` annotation?
+	var is_after_all = false is writable
 end
 
 # A local definition of a method
@@ -2466,37 +2694,116 @@ end
 class MClassKind
 	redef var to_s
 
+	# Can a class of kind `self` define a membership predicate?
+	var can_customize_isa: Bool
+
+	# Can a class of kind `self` define a constructor?
+	var can_init: Bool
+
 	# Is a constructor required?
 	var need_init: Bool
 
 	# TODO: private init because enumeration.
 
-	# Can a class of kind `self` specializes a class of kine `other`?
+	# Can a class of kind `self` specializes a class of kind `other`?
 	fun can_specialize(other: MClassKind): Bool
 	do
-		if other == interface_kind then return true # everybody can specialize interfaces
-		if self == interface_kind or self == enum_kind then
-			# no other case for interfaces
+		if other == interface_kind then
+			# everybody can specialize interfaces
+			return true
+		else if self == interface_kind or self == enum_kind then
+			# no other case for interfaces and enums
 			return false
+		else if self == subset_kind then
+			# A subset may specialize anything, except another subset.
+			# TODO: Allow sub-subsets once we can handle them.
+			return other != subset_kind
 		else if self == extern_kind then
 			# only compatible with themselves
 			return self == other
-		else if other == enum_kind or other == extern_kind then
-			# abstract_kind and concrete_kind are incompatible
-			return false
+		else
+			# assert self == abstract_kind or self == concrete_kind
+			return other == abstract_kind or other == concrete_kind
 		end
-		# remain only abstract_kind and concrete_kind
-		return true
 	end
 end
 
 # The class kind `abstract`
-fun abstract_kind: MClassKind do return once new MClassKind("abstract class", true)
+fun abstract_kind: MClassKind do return once new MClassKind("abstract class", false, true, true)
 # The class kind `concrete`
-fun concrete_kind: MClassKind do return once new MClassKind("class", true)
+fun concrete_kind: MClassKind do return once new MClassKind("class", false, true, true)
 # The class kind `interface`
-fun interface_kind: MClassKind do return once new MClassKind("interface", false)
+fun interface_kind: MClassKind do return once new MClassKind("interface", false, true, false)
 # The class kind `enum`
-fun enum_kind: MClassKind do return once new MClassKind("enum", false)
+fun enum_kind: MClassKind do return once new MClassKind("enum", false, true, false)
 # The class kind `extern`
-fun extern_kind: MClassKind do return once new MClassKind("extern class", false)
+fun extern_kind: MClassKind do return once new MClassKind("extern class", false, true, false)
+# The class kind `subset`
+fun subset_kind: MClassKind do return once new MClassKind("subset", true, false, false)
+
+# A standalone pre-constructed model used to test various model-related methods.
+#
+# When instantiated, a standalone model is already filled with entities that are exposed as attributes.
+class ModelStandalone
+	super Model
+
+	redef var location = new Location.opaque_file("ModelStandalone")
+
+	# The first module
+	var mmodule0 = new MModule(self, null, "module0", location)
+
+	# The root Object class
+	var mclass_o = new MClass(mmodule0, "Object", location, null, interface_kind, public_visibility)
+
+	# The introduction of `mclass_o`
+	var mclassdef_o = new MClassDef(mmodule0, mclass_o.mclass_type, location)
+end
+
+# A standalone model with the common class diamond-hierarchy ABCD
+class ModelDiamond
+	super ModelStandalone
+
+	# A, a simple subclass of Object
+	var mclass_a = new MClass(mmodule0, "A", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_a`
+	var mclassdef_a: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_a.mclass_type, location)
+		res.set_supertypes([mclass_o.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+
+	# B, a subclass of A (`mclass_a`)
+	var mclass_b = new MClass(mmodule0, "B", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_b`
+	var mclassdef_b: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_b.mclass_type, location)
+		res.set_supertypes([mclass_a.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+
+	# C, another subclass of A (`mclass_a`)
+	var mclass_c = new MClass(mmodule0, "C", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_c`
+	var mclassdef_c: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_c.mclass_type, location)
+		res.set_supertypes([mclass_a.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+
+	# D, a multiple subclass of B (`mclass_b`) and C (`mclass_c`)
+	var mclass_d = new MClass(mmodule0, "D", location, null, concrete_kind, public_visibility)
+
+	# The introduction of `mclass_d`
+	var mclassdef_d: MClassDef do
+		var res = new MClassDef(mmodule0, mclass_d.mclass_type, location)
+		res.set_supertypes([mclass_b.mclass_type, mclass_c.mclass_type])
+		res.add_in_hierarchy
+		return res
+	end
+end

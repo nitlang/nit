@@ -11,7 +11,6 @@
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"]}
-# Errors: 'Deserialization Error: JSON object has not attribute 'o'.'
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"], "o":
@@ -19,7 +18,7 @@
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<MyClass i:456 s:world f:654.321 a:[1, 2] o:<null>>>
 
 # JSON: {"i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"], "o": null}
-# Errors: 'Serialization Error: JSON object declaration does not declare a `__class`.'
+# Errors: 'Deserialization Error: JSON object declaration does not declare a `__class`.'
 # Nit: <JsonObject i:123, s:hello, f:123.456, a:[one,two], o:<null>>
 
 # JSON: {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"], "o": "Not the right type"}
@@ -27,6 +26,6 @@
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: not valid json
-# Errors: 'Parsing error at line 1, position 1: Error: bad JSON entity'
+# Errors: 'Error: bad JSON entity'
 # Nit: null
 

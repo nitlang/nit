@@ -331,8 +331,8 @@ extern class GtkFrame `{GtkFrame *`}
 		return (GtkFrame *)gtk_frame_new(String_to_cstring(lbl));
 	`}
 
-	fun frame_label: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_frame_get_label(self));
+	fun frame_label: String import CString.to_s `{
+		return CString_to_s((char *)gtk_frame_get_label(self));
 	`}
 
 	fun frame_label=(lbl: String) import String.to_cstring `{
@@ -475,8 +475,8 @@ extern class GtkEntry `{GtkEntry *`}
 		 return (GtkEntry *)gtk_entry_new();
 	`}
 
-	fun text: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_entry_get_text(self));
+	fun text: String import CString.to_s `{
+		return CString_to_s((char *)gtk_entry_get_text(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{
@@ -682,8 +682,8 @@ extern class GtkLabel `{GtkLabel *`}
 	`}
 
 	# Returns the text of the label
-	fun text: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char*)gtk_label_get_text(self));
+	fun text: String import CString.to_s `{
+		return CString_to_s((char*)gtk_label_get_text(self));
 	`}
 
 	# Sets the angle of rotation for the label.
@@ -704,7 +704,7 @@ extern class GtkLabel `{GtkLabel *`}
 	# lbl.set_markup("<span style=\"italic\">\%s</span>".to_cstring,
 	#                "Italic content")
 	# ~~~
-	fun set_markup(format, content: NativeString) `{
+	fun set_markup(format, content: CString) `{
 		char *formatted = g_markup_printf_escaped(format, content);
 		gtk_label_set_markup(self, formatted);
 		g_free(formatted);
@@ -803,8 +803,8 @@ extern class GtkButton `{GtkButton *`}
 		return (GtkButton *)gtk_button_new_from_stock(String_to_cstring(stock_id));
 	`}
 
-	fun text: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_button_get_label(self));
+	fun text: String import CString.to_s `{
+		return CString_to_s((char *)gtk_button_get_label(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{
@@ -876,8 +876,8 @@ extern class GtkExpander `{GtkExpander *`}
 		gtk_expander_set_spacing(self, pixels);
 	`}
 
-	fun label_text: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_expander_get_label(self));
+	fun label_text: String import CString.to_s `{
+		return CString_to_s((char *)gtk_expander_get_label(self));
 	`}
 
 	fun label_text=(lbl: String) import String.to_cstring `{
@@ -995,8 +995,8 @@ extern class GtkComboBox `{GtkComboBox *`}
 		gtk_combo_box_set_id_column(self, id_column);
 	`}
 
-	fun active_id: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_combo_box_get_active_id(self));
+	fun active_id: String import CString.to_s `{
+		return CString_to_s((char *)gtk_combo_box_get_active_id(self));
 	`}
 
 	fun active_id=(id_active: String) import String.to_cstring `{
@@ -1019,8 +1019,8 @@ extern class GtkComboBox `{GtkComboBox *`}
 		gtk_combo_box_popdown(self);
 	`}
 
-	fun title: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_combo_box_get_title(self));
+	fun title: String import CString.to_s `{
+		return CString_to_s((char *)gtk_combo_box_get_title(self));
 	`}
 
 	fun title=(t: String) import String.to_cstring `{

@@ -1,0 +1,12 @@
+<div class='container'>
+	<h2>
+		{{vm.entities.count}} matches for
+		<a ui-sref='search({q: vm.query})'>{{vm.query}}</a>
+	</h2>
+	<div class='card-list'>
+		<entity-card mentity='mentity' ng-repeat='mentity in vm.entities.results' />
+	</div>
+	<div class='container text-center' ng-if='vm.entities'>
+		<ui-pagination pagination='vm.entities'/>
+	</div>
+</div>

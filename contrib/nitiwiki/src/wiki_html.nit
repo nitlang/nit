@@ -50,7 +50,7 @@ redef class Nitiwiki
 	# Markdown processor used for inline element such as titles in TOC.
 	private var inline_processor: MarkdownProcessor is lazy do
 		var proc = new MarkdownProcessor
-		proc.emitter.decorator = new InlineDecorator
+		proc.decorator = new InlineDecorator
 		return proc
 	end
 

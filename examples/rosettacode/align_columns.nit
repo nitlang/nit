@@ -6,7 +6,7 @@
 # Task: Align columns
 # SEE: <http://rosettacode.org/wiki/Align_columns>
 #
-# Use `Text::justify` for the standard library.
+# Uses `Text::justify` from the standard library.
 module align_columns
 
 fun aligner(text: String, left: Float)

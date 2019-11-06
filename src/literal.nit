@@ -129,9 +129,6 @@ redef class ACharExpr
 
 	redef fun delimiter_end do return '\''
 
-	# Is the expression returning an ASCII byte value ?
-	fun is_ascii: Bool do return prefix == "b"
-
 	# Is the expression returning a Code Point ?
 	fun is_code_point: Bool do return prefix == "u"
 
@@ -139,7 +136,6 @@ redef class ACharExpr
 
 	redef fun is_valid_augmentation do
 		if suffix != "" then return false
-		if is_ascii then return true
 		if is_code_point then return true
 		if prefix != "" then return false
 		return true
@@ -157,7 +153,6 @@ redef class ACharExpr
 			return
 		end
 		self.value = txt.chars[1]
-		if is_ascii and txt.chars[1].code_point > 127 then v.toolcontext.error(self.hot_location, "Syntax Error: usage of byte prefix on multibyte character.")
 	end
 end
 

@@ -22,7 +22,7 @@ s8 isa ASCIIFlatString
 String66515A
 s9 isa Regex
 /
-0x47String/
+71String/
 true
 false
 true

@@ -33,10 +33,10 @@ redef class GamnitDisplay
 	# The selected EGL configuration
 	var egl_config: EGLConfig is noautoinit
 
-	# Setup the EGL display for the given `x11_display`
-	protected fun setup_egl_display(x11_display: Pointer)
+	# Setup the EGL display for the given `native_display`
+	protected fun setup_egl_display(native_display: Pointer)
 	do
-		var egl_display = new EGLDisplay(x11_display)
+		var egl_display = new EGLDisplay(native_display)
 		assert egl_display.is_valid else print "new EGL display is not valid"
 
 		egl_display.initialize
@@ -46,7 +46,7 @@ redef class GamnitDisplay
 	end
 
 	# Select an EGL config
-	protected fun select_egl_config(red, green, blue, alpha, depth, stencil, sample: Int)
+	protected fun select_egl_config(red, green, blue, alpha, depth, stencil: Int)
 	do
 		var config_chooser = new EGLConfigChooser
 		config_chooser.renderable_type_egl
@@ -57,7 +57,10 @@ redef class GamnitDisplay
 		if alpha > 0 then config_chooser.alpha_size = alpha
 		if depth > 0 then config_chooser.depth_size = depth
 		if stencil > 0 then config_chooser.stencil_size = stencil
-		if sample > 0 then config_chooser.sample_buffers = sample
+
+		config_chooser.sample_buffers = 1
+		config_chooser.samples = 4
+
 		config_chooser.close
 
 		var configs = config_chooser.choose(egl_display)
@@ -72,6 +75,7 @@ redef class GamnitDisplay
 				print "  Caveats: {attribs.caveat}"
 				print "  Size of RGBA: {attribs.red_size} {attribs.green_size} {attribs.blue_size} {attribs.alpha_size}"
 				print "  Buffer, depth, stencil: {attribs.buffer_size} {attribs.depth_size} {attribs.stencil_size}"
+				print "  Sample buffers, samples: {attribs.sample_buffers} {attribs.samples}"
 			end
 		end
 
@@ -79,10 +83,10 @@ redef class GamnitDisplay
 		self.egl_config = configs.first
 	end
 
-	# Setup the EGL context for the given `window_handle`
-	protected fun setup_egl_context(window_handle: Pointer)
+	# Setup the EGL context for the given `native_window`
+	protected fun setup_egl_context(native_window: Pointer)
 	do
-		var window_surface = egl_display.create_window_surface(egl_config, window_handle, [0])
+		var window_surface = egl_display.create_window_surface(egl_config, native_window, [0])
 		assert window_surface.is_ok else print "Creating EGL window surface failed: {egl_display.error}"
 		self.window_surface = window_surface
 
@@ -95,6 +99,47 @@ redef class GamnitDisplay
 		# TODO make the API selection configurable per platform
 		assert egl_bind_opengl_es_api else print "EGL bind API failed: {egl_display.error}"
 	end
+
+	# Check if the current configuration of `native_window` is still valid
+	#
+	# There is two return values:
+	# * Returns `true` if the Gamnit services should be recreated.
+	# * Sets `native_window_is_invalid` if the system provided window handle is invalid.
+	#   We should wait until we are provided a valid window handle.
+	fun check_egl_context(native_window: Pointer): Bool
+	do
+		native_window_is_invalid = false
+
+		if not egl_context.is_ok then
+			# Needs recreating
+			egl_context = egl_display.create_context(egl_config)
+			assert egl_context.is_ok else print "Creating EGL context failed: {egl_display.error}"
+		end
+
+		var success = egl_display.make_current(window_surface, window_surface, egl_context)
+		if not success then
+			var error = egl_display.error
+			print "check_egl_context make_current: {error}"
+
+
+			if error.is_bad_native_window then
+				# native_window is invalid
+				native_window_is_invalid = true
+				return true
+
+			else if not error.is_success then
+				# The context is now invalid, rebuild it
+				setup_egl_context native_window
+				return true
+			end
+		end
+		return false
+	end
+
+	# Return value from `check_egl_context`, the current native window is invalid
+	#
+	# We should wait until we are provided a valid window handle.
+	var native_window_is_invalid = false
 
 	redef fun width do return window_surface.attribs(egl_display).width
 
@@ -110,6 +155,10 @@ redef class GamnitDisplay
 
 	redef fun flip
 	do
+		assert glGetError == gl_NO_ERROR
+
+		assert egl_display.is_valid
+
 		egl_display.swap_buffers(window_surface)
 	end
 end

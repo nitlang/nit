@@ -46,19 +46,27 @@ redef class String
 	# Search for the program `self` in all directories from `PATH`
 	fun program_is_in_path: Bool
 	do
+		var sep = if is_windows then ";" else ":"
 		var full_path = "PATH".environ
-		var paths = full_path.split(":")
+		var paths = full_path.split(sep)
 		for path in paths do if path.file_exists then
 			if path.join_path(self).file_exists then return true
+			if is_windows and (path / self + ".exe").file_exists then return true
 		end
 
 		return false
 	end
 end
 
-redef class NativeString
-	private fun get_environ: NativeString `{ return getenv(self); `}
-	private fun setenv(value: NativeString) `{ setenv(self, value, 1); `}
+redef class CString
+	private fun get_environ: CString `{ return getenv(self); `}
+	private fun setenv(value: CString) `{
+#ifdef _WIN32
+		_putenv_s(self, value);
+#else
+		setenv(self, value, 1);
+#endif
+	`}
 end
 
 redef class Sys

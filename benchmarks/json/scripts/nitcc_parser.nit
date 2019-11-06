@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json
+import json::static
 
 var text = args.first.to_path.read_all
 var json = text.parse_json

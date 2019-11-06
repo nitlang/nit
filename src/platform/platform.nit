@@ -23,8 +23,10 @@ private import parser_util
 private import annotation
 
 redef class ToolContext
+	# Detects the `platform` annotation to set a mobile target platform
 	var platform_phase: Phase = new PlatformPhase(self, [modelize_property_phase])
 
+	# Get platform compilation settings from its `name`
 	protected fun platform_from_name(name: String): nullable Platform
 	do
 		return null

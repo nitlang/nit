@@ -18,9 +18,6 @@
 #ifdef ANDROID
 	#include <android/log.h>
 	#define PRINT_ERROR(...) ((void)__android_log_print(ANDROID_LOG_WARN, "nit", __VA_ARGS__))
-
-	// FIXME bring back when the GC is fixed in Android
-	#undef WITH_LIBGC
 #else
 	#define PRINT_ERROR(...) ((void)fprintf(stderr, __VA_ARGS__))
 #endif
@@ -28,7 +25,7 @@
 enum gc_option { gc_opt_large, gc_opt_malloc, gc_opt_boehm } gc_option;
 
 #ifdef WITH_LIBGC
-#include <gc/gc.h>
+	#include <gc.h>
 #endif
 
 void *nit_raw_alloc(size_t s0)
@@ -127,7 +124,7 @@ void initialize_gc_option(void) {
 
 void gc_register_finalizer(void* obj) {
 #ifdef WITH_LIBGC
-	GC_register_finalizer(obj, &gc_finalize, NULL, NULL, NULL);
+	GC_register_finalizer_no_order(obj, &gc_finalize, NULL, NULL, NULL);
 #endif
 }
 

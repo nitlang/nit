@@ -14,5 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1# module test_annot_pkgconfig is pkgconfig("sdl")
-#alt2# module test_annot_pkgconfig is pkgconfig("sdl", "egl")
+#alt1# module test_annot_pkgconfig_alt1 is pkgconfig("sdl")
+#alt2# module test_annot_pkgconfig_alt2 is pkgconfig("sdl", "egl")
+
+fun foo `{ `}
+foo

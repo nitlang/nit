@@ -651,11 +651,6 @@ universal Byte
 	#     assert 5u8 >> 1    == 2u8
 	fun >>(i: Int): Byte is intern `{ return self >> i; `}
 
-	# Returns the character equivalent of `self`
-	#
-	# REQUIRE: `self <= 127u8`
-	fun ascii: Char is intern `{ return (uint32_t)self; `}
-
 	redef fun to_i is intern
 	redef fun to_f is intern
 	redef fun to_b do return self
@@ -863,8 +858,11 @@ universal Int
 
 	# Return the corresponding digit character
 	# If 0 <= `self` <= 9, return the corresponding character.
+	#
 	#     assert 5.to_c    == '5'
+	#
 	# If 10 <= `self` <= 36, return the corresponding letter [a..z].
+	#
 	#     assert 15.to_c   == 'f'
 	fun to_c: Char
 	do
@@ -882,6 +880,9 @@ universal Int
 	#     assert 10.abs    == 10
 	#     assert 0.abs     == 0
 	fun abs: Int do return if self >= 0 then self else -self
+
+	# Is `self` an ASCII whitespace ?
+	fun is_whitespace: Bool do return self == 0x7F or self <= 0x20
 end
 
 # Native characters.
@@ -918,6 +919,24 @@ universal Char
 	redef fun successor(i) is intern
 	redef fun predecessor(i) is intern
 
+	# The `i`-th char after self (in code point)
+	#
+	# ~~~
+	# assert 'A' + 5 == 'F'
+	# ~~~
+	#
+	# Alias of `successor`.
+	fun +(i: Int): Char do return successor(i)
+
+	# The `i`-th char before self (in code point)
+	#
+	# ~~~
+	# assert 'F' - 5 == 'A'
+	# ~~~
+	#
+	# Alias of `predecessor`.
+	fun -(i: Int): Char do return predecessor(i)
+
 	redef fun distance(c)
 	do
 		var d = self.code_point - c.code_point
@@ -942,14 +961,6 @@ universal Char
 			return self.to_lower.code_point - 'a'.code_point + 10
 		end
 	end
-
-	# The ascii value of `self`
-	#
-	#     assert 'a'.ascii    == 97u8
-	#     assert '\n'.ascii   == 10u8
-	#
-	# REQUIRE: `is_ascii`
-	fun ascii: Byte do return code_point.to_b
 
 	# The unicode code point value of `self`
 	#
@@ -1045,22 +1056,33 @@ universal Char
 	#
 	#     assert 'A'.is_whitespace  == false
 	#     assert ','.is_whitespace  == false
-	#     assert ' '.is_whitespace  == true
+	#     assert ' '.is_whitespace  == true # space
+	#     assert ' '.is_whitespace  == true # non-breaking space
 	#     assert '\t'.is_whitespace == true
 	fun is_whitespace: Bool
 	do
 		var i = code_point
-		return i <= 0x20 or i == 0x7F
+		return i <= 0x20 or i == 0x7F or i == 0xA0
 	end
 end
 
 # Pointer classes are used to manipulate extern C structures.
 extern class Pointer
+	# C `NULL` pointer
+	new nul `{ return NULL; `}
+
 	# Is the address behind this Object at NULL?
 	fun address_is_null: Bool `{ return self == NULL; `}
 
 	# Free the memory pointed by this pointer
 	fun free `{ free(self); `}
+
+	# Use the address value
+	redef fun hash `{ return (long)(intptr_t)self; `}
+
+	# Is equal to any instance pointing to the same address
+	redef fun ==(o) do return o isa Pointer and native_equals(o)
+	private fun native_equals(o: Pointer): Bool `{ return self == o; `}
 end
 
 # Task with a `main` method to be implemented by subclasses
@@ -1073,3 +1095,12 @@ interface Task
 	# Main method of this task
 	fun main do end
 end
+
+# Is this program currently running in a Windows OS?
+fun is_windows: Bool `{
+#ifdef _WIN32
+	return 1;
+#else
+	return 0;
+#endif
+`}

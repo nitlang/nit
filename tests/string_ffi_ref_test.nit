@@ -25,18 +25,18 @@ class StringTest
 
 	var referenced_str: nullable String = null
 
-	fun get_c_string import FlatString.items, NativeString.to_s, NativeString.to_s_with_copy, StringTest.ref_test, StringTest.copy_test `{
+	fun get_c_string import FlatString.items, CString.to_s, CString.to_s, StringTest.ref_test, StringTest.copy_test `{
 		char* string = "This is a test string";
 
-		FlatString ref_string = NativeString_to_s(string);
+		FlatString ref_string = CString_to_s(string);
 		StringTest_ref_test(self, ref_string);
 
-		FlatString copy_string = NativeString_to_s_with_copy(string);
+		FlatString copy_string = CString_to_s(string);
 		StringTest_copy_test(self, copy_string);
 
 		int same_refs = FlatString_items(copy_string) == FlatString_items(ref_string);
 
-		printf("Do the strings have the same NativeString reference ? ");
+		printf("Do the strings have the same CString reference ? ");
 
 		if(same_refs){
 			printf("True\n");

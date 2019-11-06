@@ -18,25 +18,25 @@ The _app.nit_ application life-cycle is compatible with all target platforms.
 It relies on the following sequence of events, represented here by their callback method name:
 
 1. `on_create`: The application is being created.
-   You should build the UI at this time.
+   You should build the UI at this time and launch services.
 
-2. `on_start`: The app is starting or restarting, background activities may
+2. `on_resume`: The app enters the active state, it is in the foreground and interactive.
 
-3. `on_resume`: The app enters the active state, it is in the foreground.
-
-4. `on_pause`: The app leaves the active state and the foreground.
+3. `on_pause`: The app becomes inactive and it leaves the foreground.
    It may still be visible in the background.
-   It may then go back to `on_resume` or `on_stop`.
 
-5. `on_stop`: The app is completely hidden.
-   It may then be destroyed (`on_destroy`) or go back to `on_start`.
+4. `on_stop`: The app is completely hidden.
+   It may then be destroyed (without warning) or go back to the active state with `on_restart`.
 
-6. `on_destroy`: The app is being destroyed.
+5. `on_restart`: The app goes back to the inactive state.
+   You can revert what was done by `on_stop`.
+
+![_app.nit_ life-cycle](doc/app-nit-lifecycle.png)
 
 Life-cycle events related to saving and restoring the application state are provided by two special callback methods:
 
 * `on_save_state`: The app may be destroyed soon, save its state for a future `on_restore_state`.
-  More on how it can be done in the `app::data_store` section.
+  There is more on how it can be done in the `app::data_store` section.
 
 * `on_restore_state`: The app is launching, restore its state from a previous `on_save_state`.
 
@@ -150,9 +150,20 @@ The _app.nit_ framework defines three annotations to customize the application p
   The special function `git_revision` will use the prefix of the hash of the latest git commit.
   By default, the version is 0.1.
 
+* `app_files` tells the compiler where to find platform specific resource files associated to a module.
+  By default, only the root of the project is searched for the folders `android` and `ios`.
+  The `android` folder is used as base for the generated Android project,
+  it can be used to specify the resource files, libs and even Java source files.
+  The `ios` folder is searched for icons only.
+
+  Each argument of `app_files` is a relative path to a folder containing extra `android` or `ios` folders.
+  If there is no arguments, the parent folder of the annotated module is used.
+  In case of name conflicts in the resource files, the files from the project root have the lowest priority,
+  those associated to modules lower in the importation hierarchy have higher priority.
+
 ## Usage Example
 
-~~~
+~~~nitish
 module my_module is
     app_name "My App"
     app_namespace "org.example.my_app"
@@ -172,7 +183,7 @@ There is two main ways to achieve this goal:
 * The mixin option (`-m module`) imports an additional module before compiling.
   It can be used to load platform specific implementations of the _app.nit_ portable UI.
 
-  ~~~
+  ~~~raw
   # GNU/Linux version, using GTK
   nitc calculator.nit -m linux
 
@@ -187,7 +198,7 @@ There is two main ways to achieve this goal:
   Continuing with the calculator example, it is adapted for Android by the module `android_calculator.nit`.
   This module imports both `calculator` and `android`, it can then use Android specific code.
 
-  ~~~
+  ~~~nitish
   module android_calculator
 
   import calculator

@@ -13,11 +13,28 @@
 # limitations under the License.
 
 # HTTP request services: `AsyncHttpRequest` and `Text::http_get`
+#
+# ~~~nitish
+# import app::http_request
+#
+# class MyHttpRequest
+#     super AsyncHttpRequest
+#
+#     redef fun uri do return "http://example.com/"
+#
+#     redef fun on_load(data, status) do print "Received: {data or else "null"}"
+#
+#     redef fun on_fail(error) do print "Connection error: {error}"
+# end
+#
+# var req = new MyHttpRequest
+# req.start
+# ~~~
 module http_request
 
 import app_base
 import pthreads
-import json::serialization
+import json
 
 import linux::http_request is conditional(linux)
 import android::http_request is conditional(android)
@@ -122,11 +139,16 @@ abstract class AsyncHttpRequest
 	fun after do end
 end
 
-# Minimal implementation of `AsyncHttpRequest` where `uri` is an attribute
+# Simple `AsyncHttpRequest` where `uri` is an attribute
 #
-# Prints on communication errors and when the server returns an HTTP status code not in the 200s.
+# Prints on communication errors and when the remote server returns an
+# HTTP status code not in the 200s.
 #
-# ~~~
+# This class can be instantiated to execute a request where the response is
+# ignored by the application. Alternatively, it can be subclassed to implement
+# `on_load`.
+#
+# ~~~nitish
 # var request = new SimpleAsyncHttpRequest("http://example.com")
 # request.start
 # ~~~

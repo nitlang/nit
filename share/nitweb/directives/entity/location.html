@@ -1,5 +1,3 @@
-<span ng-if='mentity.location'>
-	<a ng-href="{{mentity.web_url}}">{{mentity.location.file}}
-		<span ng-if='mentity.location.line_start'>:{{mentity.location.line_start}}</span>
-	</a>
+<span class='text-muted'>
+	{{vm.loc.file}}<span ng-if='vm.loc.line_start'>:{{vm.loc.line_start}}</span>
 </span>

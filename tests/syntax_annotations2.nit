@@ -29,7 +29,7 @@ class A
 	super Toto is annot
 	super Tata is annot, annot2
 	super Titi is
-		annot
+		annot # comment
 		annot2
 	end
 	fun foo1 is
@@ -38,7 +38,7 @@ class A
 		var x: Toto@foo
 	end
 	fun foo2 is annot
-	fun foo3 is annot, annot2
+	fun foo3 is annot, annot2 # comment
 	fun foo4 is
 		annot
 		annot2
@@ -55,4 +55,27 @@ end
 interface Tata
 end
 interface Titi
+end
+
+fun baz1 is
+end
+fun baz2 is
+	# comment
+
+	# comment
+end
+fun baz3 is
+	# comment
+
+	# doc
+	annot #comment
+
+	# comment
+
+	# comment
+
+	annot2
+	# doc2 bis
+	annot2
+	# comment
 end

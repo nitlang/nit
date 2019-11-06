@@ -155,6 +155,17 @@ class StatementRow
 	# Statement linked to `self`
 	var statement: Statement
 
+	# Maps the column name to its value
+	fun map: Map[String, nullable Sqlite3Data]
+	do
+		var ret = new ArrayMap[String, nullable Sqlite3Data]
+		for i in [0 .. length[ do
+			var st = self[i]
+			ret[st.name] = st.value
+		end
+		return ret
+	end
+
 	# Number of entries in this row
 	#
 	# require: `self.statement.is_open`
@@ -239,9 +250,9 @@ class StatementEntry
 	do
 		assert statement_closed: statement.is_open
 
-		var native_string = statement.native_statement.column_text(index)
-		if native_string.address_is_null then return ""
-		return native_string.to_s_with_copy
+		var c_string = statement.native_statement.column_text(index)
+		if c_string.address_is_null then return ""
+		return c_string.to_s
 	end
 
 	# Get this entry as `Blob`

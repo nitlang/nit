@@ -1,6 +1,8 @@
 *.bak
 *.swp
 *.swo
+*.swn
+*.swm
 *~
 .project
 EIFGENs
@@ -9,6 +11,7 @@ EIFGENs
 .nitpretty
 *.orig
 bin/nit*
+bin/picnit
 doc/stdlib
 doc/nitc
 
@@ -28,15 +31,19 @@ src/*.dat
 src/*.gnu
 src/*.bin
 src/nitc_0
+src/nitc_0.exe
 
 c_src/*.o
 c_src/*.cksum
 c_src/nitc
+c_src/nitc.exe
 
 csrc2/
 
 lib/*.log
 lib/*.dot
+
+lib/*/bin
 
 examples/*/doc
 examples/*/bin
@@ -57,3 +64,5 @@ nitunit.xml
 .metadata/*
 .github_data
 .DS_Store
+
+**/nit_compile/*

@@ -52,7 +52,8 @@ redef class App
 
 		android.content.IntentFilter filter = new android.content.IntentFilter();
 		filter.addAction(android.net.wifi.WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-		final int final_self = self;
+		final nit.app.NitObject final_self = self;
+		App_incr_ref(final_self);
 
 		context.registerReceiver(
 			new android.content.BroadcastReceiver() {
@@ -123,11 +124,10 @@ redef class SectionTitle
 end
 
 redef class ItemView
-	init do set_backgroud(native, app.native_context)
+	init do set_background(native, app.native_context)
 
-	private fun set_backgroud(view: NativeView, context: NativeContext) in "Java" `{
-		int color = context.getResources().getIdentifier("item_background", "color", context.getPackageName());
-		view.setBackgroundResource(color);
+	private fun set_background(view: NativeView, context: NativeContext) in "Java" `{
+		view.setBackgroundResource(R.color.item_background);
 	`}
 end
 
@@ -141,9 +141,6 @@ end
 
 private fun native_notify(context: NativeService, id: Int, title, content: JavaString)
 in "Java" `{
-	int icon = context.getResources().getIdentifier(
-		"notif", "drawable", context.getPackageName());
-
 	android.app.Notification.BigTextStyle style =
 		new android.app.Notification.BigTextStyle();
 	style.bigText(content);
@@ -156,7 +153,7 @@ in "Java" `{
 	android.app.Notification notif = new android.app.Notification.Builder(context)
 		.setContentTitle(title)
 		.setContentText(content)
-		.setSmallIcon(icon)
+		.setSmallIcon(R.drawable.notif)
 		.setAutoCancel(true)
 		.setOngoing(false)
 		.setStyle(style)
@@ -200,7 +197,7 @@ redef class BeerView
 		final String final_title = title;
 		final boolean final_loggedin = loggedin;
 
-		final int final_self = self;
+		final nit.app.NitObject final_self = self;
 		BeerView_incr_ref(self); // Nit GC
 
 		view.setOnTouchListener(new android.view.View.OnTouchListener() {
@@ -225,8 +222,7 @@ redef class BeerView
 				rating.setRating(final_rating);
 
 				// Header bar
-				int icon = final_context.getResources().getIdentifier("notif", "drawable", final_context.getPackageName());
-				dialog_builder.setIcon(icon);
+				dialog_builder.setIcon(R.drawable.notif);
 				dialog_builder.setTitle(final_title);
 
 				// Rating control

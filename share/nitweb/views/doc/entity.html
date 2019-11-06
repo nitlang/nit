@@ -1,0 +1,109 @@
+<div>
+	<ul class='nav nav-tabs' role='tablist'>
+
+		<!-- doc -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage" ||
+				vm.mentity.class_name == "MGroup" ||
+				vm.mentity.class_name == "MModule" ||
+				vm.mentity.class_name == "MClass" ||
+				vm.mentity.class_name == "MMethod" ||
+				vm.mentity.class_name == "MAttribute" ||
+				vm.mentity.class_name == "MVirtualTypeProp"'>
+			<a ui-sref='.doc'>
+				<span class='glyphicon glyphicon-book'/> Doc
+			</a>
+		</li>
+
+		<!-- definitions -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage" ||
+				vm.mentity.class_name == "MGroup" ||
+				vm.mentity.class_name == "MModule"'>
+			<a ui-sref='.defs'>
+				<span class='glyphicon glyphicon-list'/>
+				<span ng-if='vm.mentity.class_name == "MPackage"'>Groups</span>
+				<span ng-if='vm.mentity.class_name == "MGroup"'>Content</span>
+				<span ng-if='vm.mentity.class_name == "MModule"'>Classes</span>
+			</a>
+		</li>
+
+		<!-- graph -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage" ||
+				vm.mentity.class_name == "MGroup" ||
+				vm.mentity.class_name == "MModule" ||
+				vm.mentity.class_name == "MClass"'>
+			<a ui-sref='.graph'>
+				<span class='glyphicon glyphicon-object-align-vertical'/>
+				<span ng-if='vm.mentity.class_name == "MPackage"'>Dependencies</span>
+				<span ng-if='vm.mentity.class_name == "MGroup"'>Imports</span>
+				<span ng-if='vm.mentity.class_name == "MModule"'>Imports</span>
+				<span ng-if='vm.mentity.class_name == "MClass"'>Inheritance</span>
+			</a>
+		</li>
+
+		<!-- code -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MModule"'>
+			<a ui-sref='.code'>
+				<span class='glyphicon glyphicon-console'/> Code
+			</a>
+		</li>
+
+		<!-- all -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MClass"'>
+			<a ui-sref='.all'>
+				<span class='glyphicon glyphicon-tags'/> All properties
+			</a>
+		</li>
+
+		<!-- linearization -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MClass" ||
+				vm.mentity.class_name == "MMethod" ||
+				vm.mentity.class_name == "MAttribute" ||
+				vm.mentity.class_name == "MVirtualTypeProp"'>
+			<a ui-sref='.lin'>
+				<span class='glyphicon glyphicon-arrow-down'/> Linearization
+			</a>
+		</li>
+
+		<!-- metrics -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage" ||
+				vm.mentity.class_name == "MGroup" ||
+				vm.mentity.class_name == "MModule" ||
+				vm.mentity.class_name == "MClass"'>
+			<a ui-sref='.metrics'>
+				<span class='glyphicon glyphicon-stats'/> Metrics
+			</a>
+		</li>
+
+		<!-- grades -->
+		<li role='presentation' ui-sref-active='active'>
+			<a ui-sref='.grades'>
+				<span class='glyphicon glyphicon-star'/> Grades
+			</a>
+		</li>
+
+		<!-- license -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage"'>
+			<a ui-sref='.license'>
+				<span class='glyphicon glyphicon-copyright-mark'/> License
+			</a>
+		</li>
+
+		<!-- contrib -->
+		<li role='presentation' ui-sref-active='active' ng-if='
+				vm.mentity.class_name == "MPackage"'>
+			<a ui-sref='.contrib'>
+				<span class='glyphicon glyphicon-gift'/> Contributing
+			</a>
+		</li>
+	</ul>
+	<br>
+	<ui-view />
+</div>

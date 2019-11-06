@@ -41,11 +41,11 @@ end
 redef class Decorator
 
 	# Renders a `[[wikilink]]` item.
-	fun add_wikilink(v: EMITTER, token: TokenWikiLink) do
+	fun add_wikilink(v: PROCESSOR, token: TokenWikiLink) do
 		if token.name != null then
-			v.add "[[{token.name.to_s}|{token.link.to_s}]]"
+			v.add "[[{token.name.as(not null).to_s}|{token.link.as(not null).to_s}]]"
 		else
-			v.add "[[{token.link.to_s}]]"
+			v.add "[[{token.link.as(not null).to_s}]]"
 		end
 	end
 end
@@ -72,6 +72,7 @@ class TokenWikiLink
 
 	redef fun check_link(v, out, start, token) do
 		var md = v.current_text
+		if md == null then return -1
 		var pos = start + 2
 		var tmp = new FlatBuffer
 		pos = md.read_md_link_id(tmp, pos)

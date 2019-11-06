@@ -7,7 +7,9 @@ This parser is inspired by the famous TxtMark for Java (https://github.com/rjesc
 
 `nitmd` can be used as a standalone tool:
 
-	$ nitmd file.md
+~~~bash
+$ nitmd file.md
+~~~
 
 Or you can use it programmatically by importing the `markdown` module.
 
@@ -26,4 +28,6 @@ Minimalists tests are prefixed with `process_*`. All tests from daringfireball a
 
 Run the test suite:
 
-	$ nitunit lib/markdown/markdown.nit -t lib/markdown/test_markdown.nit
+~~~bash
+$ nitunit lib/markdown/markdown.nit -t lib/markdown/test_markdown.nit
+~~~

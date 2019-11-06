@@ -53,6 +53,12 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 var mmodules = modelbuilder.parse_full(arguments)
 toolcontext.mmodules_to_check.add_all mmodules
 
+# Blacklist warnings of not explicitly required modules
+for mm in model.mmodules do
+	if mmodules.has(mm) then continue
+	toolcontext.warning_blacklist[mm.location.file].add("all")
+end
+
 modelbuilder.run_phases
 toolcontext.run_global_phases(mmodules)
 if toolcontext.error_count > 0 then exit(1)

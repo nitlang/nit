@@ -104,11 +104,6 @@ redef class ModelBuilder
 		end
 
 		if mclass == null then
-			if nclassdef isa AStdClassdef and nclassdef.n_kwredef != null then
-				error(nclassdef, "Redef Error: no imported class `{name}` to refine.")
-				return
-			end
-
 			# Check for conflicting class full-names in the package
 			if mmodule.mgroup != null and mvisibility >= protected_visibility then
 				var mclasses = model.get_mclasses_by_name(name)
@@ -154,7 +149,6 @@ redef class ModelBuilder
 	private fun build_a_mclassdef(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
-		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
 		var mclass = nclassdef.mclass
 		if mclass == null then return # Skip error
 
@@ -166,55 +160,8 @@ redef class ModelBuilder
 			return
 		end
 
-		var bounds = new Array[MType]
-		if nclassdef isa AStdClassdef and mclass.arity > 0 then
-			# Revolve bound for formal parameters
-			for i in [0..mclass.arity[ do
-				if nclassdef.n_formaldefs.is_empty then
-					# Inherit the bound
-					var bound = mclass.intro.bound_mtype.arguments[i]
-					bounds.add(bound)
-					continue
-				end
-
-				var nfd = nclassdef.n_formaldefs[i]
-				var pname = mclass.mparameters[i].name
-				if nfd.n_id.text != pname then
-					error(nfd.n_id, "Error: formal parameter type #{i} `{nfd.n_id.text}` must be named `{pname}` as in the original definition in module `{mclass.intro.mmodule}`.")
-				end
-				var nfdt = nfd.n_type
-				if nfdt != null then
-					var bound = resolve_mtype_unchecked(mmodule, null, nfdt, false)
-					if bound == null then return # Forward error
-					if bound.need_anchor then
-						# No F-bounds!
-						error(nfd, "Error: formal parameter type `{pname}` bounded with a formal parameter type.")
-					else
-						bounds.add(bound)
-						nfd.bound = bound
-					end
-					if bound isa MClassType and bound.mclass.kind == enum_kind then
-						warning(nfdt, "useless-bound", "Warning: useless formal parameter type since `{bound}` cannot have subclasses.")
-					end
-				else if mclass.mclassdefs.is_empty then
-					if objectclass == null then
-						error(nfd, "Error: formal parameter type `{pname}` unbounded but no `Object` class exists.")
-						return
-					end
-					# No bound, then implicitely bound by nullable Object
-					var bound = objectclass.mclass_type.as_nullable
-					bounds.add(bound)
-					nfd.bound = bound
-				else
-					# Inherit the bound
-					var bound = mclass.intro.bound_mtype.arguments[i]
-					bounds.add(bound)
-					nfd.bound = bound
-				end
-			end
-		end
-
-		var bound_mtype = mclass.get_mtype(bounds)
+		var bound_mtype = build_a_bound_mtype(nmodule, nclassdef)
+		if bound_mtype == null then return
 		var mclassdef = new MClassDef(mmodule, bound_mtype, nclassdef.location)
 		nclassdef.mclassdef = mclassdef
 		self.mclassdef2nclassdef[mclassdef] = nclassdef
@@ -237,17 +184,96 @@ redef class ModelBuilder
 		end
 	end
 
+	# Determine the type parameter bounds for `nclassdef`.
+	#
+	# In case of error, return `null`.
+	#
+	# REQUIRE: `nmodule.mmodule != null`
+	# REQUIRE: `nclassdef.mclass != null`
+	private fun build_a_bound_mtype(nmodule: AModule, nclassdef: AClassdef): nullable MClassType
+	do
+		var mmodule = nmodule.mmodule.as(not null)
+		var mclass = nclassdef.mclass.as(not null)
+
+		var bounds = new Array[MType]
+		if nclassdef isa AStdClassdef and mclass.arity > 0 then
+			var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
+
+			# Revolve bound for formal parameters
+			for i in [0..mclass.arity[ do
+				if nclassdef.n_formaldefs.is_empty then
+					# Inherit the bound
+					var bound = mclass.intro.bound_mtype.arguments[i]
+					bounds.add(bound)
+					continue
+				end
+
+				var nfd = nclassdef.n_formaldefs[i]
+				var pname = mclass.mparameters[i].name
+				if nfd.n_id.text != pname then
+					error(nfd.n_id, "Error: formal parameter type #{i} `{nfd.n_id.text}` must be named `{pname}` as in the original definition in module `{mclass.intro.mmodule}`.")
+				end
+				var nfdt = nfd.n_type
+				if nfdt != null then
+					var bound = resolve_mtype3_unchecked(mmodule, null, null, nfdt, false)
+					if bound == null then return null # Forward error
+					if bound.need_anchor then
+						# No F-bounds!
+						error(nfd, "Error: formal parameter type `{pname}` bounded with a formal parameter type.")
+					else
+						bounds.add(bound)
+						nfd.bound = bound
+					end
+				else if mclass.mclassdefs.is_empty then
+					if objectclass == null then
+						error(nfd, "Error: formal parameter type `{pname}` unbounded but no `Object` class exists.")
+						return null
+					end
+					# No bound, then implicitely bound by nullable Object
+					var bound = objectclass.mclass_type.as_nullable
+					bounds.add(bound)
+					nfd.bound = bound
+				else
+					# Inherit the bound
+					var bound = mclass.intro.bound_mtype.arguments[i]
+					bounds.add(bound)
+					nfd.bound = bound
+				end
+			end
+		end
+
+		return mclass.get_mtype(bounds)
+	end
+
 	# Visit the AST and set the super-types of the `MClassDef` objects
-	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
+	private fun build_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule
 		if mmodule == null then return
-		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
-		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
 		var mclass = nclassdef.mclass
 		if mclass == null then return
 		var mclassdef = nclassdef.mclassdef
 		if mclassdef == null then return
+
+		var supertypes = collect_supertypes(nmodule, nclassdef, mclassdef.is_intro)
+		mclassdef.set_supertypes(supertypes)
+		if not supertypes.is_empty then self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
+	end
+
+	# List the supertypes specified or implied by `nclassdef`.
+	#
+	# REQUIRE: `nmodule.mmodule != null`
+	# REQUIRE: `nclassdef.mclass != null`
+	private fun collect_supertypes(nmodule: AModule, nclassdef: AClassdef,
+			is_intro: Bool): Array[MClassType]
+	do
+		var mmodule = nmodule.mmodule.as(not null)
+		var mclass = nclassdef.mclass.as(not null)
+		var name = mclass.name
+		var kind = mclass.kind
+
+		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
+		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
 
 		# Do we need to specify Object as a super class?
 		var specobject = true
@@ -261,33 +287,43 @@ redef class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				specobject = false
 				var ntype = nsc.n_type
-				var mtype = resolve_mtype_unchecked(mmodule, mclassdef, ntype, false)
+				var mtype = resolve_mtype3_unchecked(mmodule, mclass, null,
+						ntype, false)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
-					error(ntype, "Error: supertypes cannot be a formal type.")
-					return
+					error(ntype, "Error: a supertype cannot be a formal type.")
+					continue
 				end
-				if not mclass.kind.can_specialize(mtype.mclass.kind) then
-					error(ntype, "Error: {mclass.kind} `{mclass}` cannot specialize {mtype.mclass.kind} `{mtype.mclass}`.")
+				var superclass = mtype.mclass
+				var super_kind = superclass.kind
+				if not kind.can_specialize(super_kind) then
+					error(ntype, "Error: {kind} `{mclass}` cannot specialize {super_kind} `{superclass}`.")
 				end
 				supertypes.add mtype
 				#print "new super : {mclass} < {mtype}"
-				if mtype.mclass.kind == extern_kind then specpointer = false
+				if super_kind == extern_kind then specpointer = false
 			end
 		end
 
-		if mclassdef.is_intro and objectclass != null then
-			if mclass.kind == extern_kind and mclass.name != "Pointer" then
+		if is_intro and objectclass != null then
+			if kind == extern_kind and name != "Pointer" then
 				# it is an extern class, but not a Pointer
+				if pointerclass == null then
+					error(nclassdef, "Error: `Pointer` must be defined first.")
+					return supertypes
+				end
 				if specpointer then supertypes.add pointerclass.mclass_type
-			else if specobject and mclass.name != "Object" then
-				# it is a standard class without super class (but is not Object)
-				supertypes.add objectclass.mclass_type
+			else if specobject then
+				if name != "Object" then
+					# it is a standard class without super class (but is not Object)
+					supertypes.add objectclass.mclass_type
+				else if kind != interface_kind then
+					error(nclassdef, "Error: `Object` must be an {interface_kind}.")
+				end
 			end
 		end
 
-		mclassdef.set_supertypes(supertypes)
-		if not supertypes.is_empty then self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
+		return supertypes
 	end
 
 	# Check the validity of the specialization heirarchy
@@ -308,7 +344,6 @@ redef class ModelBuilder
 	end
 
 	# Build the classes of the module `nmodule`.
-	# REQUIRE: classes of imported modules are already build. (let `phase` do the job)
 	private fun build_classes(nmodule: AModule)
 	do
 		# Force building recursively
@@ -344,7 +379,7 @@ redef class ModelBuilder
 
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
-			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
+			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
 		end
 
 		# Create the mclassdef hierarchy
@@ -361,11 +396,21 @@ redef class ModelBuilder
 		for nclassdef in nmodule.n_classdefs do
 			if nclassdef isa AStdClassdef then
 				var mclassdef = nclassdef.mclassdef
+				var mclass
+				var anchor
+				if mclassdef == null then
+					mclass = null
+					anchor = null
+				else
+					mclass = mclassdef.mclass
+					anchor = mclassdef.bound_mtype
+				end
+
 				# check bound of formal parameter
-				for nfd in  nclassdef.n_formaldefs do
+				for nfd in nclassdef.n_formaldefs do
 					var nfdt = nfd.n_type
 					if nfdt != null and nfdt.mtype != null then
-						var bound = resolve_mtype(mmodule, mclassdef, nfdt)
+						var bound = resolve_mtype3(mmodule, mclass, anchor, nfdt)
 						if bound == null then return # Forward error
 					end
 				end
@@ -373,7 +418,7 @@ redef class ModelBuilder
 				for nsc in nclassdef.n_superclasses do
 					var ntype = nsc.n_type
 					if ntype.mtype != null then
-						var mtype = resolve_mtype(mmodule, mclassdef, ntype)
+						var mtype = resolve_mtype3(mmodule, mclass, anchor, ntype)
 						if mtype == null then return # Forward error
 					end
 				end
@@ -425,8 +470,11 @@ redef class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				var ntype = nsc.n_type
 				var mtype = ntype.mtype
-				if mtype == null then continue
-				assert mtype isa MClassType
+
+				# If the supertype is `null` or don’t refer to a class, we
+				# already raised an error.
+				if not mtype isa MClassType then continue
+
 				var sc = mtype.mclass
 				if not parents.has(sc) or sc == objectclass then
 					# Skip the warning on generated code
@@ -489,6 +537,9 @@ redef class AEnumClasskind
 end
 redef class AExternClasskind
 	redef fun mkind do return extern_kind
+end
+redef class ASubsetClasskind
+	redef fun mkind do return subset_kind
 end
 
 redef class AFormaldef

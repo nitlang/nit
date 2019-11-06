@@ -37,7 +37,7 @@
 #   main activity of the running application. Use it to get anything related
 #   to the `Context` and as anchor to execute Java UI code.
 module native_app_glue is
-	ldflags "-landroid"
+	ldflags("-landroid", "-lnative_app_glue")
 	android_activity "android.app.NativeActivity"
 end
 
@@ -52,12 +52,27 @@ in "C header" `{
 in "C body" `{
 	struct android_app* native_app_glue_data;
 
+	// Was `android_main` called?
+	int android_main_launched = 0;
+
 	// Entry point called by the native_app_glue_framework framework
 	// We relay the call to the Nit application.
 	void android_main(struct android_app* app) {
 		native_app_glue_data = app;
-		app_dummy();
-		main(0, NULL);
+
+		if (android_main_launched) {
+			// Second call to `android_main`, may happen if `exit 0` was not
+			// called previously to force unloading the Nit app state.
+			// This happens sometimes when the `destroy` lifecycle command
+			// was not correctly received.
+			// We `exit 0` here hoping the system restarts the app nicely
+			// without an error popup.
+			exit(0);
+		} else {
+			android_main_launched = 1;
+			int main(int argc, char ** argv);
+			main(0, NULL);
+		}
 	}
 
 	// Main callback on the native_app_glue framework
@@ -194,7 +209,7 @@ redef class App
 	# Notification from the Android framework, the system is running low on memory
 	#
 	# Try to reduce your memory use.
-	fun low_memory do end
+	fun low_memory do force_garbage_collection
 
 	# Notification from the Android framework, the current device configuration has changed
 	fun config_changed do end
@@ -215,12 +230,22 @@ redef class App
 	# Raised when the soft input window being shown or hidden, and similar events.
 	fun content_rect_changed do end
 
-	# Call the `ALooper` to retrieve events and callback the application
+	# Call the `ALooper_pollAll` to retrieve events and callback the application
 	fun poll_looper(timeout_ms: Int) import handle_looper_event `{
 		int ident;
 		int event;
 		void* source;
 		while ((ident=ALooper_pollAll(timeout_ms, NULL, &event, &source)) >= 0) {
+			App_handle_looper_event(self, ident, event, source);
+		}
+	`}
+
+	# Call the `ALooper_pollOnce` to retrieve at most one event and callback the application
+	fun poll_looper_pause(timeout_ms: Int) import handle_looper_event `{
+		int event;
+		void* source;
+		int ident = ALooper_pollOnce(timeout_ms, NULL, &event, &source);
+		if (ident >= 0) {
 			App_handle_looper_event(self, ident, event, source);
 		}
 	`}
@@ -260,10 +285,10 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	fun java_native_activity: NativeActivity `{ return self->clazz; `}
 
 	# Path to this application's internal data directory.
-	fun internal_data_path: NativeString `{ return (char*)self->internalDataPath; `}
+	fun internal_data_path: CString `{ return (char*)self->internalDataPath; `}
 
 	# Path to this application's external (removable/mountable) data directory.
-	fun external_data_path: NativeString `{ return (char*)self->externalDataPath; `}
+	fun external_data_path: CString `{ return (char*)self->externalDataPath; `}
 
 	# The platform's SDK version code.
 	fun sdk_version: Int `{ return self->sdkVersion; `}
@@ -285,7 +310,7 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	# api?
 	#
 	# TODO activate in a future module at API 11
-	#fun obb_path: NativeString `{ return (char*)self->obbPath; `}
+	#fun obb_path: CString `{ return (char*)self->obbPath; `}
 end
 
 # This is the interface for the standard glue code of a threaded
@@ -349,7 +374,7 @@ extern class NativeAppGlue `{ struct android_app* `}
 
 	# This is non-zero when the application's NativeActivity is being
 	# destroyed and waiting for the app thread to complete.
-	fun detroy_request: Bool `{ return self->destroyRequested; `}
+	fun destroy_requested: Bool `{ return self->destroyRequested; `}
 end
 
 # Android NDK's struture holding configurations of the native app

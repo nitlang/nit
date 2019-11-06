@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# This is an example of how to use angular.js with popcorn
+module example_angular is example
+
 import popcorn
+import popcorn::pop_json
 
 class CounterAPI
 	super Handler

@@ -45,11 +45,11 @@ class SAXParseException
 
 	# The line number of the end of the text that
 	# caused the error or warning, or -1.
-	var line_number: Int = -1
+	var line_number = -1
 
 	# The column number of the end of the text that
 	# caused the error or warning, or -1.
-	var column_number: Int = -1
+	var column_number = -1
 
 	# Create a new SAXParseException from a message and a Locator.
 	#

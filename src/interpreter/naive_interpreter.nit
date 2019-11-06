@@ -21,7 +21,8 @@ import literal
 import semantize
 private import parser::tables
 import mixin
-import primitive_types
+private import model::serialize_model
+private import frontend::explain_assert_api
 
 redef class ToolContext
 	# --discover-call-trace
@@ -60,7 +61,7 @@ class NaiveInterpreter
 	var modelbuilder: ModelBuilder
 
 	# The main module of the program (used to lookup method)
-	var mainmodule: MModule
+	var mainmodule: MModule is writable
 
 	# The command line arguments of the interpreted program
 	# arguments.first is the program name
@@ -69,6 +70,9 @@ class NaiveInterpreter
 
 	# The main Sys instance
 	var mainobj: nullable Instance is noinit
+
+	# Name of all supported functional names
+	var routine_types: Set[String] = new HashSet[String]
 
 	init
 	do
@@ -79,6 +83,15 @@ class NaiveInterpreter
 			init_instance_primitive(self.false_instance)
 		end
 		self.null_instance = new PrimitiveInstance[nullable Object](mainmodule.model.null_type, null)
+
+		routine_types.add("RoutineRef")
+		for name in ["Proc", "Fun", "ProcRef", "FunRef"] do
+			# 20 is a magic number = upper limit of the arity of each functional class.
+			# i.e. Proc0, Proc1, ... Proc19
+			for i  in [0..20[ do
+				routine_types.add("{name}{i}")
+			end
+		end
 	end
 
 	# Starts the interpreter on the main module of a program
@@ -118,7 +131,10 @@ class NaiveInterpreter
 	var escapemark: nullable EscapeMark = null
 
 	# The count of `catch` blocs that have been encountered and can catch an abort
-	var catch_count = 0
+	var catch_count = 0 is writable
+
+	# The last error thrown on abort/runtime error where catch_count > 0
+	var last_error: nullable FatalError = null
 
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
@@ -316,34 +332,46 @@ class NaiveInterpreter
 		end
 	end
 
-	# Return a new native string initialized with `txt`
-	fun native_string_instance(txt: String): Instance
+	# Return a new C string initialized with `txt`
+	fun c_string_instance(txt: String): Instance
 	do
-		var instance = native_string_instance_len(txt.byte_length+1)
+		var instance = c_string_instance_len(txt.byte_length+1)
 		var val = instance.val
-		val[txt.byte_length] = 0u8
+		val[txt.byte_length] = 0
 		txt.to_cstring.copy_to(val, txt.byte_length, 0, 0)
 
 		return instance
 	end
 
-	# Return a new native string initialized with `txt`
-	fun native_string_instance_from_ns(txt: NativeString, len: Int): Instance
+	# Return a new C string initialized with `txt`
+	fun c_string_instance_from_ns(txt: CString, len: Int): Instance
 	do
-		var instance = native_string_instance_len(len)
+		var instance = c_string_instance_len(len)
 		var val = instance.val
 		txt.copy_to(val, len, 0, 0)
 
 		return instance
 	end
 
-	# Return a new native string initialized of `length`
-	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
+	# Return a new C string instance sharing the same data space as `txt`
+	fun c_string_instance_fast_cstr(txt: CString, from: Int): Instance
 	do
-		var val = new NativeString(length)
+		var ncstr = txt.fast_cstring(from)
+		var t = mainmodule.c_string_type
 
-		var t = mainmodule.native_string_type
-		var instance = new PrimitiveInstance[NativeString](t, val)
+		var instance = new PrimitiveInstance[CString](t, ncstr)
+		init_instance_primitive(instance)
+
+		return instance
+	end
+
+	# Return a new C string initialized of `length`
+	fun c_string_instance_len(length: Int): PrimitiveInstance[CString]
+	do
+		var val = new CString(length)
+
+		var t = mainmodule.c_string_type
+		var instance = new PrimitiveInstance[CString](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -351,8 +379,8 @@ class NaiveInterpreter
 	# Return a new String instance for `txt`
 	fun string_instance(txt: String): Instance
 	do
-		var nat = native_string_instance(txt)
-		var res = self.send(self.force_get_primitive_method("to_s_full", nat.mtype), [nat, self.int_instance(txt.byte_length), self.int_instance(txt.length)])
+		var nat = c_string_instance(txt)
+		var res = self.send(self.force_get_primitive_method("to_s_unsafe", nat.mtype), [nat, self.int_instance(txt.byte_length), self.int_instance(txt.length), self.false_instance, self.false_instance])
 		assert res != null
 		return res
 	end
@@ -440,6 +468,22 @@ class NaiveInterpreter
 	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
+	# Consumes an iterator of expressions and tries to map each element to
+	# its corresponding Instance.
+	#
+	# If any AExprs doesn't resolve to an Instance, then it returns null.
+	# Otherwise return an array of instances
+	fun aexprs_to_instances(aexprs: Iterator[AExpr]): nullable Array[Instance]
+	do
+		var accumulator = new Array[Instance]
+		for aexpr in aexprs do
+			var instance = expr(aexpr)
+			if instance == null then return null
+			accumulator.push(instance)
+		end
+		return accumulator
+	end
+
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
 	# of instances to use in the call.
@@ -454,22 +498,15 @@ class NaiveInterpreter
 
 		if map == null then
 			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
-			for ne in args do
-				var e = self.expr(ne)
-				if e == null then return null
-				res.add e
-			end
+			var rest_args = aexprs_to_instances(args.iterator)
+			if rest_args == null then return null
+			res.append(rest_args)
 			return res
 		end
 
 		# Eval in order of arguments, not parameters
-		var exprs = new Array[Instance].with_capacity(args.length)
-		for ne in args do
-			var e = self.expr(ne)
-			if e == null then return null
-			exprs.add e
-		end
-
+		var exprs = aexprs_to_instances(args.iterator)
+		if exprs == null then return null
 
 		# Fill `res` with the result of the evaluation according to the mapping
 		for i in [0..msignature.arity[ do
@@ -662,16 +699,30 @@ class NaiveInterpreter
 	var error_instance = new MutableInstance(modelbuilder.model.null_type) is lazy
 end
 
+# A runtime error
+class FatalError
+	# The error message
+	var message: String
+
+	# The problematic node, if any
+	var node: nullable ANode
+end
+
 # An instance represents a value of the executed program.
 abstract class Instance
 	# The dynamic type of the instance
 	# ASSERT: not self.mtype.is_anchored
 	var mtype: MType
 
-	# return true if the instance is the true value.
-	# return false if the instance is the true value.
-	# else aborts
+	# Return `true` if the instance is the `true` value.
+	#
+	# Return `false` if the instance is the `false` value.
+	# Abort if the instance is not a boolean value.
 	fun is_true: Bool do abort
+
+	# Return `true` if the instance is null.
+	# Return `false` otherwise.
+	fun is_null: Bool do return mtype isa MNullType
 
 	# Return true if `self` IS `o` (using the Nit semantic of is)
 	fun eq_is(o: Instance): Bool do return self.is_same_instance(o)
@@ -724,8 +775,29 @@ class MutableInstance
 	var attributes: Map[MAttribute, Instance] = new HashMap[MAttribute, Instance]
 end
 
+# An instance with the original receiver and callsite (for function reference)
+class CallrefInstance
+	super Instance
+
+	# The original receiver
+	#
+	# ~~~nitish
+	# var a = new A
+	# var f = &a.toto # `a` is the original receiver
+	# ~~~
+	var recv: Instance
+
+	# The original callsite
+	#
+	# ~~~nitish
+	# var a = new A
+	# var f = &a.toto # `toto` is the original callsite
+	# ~~~
+	var callsite: CallSite
+end
+
 # Special instance to handle primitives values (int, bool, etc.)
-# The trick it just to encapsulate the <<real>> value
+# The trick is just to encapsulate the “real” value.
 class PrimitiveInstance[E]
 	super Instance
 
@@ -789,7 +861,7 @@ class InterpreterFrame
 	super Frame
 
 	# Mapping between a variable and the current value
-	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
 end
 
 redef class ANode
@@ -797,7 +869,13 @@ redef class ANode
 	# `v` is used to know if a colored message is displayed or not
 	fun fatal(v: NaiveInterpreter, message: String)
 	do
-		if v.modelbuilder.toolcontext.opt_no_color.value == true then
+		# Abort if there is a `catch` block
+		if v.catch_count > 0 then
+			v.last_error = new FatalError(message, self)
+			abort
+		end
+
+		if v.modelbuilder.toolcontext.opt_no_color.value then
 			sys.stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
 		else
 			sys.stderr.write("{location}: Runtime error: {message}\n{location.colored_line("0;31")}\n")
@@ -832,7 +910,10 @@ redef class AMethPropdef
 		return res
 	end
 
-	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
+	# Execution of the body of the method
+	#
+	# It handle the common special cases: super, intern, extern
+	fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
 	do
 		v.frames.unshift(f)
 
@@ -900,6 +981,19 @@ redef class AMethPropdef
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
+
+		if pname == "call" and v.routine_types.has(cname) then
+			var routine = args.shift
+			assert routine isa CallrefInstance
+			# Swap the receiver position with the original recv of the call form.
+			args.unshift routine.recv
+			var res = v.callsite(routine.callsite, args)
+			# recover the old args state
+			args.shift
+			args.unshift routine
+			return res
+		end
+
 		if pname == "output" then
 			var recv = args.first
 			recv.val.output
@@ -918,7 +1012,7 @@ redef class AMethPropdef
 		else if pname == "native_class_name" then
 			var recv = args.first
 			var txt = recv.mtype.to_s
-			return v.native_string_instance(txt)
+			return v.c_string_instance(txt)
 		else if pname == "==" then
 			# == is correctly redefined for instances
 			return v.bool_instance(args[0] == args[1])
@@ -928,6 +1022,8 @@ redef class AMethPropdef
 			return v.bool_instance(args[0].mtype == args[1].mtype)
 		else if pname == "is_same_instance" then
 			return v.bool_instance(args[0].eq_is(args[1]))
+		else if pname == "class_inheritance_metamodel_json" then
+			return v.c_string_instance(v.mainmodule.flatten_mclass_hierarchy.to_thin_json)
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort
@@ -1123,21 +1219,21 @@ redef class AMethPropdef
 			else if pname == "round" then
 				return v.float_instance(args[0].to_f.round)
 			end
-		else if cname == "NativeString" then
+		else if cname == "CString" then
 			if pname == "new" then
-				return v.native_string_instance_len(args[1].to_i)
+				return v.c_string_instance_len(args[1].to_i)
 			end
-			var recvval = args.first.val.as(NativeString)
+			var recvval = args.first.val.as(CString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
-				return v.byte_instance(recvval[arg1])
+				return v.int_instance(recvval[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
-				recvval[arg1] = args[2].val.as(Byte)
+				recvval[arg1] = args[2].val.as(Int)
 				return null
 			else if pname == "copy_to" then
-				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(NativeString)
+				# sig= copy_to(dest: CString, length: Int, from: Int, to: Int)
+				var destval = args[1].val.as(CString)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
@@ -1146,14 +1242,13 @@ redef class AMethPropdef
 			else if pname == "atoi" then
 				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
-				var ns = recvval.fast_cstring(args[1].to_i)
-				return v.native_string_instance(ns.to_s)
+				return v.c_string_instance_fast_cstr(args[0].val.as(CString), args[1].to_i)
 			else if pname == "fetch_4_chars" then
-				return v.int_instance(args[0].val.as(NativeString).fetch_4_chars(args[1].to_i))
+				return v.uint32_instance(args[0].val.as(CString).fetch_4_chars(args[1].to_i))
 			else if pname == "fetch_4_hchars" then
-				return v.int_instance(args[0].val.as(NativeString).fetch_4_hchars(args[1].to_i))
+				return v.uint32_instance(args[0].val.as(CString).fetch_4_hchars(args[1].to_i))
 			else if pname == "utf8_length" then
-				return v.int_instance(args[0].val.as(NativeString).utf8_length(args[1].to_i, args[2].to_i))
+				return v.int_instance(args[0].val.as(CString).utf8_length(args[1].to_i, args[2].to_i))
 			end
 		else if cname == "NativeArray" then
 			if pname == "new" then
@@ -1443,12 +1538,7 @@ redef class AMethPropdef
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
 			var txt = v.arguments[args[1].to_i]
-			return v.native_string_instance(txt)
-		else if pname == "native_argc" then
-			return v.int_instance(v.arguments.length)
-		else if pname == "native_argv" then
-			var txt = v.arguments[args[1].to_i]
-			return v.native_string_instance(txt)
+			return v.c_string_instance(txt)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
@@ -1476,7 +1566,7 @@ redef class AAttrPropdef
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			var arg = args[1]
-			if is_optional and arg.mtype isa MNullType then
+			if is_optional and arg.is_null then
 				var f = v.new_frame(self, mpropdef, args)
 				arg = evaluate_expr(v, recv, f)
 			end
@@ -1685,6 +1775,8 @@ redef class AEscapeExpr
 			var i = v.expr(ne)
 			if i == null then return
 			v.escapevalue = i
+		else
+			v.escapevalue = null
 		end
 		v.escapemark = self.escapemark
 	end
@@ -1693,13 +1785,8 @@ end
 redef class AAbortExpr
 	redef fun stmt(v)
 	do
-		# Abort as asked if there is no `catch` bloc
-		if v.catch_count <= 0 then
-			fatal(v, "Aborted")
-			exit(1)
-		else
-			abort
-		end
+		fatal(v, "Aborted")
+		exit(1)
 	end
 end
 
@@ -1799,7 +1886,7 @@ redef class AForExpr
 		for g in n_groups do
 			var col = v.expr(g.n_expr)
 			if col == null then return
-			if col.mtype isa MNullType then fatal(v, "Receiver is null")
+			if col.is_null then fatal(v, "Receiver is null")
 
 			var iter = v.callsite(g.method_iterator, [col]).as(not null)
 			iters.add iter
@@ -1866,6 +1953,22 @@ redef class AAssertExpr
 		if not cond.is_true then
 			v.stmt(self.n_else)
 			if v.is_escaping then return
+
+			# Explain assert if it fails
+			var explain_assert_str = explain_assert_str
+			if explain_assert_str != null then
+				var i = v.expr(explain_assert_str)
+				if i isa MutableInstance then
+					var res = v.send(v.force_get_primitive_method("to_cstring", i.mtype), [i])
+					if res != null then
+						var val = res.val
+						if val != null then
+							print_error "Runtime assert: {val.to_s}"
+						end
+					end
+				end
+			end
+
 			var nid = self.n_id
 			if nid != null then
 				fatal(v, "Assert '{nid.text}' failed")
@@ -1950,8 +2053,9 @@ end
 redef class ACharExpr
 	redef fun expr(v)
 	do
-		if is_ascii then return v.byte_instance(self.value.as(not null).ascii)
-		if is_code_point then return v.int_instance(self.value.as(not null).code_point)
+		if is_code_point then
+			return v.int_instance(self.value.as(not null).code_point)
+		end
 		return v.char_instance(self.value.as(not null))
 	end
 end
@@ -2024,7 +2128,7 @@ redef class AStringExpr
 		var s = v.string_instance(value)
 		if is_string then return s
 		if is_bytestring then
-			var ns = v.native_string_instance_from_ns(bytes.items, bytes.length)
+			var ns = v.c_string_instance_from_ns(bytes.items, bytes.length)
 			var ln = v.int_instance(bytes.length)
 			var prop = to_bytes_with_copy
 			assert prop != null
@@ -2143,7 +2247,7 @@ redef class AAsNotnullExpr
 	do
 		var i = v.expr(self.n_expr)
 		if i == null then return null
-		if i.mtype isa MNullType then
+		if i.is_null then
 			fatal(v, "Cast failed")
 		end
 		return i
@@ -2176,11 +2280,31 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
+
+		# Safe call shortcut if recv is null
+		if is_safe and recv.is_null then
+			return recv
+		end
+
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 		if args == null then return null
-
 		var res = v.callsite(callsite, args)
 		return res
+	end
+end
+
+redef class ACallrefExpr
+	redef fun expr(v)
+	do
+		var recv = v.expr(self.n_expr)
+		if recv == null then return null
+		var mtype = self.mtype
+		assert mtype != null
+		# In case we are in generic class where formal parameter can not
+		# be resolved.
+		var mtype2 = v.unanchor_type(mtype)
+		var inst = new CallrefInstance(mtype2, recv, callsite.as(not null))
+		return inst
 	end
 end
 
@@ -2272,7 +2396,7 @@ redef class AAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.read_attribute(mproperty, recv)
 	end
@@ -2283,7 +2407,7 @@ redef class AAttrAssignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -2296,7 +2420,7 @@ redef class AAttrReassignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -2312,13 +2436,20 @@ redef class AIssetAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
+		if recv.is_null then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.bool_instance(v.isset_attribute(mproperty, recv))
 	end
 end
 
 redef class AVarargExpr
+	redef fun expr(v)
+	do
+		return v.expr(self.n_expr)
+	end
+end
+
+redef class ASafeExpr
 	redef fun expr(v)
 	do
 		return v.expr(self.n_expr)

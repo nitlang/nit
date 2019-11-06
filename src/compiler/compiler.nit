@@ -19,8 +19,8 @@ import separate_erasure_compiler
 import global_compiler
 import compiler_ffi
 import memory_logger
+import compiler_serialization
 
 import platform::android
-import platform::pnacl
 import platform::emscripten
 import platform::ios

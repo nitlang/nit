@@ -13,6 +13,8 @@
 # limitations under the License.
 
 # Collect and orchestration of main frontend phases
+#
+# Import `frontend::code_gen` to also include code generation modules.
 module frontend
 
 import no_warning
@@ -21,13 +23,15 @@ import literal
 import modelize
 import semantize
 import div_by_zero
-import serialization_phase
+import serialization_model_phase
 import deriving
 import check_annotation
+import parse_annotations
 import glsl_validation
 import parallelization_phase
 import i18n_phase
 import regex_phase
+import actors_injection_phase
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation

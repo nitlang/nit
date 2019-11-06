@@ -131,6 +131,7 @@ class CalculatorContext
 	do
 		result = null
 		last_op = null
+		last_op_was_unary = false
 		current = null
 	end
 

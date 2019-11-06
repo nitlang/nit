@@ -16,5 +16,5 @@
 
 class A
 	#alt1#once
-	?&*
+	`?&*
 end

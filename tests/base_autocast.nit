@@ -17,9 +17,13 @@ import kernel
 class G[E]
 	type V: nullable Object
 
-	fun foo
+	fun foo1
 	do
 		bar(1)
+	end
+
+	fun foo2
+	do
 		baz(2)
 	end
 
@@ -36,6 +40,9 @@ class I
 	redef type V: Char
 end
 
-(new G[Object]).foo
-#alt1#(new H).foo
-#alt2#(new I).foo
+(new G[Object]).foo1
+(new G[Object]).foo2
+#alt1#(new H).foo1
+#alt1#(new H).foo2
+#alt2#(new I).foo1
+#alt2#(new I).foo2

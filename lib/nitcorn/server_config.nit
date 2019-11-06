@@ -25,7 +25,7 @@ class ServerConfig
 	var virtual_hosts = new VirtualHosts(self)
 
 	# Default `VirtualHost` to respond to requests not handled by any of the `virtual_hosts`
-	var default_virtual_host: nullable VirtualHost = null
+	var default_virtual_host: nullable VirtualHost = null is writable
 end
 
 # A `VirtualHost` configuration
@@ -82,7 +82,7 @@ class Interfaces
 	super Array[Interface]
 
 	# Back reference to the associtated `VirtualHost`
-	var vh: VirtualHost
+	var virtual_host: VirtualHost
 
 	# Add an `Interface` described by `text` formatted as `interface.name.com:port`
 	fun add_from_string(text: String)

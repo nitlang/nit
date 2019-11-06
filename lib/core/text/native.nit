@@ -13,6 +13,7 @@ module native
 
 import kernel
 import math
+import fixed_ints
 
 in "C" `{
 #ifdef __linux__
@@ -22,26 +23,28 @@ in "C" `{
 	#include <libkern/OSByteOrder.h>
 	#define be32toh(x) OSSwapBigToHostInt32(x)
 #endif
-
-#ifdef __pnacl__
-	#define be16toh(val) (((val) >> 8) | ((val) << 8))
-	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))
+#ifdef _WIN32
+	#define be32toh(val) _byteswap_ulong(val)
 #endif
+
 #ifndef be32toh
 	#define be32toh(val) betoh32(val)
 #endif
+
+#include <assert.h>
+#include <string.h>
 `}
 
-redef class Byte
+redef class Int
 	# Gives the length of the UTF-8 char starting with `self`
 	fun u8len: Int do
-		if self & 0b1000_0000u8 == 0u8 then
+		if self & 0b1000_0000 == 0 then
 			return 1
-		else if self & 0b1110_0000u8 == 0b1100_0000u8 then
+		else if self & 0b1110_0000 == 0b1100_0000 then
 			return 2
-		else if self & 0b1111_0000u8 == 0b1110_0000u8 then
+		else if self & 0b1111_0000 == 0b1110_0000 then
 			return 3
-		else if self & 0b1111_1000u8 == 0b1111_0000u8 then
+		else if self & 0b1111_1000 == 0b1111_0000 then
 			return 4
 		else
 			return 1
@@ -51,54 +54,63 @@ redef class Byte
 	# Is `self` a valid UTF-8 sequence start ?
 	#
 	# ~~~nit
-	# assert 0u8.is_valid_utf8_start
-	# assert 0xC0u8.is_valid_utf8_start
-	# assert 0xE0u8.is_valid_utf8_start
-	# assert 0xF0u8.is_valid_utf8_start
+	# assert 0.is_valid_utf8_start
+	# assert 0xC0.is_valid_utf8_start
+	# assert 0xE0.is_valid_utf8_start
+	# assert 0xF0.is_valid_utf8_start
 	# ~~~
 	fun is_valid_utf8_start: Bool do
-		if self & 0x80u8 == 0u8 then return true
-		if self & 0b1110_0000u8 == 0b1100_0000u8 then return true
-		if self & 0b1111_0000u8 == 0b1110_0000u8 then return true
-		if self & 0b1111_1000u8 == 0b1111_0000u8 then return true
+		if self & 0x80 == 0 then return true
+		if self & 0b1110_0000 == 0b1100_0000 then return true
+		if self & 0b1111_0000 == 0b1110_0000 then return true
+		if self & 0b1111_1000 == 0b1111_0000 then return true
 		return false
 	end
 end
 
-redef class Int
+redef class UInt32
 	# Returns the code_point from a utf16 surrogate pair
 	#
-	#     assert 0xD83DDE02.from_utf16_surr == 0x1F602
-	fun from_utf16_surr: Int do
-		var hi = (self & 0xFFFF0000) >> 16
-		var lo = self & 0xFFFF
-		var cp = 0
-		cp += (hi - 0xD800) << 10
-		cp += lo - 0xDC00
-		cp += 0x10000
+	#     assert 0xD83DDE02u32.from_utf16_surr == 0x1F602u32
+	fun from_utf16_surr: UInt32 do
+		var hi = (self & 0xFFFF0000u32) >> 16
+		var lo = self & 0xFFFFu32
+		var cp = 0u32
+		cp += (hi - 0xD800u32) << 10
+		cp += lo - 0xDC00u32
+		cp += 0x10000u32
 		return cp
 	end
+
+	# The character which code point (unicode-wise) is `self`
+	#
+	#     assert 65u32.code_point == 'A'
+	#     assert 10u32.code_point == '\n'
+	#     assert 0x220Bu32.code_point == '∋'
+	fun code_point: Char `{ return self; `}
 end
 
-# Native strings are simple C char *
-extern class NativeString `{ char* `}
-	# Creates a new NativeString with a capacity of `length`
+# C string `char *`
+#
+# Used as underlying implementation for `String` and some other `Text`.
+extern class CString `{ char* `}
+	# Create a new `CString` with the capacity for `length` characters
 	new(length: Int) is intern
 
-	# Returns a char* starting at `index`.
+	# Get a char* starting at `index`.
 	#
 	# WARNING: Unsafe for extern code, use only for temporary
 	# pointer manipulation purposes (e.g. write to file or such)
-	fun fast_cstring(index: Int): NativeString is intern
+	fun fast_cstring(index: Int): CString is intern
 
 	# Get char at `index`.
-	fun [](index: Int): Byte is intern
+	fun [](index: Int): Int is intern
 
 	# Set char `item` at index.
-	fun []=(index: Int, item: Byte) is intern
+	fun []=(index: Int, item: Int) is intern
 
 	# Copy `self` to `dest`.
-	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
+	fun copy_to(dest: CString, length: Int, from: Int, to: Int) is intern
 
 	redef fun ==(o) is intern do return is_same_instance(o)
 
@@ -108,7 +120,7 @@ extern class NativeString `{ char* `}
 	fun cstring_length: Int
 	do
 		var l = 0
-		while self[l] != 0u8 do l += 1
+		while self[l] != 0 do l += 1
 		return l
 	end
 
@@ -134,28 +146,28 @@ extern class NativeString `{ char* `}
 	# ~~~
 	fun char_at(pos: Int): Char do
 		var c = self[pos]
-		if c & 0x80u8 == 0u8 then return c.ascii
+		if c & 0x80 == 0 then return c.code_point
 		var b = fetch_4_hchars(pos)
-		var ret = 0
-		if b & 0xC00000 != 0x800000 then return 0xFFFD.code_point
-		if b & 0xE0000000 == 0xC0000000 then
-			ret |= (b & 0x1F000000) >> 18
-			ret |= (b & 0x3F0000) >> 16
+		var ret = 0u32
+		if b & 0xC00000u32 != 0x800000u32 then return 0xFFFD.code_point
+		if b & 0xE0000000u32 == 0xC0000000u32 then
+			ret |= (b & 0x1F000000u32) >> 18
+			ret |= (b & 0x3F0000u32) >> 16
 			return ret.code_point
 		end
-		if not b & 0xC000 == 0x8000 then return 0xFFFD.code_point
-		if b & 0xF0000000 == 0xE0000000 then
-			ret |= (b & 0xF000000) >> 12
-			ret |= (b & 0x3F0000) >> 10
-			ret |= (b & 0x3F00) >> 8
+		if not b & 0xC000u32 == 0x8000u32 then return 0xFFFD.code_point
+		if b & 0xF0000000u32 == 0xE0000000u32 then
+			ret |= (b & 0xF000000u32) >> 12
+			ret |= (b & 0x3F0000u32) >> 10
+			ret |= (b & 0x3F00u32) >> 8
 			return ret.code_point
 		end
-		if not b & 0xC0 == 0x80 then return 0xFFFD.code_point
-		if b & 0xF8000000 == 0xF0000000 then
-			ret |= (b.to_i & 0x7000000) >> 6
-			ret |= (b.to_i & 0x3F0000) >> 4
-			ret |= (b.to_i & 0x3F00) >> 2
-			ret |= b.to_i & 0x3F
+		if not b & 0xC0u32 == 0x80u32 then return 0xFFFD.code_point
+		if b & 0xF8000000u32 == 0xF0000000u32 then
+			ret |= (b & 0x7000000u32) >> 6
+			ret |= (b & 0x3F0000u32) >> 4
+			ret |= (b & 0x3F00u32) >> 2
+			ret |= b & 0x3Fu32
 			return ret.code_point
 		end
 		return 0xFFFD.code_point
@@ -167,13 +179,13 @@ extern class NativeString `{ char* `}
 	# Gets the length of the character at position `pos` (1 if invalid sequence)
 	fun length_of_char_at(pos: Int): Int do
 		var c = self[pos]
-		if c & 0x80u8 == 0x00u8 then
+		if c & 0x80 == 0x00 then
 			return 1
-		else if c & 0xE0u8 == 0xC0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 then
+		else if c & 0xE0 == 0xC0 and self[pos + 1] & 0xC0 == 0x80 then
 			return 2
-		else if c & 0xF0u8 == 0xE0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 then
+		else if c & 0xF0 == 0xE0 and self[pos + 1] & 0xC0 == 0x80 and self[pos + 2] & 0xC0 == 0x80 then
 			return 3
-		else if c & 0xF8u8 == 0xF0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 and self[pos + 3] & 0xC0u8 == 0x80u8 then
+		else if c & 0xF8 == 0xF0 and self[pos + 1] & 0xC0 == 0x80 and self[pos + 2] & 0xC0 == 0x80 and self[pos + 3] & 0xC0 == 0x80 then
 			return 4
 		else
 			return 1
@@ -195,7 +207,7 @@ extern class NativeString `{ char* `}
 		while dist > 0 do
 			while dist >= 4 do
 				var i = fetch_4_chars(ns_i)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				ns_i += 4
 				my_i += 4
 				dist -= 4
@@ -209,7 +221,7 @@ extern class NativeString `{ char* `}
 		while dist < 0 do
 			while dist <= -4 do
 				var i = fetch_4_chars(ns_i - 4)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				ns_i -= 4
 				my_i -= 4
 				dist += 4
@@ -251,15 +263,15 @@ extern class NativeString `{ char* `}
 	# If the char is invalid UTF-8, `pos` is returned as-is
 	#
 	# ~~~raw
-	# 	assert "abc".items.find_beginning_of_char_at(2) == 2
-	# 	assert "か".items.find_beginning_of_char_at(1) == 0
-	#	assert [0x41u8, 233u8].to_s.items.find_beginning_of_char_at(1) == 1
+	#	assert "abc".items.find_beginning_of_char_at(2) == 2
+	#	assert "か".items.find_beginning_of_char_at(1) == 0
+	#	assert [0x41, 233].to_s.items.find_beginning_of_char_at(1) == 1
 	# ~~~
 	fun find_beginning_of_char_at(pos: Int): Int do
 		var endpos = pos
 		var c = self[pos]
-		if c & 0x80u8 == 0x00u8 then return pos
-		while c & 0xC0u8 == 0x80u8 do
+		if c & 0x80 == 0x00 then return pos
+		while c & 0xC0 == 0x80 do
 			pos -= 1
 			c = self[pos]
 		end
@@ -275,7 +287,7 @@ extern class NativeString `{ char* `}
 		while byte_length > 0 do
 			while byte_length >= 4 do
 				var i = fetch_4_chars(st)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				byte_length -= 4
 				st += 4
 				ln += 4
@@ -290,11 +302,10 @@ extern class NativeString `{ char* `}
 	end
 
 	# Fetch 4 chars in `self` at `pos`
-	fun fetch_4_chars(pos: Int): Int is intern `{ return (long)*((uint32_t*)(self+pos)); `}
+	fun fetch_4_chars(pos: Int): UInt32 is intern `{ return *((uint32_t*)(self+pos)); `}
 
 	# Fetch 4 chars in `self` at `pos`
-	fun fetch_4_hchars(pos: Int): Int is intern `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
-
+	fun fetch_4_hchars(pos: Int): UInt32 is intern `{ return (uint32_t)be32toh(*((uint32_t*)(self+pos))); `}
 
 	# Right shifts `len` bytes of `self` from `sh` bytes starting at position `pos`
 	fun rshift(sh, len, pos: Int) do
@@ -305,4 +316,10 @@ extern class NativeString `{ char* `}
 	fun lshift(sh, len, pos: Int) do
 		copy_to(self, len, pos, pos - sh)
 	end
+
+	# Sets the contents of `self` to `value` for `len` bytes
+	fun memset(value, len: Int) `{
+		assert(len >= 0);
+		memset(self, value, len);
+	`}
 end

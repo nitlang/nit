@@ -51,16 +51,16 @@ class IMG
 	fun quit `{ IMG_Quit(); `}
 
 	# Get the latest image library error
-	fun error: NativeString `{ return (char*)IMG_GetError(); `}
+	fun error: CString `{ return (char*)IMG_GetError(); `}
 end
 
 redef extern class SDLSurface
 	# Load the image at `path` inferring its type from the file extension
-	new load(path: NativeString) `{ return IMG_Load(path); `}
+	new load(path: CString) `{ return IMG_Load(path); `}
 end
 
 # Flags from `sys.sdl.img.initialize`
-extern class SDLImgInitFlags `{ int `}
+extern class SDLImgInitFlags `{ IMG_InitFlags `}
 	# Get the default empty flag set
 	new `{ return 0; `}
 

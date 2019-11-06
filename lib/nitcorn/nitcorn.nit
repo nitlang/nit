@@ -25,26 +25,27 @@
 # Basic usage example:
 # ~~~~
 # class MyAction
-# 	super Action
+#     super Action
 #
-# 	redef fun answer(http_request, turi)
-# 	do
-# 		var response = new HttpResponse(200)
-# 		response.body = """
-# 		<!DOCTYPE html>
-# 		<head>
-# 			<meta charset="utf-8">
-# 			<title>Hello World</title>
-# 		</head>
-# 		<body>
-# 			<p>Hello World</p>
-# 		</body>
-# 		</html>"""
-# 		return response
-# 	end
+#     redef fun answer(http_request, turi)
+#     do
+#         var response = new HttpResponse(200)
+#         response.body = """
+# <!DOCTYPE html>
+# <head>
+#     <meta charset="utf-8">
+#     <title>Hello World</title>
+# </head>
+# <body>
+#     <p>Hello World</p>
+# </body>
+# </html>"""
+#         return response
+#     end
 # end
 #
-# var vh = new VirtualHost("localhost:80")
+# # Listen to port 8080 on all interfaces
+# var vh = new VirtualHost("0.0.0.0:8080")
 #
 # # Serve index.html with our custom handler
 # vh.routes.add new Route("/index.html", new MyAction)
@@ -61,3 +62,4 @@ module nitcorn
 import reactor
 import file_server
 import sessions
+import signal_handler

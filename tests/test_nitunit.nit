@@ -15,19 +15,27 @@
 # limitations under the License.
 
 # a 'success' unit test (pass)
+#
 #     assert true
 module test_nitunit
 # a 'error' unit test (do not pass)
+#
 #     assert false
 class X
 	# a 'failure' unit test (does not compile)
+	#
 	#     assert undefined_identifier
 	fun foo do end
 
 	# a 'failure' unit test (does not parse)
+	#
 	#     assert !@#$%^&*()
 	fun foo1(a, b: Int) do end
 
+	# a private method (visible by nitunit)
+	#
+	#     var x = new X
+	#     assert x.foo2
 	private fun foo2: Bool do return true
 
 	var foo3: Y[X] = new Y[X]

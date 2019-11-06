@@ -36,13 +36,13 @@ class SDL
 	# TODO make this private and only called through `sys.sdl`
 	init internal do end
 
-	# Initialize the given SDL `subsystems`
-	fun initialize(subsystems: SDLInitFlags): Bool `{ return SDL_Init(subsystems); `}
+	# Initialize the given SDL `subsystems`, returns `false` on error
+	fun initialize(subsystems: SDLInitFlags): Bool `{ return SDL_Init(subsystems) == 0; `}
 
 	# Returns the latest SDL error
 	#
 	# After calling this method, you should also call `clear_error`.
-	fun error: NativeString `{ return (char*)SDL_GetError(); `}
+	fun error: CString `{ return (char*)SDL_GetError(); `}
 
 	# Clear the SDL error
 	fun clear_error `{ SDL_ClearError(); `}
@@ -65,7 +65,7 @@ class SDL
 	fun system_ram: Int `{ return SDL_GetSystemRAM(); `}
 
 	# Show a simple message box
-	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: NativeString) `{
+	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: CString) `{
 		SDL_ShowSimpleMessageBox(level, title, content, NULL);
 	`}
 
@@ -76,6 +76,25 @@ class SDL
 	# This method should not normally be used, refer to the SDL source code
 	# before use.
 	fun set_main_ready `{ SDL_SetMainReady(); `}
+
+	# Show or hide the cursor
+	fun show_cursor=(val: Bool) `{ SDL_ShowCursor(val? SDL_ENABLE: SDL_DISABLE); `}
+
+	# Is the cursor visible?
+	fun show_cursor: Bool `{ return SDL_ShowCursor(SDL_QUERY); `}
+
+	# Collect only relative mouse events and hide cursor
+	#
+	# Check `relative_mouse_mode` to see if the mode could be applied,
+	# if not, see `error`.
+	fun relative_mouse_mode=(value: Bool) `{
+		SDL_SetRelativeMouseMode(value);
+	`}
+
+	# Hide cursor and collect only relative mouse events?
+	fun relative_mouse_mode: Bool `{
+		return SDL_GetRelativeMouseMode();
+	`}
 end
 
 # Flags for `sys.sdl.initialize` and related methods
@@ -120,7 +139,7 @@ end
 # A window created by SDL
 extern class SDLWindow `{ SDL_Window * `}
 	# Create a window with the given `title`, `width` and `height`, also apply the `flags`
-	new (title: NativeString, width, height: Int, flags: SDLWindowFlags) `{
+	new (title: CString, width, height: Int, flags: SDLWindowFlags) `{
 		return SDL_CreateWindow(title,
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			width, height, flags);
@@ -138,7 +157,7 @@ extern class SDLWindow `{ SDL_Window * `}
 	# Show a simple message box
 	#
 	# Similar to `sys.sdl.show_simple_message_box` but attached to this window
-	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: NativeString) `{
+	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: CString) `{
 		SDL_ShowSimpleMessageBox(level, title, content, self);
 	`}
 
@@ -379,12 +398,48 @@ end
 extern class SDLSurface `{ SDL_Surface * `}
 
 	# Load the BMP file at `path`
-	new load_bmp(path: NativeString) `{ return SDL_LoadBMP(path); `}
+	new load_bmp(path: CString) `{ return SDL_LoadBMP(path); `}
 
 	redef fun free `{ SDL_FreeSurface(self); `}
 
 	# Save this texture to a BMP file
-	fun save_bmp(path: NativeString) `{ SDL_SaveBMP(self, path); `}
+	fun save_bmp(path: CString) `{ SDL_SaveBMP(self, path); `}
+
+	# Format of the pixels
+	fun format: SDL_PixelFormat `{ return self->format; `}
+
+	# Width in pixels
+	fun w: Int `{ return self->w; `}
+
+	# Height in pixels
+	fun h: Int `{ return self->h; `}
+
+	# Bytes in a row of pixels
+	fun pitch: Int `{ return self->pitch; `}
+
+	# Pointer to pixel data
+	fun pixels: Pointer `{ return self->pixels; `}
+end
+
+# Pixel format information
+extern class SDL_PixelFormat `{ SDL_PixelFormat * `}
+	# Number of significant bits in a pixel
+	fun bits_per_pixel: Int `{ return self->BitsPerPixel; `}
+
+	# Number of bytes required to hold a pixel
+	fun bytes_per_pixel: Int `{ return self->BytesPerPixel; `}
+
+	# Mask of the location of the red component
+	fun rmask: UInt32 `{ return self->Rmask; `}
+
+	# Mask of the location of the green component
+	fun gmask: UInt32 `{ return self->Gmask; `}
+
+	# Mask of the location of the blue component
+	fun bmask: UInt32 `{ return self->Bmask; `}
+
+	# Mask of the location of the alpha component
+	fun amask: UInt32 `{ return self->Amask; `}
 end
 
 # A loaded bitmap texture
@@ -526,7 +581,7 @@ extern class SDLRendererInfo `{ SDL_RendererInfo * `}
 	new malloc `{ return malloc(sizeof(SDL_RendererInfo)); `}
 
 	# Name of the renderer's driver
-	fun name: NativeString `{ return (char*)self->name; `}
+	fun name: CString `{ return (char*)self->name; `}
 
 	# Maximum texture width supported by the renderer
 	fun max_texture_width: Int `{ return self->max_texture_width; `}

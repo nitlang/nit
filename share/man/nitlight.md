@@ -15,6 +15,12 @@ Unlike generic lexical or syntactic highlighter, nitlight use semantic informati
 Common options of the Nit tools are understood.
 Here, only the specific one are indicated.
 
+### `--txt`
+Generate text with ANSI coloring escape sequences.
+
+Instead of HTML, this generate text files with ANSI escape sequence for colors.
+The options `-f`, `--line-id-prefix` and `--ast` are ignored in this mode.
+
 ### `-f`, `--fragment`
 Omit document header and footer.
 
@@ -58,6 +64,15 @@ Process also imported modules.
 By default, only the modules indicated on the command line are highlighted.
 
 With the `--full` option, all imported modules (even those in standard) are also precessed.
+
+### `--no-infobox`
+Disable the generation of infoboxes.
+
+### `--ast`
+Generate specific HTML elements for each Node of the AST.
+
+Additional `<span>` elements are generated for each node of the AST.
+The HTML generated can become quite large.
 
 # SEE ALSO
 

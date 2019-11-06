@@ -83,6 +83,8 @@ interface Boxed[N: Numeric]
 	# assert b.left == 2 and b.right == 8 and b.top == 13 and b.bottom == 7
 	# ~~~
 	fun padded(dist: N): Box[N] do return new Box[N].lrtb(left - dist, right + dist, top + dist, bottom - dist)
+
+	redef fun to_s do return "<{class_name} left: {left}, right: {right}, top: {top}, bottom: {bottom}>"
 end
 
 # A 2d bounded object and an implementation of `Boxed`
@@ -146,8 +148,6 @@ class Box[N: Numeric]
 	do
 		init(left, left+width, top, top - height)
 	end
-
-	redef fun to_s do return "<left: {left}, right: {right}, top: {top}, bottom: {bottom}>"
 end
 
 # An 3d abstract bounded object
@@ -195,6 +195,8 @@ interface Boxed3d[N: Numeric]
 	end
 
 	redef fun padded(dist): Box3d[N] do return new Box3d[N].lrtbfb(left - dist, right + dist, top + dist, bottom - dist, front + dist, back - dist)
+
+	redef fun to_s do return "<{class_name} left: {left}, right: {right}, top: {top}, bottom: {bottom}, front: {front}, back: {back}>"
 end
 
 # A 3d bounded object and an implementation of Boxed
@@ -278,8 +280,6 @@ class Box3d[N: Numeric]
 		self.front = front
 		self.back = front - depth
 	end
-
-	redef fun to_s do return "<left: {left}, right: {right}, top: {top}, bottom: {bottom}, front: {front}, back: {back}"
 end
 
 redef class IPoint[N]
@@ -322,22 +322,19 @@ interface BoxedCollection[E: Boxed[Numeric]]
 	fun items_overlapping(region :Boxed[Numeric]): SimpleCollection[E] is abstract
 end
 
-# A BoxedCollection implemented with an array, linear performances for searching but really
-# fast for creation and filling
+# `BoxedCollection` implemented by an array
+#
+# Linear performances for searching, but really fast creation and filling.
 class BoxedArray[E: Boxed[Numeric]]
 	super BoxedCollection[E]
+	super Array[E]
 
-	private var data: Array[E] = new Array[E]
-
-	redef fun add(item) do data.add(item)
-	redef fun items_overlapping(item): SimpleCollection[E]
+	redef fun items_overlapping(item)
 	do
 		var arr = new Array[E]
-		for i in data do
+		for i in self do
 			if i.intersects(item) then arr.add(i)
 		end
 		return arr
 	end
-
-	redef fun iterator do return data.iterator
 end

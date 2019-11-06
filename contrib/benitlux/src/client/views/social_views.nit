@@ -27,7 +27,7 @@ class SocialWindow
 
 	private var layout_header = new VerticalLayout(parent=list_search)
 	private var layout_search = new HorizontalLayout(parent=layout_header)
-	private var txt_query = new TextInput(parent=layout_search)
+	var txt_query = new TextInput(parent=layout_search)
 	private var but_search = new Button(parent=layout_search, text="Search".t)
 
 	private var layout_list = new HorizontalLayout(parent=layout_header)
@@ -66,7 +66,7 @@ class SocialWindow
 		var query = txt_query.text
 		if query == null or query.is_empty then return
 
-		var res = "rest/search?token={app.token}&query={query}&offset=0"
+		var res = "rest/search?token={app.token}&query={query.to_percent_encoding}&offset=0"
 		(new ListUsersAction(self, res)).start
 	end
 
@@ -110,7 +110,7 @@ class PeopleView
 		var favs = if not user_and_following.favs.is_empty then
 			"Favorites: %0".t.format(user_and_following.favs)
 		else "No favorites yet".t
-		var lbl_desc = new Label(parent=self, text=favs, size=0.5)
+		var lbl_desc = new DescLabel(parent=self, text=favs, size=0.5)
 	end
 end
 
@@ -118,7 +118,7 @@ end
 class FollowButton
 	super Button
 
-	autoinit followed_id, following, followed_by, parent, enabled, text
+	autoinit followed_id, following, followed_by, parent, enabled, text, size, align
 
 	# Id of the user to be followd/unfollow
 	var followed_id: Int

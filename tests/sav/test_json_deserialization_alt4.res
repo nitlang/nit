@@ -11,6 +11,9 @@
 	"n": null
 }
 
+# Back in Nit:
+<A: true a 0.123 1234 asdf false p4ssw0rd>
+
 # Nit:
 <B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>
 
@@ -25,6 +28,9 @@
 	"ii": 1111,
 	"ss": "qwer"
 }
+
+# Back in Nit:
+<B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>
 
 # Nit:
 <C: <A: true a 0.123 1234 asdf false p4ssw0rd> <B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>>
@@ -59,6 +65,9 @@
 	}
 }
 
+# Back in Nit:
+<C: <A: true a 0.123 1234 asdf false p4ssw0rd> <B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>>
+
 Serialization warning: Cycle detected in serialized object, replacing reference with 'null'.
 # Nit:
 <D: <B: <A: false b 123.123 2345 new line ->
@@ -77,52 +86,51 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 	"d": null
 }
 
+# Back in Nit:
+<D: <B: <A: false b 123.123 2345 new line ->
+<- false p4ssw0rd> 1111 	f"\/> false>
+
 # Nit:
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 # Json:
 {
-	"a": [
-		"hello",
-		1234,
-		123.4
-	],
-	"b": [
-		"hella",
-		2345,
-		234.5
-	]
+	"a": ["hello", 1234, 123.4],
+	"b": ["hella", 2345, 234.5]
 }
 
+# Back in Nit:
+<E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
+
 # Nit:
-<E: 2222>
+<F: 2222>
 
 # Json:
 {
 	"n": 2222
 }
 
+# Back in Nit:
+<F: 2222>
+
 # Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Json:
 {
 	"n": 33.33
 }
 
+# Back in Nit:
+<F: 33.33>
+
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 
 # Json:
 {
-	"hs": [
-		-1,
-		0
-	],
-	"s": [
-		"one",
-		"two"
-	],
+	"hs": [-1, 0],
+	"s": ["one", "two"],
 	"hm": {
 		"one": 1,
 		"two": 2
@@ -133,3 +141,8 @@ Serialization warning: Cycle detected in serialized object, replacing reference 
 	}
 }
 
+# Back in Nit:
+<G: hs: -1, 0; s: ; hm: one. 1, two. 2; am: three. 3, four. 4>
+
+Deserialization Error: Doesn't know how to deserialize class "Set[String]"
+Deserialization Error: Wrong type on `G::s` expected `Set[String]`, got `null`

@@ -14,7 +14,7 @@
 					<span>: </span>
 					<entity-signature mentity='mparam.mtype' />
 				</span>
-				<span ng-if='$middle'>, </span>
+				<span ng-if='!$last'>, </span>
 			</span>
 			<span>]</span>
 		</span>
@@ -22,7 +22,7 @@
 	<span ng-if='mentity.msignature'>
 		<span ng-if='mentity.msignature.arity > 0'>
 			<span>(</span>
-			<span ng-repeat='mparam in mentity.msignature.mparams'>
+			<span ng-repeat='mparam in mentity.msignature.mparameters'>
 				<span>
 					<span>{{mparam.name}}</span>
 					<span ng-if='mentity.is_intro !== false'>

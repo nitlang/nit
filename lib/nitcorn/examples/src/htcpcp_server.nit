@@ -17,7 +17,7 @@
 # Hyper Text Coffee Pot Control Protocol
 
 # A server that implements HTCPCP. At the moment there are no additions.
-module htcpcp_server
+module htcpcp_server is example
 
 import nitcorn
 
@@ -36,7 +36,7 @@ class HTCPCPAction
 		var method = http_request.method
 		var response: HttpResponse
 
-		if is_teapot == true then
+		if is_teapot then
 			response = new HttpResponse(418)
 			response.body = "I'm a teapot!\n"
 			response.header["Content-Type"] = "text"

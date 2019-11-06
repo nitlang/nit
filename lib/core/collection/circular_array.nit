@@ -19,11 +19,11 @@ import array
 
 # Efficient data structure to access both end of the sequence.
 #
-# A circular array offers efficient random access,
-# efficient manipulation for both ends of the structure (push, pop, ) and
+# A circular array offers efficient random access, efficient manipulation
+# at both ends of the structure (push, pop, shift and unshift) and
 # automatic amortized growth.
 #
-# Therefore it can be used as is or as and efficient queue (FIFO/LIFO)
+# Therefore it can be used as is or as an efficient queue (FIFO/LIFO).
 class CircularArray[E]
 	super Sequence[E]
 

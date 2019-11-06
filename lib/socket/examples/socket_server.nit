@@ -31,7 +31,7 @@ print "[PORT] : {socket.port.to_s}"
 var clients = new Array[TCPStream]
 var max = socket
 loop
-	var fs = new SocketObserver(true, true, true)
+	var fs = new SocketObserver.with_sets(true, true, true)
 	fs.read_set.add socket
 
 	for c in clients do fs.read_set.add c

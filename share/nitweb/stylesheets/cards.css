@@ -1,0 +1,70 @@
+/*
+ * Copyright 2017 Alexandre Terrasa <alexandre@moz-code.org>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* cards */
+
+.card.active {
+	border: 1px solid #1E9431;
+}
+
+.card-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.card {
+	display: table;
+	width: 100%;
+	background: #fff;
+	border: 1px solid #eee;
+	margin-top: 10px;
+	box-shadow: -1px -1px 3px rgba(0,0,0,.06), 1px 1px 3px rgba(0,0,0,.12);
+}
+
+.card-body, .card-left, .card-right {
+	display: table-cell;
+	padding: 15px;
+}
+
+.card-body {
+	padding: 15px 0;
+	width: 100%
+}
+
+.card-body:first-child {
+	padding-left: 15px;
+}
+
+.card-body:last-child {
+	padding-right: 15px;
+}
+
+.card-list {
+	margin-top: 10px;
+}
+
+.card-list > .card:first-child {
+	border-top: 1px solid #ddd;
+}
+
+.card-list > .card {
+	margin-top: 0;
+	border-top: none;
+}
+
+.card-title {
+    margin-top: 0;
+}

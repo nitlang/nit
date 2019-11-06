@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json::serialization
+import json
 import json::static
 
 class MyClass
@@ -49,7 +49,7 @@ tests.add """
 tests.add """
 {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "o": null, "a": ["one", "two"], "Some random attribute": 777}"""
 
-# Skipping `o` will cause an error but the attribute will be set to `null`
+# Skipping `o` will set the attribute to `null`
 tests.add """
 {"__class": "MyClass", "i": 123, "s": "hello", "f": 123.456, "a": ["one", "two"]}"""
 

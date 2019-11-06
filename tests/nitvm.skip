@@ -5,8 +5,10 @@ nit_args4
 nit_args5
 nit_args6
 nit_args8
+nit_args9
 nitvm_args1
 nitvm_args3
+nitin
 nitc_args1
 nitc_args3
 nitc_args5
@@ -42,3 +44,9 @@ test_rubix_visual
 test_rubix_cube
 test_csv
 repeating_key_xor_solve
+test_explain_assert
+base_notnull_lit_alt2
+assertions
+nitpm
+nitdoc
+test_astbuilder

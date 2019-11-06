@@ -25,15 +25,14 @@
 #
 #
 # A module for testing the classes in the bitmap module
-module test_bitmap is test_suite
+module test_bitmap is test
 
 import bitmap
-import test_suite
 
 class TestBitmap
-	super TestSuite
+	test
 
-	fun test_grayscale do
+	fun test_grayscale is test do
 		var bitmap = new Bitmap.with_size(400, 300)
 		for y in [0..300] do
 			for x in [0..200] do bitmap.set_pixel(x, y, 0x0077AAAA)

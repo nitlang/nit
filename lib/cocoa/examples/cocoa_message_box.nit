@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Simple message box using the Cocoa framework
-module cocoa_message_box
+module cocoa_message_box is example
 
 import cocoa
 

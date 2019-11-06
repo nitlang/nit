@@ -17,6 +17,8 @@ This directory contains small Nit programs and useful scripts to test the non re
   Useful before committing something.
 * `listfull.sh` lists tests that are run by `testfull.sh`.
   It is used by other scripts but can be used by human to see what is tested.
+  Each path is quoted using apostrophes, with `'\''` escaping an apostrophe.
+  This syntax is compatible with `xargs` and the POSIX shell.
 
   Currently, all files in `tests/`, `lib/` and `examples/` are executed, some of `contrib/` and the main programs of `src/`.
   To update the list of tested files, just edit this script.
@@ -321,6 +323,11 @@ $ cat out/zzz_test_post_proc.res
 
 The environment variable `NIT_TESTING` is set to `true` during the execution of program tests.
 Some libraries of programs can use it to produce specific reproducible results ; or just to exit their executions.
+
+`NIT_TESTING_TESTS_SH` is set to `true` for tests ran by `tests.sh` only, not by nitunit.
+
+`NIT_TESTING_ID` is set to an integer value unique between concurrent executions of `tests.sh`.
+Use it to name files, database entries, open sockets in order to avoid race conditions.
 
 ~~~
 $ cat zzz_tests/zzz_test_envvar.nit

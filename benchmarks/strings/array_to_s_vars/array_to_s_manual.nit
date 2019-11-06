@@ -33,7 +33,7 @@ redef class Array[E]
 			na[i] = tmp
 			i += 1
 		end
-		var ns = new NativeString(sl + 1)
+		var ns = new CString(sl + 1)
 		ns[sl] = '\0'
 		i = 0
 		var off = 0
@@ -52,6 +52,6 @@ redef class Array[E]
 			end
 			i += 1
 		end
-		return ns.to_s_with_length(sl)
+		return ns.to_s_unsafe(sl, copy=false)
 	end
 end

@@ -15,96 +15,16 @@
 # This is an example of a client of the frontend without command-line processing.
 #
 # It offers a simple nitcorn web server that offers a textarea and nitpick and nitlignt it.
-module nitlight_as_a_service
+module nitlight_as_a_service is example
 
 import frontend
-import highlight
+import htmlight
 import nitcorn
 import nitcorn::log
 import template
+import json::serialization_write
 
-# Fully process a content as a nit source file.
-fun hightlightcode(hl: HighlightVisitor, content: String): HLCode
-do
-	# Prepare a stand-alone tool context
-	var tc = new ToolContext
-	tc.nit_dir = tc.locate_nit_dir # still use the common lib to have core
-	tc.keep_going = true # no exit, obviously
-	tc.opt_warn.value = -1 # no output, obviously
-
-	# Prepare an stand-alone model and model builder.
-	# Unfortunately, models are enclosing and append-only.
-	# There is no way (yet?) to have a shared module `core` with
-	# isolated and throwable user modules.
-	var model = new Model
-	var mb = new ModelBuilder(model, tc)
-
-	# Parse the code
-	var source = new SourceFile.from_string("", content + "\n")
-	var lexer = new Lexer(source)
-	var parser = new Parser(lexer)
-	var tree = parser.parse
-
-	var hlcode = new HLCode(hl, content, source)
-
-	# Check syntax error
-	var eof = tree.n_eof
-	if eof isa AError then
-		mb.error(eof, eof.message)
-		hl.hightlight_source(source)
-		return hlcode
-	end
-	var amodule = tree.n_base.as(not null)
-
-	# Load the AST as a module in the model
-	# Then process it
-	mb.load_rt_module(null, amodule, "")
-	mb.run_phases
-
-	# Highlight the processed module
-	hl.enter_visit(amodule)
-	return hlcode
-end
-
-# A standalone highlighted piece of code
-class HLCode
-	# The highlighter used
-	var hl: HighlightVisitor
-
-	# The raw code source
-	var content: String
-
-	# The pseudo source-file
-	var source: SourceFile
-
-	# JavaScript code to update an existing codemirror editor.
-	fun code_mirror_update: Template
-	do
-
-		var res = new Template
-		res.add """
-	function nitmessage() {
-		editor.operation(function(){
-			for (var i = 0; i < widgets.length; ++i)
-			      editor.removeLineWidget(widgets[i]);
-			widgets.length = 0;
-"""
-
-		for m in source.messages do
-			res.add """
-			var l = document.createElement("div");
-			l.className = "lint-error"
-			l.innerHTML = "<span class='glyphicon glyphicon-warning-sign lint-error-icon'></span> {{{m.text.html_escape}}}";
-			var w = editor.addLineWidget({{{m.location.line_start-1}}}, l);
-			widgets.push(w);
-"""
-		end
-		res.add """});}"""
-		return res
-	end
-end
-
-# Nitcorn service to hightlight code
+# Nitcorn service to highlight code
 #
 # It's a single stand-alone page that has to form to itself.
 class HighlightAction
@@ -112,13 +32,20 @@ class HighlightAction
 
 	redef fun answer(http_request, turi)
 	do
-		var hl = new HighlightVisitor
+		var hl = new HtmlightVisitor
 		var page = new Template
 
 		# There is code? Process it
 		var code = http_request.post_args.get_or_null("code")
 		var hlcode = null
-		if code != null then hlcode = hightlightcode(hl, code)
+		if code != null then hlcode = hl.highlightcode(code)
+
+		if http_request.post_args.get_or_null("json") == "true" and hlcode != null then
+			var response = new HttpResponse(200)
+			response.header["Content-Type"] = "text/json"
+			response.body = hlcode.to_json
+			return response
+		end
 
 		if http_request.post_args.get_or_null("ajax") == "true" and hlcode != null then
 			page.add hlcode.code_mirror_update

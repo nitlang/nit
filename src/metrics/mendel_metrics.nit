@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The mndel model helps to understand class hierarchies
+# The Mendel model helps to understand class hierarchies.
 #
 # It provides metrics to extract interesting classes:
 #
@@ -38,9 +38,9 @@
 # * replacers that have less redefinitions that call super than not calling it
 #
 # For more details see
-#  Mendel: A Model, Metrics and Rules to Understan Class Hierarchies
-#  S. Denier and Y. Gueheneuc
-#  in Proceedings of the 16th IEEE International Conference on Program Comprehension (OCPC'08)
+# “Mendel: A Model, Metrics and Rules to Understand Class Hierarchies,”
+# by S. Denier and Y. Gueheneuc,
+# in *Proceedings of the 16th IEEE International Conference on Program Comprehension* (OCPC'08).
 module mendel_metrics
 
 import metrics_base
@@ -67,17 +67,17 @@ private class MendelMetricsPhase
 		print toolcontext.format_h1("\n# Mendel metrics")
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = model.protected_view
+		var filter = new ModelFilter(min_visibility = protected_visibility)
 
 		var mclasses = new HashSet[MClass]
-		for mclass in model_view.mclasses do
+		for mclass in model.collect_mclasses(filter) do
 			if mclass.is_interface then continue
 			mclasses.add(mclass)
 		end
 
-		var cnblp = new CNBLP(mainmodule, model_view)
-		var cnvi = new CNVI(mainmodule)
-		var cnvs = new CNVS(mainmodule)
+		var cnblp = new CNBLP(model, mainmodule, filter)
+		var cnvi = new CNVI(model, mainmodule, filter)
+		var cnvs = new CNVS(model, mainmodule, filter)
 
 		var metrics = new MetricSet
 		metrics.register(cnblp, cnvi, cnvs)
@@ -113,15 +113,15 @@ private class MendelMetricsPhase
 			csvh.separator = ';'
 			csvh.header = ["povr", "ovr", "pext", "ext", "pspe", "spe", "prep", "rep", "eq"]
 			for mclass in mclasses do
-				var povr = mclass.is_pure_overrider(model_view).object_id
-				var ovr = mclass.is_overrider(model_view).object_id
-				var pext = mclass.is_pure_extender(model_view).object_id
-				var ext = mclass.is_extender(model_view).object_id
-				var pspe = mclass.is_pure_specializer(model_view).object_id
-				var spe = mclass.is_pure_specializer(model_view).object_id
-				var prep = mclass.is_pure_replacer(model_view).object_id
-				var rep = mclass.is_replacer(model_view).object_id
-				var eq = mclass.is_equal(model_view).object_id
+				var povr = mclass.is_pure_overrider(filter).object_id
+				var ovr = mclass.is_overrider(filter).object_id
+				var pext = mclass.is_pure_extender(filter).object_id
+				var ext = mclass.is_extender(filter).object_id
+				var pspe = mclass.is_pure_specializer(filter).object_id
+				var spe = mclass.is_pure_specializer(filter).object_id
+				var prep = mclass.is_pure_replacer(filter).object_id
+				var rep = mclass.is_replacer(filter).object_id
+				var eq = mclass.is_equal(filter).object_id
 				csvh.add_record(povr, ovr, pext, ext, pspe, spe, prep, rep, eq)
 			end
 			csvh.write_to_file("{out}/inheritance_behaviour.csv")
@@ -137,13 +137,9 @@ class CBMS
 	redef fun name do return "cbms"
 	redef fun desc do return "branch mean size, mean number of introduction available among ancestors"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var totc = mclass.collect_accessible_mproperties(protected_view).length
+			var totc = mclass.collect_accessible_mproperties(mainmodule, filter).length
 			var ditc = mclass.in_hierarchy(mainmodule).depth
 			values[mclass] = totc.to_f / (ditc + 1).to_f
 		end
@@ -160,8 +156,8 @@ class MBMS
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
-			var totc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-			totc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+			var totc = mmodule.collect_intro_mclassdefs(filter).length
+			totc += mmodule.collect_redef_mclassdefs(filter).length
 			var ditc = mmodule.in_importation.depth
 			values[mmodule] = totc.to_f / (ditc + 1).to_f
 		end
@@ -176,12 +172,8 @@ class CNVI
 	redef fun name do return "cnvi"
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
-		var cbms = new CBMS(mainmodule)
+		var cbms = new CBMS(model, mainmodule, filter)
 		for mclass in mclasses do
 			# compute branch mean size
 			var parents = mclass.in_hierarchy(mainmodule).direct_greaters
@@ -189,7 +181,7 @@ class CNVI
 				cbms.clear
 				cbms.collect(new HashSet[MClass].from(parents))
 				# compute class novelty index
-				var locc = mclass.collect_accessible_mproperties(protected_view).length
+				var locc = mclass.collect_accessible_mproperties(mainmodule, filter).length
 				values[mclass] = locc.to_f / cbms.avg
 			else
 				values[mclass] = 0.0
@@ -207,7 +199,7 @@ class MNVI
 	redef fun desc do return "module novelty index, contribution of the module to its branch in term of introductions"
 
 	redef fun collect(mmodules) do
-		var mbms = new MBMS
+		var mbms = new MBMS(model, mainmodule, filter)
 		for mmodule in mmodules do
 			# compute branch mean size
 			var parents = mmodule.in_importation.direct_greaters
@@ -215,8 +207,8 @@ class MNVI
 				mbms.clear
 				mbms.collect(new HashSet[MModule].from(parents))
 				# compute module novelty index
-				var locc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-				locc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+				var locc = mmodule.collect_intro_mclassdefs(filter).length
+				locc += mmodule.collect_redef_mclassdefs(filter).length
 				values[mmodule] = locc.to_f / mbms.avg
 			else
 				values[mmodule] = 0.0
@@ -233,15 +225,11 @@ class CNVS
 	redef fun name do return "cnvs"
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
-	# Mainmodule used to compute class hierarchy.
-	var mainmodule: MModule
-	private var protected_view: ModelView = mainmodule.model.protected_view is lateinit
-
 	redef fun collect(mclasses) do
-		var cnvi = new CNVI(mainmodule)
+		var cnvi = new CNVI(model, mainmodule, filter)
 		cnvi.collect(mclasses)
 		for mclass in mclasses do
-			var locc = mclass.collect_local_mproperties(protected_view).length
+			var locc = mclass.collect_local_mproperties(filter).length
 			values[mclass] = cnvi.values[mclass] * locc.to_f
 		end
 	end
@@ -256,11 +244,11 @@ class MNVS
 	redef fun desc do return "module novelty score, importance of the contribution of the module to its branch"
 
 	redef fun collect(mmodules) do
-		var mnvi = new MNVI
+		var mnvi = new MNVI(model, mainmodule, filter)
 		mnvi.collect(mmodules)
 		for mmodule in mmodules do
-			var locc = mmodule.collect_intro_mclassdefs(mmodule.protected_view).length
-			locc += mmodule.collect_redef_mclassdefs(mmodule.protected_view).length
+			var locc = mmodule.collect_intro_mclassdefs(filter).length
+			locc += mmodule.collect_redef_mclassdefs(filter).length
 			values[mmodule] = mnvi.values[mmodule] * locc.to_f
 		end
 	end
@@ -268,11 +256,11 @@ end
 
 redef class MClass
 	# the set of redefition that call to super
-	fun extended_mproperties(view: ModelView): Set[MProperty] do
+	fun extended_mproperties(filter: ModelFilter): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if not view.accept_mentity(mpropdef) then continue
+				if not filter.accept_mentity(mpropdef) then continue
 				if not mpropdef.has_supercall then continue
 				if mpropdef.mproperty.intro_mclassdef.mclass != self then set.add(mpropdef.mproperty)
 			end
@@ -281,11 +269,11 @@ redef class MClass
 	end
 
 	# the set of redefition that do not call to super
-	fun overriden_mproperties(view: ModelView): Set[MProperty] do
+	fun overriden_mproperties(filter: ModelFilter): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if not view.accept_mentity(mpropdef) then continue
+				if not filter.accept_mentity(mpropdef) then continue
 				if mpropdef.has_supercall then continue
 				if mpropdef.mproperty.intro_mclassdef.mclass != self then set.add(mpropdef.mproperty)
 			end
@@ -294,78 +282,78 @@ redef class MClass
 	end
 
 	# pure overriders contain only redefinitions
-	private fun is_pure_overrider(view: ModelView): Bool do
-		var news = collect_intro_mproperties(view).length
-		var locs = collect_local_mproperties(view).length
+	private fun is_pure_overrider(filter: ModelFilter): Bool do
+		var news = collect_intro_mproperties(filter).length
+		var locs = collect_local_mproperties(filter).length
 		if news == 0 and locs > 0 then return true
 		return false
 	end
 
 	# overriders contain more definitions than introductions
-	private fun is_overrider(view: ModelView): Bool do
-		var rdfs = collect_redef_mproperties(view).length
-		var news = collect_intro_mproperties(view).length
-		var locs = collect_local_mproperties(view).length
+	private fun is_overrider(filter: ModelFilter): Bool do
+		var rdfs = collect_redef_mproperties(filter).length
+		var news = collect_intro_mproperties(filter).length
+		var locs = collect_local_mproperties(filter).length
 		if rdfs >= news and locs > 0 then return true
 		return false
 	end
 
 	# pure extenders contain only introductions
-	private fun is_pure_extender(view: ModelView): Bool do
-		var rdfs = collect_redef_mproperties(view).length
-		var locs = collect_local_mproperties(view).length
+	private fun is_pure_extender(filter: ModelFilter): Bool do
+		var rdfs = collect_redef_mproperties(filter).length
+		var locs = collect_local_mproperties(filter).length
 		if rdfs == 0 and locs > 0 then return true
 		return false
 	end
 
 	# extenders contain more introduction than redefinitions
-	private fun is_extender(view: ModelView): Bool do
-		var rdfs = collect_redef_mproperties(view).length
-		var news = collect_intro_mproperties(view).length
-		var locs = collect_local_mproperties(view).length
+	private fun is_extender(filter: ModelFilter): Bool do
+		var rdfs = collect_redef_mproperties(filter).length
+		var news = collect_intro_mproperties(filter).length
+		var locs = collect_local_mproperties(filter).length
 		if news > rdfs and locs > 0 then return true
 		return false
 	end
 
 	# pure specializers always call to super in its redefinitions
-	private fun is_pure_specializer(view: ModelView): Bool do
-		var ovrs = overriden_mproperties(view).length
-		var rdfs = collect_redef_mproperties(view).length
+	private fun is_pure_specializer(filter: ModelFilter): Bool do
+		var ovrs = overriden_mproperties(filter).length
+		var rdfs = collect_redef_mproperties(filter).length
 		if ovrs == 0 and rdfs > 0 then return true
 		return false
 	end
 
 	# specializers have more redefinitions that call super than not calling it
-	private fun is_specializer(view: ModelView): Bool do
-		var spcs = extended_mproperties(view).length
-		var ovrs = overriden_mproperties(view).length
-		var rdfs = collect_redef_mproperties(view).length
+	private fun is_specializer(filter: ModelFilter): Bool do
+		var spcs = extended_mproperties(filter).length
+		var ovrs = overriden_mproperties(filter).length
+		var rdfs = collect_redef_mproperties(filter).length
 		if spcs > ovrs and rdfs > 0 then return true
 		return false
 	end
 
 	# pure replacers never call to super in its redefinitions
-	private fun is_pure_replacer(view: ModelView): Bool do
-		var spcs = extended_mproperties(view).length
-		var rdfs = collect_redef_mproperties(view).length
+	private fun is_pure_replacer(filter: ModelFilter): Bool do
+		var spcs = extended_mproperties(filter).length
+		var rdfs = collect_redef_mproperties(filter).length
 		if spcs == 0 and rdfs > 0 then return true
 		return false
 	end
 
 	# replacers have less redefinitions that call super than not calling it
-	private fun is_replacer(view: ModelView): Bool do
-		var spcs = extended_mproperties(view).length
-		var ovrs = overriden_mproperties(view).length
-		var rdfs = collect_redef_mproperties(view).length
+	private fun is_replacer(filter: ModelFilter): Bool do
+		var spcs = extended_mproperties(filter).length
+		var ovrs = overriden_mproperties(filter).length
+		var rdfs = collect_redef_mproperties(filter).length
 		if ovrs > spcs and rdfs > 0 then return true
 		return false
 	end
 
 	# equals contain as redifinition than introduction
-	private fun is_equal(view: ModelView): Bool do
-		var spcs = extended_mproperties(view).length
-		var ovrs = overriden_mproperties(view).length
-		var rdfs = collect_redef_mproperties(view).length
+	private fun is_equal(filter: ModelFilter): Bool do
+		var spcs = extended_mproperties(filter).length
+		var ovrs = overriden_mproperties(filter).length
+		var rdfs = collect_redef_mproperties(filter).length
 		if spcs == ovrs and rdfs > 0 then return true
 		return false
 	end

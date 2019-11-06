@@ -4,9 +4,9 @@ excluded test_prog
 excluded test_prog
 
 # mmodules:
-careers character combat excluded game platform races rpg test_prog
+careers character combat excluded game game_examples platform races rpg test_game test_prog
 ------------------------------------
-careers character combat excluded game platform races rpg test_prog
+careers character combat excluded game game_examples platform races rpg test_game test_prog
 
 # mclasses:
 Alcoholic Bool Career Character Combatable Dwarf Elf Float Game Human Int List Magician Object Race Starter String Sys Warrior Weapon

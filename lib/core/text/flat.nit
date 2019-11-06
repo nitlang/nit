@@ -36,16 +36,16 @@ end
 
 redef class FlatText
 
-	# First byte of the NativeString
+	# First byte of the CString
 	protected fun first_byte: Int do return 0
 
-	# Last byte of the NativeString
+	# Last byte of the CString
 	protected fun last_byte: Int do return first_byte + _byte_length - 1
 
 	# Cache of the latest position (char) explored in the string
 	var position: Int = 0
 
-	# Cached position (bytes) in the NativeString underlying the String
+	# Cached position (bytes) in the CString underlying the String
 	var bytepos: Int = 0
 
 	# Index of the character `index` in `_items`
@@ -55,7 +55,7 @@ redef class FlatText
 		var its = _items
 
 		if dpos == 1 then
-			if its[b] & 0x80u8 == 0x00u8 then
+			if its[b] & 0x80 == 0x00 then
 				b += 1
 			else
 				b += its.length_of_char_at(b)
@@ -113,17 +113,17 @@ redef class FlatText
 		var endlen = 0
 		while pos <= max do
 			var c = its[pos]
-			if c == 0x3Cu8 then
+			if c == u'<' then
 				endlen += 3
-			else if c == 0x3Eu8 then
+			else if c == u'>' then
 				endlen += 3
-			else if c == 0x26u8 then
+			else if c == u'&' then
 				endlen += 4
-			else if c == 0x22u8 then
+			else if c == u'"' then
 				endlen += 4
-			else if c == 0x27u8 then
+			else if c == u'\'' then
 				endlen += 4
-			else if c == 0x2Fu8 then
+			else if c == 0x2F then
 				endlen += 4
 			end
 			pos += 1
@@ -139,59 +139,52 @@ redef class FlatText
 		var max = last_byte
 		var pos = first_byte
 		var nlen = extra + _byte_length
-		var nits = new NativeString(nlen)
+		var nits = new CString(nlen)
 		var outpos = 0
 		while pos <= max do
 			var c = its[pos]
 			# Special codes:
 			# Some HTML characters are used as meta-data, they need
 			# to be replaced by an HTML-Escaped equivalent
-			#
-			# * 0x3C (<) => &lt;
-			# * 0x3E (>) => &gt;
-			# * 0x26 (&) => &amp;
-			# * 0x22 (") => &#34;
-			# * 0x27 (') => &#39;
-			# * 0x2F (/) => &#47;
-			if c == 0x3Cu8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x6Cu8
-				nits[outpos + 2] = 0x74u8
-				nits[outpos + 3] = 0x3Bu8
+			if c == u'<' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'l'
+				nits[outpos + 2] = u't'
+				nits[outpos + 3] = u';'
 				outpos += 4
-			else if c == 0x3Eu8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x67u8
-				nits[outpos + 2] = 0x74u8
-				nits[outpos + 3] = 0x3Bu8
+			else if c == u'>' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'g'
+				nits[outpos + 2] = u't'
+				nits[outpos + 3] = u';'
 				outpos += 4
-			else if c == 0x26u8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x61u8
-				nits[outpos + 2] = 0x6Du8
-				nits[outpos + 3] = 0x70u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == u'&' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'a'
+				nits[outpos + 2] = u'm'
+				nits[outpos + 3] = u'p'
+				nits[outpos + 4] = u';'
 				outpos += 5
-			else if c == 0x22u8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x23u8
-				nits[outpos + 2] = 0x33u8
-				nits[outpos + 3] = 0x34u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == u'"' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'#'
+				nits[outpos + 2] = u'3'
+				nits[outpos + 3] = u'4'
+				nits[outpos + 4] = u';'
 				outpos += 5
-			else if c == 0x27u8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x23u8
-				nits[outpos + 2] = 0x33u8
-				nits[outpos + 3] = 0x39u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == u'\'' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'#'
+				nits[outpos + 2] = u'3'
+				nits[outpos + 3] = u'9'
+				nits[outpos + 4] = u';'
 				outpos += 5
-			else if c == 0x2Fu8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x23u8
-				nits[outpos + 2] = 0x34u8
-				nits[outpos + 3] = 0x37u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == u'/' then
+				nits[outpos] = u'&'
+				nits[outpos + 1] = u'#'
+				nits[outpos + 2] = u'4'
+				nits[outpos + 3] = u'7'
+				nits[outpos + 4] = u';'
 				outpos += 5
 			else
 				nits[outpos] = c
@@ -215,33 +208,33 @@ redef class FlatText
 		var req_esc = 0
 		while pos <= max do
 			var c = its[pos]
-			if c == 0x0Au8 then
+			if c == u'\n' then
 				req_esc += 1
-			else if c == 0x09u8 then
+			else if c == u'\t' then
 				req_esc += 1
-			else if c == 0x22u8 then
+			else if c == u'"' then
 				req_esc += 1
-			else if c == 0x27u8 then
+			else if c == u'\'' then
 				req_esc += 1
-			else if c == 0x5Cu8 then
+			else if c == u'\\' then
 				req_esc += 1
-			else if c == 0x3Fu8 then
+			else if c == u'?' then
 				var j = pos + 1
 				if j < length then
 					var next = its[j]
 					# We ignore `??'` because it will be escaped as `??\'`.
 					if
-						next == 0x21u8 or
-						next == 0x28u8 or
-						next == 0x29u8 or
-						next == 0x2Du8 or
-						next == 0x2Fu8 or
-						next == 0x3Cu8 or
-						next == 0x3Du8 or
-						next == 0x3Eu8
+						next == 0x21 or
+						next == 0x28 or
+						next == 0x29 or
+						next == 0x2D or
+						next == 0x2F or
+						next == 0x3C or
+						next == 0x3D or
+						next == 0x3E
 					then req_esc += 1
 				end
-			else if c < 32u8 then
+			else if c < 32 then
 				req_esc += 3
 			end
 			pos += 1
@@ -255,7 +248,7 @@ redef class FlatText
 		var its = _items
 		var max = last_byte
 		var nlen = _byte_length + ln_extra
-		var nns = new NativeString(nlen)
+		var nns = new CString(nlen)
 		var pos = first_byte
 		var opos = 0
 		while pos <= max do
@@ -276,52 +269,52 @@ redef class FlatText
 			# * 0x22 => \"
 			# * 0x27 => \'
 			# * 0x5C => \\
-			if c == 0x09u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x74u8
+			if c == u'\t' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u't'
 				opos += 2
-			else if c == 0x0Au8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x6Eu8
+			else if c == u'\n' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'n'
 				opos += 2
-			else if c == 0x22u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x22u8
+			else if c == u'"' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'"'
 				opos += 2
-			else if c == 0x27u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x27u8
+			else if c == u'\'' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'\''
 				opos += 2
-			else if c == 0x5Cu8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x5Cu8
+			else if c == u'\\' then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'\\'
 				opos += 2
-			else if c == 0x3Fu8 then
+			else if c == u'?' then
 				var j = pos + 1
 				if j < length then
 					var next = its[j]
 					# We ignore `??'` because it will be escaped as `??\'`.
 					if
-						next == 0x21u8 or
-						next == 0x28u8 or
-						next == 0x29u8 or
-						next == 0x2Du8 or
-						next == 0x2Fu8 or
-						next == 0x3Cu8 or
-						next == 0x3Du8 or
-						next == 0x3Eu8
+						next == 0x21 or
+						next == 0x28 or
+						next == 0x29 or
+						next == 0x2D or
+						next == 0x2F or
+						next == 0x3C or
+						next == 0x3D or
+						next == 0x3E
 					then
-						nns[opos] = 0x5Cu8
+						nns[opos] = 0x5C
 						opos += 1
 					end
 				end
-				nns[opos] = 0x3Fu8
+				nns[opos] = 0x3F
 				opos += 1
-			else if c < 32u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x30u8
-				nns[opos + 2] = ((c & 0x38u8) >> 3) + 0x30u8
-				nns[opos + 3] = (c & 0x07u8) + 0x30u8
+			else if c < 32 then
+				nns[opos] = u'\\'
+				nns[opos + 1] = u'0'
+				nns[opos + 2] = ((c & 0x38) >> 3) + u'0'
+				nns[opos + 3] = (c & 0x07) + u'0'
 				opos += 4
 			else
 				nns[opos] = c
@@ -329,7 +322,7 @@ redef class FlatText
 			end
 			pos += 1
 		end
-		return nns.to_s_unsafe(nlen)
+		return nns.to_s_unsafe(nlen, copy=false, clean=false)
 	end
 
 	redef fun [](index) do
@@ -346,7 +339,7 @@ redef class FlatText
 		if dpos == 1 and index < len - 1 then
 			var its = _items
 			var c = its[b]
-			if c & 0x80u8 == 0x00u8 then
+			if c & 0x80 == 0x00 then
 				# We want the next, and current is easy.
 				# So next is easy to find!
 				b += 1
@@ -358,20 +351,20 @@ redef class FlatText
 		else if dpos == -1 and index > 1 then
 			var its = _items
 			var c = its[b-1]
-			if c & 0x80u8 == 0x00u8 then
+			if c & 0x80 == 0x00 then
 				# We want the previous, and it is easy.
 				b -= 1
 				dpos = 0
 				_position = index
 				_bytepos = b
-				return c.ascii
+				return c.code_point
 			end
 		end
 		if dpos == 0 then
 			# We know what we want (+0 or +1) just get it now!
 			var its = _items
 			var c = its[b]
-			if c & 0x80u8 == 0x00u8 then return c.ascii
+			if c & 0x80 == 0x00 then return c.code_point
 			return items.char_at(b)
 		end
 
@@ -386,7 +379,7 @@ redef class FlatText
 		var i = char_to_byte_index(index)
 		var items = _items
 		var b = items[i]
-		if b & 0x80u8 == 0x00u8 then return b.ascii
+		if b & 0x80 == 0x00 then return b.code_point
 		return items.char_at(i)
 	end
 
@@ -402,7 +395,7 @@ redef class FlatText
 		var max = pos + ln
 		for i in [pos .. max[ do
 			res <<= 4
-			res += its[i].ascii.from_hex
+			res += its[i].code_point.from_hex
 		end
 		return res
 	end
@@ -426,9 +419,9 @@ abstract class FlatString
 
 	redef fun to_cstring do
 		var blen = _byte_length
-		var new_items = new NativeString(blen + 1)
+		var new_items = new CString(blen + 1)
 		_items.copy_to(new_items, blen, _first_byte, 0)
-		new_items[blen] = 0u8
+		new_items[blen] = 0
 		return new_items
 	end
 
@@ -530,7 +523,7 @@ abstract class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private new with_infos(items: NativeString, byte_length, from: Int)
+	private new with_infos(items: CString, byte_length, from: Int)
 	do
 		var len = items.utf8_length(from, byte_length)
 		if byte_length == len then return new ASCIIFlatString.full_data(items, byte_length, from, len)
@@ -541,7 +534,7 @@ abstract class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private new full(items: NativeString, byte_length, from, length: Int)
+	private new full(items: CString, byte_length, from, length: Int)
 	do
 		if byte_length == length then return new ASCIIFlatString.full_data(items, byte_length, from, length)
 		return new UnicodeFlatString.full_data(items, byte_length, from, length)
@@ -614,7 +607,7 @@ abstract class FlatString
 		if s isa FlatText then
 			var sits = s._items
 			var sifrom = s.first_byte
-			var ns = new NativeString(nlen + 1)
+			var ns = new CString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
 			return new FlatString.full(ns, nlen, 0, _length + o.length)
@@ -630,8 +623,8 @@ abstract class FlatString
 		var newlen = mylen * i
 		var its = _items
 		var fb = _first_byte
-		var ns = new NativeString(new_byte_length + 1)
-		ns[new_byte_length] = 0u8
+		var ns = new CString(new_byte_length + 1)
+		ns[new_byte_length] = 0
 		var offset = 0
 		while i > 0 do
 			its.copy_to(ns, mybtlen, fb, offset)
@@ -669,7 +662,7 @@ end
 private class UnicodeFlatString
 	super FlatString
 
-	init full_data(items: NativeString, byte_length, from, length: Int) do
+	init full_data(items: CString, byte_length, from, length: Int) do
 		self._items = items
 		self._length = length
 		self._byte_length = byte_length
@@ -693,7 +686,7 @@ end
 private class ASCIIFlatString
 	super FlatString
 
-	init full_data(items: NativeString, byte_length, from, length: Int) do
+	init full_data(items: CString, byte_length, from, length: Int) do
 		self._items = items
 		self._length = length
 		self._byte_length = byte_length
@@ -703,7 +696,7 @@ private class ASCIIFlatString
 
 	redef fun [](idx) do
 		assert idx < _byte_length and idx >= 0
-		return _items[idx + _first_byte].ascii
+		return _items[idx + _first_byte].code_point
 	end
 
 	redef fun substring(from, count) do
@@ -736,7 +729,7 @@ private class ASCIIFlatString
 		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
 	end
 
-	redef fun fetch_char_at(i) do return _items[i + _first_byte].ascii
+	redef fun fetch_char_at(i) do return _items[i + _first_byte].code_point
 end
 
 private class FlatStringCharReverseIterator
@@ -791,11 +784,11 @@ private class FlatStringCharView
 end
 
 private class FlatStringByteReverseIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatString
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -817,11 +810,11 @@ private class FlatStringByteReverseIterator
 end
 
 private class FlatStringByteIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatString
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -884,12 +877,12 @@ class FlatBuffer
 
 	redef fun substrings do return new FlatSubstringsIter(self)
 
-	# Re-copies the `NativeString` into a new one and sets it as the new `Buffer`
+	# Re-copies the `CString` into a new one and sets it as the new `Buffer`
 	#
 	# This happens when an operation modifies the current `Buffer` and
 	# the Copy-On-Write flag `written` is set at true.
 	private fun reset do
-		var nns = new NativeString(capacity)
+		var nns = new CString(capacity)
 		if _byte_length != 0 then _items.copy_to(nns, _byte_length, 0, 0)
 		_items = nns
 		written = false
@@ -904,7 +897,7 @@ class FlatBuffer
 		var bt = _byte_length
 		if bt + len > capacity then
 			capacity = capacity * 2 + 2
-			nit = new NativeString(capacity)
+			nit = new CString(capacity)
 			oit.copy_to(nit, 0, 0, from)
 		end
 		oit.copy_to(nit, bt - from, from, from + len)
@@ -941,6 +934,38 @@ class FlatBuffer
 		it.set_char_at(ip, item)
 	end
 
+	redef fun insert(s, pos) do
+		assert pos >= 0 and pos <= length
+		if pos == length then
+			append s
+			return
+		end
+		var slen = s.byte_length
+		enlarge(byte_length + slen)
+		var it = _items
+		var shpos = it.char_to_byte_index(pos)
+		rshift_bytes(shpos, slen)
+		s.copy_to_native(it, slen, 0, shpos)
+		length += s.length
+		byte_length += slen
+	end
+
+	redef fun insert_char(c, pos) do
+		assert pos >= 0 and pos <= length
+		if pos == length then
+			add c
+			return
+		end
+		var clen = c.u8char_len
+		enlarge(byte_length + clen)
+		var it = _items
+		var shpos = it.char_to_byte_index(pos)
+		rshift_bytes(shpos, clen)
+		it.set_char_at(shpos, c)
+		length += 1
+		byte_length += clen
+	end
+
 	redef fun add(c)
 	do
 		if written then reset
@@ -973,7 +998,7 @@ class FlatBuffer
 		# it does a copy of the current `Buffer`
 		written = false
 		var bln = _byte_length
-		var a = new NativeString(c)
+		var a = new CString(c)
 		if bln > 0 then
 			var it = _items
 			if bln > 0 then it.copy_to(a, bln, 0, 0)
@@ -986,15 +1011,15 @@ class FlatBuffer
 	do
 		written = true
 		var bln = _byte_length
-		if bln == 0 then _items = new NativeString(1)
+		if bln == 0 then _items = new CString(1)
 		return new FlatString.full(_items, bln, 0, _length)
 	end
 
 	redef fun to_cstring
 	do
 		var bln = _byte_length
-		var new_native = new NativeString(bln + 1)
-		new_native[bln] = 0u8
+		var new_native = new CString(bln + 1)
+		new_native[bln] = 0
 		if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
 		return new_native
 	end
@@ -1009,7 +1034,7 @@ class FlatBuffer
 	#
 	# If `_items` is shared, `written` should be set to true after the creation
 	# so that a modification will do a copy-on-write.
-	private init with_infos(items: NativeString, capacity, byte_length, length: Int)
+	private init with_infos(items: CString, capacity, byte_length, length: Int)
 	do
 		self._items = items
 		self.capacity = capacity
@@ -1020,7 +1045,7 @@ class FlatBuffer
 	# Create a new string copied from `s`.
 	init from(s: Text)
 	do
-		_items = new NativeString(s.byte_length)
+		_items = new CString(s.byte_length)
 		for i in s.substrings do i._items.copy_to(_items, i._byte_length, first_byte, 0)
 		_byte_length = s.byte_length
 		_length = s.length
@@ -1031,7 +1056,7 @@ class FlatBuffer
 	init with_capacity(cap: Int)
 	do
 		assert cap >= 0
-		_items = new NativeString(cap)
+		_items = new CString(cap)
 		capacity = cap
 		_byte_length = 0
 	end
@@ -1073,7 +1098,7 @@ class FlatBuffer
 		var byteto = its.char_to_byte_index(count + from - 1)
 		byteto += its.char_at(byteto).u8char_len - 1
 		var byte_length = byteto - bytefrom + 1
-		var r_items = new NativeString(byte_length)
+		var r_items = new CString(byte_length)
 		its.copy_to(r_items, byte_length, bytefrom, 0)
 		return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
 	end
@@ -1084,13 +1109,27 @@ class FlatBuffer
 			super
 			return
 		end
+		var sits = s._items
 		var bytest = s.char_to_byte_index(from)
 		var bytend = s.char_to_byte_index(from + length - 1)
-		var btln = bytend - bytest + 1
+		var btln = bytend - bytest + sits.char_at(bytend).u8char_len
 		enlarge(btln + _byte_length)
-		s._items.copy_to(_items, btln, bytest, _byte_length)
+		sits.copy_to(_items, btln, bytest, _byte_length)
 		_byte_length += btln
 		_length += length
+	end
+
+	redef fun remove_at(p, len) do
+		if len == null then len = 1
+		if len == 0 then return
+		var its = _items
+		var bst = char_to_byte_index(p)
+		var bend = char_to_byte_index(p + len - 1)
+		bend += its.char_at(bend).u8char_len
+		var blen = bend - bst
+		lshift_bytes(bend, bend - bst)
+		byte_length -= blen
+		length -= len
 	end
 
 	redef fun reverse
@@ -1124,11 +1163,11 @@ class FlatBuffer
 end
 
 private class FlatBufferByteReverseIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatBuffer
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
@@ -1158,15 +1197,15 @@ private class FlatBufferByteView
 end
 
 private class FlatBufferByteIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
 	var target: FlatBuffer
 
-	var target_items: NativeString is noautoinit
+	var target_items: CString is noautoinit
 
 	var curr_pos: Int
 
-	init do target_items = target._items
+	init do if isset target._items then target_items = target._items
 
 	redef fun index do return curr_pos
 
@@ -1261,42 +1300,49 @@ private class FlatBufferCharIterator
 
 end
 
-redef class NativeString
-	redef fun to_s
+redef class CString
+
+	# Get a `String` from the data at `self` copied into Nit memory
+	#
+	# Require: `self` is a null-terminated string.
+	redef fun to_s do return to_s_unsafe
+
+	# Get a `String` from `byte_length` bytes at `self` copied into Nit memory
+	#
+	# The string is cleaned.
+	fun to_s_with_length(byte_length: Int): String do return to_s_unsafe(byte_length)
+
+	redef fun to_s_unsafe(byte_length, char_length, copy, clean)
 	do
-		return to_s_with_length(cstring_length)
-	end
+		byte_length = byte_length or else cstring_length
+		clean = clean or else true
+		copy = copy or else true
 
-	redef fun to_s_with_length(length)
-	do
-		assert length >= 0
-		return clean_utf8(length)
-	end
+		# Clean?
+		var str = null
+		if clean then
+			str = clean_utf8(byte_length)
+			char_length = str.length
+		else
+			char_length = char_length or else utf8_length(0, byte_length)
+		end
 
-	redef fun to_s_full(byte_length, unilen) do
-		return new FlatString.full(self, byte_length, 0, unilen)
-	end
+		# Copy? (if not already copied by `clean_utf8`)
+		if copy and (str == null or str.items == self) then
+			var new_cstr = new CString(byte_length + 1)
+			copy_to(new_cstr, byte_length, 0, 0)
+			new_cstr[byte_length] = 0
+			str = new FlatString.full(new_cstr, byte_length, 0, char_length)
+		end
 
-	redef fun to_s_unsafe(len) do
-		if len == null then len = cstring_length
-		return new FlatString.with_infos(self, len, 0)
-	end
+		if str == null then
+			str = new FlatString.full(self, byte_length, 0, char_length)
+		end
 
-	redef fun to_s_with_copy do return to_s_with_copy_and_length(cstring_length)
-
-	# Get a `String` from `length` bytes at `self` copied into Nit memory
-	fun to_s_with_copy_and_length(length: Int): String
-	do
-		var r = clean_utf8(length)
-		if r.items != self then return r
-		var new_self = new NativeString(length + 1)
-		copy_to(new_self, length, 0, 0)
-		var str = new FlatString.with_infos(new_self, length, 0)
-		new_self[length] = 0u8
 		return str
 	end
 
-	# Cleans a NativeString if necessary
+	# Cleans a CString if necessary
 	fun clean_utf8(len: Int): FlatString do
 		var replacements: nullable Array[Int] = null
 		var end_length = len
@@ -1306,14 +1352,14 @@ redef class NativeString
 		while rem > 0 do
 			while rem >= 4 do
 				var i = fetch_4_chars(pos)
-				if i & 0x80808080 != 0 then break
+				if i & 0x80808080u32 != 0u32 then break
 				pos += 4
 				chr_ln += 4
 				rem -= 4
 			end
 			if rem == 0 then break
 			var b = self[pos]
-			if b & 0x80u8 == 0x00u8 then
+			if b & 0x80 == 0x00 then
 				pos += 1
 				chr_ln += 1
 				rem -= 1
@@ -1322,13 +1368,13 @@ redef class NativeString
 			var nxst = length_of_char_at(pos)
 			var ok_st: Bool
 			if nxst == 1 then
-				ok_st = b & 0x80u8 == 0u8
+				ok_st = b & 0x80 == 0
 			else if nxst == 2 then
-				ok_st = b & 0xE0u8 == 0xC0u8
+				ok_st = b & 0xE0 == 0xC0
 			else if nxst == 3 then
-				ok_st = b & 0xF0u8 == 0xE0u8
+				ok_st = b & 0xF0 == 0xE0
 			else
-				ok_st = b & 0xF8u8 == 0xF0u8
+				ok_st = b & 0xF8 == 0xF0
 			end
 			if not ok_st then
 				if replacements == null then replacements = new Array[Int]
@@ -1368,7 +1414,7 @@ redef class NativeString
 		end
 		var ret = self
 		if end_length != len then
-			ret = new NativeString(end_length)
+			ret = new CString(end_length)
 			var old_repl = 0
 			var off = 0
 			var repls = replacements.as(not null)
@@ -1379,9 +1425,9 @@ redef class NativeString
 				var chkln = repl_pos - old_repl
 				copy_to(ret, chkln, old_repl, off)
 				off += chkln
-				ret[off] = 0xEFu8
-				ret[off + 1] = 0xBFu8
-				ret[off + 2] = 0xBDu8
+				ret[off] = 0xEF
+				ret[off + 1] = 0xBF
+				ret[off + 2] = 0xBD
 				old_repl = repl_pos + 1
 				off += 3
 			end
@@ -1396,22 +1442,22 @@ redef class NativeString
 	private fun set_char_at(pos: Int, c: Char) do
 		var cp = c.code_point
 		if cp < 128 then
-			self[pos] = cp.to_b
+			self[pos] = cp
 			return
 		end
 		var ln = c.u8char_len
 		if ln == 2 then
-			self[pos] = (0xC0 | ((cp & 0x7C0) >> 6)).to_b
-			self[pos + 1] = (0x80 | (cp & 0x3F)).to_b
+			self[pos] = 0xC0 | ((cp & 0x7C0) >> 6)
+			self[pos + 1] = 0x80 | (cp & 0x3F)
 		else if ln == 3 then
-			self[pos] = (0xE0 | ((cp & 0xF000) >> 12)).to_b
-			self[pos + 1] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
-			self[pos + 2] = (0x80 | (cp & 0x3F)).to_b
+			self[pos] = 0xE0 | ((cp & 0xF000) >> 12)
+			self[pos + 1] = 0x80 | ((cp & 0xFC0) >> 6)
+			self[pos + 2] = 0x80 | (cp & 0x3F)
 		else if ln == 4 then
-			self[pos] = (0xF0 | ((cp & 0x1C0000) >> 18)).to_b
-			self[pos + 1] = (0x80 | ((cp & 0x3F000) >> 12)).to_b
-			self[pos + 2] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
-			self[pos + 3] = (0x80 | (cp & 0x3F)).to_b
+			self[pos] = 0xF0 | ((cp & 0x1C0000) >> 18)
+			self[pos + 1] = 0x80 | ((cp & 0x3F000) >> 12)
+			self[pos + 2] = 0x80 | ((cp & 0xFC0) >> 6)
+			self[pos + 3] = 0x80 | (cp & 0x3F)
 		end
 	end
 end
@@ -1427,8 +1473,8 @@ redef class Int
 		if self == 1 then return "1"
 
 		var nslen = int_to_s_len
-		var ns = new NativeString(nslen + 1)
-		ns[nslen] = 0u8
+		var ns = new CString(nslen + 1)
+		ns[nslen] = 0
 		native_int_to_s(ns, nslen + 1)
 		return new FlatString.full(ns, nslen, 0, nslen)
 	end
@@ -1460,8 +1506,8 @@ redef class Array[E]
 			i += 1
 			mypos += 1
 		end
-		var ns = new NativeString(sl + 1)
-		ns[sl] = 0u8
+		var ns = new CString(sl + 1)
+		ns[sl] = 0
 		i = 0
 		var off = 0
 		while i < mypos do
@@ -1497,8 +1543,8 @@ redef class NativeArray[E]
 			i += 1
 			mypos += 1
 		end
-		var ns = new NativeString(sl + 1)
-		ns[sl] = 0u8
+		var ns = new CString(sl + 1)
+		ns[sl] = 0
 		i = 0
 		var off = 0
 		while i < mypos do

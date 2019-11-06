@@ -20,9 +20,8 @@ end
 
 # An object needing finalization
 #
-# Sub-classes of `Finalizable` must no have cycles, or else they will not be
-# liberated. For this reason, it is recommended to sub-class `Finalizable`
-# only on simple objects directly managing a limited resource. This use case
+# It is recommended to sub-class `Finalizable` only on
+# simple objects directly managing a limited resource. This use case
 # is common when wrapping an extern instance with a standard object.
 class Finalizable
 
@@ -32,8 +31,9 @@ class Finalizable
 	# is no longer referenced. It can also be called by the user. Its implementation
 	# must be planned accordingly and ensure that it may be invoked more than once.
 	#
-	# The object are finialized in a topological order, it is safe for this method
-	# to use attributes of this instances.
+	# The object are not finialized in a topological order, it is safe for this method
+	# to use attributes of this instances, unless theses attributes are finalizable as well
+	# because they may have been finalized already.
 	fun finalize do end
 end
 

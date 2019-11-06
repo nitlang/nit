@@ -47,7 +47,7 @@ class Config
 
 	# Super directories with wanted folder names, which will be used to sort
 	# the files (only their name are used, the files won't be copied there).
-	var regex_source_dirs: Array[String] = ["~/Videos/"]
+	var regex_source_dirs = ["~/Videos/"]
 
 	# Will only sort files older than the number of `elapsed_days`.
 	var elapsed_days = 7
@@ -64,10 +64,10 @@ redef class String
 
 	# Returns null on success
 	fun file_rename_to(dest: String): nullable String import String.to_cstring,
-	NativeString.to_s, String.as nullable `{
+	CString.to_s, String.as nullable `{
 		int res = rename(String_to_cstring(self), String_to_cstring(dest));
 		if (res == 0) return null_String();
-		return String_as_nullable(NativeString_to_s(strerror(errno)));
+		return String_as_nullable(CString_to_s(strerror(errno)));
 	`}
 
 	# Replace `~` by the path to the home diretory

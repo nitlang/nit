@@ -29,7 +29,7 @@ environment string delim '(\"{3})' '(\"{3})' escape "\\" multiline begin
 	specialchar = '\\.'
 end
 
-keyword = "abort|abstract|as|assert|break|continue|do|else|end|enum|extern|for|if|import|in|interface|intern|intrude|is|isa|isset|new|label|loop|private|protected|readable|return|super|then|while|false|null|nullable|redef|self|true|and|not|or|fun|var|type|init|class|package|module|special|universal|writable"
+keyword = "abort|abstract|as|assert|break|continue|do|else|end|catch|enum|extern|for|if|import|in|interface|intern|intrude|is|isa|isset|new|label|loop|private|protected|readable|return|super|then|while|false|null|nullable|redef|self|true|and|not|or|fun|var|type|init|class|package|module|special|universal|writable"
 
 type = '[[:upper:]]([[:word:]]*)'
 

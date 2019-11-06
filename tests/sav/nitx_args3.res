@@ -1,18 +1,31 @@
 
-[1m[32m# 3 result(s) for 'comment: base_simple3'[m[m
+Features for `base_simple3::base_simple3`:
 
- [1m[32mP[m[m [1m[34mbase_simple3[m[m
-   [1m[30mbase_simple3[m[m
-   package base_simple3
-   [30mbase_simple3.nit:17,1--66,13[m
+ + base_simple3$A
+   class A
+   base_simple3.nit:29,1--32,3
 
- [1m[32mG[m[m [1m[34mbase_simple3[m[m
-   [1m[30mbase_simple3[m[m
-   group base_simple3
-   [30mbase_simple3.nit:17,1--66,13[m
+ + base_simple3$B
+   class B
+   base_simple3.nit:34,1--42,3
 
- [1m[32mM[m[m [1m[34mbase_simple3[m[m
-   [1m[30mbase_simple3::base_simple3[m[m
-   module base_simple3
-   [30mbase_simple3.nit:17,1--66,13[m
+ + base_simple3$Bool
+   enum Bool
+   base_simple3.nit:22,1--23,3
+
+ + base_simple3$C
+   class C
+   base_simple3.nit:44,1--47,3
+
+ + base_simple3$Int
+   enum Int
+   base_simple3.nit:25,1--27,3
+
+ + base_simple3$Object
+   interface Object
+   base_simple3.nit:19,1--20,3
+
+ + base_simple3$Sys
+   class Sys
+   base_simple3.nit:49,1--19
 

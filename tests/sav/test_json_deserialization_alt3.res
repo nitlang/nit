@@ -100,19 +100,11 @@
 	"__kind": "obj", "__id": 0, "__class": "E",
 	"a": {
 		"__kind": "obj", "__id": 1, "__class": "Array[Object]",
-		"__items": [
-			"hello",
-			1234,
-			123.4
-		]
+		"__items": ["hello", 1234, 123.4]
 	},
 	"b": {
 		"__kind": "obj", "__id": 2, "__class": "Array[nullable Serializable]",
-		"__items": [
-			"hella",
-			2345,
-			234.5
-		]
+		"__items": ["hella", 2345, 234.5]
 	}
 }
 
@@ -120,7 +112,7 @@
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 # Nit:
-<E: 2222>
+<F: 2222>
 
 # Json:
 {
@@ -129,10 +121,10 @@
 }
 
 # Back in Nit:
-null
+<F: 2222>
 
 # Nit:
-<E: 33.33>
+<F: 33.33>
 
 # Json:
 {
@@ -141,7 +133,7 @@ null
 }
 
 # Back in Nit:
-null
+<F: 33.33>
 
 # Nit:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
@@ -151,42 +143,24 @@ null
 	"__kind": "obj", "__id": 0, "__class": "G",
 	"hs": {
 		"__kind": "obj", "__id": 1, "__class": "HashSet[Int]",
-		"__items": [
-			-1,
-			0
-		]
+		"__items": [-1, 0]
 	},
 	"s": {
 		"__kind": "obj", "__id": 2, "__class": "ArraySet[String]",
-		"__items": [
-			"one",
-			"two"
-		]
+		"__items": ["one", "two"]
 	},
 	"hm": {
 		"__kind": "obj", "__id": 3, "__class": "HashMap[String, Int]", "__length": 2,
-		"__keys": [
-			"one",
-			"two"
-		],
-		"__values": [
-			1,
-			2
-		]
+		"__keys": ["one", "two"],
+		"__values": [1, 2]
 	},
 	"am": {
 		"__kind": "obj", "__id": 4, "__class": "ArrayMap[String, String]", "__length": 2,
-		"__keys": [
-			"three",
-			"four"
-		],
-		"__values": [
-			"3",
-			"4"
-		]
+		"__keys": ["three", "four"],
+		"__values": ["3", "4"]
 	}
 }
 
 # Back in Nit:
-<G: hs: ; s: ; hm: ; am: >
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 

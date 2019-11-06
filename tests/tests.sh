@@ -18,23 +18,61 @@
 # This shell script compile, run and verify Nit program files
 
 # Set lang do default to avoid failed tests because of locale
-export LANG=C
-export LC_ALL=C
+export LANG=C.UTF-8
+
+# Explore candidates for LC_ALL
+#
+# If C.UTF-8, the most agnostic UTF-8 locale is supported, we
+# use it, otherwise we default to the UTF-8 system locale, and
+# if unavailable, we default on C.
+#
+# Note that C however is not guaranteed to be UTF-8, and
+# some tests may fail when relying on Unicode semantics.
+locale_candidate=C.UTF-8
+if ! locale -a 2>/dev/null | grep -q C.UTF-8; then
+	locale_candidate="$(locale -a | grep -i utf8 | head -n1)"
+	if [ -z "$locale_candidate" ]; then
+		locale_candidate=C
+	fi
+fi
+export LC_ALL="$locale_candidate"
+
+# Darwin / macOS
+if uname | grep Darwin 1>/dev/null 2>&1; then
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
+
+	# Fix for errors on some libevent/nitcorn clients
+	export EVENT_NOKQUEUE=1
+fi
+
 export NIT_TESTING=true
 # Use the pid as a collision prevention
 export NIT_TESTING_ID=$$
 export NIT_SRAND=0
 
+# Identify this as a tests.sh test to differentiate from a nitunit test
+export NIT_TESTING_TESTS_SH=true
+
 unset NIT_DIR
 
 # Get the first Java lib available
 if which_java=$(which javac 2>/dev/null); then
-	JAVA_HOME=$(dirname $(dirname $(readlink -f "$which_java")))
+
+	if sh -c "readlink -f ." 1>/dev/null 2>&1; then
+		READLINK="readlink -f"
+	else
+		# Darwin?
+		READLINK="readlink"
+	fi
+	JAVA_HOME=$(dirname $(dirname $($READLINK "$which_java")))
 
 	shopt -s nullglob
 	paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
-	paths=($paths)
-	JNI_LIB_PATH=`dirname ${paths[0]}`
+	if [ -n "$paths" ]; then
+		paths=($paths)
+		JNI_LIB_PATH=`dirname ${paths[0]}`
+	fi
 	shopt -u nullglob
 fi
 
@@ -130,10 +168,12 @@ else
 fi
 
 # Detect a working time command
-if env time --quiet -f%U true 2>/dev/null; then
-	TIME="env time --quiet -f%U"
-elif env time -f%U true 2>/dev/null; then
-	TIME="env time -f%U"
+if command time --quiet -f%e true 2>/dev/null; then
+	TIME="command time --quiet -f%e"
+elif command time -f%e true 2>/dev/null; then
+	TIME="command time -f%e"
+elif command gtime -f%e true 2>/dev/null; then
+	TIME="command gtime -f%e"
 else
 	TIME=
 fi
@@ -144,6 +184,15 @@ if date -Iseconds >/dev/null 2>&1; then
 else
 	TIMESTAMP=
 fi
+
+# Detect a working hostname command
+if hostname --version 2>&1 | grep coreutils >/dev/null 2>&1; then
+	HOSTNAME="hostname"
+else
+	HOSTNAME="hostname -s"
+fi
+
+UNAME=`uname | sed s/-.*//`
 
 # $1 is the pattern of the test
 # $2 is the file to compare to
@@ -158,7 +207,7 @@ function compare_to_result()
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
 	test "`cat -- "$sav"`" = "UNDEFINED" && return 1
-	diff -u -- "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
+	diff -u --strip-trailing-cr -- "$sav" "$outdir/$pattern.res" > "$outdir/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
@@ -166,7 +215,7 @@ function compare_to_result()
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "$outdir/$pattern.sav2"
 	grep '[Ee]rror' "$outdir/$pattern.res" >/dev/null && echo "Error" >> "$outdir/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "$outdir/$pattern.sav2"
-	diff -u "$outdir/$pattern.sav2" "$outdir/$pattern.res2" > "$outdir/$pattern.diff.sav.log2"
+	diff -u --strip-trailing-cr "$outdir/$pattern.sav2" "$outdir/$pattern.res2" > "$outdir/$pattern.diff.sav.log2"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -362,9 +411,14 @@ need_skip()
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
+	if test -n "GITLAB_CI" && echo "$1" | grep -f "gitlab_ci.skip" >/dev/null 2>&1; then
+		echo "=> $2: [skip gitlab ci]"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
+		return 0
+	fi
 
 	# Skip by OS
-	local os_skip_file=`uname`.skip
+	local os_skip_file=$UNAME.skip
 	if test -e $os_skip_file && echo "$1" | grep -f "$os_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip os]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
@@ -372,7 +426,7 @@ need_skip()
 	fi
 
 	# Skip by hostname
-	local host_skip_file=`hostname -s`.skip
+	local host_skip_file=`$HOSTNAME`.skip
 	if test -e $host_skip_file && echo "$1" | grep -f "$host_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip hostname]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
@@ -425,7 +479,7 @@ istodo()
 find_nitc()
 {
 	local name="$enginebinname"
-	local recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
+	local recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../contrib/nitin/bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		echo "Could not find binary for engine $engine, aborting"
 		exit 1
@@ -459,6 +513,7 @@ while [ $stop = false ]; do
 done
 enginebinname=$engine
 isinterpret=
+isinteractive=
 case $engine in
 	nitc|nitg)
 		engine=nitcs;
@@ -504,6 +559,10 @@ case $engine in
 		OPT="--vm $OPT"
 		savdirs="sav/niti/"
 		;;
+	nitin)
+		enginebinname=nitin
+		isinteractive=true
+		;;
 	nitj)
 		engine=nitj;
 		OPT="--compile-dir $compdir --ant"
@@ -521,7 +580,8 @@ case $engine in
 		;;
 esac
 
-savdirs="sav/`hostname -s` sav/`uname` sav/$engine $savdirs sav/"
+savdirs="sav/`$HOSTNAME` sav/$UNAME sav/$engine $savdirs sav/"
+test -n "$GITLAB_CI" && savdirs="sav/gitlab_ci $savdirs"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
@@ -580,8 +640,8 @@ for ii in "$@"; do
 	# Sould we skip the file for this engine?
 	need_skip "$f" "$f" "$pack" && continue
 
-	tmp=${ii/../AA}
-	if [ "x$tmp" = "x$ii" ]; then
+	local_tmp=${ii/../AA}
+	if [ "x$local_tmp" = "x$ii" ]; then
 		includes="-I . -I ../lib/core -I ../lib/core/collection -I alt"
 	else
 		includes="-I alt"
@@ -612,6 +672,15 @@ for ii in "$@"; do
 		if [ -n "$isinterpret" ]; then
 			cat > "$ff.bin" <<END
 exec $NITC --no-color $OPT $includes -- $(printf '%q' "$i") "\$@"
+END
+			chmod +x "$ff.bin"
+			> "$ff.cmp.err"
+			> "$ff.compile.log"
+			ERR=0
+			echo 0.0 > "$ff.time.out"
+		elif [ -n "$isinteractive" ]; then
+			cat > "$ff.bin" <<END
+exec $NITC --no-color --no-prompt --source-name $(printf '%q' "$i") $OPT $includes < $(printf '%q' "$i") "\$@"
 END
 			chmod +x "$ff.bin"
 			> "$ff.cmp.err"
@@ -671,7 +740,7 @@ END
 				echo ""
 				echo "NIT_NO_STACK=1 $ff.bin" $args
 			fi
-			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH \
+			NIT_NO_STACK=1 LD_LIBRARY_PATH=$JNI_LIB_PATH WRITE="$ff.write" \
 				saferun -a -o "$ff.time.out" "$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			mv "$ff.time.out" "$ff.times.out"
 			awk '{ SUM += $1} END { print SUM }' "$ff.times.out" > "$ff.time.out"
@@ -683,7 +752,7 @@ END
 			if [ -f "$ff.write" ]; then
 				cat -- "$ff.write" >> "$ff.res"
 			elif [ -d "$ff.write" ]; then
-				LANG=C /bin/ls -F "$ff.write" >> "$ff.res"
+				/bin/ls -F "$ff.write" >> "$ff.res"
 			fi
 			cp -- "$ff.res"  "$ff.res2"
 			cat -- "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
@@ -725,7 +794,7 @@ END
 					if [ -f "$fff.write" ]; then
 						cat -- "$fff.write" >> "$fff.res"
 					elif [ -d "$fff.write" ]; then
-						LANG=C /bin/ls -F -- "$fff.write" >> "$fff.res"
+						/bin/ls -F -- "$fff.write" >> "$fff.res"
 					fi
 					if [ -s "$fff.err" ]; then
 						cp -- "$fff.res"  "$fff.res2"
@@ -776,6 +845,10 @@ if [ "x$ERRLIST" != "x" ]; then
 fi
 
 echo >>$xml "</testsuite></testsuites>"
+
+if type junit2html >/dev/null; then
+	junit2html "$xml"
+fi
 
 if [ -n "$nok" ]; then
 	exit 1

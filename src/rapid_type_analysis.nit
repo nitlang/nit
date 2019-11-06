@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # Rapid type analysis on the AST
 #
 # Rapid type analysis is an analyse that aproximates the set of live classes
@@ -24,6 +23,7 @@
 module rapid_type_analysis
 
 import semantize
+private import explain_assert_api
 
 import csv # for live_types_to_csv
 private import ordered_tree # for live_methods_to_tree
@@ -62,7 +62,7 @@ class RapidTypeAnalysis
 	# live_methods to determine new methoddefs to visit
 	var live_types = new HashSet[MClassType]
 
-	# The pool of undesolved live types
+	# The pool of unresolved live types
 	# They are globally resolved at the end of the analaysis
 	var live_open_types = new HashSet[MClassType]
 
@@ -318,6 +318,7 @@ class RapidTypeAnalysis
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
 				if live_types.has(rt) then continue
+				if not rt.is_legal_in(mainmodule) then continue
 				if not check_depth(rt) then continue
 				#print "{ot}/{t} -> {rt}"
 				live_types.add(rt)
@@ -334,6 +335,7 @@ class RapidTypeAnalysis
 			for t in live_types do
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
+				if not rt.is_legal_in(mainmodule) then continue
 				live_cast_types.add(rt)
 				#print "  {ot}/{t} -> {rt}"
 			end
@@ -590,9 +592,9 @@ end
 redef class AStringFormExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var native = v.analysis.mainmodule.native_string_type
+		var native = v.analysis.mainmodule.c_string_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s_full")
+		var prop = v.get_method(native, "to_s_unsafe")
 		v.add_monomorphic_send(native, prop)
 		v.add_callsite(to_re)
 		v.add_callsite(ignore_case)
@@ -671,6 +673,31 @@ redef class AAsCastExpr
 	end
 end
 
+redef class AAssertExpr
+	redef fun accept_rapid_type_visitor(v)
+	do
+		if can_explain_assert(v.analysis.modelbuilder) then
+			var str = explain_assert_str
+			if str != null then str.accept_rapid_type_visitor(v)
+		end
+	end
+
+	# Does `modelbuilder` know the classes to build a superstring to explain a failed assert?
+	private fun can_explain_assert(modelbuilder: ModelBuilder): Bool
+	do
+		var nas = modelbuilder.model.get_mclasses_by_name("NativeArray")
+		if nas == null then return false
+
+		nas = modelbuilder.model.get_mclasses_by_name("Array")
+		if nas == null or nas.is_empty then return false
+
+		nas = modelbuilder.model.get_mclasses_by_name("String")
+		if nas == null or nas.is_empty then return false
+
+		return true
+	end
+end
+
 redef class ASendExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
@@ -678,6 +705,13 @@ redef class ASendExpr
 	end
 end
 
+redef class ACallrefExpr
+        redef fun accept_rapid_type_visitor(v)
+        do
+                super
+                v.add_type(mtype.as(MClassType))
+        end
+end
 
 redef class ASendReassignFormExpr
 	redef fun accept_rapid_type_visitor(v)

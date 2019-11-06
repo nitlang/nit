@@ -21,9 +21,12 @@
 module http_request
 
 import core
+import serialization
 
 # A request received over HTTP, is build by `HttpRequestParser`
 class HttpRequest
+	serialize
+
 	private init is old_style_init do end
 
 	# HTTP protocol version
@@ -31,9 +34,6 @@ class HttpRequest
 
 	# Method of this request (GET or POST)
 	var method: String
-
-	# The host targetter by this request (usually the server)
-	var host: String
 
 	# The full URL requested by the client (including the `query_string`)
 	var url: String
@@ -76,13 +76,13 @@ class HttpRequest
 		return s
 	end
 
-	# Returns argument `arg_name` as an Int or `null` if not found or not a number.
+	# Returns argument `arg_name` as an Int or `null` if not found or not an integer.
 	#
 	# NOTE: Prioritizes POST before GET
 	fun int_arg(arg_name: String): nullable Int do
 		if not all_args.has_key(arg_name) then return null
 		var i = all_args[arg_name]
-		if not i.is_numeric then return null
+		if not i.is_int then return null
 		return i.to_i
 	end
 
@@ -146,7 +146,7 @@ class HttpRequestParser
 		end
 
 		# POST args
-		if http_request.method == "POST" then
+		if http_request.method == "POST" or http_request.method == "PUT" then
 			http_request.body = body
 			var lines = body.split_with('&')
 			for line in lines do if not line.trim.is_empty then
@@ -155,8 +155,6 @@ class HttpRequestParser
 					var decoded = parts[1].replace('+', " ").from_percent_encoding
 					http_request.post_args[parts[0]] = decoded
 					http_request.all_args[parts[0]] = decoded
-				else
-					print "POST Error: {line} format error on {line}"
 				end
 			end
 		end
@@ -241,7 +239,10 @@ class HttpRequestParser
 			for param in get_args do
 				var key_value = param.split_with("=")
 				if key_value.length < 2 then continue
-				query_strings[key_value[0]] = key_value[1]
+
+				var key = key_value[0].from_percent_encoding
+				var value = key_value[1].from_percent_encoding
+				query_strings[key] = value
 			end
 		end
 

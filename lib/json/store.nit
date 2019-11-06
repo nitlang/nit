@@ -90,6 +90,7 @@
 module store
 
 import static
+import json
 
 # A JsonStore can save and load json data from file system.
 class JsonStore
@@ -110,7 +111,7 @@ class JsonStore
 
 	# Is there data are stored under `key`.
 	fun has_key(key: String): Bool do
-		return (store_dir / "{key}.json").file_exists
+		return ("{store_dir}/{key}.json".simplify_path).file_exists
 	end
 
 	# Save `json` object under `key`.
@@ -127,8 +128,8 @@ class JsonStore
 	#
 	# Only `JsonObject` and `JsonArray` are allowed in a json file.
 	# Use `store_object` or `store_array` instead.
-	private fun store_json(key: String, json: Jsonable) do
-		var path = store_dir / "{key}.json"
+	private fun store_json(key: String, json: Serializable) do
+		var path = "{store_dir}/{key}.json".simplify_path
 		path.dirname.mkdir
 		var file = new FileWriter.open(path)
 		file.write(json.to_json)
@@ -148,9 +149,9 @@ class JsonStore
 	# Load a JsonObject associated to `key` from store.
 	#
 	# Ensure `has_data(key)`
-	private fun load_json(key: String): nullable Jsonable do
+	private fun load_json(key: String): nullable Serializable do
 		assert has_key(key)
-		var path = store_dir / "{key}.json"
+		var path = "{store_dir}/{key}.json".simplify_path
 		var file = new FileReader.open(path)
 		var text = file.read_all
 		file.close
@@ -160,7 +161,7 @@ class JsonStore
 	# Get the list of keys stored under the collection `key`.
 	fun list_collection(key: String): JsonArray do
 		var res = new JsonArray
-		var coll = (store_dir / "{key}").to_path
+		var coll = ("{store_dir}/{key}".simplify_path).to_path
 		if not coll.exists or not coll.stat.is_dir then return res
 		for file in coll.files do
 			if file.to_s.has_suffix(".json") then
@@ -172,7 +173,7 @@ class JsonStore
 
 	# Does `key` matches a collection?
 	fun has_collection(key: String): Bool do
-		var path = (store_dir / "{key}").to_path
+		var path = ("{store_dir}/{key}".simplify_path).to_path
 		return path.exists and path.stat.is_dir
 	end
 end

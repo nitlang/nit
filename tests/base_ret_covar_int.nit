@@ -35,7 +35,7 @@ class B
 	redef fun bar2: Int do return 33
 
 	redef fun baz1 do return 44
-	#alt1#redef fun baz2: Int do return 55
+	#alt1#redef fun baz2 do return 55
 end
 
 fun test_a(a: A[Object])

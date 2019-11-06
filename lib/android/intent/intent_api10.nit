@@ -21,7 +21,7 @@ module intent_api10
 import dalvik
 import android::bundle
 import serialization
-private import json::serialization
+private import json
 
 in "Java" `{
 	import android.content.Intent;
@@ -29,6 +29,7 @@ in "Java" `{
 	import android.graphics.Rect;
 	import java.util.Set;
 	import java.util.ArrayList;
+	import nit.app.NitObject;
 `}
 
 extern class NativeIntent in "Java" `{ android.content.Intent `}
@@ -45,7 +46,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun boolean_array_extra(name: JavaString): Array[Bool] import Array[Bool],
 	  Array[Bool].push in "Java" `{
 		boolean[] java_array = self.getBooleanArrayExtra(name);
-		int nit_array = new_Array_of_Bool();
+		NitObject nit_array = new_Array_of_Bool();
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Bool_push(nit_array, java_array[i]);
@@ -58,7 +59,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun byte_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].add in "Java" `{
 		byte[] java_array = self.getByteArrayExtra(name);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		for (int i=0; i < java_array.length; ++i)
 			Array_of_Int_add(nit_array, java_array[i]);
@@ -72,7 +73,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun char_array_extra(name: JavaString): Array[Char] import Array[Char],
 	  Array[Char].add in "Java" `{
 		char[] java_array = self.getCharArrayExtra(name);
-		int nit_array = new_Array_of_Char();
+		NitObject nit_array = new_Array_of_Char();
 
 		for (int i = 0; i < java_array.length; ++i)
 			Array_of_Char_add(nit_array, java_array[i]);
@@ -86,7 +87,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun char_sequence_array_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		CharSequence[] java_array = self.getCharSequenceArrayExtra(name);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		for (int i = 0; i < java_array.length; ++i)
 			StringCopyArray_add(nit_array, (String) java_array[i]);
@@ -96,7 +97,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun char_sequence_array_list_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		ArrayList<CharSequence> java_array = self.getCharSequenceArrayListExtra(name);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 
@@ -111,7 +112,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun categories: HashSet[String] import StringCopyHashSet,
 	  StringCopyHashSet.add, StringCopyHashSet.collection  in "Java" `{
 		Set<String> java_set = self.getCategories();
-		int nit_hashset = new_StringCopyHashSet();
+		NitObject nit_hashset = new_StringCopyHashSet();
 
 		if (java_set == null) return nit_hashset;
 
@@ -125,7 +126,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun double_array_extra(name: JavaString): Array[Float] import Array[Float],
 	  Array[Float].push in "Java" `{
 		double[] java_array = self.getDoubleArrayExtra(name);
-		int nit_array = new_Array_of_Float();
+		NitObject nit_array = new_Array_of_Float();
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Float_push(nit_array, java_array[i]);
@@ -139,7 +140,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun float_array_extra(name: JavaString): Array[Float] import Array[Float],
 	  Array[Float].push in "Java" `{
 		float[] java_array = self.getFloatArrayExtra(name);
-		int nit_array = new_Array_of_Float();
+		NitObject nit_array = new_Array_of_Float();
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Float_push(nit_array, java_array[i]);
@@ -152,7 +153,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun int_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].push in "Java" `{
 		int[] java_array = self.getIntArrayExtra(name);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_push(nit_array, java_array[i]);
@@ -165,7 +166,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun long_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].push in "Java" `{
 		long[] java_array = self.getLongArrayExtra(name);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_push(nit_array, (int) java_array[i]);
@@ -180,7 +181,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun short_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].push in "Java" `{
 		short[] java_array = self.getShortArrayExtra(name);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_push(nit_array, (int) java_array[i]);
@@ -193,7 +194,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun string_array_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		String[] java_array = self.getStringArrayExtra(name);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		for(int i=0; i < java_array.length; ++i)
 			StringCopyArray_add(nit_array, java_array[i]);
@@ -203,7 +204,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	fun string_array_list_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		ArrayList<String> java_array = self.getStringArrayListExtra(name);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		for (String element: java_array)
 			StringCopyArray_add(nit_array, element);

@@ -1,10 +1,13 @@
 #include "nitc__coloring.sep.0.h"
-/* method coloring#POSetConflictGraph#core for (self: POSetConflictGraph[nullable Object]): HashSet[nullable Object] */
+/* method coloring$POSetConflictGraph$core for (self: POSetConflictGraph[nullable Object]): HashSet[nullable Object] */
 val* nitc___nitc__POSetConflictGraph___core(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -13,12 +16,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#border for (self: POSetConflictGraph[nullable Object]): HashSet[nullable Object] */
+/* method coloring$POSetConflictGraph$border for (self: POSetConflictGraph[nullable Object]): HashSet[nullable Object] */
 val* nitc___nitc__POSetConflictGraph___border(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -27,12 +33,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#crown for (self: POSetConflictGraph[nullable Object]): HashSet[nullable Object] */
+/* method coloring$POSetConflictGraph$crown for (self: POSetConflictGraph[nullable Object]): HashSet[nullable Object] */
 val* nitc___nitc__POSetConflictGraph___crown(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___crown].val; /* _crown on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _crown");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 34);
 fatal_exit(1);
@@ -41,12 +50,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#conflicts for (self: POSetConflictGraph[nullable Object]): HashMap[nullable Object, Set[nullable Object]] */
+/* method coloring$POSetConflictGraph$conflicts for (self: POSetConflictGraph[nullable Object]): HashMap[nullable Object, Set[nullable Object]] */
 val* nitc___nitc__POSetConflictGraph___conflicts(val* self) {
 val* var /* : HashMap[nullable Object, Set[nullable Object]] */;
 val* var1 /* : HashMap[nullable Object, Set[nullable Object]] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -55,12 +67,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#poset for (self: POSetConflictGraph[nullable Object]): POSet[nullable Object] */
+/* method coloring$POSetConflictGraph$poset for (self: POSetConflictGraph[nullable Object]): POSet[nullable Object] */
 val* nitc___nitc__POSetConflictGraph___poset(val* self) {
 val* var /* : POSet[nullable Object] */;
 val* var1 /* : POSet[nullable Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -69,7 +84,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#poset= for (self: POSetConflictGraph[nullable Object], POSet[nullable Object]) */
+/* method coloring$POSetConflictGraph$poset= for (self: POSetConflictGraph[nullable Object], POSet[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___poset_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -95,12 +110,15 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val = p0; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#order for (self: POSetConflictGraph[nullable Object]): Array[nullable Object] */
+/* method coloring$POSetConflictGraph$order for (self: POSetConflictGraph[nullable Object]): Array[nullable Object] */
 val* nitc___nitc__POSetConflictGraph___order(val* self) {
 val* var /* : Array[nullable Object] */;
 val* var1 /* : Array[nullable Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___order].val; /* _order on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _order");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 51);
 fatal_exit(1);
@@ -109,7 +127,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#order= for (self: POSetConflictGraph[nullable Object], Array[nullable Object]) */
+/* method coloring$POSetConflictGraph$order= for (self: POSetConflictGraph[nullable Object], Array[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___order_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -135,7 +153,7 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetConflictGraph___order].val = p0; /* _order on <self:POSetConflictGraph[nullable Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#init for (self: POSetConflictGraph[nullable Object]) */
+/* method coloring$POSetConflictGraph$init for (self: POSetConflictGraph[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___core__kernel__Object__init(val* self) {
 val* var /* : POSet[nullable Object] */;
 val* var2 /* : POSet[nullable Object] */;
@@ -151,21 +169,24 @@ const char* var_class_name;
 ((void(*)(val* self))(self->class->vft[COLOR_nitc___nitc__POSetConflictGraph___core__kernel__Object__init]))(self); /* init on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
-nitc___nitc__POSetConflictGraph___extract_core(self); /* Direct call coloring#POSetConflictGraph#extract_core on <self:POSetConflictGraph[nullable Object]>*/
+nitc___nitc__POSetConflictGraph___extract_core(self); /* Direct call coloring$POSetConflictGraph$extract_core on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
-nitc___nitc__POSetConflictGraph___extract_border(self); /* Direct call coloring#POSetConflictGraph#extract_border on <self:POSetConflictGraph[nullable Object]>*/
+nitc___nitc__POSetConflictGraph___extract_border(self); /* Direct call coloring$POSetConflictGraph$extract_border on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
-nitc___nitc__POSetConflictGraph___extract_crown(self); /* Direct call coloring#POSetConflictGraph#extract_crown on <self:POSetConflictGraph[nullable Object]>*/
+nitc___nitc__POSetConflictGraph___extract_crown(self); /* Direct call coloring$POSetConflictGraph$extract_crown on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
-nitc___nitc__POSetConflictGraph___compute_conflicts(self); /* Direct call coloring#POSetConflictGraph#compute_conflicts on <self:POSetConflictGraph[nullable Object]>*/
+nitc___nitc__POSetConflictGraph___compute_conflicts(self); /* Direct call coloring$POSetConflictGraph$compute_conflicts on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -175,9 +196,12 @@ RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -190,7 +214,7 @@ RET_LABEL4:(void)0;
 var6 = poset___poset__POSet___linearize(var, var3);
 }
 {
-{ /* Inline coloring#POSetConflictGraph#order= (self,var6) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$order= (self,var6) on <self:POSetConflictGraph[nullable Object]> */
 /* Covariant cast for argument 0 (order) <var6:Array[nullable Object]> isa Array[E] */
 /* <var6:Array[nullable Object]> isa Array[E] */
 type_struct = self->type->resolution_table->types[COLOR_core__Array__nitc__POSetConflictGraph___35dE];
@@ -213,7 +237,7 @@ RET_LABEL7:(void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#extract_core for (self: POSetConflictGraph[nullable Object]) */
+/* method coloring$POSetConflictGraph$extract_core for (self: POSetConflictGraph[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___extract_core(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var2 /* : HashSet[nullable Object] */;
@@ -243,9 +267,12 @@ val* var25 /* : POSet[nullable Object] */;
 val* var26 /* : POSetElement[nullable Object] */;
 val* var27 /* : Collection[nullable Object] */;
 {
-{ /* Inline coloring#POSetConflictGraph#core (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (self) on <self:POSetConflictGraph[nullable Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -255,12 +282,15 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashSet___core__abstract_collection__RemovableCollection__clear(var); /* Direct call hash_collection#HashSet#clear on <var:HashSet[nullable Object]>*/
+core___core__HashSet___core__abstract_collection__RemovableCollection__clear(var); /* Direct call hash_collection$HashSet$clear on <var:HashSet[nullable Object]>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -287,9 +317,12 @@ var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7-
 }
 var_e = var9;
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var12 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -308,14 +341,14 @@ var14 = poset___poset__POSetElement___direct_greaters(var13);
 var15 = ((long(*)(val* self))((((long)var14&3)?class_info[((long)var14&3)]:var14->class)->vft[COLOR_core__abstract_collection__Collection__length]))(var14); /* length on <var14:Collection[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#> (var15,1l) on <var15:Int> */
+{ /* Inline kernel$Int$> (var15,1l) on <var15:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var18 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var18)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var19 = var15 > 1l;
@@ -326,9 +359,12 @@ RET_LABEL17:(void)0;
 }
 if (var16){
 {
-{ /* Inline coloring#POSetConflictGraph#core (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (self) on <self:POSetConflictGraph[nullable Object]> */
 var22 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var22 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -338,9 +374,12 @@ RET_LABEL21:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var25 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var25 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -356,7 +395,7 @@ var26 = poset___poset__POSet____91d_93d(var23, var_e);
 var27 = poset___poset__POSetElement___greaters(var26);
 }
 {
-core___core__SimpleCollection___add_all(var20, var27); /* Direct call abstract_collection#SimpleCollection#add_all on <var20:HashSet[nullable Object]>*/
+core___core__SimpleCollection___add_all(var20, var27); /* Direct call abstract_collection$SimpleCollection$add_all on <var20:HashSet[nullable Object]>*/
 }
 } else {
 }
@@ -370,7 +409,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#extract_border for (self: POSetConflictGraph[nullable Object]) */
+/* method coloring$POSetConflictGraph$extract_border for (self: POSetConflictGraph[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___extract_border(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var2 /* : HashSet[nullable Object] */;
@@ -397,9 +436,12 @@ val* var_e25 /* var e: nullable Object */;
 val* var26 /* : HashSet[nullable Object] */;
 val* var28 /* : HashSet[nullable Object] */;
 {
-{ /* Inline coloring#POSetConflictGraph#border (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (self) on <self:POSetConflictGraph[nullable Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -409,12 +451,15 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashSet___core__abstract_collection__RemovableCollection__clear(var); /* Direct call hash_collection#HashSet#clear on <var:HashSet[nullable Object]>*/
+core___core__HashSet___core__abstract_collection__RemovableCollection__clear(var); /* Direct call hash_collection$HashSet$clear on <var:HashSet[nullable Object]>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#core (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (self) on <self:POSetConflictGraph[nullable Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -449,9 +494,12 @@ goto BREAK_label12;
 } else {
 }
 {
-{ /* Inline coloring#POSetConflictGraph#border (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (self) on <self:POSetConflictGraph[nullable Object]> */
 var15 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var15 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -461,7 +509,7 @@ RET_LABEL14:(void)0;
 }
 }
 {
-core___core__HashSet___core__abstract_collection__SimpleCollection__add(var13, var_e); /* Direct call hash_collection#HashSet#add on <var13:HashSet[nullable Object]>*/
+core___core__HashSet___core__abstract_collection__SimpleCollection__add(var13, var_e); /* Direct call hash_collection$HashSet$add on <var13:HashSet[nullable Object]>*/
 }
 BREAK_label12: (void)0;
 {
@@ -473,9 +521,12 @@ BREAK_label: (void)0;
 ((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_7); /* finish on <var_7:Iterator[nullable Object]>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#border (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (self) on <self:POSetConflictGraph[nullable Object]> */
 var18 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var18 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -502,9 +553,12 @@ var24 = ((val*(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var
 }
 var_e25 = var24;
 {
-{ /* Inline coloring#POSetConflictGraph#core (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (self) on <self:POSetConflictGraph[nullable Object]> */
 var28 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var28 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -514,7 +568,7 @@ RET_LABEL27:(void)0;
 }
 }
 {
-core___core__HashSet___core__abstract_collection__RemovableCollection__remove(var26, var_e25); /* Direct call hash_collection#HashSet#remove on <var26:HashSet[nullable Object]>*/
+core___core__HashSet___core__abstract_collection__RemovableCollection__remove(var26, var_e25); /* Direct call hash_collection$HashSet$remove on <var26:HashSet[nullable Object]>*/
 }
 {
 ((void(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var_21->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_21); /* next on <var_21:Iterator[nullable Object]>*/
@@ -526,7 +580,7 @@ BREAK_label23: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#is_border for (self: POSetConflictGraph[nullable Object], nullable Object): Bool */
+/* method coloring$POSetConflictGraph$is_border for (self: POSetConflictGraph[nullable Object], nullable Object): Bool */
 short int nitc___nitc__POSetConflictGraph___is_border(val* self, val* p0) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
@@ -572,9 +626,12 @@ fatal_exit(1);
 }
 var_e = p0;
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var4 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -607,9 +664,12 @@ var10 = ((val*(*)(val* self))((((long)var_8&3)?class_info[((long)var_8&3)]:var_8
 }
 var_child = var10;
 {
-{ /* Inline coloring#POSetConflictGraph#core (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (self) on <self:POSetConflictGraph[nullable Object]> */
 var13 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var13 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -639,7 +699,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetConflictGraph#extract_crown for (self: POSetConflictGraph[nullable Object]) */
+/* method coloring$POSetConflictGraph$extract_crown for (self: POSetConflictGraph[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___extract_crown(val* self) {
 val* var /* : HashSet[nullable Object] */;
 val* var2 /* : HashSet[nullable Object] */;
@@ -664,9 +724,12 @@ short int var21 /* : Bool */;
 val* var22 /* : HashSet[nullable Object] */;
 val* var24 /* : HashSet[nullable Object] */;
 {
-{ /* Inline coloring#POSetConflictGraph#crown (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$crown (self) on <self:POSetConflictGraph[nullable Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___crown].val; /* _crown on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _crown");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 34);
 fatal_exit(1);
@@ -676,12 +739,15 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashSet___core__abstract_collection__RemovableCollection__clear(var); /* Direct call hash_collection#HashSet#clear on <var:HashSet[nullable Object]>*/
+core___core__HashSet___core__abstract_collection__RemovableCollection__clear(var); /* Direct call hash_collection$HashSet$clear on <var:HashSet[nullable Object]>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -708,9 +774,12 @@ var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7-
 }
 var_e = var9;
 {
-{ /* Inline coloring#POSetConflictGraph#core (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (self) on <self:POSetConflictGraph[nullable Object]> */
 var13 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var13 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -726,9 +795,12 @@ var15 = !var14;
 var_16 = var15;
 if (var15){
 {
-{ /* Inline coloring#POSetConflictGraph#border (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (self) on <self:POSetConflictGraph[nullable Object]> */
 var19 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var19 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -747,9 +819,12 @@ var10 = var_16;
 }
 if (var10){
 {
-{ /* Inline coloring#POSetConflictGraph#crown (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$crown (self) on <self:POSetConflictGraph[nullable Object]> */
 var24 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___crown].val; /* _crown on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var24 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _crown");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 34);
 fatal_exit(1);
@@ -759,7 +834,7 @@ RET_LABEL23:(void)0;
 }
 }
 {
-core___core__HashSet___core__abstract_collection__SimpleCollection__add(var22, var_e); /* Direct call hash_collection#HashSet#add on <var22:HashSet[nullable Object]>*/
+core___core__HashSet___core__abstract_collection__SimpleCollection__add(var22, var_e); /* Direct call hash_collection$HashSet$add on <var22:HashSet[nullable Object]>*/
 }
 } else {
 }
@@ -773,7 +848,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#compute_conflicts for (self: POSetConflictGraph[nullable Object]) */
+/* method coloring$POSetConflictGraph$compute_conflicts for (self: POSetConflictGraph[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___compute_conflicts(val* self) {
 val* var /* : HashMap[nullable Object, Set[nullable Object]] */;
 val* var2 /* : HashMap[nullable Object, Set[nullable Object]] */;
@@ -790,9 +865,12 @@ val* var12 /* : POSet[nullable Object] */;
 val* var13 /* : POSetElement[nullable Object] */;
 val* var14 /* : Collection[nullable Object] */;
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -802,12 +880,15 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection#HashMap#clear on <var:HashMap[nullable Object, Set[nullable Object]]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection$HashMap$clear on <var:HashMap[nullable Object, Set[nullable Object]]>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#border (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (self) on <self:POSetConflictGraph[nullable Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -834,9 +915,12 @@ var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7-
 }
 var_e = var9;
 {
-{ /* Inline coloring#POSetConflictGraph#poset (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (self) on <self:POSetConflictGraph[nullable Object]> */
 var12 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -852,7 +936,7 @@ var13 = poset___poset__POSet____91d_93d(var10, var_e);
 var14 = poset___poset__POSetElement___greaters(var13);
 }
 {
-nitc___nitc__POSetConflictGraph___add_conflicts(self, var14); /* Direct call coloring#POSetConflictGraph#add_conflicts on <self:POSetConflictGraph[nullable Object]>*/
+nitc___nitc__POSetConflictGraph___add_conflicts(self, var14); /* Direct call coloring$POSetConflictGraph$add_conflicts on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
 ((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_7); /* next on <var_7:Iterator[nullable Object]>*/
@@ -864,7 +948,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#add_conflict for (self: POSetConflictGraph[nullable Object], nullable Object, nullable Object) */
+/* method coloring$POSetConflictGraph$add_conflict for (self: POSetConflictGraph[nullable Object], nullable Object, nullable Object) */
 void nitc___nitc__POSetConflictGraph___add_conflict(val* self, val* p0, val* p1) {
 short int var /* : Bool */;
 int cltype;
@@ -945,9 +1029,12 @@ fatal_exit(1);
 var_e = p0;
 var_o = p1;
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var9 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var9 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -962,9 +1049,12 @@ var10 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var7,
 var11 = !var10;
 if (var11){
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var14 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -975,17 +1065,20 @@ RET_LABEL13:(void)0;
 }
 var15 = NEW_core__HashSet(self->type->resolution_table->types[COLOR_core__HashSet__nitc__POSetConflictGraph___35dE]);
 {
-core___core__HashSet___core__kernel__Object__init(var15); /* Direct call hash_collection#HashSet#init on <var15:HashSet[nullable Object]>*/
+core___core__HashSet___core__kernel__Object__init(var15); /* Direct call hash_collection$HashSet$init on <var15:HashSet[nullable Object]>*/
 }
 {
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var12, var_e, var15); /* Direct call hash_collection#HashMap#[]= on <var12:HashMap[nullable Object, Set[nullable Object]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var12, var_e, var15); /* Direct call hash_collection$HashMap$[]= on <var12:HashMap[nullable Object, Set[nullable Object]]>*/
 }
 } else {
 }
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var18 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var18 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -1000,9 +1093,12 @@ var19 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var16
 var20 = !var19;
 if (var20){
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var23 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var23 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -1013,17 +1109,20 @@ RET_LABEL22:(void)0;
 }
 var24 = NEW_core__HashSet(self->type->resolution_table->types[COLOR_core__HashSet__nitc__POSetConflictGraph___35dE]);
 {
-core___core__HashSet___core__kernel__Object__init(var24); /* Direct call hash_collection#HashSet#init on <var24:HashSet[nullable Object]>*/
+core___core__HashSet___core__kernel__Object__init(var24); /* Direct call hash_collection$HashSet$init on <var24:HashSet[nullable Object]>*/
 }
 {
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var21, var_o, var24); /* Direct call hash_collection#HashMap#[]= on <var21:HashMap[nullable Object, Set[nullable Object]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var21, var_o, var24); /* Direct call hash_collection$HashMap$[]= on <var21:HashMap[nullable Object, Set[nullable Object]]>*/
 }
 } else {
 }
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var27 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var27 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -1039,9 +1138,12 @@ var28 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var2
 ((void(*)(val* self, val* p0))((((long)var28&3)?class_info[((long)var28&3)]:var28->class)->vft[COLOR_core__abstract_collection__SimpleCollection__add]))(var28, var_o); /* add on <var28:nullable Object(Set[nullable Object])>*/
 }
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (self) on <self:POSetConflictGraph[nullable Object]> */
 var31 = self->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <self:POSetConflictGraph[nullable Object]> */
 if (unlikely(var31 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -1058,7 +1160,7 @@ var32 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var2
 }
 RET_LABEL:;
 }
-/* method coloring#POSetConflictGraph#add_conflicts for (self: POSetConflictGraph[nullable Object], Collection[nullable Object]) */
+/* method coloring$POSetConflictGraph$add_conflicts for (self: POSetConflictGraph[nullable Object], Collection[nullable Object]) */
 void nitc___nitc__POSetConflictGraph___add_conflicts(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1130,7 +1232,7 @@ var10 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7
 }
 var_e2 = var10;
 {
-nitc___nitc__POSetConflictGraph___add_conflict(self, var_e1, var_e2); /* Direct call coloring#POSetConflictGraph#add_conflict on <self:POSetConflictGraph[nullable Object]>*/
+nitc___nitc__POSetConflictGraph___add_conflict(self, var_e1, var_e2); /* Direct call coloring$POSetConflictGraph$add_conflict on <self:POSetConflictGraph[nullable Object]>*/
 }
 {
 ((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_7); /* next on <var_7:Iterator[nullable Object]>*/
@@ -1150,7 +1252,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSet#to_conflict_graph for (self: POSet[nullable Object]): POSetConflictGraph[nullable Object] */
+/* method coloring$POSet$to_conflict_graph for (self: POSet[nullable Object]): POSetConflictGraph[nullable Object] */
 val* nitc__coloring___poset__POSet___to_conflict_graph(val* self) {
 val* var /* : POSetConflictGraph[nullable Object] */;
 val* var1 /* : POSetConflictGraph[nullable Object] */;
@@ -1166,7 +1268,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#is_colored for (self: POSetColorer[Object]): Bool */
+/* method coloring$POSetColorer$is_colored for (self: POSetColorer[Object]): Bool */
 short int nitc___nitc__POSetColorer___is_colored(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
@@ -1175,12 +1277,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#is_colored= for (self: POSetColorer[Object], Bool) */
+/* method coloring$POSetColorer$is_colored= for (self: POSetColorer[Object], Bool) */
 void nitc___nitc__POSetColorer___is_colored_61d(val* self, short int p0) {
 self->attrs[COLOR_nitc__coloring__POSetColorer___is_colored].s = p0; /* _is_colored on <self:POSetColorer[Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#ids for (self: POSetColorer[Object]): Map[Object, Int] */
+/* method coloring$POSetColorer$ids for (self: POSetColorer[Object]): Map[Object, Int] */
 val* nitc___nitc__POSetColorer___ids(val* self) {
 val* var /* : Map[Object, Int] */;
 short int var1 /* : Bool */;
@@ -1188,21 +1290,27 @@ short int var3 /* : Bool */;
 val* var4 /* : HashMap[Object, Int] */;
 val* var6 /* : HashMap[Object, Int] */;
 {
-{ /* Inline coloring#POSetColorer#is_colored (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$is_colored (self) on <self:POSetColorer[Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__POSetColorer___is_colored].s; /* _is_colored on <self:POSetColorer[Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 176);
 fatal_exit(1);
 }
 {
-{ /* Inline coloring#POSetColorer#ids_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$ids_cache (self) on <self:POSetColorer[Object]> */
 var6 = self->attrs[COLOR_nitc__coloring__POSetColorer___ids_cache].val; /* _ids_cache on <self:POSetColorer[Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ids_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 179);
 fatal_exit(1);
@@ -1216,12 +1324,15 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#ids_cache for (self: POSetColorer[Object]): HashMap[Object, Int] */
+/* method coloring$POSetColorer$ids_cache for (self: POSetColorer[Object]): HashMap[Object, Int] */
 val* nitc___nitc__POSetColorer___ids_cache(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var1 /* : HashMap[Object, Int] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetColorer___ids_cache].val; /* _ids_cache on <self:POSetColorer[Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ids_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 179);
 fatal_exit(1);
@@ -1230,7 +1341,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#colors for (self: POSetColorer[Object]): Map[Object, Int] */
+/* method coloring$POSetColorer$colors for (self: POSetColorer[Object]): Map[Object, Int] */
 val* nitc___nitc__POSetColorer___colors(val* self) {
 val* var /* : Map[Object, Int] */;
 short int var1 /* : Bool */;
@@ -1238,21 +1349,27 @@ short int var3 /* : Bool */;
 val* var4 /* : HashMap[Object, Int] */;
 val* var6 /* : HashMap[Object, Int] */;
 {
-{ /* Inline coloring#POSetColorer#is_colored (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$is_colored (self) on <self:POSetColorer[Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__POSetColorer___is_colored].s; /* _is_colored on <self:POSetColorer[Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 184);
 fatal_exit(1);
 }
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var6 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -1266,12 +1383,15 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#colors_cache for (self: POSetColorer[Object]): HashMap[Object, Int] */
+/* method coloring$POSetColorer$colors_cache for (self: POSetColorer[Object]): HashMap[Object, Int] */
 val* nitc___nitc__POSetColorer___colors_cache(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var1 /* : HashMap[Object, Int] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -1280,12 +1400,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#poset_cache for (self: POSetColorer[Object]): POSet[Object] */
+/* method coloring$POSetColorer$poset_cache for (self: POSetColorer[Object]): POSet[Object] */
 val* nitc___nitc__POSetColorer___poset_cache(val* self) {
 val* var /* : POSet[Object] */;
 val* var1 /* : POSet[Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val; /* _poset_cache on <self:POSetColorer[Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 194);
 fatal_exit(1);
@@ -1294,7 +1417,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#poset_cache= for (self: POSetColorer[Object], POSet[Object]) */
+/* method coloring$POSetColorer$poset_cache= for (self: POSetColorer[Object], POSet[Object]) */
 void nitc___nitc__POSetColorer___poset_cache_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1320,7 +1443,7 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val = p0; /* _poset_cache on <self:POSetColorer[Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#conflicts for (self: POSetColorer[Object]): Map[Object, Set[Object]] */
+/* method coloring$POSetColorer$conflicts for (self: POSetColorer[Object]): Map[Object, Set[Object]] */
 val* nitc___nitc__POSetColorer___conflicts(val* self) {
 val* var /* : Map[Object, Set[Object]] */;
 short int var1 /* : Bool */;
@@ -1328,21 +1451,27 @@ short int var3 /* : Bool */;
 val* var4 /* : Map[Object, Set[Object]] */;
 val* var6 /* : Map[Object, Set[Object]] */;
 {
-{ /* Inline coloring#POSetColorer#is_colored (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$is_colored (self) on <self:POSetColorer[Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__POSetColorer___is_colored].s; /* _is_colored on <self:POSetColorer[Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 198);
 fatal_exit(1);
 }
 {
-{ /* Inline coloring#POSetColorer#conflicts_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$conflicts_cache (self) on <self:POSetColorer[Object]> */
 var6 = self->attrs[COLOR_nitc__coloring__POSetColorer___conflicts_cache].val; /* _conflicts_cache on <self:POSetColorer[Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 201);
 fatal_exit(1);
@@ -1356,12 +1485,15 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#conflicts_cache for (self: POSetColorer[Object]): Map[Object, Set[Object]] */
+/* method coloring$POSetColorer$conflicts_cache for (self: POSetColorer[Object]): Map[Object, Set[Object]] */
 val* nitc___nitc__POSetColorer___conflicts_cache(val* self) {
 val* var /* : Map[Object, Set[Object]] */;
 val* var1 /* : Map[Object, Set[Object]] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetColorer___conflicts_cache].val; /* _conflicts_cache on <self:POSetColorer[Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 201);
 fatal_exit(1);
@@ -1370,7 +1502,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#conflicts_cache= for (self: POSetColorer[Object], Map[Object, Set[Object]]) */
+/* method coloring$POSetColorer$conflicts_cache= for (self: POSetColorer[Object], Map[Object, Set[Object]]) */
 void nitc___nitc__POSetColorer___conflicts_cache_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1396,12 +1528,15 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetColorer___conflicts_cache].val = p0; /* _conflicts_cache on <self:POSetColorer[Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#graph for (self: POSetColorer[Object]): POSetConflictGraph[Object] */
+/* method coloring$POSetColorer$graph for (self: POSetColorer[Object]): POSetConflictGraph[Object] */
 val* nitc___nitc__POSetColorer___graph(val* self) {
 val* var /* : POSetConflictGraph[Object] */;
 val* var1 /* : POSetConflictGraph[Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val; /* _graph on <self:POSetColorer[Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 203);
 fatal_exit(1);
@@ -1410,7 +1545,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#graph= for (self: POSetColorer[Object], POSetConflictGraph[Object]) */
+/* method coloring$POSetColorer$graph= for (self: POSetColorer[Object], POSetConflictGraph[Object]) */
 void nitc___nitc__POSetColorer___graph_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1436,7 +1571,7 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val = p0; /* _graph on <self:POSetColorer[Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#colorize for (self: POSetColorer[Object], POSet[Object]) */
+/* method coloring$POSetColorer$colorize for (self: POSetColorer[Object], POSet[Object]) */
 void nitc___nitc__POSetColorer___colorize(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -1482,7 +1617,7 @@ fatal_exit(1);
 }
 var_poset = p0;
 {
-{ /* Inline coloring#POSetColorer#poset_cache= (self,var_poset) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$poset_cache= (self,var_poset) on <self:POSetColorer[Object]> */
 /* Covariant cast for argument 0 (poset_cache) <var_poset:POSet[Object]> isa POSet[E] */
 /* <var_poset:POSet[Object]> isa POSet[E] */
 type_struct5 = self->type->resolution_table->types[COLOR_poset__POSet__nitc__POSetColorer___35dE];
@@ -1511,7 +1646,7 @@ var7 = NEW_nitc__POSetConflictGraph(self->type->resolution_table->types[COLOR_ni
 ((void(*)(val* self))(var7->class->vft[COLOR_core__kernel__Object__init]))(var7); /* init on <var7:POSetConflictGraph[Object]>*/
 }
 {
-{ /* Inline coloring#POSetColorer#graph= (self,var7) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$graph= (self,var7) on <self:POSetColorer[Object]> */
 /* Covariant cast for argument 0 (graph) <var7:POSetConflictGraph[Object]> isa POSetConflictGraph[E] */
 /* <var7:POSetConflictGraph[Object]> isa POSetConflictGraph[E] */
 type_struct12 = self->type->resolution_table->types[COLOR_nitc__POSetConflictGraph__nitc__POSetColorer___35dE];
@@ -1533,15 +1668,18 @@ RET_LABEL8:(void)0;
 }
 }
 {
-nitc___nitc__POSetColorer___allocate_ids(self); /* Direct call coloring#POSetColorer#allocate_ids on <self:POSetColorer[Object]>*/
+nitc___nitc__POSetColorer___allocate_ids(self); /* Direct call coloring$POSetColorer$allocate_ids on <self:POSetColorer[Object]>*/
 }
 {
-nitc___nitc__POSetColorer___compute_colors(self); /* Direct call coloring#POSetColorer#compute_colors on <self:POSetColorer[Object]>*/
+nitc___nitc__POSetColorer___compute_colors(self); /* Direct call coloring$POSetColorer$compute_colors on <self:POSetColorer[Object]>*/
 }
 {
-{ /* Inline coloring#POSetColorer#graph (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$graph (self) on <self:POSetColorer[Object]> */
 var16 = self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val; /* _graph on <self:POSetColorer[Object]> */
 if (unlikely(var16 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 203);
 fatal_exit(1);
@@ -1551,9 +1689,12 @@ RET_LABEL15:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (var14) on <var14:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (var14) on <var14:POSetConflictGraph[Object]> */
 var19 = var14->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <var14:POSetConflictGraph[Object]> */
 if (unlikely(var19 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -1563,7 +1704,7 @@ RET_LABEL18:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetColorer#conflicts_cache= (self,var17) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$conflicts_cache= (self,var17) on <self:POSetColorer[Object]> */
 /* Covariant cast for argument 0 (conflicts_cache) <var17:HashMap[nullable Object, Set[nullable Object]](HashMap[Object, Set[Object]])> isa Map[E, Set[E]] */
 /* <var17:HashMap[nullable Object, Set[nullable Object]](HashMap[Object, Set[Object]])> isa Map[E, Set[E]] */
 type_struct24 = self->type->resolution_table->types[COLOR_core__Map__nitc__POSetColorer___35dE__core__Set__nitc__POSetColorer___35dE];
@@ -1585,14 +1726,14 @@ RET_LABEL20:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetColorer#is_colored= (self,1) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$is_colored= (self,1) on <self:POSetColorer[Object]> */
 self->attrs[COLOR_nitc__coloring__POSetColorer___is_colored].s = 1; /* _is_colored on <self:POSetColorer[Object]> */
 RET_LABEL26:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#allocate_ids for (self: POSetColorer[Object]) */
+/* method coloring$POSetColorer$allocate_ids for (self: POSetColorer[Object]) */
 void nitc___nitc__POSetColorer___allocate_ids(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var2 /* : HashMap[Object, Int] */;
@@ -1617,9 +1758,12 @@ val* var21 /* : HashMap[Object, Int] */;
 long var22 /* : Int */;
 val* var23 /* : nullable Object */;
 {
-{ /* Inline coloring#POSetColorer#ids_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$ids_cache (self) on <self:POSetColorer[Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetColorer___ids_cache].val; /* _ids_cache on <self:POSetColorer[Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ids_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 179);
 fatal_exit(1);
@@ -1629,13 +1773,16 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection#HashMap#clear on <var:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection$HashMap$clear on <var:HashMap[Object, Int]>*/
 }
 var3 = NEW_core__HashSet(self->type->resolution_table->types[COLOR_core__HashSet__nitc__POSetColorer___35dE]);
 {
-{ /* Inline coloring#POSetColorer#poset_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$poset_cache (self) on <self:POSetColorer[Object]> */
 var6 = self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val; /* _poset_cache on <self:POSetColorer[Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 194);
 fatal_exit(1);
@@ -1648,13 +1795,16 @@ RET_LABEL5:(void)0;
 var7 = core__array___Collection___to_a(var4);
 }
 {
-core___core__HashSet___from(var3, var7); /* Direct call hash_collection#HashSet#from on <var3:HashSet[Object]>*/
+core___core__HashSet___from(var3, var7); /* Direct call hash_collection$HashSet$from on <var3:HashSet[Object]>*/
 }
 var_elements = var3;
 {
-{ /* Inline coloring#POSetColorer#poset_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$poset_cache (self) on <self:POSetColorer[Object]> */
 var10 = self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val; /* _poset_cache on <self:POSetColorer[Object]> */
 if (unlikely(var10 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 194);
 fatal_exit(1);
@@ -1684,9 +1834,12 @@ var15 = ((val*(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var
 }
 var_e = var15;
 {
-{ /* Inline coloring#POSetColorer#ids_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$ids_cache (self) on <self:POSetColorer[Object]> */
 var18 = self->attrs[COLOR_nitc__coloring__POSetColorer___ids_cache].val; /* _ids_cache on <self:POSetColorer[Object]> */
 if (unlikely(var18 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ids_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 179);
 fatal_exit(1);
@@ -1696,9 +1849,12 @@ RET_LABEL17:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetColorer#ids_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$ids_cache (self) on <self:POSetColorer[Object]> */
 var21 = self->attrs[COLOR_nitc__coloring__POSetColorer___ids_cache].val; /* _ids_cache on <self:POSetColorer[Object]> */
 if (unlikely(var21 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ids_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 179);
 fatal_exit(1);
@@ -1712,7 +1868,7 @@ var22 = core___core__HashMap___core__abstract_collection__MapRead__length(var19)
 }
 {
 var23 = (val*)(var22<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var16, var_e, var23); /* Direct call hash_collection#HashMap#[]= on <var16:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var16, var_e, var23); /* Direct call hash_collection$HashMap$[]= on <var16:HashMap[Object, Int]>*/
 }
 {
 ((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_13); /* next on <var_13:IndexedIterator[Object]>*/
@@ -1724,7 +1880,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#compute_colors for (self: POSetColorer[Object]) */
+/* method coloring$POSetColorer$compute_colors for (self: POSetColorer[Object]) */
 void nitc___nitc__POSetColorer___compute_colors(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var2 /* : HashMap[Object, Int] */;
@@ -1737,9 +1893,12 @@ val* var11 /* : POSetConflictGraph[Object] */;
 val* var12 /* : HashSet[nullable Object] */;
 val* var14 /* : HashSet[nullable Object] */;
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -1749,15 +1908,18 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection#HashMap#clear on <var:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection$HashMap$clear on <var:HashMap[Object, Int]>*/
 }
 {
-nitc___nitc__POSetColorer___colorize_core(self); /* Direct call coloring#POSetColorer#colorize_core on <self:POSetColorer[Object]>*/
+nitc___nitc__POSetColorer___colorize_core(self); /* Direct call coloring$POSetColorer$colorize_core on <self:POSetColorer[Object]>*/
 }
 {
-{ /* Inline coloring#POSetColorer#graph (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$graph (self) on <self:POSetColorer[Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val; /* _graph on <self:POSetColorer[Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 203);
 fatal_exit(1);
@@ -1767,9 +1929,12 @@ RET_LABEL4:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#border (var3) on <var3:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (var3) on <var3:POSetConflictGraph[Object]> */
 var8 = var3->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <var3:POSetConflictGraph[Object]> */
 if (unlikely(var8 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -1779,12 +1944,15 @@ RET_LABEL7:(void)0;
 }
 }
 {
-nitc___nitc__POSetColorer___colorize_set(self, var6); /* Direct call coloring#POSetColorer#colorize_set on <self:POSetColorer[Object]>*/
+nitc___nitc__POSetColorer___colorize_set(self, var6); /* Direct call coloring$POSetColorer$colorize_set on <self:POSetColorer[Object]>*/
 }
 {
-{ /* Inline coloring#POSetColorer#graph (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$graph (self) on <self:POSetColorer[Object]> */
 var11 = self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val; /* _graph on <self:POSetColorer[Object]> */
 if (unlikely(var11 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 203);
 fatal_exit(1);
@@ -1794,9 +1962,12 @@ RET_LABEL10:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#crown (var9) on <var9:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$crown (var9) on <var9:POSetConflictGraph[Object]> */
 var14 = var9->attrs[COLOR_nitc__coloring__POSetConflictGraph___crown].val; /* _crown on <var9:POSetConflictGraph[Object]> */
 if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _crown");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 34);
 fatal_exit(1);
@@ -1806,11 +1977,11 @@ RET_LABEL13:(void)0;
 }
 }
 {
-nitc___nitc__POSetColorer___colorize_set(self, var12); /* Direct call coloring#POSetColorer#colorize_set on <self:POSetColorer[Object]>*/
+nitc___nitc__POSetColorer___colorize_set(self, var12); /* Direct call coloring$POSetColorer$colorize_set on <self:POSetColorer[Object]>*/
 }
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#colorize_core for (self: POSetColorer[Object]) */
+/* method coloring$POSetColorer$colorize_core for (self: POSetColorer[Object]) */
 void nitc___nitc__POSetColorer___colorize_core(val* self) {
 val* var /* : POSet[Object] */;
 val* var2 /* : POSet[Object] */;
@@ -1845,9 +2016,12 @@ val* var29 /* : HashMap[Object, Int] */;
 val* var31 /* : HashMap[Object, Int] */;
 val* var32 /* : nullable Object */;
 {
-{ /* Inline coloring#POSetColorer#poset_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$poset_cache (self) on <self:POSetColorer[Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val; /* _poset_cache on <self:POSetColorer[Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 194);
 fatal_exit(1);
@@ -1857,9 +2031,12 @@ RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetColorer#graph (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$graph (self) on <self:POSetColorer[Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val; /* _graph on <self:POSetColorer[Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 203);
 fatal_exit(1);
@@ -1869,9 +2046,12 @@ RET_LABEL4:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#core (var3) on <var3:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (var3) on <var3:POSetConflictGraph[Object]> */
 var8 = var3->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <var3:POSetConflictGraph[Object]> */
 if (unlikely(var8 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -1905,9 +2085,12 @@ var14 = nitc___nitc__POSetColorer___min_color(self, var_e);
 }
 var_color = var14;
 {
-{ /* Inline coloring#POSetColorer#graph (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$graph (self) on <self:POSetColorer[Object]> */
 var17 = self->attrs[COLOR_nitc__coloring__POSetColorer___graph].val; /* _graph on <self:POSetColorer[Object]> */
 if (unlikely(var17 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 203);
 fatal_exit(1);
@@ -1917,9 +2100,12 @@ RET_LABEL16:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (var15) on <var15:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (var15) on <var15:POSetConflictGraph[Object]> */
 var20 = var15->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <var15:POSetConflictGraph[Object]> */
 if (unlikely(var20 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -1939,14 +2125,14 @@ var22 = nitc___nitc__POSetColorer___is_color_free(self, var_color, var_conflicts
 var23 = !var22;
 if (var23){
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var26 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var26)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var27 = var_color + 1l;
@@ -1962,9 +2148,12 @@ goto BREAK_label28;
 }
 BREAK_label28: (void)0;
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var31 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var31 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -1975,7 +2164,7 @@ RET_LABEL30:(void)0;
 }
 {
 var32 = (val*)(var_color<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var29, var_e, var32); /* Direct call hash_collection#HashMap#[]= on <var29:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var29, var_e, var32); /* Direct call hash_collection$HashMap$[]= on <var29:HashMap[Object, Int]>*/
 }
 {
 ((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_11); /* next on <var_11:IndexedIterator[Object]>*/
@@ -1987,7 +2176,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#colorize_set for (self: POSetColorer[Object], Set[Object]) */
+/* method coloring$POSetColorer$colorize_set for (self: POSetColorer[Object], Set[Object]) */
 void nitc___nitc__POSetColorer___colorize_set(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2026,9 +2215,12 @@ fatal_exit(1);
 }
 var_set = p0;
 {
-{ /* Inline coloring#POSetColorer#poset_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$poset_cache (self) on <self:POSetColorer[Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val; /* _poset_cache on <self:POSetColorer[Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 194);
 fatal_exit(1);
@@ -2058,9 +2250,12 @@ var8 = ((val*(*)(val* self))((((long)var_6&3)?class_info[((long)var_6&3)]:var_6-
 }
 var_e = var8;
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var11 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var11 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -2074,7 +2269,7 @@ var12 = nitc___nitc__POSetColorer___min_color(self, var_e);
 }
 {
 var13 = (val*)(var12<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var9, var_e, var13); /* Direct call hash_collection#HashMap#[]= on <var9:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var9, var_e, var13); /* Direct call hash_collection$HashMap$[]= on <var9:HashMap[Object, Int]>*/
 }
 {
 ((void(*)(val* self))((((long)var_6&3)?class_info[((long)var_6&3)]:var_6->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_6); /* next on <var_6:IndexedIterator[Object]>*/
@@ -2086,7 +2281,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetColorer#min_color for (self: POSetColorer[Object], Object): Int */
+/* method coloring$POSetColorer$min_color for (self: POSetColorer[Object], Object): Int */
 long nitc___nitc__POSetColorer___min_color(val* self, val* p0) {
 long var /* : Int */;
 short int var1 /* : Bool */;
@@ -2147,7 +2342,7 @@ fatal_exit(1);
 }
 var_e = p0;
 {
-{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
+{ /* Inline kernel$Int$unary - (1l) on <1l:Int> */
 var4 = -1l;
 var2 = var4;
 goto RET_LABEL3;
@@ -2156,9 +2351,12 @@ RET_LABEL3:(void)0;
 }
 var_max_color = var2;
 {
-{ /* Inline coloring#POSetColorer#poset_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$poset_cache (self) on <self:POSetColorer[Object]> */
 var7 = self->attrs[COLOR_nitc__coloring__POSetColorer___poset_cache].val; /* _poset_cache on <self:POSetColorer[Object]> */
 if (unlikely(var7 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 194);
 fatal_exit(1);
@@ -2191,9 +2389,12 @@ var13 = ((val*(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var
 }
 var_p = var13;
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var16 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var16 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -2211,9 +2412,12 @@ goto BREAK_label19;
 } else {
 }
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var22 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var22 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -2228,14 +2432,14 @@ var23 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var2
 var24 = (long)(var23)>>2;
 var_color = var24;
 {
-{ /* Inline kernel#Int#> (var_color,var_max_color) on <var_color:Int> */
+{ /* Inline kernel$Int$> (var_color,var_max_color) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <var_max_color:Int> isa OTHER */
 /* <var_max_color:Int> isa OTHER */
 var27 = 1; /* easy <var_max_color:Int> isa OTHER*/
 if (unlikely(!var27)) {
 var_class_name30 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name30);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var31 = var_color > var_max_color;
@@ -2258,14 +2462,14 @@ BREAK_label: (void)0;
 ((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_11); /* finish on <var_11:Iterator[Object]>*/
 }
 {
-{ /* Inline kernel#Int#+ (var_max_color,1l) on <var_max_color:Int> */
+{ /* Inline kernel$Int$+ (var_max_color,1l) on <var_max_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var34 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var34)) {
 var_class_name37 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name37);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var38 = var_max_color + 1l;
@@ -2279,7 +2483,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetColorer#is_color_free for (self: POSetColorer[Object], Int, Collection[Object]): Bool */
+/* method coloring$POSetColorer$is_color_free for (self: POSetColorer[Object], Int, Collection[Object]): Bool */
 short int nitc___nitc__POSetColorer___is_color_free(val* self, long p0, val* p1) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
@@ -2342,9 +2546,12 @@ var5 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3-
 }
 var_e = var5;
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var9 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var9 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -2359,9 +2566,12 @@ var10 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var7,
 var_11 = var10;
 if (var10){
 {
-{ /* Inline coloring#POSetColorer#colors_cache (self) on <self:POSetColorer[Object]> */
+{ /* Inline coloring$POSetColorer$colors_cache (self) on <self:POSetColorer[Object]> */
 var14 = self->attrs[COLOR_nitc__coloring__POSetColorer___colors_cache].val; /* _colors_cache on <self:POSetColorer[Object]> */
 if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 187);
 fatal_exit(1);
@@ -2374,7 +2584,7 @@ RET_LABEL13:(void)0;
 var15 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var12, var_e);
 }
 {
-{ /* Inline kernel#Int#== (var15,var_color) on <var15:nullable Object(Int)> */
+{ /* Inline kernel$Int$== (var15,var_color) on <var15:nullable Object(Int)> */
 var19 = (long)(var15)>>2;
 var18 = var19 == var_color;
 var16 = var18;
@@ -2404,12 +2614,15 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#graph for (self: POSetGroupColorer[Object, Object]): POSetConflictGraph[Object] */
+/* method coloring$POSetGroupColorer$graph for (self: POSetGroupColorer[Object, Object]): POSetConflictGraph[Object] */
 val* nitc___nitc__POSetGroupColorer___graph(val* self) {
 val* var /* : POSetConflictGraph[Object] */;
 val* var1 /* : POSetConflictGraph[Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -2418,7 +2631,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#graph= for (self: POSetGroupColorer[Object, Object], POSetConflictGraph[Object]) */
+/* method coloring$POSetGroupColorer$graph= for (self: POSetGroupColorer[Object, Object], POSetConflictGraph[Object]) */
 void nitc___nitc__POSetGroupColorer___graph_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2444,12 +2657,15 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val = p0; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetGroupColorer#buckets for (self: POSetGroupColorer[Object, Object]): Map[Object, Collection[Object]] */
+/* method coloring$POSetGroupColorer$buckets for (self: POSetGroupColorer[Object, Object]): Map[Object, Collection[Object]] */
 val* nitc___nitc__POSetGroupColorer___buckets(val* self) {
 val* var /* : Map[Object, Collection[Object]] */;
 val* var1 /* : Map[Object, Collection[Object]] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___buckets].val; /* _buckets on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _buckets");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 288);
 fatal_exit(1);
@@ -2458,7 +2674,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#buckets= for (self: POSetGroupColorer[Object, Object], Map[Object, Collection[Object]]) */
+/* method coloring$POSetGroupColorer$buckets= for (self: POSetGroupColorer[Object, Object], Map[Object, Collection[Object]]) */
 void nitc___nitc__POSetGroupColorer___buckets_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2484,7 +2700,7 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetGroupColorer___buckets].val = p0; /* _buckets on <self:POSetGroupColorer[Object, Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetGroupColorer#poset for (self: POSetGroupColorer[Object, Object]): POSet[Object] */
+/* method coloring$POSetGroupColorer$poset for (self: POSetGroupColorer[Object, Object]): POSet[Object] */
 val* nitc___nitc__POSetGroupColorer___poset(val* self) {
 val* var /* : POSet[Object] */;
 val* var1 /* : POSetConflictGraph[Object] */;
@@ -2492,9 +2708,12 @@ val* var3 /* : POSetConflictGraph[Object] */;
 val* var4 /* : POSet[nullable Object] */;
 val* var6 /* : POSet[nullable Object] */;
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -2504,9 +2723,12 @@ RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (var1) on <var1:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (var1) on <var1:POSetConflictGraph[Object]> */
 var6 = var1->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <var1:POSetConflictGraph[Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -2520,7 +2742,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#colors for (self: POSetGroupColorer[Object, Object]): Map[Object, Int] */
+/* method coloring$POSetGroupColorer$colors for (self: POSetGroupColorer[Object, Object]): Map[Object, Int] */
 val* nitc___nitc__POSetGroupColorer___colors(val* self) {
 val* var /* : Map[Object, Int] */;
 short int var1 /* : Bool */;
@@ -2545,6 +2767,9 @@ var1 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors].val != NULL
 if(likely(var1)) {
 var2 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors].val; /* _colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 300);
 fatal_exit(1);
@@ -2552,9 +2777,12 @@ fatal_exit(1);
 } else {
 {
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var7 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var7 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -2564,9 +2792,12 @@ RET_LABEL6:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#poset (var5) on <var5:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$poset (var5) on <var5:POSetConflictGraph[Object]> */
 var10 = var5->attrs[COLOR_nitc__coloring__POSetConflictGraph___poset].val; /* _poset on <var5:POSetConflictGraph[Object]> */
 if (unlikely(var10 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 48);
 fatal_exit(1);
@@ -2593,9 +2824,12 @@ var14 = ((val*(*)(val* self))((((long)var_12&3)?class_info[((long)var_12&3)]:var
 }
 var_h = var14;
 {
-{ /* Inline coloring#POSetGroupColorer#used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var17 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___used_colors].val; /* _used_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var17 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _used_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 314);
 fatal_exit(1);
@@ -2606,10 +2840,10 @@ RET_LABEL16:(void)0;
 }
 var18 = NEW_core__HashSet(&type_core__HashSet__core__Int);
 {
-core___core__HashSet___core__kernel__Object__init(var18); /* Direct call hash_collection#HashSet#init on <var18:HashSet[Int]>*/
+core___core__HashSet___core__kernel__Object__init(var18); /* Direct call hash_collection$HashSet$init on <var18:HashSet[Int]>*/
 }
 {
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var15, var_h, var18); /* Direct call hash_collection#HashMap#[]= on <var15:HashMap[Object, HashSet[Int]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var15, var_h, var18); /* Direct call hash_collection$HashMap$[]= on <var15:HashMap[Object, HashSet[Int]]>*/
 }
 {
 ((void(*)(val* self))((((long)var_12&3)?class_info[((long)var_12&3)]:var_12->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_12); /* next on <var_12:Iterator[Object]>*/
@@ -2620,12 +2854,15 @@ BREAK_label: (void)0;
 ((void(*)(val* self))((((long)var_12&3)?class_info[((long)var_12&3)]:var_12->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_12); /* finish on <var_12:Iterator[Object]>*/
 }
 {
-nitc___nitc__POSetGroupColorer___compute_colors(self); /* Direct call coloring#POSetGroupColorer#compute_colors on <self:POSetGroupColorer[Object, Object]>*/
+nitc___nitc__POSetGroupColorer___compute_colors(self); /* Direct call coloring$POSetGroupColorer$compute_colors on <self:POSetGroupColorer[Object, Object]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
 var21 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors_cache].val; /* _colors_cache on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var21 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 311);
 fatal_exit(1);
@@ -2645,12 +2882,15 @@ var = var2;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#colors_cache for (self: POSetGroupColorer[Object, Object]): HashMap[Object, Int] */
+/* method coloring$POSetGroupColorer$colors_cache for (self: POSetGroupColorer[Object, Object]): HashMap[Object, Int] */
 val* nitc___nitc__POSetGroupColorer___colors_cache(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var1 /* : HashMap[Object, Int] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors_cache].val; /* _colors_cache on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 311);
 fatal_exit(1);
@@ -2659,12 +2899,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#used_colors for (self: POSetGroupColorer[Object, Object]): HashMap[Object, HashSet[Int]] */
+/* method coloring$POSetGroupColorer$used_colors for (self: POSetGroupColorer[Object, Object]): HashMap[Object, HashSet[Int]] */
 val* nitc___nitc__POSetGroupColorer___used_colors(val* self) {
 val* var /* : HashMap[Object, HashSet[Int]] */;
 val* var1 /* : HashMap[Object, HashSet[Int]] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___used_colors].val; /* _used_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _used_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 314);
 fatal_exit(1);
@@ -2673,7 +2916,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#build_layout for (self: POSetGroupColorer[Object, Object], Object): Array[nullable Object] */
+/* method coloring$POSetGroupColorer$build_layout for (self: POSetGroupColorer[Object, Object], Object): Array[nullable Object] */
 val* nitc___nitc__POSetGroupColorer___build_layout(val* self, val* p0) {
 val* var /* : Array[nullable Object] */;
 short int var1 /* : Bool */;
@@ -2736,31 +2979,51 @@ val* var53 /* : NativeArray[String] */;
 static val* varonce;
 static val* varonce54;
 val* var55 /* : String */;
-char* var56 /* : NativeString */;
+char* var56 /* : CString */;
 val* var57 /* : String */;
-static val* varonce58;
-val* var59 /* : String */;
-char* var60 /* : NativeString */;
-val* var61 /* : String */;
+val* var58 /* : nullable Int */;
+val* var59 /* : nullable Int */;
+val* var60 /* : nullable Bool */;
+val* var61 /* : nullable Bool */;
 static val* varonce62;
 val* var63 /* : String */;
-char* var64 /* : NativeString */;
+char* var64 /* : CString */;
 val* var65 /* : String */;
-static val* varonce66;
-val* var67 /* : String */;
-char* var68 /* : NativeString */;
-val* var69 /* : String */;
-val* var70 /* : String */;
+val* var66 /* : nullable Int */;
+val* var67 /* : nullable Int */;
+val* var68 /* : nullable Bool */;
+val* var69 /* : nullable Bool */;
+static val* varonce70;
 val* var71 /* : String */;
-val* var72 /* : Object */;
-val* var73 /* : nullable Object */;
-static val* varonce74;
-val* var75 /* : String */;
-char* var76 /* : NativeString */;
-val* var77 /* : String */;
-val* var78 /* : String */;
+char* var72 /* : CString */;
+val* var73 /* : String */;
+val* var74 /* : nullable Int */;
+val* var75 /* : nullable Int */;
+val* var76 /* : nullable Bool */;
+val* var77 /* : nullable Bool */;
+static val* varonce78;
 val* var79 /* : String */;
-val* var80 /* : String */;
+char* var80 /* : CString */;
+val* var81 /* : String */;
+val* var82 /* : nullable Int */;
+val* var83 /* : nullable Int */;
+val* var84 /* : nullable Bool */;
+val* var85 /* : nullable Bool */;
+val* var86 /* : String */;
+val* var87 /* : String */;
+val* var88 /* : Object */;
+val* var89 /* : nullable Object */;
+static val* varonce90;
+val* var91 /* : String */;
+char* var92 /* : CString */;
+val* var93 /* : String */;
+val* var94 /* : nullable Int */;
+val* var95 /* : nullable Int */;
+val* var96 /* : nullable Bool */;
+val* var97 /* : nullable Bool */;
+val* var98 /* : String */;
+val* var99 /* : String */;
+val* var100 /* : String */;
 /* Covariant cast for argument 0 (h) <p0:Object> isa H */
 /* <p0:Object> isa H */
 type_struct = self->type->resolution_table->types[COLOR_nitc__POSetGroupColorer___35dH];
@@ -2780,7 +3043,7 @@ fatal_exit(1);
 var_h = p0;
 var2 = NEW_core__Array(self->type->resolution_table->types[COLOR_core__Array__nullable__nitc__POSetGroupColorer___35dE]);
 {
-core___core__Array___core__kernel__Object__init(var2); /* Direct call array#Array#init on <var2:Array[nullable Object]>*/
+core___core__Array___core__kernel__Object__init(var2); /* Direct call array$Array$init on <var2:Array[nullable Object]>*/
 }
 var_table = var2;
 {
@@ -2810,9 +3073,12 @@ var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7-
 }
 var_s = var9;
 {
-{ /* Inline coloring#POSetGroupColorer#buckets (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$buckets (self) on <self:POSetGroupColorer[Object, Object]> */
 var12 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___buckets].val; /* _buckets on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _buckets");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 288);
 fatal_exit(1);
@@ -2864,21 +3130,21 @@ var24 = ((val*(*)(val* self, val* p0))((((long)var23&3)?class_info[((long)var23&
 var25 = (long)(var24)>>2;
 var_color = var25;
 {
-{ /* Inline array#AbstractArrayRead#length (var_table) on <var_table:Array[nullable Object]> */
+{ /* Inline array$AbstractArrayRead$length (var_table) on <var_table:Array[nullable Object]> */
 var28 = var_table->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_table:Array[nullable Object]> */
 var26 = var28;
 RET_LABEL27:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#<= (var26,var_color) on <var26:Int> */
+{ /* Inline kernel$Int$<= (var26,var_color) on <var26:Int> */
 /* Covariant cast for argument 0 (i) <var_color:Int> isa OTHER */
 /* <var_color:Int> isa OTHER */
 var31 = 1; /* easy <var_color:Int> isa OTHER*/
 if (unlikely(!var31)) {
 var_class_name34 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 724);
 fatal_exit(1);
 }
 var35 = var26 <= var_color;
@@ -2889,7 +3155,7 @@ RET_LABEL30:(void)0;
 }
 if (var29){
 {
-{ /* Inline array#AbstractArrayRead#length (var_table) on <var_table:Array[nullable Object]> */
+{ /* Inline array$AbstractArrayRead$length (var_table) on <var_table:Array[nullable Object]> */
 var38 = var_table->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_table:Array[nullable Object]> */
 var36 = var38;
 RET_LABEL37:(void)0;
@@ -2899,14 +3165,14 @@ var_i = var36;
 var_39 = var_color;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_i,var_39) on <var_i:Int> */
+{ /* Inline kernel$Int$< (var_i,var_39) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <var_39:Int> isa OTHER */
 /* <var_39:Int> isa OTHER */
 var42 = 1; /* easy <var_39:Int> isa OTHER*/
 if (unlikely(!var42)) {
 var_class_name45 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name45);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var46 = var_i < var_39;
@@ -2920,7 +3186,7 @@ if (var40){
 goto BREAK_label47;
 }
 {
-core___core__Array___core__abstract_collection__Sequence___91d_93d_61d(var_table, var_i, ((val*)NULL)); /* Direct call array#Array#[]= on <var_table:Array[nullable Object]>*/
+core___core__Array___core__abstract_collection__Sequence___91d_93d_61d(var_table, var_i, ((val*)NULL)); /* Direct call array$Array$[]= on <var_table:Array[nullable Object]>*/
 }
 {
 var48 = core___core__Int___Discrete__successor(var_i, 1l);
@@ -2944,83 +3210,106 @@ var50 = var51;
 if (unlikely(!var50)) {
 var52 = glob_sys;
 if (unlikely(varonce==NULL)) {
-var53 = NEW_core__NativeArray(8l, &type_core__NativeArray__core__String);
+var53 = NEW_core__NativeArray((int)8l, &type_core__NativeArray__core__String);
 if (likely(varonce54!=NULL)) {
 var55 = varonce54;
 } else {
 var56 = "in ";
-var57 = core__flat___NativeString___to_s_full(var56, 3l, 3l);
+var58 = (val*)(3l<<2|1);
+var59 = (val*)(3l<<2|1);
+var60 = (val*)((long)(0)<<2|3);
+var61 = (val*)((long)(0)<<2|3);
+var57 = core__flat___CString___to_s_unsafe(var56, var58, var59, var60, var61);
 var55 = var57;
 varonce54 = var55;
 }
 ((struct instance_core__NativeArray*)var53)->values[0]=var55;
-if (likely(varonce58!=NULL)) {
-var59 = varonce58;
-} else {
-var60 = ", for ";
-var61 = core__flat___NativeString___to_s_full(var60, 6l, 6l);
-var59 = var61;
-varonce58 = var59;
-}
-((struct instance_core__NativeArray*)var53)->values[2]=var59;
 if (likely(varonce62!=NULL)) {
 var63 = varonce62;
 } else {
-var64 = ": ";
-var65 = core__flat___NativeString___to_s_full(var64, 2l, 2l);
+var64 = ", for ";
+var66 = (val*)(6l<<2|1);
+var67 = (val*)(6l<<2|1);
+var68 = (val*)((long)(0)<<2|3);
+var69 = (val*)((long)(0)<<2|3);
+var65 = core__flat___CString___to_s_unsafe(var64, var66, var67, var68, var69);
 var63 = var65;
 varonce62 = var63;
 }
-((struct instance_core__NativeArray*)var53)->values[4]=var63;
-if (likely(varonce66!=NULL)) {
-var67 = varonce66;
+((struct instance_core__NativeArray*)var53)->values[2]=var63;
+if (likely(varonce70!=NULL)) {
+var71 = varonce70;
 } else {
-var68 = " vs ";
-var69 = core__flat___NativeString___to_s_full(var68, 4l, 4l);
-var67 = var69;
-varonce66 = var67;
+var72 = ": ";
+var74 = (val*)(2l<<2|1);
+var75 = (val*)(2l<<2|1);
+var76 = (val*)((long)(0)<<2|3);
+var77 = (val*)((long)(0)<<2|3);
+var73 = core__flat___CString___to_s_unsafe(var72, var74, var75, var76, var77);
+var71 = var73;
+varonce70 = var71;
 }
-((struct instance_core__NativeArray*)var53)->values[6]=var67;
+((struct instance_core__NativeArray*)var53)->values[4]=var71;
+if (likely(varonce78!=NULL)) {
+var79 = varonce78;
+} else {
+var80 = " vs ";
+var82 = (val*)(4l<<2|1);
+var83 = (val*)(4l<<2|1);
+var84 = (val*)((long)(0)<<2|3);
+var85 = (val*)((long)(0)<<2|3);
+var81 = core__flat___CString___to_s_unsafe(var80, var82, var83, var84, var85);
+var79 = var81;
+varonce78 = var79;
+}
+((struct instance_core__NativeArray*)var53)->values[6]=var79;
 } else {
 var53 = varonce;
 varonce = NULL;
 }
 {
-var70 = ((val*(*)(val* self))((((long)var_h&3)?class_info[((long)var_h&3)]:var_h->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_h); /* to_s on <var_h:Object>*/
+var86 = ((val*(*)(val* self))((((long)var_h&3)?class_info[((long)var_h&3)]:var_h->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_h); /* to_s on <var_h:Object>*/
 }
-((struct instance_core__NativeArray*)var53)->values[1]=var70;
-var71 = core__flat___Int___core__abstract_text__Object__to_s(var_color);
-((struct instance_core__NativeArray*)var53)->values[3]=var71;
+((struct instance_core__NativeArray*)var53)->values[1]=var86;
+var87 = core__flat___Int___core__abstract_text__Object__to_s(var_color);
+((struct instance_core__NativeArray*)var53)->values[3]=var87;
 {
-var73 = core___core__Array___core__abstract_collection__SequenceRead___91d_93d(var_table, var_color);
+var89 = core___core__Array___core__abstract_collection__SequenceRead___91d_93d(var_table, var_color);
 }
-if (var73!=NULL) {
-var72 = var73;
+if (var89!=NULL) {
+var88 = var89;
 } else {
-if (likely(varonce74!=NULL)) {
-var75 = varonce74;
+if (likely(varonce90!=NULL)) {
+var91 = varonce90;
 } else {
-var76 = "";
-var77 = core__flat___NativeString___to_s_full(var76, 0l, 0l);
-var75 = var77;
-varonce74 = var75;
+var92 = "";
+var94 = (val*)(0l<<2|1);
+var95 = (val*)(0l<<2|1);
+var96 = (val*)((long)(0)<<2|3);
+var97 = (val*)((long)(0)<<2|3);
+var93 = core__flat___CString___to_s_unsafe(var92, var94, var95, var96, var97);
+var91 = var93;
+varonce90 = var91;
 }
-var72 = var75;
+var88 = var91;
 }
 {
-var78 = ((val*(*)(val* self))((((long)var72&3)?class_info[((long)var72&3)]:var72->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var72); /* to_s on <var72:Object>*/
+var98 = ((val*(*)(val* self))((((long)var88&3)?class_info[((long)var88&3)]:var88->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var88); /* to_s on <var88:Object>*/
 }
-((struct instance_core__NativeArray*)var53)->values[5]=var78;
+((struct instance_core__NativeArray*)var53)->values[5]=var98;
 {
-var79 = ((val*(*)(val* self))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_e); /* to_s on <var_e:Object>*/
+var99 = ((val*(*)(val* self))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_e); /* to_s on <var_e:Object>*/
 }
-((struct instance_core__NativeArray*)var53)->values[7]=var79;
+((struct instance_core__NativeArray*)var53)->values[7]=var99;
 {
-var80 = ((val*(*)(val* self))(var53->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var53); /* native_to_s on <var53:NativeArray[String]>*/
+var100 = ((val*(*)(val* self))(var53->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var53); /* native_to_s on <var53:NativeArray[String]>*/
 }
 varonce = var53;
 {
-core__file___Sys___print(var52, var80); /* Direct call file#Sys#print on <var52:Sys>*/
+core__file___Sys___print(var52, var100); /* Direct call file$Sys$print on <var52:Sys>*/
+}
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
 }
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 333);
@@ -3028,7 +3317,7 @@ fatal_exit(1);
 }
 }
 {
-core___core__Array___core__abstract_collection__Sequence___91d_93d_61d(var_table, var_color, var_e); /* Direct call array#Array#[]= on <var_table:Array[nullable Object]>*/
+core___core__Array___core__abstract_collection__Sequence___91d_93d_61d(var_table, var_color, var_e); /* Direct call array$Array$[]= on <var_table:Array[nullable Object]>*/
 }
 {
 ((void(*)(val* self))((((long)var_19&3)?class_info[((long)var_19&3)]:var_19->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_19); /* next on <var_19:Iterator[Object]>*/
@@ -3052,7 +3341,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#compute_colors for (self: POSetGroupColorer[Object, Object]) */
+/* method coloring$POSetGroupColorer$compute_colors for (self: POSetGroupColorer[Object, Object]) */
 void nitc___nitc__POSetGroupColorer___compute_colors(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var2 /* : HashMap[Object, Int] */;
@@ -3065,9 +3354,12 @@ val* var11 /* : POSetConflictGraph[Object] */;
 val* var12 /* : HashSet[nullable Object] */;
 val* var14 /* : HashSet[nullable Object] */;
 {
-{ /* Inline coloring#POSetGroupColorer#colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors_cache].val; /* _colors_cache on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 311);
 fatal_exit(1);
@@ -3077,15 +3369,18 @@ RET_LABEL1:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection#HashMap#clear on <var:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var); /* Direct call hash_collection$HashMap$clear on <var:HashMap[Object, Int]>*/
 }
 {
-nitc___nitc__POSetGroupColorer___colorize_core(self); /* Direct call coloring#POSetGroupColorer#colorize_core on <self:POSetGroupColorer[Object, Object]>*/
+nitc___nitc__POSetGroupColorer___colorize_core(self); /* Direct call coloring$POSetGroupColorer$colorize_core on <self:POSetGroupColorer[Object, Object]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var5 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -3095,9 +3390,12 @@ RET_LABEL4:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#border (var3) on <var3:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$border (var3) on <var3:POSetConflictGraph[Object]> */
 var8 = var3->attrs[COLOR_nitc__coloring__POSetConflictGraph___border].val; /* _border on <var3:POSetConflictGraph[Object]> */
 if (unlikely(var8 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _border");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 28);
 fatal_exit(1);
@@ -3107,12 +3405,15 @@ RET_LABEL7:(void)0;
 }
 }
 {
-nitc___nitc__POSetGroupColorer___colorize_set(self, var6); /* Direct call coloring#POSetGroupColorer#colorize_set on <self:POSetGroupColorer[Object, Object]>*/
+nitc___nitc__POSetGroupColorer___colorize_set(self, var6); /* Direct call coloring$POSetGroupColorer$colorize_set on <self:POSetGroupColorer[Object, Object]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var11 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var11 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -3122,9 +3423,12 @@ RET_LABEL10:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#crown (var9) on <var9:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$crown (var9) on <var9:POSetConflictGraph[Object]> */
 var14 = var9->attrs[COLOR_nitc__coloring__POSetConflictGraph___crown].val; /* _crown on <var9:POSetConflictGraph[Object]> */
 if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _crown");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 34);
 fatal_exit(1);
@@ -3134,11 +3438,11 @@ RET_LABEL13:(void)0;
 }
 }
 {
-nitc___nitc__POSetGroupColorer___colorize_set(self, var12); /* Direct call coloring#POSetGroupColorer#colorize_set on <self:POSetGroupColorer[Object, Object]>*/
+nitc___nitc__POSetGroupColorer___colorize_set(self, var12); /* Direct call coloring$POSetGroupColorer$colorize_set on <self:POSetGroupColorer[Object, Object]>*/
 }
 RET_LABEL:;
 }
-/* method coloring#POSetGroupColorer#colorize_core for (self: POSetGroupColorer[Object, Object]) */
+/* method coloring$POSetGroupColorer$colorize_core for (self: POSetGroupColorer[Object, Object]) */
 void nitc___nitc__POSetGroupColorer___colorize_core(val* self) {
 val* var /* : POSetConflictGraph[Object] */;
 val* var2 /* : POSetConflictGraph[Object] */;
@@ -3208,9 +3512,12 @@ val* var67 /* : HashMap[Object, Int] */;
 val* var69 /* : HashMap[Object, Int] */;
 val* var70 /* : nullable Object */;
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var2 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -3220,9 +3527,12 @@ RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#order (var) on <var:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$order (var) on <var:POSetConflictGraph[Object]> */
 var5 = var->attrs[COLOR_nitc__coloring__POSetConflictGraph___order].val; /* _order on <var:POSetConflictGraph[Object]> */
 if (unlikely(var5 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _order");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 51);
 fatal_exit(1);
@@ -3249,9 +3559,12 @@ var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7-
 }
 var_h = var9;
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var12 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -3261,9 +3574,12 @@ RET_LABEL11:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#core (var10) on <var10:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$core (var10) on <var10:POSetConflictGraph[Object]> */
 var15 = var10->attrs[COLOR_nitc__coloring__POSetConflictGraph___core].val; /* _core on <var10:POSetConflictGraph[Object]> */
 if (unlikely(var15 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _core");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 22);
 fatal_exit(1);
@@ -3286,9 +3602,12 @@ var19 = nitc___nitc__POSetGroupColorer___inherit_color(self, var_h);
 var_color = var19;
 var_mincolor = var_color;
 {
-{ /* Inline coloring#POSetGroupColorer#buckets (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$buckets (self) on <self:POSetGroupColorer[Object, Object]> */
 var22 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___buckets].val; /* _buckets on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var22 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _buckets");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 288);
 fatal_exit(1);
@@ -3315,9 +3634,12 @@ goto BREAK_label18;
 } else {
 }
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var28 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var28 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -3327,9 +3649,12 @@ RET_LABEL27:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#conflicts (var26) on <var26:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$conflicts (var26) on <var26:POSetConflictGraph[Object]> */
 var31 = var26->attrs[COLOR_nitc__coloring__POSetConflictGraph___conflicts].val; /* _conflicts on <var26:POSetConflictGraph[Object]> */
 if (unlikely(var31 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 40);
 fatal_exit(1);
@@ -3378,9 +3703,12 @@ var43 = nitc___nitc__POSetGroupColorer___next_free_color(self, var_color, var_co
 }
 var_color = var43;
 {
-{ /* Inline coloring#POSetGroupColorer#colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
 var46 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors_cache].val; /* _colors_cache on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var46 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 311);
 fatal_exit(1);
@@ -3391,12 +3719,15 @@ RET_LABEL45:(void)0;
 }
 {
 var47 = (val*)(var_color<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var44, var_e, var47); /* Direct call hash_collection#HashMap#[]= on <var44:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var44, var_e, var47); /* Direct call hash_collection$HashMap$[]= on <var44:HashMap[Object, Int]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var50 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___used_colors].val; /* _used_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var50 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _used_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 314);
 fatal_exit(1);
@@ -3410,10 +3741,10 @@ var51 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var4
 }
 {
 var52 = (val*)(var_color<<2|1);
-core___core__HashSet___core__abstract_collection__SimpleCollection__add(var51, var52); /* Direct call hash_collection#HashSet#add on <var51:nullable Object(HashSet[Int])>*/
+core___core__HashSet___core__abstract_collection__SimpleCollection__add(var51, var52); /* Direct call hash_collection$HashSet$add on <var51:nullable Object(HashSet[Int])>*/
 }
 {
-{ /* Inline kernel#Int#== (var_mincolor,var_color) on <var_mincolor:Int> */
+{ /* Inline kernel$Int$== (var_mincolor,var_color) on <var_mincolor:Int> */
 var55 = var_mincolor == var_color;
 var53 = var55;
 goto RET_LABEL54;
@@ -3422,14 +3753,14 @@ RET_LABEL54:(void)0;
 }
 if (var53){
 {
-{ /* Inline kernel#Int#+ (var_mincolor,1l) on <var_mincolor:Int> */
+{ /* Inline kernel$Int$+ (var_mincolor,1l) on <var_mincolor:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var58 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var58)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var59 = var_mincolor + 1l;
@@ -3442,14 +3773,14 @@ var_mincolor = var56;
 } else {
 }
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var62 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var62)) {
 var_class_name65 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name65);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var66 = var_color + 1l;
@@ -3468,9 +3799,12 @@ BREAK_label40: (void)0;
 ((void(*)(val* self))((((long)var_38&3)?class_info[((long)var_38&3)]:var_38->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_38); /* finish on <var_38:Iterator[Object]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var69 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___min_colors].val; /* _min_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var69 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _min_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 409);
 fatal_exit(1);
@@ -3481,7 +3815,7 @@ RET_LABEL68:(void)0;
 }
 {
 var70 = (val*)(var_mincolor<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var67, var_h, var70); /* Direct call hash_collection#HashMap#[]= on <var67:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var67, var_h, var70); /* Direct call hash_collection$HashMap$[]= on <var67:HashMap[Object, Int]>*/
 }
 BREAK_label18: (void)0;
 {
@@ -3494,7 +3828,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetGroupColorer#colorize_set for (self: POSetGroupColorer[Object, Object], Set[Object]) */
+/* method coloring$POSetGroupColorer$colorize_set for (self: POSetGroupColorer[Object, Object], Set[Object]) */
 void nitc___nitc__POSetGroupColorer___colorize_set(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -3576,9 +3910,12 @@ fatal_exit(1);
 }
 var_set = p0;
 {
-{ /* Inline coloring#POSetGroupColorer#graph (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$graph (self) on <self:POSetGroupColorer[Object, Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___graph].val; /* _graph on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _graph");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 282);
 fatal_exit(1);
@@ -3588,9 +3925,12 @@ RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline coloring#POSetConflictGraph#order (var1) on <var1:POSetConflictGraph[Object]> */
+{ /* Inline coloring$POSetConflictGraph$order (var1) on <var1:POSetConflictGraph[Object]> */
 var6 = var1->attrs[COLOR_nitc__coloring__POSetConflictGraph___order].val; /* _order on <var1:POSetConflictGraph[Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _order");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 51);
 fatal_exit(1);
@@ -3630,9 +3970,12 @@ var14 = nitc___nitc__POSetGroupColorer___inherit_color(self, var_h);
 var_color = var14;
 var_mincolor = var_color;
 {
-{ /* Inline coloring#POSetGroupColorer#buckets (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$buckets (self) on <self:POSetGroupColorer[Object, Object]> */
 var17 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___buckets].val; /* _buckets on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var17 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _buckets");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 288);
 fatal_exit(1);
@@ -3690,9 +4033,12 @@ var30 = nitc___nitc__POSetGroupColorer___next_free_color(self, var_color, var_pa
 }
 var_color = var30;
 {
-{ /* Inline coloring#POSetGroupColorer#colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$colors_cache (self) on <self:POSetGroupColorer[Object, Object]> */
 var33 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___colors_cache].val; /* _colors_cache on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var33 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors_cache");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 311);
 fatal_exit(1);
@@ -3703,12 +4049,15 @@ RET_LABEL32:(void)0;
 }
 {
 var34 = (val*)(var_color<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var31, var_e, var34); /* Direct call hash_collection#HashMap#[]= on <var31:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var31, var_e, var34); /* Direct call hash_collection$HashMap$[]= on <var31:HashMap[Object, Int]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var37 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___used_colors].val; /* _used_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var37 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _used_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 314);
 fatal_exit(1);
@@ -3722,10 +4071,10 @@ var38 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var3
 }
 {
 var39 = (val*)(var_color<<2|1);
-core___core__HashSet___core__abstract_collection__SimpleCollection__add(var38, var39); /* Direct call hash_collection#HashSet#add on <var38:nullable Object(HashSet[Int])>*/
+core___core__HashSet___core__abstract_collection__SimpleCollection__add(var38, var39); /* Direct call hash_collection$HashSet$add on <var38:nullable Object(HashSet[Int])>*/
 }
 {
-{ /* Inline kernel#Int#== (var_mincolor,var_color) on <var_mincolor:Int> */
+{ /* Inline kernel$Int$== (var_mincolor,var_color) on <var_mincolor:Int> */
 var42 = var_mincolor == var_color;
 var40 = var42;
 goto RET_LABEL41;
@@ -3734,14 +4083,14 @@ RET_LABEL41:(void)0;
 }
 if (var40){
 {
-{ /* Inline kernel#Int#+ (var_mincolor,1l) on <var_mincolor:Int> */
+{ /* Inline kernel$Int$+ (var_mincolor,1l) on <var_mincolor:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var45 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var45)) {
 var_class_name48 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var49 = var_mincolor + 1l;
@@ -3754,14 +4103,14 @@ var_mincolor = var43;
 } else {
 }
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var52 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var52)) {
 var_class_name55 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name55);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var56 = var_color + 1l;
@@ -3780,9 +4129,12 @@ BREAK_label28: (void)0;
 ((void(*)(val* self))((((long)var_26&3)?class_info[((long)var_26&3)]:var_26->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_26); /* finish on <var_26:Iterator[Object]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var59 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___min_colors].val; /* _min_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var59 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _min_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 409);
 fatal_exit(1);
@@ -3793,7 +4145,7 @@ RET_LABEL58:(void)0;
 }
 {
 var60 = (val*)(var_mincolor<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var57, var_h, var60); /* Direct call hash_collection#HashMap#[]= on <var57:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var57, var_h, var60); /* Direct call hash_collection$HashMap$[]= on <var57:HashMap[Object, Int]>*/
 }
 BREAK_label13: (void)0;
 {
@@ -3806,7 +4158,7 @@ BREAK_label: (void)0;
 }
 RET_LABEL:;
 }
-/* method coloring#POSetGroupColorer#inherit_color for (self: POSetGroupColorer[Object, Object], Object): Int */
+/* method coloring$POSetGroupColorer$inherit_color for (self: POSetGroupColorer[Object, Object], Object): Int */
 long nitc___nitc__POSetGroupColorer___inherit_color(val* self, val* p0) {
 long var /* : Int */;
 short int var1 /* : Bool */;
@@ -3884,9 +4236,12 @@ var8 = ((val*(*)(val* self))((((long)var_6&3)?class_info[((long)var_6&3)]:var_6-
 }
 var_p = var8;
 {
-{ /* Inline coloring#POSetGroupColorer#min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var11 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___min_colors].val; /* _min_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var11 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _min_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 409);
 fatal_exit(1);
@@ -3901,14 +4256,14 @@ var12 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var9
 var13 = (long)(var12)>>2;
 var_m = var13;
 {
-{ /* Inline kernel#Int#> (var_m,var_res) on <var_m:Int> */
+{ /* Inline kernel$Int$> (var_m,var_res) on <var_m:Int> */
 /* Covariant cast for argument 0 (i) <var_res:Int> isa OTHER */
 /* <var_res:Int> isa OTHER */
 var16 = 1; /* easy <var_res:Int> isa OTHER*/
 if (unlikely(!var16)) {
 var_class_name19 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name19);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var20 = var_m > var_res;
@@ -3930,9 +4285,12 @@ BREAK_label: (void)0;
 ((void(*)(val* self))((((long)var_6&3)?class_info[((long)var_6&3)]:var_6->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_6); /* finish on <var_6:Iterator[Object]>*/
 }
 {
-{ /* Inline coloring#POSetGroupColorer#min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$min_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var23 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___min_colors].val; /* _min_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var23 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _min_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 409);
 fatal_exit(1);
@@ -3943,19 +4301,22 @@ RET_LABEL22:(void)0;
 }
 {
 var24 = (val*)(var_res<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var21, var_h, var24); /* Direct call hash_collection#HashMap#[]= on <var21:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var21, var_h, var24); /* Direct call hash_collection$HashMap$[]= on <var21:HashMap[Object, Int]>*/
 }
 var = var_res;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#min_colors for (self: POSetGroupColorer[Object, Object]): HashMap[Object, Int] */
+/* method coloring$POSetGroupColorer$min_colors for (self: POSetGroupColorer[Object, Object]): HashMap[Object, Int] */
 val* nitc___nitc__POSetGroupColorer___min_colors(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var1 /* : HashMap[Object, Int] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___min_colors].val; /* _min_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _min_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 409);
 fatal_exit(1);
@@ -3964,7 +4325,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#next_free_color for (self: POSetGroupColorer[Object, Object], Int, Collection[Object]): Int */
+/* method coloring$POSetGroupColorer$next_free_color for (self: POSetGroupColorer[Object, Object], Int, Collection[Object]): Int */
 long nitc___nitc__POSetGroupColorer___next_free_color(val* self, long p0, val* p1) {
 long var /* : Int */;
 short int var1 /* : Bool */;
@@ -4028,9 +4389,12 @@ var5 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3-
 }
 var_h = var5;
 {
-{ /* Inline coloring#POSetGroupColorer#used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
+{ /* Inline coloring$POSetGroupColorer$used_colors (self) on <self:POSetGroupColorer[Object, Object]> */
 var8 = self->attrs[COLOR_nitc__coloring__POSetGroupColorer___used_colors].val; /* _used_colors on <self:POSetGroupColorer[Object, Object]> */
 if (unlikely(var8 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _used_colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 314);
 fatal_exit(1);
@@ -4048,14 +4412,14 @@ var10 = core___core__HashSet___core__abstract_collection__Collection__has(var9, 
 }
 if (var10){
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var14 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var14)) {
 var_class_name17 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var18 = var_color + 1l;
@@ -4085,19 +4449,22 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetGroupColorer#init for (self: POSetGroupColorer[Object, Object]) */
+/* method coloring$POSetGroupColorer$init for (self: POSetGroupColorer[Object, Object]) */
 void nitc___nitc__POSetGroupColorer___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_nitc___nitc__POSetGroupColorer___core__kernel__Object__init]))(self); /* init on <self:POSetGroupColorer[Object, Object]>*/
 }
 RET_LABEL:;
 }
-/* method coloring#BucketsColorer#colors for (self: BucketsColorer[Object, Object]): HashMap[Object, Int] */
+/* method coloring$BucketsColorer$colors for (self: BucketsColorer[Object, Object]): HashMap[Object, Int] */
 val* nitc___nitc__BucketsColorer___colors(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var1 /* : HashMap[Object, Int] */;
 var1 = self->attrs[COLOR_nitc__coloring__BucketsColorer___colors].val; /* _colors on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 458);
 fatal_exit(1);
@@ -4106,12 +4473,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#BucketsColorer#conflicts for (self: BucketsColorer[Object, Object]): HashMap[Object, Set[Object]] */
+/* method coloring$BucketsColorer$conflicts for (self: BucketsColorer[Object, Object]): HashMap[Object, Set[Object]] */
 val* nitc___nitc__BucketsColorer___conflicts(val* self) {
 val* var /* : HashMap[Object, Set[Object]] */;
 val* var1 /* : HashMap[Object, Set[Object]] */;
 var1 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4120,7 +4490,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#BucketsColorer#colorize for (self: BucketsColorer[Object, Object], Map[Object, Set[Object]]): Map[Object, Int] */
+/* method coloring$BucketsColorer$colorize for (self: BucketsColorer[Object, Object], Map[Object, Set[Object]]): Map[Object, Int] */
 val* nitc___nitc__BucketsColorer___colorize(val* self, val* p0) {
 val* var /* : Map[Object, Int] */;
 short int var1 /* : Bool */;
@@ -4179,7 +4549,7 @@ fatal_exit(1);
 }
 var_buckets = p0;
 {
-nitc___nitc__BucketsColorer___compute_conflicts(self, var_buckets); /* Direct call coloring#BucketsColorer#compute_conflicts on <self:BucketsColorer[Object, Object]>*/
+nitc___nitc__BucketsColorer___compute_conflicts(self, var_buckets); /* Direct call coloring$BucketsColorer$compute_conflicts on <self:BucketsColorer[Object, Object]>*/
 }
 var_min_color = 0l;
 var_ = var_buckets;
@@ -4221,9 +4591,12 @@ var12 = ((val*(*)(val* self))((((long)var_9&3)?class_info[((long)var_9&3)]:var_9
 }
 var_bucket = var12;
 {
-{ /* Inline coloring#BucketsColorer#colors (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$colors (self) on <self:BucketsColorer[Object, Object]> */
 var15 = self->attrs[COLOR_nitc__coloring__BucketsColorer___colors].val; /* _colors on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var15 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 458);
 fatal_exit(1);
@@ -4247,14 +4620,14 @@ var18 = nitc___nitc__BucketsColorer___is_color_free(self, var_bucket, var_color)
 var19 = !var18;
 if (var19){
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var22 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var22)) {
 var_class_name25 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var26 = var_color + 1l;
@@ -4270,9 +4643,12 @@ goto BREAK_label27;
 }
 BREAK_label27: (void)0;
 {
-{ /* Inline coloring#BucketsColorer#colors (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$colors (self) on <self:BucketsColorer[Object, Object]> */
 var30 = self->attrs[COLOR_nitc__coloring__BucketsColorer___colors].val; /* _colors on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var30 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 458);
 fatal_exit(1);
@@ -4283,7 +4659,7 @@ RET_LABEL29:(void)0;
 }
 {
 var31 = (val*)(var_color<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var28, var_bucket, var31); /* Direct call hash_collection#HashMap#[]= on <var28:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var28, var_bucket, var31); /* Direct call hash_collection$HashMap$[]= on <var28:HashMap[Object, Int]>*/
 }
 var_color = var_min_color;
 BREAK_label17: (void)0;
@@ -4301,14 +4677,17 @@ BREAK_label11: (void)0;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#MapIterator#finish (var_3) on <var_3:MapIterator[Object, Set[Object]]> */
+{ /* Inline abstract_collection$MapIterator$finish (var_3) on <var_3:MapIterator[Object, Set[Object]]> */
 RET_LABEL32:(void)0;
 }
 }
 {
-{ /* Inline coloring#BucketsColorer#colors (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$colors (self) on <self:BucketsColorer[Object, Object]> */
 var35 = self->attrs[COLOR_nitc__coloring__BucketsColorer___colors].val; /* _colors on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var35 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 458);
 fatal_exit(1);
@@ -4322,7 +4701,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#BucketsColorer#is_color_free for (self: BucketsColorer[Object, Object], Object, Int): Bool */
+/* method coloring$BucketsColorer$is_color_free for (self: BucketsColorer[Object, Object], Object, Int): Bool */
 short int nitc___nitc__BucketsColorer___is_color_free(val* self, val* p0, long p1) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
@@ -4374,9 +4753,12 @@ fatal_exit(1);
 var_bucket = p0;
 var_color = p1;
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var4 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4390,9 +4772,12 @@ var5 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var2, 
 }
 if (var5){
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var8 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var8 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4422,9 +4807,12 @@ var13 = ((val*(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var
 }
 var_other = var13;
 {
-{ /* Inline coloring#BucketsColorer#colors (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$colors (self) on <self:BucketsColorer[Object, Object]> */
 var17 = self->attrs[COLOR_nitc__coloring__BucketsColorer___colors].val; /* _colors on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var17 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 458);
 fatal_exit(1);
@@ -4439,9 +4827,12 @@ var18 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var15
 var_19 = var18;
 if (var18){
 {
-{ /* Inline coloring#BucketsColorer#colors (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$colors (self) on <self:BucketsColorer[Object, Object]> */
 var22 = self->attrs[COLOR_nitc__coloring__BucketsColorer___colors].val; /* _colors on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var22 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 458);
 fatal_exit(1);
@@ -4454,7 +4845,7 @@ RET_LABEL21:(void)0;
 var23 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var20, var_other);
 }
 {
-{ /* Inline kernel#Int#== (var23,var_color) on <var23:nullable Object(Int)> */
+{ /* Inline kernel$Int$== (var23,var_color) on <var23:nullable Object(Int)> */
 var27 = (long)(var23)>>2;
 var26 = var27 == var_color;
 var24 = var26;
@@ -4486,7 +4877,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#BucketsColorer#compute_conflicts for (self: BucketsColorer[Object, Object], Map[Object, Set[Object]]) */
+/* method coloring$BucketsColorer$compute_conflicts for (self: BucketsColorer[Object, Object], Map[Object, Set[Object]]) */
 void nitc___nitc__BucketsColorer___compute_conflicts(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -4555,9 +4946,12 @@ fatal_exit(1);
 }
 var_buckets = p0;
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var3 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4567,7 +4961,7 @@ RET_LABEL2:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var1); /* Direct call hash_collection#HashMap#clear on <var1:HashMap[Object, Set[Object]]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var1); /* Direct call hash_collection$HashMap$clear on <var1:HashMap[Object, Set[Object]]>*/
 }
 var_ = var_buckets;
 {
@@ -4608,9 +5002,12 @@ var14 = ((val*(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var
 }
 var_bucket = var14;
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var17 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var17 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4625,9 +5022,12 @@ var18 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var15
 var19 = !var18;
 if (var19){
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var22 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var22 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4638,10 +5038,10 @@ RET_LABEL21:(void)0;
 }
 var23 = NEW_core__HashSet(self->type->resolution_table->types[COLOR_core__HashSet__nitc__BucketsColorer___35dE]);
 {
-core___core__HashSet___core__kernel__Object__init(var23); /* Direct call hash_collection#HashSet#init on <var23:HashSet[Object]>*/
+core___core__HashSet___core__kernel__Object__init(var23); /* Direct call hash_collection$HashSet$init on <var23:HashSet[Object]>*/
 }
 {
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var20, var_bucket, var23); /* Direct call hash_collection#HashMap#[]= on <var20:HashMap[Object, Set[Object]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var20, var_bucket, var23); /* Direct call hash_collection$HashMap$[]= on <var20:HashMap[Object, Set[Object]]>*/
 }
 } else {
 }
@@ -4670,9 +5070,12 @@ goto BREAK_label31;
 } else {
 }
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var34 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var34 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4687,9 +5090,12 @@ var35 = core___core__HashMap___core__abstract_collection__MapRead__has_key(var32
 var36 = !var35;
 if (var36){
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var39 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var39 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4700,17 +5106,20 @@ RET_LABEL38:(void)0;
 }
 var40 = NEW_core__HashSet(self->type->resolution_table->types[COLOR_core__HashSet__nitc__BucketsColorer___35dE]);
 {
-core___core__HashSet___core__kernel__Object__init(var40); /* Direct call hash_collection#HashSet#init on <var40:HashSet[Object]>*/
+core___core__HashSet___core__kernel__Object__init(var40); /* Direct call hash_collection$HashSet$init on <var40:HashSet[Object]>*/
 }
 {
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var37, var_obucket, var40); /* Direct call hash_collection#HashMap#[]= on <var37:HashMap[Object, Set[Object]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var37, var_obucket, var40); /* Direct call hash_collection$HashMap$[]= on <var37:HashMap[Object, Set[Object]]>*/
 }
 } else {
 }
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var43 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var43 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4726,9 +5135,12 @@ var44 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var4
 ((void(*)(val* self, val* p0))((((long)var44&3)?class_info[((long)var44&3)]:var44->class)->vft[COLOR_core__abstract_collection__SimpleCollection__add]))(var44, var_obucket); /* add on <var44:nullable Object(Set[Object])>*/
 }
 {
-{ /* Inline coloring#BucketsColorer#conflicts (self) on <self:BucketsColorer[Object, Object]> */
+{ /* Inline coloring$BucketsColorer$conflicts (self) on <self:BucketsColorer[Object, Object]> */
 var47 = self->attrs[COLOR_nitc__coloring__BucketsColorer___conflicts].val; /* _conflicts on <self:BucketsColorer[Object, Object]> */
 if (unlikely(var47 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 459);
 fatal_exit(1);
@@ -4766,18 +5178,21 @@ BREAK_label13: (void)0;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#MapIterator#finish (var_5) on <var_5:MapIterator[Object, Set[Object]]> */
+{ /* Inline abstract_collection$MapIterator$finish (var_5) on <var_5:MapIterator[Object, Set[Object]]> */
 RET_LABEL49:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method coloring#POSetBucketsColorer#colors for (self: POSetBucketsColorer[Object, Object]): HashMap[Object, Int] */
+/* method coloring$POSetBucketsColorer$colors for (self: POSetBucketsColorer[Object, Object]): HashMap[Object, Int] */
 val* nitc___nitc__POSetBucketsColorer___colors(val* self) {
 val* var /* : HashMap[Object, Int] */;
 val* var1 /* : HashMap[Object, Int] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -4786,12 +5201,15 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#poset for (self: POSetBucketsColorer[Object, Object]): POSet[Object] */
+/* method coloring$POSetBucketsColorer$poset for (self: POSetBucketsColorer[Object, Object]): POSet[Object] */
 val* nitc___nitc__POSetBucketsColorer___poset(val* self) {
 val* var /* : POSet[Object] */;
 val* var1 /* : POSet[Object] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___poset].val; /* _poset on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 510);
 fatal_exit(1);
@@ -4800,7 +5218,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#poset= for (self: POSetBucketsColorer[Object, Object], POSet[Object]) */
+/* method coloring$POSetBucketsColorer$poset= for (self: POSetBucketsColorer[Object, Object], POSet[Object]) */
 void nitc___nitc__POSetBucketsColorer___poset_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -4826,12 +5244,15 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___poset].val = p0; /* _poset on <self:POSetBucketsColorer[Object, Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetBucketsColorer#conflicts for (self: POSetBucketsColorer[Object, Object]): Map[Object, Set[Object]] */
+/* method coloring$POSetBucketsColorer$conflicts for (self: POSetBucketsColorer[Object, Object]): Map[Object, Set[Object]] */
 val* nitc___nitc__POSetBucketsColorer___conflicts(val* self) {
 val* var /* : Map[Object, Set[Object]] */;
 val* var1 /* : Map[Object, Set[Object]] */;
 var1 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___conflicts].val; /* _conflicts on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 511);
 fatal_exit(1);
@@ -4840,7 +5261,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#conflicts= for (self: POSetBucketsColorer[Object, Object], Map[Object, Set[Object]]) */
+/* method coloring$POSetBucketsColorer$conflicts= for (self: POSetBucketsColorer[Object, Object], Map[Object, Set[Object]]) */
 void nitc___nitc__POSetBucketsColorer___conflicts_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -4866,7 +5287,7 @@ fatal_exit(1);
 self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___conflicts].val = p0; /* _conflicts on <self:POSetBucketsColorer[Object, Object]> */
 RET_LABEL:;
 }
-/* method coloring#POSetBucketsColorer#colorize for (self: POSetBucketsColorer[Object, Object], Map[Object, Set[Object]]): Map[Object, Int] */
+/* method coloring$POSetBucketsColorer$colorize for (self: POSetBucketsColorer[Object, Object], Map[Object, Set[Object]]): Map[Object, Int] */
 val* nitc___nitc__POSetBucketsColorer___colorize(val* self, val* p0) {
 val* var /* : Map[Object, Int] */;
 short int var1 /* : Bool */;
@@ -4940,9 +5361,12 @@ fatal_exit(1);
 }
 var_buckets = p0;
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var4 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var4 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -4952,12 +5376,15 @@ RET_LABEL3:(void)0;
 }
 }
 {
-core___core__HashMap___core__abstract_collection__Map__clear(var2); /* Direct call hash_collection#HashMap#clear on <var2:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map__clear(var2); /* Direct call hash_collection$HashMap$clear on <var2:HashMap[Object, Int]>*/
 }
 {
-{ /* Inline coloring#POSetBucketsColorer#poset (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$poset (self) on <self:POSetBucketsColorer[Object, Object]> */
 var7 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___poset].val; /* _poset on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var7 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 510);
 fatal_exit(1);
@@ -4990,9 +5417,12 @@ var13 = ((val*(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var
 }
 var_h = var13;
 {
-{ /* Inline coloring#POSetBucketsColorer#poset (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$poset (self) on <self:POSetBucketsColorer[Object, Object]> */
 var16 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___poset].val; /* _poset on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var16 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 510);
 fatal_exit(1);
@@ -5032,9 +5462,12 @@ var26 = ((val*(*)(val* self))((((long)var_23&3)?class_info[((long)var_23&3)]:var
 }
 var_bucket = var26;
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var29 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var29 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5057,14 +5490,14 @@ var32 = nitc___nitc__POSetBucketsColorer___is_color_free(self, var_color, var_h,
 var33 = !var32;
 if (var33){
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var36 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var36)) {
 var_class_name39 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var40 = var_color + 1l;
@@ -5080,9 +5513,12 @@ goto BREAK_label41;
 }
 BREAK_label41: (void)0;
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var44 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var44 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5093,17 +5529,17 @@ RET_LABEL43:(void)0;
 }
 {
 var45 = (val*)(var_color<<2|1);
-core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var42, var_bucket, var45); /* Direct call hash_collection#HashMap#[]= on <var42:HashMap[Object, Int]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var42, var_bucket, var45); /* Direct call hash_collection$HashMap$[]= on <var42:HashMap[Object, Int]>*/
 }
 {
-{ /* Inline kernel#Int#+ (var_color,1l) on <var_color:Int> */
+{ /* Inline kernel$Int$+ (var_color,1l) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var48 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var48)) {
 var_class_name51 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name51);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var52 = var_color + 1l;
@@ -5131,9 +5567,12 @@ BREAK_label: (void)0;
 ((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_11); /* finish on <var_11:IndexedIterator[Object]>*/
 }
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var55 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var55 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5147,7 +5586,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#min_color for (self: POSetBucketsColorer[Object, Object], Collection[Object], Map[Object, Set[Object]]): Int */
+/* method coloring$POSetBucketsColorer$min_color for (self: POSetBucketsColorer[Object, Object], Collection[Object], Map[Object, Set[Object]]): Int */
 long nitc___nitc__POSetBucketsColorer___min_color(val* self, val* p0, val* p1) {
 long var /* : Int */;
 short int var1 /* : Bool */;
@@ -5220,7 +5659,7 @@ fatal_exit(1);
 var_others = p0;
 var_buckets = p1;
 {
-{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
+{ /* Inline kernel$Int$unary - (1l) on <1l:Int> */
 var9 = -1l;
 var7 = var9;
 goto RET_LABEL8;
@@ -5250,14 +5689,14 @@ var14 = nitc___nitc__POSetBucketsColorer___max_color(self, var_holder, var_bucke
 }
 var_color = var14;
 {
-{ /* Inline kernel#Int#> (var_color,var_min) on <var_color:Int> */
+{ /* Inline kernel$Int$> (var_color,var_min) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <var_min:Int> isa OTHER */
 /* <var_min:Int> isa OTHER */
 var17 = 1; /* easy <var_min:Int> isa OTHER*/
 if (unlikely(!var17)) {
 var_class_name20 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var21 = var_color > var_min;
@@ -5279,14 +5718,14 @@ BREAK_label: (void)0;
 ((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_11); /* finish on <var_11:Iterator[Object]>*/
 }
 {
-{ /* Inline kernel#Int#+ (var_min,1l) on <var_min:Int> */
+{ /* Inline kernel$Int$+ (var_min,1l) on <var_min:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var24 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var24)) {
 var_class_name27 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var28 = var_min + 1l;
@@ -5300,7 +5739,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#max_color for (self: POSetBucketsColorer[Object, Object], Object, Map[Object, Set[Object]]): Int */
+/* method coloring$POSetBucketsColorer$max_color for (self: POSetBucketsColorer[Object, Object], Object, Map[Object, Set[Object]]): Int */
 long nitc___nitc__POSetBucketsColorer___max_color(val* self, val* p0, val* p1) {
 long var /* : Int */;
 short int var1 /* : Bool */;
@@ -5375,7 +5814,7 @@ fatal_exit(1);
 var_holder = p0;
 var_buckets = p1;
 {
-{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
+{ /* Inline kernel$Int$unary - (1l) on <1l:Int> */
 var9 = -1l;
 var7 = var9;
 goto RET_LABEL8;
@@ -5404,9 +5843,12 @@ var14 = ((val*(*)(val* self))((((long)var_12&3)?class_info[((long)var_12&3)]:var
 }
 var_bucket = var14;
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var17 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var17 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5424,9 +5866,12 @@ goto BREAK_label20;
 } else {
 }
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var23 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var23 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5441,14 +5886,14 @@ var24 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var2
 var25 = (long)(var24)>>2;
 var_color = var25;
 {
-{ /* Inline kernel#Int#> (var_color,var_max) on <var_color:Int> */
+{ /* Inline kernel$Int$> (var_color,var_max) on <var_color:Int> */
 /* Covariant cast for argument 0 (i) <var_max:Int> isa OTHER */
 /* <var_max:Int> isa OTHER */
 var28 = 1; /* easy <var_max:Int> isa OTHER*/
 if (unlikely(!var28)) {
 var_class_name31 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var32 = var_color > var_max;
@@ -5475,7 +5920,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#is_color_free for (self: POSetBucketsColorer[Object, Object], Int, Object, Map[Object, Set[Object]]): Bool */
+/* method coloring$POSetBucketsColorer$is_color_free for (self: POSetBucketsColorer[Object, Object], Int, Object, Map[Object, Set[Object]]): Bool */
 short int nitc___nitc__POSetBucketsColorer___is_color_free(val* self, long p0, val* p1, val* p2) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
@@ -5557,9 +6002,12 @@ var_color = p0;
 var_holder = p1;
 var_buckets = p2;
 {
-{ /* Inline coloring#POSetBucketsColorer#conflicts (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$conflicts (self) on <self:POSetBucketsColorer[Object, Object]> */
 var9 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___conflicts].val; /* _conflicts on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var9 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 511);
 fatal_exit(1);
@@ -5578,9 +6026,12 @@ goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline coloring#POSetBucketsColorer#conflicts (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$conflicts (self) on <self:POSetBucketsColorer[Object, Object]> */
 var14 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___conflicts].val; /* _conflicts on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var14 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _conflicts");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 511);
 fatal_exit(1);
@@ -5630,9 +6081,12 @@ var26 = ((val*(*)(val* self))((((long)var_23&3)?class_info[((long)var_23&3)]:var
 }
 var_bucket = var26;
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var29 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var29 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5650,9 +6104,12 @@ goto BREAK_label32;
 } else {
 }
 {
-{ /* Inline coloring#POSetBucketsColorer#colors (self) on <self:POSetBucketsColorer[Object, Object]> */
+{ /* Inline coloring$POSetBucketsColorer$colors (self) on <self:POSetBucketsColorer[Object, Object]> */
 var35 = self->attrs[COLOR_nitc__coloring__POSetBucketsColorer___colors].val; /* _colors on <self:POSetBucketsColorer[Object, Object]> */
 if (unlikely(var35 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _colors");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__coloring, 509);
 fatal_exit(1);
@@ -5665,7 +6122,7 @@ RET_LABEL34:(void)0;
 var36 = core___core__HashMap___core__abstract_collection__MapRead___91d_93d(var33, var_bucket);
 }
 {
-{ /* Inline kernel#Int#== (var36,var_color) on <var36:nullable Object(Int)> */
+{ /* Inline kernel$Int$== (var36,var_color) on <var36:nullable Object(Int)> */
 var40 = (long)(var36)>>2;
 var39 = var40 == var_color;
 var37 = var39;
@@ -5700,7 +6157,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method coloring#POSetBucketsColorer#init for (self: POSetBucketsColorer[Object, Object]) */
+/* method coloring$POSetBucketsColorer$init for (self: POSetBucketsColorer[Object, Object]) */
 void nitc___nitc__POSetBucketsColorer___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_nitc___nitc__POSetBucketsColorer___core__kernel__Object__init]))(self); /* init on <self:POSetBucketsColorer[Object, Object]>*/

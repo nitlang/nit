@@ -1,0 +1,15 @@
+<div>
+	<div class='card'>
+		<div class='card-body text-center'>
+			<entity-graph mentity='mentity' graph='vm.graph' />
+		</div>
+	</div>
+
+	<!-- Parents -->
+	<entity-list list-title='Parents'
+		list-entities='vm.parents.results' list-object-filter='{}' />
+
+	<!-- Children -->
+	<entity-list list-title='Children'
+		list-entities='vm.children.results' list-object-filter='{}' />
+</div>

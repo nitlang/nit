@@ -21,6 +21,7 @@ module ffi_support is
 	cflags "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
 	ldflags "-L $(JNI_LIB_PATH) -ljvm"
 	new_annotation extra_java_files
+	extra_java_files "nit.app.NitObject"
 end
 
 import jvm
@@ -29,8 +30,9 @@ redef class Sys
 	private var jvm_cache: nullable JavaVM = null
 	private var jni_env_cache: nullable JniEnv = null
 
-	# Default Java Virtual Machine to use (will be instantiated using
-	# `create_default_jvm` if not already set)
+	# Default Java Virtual Machine to use
+	#
+	# Instantiated using `create_default_jvm` if not already set.
 	fun jvm: JavaVM
 	do
 		if jvm_cache == null then create_default_jvm
@@ -69,7 +71,7 @@ redef class Sys
 	end
 
 	# Get a Java class by its name from the current `jni_env`
-	fun load_jclass(name: NativeString): JClass import jni_env `{
+	fun load_jclass(name: CString): JClass import jni_env `{
 		JNIEnv *nit_ffi_jni_env = Sys_jni_env(self);
 
 		// retrieve the implementation Java class
@@ -87,12 +89,12 @@ end
 # A standard Java string `java.lang.String`
 #
 # Converted to a Nit string using `to_s`, or to a C string with `to_cstring`.
-# Created using `String::to_java_string` or `NativeString::to_java_string`.
+# Created using `String::to_java_string` or `CString::to_java_string`.
 extern class JavaString in "Java" `{ java.lang.String `}
 	super JavaObject
 
 	# Get the string from Java and copy it to Nit memory
-	fun to_cstring: NativeString import sys, Sys.jni_env `{
+	fun to_cstring: CString import sys, Sys.jni_env `{
 		Sys sys = JavaString_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 
@@ -110,10 +112,14 @@ extern class JavaString in "Java" `{ java.lang.String `}
 		return nit_cstr;
 	`}
 
-	redef fun to_s do return to_cstring.to_s
+	redef fun to_s
+	do
+		if is_java_null then return "<{inspect_head}:null>"
+		return to_cstring.to_s
+	end
 end
 
-redef class NativeString
+redef class CString
 	# Get a Java string from this C string
 	#
 	# This instance is only valid until the next execution of Java code.
@@ -188,7 +194,7 @@ redef extern class JavaObject
 	# Use Java's `toString` for any `JavaObject`
 	redef fun to_s
 	do
-		if is_java_null then return super
+		if is_java_null then return "<{inspect_head}:null>"
 		return to_java_string.to_s
 	end
 end

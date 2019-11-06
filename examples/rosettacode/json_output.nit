@@ -7,6 +7,7 @@
 # SEE: <http://rosettacode.org/wiki/JSON>
 module json_output
 
+import json::static
 import json
 
 var str = """{

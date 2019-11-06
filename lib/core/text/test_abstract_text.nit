@@ -8,22 +8,20 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-module test_abstract_text is test_suite
+module test_abstract_text is test
 
-import test_suite
 import text
 intrude import ropes
 
 class TestText
-	super TestSuite
+	test
 
 	private var factories: Collection[TextFactory] = [
 		new ConcatFactory,
-		new RopeBufferFactory,
 		new FlatBufferFactory
 	: TextFactory]
 
-	fun test_escape_to_c do
+	fun test_escape_to_c is test do
 		for f in factories do
 			assert f.create("abAB12<>&").escape_to_c       == "abAB12<>&"
 			assert f.create("\n\"'\\").escape_to_c         == "\\n\\\"\\'\\\\"
@@ -47,13 +45,6 @@ class ConcatFactory
 
 	redef fun create(s) do return new Concat("", s)
 end
-
-class RopeBufferFactory
-	super TextFactory
-
-	redef fun create(s) do return new RopeBuffer.from(s)
-end
-
 class FlatBufferFactory
 	super TextFactory
 

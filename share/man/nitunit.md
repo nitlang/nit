@@ -131,25 +131,24 @@ This flag can be used by libraries and program to prevent (or limit) the executi
 
 TestSuites are Nit modules that define a set of TestCases.
 
-A test suite is a module that uses the annotation `is test_suite`.
+A test suite is a module that uses the annotation `is test`.
 
 It is common that a test suite focuses on testing a single module.
-In this case, the name of the test_suite is often `test_foo.nit` where `foo.nit` is the tested module.
+In this case, the name of the test suite is often `test_foo.nit` where `foo.nit` is the tested module.
 
 The structure of a test suite is the following:
 
 ~~~~
 # test suite for module `foo`
-module test_foo is test_suite
+module test_foo is test
 
-import test_suite
 import foo # can be intrude to test private things
 
 class TestFoo
-	super TestSuite
+    test
 
     # test case for `foo::Foo::baz`
-    fun test_baz do
+    fun baz is test do
         var subject = new Foo
         assert subject.baz(1, 2) == 3
     end
@@ -160,18 +159,18 @@ Test suite can be executed using the same `nitunit` command:
 
     $ nitunit foo.nit
 
-`nitunit` will execute a test for each method named `test_*` in a class
-subclassing `TestSuite` so multiple tests can be executed for a single method:
+`nitunit` will execute a test for each method with the `test` annotation in a class
+also annotated with `test` so multiple tests can be executed for a single method:
 
 ~~~~
 class TestFoo
-	super TestSuite
+    test
 
-    fun test_baz_1 do
+    fun baz_1 is test do
         var subject = new Foo
         assert subject.baz(1, 2) == 3
     end
-    fun test_baz_2 do
+    fun baz_2 is test do
         var subject = new Foo
         assert subject.baz(1, -2) == -1
     end
@@ -204,12 +203,12 @@ The `diff(1)` command is used to perform the comparison.
 The test is failed if non-zero is returned by `diff`.
 
 ~~~
-module test_mod is test_suite
+module test_mod is test
 
 class TestFoo
-	super TestSuite
+	test
 
-	fun test_bar do
+	fun bar is test do
 		print "Hello!"
 	end
 end
@@ -228,51 +227,131 @@ To helps the management of the expected results, the option `--autosav` can be u
 
 ## Configuring TestSuites
 
-`TestSuite`s also provide methods to configure the test run:
-
-`before_test` and `after_test`: methods called before/after each test case.
+`TestSuite`s also provide annotations to configure the test run:
+`before` and `after` annotations can be added to methods that must be called before/after each test case.
 They can be used to factorize repetitive tasks:
 
-~~~~
+~~~
 class TestFoo
-	super TestSuite
-    var subject: Foo
-    # Mandatory empty init
-    init do end
-    # Method executed before each test
-    fun before_test do
-        subject = new Foo
-    end
-    fun test_baz_1 do
-        assert subject.baz(1, 2) == 3
-    end
-    fun test_baz_2 do
-        assert subject.baz(1, -2) == -1
-    end
+	test
+
+	var subject: Foo is noinit
+
+	# Method executed before each test
+	fun set_up is before do
+		subject = new Foo
+	end
+
+	fun baz_1 is test do
+		assert subject.baz(1, 2) == 3
+	end
+
+	fun baz_2 is test do
+		assert subject.baz(1, -2) == -1
+	end
 end
-~~~~
+~~~
 
-When using custom test attributes, an empty `init` must be declared to allow automatic test running.
+When using custom test attributes, a empty init must be declared to allow automatic test running.
 
-`before_module` and `after_module`: methods called before/after each test suite.
-They have to be declared at top level:
+At class level, `before_all` and `after_all` annotations can be set on methods that must be called before/after all the test cases in the class:
 
-~~~~
+~~~
+class TestFoo
+	test
+
+	var subject: Foo is noinit
+
+	# Method executed before all tests in the class
+	fun set_up is before_all do
+		subject = new Foo
+	end
+
+	fun baz_1 is test do
+		assert subject.baz(1, 2) == 3
+	end
+
+	fun baz_2 is test do
+		assert subject.baz(1, -2) == -1
+	end
+end
+~~~
+
+`before_all` and `after_all` annotations can also be set on methods that must be called before/after each test suite when declared at top level:
+
+~~~
 module test_bdd_connector
+
 import bdd_connector
+
 # Testing the bdd_connector
 class TestConnector
-    # test cases using a server
+	test
+	# test cases using a server
 end
+
 # Method executed before testing the module
-fun before_module do
-    # start server before all test cases
+fun setup_db is before_all do
+	# start server before all test cases
 end
+
 # Method executed after testing the module
-fun after_module do
-    # stop server after all test cases
+fun teardown_db is after_all do
+	# stop server after all test cases
 end
-~~~~
+~~~
+
+When dealing with multiple test suites, niunit allows you to import other test suites to factorize your tests:
+
+~~~
+module test_bdd_users
+
+import test_bdd_connector
+
+# Testing the user table
+class TestUsersTable
+	test
+	# test cases using the db server from `test_bdd_connector`
+end
+
+fun setup_table is before_all do
+	# create user table
+end
+
+fun teardown_table is after_all do
+	# drop user table
+end
+~~~
+
+Methods with `before*` and `after*` annotations are linearized and called in different ways.
+
+* `before*` methods are called from the least specific to the most specific
+* `after*` methods are called from the most specific to the least specific
+
+In the previous example, the execution order would be:
+
+1. `test_bdd_connector::setup_db`
+2. `test_bdd_users::setup_table`
+3. `all test cases from test_bdd_users`
+4. `test_bdd_users::teardown_table`
+5. `test_bdd_connector::teardown_db`
+
+## Accessing the test suite environment
+
+The `NIT_TESTING_PATH` environment variable contains the current test suite
+file path.
+Nitunit define this variable before the execution of each test suite.
+It can be used to access files based on the current test suite location:
+
+~~~
+class TestWithPath
+    test
+
+    fun test_suite_path do
+        assert "NIT_TESTING_PATH".environ != ""
+    end
+end
+~~~
 
 ## Generating test suites
 
@@ -383,6 +462,10 @@ To solve this issue, `NIT_TESTING_ID` is initialized with a distinct integer ide
 
 Note: `rand` is not a recommended way to get a distinct identifier because its randomness is disabled by default. See `SRAND`.
 
+### `NIT_TESTING_PATH`
+
+Only available for test suites.
+Contains the module test suite path.
 
 # SEE ALSO
 

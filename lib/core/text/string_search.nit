@@ -470,13 +470,25 @@ redef class Text
 		return res
 	end
 
-	# Replace all occurences of `pattern` with `string`
+	# Replace all occurrences of `pattern` with `string`
 	#
-	#     assert "hlelo".replace("le", "el")	     ==  "hello"
-	#     assert "hello".replace('l', "")	     ==  "heo"
-	fun replace(pattern: Pattern, string: SELFTYPE): String
+	#     assert "hlelo".replace("le", "el") == "hello"
+	#     assert "hello".replace('l', "")    == "heo"
+	#
+	#     var t: Text = "hello"
+	#     assert t.replace("hello", new FlatBuffer) == ""
+	fun replace(pattern: Pattern, string: Text): String
 	do
 		return self.split_with(pattern).join(string)
+	end
+
+	# Replace the first occurrence of `pattern` with `string`
+	#
+	#     assert "hlelo".replace_first("le", "el") == "hello"
+	#     assert "hello".replace_first('l', "")    == "helo"
+	fun replace_first(pattern: Pattern, string: Text): String
+	do
+		return self.split_once_on(pattern).join(string)
 	end
 
 	# Does `self` contains at least one instance of `pattern`?

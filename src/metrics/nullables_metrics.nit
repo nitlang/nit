@@ -22,6 +22,8 @@ import mclasses_metrics
 import semantize
 
 redef class ToolContext
+
+	# Nullable types related metrics
 	var nullables_metrics_phase: Phase = new NullablesMetricsPhase(self, null)
 end
 
@@ -38,11 +40,11 @@ private class NullablesMetricsPhase
 		print toolcontext.format_h1("\n# Nullable metrics")
 
 		var model = toolcontext.modelbuilder.model
-		var model_view = model.private_view
+		var filter = new ModelFilter(private_visibility)
 
 		var metrics = new MetricSet
-		metrics.register(new CNBA(mainmodule, model_view))
-		metrics.register(new CNBNA(mainmodule, model_view))
+		metrics.register(new CNBA(model, mainmodule, filter))
+		metrics.register(new CNBNA(model, mainmodule, filter))
 
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
@@ -84,17 +86,9 @@ class CNBNA
 	redef fun name do return "cnbna"
 	redef fun desc do return "number of accessible nullable attributes (inherited + local)"
 
-	var mainmodule: MModule
-	var model_view: ModelView
-
-	init(mainmodule: MModule, model_view: ModelView) do
-		self.mainmodule = mainmodule
-		self.model_view = model_view
-	end
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var all = mclass.collect_accessible_mattributes(model_view)
+			var all = mclass.collect_accessible_mattributes(mainmodule, filter)
 			for mattr in all do
 				if mattr.is_nullable then values.inc(mclass)
 			end
@@ -114,20 +108,12 @@ end
 
 private class NullableSends
 	super Visitor
-	var modelbuilder: ModelBuilder
 	var nclassdef: AClassdef
 
 	var total_sends: Int = 0
 	var nullable_sends: Int = 0
 	var nullable_eq_sends: Int = 0
 	var buggy_sends: Int = 0
-
-	# Get a new visitor on a classef to add type count in `typecount`.
-	init(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-		self.modelbuilder = modelbuilder
-		self.nclassdef = nclassdef
-	end
 
 	redef fun visit(n)
 	do
@@ -168,7 +154,7 @@ do
 	# Visit all the source code to collect data
 	for nmodule in modelbuilder.nmodules do
 		for nclassdef in nmodule.n_classdefs do
-			var visitor = new NullableSends(modelbuilder, nclassdef)
+			var visitor = new NullableSends(nclassdef)
 			visitor.enter_visit(nclassdef)
 			total_sends += visitor.total_sends
 			nullable_sends += visitor.nullable_sends

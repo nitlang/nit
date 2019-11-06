@@ -16,9 +16,11 @@
 # see `testing/README`
 module nitunit
 
+import frontend
 import testing
 
 var toolcontext = new ToolContext
+toolcontext.keep_going = true
 
 toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_autosav, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show, toolcontext.opt_nitc)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
@@ -82,19 +84,23 @@ for a in args do
 	end
 	# Try to load the file as a markdown document
 	var mdoc = modelbuilder.load_markdown(a)
-	page.add modelbuilder.test_mdoc(mdoc)
+	var ts = modelbuilder.test_mdoc(mdoc)
+	if not ts.children.is_empty then page.add ts
 end
 
 for a in module_files do
 	var g = modelbuilder.identify_group(a)
 	if g == null then continue
-	page.add modelbuilder.test_group(g)
+	var ts = modelbuilder.test_group(g)
+	if not ts.children.is_empty then page.add ts
 end
 
 for m in mmodules do
-	page.add modelbuilder.test_markdown(m)
-	var ts = modelbuilder.test_unit(m)
-	if ts != null then page.add ts
+	var ts
+	ts = modelbuilder.test_markdown(m)
+	if not ts.children.is_empty then page.add ts
+	ts = modelbuilder.test_unit(m)
+	if ts != null and not ts.children.is_empty then page.add ts
 end
 
 var file = toolcontext.opt_output.value

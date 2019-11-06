@@ -57,3 +57,8 @@ class String end
 
 # List of things.
 class List[E] end
+
+# Sys
+class Sys
+	fun main is intern
+end

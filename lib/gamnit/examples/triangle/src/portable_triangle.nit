@@ -18,6 +18,7 @@
 # * The book OpenGL ES 2.0 Programming Guide
 # * https://code.google.com/p/opengles-book-samples/source/browse/trunk/LinuxX11/Chapter_2/Hello_Triangle/Hello_Triangle.c
 module portable_triangle is
+	example
 	app_name "gamnit Triangle"
 	app_namespace "org.nitlanguage.triangle"
 	app_version(1, 1, git_revision)
@@ -39,7 +40,7 @@ redef class App
 	# Vertex data for the triangle
 	var vertex_array: VertexArray is noautoinit
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 

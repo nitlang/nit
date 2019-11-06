@@ -25,34 +25,34 @@ import android.view.KeyEvent;
 public class NitActivity extends Activity {
 
 	// Nit activity associated to `this`
-	protected int nitActivity = 0;
+	protected long nitActivity = 0;
 
 	/*
 	 * Calls to Nit or to the C framework
 	 */
 
 	static {
-		System.loadLibrary("main");
+		System.loadLibrary("nit_app");
 	}
 
 	/*
 	 * Callbacks to Nit through C
 	 */
-	protected native int nitRegisterActivity();
-	protected native void nitOnCreate(int activity, Bundle savedInstanceState);
-	protected native void nitOnStart(int activity);
-	protected native void nitOnRestart(int activity);
-	protected native void nitOnResume(int activity);
-	protected native void nitOnPause(int activity);
-	protected native void nitOnStop(int activity);
-	protected native void nitOnDestroy(int activity);
-	protected native void nitOnSaveInstanceState(int activity, Bundle savedInstanceState);
-	protected native void nitOnRestoreInstanceState(int activity, Bundle savedInstanceState);
-	protected native boolean nitOnBackPressed(int activity);
-	protected native boolean nitOnKeyDown(int activity, int keyCode, KeyEvent event);
-	protected native boolean nitOnKeyLongPress(int activity, int keyCode, KeyEvent event);
-	protected native boolean nitOnKeyMultiple(int activity, int keyCode, int count, KeyEvent event);
-	protected native boolean nitOnKeyUp(int activity, int keyCode, KeyEvent event);
+	protected native long nitRegisterActivity();
+	protected native void nitOnCreate(long activity, Bundle savedInstanceState);
+	protected native void nitOnStart(long activity);
+	protected native void nitOnRestart(long activity);
+	protected native void nitOnResume(long activity);
+	protected native void nitOnPause(long activity);
+	protected native void nitOnStop(long activity);
+	protected native void nitOnDestroy(long activity);
+	protected native void nitOnSaveInstanceState(long activity, Bundle savedInstanceState);
+	protected native void nitOnRestoreInstanceState(long activity, Bundle savedInstanceState);
+	protected native boolean nitOnBackPressed(long activity);
+	protected native boolean nitOnKeyDown(long activity, int keyCode, KeyEvent event);
+	protected native boolean nitOnKeyLongPress(long activity, int keyCode, KeyEvent event);
+	protected native boolean nitOnKeyMultiple(long activity, int keyCode, int count, KeyEvent event);
+	protected native boolean nitOnKeyUp(long activity, int keyCode, KeyEvent event);
 
 	/*
 	 * Implementation of OS callbacks

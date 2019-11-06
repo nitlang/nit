@@ -63,13 +63,13 @@ class GlobeModel
 	redef fun load
 	do
 		leaves.add new LeafModel(
-			new Mesh.uv_sphere(1.0, 2*n_parallels, n_parallels),
+			new UVSphere(1.0, 2*n_parallels, n_parallels),
 			new GlobeMaterial.surface)
 		leaves.add new LeafModel(
-			new Mesh.uv_sphere(1.1, 2*n_parallels, n_parallels),
+			new UVSphere(1.1, 2*n_parallels, n_parallels),
 			new GlobeMaterial.clouds)
 		leaves.add new LeafModel(
-			new Mesh.uv_sphere(1.2, 2*n_parallels, n_parallels),
+			new UVSphere(1.2, 2*n_parallels, n_parallels),
 			new GlobeMaterial.atmo)
 	end
 end
@@ -91,12 +91,14 @@ class GlobeMaterial
 	init surface do init(0, true, [1.0, 1.0, 1.0, 1.0])
 
 	# Create and configure a material for the cloud layer
-	init clouds do init(4, false, [1.0, 1.0, 1.0, 0.5])
+	init clouds do init(4, false, [1.0*clouds_a, 1.0*clouds_a, 1.0*clouds_a, clouds_a])
+	private var clouds_a = 0.5
 
 	# Create and configure a material for the visible atmosphere
-	init atmo do init(null, false, [0.0, 0.8, 1.0, 0.05])
+	init atmo do init(null, false, [0.0, 0.8*atmo_a, 1.0*atmo_a, atmo_a])
+	private var atmo_a = 0.05
 
-	redef fun draw(actor, model)
+	redef fun draw(actor, model, camera)
 	do
 		var gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print gl_error
@@ -104,9 +106,6 @@ class GlobeMaterial
 		var mesh = model.mesh
 
 		var program = app.globe_program
-		program.use
-
-		# Set constant program values
 		program.use
 
 		# Bind textures
@@ -133,7 +132,7 @@ class GlobeMaterial
 		# Update camera view and light
 		var p = app.world_camera.position
 		program.camera.uniform(p.x, p.y, p.z)
-		program.mvp.uniform app.world_camera.mvp_matrix
+		program.mvp.uniform camera.mvp_matrix
 		program.light_center.uniform(app.light.position.x, app.light.position.y, app.light.position.z)
 
 		# Set attributes
@@ -148,7 +147,7 @@ class GlobeMaterial
 
 		# Set uniforms
 		program.scale.uniform 1.0
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
 		program.color.uniform(color[0], color[1], color[2], color[3])
 		program.is_surface.uniform is_surface
@@ -228,7 +227,6 @@ class GlobeProgram
 				s += 0.05 * texture2D(tex_displace, tex_coord).r;
 
 			gl_Position = (vec4(coord.xyz * s, 1.0) * rotation + translation) * mvp;
-
 		}
 		""" @ glsl_vertex_shader
 

@@ -26,20 +26,20 @@ redef class SingleByteXorCipher
 
 		# Accumulate best result
 		var max = 0.0
-		var best = 0.to_b
+		var best = 0
 
 		# Iterate on possible values for a byte
 		var xor_b = new Bytes.with_capacity(1)
 		for b in [0 .. 255] do
 			# Need `Bytes` to pass to xor
-			xor_b[0] = b.to_b
+			xor_b[0] = b
 
 			# Xor and evaluate result
 			var xored = ciphertext.xorcipher(xor_b)
 			var result = xored.to_s.english_scoring
 			if result > max then
 				max = result
-				best = b.to_b
+				best = b
 			end
 		end
 

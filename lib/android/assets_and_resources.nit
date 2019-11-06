@@ -52,7 +52,7 @@ private extern class NativeAssetManager in "Java" `{ android.content.res.AssetMa
 
 	# Get the locales that this assets manager contains data for
 	fun get_locales: Array[JavaString] import Array[JavaString], Array[JavaString].add in "Java" `{
-		int arr = new_Array_of_JavaString();
+		nit.app.NitObject arr = new_Array_of_JavaString();
 		for (String s : self.getLocales()) {
 			Array_of_JavaString_add(arr, s);
 		}
@@ -61,7 +61,7 @@ private extern class NativeAssetManager in "Java" `{ android.content.res.AssetMa
 
 	# String Array of all the assets at the given path
 	fun list(path: JavaString): Array[JavaString] import Array[JavaString], Array[JavaString].add  in "Java" `{
-		int arr = new_Array_of_JavaString();
+		nit.app.NitObject arr = new_Array_of_JavaString();
 		try {
 			for (String s : self.list(path)) {
 				Array_of_JavaString_add(arr, s);
@@ -325,6 +325,10 @@ private extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 	# Wraps Java: `boolean android.graphics.Bitmap.hasAlpha()`
 	fun has_alpha: Bool in "Java" `{
 		return self.hasAlpha();
+	`}
+
+	fun recycle in "Java" `{
+		self.recycle();
 	`}
 
 	# HACK for bug #845

@@ -31,25 +31,14 @@ import app::ui
 import app::http_request
 import app::data_store
 import android::aware
-import json::serialization
+import json
 
 import model
 
 # Delay in seconds before the next request after an error
 fun request_delay_on_error: Float do return 60.0
 
-redef class App
-	redef fun on_create
-	do
-		# Create the main window
-		push_window new TnitterWindow
-		super
-	end
-end
-
-# Main window
-class TnitterWindow
-	super Window
+redef class Window
 
 	private var layout = new VerticalLayout(parent=self)
 	private var list_posts = new ListLayout(parent=layout)
@@ -98,7 +87,7 @@ fun tnitter_server_uri: String do return "http://localhost:8080"
 abstract class AsyncTnitterRequest
 	super AsyncHttpRequest
 
-	private var window: TnitterWindow
+	private var window: Window
 
 	redef fun uri_root do return tnitter_server_uri
 

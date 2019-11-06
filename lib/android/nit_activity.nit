@@ -36,7 +36,7 @@
 # the Java virtual machine. For this reason, the main _must_ execute quickly,
 # on the main UI thread at least.
 module nit_activity is
-	extra_java_files "NitActivity.java"
+	extra_java_files "nit.app.NitActivity"
 	android_activity "nit.app.NitActivity"
 end
 
@@ -64,6 +64,7 @@ in "C body" `{
 		global_jvm = vm;
 
 		// Invoke Nit system and main
+		int main(int argc, char ** argv);
 		main(0, NULL);
 
 		return JNI_VERSION_1_2;
@@ -73,94 +74,94 @@ in "C body" `{
 	 * Implementations of NitActivity.java native methods
 	 */
 
-	JNIEXPORT jint JNICALL Java_nit_app_NitActivity_nitRegisterActivity
+	JNIEXPORT jlong JNICALL Java_nit_app_NitActivity_nitRegisterActivity
 	  (JNIEnv *env, jobject java_activity)
 	{
 		Activity nit_activity = App_register_activity(global_app, java_activity);
 		Activity_incr_ref(nit_activity);
-		return (jint)(void*)nit_activity;
+		return (jlong)(void*)nit_activity;
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnCreate
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jobject saved_state)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jobject saved_state)
 	{
 		Activity_on_create((Activity)nit_activity, saved_state);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnStart
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		Activity_on_start((Activity)nit_activity);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnRestart
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		Activity_on_restart((Activity)nit_activity);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnResume
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		Activity_on_resume((Activity)nit_activity);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnPause
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		Activity_on_pause((Activity)nit_activity);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnStop
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		Activity_on_stop((Activity)nit_activity);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnDestroy
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		Activity_on_destroy((Activity)nit_activity);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnSaveInstanceState
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jobject saved_state)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jobject saved_state)
 	{
 		Activity_on_save_instance_state((Activity)nit_activity, saved_state);
 	}
 
 	JNIEXPORT void JNICALL Java_nit_app_NitActivity_nitOnRestoreInstanceState
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jobject saved_state)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jobject saved_state)
 	{
 		Activity_on_restore_instance_state((Activity)nit_activity, saved_state);
 	}
 
 	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnBackPressed
-	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity)
 	{
 		return (jboolean)Activity_on_back_pressed((Activity)nit_activity);
 	}
 
 	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyDown
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jint keyCode, jobject event)
 	{
 		return (jboolean)Activity_on_key_down((Activity)nit_activity, keyCode, event);
 	}
 
 	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyLongPress
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jint keyCode, jobject event)
 	{
 		return (jboolean)Activity_on_key_long_press((Activity)nit_activity, keyCode, event);
 	}
 
 	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyMultiple
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jint count, jobject event)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jint keyCode, jint count, jobject event)
 	{
 		return (jboolean)Activity_on_key_multiple((Activity)nit_activity, keyCode, count, event);
 	}
 
 	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyUp
-	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
+	  (JNIEnv *env, jobject java_activity, jlong nit_activity, jint keyCode, jobject event)
 	{
 		return (jboolean)Activity_on_key_up((Activity)nit_activity, keyCode, event);
 	}
@@ -207,6 +208,14 @@ redef class App
 	end
 end
 
+redef class AppComponent
+	# The application is starting or restarting, it is visible to the user
+	fun on_start do end
+
+	# The application is being destroyed
+	fun on_destroy do end
+end
+
 # An Android activity
 #
 # You must implement the callbacks (prefixed with `on_`) to follow the
@@ -232,7 +241,7 @@ class Activity
 	# Notification from Android, the activity has been restarted
 	#
 	# Followed by `on_start`.
-	fun on_restart do end
+	fun on_restart do app.on_restart
 
 	# Notification from Android, the activity has been started
 	#
@@ -278,7 +287,7 @@ class Activity
 	# Notification from Android, the system is running low on memory
 	#
 	# Try to reduce your memory use.
-	fun on_low_memory do end
+	fun on_low_memory do force_garbage_collection
 
 	# Notification from Android, the current window of the activity has lost or gained focus
 	fun on_window_focus_changed(has_focus: Bool) do end

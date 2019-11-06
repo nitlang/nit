@@ -74,10 +74,10 @@ class Bitmap
 	private var image_size: Int is noinit
 
 	# 14-byte bitmap header
-	private var bitmap_header: Array[Int] = [66, 77, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0]
+	private var bitmap_header = [66, 77, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0]
 
 	# 40-byte dib header
-	private var dib_header: Array[Int] = [40, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	private var dib_header = [40, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 1, 0, 24, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -130,10 +130,8 @@ class Bitmap
 		# =============== Bitmap header ================
 		for x in [0..13] do
 			var b = fileReader.read_byte
-			if b == null then
-				return
-			end
-			bitmap_header[x] = b.to_i
+			if b < 0 then return
+			bitmap_header[x] = b
 		end
 		self.file_size = get_value(bitmap_header.subarray(2, 4))
 		self.data_offset = get_value(bitmap_header.subarray(10, 4))
@@ -141,8 +139,8 @@ class Bitmap
 		# =============== DIB header ================
 		for x in [0..39] do
 			var b = fileReader.read_byte
-			if b == null then return
-			dib_header[x] = b.to_i
+			if b < 0 then return
+			dib_header[x] = b
 		end
 		var dib_size = get_value(dib_header.subarray(0, 4))
 		# only support BITMAPINFOHEADER
@@ -169,13 +167,14 @@ class Bitmap
 			for x in [0..self.height[
 			do
 				var row = new Array[Int].with_capacity(self.width)
+				var rgb_str = new CString(3)
 				for y in [0..self.width[
 				do
-					var bts = fileReader.read_bytes(3)
-					if bts.length != 3 then return
-					var red = bts[0] << 16
-					var green = bts[1] << 8
-					var blue = bts[2]
+					var bts = fileReader.read_bytes_to_cstring(rgb_str, 3)
+					if bts < 3 then return
+					var red = rgb_str[0] << 16
+					var green = rgb_str[1] << 8
+					var blue = rgb_str[2]
 					row.add(red.to_i + green.to_i + blue.to_i)
 				end
 				self.data.add(row)

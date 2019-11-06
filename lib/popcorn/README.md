@@ -364,7 +364,7 @@ The app declared in this example will try to match the routes in this order:
 ### Route parameters
 
 **Route parameters** are variable parts of a route path. They can be used to path
-arguments within the URI.
+arguments within the URI.
 Parameters in a route are prefixed with a colon `:` like in `:userId`, `:year`.
 
 The following example declares a handler `UserHome` that responds with the `user`
@@ -511,7 +511,7 @@ with the `use_before` method.
 Next, we’ll create a middleware handler called “LogHandler” that prints the requested
 uri, the response status and the time it took to Popcorn to process the request.
 
-This example gives a simplified version of the `RequestClock` and `ConsoleLog` middlewares.
+This example gives a simplified version of the `RequestClock` and `PopLogger` middlewares.
 
 ~~~
 import popcorn
@@ -584,7 +584,7 @@ Starting with version 0.1, Popcorn provide a set of built-in middleware that can
 be used to develop your app faster.
 
 * `RequestClock`: initializes requests clock.
-* `ConsoleLog`: displays resquest and response status in console (can be used with `RequestClock`).
+* `PopLogger`: displays resquest and response status in console (can be used with `RequestClock`).
 * `SessionInit`: initializes requests session (see the `Sessions` section).
 * `StaticServer`: serves static files (see the `Serving static files with Popcorn` section).
 * `Router`: a mountable mini-app (see the `Mountable routers` section).
@@ -718,7 +718,7 @@ app.listen("localhost", 3000)
 
 ## Sessions
 
-**Sessions** can be used thanks to the built-in `SessionMiddleware`.
+**Sessions** can be used thanks to the built-in `SessionInit` middleware.
 
 Here a simple example of login button that define a value in the `req` session.
 
@@ -747,7 +747,7 @@ class AppLogin
 end
 
 var app = new App
-app.use("/*", new SessionInit)
+app.use_before("/*", new SessionInit)
 app.use("/", new AppLogin)
 app.listen("localhost", 3000)
 ~~~
@@ -823,7 +823,7 @@ class UserForm
 	end
 end
 
-var mongo = new MongoClient("mongodb://localhost:27017/")
+var mongo = new MongoClient("mongodb://mongo:27017/")
 var db = mongo.database("mongo_example")
 
 var app = new App

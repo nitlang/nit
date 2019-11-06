@@ -1,24 +1,13 @@
-<div class='card card-xl' ng-class='{active: focus.full_name == definition.full_name}'>
+<div class='card card-xl' ng-class='{active: isActive()}' id='{{definition.full_name}}'>
 	<div class='card-body'>
-		<h5 class='text-muted'>
+		<h5>
 			<span ng-if='definition.is_intro'>
-				<span class='glyphicon glyphicon-plus' /> Introduction</span>
+				<span class='text-muted glyphicon glyphicon-plus' title='introduction' />
+				<entity-namespace namespace='definition.namespace' />
 			</span>
 			<span ng-if='!definition.is_intro'>
-				<span class='glyphicon glyphicon-asterisk' /> Redefinition</span>
-			</span>
-			<span ng-if='definition.mclass'>
-				of <entity-link mentity='definition.mclass' />
-			</span>
-			<span ng-if='definition.mproperty'>
-				of <entity-link mentity='definition.mproperty' />
-			</span>
-			<span ng-if='definition.mclassdef'>
-				in <entity-link mentity='definition.mmodule' />
-				:: <entity-link mentity='definition.mclassdef' />
-			</span>
-			<span ng-if='!definition.mclassdef'>
-				in <entity-link mentity='definition.mmodule' />
+				<span class='text-muted glyphicon glyphicon-asterisk' title='redefinition' />
+				<entity-namespace namespace='definition.namespace' />
 			</span>
 			<div class='btn-bar'>
 				<button class='btn btn-link' aria-expanded='false'
@@ -30,8 +19,8 @@
 			</div>
 		</h5>
 		<div id='{{codeId}}' class='collapse'>
-			<pre ng-bind-html='code' />
+			<pre ng-bind-html='code.code' />
+			<entity-location loc='code.location' />
 		</div>
-		<entity-location mentity='definition' />
 	</div>
 </div>

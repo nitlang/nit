@@ -49,7 +49,7 @@ for ref in `git rev-list --no-merges "$from".."$to"`; do
 	err=1
 done
 
-rm check_signedoff_list.out 2> /dev/null
+rm check_signedoff_list.out 2> /dev/null || true
 
 if test "$err" = 1; then
 	echo ""

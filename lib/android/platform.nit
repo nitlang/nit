@@ -19,4 +19,9 @@ module platform is platform "android"
 
 import java
 import app
+intrude import app::app_base # For test_bound_platform
 import aware
+
+redef fun bound_platform do return "Android"
+
+redef fun test_bound_platform do end

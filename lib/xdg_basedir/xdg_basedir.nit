@@ -49,18 +49,18 @@ extern class XdgBasedir `{ xdgHandle* `}
 	fun update: Bool `{ return xdgUpdateData(self); `}
 
 	# Base directory for user specific data files.
-	fun data_home: String import NativeString.to_s `{
-		return NativeString_to_s((char*)xdgDataHome(self));
+	fun data_home: String import CString.to_s `{
+		return CString_to_s((char*)xdgDataHome(self));
 	`}
 
 	# Base directory for user specific configuration files.
-	fun config_home: String import NativeString.to_s `{
-		return NativeString_to_s((char*)xdgConfigHome(self));
+	fun config_home: String import CString.to_s `{
+		return CString_to_s((char*)xdgConfigHome(self));
 	`}
 
 	# Base directory for user specific non-essential data files.
-	fun cache_home: String import NativeString.to_s `{
-		return NativeString_to_s((char*)xdgCacheHome(self));
+	fun cache_home: String import CString.to_s `{
+		return CString_to_s((char*)xdgCacheHome(self));
 	`}
 
 	# Preference-ordered set of base directories to search for data files
@@ -111,13 +111,13 @@ end
 private extern class ConstPointer `{ const void * `}
 	# Convert a C `char **` to a Nit `Array[String]`
 	fun to_string_array: Array[String]
-	import Array[String], Array[String].add, NativeString.to_s `{
+	import Array[String], Array[String].add, CString.to_s `{
 		char **strings = (char**)self;
 
 		Array_of_String aos = new_Array_of_String();
 		int p = 0;
 		while (strings[p] != NULL) {
-			Array_of_String_add(aos, NativeString_to_s((char*)strings[p]));
+			Array_of_String_add(aos, CString_to_s((char*)strings[p]));
 			p ++;
 		}
 

@@ -18,31 +18,32 @@ module test_postgres_nity
 
 import postgresql::postgres
 
-var db = new Postgres.open("dbname=postgres")
+var db_suffix = "NIT_TESTING_ID".environ
+var db = new Postgres.open("host=postgres user=postgres dbname=postgres")
 assert open_db: not db.is_closed else print db.error
 
-assert create_table: db.create_table("IF NOT EXISTS users (uname TEXT PRIMARY KEY, pass TEXT NOT NULL, activated INTEGER, perc FLOAT)") else
+assert create_table: db.create_table("IF NOT EXISTS users_{db_suffix} (uname TEXT PRIMARY KEY, pass TEXT NOT NULL, activated INTEGER, perc FLOAT)") else
   print db.error
 end
 
-assert insert1: db.insert("INTO users VALUES('Bob', 'zzz', 1, 77.7)") else
+assert insert1: db.insert("INTO users_{db_suffix} VALUES('Bob', 'zzz', 1, 77.7)") else
   print db.error
 end
 
-assert insert2: db.insert("INTO users VALUES('Guilherme', 'xxx', 1, 88)") else
+assert insert2: db.insert("INTO users_{db_suffix} VALUES('Guilherme', 'xxx', 1, 88)") else
   print db.error
 end
 
-var result = db.raw_execute("SELECT * FROM users")
+var result = db.raw_execute("SELECT * FROM users_{db_suffix}")
 
 assert raw_exec: result.is_ok else print db.error
 
 assert postgres_nfields: result.nfields == 4 else print_error db.error
 assert postgres_fname: result.fname(0) == "uname" else print_error db.error
-assert postgres_isnull: result.is_null(0,0) == false else print_error db.error
+assert postgres_isnull: not result.is_null(0,0) else print_error db.error
 assert postgres_value: result.value(0,0) == "Bob" else print_error db.error
 
-assert drop_table: db.execute("DROP TABLE users") else print db.error
+assert drop_table: db.execute("DROP TABLE users_{db_suffix}") else print db.error
 
 db.finish
 

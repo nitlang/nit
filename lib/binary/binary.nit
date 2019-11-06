@@ -18,7 +18,7 @@
 # var w = new FileWriter.open("/tmp/data.bin")
 # w.write "hello"
 # w.write_int64 123456789
-# w.write_byte 3u8
+# w.write_byte 3
 # w.write_float 1.25
 # w.write_double 1.234567
 # w.write_bits(true, false, true)
@@ -28,7 +28,7 @@
 # var r = new FileReader.open("/tmp/data.bin")
 # assert r.read(5) == "hello"
 # assert r.read_int64 == 123456789
-# assert r.read_byte == 3u8
+# assert r.read_byte == 3
 # assert r.read_float == 1.25
 # assert r.read_double == 1.234567
 #
@@ -70,7 +70,7 @@ redef abstract class Writer
 	super BinaryStream
 
 	# Write a boolean `value` on a byte, using 0 for `false` and 1 for `true`
-	fun write_bool(value: Bool) do write_byte if value then 1u8 else 0u8
+	fun write_bool(value: Bool) do write_byte if value then 1 else 0
 
 	# Write up to 8 `Bool` in a byte
 	#
@@ -81,9 +81,9 @@ redef abstract class Writer
 	do
 		assert bits.length <= 8
 
-		var int = 0u8
+		var int = 0
 		for b in bits.length.times do
-			if bits[b] then int |= 1u8 << (7 - b)
+			if bits[b] then int |= 1 << (7 - b)
 		end
 
 		write_byte int
@@ -97,7 +97,7 @@ redef abstract class Writer
 	fun write_string(text: Text)
 	do
 		write text
-		write_byte 0x00u8
+		write_byte 0x00
 	end
 
 	# Write the length as a 64 bits integer, then the content of `text`
@@ -153,7 +153,7 @@ redef abstract class Reader
 	# Read a single byte and return `true` if its value is different than 0
 	#
 	# Returns `false` when an error is pending (`last_error != null`).
-	fun read_bool: Bool do return read_byte != 0u8
+	fun read_bool: Bool do return read_byte > 0
 
 	# Get an `Array` of 8 `Bool` by reading a single byte
 	#
@@ -163,10 +163,10 @@ redef abstract class Reader
 	fun read_bits: Array[Bool]
 	do
 		var int = read_byte
-		if int == null then return new Array[Bool]
+		if int < 0 then return new Array[Bool]
 		var arr = new Array[Bool]
 		for i in [7 .. 0].step(-1) do
-			arr.push(((int >> i) & 1u8) != 0u8)
+			arr.push(((int >> i) & 1) != 0)
 		end
 		return arr
 	end
@@ -181,7 +181,7 @@ redef abstract class Reader
 		var buf = new Bytes.empty
 		loop
 			var byte = read_byte
-			if byte == null or byte == 0u8 then
+			if byte <= 0 then
 				return buf.to_s
 			end
 			buf.add byte
@@ -216,13 +216,13 @@ redef abstract class Reader
 		var b3 = read_byte
 
 		# Check for error, `last_error` is set by `read_byte`
-		if b0 == null or b1 == null or b2 == null or b3 == null then return 0.0
+		if b0 < 0 or b1 < 0 or b2 < 0 or b3 < 0 then return 0.0
 
 		return native_read_float(b0, b1, b2, b3, big_endian)
 	end
 
 	# Utility for `read_float`
-	private fun native_read_float(b0, b1, b2, b3: Byte, big_endian: Bool): Float `{
+	private fun native_read_float(b0, b1, b2, b3: Int, big_endian: Bool): Float `{
 		union {
 			unsigned char b[4];
 			float val;
@@ -258,14 +258,14 @@ redef abstract class Reader
 		var b7 = read_byte
 
 		# Check for error, `last_error` is set by `read_byte`
-		if b0 == null or b1 == null or b2 == null or b3 == null or
-		   b4 == null or b5 == null or b6 == null or b7 == null then return 0.0
+		if b0 < 0 or b1 < 0 or b2 < 0 or b3 < 0 or
+		   b4 < 0 or b5 < 0 or b6 < 0 or b7 < 0 then return 0.0
 
 		return native_read_double(b0, b1, b2, b3, b4, b5, b6, b7, big_endian)
 	end
 
 	# Utility for `read_double`
-	private fun native_read_double(b0, b1, b2, b3, b4, b5, b6, b7: Byte, big_endian: Bool): Float `{
+	private fun native_read_double(b0, b1, b2, b3, b4, b5, b6, b7: Int, big_endian: Bool): Float `{
 		union {
 			unsigned char b[8];
 			double val;
@@ -308,14 +308,14 @@ redef abstract class Reader
 		var b7 = read_byte
 
 		# Check for error, `last_error` is set by `read_byte`
-		if b0 == null or b1 == null or b2 == null or b3 == null or
-		   b4 == null or b5 == null or b6 == null or b7 == null then return 0
+		if b0 < 0 or b1 < 0 or b2 < 0 or b3 < 0 or
+		   b4 < 0 or b5 < 0 or b6 < 0 or b7 < 0 then return 0
 
 		return native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7, big_endian)
 	end
 
 	# Utility for `read_int64`
-	private fun native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7: Byte, big_endian: Bool): Int `{
+	private fun native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char b[8];
 			int64_t val;
@@ -341,7 +341,7 @@ end
 
 redef class Int
 	# Utility for `BinaryWriter`
-	private fun int64_byte_at(index: Int, big_endian: Bool): Byte `{
+	private fun int64_byte_at(index: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char bytes[8];
 			int64_t val;
@@ -360,7 +360,7 @@ end
 
 redef class Float
 	# Utility for `BinaryWriter`
-	private fun float_byte_at(index: Int, big_endian: Bool): Byte `{
+	private fun float_byte_at(index: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char bytes[4];
 			float val;
@@ -377,7 +377,7 @@ redef class Float
 	`}
 
 	# Utility for `BinaryWriter`
-	private fun double_byte_at(index: Int, big_endian: Bool): Byte `{
+	private fun double_byte_at(index: Int, big_endian: Bool): Int `{
 		union {
 			unsigned char bytes[8];
 			double val;

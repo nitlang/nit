@@ -17,3 +17,4 @@ module crypto
 
 import basic_ciphers
 import xor_ciphers
+import bytes

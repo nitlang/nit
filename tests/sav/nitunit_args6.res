@@ -5,7 +5,7 @@
 	Runtime error: Assert failed (nitunit.out/test_nitunit3-0.nit:7)
 
 [KO] test_nitunit3>#2
-     test_nitunit3/README.md:7,3--5: Syntax Error: unexpected malformed character '\].
+     test_nitunit3/README.md:8,3--5: Syntax Error: unexpected malformed character '\].
 
 ==== Docunits of module test_nitunit3::test_nitunit3 | tests: 1
 [OK] test_nitunit3::test_nitunit3

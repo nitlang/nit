@@ -26,6 +26,11 @@ POST args: i:0123, s:asdf
 Method: GET, URI: /simple_answer, trailing: /
 Cookie: i:0123, s:asdf
 
+[Client] curl -s localhost:*****/simple_answer --get --data-urlencode 's=b b'
+[Response] Simple answer
+Method: GET, URI: /simple_answer, trailing: /
+GET args: s:b b
+
 [Client] curl -s localhost:*****/params_answer/0123/asdf
 [Response] Simple answer
 Method: GET, URI: /params_answer/0123/asdf, trailing: /
@@ -123,3 +128,10 @@ Content-Length: 0
 Server: nitcorn
 Set-Cookie: nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT
 
+
+[Client] curl -s localhost:*****/simple_binary/
+сту
+
+[Client] curl -s localhost:*****/simple_template/
+Hello
+сту

@@ -32,7 +32,7 @@ fun plus_0x10(v: Byte): Byte `{
 	return v + 0x10;
 `}
 
-fun print_ns(s: NativeString) `{
+fun print_ns(s: CString) `{
 	printf("%s\n", s);
 `}
 

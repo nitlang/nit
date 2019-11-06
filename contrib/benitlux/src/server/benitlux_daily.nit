@@ -246,7 +246,7 @@ end
 if "NIT_TESTING".environ == "true" then exit 0
 
 opts.parse args
-if not opts.errors.is_empty or opts.help.value == true then
+if not opts.errors.is_empty or opts.help.value then
 	print opts.errors.join("\n")
 	print "Usage: benitlux_daily [Options]"
 	opts.usage

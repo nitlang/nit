@@ -1,0 +1,21 @@
+test_prog -q Obj --name-prefix --no-color
+test_prog -q C --name-prefix --no-color
+test_prog -q e --name-prefix --no-color
+test_prog -q to --name-prefix --no-color
+test_prog -q C --full-name-prefix --no-color
+test_prog -q test_prog:: --full-name-prefix --no-color
+test_prog -q test_prog::C --full-name-prefix --no-color
+test_prog -q A --name-similarity --no-color
+test_prog -q Floot --name-similarity --no-color
+test_prog -q elf --name-similarity --no-color
+test_prog -q test_prog::Dwarv --full-name-similarity --no-color
+test_prog -q test_prof::Dwarf --full-name-similarity --no-color
+test_prog -q Obj --name --no-color
+test_prog -q C --name --no-color
+test_prog -q to --name --no-color
+test_prog -q test_prog::Dwar --full-name --no-color
+test_prog -q test_prog::C --full-name --no-color
+test_prog -q C --no-color
+test_prog -q to --no-color
+test_prog -q Floot --no-color
+test_prog -q test_prog::C --no-color

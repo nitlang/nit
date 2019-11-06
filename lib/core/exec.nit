@@ -23,17 +23,22 @@ in "C" `{
 	#include <errno.h>
 	#include <stdio.h>
 	#include <unistd.h>
-	#include <sys/wait.h>
 	#include <signal.h>
-`}
-
-in "C Header" `{
 	#include <sys/types.h>
 
-	// FIXME this should be in the "C" block when bug on module blocks is fixed
-	// or, even better, replace the C structure by a Nit object.
+#ifdef _WIN32
+	#include <windows.h>
+	#include <fcntl.h>
+#else
+	#include <sys/wait.h>
+#endif
+
 	typedef struct se_exec_data se_exec_data_t;
 	struct se_exec_data {
+#ifdef _WIN32
+		HANDLE h_process;
+		HANDLE h_thread;
+#endif
 		pid_t id;
 		int running;
 		int status;
@@ -96,23 +101,141 @@ class Process
 	# Internal code to handle execution
 	protected fun execute
 	do
-		# Pass the arguments as a big C string where elements are separated with '\0'
-		var args = new FlatBuffer
-		var l = 1 # Number of elements in args
-		args.append(command)
 		var arguments = self.arguments
-		if arguments != null then
-			for a in arguments do
-				args.add('\0')
-				args.append(a)
+
+		var args = new FlatBuffer
+		var argc = 1
+
+		if not is_windows then
+			# Pass the arguments as a big C string where elements are separated with '\0'
+			args.append command
+			if arguments != null then
+				for a in arguments do
+					args.add '\0'
+					args.append a
+				end
+				argc += arguments.length
 			end
-			l += arguments.length
+		else
+			# Combine the program and args in a single string
+			assert not command.chars.has('"')
+			args = new FlatBuffer
+
+			args.add '"'
+			args.append command
+			args.add '"'
+
+			if arguments != null then
+				for a in arguments do
+					args.append " \""
+					args.append a.replace('"', "\\\"")
+					args.add '"'
+				end
+			end
 		end
-		data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, l, pipeflags)
+
+		data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, argc, pipeflags)
+		assert not data.address_is_null else print_error "Internal error executing: {command}"
 	end
 
 	private var data: NativeProcess
-	private fun basic_exec_execute(prog, args: NativeString, argc: Int, pipeflag: Int): NativeProcess `{
+
+	private fun basic_exec_execute(prog, args: CString, argc: Int, pipeflag: Int): NativeProcess `{
+#ifdef _WIN32
+		SECURITY_ATTRIBUTES sec_attr;
+		sec_attr.nLength = sizeof(SECURITY_ATTRIBUTES);
+		sec_attr.bInheritHandle = TRUE;
+		sec_attr.lpSecurityDescriptor = NULL;
+
+		STARTUPINFO start_info;
+		ZeroMemory(&start_info, sizeof(STARTUPINFO));
+		start_info.cb = sizeof(STARTUPINFO);
+		start_info.dwFlags = STARTF_USESTDHANDLES;
+
+		HANDLE in_fd[2];
+		HANDLE out_fd[2];
+		HANDLE err_fd[2];
+
+		se_exec_data_t *result = (se_exec_data_t*)malloc(sizeof(se_exec_data_t));
+
+		// Redirect stdin?
+		if (pipeflag & 1) {
+			if (!CreatePipe(&in_fd[0], &in_fd[1], &sec_attr, 0)) {
+				return NULL;
+			}
+			start_info.hStdInput = in_fd[0];
+			result->in_fd = _open_osfhandle((intptr_t)in_fd[1], _O_WRONLY);
+			if ( !SetHandleInformation(in_fd[1], HANDLE_FLAG_INHERIT, 0) )
+				return NULL;
+		} else {
+			start_info.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+			result->in_fd = -1;
+		}
+
+		// Redirect stdout?
+		if (pipeflag & 2) {
+			if (!CreatePipe(&out_fd[0], &out_fd[1], &sec_attr, 0)) {
+				return NULL;
+			}
+			start_info.hStdOutput = out_fd[1];
+			result->out_fd = _open_osfhandle((intptr_t)out_fd[0], _O_RDONLY);
+			if ( !SetHandleInformation(out_fd[0], HANDLE_FLAG_INHERIT, 0) )
+				return NULL;
+		} else {
+			start_info.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+			result->out_fd = -1;
+		}
+
+		// Redirect stderr?
+		if (pipeflag & 4) {
+			if (!CreatePipe(&err_fd[0], &err_fd[1], &sec_attr, 0)) {
+				return NULL;
+			}
+			start_info.hStdError = err_fd[1];
+			result->err_fd = _open_osfhandle((intptr_t)err_fd[0], _O_RDONLY);
+			if ( !SetHandleInformation(err_fd[0], HANDLE_FLAG_INHERIT, 0) )
+				return NULL;
+		} else {
+			start_info.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+			result->err_fd = -1;
+		}
+
+		PROCESS_INFORMATION proc_info;
+		ZeroMemory(&proc_info, sizeof(PROCESS_INFORMATION));
+
+		BOOL created = CreateProcess(NULL,
+			args,       // command line
+			NULL,       // process security attributes
+			NULL,       // primary thread security attributes
+			TRUE,       // inherit handles
+			0,          // creation flags
+			NULL,       // use parent's environment
+			NULL,       // use parent's current directory
+			&start_info,
+			&proc_info);
+
+		if (pipeflag & 1) CloseHandle(in_fd[0]);
+		if (pipeflag & 2) CloseHandle(out_fd[1]);
+		if (pipeflag & 3) CloseHandle(err_fd[1]);
+
+		// Error?
+		if (!created) {
+			result->running = 0;
+			result->status = 127;
+
+			// Close subprocess pipes
+			if (pipeflag & 1) CloseHandle(in_fd[1]);
+			if (pipeflag & 2) CloseHandle(out_fd[0]);
+			if (pipeflag & 3) CloseHandle(err_fd[0]);
+		} else {
+			result->h_process = proc_info.hProcess;
+			result->h_thread = proc_info.hThread;
+			result->id = GetProcessId(proc_info.hProcess);
+			result->running = 1;
+		}
+
+		return result;
+#else
 		se_exec_data_t* result = NULL;
 		int id;
 		int in_fd[2];
@@ -204,9 +327,13 @@ class Process
 				close(err_fd[1]);
 			} else
 				result->err_fd = -1;
+		} else {
+			perror("Process:");
+			return NULL;
 		}
 
 		return result;
+#endif
 	`}
 end
 
@@ -222,7 +349,7 @@ class ProcessReader
 
 	redef fun read_char do return stream_in.read_char
 
-	redef fun read_byte do return stream_in.read_byte
+	redef fun raw_read_byte do return stream_in.read_byte
 
 	redef fun eof do return stream_in.eof
 
@@ -331,23 +458,25 @@ redef class Sys
 	fun pid: Int `{ return getpid(); `}
 end
 
-redef class NativeString
+redef class CString
 	# Execute self as a shell command.
 	#
 	# See the posix function system(3).
 	fun system: Int `{
 		int status = system(self);
+#ifndef _WIN32
 		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT) {
 			// system exited on SIGINT: in my opinion the user wants the main to be discontinued
 			kill(getpid(), SIGINT);
 		}
+#endif
 		return status;
 	`}
 end
 
 private extern class NativeProcess `{ se_exec_data_t* `}
 
-	fun id: Int `{ return self->id; `}
+	fun id: Int `{ return (long)self->id; `}
 	fun status: Int `{ return self->status; `}
 	fun in_fd: Int `{ return self->in_fd; `}
 	fun out_fd: Int `{ return self->out_fd; `}
@@ -355,8 +484,22 @@ private extern class NativeProcess `{ se_exec_data_t* `}
 
 	fun is_finished: Bool `{
 		int result = (int)0;
-		int status;
 		if (self->running) {
+#ifdef _WIN32
+			if (WaitForSingleObject(self->h_process, 0) == 0) {
+				/* child is finished */
+				result = 1;
+
+				long unsigned int status;
+				GetExitCodeProcess(self->h_process, &status);
+				self->running = 0;
+				self->status = (int)status;
+
+				CloseHandle(self->h_process);
+				CloseHandle(self->h_thread);
+			}
+#else
+			int status;
 			int id = waitpid(self->id, &status, WNOHANG);
 			if (id != 0) {
 				/* child is finished */
@@ -364,6 +507,7 @@ private extern class NativeProcess `{ se_exec_data_t* `}
 				self->status = WEXITSTATUS(status);
 				self->running = 0;
 			}
+#endif
 		}
 		else{
 			result = (int)1;
@@ -372,11 +516,25 @@ private extern class NativeProcess `{ se_exec_data_t* `}
 	`}
 
 	fun wait `{
+#ifdef _WIN32
+		long unsigned int status;
+		if (self->running) {
+			WaitForSingleObject(self->h_process, INFINITE);
+			GetExitCodeProcess(self->h_process, &status);
+
+			CloseHandle(self->h_process);
+			CloseHandle(self->h_thread);
+
+			self->status = (int)status;
+			self->running = 0;
+		}
+#else
 		int status;
 		if (self->running) {
 			waitpid(self->id, &status, 0);
 			self->status = WEXITSTATUS(status);
 			self->running = 0;
 		}
+#endif
 	`}
 end

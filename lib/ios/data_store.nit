@@ -17,14 +17,9 @@ module data_store
 
 import app::data_store
 import cocoa::foundation
-private import json::serialization
+private import json
 
-redef class App
-	redef var data_store = new UserDefaultView
-end
-
-private class UserDefaultView
-	super DataStore
+redef class DataStore
 
 	# The `NSUserDefaults` used to implement `DataStore`
 	var user_defaults = new NSUserDefaults.standard_user_defaults is lazy
@@ -37,7 +32,16 @@ private class UserDefaultView
 
 		# TODO report errors
 		var deserializer = new JsonDeserializer(nsstr.to_s)
-		return deserializer.deserialize
+		var deserialized = deserializer.deserialize
+
+		var errors = deserializer.errors
+		if errors.not_empty then
+			# An update may have broken the versioning compatibility
+			print_error "{class_name} error at deserialization: {errors.join(", ")}"
+			return null # Let's be safe
+		end
+
+		return deserialized
 	end
 
 	redef fun []=(key, value)

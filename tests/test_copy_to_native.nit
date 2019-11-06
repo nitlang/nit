@@ -16,7 +16,7 @@ import core
 #alt1 intrude import core::text::ropes
 #alt2 intrude import core::text::ropes
 
-var ons = new NativeString(9)
+var ons = new CString(9)
 var base_str = "%Dégâštr"
 
 var str: String = base_str
@@ -25,4 +25,4 @@ var str: String = base_str
 
 var copy_len = (str.byte_length - 4).min(9)
 str.copy_to_native(ons, copy_len, 4, 0)
-print ons.to_s_with_length(copy_len)
+print ons.to_s_unsafe(copy_len, copy=false)

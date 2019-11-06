@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module example_mongodb is example
+
 import popcorn
 import mongodb
 import template
@@ -58,7 +60,7 @@ class UserList
 	end
 end
 
-var mongo = new MongoClient("mongodb://localhost:27017/")
+var mongo = new MongoClient("mongodb://mongo:27017/")
 var db = mongo.database("mongo_example")
 
 var app = new App

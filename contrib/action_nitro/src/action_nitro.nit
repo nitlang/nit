@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module action_nitro
+module action_nitro is
+	app_name "Action Nitro"
+	app_namespace "net.xymus.action_nitro"
+	app_version(1, 0, git_revision)
+end
 
 import gamnit::depth
-import gamnit::keys
-import gamnit::limit_fps
+import gamnit::landscape
 
 import game
 
@@ -32,11 +35,14 @@ redef class App
 	# Game world assets
 
 	# Textures of the biplane, jet, helicopter, parachute and powerups
-	private var planes_sheet = new PlanesImages
+	var planes_sheet = new PlanesImages
+
+	# Animation when opening the parachute
+	var parachute_animation = new Animation(planes_sheet.parachute, 16.0)
 
 	# Animation for the player movement
-	private var player_textures: Array[Texture] =
-		[for f in [1..12] do new Texture("textures/player/frame_{f.pad(2)}.png")]
+	private var running_texture = new Texture("textures/player.png")
+	private var running_animation: Animation = running_texture.to_animation(10.0, 12, 0)
 
 	# Boss 3D model
 	private var iss_model = new Model("models/iss.obj")
@@ -61,7 +67,7 @@ redef class App
 	# ---
 	# Background
 
-	private var city_texture = new Texture("textures/city_background_clean.png")
+	private var city_texture = new TextureAsset("textures/city_background_clean.png")
 
 	private var stars_texture = new Texture("textures/stars.jpg")
 	private var stars = new Sprite(stars_texture, new Point3d[Float](0.0, 1100.0, -600.0)) is lazy
@@ -70,11 +76,11 @@ redef class App
 	# Particle effects
 
 	# Explosion particles
-	var explosions = new ParticleSystem(20, explosion_program,
+	var explosions = new ParticleSystem(100, explosion_program,
 		new Texture("particles/explosion00.png"))
 
 	# Blood explosion particles
-	var blood = new ParticleSystem(20, explosion_program,
+	var blood = new ParticleSystem(100, explosion_program,
 		new Texture("particles/blood07.png"))
 
 	# Smoke for the background
@@ -122,30 +128,38 @@ redef class App
 	private var altitude_counter = new CounterSprites(texts_sheet.n,
 		new Point3d[Float](1400.0, -64.0, 0.0))
 
+	# Did the player asked to skip the intro animation?
+	private var skip_intro = false
+
 	redef fun on_create
 	do
+		blood.texture.as(RootTexture).premultiply_alpha = false
+		explosions.texture.as(RootTexture).premultiply_alpha = false
+
 		super
 
 		show_splash_screen new Texture("textures/splash.jpg")
 
 		# Load 3d models
 		iss_model.load
+		if iss_model.errors.not_empty then print_error iss_model.errors.join("\n")
 
 		# Setup cameras
-		world_camera.reset_height 40.0
+		world_camera.reset_height 60.0
 		ui_camera.reset_height 1080.0
 
 		# Register particle systems
-		particle_systems.add explosions
-		particle_systems.add blood
 		particle_systems.add smoke
 		particle_systems.add clouds
+		particle_systems.add blood
+		particle_systems.add explosions
 
 		# Stars background
 		sprites.add stars
 		stars.scale = 2.1
 
 		# City background
+		city_texture.pixelated = true
 		var city_sprite = new Sprite(city_texture, new Point3d[Float](0.0, 370.0, -600.0))
 		city_sprite.scale = 0.8
 		sprites.add city_sprite
@@ -165,11 +179,12 @@ redef class App
 		actors.add ground
 
 		# Trees
-		for i in 1000.times do
+		for i in 2000.times do
 			var s = 0.1 + 0.1.rand
 			var h = tree_texture.height * s
 			var sprite = new Sprite(tree_texture,
 				new Point3d[Float](0.0 & 1500.0, h/2.0 - 10.0*s, 10.0 - 609.0.rand))
+			sprite.static = true
 			sprite.scale = s
 			sprites.add sprite
 
@@ -201,7 +216,7 @@ redef class App
 
 		# Prepare for intro animation
 		ui_sprites.add tutorial_goal
-		world_camera.far = 700.0
+		world_camera.far = 1024.0
 	end
 
 	redef fun update(dt)
@@ -238,7 +253,7 @@ redef class App
 		# Cinematic?
 		var t = world.t
 		var intro_duration = 8.0
-		if t < intro_duration then
+		if t < intro_duration and not skip_intro then
 			var pitch = t/intro_duration
 			pitch = (pitch*pi).sin
 			world_camera.pitch = pitch
@@ -246,16 +261,10 @@ redef class App
 		end
 
 		if world.player == null then
-			# Game is starting!
-			world.spawn_player
-			world.planes.add new Airplane(new Point3d[Float](0.0, world.player.center.y - 10.0, 0.0), 16.0, 4.0)
-
-			# Setup tutorial
-			ui_sprites.clear
-			ui_sprites.add_all([tutorial_wasd, tutorial_arrows, tutorial_chute])
-
 			world_camera.pitch = 0.0
 			world_camera.far = 700.0
+
+			begin_play true
 		end
 
 		# Update counters
@@ -333,6 +342,20 @@ redef class App
 		end
 	end
 
+	# Begin playing, after intro if `initial`, otherwise after death
+	fun begin_play(initial: Bool)
+	do
+		ui_sprites.clear
+
+		world.spawn_player
+		world.planes.add new Airplane(new Point3d[Float](0.0, world.player.center.y - 10.0, 0.0), 16.0, 4.0)
+
+		if initial then
+			# Setup tutorial
+			ui_sprites.add_all([tutorial_wasd, tutorial_arrows, tutorial_chute])
+		end
+	end
+
 	# Seconds at which the game was won, using `world.t` as reference
 	private var won_at: nullable Float = null
 
@@ -347,12 +370,14 @@ redef class App
 
 	redef fun accept_event(event)
 	do
-		var s = super
+		if super then return true
 
 		if event isa QuitEvent then
+			print perfs
 			exit 0
 		else if event isa KeyEvent then
 			if event.name == "escape" and event.is_down then
+				print perfs
 				exit 0
 			end
 
@@ -380,29 +405,28 @@ redef class App
 					if event.name == "left" then
 						var mod = if event.is_down then -1.0 else 1.0
 						player.moving += mod
-					end
-
-					if event.name == "right" then
+						player.animate_move
+					else if event.name == "right" then
 						var mod = if event.is_down then 1.0 else -1.0
 						player.moving += mod
+						player.animate_move
 					end
-
-					if player.moving == 0.0 then
-					player.sprite.as(PlayerSprite).stop_running
-					else player.sprite.as(PlayerSprite).start_running
-				end
-			end
-
-			# When player is dead, respawn on spacebar
-			if player != null and not player.is_alive then
-				if event.name == "space" then
-					ui_sprites.clear
-					world.spawn_player
 				end
 			end
 		end
 
-		return s
+		# When player is dead, respawn on spacebar or pointer depressed
+		if (event isa KeyEvent and event.name == "space") or
+		   (event isa PointerEvent and not event.is_move and event.depressed) then
+			var player = world.player
+			if player == null then
+				skip_intro = true
+			else if not player.is_alive then
+				begin_play false
+			end
+		end
+
+		return false
 	end
 end
 
@@ -443,12 +467,12 @@ redef class Human
 	# Show death animation (explosion)
 	fun death_animation
 	do
-		var force = 4.0
+		var force = 2.0
 		health = 0.0
-		for i in 32.times do
+		for i in 16.times do
 			app.blood.add(
 				new Point3d[Float](center.x & force, center.y & force, center.z & force),
-				(2048.0 & 4096.0) * force, 0.3 & 0.1)
+				(4096.0 & 2048.0) * force, 0.3 & 0.1)
 		end
 	end
 end
@@ -481,7 +505,7 @@ end
 redef class Boss
 	redef var actor is lazy do
 		var actor = new Actor(app.iss_model, center)
-		actor.rotation = pi/2.0
+		actor.yaw = pi/2.0
 		return actor
 	end
 
@@ -498,18 +522,30 @@ redef class Boss
 end
 
 redef class Enemy
-	redef var sprite = new Sprite(app.player_textures.rand, center) is lazy
+	redef var sprite = new Sprite(app.running_animation.frames.rand, center) is lazy
 	init do sprite.scale = width/sprite.texture.width * 2.0
 end
 
 redef class Parachute
-	redef var sprite = new Sprite(app.planes_sheet.parachute, center) is lazy
-	init do sprite.scale = width / sprite.texture.width
+	redef var sprite = new Sprite(app.planes_sheet.parachute_open, center) is lazy
+	init
+	do
+		sprite.scale = width / sprite.texture.width
+		sprite.animate app.parachute_animation
+	end
 end
 
 redef class Player
-	redef var sprite = new PlayerSprite(app.player_textures[1], center, app.player_textures, 0.08) is lazy
+	redef var sprite = new Sprite(app.running_animation.frames.last, center) is lazy
 	init do sprite.scale = width/sprite.texture.width * 2.0
+
+	# Update current animation
+	fun animate_move
+	do
+		if moving == 0.0 then
+			sprite.animate_stop
+		else sprite.animate(app.running_animation, -1.0)
+	end
 
 	redef fun update(dt, world)
 	do
@@ -530,12 +566,12 @@ redef class Player
 			var splatter = new Actor(app.splatter_model,
 				new Point3d[Float](center.x, 0.05 & 0.04, center.y))
 			splatter.scale = 32.0
-			splatter.rotation = 2.0 * pi.rand
+			splatter.yaw = 2.0*pi.rand
 			app.actors.add splatter
 		end
 
 		# Display respawn instructions
-		app.ui_sprites.add new Sprite(app.texts_sheet.respawn, app.ui_camera.center)
+		app.ui_sprites.add new Sprite(app.texts_sheet.respawn, app.ui_camera.center.offset(0.0, 0.0, 0.0))
 	end
 end
 
@@ -585,62 +621,13 @@ redef class World
 		super
 
 		# Particles
-		app.explosions.add(center, 8192.0 * force, 0.3)
-		for i in (4.0*force).to_i.times do
+		var range = 0.5 * force
+		app.explosions.add(center, 4096.0 * force, 0.3)
+		for i in (2.0*force).to_i.times do
 			app.explosions.add(
-				new Point3d[Float](center.x & force, center.y & force/2.0, center.z & force),
-				(4096.0 & 2048.0) * force, 0.3 & 0.3, 0.5.rand)
+				new Point3d[Float](center.x & range, center.y & range, center.z & range),
+				(2048.0 & 1024.0) * force, 0.3 & 0.3, 0.5.rand)
 		end
-	end
-end
-
-redef class Int
-	# Pad a number with `0`s on the left side to reach `size` digits
-	private fun pad(size: Int): String
-	do
-		var s = to_s
-		var d = size - s.length
-		if d > 0 then s = "0"*d + s
-		return s
-	end
-end
-
-# Special `Sprite` for the player character which is animated
-class PlayerSprite
-	super Sprite
-
-	# Animation of the running character
-	var running_animation: Array[Texture]
-
-	# Seconds per frame of the animations
-	var time_per_frame: Float
-
-	# Currently playing animation
-	private var current_animation: nullable Array[Texture] = null
-
-	# Second at witch `current_animation` started
-	private var anim_ot = 0.0
-
-	# Start the running animation
-	fun start_running
-	do
-		anim_ot = app.world.t
-		current_animation = running_animation
-	end
-
-	# Stop the running animation
-	fun stop_running do current_animation = null
-
-	redef fun texture
-	do
-		var anim = current_animation
-		if anim != null then
-			var dt = app.world.t - anim_ot
-			var i = (dt / time_per_frame).to_i+2
-			return anim.modulo(i)
-		end
-
-		return super
 	end
 end
 
@@ -696,8 +683,8 @@ redef class SmokeProgram
 		gl_PointSize = scale / gl_Position.z * (pt+0.1);
 
 		if (pt < 0.1)
-			v_color.a = pt / 0.1;
+			v_color *= pt / 0.1;
 		else
-			v_color.a = 1.0 - pt*0.9;
+			v_color *= 1.0 - pt*0.9;
 	"""
 end

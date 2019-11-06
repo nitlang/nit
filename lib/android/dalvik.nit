@@ -109,7 +109,7 @@ redef class Sys
 		(*env)->DeleteLocalRef(env, class_class_loader);
 	`}
 
-	private fun load_jclass_intern(instance_class_loader: JavaObject, class_loader_findClass: JMethodID, name: NativeString): JClass import jni_env `{
+	private fun load_jclass_intern(instance_class_loader: JavaObject, class_loader_findClass: JMethodID, name: CString): JClass import jni_env `{
 		JNIEnv *env = Sys_jni_env(self);
 		jobject class_name = (*env)->NewStringUTF(env, name);
 

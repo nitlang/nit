@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Sample module showing the use of the i18n annotation
-module langannot is i18n
+module langannot is example, i18n
 
 import gettext
 

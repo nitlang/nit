@@ -17,42 +17,42 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-long abstract_text___Int_int_to_s_len___impl( long self )
+long core__abstract_text___Int_int_to_s_len___impl( long self )
 {
-#line 1586 "../lib/core/text/abstract_text.nit"
+#line 1838 "../lib/core/text/abstract_text.nit"
 
 
 		return snprintf(NULL, 0, "%ld", self);
 	}
-void abstract_text___Int_native_int_to_s___impl( long self, char* nstr, long strlen )
+void core__abstract_text___Int_native_int_to_s___impl( long self, char* nstr, long strlen )
 {
-#line 1591 "../lib/core/text/abstract_text.nit"
+#line 1843 "../lib/core/text/abstract_text.nit"
 
 
 		snprintf(nstr, strlen, "%ld", self);
 	}
-long abstract_text___Byte_byte_to_s_len___impl( unsigned char self )
+long core__abstract_text___Byte_byte_to_s_len___impl( unsigned char self )
 {
-#line 1531 "../lib/core/text/abstract_text.nit"
+#line 1783 "../lib/core/text/abstract_text.nit"
 
 
 		return snprintf(NULL, 0, "0x%02x", self);
 	}
-void abstract_text___Byte_native_byte_to_s___impl( unsigned char self, char* nstr, long strlen )
+void core__abstract_text___Byte_native_byte_to_s___impl( unsigned char self, char* nstr, long strlen )
 {
-#line 1536 "../lib/core/text/abstract_text.nit"
+#line 1788 "../lib/core/text/abstract_text.nit"
 
 
 		snprintf(nstr, strlen, "0x%02x", self);
 	}
-char* abstract_text___Int_strerror_ext___impl( long self )
+char* core__abstract_text___Int_strerror_ext___impl( long self )
 {
-#line 1556 "../lib/core/text/abstract_text.nit"
+#line 1808 "../lib/core/text/abstract_text.nit"
 
- return strerror(self); }
-void abstract_text___Char_u8char_tos___impl( uint32_t self, char* r, long len )
+ return strerror((int)self); }
+void core__abstract_text___Char_u8char_tos___impl( uint32_t self, char* r, long len )
 {
-#line 1753 "../lib/core/text/abstract_text.nit"
+#line 2033 "../lib/core/text/abstract_text.nit"
 
 
 		r[len] = '\0';

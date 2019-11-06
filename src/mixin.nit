@@ -46,10 +46,12 @@ redef class ToolContext
 			var location = mainmodule.location
 			var model = mainmodule.model
 
+			# Create a fictive module if needed
 			if mainmodule == mmodules.first then
 				mainmodule = new MModule(model, null, mainmodule.name + "-d", location)
 				mainmodule.set_imported_mmodules(mmodules)
 				mainmodule.is_fictive = true
+				mainmodule.first_real_mmodule = mmodules.first
 			end
 
 			var recv = mainmodule.sys_type

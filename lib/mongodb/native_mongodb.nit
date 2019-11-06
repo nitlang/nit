@@ -48,7 +48,7 @@ extern class NativeBSON `{ bson_t * `}
 	# by parsing the JSON found in `data`.
 	# Only a single JSON object may exist in data or an error will be set and
 	# `NULL` returned.
-	new from_json_string(data: NativeString) import set_mongoc_error `{
+	new from_json_string(data: CString) import set_mongoc_error `{
 		bson_error_t error;
 		bson_t *bson;
 		bson = bson_new_from_json((uint8_t *)data, -1, &error);
@@ -64,7 +64,7 @@ extern class NativeBSON `{ bson_t * `}
 	# The `bson_as_json()` function shall encode bson as a JSON encoded UTF-8 string.
 	# The caller is responsible for freeing the resulting UTF-8 encoded string
 	# by calling `bson_free()` with the result.
-	fun to_native_string: NativeString `{ return bson_as_json(self, NULL); `}
+	fun to_c_string: CString `{ return bson_as_json(self, NULL); `}
 
 	# Wrapper for `bson_destroy()`.
 	#
@@ -100,7 +100,7 @@ extern class BSONError `{ bson_error_t * `}
 	# Wrapper for `error.message`.
 	#
 	# The `error.message` field contains a human printable error message.
-	fun message: NativeString `{ return self->message; `}
+	fun message: CString `{ return self->message; `}
 end
 
 # Wrapper for `bson_oid_t`.
@@ -114,12 +114,23 @@ end
 # * a 2-byte process id (Big Endian), and
 # * a 3-byte counter (Big Endian), starting with a random value.
 extern class BSONObjectId `{ bson_oid_t * `}
+
+	# Generates a new `bson_oid_t`.
+	new `{
+		bson_oid_t *self = malloc(sizeof(bson_oid_t));
+		bson_oid_init(self, NULL);
+		return self;
+	`}
+
 	# Object id.
-	fun id: String import NativeString.to_s_with_copy `{
+	fun id: String import CString.to_s `{
 		char str[25];
 		bson_oid_to_string(self, str);
-		return NativeString_to_s_with_copy(str);
+		return CString_to_s(str);
 	`}
+
+	# Destroy `self`.
+	fun destroy `{ free(self); `}
 end
 
 redef class Sys
@@ -136,7 +147,7 @@ end
 
 # Wrapper for `char**`.
 #
-# Used to handle array of NativeString returned by MongoDB.
+# Used to handle array of CString returned by MongoDB.
 redef class NativeCStringArray
 	# Frees `self`.
 	#
@@ -156,7 +167,7 @@ extern class NativeMongoClient `{ mongoc_client_t * `}
 	# Wrapper for `mongoc_client_new()`.
 	#
 	# Creates a new `mongoc_client_t` using the `uri` string provided.
-	new(uri: NativeString) `{
+	new(uri: CString) `{
 		mongoc_init();
 		return mongoc_client_new(uri);
 	`}
@@ -218,7 +229,7 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	# Database are automatically created on the MongoDB server upon insertion of
 	# the first document into a collection.
 	# There is no need to create a database manually.
-	new(client: NativeMongoClient, db_name: NativeString) `{
+	new(client: NativeMongoClient, db_name: CString) `{
 		return mongoc_client_get_database(client, db_name);
 	`}
 
@@ -241,7 +252,7 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	#
 	# Allocates a new `mongoc_collection_t` structure for the collection named
 	# `name` in database.
-	fun collection(name: NativeString): NativeMongoCollection `{
+	fun collection(name: CString): NativeMongoCollection `{
 		return mongoc_database_get_collection(self, name);
 	`}
 
@@ -249,7 +260,7 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	#
 	# This function checks to see if a collection exists on the MongoDB server
 	# within database.
-	fun has_collection(name: NativeString): Bool import set_mongoc_error `{
+	fun has_collection(name: CString): Bool import set_mongoc_error `{
 		bson_error_t error;
 		if(!mongoc_database_has_collection(self, name, &error)) {
 			NativeMongoDb_set_mongoc_error(self, &error);
@@ -301,7 +312,7 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# Collections are automatically created on the MongoDB server upon insertion
 	# of the first document.
 	# There is no need to create a collection manually.
-	new(client: NativeMongoClient, db, collection: NativeString) `{
+	new(client: NativeMongoClient, db, collection: CString) `{
 		return mongoc_client_get_collection(client, db, collection);
 	`}
 
@@ -433,6 +444,24 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 		return NativeMongoCursor_as_nullable(cursor);
 	`}
 
+	# Wrapper for `mongoc_collection_aggregate()`.
+	#
+	# This function shall execute an aggregation `pipeline` on the underlying collection.
+	#
+	# The `pipeline` parameter should contain a field named `pipeline` containing
+	# a BSON array of pipeline stages.
+	fun aggregate(pipeline: NativeBSON): nullable NativeMongoCursor import
+		NativeMongoCursor.as nullable, set_mongoc_error `{
+		bson_error_t error;
+		mongoc_cursor_t	*cursor;
+		cursor = mongoc_collection_aggregate(self, MONGOC_QUERY_NONE, pipeline, NULL, NULL);
+		if (mongoc_cursor_error(cursor, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
+			return null_NativeMongoCursor();
+		}
+		return NativeMongoCursor_as_nullable(cursor);
+	`}
+
 	# Wrapper for `mongoc_collection_stats()`.
 	#
 	# This function is a helper to retrieve statistics about the collection.
@@ -465,7 +494,7 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# The name of the collection will also be updated internally so it is safe
 	# to continue using this collection after the rename.
 	# Additional operations will occur on renamed collection.
-	fun rename(new_database, new_name: NativeString): Bool `{
+	fun rename(new_database, new_name: CString): Bool `{
 		bson_error_t error;
 		if(!mongoc_collection_rename(self, new_database, new_name, false, &error)){
 			NativeMongoCollection_set_mongoc_error(self, &error);

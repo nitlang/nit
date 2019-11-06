@@ -27,7 +27,7 @@ class MdDecorator
 
 	redef fun add_headline(v, block) do
 		# save headline
-		var txt = block.block.first_line.value
+		var txt = block.block.first_line.as(not null).value
 		var id = strip_id(txt)
 		var lvl = block.depth
 		headlines[id] = new HeadLine(id, txt, lvl)
@@ -43,7 +43,7 @@ class MdDecorator
 
 	redef fun add_code(v, block) do
 		if block isa BlockFence and block.meta != null then
-			v.add "~~~{block.meta.to_s}"
+			v.add "~~~{block.meta.as(not null).to_s}"
 		else
 			v.add "~~~"
 		end

@@ -105,7 +105,8 @@ end
 
 # An extern file to compile
 class ExternFile
-	# The filename of the file
+
+	# Filename relative to the nit-compile folder
 	var filename: String
 
 	# The name of the target in the Makefile
@@ -118,6 +119,7 @@ class ExternFile
 
 	fun compiles_to_o_file: Bool do return false
 
+	# Is `self` a Java file to include in the JAR archive?
 	fun add_to_jar: Bool do return false
 
 	# Additional libraries needed for the compilation

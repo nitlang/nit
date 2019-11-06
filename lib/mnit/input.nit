@@ -16,7 +16,6 @@
 # Implemented independantly for each platforms and technologies.
 module input
 
-import sdl is conditional(linux)
 import android::input_events is conditional(android)
 
 # Input to the App, propagated through `App::input`.
@@ -41,6 +40,13 @@ interface PointerEvent
 
 	# Is this a movement event?
 	fun is_move: Bool is abstract
+
+	# Unique identifier of this pointer among other active pointers
+	#
+	# This value is useful to differentiate between pointers (or fingers) on
+	# multi-touch systems. This value does not change for the same pointer
+	# while it touches the screen.
+	fun pointer_id: Int do return 0
 end
 
 # A motion event on screen composed of many `PointerEvent`

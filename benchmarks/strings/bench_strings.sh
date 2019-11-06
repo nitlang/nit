@@ -93,7 +93,7 @@ function bench_concat()
 	fi
 
 	echo "Generating executable chain_concat for variant $variant"
-	../../bin/nitc chain_concat.nit -D maxlen=$curr_maxlen
+	../../bin/nitc chain_concat.nit -D maxlen=$curr_maxln
 
 	bench_concat_variant "string" $1 $2 $3 $4 $5
 	bench_concat_variant "buffer" $1 $2 $3 $4 $5
@@ -124,7 +124,7 @@ function bench_iteration()
 		exit
 	fi
 	echo "Generating executable iteration_bench for variant $variant"
-	../../bin/nitc --global iteration_bench.nit -D maxlen=$curr_maxlen
+	../../bin/nitc --global iteration_bench.nit -D maxlen=$curr_maxln
 
 	bench_iterate_variant "iterator" "string" $1 $2 $3 $4
 	bench_iterate_variant "index" "string" $1 $2 $3 $4
@@ -157,7 +157,7 @@ function bench_substring()
 		exit
 	fi
 	echo "Generating executable substr_bench for variant $variant"
-	../../bin/nitc --global substr_bench.nit -D maxlen=$curr_maxlen
+	../../bin/nitc --global substr_bench.nit -D maxlen=$curr_maxln
 
 	bench_substring_variant "string" $1 $2 $3 $4
 	bench_substring_variant "buffer" $1 $2 $3 $4
@@ -190,14 +190,15 @@ function bench_compiler()
 	../../bin/nitc ../../src/nitc.nit -o ../../bin/nitc
 	echo "nitc (2/2)"
 
-	bench_command nitc nitc_$variant ../../bin/nitc ../../src/nitc.nit -D maxlen=$curr_maxlen
+	bench_command nitc nitc_$variant ../../bin/nitc ../../src/nitc.nit -D maxlen=$curr_maxln
 
 	rm nitc
 }
 
 function bench_basic()
 {
-	../../bin/nitc ../../examples/hello_world.nit -D maxlen=$curr_maxlen
+	echo ../../bin/nitc ../../examples/hello_world.nit -D maxlen=$curr_maxln
+	../../bin/nitc ../../examples/hello_world.nit -D maxlen=$curr_maxln
 	./hello_world
 	rm hello_world
 }

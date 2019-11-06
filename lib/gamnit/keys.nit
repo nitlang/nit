@@ -18,6 +18,28 @@
 # As a `Set`, `app.pressed_keys` can be iterated and queried with `has`.
 #
 # Limitations: The keys names are platform dependent.
+#
+# ~~~nitish
+# redef class App
+#     redef fun accept_event(event)
+#     do
+#         # First, pass the event to `super`, `pressed_keys` must see all
+#         # events but it doesn't intercept any of them.
+#         if super then return true
+#         return false
+#     end
+#
+#     redef fun update(dt)
+#     do
+#         for key in pressed_keys do
+#             if k == "left" or k == "a" then
+#                 # Act on key pressed down
+#                 print "left or a is pressed down"
+#             end
+#         end
+#     end
+# end
+# ~~~
 module keys
 
 import mnit::input

@@ -1,0 +1,55 @@
+<div class='card' ng-if='listMetrics'>
+	<div class='card-body'>
+		<h4 class='card-heading'>{{listTitle}}</h4>
+		<table class='table'>
+			<tr>
+				<th></th>
+				<th>avg.</th>
+				<th>std dev.</th>
+				<th>min.</th>
+				<th>max.</th>
+			</tr>
+			<tr ng-repeat='metric in listMetricsNames'>
+				<th>
+					<abbr title="{{listMetrics[metric].desc}}">
+						{{listMetrics[metric].name.toUpperCase()}}
+					</abbr>
+				</th>
+				<td ng-if='listMetrics[metric].empty' colspan='5'>No classes in this module</td>
+				<td>{{listMetrics[metric].avg}}</td>
+				<td>{{listMetrics[metric].std_dev}}</td>
+				<td ng-if='!listMetrics[metric].empty'>
+					{{listMetrics[metric].values[listMetrics[metric].min.full_name].value}}
+					&nbsp;(<entity-link mentity='listMetrics[metric].min' />)
+				</td>
+				<td ng-if='!listMetrics[metric].empty'>
+					{{listMetrics[metric].values[listMetrics[metric].max.full_name].value}}
+					&nbsp;(<entity-link mentity='listMetrics[metric].max' />)
+				</td>
+			</tr>
+		</table>
+		<p class='text-center'>
+			<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{listId}}" aria-expanded="false" aria-controls="{{listId}}">
+				Show all values
+			</button>
+		</p>
+		<div class="collapse" id="{{listId}}">
+			<table class='table'>
+				<tr>
+					<th></th>
+					<th ng-repeat='metric in listMetricsNames'>
+						<abbr title="{{listMetrics[metric].desc}}">
+							{{listMetrics[metric].name.toUpperCase()}}
+						</abbr>
+					</th>
+				</tr>
+				<tr ng-repeat='value in listMetrics[listMetricsDefault].values'>
+					<td><entity-link mentity='value.mentity'></td>
+					<td ng-repeat='metric in listMetricsNames'>
+						{{listMetrics[metric].values[value.mentity.full_name].value}}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

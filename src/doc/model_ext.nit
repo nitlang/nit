@@ -117,4 +117,4 @@ end
 fun package_visibility: MVisibility do return once new MVisibility("package", 2)
 
 # A class kind with no equivalent semantic in Nit.
-fun raw_kind(s: String): MClassKind do return new MClassKind(s, false)
+fun raw_kind(s: String): MClassKind do return new MClassKind(s, false, false, false)

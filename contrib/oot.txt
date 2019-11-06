@@ -1,0 +1,10 @@
+# List of out-of-tree repositories not good enough to be nitpm-compatible
+# but good enough to be in the catalog
+# Format: repo name
+https://github.com/R4PaSs/brewnit.git
+https://gitlab.com/xymus/darpg.git
+https://gitlab.com/jeremlvt/dawn_arrival.git
+https://github.com/Morriar/Missions.git missions
+https://gitlab.com/Heavyshield/NitGains.git nitgains
+https://github.com/ppepos/pep8-dbg.git pep8dbg
+https://gitlab.com/xymus/sputnit.git

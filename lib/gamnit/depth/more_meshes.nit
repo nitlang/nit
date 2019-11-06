@@ -79,20 +79,31 @@ class Plane
 	# TODO use gl_TRIANGLE_FAN instead
 end
 
-# Cube, with 6 faces
-class Cube
+# Cuboid, or rectangular prism, with 6 faces and right angles
+#
+# Can be created from a `Boxed3d` using `to_mesh`.
+class Cuboid
 	super Mesh
 
-	redef var vertices is lazy do
-		var a = [-0.5, -0.5, -0.5]
-		var b = [ 0.5, -0.5, -0.5]
-		var c = [-0.5,  0.5, -0.5]
-		var d = [ 0.5,  0.5, -0.5]
+	# Width, on the X axis
+	var width: Float
 
-		var e = [-0.5, -0.5,  0.5]
-		var f = [ 0.5, -0.5,  0.5]
-		var g = [-0.5,  0.5,  0.5]
-		var h = [ 0.5,  0.5,  0.5]
+	# Height, on the Y axis
+	var height: Float
+
+	# Depth, on the Z axis
+	var depth: Float
+
+	redef var vertices is lazy do
+		var a = [-0.5*width, -0.5*height, -0.5*depth]
+		var b = [ 0.5*width, -0.5*height, -0.5*depth]
+		var c = [-0.5*width,  0.5*height, -0.5*depth]
+		var d = [ 0.5*width,  0.5*height, -0.5*depth]
+
+		var e = [-0.5*width, -0.5*height,  0.5*depth]
+		var f = [ 0.5*width, -0.5*height,  0.5*depth]
+		var g = [-0.5*width,  0.5*height,  0.5*depth]
+		var h = [ 0.5*width,  0.5*height,  0.5*depth]
 
 		var vertices = new Array[Float]
 		for v in [a, c, d, a, d, b, # front
@@ -131,4 +142,98 @@ class Cube
 	end
 
 	redef var center = new Point3d[Float](0.0, 0.0, 0.0) is lazy
+end
+
+# Cube, with 6 faces, edges of equal length and square angles
+#
+# Occupies `[-0.5..0.5]` on all three axes.
+class Cube
+	super Cuboid
+
+	noautoinit
+
+	init
+	do
+		width = 1.0
+		height = 1.0
+		depth = 1.0
+	end
+end
+
+redef class Boxed3d[N]
+	# Create a `Cuboid` mesh with the dimension of `self`
+	#
+	# Does not use the position of `self`, but it can be given to an `Actor`.
+	fun to_mesh: Cuboid
+	do
+		var width = right.to_f-left.to_f
+		var height = top.to_f-bottom.to_f
+		var depth = front.to_f-back.to_f
+		return new Cuboid(width, height, depth)
+	end
+end
+
+# Sphere with `radius` and a number of faces set by `n_meridians` and `n_parallels`
+class UVSphere
+	super Mesh
+
+	# Distance between the center and the vertices
+	var radius: Float
+
+	# Number of vertices on a full circle around the Z axis
+	var n_meridians: Int
+
+	# Number of vertices on an arc between both poles
+	var n_parallels: Int
+
+	init
+	do
+		var w = n_meridians
+		var h = n_parallels
+
+		var vertices = new Array[Float].with_capacity(w*h*3)
+		self.vertices = vertices
+
+		var texture_coords = new Array[Float].with_capacity(w*h*2)
+		self.texture_coords = texture_coords
+
+		var normals = new Array[Float].with_capacity(w*h*3)
+		self.normals = normals
+
+		# Build vertices
+		for m in [0..w[ do
+			for p in [0..h[ do
+				var u = m.to_f * 2.0 * pi / (w-1).to_f
+				var v = p.to_f * pi / (h-1).to_f
+
+				vertices.add radius * u.cos * v.sin
+				vertices.add radius * v.cos
+				vertices.add radius * u.sin * v.sin
+
+				texture_coords.add (1.0 - m.to_f/(w-1).to_f)
+				texture_coords.add(p.to_f/(h-1).to_f)
+
+				normals.add u.cos * v.sin
+				normals.add v.cos
+				normals.add u.sin * v.sin
+			end
+		end
+
+		# Build faces
+		var indices = new Array[Int].with_capacity((w-1)*(h-1)*6)
+		self.indices = indices
+		for m in [0..w-1[ do
+			for p in [0..h-1[ do
+				var a = m*h + p
+
+				indices.add a
+				indices.add a+h
+				indices.add a+1
+
+				indices.add a+h
+				indices.add a+h+1
+				indices.add a+1
+			end
+		end
+	end
 end

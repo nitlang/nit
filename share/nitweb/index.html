@@ -14,39 +14,47 @@
 		<link href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css'
 			type='text/css' rel='stylesheet' media='all'>
 
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.css'
+			type='text/css' rel='stylesheet'>
 
-		<link href='/stylesheets/nitweb_bootstrap.css' rel='stylesheet'>
-		<link href='/stylesheets/nitweb.css' rel='stylesheet'>
+
+		<link rel='stylesheet' href='/stylesheets/nitweb_bootstrap.css'>
+		<link rel='stylesheet' href='/stylesheets/nitweb.css'>
+		<link rel='stylesheet' href='/stylesheets/nitlight.css'>
+		<link rel='stylesheet' href='/stylesheets/search.css'>
+		<link rel='stylesheet' href='/stylesheets/cards.css'>
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js"></script>
+		<script src="/vendors/d3pie.min.js"></script>
 	</head>
 	<body>
 		<nav class='navbar navbar-default navbar-fixed-top'>
 			<div class='container-fluid'>
 				<div class='col-xs-3'>
-					<div class='navbar-header'>
+					<ul class='nav navbar-nav'>
+						<li class='dropdown'>
+							<a class='btn btn-link dropdown-toggle' type='button' data-toggle='dropdown'>
+								<span class='glyphicon glyphicon-menu-hamburger' />
+							</a>
+							<ul class='dropdown-menu'>
+								<li><a href='/docdown?edit'><span class='glyphicon glyphicon-edit'></span> DocDown</a></li>
+								<li><a href='/grades'><span class='glyphicon glyphicon-stats'></span> Grades</a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class='navbar-header dropdown'>
 						<a class='navbar-brand' ng-href='/'>Nitdoc</a>
 					</div>
-					<ul class="nav navbar-nav">
-						<li><a href="/docdown?edit=true">DocDown</a></li>
-					</ul>
 				</div>
 				<div class='col-xs-7'>
-					<form ng-controller='SearchCtrl as searchCtrl' >
-						<div class='form-group has-icon'>
-							<input placeholder='Search...' type='text' class='form-control search-input'
-								ng-model-options='{ debounce: 150 }' ng-model='query'
-								ng-keydown='update($event)' ng-change='search()'>
-							<span class='glyphicon glyphicon-search form-control-icon text-muted'></span>
-						</div>
-						<div ng-if='results.length > 0' class='search-results'>
-							<div class='card-list'>
-								<entity-card ng-click='reset()' ng-class='{active: activeItem == $index}' mentity='mentity' ng-repeat='mentity in results' />
-							</div>
-						</div>
-					</form>
+					<ui-search-field />
+				</div>
+				<div class='col-xs-2'>
+					<user-menu />
 				</div>
 			</div>
 		</nav>
-		<div ng-view></div>
+		<ui-view></ui-view>
 
 		<script src='https://code.jquery.com/jquery-1.12.4.min.js'
 			integrity='sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ='
@@ -56,19 +64,19 @@
 			crossorigin='anonymous'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js'>
 		</script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js'>
-		</script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-sanitize.js'>
 		</script>
-		<script type='text/javascript'
-			src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'>
+		<script src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'>
 		</script>
 
 		<script src='/javascripts/nitweb.js'></script>
-		<script src='/javascripts/model.js'></script>
 		<script src='/javascripts/entities.js'></script>
 		<script src='/javascripts/ui.js'></script>
-		<script src='/javascripts/index.js'></script>
+		<script src='/javascripts/catalog.js'></script>
 		<script src='/javascripts/docdown.js'></script>
+		<script src='/javascripts/metrics.js'></script>
+		<script src='/javascripts/users.js'></script>
+		<script src='/javascripts/grades.js'></script>
 	</body>
 </html>

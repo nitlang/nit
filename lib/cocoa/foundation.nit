@@ -35,12 +35,12 @@ extern class NSString in "ObjC" `{ NSString * `}
 	new nil in "ObjC" `{ return nil; `}
 
 	# Get an UTF8 encoded `char*` copy of `self`
-	fun utf8_string: NativeString in "ObjC" `{ return (char *)[self UTF8String]; `}
+	fun utf8_string: CString in "ObjC" `{ return (char *)[self UTF8String]; `}
 
-	redef fun to_s do return utf8_string.to_s_with_copy
+	redef fun to_s do return utf8_string.to_s
 end
 
-redef class NativeString
+redef class CString
 	# Get a `NSString` from `self` with the specified `length`
 	fun to_nsstring(length: Int): NSString in "ObjC" `{
 		return [[NSString alloc] initWithBytes:self
@@ -58,12 +58,12 @@ end
 extern class NSData in "ObjC" `{ NSData * `}
 
 	# Pointer to contained data
-	fun bytes: NativeString in "ObjC" `{ return (char*)self.bytes; `}
+	fun bytes: CString in "ObjC" `{ return (char*)self.bytes; `}
 
 	# Number of bytes containted in `self`
 	fun length: Int in "ObjC" `{ return self.length; `}
 
-	redef fun to_s do return bytes.to_s_with_copy_and_length(length)
+	redef fun to_s do return bytes.to_s_with_length(length)
 end
 
 # Error condition

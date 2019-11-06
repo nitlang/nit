@@ -1,4 +1,4 @@
-module_1.nit -d $WRITE
-base_attr_nullable.nit -d $WRITE
---private base_attr_nullable.nit -d $WRITE
---no-render --test test_prog -d $WRITE
+--test module_1.nit -d $WRITE
+--test base_attr_nullable.nit -d $WRITE
+--test --private base_attr_nullable.nit --no-attributes -d $WRITE
+--test --no-render test_prog -d $WRITE

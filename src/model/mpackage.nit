@@ -19,20 +19,21 @@ import model_base
 private import more_collections
 import poset
 import mdoc
+import graph::digraph
 
 # A Nit package, that encompass a product
 class MPackage
 	super MConcern
 
 	# The name of the package
-	redef var name: String
+	redef var name
 
 	redef fun full_name do return name
 
 	redef var c_name = name.to_cmangle is lazy
 
 	# The model of the package
-	redef var model: Model
+	redef var model
 
 	redef var location
 
@@ -47,6 +48,8 @@ class MPackage
 	init
 	do
 		model.mpackages.add(self)
+		# Add `self` to the importation graph
+		model.mpackage_importation_graph.add_vertex(self)
 		model.mpackage_by_name.add_one(name, self)
 	end
 
@@ -55,8 +58,57 @@ class MPackage
 
 	redef fun mdoc_or_fallback
 	do
+		var mdoc = self.mdoc
 		if mdoc != null then return mdoc
-		return root.mdoc_or_fallback
+		var root = self.root
+		if root != null then return root.mdoc_or_fallback
+		return null
+	end
+
+	# Does `self` have a source file?
+	fun has_source: Bool do return location.file != null
+
+	# The path to `self`
+	fun package_path: nullable String do
+		if not has_source then return null
+		return location.file.as(not null).filename
+	end
+
+	# Is `self` in its own directory?
+	fun is_expanded: Bool do
+		var path = package_path
+		if path == null then return false
+		return not path.has_suffix(".nit")
+	end
+
+	# The path to `self` ini file
+	fun ini_path: nullable String do
+		var path = package_path
+		if path == null then return null
+		if is_expanded then return path / "package.ini"
+		return path.dirname / "{name}.ini"
+	end
+
+	# Does `self` have a ini file?
+	fun has_ini: Bool do
+		var ini_path = self.ini_path
+		if ini_path == null then return false
+		return ini_path.file_exists
+	end
+
+	# The path to `self` README.md
+	fun readme_path: nullable String do
+		var path = package_path
+		if path == null then return null
+		if not is_expanded then return null
+		return path / "README.md"
+	end
+
+	# Does `self` have a README.md file?
+	fun has_readme: Bool do
+		var readme_path = self.readme_path
+		if readme_path == null then return false
+		return readme_path.file_exists
 	end
 end
 
@@ -66,7 +118,7 @@ class MGroup
 
 	# The name of the group
 	# empty name for a default group in a single-module package
-	redef var name: String
+	redef var name
 
 	redef var location
 
@@ -128,6 +180,11 @@ class MGroup
 end
 
 redef class Model
+
+	# Full package importation graph
+	# Each package is in relation with itself
+	var mpackage_importation_graph = new HashDigraph[MPackage]
+
 	# packages of the model
 	var mpackages = new Array[MPackage]
 

@@ -1,979 +1,778 @@
 #include "csv.sep.0.h"
-/* method csv#CsvFormat#delimiter for (self: CsvFormat): Char */
-uint32_t csv___csv__CsvFormat___delimiter(val* self) {
-uint32_t var /* : Char */;
-uint32_t var1 /* : Char */;
-var1 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method csv#CsvFormat#delimiter= for (self: CsvFormat, Char) */
-void csv___csv__CsvFormat___delimiter_61d(val* self, uint32_t p0) {
-self->attrs[COLOR_csv__CsvFormat___delimiter].c = p0; /* _delimiter on <self:CsvFormat> */
-RET_LABEL:;
-}
-/* method csv#CsvFormat#separator for (self: CsvFormat): Char */
-uint32_t csv___csv__CsvFormat___separator(val* self) {
-uint32_t var /* : Char */;
-uint32_t var1 /* : Char */;
-var1 = self->attrs[COLOR_csv__CsvFormat___separator].c; /* _separator on <self:CsvFormat> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method csv#CsvFormat#separator= for (self: CsvFormat, Char) */
-void csv___csv__CsvFormat___separator_61d(val* self, uint32_t p0) {
-self->attrs[COLOR_csv__CsvFormat___separator].c = p0; /* _separator on <self:CsvFormat> */
-RET_LABEL:;
-}
-/* method csv#CsvFormat#eol for (self: CsvFormat): String */
-val* csv___csv__CsvFormat___eol(val* self) {
+/* method csv$Text$escape_to_csv for (self: Text, Char, Char, String): String */
+val* csv___core__Text___escape_to_csv(val* self, uint32_t p0, uint32_t p1, val* p2) {
 val* var /* : String */;
-val* var1 /* : String */;
-var1 = self->attrs[COLOR_csv__CsvFormat___eol].val; /* _eol on <self:CsvFormat> */
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _eol");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 28);
-fatal_exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method csv#CsvFormat#eol= for (self: CsvFormat, String) */
-void csv___csv__CsvFormat___eol_61d(val* self, val* p0) {
-self->attrs[COLOR_csv__CsvFormat___eol].val = p0; /* _eol on <self:CsvFormat> */
-RET_LABEL:;
-}
-/* method csv#CsvFormat#escaping for (self: CsvFormat): String */
-val* csv___csv__CsvFormat___escaping(val* self) {
-val* var /* : String */;
-short int var1 /* : Bool */;
-val* var2 /* : String */;
-val* var3 /* : NativeArray[String] */;
-static val* varonce;
-uint32_t var4 /* : Char */;
-uint32_t var6 /* : Char */;
-val* var7 /* : String */;
-uint32_t var8 /* : Char */;
-uint32_t var10 /* : Char */;
-val* var11 /* : String */;
-val* var12 /* : String */;
-var1 = self->attrs[COLOR_csv__CsvFormat___escaping].val != NULL; /* _escaping on <self:CsvFormat> */
-if(likely(var1)) {
-var2 = self->attrs[COLOR_csv__CsvFormat___escaping].val; /* _escaping on <self:CsvFormat> */
-if (unlikely(var2 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _escaping");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 31);
-fatal_exit(1);
-}
-} else {
-if (unlikely(varonce==NULL)) {
-var3 = NEW_core__NativeArray(2l, &type_core__NativeArray__core__String);
-} else {
-var3 = varonce;
-varonce = NULL;
-}
+uint32_t var_sep_char /* var sep_char: Char */;
+uint32_t var_delim_char /* var delim_char: Char */;
+val* var_eol /* var eol: String */;
+long var1 /* : Int */;
+long var_add_sp /* var add_sp: Int */;
+short int var2 /* : Bool */;
+short int var4 /* : Bool */;
+val* var5 /* : String */;
+static val* varoncenew;
+static int varoncenew_guard;
+val* var6 /* : Buffer */;
+val* var7 /* : Buffer */;
+long var8 /* : Int */;
+long var9 /* : Int */;
+short int var11 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var12 /* : Int */;
+val* var13 /* : Buffer */;
+val* var_bf /* var bf: Buffer */;
+long var_i /* var i: Int */;
+long var14 /* : Int */;
+long var_ /* var : Int */;
+short int var15 /* : Bool */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+const char* var_class_name20;
+short int var21 /* : Bool */;
+uint32_t var22 /* : Char */;
+uint32_t var_c /* var c: Char */;
+short int var23 /* : Bool */;
+short int var25 /* : Bool */;
+long var26 /* : Int */;
+val* var27 /* : String */;
+var_sep_char = p0;
+var_delim_char = p1;
+var_eol = p2;
 {
-{ /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
-var6 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
-var4 = var6;
-RET_LABEL5:(void)0;
+var1 = csv___core__Text___chars_to_escape_csv(self, var_sep_char, var_delim_char, var_eol);
 }
-}
-var7 = core__abstract_text___Char___Object__to_s(var4);
-((struct instance_core__NativeArray*)var3)->values[0]=var7;
+var_add_sp = var1;
 {
-{ /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
-var10 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
-var8 = var10;
-RET_LABEL9:(void)0;
-}
-}
-var11 = core__abstract_text___Char___Object__to_s(var8);
-((struct instance_core__NativeArray*)var3)->values[1]=var11;
-{
-var12 = ((val*(*)(val* self))(var3->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var3); /* native_to_s on <var3:NativeArray[String]>*/
-}
-varonce = var3;
-self->attrs[COLOR_csv__CsvFormat___escaping].val = var12; /* _escaping on <self:CsvFormat> */
-var2 = var12;
-}
-var = var2;
-RET_LABEL:;
-return var;
-}
-/* method csv#CsvFormat#escape_cell for (self: CsvFormat, String): Text */
-val* csv___csv__CsvFormat___escape_cell(val* self, val* p0) {
-val* var /* : Text */;
-val* var_cell /* var cell: String */;
-val* var1 /* : RopeBuffer */;
-val* var_result /* var result: RopeBuffer */;
-uint32_t var2 /* : Char */;
-uint32_t var4 /* : Char */;
-uint32_t var5 /* : Char */;
-uint32_t var7 /* : Char */;
-val* var8 /* : String */;
-val* var9 /* : String */;
-val* var10 /* : Pattern */;
-uint32_t var11 /* : Char */;
-uint32_t var13 /* : Char */;
-var_cell = p0;
-var1 = NEW_core__RopeBuffer(&type_core__RopeBuffer);
-{
-core___core__RopeBuffer___core__kernel__Object__init(var1); /* Direct call ropes#RopeBuffer#init on <var1:RopeBuffer>*/
-}
-var_result = var1;
-{
-{ /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
-var4 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
+{ /* Inline kernel$Int$== (var_add_sp,0l) on <var_add_sp:Int> */
+var4 = var_add_sp == 0l;
 var2 = var4;
+goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 }
+if (var2){
 {
-core___core__RopeBuffer___core__abstract_text__Buffer__add(var_result, var2); /* Direct call ropes#RopeBuffer#add on <var_result:RopeBuffer>*/
+var5 = ((val*(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Object__to_s]))(self); /* to_s on <self:Text>*/
 }
-{
-{ /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
-var7 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
-var5 = var7;
-RET_LABEL6:(void)0;
-}
-}
-{
-var8 = csv___csv__CsvFormat___escaping(self);
-}
-{
-var10 = (val*)((long)(var5)<<2|2);
-var9 = core__string_search___Text___replace(var_cell, var10, var8);
-}
-{
-core___core__RopeBuffer___core__abstract_text__Buffer__append(var_result, var9); /* Direct call ropes#RopeBuffer#append on <var_result:RopeBuffer>*/
-}
-{
-{ /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
-var13 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
-var11 = var13;
-RET_LABEL12:(void)0;
-}
-}
-{
-core___core__RopeBuffer___core__abstract_text__Buffer__add(var_result, var11); /* Direct call ropes#RopeBuffer#add on <var_result:RopeBuffer>*/
-}
-var = var_result;
+var = var5;
 goto RET_LABEL;
-RET_LABEL:;
-return var;
+} else {
 }
-/* method csv#CsvFormat#is_value_clean for (self: CsvFormat, String): Bool */
-short int csv___csv__CsvFormat___is_value_clean(val* self, val* p0) {
-short int var /* : Bool */;
-val* var_value /* var value: String */;
-val* var1 /* : SequenceRead[Char] */;
-val* var_ /* var : SequenceRead[Char] */;
-val* var2 /* : Iterator[nullable Object] */;
-val* var_3 /* var : IndexedIterator[Char] */;
-short int var4 /* : Bool */;
-val* var5 /* : nullable Object */;
-uint32_t var6 /* : Char */;
-uint32_t var_c /* var c: Char */;
-uint32_t var7 /* : Char */;
-uint32_t var9 /* : Char */;
-short int var10 /* : Bool */;
-short int var12 /* : Bool */;
-uint32_t var13 /* : Char */;
-uint32_t var15 /* : Char */;
-short int var16 /* : Bool */;
-short int var18 /* : Bool */;
-val* var19 /* : String */;
-val* var21 /* : String */;
-val* var22 /* : SequenceRead[Char] */;
-val* var23 /* : nullable Object */;
-short int var24 /* : Bool */;
-var_value = p0;
+if (likely(varoncenew_guard)) {
+var6 = varoncenew;
+} else {
+var7 = NEW_core__Buffer(&type_core__Buffer);
+var6 = var7;
+varoncenew = var6;
+varoncenew_guard = 1;
+}
 {
-var1 = ((val*(*)(val* self))(var_value->class->vft[COLOR_core__abstract_text__Text__chars]))(var_value); /* chars on <var_value:String>*/
+var8 = ((long(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Text__byte_length]))(self); /* byte_length on <self:Text>*/
 }
-var_ = var1;
 {
-var2 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_core__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:SequenceRead[Char]>*/
+{ /* Inline kernel$Int$+ (var_add_sp,var8) on <var_add_sp:Int> */
+/* Covariant cast for argument 0 (i) <var8:Int> isa OTHER */
+/* <var8:Int> isa OTHER */
+var11 = 1; /* easy <var8:Int> isa OTHER*/
+if (unlikely(!var11)) {
+var_class_name = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
 }
-var_3 = var2;
+var12 = var_add_sp + var8;
+var9 = var12;
+goto RET_LABEL10;
+RET_LABEL10:(void)0;
+}
+}
+{
+var13 = core__flat___Buffer___with_cap(var6, var9);
+}
+var_bf = var13;
+{
+((void(*)(val* self, uint32_t p0))(var_bf->class->vft[COLOR_core__abstract_text__Buffer__add]))(var_bf, '\"'); /* add on <var_bf:Buffer>*/
+}
+var_i = 0l;
+{
+var14 = ((long(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Text__length]))(self); /* length on <self:Text>*/
+}
+var_ = var14;
 for(;;) {
 {
-var4 = ((short int(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_3); /* is_ok on <var_3:IndexedIterator[Char]>*/
+{ /* Inline kernel$Int$< (var_i,var_) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_:Int> isa OTHER */
+/* <var_:Int> isa OTHER */
+var17 = 1; /* easy <var_:Int> isa OTHER*/
+if (unlikely(!var17)) {
+var_class_name20 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
+fatal_exit(1);
 }
-if (var4){
+var21 = var_i < var_;
+var15 = var21;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
+}
+}
+if (var15){
 } else {
 goto BREAK_label;
 }
 {
-var5 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_3); /* item on <var_3:IndexedIterator[Char]>*/
+var22 = ((uint32_t(*)(val* self, long p0))(self->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(self, var_i); /* [] on <self:Text>*/
 }
-var6 = (uint32_t)((long)(var5)>>2);
-var_c = var6;
+var_c = var22;
 {
-{ /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
-var9 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
-var7 = var9;
-RET_LABEL8:(void)0;
+{ /* Inline kernel$Char$== (var_c,var_delim_char) on <var_c:Char> */
+var25 = var_c == var_delim_char;
+var23 = var25;
+goto RET_LABEL24;
+RET_LABEL24:(void)0;
 }
 }
+if (var23){
 {
-{ /* Inline kernel#Char#== (var_c,var7) on <var_c:Char> */
-var12 = var_c == var7;
-var10 = var12;
-goto RET_LABEL11;
-RET_LABEL11:(void)0;
+((void(*)(val* self, uint32_t p0))(var_bf->class->vft[COLOR_core__abstract_text__Buffer__add]))(var_bf, var_c); /* add on <var_bf:Buffer>*/
 }
-}
-if (var10){
-var = 0;
-goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline csv#CsvFormat#separator (self) on <self:CsvFormat> */
-var15 = self->attrs[COLOR_csv__CsvFormat___separator].c; /* _separator on <self:CsvFormat> */
-var13 = var15;
-RET_LABEL14:(void)0;
-}
+((void(*)(val* self, uint32_t p0))(var_bf->class->vft[COLOR_core__abstract_text__Buffer__add]))(var_bf, var_c); /* add on <var_bf:Buffer>*/
 }
 {
-{ /* Inline kernel#Char#== (var_c,var13) on <var_c:Char> */
-var18 = var_c == var13;
-var16 = var18;
-goto RET_LABEL17;
-RET_LABEL17:(void)0;
+var26 = core___core__Int___Discrete__successor(var_i, 1l);
 }
-}
-if (var16){
-var = 0;
-goto RET_LABEL;
-} else {
-}
-{
-{ /* Inline csv#CsvFormat#eol (self) on <self:CsvFormat> */
-var21 = self->attrs[COLOR_csv__CsvFormat___eol].val; /* _eol on <self:CsvFormat> */
-if (unlikely(var21 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _eol");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 28);
-fatal_exit(1);
-}
-var19 = var21;
-RET_LABEL20:(void)0;
-}
-}
-{
-var22 = ((val*(*)(val* self))(var19->class->vft[COLOR_core__abstract_text__Text__chars]))(var19); /* chars on <var19:String>*/
-}
-{
-var23 = (val*)((long)(var_c)<<2|2);
-var24 = ((short int(*)(val* self, val* p0))((((long)var22&3)?class_info[((long)var22&3)]:var22->class)->vft[COLOR_core__abstract_collection__Collection__has]))(var22, var23); /* has on <var22:SequenceRead[Char]>*/
-}
-if (var24){
-var = 0;
-goto RET_LABEL;
-} else {
-}
-{
-((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_3); /* next on <var_3:IndexedIterator[Char]>*/
-}
+var_i = var26;
 }
 BREAK_label: (void)0;
 {
-((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_3); /* finish on <var_3:IndexedIterator[Char]>*/
+((void(*)(val* self, uint32_t p0))(var_bf->class->vft[COLOR_core__abstract_text__Buffer__add]))(var_bf, '\"'); /* add on <var_bf:Buffer>*/
 }
-var = 1;
+{
+var27 = ((val*(*)(val* self))(var_bf->class->vft[COLOR_core__abstract_text__Object__to_s]))(var_bf); /* to_s on <var_bf:Buffer>*/
+}
+var = var27;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method csv#CsvFormat#init for (self: CsvFormat) */
-void csv___csv__CsvFormat___core__kernel__Object__init(val* self) {
+/* method csv$Text$chars_to_escape_csv for (self: Text, Char, Char, String): Int */
+long csv___core__Text___chars_to_escape_csv(val* self, uint32_t p0, uint32_t p1, val* p2) {
+long var /* : Int */;
+uint32_t var_sep_char /* var sep_char: Char */;
+uint32_t var_delim_char /* var delim_char: Char */;
+val* var_eol /* var eol: String */;
+long var_more_ln /* var more_ln: Int */;
+long var1 /* : Int */;
+long var_ln /* var ln: Int */;
+short int var_need_esc /* var need_esc: Bool */;
+uint32_t var2 /* : Char */;
+uint32_t var_fst_eol /* var fst_eol: Char */;
+long var_i /* var i: Int */;
+short int var3 /* : Bool */;
+short int var5 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+short int var6 /* : Bool */;
+uint32_t var7 /* : Char */;
+uint32_t var_c /* var c: Char */;
+short int var8 /* : Bool */;
+short int var10 /* : Bool */;
+long var11 /* : Int */;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+const char* var_class_name16;
+long var17 /* : Int */;
+short int var18 /* : Bool */;
+short int var20 /* : Bool */;
+long var_j /* var j: Int */;
+long var21 /* : Int */;
+long var_ /* var : Int */;
+short int var22 /* : Bool */;
+short int var24 /* : Bool */;
+int cltype25;
+int idtype26;
+const char* var_class_name27;
+short int var28 /* : Bool */;
+long var29 /* : Int */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+const char* var_class_name34;
+long var35 /* : Int */;
+uint32_t var36 /* : Char */;
+uint32_t var37 /* : Char */;
+short int var38 /* : Bool */;
+short int var40 /* : Bool */;
+short int var41 /* : Bool */;
+long var42 /* : Int */;
+short int var44 /* : Bool */;
+int cltype45;
+int idtype46;
+const char* var_class_name47;
+long var48 /* : Int */;
+long var49 /* : Int */;
+short int var50 /* : Bool */;
+short int var52 /* : Bool */;
+long var53 /* : Int */;
+short int var55 /* : Bool */;
+int cltype56;
+int idtype57;
+const char* var_class_name58;
+long var59 /* : Int */;
+long var61 /* : Int */;
+long var62 /* : Int */;
+short int var64 /* : Bool */;
+int cltype65;
+int idtype66;
+const char* var_class_name67;
+long var68 /* : Int */;
+long var_more /* var more: Int */;
+long var69 /* : Int */;
+short int var71 /* : Bool */;
+int cltype72;
+int idtype73;
+const char* var_class_name74;
+long var75 /* : Int */;
+var_sep_char = p0;
+var_delim_char = p1;
+var_eol = p2;
+var_more_ln = 0l;
 {
-((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvFormat___core__kernel__Object__init]))(self); /* init on <self:CsvFormat>*/
+var1 = ((long(*)(val* self))(self->class->vft[COLOR_core__abstract_text__Text__length]))(self); /* length on <self:Text>*/
 }
+var_ln = var1;
+var_need_esc = 0;
+{
+var2 = core___core__Text___first(var_eol);
+}
+var_fst_eol = var2;
+var_i = 0l;
+for(;;) {
+{
+{ /* Inline kernel$Int$< (var_i,var_ln) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_ln:Int> isa OTHER */
+/* <var_ln:Int> isa OTHER */
+var5 = 1; /* easy <var_ln:Int> isa OTHER*/
+if (unlikely(!var5)) {
+var_class_name = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
+fatal_exit(1);
+}
+var6 = var_i < var_ln;
+var3 = var6;
+goto RET_LABEL4;
+RET_LABEL4:(void)0;
+}
+}
+if (var3){
+{
+var7 = ((uint32_t(*)(val* self, long p0))(self->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(self, var_i); /* [] on <self:Text>*/
+}
+var_c = var7;
+{
+{ /* Inline kernel$Char$== (var_c,var_delim_char) on <var_c:Char> */
+var10 = var_c == var_delim_char;
+var8 = var10;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
+}
+}
+if (var8){
+{
+{ /* Inline kernel$Int$+ (var_more_ln,1l) on <var_more_ln:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var13 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var13)) {
+var_class_name16 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
+}
+var17 = var_more_ln + 1l;
+var11 = var17;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
+}
+}
+var_more_ln = var11;
+} else {
+}
+{
+{ /* Inline kernel$Char$== (var_c,var_fst_eol) on <var_c:Char> */
+var20 = var_c == var_fst_eol;
+var18 = var20;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
+}
+}
+if (var18){
+var_need_esc = 1;
+var_j = 1l;
+{
+var21 = ((long(*)(val* self))(var_eol->class->vft[COLOR_core__abstract_text__Text__length]))(var_eol); /* length on <var_eol:String>*/
+}
+var_ = var21;
+for(;;) {
+{
+{ /* Inline kernel$Int$< (var_j,var_) on <var_j:Int> */
+/* Covariant cast for argument 0 (i) <var_:Int> isa OTHER */
+/* <var_:Int> isa OTHER */
+var24 = 1; /* easy <var_:Int> isa OTHER*/
+if (unlikely(!var24)) {
+var_class_name27 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name27);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
+fatal_exit(1);
+}
+var28 = var_j < var_;
+var22 = var28;
+goto RET_LABEL23;
+RET_LABEL23:(void)0;
+}
+}
+if (var22){
+} else {
+goto BREAK_label;
+}
+{
+{ /* Inline kernel$Int$+ (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var31 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var31)) {
+var_class_name34 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
+}
+var35 = var_i + 1l;
+var29 = var35;
+goto RET_LABEL30;
+RET_LABEL30:(void)0;
+}
+}
+var_i = var29;
+{
+var36 = ((uint32_t(*)(val* self, long p0))(self->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(self, var_i); /* [] on <self:Text>*/
+}
+var_c = var36;
+{
+var37 = ((uint32_t(*)(val* self, long p0))(var_eol->class->vft[COLOR_core__abstract_text__Text___91d_93d]))(var_eol, var_j); /* [] on <var_eol:String>*/
+}
+{
+{ /* Inline kernel$Char$!= (var_c,var37) on <var_c:Char> */
+var40 = var_c == var37;
+var41 = !var40;
+var38 = var41;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
+}
+}
+if (var38){
+{
+{ /* Inline kernel$Int$- (var_i,var_j) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_j:Int> isa OTHER */
+/* <var_j:Int> isa OTHER */
+var44 = 1; /* easy <var_j:Int> isa OTHER*/
+if (unlikely(!var44)) {
+var_class_name47 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name47);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+fatal_exit(1);
+}
+var48 = var_i - var_j;
+var42 = var48;
+goto RET_LABEL43;
+RET_LABEL43:(void)0;
+}
+}
+var_i = var42;
+var_need_esc = 0;
+goto BREAK_label;
+} else {
+}
+{
+var49 = core___core__Int___Discrete__successor(var_j, 1l);
+}
+var_j = var49;
+}
+BREAK_label: (void)0;
+} else {
+}
+{
+{ /* Inline kernel$Char$== (var_c,var_sep_char) on <var_c:Char> */
+var52 = var_c == var_sep_char;
+var50 = var52;
+goto RET_LABEL51;
+RET_LABEL51:(void)0;
+}
+}
+if (var50){
+var_need_esc = 1;
+} else {
+}
+{
+{ /* Inline kernel$Int$+ (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var55 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var55)) {
+var_class_name58 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name58);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
+}
+var59 = var_i + 1l;
+var53 = var59;
+goto RET_LABEL54;
+RET_LABEL54:(void)0;
+}
+}
+var_i = var53;
+} else {
+goto BREAK_label60;
+}
+}
+BREAK_label60: (void)0;
+{
+var61 = core__abstract_text___Char___u8char_len(var_delim_char);
+}
+{
+{ /* Inline kernel$Int$* (var_more_ln,var61) on <var_more_ln:Int> */
+/* Covariant cast for argument 0 (i) <var61:Int> isa OTHER */
+/* <var61:Int> isa OTHER */
+var64 = 1; /* easy <var61:Int> isa OTHER*/
+if (unlikely(!var64)) {
+var_class_name67 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name67);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 732);
+fatal_exit(1);
+}
+var68 = var_more_ln * var61;
+var62 = var68;
+goto RET_LABEL63;
+RET_LABEL63:(void)0;
+}
+}
+var_more = var62;
+if (var_need_esc){
+{
+{ /* Inline kernel$Int$+ (var_more,2l) on <var_more:Int> */
+/* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
+/* <2l:Int> isa OTHER */
+var71 = 1; /* easy <2l:Int> isa OTHER*/
+if (unlikely(!var71)) {
+var_class_name74 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name74);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+fatal_exit(1);
+}
+var75 = var_more + 2l;
+var69 = var75;
+goto RET_LABEL70;
+RET_LABEL70:(void)0;
+}
+}
+var_more = var69;
+} else {
+}
+var = var_more;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method csv$CsvStream$delimiter for (self: CsvStream): Char */
+uint32_t csv___csv__CsvStream___delimiter(val* self) {
+uint32_t var /* : Char */;
+uint32_t var1 /* : Char */;
+var1 = self->attrs[COLOR_csv__CsvStream___delimiter].c; /* _delimiter on <self:CsvStream> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method csv$CsvStream$delimiter= for (self: CsvStream, Char) */
+void csv___csv__CsvStream___delimiter_61d(val* self, uint32_t p0) {
+self->attrs[COLOR_csv__CsvStream___delimiter].c = p0; /* _delimiter on <self:CsvStream> */
 RET_LABEL:;
 }
-/* method csv#CsvDocument#format for (self: CsvDocument): CsvFormat */
-val* csv___csv__CsvDocument___format(val* self) {
-val* var /* : CsvFormat */;
-val* var1 /* : CsvFormat */;
-var1 = self->attrs[COLOR_csv__CsvDocument___format].val; /* _format on <self:CsvDocument> */
+/* method csv$CsvStream$separator for (self: CsvStream): Char */
+uint32_t csv___csv__CsvStream___separator(val* self) {
+uint32_t var /* : Char */;
+uint32_t var1 /* : Char */;
+var1 = self->attrs[COLOR_csv__CsvStream___separator].c; /* _separator on <self:CsvStream> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method csv$CsvStream$separator= for (self: CsvStream, Char) */
+void csv___csv__CsvStream___separator_61d(val* self, uint32_t p0) {
+self->attrs[COLOR_csv__CsvStream___separator].c = p0; /* _separator on <self:CsvStream> */
+RET_LABEL:;
+}
+/* method csv$CsvStream$eol for (self: CsvStream): String */
+val* csv___csv__CsvStream___eol(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+var1 = self->attrs[COLOR_csv__CsvStream___eol].val; /* _eol on <self:CsvStream> */
 if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 58);
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _eol");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 112);
 fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method csv#CsvDocument#format= for (self: CsvDocument, CsvFormat) */
-void csv___csv__CsvDocument___format_61d(val* self, val* p0) {
-self->attrs[COLOR_csv__CsvDocument___format].val = p0; /* _format on <self:CsvDocument> */
+/* method csv$CsvStream$eol= for (self: CsvStream, String) */
+void csv___csv__CsvStream___eol_61d(val* self, val* p0) {
+self->attrs[COLOR_csv__CsvStream___eol].val = p0; /* _eol on <self:CsvStream> */
 RET_LABEL:;
 }
-/* method csv#CsvDocument#header for (self: CsvDocument): Array[String] */
+/* method csv$CsvDocument$header for (self: CsvDocument): Array[String] */
 val* csv___csv__CsvDocument___header(val* self) {
 val* var /* : Array[String] */;
 val* var1 /* : Array[String] */;
 var1 = self->attrs[COLOR_csv__CsvDocument___header].val; /* _header on <self:CsvDocument> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _header");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 63);
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 121);
 fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method csv#CsvDocument#header= for (self: CsvDocument, Array[String]) */
+/* method csv$CsvDocument$header= for (self: CsvDocument, nullable Array[String]) */
 void csv___csv__CsvDocument___header_61d(val* self, val* p0) {
-self->attrs[COLOR_csv__CsvDocument___header].val = p0; /* _header on <self:CsvDocument> */
+val* var /* : Array[String] */;
+val* var1 /* : Array[String] */;
+if (p0 == NULL) {
+var1 = NEW_core__Array(&type_core__Array__core__String);
+{
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[String]>*/
+}
+self->attrs[COLOR_csv__CsvDocument___header].val = var1; /* _header on <self:CsvDocument> */
+var = var1;
+} else {
+var = p0;
+}
+self->attrs[COLOR_csv__CsvDocument___header].val = var; /* _header on <self:CsvDocument> */
 RET_LABEL:;
 }
-/* method csv#CsvDocument#records for (self: CsvDocument): Array[Array[String]] */
+/* method csv$CsvDocument$records for (self: CsvDocument): Array[Array[String]] */
 val* csv___csv__CsvDocument___records(val* self) {
 val* var /* : Array[Array[String]] */;
 val* var1 /* : Array[Array[String]] */;
 var1 = self->attrs[COLOR_csv__CsvDocument___records].val; /* _records on <self:CsvDocument> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _records");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 68);
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 126);
 fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method csv#CsvDocument#add_record for (self: CsvDocument, Array[Object]) */
-void csv___csv__CsvDocument___add_record(val* self, val* p0) {
-val* var_values /* var values: Array[Object] */;
-long var /* : Int */;
-long var2 /* : Int */;
-val* var3 /* : Array[String] */;
-val* var5 /* : Array[String] */;
-long var6 /* : Int */;
-long var8 /* : Int */;
-short int var9 /* : Bool */;
-short int var11 /* : Bool */;
-val* var12 /* : Sys */;
-val* var14 /* : Sys */;
-val* var15 /* : Writer */;
-val* var16 /* : NativeArray[String] */;
-static val* varonce;
-static val* varonce17;
-val* var18 /* : String */;
-char* var19 /* : NativeString */;
-val* var20 /* : String */;
-static val* varonce21;
-val* var22 /* : String */;
-char* var23 /* : NativeString */;
-val* var24 /* : String */;
-static val* varonce25;
-val* var26 /* : String */;
-char* var27 /* : NativeString */;
-val* var28 /* : String */;
-val* var29 /* : Array[String] */;
-val* var31 /* : Array[String] */;
-long var32 /* : Int */;
-long var34 /* : Int */;
-val* var35 /* : String */;
-long var36 /* : Int */;
-long var38 /* : Int */;
-val* var39 /* : String */;
-val* var40 /* : String */;
-val* var41 /* : Array[String] */;
-val* var_record /* var record: Array[String] */;
-val* var_ /* var : Array[Object] */;
-val* var42 /* : IndexedIterator[nullable Object] */;
-val* var_43 /* var : IndexedIterator[Object] */;
-short int var44 /* : Bool */;
-val* var45 /* : nullable Object */;
-val* var_value /* var value: Object */;
-val* var46 /* : String */;
-val* var47 /* : Array[Array[String]] */;
-val* var49 /* : Array[Array[String]] */;
-var_values = p0;
+/* method csv$CsvDocument$records= for (self: CsvDocument, nullable Array[Array[String]]) */
+void csv___csv__CsvDocument___records_61d(val* self, val* p0) {
+val* var /* : Array[Array[String]] */;
+val* var1 /* : Array[Array[String]] */;
+if (p0 == NULL) {
+var1 = NEW_core__Array(&type_core__Array__core__Array__core__String);
 {
-{ /* Inline array#AbstractArrayRead#length (var_values) on <var_values:Array[Object]> */
-var2 = var_values->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_values:Array[Object]> */
-var = var2;
-RET_LABEL1:(void)0;
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array$Array$init on <var1:Array[Array[String]]>*/
 }
-}
-{
-{ /* Inline csv#CsvDocument#header (self) on <self:CsvDocument> */
-var5 = self->attrs[COLOR_csv__CsvDocument___header].val; /* _header on <self:CsvDocument> */
-if (unlikely(var5 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _header");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 63);
-fatal_exit(1);
-}
-var3 = var5;
-RET_LABEL4:(void)0;
-}
-}
-{
-{ /* Inline array#AbstractArrayRead#length (var3) on <var3:Array[String]> */
-var8 = var3->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var3:Array[String]> */
-var6 = var8;
-RET_LABEL7:(void)0;
-}
-}
-{
-{ /* Inline kernel#Int#== (var,var6) on <var:Int> */
-var11 = var == var6;
-var9 = var11;
-goto RET_LABEL10;
-RET_LABEL10:(void)0;
-}
-}
-if (unlikely(!var9)) {
-{
-{ /* Inline kernel#Object#sys (self) on <self:CsvDocument> */
-var14 = glob_sys;
-var12 = var14;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
-}
-}
-{
-var15 = core__file___Sys___stderr(var12);
-}
-if (unlikely(varonce==NULL)) {
-var16 = NEW_core__NativeArray(5l, &type_core__NativeArray__core__String);
-if (likely(varonce17!=NULL)) {
-var18 = varonce17;
+self->attrs[COLOR_csv__CsvDocument___records].val = var1; /* _records on <self:CsvDocument> */
+var = var1;
 } else {
-var19 = "CSV error: Header declares ";
-var20 = core__flat___NativeString___to_s_full(var19, 27l, 27l);
-var18 = var20;
-varonce17 = var18;
+var = p0;
 }
-((struct instance_core__NativeArray*)var16)->values[0]=var18;
-if (likely(varonce21!=NULL)) {
-var22 = varonce21;
-} else {
-var23 = " columns, record contains ";
-var24 = core__flat___NativeString___to_s_full(var23, 26l, 26l);
-var22 = var24;
-varonce21 = var22;
-}
-((struct instance_core__NativeArray*)var16)->values[2]=var22;
-if (likely(varonce25!=NULL)) {
-var26 = varonce25;
-} else {
-var27 = " values.\n";
-var28 = core__flat___NativeString___to_s_full(var27, 9l, 9l);
-var26 = var28;
-varonce25 = var26;
-}
-((struct instance_core__NativeArray*)var16)->values[4]=var26;
-} else {
-var16 = varonce;
-varonce = NULL;
-}
-{
-{ /* Inline csv#CsvDocument#header (self) on <self:CsvDocument> */
-var31 = self->attrs[COLOR_csv__CsvDocument___header].val; /* _header on <self:CsvDocument> */
-if (unlikely(var31 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _header");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 63);
-fatal_exit(1);
-}
-var29 = var31;
-RET_LABEL30:(void)0;
-}
-}
-{
-{ /* Inline array#AbstractArrayRead#length (var29) on <var29:Array[String]> */
-var34 = var29->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var29:Array[String]> */
-var32 = var34;
-RET_LABEL33:(void)0;
-}
-}
-var35 = core__flat___Int___core__abstract_text__Object__to_s(var32);
-((struct instance_core__NativeArray*)var16)->values[1]=var35;
-{
-{ /* Inline array#AbstractArrayRead#length (var_values) on <var_values:Array[Object]> */
-var38 = var_values->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_values:Array[Object]> */
-var36 = var38;
-RET_LABEL37:(void)0;
-}
-}
-var39 = core__flat___Int___core__abstract_text__Object__to_s(var36);
-((struct instance_core__NativeArray*)var16)->values[3]=var39;
-{
-var40 = ((val*(*)(val* self))(var16->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var16); /* native_to_s on <var16:NativeArray[String]>*/
-}
-varonce = var16;
-{
-core___core__FileWriter___core__stream__Writer__write(var15, var40); /* Direct call file#FileWriter#write on <var15:Writer>*/
-}
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 81);
-fatal_exit(1);
-}
-var41 = NEW_core__Array(&type_core__Array__core__String);
-{
-core___core__Array___core__kernel__Object__init(var41); /* Direct call array#Array#init on <var41:Array[String]>*/
-}
-var_record = var41;
-var_ = var_values;
-{
-var42 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
-}
-var_43 = var42;
-for(;;) {
-{
-var44 = ((short int(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_43); /* is_ok on <var_43:IndexedIterator[Object]>*/
-}
-if (var44){
-} else {
-goto BREAK_label;
-}
-{
-var45 = ((val*(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_43); /* item on <var_43:IndexedIterator[Object]>*/
-}
-var_value = var45;
-{
-var46 = ((val*(*)(val* self))((((long)var_value&3)?class_info[((long)var_value&3)]:var_value->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_value); /* to_s on <var_value:Object>*/
-}
-{
-core___core__Array___core__abstract_collection__SimpleCollection__add(var_record, var46); /* Direct call array#Array#add on <var_record:Array[String]>*/
-}
-{
-((void(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_43); /* next on <var_43:IndexedIterator[Object]>*/
-}
-}
-BREAK_label: (void)0;
-{
-((void(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_43); /* finish on <var_43:IndexedIterator[Object]>*/
-}
-{
-{ /* Inline csv#CsvDocument#records (self) on <self:CsvDocument> */
-var49 = self->attrs[COLOR_csv__CsvDocument___records].val; /* _records on <self:CsvDocument> */
-if (unlikely(var49 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _records");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 68);
-fatal_exit(1);
-}
-var47 = var49;
-RET_LABEL48:(void)0;
-}
-}
-{
-core___core__Array___core__abstract_collection__SimpleCollection__add(var47, var_record); /* Direct call array#Array#add on <var47:Array[Array[String]]>*/
-}
+self->attrs[COLOR_csv__CsvDocument___records].val = var; /* _records on <self:CsvDocument> */
 RET_LABEL:;
 }
-/* method csv#CsvDocument#write_to for (self: CsvDocument, Writer) */
-void csv___csv__CsvDocument___core__stream__Writable__write_to(val* self, val* p0) {
-val* var_stream /* var stream: Writer */;
-val* var /* : CsvWriter */;
-val* var1 /* : CsvFormat */;
-val* var3 /* : CsvFormat */;
-val* var_writer /* var writer: CsvWriter */;
-val* var4 /* : Array[String] */;
-val* var6 /* : Array[String] */;
-val* var7 /* : Array[Array[String]] */;
+/* method csv$CsvDocument$add_record for (self: CsvDocument, Array[Object]) */
+void csv___csv__CsvDocument___add_record(val* self, val* p0) {
+val* var_objs /* var objs: Array[Object] */;
+val* var /* : Array[String] */;
+long var1 /* : Int */;
+long var3 /* : Int */;
+val* var_ln /* var ln: Array[String] */;
+val* var_ /* var : Array[Object] */;
+val* var4 /* : IndexedIterator[nullable Object] */;
+val* var_5 /* var : IndexedIterator[Object] */;
+short int var6 /* : Bool */;
+val* var7 /* : nullable Object */;
+val* var_i /* var i: Object */;
+val* var8 /* : String */;
 val* var9 /* : Array[Array[String]] */;
-val* var_ /* var : Array[Array[String]] */;
-val* var10 /* : IndexedIterator[nullable Object] */;
-val* var_11 /* var : IndexedIterator[Array[String]] */;
-short int var12 /* : Bool */;
-val* var13 /* : nullable Object */;
-val* var_record /* var record: Array[String] */;
-var_stream = p0;
-var = NEW_csv__CsvWriter(&type_csv__CsvWriter);
+val* var11 /* : Array[Array[String]] */;
+var_objs = p0;
+var = NEW_core__Array(&type_core__Array__core__String);
 {
-{ /* Inline csv#CsvDocument#format (self) on <self:CsvDocument> */
-var3 = self->attrs[COLOR_csv__CsvDocument___format].val; /* _format on <self:CsvDocument> */
-if (unlikely(var3 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 58);
-fatal_exit(1);
-}
+{ /* Inline array$AbstractArrayRead$length (var_objs) on <var_objs:Array[Object]> */
+var3 = var_objs->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_objs:Array[Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-csv___csv__CsvWriter___with_format(var, var_stream, var1); /* Direct call csv#CsvWriter#with_format on <var:CsvWriter>*/
+core___core__Array___with_capacity(var, var1); /* Direct call array$Array$with_capacity on <var:Array[String]>*/
 }
-var_writer = var;
+var_ln = var;
+var_ = var_objs;
 {
-{ /* Inline csv#CsvDocument#header (self) on <self:CsvDocument> */
-var6 = self->attrs[COLOR_csv__CsvDocument___header].val; /* _header on <self:CsvDocument> */
-if (unlikely(var6 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _header");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 63);
-fatal_exit(1);
+var4 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
 }
-var4 = var6;
-RET_LABEL5:(void)0;
-}
-}
-{
-csv___csv__CsvWriter___write_sequence(var_writer, var4); /* Direct call csv#CsvWriter#write_sequence on <var_writer:CsvWriter>*/
-}
-{
-{ /* Inline csv#CsvDocument#records (self) on <self:CsvDocument> */
-var9 = self->attrs[COLOR_csv__CsvDocument___records].val; /* _records on <self:CsvDocument> */
-if (unlikely(var9 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _records");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 68);
-fatal_exit(1);
-}
-var7 = var9;
-RET_LABEL8:(void)0;
-}
-}
-var_ = var7;
-{
-var10 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
-}
-var_11 = var10;
+var_5 = var4;
 for(;;) {
 {
-var12 = ((short int(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_11); /* is_ok on <var_11:IndexedIterator[Array[String]]>*/
+var6 = ((short int(*)(val* self))((((long)var_5&3)?class_info[((long)var_5&3)]:var_5->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_5); /* is_ok on <var_5:IndexedIterator[Object]>*/
 }
-if (var12){
+if (var6){
 } else {
 goto BREAK_label;
 }
 {
-var13 = ((val*(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_11); /* item on <var_11:IndexedIterator[Array[String]]>*/
+var7 = ((val*(*)(val* self))((((long)var_5&3)?class_info[((long)var_5&3)]:var_5->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_5); /* item on <var_5:IndexedIterator[Object]>*/
 }
-var_record = var13;
+var_i = var7;
 {
-csv___csv__CsvWriter___write_sequence(var_writer, var_record); /* Direct call csv#CsvWriter#write_sequence on <var_writer:CsvWriter>*/
+var8 = ((val*(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_i); /* to_s on <var_i:Object>*/
 }
 {
-((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_11); /* next on <var_11:IndexedIterator[Array[String]]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_ln, var8); /* Direct call array$Array$add on <var_ln:Array[String]>*/
+}
+{
+((void(*)(val* self))((((long)var_5&3)?class_info[((long)var_5&3)]:var_5->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_5); /* next on <var_5:IndexedIterator[Object]>*/
 }
 }
 BREAK_label: (void)0;
 {
-((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_11); /* finish on <var_11:IndexedIterator[Array[String]]>*/
+((void(*)(val* self))((((long)var_5&3)?class_info[((long)var_5&3)]:var_5->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_5); /* finish on <var_5:IndexedIterator[Object]>*/
 }
-RET_LABEL:;
+{
+{ /* Inline csv$CsvDocument$records (self) on <self:CsvDocument> */
+var11 = self->attrs[COLOR_csv__CsvDocument___records].val; /* _records on <self:CsvDocument> */
+if (unlikely(var11 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
 }
-/* method csv#CsvWriter#ostream for (self: CsvWriter): Writer */
-val* csv___csv__CsvWriter___ostream(val* self) {
-val* var /* : Writer */;
-val* var1 /* : Writer */;
-var1 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 152);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _records");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 126);
 fatal_exit(1);
 }
-var = var1;
-RET_LABEL:;
-return var;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
-/* method csv#CsvWriter#ostream= for (self: CsvWriter, Writer) */
-void csv___csv__CsvWriter___ostream_61d(val* self, val* p0) {
-self->attrs[COLOR_csv__CsvWriter___ostream].val = p0; /* _ostream on <self:CsvWriter> */
-RET_LABEL:;
-}
-/* method csv#CsvWriter#format for (self: CsvWriter): CsvFormat */
-val* csv___csv__CsvWriter___format(val* self) {
-val* var /* : CsvFormat */;
-val* var1 /* : CsvFormat */;
-var1 = self->attrs[COLOR_csv__CsvWriter___format].val; /* _format on <self:CsvWriter> */
-if (unlikely(var1 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 155);
-fatal_exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method csv#CsvWriter#format= for (self: CsvWriter, CsvFormat) */
-void csv___csv__CsvWriter___format_61d(val* self, val* p0) {
-self->attrs[COLOR_csv__CsvWriter___format].val = p0; /* _format on <self:CsvWriter> */
-RET_LABEL:;
-}
-/* method csv#CsvWriter#always_escape for (self: CsvWriter): Bool */
-short int csv___csv__CsvWriter___always_escape(val* self) {
-short int var /* : Bool */;
-short int var1 /* : Bool */;
-var1 = self->attrs[COLOR_csv__CsvWriter___always_escape].s; /* _always_escape on <self:CsvWriter> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method csv#CsvWriter#with_format for (self: CsvWriter, Writer, CsvFormat) */
-void csv___csv__CsvWriter___with_format(val* self, val* p0, val* p1) {
-val* var_ostream /* var ostream: Writer */;
-val* var_format /* var format: CsvFormat */;
-var_ostream = p0;
-var_format = p1;
-{
-((void(*)(val* self, val* p0))(self->class->vft[COLOR_csv__CsvWriter__ostream_61d]))(self, var_ostream); /* ostream= on <self:CsvWriter>*/
 }
 {
-((void(*)(val* self))(self->class->vft[COLOR_core__kernel__Object__init]))(self); /* init on <self:CsvWriter>*/
-}
-{
-{ /* Inline csv#CsvWriter#format= (self,var_format) on <self:CsvWriter> */
-self->attrs[COLOR_csv__CsvWriter___format].val = var_format; /* _format on <self:CsvWriter> */
-RET_LABEL1:(void)0;
-}
+core___core__Array___core__abstract_collection__SimpleCollection__add(var9, var_ln); /* Direct call array$Array$add on <var9:Array[Array[String]]>*/
 }
 RET_LABEL:;
 }
-/* method csv#CsvWriter#write_sequence for (self: CsvWriter, SequenceRead[Object]) */
-void csv___csv__CsvWriter___write_sequence(val* self, val* p0) {
-val* var_row /* var row: SequenceRead[Object] */;
-short int var /* : Bool */;
-short int var1 /* : Bool */;
-val* var2 /* : Iterator[nullable Object] */;
-val* var_i /* var i: IndexedIterator[Object] */;
-val* var3 /* : CsvFormat */;
-val* var5 /* : CsvFormat */;
-uint32_t var6 /* : Char */;
-uint32_t var8 /* : Char */;
-val* var9 /* : String */;
-val* var_separator /* var separator: String */;
-val* var10 /* : nullable Object */;
-val* var11 /* : String */;
-val* var_ /* var : IndexedIterator[Object] */;
-val* var12 /* : Iterator[nullable Object] */;
-val* var_13 /* var : Iterator[Object] */;
-short int var14 /* : Bool */;
-val* var15 /* : nullable Object */;
-val* var_cell /* var cell: Object */;
-val* var16 /* : Writer */;
-val* var18 /* : Writer */;
-val* var19 /* : String */;
-val* var20 /* : Writer */;
-val* var22 /* : Writer */;
-val* var23 /* : CsvFormat */;
-val* var25 /* : CsvFormat */;
-val* var26 /* : String */;
-val* var28 /* : String */;
-var_row = p0;
+/* method csv$CsvDocument$write_to for (self: CsvDocument, Writer) */
+void csv___csv__CsvDocument___core__stream__Writable__write_to(val* self, val* p0) {
+val* var_stream /* var stream: Writer */;
+val* var /* : CsvWriter */;
+val* var_s /* var s: CsvWriter */;
+uint32_t var1 /* : Char */;
+uint32_t var3 /* : Char */;
+val* var5 /* : String */;
+val* var7 /* : String */;
+uint32_t var9 /* : Char */;
+uint32_t var11 /* : Char */;
+val* var13 /* : Array[String] */;
+val* var15 /* : Array[String] */;
+short int var16 /* : Bool */;
+short int var17 /* : Bool */;
+val* var18 /* : Array[String] */;
+val* var20 /* : Array[String] */;
+val* var21 /* : Array[Array[String]] */;
+val* var23 /* : Array[Array[String]] */;
+var_stream = p0;
+var = NEW_csv__CsvWriter(&type_csv__CsvWriter);
 {
-var = ((short int(*)(val* self))((((long)var_row&3)?class_info[((long)var_row&3)]:var_row->class)->vft[COLOR_core__abstract_collection__Collection__is_empty]))(var_row); /* is_empty on <var_row:SequenceRead[Object]>*/
+((void(*)(val* self, val* p0))(var->class->vft[COLOR_csv__CsvWriter__ostream_61d]))(var, var_stream); /* ostream= on <var:CsvWriter>*/
 }
-var1 = !var;
-if (var1){
 {
-var2 = ((val*(*)(val* self))((((long)var_row&3)?class_info[((long)var_row&3)]:var_row->class)->vft[COLOR_core__abstract_collection__Collection__iterator]))(var_row); /* iterator on <var_row:SequenceRead[Object]>*/
+((void(*)(val* self))(var->class->vft[COLOR_core__kernel__Object__init]))(var); /* init on <var:CsvWriter>*/
 }
-var_i = var2;
+var_s = var;
 {
-{ /* Inline csv#CsvWriter#format (self) on <self:CsvWriter> */
-var5 = self->attrs[COLOR_csv__CsvWriter___format].val; /* _format on <self:CsvWriter> */
-if (unlikely(var5 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 155);
-fatal_exit(1);
+{ /* Inline csv$CsvStream$separator (self) on <self:CsvDocument> */
+var3 = self->attrs[COLOR_csv__CsvStream___separator].c; /* _separator on <self:CsvDocument> */
+var1 = var3;
+RET_LABEL2:(void)0;
 }
-var3 = var5;
+}
+{
+{ /* Inline csv$CsvStream$separator= (var_s,var1) on <var_s:CsvWriter> */
+var_s->attrs[COLOR_csv__CsvStream___separator].c = var1; /* _separator on <var_s:CsvWriter> */
 RET_LABEL4:(void)0;
 }
 }
 {
-{ /* Inline csv#CsvFormat#separator (var3) on <var3:CsvFormat> */
-var8 = var3->attrs[COLOR_csv__CsvFormat___separator].c; /* _separator on <var3:CsvFormat> */
-var6 = var8;
-RET_LABEL7:(void)0;
+{ /* Inline csv$CsvStream$eol (self) on <self:CsvDocument> */
+var7 = self->attrs[COLOR_csv__CsvStream___eol].val; /* _eol on <self:CsvDocument> */
+if (unlikely(var7 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
 }
-}
-{
-var9 = core__abstract_text___Char___Object__to_s(var6);
-}
-var_separator = var9;
-{
-var10 = ((val*(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_i); /* item on <var_i:IndexedIterator[Object]>*/
-}
-{
-var11 = ((val*(*)(val* self))((((long)var10&3)?class_info[((long)var10&3)]:var10->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var10); /* to_s on <var10:nullable Object(Object)>*/
-}
-{
-csv___csv__CsvWriter___write_cell(self, var11); /* Direct call csv#CsvWriter#write_cell on <self:CsvWriter>*/
-}
-{
-((void(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_i); /* next on <var_i:IndexedIterator[Object]>*/
-}
-var_ = var_i;
-{
-var12 = core___core__Iterator___iterator(var_);
-}
-var_13 = var12;
-for(;;) {
-{
-var14 = ((short int(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_13); /* is_ok on <var_13:Iterator[Object]>*/
-}
-if (var14){
-} else {
-goto BREAK_label;
-}
-{
-var15 = ((val*(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_13); /* item on <var_13:Iterator[Object]>*/
-}
-var_cell = var15;
-{
-{ /* Inline csv#CsvWriter#ostream (self) on <self:CsvWriter> */
-var18 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
-if (unlikely(var18 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 152);
-fatal_exit(1);
-}
-var16 = var18;
-RET_LABEL17:(void)0;
-}
-}
-{
-core___core__FileWriter___core__stream__Writer__write(var16, var_separator); /* Direct call file#FileWriter#write on <var16:Writer>*/
-}
-{
-var19 = ((val*(*)(val* self))((((long)var_cell&3)?class_info[((long)var_cell&3)]:var_cell->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_cell); /* to_s on <var_cell:Object>*/
-}
-{
-csv___csv__CsvWriter___write_cell(self, var19); /* Direct call csv#CsvWriter#write_cell on <self:CsvWriter>*/
-}
-{
-((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_13); /* next on <var_13:Iterator[Object]>*/
-}
-}
-BREAK_label: (void)0;
-{
-((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_13); /* finish on <var_13:Iterator[Object]>*/
-}
-} else {
-}
-{
-{ /* Inline csv#CsvWriter#ostream (self) on <self:CsvWriter> */
-var22 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
-if (unlikely(var22 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 152);
-fatal_exit(1);
-}
-var20 = var22;
-RET_LABEL21:(void)0;
-}
-}
-{
-{ /* Inline csv#CsvWriter#format (self) on <self:CsvWriter> */
-var25 = self->attrs[COLOR_csv__CsvWriter___format].val; /* _format on <self:CsvWriter> */
-if (unlikely(var25 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 155);
-fatal_exit(1);
-}
-var23 = var25;
-RET_LABEL24:(void)0;
-}
-}
-{
-{ /* Inline csv#CsvFormat#eol (var23) on <var23:CsvFormat> */
-var28 = var23->attrs[COLOR_csv__CsvFormat___eol].val; /* _eol on <var23:CsvFormat> */
-if (unlikely(var28 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _eol");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 28);
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 112);
 fatal_exit(1);
 }
-var26 = var28;
-RET_LABEL27:(void)0;
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-core___core__FileWriter___core__stream__Writer__write(var20, var26); /* Direct call file#FileWriter#write on <var20:Writer>*/
-}
-RET_LABEL:;
-}
-/* method csv#CsvWriter#write_cell for (self: CsvWriter, String) */
-void csv___csv__CsvWriter___write_cell(val* self, val* p0) {
-val* var_cell /* var cell: String */;
-short int var /* : Bool */;
-short int var1 /* : Bool */;
-short int var2 /* : Bool */;
-short int var4 /* : Bool */;
-short int var5 /* : Bool */;
-short int var_ /* var : Bool */;
-val* var6 /* : CsvFormat */;
-val* var8 /* : CsvFormat */;
-short int var9 /* : Bool */;
-val* var10 /* : Writer */;
-val* var12 /* : Writer */;
-val* var13 /* : Writer */;
-val* var15 /* : Writer */;
-val* var16 /* : CsvFormat */;
-val* var18 /* : CsvFormat */;
-val* var19 /* : Text */;
-var_cell = p0;
-{
-var = ((short int(*)(val* self))(var_cell->class->vft[COLOR_core__abstract_text__Text__is_empty]))(var_cell); /* is_empty on <var_cell:String>*/
-}
-if (var){
-goto RET_LABEL;
-} else {
-}
-{
-{ /* Inline csv#CsvWriter#always_escape (self) on <self:CsvWriter> */
-var4 = self->attrs[COLOR_csv__CsvWriter___always_escape].s; /* _always_escape on <self:CsvWriter> */
-var2 = var4;
-RET_LABEL3:(void)0;
-}
-}
-var5 = !var2;
-var_ = var5;
-if (var5){
-{
-{ /* Inline csv#CsvWriter#format (self) on <self:CsvWriter> */
-var8 = self->attrs[COLOR_csv__CsvWriter___format].val; /* _format on <self:CsvWriter> */
-if (unlikely(var8 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 155);
-fatal_exit(1);
-}
-var6 = var8;
-RET_LABEL7:(void)0;
+{ /* Inline csv$CsvStream$eol= (var_s,var5) on <var_s:CsvWriter> */
+var_s->attrs[COLOR_csv__CsvStream___eol].val = var5; /* _eol on <var_s:CsvWriter> */
+RET_LABEL8:(void)0;
 }
 }
 {
-var9 = csv___csv__CsvFormat___is_value_clean(var6, var_cell);
-}
-var1 = var9;
-} else {
-var1 = var_;
-}
-if (var1){
-{
-{ /* Inline csv#CsvWriter#ostream (self) on <self:CsvWriter> */
-var12 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
-if (unlikely(var12 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 152);
-fatal_exit(1);
-}
-var10 = var12;
-RET_LABEL11:(void)0;
+{ /* Inline csv$CsvStream$delimiter (self) on <self:CsvDocument> */
+var11 = self->attrs[COLOR_csv__CsvStream___delimiter].c; /* _delimiter on <self:CsvDocument> */
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-core___core__FileWriter___core__stream__Writer__write(var10, var_cell); /* Direct call file#FileWriter#write on <var10:Writer>*/
+{ /* Inline csv$CsvStream$delimiter= (var_s,var9) on <var_s:CsvWriter> */
+var_s->attrs[COLOR_csv__CsvStream___delimiter].c = var9; /* _delimiter on <var_s:CsvWriter> */
+RET_LABEL12:(void)0;
 }
-} else {
+}
 {
-{ /* Inline csv#CsvWriter#ostream (self) on <self:CsvWriter> */
-var15 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
+{ /* Inline csv$CsvDocument$header (self) on <self:CsvDocument> */
+var15 = self->attrs[COLOR_csv__CsvDocument___header].val; /* _header on <self:CsvDocument> */
 if (unlikely(var15 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 152);
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _header");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 121);
 fatal_exit(1);
 }
 var13 = var15;
@@ -981,74 +780,296 @@ RET_LABEL14:(void)0;
 }
 }
 {
-{ /* Inline csv#CsvWriter#format (self) on <self:CsvWriter> */
-var18 = self->attrs[COLOR_csv__CsvWriter___format].val; /* _format on <self:CsvWriter> */
-if (unlikely(var18 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _format");
-PRINT_ERROR(" (%s:%d)\n", FILE_csv, 155);
+var16 = core___core__AbstractArrayRead___core__abstract_collection__Collection__is_empty(var13);
+}
+var17 = !var16;
+if (var17){
+{
+{ /* Inline csv$CsvDocument$header (self) on <self:CsvDocument> */
+var20 = self->attrs[COLOR_csv__CsvDocument___header].val; /* _header on <self:CsvDocument> */
+if (unlikely(var20 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _header");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 121);
 fatal_exit(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-var19 = csv___csv__CsvFormat___escape_cell(var16, var_cell);
+csv___csv__CsvWriter___write_line(var_s, var18); /* Direct call csv$CsvWriter$write_line on <var_s:CsvWriter>*/
+}
+} else {
 }
 {
-core___core__FileWriter___core__stream__Writer__write(var13, var19); /* Direct call file#FileWriter#write on <var13:Writer>*/
+{ /* Inline csv$CsvDocument$records (self) on <self:CsvDocument> */
+var23 = self->attrs[COLOR_csv__CsvDocument___records].val; /* _records on <self:CsvDocument> */
+if (unlikely(var23 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
 }
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _records");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 126);
+fatal_exit(1);
+}
+var21 = var23;
+RET_LABEL22:(void)0;
+}
+}
+{
+csv___csv__CsvWriter___write_lines(var_s, var21); /* Direct call csv$CsvWriter$write_lines on <var_s:CsvWriter>*/
 }
 RET_LABEL:;
 }
-/* method csv#CsvWriter#init for (self: CsvWriter) */
+/* method csv$CsvDocument$init for (self: CsvDocument) */
+void csv___csv__CsvDocument___core__kernel__Object__init(val* self) {
+{
+((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvDocument___core__kernel__Object__init]))(self); /* init on <self:CsvDocument>*/
+}
+RET_LABEL:;
+}
+/* method csv$CsvWriter$ostream for (self: CsvWriter): Writer */
+val* csv___csv__CsvWriter___ostream(val* self) {
+val* var /* : Writer */;
+val* var1 /* : Writer */;
+var1 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
+if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 186);
+fatal_exit(1);
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method csv$CsvWriter$ostream= for (self: CsvWriter, Writer) */
+void csv___csv__CsvWriter___ostream_61d(val* self, val* p0) {
+self->attrs[COLOR_csv__CsvWriter___ostream].val = p0; /* _ostream on <self:CsvWriter> */
+RET_LABEL:;
+}
+/* method csv$CsvWriter$write_lines for (self: CsvWriter, Array[Array[Object]]) */
+void csv___csv__CsvWriter___write_lines(val* self, val* p0) {
+val* var_lines /* var lines: Array[Array[Object]] */;
+val* var_ /* var : Array[Array[Object]] */;
+val* var /* : IndexedIterator[nullable Object] */;
+val* var_1 /* var : IndexedIterator[Array[Object]] */;
+short int var2 /* : Bool */;
+val* var3 /* : nullable Object */;
+val* var_i /* var i: Array[Object] */;
+var_lines = p0;
+var_ = var_lines;
+{
+var = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
+}
+var_1 = var;
+for(;;) {
+{
+var2 = ((short int(*)(val* self))((((long)var_1&3)?class_info[((long)var_1&3)]:var_1->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_1); /* is_ok on <var_1:IndexedIterator[Array[Object]]>*/
+}
+if (var2){
+} else {
+goto BREAK_label;
+}
+{
+var3 = ((val*(*)(val* self))((((long)var_1&3)?class_info[((long)var_1&3)]:var_1->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_1); /* item on <var_1:IndexedIterator[Array[Object]]>*/
+}
+var_i = var3;
+{
+csv___csv__CsvWriter___write_line(self, var_i); /* Direct call csv$CsvWriter$write_line on <self:CsvWriter>*/
+}
+{
+((void(*)(val* self))((((long)var_1&3)?class_info[((long)var_1&3)]:var_1->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_1); /* next on <var_1:IndexedIterator[Array[Object]]>*/
+}
+}
+BREAK_label: (void)0;
+{
+((void(*)(val* self))((((long)var_1&3)?class_info[((long)var_1&3)]:var_1->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_1); /* finish on <var_1:IndexedIterator[Array[Object]]>*/
+}
+RET_LABEL:;
+}
+/* method csv$CsvWriter$write_line for (self: CsvWriter, Array[Object]) */
+void csv___csv__CsvWriter___write_line(val* self, val* p0) {
+val* var_line /* var line: Array[Object] */;
+val* var /* : Writer */;
+val* var2 /* : Writer */;
+val* var_os /* var os: Writer */;
+uint32_t var3 /* : Char */;
+uint32_t var5 /* : Char */;
+uint32_t var_esc /* var esc: Char */;
+uint32_t var6 /* : Char */;
+uint32_t var8 /* : Char */;
+uint32_t var_sep /* var sep: Char */;
+val* var9 /* : String */;
+val* var11 /* : String */;
+val* var_eol /* var eol: String */;
+long var_i /* var i: Int */;
+long var12 /* : Int */;
+long var14 /* : Int */;
+long var15 /* : Int */;
+short int var17 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var18 /* : Int */;
+long var_ /* var : Int */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
+short int var25 /* : Bool */;
+val* var26 /* : nullable Object */;
+val* var27 /* : String */;
+val* var28 /* : String */;
+long var29 /* : Int */;
+val* var30 /* : nullable Object */;
+val* var31 /* : String */;
+val* var32 /* : String */;
+var_line = p0;
+{
+{ /* Inline csv$CsvWriter$ostream (self) on <self:CsvWriter> */
+var2 = self->attrs[COLOR_csv__CsvWriter___ostream].val; /* _ostream on <self:CsvWriter> */
+if (unlikely(var2 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _ostream");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 186);
+fatal_exit(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
+var_os = var;
+{
+{ /* Inline csv$CsvStream$delimiter (self) on <self:CsvWriter> */
+var5 = self->attrs[COLOR_csv__CsvStream___delimiter].c; /* _delimiter on <self:CsvWriter> */
+var3 = var5;
+RET_LABEL4:(void)0;
+}
+}
+var_esc = var3;
+{
+{ /* Inline csv$CsvStream$separator (self) on <self:CsvWriter> */
+var8 = self->attrs[COLOR_csv__CsvStream___separator].c; /* _separator on <self:CsvWriter> */
+var6 = var8;
+RET_LABEL7:(void)0;
+}
+}
+var_sep = var6;
+{
+{ /* Inline csv$CsvStream$eol (self) on <self:CsvWriter> */
+var11 = self->attrs[COLOR_csv__CsvStream___eol].val; /* _eol on <self:CsvWriter> */
+if (unlikely(var11 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _eol");
+PRINT_ERROR(" (%s:%d)\n", FILE_csv, 112);
+fatal_exit(1);
+}
+var9 = var11;
+RET_LABEL10:(void)0;
+}
+}
+var_eol = var9;
+var_i = 0l;
+{
+{ /* Inline array$AbstractArrayRead$length (var_line) on <var_line:Array[Object]> */
+var14 = var_line->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_line:Array[Object]> */
+var12 = var14;
+RET_LABEL13:(void)0;
+}
+}
+{
+{ /* Inline kernel$Int$- (var12,1l) on <var12:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var17 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var17)) {
+var_class_name = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+fatal_exit(1);
+}
+var18 = var12 - 1l;
+var15 = var18;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
+}
+}
+var_ = var15;
+for(;;) {
+{
+{ /* Inline kernel$Int$< (var_i,var_) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <var_:Int> isa OTHER */
+/* <var_:Int> isa OTHER */
+var21 = 1; /* easy <var_:Int> isa OTHER*/
+if (unlikely(!var21)) {
+var_class_name24 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
+fatal_exit(1);
+}
+var25 = var_i < var_;
+var19 = var25;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
+}
+}
+if (var19){
+} else {
+goto BREAK_label;
+}
+{
+var26 = core___core__Array___core__abstract_collection__SequenceRead___91d_93d(var_line, var_i);
+}
+{
+var27 = ((val*(*)(val* self))((((long)var26&3)?class_info[((long)var26&3)]:var26->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var26); /* to_s on <var26:nullable Object(Object)>*/
+}
+{
+var28 = csv___core__Text___escape_to_csv(var27, var_sep, var_esc, var_eol);
+}
+{
+core___core__FileWriter___core__stream__Writer__write(var_os, var28); /* Direct call file$FileWriter$write on <var_os:Writer>*/
+}
+{
+core___core__Writer___write_char(var_os, var_sep); /* Direct call stream$Writer$write_char on <var_os:Writer>*/
+}
+{
+var29 = core___core__Int___Discrete__successor(var_i, 1l);
+}
+var_i = var29;
+}
+BREAK_label: (void)0;
+{
+var30 = core___core__SequenceRead___last(var_line);
+}
+{
+var31 = ((val*(*)(val* self))((((long)var30&3)?class_info[((long)var30&3)]:var30->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var30); /* to_s on <var30:nullable Object(Object)>*/
+}
+{
+var32 = csv___core__Text___escape_to_csv(var31, var_sep, var_esc, var_eol);
+}
+{
+core___core__FileWriter___core__stream__Writer__write(var_os, var32); /* Direct call file$FileWriter$write on <var_os:Writer>*/
+}
+{
+core___core__FileWriter___core__stream__Writer__write(var_os, var_eol); /* Direct call file$FileWriter$write on <var_os:Writer>*/
+}
+RET_LABEL:;
+}
+/* method csv$CsvWriter$init for (self: CsvWriter) */
 void csv___csv__CsvWriter___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvWriter___core__kernel__Object__init]))(self); /* init on <self:CsvWriter>*/
 }
 RET_LABEL:;
-}
-/* method csv#Sys#rfc4180 for (self: Sys): CsvFormat */
-val* csv___core__Sys___rfc4180(val* self) {
-val* var /* : CsvFormat */;
-static val* varonce;
-static int varonce_guard;
-val* var1 /* : CsvFormat */;
-val* var2 /* : CsvFormat */;
-static val* varonce3;
-val* var4 /* : String */;
-char* var5 /* : NativeString */;
-val* var6 /* : String */;
-if (likely(varonce_guard)) {
-var1 = varonce;
-} else {
-var2 = NEW_csv__CsvFormat(&type_csv__CsvFormat);
-if (likely(varonce3!=NULL)) {
-var4 = varonce3;
-} else {
-var5 = "\015\n";
-var6 = core__flat___NativeString___to_s_full(var5, 2l, 2l);
-var4 = var6;
-varonce3 = var4;
-}
-{
-((void(*)(val* self, uint32_t p0))(var2->class->vft[COLOR_csv__CsvFormat__delimiter_61d]))(var2, '\"'); /* delimiter= on <var2:CsvFormat>*/
-}
-{
-((void(*)(val* self, uint32_t p0))(var2->class->vft[COLOR_csv__CsvFormat__separator_61d]))(var2, ','); /* separator= on <var2:CsvFormat>*/
-}
-{
-((void(*)(val* self, val* p0))(var2->class->vft[COLOR_csv__CsvFormat__eol_61d]))(var2, var4); /* eol= on <var2:CsvFormat>*/
-}
-{
-((void(*)(val* self))(var2->class->vft[COLOR_core__kernel__Object__init]))(var2); /* init on <var2:CsvFormat>*/
-}
-var1 = var2;
-varonce = var1;
-varonce_guard = 1;
-}
-var = var1;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
 }

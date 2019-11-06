@@ -19,16 +19,18 @@ Features:
 
 Basic wiki structure:
 
-	root
-	|- assets
-	|- out
-	|- pages
-	|- templates
-	|	|- footer.html
-	|	|- header.html
-	|	|- menu.html
-	|	`- template.html
-	`- config.ini
+~~~raw
+root
+|- assets
+|- out
+|- pages
+|- templates
+|	|- footer.html
+|	|- header.html
+|	|- menu.html
+|	`- template.html
+`- config.ini
+~~~
 
 ### pages
 
@@ -37,14 +39,16 @@ Nitiwiki will render an article for each markdown file found in `pages`.
 
 You can categorize your content in sections using sub-folders:
 
-	pages
-	|- section1
-	|	`- index.md
-	|- section2
-	|	`- index.md
-	|- page1.md
-	|- page2.md
-	`- index.md
+~~~raw
+pages
+|- section1
+|	`- index.md
+|- section2
+|	`- index.md
+|- page1.md
+|- page2.md
+`- index.md
+~~~
 
 ### assets
 
@@ -53,10 +57,12 @@ This is where you store CSS and JavaScript files used in the design of your site
 You can also use this directory to put some images or other files that will be
 used in all your pages.
 
-	assets
-	|- css
-	|- js
-	`- logo.png
+~~~raw
+assets
+|- css
+|- js
+`- logo.png
+~~~
 
 ### templates
 
@@ -88,7 +94,9 @@ This is the main config file of your wiki. For more details see [Configure the w
 
 Just move to the directory where you want to store your source files and type:
 
-	nitiwiki init
+~~~sh
+nitiwiki init
+~~~
 
 This command will import the base structure of your wiki in the current directory.
 At this point nitiwiki has created the main configuration file of your site:
@@ -201,13 +209,17 @@ This nesting of trails can be used to have sections and sub-sections.
 
 Once you have done your changes, use:
 
-	nitiwiki --status
+~~~sh
+nitiwiki --status
+~~~
 
 This will show the impacts of your changes on the wiki structure.
 
 Then type:
 
-	nitiwiki --render
+~~~sh
+nitiwiki --render
+~~~
 
 This will the generate the html output of your new content.
 The option `--force` can be used to regenerate all the wiki.
@@ -256,23 +268,25 @@ Additional macros can be used in specialized templates.
 
 The template file `template.html` represents the overall structure of your wiki pages.
 
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<title>%TITLE%</title>
-			<link href="%ROOT_URL%/assets/css/main.css" rel="stylesheet">
-		</head>
-		<body>
-			%HEADER%
-			%TOP_MENU%
-			<div>
-				%TRAIL%
-				%BODY%
-				%TRAIL%
-				%FOOTER%
-			</div>
-		</body>
-	</html>
+~~~html
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>%TITLE%</title>
+		<link href="%ROOT_URL%/assets/css/main.css" rel="stylesheet">
+	</head>
+	<body>
+		%HEADER%
+		%TOP_MENU%
+		<div>
+			%TRAIL%
+			%BODY%
+			%TRAIL%
+			%FOOTER%
+		</div>
+	</body>
+</html>
+~~~
 
 Additionnal macros:
 
@@ -287,20 +301,24 @@ Additionnal macros:
 
 The template file `header.html` is generated on top of all the wiki pages.
 
-	<header>
-		<a href="#"><img src="%ROOT_URL%/%LOGO%" alt="logo"/></a>
-		<h2>%SUBTITLE%</h2>
-		<h1>%TITLE%</h1>
-	</header>
+~~~html
+<header>
+	<a href="#"><img src="%ROOT_URL%/%LOGO%" alt="logo"/></a>
+	<h2>%SUBTITLE%</h2>
+	<h1>%TITLE%</h1>
+</header>
+~~~
 
 ### Footer template
 
 The template file `footer.html` is generated on the bottom of all the wiki pages.
 
-	<footer>
-		<p>%TITLE% &copy; %YEAR%</p>
-		<p>last modification %GEN_TIME%</p>
-	</footer>
+~~~html
+<footer>
+	<p>%TITLE% &copy; %YEAR%</p>
+	<p>last modification %GEN_TIME%</p>
+</footer>
+~~~
 
 Additionnal macros:
 
@@ -313,21 +331,25 @@ The template file `menu.html` contains the menu structure generated on all your 
 
 Its content can be static:
 
-	<nav class="menu">
-		<ul class="nav navbar-nav">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Page1</a></li>
-			<li><a href="#">Page2</a></li>
-		</ul>
-	</nav>
+~~~html
+<nav class="menu">
+	<ul class="nav navbar-nav">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Page1</a></li>
+		<li><a href="#">Page2</a></li>
+	</ul>
+</nav>
+~~~
 
 Or dynamic using the macro `MENUS`:
 
-	<nav class="menu">
-		<ul class="nav navbar-nav">
-		%MENUS%
-		</ul>
-	</nav>
+~~~html
+<nav class="menu">
+	<ul class="nav navbar-nav">
+	%MENUS%
+	</ul>
+</nav>
+~~~
 
 ## Advanced usages
 
@@ -343,7 +365,9 @@ in order to correctly pull changes.
 To automatically update your wiki when changes are pushed on the
 origin repository you can use the following command in a git hook:
 
-	nitiwiki --fetch --render
+~~~sh
+nitiwiki --fetch --render
+~~~
 
 ### Working with a remote server
 
@@ -358,7 +382,9 @@ after changes or set a cron on a different server that you can control.
 Using the following command in your cron will update the web server instance
 from git:
 
-	nitiwiki --fetch --render --rsync
+~~~sh
+nitiwiki --fetch --render --rsync
+~~~
 
 Be sure to set `wiki.rsync_dir` in order to correctly push your changes.
 When using `--rsync`, keep in mind that the rendered output must be configured

@@ -8,24 +8,16 @@
 # You are allowed to redistribute it and sell it, alone or is a part of
 # another product.
 
-# Errors related to JSON parsing.
-module json::error
+# Intro `JsonParseError` which is exposed by all JSON reading APIs
+module error
 
-import nitcc_runtime
+import parser_base
 
-# Ill-formed JSON.
+# JSON format error at parsing
 class JsonParseError
 	super Error
+	serialize
 
-	# The location of the error in the original text.
-	var position: nullable Position
-
-	redef fun to_s do
-		var p = position
-		if p isa Position then
-			return "Error Parsing JSON: [{p}] {super}"
-		else
-			return super
-		end
-	end
+	# Location of the error in source
+	var location: nullable Location = null
 end

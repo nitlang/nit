@@ -19,7 +19,7 @@
 module bundle
 
 import serialization
-import json::serialization
+import json
 
 import platform
 import activities
@@ -29,6 +29,7 @@ in "Java" `{
 	import android.app.Activity;
 	import java.util.ArrayList;
 	import java.util.Set;
+	import nit.app.NitObject;
 `}
 
 extern class NativeBundle in "Java" `{ android.os.Bundle `}
@@ -44,10 +45,10 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get(key: JavaString): JavaObject in "Java" `{ return self.get(key); `}
 	fun remove(key: JavaString) in "Java" `{ self.remove(key); `}
 	fun put_all(bundle: NativeBundle) in "Java" `{ self.putAll(bundle); `}
-	fun key_set: HashSet[JavaString] import HashSet[JavaString], 
-	  HashSet[JavaString].add in "Java" `{ 
+	fun key_set: HashSet[JavaString] import HashSet[JavaString],
+	  HashSet[JavaString].add in "Java" `{
 		Set<String> java_set = self.keySet();
-		int nit_hashset = new_HashSet_of_JavaString();
+		NitObject nit_hashset = new_HashSet_of_JavaString();
 
 		for (String element: java_set)
 			HashSet_of_JavaString_add(nit_hashset, element);
@@ -257,7 +258,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_integer_array_list(key: JavaString): Array[Int]
 		import Array[Int], Array[Int].add in "Java" `{
 		ArrayList<Integer> java_array = self.getIntegerArrayList(key);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		if (java_array == null) return nit_array;
 
@@ -269,7 +270,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_string_array_list(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		ArrayList<String> java_array = self.getStringArrayList(key);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 
@@ -281,7 +282,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_char_sequence_array_list(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		ArrayList<CharSequence> java_array = self.getCharSequenceArrayList(key);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 
@@ -293,7 +294,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_boolean_array(key: JavaString): Array[Bool]
 		import Array[Bool], Array[Bool].add in "Java" `{
 		boolean[] java_array = self.getBooleanArray(key);
-		int nit_array = new_Array_of_Bool();
+		NitObject nit_array = new_Array_of_Bool();
 
 		if (java_array == null) return nit_array;
 
@@ -305,7 +306,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_byte_array(key: JavaString): Array[Int]
 		import Array[Int], Array[Int].add in "Java" `{
 		byte[] java_array = self.getByteArray(key);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		if (java_array == null) return nit_array;
 
@@ -317,7 +318,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_short_array(key: JavaString): Array[Int]
 		import Array[Int], Array[Int].add in "Java" `{
 		short[] java_array = self.getShortArray(key);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		if (java_array == null) return nit_array;
 
@@ -330,7 +331,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_char_array(key: JavaString): Array[Char]
 		import Array[Char], Array[Char].add in "Java" `{
 		char[] java_array = self.getCharArray(key);
-		int nit_array = new_Array_of_Char();
+		NitObject nit_array = new_Array_of_Char();
 
 		if (java_array == null) return nit_array;
 
@@ -342,7 +343,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_int_array(key: JavaString): Array[Int]
 		import Array[Int], Array[Int].add in "Java" `{
 		int[] java_array = self.getIntArray(key);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		if (java_array == null) return nit_array;
 
@@ -355,7 +356,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_long_array(key: JavaString): Array[Int]
 		import Array[Int], Array[Int].add in "Java" `{
 		long[] java_array = self.getLongArray(key);
-		int nit_array = new_Array_of_Int();
+		NitObject nit_array = new_Array_of_Int();
 
 		if (java_array == null) return nit_array;
 
@@ -367,7 +368,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_float_array(key: JavaString): Array[Float]
 		import Array[Float], Array[Float].add in "Java" `{
 		float[] java_array = self.getFloatArray(key);
-		int nit_array = new_Array_of_Float();
+		NitObject nit_array = new_Array_of_Float();
 
 		if (java_array == null) return nit_array;
 
@@ -379,7 +380,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_double_array(key: JavaString): Array[Float]
 		import Array[Float], Array[Float].add in "Java" `{
 		double[] java_array = self.getDoubleArray(key);
-		int nit_array = new_Array_of_Float();
+		NitObject nit_array = new_Array_of_Float();
 
 		if (java_array == null) return nit_array;
 
@@ -391,7 +392,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_string_array(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		String[] java_array = self.getStringArray(key);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 
@@ -403,7 +404,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	fun get_char_sequence_array(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
 		CharSequence[] java_array = self.getCharSequenceArray(key);
-		int nit_array = new_StringCopyArray();
+		NitObject nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
 

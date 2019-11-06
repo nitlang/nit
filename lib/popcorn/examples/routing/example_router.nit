@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module example_router is example
+
 import popcorn
 
 class AppHome
@@ -28,7 +30,7 @@ class UserLogger
 	redef fun all(req, res) do print "User logged"
 end
 
-class UserHome
+class UserHomepage
 	super Handler
 
 	redef fun get(req, res) do res.send "User Home"
@@ -42,7 +44,7 @@ end
 
 var user_router = new Router
 user_router.use("/*", new UserLogger)
-user_router.use("/", new UserHome)
+user_router.use("/", new UserHomepage)
 user_router.use("/profile", new UserProfile)
 
 var app = new App

@@ -94,6 +94,7 @@ abstract
 intern
 extern
 no_warning
+generated
 
 auto_inspect
 
@@ -103,6 +104,17 @@ ldflags
 light_ffi
 
 platform
+
+test
+before
+before_all
+after
+after_all
+example
+
+expect
+ensure
+no_contract
 """
 
 	# Efficient set build from `primtives_annotations_list`

@@ -31,7 +31,7 @@ abstract class BSComponent
 	super Template
 
 	# CSS classes to add on this element.
-	var css_classes = new Array[String]
+	var css_classes = new Array[String] is optional
 
 	# Render `self` css clases as a `class` attribute.
 	fun render_css_classes: String do
@@ -53,11 +53,12 @@ end
 #
 # Creates a link with a title attribute:
 # ~~~
-# lnk = new Link.with_title("http://nitlanguage.org", "Nit", "Nit homepage")
+# lnk = new Link("http://nitlanguage.org", "Nit", "Nit homepage")
 # assert lnk.write_to_string == "<a href=\"http://nitlanguage.org\" title=\"Nit homepage\">Nit</a>"
 # ~~~
 class Link
 	super BSComponent
+	autoinit(href, text, title, css_classes)
 
 	# URL pointed by this link.
 	var href: String is writable
@@ -66,18 +67,12 @@ class Link
 	var text: Writable is writable
 
 	# Optional title.
-	var title: nullable String is noinit, writable
-
-	# Creates a link with a `title` attribute.
-	init with_title(href: String, text: Writable, title: nullable String) do
-		init(href, text)
-		self.title = title
-	end
+	var title: nullable String = null is optional, writable
 
 	redef fun rendering do
 		add "<a{render_css_classes} href=\"{href}\""
 		var title = self.title
-		if title != null then add " title=\"{title.write_to_string}\""
+		if title != null then add " title=\"{title.html_escape}\""
 		add ">{text}</a>"
 	end
 end
@@ -95,11 +90,12 @@ end
 #
 # With subtext:
 # ~~~
-# var h6 = new Header.with_subtext(6, "Title", "with subtext")
+# var h6 = new Header(6, "Title", "with subtext")
 # assert h6.write_to_string == "<h6>Title<small>with subtext</small></h6>"
 # ~~~
 class Header
 	super BSComponent
+	autoinit(level, text, subtext, id, css_classes)
 
 	# Header level between 1 and 6.
 	var level: Int
@@ -108,13 +104,10 @@ class Header
 	var text: Writable
 
 	# Optional subtext.
-	var subtext: nullable Writable is noinit, writable
+	var subtext: nullable Writable = null is optional, writable
 
-	# Creates a link with a `title` attribute.
-	init with_subtext(level: Int, text: Writable, subtext: String) do
-		init(level, text)
-		self.subtext = subtext
-	end
+	# Optional id.
+	var id: nullable String = null is optional, writable
 
 	redef fun rendering do
 		add "<h{level}{render_css_classes}>{text.write_to_string}"
@@ -131,11 +124,12 @@ end
 # Used to factorize behavior between OrderedList and UnorderedList.
 abstract class HTMLList
 	super BSComponent
+	autoinit(items, css_classes)
 
 	# A list contains `<li>` tags as children.
 	#
 	# See ListItem.
-	var items = new Array[ListItem]
+	var items = new Array[ListItem] is optional
 
 	# Adds a new ListItem to `self`.
 	fun add_li(item: ListItem) do items.add item
@@ -203,6 +197,7 @@ end
 # A `<li>` tag.
 class ListItem
 	super BSComponent
+	autoinit(text, css_classes)
 
 	# Content to display in this list item.
 	var text: Writable is writable
@@ -222,6 +217,7 @@ end
 # ~~~
 class BSIcon
 	super BSComponent
+	autoinit(icon, css_classes)
 
 	# Glyphicon name to display.
 	#
@@ -278,6 +274,7 @@ end
 # ~~~
 class BSLabel
 	super BSComponent
+	autoinit(color, text, css_classes)
 
 	# Class used to change the color of the label.
 	#
@@ -306,6 +303,7 @@ end
 # ~~~
 class BSBadge
 	super BSComponent
+	autoinit(text, css_classes)
 
 	# Text to display in the label.
 	var text: Writable
@@ -333,6 +331,7 @@ end
 # ~~~
 class BSPageHeader
 	super BSComponent
+	autoinit(text, css_classes)
 
 	# Text to display as title.
 	var text: Writable
@@ -362,6 +361,7 @@ end
 # ~~~
 class BSAlert
 	super BSComponent
+	autoinit(color, text, is_dismissible, css_classes)
 
 	# Class used to change the color of the alert.
 	#
@@ -376,7 +376,7 @@ class BSAlert
 	# See http://getbootstrap.com/components/#alerts-dismissible
 	#
 	# Default is `false`.
-	var is_dismissible = false
+	var is_dismissible = false is optional, writable
 
 	init do css_classes.add "alert alert-{color}"
 
@@ -399,7 +399,7 @@ end
 # Example:
 #
 # ~~~
-# var p = new BSPanel("default", "Panel content")
+# var p = new BSPanel("default", body = "Panel content")
 #
 # assert p.write_to_string == """
 # <div class="panel panel-default">
@@ -413,8 +413,7 @@ end
 # Panel with heading:
 #
 # ~~~
-# p = new BSPanel("danger", "Panel content")
-# p.heading = "Panel heading"
+# p = new BSPanel("danger", heading = "Panel heading", body = "Panel content")
 #
 # assert p.write_to_string == """
 # <div class="panel panel-danger">
@@ -429,20 +428,21 @@ end
 # ~~~
 class BSPanel
 	super BSComponent
+	autoinit(color, heading, body, footer, css_classes)
 
 	# Panel color.
 	#
 	# Can be one of `default`, `primary`, `success`, `info`, `warning` or `danger`.
-	var color: String
+	var color: String is writable
 
 	# Panel header if any.
-	var heading: nullable Writable is noinit, writable
+	var heading: nullable Writable = null is optional, writable
 
 	# Body to display in the panel.
-	var body: Writable
+	var body: nullable Writable = null is optional, writable
 
 	# Panel footer is any.
-	var footer: nullable Writable is noinit, writable
+	var footer: nullable Writable = null is optional, writable
 
 	init do css_classes.add "panel panel-{color}"
 
@@ -454,9 +454,12 @@ class BSPanel
 			addn heading.write_to_string
 			addn "</div>"
 		end
-		addn "<div class=\"panel-body\">"
-		addn body.write_to_string
-		addn "</div>"
+		var body = self.body
+		if body != null then
+			addn "<div class=\"panel-body\">"
+			addn body.write_to_string
+			addn "</div>"
+		end
 		var footer = self.footer
 		if footer != null then
 			addn "<div class=\"panel-footer\">"

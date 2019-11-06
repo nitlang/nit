@@ -47,6 +47,7 @@ import model_parser_base
 # var parser = new ObjFileParser(obj_src)
 # var parsed_obj = parser.parse
 # assert parsed_obj.is_coherent
+# assert parsed_obj.objects.first.name == "Cube"
 # ~~~
 class ObjFileParser
 	super StringProcessor
@@ -60,6 +61,7 @@ class ObjFileParser
 	# Execute parsing of `src` to extract an `ObjDef`
 	fun parse: nullable ObjDef
 	do
+		var obj_obj = null
 		while not eof do
 			var token = read_token
 			if token.is_empty or token == "#" then
@@ -78,7 +80,11 @@ class ObjFileParser
 				geometry.params.add vec
 			else if token == "f" then # Faces
 				var face = read_face
-				geometry.faces.add face
+				if obj_obj == null then
+					obj_obj = new ObjObj("")
+					geometry.objects.add obj_obj
+				end
+				obj_obj.faces.add face
 			else if token == "mtllib" then
 				current_material_lib = read_until_eol_or_comment
 			else if token == "usemtl" then
@@ -87,6 +93,8 @@ class ObjFileParser
 			# TODO other line type headers
 			else if token == "s" then
 			else if token == "o" then
+				obj_obj = new ObjObj(read_until_eol_or_comment)
+				geometry.objects.add obj_obj
 			else if token == "g" then
 			end
 			skip_eol
@@ -152,15 +160,17 @@ class ObjDef
 	# Surface parameters
 	var params = new Array[Vec3]
 
-	# Faces
-	var faces = new Array[ObjFace]
+	# Sub-objects
+	var objects = new Array[ObjObj]
 
-	# Referenced material libraries
+	# Relative paths to referenced material libraries
 	fun material_libs: Set[String] do
 		var libs = new Set[String]
-		for face in faces do
-			var lib = face.material_lib
-			if lib != null then libs.add lib
+		for obj in objects do
+			for face in obj.faces do
+				var lib = face.material_lib
+				if lib != null then libs.add lib
+			end
 		end
 		return libs
 	end
@@ -173,10 +183,12 @@ class ObjDef
 	# be executed at each execution of a game.
 	fun is_coherent: Bool
 	do
-		for f in faces do
-			if f.vertices.length < 3 then return error("ObjFace with less than 3 vertices")
+		for obj in objects do
+			for f in obj.faces do
+				if f.vertices.length < 3 then return error("Face with less than 3 vertices")
+			end
 
-			for v in f.vertices do
+			for f in obj.faces do for v in f.vertices do
 				var i = v.vertex_point_index
 				if i < 1 then return error("Vertex point index < 1")
 				if i > vertex_points.length then return error("Vertex point index > than length")
@@ -205,9 +217,19 @@ class ObjDef
 	end
 end
 
+# Sub-object within an `ObjDef`
+class ObjObj
+
+	# Sub-object name as declared in the source file
+	var name: String
+
+	# Sub-object faces
+	var faces = new Array[ObjFace]
+end
+
 # Flat surface of an `ObjDef`
 class ObjFace
-	# Vertex composing this surface, thene should be 3 or more
+	# Vertex composing this surface, there should be 3 or more
 	var vertices = new Array[ObjVertex]
 
 	# Relative path to the .mtl material lib

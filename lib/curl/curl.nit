@@ -14,29 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Data transfer with URL syntax
+# Data transfer powered by the native curl library
 #
-# Download or upload over HTTP with `CurlHTTPRequest` and send emails with `CurlMail`.
+# Download or upload data over HTTP with `CurlHTTPRequest` and send emails
+# with `CurlMail`. Scripts can use the easier (but limited) services on `Text`,
+# `http_get` and `http_download`, provided by `curl::extra`.
 module curl
 
 import native_curl
 
-redef class Sys
-	# Shared Curl library handle
-	#
-	# Usually, you do not have to use this attribute, it instancied by `CurlHTTPRequest` and `CurlMail`.
-	# But in some cases you may want to finalize it to free some small resources.
-	# However, if Curl services are needed once again, this attribute must be manually set.
-	var curl: Curl = new Curl is lazy, writable
-end
-
-# Curl library handle, it is initialized and released with this class
-class Curl
+# Curl library handle
+private class Curl
 	super FinalizableOnce
 
-	private var native = new NativeCurl.easy_init
+	var native = new NativeCurl.easy_init
 
-	# Check for correct initialization
+	# Is this instance correctly initialized?
 	fun is_ok: Bool do return self.native.is_init
 
 	redef fun finalize_once do if is_ok then native.easy_clean
@@ -45,7 +38,7 @@ end
 # CURL Request
 class CurlRequest
 
-	private var curl: Curl = sys.curl
+	private var curl = new Curl
 
 	# Shall this request be verbose?
 	var verbose: Bool = false is writable
@@ -71,6 +64,14 @@ class CurlRequest
 	do
 		return new CurlResponseFailed(error_code, error_msg)
 	end
+
+	# Close low-level resources associated to this request
+	#
+	# Once closed, this request can't be used again.
+	#
+	# If this service isn't called explicitly, low-level resources
+	# may be freed automatically by the GC.
+	fun close do curl.finalize
 end
 
 # HTTP request builder
@@ -100,6 +101,13 @@ class CurlHTTPRequest
 	# Data for the body of a POST request
 	var data: nullable HeaderMap is writable
 
+	# Raw body string
+	#
+	# Set this value to send raw data instead of the POST formatted `data`.
+	#
+	# If `data` is set, the body will not be sent.
+	var body: nullable String is writable
+
 	# Header content of the request
 	var headers: nullable HeaderMap is writable
 
@@ -109,55 +117,36 @@ class CurlHTTPRequest
 	# Set the user agent for all following HTTP requests
 	var user_agent: nullable String is writable
 
+	# Set the Unix domain socket path to use
+	#
+	# When not null, enables using a Unix domain socket
+	# instead of a TCP connection and DNS hostname resolution.
+	var unix_socket_path: nullable String is writable
+
+	# The HTTP method, GET by default
+	#
+	# Must be a capitalized string with request name complying with RFC7231
+	var method: String = "GET" is optional, writable
+
 	# Execute HTTP request
 	#
 	# By default, the response body is returned in an instance of `CurlResponse`.
 	# This behavior can be customized by setting a custom `delegate`.
 	fun execute: CurlResponse
 	do
+		# Reset libcurl parameters as the lib is shared and options
+		# might affect requests from one another.
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var success_response = new CurlResponseSuccess
 		var callback_receiver: CurlCallbacks = success_response
-		if self.delegate != null then callback_receiver = self.delegate.as(not null)
+		var err : CURLCode
 
-		var err
-
-		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
+		# Prepare request
+		err = prepare_request(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.native.easy_setopt(new CURLOption.url, url)
-		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-
-		var user_agent = user_agent
-		if user_agent != null then
-			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
-		# Callbacks
-		err = self.curl.native.register_callback_header(callback_receiver)
-		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-
-		err = self.curl.native.register_callback_body(callback_receiver)
-		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-
-		# HTTP Header
-		var headers = self.headers
-		if headers != null then
-			var headers_joined = headers.join_pairs(": ")
-			err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
-		# Datas
-		var data = self.data
-		if data != null then
-			var postdatas = data.to_url_encoded(self.curl)
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
+		# Perform request
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
@@ -167,9 +156,129 @@ class CurlHTTPRequest
 		return success_response
 	end
 
+	# Internal function that sets cURL options and request' parameters
+	private fun prepare_request(callback_receiver: CurlCallbacks) : CURLCode
+	do
+		var err
+
+		# cURL options and delegates
+		err = set_curl_options
+		if not err.is_ok then return err
+
+		# Callbacks
+		err = set_curl_callback(callback_receiver)
+		if not err.is_ok then return err
+
+		# HTTP Header
+		err = set_curl_http_header
+		if not err.is_ok then return err
+
+		# Set HTTP method and body
+		err = set_method
+		if not err.is_ok then return err
+		err = set_body
+
+		return err
+	end
+
+	# Set cURL parameters according to assigned HTTP method set in method
+	# attribute and body if the method allows it according to RFC7231
+	private fun set_method : CURLCode
+	do
+		var err : CURLCode
+
+		if self.method=="GET" then
+			err=self.curl.native.easy_setopt(new CURLOption.get, 1)
+
+		else if self.method=="POST" then
+			err=self.curl.native.easy_setopt(new CURLOption.post, 1)
+
+		else if self.method=="HEAD" then
+			err=self.curl.native.easy_setopt(new CURLOption.no_body,1)
+
+		else
+			err=self.curl.native.easy_setopt(new CURLOption.custom_request,self.method)
+		end
+		return err
+	end
+
+	# Set request's body
+	private fun set_body : CURLCode
+	do
+		var err
+		var data = self.data
+		var body = self.body
+
+		if data != null then
+			var postdatas = data.to_url_encoded(self.curl)
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
+			if not err.is_ok then return err
+		else if body != null then
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, body)
+			if not err.is_ok then return err
+		end
+		return new CURLCode.ok
+	end
+
+	# Set cURL options
+	# such as delegate, follow location, URL, user agent and address family
+	private fun set_curl_options : CURLCode
+	do
+		var err
+
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return err
+
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
+		if not err.is_ok then return err
+
+		var user_agent = user_agent
+		if user_agent != null then
+			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
+			if not err.is_ok then return err
+		end
+
+		var unix_socket_path = unix_socket_path
+		if unix_socket_path != null then
+			err = self.curl.native.easy_setopt(new CURLOption.unix_socket_path, unix_socket_path)
+			if not err.is_ok then return err
+		end
+		return err
+	end
+
+	# Set cURL callback
+	private fun set_curl_callback(callback_receiver : CurlCallbacks) : CURLCode
+	do
+		var err
+
+		if self.delegate != null then callback_receiver = self.delegate.as(not null)
+
+		err = self.curl.native.register_callback_header(callback_receiver)
+		if not err.is_ok then return err
+
+		err = self.curl.native.register_callback_body(callback_receiver)
+		if not err.is_ok then return err
+
+		return err
+	end
+
+	# Set cURL request header according to attribute headers
+	private fun set_curl_http_header : CURLCode
+	do
+		var headers = self.headers
+		if headers != null then
+			var headers_joined = headers.join_pairs(": ")
+			var err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
+			if not err.is_ok then return err
+		end
+		return new CURLCode.ok
+	end
+
 	# Download to file given resource
 	fun download_to_file(output_file_name: nullable String): CurlResponse
 	do
+		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
+
 		var success_response = new CurlFileResponseSuccess
 
 		var callback_receiver: CurlCallbacks = success_response
@@ -223,6 +332,7 @@ class CurlHTTPRequest
 		return success_response
 	end
 end
+
 
 # CURL Mail Request
 #
@@ -283,7 +393,7 @@ class CurlMail
 	# Protocols supported to send mail to a server
 	#
 	# Default value at `["smtp", "smtps"]`
-	var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
+	var supported_outgoing_protocol = ["smtp", "smtps"]
 
 	# Helper method to add pair values to mail content while building it (ex: "To:", "address@mail.com")
 	private fun add_pair_to_content(str: String, att: String, val: nullable String): String
@@ -427,7 +537,10 @@ end
 class CurlResponseFailed
 	super CurlResponse
 
+	# Curl error code
 	var error_code: Int
+
+	# Curl error message
 	var error_msg: String
 
 	redef fun to_s do return "{error_msg} ({error_code})"
@@ -455,23 +568,27 @@ end
 class CurlResponseSuccess
 	super CurlResponseSuccessIntern
 
-	var body_str = ""
+	# Server HTTP response code
 	var status_code = 0
 
-	# Receive body from request due to body callback registering
-	redef fun body_callback(line) do
-		self.body_str = "{self.body_str}{line}"
-	end
+	# Response body as a `String`
+	var body_str = ""
+
+	# Accept part of the response body
+	redef fun body_callback(line) do self.body_str += line
 end
 
 # Success Response Class of a downloaded File
 class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
+	# Server HTTP response code
 	var status_code = 0
+
 	var speed_download = 0.0
 	var size_download = 0.0
 	var total_time = 0.0
+
 	private var file: nullable FileWriter = null
 
 	# Receive bytes stream from request due to stream callback registering
@@ -508,7 +625,7 @@ class HeaderMap
 	# Get `self` as a single string for HTTP POST
 	#
 	# Require: `curl.is_ok`
-	fun to_url_encoded(curl: Curl): String
+	private fun to_url_encoded(curl: Curl): String
 	do
 		assert curl.is_ok
 

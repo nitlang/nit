@@ -58,7 +58,7 @@ do
 	# Fallback
 	if bytes == null or bytes.length != bin_length or force_rand == true then
 		bytes = new Bytes.with_capacity(bin_length)
-		for i in bin_length.times do bytes.add 256.rand.to_b
+		for i in bin_length.times do bytes.add 256.rand
 	end
 
 	# Encode in base64 so it is readable

@@ -1,4 +1,3 @@
-mnit
 android
 java
 jvm
@@ -7,3 +6,11 @@ mpi
 emscripten
 ui_test
 readline
+postgres
+nitweb
+nitpm_args3
+langannot
+test_nitcorn
+test_annot_pkgconfig
+test_glsl_validation
+test_restful_annot

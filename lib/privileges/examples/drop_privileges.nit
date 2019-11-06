@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Example using the privileges module to drop privileges from root
-module drop_privileges
+module drop_privileges is example
 
 import privileges
 

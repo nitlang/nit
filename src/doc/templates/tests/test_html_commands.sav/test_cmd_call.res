@@ -1,0 +1,1 @@
+<ul><li><a href="test_prog_36dCharacter_36dObject_58d_58dinit">init</a></li><li><a href="test_prog_36dCharacter_36dtotal_strengh" title="The actual strength of the character.">total_strengh</a> - <span class="synopsis nitdoc">The actual strength of the character.</span></li></ul>

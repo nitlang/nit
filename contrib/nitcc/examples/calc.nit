@@ -14,7 +14,7 @@
 
 # Example of a calculation used nitcc
 # see `calc.sablecc` for the grammar
-module calc
+module calc is example
 
 # Reuse the test program to simplify the code
 import calc_test_parser

@@ -14,21 +14,56 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Dynamic interface to read JSON strings.
+# Dynamic interface to read values from JSON strings
 #
-# `String::to_json_value` returns a `JsonValue` which can be queried
-# to get the underlying JSON data.
+# Most services are in `JsonValue`, which is created by `Text::to_json_value`.
 module dynamic
 
 import error
 private import static
 
-# Wraps a JSON value.
+redef class Text
+	# Parse `self` to a `JsonValue`
+	fun to_json_value: JsonValue do return new JsonValue(parse_json)
+end
+
+# Dynamic wrapper of a JSON value, created by `Text::to_json_value`
 #
-# Offer methods to query the type, to dynamicaly cast the underlying value and
-# to query elements (in case of a JSON object or a JSON array).
+# Provides high-level services to explore JSON objects with minimal overhead
+# dealing with static types. Use this class to manipulate the JSON data first
+# and check for errors only before using the resulting data.
 #
-# Use `String::to_json_value` to get a `JsonValue` from a string.
+# For example, given:
+# ~~~
+# var json_src = """
+# {
+#   "i": 123,
+#   "m": {
+#          "t": true,
+#          "f": false
+#        },
+#   "a": ["zero", "one", "two"]
+# }"""
+# var json_value = json_src.to_json_value # Parse src to a `JsonValue`
+# ~~~
+#
+# Access array or map values using their indices.
+# ~~~
+# var target_int = json_value["i"]
+# assert target_int.is_int # Check for error and expected type
+# assert target_int.to_i == 123 # Use the value
+# ~~~
+#
+# Use `get` to reach a value nested in multiple objects.
+# ~~~
+# var target_str = json_value.get("a.0")
+# assert target_str.is_string # Check for error and expected type
+# assert target_str.to_s == "zero" # Use the value
+# ~~~
+#
+# This API is useful for scripts and when you need only a few values from a
+# JSON object. To access many values or check the conformity of the JSON
+# beforehand, use the `json` serialization services.
 class JsonValue
 
 	# The wrapped JSON value.
@@ -131,10 +166,7 @@ class JsonValue
 	#     assert "123".to_json_value.to_s == "123"
 	#     assert "true".to_json_value.to_s == "true"
 	#     assert "[1, 2, 3]".to_json_value.to_s == "[1,2,3]"
-	redef fun to_s do
-		if value == null then return "null"
-		return value.to_s
-	end
+	redef fun to_s do return (value or else "null").to_s
 
 	### Objects
 
@@ -195,19 +227,6 @@ class JsonValue
 	# require: `self.is_error`
 	fun to_error: Error do return value.as(Error)
 
-	### JsonParseError
-
-	# Is this value a parse error?
-	#
-	#     assert "[".to_json_value.is_parse_error
-	#     assert not "[]".to_json_value.is_parse_error
-	fun is_parse_error: Bool do return value isa JsonParseError
-
-	# Get this value as a `JsonParseError`.
-	#
-	# require: `self.is_parse_error`
-	fun to_parse_error: JsonParseError do return value.as(JsonParseError)
-
 	### Children access
 
 	# Iterator over the values of the array `self`
@@ -264,57 +283,104 @@ class JsonValue
 		return new JsonValue(result)
 	end
 
-	# Advanced query to get a value within the map `self` or it's children.
+	# Get the value at `query`, a string of map keys and array indices
 	#
-	# A query is composed of the keys to each map seperated by '.'.
+	# The `query` is composed of map keys and array indices separated by "." (by default).
+	# The separator can be set with `sep` to any string.
 	#
-	# require: `self.is_map`
+	# Given the following JSON object parsed as a `JsonValue`.
+	# ~~~
+	# var jvalue = """
+	# {
+	#   "a": {
+	#          "i": 123,
+	#          "b": true
+	#        },
+	#   "b": ["zero", "one", "two"]
+	# }""".to_json_value
+	# ~~~
 	#
-	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a").is_map
-	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a.t").to_bool
-	#     assert not """{"a": {"t": true, "f": false}}""".to_json_value.get("a.f").to_bool
-	#     assert """{"a": {"t": true, "f": false}}""".to_json_value.get("a.t.t").is_error
-	#     assert """{"a": {"b": {"c": {"d": 123}}}}""".to_json_value.get("a.b.c.d").to_i == 123
-	#     assert """{"a": {"b": {"c": {"d": 123}}}}""".to_json_value.get("a.z.c.d").is_error
-	fun get(query: String): JsonValue do
-		var keys = query.split(".")
-		var value = value
+	# Access a value in maps by its key, starting from the key in the root object.
+	# ~~~
+	# assert jvalue.get("a").is_map
+	# assert jvalue.get("a.i").to_i == 123
+	# assert jvalue.get("a.b").to_bool
+	# ~~~
+	#
+	# Access an item in an array by its index.
+	# ~~~
+	# assert jvalue.get("b.1").to_s == "one"
+	# ~~~
+	#
+	# Any error at any depth of a query is reported. The client should usually
+	# check for errors before using the returned value.
+	# ~~~
+	# assert jvalue.get("a.b.c").to_error.to_s == "Value at `a.b` is not a map. Got a `map`"
+	# assert jvalue.get("b.3").to_error.to_s == "Index `3` out of bounds at `b`"
+	# ~~~
+	#
+	# Set `sep` to a custom string to access keys containing a dot.
+	# ~~~
+	# jvalue = """
+	# {
+	#   "a.b": { "i": 123 },
+	#   "c/d": [ 456 ]
+	# }""".to_json_value
+	#
+	# assert jvalue.get("a.b/i", sep="/").to_i == 123
+	# assert jvalue.get("c/d:0", sep=":").to_i == 456
+	# ~~~
+	fun get(query: Text, sep: nullable Text): JsonValue
+	do
 		if is_error then return self
+
+		sep = sep or else "."
+		var keys = query.split(sep)
+		var value = value
 		for i in [0..keys.length[ do
 			var key = keys[i]
 			if value isa MapRead[String, nullable Object] then
 				if value.has_key(key) then
 					value = value[key]
 				else
-					var sub_query = sub_query_to_s(keys, i)
-					var e = new JsonKeyError("Key `{key}` not found.",
+					var sub_query = sub_query_to_s(keys, i, sep)
+					value = new JsonKeyError("Key `{key}` not found.",
 							self, sub_query)
-					return new JsonValue(e)
+					break
+				end
+			else if value isa Sequence[nullable Object] then
+				if key.is_int then
+					var index = key.to_i
+					if index < value.length then
+						value = value[index]
+					else
+						var sub_query = sub_query_to_s(keys, i, sep)
+						value = new JsonKeyError("Index `{key}` out of bounds at `{sub_query}`",
+								self, sub_query)
+						break
+					end
 				end
 			else
-				var sub_query = sub_query_to_s(keys, i)
-				var val_type = (new JsonValue(value)).json_type
-				var e = new JsonKeyError("Value at `{sub_query}` is not a map. Got type `{val_type}`",
+				var sub_query = sub_query_to_s(keys, i, sep)
+				value = new JsonKeyError("Value at `{sub_query}` is not a map. Got a `{json_type}`",
 						self, sub_query)
-				return new JsonValue(e)
+				break
 			end
 		end
 		return new JsonValue(value)
 	end
 
-	# Concatenate all keys up to `last` for debugging purposes.
-	#
-	# Note: This method deletes elements in `keys`.
-	private fun sub_query_to_s(keys: Array[String], last: Int): String do
-		last += 1
-		for j in [last..keys.length[ do keys.pop
-		return keys.join(".")
+	# Concatenate all keys up to `last` for error reports
+	private fun sub_query_to_s(keys: Array[String], last: Int, sep: Text): String
+	do
+		return [for i in [0..last[ do keys[i]].join(sep)
 	end
 
 	# Return a human-readable description of the type.
 	#
 	# For debugging purpose only.
-	fun json_type: String do
+	private fun json_type: String
+	do
 		if is_array then return "array"
 		if is_bool then return "bool"
 		if is_float then return "float"
@@ -322,29 +388,20 @@ class JsonValue
 		if is_null then return "null"
 		if is_map then return "map"
 		if is_string then return "string"
-		if is_parse_error then return "parse_error"
 		if is_error then return "error"
 		return "undefined"
 	end
 end
 
-# Keyed access failed.
+# Key access error
 class JsonKeyError
 	super Error
 
-	# The value on which the access was requested.
+	# The value on which the access was requested
 	var json_value: JsonValue
 
-	# The requested key.
+	# The requested key
 	#
-	# In the case of `JsonValue.get`, the sub-query that failed.
+	# In the case of `JsonValue::get`, the sub-query that failed.
 	var key: Object
-end
-
-redef class Text
-	# Parse `self` to obtain a `JsonValue`
-	fun to_json_value: JsonValue do
-		var value = parse_json
-		return new JsonValue(value)
-	end
 end

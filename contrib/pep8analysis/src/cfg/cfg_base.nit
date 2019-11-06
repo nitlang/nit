@@ -435,7 +435,7 @@ class BasicBlock
 end
 
 private class Counter
-	var count: Int = -1
+	var count = -1
 	fun next : Int
 	do
 		count += 1

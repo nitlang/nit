@@ -24,6 +24,8 @@ import c_tools
 private import annotation
 import mixin
 import counter
+import pkgconfig
+private import explain_assert_api
 
 # Add compiling options
 redef class ToolContext
@@ -31,10 +33,14 @@ redef class ToolContext
 	var opt_output = new OptionString("Filename of the generated executable", "-o", "--output")
 	# --dir
 	var opt_dir = new OptionString("Output directory", "--dir")
+	# --run
+	var opt_run = new OptionBool("Execute the binary after the compilation", "--run")
 	# --no-cc
 	var opt_no_cc = new OptionBool("Do not invoke the C compiler", "--no-cc")
 	# --no-main
 	var opt_no_main = new OptionBool("Do not generate main entry point", "--no-main")
+	# --shared-lib
+	var opt_shared_lib = new OptionBool("Compile to a native shared library", "--shared-lib")
 	# --make-flags
 	var opt_make_flags = new OptionString("Additional options to the `make` command", "--make-flags")
 	# --max-c-lines
@@ -71,11 +77,13 @@ redef class ToolContext
 	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
 	# -g
 	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "-g", "--debug")
+	# --trace
+	var opt_trace = new OptionBool("Compile with lttng's instrumentation", "--trace")
 
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
+		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_run, self.opt_no_cc, self.opt_no_main, self.opt_shared_lib, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
 		self.option_context.add_option(self.opt_no_stacktrace)
@@ -83,8 +91,10 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
 		self.option_context.add_option(self.opt_debug)
+		self.option_context.add_option(self.opt_trace)
 
 		opt_no_main.hidden = true
+		opt_shared_lib.hidden = true
 	end
 
 	redef fun process_options(args)
@@ -186,6 +196,8 @@ class MakefileToolchain
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
 
+		toolcontext.check_errors
+
 		# Execute the Makefile
 
 		if self.toolcontext.opt_no_cc.value then return
@@ -197,6 +209,14 @@ class MakefileToolchain
 
 		if auto_remove then
 			sys.system("rm -r -- '{root_compile_dir.escape_to_sh}/'")
+		end
+
+		if toolcontext.opt_run.value then
+			var mainmodule = compiler.mainmodule
+			var out = outfile(mainmodule)
+			var cmd = ["."/out]
+			cmd.append toolcontext.option_context.rest
+			toolcontext.exec_and_check(cmd, "--run")
 		end
 
 		time1 = get_time
@@ -218,6 +238,16 @@ class MakefileToolchain
 		var clib = toolcontext.nit_dir / "clib"
 		compiler.files_to_copy.add "{clib}/gc_chooser.c"
 		compiler.files_to_copy.add "{clib}/gc_chooser.h"
+
+		# Add lttng traces provider to external bodies
+		if toolcontext.opt_trace.value then
+			#-I. is there in order to make the TRACEPOINT_INCLUDE directive in clib/traces.h refer to the directory in which gcc was invoked.
+			var traces = new ExternCFile("traces.c", "-I.")
+			traces.pkgconfigs.add "lttng-ust"
+			compiler.extern_bodies.add(traces)
+			compiler.files_to_copy.add "{clib}/traces.c"
+			compiler.files_to_copy.add "{clib}/traces.h"
+		end
 
 		# FFI
 		for m in compiler.mainmodule.in_importation.greaters do
@@ -349,14 +379,34 @@ class MakefileToolchain
 		end
 		var debug = toolcontext.opt_debug.value
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write """
+ifeq ($(origin CC), default)
+        CC = ccache cc
+endif
+ifeq ($(origin CXX), default)
+        CXX = ccache c++
+endif
+CFLAGS ?= -g {{{if not debug then "-O2" else ""}}} -Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs
+CINCL =
+LDFLAGS ?=
+LDLIBS  ?= -lm {{{linker_options.join(" ")}}}
+\n"""
+
+		if self.toolcontext.opt_trace.value then makefile.write "LDLIBS += -llttng-ust -ldl\n"
+
+		if toolcontext.opt_shared_lib.value then
+			makefile.write """
+CFLAGS += -fPIC
+LDFLAGS += -shared -Wl,-soname,{{{outname}}}
+"""
+		end
 
 		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
 		if platform.supports_libunwind then
 			if toolcontext.opt_no_stacktrace.value then
-				makefile.write "NO_STACKTRACE=True"
+				makefile.write "NO_STACKTRACE ?= True"
 			else
-				makefile.write "NO_STACKTRACE= # Set to `True` to enable"
+				makefile.write "NO_STACKTRACE ?= # Set to `True` to enable"
 			end
 		end
 
@@ -403,6 +453,25 @@ ifeq ($(uname_S),Darwin)
 	LDLIBS := $(filter-out -lrt,$(LDLIBS))
 endif
 
+# Special configuration for Windows under mingw64
+ifneq ($(findstring MINGW64,$(uname_S)),)
+	# Use the pcreposix regex library
+	LDLIBS += -lpcreposix
+
+	# Remove POSIX flag -lrt
+	LDLIBS := $(filter-out -lrt,$(LDLIBS))
+
+	# Silence warnings when storing Int, Char and Bool as pointer address
+	CFLAGS += -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
+endif
+
+# Add the compilation dir to the Java CLASSPATH
+ifeq ($(CLASSPATH),)
+	CLASSPATH := .
+else
+	CLASSPATH := $(CLASSPATH):.
+endif
+
 """
 
 		makefile.write("all: {outpath}\n")
@@ -433,14 +502,19 @@ endif
 			f.close
 		end
 
-		var java_files = new Array[ExternFile]
-
+		# pkg-config annotation support
 		var pkgconfigs = new Array[String]
 		for f in compiler.extern_bodies do
 			pkgconfigs.add_all f.pkgconfigs
 		end
-		# Protect pkg-config
+
+		# Only test if pkg-config is used
 		if not pkgconfigs.is_empty then
+
+			# Check availability of pkg-config, silence the proc output
+			toolcontext.check_pkgconfig_packages pkgconfigs
+
+			# Double the check in the Makefile in case it's distributed
 			makefile.write """
 # does pkg-config exists?
 ifneq ($(shell which pkg-config >/dev/null; echo $$?), 0)
@@ -458,10 +532,10 @@ endif
 		end
 
 		# Compile each required extern body into a specific .o
+		var java_files = new Array[ExternFile]
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
-			var ff = f.filename.basename
-			makefile.write("{o}: {ff}\n")
+			makefile.write("{o}: {f.filename}\n")
 			makefile.write("\t{f.makefile_rule_content}\n\n")
 			dep_rules.add(f.makefile_rule_name)
 
@@ -488,9 +562,9 @@ endif
 		end
 		makefile.write("{outpath}: {dep_rules.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath.escape_to_sh} {ofiles.join(" ")} $(LDLIBS) {pkg}\n\n")
 		# Clean
-		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n")
+		makefile.write("clean:\n\trm -f {ofiles.join(" ")} 2>/dev/null\n")
 		if outpath != real_outpath then
-			makefile.write("\trm -- {outpath.escape_to_sh} 2>/dev/null\n")
+			makefile.write("\trm -f -- {outpath.escape_to_sh} 2>/dev/null\n")
 		end
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
@@ -512,6 +586,8 @@ endif
 		var res
 		if self.toolcontext.verbose_level >= 3 then
 			res = sys.system("{command} 2>&1")
+		else if is_windows then
+			res = sys.system("{command} 2>&1 >nul")
 		else
 			res = sys.system("{command} 2>&1 >/dev/null")
 		end
@@ -548,6 +624,20 @@ abstract class AbstractCompiler
 
 	# The targeted specific platform
 	var target_platform: Platform is noinit
+
+	# All methods who already has a callref_thunk generated for
+	var compiled_callref_thunk = new HashSet[MMethodDef]
+
+	var all_routine_types_name: Set[String] do
+		var res = new HashSet[String]
+		for name in ["Fun", "Proc", "FunRef", "ProcRef"] do
+			# Currently there's 20 arity per func type
+			for i in [0..20[ do
+				res.add("{name}{i}")
+			end
+		end
+		return res
+	end
 
 	init
 	do
@@ -642,7 +732,7 @@ abstract class AbstractCompiler
 		stream.write("const char* get_nit_name(register const char* procname, register unsigned int len);\n")
 		stream.close
 
-		extern_bodies.add(new ExternCFile("{compile_dir}/c_functions_hash.c", ""))
+		extern_bodies.add(new ExternCFile("c_functions_hash.c", ""))
 	end
 
 	# Compile C headers
@@ -661,13 +751,15 @@ abstract class AbstractCompiler
 		self.header.add_decl("#endif")
 		self.header.add_decl("#include <inttypes.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
+		if modelbuilder.toolcontext.opt_trace.value then self.header.add_decl("#include \"traces.h\"")
 		self.header.add_decl("#ifdef __APPLE__")
+		self.header.add_decl("	#include <TargetConditionals.h>")
+		self.header.add_decl("	#include <syslog.h>")
 		self.header.add_decl("	#include <libkern/OSByteOrder.h>")
 		self.header.add_decl("	#define be32toh(x) OSSwapBigToHostInt32(x)")
 		self.header.add_decl("#endif")
-		self.header.add_decl("#ifdef __pnacl__")
-		self.header.add_decl("	#define be16toh(val) (((val) >> 8) | ((val) << 8))")
-		self.header.add_decl("	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))")
+		self.header.add_decl("#ifdef _WIN32")
+		self.header.add_decl("	#define be32toh(val) _byteswap_ulong(val)")
 		self.header.add_decl("#endif")
 		self.header.add_decl("#ifdef ANDROID")
 		self.header.add_decl("	#ifndef be32toh")
@@ -675,6 +767,8 @@ abstract class AbstractCompiler
 		self.header.add_decl("	#endif")
 		self.header.add_decl("	#include <android/log.h>")
 		self.header.add_decl("	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, \"Nit\", __VA_ARGS__)")
+		self.header.add_decl("#elif TARGET_OS_IPHONE")
+		self.header.add_decl("	#define PRINT_ERROR(...) syslog(LOG_ERR, __VA_ARGS__)")
 		self.header.add_decl("#else")
 		self.header.add_decl("	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)")
 		self.header.add_decl("#endif")
@@ -715,9 +809,10 @@ abstract class AbstractCompiler
 		self.header.add_decl """
 struct catch_stack_t {
 	int cursor;
-	jmp_buf envs[100];
+	int currentSize;
+	jmp_buf *envs;
 };
-extern struct catch_stack_t catchStack;
+extern struct catch_stack_t *getCatchStack();
 """
 	end
 
@@ -818,7 +913,44 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
-		v.add_decl("struct catch_stack_t catchStack;")
+
+		# Store catch stack in thread local storage
+		v.add_decl """
+#if defined(TARGET_OS_IPHONE)
+	// Use pthread_key_create and others for iOS
+	#include <pthread.h>
+
+	static pthread_key_t catch_stack_key;
+	static pthread_once_t catch_stack_key_created = PTHREAD_ONCE_INIT;
+
+	static void create_catch_stack()
+	{
+		pthread_key_create(&catch_stack_key, NULL);
+	}
+
+	struct catch_stack_t *getCatchStack()
+	{
+		pthread_once(&catch_stack_key_created, &create_catch_stack);
+		struct catch_stack_t *data = pthread_getspecific(catch_stack_key);
+		if (data == NULL) {
+			data = malloc(sizeof(struct catch_stack_t));
+			data->cursor = -1;
+			data->currentSize = 0;
+			data->envs = NULL;
+			pthread_setspecific(catch_stack_key, data);
+		}
+		return data;
+	}
+#else
+	// Use __thread when available
+	__thread struct catch_stack_t catchStack = {-1, 0, NULL};
+
+	struct catch_stack_t *getCatchStack()
+	{
+		return &catchStack;
+	}
+#endif
+"""
 
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 			for tag in count_type_test_tags do
@@ -878,11 +1010,17 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("\}")
 
 		v.add_decl("void sig_handler(int signo)\{")
+		v.add_decl "#ifdef _WIN32"
+		v.add_decl "PRINT_ERROR(\"Caught signal : %s\\n\", signo);"
+		v.add_decl "#else"
 		v.add_decl("PRINT_ERROR(\"Caught signal : %s\\n\", strsignal(signo));")
+		v.add_decl "#endif"
 		v.add_decl("show_backtrace();")
 		# rethrows
 		v.add_decl("signal(signo, SIG_DFL);")
+		v.add_decl "#ifndef _WIN32"
 		v.add_decl("kill(getpid(), signo);")
+		v.add_decl "#endif"
 		v.add_decl("\}")
 
 		v.add_decl("void fatal_exit(int status) \{")
@@ -908,10 +1046,11 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
 		v.add "#endif"
+		v.add "#ifndef _WIN32"
 		v.add("signal(SIGPIPE, SIG_IGN);")
+		v.add "#endif"
 
 		v.add("glob_argc = argc; glob_argv = argv;")
-		v.add("catchStack.cursor = -1;")
 		v.add("initialize_gc_option();")
 
 		v.add "initialize_nitni_global_refs();"
@@ -1134,25 +1273,41 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 	fun finalize_ffi_for_module(mmodule: MModule) do mmodule.finalize_ffi(self)
 end
 
-# A file unit (may be more than one file if
-# A file unit aim to be autonomous and is made or one or more `CodeWriter`s
+# C code file generated from the `writers` and the `required_declarations`
+#
+# A file unit aims to be autonomous and is made or one or more `CodeWriter`s.
 class CodeFile
+	# Basename of the file, will be appended by `.h` and `.c`
 	var name: String
+
+	# `CodeWriter` used in sequence to fill the top of the body, then the bottom
 	var writers = new Array[CodeWriter]
+
+	# Required declarations keys
+	#
+	# See: `provide_declaration`
 	var required_declarations = new HashSet[String]
 end
 
-# Where to store generated lines
+# Store generated lines
+#
+# Instances are added to `file.writers` at construction.
 class CodeWriter
+	# Parent `CodeFile`
 	var file: CodeFile
+
+	# Main lines of code (written at the bottom of the body)
 	var lines = new Array[String]
+
+	# Lines of code for declarations (written at the top of the body)
 	var decl_lines = new Array[String]
 
-	# Add a line in the main part of the generated C
+	# Add a line in the main lines of code (to `lines`)
 	fun add(s: String) do self.lines.add(s)
 
-	# Add a line in the
-	# (used for local or global declaration)
+	# Add a declaration line (to `decl_lines`)
+	#
+	# Used for local and global declaration.
 	fun add_decl(s: String) do self.decl_lines.add(s)
 
 	init
@@ -1212,6 +1367,12 @@ abstract class AbstractCompilerVisitor
 	# Store an element in a native array.
 	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
+
+	# Instantiate a new routine pointer
+	fun routine_ref_instance(routine_mclass_type: MClassType, recv: RuntimeVariable, callsite: CallSite): RuntimeVariable is abstract
+
+	# Call the underlying referenced function
+	fun routine_ref_call(mmethoddef: MMethodDef, args: Array[RuntimeVariable]) is abstract
 
 	# Allocate `size` bytes with the low_level `nit_alloc` C function
 	#
@@ -1292,6 +1453,11 @@ abstract class AbstractCompilerVisitor
 	do
 		mtype = self.anchor(mtype)
 		var valmtype = value.mcasttype
+
+		# CPrimitive is the best you can do
+		if valmtype.is_c_primitive then
+			return value
+		end
 
 		# Do nothing if useless autocast
 		if valmtype.is_subtype(self.compiler.mainmodule, null, mtype) then
@@ -1375,7 +1541,7 @@ abstract class AbstractCompilerVisitor
 	# Checks
 
 	# Can value be null? (according to current knowledge)
-	fun maybenull(value: RuntimeVariable): Bool
+	fun maybe_null(value: RuntimeVariable): Bool
 	do
 		return value.mcasttype isa MNullableType or value.mcasttype isa MNullType
 	end
@@ -1385,7 +1551,7 @@ abstract class AbstractCompilerVisitor
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
 
-		if maybenull(recv) then
+		if maybe_null(recv) then
 			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
@@ -1437,7 +1603,7 @@ abstract class AbstractCompilerVisitor
 	end
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
-	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
+	# NOTE: we do not return a `RuntimeVariable` "CString" as the class may not exist in the module/program
 	fun class_name_string(value: RuntimeVariable): String is abstract
 
 	# Variables handling
@@ -1556,7 +1722,7 @@ abstract class AbstractCompilerVisitor
 	fun int8_instance(value: Int8): RuntimeVariable
 	do
 		var t = mmodule.int8_type
-		var res = new RuntimeVariable("((int8_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT8_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1564,7 +1730,7 @@ abstract class AbstractCompilerVisitor
 	fun int16_instance(value: Int16): RuntimeVariable
 	do
 		var t = mmodule.int16_type
-		var res = new RuntimeVariable("((int16_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT16_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1572,7 +1738,7 @@ abstract class AbstractCompilerVisitor
 	fun uint16_instance(value: UInt16): RuntimeVariable
 	do
 		var t = mmodule.uint16_type
-		var res = new RuntimeVariable("((uint16_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("UINT16_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1580,7 +1746,7 @@ abstract class AbstractCompilerVisitor
 	fun int32_instance(value: Int32): RuntimeVariable
 	do
 		var t = mmodule.int32_type
-		var res = new RuntimeVariable("((int32_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("INT32_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1588,7 +1754,7 @@ abstract class AbstractCompilerVisitor
 	fun uint32_instance(value: UInt32): RuntimeVariable
 	do
 		var t = mmodule.uint32_type
-		var res = new RuntimeVariable("((uint32_t){value.to_s})", t, t)
+		var res = new RuntimeVariable("UINT32_C({value.to_s})", t, t)
 		return res
 	end
 
@@ -1607,10 +1773,10 @@ abstract class AbstractCompilerVisitor
 	# Generate a float value
 	#
 	# FIXME pass a Float, not a string
-	fun float_instance(value: String): RuntimeVariable
+	fun float_instance(value: Float): RuntimeVariable
 	do
 		var t = mmodule.float_type
-		var res = new RuntimeVariable("{value}", t, t)
+		var res = new RuntimeVariable("{value.to_hexa_exponential_notation}", t, t)
 		return res
 	end
 
@@ -1630,13 +1796,13 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
-	# Generates a NativeString instance fully escaped in C-style \xHH fashion
-	fun native_string_instance(ns: NativeString, len: Int): RuntimeVariable do
-		var mtype = mmodule.native_string_type
+	# Generates a CString instance fully escaped in C-style \xHH fashion
+	fun c_string_instance(ns: CString, len: Int): RuntimeVariable do
+		var mtype = mmodule.c_string_type
 		var nat = new_var(mtype)
 		var byte_esc = new Buffer.with_cap(len * 4)
 		for i in [0 .. len[ do
-			byte_esc.append("\\x{ns[i].to_s.substring_from(2)}")
+			byte_esc.append("\\x{ns[i].to_hex}")
 		end
 		self.add("{nat} = \"{byte_esc}\";")
 		return nat
@@ -1652,12 +1818,12 @@ abstract class AbstractCompilerVisitor
 		self.add("if (likely({name}!=NULL)) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var native_mtype = mmodule.native_string_type
+		var native_mtype = mmodule.c_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var byte_length = self.int_instance(string.byte_length)
 		var unilen = self.int_instance(string.length)
-		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, byte_length, unilen]).as(not null)};")
+		self.add("{res} = {self.send(self.get_property("to_s_unsafe", native_mtype), [nat, byte_length, unilen, value_instance(false), value_instance(false)]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -1750,17 +1916,33 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
-		self.add("if(catchStack.cursor >= 0)\{")
-		self.add("longjmp(catchStack.envs[catchStack.cursor], 1);")
-		self.add("\}")
+		add_raw_throw
 		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
 		add_raw_abort
 	end
 
+	# Generate a long jump if there is a catch block.
+	#
+	# This method should be called before the error messages and before a `add_raw_abort`.
+	fun add_raw_throw
+	do
+		self.add("\{")
+		self.add("struct catch_stack_t *catchStack = getCatchStack();")
+		self.add("if(catchStack->cursor >= 0)\{")
+		self.add("	longjmp(catchStack->envs[catchStack->cursor], 1);")
+		self.add("\}")
+		self.add("\}")
+	end
+
+	# Generate abort without a message.
+	#
+	# Used when one need a more complex message.
+	# Do not forget to call `add_raw_abort` before the display of a custom user message.
 	fun add_raw_abort
 	do
-		if self.current_node != null and self.current_node.location.file != null and
-				self.current_node.location.file.mmodule != null then
+		var current_node = self.current_node
+		if current_node != null and current_node.location.file != null and
+				current_node.location.file.mmodule != null then
 			var f = "FILE_{self.current_node.location.file.mmodule.c_name}"
 			self.require_declaration(f)
 			self.add("PRINT_ERROR(\" (%s:%d)\\n\", {f}, {current_node.location.line_start});")
@@ -1775,6 +1957,7 @@ abstract class AbstractCompilerVisitor
 	do
 		var res = self.type_test(value, mtype, tag)
 		self.add("if (unlikely(!{res})) \{")
+		self.add_raw_throw
 		var cn = self.class_name_string(value)
 		self.add("PRINT_ERROR(\"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
 		self.add_raw_abort
@@ -1870,7 +2053,26 @@ abstract class AbstractCompilerVisitor
 end
 
 # A C function associated to a Nit method
-# Because of customization, a given Nit method can be compiler more that once
+# This is the base class for all runtime representation of a nit method.
+# It implements the Template Design Pattern whose steps are :
+#       1. create the receiver `RuntimeVariable` (selfvar)
+#       2. create a `StaticFrame`
+#       3. resolve the return type.
+#       4. write the function signature
+#       5. Declare the function signature (for C header files)
+#       6. writer the function body
+#       7. post-compiler hook (optional)
+# Each step is called in `AbstractRuntimeFunction::compile_to_c`. A default
+# body is provided foreach step except for compilation hooks. Subclasses may
+# redefine any of the above mentioned steps. However, it's not recommanded
+# to override `compile_to_c` since there's an ordering of the compilation steps.
+# Any information between steps must be saved in the visitor. Currently most
+# of the future runtime info are stored in the `StaticFrame` of the visitor,
+# e.g. the receiver (selfvar), the arguments, etc.
+#
+# Moreover, any subclass may redefine : the receiver type, the return type and
+# the signature. This allow for a better customization for the final implementation.
+# Because of customization, a given Nit method can be compile more that once.
 abstract class AbstractRuntimeFunction
 
 	type COMPILER: AbstractCompiler
@@ -1878,6 +2080,8 @@ abstract class AbstractRuntimeFunction
 
 	# The associated Nit method
 	var mmethoddef: MMethodDef
+
+	protected var return_mtype: nullable MType = null
 
 	# The mangled c name of the runtime_function
 	# Subclasses should redefine `build_c_name` instead
@@ -1890,6 +2094,8 @@ abstract class AbstractRuntimeFunction
 		return res
 	end
 
+	fun c_ref: String do return "&{c_name}"
+
 	# Non cached version of `c_name`
 	protected fun build_c_name: String is abstract
 
@@ -1899,9 +2105,244 @@ abstract class AbstractRuntimeFunction
 	# May inline the body or generate a C function call
 	fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	# Generate the code for the `AbstractRuntimeFunction`
-	# Warning: compile more than once compilation makes CC unhappy
-	fun compile_to_c(compiler: COMPILER) is abstract
+	# Returns `true` if the associated `mmethoddef`'s return type isn't null,
+	# otherwise `false`.
+	fun has_return: Bool
+	do
+		return mmethoddef.msignature.return_mtype != null
+	end
+
+	# The current msignature to use when compiling : `signature_to_c` and `body_to_c`.
+	# This method is useful since most concrete implementation doesn't use the
+	# mmethoddef's signature. By providing a definition in the abstract class,
+	# subclasses can use any msignature.
+	fun msignature: MSignature
+	do
+		return mmethoddef.msignature.as(not null)
+	end
+
+	# The current receiver type to compile : `signature_to_c` and `body_to_c`.
+	# See `msignature` method for more information.
+	protected fun recv_mtype: MType
+	do
+		return mmethoddef.mclassdef.bound_mtype
+	end
+
+	# Prepare the `self` runtime variable to be used by the rest of
+	# compilation steps.
+	# Step 1
+	protected fun resolve_receiver(v: VISITOR): RuntimeVariable
+	do
+		var casttype = mmethoddef.mclassdef.bound_mtype
+		return new RuntimeVariable("self", recv_mtype, casttype)
+	end
+
+	# Builds the static frame for current runtime method
+	# Step 2
+	protected fun build_frame(v: VISITOR, arguments: Array[RuntimeVariable]): StaticFrame
+	do
+		return new StaticFrame(v, mmethoddef, recv_mtype.as(MClassType), arguments)
+	end
+
+	# Step 3 : Returns the return type used by the runtime function.
+	protected fun resolve_return_mtype(v: VISITOR)
+	do
+		return_mtype = msignature.return_mtype
+	end
+
+	# Fills the argument array inside v.frame.arguments, calling `resolve_ith_parameter`
+	# for each parameter.
+	private fun fill_parameters(v: VISITOR)
+	do
+		assert v.frame != null
+		for i in [0..msignature.arity[ do
+			var arg = resolve_ith_parameter(v, i)
+			v.frame.arguments.add(arg)
+		end
+	end
+
+	# Step 4 : Creates `RuntimeVariable` for each method argument.
+	protected fun resolve_ith_parameter(v: VISITOR, i: Int): RuntimeVariable
+	do
+		var mp = msignature.mparameters[i]
+		var mtype = mp.mtype
+		if mp.is_vararg then
+			mtype = v.mmodule.array_type(mtype)
+		end
+		return new RuntimeVariable("p{i}", mtype, mtype)
+	end
+
+	# Generate the code for the signature with an open curly brace
+	#
+	# Returns the generated signature without a semicolon and curly brace,
+	# e.g `RES f(T0 p0, T1 p1, ..., TN pN)`
+	# Step 5
+	protected fun signature_to_c(v: VISITOR): String
+	do
+		assert v.frame != null
+		var arguments = v.frame.arguments
+		var comment = new FlatBuffer
+		var selfvar = v.frame.selfvar
+		var c_ret = "void"
+		if has_return then
+			c_ret = "{return_mtype.ctype}"
+		end
+		var sig = new FlatBuffer
+		sig.append("{c_ret} {c_name}({recv_mtype.ctype} self")
+		comment.append("({selfvar}: {selfvar.mtype}")
+
+		for i in [0..arguments.length-1[ do
+			# Skip the receiver
+			var arg = arguments[i+1]
+			comment.append(", {arg.mtype}")
+			sig.append(", {arg.mtype.ctype} p{i}")
+		end
+		sig.append(")")
+		comment.append(")")
+		if has_return then
+			comment.append(": {return_mtype.as(not null)}")
+		end
+		v.add_decl("/* method {self} for {comment} */")
+		v.add_decl("{sig} \{")
+		return sig.to_s
+	end
+
+	# How the concrete compiler will declare the method, e.g inside a global header file,
+	# extern signature, etc.
+	# Step 6
+	protected fun declare_signature(v: VISITOR, signature: String) is abstract
+
+	# Generate the code for the body without return statement at the end and
+	# no curly brace.
+	# Step 7
+	protected fun body_to_c(v: VISITOR)
+	do
+		mmethoddef.compile_inside_to_c(v, v.frame.arguments)
+	end
+
+	# Hook called at the end of `compile_to_c` function. This function
+	# is useful if you need to register any function compiled to c.
+	# Step 8 (optional).
+	protected fun end_compile_to_c(v: VISITOR)
+	do
+		# Nothing to do by default
+	end
+
+	# Generate the code
+	fun compile_to_c(compiler: COMPILER)
+	do
+		var v = compiler.new_visitor
+		var selfvar = resolve_receiver(v)
+		var arguments = [selfvar]
+		var frame = build_frame(v, arguments)
+		v.frame = frame
+
+		resolve_return_mtype(v)
+		fill_parameters(v)
+
+		# WARNING: the signature must be declared before creating
+		# any returnlabel and returnvar (`StaticFrame`). Otherwise,
+		# you could end up with variable outside the function.
+		var sig = signature_to_c(v)
+		declare_signature(v, sig)
+
+		frame.returnlabel = v.get_name("RET_LABEL")
+		if has_return then
+			var ret_mtype = return_mtype
+			assert ret_mtype != null
+			frame.returnvar = v.new_var(ret_mtype)
+		end
+
+		body_to_c(v)
+		v.add("{frame.returnlabel.as(not null)}:;")
+		if has_return then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+		v.add "\}"
+		end_compile_to_c(v)
+	end
+end
+
+# Base class for all thunk-like function. A thunk is a function whose purpose
+# is to call another function. Like a class wrapper or decorator, a thunk is used
+# to computer things (conversions, log, etc) before or after a function call. It's
+# an intermediary between the caller and the callee.
+#
+# The most basic use of a thunk is to unbox its argument before invoking the real callee.
+# Virtual functions are a use case of thunk function:
+#
+# ~~~~nitish
+# redef class Object
+#       fun toto(x: Int): Int do return 1 + x
+# end
+# redef class Int
+#       redef fun toto(x) do return x + self
+# end
+#
+# ```generated C code
+# long Object__toto(val* self, long x) { return 1 + x }
+# long Int__toto(long self, long x) { return x + self }
+# long THUNK_Int__toto(val* self, long x) {
+#       long self2 = (long)(self)>>2    // Unboxing from Object to Int
+#       return Int_toto(self2, x)
+# }
+#
+# ```
+# ~~~~
+#
+# A thunk has its OWN SIGNATURE and is considered like any other `AbstractRuntimeFunction`.
+# Thus, one might need to be careful when overriding parent's method. Since most usage of
+# thunks in Nit is to unbox and box things between a caller and a callee, the default
+# implementation is doing just that. In other words, a thunk takes a signature and a method
+# and tries to cast its signature to the underlying method's signature.
+#
+# A virtual function has the same signature as its `mmethoddef` field, except for
+# its receiver is of type `Object`.
+# In the same vibe, a call reference has all of its argument boxed as `Object`.
+abstract class ThunkFunction
+	super AbstractRuntimeFunction
+
+	# Determines if the callsite should be polymorphic or static.
+	var polymorph_call_flag = false is writable
+
+	# The type expected by the callee. Used to resolve `mmethoddef`'s formal
+	# parameters and virtual type. This type must NOT need anchor.
+	fun target_recv: MType is abstract
+
+	redef fun body_to_c(v)
+	do
+		assert not target_recv.need_anchor
+		var frame = v.frame
+		assert frame != null
+		var selfvar = frame.selfvar
+		var arguments = frame.arguments
+		var arguments2 = new Array[RuntimeVariable]
+		arguments2.push(v.autobox(selfvar, target_recv))
+		var resolved_sig = msignature.resolve_for(target_recv, target_recv.as(MClassType), v.mmodule, true)
+		for i in [0..resolved_sig.arity[ do
+		var param = resolved_sig.mparameters[i]
+			var mtype = param.mtype
+			if param.is_vararg then
+				mtype = v.mmodule.array_type(mtype)
+			end
+			var temp = v.autobox(arguments[i+1], mtype)
+			arguments2.push(temp)
+		end
+		v.add("/* {mmethoddef}, {recv_mtype.ctype} */")
+		var subret: nullable RuntimeVariable = null
+		if polymorph_call_flag then
+			subret = v.send(mmethoddef.mproperty, arguments2)
+		else
+			subret = v.call(mmethoddef, arguments2[0].mcasttype.as(MClassType), arguments2)
+		end
+		if has_return then
+			assert subret != null
+			var subret2 = v.autobox(subret, return_mtype.as(not null))
+			v.assign(frame.returnvar.as(not null), subret2)
+		end
+
+	end
+
 end
 
 # A runtime variable hold a runtime value in C.
@@ -1978,6 +2419,14 @@ class StaticFrame
 
 	# The array comprehension currently filled, if any
 	private var comprehension: nullable RuntimeVariable = null
+
+	# Returns the first argument (the receiver) of a frame.
+	# REQUIRE: arguments.length >= 1
+	fun selfvar: RuntimeVariable
+	do
+		assert arguments.length >= 1
+		return arguments.first
+	end
 end
 
 redef class MType
@@ -2019,7 +2468,7 @@ redef class MClassType
 			return "int32_t"
 		else if mclass.name == "UInt32" then
 			return "uint32_t"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
@@ -2061,7 +2510,7 @@ redef class MClassType
 			return "i32"
 		else if mclass.name == "UInt32" then
 			return "u32"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "str"
 		else if mclass.name == "NativeArray" then
 			#return "{self.arguments.first.ctype}*"
@@ -2104,6 +2553,7 @@ redef class MMethodDef
 		var node = modelbuilder.mpropdef2node(self)
 
 		if is_abstract then
+			v.add_raw_throw
 			var cn = v.class_name_string(arguments.first)
 			v.current_node = node
 			v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mproperty.name.escape_to_c}\", {cn});")
@@ -2215,6 +2665,7 @@ redef class AMethPropdef
 		end
 
 		# We have a problem
+		v.add_raw_throw
 		var cn = v.class_name_string(arguments.first)
 		v.add("PRINT_ERROR(\"Runtime error: uncompiled method `%s` called on `%s`. NOT YET IMPLEMENTED\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
 		v.add_raw_abort
@@ -2235,9 +2686,16 @@ redef class AMethPropdef
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
 		var ret = mpropdef.msignature.return_mtype
-		if ret != null then
+		var compiler = v.compiler
+
+		# WARNING: we must not resolve the return type when it's a functional type.
+		# Otherwise, we get a compile error exactly here. Moreover, `routine_ref_call`
+		# already handles the return type. NOTE: this warning only apply when compiling
+		# in `semi-global`.
+		if ret != null and not compiler.all_routine_types_name.has(cname) then
 			ret = v.resolve_for(ret, arguments.first)
 		end
+
 		if pname != "==" and pname != "!=" then
 			v.adapt_signature(mpropdef, arguments)
 			v.unbox_signature_extern(mpropdef, arguments)
@@ -2530,7 +2988,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
-		else if cname == "NativeString" then
+		else if cname == "CString" then
 			if pname == "[]" then
 				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}[{arguments[1]}])", ret.as(not null)))
 				return true
@@ -2554,14 +3012,14 @@ redef class AMethPropdef
 				v.ret(v.new_expr("!{res}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				var alloc = v.nit_alloc(arguments[1].to_s, "NativeString")
+				var alloc = v.nit_alloc(arguments[1].to_s, "CString")
 				v.ret(v.new_expr("(char*){alloc}", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_chars" then
-				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
+				v.ret(v.new_expr("*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
 				return true
 			else if pname == "fetch_4_hchars" then
-				v.ret(v.new_expr("(long)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -3001,9 +3459,12 @@ redef class AMethPropdef
 				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
 				return true
 			end
+		else if compiler.all_routine_types_name.has(cname) then
+			v.routine_ref_call(mpropdef, arguments)
+			return true
 		end
 		if pname == "exit" then
-			v.add("exit({arguments[1]});")
+			v.add("exit((int){arguments[1]});")
 			return true
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
@@ -3136,7 +3597,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			var recv = arguments.first
 			var arg = arguments[1]
-			if is_optional and v.maybenull(arg) then
+			if is_optional and v.maybe_null(arg) then
 				var value = v.new_var(self.mpropdef.static_mtype.as(not null))
 				v.add("if ({arg} == NULL) \{")
 				v.assign(value, evaluate_expr(v, recv))
@@ -3415,13 +3876,24 @@ redef class ADoExpr
 	redef fun stmt(v)
 	do
 		if self.n_catch != null then
-			v.add("catchStack.cursor += 1;")
-			v.add("if(!setjmp(catchStack.envs[catchStack.cursor]))\{")
+			v.add("\{")
+			v.add("struct catch_stack_t *catchStack = getCatchStack();")
+			v.add("if(catchStack->currentSize == 0) \{")
+			v.add("		catchStack->cursor = -1;")
+			v.add("		catchStack->currentSize = 100;")
+			v.add("		catchStack->envs = malloc(sizeof(jmp_buf)*100);")
+			v.add("\} else if(catchStack->cursor == catchStack->currentSize - 1) \{")
+			v.add("		catchStack->currentSize *= 2;")
+			v.add("		catchStack->envs = realloc(catchStack->envs, sizeof(jmp_buf)*catchStack->currentSize);")
+			v.add("\}")
+			v.add("catchStack->cursor += 1;")
+			v.add("if(!setjmp(catchStack->envs[catchStack->cursor]))\{")
 			v.stmt(self.n_block)
-			v.add("catchStack.cursor -= 1;")
+			v.add("catchStack->cursor -= 1;")
 			v.add("\}else \{")
-			v.add("catchStack.cursor -= 1;")
+			v.add("catchStack->cursor -= 1;")
 			v.stmt(self.n_catch)
+			v.add("\}")
 			v.add("\}")
 		else
 			v.stmt(self.n_block)
@@ -3527,6 +3999,9 @@ redef class AAssertExpr
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (unlikely(!{cond})) \{")
 		v.stmt(self.n_else)
+
+		explain_assert v
+
 		var nid = self.n_id
 		if nid != null then
 			v.add_abort("Assert '{nid.text}' failed")
@@ -3534,6 +4009,27 @@ redef class AAssertExpr
 			v.add_abort("Assert failed")
 		end
 		v.add("\}")
+	end
+
+	# Explain assert if it fails
+	private fun explain_assert(v: AbstractCompilerVisitor)
+	do
+		var explain_assert_str = explain_assert_str
+		if explain_assert_str == null then return
+
+		var nas = v.compiler.modelbuilder.model.get_mclasses_by_name("NativeArray")
+		if nas == null then return
+
+		nas = v.compiler.modelbuilder.model.get_mclasses_by_name("Array")
+		if nas == null or nas.is_empty then return
+
+		var expr = explain_assert_str.expr(v)
+		if expr == null then return
+
+		var cstr = v.send(v.get_property("to_cstring", expr.mtype), [expr])
+		if cstr == null then return
+
+		v.add "PRINT_ERROR(\"Runtime assert: %s\\n\", {cstr});"
 	end
 end
 
@@ -3596,7 +4092,7 @@ redef class AOrElseExpr
 		var res = v.new_var(self.mtype.as(not null))
 		var i1 = v.expr(self.n_expr, null)
 
-		if not v.maybenull(i1) then return i1
+		if not v.maybe_null(i1) then return i1
 
 		v.add("if ({i1}!=NULL) \{")
 		v.assign(res, i1)
@@ -3623,13 +4119,14 @@ redef class AIntegerExpr
 end
 
 redef class AFloatExpr
-	redef fun expr(v) do return v.float_instance("{self.n_float.text}") # FIXME use value, not n_float
+	redef fun expr(v) do return v.float_instance(self.value.as(Float))
 end
 
 redef class ACharExpr
 	redef fun expr(v) do
-		if is_ascii then return v.byte_instance(value.as(not null).ascii)
-		if is_code_point then return v.int_instance(value.as(not null).code_point)
+		if is_code_point then
+			return v.int_instance(value.as(not null).code_point)
+		end
 		return v.char_instance(self.value.as(not null))
 	end
 end
@@ -3698,7 +4195,7 @@ redef class AStringExpr
 		var s = v.string_instance(value)
 		if is_string then return s
 		if is_bytestring then
-			var ns = v.native_string_instance(bytes.items, bytes.length)
+			var ns = v.c_string_instance(bytes.items, bytes.length)
 			var ln = v.int_instance(bytes.length)
 			var cs = to_bytes_with_copy
 			assert cs != null
@@ -3772,7 +4269,7 @@ redef class ASuperstringExpr
 			v.native_array_set(a, i, e)
 		end
 
-		# Fast join the native string to get the result
+		# Fast join the C string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
 		assert res != null
 
@@ -3849,7 +4346,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		if not v.maybenull(i) then return i
+		if not v.maybe_null(i) then return i
 
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
@@ -3887,10 +4384,33 @@ redef class ASendExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr, null)
+		if is_safe then
+			v.add "if ({recv}!=NULL) \{"
+		end
 		var callsite = self.callsite.as(not null)
 		if callsite.is_broken then return null
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
-		return v.compile_callsite(callsite, args)
+		var res = v.compile_callsite(callsite, args)
+		if is_safe then
+			if res != null then
+				var orig_res = res
+				res = v.new_var(self.mtype.as(not null))
+				v.add("{res} = {orig_res};")
+				v.add("\} else \{")
+				v.add("{res} = NULL;")
+			end
+			v.add("\}")
+		end
+		return res
+	end
+end
+
+redef class ACallrefExpr
+	redef fun expr(v)
+	do
+		var recv = v.expr(self.n_expr, null)
+		var res = v.routine_ref_instance(mtype.as(MClassType), recv, callsite.as(not null))
+		return res
 	end
 end
 
@@ -4058,6 +4578,13 @@ redef class AVarargExpr
 	end
 end
 
+redef class ASafeExpr
+	redef fun expr(v)
+	do
+		return v.expr(self.n_expr, null)
+	end
+end
+
 redef class ANamedargExpr
 	redef fun expr(v)
 	do
@@ -4129,6 +4656,10 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
+if toolcontext.opt_run.value then
+	# When --run, only the first is the program, the rest is the run arguments
+	arguments = [toolcontext.option_context.rest.shift]
+end
 if arguments.length > 1 and toolcontext.opt_output.value != null then
 	print "Option Error: --output needs a single source file. Do you prefer --dir?"
 	exit 1

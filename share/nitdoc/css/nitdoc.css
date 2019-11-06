@@ -1,271 +1,116 @@
 /*
- * Global
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
+/* Top menu */
+
+.navbar-fixed-top {
+	background-color: #1E9431;
+	box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.navbar-brand > a {
+	color: #fff;
+}
+
+.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border-color: transparent;
+}
+
+.navbar-toggle {
+	float: left;
+}
+
+/* Body */
 
 body {
-	text-align: justify;
+	background: #f2f2f2;
+	margin-top: 70px;
+	margin-bottom: 70px;
 }
 
-a:hover {
-	text-decoration: none;
-}
-
-ul li .label {
-	padding: 1px 4px;
-	font-size: 70%;
-	vertical-align: middle;
-	border-radius: .25em;
-	margin: 3px;
-	font-family: monospace;
-}
-
-code {
-	color: #333;
-	border: 1px solid #ddd;
-}
-
-pre code {
-	border: none;
-}
-
-.navbar-default .navbar-toggle {
-	margin-top: 2px;
-	padding: 5px 10px;
-}
-
-h3 {
-	margin: 10px 0;
-}
-
-article {
-	padding: 10px 0px;
-}
-
-article.nospace {
-	padding: 0;
-	margin: 0;
-}
-
-/*
- * Sidebar
- */
-
-#sidebar .panel {
-	margin-top: 15px;
-	box-shadow: none;
-}
-
-#sidebar .panel-heading {
-	padding: 3px 0 0 0;
-	font-size: 16px;
-}
-
-#sidebar .panel-body {
-	padding: 0;
-}
-
-#sidebar .panel-body ul>li>a {
-	padding: 0;
-}
-
-#sidebar .panel-body ul>li {
-	padding: 0 0 0 15px;
-	font-size: 15px;
-	color: #333;
-}
-
-#sidebar .panel-body ul ul>li,
-#sidebar .panel-body ul ul>li a {
-	padding: 0 0 0 0;
-	font-size: 14px;
+h1, h2, h3, h4, h5, h6 {
 	color: #666;
 }
 
-#sidebar .panel-body ul ul ul>li {
-	font-size: 13px;
-	color: #999;
+.page-header {
+    margin-top: 0;
+    border: none;
 }
 
-#sidebar .panel-heading a:hover, #sidebar .panel ul a:hover {
-	color: #0d8921;
-	background-color: transparent;
+#sidebar { margin-top: 15px; }
+
+pre {
+	white-space: pre-wrap;
 }
-
-#sidebar .summary .nav>li>a {
-	padding: 3px 0 0 10px;
-	font-size: 15px;
-	border-left: 2px solid transparent;
-	color: #333;
-}
-
-#sidebar .summary .nav .nav>li>a {
-	padding-top: 2px;
-	padding-left: 15px;
-	font-size: 14px;
-	color: #666;
-}
-
-#sidebar .summary .nav .nav .nav>li>a {
-	padding-left: 20px;
-	font-size: 13px;
-	color: #999;
-}
-
-#sidebar .summary .nav .nav .nav .nav>li>a {
-	font-size: 12px;
-	color: #CCC;
-}
-
-#sidebar .summary .nav>.active>a,
-#sidebar .summary .nav>.active>a:hover,
-#sidebar .summary .nav>li>a:hover {
-	color: #0d8921;
-	background-color: transparent;
-}
-
-#sidebar .summary .nav>.active>a,
-#sidebar .summary .nav>.active>a:hover,
-#sidebar .summary .nav .nav>.active>a,
-#sidebar .summary .nav .nav>.active>a:hover,
-#sidebar .summary .nav .nav .nav>.active>a,
-#sidebar .summary .nav .nav .nav>.active>a:hover {
-	color: #0d8921;
-	border-left: 2px solid #0d8921;
-	margin-left: 0px;
-}
-
-#sidebar .summary .nav>li>a:hover,
-#sidebar .summary .nav .nav>li>a:hover,
-#sidebar .summary .nav .nav .nav>li>a:hover {
-	color: #0d8921;
-	border-left: 1px solid #0d8921;
-	margin-left: 1px;
-	background-color: transparent;
-}
-
-/*
- * Content
- */
-
-#content {
-	position: fixed;
-	top: 30px;
-	bottom: 0;
-	left: 10px;
-	right: 15px;
-}
-
-#content>.col {
-	height: 100%;
-	overflow-y: scroll;
-}
-
-#content>.col::-webkit-scrollbar-thumb {
-	background: transparent;
-}
-
-#content>.col:hover::-webkit-scrollbar-thumb {
-	background: #CCC;
-	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
-}
-
-#content>.col::-webkit-scrollbar {
-    width: 7px;
-	height: 7px;
-}
-
-#content>.col::-webkit-scrollbar-thumb:hover {
-	background: #999;
-}
-
-#content>.col::-webkit-scrollbar-corner {
-	background: transparent;
-}
-
-#content>.col::-webkit-scrollbar-button {
-	width: 0;
-	height: 0;
-	display: none;
-}
-
-#content article:target {
-	padding-left: 10px;
-	margin-left: -10px;
-	border-left: 2px solid #0d8921;
-}
-
-
-.pull-right .dropdown-toggle {
-	padding: 0 5px;
-}
-
-/* Hide the "..." link */
-
-article .dropdown, article .dropdown {
-	visibility: hidden;
-}
-article:hover .dropdown, article:target .dropdown {
-	visibility: visible;
-}
-
-/*
- * Page parts
- */
 
 .footer {
+	color: #999;
+	text-align: center;
 	padding: 10px;
 	margin: 20px 0;
 }
 
-.subtitle {
-	margin-bottom: 10px;
+/* ui */
+
+.btn-bar { margin-top: -5px; float: right }
+.btn-bar .btn { padding: 5px 10px; }
+
+/* Doc */
+
+.nitdoc > *:first-child {
+	margin-top: 0;
 }
 
-.label:empty {
-	display:inline;
+.signature {
+	color: #777;
+	font-family: monospace;
 }
 
-.label.intro:before {
-	content: "I";
-}
-.label.redef:before {
-	content: "R";
-}
-.label.inherit:before {
-	content: "H";
+.signature .name {
+	font-weight: bold;
 }
 
-.signature span.glyphicon {
-	margin: 0 10px 5px 0;
-	font-size: 55%;
-	vertical-align: middle;
+.page-header .signature .name, .signature .signature .name {
+	font-weight: normal;
 }
 
-.signature a, .list-definition a, .info.signature a {
-	color: #0d8921;
-}
+/* Summary */
 
-.info {
-	color: #888;
-}
+.summary h1 { font-size: 14px; margin: 10px 0 5px 0;   font-weight: bold; }
+.summary h2 { font-size: 13px; margin:  9px 0 5px 5px; font-weight: bold; }
+.summary h3 { font-size: 12px; margin:  8px 0 5px 10px; }
+.summary h4 { font-size: 11px; margin:  7px 0 5px 15px; }
+.summary h5 { font-size: 10px; margin:  6px 0 5px 20px; }
+.summary h6 { font-size:  9px; margin:  5px 0 5px 25px; }
 
-.info a {
-	color: #666;
-}
+.summary a, .summary a:hover { color: #666; }
 
-.info a:hover {
+/*
+ * Nit
+ */
+
+.nitdoc h1, .nitdoc h2, .nitdoc h3, .nitdoc h4, .nitdoc h5, .nitdoc h6 {
 	color: #333;
 }
 
-.graph {
-	text-align: center;
-}
-
-.nitdoc .synopsys {
-	margin: 5px 0;
-	font-size: 16px;
-	font-weight: bold;
-	line-height: 1.4;
+.nitdoc .synopsis {
+	margin-top: 0;
 }
 
 .public {
@@ -279,41 +124,3 @@ article:hover .dropdown, article:target .dropdown {
 .private {
 	color: #a94442;
 }
-
-.list-definition .list-definition {
-	margin-left: 30px;
-}
-
-/*
- * Code Highlighting
- */
-
-.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
-.nitcode a:hover { text-decoration: underline; } /* underline links */
-.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
-/* lexical raw tokens. independent of usage or semantic: */
-.nitcode .nc_c { color: gray; font-style: italic; } /* comment */
-.nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
-.nitcode .nc_k { font-weight: bold; } /* keyword */
-.nitcode .nc_o {} /* operator */
-.nitcode .nc_i {} /* standard identifier */
-.nitcode .nc_t { color: #445588; font-weight: bold; } /* type/class identifier */
-.nitcode .nc_a { color: #445588; font-style: italic; } /* old style attribute identifier */
-.nitcode .nc_l { color: #009999; } /* char and number literal */
-.nitcode .nc_s { color: #8F1546; } /* string literal */
-/* syntactic token usage. added because of their position in the AST */
-.nitcode .nc_ast { color: blue; } /* assert label */
-.nitcode .nc_la { color: blue; } /* break/continue label */
-.nitcode .nc_m { color: #445588; } /* module name */
-/* syntactic groups */
-.nitcode .nc_def { font-weight: bold; color: blue; } /* name used in a definition */
-.nitcode .nc_def.nc_a { color: blue; } /* name used in a attribute definition */
-.nitcode .nc_def.nc_t { color: blue; } /* name used in a class or vt definition */
-.nitcode .nc_ss { color: #9E6BEB; } /* superstrings */
-.nitcode .nc_cdef {} /* A whole class definition */
-.nitcode .nc_pdef {} /* A whole property definition */
-/* semantic token usage */
-.nitcode .nc_v { font-style: italic; } /* local variable or parameter */
-.nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
-.nitcode .nc_error { border: 1px red solid;} /* not used */
-

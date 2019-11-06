@@ -17,8 +17,8 @@
 # OpenGL graphics rendering library for embedded systems, version 2.0
 #
 # This is a low-level wrapper, it can be useful for developers already familiar
-# with the C API of OpenGL. Most developers will prefer to use higher level
-# wrappers such as `mnit` and `gammit`.
+# with the C API of OpenGL. Most developers will prefer to use the higher level
+# graphic API `gammit`.
 #
 # Defines the annotations `glsl_vertex_shader` and `glsl_fragment_shader`
 # applicable on string literals to check shader code using `glslangValidator`.
@@ -31,6 +31,7 @@
 # http://www.khronos.org/opengles/sdk/docs/man/
 module glesv2 is
 	pkgconfig
+	no_warning "missing-doc"
 	new_annotation glsl_vertex_shader
 	new_annotation glsl_fragment_shader
 	ldflags("-lGLESv2")@android
@@ -40,7 +41,11 @@ import android::aware
 intrude import c
 
 in "C Header" `{
+#ifdef __APPLE__
+	#include <OpenGLES/ES2/gl.h>
+#else
 	#include <GLES2/gl2.h>
+#endif
 `}
 
 # OpenGL ES program to which we attach shaders
@@ -106,12 +111,12 @@ extern class GLProgram `{GLuint`}
 	fun active_attrib_name(index: Int): String
 	do
 		var max_size = active_attribute_max_length
-		var cname = new NativeString(max_size)
+		var cname = new CString(max_size)
 		active_attrib_name_native(index, max_size, cname)
 		return cname.to_s
 	end
 
-	private fun active_attrib_name_native(index, max_size: Int, name: NativeString) `{
+	private fun active_attrib_name_native(index, max_size: Int, name: CString) `{
 		// We get more values than we need, for compatibility. At least the
 		// NVidia driver tries to fill them even if NULL.
 
@@ -142,12 +147,12 @@ extern class GLProgram `{GLuint`}
 	fun active_uniform_name(index: Int): String
 	do
 		var max_size = active_uniform_max_length
-		var cname = new NativeString(max_size)
+		var cname = new CString(max_size)
 		active_uniform_name_native(index, max_size, cname)
 		return cname.to_s
 	end
 
-	private fun active_uniform_name_native(index, max_size: Int, name: NativeString) `{
+	private fun active_uniform_name_native(index, max_size: Int, name: CString) `{
 		int size;
 		GLenum type;
 		glGetActiveUniform(self, index, max_size, NULL, &size, &type, name);
@@ -187,7 +192,7 @@ fun glValidateProgram(program: GLProgram) `{ glValidateProgram(program); `}
 # Delete the `program` object
 fun glDeleteProgram(program: GLProgram) `{ glDeleteProgram(program); `}
 
-# Determine if `name` corresponds to a program object
+# Does `name` corresponds to a program object?
 fun glIsProgram(name: GLProgram): Bool `{ return glIsProgram(name); `}
 
 # Attach a `shader` to `program`
@@ -207,13 +212,13 @@ fun glGetProgramiv(program: GLProgram, pname: GLGetParameterName): Int `{
 fun glGetProgramInfoLog(program: GLProgram): String
 do
 	var size = glGetProgramiv(program, gl_INFO_LOG_LENGTH)
-	var buf = new NativeString(size)
+	var buf = new CString(size)
 	native_glGetProgramInfoLog(program, size, buf)
 	return buf.to_s_with_length(size)
 end
 
 # Return the program information log in `buf`
-private fun native_glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: NativeString): Int `{
+private fun native_glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: CString): Int `{
 	int length;
 	glGetProgramInfoLog(program, buf_size, &length, buf);
 	return length;
@@ -233,7 +238,7 @@ extern class GLShader `{GLuint`}
 		return source_native(size).to_s
 	end
 
-	private fun source_native(size: Int): NativeString `{
+	private fun source_native(size: Int): CString `{
 		GLchar *code = malloc(size);
 		glGetShaderSource(self, size, NULL, code);
 		return code;
@@ -277,12 +282,12 @@ fun gl_VALIDATE_STATUS: GLGetParameterName `{ return GL_VALIDATE_STATUS; `}
 fun glGetShaderInfoLog(shader: GLShader): String
 do
 	var size = glGetShaderiv(shader, gl_INFO_LOG_LENGTH)
-	var buf = new NativeString(size)
+	var buf = new CString(size)
 	native_glGetShaderInfoLog(shader, size, buf)
 	return buf.to_s_with_length(size)
 end
 
-private fun native_glGetShaderInfoLog(shader: GLShader, buf_size: Int, buffer: NativeString): Int `{
+private fun native_glGetShaderInfoLog(shader: GLShader, buf_size: Int, buffer: CString): Int `{
 	int length;
 	glGetShaderInfoLog(shader, buf_size, &length, buffer);
 	return length;
@@ -302,7 +307,7 @@ fun glCreateShader(shader_type: GLShaderType): GLShader `{
 `}
 
 # Replace the source code in the `shader` object with `code`
-fun glShaderSource(shader: GLShader, code: NativeString) `{
+fun glShaderSource(shader: GLShader, code: CString) `{
 	glShaderSource(shader, 1, (GLchar const **)&code, NULL);
 `}
 
@@ -312,7 +317,7 @@ fun glCompileShader(shader: GLShader) `{ glCompileShader(shader); `}
 # Delete the `shader` object
 fun glDeleteShader(shader: GLShader) `{ glDeleteShader(shader); `}
 
-# Determine if `name` corresponds to a shader object
+# Does `name` corresponds to a shader object?
 fun glIsShader(name: GLShader): Bool `{ return glIsShader(name); `}
 
 # An OpenGL ES 2.0 fragment shader
@@ -375,14 +380,24 @@ fun glDisableVertexAttribArray(index: Int) `{ glDisableVertexAttribArray(index);
 # Render primitives from array data
 fun glDrawArrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 
-# Render primitives from array data by their index
+# Render primitives from array data by their index listed in `indices`
 fun glDrawElements(mode: GLDrawMode, count: Int, typ: GLDataType, indices: Pointer) `{
 	glDrawElements(mode, count, typ, indices);
+`}
+
+# Render primitives from array data, at `offset` in the element buffer
+fun glDrawElementsi(mode: GLDrawMode, count: Int, typ: GLDataType, offset: Int) `{
+	glDrawElements(mode, count, typ, (const GLvoid*)offset);
 `}
 
 # Define an array of generic vertex attribute data
 fun glVertexAttribPointer(index, size: Int, typ: GLDataType, normalized: Bool, stride: Int, array: NativeGLfloatArray) `{
 	glVertexAttribPointer(index, size, typ, normalized, stride, array);
+`}
+
+# Define an array of generic vertex attribute data, at `offset` in the array buffer
+fun glVertexAttribPointeri(index, size: Int, typ: GLDataType, normalized: Bool, stride: Int, offset: Int) `{
+	glVertexAttribPointer(index, size, typ, normalized, stride, (const GLvoid*)offset);
 `}
 
 # Specify the value of a generic vertex attribute
@@ -423,12 +438,27 @@ fun glUniform4f(index: Int, x, y, z, w: Float) `{ glUniform4f(index, x, y, z, w)
 
 # Low level array of `Float`
 class GLfloatArray
-	super CArray[Float]
-	redef type NATIVE: NativeGLfloatArray
+	super FinalizableOnce
 
-	redef init(length)
+	var length: Int
+
+	var native_array = new NativeGLfloatArray(length) is lateinit
+
+	fun [](index: Int): Float do return native_array[index]
+
+	fun []=(index: Int, val: Float) do native_array[index] = val
+
+	var add_index = 0
+
+	fun reset_add do add_index = 0
+
+	# Require: `add_index < length`
+	fun add(value: Float)
 	do
-		native_array = new NativeGLfloatArray(length)
+		var index = add_index
+		assert index < length
+		native_array[index] = value
+		self.add_index = index + 1
 	end
 
 	# Create with the content of `array`
@@ -440,26 +470,34 @@ class GLfloatArray
 	end
 
 	# Fill with the content of `array`
-	fun fill_from(array: Array[Float])
+	#
+	# If `dst_offset` is set, the data is copied to the index `dst_offset`,
+	# otherwise, it is copied the beginning of `self`.
+	#
+	# Require: `length >= array.length + dst_offset or else 0`
+	fun fill_from(array: Array[Float], dst_offset: nullable Int)
 	do
-		assert length >= array.length
+		dst_offset = dst_offset or else add_index
+
+		assert length >= array.length + dst_offset
 		for k in [0..array.length[ do
-			self[k] = array[k]
+			self[dst_offset+k] = array[k]
 		end
 	end
+
+	redef fun finalize_once do native_array.free
 end
 
 # An array of `GLfloat` in C (`GLfloat*`)
 extern class NativeGLfloatArray `{ GLfloat* `}
-	super NativeCArray
-	redef type E: Float
 
 	new(size: Int) `{ return calloc(size, sizeof(GLfloat)); `}
 
-	redef fun [](index) `{ return self[index]; `}
-	redef fun []=(index, val) `{ self[index] = val; `}
+	fun [](index: Int): Float `{ return self[index]; `}
 
-	redef fun +(offset) `{ return self + offset; `}
+	fun []=(index: Int, val: Float) `{ self[index] = val; `}
+
+	fun +(offset: Int): NativeGLfloatArray `{ return self + offset; `}
 end
 
 # General type for OpenGL enumerations
@@ -694,7 +732,7 @@ private fun native_glGenRenderbuffers(n: Int, renderbuffers: NativeCIntArray) `{
 	glGenRenderbuffers(n, (GLuint *)renderbuffers);
 `}
 
-# Determine if `name` corresponds to a renderbuffer object
+# Does `name` corresponds to a renderbuffer object?
 fun glIsRenderbuffer(name: Int): Bool `{
 	return glIsRenderbuffer(name);
 `}
@@ -735,10 +773,10 @@ fun gl_RGBA4: GLRenderbufferFormat `{ return GL_RGBA4; `}
 fun gl_RGB565: GLRenderbufferFormat `{ return GL_RGB565; `}
 
 # 5 red, 5 green, 5 blue, 1 alpha bits format
-fun gl_RGB_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
+fun gl_RGB5_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
 
 # 16 depth bits format
-fun gl_DEPTH_COMPNENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
+fun gl_DEPTH_COMPONENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
 
 # 8 stencil bits format
 fun gl_STENCIL_INDEX8: GLRenderbufferFormat `{ return GL_STENCIL_INDEX8; `}
@@ -876,6 +914,62 @@ fun glHint(target: GLHintTarget, mode: GLHintMode) `{
 # Generate and fill set of mipmaps for the texture object `target`
 fun glGenerateMipmap(target: GLTextureTarget) `{ glGenerateMipmap(target); `}
 
+# Generate `n` buffer names
+fun glGenBuffers(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenBuffers(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenBuffers(n: Int, buffers: NativeCIntArray) `{
+	glGenBuffers(n, (GLuint *)buffers);
+`}
+
+# Does `name` corresponds to a buffer object?
+fun glIsBuffer(name: Int): Bool `{
+	return glIsBuffer(name);
+`}
+
+# Delete named buffer objects
+fun glDeleteBuffers(buffers: SequenceRead[Int])
+do
+	var n = buffers.length
+	var array = new CIntArray.from(buffers)
+	native_glDeleteBuffers(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteBuffers(n: Int, buffers: NativeCIntArray) `{
+	return glDeleteBuffers(n, (const GLuint *)buffers);
+`}
+
+# Create and initialize a buffer object's data store
+fun glBufferData(target: GLArrayBuffer, size: Int, data: Pointer, usage: GLBufferUsage) `{
+	glBufferData(target, size, data, usage);
+`}
+
+# Update a subset of a buffer object's data store
+fun glBufferSubData(target: GLArrayBuffer, offset, size: Int, data: Pointer) `{
+	glBufferSubData(target, offset, size, data);
+`}
+
+# Expected usage of a buffer
+extern class GLBufferUsage
+	super GLEnum
+end
+
+# Data will be modified once and used a few times
+fun gl_STREAM_DRAW: GLBufferUsage `{ return GL_STREAM_DRAW; `}
+
+# Data will be modified once and used many times
+fun gl_STATIC_DRAW: GLBufferUsage `{ return GL_STATIC_DRAW; `}
+
+# Data will be modified repeatedly and used many times
+fun gl_DYNAMIC_DRAW: GLBufferUsage `{ return GL_DYNAMIC_DRAW; `}
+
 # Bind the named `buffer` object
 fun glBindBuffer(target: GLArrayBuffer, buffer: Int) `{ glBindBuffer(target, buffer); `}
 
@@ -967,11 +1061,11 @@ do
 	return a
 end
 
-private fun native_glGenFramebuffers(n: Int, textures: NativeCIntArray) `{
-	glGenFramebuffers(n, (GLuint *)textures);
+private fun native_glGenFramebuffers(n: Int, framebuffers: NativeCIntArray) `{
+	glGenFramebuffers(n, (GLuint *)framebuffers);
 `}
 
-# Determine if `name` corresponds to a framebuffer object
+# Does `name` corresponds to a framebuffer object?
 fun glIsFramebuffer(name: Int): Bool `{
 	return glIsFramebuffer(name);
 `}
@@ -1133,6 +1227,7 @@ end
 fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
 fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
 fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
+fun gl_DEPTH_COMPONENT: GLPixelFormat `{ return GL_DEPTH_COMPONENT; `}
 
 # Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
@@ -1227,3 +1322,36 @@ fun gl_MAX_COMBINED_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_COM
 fun gl_MAX_VERTEX_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS; `}
 fun gl_MAX_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_TEXTURE_IMAGE_UNITS; `}
 fun gl_MAX_FRAGMENT_UNIFORM_VECTORS: GLGetParameterName `{ return GL_MAX_FRAGMENT_UNIFORM_VECTORS; `}
+
+fun gl_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_ARRAY_BUFFER_BINDING; `}
+fun gl_ELEMENT_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_ELEMENT_ARRAY_BUFFER_BINDING; `}
+fun gl_TEXTURE_BINDING_2D: GLGetParameterName `{ return GL_TEXTURE_BINDING_2D; `}
+fun gl_TEXTURE_BINDING_CUBE_MAP: GLGetParameterName `{ return GL_TEXTURE_BINDING_CUBE_MAP; `}
+fun gl_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: GLGetParameterName `{ return GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING; `}
+fun gl_FRAMEBUFFER_BINDING: GLGetParameterName `{ return GL_FRAMEBUFFER_BINDING; `}
+fun gl_RENDERBUFFER_BINDING: GLGetParameterName `{ return GL_RENDERBUFFER_BINDING; `}
+
+# Return a string describing the current GL configuration
+fun glGetString(name: GLEnum): String
+do
+	var cstr = glGetString_native(name)
+	assert not cstr.address_is_null
+	return cstr.to_s
+end
+
+private fun glGetString_native(name: GLEnum): CString `{ return (char*)glGetString(name); `}
+
+# Company responsible for this GL implementation
+fun gl_VENDOR: GLEnum `{ return GL_VENDOR; `}
+
+# Name of the renderer, typically specific to a particular configuration of the hardware platform
+fun gl_RENDERER: GLEnum `{ return GL_RENDERER; `}
+
+# Version or release number
+fun gl_VERSION: GLEnum `{ return GL_VERSION; `}
+
+# Version or release number for the shading language of the form
+fun gl_SHADING_LANGUAGE_VERSION: GLEnum `{ return GL_SHADING_LANGUAGE_VERSION; `}
+
+# Space-separated list of supported extensions to GL
+fun gl_EXTENSIONS: GLEnum `{ return GL_EXTENSIONS; `}

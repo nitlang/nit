@@ -19,26 +19,55 @@ import stream
 
 in "C Header" `{
 	#include <time.h>
+	#include <sys/time.h>
 `}
 
-# Unix time: the number of seconds elapsed since January 1, 1970
+# The number of seconds elapsed since January 1, 1970
+#
+# Uses the Unix function `time`.
 fun get_time: Int `{ return time(NULL); `}
+
+# The number of milliseconds elapsed since January 1, 1970
+#
+# Returns `get_microtime / 1000`
+fun get_millitime: Int do return get_microtime / 1000
+
+# The number of microseconds elapsed since January 1, 1970
+#
+# Uses the Unix function `gettimeofday`.
+fun get_microtime: Int `{
+	struct timeval val;
+	gettimeofday(&val, NULL);
+	return val.tv_sec * 1000000 + val.tv_usec;
+`}
 
 redef class Sys
 	# Wait a specific number of second and nanoseconds
-	fun nanosleep(sec, nanosec: Int) `{
+	#
+	# Returns `true` if interrupted by a signal.
+	fun nanosleep(sec, nanosec: Int): Bool `{
 		const struct timespec req = {sec, nanosec};
-		nanosleep(&req, NULL);
+		return nanosleep(&req, NULL);
 	`}
+end
+
+redef class Int
+	# Sleep approximately `self` seconds
+	#
+	# Is not interrupted by signals.
+	fun sleep do to_f.sleep
 end
 
 redef class Float
 	# Sleep approximately `self` seconds
+	#
+	# Is not interrupted by signals.
 	fun sleep `{
 		time_t s = self;
 		long ns = (self-s) * 1000000000.0;
-		const struct timespec req = {s, ns};
-		nanosleep(&req, NULL);
+		struct timespec req = {s, ns};
+
+		while (nanosleep(&req, &req)) { }
 	`}
 end
 
@@ -55,8 +84,8 @@ extern class TimeT `{time_t`}
 	fun update `{ time(&self); `}
 
 	# Convert `self` to a human readable String.
-	fun ctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( ctime(&self) );
+	fun ctime: String import CString.to_s `{
+		return CString_to_s( ctime(&self) );
 	`}
 
 	# Difference in secondes from start (self if the end time)
@@ -132,23 +161,23 @@ extern class Tm `{struct tm *`}
 	fun is_dst: Bool `{ return self->tm_isdst; `}
 
 	# Convert `self` to a human readable String.
-	private fun asctime: NativeString `{ return asctime(self); `}
+	private fun asctime: CString `{ return asctime(self); `}
 
 	# Convert `self` to a human readable String corresponding to `format`.
 	# TODO document allowed format.
-	fun strftime(format: String): String import String.to_cstring, NativeString.to_s_with_copy `{
+	fun strftime(format: String): String import String.to_cstring, CString.to_s `{
 		char* buf, *c_format;
 
 		buf = (char*)malloc(100);
 		c_format = String_to_cstring(format);
 
 		strftime(buf, 100, c_format, self);
-		String s = NativeString_to_s_with_copy(buf);
+		String s = CString_to_s(buf);
 		free(buf);
 		return s;
 	`}
 
-	redef fun to_s do return asctime.to_s_with_copy.replace("\n", "")
+	redef fun to_s do return asctime.to_s.replace("\n", "")
 end
 
 # Date using the international format defined by ISO 8601.

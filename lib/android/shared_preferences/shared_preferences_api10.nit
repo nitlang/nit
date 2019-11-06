@@ -19,7 +19,7 @@ module shared_preferences_api10
 
 import dalvik
 import serialization
-private import json::serialization
+private import json
 
 in "Java" `{
 	import android.content.SharedPreferences;
@@ -38,7 +38,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_all: HashMap[JavaString, JavaObject] import HashMap[JavaString, JavaObject],
 		HashMap[JavaString, JavaObject].[]= in "Java" `{
 		Map<String, ?> java_map = null;
-		int nit_hashmap = new_HashMap_of_JavaString_JavaObject();
+		nit.app.NitObject nit_hashmap = new_HashMap_of_JavaString_JavaObject();
 		try {
 			java_map = self.getAll();
 		} catch (NullPointerException e) {
@@ -397,7 +397,16 @@ class SharedPreferences
 		if serialized_string == "" then return null
 
 		var deserializer = new JsonDeserializer(serialized_string)
-		return deserializer.deserialize
+		var deserialized = deserializer.deserialize
+
+		var errors = deserializer.errors
+		if errors.not_empty then
+			# An update may have broken the versioning compatibility
+			print_error "{class_name} error at deserialization: {errors.join(", ")}"
+			return null # Let's be safe
+		end
+
+		return deserialized
 	end
 end
 

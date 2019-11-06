@@ -21,7 +21,7 @@ var cpstr: Text = src_s
 #alt2 cpstr = new FlatBuffer.from(src_s)
 #alt3 cpstr = cpstr.substring(1, 5)
 
-var ns = new NativeString(cpstr.byte_length)
+var ns = new CString(cpstr.byte_length)
 ns.fill_from(cpstr)
 
-print ns.to_s_with_length(cpstr.byte_length)
+print ns.to_s_unsafe(cpstr.byte_length, copy=false)

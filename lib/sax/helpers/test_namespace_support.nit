@@ -9,13 +9,12 @@
 # another product.
 
 # Test suite for `namespace_support`.
-module test_namespace_support is test_suite
+module test_namespace_support is test
 
-import test_suite
 import sax::helpers::namespace_support
 
 class TestNamespaceSupport
-	super TestSuite
+	test
 
 	private fun sample: NamespaceSupport do
 		var subject = new NamespaceSupport
@@ -26,7 +25,7 @@ class TestNamespaceSupport
 		return subject
 	end
 
-	fun test_reset do
+	fun test_reset is test do
 		var subject = sample
 
 		subject.reset
@@ -37,7 +36,7 @@ class TestNamespaceSupport
 		assert 2 == subject.prefixes.length
 	end
 
-	fun test_push_context_override_default do
+	fun test_push_context_override_default is test do
 		var subject = sample
 
 		subject.push_context
@@ -51,7 +50,7 @@ class TestNamespaceSupport
 		assert 3 == subject.prefixes.length
 	end
 
-	fun test_push_context_override_dc do
+	fun test_push_context_override_dc is test do
 		var subject = sample
 
 		subject.push_context
@@ -64,7 +63,7 @@ class TestNamespaceSupport
 		assert 3 == subject.prefixes.length
 	end
 
-	fun test_push_context_undeclare do
+	fun test_push_context_undeclare is test do
 		var subject = sample
 
 		subject.push_context
@@ -74,7 +73,7 @@ class TestNamespaceSupport
 		assert 2 == subject.prefixes.length
 	end
 
-	fun test_pop_context do
+	fun test_pop_context is test do
 		var subject = sample
 
 		subject.pop_context
@@ -86,7 +85,7 @@ class TestNamespaceSupport
 
 	#fun test_declare_prefix # SEE: test_push_context_*
 
-	fun test_process_name do
+	fun test_process_name is test do
 		var subject = sample
 		var parts = new Array[String]
 
@@ -104,7 +103,7 @@ class TestNamespaceSupport
 		assert ["", "p", "p"] == subject.process_name("p", parts, true)
 	end
 
-	fun test_process_name_xmlns do
+	fun test_process_name_xmlns is test do
 		var subject = sample
 		var parts = new Array[String].with_capacity(3)
 
@@ -112,7 +111,7 @@ class TestNamespaceSupport
 		assert ["http://www.w3.org/1999/xhtml", "xmlns", "xmlns"] == subject.process_name("xmlns", parts, false)
 	end
 
-	fun test_declare_prefix_illegal do
+	fun test_declare_prefix_illegal is test do
 		var subject = sample
 
 		assert not subject.declare_prefix("xml", "http://example.org")
@@ -122,7 +121,7 @@ class TestNamespaceSupport
 		assert 2 == subject.declared_prefixes.length
 	end
 
-	fun test_uri do
+	fun test_uri is test do
 		var subject = sample
 
 		assert "http://www.w3.org/1999/xhtml" == subject.uri("")
@@ -131,7 +130,7 @@ class TestNamespaceSupport
 		assert subject.uri("foo") == null
 	end
 
-	fun test_prefixes do
+	fun test_prefixes is test do
 		var res = sample.prefixes
 
 		assert 3 == res.length else
@@ -142,7 +141,7 @@ class TestNamespaceSupport
 		assert res.has("xmlns")
 	end
 
-	fun test_prefix do
+	fun test_prefix is test do
 		var subject = sample
 
 		assert subject.prefix("http://www.w3.org/1999/xhtml") == null
@@ -151,7 +150,7 @@ class TestNamespaceSupport
 		assert subject.prefix("https://example.org/serious") == null
 	end
 
-	fun test_prefixes_of do
+	fun test_prefixes_of is test do
 		var subject = sample
 		var res: Collection[String]
 
@@ -169,7 +168,7 @@ class TestNamespaceSupport
 		assert res.has_all(["dc", "dc2"])
 	end
 
-	fun test_declared_prefixes do
+	fun test_declared_prefixes is test do
 		var res = sample.declared_prefixes
 
 		assert 2 == res.length else

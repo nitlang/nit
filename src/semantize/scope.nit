@@ -268,6 +268,11 @@ redef class AParam
 	var variable: nullable Variable
 	redef fun accept_scope_visitor(v)
 	do
+		if variable != null then
+			v.register_variable(self.n_id, variable.as(not null))
+			return
+		end
+
 		super
 		var nid = self.n_id
 		var variable = new Variable(nid.text)
@@ -482,7 +487,7 @@ redef class ACallFormExpr
 			var variable = v.search_variable(name)
 			if variable != null then
 				var n: AExpr
-				if not n_args.n_exprs.is_empty or n_args isa AParExprs then
+				if not n_args.n_exprs.is_empty or n_args isa AParExprs or self isa ACallrefExpr then
 					v.error(self, "Error: `{name}` is a variable, not a method.")
 					return
 				end
@@ -521,5 +526,13 @@ redef class ACallReassignExpr
 	do
 		variable.warn_unread = false
 		return new AVarReassignExpr.init_avarreassignexpr(n_qid.n_id, n_assign_op, n_value)
+	end
+end
+
+redef class ALambdaExpr
+	redef fun accept_scope_visitor(v)
+	do
+		# TODO
+		return
 	end
 end

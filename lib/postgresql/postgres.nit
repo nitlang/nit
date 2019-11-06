@@ -36,18 +36,19 @@
 # animals.add(cat)
 # animals.add(turtle)
 #
-# var db = new Postgres.open("dbname=postgres")
+# var db_suffix = "NIT_TESTING_ID".environ
+# var db = new Postgres.open("host=postgres user=postgres dbname=postgres")
 #
 # assert db_is_open: not db.is_closed
-# assert create_table: db.create_table("IF NOT EXISTS animals (aname TEXT PRIMARY KEY, kind TEXT NOT NULL, age INT NOT NULL)") else print db.error
+# assert create_table: db.create_table("IF NOT EXISTS animals_{db_suffix} (aname TEXT PRIMARY KEY, kind TEXT NOT NULL, age INT NOT NULL)") else print db.error
 #
 # for animal in animals do
-#   assert insert: db.insert("INTO animals VALUES('{animal.name}', '{animal.kind}', {animal.age})") else print db.error
+#   assert insert: db.insert("INTO animals_{db_suffix} VALUES('{animal.name}', '{animal.kind}', {animal.age})") else print db.error
 # end
 #
-# var result = db.raw_execute("SELECT * FROM animals")
+# var result = db.raw_execute("SELECT * FROM animals_{db_suffix}")
 # assert  result.is_ok
-# assert drop_table: db.execute("DROP TABLE animals")
+# assert drop_table: db.execute("DROP TABLE animals_{db_suffix}")
 # db.finish
 # assert db_is_closed: db.is_closed
 # ~~~
@@ -59,6 +60,7 @@ private import native_postgres
 class Postgres
   private var native_connection: NativePostgres
 
+  # Is the connection closed?
   var is_closed = true
 
   # Open the connnection with the database using the `conninfo`
@@ -78,8 +80,22 @@ class Postgres
     native_connection.finish
   end
 
+  # Prepares the statement `query` with `stmt_name` to be executed later
+  #
+  # `num_params` specifies the number of parameters expected at the statement
+  # execution.
+  #
+  # See `exec_prepared` for execution.
   fun prepare(stmt_name:String, query:String, num_params: Int):PGResult do return new PGResult(native_connection.prepare(stmt_name, query, num_params))
 
+  # Execute prepared statement named `stmt_name` with `values`
+  #
+  # * `num_params` specifies the number of parameters given to the prepared statement
+  # * `param_lengths` specifies the length of each parameters
+  # * `param_formats` and `result_format` specifies the format used as input/output.
+  #   Should be 0 for text results, 1 for binary.
+  #
+  # See `prepare`.
   fun exec_prepared(stmt_name: String, num_params: Int, values: Array[String], param_lengths: Array[Int], param_formats: Array[Int], result_format: Int):PGResult do
     return new PGResult(native_connection.exec_prepared(stmt_name, num_params, values, param_lengths, param_formats, result_format))
   end
@@ -119,6 +135,7 @@ end
 class PGResult
   private var pg_result: NativePGResult
 
+  # Clears the result object and frees the memory allocated to the underlying C struct
   fun clear do pg_result.clear
 
   # Returns the number of rows in the query result

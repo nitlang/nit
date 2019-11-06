@@ -1,0 +1,8 @@
+install https://gitlab.com/xymus/hello_nitpm.git
+install hello_nitpm
+upgrade hello_nitpm
+install nitpm_test_versions=1.0 nitpm_test_versions=stable nitpm_test_imports
+list
+uninstall -f nitpm_test_versions=1.0 nitpm_test_versions=2.0 nitpm_test_versions=stable nitpm_test_imports nitpm_test_cycle hello_nitpm
+list
+uninstall . .. 0invalid _invalid a/../

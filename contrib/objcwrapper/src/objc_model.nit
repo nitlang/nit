@@ -45,7 +45,7 @@ class ObjcModel
 	# Objective-C types available in imported modules
 	#
 	# TODO seach in existing wrappers
-	private var imported_types: Array[String] = ["NSObject", "NSString"]
+	private var imported_types = ["NSObject", "NSString"]
 end
 
 # Objective-C class

@@ -7,6 +7,8 @@ nitc - compiles Nit programs.
 
 nitc [*options*] FILE...
 
+nitc [*options*] --run FILE [ARG]...
+
 
 # DESCRIPTION
 
@@ -36,7 +38,7 @@ To combine files into a single program, use the `-m` option.
     $ nitc prog1.nit -m other_module.nit
 
 nitc can produces executables for various platforms when specific modules are used.
-Currently, android, pnacl and emscripten are supported.
+Currently, android and emscripten are supported.
 See the documentation of these specific modules for details.
 
 
@@ -163,6 +165,21 @@ Has precedence over the environment variable `NIT_DIR`.
 
 ## COMPILATION
 
+### `--run`
+Execute the binary after the compilation.
+
+The binary is generated as expected then it is executed directly.
+After the execution, the binary is not removed.
+
+When `--run` is used, the first argument is the program to compile, the rest of the arguments are the arguments of the program.
+Note that you MUST use `--` before the program arguments if one of them is an option starting with a `-`.
+
+~~~bash
+$ nitc --run foo.nit arg       # compile foo.nit, then executes `./foo arg`
+$ nitc --run foo.nit arg -W    # compile foo.nit with warnings, then executes `./foo arg`
+$ nitc --run foo.nit -- arg -W # compile foo.nit, then executes `./foo arg -W`
+~~~
+
 ### `--compile-dir`
 Directory used to generate temporary files.
 
@@ -228,6 +245,29 @@ Currently removes gcc optimizations.
 Also preserves the source-files directory for C-debuggers.
 
 For more debugging-related options, see also `--hardening` and `NIT_GC_OPTION`
+
+### `--trace`
+Compile with lttng's instrumentation.
+
+Currently add a lttng trace provider and add tracepoint into object instances and destructions.
+
+The lttng nit/misc/Nit_Compiler.lttng file is a template that you can use instead of configure channels by yourself. You have to configure the path of the destination tracefile. <destination> <path> "your path" </path> </destination>
+
+To create a channel with template :
+	lttng-sessiond --daemonize
+	lttng load -i=~/nit/misc/Nit_Compiler.lttng Nit_Compiler
+To create a channel without template :
+	lttng create session_name
+	lttng enable-event --userspace Nit_Compiler:Object_Instance
+	lttng enable-event --userspace Nit_Compiler:Object_Destroy
+To record some traces :
+	lttng start
+	--> run your program
+	lttng stop
+To read some traces :
+	babeltrace ~/session_name
+To destroy your current tracing session :
+	lttng destroy
 
 ## COMPILATION MODES
 
@@ -498,6 +538,15 @@ Force lazy semantic analysis of the source-code.
 
 Analysis of methods is thus done only when required.
 This option breaks the behavior of most of the tools since errors in methods are undetected until the method is required in some processing.
+
+## Contract
+By default the contracts can be defined as "semi-global". I.E. All contracts (ensures, expects) used in the main package are enabled, the `expects` contracts are enabled (`ensures` contracts are disable) in direct imported package. Other indirected imported package has no active contract.
+
+### `--no-contract`
+Option used to disable the contracts(ensures, expects) usage.
+
+### `--full-contract`
+Option used to enables contracts (ensures, expects) on all classes. Warning this is an expensive option at runtime.
 
 # ENVIRONMENT VARIABLES
 

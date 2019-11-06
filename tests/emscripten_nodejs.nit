@@ -1,6 +1,6 @@
 import emscripten
 redef class FileReader
-	redef fun fill_buffer
+	redef fun raw_read_byte
 	do
 		print "NOT YET IMPLEMENTED"
 		abort

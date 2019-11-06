@@ -1,0 +1,16 @@
+<form style='margin-bottom: 0'>
+	<div class='form-group has-icon'>
+		<input placeholder='Search...' type='text' class='form-control search-input'
+			ng-model-options='{ debounce: 300 }' ng-model='vm.query'
+			ng-keydown='vm.update($event)' ng-change='vm.search()'>
+		<span class='glyphicon glyphicon-search form-control-icon text-muted'></span>
+	</div>
+	<div ng-if='vm.results.results.length > 0' class='card-list search-results'>
+		<entity-card ng-click='vm.selectEnter()' ng-class='{active: vm.activeItem == $index}' ng-mouseover='vm.setActive($index)' mentity='mentity' ng-repeat='mentity in vm.results.results' />
+		<div class='card' ng-click='vm.selectEnter()' ng-mouseover='vm.setActive(vm.results.results.length)' ng-class='{active: vm.activeItem == vm.results.results.length}'>
+			<div class='card-body'>
+				Show all {{vm.results.count}} results for <a>"{{vm.query}}"</a>
+			</div>
+		</div>
+	</div>
+</form>

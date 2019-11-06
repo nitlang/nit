@@ -22,83 +22,83 @@ intrude import text::flat
 # Any kind of entity which can be searched for in a Sequence of Byte
 interface BytePattern
 	# Return the first occurence of `self` in `b`, or -1 if not found
-	fun first_index_in(b: SequenceRead[Byte]): Int do return first_index_in_from(b, 0)
+	fun first_index_in(b: SequenceRead[Int]): Int do return first_index_in_from(b, 0)
 
 	# Return the first occurence of `self` in `b` starting at `from`, or -1 if not found
-	fun first_index_in_from(b: SequenceRead[Byte], from: Int): Int is abstract
+	fun first_index_in_from(b: SequenceRead[Int], from: Int): Int is abstract
 
 	# Return the last occurence of `self` in `b`, or -1 if not found
-	fun last_index_in(b: SequenceRead[Byte]): Int do return last_index_in_from(b, b.length - 1)
+	fun last_index_in(b: SequenceRead[Int]): Int do return last_index_in_from(b, b.length - 1)
 
 	# Return the last occurence of `self` in `b`, or -1 if not found
-	fun last_index_in_from(b: SequenceRead[Byte], from: Int): Int is abstract
+	fun last_index_in_from(b: SequenceRead[Int], from: Int): Int is abstract
 
 	# Returns the indexes of all the occurences of `self` in `b`
-	fun search_all_in(b: SequenceRead[Byte]): SequenceRead[Int] is abstract
+	fun search_all_in(b: SequenceRead[Int]): SequenceRead[Int] is abstract
 
 	# Length of the pattern
 	fun pattern_length: Int is abstract
 
 	# Appends `self` to `b`
-	fun append_to(b: Sequence[Byte]) is abstract
+	fun append_to(b: Sequence[Int]) is abstract
 
 	# Is `self` a prefix for `b` ?
-	fun is_prefix(b: SequenceRead[Byte]): Bool is abstract
+	fun is_prefix(b: SequenceRead[Int]): Bool is abstract
 
 	# Is `self` a suffix for `b` ?
-	fun is_suffix(b: SequenceRead[Byte]): Bool is abstract
+	fun is_suffix(b: SequenceRead[Int]): Bool is abstract
 end
 
-redef class Byte
+redef class Int
 	super BytePattern
 
 	# Write self as a string into `ns` at position `pos`
-	private fun add_digest_at(ns: NativeString, pos: Int) do
-		var tmp = (0xF0u8 & self) >> 4
-		ns[pos] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
-		tmp = 0x0Fu8 & self
-		ns[pos + 1] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
+	private fun add_digest_at(ns: CString, pos: Int) do
+		var tmp = (0xF0 & self) >> 4
+		ns[pos] = if tmp >= 0x0A then tmp + 0x37 else tmp + 0x30
+		tmp = 0x0F & self
+		ns[pos + 1] = if tmp >= 0x0A then tmp + 0x37 else tmp + 0x30
 	end
 
 	# Is `self` a valid hexadecimal digit (in ASCII)
 	#
 	# ~~~nit
 	# intrude import core::bytes
-	# assert not '/'.ascii.is_valid_hexdigit
-	# assert '0'.ascii.is_valid_hexdigit
-	# assert '9'.ascii.is_valid_hexdigit
-	# assert not ':'.ascii.is_valid_hexdigit
-	# assert not '@'.ascii.is_valid_hexdigit
-	# assert 'A'.ascii.is_valid_hexdigit
-	# assert 'F'.ascii.is_valid_hexdigit
-	# assert not 'G'.ascii.is_valid_hexdigit
-	# assert not '`'.ascii.is_valid_hexdigit
-	# assert 'a'.ascii.is_valid_hexdigit
-	# assert 'f'.ascii.is_valid_hexdigit
-	# assert not 'g'.ascii.is_valid_hexdigit
+	# assert not u'/'.is_valid_hexdigit
+	# assert u'0'.is_valid_hexdigit
+	# assert u'9'.is_valid_hexdigit
+	# assert not u':'.is_valid_hexdigit
+	# assert not u'@'.is_valid_hexdigit
+	# assert u'A'.is_valid_hexdigit
+	# assert u'F'.is_valid_hexdigit
+	# assert not u'G'.is_valid_hexdigit
+	# assert not u'`'.is_valid_hexdigit
+	# assert u'a'.is_valid_hexdigit
+	# assert u'f'.is_valid_hexdigit
+	# assert not u'g'.is_valid_hexdigit
 	# ~~~
 	private fun is_valid_hexdigit: Bool do
-		return (self >= 0x30u8 and self <= 0x39u8) or
-		       (self >= 0x41u8 and self <= 0x46u8) or
-		       (self >= 0x61u8 and self <= 0x66u8)
+		return (self >= 0x30 and self <= 0x39) or
+		       (self >= 0x41 and self <= 0x46) or
+		       (self >= 0x61 and self <= 0x66)
 	end
 
 	# `self` as a hexdigit to its byte value
 	#
 	# ~~~nit
 	# intrude import core::bytes
-	# assert 0x39u8.hexdigit_to_byteval == 0x09u8
-	# assert 0x43u8.hexdigit_to_byteval == 0x0Cu8
+	# assert 0x39.hexdigit_to_byteval == 0x09
+	# assert 0x43.hexdigit_to_byteval == 0x0C
 	# ~~~
 	#
 	# REQUIRE: `self.is_valid_hexdigit`
-	private fun hexdigit_to_byteval: Byte do
-		if self >= 0x30u8 and self <= 0x39u8 then
-			return self - 0x30u8
-		else if self >= 0x41u8 and self <= 0x46u8 then
-			return self - 0x37u8
-		else if self >= 0x61u8 and self <= 0x66u8 then
-			return self - 0x57u8
+	private fun hexdigit_to_byteval: Int do
+		if self >= 0x30 and self <= 0x39 then
+			return self - 0x30
+		else if self >= 0x41 and self <= 0x46 then
+			return self - 0x37
+		else if self >= 0x61 and self <= 0x66 then
+			return self - 0x57
 		end
 		# Happens only if the requirement is not met.
 		# i.e. this abort is here to please the compiler
@@ -130,24 +130,117 @@ redef class Byte
 
 	redef fun append_to(b) do b.push self
 
-	#     assert 'b'.ascii.is_suffix("baqsdb".to_bytes)
-	#     assert not 'b'.ascii.is_suffix("baqsd".to_bytes)
+	#     assert u'b'.is_suffix("baqsdb".to_bytes)
+	#     assert not u'b'.is_suffix("baqsd".to_bytes)
 	redef fun is_suffix(b) do return b.length != 0 and b.last == self
 
-	#     assert 'b'.ascii.is_prefix("baqsdb".to_bytes)
-	#     assert not 'b'.ascii.is_prefix("aqsdb".to_bytes)
+	#     assert u'b'.is_prefix("baqsdb".to_bytes)
+	#     assert not u'b'.is_prefix("aqsdb".to_bytes)
 	redef fun is_prefix(b) do return b.length != 0 and b.first == self
+
+	# A signed big-endian representation of `self`
+	#
+	# ~~~
+	# assert     1.to_bytes.hexdigest ==     "01"
+	# assert   255.to_bytes.hexdigest ==     "FF"
+	# assert   256.to_bytes.hexdigest ==   "0100"
+	# assert 65535.to_bytes.hexdigest ==   "FFFF"
+	# assert 65536.to_bytes.hexdigest == "010000"
+	# ~~~
+	#
+	# Negative values are converted to their two's complement.
+	# Be careful as the result can be ambiguous.
+	#
+	# ~~~
+	# assert     (-1).to_bytes.hexdigest ==     "FF"
+	# assert    (-32).to_bytes.hexdigest ==     "E0"
+	# assert   (-512).to_bytes.hexdigest ==   "FE00"
+	# assert (-65794).to_bytes.hexdigest == "FEFEFE"
+	# ~~~
+	#
+	# Optionally, set `n_bytes` to the desired number of bytes in the output.
+	# This setting can disambiguate the result between positive and negative
+	# integers. Be careful with this parameter as the result may overflow.
+	#
+	# ~~~
+	# assert        1.to_bytes(2).hexdigest ==     "0001"
+	# assert    65535.to_bytes(2).hexdigest ==     "FFFF"
+	# assert     (-1).to_bytes(2).hexdigest ==     "FFFF"
+	# assert   (-512).to_bytes(4).hexdigest == "FFFFFE00"
+	# assert 0x123456.to_bytes(2).hexdigest ==     "3456"
+	# ~~~
+	#
+	# For 0, a Bytes object with single nul byte is returned (instead of an empty Bytes object).
+	#
+	# ~~~
+	# assert 0.to_bytes.hexdigest == "00"
+	# ~~~
+	#
+	# For positive integers, `Bytes::to_i` can reverse the operation.
+	#
+	# ~~~
+	# assert 1234.to_bytes.to_i == 1234
+	# ~~~
+	#
+	# Require self >= 0
+	fun to_bytes(n_bytes: nullable Int): Bytes do
+
+		# If 0, force using at least one byte
+		if self == 0 and n_bytes == null then n_bytes = 1
+
+		# Compute the len (log256)
+		var len = 1
+		var max = 256
+		var s = self.abs
+		while s >= max do
+			len += 1
+			max *= 256
+		end
+
+		# Two's complement
+		s = self
+		if self < 0 then
+			var ff = 0
+			for j in [0..len[ do
+				ff *= 0x100
+				ff += 0xFF
+			end
+
+			s = ((-self) ^ ff) + 1
+		end
+
+		# Cut long values
+		if n_bytes != null and len > n_bytes then len = n_bytes
+
+		# Allocate the buffer
+		var cap = n_bytes or else len
+		var res = new Bytes.with_capacity(cap)
+
+		var filler = if self < 0 then 0xFF else 0
+		for i in [0..cap[ do res[i] = filler
+
+		# Fill it starting with the end
+		var i = cap
+		var sum = s
+		while i > cap - len do
+			i -= 1
+			res[i] = sum % 256
+			sum /= 256
+		end
+
+		return res
+	end
 end
 
 # A buffer containing Byte-manipulation facilities
 #
 # Uses Copy-On-Write when persisted
 class Bytes
-	super AbstractArray[Byte]
+	super AbstractArray[Int]
 	super BytePattern
 
-	# A NativeString being a char*, it can be used as underlying representation here.
-	var items: NativeString
+	# A CString being a char*, it can be used as underlying representation here.
+	var items: CString
 
 	# Number of bytes in the array
 	redef var length
@@ -163,13 +256,13 @@ class Bytes
 	#     var b = new Bytes.empty
 	#     assert b.to_s == ""
 	init empty do
-		var ns = new NativeString(0)
+		var ns = new CString(0)
 		init(ns, 0, 0)
 	end
 
 	# Init a `Bytes` with capacity `cap`
 	init with_capacity(cap: Int) do
-		var ns = new NativeString(cap)
+		var ns = new CString(cap)
 		init(ns, 0, cap)
 	end
 
@@ -178,8 +271,8 @@ class Bytes
 	redef fun is_empty do return length == 0
 
 	#     var b = new Bytes.empty
-	#     b.add 101u8
-	#     assert b[0] == 101u8
+	#     b.add 101
+	#     assert b[0] == 101
 	redef fun [](i) do
 		assert i >= 0
 		assert i < length
@@ -202,19 +295,19 @@ class Bytes
 	fun trim: Bytes do
 		var st = 0
 		while st < length do
-			if self[st] > 0x20u8 then break
+			if self[st] > 0x20 then break
 			st += 1
 		end
 		if st >= length then return new Bytes.empty
 		var ed = length - 1
 		while ed > 0 do
-			if self[ed] > 0x20u8 then break
+			if self[ed] > 0x20 then break
 			ed -= 1
 		end
 		return slice(st, ed - st + 1)
 	end
 
-	# Returns a subset of the content of `self` starting at `from` and of length `count`
+	# Copy a subset of `self` starting at `from` and of `count` bytes
 	#
 	#     var b = "abcd".to_bytes
 	#     assert b.slice(1, 2).hexdigest == "6263"
@@ -239,7 +332,7 @@ class Bytes
 		return ret
 	end
 
-	# Returns a copy of `self` starting at `from`
+	# Copy of `self` starting at `from`
 	#
 	#     var b = "abcd".to_bytes
 	#     assert b.slice_from(1).hexdigest  == "626364"
@@ -249,6 +342,21 @@ class Bytes
 		if from >= length then return new Bytes.empty
 		if from < 0 then from = 0
 		return slice(from, length)
+	end
+
+	# Reverse the byte array in place
+	#
+	#     var b = "abcd".to_bytes
+	#     b.reverse
+	#     assert b.to_s == "dcba"
+	fun reverse
+	do
+		var l = length
+		for i in [0..l/2[ do
+			var tmp = self[i]
+			self[i] = self[l-i-1]
+			self[l-i-1] = tmp
+		end
 	end
 
 	# Returns self as an hexadecimal digest.
@@ -262,7 +370,7 @@ class Bytes
 	# ~~~
 	fun hexdigest: String do
 		var elen = length * 2
-		var ns = new NativeString(elen)
+		var ns = new CString(elen)
 		var i = 0
 		var oi = 0
 		while i < length do
@@ -285,12 +393,12 @@ class Bytes
 	# ~~~
 	fun chexdigest: String do
 		var elen = length * 4
-		var ns = new NativeString(elen)
+		var ns = new CString(elen)
 		var i = 0
 		var oi = 0
 		while i < length do
-			ns[oi] = 0x5Cu8 # b'\\'
-			ns[oi+1] = 0x78u8 # b'x'
+			ns[oi] = u'\\'
+			ns[oi+1] = u'x'
 			self[i].add_digest_at(ns, oi+2)
 			i += 1
 			oi += 4
@@ -308,17 +416,17 @@ class Bytes
 	# ~~~
 	fun binarydigest: String do
 		var elen = length * 8
-		var ns = new NativeString(elen)
+		var ns = new CString(elen)
 		var i = 0
 		var oi = 0
 		while i < length do
 			var c = self[i]
-			var b = 128u8
-			while b > 0u8 do
-				if c & b == 0u8 then
-					ns[oi] = 0x30u8 # b'0'
+			var b = 128
+			while b > 0 do
+				if c & b == 0 then
+					ns[oi] = u'0'
 				else
-					ns[oi] = 0x31u8 # b'1'
+					ns[oi] = u'1'
 				end
 				oi += 1
 				b = b >> 1
@@ -328,23 +436,34 @@ class Bytes
 		return new FlatString.full(ns, elen, 0, elen)
 	end
 
-	# Interprets `self` as a big-endian positive integer.
+	# Interprets `self` as a big-endian integer (unsigned by default)
 	#
 	# ~~~
 	# var b = "0102".hexdigest_to_bytes
 	# assert b.to_i == 258
-	# ~~~
 	#
-	# Nul bytes on the left are trimmed.
-	# 0 is returned for an empty Bytes object.
-	#
-	# ~~~
-	# assert "01".hexdigest_to_bytes.to_i == 1
-	# assert "0001".hexdigest_to_bytes.to_i == 1
-	#
+	# assert   "01".hexdigest_to_bytes.to_i == 1
+	# assert   "FF".hexdigest_to_bytes.to_i == 255
 	# assert "0000".hexdigest_to_bytes.to_i == 0
-	# assert "00".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# If `self.is_empty`, 0 is returned.
+	#
+	# ~~~
 	# assert "".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# If `signed == true`, the bytes are read as a signed integer.
+	# As usual, the sign bit is the left most bit, no matter the
+	# `length` of `self`.
+	#
+	# ~~~
+	# assert     "01".hexdigest_to_bytes.to_i(true) ==      1
+	# assert     "FF".hexdigest_to_bytes.to_i(true) ==     -1
+	# assert   "00FF".hexdigest_to_bytes.to_i(true) ==    255
+	# assert     "E0".hexdigest_to_bytes.to_i(true) ==    -32
+	# assert   "FE00".hexdigest_to_bytes.to_i(true) ==   -512
+	# assert "FEFEFE".hexdigest_to_bytes.to_i(true) == -65794
 	# ~~~
 	#
 	# `Int::to_bytes` is a loosely reverse method.
@@ -353,10 +472,12 @@ class Bytes
 	# assert b.to_i.to_bytes == b
 	# assert (b.to_i + 1).to_bytes.hexdigest == "0103"
 	# assert "0001".hexdigest_to_bytes.to_i.to_bytes.hexdigest == "01"
+	#
+	# assert (-32).to_bytes.to_i(true) == -32
 	# ~~~
 	#
 	# Warning: `Int` might overflow for bytes with more than 60 bits.
-	fun to_i: Int do
+	fun to_i(signed: nullable Bool): Int do
 		var res = 0
 		var i = 0
 		while i < length do
@@ -364,11 +485,23 @@ class Bytes
 			res += self[i].to_i
 			i += 1
 		end
+
+		# Two's complement is `signed`
+		if signed == true and not_empty and first > 0x80 then
+			var ff = 0
+			for j in [0..length[ do
+				ff *= 0x100
+				ff += 0xFF
+			end
+
+			res = -((res ^ ff) + 1)
+		end
+
 		return res
 	end
 
 	#     var b = new Bytes.with_capacity(1)
-	#     b[0] = 101u8
+	#     b[0] = 101
 	#     assert b.to_s == "e"
 	redef fun []=(i, v) do
 		if persisted then regen
@@ -379,7 +512,7 @@ class Bytes
 	end
 
 	#     var b = new Bytes.empty
-	#     b.add 101u8
+	#     b.add 101
 	#     assert b.to_s == "e"
 	redef fun add(c) do
 		if persisted then regen
@@ -405,8 +538,14 @@ class Bytes
 		length += cln
 	end
 
+	redef fun has(c)
+	do
+		if not c isa Int then return false
+		return super(c&255)
+	end
+
 	#     var b = new Bytes.empty
-	#     b.append([104u8, 101u8, 108u8, 108u8, 111u8])
+	#     b.append([104, 101, 108, 108, 111])
 	#     assert b.to_s == "hello"
 	redef fun append(arr) do
 		if arr isa Bytes then
@@ -417,7 +556,7 @@ class Bytes
 	end
 
 	#     var b = new Bytes.empty
-	#     b.append([0x41u8, 0x41u8, 0x18u8])
+	#     b.append([0x41, 0x41, 0x18])
 	#     b.pop
 	#     assert b.to_s == "AA"
 	redef fun pop do
@@ -430,13 +569,13 @@ class Bytes
 
 	# Regenerates the buffer, necessary when it was persisted
 	private fun regen do
-		var nns = new NativeString(capacity)
+		var nns = new CString(capacity)
 		items.copy_to(nns, length, 0, 0)
 		persisted = false
 	end
 
 	# Appends the `ln` first bytes of `ns` to self
-	fun append_ns(ns: NativeString, ln: Int) do
+	fun append_ns(ns: CString, ln: Int) do
 		if persisted then regen
 		var nlen = length + ln
 		if nlen > capacity then enlarge(nlen)
@@ -445,7 +584,7 @@ class Bytes
 	end
 
 	# Appends `ln` bytes from `ns` starting at index `from` to self
-	fun append_ns_from(ns: NativeString, ln, from: Int) do
+	fun append_ns_from(ns: CString, ln, from: Int) do
 		if persisted then regen
 		var nlen = length + ln
 		if nlen > capacity then enlarge(nlen)
@@ -453,20 +592,17 @@ class Bytes
 		length += ln
 	end
 
-	# Appends the bytes of `s` to `selftextextt`
-	fun append_text(s: Text) do
-		for i in s.substrings do
-			append_ns(i.fast_cstring, i.byte_length)
-		end
-	end
+	# Appends the bytes of `str` to `self`
+	fun append_text(str: Text) do str.append_to_bytes self
 
 	redef fun append_to(b) do b.append self
 
 	redef fun enlarge(sz) do
 		if capacity >= sz then return
 		persisted = false
+		if capacity < 16 then capacity = 16
 		while capacity < sz do capacity = capacity * 2 + 2
-		var ns = new NativeString(capacity)
+		var ns = new CString(capacity)
 		items.copy_to(ns, length, 0, 0)
 		items = ns
 	end
@@ -474,7 +610,7 @@ class Bytes
 	redef fun to_s do
 		persisted = true
 		var b = self
-		var r = b.items.to_s_with_length(length)
+		var r = b.items.to_s_unsafe(length, copy=false)
 		if r != items then persisted = false
 		return r
 	end
@@ -519,7 +655,7 @@ class Bytes
 
 	# Splits the content on self when encountering `b`
 	#
-	#     var a = "String is string".to_bytes.split_with('s'.ascii)
+	#     var a = "String is string".to_bytes.split_with(u's')
 	#     assert a.length == 3
 	#     assert a[0].hexdigest == "537472696E672069"
 	#     assert a[1].hexdigest == "20"
@@ -539,7 +675,7 @@ class Bytes
 
 	# Splits `self` in two parts at the first occurence of `b`
 	#
-	#     var a = "String is string".to_bytes.split_once_on('s'.ascii)
+	#     var a = "String is string".to_bytes.split_once_on(u's')
 	#     assert a[0].hexdigest == "537472696E672069"
 	#     assert a[1].hexdigest == "20737472696E67"
 	fun split_once_on(b: BytePattern): Array[Bytes] do
@@ -553,7 +689,7 @@ class Bytes
 
 	# Replaces all the occurences of `this` in `self` by `by`
 	#
-	#     var b = "String is string".to_bytes.replace(0x20u8, 0x41u8)
+	#     var b = "String is string".to_bytes.replace(0x20, 0x41)
 	#     assert b.hexdigest == "537472696E6741697341737472696E67"
 	fun replace(pattern: BytePattern, bytes: BytePattern): Bytes do
 		if is_empty then return new Bytes.empty
@@ -572,34 +708,35 @@ class Bytes
 
 	# Decode `self` from percent (or URL) encoding to a clear string
 	#
-	# Replace invalid use of '%' with '?'.
+	# Invalid '%' are not decoded.
 	#
 	#     assert "aBc09-._~".to_bytes.from_percent_encoding == "aBc09-._~".to_bytes
 	#     assert "%25%28%29%3c%20%3e".to_bytes.from_percent_encoding == "%()< >".to_bytes
 	#     assert ".com%2fpost%3fe%3dasdf%26f%3d123".to_bytes.from_percent_encoding == ".com/post?e=asdf&f=123".to_bytes
 	#     assert "%25%28%29%3C%20%3E".to_bytes.from_percent_encoding == "%()< >".to_bytes
-	#     assert "incomplete %".to_bytes.from_percent_encoding == "incomplete ?".to_bytes
-	#     assert "invalid % usage".to_bytes.from_percent_encoding == "invalid ? usage".to_bytes
+	#     assert "incomplete %".to_bytes.from_percent_encoding == "incomplete %".to_bytes
+	#     assert "invalid % usage".to_bytes.from_percent_encoding == "invalid % usage".to_bytes
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".to_bytes.from_percent_encoding == "éあいう".to_bytes
+	#     assert "%1 %A %C3%A9A9".to_bytes.from_percent_encoding == "%1 %A éA9".to_bytes
 	fun from_percent_encoding: Bytes do
 		var tmp = new Bytes.with_capacity(length)
 		var pos = 0
 		while pos < length do
 			var b = self[pos]
-			if b != '%'.ascii then
+			if b != u'%' then
 				tmp.add b
 				pos += 1
 				continue
 			end
 			if length - pos < 2 then
-				tmp.add '?'.ascii
+				tmp.add u'%'
 				pos += 1
 				continue
 			end
 			var bn = self[pos + 1]
 			var bnn = self[pos + 2]
 			if not bn.is_valid_hexdigit or not bnn.is_valid_hexdigit then
-				tmp.add '?'.ascii
+				tmp.add u'%'
 				pos += 1
 				continue
 			end
@@ -635,9 +772,9 @@ class Bytes
 end
 
 private class BytesIterator
-	super IndexedIterator[Byte]
+	super IndexedIterator[Int]
 
-	var tgt: NativeString
+	var tgt: CString
 
 	redef var index
 
@@ -652,64 +789,12 @@ private class BytesIterator
 	redef fun item do return tgt[index]
 end
 
-redef class Int
-	# A big-endian representation of self.
-	#
-	# ~~~
-	# assert     1.to_bytes.hexdigest ==     "01"
-	# assert   255.to_bytes.hexdigest ==     "FF"
-	# assert   256.to_bytes.hexdigest ==   "0100"
-	# assert 65535.to_bytes.hexdigest ==   "FFFF"
-	# assert 65536.to_bytes.hexdigest == "010000"
-	# ~~~
-	#
-	# For 0, a Bytes object with single nul byte is returned (instead of an empty Bytes object).
-	#
-	# ~~~
-	# assert 0.to_bytes.hexdigest == "00"
-	# ~~~
-	#
-	# `Bytes::to_i` can be used to do the reverse operation.
-	#
-	# ~~~
-	# assert 1234.to_bytes.to_i == 1234
-	# ~~~
-	#
-	# Require self >= 0
-	fun to_bytes: Bytes do
-		if self == 0 then return "\0".to_bytes
-		assert self > 0
-
-		# Compute the len (log256)
-		var len = 1
-		var max = 256
-		while self >= max do
-			len += 1
-			max *= 256
-		end
-
-		# Allocate the buffer
-		var res = new Bytes.with_capacity(len)
-		for i in [0..len[ do res[i] = 0u8
-
-		# Fill it starting with the end
-		var i = len
-		var sum = self
-		while i > 0 do
-			i -= 1
-			res[i] = (sum % 256).to_b
-			sum /= 256
-		end
-		return res
-	end
-end
-
 redef class Text
 	# Returns a mutable copy of `self`'s bytes
 	#
 	# ~~~nit
 	# assert "String".to_bytes isa Bytes
-	# assert "String".to_bytes == [83u8, 116u8, 114u8, 105u8, 110u8, 103u8]
+	# assert "String".to_bytes == [83, 116, 114, 105, 110, 103]
 	# ~~~
 	fun to_bytes: Bytes do
 		var b = new Bytes.with_capacity(byte_length)
@@ -736,7 +821,7 @@ redef class Text
 
 	# Returns a new `Bytes` instance with the digest as content
 	#
-	#     assert "0B1F4D".hexdigest_to_bytes == [0x0Bu8, 0x1Fu8, 0x4Du8]
+	#     assert "0B1F4D".hexdigest_to_bytes == [0x0B, 0x1F, 0x4D]
 	#     assert "0B1F4D".hexdigest_to_bytes.hexdigest == "0B1F4D"
 	#
 	# Characters that are not hexadecimal digits are ignored.
@@ -771,7 +856,7 @@ redef class Text
 		var ret = new Bytes.with_capacity((dlength+1) / 2)
 
 		var i = (dlength+1) % 2 # current hex digit (1=high, 0=low)
-		var byte = 0u8 # current accumulated byte value
+		var byte = 0 # current accumulated byte value
 
 		pos = 0
 		while pos < max do
@@ -783,7 +868,7 @@ redef class Text
 					# Last digit known: store and restart
 					ret.add byte
 					i = 1
-					byte = 0u8
+					byte = 0
 				end
 			end
 			pos += 1
@@ -796,7 +881,7 @@ redef class Text
 	#     assert "&lt;STRING&#47;&rt;".hexdigest == "266C743B535452494E47262334373B2672743B"
 	fun hexdigest: String do
 		var ln = byte_length
-		var outns = new NativeString(ln * 2)
+		var outns = new CString(ln * 2)
 		var oi = 0
 		for i in [0 .. ln[ do
 			bytes[i].add_digest_at(outns, oi)
@@ -841,7 +926,7 @@ redef class Text
 			else if c == 'x' or c == 'X' then
 				var hx = substring(i + 1, 2)
 				if hx.is_hex then
-					res.add(hx.to_hex.to_b)
+					res.add hx.to_hex
 				else
 					res.add_char(c)
 				end
@@ -894,23 +979,23 @@ redef class Text
 		while pos < max do
 			var c = b[pos]
 			pos += 1
-			if c == 0x30u8 or c == 0x31u8 then bitlen += 1 # b'0' or b'1'
+			if c == u'0' or c == u'1' then bitlen += 1
 		end
 
 		# Allocate (and take care of the padding)
 		var ret = new Bytes.with_capacity((bitlen+7) / 8)
 
 		var i = (bitlen+7) % 8 # current bit (7th=128, 0th=1)
-		var byte = 0u8 # current accumulated byte value
+		var byte = 0 # current accumulated byte value
 
 		pos = 0
 		while pos < max do
 			var c = b[pos]
 			pos += 1
-			if c == 0x30u8 then # b'0'
+			if c == u'0' then
 				byte = byte << 1
-			else if c == 0x31u8 then # b'1'
-				byte = byte << 1 | 1u8
+			else if c == u'1' then
+				byte = byte << 1 | 1
 			else
 				continue
 			end
@@ -920,7 +1005,7 @@ redef class Text
 				# Last bit known: store and restart
 				ret.add byte
 				i = 7
-				byte = 0u8
+				byte = 0
 			end
 		end
 		return ret
@@ -930,11 +1015,11 @@ end
 redef class FlatText
 	redef fun append_to_bytes(b) do
 		var from = if self isa FlatString then first_byte else 0
-		b.append_ns_from(items, byte_length, from)
+		if isset _items then b.append_ns_from(items, byte_length, from)
 	end
 end
 
-redef class NativeString
+redef class CString
 	# Creates a new `Bytes` object from `self` with `len` as length
 	#
 	# If `len` is null, strlen will determine the length of the Bytes
@@ -948,7 +1033,7 @@ redef class NativeString
 	# If `len` is null, strlen will determine the length of the Bytes
 	fun to_bytes_with_copy(len: nullable Int): Bytes do
 		if len == null then len = cstring_length
-		var nns = new NativeString(len)
+		var nns = new CString(len)
 		copy_to(nns, len, 0, 0)
 		return new Bytes(nns, len, len)
 	end
@@ -956,7 +1041,7 @@ end
 
 # Joins an array of bytes `arr` separated by `sep`
 #
-#     assert join_bytes(["String".to_bytes, "is".to_bytes, "string".to_bytes], ' '.ascii).hexdigest == "537472696E6720697320737472696E67"
+#     assert join_bytes(["String".to_bytes, "is".to_bytes, "string".to_bytes], u' ').hexdigest == "537472696E6720697320737472696E67"
 fun join_bytes(arr: Array[Bytes], sep: nullable BytePattern): Bytes do
 	if arr.is_empty then return new Bytes.empty
 	sep = sep or else new Bytes.empty

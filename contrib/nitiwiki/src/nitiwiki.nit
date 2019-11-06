@@ -17,6 +17,7 @@ module nitiwiki
 
 import wiki_html
 import markdown_highlight
+import config
 
 # Locate nit directory
 private fun compute_nit_dir(opt_nit_dir: OptionString): String do
@@ -68,7 +69,6 @@ private fun check_nit_dir(res: String): Bool do
 	return res.file_exists and "{res}/src/nit.nit".file_exists
 end
 
-var opt_help = new OptionBool("Display this help message", "-h", "--help")
 var opt_verbose = new OptionCount("Verbose level", "-v")
 var opt_config = new OptionString("Path to config.ini file", "-c", "--config")
 var opt_init = new OptionBool("Initialize a new wiki in the current directory", "--init")
@@ -80,19 +80,24 @@ var opt_rsync = new OptionBool("Synchronize outdir with distant wiki using rsync
 var opt_fetch = new OptionBool("Render local source from git repo", "--fetch")
 var opt_nit_dir = new OptionString("Nit base directory", "--nit-dir")
 
-var context = new OptionContext
-context.add_option(opt_help, opt_verbose, opt_config)
-context.add_option(opt_init, opt_status, opt_render, opt_force)
-context.add_option(opt_clean, opt_rsync, opt_fetch, opt_nit_dir)
-context.parse(args)
+var config = new Config
+config.add_option(opt_verbose, opt_config)
+config.add_option(opt_init, opt_status, opt_render, opt_force)
+config.add_option(opt_clean, opt_rsync, opt_fetch, opt_nit_dir)
 
-var config_filename = "config.ini"
+var usage = new Buffer
+usage.append "Usage: nitiwiki [OPTION]...\n"
+usage.append "A wiki engine based on markdown files and git."
+config.tool_description = usage.write_to_string
 
-# --help
-if opt_help.value then
-	context.usage
+config.parse_options(args)
+
+if config.opt_help.value then
+	config.usage
 	exit 0
 end
+
+var config_filename = "config.ini"
 
 # --init
 if opt_init.value then
@@ -128,8 +133,8 @@ if not config_file.file_exists then
 	exit 0
 end
 
-var config = new WikiConfig(config_file)
-var wiki = new Nitiwiki(config)
+var wiki_config = new WikiConfig(config_file)
+var wiki = new Nitiwiki(wiki_config)
 
 # --verbose
 wiki.verbose_level = opt_verbose.value

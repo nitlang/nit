@@ -1,0 +1,56 @@
+/*
+ * Copyright 2017 Alexandre Terrasa <alexandre@moz-code.org>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * Code Highlighting
+ */
+
+.nitdoc h1, .nitdoc h2, .nitdoc h3, .nitdoc h4, .nitdoc h5, .nitdoc h6 {
+	color: #333;
+}
+
+.nitdoc .synopsis {
+	margin-top: 0;
+}
+
+.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
+.nitcode a:hover { text-decoration: underline; } /* underline links */
+.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
+/* lexical raw tokens. independent of usage or semantic: */
+.nitcode .nc_c { color: gray; font-style: italic; } /* comment */
+.nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
+.nitcode .nc_k { font-weight: bold; } /* keyword */
+.nitcode .nc_o {} /* operator */
+.nitcode .nc_i {} /* standard identifier */
+.nitcode .nc_t { color: #445588; font-weight: bold; } /* type/class identifier */
+.nitcode .nc_a { color: #445588; font-style: italic; } /* old style attribute identifier */
+.nitcode .nc_l { color: #009999; } /* char and number literal */
+.nitcode .nc_s { color: #8F1546; } /* string literal */
+/* syntactic token usage. added because of their position in the AST */
+.nitcode .nc_ast { color: blue; } /* assert label */
+.nitcode .nc_la { color: blue; } /* break/continue label */
+.nitcode .nc_m { color: #445588; } /* module name */
+/* syntactic groups */
+.nitcode .nc_def { font-weight: bold; color: blue; } /* name used in a definition */
+.nitcode .nc_def.nc_a { color: blue; } /* name used in a attribute definition */
+.nitcode .nc_def.nc_t { color: blue; } /* name used in a class or vt definition */
+.nitcode .nc_ss { color: #9E6BEB; } /* superstrings */
+.nitcode .nc_cdef {} /* A whole class definition */
+.nitcode .nc_pdef {} /* A whole property definition */
+/* semantic token usage */
+.nitcode .nc_v { font-style: italic; } /* local variable or parameter */
+.nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
+.nitcode .nc_error { border: 1px red solid;} /* not used */

@@ -130,8 +130,8 @@ private extern class CallArg `{ nit_call_arg* `}
 	# The `Instance` held by this cell
 	fun instance=(value: Instance) is light_ffi `{ self->value_Pointer = value; `}
 
-	# The `NativeString` held by this cell
-	fun native_string: NativeString `{ return (char*)self->value_Pointer; `}
+	# The `CString` held by this cell
+	fun c_string: CString `{ return (char*)self->value_Pointer; `}
 
 	# Set the content of this cell according to `static_type`
 	#
@@ -168,8 +168,8 @@ private extern class CallArg `{ nit_call_arg* `}
 		else if static_type.name == "Float" then
 			assert value isa PrimitiveInstance[Float]
 			self.float = value.val
-		else if static_type.name == "NativeString" then
-			assert value isa PrimitiveInstance[NativeString]
+		else if static_type.name == "CString" then
+			assert value isa PrimitiveInstance[CString]
 			self.pointer = value.val
 		else if static_type isa MClassType and static_type.mclass.kind == extern_kind then
 			assert value isa PrimitiveInstance[Pointer] else print value.class_name
@@ -207,8 +207,8 @@ private extern class CallArg `{ nit_call_arg* `}
 			return v.uint32_instance(self.uint32)
 		else if name == "Float" then
 			return v.float_instance(self.float)
-		else if name == "NativeString" then
-			var instance = new PrimitiveInstance[NativeString](static_type, self.native_string)
+		else if name == "CString" then
+			var instance = new PrimitiveInstance[CString](static_type, self.c_string)
 			v.init_instance_primitive instance
 			return instance
 		else if static_type isa MClassType and static_type.mclass.kind == extern_kind then
@@ -225,17 +225,17 @@ end
 # Handle to foreign code library
 private extern class ForeignCodeLib
 	# Open and load the library at `path`
-	new dlopen(path: NativeString) `{
+	new dlopen(path: CString) `{
 		return dlopen(path, RTLD_LOCAL | RTLD_NOW);
 	`}
 
 	# Find the `ForeignCodeEntry` at `symbol_name`
-	fun dlsym(symbol_name: NativeString): ForeignCodeEntry `{
+	fun dlsym(symbol_name: CString): ForeignCodeEntry `{
 		return dlsym(self, symbol_name);
 	`}
 end
 
-private fun dlerror: NativeString `{ return dlerror(); `}
+private fun dlerror: CString `{ return dlerror(); `}
 
 # Handle to an implementation function in a `ForeignCodeLib`
 private extern class ForeignCodeEntry`{ nit_foreign_lib_entry `}

@@ -17,7 +17,7 @@
 
 class BackIntComparator
 	super Comparator
-	redef type COMPARED: Int
+	redef type COMPARED: Int is fixed
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return b <=> a
@@ -28,7 +28,7 @@ end
 
 class DecimalComparator
 	super Comparator
-	redef type COMPARED: Int
+	redef type COMPARED: Int is fixed
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return (a%10) <=> (b%10)

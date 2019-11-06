@@ -1,0 +1,33 @@
+<div class='container'>
+	<div class='col-xs-2 no-padding'>
+		<img class='avatar' style='width:100%; max-width:100px' src='https://secure.gravatar.com/avatar/{{vm.person.gravatar}}?size=100&amp;default=retro' />
+	</div>
+	<div class='col-xs-10'>
+		<h1>
+			{{vm.person.name}}<br>
+			<small>{{vm.person.email}}</small>
+		</h1>
+	</div>
+	<hr/>
+</div>
+<br><br>
+<div class='container'>
+	<div ng-if='vm.maintaining.results.length > 0'>
+		<h3 id='maintaining'>{{vm.maintaining.count}} maintained projects</h3>
+		<div class='card-list'>
+			<entity-card mentity='package' ng-repeat='package in vm.maintaining.results' />
+		</div>
+		<div class='container text-center' ng-if='vm.maintaining'>
+			<ui-pagination pagination='vm.maintaining' suffix='1'/>
+		</div>
+	</div>
+	<div ng-if='vm.contributing.results.length > 0'>
+		<h3 id='contributing'>{{vm.contributing.count}} contributed projects</h3>
+		<div class='card-list'>
+			<entity-card mentity='package' ng-repeat='package in vm.contributing.results' />
+		</div>
+		<div class='container text-center' ng-if='vm.contributing'>
+			<ui-pagination pagination='vm.contributing' suffix='2' />
+		</div>
+	</div>
+</div>

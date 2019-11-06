@@ -21,23 +21,6 @@ import parser
 import parser_util
 import astutil
 
-# A basic visitor that prints AST trees to the screen
-class PrintTreeVisitor
-	super Visitor
-	private var rank: Int = 0
-	redef fun visit(n)
-	do
-		if n isa Token then
-			printn("  " * rank, n.class_name, " \"", n.text.escape_to_c, "\" ", n.location, "\n")
-		else
-			printn("  " * rank, n.class_name, " ", n.location, "\n")
-		end
-		rank = rank + 1
-		n.visit_all(self)
-		rank = rank - 1
-	end
-end
-
 var no_print = false
 var only_lexer = false
 var need_help = false
@@ -112,7 +95,7 @@ else if interactive then
 		end
 
 		if not no_print then
-			(new PrintTreeVisitor).enter_visit(n)
+			n.dump_tree
 		end
 	end
 else
@@ -148,7 +131,7 @@ else
 				tree.parentize_tokens
 				tree.to_xml.write_to(stdout)
 			else if not no_print then
-				(new PrintTreeVisitor).enter_visit(tree)
+				tree.dump_tree
 			end
 		end
 	end

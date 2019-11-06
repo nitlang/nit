@@ -1,10 +1,13 @@
 #include "core__circular_array.sep.0.h"
-/* method circular_array#CircularArray#native for (self: CircularArray[nullable Object]): NativeArray[nullable Object] */
+/* method circular_array$CircularArray$native for (self: CircularArray[nullable Object]): NativeArray[nullable Object] */
 val* core___core__CircularArray___native(val* self) {
 val* var /* : NativeArray[nullable Object] */;
 val* var1 /* : NativeArray[nullable Object] */;
 var1 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -13,7 +16,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#native= for (self: CircularArray[nullable Object], NativeArray[nullable Object]) */
+/* method circular_array$CircularArray$native= for (self: CircularArray[nullable Object], NativeArray[nullable Object]) */
 void core___core__CircularArray___native_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -39,7 +42,7 @@ fatal_exit(1);
 self->attrs[COLOR_core__circular_array__CircularArray___native].val = p0; /* _native on <self:CircularArray[nullable Object]> */
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#head for (self: CircularArray[nullable Object]): Int */
+/* method circular_array$CircularArray$head for (self: CircularArray[nullable Object]): Int */
 long core___core__CircularArray___head(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -48,12 +51,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#head= for (self: CircularArray[nullable Object], Int) */
+/* method circular_array$CircularArray$head= for (self: CircularArray[nullable Object], Int) */
 void core___core__CircularArray___head_61d(val* self, long p0) {
 self->attrs[COLOR_core__circular_array__CircularArray___head].l = p0; /* _head on <self:CircularArray[nullable Object]> */
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#tail for (self: CircularArray[nullable Object]): Int */
+/* method circular_array$CircularArray$tail for (self: CircularArray[nullable Object]): Int */
 long core___core__CircularArray___tail(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -62,12 +65,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#tail= for (self: CircularArray[nullable Object], Int) */
+/* method circular_array$CircularArray$tail= for (self: CircularArray[nullable Object], Int) */
 void core___core__CircularArray___tail_61d(val* self, long p0) {
 self->attrs[COLOR_core__circular_array__CircularArray___tail].l = p0; /* _tail on <self:CircularArray[nullable Object]> */
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#length for (self: CircularArray[nullable Object]): Int */
+/* method circular_array$CircularArray$length for (self: CircularArray[nullable Object]): Int */
 long core___core__CircularArray___core__abstract_collection__Collection__length(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -76,12 +79,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#length= for (self: CircularArray[nullable Object], Int) */
+/* method circular_array$CircularArray$length= for (self: CircularArray[nullable Object], Int) */
 void core___core__CircularArray___length_61d(val* self, long p0) {
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = p0; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#offset for (self: CircularArray[nullable Object], Int): Int */
+/* method circular_array$CircularArray$offset for (self: CircularArray[nullable Object], Int): Int */
 long core___core__CircularArray___offset(val* self, long p0) {
 long var /* : Int */;
 long var_index /* var index: Int */;
@@ -133,14 +136,14 @@ const char* var_class_name46;
 short int var47 /* : Bool */;
 var_index = p0;
 {
-{ /* Inline kernel#Int#>= (var_index,0l) on <var_index:Int> */
+{ /* Inline kernel$Int$>= (var_index,0l) on <var_index:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var3 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var3)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var4 = var_index >= 0l;
@@ -150,6 +153,9 @@ RET_LABEL2:(void)0;
 }
 }
 if (unlikely(!var1)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 71);
 fatal_exit(1);
@@ -159,14 +165,14 @@ var_head = var5;
 var6 = self->attrs[COLOR_core__circular_array__CircularArray___tail].l; /* _tail on <self:CircularArray[nullable Object]> */
 var_tail = var6;
 {
-{ /* Inline kernel#Int#+ (var_head,var_index) on <var_head:Int> */
+{ /* Inline kernel$Int$+ (var_head,var_index) on <var_head:Int> */
 /* Covariant cast for argument 0 (i) <var_index:Int> isa OTHER */
 /* <var_index:Int> isa OTHER */
 var9 = 1; /* easy <var_index:Int> isa OTHER*/
 if (unlikely(!var9)) {
 var_class_name12 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var13 = var_head + var_index;
@@ -177,14 +183,14 @@ RET_LABEL8:(void)0;
 }
 var_offset = var7;
 {
-{ /* Inline kernel#Int#> (var_head,var_tail) on <var_head:Int> */
+{ /* Inline kernel$Int$> (var_head,var_tail) on <var_head:Int> */
 /* Covariant cast for argument 0 (i) <var_tail:Int> isa OTHER */
 /* <var_tail:Int> isa OTHER */
 var16 = 1; /* easy <var_tail:Int> isa OTHER*/
 if (unlikely(!var16)) {
 var_class_name19 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name19);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var20 = var_head > var_tail;
@@ -195,9 +201,12 @@ RET_LABEL15:(void)0;
 }
 if (var14){
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
 var23 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var23 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -207,7 +216,7 @@ RET_LABEL22:(void)0;
 }
 }
 {
-{ /* Inline array#NativeArray#length (var21) on <var21:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var21) on <var21:NativeArray[nullable Object]> */
 var26 = ((struct instance_core__NativeArray*)var21)->length;
 var24 = var26;
 goto RET_LABEL25;
@@ -216,14 +225,14 @@ RET_LABEL25:(void)0;
 }
 var_capacity = var24;
 {
-{ /* Inline kernel#Int#< (var_offset,var_capacity) on <var_offset:Int> */
+{ /* Inline kernel$Int$< (var_offset,var_capacity) on <var_offset:Int> */
 /* Covariant cast for argument 0 (i) <var_capacity:Int> isa OTHER */
 /* <var_capacity:Int> isa OTHER */
 var29 = 1; /* easy <var_capacity:Int> isa OTHER*/
 if (unlikely(!var29)) {
 var_class_name32 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var33 = var_offset < var_capacity;
@@ -238,14 +247,14 @@ goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline kernel#Int#- (var_offset,var_capacity) on <var_offset:Int> */
+{ /* Inline kernel$Int$- (var_offset,var_capacity) on <var_offset:Int> */
 /* Covariant cast for argument 0 (i) <var_capacity:Int> isa OTHER */
 /* <var_capacity:Int> isa OTHER */
 var36 = 1; /* easy <var_capacity:Int> isa OTHER*/
 if (unlikely(!var36)) {
 var_class_name39 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var40 = var_offset - var_capacity;
@@ -258,14 +267,14 @@ var_offset = var34;
 } else {
 }
 {
-{ /* Inline kernel#Int#<= (var_offset,var_tail) on <var_offset:Int> */
+{ /* Inline kernel$Int$<= (var_offset,var_tail) on <var_offset:Int> */
 /* Covariant cast for argument 0 (i) <var_tail:Int> isa OTHER */
 /* <var_tail:Int> isa OTHER */
 var43 = 1; /* easy <var_tail:Int> isa OTHER*/
 if (unlikely(!var43)) {
 var_class_name46 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name46);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 724);
 fatal_exit(1);
 }
 var47 = var_offset <= var_tail;
@@ -275,6 +284,9 @@ RET_LABEL42:(void)0;
 }
 }
 if (unlikely(!var41)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 85);
 fatal_exit(1);
@@ -284,7 +296,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#[] for (self: CircularArray[nullable Object], Int): nullable Object */
+/* method circular_array$CircularArray$[] for (self: CircularArray[nullable Object], Int): nullable Object */
 val* core___core__CircularArray___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0) {
 val* var /* : nullable Object */;
 long var_index /* var index: Int */;
@@ -295,9 +307,12 @@ val* var5 /* : nullable Object */;
 val* var7 /* : Object */;
 var_index = p0;
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -310,7 +325,7 @@ RET_LABEL2:(void)0;
 var4 = core___core__CircularArray___offset(self, var_index);
 }
 {
-{ /* Inline array#NativeArray#[] (var1,var4) on <var1:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[] (var1,var4) on <var1:NativeArray[nullable Object]> */
 var7 = ((struct instance_core__NativeArray*)var1)->values[var4];
 var5 = var7;
 goto RET_LABEL6;
@@ -322,7 +337,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#[]= for (self: CircularArray[nullable Object], Int, nullable Object) */
+/* method circular_array$CircularArray$[]= for (self: CircularArray[nullable Object], Int, nullable Object) */
 void core___core__CircularArray___core__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, val* p1) {
 short int var /* : Bool */;
 int cltype;
@@ -370,7 +385,7 @@ fatal_exit(1);
 var_index = p0;
 var_item = p1;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -378,7 +393,7 @@ RET_LABEL2:(void)0;
 }
 var_l = var1;
 {
-{ /* Inline kernel#Int#== (var_index,var_l) on <var_index:Int> */
+{ /* Inline kernel$Int$== (var_index,var_l) on <var_index:Int> */
 var6 = var_index == var_l;
 var4 = var6;
 goto RET_LABEL5;
@@ -387,15 +402,18 @@ RET_LABEL5:(void)0;
 }
 if (var4){
 {
-core___core__CircularArray___core__abstract_collection__Sequence__push(self, var_item); /* Direct call circular_array#CircularArray#push on <self:CircularArray[nullable Object]>*/
+core___core__CircularArray___core__abstract_collection__Sequence__push(self, var_item); /* Direct call circular_array$CircularArray$push on <self:CircularArray[nullable Object]>*/
 }
 goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
 var9 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var9 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -408,7 +426,7 @@ RET_LABEL8:(void)0;
 var10 = core___core__CircularArray___offset(self, var_index);
 }
 {
-{ /* Inline array#NativeArray#[]= (var7,var10,var_item) on <var7:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[]= (var7,var10,var_item) on <var7:NativeArray[nullable Object]> */
 /* Covariant cast for argument 1 (item) <var_item:nullable Object> isa E */
 /* <var_item:nullable Object> isa E */
 type_struct15 = var7->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -427,7 +445,7 @@ var12 = (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->type_
 if (unlikely(!var12)) {
 var_class_name17 = var_item == NULL ? "null" : (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var7)->values[var10]=var_item;
@@ -436,7 +454,7 @@ RET_LABEL11:(void)0;
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#push for (self: CircularArray[nullable Object], nullable Object) */
+/* method circular_array$CircularArray$push for (self: CircularArray[nullable Object], nullable Object) */
 void core___core__CircularArray___core__abstract_collection__Sequence__push(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -509,21 +527,21 @@ fatal_exit(1);
 }
 var_item = p0;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var1,1l) on <var1:Int> */
+{ /* Inline kernel$Int$+ (var1,1l) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var6 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var6)) {
 var_class_name9 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var10 = var1 + 1l;
@@ -534,23 +552,26 @@ RET_LABEL5:(void)0;
 }
 var_l = var4;
 {
-core___core__CircularArray___enlarge(self, var_l); /* Direct call circular_array#CircularArray#enlarge on <self:CircularArray[nullable Object]>*/
+core___core__CircularArray___enlarge(self, var_l); /* Direct call circular_array$CircularArray$enlarge on <self:CircularArray[nullable Object]>*/
 }
 {
-{ /* Inline circular_array#CircularArray#length= (self,var_l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length= (self,var_l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = var_l; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL11:(void)0;
 }
 }
 var12 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 105);
 fatal_exit(1);
 }
 var_native = var12;
 {
-{ /* Inline array#NativeArray#length (var_native) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var_native) on <var_native:NativeArray[nullable Object]> */
 var15 = ((struct instance_core__NativeArray*)var_native)->length;
 var13 = var15;
 goto RET_LABEL14;
@@ -559,21 +580,21 @@ RET_LABEL14:(void)0;
 }
 var_cap = var13;
 {
-{ /* Inline circular_array#CircularArray#tail (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail (self) on <self:CircularArray[nullable Object]> */
 var18 = self->attrs[COLOR_core__circular_array__CircularArray___tail].l; /* _tail on <self:CircularArray[nullable Object]> */
 var16 = var18;
 RET_LABEL17:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var16,1l) on <var16:Int> */
+{ /* Inline kernel$Int$+ (var16,1l) on <var16:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var21 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var21)) {
 var_class_name24 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var25 = var16 + 1l;
@@ -584,14 +605,14 @@ RET_LABEL20:(void)0;
 }
 var_t = var19;
 {
-{ /* Inline kernel#Int#>= (var_t,var_cap) on <var_t:Int> */
+{ /* Inline kernel$Int$>= (var_t,var_cap) on <var_t:Int> */
 /* Covariant cast for argument 0 (i) <var_cap:Int> isa OTHER */
 /* <var_cap:Int> isa OTHER */
 var28 = 1; /* easy <var_cap:Int> isa OTHER*/
 if (unlikely(!var28)) {
 var_class_name31 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var32 = var_t >= var_cap;
@@ -602,14 +623,14 @@ RET_LABEL27:(void)0;
 }
 if (var26){
 {
-{ /* Inline kernel#Int#- (var_t,var_cap) on <var_t:Int> */
+{ /* Inline kernel$Int$- (var_t,var_cap) on <var_t:Int> */
 /* Covariant cast for argument 0 (i) <var_cap:Int> isa OTHER */
 /* <var_cap:Int> isa OTHER */
 var35 = 1; /* easy <var_cap:Int> isa OTHER*/
 if (unlikely(!var35)) {
 var_class_name38 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var39 = var_t - var_cap;
@@ -622,7 +643,7 @@ var_t = var33;
 } else {
 }
 {
-{ /* Inline array#NativeArray#[]= (var_native,var_t,var_item) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[]= (var_native,var_t,var_item) on <var_native:NativeArray[nullable Object]> */
 /* Covariant cast for argument 1 (item) <var_item:nullable Object> isa E */
 /* <var_item:nullable Object> isa E */
 type_struct44 = var_native->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -641,7 +662,7 @@ var41 = (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->type_
 if (unlikely(!var41)) {
 var_class_name46 = var_item == NULL ? "null" : (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name46);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var_native)->values[var_t]=var_item;
@@ -649,14 +670,14 @@ RET_LABEL40:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#tail= (self,var_t) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail= (self,var_t) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___tail].l = var_t; /* _tail on <self:CircularArray[nullable Object]> */
 RET_LABEL47:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#add_all for (self: CircularArray[nullable Object], Collection[nullable Object]) */
+/* method circular_array$CircularArray$add_all for (self: CircularArray[nullable Object], Collection[nullable Object]) */
 void core___core__CircularArray___core__abstract_collection__SimpleCollection__add_all(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -691,7 +712,7 @@ fatal_exit(1);
 }
 var_items = p0;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -701,14 +722,14 @@ RET_LABEL2:(void)0;
 var4 = ((long(*)(val* self))((((long)var_items&3)?class_info[((long)var_items&3)]:var_items->class)->vft[COLOR_core__abstract_collection__Collection__length]))(var_items); /* length on <var_items:Collection[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#+ (var1,var4) on <var1:Int> */
+{ /* Inline kernel$Int$+ (var1,var4) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <var4:Int> isa OTHER */
 /* <var4:Int> isa OTHER */
 var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (unlikely(!var7)) {
 var_class_name10 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var11 = var1 + var4;
@@ -718,14 +739,14 @@ RET_LABEL6:(void)0;
 }
 }
 {
-core___core__CircularArray___enlarge(self, var5); /* Direct call circular_array#CircularArray#enlarge on <self:CircularArray[nullable Object]>*/
+core___core__CircularArray___enlarge(self, var5); /* Direct call circular_array$CircularArray$enlarge on <self:CircularArray[nullable Object]>*/
 }
 {
 ((void(*)(val* self, val* p0))(self->class->vft[COLOR_core___core__CircularArray___core__abstract_collection__SimpleCollection__add_all]))(self, p0); /* add_all on <self:CircularArray[nullable Object]>*/
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#pop for (self: CircularArray[nullable Object]): nullable Object */
+/* method circular_array$CircularArray$pop for (self: CircularArray[nullable Object]): nullable Object */
 val* core___core__CircularArray___core__abstract_collection__Sequence__pop(val* self) {
 val* var /* : nullable Object */;
 long var1 /* : Int */;
@@ -772,21 +793,21 @@ int idtype44;
 const char* var_class_name45;
 long var46 /* : Int */;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var1,1l) on <var1:Int> */
+{ /* Inline kernel$Int$- (var1,1l) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var6 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var6)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var7 = var1 - 1l;
@@ -797,14 +818,14 @@ RET_LABEL5:(void)0;
 }
 var_l = var4;
 {
-{ /* Inline kernel#Int#>= (var_l,0l) on <var_l:Int> */
+{ /* Inline kernel$Int$>= (var_l,0l) on <var_l:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var10 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name13 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var14 = var_l >= 0l;
@@ -814,25 +835,31 @@ RET_LABEL9:(void)0;
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 121);
 fatal_exit(1);
 }
 {
-{ /* Inline circular_array#CircularArray#length= (self,var_l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length= (self,var_l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = var_l; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL15:(void)0;
 }
 }
 var16 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var16 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 124);
 fatal_exit(1);
 }
 var_native = var16;
 {
-{ /* Inline circular_array#CircularArray#tail (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail (self) on <self:CircularArray[nullable Object]> */
 var19 = self->attrs[COLOR_core__circular_array__CircularArray___tail].l; /* _tail on <self:CircularArray[nullable Object]> */
 var17 = var19;
 RET_LABEL18:(void)0;
@@ -840,7 +867,7 @@ RET_LABEL18:(void)0;
 }
 var_t = var17;
 {
-{ /* Inline array#NativeArray#[] (var_native,var_t) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[] (var_native,var_t) on <var_native:NativeArray[nullable Object]> */
 var22 = ((struct instance_core__NativeArray*)var_native)->values[var_t];
 var20 = var22;
 goto RET_LABEL21;
@@ -849,14 +876,14 @@ RET_LABEL21:(void)0;
 }
 var_res = var20;
 {
-{ /* Inline kernel#Int#- (var_t,1l) on <var_t:Int> */
+{ /* Inline kernel$Int$- (var_t,1l) on <var_t:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var25 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var29 = var_t - 1l;
@@ -867,14 +894,14 @@ RET_LABEL24:(void)0;
 }
 var_t = var23;
 {
-{ /* Inline kernel#Int#< (var_t,0l) on <var_t:Int> */
+{ /* Inline kernel$Int$< (var_t,0l) on <var_t:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var32 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var32)) {
 var_class_name35 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name35);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var36 = var_t < 0l;
@@ -885,7 +912,7 @@ RET_LABEL31:(void)0;
 }
 if (var30){
 {
-{ /* Inline array#NativeArray#length (var_native) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var_native) on <var_native:NativeArray[nullable Object]> */
 var39 = ((struct instance_core__NativeArray*)var_native)->length;
 var37 = var39;
 goto RET_LABEL38;
@@ -893,14 +920,14 @@ RET_LABEL38:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var_t,var37) on <var_t:Int> */
+{ /* Inline kernel$Int$+ (var_t,var37) on <var_t:Int> */
 /* Covariant cast for argument 0 (i) <var37:Int> isa OTHER */
 /* <var37:Int> isa OTHER */
 var42 = 1; /* easy <var37:Int> isa OTHER*/
 if (unlikely(!var42)) {
 var_class_name45 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name45);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var46 = var_t + var37;
@@ -913,7 +940,7 @@ var_t = var40;
 } else {
 }
 {
-{ /* Inline circular_array#CircularArray#tail= (self,var_t) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail= (self,var_t) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___tail].l = var_t; /* _tail on <self:CircularArray[nullable Object]> */
 RET_LABEL47:(void)0;
 }
@@ -923,7 +950,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#unshift for (self: CircularArray[nullable Object], nullable Object) */
+/* method circular_array$CircularArray$unshift for (self: CircularArray[nullable Object], nullable Object) */
 void core___core__CircularArray___core__abstract_collection__Sequence__unshift(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -995,21 +1022,21 @@ fatal_exit(1);
 }
 var_item = p0;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var1,1l) on <var1:Int> */
+{ /* Inline kernel$Int$+ (var1,1l) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var6 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var6)) {
 var_class_name9 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var10 = var1 + 1l;
@@ -1020,37 +1047,40 @@ RET_LABEL5:(void)0;
 }
 var_l = var4;
 {
-core___core__CircularArray___enlarge(self, var_l); /* Direct call circular_array#CircularArray#enlarge on <self:CircularArray[nullable Object]>*/
+core___core__CircularArray___enlarge(self, var_l); /* Direct call circular_array$CircularArray$enlarge on <self:CircularArray[nullable Object]>*/
 }
 {
-{ /* Inline circular_array#CircularArray#length= (self,var_l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length= (self,var_l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = var_l; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL11:(void)0;
 }
 }
 var12 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var12 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 140);
 fatal_exit(1);
 }
 var_native = var12;
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
 var15 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
 var13 = var15;
 RET_LABEL14:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var13,1l) on <var13:Int> */
+{ /* Inline kernel$Int$- (var13,1l) on <var13:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var18 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var18)) {
 var_class_name21 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var22 = var13 - 1l;
@@ -1061,14 +1091,14 @@ RET_LABEL17:(void)0;
 }
 var_h = var16;
 {
-{ /* Inline kernel#Int#< (var_h,0l) on <var_h:Int> */
+{ /* Inline kernel$Int$< (var_h,0l) on <var_h:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var25 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var29 = var_h < 0l;
@@ -1079,7 +1109,7 @@ RET_LABEL24:(void)0;
 }
 if (var23){
 {
-{ /* Inline array#NativeArray#length (var_native) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var_native) on <var_native:NativeArray[nullable Object]> */
 var32 = ((struct instance_core__NativeArray*)var_native)->length;
 var30 = var32;
 goto RET_LABEL31;
@@ -1087,14 +1117,14 @@ RET_LABEL31:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var_h,var30) on <var_h:Int> */
+{ /* Inline kernel$Int$+ (var_h,var30) on <var_h:Int> */
 /* Covariant cast for argument 0 (i) <var30:Int> isa OTHER */
 /* <var30:Int> isa OTHER */
 var35 = 1; /* easy <var30:Int> isa OTHER*/
 if (unlikely(!var35)) {
 var_class_name38 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var39 = var_h + var30;
@@ -1107,7 +1137,7 @@ var_h = var33;
 } else {
 }
 {
-{ /* Inline array#NativeArray#[]= (var_native,var_h,var_item) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[]= (var_native,var_h,var_item) on <var_native:NativeArray[nullable Object]> */
 /* Covariant cast for argument 1 (item) <var_item:nullable Object> isa E */
 /* <var_item:nullable Object> isa E */
 type_struct44 = var_native->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -1126,7 +1156,7 @@ var41 = (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->type_
 if (unlikely(!var41)) {
 var_class_name46 = var_item == NULL ? "null" : (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name46);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var_native)->values[var_h]=var_item;
@@ -1134,14 +1164,14 @@ RET_LABEL40:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head= (self,var_h) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head= (self,var_h) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___head].l = var_h; /* _head on <self:CircularArray[nullable Object]> */
 RET_LABEL47:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#shift for (self: CircularArray[nullable Object]): nullable Object */
+/* method circular_array$CircularArray$shift for (self: CircularArray[nullable Object]): nullable Object */
 val* core___core__CircularArray___core__abstract_collection__Sequence__shift(val* self) {
 val* var /* : nullable Object */;
 long var1 /* : Int */;
@@ -1189,21 +1219,21 @@ int idtype44;
 const char* var_class_name45;
 long var46 /* : Int */;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var1,1l) on <var1:Int> */
+{ /* Inline kernel$Int$- (var1,1l) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var6 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var6)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var7 = var1 - 1l;
@@ -1214,14 +1244,14 @@ RET_LABEL5:(void)0;
 }
 var_l = var4;
 {
-{ /* Inline kernel#Int#>= (var_l,0l) on <var_l:Int> */
+{ /* Inline kernel$Int$>= (var_l,0l) on <var_l:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var10 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var10)) {
 var_class_name13 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var14 = var_l >= 0l;
@@ -1231,25 +1261,31 @@ RET_LABEL9:(void)0;
 }
 }
 if (unlikely(!var8)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 150);
 fatal_exit(1);
 }
 {
-{ /* Inline circular_array#CircularArray#length= (self,var_l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length= (self,var_l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = var_l; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL15:(void)0;
 }
 }
 var16 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var16 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 153);
 fatal_exit(1);
 }
 var_native = var16;
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
 var19 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
 var17 = var19;
 RET_LABEL18:(void)0;
@@ -1257,7 +1293,7 @@ RET_LABEL18:(void)0;
 }
 var_h = var17;
 {
-{ /* Inline array#NativeArray#[] (var_native,var_h) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[] (var_native,var_h) on <var_native:NativeArray[nullable Object]> */
 var22 = ((struct instance_core__NativeArray*)var_native)->values[var_h];
 var20 = var22;
 goto RET_LABEL21;
@@ -1266,14 +1302,14 @@ RET_LABEL21:(void)0;
 }
 var_res = var20;
 {
-{ /* Inline kernel#Int#+ (var_h,1l) on <var_h:Int> */
+{ /* Inline kernel$Int$+ (var_h,1l) on <var_h:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var25 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var25)) {
 var_class_name28 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var29 = var_h + 1l;
@@ -1284,7 +1320,7 @@ RET_LABEL24:(void)0;
 }
 var_h = var23;
 {
-{ /* Inline array#NativeArray#length (var_native) on <var_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var_native) on <var_native:NativeArray[nullable Object]> */
 var32 = ((struct instance_core__NativeArray*)var_native)->length;
 var30 = var32;
 goto RET_LABEL31;
@@ -1293,14 +1329,14 @@ RET_LABEL31:(void)0;
 }
 var_cap = var30;
 {
-{ /* Inline kernel#Int#>= (var_h,var_cap) on <var_h:Int> */
+{ /* Inline kernel$Int$>= (var_h,var_cap) on <var_h:Int> */
 /* Covariant cast for argument 0 (i) <var_cap:Int> isa OTHER */
 /* <var_cap:Int> isa OTHER */
 var35 = 1; /* easy <var_cap:Int> isa OTHER*/
 if (unlikely(!var35)) {
 var_class_name38 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var39 = var_h >= var_cap;
@@ -1311,14 +1347,14 @@ RET_LABEL34:(void)0;
 }
 if (var33){
 {
-{ /* Inline kernel#Int#- (var_h,var_cap) on <var_h:Int> */
+{ /* Inline kernel$Int$- (var_h,var_cap) on <var_h:Int> */
 /* Covariant cast for argument 0 (i) <var_cap:Int> isa OTHER */
 /* <var_cap:Int> isa OTHER */
 var42 = 1; /* easy <var_cap:Int> isa OTHER*/
 if (unlikely(!var42)) {
 var_class_name45 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name45);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var46 = var_h - var_cap;
@@ -1331,7 +1367,7 @@ var_h = var40;
 } else {
 }
 {
-{ /* Inline circular_array#CircularArray#head= (self,var_h) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head= (self,var_h) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___head].l = var_h; /* _head on <self:CircularArray[nullable Object]> */
 RET_LABEL47:(void)0;
 }
@@ -1341,7 +1377,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArray#enlarge for (self: CircularArray[nullable Object], Int) */
+/* method circular_array$CircularArray$enlarge for (self: CircularArray[nullable Object], Int) */
 void core___core__CircularArray___enlarge(val* self, long p0) {
 long var_capacity /* var capacity: Int */;
 short int var /* : Bool */;
@@ -1413,43 +1449,58 @@ int cltype74;
 int idtype75;
 const char* var_class_name76;
 long var77 /* : Int */;
-val* var78 /* : NativeArray[nullable Object] */;
-val* var80 /* : NativeArray[nullable Object] */;
-long var81 /* : Int */;
-long var83 /* : Int */;
-long var84 /* : Int */;
-short int var86 /* : Bool */;
-int cltype87;
-int idtype88;
-const char* var_class_name89;
+short int var79 /* : Bool */;
+int cltype80;
+int idtype81;
+const struct type* type_struct82;
+const char* var_class_name83;
+val* var84 /* : NativeArray[nullable Object] */;
+val* var86 /* : NativeArray[nullable Object] */;
+long var87 /* : Int */;
+long var89 /* : Int */;
 long var90 /* : Int */;
-long var91 /* : Int */;
-long var93 /* : Int */;
-long var94 /* : Int */;
-short int var96 /* : Bool */;
-int cltype97;
-int idtype98;
-const char* var_class_name99;
+short int var92 /* : Bool */;
+int cltype93;
+int idtype94;
+const char* var_class_name95;
+long var96 /* : Int */;
+long var97 /* : Int */;
+long var99 /* : Int */;
 long var100 /* : Int */;
-val* var101 /* : NativeArray[nullable Object] */;
-val* var103 /* : NativeArray[nullable Object] */;
-long var104 /* : Int */;
+short int var102 /* : Bool */;
+int cltype103;
+int idtype104;
+const char* var_class_name105;
 long var106 /* : Int */;
-long var107 /* : Int */;
-long var109 /* : Int */;
-long var111 /* : Int */;
-long var113 /* : Int */;
-long var114 /* : Int */;
-short int var116 /* : Bool */;
-int cltype117;
-int idtype118;
-const char* var_class_name119;
-long var120 /* : Int */;
+short int var108 /* : Bool */;
+int cltype109;
+int idtype110;
+const struct type* type_struct111;
+const char* var_class_name112;
+val* var113 /* : NativeArray[nullable Object] */;
+val* var115 /* : NativeArray[nullable Object] */;
+long var116 /* : Int */;
+long var118 /* : Int */;
+long var119 /* : Int */;
+long var121 /* : Int */;
 short int var123 /* : Bool */;
 int cltype124;
 int idtype125;
 const struct type* type_struct126;
 const char* var_class_name127;
+long var129 /* : Int */;
+long var131 /* : Int */;
+long var132 /* : Int */;
+short int var134 /* : Bool */;
+int cltype135;
+int idtype136;
+const char* var_class_name137;
+long var138 /* : Int */;
+short int var141 /* : Bool */;
+int cltype142;
+int idtype143;
+const struct type* type_struct144;
+const char* var_class_name145;
 var_capacity = p0;
 var = self->attrs[COLOR_core__circular_array__CircularArray___native].val != NULL; /* _native on <self:CircularArray[nullable Object]> */
 var1 = !var;
@@ -1457,14 +1508,14 @@ if (var1){
 var_new_c = 8l;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_new_c,var_capacity) on <var_new_c:Int> */
+{ /* Inline kernel$Int$< (var_new_c,var_capacity) on <var_new_c:Int> */
 /* Covariant cast for argument 0 (i) <var_capacity:Int> isa OTHER */
 /* <var_capacity:Int> isa OTHER */
 var4 = 1; /* easy <var_capacity:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var5 = var_new_c < var_capacity;
@@ -1475,14 +1526,14 @@ RET_LABEL3:(void)0;
 }
 if (var2){
 {
-{ /* Inline kernel#Int#* (var_new_c,2l) on <var_new_c:Int> */
+{ /* Inline kernel$Int$* (var_new_c,2l) on <var_new_c:Int> */
 /* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
 /* <2l:Int> isa OTHER */
 var8 = 1; /* easy <2l:Int> isa OTHER*/
 if (unlikely(!var8)) {
 var_class_name11 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 735);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 732);
 fatal_exit(1);
 }
 var12 = var_new_c * 2l;
@@ -1497,9 +1548,9 @@ goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-var13 = NEW_core__NativeArray(var_new_c, self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE]);
+var13 = NEW_core__NativeArray((int)var_new_c, self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE]);
 {
-{ /* Inline circular_array#CircularArray#native= (self,var13) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native= (self,var13) on <self:CircularArray[nullable Object]> */
 /* Covariant cast for argument 0 (native) <var13:NativeArray[nullable Object]> isa NativeArray[E] */
 /* <var13:NativeArray[nullable Object]> isa NativeArray[E] */
 type_struct = self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE];
@@ -1524,9 +1575,12 @@ goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
 var21 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var21 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -1536,7 +1590,7 @@ RET_LABEL20:(void)0;
 }
 }
 {
-{ /* Inline array#NativeArray#length (var19) on <var19:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var19) on <var19:NativeArray[nullable Object]> */
 var24 = ((struct instance_core__NativeArray*)var19)->length;
 var22 = var24;
 goto RET_LABEL23;
@@ -1545,14 +1599,14 @@ RET_LABEL23:(void)0;
 }
 var_c = var22;
 {
-{ /* Inline kernel#Int#<= (var_capacity,var_c) on <var_capacity:Int> */
+{ /* Inline kernel$Int$<= (var_capacity,var_c) on <var_capacity:Int> */
 /* Covariant cast for argument 0 (i) <var_c:Int> isa OTHER */
 /* <var_c:Int> isa OTHER */
 var27 = 1; /* easy <var_c:Int> isa OTHER*/
 if (unlikely(!var27)) {
 var_class_name30 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name30);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 724);
 fatal_exit(1);
 }
 var31 = var_capacity <= var_c;
@@ -1568,14 +1622,14 @@ goto RET_LABEL;
 var_new_c32 = var_c;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_new_c32,var_capacity) on <var_new_c32:Int> */
+{ /* Inline kernel$Int$< (var_new_c32,var_capacity) on <var_new_c32:Int> */
 /* Covariant cast for argument 0 (i) <var_capacity:Int> isa OTHER */
 /* <var_capacity:Int> isa OTHER */
 var35 = 1; /* easy <var_capacity:Int> isa OTHER*/
 if (unlikely(!var35)) {
 var_class_name38 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var39 = var_new_c32 < var_capacity;
@@ -1586,14 +1640,14 @@ RET_LABEL34:(void)0;
 }
 if (var33){
 {
-{ /* Inline kernel#Int#* (var_new_c32,2l) on <var_new_c32:Int> */
+{ /* Inline kernel$Int$* (var_new_c32,2l) on <var_new_c32:Int> */
 /* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
 /* <2l:Int> isa OTHER */
 var42 = 1; /* easy <2l:Int> isa OTHER*/
 if (unlikely(!var42)) {
 var_class_name45 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name45);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 735);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 732);
 fatal_exit(1);
 }
 var46 = var_new_c32 * 2l;
@@ -1608,31 +1662,31 @@ goto BREAK_label47;
 }
 }
 BREAK_label47: (void)0;
-var48 = NEW_core__NativeArray(var_new_c32, self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE]);
+var48 = NEW_core__NativeArray((int)var_new_c32, self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE]);
 var_new_native = var48;
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
 var51 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
 var49 = var51;
 RET_LABEL50:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#tail (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail (self) on <self:CircularArray[nullable Object]> */
 var54 = self->attrs[COLOR_core__circular_array__CircularArray___tail].l; /* _tail on <self:CircularArray[nullable Object]> */
 var52 = var54;
 RET_LABEL53:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#> (var49,var52) on <var49:Int> */
+{ /* Inline kernel$Int$> (var49,var52) on <var49:Int> */
 /* Covariant cast for argument 0 (i) <var52:Int> isa OTHER */
 /* <var52:Int> isa OTHER */
 var57 = 1; /* easy <var52:Int> isa OTHER*/
 if (unlikely(!var57)) {
 var_class_name60 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 730);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 727);
 fatal_exit(1);
 }
 var61 = var49 > var52;
@@ -1643,9 +1697,12 @@ RET_LABEL56:(void)0;
 }
 if (var55){
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
 var64 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var64 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -1655,28 +1712,28 @@ RET_LABEL63:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
 var67 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
 var65 = var67;
 RET_LABEL66:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
 var70 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
 var68 = var70;
 RET_LABEL69:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var_c,var68) on <var_c:Int> */
+{ /* Inline kernel$Int$- (var_c,var68) on <var_c:Int> */
 /* Covariant cast for argument 0 (i) <var68:Int> isa OTHER */
 /* <var68:Int> isa OTHER */
 var73 = 1; /* easy <var68:Int> isa OTHER*/
 if (unlikely(!var73)) {
 var_class_name76 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name76);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var77 = var_c - var68;
@@ -1686,143 +1743,147 @@ RET_LABEL72:(void)0;
 }
 }
 {
-core___core__NativeArray___memmove(var62, var65, var71, var_new_native, 0l); /* Direct call array#NativeArray#memmove on <var62:NativeArray[nullable Object]>*/
+{ /* Inline array$NativeArray$memmove (var62,var65,var71,var_new_native,0l) on <var62:NativeArray[nullable Object]> */
+/* Covariant cast for argument 2 (dest) <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+/* <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+type_struct82 = var62->type->resolution_table->types[COLOR_core__NativeArray__core__NativeArray___35dE];
+cltype80 = type_struct82->color;
+idtype81 = type_struct82->id;
+if(cltype80 >= var_new_native->type->table_size) {
+var79 = 0;
+} else {
+var79 = var_new_native->type->type_table[cltype80] == idtype81;
+}
+if (unlikely(!var79)) {
+var_class_name83 = var_new_native == NULL ? "null" : var_new_native->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[E]", var_class_name83);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 997);
+fatal_exit(1);
+}
+memmove(((struct instance_core__NativeArray*)var_new_native)->values+0l, ((struct instance_core__NativeArray*)var62)->values+var65, var71*sizeof(val*));
+RET_LABEL78:(void)0;
+}
 }
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
-var80 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
-if (unlikely(var80 == NULL)) {
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
+var86 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
+if (unlikely(var86 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
 }
-var78 = var80;
-RET_LABEL79:(void)0;
-}
-}
-{
-{ /* Inline circular_array#CircularArray#tail (self) on <self:CircularArray[nullable Object]> */
-var83 = self->attrs[COLOR_core__circular_array__CircularArray___tail].l; /* _tail on <self:CircularArray[nullable Object]> */
-var81 = var83;
-RET_LABEL82:(void)0;
-}
-}
-{
-{ /* Inline kernel#Int#+ (var81,1l) on <var81:Int> */
-/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
-/* <1l:Int> isa OTHER */
-var86 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var86)) {
-var_class_name89 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name89);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
-fatal_exit(1);
-}
-var90 = var81 + 1l;
-var84 = var90;
-goto RET_LABEL85;
+var84 = var86;
 RET_LABEL85:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
-var93 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
-var91 = var93;
-RET_LABEL92:(void)0;
+{ /* Inline circular_array$CircularArray$tail (self) on <self:CircularArray[nullable Object]> */
+var89 = self->attrs[COLOR_core__circular_array__CircularArray___tail].l; /* _tail on <self:CircularArray[nullable Object]> */
+var87 = var89;
+RET_LABEL88:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var_c,var91) on <var_c:Int> */
-/* Covariant cast for argument 0 (i) <var91:Int> isa OTHER */
-/* <var91:Int> isa OTHER */
-var96 = 1; /* easy <var91:Int> isa OTHER*/
-if (unlikely(!var96)) {
-var_class_name99 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name99);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+{ /* Inline kernel$Int$+ (var87,1l) on <var87:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var92 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var92)) {
+var_class_name95 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name95);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
-var100 = var_c - var91;
-var94 = var100;
-goto RET_LABEL95;
-RET_LABEL95:(void)0;
+var96 = var87 + 1l;
+var90 = var96;
+goto RET_LABEL91;
+RET_LABEL91:(void)0;
 }
 }
 {
-core___core__NativeArray___memmove(var78, 0l, var84, var_new_native, var94); /* Direct call array#NativeArray#memmove on <var78:NativeArray[nullable Object]>*/
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
+var99 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
+var97 = var99;
+RET_LABEL98:(void)0;
+}
+}
+{
+{ /* Inline kernel$Int$- (var_c,var97) on <var_c:Int> */
+/* Covariant cast for argument 0 (i) <var97:Int> isa OTHER */
+/* <var97:Int> isa OTHER */
+var102 = 1; /* easy <var97:Int> isa OTHER*/
+if (unlikely(!var102)) {
+var_class_name105 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name105);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+fatal_exit(1);
+}
+var106 = var_c - var97;
+var100 = var106;
+goto RET_LABEL101;
+RET_LABEL101:(void)0;
+}
+}
+{
+{ /* Inline array$NativeArray$memmove (var84,0l,var90,var_new_native,var100) on <var84:NativeArray[nullable Object]> */
+/* Covariant cast for argument 2 (dest) <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+/* <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+type_struct111 = var84->type->resolution_table->types[COLOR_core__NativeArray__core__NativeArray___35dE];
+cltype109 = type_struct111->color;
+idtype110 = type_struct111->id;
+if(cltype109 >= var_new_native->type->table_size) {
+var108 = 0;
+} else {
+var108 = var_new_native->type->type_table[cltype109] == idtype110;
+}
+if (unlikely(!var108)) {
+var_class_name112 = var_new_native == NULL ? "null" : var_new_native->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[E]", var_class_name112);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 997);
+fatal_exit(1);
+}
+memmove(((struct instance_core__NativeArray*)var_new_native)->values+var100, ((struct instance_core__NativeArray*)var84)->values+0l, var90*sizeof(val*));
+RET_LABEL107:(void)0;
+}
 }
 } else {
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
-var103 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
-if (unlikely(var103 == NULL)) {
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
+var115 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
+if (unlikely(var115 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
 }
-var101 = var103;
-RET_LABEL102:(void)0;
+var113 = var115;
+RET_LABEL114:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head (self) on <self:CircularArray[nullable Object]> */
-var106 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
-var104 = var106;
-RET_LABEL105:(void)0;
+{ /* Inline circular_array$CircularArray$head (self) on <self:CircularArray[nullable Object]> */
+var118 = self->attrs[COLOR_core__circular_array__CircularArray___head].l; /* _head on <self:CircularArray[nullable Object]> */
+var116 = var118;
+RET_LABEL117:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
-var109 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
-var107 = var109;
-RET_LABEL108:(void)0;
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
+var121 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
+var119 = var121;
+RET_LABEL120:(void)0;
 }
 }
 {
-core___core__NativeArray___memmove(var101, var104, var107, var_new_native, 0l); /* Direct call array#NativeArray#memmove on <var101:NativeArray[nullable Object]>*/
-}
-}
-{
-{ /* Inline circular_array#CircularArray#head= (self,0l) on <self:CircularArray[nullable Object]> */
-self->attrs[COLOR_core__circular_array__CircularArray___head].l = 0l; /* _head on <self:CircularArray[nullable Object]> */
-RET_LABEL110:(void)0;
-}
-}
-{
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
-var113 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
-var111 = var113;
-RET_LABEL112:(void)0;
-}
-}
-{
-{ /* Inline kernel#Int#- (var111,1l) on <var111:Int> */
-/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
-/* <1l:Int> isa OTHER */
-var116 = 1; /* easy <1l:Int> isa OTHER*/
-if (unlikely(!var116)) {
-var_class_name119 = type_core__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name119);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
-fatal_exit(1);
-}
-var120 = var111 - 1l;
-var114 = var120;
-goto RET_LABEL115;
-RET_LABEL115:(void)0;
-}
-}
-{
-{ /* Inline circular_array#CircularArray#tail= (self,var114) on <self:CircularArray[nullable Object]> */
-self->attrs[COLOR_core__circular_array__CircularArray___tail].l = var114; /* _tail on <self:CircularArray[nullable Object]> */
-RET_LABEL121:(void)0;
-}
-}
-{
-{ /* Inline circular_array#CircularArray#native= (self,var_new_native) on <self:CircularArray[nullable Object]> */
-/* Covariant cast for argument 0 (native) <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+{ /* Inline array$NativeArray$memmove (var113,var116,var119,var_new_native,0l) on <var113:NativeArray[nullable Object]> */
+/* Covariant cast for argument 2 (dest) <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
 /* <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
-type_struct126 = self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE];
+type_struct126 = var113->type->resolution_table->types[COLOR_core__NativeArray__core__NativeArray___35dE];
 cltype124 = type_struct126->color;
 idtype125 = type_struct126->id;
 if(cltype124 >= var_new_native->type->table_size) {
@@ -1833,16 +1894,75 @@ var123 = var_new_native->type->type_table[cltype124] == idtype125;
 if (unlikely(!var123)) {
 var_class_name127 = var_new_native == NULL ? "null" : var_new_native->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[E]", var_class_name127);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 997);
+fatal_exit(1);
+}
+memmove(((struct instance_core__NativeArray*)var_new_native)->values+0l, ((struct instance_core__NativeArray*)var113)->values+var116, var119*sizeof(val*));
+RET_LABEL122:(void)0;
+}
+}
+}
+{
+{ /* Inline circular_array$CircularArray$head= (self,0l) on <self:CircularArray[nullable Object]> */
+self->attrs[COLOR_core__circular_array__CircularArray___head].l = 0l; /* _head on <self:CircularArray[nullable Object]> */
+RET_LABEL128:(void)0;
+}
+}
+{
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
+var131 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
+var129 = var131;
+RET_LABEL130:(void)0;
+}
+}
+{
+{ /* Inline kernel$Int$- (var129,1l) on <var129:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var134 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var134)) {
+var_class_name137 = type_core__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name137);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+fatal_exit(1);
+}
+var138 = var129 - 1l;
+var132 = var138;
+goto RET_LABEL133;
+RET_LABEL133:(void)0;
+}
+}
+{
+{ /* Inline circular_array$CircularArray$tail= (self,var132) on <self:CircularArray[nullable Object]> */
+self->attrs[COLOR_core__circular_array__CircularArray___tail].l = var132; /* _tail on <self:CircularArray[nullable Object]> */
+RET_LABEL139:(void)0;
+}
+}
+{
+{ /* Inline circular_array$CircularArray$native= (self,var_new_native) on <self:CircularArray[nullable Object]> */
+/* Covariant cast for argument 0 (native) <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+/* <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
+type_struct144 = self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE];
+cltype142 = type_struct144->color;
+idtype143 = type_struct144->id;
+if(cltype142 >= var_new_native->type->table_size) {
+var141 = 0;
+} else {
+var141 = var_new_native->type->type_table[cltype142] == idtype143;
+}
+if (unlikely(!var141)) {
+var_class_name145 = var_new_native == NULL ? "null" : var_new_native->type->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[E]", var_class_name145);
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
 }
 self->attrs[COLOR_core__circular_array__CircularArray___native].val = var_new_native; /* _native on <self:CircularArray[nullable Object]> */
-RET_LABEL122:(void)0;
+RET_LABEL140:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#insert for (self: CircularArray[nullable Object], nullable Object, Int) */
+/* method circular_array$CircularArray$insert for (self: CircularArray[nullable Object], nullable Object, Int) */
 void core___core__CircularArray___core__abstract_collection__Sequence__insert(val* self, val* p0, long p1) {
 short int var /* : Bool */;
 int cltype;
@@ -1987,21 +2107,21 @@ fatal_exit(1);
 var_item = p0;
 var_index = p1;
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#>= (var_index,var1) on <var_index:Int> */
+{ /* Inline kernel$Int$>= (var_index,var1) on <var_index:Int> */
 /* Covariant cast for argument 0 (i) <var1:Int> isa OTHER */
 /* <var1:Int> isa OTHER */
 var6 = 1; /* easy <var1:Int> isa OTHER*/
 if (unlikely(!var6)) {
 var_class_name9 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var10 = var_index >= var1;
@@ -2012,14 +2132,14 @@ RET_LABEL5:(void)0;
 }
 if (var4){
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var13 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var11 = var13;
 RET_LABEL12:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#== (var_index,var11) on <var_index:Int> */
+{ /* Inline kernel$Int$== (var_index,var11) on <var_index:Int> */
 var16 = var_index == var11;
 var14 = var16;
 goto RET_LABEL15;
@@ -2027,25 +2147,28 @@ RET_LABEL15:(void)0;
 }
 }
 if (unlikely(!var14)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 204);
 fatal_exit(1);
 }
 {
-core___core__CircularArray___core__abstract_collection__Sequence__push(self, var_item); /* Direct call circular_array#CircularArray#push on <self:CircularArray[nullable Object]>*/
+core___core__CircularArray___core__abstract_collection__Sequence__push(self, var_item); /* Direct call circular_array$CircularArray$push on <self:CircularArray[nullable Object]>*/
 }
 goto RET_LABEL;
 } else {
 }
 {
-{ /* Inline kernel#Int#>= (var_index,0l) on <var_index:Int> */
+{ /* Inline kernel$Int$>= (var_index,0l) on <var_index:Int> */
 /* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
 /* <0l:Int> isa OTHER */
 var19 = 1; /* easy <0l:Int> isa OTHER*/
 if (unlikely(!var19)) {
 var_class_name22 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 729);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 726);
 fatal_exit(1);
 }
 var23 = var_index >= 0l;
@@ -2055,26 +2178,29 @@ RET_LABEL18:(void)0;
 }
 }
 if (unlikely(!var17)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 208);
 fatal_exit(1);
 }
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var26 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var24 = var26;
 RET_LABEL25:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var24,1l) on <var24:Int> */
+{ /* Inline kernel$Int$+ (var24,1l) on <var24:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var29 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var29)) {
 var_class_name32 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var33 = var24 + 1l;
@@ -2085,9 +2211,12 @@ RET_LABEL28:(void)0;
 }
 var_new_len = var27;
 {
-{ /* Inline circular_array#CircularArray#native (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native (self) on <self:CircularArray[nullable Object]> */
 var36 = self->attrs[COLOR_core__circular_array__CircularArray___native].val; /* _native on <self:CircularArray[nullable Object]> */
 if (unlikely(var36 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _native");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 30);
 fatal_exit(1);
@@ -2097,7 +2226,7 @@ RET_LABEL35:(void)0;
 }
 }
 {
-{ /* Inline array#NativeArray#length (var34) on <var34:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$length (var34) on <var34:NativeArray[nullable Object]> */
 var39 = ((struct instance_core__NativeArray*)var34)->length;
 var37 = var39;
 goto RET_LABEL38;
@@ -2107,14 +2236,14 @@ RET_LABEL38:(void)0;
 var_c = var37;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_c,var_new_len) on <var_c:Int> */
+{ /* Inline kernel$Int$< (var_c,var_new_len) on <var_c:Int> */
 /* Covariant cast for argument 0 (i) <var_new_len:Int> isa OTHER */
 /* <var_new_len:Int> isa OTHER */
 var42 = 1; /* easy <var_new_len:Int> isa OTHER*/
 if (unlikely(!var42)) {
 var_class_name45 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name45);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var46 = var_c < var_new_len;
@@ -2125,14 +2254,14 @@ RET_LABEL41:(void)0;
 }
 if (var40){
 {
-{ /* Inline kernel#Int#* (var_c,2l) on <var_c:Int> */
+{ /* Inline kernel$Int$* (var_c,2l) on <var_c:Int> */
 /* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
 /* <2l:Int> isa OTHER */
 var49 = 1; /* easy <2l:Int> isa OTHER*/
 if (unlikely(!var49)) {
 var_class_name52 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name52);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 735);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 732);
 fatal_exit(1);
 }
 var53 = var_c * 2l;
@@ -2147,19 +2276,19 @@ goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-var54 = NEW_core__NativeArray(var_c, self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE]);
+var54 = NEW_core__NativeArray((int)var_c, self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE]);
 var_new_native = var54;
 var_i = 0l;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_i,var_index) on <var_i:Int> */
+{ /* Inline kernel$Int$< (var_i,var_index) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <var_index:Int> isa OTHER */
 /* <var_index:Int> isa OTHER */
 var57 = 1; /* easy <var_index:Int> isa OTHER*/
 if (unlikely(!var57)) {
 var_class_name60 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var61 = var_i < var_index;
@@ -2173,7 +2302,7 @@ if (var55){
 var62 = core___core__CircularArray___core__abstract_collection__SequenceRead___91d_93d(self, var_i);
 }
 {
-{ /* Inline array#NativeArray#[]= (var_new_native,var_i,var62) on <var_new_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[]= (var_new_native,var_i,var62) on <var_new_native:NativeArray[nullable Object]> */
 /* Covariant cast for argument 1 (item) <var62:nullable Object> isa E */
 /* <var62:nullable Object> isa E */
 type_struct67 = var_new_native->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -2192,7 +2321,7 @@ var64 = (((long)var62&3)?type_info[((long)var62&3)]:var62->type)->type_table[clt
 if (unlikely(!var64)) {
 var_class_name69 = var62 == NULL ? "null" : (((long)var62&3)?type_info[((long)var62&3)]:var62->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name69);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var_new_native)->values[var_i]=var62;
@@ -2200,14 +2329,14 @@ RET_LABEL63:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var_i,1l) on <var_i:Int> */
+{ /* Inline kernel$Int$+ (var_i,1l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var72 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var72)) {
 var_class_name75 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name75);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var76 = var_i + 1l;
@@ -2223,7 +2352,7 @@ goto BREAK_label77;
 }
 BREAK_label77: (void)0;
 {
-{ /* Inline array#NativeArray#[]= (var_new_native,var_index,var_item) on <var_new_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[]= (var_new_native,var_index,var_item) on <var_new_native:NativeArray[nullable Object]> */
 /* Covariant cast for argument 1 (item) <var_item:nullable Object> isa E */
 /* <var_item:nullable Object> isa E */
 type_struct82 = var_new_native->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -2242,7 +2371,7 @@ var79 = (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->type_
 if (unlikely(!var79)) {
 var_class_name84 = var_item == NULL ? "null" : (((long)var_item&3)?type_info[((long)var_item&3)]:var_item->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name84);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var_new_native)->values[var_index]=var_item;
@@ -2250,7 +2379,7 @@ RET_LABEL78:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#length (self) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (self) on <self:CircularArray[nullable Object]> */
 var87 = self->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <self:CircularArray[nullable Object]> */
 var85 = var87;
 RET_LABEL86:(void)0;
@@ -2259,14 +2388,14 @@ RET_LABEL86:(void)0;
 var_l = var85;
 for(;;) {
 {
-{ /* Inline kernel#Int#< (var_i,var_l) on <var_i:Int> */
+{ /* Inline kernel$Int$< (var_i,var_l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <var_l:Int> isa OTHER */
 /* <var_l:Int> isa OTHER */
 var90 = 1; /* easy <var_l:Int> isa OTHER*/
 if (unlikely(!var90)) {
 var_class_name93 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name93);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var94 = var_i < var_l;
@@ -2277,14 +2406,14 @@ RET_LABEL89:(void)0;
 }
 if (var88){
 {
-{ /* Inline kernel#Int#+ (var_i,1l) on <var_i:Int> */
+{ /* Inline kernel$Int$+ (var_i,1l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var97 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var97)) {
 var_class_name100 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name100);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var101 = var_i + 1l;
@@ -2297,7 +2426,7 @@ RET_LABEL96:(void)0;
 var102 = core___core__CircularArray___core__abstract_collection__SequenceRead___91d_93d(self, var_i);
 }
 {
-{ /* Inline array#NativeArray#[]= (var_new_native,var95,var102) on <var_new_native:NativeArray[nullable Object]> */
+{ /* Inline array$NativeArray$[]= (var_new_native,var95,var102) on <var_new_native:NativeArray[nullable Object]> */
 /* Covariant cast for argument 1 (item) <var102:nullable Object> isa E */
 /* <var102:nullable Object> isa E */
 type_struct107 = var_new_native->type->resolution_table->types[COLOR_core__NativeArray___35dE];
@@ -2316,7 +2445,7 @@ var104 = (((long)var102&3)?type_info[((long)var102&3)]:var102->type)->type_table
 if (unlikely(!var104)) {
 var_class_name109 = var102 == NULL ? "null" : (((long)var102&3)?type_info[((long)var102&3)]:var102->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name109);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 988);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__array, 991);
 fatal_exit(1);
 }
 ((struct instance_core__NativeArray*)var_new_native)->values[var95]=var102;
@@ -2324,14 +2453,14 @@ RET_LABEL103:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var_i,1l) on <var_i:Int> */
+{ /* Inline kernel$Int$+ (var_i,1l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var112 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var112)) {
 var_class_name115 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name115);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var116 = var_i + 1l;
@@ -2347,26 +2476,26 @@ goto BREAK_label117;
 }
 BREAK_label117: (void)0;
 {
-{ /* Inline circular_array#CircularArray#length= (self,var_new_len) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length= (self,var_new_len) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = var_new_len; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL118:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head= (self,0l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head= (self,0l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___head].l = 0l; /* _head on <self:CircularArray[nullable Object]> */
 RET_LABEL119:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#- (var_new_len,1l) on <var_new_len:Int> */
+{ /* Inline kernel$Int$- (var_new_len,1l) on <var_new_len:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var122 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var122)) {
 var_class_name125 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name125);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 734);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
 fatal_exit(1);
 }
 var126 = var_new_len - 1l;
@@ -2376,13 +2505,13 @@ RET_LABEL121:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#tail= (self,var120) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail= (self,var120) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___tail].l = var120; /* _tail on <self:CircularArray[nullable Object]> */
 RET_LABEL127:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#native= (self,var_new_native) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$native= (self,var_new_native) on <self:CircularArray[nullable Object]> */
 /* Covariant cast for argument 0 (native) <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
 /* <var_new_native:NativeArray[nullable Object]> isa NativeArray[E] */
 type_struct132 = self->type->resolution_table->types[COLOR_core__NativeArray__core__CircularArray___35dE];
@@ -2405,24 +2534,24 @@ RET_LABEL128:(void)0;
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#clear for (self: CircularArray[nullable Object]) */
+/* method circular_array$CircularArray$clear for (self: CircularArray[nullable Object]) */
 void core___core__CircularArray___core__abstract_collection__RemovableCollection__clear(val* self) {
 long var /* : Int */;
 long var4 /* : Int */;
 {
-{ /* Inline circular_array#CircularArray#length= (self,0l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length= (self,0l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___length].l = 0l; /* _length on <self:CircularArray[nullable Object]> */
 RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#head= (self,0l) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$head= (self,0l) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___head].l = 0l; /* _head on <self:CircularArray[nullable Object]> */
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
+{ /* Inline kernel$Int$unary - (1l) on <1l:Int> */
 var4 = -1l;
 var = var4;
 goto RET_LABEL3;
@@ -2430,14 +2559,14 @@ RET_LABEL3:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#tail= (self,var) on <self:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$tail= (self,var) on <self:CircularArray[nullable Object]> */
 self->attrs[COLOR_core__circular_array__CircularArray___tail].l = var; /* _tail on <self:CircularArray[nullable Object]> */
 RET_LABEL5:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArray#iterator for (self: CircularArray[nullable Object]): Iterator[nullable Object] */
+/* method circular_array$CircularArray$iterator for (self: CircularArray[nullable Object]): Iterator[nullable Object] */
 val* core___core__CircularArray___core__abstract_collection__Collection__iterator(val* self) {
 val* var /* : Iterator[nullable Object] */;
 val* var1 /* : CircularArrayIterator[nullable Object] */;
@@ -2453,12 +2582,15 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArrayIterator#array for (self: CircularArrayIterator[nullable Object]): CircularArray[nullable Object] */
+/* method circular_array$CircularArrayIterator$array for (self: CircularArrayIterator[nullable Object]): CircularArray[nullable Object] */
 val* core__circular_array___core__circular_array__CircularArrayIterator___array(val* self) {
 val* var /* : CircularArray[nullable Object] */;
 val* var1 /* : CircularArray[nullable Object] */;
 var1 = self->attrs[COLOR_core__circular_array__CircularArrayIterator___array].val; /* _array on <self:CircularArrayIterator[nullable Object]> */
 if (unlikely(var1 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 252);
 fatal_exit(1);
@@ -2467,7 +2599,7 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArrayIterator#array= for (self: CircularArrayIterator[nullable Object], CircularArray[nullable Object]) */
+/* method circular_array$CircularArrayIterator$array= for (self: CircularArrayIterator[nullable Object], CircularArray[nullable Object]) */
 void core__circular_array___core__circular_array__CircularArrayIterator___array_61d(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
@@ -2493,7 +2625,7 @@ fatal_exit(1);
 self->attrs[COLOR_core__circular_array__CircularArrayIterator___array].val = p0; /* _array on <self:CircularArrayIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method circular_array#CircularArrayIterator#index for (self: CircularArrayIterator[nullable Object]): Int */
+/* method circular_array$CircularArrayIterator$index for (self: CircularArrayIterator[nullable Object]): Int */
 long core__circular_array___core__circular_array__CircularArrayIterator___core__abstract_collection__IndexedIterator__index(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
@@ -2502,12 +2634,12 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArrayIterator#index= for (self: CircularArrayIterator[nullable Object], Int) */
+/* method circular_array$CircularArrayIterator$index= for (self: CircularArrayIterator[nullable Object], Int) */
 void core__circular_array___core__circular_array__CircularArrayIterator___index_61d(val* self, long p0) {
 self->attrs[COLOR_core__circular_array__CircularArrayIterator___index].l = p0; /* _index on <self:CircularArrayIterator[nullable Object]> */
 RET_LABEL:;
 }
-/* method circular_array#CircularArrayIterator#is_ok for (self: CircularArrayIterator[nullable Object]): Bool */
+/* method circular_array$CircularArrayIterator$is_ok for (self: CircularArrayIterator[nullable Object]): Bool */
 short int core__circular_array___core__circular_array__CircularArrayIterator___core__abstract_collection__Iterator__is_ok(val* self) {
 short int var /* : Bool */;
 long var1 /* : Int */;
@@ -2523,16 +2655,19 @@ int idtype;
 const char* var_class_name;
 short int var13 /* : Bool */;
 {
-{ /* Inline circular_array#CircularArrayIterator#index (self) on <self:CircularArrayIterator[nullable Object]> */
+{ /* Inline circular_array$CircularArrayIterator$index (self) on <self:CircularArrayIterator[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArrayIterator___index].l; /* _index on <self:CircularArrayIterator[nullable Object]> */
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArrayIterator#array (self) on <self:CircularArrayIterator[nullable Object]> */
+{ /* Inline circular_array$CircularArrayIterator$array (self) on <self:CircularArrayIterator[nullable Object]> */
 var6 = self->attrs[COLOR_core__circular_array__CircularArrayIterator___array].val; /* _array on <self:CircularArrayIterator[nullable Object]> */
 if (unlikely(var6 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 252);
 fatal_exit(1);
@@ -2542,21 +2677,21 @@ RET_LABEL5:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArray#length (var4) on <var4:CircularArray[nullable Object]> */
+{ /* Inline circular_array$CircularArray$length (var4) on <var4:CircularArray[nullable Object]> */
 var9 = var4->attrs[COLOR_core__circular_array__CircularArray___length].l; /* _length on <var4:CircularArray[nullable Object]> */
 var7 = var9;
 RET_LABEL8:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#< (var1,var7) on <var1:Int> */
+{ /* Inline kernel$Int$< (var1,var7) on <var1:Int> */
 /* Covariant cast for argument 0 (i) <var7:Int> isa OTHER */
 /* <var7:Int> isa OTHER */
 var12 = 1; /* easy <var7:Int> isa OTHER*/
 if (unlikely(!var12)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 725);
 fatal_exit(1);
 }
 var13 = var1 < var7;
@@ -2570,7 +2705,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArrayIterator#item for (self: CircularArrayIterator[nullable Object]): nullable Object */
+/* method circular_array$CircularArrayIterator$item for (self: CircularArrayIterator[nullable Object]): nullable Object */
 val* core__circular_array___core__circular_array__CircularArrayIterator___core__abstract_collection__Iterator__item(val* self) {
 val* var /* : nullable Object */;
 val* var1 /* : CircularArray[nullable Object] */;
@@ -2579,9 +2714,12 @@ long var4 /* : Int */;
 long var6 /* : Int */;
 val* var7 /* : nullable Object */;
 {
-{ /* Inline circular_array#CircularArrayIterator#array (self) on <self:CircularArrayIterator[nullable Object]> */
+{ /* Inline circular_array$CircularArrayIterator$array (self) on <self:CircularArrayIterator[nullable Object]> */
 var3 = self->attrs[COLOR_core__circular_array__CircularArrayIterator___array].val; /* _array on <self:CircularArrayIterator[nullable Object]> */
 if (unlikely(var3 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _array");
 PRINT_ERROR(" (%s:%d)\n", FILE_core__circular_array, 252);
 fatal_exit(1);
@@ -2591,7 +2729,7 @@ RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArrayIterator#index (self) on <self:CircularArrayIterator[nullable Object]> */
+{ /* Inline circular_array$CircularArrayIterator$index (self) on <self:CircularArrayIterator[nullable Object]> */
 var6 = self->attrs[COLOR_core__circular_array__CircularArrayIterator___index].l; /* _index on <self:CircularArrayIterator[nullable Object]> */
 var4 = var6;
 RET_LABEL5:(void)0;
@@ -2605,7 +2743,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method circular_array#CircularArrayIterator#next for (self: CircularArrayIterator[nullable Object]) */
+/* method circular_array$CircularArrayIterator$next for (self: CircularArrayIterator[nullable Object]) */
 void core__circular_array___core__circular_array__CircularArrayIterator___core__abstract_collection__Iterator__next(val* self) {
 val* var_ /* var : CircularArrayIterator[nullable Object] */;
 long var /* : Int */;
@@ -2618,21 +2756,21 @@ const char* var_class_name;
 long var6 /* : Int */;
 var_ = self;
 {
-{ /* Inline circular_array#CircularArrayIterator#index (var_) on <var_:CircularArrayIterator[nullable Object]> */
+{ /* Inline circular_array$CircularArrayIterator$index (var_) on <var_:CircularArrayIterator[nullable Object]> */
 var2 = var_->attrs[COLOR_core__circular_array__CircularArrayIterator___index].l; /* _index on <var_:CircularArrayIterator[nullable Object]> */
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#+ (var,1l) on <var:Int> */
+{ /* Inline kernel$Int$+ (var,1l) on <var:Int> */
 /* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
 /* <1l:Int> isa OTHER */
 var5 = 1; /* easy <1l:Int> isa OTHER*/
 if (unlikely(!var5)) {
 var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 731);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 728);
 fatal_exit(1);
 }
 var6 = var + 1l;
@@ -2642,14 +2780,14 @@ RET_LABEL4:(void)0;
 }
 }
 {
-{ /* Inline circular_array#CircularArrayIterator#index= (var_,var3) on <var_:CircularArrayIterator[nullable Object]> */
+{ /* Inline circular_array$CircularArrayIterator$index= (var_,var3) on <var_:CircularArrayIterator[nullable Object]> */
 var_->attrs[COLOR_core__circular_array__CircularArrayIterator___index].l = var3; /* _index on <var_:CircularArrayIterator[nullable Object]> */
 RET_LABEL7:(void)0;
 }
 }
 RET_LABEL:;
 }
-/* method circular_array#CircularArrayIterator#init for (self: CircularArrayIterator[nullable Object]) */
+/* method circular_array$CircularArrayIterator$init for (self: CircularArrayIterator[nullable Object]) */
 void core__circular_array___core__circular_array__CircularArrayIterator___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_core__circular_array___core__circular_array__CircularArrayIterator___core__kernel__Object__init]))(self); /* init on <self:CircularArrayIterator[nullable Object]>*/

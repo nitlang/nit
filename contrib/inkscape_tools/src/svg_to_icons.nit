@@ -87,7 +87,7 @@ var resolutions
 if opt_android.value then
 	resolutions = [36, 48, 72, 96, 144, 192]
 else if opt_ios.value then
-	resolutions = [29, 57, 58, 80, 87, 114, 120, 180]
+	resolutions = [29, 58, 76, 80, 87, 120, 152, 180]
 else if opt_large.value then
 	resolutions = [512, 1024]
 else abort

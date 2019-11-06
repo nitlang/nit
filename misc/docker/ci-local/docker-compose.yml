@@ -1,0 +1,29 @@
+version: '2'
+services:
+        mongo:
+                image: mongo
+                restart: always
+                networks:
+                        nitci:
+                                ipv4_address: 172.16.238.2
+        neo4j:
+                image: neo4j:2.3
+                restart: always
+                environment:
+                        NEO4J_AUTH: none
+                networks:
+                        nitci:
+                                ipv4_address: 172.16.238.3
+        postgres:
+                image: postgres
+                restart: always
+                networks:
+                        nitci:
+                                ipv4_address: 172.16.238.4
+networks:
+        nitci:
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.16.238.0/24

@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt0# module error_annot_pkgconfig_alt0 is pkgconfig() # 0 arg
-#alt1# module error_annot_pkgconfig_alt1 is pkgconfig("missing-lib")
-#alt2# module error_annot_pkgconfig_alt2 is pkgconfig("too many args", 123)
-#alt3# module error_annot_pkgconfig_alt3 is pkgconfig(1234) # not a string
+#alt0# module error_annot_pkgconfig_alt0 is pkgconfig # defaults to module name
+#alt1# module error_annot_pkgconfig_alt1 is pkgconfig("missing-lib", "other missing lib")
+#alt2# module error_annot_pkgconfig_alt2 is pkgconfig(1234) # not a string
 
 fun foo `{ `}
 foo

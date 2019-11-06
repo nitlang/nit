@@ -23,7 +23,7 @@
 
 	function Brush()
 	{
-		var keywords =	'abort abstract and as assert break class continue do else end enum extern false for fun' +
+		var keywords =	'abort abstract and as assert break class continue do else end catch enum extern false for fun' +
 						'if import in init interface intrude is isa isset label loop module new null nullable not' +
 						'once or protected private redef return self super then type true universal var' +
 						'when while writable';

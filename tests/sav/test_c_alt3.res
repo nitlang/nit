@@ -1,2 +1,2 @@
-Runtime error: Assert failed (../lib/c.nit:38)
+Runtime error: Assert failed (../lib/c/c.nit:38)
 0

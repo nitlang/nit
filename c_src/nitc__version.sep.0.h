@@ -1,2 +1,2 @@
 #include "nit.common.h"
-val* core__flat___NativeString___to_s_full(char* self, long p0, long p1);
+val* core__flat___CString___to_s_unsafe(char* self, val* p0, val* p1, val* p2, val* p3);

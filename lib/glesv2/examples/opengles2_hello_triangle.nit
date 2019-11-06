@@ -14,16 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Basic example of OpenGL ES 2.0 usage from the book OpenGL ES 2.0 Programming Guide.
+# Basic example of OpenGL ES 2.0 usage using SDL 2
 #
-# Code reference:
+# From the book OpenGL ES 2.0 Programming Guide, see code reference:
 # https://code.google.com/p/opengles-book-samples/source/browse/trunk/LinuxX11/Chapter_2/Hello_Triangle/Hello_Triangle.c
-module opengles2_hello_triangle
+module opengles2_hello_triangle is example
 
 import glesv2
 import egl
-import sdl
-import x11
+import sdl2
+
+import realtime
 
 if "NIT_TESTING".environ == "true" then exit(0)
 
@@ -31,31 +32,33 @@ var window_width = 800
 var window_height = 600
 
 #
-## SDL
+## SDL2
 #
-var sdl_display = new SDLDisplay(window_width, window_height)
-var sdl_wm_info = new SDLSystemWindowManagerInfo
-var x11_window_handle = sdl_wm_info.x11_window_handle
+assert sdl.initialize((new SDLInitFlags).video) else
+	print sdl.error
+end
 
-#
-## X11
-#
-var x_display = x_open_default_display
-assert x_display != 0 else print "x11 fail"
+var sdl_window = new SDLWindow("Title".to_cstring, window_width, window_height, (new SDLWindowFlags).opengl)
+assert not sdl_window.address_is_null else print sdl.error
+
+var sdl_wm_info = sdl_window.wm_info
+var native_window = sdl_wm_info.window_handle
+var native_display = sdl_wm_info.display_handle
+assert not native_display.address_is_null else print "Failed to get handle to native display"
 
 #
 ## EGL
 #
-var egl_display = new EGLDisplay(x_display)
+var egl_display = new EGLDisplay(native_display)
 assert egl_display.is_valid else print "EGL display is not valid"
+
 egl_display.initialize
+assert egl_display.is_valid else print egl_display.error
 
 print "EGL version: {egl_display.version}"
 print "EGL vendor: {egl_display.vendor}"
-print "EGL extensions: {egl_display.extensions.join(", ")}"
+print "EGL extensions: \n* {egl_display.extensions.join("\n* ")}"
 print "EGL client APIs: {egl_display.client_apis.join(", ")}"
-
-assert egl_display.is_valid else print egl_display.error
 
 var config_chooser = new EGLConfigChooser
 #config_chooser.surface_type_egl
@@ -83,17 +86,14 @@ end
 
 var config = configs.first
 
-# TODO android part
-# Opengles1Display_midway_init(self, format);
-
-var surface = egl_display.create_window_surface(config, x11_window_handle, [0])
+var surface = egl_display.create_window_surface(config, native_window, [0])
 assert surface.is_ok else print egl_display.error
 
 var context = egl_display.create_context(config)
 assert context.is_ok else print egl_display.error
 
 var make_current_res = egl_display.make_current(surface, surface, context)
-assert make_current_res
+assert make_current_res else print egl_display.error
 
 var width = surface.attribs(egl_display).width
 var height = surface.attribs(egl_display).height
@@ -156,21 +156,30 @@ glLinkProgram program
 assert program.is_linked else print "Linking failed: {glGetProgramInfoLog(program)}"
 assert_no_gl_error
 
+# prepare
+glViewport(0, 0, width, height)
+glClearColor(0.5, 0.0, 0.5, 1.0)
+
 # draw!
 var vertices = [0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0]
 var vertex_array = new VertexArray(0, 3, vertices)
 vertex_array.attrib_pointer
-glClearColor(0.5, 0.0, 0.5, 1.0)
-for i in [0..10000[ do
+
+var clock = new Clock
+
+var n_frames = 1000
+for i in [0..n_frames[ do
 	printn "."
 	assert_no_gl_error
-	glViewport(0, 0, width, height)
+
 	glClear gl_COLOR_BUFFER_BIT
 	glUseProgram program
 	vertex_array.enable
 	glDrawArrays(gl_TRIANGLES, 0, 3)
 	egl_display.swap_buffers(surface)
 end
+
+print "FPS: {n_frames.to_f/clock.lapse.to_f}"
 
 # delete
 glDeleteProgram program
@@ -186,7 +195,7 @@ egl_display.destroy_context context
 egl_display.destroy_surface surface
 
 #
-## SDL
+## SDL2
 #
 # close
-sdl_display.destroy
+sdl.quit

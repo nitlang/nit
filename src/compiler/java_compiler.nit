@@ -1301,7 +1301,7 @@ redef class MType
 
 	# Is the associated Java type a primitive one?
 	#
-	# ENSURE `result == (java_type != "Object")`
+	# ENSURE `result == (java_type != "RTVal")`
 	var is_java_primitive: Bool is lazy do return java_type != "RTVal"
 end
 
@@ -1318,7 +1318,7 @@ redef class MClassType
 			return "double"
 		else if mclass.name == "Byte" then
 			return "byte"
-		else if mclass.name == "NativeString" then
+		else if mclass.name == "CString" then
 			return "String"
 		else if mclass.name == "NativeArray" then
 			return "Array"

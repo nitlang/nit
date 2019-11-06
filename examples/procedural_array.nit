@@ -16,7 +16,7 @@
 
 # Example of a procedural program (without explicit class definition).
 # This program manipulates arrays of integers.
-module procedural_array
+module procedural_array is example
 
 # The sum of the elements of `a'.
 # Uses a 'for' control structure.

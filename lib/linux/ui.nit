@@ -64,7 +64,6 @@ redef class App
 	do
 		app.on_create
 		app.on_restore_state
-		app.on_start
 		app.on_resume
 
 		gtk_main
@@ -72,7 +71,6 @@ redef class App
 		app.on_pause
 		app.on_stop
 		app.on_save_state
-		app.on_destroy
 	end
 
 	# Spacing between GTK controls, default at 2

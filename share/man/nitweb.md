@@ -47,10 +47,10 @@ using the uri param `json=true` (default `false`).
 # OPTIONS
 
 ### `--host`
-The host to bind the web server on.
+Host to bind the server on.
 
 ### `--port`
-Port number to use
+Port number to use.
 
 ### `-h`, `-?`, `--help`
 Show Help (the list of options).

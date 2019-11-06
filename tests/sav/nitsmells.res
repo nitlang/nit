@@ -1,0 +1,3 @@
+Usage: nitsmells [OPTION]... <file.nit>...
+ Computes code smells on Nit programs.
+Use --help for help

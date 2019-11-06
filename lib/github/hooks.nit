@@ -37,7 +37,7 @@
 # redef class CommitCommentEvent
 #
 #    redef fun log_event(l) do
-#        print "new comment on commit {comment.commit.sha}"
+#        print "new comment on commit {comment.commit_id}"
 #    end
 # end
 #
@@ -88,36 +88,35 @@ abstract class HookListener
 	end
 
 	# How to build events from received json objects.
-	fun event_factory(kind: String, json: JsonObject): GithubEvent do
+	fun event_factory(kind: String, json: String): nullable GithubEvent do
 		if kind == "commit_comment" then
-			return new CommitCommentEvent.from_json(api, json)
+			return api.deserialize(json).as(CommitCommentEvent)
 		else if kind == "create" then
-			return new CreateEvent.from_json(api, json)
+			return api.deserialize(json).as(CreateEvent)
 		else if kind == "delete" then
-			return new DeleteEvent.from_json(api, json)
+			return api.deserialize(json).as(DeleteEvent)
 		else if kind == "deployment" then
-			return new DeploymentEvent.from_json(api, json)
+			return api.deserialize(json).as(DeploymentEvent)
 		else if kind == "deployment_status" then
-			return new DeploymentStatusEvent.from_json(api, json)
+			return api.deserialize(json).as(DeploymentStatusEvent)
 		else if kind == "fork" then
-			return new ForkEvent.from_json(api, json)
+			return api.deserialize(json).as(ForkEvent)
 		else if kind == "issues" then
-			return new IssuesEvent.from_json(api, json)
+			return api.deserialize(json).as(IssuesEvent)
 		else if kind == "issue_comment" then
-			return new IssueCommentEvent.from_json(api, json)
+			return api.deserialize(json).as(IssueCommentEvent)
 		else if kind == "member" then
-			return new MemberEvent.from_json(api, json)
+			return api.deserialize(json).as(MemberEvent)
 		else if kind == "pull_request" then
-			return new PullRequestEvent.from_json(api, json)
+			return api.deserialize(json).as(PullRequestEvent)
 		else if kind == "pull_request_review_comment" then
-			return new PullRequestReviewCommentEvent.from_json(api, json)
+			return api.deserialize(json).as(PullRequestPullCommentEvent)
 		else if kind == "push" then
-			return new PushEvent.from_json(api, json)
+			return api.deserialize(json).as(PushEvent)
 		else if kind == "status" then
-			return new StatusEvent.from_json(api, json)
-		else
-			return new GithubEvent.from_json(api, json)
+			return api.deserialize(json).as(StatusEvent)
 		end
+		return null
 	end
 
 	# What to do when we receive an event from a hook?
@@ -139,11 +138,9 @@ private class HookAction
 		# get event type
 		var kind = request.header.get_or_null("X-GitHub-Event")
 		if kind == null then return new HttpResponse(403)
-		# get POST object
-		var obj = request.body.parse_json
-		if not obj isa JsonObject then return new HttpResponse(403)
 		# parse event
-		var event = listener.event_factory(kind, obj)
+		var event = listener.event_factory(kind, request.body)
+		if event == null then return new HttpResponse(403)
 		listener.apply_event(event)
 		return new HttpResponse(200)
 	end

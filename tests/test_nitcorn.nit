@@ -30,23 +30,49 @@ class MyAction
 	redef fun answer(request, turi)
 	do
 		var rep = new HttpResponse(200)
-		rep.body = """
+		var body = """
 [Response] Simple answer
 Method: {{{request.method}}}, URI: {{{request.uri}}}, trailing: {{{turi}}}"""
 
 		if request.get_args.not_empty
-		then rep.body += "\nGET args: {request.get_args.join(", ", ":")}"
+		then body += "\nGET args: {request.get_args.join(", ", ":")}"
 
 		if request.post_args.not_empty
-		then rep.body += "\nPOST args: {request.post_args.join(", ", ":")}"
+		then body += "\nPOST args: {request.post_args.join(", ", ":")}"
 
 		if request.uri_params.not_empty
-		then rep.body += "\nParams args: {request.uri_params.join(", ", ":")}"
+		then body += "\nParams args: {request.uri_params.join(", ", ":")}"
 
 		if request.cookie.not_empty
-		then rep.body += "\nCookie: {request.cookie.join(", ", ":")}"
+		then body += "\nCookie: {request.cookie.join(", ", ":")}"
 
-		rep.body += "\n"
+		body += "\n"
+		rep.body = body
+		return rep
+	end
+end
+
+class MyBinAction
+	super Action
+
+	redef fun answer(request, turi)
+	do
+		var rep = new HttpResponse(200)
+		rep.body = b"\xF1\xF2\xF3\n"
+		return rep
+	end
+end
+
+class MyTmplAction
+	super Action
+
+	redef fun answer(request, turi)
+	do
+		var rep = new HttpResponse(200)
+		var body = new Template
+		body.add "Hello\n"
+		body.add b"\xF1\xF2\xF3\n"
+		rep.body = body
 		return rep
 	end
 end
@@ -64,6 +90,8 @@ class ServerThread
 		vh.routes.add new Route("file_server", new FileServer(fs_path.simplify_path))
 		vh.routes.add new Route("simple_answer", new MyAction)
 		vh.routes.add new Route("params_answer/:i/:s", new MyAction)
+		vh.routes.add new Route("simple_binary", new MyBinAction)
+		vh.routes.add new Route("simple_template", new MyTmplAction)
 
 		# Launch
 		var factory = new HttpFactory.and_libevent
@@ -86,6 +114,7 @@ class ClientThread
 		system "curl -s '{iface}/simple_answer?i=0123&s=asdf'"
 		system "curl -s {iface}/simple_answer --data 'i=0123&s=asdf'"
 		system "curl -s {iface}/simple_answer --cookie 'i=0123; s=asdf'"
+		system "curl -s {iface}/simple_answer --get --data-urlencode 's=b b'"
 
 		system "curl -s {iface}/params_answer/0123/asdf"
 		system "curl -s {iface}/params_answer/0123/"
@@ -103,6 +132,9 @@ class ClientThread
 		system "curl -s {iface}/file_server/unknown_file.txt --head"
 
 		system "curl -s {iface}/invalid_route --head"
+
+		system "curl -s {iface}/simple_binary/"
+		system "curl -s {iface}/simple_template/"
 		return null
 	end
 

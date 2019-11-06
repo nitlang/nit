@@ -31,27 +31,49 @@ end
 # Model loaded from a file in the asset folder
 #
 # In case of error, `error` is set accordingly.
-# If the error is on the mesh, `mesh` is set to a default `new Mesh.cube`.
-# If the material is missing or it failed to load, `material` is set to a `new SimpleMaterial.default`.
+# If the error is on the mesh, `mesh` is set to a default `new Cube`.
+# If the material is missing or it failed to load, `material` is set to the blueish `new Material`.
 class ModelAsset
 	super Model
 	super Asset
 
 	init do models.add self
 
+	private var loaded = false
+
 	redef fun load
 	do
+		if loaded then return
+
 		var ext = path.file_extension
 		if ext == "obj" then
 			load_obj_file
 		else
-			print_error "Model failed to load: Extension '{ext or else "null"}' unrecognized"
+			errors.add new Error("Model at '{path}' failed to load: Extension '{ext or else "null"}' unrecognized")
 		end
 
-		if leaves.is_empty then
+		if leaves_cache.is_empty then
 			# Nothing was loaded, use a cube with the default material
 			var leaf = placeholder_model
-			leaves.add leaf
+			leaves_cache.add leaf
+		end
+
+		loaded = true
+	end
+
+	private fun lazy_load
+	do
+		if loaded then return
+
+		# Lazy load
+		load
+
+		# Print errors when lazy loading only
+		if errors.length == 1 then
+			print_error errors.first
+		else if errors.length > 1 then
+			print_error "Loading model at '{path}' raised {errors.length} errors:\n* "
+			print_error errors.join("\n* ")
 		end
 	end
 
@@ -61,8 +83,8 @@ class ModelAsset
 		var text_asset = new TextAsset(path)
 		var content = text_asset.to_s
 		if content.is_empty then
-			print_error "Model failed to load: Asset empty at '{self.path}'"
-			leaves.add new LeafModel(new Cube, new SmoothMaterial.default)
+			errors.add new Error("Model failed to load: Asset empty at '{self.path}'")
+			leaves_cache.add new LeafModel(new Cube, new Material)
 			return
 		end
 
@@ -70,8 +92,8 @@ class ModelAsset
 		var parser = new ObjFileParser(content)
 		var obj_def = parser.parse
 		if obj_def == null then
-			print_error "Model failed to load: .obj format error on '{self.path}'"
-			leaves.add new LeafModel(new Cube, new SmoothMaterial.default)
+			errors.add new Error("Model failed to load: .obj format error on '{self.path}'")
+			leaves_cache.add new LeafModel(new Cube, new Material)
 			return
 		end
 
@@ -79,18 +101,33 @@ class ModelAsset
 		if debug_gamnit then assert obj_def.is_coherent
 
 		# Build models
-		var converter = new ModelFromObj(path, obj_def)
-		converter.models leaves
+		var converter = new BuildModelFromObj(path, obj_def)
+		converter.fill_leaves self
+		errors.add_all converter.errors
 	end
 
-	redef var leaves = new Array[LeafModel]
+	redef fun leaves
+	do
+		lazy_load
+		return leaves_cache
+	end
+
+	private var leaves_cache = new Array[LeafModel]
+
+	redef fun named_parts
+	do
+		lazy_load
+		return named_leaves_cache
+	end
+
+	private var named_leaves_cache = new Map[String, Model]
 end
 
-# Short-lived service to convert an `ObjDef` to `models`
+# Short-lived service to convert an `ObjDef` to `fill_leaves`
 #
 # Limitations: This service only support faces with 3 or 4 vertices.
 # Faces with more vertices should be triangulated by the modeling tool.
-private class ModelFromObj
+private class BuildModelFromObj
 
 	# Path to the .obj file in the assets folder, used to find .mtl files
 	var path: String
@@ -98,71 +135,86 @@ private class ModelFromObj
 	# Parsed .obj definition
 	var obj_def: ObjDef
 
-	fun models(array: Array[LeafModel])
+	# Errors raised by calls to `fill_leaves`
+	var errors = new Array[Error]
+
+	# Fill `leaves` with objects described in `obj_def`
+	fun fill_leaves(target_model: ModelAsset)
 	do
+		var leaves = target_model.leaves_cache
+
 		# Sort faces by material
-		var mtl_to_faces = new MultiHashMap[String, ObjFace]
-		for face in obj_def.faces do
-			var mtl_lib_name = face.material_lib
-			var mtl_name = face.material_name
+		var obj_mtl_to_faces = new Map[ObjObj, MultiHashMap[String, ObjFace]]
+		for obj in obj_def.objects do
+			var mtl_to_faces = new MultiHashMap[String, ObjFace]
+			obj_mtl_to_faces[obj] = mtl_to_faces
+			for face in obj.faces do
+				var mtl_lib_name = face.material_lib
+				var mtl_name = face.material_name
 
-			var full_name = ""
-			if mtl_lib_name != null and mtl_name != null then full_name = mtl_lib_name / mtl_name
+				var full_name = ""
+				if mtl_lib_name != null and mtl_name != null then full_name = mtl_lib_name / mtl_name
 
-			mtl_to_faces[full_name].add face
+				mtl_to_faces[full_name].add face
+			end
 		end
 
 		# Load material libs
-		# TODO do not load each libs more than once
-		var mtl_libs = new Map[String, Map[String, MtlDef]]
+		var mtl_libs = sys.mtl_libs
 		var lib_names = obj_def.material_libs
 		for name in lib_names do
-			var lib_path = self.path.dirname / name
-			var lib_asset = new TextAsset(lib_path)
+			var asset_path = self.path.dirname / name
+			var lib_asset = new TextAsset(asset_path)
 			lib_asset.load
 
 			var error = lib_asset.error
 			if error != null then
-				print_error error.to_s
+				errors.add error
 				continue
 			end
 
 			var mtl_parser = new MtlFileParser(lib_asset.to_s)
 			var mtl_lib = mtl_parser.parse
-			mtl_libs[name] = mtl_lib
+			mtl_libs[asset_path] = mtl_lib
 		end
 
-		# Create 1 mesh per material, and prepare materials
+		# Create 1 mesh per material per object, and prepare materials
 		var mesh_to_mtl = new Map[Mesh, nullable MtlDef]
+		var mesh_to_name = new Map[Mesh, String]
 		var texture_names = new Set[String]
-		for full_name, faces in mtl_to_faces do
+		for obj in obj_def.objects do
+			var mtl_to_faces = obj_mtl_to_faces[obj]
+			for mtl_path, faces in mtl_to_faces do
 
-			# Create mesh
-			var mesh = new Mesh
-			mesh.vertices = vertices(faces)
-			mesh.normals = normals(faces)
-			mesh.texture_coords = texture_coords(faces)
+				# Create mesh
+				var mesh = new Mesh
+				mesh.vertices = vertices(faces)
+				mesh.normals = normals(faces)
+				mesh.texture_coords = texture_coords(faces)
 
-			# Material
-			var mtl_def = null
+				# Material
+				var mtl_def = null
 
-			var mtl_lib_name = faces.first.material_lib
-			var mtl_name = faces.first.material_name
-			if mtl_lib_name != null and mtl_name != null then
-				var mtl_lib = mtl_libs[mtl_lib_name]
-				var mtl = mtl_lib.get_or_null(mtl_name)
-				if mtl != null then
-					mtl_def = mtl
+				var mtl_lib_name = faces.first.material_lib
+				var mtl_name = faces.first.material_name
+				if mtl_lib_name != null and mtl_name != null then
+					var asset_path = self.path.dirname / mtl_lib_name
+					var mtl_lib = mtl_libs[asset_path]
+					var mtl = mtl_lib.get_or_null(mtl_name)
+					if mtl != null then
+						mtl_def = mtl
 
-					for e in mtl.maps do
-						texture_names.add self.path.dirname / e
+						for e in mtl.maps do
+							texture_names.add self.path.dirname / e
+						end
+					else
+						errors.add new Error("Error loading model at '{path}': mtl '{mtl_name}' not found in '{asset_path}'")
 					end
-				else
-					print_error "mtl '{mtl_name}' not found in '{mtl_lib_name}'"
 				end
-			end
 
-			mesh_to_mtl[mesh] = mtl_def
+				mesh_to_mtl[mesh] = mtl_def
+				mesh_to_name[mesh] = obj.name
+			end
 		end
 
 		# Load textures need for these materials
@@ -170,6 +222,10 @@ private class ModelFromObj
 			if not asset_textures_by_name.keys.has(name) then
 				var tex = new TextureAsset(name)
 				asset_textures_by_name[name] = tex
+
+				tex.load
+				var error = tex.error
+				if error != null then errors.add error
 			end
 		end
 
@@ -210,12 +266,27 @@ private class ModelFromObj
 		end
 
 		# Create models and store them
+		var name_to_leaves = new MultiHashMap[String, LeafModel]
 		for mesh, mtl_def in mesh_to_mtl do
+
 			var material = materials.get_or_null(mtl_def)
-			if material == null then material = new SmoothMaterial.default
+			if material == null then material = new Material
 
 			var model = new LeafModel(mesh, material)
-			array.add model
+			leaves.add model
+
+			name_to_leaves[mesh_to_name[mesh]].add model
+		end
+
+		# Collect objects with a name
+		for name, models in name_to_leaves do
+			if models.length == 1 then
+				target_model.named_leaves_cache[name] = models.first
+			else
+				var named_model = new CompositeModel
+				named_model.leaves.add_all models
+				target_model.named_leaves_cache[name] = named_model
+			end
 		end
 	end
 
@@ -381,11 +452,14 @@ redef class Sys
 	# Textures loaded from .mtl files for models
 	var asset_textures_by_name = new Map[String, TextureAsset]
 
+	# Loaded .mtl material definitions, sorted by path in assets and material name
+	private var mtl_libs = new Map[String, Map[String, MtlDef]]
+
 	# All instantiated asset models
 	var models = new Set[ModelAsset]
 
 	# Blue cube of 1 unit on each side, acting as placeholder for models failing to load
 	#
 	# This model can be freely used by any `Actor` as placeholder or for debugging.
-	var placeholder_model = new LeafModel(new Cube, new SmoothMaterial.default) is lazy
+	var placeholder_model = new LeafModel(new Cube, new Material) is lazy
 end

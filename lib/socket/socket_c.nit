@@ -35,7 +35,7 @@ in "C" `{
 	#include <netinet/tcp.h>
 `}
 
-# Wrapper for the data structure PollFD used for polling on a socket
+# Wrapper for the data structure used for polling on a socket
 class PollFD
 	super FinalizableOnce
 
@@ -45,18 +45,20 @@ class PollFD
 	# A collection of the events to be watched
 	var events: Array[NativeSocketPollValues]
 
-	init(pid: Int, events: Array[NativeSocketPollValues])
+	# Create a PollFD object from NativePollFD informations
+	init from_poll_values(pid: Int, events: Array[NativeSocketPollValues])
 	do
 		assert events.length >= 1
-		self.events = events
 
 		var events_in_one = events[0]
 
-		for i in [1 .. events.length-1] do
+		for i in [1 .. events.length - 1] do
 			events_in_one += events[i]
 		end
 
-		self.poll_struct = new NativeSocketPollFD(pid, events_in_one)
+		var poll_struct = new NativeSocketPollFD(pid, events_in_one)
+
+		init(poll_struct, events)
 	end
 
 	# Reads the response and returns an array with the type of events that have been found
@@ -103,8 +105,10 @@ private extern class NativeSocketPollFD `{ struct pollfd * `}
 	`}
 end
 
+# Native C socket
 extern class NativeSocket `{ int* `}
 
+	# Create a new C socket
 	new socket(domain: NativeSocketAddressFamilies, socketType: NativeSocketTypes, protocol: NativeSocketProtocolFamilies) `{
 		int ds = socket(domain, socketType, protocol);
 		if(ds == -1){
@@ -115,29 +119,35 @@ extern class NativeSocket `{ int* `}
 		return d;
 	`}
 
+	# Free the socket
 	fun destroy `{ free(self); `}
 
+	# Close the socket in both read/write
 	fun close: Int `{ return close(*self); `}
 
+	# Get the FD related to `self`
 	fun descriptor: Int `{ return *self; `}
 
+	# Connect to another open socket
+	#
+	# SEE: C documentation for more details on the `connect` operation
 	fun connect(addrIn: NativeSocketAddrIn): Int `{
 		return connect(*self, (struct sockaddr*)addrIn, sizeof(*addrIn));
 	`}
 
 	# Write `length` bytes from `buffer`
-	fun write(buffer: NativeString, length: Int): Int `{
+	fun write(buffer: CString, length: Int): Int `{
 		return write(*self, buffer, length);
 	`}
 
 	# Write `value` as a single byte
-	fun write_byte(value: Byte): Int `{
+	fun write_byte(value: Int): Int `{
 		unsigned char byt = (unsigned char)value;
 		return write(*self, &byt, 1);
 	`}
 
 	# Read `length` bytes into `buffer`, returns the number of bytes read
-	fun read(buffer: NativeString, length: Int): Int `{
+	fun read(buffer: CString, length: Int): Int `{
 		return read(*self, buffer, length);
 	`}
 
@@ -152,8 +162,12 @@ extern class NativeSocket `{ int* `}
 		return 1;
 	`}
 
+	# Bind the socket to a local address
+	#
+	# SEE: C documentation for more details on the bind operation
 	fun bind(addrIn: NativeSocketAddrIn): Int `{ return bind(*self, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
 
+	# Prepare for listening to incoming connections
 	fun listen(size: Int): Int `{ return listen(*self, size); `}
 
 	# Checks if the buffer is ready for any event specified when creating the pollfd structure
@@ -203,6 +217,9 @@ extern class NativeSocket `{ int* `}
 		return ptr;
 	`}
 
+	# Accept a new connection on `self`
+	#
+	# Require the socket to be first bound and listening for connections
 	fun accept: nullable SocketAcceptResult
 	do
 		var addrIn = new NativeSocketAddrIn
@@ -227,17 +244,17 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Send `len` bytes from `buf` to `dest_addr`
-	fun sendto(buf: NativeString, len: Int, flags: Int, dest_addr: NativeSocketAddrIn): Int `{
+	fun sendto(buf: CString, len: Int, flags: Int, dest_addr: NativeSocketAddrIn): Int `{
 		return sendto(*self, buf, len, flags, (struct sockaddr*)dest_addr, sizeof(struct sockaddr_in));
 	`}
 
 	# Receive a message into `buf` of maximum `len` bytes
-	fun recv(buf: NativeString, len: Int, flags: Int): Int `{
+	fun recv(buf: CString, len: Int, flags: Int): Int `{
 		return recv(*self, buf, len, flags);
 	`}
 
 	# Receive a message into `buf` of maximum `len` bytes and store sender info into `src_addr`
-	fun recvfrom(buf: NativeString, len: Int, flags: Int, src_addr: NativeSocketAddrIn): Int `{
+	fun recvfrom(buf: CString, len: Int, flags: Int, src_addr: NativeSocketAddrIn): Int `{
 		socklen_t srclen = sizeof(struct sockaddr_in);
 		return recvfrom(*self, buf, len, flags, (struct sockaddr*)src_addr, &srclen);
 	`}
@@ -275,7 +292,7 @@ extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
 	`}
 
 	# Internet address as then IPV4 numbers-and-dots notation
-	fun address: NativeString `{ return (char*)inet_ntoa(self->sin_addr); `}
+	fun address: CString `{ return (char*)inet_ntoa(self->sin_addr); `}
 
 	# Set `address` to `INADDR_ANY`
 	fun address_any `{ self->sin_addr.s_addr = INADDR_ANY; `}
@@ -298,7 +315,7 @@ end
 
 # Host entry information, a pointer to a `struct hostent`
 extern class NativeSocketHostent `{ struct hostent* `}
-	private fun native_h_aliases(i: Int): NativeString `{
+	private fun native_h_aliases(i: Int): CString `{
 		return self->h_aliases[i];
 	`}
 
@@ -314,17 +331,22 @@ extern class NativeSocketHostent `{ struct hostent* `}
 		return res
 	end
 
-	fun h_addr: NativeString `{
+	# Host IPv4 address
+	fun h_addr: CString `{
 		return (char*)inet_ntoa(*(struct in_addr*)self->h_addr);
 	`}
 
+	# Host address type
 	fun h_addrtype: Int `{ return self->h_addrtype; `}
 
+	# Length in bytes of the addresses
 	fun h_length: Int `{ return self->h_length; `}
 
-	fun h_name: NativeString `{ return self->h_name; `}
+	# Host name
+	fun h_name: CString `{ return self->h_name; `}
 end
 
+# Time structure, with a microsecond resolution
 extern class NativeTimeval `{ struct timeval* `}
 	new (seconds: Int, microseconds: Int) `{
 		struct timeval* tv = NULL;
@@ -334,13 +356,20 @@ extern class NativeTimeval `{ struct timeval* `}
 		return tv;
 	`}
 
+	# Number of seconds recorded
 	fun seconds: Int `{ return self->tv_sec; `}
 
+	# Number of microseconds recorded
 	fun microseconds: Int `{ return self->tv_usec; `}
 
+	# Destory `self`
 	fun destroy `{ free(self); `}
 end
 
+# Structure used to register FDs for a Select
+#
+# FIXME: This should not be Socket-specific
+# FIXME: This is Unix-specific
 extern class NativeSocketSet `{ fd_set* `}
 	new `{
 		fd_set *f = NULL;
@@ -348,17 +377,23 @@ extern class NativeSocketSet `{ fd_set* `}
 		return f;
 	`}
 
+	# Add a file descriptor to the set
 	fun set(s: NativeSocket) `{ FD_SET(*s, self); `}
 
+	# Check if `s` is in the set
 	fun is_set(s: NativeSocket): Bool `{ return FD_ISSET(*s, self); `}
 
+	# Clear the set
 	fun zero `{ FD_ZERO(self); `}
 
+	# Remove `s` from the set
 	fun clear(s: NativeSocket) `{ FD_CLR(*s, self); `}
 
+	# Free the set
 	fun destroy `{ free(self); `}
 end
 
+# Socket observer
 class NativeSocketObserver
 	# FIXME this implementation is broken. `reads`, `write` and `except`
 	# are boxed objects, passing them to a C function is illegal.
@@ -376,16 +411,20 @@ class NativeSocketObserver
 	`}
 end
 
+# Socket types
 extern class NativeSocketTypes `{ int `}
+	# STREAM socket, used for sequential writes/reads
 	new sock_stream `{ return SOCK_STREAM; `}
+	# DGRAM socket, used for packet-oriented communication
 	new sock_dgram `{ return SOCK_DGRAM; `}
+	# RAW socket, access raw data, without it being handled by the IP stack
 	new sock_raw `{ return SOCK_RAW; `}
+	# SEQPACKET, packet-oriented communication with guarantees in packet order
 	new sock_seqpacket `{ return SOCK_SEQPACKET; `}
 end
 
+# Socket families
 extern class NativeSocketAddressFamilies `{ int `}
-	new af_null `{ return 0; `}
-
 	# Unspecified
 	new af_unspec `{ return AF_UNSPEC; `}
 
@@ -413,23 +452,44 @@ extern class NativeSocketAddressFamilies `{ int `}
 	# IPv6
 	new af_inet6 `{ return AF_INET6; `}
 
+	# Maximum identifier for socket families
 	new af_max `{ return AF_MAX; `}
 end
 
+# Socket protocol families
 extern class NativeSocketProtocolFamilies `{ int `}
-	new pf_null `{ return 0; `}
+	# Unspecified
 	new pf_unspec `{ return PF_UNSPEC; `}
+
+	# Local socket
 	new pf_local `{ return PF_LOCAL; `}
+
+	# Unix socket
 	new pf_unix `{ return PF_UNIX; `}
+
+	# Internet (IPv4) socket
 	new pf_inet `{ return PF_INET; `}
+
+	# SNA (IBM) socket
 	new pf_sna `{ return PF_SNA; `}
+
+	# DECnet socket
 	new pf_decnet `{ return PF_DECnet; `}
+
+	# Routing tables control
 	new pf_route `{ return PF_ROUTE; `}
+
+	# Novell internet protocol
 	new pf_ipx `{ return PF_IPX; `}
+
+	# Key management protocol
 	new pf_key `{ return PF_KEY; `}
+
+	# Internet (IPv6) socket
 	new pf_inet6 `{ return PF_INET6; `}
+
+	# Maximum identifier for socket families
 	new pf_max `{ return PF_MAX; `}
-	new ipproto_udp `{ return IPPROTO_UDP; `}
 end
 
 # Level on which to set options
@@ -518,7 +578,7 @@ end
 
 redef class Sys
 	# Get network host entry
-	fun gethostbyname(name: NativeString): NativeSocketHostent `{
+	fun gethostbyname(name: CString): NativeSocketHostent `{
 		return gethostbyname(name);
 	`}
 

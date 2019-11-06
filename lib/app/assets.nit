@@ -37,7 +37,7 @@ class TextAsset
 	redef var to_s = load is lazy
 
 	# Load this asset
-	fun load: String is abstract
+	fun load: String do return ""
 
 	# Error on the last call to `load`, if any
 	var error: nullable Error = null

@@ -2,10 +2,34 @@
 	<div class='card-left text-center'>
 		<entity-tag mentity='mentity' />
 	</div>
-	<div class='card-body'>
+	<div class='card-body' ng-if='mentity.class_name == "MPackage"' style='width: 75%'>
 		<h5 class='card-heading'>
-			<entity-signature mentity='mentity'/>
+			<entity-signature mentity='mentity' />
+			<small ng-if='mentity.class_name == "MPackage"'>
+				<span ng-repeat='tag in mentity.tags'>
+					<a ui-sref='tag({id: tag})' class='text-muted'>{{tag}}</a>
+					<span ng-if='!$last'>,</span>
+				</span>
+			</small>
 		</h5>
-		<span class='synopsis' ng-bind-html='mentity.mdoc.html_synopsis' />
+		<span class='synopsis' ng-bind-html='mentity.html_synopsis' />
+	</div>
+	<div class='card-body' ng-if='mentity.class_name != "MPackage"'>
+		<h5 class='card-heading'>
+			<entity-signature mentity='mentity' />
+			<small><br/><entity-namespace namespace='mentity.namespace' /></small>
+		</h5>
+		<span class='synopsis' ng-bind-html='mentity.html_synopsis' />
+	</div>
+	<div class='card-right' ng-if='mentity.class_name == "MPackage"' style='width: 25%'>
+			<img class='avatar' src='https://secure.gravatar.com/avatar/{{mentity.maintainer.gravatar}}?size=14&amp;default=retro' />
+			<a ui-sref='person({id: mentity.maintainer.name})'>{{mentity.maintainer.name}}</a>
+		</span>
+		<br>
+		<span ng-if='mentity.license'>
+			<span class='text-muted'>
+				<a href='http://opensource.org/licenses/{{mentity.license}}' class='text-muted'>{{mentity.license}}</a>
+			</span>
+		</span>
 	</div>
 </div>

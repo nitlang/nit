@@ -157,7 +157,7 @@ redef class Material
 
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
-		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
+		program.rotation.uniform new Matrix.gamnit_euler_rotation(actor.pitch, actor.yaw, actor.roll)
 
 		var display = app.display
 		assert display != null
@@ -210,7 +210,7 @@ redef class TexturedMaterial
 		# If using a texture, set `texture_coords`
 		program.tex_coord.array_enabled = sample_used_texture != null
 		if sample_used_texture != null then
-			if sample_used_texture isa GamnitRootTexture then
+			if sample_used_texture isa RootTexture then
 				# Coordinates are directly valid
 				program.tex_coord.array(mesh.texture_coords, 2)
 			else

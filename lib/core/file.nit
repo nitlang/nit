@@ -28,8 +28,16 @@ in "C Header" `{
 	#include <sys/stat.h>
 	#include <unistd.h>
 	#include <stdio.h>
-	#include <poll.h>
 	#include <errno.h>
+#ifndef _WIN32
+	#include <poll.h>
+#endif
+`}
+
+in "C" `{
+#ifdef _WIN32
+	#include <windows.h>
+#endif
 `}
 
 # `Stream` used to interact with a File or FileDescriptor
@@ -93,7 +101,6 @@ end
 # `Stream` that can read from a File
 class FileReader
 	super FileStream
-	super BufferedReader
 	super PollableReader
 	# Misc
 
@@ -106,62 +113,64 @@ class FileReader
 	#     assert l == f.read_line
 	fun reopen
 	do
-		if not eof and not _file.as(not null).address_is_null then close
+		var fl = _file
+		if fl != null and not fl.address_is_null then close
 		last_error = null
 		_file = new NativeFile.io_open_read(path.as(not null).to_cstring)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path.as(not null)}`: {sys.errno.strerror}")
-			end_reached = true
 			return
 		end
-		end_reached = false
-		buffer_reset
 	end
 
-	redef fun close
+	redef fun raw_read_byte
 	do
-		super
-		buffer_reset
-		end_reached = true
-	end
-
-	redef fun fill_buffer
-	do
-		var nb = _file.as(not null).io_read(_buffer, _buffer_capacity)
+		var nb = _file.as(not null).io_read(write_buffer, 1)
 		if last_error == null and _file.as(not null).ferror then
 			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
-			end_reached = true
 		end
-		if nb <= 0 then
-			end_reached = true
-			nb = 0
-		end
-		_buffer_length = nb
-		_buffer_pos = 0
+		if nb == 0 then return -1
+		return write_buffer[0].to_i
 	end
 
-	# End of file?
-	redef var end_reached = false
+	redef fun raw_read_bytes(cstr, max)
+	do
+		var nb = _file.as(not null).io_read(cstr, max)
+		if last_error == null and _file.as(not null).ferror then
+			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
+		end
+		return nb
+	end
+
+	redef fun eof do
+		var fl = _file
+		if fl == null then return true
+		if fl.address_is_null then return true
+		if last_error != null then return true
+		if super then
+			if last_error != null then return true
+			return fl.feof
+		end
+		return false
+	end
 
 	# Open the file at `path` for reading.
 	#
 	#     var f = new FileReader.open("/etc/issue")
-	#     assert not f.end_reached
+	#     assert not f.eof
 	#     f.close
 	#
 	# In case of error, `last_error` is set
 	#
 	#     f = new FileReader.open("/fail/does not/exist")
-	#     assert f.end_reached
+	#     assert f.eof
 	#     assert f.last_error != null
 	init open(path: String)
 	do
 		self.path = path
-		prepare_buffer(100)
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
-			end_reached = true
 		end
 	end
 
@@ -170,11 +179,9 @@ class FileReader
 	# This is a low-level method.
 	init from_fd(fd: Int) do
 		self.path = ""
-		prepare_buffer(1)
 		_file = fd.fd_to_stream(read_only)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Error: Converting fd {fd} to stream failed with '{sys.errno.strerror}'")
-			end_reached = true
 		end
 	end
 
@@ -188,8 +195,12 @@ class FileReader
 	end
 
 	private fun native_poll_in(fd: Int): Int `{
+#ifndef _WIN32
 		struct pollfd fds = {(int)fd, POLLIN, 0};
 		return poll(&fds, 1, 0);
+#else
+		return 0;
+#endif
 	`}
 end
 
@@ -198,13 +209,13 @@ class FileWriter
 	super FileStream
 	super Writer
 
-	redef fun write_bytes(s) do
+	redef fun write_bytes_from_cstring(cs, len) do
 		if last_error != null then return
 		if not _is_writable then
 			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		write_native(s.items, 0, s.length)
+		write_native(cs, 0, len)
 	end
 
 	redef fun write(s)
@@ -245,7 +256,7 @@ class FileWriter
 	redef var is_writable = false
 
 	# Write `len` bytes from `native`.
-	private fun write_native(native: NativeString, from, len: Int)
+	private fun write_native(native: CString, from, len: Int)
 	do
 		if last_error != null then return
 		if not _is_writable then
@@ -292,20 +303,23 @@ redef class Int
 	# Creates a file stream from a file descriptor `fd` using the file access `mode`.
 	#
 	# NOTE: The `mode` specified must be compatible with the one used in the file descriptor.
-	private fun fd_to_stream(mode: NativeString): NativeFile `{
+	private fun fd_to_stream(mode: CString): NativeFile `{
 		return fdopen((int)self, mode);
 	`}
+
+	# Does the file descriptor `self` refer to a terminal?
+	fun isatty: Bool `{ return isatty(self); `}
 end
 
 # Constant for read-only file streams
-private fun read_only: NativeString do return once "r".to_cstring
+private fun read_only: CString do return once "r".to_cstring
 
 # Constant for write-only file streams
 #
 # If a stream is opened on a file with this method,
 # it will wipe the previous file if any.
 # Else, it will create the file.
-private fun wipe_write: NativeString do return once "w".to_cstring
+private fun wipe_write: CString do return once "w".to_cstring
 
 ###############################################################################
 
@@ -318,7 +332,6 @@ class Stdin
 	init do
 		_file = new NativeFile.native_stdin
 		path = "/dev/stdin"
-		prepare_buffer(1)
 	end
 end
 
@@ -498,9 +511,10 @@ class Path
 		var input = open_ro
 		var output = dest.open_wo
 
+		var buffer = new CString(4096)
 		while not input.eof do
-			var buffer = input.read_bytes(1024)
-			output.write_bytes buffer
+			var read = input.read_bytes_to_cstring(buffer, 4096)
+			output.write_bytes_from_cstring(buffer, read)
 		end
 
 		input.close
@@ -626,6 +640,22 @@ class Path
 		return res
 	end
 
+	# Correctly join `self` with `subpath` using the directory separator.
+	#
+	# Using a standard "{self}/{path}" does not work in the following cases:
+	#
+	# * `self` is empty.
+	# * `path` starts with `'/'`.
+	#
+	# This method ensures that the join is valid.
+	#
+	#     var hello = "hello".to_path
+	#     assert (hello/"world").to_s   == "hello/world"
+	#     assert ("hel/lo".to_path / "wor/ld").to_s == "hel/lo/wor/ld"
+	#     assert ("".to_path / "world").to_s == "world"
+	#     assert (hello / "/world").to_s  == "/world"
+	#     assert ("hello/".to_path / "world").to_s  == "hello/world"
+	fun /(subpath: String): Path do return new Path(path / subpath)
 
 	# Lists the files contained within the directory at `path`.
 	#
@@ -655,9 +685,9 @@ class Path
 				# readdir cannot fail, so null means end of list
 				break
 			end
-			var name = de.to_s_with_copy
+			var name = de.to_s
 			if name == "." or name == ".." then continue
-			res.add new Path(path / name)
+			res.add self / name
 		end
 		d.closedir
 
@@ -677,26 +707,32 @@ class Path
 		return st.is_dir
 	end
 
-	# Delete a directory and all of its content
+	# Recursively delete a directory and all of its content
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the file system.
 	#
-	# `last_error` is updated to contains the error information on error, and null on success.
-	# The method does not stop on the first error and try to remove most file and directories.
+	# `last_error` is updated with the first encountered error, or null on success.
+	# The method does not stop on the first error and tries to remove the most files and directories.
 	#
 	# ~~~
 	# var path = "/does/not/exists/".to_path
 	# path.rmdir
 	# assert path.last_error != null
+	#
+	# path = "/tmp/path/to/create".to_path
+	# path.to_s.mkdir
+	# assert path.exists
+	# path.rmdir
+	# assert path.last_error == null
 	# ~~~
 	fun rmdir
 	do
-		last_error = null
+		var first_error = null
 		for file in self.files do
 			var stat = file.link_stat
 			if stat == null then
-				last_error = file.last_error
+				if first_error == null then first_error = file.last_error
 				continue
 			end
 			if stat.is_dir then
@@ -705,15 +741,16 @@ class Path
 			else
 				file.delete
 			end
-			if last_error == null then last_error = file.last_error
+			if first_error == null then first_error = file.last_error
 		end
 
 		# Delete the directory itself if things are fine
-		if last_error == null then
-			if path.to_cstring.rmdir then
-				last_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
+		if first_error == null then
+			if not path.to_cstring.rmdir then
+				first_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
 			end
 		end
+		self.last_error = first_error
 	end
 
 	redef fun ==(other) do return other isa Path and simplified.path == other.simplified.path
@@ -860,9 +897,7 @@ redef class Text
 	do
 		for i in substrings do s.write_native(i.to_cstring, 0, i.byte_length)
 	end
-end
 
-redef class String
 	# return true if a file with this names exists
 	fun file_exists: Bool do return to_cstring.file_exists
 
@@ -908,14 +943,14 @@ redef class String
 		if extension == null then
 			extension = file_extension
 			if extension == null then
-				return self
+				return self.to_s
 			else extension = ".{extension}"
 		end
 
 		if has_suffix(extension) then
-			return substring(0, length - extension.length)
+			return substring(0, length - extension.length).to_s
 		end
-		return self
+		return self.to_s
 	end
 
 	# Extract the basename of a path and strip the `extension`
@@ -928,24 +963,33 @@ redef class String
 	#     assert "path/to".basename(".ext")                 == "to"
 	#     assert "path/to/".basename(".ext")                == "to"
 	#     assert "path/to".basename                         == "to"
-	#     assert "path".basename("")                        == "path"
-	#     assert "/path".basename("")                       == "path"
-	#     assert "/".basename("")                           == "/"
-	#     assert "".basename("")                            == ""
+	#     assert "path".basename                            == "path"
+	#     assert "/path".basename                           == "path"
+	#     assert "/".basename                               == "/"
+	#     assert "".basename                                == ""
+	#
+	# On Windows, '\' are replaced by '/':
+	#
+	# ~~~nitish
+	# assert "C:\\path\\to\\a_file.ext".basename(".ext")    == "a_file"
+	# assert "C:\\".basename                                == "C:"
+	# ~~~
 	fun basename(extension: nullable String): String
 	do
+		var n = self
+		if is_windows then n = n.replace("\\", "/")
+
 		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
 		if l == 0 then return "/"
 		var pos = chars.last_index_of_from('/', l)
-		var n = self
 		if pos >= 0 then
 			n = substring(pos+1, l-pos)
 		end
 
 		if extension != null then
 			return n.strip_extension(extension)
-		else return n
+		else return n.to_s
 	end
 
 	# Extract the dirname of a path
@@ -958,13 +1002,23 @@ redef class String
 	#     assert "/path".dirname                       == "/"
 	#     assert "/".dirname                           == "/"
 	#     assert "".dirname                            == "."
+	#
+	# On Windows, '\' are replaced by '/':
+	#
+	# ~~~nitish
+	# assert "C:\\path\\to\\a_file.ext".dirname        == "C:/path/to"
+	# assert "C:\\file".dirname                        == "C:"
+	# ~~~
 	fun dirname: String
 	do
+		var s = self
+		if is_windows then s = s.replace("\\", "/")
+
 		var l = length - 1 # Index of the last char
-		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
-		var pos = chars.last_index_of_from('/', l)
+		while l > 0 and s.chars[l] == '/' do l -= 1 # remove all trailing `/`
+		var pos = s.chars.last_index_of_from('/', l)
 		if pos > 0 then
-			return substring(0, pos)
+			return s.substring(0, pos).to_s
 		else if pos == 0 then
 			return "/"
 		else
@@ -978,7 +1032,7 @@ redef class String
 	fun realpath: String do
 		var cs = to_cstring.file_realpath
 		assert file_exists
-		var res = cs.to_s_with_copy
+		var res = cs.to_s
 		cs.free
 		return res
 	end
@@ -1009,9 +1063,18 @@ redef class String
 	# assert "./../dir".simplify_path		   == "../dir"
 	# assert "./dir".simplify_path			   == "dir"
 	# ~~~
+	#
+	# On Windows, '\' are replaced by '/':
+	#
+	# ~~~nitish
+	# assert "C:\\some\\.\\complex\\../../path/to/a_file.ext".simplify_path == "C:/path/to/a_file.ext"
+	# assert "C:\\".simplify_path              == "C:"
+	# ~~~
 	fun simplify_path: String
 	do
-		var a = self.split_with("/")
+		var s = self
+		if is_windows then s = s.replace("\\", "/")
+		var a = s.split_with("/")
 		var a2 = new Array[String]
 		for x in a do
 			if x == "." and not a2.is_empty then continue # skip `././`
@@ -1052,11 +1115,11 @@ redef class String
 	# Note: You may want to use `simplify_path` on the result.
 	#
 	# Note: This method works only with POSIX paths.
-	fun join_path(path: String): String
+	fun join_path(path: Text): String
 	do
-		if path.is_empty then return self
-		if self.is_empty then return path
-		if path.chars[0] == '/' then return path
+		if path.is_empty then return self.to_s
+		if self.is_empty then return path.to_s
+		if path.chars[0] == '/' then return path.to_s
 		if self.last == '/' then return "{self}{path}"
 		return "{self}/{path}"
 	end
@@ -1071,7 +1134,7 @@ redef class String
 	#     assert "".to_program_name == "./" # At least, your shell will detect the error.
 	fun to_program_name: String do
 		if self.has_prefix("/") then
-			return self
+			return self.to_s
 		else
 			return "./{self}"
 		end
@@ -1091,7 +1154,7 @@ redef class String
 	#     var b = "/bar"
 	#     var c = "baz/foobar"
 	#     assert a/b/c == "/bar/baz/foobar"
-	fun /(path: String): String do return join_path(path)
+	fun /(path: Text): String do return join_path(path)
 
 	# Returns the relative path needed to go from `self` to `dest`.
 	#
@@ -1136,6 +1199,7 @@ redef class String
 	#     assert "/" + "/".relpath(".") == getcwd
 	fun relpath(dest: String): String
 	do
+		# TODO windows support
 		var cwd = getcwd
 		var from = (cwd/self).simplify_path.split("/")
 		if from.last.is_empty then from.pop # case for the root directory
@@ -1168,8 +1232,10 @@ redef class String
 	fun mkdir(mode: nullable Int): nullable Error
 	do
 		mode = mode or else 0o777
+		var s = self
+		if is_windows then s = s.replace("\\", "/")
 
-		var dirs = self.split_with("/")
+		var dirs = s.split_with("/")
 		var path = new FlatBuffer
 		if dirs.is_empty then return null
 		if dirs[0].is_empty then
@@ -1177,14 +1243,20 @@ redef class String
 			path.add('/')
 		end
 		var error: nullable Error = null
-		for d in dirs do
+		for i in [0 .. dirs.length - 1[ do
+			var d = dirs[i]
 			if d.is_empty then continue
 			path.append(d)
 			path.add('/')
-			var res = path.to_s.to_cstring.file_mkdir(mode)
+			if path.file_exists then continue
+			var res = path.to_cstring.file_mkdir(mode)
 			if not res and error == null then
 				error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 			end
+		end
+		var res = s.to_cstring.file_mkdir(mode)
+		if not res and error == null then
+			error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 		end
 		return error
 	end
@@ -1246,7 +1318,7 @@ redef class String
 	do
 		var last_slash = chars.last_index_of('.')
 		if last_slash > 0 then
-			return substring( last_slash+1, length )
+			return substring( last_slash+1, length ).to_s
 		else
 			return null
 		end
@@ -1272,7 +1344,7 @@ redef class String
 		loop
 			var de = d.readdir
 			if de.address_is_null then break
-			var name = de.to_s_with_copy
+			var name = de.to_s
 			if name == "." or name == ".." then continue
 			res.add name
 		end
@@ -1293,7 +1365,7 @@ redef class FlatString
 		var p = last_byte
 		var c = its[p]
 		var st = _first_byte
-		while p >= st and c != '.'.ascii do
+		while p >= st and c != u'.' do
 			p -= 1
 			c = its[p]
 		end
@@ -1303,27 +1375,36 @@ redef class FlatString
 	end
 
 	redef fun basename(extension) do
-		var l = last_byte
-		var its = _items
-		var min = _first_byte
-		var sl = '/'.ascii
+		var s = self
+		if is_windows then s = s.replace("\\", "/").as(FlatString)
+
+		var bname
+		var l = s.last_byte
+		var its = s._items
+		var min = s._first_byte
+		var sl = u'/'
 		while l > min and its[l] == sl do l -= 1
 		if l == min then return "/"
 		var ns = l
 		while ns >= min and its[ns] != sl do ns -= 1
-		var bname = new FlatString.with_infos(its, l - ns, ns + 1)
+		bname = new FlatString.with_infos(its, l - ns, ns + 1)
 
 		return if extension != null then bname.strip_extension(extension) else bname
 	end
 end
 
-redef class NativeString
+redef class CString
 	private fun file_exists: Bool `{
+#ifdef _WIN32
+		DWORD attribs = GetFileAttributesA(self);
+		return attribs != INVALID_FILE_ATTRIBUTES;
+#else
 		FILE *hdl = fopen(self,"r");
 		if(hdl != NULL){
 			fclose(hdl);
 		}
 		return hdl != NULL;
+#endif
 	`}
 
 	private fun file_stat: NativeFileStat `{
@@ -1337,15 +1418,26 @@ redef class NativeString
 	`}
 
 	private fun file_lstat: NativeFileStat `{
+#ifdef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+		return NULL;
+#else
 		struct stat* stat_element;
 		int res;
 		stat_element = malloc(sizeof(struct stat));
 		res = lstat(self, stat_element);
 		if (res == -1) return NULL;
 		return stat_element;
+#endif
 	`}
 
-	private fun file_mkdir(mode: Int): Bool `{ return !mkdir(self, mode); `}
+	private fun file_mkdir(mode: Int): Bool `{
+#ifdef _WIN32
+		return !mkdir(self);
+#else
+		return !mkdir(self, mode);
+#endif
+	`}
 
 	private fun rmdir: Bool `{ return !rmdir(self); `}
 
@@ -1355,7 +1447,16 @@ redef class NativeString
 
 	private fun file_chdir: Bool `{ return !chdir(self); `}
 
-	private fun file_realpath: NativeString `{ return realpath(self, NULL); `}
+	private fun file_realpath: CString `{
+#ifdef _WIN32
+		DWORD len = GetFullPathName(self, 0, NULL, NULL);
+		char *buf = malloc(len+1); // FIXME don't leak memory
+		len = GetFullPathName(self, len+1, buf, NULL);
+		return buf;
+#else
+		return realpath(self, NULL);
+#endif
+	`}
 end
 
 # This class is system dependent ... must reify the vfs
@@ -1392,23 +1493,40 @@ private extern class NativeFileStat `{ struct stat * `}
 	fun is_fifo: Bool `{ return S_ISFIFO(self->st_mode); `}
 
 	# Returns true if the type is a link
-	fun is_lnk: Bool `{ return S_ISLNK(self->st_mode); `}
+	fun is_lnk: Bool `{
+#ifdef _WIN32
+	return 0;
+#else
+	return S_ISLNK(self->st_mode);
+#endif
+	`}
 
 	# Returns true if the type is a socket
-	fun is_sock: Bool `{ return S_ISSOCK(self->st_mode); `}
+	fun is_sock: Bool `{
+#ifdef _WIN32
+	return 0;
+#else
+	return S_ISSOCK(self->st_mode);
+#endif
+	`}
 end
 
 # Instance of this class are standard FILE * pointers
 private extern class NativeFile `{ FILE* `}
-	fun io_read(buf: NativeString, len: Int): Int `{
+	fun io_read(buf: CString, len: Int): Int `{
 		return fread(buf, 1, len, self);
 	`}
 
-	fun io_write(buf: NativeString, from, len: Int): Int `{
-		return fwrite(buf+from, 1, len, self);
+	fun io_write(buf: CString, from, len: Int): Int `{
+		size_t res = fwrite(buf+from, 1, len, self);
+#ifdef _WIN32
+		// Force flushing buffer because end of line does not trigger a flush
+		fflush(self);
+#endif
+		return (long)res;
 	`}
 
-	fun write_byte(value: Byte): Int `{
+	fun write_byte(value: Int): Int `{
 		unsigned char b = (unsigned char)value;
 		return fwrite(&b, 1, 1, self);
 	`}
@@ -1427,6 +1545,8 @@ private extern class NativeFile `{ FILE* `}
 
 	fun ferror: Bool `{ return ferror(self); `}
 
+	fun feof: Bool `{ return feof(self); `}
+
 	fun fileno: Int `{ return fileno(self); `}
 
 	# Flushes the buffer, forcing the write operation
@@ -1437,9 +1557,9 @@ private extern class NativeFile `{ FILE* `}
 		return setvbuf(self, NULL, (int)mode, buf_length);
 	`}
 
-	new io_open_read(path: NativeString) `{ return fopen(path, "r"); `}
+	new io_open_read(path: CString) `{ return fopen(path, "r"); `}
 
-	new io_open_write(path: NativeString) `{ return fopen(path, "w"); `}
+	new io_open_write(path: CString) `{ return fopen(path, "w"); `}
 
 	new native_stdin `{ return stdin; `}
 
@@ -1452,13 +1572,13 @@ end
 private extern class NativeDir `{ DIR* `}
 
 	# Open a directory
-	new opendir(path: NativeString) `{ return opendir(path); `}
+	new opendir(path: CString) `{ return opendir(path); `}
 
 	# Close a directory
 	fun closedir `{ closedir(self); `}
 
 	# Read the next directory entry
-	fun readdir: NativeString `{
+	fun readdir: CString `{
 		struct dirent *de;
 		de = readdir(self);
 		if (!de) return NULL;
@@ -1512,6 +1632,9 @@ redef class Sys
 
 	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int
 	import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+#ifndef _WIN32
+		// FIXME use a higher level abstraction to support WIN32
+
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
 		int i;
@@ -1556,6 +1679,7 @@ redef class Sys
 		}
 		else if ( result < 0 )
 			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
+#endif
 
 		return null_Int();
 	`}
@@ -1599,4 +1723,4 @@ end
 # Return the working (current) directory
 fun getcwd: String do return native_getcwd.to_s
 
-private fun native_getcwd: NativeString `{ return getcwd(NULL, 0); `}
+private fun native_getcwd: CString `{ return getcwd(NULL, 0); `}

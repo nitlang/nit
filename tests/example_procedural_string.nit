@@ -14,15 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1 import core
-#alt1 import core::text::ropes
-
 # A procedural program (without explicit class).
 
 fun first_word(s: String): String
 do
 	var result: Buffer = new FlatBuffer
-	#alt1 result = new RopeBuffer
 	var i = 0
 	while i < s.length and s.chars[i] != ' ' do
 		result.add(s.chars[i])

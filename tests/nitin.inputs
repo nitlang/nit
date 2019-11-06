@@ -1,0 +1,65 @@
+print 5+2
+
+for i in [0..5[ do
+print i
+end
+
+do
+var sum = 0
+for i in [0..50[ do
+sum += i
+end
+print sum
+end
+
+class A
+fun foo do
+print "hello"
+end
+end
+(new A).foo
+
+class
+end
+class A
+end
+redef class A
+redef fun foo do print "Bye"
+end
+(new A).foo
+
+foo
+fun foo do
+print "I'm sys"
+end
+foo
+
+redef class Sys
+var my_int: Int is writable
+end
+my_int = 5
+print my_int
+
+print([0..10[.to_a.to_json)
+import json
+print([0..10[.to_a.to_json)
+
+%$^&
+
+fun foo_abstract is abstract
+fun foo_intern is intern
+class B
+var a: B is noautoinit
+fun foo do print "B"
+end
+fun nil: nullable B do return null
+
+abort
+nil.foo
+foo_abstract
+assert false
+(new A).as(B).foo
+print((new B).a)
+foo_intern
+
+print "Finished"

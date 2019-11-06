@@ -143,7 +143,7 @@ end
 # Global context for tools
 class ToolContext
 	# Number of errors
-	var error_count: Int = 0
+	var error_count: Int = 0 is writable
 
 	# Number of warnings
 	var warning_count: Int = 0
@@ -340,7 +340,7 @@ class ToolContext
 		proc_which.wait
 		var res = proc_which.status
 		if res != 0 then
-			print "{error}: executable \"{prog}\" not found"
+			print_error "{error}: executable \"{prog}\" not found"
 			exit 1
 		end
 
@@ -349,7 +349,7 @@ class ToolContext
 		proc.wait
 		res = proc.status
 		if res != 0 then
-			print "{error}: execution of \"{prog} {args.join(" ")}\" failed"
+			print_error "{error}: execution of \"{prog} {args.join(" ")}\" failed"
 			exit 1
 		end
 	end
@@ -405,12 +405,18 @@ class ToolContext
 	# Option --stub-man
 	var opt_stub_man = new OptionBool("Generate a stub manpage in pandoc markdown format", "--stub-man")
 
+	# Option --no-contract
+	var opt_no_contract = new OptionBool("Disable the contracts usage", "--no-contract")
+
+	# Option --full-contract
+	var opt_full_contract = new OptionBool("Enable all contracts usage", "--full-contract")
+
 	# Verbose level
 	var verbose_level: Int = 0
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man, opt_no_contract, opt_full_contract)
 
 		# Hide some internal options
 		opt_stub_man.hidden = true
@@ -566,7 +572,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 	#
 	# It uses, in order:
 	#
-	# * the option `opt_no_color`
+	# * the option `opt_nit_dir`
 	# * the environment variable `NIT_DIR`
 	# * the runpath of the program from argv[0]
 	# * the runpath of the process from /proc
@@ -610,7 +616,8 @@ The Nit language documentation and the source code of its tools and libraries ma
 		end
 
 		# search in the PATH
-		var ps = "PATH".environ.split(":")
+		var path_sep = if is_windows then ";" else ":"
+		var ps = "PATH".environ.split(path_sep)
 		for p in ps do
 			res = p/".."
 			if check_nit_dir(res) then return res.simplify_path

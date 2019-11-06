@@ -31,17 +31,35 @@ class MDoc
 
 	# The original location of the doc for error messages
 	var location: Location
+
+	# The comment first line
+	var synopsis: String is lazy do return content.first
+
+	# All comment lines except for the synopsis
+	var comment: String is lazy do
+		var lines = content.to_a
+		if not lines.is_empty then lines.shift
+		return lines.join("\n")
+	end
+
+	# Full comment
+	var documentation: String is lazy do return content.join("\n")
 end
 
 redef class MEntity
 	# The documentation associated to the entity
-	var mdoc: nullable MDoc is writable
+	var mdoc: nullable MDoc = null is writable
 
 	# The documentation associated to the entity or their main nested entity.
 	#
-	# MPackage fall-back to their root MGroup
-	# MGroup fall-back to their default_mmodule
-	# Other entities do not fall-back
+	# * `MPackage`s fall back to their root `MGroup`.
+	# * `MGroup`s fall back to their `default_mmodule`.
+	# * `MClass`es, `MClassDef`s, `MProperty`s and `MPropDef`s fall-back to
+	#   their introducing definition.
+	# * `MClassType`s fall back to their wrapped `MClass`.
+	# * `MVirtualType`s fall back to their wrapped `MProperty`.
+	# * `CallSite` fall back on the wrapped `MProperty`.
+	# * Other entities do not fall back.
 	#
 	# One may use `MDoc::original_mentity` to retrieve the original
 	# source of the documentation.

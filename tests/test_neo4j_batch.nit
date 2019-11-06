@@ -14,10 +14,8 @@
 
 import neo4j
 
-var srv = new Neo4jServer
-srv.start_quiet
-
-var key = get_time
+# key used to loosely assume unicity and prevent conflicting db accesses
+var key = "NIT_TESTING_ID".environ.to_i
 
 var andres = new NeoNode
 andres.labels.add_all(["PERSON", "MALE"])
@@ -36,8 +34,15 @@ kate["status"] = false
 var loves = new NeoEdge(andres, "LOVES", kate)
 loves["since"] = 1999
 
-var client = new Neo4jClient("http://localhost:7474")
+var client = new Neo4jClient("http://neo4j:7474")
 assert client.is_ok
+
+# Clear the previous objects, if any
+client.cypher(
+	new CypherQuery.from_string(
+		"MATCH (n) WHERE n.key = \{key\} OPTIONAL MATCH n-[r]-() DELETE r, n"
+	).set("key", key)
+)
 
 print "# Save batch\n"
 
@@ -56,7 +61,7 @@ var andres_url = andres.url.to_s
 var kate_url = kate.url.to_s
 var loves_url = loves.url.to_s
 
-client = new Neo4jClient("http://localhost:7474")
+client = new Neo4jClient("http://neo4j:7474")
 assert client.is_ok
 
 # Read Andres
@@ -92,8 +97,9 @@ print "{res5["name"].to_s} IS LOVED BY {res5.in_nodes("LOVES").first["name"].to_
 var query = (new CypherQuery).
 	nmatch("(n: MALE)-[r: LOVES]->(m)").
 	nwhere("n.name = 'Andres'").
-	nand("n.key = {key}").
-	nreturn("n, r, m")
+	nand("n.key = \{key\}").
+	nreturn("n, r, m").
+	set("key", key)
 var res7 = client.cypher(query)
 assert res7.as(JsonObject)["data"].as(JsonArray).length == 1
 

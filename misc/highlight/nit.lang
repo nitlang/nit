@@ -6,7 +6,7 @@ Digits=[[ (?:0x|0X|0b)[0-9a-fA-F]+|\d*[\.\_]?\d+(?:[eE][\-\+]\d+)? ]]
 
 Keywords={
   { Id=1,
-    List={"abort", "abstract", "as", "assert", "break", "continue", "do", "else", "end", "enum", "extern", "for", "if", "import", "in", "interface", "intern", "intrude", "is", "isa", "isset", "new", "label", "loop", "private", "protected", "readable", "return", "super", "then", "while", "false", "null", "nullable", "redef", "self", "true", "and", "not", "or", "fun", "var", "type", "init", "class", "package", "module", "special", "universal", "writable"},
+    List={"abort", "abstract", "as", "assert", "break", "continue", "do", "else", "end", "catch", "enum", "extern", "for", "if", "import", "in", "interface", "intern", "intrude", "is", "isa", "isset", "new", "label", "loop", "private", "protected", "readable", "return", "super", "then", "while", "false", "null", "nullable", "redef", "self", "true", "and", "not", "or", "fun", "var", "type", "init", "class", "package", "module", "special", "universal", "writable"},
   },
   { Id=2,
     Regex=[[[A-Z][\/\w]+]],

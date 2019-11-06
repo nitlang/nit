@@ -131,8 +131,8 @@ extern class GtkProgressBar `{GtkProgressBar *`}
 		gtk_progress_bar_set_show_text(self, show);
 	`}
 
-	fun text: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_progress_bar_get_text(self));
+	fun text: String import CString.to_s `{
+		return CString_to_s((char *)gtk_progress_bar_get_text(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{
@@ -275,5 +275,5 @@ extern class GtkCheckButton `{ GtkCheckButton * `}
 
 	new `{ return (GtkCheckButton *)gtk_check_button_new(); `}
 
-	new with_label(lbl: NativeString) `{ return (GtkCheckButton *)gtk_check_button_new_with_label((gchar *)lbl); `}
+	new with_label(lbl: CString) `{ return (GtkCheckButton *)gtk_check_button_new_with_label((gchar *)lbl); `}
 end

@@ -37,7 +37,7 @@ class XophonLexer
 	# Last read byte.
 	#
 	# Equals `-1` on end of file or error.
-	private var last_char: Int = -1
+	private var last_char = -1
 
 	# Before end-of-line handling, was the last read byte a CARRIAGE RETURN?
 	private var was_cr: Bool = false
@@ -255,7 +255,7 @@ class XophonLexer
 		end
 
 		var s = input.read_byte
-		if s == null then
+		if s < 0 then
 			last_char = -1
 			return
 		end
@@ -267,10 +267,10 @@ class XophonLexer
 		if was_cr and last_char == '\n'.code_point then
 			# EOL already reported. => Skip this byte.
 			s = input.read_byte
-			if s == null then
+			if s < 0 then
 				last_char = -1
 			else
-				last_char = s.to_i
+				last_char = s
 			end
 		end
 		was_cr = last_char == '\r'.code_point

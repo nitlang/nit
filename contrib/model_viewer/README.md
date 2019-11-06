@@ -12,7 +12,7 @@ It renders the earth with an displaced surface, a cloud layer, city lights and P
 
 	This variation can show more models specified on the command line.
 
-	~~~
+	~~~raw
 	bin/model_viewer [path_to_model ...]
 	~~~
 

@@ -19,15 +19,10 @@ module data_store
 
 import app::data_store
 private import xdg_basedir
-private import sqlite3
-private import json::serialization
+import sqlite3
+private import json
 
-redef class App
-	redef var data_store = new LinuxStore
-end
-
-private class LinuxStore
-	super DataStore
+redef class DataStore
 
 	# File path of the Sqlite3 DB file
 	fun db_file: String do return "data_store.db"
@@ -35,7 +30,7 @@ private class LinuxStore
 	# Sqlite3 table used
 	fun db_table: String do return "data_store"
 
-	var db_cache: nullable Sqlite3DB = null
+	private var db_cache: nullable Sqlite3DB = null
 
 	# Database to use to implement the `DataStore`
 	fun db: nullable Sqlite3DB
@@ -71,6 +66,7 @@ private class LinuxStore
 
 		# Prepare SELECT statement
 		var stmt = db.select("* FROM {db_table} WHERE key == {key.to_sql_string}")
+		if stmt == null then return null
 
 		# Execute statment
 		for row in stmt do
@@ -81,6 +77,13 @@ private class LinuxStore
 			# Deserialize
 			var deserializer = new JsonDeserializer(serialized)
 			var deserialized = deserializer.deserialize
+
+			var errors = deserializer.errors
+			if errors.not_empty then
+				# An update may have broken the versioning compatibility
+				print_error "{class_name} error at deserialization: {errors.join(", ")}"
+				return null # Let's be safe
+			end
 
 			return deserialized
 		end

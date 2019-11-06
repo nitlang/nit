@@ -307,6 +307,45 @@ private class StepIterator[E]
 	redef fun next_by(step) do real.next_by(step * self.step)
 end
 
+# An iterator that lazyly cache the current item.
+#
+# This class can be used as an helper to build simple iterator with a single and simplier `next_item` method.
+# The only constraint is that `next_item` returns null on the last item, so `null` cannot be a valid element.
+abstract class CachedIterator[E: Object]
+	super Iterator[E]
+
+	# Get the next item if any.
+	# Returns null if there is no next item.
+	fun next_item: nullable E is abstract
+
+	# The last item effectively read.
+	# `null` if on start, after a next of if no more items are available.
+	protected var cache: nullable E = null
+
+	# The current item, if any.
+	# If not, the cache is effectively filled (with `next_item`).
+	# Return `null` iff there is no more elements.
+	protected fun current_item: nullable E
+	do
+		var cache = self.cache
+		if cache != null then return cache
+		cache = next_item
+		self.cache = cache
+		return cache
+	end
+
+	redef fun item do return current_item.as(not null)
+
+	redef fun is_ok do return current_item != null
+
+	redef fun next do
+		# If needed, fill the cache (an consume the current element)
+		current_item
+		# Empty the cache (so the next element will be read)
+		cache = null
+	end
+end
+
 # A collection that contains only one item.
 #
 # Used to pass arguments by reference.
@@ -385,7 +424,7 @@ end
 interface SimpleCollection[E]
 	super RemovableCollection[E]
 
-	# Add an item in a collection.
+	# Add `item` to this collection.
 	#
 	#     var a = [1,2]
 	#     a.add 3
@@ -396,6 +435,7 @@ interface SimpleCollection[E]
 	fun add(item: E) is abstract
 
 	# Add each item of `coll`.
+	#
 	#     var a = [1,2]
 	#     a.add_all([3..5])
 	#     assert a.has(4)  == true
@@ -857,6 +897,36 @@ interface SequenceRead[E]
 		else
 			return length - (-1 - index) % length - 1
 		end
+	end
+
+	# Try to get an element, return `null` if the `index` is invalid.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.get_or_null(1) == 20
+	# assert a.get_or_null(3) == null
+	# assert a.get_or_null(-1) == null
+	# assert a.get_or_null(-10) == null
+	# ~~~
+	fun get_or_null(index: Int): nullable E
+	do
+		if index >= 0 and index < length then return self[index]
+		return null
+	end
+
+	# Try to get an element, return `default` if the `index` is invalid.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.get_or_default(1, -1) == 20
+	# assert a.get_or_default(3, -1) == -1
+	# assert a.get_or_default(-1, -1) == -1
+	# assert a.get_or_default(-10, -1) == -1
+	# ~~~
+	fun get_or_default(index: Int, default: E): E
+	do
+		if index >= 0 and index < length then return self[index]
+		return default
 	end
 
 	# Get the last item.

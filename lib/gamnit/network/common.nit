@@ -16,14 +16,15 @@
 module common
 
 import socket
-import binary::serialization
+import msgpack
 
 # Unique name of the application to use in the handshake
 #
 # This name must be the same between client/server and
 # it should not be used by other programs that may interfere.
-#
 # Both client and server refuse connections with a different name.
+#
+# This value must not contain spaces.
 fun handshake_app_name: String do return program_name
 
 # Version of the communication protocol to use in the handshake
@@ -32,4 +33,17 @@ fun handshake_app_name: String do return program_name
 # that different versions indicates incompatible protocols.
 #
 # Both client and server refuse connections with a different version.
+#
+# This value must not contain spaces.
 fun handshake_app_version: String do return "0.0"
+
+# Server port listening for discovery requests
+#
+# This name must be the same between client/server.
+fun discovery_port: Int do return 18722
+
+# First word in discovery requests
+private fun discovery_request_message: String do return "gamnit::network?"
+
+# First word in discovery responses
+private fun discovery_response_message: String do return "gamnit::network!"

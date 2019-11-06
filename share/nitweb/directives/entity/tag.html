@@ -1,5 +1,64 @@
-<span class="glyphicon glyphicon-tag" ng-class='{
+<span>
+	<!-- package -->
+	<span ng-if='mentity.class_name == "MPackage"'>
+		<span class='glyphicon glyphicon-book text-muted' style='top: 3px' />
+	</span>
+
+	<!-- groups -->
+	<span ng-if='mentity.class_name == "MGroup"'>
+		<span class='glyphicon glyphicon-folder-close text-muted' />
+	</span>
+
+	<!-- modules -->
+	<span ng-if='mentity.class_name == "MModule"'>
+		<span class='glyphicon glyphicon-file text-muted' style='top: 2px' />
+	</span>
+
+	<!-- classes -->
+	<span ng-if='mentity.class_name == "MClass"'>
+		<span class='glyphicon glyphicon-stop' ng-class='{
+			"text-success": mentity.visibility == "public",
+			"text-warning": mentity.visibility == "protected",
+			"text-danger": mentity.visibility == "private",
+		}' />
+	</span>
+
+	<!-- classdefs -->
+	<span ng-if='mentity.class_name == "MClassDef"' ng-class='{
 		"text-success": mentity.visibility == "public",
 		"text-warning": mentity.visibility == "protected",
 		"text-danger": mentity.visibility == "private",
-}' />
+	}'>
+		<span class='glyphicon' style='top: 2px; left:2px' ng-class='{
+			"glyphicon-plus": mentity.is_intro,
+			"glyphicon-asterisk": !mentity.is_intro
+		}' />
+	</span>
+
+	<!-- props -->
+	<span ng-if='mentity.class_name == "MAttribute" ||
+		 mentity.class_name == "MMethod" ||
+		 mentity.class_name == "MVirtualTypeProp"
+	'>
+		<span class='glyphicon glyphicon-tag' ng-class='{
+			"text-success": mentity.visibility == "public",
+			"text-warning": mentity.visibility == "protected",
+			"text-danger": mentity.visibility == "private",
+		}' />
+	</span>
+
+	<!-- propdefs -->
+	<span ng-if='mentity.class_name == "MAttributeDef" ||
+		mentity.class_name == "MMethodDef" ||
+		mentity.class_name == "MVirtualTypePropDef"'
+		ng-class='{
+			"text-success": mentity.visibility == "public",
+			"text-warning": mentity.visibility == "protected",
+			"text-danger": mentity.visibility == "private"
+	}'>
+		<span class='glyphicon' style='top: 2px; left:2px' ng-class='{
+			"glyphicon-plus": mentity.is_intro,
+			"glyphicon-asterisk": !mentity.is_intro
+		}' />
+	</span>
+</span>

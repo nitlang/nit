@@ -46,18 +46,20 @@ Your old hard drive is full and you bought a new one. You now want to copy your 
 
 If you need more than one configuration, let's say to sort videos, you can use Nit class refinement. Create a separate Nit module next to `src/sort_downloads.nit` named `sort_videos.nit` and use something like:
 
-    #!/usr/bin/env nit
+~~~nitish
+#!/usr/bin/env nit
 
-    import sort_downloads
+import sort_downloads
 
-    redef class Config
-	    redef fun source_dir do return "/media/new-drive/video-downloads"
-	    redef fun dest_dir do return "/media/new-drive/Videos"
-	    redef fun regex_source_dirs do return ["~/Videos", dest_dir]
-	    redef fun elapsed_days do return 0
-    end
+redef class Config
+	redef fun source_dir do return "/media/new-drive/video-downloads"
+	redef fun dest_dir do return "/media/new-drive/Videos"
+	redef fun regex_source_dirs do return ["~/Videos", dest_dir]
+	redef fun elapsed_days do return 0
+end
 
-    super # this executes the program
+super # this executes the program
+~~~
 
 ## Sort only older files
 

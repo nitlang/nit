@@ -1,0 +1,26 @@
+<div class='container-fluid'>
+	<div class='col-xs-3'>
+		<user-sidebar />
+	</div>
+	<div class='col-xs-8'>
+		<h4>Your grades</h4>
+
+		<table class='table'>
+			<tr ng-repeat='rating in ratings | orderBy: "-timestamp"'>
+				<td>{{rating.timestamp * 1000 | date: 'yy/MM/dd hh:mm a'}}</td>
+				<td>
+					<b><a href='/doc/{{rating.mentity}}'>{{rating.mentity}}</a></b>
+				</td>
+				<td>
+					<b>{{rating.dimension}}</b>
+				</td>
+				<td>
+					<span class='stars' ng-repeat='star in [1, 2, 3, 4, 5]'>
+						<span class='star glyphicon'
+						  ng-class='star <= rating.rating? "glyphicon-star": "glyphicon-star-empty"' />
+					</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+<div>

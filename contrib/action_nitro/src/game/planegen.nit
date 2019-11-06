@@ -40,7 +40,7 @@ redef class World
 		for i in planes.reverse_iterator do
 			if i.out_of_screen(p, self) then
 				#print "Despawning plane"
-				i.destroy(self)
+				i.destroy self
 			end
 		end
 
@@ -118,14 +118,14 @@ redef class World
 		if p == null then return
 		if p.altitude >= boss_altitude then
 			for e in enemies.reverse_iterator do if e isa JetpackEnemy then
-				e.destroy(self)
+				e.destroy self
 			end
 			return
 		end
 		for i in enemies.reverse_iterator do
 			if i.out_of_screen(p, self) then
 				#print "Despawning enemy"
-				i.destroy(self)
+				i.destroy self
 			end
 		end
 

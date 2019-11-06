@@ -350,7 +350,6 @@ redef class TypeVisitor
 		if dcp.is_disabled then return res
 
 		var anchor = self.anchor
-		assert anchor != null
 		var supx = sup
 		var subx = sub
 		var p = node.parent.as(not null)
@@ -474,19 +473,19 @@ redef class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
-		assert sub isa MClassType # It is the only remaining type
+		if sub isa MBottomType or sub isa MErrorType then
+			return true
+		end
 
-		# A unfixed formal type can only accept itself
-		if sup isa MFormalType then
+		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
+
+		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
+		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType or sup isa MErrorType then
+			# These types are not super-types of Class-based types.
 			return false
 		end
 
-		if sup isa MNullType then
-			# `sup` accepts only null
-			return false
-		end
-
-		assert sup isa MClassType # It is the only remaining type
+		assert sup isa MClassType else print_error "got {sup} {sub.inspect}" # It is the only remaining type
 
 		# Now both are MClassType, we need to dig
 
@@ -495,7 +494,7 @@ redef class MType
 		if anchor == null then anchor = sub # UGLY: any anchor will work
 		var resolved_sub = sub.anchor_to(mmodule, anchor)
 		var res = resolved_sub.collect_mclasses(mmodule).has(sup.mclass)
-		if res == false then return false
+		if not res then return false
 		if not sup isa MGenericType then return true
 		var sub2 = sub.supertype_to(mmodule, anchor, sup.mclass)
 		assert sub2.mclass == sup.mclass
@@ -503,10 +502,10 @@ redef class MType
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
 			res = sub_arg.is_subtype(mmodule, anchor, sup_arg)
-			if res == false then return false
+			if not res then return false
 			# The two new lines
 			res = sup_arg.is_subtype(mmodule, anchor, sub_arg)
-			if res == false then return false
+			if not res then return false
 			# End of the two new lines
 		end
 		return true

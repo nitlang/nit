@@ -19,7 +19,7 @@
 # References:
 # * The book OpenGL ES 2.0 Programming Guide
 # * https://code.google.com/p/opengles-book-samples/source/browse/trunk/LinuxX11/Chapter_2/Hello_Triangle/Hello_Triangle.c
-module standalone_triangle
+module standalone_triangle is example
 
 import app
 import gamnit::display
@@ -73,7 +73,7 @@ void main()
 	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
 """@glsl_fragment_shader.to_cstring)
-glIsShader fragment_shader
+glCompileShader fragment_shader
 assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {glGetShaderInfoLog(fragment_shader)}"
 assert glGetError == gl_NO_ERROR
 

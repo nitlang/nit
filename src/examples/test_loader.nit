@@ -15,7 +15,7 @@
 # Sample program that scan and load things.
 #
 # It shows the difference betwenn the various services of the `loader`.
-module test_loader
+module test_loader is example
 
 import loader
 

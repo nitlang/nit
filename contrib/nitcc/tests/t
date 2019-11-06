@@ -54,21 +54,26 @@ differ() {
                         echo "[***no sav***] cp 'out/$r' sav/"
                         test $verbose = true && { cat "out/$r" ; echo ; }
 			echo >>"$tap" "not ok $tapcount - $name # TODO no sav"
+			return 1
                 else
                         echo "[0K]"
 			echo >>"$tap" "ok $tapcount - $name"
+			return 0
                 fi
         elif diff "sav/$r" "out/$r" >/dev/null
         then
                 echo "[OK]"
 		echo >>"$tap" "ok $tapcount - $name"
+		return 0
         else
                 echo "[******failed******] diff -u {sav,out}/$r"
                 test $verbose = true && { diff -u "sav/$r" "out/$r" ; echo ; }
 		echo >>"$tap" "not ok $tapcount - $name"
+		return 1
         fi
 }
 
+err=0
 for f in "$@"
 do
         for a in "$f" `./alterner.pl $f`
@@ -107,7 +112,7 @@ do
 
 		grep -i "error" "out/$bn.nitcc.log" > "out/$res"
 		name="$a"
-                differ $res
+                differ $res || err=1
 
                 if test \! -z $cla
                 then
@@ -129,7 +134,7 @@ do
 
 				cp "$langname.ast.out" "out/$resi"
 				name="$a $i"
-                                differ "$resi"
+                                differ "$resi" || err=1
                         done
                 fi
         done
@@ -137,3 +142,4 @@ done
 
 echo >>"$tap" "1..$tapcount"
 #prove --formatter=TAP::Formatter::JUnit /bin/cat :: tap.output > tap.xml
+exit "$err"

@@ -51,13 +51,25 @@ for f in "$@"; do
 			b=`basename -- "$f"`
 			;;
 	esac
+
 	# remove bad chars
-	c=`echo "$b" | sed 's/\([\\.*^$]\|\[\|]\)/./g'`
+	c="$(printf '%s\n' "$b" | sed '
+		# POSIX BRE metacharacters -> .
+		s/[\\.*^$]\|\[\|]/./g
+
+		# Escape the apostrophe the same way than `listfull.sh`,
+		# then re-escape in POSIX BRE.
+		# x -> x\\xx (where `x` is the apostrophe)
+		s/'\''/'\''\\\\'\'\''/g
+	')"
+
 	# Remove alts of args test variations
 	c=`echo "$c" | sed 's/\(_[0-9]*alt[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/g;s/\(_args[0-9][0-9]*\)/\\\\(\1\\\\)\\\\?/'`
 	b=`echo "$b" | sed 's/_[0-9]*alt[0-9][0-9]*//g;s/_args[0-9][0-9]*//'`
 	# Search the orig nit file in the list
-	cat listfull.out | grep -- "\(^\|/\)$c.nit" || {
+	{
+		grep -- "\(^'\|/\)$c.nit" listfull.out | xargs -E '' -- printf '%s\n'
+	} || {
 		res=1
 		echo >&2 "No test $b.nit found for $f"
 		test "$verbose" == "true" || continue

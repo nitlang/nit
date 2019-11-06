@@ -13,22 +13,21 @@
 # limitations under the License.
 
 # Test suites for module `markdown`
-module test_markdown is test_suite
+module test_markdown is test
 
-import test_suite
 intrude import markdown
 
 class TestMarkdownProcessor
-	super TestSuite
+	test
 
-	fun test_process_empty do
+	fun test_process_empty is test do
 		var test = ""
 		var exp = ""
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_tabs do
+	fun test_process_tabs is test do
 		var test = """
 	some code
 """
@@ -40,14 +39,14 @@ class TestMarkdownProcessor
 	end
 
 
-	fun test_process_par1 do
+	fun test_process_par1 is test do
 		var test = "test"
 		var exp = "<p>test</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_par2 do
+	fun test_process_par2 is test do
 		var test = """
 line1
 line2
@@ -65,7 +64,7 @@ line2</p>
 		assert res == exp
 	end
 
-	fun test_process_par3 do
+	fun test_process_par3 is test do
 		var test = """
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Aliquam hendrerit mi posuere lectus.
@@ -85,7 +84,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_headings_1 do
+	fun test_process_headings_1 is test do
 		var test = """
 This is a H1
 =============
@@ -101,7 +100,7 @@ This is a H2
 		assert res == exp
 	end
 
-	fun test_process_headings_2 do
+	fun test_process_headings_2 is test do
 		var test = """
 # This is a H1
 
@@ -117,7 +116,7 @@ This is a H2
 		assert res == exp
 	end
 
-	fun test_process_headings_3 do
+	fun test_process_headings_3 is test do
 		var test = """
 # This is a H1 #
 
@@ -134,7 +133,7 @@ This is a H2
 		assert res == exp
 	end
 
-	fun test_process_hr do
+	fun test_process_hr is test do
 		var test = """
 * * *
 
@@ -151,7 +150,7 @@ This is a H2
 		assert res == exp
 	end
 
-	fun test_process_bquote1 do
+	fun test_process_bquote1 is test do
 		var test = """
 > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 > consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
@@ -172,7 +171,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_bquote2 do
+	fun test_process_bquote2 is test do
 		var test = """
 > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
@@ -193,7 +192,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_bquote3 do
+	fun test_process_bquote3 is test do
 		var test = """
 > This is the first level of quoting.
 >
@@ -213,7 +212,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_list1 do
+	fun test_process_list1 is test do
 		var test = """
 *   Red
 *   Green
@@ -229,7 +228,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_list2 do
+	fun test_process_list2 is test do
 		var test = """
 +   Red
 +   Green
@@ -245,7 +244,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_list3 do
+	fun test_process_list3 is test do
 		var test = """
 -   Red
 -   Green
@@ -261,7 +260,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_list4 do
+	fun test_process_list4 is test do
 		var test = """
 1.  Bird
 2.  McHale
@@ -277,7 +276,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_list5 do
+	fun test_process_list5 is test do
 		var test = """
 3. Bird
 1. McHale
@@ -293,7 +292,7 @@ id sem consectetuer libero luctus adipiscing.</p>
 		assert res == exp
 	end
 
-	fun test_process_list6 do
+	fun test_process_list6 is test do
 		var test = """
 *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
@@ -314,7 +313,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.</li>
 		assert res == exp
 	end
 
-	fun test_process_list7 do
+	fun test_process_list7 is test do
 		var test = """
 *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
@@ -335,7 +334,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.</li>
 		assert res == exp
 	end
 
-	fun test_process_list8 do
+	fun test_process_list8 is test do
 		var test = """
 *   Bird
 
@@ -353,7 +352,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.</li>
 		assert res == exp
 	end
 
-	fun test_process_list9 do
+	fun test_process_list9 is test do
 		var test = """
 1.  This is a list item with two paragraphs. Lorem ipsum dolor
     sit amet, consectetuer adipiscing elit. Aliquam hendrerit
@@ -382,7 +381,7 @@ sit amet velit.</p>
 		assert res == exp
 	end
 
-	fun test_process_list10 do
+	fun test_process_list10 is test do
 		var test = """
 *   This is a list item with two paragraphs.
 
@@ -407,7 +406,7 @@ sit amet, consectetuer adipiscing elit.</p>
 		assert res == exp
 	end
 
-	fun test_process_list11 do
+	fun test_process_list11 is test do
 		var test = """
 This is a paragraph
 * and this is not a list
@@ -422,7 +421,7 @@ This is a paragraph
 		assert res == exp
 	end
 
-	fun test_process_list_ext do
+	fun test_process_list_ext is test do
 		var test = """
 This is a paragraph
 * and this is not a list
@@ -437,7 +436,7 @@ This is a paragraph
 		assert res == exp
 	end
 
-	fun test_process_code1 do
+	fun test_process_code1 is test do
 		var test = """
 This is a normal paragraph:
 
@@ -451,7 +450,7 @@ This is a normal paragraph:
 		assert res == exp
 	end
 
-	fun test_process_code2 do
+	fun test_process_code2 is test do
 		var test = """
 Here is an example of AppleScript:
 
@@ -478,7 +477,7 @@ end tell
 		assert res == exp
 	end
 
-	fun test_process_code_ext1 do
+	fun test_process_code_ext1 is test do
 		var test = """
 Here is an example of AppleScript:
 ~~~
@@ -506,7 +505,7 @@ end tell
 		assert res == exp
 	end
 
-	fun test_process_code_ext2 do
+	fun test_process_code_ext2 is test do
 		var test = """
 Here is an example of AppleScript:
 ```
@@ -534,7 +533,7 @@ end tell
 		assert res == exp
 	end
 
-	fun test_process_code_ext3 do
+	fun test_process_code_ext3 is test do
 		var proc = new MarkdownProcessor
 		proc.ext_mode = false
 
@@ -550,7 +549,7 @@ beep</p>
 		assert res == exp
 	end
 
-	fun test_process_code_ext4 do
+	fun test_process_code_ext4 is test do
 		var test = """
 Here is an example of AppleScript:
     beep
@@ -564,7 +563,7 @@ Here is an example of AppleScript:
 		assert res == exp
 	end
 
-	fun test_process_code_ext5 do
+	fun test_process_code_ext5 is test do
 		var test = """
 ```nit
 print "Hello World!"
@@ -578,7 +577,7 @@ print "Hello World!"
 		assert res == exp
 	end
 
-	fun test_process_code_ext6 do
+	fun test_process_code_ext6 is test do
 		var test = """
 ~~~
 print "Hello"
@@ -597,7 +596,7 @@ print "World"
 		assert res == exp
 	end
 
-	fun test_process_code_ext7 do
+	fun test_process_code_ext7 is test do
 		var test = """
 ~~~
 print "Hello"
@@ -616,7 +615,7 @@ print "World"
 		assert res == exp
 	end
 
-	fun test_process_nesting1 do
+	fun test_process_nesting1 is test do
 		var test = """
 > ## This is a header.
 >
@@ -643,7 +642,7 @@ print "World"
 		assert res == exp
 	end
 
-	fun test_process_nesting2 do
+	fun test_process_nesting2 is test do
 		var test = """
 *   A list item with a blockquote:
 
@@ -664,7 +663,7 @@ inside a list item.</p>
 		assert res == exp
 	end
 
-	fun test_process_nesting3 do
+	fun test_process_nesting3 is test do
 		var test = """
 *   A list item with a code block:
 
@@ -682,7 +681,7 @@ inside a list item.</p>
 		assert res == exp
 	end
 
-	fun test_process_nesting4 do
+	fun test_process_nesting4 is test do
 		var test = """
 *	Tab
 	*	Tab
@@ -704,7 +703,7 @@ inside a list item.</p>
 	end
 
 	# TODO
-	#	fun test_process_nesting5 do
+	#	fun test_process_nesting5 is test do
 	#		var test = """
 	# *	this
 	#
@@ -726,7 +725,7 @@ inside a list item.</p>
 	#		assert res == exp
 	#	end
 
-	fun test_process_emph1 do
+	fun test_process_emph1 is test do
 		var test = """
 *single asterisks*
 
@@ -745,14 +744,14 @@ __double underscores__
 		assert res == exp
 	end
 
-	fun test_process_emph2 do
+	fun test_process_emph2 is test do
 		var test = "un*frigging*believable"
 		var exp = "<p>un<em>frigging</em>believable</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_emph3 do
+	fun test_process_emph3 is test do
 		var proc = new MarkdownProcessor
 		proc.ext_mode = false
 		var test = "Con_cat_this"
@@ -761,14 +760,14 @@ __double underscores__
 		assert res == exp
 	end
 
-	fun test_process_emph_ext do
+	fun test_process_emph_ext is test do
 		var test = "Con_cat_this"
 		var exp = "<p>Con_cat_this</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_xml1 do
+	fun test_process_xml1 is test do
 		var test = """
 This is a regular paragraph.
 
@@ -793,7 +792,7 @@ This is another regular paragraph.
 		assert res == exp
 	end
 
-	fun test_process_xml2 do
+	fun test_process_xml2 is test do
 		var test = """
 This is an image <img src="foo/bar" alt="baz"/> in a regular paragraph.
 """
@@ -803,7 +802,7 @@ This is an image <img src="foo/bar" alt="baz"/> in a regular paragraph.
 		assert res == exp
 	end
 
-	fun test_process_xml3 do
+	fun test_process_xml3 is test do
 		var test = """
 <div style=">"/>
 """
@@ -814,7 +813,7 @@ This is an image <img src="foo/bar" alt="baz"/> in a regular paragraph.
 		assert res == exp
 	end
 
-	fun test_process_xml4 do
+	fun test_process_xml4 is test do
 		var test = """
 <p>This is an example of a block element that should be escaped.</p>
 <p>Idem for the second paragraph.</p>
@@ -824,7 +823,7 @@ This is an image <img src="foo/bar" alt="baz"/> in a regular paragraph.
 		assert res == exp
 	end
 
-	fun test_process_xml5 do
+	fun test_process_xml5 is test do
 		var test = """
 # Some more XML tests
 
@@ -844,21 +843,21 @@ With a *md paragraph*!
 		assert res == exp
 	end
 
-	fun test_process_span_code1 do
+	fun test_process_span_code1 is test do
 		var test = "Use the `printf()` function."
 		var exp = "<p>Use the <code>printf()</code> function.</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_span_code2 do
+	fun test_process_span_code2 is test do
 		var test = "``There is a literal backtick (`) here.``"
 		var exp = "<p><code>There is a literal backtick (`) here.</code></p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_span_code3 do
+	fun test_process_span_code3 is test do
 		var test = """
 A single backtick in a code span: `` ` ``
 
@@ -872,42 +871,42 @@ A backtick-delimited string in a code span: `` `foo` ``
 		assert res == exp
 	end
 
-	fun test_process_span_code4 do
+	fun test_process_span_code4 is test do
 		var test = "Please don't use any `<blink>` tags."
 		var exp = "<p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_span_code5 do
+	fun test_process_span_code5 is test do
 		var test = "`&#8212;` is the decimal-encoded equivalent of `&mdash;`."
 		var exp = "<p><code>&amp;#8212;</code> is the decimal-encoded equivalent of <code>&amp;mdash;</code>.</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_escape1 do
+	fun test_process_escape1 is test do
 		var test = "\\*this text is surrounded by literal asterisks\\*"
 		var exp = "<p>*this text is surrounded by literal asterisks*</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_escape2 do
+	fun test_process_escape2 is test do
 		var test = "1986\\. What a great season."
 		var exp = "<p>1986. What a great season.</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_escape3 do
+	fun test_process_escape3 is test do
 		var test = "Ben & Lux"
 		var exp = "<p>Ben &amp; Lux</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_link1 do
+	fun test_process_link1 is test do
 		var test = """
 This is [an example](http://example.com/ "Title") inline link.
 
@@ -920,14 +919,14 @@ This is [an example](http://example.com/ "Title") inline link.
 		assert res == exp
 	end
 
-	fun test_process_link2 do
+	fun test_process_link2 is test do
 		var test = "See my [About](/about/) page for details."
 		var exp = "<p>See my <a href=\"/about/\">About</a> page for details.</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert res == exp
 	end
 
-	fun test_process_link3 do
+	fun test_process_link3 is test do
 		var test = """
 This is [an example][id] reference-style link.
 
@@ -949,7 +948,7 @@ Some other lipsum
 		assert res == exp
 	end
 
-	fun test_process_link4 do
+	fun test_process_link4 is test do
 		var test = """
 This is multiple examples: [foo][1], [bar][2], [baz][3].
 
@@ -964,7 +963,7 @@ This is multiple examples: [foo][1], [bar][2], [baz][3].
 		assert res == exp
 	end
 
-	fun test_process_link5 do
+	fun test_process_link5 is test do
 		var test = """
 This is multiple examples: [foo][a], [bar][A], [a].
 
@@ -976,7 +975,7 @@ This is multiple examples: [foo][a], [bar][A], [a].
 		assert res == exp
 	end
 
-	fun test_process_link6 do
+	fun test_process_link6 is test do
 		var test = """
 I get 10 times more traffic from [Google][] than from [Yahoo][] or [MSN][].
 
@@ -990,7 +989,7 @@ I get 10 times more traffic from [Google][] than from [Yahoo][] or [MSN][].
 		assert res == exp
 	end
 
-	fun test_process_link7 do
+	fun test_process_link7 is test do
 		var test = """
 Visit [Daring Fireball][] for more information.
 
@@ -1002,7 +1001,7 @@ Visit [Daring Fireball][] for more information.
 		assert res == exp
 	end
 
-	fun test_process_link8 do
+	fun test_process_link8 is test do
 		var test = """
 This one has a [line
 break].
@@ -1023,7 +1022,7 @@ break</a> with a line-ending space.</p>
 	end
 
 	# FIXME unignore test once escape strings fixed
-	#	fun test_process_link9 do
+	#	fun test_process_link9 is test do
 	#		var test = """
 	# Foo [bar][].
 	#
@@ -1040,7 +1039,7 @@ break</a> with a line-ending space.</p>
 	#		assert res == exp
 	#	end
 
-	fun test_process_img1 do
+	fun test_process_img1 is test do
 		var test = """
 ![Alt text](/path/to/img.jpg)
 
@@ -1053,7 +1052,7 @@ break</a> with a line-ending space.</p>
 		assert res == exp
 	end
 
-	fun test_process_img2 do
+	fun test_process_img2 is test do
 		var test = """
 ![Alt text][id]
 
@@ -1065,7 +1064,7 @@ break</a> with a line-ending space.</p>
 		assert res == exp
 	end
 
-	fun test_process_strike do
+	fun test_process_strike is test do
 		var proc = new MarkdownProcessor
 		proc.ext_mode = false
 		var test = "This is how you ~~strike text~~"
@@ -1074,21 +1073,21 @@ break</a> with a line-ending space.</p>
 		assert exp == res
 	end
 
-	fun test_process_strike_ext do
+	fun test_process_strike_ext is test do
 		var test = "This is how you ~~strike text~~"
 		var exp = "<p>This is how you <del>strike text</del></p>\n"
 		var res = test.md_to_html.write_to_string
 		assert exp == res
 	end
 
-	fun test_escape_bad_html do
+	fun test_escape_bad_html is test do
 			var test = "-1 if < , +1 if > and 0 otherwise"
 			var exp = "<p>-1 if &lt; , +1 if > and 0 otherwise</p>\n"
 		var res = test.md_to_html.write_to_string
 		assert exp == res
 	end
 
-	fun test_daring_encoding do
+	fun test_daring_encoding is test do
 		var test = """
 AT&T has an ampersand in their name.
 
@@ -1129,7 +1128,7 @@ Here's an inline [link](</script?foo=1&bar=2>).
 
 	end
 
-	fun test_daring_autolinks do
+	fun test_daring_autolinks is test do
 		var test = """
 Link: <http://example.com/>.
 
@@ -1165,7 +1164,7 @@ Auto-links should not occur here: `<http://example.com/>`
 		assert res == exp
 	end
 
-	fun test_daring_escape do
+	fun test_daring_escape is test do
 		var test = """
 These should all get escaped:
 
@@ -1367,7 +1366,7 @@ other Markdown constructs:</p>
 		assert res == exp
 	end
 
-	fun test_daring_blockquotes do
+	fun test_daring_blockquotes is test do
 		var test = """
 > Example:
 >
@@ -1400,7 +1399,7 @@ other Markdown constructs:</p>
 		assert res == exp
 	end
 
-	fun test_daring_code_blocks do
+	fun test_daring_code_blocks is test do
 		var test = """
 	code block on the first line
 
@@ -1436,7 +1435,7 @@ all contain trailing spaces
 		assert res == exp
 	end
 
-	fun test_daring_code_spans do
+	fun test_daring_code_spans is test do
 		var test = """
 `<test a="` content of attribute `">`
 
@@ -1454,7 +1453,7 @@ Here's how you put `` `backticks` `` in a code span.
 		assert res == exp
 	end
 
-	fun test_daring_pars do
+	fun test_daring_pars is test do
 		var proc = new MarkdownProcessor
 		proc.ext_mode = false
 
@@ -1482,7 +1481,7 @@ list item.</p>
 		assert res == exp
 	end
 
-	fun test_daring_rules do
+	fun test_daring_rules is test do
 		var test = """
 Dashes:
 
@@ -1598,7 +1597,7 @@ _ _ _
 		assert res == exp
 	end
 
-	fun test_daring_images do
+	fun test_daring_images is test do
 		var test = """
 ![Alt text](/path/to/img.jpg)
 
@@ -1645,7 +1644,7 @@ Inline within a paragraph: [alt text](/url/).
 		assert res == exp
 	end
 
-	fun test_daring_inline_html1 do
+	fun test_daring_inline_html1 is test do
 		var test = """
 Here's a simple block:
 
@@ -1768,7 +1767,7 @@ Blah
 		assert res == exp
 	end
 
-	fun test_daring_inline_html2 do
+	fun test_daring_inline_html2 is test do
 		var test = """
 Simple block on one line:
 
@@ -1831,7 +1830,7 @@ foo
 		assert res == exp
 	end
 
-	fun test_daring_inline_html3 do
+	fun test_daring_inline_html3 is test do
 		var test = """
 Paragraph one.
 
@@ -1862,7 +1861,7 @@ The end.
 		assert res == exp
 	end
 
-	fun test_daring_links1 do
+	fun test_daring_links1 is test do
 		var test = """
 Just a [URL](/url/).
 
@@ -1908,7 +1907,7 @@ Just a [URL](/url/).
 		assert res == exp
 	end
 
-	fun test_daring_links2 do
+	fun test_daring_links2 is test do
 		var test = """
 Foo [bar] [1].
 
@@ -2017,7 +2016,7 @@ breaks</a> across lines, but with a line-ending space.</p>
 		assert res == exp
 	end
 
-	fun test_daring_links3 do
+	fun test_daring_links3 is test do
 		var test = """
 This is the [simple case].
 
@@ -2053,7 +2052,7 @@ break</a> with a line-ending space.</p>
 		assert res == exp
 	end
 
-	fun test_daring_nested do
+	fun test_daring_nested is test do
 		var test = """
 > foo
 >
@@ -2075,7 +2074,7 @@ break</a> with a line-ending space.</p>
 		assert res == exp
 	end
 
-	fun test_daring_list do
+	fun test_daring_list is test do
 		var test = """
 ## Unordered
 
@@ -2332,7 +2331,7 @@ back.</p>
 		assert res == exp
 	end
 
-	fun test_daring_strong_em do
+	fun test_daring_strong_em is test do
 		var test = """
 ***This is strong and em.***
 
@@ -2353,7 +2352,7 @@ So is ___this___ word.
 		assert res == exp
 	end
 
-	fun test_daring_tabs do
+	fun test_daring_tabs is test do
 		var test = """
 +	this is a list item
 	indented with tabs
@@ -2405,7 +2404,7 @@ indented with spaces</p>
 		assert res == exp
 	end
 
-	fun test_daring_tidyness do
+	fun test_daring_tidyness is test do
 		var test = """
 > A list within a blockquote:
 >
@@ -2432,19 +2431,19 @@ indented with spaces</p>
 end
 
 class TestBlock
-	super TestSuite
+	test
 
 	# A dummy location for testing purposes.
 	var loc = new MDLocation(0, 0, 0, 0)
 
-	fun test_has_blocks do
+	fun test_has_blocks is test do
 		var subject = new MDBlock(loc)
 		assert not subject.has_blocks
 		subject.first_block = new MDBlock(loc)
 		assert subject.has_blocks
 	end
 
-	fun test_count_blocks do
+	fun test_count_blocks is test do
 		var subject = new MDBlock(loc)
 		assert subject.count_blocks == 0
 		subject.first_block = new MDBlock(loc)
@@ -2453,14 +2452,14 @@ class TestBlock
 		assert subject.count_blocks == 2
 	end
 
-	fun test_has_lines do
+	fun test_has_lines is test do
 		var subject = new MDBlock(loc)
 		assert not subject.has_lines
 		subject.first_line = new MDLine(loc, "")
 		assert subject.has_lines
 	end
 
-	fun test_count_lines do
+	fun test_count_lines is test do
 		var subject = new MDBlock(loc)
 		assert subject.count_lines == 0
 		subject.first_line = new MDLine(loc, "")
@@ -2469,7 +2468,7 @@ class TestBlock
 		assert subject.count_lines == 2
 	end
 
-	fun test_split do
+	fun test_split is test do
 		var line1 = new MDLine(loc, "line1")
 		var line2 = new MDLine(loc, "line2")
 		var line3 = new MDLine(loc, "line3")
@@ -2487,7 +2486,7 @@ class TestBlock
 		assert block.last_line == line2
 	end
 
-	fun test_add_line do
+	fun test_add_line is test do
 		var subject = new MDBlock(loc)
 		assert subject.count_lines == 0
 		subject.add_line new MDLine(loc, "")
@@ -2496,7 +2495,7 @@ class TestBlock
 		assert subject.count_lines == 2
 	end
 
-	fun test_remove_line do
+	fun test_remove_line is test do
 		var line1 = new MDLine(loc, "line1")
 		var line2 = new MDLine(loc, "line2")
 		var line3 = new MDLine(loc, "line3")
@@ -2512,7 +2511,7 @@ class TestBlock
 		assert subject.last_line == line3
 	end
 
-	fun test_transform_headline1 do
+	fun test_transform_headline1 is test do
 		var subject = new MDBlock(loc)
 		var kind = new BlockHeadline(subject)
 		subject.add_line new MDLine(loc, " #   Title 1   ")
@@ -2521,7 +2520,7 @@ class TestBlock
 		assert subject.first_line.value == "Title 1"
 	end
 
-	fun test_transform_headline2 do
+	fun test_transform_headline2 is test do
 		var subject = new MDBlock(loc)
 		var kind = new BlockHeadline(subject)
 		subject.add_line new MDLine(loc, " #####Title 5   ")
@@ -2530,7 +2529,7 @@ class TestBlock
 		assert subject.first_line.value == "Title 5"
 	end
 
-	fun test_remove_quote_prefix do
+	fun test_remove_quote_prefix is test do
 		var subject = new MDBlock(loc)
 		var kind = new BlockQuote(subject)
 		subject.add_line new MDLine(loc, " > line 1")
@@ -2542,7 +2541,7 @@ class TestBlock
 		assert subject.first_line.next.next.value == "line 3"
 	end
 
-	fun test_remove_leading_empty_lines_1 do
+	fun test_remove_leading_empty_lines_1 is test do
 		var block = new MDBlock(loc)
 		block.add_line new MDLine(loc, "")
 		block.add_line new MDLine(loc, "")
@@ -2554,14 +2553,14 @@ class TestBlock
 		assert block.first_line.value == "   text"
 	end
 
-	fun test_remove_leading_empty_lines_2 do
+	fun test_remove_leading_empty_lines_2 is test do
 		var block = new MDBlock(loc)
 		block.add_line new MDLine(loc, "   text")
 		block.remove_leading_empty_lines
 		assert block.first_line.value == "   text"
 	end
 
-	fun test_remove_trailing_empty_lines_1 do
+	fun test_remove_trailing_empty_lines_1 is test do
 		var block = new MDBlock(loc)
 		block.add_line new MDLine(loc, "")
 		block.add_line new MDLine(loc, "text")
@@ -2573,14 +2572,14 @@ class TestBlock
 		assert block.last_line.value == "text"
 	end
 
-	fun test_remove_trailing_empty_lines_2 do
+	fun test_remove_trailing_empty_lines_2 is test do
 		var block = new MDBlock(loc)
 		block.add_line new MDLine(loc, "text  ")
 		assert not block.remove_trailing_empty_lines
 		assert block.last_line.value == "text  "
 	end
 
-	fun test_remove_surrounding_empty_lines do
+	fun test_remove_surrounding_empty_lines is test do
 		var block = new MDBlock(loc)
 		block.add_line new MDLine(loc, "")
 		block.add_line new MDLine(loc, "text")
@@ -2595,14 +2594,14 @@ class TestBlock
 end
 
 class TestLine
-	super TestSuite
+	test
 
 	# A dummy location for testing purposes.
 	var loc = new MDLocation(0, 0, 0, 0)
 
 	var subject: MDLine
 
-	fun test_is_empty do
+	fun test_is_empty is test do
 		subject = new MDLine(loc, "")
 		assert subject.is_empty
 		subject = new MDLine(loc, "    ")
@@ -2613,7 +2612,7 @@ class TestLine
 		assert not subject.is_empty
 	end
 
-	fun test_leading do
+	fun test_leading is test do
 		subject = new MDLine(loc, "")
 		assert subject.leading == 0
 		subject = new MDLine(loc, "    ")
@@ -2624,7 +2623,7 @@ class TestLine
 		assert subject.leading == 4
 	end
 
-	fun test_trailing do
+	fun test_trailing is test do
 		subject = new MDLine(loc, "")
 		assert subject.trailing == 0
 		subject = new MDLine(loc, "    ")
@@ -2635,7 +2634,7 @@ class TestLine
 		assert subject.trailing == 1
 	end
 
-	fun test_line_type do
+	fun test_line_type is test do
 		var v = new MarkdownProcessor
 		subject = new MDLine(loc, "")
 		assert v.line_kind(subject) isa LineEmpty
@@ -2681,7 +2680,7 @@ class TestLine
 		assert v.line_kind(subject) isa LineOList
 	end
 
-	fun test_line_type_ext do
+	fun test_line_type_ext is test do
 		var v = new MarkdownProcessor
 		subject = new MDLine(loc, "  ~~~")
 		assert v.line_kind(subject) isa LineFence
@@ -2691,7 +2690,7 @@ class TestLine
 		assert v.line_kind(subject) isa LineFence
 	end
 
-	fun test_count_chars do
+	fun test_count_chars is test do
 		subject = new MDLine(loc, "")
 		assert subject.count_chars('*') == 0
 		subject = new MDLine(loc, "* ")
@@ -2704,7 +2703,7 @@ class TestLine
 		assert subject.count_chars('*') == 0
 	end
 
-	fun test_count_chars_start do
+	fun test_count_chars_start is test do
 		subject = new MDLine(loc, "")
 		assert subject.count_chars_start('*') == 0
 		subject = new MDLine(loc, "* ")
@@ -2719,9 +2718,9 @@ class TestLine
 end
 
 class TestHTMLDecorator
-	super TestSuite
+	test
 
-	fun test_headlines do
+	fun test_headlines is test do
 		var test = """
 # **a**
 ## a.a
@@ -2736,7 +2735,7 @@ class TestHTMLDecorator
 # c
 """
 		var proc = new MarkdownProcessor
-		var decorator = proc.emitter.decorator.as(HTMLDecorator)
+		var decorator = proc.decorator.as(HTMLDecorator)
 		proc.process(test)
 		var res = ""
 		for id, headline in decorator.headlines do
@@ -2760,9 +2759,9 @@ c:c
 end
 
 class TestTokenLocation
-	super TestSuite
+	test
 
-	fun test_token_location1 do
+	fun test_token_location1 is test do
 		var string = "**Hello** `World`"
 		var stack =  [
 			"TokenStrongStar at 1,1--1,1",
@@ -2772,7 +2771,7 @@ class TestTokenLocation
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location2 do
+	fun test_token_location2 is test do
 		var string = "**Hello**\n`World`\n*Bonjour*\n[le monde]()"
 		var stack =  [
 			"TokenStrongStar at 1,1--1,1",
@@ -2785,7 +2784,7 @@ class TestTokenLocation
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location3 do
+	fun test_token_location3 is test do
 		var string = """**Hello**
 		`World`
 		*Bonjour*
@@ -2801,7 +2800,7 @@ class TestTokenLocation
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location4 do
+	fun test_token_location4 is test do
 		var string = "**Hello**\n\n`World`"
 		var stack =  [
 			"TokenStrongStar at 1,1--1,1",
@@ -2811,7 +2810,7 @@ class TestTokenLocation
 		(new TestTokenProcessor(stack)).process(string)
 	end
 
-	fun test_token_location5 do
+	fun test_token_location5 is test do
 		var string = "# *Title1*\n\n# *Title2*"
 		var stack =  [
 			"TokenEmStar at 1,3--1,3",
@@ -2841,11 +2840,11 @@ class TestTokenProcessor
 end
 
 class TestBlockLocation
-	super TestSuite
+	test
 
 	var proc = new MarkdownProcessor
 
-	fun test_block_location1 do
+	fun test_block_location1 is test do
 		var stack = [
 			"BlockHeadline: 1,1--1,8",
 			"BlockListItem: 2,1--2,6",
@@ -2853,11 +2852,11 @@ class TestBlockLocation
 		]
 		var string =
 		"# Title\n* li1\n* li2"
-		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end
 
-	fun test_block_location2 do
+	fun test_block_location2 is test do
 		var stack = [
 			"BlockHeadline: 1,1--1,11",
 			"BlockFence: 3,1--5,4",
@@ -2871,16 +2870,16 @@ some code
 
 1. li1
 1. li2"""
-		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end
 
-	fun test_block_location3 do
+	fun test_block_location3 is test do
 		var stack = [
 			"BlockHeadline: 1,1--1,8",
 			"BlockHeadline: 3,1--3,10"]
 		var string ="""# Title\n\n## Title 2"""
-		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end
 end

@@ -93,7 +93,7 @@ class Attribute
 
 		var native = native_float_array
 		if native == null or array.length > native.length then
-			if native != null then native.destroy
+			if native != null then native.finalize
 			native = new GLfloatArray.from(array)
 			self.native_float_array = native
 		else
@@ -160,6 +160,14 @@ class UniformBool
 
 	# Set this uniform value
 	fun uniform(val: Bool) do uniform_1i(location, if val then 1 else 0)
+end
+
+# Shader uniform of GLSL type `int`
+class UniformInt
+	super Uniform
+
+	# Set this uniform value
+	fun uniform(val: Int) do uniform_1i(location, val)
 end
 
 # Shader uniform of GLSL type `vec4`
@@ -230,6 +238,7 @@ end
 class InactiveUniform
 	super InactiveVariable
 	super UniformBool
+	super UniformInt
 	super UniformFloat
 	super UniformSampler2D
 	super UniformVec2
@@ -408,6 +417,8 @@ abstract class GamnitProgram
 			var uniform
 			if typ == gl_BOOL then
 				uniform = new UniformBool(gl_program, name, location, size)
+			else if typ == gl_INT then
+				uniform = new UniformInt(gl_program, name, location, size)
 			else if typ == gl_SAMPLER_2D then
 				uniform = new UniformSampler2D(gl_program, name, location, size)
 			else if typ == gl_FLOAT then
@@ -473,7 +484,9 @@ abstract class GamnitProgram
 	do
 		if deleted then return
 
-		glDeleteProgram gl_program.as(not null)
+		var gl_program = gl_program
+		if gl_program != null then glDeleteProgram gl_program
+
 		deleted = true
 	end
 end
@@ -555,8 +568,8 @@ redef extern class NativeGLfloatArray
 	# Overwrite this matrix with the identity matrix
 	fun set_identity
 	do
-		for i in 4.times do
-			for j in 4.times do
+		for i in [0..4[ do
+			for j in [0..4[ do
 				matrix_set(i, j, if i == j then 1.0 else 0.0)
 			end
 		end
@@ -573,8 +586,8 @@ redef class Matrix
 	# Copy content of this matrix to a `NativeGLfloatArray`
 	fun fill_native(native: NativeGLfloatArray)
 	do
-		for i in width.times do
-			for j in height.times do
+		for i in [0..width[ do
+			for j in [0..height[ do
 				native.matrix_set(i, j, self[i, j])
 			end
 		end

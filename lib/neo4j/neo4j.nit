@@ -14,16 +14,10 @@
 
 # Neo4j connector through its JSON REST API using curl.
 #
-# For ease of use and testing this module provide a wrapper to the `neo4j` command:
-#
-#     # Start the Neo4j server
-#     var srv = new Neo4jServer
-#     assert srv.start_quiet
-#
 # In order to connect to Neo4j you need a connector:
 #
 #     # Create new Neo4j client
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     assert client.is_ok
 #
 # The fundamental units that form a graph are nodes and relationships.
@@ -66,39 +60,9 @@ module neo4j
 import curl_json
 import error
 
-# Handles Neo4j server start and stop command
-#
-# `neo4j` binary must be in `PATH` in order to work
-class Neo4jServer
-
-	# Start the local Neo4j server instance
-	fun start: Bool do
-		sys.system("neo4j start console")
-		return true
-	end
-
-	# Like `start` but redirect the console output to `/dev/null`
-	fun start_quiet: Bool do
-		sys.system("neo4j start console > /dev/null")
-		return true
-	end
-
-	# Stop the local Neo4j server instance
-	fun stop: Bool do
-		sys.system("neo4j stop")
-		return true
-	end
-
-	# Like `stop` but redirect the console output to `/dev/null`
-	fun stop_quiet: Bool do
-		sys.system("neo4j stop > /dev/null")
-		return true
-	end
-end
-
 # `Neo4jClient` is needed to communicate through the REST API
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     assert client.is_ok
 class Neo4jClient
 
@@ -111,8 +75,6 @@ class Neo4jClient
 	# REST service to send cypher requests
 	private var cypher_url: String
 
-	private var curl = new Curl
-
 	init(base_url: String) do
 		self.base_url = base_url
 		var root = service_root
@@ -124,7 +86,7 @@ class Neo4jClient
 		self.cypher_url = root["cypher"].to_s
 	end
 
-	fun service_root: Jsonable do return get(base_url / "db/data")
+	fun service_root: Serializable do return get(base_url / "db/data")
 
 	# Is the connection with the Neo4j server ok?
 	fun is_ok: Bool do return service_root isa JsonObject
@@ -142,7 +104,7 @@ class Neo4jClient
 
 	# Save the node in base
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     # Create a node
 	#     var andres = new NeoNode
@@ -198,7 +160,7 @@ class Neo4jClient
 	# Save the edge in base
 	# From and to nodes will be created.
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     var andres = new NeoNode
 	#     var kate = new NeoNode
@@ -247,7 +209,7 @@ class Neo4jClient
 
 	# Retrieve all nodes with specified `lbl`
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
@@ -273,7 +235,7 @@ class Neo4jClient
 
 	# Retrieve nodes belonging to all the specified `labels`.
 	#
-	#     var client = new Neo4jClient("http://localhost:7474")
+	#     var client = new Neo4jClient("http://neo4j:7474")
 	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
@@ -289,8 +251,8 @@ class Neo4jClient
 		assert not labels.is_empty
 
 		# Build the query.
-		var buffer = new RopeBuffer
-		buffer.append "match n where \{label_0\} in labels(n)"
+		var buffer = new Buffer
+		buffer.append "match (n) where \{label_0\} in labels(n)"
 		for i in [1..labels.length[ do
 			buffer.append " and \{label_{i}\} in labels(n)"
 		end
@@ -314,19 +276,19 @@ class Neo4jClient
 
 	# Perform a `CypherQuery`
 	# see: CypherQuery
-	fun cypher(query: CypherQuery): Jsonable do
+	fun cypher(query: CypherQuery): Serializable do
 		return post("{cypher_url}", query.to_rest)
 	end
 
 	# GET JSON data from `url`
-	fun get(url: String): Jsonable do
+	fun get(url: String): Serializable do
 		var request = new JsonGET(url)
 		var response = request.execute
 		return parse_response(response)
 	end
 
 	# POST `params` to `url`
-	fun post(url: String, params: Jsonable): Jsonable do
+	fun post(url: String, params: Serializable): Serializable do
 		var request = new JsonPOST(url)
 		request.json_data = params
 		var response = request.execute
@@ -334,7 +296,7 @@ class Neo4jClient
 	end
 
 	# PUT `params` at `url`
-	fun put(url: String, params: Jsonable): Jsonable do
+	fun put(url: String, params: Serializable): Serializable do
 		var request = new JsonPUT(url)
 		request.json_data = params
 		var response = request.execute
@@ -342,14 +304,14 @@ class Neo4jClient
 	end
 
 	# DELETE `url`
-	fun delete(url: String): Jsonable do
+	fun delete(url: String): Serializable do
 		var request = new JsonDELETE(url)
 		var response = request.execute
 		return parse_response(response)
 	end
 
 	# Parse the cURL `response` as a JSON string
-	private fun parse_response(response: CurlResponse): Jsonable do
+	private fun parse_response(response: CurlResponse): Serializable do
 		if response isa CurlResponseSuccess then
 			var str = response.body_str
 			if str.is_empty then return new JsonObject
@@ -389,7 +351,7 @@ end
 #
 # Example:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     var query = new CypherQuery
 #     query.nmatch("(n)-[r:LOVES]->(m)")
 #     query.nwhere("n.name=\"Andres\"")
@@ -413,6 +375,13 @@ class CypherQuery
 	# init the query with parameters
 	init with_params(params: JsonObject) do
 		self.params = params
+	end
+
+	# Pass the argument `value` as the parameter `key`.
+	#
+	# SEE: `set`
+	fun []=(key: String, value: nullable Serializable) do
+		params[key] = value
 	end
 
 	# Add a `CREATE` statement to the query
@@ -451,6 +420,25 @@ class CypherQuery
 		return self
 	end
 
+	# Pass the argument `value` as the parameter `key`.
+	#
+	# Return `self`.
+	#
+	# ```
+	# var query = (new CypherQuery).
+	# 		nmatch("(n)").
+	# 		nwhere("n.key = \{key\}").
+	#		set("key", "foo")
+	#
+	# assert query.params["key"] == "foo"
+	# ```
+	#
+	# SEE: `[]=`
+	fun set(key: String, value: nullable Serializable): SELF do
+		self[key] = value
+		return self
+	end
+
 	# Translate the query to the body of a corresponding Neo4j REST request.
 	fun to_rest: JsonObject do
 		var obj = new JsonObject
@@ -482,7 +470,7 @@ end
 # Then we can link the entity to the base:
 #
 #     # Init client
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     client.save_node(andres)
 #     # The node is now linked
 #     assert andres.is_linked
@@ -551,13 +539,13 @@ abstract class NeoEntity
 	end
 
 	# Get the entity property at `key`
-	fun [](key: String): nullable Jsonable do
+	fun [](key: String): nullable Serializable do
 		if not properties.has_key(key) then return null
 		return properties[key]
 	end
 
 	# Set the entity property `value` at `key`
-	fun []=(key: String, value: nullable Jsonable) do properties[key] = value
+	fun []=(key: String, value: nullable Serializable) do properties[key] = value
 
 	# Is the property `key` set?
 	fun has_key(key: String): Bool do return properties.has_key(key)
@@ -574,7 +562,7 @@ end
 #
 # Creating new nodes:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #
 #     var andres = new NeoNode
 #     andres.labels.add "Person"
@@ -687,7 +675,7 @@ end
 #
 # Create a relationship:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #     # Create nodes
 #     var andres = new NeoNode
 #     andres["name"] = "Andres"
@@ -780,7 +768,7 @@ end
 #
 # Example:
 #
-#     var client = new Neo4jClient("http://localhost:7474")
+#     var client = new Neo4jClient("http://neo4j:7474")
 #
 #     var node1 = new NeoNode
 #     var node2 = new NeoNode
@@ -923,7 +911,7 @@ class NeoBatch
 	end
 
 	# Associate data from response in original nodes and edges
-	private fun finalize_batch(response: Jsonable): List[NeoError] do
+	private fun finalize_batch(response: Serializable): List[NeoError] do
 		var errors = new List[NeoError]
 		if not response isa JsonArray then
 			errors.add(new NeoError("Unexpected batch response format.", "Neo4jError"))
@@ -987,7 +975,7 @@ end
 # This is a representation of a neo job in JSON Format
 #
 # Each job description should contain a `to` attribute, with a value relative to the data API root
-# (so http://localhost:7474/db/data/node becomes just /node), and a `method` attribute containing
+# (so http://neo4j:7474/db/data/node becomes just /node), and a `method` attribute containing
 # HTTP verb to use.
 #
 # Optionally you may provide a `body` attribute, and an `id` attribute to help you keep track
@@ -1013,7 +1001,7 @@ class NeoJob
 	# Job service target: `/node`, `/labels` etc...
 	var to: String
 	# Body to send with the job service request
-	var body: nullable Jsonable = null
+	var body: nullable Serializable = null
 
 	# JSON formated job
 	fun to_rest: JsonObject do

@@ -17,7 +17,7 @@ module testing_suite
 
 import testing_base
 import html
-private import annotation
+private import parse_annotations
 private import realtime
 
 redef class ToolContext
@@ -38,29 +38,49 @@ class NitUnitTester
 		var toolcontext = mbuilder.toolcontext
 		var suite = new TestSuite(mmodule, toolcontext)
 		# method to execute before all tests in the module
-		var before_module = mmodule.before_test
-		if before_module != null then
+		for mmethod in mmodule.before_all do
 			toolcontext.modelbuilder.total_tests += 1
-			suite.before_module = new TestCase(suite, before_module, toolcontext)
+			suite.before_all.add new TestCase(suite, mmethod, toolcontext)
 		end
 		# generate all test cases
 		for mclassdef in mmodule.mclassdefs do
 			if not mclassdef.is_test then continue
 			if not suite_match_pattern(mclassdef) then continue
 			toolcontext.modelbuilder.total_classes += 1
+
+			var test_class = new TestClass
+
+			# method to execute before all tests in the class
+			for mmethod in mclassdef.before_all do
+				toolcontext.modelbuilder.total_tests += 1
+				test_class.before_all.add new TestCase(suite, mmethod, toolcontext)
+			end
+
+			var before = mclassdef.before
+			var after = mclassdef.after
+
 			for mpropdef in mclassdef.mpropdefs do
 				if not mpropdef isa MMethodDef or not mpropdef.is_test then continue
 				if not case_match_pattern(mpropdef) then continue
 				toolcontext.modelbuilder.total_tests += 1
 				var test = new TestCase(suite, mpropdef, toolcontext)
-				suite.add_test test
+				test.before = before
+				test.after = after
+				test_class.test_cases.add test
 			end
+
+			# method to execute after all tests in the class
+			for mmethod in mclassdef.after_all do
+				toolcontext.modelbuilder.total_tests += 1
+				test_class.after_all.add new TestCase(suite, mmethod, toolcontext)
+			end
+
+			suite.test_classes.add test_class
 		end
 		# method to execute after all tests in the module
-		var after_module = mmodule.after_test
-		if after_module != null then
+		for mmethod in mmodule.after_all do
 			toolcontext.modelbuilder.total_tests += 1
-			suite.after_module = new TestCase(suite, after_module, toolcontext)
+			suite.after_all.add new TestCase(suite, mmethod, toolcontext)
 		end
 		suite.run
 		return suite
@@ -111,24 +131,30 @@ class TestSuite
 	var toolcontext: ToolContext
 
 	# List of `TestCase` to be executed in this suite.
-	var test_cases = new Array[TestCase]
+	var test_classes = new Array[TestClass]
 
-	# Add a `TestCase` to the suite.
-	fun add_test(case: TestCase) do test_cases.add case
+	# Tests to be executed before the whole test suite.
+	var before_all = new Array[TestCase]
 
-	# Test to be executed before the whole test suite.
-	var before_module: nullable TestCase = null
+	# Tests to be executed after the whole test suite.
+	var after_all = new Array[TestCase]
 
-	# Test to be executed after the whole test suite.
-	var after_module: nullable TestCase = null
-
-	fun show_status
-	do
+	# Display test suite status in std-out.
+	fun show_status do
+		var test_cases = new Array[TestCase]
+		for test_class in test_classes do
+			test_cases.add_all test_class.before_all
+			test_cases.add_all test_class.test_cases
+			test_cases.add_all test_class.after_all
+		end
+		test_cases.add_all before_all
+		test_cases.add_all after_all
 		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
 	end
 
 	# Execute the test suite
 	fun run do
+		set_env
 		show_status
 		if not toolcontext.test_dir.file_exists then
 			toolcontext.test_dir.mkdir
@@ -136,30 +162,94 @@ class TestSuite
 		write_to_nit
 		compile
 		if failure != null then
-			for case in test_cases do
-				case.is_done = true
-				case.error = "Compilation Error"
-				case.raw_output = failure
-				toolcontext.modelbuilder.failed_tests += 1
-				toolcontext.clear_progress_bar
-				toolcontext.show_unit(case)
+			for test_class in test_classes do
+				for case in test_class.test_cases do
+					case.fail "Compilation Error"
+					case.raw_output = failure
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(case)
+				end
 			end
 			show_status
 			print ""
 			return
 		end
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
-		var before_module = self.before_module
-		if not before_module == null then before_module.run
-		for case in test_cases do
-			case.run
+
+		for before_module in before_all do
+			before_module.run
 			toolcontext.clear_progress_bar
-			toolcontext.show_unit(case)
-			show_status
+			toolcontext.show_unit(before_module)
+			if before_module.error != null then
+				for test_class in test_classes do
+					for case in test_class.before_all do
+						case.fail "Nitunit Error: before module test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(case)
+					end
+					for case in test_class.test_cases do
+						case.fail "Nitunit Error: before module test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(case)
+					end
+					for case in test_class.after_all do
+						case.fail "Nitunit Error: before module test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(case)
+					end
+				end
+				for after_module in after_all do
+					after_module.fail "Nitunit Error: before module test failed"
+					toolcontext.clear_progress_bar
+					toolcontext.show_unit(after_module)
+				end
+				show_status
+				print ""
+				return
+			end
 		end
 
-		var after_module = self.after_module
-		if not after_module == null then after_module.run
+		for test_class in test_classes do
+			for case in test_class.before_all do
+				case.run
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+				if case.error != null then
+					for scase in test_class.test_cases do
+						scase.fail "Nitunit Error: before class test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(scase)
+					end
+					for scase in test_class.after_all do
+						scase.fail "Nitunit Error: before class test failed"
+						toolcontext.clear_progress_bar
+						toolcontext.show_unit(scase)
+					end
+					show_status
+					print ""
+					return
+				end
+			end
+			for case in test_class.test_cases do
+				case.run
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+				show_status
+			end
+			for after_class in test_class.after_all do
+				after_class.run
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(after_class)
+				show_status
+			end
+		end
+
+		for after_module in after_all do
+			after_module.run
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(after_module)
+			show_status
+		end
 
 		show_status
 		print ""
@@ -168,11 +258,25 @@ class TestSuite
 	# Write the test unit for `self` in a nit compilable file.
 	fun write_to_nit do
 		var file = new Template
-		file.addn "intrude import test_suite"
+		file.addn "intrude import core"
 		file.addn "import {mmodule.name}\n"
 		file.addn "var name = args.first"
-		for case in test_cases do
-			case.write_to_nit(file)
+		for before_module in before_all do
+			before_module.write_to_nit(file)
+		end
+		for test_class in test_classes do
+			for case in test_class.before_all do
+				case.write_to_nit(file)
+			end
+			for case in test_class.test_cases do
+				case.write_to_nit(file)
+			end
+			for case in test_class.after_all do
+				case.write_to_nit(file)
+			end
+		end
+		for after_module in after_all do
+			after_module.write_to_nit(file)
 		end
 		file.write_to_file("{test_file}.nit")
 	end
@@ -182,7 +286,9 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
-		for test in test_cases do n.add test.to_xml
+		for test_class in test_classes do
+			for test in test_class.test_cases do n.add test.to_xml
+		end
 		return n
 	end
 
@@ -214,8 +320,29 @@ class TestSuite
 		end
 	end
 
+	# Set environment variables for test suite execution
+	fun set_env do
+		var loc = mmodule.location.file
+		if loc == null then return
+		toolcontext.set_testing_path(loc.filename)
+	end
+
 	# Error occured during test-suite compilation.
 	var failure: nullable String = null
+end
+
+# A test class contains multiple test cases
+#
+# For each test class, methods can be executed before and after all cases.
+class TestClass
+	# List of `TestCase` to be executed in this suite.
+	var test_cases = new Array[TestCase]
+
+	# Tests to be executed before the whole test suite.
+	var before_all = new Array[TestCase]
+
+	# Tests to be executed after the whole test suite.
+	var after_all = new Array[TestCase]
 end
 
 # A test case is a unit test considering only a `MMethodDef`.
@@ -227,6 +354,12 @@ class TestCase
 
 	# Test method to be compiled and tested.
 	var test_method: MMethodDef
+
+	# Cases to execute before this one
+	var before = new Array[MMethodDef]
+
+	# Cases to execute after this one
+	var after = new Array[MMethodDef]
 
 	redef fun full_name do return test_method.full_name
 
@@ -242,10 +375,14 @@ class TestCase
 		if test_method.mproperty.is_toplevel then
 			file.addn "\t{name}"
 		else
-			file.addn "\tvar subject = new {test_method.mclassdef.name}.nitunit"
-			file.addn "\tsubject.before_test"
+			file.addn "\tvar subject = new {test_method.mclassdef.name}.intern"
+			for mmethod in before do
+				file.addn "\tsubject.{mmethod.name}"
+			end
 			file.addn "\tsubject.{name}"
-			file.addn "\tsubject.after_test"
+			for mmethod in after do
+				file.addn "\tsubject.{mmethod.name}"
+			end
 		end
 		file.addn "end"
 	end
@@ -310,6 +447,15 @@ class TestCase
 		is_done = true
 	end
 
+	# Make the test case fail without testing it
+	#
+	# Useful when the compilation or the before_test failed.
+	fun fail(message: String) do
+		is_done = true
+		error = message
+		toolcontext.modelbuilder.failed_tests += 1
+	end
+
 	redef fun xml_classname do
 		var a = test_method.full_name.split("$")
 		return "nitunit.{a[0]}.{a[1]}"
@@ -321,54 +467,113 @@ class TestCase
 	end
 end
 
-redef class MMethodDef
-	# TODO use annotations?
-
-	# Is the method a test_method?
-	# i.e. begins with "test_"
-	private fun is_test: Bool do return name.has_prefix("test_")
-
-	# Is the method a "before_module"?
-	private fun is_before_module: Bool do return mproperty.is_toplevel and name == "before_module"
-
-	# Is the method a "after_module"?
-	private fun is_after_module: Bool do return mproperty.is_toplevel and name == "after_module"
-end
-
 redef class MClassDef
-	# Is the class a TestClass?
-	# i.e. is a subclass of `TestSuite`
-	private fun is_test: Bool do
-		var in_hierarchy = self.in_hierarchy
-		if in_hierarchy == null then return false
-		for sup in in_hierarchy.greaters do
-			if sup.name == "TestSuite" then return true
+	# Methods tagged with `before` in this class definition
+	private fun before: Array[MMethodDef] do
+		var res = new ArraySet[MMethodDef]
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef and mpropdef.is_before then
+				res.add mpropdef
+			end
 		end
-		return false
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return res.to_a
+		for mclassdef in in_hierarchy.direct_greaters do
+			res.add_all mclassdef.before
+		end
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin
+	end
+
+	# Methods tagged with `before_all` in this class definition
+	private fun before_all: Array[MMethodDef] do
+		var res = new ArraySet[MMethodDef]
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef and mpropdef.is_before_all then
+				res.add mpropdef
+			end
+		end
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return res.to_a
+		for mclassdef in in_hierarchy.direct_greaters do
+			res.add_all mclassdef.before_all
+		end
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin
+	end
+
+	# Methods tagged with `after` in this class definition
+	private fun after: Array[MMethodDef] do
+		var res = new ArraySet[MMethodDef]
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef and mpropdef.is_after then
+				res.add mpropdef
+			end
+		end
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return res.to_a
+		for mclassdef in in_hierarchy.direct_greaters do
+			res.add_all mclassdef.after
+		end
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin.reversed
+	end
+
+	# Methods tagged with `after_all` in this class definition
+	private fun after_all: Array[MMethodDef] do
+		var res = new ArraySet[MMethodDef]
+		for mpropdef in mpropdefs do
+			if mpropdef isa MMethodDef and mpropdef.is_after_all then
+				res.add mpropdef
+			end
+		end
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return res.to_a
+		for mclassdef in in_hierarchy.direct_greaters do
+			res.add_all mclassdef.after_all
+		end
+		var lin = res.to_a
+		mmodule.linearize_mpropdefs(lin)
+		return lin.reversed
 	end
 end
 
 redef class MModule
-	# "before_module" method for this module.
-	private fun before_test: nullable MMethodDef do
-		for mclassdef in mclassdefs do
-			if not mclassdef.name == "Object" then continue
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef isa MMethodDef and mpropdef.is_before_module then return mpropdef
+	# Methods tagged with `before_all` at the module level (in `Sys`)
+	private fun before_all: Array[MMethodDef] do
+		var res = new Array[MMethodDef]
+		for mmodule in in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.name != "Sys" then continue
+				for mpropdef in mclassdef.mpropdefs do
+					if not mpropdef isa MMethodDef or not mpropdef.is_before_all then continue
+					res.add mpropdef
+				end
 			end
 		end
-		return null
+		var lin = res.to_a
+		linearize_mpropdefs(lin)
+		return lin
 	end
 
-	# "after_module" method for this module.
-	private fun after_test: nullable MMethodDef do
-		for mclassdef in mclassdefs do
-			if not mclassdef.name == "Object" then continue
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef isa MMethodDef and mpropdef.is_after_module then return mpropdef
+	# Methods tagged with `after_all` at the module level (in `Sys`)
+	private fun after_all: Array[MMethodDef] do
+		var res = new Array[MMethodDef]
+		for mmodule in in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.name != "Sys" then continue
+				for mpropdef in mclassdef.mpropdefs do
+					if not mpropdef isa MMethodDef or not mpropdef.is_after_all then continue
+					res.add mpropdef
+				end
 			end
 		end
-		return null
+		var lin = res.to_a
+		linearize_mpropdefs(lin)
+		return lin.reversed
 	end
 end
 
@@ -385,7 +590,7 @@ redef class ModelBuilder
 	# Run NitUnit test suite for `mmodule` (if it is one).
 	fun test_unit(mmodule: MModule): nullable HTMLTag do
 		# is the module a test_suite?
-		if get_mmodule_annotation("test_suite", mmodule) == null then return null
+		if not mmodule.is_test then return null
 		toolcontext.info("nitunit: test-suite {mmodule}", 2)
 
 		var tester = new NitUnitTester(self)

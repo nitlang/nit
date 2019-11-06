@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Test extern classes from the Cocoa framework and extern factories
-module cocoa_extern_types
+module cocoa_extern_types is example
 
 import cocoa
 

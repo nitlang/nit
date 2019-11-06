@@ -25,10 +25,12 @@ name=$1
 shift
 
 # Detect a working time command
-if env time --quiet -f%U true 2>/dev/null; then
-	TIME="env time --quiet -f%U -o ${name}.t.out"
-elif env time -f%U true 2>/dev/null; then
-	TIME="env time -f%U -o ${name}.t.out"
+if command time --quiet -f%e true 2>/dev/null; then
+	TIME="command time --quiet -f%e -o ${name}.t.out"
+elif command time -f%e true 2>/dev/null; then
+	TIME="command time -f%e -o ${name}.t.out"
+elif command gtime -f%e true 2>/dev/null; then
+	TIME="command gtime -f%e -o ${name}.t.out"
 else
 	TIME=
 fi

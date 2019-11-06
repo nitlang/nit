@@ -1,9 +1,8 @@
-c_src			-diff
-parser.nit		-diff
-parser_prod.nit		-diff
-lexer.nit		-diff
-tables_nit.c		-diff
-c_src/**		-diff
+/src/parser/parser.nit      -diff
+/src/parser/parser_prod.nit -diff
+/src/parser/lexer.nit       -diff
+/src/parser/tables_nit.c    -diff
+/c_src/**                   -diff
 
 tests/sav/**/*.res	-whitespace
 *.res			-whitespace

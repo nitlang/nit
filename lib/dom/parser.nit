@@ -82,6 +82,7 @@ class XMLProcessor
 		var c = src[pos]
 		if not c == '<' then return new XMLError(st_loc, "Expected start of tag, got `{c}`")
 		pos += 1
+		if pos >= src.length then return new XMLError(st_loc, "Malformed tag")
 		c = src[pos]
 		if c == '!' then
 			# Special tag
@@ -186,7 +187,6 @@ class XMLProcessor
 				end
 			end
 		else
-			if tag_name.has("xml") then return new XMLError(st_loc, "Forbidden keyword xml in Processing Instruction")
 			var cont_st = pos
 			var cont_end = ignore_until("?>")
 			if cont_end == -1 then
@@ -236,11 +236,11 @@ class XMLProcessor
 	# Parses an xml tag name
 	private fun parse_tag_name(delims: Array[Char]): String do
 		var idst = pos
-		var c = src[pos]
 		var srclen = src.length
-		while pos < srclen and not c.is_whitespace and not delims.has(c) do
+		while pos < srclen do
+			var c = src[pos]
+			if c.is_whitespace or delims.has(c) then break
 			pos += 1
-			c = src[pos]
 		end
 		return src.substring(idst, pos - idst).trim
 	end

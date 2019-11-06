@@ -39,10 +39,13 @@ class AppProject
 	var version_code: Int is lazy do
 
 		# Get the date and time (down to the minute) as string
-		var local_time = new Tm.localtime
-		var local_time_s = local_time.strftime("%y%m%d%H%M")
+		var gmtime = new Tm.gmtime
+		var local_time_s = gmtime.strftime("%y%m%d%H%M")
 		return local_time_s.to_i
 	end
+
+	# Extra folders where to find platform specific resource files
+	var files = new Array[String]
 
 	private var modelbuilder: ModelBuilder
 	private var mainmodule: MModule
@@ -63,6 +66,9 @@ class AppProject
 			var val = annot.arg_as_string(modelbuilder)
 			if val != null then namespace = val
 		end
+
+		var annots = modelbuilder.collect_annotations_on_modules("app_files", mainmodule)
+		for a in annots do files.add_all a.as_relative_paths(modelbuilder)
 
 		modelbuilder.toolcontext.check_errors
 	end
@@ -133,5 +139,30 @@ redef class AAnnotation
 		end
 
 		return version_fields.join(".")
+	end
+
+	# Parse all arguments as paths relative to the declaring module
+	#
+	# If no arguments are given, then use the parent directory of the module.
+	private fun as_relative_paths(modelbuilder: ModelBuilder): Array[String]
+	do
+		var paths = new Array[String]
+
+		var file = location.file
+		if file == null then return paths
+
+		var args = n_args
+		if args.is_empty then
+			paths.add file.filename.dirname
+		else
+			for arg in args do
+				var val = arg.as_string
+				if val != null then
+					paths.add file.filename.dirname/val
+				else modelbuilder.error(arg, "Syntax Error: `app_files` expects String literals as arguments.")
+			end
+		end
+
+		return paths
 	end
 end

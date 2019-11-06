@@ -14,10 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class pandoc/pandoc
+all: nitmd/nitmd nitmd2/nitmd2 txtmark/Txtmark.class markdown4j/Markdown4j.class
 
 nitmd/nitmd:
 	make -C nitmd
+
+nitmd2/nitmd2:
+	make -C nitmd2
 
 txtmark/Txtmark.class:
 	make -C txtmark
@@ -30,6 +33,7 @@ pandoc/pandoc:
 
 clean:
 	make -C nitmd clean
+	make -C nitmd2 clean
 	make -C txtmark clean
 	make -C markdown4j clean
 	make -C pandoc clean

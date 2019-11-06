@@ -36,7 +36,7 @@ class AndroidPlatform
 
 	redef fun name do return "android"
 
-	redef fun supports_libgc do return false
+	redef fun supports_libgc do return true
 
 	redef fun supports_libunwind do return false
 
@@ -54,65 +54,27 @@ class AndroidToolchain
 	do
 		var android_project_root = "{root_compile_dir}/android/"
 		self.android_project_root = android_project_root
-		return "{android_project_root}/jni/nit_compile/"
+		return "{android_project_root}/app/src/main/cpp/"
 	end
 
 	redef fun default_outname do return "{super}.apk"
 
+	private fun share_dir: Text
+	do
+		var nit_dir = toolcontext.nit_dir or else "."
+		return (nit_dir/"share").realpath
+	end
+
+	private fun gradlew_dir: Text do return share_dir / "android-gradlew"
+
 	redef fun write_files(compile_dir, cfiles)
 	do
 		var android_project_root = android_project_root.as(not null)
+		var android_app_root = android_project_root/"app"
 		var project = new AndroidProject(toolcontext.modelbuilder, compiler.mainmodule)
 		var release = toolcontext.opt_release.value
 
-		var app_name = project.name
-		if not release then app_name += " Debug"
-
-		var short_project_name = project.short_name
-
-		var app_package = project.namespace
-		if not release then app_package += "_debug"
-
-		var app_version = project.version
-
-		var app_min_api = project.min_api
-		if app_min_api == null then app_min_api = 10
-
-		var app_target_api = project.target_api
-		if app_target_api == null then app_target_api = app_min_api
-
-		var app_max_api = ""
-		if project.max_api != null then app_max_api = "android:maxSdkVersion=\"{project.max_api.as(not null)}\""
-
-		# Clear the previous android project, so there is no "existing project warning"
-		# or conflict between Java files of different projects
-		if android_project_root.file_exists then android_project_root.rmdir
-
-		var args = ["android", "-s",
-			"create", "project",
-			"--name", short_project_name,
-			"--target", "android-{app_target_api}",
-			"--path", android_project_root,
-			"--package", app_package,
-			"--activity", short_project_name]
-		toolcontext.exec_and_check(args, "Android project error")
-
-		# create compile_dir
-		var dir = "{android_project_root}/jni/"
-		if not dir.file_exists then dir.mkdir
-
-		dir = compile_dir
-		if not dir.file_exists then dir.mkdir
-
-		# compile normal C files
-		super
-
-		# Gather extra C files generated elsewhere than in super
-		for f in compiler.extern_bodies do
-			if f isa ExternCFile then cfiles.add(f.filename.basename)
-		end
-
-		# Is there an icon?
+		# Compute the root of the project where could be assets and resources
 		var project_root = "."
 		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
 		if mpackage != null then
@@ -125,42 +87,50 @@ class AndroidToolchain
 			end
 		end
 
-		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]
-		var icon_available = false
-		for res in resolutions do
-			var path = project_root / "android/res/drawable-{res}/icon.png"
-			if path.file_exists then
-				icon_available = true
-				break
-			end
+		# Gather app configs
+		# ---
+
+		var app_name = project.name
+		var app_package = project.namespace
+		var app_version = project.version
+
+		var app_min_api = project.min_api
+		if app_min_api == null then app_min_api = 10
+
+		var app_target_api = project.target_api
+		if app_target_api == null then app_target_api = app_min_api
+
+		var app_max_api = ""
+		if project.max_api != null then app_max_api = "maxSdkVersion  {project.max_api.as(not null)}"
+
+		# Create basic directory structure
+		# ---
+
+		android_project_root.mkdir
+		android_app_root.mkdir
+		(android_app_root/"libs").mkdir
+
+		var android_app_main = android_app_root / "src/main"
+		android_app_main.mkdir
+		(android_app_main / "java").mkdir
+
+		# /app/build.gradle
+		# ---
+
+		# Use the most recent build_tools_version
+		var android_home = "ANDROID_HOME".environ
+		if android_home.is_empty then android_home = "HOME".environ / "Android/Sdk"
+		var build_tools_dir = android_home / "build-tools"
+		var available_versions = build_tools_dir.files
+
+		var build_tools_version
+		if available_versions.is_empty then
+			print_error "Error: found no Android build-tools, install one or set ANDROID_HOME."
+			return
+		else
+			alpha_comparator.sort available_versions
+			build_tools_version = available_versions.last
 		end
-
-		var icon_declaration
-		if icon_available then
-			icon_declaration = "android:icon=\"@drawable/icon\""
-		else icon_declaration = ""
-
-		# Also copy over the java files
-		dir = "{android_project_root}/src/"
-		for mmodule in compiler.mainmodule.in_importation.greaters do
-			var extra_java_files = mmodule.extra_java_files
-			if extra_java_files != null then for file in extra_java_files do
-				var path = file.filename
-				path.file_copy_to(dir/path.basename)
-			end
-		end
-
-		## Generate Application.mk
-		dir = "{android_project_root}/jni/"
-		"""
-APP_ABI := armeabi armeabi-v7a x86
-APP_PLATFORM := android-{{{app_target_api}}}
-""".write_to_file "{dir}/Application.mk"
-
-		## Generate delegating makefile
-		"""
-include $(call all-subdir-makefiles)
-""".write_to_file "{dir}/Android.mk"
 
 		# Gather ldflags for Android
 		var ldflags = new Array[String]
@@ -171,53 +141,315 @@ include $(call all-subdir-makefiles)
 			end
 		end
 
-		### generate makefile into "{compile_dir}/Android.mk"
-		dir = compile_dir
-		"""
-LOCAL_PATH := $(call my-dir)
-include $(CLEAR_VARS)
+		# Platform version for OpenGL ES
+		var platform_version = ""
+		if ldflags.has("-lGLESv3") then
+			platform_version = "def platformVersion = 18"
+		else if ldflags.has("-lGLESv2") then
+			platform_version = "def platformVersion = 12"
+		end
 
-LOCAL_CFLAGS	:= -D ANDROID -D WITH_LIBGC
-LOCAL_MODULE    := main
-LOCAL_SRC_FILES := \\
-{{{cfiles.join(" \\\n")}}}
-LOCAL_LDLIBS    := {{{ldflags.join(" ")}}} $(TARGET_ARCH)/libgc.a
-LOCAL_STATIC_LIBRARIES := android_native_app_glue
+		# TODO make configurable client-side
+		var compile_sdk_version = app_target_api
 
-include $(BUILD_SHARED_LIBRARY)
+		var local_build_gradle = """
+apply plugin: 'com.android.application'
 
-$(call import-module,android/native_app_glue)
-		""".write_to_file("{dir}/Android.mk")
+{{{platform_version}}}
 
-		### generate AndroidManifest.xml
-		dir = android_project_root
-		var manifest_file = new FileWriter.open("{dir}/AndroidManifest.xml")
+android {
+    compileSdkVersion {{{compile_sdk_version}}}
+    buildToolsVersion "{{{build_tools_version}}}"
+
+    defaultConfig {
+        applicationId "{{{app_package}}}"
+        minSdkVersion {{{app_min_api}}}
+        {{{app_max_api}}}
+        targetSdkVersion {{{app_target_api}}}
+        versionCode {{{project.version_code}}}
+        versionName "{{{app_version}}}"
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_TOOLCHAIN=gcc"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    lintOptions {
+       abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+"""
+		local_build_gradle.write_to_file "{android_project_root}/app/build.gradle"
+
+		# TODO add 'arm64-v8a' and 'x86_64' to `abiFilters` when the min API is available
+
+		# ---
+		# Other, smaller files
+
+		# /build.gradle
+		var global_build_gradle = """
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+"""
+		global_build_gradle.write_to_file "{android_project_root}/build.gradle"
+
+		# /settings.gradle
+		var settings_gradle = """
+include ':app'
+"""
+		settings_gradle.write_to_file "{android_project_root}/settings.gradle"
+
+		# /gradle.properties
+		var gradle_properties = """
+org.gradle.jvmargs=-Xmx1536m
+"""
+		gradle_properties.write_to_file "{android_project_root}/gradle.properties"
+
+		# Insert an importation of the generated R class to all Java files from the FFI
+		for mod in compiler.mainmodule.in_importation.greaters do
+			var java_ffi_file = mod.java_file
+			if java_ffi_file != null then java_ffi_file.add "import {app_package}.R;"
+		end
+
+		# compile normal C files
+		super
+
+		# ---
+		# /app/src/main/cpp/CMakeLists.txt
+
+		# Gather extra C files generated elsewhere than in super
+		for f in compiler.extern_bodies do
+			if f isa ExternCFile then cfiles.add(f.filename.basename)
+		end
+
+		# Prepare for the CMakeLists format
+		var target_link_libraries = new Array[String]
+		for flag in ldflags do
+			if flag.has_prefix("-l") then
+				target_link_libraries.add flag.substring_from(2)
+			end
+		end
+
+		# Download the libgc/bdwgc sources
+		var share_dir = share_dir
+		if not share_dir.file_exists then
+			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
+			exit 1
+		end
+
+		var bdwgc_dir = "{share_dir}/android-bdwgc/bdwgc"
+		if not bdwgc_dir.file_exists then
+			toolcontext.exec_and_check(["{share_dir}/android-bdwgc/setup.sh"], "Android project error")
+		end
+
+		# Compile the native app glue lib if used
+		var add_native_app_glue = ""
+		if target_link_libraries.has("native_app_glue") then
+			add_native_app_glue = """
+add_library(native_app_glue STATIC ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+"""
+		end
+
+		var cmakelists = """
+cmake_minimum_required(VERSION 3.4.1)
+
+{{{add_native_app_glue}}}
+
+
+# libgc/bdwgc
+
+## The source is in the Nit repo
+set(lib_src_DIR {{{bdwgc_dir}}})
+set(lib_build_DIR ../libgc/outputs)
+file(MAKE_DIRECTORY ${lib_build_DIR})
+
+## Config
+add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA")
+set(enable_threads TRUE)
+set(CMAKE_USE_PTHREADS_INIT TRUE)
+
+## link_map is already defined in Android
+add_definitions("-DGC_DONT_DEFINE_LINK_MAP")
+
+## Silence warning
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
+
+add_subdirectory(${lib_src_DIR} ${lib_build_DIR} )
+include_directories(${lib_src_DIR}/include)
+
+
+# Nit generated code
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID -DWITH_LIBGC")
+
+# Export ANativeActivity_onCreate(),
+# Refer to: https://github.com/android-ndk/ndk/issues/381.
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
+
+#           name      so       source
+add_library(nit_app   SHARED   {{{cfiles.join("\n\t")}}} )
+
+target_include_directories(nit_app PRIVATE ${ANDROID_NDK}/sources/android/native_app_glue)
+
+
+# Link!
+
+target_link_libraries(nit_app gc-lib
+	{{{target_link_libraries.join("\n\t")}}})
+"""
+		cmakelists.write_to_file "{android_app_main}/cpp/CMakeLists.txt"
+
+		# ---
+		# /app/src/main/res/values/strings.xml for app name
+
+		# Set the default pretty application name
+		var res_values_dir = "{android_app_main}/res/values/"
+		res_values_dir.mkdir
+"""<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">{{{app_name}}}</string>
+</resources>""".write_to_file res_values_dir/"strings.xml"
+
+		# ---
+		# Copy assets, resources in the Android project
+
+		## Collect path to all possible folder where we can find the `android` folder
+		var app_files = [project_root]
+		app_files.add_all project.files
+
+		for path in app_files do
+			# Copy the assets folder
+			var assets_dir = path / "assets"
+			if assets_dir.file_exists then
+				assets_dir = assets_dir.realpath
+				toolcontext.exec_and_check(["cp", "-r", assets_dir, android_app_main], "Android project error")
+			end
+
+			# Copy the whole `android` folder
+			var android_dir = path / "android"
+			if android_dir.file_exists then
+				android_dir = android_dir.realpath
+				for f in android_dir.files do
+					toolcontext.exec_and_check(["cp", "-r", android_dir / f, android_app_main], "Android project error")
+				end
+			end
+		end
+
+		# ---
+		# Generate AndroidManifest.xml
+
+		# Is there an icon?
+		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi", "anydpi", "anydpi-v26"]
+		var icon_name = null
+		var has_round = false
+
+		for res in resolutions do
+			# New style mipmap
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher_round.png".file_exists then
+				has_round = true
+			end
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher.png".file_exists then
+				icon_name = "@mipmap/ic_launcher"
+				break
+			end
+			if "{project_root}/android/res/mipmap-{res}/ic_launcher.xml".file_exists then
+				icon_name = "@mipmap/ic_launcher"
+				break
+			end
+		end
+		if icon_name == null then
+			# Old style drawable-hdpi/icon.png
+			for res in resolutions do
+				var path = project_root / "android/res/drawable-{res}/icon.png"
+				if path.file_exists then
+					icon_name = "@drawable/icon"
+					break
+				end
+			end
+		end
+
+		var icon_declaration
+		if icon_name != null then
+			icon_declaration = "android:icon=\"{icon_name}\""
+			if app_target_api >= 25 and has_round then
+				icon_declaration += "\n\t\tandroid:roundIcon=\"@mipmap/ic_launcher_round\""
+			end
+		else icon_declaration = ""
+
+		# TODO android:roundIcon
+
+		# Copy the Java sources files
+		var java_dir = android_app_main / "java/"
+		java_dir.mkdir
+		for mmodule in compiler.mainmodule.in_importation.greaters do
+			var extra_java_files = mmodule.extra_java_files
+			if extra_java_files != null then for file in extra_java_files do
+				var path = file.src_path
+				var dir = file.filename.dirname
+				(java_dir/dir).mkdir
+				path.file_copy_to(java_dir/file.filename)
+			end
+		end
+
+		# ---
+		# /app/src/main/AndroidManifest.xml
+
+		var manifest_file = new FileWriter.open(android_app_main / "AndroidManifest.xml")
 		manifest_file.write """
 <?xml version="1.0" encoding="utf-8"?>
-<!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="{{{app_package}}}"
-        android:versionCode="{{{project.version_code}}}"
-        android:versionName="{{{app_version}}}">
-
-    <uses-sdk
-        android:minSdkVersion="{{{app_min_api}}}"
-        android:targetSdkVersion="{{{app_target_api}}}"
-        {{{app_max_api}}} />
+        package="{{{app_package}}}">
 
     <application
-		android:label="@string/app_name"
 		android:hasCode="true"
-		android:debuggable="{{{not release}}}"
+		android:allowBackup="true"
+		android:label="@string/app_name"
 		{{{icon_declaration}}}>
 """
 
 		for activity in project.activities do
 			manifest_file.write """
         <activity android:name="{{{activity}}}"
-                android:label="@string/app_name"
                 {{{project.manifest_activity_attributes.join("\n")}}}
                 {{{icon_declaration}}}>
+
+            <meta-data android:name="android.app.lib_name" android:value="nit_app" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -234,70 +466,8 @@ $(call import-module,android/native_app_glue)
 {{{project.manifest_lines.join("\n")}}}
 
 </manifest>
-<!-- END_INCLUDE(manifest) -->
 """
 		manifest_file.close
-
-		### Link to png sources
-		# libpng is not available on Android NDK
-		# FIXME make obtionnal when we have alternatives to mnit
-		var nit_dir = toolcontext.nit_dir
-		var share_dir =  nit_dir/"share/"
-		if not share_dir.file_exists then
-			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
-			exit 1
-		end
-		share_dir = share_dir.realpath
-
-		# Ensure that android-setup-libgc.sh has been executed
-		if not "{share_dir}/libgc/arm/lib".file_exists then
-			toolcontext.exec_and_check(["{share_dir}/libgc/android-setup-libgc.sh"], "Android project error")
-		end
-
-		# Copy GC files
-		for arch in ["arm", "x86", "mips"] do
-			dir = android_project_root/arch
-			dir.mkdir
-			toolcontext.exec_and_check(["cp", "{share_dir}/libgc/{arch}/lib/libgc.a",
-				dir/"libgc.a"], "Android project error")
-		end
-
-		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/arm/include/gc/",
-			"{compile_dir}/gc"], "Android project error")
-
-		# Copy assets, resources and libs where expected by the SDK
-
-		# Link to assets (for mnit and others)
-		var assets_dir = project_root / "assets"
-		if assets_dir.file_exists then
-			assets_dir = assets_dir.realpath
-			var target_assets_dir = "{android_project_root}/assets"
-			if not target_assets_dir.file_exists then
-				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir], "Android project error")
-			end
-		end
-
-		# Copy the res folder
-		var res_dir = project_root / "android/res"
-		if res_dir.file_exists then
-			# copy the res folder to the compile dir
-			res_dir = res_dir.realpath
-			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
-		end
-
-		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
-			# Create our own custom `res/values/string.xml` with the App name
-"""<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">{{{app_name}}}</string>
-</resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
-		end
-
-		# Copy the libs folder
-		var libs_dir = project_root / "android/libs"
-		if libs_dir.file_exists then
-			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
-		end
 	end
 
 	redef fun write_makefile(compile_dir, cfiles)
@@ -308,24 +478,18 @@ $(call import-module,android/native_app_glue)
 	redef fun compile_c_code(compile_dir)
 	do
 		var android_project_root = android_project_root.as(not null)
-		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
-		# Compile C code (and thus Nit)
-		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "-C", android_project_root], "Android project error")
-
-		# Generate the apk
-		var args = ["ant", "-f", android_project_root+"/build.xml"]
-		if release then
-			args.add "release"
-		else args.add "debug"
+		# Compile C and Java code into an APK file
+		var verb = if release then "assembleRelease" else "assembleDebug"
+		var args = [gradlew_dir/"gradlew", verb, "-p", android_project_root]
+		if toolcontext.opt_verbose.value <= 1 then args.add "-q"
 		toolcontext.exec_and_check(args, "Android project error")
 
-		# Move the apk to the target
+		# Move the APK to the target
 		var outname = outfile(compiler.mainmodule)
-
 		if release then
-			var apk_path = "{android_project_root}/bin/{short_project_name}-release-unsigned.apk"
+			var apk_path = "{android_project_root}/app/build/outputs/apk/release/app-release-unsigned.apk"
 
 			# Sign APK
 			var keystore_path= "KEYSTORE".environ
@@ -361,7 +525,7 @@ $(call import-module,android/native_app_glue)
 			toolcontext.exec_and_check(args, "Android project error")
 		else
 			# Move to the expected output path
-			args = ["mv", "{android_project_root}/bin/{short_project_name}-debug.apk", outname]
+			args = ["mv", "{android_project_root}/app/build/outputs/apk/debug/app-debug.apk", outname]
 			toolcontext.exec_and_check(args, "Android project error")
 		end
 	end
@@ -370,9 +534,9 @@ end
 redef class JavaClassTemplate
 	redef fun write_to_files(compdir)
 	do
-		var jni_path = "jni/nit_compile/"
+		var jni_path = "cpp/"
 		if compdir.has_suffix(jni_path) then
-			var path = "{compdir.substring(0, compdir.length-jni_path.length)}/src/"
+			var path = "{compdir.substring(0, compdir.length-jni_path.length)}/java/"
 			return super(path)
 		else return super
 	end

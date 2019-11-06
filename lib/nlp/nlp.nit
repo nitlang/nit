@@ -20,52 +20,58 @@ module nlp
 import stanford
 import vsm
 
-redef class NLPDocument
+# A StringIndex using a NLPProcessor to parse and vectorize strings
+class NLPIndex
+	super StringIndex
 
-	# `NLPVector` representing `self`.
-	var vector: NLPVector is lazy do
-		var vector = new NLPVector
-		for sentence in sentences do
+	# NLP Processor used to tokenize, lemmatize and POS tag documents
+	var nlp_processor: NLPProcessor
+
+	redef fun parse_string(string) do
+		var vector = new Vector
+		if string.trim.is_empty then return vector
+		var doc = nlp_processor.process(string)
+		for sentence in doc.sentences do
 			for token in sentence.tokens do
-				if not keep_pos_token(token) then continue
+				if not accept_token(token) then continue
 				var lemma = token.lemma
-				if lemma_black_list.has(lemma) then continue
 				if not vector.has_key(lemma) then
-					vector[lemma] = 1
+					vector[lemma] = 1.0
 				else
-					vector[lemma] += 1
+					vector[lemma] += 1.0
 				end
 			end
 		end
 		return vector
 	end
 
-	# Should we keep `token` when composing the vector?
+	# Is `token` accepted by this index?
 	#
-	# Choice is based on the POS tag of the token.
-	# See `allowed_pos_prefixes`.
-	private fun keep_pos_token(token: NLPToken): Bool do
+	# See `whitelist_pos` and `blacklist_pos`.
+	fun accept_token(token: NLPToken): Bool do
 		var pos = token.pos
-		for prefix in allowed_pos_prefixes do
-			if pos.has_prefix(prefix) then return true
-		end
-		return false
-	end
-
-	# Should we keep `lemma` when composing the vector?
-	#
-	# See `lemma_black_list`.
-	private fun keep_lemma(lemma: String): Bool do
+		if whitelist_pos.not_empty and not whitelist_pos.has(pos) then return false
+		if blacklist_pos.has(pos) then return false
+		if stoplist.has(token.lemma) then return false
 		return true
 	end
 
-	# Allowed POS tag prefixes.
+	# Part-Of-Speech whitelist
 	#
-	# When building a vector from `self`,  only tokens tagged with one of these
-	# prefixes are kept.
-	# Other tokens are ignored.
-	var allowed_pos_prefixes: Array[String] = ["NN", "VB", "RB"] is writable
+	# If not empty, the index accept only the POS tags contained in this list.
+	var whitelist_pos = new Array[String] is writable
 
-	# Ignored lemmas.
-	var lemma_black_list: Array[String] = ["module", "class", "method"] is writable
+	# Part-Of-Speech blacklist
+	#
+	# Reject POS tags contained in this list.
+	var blacklist_pos = new Array[String] is writable
+
+	# List of lemmas that must not be indexed
+	var stoplist = new Array[String] is writable
+end
+
+# A FileIndex based using a NLPProcessor
+class NLPFileIndex
+	super NLPIndex
+	super FileIndex
 end

@@ -189,6 +189,11 @@ extern class UILabel in "ObjC" `{ UILabel * `}
 		return [self textColor];
 	`}
 
+	# Wraps: `UILabel.textColor`
+	fun text_color=(color: UIColor) in "ObjC" `{
+		self.textColor = color;
+	`}
+
 	# Wraps: `UILabel.shadowColor`
 	fun shadow_color: UIColor in "ObjC" `{
 		return [self shadowColor];
@@ -404,6 +409,15 @@ extern class UIColor in "ObjC" `{ UIColor * `}
 	#fun cg_color: CGColorRef in "ObjC" `{
 	#	return [self CGColor];
 	#`}
+
+	# Wraps: `[UIColor groupTableViewBackgroundColor]`
+	new group_table_view_background_color in "ObjC" `{ return [UIColor groupTableViewBackgroundColor]; `}
+
+	# Wraps: `[UIColor lightTextColor]`
+	new light_text_color in "ObjC" `{ return [UIColor lightTextColor]; `}
+
+	# Wraps: `[UIColor darkTextColor]`
+	new dark_text_color in "ObjC" `{ return [UIColor darkTextColor]; `}
 end
 
 # Wraps: `[UIColor colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha]`
@@ -456,6 +470,9 @@ extern class UITextField in "ObjC" `{ UITextField * `}
 	fun secure_text_entry=(value: Bool) in "ObjC" `{
 		self.secureTextEntry = value;
 	`}
+
+	# Wraps: `UITextField.placeholder`
+	fun placeholder=(text: NSString) in "ObjC" `{ self.placeholder = text; `}
 end
 
 # Lays out a collection of views in either a column or a row

@@ -18,8 +18,11 @@
 module mmodules_metrics
 
 import metrics_base
+import model::model_collect
 
 redef class ToolContext
+
+	# MModules related metrics phase
 	var mmodules_metrics_phase: Phase = new MModulesMetricsPhase(self, null)
 end
 
@@ -33,13 +36,22 @@ private class MModulesMetricsPhase
 		var out = "{toolcontext.opt_dir.value or else "metrics"}/mmodules"
 		out.mkdir
 
+		var model = toolcontext.modelbuilder.model
+
 		print toolcontext.format_h1("\n# MModules metrics")
 
 		var metrics = new MetricSet
-		metrics.register(new MNOA, new MNOP, new MNOC, new MNOD, new MDIT)
-		metrics.register(new MNBI, new MNBR, new MNBCC, new MNBAC, new MNBIC)
+		metrics.register(new MNOA(model, mainmodule))
+		metrics.register(new MNOP(model, mainmodule))
+		metrics.register(new MNOC(model, mainmodule))
+		metrics.register(new MNOD(model, mainmodule))
+		metrics.register(new MDIT(model, mainmodule))
+		metrics.register(new MNBI(model, mainmodule))
+		metrics.register(new MNBR(model, mainmodule))
+		metrics.register(new MNBCC(model, mainmodule))
+		metrics.register(new MNBAC(model, mainmodule))
+		metrics.register(new MNBIC(model, mainmodule))
 
-		var model = toolcontext.modelbuilder.model
 		var mmodules = new HashSet[MModule]
 		for mpackage in model.mpackages do
 
@@ -68,9 +80,18 @@ private class MModulesMetricsPhase
 end
 
 # A metric about MModule
-interface MModuleMetric
+abstract class MModuleMetric
 	super Metric
 	redef type ELM: MModule
+
+	# Model view used to collect and filter entities
+	var model: Model
+
+	# Mainmodule used for linearization
+	var mainmodule: MModule
+
+	# Filter to apply on model if any
+	var filter: nullable ModelFilter
 end
 
 # Module Metric: Number of Ancestors
@@ -139,6 +160,25 @@ class MDIT
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			values[mmodule] = mmodule.in_importation.depth
+		end
+	end
+end
+
+# Module Metric: Number of Accessible Definitions (of all kind)
+#
+# count all mclasses accessible by the module
+class MNBD
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnbd"
+	redef fun desc do return "number of definition accessibles in module"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = 0
+			for a in mmodule.collect_ancestors(mainmodule, filter) do
+				values[mmodule] += a.intro_mclasses.length
+			end
 		end
 	end
 end
@@ -250,5 +290,3 @@ class MNBEC
 		end
 	end
 end
-
-

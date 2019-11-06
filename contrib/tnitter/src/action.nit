@@ -18,7 +18,7 @@
 module action
 
 import nitcorn
-import json::serialization
+import json
 
 import model
 import database

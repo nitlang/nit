@@ -1,0 +1,13 @@
+<div>
+	<entity-list list-title='Groups' ng-if='vm.mentity.class_name == "MPackage"'
+		list-entities='vm.defs.results' list-object-filter='{}' />
+
+	<entity-list list-title='Groups & Modules' ng-if='vm.mentity.class_name == "MGroup"'
+		list-entities='vm.defs.results' list-object-filter='{}' />
+
+	<entity-list list-title='Class definitions' ng-if='vm.mentity.class_name == "MModule"'
+		list-entities='vm.defs.results' list-object-filter='{}' />
+
+	<entity-list list-title='All properties' ng-if='vm.mentity.class_name == "MClass"'
+		list-entities='vm.defs.results' list-object-filter='{}' />
+</div>

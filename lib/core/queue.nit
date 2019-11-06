@@ -238,6 +238,7 @@ class MinHeap[E: Object]
 	redef fun is_empty do return items.is_empty
 	redef fun length do return items.length
 	redef fun iterator do return items.iterator
+	redef fun clear do items.clear
 
 	redef fun peek do return items.first
 	redef fun add(e)

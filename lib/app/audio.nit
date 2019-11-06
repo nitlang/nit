@@ -14,13 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# App audio abstraction
-# Default behaviour is loading the audio from the `assets` folder of the project with its name and extension
-# Platforms implementations can modify this comportement
+# Services to load and play `Sound` and `Music` from the assets folder
 #
-# Once the application has started (after `App.setup`)
-# use `App.load_sound` to get a sound
-# then `Sound.play` to play it
+# Get a handle to a sound using `new Sound` or `new Music` at any time.
+# Call `load` at or after `App::on_create` or leave it to be loaded
+# on demand by the first call to `play`.
 module audio
 
 import app_base
@@ -29,47 +27,44 @@ import core::error
 # Platform variations
 import linux::audio is conditional(linux)
 import android::audio is conditional(android)
+import ios::audio is conditional(ios)
 
 # Abstraction of a playable Audio
 abstract class PlayableAudio
 
-	# Name of this playable audio
-	var name: String
+	init do sounds.add self
 
-	# Error which is not null if an error happened
-	var error: nullable Error = null is writable
+	# Path to the audio file in the assets folder
+	var path: String
 
-	# Is this already loaded ?
-	protected var is_loaded = false is writable
+	# Last error on this sound, if any
+	fun error: nullable Error do return null
 
 	# Load this playable audio
-	fun load is abstract
+	fun load do end
 
-	# Plays the sound
-	fun play is abstract
+	# Play the sound
+	fun play do end
 
-	# Pauses the sound
-	fun pause is abstract
+	# Pause the sound
+	fun pause do end
 
-	# Resumes the sound
-	fun resume is abstract
+	# Resume the sound
+	fun resume do end
 end
 
-# Abstraction of a short sound
+# Short sound
 class Sound
 	super PlayableAudio
 end
 
-# Abstraction of a long song, that can bee looped
+# Long sound that can bee looped
 class Music
 	super PlayableAudio
 end
 
-redef class App
+redef class Sys
 
-	# Load a sound
-	fun load_sound(name: String): Sound is abstract
-
-	# Load a music
-	fun load_music(name: String): Music is abstract
+	# All instantiated sounds
+	var sounds = new Array[PlayableAudio]
 end

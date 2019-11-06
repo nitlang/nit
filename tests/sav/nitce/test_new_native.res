@@ -1,5 +1,5 @@
-NativeString
-0x4e
+CString
+78
 Nit
 NativeArray
 3

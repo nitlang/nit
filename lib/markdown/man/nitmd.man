@@ -1,0 +1,15 @@
+# NAME
+
+nitmd - Translate Markdown documents to other formats.
+
+# SYNOPSIS
+
+nitmd [-t format] <file.md>
+
+# OPTIONS
+
+### `-h`, `-?`, `--help`
+Show this help message.
+
+### `-t`, `--to`
+Specify output format (html, md, man).

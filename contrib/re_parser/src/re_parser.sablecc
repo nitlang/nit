@@ -1,0 +1,25 @@
+Grammar re_parser;
+
+Lexer
+
+// A printable character (inside strings)
+char = ' ' ...;
+
+// Igndored stufs
+blank = ' ';
+
+Parser
+
+Ignored blank;
+
+re =
+	{char:} char	|
+	{par:} '(' re ')'
+Unary
+	{ques:} re '?' |
+	{star:} re '*' |
+	{plus:} re '+'
+Left
+	{conc:} re re
+Left
+	{alter:} re '|' re;

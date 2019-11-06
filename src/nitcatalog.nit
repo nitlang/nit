@@ -22,8 +22,9 @@
 module nitcatalog
 
 import loader # Scan&load packages, groups and modules
-import doc::doc_down # Display mdoc
 import catalog
+
+import doc::templates::html_model
 
 # A HTML page in a catalog
 #
@@ -187,7 +188,7 @@ redef class Catalog
 	do
 		# Register `self` to the global NitdocDecorator
 		# FIXME this is ugly. But no better idea at the moment.
-		modelbuilder.model.nitdoc_md_processor.emitter.decorator.as(NitdocDecorator).catalog = self
+		modelbuilder.model.nitdoc_md_processor.decorator.as(NitdocDecorator).catalog = self
 	end
 
 	# The output directory where to generate pages
@@ -232,12 +233,19 @@ redef class Catalog
 		var name = mpackage.name.html_escape
 		res.more_head.add """<title>{{{name}}}</title>"""
 
-		res.add """
-<div class="content">
-<h1 class="package-name">{{{name}}}</h1>
-"""
+		res.add """<div class="content">"""
+
 		var mdoc = mpackage.mdoc_or_fallback
-		if mdoc != null then res.add mdoc.html_documentation
+		if mdoc == null then
+			res.add """<h1 class="package-name">{{{name}}}</h1>"""
+		else
+			res.add """
+<div style="float: left">
+	<h1 class="package-name">{{{name}}}&nbsp;-&nbsp;</h1>
+</div>
+"""
+			res.add mdoc.html_documentation
+		end
 
 		res.add "<h2>Content</h2>"
 		var ot = new OrderedTree[MConcern]
@@ -260,12 +268,12 @@ redef class Catalog
 <div class="sidebar">
 <ul class="box">
 """
-		var tryit = mpackage.metadata("upstream.tryit")
+		var tryit = mpackage.metadata.metadata("upstream.tryit")
 		if tryit != null then
 			var e = tryit.html_escape
 			res.add "<li><a href=\"{e}\">Try<span style=\"color:white\">n</span>it!</a></li>\n"
 		end
-		var apk = mpackage.metadata("upstream.apk")
+		var apk = mpackage.metadata.metadata("upstream.apk")
 		if apk != null then
 			var e = apk.html_escape
 			res.add "<li><a href=\"{e}\">Android apk</a></li>\n"
@@ -273,15 +281,15 @@ redef class Catalog
 
 		res.add """</ul>\n<ul class="box">\n"""
 
-		var homepage = mpackage.metadata("upstream.homepage")
+		var homepage = mpackage.metadata.metadata("upstream.homepage")
 		if homepage != null then
 			var e = homepage.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		for maintainer in mpackage.maintainers do
+		for maintainer in mpackage.metadata.maintainers do
 			res.add "<li>{maintainer.to_html}</li>"
 		end
-		var license = mpackage.metadata("package.license")
+		var license = mpackage.metadata.metadata("package.license")
 		if license != null then
 			var e = license.html_escape
 			res.add "<li><a href=\"http://opensource.org/licenses/{e}\">{e}</a> license</li>\n"
@@ -289,22 +297,22 @@ redef class Catalog
 		res.add "</ul>\n"
 
 		res.add "<h3>Source Code</h3>\n<ul class=\"box\">\n"
-		var browse = mpackage.metadata("upstream.browse")
+		var browse = mpackage.metadata.metadata("upstream.browse")
 		if browse != null then
 			var e = browse.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		var git = mpackage.metadata("upstream.git")
+		var git = mpackage.metadata.metadata("upstream.git")
 		if git != null then
 			var e = git.html_escape
 			res.add "<li><tt>{e}</tt></li>\n"
 		end
-		var last_date = mpackage.last_date
+		var last_date = mpackage.metadata.last_date
 		if last_date != null then
 			var e = last_date.html_escape
 			res.add "<li>most recent commit: {e}</li>\n"
 		end
-		var first_date = mpackage.first_date
+		var first_date = mpackage.metadata.first_date
 		if first_date != null then
 			var e = first_date.html_escape
 			res.add "<li>oldest commit: {e}</li>\n"
@@ -326,14 +334,14 @@ redef class Catalog
 
 		res.add "<h3>Tags</h3>\n"
 		var ts2 = new Array[String]
-		for t in mpackage.tags do
+		for t in mpackage.metadata.tags do
 			t = t.html_escape
 			ts2.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
 		end
 		res.add_list(ts2, ", ", ", ")
 
-		if deps.has(mpackage) then
-			var reqs = deps[mpackage].greaters.to_a
+		if deps.vertices.has(mpackage) then
+			var reqs = deps.get_all_successors(mpackage)
 			reqs.remove(mpackage)
 			alpha_comparator.sort(reqs)
 			res.add "<h3>Requirements</h3>\n"
@@ -342,7 +350,7 @@ redef class Catalog
 			else
 				var list = new Array[String]
 				for r in reqs do
-					var direct = deps.has_direct_edge(mpackage, r)
+					var direct = deps.has_arc(mpackage, r)
 					var s = "<a href=\"{r}.html\">"
 					if direct then s += "<strong>"
 					s += r.to_s
@@ -353,7 +361,7 @@ redef class Catalog
 				res.add_list(list, ", ", " and ")
 			end
 
-			reqs = deps[mpackage].smallers.to_a
+			reqs = deps.get_all_predecessors(mpackage)
 			reqs.remove(mpackage)
 			alpha_comparator.sort(reqs)
 			res.add "<h3>Clients</h3>\n"
@@ -362,7 +370,7 @@ redef class Catalog
 			else
 				var list = new Array[String]
 				for r in reqs do
-					var direct = deps.has_direct_edge(r, mpackage)
+					var direct = deps.has_arc(r, mpackage)
 					var s = "<a href=\"{r}.html\">"
 					if direct then s += "<strong>"
 					s += r.to_s
@@ -374,7 +382,7 @@ redef class Catalog
 			end
 		end
 
-		var contributors = mpackage.contributors
+		var contributors = mpackage.metadata.contributors
 		if not contributors.is_empty then
 			res.add "<h3>Contributors</h3>\n<ul class=\"box\">"
 			for c in contributors do
@@ -472,7 +480,7 @@ redef class Catalog
 		res.add "<th data-field=\"name\" data-sortable=\"true\">name</th>\n"
 		res.add "<th data-field=\"maint\" data-sortable=\"true\">maint</th>\n"
 		res.add "<th data-field=\"contrib\" data-sortable=\"true\">contrib</th>\n"
-		if deps.not_empty then
+		if deps.vertices.not_empty then
 			res.add "<th data-field=\"reqs\" data-sortable=\"true\">reqs</th>\n"
 			res.add "<th data-field=\"dreqs\" data-sortable=\"true\">direct<br>reqs</th>\n"
 			res.add "<th data-field=\"cli\" data-sortable=\"true\">clients</th>\n"
@@ -492,14 +500,14 @@ redef class Catalog
 			res.add "<tr>"
 			res.add "<td><a href=\"p/{p.name}.html\">{p.name}</a></td>"
 			var maint = "?"
-			if p.maintainers.not_empty then maint = p.maintainers.first.name.html_escape
+			if p.metadata.maintainers.not_empty then maint = p.metadata.maintainers.first.name.html_escape
 			res.add "<td>{maint}</td>"
-			res.add "<td>{p.contributors.length}</td>"
-			if deps.not_empty then
-				res.add "<td>{deps[p].greaters.length-1}</td>"
-				res.add "<td>{deps[p].direct_greaters.length}</td>"
-				res.add "<td>{deps[p].smallers.length-1}</td>"
-				res.add "<td>{deps[p].direct_smallers.length}</td>"
+			res.add "<td>{p.metadata.contributors.length}</td>"
+			if deps.vertices.not_empty then
+				res.add "<td>{deps.get_all_successors(p).length-1}</td>"
+				res.add "<td>{deps.successors(p).length}</td>"
+				res.add "<td>{deps.get_all_predecessors(p).length-1}</td>"
+				res.add "<td>{deps.predecessors(p).length}</td>"
 			end
 			res.add "<td>{mmodules[p]}</td>"
 			res.add "<td>{mclasses[p]}</td>"
@@ -522,6 +530,24 @@ redef class Catalog
 	# Piwik site ID
 	# Used when `piwik_tracker` is set
 	var piwik_site_id: Int = 1
+end
+
+redef class Person
+	redef fun to_html do
+		var res = ""
+		var e = name.html_escape
+		var page = self.page
+		if page != null then
+			res += "<a href=\"{page.html_escape}\">"
+		end
+		var gravatar = self.gravatar
+		if gravatar != null then
+			res += "<img src=\"https://secure.gravatar.com/avatar/{gravatar}?size=20&amp;default=retro\">&nbsp;"
+		end
+		res += e
+		if page != null then res += "</a>"
+		return res
+	end
 end
 
 var model = new Model
@@ -567,29 +593,13 @@ if opt_no_parse.value then
 else
 	mmodules = modelbuilder.parse_full(args)
 end
-var mpackages = new Set[MPackage]
-for m in mmodules do
-	var p = m.mpackage
-	if p != null then mpackages.add p
-end
+var mpackages = modelbuilder.model.mpackage_importation_graph.vertices
 
 # Scan packages and compute information
-for p in model.mpackages do
+for p in mpackages do
 	var g = p.root
 	assert g != null
 	modelbuilder.scan_group(g)
-
-	# Load the module to process importation information
-	if opt_no_parse.value then continue
-
-	catalog.deps.add_node(p)
-	for gg in p.mgroups do for m in gg.mmodules do
-		for im in m.in_importation.direct_greaters do
-			var ip = im.mpackage
-			if ip == null or ip == p then continue
-			catalog.deps.add_edge(p, ip)
-		end
-	end
 end
 
 if not opt_no_git.value then for p in mpackages do
@@ -714,6 +724,9 @@ for p in mpackages do
 	var f = "p/{p.name}.html"
 	catalog.package_page(p)
 	catalog.generate_page(p).write_to_file(out/f)
+	# copy ini
+	var ini = p.ini
+	if ini != null then ini.write_to_file(out/"p/{p.name}.ini")
 end
 
 # INDEX
@@ -729,11 +742,11 @@ index.add """
 index.add "<h2>Highlighted Packages</h2>\n"
 index.add catalog.list_best(catalog.score)
 
-if catalog.deps.not_empty then
+if catalog.deps.vertices.not_empty then
 	index.add "<h2>Most Required</h2>\n"
 	var reqs = new Counter[MPackage]
 	for p in mpackages do
-		reqs[p] = catalog.deps[p].smallers.length - 1
+		reqs[p] = catalog.deps.get_all_successors(p).length - 1
 	end
 	index.add catalog.list_best(reqs)
 end

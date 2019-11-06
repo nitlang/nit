@@ -1,0 +1,30 @@
+# NAME
+
+github_merge - Query the Github PR API to perform a merge.
+
+# SYNOPSIS
+
+github_merge [OPTION]... <PR number...>
+
+# OPTIONS
+
+### `-h`, `-?`, `--help`
+Show this help message.
+
+### `-r`, `--repo`
+Repository (e.g. nitlang/nit).
+
+### `--auth`
+OAuth token.
+
+### `-q`, `--query`
+Query to get issues (e.g. label=ok_will_merge).
+
+### `--status`
+A status context that must be "success" (e.g. default).
+
+### `-a`, `--all`
+Merge all.
+
+### `-k`, `--keep-going`
+Skip merge conflicts.

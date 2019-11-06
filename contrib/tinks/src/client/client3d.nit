@@ -18,13 +18,11 @@ module client3d is
 	app_namespace "org.nitlanguage.tinks3d"
 	app_version(1, 0, git_revision)
 
-	android_api_target 15
+	android_api_target 10
 	android_manifest """<uses-permission android:name="android.permission.INTERNET" />"""
 end
 
 import gamnit::depth
-import gamnit::keys
-import app::audio
 
 import base
 
@@ -43,23 +41,23 @@ redef class App
 	# Models
 
 	# Models of rocks
-	var models_rock = new Array[Model].with_items(
+	var models_rock = [
 		new Model("models/Tall_Rock_1_01.obj"),
 		new Model("models/Tall_Rock_2_01.obj"),
 		new Model("models/Tall_Rock_3_01.obj"),
-		new Model("models/Tall_Rock_4_01.obj"))
+		new Model("models/Tall_Rock_4_01.obj")]
 
 	# Models of trees
-	var models_tree = new Array[Model].with_items(
+	var models_tree = [
 		new Model("models/Oak_Dark_01.obj"),
 		new Model("models/Oak_Green_01.obj"),
 		new Model("models/Large_Oak_Dark_01.obj"),
-		new Model("models/Large_Oak_Green_01.obj"))
+		new Model("models/Large_Oak_Green_01.obj")]
 
 	# Models of the debris left by a destroyed tank
-	var models_debris = new Array[Model].with_items(
+	var models_debris = [
 		new Model("models/debris0.obj"),
-		new Model("models/debris1.obj"))
+		new Model("models/debris1.obj")]
 
 	# Model the health pickup
 	var model_health = new Model("models/health.obj")
@@ -122,8 +120,15 @@ redef class App
 		show_splash_screen logo
 
 		# Load everything
-		for model in models do model.load
-		for texture in all_root_textures do texture.load
+		for texture in all_root_textures do
+			texture.load
+			var error = texture.error
+			if error != null then print_error error
+		end
+		for model in models do
+			model.load
+			if model.errors.not_empty then print_error model.errors.join("\n")
+		end
 
 		# Modify all textures so they have a higher ambient color
 		for model in models do
@@ -359,7 +364,7 @@ redef class Feature
 		# Apply a random model and rotation to new features
 		actor = new Actor(rule.models.rand,
 			new Point3d[Float](pos.x, 0.0, pos.y))
-		actor.rotation = 2.0*pi.rand
+		actor.yaw = 2.0*pi.rand
 		actor.scale = 0.75
 
 		self.actor = actor
@@ -426,7 +431,7 @@ redef class ExplosionEvent
 		# Blast mark on the ground
 		var blast = new Actor(app.blast_model, new Point3d[Float](pos.x, 0.05 & 0.04, pos.y))
 		blast.scale = 3.0
-		blast.rotation = 2.0*pi.rand
+		blast.yaw = 2.0*pi.rand
 		app.actors.add blast
 
 		# Smoke
@@ -474,8 +479,8 @@ redef class TankMoveEvent
 			actor.center.z = pos.y
 		end
 
-		tank.actors[0].rotation = tank.heading + pi
-		tank.actors[1].rotation = tank.turret.heading + pi
+		tank.actors[0].yaw = -tank.heading + pi
+		tank.actors[1].yaw = -tank.turret.heading + pi
 
 		# Keep going only for the local tank
 		var local_player = app.context.local_player

@@ -1,2 +1,3 @@
 --no-colors --all --csv base_simple3.nit -d $WRITE
 --detect-variance-constraints base_ft_detect_variance_constraints.nit
+--readme --csv -d $WRITE test_prog/

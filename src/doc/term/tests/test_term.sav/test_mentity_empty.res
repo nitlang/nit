@@ -1,0 +1,2 @@
+Error: Empty command name
+

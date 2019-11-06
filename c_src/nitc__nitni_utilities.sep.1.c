@@ -1,5 +1,5 @@
 #include "nitc__nitni_utilities.sep.0.h"
-/* method nitni_utilities#MMethod#build_cname for (self: MMethod, MClassType, MModule, nullable String, SignatureLength): String */
+/* method nitni_utilities$MMethod$build_cname for (self: MMethod, MClassType, MModule, nullable String, SignatureLength): String */
 val* nitc__nitni_utilities___MMethod___build_cname(val* self, val* p0, val* p1, val* p2, val* p3) {
 val* var /* : String */;
 val* var_recv_mtype /* var recv_mtype: MClassType */;
@@ -13,73 +13,100 @@ val* var5 /* : String */;
 val* var7 /* : String */;
 static val* varonce;
 val* var8 /* : String */;
-char* var9 /* : NativeString */;
+char* var9 /* : CString */;
 val* var10 /* : String */;
-short int var11 /* : Bool */;
+val* var11 /* : nullable Int */;
+val* var12 /* : nullable Int */;
+val* var13 /* : nullable Bool */;
+val* var14 /* : nullable Bool */;
+short int var15 /* : Bool */;
 short int var_ /* var : Bool */;
-val* var12 /* : String */;
-val* var14 /* : String */;
-static val* varonce15;
 val* var16 /* : String */;
-char* var17 /* : NativeString */;
 val* var18 /* : String */;
-short int var19 /* : Bool */;
-val* var21 /* : NativeArray[String] */;
-static val* varonce20;
-static val* varonce22;
-val* var23 /* : String */;
-char* var24 /* : NativeString */;
-val* var25 /* : String */;
-val* var26 /* : String */;
-val* var27 /* : String */;
-val* var_cname /* var cname: nullable Object */;
+static val* varonce19;
+val* var20 /* : String */;
+char* var21 /* : CString */;
+val* var22 /* : String */;
+val* var23 /* : nullable Int */;
+val* var24 /* : nullable Int */;
+val* var25 /* : nullable Bool */;
+val* var26 /* : nullable Bool */;
+short int var27 /* : Bool */;
 val* var29 /* : NativeArray[String] */;
 static val* varonce28;
 static val* varonce30;
 val* var31 /* : String */;
-char* var32 /* : NativeString */;
+char* var32 /* : CString */;
 val* var33 /* : String */;
-static val* varonce34;
-val* var35 /* : String */;
-char* var36 /* : NativeString */;
-val* var37 /* : String */;
+val* var34 /* : nullable Int */;
+val* var35 /* : nullable Int */;
+val* var36 /* : nullable Bool */;
+val* var37 /* : nullable Bool */;
 val* var38 /* : String */;
 val* var39 /* : String */;
-val* var40 /* : String */;
-val* var42 /* : NativeArray[String] */;
-static val* varonce41;
-static val* varonce43;
-val* var44 /* : String */;
-char* var45 /* : NativeString */;
-val* var46 /* : String */;
-val* var47 /* : String */;
-val* var48 /* : String */;
-val* var49 /* : String */;
-short int var50 /* : Bool */;
-short int var51 /* : Bool */;
-val* var_other /* var other: nullable Object */;
-short int var53 /* : Bool */;
-short int var54 /* : Bool */;
-val* var56 /* : NativeArray[String] */;
-static val* varonce55;
-val* var57 /* : String */;
-short int var58 /* : Bool */;
-short int var60 /* : Bool */;
+val* var_cname /* var cname: nullable Object */;
+val* var41 /* : NativeArray[String] */;
+static val* varonce40;
+static val* varonce42;
+val* var43 /* : String */;
+char* var44 /* : CString */;
+val* var45 /* : String */;
+val* var46 /* : nullable Int */;
+val* var47 /* : nullable Int */;
+val* var48 /* : nullable Bool */;
+val* var49 /* : nullable Bool */;
+static val* varonce50;
+val* var51 /* : String */;
+char* var52 /* : CString */;
+val* var53 /* : String */;
+val* var54 /* : nullable Int */;
+val* var55 /* : nullable Int */;
+val* var56 /* : nullable Bool */;
+val* var57 /* : nullable Bool */;
+val* var58 /* : String */;
+val* var59 /* : String */;
+val* var60 /* : String */;
 val* var62 /* : NativeArray[String] */;
 static val* varonce61;
 static val* varonce63;
 val* var64 /* : String */;
-char* var65 /* : NativeString */;
+char* var65 /* : CString */;
 val* var66 /* : String */;
-val* var67 /* : String */;
-val* var69 /* : String */;
-val* var70 /* : String */;
+val* var67 /* : nullable Int */;
+val* var68 /* : nullable Int */;
+val* var69 /* : nullable Bool */;
+val* var70 /* : nullable Bool */;
+val* var71 /* : String */;
+val* var72 /* : String */;
+val* var73 /* : String */;
+short int var74 /* : Bool */;
+short int var75 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var77 /* : Bool */;
+short int var78 /* : Bool */;
+val* var80 /* : NativeArray[String] */;
+static val* varonce79;
+val* var81 /* : String */;
+short int var82 /* : Bool */;
+short int var84 /* : Bool */;
+val* var86 /* : NativeArray[String] */;
+static val* varonce85;
+static val* varonce87;
+val* var88 /* : String */;
+char* var89 /* : CString */;
+val* var90 /* : String */;
+val* var91 /* : nullable Int */;
+val* var92 /* : nullable Int */;
+val* var93 /* : nullable Bool */;
+val* var94 /* : nullable Bool */;
+val* var95 /* : String */;
+val* var96 /* : String */;
 var_recv_mtype = p0;
 var_from_mmodule = p1;
 var_suffix = p2;
 var_length = p3;
 {
-{ /* Inline model#MMethod#is_init (self) on <self:MMethod> */
+{ /* Inline model$MMethod$is_init (self) on <self:MMethod> */
 var3 = self->attrs[COLOR_nitc__model__MMethod___is_init].s; /* _is_init on <self:MMethod> */
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -87,11 +114,14 @@ RET_LABEL2:(void)0;
 }
 if (var1){
 {
-{ /* Inline model#MProperty#name (self) on <self:MMethod> */
+{ /* Inline model$MProperty$name (self) on <self:MMethod> */
 var7 = self->attrs[COLOR_nitc__model__MProperty___name].val; /* _name on <self:MMethod> */
 if (unlikely(var7 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1951);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 2047);
 fatal_exit(1);
 }
 var5 = var7;
@@ -102,88 +132,69 @@ if (likely(varonce!=NULL)) {
 var8 = varonce;
 } else {
 var9 = "init";
-var10 = core__flat___NativeString___to_s_full(var9, 4l, 4l);
+var11 = (val*)(4l<<2|1);
+var12 = (val*)(4l<<2|1);
+var13 = (val*)((long)(0)<<2|3);
+var14 = (val*)((long)(0)<<2|3);
+var10 = core__flat___CString___to_s_unsafe(var9, var11, var12, var13, var14);
 var8 = var10;
 varonce = var8;
 }
 {
-var11 = ((short int(*)(val* self, val* p0))(var5->class->vft[COLOR_core__kernel__Object___61d_61d]))(var5, var8); /* == on <var5:String>*/
+var15 = ((short int(*)(val* self, val* p0))(var5->class->vft[COLOR_core__kernel__Object___61d_61d]))(var5, var8); /* == on <var5:String>*/
 }
-var_ = var11;
-if (var11){
+var_ = var15;
+if (var15){
 var4 = var_;
 } else {
 {
-{ /* Inline model#MProperty#name (self) on <self:MMethod> */
-var14 = self->attrs[COLOR_nitc__model__MProperty___name].val; /* _name on <self:MMethod> */
-if (unlikely(var14 == NULL)) {
+{ /* Inline model$MProperty$name (self) on <self:MMethod> */
+var18 = self->attrs[COLOR_nitc__model__MProperty___name].val; /* _name on <self:MMethod> */
+if (unlikely(var18 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1951);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 2047);
 fatal_exit(1);
 }
-var12 = var14;
-RET_LABEL13:(void)0;
-}
-}
-if (likely(varonce15!=NULL)) {
-var16 = varonce15;
-} else {
-var17 = "new";
-var18 = core__flat___NativeString___to_s_full(var17, 3l, 3l);
 var16 = var18;
-varonce15 = var16;
+RET_LABEL17:(void)0;
+}
+}
+if (likely(varonce19!=NULL)) {
+var20 = varonce19;
+} else {
+var21 = "new";
+var23 = (val*)(3l<<2|1);
+var24 = (val*)(3l<<2|1);
+var25 = (val*)((long)(0)<<2|3);
+var26 = (val*)((long)(0)<<2|3);
+var22 = core__flat___CString___to_s_unsafe(var21, var23, var24, var25, var26);
+var20 = var22;
+varonce19 = var20;
 }
 {
-var19 = ((short int(*)(val* self, val* p0))(var12->class->vft[COLOR_core__kernel__Object___61d_61d]))(var12, var16); /* == on <var12:String>*/
+var27 = ((short int(*)(val* self, val* p0))(var16->class->vft[COLOR_core__kernel__Object___61d_61d]))(var16, var20); /* == on <var16:String>*/
 }
-var4 = var19;
+var4 = var27;
 }
 if (var4){
-if (unlikely(varonce20==NULL)) {
-var21 = NEW_core__NativeArray(2l, &type_core__NativeArray__core__String);
-if (likely(varonce22!=NULL)) {
-var23 = varonce22;
-} else {
-var24 = "new_";
-var25 = core__flat___NativeString___to_s_full(var24, 4l, 4l);
-var23 = var25;
-varonce22 = var23;
-}
-((struct instance_core__NativeArray*)var21)->values[0]=var23;
-} else {
-var21 = varonce20;
-varonce20 = NULL;
-}
-{
-var26 = ((val*(*)(val* self))(var_recv_mtype->class->vft[COLOR_nitc__nitni_base__MType__mangled_cname]))(var_recv_mtype); /* mangled_cname on <var_recv_mtype:MClassType>*/
-}
-((struct instance_core__NativeArray*)var21)->values[1]=var26;
-{
-var27 = ((val*(*)(val* self))(var21->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var21); /* native_to_s on <var21:NativeArray[String]>*/
-}
-varonce20 = var21;
-var_cname = var27;
-} else {
 if (unlikely(varonce28==NULL)) {
-var29 = NEW_core__NativeArray(4l, &type_core__NativeArray__core__String);
+var29 = NEW_core__NativeArray((int)2l, &type_core__NativeArray__core__String);
 if (likely(varonce30!=NULL)) {
 var31 = varonce30;
 } else {
 var32 = "new_";
-var33 = core__flat___NativeString___to_s_full(var32, 4l, 4l);
+var34 = (val*)(4l<<2|1);
+var35 = (val*)(4l<<2|1);
+var36 = (val*)((long)(0)<<2|3);
+var37 = (val*)((long)(0)<<2|3);
+var33 = core__flat___CString___to_s_unsafe(var32, var34, var35, var36, var37);
 var31 = var33;
 varonce30 = var31;
 }
 ((struct instance_core__NativeArray*)var29)->values[0]=var31;
-if (likely(varonce34!=NULL)) {
-var35 = varonce34;
-} else {
-var36 = "_";
-var37 = core__flat___NativeString___to_s_full(var36, 1l, 1l);
-var35 = var37;
-varonce34 = var35;
-}
-((struct instance_core__NativeArray*)var29)->values[2]=var35;
 } else {
 var29 = varonce28;
 varonce28 = NULL;
@@ -193,94 +204,69 @@ var38 = ((val*(*)(val* self))(var_recv_mtype->class->vft[COLOR_nitc__nitni_base_
 }
 ((struct instance_core__NativeArray*)var29)->values[1]=var38;
 {
-var39 = nitc__nitni_base___MMethod___short_cname(self);
-}
-((struct instance_core__NativeArray*)var29)->values[3]=var39;
-{
-var40 = ((val*(*)(val* self))(var29->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var29); /* native_to_s on <var29:NativeArray[String]>*/
+var39 = ((val*(*)(val* self))(var29->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var29); /* native_to_s on <var29:NativeArray[String]>*/
 }
 varonce28 = var29;
-var_cname = var40;
+var_cname = var39;
+} else {
+if (unlikely(varonce40==NULL)) {
+var41 = NEW_core__NativeArray((int)4l, &type_core__NativeArray__core__String);
+if (likely(varonce42!=NULL)) {
+var43 = varonce42;
+} else {
+var44 = "new_";
+var46 = (val*)(4l<<2|1);
+var47 = (val*)(4l<<2|1);
+var48 = (val*)((long)(0)<<2|3);
+var49 = (val*)((long)(0)<<2|3);
+var45 = core__flat___CString___to_s_unsafe(var44, var46, var47, var48, var49);
+var43 = var45;
+varonce42 = var43;
 }
+((struct instance_core__NativeArray*)var41)->values[0]=var43;
+if (likely(varonce50!=NULL)) {
+var51 = varonce50;
 } else {
-if (unlikely(varonce41==NULL)) {
-var42 = NEW_core__NativeArray(3l, &type_core__NativeArray__core__String);
-if (likely(varonce43!=NULL)) {
-var44 = varonce43;
-} else {
-var45 = "_";
-var46 = core__flat___NativeString___to_s_full(var45, 1l, 1l);
-var44 = var46;
-varonce43 = var44;
+var52 = "_";
+var54 = (val*)(1l<<2|1);
+var55 = (val*)(1l<<2|1);
+var56 = (val*)((long)(0)<<2|3);
+var57 = (val*)((long)(0)<<2|3);
+var53 = core__flat___CString___to_s_unsafe(var52, var54, var55, var56, var57);
+var51 = var53;
+varonce50 = var51;
 }
-((struct instance_core__NativeArray*)var42)->values[1]=var44;
+((struct instance_core__NativeArray*)var41)->values[2]=var51;
 } else {
-var42 = varonce41;
-varonce41 = NULL;
+var41 = varonce40;
+varonce40 = NULL;
 }
 {
-var47 = ((val*(*)(val* self))(var_recv_mtype->class->vft[COLOR_nitc__nitni_base__MType__mangled_cname]))(var_recv_mtype); /* mangled_cname on <var_recv_mtype:MClassType>*/
+var58 = ((val*(*)(val* self))(var_recv_mtype->class->vft[COLOR_nitc__nitni_base__MType__mangled_cname]))(var_recv_mtype); /* mangled_cname on <var_recv_mtype:MClassType>*/
 }
-((struct instance_core__NativeArray*)var42)->values[0]=var47;
+((struct instance_core__NativeArray*)var41)->values[1]=var58;
 {
-var48 = nitc__nitni_base___MMethod___short_cname(self);
+var59 = nitc__nitni_base___MMethod___short_cname(self);
 }
-((struct instance_core__NativeArray*)var42)->values[2]=var48;
+((struct instance_core__NativeArray*)var41)->values[3]=var59;
 {
-var49 = ((val*(*)(val* self))(var42->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var42); /* native_to_s on <var42:NativeArray[String]>*/
+var60 = ((val*(*)(val* self))(var41->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var41); /* native_to_s on <var41:NativeArray[String]>*/
 }
-varonce41 = var42;
-var_cname = var49;
+varonce40 = var41;
+var_cname = var60;
 }
-if (var_suffix == NULL) {
-var50 = 0; /* is null */
 } else {
-var50 = 1; /* arg is null and recv is not */
-}
-if (0) {
-{ /* Inline kernel#Object#!= (var_suffix,((val*)NULL)) on <var_suffix:nullable String> */
-var_other = ((val*)NULL);
-{
-var53 = ((short int(*)(val* self, val* p0))(var_suffix->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_suffix, var_other); /* == on <var_suffix:nullable String(String)>*/
-}
-var54 = !var53;
-var51 = var54;
-goto RET_LABEL52;
-RET_LABEL52:(void)0;
-}
-var50 = var51;
-}
-if (var50){
-if (unlikely(varonce55==NULL)) {
-var56 = NEW_core__NativeArray(2l, &type_core__NativeArray__core__String);
-} else {
-var56 = varonce55;
-varonce55 = NULL;
-}
-((struct instance_core__NativeArray*)var56)->values[0]=var_cname;
-((struct instance_core__NativeArray*)var56)->values[1]=var_suffix;
-{
-var57 = ((val*(*)(val* self))(var56->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var56); /* native_to_s on <var56:NativeArray[String]>*/
-}
-varonce55 = var56;
-var_cname = var57;
-} else {
-}
-{
-{ /* Inline nitni_utilities#SignatureLength#long (var_length) on <var_length:SignatureLength> */
-var60 = var_length->attrs[COLOR_nitc__nitni_utilities__SignatureLength___long].s; /* _long on <var_length:SignatureLength> */
-var58 = var60;
-RET_LABEL59:(void)0;
-}
-}
-if (var58){
 if (unlikely(varonce61==NULL)) {
-var62 = NEW_core__NativeArray(3l, &type_core__NativeArray__core__String);
+var62 = NEW_core__NativeArray((int)3l, &type_core__NativeArray__core__String);
 if (likely(varonce63!=NULL)) {
 var64 = varonce63;
 } else {
-var65 = "___";
-var66 = core__flat___NativeString___to_s_full(var65, 3l, 3l);
+var65 = "_";
+var67 = (val*)(1l<<2|1);
+var68 = (val*)(1l<<2|1);
+var69 = (val*)((long)(0)<<2|3);
+var70 = (val*)((long)(0)<<2|3);
+var66 = core__flat___CString___to_s_unsafe(var65, var67, var68, var69, var70);
 var64 = var66;
 varonce63 = var64;
 }
@@ -290,24 +276,90 @@ var62 = varonce61;
 varonce61 = NULL;
 }
 {
-{ /* Inline mmodule#MModule#name (var_from_mmodule) on <var_from_mmodule:MModule> */
-var69 = var_from_mmodule->attrs[COLOR_nitc__mmodule__MModule___name].val; /* _name on <var_from_mmodule:MModule> */
-if (unlikely(var69 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__mmodule, 95);
-fatal_exit(1);
+var71 = ((val*(*)(val* self))(var_recv_mtype->class->vft[COLOR_nitc__nitni_base__MType__mangled_cname]))(var_recv_mtype); /* mangled_cname on <var_recv_mtype:MClassType>*/
 }
-var67 = var69;
-RET_LABEL68:(void)0;
-}
-}
-((struct instance_core__NativeArray*)var62)->values[0]=var67;
-((struct instance_core__NativeArray*)var62)->values[2]=var_cname;
+((struct instance_core__NativeArray*)var62)->values[0]=var71;
 {
-var70 = ((val*(*)(val* self))(var62->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var62); /* native_to_s on <var62:NativeArray[String]>*/
+var72 = nitc__nitni_base___MMethod___short_cname(self);
+}
+((struct instance_core__NativeArray*)var62)->values[2]=var72;
+{
+var73 = ((val*(*)(val* self))(var62->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var62); /* native_to_s on <var62:NativeArray[String]>*/
 }
 varonce61 = var62;
-var_cname = var70;
+var_cname = var73;
+}
+if (var_suffix == NULL) {
+var74 = 0; /* is null */
+} else {
+var74 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel$Object$!= (var_suffix,((val*)NULL)) on <var_suffix:nullable String> */
+var_other = ((val*)NULL);
+{
+var77 = ((short int(*)(val* self, val* p0))(var_suffix->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_suffix, var_other); /* == on <var_suffix:nullable String(String)>*/
+}
+var78 = !var77;
+var75 = var78;
+goto RET_LABEL76;
+RET_LABEL76:(void)0;
+}
+var74 = var75;
+}
+if (var74){
+if (unlikely(varonce79==NULL)) {
+var80 = NEW_core__NativeArray((int)2l, &type_core__NativeArray__core__String);
+} else {
+var80 = varonce79;
+varonce79 = NULL;
+}
+((struct instance_core__NativeArray*)var80)->values[0]=var_cname;
+((struct instance_core__NativeArray*)var80)->values[1]=var_suffix;
+{
+var81 = ((val*(*)(val* self))(var80->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var80); /* native_to_s on <var80:NativeArray[String]>*/
+}
+varonce79 = var80;
+var_cname = var81;
+} else {
+}
+{
+{ /* Inline nitni_utilities$SignatureLength$long (var_length) on <var_length:SignatureLength> */
+var84 = var_length->attrs[COLOR_nitc__nitni_utilities__SignatureLength___long].s; /* _long on <var_length:SignatureLength> */
+var82 = var84;
+RET_LABEL83:(void)0;
+}
+}
+if (var82){
+if (unlikely(varonce85==NULL)) {
+var86 = NEW_core__NativeArray((int)3l, &type_core__NativeArray__core__String);
+if (likely(varonce87!=NULL)) {
+var88 = varonce87;
+} else {
+var89 = "___";
+var91 = (val*)(3l<<2|1);
+var92 = (val*)(3l<<2|1);
+var93 = (val*)((long)(0)<<2|3);
+var94 = (val*)((long)(0)<<2|3);
+var90 = core__flat___CString___to_s_unsafe(var89, var91, var92, var93, var94);
+var88 = var90;
+varonce87 = var88;
+}
+((struct instance_core__NativeArray*)var86)->values[1]=var88;
+} else {
+var86 = varonce85;
+varonce85 = NULL;
+}
+{
+var95 = nitc___nitc__MModule___nitc__model_base__MEntity__c_name(var_from_mmodule);
+}
+((struct instance_core__NativeArray*)var86)->values[0]=var95;
+((struct instance_core__NativeArray*)var86)->values[2]=var_cname;
+{
+var96 = ((val*(*)(val* self))(var86->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var86); /* native_to_s on <var86:NativeArray[String]>*/
+}
+varonce85 = var86;
+var_cname = var96;
 } else {
 }
 var = var_cname;
@@ -315,7 +367,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method nitni_utilities#MMethod#build_csignature for (self: MMethod, MClassType, MModule, nullable String, SignatureLength, CallContext): String */
+/* method nitni_utilities$MMethod$build_csignature for (self: MMethod, MClassType, MModule, nullable String, SignatureLength, CallContext): String */
 val* nitc__nitni_utilities___MMethod___build_csignature(val* self, val* p0, val* p1, val* p2, val* p3, val* p4) {
 val* var /* : String */;
 val* var_recv_mtype /* var recv_mtype: MClassType */;
@@ -350,65 +402,93 @@ val* var25 /* : MType */;
 val* var26 /* : String */;
 static val* varonce;
 val* var27 /* : String */;
-char* var28 /* : NativeString */;
+char* var28 /* : CString */;
 val* var29 /* : String */;
-val* var30 /* : String */;
+val* var30 /* : nullable Int */;
+val* var31 /* : nullable Int */;
+val* var32 /* : nullable Bool */;
+val* var33 /* : nullable Bool */;
+val* var34 /* : String */;
 val* var_cname /* var cname: String */;
-val* var31 /* : List[String] */;
+val* var35 /* : List[String] */;
 val* var_cparams /* var cparams: List[String] */;
-short int var33 /* : Bool */;
-short int var35 /* : Bool */;
-short int var36 /* : Bool */;
-val* var38 /* : NativeArray[String] */;
-static val* varonce37;
-static val* varonce39;
-val* var40 /* : String */;
-char* var41 /* : NativeString */;
-val* var42 /* : String */;
-val* var43 /* : String */;
+short int var37 /* : Bool */;
+short int var39 /* : Bool */;
+short int var40 /* : Bool */;
+val* var42 /* : NativeArray[String] */;
+static val* varonce41;
+static val* varonce43;
 val* var44 /* : String */;
-val* var45 /* : Array[MParameter] */;
-val* var47 /* : Array[MParameter] */;
+char* var45 /* : CString */;
+val* var46 /* : String */;
+val* var47 /* : nullable Int */;
+val* var48 /* : nullable Int */;
+val* var49 /* : nullable Bool */;
+val* var50 /* : nullable Bool */;
+val* var51 /* : String */;
+val* var52 /* : String */;
+val* var53 /* : Array[MParameter] */;
+val* var55 /* : Array[MParameter] */;
 val* var_ /* var : Array[MParameter] */;
-val* var48 /* : IndexedIterator[nullable Object] */;
-val* var_49 /* var : IndexedIterator[MParameter] */;
-short int var50 /* : Bool */;
-val* var51 /* : nullable Object */;
+val* var56 /* : IndexedIterator[nullable Object] */;
+val* var_57 /* var : IndexedIterator[MParameter] */;
+short int var58 /* : Bool */;
+val* var59 /* : nullable Object */;
 val* var_p /* var p: MParameter */;
-val* var52 /* : MType */;
-val* var54 /* : MType */;
-val* var55 /* : MType */;
+val* var60 /* : MType */;
+val* var62 /* : MType */;
+val* var63 /* : MType */;
 val* var_param_mtype /* var param_mtype: MType */;
-val* var57 /* : NativeArray[String] */;
-static val* varonce56;
-static val* varonce58;
-val* var59 /* : String */;
-char* var60 /* : NativeString */;
-val* var61 /* : String */;
-val* var62 /* : String */;
-val* var63 /* : String */;
-val* var65 /* : String */;
-val* var66 /* : String */;
-val* var68 /* : NativeArray[String] */;
-static val* varonce67;
-static val* varonce69;
-val* var70 /* : String */;
-char* var71 /* : NativeString */;
-val* var72 /* : String */;
-static val* varonce73;
+val* var65 /* : NativeArray[String] */;
+static val* varonce64;
+static val* varonce66;
+val* var67 /* : String */;
+char* var68 /* : CString */;
+val* var69 /* : String */;
+val* var70 /* : nullable Int */;
+val* var71 /* : nullable Int */;
+val* var72 /* : nullable Bool */;
+val* var73 /* : nullable Bool */;
 val* var74 /* : String */;
-char* var75 /* : NativeString */;
-val* var76 /* : String */;
-static val* varonce77;
+val* var75 /* : String */;
+val* var77 /* : String */;
 val* var78 /* : String */;
-char* var79 /* : NativeString */;
-val* var80 /* : String */;
+val* var80 /* : NativeArray[String] */;
+static val* varonce79;
 static val* varonce81;
 val* var82 /* : String */;
-char* var83 /* : NativeString */;
+char* var83 /* : CString */;
 val* var84 /* : String */;
-val* var85 /* : String */;
-val* var86 /* : String */;
+val* var85 /* : nullable Int */;
+val* var86 /* : nullable Int */;
+val* var87 /* : nullable Bool */;
+val* var88 /* : nullable Bool */;
+static val* varonce89;
+val* var90 /* : String */;
+char* var91 /* : CString */;
+val* var92 /* : String */;
+val* var93 /* : nullable Int */;
+val* var94 /* : nullable Int */;
+val* var95 /* : nullable Bool */;
+val* var96 /* : nullable Bool */;
+static val* varonce97;
+val* var98 /* : String */;
+char* var99 /* : CString */;
+val* var100 /* : String */;
+val* var101 /* : nullable Int */;
+val* var102 /* : nullable Int */;
+val* var103 /* : nullable Bool */;
+val* var104 /* : nullable Bool */;
+static val* varonce105;
+val* var106 /* : String */;
+char* var107 /* : CString */;
+val* var108 /* : String */;
+val* var109 /* : nullable Int */;
+val* var110 /* : nullable Int */;
+val* var111 /* : nullable Bool */;
+val* var112 /* : nullable Bool */;
+val* var113 /* : String */;
+val* var114 /* : String */;
 var_recv_mtype = p0;
 var_from_mmodule = p1;
 var_suffix = p2;
@@ -419,7 +499,7 @@ var1 = nitc___nitc__MProperty___lookup_first_definition(self, var_from_mmodule, 
 }
 var_mmethoddef = var1;
 {
-{ /* Inline model#MMethodDef#msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
+{ /* Inline model$MMethodDef$msignature (var_mmethoddef) on <var_mmethoddef:MMethodDef> */
 var4 = var_mmethoddef->attrs[COLOR_nitc__model__MMethodDef___msignature].val; /* _msignature on <var_mmethoddef:MMethodDef> */
 var2 = var4;
 RET_LABEL3:(void)0;
@@ -432,7 +512,7 @@ var5 = 0; /* is null */
 var5 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_signature,((val*)NULL)) on <var_signature:nullable MSignature> */
+{ /* Inline kernel$Object$!= (var_signature,((val*)NULL)) on <var_signature:nullable MSignature> */
 var_other = ((val*)NULL);
 {
 var8 = ((short int(*)(val* self, val* p0))(var_signature->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_signature, var_other); /* == on <var_signature:nullable MSignature(MSignature)>*/
@@ -445,12 +525,15 @@ RET_LABEL7:(void)0;
 var5 = var6;
 }
 if (unlikely(!var5)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__nitni_utilities, 58);
 fatal_exit(1);
 }
 {
-{ /* Inline model#MMethod#is_init (self) on <self:MMethod> */
+{ /* Inline model$MMethod$is_init (self) on <self:MMethod> */
 var12 = self->attrs[COLOR_nitc__model__MMethod___is_init].s; /* _is_init on <self:MMethod> */
 var10 = var12;
 RET_LABEL11:(void)0;
@@ -463,7 +546,7 @@ var13 = ((val*(*)(val* self, val* p0))(var_call_context->class->vft[COLOR_nitc__
 var_creturn_type = var13;
 } else {
 {
-{ /* Inline model#MSignature#return_mtype (var_signature) on <var_signature:nullable MSignature(MSignature)> */
+{ /* Inline model$MSignature$return_mtype (var_signature) on <var_signature:nullable MSignature(MSignature)> */
 var16 = var_signature->attrs[COLOR_nitc__model__MSignature___return_mtype].val; /* _return_mtype on <var_signature:nullable MSignature(MSignature)> */
 var14 = var16;
 RET_LABEL15:(void)0;
@@ -475,7 +558,7 @@ var17 = 0; /* is null */
 var17 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var14,((val*)NULL)) on <var14:nullable MType> */
+{ /* Inline kernel$Object$!= (var14,((val*)NULL)) on <var14:nullable MType> */
 var_other = ((val*)NULL);
 {
 var20 = ((short int(*)(val* self, val* p0))(var14->class->vft[COLOR_core__kernel__Object___61d_61d]))(var14, var_other); /* == on <var14:nullable MType(MType)>*/
@@ -489,7 +572,7 @@ var17 = var18;
 }
 if (var17){
 {
-{ /* Inline model#MSignature#return_mtype (var_signature) on <var_signature:nullable MSignature(MSignature)> */
+{ /* Inline model$MSignature$return_mtype (var_signature) on <var_signature:nullable MSignature(MSignature)> */
 var24 = var_signature->attrs[COLOR_nitc__model__MSignature___return_mtype].val; /* _return_mtype on <var_signature:nullable MSignature(MSignature)> */
 var22 = var24;
 RET_LABEL23:(void)0;
@@ -497,6 +580,9 @@ RET_LABEL23:(void)0;
 }
 var_ret_mtype = var22;
 if (var_ret_mtype == NULL) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_nitc__nitni_utilities, 65);
 fatal_exit(1);
@@ -513,7 +599,11 @@ if (likely(varonce!=NULL)) {
 var27 = varonce;
 } else {
 var28 = "void";
-var29 = core__flat___NativeString___to_s_full(var28, 4l, 4l);
+var30 = (val*)(4l<<2|1);
+var31 = (val*)(4l<<2|1);
+var32 = (val*)((long)(0)<<2|3);
+var33 = (val*)((long)(0)<<2|3);
+var29 = core__flat___CString___to_s_unsafe(var28, var30, var31, var32, var33);
 var27 = var29;
 varonce = var27;
 }
@@ -521,205 +611,238 @@ var_creturn_type = var27;
 }
 }
 {
-var30 = nitc__nitni_utilities___MMethod___build_cname(self, var_recv_mtype, var_from_mmodule, var_suffix, var_length);
+var34 = nitc__nitni_utilities___MMethod___build_cname(self, var_recv_mtype, var_from_mmodule, var_suffix, var_length);
 }
-var_cname = var30;
-var31 = NEW_core__List(&type_core__List__core__String);
+var_cname = var34;
+var35 = NEW_core__List(&type_core__List__core__String);
 {
-{ /* Inline list#List#init (var31) on <var31:List[String]> */
+{ /* Inline list$List$init (var35) on <var35:List[String]> */
 {
-((void(*)(val* self))(var31->class->vft[COLOR_core___core__List___core__kernel__Object__init]))(var31); /* init on <var31:List[String]>*/
+((void(*)(val* self))(var35->class->vft[COLOR_core___core__List___core__kernel__Object__init]))(var35); /* init on <var35:List[String]>*/
 }
-RET_LABEL32:(void)0;
+RET_LABEL36:(void)0;
 }
 }
-var_cparams = var31;
+var_cparams = var35;
 {
-{ /* Inline model#MMethod#is_init (self) on <self:MMethod> */
-var35 = self->attrs[COLOR_nitc__model__MMethod___is_init].s; /* _is_init on <self:MMethod> */
-var33 = var35;
-RET_LABEL34:(void)0;
+{ /* Inline model$MMethod$is_init (self) on <self:MMethod> */
+var39 = self->attrs[COLOR_nitc__model__MMethod___is_init].s; /* _is_init on <self:MMethod> */
+var37 = var39;
+RET_LABEL38:(void)0;
 }
 }
-var36 = !var33;
-if (var36){
-if (unlikely(varonce37==NULL)) {
-var38 = NEW_core__NativeArray(2l, &type_core__NativeArray__core__String);
-if (likely(varonce39!=NULL)) {
-var40 = varonce39;
+var40 = !var37;
+if (var40){
+if (unlikely(varonce41==NULL)) {
+var42 = NEW_core__NativeArray((int)2l, &type_core__NativeArray__core__String);
+if (likely(varonce43!=NULL)) {
+var44 = varonce43;
 } else {
-var41 = " self";
-var42 = core__flat___NativeString___to_s_full(var41, 5l, 5l);
-var40 = var42;
-varonce39 = var40;
+var45 = " self";
+var47 = (val*)(5l<<2|1);
+var48 = (val*)(5l<<2|1);
+var49 = (val*)((long)(0)<<2|3);
+var50 = (val*)((long)(0)<<2|3);
+var46 = core__flat___CString___to_s_unsafe(var45, var47, var48, var49, var50);
+var44 = var46;
+varonce43 = var44;
 }
-((struct instance_core__NativeArray*)var38)->values[1]=var40;
+((struct instance_core__NativeArray*)var42)->values[1]=var44;
 } else {
-var38 = varonce37;
-varonce37 = NULL;
+var42 = varonce41;
+varonce41 = NULL;
 }
 {
-var43 = ((val*(*)(val* self, val* p0))(var_call_context->class->vft[COLOR_nitc__nitni_utilities__CallContext__name_mtype]))(var_call_context, var_recv_mtype); /* name_mtype on <var_call_context:CallContext>*/
+var51 = ((val*(*)(val* self, val* p0))(var_call_context->class->vft[COLOR_nitc__nitni_utilities__CallContext__name_mtype]))(var_call_context, var_recv_mtype); /* name_mtype on <var_call_context:CallContext>*/
 }
-((struct instance_core__NativeArray*)var38)->values[0]=var43;
+((struct instance_core__NativeArray*)var42)->values[0]=var51;
 {
-var44 = ((val*(*)(val* self))(var38->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var38); /* native_to_s on <var38:NativeArray[String]>*/
+var52 = ((val*(*)(val* self))(var42->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var42); /* native_to_s on <var42:NativeArray[String]>*/
 }
-varonce37 = var38;
+varonce41 = var42;
 {
-core___core__Sequence___SimpleCollection__add(var_cparams, var44); /* Direct call abstract_collection#Sequence#add on <var_cparams:List[String]>*/
+core___core__Sequence___SimpleCollection__add(var_cparams, var52); /* Direct call abstract_collection$Sequence$add on <var_cparams:List[String]>*/
 }
 } else {
 }
 {
-{ /* Inline model#MSignature#mparameters (var_signature) on <var_signature:nullable MSignature(MSignature)> */
-var47 = var_signature->attrs[COLOR_nitc__model__MSignature___mparameters].val; /* _mparameters on <var_signature:nullable MSignature(MSignature)> */
-if (unlikely(var47 == NULL)) {
+{ /* Inline model$MSignature$mparameters (var_signature) on <var_signature:nullable MSignature(MSignature)> */
+var55 = var_signature->attrs[COLOR_nitc__model__MSignature___mparameters].val; /* _mparameters on <var_signature:nullable MSignature(MSignature)> */
+if (unlikely(var55 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mparameters");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1783);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1879);
 fatal_exit(1);
 }
-var45 = var47;
-RET_LABEL46:(void)0;
+var53 = var55;
+RET_LABEL54:(void)0;
 }
 }
-var_ = var45;
+var_ = var53;
 {
-var48 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
+var56 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
 }
-var_49 = var48;
+var_57 = var56;
 for(;;) {
 {
-var50 = ((short int(*)(val* self))((((long)var_49&3)?class_info[((long)var_49&3)]:var_49->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_49); /* is_ok on <var_49:IndexedIterator[MParameter]>*/
+var58 = ((short int(*)(val* self))((((long)var_57&3)?class_info[((long)var_57&3)]:var_57->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_57); /* is_ok on <var_57:IndexedIterator[MParameter]>*/
 }
-if (var50){
+if (var58){
 } else {
 goto BREAK_label;
 }
 {
-var51 = ((val*(*)(val* self))((((long)var_49&3)?class_info[((long)var_49&3)]:var_49->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_49); /* item on <var_49:IndexedIterator[MParameter]>*/
+var59 = ((val*(*)(val* self))((((long)var_57&3)?class_info[((long)var_57&3)]:var_57->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_57); /* item on <var_57:IndexedIterator[MParameter]>*/
 }
-var_p = var51;
+var_p = var59;
 {
-{ /* Inline model#MParameter#mtype (var_p) on <var_p:MParameter> */
-var54 = var_p->attrs[COLOR_nitc__model__MParameter___mtype].val; /* _mtype on <var_p:MParameter> */
-if (unlikely(var54 == NULL)) {
+{ /* Inline model$MParameter$mtype (var_p) on <var_p:MParameter> */
+var62 = var_p->attrs[COLOR_nitc__model__MParameter___mtype].val; /* _mtype on <var_p:MParameter> */
+if (unlikely(var62 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mtype");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1900);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1996);
 fatal_exit(1);
 }
-var52 = var54;
-RET_LABEL53:(void)0;
+var60 = var62;
+RET_LABEL61:(void)0;
 }
 }
 {
-var55 = ((val*(*)(val* self, val* p0, val* p1, val* p2, short int p3))(var52->class->vft[COLOR_nitc__model__MType__resolve_for]))(var52, var_recv_mtype, var_recv_mtype, var_from_mmodule, 1); /* resolve_for on <var52:MType>*/
+var63 = ((val*(*)(val* self, val* p0, val* p1, val* p2, short int p3))(var60->class->vft[COLOR_nitc__model__MType__resolve_for]))(var60, var_recv_mtype, var_recv_mtype, var_from_mmodule, 1); /* resolve_for on <var60:MType>*/
 }
-var_param_mtype = var55;
-if (unlikely(varonce56==NULL)) {
-var57 = NEW_core__NativeArray(3l, &type_core__NativeArray__core__String);
-if (likely(varonce58!=NULL)) {
-var59 = varonce58;
+var_param_mtype = var63;
+if (unlikely(varonce64==NULL)) {
+var65 = NEW_core__NativeArray((int)3l, &type_core__NativeArray__core__String);
+if (likely(varonce66!=NULL)) {
+var67 = varonce66;
 } else {
-var60 = " ";
-var61 = core__flat___NativeString___to_s_full(var60, 1l, 1l);
-var59 = var61;
-varonce58 = var59;
+var68 = " ";
+var70 = (val*)(1l<<2|1);
+var71 = (val*)(1l<<2|1);
+var72 = (val*)((long)(0)<<2|3);
+var73 = (val*)((long)(0)<<2|3);
+var69 = core__flat___CString___to_s_unsafe(var68, var70, var71, var72, var73);
+var67 = var69;
+varonce66 = var67;
 }
-((struct instance_core__NativeArray*)var57)->values[1]=var59;
+((struct instance_core__NativeArray*)var65)->values[1]=var67;
 } else {
-var57 = varonce56;
-varonce56 = NULL;
+var65 = varonce64;
+varonce64 = NULL;
 }
 {
-var62 = ((val*(*)(val* self, val* p0))(var_call_context->class->vft[COLOR_nitc__nitni_utilities__CallContext__name_mtype]))(var_call_context, var_param_mtype); /* name_mtype on <var_call_context:CallContext>*/
+var74 = ((val*(*)(val* self, val* p0))(var_call_context->class->vft[COLOR_nitc__nitni_utilities__CallContext__name_mtype]))(var_call_context, var_param_mtype); /* name_mtype on <var_call_context:CallContext>*/
 }
-((struct instance_core__NativeArray*)var57)->values[0]=var62;
+((struct instance_core__NativeArray*)var65)->values[0]=var74;
 {
-{ /* Inline model#MParameter#name (var_p) on <var_p:MParameter> */
-var65 = var_p->attrs[COLOR_nitc__model__MParameter___name].val; /* _name on <var_p:MParameter> */
-if (unlikely(var65 == NULL)) {
+{ /* Inline model$MParameter$name (var_p) on <var_p:MParameter> */
+var77 = var_p->attrs[COLOR_nitc__model__MParameter___name].val; /* _name on <var_p:MParameter> */
+if (unlikely(var77 == NULL)) {
+if(catchStack.cursor >= 0){
+longjmp(catchStack.envs[catchStack.cursor], 1);
+}
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
-PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1897);
+PRINT_ERROR(" (%s:%d)\n", FILE_nitc__model, 1993);
 fatal_exit(1);
 }
-var63 = var65;
-RET_LABEL64:(void)0;
+var75 = var77;
+RET_LABEL76:(void)0;
 }
 }
-((struct instance_core__NativeArray*)var57)->values[2]=var63;
+((struct instance_core__NativeArray*)var65)->values[2]=var75;
 {
-var66 = ((val*(*)(val* self))(var57->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var57); /* native_to_s on <var57:NativeArray[String]>*/
+var78 = ((val*(*)(val* self))(var65->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var65); /* native_to_s on <var65:NativeArray[String]>*/
 }
-varonce56 = var57;
+varonce64 = var65;
 {
-core___core__Sequence___SimpleCollection__add(var_cparams, var66); /* Direct call abstract_collection#Sequence#add on <var_cparams:List[String]>*/
+core___core__Sequence___SimpleCollection__add(var_cparams, var78); /* Direct call abstract_collection$Sequence$add on <var_cparams:List[String]>*/
 }
 {
-((void(*)(val* self))((((long)var_49&3)?class_info[((long)var_49&3)]:var_49->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_49); /* next on <var_49:IndexedIterator[MParameter]>*/
+((void(*)(val* self))((((long)var_57&3)?class_info[((long)var_57&3)]:var_57->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_57); /* next on <var_57:IndexedIterator[MParameter]>*/
 }
 }
 BREAK_label: (void)0;
 {
-((void(*)(val* self))((((long)var_49&3)?class_info[((long)var_49&3)]:var_49->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_49); /* finish on <var_49:IndexedIterator[MParameter]>*/
+((void(*)(val* self))((((long)var_57&3)?class_info[((long)var_57&3)]:var_57->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_57); /* finish on <var_57:IndexedIterator[MParameter]>*/
 }
-if (unlikely(varonce67==NULL)) {
-var68 = NEW_core__NativeArray(6l, &type_core__NativeArray__core__String);
-if (likely(varonce69!=NULL)) {
-var70 = varonce69;
-} else {
-var71 = " ";
-var72 = core__flat___NativeString___to_s_full(var71, 1l, 1l);
-var70 = var72;
-varonce69 = var70;
-}
-((struct instance_core__NativeArray*)var68)->values[1]=var70;
-if (likely(varonce73!=NULL)) {
-var74 = varonce73;
-} else {
-var75 = "( ";
-var76 = core__flat___NativeString___to_s_full(var75, 2l, 2l);
-var74 = var76;
-varonce73 = var74;
-}
-((struct instance_core__NativeArray*)var68)->values[3]=var74;
-if (likely(varonce77!=NULL)) {
-var78 = varonce77;
-} else {
-var79 = " )";
-var80 = core__flat___NativeString___to_s_full(var79, 2l, 2l);
-var78 = var80;
-varonce77 = var78;
-}
-((struct instance_core__NativeArray*)var68)->values[5]=var78;
-} else {
-var68 = varonce67;
-varonce67 = NULL;
-}
-((struct instance_core__NativeArray*)var68)->values[0]=var_creturn_type;
-((struct instance_core__NativeArray*)var68)->values[2]=var_cname;
+if (unlikely(varonce79==NULL)) {
+var80 = NEW_core__NativeArray((int)6l, &type_core__NativeArray__core__String);
 if (likely(varonce81!=NULL)) {
 var82 = varonce81;
 } else {
-var83 = ", ";
-var84 = core__flat___NativeString___to_s_full(var83, 2l, 2l);
+var83 = " ";
+var85 = (val*)(1l<<2|1);
+var86 = (val*)(1l<<2|1);
+var87 = (val*)((long)(0)<<2|3);
+var88 = (val*)((long)(0)<<2|3);
+var84 = core__flat___CString___to_s_unsafe(var83, var85, var86, var87, var88);
 var82 = var84;
 varonce81 = var82;
 }
-{
-var85 = core__abstract_text___Collection___join(var_cparams, var82);
+((struct instance_core__NativeArray*)var80)->values[1]=var82;
+if (likely(varonce89!=NULL)) {
+var90 = varonce89;
+} else {
+var91 = "( ";
+var93 = (val*)(2l<<2|1);
+var94 = (val*)(2l<<2|1);
+var95 = (val*)((long)(0)<<2|3);
+var96 = (val*)((long)(0)<<2|3);
+var92 = core__flat___CString___to_s_unsafe(var91, var93, var94, var95, var96);
+var90 = var92;
+varonce89 = var90;
 }
-((struct instance_core__NativeArray*)var68)->values[4]=var85;
-{
-var86 = ((val*(*)(val* self))(var68->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var68); /* native_to_s on <var68:NativeArray[String]>*/
+((struct instance_core__NativeArray*)var80)->values[3]=var90;
+if (likely(varonce97!=NULL)) {
+var98 = varonce97;
+} else {
+var99 = " )";
+var101 = (val*)(2l<<2|1);
+var102 = (val*)(2l<<2|1);
+var103 = (val*)((long)(0)<<2|3);
+var104 = (val*)((long)(0)<<2|3);
+var100 = core__flat___CString___to_s_unsafe(var99, var101, var102, var103, var104);
+var98 = var100;
+varonce97 = var98;
 }
-varonce67 = var68;
-var = var86;
+((struct instance_core__NativeArray*)var80)->values[5]=var98;
+} else {
+var80 = varonce79;
+varonce79 = NULL;
+}
+((struct instance_core__NativeArray*)var80)->values[0]=var_creturn_type;
+((struct instance_core__NativeArray*)var80)->values[2]=var_cname;
+if (likely(varonce105!=NULL)) {
+var106 = varonce105;
+} else {
+var107 = ", ";
+var109 = (val*)(2l<<2|1);
+var110 = (val*)(2l<<2|1);
+var111 = (val*)((long)(0)<<2|3);
+var112 = (val*)((long)(0)<<2|3);
+var108 = core__flat___CString___to_s_unsafe(var107, var109, var110, var111, var112);
+var106 = var108;
+varonce105 = var106;
+}
+{
+var113 = core__abstract_text___Collection___join(var_cparams, var106, ((val*)NULL));
+}
+((struct instance_core__NativeArray*)var80)->values[4]=var113;
+{
+var114 = ((val*(*)(val* self))(var80->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var80); /* native_to_s on <var80:NativeArray[String]>*/
+}
+varonce79 = var80;
+var = var114;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method nitni_utilities#CallContext#name_mtype for (self: CallContext, MType): String */
+/* method nitni_utilities$CallContext$name_mtype for (self: CallContext, MType): String */
 val* nitc___nitc__CallContext___name_mtype(val* self, val* p0) {
 val* var /* : String */;
 val* var_mtype /* var mtype: MType */;
@@ -733,7 +856,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method nitni_utilities#SignatureLength#long for (self: SignatureLength): Bool */
+/* method nitni_utilities$SignatureLength$long for (self: SignatureLength): Bool */
 short int nitc___nitc__SignatureLength___long(val* self) {
 short int var /* : Bool */;
 short int var1 /* : Bool */;
@@ -742,25 +865,25 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method nitni_utilities#SignatureLength#long= for (self: SignatureLength, Bool) */
+/* method nitni_utilities$SignatureLength$long= for (self: SignatureLength, Bool) */
 void nitc___nitc__SignatureLength___long_61d(val* self, short int p0) {
 self->attrs[COLOR_nitc__nitni_utilities__SignatureLength___long].s = p0; /* _long on <self:SignatureLength> */
 RET_LABEL:;
 }
-/* method nitni_utilities#SignatureLength#init for (self: SignatureLength) */
+/* method nitni_utilities$SignatureLength$init for (self: SignatureLength) */
 void nitc___nitc__SignatureLength___core__kernel__Object__init(val* self) {
 {
 ((void(*)(val* self))(self->class->vft[COLOR_nitc___nitc__SignatureLength___core__kernel__Object__init]))(self); /* init on <self:SignatureLength>*/
 }
 RET_LABEL:;
 }
-/* method nitni_utilities#Sys#internal_call_context for (self: Sys): CallContext */
+/* method nitni_utilities$Sys$internal_call_context for (self: Sys): CallContext */
 val* nitc__nitni_utilities___core__Sys___internal_call_context(val* self) {
 val* var /* : CallContext */;
 val* var1 /* : CallContext */;
 var1 = NEW_nitc__CallContext(&type_nitc__CallContext);
 {
-{ /* Inline kernel#Object#init (var1) on <var1:CallContext> */
+{ /* Inline kernel$Object$init (var1) on <var1:CallContext> */
 RET_LABEL2:(void)0;
 }
 }
@@ -769,7 +892,7 @@ goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method nitni_utilities#Sys#long_signature for (self: Sys): SignatureLength */
+/* method nitni_utilities$Sys$long_signature for (self: Sys): SignatureLength */
 val* nitc__nitni_utilities___core__Sys___long_signature(val* self) {
 val* var /* : SignatureLength */;
 static val* varonce;

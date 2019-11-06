@@ -89,6 +89,16 @@ class ParticleSystem
 	# Time-to-live of each particle
 	private var ttls = new Array[Float]
 
+	# Clear all particles
+	fun clear
+	do
+		centers.clear
+		ots.clear
+		scales.clear
+		ttls.clear
+		total_particles = 0
+	end
+
 	# Add a particle at `center` with `scale`, living for `ttl` from `time_offset`
 	#
 	# `time_offset` is added to the creation time, it can be used to delay the
@@ -252,13 +262,12 @@ class ParticleProgram
 		uniform bool use_texture;
 
 		// Texture to apply on this particle
-		uniform sampler2D texture;
+		uniform sampler2D texture0;
 
 		void main()
 		{
 			if (use_texture) {
-				gl_FragColor = texture2D(texture, gl_PointCoord) * v_color;
-				if (gl_FragColor.a <= 0.01) discard;
+				gl_FragColor = texture2D(texture0, gl_PointCoord) * v_color;
 			} else {
 				gl_FragColor = v_color;
 			}
@@ -272,7 +281,7 @@ class ParticleProgram
 	var use_texture = uniforms["use_texture"].as(UniformBool) is lazy
 
 	# Visible texture unit
-	var texture = uniforms["texture"].as(UniformSampler2D) is lazy
+	var texture = uniforms["texture0"].as(UniformSampler2D) is lazy
 
 	# Color tint per vertex
 	var color = attributes["color"].as(AttributeVec4) is lazy
@@ -301,7 +310,7 @@ class ExplosionProgram
 		gl_Position = center * mvp;
 		gl_PointSize = scale / gl_Position.z * pt;
 
-		if (pt > 0.8) v_color.a = (1.0-pt)/0.2;
+		if (pt > 0.8) v_color *= (1.0-pt)/0.2;
 	"""
 end
 
@@ -318,8 +327,8 @@ class SmokeProgram
 		gl_PointSize = scale / gl_Position.z * (pt+0.1);
 
 		if (pt < 0.1)
-			v_color.a = pt / 0.1;
+			v_color *= pt / 0.1;
 		else
-			v_color.a = 1.0 - pt*0.9;
+			v_color *= 1.0 - pt*0.9;
 	"""
 end

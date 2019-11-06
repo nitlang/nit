@@ -13,6 +13,10 @@ index:
 	./bench_strings.sh index 10000000 50 25 200
 
 check: basic
+	./bench_strings.sh concat 10000 15 10 2 20
+	./bench_strings.sh substring 25000 50 25 200
+	./bench_strings.sh iteration 10000 10 10 100
+	./bench_strings.sh index 100000 50 25 200
 
 basic:
 	./bench_strings.sh basic

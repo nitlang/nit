@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-fun print_cstring(cstr: NativeString) `{
+fun print_cstring(cstr: CString) `{
 	printf("cstr-> %s\n", cstr);
 `}
 
-fun get_cstring: NativeString `{
+fun get_cstring: CString `{
 	return "char* from C";
 `}
 
@@ -26,8 +26,8 @@ fun print_string(str: String) import String.to_cstring `{
 	printf("str-> %s\n", String_to_cstring(str) );
 `}
 
-fun get_string: String import NativeString.to_s, String.output `{
-	String str = NativeString_to_s("Nit string from C");
+fun get_string: String import CString.to_s, String.output `{
+	String str = CString_to_s("Nit string from C");
 	String_output(str);
 	printf("\n");
 	return str;

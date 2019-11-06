@@ -1,0 +1,54 @@
+<h4>Grade this entity</h4>
+
+<div class='container-fluid'>
+	<div class='col-xs-8'>
+		<dl class='dl-horizontal'>
+			<dt>Feature</dt>
+			<dd>
+				<entity-stars mentity='mentity' dimension='feature' mean='ratings.feature.mean' list='ratings.feature.ratings' user='ratings.feature.user' ratings='ratings' />
+				<p class='text-muted'><i>This entity is useful, usable and has a good API. It helps me getting things done.</i></p>
+			</dd>
+			<dt>Documentation</dt>
+			<dd>
+				<entity-stars mentity='mentity' dimension='doc' mean='ratings.doc.mean' list='ratings.doc.ratings' user='ratings.doc.user' ratings='ratings' />
+				<p class='text-muted'><i>This entity is well documented, the explanations are clear and useful. They help me understand the feature and how to use it.</i></p>
+			</dd>
+			<dt>Examples</dt>
+			<dd>
+				<entity-stars mentity='mentity' dimension='examples' mean='ratings.examples.mean' list='ratings.examples.ratings' user='ratings.examples.user' ratings='ratings' />
+				<p class='text-muted'><i>This entity is provided with examples, they are runnable and free of bugs. They help me understand the feature behavior and how to use it.</i></p>
+			</dd>
+			<dt>Code</dt>
+			<dd>
+				<entity-stars mentity='mentity' dimension='code' mean='ratings.code.mean' list='ratings.code.ratings' user='ratings.code.user' ratings='ratings' />
+				<p class='text-muted'><i>This entity is well coded and respects the Nit standards.</i></p>
+			</dd>
+		</dl>
+	</div>
+	<div class='col-xs-4'>
+		<h1 class='text-center'>
+			<span class='text-danger'>{{ratings.feature.mean + ratings.doc.mean + ratings.examples.mean + ratings.code.mean | number: 1}} / 20</span><br><small>{{ratings.ratings.length}} votes</small>
+		</h1>
+	</div>
+</div>
+
+<h4>History</h4>
+
+<table class='table'>
+	<tr ng-repeat='rating in ratings.ratings | orderBy: "-timestamp"'>
+		<td>{{rating.timestamp * 1000 | date: 'yy/MM/dd hh:mm a'}}</td>
+		<td>
+			<i>{{rating.user ? rating.user : "anon"}}<i>
+		</td>
+		<td>
+			rated the <b>{{rating.dimension}}</b>
+		</td>
+		<td>
+			<span class='stars' ng-repeat='star in [1, 2, 3, 4, 5]'>
+				<span
+					class='star glyphicon'
+					ng-class='star <= rating.rating? "glyphicon-star": "glyphicon-star-empty"' />
+			</span>
+		</td>
+	</tr>
+</table>

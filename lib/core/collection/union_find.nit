@@ -13,7 +13,8 @@ module union_find
 
 import hash_collection
 
-# Data structure to keeps track of elements partitioned into disjoint subsets
+# Data structure to keep track of elements partitioned into disjoint subsets
+#
 #     var s = new DisjointSet[Int]
 #     s.add(1)
 #     s.add(2)
@@ -21,15 +22,15 @@ import hash_collection
 #     s.union(1,2)
 #     assert s.in_same_subset(1,2)
 #
-# `in_same_subset` is transitive, reflexive and symetric
+# `in_same_subset` is transitive, reflexive and symmetric
 #
 #     s.add(3)
 #     assert not s.in_same_subset(1,3)
 #     s.union(3,2)
 #     assert s.in_same_subset(1,3)
 #
-# Unkike theorical Disjoint-set data structures, the underling implementation is opaque
-# that makes the traditionnal `find` method unavailable for clients.
+# Unlike theoretical Disjoint-set data structures, the underling implementation is opaque
+# making the traditional `find` method unavailable for clients.
 # The methods `in_same_subset`, `to_partitions`, and their variations are offered instead.
 class DisjointSet[E]
 	super SimpleCollection[E]
@@ -139,6 +140,7 @@ class DisjointSet[E]
 	end
 
 	# Are all elements of `es` in the same subset?
+	#
 	#     var s = new DisjointSet[Int]
 	#     s.add_all([1,2,3,4,5,6])
 	#     s.union_all([1,2,3])
@@ -170,7 +172,7 @@ class DisjointSet[E]
 		return to_subpartition(self)
 	end
 
-	# Construct a partitionning on `es`, a subset of elements
+	# Construct a partitioning on `es`, a subset of elements
 	#
 	#     var s = new DisjointSet[Int]
 	#     s.add_all([1,2,3,4,5,6])
@@ -235,7 +237,7 @@ private class DisjointSetNode
 	# If parent == self then the node is a root
 	var parent: DisjointSetNode = self
 
-	# The rank to no desequilibrate the structure.
+	# The rank to keep the structure balanced.
 	# The term rank is used instead of depth since
 	# path compression is used, see `DisjointSet::nfind`
 	var rank = 0

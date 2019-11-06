@@ -36,17 +36,17 @@ private class TypeVisitor
 
 	# The module of the analysis
 	# Used to correctly query the model
-	var mmodule: MModule
+	var mmodule: MModule is noinit
 
 	# The static type of the receiver
 	# Mainly used for type tests and type resolutions
-	var anchor: nullable MClassType = null
+	var anchor: MClassType is noinit
 
 	# The analyzed mclassdef
-	var mclassdef: nullable MClassDef = null
+	var mclassdef: MClassDef is noinit
 
 	# The analyzed property
-	var mpropdef: nullable MPropDef
+	var mpropdef: MPropDef
 
 	var selfvariable = new Variable("self")
 
@@ -59,33 +59,25 @@ private class TypeVisitor
 	init
 	do
 		var mpropdef = self.mpropdef
+		var mclassdef = mpropdef.mclassdef
+		mmodule = mclassdef.mmodule
+		self.mclassdef = mclassdef
+		self.anchor = mclassdef.bound_mtype
 
-		if mpropdef != null then
-			self.mpropdef = mpropdef
-			var mclassdef = mpropdef.mclassdef
-			self.mclassdef = mclassdef
-			self.anchor = mclassdef.bound_mtype
+		var mclass = mclassdef.mclass
 
-			var mclass = mclassdef.mclass
+		var selfvariable = new Variable("self")
+		self.selfvariable = selfvariable
+		selfvariable.declared_type = mclass.mclass_type
 
-			var selfvariable = new Variable("self")
-			self.selfvariable = selfvariable
-			selfvariable.declared_type = mclass.mclass_type
-
-			var mprop = mpropdef.mproperty
-			if mprop isa MMethod and mprop.is_new then
-				is_toplevel_context = true
-			end
+		var mprop = mpropdef.mproperty
+		if mprop isa MMethod and mprop.is_new then
+			is_toplevel_context = true
 		end
 	end
 
 	fun anchor_to(mtype: MType): MType
 	do
-		var anchor = anchor
-		if anchor == null then
-			assert not mtype.need_anchor
-			return mtype
-		end
 		return mtype.anchor_to(mmodule, anchor)
 	end
 
@@ -102,9 +94,9 @@ private class TypeVisitor
 	end
 
 	# Check that `sub` is a subtype of `sup`.
-	# If `sub` is not a valid suptype, then display an error on `node` an return null.
-	# If `sub` is a safe subtype of `sup` then return `sub`.
-	# If `sub` is an unsafe subtype (ie an implicit cast is required), then return `sup`.
+	# If `sub` is not a valid suptype, then display an error on `node` and return `null`.
+	# If `sub` is a safe subtype of `sup`, then return `sub`.
+	# If `sub` is an unsafe subtype (i.e., an implicit cast is required), then return `sup`.
 	#
 	# The point of the return type is to determinate the usable type on an expression when `autocast` is true:
 	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
@@ -117,7 +109,7 @@ private class TypeVisitor
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
 		end
-		if sup isa MBottomType then return null # Skip error
+		if sup isa MErrorType then return null # Skip error
 		if sub.need_anchor then
 			var u = anchor_to(sub)
 			self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}: {u}`.")
@@ -188,7 +180,6 @@ private class TypeVisitor
 	do
 		return self.visit_expr_subtype(nexpr, self.type_bool(nexpr))
 	end
-
 
 	fun check_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
@@ -283,7 +274,7 @@ private class TypeVisitor
 
 	fun resolve_mtype(node: AType): nullable MType
 	do
-		return self.modelbuilder.resolve_mtype(mmodule, mclassdef, node)
+		return self.modelbuilder.resolve_mtype(mclassdef, node)
 	end
 
 	fun try_get_mclass(node: ANode, name: String): nullable MClass
@@ -305,7 +296,13 @@ private class TypeVisitor
 		return mclass.mclass_type
 	end
 
-	fun get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
+	# Construction of a specific callsite according to the current context.
+	# Three entry points exist to create a callsite based on knowledge.
+	# The `build_callsite_by_name` is a top entry point, the method find the mpropdefs to call by the name of this.
+	# see `build_callsite_by_property` and `build_callsite_by_propdef` for more detail.
+	# If you already know the mpropdef to call use directly the `get_method_by_propdef` method
+	# If you just know the mproperty use the `build_callsite_by_property` method to display error if no `mpropdef` is found in the context
+	fun build_callsite_by_name(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
 		var unsafe_type = self.anchor_to(recvtype)
 
@@ -339,23 +336,37 @@ private class TypeVisitor
 
 		assert mproperty isa MMethod
 
+		return build_callsite_by_property(node, recvtype, mproperty, recv_is_self)
+	end
+
+	# The `build_callsite_by_property` finds the mpropdefs to call by the `MMethod`.
+	# If the mpropdef is found in the context it builds a new `Callsite`.
+	fun build_callsite_by_property(node: ANode, recvtype: MType, mproperty: MMethod, recv_is_self: Bool): nullable CallSite
+	do
+		var unsafe_type = self.anchor_to(recvtype)
+
+		if recvtype isa MNullType then
+			var objclass = get_mclass(node, "Object")
+			if objclass == null then return null # Forward error
+			unsafe_type = objclass.mclass_type
+		end
 		# `null` only accepts some methods of object.
 		if recvtype isa MNullType and not mproperty.is_null_safe then
-			self.error(node, "Error: method `{name}` called on `null`.")
+			self.error(node, "Error: method `{mproperty.name}` called on `null`.")
 			return null
 		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
 			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
 		end
 
 		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel then
-			error(node, "Error: `{name}` is not a top-level method, thus need a receiver.")
+			error(node, "Error: `{mproperty.name}` is not a top-level method, thus need a receiver.")
 		end
 		if not recv_is_self and mproperty.is_toplevel then
-			error(node, "Error: cannot call `{name}`, a top-level method, with a receiver.")
+			error(node, "Error: cannot call `{mproperty.name}`, a top-level method, with a receiver.")
 		end
 
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
-			self.modelbuilder.error(node, "Error: method `{name}` is protected and can only accessed by `self`.")
+			self.modelbuilder.error(node, "Error: method `{mproperty.name}` is protected and can only accessed by `self`.")
 			return null
 		end
 
@@ -363,25 +374,31 @@ private class TypeVisitor
 		if info != null and self.mpropdef.mproperty.deprecation == null then
 			var mdoc = info.mdoc
 			if mdoc != null then
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{name}` is deprecated: {mdoc.content.first}")
+				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated: {mdoc.content.first}")
 			else
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{name}` is deprecated.")
+				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated.")
 			end
 		end
 
 		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
 		var mpropdef
 		if propdefs.length == 0 then
-			self.modelbuilder.error(node, "Type Error: no definition found for property `{name}` in `{unsafe_type}`.")
-			return null
+			self.modelbuilder.error(node, "Type Error: no definition found for property `{mproperty.name}` in `{unsafe_type}`.")
+			abort
+			#return null
 		else if propdefs.length == 1 then
 			mpropdef = propdefs.first
 		else
-			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{name}` in `{unsafe_type}`: {propdefs.join(" ")}")
+			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
 			mpropdef = mproperty.intro
 		end
 
+		return build_callsite_by_propdef(node, recvtype, mpropdef, recv_is_self)
+	end
 
+	# The `build_callsite_by_propdef` builds the callsite directly with the `mprodef` passed in argument.
+	fun build_callsite_by_propdef(node: ANode, recvtype: MType, mpropdef: MMethodDef, recv_is_self: Bool): nullable CallSite
+	do
 		var msignature = mpropdef.msignature
 		if msignature == null then return null # skip error
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
@@ -398,18 +415,17 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mpropdef.mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
-	fun try_get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
+	fun try_build_callsite_by_name(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
 		var unsafe_type = self.anchor_to(recvtype)
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if mproperty == null then return null
-		return get_method(node, recvtype, name, recv_is_self)
+		return build_callsite_by_name(node, recvtype, name, recv_is_self)
 	end
-
 
 	# Visit the expressions of args and check their conformity with the corresponding type in signature
 	# The point of this method is to handle varargs correctly
@@ -430,7 +446,6 @@ private class TypeVisitor
 			end
 			# Other cases are managed later
 		end
-
 
 		#debug("CALL {unsafe_type}.{msignature}")
 
@@ -584,7 +599,16 @@ private class TypeVisitor
 				return mtypes.first
 			else
 				var res = merge_types(node,mtypes)
-				if res == null then res = variable.declared_type
+				if res == null then
+					res = variable.declared_type
+					# Try to fallback to a non-null version
+					if res != null and can_be_null(res) then do
+						for t in mtypes do
+							if t != null and can_be_null(t) then break label
+						end
+						res = res.as_notnull
+					end label
+				end
 				return res
 			end
 		end
@@ -604,6 +628,29 @@ private class TypeVisitor
 		flow.set_var(self, variable, mtype)
 	end
 
+	# Find the exact representable most specific common super-type in `col`.
+	#
+	# Try to find the most specific common type that is a super-type of each types
+	# in `col`.
+	# In most cases, the result is simply the most general type in `col`.
+	# If nullables types are involved, then the nullable information is correctly preserved.
+	# If incomparable super-types exists in `col`, them no solution is given and the `null`
+	# value is returned (since union types are non representable in Nit)
+	#
+	# The `null` values in `col` are ignored, nulltypes (MNullType) are considered.
+	#
+	# Returns the `null` value if:
+	#
+	# * `col` is empty
+	# * `col` only have null values
+	# * there is a conflict
+	#
+	# Example (with a diamond A,B,C,D):
+	#
+	# * merge(A,B,C) -> A, because A is the most general type in {A,B,C}
+	# * merge(C,B) -> null, there is conflict, because `B or C` cannot be represented
+	# * merge(A,nullable B) -> nullable A, because A is the most general type and
+	#   the nullable information is preserved
 	fun merge_types(node: ANode, col: Array[nullable MType]): nullable MType
 	do
 		if col.length == 1 then return col.first
@@ -625,6 +672,82 @@ private class TypeVisitor
 		#self.modelbuilder.warning(node, "Type Error: {col.length} conflicting types: <{col.join(", ")}>")
 		return null
 	end
+
+	# Find a most general common subtype between `type1` and `type2`.
+	#
+	# Find the most general type that is a subtype of `type2` and, if possible, a subtype of `type1`.
+	# Basically, this return the most specific type between `type1` and `type2`.
+	# If nullable types are involved, the information is correctly preserved.
+	# If `type1` and `type2` are incomparable then `type2` is preferred (since intersection types
+	# are not representable in Nit).
+	#
+	# The `null` value is returned if both `type1` and `type2` are null.
+	#
+	# Examples (with diamond A,B,C,D):
+	#
+	# * intersect_types(A,B) -> B, because B is a subtype of A
+	# * intersect_types(B,A) -> B, because B is a subtype of A
+	# * intersect_types(B,C) -> C, B and C are incomparable,
+	#   `type2` is then preferred (`B and C` cannot be represented)
+	# * intersect_types(nullable B,A) -> B, because B<:A and the non-null information is preserved
+	# * intersect_types(B,nullable C) -> C, `type2` is preferred and the non-null information is preserved
+	fun intersect_types(node: ANode, type1, type2: nullable MType): nullable MType
+	do
+		if type1 == null then return type2
+		if type2 == null then return type1
+
+		if not can_be_null(type2) or not can_be_null(type1) then
+			type1 = type1.as_notnull
+			type2 = type2.as_notnull
+		end
+
+		var res
+		if is_subtype(type1, type2) then
+			res = type1
+		else
+			res = type2
+		end
+		return res
+	end
+
+	# Find a most general type that is a subtype of `type1` but not one of `type2`.
+	#
+	# Basically, this returns `type1`-`type2` but since there is no substraction type
+	# in Nit this just returns `type1` most of the case.
+	#
+	# The few other cases are if `type2` is a super-type and if some nullable information
+	# is present.
+	#
+	# The `null` value is returned if `type1` is null.
+	#
+	# Examples (with diamond A,B,C,D):
+	#
+	# * diff_types(A,B) -> A, because the notB cannot be represented
+	# * diff_types(B,A) -> None (absurd type), because B<:A
+	# * diff_types(nullable A, nullable B) -> A, because null is removed
+	# * diff_types(nullable B, A) -> Null, because anything but null is removed
+	fun diff_types(node: ANode, type1, type2: nullable MType): nullable MType
+	do
+		if type1 == null then return null
+		if type2 == null then return type1
+
+		# if t1 <: t2 then t1-t2 = bottom
+		if is_subtype(type1, type2) then
+			return modelbuilder.model.null_type.as_notnull
+		end
+
+		# else if t1 <: nullable t2 then t1-t2 = nulltype
+		if is_subtype(type1, type2.as_nullable) then
+			return modelbuilder.model.null_type
+		end
+
+		# else t2 can be null and type2 must accept null then null is excluded in t1
+		if can_be_null(type1) and (type2 isa MNullableType or type2 isa MNullType) then
+			return type1.as_notnull
+		end
+
+		return type1
+	end
 end
 
 # Mapping between parameters and arguments in a call.
@@ -641,7 +764,7 @@ end
 class CallSite
 	super MEntity
 
-	redef var location: Location
+	redef var location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
@@ -681,11 +804,18 @@ class CallSite
 		if map == null then is_broken = true
 		return map == null
 	end
+
+	# Information about the callsite to display on a node
+	fun dump_info(v: ASTDump): String do
+		return "{recv}.{mpropdef}{msignature}"
+	end
+
+	redef fun mdoc_or_fallback do return mproperty.intro.mdoc
 end
 
 redef class Variable
 	# The declared type of the variable
-	var declared_type: nullable MType is writable
+	var declared_type: nullable MType = null is writable
 
 	# Was the variable type-adapted?
 	# This is used to speedup type retrieval while it remains `false`
@@ -758,7 +888,7 @@ redef class AMethPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # skip error
 
-		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var mmethoddef = self.mpropdef.as(not null)
@@ -825,7 +955,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mreadpropdef
 		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
-		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
+		var v = new TypeVisitor(modelbuilder, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
@@ -884,6 +1014,19 @@ redef class AExpr
 	#
 	# This attribute is meaning less on expressions not used as attributes.
 	var vararg_decl: Int = 0
+
+	redef fun dump_info(v) do
+		var res = super
+		var mtype = self.mtype
+		if mtype != null then
+			res += v.yellow(":{mtype}")
+		end
+		var ict = self.implicit_cast_to
+		if ict != null then
+			res += v.yellow("(.as({ict}))")
+		end
+		return res
+	end
 end
 
 redef class ABlockExpr
@@ -997,7 +1140,7 @@ redef class AReassignFormExpr
 
 		self.read_type = readtype
 
-		var callsite = v.get_method(self.n_assign_op, readtype, reassign_name, false)
+		var callsite = v.build_callsite_by_name(self.n_assign_op, readtype, reassign_name, false)
 		if callsite == null then return null # Skip error
 		self.reassign_callsite = callsite
 
@@ -1034,7 +1177,6 @@ redef class AVarReassignExpr
 		self.is_typed = rettype != null
 	end
 end
-
 
 redef class AContinueExpr
 	redef fun accept_typing(v)
@@ -1202,7 +1344,7 @@ redef class AForGroup
 		if objcla == null then return
 
 		# check iterator method
-		var itdef = v.get_method(self, mtype, "iterator", n_expr isa ASelfExpr)
+		var itdef = v.build_callsite_by_name(self, mtype, "iterator", n_expr isa ASelfExpr)
 		if itdef == null then
 			v.error(self, "Type Error: `for` expects a type providing an `iterator` method, got `{mtype}`.")
 			return
@@ -1259,31 +1401,31 @@ redef class AForGroup
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
-		var ikdef = v.get_method(self, ittype, "is_ok", false)
+		var ikdef = v.build_callsite_by_name(self, ittype, "is_ok", false)
 		if ikdef == null then
 			v.error(self, "Type Error: `for` expects a method `is_ok` in type `{ittype}`.")
 			return
 		end
 		self.method_is_ok = ikdef
 
-		var itemdef = v.get_method(self, ittype, "item", false)
+		var itemdef = v.build_callsite_by_name(self, ittype, "item", false)
 		if itemdef == null then
 			v.error(self, "Type Error: `for` expects a method `item` in type `{ittype}`.")
 			return
 		end
 		self.method_item = itemdef
 
-		var nextdef = v.get_method(self, ittype, "next", false)
+		var nextdef = v.build_callsite_by_name(self, ittype, "next", false)
 		if nextdef == null then
 			v.error(self, "Type Error: `for` expects a method `next` in type {ittype}.")
 			return
 		end
 		self.method_next = nextdef
 
-		self.method_finish = v.try_get_method(self, ittype, "finish", false)
+		self.method_finish = v.try_build_callsite_by_name(self, ittype, "finish", false)
 
 		if is_map then
-			var keydef = v.get_method(self, ittype, "key", false)
+			var keydef = v.build_callsite_by_name(self, ittype, "key", false)
 			if keydef == null then
 				v.error(self, "Type Error: `for` expects a method `key` in type `{ittype}`.")
 				return
@@ -1296,12 +1438,12 @@ redef class AForGroup
 			var vtype = variable.declared_type.as(not null)
 
 			if n_expr isa AOrangeExpr then
-				self.method_lt = v.get_method(self, vtype, "<", false)
+				self.method_lt = v.build_callsite_by_name(self, vtype, "<", false)
 			else
-				self.method_lt = v.get_method(self, vtype, "<=", false)
+				self.method_lt = v.build_callsite_by_name(self, vtype, "<=", false)
 			end
 
-			self.method_successor = v.get_method(self, vtype, "successor", false)
+			self.method_successor = v.build_callsite_by_name(self, vtype, "successor", false)
 		end
 	end
 end
@@ -1315,8 +1457,8 @@ redef class AWithExpr
 		var mtype = v.visit_expr(n_expr)
 		if mtype == null then return
 
-		method_start = v.get_method(self, mtype, "start", n_expr isa ASelfExpr)
-		method_finish = v.get_method(self, mtype, "finish", n_expr isa ASelfExpr)
+		method_start = v.build_callsite_by_name(self, mtype, "start", n_expr isa ASelfExpr)
+		method_finish = v.build_callsite_by_name(self, mtype, "finish", n_expr isa ASelfExpr)
 
 		v.visit_stmt(n_block)
 		self.mtype = n_block.mtype
@@ -1360,7 +1502,6 @@ redef class AAndExpr
 		self.mtype = v.type_bool(self)
 	end
 end
-
 
 redef class ANotExpr
 	redef fun accept_typing(v)
@@ -1461,9 +1602,7 @@ end
 redef class ACharExpr
 	redef fun accept_typing(v) do
 		var mclass: nullable MClass = null
-		if is_ascii then
-			mclass = v.get_mclass(self, "Byte")
-		else if is_code_point then
+		if is_code_point then
 			mclass = v.get_mclass(self, "Int")
 		else
 			mclass = v.get_mclass(self, "Char")
@@ -1484,17 +1623,17 @@ redef class AugmentedStringFormExpr
 	var newline: nullable CallSite = null
 	# Regex::extended, used for suffix `b` on `re`
 	var extended: nullable CallSite = null
-	# NativeString::to_bytes_with_copy, used for prefix `b`
+	# CString::to_bytes_with_copy, used for prefix `b`
 	var to_bytes_with_copy: nullable CallSite = null
 
 	redef fun accept_typing(v) do
 		var mclass = v.get_mclass(self, "String")
 		if mclass == null then return # Forward error
 		if is_bytestring then
-			to_bytes_with_copy = v.get_method(self, v.mmodule.native_string_type, "to_bytes_with_copy", false)
+			to_bytes_with_copy = v.build_callsite_by_name(self, v.mmodule.c_string_type, "to_bytes_with_copy", false)
 			mclass = v.get_mclass(self, "Bytes")
 		else if is_re then
-			to_re = v.get_method(self, mclass.mclass_type, "to_re", false)
+			to_re = v.build_callsite_by_name(self, mclass.mclass_type, "to_re", false)
 			for i in suffix.chars do
 				mclass = v.get_mclass(self, "Regex")
 				if mclass == null then
@@ -1504,13 +1643,13 @@ redef class AugmentedStringFormExpr
 				var service = ""
 				if i == 'i' then
 					service = "ignore_case="
-					ignore_case = v.get_method(self, mclass.mclass_type, service, false)
+					ignore_case = v.build_callsite_by_name(self, mclass.mclass_type, service, false)
 				else if i == 'm' then
 					service = "newline="
-					newline = v.get_method(self, mclass.mclass_type, service, false)
+					newline = v.build_callsite_by_name(self, mclass.mclass_type, service, false)
 				else if i == 'b' then
 					service = "extended="
-					extended = v.get_method(self, mclass.mclass_type, service, false)
+					extended = v.build_callsite_by_name(self, mclass.mclass_type, service, false)
 				else
 					v.error(self, "Type Error: Unrecognized suffix {i} in prefixed Regex")
 					abort
@@ -1604,8 +1743,8 @@ redef class AArrayExpr
 		if mclass == null then return # Forward error
 		var array_mtype = mclass.get_mtype([mtype])
 
-		with_capacity_callsite = v.get_method(self, array_mtype, "with_capacity", false)
-		push_callsite = v.get_method(self, array_mtype, "push", false)
+		with_capacity_callsite = v.build_callsite_by_name(self, array_mtype, "with_capacity", false)
+		push_callsite = v.build_callsite_by_name(self, array_mtype, "push", false)
 
 		self.mtype = array_mtype
 	end
@@ -1639,9 +1778,9 @@ redef class ARangeExpr
 		# get the constructor
 		var callsite
 		if self isa ACrangeExpr then
-			callsite = v.get_method(self, mtype, "autoinit", false)
+			callsite = v.build_callsite_by_name(self, mtype, "autoinit", false)
 		else if self isa AOrangeExpr then
-			callsite = v.get_method(self, mtype, "without_last", false)
+			callsite = v.build_callsite_by_name(self, mtype, "without_last", false)
 		else
 			abort
 		end
@@ -1675,9 +1814,16 @@ redef class AIsaExpr
 			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
 
-			# Do not adapt if there is no information gain (i.e. adapt to a supertype)
-			if mtype == null or orig == null or not v.is_subtype(orig, mtype) then
-				self.after_flow_context.when_true.set_var(v, variable, mtype)
+			var thentype = v.intersect_types(self, orig, mtype)
+			if thentype != orig then
+				self.after_flow_context.when_true.set_var(v, variable, thentype)
+				#debug "{variable}:{orig or else "?"} isa {mtype or else "?"} -> then {thentype or else "?"}"
+			end
+
+			var elsetype = v.diff_types(self, orig, mtype)
+			if elsetype != orig then
+				self.after_flow_context.when_false.set_var(v, variable, elsetype)
+				#debug "{variable}:{orig or else "?"} isa {mtype or else "?"} -> else {elsetype or else "?"}"
 			end
 		end
 
@@ -1688,6 +1834,16 @@ redef class AIsaExpr
 	do
 		v.check_expr_cast(self, self.n_expr, self.n_type)
 	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var mtype = self.cast_type
+		if mtype != null then
+			res += v.yellow(".as({mtype})")
+		end
+		return res
+	end
+
 end
 
 redef class AAsCastExpr
@@ -1772,6 +1928,11 @@ redef class ASendExpr
 	# The property invoked by the send.
 	var callsite: nullable CallSite
 
+	# Is self a safe call (with `x?.foo`)?
+	# If so and the receiver is null, then the arguments won't be evaluated
+	# and the call skipped (replaced with null).
+	var is_safe: Bool = false
+
 	redef fun bad_expr_message(child)
 	do
 		if child == self.n_expr then
@@ -1784,6 +1945,13 @@ redef class ASendExpr
 	do
 		var nrecv = self.n_expr
 		var recvtype = v.visit_expr(nrecv)
+
+		if nrecv isa ASafeExpr then
+			# Has the receiver the form `x?.foo`?
+			# For parsing "reasons" the `?` is in the receiver node, not the call node.
+			is_safe = true
+		end
+
 		var name = self.property_name
 		var node = self.property_node
 
@@ -1799,7 +1967,7 @@ redef class ASendExpr
 				var systype = sysclass.mclass_type
 				mproperty = v.try_get_mproperty_by_name2(node, systype, name)
 				if mproperty != null then
-					callsite = v.get_method(node, systype, name, false)
+					callsite = v.build_callsite_by_name(node, systype, name, false)
 					if callsite == null then return # Forward error
 					# Update information, we are looking at `sys` now, not `self`
 					nrecv.is_sys = true
@@ -1811,7 +1979,7 @@ redef class ASendExpr
 		end
 		if callsite == null then
 			# If still nothing, just exit
-			callsite = v.get_method(node, recvtype, name, nrecv isa ASelfExpr)
+			callsite = v.build_callsite_by_name(node, recvtype, name, nrecv isa ASelfExpr)
 			if callsite == null then return
 		end
 
@@ -1820,7 +1988,9 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, node, args)
+                if not self isa ACallrefExpr then
+			callsite.check_signature(v, node, args)
+                end
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
@@ -1834,6 +2004,10 @@ redef class ASendExpr
 
 		var ret = msignature.return_mtype
 		if ret != null then
+			if is_safe then
+				# A safe receiver makes that the call is not executed and returns null
+				ret = ret.as_nullable
+			end
 			self.mtype = ret
 		else
 			self.is_typed = true
@@ -1853,6 +2027,15 @@ redef class ASendExpr
 	fun raw_arguments: Array[AExpr] do return compute_raw_arguments
 
 	private fun compute_raw_arguments: Array[AExpr] is abstract
+
+	redef fun dump_info(v) do
+		var res = super
+		var callsite = self.callsite
+		if callsite != null then
+			res += v.yellow(" call="+callsite.dump_info(v))
+		end
+		return res
+	end
 end
 
 redef class ABinopExpr
@@ -1875,6 +2058,10 @@ redef class AEqFormExpr
 
 		if mtype == null or mtype2 == null then return
 
+		if mtype == v.type_bool(self) and (n_expr2 isa AFalseExpr or n_expr2 isa ATrueExpr) then
+			v.modelbuilder.warning(self, "useless-truism", "Warning: useless comparison to a Bool literal.")
+		end
+
 		if not mtype2 isa MNullType then return
 
 		v.check_can_be_null(n_expr, mtype)
@@ -1885,7 +2072,6 @@ redef class AUnaryopExpr
 	redef fun property_name do return "unary {operator}"
 	redef fun compute_raw_arguments do return new Array[AExpr]
 end
-
 
 redef class ACallExpr
 	redef fun property_name do return n_qid.n_id.text
@@ -1932,7 +2118,7 @@ redef class ASendReassignFormExpr
 		if recvtype == null then return # Forward error
 
 		var for_self = self.n_expr isa ASelfExpr
-		var callsite = v.get_method(node, recvtype, name, for_self)
+		var callsite = v.build_callsite_by_name(node, recvtype, name, for_self)
 
 		if callsite == null then return
 		self.callsite = callsite
@@ -1947,7 +2133,7 @@ redef class ASendReassignFormExpr
 			return
 		end
 
-		var wcallsite = v.get_method(node, recvtype, name + "=", self.n_expr isa ASelfExpr)
+		var wcallsite = v.build_callsite_by_name(node, recvtype, name + "=", self.n_expr isa ASelfExpr)
 		if wcallsite == null then return
 		self.write_callsite = wcallsite
 
@@ -1979,6 +2165,77 @@ redef class AInitExpr
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
+redef class ACallrefExpr
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid
+	redef fun compute_raw_arguments do return n_args.to_a
+
+	redef fun accept_typing(v)
+	do
+		super # do the job as if it was a real call
+		var res = callsite.mproperty
+
+                var msignature = callsite.mpropdef.msignature
+                var recv = callsite.recv
+                assert msignature != null
+                var arity = msignature.mparameters.length
+
+                var routine_type_name = "ProcRef"
+                if msignature.return_mtype != null then
+                        routine_type_name = "FunRef"
+                end
+
+                var target_routine_class = "{routine_type_name}{arity}"
+                var routine_mclass = v.get_mclass(self, target_routine_class)
+
+                if routine_mclass == null then
+                        v.error(self, "Error: missing functional types, try `import functional`")
+                        return
+                end
+
+                var types_list = new Array[MType]
+                for param in msignature.mparameters do
+                        if param.is_vararg then
+                                types_list.push(v.mmodule.array_type(param.mtype))
+                        else
+                                types_list.push(param.mtype)
+                        end
+                end
+                if msignature.return_mtype != null then
+                        types_list.push(msignature.return_mtype.as(not null))
+                end
+
+                # Why we need an anchor :
+                #
+                # ~~~~nitish
+                # class A[E]
+                #       def toto(x: E) do print "{x}"
+                # end
+                #
+                # var a = new A[Int]
+                # var f = &a.toto # without anchor : ProcRef1[E]
+                #		  # with anchor : ProcRef[Int]
+                # ~~~~
+		# However, we can only anchor if we can resolve every formal
+		# parameter, here's an example where we can't.
+		# ~~~~nitish
+		# class A[E]
+		#	fun bar: A[E] do return self
+		#	fun foo: Fun0[A[E]] do return &bar # here we can't anchor
+		# end
+		# var f1 = a1.foo # when this expression will be evaluated,
+		#		  # `a1` will anchor `&bar` returned by `foo`.
+		# print f1.call
+		# ~~~~
+		var routine_type = routine_mclass.get_mtype(types_list)
+		if not recv.need_anchor then
+			routine_type = routine_type.anchor_to(v.mmodule, recv.as(MClassType))
+		end
+                is_typed = true
+		self.mtype = routine_type
+	end
+end
+
 redef class AExprs
 	fun to_a: Array[AExpr] do return self.n_exprs.to_a
 end
@@ -1997,7 +2254,6 @@ redef class ASuperExpr
 	redef fun accept_typing(v)
 	do
 		var anchor = v.anchor
-		assert anchor != null
 		var recvtype = v.get_variable(self, v.selfvariable)
 		assert recvtype != null
 		var mproperty = v.mpropdef.mproperty
@@ -2036,7 +2292,6 @@ redef class ASuperExpr
 	private fun process_superinit(v: TypeVisitor)
 	do
 		var anchor = v.anchor
-		assert anchor != null
 		var recvtype = v.get_variable(self, v.selfvariable)
 		assert recvtype != null
 		var mpropdef = v.mpropdef
@@ -2103,6 +2358,19 @@ redef class ASuperExpr
 
 		self.is_typed = true
 	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var callsite = self.callsite
+		if callsite != null then
+			res += v.yellow(" super-init="+callsite.dump_info(v))
+		end
+		var mpropdef = self.mpropdef
+		if mpropdef != null then
+			res += v.yellow(" call-next-method="+mpropdef.to_s)
+		end
+		return res
+	end
 end
 
 ####
@@ -2159,7 +2427,7 @@ redef class ANewExpr
 			return
 		end
 
-		var callsite = v.get_method(node, recvtype, name, false)
+		var callsite = v.build_callsite_by_name(node, recvtype, name, false)
 		if callsite == null then return
 
 		if not callsite.mproperty.is_new then
@@ -2182,6 +2450,15 @@ redef class ANewExpr
 
 		var args = n_args.to_a
 		callsite.check_signature(v, node, args)
+	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var callsite = self.callsite
+		if callsite != null then
+			res += v.yellow(" call="+callsite.dump_info(v))
+		end
+		return res
 	end
 end
 
@@ -2223,6 +2500,16 @@ redef class AAttrFormExpr
 		attr_type = v.resolve_for(attr_type, recvtype, self.n_expr isa ASelfExpr)
 		self.attr_type = attr_type
 	end
+
+	redef fun dump_info(v) do
+		var res = super
+		var mproperty = self.mproperty
+		var attr_type = self.attr_type
+		if mproperty != null then
+			res += v.yellow(" attr={mproperty}:{attr_type or else "BROKEN"}")
+		end
+		return res
+	end
 end
 
 redef class AAttrExpr
@@ -2232,7 +2519,6 @@ redef class AAttrExpr
 		self.mtype = self.attr_type
 	end
 end
-
 
 redef class AAttrAssignExpr
 	redef fun accept_typing(v)
@@ -2271,6 +2557,28 @@ redef class AIssetAttrExpr
 			v.error(n_id, "Type Error: `isset` on a nullable attribute.")
 		end
 		self.mtype = v.type_bool(self)
+	end
+end
+
+redef class ASafeExpr
+	redef fun accept_typing(v)
+	do
+		var mtype = v.visit_expr(n_expr)
+		if mtype == null then return # Skip error
+
+		if mtype isa MNullType then
+			# While `null?.foo` is semantically well defined and should not execute `foo` and just return `null`,
+			# currently `null.foo` is forbidden so it seems coherent to also forbid `null?.foo`
+			v.modelbuilder.error(self, "Error: safe operator `?` on `null`.")
+			return
+		end
+
+		self.mtype = mtype.as_notnull
+
+		if not v.can_be_null(mtype) then
+			v.modelbuilder.warning(self, "useless-safe", "Warning: useless safe operator `?` on non-nullable value.")
+			return
+		end
 	end
 end
 

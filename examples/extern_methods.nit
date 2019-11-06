@@ -34,7 +34,7 @@ redef enum Int
 	# System call to sleep for `self` seconds
 	#
 	# You can use the FFI to access any system functions, sometimes it's extremely simple.
-	fun sleep `{
+	fun sleep_seconds `{
 		sleep(self);
 	`}
 

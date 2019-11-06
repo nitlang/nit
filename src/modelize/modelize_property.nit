@@ -42,6 +42,17 @@ redef class ModelBuilder
 	# Public clients need to use `mpropdef2node` to access stuff.
 	private var mpropdef2npropdef = new HashMap[MPropDef, APropdef]
 
+	# Associate a `npropdef` with its `mpropdef`
+	#
+	# Be careful, this method is unsafe, no checking is done when it's used.
+	# The safe way to add method it's to use the `build_property`
+	#
+	# See `mpropdef2npropdef`
+	fun unsafe_add_mpropdef2npropdef(mpropdef: MPropDef,npropdef: APropdef)
+	do
+		mpropdef2npropdef[mpropdef] = npropdef
+	end
+
 	# Retrieve the associated AST node of a mpropertydef.
 	# This method is used to associate model entity with syntactic entities.
 	#
@@ -79,7 +90,6 @@ redef class ModelBuilder
 	end
 
 	# Build the properties of `nclassdef`.
-	# REQUIRE: all superclasses are built.
 	private fun build_properties(nclassdef: AClassdef)
 	do
 		# Force building recursively
@@ -110,7 +120,7 @@ redef class ModelBuilder
 				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
 					# Invalidate the bound
 					mpropdef.is_broken = true
-					mpropdef.bound = new MBottomType(mclassdef.mmodule.model)
+					mpropdef.bound = new MErrorType(mclassdef.mmodule.model)
 				end
 			end
 			for npropdef in nclassdef2.n_propdefs do
@@ -389,6 +399,8 @@ redef class ModelBuilder
 		else if mtype isa MNullType then
 			# nothing to do.
 		else if mtype isa MBottomType then
+			# nothing to do.
+		else if mtype isa MErrorType then
 			# nothing to do.
 		else
 			node.debug "Unexpected type {mtype}"
@@ -674,14 +686,13 @@ redef class ASignature
 	# Visit and fill information about a signature
 	private fun visit_signature(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
 	do
-		var mmodule = mclassdef.mmodule
 		var param_names = self.param_names
 		var param_types = self.param_types
 		for np in self.n_params do
 			param_names.add(np.n_id.text)
 			var ntype = np.n_type
 			if ntype != null then
-				var mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+				var mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 				if mtype == null then return false # Skip error
 				for i in [0..param_names.length-param_types.length[ do
 					param_types.add(mtype)
@@ -698,7 +709,7 @@ redef class ASignature
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			self.ret_type = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+			self.ret_type = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 			if self.ret_type == null then return false # Skip error
 		end
 
@@ -712,14 +723,14 @@ redef class ASignature
 		for np in self.n_params do
 			var ntype = np.n_type
 			if ntype != null then
-				if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+				if modelbuilder.resolve_mtype(mclassdef, ntype) == null then
 					res = false
 				end
 			end
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+			if modelbuilder.resolve_mtype(mclassdef, ntype) == null then
 				res = false
 			end
 		end
@@ -773,15 +784,13 @@ redef class AMethPropdef
 	do
 		var n_kwinit = n_kwinit
 		var n_kwnew = n_kwnew
-		var is_init = n_kwinit != null or n_kwnew != null
+		var is_new = n_kwnew != null
+		var is_init = n_kwinit != null or is_new
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
 		if amethodid == null then
-			if not is_init then
-				name = "main"
-				name_node = self
-			else if n_kwinit != null then
+			if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
 				if self.n_signature.n_params.not_empty or get_single_annotation("old_style_init", modelbuilder) != null then
@@ -791,7 +800,8 @@ redef class AMethPropdef
 				name = "new"
 				name_node = n_kwnew
 			else
-				abort
+				name = "main"
+				name_node = self
 			end
 		else if amethodid isa AIdMethid then
 			name = amethodid.n_id.text
@@ -835,8 +845,8 @@ redef class AMethPropdef
 				mprop.is_root_init = true
 			end
 			mprop.is_init = is_init
-			mprop.is_new = n_kwnew != null
-			if mprop.is_new then mclassdef.mclass.has_new_factory = true
+			mprop.is_new = is_new
+			if is_new then mclassdef.mclass.has_new_factory = true
 			if name == "sys" then mprop.is_toplevel = true # special case for sys allowed in `new` factories
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then
 				mprop.is_broken = true
@@ -888,6 +898,7 @@ redef class AMethPropdef
 	do
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skiped
+		var mproperty = mpropdef.mproperty
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
@@ -912,7 +923,7 @@ redef class AMethPropdef
 		# FIXME: do not inherit from the intro, but from the most specific
 		var msignature: nullable MSignature = null
 		if not mpropdef.is_intro then
-			msignature = mpropdef.mproperty.intro.msignature
+			msignature = mproperty.intro.msignature
 			if msignature == null then return # Skip error
 
 			# The local signature is adapted to use the local formal types, if any.
@@ -922,14 +933,14 @@ redef class AMethPropdef
 			if param_names.length != msignature.arity then
 				var node: ANode
 				if nsig != null then node = nsig else node = self
-				modelbuilder.error(node, "Redef Error: expected {msignature.arity} parameter(s) for `{mpropdef.mproperty.name}{msignature}`; got {param_names.length}. See introduction at `{mpropdef.mproperty.full_name}`.")
+				modelbuilder.error(node, "Redef Error: expected {msignature.arity} parameter(s) for `{mproperty.name}{msignature}`; got {param_names.length}. See introduction at `{mproperty.full_name}`.")
 				return
 			end
-		else if mpropdef.mproperty.is_init and not mpropdef.mproperty.is_new then
+		else if mproperty.is_init and not mproperty.is_new then
 			# FIXME UGLY: inherit signature from a super-constructor
 			for msupertype in mclassdef.supertypes do
 				msupertype = msupertype.anchor_to(mmodule, mclassdef.bound_mtype)
-				var candidate = modelbuilder.try_get_mproperty_by_name2(self, mmodule, msupertype, mpropdef.mproperty.name)
+				var candidate = modelbuilder.try_get_mproperty_by_name2(self, mmodule, msupertype, mproperty.name)
 				if candidate != null then
 					if msignature == null then
 						msignature = candidate.intro.as(MMethodDef).msignature
@@ -966,14 +977,14 @@ redef class AMethPropdef
 		end
 
 		# In `new`-factories, the return type is by default the classtype.
-		if ret_type == null and mpropdef.mproperty.is_new then ret_type = mclassdef.mclass.mclass_type
+		if ret_type == null and mproperty.is_new then ret_type = mclassdef.mclass.mclass_type
 
 		# Special checks for operator methods
 		if not accept_special_last_parameter and mparameters.not_empty and mparameters.last.is_vararg then
-			modelbuilder.error(self.n_signature.n_params.last, "Error: illegal variadic parameter `{mparameters.last}` for `{mpropdef.mproperty.name}`.")
+			modelbuilder.error(self.n_signature.n_params.last, "Error: illegal variadic parameter `{mparameters.last}` for `{mproperty.name}`.")
 		end
 		if ret_type == null and return_is_mandatory then
-			modelbuilder.error(self.n_methid, "Error: mandatory return type for `{mpropdef.mproperty.name}`.")
+			modelbuilder.error(self.n_methid, "Error: mandatory return type for `{mproperty.name}`.")
 		end
 
 		msignature = new MSignature(mparameters, ret_type)
@@ -1162,8 +1173,8 @@ redef class AAttrPropdef
 	# Is the node tagged optional?
 	var is_optional = false
 
-	# Has the node a default value?
-	# Could be through `n_expr` or `n_block`
+	# Does the node have a default value?
+	# Could be through `n_expr`, `n_block` or `is_lazy`
 	var has_value = false
 
 	# The guard associated to a lazy attribute.
@@ -1210,6 +1221,12 @@ redef class AAttrPropdef
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
 		end
 		mclassdef.mprop2npropdef[mreadprop] = self
+
+		var attr_mpropdef = mpropdef
+		if attr_mpropdef != null then
+			mreadprop.getter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.getter = mreadprop
+		end
 
 		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 		self.mreadpropdef = mreadpropdef
@@ -1317,6 +1334,11 @@ redef class AAttrPropdef
 		end
 		mclassdef.mprop2npropdef[mwriteprop] = self
 
+		if attr_mpropdef != null then
+			mwriteprop.setter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.setter = mwriteprop
+		end
+
 		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 		self.mwritepropdef = mwritepropdef
 		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
@@ -1352,7 +1374,7 @@ redef class AAttrPropdef
 
 		var ntype = self.n_type
 		if ntype != null then
-			mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+			mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 			if mtype == null then return
 		end
 
@@ -1372,71 +1394,12 @@ redef class AAttrPropdef
 		var nexpr = self.n_expr
 		if mtype == null then
 			if nexpr != null then
-				if nexpr isa ANewExpr then
-					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
-				else if nexpr isa AAsCastExpr then
-					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
-				else if nexpr isa AIntegerExpr then
-					var cla: nullable MClass = null
-					if nexpr.value isa Int then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
-					else if nexpr.value isa Byte then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
-					else if nexpr.value isa Int8 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int8")
-					else if nexpr.value isa Int16 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int16")
-					else if nexpr.value isa UInt16 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt16")
-					else if nexpr.value isa Int32 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int32")
-					else if nexpr.value isa UInt32 then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt32")
-					else
-						# Should not happen, and should be updated as new types are added
-						abort
-					end
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa AFloatExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa ACharExpr then
-					var cla: nullable MClass
-					if nexpr.is_ascii then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
-					else if nexpr.is_code_point then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
-					else
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
-					end
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa ABoolExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa ASuperstringExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
-					if cla != null then mtype = cla.mclass_type
-				else if nexpr isa AStringFormExpr then
-					var cla: nullable MClass
-					if nexpr.is_bytestring then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bytes")
-					else if nexpr.is_re then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Regex")
-					else if nexpr.is_string then
-						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
-					else
-						abort
-					end
-					if cla != null then mtype = cla.mclass_type
-				else
-					modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
-				end
-
+				mtype = infer_static_type(modelbuilder, nexpr, mclassdef, mmodule, mreadpropdef)
 				if mtype == null then return
 			end
 		else if ntype != null and inherited_type == mtype then
 			if nexpr isa ANewExpr then
-				var xmtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
+				var xmtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
 				if xmtype == mtype then
 					modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition")
 				end
@@ -1479,6 +1442,102 @@ redef class AAttrPropdef
 		check_repeated_types(modelbuilder)
 	end
 
+	# Detect the static type from the value assigned to the attribute `self`
+	#
+	# Return the static type if it can be safely inferred.
+	private fun infer_static_type(modelbuilder: ModelBuilder, nexpr: AExpr,
+		mclassdef: MClassDef, mmodule: MModule, mreadpropdef: MPropDef): nullable MType
+	do
+		var mtype = null
+		if nexpr isa ANewExpr then
+			mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
+		else if nexpr isa AAsCastExpr then
+			mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, nexpr.n_type, true)
+		else if nexpr isa AIntegerExpr then
+			var cla: nullable MClass = null
+			if nexpr.value isa Int then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+			else if nexpr.value isa Byte then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+			else if nexpr.value isa Int8 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int8")
+			else if nexpr.value isa Int16 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int16")
+			else if nexpr.value isa UInt16 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt16")
+			else if nexpr.value isa Int32 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int32")
+			else if nexpr.value isa UInt32 then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt32")
+			else
+				# Should not happen, and should be updated as new types are added
+				abort
+			end
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AFloatExpr then
+			var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa ACharExpr then
+			var cla: nullable MClass
+			if nexpr.is_code_point then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+			else
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+			end
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa ABoolExpr then
+			var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa ASuperstringExpr then
+			var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AStringFormExpr then
+			var cla: nullable MClass
+			if nexpr.is_bytestring then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bytes")
+			else if nexpr.is_re then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Regex")
+			else if nexpr.is_string then
+				cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+			else
+				abort
+			end
+			if cla != null then mtype = cla.mclass_type
+		else if nexpr isa AArrayExpr and nexpr.n_type == null and nexpr.n_exprs.not_empty then
+			# Non-empty arrays without an explicit type
+
+			var item_mtypes = new Set[MType]
+			var fails = false
+			for node in nexpr.n_exprs do
+				var item_mtype = infer_static_type(modelbuilder, node, mclassdef, mmodule, mreadpropdef)
+				if item_mtype == null then
+					fails = true
+				else
+					item_mtypes.add item_mtype
+				end
+			end
+
+			if fails then return null # Failed to infer some types
+
+			if item_mtypes.length > 1 then
+				modelbuilder.error(self, "Type Error: ambiguous array type {item_mtypes.join(" ")}")
+			end
+
+			mtype = mmodule.array_type(item_mtypes.first)
+		else if nexpr isa AUminusExpr and (nexpr.n_expr isa AIntegerExpr or nexpr.n_expr isa AFloatExpr) then
+			# The Int and Float unary - is defined in `kernel`, so this may
+			# result in an invalid behavior when using a custom kernel.
+			# A workaround is to declare the attribute static type.
+			# This is still very useful, especially to novice programmers.
+			mtype = infer_static_type(modelbuilder, nexpr.n_expr, mclassdef, mmodule, mreadpropdef)
+		else if nexpr isa AOnceExpr then
+			mtype = infer_static_type(modelbuilder, nexpr.n_expr, mclassdef, mmodule, mreadpropdef)
+		else
+			modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
+		end
+		return mtype
+	end
+
 	redef fun check_signature(modelbuilder)
 	do
 		var mpropdef = self.mpropdef
@@ -1492,11 +1551,11 @@ redef class AAttrPropdef
 
 		# Check types
 		if ntype != null then
-			if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then return
+			if modelbuilder.resolve_mtype(mclassdef, ntype) == null then return
 		end
 		var nexpr = n_expr
 		if nexpr isa ANewExpr then
-			if modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type) == null then return
+			if modelbuilder.resolve_mtype(mclassdef, nexpr.n_type) == null then return
 		end
 
 		# Lookup for signature in the precursor
@@ -1649,11 +1708,10 @@ redef class ATypePropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skipped
 		var mclassdef = mpropdef.mclassdef
-		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
 		var ntype = self.n_type
-		mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+		mtype = modelbuilder.resolve_mtype_unchecked(mclassdef, ntype, true)
 		if mtype == null then return
 
 		mpropdef.bound = mtype
@@ -1675,7 +1733,7 @@ redef class ATypePropdef
 		var anchor = mclassdef.bound_mtype
 
 		var ntype = self.n_type
-		if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then
+		if modelbuilder.resolve_mtype(mclassdef, ntype) == null then
 			mpropdef.bound = null
 			return
 		end
@@ -1689,8 +1747,7 @@ redef class ATypePropdef
 				break
 			end
 			if p.mclassdef.mclass == mclassdef.mclass then
-				# Still a warning to pass existing bad code
-				modelbuilder.warning(n_type, "refine-type", "Redef Error: a virtual type cannot be refined.")
+				modelbuilder.error(n_type, "Redef Error: a virtual type cannot be refined.")
 				break
 			end
 			if not modelbuilder.check_subtype(n_type, mmodule, anchor, bound, supbound) then

@@ -872,8 +872,8 @@ class NeoModel
 	end
 
 	# Get a `Location` from its string representation.
-	private fun to_location(loc: String): Location do
-		return new Location.from_string(loc)
+	private fun to_location(loc: String): nitc::Location do
+		return new nitc::Location.from_string(loc)
 	end
 
 	# Get a `MVisibility` from its string representation.

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Hello world using the Cocoa framework
-module hello_cocoa
+module hello_cocoa is example
 
 import cocoa::foundation
 

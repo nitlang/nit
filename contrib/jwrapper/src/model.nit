@@ -21,7 +21,7 @@ module model is serialize
 import more_collections
 import opts
 import poset
-import binary::serialization
+import msgpack
 
 import jtype_converter
 
@@ -93,7 +93,7 @@ class JavaType
 			end
 		else
 			# Use the prefix and the short class name
-			# e.g. given the prefix Native: java.lang.String -> NativeString
+			# e.g. given the prefix Native: java.lang.String -> CString
 			name = prefix + id
 		end
 
@@ -107,16 +107,16 @@ class JavaType
 	end
 
 	# Short name of the class, mangled to remove `$` (e.g. `Set`)
-	var id: String is lazy do return identifier.last.replace("$", "")
+	var id: String is lazy, noserialize do return identifier.last.replace("$", "")
 
 	# Full name of this class as used in java code (e.g. `java.lang.Set`)
-	var java_full_name: String is lazy do return identifier.join(".").replace("$", ".")
+	var java_full_name: String is lazy, noserialize do return identifier.join(".").replace("$", ".")
 
 	# Full name of this class as used by jni (e.g. `android.graphics.BitmapFactory$Options`)
-	var jni_full_name: String is lazy do return identifier.join(".")
+	var jni_full_name: String is lazy, noserialize do return identifier.join(".")
 
 	# Name of this class for the extern declaration in Nit (e.g. `java.lang.Set[]`)
-	var extern_equivalent: String is lazy do return jni_full_name + "[]" * array_dimension
+	var extern_equivalent: String is lazy, noserialize do return jni_full_name + "[]" * array_dimension
 
 	# Full name of this class with arrays and generic values (e.g. `java.lang.Set<E>[]`)
 	redef fun to_s do
@@ -270,12 +270,12 @@ class JavaModel
 			end
 
 			var file = model_path.to_path.open_ro
-			var d = new BinaryDeserializer(file)
+			var d = new MsgPackDeserializer(file)
 			var model = d.deserialize
 			file.close
 
 			if d.errors.not_empty then
-				print_error "Error: failed to deserialize model file '{model_path}' with: {d.errors.join(", ")}"
+				print_error "Error: failed to deserialize model file '{model_path}' with:\n* {d.errors.join("\n* ")}"
 				continue
 			end
 
@@ -291,7 +291,7 @@ class JavaModel
 	end
 
 	# Does this model have access to the `java.lang.Object`?
-	var knows_the_object_class: Bool = all_classes.keys.has("java.lang.Object") is lazy
+	var knows_the_object_class: Bool = all_classes.keys.has("java.lang.Object") is lazy, noserialize
 
 	# Add a class in `classes`
 	fun add_class(jclass: JavaClass)
@@ -487,7 +487,7 @@ class NitModuleRef
 	var path: String
 
 	# Name of the module
-	var name: String is lazy do return path.basename(".nit")
+	var name: String is lazy, noserialize do return path.basename(".nit")
 
 	redef fun to_s do return self.name
 	redef fun ==(other) do return other isa NitModuleRef and self.path == other.path
@@ -558,7 +558,7 @@ redef class Sys
 	var opt_extern_class_prefix = new OptionString("Prefix to extern classes (By default uses the full namespace)", "-p")
 
 	# Prefix used to name extern classes, if `null` use the full namespace
-	var extern_class_prefix: nullable String is lazy do return opt_extern_class_prefix.value
+	var extern_class_prefix: nullable String is lazy, noserialize do return opt_extern_class_prefix.value
 
 	# Libraries to search for existing wrappers
 	var opt_libs = new OptionArray("Paths to libraries with wrappers of Java classes ('auto' to use the full Nit lib)", "-i")

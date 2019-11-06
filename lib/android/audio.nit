@@ -28,8 +28,8 @@
 #
 # ~~~nitish
 # # Note that you need to specify the path from "assets" folder and the extension
-# var s = app.load_sound("sounds/test_sound.ogg")
-# var m = app.load_music("sounds/test_music.ogg")
+# var s = new Sound("sounds/test_sound.ogg")
+# var m = new Music("sounds/test_music.ogg")
 # s.play
 # m.play
 # ~~~
@@ -152,6 +152,13 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 		}
 	`}
 	fun reset in "Java" `{ self.reset(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeMediaPlayer_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 # Sound Pool from Java, used to play sounds simultaneously
@@ -203,6 +210,13 @@ private extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	fun stop(stream_id: Int) in "Java" `{ self.stop((int)stream_id); `}
 	fun unload(sound_id: Int): Bool in "Java" `{ return self.unload((int)sound_id); `}
 	fun release in "Java" `{ self.release(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeSoundPool_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 
@@ -238,7 +252,7 @@ class SoundPool
 	# Stream priority
 	private var priority = 1
 
-	init do self.nsoundpool = new NativeSoundPool(max_streams, stream_type, src_quality)
+	init do self.nsoundpool = (new NativeSoundPool(max_streams, stream_type, src_quality)).new_global_ref
 
 	# Load the sound from an asset file descriptor
 	# this function is for advanced use
@@ -280,7 +294,7 @@ class SoundPool
 		var resval = nsoundpool.load_path(path.to_java_string, priority)
 		sys.jni_env.pop_local_frame
 		if  resval == -1 then
-			self.error = new Error("Unable to load sound from path : " + path)
+			self.error = new Error("Unable to load sound from path: " + path)
 			return new Sound.priv_init(null, -1, self, self.error)
 		else
 			return new Sound.priv_init(null, resval, self, null)
@@ -293,12 +307,12 @@ class SoundPool
 		return nsoundpool.play(id, left_volume, right_volume, priority, looping, rate)
 	end
 
-	# Load a sound by its name in the resources, the sound must be in the `res/raw` folder
-	fun load_name(resource_manager: ResourcesManager, context: NativeActivity, sound: String): Sound do
-		var id = resource_manager.raw_id(sound)
+	# Load a sound by its `name` in the resources, the sound must be in the `res/raw` folder
+	fun load_name(resource_manager: ResourcesManager, context: NativeActivity, name: String): Sound do
+		var id = resource_manager.raw_id(name)
 		var resval = nsoundpool.load_id(context, id, priority)
 		if  resval == -1 then
-			self.error = new Error("Unable to load sound from resources : " + sound)
+			self.error = new Error("Unable to load sound from resources: " + name)
 			return new Sound.priv_init(null, -1, self, self.error)
 		else
 			return new Sound.priv_init(null, resval, self, null)
@@ -364,7 +378,7 @@ class MediaPlayer
 
 	# Create a new MediaPlayer, but no sound is attached, you'll need
 	# to use `load_sound` before using it
-	init do self.nmedia_player = new NativeMediaPlayer
+	init do self.nmedia_player = (new NativeMediaPlayer).new_global_ref
 
 	# Init the mediaplayer with a sound resource id
 	init from_id(context: NativeActivity, id: Int) do
@@ -498,7 +512,10 @@ redef class PlayableAudio
 	# Used when the app pause all sounds or resume all sounds
 	var paused: Bool = false
 
-	redef init do add_to_sounds(self)
+	# Is `self` already loaded?
+	protected var is_loaded = false is writable
+
+	redef var error = null
 end
 
 redef class Sound
@@ -525,16 +542,24 @@ redef class Sound
 
 	redef fun load do
 		if is_loaded then return
-		var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, self.name.strip_extension)
-		if retval_resources == -1 then
-			self.error = new Error("failed to load" + self.name)
-			var nam = app.asset_manager.open_fd(self.name)
+
+		# Try resources (res)
+		var rid = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, path.strip_extension)
+		if rid > 0 then
+			self.soundpool_id = rid
+			self.soundpool = app.default_soundpool
+			self.error = null
+			self.soundpool.error = null
+		else
+			# Try assets
+			var nam = app.asset_manager.open_fd(path)
 			if nam.is_java_null then
-				self.error = new Error("Failed to get file descriptor for " + self.name)
+				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var retval_assets = app.default_soundpool.load_asset_fd_rid(nam)
+				nam.close
 				if retval_assets == -1 then
-					self.error = new Error("Failed to load" + self.name)
+					self.error = new Error("Failed to load " + path)
 				else
 					self.soundpool_id = retval_assets
 					self.soundpool = app.default_soundpool
@@ -542,13 +567,11 @@ redef class Sound
 					self.soundpool.error = null
 				end
 			end
-		else
-			self.soundpool_id = retval_resources
-			self.soundpool = app.default_soundpool
-			self.error = null
-			self.soundpool.error = null
 		end
 		is_loaded = true
+
+		var error = error
+		if error != null then print_error error
 	end
 
 	redef fun play do
@@ -591,14 +614,25 @@ redef class Music
 
 	redef fun load do
 		if is_loaded then return
-		var mp_sound_resources = app.default_mediaplayer.load_sound(app.resource_manager.raw_id(self.name.strip_extension), app.native_activity)
-		if mp_sound_resources.error != null then
+
+		# Try resources (res)
+		var rid = app.resource_manager.raw_id(path.strip_extension)
+		if rid > 0 then
+			var mp_sound_resources = app.default_mediaplayer.load_sound(rid, app.native_activity)
+			if mp_sound_resources.error != null then
+				self.media_player = app.default_mediaplayer
+				self.error = null
+				self.media_player.error = null
+			end
 			self.error = mp_sound_resources.error
-			var nam = app.asset_manager.open_fd(self.name)
+		else
+			# Try assets
+			var nam = app.asset_manager.open_fd(path)
 			if nam.is_java_null then
-				self.error = new Error("Failed to get file descriptor for " + self.name)
+				self.error = new Error("Failed to get file descriptor for " + path)
 			else
 				var mp_sound_assets = app.default_mediaplayer.data_source_fd(nam)
+				nam.close
 				if mp_sound_assets.error != null then
 					self.error = mp_sound_assets.error
 				else
@@ -607,12 +641,11 @@ redef class Music
 					self.media_player.error = null
 				end
 			end
-		else
-			self.media_player = app.default_mediaplayer
-			self.error = null
-			self.media_player.error = null
 		end
 		is_loaded = true
+
+		var error = error
+		if error != null then print_error error
 	end
 
 	redef fun play do
@@ -636,7 +669,6 @@ end
 
 redef class App
 
-
 	# Returns the default MediaPlayer of the application.
 	# When you load a music, it goes in this MediaPlayer.
 	# Use it for advanced sound management
@@ -648,48 +680,24 @@ redef class App
 	var default_soundpool: SoundPool is lazy do return new SoundPool
 
 	# Get the native audio manager
-	private fun audio_manager: NativeAudioManager import native_activity in "Java" `{
-		return (AudioManager)App_native_activity(self).getSystemService(Context.AUDIO_SERVICE);
+	private fun audio_manager(native_activity: NativeContext): NativeAudioManager in "Java" `{
+		return (AudioManager)native_activity.getSystemService(Context.AUDIO_SERVICE);
 	`}
 
 	# Sets the stream of the app to STREAM_MUSIC.
 	# STREAM_MUSIC is the default stream used by android apps.
-	private fun manage_audio_stream import native_activity in "Java" `{
-		App_native_activity(self).setVolumeControlStream(AudioManager.STREAM_MUSIC);
+	private fun manage_audio_stream(native_activity: NativeActivity) in "Java" `{
+		native_activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
-
-	# Retrieves a sound with a soundpool in the `assets` folder using its name.
-	# Used to play short songs, can play multiple sounds simultaneously
-	redef fun load_sound(path) do
-		var fd = asset_manager.open_fd(path)
-		if not fd.is_java_null then
-			return add_to_sounds(default_soundpool.load_asset_fd(fd)).as(Sound)
-		else
-			var error = new Error("Failed to load Sound {path}")
-			return new Sound.priv_init(null, -1, default_soundpool, error)
-		end
-	end
-
-	# Retrieves a music with a media player in the `assets` folder using its name.
-	# Used to play long sounds or musics, can't play multiple sounds simultaneously
-	redef fun load_music(path) do
-		var fd = asset_manager.open_fd(path)
-		if not fd.is_java_null then
-			return add_to_sounds(default_mediaplayer.data_source_fd(fd)).as(Music)
-		else
-			var error = new Error("Failed to load music {path}")
-			return new Music.priv_init(null, default_mediaplayer, error)
-		end
-	end
 
 	# Same as `load_sound` but load the sound from the `res/raw` folder
 	fun load_sound_from_res(sound_name: String): Sound do
-		return add_to_sounds(default_soundpool.load_name(resource_manager,self.native_activity, sound_name)).as(Sound)
+		return default_soundpool.load_name(resource_manager, native_activity, sound_name)
 	end
 
 	# Same as `load_music` but load the sound from the `res/raw` folder
 	fun load_music_from_res(music: String): Music do
-		return add_to_sounds(default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity)).as(Music)
+		return default_mediaplayer.load_sound(resource_manager.raw_id(music), native_activity)
 	end
 
 	redef fun on_pause do
@@ -704,34 +712,21 @@ redef class App
 				s.paused = false
 			end
 		end
-		audio_manager.abandon_audio_focus
+		audio_manager(native_activity).abandon_audio_focus
 	end
 
 	redef fun on_create do
 		super
-		audio_manager.request_audio_focus
-		manage_audio_stream
+		audio_manager(native_activity).request_audio_focus
+		manage_audio_stream native_activity
 	end
 
 	redef fun on_resume do
 		super
-		audio_manager.request_audio_focus
+		audio_manager(native_activity).request_audio_focus
 		for s in sounds do
 			# Resumes only the sounds paused by the App
 			if not s.paused then s.resume
 		end
-	end
-end
-
-redef class Sys
-
-	# Sounds handled by the application, when you load a sound, it's added to this list.
-	# This array is used in `pause` and `resume`
-	private var sounds = new Array[PlayableAudio]
-
-	# Factorizes `sounds.add` to use it in `load_music`, `load_sound`, `load_music_from_res` and `load_sound_from_res`
-	private fun add_to_sounds(sound: PlayableAudio): PlayableAudio do
-		sounds.add(sound)
-		return sound
 	end
 end

@@ -14,8 +14,8 @@
 
 # Portable calculator UI
 module calculator is
-	app_name "app.nit Calc."
-	app_version(0, 1, git_revision)
+	app_name "app.nit Calc"
+	app_version(0, 2, git_revision)
 	app_namespace "org.nitlanguage.calculator"
 
 	# Lock in portrait mode
@@ -32,16 +32,7 @@ import calculator_logic
 # Show debug output?
 fun debug: Bool do return false
 
-redef class App
-	redef fun on_create
-	do
-		if debug then print "App::on_create"
-
-		# Create the main window
-		push_window new CalculatorWindow
-		super
-	end
-end
+redef fun root_window do return new CalculatorWindow
 
 # The main (and only) window of this calculator
 class CalculatorWindow

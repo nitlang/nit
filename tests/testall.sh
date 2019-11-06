@@ -14,7 +14,13 @@
 # limitations under the License.
 
 # Run some tests on each engine
-for x in nitcg nitcs nitcsg nitce niti nitvm; do
+
+engine=(nitcg nitcg nitcs nitcsg nitce niti)
+if uname | grep MINGW64 1>/dev/null 2>&1; then
+	engine=(nitcg nitcg nitcs nitcsg nitce)
+fi
+
+for x in "${engine[@]}"; do
 	echo "--engine $x"
 	./tests.sh --engine $x "$@"
 done

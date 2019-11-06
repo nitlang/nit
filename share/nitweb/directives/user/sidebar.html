@@ -1,0 +1,15 @@
+<div>
+	<img class='avatar' width='100%' src='{{user.avatar_url}}' />
+	<h1>{{user.login}}</h1>
+	<h3>{{user.name}}</h3>
+	<ul class='list-unstyled'>
+		<li>
+			<span class='glyphicon glyphicon-envelope' />
+			<a href='mailto:{{user.email}}'>{{user.email}}</a>
+		</li>
+		<li>
+			<span class='glyphicon glyphicon-link' />
+			<a href='{{user.blog}}'>{{user.blog}}</a>
+		</li>
+	</ul>
+</div>

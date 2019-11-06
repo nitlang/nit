@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var fb: Buffer = new RopeBuffer
-#alt1 fb = new FlatBuffer
+var fb = new FlatBuffer
 
 for i in [0 .. 64[ do fb.add 'A'
 
@@ -35,7 +34,7 @@ end
 l = 0
 
 for i in fb.bytes do
-	print "Byte {l} = {i}"
+	print "Byte {l} = 0x{i.to_hex}"
 	l += 1
 end
 
@@ -49,6 +48,6 @@ end
 l = fb.byte_length - 1
 
 for i in fb.bytes.reverse_iterator do
-	print "Byte {l} = {i}"
+	print "Byte {l} = 0x{i.to_hex}"
 	l -= 1
 end

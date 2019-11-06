@@ -65,7 +65,7 @@ class Model
 end
 
 redef class ALine
-	var address: Int = -1
+	var address = -1
 
 	fun size: Int is abstract
 

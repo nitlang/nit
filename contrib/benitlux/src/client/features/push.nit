@@ -177,10 +177,12 @@ end
 
 redef class UserWindow
 
-	private var layout_push_options = new VerticalLayout(parent=layout)
+	private var header = new SectionHeader(parent=layout)
 
-	private var lbl_push_options_title = new Label(parent=layout_push_options,
-		text="Notifications options".t, size=1.5)
+	private var lbl_push_options_title = new SectionTitle(parent=header,
+		text="Notifications options".t)
+
+	private var layout_push_options = new VerticalLayout(parent=layout)
 
 	private var chk_notify_on_new_beers = new CheckBox(parent=layout_push_options,
 		text="Notify when there are new beers".t)

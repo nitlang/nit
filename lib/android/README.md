@@ -8,29 +8,52 @@ file can be specified using the `-o` and `--dir` options.
 
 # Host system configuration
 
-Some configuration is required to compile for the Android platform from a GNU/Linux host.
+To compile Android apps from a 64 bits GNU/Linux host you can reuse an existing Android Studio
+installation or make a clean install with command line tools only.
 
-1. Download and install the latest Android SDK __and__ NDK.
+Note that this guide supports only 64 bits GNU/Linux hosts with support for a Java 8 JDK,
+it may be possible to support other platforms with some tweaks.
 
-2. Update PATH so it includes the tools `android`, `ndk-build` and `ant`.
-	You should add something like the following snippet to your .bashrc or equivalent,
-	be careful to replace `ANDROID_SDK` and `ANDROID_NDK` with the full path where you installed each package.
+1.	Install the required SDK packages using one of these two methods:
 
+	a.	Using Android Studio, open `Tools > Android > SDK Manager`, in the SDK Tools tab,
+		install "Android SDK Build-Tools", CMake and NDK.
+
+	b.	From the command line, run this script for a quick setup without Android Studio.
+		You will probably need to tweak it to you system or update the download URL
+		to the latest SDK tools from https://developer.android.com/studio/index.html#command-tools
+
+	~~~raw
+	# Fetch and extract SDK tools
+	mkdir -p ~/Android/Sdk
+	cd ~/Android/Sdk
+	wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+	unzip sdk-tools-linux-3859397.zip
+
+	# Update tools
+	tools/bin/sdkmanager --update
+
+	# Accept the licenses
+	tools/bin/sdkmanager --licenses
+
+	# Install the basic build tools
+	tools/bin/sdkmanager "build-tools;27.0.0" ndk-bundle
 	~~~
-	export PATH=$PATH:ANDROID_SDK/tools/:ANDROID_SDK/platform-tools/:ANDROID_NDK/
+
+3.	Set the environment variable ANDROID_HOME to the SDK installation directory, usually `~/Android/Sdk/`.
+	Use the following command to setup the variable for bash.
+
+	~~~raw
+	echo "export ANDROID_HOME=~/Android/Sdk/" >> ~/.bashrc
 	~~~
 
-2. Using the `android` executable, download the latest `tools, build-tools` and within the Android 4.0.3 (API 15) folder, install `SDK platform`.
-	You may have to install additional SDK platforms for applications with different targets.
+4.	Install Java 8 JDK, on Debian/Ubuntu systems you can use the following command:
 
-3. Using your OS package manager, install `apt openjdk-7-jdk lib32stdc++6 lib32z1`.
-	On Debian and Ubuntu the command is:
-
-	~~~
-	sudo apt-get install apt openjdk-7-jdk lib32stdc++6 lib32z1
+	~~~raw
+	sudo apt install openjdk-8-jdk
 	~~~
 
-# Configure your Android application
+# Configure the Android application
 
 The _app.nit_ framework and this project offers some services to
 customize the generated Android application.
@@ -48,7 +71,7 @@ and `android_manifest_activity`.
 
     Example usage to specify an extra permission:
 
-    ~~~
+    ~~~raw
     android_manifest """<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>"""
     ~~~
 
@@ -79,6 +102,20 @@ Importing `android::landscape` or `android::portrait` locks the generated
 application in the specified orientation. This can be useful for games and
 other multimedia applications.
 
+## Resources and application icon
+
+Resources specific to the Android platform should be placed in an `android/` folder at the root of the project.
+The folder should adopt the structure of a normal Android project, e.g., a custom XML resource file can be placed
+at `android/res/values/color.xml` to be compiled with the Android application.
+
+The application icon should also be placed in the `android/` folder.
+Place the classic bitmap version at `android/res/mipmap-hdpi/ic_launcher.png` (and others),
+and the adaptive version at `android/res/mipmap-anydpi-v26/ic_launcher.xml`.
+The Nit compiler detects these files and uses them as the application icon.
+
+Additional `android/` folders may be placed next to more specific Nit modules to change the Android resources
+for application variants. The more specific resources will have priority over the project level `android/` files.
+
 # Compilation modes
 
 There are two compilation modes for the Android platform, debug and release.
@@ -106,7 +143,7 @@ as they change between versions of the Java SDK. You should instead use a
 command similar to the following, replacing `KEYSTORE_PATH` and `KEY_ALIAS`
 with the desired values.
 
-    ~~~
+    ~~~raw
     keytool -genkey -keystore KEYSTORE_PATH -alias KEY_ALIAS -sigalg MD5withRSA -keyalg RSA -keysize 1024 -validity 10000
     ~~~
 
@@ -117,7 +154,7 @@ optionally `TSA_SERVER`. These settings can be set in a startup script such as
     You can use the following commands by replacing the right-hand values
 to your own configuration.
 
-    ~~~
+    ~~~raw
     export KEYSTORE=keystore_path
     export KEY_ALIAS=key_alias
     export TSA_SERVER=timestamp_authority_server_url # Optional

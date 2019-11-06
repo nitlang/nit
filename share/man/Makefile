@@ -16,7 +16,7 @@ IN=$(wildcard nit*.md)
 OUT=$(patsubst %.md,man1/%.1,$(IN))
 
 MARKDOWN=../../lib/markdown
-NITMD=$(MARKDOWN)/nitmd
+NITMD=$(MARKDOWN)/bin/nitmd
 
 all: $(OUT)
 

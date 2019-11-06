@@ -12,23 +12,20 @@
 module neo4j::error
 
 import json::static
+import json
 
 # An error thrown by the `neo4j` API.
 #
 #     var error = new NeoError("ErrorMessage", "ErrorName")
-#     assert error.to_json == "\{\"error\":\"ErrorName\",\"message\":\"ErrorMessage\"\}"
+#     assert error.to_json == """{"message":"ErrorMessage","cause":null,"error":"ErrorName"}"""
 class NeoError
 	super Error
-	super Jsonable
+	serialize
 
 	# The name of the error.
 	#
 	# Used to programmatically distinguish this kind of error from others.
-	var name: String
-
-	redef fun to_json do
-		return "\{\"error\":{name.to_json},\"message\":{message.to_json}\}"
-	end
+	var name: String is serialize_as "error"
 
 	redef fun to_s do return "[{name}] {super}"
 end

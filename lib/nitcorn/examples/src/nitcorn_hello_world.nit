@@ -19,7 +19,7 @@
 # The main page, `index.html`, is served dynamicly with `MyAction`.
 # The rest of the Web site fetches files from the local directory
 # `www/hello_world/`.
-module nitcorn_hello_world
+module nitcorn_hello_world is example
 
 import nitcorn
 

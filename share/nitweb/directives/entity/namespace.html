@@ -1,13 +1,10 @@
-<span ng-if='mentity.mpackage'>
-	<entity-link mentity='mentity.mpackage' /> ::
+<span ng-repeat='part in namespace track by $index'>
+	<span ng-if='isArray(part)'>
+		<entity-namespace namespace='part' />
+	</span>
+	<span ng-if='isObject(part)'>
+		<entity-link mentity='part' />
+	</span>
+	<span ng-if='isString(part)'>
+	<span>{{part}}</span>
 </span>
-<span ng-if='mentity.mmodule'>
-	<entity-link mentity='mentity.mmodule' /> ::
-</span>
-<span ng-if='mentity.intro_mclassdef'>
-	<entity-link mentity='mentity.intro_mclassdef' /> ::
-</span>
-<span ng-if='mentity.mclassdef'>
-	<entity-link mentity='mentity.mclassdef' /> ::
-</span>
-{{mentity.name}}

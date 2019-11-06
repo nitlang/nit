@@ -18,7 +18,7 @@ module brainfuck
 # Interpreter for Brainfuck source code.
 class BFInterpreter
 	# Data cells
-	var dr = new Array[Byte]
+	var dr = new Array[Int]
 	# Data pointer
 	var dp = 0
 	# Instruction pointer
@@ -29,7 +29,7 @@ class BFInterpreter
 
 	# Create an interpreter for `program`.
 	init do
-		dr.add 0u8
+		dr.add 0
 	end
 
 	# Create an interpreter for the file located at `path`.
@@ -51,35 +51,35 @@ class BFInterpreter
 	# Evaluates the current instruction
 	fun eval do
 		var instr = program[ip]
-		if instr == '.'.ascii then printn dr[dp].ascii
-		if instr == '['.ascii then
-			if dr[dp] == 0u8 then
+		if instr == u'.' then printn dr[dp].code_point
+		if instr == u'[' then
+			if dr[dp] == 0 then
 				ip = find_matching_rbra
 				return
 			end
 		end
-		if instr == ']'.ascii then
-			if dr[dp] != 0u8 then
+		if instr == u']' then
+			if dr[dp] != 0 then
 				ip = find_matching_lbra
 				return
 			end
 		end
-		if instr == '>'.ascii then
+		if instr == u'>' then
 			dp += 1
-			if dp >= dr.length then dr.add(0u8)
+			if dp >= dr.length then dr.add(0)
 		end
-		if instr == '<'.ascii then
+		if instr == u'<' then
 			dp -= 1
 			if dp < 0 then abort
 		end
-		if instr == '+'.ascii then
-			dr[dp] = dr[dp] + 1u8
+		if instr == u'+' then
+			dr[dp] = dr[dp] + 1
 		end
-		if instr == '-'.ascii then
-			dr[dp] = dr[dp] - 1u8
+		if instr == u'-' then
+			dr[dp] = dr[dp] - 1
 		end
-		if instr == ','.ascii then
-			dr[dp] = getc.ascii
+		if instr == u',' then
+			dr[dp] = getc.code_point
 		end
 	end
 
@@ -89,14 +89,14 @@ class BFInterpreter
 		var lbracnt = 0
 		loop
 			if pos > program.length then abort
-			if program[pos] == ']'.ascii then
+			if program[pos] == u']' then
 				if lbracnt > 0 then
 					lbracnt -= 1
 				else
 					break
 				end
 			end
-			if program[pos] == '['.ascii then lbracnt += 1
+			if program[pos] == u'[' then lbracnt += 1
 			pos += 1
 		end
 		return pos
@@ -108,14 +108,14 @@ class BFInterpreter
 		var rbracnt = 0
 		loop
 			if pos < 0 then abort
-			if program[pos] == '['.ascii then
+			if program[pos] == u'[' then
 				if rbracnt > 0 then
 					rbracnt -= 1
 				else
 					break
 				end
 			end
-			if program[pos] == ']'.ascii then rbracnt += 1
+			if program[pos] == u']' then rbracnt += 1
 			pos -= 1
 		end
 		return pos

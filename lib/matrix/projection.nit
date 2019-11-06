@@ -150,4 +150,78 @@ redef class Matrix
 		var rotated = self * rotation
 		self.items = rotated.items
 	end
+
+	# Rotation matrix from Euler angles `pitch`, `yaw` and `roll` in radians
+	#
+	# Apply a composition of intrinsic rotations around the axes x-y'-z''.
+	# Or `pitch` around the X axis, `yaw` around Y and `roll` around Z,
+	# applied successively. All rotations follow the right hand rule.
+	#
+	# This service aims to respect the world axes and logic of `gamnit`,
+	# it may not correspond to all needs.
+	#
+	# The returned `Matrix` may be cached, it must not be modified.
+	new gamnit_euler_rotation(pitch, yaw, roll: Float)
+	do
+		if pitch == 0.0 and yaw == 0.0 and roll == 0.0 then
+			return once new Matrix.identity(4)
+		end
+
+		if rotation_pitch == pitch and rotation_yaw == yaw and rotation_roll == roll then
+			var rot = rotation_matrix_cache
+			if rot != null then return rot
+		end
+
+		var c1 = pitch.cos
+		var s1 = pitch.sin
+		var c2 = yaw.cos
+		var s2 = yaw.sin
+		var c3 = roll.cos
+		var s3 = roll.sin
+
+		var rot = new Matrix(4, 4)
+		rot.items.mat4_set(
+			          c2*c3,          -c2*s3,   -s2, 0.0,
+			 c1*s3+c3*s1*s2,  c1*c3-s1*s2*s3, c2*s1, 0.0,
+			-s1*s3+c1*c3*s2, -c3*s1-c1*s2*s3, c1*c2, 0.0,
+			            0.0,             0.0,   0.0, 1.0)
+
+		rotation_matrix_cache = rot
+		rotation_pitch = pitch
+		rotation_yaw = yaw
+		rotation_roll = roll
+		return rot
+	end
+end
+
+redef class NativeDoubleArray
+	fun mat4_set(f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15: Float) `{
+		self[ 0] =  f0;
+		self[ 1] =  f1;
+		self[ 2] =  f2;
+		self[ 3] =  f3;
+
+		self[ 4] =  f4;
+		self[ 5] =  f5;
+		self[ 6] =  f6;
+		self[ 7] =  f7;
+
+		self[ 8] =  f8;
+		self[ 9] =  f9;
+		self[10] = f10;
+		self[11] = f11;
+
+		self[12] = f12;
+		self[13] = f13;
+		self[14] = f14;
+		self[15] = f15;
+	`}
+end
+
+redef class Sys
+
+	private var rotation_matrix_cache: nullable Matrix = null
+	private var rotation_pitch = 0.0
+	private var rotation_yaw = 0.0
+	private var rotation_roll = 0.0
 end

@@ -15,10 +15,10 @@
 # Tool that produces highlighting for Nit programs
 module nitlight
 
-import highlight
+import htmlight
 
 class NitlightVisitor
-	super HighlightVisitor
+	super HtmlightVisitor
 
 	# The current highlight module
 	#
@@ -32,7 +32,7 @@ class NitlightVisitor
 	# Entities outside these modules will not be linked.
 	var mmodules: Collection[MModule]
 
-	redef fun hrefto(entitiy) do return entitiy.href(self)
+	redef fun hrefto(entity) do return entity.href(self)
 end
 
 redef class MEntity
@@ -94,7 +94,9 @@ var opt_last_line = new OptionInt("End the source file at this line (default: to
 var opt_dir = new OptionString("Output html files in a specific directory (required if more than one module)", "-d", "--dir")
 var opt_full = new OptionBool("Process also imported modules", "--full")
 var opt_ast = new OptionBool("Generate specific HTML elements for each Node of the AST", "--ast")
-toolcontext.option_context.add_option(opt_fragment, opt_line_id_prefix, opt_first_line, opt_last_line, opt_dir, opt_full)
+var opt_noinfobox = new OptionBool("Disable the generation of infoboxes", "--no-infobox")
+var opt_txt = new OptionBool("Generate text with ANSI coloring escape sequences", "--txt")
+toolcontext.option_context.add_option(opt_fragment, opt_line_id_prefix, opt_first_line, opt_last_line, opt_dir, opt_full, opt_ast, opt_txt, opt_noinfobox)
 toolcontext.tooldescription = "Usage: nitlight [OPTION]... <file.nit>...\nGenerates HTML of highlited code from Nit source files."
 toolcontext.process_options(args)
 
@@ -116,6 +118,29 @@ else if mmodules.length > 1 then
 	return
 end
 
+if opt_txt.value then
+	for mm in mmodules do
+		var v = new AnsiHighlightVisitor
+		v.include_loose_tokens = true
+		v.include_whole_lines = true
+
+		if opt_first_line.value != 0 then v.first_line = opt_first_line.value
+		if opt_last_line.value != 0 then v.last_line = opt_last_line.value
+		var m = modelbuilder.mmodule2node(mm)
+		assert m != null
+
+		v.highlight_node(m)
+		var page = v.result
+
+		if dir != null then
+			page.write_to_file("{dir}/{mm.c_name}.txt")
+		else
+			page.write_to(stdout)
+		end
+	end
+	return
+end
+
 for mm in mmodules do
 	if dir != null then toolcontext.info("write {dir}/{mm.c_name}.html", 1)
 
@@ -130,6 +155,7 @@ for mm in mmodules do
 	if opt_first_line.value != 0 then v.first_line = opt_first_line.value
 	if opt_last_line.value != 0 then v.last_line = opt_last_line.value
 	if opt_ast.value then v.with_ast = true
+	if opt_noinfobox.value then v.show_infobox = false
 	var page = null
 	var m = modelbuilder.mmodule2node(mm)
 	assert m != null
@@ -150,7 +176,7 @@ for mm in mmodules do
 		page.add_raw_html v.head_content
 		page.add_raw_html "</head><body><pre class='nit_code'>"
 	end
-	v.enter_visit(m)
+	v.highlight_node(m)
 	if not opt_fragment.value then
 		page.add(v.html)
 		page.add_raw_html "</pre>"
@@ -186,7 +212,7 @@ if dir != null then
 	page.add_raw_html "</li></body>"
 	page.write_to_file("{dir}/index.html")
 
-	var v = new HighlightVisitor
+	var v = new HtmlightVisitor
 	toolcontext.info("write {dir}/style.css", 1)
 	var f = new FileWriter.open("{dir}/style.css")
 	f.write v.css_content

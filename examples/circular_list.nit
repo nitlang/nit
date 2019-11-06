@@ -14,7 +14,7 @@
 
 # Example of an implementation of circular lists
 # This example shows the usage of generics and somewhat a specialisation of collections.
-module circular_list
+module circular_list is example
 
 # Sequences of elements implemented with a double-linked circular list
 class CircularList[E]

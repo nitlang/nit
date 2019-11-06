@@ -1,0 +1,16 @@
+<div class='container'>
+	<h1>
+		{{vm.tag.tag}}
+		<small>{{vm.tag.count}} packages</small>
+	</h1>
+	<hr/>
+
+	<div class='container-fluid no-padding' ng-if='vm.tag.results.length > 0'>
+		<div class='card-list'>
+			<entity-card mentity='package' ng-repeat='package in vm.tag.results' />
+		</div>
+		<div class='container text-center' ng-if='vm.tag'>
+			<ui-pagination pagination='vm.tag'/>
+		</div>
+	</div>
+</div>

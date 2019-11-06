@@ -50,6 +50,8 @@ redef class ToolContext
 	var opt_tables = new OptionBool("Compute tables metrics", "--tables")
 	# --rta
 	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
+	# --readme
+	var opt_readme = new OptionBool("Compute ReadMe metrics", "--readme")
 	# --generate-csv
 	var opt_csv = new OptionBool("Also export metrics in CSV format", "--csv")
 	# --generate_hyperdoc
@@ -79,6 +81,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
 		self.option_context.add_option(opt_rta)
+		self.option_context.add_option(opt_readme)
 		self.option_context.add_option(opt_csv)
 		self.option_context.add_option(opt_generate_hyperdoc)
 		self.option_context.add_option(opt_poset)
@@ -235,7 +238,7 @@ end
 class IntMetric
 	super Metric
 
-	redef type VAL: Int
+	redef type VAL: Int is fixed
 	redef type RES: Counter[ELM]
 
 	# `IntMetric` uses a Counter to store values in intern.

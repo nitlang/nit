@@ -111,7 +111,7 @@ class JsonGraphStore
 end
 
 redef class NeoGraph
-	super Jsonable
+	super Serializable
 
 	# Retrieve the graph from the specified JSON document.
 	#
@@ -191,35 +191,25 @@ redef class NeoGraph
 		end
 	end
 
-	redef fun to_json do return to_json_by_append
-
-	# Append the JSON representation of `self` to the specified buffer.
-	#
-	# For a description of the format, see `JsonGraphStore`.
-	#
-	# SEE: `to_json`
-	redef fun append_json(b) do
-		b.append "\{\"nodes\":["
-		append_entities_json(nodes, b)
-		b.append "],\"edges\":["
-		append_entities_json(edges, b)
-		b.append "]\}"
+	redef fun accept_json_serializer(v) do
+		v.stream.write "\{\"nodes\":["
+		append_entities_json(nodes, v)
+		v.stream.write "],\"edges\":["
+		append_entities_json(edges, v)
+		v.stream.write "]\}"
 	end
 
 	# Encode `self` in JSON.
 	#
 	# For a description of the format, see `JsonGraphStore`.
-	#
-	# SEE: `append_json`
-	private fun append_entities_json(entities: Collection[NeoEntity],
-			b: Buffer) do
+	private fun append_entities_json(entities: Collection[NeoEntity], v: JsonSerializer) do
 		var i = entities.iterator
 		if i.is_ok then
-			i.item.append_json_for(self, b)
+			i.item.append_json_for(self, v)
 			i.next
 			for entity in i do
-				b.add ','
-				entity.append_json_for(self, b)
+				v.stream.write ","
+				entity.append_json_for(self, v)
 			end
 		end
 	end
@@ -227,18 +217,18 @@ end
 
 redef class NeoNodeCollection
 	# Convert the specified JSON value into a local ID.
-	fun id_from_jsonable(id: nullable Jsonable): ID_TYPE do return id.as(ID_TYPE)
+	fun id_from_jsonable(id: nullable Serializable): ID_TYPE do return id.as(ID_TYPE)
 end
 
 redef class NeoEntity
 
 	# Append the JSON representation of the entity to the specified buffer.
-	fun append_json_for(graph: NeoGraph, buffer: Buffer) is abstract
+	fun append_json_for(graph: NeoGraph, v: JsonSerializer) is abstract
 end
 
-# Make `NeoNode` `Jsonable`.
+# Make `NeoNode` `Serializable`.
 redef class NeoNode
-	super Jsonable
+	super Serializable
 
 	# Retrieve the node from the specified JSON value.
 	#
@@ -273,32 +263,27 @@ redef class NeoNode
 		properties.add_all(json_properties)
 	end
 
-	redef fun to_json do return to_json_by_append
-
-	# Append the JSON representation of the node to the specified buffer.
-	#
-	# SEE: `JsonGraph`
-	redef fun append_json(b) do
-		b.append "\{\"labels\":["
+	redef fun accept_json_serializer(v) do
+		v.stream.write "\{\"labels\":["
 		var i = labels.iterator
 		if i.is_ok then
-			i.item.append_json(b)
+			i.item.serialize_to v
 			i.next
 			for lab in i do
-				b.add ','
-				lab.append_json(b)
+				v.stream.write ","
+				lab.serialize_to v
 			end
 		end
-		b.append "],\"properties\":"
-		properties.append_json(b)
-		b.add '}'
+		v.stream.write "],\"properties\":"
+		properties.serialize_to v
+		v.stream.write "}"
 	end
 
 	redef fun to_s do return to_json
 
 	# Append the JSON representation of the node to the specified buffer.
-	redef fun append_json_for(graph, buffer) do
-		append_json(buffer)
+	redef fun append_json_for(graph, v) do
+		accept_json_serializer v
 	end
 end
 
@@ -307,15 +292,15 @@ redef class NeoEdge
 	# Append the JSON representation of the relationship to the specified buffer.
 	#
 	# Use the IDs specfied by `graph.nodes`.
-	redef fun append_json_for(graph, buffer) do
-		buffer.append "\{\"type\":"
-		rel_type.as(not null).append_json(buffer)
-		buffer.append ",\"properties\":"
-		properties.append_json(buffer)
-		buffer.append ",\"from\":"
-		graph.nodes.id_of(from).append_json(buffer)
-		buffer.append ",\"to\":"
-		graph.nodes.id_of(to).append_json(buffer)
-		buffer.append "}"
+	redef fun append_json_for(graph, v) do
+		v.stream.write "\{\"type\":"
+		rel_type.as(not null).serialize_to(v)
+		v.stream.write ",\"properties\":"
+		properties.serialize_to(v)
+		v.stream.write ",\"from\":"
+		graph.nodes.id_of(from).serialize_to(v)
+		v.stream.write ",\"to\":"
+		graph.nodes.id_of(to).serialize_to(v)
+		v.stream.write "}"
 	end
 end

@@ -91,7 +91,7 @@ class HttpServer
 	# Send back `response` to the client
 	fun respond(response: HttpResponse)
 	do
-		write response.to_s
+		response.render.write_to(self)
 		for path in response.files do write_file path
 	end
 end
@@ -148,7 +148,7 @@ class HttpFactory
 			event_base.dispatch
 		end
 
-		event_base.destroy
+		event_base.free
 	end
 end
 
@@ -176,7 +176,7 @@ redef class Sys
 
 		var listener = listeners[name, port]
 		if listener == null then
-			listener = factory.bind_to(name, port)
+			listener = factory.bind_tcp(name, port)
 			if listener != null then
 				sys.listeners[name, port] = listener
 				listeners_count[name, port] = 1
@@ -201,8 +201,15 @@ redef class Interfaces
 	redef fun add(e)
 	do
 		super
-		var config = vh.server_config
-		if config != null then sys.listen_on(e, config.factory)
+		var config = virtual_host.server_config
+		if config != null then register_and_listen(e, config)
+	end
+
+	# Indirection to `listen_on` and check if this targets all addresses
+	private fun register_and_listen(e: Interface, config: ServerConfig)
+	do
+		listen_on(e, config.factory)
+		if e.name == "0.0.0.0" or e.name == "::0" then config.default_virtual_host = virtual_host
 	end
 
 	# TODO remove
@@ -212,7 +219,7 @@ redef class VirtualHosts
 	redef fun add(e)
 	do
 		super
-		for i in e.interfaces do sys.listen_on(i, config.factory)
+		for i in e.interfaces do e.interfaces.register_and_listen(i, config)
 	end
 
 	# TODO remove

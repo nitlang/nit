@@ -154,6 +154,56 @@ redef class Text
 		end
 		return arr.to_s
 	end
+
+	# Vigenere encoder on ASCII letters.
+	#
+	# Only the letters in '[A-Za-z]' are encoded while keeping the case.
+	#
+	#     assert "Hello, World!".vigenere("abc") == "Hfnlp, Yosnd!"
+	#
+	# REQUIRE `key` contains only lowercases '[a-z]'
+	fun vigenere(key: String): String
+	do
+		var res = new Buffer
+		res.enlarge(length)
+		var i = 0
+		for c in self do
+			var k = key[i%key.length]
+			assert k >= 'a' and k <= 'z'
+			if c.is_letter then
+				var d = k.code_point - 'a'.code_point
+				c = c.rot(d)
+				i += 1
+			end
+			res.add c
+		end
+		return res.to_s
+	end
+
+	# Vigenere decoder on ASCII letters.
+	#
+	# Only the letters in '[A-Za-z]' are decoded while keeping the case.
+	#
+	#     assert "Hfnlp, Yosnd!".uvigenere("abc") == "Hello, World!"
+	#
+	# REQUIRE `key` contains only lowercases '[a-z]'
+	fun uvigenere(key: String): String
+	do
+		var res = new Buffer
+		res.enlarge(length)
+		var i = 0
+		for c in self do
+			var k = key[i%key.length]
+			assert k >= 'a' and k <= 'z'
+			if c.is_letter then
+				var d = k.code_point - 'a'.code_point
+				c = c.rot(-d)
+				i += 1
+			end
+			res.add c
+		end
+		return res.to_s
+	end
 end
 
 redef class Bytes
@@ -162,12 +212,12 @@ redef class Bytes
 	#     assert "this is a test".to_bytes.hamming_distance("wokka wokka!!!".bytes) == 37
 	#     assert "this is a test".to_bytes.hamming_distance("this is a test".bytes) == 0
 	#
-	fun hamming_distance(other: SequenceRead[Byte]): Int do
+	fun hamming_distance(other: SequenceRead[Int]): Int do
 		var diff = 0
 		for idx in self.length.times do
 			var res_byte = self[idx] ^ other[idx]
 			for bit in [0..8[ do
-				if res_byte & 1u8 == 1u8 then diff += 1
+				if res_byte & 1 == 1 then diff += 1
 				res_byte = res_byte >> 1
 			end
 		end

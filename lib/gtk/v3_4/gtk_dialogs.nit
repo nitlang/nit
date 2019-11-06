@@ -52,40 +52,40 @@ extern class GtkAboutDialog `{GtkAboutDialog *`}
 		return (GtkAboutDialog *)gtk_about_dialog_new();
 	`}
 
-	fun program_name: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_about_dialog_get_program_name(self));
+	fun program_name: String import CString.to_s `{
+		return CString_to_s((char *)gtk_about_dialog_get_program_name(self));
 	`}
 
 	fun program_name=(name: String) import String.to_cstring `{
 		gtk_about_dialog_set_program_name(self, String_to_cstring(name));
 	`}
 
-	fun version: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_about_dialog_get_version(self));
+	fun version: String import CString.to_s `{
+		return CString_to_s((char *)gtk_about_dialog_get_version(self));
 	`}
 
 	fun version=(v: String) import String.to_cstring `{
 		gtk_about_dialog_set_version(self, String_to_cstring(v));
 	`}
 
-	fun copyright: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_about_dialog_get_copyright(self));
+	fun copyright: String import CString.to_s `{
+		return CString_to_s((char *)gtk_about_dialog_get_copyright(self));
 	`}
 
 	fun copyright=(c: String) import String.to_cstring `{
 		gtk_about_dialog_set_copyright(self, String_to_cstring(c));
 	`}
 
-	fun comments: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_about_dialog_get_comments(self));
+	fun comments: String import CString.to_s `{
+		return CString_to_s((char *)gtk_about_dialog_get_comments(self));
 	`}
 
 	fun comments=(com: String) import String.to_cstring `{
 		gtk_about_dialog_set_comments(self, String_to_cstring(com));
 	`}
 
-	fun license: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_about_dialog_get_license(self));
+	fun license: String import CString.to_s `{
+		return CString_to_s((char *)gtk_about_dialog_get_license(self));
 	`}
 
 	fun license=(li: String) import String.to_cstring `{
@@ -94,16 +94,16 @@ extern class GtkAboutDialog `{GtkAboutDialog *`}
 
 	# license_type
 
-	fun website: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_about_dialog_get_website(self));
+	fun website: String import CString.to_s `{
+		return CString_to_s((char *)gtk_about_dialog_get_website(self));
 	`}
 
 	fun website=(link: String) import String.to_cstring `{
 		gtk_about_dialog_set_website(self, String_to_cstring(link));
 	`}
 
-	fun website_label: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *) gtk_about_dialog_get_website_label(self));
+	fun website_label: String import CString.to_s `{
+		return CString_to_s((char *) gtk_about_dialog_get_website_label(self));
 	`}
 
 	fun website_label=(link_label: String) import String.to_cstring `{
@@ -111,8 +111,8 @@ extern class GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	# TODO
-	# fun authors: String  import NativeString.to_s_with_copy `{
-	#		return NativeString_to_s_with_copy(gtk_about_dialog_get_authors(self));
+	# fun authors: String  import CString.to_s `{
+	#		return CString_to_s(gtk_about_dialog_get_authors(self));
 	# `}
 
 	# TODO
@@ -144,8 +144,8 @@ extern class GtkAppChooserDialog `{GtkAppChooserDialog *`}
 
 	fun widget: GtkWidget `{ return gtk_app_chooser_dialog_get_widget(self); `}
 
-	fun heading: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_app_chooser_dialog_get_heading(self));
+	fun heading: String import CString.to_s `{
+		return CString_to_s((char *)gtk_app_chooser_dialog_get_heading(self));
 	`}
 
 	fun heading=(text: String) import String.to_cstring `{

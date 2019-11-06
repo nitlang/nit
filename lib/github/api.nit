@@ -19,13 +19,17 @@
 # For most use-cases you need to use the `GithubAPI` client.
 module api
 
-import github_curl
+intrude import json::serialization_read
+
+import base64
+import curl
+import json
 
 # Client to Github API
 #
 # To access the API you need an instance of a `GithubAPI` client.
 #
-# ~~~
+# ~~~nitish
 # # Get Github authentification token.
 # var token = get_github_oauth
 # assert not token.is_empty
@@ -36,12 +40,12 @@ import github_curl
 #
 # The API client allows you to get Github API entities.
 #
-# ~~~
-# var repo = api.load_repo("nitlang/nit")
+# ~~~nitish
+# var repo = api.get_repo("nitlang/nit")
 # assert repo != null
 # assert repo.name == "nit"
 #
-# var user = api.load_user("Morriar")
+# var user = api.get_user("Morriar")
 # assert user != null
 # assert user.login == "Morriar"
 # ~~~
@@ -59,69 +63,78 @@ class GithubAPI
 	#
 	# Be aware that there is [rate limits](https://developer.github.com/v3/rate_limit/)
 	# associated to the key.
-	var auth: String
-
-	# Github API base url.
-	#
-	# Default is `https://api.github.com` and should not be changed.
-	var api_url = "https://api.github.com"
+	var auth: nullable String = null is optional
 
 	# User agent used for HTTP requests.
 	#
 	# Default is `nit_github_api`.
 	#
 	# See <https://developer.github.com/v3/#user-agent-required>
-	var user_agent = "nit_github_api"
+	var user_agent: String = "nit_github_api" is optional
 
-	# Curl instance.
-	#
-	# Internal Curl instance used to perform API calls.
-	private var ghcurl: GithubCurl is noinit
-
-	# Verbosity level.
-	#
-	# * `0`: only errors (default)
-	# * `1`: verbose
-	var verbose_lvl = 0 is public writable
-
-	init do
-		ghcurl = new GithubCurl(auth, user_agent)
+	# Headers to use on all requests
+	fun new_headers: HeaderMap do
+		var map = new HeaderMap
+		var auth = self.auth
+		if auth != null then
+			map["Authorization"] = "token {auth}"
+		end
+		map["User-Agent"] = user_agent
+		# FIXME remove when projects and team are no more in beta
+		map["Accept"] = "application/vnd.github.inertia-preview+json"
+		map["Accept"] = "application/vnd.github.hellcat-preview+json"
+		return map
 	end
 
-	# Execute a GET request on Github API.
+	# Github API base url.
 	#
-	# This method returns raw json data.
-	# See other `load_*` methods to use more expressive types.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var obj = api.get("repos/nitlang/nit")
-	#     assert obj isa JsonObject
-	#     assert obj["name"] == "nit"
-	#
-	# Returns `null` in case of `error`.
-	#
-	#     obj = api.get("foo/bar/baz")
-	#     assert obj == null
-	#     assert api.was_error
-	#     var err = api.last_error
-	#     assert err isa GithubError
-	#     assert err.name == "GithubAPIError"
-	#     assert err.message == "Not Found"
-	fun get(path: String): nullable Jsonable do
+	# Default is `https://api.github.com` and should not be changed.
+	var api_url = "https://api.github.com"
+
+	# Send a HTTPRequest to the Github API
+	fun send(method, path: String, headers: nullable HeaderMap, body: nullable String): nullable String do
+		last_error = null
 		path = sanitize_uri(path)
-		var res = ghcurl.get_and_parse("{api_url}/{path}")
-		if res isa Error then
-			last_error = res
+		var uri = "{api_url}{path}"
+		var request = new CurlHTTPRequest(uri)
+		request.method = method
+		request.user_agent = user_agent
+		request.headers = headers or else self.new_headers
+		request.body = body
+		return check_response(uri, request.execute)
+	end
+
+	private fun check_response(uri: String, response: CurlResponse): nullable String do
+		if response isa CurlResponseSuccess then
+			was_error = false
+			return response.body_str
+		else if response isa CurlResponseFailed then
+			last_error = new GithubAPIError(
+				response.error_msg,
+				response.error_code,
+				uri
+			)
 			was_error = true
+			return null
+		else abort
+	end
+
+	# Deserialize an object
+	fun deserialize(string: nullable Serializable): nullable Object do
+		if string == null then return null
+		var deserializer = new GithubDeserializer(string.to_s)
+		var res = deserializer.deserialize
+		if deserializer.errors.not_empty then
+			was_error = true
+			last_error = new GithubDeserializerErrors("Deserialization failed", deserializer.errors)
+			return null
+		else if res isa GithubError then
+			was_error = true
+			last_error = res
 			return null
 		end
 		was_error = false
 		return res
-	end
-
-	# Display a message depending on `verbose_lvl`.
-	fun message(lvl: Int, message: String) do
-		if lvl <= verbose_lvl then print message
 	end
 
 	# Escape `uri` in an acceptable format for Github.
@@ -136,309 +149,87 @@ class GithubAPI
 	# Does the last request provoqued an error?
 	var was_error = false is protected writable
 
-	# Load the json object from Github.
-	# See `GithubEntity::load_from_github`.
-	protected fun load_from_github(key: String): JsonObject do
-		message(1, "Get {key} (github)")
-		var res = get(key)
-		if was_error then return new JsonObject
-		return res.as(JsonObject)
+	# Execute a GET request on Github API.
+	#
+	# This method returns a deserialized result.
+	#
+	# For raw data see `send`.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var obj = api.get("/repos/nitlang/nit")
+	# assert obj isa Repo
+	# assert obj.name == "nit"
+	# ~~~
+	#
+	# Returns `null` in case of `error`.
+	#
+	# ~~~nitish
+	# obj = api.get("/foo/bar/baz")
+	# assert obj == null
+	# assert api.was_error
+	# assert api.last_error isa GithubError
+	# ~~~
+	fun get(path: String, headers: nullable HeaderMap, data: nullable String): nullable Object do
+		return deserialize(send("GET", path, headers, data))
+	end
+
+	# Get the Github logged user from `auth` token.
+	#
+	# Loads the `User` from the API or returns `null` if the user cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var user = api.get_auth_user
+	# assert user.login == "Morriar"
+	# ~~~
+	fun get_auth_user: nullable User do
+		return get("/user").as(nullable User)
 	end
 
 	# Get the Github user with `login`
 	#
 	# Loads the `User` from the API or returns `null` if the user cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var user = api.load_user("Morriar")
-	#     assert user.login == "Morriar"
-	fun load_user(login: String): nullable User do
-		var user = new User(self, login)
-		return user.load_from_github
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var user = api.get_user("Morriar")
+	# print user or else "null"
+	# assert user.login == "Morriar"
+	# ~~~
+	fun get_user(login: String): nullable User do
+		return get("/users/{login}").as(nullable User)
 	end
 
 	# Get the Github repo with `full_name`.
 	#
 	# Loads the `Repo` from the API or returns `null` if the repo cannot be found.
 	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo.name == "nit"
-	#     assert repo.owner.login == "nitlang"
-	#     assert repo.default_branch.name == "master"
-	fun load_repo(full_name: String): nullable Repo do
-		var repo = new Repo(self, full_name)
-		return repo.load_from_github
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo.name == "nit"
+	# assert repo.owner.login == "nitlang"
+	# assert repo.default_branch == "master"
+	# ~~~
+	fun get_repo(repo_slug: String): nullable Repo do
+		return get("/repos/{repo_slug}").as(nullable Repo)
 	end
 
-	# Get the Github branch with `name`.
+	# List of repo branches.
 	#
-	# Returns `null` if the branch cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var branch = api.load_branch(repo, "master")
-	#     assert branch.name == "master"
-	#     assert branch.commit isa Commit
-	fun load_branch(repo: Repo, name: String): nullable Branch do
-		var branch = new Branch(self, repo, name)
-		return branch.load_from_github
-	end
-
-	# Get the Github commit with `sha`.
-	#
-	# Returns `null` if the commit cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var commit = api.load_commit(repo, "64ce1f")
-	#     assert commit isa Commit
-	fun load_commit(repo: Repo, sha: String): nullable Commit do
-		var commit = new Commit(self, repo, sha)
-		return commit.load_from_github
-	end
-
-	# Get the Github issue #`number`.
-	#
-	# Returns `null` if the issue cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var issue = api.load_issue(repo, 1)
-	#     assert issue.title == "Doc"
-	fun load_issue(repo: Repo, number: Int): nullable Issue do
-		var issue = new Issue(self, repo, number)
-		return issue.load_from_github
-	end
-
-	# Get the Github pull request #`number`.
-	#
-	# Returns `null` if the pull request cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var pull = api.load_pull(repo, 1)
-	#     assert pull.title == "Doc"
-	#     assert pull.user.login == "Morriar"
-	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
-		var pull = new PullRequest(self, repo, number)
-		return pull.load_from_github
-	end
-
-	# Get the Github label with `name`.
-	#
-	# Returns `null` if the label cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var labl = api.load_label(repo, "ok_will_merge")
-	#     assert labl != null
-	fun load_label(repo: Repo, name: String): nullable Label do
-		var labl = new Label(self, repo, name)
-		return labl.load_from_github
-	end
-
-	# Get the Github milestone with `id`.
-	#
-	# Returns `null` if the milestone cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var stone = api.load_milestone(repo, 4)
-	#     assert stone.title == "v1.0prealpha"
-	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
-		var milestone = new Milestone(self, repo, id)
-		return milestone.load_from_github
-	end
-
-	# Get the Github issue event with `id`.
-	#
-	# Returns `null` if the event cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo isa Repo
-	#     var event = api.load_issue_event(repo, 199674194)
-	#     assert event.actor.login == "privat"
-	#     assert event.event == "labeled"
-	#     assert event.labl.name == "need_review"
-	#     assert event.issue.number == 945
-	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
-		var event = new IssueEvent(self, repo, id)
-		return event.load_from_github
-	end
-
-	# Get the Github commit comment with `id`.
-	#
-	# Returns `null` if the comment cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var comment = api.load_commit_comment(repo, 8982707)
-	#     assert comment.user.login == "Morriar"
-	#     assert comment.body == "For testing purposes..."
-	#     assert comment.commit.sha == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
-	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
-		var comment = new CommitComment(self, repo, id)
-		return comment.load_from_github
-	end
-
-	# Get the Github issue comment with `id`.
-	#
-	# Returns `null` if the comment cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var comment = api.load_issue_comment(repo, 6020149)
-	#     assert comment.user.login == "privat"
-	#     assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
-	#     assert comment.issue.number == 10
-	fun load_issue_comment(repo: Repo, id: Int): nullable IssueComment do
-		var comment = new IssueComment(self, repo, id)
-		return comment.load_from_github
-	end
-
-	# Get the Github diff comment with `id`.
-	#
-	# Returns `null` if the comment cannot be found.
-	#
-	#     var api = new GithubAPI(get_github_oauth)
-	#     var repo = api.load_repo("nitlang/nit")
-	#     assert repo != null
-	#     var comment = api.load_review_comment(repo, 21010363)
-	#     assert comment.path == "src/modelize/modelize_property.nit"
-	#     assert comment.original_position == 26
-	#     assert comment.pull.number == 945
-	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
-		var comment = new ReviewComment(self, repo, id)
-		return comment.load_from_github
-	end
-end
-
-# Something returned by the Github API.
-#
-# Mainly a Nit wrapper around a JSON objet.
-abstract class GithubEntity
-
-	# Github API instance.
-	var api: GithubAPI
-
-	# FIXME constructor should be private
-
-	# Key used to access this entity from Github api base.
-	fun key: String is abstract
-
-	# JSON representation of `self`.
-	#
-	# This is the same json structure than used by Github API.
-	var json: JsonObject is noinit, protected writable
-
-	# Load `json` from Github API.
-	private fun load_from_github: nullable SELF do
-		json = api.load_from_github(key)
-		if api.was_error then return null
-		return self
-	end
-
-	redef fun to_s do return json.to_json
-
-	# Github page url.
-	fun html_url: String do return json["html_url"].as(String)
-
-	# Set page url.
-	fun html_url=(url: String) do json["html_url"] = url
-end
-
-# A Github user
-#
-# Provides access to [Github user data](https://developer.github.com/v3/users/).
-# Should be accessed from `GithubAPI::load_user`.
-class User
-	super GithubEntity
-
-	redef var key is lazy do return "users/{login}"
-
-	# Github login.
-	var login: String
-
-	# Init `self` from a `json` object.
-	init from_json(api: GithubAPI, json: JsonObject) do
-		init(api, json["login"].as(String))
-		self.json = json
-	end
-
-	# Avatar image url for this user.
-	fun avatar_url: String do return json["avatar_url"].as(String)
-
-	# Set avatar url.
-	fun avatar_url=(url: String) do json["avatar_url"] = url
-end
-
-# A Github repository.
-#
-# Provides access to [Github repo data](https://developer.github.com/v3/repos/).
-# Should be accessed from `GithubAPI::load_repo`.
-class Repo
-	super GithubEntity
-
-	redef var key is lazy do return "repos/{full_name}"
-
-	# Repo full name on Github.
-	var full_name: String
-
-	# Init `self` from a `json` object.
-	init from_json(api: GithubAPI, json: JsonObject) do
-		init(api, json["full_name"].as(String))
-		self.json = json
-	end
-
-	# Repo short name on Github.
-	fun name: String do return json["name"].as(String)
-
-	# Set repo full name
-	fun name=(name: String) do json["name"] = name
-
-	# Get the repo owner.
-	fun owner: User do return new User.from_json(api, json["owner"].as(JsonObject))
-
-	# Set repo owner
-	fun owner=(owner: User) do json["owner"] = owner.json
-
-	# List of branches associated with their names.
-	fun branches: Map[String, Branch] do
-		api.message(1, "Get branches for {full_name}")
-		var array = api.get("repos/{full_name}/branches")
-		var res = new HashMap[String, Branch]
-		if not array isa JsonArray then return res
-		for obj in array do
-			if not obj isa JsonObject then continue
-			var name = obj["name"].as(String)
-			res[name] = new Branch.from_json(api, self, obj)
-		end
-		return res
+	# Pagination:
+	#	* `page`: page to fetch (default: 1)
+	#	* `per_page`: number of branches by page (default: 30)
+	fun get_repo_branches(repo_slug: String, page, per_page: nullable Int): Array[Branch] do
+		return new GithubArray[Branch].from(get(
+			"/repos/{repo_slug}/branches?{pagination(page, per_page)}"))
 	end
 
 	# List of issues associated with their ids.
-	fun issues: Map[Int, Issue] do
-		api.message(1, "Get issues for {full_name}")
-		var res = new HashMap[Int, Issue]
-		var issue = last_issue
-		if issue == null then return res
-		res[issue.number] = issue
-		while issue.number > 1 do
-			issue = api.load_issue(self, issue.number - 1)
-			assert issue isa Issue
-			res[issue.number] = issue
-		end
-		return res
+	fun get_repo_issues(repo_slug: String, page, per_page: nullable Int): Array[Issue] do
+		return new GithubArray[Issue].from(get(
+			"/repos/{repo_slug}/issues?{pagination(page, per_page)}"))
 	end
 
 	# Search issues in this repo form an advanced query.
@@ -450,55 +241,20 @@ class Repo
 	# ~~~
 	#
 	# See <https://developer.github.com/v3/search/#search-issues>.
-	fun search_issues(query: String): nullable Array[Issue] do
-		query = "search/issues?q={query} repo:{full_name}"
-		var response = api.get(query)
-		if api.was_error then return null
-		var arr = response.as(JsonObject)["items"].as(JsonArray)
-		var res = new Array[Issue]
-		for obj in arr do
-			res.add new Issue.from_json(api, self, obj.as(JsonObject))
-		end
-		return res
-	end
-
-	# Get the last published issue.
-	fun last_issue: nullable Issue do
-		var array = api.get("repos/{full_name}/issues")
-		if not array isa JsonArray then return null
-		if array.is_empty then return null
-		var obj = array.first
-		if not obj isa JsonObject then return null
-		return new Issue.from_json(api, self, obj)
+	fun search_repo_issues(repo_slug: String, query: String, page, per_page: nullable Int): nullable SearchResults do
+		return get("/search/issues?q={query} repo:{repo_slug}&{pagination(page, per_page)}").as(nullable SearchResults)
 	end
 
 	# List of labels associated with their names.
-	fun labels: Map[String, Label] do
-		api.message(1, "Get labels for {full_name}")
-		var array = api.get("repos/{full_name}/labels")
-		var res = new HashMap[String, Label]
-		if not array isa JsonArray then return res
-		for obj in array do
-			if not obj isa JsonObject then continue
-			var name = obj["name"].as(String)
-			res[name] = new Label.from_json(api, self, obj)
-		end
-		return res
+	fun get_repo_labels(repo_slug: String, page, per_page: nullable Int): Array[Label] do
+		return new GithubArray[Label].from(get(
+			"/repos/{repo_slug}/labels?{pagination(page, per_page)}"))
 	end
 
 	# List of milestones associated with their ids.
-	fun milestones: Map[Int, Milestone] do
-		api.message(1, "Get milestones for {full_name}")
-		var array = api.get("repos/{full_name}/milestones")
-		var res = new HashMap[Int, Milestone]
-		if array isa JsonArray then
-			for obj in array do
-				if not obj isa JsonObject then continue
-				var number = obj["number"].as(Int)
-				res[number] = new Milestone.from_json(api, self, obj)
-			end
-		end
-		return res
+	fun get_repo_milestones(repo_slug: String, page, per_page: nullable Int): Array[Milestone] do
+		return new GithubArray[Milestone].from(get(
+			"/repos/{repo_slug}/milestones?{pagination(page, per_page)}"))
 	end
 
 	# List of pull-requests associated with their ids.
@@ -506,723 +262,555 @@ class Repo
 	# Implementation notes: because PR numbers are not consecutive,
 	# PR are loaded from pages.
 	# See: https://developer.github.com/v3/pulls/#list-pull-requests
-	fun pulls: Map[Int, PullRequest] do
-		api.message(1, "Get pulls for {full_name}")
-		var res = new HashMap[Int, PullRequest]
-		var page = 1
-		var array = api.get("{key}/pulls?page={page}").as(JsonArray)
-		while not array.is_empty do
-			for obj in array do
-				if not obj isa JsonObject then continue
-				var number = obj["number"].as(Int)
-				res[number] = new PullRequest.from_json(api, self, obj)
-			end
-			page += 1
-			array = api.get("{key}/pulls?page={page}").as(JsonArray)
-		end
-		return res
+	fun get_repo_pulls(repo_slug: String, page, per_page: nullable Int): Array[PullRequest] do
+		return new GithubArray[PullRequest].from(get(
+			"/repos/{repo_slug}/pulls?{pagination(page, per_page)}"))
 	end
 
 	# List of contributor related statistics.
-	fun contrib_stats: Array[ContributorStats] do
-		api.message(1, "Get contributor stats for {full_name}")
-		var res = new Array[ContributorStats]
-		var array = api.get("{key}/stats/contributors")
-		if array isa JsonArray then
-			for obj in array do
-				res.add new ContributorStats.from_json(api, obj.as(JsonObject))
-			end
-		end
-		return res
+	fun get_repo_contrib_stats(repo_slug: String): Array[ContributorStats] do
+		return new GithubArray[ContributorStats].from(get("/repos/{repo_slug}/stats/contributors"))
 	end
 
-	# Repo default branch.
-	fun default_branch: Branch do
-		var name = json["default_branch"].as(String)
-		var branch = api.load_branch(self, name)
-		assert branch isa Branch
-		return branch
+	# Get the Github branch with `name`.
+	#
+	# Returns `null` if the branch cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var branch = api.get_branch(repo, "master")
+	# assert branch.name == "master"
+	# assert branch.commit isa Commit
+	# ~~~
+	fun get_branch(repo_slug: String, name: String): nullable Branch do
+		return get("/repos/{repo_slug}/branches/{name}").as(nullable Branch)
 	end
 
-	# Set the default branch
-	fun default_branch=(branch: Branch) do json["default_branch"] = branch.json
+	# Get the Github commit with `sha`.
+	#
+	# Returns `null` if the commit cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var commit = api.get_commit(repo, "64ce1f")
+	# assert commit isa Commit
+	# ~~~
+	fun get_commit(repo_slug: String, sha: String): nullable Commit do
+		return get("/repos/{repo_slug}/commits/{sha}").as(nullable Commit)
+	end
+
+	# Get the status of a commit
+	#
+	# The status holds the result of each check ran on a commit like CI, reviews etc.
+	fun get_commit_status(repo_slug: String, sha: String): nullable CommitStatus do
+		return get("/repos/{repo_slug}/commits/{sha}/status").as(nullable CommitStatus)
+	end
+
+	# Get the Github issue #`number`.
+	#
+	# Returns `null` if the issue cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var issue = api.get_issue(repo, 1)
+	# assert issue.title == "Doc"
+	# ~~~
+	fun get_issue(repo_slug: String, number: Int): nullable Issue do
+		return get("/repos/{repo_slug}/issues/{number}").as(nullable Issue)
+	end
+
+	# List of event on this issue.
+	fun get_issue_comments(repo_slug: String, issue_number: Int, page, per_page: nullable Int): Array[IssueComment] do
+		return new GithubArray[IssueComment].from(get(
+			"/repos/{repo_slug}/issues/{issue_number}/comments?{pagination(page, per_page)}"))
+	end
+
+	# List of events on this issue.
+	fun get_issue_events(repo_slug: String, issue_number: Int, page, per_page: nullable Int): Array[IssueEvent] do
+		return new GithubArray[IssueEvent].from(get(
+			"/repos/{repo_slug}/issues/{issue_number}/events?{pagination(page, per_page)}"))
+	end
+
+	# Get the Github pull request #`number`.
+	#
+	# Returns `null` if the pull request cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var pull = api.get_pull(repo, 1)
+	# assert pull.title == "Doc"
+	# assert pull.user.login == "Morriar"
+	# ~~~
+	fun get_pull(repo_slug: String, number: Int): nullable PullRequest do
+		return get("/repos/{repo_slug}/pulls/{number}").as(nullable PullRequest)
+	end
+
+	# List of comments on a pull request
+	fun get_pull_comments(repo_slug: String, pull_number: Int, page, per_page: nullable Int): Array[PullComment] do
+		return new GithubArray[PullComment].from(get(
+			"/repos/{repo_slug}/pulls/{pull_number}/comments?{pagination(page, per_page)}"))
+	end
+
+	# Get a specific pull request comment
+	fun get_pull_comment(repo_slug: String, id: Int): nullable PullComment do
+		return get("/repos/{repo_slug}/pulls/comments/{id}").as(nullable PullComment)
+	end
+
+	# Get the Github label with `name`.
+	#
+	# Returns `null` if the label cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var labl = api.get_label(repo, "ok_will_merge")
+	# assert labl != null
+	# ~~~
+	fun get_label(repo_slug: String, name: String): nullable Label do
+		return get("/repos/{repo_slug}/labels/{name}").as(nullable Label)
+	end
+
+	# Get the Github milestone with `id`.
+	#
+	# Returns `null` if the milestone cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var stone = api.get_milestone(repo, 4)
+	# assert stone.title == "v1.0prealpha"
+	# ~~~
+	fun get_milestone(repo_slug: String, id: Int): nullable Milestone do
+		return get("/repos/{repo_slug}/milestones/{id}").as(nullable Milestone)
+	end
+
+	# Get the Github issue event with `id`.
+	#
+	# Returns `null` if the event cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo isa Repo
+	# var event = api.get_issue_event(repo, 199674194)
+	# assert event isa IssueEvent
+	# assert event.actor.login == "privat"
+	# assert event.event == "labeled"
+	# assert event.labl isa Label
+	# assert event.labl.name == "need_review"
+	# ~~~
+	fun get_issue_event(repo_slug: String, id: Int): nullable IssueEvent do
+		return get("/repos/{repo_slug}/issues/events/{id}").as(nullable IssueEvent)
+	end
+
+	# Get the Github commit comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var comment = api.get_commit_comment(repo, 8982707)
+	# assert comment.user.login == "Morriar"
+	# assert comment.body == "For testing purposes...\n"
+	# assert comment.commit_id == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
+	# ~~~
+	fun get_commit_comment(repo_slug: String, id: Int): nullable CommitComment do
+		return get("/repos/{repo_slug}/comments/{id}").as(nullable CommitComment)
+	end
+
+	# Get the Github issue comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	# ~~~nitish
+	# var api = new GithubAPI(get_github_oauth)
+	# var repo = api.get_repo("nitlang/nit")
+	# assert repo != null
+	# var comment = api.get_issue_comment(repo, 6020149)
+	# assert comment.user.login == "privat"
+	# assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
+	# assert comment.issue_number == 10
+	# ~~~
+	fun get_issue_comment(repo_slug: String, id: Int): nullable IssueComment do
+		return get("/repos/{repo_slug}/issues/comments/{id}").as(nullable IssueComment)
+	end
+
+	private fun pagination(page, per_page: nullable Int): String do
+		return "page={page or else 1}&per_page={per_page or else 30}"
+	end
 end
 
-# A `RepoEntity` is something contained in a `Repo`.
-abstract class RepoEntity
-	super GithubEntity
+# Return deserialization as an array of E
+#
+# Non-subtypes will be ignored.
+private class GithubArray[E]
+	super Array[E]
 
-	# Repo that contains `self`.
-	var repo: Repo
-
-	# Init `self` from a `json` object.
-	init from_json(api: GithubAPI, repo: Repo, json: JsonObject) do
-		init(api, repo)
-		self.json = json
+	# Create `self` from an Array of objects
+	#
+	# Objects non-subtyping E will be ignored.
+	init from(res: nullable Object) do
+		if not res isa Array[Object] then return
+		for obj in res do
+			if obj isa E then add obj
+		end
 	end
+end
+
+# An Error returned by GithubAPI
+class GithubError
+	super Error
+end
+
+# An Error returned by https://api.github.com
+#
+# Anything that can occurs when sending request to the API:
+# * Can't connect to API
+# * Ressource not found
+# * Validation error
+# * ...
+class GithubAPIError
+	super GithubError
+
+	# Status code obtained
+	var status_code: Int
+
+	# URI that returned the error
+	var requested_uri: String
+end
+
+# An Error returned while deserializing objects from the API
+class GithubDeserializerErrors
+	super GithubError
+
+	# Errors returned by the deserizalization process
+	var deserizalization_errors: Array[Error]
+end
+
+# A Github user
+#
+# Provides access to [Github user data](https://developer.github.com/v3/users/).
+# Should be accessed from `GithubAPI::get_user`.
+class User
+	super GitUser
+	serialize
+
+	# Github login.
+	var login: String is writable
+
+	# Avatar image url for this user.
+	var avatar_url: nullable String is writable
+
+	# User public name if any.
+	var name: nullable String is writable
+
+	# User public email if any.
+	var email: nullable String is writable
+
+	# User public blog if any.
+	var blog: nullable String is writable
+end
+
+# A Github repository.
+#
+# Provides access to [Github repo data](https://developer.github.com/v3/repos/).
+# Should be accessed from `GithubAPI::get_repo`.
+class Repo
+	serialize
+
+	# Repo full name on Github.
+	var full_name: String is writable
+
+	# Repo short name on Github.
+	var name: String is writable
+
+	# Get the repo owner.
+	var owner: User is writable
+
+	# Repo default branch name.
+	var default_branch: nullable String = null is optional, writable
 end
 
 # A Github branch.
 #
-# Should be accessed from `GithubAPI::load_branch`.
+# Should be accessed from `GithubAPI::get_branch`.
 #
 # See <https://developer.github.com/v3/repos/#list-branches>.
 class Branch
-	super RepoEntity
-
-	redef var key is lazy do return "{repo.key}/branches/{name}"
+	serialize
 
 	# Branch name.
-	var name: String
-
-	redef init from_json(api, repo, json) do
-		self.name = json["name"].as(String)
-		super
-	end
+	var name: String is writable
 
 	# Get the last commit of `self`.
-	fun commit: Commit do return new Commit.from_json(api, repo, json["commit"].as(JsonObject))
-
-	# Set the last commit
-	fun commit=(commit: Commit) do json["commit"] = commit.json
-
-	# List all commits in `self`.
-	#
-	# This can be long depending on the branch size.
-	# Commit are returned in an unspecified order.
-	fun commits: Array[Commit] do
-		var res = new Array[Commit]
-		var done = new HashSet[String]
-		var todos = new Array[Commit]
-		todos.add commit
-		while not todos.is_empty do
-			var commit = todos.pop
-			if done.has(commit.sha) then continue
-			done.add commit.sha
-			res.add commit
-			for parent in commit.parents do
-				todos.add parent
-			end
-		end
-		return res
-	end
+	var commit: Commit is writable
 end
 
 # A Github commit.
 #
-# Should be accessed from `GithubAPI::load_commit`.
+# Should be accessed from `GithubAPI::get_commit`.
 #
 # See <https://developer.github.com/v3/repos/commits/>.
 class Commit
-	super RepoEntity
-
-	redef var key is lazy do return "{repo.key}/commits/{sha}"
+	serialize
 
 	# Commit SHA.
-	var sha: String
-
-	redef init from_json(api, repo, json) do
-		self.sha = json["sha"].as(String)
-		super
-	end
+	var sha: String is writable
 
 	# Parent commits of `self`.
-	fun parents: Array[Commit] do
-		var res = new Array[Commit]
-		var parents = json.get_or_null("parents")
-		if not parents isa JsonArray then return res
-		for obj in parents do
-			if not obj isa JsonObject then continue
-			res.add(api.load_commit(repo, obj["sha"].as(String)).as(not null))
-		end
-		return res
-	end
-
-	# Set parent commits.
-	fun parents=(parents: Array[Commit]) do
-		var res = new JsonArray
-		for parent in parents do res.add parent.json
-		json["parents"] = res
-	end
+	var parents: nullable Array[Commit] = null is writable
 
 	# Author of the commit.
-	fun author: nullable User do
-		var user = json.get_or_null("author")
-		if user isa JsonObject then return new User.from_json(api, user)
-		return null
-	end
-
-	# Set commit author.
-	fun author=(user: nullable User) do
-		if user == null then
-			json["author"] = null
-		else
-			json["author"] = user.json
-		end
-	end
+	var author: nullable GitUser is writable
 
 	# Committer of the commit.
-	fun committer: nullable User do
-		var user = json.get_or_null("author")
-		if user isa JsonObject then return new User.from_json(api, user)
-		return null
-	end
+	var committer: nullable GitUser is writable
 
-	# Set commit committer.
-	fun committer=(user: nullable User) do
-		if user == null then
-			json["committer"] = null
-		else
-			json["committer"] = user.json
-		end
-	end
+	# Authoring date as String.
+	var author_date: nullable String is writable
 
-	# Authoring date as ISODate.
-	fun author_date: ISODate do
-		var commit = json["commit"].as(JsonObject)
-		var author = commit["author"].as(JsonObject)
-		return new ISODate.from_string(author["date"].as(String))
-	end
-
-	# Commit date as ISODate.
-	fun commit_date: ISODate do
-		var commit = json["commit"].as(JsonObject)
-		var author = commit["committer"].as(JsonObject)
-		return new ISODate.from_string(author["date"].as(String))
-	end
+	# Commit date as String.
+	var commit_date: nullable String is writable
 
 	# List files staged in this commit.
-	fun files: Array[GithubFile] do
-		var res = new Array[GithubFile]
-		var files = json.get_or_null("files")
-		if not files isa JsonArray then return res
-		for obj in files do
-			res.add(new GithubFile(obj.as(JsonObject)))
-		end
-		return res
-	end
-
-	# Set commit files.
-	fun files=(files: Array[GithubFile]) do
-		var res = new JsonArray
-		for file in files do res.add file.json
-		json["files"] = res
-	end
+	var files: nullable Array[GithubFile] = null is optional, writable
 
 	# Commit message.
-	fun message: String do return json["commit"].as(JsonObject)["message"].as(String)
+	var message: nullable String is writable
+
+	# Git commit representation linked to this commit.
+	var commit: nullable GitCommit
+end
+
+# A Git Commit representation
+class GitCommit
+	serialize
+
+	# Commit SHA.
+	var sha: nullable String is writable
+
+	# Parent commits of `self`.
+	var parents: nullable Array[GitCommit] = null is writable
+
+	# Author of the commit.
+	var author: nullable GitUser is writable
+
+	# Committer of the commit.
+	var committer: nullable GitUser is writable
+
+	# Commit message.
+	var message: nullable String is writable
+end
+
+# Git user authoring data
+class GitUser
+	serialize
+
+	# Authoring date.
+	var date: nullable String = null is writable
 end
 
 # A Github issue.
 #
-# Should be accessed from `GithubAPI::load_issue`.
+# Should be accessed from `GithubAPI::get_issue`.
 #
 # See <https://developer.github.com/v3/issues/>.
 class Issue
-	super RepoEntity
-
-	redef var key is lazy do return "{repo.key}/issues/{number}"
+	serialize
 
 	# Issue Github ID.
-	var number: Int
-
-	redef init from_json(api, repo, json) do
-		self.number = json["number"].as(Int)
-		super
-	end
+	var number: Int is writable
 
 	# Issue id.
-	fun id: Int do return json["id"].as(Int)
-
-	# Set issue id.
-	fun id=(id: Int) do json["id"] = id
+	var id: nullable Int is writable
 
 	# Issue title.
-	fun title: String do return json["title"].as(String)
-
-	# Set issue title
-	fun title=(title: String) do json["title"] = title
+	var title: String is writable
 
 	# User that created this issue.
-	fun user: User do return new User.from_json(api, json["user"].as(JsonObject))
-
-	# Set issue creator.
-	fun user=(user: User) do json["user"] = user.json
+	var user: nullable User is writable
 
 	# List of labels on this issue associated to their names.
-	fun labels: Map[String, Label] do
-		var res = new HashMap[String, Label]
-		var lbls = json.get_or_null("labels")
-		if not lbls isa JsonArray then return res
-		for obj in lbls do
-			if not obj isa JsonObject then continue
-			var name = obj["name"].as(String)
-			res[name] = new Label.from_json(api, repo, obj)
-		end
-		return res
-	end
+	var labels: nullable Array[Label] is writable
 
 	# State of the issue on Github.
-	fun state: String do return json["state"].as(String)
-
-	# Set the state of this issue.
-	fun state=(state: String) do json["state"] = state
+	var state: String is writable
 
 	# Is the issue locked?
-	fun locked: Bool do return json["locked"].as(Bool)
-
-	# Set issue locked state.
-	fun locked=(locked: Bool) do json["locked"] = locked
+	var locked: nullable Bool is writable
 
 	# Assigned `User` (if any).
-	fun assignee: nullable User do
-		var assignee = json.get_or_null("assignee")
-		if assignee isa JsonObject then return new User.from_json(api, assignee)
-		return null
-	end
-
-	# Set issue assignee.
-	fun assignee=(user: nullable User) do
-		if user == null then
-			json["assignee"] = null
-		else
-			json["assignee"] = user.json
-		end
-	end
+	var assignee: nullable User is writable
 
 	# `Milestone` (if any).
-	fun milestone: nullable Milestone do
-		var milestone = json.get_or_null("milestone")
-		if milestone isa JsonObject then return new Milestone.from_json(api, repo, milestone)
-		return null
-	end
-
-	# Set issue milestone.
-	fun milestone=(milestone: nullable Milestone) do
-		if milestone == null then
-			json["milestone"] = null
-		else
-			json["milestone"] = milestone.json
-		end
-	end
-
-	# List of comments made on this issue.
-	fun comments: Array[IssueComment] do
-		var res = new Array[IssueComment]
-		var count = comments_count
-		var page = 1
-		var array = api.get("{key}/comments?page={page}")
-		if not array isa JsonArray then
-			return res
-		end
-		while not array.is_empty and res.length < count do
-			for obj in array do
-				if not obj isa JsonObject then continue
-				var id = obj["id"].as(Int)
-				var comment = api.load_issue_comment(repo, id)
-				if comment == null then continue
-				res.add(comment)
-			end
-			page += 1
-			var json = api.get("{key}/comments?page={page}")
-			if not json isa JsonArray then
-				return res
-			end
-			array = json
-		end
-		return res
-	end
+	var milestone: nullable Milestone is writable
 
 	# Number of comments on this issue.
-	fun comments_count: Int do return json["comments"].as(Int)
+	var comments: nullable Int is writable
 
-	# Creation time in ISODate format.
-	fun created_at: ISODate do return new ISODate.from_string(json["created_at"].as(String))
+	# Creation time as String.
+	var created_at: String is writable
 
-	# Set issue creation time.
-	fun created_at=(created_at: nullable ISODate) do
-		if created_at == null then
-			json["created_at"] = null
-		else
-			json["created_at"] = created_at.to_s
-		end
-	end
+	# Last update time as String (if any).
+	var updated_at: nullable String is writable
 
-	# Last update time in ISODate format (if any).
-	fun updated_at: nullable ISODate do
-		var res = json.get_or_null("updated_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
-
-	# Set issue last update time.
-	fun updated_at=(updated_at: nullable ISODate) do
-		if updated_at == null then
-			json["updated_at"] = null
-		else
-			json["updated_at"] = updated_at.to_s
-		end
-	end
-
-	# Close time in ISODate format (if any).
-	fun closed_at: nullable ISODate do
-		var res = json.get_or_null("closed_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
-
-	# Set issue close time.
-	fun closed_at=(closed_at: nullable ISODate) do
-		if closed_at == null then
-			json["closed_at"] = null
-		else
-			json["closed_at"] = closed_at.to_s
-		end
-	end
-
-	# TODO link to pull request
+	# Close time as String (if any).
+	var closed_at: nullable String is writable
 
 	# Full description of the issue.
-	fun body: String do return json["body"].as(String)
-
-	# Set description body
-	fun body=(body: String) do json["body"] = body
-
-	# List of events on this issue.
-	fun events: Array[IssueEvent] do
-		var res = new Array[IssueEvent]
-		var page = 1
-		var array = api.get("{key}/events?page={page}")
-		if not array isa JsonArray then return res
-		while not array.is_empty do
-			for obj in array do
-				if not obj isa JsonObject then continue
-				res.add new IssueEvent.from_json(api, repo, obj)
-			end
-			page += 1
-			array = api.get("{key}/events?page={page}").as(JsonArray)
-		end
-		return res
-	end
+	var body: nullable String is writable
 
 	# User that closed this issue (if any).
-	fun closed_by: nullable User do
-		var closer = json.get_or_null("closed_by")
-		if closer isa JsonObject then return new User.from_json(api, closer)
-		return null
-	end
-
-	# Set user that closed the issue.
-	fun closed_by=(user: nullable User) do
-		if user == null then
-			json["closed_by"] = null
-		else
-			json["closed_by"] = user.json
-		end
-	end
+	var closed_by: nullable User is writable
 
 	# Is this issue linked to a pull request?
-	fun is_pull_request: Bool do return json.has_key("pull_request")
+	var is_pull_request: Bool = false is writable
 end
 
 # A Github pull request.
 #
-# Should be accessed from `GithubAPI::load_pull`.
+# Should be accessed from `GithubAPI::get_pull`.
 #
 # PullRequest are basically Issues with more data.
 # See <https://developer.github.com/v3/pulls/>.
 class PullRequest
 	super Issue
+	serialize
 
-	redef var key is lazy do return "{repo.key}/pulls/{number}"
-
-	# Merge time in ISODate format (if any).
-	fun merged_at: nullable ISODate do
-		var res = json.get_or_null("merged_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
-
-	# Set pull request merge time.
-	fun merged_at=(merged_at: nullable ISODate) do
-		if merged_at == null then
-			json["merged_at"] = null
-		else
-			json["merged_at"] = merged_at.to_s
-		end
-	end
+	# Merge time as String (if any).
+	var merged_at: nullable String is writable
 
 	# Merge commit SHA.
-	fun merge_commit_sha: String do return json["merge_commit_sha"].as(String)
-
-	# Set merge_commit_sha
-	fun merge_commit_sha=(sha: String) do json["merge_commit_sha"] = sha
+	var merge_commit_sha: nullable String is writable
 
 	# Count of comments made on the pull request diff.
-	fun review_comments: Int do return json["review_comments"].as(Int)
-
-	# Set review_comments
-	fun review_comments=(count: Int) do json["review_comments"] = count
+	var review_comments: nullable Int is writable
 
 	# Pull request head (can be a commit SHA or a branch name).
-	fun head: PullRef do
-		var json = json["head"].as(JsonObject)
-		return new PullRef(api, json)
-	end
-
-	# Set head
-	fun head=(head: PullRef) do json["head"] = head.json
+	var head: PullRef is writable
 
 	# Pull request base (can be a commit SHA or a branch name).
-	fun base: PullRef do
-		var json = json["base"].as(JsonObject)
-		return new PullRef(api, json)
-	end
-
-	# Set base
-	fun base=(base: PullRef) do json["base"] = base.json
+	var base: PullRef is writable
 
 	# Is this pull request merged?
-	fun merged: Bool do return json["merged"].as(Bool)
-
-	# Set merged
-	fun merged=(merged: Bool) do json["merged"] = merged
+	var merged: nullable Bool is writable
 
 	# Is this pull request mergeable?
-	fun mergeable: Bool do return json["mergeable"].as(Bool)
-
-	# Set mergeable
-	fun mergeable=(mergeable: Bool) do json["mergeable"] = mergeable
+	var mergeable: nullable Bool is writable
 
 	# Mergeable state of this pull request.
 	#
 	# See <https://developer.github.com/v3/pulls/#list-pull-requests>.
-	fun mergeable_state: Int do return json["mergeable_state"].as(Int)
-
-	# Set mergeable_state
-	fun mergeable_state=(mergeable_state: Int) do json["mergeable_state"] = mergeable_state
+	var mergeable_state: nullable String is writable
 
 	# User that merged this pull request (if any).
-	fun merged_by: nullable User do
-		var merger = json.get_or_null("merged_by")
-		if merger isa JsonObject then return new User.from_json(api, merger)
-		return null
-	end
-
-	# Set merged_by.
-	fun merged_by=(merged_by: nullable User) do
-		if merged_by == null then
-			json["merged_by"] = null
-		else
-			json["merged_by"] = merged_by.json
-		end
-	end
+	var merged_by: nullable User is writable
 
 	# Count of commits in this pull request.
-	fun commits: Int do return json["commits"].as(Int)
-
-	# Set commits
-	fun commits=(commits: Int) do json["commits"] = commits
+	var commits: nullable Int is writable
 
 	# Added line count.
-	fun additions: Int do return json["additions"].as(Int)
-
-	# Set additions
-	fun additions=(additions: Int) do json["additions"] = additions
+	var additions: nullable Int is writable
 
 	# Deleted line count.
-	fun deletions: Int do return json["deletions"].as(Int)
-
-	# Set deletions
-	fun deletions=(deletions: Int) do json["deletions"] = deletions
+	var deletions: nullable Int is writable
 
 	# Changed files count.
-	fun changed_files: Int do return json["changed_files"].as(Int)
+	var changed_files: nullable Int is writable
 
-	# Set changed_files
-	fun changed_files=(changed_files: Int) do json["changed_files"] = changed_files
+	# URL to patch file
+	var patch_url: nullable String is writable
 end
 
 # A pull request reference (used for head and base).
 class PullRef
-
-	# Api instance that maintains self.
-	var api: GithubAPI
-
-	# JSON representation.
-	var json: JsonObject
+	serialize
 
 	# Label pointed by `self`.
-	fun labl: String do return json["label"].as(String)
-
-	# Set labl
-	fun labl=(labl: String) do json["label"] = labl
+	var labl: String is writable, serialize_as("label")
 
 	# Reference pointed by `self`.
-	fun ref: String do return json["ref"].as(String)
-
-	# Set ref
-	fun ref=(ref: String) do json["ref"] = ref
+	var ref: String is writable
 
 	# Commit SHA pointed by `self`.
-	fun sha: String do return json["sha"].as(String)
-
-	# Set sha
-	fun sha=(sha: String) do json["sha"] = sha
+	var sha: String is writable
 
 	# User pointed by `self`.
-	fun user: User do
-		return new User.from_json(api, json["user"].as(JsonObject))
-	end
+	var user: User is writable
 
-	# Set user
-	fun user=(user: User) do json["user"] = user.json
-
-	# Repo pointed by `self`.
-	fun repo: Repo do
-		return new Repo.from_json(api, json["repo"].as(JsonObject))
-	end
-
-	# Set repo
-	fun repo=(repo: Repo) do json["repo"] = repo.json
+	# Repo pointed by `self` (if any).
+	#
+	# A `null` value means the `repo` was deleted.
+	var repo: nullable Repo is writable
 end
 
 # A Github label.
 #
-# Should be accessed from `GithubAPI::load_label`.
+# Should be accessed from `GithubAPI::get_label`.
 #
 # See <https://developer.github.com/v3/issues/labels/>.
 class Label
-	super RepoEntity
-
-	redef var key is lazy do return "{repo.key}/labels/{name}"
+	serialize
 
 	# Label name.
-	var name: String
-
-	redef init from_json(api, repo, json) do
-		self.name = json["name"].as(String)
-		super
-	end
+	var name: String is writable
 
 	# Label color code.
-	fun color: String do return json["color"].as(String)
-
-	# Set color
-	fun color=(color: String) do json["color"] = color
+	var color: String is writable
 end
 
 # A Github milestone.
 #
-# Should be accessed from `GithubAPI::load_milestone`.
+# Should be accessed from `GithubAPI::get_milestone`.
 #
 # See <https://developer.github.com/v3/issues/milestones/>.
 class Milestone
-	super RepoEntity
-
-	redef var key is lazy do return "{repo.key}/milestones/{number}"
+	serialize
 
 	# The milestone id on Github.
-	var number: Int
-
-	redef init from_json(api, repo, json) do
-		super
-		self.number = json["number"].as(Int)
-	end
+	var number: nullable Int = null is writable
 
 	# Milestone title.
-	fun title: String do return json["title"].as(String)
-
-	# Set title
-	fun title=(title: String) do json["title"] = title
+	var title: String is writable
 
 	# Milestone long description.
-	fun description: String do return json["description"].as(String)
-
-	# Set description
-	fun description=(description: String) do json["description"] = description
+	var description: nullable String is writable
 
 	# Count of opened issues linked to this milestone.
-	fun open_issues: Int do return json["open_issues"].as(Int)
-
-	# Set open_issues
-	fun open_issues=(open_issues: Int) do json["open_issues"] = open_issues
+	var open_issues: nullable Int = null is writable
 
 	# Count of closed issues linked to this milestone.
-	fun closed_issues: Int do return json["closed_issues"].as(Int)
-
-	# Set closed_issues
-	fun closed_issues=(closed_issues: Int) do json["closed_issues"] = closed_issues
+	var closed_issues: nullable Int = null is writable
 
 	# Milestone state.
-	fun state: String do return json["state"].as(String)
+	var state: nullable String is writable
 
-	# Set state
-	fun state=(state: String) do json["state"] = state
-
-	# Creation time in ISODate format.
-	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].as(String))
-	end
-
-	# Set created_at
-	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
+	# Creation time as String.
+	var created_at: nullable String is writable
 
 	# User that created this milestone.
-	fun creator: User do
-		return new User.from_json(api, json["creator"].as(JsonObject))
-	end
+	var creator: nullable User is writable
 
-	# Set creator
-	fun creator=(creator: User) do json["creator"] = creator.json
+	# Due time as String (if any).
+	var due_on: nullable String is writable
 
-	# Due time in ISODate format (if any).
-	fun due_on: nullable ISODate do
-		var res = json.get_or_null("updated_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
+	# Last update time as String (if any).
+	var updated_at: nullable String is writable
 
-	# Set due_on.
-	fun due_on=(due_on: nullable ISODate) do
-		if due_on == null then
-			json["due_on"] = null
-		else
-			json["due_on"] = due_on.to_s
-		end
-	end
-
-	# Update time in ISODate format (if any).
-	fun updated_at: nullable ISODate do
-		var res = json.get_or_null("updated_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
-
-	# Set updated_at.
-	fun updated_at=(updated_at: nullable ISODate) do
-		if updated_at == null then
-			json["updated_at"] = null
-		else
-			json["updated_at"] = updated_at.to_s
-		end
-	end
-
-	# Close time in ISODate format (if any).
-	fun closed_at: nullable ISODate do
-		var res = json.get_or_null("closed_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
-
-	# Set closed_at.
-	fun closed_at=(closed_at: nullable ISODate) do
-		if closed_at == null then
-			json["closed_at"] = null
-		else
-			json["closed_at"] = closed_at.to_s
-		end
-	end
+	# Close time as String (if any).
+	var closed_at: nullable String is writable
 end
 
 # A Github comment
@@ -1231,59 +819,27 @@ end
 #
 # * `CommitComment` are made on a commit page.
 # * `IssueComment` are made on an issue or pull request page.
-# * `ReviewComment` are made on the diff associated to a pull request.
+# * `PullComment` are made on the diff associated to a pull request.
 abstract class Comment
-	super RepoEntity
+	serialize
 
 	# Identifier of this comment.
-	var id: Int
-
-	redef init from_json(api, repo, json) do
-		self.id = json["id"].as(Int)
-		super
-	end
+	var id: Int is writable
 
 	# User that made this comment.
-	fun user: User do
-		return new User.from_json(api, json["user"].as(JsonObject))
-	end
+	var user: User is writable
 
-	# Set user
-	fun user=(user: User) do json["user"] = user.json
+	# Creation time as String.
+	var created_at: String is writable
 
-	# Creation time in ISODate format.
-	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].as(String))
-	end
-
-	# Set created_at
-	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
-
-	# Last update time in ISODate format (if any).
-	fun updated_at: nullable ISODate do
-		var res = json.get_or_null("updated_at")
-		if res isa String then return new ISODate.from_string(res)
-		return null
-	end
-
-	# Set updated_at.
-	fun updated_at=(updated_at: nullable ISODate) do
-		if updated_at == null then
-			json["updated_at"] = null
-		else
-			json["updated_at"] = updated_at.to_s
-		end
-	end
+	# Last update time as String (if any).
+	var updated_at: nullable String is writable
 
 	# Comment body text.
-	fun body: String do return json["body"].as(String)
-
-	# Set body
-	fun body=(body: String) do json["body"] = body
+	var body: String is writable
 
 	# Does the comment contain an acknowledgement (+1)
-	fun is_ack: Bool
-	do
+	fun is_ack: Bool do
 		return body.has("\\+1\\b".to_re) or body.has(":+1:") or body.has(":shipit:")
 	end
 end
@@ -1291,324 +847,313 @@ end
 # A comment made on a commit.
 class CommitComment
 	super Comment
-
-	redef var key is lazy do return "{repo.key}/comments/{id}"
+	serialize
 
 	# Commented commit.
-	fun commit: Commit do
-		return api.load_commit(repo, json["commit_id"].as(String)).as(not null)
-	end
-
-	# Set commit
-	fun commit=(commit: Commit) do json["commit_id"] = commit.json
+	var commit_id: String is writable
 
 	# Position of the comment on the line.
-	fun position: nullable String do
-		var res = json.get_or_null("position")
-		if res isa String then return res
-		return null
-	end
-
-	# Set position.
-	fun position=(position: nullable String) do json["position"] = position
+	var position: nullable Int is writable
 
 	# Line of the comment.
-	fun line: nullable String do
-		var res = json.get_or_null("line")
-		if res isa String then return res
-		return null
-	end
-
-	# Set line.
-	fun line=(line: nullable String) do json["line"] = line
+	var line: nullable Int is writable
 
 	# Path of the commented file.
-	fun path: String do return json["path"].as(String)
+	var path: nullable String is writable
+end
 
-	# Set path.
-	fun path=(path: String) do json["path"] = path
+# Status of a commit
+#
+# Can contain sub-status for reviews, CI etc.
+class CommitStatus
+	serialize
+
+	# Global state of this commit
+	var state: nullable String = null is optional, writable
+
+	# Sha of the commit this status is for
+	var sha: nullable String = null is optional, writable
+
+	# Repository the commit belongs to
+	var repository: nullable Repo = null is optional, writable
+
+	# All sub statuses (one for each check)
+	var statuses = new Array[RepoStatus] is optional, writable
+
+	# Total count of sub statuses
+	var total_count: nullable Int = null is optional, writable
+end
+
+# Sub status of a CommitStatus
+#
+# Represents a check applied to a commit (reviews, CI, ...).
+class RepoStatus
+	serialize
+
+	# State of this check
+	var state: nullable String = null is optional, writable
+
+	# Description of this check
+	var description: nullable String = null is optional, writable
+
+	# External URL
+	var target_url: nullable String = null is optional, writable
+
+	# Context this status is related to
+	#
+	# Used to hold the name of the check applied.
+	var context: nullable String = null is optional, writable
+
+	# Date when this status was created
+	var created_at: nullable String = null is optional, writable
+
+	# Last date this status was updated
+	var updated_at: nullable String = null is optional, writable
 end
 
 # Comments made on Github issue and pull request pages.
 #
-# Should be accessed from `GithubAPI::load_issue_comment`.
+# Should be accessed from `GithubAPI::get_issue_comment`.
 #
 # See <https://developer.github.com/v3/issues/comments/>.
 class IssueComment
 	super Comment
-
-	redef var key is lazy do return "{repo.key}/issues/comments/{id}"
+	serialize
 
 	# Issue that contains `self`.
-	fun issue: Issue do
-		var number = issue_url.split("/").last.to_i
-		return api.load_issue(repo, number).as(not null)
-	end
+	fun issue_number: Int do return issue_url.split("/").last.to_i
 
 	# Link to the issue document on API.
-	fun issue_url: String do return json["issue_url"].as(String)
-
-	# Set issue_url.
-	fun issue_url=(issue_url: String) do json["issue_url"] = issue_url
+	var issue_url: String is writable
 end
 
 # Comments made on Github pull request diffs.
 #
-# Should be accessed from `GithubAPI::load_diff_comment`.
+# Should be accessed from `GithubAPI::get_diff_comment`.
 #
 # See <https://developer.github.com/v3/pulls/comments/>.
-class ReviewComment
+class PullComment
 	super Comment
-
-	redef var key is lazy do return "{repo.key}/pulls/comments/{id}"
+	serialize
 
 	# Pull request that contains `self`.
-	fun pull: PullRequest do
-		var number = pull_request_url.split("/").last.to_i
-		return api.load_pull(repo, number).as(not null)
-	end
+	fun pull_number: Int do return pull_request_url.split("/").last.to_i
 
 	# Link to the pull request on API.
-	fun pull_request_url: String do return json["pull_request_url"].as(String)
-
-	# Set pull_request_url.
-	fun pull_request_url=(pull_request_url: String) do json["pull_request_url"] = pull_request_url
+	var pull_request_url: String is writable
 
 	# Diff hunk.
-	fun diff_hunk: String do return json["diff_hunk"].as(String)
-
-	# Set diff_hunk.
-	fun diff_hunk=(diff_hunk: String) do json["diff_hunk"] = diff_hunk
+	var diff_hunk: String is writable
 
 	# Path of commented file.
-	fun path: String do return json["path"].as(String)
-
-	# Set path.
-	fun path=(path: String) do json["path"] = path
+	var path: String is writable
 
 	# Position of the comment on the file.
-	fun position: Int do return json["position"].as(Int)
-
-	# Set position.
-	fun position=(position: Int) do json["position"] = position
+	var position: nullable Int is writable
 
 	# Original position in the diff.
-	fun original_position: Int do return json["original_position"].as(Int)
-
-	# Set original_position.
-	fun original_position=(original_position: Int) do json["original_position"] = original_position
+	var original_position: Int is writable
 
 	# Commit referenced by this comment.
-	fun commit_id: String do return json["commit_id"].as(String)
-
-	# Set commit_id.
-	fun commit_id=(commit_id: String) do json["commit_id"] = commit_id
+	var commit_id: String is writable
 
 	# Original commit id.
-	fun original_commit_id: String do return json["original_commit_id"].as(String)
-
-	# Set original_commit_id.
-	fun original_commit_id=(commit_id: String) do json["original_commit_id"] = commit_id
+	var original_commit_id: String is writable
 end
 
 # An event that occurs on a Github `Issue`.
 #
-# Should be accessed from `GithubAPI::load_issue_event`.
+# Should be accessed from `GithubAPI::get_issue_event`.
 #
 # See <https://developer.github.com/v3/issues/events/>.
 class IssueEvent
-	super RepoEntity
-
-	redef var key is lazy do return "{repo.key}/issues/events/{id}"
+	serialize
 
 	# Event id on Github.
-	var id: Int
-
-	redef init from_json(api, repo, json) do
-		self.id = json["id"].as(Int)
-		super
-	end
-
-	# Issue that contains `self`.
-	fun issue: Issue do
-		return new Issue.from_json(api, repo, json["issue"].as(JsonObject))
-	end
-
-	# Set issue.
-	fun issue=(issue: Issue) do json["issue"] = issue.json
+	var id: Int is writable
 
 	# User that initiated the event.
-	fun actor: User do
-		return new User.from_json(api, json["actor"].as(JsonObject))
-	end
+	var actor: User is writable
 
-	# Set actor.
-	fun actor=(actor: User) do json["actor"] = actor.json
-
-	# Creation time in ISODate format.
-	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].as(String))
-	end
-
-	# Set created_at.
-	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
+	# Creation time as String.
+	var created_at: String is writable
 
 	# Event descriptor.
-	fun event: String do return json["event"].as(String)
-
-	# Set event.
-	fun event=(event: String) do json["event"] = event
+	var event: String is writable
 
 	# Commit linked to this event (if any).
-	fun commit_id: nullable String do
-		var res = json.get_or_null("commit_id")
-		if res isa String then return res
-		return null
-	end
-
-	# Set commit_id.
-	fun commit_id=(commit_id: nullable String) do json["commit_id"] = commit_id
+	var commit_id: nullable String is writable
 
 	# Label linked to this event (if any).
-	fun labl: nullable Label do
-		var res = json.get_or_null("label")
-		if res isa JsonObject then return new Label.from_json(api, repo, res)
-		return null
-	end
-
-	# Set labl.
-	fun labl=(labl: nullable Label) do
-		if labl == null then
-			json["labl"] = null
-		else
-			json["labl"] = labl.json
-		end
-	end
+	var labl: nullable Label is writable, serialize_as("label")
 
 	# User linked to this event (if any).
-	fun assignee: nullable User do
-		var res = json.get_or_null("assignee")
-		if res isa JsonObject then return new User.from_json(api, res)
-		return null
-	end
-
-	# Set assignee.
-	fun assignee=(assignee: nullable User) do
-		if assignee == null then
-			json["assignee"] = null
-		else
-			json["assignee"] = assignee.json
-		end
-	end
+	var assignee: nullable User is writable
 
 	# Milestone linked to this event (if any).
-	fun milestone: nullable Milestone do
-		var res = json.get_or_null("milestone")
-		if res isa JsonObject then return new Milestone.from_json(api, repo, res)
-		return null
-	end
-
-	# Set milestone.
-	fun milestone=(milestone: nullable User) do
-		if milestone == null then
-			json["milestone"] = null
-		else
-			json["milestone"] = milestone.json
-		end
-	end
+	var milestone: nullable Milestone is writable
 
 	# Rename linked to this event (if any).
-	fun rename: nullable RenameAction do
-		var res = json.get_or_null("rename")
-		if res isa JsonObject then return new RenameAction(res)
-		return null
-	end
-
-	# Set rename.
-	fun rename=(rename: nullable User) do
-		if rename == null then
-			json["rename"] = null
-		else
-			json["rename"] = rename.json
-		end
-	end
+	var rename: nullable RenameAction is writable
 end
 
 # A rename action maintains the name before and after a renaming action.
 class RenameAction
-
-	# JSON content.
-	var json: JsonObject
+	serialize
 
 	# Name before renaming.
-	fun from: String do return json["from"].as(String)
-
-	# Set from.
-	fun from=(from: String) do json["from"] = from
+	var from: String is writable
 
 	# Name after renaming.
-	fun to: String do return json["to"].as(String)
-
-	# Set to.
-	fun to=(to: String) do json["to"] = to
+	var to: String is writable
 end
 
-# Contributors list with additions, deletions, and commit counts.
 #
 # Should be accessed from `Repo::contrib_stats`.
 #
 # See <https://developer.github.com/v3/repos/statistics/>.
 class ContributorStats
 	super Comparable
+	serialize
 
 	redef type OTHER: ContributorStats
 
-	# Github API client.
-	var api: GithubAPI
-
-	# Json content.
-	var json: JsonObject
-
-	# Init `self` from a `json` object.
-	init from_json(api: GithubAPI, json: JsonObject) do
-		init(api, json)
-	end
-
 	# User these statistics are about.
-	fun author: User do
-		return new User.from_json(api, json["author"].as(JsonObject))
-	end
-
-	# Set author.
-	fun author=(author: User) do json["author"] = author.json
+	var author: User is writable
 
 	# Total number of commit.
-	fun total: Int do return json["total"].as(Int)
+	var total: Int is writable
 
-	# Set total.
-	fun total=(total: Int) do json["total"] = total
-
-	# Are of weeks of activity with detailed statistics.
-	fun weeks: JsonArray do return json["weeks"].as(JsonArray)
-
-	# Set weeks.
-	fun weeks=(weeks: JsonArray) do json["weeks"] = weeks
+	# Array of weeks of activity with detailed statistics.
+	var weeks: Array[ContributorWeek] is writable
 
 	# ContributorStats can be compared on the total amount of commits.
 	redef fun <(o) do return total < o.total
+end
+
+# Contributor stats weekly hash
+class ContributorWeek
+	serialize
+
+	# Start of week given a Unix timestamp
+	var w: Int
+
+	# Number of additions
+	var a: Int
+
+	# Number of deletions
+	var d: Int
+
+	# Number of commits
+	var c: Int
 end
 
 # A Github file representation.
 #
 # Mostly a wrapper around a json object.
 class GithubFile
-
-	# Json content.
-	var json: JsonObject
+	serialize
 
 	# File name.
-	fun filename: String do return json["filename"].as(String)
+	var filename: String is writable
+end
 
-	# Set filename.
-	fun filename=(filename: String) do json["filename"] = filename
+# A list of results returned buy `/search`
+class SearchResults
+	serialize
+
+	# Total count with other pages
+	var total_count: Int
+
+	# Does this page contain all the results?
+	var incomplete_results: Bool
+
+	# Results in this page
+	var items: Array[Object]
+end
+
+# JsonDeserializer specific for Github objects.
+class GithubDeserializer
+	super JsonDeserializer
+
+	private var pattern_base = "https://api.github.com"
+
+	# Url patterns to class names
+	var url_patterns: Map[Regex, String] is lazy do
+		var map = new HashMap[Regex, String]
+		map["{pattern_base}/users/[^/]*$".to_re] = "User"
+		map["{pattern_base}/repos/[^/]*/[^/]*$".to_re] = "Repo"
+		map["{pattern_base}/repos/[^/]*/[^/]*/labels/[^/]+$".to_re] = "Label"
+		map["{pattern_base}/repos/[^/]*/[^/]*/milestones/[0-9]+$".to_re] = "Milestone"
+		map["{pattern_base}/repos/[^/]*/[^/]*/issues/[0-9]+$".to_re] = "Issue"
+		map["{pattern_base}/repos/[^/]*/[^/]*/issues/comments/[0-9]+$".to_re] = "IssueComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/issues/events/[0-9]+$".to_re] = "IssueEvent"
+		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/[0-9]+$".to_re] = "PullRequest"
+		map["{pattern_base}/repos/[^/]*/[^/]*/pulls/comments/[0-9]+$".to_re] = "PullComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/comments/[0-9]+$".to_re] = "CommitComment"
+		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+$".to_re] = "Commit"
+		map["{pattern_base}/repos/[^/]*/[^/]*/commits/[a-f0-9]+/status$".to_re] = "CommitStatus"
+		map["{pattern_base}/repos/[^/]*/[^/]*/statuses/[a-f0-9]+$".to_re] = "RepoStatus"
+		return map
+	end
+
+	# Match `url` property in object to a class name
+	fun url_heuristic(raw: Map[String, nullable Object]): nullable String do
+		if not raw.has_key("url") then return null
+
+		var url = raw["url"].as(String)
+		for re, class_name in url_patterns do
+			if url.has(re) then return class_name
+		end
+		return null
+	end
+
+	redef fun class_name_heuristic(raw) do
+		# Try with url
+		var class_name = url_heuristic(raw)
+		if class_name != null then return class_name
+
+		# print raw.serialize_to_json(true, true) # debug
+
+		# Use properties heuristics
+		if raw.has_key("name") and raw.has_key("commit") then
+			return "Branch"
+		else if raw.has_key("total_count") and raw.has_key("items") then
+			return "SearchResults"
+		else if raw.has_key("total") and raw.has_key("weeks") then
+			return "ContributorStats"
+		else if raw.has_key("a") and raw.has_key("d") and raw.has_key("c") then
+			return "ContributorWeek"
+		end
+		return null
+	end
+
+	redef fun deserialize_class(name) do
+		if name == "Issue" then
+			var issue = super.as(Issue)
+			if path.last.has_key("pull_request") then
+				issue.is_pull_request = true
+			end
+			return issue
+		else if name == "Commit" then
+			var commit = super.as(Commit)
+			var git_commit = commit.commit
+			if git_commit != null then commit.message = git_commit.message
+			return commit
+		end
+		return super
+	end
+end
+
+# Gets the Github token from `git` configuration
+#
+# Return the value of `git config --get github.oauthtoken`
+# or `""` if no key exists.
+fun get_github_oauth: String
+do
+	var p = new ProcessReader("git", "config", "--get", "github.oauthtoken")
+	var token = p.read_line
+	p.wait
+	p.close
+	return token.trim
 end

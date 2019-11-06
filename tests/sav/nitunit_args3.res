@@ -1,19 +1,18 @@
-module test_test_nitunit is test_suite
+module test_test_nitunit is test
 
-import test_suite
 intrude import test_nitunit
 
 class TestX
-	super TestSuite
+	test
 
-	fun test_foo do
+	fun test_foo is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: X
 		subject.foo
 	end
 
-	fun test_foo1 do
+	fun test_foo1 is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: X
@@ -22,7 +21,7 @@ class TestX
 		subject.foo1(a, b)
 	end
 
-	fun test_foo2 do
+	fun test_foo2 is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: X
@@ -31,7 +30,7 @@ class TestX
 		assert exp == res
 	end
 
-	fun test_foo3 do
+	fun test_foo3 is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: X
@@ -40,7 +39,7 @@ class TestX
 		assert exp == res
 	end
 
-	fun test_foo3= do
+	fun test_foo3= is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: X
@@ -50,9 +49,9 @@ class TestX
 end
 
 class TestY
-	super TestSuite
+	test
 
-	fun test_bra do
+	fun test_bra is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -62,7 +61,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_bra_assign do
+	fun test_bra_assign is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -71,7 +70,7 @@ class TestY
 		subject[e] = i
 	end
 
-	fun test_plus do
+	fun test_plus is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -81,7 +80,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_minus do
+	fun test_minus is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -91,7 +90,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_star do
+	fun test_star is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -101,7 +100,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_slash do
+	fun test_slash is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -111,7 +110,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_percent do
+	fun test_percent is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -121,7 +120,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_unary_minus do
+	fun test_unary_minus is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -130,7 +129,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_equals do
+	fun test_equals is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -140,7 +139,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_not_equals do
+	fun test_not_equals is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -150,7 +149,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_lt do
+	fun test_lt is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -160,7 +159,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_le do
+	fun test_le is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -170,7 +169,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_compare do
+	fun test_compare is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -180,7 +179,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_ge do
+	fun test_ge is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -190,7 +189,7 @@ class TestY
 		assert exp == res
 	end
 
-	fun test_gt do
+	fun test_gt is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Y[X]
@@ -202,9 +201,9 @@ class TestY
 end
 
 class TestZ
-	super TestSuite
+	test
 
-	fun test_bra do
+	fun test_bra is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Z
@@ -215,7 +214,7 @@ class TestZ
 		assert exp == res
 	end
 
-	fun test_bra_assign do
+	fun test_bra_assign is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Z
@@ -225,7 +224,7 @@ class TestZ
 		subject[i, j] = k
 	end
 
-	fun test_foo= do
+	fun test_foo= is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Z
@@ -234,7 +233,7 @@ class TestZ
 		subject.foo(i) = j
 	end
 
-	fun test_bar= do
+	fun test_bar= is test do
 		assert not_implemented: false # TODO remove once implemented
 
 		var subject: Z

@@ -43,8 +43,6 @@ function run_compiler()
 		bench_command "nitc-g" "nitc --global ../src/test_parser.nit" "./nitc.$title.bin" -v --global --no-cc ../src/test_parser.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/location.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/location.nit
-		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
-		bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
@@ -61,8 +59,6 @@ function run_compiler()
 		bench_command "nitdoc" "nitdoc ../src/nitls.nit" "./nitdoc.$title.bin" -v ../src/nitls.nit -d out
 		run_command "$@" ../src/nitlight.nit -o "nitlight.$title.bin"
 		bench_command "nitlight" "nitlight ../lib/[a-f]*/" "./nitlight.$title.bin" ../lib/[a-f]*/ -d out
-		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
-		bench_command "shoot" "shoot_logic 15" "./shoot.$title.bin" 15
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 17" "./bintrees.$title.bin" 17
 		#run_command "$@" "../contrib/pep8analysis/src/pep8analysis.nit" -o "pep8a.$title.bin"
@@ -75,6 +71,7 @@ function run_compiler()
 		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 		run_command "$@" ../contrib/jwrapper/src/jwrapper.nit -o "jwrapper.$title.bin"
 		bench_command "jwrapper" "jwrapper ant.jar" "./jwrapper.$title.bin" /usr/share/java/ant.jar -o out/ant_jar.nit
+		rm -r tmp 2> /dev/null # remove jwrapper output directory
 	fi
 
 	rm -r *.bin out 2> /dev/null
@@ -220,10 +217,14 @@ bench_nitc_options "faster" --erasure --skip-dead-methods --inline-coloring-numb
 bench_nitc_options "engine" "" NOALL "--separate" "--erasure" "--separate --semi-global" "--erasure --semi-global" "--erasure --semi-global --rta" "--global"
 bench_nitc_options "policy" "" NOALL "--separate" "--erasure" "--separate --no-check-covariance" "--erasure --no-check-covariance --no-check-erasure-cast"
 bench_nitc_options "nullables" "" "--no-check-attr-isset" "--no-union-attribute"
-bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0" "--substitute-monomorph"
+#bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0" "--substitute-monomorph" # --colors-are-symbols is broken :(
+bench_nitc_options "linkboost" "" NOALL --trampoline-call --guard-call --substitute-monomorph
 bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomorph
 
 bench_nitc_options "misc" "" --log --typing-test-metrics --invocation-metrics --isset-checks-metrics --tables-metrics --no-stacktrace --release --debug #FIXME add --sloppy
+
+# sanitary just run the default configuration, this is used to check that `run_compiler` works.
+bench_nitc_options "sanitary" ""
 
 function bench_nitc-e_gc()
 {

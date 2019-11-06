@@ -1,0 +1,6 @@
+<span class='stars editable' ng-repeat='star in [1, 2, 3, 4, 5]' title='mean: {{mean ? mean : 0 | number: 1}} ({{ratings ? ratings.length : 0}} stars)'>
+	<span
+		class='star glyphicon'
+		ng-class='[star <= mean? "glyphicon-star": "glyphicon-star-empty", user.rating == star? "active": ""]'
+		ng-click='starsCtrl.postStar(star)' />
+</span>

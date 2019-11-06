@@ -17,7 +17,6 @@
 module transform
 
 import astbuilder
-import astvalidation
 import semantize
 intrude import semantize::scope
 intrude import semantize::typing

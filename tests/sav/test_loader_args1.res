@@ -14,8 +14,8 @@ scan_full found 6 modules
   model: mpackages=1 mmodules=5
   mb: identified modules=5; parsed modules=0
 parse found 2 modules
-  model: mpackages=2 mmodules=9
-  mb: identified modules=9; parsed modules=6
+  model: mpackages=2 mmodules=11
+  mb: identified modules=11; parsed modules=6
 parse_full found 5 modules
-  model: mpackages=2 mmodules=9
-  mb: identified modules=9; parsed modules=6
+  model: mpackages=2 mmodules=11
+  mb: identified modules=11; parsed modules=6

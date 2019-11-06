@@ -15,15 +15,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import curl
+intrude import curl
 
 class CallbackManager
   super CurlCallbacks
 
-  redef fun body_callback(line: String) do end
+  redef fun body_callback(line) do end
 end
 
-fun error_manager(err: CURLCode) do if not err.is_ok then print err
+private fun error_manager(err: CURLCode) do if not err.is_ok then print err
 
 var url = "http://example.org/"
 
@@ -210,4 +210,4 @@ var hashMapRefined = new HeaderMap
 hashMapRefined["hello"] = "toto"
 hashMapRefined["hello"] = "tata"
 hashMapRefined["allo"] = "foo"
-print hashMapRefined.to_url_encoded(sys.curl)
+print hashMapRefined.to_url_encoded(new Curl)

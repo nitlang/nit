@@ -99,10 +99,21 @@ extern class SDLSysWMInfo `{ SDL_SysWMinfo * `}
 		#endif
 	`}
 
-	# Returns the handle of this window on a X11 window system
-	#
-	# Require: `is_x11`
-	fun x11_window_handle: Pointer `{
-		return (void*)self->info.x11.window;
+	# Handle to the window
+	fun window_handle: Pointer `{
+		#ifdef _WIN32
+			return (void*)self->info.win.window;
+		#else
+			return (void*)self->info.x11.window;
+		#endif
+	`}
+
+	# Handle to the display or device context
+	fun display_handle: Pointer `{
+		#ifdef _WIN32
+			return (void*)self->info.win.hdc;
+		#else
+			return (void*)self->info.x11.display;
+		#endif
 	`}
 end

@@ -1,3 +1,3 @@
 Usage: nitweb [OPTION]... <file.nit>...
-Run a webserver based on nitcorn that serve pages about model.
+Run a webserver based on nitcorn that serves pages about model.
 Use --help for help

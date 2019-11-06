@@ -18,6 +18,7 @@ module wiki_edit
 import nitcorn
 import markdown
 import md5
+import config
 
 intrude import wiki_html
 
@@ -49,7 +50,7 @@ class WikiEditForm
 	fun to_http_response: HttpResponse
 	do
 		var resp = new HttpResponse(200)
-		resp.body = tpl_page.write_to_string
+		resp.body = tpl_page
 		return resp
 	end
 end
@@ -176,9 +177,29 @@ redef class String
 	end
 end
 
-var config_file_path = "config.ini"
-var iface = "localhost:8080"
-var password_file_path = "passwords"
+var opt_config = new OptionString("Path to config.ini file", "-c", "--config")
+var opt_host = new OptionString("Host to bind the server to", "--host")
+var opt_port = new OptionInt("Port to bind the server to", 8000, "--port")
+var opt_pass = new OptionString("Password file path", "--pass")
+
+var config = new Config
+config.add_option(opt_config, opt_host, opt_port, opt_pass)
+
+var usage = new Buffer
+usage.append "Usage: wiki_edit [OPTION]...\n"
+usage.append "Web server to server generated files and modify the wiki from a web form."
+config.tool_description = usage.write_to_string
+
+config.parse_options(args)
+
+if config.opt_help.value then
+	config.usage
+	exit 0
+end
+
+var config_file_path = opt_config.value or else "config.ini"
+var iface = "{opt_host.value or else "localhost"}:{opt_port.value}"
+var password_file_path = opt_pass.value or else "passwords"
 
 # Load passwords for file
 var passwords = if password_file_path.file_exists then

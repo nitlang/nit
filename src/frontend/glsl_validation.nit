@@ -58,9 +58,7 @@ private class GLSLValidationPhase
 
 		# Do not double check if tool is in path
 		var in_path = tool_is_in_path
-		if in_path != null then
-			if not in_path then return
-		else
+		if in_path == null then
 			# Is _glslangValidator_ installed?
 			var proc_which = new ProcessReader("which", "glslangValidator")
 			proc_which.wait
@@ -68,11 +66,12 @@ private class GLSLValidationPhase
 			var status = proc_which.status
 			in_path = status == 0
 			tool_is_in_path = in_path
-			if not in_path then
-				toolcontext.warning(nat.location, "glslvalidator",
-					"Warning: program `glslangValidator` not in PATH, cannot validate this shader.")
-				return
-			end
+		end
+
+		if not in_path then
+			toolcontext.advice(nat.location, "glslvalidator",
+				"Warning: program `glslangValidator` not in PATH, cannot validate this shader.")
+			return
 		end
 
 		# Get the shader source

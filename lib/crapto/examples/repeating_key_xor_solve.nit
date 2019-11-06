@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module repeating_key_xor_solve is example
+
 import base64
 import crapto
 

@@ -16,19 +16,25 @@
 
 NITCOPT=--semi-global
 OLDNITCOPT=--semi-global
-OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial nitrestful
+OBJS=nitc nitpick nit nitls nitunit nitx nitlight nitserial nitrestful nitpackage
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
+MOREOBJS=nitdoc nitweb nitcatalog nitmetrics nitpretty nitweb nitpm
+MORESRCS=$(patsubst %,%.nit,$(MOREOBJS))
+MOREBINS=$(patsubst %,../bin/%,$(MOREOBJS))
+DEPS=$(wildcard *.nit */*.nit) parser/parser.nit
 
-# Workaround: Cygwin requires peflags to boostrap
+# Workaround: Cygwin requires peflags to bootstrap
 peflags := ${shell which peflags 2>/dev/null}
 
-all: bin/nitc
+all: ../bin/nitc
+
+more: ../bin/nitdoc
 
 pre-build:
 	./git-gen-version.sh
 
-nitc_0: ../c_src/nitc parser/parser.nit
+nitc_0: ../c_src/nitc $(DEPS)
 	@echo '***************************************************************'
 	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
@@ -38,7 +44,7 @@ ifdef peflags
 	${peflags} --cygwin-heap=2048 nitc_0
 endif
 
-bin/nitc: nitc_0 parser/parser.nit
+../bin/nitc: nitc_0 $(DEPS)
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
@@ -46,7 +52,10 @@ bin/nitc: nitc_0 parser/parser.nit
 	test -d ../bin || mkdir ../bin
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
 
-$(OBJS): nitc_0 parser/parser.nit
+../bin/nitdoc: ../bin/nitc $(DEPS)
+	../bin/nitc ${NITCOPT} -v --dir ../bin $(MORESRCS)
+
+$(OBJS): nitc_0 $(DEPS)
 	./git-gen-version.sh
 	./nitc_0 ${NITCOPT} -v $@.nit
 

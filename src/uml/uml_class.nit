@@ -35,7 +35,7 @@ redef class UMLModel
 					fontname = "Bitstream Vera Sans"
 					fontsize = 8
 				]\n"""
-		for mclass in view.mclasses do
+		for mclass in model.collect_mclasses(filter) do
 			tpl.add mclass.tpl_class(self)
 			tpl.add "\n"
 		end
@@ -72,7 +72,7 @@ redef class MClass
 			t.add "]"
 		end
 		t.add "|"
-		var props = collect_intro_mproperties(model.view)
+		var props = collect_intro_mproperties(model.filter)
 		for i in props do
 			if not i isa MAttribute then continue
 			t.add i.tpl_class(model)
@@ -87,7 +87,7 @@ redef class MClass
 		t.add "\}\"\n]\n"
 		var g = in_hierarchy(model.mainmodule).direct_greaters
 		for i in g do
-			if not model.view.accept_mentity(i) then continue
+			if not model.filter.accept_mentity(i) then continue
 			t.add "{i.name} -> {name} [dir=back"
 			if i.kind == interface_kind then
 				t.add " arrowtail=open style=dashed"

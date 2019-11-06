@@ -33,7 +33,7 @@ end
 import c
 intrude import core::text::flat
 import serialization
-private import json::serialization
+private import json
 
 in "C Header" `{
 	#include <mpi.h>
@@ -50,11 +50,11 @@ class MPI
 	fun finalize `{ MPI_Finalize(); `}
 
 	# Name of this processor, usually the hostname
-	fun processor_name: String import NativeString.to_s_with_length `{
+	fun processor_name: String import CString.to_s_with_length `{
 		char *name = malloc(MPI_MAX_PROCESSOR_NAME);
 		int size;
 		MPI_Get_processor_name(name, &size);
-		return NativeString_to_s_with_length(name, size);
+		return CString_to_s_with_length(name, size);
 	`}
 
 	# Send the content of a buffer
@@ -338,7 +338,7 @@ extern class SuccessOrError `{ int `}
 	`}
 
 	redef fun to_s do return native_to_s.to_s
-	private fun native_to_s: NativeString `{
+	private fun native_to_s: CString `{
 		char *err = malloc(MPI_MAX_ERROR_STRING);
 		MPI_Error_string(self, err, NULL);
 		return err;
@@ -348,7 +348,7 @@ end
 # An MPI error class
 extern class ErrorClass `{ int `}
 	redef fun to_s do return native_to_s.to_s
-	private fun native_to_s: NativeString `{
+	private fun native_to_s: CString `{
 		char *err = malloc(MPI_MAX_ERROR_STRING);
 		MPI_Error_string(self, err, NULL);
 		return err;

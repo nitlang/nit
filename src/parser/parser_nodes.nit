@@ -18,10 +18,11 @@ module parser_nodes
 
 import location
 import ordered_tree
+private import console
 
 # Root of the AST class-hierarchy
 abstract class ANode
-	# Location is set during AST building. Once built, location cannon be null.
+	# Location is set during AST building. Once built, location can not be null.
 	# However, manual instantiated nodes may need more care.
 	var location: Location is writable, noinit
 
@@ -34,14 +35,27 @@ abstract class ANode
 		sys.stderr.write "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}\n"
 	end
 
+	# Is `self` a token or a pure-structural production like `AQId`?
+	fun is_structural: Bool do return false
+
 	# Write the subtree on stdout.
-	# See `ASTDump`
-	fun dump_tree
+	#
+	# Visit the subtree and display it with additional and useful information.
+	#
+	# By default, this displays all kind of nodes and the corresponding lines of codes.
+	#
+	# See `ASTDump` for details.
+	fun dump_tree(display_structural, display_line: nullable Bool)
 	do
-		var d = new ASTDump
+		var d = new ASTDump(display_structural or else true, display_line or else true)
 		d.enter_visit(self)
 		d.write_to(sys.stdout)
 	end
+
+	# Information to display on a node
+	#
+	# Refine this method to add additional information on each node type.
+	fun dump_info(v: ASTDump): String do return ""
 
 	# Parent of the node in the AST
 	var parent: nullable ANode = null
@@ -177,8 +191,22 @@ class ASTDump
 	# Is used to handle the initial node parent and workaround possible inconsistent `ANode::parent`
 	private var last_parent: nullable ANode = null
 
+	# Display tokens and structural production?
+	#
+	# Should tokens (and structural production like AQId) be displayed?
+	var display_structural: Bool
+
+	# Display lines?
+	#
+	# Should each new line be displayed (numbered and in gray)?
+	var display_line: Bool
+
+	# Current line number (when printing lines)
+	private var line = 0
+
 	redef fun visit(n)
 	do
+		if not display_structural and n.is_structural then return
 		var p = last_parent
 		add(p, n)
 		last_parent = n
@@ -186,14 +214,35 @@ class ASTDump
 		last_parent = p
 	end
 
+	redef fun write_line(o, n, p)
+	do
+		if display_line then
+			var ls = n.location.line_start
+			var file = n.location.file
+			var line = self.line
+			if ls > line and file != null then
+				if line == 0 then line = ls - 1
+				while line < ls do
+					line += 1
+					o.write "{line}\t{file.get_line(line)}\n".light_gray
+				end
+				self.line = ls
+			end
+		end
+
+		super
+	end
+
 	redef fun display(n)
 	do
-		if n isa Token then
-			return "{n.class_name} \"{n.text.escape_to_c}\" @{n.location}"
-		else
-			return "{n.class_name} @{n.location}"
-		end
+		return "{n.class_name} {n.dump_info(self)} @{n.location}"
 	end
+
+	# `s` as yellow
+	fun yellow(s: String): String do return s.yellow
+
+	# `s` as red
+	fun red(s: String): String do return s.red
 end
 
 # A sequence of nodes
@@ -330,6 +379,10 @@ abstract class Token
 	# Whitespace are ignored by the lexer, so they are not even considered as loose tokens.
 	# See `blank_before` to get the whitespace that separate tokens.
 	var is_loose = false
+
+	redef fun is_structural do return true
+
+	redef fun dump_info(v) do return " {text.escape_to_c}"
 
 	# Loose tokens that precede `self`.
 	#
@@ -481,8 +534,13 @@ class TKwinterface
 	super TokenKeyword
 end
 
-# The keywords `enum` ane `universal`
+# The keywords `enum` and `universal`
 class TKwenum
+	super TokenKeyword
+end
+
+# The keyword `subset`
+class TKwsubset
 	super TokenKeyword
 end
 
@@ -925,6 +983,11 @@ class TStarship
 	super TokenOperator
 end
 
+# The operator `?`
+class TQuest
+	super TokenOperator
+end
+
 # The operator `!`
 class TBang
 	super TokenOperator
@@ -1020,6 +1083,11 @@ class TBadString
 	end
 end
 
+# A malformed triple quoted string
+class TBadTString
+	super TBadString
+end
+
 # A malformed char
 class TBadChar
 	super Token
@@ -1032,6 +1100,15 @@ end
 # A extern code block
 class TExternCodeSegment
 	super Token
+end
+
+# A malformed extern code block
+class TBadExtern
+	super Token
+	redef fun to_s
+	do
+		do return "malformed extern segment {text}"
+	end
 end
 
 # A end of file
@@ -1158,8 +1235,9 @@ class AIntrudeVisibility
 end
 
 # A class definition
-# While most definition are `AStdClassdef`
-# There is tow special case of class definition
+#
+# While most definitions are `AStdClassdef`s,
+# there are 2 special cases of class definitions.
 abstract class AClassdef
 	super Prod
 	# All the declared properties (including the main method)
@@ -1260,6 +1338,18 @@ class AExternClasskind
 	var n_kwclass: nullable TKwclass = null is writable
 end
 
+class ASubsetClasskind
+	super AClasskind
+
+	# The `subset` keyword.
+	var n_kwsubset: TKwsubset is writable, noinit
+
+	redef fun visit_all(v) do
+		# TODO: Remove this redefinition once generated from the grammar.
+		v.enter_visit(n_kwsubset)
+	end
+end
+
 # The definition of a formal generic parameter type. eg `X: Y`
 class AFormaldef
 	super Prod
@@ -1320,6 +1410,9 @@ class AMethPropdef
 
 	# The `init` keyword, if any
 	var n_kwinit: nullable TKwinit = null is writable
+
+	# The `isa` keyword, if any
+	var n_kwisa: nullable TKwisa = null is writable
 
 	# The `new` keyword, if any
 	var n_kwnew: nullable TKwnew = null is writable
@@ -1667,6 +1760,8 @@ class AQid
 
 	# The final identifier
 	var n_id: TId is writable, noinit
+
+	redef fun is_structural do return true
 end
 
 # A potentially qualified class identifier `foo::bar::Baz`
@@ -1677,6 +1772,8 @@ class AQclassid
 
 	# The final identifier
 	var n_id: TClassid is writable, noinit
+
+	redef fun is_structural do return true
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
@@ -2359,6 +2456,27 @@ class ACallReassignExpr
 	super ASendReassignFormExpr
 end
 
+# A reference to a method with a captured receiver. eg. `&x.foo` or just `&foo` is self is captured.
+#
+# Currently, the syntax is analogous to a simple call (`recv.foo`) with a prefix `&`.
+# On chains, only the last call is captured (`.` has a higher precedence than `&`).
+#
+# The syntax is analogous to a call (except the &), there is always a receiver (including the implicit self or sys) and arguments are accepted by the parser.
+#
+# TODO There is no clear syntax proposal
+#
+# * to avoid the capture of a receiver since a receiver is statically expected to resolve the method name
+# * for special method names (setters, brackets and operators)
+#
+# Note: The class specializes `ASendExpr` (trough `ACallFormExpr`) so some behavior of a genuine send expression must be redefined.
+class ACallrefExpr
+       super ACallFormExpr
+
+       # The `&` operator
+       var n_amp: TAmp is writable, noinit
+end
+
+
 # A call to `super`. OR a call of a super-constructor
 class ASuperExpr
 	super AExpr
@@ -2589,6 +2707,14 @@ class ASuperstringExpr
 	var n_exprs = new ANodes[AExpr](self)
 end
 
+class ALambdaExpr
+	super AExpr
+	var n_kwmeth: TKwmeth is writable, noinit
+	var n_signature: ASignature is writable, noinit
+	var n_kwdo: TKwdo is writable, noinit
+	var n_expr: AExpr is writable, noinit
+end
+
 # A simple parenthesis. eg `(x)`
 class AParExpr
 	super AExpr
@@ -2656,6 +2782,17 @@ class AVarargExpr
 
 	# The `...` symbol
 	var n_dotdotdot: TDotdotdot is writable, noinit
+end
+
+# A receiver with a `?` suffix used in safe call operator.
+class ASafeExpr
+	super AExpr
+
+	# The expression made safe
+	var n_expr: AExpr is writable, noinit
+
+	# The `?` symbol
+	var n_quest: TQuest is writable, noinit
 end
 
 # An named notation used to pass an expression by name in a parameter
@@ -2965,7 +3102,8 @@ abstract class AAtid
 	super Prod
 
 	# The identifier of the annotation.
-	# Can be a TId of a keyword
+	#
+	# Can be a TId or a keyword.
 	var n_id: Token is writable, noinit
 end
 

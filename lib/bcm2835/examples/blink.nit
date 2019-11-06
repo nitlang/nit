@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module blink
+module blink is example
 
 import bcm2835
 

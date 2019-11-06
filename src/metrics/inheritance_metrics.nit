@@ -22,6 +22,8 @@ import mmodules_metrics
 import mclasses_metrics
 
 redef class ToolContext
+
+	# Inheritance related metrics phase
 	var inheritance_metrics_phase: Phase = new InheritanceMetricsPhase(self, null)
 end
 
@@ -35,28 +37,30 @@ private class InheritanceMetricsPhase
 		var out = "{toolcontext.opt_dir.value or else "metrics"}/inheritance"
 		out.mkdir
 
+		var model = toolcontext.modelbuilder.model
+		var filter = new ModelFilter(min_visibility = private_visibility)
+
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
 		var hmetrics = new MetricSet
-		hmetrics.register(new MDUI(mainmodule))
-		hmetrics.register(new MDUIC(mainmodule))
-		hmetrics.register(new MDUII(mainmodule))
-		hmetrics.register(new MIF(mainmodule))
-		hmetrics.register(new MIFC(mainmodule))
-		hmetrics.register(new MIFI(mainmodule))
+		hmetrics.register(new MDUI(model, mainmodule))
+		hmetrics.register(new MDUIC(model, mainmodule))
+		hmetrics.register(new MDUII(model, mainmodule))
+		hmetrics.register(new MIF(model, mainmodule))
+		hmetrics.register(new MIFC(model, mainmodule))
+		hmetrics.register(new MIFI(model, mainmodule))
 
 		var cmetrics = new MetricSet
-		cmetrics.register(new CNOAC(mainmodule))
-		cmetrics.register(new CNOPC(mainmodule))
-		cmetrics.register(new CNOCC(mainmodule))
-		cmetrics.register(new CNODC(mainmodule))
-		cmetrics.register(new CNOPI(mainmodule))
-		cmetrics.register(new CNOCI(mainmodule))
-		cmetrics.register(new CNODI(mainmodule))
-		cmetrics.register(new CDITC(mainmodule))
-		cmetrics.register(new CDITI(mainmodule))
+		cmetrics.register(new CNOAC(model, mainmodule, filter))
+		cmetrics.register(new CNOPC(model, mainmodule, filter))
+		cmetrics.register(new CNOCC(model, mainmodule, filter))
+		cmetrics.register(new CNODC(model, mainmodule, filter))
+		cmetrics.register(new CNOPI(model, mainmodule, filter))
+		cmetrics.register(new CNOCI(model, mainmodule, filter))
+		cmetrics.register(new CNODI(model, mainmodule, filter))
+		cmetrics.register(new CDITC(model, mainmodule, filter))
+		cmetrics.register(new CDITI(model, mainmodule, filter))
 
-		var model = toolcontext.modelbuilder.model
 		var mmodules = new HashSet[MModule]
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
@@ -108,9 +112,6 @@ class MDUI
 	redef fun name do return "mdui"
 	redef fun desc do return "proportion of mclass defined using inheritance (has other parent than Object)"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -134,9 +135,6 @@ class MDUIC
 	super FloatMetric
 	redef fun name do return "mduic"
 	redef fun desc do return "proportion of class_kind defined using inheritance"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -166,9 +164,6 @@ class MDUII
 	redef fun name do return "mduii"
 	redef fun desc do return "proportion of interface_kind defined using inheritance"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -197,9 +192,6 @@ class MIF
 	redef fun name do return "mif"
 	redef fun desc do return "proportion of mclass inherited from"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -223,9 +215,6 @@ class MIFC
 	super FloatMetric
 	redef fun name do return "mifc"
 	redef fun desc do return "proportion of class_kind inherited from"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
@@ -255,9 +244,6 @@ class MIFI
 	redef fun name do return "mifi"
 	redef fun desc do return "proportion of interface_kind inherited from"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mmodules) do
 		for mmodule in mmodules do
 			var count = 0
@@ -286,9 +272,6 @@ class CNOAC
 	redef fun name do return "cnoac"
 	redef fun desc do return "number of class_kind ancestor"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -311,9 +294,6 @@ class CNOPC
 	super IntMetric
 	redef fun name do return "cnopc"
 	redef fun desc do return "number of class_kind parent"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -338,9 +318,6 @@ class CNOCC
 	redef fun name do return "cnocc"
 	redef fun desc do return "number of class_kind children"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -364,15 +341,35 @@ class CNODC
 	redef fun name do return "cnodc"
 	redef fun desc do return "number of class_kind descendants"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
 			for parent in mclass.in_hierarchy(mainmodule).smallers do
 				if parent == mclass then continue
 				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
+			end
+			values[mclass] = count
+		end
+	end
+end
+
+# MClass metric: Number of Abstract Class Ancestors
+#
+# Count only absrtract classes
+class CNOAA
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnoaa"
+	redef fun desc do return "number of abstract class ancestors"
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind then
 					count += 1
 				end
 			end
@@ -389,9 +386,6 @@ class CNOAI
 	super IntMetric
 	redef fun name do return "cnoai"
 	redef fun desc do return "number of interface_kind ancestor"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -416,9 +410,6 @@ class CNOPI
 	redef fun name do return "cnopi"
 	redef fun desc do return "number of interface_kind parent"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -441,9 +432,6 @@ class CNOCI
 	super IntMetric
 	redef fun name do return "cnoci"
 	redef fun desc do return "number of interface_kind children"
-
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -468,9 +456,6 @@ class CNODI
 	redef fun name do return "cnodi"
 	redef fun desc do return "number of interface_kind descendants"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			var count = 0
@@ -494,9 +479,6 @@ class CDITC
 	redef fun name do return "cditc"
 	redef fun desc do return "depth in class tree following only class, abstract, extern kind"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.ditc(mainmodule)
@@ -513,9 +495,6 @@ class CDITI
 	redef fun name do return "cditi"
 	redef fun desc do return "depth in class tree following only interface_kind"
 
-	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
-
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
 			values[mclass] = mclass.diti(mainmodule)
@@ -526,7 +505,7 @@ end
 # model redef
 
 redef class MClass
-		
+
 	# Class Depth in Inheritance Tree
 	#
 	# Following the longest path composed only of extends edges from self to Object
@@ -565,4 +544,3 @@ redef class MClass
 		return min
 	end
 end
-

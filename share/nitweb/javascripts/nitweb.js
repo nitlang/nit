@@ -15,30 +15,26 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'angular-loading-bar', 'entities', 'docdown', 'index'])
+	angular.module('nitweb', ['ui.router', 'ngSanitize', 'angular-loading-bar', 'catalog', 'entities', 'docdown', 'metrics', 'users', 'grades'])
+
 	.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 		cfpLoadingBarProvider.includeSpinner = false;
 	}])
-	.config(function($routeProvider, $locationProvider) {
-		$routeProvider
-			.when('/', {
-				templateUrl: 'views/index.html',
-				controller: 'IndexCtrl',
-				controllerAs: 'indexCtrl'
+
+	.run(function($rootScope, $anchorScroll) {
+		$anchorScroll.yOffset = 80;
+		$rootScope.$on('$stateChangeSuccess', function() {
+		  $anchorScroll();
+		});
+	})
+
+	.config(function($stateProvider, $locationProvider) {
+		$stateProvider
+			.state({
+				name: '404',
+				url: '*path',
+				templateUrl: 'views/error.html'
 			})
-			.when('/docdown', {
-				templateUrl: 'views/docdown.html',
-				controller: 'DocdownCtrl',
-				controllerAs: 'docdownCtrl'
-			})
-			.when('/doc/:id', {
-				templateUrl: 'views/doc.html',
-				controller: 'EntityCtrl',
-				controllerAs: 'entityCtrl'
-			})
-			.otherwise({
-				redirectTo: '/'
-			});
 		$locationProvider.html5Mode(true);
-	});
+	})
 })();

@@ -22,10 +22,15 @@
 #
 # ~~~
 # # Opens the connexion with the Mongo server.
-# var client = new MongoClient("mongodb://localhost:27017/")
+# var client = new MongoClient("mongodb://mongo:27017/")
+#
+# # Select the database.
+# var db_suffix = "NIT_TESTING_ID".environ
+# var db_name = "test_{db_suffix}"
+# var db = client.database(db_name)
 #
 # # Retrieve a collection.
-# var col = client.database("test").collection("test")
+# var col = db.collection("test")
 #
 # # Insert a document in the collection.
 # var doc = new JsonObject
@@ -42,6 +47,7 @@
 # ~~~
 module mongodb
 
+import json::static
 import json
 private import native_mongodb
 
@@ -90,9 +96,9 @@ private class BSON
 	end
 
 	redef fun to_s do
-		var ns = native.to_native_string
-		var res = ns.to_s_with_copy
-		ns.free # manual free of gc allocated NativeString
+		var ns = native.to_c_string
+		var res = ns.to_s
+		ns.free # manual free of gc allocated CString
 		return res
 	end
 
@@ -146,7 +152,7 @@ class MongoError
 	# Human readable error message.
 	fun message: String do
 		var ns = native.message
-		var res = ns.to_s_with_copy
+		var res = ns.to_s
 		ns.free
 		return res
 	end
@@ -162,9 +168,13 @@ end
 # Since the MongoDB notation is not JSON complient, the mongoc wrapper uses
 # a JSON based notation like `{"$oid": "hash"}`.
 # This is the notation returned by the `to_json` service.
-private class MongoObjectId
+class MongoObjectId
 
-	var native: BSONObjectId
+	private var native: BSONObjectId = new BSONObjectId
+
+	private init with_native(native: BSONObjectId) do
+		self.native = native
+	end
 
 	# The unique ID as an MongoDB Object ID string.
 	fun id: String do return native.id
@@ -187,7 +197,7 @@ end
 # Usage:
 #
 # ~~~
-# var uri = "mongodb://localhost:27017/"
+# var uri = "mongodb://mongo:27017/"
 # var client = new MongoClient(uri)
 # assert client.server_uri == uri
 # ~~~
@@ -206,7 +216,7 @@ class MongoClient
 	# Returns `null` if an error occured. See `last_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
+	# var client = new MongoClient("mongodb://mongo:27017/")
 	# assert client.server_status["process"] == "mongod"
 	# ~~~
 	fun server_status: nullable JsonObject do
@@ -220,10 +230,12 @@ class MongoClient
 	# Lists available database names.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# db.collection("test").insert(new JsonObject)
-	# assert client.database_names.has("test")
+	# assert client.database_names.has(db_name)
 	# ~~~
 	fun database_names: Array[String] do
 		var res = new Array[String]
@@ -232,7 +244,7 @@ class MongoClient
 		var i = 0
 		var name = nas[i]
 		while not name.address_is_null do
-			res.add name.to_s_with_copy
+			res.add name.to_s
 			name.free
 			i += 1
 			name = nas[i]
@@ -247,8 +259,11 @@ class MongoClient
 	# There is no need to create a database manually.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# assert client.database("test").name == "test"
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# assert db.name == db_name
 	# ~~~
 	fun database(name: String): MongoDb do return new MongoDb(self, name)
 
@@ -270,7 +285,7 @@ class MongoClient
 	private fun last_id: nullable MongoObjectId do
 		var last_id = sys.last_mongoc_id
 		if last_id == null then return null
-		return new MongoObjectId(last_id)
+		return new MongoObjectId.with_native(last_id)
 	end
 
 	# Set the last generated id or `null` to unset once used.
@@ -306,8 +321,10 @@ class MongoDb
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# db.collection("test").insert(new JsonObject)
 	# assert db.collection_names.has("test")
 	# ~~~
@@ -318,7 +335,7 @@ class MongoDb
 		var i = 0
 		var name = nas[i]
 		while not name.address_is_null do
-			res.add name.to_s_with_copy
+			res.add name.to_s
 			name.free
 			i += 1
 			name = nas[i]
@@ -329,8 +346,10 @@ class MongoDb
 	# Loads or creates a collection by its `name`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# var col = db.collection("test")
 	# assert col.name == "test"
 	# ~~~
@@ -341,8 +360,10 @@ class MongoDb
 	# Checks if a collection named `name` exists.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var db = client.database("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
 	# assert not db.has_collection("qwerty")
 	# ~~~
 	fun has_collection(name: String): Bool do
@@ -399,8 +420,11 @@ class MongoCollection
 	# Returns `false` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var doc = new JsonObject
 	# doc["foo"] = 10
 	# doc["bar"] = "bar"
@@ -431,8 +455,11 @@ class MongoCollection
 	# Returns `false` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	#
 	# var doc = new JsonObject
 	# doc["foo"] = 10
@@ -461,8 +488,11 @@ class MongoCollection
 	# Returns `false` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var sel = new JsonObject
 	# sel["foo"] = 10
 	# assert col.remove(sel)
@@ -483,8 +513,11 @@ class MongoCollection
 	# No upsert is done, see `save` instead.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var sel = new JsonObject
 	# sel["foo"] = 10
 	# var upd = new JsonObject
@@ -511,8 +544,11 @@ class MongoCollection
 	# Returns `-1` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# assert col.count(query) > 0
@@ -530,8 +566,11 @@ class MongoCollection
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# var doc = col.find(query)
@@ -560,8 +599,11 @@ class MongoCollection
 	# * `limit` number of documents to return
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# assert col.find_all(query).length > 0
@@ -580,14 +622,56 @@ class MongoCollection
 		return res
 	end
 
+	# Applies an aggregation `pipeline` over the collection.
+	#
+	# ~~~
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test_aggregate")
+	#
+	# col.drop
+	#
+	# col.insert("""{ "cust_id": "A123", "amount": 500, "status": "A"}""".parse_json.as(JsonObject))
+	# col.insert("""{ "cust_id": "A123", "amount": 250, "status": "A"}""".parse_json.as(JsonObject))
+	# col.insert("""{ "cust_id": "B212", "amount": 200, "status": "A"}""".parse_json.as(JsonObject))
+	# col.insert("""{ "cust_id": "A123", "amount": 300, "status": "D"}""".parse_json.as(JsonObject))
+	#
+	# var res = col.aggregate("""[
+	#	{ "$match": { "status": "A" } },
+	#	{ "$group": { "_id": "$cust_id", "total": { "$sum": "$amount" } } },
+        #       { "$sort" : { "_id": 1 } }
+	# ]""".parse_json.as(JsonArray))
+	#
+        # assert res[0].to_json == """{"_id":"A123","total":750}"""
+	# assert res[1].to_json == """{"_id":"B212","total":200}"""
+	# ~~~
+	fun aggregate(pipeline: JsonArray): Array[JsonObject] do
+		var q = new JsonObject
+		q["pipeline"] = pipeline
+		var res = new Array[JsonObject]
+		var c = native.aggregate(q.to_bson.native)
+		if c == null then return res
+		var cursor = new MongoCursor(c)
+		while cursor.is_ok do
+			res.add cursor.item
+			cursor.next
+		end
+		return res
+	end
+
 	# Retrieves statistics about the collection.
 	#
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
-	# var client = new MongoClient("mongodb://localhost:27017/")
-	# var col = client.database("test").collection("test")
-	# assert col.stats["ns"] == "test.test"
+	# var client = new MongoClient("mongodb://mongo:27017/")
+	# var db_suffix = "NIT_TESTING_ID".environ
+	# var db_name = "test_{db_suffix}"
+	# var db = client.database(db_name)
+	# var col = db.collection("test")
+	# assert col.stats["ns"] == "{db_name}.test"
 	# ~~~
 	fun stats: nullable JsonObject do
 		var bson = native.stats

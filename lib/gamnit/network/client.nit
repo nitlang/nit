@@ -40,7 +40,7 @@
 # ~~~
 module client
 
-import common
+intrude import common
 
 # Information of the remove server
 class RemoteServerConfig
@@ -62,13 +62,17 @@ class RemoteServer
 	var socket: nullable TCPStream = null
 
 	# Is this connection connected?
-	fun connected: Bool do return socket != null and socket.connected == true
+	fun connected: Bool
+	do
+		var socket = socket
+		return socket != null and socket.connected
+	end
 
-	# `BinarySerializer` used to send data to this client through `socket`
-	var writer: BinarySerializer is noinit
+	# `MsgPackSerializer` used to send data to this client through `socket`
+	var writer: MsgPackSerializer is noinit
 
-	# `BinaryDeserializer` used to receive data from this client through `socket`
-	var reader: BinaryDeserializer is noinit
+	# `MsgPackDeserializer` used to receive data from this client through `socket`
+	var reader: MsgPackDeserializer is noinit
 
 	# Attempt connection with the remote server
 	fun connect: Bool
@@ -83,9 +87,9 @@ class RemoteServer
 		end
 
 		# Setup serialization
-		writer = new BinarySerializer(socket)
+		writer = new MsgPackSerializer(socket)
 		writer.cache = new AsyncCache(false)
-		reader = new BinaryDeserializer(socket)
+		reader = new MsgPackDeserializer(socket)
 		writer.link reader
 
 		return true
@@ -104,25 +108,77 @@ class RemoteServer
 
 		# App name
 		var app_name = sys.handshake_app_name
-		socket.write_string app_name
+		socket.serialize_msgpack app_name
 
-		var server_app = socket.read_string
+		var server_app = socket.deserialize_msgpack("String")
 		if server_app != app_name then
-			print_error "Handshake Error: server app name is '{server_app}'"
+			print_error "Handshake Error: server app name is '{server_app or else "<invalid>"}'"
 			socket.close
 			return false
 		end
 
 		# App version
-		socket.write_string sys.handshake_app_version
+		socket.serialize_msgpack sys.handshake_app_version
 
-		var server_version = socket.read_string
+		var server_version = socket.deserialize_msgpack("String")
 		if server_version != sys.handshake_app_version then
-			print_error "Handshake Error: server version is different '{server_version}'"
+			print_error "Handshake Error: server version is different '{server_version or else "<invalid>"}'"
 			socket.close
 			return false
 		end
 
 		return true
 	end
+end
+
+# Discover local servers responding on UDP `discovery_port`
+#
+# Sends a message in the format `gamnit::network? handshake_app_name` and
+# looks for the response `gamnit::network! handshake_app_name port_number`.
+# Waits for `timeout`, or the default 0.1 seconds, after sending the message.
+#
+# The server usually responds using the method `answer_discovery_requests`.
+# When receiving responses, the client may then choose a server and
+# connect via `new RemoteServer`.
+#
+# ~~~
+# var servers = discover_local_servers
+# if servers.not_empty then
+#     var server = new RemoteServer(servers.first)
+#     server.connect
+#     server.writer.serialize "hello server"
+#     server.socket.close
+# end
+# ~~~
+fun discover_local_servers(timeout: nullable Float): Array[RemoteServerConfig]
+do
+	timeout = timeout or else 0.1
+
+	var s = new UDPSocket
+	s.enable_broadcast = true
+	s.blocking = false
+	s.broadcast(discovery_port, "{discovery_request_message} {handshake_app_name}")
+	timeout.sleep
+
+	var r = new Array[RemoteServerConfig]
+	loop
+		var ptr = new Ref[nullable SocketAddress](null)
+		var resp = s.recv_from(1024, ptr)
+		var src = ptr.item
+
+		if resp.is_empty then
+			# No response
+			break
+		else
+			assert src != null
+			var words = resp.split(" ")
+			if words.length == 3 and words[0] == discovery_response_message and
+			   words[1] == handshake_app_name and words[2].is_int then
+				var address = src.address
+				var port = words[2].to_i
+				r.add new RemoteServerConfig(address, port)
+			end
+		end
+	end
+	return r
 end

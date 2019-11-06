@@ -31,7 +31,7 @@ class TGame
 	private var clock = new Clock is noserialize
 
 	# Tick count of the last turn (The first turn as a tick of 0)
-	var tick: Int = -1
+	var tick = -1
 
 	# Execute the next turn and return it as a `TTurn`
 	#

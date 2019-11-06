@@ -149,6 +149,7 @@ class SeparateCompiler
 	private var type_ids: Map[MType, Int] is noinit
 	private var type_colors: Map[MType, Int] is noinit
 	private var opentype_colors: Map[MType, Int] is noinit
+	private var thunks_to_compile: Set[SeparateRuntimeFunction] = new HashSet[SeparateRuntimeFunction]
 
 	init do
 		var file = new_file("nit.common")
@@ -193,6 +194,15 @@ class SeparateCompiler
 		modelbuilder.toolcontext.info("Type coloring", 2)
 		compiler.new_file("{c_name}.types")
 		compiler.compile_types
+	end
+
+	fun thunk_todo(thunk: SeparateRuntimeFunction)
+	do
+		# Concrete instance of `SeparateRuntimeFunction` are already
+		# handled by the compiler. Avoid duplicate compilation.
+		if thunk isa SeparateThunkFunction then
+			thunks_to_compile.add(thunk)
+		end
 	end
 
 	# Color and compile type structures and cast information
@@ -252,11 +262,11 @@ class SeparateCompiler
 	do
 		# Collect all bas box class
 		# FIXME: this is not completely fine with a separate compilation scheme
-		for classname in ["Int", "Bool", "Byte", "Char", "Float", "NativeString",
-		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
+		for classname in ["Int", "Bool", "Byte", "Char", "Float", "CString",
+				 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
 			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
 			if classes == null then continue
-			assert classes.length == 1 else print classes.join(", ")
+			assert classes.length == 1 else print_error classes.join(", ")
 			self.box_kinds[classes.first] = self.box_kinds.length + 1
 		end
 	end
@@ -269,12 +279,11 @@ class SeparateCompiler
 		#if mclass.mclass_type.ctype == "val*" or mclass.mclass_type.is_subtype(self.mainmodule, mclass.mclass_type pointer_type) then
 		if mclass.mclass_type.ctype_extern == "val*" then
 			return 0
-		else if mclass.kind == extern_kind and mclass.name != "NativeString" then
+		else if mclass.kind == extern_kind and mclass.name != "CString" then
 			return self.box_kinds[self.mainmodule.pointer_type.mclass]
 		else
 			return self.box_kinds[mclass]
 		end
-
 	end
 
 	fun compile_color_consts(colors: Map[Object, Int]) do
@@ -344,7 +353,7 @@ class SeparateCompiler
 
 		for m in mainmodule.in_importation.greaters do for cd in m.mclassdefs do
 			var mclass = cd.mclass
-			# Collect methods ad attributes
+			# Collect methods and attributes
 			for p in cd.intro_mproperties do
 				if p isa MMethod then
 					if rta == null then
@@ -413,7 +422,6 @@ class SeparateCompiler
 			# Do not need to resolve attributes as only the position is used
 			attr_tables[mclass] = attr_colorer.build_layout(mclass)
 		end
-
 
 	end
 
@@ -505,7 +513,6 @@ class SeparateCompiler
 		end
 		return tables
 	end
-
 
 	private fun compute_type_test_layouts(mtypes: Set[MClassType], cast_types: Set[MType]) do
 		# Group cast_type by their classes
@@ -641,6 +648,15 @@ class SeparateCompiler
 				end
 			end
 		end
+		var compiled_thunks = new Array[SeparateRuntimeFunction]
+		# Compile thunks here to write them in the same module they are declared.
+		for thunk in thunks_to_compile do
+			if thunk.mmethoddef.mclassdef.mmodule == mmodule then
+				thunk.compile_to_c(self)
+				compiled_thunks.add(thunk)
+			end
+		end
+		thunks_to_compile.remove_all(compiled_thunks)
 		self.mainmodule = old_module
 	end
 
@@ -938,9 +954,32 @@ class SeparateCompiler
 			v.add("return (val*){res};")
 			v.add("\}")
 			return
-		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
-			# Is an extern class (other than Pointer and NativeString)
-			# Pointer is caught in a previous `if`, and NativeString is internal
+		else if mclass.name == "RoutineRef" then
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct type *type;")
+			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("val* recv;")
+			self.header.add_decl("nitmethod_t method;")
+			self.header.add_decl("\};")
+
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(val* recv, nitmethod_t method, const struct class* class, const struct type* type);")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}(val* recv, nitmethod_t method, const struct class* class, const struct type* type)\{")
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_name} *{res};")
+			var alloc = v.nit_alloc("sizeof(struct instance_{c_name})", mclass.full_name)
+			v.add("{res} = {alloc};")
+			v.add("{res}->type = type;")
+			hardening_live_type(v, "type")
+			v.add("{res}->class = class;")
+			v.add("{res}->recv = recv;")
+			v.add("{res}->method = method;")
+			v.add("return (val*){res};")
+			v.add("\}")
+			return
+		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
+			# Is an extern class (other than Pointer and CString)
+			# Pointer is caught in a previous `if`, and CString is internal
 
 			var pointer_type = mainmodule.pointer_type
 
@@ -981,6 +1020,10 @@ class SeparateCompiler
 			else
 				var alloc = v.nit_alloc("sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t)", mclass.full_name)
 				v.add("{res} = {alloc};")
+			end
+			if modelbuilder.toolcontext.opt_trace.value then
+				v.add("tracepoint(Nit_Compiler, Object_Instance,\"{mtype}\", (uintptr_t)self);")
+				v.add("GC_register_finalizer(self, object_destroy_callback, NULL, NULL, NULL);")
 			end
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
@@ -1242,7 +1285,7 @@ class SeparateCompilerVisitor
 				return res
 			end
 			var valtype = value.mtype.as(MClassType)
-			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
+			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
 				valtype = compiler.mainmodule.pointer_type
 			end
 			var res = self.new_var(mtype)
@@ -1267,7 +1310,7 @@ class SeparateCompilerVisitor
 	redef fun unbox_extern(value, mtype)
 	do
 		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
-		   mtype.mclass.name != "NativeString" then
+		   mtype.mclass.name != "CString" then
 			var pointer_type = compiler.mainmodule.pointer_type
 			var res = self.new_var_extern(mtype)
 			self.add "{res} = ((struct instance_{pointer_type.c_name}*){value})->value; /* unboxing {value.mtype} */"
@@ -1280,7 +1323,7 @@ class SeparateCompilerVisitor
 	redef fun box_extern(value, mtype)
 	do
 		if mtype isa MClassType and mtype.mclass.kind == extern_kind and
-		   mtype.mclass.name != "NativeString" then
+		   mtype.mclass.name != "CString" then
 			var valtype = compiler.mainmodule.pointer_type
 			var res = self.new_var(mtype)
 			compiler.undead_types.add(mtype)
@@ -1405,7 +1448,7 @@ class SeparateCompilerVisitor
 		var res: nullable RuntimeVariable = null
 		var recv = arguments.first
 		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_null.value or mmethod.name == "==" or mmethod.name == "!="
-		if maybenull(recv) and consider_null then
+		if maybe_null(recv) and consider_null then
 			self.add("if ({recv} == NULL) \{")
 			if mmethod.name == "==" or mmethod.name == "is_same_instance" then
 				res = self.new_var(bool_type)
@@ -1888,7 +1931,7 @@ class SeparateCompilerVisitor
 		if not value.mtype.is_c_primitive then
 			self.add "{res} = {value} == NULL ? \"null\" : {type_info(value)}->name;"
 		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind and
-			value.mtype.as(MClassType).name != "NativeString" then
+			value.mtype.as(MClassType).name != "CString" then
 			self.add "{res} = \"{value.mtype.as(MClassType).mclass}\";"
 		else
 			self.require_declaration("type_{value.mtype.c_name}")
@@ -2061,12 +2104,6 @@ class SeparateCompilerVisitor
 		return k == interface_kind or t.is_c_primitive
 	end
 
-	fun maybe_null(value: RuntimeVariable): Bool
-	do
-		var t = value.mcasttype
-		return t isa MNullableType or t isa MNullType
-	end
-
 	redef fun array_instance(array, elttype)
 	do
 		var nclass = mmodule.native_array_class
@@ -2085,7 +2122,7 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	redef fun native_array_instance(elttype, length)
 	do
 		var mtype = mmodule.native_array_type(elttype)
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
@@ -2098,11 +2135,11 @@ class SeparateCompilerVisitor
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			self.require_declaration(mtype.const_color)
-			return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
+			return self.new_expr("NEW_{mtype.mclass.c_name}((int){length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 		end
 		compiler.undead_types.add(mtype)
 		self.require_declaration("type_{mtype.c_name}")
-		return self.new_expr("NEW_{mtype.mclass.c_name}({length}, &type_{mtype.c_name})", mtype)
+		return self.new_expr("NEW_{mtype.mclass.c_name}((int){length}, &type_{mtype.c_name})", mtype)
 	end
 
 	redef fun native_array_def(pname, ret_type, arguments)
@@ -2151,6 +2188,127 @@ class SeparateCompilerVisitor
 		self.add("{recv}[{i}]={val};")
 	end
 
+	redef fun routine_ref_instance(routine_type, recv, callsite)
+	do
+		#debug "ENTER ref_instance"
+		var mmethoddef = callsite.mpropdef
+		var mmethod = mmethoddef.mproperty
+		# routine_mclass is the specialized one, e.g: FunRef1, ProcRef2, etc..
+		var routine_mclass = routine_type.mclass
+
+		var nclasses = mmodule.model.get_mclasses_by_name("RoutineRef").as(not null)
+		var base_routine_mclass = nclasses.first
+
+		# All routine classes use the same `NEW` constructor.
+		# However, they have different declared `class` and `type` value.
+		self.require_declaration("NEW_{base_routine_mclass.c_name}")
+
+		var recv_class_cname = recv.mcasttype.as(MClassType).mclass.c_name
+		var my_recv = recv
+
+		if recv.mtype.is_c_primitive then
+			my_recv = autobox(recv, mmodule.object_type)
+		end
+		var my_recv_mclass_type = my_recv.mtype.as(MClassType)
+
+		# The class of the concrete Routine must exist (e.g ProcRef0, FunRef0, etc.)
+		self.require_declaration("class_{routine_mclass.c_name}")
+		self.require_declaration(mmethoddef.c_name)
+
+		var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
+		# If the receiver is exact, then there's no need to make a
+		# polymorph call to the underlying method.
+		thunk_function.polymorph_call_flag = not my_recv.is_exact
+		var runtime_function = mmethoddef.virtual_runtime_function
+
+		var is_c_equiv = runtime_function.msignature.c_equiv(thunk_function.msignature)
+
+		var c_ref = thunk_function.c_ref
+		if is_c_equiv then
+			var const_color = mmethoddef.mproperty.const_color
+			c_ref = "{class_info(my_recv)}->vft[{const_color}]"
+			self.require_declaration(const_color)
+		else
+			self.require_declaration(thunk_function.c_name)
+			compiler.thunk_todo(thunk_function)
+		end
+		var res: RuntimeVariable
+		if routine_type.need_anchor then
+			hardening_live_open_type(routine_type)
+			link_unresolved_type(self.frame.mpropdef.mclassdef, routine_type)
+			var recv2 = self.frame.arguments.first
+			var recv2_type_info = self.type_info(recv2)
+			self.require_declaration(routine_type.const_color)
+			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, {recv2_type_info}->resolution_table->types[{routine_type.const_color}])", routine_type)
+		else
+			self.require_declaration("type_{routine_type.c_name}")
+			compiler.undead_types.add(routine_type)
+			res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name}, &type_{routine_type.c_name})", routine_type)
+		end
+		return res
+	end
+
+	redef fun routine_ref_call(mmethoddef, arguments)
+	do
+		#debug "ENTER ref_call"
+		compiler.modelbuilder.nb_invok_by_tables += 1
+		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
+		var nclasses = mmodule.model.get_mclasses_by_name("RoutineRef").as(not null)
+		var nclass = nclasses.first
+		var runtime_function = mmethoddef.virtual_runtime_function
+
+		# Save the current receiver since adapt_signature will autobox
+		# the routine receiver which is not the underlying receiver.
+		# The underlying receiver has already been adapted in the
+		# `routine_ref_instance` method. Here we just want to adapt the
+		# rest of the signature, but it's easier to pass the wrong
+		# receiver in adapt_signature then discards it with `shift`.
+		#
+		# ~~~~nitish
+		# class A; def toto do print "toto"; end
+		# var a = new A
+		# var f = &a.toto # `a` is the underlying receiver
+		# f.call # here `f` is the routine receiver
+		# ~~~~
+		var routine = arguments.first
+
+		# Retrieve the concrete routine type
+		var original_recv_c = "(((struct instance_{nclass.c_name}*){arguments[0]})->recv)"
+		var nitmethod = "(({runtime_function.c_funptrtype})(((struct instance_{nclass.c_name}*){arguments[0]})->method))"
+		if arguments.length > 1 then
+			adapt_signature(mmethoddef, arguments)
+		end
+
+		var ret_mtype = runtime_function.called_signature.return_mtype
+
+		if ret_mtype != null then
+			# `ret` is actually always nullable Object. When invoking
+			# a callref, we don't have the original callsite information.
+			# Thus, we need to recompute the return type of the callsite.
+			ret_mtype = resolve_for(ret_mtype, routine)
+		end
+
+		# remove the routine's receiver
+		arguments.shift
+		var ss = arguments.join(", ")
+		# replace the receiver with the original one
+		if arguments.length > 0 then
+			ss = "{original_recv_c}, {ss}"
+		else
+			ss = original_recv_c
+		end
+
+		arguments.unshift routine # put back the routine ref receiver
+		add "/* {mmethoddef.mproperty} on {arguments.first.inspect}*/"
+		var callsite = "{nitmethod}({ss})"
+		if ret_mtype != null then
+			var subres = new_expr("{callsite}", ret_mtype)
+			ret(subres)
+		else
+			add("{callsite};")
+		end
+	end
+
 	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
 		assert mtype.need_anchor
 		var compiler = self.compiler
@@ -2174,6 +2332,43 @@ redef class MMethodDef
 		end
 		return res
 	end
+
+	# Returns true if the current method definition differ from
+	# its original introduction in terms of receiver type.
+	fun recv_differ_from_intro: Bool
+	do
+		var intromclassdef = mproperty.intro.mclassdef
+		var introrecv = intromclassdef.bound_mtype
+		return self.mclassdef.bound_mtype != introrecv
+	end
+
+	# The C thunk function associated to a mmethoddef. Receives only nullable
+	# Object and cast them to the original mmethoddef signature.
+	fun callref_thunk(recv_mtype: MClassType): SeparateThunkFunction
+	do
+		var res = callref_thunk_cache
+		if res == null then
+			var object_type = mclassdef.mmodule.object_type
+			var nullable_object = object_type.as_nullable
+			var ps = new Array[MParameter]
+
+			# Replace every argument type by nullable object
+			for p in msignature.mparameters do
+				ps.push(new MParameter(p.name, nullable_object, p.is_vararg))
+			end
+			var ret: nullable MType = null
+			if msignature.return_mtype != null then ret = nullable_object
+			var msignature2 = new MSignature(ps, ret)
+			var intromclassdef = mproperty.intro.mclassdef
+
+			res = new SeparateThunkFunction(self, recv_mtype, msignature2, "THUNK_{c_name}", mclassdef.bound_mtype)
+			res.polymorph_call_flag = true
+			callref_thunk_cache = res
+		end
+		return res
+	end
+
+	private var callref_thunk_cache: nullable SeparateThunkFunction
 	private var separate_runtime_function_cache: nullable SeparateRuntimeFunction
 
 	# The C function associated to a mmethoddef, that can be stored into a VFT of a class
@@ -2199,10 +2394,7 @@ redef class MMethodDef
 				self.virtual_runtime_function_cache = res
 				return res
 			end
-
-			res = new SeparateRuntimeFunction(self, recv, msignature, "VIRTUAL_{c_name}")
-			self.virtual_runtime_function_cache = res
-			res.is_thunk = true
+			res = new SeparateThunkFunction(self, recv, msignature, "VIRTUAL_{c_name}", mclassdef.bound_mtype)
 		end
 		return res
 	end
@@ -2239,10 +2431,22 @@ class SeparateRuntimeFunction
 	# The name on the compiled method
 	redef var build_c_name: String
 
-	# Statically call the original body instead
-	var is_thunk = false
-
 	redef fun to_s do return self.mmethoddef.to_s
+
+	redef fun msignature
+	do
+		return called_signature
+	end
+
+	redef fun recv_mtype
+	do
+		return called_recv
+	end
+
+	redef fun return_mtype
+	do
+		return called_signature.return_mtype
+	end
 
 	# The C return type (something or `void`)
 	var c_ret: String is lazy do
@@ -2273,68 +2477,31 @@ class SeparateRuntimeFunction
 	# The C type for the function pointer.
 	var c_funptrtype: String is lazy do return "{c_ret}(*){c_sig}"
 
-	redef fun compile_to_c(compiler)
+	redef fun declare_signature(v, sig)
 	do
-		var mmethoddef = self.mmethoddef
+		v.compiler.provide_declaration(c_name, "{sig};")
+	end
 
-		var sig = "{c_ret} {c_name}{c_sig}"
-		compiler.provide_declaration(self.c_name, "{sig};")
-
-		var rta = compiler.as(SeparateCompiler).runtime_type_analysis
-
-		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = compiler.new_visitor
-		var selfvar = new RuntimeVariable("self", called_recv, recv)
-		var arguments = new Array[RuntimeVariable]
-		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
-		v.frame = frame
-
-		var msignature = called_signature
-		var ret = called_signature.return_mtype
-
-		var comment = new FlatBuffer
-		comment.append("({selfvar}: {selfvar.mtype}")
-		arguments.add(selfvar)
-		for i in [0..msignature.arity[ do
-			var mp = msignature.mparameters[i]
-			var mtype = mp.mtype
-			if mp.is_vararg then
-				mtype = v.mmodule.array_type(mtype)
-			end
-			comment.append(", {mtype}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if is_thunk then
-			var subret = v.call(mmethoddef, recv, arguments)
-			if ret != null then
-				assert subret != null
-				v.assign(frame.returnvar.as(not null), subret)
-			end
-		else if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
+	redef fun body_to_c(v)
+	do
+		var rta = v.compiler.as(SeparateCompiler).runtime_type_analysis
+		if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
 			v.add_abort("FATAL: Dead method executed.")
 		else
-			mmethoddef.compile_inside_to_c(v, arguments)
+			super
 		end
+	end
 
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
+	redef fun end_compile_to_c(v)
+	do
+		var compiler = v.compiler
 		compiler.names[self.c_name] = "{mmethoddef.full_name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
+	end
+
+	redef fun build_frame(v, arguments)
+	do
+		var recv = mmethoddef.mclassdef.bound_mtype
+		return new StaticFrame(v, mmethoddef, recv, arguments)
 	end
 
 	# Compile the trampolines used to implement late-binding.
@@ -2382,6 +2549,12 @@ class SeparateRuntimeFunction
 			v2.add "\}"
 		end
 	end
+end
+
+class SeparateThunkFunction
+	super ThunkFunction
+	super SeparateRuntimeFunction
+	redef var target_recv
 end
 
 redef class MType

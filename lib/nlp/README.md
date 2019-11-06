@@ -11,7 +11,9 @@ This wrapper needs the Stanford CoreNLP jars that run on Java 1.8+.
 
 See http://nlp.stanford.edu/software/corenlp.shtml.
 
-## Usage
+## NLPProcessor
+
+### Java client
 
 ~~~nitish
 var proc = new NLPProcessor("path/to/StanfordCoreNLP/jars")
@@ -25,60 +27,41 @@ for sentence in doc.sentences do
 end
 ~~~
 
-## Nit API
+### NLPServer
 
-For ease of use, this wrapper introduce a Nit model to handle CoreNLP XML results.
+The NLPServer provides a wrapper around the StanfordCoreNLPServer.
 
-### NLPDocument
+See `https://stanfordnlp.github.io/CoreNLP/corenlp-server.html`.
 
-[[doc: NLPDocument]]
+~~~nitish
+var cp = "/path/to/StanfordCoreNLP/jars"
+var srv = new NLPServer(cp, 9000)
+srv.start
+~~~
 
-[[doc: NLPDocument::from_xml]]
-[[doc: NLPDocument::from_xml_file]]
-[[doc: NLPDocument::sentences]]
+### NLPClient
 
-### NLPSentence
+The NLPClient is used as a NLPProcessor with a NLPServer backend.
 
-[[doc: NLPSentence]]
+~~~nitish
+var cli = new NLPClient("http://localhost:9000")
+var doc = cli.process("String to analyze")
+~~~
 
-[[doc: NLPSentence::tokens]]
+## NLPIndex
 
-### NLPToken
+NLPIndex extends the StringIndex to use a NLPProcessor to tokenize, lemmatize and
+tag the terms of a document.
 
-[[doc: NLPToken]]
+~~~nitish
+var index = new NLPIndex(proc)
 
-[[doc: NLPToken::word]]
-[[doc: NLPToken::lemma]]
-[[doc: NLPToken::pos]]
+var d1 = index.index_string("Doc 1", "/uri/1", "this is a sample")
+var d2 = index.index_string("Doc 2", "/uri/2", "this and this is another example")
+assert index.documents.length == 2
 
-### NLP Processor
-
-[[doc: NLPProcessor]]
-
-[[doc: NLPProcessor::java_cp]]
-
-[[doc: NLPProcessor::process]]
-[[doc: NLPProcessor::process_file]]
-[[doc: NLPProcessor::process_files]]
-
-## Vector Space Model
-
-[[doc: NLPVector]]
-
-[[doc: NLPDocument::vector]]
-
-[[doc: NLPVector::cosine_similarity]]
-
-## NitNLP binary
-
-The `nitnlp` binary is given as an example of NitNLP client.
-It compares two strings and display ther cosine similarity value.
-
-Usage:
-
-~~~raw
-nitnlp --cp "/path/to/jars" "sort" "Sorting array data"
-0.577
+matches = index.match_string("this sample")
+assert matches.first.document == d1
 ~~~
 
 ## TODO

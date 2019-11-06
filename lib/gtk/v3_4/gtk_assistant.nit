@@ -72,8 +72,8 @@ extern class GtkAssistant `{GtkAssistant *`}
 		gtk_assistant_set_page_type(self, page, t);
 	`}
 
-	fun get_page_title(page: GtkWidget): String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_assistant_get_page_title(self, page));
+	fun get_page_title(page: GtkWidget): String import CString.to_s `{
+		return CString_to_s((char *)gtk_assistant_get_page_title(self, page));
 	`}
 
 	fun set_page_title(page: GtkWidget, title: String) import String.to_cstring `{

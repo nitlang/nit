@@ -127,7 +127,7 @@ class People
 	super DBObject
 
 	# ID in the Database, -1 if not set
-	var id: Int = -1
+	var id = -1
 	# Name of the participant
 	var name: String
 	# Surname of the participant
@@ -270,7 +270,7 @@ class Answer
 	# Name of the answer (title)
 	var name: String
 	# Id in the database, -1 if not set
-	var id: Int = -1
+	var id = -1
 	# Meetup the answer is linked to (null while it is not added in the database or set via API)
 	var meetup: nullable Meetup = null is writable
 

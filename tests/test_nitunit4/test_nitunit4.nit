@@ -12,28 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module test_nitunit4 is test_suite
+module test_nitunit4 is test
 
 import test_nitunit4_base
 
 class TestTestSuite
 	super SuperTestSuite
+	test
 
-	fun test_foo do
+	fun test_foo is test do
 		print "Tested method"
 		assert before
 		before = false
 	end
 
-	fun test_bar do
+	fun test_bar is test do
 		print "Tested method"
 	end
 
-	fun test_baz do
+	fun test_baz is test do
 		print "Tested method"
 	end
 
-	fun test_sav_conflict do
+	fun test_sav_conflict is test do
 		print "Tested method"
 	end
+
+	redef fun to_s do return "<{class_name}>"
 end

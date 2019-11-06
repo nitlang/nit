@@ -19,7 +19,7 @@ import app::ui
 import app::data_store
 import app::http_request
 import android::aware
-import json::serialization
+import json
 
 import benitlux_model
 import translations
@@ -78,9 +78,16 @@ fun notify(title, content: Text, uniqueness_id: Int)
 do print "Notification {uniqueness_id}: {title}; {content}"
 
 # View for an item in a list, like a beer or a person
-abstract class ItemView
-	super View
-end
+abstract class ItemView super View end
+
+# Descriptive label providing extra information
+class DescLabel super Label end
+
+# `HorizontalLayout` header to a section
+class SectionHeader super HorizontalLayout end
+
+# `Label` used in section headers
+class SectionTitle super Label end
 
 # Basic async HTTP request for this app
 #

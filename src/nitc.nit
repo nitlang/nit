@@ -17,7 +17,7 @@
 # A Nit compiler
 module nitc
 
-import frontend
+import frontend::code_gen
 import compiler
 import transform
 

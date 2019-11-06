@@ -32,6 +32,21 @@ redef class Bytes
 	end
 end
 
+redef class CString
+	# In-place XOR `self` with `key`
+	fun xor(key: CString, len: Int, key_length: Int, key_offset: nullable Int) do
+		if key_offset == null then key_offset = 0
+
+		var key_pos = key_offset % key_length
+
+		for i in [0 .. len[ do
+			self[i] = key[key_pos] ^ self[i]
+			key_pos += 1
+			if key_pos >= key_length then key_pos = 0
+		end
+	end
+end
+
 # Base class to modelize cryptographic ciphers
 abstract class Cipher
 
@@ -54,7 +69,7 @@ class SingleByteXorCipher
 	super Cipher
 
 	# Cryptographic key used in encryption and decryption.
-	var key: Byte = 0.to_b
+	var key: Int = 0
 
 	redef fun encrypt do
 		var key_bytes = new Bytes.with_capacity(1)

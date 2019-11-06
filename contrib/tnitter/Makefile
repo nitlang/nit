@@ -6,7 +6,7 @@ bin/tnitter_server: $(shell nitls -M src/tnitter.nit)
 	mkdir -p bin/
 	nitc -o bin/tnitter_server src/tnitter.nit -D tnitter_interface=$(SERVER)
 
-bin/tnitter: $(shell nitls -M src/tnitter_app.nit)
+bin/tnitter: $(shell nitls -M src/tnitter_app.nit -m linux)
 	mkdir -p bin/
 	nitc -o bin/tnitter src/tnitter_app.nit -m linux -D tnitter_server_uri=http://$(SERVER)
 
@@ -30,11 +30,11 @@ android/res/: art/icon.svg
 # iOS
 
 ios: bin/tnitter.app
-bin/tnitter.app: $(shell nitls -M src/tnitter_app.nit ios) ios/AppIcon.appiconset/Contents.json
+bin/tnitter.app: $(shell nitls -M src/tnitter_app.nit -m ios) ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin/
 	nitc -o bin/tnitter.app src/tnitter_app.nit -m ios -D tnitter_server_uri=http://$(SERVER)
 
-ios-release: $(shell nitls -M src/tnitter_app.nit ios) ios/AppIcon.appiconset/Contents.json
+ios-release: $(shell nitls -M src/tnitter_app.nit -m ios) ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin/
 	nitc -o bin/tnitter.app src/tnitter_app.nit -m ios -D tnitter_server_uri=http://tnitter.xymus.net
 

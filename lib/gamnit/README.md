@@ -5,11 +5,24 @@ It is based on the portability framework _app.nit_ and the OpenGL ES 2.0 standar
 
 # System configuration
 
-To compile the _gamnit_ apps packaged with the Nit repositoy on GNU/Linux you need to install the dev version of a few libraries and some tools.
-Under Debian 8.2, this command should install everything needed:
+To compile the _gamnit_ apps packaged with the Nit repository on GNU/Linux you need to install the dev version of a few libraries and some tools.
+On Debian 8.2, this command should install everything needed:
 
+~~~raw
+apt-get install libgles2-mesa-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev inkscape
 ~~~
-apt-get install libgles2-mesa-dev libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf2.0-dev inkscape mpg123
+
+On Windows 64 bits, using msys2, you can install the required packages with:
+
+~~~raw
+pacman -S mingw-w64-x86_64-angleproject-git mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-SDL2_mixer
+~~~
+
+While macOS isn't supported, it can create iOS apps.
+You need to install and setup Xcode, and you may install the GLSL shader validation tool via `brew`:
+
+~~~raw
+brew install glslang
 ~~~
 
 # Services by submodules

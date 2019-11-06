@@ -227,11 +227,12 @@ abstract class Body
 		if self.health <= 0.0 then die(world)
 	end
 
-	# Die in the game logic, with graphical animations and scoring when applicable
+	# Die in the game logic, with graphical animations
 	#
 	# Calls `destroy` by default.
 	fun die(world: World)
 	do
+		if not is_alive then return
 		is_alive = false
 		destroy world
 	end
@@ -264,6 +265,7 @@ abstract class Platform
 
 	redef fun die(world)
 	do
+		if not is_alive then return
 		super
 		world.explode(center, width)
 		world.score += 1
@@ -482,8 +484,9 @@ abstract class Human
 			for plane in world.planes do # TODO optimize with quad tree
 				if plane.left < right and plane.right > left then
 					if old_y > plane.top and bottom <= plane.top then
-						if world.parachute != null then
-							world.parachute.destroy(world)
+						var parachute = world.parachute
+						if parachute != null then
+							parachute.die world
 							world.parachute = null
 						end
 						parachute_deployed = false
@@ -721,14 +724,14 @@ abstract class Bullet
 	redef fun update(dt, world)
 	do
 		super
-		if world.t - creation_time >= weapon.bullet_lifespan then destroy world
+		if world.t - creation_time >= weapon.bullet_lifespan then die world
 	end
 
 	# Hit `body`
 	fun hit_enemy(body: Body, world: World)
 	do
 		body.hit(self.weapon.damage, world)
-		destroy world
+		die world
 	end
 end
 

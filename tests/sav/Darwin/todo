@@ -1,7 +1,6 @@
 fatal error: 'endian.h' file not found
-Error: package `glesv1_cm` unknown by `pkg-config`, make sure the development package is be installed
-Error: package `glesv2` unknown by `pkg-config`, make sure the development package is be installed
-Error: package `egl` unknown by `pkg-config`, make sure the development package is be installed
-Error: package `ncurses` unknown by `pkg-config`, make sure the development package is be installed
-Error: package `x11` unknown by `pkg-config`, make sure the development package is be installed
+Error: dev package for `glesv2` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
+Error: dev package for `egl` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
+Error: dev package for `ncurses` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
+Error: dev package for `x11` unknown by `pkg-config`, install it with `apt-get`, `brew` or similar.
 fatal error: 'libintl.h' file not found

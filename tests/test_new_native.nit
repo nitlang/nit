@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var s = new NativeString(4)
-s[0] = 0x4Eu8
-s[2] = 0x74u8
-s[1] = 0x69u8
-s[3] = 0u8
+var s = new CString(4)
+s[0] = 0x4E
+s[2] = 0x74
+s[1] = 0x69
+s[3] = 0
 print s.class_name
 print s[0]
 print s.to_s

@@ -15,7 +15,6 @@
 # This module is implicitly imported by every module.
 module core
 
-import posix
 import environ
 import time
 import file
@@ -33,3 +32,4 @@ import error
 import re
 import bytes
 import fixed_ints
+import protocol

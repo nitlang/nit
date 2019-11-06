@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module example_advanced_logger is example
+
 import popcorn
 import realtime
 
@@ -28,7 +30,7 @@ class RequestTimeHandler
 	redef fun all(req, res) do req.timer = new Clock
 end
 
-class LogHandler
+class AdvancedLoggerHandler
 	super Handler
 
 	redef fun all(req, res) do
@@ -41,7 +43,7 @@ class LogHandler
 	end
 end
 
-class HelloHandler
+class AnotherHandler
 	super Handler
 
 	redef fun get(req, res) do res.send "Hello World!"
@@ -49,6 +51,6 @@ end
 
 var app = new App
 app.use_before("/*", new RequestTimeHandler)
-app.use("/", new HelloHandler)
-app.use_after("/*", new LogHandler)
+app.use("/", new AnotherHandler)
+app.use_after("/*", new AdvancedLoggerHandler)
 app.listen("localhost", 3000)

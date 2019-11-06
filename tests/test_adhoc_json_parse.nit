@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json::string_parser
+import json::static
 import json
 
 if args.length < 1 then

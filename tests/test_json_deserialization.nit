@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+
 import test_deserialization
-import json::serialization
-#alt1# import test_deserialization_serial
+import test_deserialization_serial
 
 var entities = new TestEntities
 
@@ -33,10 +34,13 @@ for o in tests do
 	#alt4#serializer.pretty_json = true
 	serializer.serialize(o)
 
-	var deserializer = new JsonDeserializer(stream.to_s)#alt2##alt4#
-	var deserialized = deserializer.deserialize#alt2##alt4#
+	var type_name: nullable String = o.class_name
+	type_name = null #alt2##alt4#
+	var deserializer = new JsonDeserializer(stream.to_s)
+	var deserialized = deserializer.deserialize(type_name)
 
 	print "# Nit:\n{o}\n"
 	print "# Json:\n{stream}\n"
-	print "# Back in Nit:\n{deserialized or else "null"}\n"#alt2##alt4#
+	print "# Back in Nit:\n{deserialized or else "null"}\n"
+	if deserializer.errors.not_empty then print deserializer.errors.join("\n")
 end

@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides interfaces and classes to represent basic geometry needs.
+# Interfaces and classes to represent basic geometry needs.
 module points_and_lines is serialize
 
 import serialization
 
-# An abstract 2d point, strongly linked to its implementation `Point`
+# Abstract 2d point, strongly linked to its implementation `Point`
 interface IPoint[N: Numeric]
 
 	# Horizontal coordinate
@@ -38,7 +38,16 @@ interface IPoint[N: Numeric]
 	# assert p0.dist(p1).is_approx(3.6, 0.01)
 	# ~~~
 	#
-	# TODO 3D implementation.
+	# If `self` or `other` are in 3D, the distance takes into account the 3 axes.
+	# For a 2D point, the Z coordinate is considered to be 0.
+	#
+	# ~~~
+	# var p2 = new Point3d[Float](0.0, 0.0, 0.0)
+	# var p3 = new Point3d[Float](2.0, 3.0, 4.0)
+	# var p4 = new Point[Float](2.0, 3.0)
+	# assert p2.dist(p3).is_approx(5.385, 0.01)
+	# assert p2.dist(p4).is_approx(3.606, 0.01)
+	# ~~~
 	fun dist(other: Point[Numeric]): N
 	do
 		return x.value_of(dist2(other).to_f.sqrt)
@@ -54,8 +63,28 @@ interface IPoint[N: Numeric]
 	# assert p0.dist2(p1) == 13.0
 	# ~~~
 	#
-	# TODO 3D implementation.
+	# If `self` or `other` are in 3D, the distance takes into account the 3 axes.
+	# For a 2D point, the Z coordinate is considered to be 0.
+	#
+	# ~~~
+	# var p2 = new Point3d[Float](0.0, 0.0, 0.0)
+	# var p3 = new Point3d[Float](2.0, 3.0, 4.0)
+	# var p4 = new Point[Float](2.0, 3.0)
+	# assert p2.dist2(p3).is_approx(29.0, 0.01)
+	# assert p2.dist2(p4).is_approx(13.0, 0.01)
+	# assert p4.dist2(p2).is_approx(13.0, 0.01)
+	# ~~~
 	fun dist2(other: Point[Numeric]): N
+	do return x.value_of(other.dist2_with_2d(self))
+
+	private fun dist2_with_2d(other: IPoint[Numeric]): Numeric
+	do return dist2_xy(other)
+
+	private fun dist2_with_3d(other: IPoint3d[Numeric]): Numeric
+	do return dist2_xy(other).add(other.z.mul(other.z))
+
+	# Square of the distance with `other` on the X and Y axes
+	private fun dist2_xy(other: IPoint[N]): N
 	do
 		var dx = other.x.sub(x)
 		var dy = other.y.sub(y)
@@ -84,47 +113,71 @@ interface IPoint[N: Numeric]
 	redef fun ==(o) do return o isa IPoint[Numeric] and o.x == x and o.y == y
 end
 
-# A 2d point and an implementation of `IPoint`
+# 2D point with `x` and `z`
 class Point[N: Numeric]
 	super IPoint[N]
 
-	redef var x: N is writable
-	redef var y: N is writable
+	redef var x: N = 0.0 is writable, optional
+	redef var y: N = 0.0 is writable, optional
 end
 
-# An abstract 3d point, strongly linked to its implementation `Point3d`
+# Abstract 3d point, strongly linked to its implementation `Point3d`
 interface IPoint3d[N: Numeric]
 	super IPoint[N]
 
-	# depth coordinate
+	# Depth coordinate
 	fun z: N is abstract
 
 	redef fun to_s do return "({x}, {y}, {z})"
+
+	redef fun dist2(other)
+	do return x.value_of(other.dist2_with_3d(self))
+
+	redef fun dist2_with_2d(other)
+	do return dist2_xy(other).add(z.mul(z))
+
+	redef fun dist2_with_3d(other)
+	do
+		var dz = other.z.sub(z)
+		var s = dist2_xy(other).add(dz.mul(dz))
+		return x.value_of(s)
+	end
+
+	# Get a new `Point3d[Float]` at an offset of `x, y, z` from `self`
+	#
+	# ~~~
+	# var origin = new Point3d[Float](1.0, 1.0, 1.0)
+	# assert origin.offset(1.0, 2.0, 3.0).to_s == "(2.0, 3.0, 4.0)"
+	# ~~~
+	fun offset(x, y, z: Numeric): Point3d[Float]
+	do return new Point3d[Float](self.x.to_f+x.to_f,
+	                             self.y.to_f+y.to_f,
+	                             self.z.to_f+z.to_f)
 end
 
-# A 3d point and an implementation of `IPoint3d`
+# 3D point with `x`, `y` and `z`
 class Point3d[N: Numeric]
 	super IPoint3d[N]
 	super Point[N]
 
-	redef var z: N is writable
+	redef var z: N = 0.0 is writable, optional
 end
 
-# An abstract 2d line segment
+# Abstract 2D line segment between two ordered points
 interface ILine[N: Numeric]
 	# The type of points that ends the segment
 	type P: IPoint[N]
 
-	# The point that is the left-end of the segment
+	# Point at the left-end of the segment
 	fun point_left: P is abstract
 
-	# The point that is the right-end of the segment
+	# Point at the right-end of the segment
 	fun point_right: P is abstract
 
 	redef fun to_s do return "{point_left}--{point_right}"
 end
 
-# A 2d line segment
+# 2D line segment between two ordered points
 class Line[N: Numeric]
 	super ILine[N]
 
@@ -142,14 +195,14 @@ class Line[N: Numeric]
 	end
 end
 
-# An abstract 3d line segment
+# Abstract 3D line segment between two ordered points
 interface ILine3d[N: Numeric]
 	super ILine[N]
 
 	redef type P: IPoint3d[N]
 end
 
-# A 3d line segment
+# 3D line segment between two ordered points
 class Line3d[N: Numeric]
 	super Line[N]
 	super ILine3d[N]

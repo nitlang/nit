@@ -85,6 +85,9 @@ class PbxFile
 	# Path to `self`
 	var path: String
 
+	# Compiler flags for this source file
+	var cflags: String = "" is writable
+
 	# UUID for build elements
 	private var build_uuid: String = sys.pbx_uuid_generator.next_uuid is lazy
 
@@ -104,15 +107,22 @@ class PbxFile
 	end
 
 	# PBX description of this file
-	private fun description: Writable do return """
+	private fun description: Writable
+	do
+		var extra = ""
+		var cflags = cflags
+		if not cflags.is_empty then extra = "\nsettings = \{COMPILER_FLAGS = \"{cflags}\"; \};"
+
+		return """
 		{{{ref_uuid}}} /* {{{doc}}} */ = {
 			isa = PBXFileReference;
 			fileEncoding = 4;
 			lastKnownFileType = {{{file_type}}};
-			path = {{{path}}};
-			sourceTree = "<group>";
+			path = '{{{path}}}';
+			sourceTree = "<group>";{{{extra}}}
 			};
 """
+	end
 
 	private fun add_to_project(project: PbxprojectTemplate)
 	do
@@ -138,6 +148,9 @@ class PbxprojectTemplate
 
 	# Name of the project
 	var name: String
+
+	# OTHER_CFLAGS
+	var cflags = "" is writable
 
 	# All body/implementation source files to be compiled
 	private var source_files = new Array[PbxFile]
@@ -174,6 +187,7 @@ class PbxprojectTemplate
 """
 
 		add """
+		0F4688411FDF8748004F34D4 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 0F4688401FDF8748004F34D4 /* assets */; };
 		0FDD07A21C6F8E0E006FF70E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FDD07A11C6F8E0E006FF70E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +233,7 @@ class PbxprojectTemplate
 		for file in files do add file.description
 
 		add """
+		0F4688401FDF8748004F34D4 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = {{{name}}}/assets; sourceTree = SOURCE_ROOT; };
 		0FDD07A11C6F8E0E006FF70E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +268,7 @@ class PbxprojectTemplate
 		AF9F83CE1A5F0D21004B62C0 /* {{{name}}} */ = {
 			isa = PBXGroup;
 			children = (
+				0F4688401FDF8748004F34D4 /* assets */,
 """
 			# Reference all known files
 			for file in files do add """
@@ -328,6 +344,7 @@ class PbxprojectTemplate
 
 		add """
 				0FDD07A21C6F8E0E006FF70E /* LaunchScreen.storyboard in Resources */,
+				0F4688411FDF8748004F34D4 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +431,7 @@ class PbxprojectTemplate
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -424,6 +442,7 @@ class PbxprojectTemplate
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

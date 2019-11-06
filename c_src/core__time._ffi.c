@@ -11,10 +11,9 @@
 #else
 	#define PRINT_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #endif
-#define NativeString_to_s_with_copy time___NativeString_to_s_with_copy
-#define String_to_cstring time___String_to_cstring
-#define NativeString_to_s time___NativeString_to_s
-long time___Sys_get_time___impl( Sys self )
+#define CString_to_s core__time___CString_to_s
+#define String_to_cstring core__time___String_to_cstring
+long core__time___Sys_get_time___impl( Sys self )
 {
 #line 24 "../lib/core/time.nit"
 

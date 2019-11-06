@@ -17,16 +17,14 @@ module asteronits is
 	app_name "Asteronits"
 	app_namespace "org.nitlanguage.asteronits"
 	app_version(1, 0, git_revision)
-
-	android_manifest_activity """android:screenOrientation="sensorLandscape""""
-	android_api_target 15
 end
 
 import gamnit::flat
 
+import gamnit::landscape
+
 import game_logic
 import spritesheet
-import app::audio
 
 redef class Spritesheet
 	# Largest meteors, organized by color
@@ -61,16 +59,18 @@ redef class App
 	var world = new World(12, 2, display.aspect_ratio) is lazy
 
 	# Sound effects
-	private var fx_fire = new Sound("sounds/fire.mp3")
+	private var fx_fire = new Sound("sounds/fire.ogg")
 	private var fx_explosion_ship = new Sound("sounds/explosion_ship.wav")
 	private var fx_explosion_asteroids = new Sound("sounds/explosion_asteroids.wav")
 
-	redef fun on_create
+	redef fun create_scene
 	do
 		super
 
 		# Move the camera to show all the world world in the screen range
 		world_camera.reset_height(world.half_height * 2.0)
+
+		ui_camera.reset_height 720.0
 	end
 
 	# Main spritesheet with ships, asteroids and beams
@@ -90,6 +90,8 @@ redef class App
 
 	redef fun accept_event(event)
 	do
+		if super then return true
+
 		if event isa QuitEvent then
 			exit 0
 		else if event isa KeyEvent then
@@ -110,6 +112,12 @@ redef class App
 				return true
 			else if event.name == "escape" then
 				exit 0
+			else if event.name == "." and event.is_down then
+				dynamic_resolution_ratio *= 2.0
+				print dynamic_resolution_ratio
+			else if event.name == "," and event.is_down then
+				dynamic_resolution_ratio /= 2.0
+				print dynamic_resolution_ratio
 			end
 		end
 
@@ -224,15 +232,15 @@ redef class KeyEvent
 	# How does this event affect the ship thrust?
 	fun thrust: Float
 	do
-		if is_arrow_up or name == "w" then return 1.0
+		if name == "up" or name == "w" then return 1.0
 		return 0.0
 	end
 
 	# How does this event affect the ship thrust?
 	fun rotation: Float
 	do
-		if is_arrow_right or name == "d" then return -1.0
-		if is_arrow_left or name == "a" then return 1.0
+		if name == "right" or name == "d" then return -1.0
+		if name == "left" or name == "a" then return 1.0
 		return 0.0
 	end
 end

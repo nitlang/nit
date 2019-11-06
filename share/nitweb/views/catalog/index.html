@@ -1,0 +1,35 @@
+<div class='container'>
+	<div class='page-header'>
+		<h2>Welcome to NitWeb!</h2>
+		<p class='text-muted'>The Nit knowledge base.</p>
+	</div>
+
+	<div ng-if='vm.stats' class='container-fluid no-padding'>
+		<span ng-repeat='(key, value) in vm.stats' class='text-muted small'>
+			<strong>{{value}}</strong>&nbsp;<span>{{key}}</span>
+			&nbsp;
+		</span>
+	</div>
+	<hr/>
+
+	<div class='col-md-3 col-md-push-9 no-padding' ng-if='vm.tags'>
+		<h2>Tags</h2>
+		<div class='container-fluid no-padding'>
+			<div class='col-xs-3 col-md-12' ng-repeat='(tag, packages) in vm.tags'>
+				<span class='badge'>{{packages}}</span>
+				<a ui-sref='tag({id: tag})'>{{tag}}</a>
+			</div>
+		</div>
+		<hr/>
+	</div>
+
+	<div class='col-md-9 col-md-pull-3 no-padding'>
+		<h2>Packages</h2>
+		<div class='card-list'>
+			<entity-card mentity='package' ng-repeat='package in vm.packages.results' />
+		</div>
+		<div class='container text-center' ng-if='vm.packages'>
+			<ui-pagination pagination='vm.packages' />
+		</div>
+	</div>
+</div>

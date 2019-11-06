@@ -35,10 +35,10 @@ extern class ExecStatusType `{int`}
     return !(self == PGRES_BAD_RESPONSE || self == PGRES_NONFATAL_ERROR || self == PGRES_FATAL_ERROR);
   `}
 
-  redef fun to_s import NativeString.to_s `{
+  redef fun to_s import CString.to_s `{
     char * err = PQresStatus(self);
     if(err == NULL) err = "";
-    return NativeString_to_s(err);
+    return CString_to_s(err);
   `}
 end
 
@@ -63,8 +63,8 @@ extern class NativePGResult `{PGresult *`}
   fun status: ExecStatusType `{ return PQresultStatus(self); `}
 
   # Returns the field name of a given column_number
-  fun fname(column_number:Int):String import NativeString.to_s `{
-    return NativeString_to_s( PQfname(self, column_number));
+  fun fname(column_number:Int):String import CString.to_s `{
+    return CString_to_s( PQfname(self, column_number));
   `}
 
   # Returns the column number associated with the column name
@@ -73,8 +73,8 @@ extern class NativePGResult `{PGresult *`}
   `}
 
   # Returns a single field value of one row of the result at row_number, column_number
-  fun value(row_number:Int, column_number:Int):String import NativeString.to_s `{
-    return NativeString_to_s(PQgetvalue(self, row_number, column_number));
+  fun value(row_number:Int, column_number:Int):String import CString.to_s `{
+    return CString_to_s(PQgetvalue(self, row_number, column_number));
   `}
 
   # Tests wether a field is a null value
@@ -123,9 +123,9 @@ extern class NativePostgres `{PGconn *`}
   `}
 
   # Returns the error message of the last operation on the connection
-  fun error: String import NativeString.to_s `{
+  fun error: String import CString.to_s `{
     char * error = PQerrorMessage(self);
-    return NativeString_to_s(error);
+    return CString_to_s(error);
   `}
 
   # Returns the status of this connection

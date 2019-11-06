@@ -1,0 +1,23 @@
+<ul class='nav navbar-nav'>
+	<li ng-if='!user'>
+		<a href='/login'>
+			Login
+			<span class='octicon octicon-mark-github'></span>
+		</a>
+	</li>
+	<li class="dropdown" ng-if='user'>
+		<a class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
+			{{user.login}}
+			<img class='avatar avatar-icon' ng-src='{{user.avatar_url}}' />
+		</a>
+		<ul class="dropdown-menu dropdown-menu-right">
+			<li>
+				<a href="/user"><span class='glyphicon glyphicon-user' /> Profile</a>
+			</li>
+			<li role="separator" class="divider"></li>
+			<li>
+				<a href="/logout"><span class='glyphicon glyphicon-log-out' /> Logout</a>
+			</li>
+		</ul>
+	</li>
+</ul>

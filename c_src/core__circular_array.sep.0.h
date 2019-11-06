@@ -8,19 +8,19 @@ extern const char FILE_core__circular_array[];
 extern const struct type type_core__Int;
 extern const char FILE_core__kernel[];
 long core___core__CircularArray___offset(val* self, long p0);
-#define COLOR_core__CircularArray___35dE 2
+#define COLOR_core__CircularArray___35dE 1
 void core___core__CircularArray___core__abstract_collection__Sequence__push(val* self, val* p0);
 #define COLOR_core__NativeArray___35dE 0
 extern const char FILE_core__array[];
 void core___core__CircularArray___enlarge(val* self, long p0);
-#define COLOR_core__Collection__core__CircularArray___35dE 3
-#define COLOR_core__abstract_collection__Collection__length 19
-#define COLOR_core___core__CircularArray___core__abstract_collection__SimpleCollection__add_all 42
+#define COLOR_core__Collection__core__CircularArray___35dE 2
+#define COLOR_core__abstract_collection__Collection__length 22
+#define COLOR_core___core__CircularArray___core__abstract_collection__SimpleCollection__add_all 33
 val* NEW_core__NativeArray(int length, const struct type* type);
-void core___core__NativeArray___memmove(val* self, long p0, long p1, val* p2, long p3);
+#define COLOR_core__NativeArray__core__NativeArray___35dE 1
 val* core___core__CircularArray___core__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
 val* NEW_core__circular_array__CircularArrayIterator(const struct type* type);
-#define COLOR_core__circular_array__CircularArrayIterator__core__CircularArray___35dE 4
+#define COLOR_core__circular_array__CircularArrayIterator__core__CircularArray___35dE 3
 #define COLOR_core__circular_array__CircularArrayIterator__array_61d 19
 #define COLOR_core__kernel__Object__init 0
 #define COLOR_core__circular_array__CircularArrayIterator___array 0

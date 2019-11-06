@@ -116,7 +116,7 @@ class VirtualMachine super NaiveInterpreter
 		var mask = sub.mclass.vtable.mask
 
 		var res = inter_is_subtype_ph(super_id, mask, sub.mclass.vtable.internal_vtable)
-		if res == false then return false
+		if not res then return false
 		# sub and sup can be generic types, each argument of generics has to be tested
 
 		if not sup isa MGenericType then return true
@@ -127,7 +127,7 @@ class VirtualMachine super NaiveInterpreter
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
 			var res2 = is_subtype(sub_arg, sup_arg)
-			if res2 == false then return false
+			if not res2 then return false
 		end
 		return true
 	end
@@ -199,13 +199,20 @@ class VirtualMachine super NaiveInterpreter
 	do
 		if mclass.loaded then return
 
-		# Recursively load superclasses
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+		load_supers(mclass)
 
 		if mclass.abstract_loaded then
 			mclass.allocate_vtable(self)
 		else
 			mclass.make_vt(self, true)
+		end
+	end
+
+	# Recursively load superclasses.
+	private fun load_supers(mclass: MClass)
+	do
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
+			load_class_indirect(parent)
 		end
 	end
 
@@ -217,7 +224,7 @@ class VirtualMachine super NaiveInterpreter
 		# It the class was already implicitly loaded
 		if mclass.abstract_loaded then return
 
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+		load_supers(mclass)
 
 		mclass.make_vt(self, false)
 	end

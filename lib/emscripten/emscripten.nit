@@ -29,7 +29,7 @@ redef class Text
 	# Run `self` as JavaScript code
 	fun run_js do run_js_native(self.escape_to_js.to_cstring)
 
-	private fun run_js_native(script: NativeString) `{ emscripten_run_script(script); `}
+	private fun run_js_native(script: CString) `{ emscripten_run_script(script); `}
 
 	# Escape the content of `self` to pass to JavaScript code
 	fun escape_to_js: Text do return replace('\n', "\\n")

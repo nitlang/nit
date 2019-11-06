@@ -17,12 +17,10 @@ module model_viewer is
 	app_name "Model Viewer"
 	app_namespace "org.nitlanguage.model_viewer"
 	app_version(1, 0, git_revision)
-
-	android_manifest_activity """android:screenOrientation="landscape""""
-	android_api_target 15
 end
 
 import gamnit::depth
+import gamnit::landscape
 
 import globe
 
@@ -30,9 +28,9 @@ redef class App
 
 	# All available models
 	var models: Array[Model] = [
-		new LeafModel(new Cube, new SmoothMaterial.default),
-		new LeafModel(new Mesh.uv_sphere(4.0, 32, 16), new SmoothMaterial.default),
-		new LeafModel(new Mesh.uv_sphere(4.0, 32, 16), new NormalsMaterial),
+		new LeafModel(new Cube, new Material),
+		new LeafModel(new UVSphere(4.0, 32, 16), new Material),
+		new LeafModel(new UVSphere(4.0, 32, 16), new NormalsMaterial),
 		new Model("models/Tree_01.obj"),
 		new Model("models/Oak_Fall_01.obj"),
 		new Model("models/Quandtum_BA-2_v1_1.obj"),
@@ -67,8 +65,10 @@ redef class App
 		world_camera.near = 0.1
 		world_camera.far = 100.0
 
-		for model in models do model.load
-		for texture in asset_textures_by_name.values do texture.load
+		for model in models do
+			model.load
+			if model.errors.not_empty then print_error model.errors.join("\n")
+		end
 
 		# Display the first model
 		model = models[model_index]
@@ -128,7 +128,7 @@ redef class App
 			else if event.is_arrow_left then
 				cycle_model -1
 			end
-		else if event isa PointerEvent and event.depressed then
+		else if event isa PointerEvent and not event.is_move and event.depressed then
 			if event.x.to_i > display.width / 2 then
 				cycle_model 1
 			else cycle_model -1
@@ -146,7 +146,7 @@ redef class App
 		var t = clock.total.to_f
 
 		# Rotate the model
-		actors.first.rotation = t
+		actors.first.yaw = t
 
 		# Move the light source
 		var dist_to_light = 20.0

@@ -7,3 +7,8 @@ test_nitunit3 --no-color -o $WRITE
 test_nitunit_md.md --no-color -o $WRITE
 test_doc3.nit --no-color -o $WRITE
 test_nitunit4 --no-color -o $WRITE
+test_nitunit5.nit --no-color -o $WRITE
+test_nitunit6.nit --no-color -o $WRITE
+test_nitunit7.nit --no-color -o $WRITE
+test_nitunit8.nit --no-color -o $WRITE
+test_nitunit11.nit --no-color -o $WRITE

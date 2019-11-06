@@ -124,7 +124,7 @@ redef class PlayScene
 		while sys.stdin.poll_in do
 			if sys.stdin.eof then return
 			var c = sys.stdin.read_char
-			if c == 'q'.ascii then
+			if c == u'q' then
 				self.exists = false
 				return
 			end

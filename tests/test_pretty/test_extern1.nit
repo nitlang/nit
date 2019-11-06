@@ -70,8 +70,8 @@ extern class TimeT `{time_t`}
 
 	fun update `{ time(&self); `}
 
-	fun ctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( ctime(&self) );
+	fun ctime: String import CString.to_s `{
+		return CString_to_s( ctime(&self) );
 	`}
 
 	# Difference in secondes from start (self if the end time)

@@ -29,7 +29,7 @@ abstract class Camera
 	var display: GamnitDisplay
 
 	# Position of this camera in world space
-	var position = new Point3d[Float](0.0, 0.0, 0.0) is writable
+	var position = new Point3d[Float](0.0, 0.0, 0.0)
 
 	# The Model-View-Projection matrix created by this camera
 	#
@@ -133,7 +133,7 @@ class EulerCamera
 		view = view * rotation_matrix
 
 		# Use a projection matrix with a depth
-		var projection = new Matrix.perspective(pi*field_of_view_y/2.0,
+		var projection = new Matrix.perspective(field_of_view_y,
 			display.aspect_ratio, near, far)
 
 		return view * projection
@@ -185,7 +185,7 @@ class EulerCamera
 		var near_height = (field_of_view_y/2.0).tan * near
 		var cross_screen_to_near = near_height / (display.height.to_f/2.0)
 		var cross_near_to_target = (position.z - target_z) / near
-		var mod = cross_screen_to_near * cross_near_to_target * 1.72 # FIXME drop the magic number
+		var mod = cross_screen_to_near * cross_near_to_target
 
 		var wx = position.x + (x.to_f-display.width.to_f/2.0) * mod
 		var wy = position.y - (y.to_f-display.height.to_f/2.0) * mod
@@ -207,52 +207,60 @@ class UICamera
 	# Clipping wall the farthest of the camera, defaults to -100.0
 	var far: Float = -100.0 is writable
 
-	# Width in world units, defaults to the width in pixels of the screen
-	var width: Float = display.width.to_f is lazy
+	# Width in world units, calculated from `height` and the screen aspect ratio
+	fun width: Float do return height * display.aspect_ratio
 
-	# Height in world units, defaults to the height in pixels of the screen
-	var height: Float = display.height.to_f is lazy
+	# Height in world units, defaults to 1080.0
+	#
+	# Set this value using `reset_height`.
+	var height = 1080.0
 
 	# Reset the camera position so that `height` world units are visible on the Y axis
-	#
-	# By default, `height` is set to `display.height`.
 	#
 	# This can be used to set standardized UI units independently from the screen resolution.
 	fun reset_height(height: nullable Float)
 	do
 		if height == null then height = display.height.to_f
-
 		self.height = height
-		self.width = height * display.aspect_ratio
 	end
 
 	# Convert the position `x, y` on screen, to UI coordinates
-	fun camera_to_ui(x, y: Numeric): Point[Float]
+	fun camera_to_ui(x, y: Numeric): Point3d[Float]
 	do
 		# FIXME this kind of method should use something like a canvas
 		# instead of being hard coded on the display.
 
 		var wx = x.to_f * width / display.width.to_f - position.x
 		var wy = y.to_f * height / display.height.to_f - position.y
-		return new Point[Float](wx, wy)
+		return new Point3d[Float](wx, -wy, 0.0)
 	end
 
 	# Center of the screen, from the point of view of the camera, at z = 0
-	fun center: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y - height / 2.0, 0.0)
+	var center: IPoint3d[Float] = new CameraAnchor(self, 0.5, -0.5)
 
-	# Anchor in the top left corner of the screen, at z = 0
-	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
+	# Center of the top of the screen, at z = 0
+	var top: IPoint3d[Float] = new CameraAnchor(self, 0.5, 0.0)
 
-	# Anchor in the top right corner of the screen, at z = 0
-	fun top_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y, 0.0)
+	# Center of the bottom of the screen, at z = 0
+	var bottom: IPoint3d[Float] = new CameraAnchor(self, 0.5, -1.0)
 
-	# Anchor in the bottom left corner of the screen, at z = 0
-	fun bottom_left: Point3d[Float] do return new Point3d[Float](position.x, position.y - height, 0.0)
+	# Center of the left border of the screen, at z = 0
+	var left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -0.5)
 
-	# Anchor in the bottom right corner of the screen, at z = 0
-	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height, 0.0)
+	# Center of the right border of the screen, at z = 0
+	var right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -0.5)
 
-	# TODO cache the anchors and the matrix
+	# Top left corner of the screen, at z = 0
+	var top_left: IPoint3d[Float] = new CameraAnchor(self, 0.0, 0.0)
+
+	# Top right corner of the screen, at z = 0
+	var top_right: IPoint3d[Float] = new CameraAnchor(self, 1.0, 0.0)
+
+	# Bottom left corner of the screen, at z = 0
+	var bottom_left: IPoint3d[Float] = new CameraAnchor(self, 0.0, -1.0)
+
+	# Bottom right corner of the screen, at z = 0
+	var bottom_right: IPoint3d[Float] = new CameraAnchor(self, 1.0, -1.0)
 
 	redef fun mvp_matrix
 	do
@@ -266,4 +274,56 @@ class UICamera
 
 		return view * projection
 	end
+end
+
+# Immutable relative anchors for reference points on `camera`
+private class CameraAnchor
+	super IPoint3d[Float]
+
+	# Reference camera
+	var camera: UICamera
+
+	# Reference position, the top left of the screen
+	var ref: Point3d[Float] = camera.position is lazy
+
+	# X position as proportion of the screen width
+	var relative_x: Float
+
+	# Y position as proportion of the screen height
+	var relative_y: Float
+
+	redef fun x do return ref.x + relative_x*camera.width
+	redef fun y do return ref.y + relative_y*camera.height
+	redef fun z do return ref.z
+
+	redef fun offset(x, y, z) do return new OffsetPoint3d(self, x.to_f, y.to_f, z.to_f)
+end
+
+# Position relative to another point or usually a `CameraAnchor`
+private class OffsetPoint3d
+	super Point3d[Float]
+
+	autoinit ref, offset_x, offset_y, offset_z
+
+	# Reference point to which the offsets are applied
+	var ref: IPoint3d[Float]
+
+	# Difference on the X axis
+	var offset_x: Float
+
+	# Difference on the X axis
+	var offset_y: Float
+
+	# Difference on the X axis
+	var offset_z: Float
+
+	redef fun x do return ref.x + offset_x
+	redef fun y do return ref.y + offset_y
+	redef fun z do return ref.z + offset_z
+
+	redef fun x=(value) do if value != null then offset_x += value - x
+	redef fun y=(value) do if value != null then offset_y += value - y
+	redef fun z=(value) do if value != null then offset_z += value - z
+
+	redef fun offset(x, y, z) do return new OffsetPoint3d(self, x.to_f, y.to_f, z.to_f)
 end

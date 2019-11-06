@@ -1,7 +1,8 @@
 A hello world!
 0
 
-B hello world!0
+B hello world!true
+0
 
 C hello world!
 0

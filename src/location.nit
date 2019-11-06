@@ -47,6 +47,20 @@ class SourceFile
 	#
 	# Used for fast access to each line when rendering parts of the `string`.
 	var line_starts = new Array[Int]
+
+	# Extract a given line excluding the line-terminators characters.
+	#
+	# `line_number` starts at 1 for the first line.
+	fun get_line(line_number: Int): String do
+		if line_number > line_starts.length then return ""
+		var line_start = line_starts[line_number-1]
+		var line_end = line_start
+		var string = self.string
+		while line_end+1 < string.length and string.chars[line_end+1] != '\n' and string.chars[line_end+1] != '\r' do
+			line_end += 1
+		end
+		return string.substring(line_start, line_end-line_start+1)
+	end
 end
 
 # A location inside a source file
@@ -194,7 +208,7 @@ class Location
 
 		if line_start == loc.line_start then
 			if column_start < loc.column_start then return false
-			if column_start > loc.column_end then return false
+			if line_start == loc.line_end and column_start > loc.column_end then return false
 		end
 
 		if line_end == loc.line_end and column_end > loc.column_end then return false

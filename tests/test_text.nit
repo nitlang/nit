@@ -32,12 +32,6 @@ num = numstr
 #alt1 trimable.append(spaces)
 #alt1 num = new FlatBuffer.from(numstr)
 
-#alt3 txt = new RopeBuffer.from(str)
-#alt3 trimable = new RopeBuffer.from(spaces)
-#alt3 trimable.append(str)
-#alt3 trimable.append(spaces)
-#alt3 num = new RopeBuffer.from(numstr)
-
 # Test Text methods on all types of receivers
 
 print txt.substring(0, 105)

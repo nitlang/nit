@@ -1,0 +1,18 @@
+<div class='container-fluid'>
+
+	<div ng-if='vm.error' class='alert alert-danger' role='alert'>
+		<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+		<span class='sr-only'>Error:</span>
+		<span ng-switch='vm.error.status'>
+			<span ng-switch-when='404'>Entity <code>{{vm.entityId}}</code> not found!</span>
+			<span ng-switch-default>An error occured<br/>{{vm.error.status}}: {{vm.error.message}}</span>
+		</span>
+	</div>
+
+	<div class='page-header'>
+		<h2><entity-signature mentity='vm.mentity' /></h2>
+		<entity-namespace namespace='vm.mentity.namespace' />
+	</div>
+
+	<ui-view />
+</div>

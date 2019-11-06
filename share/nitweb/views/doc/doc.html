@@ -1,0 +1,143 @@
+<div>
+	<div class='col-lg-2 col-sm-3 col-xs-12'>
+		<ui-summary target='#summary-content' />
+	</div>
+	<div class='col-lg-10 col-sm-9 col-xs-12' id='summary-content' ng-class='{
+		"col-lg-8 col-sm-6 col-xs-12": vm.mentity.class_name == "MPackage"
+	}'>
+		<div class='card'>
+			<div class='card-body'>
+				<div ng-if='vm.doc.documentation'>
+					<div ng-bind-html='vm.doc.documentation'></div>
+				</div>
+				<div ng-if='!vm.doc.documentation'>
+					<i class='text-muted'>No documentation for this entity.</i>
+				</div>
+			</div>
+		</div>
+
+		<entity-list list-title='Introduced classes' list-entities='vm.intros.results'
+			list-object-filter='{}' ng-if='vm.mentity.class_name == "MModule"' />
+
+		<entity-list list-title='Class redefinitions' list-entities='vm.redefs.results'
+			list-object-filter='{}' ng-if='vm.mentity.class_name == "MModule"' />
+
+		<entity-list list-title='Constructors'
+			list-entities='vm.mentity.all_mproperties'
+			list-object-filter='{is_init: true}' />
+
+		<entity-list list-title='Introduced properties' list-entities='vm.intros.results'
+			list-object-filter='{is_init: "!true"}' ng-if='vm.mentity.class_name == "MClass"' />
+
+		<entity-list list-title='Redefined properties' list-entities='vm.redefs.results'
+			list-object-filter='{is_init: "!true"}' ng-if='vm.mentity.class_name == "MClass"' />
+
+	</div>
+
+	<div class='col-lg-2 col-sm-3 col-xs-12' ng-class='{
+		"hidden": vm.mentity.class_name != "MPackage"
+	}'>
+		<br>
+		<p ng-repeat='maintainer in vm.meta.maintainers' class='lead'>
+			<img class='avatar' src='https://secure.gravatar.com/avatar/{{maintainer.gravatar}}?size=20&default=retro' />
+			<span>
+				<a ui-sref='person({id: maintainer.name})'>{{maintainer.name}}</a>
+			</span>
+			<br>
+		</p>
+		<span ng-if='vm.meta.license'>
+			<span class='text-muted'>
+				<a href='http://opensource.org/licenses/{{vm.meta.license}}'>{{vm.meta.license}}</a>
+				license
+			</span>
+			<br>
+		</span>
+
+		<div ng-if='vm.meta.homepage || vm.meta.issues'>
+			<h3>Links</h3>
+			<ul class='list-unstyled'>
+				<li ng-if='vm.meta.homepage'>
+					<a href='{{vm.meta.homepage}}'>Homepage</a>
+				</li>
+				<li ng-if='vm.meta.browse'>
+					<a href='{{vm.meta.browse}}'>Source Code</a>
+				</li>
+				<li ng-if='vm.meta.issues'>
+					<a href='{{vm.meta.issues}}'>Issues</a>
+				</li>
+			</ul>
+		</div>
+
+		<div ng-if='vm.meta.git || vm.mentity.stats.commits'>
+			<h3>Git</h3>
+			<ul class='list-unstyled' style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>
+				<li ng-if='vm.meta.git'>
+					<a href='{{vm.meta.git}}'>{{vm.meta.git}}</a>
+				</li>
+				<li ng-if='vm.mentity.stats.commits' class='text-muted'>
+					<br><b>{{vm.mentity.stats.commits}} commits</b>
+				</li>
+				<li ng-if='vm.meta.last_date'><b class='text-muted'>Last:</b> {{vm.date(vm.meta.last_date) | date: 'medium'}}</li>
+				<li ng-if='vm.meta.first_date'><b class='text-muted'>First: </b>{{vm.date(vm.meta.first_date) | date: 'medium'}}</li>
+			</ul>
+		</div>
+
+		<div ng-if='vm.mentity.stats'>
+			<h3>Quality</h3>
+			<ul class='list-unstyled'>
+				<li ng-if='vm.mentity.stats.documentation_score'>
+					{{vm.mentity.stats.documentation_score}}% documented
+				</li>
+				<li ng-if='vm.mentity.stats.errors' class='text-danger'>
+					{{vm.mentity.stats.errors}} errors
+				</li>
+				<li ng-if='vm.mentity.stats.warnings' class='text-warning'>
+					{{vm.mentity.stats.warnings}} warnings
+					({{vm.mentity.stats.warnings_per_kloc}} / kloc)
+				</li>
+			</ul>
+		</div>
+
+		<div ng-if='vm.meta.tags.length > 0'>
+			<h3>Tags</h3>
+			<span ng-repeat='tag in vm.meta.tags'>
+				<a ui-sref='tag({id: tag})'>{{tag}}</a><span ng-if='!$last'>,</span>
+			</span>
+		</div>
+
+		<div ng-if='vm.parents.results.length > 0'>
+			<h3>Requirements</h3>
+			<span ng-repeat='parent in vm.parents.results'>
+				<entity-link mentity='parent' /><span ng-if='!$last'>,</span>
+			</span>
+		</div>
+
+		<div ng-if='vm.children.results.length > 0'>
+			<h3>Clients</h3>
+			<span ng-repeat='client in vm.children.results'>
+				<entity-link mentity='client' /><span ng-if='!$last'>,</span>
+			</span>
+		</div>
+
+		<div ng-if='vm.meta.contributors.length > 1'>
+			<h3>Contributors</h3>
+			<ul class='list-unstyled'>
+				<li ng-repeat='contributor in vm.meta.contributors'>
+					<img class='avatar' src='https://secure.gravatar.com/avatar/{{contributor.gravatar}}?size=20&default=retro' />
+					<a ui-sref='person({id: contributor.name})'>
+					{{contributor.name}}</a>
+				</li>
+			</ul>
+		</div>
+
+		<div ng-if='vm.mentity.stats'>
+			<h3>Stats</h3>
+			<ul class='list-unstyled'>
+				<li>{{vm.mentity.stats.mmodules}} modules</li>
+				<li>{{vm.mentity.stats.mclasses}} classes</li>
+				<li>{{vm.mentity.stats.mmethods}} methods</li>
+				<li>{{vm.mentity.stats.loc}} loc</li>
+			</ul>
+		</div>
+	</div>
+</div>

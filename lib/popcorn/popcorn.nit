@@ -18,7 +18,9 @@
 module popcorn
 
 import nitcorn
-import pop_middlewares
+import pop_tasks
+import pop_sessions
+import pop_logging
 intrude import pop_handlers
 
 # App acts like a wrapper around a nitcorn `Action`.

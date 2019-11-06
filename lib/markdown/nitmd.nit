@@ -19,22 +19,25 @@ import markdown
 import decorators
 import man
 
-import opts
+import config
 
-var options = new OptionContext
-var opt_help = new OptionBool("Show this help.", "-h", "-?", "--help")
-options.add_option(opt_help)
 var opt_to = new OptionString("Specify output format (html, md, man)", "-t", "--to")
-options.add_option(opt_to)
 
-options.parse(args)
-if options.rest.length != 1 then
-	print "usage: nitmd [-t format] <file.md>"
-	options.usage
+var usage = new Buffer
+usage.append "Usage: nitmd [-t format] <file.md>\n"
+usage.append "Translate Markdown documents to other formats."
+
+var config = new Config
+config.add_option(opt_to)
+config.tool_description = usage.write_to_string
+
+config.parse_options(args)
+if config.args.length != 1 then
+	config.usage
 	exit 1
 end
 
-var file = options.rest.first
+var file = config.args.first
 if not file.file_exists then
 	print "'{file}' not found"
 	exit 1
@@ -49,9 +52,9 @@ var to = opt_to.value
 if to == null or to == "html" then
 	# Noop
 else if to == "md" then
-	processor.emitter.decorator = new MdDecorator
+	processor.decorator = new MdDecorator
 else if to == "man" then
-	processor.emitter.decorator = new ManDecorator
+	processor.decorator = new ManDecorator
 else
 	print "Unknown output format: {to}"
 	exit 1

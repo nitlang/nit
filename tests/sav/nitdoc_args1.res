@@ -1,42 +1,39 @@
-Empty README for group `module_1` (readme-warning)
-Empty README for group `module_0` (readme-warning)
-Errors: 0. Warnings: 2.
-class_module_95d0-__Int.html
-class_module_95d0-__Object.html
-class_module_95d0-__Sys.html
-class_module_95d1-__A.html
-class_module_95d1-__B.html
+Parsing code...
+Generating documentation pages...
+Documentation produced in `out/nitdoc_args1.write`
+Generated 22/22 pages
+ PageHome: 1
+ PageMPackage: 2
+ PageMGroup: 2
+ PageMModule: 2
+ PageMClass: 5
+ PageMProperty: 10
+ PagePerson: 0
+ PageTag: 0
+class_module_95d0_58d_58dInt.html
+class_module_95d0_58d_58dObject.html
+class_module_95d0_58d_58dSys.html
+class_module_95d1_58d_58dA.html
+class_module_95d1_58d_58dB.html
 css/
-dep_class_module_95d0-__Int.dot
-dep_class_module_95d0-__Object.dot
-dep_class_module_95d0-__Sys.dot
-dep_class_module_95d1-__A.dot
-dep_class_module_95d1-__B.dot
-dep_module_module_95d0-.dot
-dep_module_module_95d1-.dot
-group_module_95d0.html
-group_module_95d1.html
+group_module_95d0_62d.html
+group_module_95d1_62d.html
 index.html
 js/
 less/
-module_module_95d0-.html
-module_module_95d1-.html
-property_module_95d0-__Int__autoinit.html
-property_module_95d0-__Object__autoinit.html
-property_module_95d0-__Object__init.html
-property_module_95d0-__Object__output.html
-property_module_95d0-__Object__print.html
-property_module_95d0-__Sys__autoinit.html
-property_module_95d0-__Sys__main.html
-property_module_95d1-__A__a1.html
-property_module_95d1-__A__a12.html
-property_module_95d1-__A__a123.html
-property_module_95d1-__A__a13.html
-property_module_95d1-__A__autoinit.html
-property_module_95d1-__B__all2.html
-property_module_95d1-__B__all25.html
-property_module_95d1-__B__autoinit.html
+module_module_95d0_58d_58dmodule_95d0.html
+module_module_95d1_58d_58dmodule_95d1.html
+package_module_95d0.html
+package_module_95d1.html
+property_module_95d0_58d_58dObject_58d_58dinit.html
+property_module_95d0_58d_58dObject_58d_58doutput.html
+property_module_95d0_58d_58dObject_58d_58dprint.html
+property_module_95d0_58d_58dSys_58d_58dmain.html
+property_module_95d1_58d_58dA_58d_58da1.html
+property_module_95d1_58d_58dA_58d_58da12.html
+property_module_95d1_58d_58dA_58d_58da123.html
+property_module_95d1_58d_58dA_58d_58da13.html
+property_module_95d1_58d_58dB_58d_58dall2.html
+property_module_95d1_58d_58dB_58d_58dall25.html
 quicksearch-list.js
-resources/
-search.html
 vendors/

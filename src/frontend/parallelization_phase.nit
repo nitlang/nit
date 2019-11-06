@@ -22,7 +22,6 @@ private import parser_util
 import modelize
 import astbuilder
 private import annotation
-private import astvalidation
 
 redef class ToolContext
 	# Transforms a function annotated with "threaded"

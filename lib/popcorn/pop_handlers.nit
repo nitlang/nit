@@ -18,7 +18,7 @@
 module pop_handlers
 
 import pop_routes
-import json
+import csv
 
 # Class handler for a route.
 #
@@ -431,7 +431,7 @@ redef class HttpResponse
 	# Write data in body response and send it.
 	fun send(raw_data: nullable Writable, status: nullable Int) do
 		if raw_data != null then
-			body += raw_data.write_to_string
+			body = raw_data
 		end
 		if status != null then
 			status_code = status
@@ -448,23 +448,26 @@ redef class HttpResponse
 		send(html, status)
 	end
 
-	# Write data as JSON and set the right content type header.
-	fun json(json: nullable Jsonable, status: nullable Int) do
-		header["Content-Type"] = media_types["json"].as(not null)
-		if json == null then
+	# Write data as CSV and set the right content type header.
+	fun csv(csv: nullable CsvDocument, status: nullable Int) do
+		header["Content-Type"] = media_types["csv"].as(not null)
+		if csv == null then
 			send(null, status)
 		else
-			send(json.to_json, status)
+			send(csv.write_to_string, status)
 		end
 	end
 
 	# Redirect response to `location`
+	#
+	# Use by default 303 See Other as it is the RFC
+	# way to redirect web applications to a new URI.
 	fun redirect(location: String, status: nullable Int) do
 		header["Location"] = location
 		if status != null then
 			status_code = status
 		else
-			status_code = 302
+			status_code = 303
 		end
 		check_sent
 		sent = true

@@ -14,15 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module example_simple_logger is example
+
 import popcorn
 
-class LogHandler
+class SimpleLoggerHandler
 	super Handler
 
 	redef fun all(req, res) do print "Request Logged"
 end
 
-class HelloHandler
+class MyOtherHandler
 	super Handler
 
 	redef fun get(req, res) do res.send "Hello World!"
@@ -30,6 +32,6 @@ end
 
 
 var app = new App
-app.use_before("/*", new LogHandler)
-app.use("/", new HelloHandler)
+app.use_before("/*", new SimpleLoggerHandler)
+app.use("/", new MyOtherHandler)
 app.listen("localhost", 3000)
