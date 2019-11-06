@@ -199,9 +199,6 @@ end
 
 redef class MMethodDef
 	redef fun cs_signature(no_color) do
-		if mproperty.is_root_init then
-			return new_msignature.as(not null).cs_signature(no_color)
-		end
 		return msignature.as(not null).cs_signature(no_color)
 	end
 end
