@@ -173,15 +173,13 @@ redef class ModelBuilder
 			if mpropdef.mproperty.is_root_init then
 				assert defined_init == null
 				defined_init = mpropdef
-			else if mpropdef.mproperty.name == "autoinit" then
-				# An explicit old-style init named "init", so return
+			end
+			if mpropdef.name == "defaultinit" then
 				return
 			end
 		end
 
-		if mclassdef.auto_init != null then
-			return
-		end
+		if mclassdef.default_init != null then return
 
 		if not nclassdef isa AStdClassdef then return
 
@@ -195,7 +193,6 @@ redef class ModelBuilder
 				if mpropdef == null then return # Skip broken method
 				var sig = mpropdef.msignature
 				if sig == null then continue # Skip broken method
-
 				mparameters.add_all sig.mparameters
 				initializers.add(mpropdef.mproperty)
 				mpropdef.mproperty.is_autoinit = true
@@ -241,7 +238,7 @@ redef class ModelBuilder
 		# Look for most-specific new-stype init definitions
 		var spropdefs = new ArraySet[MMethodDef]
 		for x in mclassdef.in_hierarchy.direct_greaters do
-			var y = x.mclass.intro.auto_init
+			var y = x.mclass.intro.default_init
 			if y == null then continue
 			if y.is_broken or y.msignature == null then return
 			spropdefs.add y
@@ -299,30 +296,12 @@ redef class ModelBuilder
 				end
 			end
 		else if spropdefs.not_empty then
-			# Search for inherited manual autoinit
-			var manual = null
-			for s in spropdefs do
-				if mpropdef2npropdef.has_key(s) then
-					self.toolcontext.info("{mclassdef} inherits a manual autoinit {s}", 3)
-					#mclassdef.autoinit = s
-					#return
-					manual = s
-				end
-			end
-
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
 			if spropdefs.length > 1 then
 				# part 1. find the longest list
 				for spd in spropdefs do
 					if spd.initializers.length > longest.initializers.length then longest = spd
-					if spd != manual and manual != null then
-						self.toolcontext.info("{mclassdef} conflict between manual autoinit {manual} and automatic autoinit {spd}.", 3)
-					end
-				end
-				# conflict with manual autoinit?
-				if longest != manual and manual != null then
-					self.error(nclassdef, "Error: conflict between manual autoinit {manual} and automatic autoinit {longest}.")
 				end
 				# part 2. compare
 				# Check for conflict in the order of initializers
@@ -365,13 +344,13 @@ redef class ModelBuilder
 
 		# Create a specific new autoinit constructor
 		do
-			var mprop = new MMethod(mclassdef, "autoinit", nclassdef.location, public_visibility)
+			var mprop = new MMethod(mclassdef, "defaultinit", nclassdef.location, public_visibility)
 			mprop.is_init = true
 			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
 			mpropdef.initializers.add_all(initializers)
 			var msignature = new MSignature(mparameters, null)
 			mpropdef.msignature = msignature
-			mclassdef.auto_init = mpropdef
+			mclassdef.default_init = mpropdef
 			self.toolcontext.info("{mclassdef} gets a free auto constructor `{mpropdef}{msignature}`. {spropdefs}", 3)
 			mclassdef.mclass.the_root_init_mmethod = the_root_init_mmethod
 		end
@@ -789,12 +768,15 @@ redef class AMethPropdef
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
+		var is_old_style_init = false
 		if amethodid == null then
 			if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
-				if self.n_signature.n_params.not_empty or get_single_annotation("old_style_init", modelbuilder) != null then
-					name = "autoinit"
+				var old_style_annot = get_single_annotation("old_style_init", modelbuilder)
+				if  old_style_annot != null or self.n_signature.n_params.not_empty then
+					name = "defaultinit"
+					if old_style_annot != null then is_old_style_init = true
 				end
 			else if n_kwnew != null then
 				name = "new"
@@ -874,9 +856,10 @@ redef class AMethPropdef
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
-		if mprop.name == "autoinit" and mclassdef.is_intro then
-			assert mclassdef.auto_init == null
-			mclassdef.auto_init = mpropdef
+		if mpropdef.name == "defaultinit" and mclassdef.is_intro then
+			assert mclassdef.default_init == null
+			mpropdef.is_old_style_init = is_old_style_init
+			mclassdef.default_init = mpropdef
 			if mpropdef.is_intro then
 				mpropdef.initializers.add mprop
 				mpropdef.is_calling_init = true

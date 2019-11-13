@@ -49,7 +49,6 @@ private class AstMetricsVisitor
 	super Visitor
 
 	var phase: AstMetricsPhase
-	init(phase: AstMetricsPhase) do self.phase = phase
 
 	redef fun visit(n)
 	do

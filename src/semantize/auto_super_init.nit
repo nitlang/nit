@@ -104,14 +104,9 @@ redef class AMethPropdef
 		var auto_super_inits = new Array[CallSite]
 
 		# The look for new-style super constructors (called from a old style constructor)
-		var the_root_init_mmethod = modelbuilder.the_root_init_mmethod
-		if the_root_init_mmethod != null and auto_super_inits.is_empty then
-			var candidatedefs = the_root_init_mmethod.lookup_definitions(mmodule, anchor)
-			if candidatedefs.is_empty then
-				# skip broken
-				is_broken = true
-				return
-			end
+		var candidatedefs = get_super_candidatedefs(modelbuilder)
+
+		if not candidatedefs.is_empty and auto_super_inits.is_empty then
 
 			var candidatedef = candidatedefs.first
 			if candidatedefs.length > 1 then
@@ -124,15 +119,31 @@ redef class AMethPropdef
 			var msignature = candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
 
-			if msignature.arity > 0 then
+			if msignature.arity > mpropdef.msignature.arity then
 				modelbuilder.error(self, "Error: cannot do an implicit constructor call to `{candidatedef}{msignature}`. Expected at least `{msignature.arity}` arguments.")
 				is_broken = true
 				return
 			end
 
-			var callsite = new CallSite(hot_location, recvtype, mmodule, anchor, true, the_root_init_mmethod, candidatedef, msignature, false)
+			if candidatedef.mproperty != mpropdef.mproperty then
+				var i = 0
+				for candidat_mparameter in msignature.mparameters do
+					var actual_mparameter = mpropdef.msignature.mparameters[i]
+					if not candidat_mparameter.mtype.is_subtype(mmodule, anchor, actual_mparameter.mtype) then
+						modelbuilder.error(self, "Type Error: expected argument #{i} of type `{candidat_mparameter.mtype}`, got implicit argument `{candidat_mparameter.name}` of type `{actual_mparameter.mtype}`. Signature is {msignature}")
+						return
+					end
+					i += 1
+				end
+			end
+
+			var callsite = new CallSite(hot_location, recvtype, mmodule, anchor, true, candidatedef.mproperty, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
-			modelbuilder.toolcontext.info("Auto-super init for {mpropdef} to {the_root_init_mmethod.full_name}", 4)
+			modelbuilder.toolcontext.info("Auto-super init for {mpropdef} to {candidatedef.full_name}", 4)
+		else if candidatedefs.is_empty then
+			# skip broken
+			is_broken = true
+			return
 		end
 		if auto_super_inits.is_empty then
 			modelbuilder.error(self, "Error: no constructors to call implicitly in `{mpropdef}`. Call one explicitly.")
@@ -142,6 +153,34 @@ redef class AMethPropdef
 		self.auto_super_inits = auto_super_inits
 	end
 
+	# This method returns the list of possible candidates for the current definition.
+	#
+	# Warning this method supports super call from old_style_init to default_inits without signature verification!!!
+	private fun get_super_candidatedefs(modelbuilder: ModelBuilder): Array[MMethodDef]
+	do
+		var candidatedefs = new Array[MMethodDef]
+
+		var mclassdef = self.parent.as(AClassdef).mclassdef
+		if mclassdef == null or mclassdef.is_broken then return candidatedefs # skip error
+		var mpropdef = self.mpropdef
+		if mpropdef == null or mpropdef.is_broken then return candidatedefs # skip error
+		var mmodule = mpropdef.mclassdef.mmodule
+		var anchor = mclassdef.bound_mtype
+		var mproperty = mpropdef.mproperty
+
+		# The look for new-style super constructors (called from a old style constructor)
+		var the_root_init_mmethod = modelbuilder.the_root_init_mmethod
+
+		if mpropdef.is_old_style_init then
+			var superprop: nullable MMethodDef = null
+			for mclass in mclassdef.mclass.in_hierarchy(mmodule).direct_greaters do
+				candidatedefs.add(mclass.intro.default_init.as(not null))
+			end
+		else
+			candidatedefs = the_root_init_mmethod.lookup_definitions(mmodule, anchor)
+		end
+		return candidatedefs
+	end
 end
 
 redef class ANode

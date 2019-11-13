@@ -264,8 +264,8 @@ class RapidTypeAnalysis
 					if not mmethoddef.is_intro then
 						self.add_super_send(v.receiver, mmethoddef)
 					end
-				else if mmethoddef.mclassdef.auto_init == mmethoddef then
-					# autoinit call
+				else if mmethoddef.mclassdef.default_init == mmethoddef then
+					# default_init call
 					for i in mmethoddef.initializers do
 						if i isa MMethod then self.add_send(v.receiver, i)
 					end

@@ -219,7 +219,7 @@ class MExplicitCall
 
 			var cname
 			if mproperty.is_init then
-				if mproperty.name == "init" or mproperty.name == "new" or mproperty.name == "autoinit" then
+				if mproperty.name == "init" or mproperty.name == "new" or mproperty.name == "defaultinit" then
 					cname = "new_{recv_mtype.mangled_cname}"
 				else
 					cname = "new_{recv_mtype.mangled_cname}_{mproperty.short_cname}"
@@ -350,7 +350,7 @@ redef class AInitPropExternCall
 			mmodule, mtype, meth_name )
 
 		if meth == null then
-			meth_name = "autoinit"
+			meth_name = "defaultinit"
 			meth = toolcontext.modelbuilder.try_get_mproperty_by_name2( self,
 				mmodule, mtype, meth_name )
 		end

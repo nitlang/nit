@@ -28,7 +28,7 @@ redef class MMethod
 	do
 		var cname
 		if self.is_init then
-			if self.name == "init" or self.name == "new" or self.name == "autoinit" then
+			if self.name == "init" or self.name == "new" or self.name == "defaultinit" then
 				cname = "new_{recv_mtype.mangled_cname}"
 			else
 				cname = "new_{recv_mtype.mangled_cname}_{self.short_cname}"

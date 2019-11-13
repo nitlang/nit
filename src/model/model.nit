@@ -778,8 +778,8 @@ class MClassDef
 	# All property introductions and redefinitions in `self` (not inheritance).
 	var mpropdefs = new Array[MPropDef]
 
-	# The special autoinit constructor
-	var auto_init: nullable MMethodDef = null is writable
+	# The special default_init constructor
+	var default_init: nullable MMethodDef = null is writable
 
 	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
 	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
@@ -2635,6 +2635,10 @@ class MMethodDef
 	# If the method is used as an initializer, then
 	# using this information prevents to call `init` twice.
 	var is_calling_init = false is writable
+
+	# Does the method is a old_style_init?
+	#
+	var is_old_style_init = false is writable
 
 	# Is the method definition abstract?
 	var is_abstract: Bool = false is writable

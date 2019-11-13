@@ -3687,12 +3687,11 @@ redef class AClassdef
 				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 			end
 			return
-		else if mclassdef.auto_init == mpropdef then
+		else if mclassdef.default_init == mpropdef then
 			var recv = arguments.first
 			var initializers = mpropdef.initializers
 			var no_init = false
-			if not initializers.is_empty then
-
+			if not initializers.is_empty and not mpropdef.is_old_style_init then
 				var i = 1
 				for p in initializers do
 					if p isa MMethod then
