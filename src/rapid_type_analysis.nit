@@ -383,7 +383,6 @@ class RapidTypeAnalysis
 				v.enter_visit(npropdef.n_block)
 			end
 		end
-
 	end
 
 	fun add_cast(mtype: MType)
