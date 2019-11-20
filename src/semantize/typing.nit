@@ -325,7 +325,12 @@ private class TypeVisitor
 
 		if mproperty == null then
 			if recv_is_self then
-				self.modelbuilder.error(node, "Error: method or variable `{name}` unknown in `{recvtype}`.")
+				# FIXME This test was added to display a more explicit error when a potential duplication of root object class.
+				if name == "init" then
+					self.modelbuilder.error(node, "Possible duplication of the root class `Object`")
+				else
+					self.modelbuilder.error(node, "Error: method or variable `{name}` unknown in `{recvtype}`.")
+				end
 			else if recvtype.need_anchor then
 				self.modelbuilder.error(node, "Error: method `{name}` does not exists in `{recvtype}: {unsafe_type}`.")
 			else
