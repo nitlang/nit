@@ -149,7 +149,11 @@ redef class ModelBuilder
 		var mclassdef = nclassdef.mclassdef.as(not null)
 
 		# Are we a refinement
-		if not mclassdef.is_intro then return
+		if not mclassdef.is_intro then
+			# Set the default_init of the mclassdef with the intro default_init
+			mclassdef.default_init = mclassdef.mclass.intro.default_init
+			return
+		end
 
 		# Look for the init in Object, or create it
 		if mclassdef.mclass.name == "Object" and the_root_init_mmethod == null then
@@ -173,15 +177,15 @@ redef class ModelBuilder
 			if mpropdef.mproperty.is_root_init then
 				assert defined_init == null
 				defined_init = mpropdef
-			end
-			if mpropdef.name == "defaultinit" then
+			else if mpropdef.name == "defaultinit" then
 				return
 			end
 		end
 
 		if mclassdef.default_init != null then return
 
-		if not nclassdef isa AStdClassdef then return
+		# If the class is not AStdClassdef or it's an enum just return. No defaultinit is need.
+		if not nclassdef isa AStdClassdef or nclassdef.n_classkind isa AEnumClasskind then return
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
@@ -237,7 +241,8 @@ redef class ModelBuilder
 
 		# Look for most-specific new-stype init definitions
 		var spropdefs = new ArraySet[MMethodDef]
-		for x in mclassdef.in_hierarchy.direct_greaters do
+
+		for x in mclassdef.get_direct_supermtype do
 			var y = x.mclass.intro.default_init
 			if y == null then continue
 			if y.is_broken or y.msignature == null then return
@@ -296,12 +301,28 @@ redef class ModelBuilder
 				end
 			end
 		else if spropdefs.not_empty then
+			# Search for inherited manual defaultinit
+			var manual = null
+			for s in spropdefs do
+				if mpropdef2npropdef.has_key(s) then
+					self.toolcontext.info("{mclassdef} inherits a manual defaultinit {s}", 3)
+					manual = s
+				end
+			end
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
 			if spropdefs.length > 1 then
 				# part 1. find the longest list
 				for spd in spropdefs do
 					if spd.initializers.length > longest.initializers.length then longest = spd
+
+					if spd != manual and manual != null then
+						self.toolcontext.info("{mclassdef} conflict between manual defaultinit {manual} and automatic defaultinit {spd}.", 3)
+					end
+				end
+				# conflict with manual autoinit?
+				if longest != manual and manual != null then
+					self.error(nclassdef, "Error: conflict between manual defaultinit {manual} and automatic defaultinit {longest}.")
 				end
 				# part 2. compare
 				# Check for conflict in the order of initializers
@@ -860,10 +881,10 @@ redef class AMethPropdef
 			assert mclassdef.default_init == null
 			mpropdef.is_old_style_init = is_old_style_init
 			mclassdef.default_init = mpropdef
-			if mpropdef.is_intro then
-				mpropdef.initializers.add mprop
-				mpropdef.is_calling_init = true
-			end
+			# Set the initializers with the mproperty.
+			# This point is need when a super class define this own default_init and inherited class use the default_init generated automaticlely.
+			mpropdef.initializers.add mprop
+			mpropdef.is_calling_init = true
 		end
 
 		set_doc(mpropdef, modelbuilder)
