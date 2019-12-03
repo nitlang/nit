@@ -4390,9 +4390,25 @@ redef class ASendExpr
 		var res = v.compile_callsite(callsite, args)
 		if is_safe then
 			if res != null then
-				var orig_res = res
+				# `callsite.mpropdef` may reference a method whose
+				# return type is a primitive type in C. If it is
+				# the case, we must convert the primitive type to
+				# a `val*` to support nullable assignment.
+				# Autobox's job is to convert primitive type to
+				# nullable type, eg from `Int` to `nullable `Int`.
+				# The target type reside in `self.mtype`.
+				var original_res = v.autobox(res, self.mtype.as(not null))
+
+				# Here we must create a new_var in case the original
+				# type is not nullable. We can't call `autobox` to
+				# convert a complex type to its nullable version.
+				# eg if we have a type `A`, calling autobox like
+				# `autobox(A, nullable A)` will return `A` since
+				# `A` and `nullable A` have the same primitive
+				# type. The nullable qualifier is only used at
+				# compile time to add appropriate null checks.
 				res = v.new_var(self.mtype.as(not null))
-				v.add("{res} = {orig_res};")
+				v.add("{res} = {original_res};")
 				v.add("\} else \{")
 				v.add("{res} = NULL;")
 			end
