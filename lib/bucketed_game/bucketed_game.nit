@@ -172,6 +172,8 @@ class GameTurn[G: Game]
 
 	# Create a new game turn for `game`.
 	init(game: G)
+	is
+		is_old_style_init
 	do
 		_tick = game.tick
 		_game = game
