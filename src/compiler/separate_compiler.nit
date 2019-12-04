@@ -825,23 +825,14 @@ class SeparateCompiler
 		v.add_decl("\};")
 	end
 
-	# Globally compile the table of the class mclass
-	# In a link-time optimisation compiler, tables are globally computed
-	# In a true separate compiler (a with dynamic loading) you cannot do this unfortnally
-	fun compile_class_to_c(mclass: MClass)
+	protected fun compile_class_vft(ccinfo: ClassCompilationInfo, v: SeparateCompilerVisitor)
 	do
-		if mclass.is_broken then return
-
-		var mtype = mclass.intro.bound_mtype
-		var c_name = mclass.c_name
-
-		var v = new_visitor
-
+		var mclass = ccinfo.mclass
+		var mtype = ccinfo.mtype
 		var rta = runtime_type_analysis
-		var is_dead = rta != null and not rta.live_classes.has(mclass)
-		# While the class may be dead, some part of separately compiled code may use symbols associated to the class, so
-		# in order to compile and link correctly the C code, these symbols should be declared and defined.
-		var need_corpse = is_dead and mtype.is_c_primitive or mclass.kind == extern_kind or mclass.kind == enum_kind
+		var c_name = ccinfo.mclass.c_name
+		var is_dead = ccinfo.is_dead
+		var need_corpse = ccinfo.need_corpse
 
 		v.add_decl("/* runtime class {c_name}: {mclass.full_name} (dead={is_dead}; need_corpse={need_corpse})*/")
 
@@ -873,11 +864,24 @@ class SeparateCompiler
 			v.add_decl("\}")
 			v.add_decl("\};")
 		end
+	end
+
+	# Given a `MClass`, if it's a universal class and if it needs to be handle
+	# specifically by the compiler, this function will compile it and return
+	# true. Otherwise, no C code will be written in the visitor and the value
+	# false will be returned.
+	fun compile_class_if_universal(ccinfo: ClassCompilationInfo, v: SeparateCompilerVisitor): Bool
+	do
+		var mclass = ccinfo.mclass
+		var mtype = ccinfo.mtype
+		var c_name = ccinfo.mclass.c_name
+		var is_dead = ccinfo.is_dead
+		var need_corpse = ccinfo.need_corpse
 
 		if mtype.is_c_primitive or mtype.mclass.name == "Pointer" then
 			# Is a primitive type or the Pointer class, not any other extern class
 
-			if mtype.is_tagged then return
+			if mtype.is_tagged then return true
 
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
@@ -887,7 +891,7 @@ class SeparateCompiler
 			self.header.add_decl("\};")
 
 			# Pointer is needed by extern types, live or not
-			if is_dead and mtype.mclass.name != "Pointer" then return
+			if is_dead and mtype.mclass.name != "Pointer" then return true
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
@@ -905,7 +909,7 @@ class SeparateCompiler
 			v.add("\}")
 
 			# A Pointer class also need its constructor
-			if mtype.mclass.name != "Pointer" then return
+			if mtype.mclass.name != "Pointer" then return true
 
 			v = new_visitor
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
@@ -926,7 +930,7 @@ class SeparateCompiler
 				v.add("return {res};")
 			end
 			v.add("\}")
-			return
+			return true
 		else if mclass.name == "NativeArray" then
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
@@ -953,7 +957,7 @@ class SeparateCompiler
 			v.add("{res}->length = length;")
 			v.add("return (val*){res};")
 			v.add("\}")
-			return
+			return true
 		else if mclass.name == "RoutineRef" then
 			self.header.add_decl("struct instance_{c_name} \{")
 			self.header.add_decl("const struct type *type;")
@@ -976,7 +980,7 @@ class SeparateCompiler
 			v.add("{res}->method = method;")
 			v.add("return (val*){res};")
 			v.add("\}")
-			return
+			return true
 		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
 			# Is an extern class (other than Pointer and CString)
 			# Pointer is caught in a previous `if`, and CString is internal
@@ -1001,8 +1005,17 @@ class SeparateCompiler
 				v.add("return {res};")
 			end
 			v.add("\}")
-			return
+			return true
 		end
+		return false
+	end
+
+	protected fun compile_default_new(ccinfo: ClassCompilationInfo, v: SeparateCompilerVisitor)
+	do
+		var mclass = ccinfo.mclass
+		var mtype = ccinfo.mtype
+		var c_name = ccinfo.mclass.c_name
+		var is_dead = ccinfo.is_dead
 
 		#Build NEW
 		self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
@@ -1036,6 +1049,35 @@ class SeparateCompiler
 			v.add("return {res};")
 		end
 		v.add("\}")
+
+	end
+
+	protected fun build_class_compilation_info(mclass: MClass): ClassCompilationInfo
+	do
+		var mtype = mclass.intro.bound_mtype
+		var rta = runtime_type_analysis
+		var is_dead = rta != null and not rta.live_classes.has(mclass)
+
+		# While the class may be dead, some part of separately compiled code may use symbols associated to the class, so
+		# in order to compile and link correctly the C code, these symbols should be declared and defined.
+		var need_corpse = is_dead and mtype.is_c_primitive or mclass.kind == extern_kind or mclass.kind == enum_kind
+
+		var compilation_info = new ClassCompilationInfo(mclass, is_dead, need_corpse)
+		return compilation_info
+	end
+
+	# Globally compile the table of the class mclass
+	# In a link-time optimisation compiler, tables are globally computed
+	# In a true separate compiler (a with dynamic loading) you cannot do this unfortnally
+	fun compile_class_to_c(mclass: MClass)
+	do
+		var v = new_visitor
+		var class_info = build_class_compilation_info(mclass)
+		compile_class_vft(class_info, v)
+		var is_already_managed = compile_class_if_universal(class_info, v)
+		if not is_already_managed then
+			compile_default_new(class_info, v)
+		end
 	end
 
 	# Compile structures used to map tagged primitive values to their classes and types.
@@ -2548,6 +2590,34 @@ class SeparateRuntimeFunction
 
 			v2.add "\}"
 		end
+	end
+end
+
+# Encapsulates every information needed to compile a class.
+#
+# The compilation of a class is done by several methods, two of those are
+# mandatory :
+# - compile_class_to_c : starts the compilation process
+# - compile_class_vft : generate the virtual function table
+# And one of them is optional :
+# - compile_class_if_universal : compiles the rest of the class if its a universal
+# type. Universal type are handle in a case-basis, this is why they need special treatment.
+# Generally, universal class will have special structure and a custom allocator.
+#
+# Throughout each step of the class compilation process, some information must be share.
+# This class encapsulates the compilation process state.
+# (except vft), eg
+class ClassCompilationInfo
+	var mclass: MClass # class to compile
+	var is_dead: Bool
+	var need_corpse: Bool
+
+	# Shortcut to access the class's bound type.
+	var mtype: MClassType is noinit
+
+	init
+	do
+		mtype = mclass.intro.bound_mtype
 	end
 end
 
