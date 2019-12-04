@@ -784,6 +784,38 @@ class MClassDef
 	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
 	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
 
+	# Return the direct parent mtype of `self`
+	# Exemple
+	# ~~~nitish
+	# module 1
+	#
+	#	class A
+	#	class B
+	#		super A
+	#
+	# module 2
+	#
+	#	redef class A
+	#	class C
+	#		super B
+	#
+	# mclassdef_C.get_direct_supermtype == [B]
+	# ~~~~
+	fun get_direct_supermtype: Collection[MClassType]
+	do
+		# Get the potentiel direct parents
+		var parents = in_hierarchy.direct_greaters
+		# Stock the potentiel direct parents
+		var res = supertypes
+		for parent in parents do
+			# remove all super parents of the potentiel direct parents
+			res.remove_all(parent.supertypes)
+			# if the length of the potentiel direct parent equal 1 break
+			if res.length == 1 then break
+		end
+		return res
+	end
+
 	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 end
 
