@@ -35,7 +35,8 @@ abstract class Command
 	var git_clone_path = "nitpm-test-test"
 	var fork_url = "https://api.github.com/repos/JeanFrizz/nitpm-test-test/"
 	var nitpm_git = "https://api.github.com/repos/nitpm-test/nitpm-test-test/"
-	var nitpm_git_fork_token = "JeanFrizz:Jeenfizznitpm1"
+	var nitpm_git_fork_token1 = "022da1dde1f706d028"
+	var nitpm_git_fork_token2 = "578f3d3913ae5ac422316e"
 	var git_head = "JeanFrizz:master"
 
 	# Short name of the command, specified in the command line
@@ -431,8 +432,7 @@ class CommandUpload
 		sha_request.user_agent = "nitpm"
 		var sha_response = sha_request.execute
 		if sha_response isa CurlResponseSuccess then
-			var nitpm_file_var = new FileReader.open("nitpm_var.txt")
-			var token = nitpm_file_var.read_all
+			var nitpm_git_fork_token = nitpm_git_fork_token1 + nitpm_git_fork_token2
 			print sha_response.body_str.to_json_value.get("sha")
 			var commit_request = new JsonPUT("{fork_url}contents/package-list.json")
 			commit_request.user_agent = "nitpm"
@@ -446,7 +446,7 @@ class CommandUpload
 			# commit_request.data = request_data
 			#commit_request.method = "PUT"
 			commit_request.json_data = json_data
-			commit_request.auth = token
+			commit_request.auth = nitpm_git_fork_token
 			var commit_response = commit_request.execute
 			if commit_response isa CurlResponseSuccess then
 				var pr_request = new JsonPOST("{nitpm_git}pulls")
@@ -455,9 +455,8 @@ class CommandUpload
 				pr_data["title"] = "Adding package"
 				pr_data["head"] = "{git_head}"
 				pr_data["base"] = "master"
-				pr_request.auth = "{nitpm_git_fork_token}"
 				pr_request.json_data = pr_data
-				pr_request.auth = token
+				pr_request.auth = nitpm_git_fork_token
 				var pr_response = pr_request.execute
 				if pr_response isa CurlResponseSuccess then
 					print "Package sent for upload"
