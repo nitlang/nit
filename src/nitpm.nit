@@ -15,15 +15,28 @@
 # Nit package manager command line interface
 module nitpm
 
+import neo4j
 import opts
 import prompt
 import ini
 import curl
+import json
+import json::static
+import json::dynamic
+import base64
 
 import nitpm_shared
 
+
 # Command line action, passed after `nitpm`
 abstract class Command
+	#dev var
+	var package_list_path = "nitpm-test-test/package-list.json"
+	var git_clone_path = "nitpm-test-test"
+	var fork_url = "https://api.github.com/repos/JeanFrizz/nitpm-test-test/"
+	var nitpm_git = "https://api.github.com/repos/nitpm-test/nitpm-test-test/"
+	var nitpm_git_fork_token = "fe9aed7d03fd4d894f7f774623235537743238b5"
+	var git_head = "JeanFrizz:master"
 
 	# Short name of the command, specified in the command line
 	fun name: String is abstract
@@ -34,7 +47,7 @@ abstract class Command
 	# Command description
 	fun description: String is abstract
 
-	# Apply this command consiering the `args` that follow
+	# Apply this command considering the `args` that follow
 	fun apply(args: Array[String]) do end
 
 	private var all_commands: Map[String, Command]
@@ -106,44 +119,55 @@ class CommandInstall
 			# Ask a centralized server
 			# TODO customizable server list
 			# TODO parse ini file in memory
+			var nitpm_file = new FileReader.open("{package_list_path}")
+			var nitpm_string = nitpm_file.read_all
+			var nitpm_json = nitpm_string.to_json_value
+			for object in nitpm_json do
+				var package_name = object.get("package.name").to_s
+				if package_name == package_id then
+					print "package {package_name} found under {package_id}"
+					install_from_git(object.get("upstream.git").to_s, package_id)
+					break
+				end
 
-			var url = "https://nitlanguage.org/catalog/p/{package_id}.ini"
-			var ini_path = "/tmp/{package_id}.ini"
-
-			if verbose then print "Looking for a package description at '{url}'"
-
-			var request = new CurlHTTPRequest(url)
-			request.verbose = verbose
-			var response = request.download_to_file(ini_path)
-
-			if response isa CurlResponseFailed then
-				print_error "Failed to contact the remote server at '{url}': {response.error_msg} ({response.error_code})"
-				exit 1
 			end
-
-			assert response isa CurlFileResponseSuccess
-			if response.status_code == 404 then
-				print_error "Package '{package_id}' not found on the server"
-				exit 1
-			else if response.status_code != 200 then
-				print_error "Server side error: {response.status_code}"
-				exit 1
-			end
-
-			if verbose then
-				print "Found a package description:"
-				print ini_path.to_path.read_all
-			end
-
-			var ini = new IniFile.from_file(ini_path)
-			var git_repo = ini["upstream.git"]
-			if git_repo == null then
-				print_error "Package description invalid, or it does not declare a Git repository"
-				exit 1
-				abort
-			end
-
-			install_from_git(git_repo, package_id, version)
+			# var url = "https://nitlanguage.org/catalog/p/{package_id}.ini"
+			# var ini_path = "/tmp/{package_id}.ini"
+			#
+			# if verbose then print "Looking for a package description at '{url}'"
+			#
+			# var request = new CurlHTTPRequest(url)
+			# request.verbose = verbose
+			# var response = request.download_to_file(ini_path)
+			#
+			# if response isa CurlResponseFailed then
+			# 	print_error "Failed to contact the remote server at '{url}': {response.error_msg} ({response.error_code})"
+			# 	exit 1
+			# end
+			#
+			# assert response isa CurlFileResponseSuccess
+			# if response.status_code == 404 then
+			# 	print_error "Package '{package_id}' not found on the server"
+			# 	exit 1
+			# else if response.status_code != 200 then
+			# 	print_error "Server side error: {response.status_code}"
+			# 	exit 1
+			# end
+			#
+			# if verbose then
+			# 	print "Found a package description:"
+			# 	print ini_path.to_path.read_all
+			# end
+			#
+			# var ini = new IniFile.from_file(ini_path)
+			# var git_repo = ini["upstream.git"]
+			# if git_repo == null then
+			# 	print_error "Package description invalid, or it does not declare a Git repository"
+			# 	exit 1
+			# 	abort
+			# end
+			#
+			# install_from_git(git_repo, package_id, version)
 		else
 			var name = package_id.git_name
 			if name != null and name != "." and not name.is_empty then
@@ -341,6 +365,204 @@ class CommandList
 	end
 end
 
+#Upload package information to central repository
+class CommandUpload
+	super Command
+
+	redef fun name do return "upload"
+	redef fun usage do return "nitpm upload"
+	redef fun description do return "Upload package information to the nitpm central repository"
+
+	redef fun apply(args)
+	do
+		var path = "{git_clone_path}"
+		var cmd = "cd {path.escape_to_sh}; git pull"
+		if verbose then print "+ {cmd}"
+
+		var proc = new Process("sh", "-c", cmd)
+		proc.wait
+
+		if proc.status != 0 then
+			print_error "updating failed"
+			exit 1
+		end
+
+		# upload package from local package.ini
+		var ini_path = "package.ini"
+		if not ini_path.file_exists then
+			print_error "Local `package.ini` not found."
+			print_local_help
+			exit 1
+		end
+		check_git
+		var ini = new IniFile.from_file(ini_path)
+		var ini_json = new HashMap[String, HashMap[String, nullable String]]
+		for section in ini.sections do
+			ini_json[section.name] = section
+		end
+		var iniJsonObject = new JsonObject.from(ini_json)
+		var nitpm_file = new FileReader.open("{package_list_path}")
+		var nitpm_string = nitpm_file.read_all
+		var nitpm_object_array = new JsonDeserializer(nitpm_string)
+		var nitpm_object = nitpm_object_array.deserialize
+	 	var nitpm_object_list = nitpm_object.as(Array[Object])
+		var i = 0
+		var found = false
+		for object in nitpm_object_list do
+			if object.as(JsonObject)["package"].as(JsonObject)["name"].as(String) == iniJsonObject["package"].as(IniSection)["name"].as(String)
+			then
+				found = true
+				var response = prompt("This package already exists. Do you want to replace it? [y/N] ")
+				var accept = response != null and (response.to_lower == "y" or response.to_lower == "yes")
+				if accept then
+					nitpm_object_list.remove_at(i)
+					nitpm_object_list.add(iniJsonObject)
+					break
+				end
+			end
+			i += 1
+		end
+		if not found then
+			nitpm_object_list.add(iniJsonObject)
+		end
+		print nitpm_object_list.serialize_to_json(pretty=true, plain=true)
+		var base64_content = nitpm_object_list.serialize_to_json(pretty=true, plain = true).encode_base64
+		var sha_request = new CurlHTTPRequest("{fork_url}contents/package-list.json")
+		sha_request.user_agent = "nitpm"
+		var sha_response = sha_request.execute
+		if sha_response isa CurlResponseSuccess then
+			print sha_response.body_str.to_json_value.get("sha")
+			var commit_request = new JsonPUT("{fork_url}contents/package-list.json")
+			commit_request.user_agent = "nitpm"
+			var json_data = new HashMap[String, String]
+			json_data["message"] = "Adding Package"
+			json_data["sha"] = sha_response.body_str.to_json_value.get("sha").to_s
+			json_data["content"] = base64_content
+			#var json_data = "\{'message':'Adding Package', 'sha':'{sha_response.body_str.to_json_value.get("sha").to_s}', 'content':'{base64_content}'\}"
+			# var request_data = new HeaderMap
+			# request_data["message"] = "Adding package"
+			# request_data["sha"] = sha_response.body_str.to_json_value.get("sha").to_s
+			# request_data["content"] = base64_content
+			# commit_request.data = request_data
+			#commit_request.method = "PUT"
+			commit_request.json_data = json_data
+			commit_request.auth = "{nitpm_git_fork_token}"
+			var commit_response = commit_request.execute
+			if commit_response isa CurlResponseSuccess then
+				var pr_request = new JsonPOST("{nitpm_git}pulls")
+				pr_request.user_agent = "nitpm"
+				var pr_data = new HashMap[String, String]
+				pr_data["title"] = "Adding package"
+				pr_data["head"] = "{git_head}"
+				pr_data["base"] = "master"
+				pr_request.auth = "{nitpm_git_fork_token}"
+				pr_request.json_data = pr_data
+				var pr_response = pr_request.execute
+				if pr_response isa CurlResponseSuccess then
+					print "Package sent for upload"
+				else
+					print "There was a problem uploading package"
+					exit 1
+				end
+			else
+				print "There was an error trying to commit"
+				exit 1
+			end
+
+		else
+			print "Curl request failed, please try again"
+			exit 1
+		end
+
+		#update le fichier list
+		#check si y a pas déjà un package avec ce nom
+		#récupérer le sha du list
+		#commit and push
+		#créer une pull request
+
+
+
+
+	end
+
+end
+
+# List all online available packages
+class CommandListAvailable
+	super Command
+
+	redef fun name do return "listAvailable"
+	redef fun usage do return "nitpm listAvailable"
+	redef fun description do return "Show every available package from the repository"
+
+	redef fun apply(args)
+	do
+		var nitpm_file = new FileReader.open("{package_list_path}")
+		var nitpm_string = nitpm_file.read_all
+		var nitpm_json = nitpm_string.to_json_value
+		for object in nitpm_json do
+			print object.get("package.name")
+		end
+	end
+end
+
+class CommandListByTag
+	super Command
+
+	redef fun name do return "listByTag"
+	redef fun usage do return "nitpm listByTag [tag]"
+	redef fun description do return "Look for available package by tag"
+
+	redef fun apply(args)
+	do
+		if args.is_empty then
+			print_local_help
+			exit 1
+		end
+		var name = args[0]
+		var nitpm_file = new FileReader.open("{package_list_path}")
+		var nitpm_string = nitpm_file.read_all
+		var nitpm_json = nitpm_string.to_json_value
+		for object in nitpm_json do
+			var tags = object.get("package.tags").to_s.split(",")
+			for tag in tags do
+				if tag == name then
+					print object.get("package.name")
+					break
+				end
+			end
+
+		end
+
+	end
+
+end
+
+class CommandUpdate
+	super Command
+
+	redef fun name do return "update"
+	redef fun usage do return "nitpm update"
+	redef fun description do return "Pulls the latest package list from git"
+
+	redef fun apply(args)
+	do
+		var path = "{git_clone_path}"
+		var cmd = "cd {path.escape_to_sh}; git pull"
+		if verbose then print "+ {cmd}"
+
+		var proc = new Process("sh", "-c", cmd)
+		proc.wait
+
+		if proc.status != 0 then
+			print_error "updating failed"
+			exit 1
+		end
+
+	end
+
+end
+
 # Show general help or help specific to a command
 class CommandHelp
 	super Command
@@ -381,9 +603,13 @@ redef class Sys
 
 	private var command_install = new CommandInstall(commands)
 	private var command_list = new CommandList(commands)
-	private var command_update = new CommandUpgrade(commands)
+	private var command_upgrade = new CommandUpgrade(commands)
 	private var command_uninstall = new CommandUninstall(commands)
 	private var command_help = new CommandHelp(commands)
+	private var command_upload = new CommandUpload(commands)
+	private var command_listAvailable = new CommandListAvailable(commands)
+	private var command_listByTag = new CommandListByTag(commands)
+	private var command_update = new CommandUpdate(commands)
 end
 
 redef fun nitpm_lib_dir
