@@ -1,74 +1,73 @@
 *** METRICS ***
 --- AST Metrics ---
 ## All nodes of the AST
- population: 52
+ population: 49
  minimum value: 1
- maximum value: 40
- total value: 304
- average value: 5.84
+ maximum value: 37
+ total value: 286
+ average value: 5.83
  distribution:
-  <=1: sub-population=16 (30.76%); cumulated value=16 (5.26%)
-  <=2: sub-population=5 (9.61%); cumulated value=10 (3.28%)
-  <=4: sub-population=9 (17.30%); cumulated value=28 (9.21%)
-  <=8: sub-population=12 (23.07%); cumulated value=76 (25.00%)
-  <=16: sub-population=5 (9.61%); cumulated value=59 (19.40%)
-  <=32: sub-population=4 (7.69%); cumulated value=75 (24.67%)
-  <=64: sub-population=1 (1.92%); cumulated value=40 (13.15%)
+  <=1: sub-population=15 (30.61%); cumulated value=15 (5.24%)
+  <=2: sub-population=3 (6.12%); cumulated value=6 (2.09%)
+  <=4: sub-population=12 (24.48%); cumulated value=40 (13.98%)
+  <=8: sub-population=10 (20.40%); cumulated value=67 (23.42%)
+  <=16: sub-population=4 (8.16%); cumulated value=48 (16.78%)
+  <=32: sub-population=4 (8.16%); cumulated value=73 (25.52%)
+  <=64: sub-population=1 (2.04%); cumulated value=37 (12.93%)
  list:
-  TId: 40 (13.15%)
-  APublicVisibility: 19 (6.25%)
-  AListExprs: 19 (6.25%)
-  AQid: 19 (6.25%)
-  ACallExpr: 18 (5.92%)
-  TClassid: 15 (4.93%)
-  AQclassid: 15 (4.93%)
-  TInteger: 10 (3.28%)
-  AIntegerExpr: 10 (3.28%)
-  AType: 9 (2.96%)
+  TId: 37 (12.93%)
+  APublicVisibility: 19 (6.64%)
+  ACallExpr: 18 (6.29%)
+  AQid: 18 (6.29%)
+  AListExprs: 18 (6.29%)
+  AQclassid: 14 (4.89%)
+  TClassid: 14 (4.89%)
+  TInteger: 10 (3.49%)
+  AIntegerExpr: 10 (3.49%)
+  ASignature: 8 (2.79%)
   ...
-  AAnnotation: 1 (0.32%)
-  AAnnotations: 1 (0.32%)
-  AReturnExpr: 1 (0.32%)
-  TKwreturn: 1 (0.32%)
-  AInterfaceClasskind: 1 (0.32%)
-  TKwinterface: 1 (0.32%)
-  ANoImport: 1 (0.32%)
-  AMainMethPropdef: 1 (0.32%)
-  AMainClassdef: 1 (0.32%)
-  TKwimport: 1 (0.32%)
+  TKwreturn: 1 (0.34%)
+  AAnnotation: 1 (0.34%)
+  AParam: 1 (0.34%)
+  AMainMethPropdef: 1 (0.34%)
+  AInterfaceClasskind: 1 (0.34%)
+  TKwinterface: 1 (0.34%)
+  ANoImport: 1 (0.34%)
+  ABlockExpr: 1 (0.34%)
+  AMainClassdef: 1 (0.34%)
+  TKwimport: 1 (0.34%)
 ## All identifiers of the AST
- population: 20
+ population: 19
  minimum value: 1
  maximum value: 11
- total value: 55
- average value: 2.75
+ total value: 51
+ average value: 2.68
  distribution:
-  <=1: sub-population=3 (15.00%); cumulated value=3 (5.45%)
-  <=2: sub-population=12 (60.00%); cumulated value=24 (43.63%)
-  <=4: sub-population=3 (15.00%); cumulated value=10 (18.18%)
-  <=8: sub-population=1 (5.00%); cumulated value=7 (12.72%)
-  <=16: sub-population=1 (5.00%); cumulated value=11 (20.00%)
+  <=1: sub-population=3 (15.78%); cumulated value=3 (5.88%)
+  <=2: sub-population=12 (63.15%); cumulated value=24 (47.05%)
+  <=4: sub-population=2 (10.52%); cumulated value=7 (13.72%)
+  <=8: sub-population=1 (5.26%); cumulated value=6 (11.76%)
+  <=16: sub-population=1 (5.26%); cumulated value=11 (21.56%)
  list:
-  output: 11 (20.00%)
-  Int: 7 (12.72%)
-  run: 4 (7.27%)
-  c: 3 (5.45%)
-  val: 3 (5.45%)
-  i: 2 (3.63%)
-  bar: 2 (3.63%)
-  foo: 2 (3.63%)
-  val2: 2 (3.63%)
-  val1: 2 (3.63%)
-  C: 2 (3.63%)
-  v: 2 (3.63%)
-  baz: 2 (3.63%)
-  a: 2 (3.63%)
-  A: 2 (3.63%)
-  B: 2 (3.63%)
-  b: 2 (3.63%)
-  intern: 1 (1.81%)
-  Object: 1 (1.81%)
-  Bool: 1 (1.81%)
+  output: 11 (21.56%)
+  Int: 6 (11.76%)
+  run: 4 (7.84%)
+  c: 3 (5.88%)
+  baz: 2 (3.92%)
+  i: 2 (3.92%)
+  bar: 2 (3.92%)
+  val2: 2 (3.92%)
+  val1: 2 (3.92%)
+  C: 2 (3.92%)
+  val: 2 (3.92%)
+  B: 2 (3.92%)
+  a: 2 (3.92%)
+  A: 2 (3.92%)
+  foo: 2 (3.92%)
+  b: 2 (3.92%)
+  intern: 1 (1.96%)
+  Object: 1 (1.96%)
+  Bool: 1 (1.96%)
 --- Detection of variance constraints on formal parameter types ---
 -- Generic classes --
  list:
@@ -221,41 +220,41 @@ Number of refined classes: 0 (0.00%)
 Average number of class refinments by classes: 0.00
 Average number of class refinments by refined classes: na
 
-Number of properties: 18
-  Number of MAttribute: 3 (16.66%)
-  Number of MMethod: 15 (83.33%)
+Number of properties: 21
+  Number of MAttribute: 3 (14.28%)
+  Number of MMethod: 18 (85.71%)
 
-Number of property definitions: 20
-Number of redefined properties: 1 (5.55%)
-Average number of property redefinitions by property: 0.11
+Number of property definitions: 23
+Number of redefined properties: 1 (4.76%)
+Average number of property redefinitions by property: 0.09
 Average number of property redefinitions by redefined property: 2.00
 --- Explicit vs. Implicit Self ---
-Total number of self: 5
-Total number of implicit self: 4 (80.00%)
+Total number of self: 4
+Total number of implicit self: 4 (100.00%)
 --- Construction of tables ---
 Number of runtime classes: 6 (excluding interfaces and abstract classes)
 Average number of composing class definition by runtime class: 2.00
-Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
-Average size of table by runtime class: 3.83
-Values never redefined: 17 (73.91%)
+Total size of tables (classes and instances): 31 (not including stuff like info for subtyping or call-next-method)
+Average size of table by runtime class: 5.16
+Values never redefined: 25 (80.64%)
 generating package_hierarchy.dot
 generating module_hierarchy.dot
 --- Metrics of the explitic static types ---
-Total number of explicit static types: 9
+Total number of explicit static types: 8
 Statistics of type usage:
  population: 4
  minimum value: 1
- maximum value: 6
- total value: 9
- average value: 2.25
+ maximum value: 5
+ total value: 8
+ average value: 2.00
  distribution:
-  <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
-  <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
+  <=1: sub-population=3 (75.00%); cumulated value=3 (37.50%)
+  <=8: sub-population=1 (25.00%); cumulated value=5 (62.50%)
  list:
-  Int: 6 (66.66%)
-  C: 1 (11.11%)
-  B: 1 (11.11%)
-  A: 1 (11.11%)
+  Int: 5 (62.50%)
+  C: 1 (12.50%)
+  B: 1 (12.50%)
+  A: 1 (12.50%)
 
 # MClasses metrics
 
@@ -292,11 +291,11 @@ Statistics of type usage:
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
+	  avg: 4.0
+	  max: C (9)
+	  min: Object (2)
+	  std: 2.591
+	  sum: 33
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -304,17 +303,17 @@ Statistics of type usage:
 	  std: 0.845
 	  sum: 3
 	cnbi: number of accessible constructors (inherited + local)
-	  avg: 1.0
-	  max: B (2)
-	  min: Object (1)
-	  std: 0.378
-	  sum: 8
+	  avg: 2.0
+	  max: A (3)
+	  min: Object (2)
+	  std: 0.655
+	  sum: 17
 	cnbm: number of accessible methods (inherited + local)
-	  avg: 3.0
-	  max: B (5)
-	  min: Object (1)
-	  std: 1.773
-	  sum: 21
+	  avg: 4.0
+	  max: C (7)
+	  min: Object (2)
+	  std: 1.927
+	  sum: 30
 	cnbv: number of accessible virtual types (inherited + local)
 	  avg: 0.0
 	  max: Object (0)
@@ -322,11 +321,11 @@ Statistics of type usage:
 	  std: 0.0
 	  sum: 0
 	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
+	  avg: 3.0
+	  max: C (7)
 	  min: Bool (0)
 	  std: 2.268
-	  sum: 18
+	  sum: 21
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: A (1)
@@ -334,11 +333,11 @@ Statistics of type usage:
 	  std: 0.535
 	  sum: 2
 	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
+	  avg: 1.0
+	  max: Bool (2)
 	  min: Object (0)
-	  std: 0.926
-	  sum: 6
+	  std: 1.0
+	  sum: 12
 
  ## global metrics
 	cnoa: number of ancestor classes
@@ -372,11 +371,11 @@ Statistics of type usage:
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
+	  avg: 4.0
+	  max: C (9)
+	  min: Object (2)
+	  std: 2.591
+	  sum: 33
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -384,17 +383,17 @@ Statistics of type usage:
 	  std: 0.845
 	  sum: 3
 	cnbi: number of accessible constructors (inherited + local)
-	  avg: 1.0
-	  max: B (2)
-	  min: Object (1)
-	  std: 0.378
-	  sum: 8
+	  avg: 2.0
+	  max: A (3)
+	  min: Object (2)
+	  std: 0.655
+	  sum: 17
 	cnbm: number of accessible methods (inherited + local)
-	  avg: 3.0
-	  max: B (5)
-	  min: Object (1)
-	  std: 1.773
-	  sum: 21
+	  avg: 4.0
+	  max: C (7)
+	  min: Object (2)
+	  std: 1.927
+	  sum: 30
 	cnbv: number of accessible virtual types (inherited + local)
 	  avg: 0.0
 	  max: Object (0)
@@ -402,11 +401,11 @@ Statistics of type usage:
 	  std: 0.0
 	  sum: 0
 	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
+	  avg: 3.0
+	  max: C (7)
 	  min: Bool (0)
 	  std: 2.268
-	  sum: 18
+	  sum: 21
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: A (1)
@@ -414,11 +413,11 @@ Statistics of type usage:
 	  std: 0.535
 	  sum: 2
 	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
+	  avg: 1.0
+	  max: Bool (2)
 	  min: Object (0)
-	  std: 0.926
-	  sum: 6
+	  std: 1.0
+	  sum: 12
 
 # MModules metrics
 
@@ -738,27 +737,27 @@ Warning: no source file for `base_simple3`
 	  sum: 0.143
 
 # Mendel metrics
-	large mclasses (threshold: 3.915)
+	large mclasses (threshold: 4.915)
+	   B: 5
 	   C: 5
-	   B: 4
-	   Sys: 4
-	budding mclasses (threshold: 5.033)
-	blooming mclasses (threshold: 21.874)
-	   C: 25.0
+	budding mclasses (threshold: 3.231)
+	   C: 3.5
+	blooming mclasses (threshold: 15.285)
+	   C: 17.5
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -
  list:
-  primitive type: 6 (100.00%)
-  total: 6
+  primitive type: 5 (100.00%)
+  total: 5
 - Variance -
  list:
-  monomorph: 6 (100.00%)
-  total: 6
+  monomorph: 5 (100.00%)
+  total: 5
 - Classes of the subtype -
  list:
-  Int: 6 (100.00%)
-  total: 6
+  Int: 5 (100.00%)
+  total: 5
 -- On covariance only --
 - Specific covariance case explanations -
  list:
@@ -815,7 +814,7 @@ Warning: no source file for `base_simple3`
 	cnbna: number of accessible nullable attributes (inherited + local) -- nothing
 	  sum: 0
 --- Sends on Nullable Receiver ---
-Total number of sends: 19
+Total number of sends: 18
 Number of sends on a unsafe nullable receiver: 0 (0.00%)
 Number of sends on a safe nullable receiver: 0 (0.00%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
@@ -848,17 +847,17 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 	  std: 0.0
 	  sum: 17
 	mnlm: number of live methods in a mmodule
-	  avg: 14.0
-	  max: base_simple3 (14)
-	  min: base_simple3 (14)
-	  std: 0.0
-	  sum: 14
-	mnlmd: number of live method definitions in a mmodule
 	  avg: 16.0
 	  max: base_simple3 (16)
 	  min: base_simple3 (16)
 	  std: 0.0
 	  sum: 16
+	mnlmd: number of live method definitions in a mmodule
+	  avg: 18.0
+	  max: base_simple3 (18)
+	  min: base_simple3 (18)
+	  std: 0.0
+	  sum: 18
 	mnldd: number of dead method definitions in a mmodule
 	  avg: 0.0
 	  max: base_simple3 (0)
@@ -901,49 +900,49 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 	  sum: 0
 
  ## Callsites
-* 23 live callsites
+* 21 live callsites
 MMethodDef locally designated (by number of CallSites)
- population: 14
+ population: 12
  minimum value: 1
  maximum value: 10
- total value: 23
- average value: 1.64
+ total value: 21
+ average value: 1.75
  distribution:
-  <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
-  <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
+  <=1: sub-population=11 (91.66%); cumulated value=11 (52.38%)
+  <=16: sub-population=1 (8.33%); cumulated value=10 (47.61%)
  list:
-  base_simple3$Int$output: 10 (43.47%)
-  base_simple3$B$val: 1 (4.34%)
-  base_simple3$B$val=: 1 (4.34%)
-  base_simple3$Object$init: 1 (4.34%)
-  base_simple3$C$val2: 1 (4.34%)
+  base_simple3$Int$output: 10 (47.61%)
+  base_simple3$B$val: 1 (4.76%)
+  base_simple3$C$val2: 1 (4.76%)
+  base_simple3$C$val1: 1 (4.76%)
+  base_simple3$B$run: 1 (4.76%)
   ...
-  base_simple3$A$init: 1 (4.34%)
-  base_simple3$Sys$baz: 1 (4.34%)
-  base_simple3$Sys$bar: 1 (4.34%)
-  base_simple3$Sys$foo: 1 (4.34%)
-  base_simple3$C$init: 1 (4.34%)
+  base_simple3$A$defaultinit: 1 (4.76%)
+  base_simple3$Sys$baz: 1 (4.76%)
+  base_simple3$Sys$bar: 1 (4.76%)
+  base_simple3$Sys$foo: 1 (4.76%)
+  base_simple3$C$defaultinit: 1 (4.76%)
 MMethodDef possibly invoked at runtime (by number of CallSites)
- population: 14
+ population: 12
  minimum value: 1
  maximum value: 10
- total value: 23
- average value: 1.64
+ total value: 21
+ average value: 1.75
  distribution:
-  <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
-  <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
+  <=1: sub-population=11 (91.66%); cumulated value=11 (52.38%)
+  <=16: sub-population=1 (8.33%); cumulated value=10 (47.61%)
  list:
-  base_simple3$Int$output: 10 (43.47%)
-  base_simple3$B$val: 1 (4.34%)
-  base_simple3$B$val=: 1 (4.34%)
-  base_simple3$Object$init: 1 (4.34%)
-  base_simple3$C$val2: 1 (4.34%)
+  base_simple3$Int$output: 10 (47.61%)
+  base_simple3$B$val: 1 (4.76%)
+  base_simple3$C$val2: 1 (4.76%)
+  base_simple3$C$val1: 1 (4.76%)
+  base_simple3$B$run: 1 (4.76%)
   ...
-  base_simple3$A$init: 1 (4.34%)
-  base_simple3$Sys$baz: 1 (4.34%)
-  base_simple3$Sys$bar: 1 (4.34%)
-  base_simple3$Sys$foo: 1 (4.34%)
-  base_simple3$C$init: 1 (4.34%)
+  base_simple3$A$defaultinit: 1 (4.76%)
+  base_simple3$Sys$baz: 1 (4.76%)
+  base_simple3$Sys$bar: 1 (4.76%)
+  base_simple3$Sys$foo: 1 (4.76%)
+  base_simple3$C$defaultinit: 1 (4.76%)
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/

@@ -1353,29 +1353,6 @@ abstract class AbstractCompilerVisitor
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		if callsite.is_broken then return null
-		var initializers = callsite.mpropdef.initializers
-		if not initializers.is_empty then
-			var recv = arguments.first
-
-			var i = 1
-			for p in initializers do
-				if p isa MMethod then
-					var args = [recv]
-					for x in p.intro.msignature.mparameters do
-						args.add arguments[i]
-						i += 1
-					end
-					self.send(p, args)
-				else if p isa MAttribute then
-					self.write_attribute(p, recv, arguments[i])
-					i += 1
-				else abort
-			end
-			assert i == arguments.length
-
-			return self.send(callsite.mproperty, [recv])
-		end
-
 		return self.send(callsite.mproperty, arguments)
 	end
 
@@ -1412,7 +1389,7 @@ abstract class AbstractCompilerVisitor
 	# of runtime variables to use in the call.
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: RuntimeVariable, args: SequenceRead[AExpr]): Array[RuntimeVariable]
 	do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var msignature = mpropdef.msignature.as(not null)
 		var res = new Array[RuntimeVariable]
 		res.add(recv)
 
@@ -3709,6 +3686,31 @@ redef class AClassdef
 			if not mpropdef.is_intro then
 				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 			end
+			return
+		else if mclassdef.default_init == mpropdef then
+			var recv = arguments.first
+			var initializers = mpropdef.initializers
+			var no_init = false
+			if not initializers.is_empty and not mpropdef.is_old_style_init then
+				var i = 1
+				for p in initializers do
+					if p isa MMethod then
+						var args = [recv]
+						for x in p.intro.msignature.mparameters do
+							args.add arguments[i]
+							i += 1
+						end
+						v.send(p, args)
+						if p.intro.is_calling_init then no_init = true
+					else if p isa MAttribute then
+						v.write_attribute(p, recv, arguments[i])
+						i += 1
+					else abort
+				end
+				assert i == arguments.length
+
+			end
+			if not no_init then v.send(mclass.the_root_init_mmethod.as(not null), [recv])
 			return
 		else
 			abort

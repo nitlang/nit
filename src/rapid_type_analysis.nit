@@ -245,7 +245,6 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
-			# TODO? new_msignature
 			var sig = msignature
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do
@@ -261,8 +260,14 @@ class RapidTypeAnalysis
 
 			if npropdef isa AClassdef then
 				if mmethoddef.mproperty.is_root_init then
+					# Final init call
 					if not mmethoddef.is_intro then
 						self.add_super_send(v.receiver, mmethoddef)
+					end
+				else if mmethoddef.mclassdef.default_init == mmethoddef then
+					# default_init call
+					for i in mmethoddef.initializers do
+						if i isa MMethod then self.add_send(v.receiver, i)
 					end
 				else
 					npropdef.debug "cannot RTA {mmethoddef}"

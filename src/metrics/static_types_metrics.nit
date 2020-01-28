@@ -41,14 +41,6 @@ private class ATypeCounterVisitor
 
 	var typecount: Counter[MType]
 
-	# Get a new visitor on a classef to add type count in `typecount`.
-	init(modelbuilder: ModelBuilder, nclassdef: AClassdef, typecount: Counter[MType])
-	do
-		self.modelbuilder = modelbuilder
-		self.nclassdef = nclassdef
-		self.typecount = typecount
-	end
-
 	redef fun visit(n)
 	do
 		if n isa AAnnotation then return

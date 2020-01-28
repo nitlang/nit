@@ -255,7 +255,7 @@ redef class AError
 
     init init_error(message: String, loc: Location)
     do
-		init(loc)
+		self.location = loc
 		self.message = message
     end
 end

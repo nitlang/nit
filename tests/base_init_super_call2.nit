@@ -40,7 +40,10 @@ end
 
 class C1
 	super A
-	init(j: Int) do
+	init(j: Int)
+	is
+		old_style_init
+	do
 		super
 		j.output
 	end
@@ -48,7 +51,10 @@ end
 
 class D1
 	super A
-	init(j: Int) do
+	init(j: Int)
+	is
+		old_style_init
+	do
 		super
 		j.output
 	end
@@ -56,7 +62,10 @@ end
 
 class E1
 	super A
-	init(j: Bool) do
+	init(j: Bool)
+	is
+		old_style_init
+	do
 		super(8)#alt4#super
 		j.output
 	end
@@ -64,7 +73,10 @@ end
 
 class C2
 	super A
-	init(j: Int) do
+	init(j: Int)
+	is
+		old_style_init
+	do
 		super(j)
 		j.output
 	end
@@ -72,7 +84,10 @@ end
 
 class D2
 	super A
-	init(j: Int) do
+	init(j: Int)
+	is
+		old_style_init
+	do
 		super(j)
 		j.output
 	end
@@ -80,7 +95,10 @@ end
 
 class E2
 	super A
-	init(j: Bool) do
+	init(j: Bool)
+	is
+		old_style_init
+	do
 		super(11)#alt5#super(j)
 		j.output
 	end
@@ -88,7 +106,10 @@ end
 
 class C3
 	super A
-	init(j: Int) do
+	init(j: Int)
+	is
+		old_style_init
+	do
 		super(j)#alt6#
 		j.output
 	end
@@ -96,7 +117,10 @@ end
 
 class D3
 	super A
-	init(j: Int) do
+	init(j: Int)
+	is
+		old_style_init
+	do
 		super(j)#alt6#
 		j.output
 	end
@@ -104,7 +128,10 @@ end
 
 class E3
 	super A
-	init(j: Bool) do
+	init(j: Bool)
+	is
+		old_style_init
+	do
 		super(14)#alt6#
 		j.output
 	end
@@ -112,7 +139,10 @@ end
 
 class F1
 	super A
-	init(j: Int, k: Bool) do
+	init(j: Int, k: Bool)
+	is
+		old_style_init
+	do
 		super
 		j.output
 	end
@@ -120,7 +150,10 @@ end
 
 class F2
 	super A
-	init(j: Int, k: Bool) do
+	init(j: Int, k: Bool)
+	is
+		old_style_init
+	do
 		super(j)#alt6#
 		j.output
 	end

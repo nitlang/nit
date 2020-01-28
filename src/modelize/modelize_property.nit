@@ -66,10 +66,9 @@ redef class ModelBuilder
 			toolcontext.run_phases_on_npropdef(res)
 			return res
 		end
-		if mpropdef isa MMethodDef and mpropdef.mproperty.is_root_init then
-			res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
-			if res != null then return res
-		end
+		# Fall back to the class node if any.
+		res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
+		if res != null then return res
 		return null
 	end
 
@@ -150,7 +149,11 @@ redef class ModelBuilder
 		var mclassdef = nclassdef.mclassdef.as(not null)
 
 		# Are we a refinement
-		if not mclassdef.is_intro then return
+		if not mclassdef.is_intro then
+			# Set the default_init of the mclassdef with the intro default_init
+			mclassdef.default_init = mclassdef.mclass.intro.default_init
+			return
+		end
 
 		# Look for the init in Object, or create it
 		if mclassdef.mclass.name == "Object" and the_root_init_mmethod == null then
@@ -161,11 +164,9 @@ redef class ModelBuilder
 			var mparameters = new Array[MParameter]
 			var msignature = new MSignature(mparameters, null)
 			mpropdef.msignature = msignature
-			mpropdef.new_msignature = msignature
 			mprop.is_init = true
 			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
 			the_root_init_mmethod = mprop
-			return
 		end
 
 		# Is there already a constructor defined?
@@ -176,13 +177,15 @@ redef class ModelBuilder
 			if mpropdef.mproperty.is_root_init then
 				assert defined_init == null
 				defined_init = mpropdef
-			else if mpropdef.mproperty.name == "init" then
-				# An explicit old-style init named "init", so return
+			else if mpropdef.name == "defaultinit" then
 				return
 			end
 		end
 
-		if not nclassdef isa AStdClassdef then return
+		if mclassdef.default_init != null then return
+
+		# If the class is not AStdClassdef or it's an enum just return. No defaultinit is need.
+		if not nclassdef isa AStdClassdef or nclassdef.n_classkind isa AEnumClasskind then return
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
@@ -194,7 +197,6 @@ redef class ModelBuilder
 				if mpropdef == null then return # Skip broken method
 				var sig = mpropdef.msignature
 				if sig == null then continue # Skip broken method
-
 				mparameters.add_all sig.mparameters
 				initializers.add(mpropdef.mproperty)
 				mpropdef.mproperty.is_autoinit = true
@@ -238,10 +240,13 @@ redef class ModelBuilder
 		if the_root_init_mmethod == null then return
 
 		# Look for most-specific new-stype init definitions
-		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
-		if spropdefs.is_empty then
-			toolcontext.error(nclassdef.location, "Error: `{mclassdef}` does not specialize `{the_root_init_mmethod.intro_mclassdef}`. Possible duplication of the root class `Object`?")
-			return
+		var spropdefs = new ArraySet[MMethodDef]
+
+		for x in mclassdef.get_direct_supermtype do
+			var y = x.mclass.intro.default_init
+			if y == null then continue
+			if y.is_broken or y.msignature == null then return
+			spropdefs.add y
 		end
 
 		# Look at the autoinit class-annotation
@@ -295,13 +300,29 @@ redef class ModelBuilder
 					abort
 				end
 			end
-		else
+		else if spropdefs.not_empty then
+			# Search for inherited manual defaultinit
+			var manual = null
+			for s in spropdefs do
+				if mpropdef2npropdef.has_key(s) then
+					self.toolcontext.info("{mclassdef} inherits a manual defaultinit {s}", 3)
+					manual = s
+				end
+			end
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
 			if spropdefs.length > 1 then
 				# part 1. find the longest list
 				for spd in spropdefs do
 					if spd.initializers.length > longest.initializers.length then longest = spd
+
+					if spd != manual and manual != null then
+						self.toolcontext.info("{mclassdef} conflict between manual defaultinit {manual} and automatic defaultinit {spd}.", 3)
+					end
+				end
+				# conflict with manual autoinit?
+				if longest != manual and manual != null then
+					self.error(nclassdef, "Error: conflict between manual defaultinit {manual} and automatic defaultinit {longest}.")
 				end
 				# part 2. compare
 				# Check for conflict in the order of initializers
@@ -334,41 +355,26 @@ redef class ModelBuilder
 				mparameters.clear
 				initializers.clear
 			else
-				# Can we just inherit?
-				if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
-					self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
-					mclassdef.mclass.root_init = longest
-					return
-				end
-
 				# Combine the inherited list to what is collected
 				if longest.initializers.length > 0 then
-					mparameters.prepend longest.new_msignature.mparameters
+					mparameters.prepend longest.msignature.mparameters
 					initializers.prepend longest.initializers
 				end
 			end
 		end
 
-		# If we already have a basic init definition, then setup its initializers
-		if defined_init != null then
-			defined_init.initializers.add_all(initializers)
+		# Create a specific new autoinit constructor
+		do
+			var mprop = new MMethod(mclassdef, "defaultinit", nclassdef.location, public_visibility)
+			mprop.is_init = true
+			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
+			mpropdef.initializers.add_all(initializers)
 			var msignature = new MSignature(mparameters, null)
-			defined_init.new_msignature = msignature
-			self.toolcontext.info("{mclassdef} extends its basic constructor signature to {defined_init}{msignature}", 3)
-			mclassdef.mclass.root_init = defined_init
-			return
+			mpropdef.msignature = msignature
+			mclassdef.default_init = mpropdef
+			self.toolcontext.info("{mclassdef} gets a free auto constructor `{mpropdef}{msignature}`. {spropdefs}", 3)
+			mclassdef.mclass.the_root_init_mmethod = the_root_init_mmethod
 		end
-
-		# Else create the local implicit basic init definition
-		var mprop = the_root_init_mmethod
-		var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-		mpropdef.has_supercall = true
-		mpropdef.initializers.add_all(initializers)
-		var msignature = new MSignature(mparameters, null)
-		mpropdef.new_msignature = msignature
-		mpropdef.msignature = new MSignature(new Array[MParameter], null) # always an empty real signature
-		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
-		mclassdef.mclass.root_init = mpropdef
 	end
 
 	# Check the visibility of `mtype` as an element of the signature of `mpropdef`.
@@ -504,11 +510,9 @@ end
 
 redef class MClass
 	# The base init of the class.
-	# Used to get the common new_msignature and initializers
 	#
-	# TODO: Where to put this information is not clear because unlike other
-	# informations, the initialisers are stable in a same class.
-	var root_init: nullable MMethodDef = null
+	# TODO: merge with `root_init` and `ModelBuilder::the_root_init_mmethod` if possible
+	var the_root_init_mmethod: nullable MMethod = null
 end
 
 redef class MClassDef
@@ -785,10 +789,16 @@ redef class AMethPropdef
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
+		var is_old_style_init = false
 		if amethodid == null then
 			if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
+				var old_style_annot = get_single_annotation("old_style_init", modelbuilder)
+				if  old_style_annot != null or self.n_signature.n_params.not_empty then
+					name = "defaultinit"
+					if old_style_annot != null then is_old_style_init = true
+				end
 			else if n_kwnew != null then
 				name = "new"
 				name_node = n_kwnew
@@ -822,7 +832,7 @@ redef class AMethPropdef
 
 		var look_like_a_root_init = look_like_a_root_init(modelbuilder, mclassdef)
 		var mprop: nullable MMethod = null
-		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
+		if not is_init or n_kwredef != null or look_like_a_root_init then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
 		if mprop == null and look_like_a_root_init then
 			mprop = modelbuilder.the_root_init_mmethod
 			var nb = n_block
@@ -867,6 +877,15 @@ redef class AMethPropdef
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
+		if mpropdef.name == "defaultinit" and mclassdef.is_intro then
+			assert mclassdef.default_init == null
+			mpropdef.is_old_style_init = is_old_style_init
+			mclassdef.default_init = mpropdef
+			# Set the initializers with the mproperty.
+			# This point is need when a super class define this own default_init and inherited class use the default_init generated automaticlely.
+			mpropdef.initializers.add mprop
+			mpropdef.is_calling_init = true
+		end
 
 		set_doc(mpropdef, modelbuilder)
 
@@ -887,16 +906,6 @@ redef class AMethPropdef
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
-
-		if mproperty.is_root_init and not mclassdef.is_intro then
-			var root_init = mclassdef.mclass.root_init
-			if root_init != null then
-				# Inherit the initializers by refinement
-				mpropdef.new_msignature = root_init.new_msignature
-				assert mpropdef.initializers.is_empty
-				mpropdef.initializers.add_all root_init.initializers
-			end
-		end
 
 		var accept_special_last_parameter = self.n_methid == null or self.n_methid.accept_special_last_parameter
 		var return_is_mandatory = self.n_methid != null and self.n_methid.return_is_mandatory

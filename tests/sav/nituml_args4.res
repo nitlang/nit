@@ -12,31 +12,31 @@ digraph G {
 					fontsize = 8
 				]
 Object [
- label = "{interface\nObject||+ object_id(): Int\l+ is_same_type(other: Object): Bool\l+ is_same_instance(other: nullable Object): Bool\l+ ==(other: nullable Object): Bool\l+ !=(other: nullable Object): Bool\l+ output()\l+ output_class_name()\l+ hash(): Int\l+ sys(): Sys\l+ init()\l}"
+ label = "{interface\nObject||+ object_id(): Int\l+ is_same_type(other: Object): Bool\l+ is_same_instance(other: nullable Object): Bool\l+ ==(other: nullable Object): Bool\l+ !=(other: nullable Object): Bool\l+ output()\l+ output_class_name()\l+ hash(): Int\l+ sys(): Sys\l+ init()\l+ defaultinit()\l}"
 ]
 
 Sys [
- label = "{Sys||+ main()\l+ run()\l+ errno(): Int\l+ exit(exit_value: Int)\l+ is_windows(): Bool\l}"
+ label = "{Sys||+ main()\l+ run()\l+ errno(): Int\l+ exit(exit_value: Int)\l+ is_windows(): Bool\l+ defaultinit()\l}"
 ]
 Object -> Sys [dir=back arrowtail=open style=dashed];
 
 Comparable [
- label = "{interface\nComparable||+ \<(other: OTHER): Bool\l+ \<=(other: OTHER): Bool\l+ \>=(other: OTHER): Bool\l+ \>(other: OTHER): Bool\l+ \<=\>(other: OTHER): Int\l+ is_between(c: OTHER, d: OTHER): Bool\l+ max(other: OTHER): OTHER\l+ min(c: OTHER): OTHER\l}"
+ label = "{interface\nComparable||+ \<(other: OTHER): Bool\l+ \<=(other: OTHER): Bool\l+ \>=(other: OTHER): Bool\l+ \>(other: OTHER): Bool\l+ \<=\>(other: OTHER): Int\l+ is_between(c: OTHER, d: OTHER): Bool\l+ max(other: OTHER): OTHER\l+ min(c: OTHER): OTHER\l+ defaultinit()\l}"
 ]
 Object -> Comparable [dir=back arrowtail=open style=dashed];
 
 Discrete [
- label = "{interface\nDiscrete||+ successor(i: Int): OTHER\l+ predecessor(i: Int): OTHER\l+ distance(d: OTHER): Int\l}"
+ label = "{interface\nDiscrete||+ successor(i: Int): OTHER\l+ predecessor(i: Int): OTHER\l+ distance(d: OTHER): Int\l+ defaultinit()\l}"
 ]
 Comparable -> Discrete [dir=back arrowtail=open style=dashed];
 
 Cloneable [
- label = "{interface\nCloneable||+ clone(): SELF\l}"
+ label = "{interface\nCloneable||+ clone(): SELF\l+ defaultinit()\l}"
 ]
 Object -> Cloneable [dir=back arrowtail=open style=dashed];
 
 Numeric [
- label = "{interface\nNumeric||+ +(i: OTHER): OTHER\l+ -(i: OTHER): OTHER\l+ unary -(): OTHER\l+ *(i: OTHER): OTHER\l+ /(i: OTHER): OTHER\l+ to_i(): Int\l+ to_f(): Float\l+ to_b(): Byte\l+ is_zero(): Bool\l+ zero(): OTHER\l+ value_of(val: Numeric): OTHER\l}"
+ label = "{interface\nNumeric||+ +(i: OTHER): OTHER\l+ -(i: OTHER): OTHER\l+ unary -(): OTHER\l+ *(i: OTHER): OTHER\l+ /(i: OTHER): OTHER\l+ to_i(): Int\l+ to_f(): Float\l+ to_b(): Byte\l+ is_zero(): Bool\l+ zero(): OTHER\l+ value_of(val: Numeric): OTHER\l+ defaultinit()\l}"
 ]
 Comparable -> Numeric [dir=back arrowtail=open style=dashed];
 
@@ -68,22 +68,22 @@ Char [
 Discrete -> Char [dir=back arrowtail=open style=dashed];
 
 Pointer [
- label = "{Pointer||+ nul(): Pointer\l+ address_is_null(): Bool\l+ free()\l}"
+ label = "{Pointer||+ nul(): Pointer\l+ address_is_null(): Bool\l+ free()\l+ defaultinit()\l}"
 ]
 Object -> Pointer [dir=back arrowtail=open style=dashed];
 
 Task [
- label = "{interface\nTask||+ main()\l}"
+ label = "{interface\nTask||+ main()\l+ defaultinit()\l}"
 ]
 Object -> Task [dir=back arrowtail=open style=dashed];
 
 A [
- label = "{A||+ pubA(a: A)\l# proA(a: A)\l+ pubA2(): A\l# proA2(): A\l+ vpubA(): nullable A\l+ vpubA=(vpubA: nullable A)\l# vproA(): nullable A\l# vproA=(vproA: nullable A)\l+ vpubA2(): A\l+ vpubA2=(vpubA2: A)\l# vproA2(): A\l# vproA2=(vproA2: A)\l}"
+ label = "{A||+ pubA(a: A)\l# proA(a: A)\l+ pubA2(): A\l# proA2(): A\l+ vpubA(): nullable A\l+ vpubA=(vpubA: nullable A)\l# vproA(): nullable A\l# vproA=(vproA: nullable A)\l+ vpubA2(): A\l+ vpubA2=(vpubA2: A)\l# vproA2(): A\l# vproA2=(vproA2: A)\l+ defaultinit()\l}"
 ]
 Object -> A [dir=back arrowtail=open style=dashed];
 
 C [
- label = "{C||}"
+ label = "{C||+ defaultinit()\l}"
 ]
 Object -> C [dir=back arrowtail=open style=dashed];
 

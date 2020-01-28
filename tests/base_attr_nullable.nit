@@ -26,7 +26,6 @@ end
 
 class Integer
 	var val: Int
-	init(val: Int) do _val = val
 	fun output do _val.output
 end
 

@@ -69,6 +69,51 @@
 			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
 		}
 	}, {
+		"name": "defaultinit",
+		"namespace": [{
+			"name": "test_prog",
+			"synopsis": "Test program for model tools."
+		}, "::", {
+			"name": "Career",
+			"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+		}, "::", {
+			"name": "defaultinit"
+		}],
+		"class_name": "MMethod",
+		"full_name": "test_prog::Career::defaultinit",
+		"visibility": "public",
+		"modifiers": ["init"],
+		"is_init": true,
+		"msignature": {
+			"arity": 3,
+			"mparameters": [{
+				"is_vararg": false,
+				"name": "strength_bonus",
+				"mtype": {
+					"name": "Int",
+					"synopsis": "Some services about Integers.",
+					"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+				}
+			}, {
+				"is_vararg": false,
+				"name": "endurance_bonus",
+				"mtype": {
+					"name": "Int",
+					"synopsis": "Some services about Integers.",
+					"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+				}
+			}, {
+				"is_vararg": false,
+				"name": "intelligence_bonus",
+				"mtype": {
+					"name": "Int",
+					"synopsis": "Some services about Integers.",
+					"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+				}
+			}],
+			"return_mtype": null
+		}
+	}, {
 		"name": "endurance_bonus",
 		"namespace": [{
 			"name": "test_prog",

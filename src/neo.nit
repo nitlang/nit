@@ -724,7 +724,7 @@ class NeoModel
 			var rank = 0
 			for mparameter in mtype.mparameters do
 				names.add mparameter.name
-				var pnode = mparameter_node(mparameter)
+				var pnode = to_node(mparameter)
 				pnode["rank"] = rank
 				node.out_edges.add(new NeoEdge(node, "PARAMETER", pnode))
 				rank += 1

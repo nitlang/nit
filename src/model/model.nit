@@ -778,8 +778,43 @@ class MClassDef
 	# All property introductions and redefinitions in `self` (not inheritance).
 	var mpropdefs = new Array[MPropDef]
 
+	# The special default_init constructor
+	var default_init: nullable MMethodDef = null is writable
+
 	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
 	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
+
+	# Return the direct parent mtype of `self`
+	# Exemple
+	# ~~~nitish
+	# module 1
+	#
+	#	class A
+	#	class B
+	#		super A
+	#
+	# module 2
+	#
+	#	redef class A
+	#	class C
+	#		super B
+	#
+	# mclassdef_C.get_direct_supermtype == [B]
+	# ~~~~
+	fun get_direct_supermtype: Collection[MClassType]
+	do
+		# Get the potentiel direct parents
+		var parents = in_hierarchy.direct_greaters
+		# Stock the potentiel direct parents
+		var res = supertypes
+		for parent in parents do
+			# remove all super parents of the potentiel direct parents
+			res.remove_all(parent.supertypes)
+			# if the length of the potentiel direct parent equal 1 break
+			if res.length == 1 then break
+		end
+		return res
+	end
 
 	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 end
@@ -2622,18 +2657,20 @@ class MMethodDef
 	# The signature attached to the property definition
 	var msignature: nullable MSignature = null is writable
 
-	# The signature attached to the `new` call on a root-init
-	# This is a concatenation of the signatures of the initializers
-	#
-	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
-	var new_msignature: nullable MSignature = null is writable
-
 	# List of initialisers to call in root-inits
 	#
 	# They could be setters or attributes
-	#
-	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
 	var initializers = new Array[MProperty]
+
+	# Does the method take the responsibility to call `init`?
+	#
+	# If the method is used as an initializer, then
+	# using this information prevents to call `init` twice.
+	var is_calling_init = false is writable
+
+	# Does the method is a old_style_init?
+	#
+	var is_old_style_init = false is writable
 
 	# Is the method definition abstract?
 	var is_abstract: Bool = false is writable

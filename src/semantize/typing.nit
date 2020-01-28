@@ -315,13 +315,22 @@ private class TypeVisitor
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if name == "new" and mproperty == null then
-			name = "init"
+			name = "defaultinit"
 			mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+			if mproperty == null then
+				name = "init"
+				mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+			end
 		end
 
 		if mproperty == null then
 			if recv_is_self then
-				self.modelbuilder.error(node, "Error: method or variable `{name}` unknown in `{recvtype}`.")
+				# FIXME This test was added to display a more explicit error when a potential duplication of root object class.
+				if name == "init" then
+					self.modelbuilder.error(node, "Possible duplication of the root class `Object`")
+				else
+					self.modelbuilder.error(node, "Error: method or variable `{name}` unknown in `{recvtype}`.")
+				end
 			else if recvtype.need_anchor then
 				self.modelbuilder.error(node, "Error: method `{name}` does not exists in `{recvtype}: {unsafe_type}`.")
 			else
@@ -395,7 +404,7 @@ private class TypeVisitor
 	# The `build_callsite_by_propdef` builds the callsite directly with the `mprodef` passed in argument.
 	fun build_callsite_by_propdef(node: ANode, recvtype: MType, mpropdef: MMethodDef, recv_is_self: Bool): nullable CallSite
 	do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature
+		var msignature = mpropdef.msignature
 		if msignature == null then return null # skip error
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
@@ -1774,7 +1783,7 @@ redef class ARangeExpr
 		# get the constructor
 		var callsite
 		if self isa ACrangeExpr then
-			callsite = v.build_callsite_by_name(self, mtype, "init", false)
+			callsite = v.build_callsite_by_name(self, mtype, "defaultinit", false)
 		else if self isa AOrangeExpr then
 			callsite = v.build_callsite_by_name(self, mtype, "without_last", false)
 		else
@@ -2156,7 +2165,7 @@ redef class ABraReassignExpr
 end
 
 redef class AInitExpr
-	redef fun property_name do return "init"
+	redef fun property_name do if n_args.n_exprs.is_empty then return "init" else return "defaultinit"
 	redef fun property_node do return n_kwinit
 	redef fun compute_raw_arguments do return n_args.to_a
 end
@@ -2325,7 +2334,7 @@ redef class ASuperExpr
 			return
 		end
 
-		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
+		var msignature = superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
 		var callsite = new CallSite(hot_location, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)

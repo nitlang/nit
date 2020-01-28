@@ -181,7 +181,7 @@ class TestCommandsModel
 		var cmd = new CmdFeatures(test_model, mentity_name = "test_prog::Career")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 10
+		assert cmd.results.as(not null).length == 11
 	end
 
 	fun test_cmd_features_with_filter_attribute is test do
@@ -189,7 +189,7 @@ class TestCommandsModel
 		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::Career")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 7
+		assert cmd.results.as(not null).length == 8
 	end
 
 	fun test_cmd_features_with_filter_public is test do
@@ -197,7 +197,7 @@ class TestCommandsModel
 		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::Career")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 4
+		assert cmd.results.as(not null).length == 5
 	end
 
 	fun test_cmd_features_with_filter_match is test do
@@ -214,7 +214,7 @@ class TestCommandsModel
 		var cmd = new CmdFeatures(test_model, filter, mentity_name = "test_prog::TestGame")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 3
+		assert cmd.results.as(not null).length == 4
 	end
 
 	fun test_cmd_features_no_features is test do
@@ -229,7 +229,7 @@ class TestCommandsModel
 		var cmd = new CmdLinearization(test_model, test_main, mentity_name = "init")
 		var res = cmd.init_command
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 10
+		assert cmd.results.as(not null).length == 9
 	end
 
 	fun test_cmd_lin_no_lin is test do

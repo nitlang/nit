@@ -205,7 +205,7 @@ class TestCommandsHttp
 		var cmd = new CmdFeatures(test_model)
 		var res = cmd.http_init(req)
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 3
+		assert cmd.results.as(not null).length == 4
 	end
 
 	# CmdLinearization
@@ -215,7 +215,7 @@ class TestCommandsHttp
 		var cmd = new CmdLinearization(test_model, test_main)
 		var res = cmd.http_init(req)
 		assert res isa CmdSuccess
-		assert cmd.results.as(not null).length == 10
+		assert cmd.results.as(not null).length == 9
 	end
 
 	fun test_cmd_http_lin_no_lin is test do
