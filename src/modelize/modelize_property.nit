@@ -1181,6 +1181,10 @@ redef class AAttrPropdef
 	# Could be through `n_expr`, `n_block` or `is_lazy`
 	var has_value = false
 
+	# The name of the attribute
+	# Note: The name of the attribute is in reality the name of the mreadpropdef
+	var name: String = n_id2.text is lazy
+
 	# The guard associated to a lazy attribute.
 	# Because some engines does not have a working `isset`,
 	# this additional attribute is used to guard the lazy initialization.
@@ -1195,48 +1199,14 @@ redef class AAttrPropdef
 	redef fun build_property(modelbuilder, mclassdef)
 	do
 		var mclass = mclassdef.mclass
-		var nid2 = n_id2
-		var name = nid2.text
 
 		var atabstract = self.get_single_annotation("abstract", modelbuilder)
-		if atabstract == null then
-			if not mclass.kind.need_init then
-				modelbuilder.error(self, "Error: attempt to define attribute `{name}` in the {mclass.kind} `{mclass}`.")
-			end
 
-			var mprop = new MAttribute(mclassdef, "_" + name, self.location, private_visibility)
-			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
-			self.mpropdef = mpropdef
-			modelbuilder.mpropdef2npropdef[mpropdef] = self
-		end
+		if atabstract == null then build_attribute_property(modelbuilder, mclassdef)
 
-		var readname = name
-		var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
-		if mreadprop == null then
-			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-			mreadprop = new MMethod(mclassdef, readname, self.location, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then
-				mreadprop.is_broken = true
-				return
-			end
-		else
-			if mreadprop.is_broken then return
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
-			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
-		end
-		mclassdef.mprop2npropdef[mreadprop] = self
+		# Construction of the read property. If it's not correctly built just return.
+		if not build_read_property(modelbuilder, mclassdef) then return
 
-		var attr_mpropdef = mpropdef
-		if attr_mpropdef != null then
-			mreadprop.getter_for = attr_mpropdef.mproperty
-			attr_mpropdef.mproperty.getter = mreadprop
-		end
-
-		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
-		self.mreadpropdef = mreadpropdef
-		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
-		set_doc(mreadpropdef, modelbuilder)
-		if mpropdef != null then mpropdef.mdoc = mreadpropdef.mdoc
 		if atabstract != null then mreadpropdef.is_abstract = true
 
 		has_value = n_expr != null or n_block != null
@@ -1259,29 +1229,8 @@ redef class AAttrPropdef
 			end
 		end
 
-		var atlazy = self.get_single_annotation("lazy", modelbuilder)
-		var atlateinit = self.get_single_annotation("lateinit", modelbuilder)
-		if atlazy != null or atlateinit != null then
-			if atlazy != null and atlateinit != null then
-				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `lateinit`.")
-				return
-			end
-			if not has_value then
-				if atlazy != null then
-					modelbuilder.error(atlazy, "Error: `lazy` attributes need a value.")
-				else if atlateinit != null then
-					modelbuilder.error(atlateinit, "Error: `lateinit` attributes need a value.")
-				end
-				has_value = true
-				return
-			end
-			is_lazy = true
-			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, self.location, none_visibility)
-			mlazyprop.is_fictive = true
-			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
-			mlazypropdef.is_fictive = true
-			self.mlazypropdef = mlazypropdef
-		end
+		# Construction of the read property. If it's not correctly built just return.
+		if not build_lazy_property(modelbuilder, mclassdef) then return
 
 		var atoptional = self.get_single_annotation("optional", modelbuilder)
 		if atoptional != null then
@@ -1304,49 +1253,9 @@ redef class AAttrPropdef
 			modelbuilder.advice(self, "attr-in-refinement", "Warning: attributes in refinement need a value or `noautoinit`.")
 		end
 
-		var writename = name + "="
-		var atwritable = self.get_single_annotation("writable", modelbuilder)
-		if atwritable != null then
-			if not atwritable.n_args.is_empty then
-				writename = atwritable.arg_as_id(modelbuilder) or else writename
-			end
-		end
-		var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
-		var nwkwredef: nullable Token = null
-		if atwritable != null then nwkwredef = atwritable.n_kwredef
-		if mwriteprop == null then
-			var mvisibility
-			if atwritable != null then
-				mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
-			else
-				mvisibility = mreadprop.visibility
-				# By default, use protected visibility at most
-				if mvisibility > protected_visibility then mvisibility = protected_visibility
-			end
-			mwriteprop = new MMethod(mclassdef, writename, self.location, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then
-				mwriteprop.is_broken = true
-				return
-			end
-			mwriteprop.deprecation = mreadprop.deprecation
-		else
-			if mwriteprop.is_broken then return
-			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
-			if atwritable != null then
-				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
-			end
-		end
-		mclassdef.mprop2npropdef[mwriteprop] = self
+		# Construction of the read property. If it's not correctly built just return.
+		if not build_write_property(modelbuilder, mclassdef, false) then return
 
-		if attr_mpropdef != null then
-			mwriteprop.setter_for = attr_mpropdef.mproperty
-			attr_mpropdef.mproperty.setter = mwriteprop
-		end
-
-		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
-		self.mwritepropdef = mwritepropdef
-		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
-		mwritepropdef.mdoc = mreadpropdef.mdoc
 		if atabstract != null then mwritepropdef.is_abstract = true
 
 		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
@@ -1364,6 +1273,146 @@ redef class AAttrPropdef
 			# By default, abstract attribute are not autoinit
 			noinit = true
 		end
+	end
+
+	# Build the attribute property
+	fun build_attribute_property(modelbuilder: ModelBuilder, mclassdef: MClassDef)
+	do
+		var mclass = mclassdef.mclass
+		var attribute_name = "_" + name
+
+		if not mclass.kind.need_init then
+			modelbuilder.error(self, "Error: attempt to define attribute `{name}` in the {mclass.kind} `{mclass}`.")
+		end
+		var mprop = new MAttribute(mclassdef, "_" + name, self.location, private_visibility)
+		var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
+		self.mpropdef = mpropdef
+		modelbuilder.mpropdef2npropdef[mpropdef] = self
+	end
+
+	# Build the read method property to get the value of the attribute
+	# Return `true` if the property was correctly created else return `false`.
+	# Warning the signature of the property is not set. This step is done by `build_signature`.
+	fun build_read_property(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
+	do
+		var mclass = mclassdef.mclass
+
+		var readname = name
+		var mreadprop = modelbuilder.try_get_mproperty_by_name(self, mclassdef, readname).as(nullable MMethod)
+		if mreadprop == null then
+			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
+			mreadprop = new MMethod(mclassdef, readname, self.location, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then
+				mreadprop.is_broken = true
+				return false
+			end
+		else
+			if mreadprop.is_broken then return false
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return false
+			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
+		end
+		mclassdef.mprop2npropdef[mreadprop] = self
+
+		var attr_mpropdef = mpropdef
+		if attr_mpropdef != null then
+			mreadprop.getter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.getter = mreadprop
+		end
+
+		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
+		self.mreadpropdef = mreadpropdef
+		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+		set_doc(mreadpropdef, modelbuilder)
+		if mpropdef != null then mpropdef.mdoc = mreadpropdef.mdoc
+
+		return true
+	end
+
+	# Build the write method property to set the attribute value
+	# Return `true` if the property was correctly created else return `false`.
+	# Warning the signature of the property is not set.
+	fun build_write_property(modelbuilder: ModelBuilder, mclassdef: MClassDef, is_same_visibility: Bool): Bool
+	do
+		var mclass = mclassdef.mclass
+
+		var writename = name + "="
+		var atwritable = self.get_single_annotation("writable", modelbuilder)
+		if atwritable != null then
+			if not atwritable.n_args.is_empty then
+				writename = atwritable.arg_as_id(modelbuilder) or else writename
+			end
+		end
+		var mwriteprop = modelbuilder.try_get_mproperty_by_name(self, mclassdef, writename).as(nullable MMethod)
+		var nwkwredef: nullable Token = null
+		if atwritable != null then nwkwredef = atwritable.n_kwredef
+		if mwriteprop == null then
+			var mvisibility
+			if atwritable != null then
+				mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
+			else
+				mvisibility = mreadpropdef.mproperty.visibility
+				# By default, use protected visibility at most
+				if mvisibility > protected_visibility and not is_same_visibility then mvisibility = protected_visibility
+			end
+			mwriteprop = new MMethod(mclassdef, writename, self.location, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then
+				mwriteprop.is_broken = true
+				return false
+			end
+			mwriteprop.deprecation = mreadpropdef.mproperty.deprecation
+		else
+			if mwriteprop.is_broken then return false
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return false
+			if atwritable != null then
+				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
+			end
+		end
+		mclassdef.mprop2npropdef[mwriteprop] = self
+
+		var attr_mpropdef = mpropdef
+		if attr_mpropdef != null then
+			mwriteprop.setter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.setter = mwriteprop
+		end
+
+		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
+		self.mwritepropdef = mwritepropdef
+		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+		mwritepropdef.mdoc = mreadpropdef.mdoc
+
+		return true
+	end
+
+	# Build the lazy attribute property
+	# Return `true` if the property was correctly created else return `false`.
+	fun build_lazy_property(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
+	do
+		var mclass = mclassdef.mclass
+
+		var atlazy = self.get_single_annotation("lazy", modelbuilder)
+		var atlateinit = self.get_single_annotation("lateinit", modelbuilder)
+		if atlazy != null or atlateinit != null then
+			if atlazy != null and atlateinit != null then
+				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `lateinit`.")
+				return false
+			end
+			if not has_value then
+				if atlazy != null then
+					modelbuilder.error(atlazy, "Error: `lazy` attributes need a value.")
+				else if atlateinit != null then
+					modelbuilder.error(atlateinit, "Error: `lateinit` attributes need a value.")
+				end
+				has_value = true
+				return false
+			end
+			is_lazy = true
+			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, self.location, none_visibility)
+			mlazyprop.is_fictive = true
+			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
+			mlazypropdef.is_fictive = true
+			self.mlazypropdef = mlazypropdef
+		end
+		return true
 	end
 
 	redef fun build_signature(modelbuilder)
@@ -1421,29 +1470,42 @@ redef class AAttrPropdef
 			mpropdef.static_mtype = mtype
 		end
 
-		do
-			var msignature = new MSignature(new Array[MParameter], mtype)
-			mreadpropdef.msignature = msignature
-		end
+		build_read_signature
 
-		var mwritepropdef = self.mwritepropdef
-		if mwritepropdef != null then
-			var mwritetype = mtype
-			if is_optional then
-				mwritetype = mwritetype.as_nullable
-			end
-			var name: String
-			name = n_id2.text
-			var mparameter = new MParameter(name, mwritetype, false)
-			var msignature = new MSignature([mparameter], null)
-			mwritepropdef.msignature = msignature
-		end
+		if self.mwritepropdef != null then build_write_signature
 
 		var mlazypropdef = self.mlazypropdef
 		if mlazypropdef != null then
 			mlazypropdef.static_mtype = mmodule.bool_type
 		end
 		check_repeated_types(modelbuilder)
+	end
+
+	# Build the read method signature
+	# `except`: mreadpropdef != null
+	# `expect`: mtype != null
+	fun build_read_signature
+	is
+		expect(mreadpropdef != null and mtype != null)
+	do
+		var msignature = new MSignature(new Array[MParameter], mtype)
+		mreadpropdef.msignature = msignature
+	end
+
+	# Build the write method signature
+	# `except`: mwritepropdef != null
+	# `expect`: mtype != null
+	fun build_write_signature
+	is
+		expect(mwritepropdef != null and mtype != null)
+	do
+		var mwritetype = mtype.as(not null)
+		if is_optional then
+			mwritetype = mwritetype.as_nullable
+		end
+		var mparameter = new MParameter(name, mwritetype, false)
+		var msignature = new MSignature([mparameter], null)
+		mwritepropdef.msignature = msignature
 	end
 
 	# Detect the static type from the value assigned to the attribute `self`
