@@ -60,7 +60,7 @@ class ModelBuilder
 	# If no such a class exists, then null is returned.
 	# If more than one class exists, then an error on `anode` is displayed and null is returned.
 	# FIXME: add a way to handle class name conflict
-	fun try_get_mclass_by_name(anode: ANode, mmodule: MModule, name: String): nullable MClass
+	fun try_get_mclass_by_name(anode: nullable ANode, mmodule: MModule, name: String): nullable MClass
 	do
 		var classes = model.get_mclasses_by_name(name)
 		if classes == null then
@@ -112,7 +112,7 @@ class ModelBuilder
 	end
 
 	# Like `try_get_mclass_by_name` but display an error message when the class is not found
-	fun get_mclass_by_name(node: ANode, mmodule: MModule, name: String): nullable MClass
+	fun get_mclass_by_name(node: nullable ANode, mmodule: MModule, name: String): nullable MClass
 	do
 		var mclass = try_get_mclass_by_name(node, mmodule, name)
 		if mclass == null then
@@ -127,7 +127,7 @@ class ModelBuilder
 	# If no such a property exists, then null is returned.
 	# If more than one property exists, then an error on `anode` is displayed and null is returned.
 	# FIXME: add a way to handle property name conflict
-	fun try_get_mproperty_by_name2(anode: ANode, mmodule: MModule, mtype: MType, name: String): nullable MProperty
+	fun try_get_mproperty_by_name2(anode: nullable ANode, mmodule: MModule, mtype: MType, name: String): nullable MProperty
 	do
 		var props = self.model.get_mproperties_by_name(name)
 		if props == null then
@@ -209,7 +209,7 @@ class ModelBuilder
 
 
 	# Alias for try_get_mproperty_by_name2(anode, mclassdef.mmodule, mclassdef.mtype, name)
-	fun try_get_mproperty_by_name(anode: ANode, mclassdef: MClassDef, name: String): nullable MProperty
+	fun try_get_mproperty_by_name(anode: nullable ANode, mclassdef: MClassDef, name: String): nullable MProperty
 	do
 		return try_get_mproperty_by_name2(anode, mclassdef.mmodule, mclassdef.bound_mtype, name)
 	end
