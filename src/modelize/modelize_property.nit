@@ -53,6 +53,17 @@ redef class ModelBuilder
 		mpropdef2npropdef[mpropdef] = npropdef
 	end
 
+	# Associate a `nclassdef` with its `mclassdef`
+	#
+	# Be careful, this method is unsafe, no checking is done when it's used.
+	# The safe way to add mclass it's to use the `build_property`
+	#
+	# See `mclassdef2nclassdef`
+	fun unsafe_add_mclassdef2nclassdef(mclassdef: MClassDef, nclassdef: AClassdef)
+	do
+		mclassdef2nclassdef[mclassdef] = nclassdef
+	end
+
 	# Retrieve the associated AST node of a mpropertydef.
 	# This method is used to associate model entity with syntactic entities.
 	#
