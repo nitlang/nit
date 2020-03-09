@@ -49,7 +49,7 @@ private class TypeVisitor
 	var mpropdef: MPropDef
 
 	# Are warnings disabled ?
-	# By default the value is false to enable all warnings for typing.
+	# By default the value is false to enable all warning for typing.
 	var disable_warning = false is optional, writable
 
 	var selfvariable = new Variable("self")
@@ -897,7 +897,7 @@ redef class AMethPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # skip error
 
-		# Define if the warning are disabled
+		# Define if warnings are disabled
 		var warning = disable_warning
 		if warning == null then warning = false
 
@@ -968,7 +968,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mreadpropdef
 		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
-		# Define if the warning are disabled
+		# Define if warnings are disabled
 		var warning = disable_warning
 		if warning == null then warning = false
 
@@ -2031,6 +2031,15 @@ redef class ASendExpr
 		else
 			self.is_typed = true
 		end
+	end
+
+	# The entry point of typing analysis of ASendExpr.
+	fun do_typing(modelbuilder: ModelBuilder, visited_mpropdef: MPropDef)
+	do
+		var v = new TypeVisitor(modelbuilder, visited_mpropdef)
+		v.visit_stmt(self)
+		var post_visitor = new PostTypingVisitor(v)
+		post_visitor.enter_visit(self)
 	end
 
 	# The name of the property
