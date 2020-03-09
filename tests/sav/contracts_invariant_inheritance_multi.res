@@ -2,3 +2,4 @@ Runtime error: Assert 'invariant(bar >= 10)' failed (contracts_invariant_inherit
 16
 1.5
 1
+3.8
