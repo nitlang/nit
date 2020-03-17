@@ -7,6 +7,7 @@ services:
 
 variables:
   NEO4J_AUTH: none
+  POSTGRES_HOST_AUTH_METHOD: trust
 
 cache:
   paths:
