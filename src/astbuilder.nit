@@ -20,6 +20,7 @@ intrude import literal
 intrude import parser
 intrude import semantize::scope
 intrude import modelbuilder_base
+intrude import modelize_property
 
 # General factory to build semantic nodes in the AST of expressions
 class ASTBuilder
@@ -165,6 +166,41 @@ class ASTBuilder
 		return new ANotExpr.make(expr)
 	end
 
+	# Make a new attribute
+	fun make_attribute(name: String,
+					n_type: nullable AType,
+					n_visibility: nullable AVisibility,
+					initial_value: nullable AExpr,
+					n_block: nullable AExpr,
+					m_attributedef: nullable MAttributeDef,
+					m_setterdef: nullable MMethodDef,
+					m_getterdef: nullable MMethodDef): AAttrPropdef
+	do
+		return new AAttrPropdef.make(name, n_type, n_visibility, initial_value, n_block, m_attributedef, m_setterdef, m_getterdef)
+	end
+
+	# Make a new class (AStdClassdef)
+	fun make_class(mclassdef: nullable MClassDef,
+					n_visibility: nullable AVisibility,
+					n_formaldefs : Collection[AFormaldef],
+					n_extern_code_block : nullable AExternCodeBlock,
+					n_propdefs : Collection[APropdef],
+					n_classkind: nullable AClasskind): AStdClassdef
+	do
+		return new AStdClassdef.make(mclassdef, n_visibility, n_formaldefs, n_extern_code_block, n_propdefs, n_classkind)
+	end
+
+	fun make_var(variable: Variable, mtype: MType): AVarExpr
+	do
+		return new AVarExpr.make(variable, mtype)
+	end
+
+	# Make a call assignment i.e `a = 10`
+	fun make_call_assign(recv: AExpr, callsite: CallSite, n_args: nullable Collection[AExpr], n_value: AExpr): ACallAssignExpr
+	do
+		return new ACallAssignExpr.make(recv, callsite, n_args, n_value)
+	end
+
 	# Build a callsite to call the `mproperty` in the current method `caller_method`.
 	# `is_self_call` indicate if the method caller is a property of `self`
 	fun create_callsite(modelbuilder: ModelBuilder, caller_method : AMethPropdef, mproperty: MMethod, is_self_call: Bool): CallSite
@@ -262,6 +298,68 @@ class APlaceholderExpr
 	end
 end
 
+redef class ACallAssignExpr
+	private init make(recv: AExpr, callsite: CallSite, args: nullable Collection[AExpr], n_value: AExpr)
+	do
+		_callsite = callsite
+		_mtype = callsite.recv
+		_is_typed = true
+		var n_args = new AListExprs
+		if args != null then
+			n_args.n_exprs.add_all(args)
+		end
+		var n_qid = new AQid
+		n_qid.n_id = new TId
+		n_qid.n_id.text = callsite.mproperty.name
+		init_acallassignexpr(recv, n_qid, n_args, new TAssign, n_value)
+	end
+end
+
+redef class AStdClassdef
+	private init make(mclassdef: nullable MClassDef,
+					n_visibility: nullable AVisibility,
+					n_formaldefs : Collection[Object],
+					n_extern_code_block : nullable AExternCodeBlock,
+					n_propdefs : Collection[Object],
+					n_classkind: nullable AClasskind)
+	do
+		if n_visibility == null then n_visibility = new APublicVisibility
+		if n_classkind == null then n_classkind = new AConcreteClasskind.init_aconcreteclasskind(new TKwclass)
+		var n_qid = new AQclassid.init_aqclassid(null, new TClassid)
+		init_astdclassdef(null, null, n_visibility, n_classkind, n_qid, null, n_formaldefs, null, n_extern_code_block, n_propdefs, new TKwend)
+		_mclassdef = mclassdef
+		_mclass = mclassdef.mclass
+	end
+end
+
+redef class AAttrPropdef
+
+	# Create a new `AAttrPropdef`
+	# Note: By default if the `AVisibility` is not given the visibility is set to public
+	private init make(name: String,
+					n_type: nullable AType,
+					n_visibility: nullable AVisibility,
+					initial_value: nullable AExpr,
+					n_block: nullable AExpr,
+					m_attributedef: nullable MAttributeDef,
+					m_setterdef: nullable MMethodDef,
+					m_getterdef: nullable MMethodDef)
+	do
+		# Set the model type
+		if n_type != null then mtype = n_type.mtype
+		# Define the visibility default is public
+		if n_visibility == null then n_visibility = new APublicVisibility
+		init_aattrpropdef(null, null, n_visibility, new TKwvar, new TId, n_type, null, initial_value, null, null , n_block, null)
+		# Set the name of the attribute
+		_n_id2.text = name
+		_mpropdef = m_attributedef
+		_mreadpropdef = m_getterdef
+		_mwritepropdef = m_setterdef
+		if initial_value != null or n_block != null then has_value = true
+		if m_attributedef != null then self.location = m_attributedef.location
+	end
+end
+
 redef class ANotExpr
 	private init make(expr: AExpr)
 	do
@@ -318,6 +416,7 @@ redef class AMethPropdef
 		if n_visibility == null then n_visibility = new APublicVisibility
 		self.init_amethpropdef(null,tk_redef,n_visibility,new TKwmeth,null,null,null,n_methid,n_signature,n_annotations,n_extern_calls,n_extern_code_block,new TKwdo,n_block,new TKwend)
 		self.mpropdef = mmethoddef
+		if mpropdef != null then self.location = mmethoddef.location
 	end
 end
 
@@ -538,13 +637,6 @@ redef class ACallExpr
 	end
 end
 
-redef class AAsCastExpr
-	private init make(n_expr: AExpr, n_type: AType)
-	do
-		init_aascastexpr(n_expr, new TKwas , null , n_type, null)
-	end
-end
-
 redef class AAsNotnullExpr
 	private init make(n_expr: AExpr, t: nullable MType)
 	do
@@ -642,6 +734,20 @@ redef class AVarAssignExpr
 end
 
 redef class ASignature
+
+	init make_from_msignature(msignature: MSignature)
+	do
+		var nparams = new Array[AParam]
+		for mparam in msignature.mparameters do
+			var variable = new Variable(mparam.name)
+			variable.declared_type = mparam.mtype
+			n_params.add(new AParam.make(variable, new AType.make(mparam.mtype)))
+		end
+		var return_type = null
+		if msignature.return_mtype != null then return_type = new AType.make(msignature.return_mtype)
+		init_asignature(null, nparams, null, return_type)
+	end
+
 	redef fun clone: SELF
 	do
 		var ntype = n_type
@@ -655,6 +761,7 @@ redef class AParam
 	private init make(v: nullable Variable, t: nullable AType)
 	do
 		_n_id = new TId
+		if v != null then _n_id.text = v.name
 		_variable = v
 		_n_type = t
 	end
