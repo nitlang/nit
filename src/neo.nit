@@ -305,8 +305,8 @@ class NeoModel
 	# Collect all nodes from the current `model`.
 	private fun collect_model_nodes(model: Model): Collection[NeoNode] do
 		for mpackage in model.mpackages do
-			to_node(mpackage)
-			for mgroup in mpackage.mgroups do to_node(mgroup)
+			mpackage.to_node(nodes, model_name)
+			for mgroup in mpackage.mgroups do mgroup.to_node(nodes, model_name)
 		end
 		return nodes.values
 	end
@@ -328,22 +328,6 @@ class NeoModel
 	# Nodes associated with MEntities.
 	private var nodes = new HashMap[MEntity, NeoNode]
 
-	# Get the `NeoNode` associated with `mentity`.
-	# `mentities` are stored locally to avoid duplication.
-	fun to_node(mentity: MEntity): NeoNode do
-		if nodes.has_key(mentity) then return nodes[mentity]
-		if mentity isa MPackage then return mpackage_node(mentity)
-		if mentity isa MGroup then return mgroup_node(mentity)
-		if mentity isa MModule then return mmodule_node(mentity)
-		if mentity isa MClass then return mclass_node(mentity)
-		if mentity isa MClassDef then return mclassdef_node(mentity)
-		if mentity isa MProperty then return mproperty_node(mentity)
-		if mentity isa MPropDef then return mpropdef_node(mentity)
-		if mentity isa MType then return mtype_node(mentity)
-		if mentity isa MParameter then return mparameter_node(mentity)
-		abort
-	end
-
 	# Get the `MEntity` associated with `node`.
 	fun to_mentity(model: Model, node: NeoNode): MEntity do
 		if node.labels.has("MPackage") then return to_mpackage(model, node)
@@ -356,36 +340,6 @@ class NeoModel
 		if node.labels.has("MType") then return to_mtype(model, node)
 		if node.labels.has("MParameter") then return to_mparameter(model, node)
 		abort
-	end
-
-	# Make a new `NeoNode` based on `mentity`.
-	private fun make_node(mentity: MEntity): NeoNode do
-		var node = new NeoNode
-		nodes[mentity] = node
-		node.labels.add "MEntity"
-		node.labels.add model_name
-		node["name"] = mentity.name
-		if not mentity isa MSignature then
-			#FIXME: MSignature is a MEntity, but has no model :/
-			node["location"] = mentity.location.to_s
-		end
-		var mdoc = mentity.mdoc
-		if mdoc != null then
-			node["mdoc"] = new JsonArray.from(mdoc.content)
-			node["mdoc_location"] = mdoc.location.to_s
-		end
-		return node
-	end
-
-	# Build a `NeoNode` representing `mpackage`.
-	private fun mpackage_node(mpackage: MPackage): NeoNode do
-		var node = make_node(mpackage)
-		node.labels.add "MPackage"
-		var root = mpackage.root
-		if root != null then
-			node.out_edges.add(new NeoEdge(node, "ROOT", to_node(root)))
-		end
-		return node
 	end
 
 	# Build a new `MPackage` from a `node`.
@@ -402,24 +356,6 @@ class NeoModel
 		set_doc(node, mpackage)
 		mpackage.root = to_mgroup(model, node.out_nodes("ROOT").first)
 		return mpackage
-	end
-
-	# Build a `NeoNode` representing `mgroup`.
-	private fun mgroup_node(mgroup: MGroup): NeoNode do
-		var node = make_node(mgroup)
-		node.labels.add "MGroup"
-		var parent = mgroup.parent
-		node.out_edges.add(new NeoEdge(node, "PROJECT", to_node(mgroup.mpackage)))
-		if parent != null then
-			node.out_edges.add(new NeoEdge(node, "PARENT", to_node(parent)))
-		end
-		for mmodule in mgroup.mmodules do
-			node.out_edges.add(new NeoEdge(node, "DECLARES", to_node(mmodule)))
-		end
-		for subgroup in mgroup.in_nesting.direct_smallers do
-			node.in_edges.add(new NeoEdge(node, "NESTS", to_node(subgroup)))
-		end
-		return node
 	end
 
 	# Build a new `MGroup` from a `node`.
@@ -441,22 +377,6 @@ class NeoModel
 		mentities[node.id.as(Int)] = mgroup
 		set_doc(node, mgroup)
 		return mgroup
-	end
-
-	# Build a `NeoNode` representing `mmodule`.
-	private fun mmodule_node(mmodule: MModule): NeoNode do
-		var node = make_node(mmodule)
-		node.labels.add "MModule"
-		for parent in mmodule.in_importation.direct_greaters do
-			node.out_edges.add(new NeoEdge(node, "IMPORTS", to_node(parent)))
-		end
-		for mclass in mmodule.intro_mclasses do
-			node.out_edges.add(new NeoEdge(node, "INTRODUCES", to_node(mclass)))
-		end
-		for mclassdef in mmodule.mclassdefs do
-			node.out_edges.add(new NeoEdge(node, "DEFINES", to_node(mclassdef)))
-		end
-		return node
 	end
 
 	# Build a new `MModule` from a `node`.
@@ -485,21 +405,6 @@ class NeoModel
 		return mmodule
 	end
 
-	# Build a `NeoNode` representing `mclass`.
-	private fun mclass_node(mclass: MClass): NeoNode do
-		var node = make_node(mclass)
-		node.labels.add "MClass"
-		node["kind"] = mclass.kind.to_s
-		node["visibility"] = mclass.visibility.to_s
-		if not mclass.mparameters.is_empty then
-			var parameter_names = new Array[String]
-			for p in mclass.mparameters do parameter_names.add(p.name)
-			node["parameter_names"] = new JsonArray.from(parameter_names)
-		end
-		node.out_edges.add(new NeoEdge(node, "CLASSTYPE", to_node(mclass.mclass_type)))
-		return node
-	end
-
 	# Build a new `MClass` from a `node`.
 	#
 	# REQUIRE `node.labels.has("MClass")`
@@ -525,24 +430,6 @@ class NeoModel
 		return mclass
 	end
 
-	# Build a `NeoNode` representing `mclassdef`.
-	private fun mclassdef_node(mclassdef: MClassDef): NeoNode do
-		var node = make_node(mclassdef)
-		node.labels.add "MClassDef"
-		node.out_edges.add(new NeoEdge(node, "BOUNDTYPE", to_node(mclassdef.bound_mtype)))
-		node.out_edges.add(new NeoEdge(node, "MCLASS", to_node(mclassdef.mclass)))
-		for mproperty in mclassdef.intro_mproperties do
-			node.out_edges.add(new NeoEdge(node, "INTRODUCES", to_node(mproperty)))
-		end
-		for mpropdef in mclassdef.mpropdefs do
-			node.out_edges.add(new NeoEdge(node, "DECLARES", to_node(mpropdef)))
-		end
-		for sup in mclassdef.supertypes do
-			node.out_edges.add(new NeoEdge(node, "INHERITS", to_node(sup)))
-		end
-		return node
-	end
-
 	# Build a new `MClassDef` from a `node`.
 	#
 	# REQUIRE `node.labels.has("MClassDef")`
@@ -564,26 +451,6 @@ class NeoModel
 		mclassdef.set_supertypes(supertypes)
 		mclassdef.add_in_hierarchy
 		return mclassdef
-	end
-
-	# Build a `NeoNode` representing `mproperty`.
-	private fun mproperty_node(mproperty: MProperty): NeoNode do
-		var node = make_node(mproperty)
-		node.labels.add "MProperty"
-		node["visibility"] = mproperty.visibility.to_s
-		if mproperty isa MMethod then
-			node.labels.add "MMethod"
-			node["is_init"] = mproperty.is_init
-		else if mproperty isa MAttribute then
-			node.labels.add "MAttribute"
-		else if mproperty isa MVirtualTypeProp then
-			node.labels.add "MVirtualTypeProp"
-		else if mproperty isa MInnerClass then
-			node.labels.add "MInnerClass"
-			node.out_edges.add(new NeoEdge(node, "NESTS", to_node(mproperty.inner)))
-		end
-		node.out_edges.add(new NeoEdge(node, "INTRO_CLASSDEF", to_node(mproperty.intro_mclassdef)))
-		return node
 	end
 
 	# Build a new `MProperty` from a `node`.
@@ -617,39 +484,6 @@ class NeoModel
 		mentities[node.id.as(Int)] = mprop
 		set_doc(node, mprop)
 		return mprop
-	end
-
-	# Build a `NeoNode` representing `mpropdef`.
-	private fun mpropdef_node(mpropdef: MPropDef): NeoNode do
-		var node = make_node(mpropdef)
-		node.labels.add "MPropDef"
-		node.out_edges.add(new NeoEdge(node, "DEFINES", to_node(mpropdef.mproperty)))
-		if mpropdef isa MMethodDef then
-			node.labels.add "MMethodDef"
-			node["is_abstract"] = mpropdef.is_abstract
-			node["is_intern"] = mpropdef.is_intern
-			node["is_extern"] = mpropdef.is_extern
-			var msignature = mpropdef.msignature
-			if msignature != null then
-				node.out_edges.add(new NeoEdge(node, "SIGNATURE", to_node(msignature)))
-			end
-		else if mpropdef isa MAttributeDef then
-			node.labels.add "MAttributeDef"
-			var static_mtype = mpropdef.static_mtype
-			if static_mtype != null then
-				node.out_edges.add(new NeoEdge(node, "TYPE", to_node(static_mtype)))
-			end
-		else if mpropdef isa MVirtualTypeDef then
-			node.labels.add "MVirtualTypeDef"
-			var bound = mpropdef.bound
-			if bound != null then
-				node.out_edges.add(new NeoEdge(node, "BOUND", to_node(bound)))
-			end
-		else if mpropdef isa MInnerClassDef then
-			node.labels.add "MInnerClassDef"
-			node.out_edges.add(new NeoEdge(node, "NESTS", to_node(mpropdef.inner)))
-		end
-		return node
 	end
 
 	# Build a new `MPropDef` from a `node`.
@@ -693,74 +527,6 @@ class NeoModel
 		end
 		set_doc(node, mpropdef)
 		return mpropdef
-	end
-
-	# Build a `NeoNode` representing `mtype`.
-	private fun mtype_node(mtype: MType): NeoNode do
-		var node = make_node(mtype)
-		node.labels.add "MType"
-		if mtype isa MClassType then
-			node.labels.add "MClassType"
-			node.out_edges.add(new NeoEdge(node, "CLASS", to_node(mtype.mclass)))
-			for arg in mtype.arguments do
-				node.out_edges.add(new NeoEdge(node, "ARGUMENT", to_node(arg)))
-			end
-			if mtype isa MGenericType then
-				node.labels.add "MGenericType"
-			end
-		else if mtype isa MVirtualType then
-			node.labels.add "MVirtualType"
-			node.out_edges.add(new NeoEdge(node, "PROPERTY", to_node(mtype.mproperty)))
-		else if mtype isa MParameterType then
-			node.labels.add "MParameterType"
-			node["rank"] = mtype.rank
-			node.out_edges.add(new NeoEdge(node, "CLASS", to_node(mtype.mclass)))
-		else if mtype isa MNullableType then
-			node.labels.add "MNullableType"
-			node.out_edges.add(new NeoEdge(node, "TYPE", to_node(mtype.mtype)))
-		else if mtype isa MSignature then
-			node.labels.add "MSignature"
-			var names = new JsonArray
-			var rank = 0
-			for mparameter in mtype.mparameters do
-				names.add mparameter.name
-				var pnode = to_node(mparameter)
-				pnode["rank"] = rank
-				node.out_edges.add(new NeoEdge(node, "PARAMETER", pnode))
-				rank += 1
-			end
-			if not names.is_empty then node["parameter_names"] = names
-			var return_mtype = mtype.return_mtype
-			if return_mtype != null then
-				node.out_edges.add(new NeoEdge(node, "RETURNTYPE", to_node(return_mtype)))
-			end
-		else if mtype isa MRawType then
-			node.labels.add "MRawType"
-			var text = new JsonArray
-			var rank = 0
-			for part in mtype.parts do
-				text.add part.text
-				if part.target != null then
-					var pnode = mtypepart_node(part)
-					pnode["rank"] = rank
-					node.out_edges.add(new NeoEdge(node, "LINK", pnode))
-				end
-				rank += 1
-			end
-			if not text.is_empty then node["text"] = text
-		end
-		return node
-	end
-
-	# Build a `NeoNode` representing `mtypepart`.
-	private fun mtypepart_node(mtypepart: MTypePart): NeoNode do
-		var node = make_node(mtypepart)
-		node.labels.add "MTypePart"
-		if mtypepart.target != null then
-			var target_node = to_node(mtypepart.target.as(not null))
-			node.out_edges.add(new NeoEdge(node, "TARGET", target_node))
-		end
-		return node
 	end
 
 	# Build a new `MType` from a `node`.
@@ -845,16 +611,6 @@ class NeoModel
 		abort
 	end
 
-	# Build a `NeoNode` representing `mparameter`.
-	private fun mparameter_node(mparameter: MParameter): NeoNode do
-		var node = make_node(mparameter)
-		node.labels.add "MParameter"
-		node["name"] = mparameter.name
-		node["is_vararg"] = mparameter.is_vararg
-		node.out_edges.add(new NeoEdge(node, "TYPE", to_node(mparameter.mtype)))
-		return node
-	end
-
 	# Build a new `MParameter` from `node`.
 	#
 	# REQUIRE `node.labels.has("MParameter")`
@@ -923,5 +679,336 @@ class NeoModel
 			mdoc.original_mentity = mentity
 			mentity.mdoc = mdoc
 		end
+	end
+end
+
+redef class MPackage
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		var root = root
+		if root != null then
+			node.out_edges.add(new NeoEdge(node, "ROOT", root.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MGroup
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		var parent = parent
+		node.out_edges.add(new NeoEdge(node, "PROJECT", mpackage.to_node(nodes, model_name)))
+		if parent != null then
+			node.out_edges.add(new NeoEdge(node, "PARENT", parent.to_node(nodes, model_name)))
+		end
+		for mmodule in mmodules do
+			node.out_edges.add(new NeoEdge(node, "DECLARES", mmodule.to_node(nodes, model_name)))
+		end
+		for subgroup in in_nesting.direct_smallers do
+			node.in_edges.add(new NeoEdge(node, "NESTS", subgroup.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MModule
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		for parent in in_importation.direct_greaters do
+			node.out_edges.add(new NeoEdge(node, "IMPORTS", parent.to_node(nodes, model_name)))
+		end
+		for mclass in intro_mclasses do
+			node.out_edges.add(new NeoEdge(node, "INTRODUCES", mclass.to_node(nodes, model_name)))
+		end
+		for mclassdef in mclassdefs do
+			node.out_edges.add(new NeoEdge(node, "DEFINES", mclassdef.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MClass
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node["kind"] = kind.to_s
+		node["visibility"] = visibility.to_s
+		if not mparameters.is_empty then
+			var parameter_names = new Array[String]
+			for p in mparameters do parameter_names.add(p.name)
+			node["parameter_names"] = new JsonArray.from(parameter_names)
+		end
+		node.out_edges.add(new NeoEdge(node, "CLASSTYPE", mclass_type.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MClassDef
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.out_edges.add(new NeoEdge(node, "BOUNDTYPE", bound_mtype.to_node(nodes, model_name)))
+		node.out_edges.add(new NeoEdge(node, "MCLASS", mclass.to_node(nodes, model_name)))
+		for mproperty in intro_mproperties do
+			node.out_edges.add(new NeoEdge(node, "INTRODUCES", mproperty.to_node(nodes, model_name)))
+		end
+		for mpropdef in mpropdefs do
+			node.out_edges.add(new NeoEdge(node, "DECLARES", mpropdef.to_node(nodes, model_name)))
+		end
+		for sup in supertypes do
+			node.out_edges.add(new NeoEdge(node, "INHERITS", sup.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MProperty
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = make_node(nodes, model_name)
+		node.labels.add "MProperty"
+		node["visibility"] = visibility.to_s
+		node.out_edges.add(new NeoEdge(node, "INTRO_CLASSDEF", intro_mclassdef.to_node(nodes, model_name)))
+		node.labels.add self.class_name
+		return node
+	end
+end
+
+redef class MMethod
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node["is_init"] = is_init
+		return node
+	end
+end
+
+redef class MInnerClass
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.out_edges.add(new NeoEdge(node, "NESTS", inner.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MPropDef
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = make_node(nodes, model_name)
+		node.labels.add "MPropDef"
+		node.out_edges.add(new NeoEdge(node, "DEFINES", mproperty.to_node(nodes, model_name)))
+		node.labels.add self.class_name
+		return node
+	end
+end
+
+redef class MMethodDef
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node["is_abstract"] = is_abstract
+		node["is_intern"] = is_intern
+		node["is_extern"] = is_extern
+		var msignature = msignature
+		if msignature != null then
+			node.out_edges.add(new NeoEdge(node, "SIGNATURE", msignature.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MAttributeDef
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		var static_mtype = static_mtype
+		if static_mtype != null then
+			node.out_edges.add(new NeoEdge(node, "TYPE", static_mtype.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MVirtualTypeDef
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		var bound = bound
+		if bound != null then
+			node.out_edges.add(new NeoEdge(node, "BOUND", bound.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MInnerClassDef
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.out_edges.add(new NeoEdge(node, "NESTS", inner.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MTypePart
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		if self.target != null then
+			var target_node = self.target.as(not null).to_node(nodes, model_name)
+			node.out_edges.add(new NeoEdge(node, "TARGET", target_node))
+		end
+		return node
+	end
+end
+
+redef class MParameter
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node["name"] = self.name
+		node["is_vararg"] = self.is_vararg
+		node.out_edges.add(new NeoEdge(node, "TYPE", self.mtype.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MClassType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MClassType"
+		node.out_edges.add(new NeoEdge(node, "CLASS", mclass.to_node(nodes, model_name)))
+		for arg in arguments do
+			node.out_edges.add(new NeoEdge(node, "ARGUMENT", arg.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+
+redef class MGenericType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MGenericType"
+		return node
+	end
+end
+
+redef class MVirtualType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MVirtualType"
+		node.out_edges.add(new NeoEdge(node, "PROPERTY", mproperty.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MParameterType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MParameterType"
+		node["rank"] = rank
+		node.out_edges.add(new NeoEdge(node, "CLASS", mclass.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MNullableType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MNullableType"
+		node.out_edges.add(new NeoEdge(node, "TYPE", mtype.to_node(nodes, model_name)))
+		return node
+	end
+end
+
+redef class MSignature
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MSignature"
+		var names = new JsonArray
+		var rank = 0
+		for mparameter in mparameters do
+			names.add mparameter.name
+			var pnode = mparameter.to_node(nodes, model_name)
+			pnode["rank"] = rank
+			node.out_edges.add(new NeoEdge(node, "PARAMETER", pnode))
+			rank += 1
+		end
+		if not names.is_empty then node["parameter_names"] = names
+		var return_mtype = return_mtype
+		if return_mtype != null then
+			node.out_edges.add(new NeoEdge(node, "RETURNTYPE", return_mtype.to_node(nodes, model_name)))
+		end
+		return node
+	end
+end
+
+redef class MRawType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = super
+		node.labels.add "MRawType"
+		var text = new JsonArray
+		var rank = 0
+		for part in self.parts do
+			text.add part.text
+			if part.target != null then
+				var pnode = part.to_node(nodes, model_name)
+				pnode["rank"] = rank
+				node.out_edges.add(new NeoEdge(node, "LINK", pnode))
+			end
+			rank += 1
+		end
+		if not text.is_empty then node["text"] = text
+		return node
+	end
+end
+
+redef class MType
+	redef fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = make_node(nodes, model_name)
+		node.labels.add "MType"
+		return node
+	end
+end
+
+redef class MEntity
+	# Build a `NeoNode` representing `self`.
+	private fun to_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		if nodes.has_key(self) then return nodes[self]
+		var node = make_node(nodes, model_name)
+		node.labels.add self.class_name
+		return node
+	end
+
+	# Make a new `NeoNode` based on `mentity`.
+	private fun make_node(nodes: HashMap[MEntity, NeoNode], model_name: nullable String): NeoNode do
+		var node = new NeoNode
+		nodes[self] = node
+		node.labels.add "MEntity"
+		if model_name != null then node.labels.add model_name
+		node["name"] = self.name
+		if not self isa MSignature then
+			#FIXME: MSignature is a MEntity, but has no model :/
+			node["location"] = self.location.to_s
+		end
+		var mdoc = self.mdoc
+		if mdoc != null then
+			node["mdoc"] = new JsonArray.from(mdoc.content)
+			node["mdoc_location"] = mdoc.location.to_s
+		end
+		return node
 	end
 end
