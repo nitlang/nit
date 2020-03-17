@@ -267,8 +267,6 @@ redef init from_deserializer(v) do abort"""
 end
 
 redef class AAttrPropdef
-	private fun name: String do return n_id2.text
-
 	# Name of this attribute in the serialized format
 	private var serialize_name: String = name is lazy
 end
