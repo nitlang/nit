@@ -1032,6 +1032,18 @@ redef class AExpr
 		end
 		return res
 	end
+
+	# Type the expression as if located in `visited_mpropdef`
+	# `TypeVisitor` and `PostTypingVisitor` will be used to do the typing, see them for more information.
+	#
+	# `visited_mpropdef`: Correspond to the evaluation context in which the expression is located.
+	fun do_typing(modelbuilder: ModelBuilder, visited_mpropdef: MPropDef)
+	do
+		var type_visitor = new TypeVisitor(modelbuilder, visited_mpropdef)
+		type_visitor.visit_stmt(self)
+		var post_visitor = new PostTypingVisitor(type_visitor)
+		post_visitor.enter_visit(self)
+	end
 end
 
 redef class ABlockExpr
