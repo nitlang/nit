@@ -1405,12 +1405,7 @@ redef class AAttrPropdef
 				has_value = true
 				return false
 			end
-			is_lazy = true
-			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, self.location, none_visibility)
-			mlazyprop.is_fictive = true
-			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
-			mlazypropdef.is_fictive = true
-			self.mlazypropdef = mlazypropdef
+			create_lazy
 		end
 		return true
 	end
@@ -1506,6 +1501,64 @@ redef class AAttrPropdef
 		var mparameter = new MParameter(name, mwritetype, false)
 		var msignature = new MSignature([mparameter], null)
 		mwritepropdef.msignature = msignature
+	end
+
+	# Create a new setter for the attribute.
+	#
+	# `modelbuilder`: It's used to link the new `mwritepropdef` and `self`
+	# `visibility`: Is the setter has the same visibilty of the `mreadpropdef`.
+	#	If `not is_same_visibility and mreadpropdef.mproperty.visibility > protected_visibility` the `mwritepropdef` visibility will be set to protected.
+	fun create_setter(modelbuilder: ModelBuilder, is_same_visibility: nullable Bool): AAttrPropdef
+	is
+		expect(mreadpropdef != null) # Use to define the visibility, the mclassdef and the doc of the `mwritepropdef`
+	do
+		if mwritepropdef != null then return self # Self already has a `mwritepropdef`
+		var same_visibility = false
+		if is_same_visibility != null then same_visibility = is_same_visibility
+
+		self.build_write_property(modelbuilder, mreadpropdef.mclassdef, same_visibility)
+		self.build_write_signature
+		return self
+	end
+
+	# Set the default `self` value
+	#
+	# `expr`: Represents the default value of the attribute. If `expr isa ABlockExpr` `self.n_block` will be set.
+	fun define_default(expr: AExpr): AAttrPropdef
+	do
+		self.has_value = true
+		if expr isa ABlockExpr then
+			self.n_block = expr
+		else
+			self.n_expr = expr
+		end
+		return self
+	end
+
+	# Set `self` as optional
+	fun define_as_optional: AAttrPropdef
+	is
+		expect(has_value)
+	do
+		is_optional = true
+		return self
+	end
+
+	# Create the lazy attribute.
+	#
+	# see `mlazypropdef` for more information about this property.
+	fun create_lazy: AAttrPropdef
+	is
+		expect(has_value and mpropdef != null) # The only way to get a null `mpropdef` is when the attribute is defined as `abstract`. But if the attribute has a value, it cannot be abstract.
+	do
+		if self.mlazypropdef != null then return self # Self already has a `mlazypropdef`
+		is_lazy = true
+		var mlazyprop = new MAttribute(mpropdef.mclassdef, "lazy _" + name, self.location, none_visibility)
+		mlazyprop.is_fictive = true
+		var mlazypropdef = new MAttributeDef(mpropdef.mclassdef, mlazyprop, self.location)
+		mlazypropdef.is_fictive = true
+		self.mlazypropdef = mlazypropdef
+		return self
 	end
 
 	# Detect the static type from the value assigned to the attribute `self`
