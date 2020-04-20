@@ -243,10 +243,10 @@ abstract class MContract
 	private fun adapt_block_to_contract(v: ContractsVisitor, n_mpropdef: AMethPropdef) is abstract
 
 	# Adapt the msignature specifically for the contract method
-	private fun adapt_specific_msignature(m_signature: MSignature): MSignature do return m_signature.adapt_to_condition
+	private fun adapt_specific_msignature(m_signature: MSignature): MSignature do return m_signature.adapt_to_contract
 
 	# Adapt the nsignature specifically for the contract method
-	private fun adapt_specific_nsignature(n_signature: ASignature): ASignature do return n_signature.adapt_to_condition(null)
+	private fun adapt_specific_nsignature(n_signature: ASignature): ASignature do return n_signature.adapt_to_contract
 
 	# Adapt the `m_signature` to the contract
 	# If it is not null call the specific adapt `m_signature` for the contract
@@ -771,9 +771,10 @@ end
 
 redef class MSignature
 
-	# Adapt signature for a expect condition
-	# Removed the return type is it not necessary
-	private fun adapt_to_condition: MSignature do return new MSignature(mparameters.to_a, null)
+	# Adapt signature for an contract
+	#
+	# The returned `MSignature` is the copy of `self` without return type.
+	private fun adapt_to_contract: MSignature do return new MSignature(mparameters.to_a, null)
 
 	# Adapt signature for a ensure contract
 	#
@@ -782,7 +783,7 @@ redef class MSignature
 	private fun adapt_to_ensurecondition: MSignature
 	do
 		var rtype = return_mtype
-		var msignature = adapt_to_condition
+		var msignature = adapt_to_contract
 		if rtype != null then
 			msignature.mparameters.add(new MParameter("result", rtype, false))
 		end
@@ -812,10 +813,10 @@ redef class ASignature
 	# Create a new ASignature adapted for contract
 	#
 	# The returned `ASignature` is the copy of `self` without return type.
-	private fun adapt_to_condition(return_type: nullable AType): ASignature
+	private fun adapt_to_contract: ASignature
 	do
 		var adapt_nsignature = self.clone
-		adapt_nsignature.n_type = return_type
+		if adapt_nsignature.n_type != null then adapt_nsignature.n_type.detach
 		return adapt_nsignature
 	end
 
@@ -824,15 +825,11 @@ redef class ASignature
 	# The returned `ASignature` is the copy of `self` without return type.
 	# The return type is replaced by a new parameter `result`
 	private fun adapt_to_ensurecondition: ASignature do
-		var nsignature = adapt_to_condition(null)
+		var nsignature = adapt_to_contract
 		if ret_type != null then
-			var n_id = new TId
-			n_id.text = "result"
-			var new_param = new AParam
-			new_param.n_id = n_id
-			new_param.variable = new Variable(n_id.text)
-			new_param.variable.declared_type = ret_type
-			nsignature.n_params.add new_param
+			var variable = new Variable("result")
+			variable.declared_type = ret_type
+			nsignature.n_params.add new AParam.make(variable, ret_type.create_ast_representation)
 		end
 		return nsignature
 	end
