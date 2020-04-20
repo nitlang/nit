@@ -1999,9 +1999,7 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-                if not self isa ACallrefExpr then
-			callsite.check_signature(v, node, args)
-                end
+		if not self isa ACallrefExpr then callsite.check_signature(v, node, args)
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
