@@ -76,6 +76,12 @@ private class TypeVisitor
 		end
 	end
 
+	# Display a warning on `node` if `not mpropdef.is_fictive`
+	fun display_warning(node: ANode, tag: String, message: String)
+	do
+		if not mpropdef.is_fictive then self.modelbuilder.warning(node, tag, message)
+	end
+
 	fun anchor_to(mtype: MType): MType
 	do
 		return mtype.anchor_to(mmodule, anchor)
@@ -190,9 +196,9 @@ private class TypeVisitor
 		if sup == null then return null # Forward error
 
 		if sup == sub then
-			self.modelbuilder.warning(node, "useless-type-test", "Warning: expression is already a `{sup}`.")
+			display_warning(node, "useless-type-test", "Warning: expression is already a `{sup}`.")
 		else if self.is_subtype(sub, sup) then
-			self.modelbuilder.warning(node, "useless-type-test", "Warning: expression is already a `{sup}` since it is a `{sub}`.")
+			display_warning(node, "useless-type-test", "Warning: expression is already a `{sup}` since it is a `{sub}`.")
 		end
 		return sup
 	end
@@ -215,16 +221,16 @@ private class TypeVisitor
 	fun check_can_be_null(anode: ANode, mtype: MType): Bool
 	do
 		if mtype isa MNullType then
-			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is always `null`.")
+			display_warning(anode, "useless-null-test", "Warning: expression is always `null`.")
 			return true
 		end
 		if can_be_null(mtype) then return true
 
 		if mtype isa MFormalType then
 			var res = anchor_to(mtype)
-			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}: {res}`.")
+			display_warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}: {res}`.")
 		else
-			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
+			display_warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
 		end
 		return false
 	end
@@ -379,9 +385,9 @@ private class TypeVisitor
 		if info != null and self.mpropdef.mproperty.deprecation == null then
 			var mdoc = info.mdoc
 			if mdoc != null then
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated: {mdoc.content.first}")
+				display_warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated: {mdoc.content.first}")
 			else
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated.")
+				display_warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated.")
 			end
 		end
 
@@ -394,7 +400,7 @@ private class TypeVisitor
 		else if propdefs.length == 1 then
 			mpropdef = propdefs.first
 		else
-			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
+			display_warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
 			mpropdef = mproperty.intro
 		end
 
@@ -1751,7 +1757,7 @@ redef class AArrayExpr
 		end
 		if useless then
 			assert ntype != null
-			v.modelbuilder.warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
+			v.display_warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
 		end
 
 		self.element_mtype = mtype
@@ -2005,9 +2011,7 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-                if not self isa ACallrefExpr then
-			callsite.check_signature(v, node, args)
-                end
+		if not self isa ACallrefExpr then callsite.check_signature(v, node, args)
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
@@ -2076,7 +2080,7 @@ redef class AEqFormExpr
 		if mtype == null or mtype2 == null then return
 
 		if mtype == v.type_bool(self) and (n_expr2 isa AFalseExpr or n_expr2 isa ATrueExpr) then
-			v.modelbuilder.warning(self, "useless-truism", "Warning: useless comparison to a Bool literal.")
+			v.display_warning(self, "useless-truism", "Warning: useless comparison to a Bool literal.")
 		end
 
 		if not mtype2 isa MNullType then return
@@ -2593,7 +2597,7 @@ redef class ASafeExpr
 		self.mtype = mtype.as_notnull
 
 		if not v.can_be_null(mtype) then
-			v.modelbuilder.warning(self, "useless-safe", "Warning: useless safe operator `?` on non-nullable value.")
+			v.display_warning(self, "useless-safe", "Warning: useless safe operator `?` on non-nullable value.")
 			return
 		end
 	end
@@ -2621,7 +2625,7 @@ redef class ADebugTypeExpr
 		var mtype = v.resolve_mtype(ntype)
 		if mtype != null and mtype != expr then
 			var umtype = v.anchor_to(mtype)
-			v.modelbuilder.warning(self, "debug", "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
+			v.display_warning(self, "debug", "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
 		end
 		self.is_typed = true
 	end
