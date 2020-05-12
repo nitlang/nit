@@ -143,6 +143,54 @@ for t in gram.tokens do
 	exit(1)
 end
 
+
+# Launched Dijkstra's algorithm on NFA, NFANOE and DFA
+
+var graphs = [nfa,nfanoe,dfa] 
+for g in [0..graphs.length[ # for `nfa` then `nfanoe` and finally `dfa`
+do
+	if g == 0 then 
+		print "Dijkstra's algorithm on NFA"
+	else if g == 1 then 
+		print "Dijkstra's algorithm on NFANOE"
+	else
+		print "Dijkstra's algorithm on DFA"
+	end
+
+	graphs[g].launch_dijkstra(graphs[g].start) # launch Dijkstra's algorithm since start node
+
+	var iter = graphs[g].retrotags.iterator 
+	while iter.is_ok # for all tokens of the grammar
+	do
+		print "{iter.key.name} : " # print the name of the token
+
+		var iter_states = iter.item.iterator 
+		while iter_states.is_ok # for all accepted states of this token 
+		do
+			var state = iter_states.item # the accepted state concerned
+			
+			var path2 = graphs[g].search_path_dijkstra(state) # get the path from start node to accepted state concerned
+			for j in [0..path2.length[ do # for all the path
+				if not(path2[j].symbol == null) # transition symbol == epsilon or not
+				then
+					printn path2[j].symbol.to_s # not epsilon, print the symbol
+				else
+					printn "ɛ" # epsilon, print it
+				end
+				if not(j == path2.length-1 ) then printn ", " # except the last, print all symbol next by a comma
+			end
+
+			print "" # print \n to the end of the path
+			iter_states.next
+		end
+		print "" # print \n to the end of the token ( for legibility )
+
+		iter.next
+	end
+
+	print ""  # print \n to the end of the graph ( for legibility )
+end
+
 # Generate Nit code
 
 print "Generate {name}_lexer.nit {name}_parser.nit {name}_test_parser.nit"

@@ -37,6 +37,18 @@ class Automaton
 	# Use `add_tag` to update
 	var retrotags = new HashMap[Token, Set[State]]
 
+	# position of the start node for Dijkstra's algorithm
+	private var start_node : Int = -1
+
+	# queue of all nodes for Dijkstra's algorithm
+	private var nodes_queue : nullable Array[Int] = null
+
+	# distance to node from start_node for Dijkstra's algorithm
+	private var node_distance : nullable Array[Int] = null
+
+	# parent of nodes for Dijkstra's algorithm
+	private var parent_node : nullable Array[Int] = null 
+
 	# Tag all accept states
 	fun tag_accept(t: Token)
 	do
@@ -729,6 +741,159 @@ class Automaton
 	do
 		var gen = new DFAGenerator(filepath, name, self, parser)
 		gen.gen_to_nit
+	end
+
+	# For Dijkstra's algorithm
+	private fun initialization 
+	do
+		nodes_queue = new Array[Int] 
+		node_distance = new Array[Int]
+		parent_node = new Array[Int]
+
+		for i in [0..states.length[ do
+			nodes_queue.add(i) # add node to queue
+			node_distance.add(-1) # distance = infinity
+			parent_node.add(-1) # parent = indefinite
+		end
+		node_distance[start_node] = 0 # start node's distance = 0
+	end
+
+	# For Dijkstra's algorithm
+	# Return the node with de minimum distance
+	private fun find_min : Int 
+	do
+		var mini = -1 # = infinity
+		var sommet = -1 # = indefinite
+		for s in  [0..nodes_queue.length[ # for all nodes
+		do			
+			# if `mini` > `s node's distance`
+			if ( not( node_distance[nodes_queue[s]] == -1 ) and mini == -1 ) or # node_distance != infinity and mini == infinity
+				( not( node_distance[nodes_queue[s]] == -1 ) and node_distance[nodes_queue[s]] < mini ) # node_distance != infinity and node_distance < mini
+			then 
+				mini = node_distance[nodes_queue[s]] # mini = `s node's distance`
+				sommet = nodes_queue[s] # sommet = `s node`
+			end
+		end
+
+		return sommet
+	end
+
+	# For Dijkstra's algorithm
+	# Update distance and parent of s2 with s1's information
+	private fun update_nodes_path(s1: Int, s2: Int) 
+	do
+		var d = node_distance[s1] + 1 # `+ 1` == `+ weight of transition`
+
+		# If s2's distance > s2's distance from s1
+		if node_distance[s2] == -1 or d < node_distance[s2]  then
+			node_distance[s2] = d # then update path
+			parent_node[s2] = s1 # and save path
+		end
+	end
+
+	# For Dijkstra's algorithm
+	# Return the position of `node` in the graph
+	private fun find_position(node : State) : Int
+	do
+		var  pos = -1
+		for i in [0..states.length[ do
+			if states[i] == node then # position found
+				pos = i # save
+				break # return it
+			end
+		end
+		return pos
+	end
+
+	# For Dijkstra's algorithm
+	public fun search_path_dijkstra(end_node : State) : Array[Transition]
+	do
+		# if the Dijkstra's algorithm hasn't been launched, return
+		if start_node == -1 then return new Array[Transition] # start node didn't declared, return an empty array
+
+		var path = new Array[Int] # path from end to start
+		var node = find_position(end_node) # begin at the end
+
+		while not node == start_node do # go back in the path
+			path.add(node)
+			node = parent_node[node] # follow the path thanks to parent of each nodes
+			if node == -1 then return new Array[Transition] # no more parent, impossible path, return an empty array
+		end
+		path.add(node) #add start_node
+
+		var reverse_path = new Array[Int] # path from start to end
+		for i in [(path.length-1)..0].step(-1) do
+			reverse_path.add(path[i])
+		end
+
+		var path_transition = new Array[Transition] # the path with transitions used
+
+		for j in [0..reverse_path.length-1[ do 
+			var states_outs = states[ reverse_path[j] ].outs # transitions outs of the j th node
+			for k in [0..states_outs.length[ do # for all transitions
+ 				if states[ reverse_path[j+1] ] == states_outs[k].to # if node's `transition to` == next node in the path
+				then
+					path_transition.add( states_outs[k] ) # save the transition in the path
+					break
+				end
+			end
+		end
+		return path_transition
+	end
+
+	# For Dijkstra's algorithm
+	# launches Dijkstra's algorithm for all the graph from a node named `start_n`
+	public fun launch_dijkstra(start_n : State)
+	do
+		start_node = find_position(start_n) # get the position in the graph
+		
+		self.initialization
+
+		while nodes_queue.length > 0 do  # while we always have nodes
+			var s1 = self.find_min   # get the node with the minimum distance
+
+			if s1 == -1 then break # path cannot go farer
+
+			var nexts = states[s1].outs  # get his next nodes
+
+			nodes_queue.remove(s1)  # Node already checked, no need to check it anymore
+
+			for i in [0..nexts.length[ do  # for all his next nodes
+				var s2 = find_position(nexts[i].to) 
+				update_nodes_path(s1,s2)  # update their path
+			end
+		end
+	end
+
+	# For Dijkstra's algorithm
+	# Search the smallest path just between two states
+	public fun find_path(start_n : State,end_node : State) : Array[Transition]
+	do
+		start_node = find_position(start_n) # get the position in the graph of the first node
+		var final_node = find_position(end_node) # get the position in the graph of the last node
+ 
+		self.initialization
+
+		while nodes_queue.length > 0 do # while we always have nodes
+			var s1 = self.find_min  # get the node with the minimum distances
+
+			if s1 == -1 then return new Array[Transition] # impossible path, return an array empty
+			if s1 == final_node then break # if we have found the last node, break the algorithm
+
+			var nexts = states[s1].outs  # get his next nodes
+			nodes_queue.remove(s1)  # Node already checked, no need to check it anymore
+
+			for i in [0..nexts.length[ do  # for all his next nodes
+				var s2 = find_position(nexts[i].to)
+				update_nodes_path(s1,s2)  # update their path
+			end
+		end
+
+		var result = self.search_path_dijkstra(end_node)
+
+		start_node = -1 # Dijkstra's algorithm wasn't lauched for all the graph, don't save it
+
+		return result # return the path
 	end
 end
 
