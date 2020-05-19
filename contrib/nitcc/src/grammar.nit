@@ -582,7 +582,6 @@ class LRAutomaton
 
 		for s in states do
 			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
-			print s.name
 			for i in s.core do
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end

@@ -177,31 +177,31 @@ f.close
 
 
 # show results of Knowledge
-var iter_prod = knowledge.knowledge_production.iterator
-	var iter_alt = knowledge.knowledge_alernative.iterator
-	var iter_token = knowledge.knowledge_tokens.iterator
+#var iter_prod = knowledge.knowledge_production.iterator
+#	var iter_alt = knowledge.knowledge_alernative.iterator
+#	var iter_token = knowledge.knowledge_tokens.iterator
 
-	print ""
-	print "Tokens"
-	while iter_token.is_ok do
-		print iter_token.key.to_s
-		printn "   "
-		print iter_token.item.join("  ")
-		iter_token.next
-	end
-	print ""
-	print "Production"
-	while iter_prod.is_ok do
-		print iter_prod.key.to_s
-		printn "   "
-		print iter_prod.item.join("  ")
-		iter_prod.next
-	end
-	print ""
-	print "Alternative"
-	while iter_alt.is_ok do
-		print iter_alt.key.to_s
-		printn "   "
-		print iter_alt.item.join("  ")
-		iter_alt.next
-	end
+#	print ""
+#	print "Tokens"
+#	while iter_token.is_ok do
+#		print iter_token.key.to_s
+#		printn "   "
+#		print iter_token.item.join("  ")
+#		iter_token.next
+#	end
+#	print ""
+#	print "Production"
+#	while iter_prod.is_ok do
+#		print iter_prod.key.to_s
+#		printn "   "
+#		print iter_prod.item.join("  ")
+#		iter_prod.next
+#	end
+#	print ""
+#	print "Alternative"
+#	while iter_alt.is_ok do
+#		print iter_alt.key.to_s
+#		printn "   "
+#		print iter_alt.item.join("  ")
+#		iter_alt.next
+#	end
