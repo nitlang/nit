@@ -573,7 +573,7 @@ class LRAutomaton
 	end
 
 	# Generate a graphviz file of the automaton
-	fun to_dot(path: String)
+	fun to_dot(path: String, knowledge_production : HashMap[Production, Array[String]], knowledge_tokens : HashMap[Token, Array[String]])
 	do
 		var f = new FileWriter.open(path)
 		f.write("digraph g \{\n")
@@ -582,6 +582,7 @@ class LRAutomaton
 
 		for s in states do
 			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
+			print s.name
 			for i in s.core do
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
@@ -590,6 +591,20 @@ class LRAutomaton
 				if s.core.has(i) then continue
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
+			
+			# write an example
+			f.write("|") 
+			var i = s.core.first # just for the first alternative of the node
+			for j in [0..i.pos[ do # for all elements from beggining of the item to his position
+				var elem = i.alt.elems[j]
+				if elem isa Production then # if the element is a Production
+					f.write("{knowledge_production[elem].join("").escape_to_dot} ") # write it
+				else # if the element is a Token
+					f.write("{knowledge_tokens[elem].join("").escape_to_dot}") # write it
+				end
+			end
+			f.write("\n")
+			
 			f.write "\""
 			if not s.is_lr0 then
 				var conflict = false

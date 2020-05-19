@@ -1134,3 +1134,102 @@ class Transition
 		to.ins.remove(self)
 	end
 end
+
+
+
+class Knowledge
+
+	var knowledge_production = new HashMap[Production, Array[String]] # How writing productions
+	var knowledge_alernative = new HashMap[Alternative, Array[String]] # How writing alternatives
+	var knowledge_tokens = new HashMap[Token, Array[String]] # How writing tokens
+
+	var productions_in_alternative = new HashMap[Production, Array[Alternative]] # the alternatives depend on which production
+	var alternative_checked = new HashMap[Alternative, Bool ] # alternative checked ( not in the queue)
+
+	var alternatives = new Array[Alternative] # alls alternatives to check
+
+	var gram : Gram
+	var dfa : Automaton
+
+	init do
+		dfa.launch_dijkstra(dfa.start)
+
+		for prod in gram.prods do # for all productions
+			for alt in prod.alts do # for all alternatives of the production
+				alternatives.add(alt) # add it in the queue
+				for elem in alt.elems  do # for all elements of the alternative
+					if elem isa Production then # if the alternative have a production as element
+						if productions_in_alternative.has_key(elem) then
+							productions_in_alternative[elem].add(alt) # add and save it
+						else
+							productions_in_alternative[elem] = [alt] # save it
+						end
+					else if elem isa Token and elem.to_s == "Eof" then # no need to check has_key because token "Eof" is unique
+						knowledge_tokens[elem] = [elem.to_s]
+					else if elem isa Token and not( knowledge_tokens.has_key(elem) ) then
+						var min_path = new Array[String] # path for an item with lettering
+						var path_tmp = new Array[Transition] # path for an item with transitions
+						var iter_state = dfa.retrotags[elem].iterator
+						while iter_state.is_ok do # For all possible paths
+							var path_tmp2 = dfa.search_path_dijkstra(iter_state.item)
+							if path_tmp.length == 0 or path_tmp.length > path_tmp2.length then path_tmp = path_tmp2 # save the minimal
+							iter_state.next
+						end
+						for value in path_tmp do # for all the path
+							min_path.add(value.symbol.to_s)	# get the symbole			
+						end
+						knowledge_tokens[elem] = min_path # save the minimal path
+					end 
+				end
+			end
+		end
+
+		while not( alternatives.is_empty ) do # as long as we have alternatives to check
+			for alt in alternatives do # for all alternatives in the queue
+				var item = alt.first_item # get the first item
+				var next = item.next
+				var path = new Array[String] # path for a whole alternative
+				while not( next == null ) do # for all items of the alternative
+
+					if next isa Production and not( knowledge_production.has_key(next) ) then break # If we do not know to write a production
+
+					if next isa Token then
+						path = path + knowledge_tokens[next]
+					else
+						path = path + knowledge_production[next]
+					end
+		 
+					item = item.avance
+					next = item.next
+				end
+
+				if next == null then # if the alternative has been fully verified (has not been broken)
+					if knowledge_production.has_key(alt.prod) then
+						if knowledge_production[alt.prod].length > path.length then # if it is the new smallest path for a production
+							knowledge_production[alt.prod] = path
+
+							if productions_in_alternative.has_key(alt.prod) then # so the production is redefined
+								for alt_p in productions_in_alternative[alt.prod] do # for all alternatives who depends of it
+									if alternative_checked.has_key(alt_p) and alternative_checked[alt_p] then  # not already in the queue
+										alternatives.add(alt_p) # check them one more time
+										alternative_checked[alt] = false
+									end
+								end
+							end
+						end
+					else
+						knowledge_production[alt.prod] = path # Or a path for an unknown production
+					end
+
+				if not( knowledge_alernative.has_key(alt) ) or knowledge_alernative[alt].length > path.length then 
+					knowledge_alernative[alt] = path # save the path for the alternative
+				end
+
+				alternatives.remove(alt) # alternatives checked, no need to check her anymore
+				alternative_checked[alt] = true # checked
+					
+				end
+			end
+		end
+	end 
+end

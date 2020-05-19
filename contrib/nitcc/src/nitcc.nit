@@ -99,8 +99,13 @@ f.write "// Concrete grammar of {name}\n"
 f.write pretty
 f.close
 
+# Find path for each productions of grammar
+var nfa = v2.nfa
+var dfa = nfa.to_dfa
+var knowledge = new Knowledge(gram,dfa)
+
 print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)"
-lr.to_dot("{name}.lr.dot")
+lr.to_dot("{name}.lr.dot",knowledge.knowledge_production,knowledge.knowledge_tokens) # we need to know how write tokens and productions
 pretty = lr.pretty
 f = new FileWriter.open("{name}.lr.out")
 f.write "// LR automaton of {name}\n"
@@ -109,14 +114,14 @@ f.close
 
 # NFA and DFA
 
-var nfa = v2.nfa
+#var nfa = v2.nfa
 print "NFA automaton: {nfa.states.length} states (see {name}.nfa.dot)"
 nfa.to_dot.write_to_file("{name}.nfa.dot")
 var nfanoe = nfa.to_nfa_noe
 nfanoe.to_dot.write_to_file("{name}.nfanoe.dot")
 print "NFA automaton without epsilon: {nfanoe.states.length} states (see {name}.nfanoe.dot)"
 
-var dfa = nfa.to_dfa
+#var dfa = nfa.to_dfa
 dfa.to_dot.write_to_file("{name}.dfanomin.dot")
 print "DFA automaton (non minimal): {dfa.states.length} states (see {name}.dfanomin.dot)"
 
@@ -141,54 +146,6 @@ for t in gram.tokens do
 	if dfa.retrotags.has_key(t) and not dfa.retrotags[t].is_empty then continue
 	print "Error: Token {t} matches nothing"
 	exit(1)
-end
-
-
-# Launched Dijkstra's algorithm on NFA, NFANOE and DFA
-
-var graphs = [nfa,nfanoe,dfa] 
-for g in [0..graphs.length[ # for `nfa` then `nfanoe` and finally `dfa`
-do
-	if g == 0 then 
-		print "Dijkstra's algorithm on NFA"
-	else if g == 1 then 
-		print "Dijkstra's algorithm on NFANOE"
-	else
-		print "Dijkstra's algorithm on DFA"
-	end
-
-	graphs[g].launch_dijkstra(graphs[g].start) # launch Dijkstra's algorithm since start node
-
-	var iter = graphs[g].retrotags.iterator 
-	while iter.is_ok # for all tokens of the grammar
-	do
-		print "{iter.key.name} : " # print the name of the token
-
-		var iter_states = iter.item.iterator 
-		while iter_states.is_ok # for all accepted states of this token 
-		do
-			var state = iter_states.item # the accepted state concerned
-			
-			var path2 = graphs[g].search_path_dijkstra(state) # get the path from start node to accepted state concerned
-			for j in [0..path2.length[ do # for all the path
-				if not(path2[j].symbol == null) # transition symbol == epsilon or not
-				then
-					printn path2[j].symbol.to_s # not epsilon, print the symbol
-				else
-					printn "ɛ" # epsilon, print it
-				end
-				if not(j == path2.length-1 ) then printn ", " # except the last, print all symbol next by a comma
-			end
-
-			print "" # print \n to the end of the path
-			iter_states.next
-		end
-		print "" # print \n to the end of the token ( for legibility )
-
-		iter.next
-	end
-
-	print ""  # print \n to the end of the graph ( for legibility )
 end
 
 # Generate Nit code
@@ -217,3 +174,34 @@ var t = new TestParser_{{{name}}}
 t.main
 """
 f.close
+
+
+# show results of Knowledge
+var iter_prod = knowledge.knowledge_production.iterator
+	var iter_alt = knowledge.knowledge_alernative.iterator
+	var iter_token = knowledge.knowledge_tokens.iterator
+
+	print ""
+	print "Tokens"
+	while iter_token.is_ok do
+		print iter_token.key.to_s
+		printn "   "
+		print iter_token.item.join("  ")
+		iter_token.next
+	end
+	print ""
+	print "Production"
+	while iter_prod.is_ok do
+		print iter_prod.key.to_s
+		printn "   "
+		print iter_prod.item.join("  ")
+		iter_prod.next
+	end
+	print ""
+	print "Alternative"
+	while iter_alt.is_ok do
+		print iter_alt.key.to_s
+		printn "   "
+		print iter_alt.item.join("  ")
+		iter_alt.next
+	end
