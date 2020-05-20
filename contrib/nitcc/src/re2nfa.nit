@@ -118,25 +118,8 @@ redef class Nre_and
 	redef fun make_nfa
 	do
 		var a = children[0].make_nfa
-		var ta = new Token("1")
-		a.tag_accept(ta)
 		var b = children[2].make_nfa
-		var tb = new Token("2")
-		b.tag_accept(tb)
-
-		var c = new Automaton.empty
-		c.absorb(a)
-		c.absorb(b)
-		c = c.to_dfa
-		c.accept.clear
-		for s in c.retrotags[ta] do
-			if c.tags[s].has(tb) then
-				c.accept.add(s)
-			end
-		end
-		c.clear_tag(ta)
-		c.clear_tag(tb)
-		return c
+		return a.intersection(b)
 	end
 end
 
@@ -152,24 +135,14 @@ end
 redef class Nre_shortest
 	redef fun make_nfa
 	do
-		var a = children[2].make_nfa
-		a = a.to_dfa
-		for s in a.accept do
-			for t in s.outs.to_a do t.delete
-		end
-		return a
+		return children[2].make_nfa.shortest
 	end
 end
 
 redef class Nre_longest
 	redef fun make_nfa
 	do
-		var a = children[2].make_nfa
-		a = a.to_dfa
-		for s in a.accept.to_a do
-			if not s.outs.is_empty then a.accept.remove(s)
-		end
-		return a
+		return children[2].make_nfa.longest
 	end
 end
 
@@ -177,8 +150,7 @@ redef class Nre_prefixes
 	redef fun make_nfa
 	do
 		var a = children[2].make_nfa
-		a.trim
-		a.accept.add_all a.states
+		a.accept_prefixes
 		return a
 	end
 end

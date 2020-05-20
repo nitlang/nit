@@ -184,6 +184,58 @@ class Automaton
 		states.add_all other.states
 	end
 
+	# Return the intersection of `self` and `other`
+	fun intersection(other: Automaton): Automaton
+	do
+		var a = self
+		var ta = new Token("1")
+		a.tag_accept(ta)
+		var b = other
+		var tb = new Token("2")
+		b.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(a)
+		c.absorb(b)
+		c = c.to_dfa
+		c.accept.clear
+		for s in c.retrotags[ta] do
+			if c.tags[s].has(tb) then
+				c.accept.add(s)
+			end
+		end
+		c.clear_tag(ta)
+		c.clear_tag(tb)
+		return c
+	end
+
+	# Return only the shortest prefixes.
+	fun shortest: Automaton
+	do
+		var a = self.to_dfa
+		for s in a.accept do
+			for t in s.outs.to_a do t.delete
+		end
+		return a
+	end
+
+	# Return a automaton without prefixes.
+	fun longest: Automaton
+	do
+		var a = self.to_dfa
+		for s in a.accept.to_a do
+			if not s.outs.is_empty then a.accept.remove(s)
+		end
+		return a
+	end
+
+	# Also accept all prefixes
+	fun accept_prefixes
+	do
+		trim
+		accept.add_all states
+	end
+
 	# Return a new automaton that recognize `self` but not `other`.
 	# For a theoretical POV, this is the subtraction of languages.
 	# Note: the implementation use `to_dfa` internally, so the theoretical complexity is not cheap.
