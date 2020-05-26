@@ -18,10 +18,10 @@
 # FIXME Split the module in three parts: extension of the modele, building phase and the "re-driving"
 module contracts
 
-import astbuilder
 import parse_annotations
 import phase
 import semantize
+intrude import astbuilder
 intrude import modelize_property
 intrude import scope
 intrude import typing
@@ -65,10 +65,11 @@ redef class AModule
 	end
 end
 
-# This visitor checks the `AMethPropdef` and the `AClassDef` to check if they have a contract annotation or it's a redefinition with a inheritance contract
+# Visitor to build all contracts.
 private class ContractsVisitor
 	super Visitor
 
+	# Instance of the toolcontext
 	var toolcontext: ToolContext
 
 	# The main module
@@ -90,6 +91,8 @@ private class ContractsVisitor
 	var current_location: Location is noinit
 
 	# Is the contrat is an introduction or not?
+	# This attribute has the same value as the `is_intro` of the propdef attached to the contract.
+	# Note : For MClassDef `is_intro_contract == false`. This is due to the fact that a method for checking invariants is systematically added to the root object class.
 	var is_intro_contract: Bool is noinit
 
 	# Actual visited class
@@ -97,6 +100,11 @@ private class ContractsVisitor
 
 	# is `no_contract` annotation was found
 	var find_no_contract = false
+
+	# The reference to the `in_contract` attribute.
+	# This attribute is used to disable contract verification when you are already in a contract verification.
+	# Keep the `in_contract` attribute to avoid searching at each contrat
+	var in_contract_attribute: nullable MAttribute = null
 
 	redef fun visit(node)
 	do
@@ -136,9 +144,9 @@ private class ContractsVisitor
 	# Verification if the construction of the contract is necessary.
 	# Three cases are checked for `expect`:
 	#
-	# - Is the `--full-contract` option it's use?
-	# - Is the method is in the main package
-	# - Is the method is in a direct imported package.
+	# - Was the `--full-contract` option passed?
+	# - Is the method is in the main package?
+	# - Is the method is in a direct imported package?
 	#
 	fun check_usage_expect(actual_mmodule: MModule): Bool
 	do
@@ -154,20 +162,95 @@ private class ContractsVisitor
 	# Verification if the construction of the contract is necessary.
 	# Two cases are checked for `ensure`:
 	#
-	# - Is the `--full-contract` option it's use?
-	# - Is the method is in the main package
+	# - Was the `--full-contract` option passed?
+	# - Is the method is in the main package?
 	#
 	fun check_usage_ensure(actual_mmodule: MModule): Bool
 	do
 		return toolcontext.opt_full_contract.value or mainmodule.mpackage == actual_mmodule.mpackage
 	end
 
+	# Inject the incontract attribute (`_in_contract_`) in the `Sys` class
+	# This attribute allows to check if the contract need to be executed
+	private fun inject_incontract_in_sys
+	do
+		# If the `in_contract_attribute` already know just return
+		if in_contract_attribute != null then return
+
+		var sys_class = toolcontext.modelbuilder.get_mclass_by_name(visited_module, mainmodule, "Sys")
+
+		# Try to get the `in_contract` property, if it has already defined in a previously visited module.
+		var in_contract_property = toolcontext.modelbuilder.try_get_mproperty_by_name(visited_module, sys_class.intro, "__in_contract_")
+		if in_contract_property != null then
+			self.in_contract_attribute = in_contract_property.as(MAttribute)
+			return
+		end
+
+		var bool_false = new AFalseExpr.make(mainmodule.bool_type)
+		var n_in_contract_attribute = toolcontext.modelbuilder.create_attribute_from_name("__in_contract_", sys_class.intro, mainmodule.bool_type, public_visibility).create_setter(toolcontext.modelbuilder, true).define_default(bool_false)
+
+		in_contract_attribute = n_in_contract_attribute.mpropdef.mproperty
+	end
+
+	# Return the `_in_contract_` attribute.
+	# If the attribute `_in_contract_` does not exist it's injected with `inject_incontract_in_sys`
+	private fun get_incontract: MAttribute
+	do
+		if self.in_contract_attribute == null then inject_incontract_in_sys
+		return in_contract_attribute.as(not null)
+	end
+
+	# Return an `AIfExpr` with the contract encapsulated by an `if` to check if it's already in a contract verification.
+	#
+	# Example:
+	# ~~~nitish
+	# class A
+	# 	fun bar([...]) is except([...])
+	#
+	# 	fun _contract_bar([...])
+	#	do
+	#		if not sys._in_contract_ then
+	#			sys._in_contract_ = true
+	#			_bar_expect([...])
+	#			sys._in_contract_ = false
+	#		end
+	#		bar([...])
+	#	end
+	#
+	# 	fun _bar_expect([...])
+	# end
+	# ~~~~
+	#
+	private fun encapsulated_contract_call(visited_method: AMethPropdef, call_to_contracts: Array[ACallExpr]): AIfExpr
+	do
+		var sys_property = toolcontext.modelbuilder.model.get_mproperties_by_name("sys").first.as(MMethod)
+		var callsite_sys = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, sys_property, true)
+
+		var incontract_attribute = get_incontract
+
+		var callsite_get_incontract = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, incontract_attribute.getter.as(MMethod), false)
+		var callsite_set_incontract = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, incontract_attribute.setter.as(MMethod), false)
+
+		var n_condition = ast_builder.make_not(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_get_incontract, null))
+
+		var n_if = ast_builder.make_if(n_condition, null)
+
+		var if_then_block = n_if.n_then.as(ABlockExpr)
+
+		if_then_block.add(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_set_incontract, [new ATrueExpr.make(mainmodule.bool_type)]))
+		if_then_block.add_all(call_to_contracts)
+		if_then_block.add(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_set_incontract, [new AFalseExpr.make(mainmodule.bool_type)]))
+
+		return n_if
+	end
 end
 
 # This visitor checks the `callsite` to see if the target `mpropdef` has a contract.
 private class CallSiteVisitor
 	super Visitor
 
+
+	# Instance of the toolcontext
 	var toolcontext: ToolContext
 
 	# Actual visited method
@@ -205,10 +288,10 @@ end
 
 redef class AAnnotation
 
-	# Returns the conditions of annotation parameters in the form of and expr
-	# exemple:
-	# the contract ensure(true, i == 10, f >= 1.0)
-	# return this condition (true and i == 10 and f >= 1.0)
+	# Returns the conditions of annotation parameters. If there are several parameters, the result is an `AAndExpr`
+	# Example:
+	# the contract `ensure(true, i == 10, f >= 1.0)`
+	# return this condition `(true and i == 10 and f >= 1.0)`
 	private fun construct_condition(v : ContractsVisitor): AExpr
 	do
 		var n_condition = n_args.first
@@ -238,10 +321,10 @@ abstract class MContract
 	private fun adapt_block_to_contract(v: ContractsVisitor, n_mpropdef: AMethPropdef) is abstract
 
 	# Adapt the msignature specifically for the contract method
-	private fun adapt_specific_msignature(m_signature: MSignature): MSignature do return m_signature.adapt_to_condition
+	private fun adapt_specific_msignature(m_signature: MSignature): MSignature do return m_signature.adapt_to_contract
 
 	# Adapt the nsignature specifically for the contract method
-	private fun adapt_specific_nsignature(n_signature: ASignature): ASignature do return n_signature.adapt_to_condition(null)
+	private fun adapt_specific_nsignature(n_signature: ASignature): ASignature do return n_signature.adapt_to_contract
 
 	# Adapt the `m_signature` to the contract
 	# If it is not null call the specific adapt `m_signature` for the contract
@@ -269,10 +352,13 @@ abstract class MContract
 	# Create the initial contract (intro)
 	# All contracts have the same implementation for the introduction.
 	#
+	# Example:
+	# ~~~nitish
 	# fun contrat([...])
 	# do
 	#	assert contract_condition
 	# end
+	# ~~~
 	#
 	private fun create_intro_contract(v: ContractsVisitor, n_condition: nullable AExpr, mclassdef: MClassDef): AMethPropdef
 	do
@@ -319,7 +405,7 @@ class MExpect
 	# because if no contract is defined at the introduction the added
 	# contracts will not cause any error even if they are not satisfied.
 	#
-	# exemple
+	# Example:
 	# ~~~nitish
 	# class A
 	# 	fun bar [...]
@@ -333,7 +419,8 @@ class MExpect
 	# 	redef fun bar is expect(contract_condition)
 	# 	redef fun _bar_expect([...])
 	# 	do
-	# 		if not (contract_condition) then super
+	# 		if (contract_condition) then return
+	#		super
 	# 	end
 	# end
 	# ~~~~
@@ -395,7 +482,9 @@ abstract class BottomMContract
 		return n_block
 	end
 
-	# Inject the result variable in the `n_block` of the given `n_mpropdef`.
+	# Inject the `result` variable into the `n_block` of the given n_mpropdef`.
+	#
+	# The purpose of the variable is to capture return values to use it in contracts.
 	private fun inject_result(v: ContractsVisitor, n_mpropdef: AMethPropdef, ret_type: MType): Variable
 	do
 		var actual_block = n_mpropdef.n_block
@@ -760,25 +849,26 @@ end
 
 redef class MSignature
 
-	# Adapt signature for a expect condition
-	# Removed the return type is it not necessary
-	private fun adapt_to_condition: MSignature do return new MSignature(mparameters.to_a, null)
-
-	# Adapt signature for a ensure condition
+	# Adapt signature for an contract
 	#
-	# Create new parameter with the return type
+	# The returned `MSignature` is the copy of `self` without return type.
+	private fun adapt_to_contract: MSignature do return new MSignature(mparameters.to_a, null)
+
+	# Adapt signature for a ensure contract
+	#
+	# The returned `MSignature` is the copy of `self` without return type.
+	# The return type is replaced by a new parameter `result`
 	private fun adapt_to_ensurecondition: MSignature
 	do
 		var rtype = return_mtype
-		var msignature = adapt_to_condition
+		var msignature = adapt_to_contract
 		if rtype != null then
 			msignature.mparameters.add(new MParameter("result", rtype, false))
 		end
 		return msignature
 	end
 
-	# Adapt signature for a expect condition
-	# Removed the return type is it not necessary
+	# The returned `MSignature` is the exact copy of `self`.
 	private fun clone: MSignature do return new MSignature(mparameters.to_a, return_mtype)
 end
 
@@ -798,26 +888,26 @@ redef class ASignature
 		return args
 	end
 
-	# Return a copy of self adapted for the expect condition
-	# npropdef it is use to define the parent of the parameters
-	private fun adapt_to_condition(return_type: nullable AType): ASignature
+	# Create a new ASignature adapted for contract
+	#
+	# The returned `ASignature` is the copy of `self` without return type.
+	private fun adapt_to_contract: ASignature
 	do
 		var adapt_nsignature = self.clone
-		adapt_nsignature.n_type = return_type
+		if adapt_nsignature.n_type != null then adapt_nsignature.n_type.detach
 		return adapt_nsignature
 	end
 
-	# Return a copy of self adapted for postcondition on npropdef
+	# Create a new ASignature adapted for ensure
+	#
+	# The returned `ASignature` is the copy of `self` without return type.
+	# The return type is replaced by a new parameter `result`
 	private fun adapt_to_ensurecondition: ASignature do
-		var nsignature = adapt_to_condition(null)
+		var nsignature = adapt_to_contract
 		if ret_type != null then
-			var n_id = new TId
-			n_id.text = "result"
-			var new_param = new AParam
-			new_param.n_id = n_id
-			new_param.variable = new Variable(n_id.text)
-			new_param.variable.declared_type = ret_type
-			nsignature.n_params.add new_param
+			var variable = new Variable("result")
+			variable.declared_type = ret_type
+			nsignature.n_params.add new AParam.make(variable, ret_type.create_ast_representation)
 		end
 		return nsignature
 	end
