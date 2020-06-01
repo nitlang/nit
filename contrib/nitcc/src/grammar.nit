@@ -24,6 +24,8 @@ class Gram
 	# The tokens (terminals) of the grammar
 	var tokens = new Array[Token]
 
+	var knowledge = new Knowledge(self)
+
 	# Dump of the concrete grammar and the transformations
 	fun pretty: String
 	do
@@ -573,38 +575,41 @@ class LRAutomaton
 	end
 
 	# Generate a graphviz file of the automaton
-	fun to_dot(path: String, knowledge_production : HashMap[Production, Array[String]], knowledge_tokens : HashMap[Token, Array[String]])
+	fun to_dot(path: String)
 	do
 		var f = new FileWriter.open(path)
 		f.write("digraph g \{\n")
 		f.write("rankdir=LR;\n")
 		f.write("node[shape=Mrecord,height=0];\n")
 
+		self.launch_dijkstra(states[0]) 
+		var end_state = self.find_end_state
+
 		for s in states do
 			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
 			for i in s.core do
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
-			f.write("|")
+			f.write("|")	
+
 			for i in s.items do
 				if s.core.has(i) then continue
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
-			
-			# write an example
-			f.write("|") 
-			var i = s.core.first # just for the first alternative of the node
-			for j in [0..i.pos[ do # for all elements from beggining of the item to his position
-				var elem = i.alt.elems[j]
-				if elem isa Production then # if the element is a Production
-					f.write("{knowledge_production[elem].join("").escape_to_dot} ") # write it
-				else # if the element is a Token
-					f.write("{knowledge_tokens[elem].join("").escape_to_dot}") # write it
-				end
-			end
-			f.write("\n")
+
+			# queues to find a path to the end
+			var queue_int = new Array[Int] # numbers of states
+			var queue_elem = new Array[Element] # elements of transitions
+			queue_int.add(0)
+			queue_elem.add(new Token(""))
+
+			#Examples of path
+			self.write_from_start(f,s,queue_elem,queue_int)
+
+			self.write_to_end(f,s,queue_elem,queue_int,end_state)
 			
 			f.write "\""
+			
 			if not s.is_lr0 then
 				var conflict = false
 				for t, a in s.guarded_reduce do
@@ -622,6 +627,7 @@ class LRAutomaton
 					f.write ",color=blue"
 				end
 			end
+
 			f.write "];\n"
 			for t in s.outs do
 				f.write "s{s.number} -> s{t.to.number} [label=\"{t.elem.to_s.escape_to_dot}\"];\n"
@@ -643,6 +649,366 @@ class LRAutomaton
 		end
 		f.close
 	end
+
+	fun find_end_state : Int do
+		var result = -1
+		for s in states do
+			if s.reduces.length == 1 then
+				if s.reduces.first.prod.to_s == "_start" then
+					result = s.number
+					break
+				end
+			end
+		end 
+		return result
+	end
+
+	fun write_from_start(f : FileWriter, s : LRState, queue_elem : Array[Element], queue_int : Array[Int]) do
+		var path_dijkstra = self.search_path_dijkstra(s) # the path from start to the state "s"
+		f.write("|") 
+		for step in path_dijkstra do # write off elements of the path
+			f.write("{grammar.knowledge.knowledges[step.elem].join("").escape_to_dot} ") # write it
+			# initialize the queues
+			queue_elem.add(step.elem) 
+			queue_int.add(step.to.number) 
+		end
+		f.write("\\l")
+	end
+
+	fun find_transition(state : LRState, element : nullable Element) : nullable LRTransition
+	do
+		for t in state.outs do
+			if t.elem == element then
+				return t
+			end
+		end
+		return null
+	end
+
+	fun count_elements(i : Item) : Array[Int]
+	do
+		var nb_productions = 0
+		var nb_tokens = 0
+		for e in [i.pos..i.alt.elems.length[ do
+			if i.alt.elems[e] isa Production then
+				nb_productions = nb_productions + 1
+			else
+				nb_tokens = nb_tokens + 1
+			end
+		end
+
+		return [nb_productions,nb_tokens]
+	end
+
+	fun choose_transition(state : LRState) : LRTransition
+	do
+		var nb_elements_consume = indefinite
+		var nb_productions = indefinite
+		var nb_tokens = indefinite
+		var next_transition : nullable LRTransition = null
+
+		for i in state.items do
+			if not i.next == null and i.next isa Token and
+				nb_elements_consume <= i.pos then
+				
+				var tmp_transition = self.find_transition(state,i.next)
+				if state.number == tmp_transition.to.number then continue # loop on itself
+
+				var elements = self.count_elements(i)
+				var tmp_nb_productions = elements[0] # number of productions in the rest of the alternative 
+				var tmp_nb_tokens = elements[1] # number of tokens in the rest of the alternative
+
+				var less_of_productions : Bool = nb_productions == indefinite or nb_productions > tmp_nb_productions
+				var as_many_of_productions : Bool = nb_productions == indefinite or nb_productions == tmp_nb_productions
+				var less_of_tokens : Bool = nb_tokens == indefinite or nb_tokens > tmp_nb_tokens
+
+				if ( less_of_productions ) or ( less_of_tokens and as_many_of_productions ) then # better choice
+					next_transition = tmp_transition
+					nb_productions = tmp_nb_productions
+					nb_tokens = tmp_nb_tokens
+					nb_elements_consume = i.pos
+				end
+			end
+		end
+
+		var result = new LRTransition(new LRState(""),new LRState(""),new Token("")) # init
+		if next_transition == null then 
+			print "Error : no transition found for state number {state.number}"
+			exit(1)
+		else
+			result = next_transition # transform "nullable LRTransition" in "LRTransition"
+		end
+
+		return result
+	end
+
+	fun shift(state : LRState, queue_elem : Array[Element], queue_int : Array[Int], path : Array[String])  : LRState 
+	do
+		
+		var next_transition = self.choose_transition(state)
+
+		var next_elem = next_transition.elem
+		var next_state = next_transition.to
+
+		queue_elem.add(next_elem)
+		queue_int.add(next_state.number)
+
+		path.add(" ") # add blank
+		path.add_all(grammar.knowledge.knowledges[next_elem])
+
+		state = next_state
+
+		return state
+	end
+
+	fun remove_end(state : LRState, queue_elem : Array[Element], queue_int : Array[Int], remove_on : Alternative)
+	do
+		for i in [0..remove_on.elems.length[ do
+			if queue_elem.length > 0 then
+				queue_elem.pop
+				queue_int.pop
+			end
+		end
+	end
+
+	fun assign_state(state : LRState, queue_elem : Array[Element], queue_int : Array[Int]) : LRState
+	do
+		if queue_int.length > 0 then
+			state = self.states[ ( queue_int[( queue_int.length -1 )] ) ]
+		else
+			state = self.states[0]
+			queue_elem.add(new Token("")) 
+			queue_int.add(0)
+		end 
+		return state
+	end
+
+	fun reduce(state : LRState, queue_elem : Array[Element], queue_int : Array[Int], remove_on : Alternative) : LRState 
+	do
+		self.remove_end(state,queue_elem,queue_int,remove_on)
+		
+		var next_elem = remove_on.prod
+
+		state = self.assign_state(state,queue_elem,queue_int)
+
+		for transition in state.outs do
+			if transition.elem == next_elem then 
+				queue_elem.add(next_elem)
+				queue_int.add(transition.to.number)
+			break
+			end
+		end
+
+		state = self.assign_state(state,queue_elem,queue_int)
+
+		return state
+	end
+
+	fun update_path(state : LRState, queue_elem : Array[Element], queue_int : Array[Int], end_state : Int, path : Array[String]) : Array[String]
+	do		
+		while state.number != end_state do	
+
+			if state.reduces.length == 0 then 
+				state = self.shift(state,queue_elem,queue_int,path)
+
+			else if state.reduces.length == 1 then # just one reduce
+				state = self.reduce(state,queue_elem,queue_int,state.reduces.first)
+
+			else # several reduces
+				var save_queue_elem = queue_elem.clone
+				var save_queue_int = queue_int.clone
+				var save_state = states[state.number]
+				var save_path = new Array[String]
+
+				for reduce_on in save_state.reduces do # try all reduces to choose the best path
+					queue_elem = save_queue_elem.clone
+					queue_int = save_queue_int.clone
+					state = states[save_state.number]
+
+					var tmp_path = new Array[String]
+					state = self.reduce(state,queue_elem,queue_int,reduce_on)
+					tmp_path = self.update_path(state,queue_elem,queue_int,end_state,tmp_path) #finish the path
+
+					if save_path.length == 0 or save_path.length > tmp_path.length then
+						save_path = tmp_path.clone
+					end
+				end
+				state = states[end_state] # the path is finish
+				path.add_all(save_path)
+			end
+		end
+		return path
+	end
+
+	fun write_to_end(f : FileWriter, state : LRState, queue_elem : Array[Element], queue_int : Array[Int], end_state : Int) 
+	do
+		f.write("|") 
+
+		var conflicts : Bool = (state.shifts.length > 0 and state.reduces.length == 1 ) or state.reduces.length > 1 
+
+		if not conflicts then 
+			var path = new Array[String] # path from this state to the end
+			path = self.update_path(state,queue_elem,queue_int,end_state,path)
+			f.write("{path.join("").escape_to_dot} ")
+			f.write("\\l")
+		else
+
+			var save_queue_elem = queue_elem.clone
+			var save_queue_int = queue_int.clone
+			var save_state = state
+
+			if state.shifts.length > 0 then 
+				var path = new Array[String] # path from this state to the end
+				state = self.shift(state,queue_elem,queue_int,path)
+				path = self.update_path(state,queue_elem,queue_int,end_state,path)
+				f.write("--- shift ---")
+				f.write("\\l")
+				f.write("{path.join("").escape_to_dot} ")
+				f.write("\\l")
+			end
+
+			var counter = 0
+
+			for reduce_on in save_state.reduces do
+				queue_elem = save_queue_elem.clone
+				queue_int = save_queue_int.clone
+				state = save_state
+				counter = counter + 1
+
+				var path = new Array[String] # path from this state to the end
+				state = self.reduce(state,queue_elem,queue_int,reduce_on)
+				path = self.update_path(state,queue_elem,queue_int,end_state,path)
+				f.write("--- reduce {counter} ---")
+				f.write("\\l")
+				f.write("{path.join("").escape_to_dot} ")
+				f.write("\\l")
+			end
+		end
+		
+	end
+
+	var infinity = -1
+	var indefinite = -1
+
+	private var start_node : Int = indefinite
+
+	# queue of all nodes for Dijkstra's algorithm
+	private var nodes_queue : nullable Array[Int] = null
+
+	# nodes's informations
+	private var distance_node : nullable Array[Int] = null
+	private var parent_node : nullable Array[Int] = null 
+
+	private fun initialization 
+	do
+		nodes_queue = new Array[Int] 
+		distance_node = new Array[Int]
+		parent_node = new Array[Int]
+
+		for i in [0..states.length[ do
+			nodes_queue.add(i)
+			distance_node.add(infinity)
+			parent_node.add(indefinite)
+		end
+		distance_node[start_node] = 0
+	end
+
+	private fun find_nearest_node : Int 
+	do
+		var mini = infinity
+		var sommet = indefinite
+		for s in  [0..nodes_queue.length[
+		do			
+			if ( not distance_node[nodes_queue[s]] == infinity and mini == infinity ) or 
+				( not distance_node[nodes_queue[s]] == infinity and distance_node[nodes_queue[s]] < mini )
+			then 
+				mini = distance_node[nodes_queue[s]]
+				sommet = nodes_queue[s]
+			end
+		end
+		return sommet
+	end
+
+	private fun update_nodes_informations(s1: Int, s2: Int) 
+	do
+		var weight_of_transition = 1 
+		var d = distance_node[s1] + weight_of_transition
+
+		if distance_node[s2] == infinity or d < distance_node[s2]  then
+			distance_node[s2] = d # then update path
+			parent_node[s2] = s1 # and save path
+		end
+	end
+
+	private fun find_position(node : LRState) : Int
+	do
+		var  pos = indefinite
+		for i in [0..states.length[ do
+			if states[i] == node then 
+				pos = i 
+				break
+			end
+		end
+		return pos
+	end
+
+	public fun search_path_dijkstra(end_node : LRState) : Array[LRTransition]
+	do
+		# If the Dijkstra's algorithm hasn't been launched, return
+		if start_node == indefinite then return new Array[LRTransition]
+
+		var path = new Array[Int]
+		var node = find_position(end_node)
+
+		while not node == start_node do
+			path.add(node)
+			node = parent_node[node] 
+			if node == indefinite then return new Array[LRTransition] # no more parent, impossible path
+		end
+		path.add(start_node) 
+
+		var reverse_path = new Array[Int]
+		for i in [(path.length-1)..0].step(-1) do
+			reverse_path.add(path[i])
+		end
+
+		var path_transition = new Array[LRTransition] 
+
+		for j in [0..reverse_path.length-1[ do 
+			var states_outs = states[ reverse_path[j] ].outs
+			for k in [0..states_outs.length[ do 
+ 				if states[ reverse_path[j+1] ] == states_outs[k].to 
+				then
+					path_transition.add( states_outs[k] ) 
+					break
+				end
+			end
+		end
+		return path_transition
+	end
+
+	public fun launch_dijkstra(start_n : LRState)
+	do
+		start_node = find_position(start_n)
+		
+		self.initialization
+
+		while nodes_queue.not_empty do
+			var s1 = self.find_nearest_node 
+
+			if s1 == indefinite then break # path cannot go farer
+
+			var nexts = states[s1].outs 
+
+			nodes_queue.remove(s1) 
+
+			for i in [0..nexts.length[ do  
+				var s2 = find_position(nexts[i].to) 
+				update_nodes_informations(s1,s2) 
+			end
+		end
+	end
+
 end
 
 private class Generator
@@ -1164,5 +1530,119 @@ class Item
 	do
 		var res = new Item(alt, pos+1)
 		return res
+	end
+end
+
+
+class Knowledge 
+	var gram : Gram
+
+	var knowledges = new HashMap[Element, Array[String]]
+	var knowledge_alernative = new HashMap[Alternative, Array[String]] # How writing alternatives
+
+	var productions_in_alternative = new HashMap[Production, Array[Alternative]] # the alternatives depend on which production
+	var alternative_checked = new HashMap[Alternative, Bool ] # alternative checked ( not in the queue)
+
+	var alternatives = new Array[Alternative] # alls alternatives to check
+
+	fun set_path=(elem : Element, path :  Array[String]) do
+		if not knowledges.has_key(elem) then
+			knowledges[elem] = path 
+		else if knowledges[elem].length > path.length then 
+				knowledges[elem] = path 
+		end
+	end 
+
+	fun initialization do
+		for prod in gram.prods do # for all productions
+			for alt in prod.alts do # for all alternatives of the production
+				alternatives.add(alt) # add it in the queue
+				for elem in alt.elems  do # for all elements of the alternative
+
+					if elem isa Production then # if the alternative have a production as element
+						if productions_in_alternative.has_key(elem) then
+							productions_in_alternative[elem].add(alt) # add and save it
+						else
+							productions_in_alternative[elem] = [alt] # save it
+						end
+					end
+				end
+			end
+		end
+	end
+
+	fun browse_the_alternative(alt : Alternative) : nullable Array[String]
+	do
+		var item = alt.first_item # get the first item
+		var next = item.next
+		var path = new Array[String] # path for a whole alternative
+		while not( next == null ) do # for all items of the alternative
+
+			if next isa Production and not( knowledges.has_key(next) ) then break # If we do not know to write a production
+
+			if next isa Token then
+				path = path + knowledges[next]
+			else
+				path = path + knowledges[next]
+			end
+ 
+			item = item.avance
+			next = item.next
+		end
+
+		if next == null then return path
+
+		return null
+	end
+
+	fun add_dependent_alternatives(alt : Alternative) do
+		for alt_dependent in productions_in_alternative[alt.prod] do 
+			if alternative_checked.has_key(alt_dependent) and alternative_checked[alt_dependent] then  # not already in the queue
+				alternatives.add(alt_dependent) # check them one more time
+				alternative_checked[alt] = false
+			end
+		end		
+	end
+
+	fun manage_productions(alt : Alternative, path : Array[String]) do
+		if knowledges.has_key(alt.prod) then
+			if knowledges[alt.prod].length > path.length then # if it is the new smallest path for a production
+				knowledges[alt.prod] = path
+
+				if productions_in_alternative.has_key(alt.prod) then # so the production is redefined
+					self.add_dependent_alternatives(alt)
+				end
+			end
+		else
+			knowledges[alt.prod] = path # Or a path for an unknown production
+		end
+	end
+
+	fun treatment do 
+		for alt in alternatives do # for all alternatives in the queue
+			
+			var result = self.browse_the_alternative(alt)
+
+			if not result == null then # if the alternative has been fully verified (has not been broken)
+				
+				self.manage_productions(alt,result)
+
+				if not( knowledge_alernative.has_key(alt) ) or knowledge_alernative[alt].length > result.length then 
+					knowledge_alernative[alt] = result # save the path for the alternative
+				end
+
+				alternatives.remove(alt) # alternatives checked, no need to check her anymore
+				alternative_checked[alt] = true # checked
+				
+			end
+		end
+	end
+
+	fun compute do
+		self.initialization
+
+		while not( alternatives.is_empty ) do # as long as we have alternatives to check
+			self.treatment
+		end
 	end
 end

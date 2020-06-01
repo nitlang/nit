@@ -1,0 +1,24 @@
+/* Grammar of a mini procedural programming language */
+Grammar reduces;
+
+Lexer
+x = 'x' ;
+y = 'y' ;
+w = 'w' ;
+z = 'z' ;
+
+Parser
+
+p = 
+	{a} q y w |
+	{b} r z |
+	{c} t y w ;
+
+q = 
+	x ;
+
+r = 
+	x ;
+
+t = 
+	x ;

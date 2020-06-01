@@ -37,18 +37,6 @@ class Automaton
 	# Use `add_tag` to update
 	var retrotags = new HashMap[Token, Set[State]]
 
-	# position of the start node for Dijkstra's algorithm
-	private var start_node : Int = -1
-
-	# queue of all nodes for Dijkstra's algorithm
-	private var nodes_queue : nullable Array[Int] = null
-
-	# distance to node from start_node for Dijkstra's algorithm
-	private var node_distance : nullable Array[Int] = null
-
-	# parent of nodes for Dijkstra's algorithm
-	private var parent_node : nullable Array[Int] = null 
-
 	# Tag all accept states
 	fun tag_accept(t: Token)
 	do
@@ -388,7 +376,8 @@ class Automaton
 
 	# Generate a minimal DFA
 	# REQUIRE: self is a DFA
-	fun to_minimal_dfa: Automaton
+	#fun to_minimal_dfa: Automaton 
+	fun to_minimal_dfa: Dfa
 	do
 		assert_valid
 
@@ -555,13 +544,15 @@ class Automaton
 
 	# Transform a NFA to a DFA.
 	# note: the DFA is not minimized.
-	fun to_dfa: Automaton
+	#fun to_dfa: Automaton
+	fun to_dfa: Dfa
 	do
 		assert_valid
 
 		trim
 
-		var dfa = new Automaton.empty
+		#var dfa = new Automaton.empty
+		var dfa = new Dfa.empty
 		var n2d = new ArrayMap[Set[State], State]
 		var seen = new ArraySet[Set[State]]
 		var alphabet = new HashSet[Int]
@@ -743,158 +734,6 @@ class Automaton
 		gen.gen_to_nit
 	end
 
-	# For Dijkstra's algorithm
-	private fun initialization 
-	do
-		nodes_queue = new Array[Int] 
-		node_distance = new Array[Int]
-		parent_node = new Array[Int]
-
-		for i in [0..states.length[ do
-			nodes_queue.add(i) # add node to queue
-			node_distance.add(-1) # distance = infinity
-			parent_node.add(-1) # parent = indefinite
-		end
-		node_distance[start_node] = 0 # start node's distance = 0
-	end
-
-	# For Dijkstra's algorithm
-	# Return the node with de minimum distance
-	private fun find_min : Int 
-	do
-		var mini = -1 # = infinity
-		var sommet = -1 # = indefinite
-		for s in  [0..nodes_queue.length[ # for all nodes
-		do			
-			# if `mini` > `s node's distance`
-			if ( not( node_distance[nodes_queue[s]] == -1 ) and mini == -1 ) or # node_distance != infinity and mini == infinity
-				( not( node_distance[nodes_queue[s]] == -1 ) and node_distance[nodes_queue[s]] < mini ) # node_distance != infinity and node_distance < mini
-			then 
-				mini = node_distance[nodes_queue[s]] # mini = `s node's distance`
-				sommet = nodes_queue[s] # sommet = `s node`
-			end
-		end
-
-		return sommet
-	end
-
-	# For Dijkstra's algorithm
-	# Update distance and parent of s2 with s1's information
-	private fun update_nodes_path(s1: Int, s2: Int) 
-	do
-		var d = node_distance[s1] + 1 # `+ 1` == `+ weight of transition`
-
-		# If s2's distance > s2's distance from s1
-		if node_distance[s2] == -1 or d < node_distance[s2]  then
-			node_distance[s2] = d # then update path
-			parent_node[s2] = s1 # and save path
-		end
-	end
-
-	# For Dijkstra's algorithm
-	# Return the position of `node` in the graph
-	private fun find_position(node : State) : Int
-	do
-		var  pos = -1
-		for i in [0..states.length[ do
-			if states[i] == node then # position found
-				pos = i # save
-				break # return it
-			end
-		end
-		return pos
-	end
-
-	# For Dijkstra's algorithm
-	public fun search_path_dijkstra(end_node : State) : Array[Transition]
-	do
-		# if the Dijkstra's algorithm hasn't been launched, return
-		if start_node == -1 then return new Array[Transition] # start node didn't declared, return an empty array
-
-		var path = new Array[Int] # path from end to start
-		var node = find_position(end_node) # begin at the end
-
-		while not node == start_node do # go back in the path
-			path.add(node)
-			node = parent_node[node] # follow the path thanks to parent of each nodes
-			if node == -1 then return new Array[Transition] # no more parent, impossible path, return an empty array
-		end
-		path.add(node) #add start_node
-
-		var reverse_path = new Array[Int] # path from start to end
-		for i in [(path.length-1)..0].step(-1) do
-			reverse_path.add(path[i])
-		end
-
-		var path_transition = new Array[Transition] # the path with transitions used
-
-		for j in [0..reverse_path.length-1[ do 
-			var states_outs = states[ reverse_path[j] ].outs # transitions outs of the j th node
-			for k in [0..states_outs.length[ do # for all transitions
- 				if states[ reverse_path[j+1] ] == states_outs[k].to # if node's `transition to` == next node in the path
-				then
-					path_transition.add( states_outs[k] ) # save the transition in the path
-					break
-				end
-			end
-		end
-		return path_transition
-	end
-
-	# For Dijkstra's algorithm
-	# launches Dijkstra's algorithm for all the graph from a node named `start_n`
-	public fun launch_dijkstra(start_n : State)
-	do
-		start_node = find_position(start_n) # get the position in the graph
-		
-		self.initialization
-
-		while nodes_queue.length > 0 do  # while we always have nodes
-			var s1 = self.find_min   # get the node with the minimum distance
-
-			if s1 == -1 then break # path cannot go farer
-
-			var nexts = states[s1].outs  # get his next nodes
-
-			nodes_queue.remove(s1)  # Node already checked, no need to check it anymore
-
-			for i in [0..nexts.length[ do  # for all his next nodes
-				var s2 = find_position(nexts[i].to) 
-				update_nodes_path(s1,s2)  # update their path
-			end
-		end
-	end
-
-	# For Dijkstra's algorithm
-	# Search the smallest path just between two states
-	public fun find_path(start_n : State,end_node : State) : Array[Transition]
-	do
-		start_node = find_position(start_n) # get the position in the graph of the first node
-		var final_node = find_position(end_node) # get the position in the graph of the last node
- 
-		self.initialization
-
-		while nodes_queue.length > 0 do # while we always have nodes
-			var s1 = self.find_min  # get the node with the minimum distances
-
-			if s1 == -1 then return new Array[Transition] # impossible path, return an array empty
-			if s1 == final_node then break # if we have found the last node, break the algorithm
-
-			var nexts = states[s1].outs  # get his next nodes
-			nodes_queue.remove(s1)  # Node already checked, no need to check it anymore
-
-			for i in [0..nexts.length[ do  # for all his next nodes
-				var s2 = find_position(nexts[i].to)
-				update_nodes_path(s1,s2)  # update their path
-			end
-		end
-
-		var result = self.search_path_dijkstra(end_node)
-
-		start_node = -1 # Dijkstra's algorithm wasn't lauched for all the graph, don't save it
-
-		return result # return the path
-	end
 end
 
 # Generate the Nit source code of the lexer
@@ -1135,101 +974,160 @@ class Transition
 	end
 end
 
+class Dfa
+	super Automaton
 
+	var infinity = -1
+	var indefinite = -1
 
-class Knowledge
+	var start_node : Int = indefinite
 
-	var knowledge_production = new HashMap[Production, Array[String]] # How writing productions
-	var knowledge_alernative = new HashMap[Alternative, Array[String]] # How writing alternatives
-	var knowledge_tokens = new HashMap[Token, Array[String]] # How writing tokens
+	# queue of all nodes for Dijkstra's algorithm
+	var nodes_queue : nullable Array[Int] = null
 
-	var productions_in_alternative = new HashMap[Production, Array[Alternative]] # the alternatives depend on which production
-	var alternative_checked = new HashMap[Alternative, Bool ] # alternative checked ( not in the queue)
+	# nodes's informations
+	var distance_node : nullable Array[Int] = null
+	var parent_node : nullable Array[Int] = null 
 
-	var alternatives = new Array[Alternative] # alls alternatives to check
+	fun initialization 
+	do
+		nodes_queue = new Array[Int] 
+		distance_node = new Array[Int]
+		parent_node = new Array[Int]
 
-	var gram : Gram
-	var dfa : Automaton
+		for i in [0..states.length[ do
+			nodes_queue.add(i)
+			distance_node.add(infinity)
+			parent_node.add(indefinite)
+		end
+		distance_node[start_node] = 0
+	end
 
-	init do
-		dfa.launch_dijkstra(dfa.start)
+	fun find_nearest_node : Int 
+	do
+		var mini = infinity
+		var sommet = indefinite 
+		for s in  [0..nodes_queue.length[
+		do			
+			if ( not distance_node[nodes_queue[s]] == infinity  and mini == infinity ) or
+				( not distance_node[nodes_queue[s]] == infinity and distance_node[nodes_queue[s]] < mini )
+			then 
+				mini = distance_node[nodes_queue[s]]
+				sommet = nodes_queue[s] 
+			end
+		end
+		return sommet
+	end
 
-		for prod in gram.prods do # for all productions
-			for alt in prod.alts do # for all alternatives of the production
-				alternatives.add(alt) # add it in the queue
-				for elem in alt.elems  do # for all elements of the alternative
-					if elem isa Production then # if the alternative have a production as element
-						if productions_in_alternative.has_key(elem) then
-							productions_in_alternative[elem].add(alt) # add and save it
-						else
-							productions_in_alternative[elem] = [alt] # save it
-						end
-					else if elem isa Token and elem.to_s == "Eof" then # no need to check has_key because token "Eof" is unique
-						knowledge_tokens[elem] = [elem.to_s]
-					else if elem isa Token and not( knowledge_tokens.has_key(elem) ) then
-						var min_path = new Array[String] # path for an item with lettering
-						var path_tmp = new Array[Transition] # path for an item with transitions
-						var iter_state = dfa.retrotags[elem].iterator
-						while iter_state.is_ok do # For all possible paths
-							var path_tmp2 = dfa.search_path_dijkstra(iter_state.item)
-							if path_tmp.length == 0 or path_tmp.length > path_tmp2.length then path_tmp = path_tmp2 # save the minimal
-							iter_state.next
-						end
-						for value in path_tmp do # for all the path
-							min_path.add(value.symbol.to_s)	# get the symbole			
-						end
-						knowledge_tokens[elem] = min_path # save the minimal path
-					end 
+	fun update_nodes_informations(s1: Int, s2: Int) 
+	do
+		var weight_of_transition = 1 
+		var d = distance_node[s1] + weight_of_transition
+
+		if distance_node[s2] == infinity or d < distance_node[s2]  then
+			distance_node[s2] = d # then update the path
+			parent_node[s2] = s1 # and save the path
+		end
+	end
+
+	fun find_position(node : State) : Int
+	do
+		var  pos = indefinite
+		for i in [0..states.length[ do
+			if states[i] == node then 
+				pos = i 
+				break 
+			end
+		end
+		return pos
+	end
+
+	fun search_path_dijkstra(end_node : State) : Array[Transition]
+	do
+		# If the Dijkstra's algorithm hasn't been launched, return
+		if start_node == indefinite then return new Array[Transition]
+
+		var path = new Array[Int]
+		var node = find_position(end_node)
+
+		while not node == start_node do
+			path.add(node)
+			node = parent_node[node]
+			if node == indefinite then return new Array[Transition] # no more parent, impossible path
+		end
+		path.add(start_node)
+
+		var reverse_path = new Array[Int]
+		for i in [(path.length-1)..0].step(-1) do
+			reverse_path.add(path[i])
+		end
+
+		var path_transition = new Array[Transition]
+
+		for j in [0..reverse_path.length-1[ do 
+			var states_outs = states[ reverse_path[j] ].outs
+			for k in [0..states_outs.length[ do 
+ 				if states[ reverse_path[j+1] ] == states_outs[k].to 
+				then
+					path_transition.add( states_outs[k] )
+					break
 				end
 			end
 		end
+		return path_transition
+	end
 
-		while not( alternatives.is_empty ) do # as long as we have alternatives to check
-			for alt in alternatives do # for all alternatives in the queue
-				var item = alt.first_item # get the first item
-				var next = item.next
-				var path = new Array[String] # path for a whole alternative
-				while not( next == null ) do # for all items of the alternative
+	fun launch_dijkstra(start : State)
+	do
+		start_node = find_position(start)
+		
+		self.initialization
 
-					if next isa Production and not( knowledge_production.has_key(next) ) then break # If we do not know to write a production
+		while nodes_queue.not_empty do 
+			var s1 = self.find_nearest_node   
 
-					if next isa Token then
-						path = path + knowledge_tokens[next]
-					else
-						path = path + knowledge_production[next]
-					end
-		 
-					item = item.avance
-					next = item.next
-				end
+			if s1 == indefinite then break # path cannot go farer
 
-				if next == null then # if the alternative has been fully verified (has not been broken)
-					if knowledge_production.has_key(alt.prod) then
-						if knowledge_production[alt.prod].length > path.length then # if it is the new smallest path for a production
-							knowledge_production[alt.prod] = path
+			var nexts = states[s1].outs 
 
-							if productions_in_alternative.has_key(alt.prod) then # so the production is redefined
-								for alt_p in productions_in_alternative[alt.prod] do # for all alternatives who depends of it
-									if alternative_checked.has_key(alt_p) and alternative_checked[alt_p] then  # not already in the queue
-										alternatives.add(alt_p) # check them one more time
-										alternative_checked[alt] = false
-									end
-								end
-							end
-						end
-					else
-						knowledge_production[alt.prod] = path # Or a path for an unknown production
-					end
+			nodes_queue.remove(s1)
 
-				if not( knowledge_alernative.has_key(alt) ) or knowledge_alernative[alt].length > path.length then 
-					knowledge_alernative[alt] = path # save the path for the alternative
-				end
-
-				alternatives.remove(alt) # alternatives checked, no need to check her anymore
-				alternative_checked[alt] = true # checked
-					
-				end
+			for i in [0..nexts.length[ do 
+				var s2 = find_position(nexts[i].to) 
+				update_nodes_informations(s1,s2)
 			end
 		end
-	end 
+	end
+
+	fun find_min_path(elem : Token ) : Array[Transition] 
+	do
+		var initialization = self.retrotags[elem].iterator.item
+		var  min_path = self.search_path_dijkstra( initialization )
+
+		for state in  self.retrotags[elem].iterator do
+			var path_tmp = self.search_path_dijkstra(state)
+			if min_path.length > path_tmp.length then min_path = path_tmp # save the minimal
+		end 
+		return min_path
+	end
+
+	fun translate_path(min_path : Array[Transition]) : Array[String]
+	do
+		var path_result = new Array[String]
+		for value in min_path do 
+			path_result.add(value.symbol.to_s)				
+		end
+		return path_result
+	end
+
+	fun sorter_path_to(elem : Token ) : Array[String]
+	do
+		if elem.to_s == "Eof" then
+			return [elem.to_s]
+		else
+			var min_path = self.find_min_path(elem)
+			var path_result = self.translate_path(min_path)
+			return path_result 
+		end 
+	end
 end

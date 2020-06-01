@@ -1,0 +1,20 @@
+/* Grammar of a mini procedural programming language */
+Grammar loop;
+
+Lexer
+a = 'a';
+b = 'b';
+c = 'c';
+d = 'd';
+
+Parser
+
+p = 
+	a q ;
+
+q = 
+	{un:} a q |
+	{deux:} b c r;
+
+r = 
+	d ;

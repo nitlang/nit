@@ -18,7 +18,6 @@ module nitcc
 import nitcc_semantic
 
 # Load the grammar file
-
 if args.is_empty then
 	print "usage: nitcc <file> | -"
 	exit 1
@@ -99,13 +98,16 @@ f.write "// Concrete grammar of {name}\n"
 f.write pretty
 f.close
 
-# Find path for each productions of grammar
 var nfa = v2.nfa
 var dfa = nfa.to_dfa
-var knowledge = new Knowledge(gram,dfa)
+dfa.launch_dijkstra(dfa.start)
+for t in gram.tokens do 
+	gram.knowledge.set_path(t) = dfa.sorter_path_to(t)
+end
+gram.knowledge.compute
 
 print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)"
-lr.to_dot("{name}.lr.dot",knowledge.knowledge_production,knowledge.knowledge_tokens) # we need to know how write tokens and productions
+lr.to_dot("{name}.lr.dot") 
 pretty = lr.pretty
 f = new FileWriter.open("{name}.lr.out")
 f.write "// LR automaton of {name}\n"
@@ -174,34 +176,3 @@ var t = new TestParser_{{{name}}}
 t.main
 """
 f.close
-
-
-# show results of Knowledge
-#var iter_prod = knowledge.knowledge_production.iterator
-#	var iter_alt = knowledge.knowledge_alernative.iterator
-#	var iter_token = knowledge.knowledge_tokens.iterator
-
-#	print ""
-#	print "Tokens"
-#	while iter_token.is_ok do
-#		print iter_token.key.to_s
-#		printn "   "
-#		print iter_token.item.join("  ")
-#		iter_token.next
-#	end
-#	print ""
-#	print "Production"
-#	while iter_prod.is_ok do
-#		print iter_prod.key.to_s
-#		printn "   "
-#		print iter_prod.item.join("  ")
-#		iter_prod.next
-#	end
-#	print ""
-#	print "Alternative"
-#	while iter_alt.is_ok do
-#		print iter_alt.key.to_s
-#		printn "   "
-#		print iter_alt.item.join("  ")
-#		iter_alt.next
-#	end

@@ -1,0 +1,41 @@
+/* Grammar of a mini procedural programming language */
+Grammar conflicts;
+
+Lexer
+r = 'r' ;
+s = 's' ;
+t = 't' ;
+u = 'u' ;
+v = 'v' ;
+w = 'w' ;
+x = 'x' ;
+y = 'y' ;
+z = 'z' ;
+
+Parser
+
+i = 
+	{a} j s t u v w |
+	{b} k |
+	{c} l s t u ;
+
+j = 
+	{a} r u |
+	{b} r u v ;
+
+k = 
+	{a} m y |
+	{b} n |
+	{c} o y z ;
+
+l = 
+	r ;
+
+m =
+	x ;
+
+n =
+	x ;
+
+o =
+	x ;
