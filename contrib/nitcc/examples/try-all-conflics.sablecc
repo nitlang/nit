@@ -20,7 +20,7 @@ i =
 	{c} l s t u ;
 
 j = 
-	{a} r u |
+	{a} r  |
 	{b} r u v ;
 
 k = 

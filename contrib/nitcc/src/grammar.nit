@@ -604,9 +604,12 @@ class LRAutomaton
 			queue_elem.add(new Token(""))
 
 			#Examples of path
-			self.write_from_start(f,s,queue_elem,queue_int)
 
-			self.write_to_end(f,s,queue_elem,queue_int,end_state)
+			if grammar.knowledge.knowledges.not_empty then 
+				self.write_from_start(f,s,queue_elem,queue_int)
+
+				self.write_to_end(f,s,queue_elem,queue_int,end_state)
+			end
 			
 			f.write "\""
 			
@@ -744,7 +747,7 @@ class LRAutomaton
 
 	fun shift(state : LRState, queue_elem : Array[Element], queue_int : Array[Int], path : Array[String])  : LRState 
 	do
-		
+		 
 		var next_transition = self.choose_transition(state)
 
 		var next_elem = next_transition.elem
