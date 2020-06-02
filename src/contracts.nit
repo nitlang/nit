@@ -21,6 +21,7 @@ module contracts
 import parse_annotations
 import phase
 import semantize
+intrude import model_contract
 intrude import astbuilder
 intrude import modelize_property
 intrude import scope
@@ -301,12 +302,7 @@ redef class AAnnotation
 	end
 end
 
-# The root of all contracts
-#
-# The objective of this class is to provide the set
-# of services must be implemented or provided by a contract
-abstract class MContract
-	super MMethod
+redef class MContract
 
 	# Define the name of the contract
 	fun contract_name: String is abstract
@@ -393,10 +389,7 @@ abstract class MContract
 	end
 end
 
-# A expect (precondition) contract representation
-# This method check if the requirements of the called method is true.
-class MExpect
-	super MContract
+redef class MExpect
 
 	# Define the name of the contract
 	redef fun contract_name: String do return "expect"
@@ -462,9 +455,7 @@ class MExpect
 	end
 end
 
-# The root of all contracts where the call is after the execution of the original method (`invariant` and `ensure`).
-abstract class BottomMContract
-	super MContract
+redef class BottomMContract
 
 	redef fun create_nblock(v: ContractsVisitor, n_condition: AExpr, args: Array[AExpr]): ABlockExpr
 	do
@@ -524,10 +515,7 @@ abstract class BottomMContract
 	end
 end
 
-# A ensure (postcondition) representation
-# This method check if the called method respects the expectations of the caller.
-class MEnsure
-	super BottomMContract
+redef class MEnsure
 
 	# Define the name of the contract
 	redef fun contract_name: String do return "ensure"
@@ -604,59 +592,13 @@ redef class MClass
 	end
 end
 
-redef class MMethod
-
-	# The contract facet of the method
-	# it's representing the method with contract
-	# This method call the contract and the method
-	var mcontract_facet: nullable MMethod = null
-
-	# The expected contract method
-	var mexpect: nullable MExpect = null
-
-	# The ensure contract method
-	var mensure: nullable MEnsure = null
-
-	# Check if the MMethod has no ensure contract
-	# if this is the case returns false and built it
-	# else return true
-	private fun check_exist_ensure: Bool
-	do
-		if self.mensure != null then return true
-		# build a new `MEnsure` contract
-		self.mensure = new MEnsure(intro_mclassdef, "_ensure_{name}", intro_mclassdef.location, public_visibility)
-		return false
-	end
-
-	# Check if the MMethod has no expect contract
-	# if this is the case returns false and built it
-	# else return true
-	private fun check_exist_expect: Bool
-	do
-		if self.mexpect != null then return true
-		# build a new `MExpect` contract
-		self.mexpect = new MExpect(intro_mclassdef, "_expect_{name}", intro_mclassdef.location, public_visibility)
-		return false
-	end
-
-	# Check if the MMethod has an contract facet
-	# If the method has no contract facet she create it
-	private fun check_exist_contract_facet(mpropdef : MMethodDef): Bool
-	do
-		if self.mcontract_facet != null then return true
-		# build a new `MMethod` contract
-		self.mcontract_facet = new MMethod(intro_mclassdef, "_contract_{name}", intro_mclassdef.location, public_visibility)
-		return false
-	end
-end
-
 redef class MMethodDef
 
 	# Verification of the contract facet
 	# Check if a contract facet already exists to use it again or if it is necessary to create it.
 	private fun check_contract_facet(v: ContractsVisitor, n_signature: ASignature, classdef: MClassDef, mcontract: MContract, exist_contract: Bool)
 	do
-		var exist_contract_facet = mproperty.check_exist_contract_facet(self)
+		var exist_contract_facet = mproperty.has_contract_facet
 		if exist_contract_facet and exist_contract then return
 
 		var contract_facet: AMethPropdef
@@ -693,8 +635,7 @@ redef class MMethodDef
 	# Method to create a contract facet of the method
 	private fun create_contract_facet(v: ContractsVisitor, classdef: MClassDef, n_signature: ASignature): AMethPropdef
 	do
-		var contract_facet = mproperty.mcontract_facet
-		assert contract_facet != null
+		var contract_facet = mproperty.build_contract_facet
 		# Defines the contract phase is an init or not
 		# it is necessary to use the contracts on constructor
 		contract_facet.is_init = self.mproperty.is_init
@@ -804,12 +745,12 @@ redef class AMethPropdef
 	do
 		if n_annotation.name == "expect" then
 			if not v.check_usage_expect(mpropdef.mclassdef.mmodule) then return
-			var exist_contract = mpropdef.mproperty.check_exist_expect
-			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mexpect.as(not null), exist_contract)
+			var exist_contract = mpropdef.mproperty.has_expect
+			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.build_expect, exist_contract)
 		else if n_annotation.name == "ensure" then
 			if not v.check_usage_ensure(mpropdef.mclassdef.mmodule) then return
-			var exist_contract = mpropdef.mproperty.check_exist_ensure
-			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mensure.as(not null), exist_contract)
+			var exist_contract = mpropdef.mproperty.has_ensure
+			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.build_ensure, exist_contract)
 		else if n_annotation.name == "no_contract" then
 			# no_contract found set the flag to true
 			v.find_no_contract = true
