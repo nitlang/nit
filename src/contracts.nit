@@ -687,17 +687,6 @@ end
 
 redef class AMethPropdef
 
-	# Execute all method verification scope flow and typing.
-	# It also execute an ast validation to define all parents and all locations
-	private fun do_all(toolcontext: ToolContext)
-	do
-		self.validate
-		# FIXME: The `do_` usage it is maybe to much (verification...). Solution: Cut the `do_` methods into simpler parts
-		self.do_scope(toolcontext)
-		self.do_flow(toolcontext)
-		self.do_typing(toolcontext.modelbuilder)
-	end
-
 	# Entry point to create a contract (verification of inheritance, or new contract).
 	redef fun create_contracts(v)
 	do

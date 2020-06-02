@@ -418,6 +418,17 @@ redef class AMethPropdef
 		self.mpropdef = mmethoddef
 		if mpropdef != null then self.location = mmethoddef.location
 	end
+
+	# Execute all method verification scope flow and typing.
+	# It also execute an ast validation to define all parents and all locations
+	fun do_all(toolcontext: ToolContext)
+	do
+		self.validate
+		# FIXME: The `do_` usage it is maybe to much (verification...). Solution: Cut the `do_` methods into simpler parts
+		self.do_scope(toolcontext)
+		self.do_flow(toolcontext)
+		self.do_typing(toolcontext.modelbuilder)
+	end
 end
 
 redef class AAssertExpr
