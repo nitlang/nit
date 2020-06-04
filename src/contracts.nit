@@ -57,11 +57,12 @@ redef class AModule
 	#   if the callsite calls a method with a contract. If this is
 	#	the case the callsite is replaced by another callsite to the contract method.
 	fun do_contracts(toolcontext: ToolContext) do
+		var ast_builder = new ASTBuilder(mmodule.as(not null))
 		#
-		var contract_visitor = new ContractsVisitor(toolcontext, toolcontext.modelbuilder.identified_modules.first, self, new ASTBuilder(mmodule.as(not null)))
+		var contract_visitor = new ContractsVisitor(toolcontext, toolcontext.modelbuilder.identified_modules.first, self, ast_builder)
 		contract_visitor.enter_visit(self)
 		#
-		var callsite_visitor = new CallSiteVisitor(toolcontext)
+		var callsite_visitor = new CallSiteVisitor(toolcontext, ast_builder)
 		callsite_visitor.enter_visit(self)
 	end
 end
@@ -250,12 +251,13 @@ end
 private class CallSiteVisitor
 	super Visitor
 
-
 	# Instance of the toolcontext
 	var toolcontext: ToolContext
 
+	var ast_builder: ASTBuilder
+
 	# Actual visited method
-	var visited_method: APropdef is noinit
+	var visited_propdef: APropdef is noinit
 
 	redef fun visit(node)
 	do
@@ -267,18 +269,13 @@ private class CallSiteVisitor
 	# If it's the case the callsite is replaced by another callsite to the contract method.
 	private fun drive_method_contract(callsite: CallSite): CallSite
 	do
-		if callsite.mproperty.mcontract_facet != null then
-			var contract_facet = callsite.mproperty.mcontract_facet
-			var visited_mpropdef = visited_method.mpropdef
-			assert contract_facet != null and visited_mpropdef != null
+		var contract_facet = callsite.mproperty.mcontract_facet
+		var visited_mpropdef = visited_propdef.mpropdef
 
-			var type_visitor = new TypeVisitor(toolcontext.modelbuilder, visited_mpropdef)
-			var drived_callsite = type_visitor.build_callsite_by_property(visited_method, callsite.recv, contract_facet, callsite.recv_is_self)
-			# This never happen this check is here for debug
-			assert drived_callsite != null
-			return drived_callsite
-		end
-		return callsite
+		if visited_mpropdef isa MContract or visited_mpropdef isa MFacet then return callsite
+		if visited_mpropdef == null or contract_facet == null then return callsite
+
+		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, contract_facet, callsite.recv_is_self)
 	end
 end
 
@@ -711,7 +708,7 @@ end
 redef class APropdef
 	redef fun check_callsite(v)
 	do
-		v.visited_method = self
+		v.visited_propdef = self
 	end
 end
 
