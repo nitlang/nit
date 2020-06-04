@@ -203,11 +203,11 @@ class ASTBuilder
 
 	# Build a callsite to call the `mproperty` in the current method `caller_method`.
 	# `is_self_call` indicate if the method caller is a property of `self`
-	fun create_callsite(modelbuilder: ModelBuilder, caller_method : AMethPropdef, mproperty: MMethod, is_self_call: Bool): CallSite
+	fun create_callsite(modelbuilder: ModelBuilder, caller_property: APropdef, mproperty: MMethod, is_self_call: Bool): CallSite
 	do
 		# FIXME It's not the better solution to call `TypeVisitor` here to build a model entity, but some make need to have a callsite
-		var type_visitor = new TypeVisitor(modelbuilder, caller_method.mpropdef.as(not null))
-		var callsite = type_visitor.build_callsite_by_property(caller_method, mproperty.intro_mclassdef.bound_mtype, mproperty, is_self_call)
+		var type_visitor = new TypeVisitor(modelbuilder, caller_property.mpropdef.as(not null))
+		var callsite = type_visitor.build_callsite_by_property(caller_property, mproperty.intro_mclassdef.bound_mtype, mproperty, is_self_call)
 		assert callsite != null
 		return callsite
 	end
@@ -417,6 +417,17 @@ redef class AMethPropdef
 		self.init_amethpropdef(null,tk_redef,n_visibility,new TKwmeth,null,null,null,n_methid,n_signature,n_annotations,n_extern_calls,n_extern_code_block,new TKwdo,n_block,new TKwend)
 		self.mpropdef = mmethoddef
 		if mpropdef != null then self.location = mmethoddef.location
+	end
+
+	# Execute all method verification scope flow and typing.
+	# It also execute an ast validation to define all parents and all locations
+	fun do_all(toolcontext: ToolContext)
+	do
+		self.validate
+		# FIXME: The `do_` usage it is maybe to much (verification...). Solution: Cut the `do_` methods into simpler parts
+		self.do_scope(toolcontext)
+		self.do_flow(toolcontext)
+		self.do_typing(toolcontext.modelbuilder)
 	end
 end
 
