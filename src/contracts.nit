@@ -296,9 +296,6 @@ end
 
 redef class MContract
 
-	# Define the name of the contract
-	fun contract_name: String is abstract
-
 	# Method use to diplay warning when the contract is not present at the introduction
 	private fun no_intro_contract(v: ContractsVisitor, a: Array[AAnnotation])do end
 
@@ -396,9 +393,6 @@ redef class MContract
 end
 
 redef class MExpect
-
-	# Define the name of the contract
-	redef fun contract_name: String do return "expect"
 
 	# Display warning if no contract is defined at introduction `expect`,
 	# because if no contract is defined at the introduction the added
@@ -527,9 +521,6 @@ redef class BottomMContract
 end
 
 redef class MEnsure
-
-	# Define the name of the contract
-	redef fun contract_name: String do return "ensure"
 
 	redef fun adapt_specific_msignature(m_signature: MSignature): MSignature
 	do
