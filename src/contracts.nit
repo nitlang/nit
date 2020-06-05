@@ -21,6 +21,7 @@ module contracts
 import parse_annotations
 import phase
 import semantize
+intrude import model_contract
 intrude import astbuilder
 intrude import modelize_property
 intrude import scope
@@ -56,11 +57,12 @@ redef class AModule
 	#   if the callsite calls a method with a contract. If this is
 	#	the case the callsite is replaced by another callsite to the contract method.
 	fun do_contracts(toolcontext: ToolContext) do
+		var ast_builder = new ASTBuilder(mmodule.as(not null))
 		#
-		var contract_visitor = new ContractsVisitor(toolcontext, toolcontext.modelbuilder.identified_modules.first, self, new ASTBuilder(mmodule.as(not null)))
+		var contract_visitor = new ContractsVisitor(toolcontext, toolcontext.modelbuilder.identified_modules.first, self, ast_builder)
 		contract_visitor.enter_visit(self)
 		#
-		var callsite_visitor = new CallSiteVisitor(toolcontext)
+		var callsite_visitor = new CallSiteVisitor(toolcontext, ast_builder)
 		callsite_visitor.enter_visit(self)
 	end
 end
@@ -249,12 +251,13 @@ end
 private class CallSiteVisitor
 	super Visitor
 
-
 	# Instance of the toolcontext
 	var toolcontext: ToolContext
 
+	var ast_builder: ASTBuilder
+
 	# Actual visited method
-	var visited_method: APropdef is noinit
+	var visited_propdef: APropdef is noinit
 
 	redef fun visit(node)
 	do
@@ -266,18 +269,13 @@ private class CallSiteVisitor
 	# If it's the case the callsite is replaced by another callsite to the contract method.
 	private fun drive_method_contract(callsite: CallSite): CallSite
 	do
-		if callsite.mproperty.mcontract_facet != null then
-			var contract_facet = callsite.mproperty.mcontract_facet
-			var visited_mpropdef = visited_method.mpropdef
-			assert contract_facet != null and visited_mpropdef != null
+		var contract_facet = callsite.mproperty.mcontract_facet
+		var visited_mpropdef = visited_propdef.mpropdef
 
-			var type_visitor = new TypeVisitor(toolcontext.modelbuilder, visited_mpropdef)
-			var drived_callsite = type_visitor.build_callsite_by_property(visited_method, callsite.recv, contract_facet, callsite.recv_is_self)
-			# This never happen this check is here for debug
-			assert drived_callsite != null
-			return drived_callsite
-		end
-		return callsite
+		if visited_mpropdef isa MContract or visited_mpropdef isa MFacet then return callsite
+		if visited_mpropdef == null or contract_facet == null then return callsite
+
+		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, contract_facet, callsite.recv_is_self)
 	end
 end
 
@@ -301,12 +299,7 @@ redef class AAnnotation
 	end
 end
 
-# The root of all contracts
-#
-# The objective of this class is to provide the set
-# of services must be implemented or provided by a contract
-abstract class MContract
-	super MMethod
+redef class MContract
 
 	# Define the name of the contract
 	fun contract_name: String is abstract
@@ -393,10 +386,7 @@ abstract class MContract
 	end
 end
 
-# A expect (precondition) contract representation
-# This method check if the requirements of the called method is true.
-class MExpect
-	super MContract
+redef class MExpect
 
 	# Define the name of the contract
 	redef fun contract_name: String do return "expect"
@@ -462,9 +452,7 @@ class MExpect
 	end
 end
 
-# The root of all contracts where the call is after the execution of the original method (`invariant` and `ensure`).
-abstract class BottomMContract
-	super MContract
+redef class BottomMContract
 
 	redef fun create_nblock(v: ContractsVisitor, n_condition: AExpr, args: Array[AExpr]): ABlockExpr
 	do
@@ -524,10 +512,7 @@ abstract class BottomMContract
 	end
 end
 
-# A ensure (postcondition) representation
-# This method check if the called method respects the expectations of the caller.
-class MEnsure
-	super BottomMContract
+redef class MEnsure
 
 	# Define the name of the contract
 	redef fun contract_name: String do return "ensure"
@@ -604,59 +589,13 @@ redef class MClass
 	end
 end
 
-redef class MMethod
-
-	# The contract facet of the method
-	# it's representing the method with contract
-	# This method call the contract and the method
-	var mcontract_facet: nullable MMethod = null
-
-	# The expected contract method
-	var mexpect: nullable MExpect = null
-
-	# The ensure contract method
-	var mensure: nullable MEnsure = null
-
-	# Check if the MMethod has no ensure contract
-	# if this is the case returns false and built it
-	# else return true
-	private fun check_exist_ensure: Bool
-	do
-		if self.mensure != null then return true
-		# build a new `MEnsure` contract
-		self.mensure = new MEnsure(intro_mclassdef, "_ensure_{name}", intro_mclassdef.location, public_visibility)
-		return false
-	end
-
-	# Check if the MMethod has no expect contract
-	# if this is the case returns false and built it
-	# else return true
-	private fun check_exist_expect: Bool
-	do
-		if self.mexpect != null then return true
-		# build a new `MExpect` contract
-		self.mexpect = new MExpect(intro_mclassdef, "_expect_{name}", intro_mclassdef.location, public_visibility)
-		return false
-	end
-
-	# Check if the MMethod has an contract facet
-	# If the method has no contract facet she create it
-	private fun check_exist_contract_facet(mpropdef : MMethodDef): Bool
-	do
-		if self.mcontract_facet != null then return true
-		# build a new `MMethod` contract
-		self.mcontract_facet = new MMethod(intro_mclassdef, "_contract_{name}", intro_mclassdef.location, public_visibility)
-		return false
-	end
-end
-
 redef class MMethodDef
 
 	# Verification of the contract facet
 	# Check if a contract facet already exists to use it again or if it is necessary to create it.
 	private fun check_contract_facet(v: ContractsVisitor, n_signature: ASignature, classdef: MClassDef, mcontract: MContract, exist_contract: Bool)
 	do
-		var exist_contract_facet = mproperty.check_exist_contract_facet(self)
+		var exist_contract_facet = mproperty.has_contract_facet
 		if exist_contract_facet and exist_contract then return
 
 		var contract_facet: AMethPropdef
@@ -693,8 +632,7 @@ redef class MMethodDef
 	# Method to create a contract facet of the method
 	private fun create_contract_facet(v: ContractsVisitor, classdef: MClassDef, n_signature: ASignature): AMethPropdef
 	do
-		var contract_facet = mproperty.mcontract_facet
-		assert contract_facet != null
+		var contract_facet = mproperty.build_contract_facet
 		# Defines the contract phase is an init or not
 		# it is necessary to use the contracts on constructor
 		contract_facet.is_init = self.mproperty.is_init
@@ -770,7 +708,7 @@ end
 redef class APropdef
 	redef fun check_callsite(v)
 	do
-		v.visited_method = self
+		v.visited_propdef = self
 	end
 end
 
@@ -804,12 +742,12 @@ redef class AMethPropdef
 	do
 		if n_annotation.name == "expect" then
 			if not v.check_usage_expect(mpropdef.mclassdef.mmodule) then return
-			var exist_contract = mpropdef.mproperty.check_exist_expect
-			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mexpect.as(not null), exist_contract)
+			var exist_contract = mpropdef.mproperty.has_expect
+			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.build_expect, exist_contract)
 		else if n_annotation.name == "ensure" then
 			if not v.check_usage_ensure(mpropdef.mclassdef.mmodule) then return
-			var exist_contract = mpropdef.mproperty.check_exist_ensure
-			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.mensure.as(not null), exist_contract)
+			var exist_contract = mpropdef.mproperty.has_ensure
+			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.build_ensure, exist_contract)
 		else if n_annotation.name == "no_contract" then
 			# no_contract found set the flag to true
 			v.find_no_contract = true
