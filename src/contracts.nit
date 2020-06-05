@@ -138,35 +138,6 @@ private class ContractsVisitor
 		end
 	end
 
-	# Verification if the construction of the contract is necessary.
-	# Three cases are checked for `expect`:
-	#
-	# - Was the `--full-contract` option passed?
-	# - Is the method is in the main package?
-	# - Is the method is in a direct imported package?
-	#
-	fun check_usage_expect(actual_mmodule: MModule): Bool
-	do
-		var main_package = mainmodule.mpackage
-		var actual_package = actual_mmodule.mpackage
-		if main_package != null and actual_package != null then
-			var condition_direct_arc = toolcontext.modelbuilder.model.mpackage_importation_graph.has_arc(main_package, actual_package)
-			return toolcontext.opt_full_contract.value or condition_direct_arc or main_package == actual_package
-		end
-		return false
-	end
-
-	# Verification if the construction of the contract is necessary.
-	# Two cases are checked for `ensure`:
-	#
-	# - Was the `--full-contract` option passed?
-	# - Is the method is in the main package?
-	#
-	fun check_usage_ensure(actual_mmodule: MModule): Bool
-	do
-		return toolcontext.opt_full_contract.value or mainmodule.mpackage == actual_mmodule.mpackage
-	end
-
 	# Inject the incontract attribute (`_in_contract_`) in the `Sys` class
 	# This attribute allows to check if the contract need to be executed
 	private fun inject_incontract_in_sys
@@ -296,6 +267,13 @@ end
 
 redef class MContract
 
+	# Should contract be called?
+	# return `true` if the contract needs to be called.
+	private fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
+	do
+		return v.toolcontext.opt_full_contract.value
+	end
+
 	# Method use to diplay warning when the contract is not present at the introduction
 	private fun no_intro_contract(v: ContractsVisitor, a: Array[AAnnotation])do end
 
@@ -305,7 +283,7 @@ redef class MContract
 	private fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr is abstract
 
 	# Method to adapt the `n_mpropdef.n_block` to the contract
-	private fun adapt_block_to_contract(v: ContractsVisitor, n_mpropdef: AMethPropdef) is abstract
+	private fun adapt_block_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef) is abstract
 
 	# Adapt the msignature specifically for the contract method
 	private fun adapt_specific_msignature(m_signature: MSignature): MSignature do return m_signature.adapt_to_contract
@@ -394,6 +372,17 @@ end
 
 redef class MExpect
 
+	redef fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
+	do
+		var main_package = v.mainmodule.mpackage
+		var actual_package = mpropdef.mclassdef.mmodule.mpackage
+		if main_package != null and actual_package != null then
+			var condition_direct_arc = v.toolcontext.modelbuilder.model.mpackage_importation_graph.has_arc(main_package, actual_package)
+			return super or main_package == actual_package or condition_direct_arc
+		end
+		return false
+	end
+
 	# Display warning if no contract is defined at introduction `expect`,
 	# because if no contract is defined at the introduction the added
 	# contracts will not cause any error even if they are not satisfied.
@@ -438,7 +427,7 @@ redef class MExpect
 		return n_block
 	end
 
-	redef fun adapt_block_to_contract(v: ContractsVisitor, n_mpropdef: AMethPropdef)
+	redef fun adapt_block_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
 		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
 		var n_self = new ASelfExpr
@@ -454,10 +443,16 @@ redef class MExpect
 			new_block.n_expr.push(actual_expr)
 		end
 		n_mpropdef.n_block = new_block
+		mfacet.has_applied_expect = true
 	end
 end
 
 redef class BottomMContract
+
+	redef fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
+	do
+		return super or v.mainmodule.mpackage == mpropdef.mclassdef.mmodule.mpackage
+	end
 
 	redef fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr
 	do
@@ -532,14 +527,12 @@ redef class MEnsure
 		return n_signature.adapt_to_ensurecondition
 	end
 
-	redef fun adapt_block_to_contract(v: ContractsVisitor, n_mpropdef: AMethPropdef)
+	redef fun adapt_block_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
 		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
 		var n_self = new ASelfExpr
 		# argument to call the contract method
 		var args = n_mpropdef.n_signature.make_parameter_read(v.ast_builder)
-		# Inject the variable result
-		# The cast is always safe because the online adapted method is the contract facet
 
 		var actual_block = n_mpropdef.n_block
 		# never happen. If it's the case the problem is in the contract facet building
@@ -547,19 +540,22 @@ redef class MEnsure
 
 		var ret_type = n_mpropdef.mpropdef.mproperty.intro.msignature.return_mtype
 		if ret_type != null then
+			# Inject the variable result
 			var result_var = inject_result(v, n_mpropdef, ret_type)
 			# Expr to read the result variable
 			var read_result = v.ast_builder.make_var_read(result_var, ret_type)
 			var return_expr = actual_block.n_expr.pop
 			# Adding the read return to argument
 			args.add(read_result)
-			var n_callcontract = v.ast_builder.make_call(n_self,callsite,args)
-			actual_block.add_all([n_callcontract,return_expr])
+			var n_call_contract = v.ast_builder.make_call(n_self, callsite, args)
+			actual_block.add_all([v.encapsulated_contract_call(n_mpropdef, [n_call_contract]), return_expr])
 		else
 			# build the call to the contract method
-			var n_callcontract = v.ast_builder.make_call(n_self,callsite,args)
-			actual_block.add n_callcontract
+			var n_call_contract = v.ast_builder.make_call(n_self, callsite, args)
+			actual_block.add v.encapsulated_contract_call(n_mpropdef, [n_call_contract])
 		end
+		n_mpropdef.do_all(v.toolcontext)
+		mfacet.has_applied_ensure = true
 	end
 end
 
@@ -594,70 +590,99 @@ redef class MClass
 	end
 end
 
-redef class MMethodDef
+redef class MMethod
 
-	# Verification of the contract facet
-	# Check if a contract facet already exists to use it again or if it is necessary to create it.
-	private fun check_contract_facet(v: ContractsVisitor, n_signature: ASignature, classdef: MClassDef, mcontract: MContract, exist_contract: Bool)
+	# Define contract facet for MMethod in the given mclassdef. The facet represents the entry point with contracts (expect, ensure) of the method.
+	# If a contract is given adapt the contract facet.
+	#
+	# `classdef`: Indicates the class where we want to introduce our facet
+	# `exist_contract`: Indicates if it is necessary to define a new facet for the contract. If `exist_contract_facet and exist_contract` it's not necessary to add a facet.
+	#
+	# Exemple:
+	# ~~~nitish
+	# from:
+	#	classe A
+	#		i :Int
+	#		fun add_one is ensure(old(i) + 1 == i)
+	#	end
+	# to:
+	#	classe A
+	#		fun add_one is ensure(old(i) + 1 == i)
+	#
+	#		# The contract facet
+	#		fun contract_add_one do
+	#			add_one
+	#			ensure_add_one(old_add_one)
+	#		end
+	#	end
+	# ~~
+	private fun define_contract_facet(v: ContractsVisitor, classdef: MClassDef, mcontract: nullable MContract)
 	do
-		var exist_contract_facet = mproperty.has_contract_facet
-		if exist_contract_facet and exist_contract then return
+		var exist_contract_facet = has_contract_facet
+		var contract_facet = build_contract_facet
+		# Do nothing the contract and the contract facet already exist
+		if mcontract != null and mcontract.is_already_applied(contract_facet) then return
 
-		var contract_facet: AMethPropdef
+		var n_contract_facet: AMethPropdef
 		if not exist_contract_facet then
 			# If has no contract facet in intro just create it
-			if classdef != mproperty.intro_mclassdef then create_contract_facet(v, mproperty.intro_mclassdef, n_signature)
-			# If has no contract facet just create it
-			contract_facet = create_contract_facet(v, classdef, n_signature)
+			if classdef != intro_mclassdef then
+				create_facet(v, intro_mclassdef, contract_facet, self)
+			end
+			n_contract_facet = create_facet(v, classdef, contract_facet, self)
 		else
 			# Check if the contract facet already exist in this context (in this classdef)
-			if classdef.mpropdefs_by_property.has_key(mproperty.mcontract_facet) then
-				# get the define
-				contract_facet = v.toolcontext.modelbuilder.mpropdef2node(classdef.mpropdefs_by_property[mproperty.mcontract_facet]).as(AMethPropdef)
+			if classdef.mpropdefs_by_property.has_key(contract_facet) then
+				# get the definition
+				n_contract_facet = v.toolcontext.modelbuilder.mpropdef2node(classdef.mpropdefs_by_property[contract_facet]).as(AMethPropdef)
 			else
 				# create a new contract facet definition
-				contract_facet = create_contract_facet(v, classdef, n_signature)
+				n_contract_facet = create_facet(v, classdef, contract_facet, self)
 				var block = v.ast_builder.make_block
 				# super call to the contract facet
-				var n_super_call = v.ast_builder.make_super_call(n_signature.make_parameter_read(v.ast_builder), null)
+				var args = n_contract_facet.n_signature.make_parameter_read(v.ast_builder)
+				var n_super_call = v.ast_builder.make_super_call(args)
 				# verification for add a return or not
-				if contract_facet.mpropdef.msignature.return_mtype != null then
+				if self.intro.msignature.return_mtype != null then
 					block.add(v.ast_builder.make_return(n_super_call))
 				else
 					block.add(n_super_call)
 				end
-				contract_facet.n_block = block
+				n_contract_facet.n_block = block
 			end
 		end
-		contract_facet.adapt_block_to_contract(v, mcontract, contract_facet)
-		contract_facet.location = v.current_location
-		contract_facet.do_all(v.toolcontext)
+		if mcontract != null then mcontract.adapt_block_to_contract(v, contract_facet, n_contract_facet)
+
+		n_contract_facet.location = v.current_location
+		n_contract_facet.do_all(v.toolcontext)
 	end
 
-	# Method to create a contract facet of the method
-	private fun create_contract_facet(v: ContractsVisitor, classdef: MClassDef, n_signature: ASignature): AMethPropdef
+	# Method to create a facet of the method.
+	# See `define_contract_facet` for more information about two types of facets.
+	#
+	# `called` : is the property to call in this facet.
+	private fun create_facet(v: ContractsVisitor, classdef: MClassDef, facet: MFacet, called: MMethod): AMethPropdef
+	is
+		expect( called.is_same_instance(self) or called.is_same_instance(self.mcontract_facet) )
 	do
-		var contract_facet = mproperty.build_contract_facet
-		# Defines the contract phase is an init or not
-		# it is necessary to use the contracts on constructor
-		contract_facet.is_init = self.mproperty.is_init
-
-		# check if the method has an `msignature` to copy it.
-		var m_signature: nullable MSignature = null
-		if mproperty.intro.msignature != null then m_signature = mproperty.intro.msignature.clone
-
-		var n_contractdef = classdef.mclass.create_empty_method(v, contract_facet, classdef, m_signature, n_signature)
+		# Defines the contract facet is an init or not
+		# it is necessary to use the contracts with in a constructor
+		facet.is_init = is_init
+		var n_contractdef = v.toolcontext.modelbuilder.create_method_from_property(facet, classdef, false, self.intro.msignature)
 		# FIXME set the location because the callsite creation need the node location
 		n_contractdef.location = v.current_location
 		n_contractdef.validate
 
 		var block = v.ast_builder.make_block
-		var n_self = new ASelfExpr
-		var args = n_contractdef.n_signature.make_parameter_read(v.ast_builder)
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_contractdef, mproperty, true)
-		var n_call = v.ast_builder.make_call(n_self, callsite, args)
 
-		if m_signature.return_mtype == null then
+		# Arguments to call the `called` property
+		var args: Array[AExpr]
+		args = n_contractdef.n_signature.make_parameter_read(v.ast_builder)
+
+		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_contractdef, called, true)
+		var n_call = v.ast_builder.make_call(new ASelfExpr, callsite, args)
+
+		if self.intro.msignature.return_mtype == null then
 			block.add(n_call)
 		else
 			block.add(v.ast_builder.make_return(n_call))
@@ -667,16 +692,18 @@ redef class MMethodDef
 		n_contractdef.do_all(v.toolcontext)
 		return n_contractdef
 	end
+end
+
+redef class MMethodDef
 
 	# Entry point to build contract (define the contract facet and define the contract method verification)
 	private fun construct_contract(v: ContractsVisitor, n_signature: ASignature, n_annotations: Array[AAnnotation], mcontract: MContract, exist_contract: Bool)
 	do
-		if not exist_contract and not is_intro then no_intro_contract(v, mcontract, n_annotations)
 		v.define_signature(mcontract, n_signature, mproperty.intro.msignature)
-
+		if not exist_contract and not is_intro then no_intro_contract(v, mcontract, n_annotations)
 		v.build_contract(n_annotations, mcontract, mclassdef)
-		check_contract_facet(v, n_signature.clone, mclassdef, mcontract, exist_contract)
-		has_contract = true
+		# Check if the contract must be called to know if it's needed to construct the facet
+		if mcontract.is_called(v, self) then mproperty.define_contract_facet(v, mclassdef, mcontract)
 	end
 
 	# Create a contract on the introduction classdef of the property.
@@ -705,11 +732,6 @@ redef class MMethodDef
 			v.toolcontext.modelbuilder.create_method_from_property(mexpect, mclassdef, false, mexpect.intro.msignature)
 		end
 	end
-end
-
-redef class MPropDef
-	# flag to indicate is the `MPropDef` has a contract
-	var has_contract = false
 end
 
 redef class APropdef
@@ -765,20 +787,18 @@ redef class AMethPropdef
 	# Verification if the method have an inherited contract to apply it.
 	private fun check_redef(v: ContractsVisitor)
 	do
-		# Check if the method has an attached contract
-		if not mpropdef.has_contract then
-			if mpropdef.mproperty.intro.has_contract then
-				mpropdef.has_contract = true
-			end
-		end
-	end
+		var mexpect = mpropdef.mproperty.mexpect
+		var mensure = mpropdef.mproperty.mensure
+		var mcontract_facet = mpropdef.mproperty.mcontract_facet
 
-	# Adapt the block to use the contracts
-	private fun adapt_block_to_contract(v: ContractsVisitor, contract: MContract, n_mpropdef: AMethPropdef)
-	do
-		contract.adapt_block_to_contract(v, n_mpropdef)
-		mpropdef.has_contract = true
-		n_mpropdef.do_all(v.toolcontext)
+		if mexpect != null then
+			if mcontract_facet != null and mcontract_facet.has_applied_expect then return
+			if mexpect.is_called(v, mpropdef.as(not null)) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mexpect)
+		end
+		if mensure != null then
+			if mcontract_facet != null and mcontract_facet.has_applied_ensure then return
+			if mensure.is_called(v, mpropdef.as(not null)) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mensure)
+		end
 	end
 end
 
