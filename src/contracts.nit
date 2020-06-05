@@ -124,7 +124,7 @@ private class ContractsVisitor
 	end
 
 	# Define the new contract take in consideration that an old contract exist or not
-	private fun build_contract(n_annotation: AAnnotation, mcontract: MContract, mclassdef: MClassDef): MMethodDef
+	private fun build_contract(n_annotation: AAnnotation, mcontract: MContract, mclassdef: MClassDef)
 	do
 		self.current_location = n_annotation.location
 		# Retrieving the expression provided in the annotation
@@ -132,15 +132,11 @@ private class ContractsVisitor
 		var m_contractdef: AMethPropdef
 		if is_intro_contract then
 			# Create new contract method
-			m_contractdef = mcontract.create_intro_contract(self, n_condition, mclassdef)
+			mcontract.create_intro_contract(self, n_condition, mclassdef)
 		else
 			# Create a redef of contract to take in consideration the new condition
-			m_contractdef = mcontract.create_subcontract(self, n_condition, mclassdef)
+			mcontract.create_subcontract(self, n_condition, mclassdef)
 		end
-		var contract_propdef = m_contractdef.mpropdef
-		# The contract has a null mpropdef, this should never happen
-		assert contract_propdef != null
-		return contract_propdef
 	end
 
 	# Verification if the construction of the contract is necessary.
@@ -353,7 +349,7 @@ redef class MContract
 	# end
 	# ~~~
 	#
-	private fun create_intro_contract(v: ContractsVisitor, n_condition: nullable AExpr, mclassdef: MClassDef): AMethPropdef
+	private fun create_intro_contract(v: ContractsVisitor, n_condition: nullable AExpr, mclassdef: MClassDef)
 	do
 		var n_block = v.ast_builder.make_block
 		if n_condition != null then
@@ -362,27 +358,26 @@ redef class MContract
 			tid.text = "{self.contract_name}"
 			n_block.add v.ast_builder.make_assert(tid, n_condition, null)
 		end
-		return make_contract(v, n_block, mclassdef)
+		make_contract(v, n_block, mclassdef)
 	end
 
 	# Create a contract with old (super) and the new conditions
-	private fun create_subcontract(v: ContractsVisitor, ncondition: nullable AExpr, mclassdef: MClassDef): AMethPropdef
+	private fun create_subcontract(v: ContractsVisitor, ncondition: nullable AExpr, mclassdef: MClassDef)
 	do
 		var args = v.n_signature.make_parameter_read(v.ast_builder)
 		var n_block = v.ast_builder.make_block
 		if ncondition != null then n_block = self.create_nblock(v, ncondition, args)
-		return make_contract(v, n_block, mclassdef)
+		make_contract(v, n_block, mclassdef)
 	end
 
 	# Build a method with a specific block `n_block` in a specified `mclassdef`
-	private fun make_contract(v: ContractsVisitor, n_block: AExpr, mclassdef: MClassDef): AMethPropdef
+	private fun make_contract(v: ContractsVisitor, n_block: AExpr, mclassdef: MClassDef)
 	do
 		var n_contractdef = intro_mclassdef.mclass.create_empty_method(v, self, mclassdef, v.m_signature, v.n_signature)
 		n_contractdef.n_block = n_block
 		# Define the location of the new method for corresponding of the annotation location
 		n_contractdef.location = v.current_location
 		n_contractdef.do_all(v.toolcontext)
-		return n_contractdef
 	end
 end
 
@@ -670,7 +665,7 @@ redef class MMethodDef
 		if not exist_contract and not is_intro then no_intro_contract(v, n_signature, mcontract, n_annotation)
 		v.define_signature(mcontract, n_signature, mproperty.intro.msignature)
 
-		var conditiondef = v.build_contract(n_annotation, mcontract, mclassdef)
+		v.build_contract(n_annotation, mcontract, mclassdef)
 		check_contract_facet(v, n_signature.clone, mclassdef, mcontract, exist_contract)
 		has_contract = true
 	end
