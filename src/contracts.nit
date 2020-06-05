@@ -231,9 +231,10 @@ private class CallSiteVisitor
 		node.visit_all(self)
 	end
 
-	# Check if the callsite calls a method with a contract.
-	# If it's the case the callsite is replaced by another callsite to the contract method.
-	private fun drive_method_contract(callsite: CallSite): CallSite
+	# Check if the callsite is bound on a property with a contract.
+	# If the property is linked to a contract a new callsite will be created towards the correct facet,
+	# in the other case the returned callsite wall be the same as the given `callsite`
+	private fun drive_callsite_to_contract(callsite: CallSite): CallSite
 	do
 		var contract_facet = callsite.mproperty.mcontract_facet
 		var visited_mpropdef = visited_propdef.mpropdef
@@ -261,6 +262,7 @@ redef class AAnnotation
 		var n_condition = n_args.first
 		n_args.remove_at(0)
 		for n_arg in n_args do n_condition = v.ast_builder.make_and(n_condition, n_arg)
+		n_condition.location = self.location
 		return n_condition
 	end
 end
@@ -282,17 +284,17 @@ redef class MContract
 	# `super_args` : Correspond to the `super` call arguments
 	private fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr is abstract
 
-	# Method to adapt the `n_mpropdef.n_block` to the contract
-	private fun adapt_block_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef) is abstract
+	# Method to adapt the given `n_mpropdef.n_block` to the contract
+	private fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef) is abstract
 
-	# Adapt the msignature specifically for the contract method
+	# Create and return an adapted `MSignature` specifically for the contract in fonction of the given `m_signature`
 	private fun adapt_specific_msignature(m_signature: MSignature): MSignature do return m_signature.adapt_to_contract
 
-	# Adapt the nsignature specifically for the contract method
+	# Create and return an adapted `ASignature` specifically for the contract in fonction of the given `n_signature`
 	private fun adapt_specific_nsignature(n_signature: ASignature): ASignature do return n_signature.adapt_to_contract
 
 	# Adapt the `m_signature` to the contract
-	# If it is not null call the specific adapt `m_signature` for the contract
+	# If `m_signature == null` return a new `MSignature` else it calls a specific adapt method see `adapt_specific_msignature`
 	private fun adapt_msignature(m_signature: nullable MSignature): MSignature
 	do
 		if m_signature == null then return new MSignature(new Array[MParameter])
@@ -300,18 +302,11 @@ redef class MContract
 	end
 
 	# Adapt the `n_signature` to the contract
-	# If it is not null call the specific adapt `n_signature` for the contract
+	# If `n_signature == null` return a new `ASignature` else it calls a specific adapt method see `adapt_specific_nsignature`
 	private fun adapt_nsignature(n_signature: nullable ASignature): ASignature
 	do
 		if n_signature == null then return new ASignature
 		return adapt_specific_nsignature(n_signature)
-	end
-
-	# Create a new empty contract
-	private fun create_empty_contract(v: ContractsVisitor, mclassdef: MClassDef, msignature: nullable MSignature, n_signature: ASignature)
-	do
-		var n_contract_def = intro_mclassdef.mclass.create_empty_method(v, self, mclassdef, msignature, n_signature)
-		n_contract_def.do_all(v.toolcontext)
 	end
 
 	# Create the initial contract (intro)
@@ -359,10 +354,12 @@ redef class MContract
 		make_contract(v, n_block, mclassdef)
 	end
 
-	# Build a method with a specific block `n_block` in a specified `mclassdef`
+	# Build a new contract method with a specific block `n_block` in a specified `mclassdef`
 	private fun make_contract(v: ContractsVisitor, n_block: AExpr, mclassdef: MClassDef)
 	do
-		var n_contractdef = intro_mclassdef.mclass.create_empty_method(v, self, mclassdef, v.m_signature, v.n_signature)
+		var n_contractdef = v.toolcontext.modelbuilder.create_method_from_property(self, mclassdef, false, v.m_signature)
+		# Set the signature to keep the same variable
+		n_contractdef.n_signature = v.n_signature
 		n_contractdef.n_block = n_block
 		# Define the location of the new method for corresponding of the annotation location
 		n_contractdef.location = v.current_location
@@ -427,16 +424,15 @@ redef class MExpect
 		return n_block
 	end
 
-	redef fun adapt_block_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
+	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
 		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
-		var n_self = new ASelfExpr
 		var args = n_mpropdef.n_signature.make_parameter_read(v.ast_builder)
-		var n_callexpect = v.ast_builder.make_call(n_self,callsite,args)
+		var n_callexpect = v.ast_builder.make_call(new ASelfExpr, callsite,args)
 		# Creation of the new instruction block with the call to expect condition
 		var actual_expr = n_mpropdef.n_block
 		var new_block = new ABlockExpr
-		new_block.n_expr.push n_callexpect
+		new_block.n_expr.push v.encapsulated_contract_call(n_mpropdef, [n_callexpect])
 		if actual_expr isa ABlockExpr then
 			new_block.n_expr.add_all(actual_expr.n_expr)
 		else if actual_expr != null then
@@ -477,12 +473,12 @@ redef class BottomMContract
 	#
 	# The purpose of the variable is to capture return values to use it in contracts.
 	private fun inject_result(v: ContractsVisitor, n_mpropdef: AMethPropdef, ret_type: MType): Variable
+	is
+		expect(n_mpropdef.n_signature.n_type != null)
 	do
 		var actual_block = n_mpropdef.n_block
 		# never happen. If it's the case the problem is in the contract facet building
 		assert actual_block isa ABlockExpr
-
-		var return_var: nullable Variable = null
 
 		var return_expr = actual_block.n_expr.last.as(AReturnExpr)
 
@@ -490,14 +486,7 @@ redef class BottomMContract
 		# The return node has no returned expression
 		assert returned_expr != null
 
-		# Check if the result variable already exit
-		if returned_expr isa AVarExpr then
-			if returned_expr.variable.name == "result" then
-				return_var = returned_expr.variable
-			end
-		end
-
-		return_var = new Variable("result")
+		var return_var = new Variable("result")
 		# Creating a new variable to keep the old return of the method
 		var assign_result = v.ast_builder.make_var_assign(return_var, returned_expr)
 		# Remove the actual return
@@ -527,7 +516,7 @@ redef class MEnsure
 		return n_signature.adapt_to_ensurecondition
 	end
 
-	redef fun adapt_block_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
+	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
 		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
 		var n_self = new ASelfExpr
@@ -556,37 +545,6 @@ redef class MEnsure
 		end
 		n_mpropdef.do_all(v.toolcontext)
 		mfacet.has_applied_ensure = true
-	end
-end
-
-redef class MClass
-
-	# This method create an abstract method representation with this MMethodDef an this AMethoddef
-	private fun create_abstract_method(v: ContractsVisitor, mproperty: MMethod, mclassdef: MClassDef, msignature: nullable MSignature, n_signature: ASignature): AMethPropdef
-	do
-		# new methoddef definition
-		var m_def = new MMethodDef(mclassdef, mproperty, v.current_location)
-		# set the signature
-		if msignature != null then m_def.msignature = msignature.clone
-		# set the abstract flag
-		m_def.is_abstract = true
-		# Build the new node method
-		var n_def = v.ast_builder.make_method(null,null,m_def,n_signature,null,null,null,null)
-		# Define the location of the new method for corresponding of the actual method
-		n_def.location = v.current_location
-		# Association new npropdef to mpropdef
-		v.toolcontext.modelbuilder.unsafe_add_mpropdef2npropdef(m_def,n_def)
-		return n_def
-	end
-
-	# Create method with an empty block
-	# the `mproperty` i.e the global property definition. The mclassdef to set where the method is declared and it's model `msignature` and ast `n_signature` signature
-	private fun create_empty_method(v: ContractsVisitor, mproperty: MMethod, mclassdef: MClassDef, msignature: nullable MSignature, n_signature: ASignature): AMethPropdef
-	do
-		var n_def = create_abstract_method(v, mproperty, mclassdef, msignature, n_signature)
-		n_def.mpropdef.is_abstract = false
-		n_def.n_block = v.ast_builder.make_block
-		return n_def
 	end
 end
 
@@ -651,7 +609,7 @@ redef class MMethod
 				n_contract_facet.n_block = block
 			end
 		end
-		if mcontract != null then mcontract.adapt_block_to_contract(v, contract_facet, n_contract_facet)
+		if mcontract != null then mcontract.adapt_method_to_contract(v, contract_facet, n_contract_facet)
 
 		n_contract_facet.location = v.current_location
 		n_contract_facet.do_all(v.toolcontext)
@@ -873,7 +831,7 @@ redef class ASendExpr
 	do
 		var actual_callsite = callsite
 		if actual_callsite != null then
-			callsite = v.drive_method_contract(actual_callsite)
+			callsite = v.drive_callsite_to_contract(actual_callsite)
 		end
 	end
 end
@@ -883,7 +841,7 @@ redef class ANewExpr
 	do
 		var actual_callsite = callsite
 		if actual_callsite != null then
-			callsite = v.drive_method_contract(actual_callsite)
+			callsite = v.drive_callsite_to_contract(actual_callsite)
 		end
 	end
 end
