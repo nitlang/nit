@@ -124,18 +124,17 @@ private class ContractsVisitor
 	end
 
 	# Define the new contract take in consideration that an old contract exist or not
-	private fun build_contract(n_annotation: AAnnotation, mcontract: MContract, mclassdef: MClassDef)
+	private fun build_contract(n_annotations: Array[AAnnotation], mcontract: MContract, mclassdef: MClassDef)
 	do
-		self.current_location = n_annotation.location
+		var n_conditions = new Array[AExpr]
 		# Retrieving the expression provided in the annotation
-		var n_condition = n_annotation.construct_condition(self)
-		var m_contractdef: AMethPropdef
+		for n_annotation in n_annotations do n_conditions.add n_annotation.construct_condition(self)
 		if is_intro_contract then
 			# Create new contract method
-			mcontract.create_intro_contract(self, n_condition, mclassdef)
+			mcontract.create_intro_contract(self, n_conditions, mclassdef)
 		else
 			# Create a redef of contract to take in consideration the new condition
-			mcontract.create_subcontract(self, n_condition, mclassdef)
+			mcontract.create_subcontract(self, n_conditions, mclassdef)
 		end
 	end
 
@@ -301,10 +300,12 @@ redef class MContract
 	fun contract_name: String is abstract
 
 	# Method use to diplay warning when the contract is not present at the introduction
-	private fun no_intro_contract(v: ContractsVisitor, a: AAnnotation)do end
+	private fun no_intro_contract(v: ContractsVisitor, a: Array[AAnnotation])do end
 
 	# Creating specific inheritance block contract
-	private fun create_nblock(v: ContractsVisitor, n_condition: AExpr, args: Array[AExpr]): ABlockExpr is abstract
+	#
+	# `super_args` : Correspond to the `super` call arguments
+	private fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr is abstract
 
 	# Method to adapt the `n_mpropdef.n_block` to the contract
 	private fun adapt_block_to_contract(v: ContractsVisitor, n_mpropdef: AMethPropdef) is abstract
@@ -349,24 +350,37 @@ redef class MContract
 	# end
 	# ~~~
 	#
-	private fun create_intro_contract(v: ContractsVisitor, n_condition: nullable AExpr, mclassdef: MClassDef)
+	private fun create_intro_contract(v: ContractsVisitor, n_conditions: Array[AExpr], mclassdef: MClassDef)
 	do
 		var n_block = v.ast_builder.make_block
-		if n_condition != null then
+		for n_condition in n_conditions do
 			# Create a new tid to set the name of the assert for more explicit error
-			var tid = new TId.init_tk(self.location)
-			tid.text = "{self.contract_name}"
-			n_block.add v.ast_builder.make_assert(tid, n_condition, null)
+			var tid = new TId.init_tk(n_condition.location)
+			tid.text = "{n_condition.location.text}"
+			var n_assert = v.ast_builder.make_assert(tid, n_condition, null)
+			# Define the assert location to reference the annoation
+			n_assert.location = n_condition.location
+			n_block.add n_assert
 		end
 		make_contract(v, n_block, mclassdef)
 	end
 
-	# Create a contract with old (super) and the new conditions
-	private fun create_subcontract(v: ContractsVisitor, ncondition: nullable AExpr, mclassdef: MClassDef)
+	# Create a contract to check the old (super call) and the new conditions
+	#
+	# Example:
+	# ~~~nitish
+	# fun contrat([...])
+	# do
+	#	super # Call the old contracts
+	#	assert new_condition
+	# end
+	# ~~~
+	#
+	private fun create_subcontract(v: ContractsVisitor, n_conditions: Array[AExpr], mclassdef: MClassDef)
 	do
 		var args = v.n_signature.make_parameter_read(v.ast_builder)
 		var n_block = v.ast_builder.make_block
-		if ncondition != null then n_block = self.create_nblock(v, ncondition, args)
+		n_block = self.create_inherit_nblock(v, n_conditions, args)
 		make_contract(v, n_block, mclassdef)
 	end
 
@@ -410,21 +424,23 @@ redef class MExpect
 	# end
 	# ~~~~
 	#
-	redef fun no_intro_contract(v: ContractsVisitor, a: AAnnotation)
+	redef fun no_intro_contract(v: ContractsVisitor, a: Array[AAnnotation])
 	do
-		v.toolcontext.warning(a.location,"","Useless contract: No contract defined at the introduction of the method")
+		v.toolcontext.warning(a.first.location,"useless_contract","Useless contract: No contract defined at the introduction of the method")
 	end
 
-	redef fun create_nblock(v: ContractsVisitor, n_condition: AExpr, args: Array[AExpr]): ABlockExpr
+	redef fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr
 	do
-		# Creating the if expression with the new condition
-		var if_block = v.ast_builder.make_if(n_condition, n_condition.mtype)
-		# Creating and adding return expr to the then case
-		if_block.n_then = v.ast_builder.make_return(null)
-		# Creating the super call to the contract and adding this to else case
-		if_block.n_else = v.ast_builder.make_super_call(args,null)
 		var n_block = v.ast_builder.make_block
-		n_block.add if_block
+		for n_condition in n_conditions do
+			# Creating the if expression with the new condition
+			var if_block = v.ast_builder.make_if(n_condition, n_condition.mtype)
+			# Creating and adding return expr to the then case
+			if_block.n_then = v.ast_builder.make_return
+			if_block.location = n_condition.location
+			n_block.add if_block
+		end
+		n_block.add v.ast_builder.make_super_call(super_args)
 		return n_block
 	end
 
@@ -449,19 +465,22 @@ end
 
 redef class BottomMContract
 
-	redef fun create_nblock(v: ContractsVisitor, n_condition: AExpr, args: Array[AExpr]): ABlockExpr
+	redef fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr
 	do
-		var tid = new TId.init_tk(v.current_location)
-		tid.text = "{contract_name}"
-		# Creating the assert expression with the new condition
-		var assert_block = v.ast_builder.make_assert(tid,n_condition,null)
-		# Creating the super call to the contract
-		var super_call = v.ast_builder.make_super_call(args,null)
 		# Define contract block
 		var n_block = v.ast_builder.make_block
-		# Adding the expressions to the block
+
+		var super_call = v.ast_builder.make_super_call(super_args)
+
 		n_block.add super_call
-		n_block.add assert_block
+		for n_condition in n_conditions do
+			var tid = new TId.init_tk(n_condition.location)
+			tid.text = "{n_condition.location.text}"
+			# Creating the assert expression with the new condition
+			var n_assert = v.ast_builder.make_assert(tid, n_condition)
+			n_assert.location = n_condition.location
+			n_block.add n_assert
+		end
 		return n_block
 	end
 
@@ -659,39 +678,41 @@ redef class MMethodDef
 	end
 
 	# Entry point to build contract (define the contract facet and define the contract method verification)
-	private fun construct_contract(v: ContractsVisitor, n_signature: ASignature, n_annotation: AAnnotation, mcontract: MContract, exist_contract: Bool)
+	private fun construct_contract(v: ContractsVisitor, n_signature: ASignature, n_annotations: Array[AAnnotation], mcontract: MContract, exist_contract: Bool)
 	do
-		if check_same_contract(v, n_annotation, mcontract) then return
-		if not exist_contract and not is_intro then no_intro_contract(v, n_signature, mcontract, n_annotation)
+		if not exist_contract and not is_intro then no_intro_contract(v, mcontract, n_annotations)
 		v.define_signature(mcontract, n_signature, mproperty.intro.msignature)
 
-		v.build_contract(n_annotation, mcontract, mclassdef)
+		v.build_contract(n_annotations, mcontract, mclassdef)
 		check_contract_facet(v, n_signature.clone, mclassdef, mcontract, exist_contract)
 		has_contract = true
 	end
 
 	# Create a contract on the introduction classdef of the property.
 	# Display an warning message if necessary
-	private fun no_intro_contract(v: ContractsVisitor, n_signature: ASignature, mcontract: MContract, n_annotation: AAnnotation)
+	private fun no_intro_contract(v: ContractsVisitor, mcontract: MContract, n_annotations: Array[AAnnotation])
 	do
-		mcontract.create_empty_contract(v, mcontract.intro_mclassdef, mcontract.adapt_msignature(self.mproperty.intro.msignature), mcontract.adapt_nsignature(n_signature))
-		mcontract.no_intro_contract(v, n_annotation)
-		mproperty.intro.has_contract = true
+		v.toolcontext.modelbuilder.create_method_from_property(mcontract, mcontract.intro_mclassdef, false, v.m_signature)
+		mcontract.no_intro_contract(v, n_annotations)
 	end
 
-	# Is the contract already defined in the context
-	#
-	# Exemple :
-	# fun foo is expect([...]), expect([...])
-	#
-	# Here `check_same_contract` display an error when the second expect is processed
-	private fun check_same_contract(v: ContractsVisitor, n_annotation: AAnnotation ,mcontract: MContract): Bool
+	# Apply the `no_contract` annotation to the contract. This method removes the inheritance by adding an empty contract method.
+	# Display a warning if the annotation is not needed
+	private fun no_contract_apply(v: ContractsVisitor, n_signature: ASignature)
 	do
-		if self.mclassdef.mpropdefs_by_property.has_key(mcontract) then
-			v.toolcontext.error(n_annotation.location, "The method already has a defined `{mcontract.contract_name}` contract at line {self.mclassdef.mpropdefs_by_property[mcontract].location.line_start}")
-			return true
+		var mensure = mproperty.mensure
+		var mexpect = mproperty.mexpect
+		if mensure == null and mexpect == null then
+			v.toolcontext.warning(location, "useless_nocontract", "Useless `no_contract`, no contract was declared for `{name}`. Remove the `no_contract`")
 		end
-		return false
+		if mensure != null then
+			# Add an empty ensure method to replace the actual definition
+			v.toolcontext.modelbuilder.create_method_from_property(mensure, mclassdef, false, mensure.intro.msignature)
+		end
+		if mexpect != null then
+			# Add an empty expect method to replace the actual definition
+			v.toolcontext.modelbuilder.create_method_from_property(mexpect, mclassdef, false, mexpect.intro.msignature)
+		end
 	end
 end
 
@@ -713,39 +734,40 @@ redef class AMethPropdef
 	redef fun create_contracts(v)
 	do
 		v.ast_builder.check_mmodule(mpropdef.mclassdef.mmodule)
-
 		v.current_location = self.location
 		v.is_intro_contract = mpropdef.is_intro
-
-		if n_annotations != null then
-			for n_annotation in n_annotations.n_items do
-				check_annotation(v,n_annotation)
-			end
-		end
-
-		if not mpropdef.is_intro and not v.find_no_contract then
-			self.check_redef(v)
-		end
-
-		# reset the flag
-		v.find_no_contract = false
+		check_annotation(v)
+		if not mpropdef.is_intro then check_redef(v)
 	end
 
 	# Verification of the annotation to know if it is a contract annotation.
 	# If this is the case, we built the appropriate contract.
-	private fun check_annotation(v: ContractsVisitor, n_annotation: AAnnotation)
+	private fun check_annotation(v: ContractsVisitor)
 	do
-		if n_annotation.name == "expect" then
-			if not v.check_usage_expect(mpropdef.mclassdef.mmodule) then return
+		var annotations_expect = get_annotations("expect")
+		var annotations_ensure = get_annotations("ensure")
+		var annotation_no_contract = get_annotations("no_contract")
+
+		if (not annotations_expect.is_empty or not annotations_ensure.is_empty) and not annotation_no_contract.is_empty then
+			v.toolcontext.error(location, "The new contract definition is not correct when using `no_contract`. Remove the contract definition or the `no_contract`")
+			return
+		end
+
+		var nsignature = n_signature or else new ASignature
+
+		if not annotation_no_contract.is_empty then
+			mpropdef.no_contract_apply(v, nsignature.clone)
+			return
+		end
+
+		if not annotations_expect.is_empty then
 			var exist_contract = mpropdef.mproperty.has_expect
-			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.build_expect, exist_contract)
-		else if n_annotation.name == "ensure" then
-			if not v.check_usage_ensure(mpropdef.mclassdef.mmodule) then return
+			mpropdef.construct_contract(v, nsignature.clone, annotations_expect, mpropdef.mproperty.build_expect, exist_contract)
+		end
+
+		if not annotations_ensure.is_empty then
 			var exist_contract = mpropdef.mproperty.has_ensure
-			mpropdef.construct_contract(v, self.n_signature.as(not null), n_annotation, mpropdef.mproperty.build_ensure, exist_contract)
-		else if n_annotation.name == "no_contract" then
-			# no_contract found set the flag to true
-			v.find_no_contract = true
+			mpropdef.construct_contract(v, nsignature.clone, annotations_ensure, mpropdef.mproperty.build_ensure, exist_contract)
 		end
 	end
 
