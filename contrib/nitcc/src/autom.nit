@@ -977,8 +977,53 @@ end
 class Dfa
 	super Automaton
 
+	var dijkstra = new Dijkstra(self.states)
+
+	fun find_min_path(elem : Token ) : Array[Transition] 
+	do
+		var initialization = self.retrotags[elem].iterator.item
+		var  min_path = dijkstra.search_path_dijkstra( initialization )
+
+		for state in  self.retrotags[elem].iterator do
+			var path_tmp = dijkstra.search_path_dijkstra(state)
+			if min_path.length > path_tmp.length then min_path = path_tmp # save the minimal
+		end 
+		return min_path
+	end
+
+	fun translate_path(min_path : Array[Transition]) : Array[String]
+	do
+		var path_result = new Array[String]
+		for value in min_path do 
+			path_result.add(value.symbol.to_s)				
+		end
+		return path_result
+	end
+
+	fun sorter_path_to(elem : Token ) : Array[String]
+	do
+		if elem.to_s == "Eof" then
+			return [elem.to_s]
+		else
+			var min_path = self.find_min_path(elem)
+			var path_result = self.translate_path(min_path)
+			return path_result 
+		end 
+	end
+
+	fun launch_dijkstra(state : State)
+	do
+		dijkstra.launch_dijkstra(state)
+	end
+end
+
+
+class Dijkstra
+
 	var infinity = -1
 	var indefinite = -1
+
+	var states : Array[State]
 
 	var start_node : Int = indefinite
 
@@ -1097,37 +1142,5 @@ class Dfa
 				update_nodes_informations(s1,s2)
 			end
 		end
-	end
-
-	fun find_min_path(elem : Token ) : Array[Transition] 
-	do
-		var initialization = self.retrotags[elem].iterator.item
-		var  min_path = self.search_path_dijkstra( initialization )
-
-		for state in  self.retrotags[elem].iterator do
-			var path_tmp = self.search_path_dijkstra(state)
-			if min_path.length > path_tmp.length then min_path = path_tmp # save the minimal
-		end 
-		return min_path
-	end
-
-	fun translate_path(min_path : Array[Transition]) : Array[String]
-	do
-		var path_result = new Array[String]
-		for value in min_path do 
-			path_result.add(value.symbol.to_s)				
-		end
-		return path_result
-	end
-
-	fun sorter_path_to(elem : Token ) : Array[String]
-	do
-		if elem.to_s == "Eof" then
-			return [elem.to_s]
-		else
-			var min_path = self.find_min_path(elem)
-			var path_result = self.translate_path(min_path)
-			return path_result 
-		end 
 	end
 end
