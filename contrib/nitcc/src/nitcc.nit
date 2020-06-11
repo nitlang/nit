@@ -107,7 +107,7 @@ end
 gram.knowledge.compute
 
 print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)"
-lr.to_dot("{name}.lr.dot") 
+lr.to_dot("{name}.lr.dot",name) 
 pretty = lr.pretty
 f = new FileWriter.open("{name}.lr.out")
 f.write "// LR automaton of {name}\n"

@@ -1,0 +1,13 @@
+/* Grammar of a mini procedural programming language */
+Grammar basic;
+
+Lexer
+d = '0'..'9';
+int = d+;
+
+Parser
+
+e = 
+	{int:} int |
+	{add:} e '+' e |
+	{sub:} e '-' e ;
