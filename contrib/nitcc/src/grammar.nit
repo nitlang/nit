@@ -605,19 +605,15 @@ class LRAutomaton
 			var queue_int = new Array[Int] # states's numbers
 			var queue_elem = new Array[Element] # transitions's elements
 			queue_int.add(0) #init
-			queue_elem.add(start_state)			
+			queue_elem.add(start_state)	
 
 			if grammar.knowledge.knowledges_string.not_empty then 
 
 				var path_start : Array[Element]
 				var paths_end : Array[Array[Element]]
 				path_start = self.write_from_start(f,s,queue_elem,queue_int,dijkstra)
-				paths_end = self.write_to_end(f,s,queue_elem,queue_int)
-
-				if s.number == 0 then
-					var ast = new LRAst(self)
-					ast.creat(s,name)
-				end
+				paths_end = self.write_to_end(f,s,queue_elem.clone,queue_int.clone)
+				
 			end
 			
 			f.write "\""
@@ -628,10 +624,18 @@ class LRAutomaton
 					if a.length > 1 then
 						f.write ",color=red"
 						conflict = true
+						if grammar.knowledge.knowledges_string.not_empty then 
+							self.generate_asts(name,a,s,queue_elem,queue_int)
+						end
 						break
 					else if s.shifts.has(t) then
 						f.write ",color=orange"
 						conflict = true
+						if grammar.knowledge.knowledges_string.not_empty then 
+							var items = a.clone
+							items.add_all(s.guarded_shift[t])
+							self.generate_asts(name,items,s,queue_elem,queue_int)
+						end
 						break
 					end
 				end
@@ -647,6 +651,16 @@ class LRAutomaton
 		end
 		f.write("\}\n")
 		f.close
+	end
+
+	fun generate_asts(name : String,items : Set[Item], state : LRState, queue_elem : Array[Element], queue_int : Array[Int]) 
+	do 
+		#print "state {state.number}"
+		#print "items = {items.join("\n")}"
+		#print ""
+		#var ast = new LRAst(self,items,state,queue_elem,queue_int)
+		var ast = new LRAst(self)
+		ast.generated(name,state,items,queue_elem,queue_int)
 	end
 
 	# Generate the parser of the automaton
@@ -1544,7 +1558,7 @@ class Item
 	fun to_name : String ###############################################################################################
 	do
 		var b = new FlatBuffer
-		b.append("{alt.prod.name}--{alt.name}=")
+		b.append("{alt.prod.name}={alt.name}=")
 		for i in [0..alt.elems.length[
 		do
 			if pos == i then b.append(".") else b.append(" ")
@@ -1680,6 +1694,97 @@ end
 
 class LRAst
 	var lr : LRAutomaton
+	
+	fun generated(name : String,state : LRState,items : Set[Item],queue_elem : Array[Element],queue_int : Array[Int])
+	do
+		print "\t{name}.state_{state.number}.ast.dot"
+
+		var f = new FileWriter.open("{name}.state_{state.number}.ast.dot")
+
+		f.write("digraph g \{\n")
+		f.write("rankdir=BT;\n")
+
+		var counter = 0
+		for item in items do
+			var historical = lr.historical(item,queue_elem.clone,queue_int.clone)
+			var racine = self.creat_ast(historical)
+
+			var leafs = new Array[Int]
+
+			counter = self.write_ast(f,racine,null,counter,leafs)
+
+			counter = counter + 1
+
+			var reverse_leafs = new Array[Int] 
+			for node in leafs do reverse_leafs.unshift(node)
+		
+			self.write_leafs(f,reverse_leafs)
+		end
+
+		f.write("\}")
+		f.close
+	end
+
+	fun creat_ast(historical : Array[Item]) : LRNode 
+	do
+
+		var first = historical.shift
+		var child = new LRNode_alt(first.alt)
+		var queue_node = new Array[LRNode_alt]
+		queue_node.add(child)
+		while queue_node.not_empty do
+			self.avance(queue_node)			
+		end
+
+
+		for item in historical do
+		
+			var me = new LRNode_alt(item.alt)
+			queue_node = new Array[LRNode_alt]
+
+			for e in [0..me.value.elems.length[ do
+
+				if e == item.pos - 1 then continue
+				var elem = me.value.elems[e]
+
+				var node : nullable LRNode = null
+				if elem isa Token then
+					node = new LRNode_token(elem)
+				else if lr.grammar.knowledge.knowledges_elem.has_key(elem) then
+					node = new LRNode_alt(lr.grammar.knowledge.knowledges_elem[elem])
+					queue_node.add(node)
+				end
+				if not node == null then me.children.add(node)
+			end
+
+			while queue_node.not_empty do
+				self.avance(queue_node)			
+			end
+
+			me.children.add(child)
+			child = me
+
+		end
+
+		return child
+
+	end
+
+	fun avance(queue_node : Array[LRNode_alt] ) do
+		var parent = queue_node.shift
+		for elem in parent.value.elems do
+			var node : nullable LRNode = null
+			if elem isa Token then
+				node = new LRNode_token(elem)
+			else if lr.grammar.knowledge.knowledges_elem.has_key(elem) then
+				node = new LRNode_alt(lr.grammar.knowledge.knowledges_elem[elem])
+				queue_node.add(node)
+			end
+			if not node == null then 
+				parent.children.add(node)
+			end
+		end
+	end
 
 	fun creat(state : LRState,name : String) do
 
@@ -1694,7 +1799,7 @@ class LRAst
 		f.write("digraph g \{\n")
 		f.write("rankdir=BT;\n")
 
-		var racine = self.creat_ast(item)
+		var racine = self.creat_ast2(item)
 
 		var leafs = new Array[Int]
 
@@ -1716,20 +1821,23 @@ class LRAst
 	do
 		counter = counter + 1
 		var me = counter
+		var tmp_leafs = new Array[Int]
 		if node isa LRNode_alt then
 
 			f.write("n{me} [label=\"{node.to_s.escape_to_dot}\"];\n")
 			if not parent == null then f.write("n{me} -> n{parent} ;\n")
 
 			for child in node.children do
-				counter = self.write_ast(f,child,me,counter,leafs)
+				counter = self.write_ast(f,child,me,counter,tmp_leafs)
 			end
 		else
 			f.write("n{me} [label=\"{node.to_s.escape_to_dot}\",shape=box];\n")
 			if not parent == null then f.write("n{me} -> n{parent} ;\n")
 
-			leafs.add(me)
+			leafs.unshift(me)
 		end
+
+		leafs.add_all(tmp_leafs)
 
 		return counter
 	end
@@ -1741,6 +1849,7 @@ class LRAst
 			for node in leafs do
 				if not node == leafs.first then f.write("->")
 				f.write("n{node}")
+				
 			end
 			f.write("[style=invis]\n\}\n")
 		else if leafs.length == 1 then
@@ -1750,7 +1859,7 @@ class LRAst
 		end
 	end
 
-	fun creat_ast(item : Item) : LRNode
+	fun creat_ast2(item : Item) : LRNode
 	do
 		var racine = new LRNode_alt(item.alt)
 		var queue_node = new Array[LRNode_alt]
@@ -1758,13 +1867,13 @@ class LRAst
 
 
 		while queue_node.not_empty do
-			self.avance(queue_node)			
+			self.avance2(queue_node)			
 		end
 
 		return racine
 	end
 
-	fun avance(queue_node : Array[LRNode_alt] ) do
+	fun avance2(queue_node : Array[LRNode_alt] ) do
 		var parent = queue_node.shift
 		for elem in parent.value.elems do
 			var node : nullable LRNode = null
