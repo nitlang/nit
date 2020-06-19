@@ -1,0 +1,121 @@
+/* Grammar of a mini procedural programming language */
+Grammar weal;
+
+Lexer
+
+	letter = ('a'..'z' | 'A'..'Z');
+	digit = '0'..'9';
+
+  all =  ('a'..'z' | 'A'..'Z' | digit ) ;
+
+
+  name = 'name';
+  h = 'h'('1'..'6');
+  p = 'p';
+  semicolon = ';';
+  assign = '=';
+  add = '|';
+  image = 'image';
+  a = 'a';
+  br = 'br';
+  gt = '>';
+  lt = '<';
+  id = 'id';
+  class = 'class';
+  css = 'css';
+  left = 'left';
+  right = 'right';
+  center = 'center';
+  blue = 'blue';
+  red = 'red';
+  yellow = 'yellow';
+  orange = 'orange';
+  purple = 'purple';
+  green = 'green' ;
+  color = 'color';
+  title = 'title';
+  xxs = 'xxs';
+  xs = 'xs';
+  s = 's';
+  m = 'm';
+  l = 'l';
+  xl = 'xl';
+  xxl = 'xxl';
+  bold = 'bold';
+  italic = 'italic';
+  underline = 'underline';
+  span = 'span';
+
+  number = (digit)+;
+  contenu = (letter|digit| '_' )+;
+
+  text_brut = '"' all* '"';
+
+  blank = ' ' | '\n' | '\t';
+
+  
+ 
+  
+Parser
+
+  Ignored blank;
+  
+
+  program = 
+    [instrs]:instr*;
+
+  instr = 
+    {name_projet:} name assign contenu semicolon |
+    {css:} css assign css_name [add_options]:add_option* semicolon |
+    {titre:} h assign [links]:link* [instr_and_links]:instr_and_link*  [add_options]:add_option* semicolon |
+    {paragraphe:} p assign [links]:link* [instr_and_links]:instr_and_link* [add_options]:add_option* semicolon |
+    {image:} image assign [contenu]:contenu [add_options]:add_option* semicolon;
+
+  css_name = 
+    {class:} [n_class]:class assign [contenus]:contenu+ |
+    {id:} id assign contenu |
+    {p:} p |
+    {image:} image |
+    {titre:} h ;
+
+  instr_and_link = 
+     {contenu:} text [links]:link*;
+
+  add_option = 
+    {add:} add option;
+
+  option = 
+    {id:} id assign contenu |
+    {class:} [n_class]:class assign [contenus]:contenu+ |
+    {title:} title assign [links]:link* [instr_and_links]:instr_and_link* |
+    {left:} left |
+    {right:} right |
+    {center:} center |
+    {blue:} blue |
+    {red:} red |
+    {yellow:} yellow |
+    {orange:} orange |
+    {purple:} purple |
+    {green:} green |
+    {color:} color assign [red]:number [green]:number [blue]:number |
+    {xxs:} xxs |
+    {xs:} xs |
+    {s:} s |
+    {m:} m |
+    {l:} l |
+    {xl:} xl |
+    {xxl:} xxl |
+    {bold:} bold |
+    {italic:} italic |
+    {underline:} underline ;
+    
+  link = 
+    {link:} lt a assign contenu gt |
+    {return:} lt br gt |
+    {span:} lt span assign [links]:link* [instr_and_links]:instr_and_link*  [add_options]:add_option* gt;
+
+  text = 
+    {text_brut:} text_brut |
+    {contenu:} contenu |
+    {number:} number |
+    {contenu_img:} contenu;

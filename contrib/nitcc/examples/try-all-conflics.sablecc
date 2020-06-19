@@ -15,9 +15,10 @@ z = 'z' ;
 Parser
 
 i = 
-	{a} j s t u v w |
-	{b} k |
-	{c} l s t u ;
+	{a} j |
+	{b} j u |
+	{c} k |
+	{d} l s t u ;
 
 j = 
 	{a} r  |

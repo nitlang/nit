@@ -100,14 +100,17 @@ f.close
 
 var nfa = v2.nfa
 var dfa = nfa.to_dfa
+# dfa give to gram the shortest path for write a token
 dfa.launch_dijkstra(dfa.start)
 for t in gram.tokens do 
 	gram.knowledge.set_path(t) = dfa.sorter_path_to(t)
 end
+# gram search how to write the shortest path for all of his productions
 gram.knowledge.compute
 
-print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)"
-lr.to_dot("{name}.lr.dot",name) 
+print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)" 
+lr.set_name name
+lr.to_dot("{name}.lr.dot") 
 pretty = lr.pretty
 f = new FileWriter.open("{name}.lr.out")
 f.write "// LR automaton of {name}\n"
@@ -115,8 +118,6 @@ f.write pretty
 f.close
 
 # NFA and DFA
-
-#var nfa = v2.nfa
 print "NFA automaton: {nfa.states.length} states (see {name}.nfa.dot)"
 nfa.to_dot.write_to_file("{name}.nfa.dot")
 var nfanoe = nfa.to_nfa_noe
