@@ -30,7 +30,7 @@ redef class ToolContext
 	# option --global
 	var opt_global = new OptionBool("Use global compilation", "--global")
 
-	var global_compiler_phase = new GlobalCompilerPhase(self, null)
+	var global_compiler_phase = new GlobalCompilerPhase(self, [contracts_phase])
 
 	redef init do
 		super
