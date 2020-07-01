@@ -97,7 +97,7 @@ redef class ToolContext
 		end
 	end
 
-	var separate_compiler_phase = new SeparateCompilerPhase(self, null)
+	var separate_compiler_phase = new SeparateCompilerPhase(self, [contracts_phase])
 end
 
 class SeparateCompilerPhase
