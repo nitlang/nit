@@ -81,8 +81,8 @@ end
 
 redef class MMethod
 
-	# The contract facet of the method
-	# is representing the method with a contract
+	# The entry point of the method with the contract verification
+	# Depending of the context, this method can verify expect/ensure or both.
 	# This method calls contracts (expect, ensure) and the method
 	var mcontract_facet: nullable MFacet = null
 
