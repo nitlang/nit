@@ -30,6 +30,21 @@ intrude import typing
 redef class ToolContext
 	# Parses contracts annotations.
 	var contracts_phase: Phase = new ContractsPhase(self, [modelize_property_phase,typing_phase])
+
+	# Option --no-contract
+	var opt_no_contract = new OptionBool("Disable the contracts usage", "--no-contract")
+
+	# Option --full-contract
+	var opt_full_contract = new OptionBool("Enable all contracts usage", "--full-contract")
+
+	# Option --in-out-invariant
+	var opt_in_out_invariant = new OptionBool("Enable invariant verification in enter and exit", "--in-out-invariant")
+
+	redef init
+	do
+		super
+		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant)
+	end
 end
 
 private class ContractsPhase
