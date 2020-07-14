@@ -35,33 +35,35 @@ end
 private class ContractsPhase
 	super Phase
 
-	# The entry point of the contract phase
-	# In reality, the contract phase is executed on each module
-	# FIXME: Actually all method is checked to add method if any contract is inherited
 	redef fun process_nmodule(nmodule)do
 		# Check if the contracts are disabled
 		if toolcontext.opt_no_contract.value then return
 		nmodule.do_contracts(self.toolcontext)
 	end
+
+	redef fun process_mainmodule(mainmodule: MModule, given_mmodules: SequenceRead[MModule]) do
+		# Visit all loaded modules `toolcontext.nmodules` to do contract weaving
+		for nmodule in toolcontext.modelbuilder.nmodules do
+			nmodule.do_weaving_contracts(self.toolcontext)
+		end
+	end
 end
 
 redef class AModule
-	# Compile all contracts
-	#
-	# The implementation of the contracts is done in two visits.
-	#
-	# - First step, the visitor analyzes and constructs the contracts
-	#   for each class (invariant) and method (expect, ensure).
-	#
-	# - Second step the visitor analyzes each `ASendExpr` to see
-	#   if the callsite calls a method with a contract. If this is
-	#	the case the callsite is replaced by another callsite to the contract method.
+
+	# Entry point to generate the entire contract infrastructure.
+	# Once this method is called we must call the `do_weaving_contracts` method (see it for more information).
 	fun do_contracts(toolcontext: ToolContext) do
 		var ast_builder = new ASTBuilder(mmodule.as(not null))
 		#
 		var contract_visitor = new ContractsVisitor(toolcontext, toolcontext.modelbuilder.identified_modules.first, self, ast_builder)
 		contract_visitor.enter_visit(self)
-		#
+	end
+
+	# Entry point to execute the weaving in order to redirect the calls to the contract sides if it's needed.
+	fun do_weaving_contracts(toolcontext: ToolContext)
+	do
+		var ast_builder = new ASTBuilder(mmodule.as(not null))
 		var callsite_visitor = new CallSiteVisitor(toolcontext, ast_builder)
 		callsite_visitor.enter_visit(self)
 	end

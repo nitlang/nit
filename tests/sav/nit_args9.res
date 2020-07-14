@@ -16,6 +16,7 @@
 [0;33mtest_keep_going.nit:44,18--21[0m: Error: method `fail` does not exists in `Sys`.
 		var a = new Sys.[1;31mfail[0m
 		                ^
+Errors: 6. Warnings: 0.
 1
 2
 3

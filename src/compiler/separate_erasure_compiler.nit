@@ -46,7 +46,7 @@ redef class ToolContext
 		end
 	end
 
-	var erasure_compiler_phase = new ErasureCompilerPhase(self, null)
+	var erasure_compiler_phase = new ErasureCompilerPhase(self, [contracts_phase])
 end
 
 class ErasureCompilerPhase

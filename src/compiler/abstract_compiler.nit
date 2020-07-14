@@ -26,6 +26,7 @@ import mixin
 import counter
 import pkgconfig
 private import explain_assert_api
+import contracts
 
 # Add compiling options
 redef class ToolContext
