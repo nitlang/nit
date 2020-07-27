@@ -21,6 +21,7 @@ module contracts
 import parse_annotations
 import phase
 import semantize
+import mclassdef_collect
 intrude import model_contract
 intrude import astbuilder
 intrude import modelize_property
@@ -30,6 +31,21 @@ intrude import typing
 redef class ToolContext
 	# Parses contracts annotations.
 	var contracts_phase: Phase = new ContractsPhase(self, [modelize_property_phase,typing_phase])
+
+	# Option --no-contract
+	var opt_no_contract = new OptionBool("Disable the contracts usage", "--no-contract")
+
+	# Option --full-contract
+	var opt_full_contract = new OptionBool("Enable all contracts usage", "--full-contract")
+
+	# Option --in-out-invariant
+	var opt_in_out_invariant = new OptionBool("Enable invariant verification in enter and exit", "--in-out-invariant")
+
+	redef init
+	do
+		super
+		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant)
+	end
 end
 
 private class ContractsPhase
@@ -110,6 +126,9 @@ private class ContractsVisitor
 	# Keep the `in_contract` attribute to avoid searching at each contrat
 	var in_contract_attribute: nullable MAttribute = null
 
+	# Keep the invariant property to avoid searching at each invariant
+	var global_invariant: nullable MInvariant = null
+
 	redef fun visit(node)
 	do
 		node.create_contracts(self)
@@ -168,6 +187,37 @@ private class ContractsVisitor
 	do
 		if self.in_contract_attribute == null then inject_incontract_in_sys
 		return in_contract_attribute.as(not null)
+	end
+
+	# Inject the invariant method (`_invariant_`) verification in the root `Object` class
+	# By default the method is empty.
+	# Note the method is not abstract because the implementation of this method makes a super call to resolve multiple inheritance problem
+	private fun inject_invariant_in_object
+	do
+		# If the global_invariant already know just return
+		if global_invariant != null then return
+		# Get the object class from the modelbuilder
+		var object_class = toolcontext.modelbuilder.get_mclass_by_name(visited_module, mainmodule, "Object")
+
+		# Try to get a global invariant if it's already defined in a previously visited module.
+		var invariant_property = toolcontext.modelbuilder.try_get_mproperty_by_name(visited_module, object_class.intro, "_invariant_")
+		if invariant_property != null then
+			global_invariant = invariant_property.as(MInvariant)
+			return
+		end
+
+		var m_invariant = new MInvariant(object_class.intro, "_invariant_", object_class.intro.location, public_visibility)
+		global_invariant = m_invariant
+
+		toolcontext.modelbuilder.create_method_from_property(m_invariant, object_class.intro, false, new MSignature(new Array[MParameter]))
+	end
+
+	# Return the invariant property `_invariant_`
+	# If the `_invariant_` does not exist it's injected this with `inject_invariant_in_object`
+	private fun get_global_invariant: MInvariant
+	do
+		if self.global_invariant == null then inject_invariant_in_object
+		return global_invariant.as(not null)
 	end
 
 	# Return an `AIfExpr` with the contract encapsulated by an `if` to check if it's already in a contract verification.
@@ -239,12 +289,20 @@ private class CallSiteVisitor
 	private fun drive_callsite_to_contract(callsite: CallSite): CallSite
 	do
 		var contract_facet = callsite.mproperty.mcontract_facet
+		var invariant_facet = callsite.mproperty.minvariant_facet
 		var visited_mpropdef = visited_propdef.mpropdef
 
 		if visited_mpropdef isa MContract or visited_mpropdef isa MFacet then return callsite
 		if visited_mpropdef == null or contract_facet == null then return callsite
 
-		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, contract_facet, callsite.recv_is_self)
+		var facet: MFacet
+		if not callsite.recv_is_self and invariant_facet != null then
+			facet = invariant_facet
+		else
+			facet = contract_facet
+		end
+
+		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, facet, callsite.recv_is_self)
 	end
 end
 
@@ -550,7 +608,188 @@ redef class MEnsure
 	end
 end
 
+redef class MInvariant
+	super BottomMContract
+
+	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
+	do
+		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var n_self = new ASelfExpr
+		# build the call to the contract method
+		var n_call = v.ast_builder.make_call(n_self, callsite, null)
+		var actual_block = n_mpropdef.n_block
+		# never happen. If it's the case the problem is in the contract facet building
+		assert actual_block isa ABlockExpr
+
+		var new_block = v.ast_builder.make_block
+
+		if v.toolcontext.opt_in_out_invariant.value and not n_mpropdef.mpropdef.mproperty.is_init then new_block.add n_call
+
+		new_block.n_expr.add_all(actual_block.n_expr)
+
+		n_mpropdef.n_block = new_block
+
+		var ret_type = n_mpropdef.mpropdef.mproperty.intro.msignature.return_mtype
+		if ret_type != null then
+			# Inject the variable result (the injection of the result is necessary even if the invariants cannot take `result` as an argument)
+			# In this case the result variable is here to keep the return value of the original method.
+			# exemple
+			# ~~~nitish
+			# class A
+			# 	fun bar([...]): Bool is invariant([...])
+			#
+			# 	fun _contract_bar([...])
+			#	do
+			#		var result = bar([...])
+			#		# Check if the invariant check call is necessary and execute it.
+			#		[...]
+			#		return result
+			#	end
+			#
+			# 	fun _bar_expect([...])
+			# end
+			# ~~~~
+			var result_var = inject_result(v, n_mpropdef, ret_type)
+			var return_expr = new_block.n_expr.pop
+			new_block.add_all([n_call, return_expr])
+		else
+			new_block.add(n_call)
+		end
+	end
+end
+
+redef class MClass
+
+	# Build the invariant verification property `_invariant` if is not exist and return it
+	private fun build_invariant(v: ContractsVisitor): MInvariant
+	do
+		var m_invariant = self.minvariant
+		if m_invariant != null then return m_invariant
+		# get a invariant property from the `ContractsVisitor`
+		m_invariant = v.get_global_invariant
+		self.minvariant = m_invariant
+		return m_invariant
+	end
+end
+
+redef class MClassDef
+
+	# Is there an inherited invariant contract?
+	private fun has_inherited_invariant: Bool
+	do
+		var super_classes = self.in_hierarchy.direct_greaters
+		for super_class in super_classes do
+			if super_class.mclass.has_invariant then return true
+		end
+		return false
+	end
+end
+
+redef class AClassdef
+
+	# Entry point to create a contract (verification of inheritance, or new contract).
+	redef fun create_contracts(v)
+	do
+		v.ast_builder.check_mmodule(mclassdef.mmodule)
+		v.current_location = self.location
+		# Invariants are always considered to be a redefinition of contract.
+		# This is due to an empty invariant method which is added to the root `object` class.
+		v.is_intro_contract = false
+		check_annotation(v)
+		if not mclass.has_invariant then check_redef(v)
+	end
+
+	# Verification if the class has an inherited contract to apply it.
+	private fun check_redef(v: ContractsVisitor)
+	do
+		# Check if the method has an attached contract (Inherited)
+		if mclassdef.has_inherited_invariant then mclass.minvariant = v.global_invariant
+	end
+
+	# Verification of the annotation to know if it is a contract annotation.
+	# If this is the case, we built the appropriate contract.
+	private fun check_annotation(v: ContractsVisitor)
+	do
+		var annotation_invariants = get_annotations("invariant")
+		var annotation_no_contract = get_annotations("no_contract")
+
+		if not annotation_invariants.is_empty and not annotation_no_contract.is_empty then
+			v.toolcontext.error(location, "The new contract definition is not correct when using `no_contract`. Remove the `invariant` definition or the `no_contract`")
+			return
+		end
+
+		if not annotation_no_contract.is_empty then
+			var minvariant = mclass.minvariant
+			if minvariant == null then
+				v.toolcontext.warning(location, "useless_nocontract", "Useless `no_contract`, no invariant was declared or inherited for `{mclass.name}`. Remove the `no_contract`")
+			else
+				# Add an empty invariant method to replace the actual definition
+				v.toolcontext.modelbuilder.create_method_from_property(minvariant, mclassdef.as(not null), false, minvariant.intro.msignature)
+			end
+			return
+		end
+
+		if not annotation_invariants.is_empty then
+
+			var minvariant = mclass.build_invariant(v)
+
+			v.define_signature(minvariant, null, null)
+			v.build_contract(annotation_invariants, minvariant, mclassdef.as(not null))
+
+			add_invariant_in_super_def(v)
+			# Construct invariant facet for the `default_init`
+			mclassdef.default_init.mproperty.define_invariant_facet(v, mclassdef.as(not null), mclass.minvariant.as(not null))
+		end
+	end
+
+	# Create all contract facet for each inherited property definition of the class to take in consideration the invariant
+	# Redefine or introduced properties will be processed later
+	private fun add_invariant_in_super_def(v: ContractsVisitor)
+	do
+		var mpropertys = mclassdef.collect_inherited_mmethods(v.mainmodule, new ModelFilter)
+		for mproperty in mpropertys do
+			if mproperty isa MFacet or mproperty isa MContract or mproperty.has_invariant_facet then continue
+
+			# All property defined in Object is considered as a pure property (without side effect)
+			# TO-DO add an option to manage it. Take care with `!=` and `==` on MNullableType you can't do a call to invariant facet because the object might be null.
+			if mproperty.intro.mclassdef.name == "Object" then continue
+
+			# Check if the actual class definition redef this property definition. if it's the case do nothing the visit of the method will do the job
+			if mclassdef.mpropdefs_by_property.has_key(mproperty) then continue
+
+			if mproperty.intro.is_intern then continue
+			# Do not generate invariant facet with inherited `defaultinit`
+			if not mproperty.name == "defaultinit" then mproperty.define_invariant_facet(v, mclassdef.as(not null), mclass.minvariant.as(not null))
+		end
+	end
+end
+
 redef class MMethod
+
+	# Define invariant facet for the MMethod in the given mclassdef.
+	# This method also defines the contract facet.
+	private fun define_invariant_facet(v: ContractsVisitor, classdef: MClassDef, minvariant: MInvariant)
+	do
+		# Do nothing the invariant facet already exist
+		if has_invariant_facet then return
+
+		# Make a contract facet if it's not exist
+		if not self.has_contract_facet then define_contract_facet(v, classdef)
+
+		# Make invariant mproperty facet
+		var invariant_facet = build_invariant_facet
+
+		# Check if the MMethod has a invariant facet in the intro_mclassdef
+		if classdef != intro_mclassdef then
+			create_facet(v, intro_mclassdef, invariant_facet, self.mcontract_facet.as(not null))
+		end
+
+		# Create an ast definition for the invariant facet
+		var n_invariant_facet = create_facet(v, classdef, invariant_facet, self.mcontract_facet.as(not null))
+		minvariant.adapt_method_to_contract(v, invariant_facet, n_invariant_facet)
+		n_invariant_facet.location = v.current_location
+		n_invariant_facet.do_all(v.toolcontext)
+	end
 
 	# Define contract facet for MMethod in the given mclassdef. The facet represents the entry point with contracts (expect, ensure) of the method.
 	# If a contract is given adapt the contract facet.
@@ -711,6 +950,7 @@ redef class AMethPropdef
 		v.is_intro_contract = mpropdef.is_intro
 		check_annotation(v)
 		if not mpropdef.is_intro then check_redef(v)
+		check_invariant(v)
 	end
 
 	# Verification of the annotation to know if it is a contract annotation.
@@ -759,6 +999,13 @@ redef class AMethPropdef
 			if mcontract_facet != null and mcontract_facet.has_applied_ensure then return
 			if mensure.is_called(v, mpropdef.as(not null)) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mensure)
 		end
+	end
+
+	# Check if the class has an invariant to apply it on the property
+	private fun check_invariant(v: ContractsVisitor)
+	do
+		var minvariant = mpropdef.mclassdef.mclass.minvariant
+		if minvariant != null and not mpropdef.mproperty.has_invariant_facet then mpropdef.mproperty.define_invariant_facet(v, mpropdef.mclassdef, minvariant)
 	end
 end
 
