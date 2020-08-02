@@ -105,11 +105,6 @@ private class ContractsVisitor
 	# is `no_contract` annotation was found
 	var find_no_contract = false
 
-	# The reference to the `in_contract` attribute.
-	# This attribute is used to disable contract verification when you are already in a contract verification.
-	# Keep the `in_contract` attribute to avoid searching at each contrat
-	var in_contract_attribute: nullable MAttribute = null
-
 	redef fun visit(node)
 	do
 		node.create_contracts(self)
@@ -140,78 +135,12 @@ private class ContractsVisitor
 		end
 	end
 
-	# Inject the incontract attribute (`_in_contract_`) in the `Sys` class
-	# This attribute allows to check if the contract need to be executed
-	private fun inject_incontract_in_sys
+	# Return an `AIfAssertion` with the contract encapsulated by an `if` to check if it's already in a contract verification.
+	private fun encapsulated_contract_call(visited_method: AMethPropdef, call_to_contracts: Array[ACallExpr]): AIfInAssertion
 	do
-		# If the `in_contract_attribute` already know just return
-		if in_contract_attribute != null then return
-
-		var sys_class = toolcontext.modelbuilder.get_mclass_by_name(visited_module, mainmodule, "Sys")
-
-		# Try to get the `in_contract` property, if it has already defined in a previously visited module.
-		var in_contract_property = toolcontext.modelbuilder.try_get_mproperty_by_name(visited_module, sys_class.intro, "__in_contract_")
-		if in_contract_property != null then
-			self.in_contract_attribute = in_contract_property.as(MAttribute)
-			return
-		end
-
-		var bool_false = new AFalseExpr.make(mainmodule.bool_type)
-		var n_in_contract_attribute = toolcontext.modelbuilder.create_attribute_from_name("__in_contract_", sys_class.intro, mainmodule.bool_type, public_visibility).create_setter(toolcontext.modelbuilder, true).define_default(bool_false)
-
-		in_contract_attribute = n_in_contract_attribute.mpropdef.mproperty
-	end
-
-	# Return the `_in_contract_` attribute.
-	# If the attribute `_in_contract_` does not exist it's injected with `inject_incontract_in_sys`
-	private fun get_incontract: MAttribute
-	do
-		if self.in_contract_attribute == null then inject_incontract_in_sys
-		return in_contract_attribute.as(not null)
-	end
-
-	# Return an `AIfExpr` with the contract encapsulated by an `if` to check if it's already in a contract verification.
-	#
-	# Example:
-	# ~~~nitish
-	# class A
-	# 	fun bar([...]) is except([...])
-	#
-	# 	fun _contract_bar([...])
-	#	do
-	#		if not sys._in_contract_ then
-	#			sys._in_contract_ = true
-	#			_bar_expect([...])
-	#			sys._in_contract_ = false
-	#		end
-	#		bar([...])
-	#	end
-	#
-	# 	fun _bar_expect([...])
-	# end
-	# ~~~~
-	#
-	private fun encapsulated_contract_call(visited_method: AMethPropdef, call_to_contracts: Array[ACallExpr]): AIfExpr
-	do
-		var sys_property = toolcontext.modelbuilder.model.get_mproperties_by_name("sys").first.as(MMethod)
-		var callsite_sys = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, sys_property, true)
-
-		var incontract_attribute = get_incontract
-
-		var callsite_get_incontract = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, incontract_attribute.getter.as(MMethod), false)
-		var callsite_set_incontract = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, incontract_attribute.setter.as(MMethod), false)
-
-		var n_condition = ast_builder.make_not(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_get_incontract, null))
-
-		var n_if = ast_builder.make_if(n_condition, null)
-
-		var if_then_block = n_if.n_then.as(ABlockExpr)
-
-		if_then_block.add(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_set_incontract, [new ATrueExpr.make(mainmodule.bool_type)]))
-		if_then_block.add_all(call_to_contracts)
-		if_then_block.add(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_set_incontract, [new AFalseExpr.make(mainmodule.bool_type)]))
-
-		return n_if
+		var n_block = ast_builder.make_block
+		n_block.add_all(call_to_contracts)
+		return new AIfInAssertion(n_block)
 	end
 end
 
@@ -845,5 +774,33 @@ redef class ANewExpr
 		if actual_callsite != null then
 			callsite = v.drive_callsite_to_contract(actual_callsite)
 		end
+	end
+end
+
+# Ast representation of the `in_assertion` checking
+# Note, the node if is only composed with a then body (`n_body`)
+class AIfInAssertion
+	super AExpr
+
+	# The body of the if
+	var n_body: AExpr is writable
+
+	redef fun accept_scope_visitor(v)
+	do
+		v.enter_visit_block(n_body, null)
+	end
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(n_body)
+	end
+
+	redef fun accept_typing(v)
+	do
+		v.visit_stmt(n_body)
+
+		self.is_typed = true
+
+		self.mtype = n_body.mtype
 	end
 end
