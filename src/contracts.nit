@@ -292,7 +292,7 @@ private class CallSiteVisitor
 		var invariant_facet = callsite.mproperty.minvariant_facet
 		var visited_mpropdef = visited_propdef.mpropdef
 
-		if visited_mpropdef isa MContract or visited_mpropdef isa MFacet then return callsite
+		if visited_mpropdef.mproperty isa MContract or visited_mpropdef.mproperty isa MFacet then return callsite
 		if visited_mpropdef == null or contract_facet == null then return callsite
 
 		var facet: MFacet
