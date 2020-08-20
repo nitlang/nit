@@ -157,6 +157,6 @@ redef class MMethod
 	# Is there an invariant facet?
 	fun has_invariant_facet: Bool
 	do
-		return self.mcontract_facet != null
+		return self.minvariant_facet != null
 	end
 end
