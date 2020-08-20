@@ -23,6 +23,7 @@ private import parser::tables
 import mixin
 private import model::serialize_model
 private import frontend::explain_assert_api
+private import contracts
 
 redef class ToolContext
 	# --discover-call-trace
@@ -73,6 +74,9 @@ class NaiveInterpreter
 
 	# Name of all supported functional names
 	var routine_types: Set[String] = new HashSet[String]
+
+	# Flag used to know if we are currently checking some assertions.
+	var in_assertion: Bool = false
 
 	init
 	do
@@ -1823,6 +1827,18 @@ redef class AIfexprExpr
 			return v.expr(self.n_then)
 		else
 			return v.expr(self.n_else)
+		end
+	end
+end
+
+
+redef class AIfInAssertion
+	redef fun stmt(v)
+	do
+		if not v.in_assertion then
+			v.in_assertion = true
+			v.stmt(self.n_body)
+			v.in_assertion = false
 		end
 	end
 end
