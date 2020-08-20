@@ -1002,7 +1002,9 @@ redef class MMethod
 		if not exist_contract_facet then
 			# If has no contract facet in intro just create it
 			if classdef != intro_mclassdef then
-				create_facet(v, intro_mclassdef, contract_facet, self)
+				var n_intro_face = create_facet(v, intro_mclassdef, contract_facet, self)
+				n_intro_face.location = self.intro.location
+				n_intro_face.do_all(v.toolcontext)
 			end
 			n_contract_facet = create_facet(v, classdef, contract_facet, self)
 		else
@@ -1330,6 +1332,8 @@ redef class ASendExpr
 		var actual_callsite = callsite
 		if actual_callsite != null then
 			callsite = v.drive_callsite_to_contract(actual_callsite)
+			# Set the signature mapping with the old value, this avoids having to re-check the callsite.
+			callsite.signaturemap = actual_callsite.signaturemap
 		end
 	end
 end
@@ -1340,6 +1344,8 @@ redef class ANewExpr
 		var actual_callsite = callsite
 		if actual_callsite != null then
 			callsite = v.drive_callsite_to_contract(actual_callsite)
+			# Set the signature mapping with the old value, this avoids having to re-check the callsite
+			callsite.signaturemap = actual_callsite.signaturemap
 		end
 	end
 end
