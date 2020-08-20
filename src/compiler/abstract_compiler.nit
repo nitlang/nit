@@ -1060,6 +1060,16 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("exit(status);")
 		v.add_decl("\}")
 
+		if modelbuilder.toolcontext.opt_contract_metrics.value then
+			v.compiler.header.add_decl("extern long count_executed_precondition_contracts; // Count the number of executed precondition")
+			v.compiler.header.add_decl("extern long count_executed_postcondition; // Count the number of executed postcondition")
+			v.compiler.header.add_decl("extern long count_executed_invariant; // Count the number of executed invariant")
+
+			v.add_decl("long count_executed_precondition_contracts= 0; // Count the number of executed contract")
+			v.add_decl("long count_executed_postcondition= 0; // Count the number of executed contract")
+			v.add_decl("long count_executed_invariant= 0; // Count the number of executed contract")
+		end
+
 		compile_before_main(v)
 
 		if no_main then
@@ -1136,6 +1146,13 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add("printf(\"by table: %ld (%.2f%%)\\n\", count_invoke_by_tables, 100.0*count_invoke_by_tables/count_invoke_total);")
 			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
 			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
+		end
+
+		if modelbuilder.toolcontext.opt_contract_metrics.value then
+			v.add("printf(\"# dynamic contract checked: total %ld\\n\", (count_executed_invariant + count_executed_precondition_contracts + count_executed_postcondition));")
+			v.add("printf(\"# dynamic invariant checked: total %ld\\n\", count_executed_invariant);")
+			v.add("printf(\"# dynamic precondition checked: total %ld\\n\", count_executed_precondition_contracts);")
+			v.add("printf(\"# dynamic postcondition checked: total %ld\\n\", count_executed_postcondition);")
 		end
 
 		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
@@ -3894,6 +3911,7 @@ redef class AIfInAssertion
 	redef fun stmt(v)
 	do
 		v.add("if (!*getInAssertion())\{")
+		if v.compiler.modelbuilder.toolcontext.opt_contract_metrics.value then v.add(mcontract.write_c_metric)
 		v.add("*getInAssertion() = 1;")
 		v.stmt(self.n_body)
 		v.add("*getInAssertion() = 0;")
