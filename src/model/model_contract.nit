@@ -43,6 +43,27 @@ class MEnsure
 	super BottomMContract
 
 	redef fun is_already_applied(mfacet: MFacet): Bool do return mfacet.has_applied_ensure
+
+	# The `MOldClass` contract if any
+	var old_mclass: nullable MOldClass = null
+
+	var old_param = new Variable("old")
+
+	# Is there an `old_mclass`?
+	private fun has_old_mclass: Bool
+	do
+		return self.old_mclass != null
+	end
+
+	# Build `old_mclass` if is not exist and return it
+	private fun build_old_mclass: MOldClass
+	do
+		var m_old_mclass = self.old_mclass
+		# build a new `MOldClass` to keep the old value
+		if m_old_mclass == null then m_old_mclass = new MOldClass(intro_mclassdef.mmodule, "old_{self.c_name}", intro_mclassdef.location, new Array[String], concrete_kind, public_visibility)
+		self.old_mclass = m_old_mclass
+		return m_old_mclass
+	end
 end
 
 # An invariant contract representation
@@ -159,4 +180,15 @@ redef class MMethod
 	do
 		return self.minvariant_facet != null
 	end
+end
+
+# Representation of `old` in ensure contract.
+class MOldClass
+	super MClass
+
+	# Property to init all old attributes.
+	var init_old_property: nullable MMethod
+
+	# The old variable.
+	var old_variable = new Variable("old")
 end
