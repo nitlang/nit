@@ -42,10 +42,13 @@ redef class ToolContext
 	# Option --in-out-invariant
 	var opt_in_out_invariant = new OptionBool("Enable invariant verification in enter and exit", "--in-out-invariant")
 
+	# Option --contract-metrics
+	var opt_contract_metrics = new OptionBool("Enable dynamic count of contract checking", "--contract-metrics")
+
 	redef init
 	do
 		super
-		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant)
+		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant, opt_contract_metrics)
 	end
 end
 
@@ -161,11 +164,11 @@ private class ContractsVisitor
 	end
 
 	# Return an `AIfAssertion` with the contract encapsulated by an `if` to check if it's already in a contract verification.
-	private fun encapsulated_contract_call(visited_method: AMethPropdef, call_to_contracts: Array[ACallExpr]): AIfInAssertion
+	private fun encapsulated_contract_call(mcontract: MContract, call_to_contracts: Array[ACallExpr]): AIfInAssertion
 	do
 		var n_block = ast_builder.make_block
 		n_block.add_all(call_to_contracts)
-		return new AIfInAssertion(n_block)
+		return new AIfInAssertion(mcontract, n_block)
 	end
 	# Inject the invariant method (`_invariant_`) verification in the root `Object` class
 	# By default the method is empty.
@@ -343,6 +346,9 @@ redef class MContract
 		return v.toolcontext.opt_full_contract.value
 	end
 
+	# Return the string that it represents the incrementation of contract invocation counter.
+	fun write_c_metric: String is abstract
+
 	# Method use to diplay warning when the contract is not present at the introduction
 	private fun no_intro_contract(v: ContractsVisitor, a: Array[AAnnotation])do end
 
@@ -436,6 +442,8 @@ end
 
 redef class MExpect
 
+	redef fun write_c_metric: String do return "count_executed_precondition_contracts++;"
+
 	redef fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
 	do
 		var main_package = v.mainmodule.mpackage
@@ -499,7 +507,7 @@ redef class MExpect
 		# Creation of the new instruction block with the call to expect condition
 		var actual_expr = n_mpropdef.n_block
 		var new_block = new ABlockExpr
-		new_block.n_expr.push v.encapsulated_contract_call(n_mpropdef, [n_callexpect])
+		new_block.n_expr.push v.encapsulated_contract_call(self, [n_callexpect])
 		if actual_expr isa ABlockExpr then
 			new_block.n_expr.add_all(actual_expr.n_expr)
 		else if actual_expr != null then
@@ -573,6 +581,8 @@ end
 
 redef class MEnsure
 
+	redef fun write_c_metric: String do return "count_executed_postcondition++;"
+
 	redef fun adapt_specific_msignature(m_signature: MSignature, visitor: ContractsVisitor): MSignature
 	do
 		var msignature = m_signature.adapt_to_ensurecondition
@@ -625,12 +635,12 @@ redef class MEnsure
 			args.add(read_result)
 			if n_read_old != null then args.add(n_read_old)
 			var n_call_contract = v.ast_builder.make_call(n_self, callsite, args)
-			actual_block.add_all([v.encapsulated_contract_call(n_mpropdef, [n_call_contract]), return_expr])
+			actual_block.add_all([v.encapsulated_contract_call(self, [n_call_contract]), return_expr])
 		else
 			if n_read_old != null then args.add(n_read_old)
 			# build the call to the contract method
 			var n_call_contract = v.ast_builder.make_call(n_self, callsite, args)
-			actual_block.add v.encapsulated_contract_call(n_mpropdef, [n_call_contract])
+			actual_block.add v.encapsulated_contract_call(self, [n_call_contract])
 		end
 
 		n_mpropdef.do_all(v.toolcontext)
@@ -669,6 +679,8 @@ end
 redef class MInvariant
 	super BottomMContract
 
+	redef fun write_c_metric: String do return "count_executed_invariant++;"
+
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
 		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
@@ -681,7 +693,7 @@ redef class MInvariant
 
 		var new_block = v.ast_builder.make_block
 
-		if v.toolcontext.opt_in_out_invariant.value and not n_mpropdef.mpropdef.mproperty.is_init then new_block.add n_call
+		if v.toolcontext.opt_in_out_invariant.value and not n_mpropdef.mpropdef.mproperty.is_init then new_block.add v.encapsulated_contract_call(self, [n_call])
 
 		new_block.n_expr.add_all(actual_block.n_expr)
 
@@ -709,7 +721,7 @@ redef class MInvariant
 			# ~~~~
 			var result_var = inject_result(v, n_mpropdef, ret_type)
 			var return_expr = new_block.n_expr.pop
-			new_block.add_all([n_call, return_expr])
+			new_block.add_all([v.encapsulated_contract_call(self, [n_call]), return_expr])
 		else
 			new_block.add(n_call)
 		end
@@ -1336,6 +1348,9 @@ end
 # Note, the node if is only composed with a then body (`n_body`)
 class AIfInAssertion
 	super AExpr
+
+	# The associed contract
+	var mcontract: MContract
 
 	# The body of the if
 	var n_body: AExpr is writable
