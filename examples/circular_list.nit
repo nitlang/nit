@@ -29,6 +29,15 @@ class CircularList[E]
 
 	redef fun first do return self.node.item
 
+	redef fun [](index) do
+		var i = 0
+		for item in self do
+			if i == index then return item
+			i += 1
+		end
+		return null
+	end
+
 	redef fun push(e)
 	do
 		var new_node = new CLNode[E](e)
