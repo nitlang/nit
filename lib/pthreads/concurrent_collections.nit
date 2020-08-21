@@ -113,7 +113,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun has_all(e)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.has_all(e)
@@ -143,7 +143,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun iterator
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.iterator
@@ -153,7 +153,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun length
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.length
@@ -163,7 +163,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun to_a
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.to_a
@@ -173,7 +173,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun rand
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.rand
@@ -183,7 +183,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun join(sep, last_sep)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.join(sep, last_sep)
@@ -193,7 +193,7 @@ abstract class ConcurrentCollection[E]
 
 	redef fun to_s
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.to_s
@@ -211,7 +211,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun ==(o)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection == o
@@ -231,7 +231,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun hash
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.hash
@@ -241,7 +241,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun index_of(index)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.index_of(index)
@@ -251,7 +251,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun index_of_from(index, from)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.index_of_from(index, from)
@@ -261,7 +261,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun iterator_from(index)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.iterator_from(index)
@@ -281,7 +281,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun last_index_of(e)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.last_index_of(e)
@@ -291,7 +291,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun last_index_of_from(e, from)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.last_index_of_from(e, from)
@@ -301,7 +301,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun reverse_iterator
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.reverse_iterator
@@ -311,7 +311,7 @@ abstract class ConcurrentSequenceRead[E]
 
 	redef fun reverse_iterator_from(from)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.reverse_iterator_from(from)
@@ -347,7 +347,7 @@ abstract class ConcurrentSequence[E]
 
 	redef fun append(e)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.append e
@@ -402,7 +402,7 @@ abstract class ConcurrentSequence[E]
 
 	redef fun prepend(e)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.prepend e
@@ -448,7 +448,7 @@ abstract class ConcurrentSequence[E]
 
 	redef fun subarray(start, len)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.subarray(start, len)
@@ -478,7 +478,7 @@ class ConcurrentArray[E]
 
 	redef fun enlarge(cap)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.enlarge(cap)
@@ -487,7 +487,7 @@ class ConcurrentArray[E]
 
 	redef fun remove_all(e)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.remove_all(e)
@@ -496,7 +496,7 @@ class ConcurrentArray[E]
 
 	redef fun swap_at(a, b)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.swap_at(a, b)
@@ -547,7 +547,7 @@ class ConcurrentList[E]
 
 	redef fun link(l)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.link(l)
@@ -637,7 +637,7 @@ class ReverseBlockingQueue[E]
 	# When the Queue is empty, signal any possible waiting thread
 	redef fun remove(e)
 	is
-		no_contract
+		#no_contract
 	do
 		mutex.lock
 		real_collection.remove(e)
