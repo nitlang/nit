@@ -215,6 +215,7 @@ private class CallSiteVisitor
 
 	redef fun visit(node)
 	do
+		if node isa AAnnotation then return # Annotations don't need to be woven
 		node.check_callsite(self)
 		node.visit_all(self)
 	end
