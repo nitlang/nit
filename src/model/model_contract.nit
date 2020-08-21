@@ -60,7 +60,7 @@ class MEnsure
 	do
 		var m_old_mclass = self.old_mclass
 		# build a new `MOldClass` to keep the old value
-		if m_old_mclass == null then m_old_mclass = new MOldClass(intro_mclassdef.mmodule, "old_{self.c_name}", intro_mclassdef.location, new Array[String], concrete_kind, public_visibility)
+		if m_old_mclass == null then m_old_mclass = new MOldClass(intro_mclassdef.mmodule, "_{self.c_name}_old", intro_mclassdef.location, new Array[String], concrete_kind, public_visibility)
 		self.old_mclass = m_old_mclass
 		return m_old_mclass
 	end
@@ -122,7 +122,7 @@ redef class MMethod
 	do
 		var m_mensure = self.mensure
 		# build a new `MEnsure` contract
-		if m_mensure == null then m_mensure = new MEnsure(intro_mclassdef, "_ensure_{name}", intro_mclassdef.location, public_visibility)
+		if m_mensure == null then m_mensure = new MEnsure(intro_mclassdef, "{name}_ensure_", intro_mclassdef.location, public_visibility)
 		self.mensure = m_mensure
 		return m_mensure
 	end
@@ -138,7 +138,7 @@ redef class MMethod
 	do
 		var m_mexpect = self.mexpect
 		# build a new `MExpect` contract
-		if m_mexpect == null then m_mexpect = new MExpect(intro_mclassdef, "_expect_{name}", intro_mclassdef.location, public_visibility)
+		if m_mexpect == null then m_mexpect = new MExpect(intro_mclassdef, "{name}_expect_", intro_mclassdef.location, public_visibility)
 		self.mexpect = m_mexpect
 		return m_mexpect
 	end
