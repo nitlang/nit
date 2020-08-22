@@ -147,6 +147,8 @@ class GlobalCompiler
 	# Return the C symbol associated to a live type runtime
 	# REQUIRE: self.runtime_type_analysis.live_types.has(mtype)
 	fun classid(mtype: MClassType): String
+	is
+		expect(self.runtime_type_analysis.live_types.has(mtype))
 	do
 		if self.classids.has_key(mtype) then
 			return self.classids[mtype]
@@ -186,9 +188,10 @@ class GlobalCompiler
 
 	# Declare C structures and identifiers for a runtime class
 	fun declare_runtimeclass(mtype: MClassType)
+	is
+		expect(self.runtime_type_analysis.live_types.has(mtype))
 	do
 		var v = self.header
-		assert self.runtime_type_analysis.live_types.has(mtype)
 		v.add_decl("/* runtime class {mtype} */")
 		var idnum = classids.length
 		var idname = "ID_" + mtype.c_name
@@ -243,9 +246,10 @@ class GlobalCompiler
 
 	# Generate the init-instance of a live type (allocate + init-instance)
 	fun generate_init_instance(mtype: MClassType)
+	is
+		expect(self.runtime_type_analysis.live_types.has(mtype))
+		expect(not mtype.is_c_primitive)
 	do
-		assert self.runtime_type_analysis.live_types.has(mtype)
-		assert not mtype.is_c_primitive
 		var v = self.new_visitor
 
 		var is_native_array = mtype.mclass.name == "NativeArray"
@@ -297,8 +301,9 @@ class GlobalCompiler
 	end
 
 	fun generate_box_instance(mtype: MClassType)
+	is
+		expect(self.runtime_type_analysis.live_types.has(mtype))
 	do
-		assert self.runtime_type_analysis.live_types.has(mtype)
 		var v = self.new_visitor
 
 		self.header.add_decl("val* BOX_{mtype.c_name}({mtype.ctype});")
