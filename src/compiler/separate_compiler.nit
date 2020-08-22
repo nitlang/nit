@@ -720,8 +720,9 @@ class SeparateCompiler
 
 	# Globaly compile the type structure of a live type
 	fun compile_type_to_c(mtype: MType)
+	is
+		expect(not mtype.need_anchor)
 	do
-		assert not mtype.need_anchor
 		var is_live = mtype isa MClassType and runtime_type_analysis.live_types.has(mtype)
 		var is_cast_live = runtime_type_analysis.live_cast_types.has(mtype)
 		var c_name = mtype.c_name
@@ -1386,8 +1387,9 @@ class SeparateCompilerVisitor
 	# If the C expression is evaluated to 0, it means there is no tag.
 	# Thus the expression can be used as a condition.
 	fun extract_tag(value: RuntimeVariable): String
+	is
+		expect(not value.mtype.is_c_primitive)
 	do
-		assert not value.mtype.is_c_primitive
 		return "((long){value}&3)" # Get the two low bits
 	end
 
@@ -2351,8 +2353,10 @@ class SeparateCompilerVisitor
 		end
 	end
 
-	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
-		assert mtype.need_anchor
+	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType)
+	is
+		expect(mtype.need_anchor)
+	do
 		var compiler = self.compiler
 		if not compiler.live_unresolved_types.has_key(self.frame.mpropdef.mclassdef) then
 			compiler.live_unresolved_types[self.frame.mpropdef.mclassdef] = new HashSet[MType]
