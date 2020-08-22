@@ -45,10 +45,13 @@ redef class ToolContext
 	# Option --contract-metrics
 	var opt_contract_metrics = new OptionBool("Enable dynamic count of contract checking", "--contract-metrics")
 
+	# Option --keep-old-instance
+	var opt_old_attribute = new OptionBool("Enable the conservation of ensure `old` intance in a class attribute", "--keep-old-instance")
+
 	redef init
 	do
 		super
-		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant, opt_contract_metrics)
+		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant, opt_contract_metrics, opt_old_attribute)
 	end
 end
 
@@ -276,7 +279,6 @@ private class OldVisitor
 			if old_expr.mtype == null then continue # skip error. The generation of warning is not needed since the typing does it for us.
 
 			var attribute_name = "_old_{number_attributes}"
-
 
 			var resolved_mtype = old_expr.mtype.anchor_to(contract_visitor.visited_module.mmodule.as(not null), visited_mpropdef.mclassdef.bound_mtype).as_nullable
 			var n_attribute = contract_visitor.toolcontext.modelbuilder.create_attribute_from_name(attribute_name, mclassdef, resolved_mtype, public_visibility).create_setter(contract_visitor.toolcontext.modelbuilder, true)
@@ -649,30 +651,66 @@ redef class MEnsure
 		mfacet.has_applied_ensure = true
 	end
 
+	# Old attribute use to avoid new instantiation old class
+	var old_attribute: nullable MAttribute
+
+	# Return an `TAttrid` corresponding to `old_attribute`
+	fun get_attid: TAttrid
+	is
+		expect(old_attribute != null)
+	do
+		var att_id = new TAttrid
+		att_id.text = "{old_attribute.name}"
+		return att_id
+	end
+
 	# Inject the `old` variable into the `n_block` of the given `n_mpropdef`.
 	#
 	# The purpose of the variable is to capture the values of `old()` expr to use it in contracts.
 	# This variable will be injected at the start of the block (first instruction)
 	private fun inject_old(v: ContractsVisitor, n_mpropdef: AMethPropdef)
 	do
+		# Creation of a new block with as first expression the `old` variable and follow by all expr of the `n_mpropdef` body
+		var new_block = v.ast_builder.make_block
+
 		# Create a new old_object to store the old expression value
 		var old_class_initdef = old_mclass.intro.default_init
 		var callsite_new_old_class = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_class_initdef.mproperty, false)
 		var n_new_old_class = v.ast_builder.make_new(callsite_new_old_class, null)
 		n_new_old_class.n_type = old_mclass.mclass_type.create_ast_representation
 
+
+		if v.toolcontext.opt_old_attribute.value then
+			if old_attribute == null then
+				var oldclass_mtype = self.old_mclass.mclass_type.as_nullable
+				var attribute_name = "_old_{self.old_mclass.name}"
+				var mclassdef = n_mpropdef.mpropdef.mclassdef
+				var n_attribute = v.toolcontext.modelbuilder.create_attribute_from_name(attribute_name, mclassdef, oldclass_mtype, public_visibility).create_setter(v.toolcontext.modelbuilder, true)
+				n_attribute.noinit = true
+				old_attribute = n_attribute.mpropdef.mproperty
+			end
+
+			var if_old_attribute = v.ast_builder.make_if(new AEqExpr.init_aeqexpr(new AAttrExpr.init_aattrexpr(new ASelfExpr, self.get_attid), new TEq, new ANullExpr.init_anullexpr( new TKwnull, null)), null)
+			if_old_attribute.n_then = new AAttrAssignExpr.init_aattrassignexpr(new ASelfExpr, self.get_attid, new TAssign, n_new_old_class)
+
+			new_block.add if_old_attribute
+		end
+
 		# Args to call the old init property
 		var n_args_call_init_property = new Array[AExpr]
 		n_args_call_init_property.add_all(n_mpropdef.n_signature.make_parameter_read(v.ast_builder))
-		n_args_call_init_property.add(n_new_old_class)
 
+		if v.toolcontext.opt_old_attribute.value then
+			var n_old_cast = new AAsCastExpr.init_aascastexpr(new AAttrExpr.init_aattrexpr(new ASelfExpr, self.get_attid), new TKwas , null, self.old_mclass.mclass_type.create_ast_representation, null)
+			n_args_call_init_property.add(n_old_cast)
+		else
+			n_args_call_init_property.add(n_new_old_class)
+		end
 
-		var callsite_old_init_property = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_mclass.init_old_property.as(not null), true)
-		var n_call_init_old_property = v.ast_builder.make_call(new ASelfExpr, callsite_old_init_property, n_args_call_init_property)
+		var callsite_old_class_init = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_mclass.init_old_property.as(not null), true)
+		var ncall_init_old = v.ast_builder.make_call(new ASelfExpr, callsite_old_class_init, n_args_call_init_property)
 
-		# Creation of a new block with as first expression the `old` variable and follow by all expr of the `n_mpropdef` body
-		var new_block = v.ast_builder.make_block
-		new_block.add v.ast_builder.make_var_assign(self.old_param, n_call_init_old_property)
+		new_block.add v.ast_builder.make_var_assign(self.old_param, ncall_init_old)
 		new_block.n_expr.add_all(n_mpropdef.n_block.as(ABlockExpr).n_expr)
 		n_mpropdef.n_block = new_block
 	end
