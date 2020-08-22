@@ -591,9 +591,14 @@ redef class MEnsure
 	do
 		var msignature = m_signature.adapt_to_ensurecondition
 
-		var object_mtype = visitor.toolcontext.modelbuilder.get_mclass_by_name(visitor.visited_module, visitor.mainmodule, "Object").mclass_type.as_nullable
 		# Addition of a parameter to express `old` reference
-		msignature.mparameters.add(new MParameter("old", object_mtype, false))
+		var object_class = visitor.toolcontext.modelbuilder.get_mclass_by_name(visitor.visited_module, visitor.mainmodule, "Object")
+
+		if object_class != null then
+			var object_mtype = object_class.mclass_type.as_nullable
+			# Addition of a parameter to express `old` reference
+			msignature.mparameters.add(new MParameter("old", object_mtype, false))
+		end
 
 		return msignature
 	end
