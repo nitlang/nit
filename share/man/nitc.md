@@ -554,6 +554,9 @@ Option used to enable `invariant` verification on entry and exit of a method. By
 ### `--contract-metrics`
 Display the number of contract evaluation for each contract type.
 
+### `--keep-old-instance`
+Store the instance of `old` representation in the class and thus systematic instantiation. This option should not be used in a multi-threaded environment.
+
 # ENVIRONMENT VARIABLES
 
 ### `NIT_DIR`
