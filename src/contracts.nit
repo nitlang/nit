@@ -309,9 +309,10 @@ private class OldVisitor
 
 			var n_old_cast = new AAsCastExpr.init_aascastexpr(n_old_var_param, new TKwas , null, mensure.old_mclass.mclass_type.create_ast_representation, null)
 
-			var read_old_attribut_callsite = contract_visitor.ast_builder.create_callsite(contract_visitor.toolcontext.modelbuilder, n_caller_propdef, n_attribut.mpropdef.mproperty.getter.as(MMethod), false)
+			var attid = new TAttrid
+			attid.text = "{n_attribut.mpropdef.mproperty.name}"
 
-			expr.replace_with(contract_visitor.ast_builder.make_call(n_old_cast, read_old_attribut_callsite, null))
+			expr.replace_with(new AAttrExpr.init_aattrexpr(n_old_cast, attid))
 		end
 	end
 end
@@ -793,13 +794,10 @@ redef class MOldClass
 		for expr, n_attribut in v.old_attributes do
 			if n_attribut == null then continue # skip error
 
-			# We use the read property because the name of this property is used to build the AQid which is used for typing.
-			var readproperty = n_attribut.mreadpropdef.mproperty
+			var attid = new TAttrid
+			attid.text = "{n_attribut.mpropdef.mproperty.name}"
 
-			# Typing get the text of the AQid and add "=" to find the property to call
-			var callsite = ast_builder.create_callsite(v.contract_visitor.toolcontext.modelbuilder ,n_method, readproperty, false)
-
-			array_assign.add(ast_builder.make_call_assign(v.contract_visitor.ast_builder.make_var(self.old_variable, self.mclass_type), callsite, null, expr))
+			array_assign.add new AAttrAssignExpr.init_aattrassignexpr(v.contract_visitor.ast_builder.make_var(self.old_variable, self.mclass_type), attid, new TAssign, expr)
 		end
 		return array_assign
 	end
