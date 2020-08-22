@@ -604,8 +604,11 @@ redef class MEnsure
 
 		# Addition of a parameter to express `old` reference
 		var object_class = visitor.toolcontext.modelbuilder.get_mclass_by_name(visitor.visited_module, visitor.mainmodule, "Object")
-		old_param.declared_type = object_class.mclass_type.as_nullable
-		nsignature.n_params.add new AParam.make(self.old_param, object_class.mclass_type.as_nullable.create_ast_representation)
+
+		if object_class != null then
+			old_param.declared_type = object_class.mclass_type.as_nullable
+			nsignature.n_params.add new AParam.make(self.old_param, object_class.mclass_type.as_nullable.create_ast_representation)
+		end
 
 		return nsignature
 	end
