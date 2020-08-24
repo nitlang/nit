@@ -242,7 +242,7 @@ private class CallSiteVisitor
 			facet = contract_facet
 		end
 
-		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, facet, callsite.recv_is_self)
+		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, callsite.recv, facet, callsite.recv_is_self)
 	end
 end
 
@@ -505,7 +505,7 @@ redef class MExpect
 
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self.intro_mclassdef.bound_mtype, self, true)
 		var args = n_mpropdef.n_signature.make_parameter_read(v.ast_builder)
 		var n_callexpect = v.ast_builder.make_call(new ASelfExpr, callsite,args)
 		# Creation of the new instruction block with the call to expect condition
@@ -620,7 +620,7 @@ redef class MEnsure
 
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self.intro_mclassdef.bound_mtype, self, true)
 		var n_self = new ASelfExpr
 		# argument to call the contract method
 		var args = n_mpropdef.n_signature.make_parameter_read(v.ast_builder)
@@ -683,7 +683,7 @@ redef class MEnsure
 
 		# Create a new old_object to store the old expression value
 		var old_class_initdef = old_mclass.intro.default_init
-		var callsite_new_old_class = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_class_initdef.mproperty, false)
+		var callsite_new_old_class = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_class_initdef.mproperty.intro_mclassdef.bound_mtype, old_class_initdef.mproperty, false)
 		var n_new_old_class = v.ast_builder.make_new(callsite_new_old_class, null)
 		n_new_old_class.n_type = old_mclass.mclass_type.create_ast_representation
 
@@ -715,7 +715,7 @@ redef class MEnsure
 			n_args_call_init_property.add(n_new_old_class)
 		end
 
-		var callsite_old_class_init = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_mclass.init_old_property.as(not null), true)
+		var callsite_old_class_init = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, old_mclass.init_old_property.intro_mclassdef.bound_mtype, old_mclass.init_old_property.as(not null), true)
 		var ncall_init_old = v.ast_builder.make_call(new ASelfExpr, callsite_old_class_init, n_args_call_init_property)
 
 		new_block.add v.ast_builder.make_var_assign(self.old_param, ncall_init_old)
@@ -731,7 +731,7 @@ redef class MInvariant
 
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self.intro_mclassdef.bound_mtype, self, true)
 		var n_self = new ASelfExpr
 		# build the call to the contract method
 		var n_call = v.ast_builder.make_call(n_self, callsite, null)
@@ -1093,7 +1093,7 @@ redef class MMethod
 		var args: Array[AExpr]
 		args = n_contractdef.n_signature.make_parameter_read(v.ast_builder)
 
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_contractdef, called, true)
+		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_contractdef, called.intro_mclassdef.bound_mtype, called, true)
 		var n_call = v.ast_builder.make_call(new ASelfExpr, callsite, args)
 
 		if self.intro.msignature.return_mtype == null then
