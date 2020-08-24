@@ -48,10 +48,25 @@ redef class ToolContext
 	# Option --keep-old-instance
 	var opt_old_attribute = new OptionBool("Enable the conservation of ensure `old` intance in a class attribute", "--keep-old-instance")
 
+	# Option --all-ensure
+	var opt_all_ensure = new OptionBool("Enable all ensure usage (disable default contract strategy)", "--all-ensure")
+
+	# Option --all-expect
+	var opt_all_expect = new OptionBool("Enable all expect usage (disable default contract strategy)", "--all-expect")
+
+	# Option --all-invariant
+	var opt_all_invariant = new OptionBool("Enable all invariant usage (disable default contract strategy)", "--all-invariant")
+
+	# Option --true-contract
+	var opt_true_contract = new OptionBool("Replace contract condition by `true` expression", "--true-contract")
+
+	# Option --only-lock-check-contract
+	var opt_only_in_assertion_check = new OptionBool("Only inject the evaluation lock state check", "--only-lock-check-contract")
+
 	redef init
 	do
 		super
-		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant, opt_contract_metrics, opt_old_attribute)
+		option_context.add_option(opt_no_contract, opt_full_contract, opt_in_out_invariant, opt_contract_metrics, opt_old_attribute, opt_all_ensure, opt_all_expect, opt_all_invariant, opt_true_contract, opt_only_in_assertion_check)
 	end
 end
 
@@ -170,7 +185,7 @@ private class ContractsVisitor
 	private fun encapsulated_contract_call(mcontract: MContract, call_to_contracts: Array[ACallExpr]): AIfInAssertion
 	do
 		var n_block = ast_builder.make_block
-		n_block.add_all(call_to_contracts)
+		if not toolcontext.opt_only_in_assertion_check.value then n_block.add_all(call_to_contracts)
 		return new AIfInAssertion(mcontract, n_block)
 	end
 	# Inject the invariant method (`_invariant_`) verification in the root `Object` class
@@ -333,6 +348,12 @@ redef class AAnnotation
 	# return this condition `(true and i == 10 and f >= 1.0)`
 	private fun construct_condition(v : ContractsVisitor): AExpr
 	do
+		if v.toolcontext.opt_true_contract.value then
+			var bool_true = new ATrueExpr.make(v.mainmodule.bool_type)
+			bool_true.location = self.location
+			return bool_true
+		end
+
 		var n_condition = n_args.first
 		n_args.remove_at(0)
 		for n_arg in n_args do n_condition = v.ast_builder.make_and(n_condition, n_arg)
@@ -450,11 +471,15 @@ redef class MExpect
 
 	redef fun is_called(v: ContractsVisitor, mclassdef: MClassDef): Bool
 	do
+		if super then return true
+		if v.toolcontext.opt_all_expect.value then return true
+		if v.toolcontext.opt_all_ensure.value or v.toolcontext.opt_all_invariant.value then return false
+
 		var main_package = v.mainmodule.mpackage
 		var actual_package = mclassdef.mmodule.mpackage
 		if main_package != null and actual_package != null then
 			var condition_direct_arc = v.toolcontext.modelbuilder.model.mpackage_importation_graph.has_arc(main_package, actual_package)
-			return super or main_package == actual_package or condition_direct_arc
+			return main_package == actual_package or condition_direct_arc
 		end
 		return false
 	end
@@ -524,11 +549,6 @@ end
 
 redef class BottomMContract
 
-	redef fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
-	do
-		return super or v.mainmodule.mpackage == mpropdef.mclassdef.mmodule.mpackage
-	end
-
 	redef fun create_inherit_nblock(v: ContractsVisitor, n_conditions: Array[AExpr], super_args: Array[AExpr]): ABlockExpr
 	do
 		# Define contract block
@@ -584,6 +604,14 @@ redef class BottomMContract
 end
 
 redef class MEnsure
+
+	redef fun is_called(v: ContractsVisitor, mclassdef: MClassDef): Bool
+	do
+		if super then return true
+		if v.toolcontext.opt_all_ensure.value then return true
+		if v.toolcontext.opt_all_expect.value or v.toolcontext.opt_all_invariant.value then return false
+		return v.mainmodule.mpackage == mclassdef.mmodule.mpackage
+	end
 
 	redef fun write_c_metric: String do return "count_executed_postcondition++;"
 
@@ -726,6 +754,14 @@ end
 
 redef class MInvariant
 	super BottomMContract
+
+	redef fun is_called(v: ContractsVisitor, mclassdef: MClassDef): Bool
+	do
+		if super then return true
+		if v.toolcontext.opt_all_invariant.value then return true
+		if v.toolcontext.opt_all_ensure.value or v.toolcontext.opt_all_expect.value then return false
+		return v.mainmodule.mpackage == mclassdef.mmodule.mpackage
+	end
 
 	redef fun write_c_metric: String do return "count_executed_invariant++;"
 
