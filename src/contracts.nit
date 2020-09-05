@@ -947,6 +947,7 @@ redef class AClassdef
 	# Entry point to create a contract (verification of inheritance, or new contract).
 	redef fun create_contracts(v)
 	do
+		if mclassdef == null then return
 		v.ast_builder.check_mmodule(mclassdef.mmodule)
 		v.current_location = self.location
 		# Invariants are always considered to be a redefinition of contract.
@@ -1288,6 +1289,7 @@ redef class AMethPropdef
 	# Entry point to create a contract (verification of inheritance, or new contract).
 	redef fun create_contracts(v)
 	do
+		if mpropdef == null then return
 		v.ast_builder.check_mmodule(mpropdef.mclassdef.mmodule)
 		v.current_location = self.location
 		v.is_intro_contract = mpropdef.is_intro
