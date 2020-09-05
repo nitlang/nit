@@ -345,7 +345,7 @@ redef class MContract
 
 	# Should contract be called?
 	# return `true` if the contract needs to be called.
-	private fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
+	private fun is_called(v: ContractsVisitor, mclassdef: MClassDef): Bool
 	do
 		return v.toolcontext.opt_full_contract.value
 	end
@@ -448,10 +448,10 @@ redef class MExpect
 
 	redef fun write_c_metric: String do return "count_executed_precondition_contracts++;"
 
-	redef fun is_called(v: ContractsVisitor, mpropdef: MPropDef): Bool
+	redef fun is_called(v: ContractsVisitor, mclassdef: MClassDef): Bool
 	do
 		var main_package = v.mainmodule.mpackage
-		var actual_package = mpropdef.mclassdef.mmodule.mpackage
+		var actual_package = mclassdef.mmodule.mpackage
 		if main_package != null and actual_package != null then
 			var condition_direct_arc = v.toolcontext.modelbuilder.model.mpackage_importation_graph.has_arc(main_package, actual_package)
 			return super or main_package == actual_package or condition_direct_arc
@@ -991,6 +991,8 @@ redef class MMethod
 	# This method also defines the contract facet.
 	private fun define_invariant_facet(v: ContractsVisitor, classdef: MClassDef, minvariant: MInvariant)
 	do
+		if not minvariant.is_called(v, classdef) then return
+
 		# Do nothing the invariant facet already exist
 		if has_invariant_facet then return
 
@@ -1117,7 +1119,7 @@ redef class MMethodDef
 		if not exist_contract and not is_intro then no_intro_contract(v, mcontract, n_annotations)
 		v.build_contract(n_annotations, mcontract, mclassdef)
 		# Check if the contract must be called to know if it's needed to construct the facet
-		if mcontract.is_called(v, self) then mproperty.define_contract_facet(v, mclassdef, mcontract)
+		if mcontract.is_called(v, self.mclassdef) then mproperty.define_contract_facet(v, mclassdef, mcontract)
 	end
 
 	# Create a contract on the introduction classdef of the property.
@@ -1152,6 +1154,96 @@ redef class APropdef
 	redef fun check_callsite(v)
 	do
 		v.visited_propdef = self
+	end
+end
+
+redef class AAttrPropdef
+	# Entry point to create a contract (verification of inheritance, or new contract).
+	redef fun create_contracts(v)
+	do
+		v.ast_builder.check_mmodule(v.visited_module.mmodule.as(not null))
+		v.current_location = self.location
+		check_annotation(v)
+		check_redef(v)
+		check_invariant(v)
+	end
+
+	# Verification of the annotation to know if it is a contract annotation.
+	# If this is the case, we built the appropriate contract.
+	private fun check_annotation(v: ContractsVisitor)
+	do
+		var annotations_expect = get_annotations("expect")
+		var annotations_ensure = get_annotations("ensure")
+		var annotation_no_contract = get_annotations("no_contract")
+
+		if (not annotations_expect.is_empty or not annotations_ensure.is_empty) and not annotation_no_contract.is_empty then
+			v.toolcontext.error(location, "The new contract definition is not correct when using `no_contract`. Remove the contract definition or the `no_contract`")
+			return
+		end
+
+		if mwritepropdef == null and (not annotations_ensure.is_empty or not annotations_ensure.is_empty) then
+			# The contract is not applicable on no writable attribute
+			v.toolcontext.error(location, "Not applicable contract on not writable attribute")
+			return
+		end
+
+		if mwritepropdef != null and not annotation_no_contract.is_empty then
+			mwritepropdef.no_contract_apply(v, new ASignature.make_from_msignature(mwritepropdef.msignature.as(not null)))
+			return
+		end
+
+		if not annotations_expect.is_empty then
+			v.is_intro_contract = mwritepropdef.is_intro
+			var exist_contract = mwritepropdef.mproperty.has_expect
+			mwritepropdef.construct_contract(v, new ASignature.make_from_msignature(mwritepropdef.msignature.as(not null)), annotations_expect, mwritepropdef.mproperty.build_expect, exist_contract)
+		end
+
+		if not annotations_ensure.is_empty then
+			v.is_intro_contract = mwritepropdef.is_intro
+			var exist_contract = mwritepropdef.mproperty.has_ensure
+
+			var mensure = mwritepropdef.mproperty.build_ensure
+
+			mwritepropdef.construct_contract(v, new ASignature.make_from_msignature(mwritepropdef.msignature.as(not null)), annotations_ensure, mensure, exist_contract)
+		end
+	end
+
+	# Verification if the method have an inherited contract to apply it.
+	private fun check_redef(v: ContractsVisitor)
+	do
+		var mwritepropdef = self.mwritepropdef
+
+		if mwritepropdef != null and not mwritepropdef.is_intro then
+			var mexpect = mwritepropdef.mproperty.mexpect
+			var mensure = mwritepropdef.mproperty.mensure
+			var mcontract_facet = mwritepropdef.mproperty.mcontract_facet
+
+			if mexpect != null then
+				if mcontract_facet != null and mcontract_facet.has_applied_expect then return
+				if mexpect.is_called(v, mwritepropdef.mclassdef) then mwritepropdef.mproperty.define_contract_facet(v, mwritepropdef.mclassdef, mexpect)
+			end
+			if mensure != null then
+				if mcontract_facet != null and mcontract_facet.has_applied_ensure then return
+				if mensure.is_called(v, mwritepropdef.mclassdef) then mwritepropdef.mproperty.define_contract_facet(v, mwritepropdef.mclassdef, mensure)
+			end
+		end
+	end
+
+	# Check if the class has an invariant to apply it on the property
+	private fun check_invariant(v: ContractsVisitor)
+	do
+		var mpropdef = mpropdef or else mwritepropdef or else mreadpropdef
+		if not mpropdef isa MPropDef then return
+
+		var minvariant = mpropdef.mclassdef.mclass.minvariant
+		if minvariant != null then
+			if mreadpropdef != null and not mreadpropdef.mproperty.has_invariant_facet then
+				mreadpropdef.mproperty.define_invariant_facet(v, mpropdef.mclassdef, minvariant)
+			end
+			if mwritepropdef != null and not mwritepropdef.mproperty.has_invariant_facet then
+				mwritepropdef.mproperty.define_invariant_facet(v, mpropdef.mclassdef, minvariant)
+			end
+		end
 	end
 end
 
@@ -1215,11 +1307,11 @@ redef class AMethPropdef
 
 		if mexpect != null then
 			if mcontract_facet != null and mcontract_facet.has_applied_expect then return
-			if mexpect.is_called(v, mpropdef.as(not null)) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mexpect)
+			if mexpect.is_called(v, mpropdef.mclassdef) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mexpect)
 		end
 		if mensure != null then
 			if mcontract_facet != null and mcontract_facet.has_applied_ensure then return
-			if mensure.is_called(v, mpropdef.as(not null)) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mensure)
+			if mensure.is_called(v, mpropdef.mclassdef) then mpropdef.mproperty.define_contract_facet(v, mpropdef.mclassdef, mensure)
 		end
 	end
 
