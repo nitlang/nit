@@ -43,6 +43,34 @@ class MEnsure
 	super BottomMContract
 
 	redef fun is_already_applied(mfacet: MFacet): Bool do return mfacet.has_applied_ensure
+
+	# The `MOldClass` contract if any
+	var old_mclass: nullable MOldClass = null
+
+	var old_param = new Variable("old")
+
+	# Is there an `old_mclass`?
+	private fun has_old_mclass: Bool
+	do
+		return self.old_mclass != null
+	end
+
+	# Build `old_mclass` if is not exist and return it
+	private fun build_old_mclass: MOldClass
+	do
+		var m_old_mclass = self.old_mclass
+		# build a new `MOldClass` to keep the old value
+		if m_old_mclass == null then m_old_mclass = new MOldClass(intro_mclassdef.mmodule, "_{self.c_name}_old", intro_mclassdef.location, new Array[String], concrete_kind, public_visibility)
+		self.old_mclass = m_old_mclass
+		return m_old_mclass
+	end
+end
+
+# An invariant contract representation
+class MInvariant
+	super BottomMContract
+
+	redef fun is_already_applied(mfacet: MFacet): Bool do return mfacet.has_applied_invariant
 end
 
 # A facet contract representation
@@ -55,14 +83,33 @@ class MFacet
 
 	# Is there an `ensure` contract applied?
 	var has_applied_ensure: Bool = false
+
+	# Is there an `invariant` contract applied?
+	var has_applied_invariant: Bool = false
+end
+
+redef class MClass
+
+	# The `MInvariant` contract if any
+	var minvariant: nullable MInvariant = null
+
+	# Is there an invariant contract?
+	private fun has_invariant: Bool
+	do
+		return self.minvariant != null
+	end
 end
 
 redef class MMethod
 
-	# The contract facet of the method
-	# is representing the method with a contract
+	# The entry point of the method with the contract verification
+	# Depending of the context, this method can verify expect/ensure or both.
 	# This method calls contracts (expect, ensure) and the method
 	var mcontract_facet: nullable MFacet = null
+
+	# The entry point of the method with the invariant and contracts verification
+	# This method calls the `mcontract_facet` and invariant contract
+	var minvariant_facet: nullable MFacet = null
 
 	# The `MExpect` contract if any
 	var mexpect: nullable MExpect = null
@@ -75,7 +122,7 @@ redef class MMethod
 	do
 		var m_mensure = self.mensure
 		# build a new `MEnsure` contract
-		if m_mensure == null then m_mensure = new MEnsure(intro_mclassdef, "_ensure_{name}", intro_mclassdef.location, public_visibility)
+		if m_mensure == null then m_mensure = new MEnsure(intro_mclassdef, "{name}_ensure_", intro_mclassdef.location, public_visibility)
 		self.mensure = m_mensure
 		return m_mensure
 	end
@@ -91,7 +138,7 @@ redef class MMethod
 	do
 		var m_mexpect = self.mexpect
 		# build a new `MExpect` contract
-		if m_mexpect == null then m_mexpect = new MExpect(intro_mclassdef, "_expect_{name}", intro_mclassdef.location, public_visibility)
+		if m_mexpect == null then m_mexpect = new MExpect(intro_mclassdef, "{name}_expect_", intro_mclassdef.location, public_visibility)
 		self.mexpect = m_mexpect
 		return m_mexpect
 	end
@@ -117,4 +164,31 @@ redef class MMethod
 	do
 		return self.mcontract_facet != null
 	end
+
+	# Build `invariant_facet` if is not exist and return it
+	private fun build_invariant_facet: MFacet
+	do
+		var m_minvariant_facet = self.minvariant_facet
+		# build a new `MFacet` contract
+		if m_minvariant_facet == null then m_minvariant_facet = new MFacet(intro_mclassdef, "_invariant_{name}", intro_mclassdef.location, public_visibility)
+		self.minvariant_facet = m_minvariant_facet
+		return m_minvariant_facet
+	end
+
+	# Is there an invariant facet?
+	fun has_invariant_facet: Bool
+	do
+		return self.minvariant_facet != null
+	end
+end
+
+# Representation of `old` in ensure contract.
+class MOldClass
+	super MClass
+
+	# Property to init all old attributes.
+	var init_old_property: nullable MMethod
+
+	# The old variable.
+	var old_variable = new Variable("old")
 end

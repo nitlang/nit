@@ -803,6 +803,9 @@ abstract class AbstractCompiler
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
+
+		# Global fonction used by the contract infrastructure
+		self.header.add_decl("extern int *getInAssertion(); // Used to know if we are currently checking some assertions.")
 	end
 
 	# Stack stocking environment for longjumps
@@ -942,6 +945,28 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		}
 		return data;
 	}
+
+	static pthread_key_t in_assertion_key;
+	static pthread_once_t in_assertion_key_created = PTHREAD_ONCE_INIT;
+
+	static void create_in_assertion()
+	{
+		pthread_key_create(&in_assertion_key, NULL);
+	}
+
+	//Flag used to know if we are currently checking some assertions.
+	int *getInAssertion()
+	{
+		pthread_once(&in_assertion_key_created, &create_in_assertion);
+		int* in_assertion = pthread_getspecific(in_assertion_key);
+		if (in_assertion == NULL) {
+		    in_assertion = malloc(sizeof(int));
+			*in_assertion = 0;
+			pthread_setspecific(in_assertion_key, in_assertion);
+		}
+		return in_assertion;
+	}
+
 #else
 	// Use __thread when available
 	__thread struct catch_stack_t catchStack = {-1, 0, NULL};
@@ -949,6 +974,12 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	struct catch_stack_t *getCatchStack()
 	{
 		return &catchStack;
+	}
+
+	__thread int in_assertion = 0; // Flag used to know if we are currently checking some assertions.
+
+	int *getInAssertion(){
+		return &in_assertion;
 	}
 #endif
 """
@@ -1029,6 +1060,16 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("exit(status);")
 		v.add_decl("\}")
 
+		if modelbuilder.toolcontext.opt_contract_metrics.value then
+			v.compiler.header.add_decl("extern long count_executed_precondition_contracts; // Count the number of executed precondition")
+			v.compiler.header.add_decl("extern long count_executed_postcondition; // Count the number of executed postcondition")
+			v.compiler.header.add_decl("extern long count_executed_invariant; // Count the number of executed invariant")
+
+			v.add_decl("long count_executed_precondition_contracts= 0; // Count the number of executed contract")
+			v.add_decl("long count_executed_postcondition= 0; // Count the number of executed contract")
+			v.add_decl("long count_executed_invariant= 0; // Count the number of executed contract")
+		end
+
 		compile_before_main(v)
 
 		if no_main then
@@ -1105,6 +1146,13 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add("printf(\"by table: %ld (%.2f%%)\\n\", count_invoke_by_tables, 100.0*count_invoke_by_tables/count_invoke_total);")
 			v.add("printf(\"direct:   %ld (%.2f%%)\\n\", count_invoke_by_direct, 100.0*count_invoke_by_direct/count_invoke_total);")
 			v.add("printf(\"inlined:  %ld (%.2f%%)\\n\", count_invoke_by_inline, 100.0*count_invoke_by_inline/count_invoke_total);")
+		end
+
+		if modelbuilder.toolcontext.opt_contract_metrics.value then
+			v.add("printf(\"# dynamic contract checked: total %ld\\n\", (count_executed_invariant + count_executed_precondition_contracts + count_executed_postcondition));")
+			v.add("printf(\"# dynamic invariant checked: total %ld\\n\", count_executed_invariant);")
+			v.add("printf(\"# dynamic precondition checked: total %ld\\n\", count_executed_precondition_contracts);")
+			v.add("printf(\"# dynamic postcondition checked: total %ld\\n\", count_executed_postcondition);")
 		end
 
 		if self.modelbuilder.toolcontext.opt_isset_checks_metrics.value then
@@ -1346,12 +1394,15 @@ abstract class AbstractCompilerVisitor
 
 	# Force to get the primitive property named `name` in the instance `recv` or abort
 	fun get_property(name: String, recv: MType): MMethod
+	is
+		expect(recv isa MClassType)
 	do
-		assert recv isa MClassType
-		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node, name, recv.mclass, self.compiler.mainmodule)
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node, name, recv.as(MClassType).mclass, self.compiler.mainmodule)
 	end
 
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		ensure(callsite.is_broken implies result == null)
 	do
 		if callsite.is_broken then return null
 		return self.send(callsite.mproperty, arguments)
@@ -1514,18 +1565,20 @@ abstract class AbstractCompilerVisitor
 
 	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		expect(t isa MClassType)
 	do
-		assert t isa MClassType
 		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
-		return self.call(propdef, t, args)
+		return self.call(propdef, t.as(MClassType), args)
 	end
 
 	# Generate a monomorphic super send from the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_super_send(m: MMethodDef, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		expect(t isa MClassType)
 	do
-		assert t isa MClassType
 		m = m.lookup_next_definition(self.compiler.mainmodule, t)
-		return self.call(m, t, args)
+		return self.call(m, t.as(MClassType), args)
 	end
 
 	# Attributes handling
@@ -1585,13 +1638,14 @@ abstract class AbstractCompilerVisitor
 
 	# Return an unique and stable identifier associated with an escapemark
 	fun escapemark_name(e: nullable EscapeMark): String
+	is
+		expect(e != null)
 	do
-		assert e != null
 		if frame.escapemark_names.has_key(e) then return frame.escapemark_names[e]
 		var name = e.name
 		if name == null then name = "label"
 		name = get_name(name)
-		frame.escapemark_names[e] = name
+		frame.escapemark_names[e.as(not null)] = name
 		return name
 	end
 
@@ -2154,8 +2208,9 @@ abstract class AbstractRuntimeFunction
 	# Fills the argument array inside v.frame.arguments, calling `resolve_ith_parameter`
 	# for each parameter.
 	private fun fill_parameters(v: VISITOR)
+	is
+		expect(v.frame != null)
 	do
-		assert v.frame != null
 		for i in [0..msignature.arity[ do
 			var arg = resolve_ith_parameter(v, i)
 			v.frame.arguments.add(arg)
@@ -2179,8 +2234,9 @@ abstract class AbstractRuntimeFunction
 	# e.g `RES f(T0 p0, T1 p1, ..., TN pN)`
 	# Step 5
 	protected fun signature_to_c(v: VISITOR): String
+	is
+		expect(v.frame != null)
 	do
-		assert v.frame != null
 		var arguments = v.frame.arguments
 		var comment = new FlatBuffer
 		var selfvar = v.frame.selfvar
@@ -2217,6 +2273,8 @@ abstract class AbstractRuntimeFunction
 	# no curly brace.
 	# Step 7
 	protected fun body_to_c(v: VISITOR)
+	is
+		expect(v.frame != null)
 	do
 		mmethoddef.compile_inside_to_c(v, v.frame.arguments)
 	end
@@ -2424,8 +2482,9 @@ class StaticFrame
 	# Returns the first argument (the receiver) of a frame.
 	# REQUIRE: arguments.length >= 1
 	fun selfvar: RuntimeVariable
+	is
+		expect(arguments.length >= 1)
 	do
-		assert arguments.length >= 1
 		return arguments.first
 	end
 end
@@ -2443,7 +2502,12 @@ redef class MType
 	# Is the associated C type a primitive one?
 	#
 	# ENSURE `result == (ctype != "val*")`
-	fun is_c_primitive: Bool do return false
+	fun is_c_primitive: Bool
+	is
+		ensure(result == (ctype != "val*"))
+	do
+		return false
+	end
 end
 
 redef class MClassType
@@ -3855,6 +3919,19 @@ redef class AIfExpr
 		v.assign(res, v.expr(self.n_else.as(not null), null))
 		v.add("\}")
 		return res
+	end
+end
+
+redef class AIfInAssertion
+
+	redef fun stmt(v)
+	do
+		v.add("if (!*getInAssertion())\{")
+		if v.compiler.modelbuilder.toolcontext.opt_contract_metrics.value then v.add(mcontract.write_c_metric)
+		v.add("*getInAssertion() = 1;")
+		v.stmt(self.n_body)
+		v.add("*getInAssertion() = 0;")
+		v.add("\}")
 	end
 end
 

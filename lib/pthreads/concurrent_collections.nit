@@ -82,6 +82,8 @@ abstract class ConcurrentCollection[E]
 	var mutex = new Mutex
 
 	redef fun count(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.count(e)
@@ -90,6 +92,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun first
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.first
@@ -98,6 +102,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun has(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.has(e)
@@ -106,6 +112,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun has_all(e)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.has_all(e)
@@ -114,6 +122,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun has_only(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.has_only(e)
@@ -122,6 +132,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun is_empty
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.is_empty
@@ -130,6 +142,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun iterator
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.iterator
@@ -138,6 +152,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun length
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.length
@@ -146,6 +162,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun to_a
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.to_a
@@ -154,6 +172,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun rand
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.rand
@@ -162,6 +182,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun join(sep, last_sep)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.join(sep, last_sep)
@@ -170,6 +192,8 @@ abstract class ConcurrentCollection[E]
 	end
 
 	redef fun to_s
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.to_s
@@ -186,6 +210,8 @@ abstract class ConcurrentSequenceRead[E]
 	redef type REAL: SequenceRead[E]
 
 	redef fun ==(o)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection == o
@@ -194,6 +220,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun [](index)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection[index]
@@ -202,6 +230,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun hash
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.hash
@@ -210,6 +240,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun index_of(index)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.index_of(index)
@@ -218,6 +250,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun index_of_from(index, from)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.index_of_from(index, from)
@@ -226,6 +260,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun iterator_from(index)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.iterator_from(index)
@@ -234,6 +270,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun last
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.last
@@ -242,6 +280,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun last_index_of(e)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.last_index_of(e)
@@ -250,6 +290,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun last_index_of_from(e, from)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.last_index_of_from(e, from)
@@ -258,6 +300,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun reverse_iterator
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.reverse_iterator
@@ -266,6 +310,8 @@ abstract class ConcurrentSequenceRead[E]
 	end
 
 	redef fun reverse_iterator_from(from)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.reverse_iterator_from(from)
@@ -282,6 +328,8 @@ abstract class ConcurrentSequence[E]
 	redef type REAL: Sequence[E]
 
 	redef fun []=(index, e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection[index] = e
@@ -289,6 +337,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun add(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.add e
@@ -296,6 +346,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun append(e)
+	is
+		#no_contract
 	do
 		mutex.lock
 		real_collection.append e
@@ -303,6 +355,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun first=(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.first = e
@@ -310,6 +364,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun insert(e, i)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.insert(e, i)
@@ -317,6 +373,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun insert_all(from, pos)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection
@@ -324,6 +382,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun last=(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.last = e
@@ -331,6 +391,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun pop
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.pop
@@ -339,6 +401,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun prepend(e)
+	is
+		#no_contract
 	do
 		mutex.lock
 		real_collection.prepend e
@@ -346,6 +410,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun push(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.push e
@@ -353,6 +419,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun remove_at(index)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.remove_at(index)
@@ -360,6 +428,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun shift
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.shift
@@ -368,6 +438,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun unshift(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.unshift(e)
@@ -375,6 +447,8 @@ abstract class ConcurrentSequence[E]
 	end
 
 	redef fun subarray(start, len)
+	is
+		#no_contract
 	do
 		mutex.lock
 		var r = real_collection.subarray(start, len)
@@ -394,6 +468,8 @@ class ConcurrentArray[E]
 	init do self.real_collection = new Array[E]
 
 	redef fun clear
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.clear
@@ -401,6 +477,8 @@ class ConcurrentArray[E]
 	end
 
 	redef fun enlarge(cap)
+	is
+		#no_contract
 	do
 		mutex.lock
 		real_collection.enlarge(cap)
@@ -408,6 +486,8 @@ class ConcurrentArray[E]
 	end
 
 	redef fun remove_all(e)
+	is
+		#no_contract
 	do
 		mutex.lock
 		real_collection.remove_all(e)
@@ -415,6 +495,8 @@ class ConcurrentArray[E]
 	end
 
 	redef fun swap_at(a, b)
+	is
+		#no_contract
 	do
 		mutex.lock
 		real_collection.swap_at(a, b)
@@ -422,6 +504,8 @@ class ConcurrentArray[E]
 	end
 
 	redef fun has(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		var result = real_collection.has(e)
@@ -434,6 +518,8 @@ class ConcurrentArray[E]
 	#
 
 	redef fun add(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.add e
@@ -460,6 +546,8 @@ class ConcurrentList[E]
 	init do self.real_collection = new List[E]
 
 	redef fun link(l)
+	is
+		#no_contract
 	do
 		mutex.lock
 		real_collection.link(l)
@@ -467,6 +555,8 @@ class ConcurrentList[E]
 	end
 
 	redef fun slice(from, to)
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.slice(from, to)
@@ -479,6 +569,8 @@ class ConcurrentList[E]
 	#
 
 	redef fun pop
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.pop
@@ -487,6 +579,8 @@ class ConcurrentList[E]
 	end
 
 	redef fun is_empty
+	is
+		no_contract
 	do
 		mutex.lock
 		var r = real_collection.is_empty
@@ -495,6 +589,8 @@ class ConcurrentList[E]
 	end
 
 	redef fun unshift(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.unshift(e)
@@ -502,6 +598,8 @@ class ConcurrentList[E]
 	end
 
 	redef fun push(e)
+	is
+		no_contract
 	do
 		mutex.lock
 		real_collection.push(e)
@@ -509,6 +607,8 @@ class ConcurrentList[E]
 	end
 
 	redef fun shift
+	is
+		no_contract
 	do
 		mutex.lock
 		var value = real_collection.shift
@@ -525,14 +625,20 @@ class ReverseBlockingQueue[E]
 	private var cond = new PthreadCond
 
 	# Adding the signal to release eventual waiting thread(s)
-	redef fun push(e) do
+	redef fun push(e)
+	is
+		no_contract
+	do
 		mutex.lock
 		real_collection.push(e)
 		mutex.unlock
 	end
 
 	# When the Queue is empty, signal any possible waiting thread
-	redef fun remove(e) do
+	redef fun remove(e)
+	is
+		#no_contract
+	do
 		mutex.lock
 		real_collection.remove(e)
 		if real_collection.is_empty then cond.signal
@@ -540,7 +646,10 @@ class ReverseBlockingQueue[E]
 	end
 
 	# Wait until the Queue is empty
-	redef fun is_empty do
+	redef fun is_empty
+	is
+		no_contract
+	do
 		mutex.lock
 		while not real_collection.is_empty do self.cond.wait(mutex)
 		mutex.unlock
@@ -558,7 +667,10 @@ class BlockingQueue[E]
 	private var cond = new PthreadCond
 
 	# Adding the signal to release eventual waiting thread(s)
-	redef fun push(e) do
+	redef fun push(e)
+	is
+		no_contract
+	do
 		mutex.lock
 		real_collection.push(e)
 		self.cond.signal
@@ -566,7 +678,10 @@ class BlockingQueue[E]
 		mutex.unlock
 	end
 
-	redef fun unshift(e) do
+	redef fun unshift(e)
+	is
+		no_contract
+	do
 		mutex.lock
 		real_collection.unshift(e)
 		self.cond.signal
@@ -574,7 +689,10 @@ class BlockingQueue[E]
 	end
 
 	# If empty, blocks until an item is inserted with `push` or `unshift`
-	redef fun shift do
+	redef fun shift
+	is
+		no_contract
+	do
 		mutex.lock
 		while real_collection.is_empty do self.cond.wait(mutex)
 		var r = real_collection.shift
@@ -582,7 +700,10 @@ class BlockingQueue[E]
 		return r
 	end
 
-	redef fun is_empty do
+	redef fun is_empty
+	is
+		no_contract
+	do
 		mutex.lock
 		var r = real_collection.is_empty
 		mutex.unlock

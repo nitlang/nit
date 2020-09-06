@@ -64,7 +64,12 @@ interface Collection[E]
 	#
 	#     assert [1,2,3].is_empty  == false
 	#     assert [1..1[.is_empty   == true
-	fun is_empty: Bool do return length == 0
+	fun is_empty: Bool
+	is
+		ensure(result == (length == 0))
+	do
+		return length == 0
+	end
 
 	# Alias for `not is_empty`.
 	#
@@ -72,7 +77,12 @@ interface Collection[E]
 	#
 	#     assert [1,2,3].not_empty  == true
 	#     assert [1..1[.not_empty   == false
-	fun not_empty: Bool do return not self.is_empty
+	fun not_empty: Bool
+	is
+		ensure(result == (length != 0))
+	do
+		return not self.is_empty
+	end
 
 	# Number of items in the collection.
 	#
@@ -92,7 +102,12 @@ interface Collection[E]
 	#     assert [1,2,3].has(9)    == false
 	#     assert [1..5[.has(2)     == true
 	#     assert [1..5[.has(9)     == false
+	#	  assert [3..3[.has(1)     == false # empty collection
+	#
+	# ENSURE `is_empty implies result == false`
 	fun has(item: nullable Object): Bool
+	is
+		ensure(is_empty implies not result)
 	do
 		for i in self do if i == item then return true
 		return false
@@ -110,6 +125,8 @@ interface Collection[E]
 	#
 	# ENSURE `is_empty implies result == true`
 	fun has_only(item: nullable Object): Bool
+	is
+		ensure(is_empty implies result)
 	do
 		for i in self do if i != item then return false
 		return true
@@ -119,7 +136,10 @@ interface Collection[E]
 	# Comparisons are done with ==
 	#
 	#     assert [10,20,10].count(10)         == 2
+	# ENSURE `is_empty implies result == 0`
 	fun count(item: nullable Object): Int
+	is
+		ensure(is_empty implies result == 0)
 	do
 		var nb = 0
 		for i in self do if i == item then nb += 1
@@ -130,8 +150,9 @@ interface Collection[E]
 	#
 	#     assert [1,2,3].first                == 1
 	fun first: E
+	is
+		expect(not_empty)
 	do
-		assert length > 0
 		return iterator.item
 	end
 
@@ -205,12 +226,12 @@ end
 # They are mainly used with collections and obtained from `Collection::iterator`.
 interface Iterator[E]
 	# The current item.
-	# Require `is_ok`.
-	fun item: E is abstract
+	# EXPECT `is_ok`.
+	fun item: E is abstract, expect(is_ok)
 
 	# Jump to the next item.
-	# Require `is_ok`.
-	fun next is abstract
+	# ENSURE `is_ok`.
+	fun next is abstract, expect(is_ok)
 
 	# Jump to the next item `step` times.
 	#
@@ -233,10 +254,11 @@ interface Iterator[E]
 	# If `step` is negative, this method aborts.
 	# But specific subclasses can change this and do something more meaningful instead.
 	#
-	# Require `is_ok`
+	# EXPECT `is_ok`
 	fun next_by(step: Int)
+	is
+		expect(is_ok)
 	do
-		assert step >= 0
 		while is_ok and step > 0 do
 			next
 			step -= 1
@@ -324,7 +346,7 @@ abstract class CachedIterator[E: Object]
 
 	# The current item, if any.
 	# If not, the cache is effectively filled (with `next_item`).
-	# Return `null` iff there is no more elements.
+	# Return `null` if there is no more elements.
 	protected fun current_item: nullable E
 	do
 		var cache = self.cache
@@ -403,7 +425,7 @@ interface RemovableCollection[E]
 	#     assert a.length == 0
 	#
 	# ENSURE `is_empty`
-	fun clear is abstract
+	fun clear is abstract, ensure(is_empty)
 
 	# Remove an occurrence of `item`
 	#
@@ -431,8 +453,8 @@ interface SimpleCollection[E]
 	#     assert a.has(3)  == true
 	#     assert a.has(10) == false
 	#
-	# Ensure col.has(item)
-	fun add(item: E) is abstract
+	# ENSURE self.has(item)
+	fun add(item: E) is abstract, ensure(self.has(item))
 
 	# Add each item of `coll`.
 	#
@@ -440,7 +462,13 @@ interface SimpleCollection[E]
 	#     a.add_all([3..5])
 	#     assert a.has(4)  == true
 	#     assert a.has(10) == false
-	fun add_all(coll: Collection[E]) do for i in coll do add(i)
+	# ENSURE `self.has_all(item)`
+	fun add_all(coll: Collection[E])
+	is
+		ensure(self.has_all(coll))
+	do
+		for i in coll do add(i)
+	end
 end
 
 # Abstract sets.
@@ -608,7 +636,7 @@ interface MapRead[K, V]
 	#     assert x.is_empty  == true
 	#     x["four"] = 4
 	#     assert x.is_empty  == false
-	fun is_empty: Bool is abstract
+	fun is_empty: Bool is abstract, ensure(result == (length == 0))
 
 	# Alias for `not is_empty`.
 	#
@@ -618,7 +646,12 @@ interface MapRead[K, V]
 	#     assert map.not_empty == false
 	#     map["one"] = 1
 	#     assert map.not_empty == true
-	fun not_empty: Bool do return not self.is_empty
+	fun not_empty: Bool
+	is
+		ensure(result == (length != 0))
+	do
+		return not self.is_empty
+	end
 
 	# Number of items in the collection.
 	#
@@ -723,7 +756,7 @@ interface Map[K, V]
 	#     assert x["four"]         == 40
 	#     assert x.values.has(4)   == false
 	#
-	fun []=(key: K, value: V) is abstract
+	fun []=(key: K, value: V) is abstract, ensure(self[key] == value)
 
 	# Add each (key,value) of `map` into `self`.
 	# If a same key exists in `map` and `self`, then the value in self is discarded.
@@ -758,7 +791,7 @@ interface Map[K, V]
 	#     assert x.keys.has("four") == false
 	#
 	# ENSURE `is_empty`
-	fun clear is abstract
+	fun clear is abstract, ensure(is_empty)
 
 	redef fun values: RemovableCollection[V] is abstract
 
@@ -768,16 +801,16 @@ end
 # Iterators for Map.
 interface MapIterator[K, V]
 	# The current item.
-	# Require `is_ok`.
-	fun item: V is abstract
+	# ENSURE `is_ok`.
+	fun item: V is abstract, expect(is_ok)
 
 	# The key of the current item.
-	# Require `is_ok`.
-	fun key: K is abstract
+	# EXPECT `is_ok`.
+	fun key: K is abstract, expect(is_ok)
 
 	# Jump to the next item.
-	# Require `is_ok`.
-	fun next is abstract
+	# EXPECT `is_ok`.
+	fun next is abstract, expect(is_ok)
 
 	# Is there a current item ?
 	fun is_ok: Bool is abstract
@@ -842,10 +875,9 @@ interface SequenceRead[E]
 	#     var a = [1,2,3]
 	#     assert a.first   == 1
 	#
-	# REQUIRE `not is_empty`
+	# EXPECT `not_empty`
 	redef fun first
 	do
-		assert not_empty: not is_empty
 		return self[0]
 	end
 
@@ -859,7 +891,7 @@ interface SequenceRead[E]
 	#     assert a[2]   == 30
 	#
 	# REQUIRE `index >= 0 and index < length`
-	fun [](index: Int): E is abstract
+	fun [](index: Int): E is abstract, expect(index >= 0 and index < length)
 
 	# Return the index-th element but wrap
 	#
@@ -874,9 +906,15 @@ interface SequenceRead[E]
 	# assert a.modulo(-10) == 30
 	# ~~~
 	#
-	# REQUIRE `not_empty`
+	# EXPECT `not_empty`
 	# ENSURE `result == self[modulo_index(index)]`
-	fun modulo(index: Int): E do return self[modulo_index(index)]
+	fun modulo(index: Int): E
+	is
+		expect(not_empty)
+		ensure(result == self[modulo_index(index)])
+	do
+		return self[modulo_index(index)]
+	end
 
 	# Returns the real index for a modulo index.
 	#
@@ -888,8 +926,10 @@ interface SequenceRead[E]
 	# assert a.modulo_index(-10) == 2
 	# ~~~
 	#
-	# REQUIRE `not_empty`
+	# EXPECT `not_empty`
 	fun modulo_index(index: Int): Int
+	is
+		expect(not_empty)
 	do
 		var length = self.length
 		if index >= 0 then
@@ -935,10 +975,11 @@ interface SequenceRead[E]
 	#     var a = [1,2,3]
 	#     assert a.last   == 3
 	#
-	# REQUIRE `not is_empty`
+	# EXPECT `not_empty`
 	fun last: E
+	is
+		expect(not_empty)
 	do
-		assert not_empty: not is_empty
 		return self[length-1]
 	end
 
@@ -1082,7 +1123,11 @@ interface Sequence[E]
 	#     a.first = 10
 	#     assert a == [10,2,3]
 	fun first=(item: E)
-	do self[0] = item end
+	is
+		ensure(self.first == item)
+	do
+		self[0] = item
+	end
 
 	# Set the last item.
 	# Is equivalent with `self[length-1] = item`.
@@ -1097,6 +1142,8 @@ interface Sequence[E]
 	#     b.last = 10
 	#     assert b == [10]
 	fun last=(item: E)
+	is
+		ensure(self[length-1] == item)
 	do
 		var l = length
 		if l > 0 then
@@ -1115,7 +1162,7 @@ interface Sequence[E]
 	#     a.push(10)
 	#     a.push(20)
 	#     assert a  == [1,2,3,10,20]
-	fun push(e: E) is abstract
+	fun push(e: E) is abstract, ensure(self[length-1] == e)
 
 	# Add each item of `coll` after the last.
 	#
@@ -1133,8 +1180,8 @@ interface Sequence[E]
 	#     assert a.pop  == 2
 	#     assert a == [1]
 	#
-	# REQUIRE `not is_empty`
-	fun pop: E is abstract
+	# EXPECT `not_empty`
+	fun pop: E is abstract, expect(not_empty)
 
 	# Add an item before the first one.
 	#
@@ -1142,7 +1189,7 @@ interface Sequence[E]
 	#     a.unshift(10)
 	#     a.unshift(20)
 	#     assert a  == [20,10,1,2,3]
-	fun unshift(e: E) is abstract
+	fun unshift(e: E) is abstract, ensure(self.first == e)
 
 	# Add all items of `coll` before the first one.
 	#
@@ -1161,8 +1208,8 @@ interface Sequence[E]
 	#     assert a.shift  == 2
 	#     assert a == [3]
 	#
-	# REQUIRE `not is_empty`
-	fun shift: E is abstract
+	# EXPECT `not_empty`
+	fun shift: E is abstract, expect(not_empty)
 
 	# Set the `item` at `index`.
 	#
@@ -1176,8 +1223,8 @@ interface Sequence[E]
 	#     a[3] = 400
 	#     assert a  == [10,200,30,400]
 	#
-	# REQUIRE `index >= 0 and index <= length`
-	fun []=(index: Int, item: E) is abstract
+	# EXPECT `index >= 0 and index <= length`
+	fun []=(index: Int, item: E) is abstract, expect(index >= 0 and index <= length)
 
 	# Set the index-th element but wrap
 	#
@@ -1193,9 +1240,15 @@ interface Sequence[E]
 	# assert a == [100, 200, 301]
 	# ~~~
 	#
-	# REQUIRE `not_empty`
+	# EXPECT `not_empty`
 	# ENSURE `self[modulo_index(index)] == value`
-	fun modulo=(index: Int, value: E) do self[modulo_index(index)] = value
+	fun modulo=(index: Int, value: E)
+	is
+		expect(not_empty)
+		ensure(self[modulo_index(index)] == value)
+	do
+		self[modulo_index(index)] = value
+	end
 
 	# Insert an element at a given position, following elements are shifted.
 	#
@@ -1203,9 +1256,9 @@ interface Sequence[E]
 	#     a.insert(100, 2)
 	#     assert a      ==  [10, 20, 100, 30, 40]
 	#
-	# REQUIRE `index >= 0 and index <= length`
+	# EXPECT `index >= 0 and index <= length`
 	# ENSURE `self[index] == item`
-	fun insert(item: E, index: Int) is abstract
+	fun insert(item: E, index: Int) is abstract, expect(index >= 0 and index <= length), ensure(self[index] == item)
 
 	# Insert all elements at a given position, following elements are shifted.
 	#
@@ -1213,11 +1266,13 @@ interface Sequence[E]
 	#     a.insert_all([100..102], 2)
 	#     assert a      ==  [10, 20, 100, 101, 102, 30, 40]
 	#
-	# REQUIRE `index >= 0 and index <= length`
+	# EXPECT `index >= 0 and index <= length`
 	# ENSURE `self[index] == coll.first`
 	fun insert_all(coll: Collection[E], index: Int)
+	is
+		expect(index >= 0 and index <= length)
+		ensure(self[index] == coll.first)
 	do
-		assert index >= 0 and index < length
 		if index == length then
 			add_all(coll)
 		end
@@ -1233,8 +1288,8 @@ interface Sequence[E]
 	#     a.remove_at(1)
 	#     assert a  == [10,30]
 	#
-	# REQUIRE `index >= 0 and index < length`
-	fun remove_at(index: Int) is abstract
+	# EXPECT `index >= 0 and index < length`
+	fun remove_at(index: Int) is abstract, expect(index >= 0 and index < length)
 
 	# Rotates the elements of self once to the left
 	#

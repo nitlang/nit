@@ -19,7 +19,26 @@ import abstract_collection
 class Range[E: Discrete]
 	super Collection[E]
 
-	redef var first
+	# Representation of the first element
+	private var first_element: E
+
+	# In introduction `first()` defines `expect(not_empty)`
+	# but in our case, the `first` method now represents the access to the `first_element` attribute.
+	# The expected contract is therefore no longer necessary this is why `expect(true)`.
+	redef fun first
+	is
+		expect(true)
+	do
+		return first_element
+	end
+
+	# Set the first element `first_element`
+	fun first=(element :E)
+	is
+		ensure(first_element == element)
+	do
+		first_element = element
+	end
 
 	# Get the last element.
 	var last: E
@@ -86,7 +105,7 @@ class Range[E: Discrete]
 	#     assert a == b
 	#     assert a.to_a == [10, 11, 12, 13, 14, 15]
 	init(from: E, to: E) is old_style_init do
-		first = from
+		first_element = from
 		last = to
 		after = to.successor(1)
 	end
@@ -100,7 +119,7 @@ class Range[E: Discrete]
 	#     assert a.to_a == [10, 11, 12, 13, 14]
 	init without_last(from: E, to: E)
 	do
-		first = from
+		first_element = from
 		if from <= to then
 			last = to.predecessor(1)
 			after = to

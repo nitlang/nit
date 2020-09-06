@@ -203,11 +203,11 @@ class ASTBuilder
 
 	# Build a callsite to call the `mproperty` in the current method `caller_method`.
 	# `is_self_call` indicate if the method caller is a property of `self`
-	fun create_callsite(modelbuilder: ModelBuilder, caller_property: APropdef, mproperty: MMethod, is_self_call: Bool): CallSite
+	fun create_callsite(modelbuilder: ModelBuilder, caller_property: APropdef, recvtype: MType, mproperty: MMethod, is_self_call: Bool): CallSite
 	do
 		# FIXME It's not the better solution to call `TypeVisitor` here to build a model entity, but some make need to have a callsite
 		var type_visitor = new TypeVisitor(modelbuilder, caller_property.mpropdef.as(not null))
-		var callsite = type_visitor.build_callsite_by_property(caller_property, mproperty.intro_mclassdef.bound_mtype, mproperty, is_self_call)
+		var callsite = type_visitor.build_callsite_by_property(caller_property, recvtype, mproperty, is_self_call)
 		assert callsite != null
 		return callsite
 	end
@@ -1051,7 +1051,10 @@ redef class ModelBuilder
 	private fun get_mmethod(name: String, mclassdef: MClassDef, visibility: nullable MVisibility): MMethod do
 		visibility = visibility or else public_visibility
 		var mproperty = try_get_mproperty_by_name(null, mclassdef, name).as(nullable MMethod)
-		if mproperty == null then mproperty = new MMethod(mclassdef, name, mclassdef.location, visibility)
+		if mproperty == null then
+			mproperty = new MMethod(mclassdef, name, mclassdef.location, visibility)
+			mproperty.is_fictive = true
+		end
 		return mproperty
 	end
 
@@ -1066,6 +1069,7 @@ redef class ModelBuilder
 	# Take care, if `is_abstract == false` the AMethPropdef returned has an empty body (potential error if the given signature has an return type).
 	fun create_method_from_property(mproperty: MMethod,  mclassdef: MClassDef, is_abstract: Bool, msignature: nullable MSignature): AMethPropdef do
 		var m_def = new MMethodDef(mclassdef, mproperty, mclassdef.location)
+		m_def.is_fictive = true
 
 		if msignature == null then msignature = new MSignature(new Array[MParameter])
 
@@ -1088,7 +1092,10 @@ redef class ModelBuilder
 	fun create_attribute_from_name(name: String, mclassdef: MClassDef, mtype: MType, visibility: nullable MVisibility): AAttrPropdef do
 		if visibility == null then visibility = public_visibility
 		var mattribute = try_get_mproperty_by_name(null, mclassdef, name)
-		if mattribute == null then mattribute = new MAttribute(mclassdef, name, mclassdef.location, visibility)
+		if mattribute == null then
+			mattribute = new MAttribute(mclassdef, name, mclassdef.location, visibility)
+			mattribute.is_fictive = true
+		end
 		return create_attribute_from_property(mattribute.as(MAttribute), mclassdef, mtype)
 	end
 
@@ -1096,6 +1103,7 @@ redef class ModelBuilder
 	# See `create_attribute_from_propdef` for more information.
 	fun create_attribute_from_property(mattribute: MAttribute, mclassdef: MClassDef, mtype: MType): AAttrPropdef do
 		var attribut_def = new MAttributeDef(mclassdef, mattribute, mclassdef.location)
+		attribut_def.is_fictive = true
 		attribut_def.static_mtype = mtype
 		return create_attribute_from_propdef(attribut_def)
 	end
@@ -1128,7 +1136,10 @@ redef class ModelBuilder
 	fun create_class_from_name(name: String, super_type: Array[MClassType], mmodule: MModule, visibility: nullable MVisibility): AStdClassdef do
 		if visibility == null then visibility = public_visibility
 		var mclass = try_get_mclass_by_name(null, mmodule, name)
-		if mclass == null then mclass = new MClass(mmodule, name, mmodule.location, new Array[String], concrete_kind, visibility)
+		if mclass == null then
+			mclass = new MClass(mmodule, name, mmodule.location, new Array[String], concrete_kind, visibility)
+			mclass.is_fictive = true
+		end
 		return create_class_from_mclass(mclass, super_type, mmodule)
 	end
 
@@ -1137,6 +1148,7 @@ redef class ModelBuilder
 	# See `create_class_from_mclassdef` for more information.
 	fun create_class_from_mclass(mclass: MClass, super_type: Array[MClassType], mmodule: MModule): AStdClassdef do
 		var mclassdef = new MClassDef(mmodule, mclass.mclass_type, mmodule.location)
+		mclassdef.is_fictive = true
 		mclassdef.set_supertypes(super_type)
 		mclassdef.add_in_hierarchy
 

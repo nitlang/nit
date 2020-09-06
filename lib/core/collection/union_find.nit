@@ -86,10 +86,11 @@ class DisjointSet[E]
 	var number_of_subsets: Int = 0
 
 	# Get the root node of an element
-	# require: `has(e)`
+	# EXPECT: `has(e)`
 	private fun find(e:E): DisjointSetNode
+	is
+		expect(has(e))
 	do
-		assert nodes.has_key(e)
 		var ne = nodes[e]
 		if ne.parent == ne then return ne
 		var res = nfind(ne)
@@ -101,6 +102,8 @@ class DisjointSet[E]
 	# Use *path compression* to flatten the structure
 	# ENSURE: `result.parent == result`
 	private fun nfind(ne: DisjointSetNode): DisjointSetNode
+	is
+		ensure(result.parent == result)
 	do
 		var nf = ne.parent
 		if nf == ne then return ne
@@ -126,7 +129,10 @@ class DisjointSet[E]
 	# Initially it is in its own disjoint subset
 	#
 	# ENSURE: `has(e)`
-	redef fun add(e) do
+	redef fun add(e)
+	is
+		ensure(self.has(e))
+	do
 		if nodes.has_key(e) then return
 		var ne = new DisjointSetNode
 		nodes[e] = ne
@@ -199,6 +205,8 @@ class DisjointSet[E]
 	# Combine the subsets of `e` and `f`
 	# ENSURE: `in_same_subset(e,f)`
 	fun union(e,f:E)
+	is
+		ensure(in_same_subset(e,f))
 	do
 		var ne = find(e)
 		var nf = find(f)
@@ -223,8 +231,10 @@ class DisjointSet[E]
 	end
 
 	# Combine the subsets of all elements of `es`
-	# ENSURE: `all_in_same_subset(cs)`
+	# ENSURE: `all_in_same_subset(es)`
 	fun union_all(es:Collection[E])
+	is
+		ensure(all_in_same_subset(es))
 	do
 		if es.is_empty then return
 		var f = es.first

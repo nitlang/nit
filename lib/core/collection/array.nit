@@ -215,17 +215,17 @@ abstract class AbstractArray[E]
 
 	redef fun push(item) do add(item)
 
+	# EXPECT `not_empty`
 	redef fun pop
 	do
-		assert not_empty: not is_empty
 		var r = last
 		_length -= 1
 		return r
 	end
 
+	# EXPECT `not_empty`
 	redef fun shift
 	do
-		assert not_empty: not is_empty
 		var r = first
 		var l = length-1
 		copy_to(1, l, self, 0)
@@ -318,15 +318,15 @@ class Array[E]
 	super AbstractArray[E]
 	super Cloneable
 
+	# EXPECT `index >= 0 and index <= length`
 	redef fun [](index)
 	do
-		assert index: index >= 0 and index < _length
 		return _items.as(not null)[index]
 	end
 
+	# EXPECT `index >= 0 and index <= length`
 	redef fun []=(index, item)
 	do
-		assert index: index >= 0 and index < _length + 1
 		if _capacity <= index then
 			enlarge(index + 1)
 		end
@@ -432,8 +432,9 @@ class Array[E]
 
 	# Create an empty array with a given capacity.
 	init with_capacity(cap: Int)
+	is
+		expect(cap >= 0)
 	do
-		assert positive: cap >= 0
 		_items = new NativeArray[E](cap)
 		_capacity = cap
 		_length = 0
@@ -441,8 +442,9 @@ class Array[E]
 
 	# Create an array of `count` elements
 	init filled_with(value: E, count: Int)
+	is
+		expect(count >= 0)
 	do
-		assert positive: count >= 0
 		_items = new NativeArray[E](count)
 		_capacity = count
 		_length = count
@@ -455,8 +457,9 @@ class Array[E]
 
 	# Create a array filled with a given native array.
 	init with_native(nat: NativeArray[E], size: Int)
+	is
+		expect(size >= 0)
 	do
-		assert positive: size >= 0
 		_items = nat
 		_capacity = size
 		_length = size
@@ -542,8 +545,9 @@ class Array[E]
 	#     assert a * 2  ==  [1,2,3,1,2,3]
 	#     assert (a * 10).length  ==  30
 	fun *(repeat: Int): Array[E]
+	is
+		expect(repeat >= 0)
 	do
-		assert repeat >= 0
 		var res = new Array[E].with_capacity(length * repeat)
 		while repeat > 0 do
 			res.add_all(self)
@@ -605,11 +609,8 @@ class ArraySet[E]
 
 	redef fun length do return _array.length
 
-	redef fun first
-	do
-		assert _array.length > 0
-		return _array.first
-	end
+	# EXPECT `not_empty`
+	redef fun first do return _array.first
 
 	redef fun remove(item)
 	do

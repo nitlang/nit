@@ -384,9 +384,9 @@ private class HashMapIterator[K, V]
 	super MapIterator[K, V]
 	redef fun is_ok do return _node != null
 
+	# EXPECT `is_ok`.
 	redef fun item
 	do
-		assert is_ok
 		return _node._value
 	end
 
@@ -396,15 +396,15 @@ private class HashMapIterator[K, V]
 	#	_node.second = value
 	#end
 
+	# EXPECT `is_ok`.
 	redef fun key
 	do
-		assert is_ok
 		return _node._key
 	end
 
+	# EXPECT `is_ok`.
 	redef fun next
 	do
-		assert is_ok
 		_node = _node._next_item
 	end
 
@@ -433,9 +433,9 @@ class HashSet[E]
 
 	redef fun is_empty do return _the_length == 0
 
+	# EXPECT `not_empty`
 	redef fun first
 	do
-		assert _the_length > 0
 		return _first_item._key
 	end
 
@@ -486,15 +486,15 @@ private class HashSetIterator[E]
 	super Iterator[E]
 	redef fun is_ok do return _node != null
 
+	# EXPECT `is_ok`
 	redef fun item
 	do
-		assert is_ok
 		return _node._key
 	end
 
+	# EXPECT `is_ok`
 	redef fun next
 	do
-		assert is_ok
 		_node = _node._next_item
 	end
 
