@@ -17,7 +17,7 @@
 class MyClass
 	init construct(test: Int)
 	is
-		expects(test > 10)
+		expect(test > 10)
 	do
 
 	end

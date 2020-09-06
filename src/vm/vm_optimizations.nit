@@ -24,28 +24,7 @@ redef class VirtualMachine
 	# Add optimization of the method dispatch
 	redef fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
-		var initializers = callsite.mpropdef.initializers
-		if initializers.is_empty then return send_optimize(callsite.as(not null), arguments)
-
-		var recv = arguments.first
-		var i = 1
-		for p in initializers do
-			if p isa MMethod then
-				var args = [recv]
-				for x in p.intro.msignature.mparameters do
-					args.add arguments[i]
-					i += 1
-				end
-				self.send(p, args)
-			else if p isa MAttribute then
-				assert recv isa MutableInstance
-				write_attribute(p, recv, arguments[i])
-				i += 1
-			else abort
-		end
-		assert i == arguments.length
-
-		return send_optimize(callsite.as(not null), [recv])
+		return send_optimize(callsite.as(not null), arguments)
 	end
 
 	# Try to have the most efficient implementation of the method dispatch

@@ -115,6 +115,7 @@ class Gram
 				p.alts.add_all(pool)
 			end
 		end
+		self.prods = self.prods.clone
 		for p in prods do
 			self.prods.remove(p)
 			self.ast_prods.add(p)

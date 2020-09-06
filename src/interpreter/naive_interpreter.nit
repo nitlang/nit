@@ -23,6 +23,7 @@ private import parser::tables
 import mixin
 private import model::serialize_model
 private import frontend::explain_assert_api
+private import contracts
 
 redef class ToolContext
 	# --discover-call-trace
@@ -71,6 +72,12 @@ class NaiveInterpreter
 	# The main Sys instance
 	var mainobj: nullable Instance is noinit
 
+	# Name of all supported functional names
+	var routine_types: Set[String] = new HashSet[String]
+
+	# Flag used to know if we are currently checking some assertions.
+	var in_assertion: Bool = false
+
 	init
 	do
 		if mainmodule.model.get_mclasses_by_name("Bool") != null then
@@ -80,6 +87,15 @@ class NaiveInterpreter
 			init_instance_primitive(self.false_instance)
 		end
 		self.null_instance = new PrimitiveInstance[nullable Object](mainmodule.model.null_type, null)
+
+		routine_types.add("RoutineRef")
+		for name in ["Proc", "Fun", "ProcRef", "FunRef"] do
+			# 20 is a magic number = upper limit of the arity of each functional class.
+			# i.e. Proc0, Proc1, ... Proc19
+			for i  in [0..20[ do
+				routine_types.add("{name}{i}")
+			end
+		end
 	end
 
 	# Starts the interpreter on the main module of a program
@@ -456,13 +472,29 @@ class NaiveInterpreter
 	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
+	# Consumes an iterator of expressions and tries to map each element to
+	# its corresponding Instance.
+	#
+	# If any AExprs doesn't resolve to an Instance, then it returns null.
+	# Otherwise return an array of instances
+	fun aexprs_to_instances(aexprs: Iterator[AExpr]): nullable Array[Instance]
+	do
+		var accumulator = new Array[Instance]
+		for aexpr in aexprs do
+			var instance = expr(aexpr)
+			if instance == null then return null
+			accumulator.push(instance)
+		end
+		return accumulator
+	end
+
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
 	# of instances to use in the call.
 	# Return `null` if one of the evaluation of the arguments return null.
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: Instance, args: SequenceRead[AExpr]): nullable Array[Instance]
 	do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var msignature = mpropdef.msignature.as(not null)
 		var res = new Array[Instance]
 		res.add(recv)
 
@@ -470,21 +502,15 @@ class NaiveInterpreter
 
 		if map == null then
 			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
-			for ne in args do
-				var e = self.expr(ne)
-				if e == null then return null
-				res.add e
-			end
+			var rest_args = aexprs_to_instances(args.iterator)
+			if rest_args == null then return null
+			res.append(rest_args)
 			return res
 		end
 
 		# Eval in order of arguments, not parameters
-		var exprs = new Array[Instance].with_capacity(args.length)
-		for ne in args do
-			var e = self.expr(ne)
-			if e == null then return null
-			exprs.add e
-		end
+		var exprs = aexprs_to_instances(args.iterator)
+		if exprs == null then return null
 
 		# Fill `res` with the result of the evaluation according to the mapping
 		for i in [0..msignature.arity[ do
@@ -593,28 +619,6 @@ class NaiveInterpreter
 	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
 		if callsite == null then return null
-		var initializers = callsite.mpropdef.initializers
-		if not initializers.is_empty then
-			var recv = arguments.first
-			var i = 1
-			for p in initializers do
-				if p isa MMethod then
-					var args = [recv]
-					for x in p.intro.msignature.mparameters do
-						args.add arguments[i]
-						i += 1
-					end
-					self.send(p, args)
-				else if p isa MAttribute then
-					assert recv isa MutableInstance
-					write_attribute(p, recv, arguments[i])
-					i += 1
-				else abort
-			end
-			assert i == arguments.length
-
-			return send(callsite.mproperty, [recv])
-		end
 		return send(callsite.mproperty, arguments)
 	end
 
@@ -773,6 +777,27 @@ class MutableInstance
 
 	# The values of the attributes
 	var attributes: Map[MAttribute, Instance] = new HashMap[MAttribute, Instance]
+end
+
+# An instance with the original receiver and callsite (for function reference)
+class CallrefInstance
+	super Instance
+
+	# The original receiver
+	#
+	# ~~~nitish
+	# var a = new A
+	# var f = &a.toto # `a` is the original receiver
+	# ~~~
+	var recv: Instance
+
+	# The original callsite
+	#
+	# ~~~nitish
+	# var a = new A
+	# var f = &a.toto # `toto` is the original callsite
+	# ~~~
+	var callsite: CallSite
 end
 
 # Special instance to handle primitives values (int, bool, etc.)
@@ -960,6 +985,19 @@ redef class AMethPropdef
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
+
+		if pname == "call" and v.routine_types.has(cname) then
+			var routine = args.shift
+			assert routine isa CallrefInstance
+			# Swap the receiver position with the original recv of the call form.
+			args.unshift routine.recv
+			var res = v.callsite(routine.callsite, args)
+			# recover the old args state
+			args.shift
+			args.unshift routine
+			return res
+		end
+
 		if pname == "output" then
 			var recv = args.first
 			recv.val.output
@@ -1601,6 +1639,31 @@ redef class AClassdef
 				v.call(superpd, arguments)
 			end
 			return null
+		else if mclassdef.default_init == mpropdef then
+			var recv = arguments.first
+			var initializers = mpropdef.initializers
+			var no_init = false
+			if not initializers.is_empty and not mpropdef.is_old_style_init then
+				var i = 1
+				for p in initializers do
+					if p isa MMethod then
+						var args = [recv]
+						for x in p.intro.msignature.mparameters do
+							args.add arguments[i]
+							i += 1
+						end
+						v.send(p, args)
+						if p.intro.is_calling_init then no_init = true
+					else if p isa MAttribute then
+						assert recv isa MutableInstance
+						v.write_attribute(p, recv, arguments[i])
+						i += 1
+					else abort
+				end
+				assert i == arguments.length
+			end
+			if not no_init then v.send(mclass.the_root_init_mmethod.as(not null), [recv])
+			return null
 		else
 			abort
 		end
@@ -1764,6 +1827,18 @@ redef class AIfexprExpr
 			return v.expr(self.n_then)
 		else
 			return v.expr(self.n_else)
+		end
+	end
+end
+
+
+redef class AIfInAssertion
+	redef fun stmt(v)
+	do
+		if not v.in_assertion then
+			v.in_assertion = true
+			v.stmt(self.n_body)
+			v.in_assertion = false
 		end
 	end
 end
@@ -2229,18 +2304,24 @@ redef class ASendExpr
 
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 		if args == null then return null
-
 		var res = v.callsite(callsite, args)
 		return res
 	end
 end
 
 redef class ACallrefExpr
-        redef fun expr(v)
-        do
-                fatal(v, "NOT YET IMPLEMENTED callref expressions.")
-                return null
-        end
+	redef fun expr(v)
+	do
+		var recv = v.expr(self.n_expr)
+		if recv == null then return null
+		var mtype = self.mtype
+		assert mtype != null
+		# In case we are in generic class where formal parameter can not
+		# be resolved.
+		var mtype2 = v.unanchor_type(mtype)
+		var inst = new CallrefInstance(mtype2, recv, callsite.as(not null))
+		return inst
+	end
 end
 
 redef class ASendReassignFormExpr

@@ -76,6 +76,12 @@ private class TypeVisitor
 		end
 	end
 
+	# Display a warning on `node` if `not mpropdef.is_fictive`
+	fun display_warning(node: ANode, tag: String, message: String)
+	do
+		if not mpropdef.is_fictive then self.modelbuilder.warning(node, tag, message)
+	end
+
 	fun anchor_to(mtype: MType): MType
 	do
 		return mtype.anchor_to(mmodule, anchor)
@@ -181,7 +187,6 @@ private class TypeVisitor
 		return self.visit_expr_subtype(nexpr, self.type_bool(nexpr))
 	end
 
-
 	fun check_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
 		var sub = nexpr.mtype
@@ -191,9 +196,9 @@ private class TypeVisitor
 		if sup == null then return null # Forward error
 
 		if sup == sub then
-			self.modelbuilder.warning(node, "useless-type-test", "Warning: expression is already a `{sup}`.")
+			display_warning(node, "useless-type-test", "Warning: expression is already a `{sup}`.")
 		else if self.is_subtype(sub, sup) then
-			self.modelbuilder.warning(node, "useless-type-test", "Warning: expression is already a `{sup}` since it is a `{sub}`.")
+			display_warning(node, "useless-type-test", "Warning: expression is already a `{sup}` since it is a `{sub}`.")
 		end
 		return sup
 	end
@@ -216,16 +221,16 @@ private class TypeVisitor
 	fun check_can_be_null(anode: ANode, mtype: MType): Bool
 	do
 		if mtype isa MNullType then
-			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is always `null`.")
+			display_warning(anode, "useless-null-test", "Warning: expression is always `null`.")
 			return true
 		end
 		if can_be_null(mtype) then return true
 
 		if mtype isa MFormalType then
 			var res = anchor_to(mtype)
-			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}: {res}`.")
+			display_warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}: {res}`.")
 		else
-			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
+			display_warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
 		end
 		return false
 	end
@@ -316,13 +321,22 @@ private class TypeVisitor
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if name == "new" and mproperty == null then
-			name = "init"
+			name = "defaultinit"
 			mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+			if mproperty == null then
+				name = "init"
+				mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+			end
 		end
 
 		if mproperty == null then
 			if recv_is_self then
-				self.modelbuilder.error(node, "Error: method or variable `{name}` unknown in `{recvtype}`.")
+				# FIXME This test was added to display a more explicit error when a potential duplication of root object class.
+				if name == "init" then
+					self.modelbuilder.error(node, "Possible duplication of the root class `Object`")
+				else
+					self.modelbuilder.error(node, "Error: method or variable `{name}` unknown in `{recvtype}`.")
+				end
 			else if recvtype.need_anchor then
 				self.modelbuilder.error(node, "Error: method `{name}` does not exists in `{recvtype}: {unsafe_type}`.")
 			else
@@ -371,9 +385,9 @@ private class TypeVisitor
 		if info != null and self.mpropdef.mproperty.deprecation == null then
 			var mdoc = info.mdoc
 			if mdoc != null then
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated: {mdoc.content.first}")
+				display_warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated: {mdoc.content.first}")
 			else
-				self.modelbuilder.warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated.")
+				display_warning(node, "deprecated-method", "Deprecation Warning: method `{mproperty.name}` is deprecated.")
 			end
 		end
 
@@ -386,7 +400,7 @@ private class TypeVisitor
 		else if propdefs.length == 1 then
 			mpropdef = propdefs.first
 		else
-			self.modelbuilder.warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
+			display_warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
 			mpropdef = mproperty.intro
 		end
 
@@ -396,7 +410,7 @@ private class TypeVisitor
 	# The `build_callsite_by_propdef` builds the callsite directly with the `mprodef` passed in argument.
 	fun build_callsite_by_propdef(node: ANode, recvtype: MType, mpropdef: MMethodDef, recv_is_self: Bool): nullable CallSite
 	do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature
+		var msignature = mpropdef.msignature
 		if msignature == null then return null # skip error
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
@@ -424,7 +438,6 @@ private class TypeVisitor
 		return build_callsite_by_name(node, recvtype, name, recv_is_self)
 	end
 
-
 	# Visit the expressions of args and check their conformity with the corresponding type in signature
 	# The point of this method is to handle varargs correctly
 	# Note: The signature must be correctly adapted
@@ -444,7 +457,6 @@ private class TypeVisitor
 			end
 			# Other cases are managed later
 		end
-
 
 		#debug("CALL {unsafe_type}.{msignature}")
 
@@ -1026,6 +1038,18 @@ redef class AExpr
 		end
 		return res
 	end
+
+	# Type the expression as if located in `visited_mpropdef`
+	# `TypeVisitor` and `PostTypingVisitor` will be used to do the typing, see them for more information.
+	#
+	# `visited_mpropdef`: Correspond to the evaluation context in which the expression is located.
+	fun do_typing(modelbuilder: ModelBuilder, visited_mpropdef: MPropDef)
+	do
+		var type_visitor = new TypeVisitor(modelbuilder, visited_mpropdef)
+		type_visitor.visit_stmt(self)
+		var post_visitor = new PostTypingVisitor(type_visitor)
+		post_visitor.enter_visit(self)
+	end
 end
 
 redef class ABlockExpr
@@ -1176,7 +1200,6 @@ redef class AVarReassignExpr
 		self.is_typed = rettype != null
 	end
 end
-
 
 redef class AContinueExpr
 	redef fun accept_typing(v)
@@ -1503,7 +1526,6 @@ redef class AAndExpr
 	end
 end
 
-
 redef class ANotExpr
 	redef fun accept_typing(v)
 	do
@@ -1735,7 +1757,7 @@ redef class AArrayExpr
 		end
 		if useless then
 			assert ntype != null
-			v.modelbuilder.warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
+			v.display_warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
 		end
 
 		self.element_mtype = mtype
@@ -1779,7 +1801,7 @@ redef class ARangeExpr
 		# get the constructor
 		var callsite
 		if self isa ACrangeExpr then
-			callsite = v.build_callsite_by_name(self, mtype, "init", false)
+			callsite = v.build_callsite_by_name(self, mtype, "defaultinit", false)
 		else if self isa AOrangeExpr then
 			callsite = v.build_callsite_by_name(self, mtype, "without_last", false)
 		else
@@ -1989,9 +2011,7 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-                if not self isa ACallrefExpr then
-			callsite.check_signature(v, node, args)
-                end
+		if not self isa ACallrefExpr then callsite.check_signature(v, node, args)
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
@@ -2060,7 +2080,7 @@ redef class AEqFormExpr
 		if mtype == null or mtype2 == null then return
 
 		if mtype == v.type_bool(self) and (n_expr2 isa AFalseExpr or n_expr2 isa ATrueExpr) then
-			v.modelbuilder.warning(self, "useless-truism", "Warning: useless comparison to a Bool literal.")
+			v.display_warning(self, "useless-truism", "Warning: useless comparison to a Bool literal.")
 		end
 
 		if not mtype2 isa MNullType then return
@@ -2073,7 +2093,6 @@ redef class AUnaryopExpr
 	redef fun property_name do return "unary {operator}"
 	redef fun compute_raw_arguments do return new Array[AExpr]
 end
-
 
 redef class ACallExpr
 	redef fun property_name do return n_qid.n_id.text
@@ -2162,7 +2181,7 @@ redef class ABraReassignExpr
 end
 
 redef class AInitExpr
-	redef fun property_name do return "init"
+	redef fun property_name do if n_args.n_exprs.is_empty then return "init" else return "defaultinit"
 	redef fun property_node do return n_kwinit
 	redef fun compute_raw_arguments do return n_args.to_a
 end
@@ -2215,11 +2234,24 @@ redef class ACallrefExpr
                 # end
                 #
                 # var a = new A[Int]
-                # var f = &a.toto <- without anchor : ProcRef1[E]
-                #               ^--- with anchor : ProcRef[Int]
+                # var f = &a.toto # without anchor : ProcRef1[E]
+                #		  # with anchor : ProcRef[Int]
                 # ~~~~
-                var routine_type = routine_mclass.get_mtype(types_list).anchor_to(v.mmodule, recv.as(MClassType))
-
+		# However, we can only anchor if we can resolve every formal
+		# parameter, here's an example where we can't.
+		# ~~~~nitish
+		# class A[E]
+		#	fun bar: A[E] do return self
+		#	fun foo: Fun0[A[E]] do return &bar # here we can't anchor
+		# end
+		# var f1 = a1.foo # when this expression will be evaluated,
+		#		  # `a1` will anchor `&bar` returned by `foo`.
+		# print f1.call
+		# ~~~~
+		var routine_type = routine_mclass.get_mtype(types_list)
+		if not recv.need_anchor then
+			routine_type = routine_type.anchor_to(v.mmodule, recv.as(MClassType))
+		end
                 is_typed = true
 		self.mtype = routine_type
 	end
@@ -2318,7 +2350,7 @@ redef class ASuperExpr
 			return
 		end
 
-		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
+		var msignature = superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
 		var callsite = new CallSite(hot_location, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
@@ -2509,7 +2541,6 @@ redef class AAttrExpr
 	end
 end
 
-
 redef class AAttrAssignExpr
 	redef fun accept_typing(v)
 	do
@@ -2566,7 +2597,7 @@ redef class ASafeExpr
 		self.mtype = mtype.as_notnull
 
 		if not v.can_be_null(mtype) then
-			v.modelbuilder.warning(self, "useless-safe", "Warning: useless safe operator `?` on non-nullable value.")
+			v.display_warning(self, "useless-safe", "Warning: useless safe operator `?` on non-nullable value.")
 			return
 		end
 	end
@@ -2594,7 +2625,7 @@ redef class ADebugTypeExpr
 		var mtype = v.resolve_mtype(ntype)
 		if mtype != null and mtype != expr then
 			var umtype = v.anchor_to(mtype)
-			v.modelbuilder.warning(self, "debug", "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
+			v.display_warning(self, "debug", "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
 		end
 		self.is_typed = true
 	end

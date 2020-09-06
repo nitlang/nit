@@ -16,18 +16,18 @@ import kernel
 
 class A
 	#1alt1#init do abort
-	#1alt2#init(a: Int) do abort
+	#1alt2#init(a: Int) is old_style_init do abort
 	#1alt3#new do abort
 	#1alt4#new(c: Int) do abort
-	#1alt5#init foo(a: Int) do abort
+	#1alt5#init foo(a: Int) is old_style_init do abort
 	#1alt6#new foo(c: Int) do abort
 	#1alt7#fun foo do end
 
 	#alt1#init do abort
-	#alt2#init(b: Float) do abort
+	#alt2#init(b: Float)is old_style_init do abort
 	#alt3#new do abort
 	#alt4#new(d: Float) do abort
-	#alt5#init foo(a: Float) do abort
+	#alt5#init foo(a: Float)is old_style_init do abort
 	#alt6#new foo(c: Float) do abort
 	#alt7#fun foo do end
 end

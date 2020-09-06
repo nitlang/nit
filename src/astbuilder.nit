@@ -20,6 +20,7 @@ intrude import literal
 intrude import parser
 intrude import semantize::scope
 intrude import modelbuilder_base
+intrude import modelize_property
 
 # General factory to build semantic nodes in the AST of expressions
 class ASTBuilder
@@ -165,13 +166,48 @@ class ASTBuilder
 		return new ANotExpr.make(expr)
 	end
 
+	# Make a new attribute
+	fun make_attribute(name: String,
+					n_type: nullable AType,
+					n_visibility: nullable AVisibility,
+					initial_value: nullable AExpr,
+					n_block: nullable AExpr,
+					m_attributedef: nullable MAttributeDef,
+					m_setterdef: nullable MMethodDef,
+					m_getterdef: nullable MMethodDef): AAttrPropdef
+	do
+		return new AAttrPropdef.make(name, n_type, n_visibility, initial_value, n_block, m_attributedef, m_setterdef, m_getterdef)
+	end
+
+	# Make a new class (AStdClassdef)
+	fun make_class(mclassdef: nullable MClassDef,
+					n_visibility: nullable AVisibility,
+					n_formaldefs : Collection[AFormaldef],
+					n_extern_code_block : nullable AExternCodeBlock,
+					n_propdefs : Collection[APropdef],
+					n_classkind: nullable AClasskind): AStdClassdef
+	do
+		return new AStdClassdef.make(mclassdef, n_visibility, n_formaldefs, n_extern_code_block, n_propdefs, n_classkind)
+	end
+
+	fun make_var(variable: Variable, mtype: MType): AVarExpr
+	do
+		return new AVarExpr.make(variable, mtype)
+	end
+
+	# Make a call assignment i.e `a = 10`
+	fun make_call_assign(recv: AExpr, callsite: CallSite, n_args: nullable Collection[AExpr], n_value: AExpr): ACallAssignExpr
+	do
+		return new ACallAssignExpr.make(recv, callsite, n_args, n_value)
+	end
+
 	# Build a callsite to call the `mproperty` in the current method `caller_method`.
 	# `is_self_call` indicate if the method caller is a property of `self`
-	fun create_callsite(modelbuilder: ModelBuilder, caller_method : AMethPropdef, mproperty: MMethod, is_self_call: Bool): CallSite
+	fun create_callsite(modelbuilder: ModelBuilder, caller_property: APropdef, recvtype: MType, mproperty: MMethod, is_self_call: Bool): CallSite
 	do
 		# FIXME It's not the better solution to call `TypeVisitor` here to build a model entity, but some make need to have a callsite
-		var type_visitor = new TypeVisitor(modelbuilder, caller_method.mpropdef.as(not null))
-		var callsite = type_visitor.build_callsite_by_property(caller_method, mproperty.intro_mclassdef.bound_mtype, mproperty, is_self_call)
+		var type_visitor = new TypeVisitor(modelbuilder, caller_property.mpropdef.as(not null))
+		var callsite = type_visitor.build_callsite_by_property(caller_property, recvtype, mproperty, is_self_call)
 		assert callsite != null
 		return callsite
 	end
@@ -262,6 +298,68 @@ class APlaceholderExpr
 	end
 end
 
+redef class ACallAssignExpr
+	private init make(recv: AExpr, callsite: CallSite, args: nullable Collection[AExpr], n_value: AExpr)
+	do
+		_callsite = callsite
+		_mtype = callsite.recv
+		_is_typed = true
+		var n_args = new AListExprs
+		if args != null then
+			n_args.n_exprs.add_all(args)
+		end
+		var n_qid = new AQid
+		n_qid.n_id = new TId
+		n_qid.n_id.text = callsite.mproperty.name
+		init_acallassignexpr(recv, n_qid, n_args, new TAssign, n_value)
+	end
+end
+
+redef class AStdClassdef
+	private init make(mclassdef: nullable MClassDef,
+					n_visibility: nullable AVisibility,
+					n_formaldefs : Collection[Object],
+					n_extern_code_block : nullable AExternCodeBlock,
+					n_propdefs : Collection[Object],
+					n_classkind: nullable AClasskind)
+	do
+		if n_visibility == null then n_visibility = new APublicVisibility
+		if n_classkind == null then n_classkind = new AConcreteClasskind.init_aconcreteclasskind(new TKwclass)
+		var n_qid = new AQclassid.init_aqclassid(null, new TClassid)
+		init_astdclassdef(null, null, n_visibility, n_classkind, n_qid, null, n_formaldefs, null, n_extern_code_block, n_propdefs, new TKwend)
+		_mclassdef = mclassdef
+		_mclass = mclassdef.mclass
+	end
+end
+
+redef class AAttrPropdef
+
+	# Create a new `AAttrPropdef`
+	# Note: By default if the `AVisibility` is not given the visibility is set to public
+	private init make(name: String,
+					n_type: nullable AType,
+					n_visibility: nullable AVisibility,
+					initial_value: nullable AExpr,
+					n_block: nullable AExpr,
+					m_attributedef: nullable MAttributeDef,
+					m_setterdef: nullable MMethodDef,
+					m_getterdef: nullable MMethodDef)
+	do
+		# Set the model type
+		if n_type != null then mtype = n_type.mtype
+		# Define the visibility default is public
+		if n_visibility == null then n_visibility = new APublicVisibility
+		init_aattrpropdef(null, null, n_visibility, new TKwvar, new TId, n_type, null, initial_value, null, null , n_block, null)
+		# Set the name of the attribute
+		_n_id2.text = name
+		_mpropdef = m_attributedef
+		_mreadpropdef = m_getterdef
+		_mwritepropdef = m_setterdef
+		if initial_value != null or n_block != null then has_value = true
+		if m_attributedef != null then self.location = m_attributedef.location
+	end
+end
+
 redef class ANotExpr
 	private init make(expr: AExpr)
 	do
@@ -318,6 +416,18 @@ redef class AMethPropdef
 		if n_visibility == null then n_visibility = new APublicVisibility
 		self.init_amethpropdef(null,tk_redef,n_visibility,new TKwmeth,null,null,null,n_methid,n_signature,n_annotations,n_extern_calls,n_extern_code_block,new TKwdo,n_block,new TKwend)
 		self.mpropdef = mmethoddef
+		if mpropdef != null then self.location = mmethoddef.location
+	end
+
+	# Execute all method verification scope flow and typing.
+	# It also execute an ast validation to define all parents and all locations
+	fun do_all(toolcontext: ToolContext)
+	do
+		self.validate
+		# FIXME: The `do_` usage it is maybe to much (verification...). Solution: Cut the `do_` methods into simpler parts
+		self.do_scope(toolcontext)
+		self.do_flow(toolcontext)
+		self.do_typing(toolcontext.modelbuilder)
 	end
 end
 
@@ -538,13 +648,6 @@ redef class ACallExpr
 	end
 end
 
-redef class AAsCastExpr
-	private init make(n_expr: AExpr, n_type: AType)
-	do
-		init_aascastexpr(n_expr, new TKwas , null , n_type, null)
-	end
-end
-
 redef class AAsNotnullExpr
 	private init make(n_expr: AExpr, t: nullable MType)
 	do
@@ -642,6 +745,20 @@ redef class AVarAssignExpr
 end
 
 redef class ASignature
+
+	init make_from_msignature(msignature: MSignature)
+	do
+		var nparams = new Array[AParam]
+		for mparam in msignature.mparameters do
+			var variable = new Variable(mparam.name)
+			variable.declared_type = mparam.mtype
+			n_params.add(new AParam.make(variable, new AType.make(mparam.mtype)))
+		end
+		var return_type = null
+		if msignature.return_mtype != null then return_type = new AType.make(msignature.return_mtype)
+		init_asignature(null, nparams, null, return_type)
+	end
+
 	redef fun clone: SELF
 	do
 		var ntype = n_type
@@ -655,6 +772,7 @@ redef class AParam
 	private init make(v: nullable Variable, t: nullable AType)
 	do
 		_n_id = new TId
+		if v != null then _n_id.text = v.name
 		_variable = v
 		_n_type = t
 	end
@@ -664,6 +782,17 @@ redef class AParam
 		var ntype = n_type
 		if ntype != null then ntype = n_type.clone
 		return new AParam.make(variable, ntype)
+	end
+end
+
+redef class AFormaldef
+
+	private init make(mparameter: MParameterType, t: AType)
+	do
+		_n_id = new TClassid
+		_n_id.text = mparameter.name
+		_n_type = t
+		_mtype = mparameter
 	end
 end
 
@@ -825,5 +954,228 @@ redef class AAnnotation
 	do
 		_n_visibility = new APublicVisibility
 		_n_args = n_args
+	end
+end
+
+redef class MEntity
+	# Build a ANode from `self`
+	#
+	# Allows the creation of an AST node from a model entity.
+	fun create_ast_representation(astbuilder: nullable ASTBuilder): ANode is abstract
+end
+
+redef class MPropDef
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): APropdef is abstract
+end
+
+redef class MClassDef
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AStdClassdef do
+		if astbuilder == null then astbuilder = new ASTBuilder(mmodule)
+		var n_propdefs = new Array[APropdef]
+		for mpropdef in self.mpropdefs do
+			n_propdefs.add(mpropdef.create_ast_representation(astbuilder))
+		end
+		var n_formaldefs = new Array[AFormaldef]
+		for mparameter in self.mclass.mparameters do n_formaldefs.add(mparameter.create_ast_representation(astbuilder))
+
+		return astbuilder.make_class(self, visibility.create_ast_representation(astbuilder), n_formaldefs, null, n_propdefs, null)
+	end
+end
+
+redef class MAttributeDef
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AAttrPropdef do
+		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule)
+		var ntype = null
+		if self.static_mtype != null then ntype = static_mtype.create_ast_representation(astbuilder)
+		return astbuilder.make_attribute("_" + self.name, ntype, self.visibility.create_ast_representation(astbuilder), null, null, self, null, null)
+	end
+end
+
+redef class MMethodDef
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AMethPropdef do
+		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule)
+		var tk_redef = null
+		if self.mproperty.intro != self then tk_redef = new TKwredef
+		var  n_signature = if self.msignature == null then new ASignature else self.msignature.create_ast_representation(astbuilder)
+		return astbuilder.make_method(visibility.create_ast_representation(astbuilder), tk_redef, self, n_signature)
+	end
+end
+
+redef class MVisibility
+	fun create_ast_representation(astbuilder: nullable ASTBuilder): AVisibility do
+		if self.to_s == "public" then
+			return new APublicVisibility
+		else if self.to_s == "private" then
+			return new APrivateVisibility
+		else if self.to_s == "protected" then
+			return new AProtectedVisibility
+		else
+			return new AIntrudeVisibility
+		end
+	end
+end
+
+redef class MSignature
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): ASignature do
+		var nparams = new Array[AParam]
+		for mparam in mparameters do nparams.add(mparam.create_ast_representation(astbuilder))
+		var return_type = null
+		if self.return_mtype != null then return_type = self.return_mtype.create_ast_representation(astbuilder)
+		return new ASignature.init_asignature(null, nparams, null, return_type)
+	end
+end
+
+redef class MParameter
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AParam do
+		var variable = new Variable(self.name)
+		variable.declared_type = self.mtype
+		return new AParam.make(variable, self.mtype.create_ast_representation(astbuilder))
+	end
+end
+
+redef class MParameterType
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AFormaldef do
+		var n_type = super
+		return new AFormaldef.make(self, n_type)
+	end
+end
+
+redef class MType
+	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AType do
+		return new AType.make(self)
+	end
+end
+
+redef class ModelBuilder
+	# Try to get MMethod property if exist in the given mclassdef. return new `MMethod` if not exist.
+	private fun get_mmethod(name: String, mclassdef: MClassDef, visibility: nullable MVisibility): MMethod do
+		visibility = visibility or else public_visibility
+		var mproperty = try_get_mproperty_by_name(null, mclassdef, name).as(nullable MMethod)
+		if mproperty == null then
+			mproperty = new MMethod(mclassdef, name, mclassdef.location, visibility)
+			mproperty.is_fictive = true
+		end
+		return mproperty
+	end
+
+	# Creation of a new method (AST and model representation) with the given name.
+	# See `create_method_from_property` for more information.
+	fun create_method_from_name(name: String, mclassdef: MClassDef, is_abstract: Bool, msignature: nullable MSignature, visibility: nullable MVisibility): AMethPropdef do
+		var mproperty = get_mmethod(name, mclassdef, visibility)
+		return create_method_from_property(mproperty, mclassdef, is_abstract, msignature)
+	end
+
+	# Creation of a new method (AST and model representation) with the given MMethod.
+	# Take care, if `is_abstract == false` the AMethPropdef returned has an empty body (potential error if the given signature has an return type).
+	fun create_method_from_property(mproperty: MMethod,  mclassdef: MClassDef, is_abstract: Bool, msignature: nullable MSignature): AMethPropdef do
+		var m_def = new MMethodDef(mclassdef, mproperty, mclassdef.location)
+		m_def.is_fictive = true
+
+		if msignature == null then msignature = new MSignature(new Array[MParameter])
+
+		m_def.msignature = msignature
+		m_def.is_abstract = true
+		var n_def = m_def.create_ast_representation
+		# Association new npropdef to mpropdef
+		unsafe_add_mpropdef2npropdef(m_def,n_def)
+
+		if not is_abstract then
+			n_def.mpropdef.is_abstract = false
+			n_def.n_block = new ABlockExpr.make
+		end
+
+		return n_def
+	end
+
+	# Creation of a new attribute (AST and model representation) with the given name.
+	# See `create_attribute_from_property` for more information.
+	fun create_attribute_from_name(name: String, mclassdef: MClassDef, mtype: MType, visibility: nullable MVisibility): AAttrPropdef do
+		if visibility == null then visibility = public_visibility
+		var mattribute = try_get_mproperty_by_name(null, mclassdef, name)
+		if mattribute == null then
+			mattribute = new MAttribute(mclassdef, name, mclassdef.location, visibility)
+			mattribute.is_fictive = true
+		end
+		return create_attribute_from_property(mattribute.as(MAttribute), mclassdef, mtype)
+	end
+
+	# Creation of a new attribute (AST and model representation) with the given MAttribute.
+	# See `create_attribute_from_propdef` for more information.
+	fun create_attribute_from_property(mattribute: MAttribute, mclassdef: MClassDef, mtype: MType): AAttrPropdef do
+		var attribut_def = new MAttributeDef(mclassdef, mattribute, mclassdef.location)
+		attribut_def.is_fictive = true
+		attribut_def.static_mtype = mtype
+		return create_attribute_from_propdef(attribut_def)
+	end
+
+	# Creation of a new attribute (AST representation) with the given MAttributeDef.
+	fun create_attribute_from_propdef(mattribut_def: MAttributeDef): AAttrPropdef
+	is
+		expect(mclassdef2node(mattribut_def.mclassdef) != null)
+	do
+		var n_attribute = mattribut_def.create_ast_representation
+
+		var nclass = mclassdef2node(mattribut_def.mclassdef)
+
+		n_attribute.location = mattribut_def.location
+		n_attribute.validate
+
+		nclass.n_propdefs.unsafe_add_all([n_attribute])
+		nclass.validate
+
+		n_attribute.build_read_property(self, mattribut_def.mclassdef)
+		n_attribute.build_read_signature
+
+		mpropdef2npropdef[mattribut_def] = n_attribute
+		return n_attribute
+	end
+
+	# Creation of a new class (AST and model representation) with the given name.
+	# `visibility` : Define the visibility of the method. If it's `null` the default is `public_visibility`
+	# See `create_class_from_mclass` for more information.
+	fun create_class_from_name(name: String, super_type: Array[MClassType], mmodule: MModule, visibility: nullable MVisibility): AStdClassdef do
+		if visibility == null then visibility = public_visibility
+		var mclass = try_get_mclass_by_name(null, mmodule, name)
+		if mclass == null then
+			mclass = new MClass(mmodule, name, mmodule.location, new Array[String], concrete_kind, visibility)
+			mclass.is_fictive = true
+		end
+		return create_class_from_mclass(mclass, super_type, mmodule)
+	end
+
+	# Creation of a new class (AST and model representation) with the given MClass.
+	# This method creates a new concrete class definition `MClassDef`, and adds it to the class hierarchy.
+	# See `create_class_from_mclassdef` for more information.
+	fun create_class_from_mclass(mclass: MClass, super_type: Array[MClassType], mmodule: MModule): AStdClassdef do
+		var mclassdef = new MClassDef(mmodule, mclass.mclass_type, mmodule.location)
+		mclassdef.is_fictive = true
+		mclassdef.set_supertypes(super_type)
+		mclassdef.add_in_hierarchy
+
+		return create_class_from_mclassdef(mclassdef, mmodule)
+	end
+
+	# Creation of a new class (AST representation) with the given MClassDef.
+	# Note all the properties of our MClassDef will also generate an AST representation.
+	# Make an error if the attribute already has a representation in the modelbuilder.
+	# This method also create the default constructor.
+	fun create_class_from_mclassdef(mclassdef: MClassDef, mmodule: MModule): AStdClassdef do
+		var n_classdef = mclassdef.create_ast_representation
+		n_classdef.location = mclassdef.location
+		n_classdef.validate
+
+		for n_propdef in n_classdef.n_propdefs do
+			var mpropdef = n_propdef.mpropdef
+			assert mpropdef != null
+
+			var p_npropdef = mpropdef2node(mpropdef)
+			if  p_npropdef != null then error(null, "The property `{mpropdef.name}` already has a representation in the AST.")
+			unsafe_add_mpropdef2npropdef(mpropdef, n_propdef)
+		end
+
+		process_default_constructors(n_classdef)
+		unsafe_add_mclassdef2nclassdef(mclassdef, n_classdef)
+
+		return n_classdef
 	end
 end

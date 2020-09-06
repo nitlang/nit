@@ -117,6 +117,28 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Object",
+		"synopsis": "Root of everything."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Object::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "unary -",
 	"namespace": [{
 		"name": "test_prog",
@@ -332,6 +354,28 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Int",
+		"synopsis": "Some services about Integers."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Int::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "+",
 	"namespace": [{
 		"name": "test_prog",
@@ -497,6 +541,94 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Float",
+		"synopsis": "Some services about Floats."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Float::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Bool",
+		"synopsis": "Booleans, `true` or `false`."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Bool::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "String",
+		"synopsis": "Strings (there is no chars...)."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::String::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "List",
+		"synopsis": "List of things."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::List::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "main",
 	"namespace": [{
 		"name": "test_prog",
@@ -511,6 +643,28 @@
 	"full_name": "test_prog::Sys::main",
 	"visibility": "public",
 	"modifiers": ["intern", "fun"],
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Sys",
+		"synopsis": "Sys"
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Sys::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
 	"msignature": {
 		"arity": 0,
 		"mparameters": [],
@@ -740,6 +894,190 @@
 	"msignature": {
 		"arity": 1,
 		"mparameters": [{
+			"is_vararg": false,
+			"name": "intelligence_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Career",
+		"synopsis": "A `Career` gives a characteristic bonus or malus to the character."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Career::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "strength_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "endurance_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "intelligence_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Warrior",
+		"synopsis": "Warriors are good for fighting."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Warrior::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "strength_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "endurance_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "intelligence_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Magician",
+		"synopsis": "Magicians know magic and how to use it."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Magician::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "strength_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "endurance_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "intelligence_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Alcoholic",
+		"synopsis": "Alcoholics are good to nothing escept taking punches."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Alcoholic::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "strength_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "endurance_bonus",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
 			"is_vararg": false,
 			"name": "intelligence_bonus",
 			"mtype": {
@@ -1001,6 +1339,190 @@
 	"msignature": {
 		"arity": 1,
 		"mparameters": [{
+			"is_vararg": false,
+			"name": "base_intelligence",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Race",
+		"synopsis": "Race determines basic characteristics and what the character will be able to do in life."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Race::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "base_strength",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_endurance",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_intelligence",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Human",
+		"synopsis": "Humans are able to do everithing."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Human::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "base_strength",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_endurance",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_intelligence",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Dwarf",
+		"synopsis": "Dwarves make strong warriors."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Dwarf::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "base_strength",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_endurance",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_intelligence",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Elf",
+		"synopsis": "Elves make good magicians."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Elf::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 3,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "base_strength",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "base_endurance",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
 			"is_vararg": false,
 			"name": "base_intelligence",
 			"mtype": {
@@ -1641,6 +2163,60 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Character",
+		"synopsis": "Characters can be played by both the human or the machine."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Character::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 4,
+		"mparameters": [{
+			"is_vararg": false,
+			"name": "race",
+			"mtype": {
+				"name": "Race",
+				"synopsis": "Race determines basic characteristics and what the character will be able to do in life.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Race determines basic characteristics and what the character will be able to do in life.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "name",
+			"mtype": {
+				"name": "String",
+				"synopsis": "Strings (there is no chars...).",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Strings (there is no chars...).</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "age",
+			"mtype": {
+				"name": "Int",
+				"synopsis": "Some services about Integers.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Integers.</span>"
+			}
+		}, {
+			"is_vararg": false,
+			"name": "sex",
+			"mtype": {
+				"name": "Bool",
+				"synopsis": "Booleans, `true` or `false`.",
+				"html_synopsis": "<span class=\"synopsis nitdoc\">Booleans, <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">true</span></span></span></code> or <code class=\"nitcode\"><span class=\"nitcode\"><span class=\"line\"><span class=\"nc_k\">false</span></span></span></code>.</span>"
+			}
+		}],
+		"return_mtype": null
+	}
+}
+{
 	"name": "dps",
 	"synopsis": "Damage per second inflicted by this weapon.",
 	"namespace": [{
@@ -1666,6 +2242,28 @@
 			"synopsis": "Some services about Floats.",
 			"html_synopsis": "<span class=\"synopsis nitdoc\">Some services about Floats.</span>"
 		}
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Weapon",
+		"synopsis": "Something that can be used to attack someone and inflict damage."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Weapon::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
 	}
 }
 {
@@ -1846,6 +2444,28 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Combatable",
+		"synopsis": "Something that can be combatted, it can `attack` and `defend`."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Combatable::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "player_characters",
 	"synopsis": "Characters played by human players.",
 	"namespace": [{
@@ -1974,6 +2594,28 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Game",
+		"synopsis": "This is the interface you have to implement to use ure gaming platform."
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Game::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "_player_characters",
 	"namespace": [{
 		"name": "test_prog",
@@ -2078,6 +2720,28 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "MyGame",
+		"synopsis": "This is an example of how to implement the Game interface"
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::MyGame::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "start",
 	"namespace": [{
 		"name": "test_prog",
@@ -2091,6 +2755,27 @@
 	"full_name": "test_prog::Starter::start",
 	"visibility": "public",
 	"modifiers": ["fun"],
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "Starter"
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::Starter::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
 	"msignature": {
 		"arity": 0,
 		"mparameters": [],
@@ -2148,6 +2833,27 @@
 	}
 }
 {
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "TestGame"
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::TestGame::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
 	"name": "test_game",
 	"namespace": [{
 		"name": "test_prog",
@@ -2161,6 +2867,27 @@
 	"full_name": "test_prog::GameTest::test_game",
 	"visibility": "public",
 	"modifiers": ["fun"],
+	"msignature": {
+		"arity": 0,
+		"mparameters": [],
+		"return_mtype": null
+	}
+}
+{
+	"name": "defaultinit",
+	"namespace": [{
+		"name": "test_prog",
+		"synopsis": "Test program for model tools."
+	}, "::", {
+		"name": "GameTest"
+	}, "::", {
+		"name": "defaultinit"
+	}],
+	"class_name": "MMethod",
+	"full_name": "test_prog::GameTest::defaultinit",
+	"visibility": "public",
+	"modifiers": ["init"],
+	"is_init": true,
 	"msignature": {
 		"arity": 0,
 		"mparameters": [],

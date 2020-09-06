@@ -18,14 +18,14 @@
 class MyClass
 	fun foo(x: Int)
 	is
-		expects(x == 1)
+		expect(x == 1)
 	do
 		x=1
 	end
 
 	fun bar(x: Float): Bool
 	is
-		ensures(result)
+		ensure(result)
 	do
 		return true
 	end
@@ -36,14 +36,14 @@ class MyClass2
 
 	redef fun foo(x: Int)
 	is
-		ensures(x == 0)
+		ensure(x == 0)
 	do
 		x=0
 	end
 
 	redef fun bar(x: Float)
 	is
-		expects(x == 1)
+		expect(x == 1)
 	do
 		return true
 	end

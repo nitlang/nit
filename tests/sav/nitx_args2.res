@@ -5,5 +5,5 @@ Documentation for `base_simple3::Sys::foo`:
 
  + base_simple3::Sys::foo
    fun foo
-   base_simple3.nit:49,1--19
+   base_simple3.nit:45,1--19
 

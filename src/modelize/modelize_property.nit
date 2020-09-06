@@ -53,6 +53,17 @@ redef class ModelBuilder
 		mpropdef2npropdef[mpropdef] = npropdef
 	end
 
+	# Associate a `nclassdef` with its `mclassdef`
+	#
+	# Be careful, this method is unsafe, no checking is done when it's used.
+	# The safe way to add mclass it's to use the `build_property`
+	#
+	# See `mclassdef2nclassdef`
+	fun unsafe_add_mclassdef2nclassdef(mclassdef: MClassDef, nclassdef: AClassdef)
+	do
+		mclassdef2nclassdef[mclassdef] = nclassdef
+	end
+
 	# Retrieve the associated AST node of a mpropertydef.
 	# This method is used to associate model entity with syntactic entities.
 	#
@@ -66,10 +77,9 @@ redef class ModelBuilder
 			toolcontext.run_phases_on_npropdef(res)
 			return res
 		end
-		if mpropdef isa MMethodDef and mpropdef.mproperty.is_root_init then
-			res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
-			if res != null then return res
-		end
+		# Fall back to the class node if any.
+		res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
+		if res != null then return res
 		return null
 	end
 
@@ -150,7 +160,11 @@ redef class ModelBuilder
 		var mclassdef = nclassdef.mclassdef.as(not null)
 
 		# Are we a refinement
-		if not mclassdef.is_intro then return
+		if not mclassdef.is_intro then
+			# Set the default_init of the mclassdef with the intro default_init
+			mclassdef.default_init = mclassdef.mclass.intro.default_init
+			return
+		end
 
 		# Look for the init in Object, or create it
 		if mclassdef.mclass.name == "Object" and the_root_init_mmethod == null then
@@ -161,11 +175,9 @@ redef class ModelBuilder
 			var mparameters = new Array[MParameter]
 			var msignature = new MSignature(mparameters, null)
 			mpropdef.msignature = msignature
-			mpropdef.new_msignature = msignature
 			mprop.is_init = true
 			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
 			the_root_init_mmethod = mprop
-			return
 		end
 
 		# Is there already a constructor defined?
@@ -176,13 +188,15 @@ redef class ModelBuilder
 			if mpropdef.mproperty.is_root_init then
 				assert defined_init == null
 				defined_init = mpropdef
-			else if mpropdef.mproperty.name == "init" then
-				# An explicit old-style init named "init", so return
+			else if mpropdef.name == "defaultinit" then
 				return
 			end
 		end
 
-		if not nclassdef isa AStdClassdef then return
+		if mclassdef.default_init != null then return
+
+		# If the class is not AStdClassdef or it's an enum just return. No defaultinit is need.
+		if not nclassdef isa AStdClassdef or nclassdef.n_classkind isa AEnumClasskind then return
 
 		# Collect undefined attributes
 		var mparameters = new Array[MParameter]
@@ -194,7 +208,6 @@ redef class ModelBuilder
 				if mpropdef == null then return # Skip broken method
 				var sig = mpropdef.msignature
 				if sig == null then continue # Skip broken method
-
 				mparameters.add_all sig.mparameters
 				initializers.add(mpropdef.mproperty)
 				mpropdef.mproperty.is_autoinit = true
@@ -238,10 +251,13 @@ redef class ModelBuilder
 		if the_root_init_mmethod == null then return
 
 		# Look for most-specific new-stype init definitions
-		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
-		if spropdefs.is_empty then
-			toolcontext.error(nclassdef.location, "Error: `{mclassdef}` does not specialize `{the_root_init_mmethod.intro_mclassdef}`. Possible duplication of the root class `Object`?")
-			return
+		var spropdefs = new ArraySet[MMethodDef]
+
+		for x in mclassdef.get_direct_supermtype do
+			var y = x.mclass.intro.default_init
+			if y == null then continue
+			if y.is_broken or y.msignature == null then return
+			spropdefs.add y
 		end
 
 		# Look at the autoinit class-annotation
@@ -295,13 +311,29 @@ redef class ModelBuilder
 					abort
 				end
 			end
-		else
+		else if spropdefs.not_empty then
+			# Search for inherited manual defaultinit
+			var manual = null
+			for s in spropdefs do
+				if mpropdef2npropdef.has_key(s) then
+					self.toolcontext.info("{mclassdef} inherits a manual defaultinit {s}", 3)
+					manual = s
+				end
+			end
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
 			if spropdefs.length > 1 then
 				# part 1. find the longest list
 				for spd in spropdefs do
 					if spd.initializers.length > longest.initializers.length then longest = spd
+
+					if spd != manual and manual != null then
+						self.toolcontext.info("{mclassdef} conflict between manual defaultinit {manual} and automatic defaultinit {spd}.", 3)
+					end
+				end
+				# conflict with manual autoinit?
+				if longest != manual and manual != null then
+					self.error(nclassdef, "Error: conflict between manual defaultinit {manual} and automatic defaultinit {longest}.")
 				end
 				# part 2. compare
 				# Check for conflict in the order of initializers
@@ -334,41 +366,26 @@ redef class ModelBuilder
 				mparameters.clear
 				initializers.clear
 			else
-				# Can we just inherit?
-				if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
-					self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
-					mclassdef.mclass.root_init = longest
-					return
-				end
-
 				# Combine the inherited list to what is collected
 				if longest.initializers.length > 0 then
-					mparameters.prepend longest.new_msignature.mparameters
+					mparameters.prepend longest.msignature.mparameters
 					initializers.prepend longest.initializers
 				end
 			end
 		end
 
-		# If we already have a basic init definition, then setup its initializers
-		if defined_init != null then
-			defined_init.initializers.add_all(initializers)
+		# Create a specific new autoinit constructor
+		do
+			var mprop = new MMethod(mclassdef, "defaultinit", nclassdef.location, public_visibility)
+			mprop.is_init = true
+			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
+			mpropdef.initializers.add_all(initializers)
 			var msignature = new MSignature(mparameters, null)
-			defined_init.new_msignature = msignature
-			self.toolcontext.info("{mclassdef} extends its basic constructor signature to {defined_init}{msignature}", 3)
-			mclassdef.mclass.root_init = defined_init
-			return
+			mpropdef.msignature = msignature
+			mclassdef.default_init = mpropdef
+			self.toolcontext.info("{mclassdef} gets a free auto constructor `{mpropdef}{msignature}`. {spropdefs}", 3)
+			mclassdef.mclass.the_root_init_mmethod = the_root_init_mmethod
 		end
-
-		# Else create the local implicit basic init definition
-		var mprop = the_root_init_mmethod
-		var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-		mpropdef.has_supercall = true
-		mpropdef.initializers.add_all(initializers)
-		var msignature = new MSignature(mparameters, null)
-		mpropdef.new_msignature = msignature
-		mpropdef.msignature = new MSignature(new Array[MParameter], null) # always an empty real signature
-		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
-		mclassdef.mclass.root_init = mpropdef
 	end
 
 	# Check the visibility of `mtype` as an element of the signature of `mpropdef`.
@@ -504,11 +521,9 @@ end
 
 redef class MClass
 	# The base init of the class.
-	# Used to get the common new_msignature and initializers
 	#
-	# TODO: Where to put this information is not clear because unlike other
-	# informations, the initialisers are stable in a same class.
-	var root_init: nullable MMethodDef = null
+	# TODO: merge with `root_init` and `ModelBuilder::the_root_init_mmethod` if possible
+	var the_root_init_mmethod: nullable MMethod = null
 end
 
 redef class MClassDef
@@ -785,10 +800,16 @@ redef class AMethPropdef
 		var name: String
 		var amethodid = self.n_methid
 		var name_node: ANode
+		var is_old_style_init = false
 		if amethodid == null then
 			if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
+				var old_style_annot = get_single_annotation("old_style_init", modelbuilder)
+				if  old_style_annot != null or self.n_signature.n_params.not_empty then
+					name = "defaultinit"
+					if old_style_annot != null then is_old_style_init = true
+				end
 			else if n_kwnew != null then
 				name = "new"
 				name_node = n_kwnew
@@ -822,7 +843,7 @@ redef class AMethPropdef
 
 		var look_like_a_root_init = look_like_a_root_init(modelbuilder, mclassdef)
 		var mprop: nullable MMethod = null
-		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
+		if not is_init or n_kwredef != null or look_like_a_root_init then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
 		if mprop == null and look_like_a_root_init then
 			mprop = modelbuilder.the_root_init_mmethod
 			var nb = n_block
@@ -867,6 +888,15 @@ redef class AMethPropdef
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
+		if mpropdef.name == "defaultinit" and mclassdef.is_intro then
+			assert mclassdef.default_init == null
+			mpropdef.is_old_style_init = is_old_style_init
+			mclassdef.default_init = mpropdef
+			# Set the initializers with the mproperty.
+			# This point is need when a super class define this own default_init and inherited class use the default_init generated automaticlely.
+			mpropdef.initializers.add mprop
+			mpropdef.is_calling_init = true
+		end
 
 		set_doc(mpropdef, modelbuilder)
 
@@ -887,16 +917,6 @@ redef class AMethPropdef
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
-
-		if mproperty.is_root_init and not mclassdef.is_intro then
-			var root_init = mclassdef.mclass.root_init
-			if root_init != null then
-				# Inherit the initializers by refinement
-				mpropdef.new_msignature = root_init.new_msignature
-				assert mpropdef.initializers.is_empty
-				mpropdef.initializers.add_all root_init.initializers
-			end
-		end
 
 		var accept_special_last_parameter = self.n_methid == null or self.n_methid.accept_special_last_parameter
 		var return_is_mandatory = self.n_methid != null and self.n_methid.return_is_mandatory
@@ -1172,6 +1192,10 @@ redef class AAttrPropdef
 	# Could be through `n_expr`, `n_block` or `is_lazy`
 	var has_value = false
 
+	# The name of the attribute
+	# Note: The name of the attribute is in reality the name of the mreadpropdef
+	var name: String = n_id2.text is lazy
+
 	# The guard associated to a lazy attribute.
 	# Because some engines does not have a working `isset`,
 	# this additional attribute is used to guard the lazy initialization.
@@ -1186,48 +1210,14 @@ redef class AAttrPropdef
 	redef fun build_property(modelbuilder, mclassdef)
 	do
 		var mclass = mclassdef.mclass
-		var nid2 = n_id2
-		var name = nid2.text
 
 		var atabstract = self.get_single_annotation("abstract", modelbuilder)
-		if atabstract == null then
-			if not mclass.kind.need_init then
-				modelbuilder.error(self, "Error: attempt to define attribute `{name}` in the {mclass.kind} `{mclass}`.")
-			end
 
-			var mprop = new MAttribute(mclassdef, "_" + name, self.location, private_visibility)
-			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
-			self.mpropdef = mpropdef
-			modelbuilder.mpropdef2npropdef[mpropdef] = self
-		end
+		if atabstract == null then build_attribute_property(modelbuilder, mclassdef)
 
-		var readname = name
-		var mreadprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, readname).as(nullable MMethod)
-		if mreadprop == null then
-			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
-			mreadprop = new MMethod(mclassdef, readname, self.location, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then
-				mreadprop.is_broken = true
-				return
-			end
-		else
-			if mreadprop.is_broken then return
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
-			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
-		end
-		mclassdef.mprop2npropdef[mreadprop] = self
+		# Construction of the read property. If it's not correctly built just return.
+		if not build_read_property(modelbuilder, mclassdef) then return
 
-		var attr_mpropdef = mpropdef
-		if attr_mpropdef != null then
-			mreadprop.getter_for = attr_mpropdef.mproperty
-			attr_mpropdef.mproperty.getter = mreadprop
-		end
-
-		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
-		self.mreadpropdef = mreadpropdef
-		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
-		set_doc(mreadpropdef, modelbuilder)
-		if mpropdef != null then mpropdef.mdoc = mreadpropdef.mdoc
 		if atabstract != null then mreadpropdef.is_abstract = true
 
 		has_value = n_expr != null or n_block != null
@@ -1250,29 +1240,8 @@ redef class AAttrPropdef
 			end
 		end
 
-		var atlazy = self.get_single_annotation("lazy", modelbuilder)
-		var atlateinit = self.get_single_annotation("lateinit", modelbuilder)
-		if atlazy != null or atlateinit != null then
-			if atlazy != null and atlateinit != null then
-				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `lateinit`.")
-				return
-			end
-			if not has_value then
-				if atlazy != null then
-					modelbuilder.error(atlazy, "Error: `lazy` attributes need a value.")
-				else if atlateinit != null then
-					modelbuilder.error(atlateinit, "Error: `lateinit` attributes need a value.")
-				end
-				has_value = true
-				return
-			end
-			is_lazy = true
-			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, self.location, none_visibility)
-			mlazyprop.is_fictive = true
-			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
-			mlazypropdef.is_fictive = true
-			self.mlazypropdef = mlazypropdef
-		end
+		# Construction of the read property. If it's not correctly built just return.
+		if not build_lazy_property(modelbuilder, mclassdef) then return
 
 		var atoptional = self.get_single_annotation("optional", modelbuilder)
 		if atoptional != null then
@@ -1295,49 +1264,9 @@ redef class AAttrPropdef
 			modelbuilder.advice(self, "attr-in-refinement", "Warning: attributes in refinement need a value or `noautoinit`.")
 		end
 
-		var writename = name + "="
-		var atwritable = self.get_single_annotation("writable", modelbuilder)
-		if atwritable != null then
-			if not atwritable.n_args.is_empty then
-				writename = atwritable.arg_as_id(modelbuilder) or else writename
-			end
-		end
-		var mwriteprop = modelbuilder.try_get_mproperty_by_name(nid2, mclassdef, writename).as(nullable MMethod)
-		var nwkwredef: nullable Token = null
-		if atwritable != null then nwkwredef = atwritable.n_kwredef
-		if mwriteprop == null then
-			var mvisibility
-			if atwritable != null then
-				mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
-			else
-				mvisibility = mreadprop.visibility
-				# By default, use protected visibility at most
-				if mvisibility > protected_visibility then mvisibility = protected_visibility
-			end
-			mwriteprop = new MMethod(mclassdef, writename, self.location, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then
-				mwriteprop.is_broken = true
-				return
-			end
-			mwriteprop.deprecation = mreadprop.deprecation
-		else
-			if mwriteprop.is_broken then return
-			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
-			if atwritable != null then
-				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
-			end
-		end
-		mclassdef.mprop2npropdef[mwriteprop] = self
+		# Construction of the read property. If it's not correctly built just return.
+		if not build_write_property(modelbuilder, mclassdef, false) then return
 
-		if attr_mpropdef != null then
-			mwriteprop.setter_for = attr_mpropdef.mproperty
-			attr_mpropdef.mproperty.setter = mwriteprop
-		end
-
-		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
-		self.mwritepropdef = mwritepropdef
-		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
-		mwritepropdef.mdoc = mreadpropdef.mdoc
 		if atabstract != null then mwritepropdef.is_abstract = true
 
 		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
@@ -1355,6 +1284,141 @@ redef class AAttrPropdef
 			# By default, abstract attribute are not autoinit
 			noinit = true
 		end
+	end
+
+	# Build the attribute property
+	fun build_attribute_property(modelbuilder: ModelBuilder, mclassdef: MClassDef)
+	do
+		var mclass = mclassdef.mclass
+		var attribute_name = "_" + name
+
+		if not mclass.kind.need_init then
+			modelbuilder.error(self, "Error: attempt to define attribute `{name}` in the {mclass.kind} `{mclass}`.")
+		end
+		var mprop = new MAttribute(mclassdef, "_" + name, self.location, private_visibility)
+		var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
+		self.mpropdef = mpropdef
+		modelbuilder.mpropdef2npropdef[mpropdef] = self
+	end
+
+	# Build the read method property to get the value of the attribute
+	# Return `true` if the property was correctly created else return `false`.
+	# Warning the signature of the property is not set. This step is done by `build_signature`.
+	fun build_read_property(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
+	do
+		var mclass = mclassdef.mclass
+
+		var readname = name
+		var mreadprop = modelbuilder.try_get_mproperty_by_name(self, mclassdef, readname).as(nullable MMethod)
+		if mreadprop == null then
+			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
+			mreadprop = new MMethod(mclassdef, readname, self.location, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then
+				mreadprop.is_broken = true
+				return false
+			end
+		else
+			if mreadprop.is_broken then return false
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return false
+			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
+		end
+		mclassdef.mprop2npropdef[mreadprop] = self
+
+		var attr_mpropdef = mpropdef
+		if attr_mpropdef != null then
+			mreadprop.getter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.getter = mreadprop
+		end
+
+		var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
+		self.mreadpropdef = mreadpropdef
+		modelbuilder.mpropdef2npropdef[mreadpropdef] = self
+		set_doc(mreadpropdef, modelbuilder)
+		if mpropdef != null then mpropdef.mdoc = mreadpropdef.mdoc
+
+		return true
+	end
+
+	# Build the write method property to set the attribute value
+	# Return `true` if the property was correctly created else return `false`.
+	# Warning the signature of the property is not set.
+	fun build_write_property(modelbuilder: ModelBuilder, mclassdef: MClassDef, is_same_visibility: Bool): Bool
+	do
+		var mclass = mclassdef.mclass
+
+		var writename = name + "="
+		var atwritable = self.get_single_annotation("writable", modelbuilder)
+		if atwritable != null then
+			if not atwritable.n_args.is_empty then
+				writename = atwritable.arg_as_id(modelbuilder) or else writename
+			end
+		end
+		var mwriteprop = modelbuilder.try_get_mproperty_by_name(self, mclassdef, writename).as(nullable MMethod)
+		var nwkwredef: nullable Token = null
+		if atwritable != null then nwkwredef = atwritable.n_kwredef
+		if mwriteprop == null then
+			var mvisibility
+			if atwritable != null then
+				mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
+			else
+				mvisibility = mreadpropdef.mproperty.visibility
+				# By default, use protected visibility at most
+				if mvisibility > protected_visibility and not is_same_visibility then mvisibility = protected_visibility
+			end
+			mwriteprop = new MMethod(mclassdef, writename, self.location, mvisibility)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then
+				mwriteprop.is_broken = true
+				return false
+			end
+			mwriteprop.deprecation = mreadpropdef.mproperty.deprecation
+		else
+			if mwriteprop.is_broken then return false
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return false
+			if atwritable != null then
+				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
+			end
+		end
+		mclassdef.mprop2npropdef[mwriteprop] = self
+
+		var attr_mpropdef = mpropdef
+		if attr_mpropdef != null then
+			mwriteprop.setter_for = attr_mpropdef.mproperty
+			attr_mpropdef.mproperty.setter = mwriteprop
+		end
+
+		var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
+		self.mwritepropdef = mwritepropdef
+		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
+		mwritepropdef.mdoc = mreadpropdef.mdoc
+
+		return true
+	end
+
+	# Build the lazy attribute property
+	# Return `true` if the property was correctly created else return `false`.
+	fun build_lazy_property(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
+	do
+		var mclass = mclassdef.mclass
+
+		var atlazy = self.get_single_annotation("lazy", modelbuilder)
+		var atlateinit = self.get_single_annotation("lateinit", modelbuilder)
+		if atlazy != null or atlateinit != null then
+			if atlazy != null and atlateinit != null then
+				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `lateinit`.")
+				return false
+			end
+			if not has_value then
+				if atlazy != null then
+					modelbuilder.error(atlazy, "Error: `lazy` attributes need a value.")
+				else if atlateinit != null then
+					modelbuilder.error(atlateinit, "Error: `lateinit` attributes need a value.")
+				end
+				has_value = true
+				return false
+			end
+			create_lazy
+		end
+		return true
 	end
 
 	redef fun build_signature(modelbuilder)
@@ -1412,29 +1476,100 @@ redef class AAttrPropdef
 			mpropdef.static_mtype = mtype
 		end
 
-		do
-			var msignature = new MSignature(new Array[MParameter], mtype)
-			mreadpropdef.msignature = msignature
-		end
+		build_read_signature
 
-		var mwritepropdef = self.mwritepropdef
-		if mwritepropdef != null then
-			var mwritetype = mtype
-			if is_optional then
-				mwritetype = mwritetype.as_nullable
-			end
-			var name: String
-			name = n_id2.text
-			var mparameter = new MParameter(name, mwritetype, false)
-			var msignature = new MSignature([mparameter], null)
-			mwritepropdef.msignature = msignature
-		end
+		if self.mwritepropdef != null then build_write_signature
 
 		var mlazypropdef = self.mlazypropdef
 		if mlazypropdef != null then
 			mlazypropdef.static_mtype = mmodule.bool_type
 		end
 		check_repeated_types(modelbuilder)
+	end
+
+	# Build the read method signature
+	# `except`: mreadpropdef != null
+	# `expect`: mtype != null
+	fun build_read_signature
+	is
+		expect(mreadpropdef != null and mtype != null)
+	do
+		var msignature = new MSignature(new Array[MParameter], mtype)
+		mreadpropdef.msignature = msignature
+	end
+
+	# Build the write method signature
+	# `except`: mwritepropdef != null
+	# `expect`: mtype != null
+	fun build_write_signature
+	is
+		expect(mwritepropdef != null and mtype != null)
+	do
+		var mwritetype = mtype.as(not null)
+		if is_optional then
+			mwritetype = mwritetype.as_nullable
+		end
+		var mparameter = new MParameter(name, mwritetype, false)
+		var msignature = new MSignature([mparameter], null)
+		mwritepropdef.msignature = msignature
+	end
+
+	# Create a new setter for the attribute.
+	#
+	# `modelbuilder`: It's used to link the new `mwritepropdef` and `self`
+	# `visibility`: Is the setter has the same visibilty of the `mreadpropdef`.
+	#	If `not is_same_visibility and mreadpropdef.mproperty.visibility > protected_visibility` the `mwritepropdef` visibility will be set to protected.
+	fun create_setter(modelbuilder: ModelBuilder, is_same_visibility: nullable Bool): AAttrPropdef
+	is
+		expect(mreadpropdef != null) # Use to define the visibility, the mclassdef and the doc of the `mwritepropdef`
+	do
+		if mwritepropdef != null then return self # Self already has a `mwritepropdef`
+		var same_visibility = false
+		if is_same_visibility != null then same_visibility = is_same_visibility
+
+		self.build_write_property(modelbuilder, mreadpropdef.mclassdef, same_visibility)
+		self.build_write_signature
+		return self
+	end
+
+	# Set the default `self` value
+	#
+	# `expr`: Represents the default value of the attribute. If `expr isa ABlockExpr` `self.n_block` will be set.
+	fun define_default(expr: AExpr): AAttrPropdef
+	do
+		self.has_value = true
+		if expr isa ABlockExpr then
+			self.n_block = expr
+		else
+			self.n_expr = expr
+		end
+		return self
+	end
+
+	# Set `self` as optional
+	fun define_as_optional: AAttrPropdef
+	is
+		expect(has_value)
+	do
+		is_optional = true
+		return self
+	end
+
+	# Create the lazy attribute.
+	#
+	# see `mlazypropdef` for more information about this property.
+	fun create_lazy: AAttrPropdef
+	is
+		expect(has_value and mpropdef != null) # The only way to get a null `mpropdef` is when the attribute is defined as `abstract`. But if the attribute has a value, it cannot be abstract.
+	do
+		if self.mlazypropdef != null then return self # Self already has a `mlazypropdef`
+		is_lazy = true
+		var mlazyprop = new MAttribute(mpropdef.mclassdef, "lazy _" + name, self.location, none_visibility)
+		mlazyprop.is_fictive = true
+		var mlazypropdef = new MAttributeDef(mpropdef.mclassdef, mlazyprop, self.location)
+		mlazypropdef.is_fictive = true
+		self.mlazypropdef = mlazypropdef
+		return self
 	end
 
 	# Detect the static type from the value assigned to the attribute `self`

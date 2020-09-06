@@ -17,7 +17,7 @@
 class MyClass
 	fun foo(x: Int, y: Float)
 	is
-		ensures(x > 0)
+		ensure(x > 0)
 	do
 		print "Good"
 	end
@@ -28,7 +28,7 @@ class SubClass
 
 	redef fun foo(x: Int, y: Float)
 	is
-		ensures(y == 1.2)
+		ensure(y == 1.2)
 	do
 		print "Good"
 	end

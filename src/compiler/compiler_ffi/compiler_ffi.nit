@@ -82,9 +82,10 @@ end
 
 redef class MExplicitCall
 	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
+	is
+		expect(mproperty isa MMethod)
 	do
-		var mproperty = mproperty
-		assert mproperty isa MMethod
+		var mproperty = mproperty.as(MMethod)
 
 		# In nitni files, declare internal function as extern
 		var full_friendly_csignature = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, internal_call_context)
@@ -198,9 +199,10 @@ end
 
 redef class MExplicitSuper
 	private fun compile_extern_callback(v: AbstractCompilerVisitor, ccu: CCompilationUnit, compile_implementation_too: Bool)
+	is
+		expect(from.mproperty isa MMethod)
 	do
-		var mproperty = from.mproperty
-		assert mproperty isa MMethod
+		var mproperty = from.mproperty.as(MMethod)
 		var mclass_type = from.mclassdef.mclass.mclass_type
 
 		# In nitni files, declare internal function as extern

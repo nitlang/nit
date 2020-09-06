@@ -75,6 +75,7 @@ else
 end
 
 modelbuilder.run_phases
+toolcontext.run_global_phases(modelbuilder.parsed_modules)
 
 if toolcontext.opt_only_metamodel.value then toolcontext.quit
 

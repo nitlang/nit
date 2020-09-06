@@ -7,6 +7,7 @@ services:
 
 variables:
   NEO4J_AUTH: none
+  POSTGRES_HOST_AUTH_METHOD: trust
 
 cache:
   paths:
@@ -333,6 +334,20 @@ bench_fast:
       - benchmarks/*.gnu
     when: always
 
+nitunit_manual:
+  stage: more_test
+  dependencies:
+    - build_tools
+  script:
+    - nitunit doc/manual/*.nit
+    - junit2html nitunit.xml
+  artifacts:
+    paths:
+      - nitunit.xml*
+    when: always
+    reports:
+      junit:
+        - nitunit.xml
 
 # MORE TOOLS ########################################################
 

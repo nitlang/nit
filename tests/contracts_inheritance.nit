@@ -29,7 +29,7 @@ class MyArrayInt
 
 	redef fun toto(e)
 	is
-		ensures(e == 12)
+		ensure(e == 12)
 	do
 		print "toto MyArrayInt"
 		super e
@@ -41,7 +41,7 @@ class MyArrayInt2
 
 	redef fun toto(e)
 	is
-		ensures(e == 11)
+		ensure(e == 11)
 	do
 		print "toto MyArrayInt2"
 		super e

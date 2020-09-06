@@ -20,8 +20,8 @@ class MyClass
 
 	fun foo(x: Int)
 	is
-		expects(bar == 10)
-		ensures(x > 0)
+		expect(bar == 10)
+		ensure(x > 0)
 	do
 		if bar != 10 then print "Error"
 	end
@@ -38,8 +38,8 @@ class MyClass2
 
 	fun foo(bool: Bool)
 	is
-		expects(not self.baz)
-		ensures(my_class.bar == 11)
+		expect(not self.baz)
+		ensure(my_class.bar == 11)
 	do
 		if baz then print "Error"
 		my_class.bar = 11

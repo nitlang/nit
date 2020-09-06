@@ -1,1 +1,1 @@
-Runtime error: Assert 'expects' failed (contracts_constructor.nit:20)
+Runtime error: Assert 'expect(test > 10)' failed (contracts_constructor.nit:20)

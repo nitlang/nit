@@ -1,4 +1,4 @@
-syntax_annotations3.nit:16,2--20: Warning: unknown annotation `invariant`.
+syntax_annotations3.nit:16,12--16: Error: method or variable `solde` unknown in `Account`.
 syntax_annotations3.nit:19,3--12: Warning: unknown annotation `pre`.
 syntax_annotations3.nit:20,3--22: Warning: unknown annotation `post`.
 syntax_annotations3.nit:28,3--7: Warning: unknown annotation `inter`.

@@ -239,7 +239,7 @@ class TestCommandsParser
 		var cmd = parser.parse("defs: test_prog::TestGame | inherited: TestGame")
 		assert cmd isa CmdFeatures
 		assert parser.error == null
-		assert cmd.results.as(not null).length == 3
+		assert cmd.results.as(not null).length == 4
 	end
 
 	# CmdLinearization

@@ -187,29 +187,6 @@
 			"name": "test_prog",
 			"synopsis": "Test program for model tools."
 		}, "$", {
-			"name": "Character",
-			"synopsis": "Characters can be played by both the human or the machine."
-		}, "$", {
-			"name": "Object",
-			"synopsis": "Root of everything."
-		}, "::", {
-			"name": "init"
-		}],
-		"class_name": "MMethodDef",
-		"full_name": "test_prog$Character$Object::init",
-		"visibility": "public",
-		"modifiers": ["redef", "init"],
-		"msignature": {
-			"arity": 0,
-			"mparameters": [],
-			"return_mtype": null
-		}
-	}, {
-		"name": "init",
-		"namespace": [{
-			"name": "test_prog",
-			"synopsis": "Test program for model tools."
-		}, "$", {
 			"name": "Dwarf",
 			"synopsis": "Dwarves make strong warriors."
 		}, "$", {

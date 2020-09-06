@@ -106,7 +106,14 @@ interface Comparator
 	#     var a = [5, 2, 3, 1, 4]
 	#     default_comparator.quick_sort(a, 0, a.length - 1)
 	#     assert a == [1, 2, 3, 4, 5]
+	#     var a2 = new Array[Int]
+	#     default_comparator.quick_sort(a2, 0, a2.length - 1)
+	#     assert a2 == new Array[Int]
+	#     var a3 = [1]
+	#     default_comparator.quick_sort(a3, 0, a3.length - 1)
+	#     assert a3 == [1]
 	fun quick_sort(array: Array[COMPARED], from: Int, to: Int) do
+		if from >= to then return
 		var pivot = array[from]
 		var i = from
 		var j = to

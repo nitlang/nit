@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # Rapid type analysis on the AST
 #
 # Rapid type analysis is an analyse that aproximates the set of live classes
@@ -246,7 +245,6 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
-			# TODO? new_msignature
 			var sig = msignature
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do
@@ -262,8 +260,14 @@ class RapidTypeAnalysis
 
 			if npropdef isa AClassdef then
 				if mmethoddef.mproperty.is_root_init then
+					# Final init call
 					if not mmethoddef.is_intro then
 						self.add_super_send(v.receiver, mmethoddef)
+					end
+				else if mmethoddef.mclassdef.default_init == mmethoddef then
+					# default_init call
+					for i in mmethoddef.initializers do
+						if i isa MMethod then self.add_send(v.receiver, i)
 					end
 				else
 					npropdef.debug "cannot RTA {mmethoddef}"
@@ -383,7 +387,6 @@ class RapidTypeAnalysis
 				v.enter_visit(npropdef.n_block)
 			end
 		end
-
 	end
 
 	fun add_cast(mtype: MType)
@@ -701,6 +704,13 @@ redef class ASendExpr
 	end
 end
 
+redef class ACallrefExpr
+        redef fun accept_rapid_type_visitor(v)
+        do
+                super
+                v.add_type(mtype.as(MClassType))
+        end
+end
 
 redef class ASendReassignFormExpr
 	redef fun accept_rapid_type_visitor(v)

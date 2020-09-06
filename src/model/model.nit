@@ -559,8 +559,10 @@ class MClass
 	# Return the class `self` in the class hierarchy of the module `mmodule`.
 	#
 	# SEE: `MModule::flatten_mclass_hierarchy`
-	# REQUIRE: `mmodule.has_mclass(self)`
+	# EXPECT: `mmodule.has_mclass(self)`
 	fun in_hierarchy(mmodule: MModule): POSetElement[MClass]
+	is
+		expect(mmodule.has_mclass(self))
 	do
 		return mmodule.flatten_mclass_hierarchy[self]
 	end
@@ -585,10 +587,11 @@ class MClass
 	# Return a generic type based on the class
 	# Is the class is not generic, then the result is `mclass_type`
 	#
-	# REQUIRE: `mtype_arguments.length == self.arity`
+	# EXPECT: `mtype_arguments.length == self.arity`
 	fun get_mtype(mtype_arguments: Array[MType]): MClassType
+	is
+		expect(mtype_arguments.length == self.arity)
 	do
-		assert mtype_arguments.length == self.arity
 		if self.arity == 0 then return self.mclass_type
 		var res = get_mtype_cache.get_or_null(mtype_arguments)
 		if res != null then return res
@@ -727,8 +730,9 @@ class MClassDef
 	# The hierarchy must not already be set
 	# REQUIRE: `self.in_hierarchy == null`
 	fun set_supertypes(supertypes: Array[MClassType])
+	is
+		expect(self.in_hierarchy == null)# unique_invocation
 	do
-		assert unique_invocation: self.in_hierarchy == null
 		var mmodule = self.mmodule
 		var model = mmodule.model
 		var mtype = self.bound_mtype
@@ -752,8 +756,10 @@ class MClassDef
 	# REQUIRE: `self.in_hierarchy == null`
 	# ENSURE: `self.in_hierarchy != null`
 	fun add_in_hierarchy
+	is
+		expect(self.in_hierarchy == null)# unique_invocation
+		ensure(self.in_hierarchy != null)
 	do
-		assert unique_invocation: self.in_hierarchy == null
 		var model = mmodule.model
 		var res = model.mclassdef_hierarchy.add_node(self)
 		self.in_hierarchy = res
@@ -778,8 +784,43 @@ class MClassDef
 	# All property introductions and redefinitions in `self` (not inheritance).
 	var mpropdefs = new Array[MPropDef]
 
+	# The special default_init constructor
+	var default_init: nullable MMethodDef = null is writable
+
 	# All property introductions and redefinitions (not inheritance) in `self` by its associated property.
 	var mpropdefs_by_property = new HashMap[MProperty, MPropDef]
+
+	# Return the direct parent mtype of `self`
+	# Exemple
+	# ~~~nitish
+	# module 1
+	#
+	#	class A
+	#	class B
+	#		super A
+	#
+	# module 2
+	#
+	#	redef class A
+	#	class C
+	#		super B
+	#
+	# mclassdef_C.get_direct_supermtype == [B]
+	# ~~~~
+	fun get_direct_supermtype: Collection[MClassType]
+	do
+		# Get the potentiel direct parents
+		var parents = in_hierarchy.direct_greaters
+		# Stock the potentiel direct parents
+		var res = supertypes
+		for parent in parents do
+			# remove all super parents of the potentiel direct parents
+			res.remove_all(parent.supertypes)
+			# if the length of the potentiel direct parent equal 1 break
+			if res.length == 1 then break
+		end
+		return res
+	end
 
 	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 end
@@ -962,11 +1003,15 @@ abstract class MType
 	# ENSURE: `not self.need_anchor implies result == self`
 	# ENSURE: `not result.need_anchor`
 	fun anchor_to(mmodule: MModule, anchor: nullable MClassType): MType
+	is
+		expect(self.need_anchor implies anchor != null)
+		expect(anchor != null and not anchor.need_anchor)
+		ensure(not self.need_anchor implies result == self)
+		ensure(not result.need_anchor)
 	do
 		if not need_anchor then return self
-		assert anchor != null and not anchor.need_anchor
 		# Just resolve to the anchor and clear all the virtual types
-		var res = self.resolve_for(anchor, null, mmodule, true)
+		var res = self.resolve_for(anchor.as(not null), null, mmodule, true)
 		assert not res.need_anchor
 		return res
 	end
@@ -990,8 +1035,10 @@ abstract class MType
 	#
 	# REQUIRE: `super_mclass` is a super-class of `self`
 	# REQUIRE: `self.need_anchor implies anchor != null and self.can_resolve_for(anchor, null, mmodule)`
-	# ENSURE: `result.mclass = super_mclass`
+	# ENSURE: `result.mclass == super_mclass`
 	fun supertype_to(mmodule: MModule, anchor: nullable MClassType, super_mclass: MClass): MClassType
+	is
+		ensure(result.mclass == super_mclass)
 	do
 		if super_mclass.arity == 0 then return super_mclass.mclass_type
 		if self isa MClassType and self.mclass == super_mclass then return self
@@ -1086,7 +1133,7 @@ abstract class MType
 	#
 	# REQUIRE: `can_resolve_for(mtype, anchor, mmodule)`
 	# ENSURE: `not self.need_anchor implies result == self`
-	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
+	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract, ensure(not self.need_anchor implies result == self)
 
 	# Resolve formal type to its verbatim bound.
 	# If the type is not formal, just return self
@@ -1151,7 +1198,9 @@ abstract class MType
 	# REQUIRE: `anchor != null implies not anchor.need_anchor`
 	# REQUIRE: `mtype.need_anchor implies anchor != null and mtype.can_resolve_for(anchor, null, mmodule)`
 	# ENSURE: `not self.need_anchor implies result == true`
-	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract
+	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract,
+		expect(anchor != null implies not anchor.need_anchor),
+		ensure(not self.need_anchor implies result)
 
 	# Return the nullable version of the type
 	# If the type is already nullable then self is returned
@@ -1222,28 +1271,29 @@ abstract class MType
 	# This function is used mainly internally.
 	#
 	# REQUIRE: `not self.need_anchor`
-	fun collect_mclassdefs(mmodule: MModule): Set[MClassDef] is abstract
+	fun collect_mclassdefs(mmodule: MModule): Set[MClassDef] is abstract, expect(not self.need_anchor)
 
 	# Compute all the super-classes.
 	# This function is used mainly internally.
 	#
 	# REQUIRE: `not self.need_anchor`
-	fun collect_mclasses(mmodule: MModule): Set[MClass] is abstract
+	fun collect_mclasses(mmodule: MModule): Set[MClass] is abstract, expect(not self.need_anchor)
 
 	# Compute all the declared super-types.
 	# Super-types are returned as declared in the classdefs (verbatim).
 	# This function is used mainly internally.
 	#
 	# REQUIRE: `not self.need_anchor`
-	fun collect_mtypes(mmodule: MModule): Set[MClassType] is abstract
+	fun collect_mtypes(mmodule: MModule): Set[MClassType] is abstract, expect(not self.need_anchor)
 
 	# Is the property in self for a given module
 	# This method does not filter visibility or whatever
 	#
 	# REQUIRE: `not self.need_anchor`
 	fun has_mproperty(mmodule: MModule, mproperty: MProperty): Bool
+	is
+		expect(not self.need_anchor)
 	do
-		assert not self.need_anchor
 		return self.collect_mclassdefs(mmodule).has(mproperty.intro_mclassdef)
 	end
 end
@@ -2192,8 +2242,10 @@ abstract class MProperty
 	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
 	# ENSURE: `not mtype.has_mproperty(mmodule, self) == result.is_empty`
 	fun lookup_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
+	is
+		expect(not mtype.need_anchor)
+		ensure(not mtype.has_mproperty(mmodule, self) == result.is_empty)
 	do
-		assert not mtype.need_anchor
 		mtype = mtype.undecorate
 
 		var cache = self.lookup_definitions_cache[mmodule, mtype]
@@ -2245,8 +2297,10 @@ abstract class MProperty
 	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
 	# ENSURE: `not mtype.has_mproperty(mmodule, self) implies result.is_empty`
 	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
+	is
+		expect(not mtype.need_anchor)
+		ensure(not mtype.has_mproperty(mmodule, self) implies result.is_empty)
 	do
-		assert not mtype.need_anchor
 		mtype = mtype.undecorate
 
 		# First, select all candidates
@@ -2314,6 +2368,9 @@ abstract class MProperty
 	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
+	is
+		expect(not mtype.need_anchor)
+		expect(mtype.has_mproperty(mmodule, self))
 	do
 		return lookup_all_definitions(mmodule, mtype).first
 	end
@@ -2324,14 +2381,14 @@ abstract class MProperty
 	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
+	is
+		expect(not mtype.undecorate.need_anchor)
+		expect(mtype.undecorate.has_mproperty(mmodule, self))
 	do
 		mtype = mtype.undecorate
 
 		var cache = self.lookup_all_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
-
-		assert not mtype.need_anchor
-		assert mtype.has_mproperty(mmodule, self)
 
 		#print "select prop {mproperty} for {mtype} in {self}"
 		# First, select all candidates
@@ -2585,8 +2642,9 @@ abstract class MPropDef
 	#
 	# REQUIRE: `not mtype.need_anchor`
 	fun lookup_next_definition(mmodule: MModule, mtype: MType): MPROPDEF
+	is
+		expect(not mtype.need_anchor)
 	do
-		assert not mtype.need_anchor
 
 		var mpropdefs = self.mproperty.lookup_all_definitions(mmodule, mtype)
 		var i = mpropdefs.iterator
@@ -2622,18 +2680,20 @@ class MMethodDef
 	# The signature attached to the property definition
 	var msignature: nullable MSignature = null is writable
 
-	# The signature attached to the `new` call on a root-init
-	# This is a concatenation of the signatures of the initializers
-	#
-	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
-	var new_msignature: nullable MSignature = null is writable
-
 	# List of initialisers to call in root-inits
 	#
 	# They could be setters or attributes
-	#
-	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
 	var initializers = new Array[MProperty]
+
+	# Does the method take the responsibility to call `init`?
+	#
+	# If the method is used as an initializer, then
+	# using this information prevents to call `init` twice.
+	var is_calling_init = false is writable
+
+	# Does the method is a old_style_init?
+	#
+	var is_old_style_init = false is writable
 
 	# Is the method definition abstract?
 	var is_abstract: Bool = false is writable

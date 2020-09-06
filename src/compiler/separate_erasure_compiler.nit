@@ -46,7 +46,7 @@ redef class ToolContext
 		end
 	end
 
-	var erasure_compiler_phase = new ErasureCompilerPhase(self, null)
+	var erasure_compiler_phase = new ErasureCompilerPhase(self, [contracts_phase])
 end
 
 class ErasureCompilerPhase
@@ -194,26 +194,127 @@ class SeparateErasureCompiler
 		self.header.add_decl("typedef struct instance \{ const struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
 
-	redef fun compile_class_to_c(mclass: MClass)
+	redef fun compile_class_if_universal(ccinfo, v)
 	do
-		var mtype = mclass.intro.bound_mtype
+		var mclass = ccinfo.mclass
+		var mtype = ccinfo.mtype
 		var c_name = mclass.c_name
+		var is_dead = ccinfo.is_dead
 
-		var class_table = self.class_tables[mclass]
-		var v = self.new_visitor
+		if mtype.is_c_primitive or mtype.mclass.name == "Pointer" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("{mtype.ctype} value;")
+			self.header.add_decl("\};")
 
-		var rta = runtime_type_analysis
-		var is_dead = false # mclass.kind == abstract_kind or mclass.kind == interface_kind
-		if not is_dead and rta != null and not rta.live_classes.has(mclass) and not mtype.is_c_primitive and mclass.name != "NativeArray" then
-			is_dead = true
+			#Build BOX
+			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype_extern} value) \{")
+			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
+			v.require_declaration("class_{c_name}")
+			v.add("res->class = &class_{c_name};")
+			v.add("res->value = value;")
+			v.add("return (val*)res;")
+			v.add("\}")
+
+			if mtype.mclass.name != "Pointer" then return true
+
+			v = new_visitor
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}() \{")
+			if is_dead then
+				v.add_abort("{mclass} is DEAD")
+			else
+				var res = v.new_named_var(mtype, "self")
+				res.is_exact = true
+				v.add("{res} = nit_alloc(sizeof(struct instance_{mtype.c_name}));")
+				v.require_declaration("class_{c_name}")
+				v.add("{res}->class = &class_{c_name};")
+				v.add("((struct instance_{mtype.c_name}*){res})->value = NULL;")
+				v.add("return {res};")
+			end
+			v.add("\}")
+			return true
+		else if mclass.name == "NativeArray" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("int length;")
+			self.header.add_decl("val* values[];")
+			self.header.add_decl("\};")
+
+			#Build NEW
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length);")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}(int length) \{")
+			var res = v.get_name("self")
+			v.add_decl("struct instance_{c_name} *{res};")
+			var mtype_elt = mtype.arguments.first
+			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.require_declaration("class_{c_name}")
+			v.add("{res}->class = &class_{c_name};")
+			v.add("{res}->length = length;")
+			v.add("return (val*){res};")
+			v.add("\}")
+			return true
+                else if mclass.name == "RoutineRef" then
+                        self.header.add_decl("struct instance_{c_name} \{")
+                        self.header.add_decl("const struct class *class;")
+                        self.header.add_decl("val* recv;")
+                        self.header.add_decl("nitmethod_t method;")
+                        self.header.add_decl("\};")
+
+                        self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(val* recv, nitmethod_t method, const struct class* class);")
+                        v.add_decl("/* allocate {mtype} */")
+                        v.add_decl("{mtype.ctype} NEW_{c_name}(val* recv, nitmethod_t method, const struct class* class)\{")
+                        var res = v.get_name("self")
+                        v.add_decl("struct instance_{c_name} *{res};")
+                        var alloc = v.nit_alloc("sizeof(struct instance_{c_name})", mclass.full_name)
+                        v.add("{res} = {alloc};")
+                        v.add("{res}->class = class;")
+                        v.add("{res}->recv = recv;")
+                        v.add("{res}->method = method;")
+                        v.add("return (val*){res};")
+                        v.add("\}")
+                        return true
+		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
+			var pointer_type = mainmodule.pointer_type
+
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}() \{")
+			if is_dead then
+				v.add_abort("{mclass} is DEAD")
+			else
+				var res = v.new_named_var(mtype, "self")
+				res.is_exact = true
+				v.add("{res} = nit_alloc(sizeof(struct instance_{pointer_type.c_name}));")
+				#v.add("{res}->type = type;")
+				v.require_declaration("class_{c_name}")
+				v.add("{res}->class = &class_{c_name};")
+				v.add("((struct instance_{pointer_type.c_name}*){res})->value = NULL;")
+				v.add("return {res};")
+			end
+			v.add("\}")
+			return true
 		end
+		return false
+	end
 
-		v.add_decl("/* runtime class {c_name} */")
-
-		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
-		v.add_decl("extern const struct type_table type_table_{c_name};")
+	redef fun compile_class_vft(ccinfo, v)
+	do
+		var mclass = ccinfo.mclass
+		var mtype = ccinfo.mtype
+		var c_name = mclass.c_name
+		var is_dead = ccinfo.is_dead
+		var rta = runtime_type_analysis
 
 		# Build class vft
+		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
+
 		v.add_decl("const struct class class_{c_name} = \{")
 		v.add_decl("{class_ids[mclass]},")
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
@@ -247,9 +348,15 @@ class SeparateErasureCompiler
 			v.add_decl("\}")
 		end
 		v.add_decl("\};")
+	end
+
+	protected fun compile_class_type_table(ccinfo: ClassCompilationInfo, v: SeparateCompilerVisitor)
+	do
+		var mclass = ccinfo.mclass
+		var c_name = mclass.c_name
+		var class_table = self.class_tables[mclass]
 
 		# Build class type table
-
 		v.add_decl("const struct type_table type_table_{c_name} = \{")
 		v.add_decl("{class_table.length},")
 		v.add_decl("\{")
@@ -262,87 +369,14 @@ class SeparateErasureCompiler
 		end
 		v.add_decl("\}")
 		v.add_decl("\};")
+	end
 
-		if mtype.is_c_primitive or mtype.mclass.name == "Pointer" then
-			#Build instance struct
-			self.header.add_decl("struct instance_{c_name} \{")
-			self.header.add_decl("const struct class *class;")
-			self.header.add_decl("{mtype.ctype} value;")
-			self.header.add_decl("\};")
-
-			#Build BOX
-			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
-			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype_extern} value) \{")
-			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
-			v.require_declaration("class_{c_name}")
-			v.add("res->class = &class_{c_name};")
-			v.add("res->value = value;")
-			v.add("return (val*)res;")
-			v.add("\}")
-
-			if mtype.mclass.name != "Pointer" then return
-
-			v = new_visitor
-			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
-			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("{mtype.ctype} NEW_{c_name}() \{")
-			if is_dead then
-				v.add_abort("{mclass} is DEAD")
-			else
-				var res = v.new_named_var(mtype, "self")
-				res.is_exact = true
-				v.add("{res} = nit_alloc(sizeof(struct instance_{mtype.c_name}));")
-				v.require_declaration("class_{c_name}")
-				v.add("{res}->class = &class_{c_name};")
-				v.add("((struct instance_{mtype.c_name}*){res})->value = NULL;")
-				v.add("return {res};")
-			end
-			v.add("\}")
-			return
-		else if mclass.name == "NativeArray" then
-			#Build instance struct
-			self.header.add_decl("struct instance_{c_name} \{")
-			self.header.add_decl("const struct class *class;")
-			self.header.add_decl("int length;")
-			self.header.add_decl("val* values[];")
-			self.header.add_decl("\};")
-
-			#Build NEW
-			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length);")
-			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("{mtype.ctype} NEW_{c_name}(int length) \{")
-			var res = v.get_name("self")
-			v.add_decl("struct instance_{c_name} *{res};")
-			var mtype_elt = mtype.arguments.first
-			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
-			v.require_declaration("class_{c_name}")
-			v.add("{res}->class = &class_{c_name};")
-			v.add("{res}->length = length;")
-			v.add("return (val*){res};")
-			v.add("\}")
-			return
-		else if mtype.mclass.kind == extern_kind and mtype.mclass.name != "CString" then
-			var pointer_type = mainmodule.pointer_type
-
-			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}();")
-			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("{mtype.ctype} NEW_{c_name}() \{")
-			if is_dead then
-				v.add_abort("{mclass} is DEAD")
-			else
-				var res = v.new_named_var(mtype, "self")
-				res.is_exact = true
-				v.add("{res} = nit_alloc(sizeof(struct instance_{pointer_type.c_name}));")
-				#v.add("{res}->type = type;")
-				v.require_declaration("class_{c_name}")
-				v.add("{res}->class = &class_{c_name};")
-				v.add("((struct instance_{pointer_type.c_name}*){res})->value = NULL;")
-				v.add("return {res};")
-			end
-			v.add("\}")
-			return
-		end
+	redef fun compile_default_new(ccinfo, v)
+	do
+		var mclass = ccinfo.mclass
+		var mtype = ccinfo.mtype
+		var c_name = mclass.c_name
+		var is_dead = ccinfo.is_dead
 
 		#Build NEW
 		self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(void);")
@@ -369,6 +403,33 @@ class SeparateErasureCompiler
 			v.add("return {res};")
 		end
 		v.add("\}")
+	end
+
+	redef fun build_class_compilation_info(mclass)
+	do
+		var ccinfo = super
+		var mtype = ccinfo.mtype
+		var rta = runtime_type_analysis
+		var is_dead = false # mclass.kind == abstract_kind or mclass.kind == interface_kind
+		if not is_dead and rta != null and not rta.live_classes.has(mclass) and not mtype.is_c_primitive and mclass.name != "NativeArray" then
+			is_dead = true
+		end
+		ccinfo.is_dead = is_dead
+		return ccinfo
+	end
+
+	redef fun compile_class_to_c(mclass: MClass)
+	do
+		var ccinfo = build_class_compilation_info(mclass)
+		var v = new_visitor
+		v.add_decl("/* runtime class {mclass.c_name} */")
+		self.provide_declaration("class_{mclass.c_name}", "extern const struct class class_{mclass.c_name};")
+		v.add_decl("extern const struct type_table type_table_{mclass.c_name};")
+		self.compile_class_vft(ccinfo, v)
+		self.compile_class_type_table(ccinfo, v)
+		if not self.compile_class_if_universal(ccinfo, v) then
+			self.compile_default_new(ccinfo, v)
+		end
 	end
 
 	private fun build_class_vts_table(mclass: MClass): Bool do
@@ -658,4 +719,55 @@ class SeparateErasureCompilerVisitor
 		self.add("{res} = NEW_{nclass.c_name}({length});")
 		return res
 	end
+
+        redef fun routine_ref_instance(routine_type, recv, callsite)
+        do
+		var mmethoddef = callsite.mpropdef
+                #debug "ENTER ref_instance"
+                var mmethod = mmethoddef.mproperty
+                # routine_mclass is the specialized one, e.g: FunRef1, ProcRef2, etc..
+                var routine_mclass = routine_type.mclass
+
+                var nclasses = mmodule.model.get_mclasses_by_name("RoutineRef").as(not null)
+                var base_routine_mclass = nclasses.first
+
+                # All routine classes use the same `NEW` constructor.
+                # However, they have different declared `class` and `type` value.
+                self.require_declaration("NEW_{base_routine_mclass.c_name}")
+
+                var recv_class_cname = recv.mcasttype.as(MClassType).mclass.c_name
+                var my_recv = recv
+
+                if recv.mtype.is_c_primitive then
+                        my_recv = autobox(recv, mmodule.object_type)
+                end
+                var my_recv_mclass_type = my_recv.mtype.as(MClassType)
+
+                # The class of the concrete Routine must exist (e.g ProcRef0, FunRef0, etc.)
+                self.require_declaration("class_{routine_mclass.c_name}")
+
+                self.require_declaration(mmethoddef.c_name)
+
+                var thunk_function = mmethoddef.callref_thunk(my_recv_mclass_type)
+                var runtime_function = mmethoddef.virtual_runtime_function
+
+                var is_c_equiv = runtime_function.msignature.c_equiv(thunk_function.msignature)
+
+                var c_ref = thunk_function.c_ref
+                if is_c_equiv then
+                        var const_color = mmethoddef.mproperty.const_color
+                        c_ref = "{class_info(my_recv)}->vft[{const_color}]"
+                        self.require_declaration(const_color)
+                else
+                        self.require_declaration(thunk_function.c_name)
+                        compiler.thunk_todo(thunk_function)
+                end
+                compiler.thunk_todo(thunk_function)
+
+                # Each RoutineRef points to a receiver AND a callref_thunk
+                var res = self.new_expr("NEW_{base_routine_mclass.c_name}({my_recv}, (nitmethod_t){c_ref}, &class_{routine_mclass.c_name})", routine_type)
+                #debug "LEAVING ref_instance"
+                return res
+
+        end
 end

@@ -16,7 +16,7 @@ end
 
 Note that from an API point of view, there is no way to distinguish the read access of an attribute with a normal method neither to distinguish a write access of an attribute with a setter. Therefore, the read access of an attribute is called a getter while the write access is called a setter.
 
-~~~
+~~~nitish
 var x = foo.bar # Is bar an attribute or a method?
 foo.bar = y # Is bar an attribute or a setter?
 # In fact, we do not need to know.
@@ -28,12 +28,12 @@ By default, a getter is public and a setter is private. The visibility of getter
 additional `writable` keyword.
 
 ~~~
-class Foo
-    var pub_pri: X
-    protected var pro_pri: X
-    var pub_pub: X is writable
-    private var pri_pro: X is protected writable
-    var pub_pri2: X is private writable # the default
+class Foo2
+    var pub_pri: Int
+    protected var pro_pri: Int
+    var pub_pub: Int is writable
+    private var pri_pro: Int is protected writable
+    var pub_pri2: Int is private writable # the default
 end
 ~~~
 
@@ -43,17 +43,17 @@ Getters and setters of attributes behave like genuine methods that can be inheri
 a redefinition while `redef writable` declares that the setter is a redefinition.
 
 ~~~
-interface Foo
+interface Foo3
     fun derp: Int is abstract
     fun derp=(o: Int) is abstract
 end
-class Bar
-    super Foo
-    redef var derp: Int redef writable
+class Bar3
+    super Foo3
+    redef var derp is redef writable
 end
-class Baz
-    super Bar
-    redef fun derp do ...
-    redef fun derp=(o) do ...
+class Baz3
+    super Bar3
+    redef fun derp do return 1
+    redef fun derp=(o) do end
 end
 ~~~

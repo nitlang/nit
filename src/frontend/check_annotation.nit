@@ -112,8 +112,9 @@ after
 after_all
 example
 
-expects
-ensures
+invariant
+expect
+ensure
 no_contract
 """
 

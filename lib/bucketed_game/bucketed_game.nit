@@ -171,9 +171,12 @@ class GameTurn[G: Game]
 	var game: G
 
 	# Create a new game turn for `game`.
-	init (game: G) is old_style_init do
-		super(game.tick)
-		self.game = game
+	init(game: G)
+	is
+		is_old_style_init
+	do
+		_tick = game.tick
+		_game = game
 	end
 
 	# Insert the Bucketable event `e` to be executed at next tick.

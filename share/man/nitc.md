@@ -548,6 +548,30 @@ Option used to disable the contracts(ensures, expects) usage.
 ### `--full-contract`
 Option used to enables contracts (ensures, expects) on all classes. Warning this is an expensive option at runtime.
 
+### `--all-ensure`
+Enable all ensure usage (disable default contract strategy).
+
+### `--all-expect`
+Enable all expect usage (disable default contract strategy).
+
+### `--all-invariant`
+Enable all invariant usage (disable default contract strategy).
+
+### `--in-out-invariant`
+Option used to enable `invariant` verification on entry and exit of a method. By default, invariants are only checked on exit. Note, that the contracts are not checked on a `self` call.
+
+### `--contract-metrics`
+Display the number of contract evaluation for each contract type.
+
+### `--keep-old-instance`
+Store the instance of `old` representation in the class and thus systematic instantiation. This option should not be used in a multi-threaded environment.
+
+### `--true-contract`
+Replace all contracts condition by `true` expression. Only for benchmark.
+
+### `--only-lock-check-contract`
+Only inject the evaluation lock state check. Only for benchmark.
+
 # ENVIRONMENT VARIABLES
 
 ### `NIT_DIR`
