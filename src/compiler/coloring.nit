@@ -182,30 +182,38 @@ class POSetColorer[E: Object]
 	# All ids are strictly positive (`>= 1`).
 	#
 	# REQUIRE: is_colored
-	fun ids: Map[E, Int] do
-		assert is_colored
+	fun ids: Map[E, Int]
+	is
+		expect(is_colored)
+	do
 		return ids_cache
 	end
 	private var ids_cache = new HashMap[E, Int]
 
 	# Resulting colors
 	# REQUIRE: is_colored
-	fun colors: Map[E, Int] do
-		assert is_colored
+	fun colors: Map[E, Int]
+	is
+		expect(is_colored)
+	do
 		return colors_cache
 	end
 	private var colors_cache = new HashMap[E, Int]
 
 	# REQUIRE: is_colored
-	fun poset: POSet[E] do
-		assert is_colored
+	fun poset: POSet[E]
+	is
+		expect(is_colored)
+	do
 		return poset_cache
 	end
 	private var poset_cache: POSet[E] is noinit
 
 	# REQUIRE: is_colored
-	fun conflicts: Map[E, Set[E]] do
-		assert is_colored
+	fun conflicts: Map[E, Set[E]]
+	is
+		expect(is_colored)
+	do
 		return conflicts_cache
 	end
 	private var conflicts_cache: Map[E, Set[E]] is noinit

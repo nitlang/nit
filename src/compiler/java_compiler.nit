@@ -684,9 +684,11 @@ class JavaCompilerVisitor
 	end
 
 	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
-	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable do
-		assert t isa MClassType
-		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
+	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		expect(t isa MClassType)
+	do
+		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t.as(MClassType))
 		return self.static_call(propdef, args)
 	end
 
@@ -760,9 +762,11 @@ class JavaCompilerVisitor
 	end
 
 	# Generate a return with `value`
-	fun ret(value: RuntimeVariable) do
-		var frame = self.frame
-		assert frame != null
+	fun ret(value: RuntimeVariable)
+	is
+		expect(frame != null)
+	do
+		var frame = self.frame.as(not null)
 		var returnvar = frame.returnvar
 		if returnvar != null then
 			assign(returnvar, value)

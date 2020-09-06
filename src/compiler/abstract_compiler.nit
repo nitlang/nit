@@ -1394,12 +1394,15 @@ abstract class AbstractCompilerVisitor
 
 	# Force to get the primitive property named `name` in the instance `recv` or abort
 	fun get_property(name: String, recv: MType): MMethod
+	is
+		expect(recv isa MClassType)
 	do
-		assert recv isa MClassType
-		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node, name, recv.mclass, self.compiler.mainmodule)
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node, name, recv.as(MClassType).mclass, self.compiler.mainmodule)
 	end
 
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		ensure(callsite.is_broken implies result == null)
 	do
 		if callsite.is_broken then return null
 		return self.send(callsite.mproperty, arguments)
@@ -1562,18 +1565,20 @@ abstract class AbstractCompilerVisitor
 
 	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		expect(t isa MClassType)
 	do
-		assert t isa MClassType
 		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
-		return self.call(propdef, t, args)
+		return self.call(propdef, t.as(MClassType), args)
 	end
 
 	# Generate a monomorphic super send from the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_super_send(m: MMethodDef, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	is
+		expect(t isa MClassType)
 	do
-		assert t isa MClassType
 		m = m.lookup_next_definition(self.compiler.mainmodule, t)
-		return self.call(m, t, args)
+		return self.call(m, t.as(MClassType), args)
 	end
 
 	# Attributes handling
@@ -1633,13 +1638,14 @@ abstract class AbstractCompilerVisitor
 
 	# Return an unique and stable identifier associated with an escapemark
 	fun escapemark_name(e: nullable EscapeMark): String
+	is
+		expect(e != null)
 	do
-		assert e != null
 		if frame.escapemark_names.has_key(e) then return frame.escapemark_names[e]
 		var name = e.name
 		if name == null then name = "label"
 		name = get_name(name)
-		frame.escapemark_names[e] = name
+		frame.escapemark_names[e.as(not null)] = name
 		return name
 	end
 
@@ -2202,8 +2208,9 @@ abstract class AbstractRuntimeFunction
 	# Fills the argument array inside v.frame.arguments, calling `resolve_ith_parameter`
 	# for each parameter.
 	private fun fill_parameters(v: VISITOR)
+	is
+		expect(v.frame != null)
 	do
-		assert v.frame != null
 		for i in [0..msignature.arity[ do
 			var arg = resolve_ith_parameter(v, i)
 			v.frame.arguments.add(arg)
@@ -2227,8 +2234,9 @@ abstract class AbstractRuntimeFunction
 	# e.g `RES f(T0 p0, T1 p1, ..., TN pN)`
 	# Step 5
 	protected fun signature_to_c(v: VISITOR): String
+	is
+		expect(v.frame != null)
 	do
-		assert v.frame != null
 		var arguments = v.frame.arguments
 		var comment = new FlatBuffer
 		var selfvar = v.frame.selfvar
@@ -2265,6 +2273,8 @@ abstract class AbstractRuntimeFunction
 	# no curly brace.
 	# Step 7
 	protected fun body_to_c(v: VISITOR)
+	is
+		expect(v.frame != null)
 	do
 		mmethoddef.compile_inside_to_c(v, v.frame.arguments)
 	end
@@ -2472,8 +2482,9 @@ class StaticFrame
 	# Returns the first argument (the receiver) of a frame.
 	# REQUIRE: arguments.length >= 1
 	fun selfvar: RuntimeVariable
+	is
+		expect(arguments.length >= 1)
 	do
-		assert arguments.length >= 1
 		return arguments.first
 	end
 end
@@ -2491,7 +2502,12 @@ redef class MType
 	# Is the associated C type a primitive one?
 	#
 	# ENSURE `result == (ctype != "val*")`
-	fun is_c_primitive: Bool do return false
+	fun is_c_primitive: Bool
+	is
+		ensure(result == (ctype != "val*"))
+	do
+		return false
+	end
 end
 
 redef class MClassType
