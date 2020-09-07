@@ -1336,12 +1336,8 @@ class SeparateCompilerVisitor
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
-		else if (value.mtype.ctype == "void*" and mtype.ctype == "void*") or
-			(value.mtype.ctype == "char*" and mtype.ctype == "void*") or
-			(value.mtype.ctype == "void*" and mtype.ctype == "char*") then
-			return value
 		else
-			# Bad things will appen!
+			# Bad things will happen!
 			var res = self.new_var(mtype)
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
 			self.add("PRINT_ERROR(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); fatal_exit(1);")
