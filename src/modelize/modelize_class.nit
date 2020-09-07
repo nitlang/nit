@@ -160,27 +160,82 @@ redef class ModelBuilder
 			return
 		end
 
+		var is_intro = (mclass.intro_mmodule == mmodule)
+		var supertypes = collect_supertypes(nmodule, nclassdef, is_intro)
+		set_normal_class_of(nmodule, nclassdef, supertypes, is_intro)
+
 		var bound_mtype = build_a_bound_mtype(nmodule, nclassdef)
 		if bound_mtype == null then return
 		var mclassdef = new MClassDef(mmodule, bound_mtype, nclassdef.location)
 		nclassdef.mclassdef = mclassdef
 		self.mclassdef2nclassdef[mclassdef] = nclassdef
 
+		# Add the documentation (if available).
 		if nclassdef isa AStdClassdef then
 			var ndoc = nclassdef.n_doc
 			if ndoc != null then
 				var mdoc = ndoc.to_mdoc
 				mclassdef.mdoc = mdoc
 				mdoc.original_mentity = mclassdef
-			else if mclassdef.is_intro and mclass.visibility >= public_visibility then
+			else if is_intro and mclass.visibility >= public_visibility then
 				advice(nclassdef, "missing-doc", "Documentation warning: Undocumented public class `{mclass}`")
 			end
 		end
 
-		if mclassdef.is_intro then
+		if is_intro then
 			self.toolcontext.info("{mclassdef} introduces new {mclass.kind} {mclass.full_name}", 3)
 		else
 			self.toolcontext.info("{mclassdef} refines {mclass.kind} {mclass.full_name}", 3)
+		end
+
+		mclassdef.set_supertypes(supertypes)
+		if not supertypes.is_empty then
+			self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
+		end
+	end
+
+	# Set the base normal class of `nclassdef.mclass`, if needed.
+	#
+	# If `mclass` is not a subset, do nothing. Else, ensure that `mclass` has
+	# exactly one (explicit or implied) direct superclass and set it as the
+	# base normal class.
+	#
+	# `is_intro` indicates if we are currently processing a definition that
+	# introduces the class.
+	private fun set_normal_class_of(nmodule: AModule, nclassdef: AClassdef,
+			supertypes: Array[MClassType], is_intro: Bool)
+	do
+		var mclass = nclassdef.mclass
+		if mclass.kind != subset_kind then
+			return
+		else if is_intro then
+			# A subset can only have one direct supertype.
+			if supertypes.length != 1 then
+				if supertypes.is_empty then
+					# Supertype collection failed or `Object` is not yet
+					# defined.
+					var mmodule = nmodule.mmodule.as(not null)
+					var objectclass = try_get_mclass_by_name(nmodule, mmodule,
+							"Object")
+					if objectclass == null then
+						error(nclassdef,
+							"Error: {mclass.kind} `{mclass.name}` must have " +
+							"a base class."
+						)
+					end
+				else
+					error(nclassdef,
+						"Error: {mclass.kind} `{mclass.name}` has multiple " +
+						"base classes."
+					)
+				end
+			end
+			# TODO: Actually set the normal class.
+		else if supertypes.not_empty then
+			error(nclassdef,
+				"Error: Only the introducing definition of " +
+				"{mclass.kind} `{mclass.name}` may specify a base class."
+			)
 		end
 	end
 
@@ -243,21 +298,6 @@ redef class ModelBuilder
 		end
 
 		return mclass.get_mtype(bounds)
-	end
-
-	# Visit the AST and set the super-types of the `MClassDef` objects
-	private fun build_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
-	do
-		var mmodule = nmodule.mmodule
-		if mmodule == null then return
-		var mclass = nclassdef.mclass
-		if mclass == null then return
-		var mclassdef = nclassdef.mclassdef
-		if mclassdef == null then return
-
-		var supertypes = collect_supertypes(nmodule, nclassdef, mclassdef.is_intro)
-		mclassdef.set_supertypes(supertypes)
-		if not supertypes.is_empty then self.toolcontext.info("{mclassdef} new super-types: {supertypes.join(", ")}", 3)
 	end
 
 	# List the supertypes specified or implied by `nclassdef`.
@@ -377,11 +417,6 @@ redef class ModelBuilder
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
-		# Create inheritance on all classdefs
-		for nclassdef in nmodule.n_classdefs do
-			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
-		end
-
 		# Create the mclassdef hierarchy
 		for mclassdef in mmodule.mclassdefs do
 			mclassdef.add_in_hierarchy
@@ -417,7 +452,9 @@ redef class ModelBuilder
 				# check declared super types
 				for nsc in nclassdef.n_superclasses do
 					var ntype = nsc.n_type
-					if ntype.mtype != null then
+					# Don’t check `ntype` if we already failed to build the
+					# `MType` or the anchor.
+					if ntype.mtype != null and anchor != null then
 						var mtype = resolve_mtype3(mmodule, mclass, anchor, ntype)
 						if mtype == null then return # Forward error
 					end
