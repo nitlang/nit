@@ -12,8 +12,6 @@ Test for ToolContext, try --bash-completion.
   -h, -?, --help          Show Help (This screen)
   --version               Show version and exit
   -v, --verbose           Additional messages from the tool
-  --no-contract           Disable the contracts usage
-  --full-contract         Enable all contracts usage
   -a, --option-a          option a, do nothing
   -b, --option-b          option b, do nothing
   -c                      option c, do nothing

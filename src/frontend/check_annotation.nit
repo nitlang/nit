@@ -112,6 +112,7 @@ after
 after_all
 example
 
+invariant
 expect
 ensure
 no_contract

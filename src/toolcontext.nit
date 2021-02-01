@@ -405,18 +405,12 @@ class ToolContext
 	# Option --stub-man
 	var opt_stub_man = new OptionBool("Generate a stub manpage in pandoc markdown format", "--stub-man")
 
-	# Option --no-contract
-	var opt_no_contract = new OptionBool("Disable the contracts usage", "--no-contract")
-
-	# Option --full-contract
-	var opt_full_contract = new OptionBool("Enable all contracts usage", "--full-contract")
-
 	# Verbose level
 	var verbose_level: Int = 0
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man, opt_no_contract, opt_full_contract)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
 
 		# Hide some internal options
 		opt_stub_man.hidden = true
