@@ -1964,17 +1964,11 @@ redef class ASendExpr
 		return null
 	end
 
-	redef fun accept_typing(v)
+	# Tries to build the callsite, if it can't then `self.callsite == null`.
+	private fun build_callsite(v: TypeVisitor)
 	do
 		var nrecv = self.n_expr
 		var recvtype = v.visit_expr(nrecv)
-
-		if nrecv isa ASafeExpr then
-			# Has the receiver the form `x?.foo`?
-			# For parsing "reasons" the `?` is in the receiver node, not the call node.
-			is_safe = true
-		end
-
 		var name = self.property_name
 		var node = self.property_node
 
@@ -2007,8 +2001,26 @@ redef class ASendExpr
 		end
 
 		self.callsite = callsite
-		var msignature = callsite.msignature
+	end
 
+	redef fun accept_typing(v)
+	do
+		var nrecv = self.n_expr
+		if nrecv isa ASafeExpr then
+			# Has the receiver the form `x?.foo`?
+			# For parsing "reasons" the `?` is in the receiver node, not the call node.
+			is_safe = true
+		end
+
+		self.build_callsite(v)
+
+		var callsite = self.callsite
+		if callsite == null then return
+
+		var name = self.property_name
+		var node = self.property_node
+
+		var msignature = callsite.msignature
 		var args = compute_raw_arguments
 
 		if not self isa ACallrefExpr then callsite.check_signature(v, node, args)
@@ -2191,15 +2203,50 @@ redef class ACallrefExpr
 	redef fun property_node do return n_qid
 	redef fun compute_raw_arguments do return n_args.to_a
 
+	redef fun build_callsite(v)
+	do
+		var ntype = self.n_type
+		if ntype != null then
+			if ntype.n_kwnullable != null then
+				v.error(self, "Error: receiver type can not be nullable in a callref expression.")
+				return
+			end
+			# If no receiver, then we need to build with the provided
+			# type information about the receiver : `var f = &TYPE.method`
+			var recvtype = v.resolve_mtype(ntype)
+			# Weird behavior of `resolve_mtype`: return null + put the error
+			# inside the `n_type` node. Thus, we only need to return if the
+			# result is null.
+			# TODO: It would be nice to have proper error message when
+			# someone tries to create a callref with an unresolved generic receiver.
+			if recvtype == null then return
+
+			var name = self.property_name
+			var node = self.property_node
+			# If still nothing, just exit
+			var callsite = v.build_callsite_by_name(node, recvtype, name, false)
+			if callsite == null then return
+			self.callsite = callsite
+		else
+			# If it has a receiver, then classic callsite building strategy.
+			super
+		end
+	end
+
 	redef fun accept_typing(v)
 	do
 		super # do the job as if it was a real call
+		if self.callsite == null then return
+
+		var ntype = self.n_type
 		var res = callsite.mproperty
 
                 var msignature = callsite.mpropdef.msignature
                 var recv = callsite.recv
                 assert msignature != null
                 var arity = msignature.mparameters.length
+
+		if ntype != null then arity += 1
 
                 var routine_type_name = "ProcRef"
                 if msignature.return_mtype != null then
@@ -2226,7 +2273,18 @@ redef class ACallrefExpr
                         types_list.push(msignature.return_mtype.as(not null))
                 end
 
-                # Why we need an anchor :
+		# Check if it's callref without receiver
+
+		if ntype != null then
+			var recvtype = v.resolve_mtype(ntype)
+			if recvtype == null then
+				v.error(self, "Error: can't resolve receiver type: `{ntype}`")
+			else
+				types_list.unshift recvtype
+			end
+		end
+
+                # Why we need an anchor for the routine :
                 #
                 # ~~~~nitish
                 # class A[E]
@@ -2237,8 +2295,10 @@ redef class ACallrefExpr
                 # var f = &a.toto # without anchor : ProcRef1[E]
                 #		  # with anchor : ProcRef[Int]
                 # ~~~~
+		#
 		# However, we can only anchor if we can resolve every formal
 		# parameter, here's an example where we can't.
+		#
 		# ~~~~nitish
 		# class A[E]
 		#	fun bar: A[E] do return self
@@ -2260,8 +2320,6 @@ end
 redef class AExprs
 	fun to_a: Array[AExpr] do return self.n_exprs.to_a
 end
-
-###
 
 redef class ASuperExpr
 	# The method to call if the super is in fact a 'super init call'

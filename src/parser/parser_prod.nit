@@ -5436,6 +5436,7 @@ end
 redef class ACallrefExpr
 	init init_acallrefexpr (
 		n_amp: nullable TAmp,
+		n_type: nullable AType,
 		n_expr: nullable AExpr,
 		n_qid: nullable AQid,
 		n_args: nullable AExprs
@@ -5443,6 +5444,8 @@ redef class ACallrefExpr
 	do
 		_n_amp = n_amp.as(not null)
 		n_amp.parent = self
+		_n_type = n_type
+		if n_type != null then n_type.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_qid = n_qid.as(not null)
@@ -5455,6 +5458,10 @@ redef class ACallrefExpr
 	do
 		if _n_amp == old_child then
 			n_amp = new_child.as(TAmp)
+			return
+		end
+		if _n_type == old_child then
+			n_type = new_child.as(nullable AType)
 			return
 		end
 		if _n_expr == old_child then
@@ -5476,6 +5483,11 @@ redef class ACallrefExpr
 		_n_amp = node
 		node.parent = self
 	end
+	redef fun n_type=(node)
+	do
+		_n_type = node
+		if node != null then node.parent = self
+	end
 	redef fun n_expr=(node)
 	do
 		_n_expr = node
@@ -5496,6 +5508,7 @@ redef class ACallrefExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_amp)
+		v.enter_visit(_n_type)
 		v.enter_visit(_n_expr)
 		v.enter_visit(_n_qid)
 		v.enter_visit(_n_args)

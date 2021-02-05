@@ -166,6 +166,8 @@ opar = '(';
 cpar = ')';
 obra = '[';
 cbra = ']';
+obrace = '{';
+cbrace = '}';
 comma = ',';
 column = ':';
 quad = '::';
@@ -643,7 +645,8 @@ expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
 	| {new} kwnew no type_atom~nobra_nopar args {-> New expr.new(kwnew, type_atom~nobra_nopar.type, Null, args.exprs)}
 	| {isset_attr} kwisset recv~nopar~nobra qualified_o attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
-	| {callref} amp recv~nopar~nobra qid args {-> New expr.callref(amp, recv~nopar~nobra.expr, qid, args.exprs)}
+	| {callref} amp recv~nopar~nobra qid args {-> New expr.callref(amp, Null, recv~nopar~nobra.expr, qid, args.exprs)}
+	| {callref_norecv} amp type dot qid args {-> New expr.callref(amp, type, New expr.implicit_self(), qid, args.exprs)}
 	;
 
 expr_atom~nopar~nobra {-> expr}
@@ -1028,7 +1031,7 @@ expr	= {block} expr* kwend?
 	| {attr_assign} expr [id]:attrid assign [value]:expr
 	| {attr_reassign} expr [id]:attrid assign_op [value]:expr
 	| {call} expr qid [args]:exprs
-	| {callref} amp expr qid [args]:exprs
+	| {callref} amp type? expr qid [args]:exprs
 	| {call_assign} expr qid [args]:exprs assign [value]:expr
 	| {call_reassign} expr qid [args]:exprs assign_op [value]:expr
 	| {super} qualified? kwsuper [args]:exprs

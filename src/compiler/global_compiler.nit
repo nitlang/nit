@@ -257,17 +257,10 @@ class GlobalCompiler
 			sig = "void"
 		end
                 if is_routine_ref then
-                        var c_args = ["val* self"]
-                        var c_ret = "void"
-                        var k = mtype.arguments.length
-                        if mtype.mclass.name.has("Fun") then
-                                c_ret = mtype.arguments.last.ctype
-                                k -= 1
-                        end
-                        for i in [0..k[ do
-                                var t = mtype.arguments[i]
-                                c_args.push("{t.ctype} p{i}")
-                        end
+			var signature = mtype.decompose_as_function
+                        var c_args = signature.args_named_ctype("p")
+			c_args.unshift "val* self"
+                        var c_ret = signature.ret_ctype
                         # The underlying method signature
                         var method_sig = "{c_ret} (*method)({c_args.join(", ")})"
                         sig = "val* recv, {method_sig}"
@@ -466,48 +459,97 @@ class GlobalCompilerVisitor
         redef fun routine_ref_instance(routine_mclass_type, recv, callsite)
         do
 		var mmethoddef = callsite.mpropdef
-                var method = new CustomizedRuntimeFunction(mmethoddef, recv.mcasttype.as(MClassType))
-                var my_recv = recv
-                if recv.mtype.is_c_primitive then
-                        var object_type = mmodule.object_type
-                        my_recv = autobox(recv, object_type)
-                end
-                var thunk = new CustomizedThunkFunction(mmethoddef, my_recv.mtype.as(MClassType))
-                thunk.polymorph_call_flag = not my_recv.is_exact
+		var recv_type = self.anchor(callsite.recv).as(MClassType)
+		var my_recv: nullable RuntimeVariable = null
+		var method: CustomizedRuntimeFunction
+		var thunk: CustomizedThunkFunction
+		if recv != null then
+			my_recv = recv
+			if recv.mtype.is_c_primitive then
+				my_recv= autobox(recv, object_type)
+			end
+			method = new CustomizedRuntimeFunction(mmethoddef, recv.mcasttype.as(MClassType))
+			recv_type = my_recv.mtype.as(MClassType)
+		else
+			method = new CustomizedRuntimeFunction(mmethoddef, recv_type)
+		end
+
+		thunk = new CustomizedThunkFunction(mmethoddef, recv_type)
+                thunk.polymorph_call_flag = recv == null or not my_recv.is_exact
                 compiler.todo(method)
                 compiler.todo(thunk)
 		var ret_type = self.anchor(routine_mclass_type).as(MClassType)
-                var res = self.new_expr("NEW_{ret_type.c_name}({my_recv}, &{thunk.c_name})", ret_type)
+		var res: RuntimeVariable
+		if my_recv == null then
+			var signature = routine_mclass_type.decompose_as_function
+			var c_args = signature.args_named_ctype("p")
+			c_args.unshift("val* self")
+                        var c_ret = signature.ret_ctype
+                        # The underlying method signature
+                        var method_sig = "{c_ret} (*)({c_args.join(", ")})"
+			var casted_thunk = "({method_sig})((void*) &{thunk.c_name})"
+			# Dupe the compiler by forcing the types to match.
+			res = self.new_expr("NEW_{ret_type.c_name}((val*)NULL, {casted_thunk})", ret_type)
+		else
+			res = self.new_expr("NEW_{ret_type.c_name}({my_recv}, &{thunk.c_name})", ret_type)
+		end
+
                 return res
         end
 
         redef fun routine_ref_call(mmethoddef, arguments)
         do
-                var routine = arguments.first
-                var routine_type = routine.mtype.as(MClassType)
-                var routine_class = routine_type.mclass
-                var underlying_recv = "((struct {routine.mcasttype.c_name}*){routine})->recv"
-                var underlying_method = "((struct {routine.mcasttype.c_name}*){routine})->method"
-                adapt_signature(mmethoddef, arguments)
-                arguments.shift
-                var ss = "{underlying_recv}"
+                var callref = arguments.first
+                var callref_type = callref.mtype.as(MClassType)
+                var recv_field = "(((struct {callref.mcasttype.c_name}*){callref})->recv)"
+                var method_field = "(((struct {callref.mcasttype.c_name}*){callref})->method)"
+		var ret_mtype = mmethoddef.msignature.return_mtype
+                if ret_mtype != null then
+                        ret_mtype = resolve_for(ret_mtype, callref)
+                end
+
+		adapt_signature(mmethoddef, arguments)
+		# Remove the receiver of the `call` method.
+		arguments.shift
+
+		#----- Case 1 : No receiver -----#
+		self.add("if ({recv_field} == NULL) \{")
+		# If no more arguments are available, then
+		# the current callref has an underlying receiver.
+		if arguments.length > 0 then
+			var signature = mmethoddef.msignature.decompose_default
+			var c_args = signature.args_named_ctype("p")
+                        var c_ret = signature.ret_ctype
+			# The underlying method signature without `val* self`
+			var method_sig = "{c_ret} (*)({c_args.join(", ")})"
+			var casted_method = "(({method_sig})((void*){method_field}))"
+			var ss1 = arguments.join(", ")
+			var callsite1 = "{casted_method}({ss1})"
+			if ret_mtype != null then
+				var subres = new_var(ret_mtype)
+				self.add("{subres} = {callsite1};")
+				ret(subres)
+			else
+				self.add("{callsite1};")
+			end
+		end
+
+		#----- Case 2 : With receiver ---#
+		self.add("\} else \{")
+                var ss2 = "{recv_field}"
                 if arguments.length > 0 then
-                        ss = "{ss}, {arguments.join(", ")}"
+                        ss2 = "{ss2}, {arguments.join(", ")}"
                 end
-                arguments.unshift routine
-
-                var ret_mtype = mmethoddef.msignature.return_mtype
-
+		var callsite2 = "{method_field}({ss2})"
                 if ret_mtype != null then
-                        ret_mtype = resolve_for(ret_mtype, routine)
-                end
-                var callsite = "{underlying_method}({ss})"
-                if ret_mtype != null then
-                        var subres = new_expr("{callsite}", ret_mtype)
+                        var subres = new_var(ret_mtype)
+			self.add("{subres} = {callsite2};")
                         ret(subres)
                 else
-                        add("{callsite};")
+                        self.add("{callsite2};")
 		end
+                arguments.unshift callref
+		self.add("\}")
         end
 
 	redef fun send(m, args)

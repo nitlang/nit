@@ -1370,7 +1370,7 @@ abstract class AbstractCompilerVisitor
 	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
 
 	# Instantiate a new routine pointer
-	fun routine_ref_instance(routine_mclass_type: MClassType, recv: RuntimeVariable, callsite: CallSite): RuntimeVariable is abstract
+	fun routine_ref_instance(routine_mclass_type: MClassType, recv: nullable RuntimeVariable, callsite: CallSite): RuntimeVariable is abstract
 
 	# Call the underlying referenced function
 	fun routine_ref_call(mmethoddef: MMethodDef, args: Array[RuntimeVariable]) is abstract
@@ -2430,6 +2430,53 @@ class StaticFrame
 	end
 end
 
+class Signature
+	var arguments: Sequence[MType] is protected writable
+	var return_type: nullable MType is protected writable
+
+	fun args_ctype: Sequence[String]
+	do
+		var res = new Array[String]
+		for a in self.arguments do res.push(a.ctype)
+		return res
+	end
+
+	fun args_named_ctype(name_prefix: String): Sequence[String]
+	do
+		var res = new Array[String]
+		var i = 0
+		for a in self.args_ctype do
+			res.push "{a} {name_prefix}{i}"
+			i += 1
+		end
+		return res
+	end
+
+	fun ret_ctype: String
+	do
+		var ret = self.return_type
+		if ret != null then
+			return ret.ctype
+		else
+			return "void"
+		end
+	end
+end
+
+redef class MSignature
+
+	redef fun decompose_as_function do return decompose_default
+
+	redef fun decompose_default
+	do
+		var mparameters = self.mparameters
+		var args = new Array[MType]
+		for mparam in mparameters do args.push(mparam.mtype)
+		var ret_type = self.return_mtype
+		return new Signature(args, ret_type)
+	end
+end
+
 redef class MType
 	# Return the C type associated to a given Nit static type
 	fun ctype: String do return "val*"
@@ -2444,6 +2491,12 @@ redef class MType
 	#
 	# ENSURE `result == (ctype != "val*")`
 	fun is_c_primitive: Bool do return false
+
+	# Decompose the type into a signature as if it was a function.
+	fun decompose_as_function: Signature is abstract
+
+	# Decompose a type into a signature in its natural way.
+	fun decompose_default: Signature is abstract
 end
 
 redef class MClassType
@@ -2520,6 +2573,22 @@ redef class MClassType
 			return "val"
 		end
 	end
+
+	redef fun decompose_as_function
+	do
+		var ret_type: nullable MType = null
+		var k = self.arguments.length
+		if k > 0 and self.mclass.name.has("Fun") then
+			ret_type = arguments.last
+			k -= 1
+		end
+		var args = new Array[MType]
+		for i in [0..k[ do args.push(self.arguments[i])
+		return new Signature(args, ret_type)
+	end
+
+	redef fun decompose_default do return new Signature(self.arguments, self)
+
 end
 
 redef class MPropDef
@@ -4424,7 +4493,11 @@ end
 redef class ACallrefExpr
 	redef fun expr(v)
 	do
-		var recv = v.expr(self.n_expr, null)
+		var ntype = self.n_type
+		var recv: nullable RuntimeVariable = null
+		if ntype == null then
+			recv = v.expr(self.n_expr, null)
+		end
 		var res = v.routine_ref_instance(mtype.as(MClassType), recv, callsite.as(not null))
 		return res
 	end
