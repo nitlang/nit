@@ -12,7 +12,7 @@ Here are the differences:
 
 -   enums (e.g. `Int` or `Bool`) can only specialize interfaces, cannot have attributes, cannot have constructors, have proper instances but they are not instantiated by the programmer—it means no `new Int`. Note that at this point there is no user-defined enums.
 
-All kinds of classes must have a name, can have some superclasses and can have some definitions of properties. Properties are methods, attributes, constructors and virtual types. All kinds of classes can also be generic. When we talk about “classes” in general, it means all these four kinds. We say “concrete classes” to designate only the classes declared with the `class` keyword alone.
+All kinds of classes must have a name, can have some superclasses and can have some definitions of properties. Properties are methods, attributes, constructors and virtual types. All kinds of classes can also be generic. When documentation refers to “classes” , it generally refers to all four kinds. The term “concrete classes” is used to designate the classes declared with the `class` keyword alone.
 
 ## Class Specialization
 
@@ -32,7 +32,7 @@ There is no repeated inheritance nor private inheritance. The specialization bet
 
 -   adding new superclasses.
 
-Note that the kind or the visibility of a class cannot be changed by a refinement. Therefore, it is allowed to just write `redef class X` whatever is the kind or the visibility of `X`.
+Note that the kind or the visibility of a class cannot be changed by a refinement. Therefore, it is allowed to just write `redef class X` regardless of the kind or the visibility of `X`.
 
 In programs, the real instantiated classes are always the combination of all their refinements.
 

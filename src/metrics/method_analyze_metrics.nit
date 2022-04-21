@@ -16,7 +16,7 @@
 module method_analyze_metrics
 
 # We usualy need specific phases
-# NOTE: `frontend` is sufficent in most case (it is often too much)
+# NOTE: `frontend` is sufficent in most cases (it is often too much)
 import nitsmell_toolcontext
 import mclassdef_collect
 

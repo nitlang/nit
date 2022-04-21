@@ -35,8 +35,8 @@ the `to_f` and `to_i` methods.
 Literal strings are enclosed within quotes (`"`).
 To insert a value
 inside a literal string, include the values inside braces (`{}`).
-Braces has to be escaped.
-`+` is the concatenation operator but is less efficient than the brace form.
+Braces have to be escaped.
+`+` is the concatenation operator, but is less efficient than the brace form.
 
 ~~~
 var j = 5
@@ -52,7 +52,7 @@ print "hel\"lo\nwo\{rld"
 ~~~
 
 Multi-line strings are enclosed with triple quotes (`"""`).
-Values are inserted with a triple braces (`{{{value}}}`).
+Values are inserted with triple braces (`{{{value}}}`).
 The multi-line form thus allows verbatim new-lines, quotes and braces
 
 ~~~
@@ -65,8 +65,8 @@ but {{{ 1+2 }}} is rendered as 3
 
 All objects have a `to_s` method that converts the object to a String.
 `print` is a top-level method that takes any number of arguments and
-prints to the standard output. `print` always add a newline, another
-top-level method, `printn`, does not add the newline.
+prints them to the standard output. `print` always adds a newline to the output, another
+top-level method, `printn`, does not add a newline.
 
 ~~~
 var x: String
@@ -84,7 +84,7 @@ Common comparison operators are available: `==` and `!=` on all objects;
 `<`, `>`, `<=`, `>=` and `<=>` on `Comparable` objects (which include
 `Int`, `String` and others).
 
-- `==`, `<`, `>`, `<=`, `>=` and `<=>` are standard Nit operators (so they are redefinable).
+- `==`, `<`, `>`, `<=`, `>=` and `<=>` are standard Nit operators thus are redefinable.
 
 - `and`, `or` and `not` are not standard Nit operators: they are not
   redefinable, also they are lazy and have adaptive typing flow
@@ -93,7 +93,7 @@ Common comparison operators are available: `==` and `!=` on all objects;
 - `==` is not for reference equality but for value equality (like
   `equals` in Java). There is a special reference equality operator,
   `is`, but it cannot be redefined and its usage is not recommended.
-  Note also that while `==` is redefinable, it has a special adaptive
+  Note that while `==` is redefinable, it has a special adaptive
   typing flow effect when used with `null`.
 
 - `!=` is not a standard Nit operator. In fact `x != y` is

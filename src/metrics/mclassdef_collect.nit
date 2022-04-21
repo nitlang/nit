@@ -16,7 +16,7 @@
 module mclassdef_collect
 
 # We usualy need specific phases
-# NOTE: `frontend` is sufficent in most case (it is often too much)
+# NOTE: `frontend` is sufficent in most cases (it is often too much)
 import frontend
 import model_collect
 

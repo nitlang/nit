@@ -1,6 +1,6 @@
 # Modules
 
-`module` declares the name of a module. While optional it is recommended to use it, at least for documentation purpose. The basename of the source file must match the name declared with `module`. The extension of the source file must be `nit`.
+`module` declares the name of a module. While optional, it is recommended to use it, at least for documentation purposes. The basename of the source file must match the name declared with `module`. The extension of the source file must be `nit`.
 
 A module is made of, in order:
 
@@ -18,7 +18,7 @@ A module is made of, in order:
 
 -   `private import` indicates a private importation. Importers of a given module will not  automatically import its privately imported modules. An analogy is using `#include` in a body file (`.c`) in C/C++.
 
--   `intrude import` indicates an intrusive importation. `intrude` `import` bypasses the `private` visibility and gives to the importer module a full access on the imported module. Such an import may only be considered when modules are strongly bounded and developed together. The closest, but insufficient, analogy is something like including a body file in a body file in C/C++.
+-   `intrude import` indicates an intrusive importation. `intrude` `import` bypasses the `private` visibility and gives to the importer module full access on the imported module. Such an import may only be considered when modules are strongly bounded and developed together. The closest, but insufficient, analogy is something like including a body file in a body file in C/C++.
 
 ## Visibility
 

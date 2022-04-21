@@ -12,7 +12,7 @@ Their objective is double :
 
 Classes in OO models are often a simple aggregates of attributes and methods.
 
-By default, the `new` construction require a value for each attribute defined in a class without a default value.
+By default, the `new` construction requires a value for each attribute defined in a class without a default value.
 
 ~~~
 class Product
@@ -68,7 +68,7 @@ assert op.price.is_approx(159.50, 0.001)
 
 ## Uncollected attributes
 
-There is three cases for an attributes to not be collected in the `new`.
+There are three cases for which an attribute is not collected in a `new` construction.
 
 * Attributes with a default value
 * Attributes with the annotation `noinit`
@@ -104,8 +104,8 @@ Therefore, `total_price` cannot be initialised with a default value, because at 
 
 ## Generalized initializers
 
-Initializers are methods that are automatically invoked by the new.
-In fact, by default, the setter of an attribute is used as a initializer.
+Initializers are methods that are automatically invoked by `new`.
+In fact, by default, the setter of an attribute is used as an initializer.
 
 `autoinit` is used to register a method as a setter.
 
@@ -124,8 +124,8 @@ var fp = new FooProduct("ABC", "Bla bla", 15.96, 1, 3)
 assert fp.z == 13
 ~~~
 
-Generalized setters are a powerful tool but often needed in only rare specific cases.
-In most case, there is no reason that an argument of a `new` construction is not stored in the object as a real attribute.
+Generalized setters are a powerful tool, but only needed in rare specific cases.
+In most cases, there is no reason for an argument of a `new` construction to not be stored in the object as a real attribute.
 
 
 ## Inheritance
@@ -213,7 +213,7 @@ They should not be used since they will be removed in a near future.
 
 ## `new` factories
 
-`new` factories permit to completely shortcut the class instantiation mechanim.
+`new` factories allow to completely shortcut the class instantiation mechanism.
 It could be used to provide `new` syntax on non-concrete class (mainly `extern class`).
 
 `new` factories behave like a top-level function that return the result of the construction.

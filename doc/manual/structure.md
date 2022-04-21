@@ -16,7 +16,7 @@ program. Nit heavily refers to the control flow in its specification:
 
 -   Adaptive typing.
 
-Some structures alter the control flow but are not described in this
+Some structures alter the control flow, but are not described in this
 section: `and`, `or`, `not`, `or else` and `return`.
 
 Note that the control flow is determined only from the position, the
@@ -118,11 +118,11 @@ loop
 end
 ~~~
 
-Note that `loop` is different from `while true` because the control flow does not consider the values of expression.
+Note that `loop` is different from `while true` because the control flow does not consider the values of expressions.
 
 ## do
 
-Single `do` are used to create scope for variables or to be attached with labeled breaks.
+Single `do` are used to create scoped variables or to be attached with labeled breaks.
 
 ~~~
 do

@@ -18,5 +18,5 @@ We are always open for suggestions or any other kind of contribution.
 If you do not want to submit code for some reason, you are always welcome to ask questions about the language or related topics via the issue system.
 
 You may also proof-read and correct documentation if you are willing!
-All the documents on this repository are written in English, however most of our contributors are not native anglophones.
+All the documents in this repository are written in English. However, most of our contributors are not native anglophones.
 Therefore we encourage people, especially those coming of an english-speaking culture to read the documentation available and submit patches to correct bad formulations, typos or related mistakes on our part through the usual system.
