@@ -21,7 +21,7 @@ module test_test_phase
 import test_phase
 
 # We usualy need specific phases
-# NOTE: `frontend` is sufficient in most case (it is often too much)
+# NOTE: `frontend` is sufficient in most cases (it is often too much)
 import frontend
 
 # The body of the specific work.

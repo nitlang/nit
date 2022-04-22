@@ -81,10 +81,10 @@ Concrete classes may have abstract methods. It is up to a refinement to provide 
 
 `super` calls the “previous” definition of the method. It is used in a redefinition of a method in a subclass or in a refinement, It can be used with or without arguments; in the latter case, the original arguments are implicitly used.
 
-The `super` of Nit behave more like the `call-next-method` of CLOS that the `super` of Java or Smalltalk. It permits the traversal of complex class hierarchies and refinement. Basically, `super` is polymorphic: the method called by `super` is not only determined by the class of
-definition of the method but also by the dynamic type of `self`.
+The `super` of Nit behaves more like the `call-next-method` of CLOS than the `super` of Java or Smalltalk. It permits the traversal of complex class hierarchies and refinement. Basically, `super` is polymorphic: the method called by `super` is not only determined by the class of
+definition of the method, but also by the dynamic type of `self`.
 
-The principle it to produce a strict order of the redefinitions of a method (the linearization). Each call to `super` call the next method definition in the linearization. From a technical point of view, the linearization algorithm used is based on C3. It ensures that:
+The principle is to produce a strict order of the redefinitions of a method (the linearization). Each call to `super` call the next method definition in the linearization. From a technical point of view, the linearization algorithm used is based on C3. It ensures that:
 
 -   A definition comes after its redefinition.
 
@@ -134,7 +134,7 @@ Operators and setters are methods that require a special syntax for their defini
 
 -   bracket operator: `[]`. Its definition requires one parameter or more and a return value. Its invocation is done with `x[y, z]` where `x` is the receiver, `y` the first argument and `z` the second argument.
 
--   setters: `something=` where `something` can be any valid method identifier. Their definitions require one parameter or more and no return value. If there is only one parameter, the invocation is done with `x.something = y` where `x` is the receiver and y the argument. If there is more that one parameter, the invocation is done with `x.something(y, z) = t` where `x` is the receiver, `y` the first argument, `z` the second argument and `t` the last argument.
+-   setters: `something=` where `something` can be any valid method identifier. Their definitions require one parameter or more and no return value. If there is only one parameter, the invocation is done with `x.something = y` where `x` is the receiver and `y` the argument. If there is more that one parameter, the invocation is done with `x.something(y, z) = t` where `x` is the receiver, `y` the first argument, `z` the second argument and `t` the last argument.
 
 -   bracket setter: `[]=`. Its definition requires two parameters or more and no return value. Its invocation is done with `x[y, z] = t` where `x` is the receiver, `y` the first argument, `z` the second argument and `t` the last argument.
 

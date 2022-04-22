@@ -45,7 +45,7 @@ Important files and directories:
  * lib/		Nit standard library
  * LICENCE	License of the software
  * Makefile	Bootstrap the Nit tools
- * misc/	Some additional files for commons text editors and tools
+ * misc/	Some additional files for common text editors and tools
  * NOTICE.md	List of the authors
  * README	This file
  * share/	Common resources used by tools

@@ -1,6 +1,6 @@
 # Local Variables and Static Typing
 
-`var` declares local variables. In fact there is no global variable in Nit, so in this document *variable* always refers to a local variable. A variable is visible up to the end of the current
+`var` declares local variables. In fact, there is no global variable in Nit, so in this document *variable* always refers to a local variable. A variable is visible up to the end of the current
 control structure. Two variables with the same name cannot coexist: no nesting nor masking.
 
 Variables are bound to values. A variable cannot be used unless it has a value in all control flow paths (à la Java).
@@ -54,7 +54,7 @@ print d + 1
 
 ## Variable Upper Bound
 
-An optional type information can be added to a variable declaration. This type is used as an upper bound of the type of the variable. When a initial value is given in a variable declaration without a specific type information, the static type of the initial value is used as an upper bound. If no type and no initial value are given, the upper bound is set to `nullable Object`.
+An optional type information can be added to a variable declaration. This type is used as an upper bound of the type of the variable. When an initial value is given in a variable declaration without a specific type information, the static type of the initial value is used as an upper bound. If no type and no initial value are given, the upper bound is set to `nullable Object`.
 
 ~~~nitish
 var e: Int # Upper bound is Int
@@ -130,7 +130,7 @@ end
 print max # outputs 11
 ~~~
 
-Note that type adaptation occurs only in an `isa` if the target type is more specific that the current type.
+Note that type adaptation occurs only in an `isa` if the target type is more specific than the current type.
 
 ~~~
 var col: Collection[Int] = [1, 2, 3]
