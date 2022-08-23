@@ -803,6 +803,9 @@ abstract class AbstractCompiler
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
+
+		# Global fonction used by the contract infrastructure
+		self.header.add_decl("extern int *getInAssertion(); // Used to know if we are currently checking some assertions.")
 	end
 
 	# Stack stocking environment for longjumps
@@ -942,6 +945,28 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		}
 		return data;
 	}
+
+	static pthread_key_t in_assertion_key;
+	static pthread_once_t in_assertion_key_created = PTHREAD_ONCE_INIT;
+
+	static void create_in_assertion()
+	{
+		pthread_key_create(&in_assertion_key, NULL);
+	}
+
+	//Flag used to know if we are currently checking some assertions.
+	int *getInAssertion()
+	{
+		pthread_once(&in_assertion_key_created, &create_in_assertion);
+		int* in_assertion = pthread_getspecific(in_assertion_key);
+		if (in_assertion == NULL) {
+		    in_assertion = malloc(sizeof(int));
+			*in_assertion = 0;
+			pthread_setspecific(in_assertion_key, in_assertion);
+		}
+		return in_assertion;
+	}
+
 #else
 	// Use __thread when available
 	__thread struct catch_stack_t catchStack = {-1, 0, NULL};
@@ -949,6 +974,12 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	struct catch_stack_t *getCatchStack()
 	{
 		return &catchStack;
+	}
+
+	__thread int in_assertion = 0; // Flag used to know if we are currently checking some assertions.
+
+	int *getInAssertion(){
+		return &in_assertion;
 	}
 #endif
 """
@@ -3855,6 +3886,18 @@ redef class AIfExpr
 		v.assign(res, v.expr(self.n_else.as(not null), null))
 		v.add("\}")
 		return res
+	end
+end
+
+redef class AIfInAssertion
+
+	redef fun stmt(v)
+	do
+		v.add("if (!*getInAssertion())\{")
+		v.add("*getInAssertion() = 1;")
+		v.stmt(self.n_body)
+		v.add("*getInAssertion() = 0;")
+		v.add("\}")
 	end
 end
 
