@@ -1,0 +1,32 @@
+/* Grammar of a mini procedural programming language */
+Grammar if_else;
+
+Lexer
+number = '0'..'9';
+int = number+;
+blank = (' '|'\n')+;
+
+add = '+';
+sub = '-';
+assign = '=';
+var = 'a';
+
+if  = 'if';
+else = 'else';
+then = 'then';
+
+true = 'true';
+false = 'false';
+
+Parser
+Ignored blank;
+
+
+instr = 
+	{if:} if bool then instr |
+	{else:} if bool then instr else instr |
+	{assign:} var assign int ;
+
+bool = 
+	{true:} true |
+	{false:} false ;
