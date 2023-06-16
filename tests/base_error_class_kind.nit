@@ -91,11 +91,11 @@ end
 
 subset SSetI
 	super IC
-	# TODO: super AC
-	# TODO: super CC
-	# TODO: super EnC
-	# TODO: super ExC
-	# TODO: super SSet
+	#alt21# super AC
+	#alt22# super CC
+	#alt23# super EnC
+	#alt24# super ExC
+	#alt25# super SSet
 end
 
 subset SSetA
