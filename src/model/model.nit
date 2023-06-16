@@ -929,6 +929,13 @@ abstract class MType
 
 		if sub isa MBottomType or sub isa MErrorType then
 			return true
+		else if sub isa MIntersectionType then
+			for t in sub.operands do
+				if t.is_subtype(mmodule, anchor, sup) then
+					return true
+				end
+			end
+			return false
 		end
 
 		assert sub isa MClassType else print_error "{sub} <? {sup}" # It is the only remaining type
@@ -937,6 +944,13 @@ abstract class MType
 		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType or sup isa MErrorType then
 			# These types are not super-types of Class-based types.
 			return false
+		else if sup isa MIntersectionType then
+			for t in sup.operands do
+				if not sub.is_subtype(mmodule, anchor, t) then
+					return false
+				end
+			end
+			return true
 		end
 
 		assert sup isa MClassType else print_error "got {sup} {sub.inspect}" # It is the only remaining type
@@ -1188,6 +1202,63 @@ abstract class MType
 	# ENSURE: `not self.need_anchor implies result == true`
 	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract
 
+	# When resolved with `anchor`, does this type possibly allows `null`?
+	fun can_be_null(mmodule: MModule, anchor: nullable MClassType): Bool
+	do
+		return false
+	end
+
+	# Intersect `self` with `other`.
+	#
+	# The resulting type represents the subtypes that are common to both `self`
+	# and `other`. The contextual parameters (`mmodule` and `anchor`) are
+	# used to resolve types during comparisons in order to simplify the
+	# resulting type.
+	#
+	# REQUIRE: `anchor == null implies not self.need_anchor and not other.need_anchor`
+	# REQUIRE: `anchor != null implies self.can_resolve_for(anchor, null, mmodule) and other.can_resolve_for(anchor, null, mmodule)`
+	fun intersection(other: MType, mmodule: MModule,
+			anchor: nullable MClassType): MType
+	do
+		# TODO: Intersections between MNullType and nullables
+		# TODO: DNF
+
+		var type1 = self
+		var type2 = other
+
+		# If one type deny null, the intersection does.
+		if not type1.can_be_null(mmodule, anchor) then
+			type2 = type2.as_notnull
+		else if	not type2.can_be_null(mmodule, anchor) then
+			type1 = type1.as_notnull
+		end
+
+		# Merge to the subtype, if applicable.
+		# TODO: Do something smarter when `anchor == null`.
+		if anchor != null or not (type1.need_anchor or type2.need_anchor) then
+			if type1.is_subtype(mmodule, anchor, type2) then
+				return type1
+			else if type2.is_subtype(mmodule, anchor, type1) then
+				return type2
+			end
+		end
+		return type1.cache_intersection(type2, mmodule)
+	end
+
+	private fun cache_intersection(other: MType, mmodule: MModule): MIntersectionType
+	do
+		# TODO: Remove the `mmodule` parameter.
+		var result = intersection_cache.get_or_null(other)
+		if result == null then
+			result = new MIntersectionType.with_operands(mmodule, self, other)
+			intersection_cache[other] = result
+		end
+		return result
+	end
+
+	# Cache of type intersections, according to thier last operand.
+	private var intersection_cache = new Map[MType, MIntersectionType]
+
 	# Return the nullable version of the type
 	# If the type is already nullable then self is returned
 	fun as_nullable: MType
@@ -1281,6 +1352,306 @@ abstract class MType
 		assert not self.need_anchor
 		return self.collect_mclassdefs(mmodule).has(mproperty.intro_mclassdef)
 	end
+end
+
+# A type that represents an operation over a set of types.
+abstract class MTypeSet[E: MType]
+	super MType
+
+	# The context in which this type was created.
+	#
+	# Used to populate `model` and look for `Object`.
+	#
+	# TODO: Remove this attribute once `as_notnull` don’t need it.
+	var mmodule: MModule
+
+	# The operands of this operation.
+	#
+	# Must not be empty. Must not be edited.
+	var operands: Set[E]
+
+	init do
+		assert operands.not_empty
+	end
+
+	redef fun model do return mmodule.model
+
+	redef fun location do return operands.first.location
+	# TODO: Return a more accurate location.
+
+	# Apply the same operator over `operands`.
+	#
+	# Does not consider properties of `self`. Used to abstract type
+	# generation done by methods of this class.
+	#
+	# May simplify the resulting expression and not return an instance of
+	# `SELF`. The contextual parameters (`mmodule` and `anchor`) are used to
+	# resolve types during comparisons in order to simplify the resulting type.
+	private fun apply_to(operands: Collection[MType], mmodule: MModule,
+			anchor: nullable MClassType): MType is abstract
+
+	redef var c_name is lazy do
+		var buffer = new Buffer.from_text(keyword)
+		# Since the arity is not implicit, we must specify it to avoid
+		# ambiguities in case this typing expression is nested in another one.
+		buffer.append(operands.length.to_s)
+		# See also `MGenericType::c_name`
+		for operand in operands do
+			buffer.append("__")
+			buffer.append(operand.c_name)
+		end
+		return buffer.to_s
+	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if not need_anchor then return true
+		for t in operands do
+			if not t.can_resolve_for(mtype, anchor, mmodule) then
+				return false
+			end
+		end
+		return true
+	end
+
+	redef fun depth
+	do
+		var result = 0
+		for operand in operands do
+			var current = operand.depth
+			if current > result then
+				result = current
+			end
+		end
+		return result
+	end
+
+	redef var full_name is lazy do
+		var names = new Array[String].with_capacity(operands.length)
+		for mtype in operands do
+			names.add(mtype.full_name)
+		end
+		return "({names.join(separator)})"
+	end
+
+	redef fun is_legal_in(mmodule, anchor)
+	do
+		for mtype in operands do
+			if not mtype.is_legal_in(mmodule, anchor) then
+				return false
+			end
+		end
+		return true
+	end
+
+	redef fun is_ok
+	do
+		for mtype in operands do
+			if not mtype.is_ok then
+				return false
+			end
+		end
+		return true
+	end
+
+	# The keyword of the operator that generates this kind of operation.
+	#
+	# Used for textual representations.
+	protected fun keyword: String is abstract
+
+	redef var need_anchor is lazy do
+		for mtype in operands do
+			if mtype.need_anchor then
+				return true
+			end
+		end
+		return false
+	end
+
+	redef fun length
+	do
+		var result = 0
+		for mtype in operands do
+			result += mtype.length
+		end
+		return result
+	end
+
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var resolved = new Set[MType]
+		for mtype in operands do
+			resolved.add(mtype.lookup_fixed(mmodule, resolved_receiver))
+		end
+		return apply_to(resolved, mmodule)
+	end
+
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+	do
+		var resolved = new Set[MType]
+		for t in operands do
+			resolved.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
+		end
+		return apply_to(resolved, mmodule)
+	end
+
+	# The separator to use in `to_s` and `full_name`.
+	#
+	# `" and "` or `" or "`
+	private fun separator: String do return " {keyword} "
+
+	redef var to_s is lazy do return "({operands.join(separator)})"
+
+	redef fun undecorate
+	do
+		# TODO: Unions must override this.
+		var undecorated = new Set[MType]
+		for t in operands do
+			undecorated.add(t.undecorate)
+		end
+		return apply_to(undecorated, mmodule)
+	end
+end
+
+# An intersection of multiple types.
+#
+# Conceptually, the subtypes that are common to all the `operands`.
+#
+# WARNING: Don’t instantiate this class directly: use `MType::intersection`
+# instead. Else, you may end up with undefined behaviors.
+class MIntersectionType
+	super MTypeSet[MType]
+
+	# Intersect the specified types.
+	init with_operands(mmodule: MModule, operands: MType...) do
+		init(mmodule, new HashSet[MType].from(operands))
+	end
+
+	redef fun ==(other)
+	do
+		# If we don’t redefine `==`, we would need to cache all intersections
+		# in the `Model` object (in order to make fixed-point algorithms work).
+		if super then return true
+		return other isa MIntersectionType and other.operands == operands
+	end
+
+	redef var hash is lazy do return operands.hash
+
+	redef fun apply_to(operands, mmodule, anchor)
+	do
+		var i = operands.iterator
+		var result = i.item
+		i.next
+		for operand in i do
+			result = result.intersection(operand, mmodule, anchor)
+		end
+		return result
+	end
+
+	redef var as_notnull is lazy do
+		var new_operands = new Set[MType]
+		# Do we need to add `Object` to the operands?
+		var add_object = true
+		for mtype in operands do
+			if mtype isa MClassType or mtype isa MNotNullType then
+				# Already not null.
+				return self
+			else
+				var operand = mtype.undecorate
+				if operand isa MNullType then
+					return model.bottom_type
+				else if operand isa MClassType or
+						operand isa MNotNullType then
+					add_object = false
+				end
+				new_operands.add operand
+			end
+		end
+		if add_object then
+			new_operands.add mmodule.object_type
+		end
+
+		# TODO: Merge to the subtype when possible.
+		var i = new_operands.iterator
+		var result = i.item
+		i.next
+		for operand in i do
+			result = result.cache_intersection(operand, mmodule)
+		end
+		return result
+	end
+
+	redef fun cache_intersection(other, mmodule)
+	do
+		var result = intersection_cache.get_or_null(other)
+		if result == null then
+			# Flatten the resulting intersection.
+			var new_operands = operands.clone
+			new_operands.add other
+			result = new MIntersectionType(mmodule, new_operands)
+			intersection_cache[other] = result
+		end
+		return result
+	end
+
+	redef fun can_be_null(mmodule, anchor)
+	do
+		for mtype in operands do
+			if not mtype.can_be_null(mmodule, anchor) then
+				return false
+			end
+		end
+		return true
+	end
+
+	redef fun collect_mclassdefs(mmodule)
+	do
+		var result = collect_mclassdefs_cache.get_or_null(mmodule)
+		if result == null then
+			result = new Set[MClassDef]
+			for mtype in operands do
+				result.add_all(mtype.collect_mclassdefs(mmodule))
+			end
+			collect_mclassdefs_cache[mmodule] = result
+		end
+		return result
+	end
+
+	private var collect_mclassdefs_cache = new Map[MModule, Set[MClassDef]]
+
+	redef fun collect_mclasses(mmodule)
+	do
+		var result = collect_mclasses_cache.get_or_null(mmodule)
+		if result == null then
+			result = new Set[MClass]
+			for mtype in operands do
+				result.add_all(mtype.collect_mclasses(mmodule))
+			end
+			collect_mclasses_cache[mmodule] = result
+		end
+		return result
+	end
+
+	private var collect_mclasses_cache = new Map[MModule, Set[MClass]]
+
+	redef fun collect_mtypes(mmodule)
+	do
+		var result = collect_mtypes_cache.get_or_null(mmodule)
+		if result == null then
+			result = new Set[MClassType]
+			for mtype in operands do
+				result.add_all(mtype.collect_mtypes(mmodule))
+			end
+			collect_mtypes_cache[mmodule] = result
+		end
+		return result
+	end
+
+	private var collect_mtypes_cache = new Map[MModule, Set[MClassType]]
+
+	redef fun keyword do return "and"
+
+	redef var undecorate is lazy do return super
 end
 
 # A type based on a class.
@@ -1510,6 +1881,11 @@ abstract class MFormalType
 	super MType
 
 	redef var as_notnull = new MNotNullType(self) is lazy
+
+	redef fun can_be_null(mmodule, anchor)
+	do
+		return anchor_to(mmodule, anchor).can_be_null(mmodule, anchor)
+	end
 end
 
 # A virtual formal type.
@@ -1519,6 +1895,15 @@ class MVirtualType
 	# The property associated with the type.
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MVirtualTypeProp
+
+	redef fun can_be_null(mmodule, anchor)
+	do
+		if anchor == null then
+			# Use the default bound.
+			return mproperty.intro.bound.can_be_null(mmodule, anchor)
+		end
+		return super
+	end
 
 	redef fun location do return mproperty.location
 
@@ -1654,6 +2039,17 @@ class MParameterType
 	# The generic class where the parameter belong
 	var mclass: MClass
 
+	redef fun can_be_null(mmodule, anchor)
+	do
+		if anchor == null then
+			# Use the default bound.
+			var intro = mclass.try_intro
+			if intro == null then return true
+			return intro.bound_mtype.arguments[rank].can_be_null(mmodule, anchor)
+		end
+		return super
+	end
+
 	redef fun model do return self.mclass.intro_mmodule.model
 
 	redef fun location do return mclass.location
@@ -1674,6 +2070,14 @@ class MParameterType
 	do
 		assert not resolved_receiver.need_anchor
 		resolved_receiver = resolved_receiver.undecorate
+		if resolved_receiver isa MTypeSet[MType] then
+			var operands = new Set[MType]
+			for operand in resolved_receiver.operands do
+				operands.add(lookup_bound(mmodule, operand))
+			end
+			return resolved_receiver.apply_to(operands, mmodule)
+		end
+
 		assert resolved_receiver isa MClassType # It is the only remaining type
 		var goalclass = self.mclass
 		if resolved_receiver.mclass == goalclass then
@@ -1733,6 +2137,22 @@ class MParameterType
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
+		if resolved_receiver isa MTypeSet[MType] then
+			var operands = new Set[MType]
+			for operand in resolved_receiver.operands do
+				operands.add(resolve_for_anchored(mtype, operand, anchor,
+						mmodule, cleanup_virtual))
+			end
+			return resolved_receiver.apply_to(operands, mmodule, anchor)
+		end
+		return resolve_for_anchored(mtype, resolved_receiver, anchor, mmodule,
+				cleanup_virtual)
+	end
+
+	private fun resolve_for_anchored(mtype: MType, resolved_receiver: MType,
+			anchor: nullable MClassType, mmodule: MModule,
+			cleanup_virtual: Bool): MType
+	do
 		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		# Eh! The parameter is in the current class.
@@ -1843,6 +2263,9 @@ class MNullableType
 	redef var c_name is lazy do return "nullable__{mtype.c_name}"
 
 	redef fun as_nullable do return self
+
+	redef fun can_be_null(mmodule, anchor) do return true
+
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		var res = super
@@ -1900,6 +2323,9 @@ class MNullType
 
 	redef var as_notnull: MBottomType = new MBottomType(model) is lazy
 	redef fun need_anchor do return false
+
+	redef fun can_be_null(mmodule, anchor) do return true
+
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
 
