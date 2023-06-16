@@ -353,10 +353,8 @@ class GlobalCompilerVisitor
 			end
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
-		else if value.mtype.ctype == "void*" and mtype.ctype == "void*" then
-			return value
 		else
-			# Bad things will appen!
+			# Bad things will happen!
 			var res = self.new_var(mtype)
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
 			self.add("PRINT_ERROR(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); fatal_exit(1);")
