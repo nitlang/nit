@@ -120,6 +120,13 @@ class Automaton
 		states.add state
 	end
 
+	# Initialize a new automaton for all string of length 1.
+	# Basically, it is /./.
+	init any
+	do
+		cla(0, null)
+	end
+
 	# Initialize a new automation for the language that accepts only a single symbol.
 	# Two state, the second is accept, one transition on `symbol`.
 	init atom(symbol: Int)
