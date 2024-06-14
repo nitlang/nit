@@ -938,6 +938,64 @@ class State
 		end
 		return null
 	end
+
+	fun vade(s: State): TSymbols
+	do
+		var res = new TSymbols
+		for t in outs do
+			if t.to != s then continue
+			var sym = t.symbol
+			if sym != null then
+				res.symbols.add sym
+			end
+		end
+		return res
+	end
+
+	fun retro(s: State): TSymbols
+	do
+		var res = new TSymbols
+		for t in ins do
+			if t.from != s then continue
+			var sym = t.symbol
+			if sym != null then
+				res.symbols.add sym
+			end
+		end
+		return res
+	end
+
+	fun path(destination: State): nullable StatePath
+	do
+		var todo = [self]
+		var paths = new HashMap[State, StatePath]
+		while todo.not_empty do
+			var s = todo.shift
+			for o in s.outs do
+				var s2 = o.to
+				if paths.has_key(s2) then continue
+				todo.add(s2)
+				paths[s2] = new StatePath(s, s.vade(s2), s2)
+				if s2 == destination then
+					var p = paths[s2]
+					while p.from != self do
+						var pp = paths[p.from]
+						pp.next = p
+						p = pp
+					end
+					return p
+				end
+			end
+		end
+		return null
+	end
+end
+
+class StatePath
+	var from: State
+	var symbols: TSymbols
+	var to: State
+	var next: nullable StatePath
 end
 
 # A range of symbols on a transition
