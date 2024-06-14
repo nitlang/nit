@@ -189,7 +189,9 @@ for arg in args do
 		arg = arg.substring(0,10) + "..."
 	end
 	var ta = new Token("{i}. {arg}")
-	a.tag_accept(ta)
+	if args.length > 1 then
+		a.tag_accept(ta)
+	end
 	nfa.absorb(a)
 end
 
@@ -207,3 +209,18 @@ dfa = dfa.to_minimal_dfa
 
 print "DFA automaton: {dfa.states.length} states (see {name}.dfa.dot)"
 dfa.to_dot.write_to_file("{name}.dfa.dot")
+
+for s in dfa.accept do
+	var path = dfa.start.path(s)
+	var l
+	if args.length > 1 then
+		l = dfa.tags[s].join(" ; ")
+	else
+		l = ""
+	end
+	if path == null then
+		print "-> {l} is unreachable"
+	else
+		print "-> {l}: {path.sample_to_s}"
+	end
+end

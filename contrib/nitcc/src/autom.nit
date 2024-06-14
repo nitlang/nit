@@ -996,6 +996,18 @@ class StatePath
 	var symbols: TSymbols
 	var to: State
 	var next: nullable StatePath
+
+	fun sample_to_s: String
+	do
+		var res = ""
+		var p
+		p = self
+		while p != null do
+			res += p.symbols.sample_to_s
+			p = p.next
+		end
+		return res
+	end
 end
 
 # A range of symbols on a transition
@@ -1024,6 +1036,17 @@ class TSymbol
 		if l <= 32 or l >= 127 then return res + "#{l}"
 		return res + l.code_point.to_s
 	end
+
+	# Return the minimum on self and the given interval
+	fun sample_on(min, max: Int): Int
+	do
+		if first > min then min = first
+		var l = last
+		if l != null and l < max then max = l
+		if min <= max then return min
+		return -1
+	end
+end
 
 # An union of symbols
 #
@@ -1116,6 +1139,44 @@ class TSymbols
 			end
 		end
 		return max
+	end
+
+	fun sample_to_s: String
+	do
+		if symbols.is_empty then return "ɛ"
+		var s = sample
+		if s <= 32 or s >=127 then return "#{s}"
+		return s.code_point.to_s
+	end
+
+	# Return a human-oriented example (eg. prefer `A` over `%` over `#12`)
+	fun sample: Int
+	do
+		var res = sample_on('A'.code_point, 'Z'.code_point)
+		if res != -1 then return res
+		res = sample_on('a'.code_point, 'a'.code_point)
+		if res != -1 then return res
+		res = sample_on('0'.code_point, '9'.code_point)
+		if res != -1 then return res
+		res = sample_on('!'.code_point, '~'.code_point)
+		if res != -1 then return res
+		return first
+	end
+
+	# Return the minimum on self and the given interval
+	fun sample_on(min, max: Int): Int
+	do
+		var res = -1
+		for s in symbols do
+			var r = s.sample_on(min, max)
+			if res == -1 then
+				res = r
+			else if r == -1 then
+			else if r < res then
+				res = r
+			end
+		end
+		return res
 	end
 end
 
