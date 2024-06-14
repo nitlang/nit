@@ -108,6 +108,19 @@ class RegexParser
 		abort
 	end
 
+	#
+	# There is some custom extensions that leverage the automaton engine.
+	#
+	# ```
+	# # (?=A)B intersection of A and B
+	# assert "(?=[ab])[bc]".parse_regex.is_equivalent("b".parse_regex)
+	# # (?!A)B remove A from B
+	# assert "(?![ab])[bc]".parse_regex.is_equivalent("c".parse_regex)
+	# # (??A) sortest A
+	# assert "(??a+)".parse_regex.is_equivalent("a".parse_regex)
+	# # (?+A) Longest A
+	# assert "(?+a?b?)".parse_regex.is_equivalent("a?b".parse_regex)
+	# ```
 	fun parse_char: Automaton
 	do
 		var c = current
@@ -116,6 +129,29 @@ class RegexParser
 		else if eof or c == '|' or c == ')' then
 			return new Automaton.epsilon
 		else if match('(') then
+			if match('?') then
+				if match('=') then
+					var r1 = parse
+					expect ')'
+					var r2 = parse_concat
+					return r2.intersect(r1)
+				else if match('!') then
+					var r1 = parse
+					expect ')'
+					var r2 = parse_concat
+					return r2.except(r1)
+				else if match('?') then
+					var r = parse
+					expect ')'
+					return r.shortest
+				else if match('+') then
+					var r = parse
+					expect ')'
+					return r.longest
+				else
+					syntax_error
+				end
+			end
 			var r = parse
 			expect ')'
 			return r
