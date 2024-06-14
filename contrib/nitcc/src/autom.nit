@@ -966,6 +966,114 @@ class TSymbol
 		if l <= 32 or l >= 127 then return res + "#{l}"
 		return res + l.code_point.to_s
 	end
+
+# An union of symbols
+#
+# Is used to manipulate an agregated edge between states
+class TSymbols
+	# List of all tsymbols?
+	var symbols = new Array[TSymbol]
+	# Is epsilon inside?
+	var epsilon = false
+
+	# Return a equivalent TSymbols with no overlapping symbols
+	fun merge_intervals: TSymbols
+	do
+		if self.symbols.is_empty then return self
+		var tsyms = new TSymbols
+		#print "Avant: {self.symbols}"
+		(new TSymbolComparator).sort(self.symbols)
+		#print "Apres: {self.symbols}"
+
+		var first = self.symbols.first.first
+		var last
+		last = first
+		for s in self.symbols do
+			if last + 1 >= s.first then
+				var sl = s.last
+				if sl == null then
+					last = null
+					break
+				end
+				if sl > last then
+					last = sl
+				end
+			else
+				tsyms.symbols.add(new TSymbol(first, last))
+				first = s.first
+				last = s.last
+				if last == null then
+					break
+				end
+			end
+		end
+		tsyms.symbols.add(new TSymbol(first, last))
+		#print "Apres2: {tsyms.symbols}"
+
+		tsyms.epsilon = self.epsilon
+		return tsyms
+	end
+
+	# Return the reverse of self
+	fun negate: TSymbols
+	do
+		print "Avant: {self.symbols}"
+		assert not epsilon
+		var ts2 = merge_intervals
+		var negprev = 0
+		var res = new TSymbols
+		for s in ts2.symbols do
+			if s.first > 0 then
+				res.symbols.add(new TSymbol(negprev+1, s.first-1))
+			end
+			var l = s.last
+			if l == null then
+				# Fast exit, we are done
+				print "Apres: {res.symbols}"
+				return res
+			else
+				negprev = l
+			end
+		end
+		# Last one is open
+		res.symbols.add(new TSymbol(negprev+1, null))
+		print "Apres: {res.symbols}"
+		return res
+	end
+
+	fun first: Int
+	do
+		var min = symbols.first.first
+		for s in symbols do
+			if s.first < min then
+				min = s.first
+			end
+		end
+		return min
+	end
+
+	fun last: nullable Int
+	do
+		var max = symbols.first.last
+		if max == null then return null
+		for s in symbols do
+			var l = s.last
+			if l == null then return null
+			if l > max then
+				max = l
+			end
+		end
+		return max
+	end
+end
+
+class TSymbolComparator
+	super Comparator
+	redef type COMPARED: TSymbol
+	redef fun compare(a, b)
+	do
+		return a.first <=> b.first
+	end
 end
 
 # A transition in a finite automaton
