@@ -26,6 +26,14 @@ class Automaton
 	# State that are accept states
 	var accept = new Array[State]
 
+	# Add an accept state without duplicate
+	fun add_accept(s: State)
+	do
+		assert states.has(s)
+		if accept.has(s) then return
+		accept.add(s)
+	end
+
 	# All states
 	var states = new Array[State]
 
@@ -612,7 +620,7 @@ class Automaton
 							dfa.add_tag(dfa_state, t)
 						end
 					end
-					dfa.accept.add(dfa_state)
+					dfa.add_accept(dfa_state)
 				end
 			end
 
@@ -708,7 +716,7 @@ class Automaton
 							dfa.add_tag(dfa_state, t)
 						end
 					end
-					dfa.accept.add(dfa_state)
+					dfa.add_accept(dfa_state)
 				end
 			end
 		end
