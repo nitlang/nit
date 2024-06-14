@@ -216,6 +216,15 @@ class Automaton
 		return c
 	end
 
+	# Return a new automaton that reject `self`.
+	# Basically, this is `/.*/.except(self)`
+	fun negate: Automaton
+	do
+		var any = new Automaton.any
+		any.close
+		return any.except(self)
+	end
+
 	# `self` absorbs all states, transitions, tags, and acceptations of `other`.
 	# An epsilon transition is added between `self.start` and `other.start`.
 	fun absorb(other: Automaton)
