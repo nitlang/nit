@@ -572,6 +572,38 @@ class Automaton
 		accept.add(st)
 	end
 
+	# Keep only the shortest prefixes of the language.
+	#
+	# ```
+	# import regexparser
+	# var a = "ab(ab)?".parse_regex.shortest
+	# assert a.is_equivalent("ab".parse_regex)
+	# ```
+	fun shortest: Automaton
+	do
+		var a = self.to_dfa
+                for s in a.accept do
+                        for t in s.outs.to_a do t.delete
+                end
+                return a
+	end
+
+	# Remove all the prefixes of the language.
+	#
+	# ```
+	# import regexparser
+	# var a = "ab(ab)?".parse_regex.longest
+	# assert a.is_equivalent("abab".parse_regex)
+	# ```
+	fun longest: Automaton
+	do
+		var a = self.to_dfa
+                for s in a.accept.to_a do
+                        if not s.outs.is_empty then a.accept.remove(s)
+                end
+                return a
+	end
+
 	# Remove states (and transitions) that does not reach an accept state
 	fun trim
 	do
