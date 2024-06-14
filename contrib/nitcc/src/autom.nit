@@ -266,6 +266,38 @@ class Automaton
 		alternate(new Automaton.epsilon)
 	end
 
+	# Do {n} on self
+	fun repeat(n: Int): Automaton
+	do
+		var res = new Automaton.epsilon
+		for i in [0..n[ do
+			res.concat(self.dup)
+		end
+		return res
+	end
+
+	# Do {n,m} on self
+	fun repeat_range(n, m: Int): Automaton
+	do
+		var res = repeat(n)
+		var alt = self.dup
+		alt.optionnal
+		for i in [n..m[ do
+			res.concat(alt.dup)
+		end
+		return res
+	end
+
+	# Do {n,} on self
+	fun repeat_close(n: Int): Automaton
+	do
+		var res = repeat(n)
+		var alt = self.dup
+		alt.close
+		res.concat(alt)
+		return res
+	end
+
 	# Remove all transitions on a given symbol
 	fun minus_sym(symbol: TSymbol)
 	do

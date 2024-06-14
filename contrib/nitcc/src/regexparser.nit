@@ -135,6 +135,11 @@ class RegexParser
 	# ```
 	# assert "a?".parse_regex.is_equivalent("a|".parse_regex)
 	# assert "a+".parse_regex.is_equivalent("aa*".parse_regex)
+	# assert "a\{3}".parse_regex.is_equivalent("aaa".parse_regex)
+	# assert "a\{1,3}".parse_regex.is_equivalent("a(aa?)?".parse_regex)
+	# assert "a\{,3}".parse_regex.is_equivalent("a\{0,3}".parse_regex)
+	# assert "a\{3,}".parse_regex.is_equivalent("aaa+".parse_regex)
+	# assert "a\{,}".parse_regex.is_equivalent("a*".parse_regex)
 	# ```
 	fun parse_unary: Automaton
 	do
@@ -148,8 +153,51 @@ class RegexParser
 		else if current == '+' then
 			next
 			r.plus
+		else if current == '{' then
+			next
+			var min
+			if current == ',' then
+				min = 0
+			else
+				min = parse_int
+			end
+			if current == '}' then
+				next
+				r = r.repeat(min)
+			else if current == ',' then
+				next
+				if current == '}' then
+					next
+					r = r.repeat_close(min)
+				else
+					var max = parse_int
+					if min > max then
+						syntax_error
+					end
+					r = r.repeat_range(min,max)
+					if current != '}' then
+						syntax_error
+					end
+					next
+				end
+			else
+				syntax_error
+			end
 		end
 		return r
+	end
+
+	fun parse_int: Int
+	do
+		var res = 0
+		loop
+			var c = current
+			if eof or c < '0' or c > '9' then
+				return res
+			end
+			res = res * 10 + (c.code_point - '0'.code_point)
+			next
+		end
 	end
 
 	fun parse_concat: Automaton
