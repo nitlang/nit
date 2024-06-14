@@ -981,9 +981,7 @@ class TSymbols
 	do
 		if self.symbols.is_empty then return self
 		var tsyms = new TSymbols
-		#print "Avant: {self.symbols}"
 		(new TSymbolComparator).sort(self.symbols)
-		#print "Apres: {self.symbols}"
 
 		var first = self.symbols.first.first
 		var last
@@ -1008,7 +1006,6 @@ class TSymbols
 			end
 		end
 		tsyms.symbols.add(new TSymbol(first, last))
-		#print "Apres2: {tsyms.symbols}"
 
 		tsyms.epsilon = self.epsilon
 		return tsyms
@@ -1017,7 +1014,6 @@ class TSymbols
 	# Return the reverse of self
 	fun negate: TSymbols
 	do
-		print "Avant: {self.symbols}"
 		assert not epsilon
 		var ts2 = merge_intervals
 		var negprev = 0
@@ -1029,7 +1025,6 @@ class TSymbols
 			var l = s.last
 			if l == null then
 				# Fast exit, we are done
-				print "Apres: {res.symbols}"
 				return res
 			else
 				negprev = l
@@ -1037,7 +1032,6 @@ class TSymbols
 		end
 		# Last one is open
 		res.symbols.add(new TSymbol(negprev+1, null))
-		print "Apres: {res.symbols}"
 		return res
 	end
 
