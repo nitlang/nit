@@ -327,6 +327,26 @@ class Automaton
 		return res
 	end
 
+	# Do `self` and `other` recognize the same language?
+	fun is_equivalent(other: Automaton): Bool
+	do
+		var this = self.dup
+		other = other.dup
+		var ta = new Token("1")
+		this.tag_accept(ta)
+		var tb = new Token("2")
+		other.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(this)
+		c.absorb(other)
+		c = c.to_dfa
+		for s in c.accept do
+			if not c.tags[s].has(ta) or not c.tags[s].has(tb) then return false
+		end
+		return true
+	end
+
 	# Reverse an automaton in place
 	fun reverse
 	do

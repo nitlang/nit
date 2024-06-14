@@ -45,6 +45,13 @@ class RegexParser
 		return c
 	end
 
+	#
+	#
+	# ```
+	# assert "[ACB]".parse_regex.is_equivalent("A|B|C".parse_regex)
+	# assert "[ACB]".parse_regex.is_equivalent("[A-C]".parse_regex)
+	# assert "[A-C]".parse_regex.is_equivalent(new Automaton.cla('A'.code_point, 'C'.code_point))
+	# ```
 	fun parse_class: Automaton
 	do
 		var negate = false
@@ -97,7 +104,7 @@ class RegexParser
 
 	fun syntax_error
 	do
-		print "Syntax error: unexepected {current} at {pos}"
+		print "Regex Syntax Error: Unexepected {current} at {pos}"
 		abort
 	end
 
@@ -123,6 +130,12 @@ class RegexParser
 		return new Automaton.atom(parse_c.code_point)
 	end
 
+	#
+	#
+	# ```
+	# assert "a?".parse_regex.is_equivalent("a|".parse_regex)
+	# assert "a+".parse_regex.is_equivalent("aa*".parse_regex)
+	# ```
 	fun parse_unary: Automaton
 	do
 		var r = parse_char
@@ -170,6 +183,12 @@ redef class String
 	# Built the finite automaton of the given ERE.
 	#
 	# Note: the automaton is basic and not optimized
+	#
+	# ```
+	# assert "".parse_regex.is_equivalent(new Automaton.epsilon)
+	# assert ".".parse_regex.is_equivalent(new Automaton.any)
+	# assert "A".parse_regex.is_equivalent(new Automaton.atom('A'.code_point))
+	# ```
 	fun parse_regex: Automaton
 	do
 		var p = new RegexParser(self)
