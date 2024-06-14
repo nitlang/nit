@@ -120,6 +120,11 @@ class Automaton
 
 	# Initialize a new automaton for the empty-string language.
 	# One state, is accept, no transition.
+	#
+	# ```
+	# import regexparser
+	# assert "".parse_regex.is_equivalent(new Automaton.epsilon)
+	# ```
 	init epsilon
 	do
 		var state = new State
@@ -130,6 +135,11 @@ class Automaton
 
 	# Initialize a new automaton for all string of length 1.
 	# Basically, it is /./.
+	#
+	# ```
+	# import regexparser
+	# assert ".".parse_regex.is_equivalent(new Automaton.any)
+	# ```
 	init any
 	do
 		cla(0, null)
@@ -137,6 +147,11 @@ class Automaton
 
 	# Initialize a new automation for the language that accepts only a single symbol.
 	# Two state, the second is accept, one transition on `symbol`.
+	#
+	# ```
+	# import regexparser
+	# assert "A".parse_regex.is_equivalent(new Automaton.atom(0x41))
+	# ```
 	init atom(symbol: Int)
 	do
 		var s = new State
@@ -151,6 +166,11 @@ class Automaton
 
 	# Initialize a new automation for the language that accepts only a range of symbols
 	# Two state, the second is accept, one transition for `from` to `to`
+	#
+	# ```
+	# import regexparser
+	# assert "[A-C]".parse_regex.is_equivalent(new Automaton.cla(0x41, 0x43))
+	# ```
 	init cla(first: Int, last: nullable Int)
 	do
 		var s = new State
@@ -165,6 +185,14 @@ class Automaton
 
 	# Concatenate `other` to `self`.
 	# Other is modified and invalidated.
+	#
+	# ```
+	# import regexparser
+	# var a = "a".parse_regex
+	# var b = "b".parse_regex
+	# a.concat(b)
+	# assert a.is_equivalent("ab".parse_regex)
+	# ```
 	fun concat(other: Automaton)
 	do
 		var s2 = other.start
@@ -177,6 +205,14 @@ class Automaton
 
 	# `self` become the alternation of `self` and `other`.
 	# `other` is modified and invalidated.
+	#
+	# ```
+	# import regexparser
+	# var a = "a".parse_regex
+	# var b = "b".parse_regex
+	# a.alternate(b)
+	# assert a.is_equivalent("a|b".parse_regex)
+	# ```
 	fun alternate(other: Automaton)
 	do
 		var s = new State
@@ -202,6 +238,14 @@ class Automaton
 	# Return a new automaton that recognize `self` but not `other`.
 	# For a theoretical POV, this is the subtraction of languages.
 	# Note: the implementation use `to_dfa` internally, so the theoretical complexity is not cheap.
+	#
+	# ```
+	# import regexparser
+	# var a = "a(b*|c*)d".parse_regex
+	# var b = ".b+.".parse_regex
+	# var c = "ac*d".parse_regex
+	# assert a.except(b).is_equivalent(c)
+	# ```
 	fun except(other: Automaton): Automaton
 	do
 		var ta = new Token("1")
@@ -233,6 +277,39 @@ class Automaton
 		return any.except(self)
 	end
 
+	# Return a new automaton that recognize `self` if and only if `other` is also recognized.
+	# For a theoretical POV, this is the intersecton of languages.
+	# Note: the implementation use `to_dfa` internally, so the theoretical complexity is not cheap.
+	#
+	# ```
+	# import regexparser
+	# var a = "a[bc]*d".parse_regex
+	# var b = "a*b*c*d*".parse_regex
+	# var c = "ab*c*d".parse_regex
+	# assert a.intersect(b).is_equivalent(c)
+	# ```
+	fun intersect(other: Automaton): Automaton
+	do
+		var ta = new Token("1")
+		self.tag_accept(ta)
+		var tb = new Token("2")
+		other.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(self)
+		c.absorb(other)
+		c = c.to_dfa
+		c.accept.clear
+		for s in c.retrotags[ta] do
+			if c.tags[s].has(tb) then
+				c.accept.add(s)
+			end
+		end
+		c.clear_tag(ta)
+		c.clear_tag(tb)
+		return c
+	end
+
 	# `self` absorbs all states, transitions, tags, and acceptations of `other`.
 	# An epsilon transition is added between `self.start` and `other.start`.
 	fun absorb(other: Automaton)
@@ -244,6 +321,14 @@ class Automaton
 	end
 
 	# Do the Kleene closure (*) on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]*".parse_regex
+	# a.close
+	# assert a.is_equivalent(b)
+	# ```
 	fun close
 	do
 		for a1 in accept do
@@ -253,6 +338,16 @@ class Automaton
 	end
 
 	# Do the + on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]+".parse_regex
+	# var c = "[ab][ab]*".parse_regex
+	# a.plus
+	# assert a.is_equivalent(b)
+	# assert a.is_equivalent(c)
+	# ```
 	fun plus
 	do
 		for a1 in accept do
@@ -261,12 +356,32 @@ class Automaton
 	end
 
 	# Do the ? on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]?".parse_regex
+	# var c = "a|b|".parse_regex
+	# a.optionnal
+	# assert a.is_equivalent(b)
+	# assert a.is_equivalent(c)
+	# ```
 	fun optionnal
 	do
 		alternate(new Automaton.epsilon)
 	end
 
 	# Do {n} on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]\{3}".parse_regex
+	# var c = "[ab][ab][ab]".parse_regex
+	# var x = a.repeat(3)
+	# assert x.is_equivalent(b)
+	# assert x.is_equivalent(c)
+	# ```
 	fun repeat(n: Int): Automaton
 	do
 		var res = new Automaton.epsilon
@@ -277,6 +392,16 @@ class Automaton
 	end
 
 	# Do {n,m} on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]\{3,5}".parse_regex
+	# var c = "[ab][ab][ab][ab]?[ab]?".parse_regex
+	# var x = a.repeat_range(3,5)
+	# assert x.is_equivalent(b)
+	# assert x.is_equivalent(c)
+	# ```
 	fun repeat_range(n, m: Int): Automaton
 	do
 		var res = repeat(n)
@@ -289,6 +414,16 @@ class Automaton
 	end
 
 	# Do {n,} on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]\{3,}".parse_regex
+	# var c = "[ab][ab][ab][ab]*".parse_regex
+	# var x = a.repeat_close(3)
+	# assert x.is_equivalent(b)
+	# assert x.is_equivalent(c)
+	# ```
 	fun repeat_close(n: Int): Automaton
 	do
 		var res = repeat(n)
@@ -299,6 +434,17 @@ class Automaton
 	end
 
 	# Remove all transitions on a given symbol
+	#
+	# A sub-automaton can become disconnected and unreachable.
+	# Accept state are not modified part that remin connected can become deadends.
+	#
+	# ```
+	# import regexparser
+	# var a = "ab*c|db".parse_regex.to_dfa
+	# var sym = new TSymbol('b'.code_point, 'b'.code_point)
+	# a.minus_sym(sym)
+	# assert a.is_equivalent("ac".parse_regex)
+	# ```
 	fun minus_sym(symbol: TSymbol)
 	do
 		var f = symbol.first
@@ -360,6 +506,15 @@ class Automaton
 	end
 
 	# Do `self` and `other` recognize the same language?
+	#
+	# ```
+	# var a0 = new Automaton.any
+	# var a1 = new Automaton.cla(0, null)
+	# var a2 = new Automaton.atom(65)
+	# assert a0.is_equivalent(a0)
+	# assert a0.is_equivalent(a1)
+	# assert not a0.is_equivalent(a2)
+	# ```
 	fun is_equivalent(other: Automaton): Bool
 	do
 		var this = self.dup
@@ -380,6 +535,15 @@ class Automaton
 	end
 
 	# Reverse an automaton in place
+	#
+	# ```
+	# import regexparser
+	# var r = "a+b?[cd]*".parse_regex
+	# var r2 = r.dup
+	# r.reverse
+	# assert r.is_equivalent("[cd]*b?a+".parse_regex)
+	# assert not r.is_equivalent(r2)
+	# ```
 	fun reverse
 	do
 		for s in states do
