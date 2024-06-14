@@ -519,7 +519,8 @@ class Automaton
 				f.append(",label=\"{state_nb}\"")
 			end
 			f.append("];\n")
-			var outs = new HashMap[State, Array[nullable TSymbol]]
+			# TSymbols for each destination
+			var outs = new HashMap[State, TSymbols]
 			for t in s.outs do
 				var a
 				var s2 = t.to
@@ -527,25 +528,41 @@ class Automaton
 				if outs.has_key(s2) then
 					a = outs[s2]
 				else
-					a = new Array[nullable TSymbol]
+					a = new TSymbols
 					outs[s2] = a
 				end
-				a.add(c)
+				if c == null then
+					a.epsilon = true
+				else
+					a.symbols.add(c)
+				end
 			end
 			for s2, a in outs do
 				var labe = ""
-				for c in a do
+				a = a.merge_intervals
+				if a.epsilon then
+					labe += "ε"
+					# else if false then
+				else if merge_transitions or else true then
+					# Present the negation if simpler
+					if a.first == 0 and a.last == null then
+						a = a.negate
+						if a.symbols.is_empty then
+							labe = "ANY"
+						else
+							labe = "NOT"
+						end
+					end
+				end
+				for c in a.symbols do
 					if merge_transitions == false then labe = ""
 					if not labe.is_empty then labe += "\n"
-					if c == null then
-						labe += "ε"
-					else
-						labe += c.to_s
-					end
+					labe += c.to_s
 					if merge_transitions == false then
 						f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_dot}\"];\n")
 					end
 				end
+				#labe = s.vade(s2).sample_to_s
 				if merge_transitions or else true then
 					f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 				end
@@ -1009,6 +1026,8 @@ class StatePath
 		return res
 	end
 end
+
+
 
 # A range of symbols on a transition
 class TSymbol
