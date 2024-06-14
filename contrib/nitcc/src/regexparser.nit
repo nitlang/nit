@@ -111,15 +111,13 @@ class RegexParser
 	fun parse_char: Automaton
 	do
 		var c = current
-		if c == '[' then
-			next
+		if match('[') then
 			return parse_class
 		else if eof or c == '|' or c == ')' then
 			return new Automaton.epsilon
-		else if c == '(' then
-			next
+		else if match('(') then
 			var r = parse
-			if next != ')' then syntax_error
+			expect ')'
 			return r
 		else if c == '?' or c == '*' or c == '+' or c == '{' then
 			syntax_error
@@ -144,30 +142,23 @@ class RegexParser
 	fun parse_unary: Automaton
 	do
 		var r = parse_char
-		if current == '?' then
-			next
+		if match('?') then
 			r.optionnal
-		else if current == '*' then
-			next
+		else if match('*') then
 			r.close
-		else if current == '+' then
-			next
+		else if match('+') then
 			r.plus
-		else if current == '{' then
-			next
+		else if match('{') then
 			var min
 			if current == ',' then
 				min = 0
 			else
 				min = parse_int
 			end
-			if current == '}' then
-				next
+			if match('}') then
 				r = r.repeat(min)
-			else if current == ',' then
-				next
-				if current == '}' then
-					next
+			else if match(',') then
+				if match('}') then
 					r = r.repeat_close(min)
 				else
 					var max = parse_int
@@ -175,10 +166,7 @@ class RegexParser
 						syntax_error
 					end
 					r = r.repeat_range(min,max)
-					if current != '}' then
-						syntax_error
-					end
-					next
+					expect '}'
 				end
 			else
 				syntax_error
@@ -213,12 +201,28 @@ class RegexParser
 	fun parse_alt: Automaton
 	do
 		var r = parse_concat
-		while current == '|' do
-			next
+		while match('|') do
 			var r2 = parse_concat
 			r.alternate(r2)
 		end
 		return r
+	end
+
+	# Consume c or produce an error
+	fun expect(c: Char)
+	do
+		if next != c then syntax_error
+	end
+
+	# If c is current, consume it and return true
+	fun match(c: Char): Bool
+	do
+		if current == c then
+			next
+			return true
+		else
+			return false
+		end
 	end
 
 	fun parse: Automaton
