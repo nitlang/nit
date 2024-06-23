@@ -130,8 +130,10 @@ private class CheckNameVisitor
 		var prod = new Production(name)
 		prod.acname = "Nodes[{e.acname}]"
 		v1.gram.prods.add(prod)
-		prod.new_alt("{name}_one", e)
-		prod.new_alt("{name}_more", prod, e)
+		var alt1 = prod.new_alt("{name}_one", e)
+		alt1.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+		var alt2 = prod.new_alt("{name}_more", prod, e)
+		alt2.codes = [new CodePop, new CodePop, new CodeAdd: Code]
 		plusizes[e] = prod
 		return prod
 	end

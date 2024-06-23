@@ -468,6 +468,23 @@ class CodeNew
 	redef fun to_s do return "New {alt.name}/{alt.elems.length}"
 end
 
+# Allocate a new empty AST node array for an alternative
+class CodeNewNodes
+	super Code
+
+	# The associated alternative
+	var alt: Alternative
+
+	redef fun to_s do return "NewArray {alt.name}"
+end
+
+# Add an element to a Nodes array
+class CodeAdd
+	super Code
+
+	redef fun to_s do return "Add"
+end
+
 # Get null
 class CodeNull
 	super Code
@@ -835,49 +852,49 @@ private class Generator
 			i -= 1
 		end
 
-		if alt.name.has_suffix("+_more") then
-			add "\t\tvar prod = n0"
-			add "\t\tn0.children.add(n1)"
-		else if alt.name.has_suffix("+_one") then
-			add "\t\tvar prod = new {alt.prod.acname}"
-			add "\t\tprod.children.add(n0)"
-		else
-			alt.make_codes
-			var cpt = 0
-			i = 0
-			var st = new Array[String]
-			for c in alt.codes.as(not null) do
-				if c isa CodePop then
-					st.add "n{i}"
-					i += 1
-				else if c isa CodeNull then
-					st.add "null"
-				else if c isa CodeNew then
-					var calt = c.alt
-					cpt += 1
-					var from = st.length - calt.elems.length
-					var args = new List[String]
-					for j in [from..st.length[ do
-						args.unshift(st.pop)
-					end
-
-					if args.is_empty then
-						add "\t\tvar p{cpt} = new {calt.cname}"
-					else
-						add "\t\tvar p{cpt} = new {calt.cname}({args.join(", ")})"
-					end
-					#var x = 0
-					#for j in [from..st.length[ do
-						#if st[j] == "null" then continue
-						#add "\t\tp{cpt}.n_{calt.elemname(x)} = {st[j]}"
-						#x += 1
-					#end
-					st.add("p{cpt}")
+		alt.make_codes
+		var cpt = 0
+		i = 0
+		var st = new Array[String]
+		for c in alt.codes.as(not null) do
+			if c isa CodePop then
+				st.add "n{i}"
+				i += 1
+			else if c isa CodeNull then
+				st.add "null"
+			else if c isa CodeNew then
+				var calt = c.alt
+				cpt += 1
+				var from = st.length - calt.elems.length
+				var args = new List[String]
+				for j in [from..st.length[ do
+					args.unshift(st.pop)
 				end
+
+				if args.is_empty then
+					add "\t\tvar p{cpt} = new {calt.cname}"
+				else
+					add "\t\tvar p{cpt} = new {calt.cname}({args.join(", ")})"
+				end
+				#var x = 0
+				#for j in [from..st.length[ do
+					#if st[j] == "null" then continue
+					#add "\t\tp{cpt}.n_{calt.elemname(x)} = {st[j]}"
+					#x += 1
+				#end
+				st.add("p{cpt}")
+			else if c isa CodeNewNodes then
+				cpt += 1
+				add "\t\tvar p{cpt} = new {c.alt.prod.acname}"
+				st.add("p{cpt}")
+			else if c isa CodeAdd then
+				var a1 = st.pop
+				var a0 = st.last
+				add "\t\t{a0}.children.add({a1})"
 			end
-			assert st.length == 1
-			add "\t\tvar prod = {st.first}"
 		end
+		assert st.length == 1
+		add "\t\tvar prod = {st.first}"
 
 		add "\t\tparser.node_stack.push prod"
 		if alt.prod.accept then
