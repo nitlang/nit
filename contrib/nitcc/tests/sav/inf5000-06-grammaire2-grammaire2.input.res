@@ -1,41 +1,95 @@
-T_Id@1,1:prods
-TAnonymous@1,7:=
-T_Altid@1,9:{many:}
-T_Id@1,17:prods
-T_Id@1,23:prod
-TAnonymous@1,29:|
-T_Altid@1,31:{one:}
-T_Id@1,38:prod
-TAnonymous@1,43:;
-T_Id@2,1:prod
-TAnonymous@2,6:=
-T_Id@2,8:id
-T_Str@2,11:'='
-T_Id@2,15:alts
-T_Str@2,20:';'
-TAnonymous@2,24:;
-T_Id@3,1:alts
-TAnonymous@3,6:=
-T_Altid@3,8:{many:}
-T_Id@3,16:alts
-T_Str@3,21:'|'
-T_Id@3,25:alt
-TAnonymous@3,29:|
-T_Altid@3,31:{one:}
-T_Id@3,38:alt
-TAnonymous@3,42:;
-T_Id@4,1:alt
-TAnonymous@4,5:=
-T_Id@4,7:altid
-T_Id@4,13:atoms
-TAnonymous@4,19:|
-T_Id@4,21:atoms
-TAnonymous@4,27:;
-T_Id@5,1:atoms
-TAnonymous@5,7:=
-T_Altid@5,9:{many:}
-T_Id@5,17:atoms
-T_Id@5,23:atom
-TAnonymous@5,28:|
-T_Altid@5,30:{none:}
-5,38. Syntax error: Unexpected character 'E'.
+NLexerError@(5:38-5:38)='E'
+Nodes[Node]
+  Nodes[Nprod]
+    prod
+      id@(1:1-1:6)='prods'
+      '='@(1:7-1:8)
+      Nodes[N_group1]
+        _group1_single
+          alt
+            altid@(1:9-1:16)='{many:}'
+            Nodes[Natom]
+              atom_id
+                id@(1:17-1:22)='prods'
+              atom_id
+                id@(1:23-1:27)='prod'
+          '|'@(1:29-1:30)
+        _group0_single
+          alt
+            altid@(1:31-1:37)='{one:}'
+            Nodes[Natom]
+              atom_id
+                id@(1:38-1:42)='prod'
+      ';'@(1:43-1:44)
+    prod
+      id@(2:1-2:5)='prod'
+      '='@(2:6-2:7)
+      Nodes[N_group1]
+        _group0_single
+          alt
+            Nodes[Natom]
+              atom_id
+                id@(2:8-2:10)='id'
+              atom_str
+                str@(2:11-2:14)='\'=\''
+              atom_id
+                id@(2:15-2:19)='alts'
+              atom_str
+                str@(2:20-2:23)='\';\''
+      ';'@(2:24-2:25)
+    prod
+      id@(3:1-3:5)='alts'
+      '='@(3:6-3:7)
+      Nodes[N_group1]
+        _group1_single
+          alt
+            altid@(3:8-3:15)='{many:}'
+            Nodes[Natom]
+              atom_id
+                id@(3:16-3:20)='alts'
+              atom_str
+                str@(3:21-3:24)='\'|\''
+              atom_id
+                id@(3:25-3:28)='alt'
+          '|'@(3:29-3:30)
+        _group0_single
+          alt
+            altid@(3:31-3:37)='{one:}'
+            Nodes[Natom]
+              atom_id
+                id@(3:38-3:41)='alt'
+      ';'@(3:42-3:43)
+    prod
+      id@(4:1-4:4)='alt'
+      '='@(4:5-4:6)
+      Nodes[N_group1]
+        _group1_single
+          alt
+            Nodes[Natom]
+              atom_id
+                id@(4:7-4:12)='altid'
+              atom_id
+                id@(4:13-4:18)='atoms'
+          '|'@(4:19-4:20)
+        _group0_single
+          alt
+            Nodes[Natom]
+              atom_id
+                id@(4:21-4:26)='atoms'
+      ';'@(4:27-4:28)
+  id@(5:1-5:6)='atoms'
+  '='@(5:7-5:8)
+  Nodes[N_group1]
+    _group1_single
+      alt
+        altid@(5:9-5:16)='{many:}'
+        Nodes[Natom]
+          atom_id
+            id@(5:17-5:22)='atoms'
+          atom_id
+            id@(5:23-5:27)='atom'
+      '|'@(5:28-5:29)
+    _group0_single
+      alt
+        altid@(5:30-5:37)='{none:}'
+  NLexerError@(5:38-5:38)='E'
