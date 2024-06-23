@@ -123,6 +123,17 @@ private class CheckNameVisitor
 	var plusizes = new HashMap[Element, Production]
 
 	# Create a + version of an element
+	#
+	# ```
+	# foo = x bar+ y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs0 y | z ;
+	# abs0 = {one:} bar | {more:} abs0 bar ;
+	# ```
 	fun plusize(e: Element): Production
 	do
 		if plusizes.has_key(e) then return plusizes[e]
@@ -142,6 +153,17 @@ private class CheckNameVisitor
 	var quesizes = new HashMap[Element, Production]
 
 	# Create a ? version of an element
+	#
+	# ```
+	# foo = x bar? y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs0 y | z ;
+	# abs0 = {one:} bar | {none} Empty ;
+	# ```
 	fun quesize(e: Element): Production
 	do
 		if quesizes.has_key(e) then return quesizes[e]
