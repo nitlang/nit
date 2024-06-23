@@ -112,7 +112,16 @@ elem =
 	{ques:} elem '?' |
 	{plus:} elem '+' |
 	{group:} '(' elem+ ')' |
+	{groupsep:} '(' elem+ separator [sep:]elem+ ')' mult |
 	{empty:} 'Empty' ;
+
+separator =
+	{sep:} 'Separator' |
+	{tail:} 'Tail' ;
+
+mult =
+	{star:} '*' |
+	{plus:} '+' ;
 
 priority =
 	{left:} 'Left' alts |
