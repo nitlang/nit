@@ -111,6 +111,7 @@ elem =
 	{star:} elem '*' |
 	{ques:} elem '?' |
 	{plus:} elem '+' |
+	{group:} '(' elem+ ')' |
 	{empty:} 'Empty' ;
 
 priority =

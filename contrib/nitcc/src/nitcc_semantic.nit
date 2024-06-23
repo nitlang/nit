@@ -157,6 +157,22 @@ private class CheckNameVisitor
 		return prod
 	end
 
+	# Pool for anoymous grouped production (reuse them!)
+	var groupizes = new HashMap[Array[Element], Production]
+
+	# Create an anonymous production that groups some elements.
+	# Note: an anonymous production is always returned, even if `es` is empty or single.
+	fun groupize(es: Array[Element]): Production
+	do
+		if groupizes.has_key(es) then return groupizes[es]
+		var name = "_group{groupizes.length}"
+		var prod = new Production(name)
+		v1.gram.prods.add(prod)
+		var a1 = prod.new_alt2("{name}_single", es)
+		groupizes[es] = prod
+		return prod
+	end
+
 	# The current nexpr, used to track dependency on named expressions (see `Nexpr::precs`)
 	var nexpr: nullable Nexpr = null
 
@@ -699,6 +715,17 @@ redef class Nelem_plus
 		super
 		var elem = v.elems.pop
 		elem = v.plusize(elem)
+		set_elem(v, null, elem)
+	end
+end
+
+redef class Nelem_group
+	redef fun accept_check_name_visitor(v) do
+		var old = v.elems
+		v.elems = new Array[Element]
+		super
+		var elem = v.groupize(v.elems)
+		v.elems = old
 		set_elem(v, null, elem)
 	end
 end
