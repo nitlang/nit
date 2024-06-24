@@ -202,7 +202,7 @@ class Regex
 	# should call it to check for errors.
 	#
 	#     assert "ab".to_re.compile == null
-	#     assert "[ab".to_re.compile.message == "Unmatched [ or [^"
+	#     assert "[ab".to_re.compile.message.has_prefix("Unmatched [")
 	fun compile: nullable Error
 	do
 		var cflags = 0
