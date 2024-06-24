@@ -181,6 +181,12 @@ end
 class TCbra
 	super Token
 end
+class TObrace
+	super Token
+end
+class TCbrace
+	super Token
+end
 class TComma
 	super Token
 end
@@ -1003,6 +1009,7 @@ end
 class ACallrefExpr
 	super AExpr
 	var n_amp: TAmp is writable, noinit
+	var n_type: nullable AType = null is writable
 	var n_expr: AExpr is writable, noinit
 	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit

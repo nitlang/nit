@@ -29,7 +29,7 @@ parser.nit: .nit.sablecc3 xss/*.xss
 	${SABLECC3ALTGEN} -c .nit.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes .nit.sablecc3
 	mv -f -- parser.nit .parser-nofact.nit
 	./fact_parser.pl .parser-nofact.nit > parser.nit
-	perl -np -i.orig -e 's/([ (\[])P([A-Z])/\1A\2/g;' -e 's/"{"/"\\{"/g;' parser.nit parser_abs.nit parser_prod.nit lexer.nit
+	perl -np -i.orig -e 's/([ (\[])P([A-Z])/\1A\2/g;' -e 's/"\{"/"\\{"/g;' parser.nit parser_abs.nit parser_prod.nit lexer.nit
 
 clean:
 	rm -f -- .nit.sablecc3 .nit.sablecc3.dump .parser-nofact.nit || true
