@@ -74,7 +74,7 @@ class TestExampleTemplatePug
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template_pug is test do
+	fun test_example_template_pug do # is test do # skip because dependendy on an external tool pug
 		var app = new App
 		app.use("/", new MyTemplatePugHandler)
 		run_test(app)
@@ -89,7 +89,7 @@ class TestExampleTemplatePugFile
 		system "curl -s {host}:{port}/"
 	end
 
-	fun test_example_template_pug_file is test do
+	fun test_example_template_pug_file do # is test do # skip because dependendy on an external tool pug
 		var app = new App
 		var handler = new MyTemplatePugFileHandler
 		handler.pug_file = test_path / "../example_template.pug"
