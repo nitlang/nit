@@ -1,0 +1,258 @@
+name: CI
+
+on: [ pull_request ]
+env:
+  # BASIC_PACKAGES is used fo the basic tools (make)
+  BASIC_PACKAGES: git build-essential ccache libgc-dev graphviz libunwind-dev libreadline-dev pkg-config
+  # MORE_PACKAGES is used for more tools and libs (make more)
+  MORE_PACKAGES: libgmp-dev libcurl4-openssl-dev libevent-dev openjdk-17-jdk-headless libgles-dev libegl-dev libsdl1.2-dev libsdl2-dev libsdl2-mixer-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-net-dev libsdl2-ttf-dev libgtk-3-dev inkscape postgresql libxdg-basedir-dev gettext libsqlite3-dev libpq-dev libmongoc-dev openmpi-bin libopenmpi-dev
+  JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64/
+  JNI_LIB_PATH: /usr/lib/jvm/java-17-openjdk-amd64/lib/server/
+  LD_LIBRARY_PATH: /usr/lib/jvm/java-17-openjdk-amd64/lib/server/
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y $BASIC_PACKAGES
+    - run: make
+    - uses: actions/upload-artifact@v4
+      with:
+        path: bin
+        name: bin
+
+  sanity-check:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - run: misc/jenkins/ensuregit.sh
+    - run: misc/jenkins/checkwhitespaces.sh
+      if: ${{ !cancelled() }}
+    - run: misc/jenkins/checklicense.sh
+      if: ${{ !cancelled() }}
+    - run: misc/jenkins/checksignedoffby.sh
+      if: ${{ !cancelled() }}
+
+  tests-some:
+    runs-on: ubuntu-24.04
+    needs: [build]
+    container: "ubuntu:24.04"
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+      mongo:
+        image: mongo
+      neo4j:
+        image: 'neo4j:2.3'
+        env:
+          NEO4J_AUTH: none
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [nitcg, nitcs, nitcsg, nitce, niti]
+    steps:
+    - name: Install dependencies
+      run: apt-get update && apt-get install -y $BASIC_PACKAGES $MORE_PACKAGES
+    - uses: actions/checkout@v4
+    - run: misc/jenkins/ensuregit.sh
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: make src/version.nit
+    - run: cd tests && ./search_tests_git.sh origin/master HEAD > list
+    - run: cd tests && ./tests.sh --engine ${{ matrix.engine }} `cat list`
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: 'tests/*.xml'
+        name: tests-some-${{ matrix.engine }}
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: 'tests/out/*.res'
+        name: tests-some-${{ matrix.engine }}-res
+
+  tests-full:
+    runs-on: ubuntu-24.04
+    needs: [tests-some]
+    container: "ubuntu:24.04"
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+      mongo:
+        image: mongo
+      neo4j:
+        image: 'neo4j:2.3'
+        env:
+          NEO4J_AUTH: none
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [nitcg, nitcs, nitcsg, nitce, niti]
+    steps:
+    - name: Install dependencies
+      run: apt-get update && apt-get install -y $BASIC_PACKAGES $MORE_PACKAGES
+    - uses: actions/checkout@v4
+    - run: misc/jenkins/ensuregit.sh
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: make src/version.nit
+    - name: Run tests
+      run: cd tests && ./testfull.sh --engine ${{ matrix.engine }}
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: 'tests/*.xml'
+        name: tests-full-${{ matrix.engine }}
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: 'tests/out/*.res`'
+        name: tests-full-${{ matrix.engine }}-res
+
+  nitunit-some:
+    runs-on: ubuntu-24.04
+    needs: [build]
+    container: "ubuntu:24.04"
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+      mongo:
+        image: mongo
+      neo4j:
+        image: 'neo4j:2.3'
+        env:
+          NEO4J_AUTH: none
+    steps:
+    - name: Install dependencies
+      run: apt-get update && apt-get install -y $BASIC_PACKAGES $MORE_PACKAGES
+    - uses: actions/checkout@v4
+    - run: misc/jenkins/ensuregit.sh
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: make nitunit-some
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: '*.xml'
+        name: nitunit-some
+
+  nitunit-full:
+    runs-on: ubuntu-24.04
+    needs: [nitunit-some]
+    container: "ubuntu:24.04"
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+      mongo:
+        image: mongo
+      neo4j:
+        image: 'neo4j:2.3'
+        env:
+          NEO4J_AUTH: none
+    steps:
+    - name: Install dependencies
+      run: apt-get update && apt-get install -y $BASIC_PACKAGES $MORE_PACKAGES
+    - uses: actions/checkout@v4
+    - run: misc/jenkins/ensuregit.sh
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: make nitunit-full
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: '*.xml'
+        name: nitunit-full
+
+  test-contrib:
+    runs-on: ubuntu-24.04
+    needs: [build]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y $BASIC_PACKAGES $MORE_PACKAGES
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: 'PATH=$PWD/bin:$PATH make test-contrib'
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: '*.xml'
+        name: test-contrib
+
+  bootstrap-full:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y $BASIC_PACKAGES
+    - run: make bootstrap-full
+
+  bench-fast:
+    runs-on: ubuntu-24.04
+    needs: [build]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y $BASIC_PACKAGES gnuplot
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: 'PATH=$PWD/bin:$PATH make bench-fast'
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: |-
+          benchmarks/*.dat
+          benchmarks/*.gnu
+          benchmarks/*.png
+          benchmarks/*.html
+        name: bench-fast
+
+  valgrind:
+    runs-on: ubuntu-24.04
+    needs: [build]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y $BASIC_PACKAGES valgrind
+    - uses: actions/download-artifact@v4
+    - run: chmod +x bin/*
+    - run: make valgrind
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        path: 'valgrind.out'
+        name: valgrind
+
+  info:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - run: pwd
+    - run: id
+    - run: ls -al
+    - run: git branch -av || true
+    - run: lscpu || true
+    - run: git log --oneline --graph --decorate | head -n 50
+    - run: cat /etc/issue
+    - run: cat /etc/os-release
+    - run: env
+
+  event_file:
+    name: "Event File"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: Event File
+        path: ${{ github.event_path }}
