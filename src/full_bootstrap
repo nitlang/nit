@@ -1,6 +1,8 @@
 set -e
 set -x
 
+./git-gen-version.sh
+
 # Check c_src is up-to-date
 make -C ../c_src
 
