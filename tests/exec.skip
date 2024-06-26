@@ -1,5 +1,6 @@
 example_exec_ls
 leapfrog_curses
+simple_file_server
 websocket_server
 converter
 show_basedir
