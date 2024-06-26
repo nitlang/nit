@@ -29,7 +29,7 @@ Cookie: i:0123, s:asdf
 [Client] curl -s localhost:*****/simple_answer --get --data-urlencode 's=b b'
 [Response] Simple answer
 Method: GET, URI: /simple_answer, trailing: /
-GET args: s:b b
+GET args: s:b+b
 
 [Client] curl -s localhost:*****/params_answer/0123/asdf
 [Response] Simple answer
