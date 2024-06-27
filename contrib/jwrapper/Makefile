@@ -40,7 +40,7 @@ check: bin/jwrapper tests/wildcards.javap
 	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
 	nitpick -q tests/wildcards.nit
 	make -C examples/queue/ check
-	make -C examples/java_api/ check
+	#make -C examples/java_api/ check #FIXME: no more `rt.jar` file?
 
 check-libs: bin/jwrapper
 	# This config dependent rule must be tweaked according to each system

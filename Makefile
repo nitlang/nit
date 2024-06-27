@@ -49,7 +49,16 @@ bin/nitdoc:
 	cd src; make ../bin/nitdoc
 
 bin/nitls:
-	cd src; make ../bin/nitls
+	cd src; make
+
+bin/nitunit:
+	cd src; make
+
+bin/nitpick:
+	cd src; make
+
+src/version.nit:
+	cd src && ./git-gen-version.sh
 
 doc/stdlib/index.html: bin/nitdoc bin/nitls
 	@echo '***************************************************************'
@@ -88,3 +97,76 @@ clean:
 	done
 	@echo ""
 	@echo "Nit was succesfully cleaned."
+
+# BASIC CI-CD JOBS ########################################################
+
+sanity-check:
+	misc/jenkins/checkwhitespaces.sh
+	misc/jenkins/checksignedoffby.sh
+	misc/jenkins/checkbinaryfiles.sh
+	misc/jenkins/checklicense.sh
+
+nitunit-some: bin/nitls bin/nitunit src/version.nit
+	misc/jenkins/nitunit-some.sh
+
+nitpick-full: bin/nitls bin/nitpick src/version.nit
+	bin/nitls lib src examples contrib
+	bin/nitls -Pp lib src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
+	xargs bin/nitpick < list.txt
+
+
+# LIB, CONTRIB AND OOT ##############################################
+
+nitunit-full: bin/nitls bin/nitunit src/version.nit
+	bin/nitls -Pp lib src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
+	ls -1 doc/manual/*.md >> list.txt
+	xargs bin/nitunit -v < list.txt
+
+nitunit-src: bin/nitls bin/nitunit src/version.nit
+	bin/nitls -Pp src examples | grep -v -f tests/gitlab_ci.skip > list.txt || true # filter what is skipped by tests.sh
+	xargs bin/nitunit -v < list.txt
+
+test-contrib: src/version.nit
+	misc/jenkins/check_contrib.sh all check
+	grep 'error message' *.xml > status.txt || true
+	test ! -s status.txt # no lines, no errors
+
+# MISC ##############################################################
+
+bootstrap-full:
+	cd src && ./full_bootstrap && ./ncall.sh
+
+bench-fast:
+	cd benchmarks && ./bench_engines.sh --fast --fast --html options
+
+nitunit-manual: bin/nitunit
+	bin/nitunit doc/manual/*.md
+
+# MORE TOOLS ########################################################
+
+build-more-tools: more
+	$(MAKE) -C contrib/nitcc
+
+valgrind: src/version.nit
+	mkdir -p valgrind.out
+	bin/nitc src/nitc.nit # To warm-up the cache
+	src/valgrind.sh --callgrind-out-file=valgrind.out/nitc.nitc.out bin/nitc src/nitc.nit -vv
+	callgrind_annotate valgrind.out/nitc.nitc.out > valgrind.out/nitc.nitc.txt
+	src/valgrind.sh --callgrind-out-file=valgrind.out/niti.niti.out bin/nit -- src/nit.nit tests/base_simple3.nit -vv
+	callgrind_annotate valgrind.out/niti.niti.out > valgrind.out/niti.niti.txt
+
+build-doc:
+	nitdoc -d nitdoc.out --keep-going lib src
+
+build-manual:
+	# apt-get update && apt-get install --yes --no-install-recommends pandoc texlive texlive-latex-extra lmodern
+	$(make) -C doc/manual
+
+nitmetrics:
+	mkdir -p nitmetrics.out
+	nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src | tee nitmetrics.out/metrics.txt
+
+build-catalog:
+	misc/jenkins/check_contrib.sh pre-build
+	cd contrib && ./oot.sh update && ./oot.sh pre-build
+	nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/

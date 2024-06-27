@@ -1,0 +1,27 @@
+name: CI Report
+on:
+  workflow_run:
+    workflows: [ CI ]
+    types: [ completed ]
+
+permissions:
+  checks: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Test Results
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: ${{ github.event.workflow.id }}
+          run_id: ${{ github.event.workflow_run.id }}
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          commit: ${{ github.event.workflow_run.head_sha }}
+          event_file: Event File/event.json
+          event_name: ${{ github.event.workflow_run.event }}
+          files: "**/*.xml"
