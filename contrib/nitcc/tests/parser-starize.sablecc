@@ -1,0 +1,8 @@
+Grammar gram;
+Lexer
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+s = s 's' t | Empty;
+t = ab* ;
+ab = 'a' 'b';

@@ -1,0 +1,12 @@
+Grammar gram;
+Lexer
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+s =
+	s 's' ('a' 'b') |
+	s 's' ('a') |
+	s 's' ('a' 'c')? |
+	s 's' ('a' 'd')+ |
+	s 't' ('a' 'e')* |
+	Empty;

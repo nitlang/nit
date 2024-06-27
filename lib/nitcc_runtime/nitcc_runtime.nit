@@ -167,6 +167,7 @@ abstract class Lexer
 	fun lex: CircularArray[NToken]
 	do
 		var res = new CircularArray[NToken]
+		chars = stream.chars
 		loop
 			var t = next_token
 			if t != null then res.add t
@@ -184,6 +185,9 @@ abstract class Lexer
 	# Cursor current column (in chars, starting from 1)
 	var col_start = 1
 
+	# Current
+	var chars: SequenceRead[Char] is noinit
+
 	# Move the cursor and return the next token.
 	#
 	# Returns a `NEof` and the end.
@@ -199,6 +203,7 @@ abstract class Lexer
 		var col_end = col_start - 1
 		var last_state: nullable DFAState = null
 		var text = stream
+		var chars = self.chars
 		var length = text.length
 		loop
 			if state.is_accept then
@@ -213,7 +218,7 @@ abstract class Lexer
 				c = '\0'
 				next = null
 			else
-				c = text.chars[pos]
+				c = chars[pos]
 				next = state.trans(c)
 			end
 			if next == null then

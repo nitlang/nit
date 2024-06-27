@@ -123,6 +123,17 @@ private class CheckNameVisitor
 	var plusizes = new HashMap[Element, Production]
 
 	# Create a + version of an element
+	#
+	# ```
+	# foo = x bar+ y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs0 y | z ;
+	# abs0 = {one:} bar | {more:} abs0 bar ;
+	# ```
 	fun plusize(e: Element): Production
 	do
 		if plusizes.has_key(e) then return plusizes[e]
@@ -130,9 +141,86 @@ private class CheckNameVisitor
 		var prod = new Production(name)
 		prod.acname = "Nodes[{e.acname}]"
 		v1.gram.prods.add(prod)
-		prod.new_alt("{name}_one", e)
-		prod.new_alt("{name}_more", prod, e)
+		var alt1 = prod.new_alt("{name}_one", e)
+		alt1.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+		var alt2 = prod.new_alt("{name}_more", prod, e)
+		alt2.codes = [new CodePop, new CodePop, new CodeAdd: Code]
 		plusizes[e] = prod
+		return prod
+	end
+
+	# Pool of elements that are modified with Separator
+	var separatizes = new HashMap[Array[Element], Production]
+
+	# Create a separated version of an element `e1` where the last element is `e2`.
+	# This is used to implement `Separator` and `Tail` keywords.
+	#
+	# ```
+	# foo = x (bar Separator baz)+ y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs1 y | z ;
+	# abs0 = bar baz ;
+	# abs1 = (one:) bar | {more:} abs0+ bar ;
+	# ```
+	fun separatize(e1, e2: Element): Production
+	do
+		var es = [e1, e2]
+		if separatizes.has_key(es) then return separatizes[es]
+		var name = "_sep{separatizes.length}"
+		var prod = new Production(name)
+		v1.gram.prods.add(prod)
+		var p = plusize(e1)
+		prod.spe = p
+		var alt1 = prod.new_alt("{name}_more", p, e2)
+		alt1.codes = [new CodePop, new CodePop, new CodeAdd: Code]
+		alt1.trans = true
+		var alt2 = prod.new_alt("{name}_one", e2)
+		alt2.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+		alt2.trans = true
+		separatizes[es] = prod
+		return prod
+	end
+
+	# Pool of elements that are modified with Tail
+	var tailizes = new HashMap[Array[Element], Production]
+
+	# Create a separated version of an element `e1` where the last `e2` can be present.
+	# This is used to implement `Separator` and `Tail` keywords.
+	#
+	# ```
+	# foo = x (bar Separator baz)+ y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs1 y | z ;
+	# abs0 = bar baz ;
+	# abs1 = (one:) bar | {more:} abs0+ bar | {tail:} abs0+;
+	# ```
+	fun tailize(e1, e2: Element): Production
+	do
+		var es = [e1, e2]
+		if tailizes.has_key(es) then return tailizes[es]
+		var name = "_tail{tailizes.length}"
+		var prod = new Production(name)
+		v1.gram.prods.add(prod)
+		var p = plusize(e1)
+		prod.spe = p
+		var alt1 = prod.new_alt("{name}_more", p, e2)
+		alt1.codes = [new CodePop, new CodePop, new CodeAdd: Code]
+		alt1.trans = true
+		var alt2 = prod.new_alt("{name}_one", e2)
+		alt2.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+		alt2.trans = true
+		var alt3 = prod.new_alt("{name}_tail", p)
+		alt3.codes = [new CodePop]
+		alt3.trans = true
+		tailizes[es] = prod
 		return prod
 	end
 
@@ -140,6 +228,17 @@ private class CheckNameVisitor
 	var quesizes = new HashMap[Element, Production]
 
 	# Create a ? version of an element
+	#
+	# ```
+	# foo = x bar? y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs0 y | z ;
+	# abs0 = {one:} bar | {none} Empty ;
+	# ```
 	fun quesize(e: Element): Production
 	do
 		if quesizes.has_key(e) then return quesizes[e]
@@ -152,6 +251,22 @@ private class CheckNameVisitor
 		var a0 = prod.new_alt0("{name}_none")
 		a0.codes = [new CodeNull]
 		quesizes[e] = prod
+		return prod
+	end
+
+	# Pool for anoymous grouped production (reuse them!)
+	var groupizes = new HashMap[Array[Element], Production]
+
+	# Create an anonymous production that groups some elements.
+	# Note: an anonymous production is always returned, even if `es` is empty or single.
+	fun groupize(es: Array[Element]): Production
+	do
+		if groupizes.has_key(es) then return groupizes[es]
+		var name = "_group{groupizes.length}"
+		var prod = new Production(name)
+		v1.gram.prods.add(prod)
+		var a1 = prod.new_alt2("{name}_single", es)
+		groupizes[es] = prod
 		return prod
 	end
 
@@ -698,6 +813,40 @@ redef class Nelem_plus
 		var elem = v.elems.pop
 		elem = v.plusize(elem)
 		set_elem(v, null, elem)
+	end
+end
+
+redef class Nelem_group
+	redef fun accept_check_name_visitor(v) do
+		var old = v.elems
+		v.elems = new Array[Element]
+		super
+		var elem = v.groupize(v.elems)
+		v.elems = old
+		set_elem(v, null, elem)
+	end
+end
+
+redef class Nelem_groupsep
+	redef fun accept_check_name_visitor(v) do
+		var old = v.elems
+		v.elems = new Array[Element]
+		n_elem.accept_check_name_visitor(v)
+		var prod1 = v.groupize(v.elems.clone)
+		n_sep.accept_check_name_visitor(v)
+		var prod2 = v.groupize(v.elems)
+		prod1.spe = prod2
+		v.elems = old
+		var prod
+		if n_separator isa Nseparator_sep then
+			prod = v.separatize(prod2, prod1)
+		else
+			prod = v.tailize(prod2, prod1)
+		end
+		if n_mult isa Nmult_star then
+			prod = v.quesize(prod)
+		end
+		set_elem(v, null, prod)
 	end
 end
 
