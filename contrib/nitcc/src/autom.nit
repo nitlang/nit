@@ -26,6 +26,14 @@ class Automaton
 	# State that are accept states
 	var accept = new Array[State]
 
+	# Add an accept state without duplicate
+	fun add_accept(s: State)
+	do
+		assert states.has(s)
+		if accept.has(s) then return
+		accept.add(s)
+	end
+
 	# All states
 	var states = new Array[State]
 
@@ -112,6 +120,11 @@ class Automaton
 
 	# Initialize a new automaton for the empty-string language.
 	# One state, is accept, no transition.
+	#
+	# ```
+	# import regexparser
+	# assert "".parse_regex.is_equivalent(new Automaton.epsilon)
+	# ```
 	init epsilon
 	do
 		var state = new State
@@ -120,8 +133,25 @@ class Automaton
 		states.add state
 	end
 
+	# Initialize a new automaton for all string of length 1.
+	# Basically, it is /./.
+	#
+	# ```
+	# import regexparser
+	# assert ".".parse_regex.is_equivalent(new Automaton.any)
+	# ```
+	init any
+	do
+		cla(0, null)
+	end
+
 	# Initialize a new automation for the language that accepts only a single symbol.
 	# Two state, the second is accept, one transition on `symbol`.
+	#
+	# ```
+	# import regexparser
+	# assert "A".parse_regex.is_equivalent(new Automaton.atom(0x41))
+	# ```
 	init atom(symbol: Int)
 	do
 		var s = new State
@@ -136,6 +166,11 @@ class Automaton
 
 	# Initialize a new automation for the language that accepts only a range of symbols
 	# Two state, the second is accept, one transition for `from` to `to`
+	#
+	# ```
+	# import regexparser
+	# assert "[A-C]".parse_regex.is_equivalent(new Automaton.cla(0x41, 0x43))
+	# ```
 	init cla(first: Int, last: nullable Int)
 	do
 		var s = new State
@@ -150,6 +185,14 @@ class Automaton
 
 	# Concatenate `other` to `self`.
 	# Other is modified and invalidated.
+	#
+	# ```
+	# import regexparser
+	# var a = "a".parse_regex
+	# var b = "b".parse_regex
+	# a.concat(b)
+	# assert a.is_equivalent("ab".parse_regex)
+	# ```
 	fun concat(other: Automaton)
 	do
 		var s2 = other.start
@@ -162,6 +205,14 @@ class Automaton
 
 	# `self` become the alternation of `self` and `other`.
 	# `other` is modified and invalidated.
+	#
+	# ```
+	# import regexparser
+	# var a = "a".parse_regex
+	# var b = "b".parse_regex
+	# a.alternate(b)
+	# assert a.is_equivalent("a|b".parse_regex)
+	# ```
 	fun alternate(other: Automaton)
 	do
 		var s = new State
@@ -187,6 +238,14 @@ class Automaton
 	# Return a new automaton that recognize `self` but not `other`.
 	# For a theoretical POV, this is the subtraction of languages.
 	# Note: the implementation use `to_dfa` internally, so the theoretical complexity is not cheap.
+	#
+	# ```
+	# import regexparser
+	# var a = "a(b*|c*)d".parse_regex
+	# var b = ".b+.".parse_regex
+	# var c = "ac*d".parse_regex
+	# assert a.except(b).is_equivalent(c)
+	# ```
 	fun except(other: Automaton): Automaton
 	do
 		var ta = new Token("1")
@@ -209,6 +268,48 @@ class Automaton
 		return c
 	end
 
+	# Return a new automaton that reject `self`.
+	# Basically, this is `/.*/.except(self)`
+	fun negate: Automaton
+	do
+		var any = new Automaton.any
+		any.close
+		return any.except(self)
+	end
+
+	# Return a new automaton that recognize `self` if and only if `other` is also recognized.
+	# For a theoretical POV, this is the intersecton of languages.
+	# Note: the implementation use `to_dfa` internally, so the theoretical complexity is not cheap.
+	#
+	# ```
+	# import regexparser
+	# var a = "a[bc]*d".parse_regex
+	# var b = "a*b*c*d*".parse_regex
+	# var c = "ab*c*d".parse_regex
+	# assert a.intersect(b).is_equivalent(c)
+	# ```
+	fun intersect(other: Automaton): Automaton
+	do
+		var ta = new Token("1")
+		self.tag_accept(ta)
+		var tb = new Token("2")
+		other.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(self)
+		c.absorb(other)
+		c = c.to_dfa
+		c.accept.clear
+		for s in c.retrotags[ta] do
+			if c.tags[s].has(tb) then
+				c.accept.add(s)
+			end
+		end
+		c.clear_tag(ta)
+		c.clear_tag(tb)
+		return c
+	end
+
 	# `self` absorbs all states, transitions, tags, and acceptations of `other`.
 	# An epsilon transition is added between `self.start` and `other.start`.
 	fun absorb(other: Automaton)
@@ -220,6 +321,14 @@ class Automaton
 	end
 
 	# Do the Kleene closure (*) on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]*".parse_regex
+	# a.close
+	# assert a.is_equivalent(b)
+	# ```
 	fun close
 	do
 		for a1 in accept do
@@ -229,6 +338,16 @@ class Automaton
 	end
 
 	# Do the + on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]+".parse_regex
+	# var c = "[ab][ab]*".parse_regex
+	# a.plus
+	# assert a.is_equivalent(b)
+	# assert a.is_equivalent(c)
+	# ```
 	fun plus
 	do
 		for a1 in accept do
@@ -237,12 +356,95 @@ class Automaton
 	end
 
 	# Do the ? on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]?".parse_regex
+	# var c = "a|b|".parse_regex
+	# a.optionnal
+	# assert a.is_equivalent(b)
+	# assert a.is_equivalent(c)
+	# ```
 	fun optionnal
 	do
 		alternate(new Automaton.epsilon)
 	end
 
+	# Do {n} on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]\{3}".parse_regex
+	# var c = "[ab][ab][ab]".parse_regex
+	# var x = a.repeat(3)
+	# assert x.is_equivalent(b)
+	# assert x.is_equivalent(c)
+	# ```
+	fun repeat(n: Int): Automaton
+	do
+		var res = new Automaton.epsilon
+		for i in [0..n[ do
+			res.concat(self.dup)
+		end
+		return res
+	end
+
+	# Do {n,m} on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]\{3,5}".parse_regex
+	# var c = "[ab][ab][ab][ab]?[ab]?".parse_regex
+	# var x = a.repeat_range(3,5)
+	# assert x.is_equivalent(b)
+	# assert x.is_equivalent(c)
+	# ```
+	fun repeat_range(n, m: Int): Automaton
+	do
+		var res = repeat(n)
+		var alt = self.dup
+		alt.optionnal
+		for i in [n..m[ do
+			res.concat(alt.dup)
+		end
+		return res
+	end
+
+	# Do {n,} on self
+	#
+	# ```
+	# import regexparser
+	# var a = "[ab]".parse_regex
+	# var b = "[ab]\{3,}".parse_regex
+	# var c = "[ab][ab][ab][ab]*".parse_regex
+	# var x = a.repeat_close(3)
+	# assert x.is_equivalent(b)
+	# assert x.is_equivalent(c)
+	# ```
+	fun repeat_close(n: Int): Automaton
+	do
+		var res = repeat(n)
+		var alt = self.dup
+		alt.close
+		res.concat(alt)
+		return res
+	end
+
 	# Remove all transitions on a given symbol
+	#
+	# A sub-automaton can become disconnected and unreachable.
+	# Accept state are not modified part that remin connected can become deadends.
+	#
+	# ```
+	# import regexparser
+	# var a = "ab*c|db".parse_regex.to_dfa
+	# var sym = new TSymbol('b'.code_point, 'b'.code_point)
+	# a.minus_sym(sym)
+	# assert a.is_equivalent("ac".parse_regex)
+	# ```
 	fun minus_sym(symbol: TSymbol)
 	do
 		var f = symbol.first
@@ -303,7 +505,45 @@ class Automaton
 		return res
 	end
 
+	# Do `self` and `other` recognize the same language?
+	#
+	# ```
+	# var a0 = new Automaton.any
+	# var a1 = new Automaton.cla(0, null)
+	# var a2 = new Automaton.atom(65)
+	# assert a0.is_equivalent(a0)
+	# assert a0.is_equivalent(a1)
+	# assert not a0.is_equivalent(a2)
+	# ```
+	fun is_equivalent(other: Automaton): Bool
+	do
+		var this = self.dup
+		other = other.dup
+		var ta = new Token("1")
+		this.tag_accept(ta)
+		var tb = new Token("2")
+		other.tag_accept(tb)
+
+		var c = new Automaton.empty
+		c.absorb(this)
+		c.absorb(other)
+		c = c.to_dfa
+		for s in c.accept do
+			if not c.tags[s].has(ta) or not c.tags[s].has(tb) then return false
+		end
+		return true
+	end
+
 	# Reverse an automaton in place
+	#
+	# ```
+	# import regexparser
+	# var r = "a+b?[cd]*".parse_regex
+	# var r2 = r.dup
+	# r.reverse
+	# assert r.is_equivalent("[cd]*b?a+".parse_regex)
+	# assert not r.is_equivalent(r2)
+	# ```
 	fun reverse
 	do
 		for s in states do
@@ -330,6 +570,38 @@ class Automaton
 		end
 		accept.clear
 		accept.add(st)
+	end
+
+	# Keep only the shortest prefixes of the language.
+	#
+	# ```
+	# import regexparser
+	# var a = "ab(ab)?".parse_regex.shortest
+	# assert a.is_equivalent("ab".parse_regex)
+	# ```
+	fun shortest: Automaton
+	do
+		var a = self.to_dfa
+                for s in a.accept do
+                        for t in s.outs.to_a do t.delete
+                end
+                return a
+	end
+
+	# Remove all the prefixes of the language.
+	#
+	# ```
+	# import regexparser
+	# var a = "ab(ab)?".parse_regex.longest
+	# assert a.is_equivalent("abab".parse_regex)
+	# ```
+	fun longest: Automaton
+	do
+		var a = self.to_dfa
+                for s in a.accept.to_a do
+                        if not s.outs.is_empty then a.accept.remove(s)
+                end
+                return a
 	end
 
 	# Remove states (and transitions) that does not reach an accept state
@@ -503,7 +775,8 @@ class Automaton
 				f.append(",label=\"{state_nb}\"")
 			end
 			f.append("];\n")
-			var outs = new HashMap[State, Array[nullable TSymbol]]
+			# TSymbols for each destination
+			var outs = new HashMap[State, TSymbols]
 			for t in s.outs do
 				var a
 				var s2 = t.to
@@ -511,25 +784,41 @@ class Automaton
 				if outs.has_key(s2) then
 					a = outs[s2]
 				else
-					a = new Array[nullable TSymbol]
+					a = new TSymbols
 					outs[s2] = a
 				end
-				a.add(c)
+				if c == null then
+					a.epsilon = true
+				else
+					a.symbols.add(c)
+				end
 			end
 			for s2, a in outs do
 				var labe = ""
-				for c in a do
+				a = a.merge_intervals
+				if a.epsilon then
+					labe += "ε"
+					# else if false then
+				else if merge_transitions or else true then
+					# Present the negation if simpler
+					if a.first == 0 and a.last == null then
+						a = a.negate
+						if a.symbols.is_empty then
+							labe = "ANY"
+						else
+							labe = "NOT"
+						end
+					end
+				end
+				for c in a.symbols do
 					if merge_transitions == false then labe = ""
 					if not labe.is_empty then labe += "\n"
-					if c == null then
-						labe += "ε"
-					else
-						labe += c.to_s
-					end
+					labe += c.to_s
 					if merge_transitions == false then
 						f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_dot}\"];\n")
 					end
 				end
+				#labe = s.vade(s2).sample_to_s
 				if merge_transitions or else true then
 					f.append("s{names[s]}->s{names[s2]} [label=\"{labe.escape_to_c}\"];\n")
 				end
@@ -579,7 +868,7 @@ class Automaton
 							dfa.add_tag(dfa_state, t)
 						end
 					end
-					dfa.accept.add(dfa_state)
+					dfa.add_accept(dfa_state)
 				end
 			end
 
@@ -675,7 +964,7 @@ class Automaton
 							dfa.add_tag(dfa_state, t)
 						end
 					end
-					dfa.accept.add(dfa_state)
+					dfa.add_accept(dfa_state)
 				end
 			end
 		end
@@ -922,7 +1211,79 @@ class State
 		end
 		return null
 	end
+
+	fun vade(s: State): TSymbols
+	do
+		var res = new TSymbols
+		for t in outs do
+			if t.to != s then continue
+			var sym = t.symbol
+			if sym != null then
+				res.symbols.add sym
+			end
+		end
+		return res
+	end
+
+	fun retro(s: State): TSymbols
+	do
+		var res = new TSymbols
+		for t in ins do
+			if t.from != s then continue
+			var sym = t.symbol
+			if sym != null then
+				res.symbols.add sym
+			end
+		end
+		return res
+	end
+
+	fun path(destination: State): nullable StatePath
+	do
+		var todo = [self]
+		var paths = new HashMap[State, StatePath]
+		while todo.not_empty do
+			var s = todo.shift
+			for o in s.outs do
+				var s2 = o.to
+				if paths.has_key(s2) then continue
+				todo.add(s2)
+				paths[s2] = new StatePath(s, s.vade(s2), s2)
+				if s2 == destination then
+					var p = paths[s2]
+					while p.from != self do
+						var pp = paths[p.from]
+						pp.next = p
+						p = pp
+					end
+					return p
+				end
+			end
+		end
+		return null
+	end
 end
+
+class StatePath
+	var from: State
+	var symbols: TSymbols
+	var to: State
+	var next: nullable StatePath
+
+	fun sample_to_s: String
+	do
+		var res = ""
+		var p
+		p = self
+		while p != null do
+			res += p.symbols.sample_to_s
+			p = p.next
+		end
+		return res
+	end
+end
+
+
 
 # A range of symbols on a transition
 class TSymbol
@@ -949,6 +1310,157 @@ class TSymbol
 		if l == null then return res
 		if l <= 32 or l >= 127 then return res + "#{l}"
 		return res + l.code_point.to_s
+	end
+
+	# Return the minimum on self and the given interval
+	fun sample_on(min, max: Int): Int
+	do
+		if first > min then min = first
+		var l = last
+		if l != null and l < max then max = l
+		if min <= max then return min
+		return -1
+	end
+end
+
+# An union of symbols
+#
+# Is used to manipulate an agregated edge between states
+class TSymbols
+	# List of all tsymbols?
+	var symbols = new Array[TSymbol]
+	# Is epsilon inside?
+	var epsilon = false
+
+	# Return a equivalent TSymbols with no overlapping symbols
+	fun merge_intervals: TSymbols
+	do
+		if self.symbols.is_empty then return self
+		var tsyms = new TSymbols
+		(new TSymbolComparator).sort(self.symbols)
+
+		var first = self.symbols.first.first
+		var last
+		last = first
+		for s in self.symbols do
+			if last + 1 >= s.first then
+				var sl = s.last
+				if sl == null then
+					last = null
+					break
+				end
+				if sl > last then
+					last = sl
+				end
+			else
+				tsyms.symbols.add(new TSymbol(first, last))
+				first = s.first
+				last = s.last
+				if last == null then
+					break
+				end
+			end
+		end
+		tsyms.symbols.add(new TSymbol(first, last))
+
+		tsyms.epsilon = self.epsilon
+		return tsyms
+	end
+
+	# Return the reverse of self
+	fun negate: TSymbols
+	do
+		assert not epsilon
+		var ts2 = merge_intervals
+		var negprev = 0
+		var res = new TSymbols
+		for s in ts2.symbols do
+			if s.first > 0 then
+				res.symbols.add(new TSymbol(negprev+1, s.first-1))
+			end
+			var l = s.last
+			if l == null then
+				# Fast exit, we are done
+				return res
+			else
+				negprev = l
+			end
+		end
+		# Last one is open
+		res.symbols.add(new TSymbol(negprev+1, null))
+		return res
+	end
+
+	fun first: Int
+	do
+		var min = symbols.first.first
+		for s in symbols do
+			if s.first < min then
+				min = s.first
+			end
+		end
+		return min
+	end
+
+	fun last: nullable Int
+	do
+		var max = symbols.first.last
+		if max == null then return null
+		for s in symbols do
+			var l = s.last
+			if l == null then return null
+			if l > max then
+				max = l
+			end
+		end
+		return max
+	end
+
+	fun sample_to_s: String
+	do
+		if symbols.is_empty then return "ɛ"
+		var s = sample
+		if s <= 32 or s >=127 then return "#{s}"
+		return s.code_point.to_s
+	end
+
+	# Return a human-oriented example (eg. prefer `A` over `%` over `#12`)
+	fun sample: Int
+	do
+		var res = sample_on('A'.code_point, 'Z'.code_point)
+		if res != -1 then return res
+		res = sample_on('a'.code_point, 'a'.code_point)
+		if res != -1 then return res
+		res = sample_on('0'.code_point, '9'.code_point)
+		if res != -1 then return res
+		res = sample_on('!'.code_point, '~'.code_point)
+		if res != -1 then return res
+		return first
+	end
+
+	# Return the minimum on self and the given interval
+	fun sample_on(min, max: Int): Int
+	do
+		var res = -1
+		for s in symbols do
+			var r = s.sample_on(min, max)
+			if res == -1 then
+				res = r
+			else if r == -1 then
+			else if r < res then
+				res = r
+			end
+		end
+		return res
+	end
+end
+
+class TSymbolComparator
+	super Comparator
+	redef type COMPARED: TSymbol
+	redef fun compare(a, b)
+	do
+		return a.first <=> b.first
 	end
 end
 

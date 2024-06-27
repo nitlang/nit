@@ -152,24 +152,14 @@ end
 redef class Nre_shortest
 	redef fun make_nfa
 	do
-		var a = children[2].make_nfa
-		a = a.to_dfa
-		for s in a.accept do
-			for t in s.outs.to_a do t.delete
-		end
-		return a
+		return children[2].make_nfa.shortest
 	end
 end
 
 redef class Nre_longest
 	redef fun make_nfa
 	do
-		var a = children[2].make_nfa
-		a = a.to_dfa
-		for s in a.accept.to_a do
-			if not s.outs.is_empty then a.accept.remove(s)
-		end
-		return a
+		return children[2].make_nfa.longest
 	end
 end
 
