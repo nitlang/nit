@@ -648,7 +648,8 @@ class Automaton
 
 	# Generate a minimal DFA
 	# REQUIRE: self is a DFA
-	fun to_minimal_dfa: Automaton
+	#fun to_minimal_dfa: Automaton 
+	fun to_minimal_dfa: Dfa
 	do
 		assert_valid
 
@@ -832,13 +833,15 @@ class Automaton
 
 	# Transform a NFA to a DFA.
 	# note: the DFA is not minimized.
-	fun to_dfa: Automaton
+	#fun to_dfa: Automaton
+	fun to_dfa: Dfa
 	do
 		assert_valid
 
 		trim
 
-		var dfa = new Automaton.empty
+		#var dfa = new Automaton.empty
+		var dfa = new Dfa.empty
 		var n2d = new ArrayMap[Set[State], State]
 		var seen = new ArraySet[Set[State]]
 		var alphabet = new HashSet[Int]
@@ -1019,6 +1022,7 @@ class Automaton
 		var gen = new DFAGenerator(filepath, name, self, parser)
 		gen.gen_to_nit
 	end
+
 end
 
 # Generate the Nit source code of the lexer
@@ -1479,5 +1483,176 @@ class Transition
 	do
 		from.outs.remove(self)
 		to.ins.remove(self)
+	end
+end
+
+class Dfa
+	super Automaton
+
+	var dijkstra = new Dijkstra(self.states)
+
+	fun find_min_path(elem : Token ) : Array[Transition] 
+	do
+		var initialization = self.retrotags[elem].iterator.item
+		var  min_path = dijkstra.search_path_dijkstra( initialization )
+
+		for state in  self.retrotags[elem].iterator do
+			var path_tmp = dijkstra.search_path_dijkstra(state)
+			if min_path.length > path_tmp.length then min_path = path_tmp # save the minimal
+		end 
+		return min_path
+	end
+
+	fun translate_path(min_path : Array[Transition]) : Array[String]
+	do
+		var path_result = new Array[String]
+		for value in min_path do 
+			path_result.add(value.symbol.to_s)				
+		end
+		return path_result
+	end
+
+	fun sorter_path_to(elem : Token ) : Array[String]
+	do
+		if elem.to_s == "Eof" then
+			return [elem.to_s]
+		else
+			var min_path = self.find_min_path(elem)
+			var path_result = self.translate_path(min_path)
+			return path_result 
+		end 
+	end
+
+	fun launch_dijkstra(state : State)
+	do
+		dijkstra.launch_dijkstra(state)
+	end
+end
+
+
+class Dijkstra
+
+	var infinity = -1
+	var indefinite = -1
+
+	var states : Array[State]
+
+	var start_node : Int = indefinite
+
+	# queue of all nodes for Dijkstra's algorithm
+	var nodes_queue : nullable Array[Int] = null
+
+	# nodes's informations
+	var distance_node : nullable Array[Int] = null
+	var parent_node : nullable Array[Int] = null 
+
+	fun initialization 
+	do
+		nodes_queue = new Array[Int] 
+		distance_node = new Array[Int]
+		parent_node = new Array[Int]
+
+		for i in [0..states.length[ do
+			nodes_queue.add(i)
+			distance_node.add(infinity)
+			parent_node.add(indefinite)
+		end
+		distance_node[start_node] = 0
+	end
+
+	fun find_nearest_node : Int 
+	do
+		var mini = infinity
+		var sommet = indefinite 
+		for s in  [0..nodes_queue.length[
+		do			
+			if ( not distance_node[nodes_queue[s]] == infinity  and mini == infinity ) or
+				( not distance_node[nodes_queue[s]] == infinity and distance_node[nodes_queue[s]] < mini )
+			then 
+				mini = distance_node[nodes_queue[s]]
+				sommet = nodes_queue[s] 
+			end
+		end
+		return sommet
+	end
+
+	fun update_nodes_informations(s1: Int, s2: Int) 
+	do
+		var weight_of_transition = 1 
+		var d = distance_node[s1] + weight_of_transition
+
+		if distance_node[s2] == infinity or d < distance_node[s2]  then
+			distance_node[s2] = d # then update the path
+			parent_node[s2] = s1 # and save the path
+		end
+	end
+
+	fun find_position(node : State) : Int
+	do
+		var  pos = indefinite
+		for i in [0..states.length[ do
+			if states[i] == node then 
+				pos = i 
+				break 
+			end
+		end
+		return pos
+	end
+
+	fun search_path_dijkstra(end_node : State) : Array[Transition]
+	do
+		# If the Dijkstra's algorithm hasn't been launched, return
+		if start_node == indefinite then return new Array[Transition]
+
+		var path = new Array[Int]
+		var node = find_position(end_node)
+
+		while not node == start_node do
+			path.add(node)
+			node = parent_node[node]
+			if node == indefinite then return new Array[Transition] # no more parent, impossible path
+		end
+		path.add(start_node)
+
+		var reverse_path = new Array[Int]
+		for i in [(path.length-1)..0].step(-1) do
+			reverse_path.add(path[i])
+		end
+
+		var path_transition = new Array[Transition]
+
+		for j in [0..reverse_path.length-1[ do 
+			var states_outs = states[ reverse_path[j] ].outs
+			for k in [0..states_outs.length[ do 
+ 				if states[ reverse_path[j+1] ] == states_outs[k].to 
+				then
+					path_transition.add( states_outs[k] )
+					break
+				end
+			end
+		end
+		return path_transition
+	end
+
+	fun launch_dijkstra(start : State)
+	do
+		start_node = find_position(start)
+		
+		self.initialization
+
+		while nodes_queue.not_empty do 
+			var s1 = self.find_nearest_node   
+
+			if s1 == indefinite then break # path cannot go farer
+
+			var nexts = states[s1].outs 
+
+			nodes_queue.remove(s1)
+
+			for i in [0..nexts.length[ do 
+				var s2 = find_position(nexts[i].to) 
+				update_nodes_informations(s1,s2)
+			end
+		end
 	end
 end

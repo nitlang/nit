@@ -1,0 +1,14 @@
+/* Grammar of a mini procedural programming language */
+Grammar shift;
+
+Lexer
+a = 'a';
+
+Parser
+
+parent =  
+	{un:} enfant a |
+	{deux:} a;
+
+enfant = 
+	;

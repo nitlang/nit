@@ -24,6 +24,8 @@ class Gram
 	# The tokens (terminals) of the grammar
 	var tokens = new Array[Token]
 
+	var knowledge = new Knowledge(self)
+
 	# Dump of the concrete grammar and the transformations
 	fun pretty: String
 	do
@@ -536,6 +538,10 @@ class LRAutomaton
 	# The set of states
 	var states = new Array[LRState]
 
+	var indefinite = -1
+
+	var name : String = ""
+
 	# Dump of the automaton
 	fun pretty: String
 	do
@@ -589,6 +595,11 @@ class LRAutomaton
 		return res.join
 	end
 
+	fun set_name(n : String)
+	do
+		name = n
+	end
+
 	# Generate a graphviz file of the automaton
 	fun to_dot(path: String)
 	do
@@ -597,17 +608,39 @@ class LRAutomaton
 		f.write("rankdir=LR;\n")
 		f.write("node[shape=Mrecord,height=0];\n")
 
+		# for "path to end", "path from start" and conflicts
+		var start_state = states[0].items.first.alt.prod
+		var dijkstra = new LRDijkstra(states)
+		dijkstra.launch_dijkstra(states[0]) 
+
 		for s in states do
 			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
 			for i in s.core do
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
-			f.write("|")
+			f.write("|")	
+
 			for i in s.items do
 				if s.core.has(i) then continue
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
+
+			# Follow the path to "s" from state 0
+			var queue_int = new Array[Int] # states's numbers
+			var queue_elem = new Array[Element] # transitions's elements
+			queue_int.add(0) #init
+			queue_elem.add(start_state)	#init
+
+			if grammar.knowledge.knowledges_string.not_empty then 
+				# completed queues
+				write_from_start(f,s,queue_elem,queue_int,dijkstra)
+				# complete the path thanks items used to arrive in s
+				write_to_end(f,s,queue_elem.clone,queue_int.clone)
+				asts_conflicts(s,queue_elem,queue_int)
+			end
+			
 			f.write "\""
+			
 			if not s.is_lr0 then
 				var conflict = false
 				for t, a in s.guarded_reduce do
@@ -625,6 +658,7 @@ class LRAutomaton
 					f.write ",color=blue"
 				end
 			end
+
 			f.write "];\n"
 			for t in s.outs do
 				f.write "s{s.number} -> s{t.to.number} [label=\"{t.elem.to_s.escape_to_dot}\"];\n"
@@ -645,6 +679,346 @@ class LRAutomaton
 			f.write("\n")
 		end
 		f.close
+	end
+
+	fun asts_conflicts(s : LRState, queue_elem : Array[Element], queue_int : Array[Int])
+	do
+		if not s.is_lr0 then
+			for t, a in s.guarded_reduce_with_conflicts do
+				if a.length > 1 then # reduce / reduce conflict
+					self.generate_asts(t.to_s,a,s,queue_elem,queue_int)
+				else if s.shifts.has(t) then 
+					var items = a.clone # shift / reduce conflict
+					items.add_all(s.guarded_shift[t])
+					self.generate_asts(t.to_s,items,s,queue_elem,queue_int)
+				end
+			end
+		end
+	end
+
+	fun generate_asts(token : String, items : Set[Item], state : LRState, queue_elem : Array[Element], queue_int : Array[Int]) 
+	do 
+		var ast = new LRAst(self)
+		# token and state will serve to named the file
+		# item and queues will serve to creat the ast
+		ast.generated(token,state,items,queue_elem,queue_int)
+	end
+
+	fun count_size_after_pos(i : Item) : Int
+	do
+		var count = 0
+		for e in [i.pos..i.alt.elems.length[ do
+			var elem = i.alt.elems[e]
+			if grammar.knowledge.knowledges_string.has_key(elem) then
+				# it is simpler to evaluate the size thanks "number of characters" than "number of elements"
+				count = count + grammar.knowledge.knowledges_string[elem].length
+			end
+		end
+
+		return count
+	end
+
+	fun count_size_before_pos(i : Item) : Int
+	do
+		var count = 0
+		for e in [0..i.pos[ do
+			var elem = i.alt.elems[e]
+			if grammar.knowledge.knowledges_string.has_key(elem) then
+				# it is simpler to evaluate the size thanks "number of characters" than "number of elements"
+				count = count + grammar.knowledge.knowledges_string[elem].length
+			end
+		end
+
+		return count
+	end
+
+	fun choose_shift(state : LRState) : nullable Item
+	do
+		var nb_elements_consume = indefinite
+		var size = indefinite
+		var next_item : nullable Item = null
+
+		for i in state.core do
+			var tmp_nb_elements_consume = self.count_size_before_pos(i)
+			if not i.next == null and nb_elements_consume <= tmp_nb_elements_consume then
+
+				var tmp_size = self.count_size_after_pos(i)
+				
+				if size == indefinite or tmp_size < size then
+					next_item = i # item with the longest path already done and the shortest path to complete
+					size = tmp_size
+				end
+			end
+		end
+
+		return next_item
+	end
+
+	fun get_items_reduces(state : LRState) : Array[Item]
+	do
+		var reduces = new Array[Item]
+		for item in state.items do # A state can have several reduces
+			if item.next == null then reduces.add(item)
+		end
+		return reduces
+	end
+
+	fun find_parent(search_in : LRState, elem :Element, alt : nullable Alternative) :  nullable Item
+	do
+		var tmp_parent : nullable Item = null
+		var size = indefinite
+		for i in search_in.items do
+			# previous item which go on this item
+			if i.next == elem and ( alt == null or i.alt == alt ) then
+				var tmp_size = self.count_size_after_pos(i)
+				if tmp_parent == null or tmp_size < size then
+					tmp_parent = i # the parent with the shortest path to be complete
+					size = tmp_size
+				end
+			end
+		end
+		return tmp_parent
+	end
+
+	fun find_parent_in_core(item : nullable Item, state : LRState, path : Array[Item] ) : nullable Item
+	do
+		while not state.core.has(item) do
+			item = self.find_parent(state,item.alt.prod,null)
+			# change of alternative, we save in the historical
+			if not item == null then path.add(item.avance) # "avance" because the previous element will done by the historical
+		end
+		return item
+	end
+
+	fun historical(item : nullable Item, queue_elem : Array[Element], queue_int : Array[Int]) : Array[Item]
+	do
+		var path = new Array[Item]
+
+		if item == null then return path # security 
+
+		path.add(item)
+
+		for s in [(queue_int.length-1)..1].step(-1) do
+
+			# the previous item which generated " this item"
+			item = self.find_parent_in_core(item,states[queue_int[s]],path)
+
+			# find the link between the state "s" and the previous state in the queue
+			var prior = states[queue_int[s-1]]
+			item = self.find_parent(prior,queue_elem[s],item.alt)
+		end
+
+		# the previous item which generated " this item"
+		item = self.find_parent_in_core(item,states[queue_int[0]],path)
+
+		return path
+	end
+
+	fun get_path(it : Item, queue_elem : Array[Element], queue_int : Array[Int]) : Array[Element]
+	do
+		var historical = self.historical(it,queue_elem,queue_int)
+		var path = new Array[Element]
+
+		# avance in all previous item to complete the path
+		for item in historical do
+			while not item.next == null do
+				var i = item.next
+				if not i == null then path.add(i) # the next element not already done to complete the path
+				item = item.avance
+			end
+		end
+
+		return path
+	end
+
+	fun write_shift(f : FileWriter, state : LRState, queue_elem : Array[Element], queue_int : Array[Int])
+	do
+		#for the best shift
+		var item_shift = self.choose_shift(state)
+
+		if not item_shift == null then  # shift possible
+
+			var path_shift = self.get_path(item_shift,queue_elem,queue_int)
+			
+			f.write("--- shift ---")
+			f.write("\\l")
+			for elem in path_shift do
+				f.write("{grammar.knowledge.knowledges_string[elem].join("").escape_to_dot} ")
+			end
+			f.write("\\l")
+		end
+	end
+
+	fun write_reduces(f : FileWriter, state : LRState, queue_elem : Array[Element], queue_int : Array[Int])
+	do
+		#for all reduces possible
+		# It is simpler to treat all of them than choose the best
+		var reduces = self.get_items_reduces(state)
+		var count = 1
+
+		for reduce_item in reduces do
+			var path_reduce = self.get_path(reduce_item,queue_elem,queue_int)
+
+			f.write("--- reduce {count} ---")
+			f.write("\\l")
+			for elem in path_reduce do
+				f.write("{grammar.knowledge.knowledges_string[elem].join("").escape_to_dot} ")
+			end
+			f.write("\\l")
+
+			count = count + 1
+		end
+	end
+
+	fun write_to_end(f : FileWriter, state : LRState, queue_elem : Array[Element], queue_int : Array[Int])
+	do
+		f.write("|") 
+
+		self.write_shift(f,state,queue_elem,queue_int)
+
+		self.write_reduces(f,state,queue_elem,queue_int)
+	end
+
+	fun write_from_start(f : FileWriter, s : LRState, queue_elem : Array[Element], queue_int : Array[Int], dijkstra : LRDijkstra)
+	do 
+		var path_dijkstra = dijkstra.search_path_dijkstra(s) # the path from start to the state "s"
+		f.write("|") 
+		for step in path_dijkstra do # write all elements of the path
+			f.write("{grammar.knowledge.knowledges_string[step.elem].join("").escape_to_dot} ")
+			f.write(" ")
+			# initialize the queues
+			queue_elem.add(step.elem) 
+			queue_int.add(step.to.number) 
+		end
+		f.write("\\l")
+	end
+
+end
+
+class LRDijkstra
+	
+	var states : Array[LRState]
+
+	var infinity = -1
+	var indefinite = -1
+
+	private var start_node : Int = indefinite
+
+	# queue of all nodes for Dijkstra's algorithm
+	private var nodes_queue : nullable Array[Int] = null
+
+	# nodes's informations
+	private var distance_node : nullable Array[Int] = null
+	private var parent_node : nullable Array[Int] = null 
+
+	private fun initialization 
+	do
+		nodes_queue = new Array[Int] 
+		distance_node = new Array[Int]
+		parent_node = new Array[Int]
+
+		for i in [0..states.length[ do
+			nodes_queue.add(i)
+			distance_node.add(infinity)
+			parent_node.add(indefinite)
+		end
+		distance_node[start_node] = 0
+	end
+
+	private fun find_nearest_node : Int 
+	do
+		var mini = infinity
+		var sommet = indefinite
+		for s in  [0..nodes_queue.length[
+		do			
+			if ( not distance_node[nodes_queue[s]] == infinity and mini == infinity ) or 
+				( not distance_node[nodes_queue[s]] == infinity and distance_node[nodes_queue[s]] < mini )
+			then 
+				mini = distance_node[nodes_queue[s]]
+				sommet = nodes_queue[s]
+			end
+		end
+		return sommet
+	end
+
+	private fun update_nodes_informations(s1: Int, s2: Int) 
+	do
+		var weight_of_transition = 1 
+		var d = distance_node[s1] + weight_of_transition
+
+		if distance_node[s2] == infinity or d < distance_node[s2]  then
+			distance_node[s2] = d # then update path
+			parent_node[s2] = s1 # and save path
+		end
+	end
+
+	private fun find_position(node : LRState) : Int
+	do
+		var  pos = indefinite
+		for i in [0..states.length[ do
+			if states[i] == node then 
+				pos = i 
+				break
+			end
+		end
+		return pos
+	end
+
+	public fun search_path_dijkstra(end_node : LRState) : Array[LRTransition]
+	do
+		# If the Dijkstra's algorithm hasn't been launched, return
+		if start_node == indefinite then return new Array[LRTransition]
+
+		var path = new Array[Int]
+		var node = find_position(end_node)
+
+		while not node == start_node do
+			path.add(node)
+			node = parent_node[node] 
+			if node == indefinite then return new Array[LRTransition] # no more parent, impossible path
+		end
+		path.add(start_node) 
+
+		var reverse_path = new Array[Int]
+		for i in [(path.length-1)..0].step(-1) do
+			reverse_path.add(path[i])
+		end
+
+		var path_transition = new Array[LRTransition] 
+
+		for j in [0..reverse_path.length-1[ do 
+			var states_outs = states[ reverse_path[j] ].outs
+			for k in [0..states_outs.length[ do 
+ 				if states[ reverse_path[j+1] ] == states_outs[k].to 
+				then
+					path_transition.add( states_outs[k] ) 
+					break
+				end
+			end
+		end
+		return path_transition
+	end
+
+	public fun launch_dijkstra(start_n : LRState)
+	do
+		start_node = find_position(start_n)
+		
+		self.initialization
+
+		while nodes_queue.not_empty do
+			var s1 = self.find_nearest_node 
+
+			if s1 == indefinite then break # path cannot go farer
+
+			var nexts = states[s1].outs 
+
+			nodes_queue.remove(s1) 
+
+			for i in [0..nexts.length[ do  
+				var s2 = find_position(nexts[i].to) 
+				update_nodes_informations(s1,s2) 
+			end
+		end
 	end
 end
 
@@ -975,6 +1349,8 @@ class LRState
 	var gotos = new ArraySet[Production]
 	# Reduction guarded by tokens
 	var guarded_reduce = new HashMap[Token, Set[Item]]
+	# Reduction guarded by tokens with the conflicts
+	var guarded_reduce_with_conflicts = new HashMap[Token, Set[Item]]
 	# Shifts guarded by tokens
 	var guarded_shift = new HashMap[Token, Set[Item]]
 
@@ -1070,6 +1446,10 @@ class LRState
 					conflicting_items.add_all guarded_shift[t]
 				end
 			end
+		end
+		# Save conflicts to generate the matching ast
+		for t,a in guarded_reduce do
+			guarded_reduce_with_conflicts[t] = a.clone
 		end
 		for t in removed_reduces do
 			guarded_reduce.keys.remove(t)
@@ -1168,4 +1548,339 @@ class Item
 		var res = new Item(alt, pos+1)
 		return res
 	end
+end
+
+
+class Knowledge 
+	var gram : Gram
+
+	var knowledges_string = new HashMap[Element, Array[String]]
+	var knowledges_elem = new HashMap[Element, Alternative]
+
+
+	var productions_in_alternative = new HashMap[Production, Array[Alternative]] # the alternatives that depends on productions
+	var alternative_checked = new HashMap[Alternative, Bool ] # alternative checked ( not in the queue)
+	var alternatives = new Array[Alternative] # queue
+
+	fun set_path=(elem : Element, path :  Array[String]) do
+		# init all tokens of the grammar
+		if not knowledges_string.has_key(elem) then
+			knowledges_string[elem] = path 
+		else if knowledges_string[elem].length > path.length then 
+				knowledges_string[elem] = path 
+		end
+	end 
+
+	fun initialization do
+		for prod in gram.prods do 
+			for alt in prod.alts do
+				# fill the queue
+				alternatives.add(alt) 
+				for elem in alt.elems  do 
+					# creat a link between alternatives that depends on productions
+					# because if we change how writing a production, that will impact the writing of alternatives
+					if elem isa Production then 
+						if productions_in_alternative.has_key(elem) then
+							productions_in_alternative[elem].add(alt) 
+						else
+							productions_in_alternative[elem] = [alt] 
+						end
+					end
+
+				end
+			end
+		end
+	end
+
+	fun browse_the_alternative(alt : Alternative) : nullable Array[String]
+	do
+		var item = alt.first_item 
+		var next = item.next
+		var path = new Array[String] # path for whole this alternative
+		while not( next == null ) do 
+			# If we do not know to write a production, we will treat this alternative later
+			if next isa Production and not( knowledges_string.has_key(next) ) then break 
+
+			if next isa Token then
+				path = path + knowledges_string[next]
+			else
+				path = path + knowledges_string[next]
+			end
+
+			item = item.avance
+			next = item.next
+		end
+
+		if next == null then return path # all elements done
+
+		return null
+	end
+
+	fun add_dependent_alternatives(alt : Alternative) do
+		for alt_dependent in productions_in_alternative[alt.prod] do 
+			# if the alternative is not already in the queue
+			if alternative_checked.has_key(alt_dependent) and alternative_checked[alt_dependent] then  
+				alternatives.add(alt_dependent) # check it one more time
+				alternative_checked[alt] = false
+			end
+		end
+	end
+
+	fun manage_productions(alt : Alternative, path : Array[String]) do
+		if knowledges_string.has_key(alt.prod) then
+			if knowledges_string[alt.prod].length > path.length then 
+				knowledges_string[alt.prod] = path
+				knowledges_elem[alt.prod] = alt # shortest alternative for this production
+
+				# the production has changed, so we need to check one more time all alternatives which depend of it
+				if productions_in_alternative.has_key(alt.prod) then
+					self.add_dependent_alternatives(alt) 
+				end
+			end
+		else
+			knowledges_string[alt.prod] = path 
+			knowledges_elem[alt.prod] = alt # shortest alternative for this production
+		end
+	end
+
+	fun treatment do 
+		for alt in alternatives do 
+			
+			var result = self.browse_the_alternative(alt)
+
+			if not result == null then # if the alternative has been fully verified (has not been broken)
+				
+				self.manage_productions(alt,result)
+
+				alternatives.remove(alt) # alternatives checked, no need to check her anymore
+				alternative_checked[alt] = true # checked
+				
+			end
+		end
+	end
+
+	fun compute do
+		self.initialization
+
+		while not( alternatives.is_empty ) do 
+			self.treatment
+		end
+	end
+end
+
+
+class LRAst
+	var lr : LRAutomaton
+
+	var counter_node = 0
+	var nb_tokens_historical = 0
+	var next_choice_shift = false
+	
+	fun generated(token : String, state : LRState,items : Set[Item],queue_elem : Array[Element],queue_int : Array[Int])
+	do
+		var file_name = "{lr.name}.ast.state_{state.number}.token_{token}.dot"
+
+		# print the name to indicate the file created
+		print "\t{file_name}"
+
+		var f = new FileWriter.open("{file_name}")
+
+		f.write("digraph g \{\n")
+		f.write("rankdir=BT;\n")
+
+		counter_node = 0 # ensures uniqueness of node names
+		for item in items do
+			var historical = lr.historical(item,queue_elem.clone,queue_int.clone)
+			nb_tokens_historical = count_past(historical) # will be used to color the path from start
+
+			# will serve to color the next token if we are in a "shift" situation
+			next_choice_shift = false
+			if not historical.first.next == null then next_choice_shift = true
+
+			var root = self.creat_ast(historical)
+
+			var leafs = new Array[Int]
+
+			# write the nodes and their links
+			write_ast(f,root,null,leafs)
+		
+			# align the leafs in the good order
+			write_leafs(f,leafs)
+		end 
+
+		f.write("\}")
+		f.close
+	end
+
+	fun count_past(historical : Array[Item]) : Int
+	do
+		var count = 0
+		for item in historical do
+			var max = item.pos-1 # because we have done "item.avance" in the historical
+			if item == historical.first then max = item.pos # except for the first one
+			# count the exact number of tokens before the original "pos"
+			for e in [0..max[ do
+				var elem = item.alt.elems[e]
+				if elem isa Token then 
+					count = count + 1
+				else
+					# Do the same thing : count the exact number of token
+					# But for a entire alternative and recursively
+					var next = lr.grammar.knowledge.knowledges_elem[elem].elems
+					count = count_lenght(next,count)
+				end
+			end
+		end
+		return count
+	end
+
+	fun count_lenght(array : Array[Element], count : Int) : Int
+	do
+		for elem in array do
+			if elem isa Token then
+				count = count + 1
+			else
+				var next = lr.grammar.knowledge.knowledges_elem[elem].elems
+				count = count_lenght(next,count)
+			end
+		end
+		return count
+	end
+
+	fun creat_ast(historical : Array[Item]) : LRNode 
+	do
+		# init
+		# we need to save the var "child" to creat a link between "this item" and his predecessor in "historical"
+		var first = historical.shift
+		var child = new LRNode_alt(first.alt)
+		var queue_node = new Array[LRNode_alt]
+		queue_node.add(child)
+		while queue_node.not_empty do
+			self.avance(queue_node)	# create under-trees for all my children 
+		end
+
+
+		for item in historical do
+		
+			var me = new LRNode_alt(item.alt)
+			queue_node = new Array[LRNode_alt] 
+
+			for e in [0..me.value.elems.length[ do
+
+				# ensure the order of the children
+				if e == item.pos - 1 then 
+					me.children.add(child) # link between two items in historical
+					continue
+				end
+
+				# init
+				var elem = me.value.elems[e]
+				var node : nullable LRNode = null
+
+				if elem isa Token then
+					node = new LRNode_token(elem)
+				else if lr.grammar.knowledge.knowledges_elem.has_key(elem) then
+					node = new LRNode_alt(lr.grammar.knowledge.knowledges_elem[elem])
+					queue_node.add(node)
+				end
+				if not node == null then me.children.add(node) # create link
+			end
+
+			while queue_node.not_empty do
+				self.avance(queue_node)	# create under-trees for all my children 
+			end
+
+			child = me
+		end
+
+		return child # final item in historical, so the root
+
+	end
+
+	fun avance(queue_node : Array[LRNode_alt] ) do
+		var under_root = queue_node.shift
+
+		for elem in under_root.value.elems do
+			#init
+			var node : nullable LRNode = null
+
+			if elem isa Token then
+				node = new LRNode_token(elem)
+			else if lr.grammar.knowledge.knowledges_elem.has_key(elem) then
+				node = new LRNode_alt(lr.grammar.knowledge.knowledges_elem[elem])
+				queue_node.add(node) # next under root
+			end
+			if not node == null then 
+				under_root.children.add(node) # create link
+			end
+		end
+	end
+
+	fun write_ast(f : FileWriter,node : LRNode, my_parent : nullable Int, leafs : Array[Int]) 
+	do
+		counter_node = counter_node + 1 # ensures uniqueness
+		var me = counter_node
+
+		if node isa LRNode_alt then
+
+			f.write("n{me} [label=\"{node.to_s.escape_to_dot}\"];\n")
+			if not my_parent == null then f.write("n{me} -> n{my_parent} ;\n")
+
+			for child in node.children do
+				write_ast(f,child,me,leafs) 
+			end
+		else
+			f.write("n{me} [label=\"{node.to_s.escape_to_dot}\",shape=box")
+
+			if nb_tokens_historical > 0 then # color in red the path from the start
+				f.write(",color=red")
+				nb_tokens_historical = nb_tokens_historical - 1
+			else if next_choice_shift then # color in orange if it's the shift of a shift/reduce conflict
+				f.write(",color=orange")
+				next_choice_shift = false
+			else
+				f.write(",color=grey")
+			end
+			f.write("];\n")
+			
+			if not my_parent == null then f.write("n{me} -> n{my_parent} ;\n")
+			leafs.add(me) # to preserve the order of the leafs
+		end
+	end
+
+	fun write_leafs(f : FileWriter, leafs : Array[Int]) 
+	do
+		# preserve the order and display at the bottom of the leafs
+		if leafs.length > 1 then
+			f.write("\{ rank=same\n")
+			for node in leafs do
+				if not node == leafs.first then f.write("->")
+				f.write("n{node}")
+			end
+			f.write("[style=invis]\n\}\n")
+		else if leafs.length == 1 then
+			f.write("\{ rank=min\n")
+			f.write("n{leafs.first}")
+			f.write("\n\}\n")
+		end
+	end
+
+end
+
+
+class LRNode
+	redef fun to_s : String is abstract
+end
+
+class LRNode_token
+	super LRNode
+	var value : Token
+	redef fun to_s do return value.to_s
+end
+
+class LRNode_alt
+	super LRNode
+	var value : Alternative
+	var children = new Array[LRNode]
+	redef fun to_s do return value.name
 end
