@@ -1,1 +1,1 @@
-8:18-8:19 Syntax Error: Unexpected '('; is acceptable instead: priority+, priority
+8:25-8:34 Syntax Error: Unexpected unknown_keyword 'Separator'; is acceptable instead: elem, text

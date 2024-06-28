@@ -123,6 +123,17 @@ private class CheckNameVisitor
 	var plusizes = new HashMap[Element, Production]
 
 	# Create a + version of an element
+	#
+	# ```
+	# foo = x bar+ y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs0 y | z ;
+	# abs0 = {one:} bar | {more:} abs0 bar ;
+	# ```
 	fun plusize(e: Element): Production
 	do
 		if plusizes.has_key(e) then return plusizes[e]
@@ -130,8 +141,10 @@ private class CheckNameVisitor
 		var prod = new Production(name)
 		prod.acname = "Nodes[{e.acname}]"
 		v1.gram.prods.add(prod)
-		prod.new_alt("{name}_one", e)
-		prod.new_alt("{name}_more", prod, e)
+		var alt1 = prod.new_alt("{name}_one", e)
+		alt1.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+		var alt2 = prod.new_alt("{name}_more", prod, e)
+		alt2.codes = [new CodePop, new CodePop, new CodeAdd: Code]
 		plusizes[e] = prod
 		return prod
 	end
@@ -140,6 +153,17 @@ private class CheckNameVisitor
 	var quesizes = new HashMap[Element, Production]
 
 	# Create a ? version of an element
+	#
+	# ```
+	# foo = x bar? y | z ;
+	# ```
+	#
+	# becomes
+	#
+	# ```
+	# foo = x abs0 y | z ;
+	# abs0 = {one:} bar | {none} Empty ;
+	# ```
 	fun quesize(e: Element): Production
 	do
 		if quesizes.has_key(e) then return quesizes[e]
@@ -152,6 +176,22 @@ private class CheckNameVisitor
 		var a0 = prod.new_alt0("{name}_none")
 		a0.codes = [new CodeNull]
 		quesizes[e] = prod
+		return prod
+	end
+
+	# Pool for anoymous grouped production (reuse them!)
+	var groupizes = new HashMap[Array[Element], Production]
+
+	# Create an anonymous production that groups some elements.
+	# Note: an anonymous production is always returned, even if `es` is empty or single.
+	fun groupize(es: Array[Element]): Production
+	do
+		if groupizes.has_key(es) then return groupizes[es]
+		var name = "_group{groupizes.length}"
+		var prod = new Production(name)
+		v1.gram.prods.add(prod)
+		var a1 = prod.new_alt2("{name}_single", es)
+		groupizes[es] = prod
 		return prod
 	end
 
@@ -697,6 +737,17 @@ redef class Nelem_plus
 		super
 		var elem = v.elems.pop
 		elem = v.plusize(elem)
+		set_elem(v, null, elem)
+	end
+end
+
+redef class Nelem_par
+	redef fun accept_check_name_visitor(v) do
+		var old = v.elems
+		v.elems = new Array[Element]
+		super
+		var elem = v.groupize(v.elems)
+		v.elems = old
 		set_elem(v, null, elem)
 	end
 end
