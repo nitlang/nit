@@ -99,8 +99,9 @@ f.write "// Concrete grammar of {name}\n"
 f.write pretty
 f.close
 
-print "LR automaton: {lr.states.length} states (see {name}.lr.dot and {name}.lr.out)"
+print "LR automaton: {lr.states.length} states (see {name}.lr.dot, {name}.lr0.dot and {name}.lr.out)"
 lr.to_dot("{name}.lr.dot")
+lr.to_dot_lr0("{name}.lr0.dot")
 pretty = lr.pretty
 f = new FileWriter.open("{name}.lr.out")
 f.write "// LR automaton of {name}\n"
