@@ -60,7 +60,7 @@ bin/nitpick:
 src/version.nit:
 	cd src && ./git-gen-version.sh
 
-doc/stdlib/index.html: bin/nitdoc bin/nitls
+doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
@@ -68,19 +68,15 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--custom-title "Nit Standard Library" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
-		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
-		--piwik-site-id "2" \
+		--custom-footer-text "Nit standard library. Version $$(git describe)."
 
-doc/nitc/index.html: bin/nitdoc bin/nitls
+doc/nitc/index.html: bin/nitdoc
 	bin/nitdoc lib src/nit*.nit src/test_*.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the Nit tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
-		--custom-footer-text "Nit tools. Version $$(git describe)." \
-		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
-		--piwik-site-id "3"
+		--custom-footer-text "Nit tools. Version $$(git describe)."
 
 man:
 	# Setup PATH to find nitc
