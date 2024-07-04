@@ -1,11 +1,11 @@
-name: CI
+name: master
 
 on: [ push ]
 env:
   # BASIC_PACKAGES is used fo the basic tools (make)
   BASIC_PACKAGES: git build-essential ccache libgc-dev graphviz libunwind-dev libreadline-dev pkg-config
   # MORE_PACKAGES is used for more tools and libs (make more)
-  MORE_PACKAGES: libgmp-dev libcurl4-openssl-dev libevent-dev openjdk-17-jdk-headless libgles-dev libegl-dev libsdl1.2-dev libsdl2-dev libsdl2-mixer-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-net-dev libsdl2-ttf-dev libgtk-3-dev inkscape postgresql libxdg-basedir-dev gettext libsqlite3-dev libpq-dev libmongoc-dev openmpi-bin libopenmpi-dev
+  MORE_PACKAGES: libgmp-dev libcurl4-openssl-dev libevent-dev openjdk-17-jdk-headless libgles-dev libegl-dev libsdl1.2-dev libsdl2-dev libsdl2-mixer-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-net-dev libsdl2-ttf-dev libgtk-3-dev inkscape postgresql libxdg-basedir-dev gettext libsqlite3-dev libpq-dev libmongoc-dev openmpi-bin libopenmpi-dev rename
 
 jobs:
   build:
