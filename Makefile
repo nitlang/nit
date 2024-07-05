@@ -165,4 +165,4 @@ nitmetrics:
 build-catalog: bin/nitdoc
 	misc/jenkins/check_contrib.sh pre-build
 	cd contrib && ./oot.sh update && ./oot.sh pre-build
-	nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/
+	bin/nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/
