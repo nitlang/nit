@@ -19,7 +19,7 @@ jobs:
       with:
         path: bin
         name: bin
-    - run: make catalog
+    - run: make build-catalog
     - uses: actions/upload-artifact@v4
       with:
         path: catalog.out/
