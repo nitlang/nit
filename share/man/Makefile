@@ -30,17 +30,12 @@ man1/%.1: %.md $(NITMD)
 $(NITMD):
 	$(MAKE) -C $(MARKDOWN)
 
-# Rule to produce mdwn files for ikiwiki that will be used at http://nitlanguage.org/tools/
+# Rule to produce md files for nitiwiki that will be used at http://nitlanguage.org/tools/
 web:
 	rm -r www 2>/dev/null || true
 	mkdir -p www
 	cp nit*.md www
-	rename '$$_ = "$${_}wn"' www/*.md
-	sed -i -e '/SEE ALSO/,$$d' www/*.mdwn
-
-publish: web
-	rsync www/* asimov:wiki/nitlanguage/doc/tools/
-	ssh asimov make -C wiki/nitlanguage
+	sed -i -e '/SEE ALSO/,$$d' www/*.md
 
 pdf:
 	mkdir -p pdf.out
