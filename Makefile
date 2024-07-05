@@ -162,7 +162,7 @@ nitmetrics:
 	mkdir -p nitmetrics.out
 	nitmetrics --all --log --log-dir nitmetrics.out --dir nitmetrics.out --keep-going lib src | tee nitmetrics.out/metrics.txt
 
-build-catalog:
+build-catalog: bin/nitdoc
 	misc/jenkins/check_contrib.sh pre-build
 	cd contrib && ./oot.sh update && ./oot.sh pre-build
 	nitcatalog -d catalog.out lib/ examples/ contrib/ contrib/oot/
