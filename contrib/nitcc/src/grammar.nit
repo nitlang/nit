@@ -590,6 +590,39 @@ class LRAutomaton
 	end
 
 	# Generate a graphviz file of the automaton
+	# This generate a simple executable LR0 without much information
+	fun to_dot_lr0(path: String)
+	do
+		var f = new FileWriter.open(path)
+		f.write("digraph \{\n")
+		f.write("rankdir=TB;\n")
+		f.write("node[shape=box,style=rounded];\n")
+
+		f.write("entry [style=invis];\nentry -> s{states.first.number}\n")
+		for s in states do
+			f.write "s{s.number} [label=\""
+			for a in s.reduces do
+				if a.prod.accept then
+					f.write "ACCEPT\\n"
+				else
+					f.write "REDUCE {a.prod.name.escape_to_dot} WITH {a.elems.length} ELEMENTS\\n"
+				end
+			end
+			if s.shifts.length > 0 then
+				f.write "SHIFT\\n"
+			end
+			f.write "\""
+			if not s.is_lr0 then f.write ",color=red"
+			f.write "];\n"
+			for t in s.outs do
+				f.write "s{s.number} -> s{t.to.number} [label=\"{t.elem.to_s.escape_to_dot}\"];\n"
+			end
+		end
+		f.write("\}\n")
+		f.close
+	end
+
+	# Generate a graphviz file of the automaton
 	fun to_dot(path: String)
 	do
 		var f = new FileWriter.open(path)
