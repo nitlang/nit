@@ -1,0 +1,11 @@
+Grammar calc;
+Lexer
+n = ('0'..'9')+ ;
+Parser
+Ignored #10, #32;
+e
+	= e '+' e
+	| e '*' e
+	| '(' e ')'
+	| n
+	;

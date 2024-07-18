@@ -1,0 +1,10 @@
+Grammar eq;
+Parser
+Ignored #10, #32;
+e =
+	var '=' e |
+	c |
+	var ;
+c =
+	e '=' e ;
+var = 'id' ;
