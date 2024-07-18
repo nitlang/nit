@@ -137,7 +137,7 @@ class Gram
 
 		analyse
 
-		var first = new LRState("Start")
+		var first = new LRState
 		first.number = 0
 		for i in start.start_state do first.add(i)
 
@@ -165,13 +165,10 @@ class Gram
 				if nexts.has_key(e) then
 					nexts[e].add(i.avance)
 				else
-					var name
-					if state == automaton.states.first then
-						name = e.to_s
-					else
-						name = "{state.name} {e}"
-					end
-					var next = new LRState(name)
+					var next = new LRState
+					next.prev = state
+					next.prefix.add_all(state.prefix)
+					next.prefix.add(e)
 					nexts[e] = next
 					next.add(i.avance)
 				end
@@ -185,6 +182,10 @@ class Gram
 				var new_state = true
 				for n in seen do
 					if n == next then
+						if next.prefix.length < n.prefix.length then
+							n.prefix = next.prefix
+							n.prev = next.prev
+						end
 						next = n
 						new_state = false
 						break
@@ -611,7 +612,7 @@ class LRAutomaton
 		var res = new Array[String]
 		res.add "* LRAutomaton: {states.length} states\n"
 		for s in states do
-			res.add "s{s.number} {s.name}\n"
+			res.add "STATE {s}\n"
 			res.add "\tCORE\n"
 			for i in s.core do
 				res.add "\t\t{i}\n"
@@ -700,7 +701,7 @@ class LRAutomaton
 		f.write("node[shape=Mrecord,height=0];\n")
 
 		for s in states do
-			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
+			f.write "s{s.number} [label=\"{s.to_s.escape_to_dot}|"
 			for i in s.core do
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
@@ -782,7 +783,7 @@ private class Generator
 		add "redef class NToken"
 		for s in states do
 			if not s.need_guard then continue
-			add "\t# guarded action for state {s.name}"
+			add "\t# guarded action for state {s}"
 			add "\t# {s.shifts.length} shift(s) and {s.reduces.length} reduce(s)"
 			add "\tprivate fun action_s{s.number}(parser: Parser) do"
 			if s.reduces.length != 1 then
@@ -887,11 +888,11 @@ private class Generator
 		end
 
 		for s in states do
-			add "# State {s.name}"
+			add "# State {s}"
 			add "private class LRState{s.number}"
 			add "\tsuper LRState"
 
-			add "\tredef fun to_s do return \"{s.name.escape_to_nit}\""
+			add "\tredef fun to_s do return \"{s.to_s.escape_to_nit}\""
 			
 			var err = new Array[String]
 			for t in s.outs do
@@ -1009,9 +1010,13 @@ end
 
 # A state in a LR automaton
 class LRState
-	# Name of the automaton (short part from the start)
-	var name: String
+	# Shortest prefix to go to this state
+	# Is empty for the start state
+	var prefix = new Array[Element]
 
+	# The previous node according to the prefix
+	# Is null for the start state
+	var prev: nullable LRState = null
 
 	# Number
 	var number = -1
@@ -1038,7 +1043,7 @@ class LRState
 	redef fun ==(o) do return o isa LRState and core == o.core
 	redef fun hash do return items.length
 
-	redef fun to_s do return items.join(" ; ")
+	redef fun to_s do return "{number} {prefix.join(" ")}"
 
 	# Add and item in the core
 	fun add(i: Item): Bool
@@ -1120,7 +1125,7 @@ class LRState
 		var removed_reduces = new Array[Token]
 		for t, a in guarded_reduce do
 			if a.length > 1 then
-				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
+				print "REDUCE/REDUCE Conflict on state {self} for token {t}:"
 				for i in a do print "\treduce: {i}"
 				conflicting_items.add_all a
 			end
@@ -1153,12 +1158,12 @@ class LRState
 					end
 				end
 				if confs.is_empty then
-					print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
+					print "Automatic Dangling on state {self} for token {t}:"
 					print "\treduce: {ri}"
 					for r in ress do print r
 					removed_reduces.add t
 				else
-					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
+					print "SHIFT/REDUCE Conflict on state {self} for token {t}:"
 					print "\treduce: {ri}"
 					for i in guarded_shift[t] do print "\tshift:  {i}"
 					removed_reduces.add t
