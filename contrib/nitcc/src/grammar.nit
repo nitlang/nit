@@ -43,6 +43,10 @@ class Gram
 				if a == last then res.append(" ;\n") else res.append(" |\n")
 			end
 			if p.is_nullable then res.append "\t// is nullable\n"
+			if p.sample_alternative != null then
+				res.append "\t// sample: {p.sample_to_s}\n"
+			end
+
 			if not p.firsts.is_empty then
 				res.append "\t// firsts:\n"
 				for x in p.firsts do res.append "\t//   {x}\n"
@@ -207,6 +211,37 @@ class Gram
 		return automaton
 	end
 
+	fun compute_sample_length
+	do
+		loop
+			var changed = false
+			for p in prods do
+				for a in p.alts do
+					if a.phony then continue
+					var sample_length = 0
+					for e in a.elems do
+						if e isa Token then
+							sample_length += 1
+						else if e isa Production then
+							var e_len = e.sample_length
+							if e_len == null then continue label alts
+							sample_length += e_len
+						else
+							abort
+						end
+					end
+					var e_len = p.sample_length
+					if e_len == null or e_len > sample_length then
+						p.sample_length = sample_length
+						p.sample_alternative = a
+						changed = true
+					end
+				end label alts
+			end
+			if not changed then break
+		end
+	end
+
 	# Compute `nullables`, `firsts` and `afters` of productions
 	fun analyse
 	do
@@ -236,6 +271,8 @@ class Gram
 			end
 			if not changed then break
 		end
+
+		compute_sample_length
 
 		loop
 			var changed = false
@@ -351,6 +388,24 @@ class Production
 
 	# Is the production nullable
 	var is_nullable = false
+
+	# The lenght (in tokens) of the smallest sample
+	var sample_length: nullable Int = null
+
+	# The allternative used as the smallest sample
+	var sample_alternative: nullable Alternative = null
+
+	redef fun sample_to_s: String
+	do
+		var alt = sample_alternative.as(not null)
+		var res = new Buffer
+		for e in alt.elems do
+			if not res.is_empty then res.add ' '
+			res.append(e.sample_to_s)
+		end
+		return res.to_s
+	end
+
 
 	# The first tokens of the production
 	var firsts = new HashSet[Item]
@@ -504,6 +559,9 @@ abstract class Element
 	var name: String
 	redef fun to_s do return name
 
+	# An example of a string
+	fun sample_to_s: String is abstract
+
 	private var acname_cache: nullable String = null
 
 	# The mangled name of the element
@@ -530,6 +588,11 @@ class Token
 	var shifts = new ArraySet[LRState]
 	# States of the LR automaton that reduce on self in the lookahead(1)
 	var reduces = new ArraySet[LRState]
+
+	redef fun sample_to_s
+	do
+		return to_s
+	end
 end
 
 #
