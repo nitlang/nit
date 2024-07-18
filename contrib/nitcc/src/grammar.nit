@@ -149,7 +149,10 @@ class Gram
 
 			#print state
 			automaton.states.add(state)
-			state.analysis
+			# Extends the core
+			for i in state.items.to_a do
+				state.extends(i)
+			end
 
 			var nexts = new HashMap[Element, LRState]
 			for i in state.items do
@@ -197,6 +200,9 @@ class Gram
 				state.outs.add t
 				next.ins.add t
 			end
+		end
+		for state in automaton.states do
+			state.analysis
 		end
 		return automaton
 	end
@@ -1020,10 +1026,6 @@ class LRState
 	# Compute guards and conflicts
 	fun analysis
 	do
-		# Extends the core
-		for i in items.to_a do
-			extends(i)
-		end
 
 		# Collect action and conflicts
 		for i in items do
