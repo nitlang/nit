@@ -1204,6 +1204,138 @@ class LRState
 	end
 end
 
+# Execution engine simulator on a LR automaton.
+# It has a stack of LR states and AST nodes.
+class LREngine
+	# The stack of stale, starts with start state
+	var state_stack = new Array[nullable LRState]
+
+	# A stack of AST node, reduced production and shifted token are pushed onto
+	var node_stack = new Array[CSTNode]
+
+	# The sequence of elements shifted for the first state
+	var past = new Array[Element]
+
+	# The sequence of elements shifted since the first state
+	var future = new Array[Element]
+
+	# The current state (top of the stack)
+	fun state: nullable LRState do return state_stack.last
+
+	# Initialize the engine on a given `state`.
+	# A consistent `past` is created to reach `state`.
+	# Subsequent shifts will be added to the `future`.
+	fun start(state: LRState)
+	do
+		var start = state
+		loop
+			var prev = start.prev
+			if prev == null then break
+			start = prev
+		end
+		state_stack.add(start)
+		for e in state.prefix do shift(e)
+		assert self.state == state
+
+		var tmp = future
+		future = past
+		past = tmp
+	end
+
+	# Perform a shift on `e` for the current `state` and add it to `future`.
+	# Both tokens and productions can be shifted.
+	# If the shift is impossible, the current state become null,
+	fun shift(e: Element)
+	do
+		state_stack.add state.trans(e)
+		future.add(e)
+		node_stack.add(new CSTNode(e))
+	end
+
+	# Perform a reduction on an alternative `a` on the current state.
+	fun reduce(a: Alternative)
+	do
+		assert can_reduce(a)
+		var len = a.elems.length
+		for i in [0..len[ do state_stack.pop
+		var node = new CSTNode(a.prod)
+		for i in [0..len[ do node.children.unshift(node_stack.pop)
+		node_stack.add(node)
+
+		# TODO something smart when accepting
+		if a.prod.accept then
+			state_stack.add null
+			return
+		end
+
+		state_stack.add state.trans(a.prod)
+	end
+
+	# Return true if the elements in the stack are compatible with the reduction.
+	fun can_reduce(alternative: Alternative): Bool
+	do
+		var idx = node_stack.length - alternative.elems.length
+		if idx < 0 then return false
+		for i in [0..alternative.elems.length[ do
+			if alternative.elems[i] != node_stack[idx+i].element then return false
+		end
+		return true
+	end
+
+	# Try to shift on the current state.
+	# If not doable, try to reduce something, then shift.
+	# Return true is a shift was done.
+	fun try_shift(e: Element): Bool
+	do
+		var s = state.trans(e)
+		if s == null then
+			if not try_reduce then
+				return false
+			end
+			return try_shift(e)
+		end
+		shift(e)
+		return true
+	end
+
+	# Try to reduce something on the current state.
+	fun try_reduce: Bool
+	do
+		for i in state.core do
+			# Filter out items that are not reduction
+			if i.next != null then continue
+			if can_reduce(i.alt) then
+				reduce(i.alt)
+				return true
+			end
+		end
+		return false
+	end
+
+	fun tree: CSTNode do return node_stack.last
+end
+
+# A CST node of the LREngine
+class CSTNode
+	var element: Element
+	var children = new Array[CSTNode]
+
+	fun dump(prefix: nullable String): String
+	do
+		if prefix == null then prefix = ""
+		var res = element.to_s + "\n"
+		if children.length == 0 then return res
+		var p2 = prefix + "│ "
+		for c in [0..children.length-1[ do
+			res += prefix + "├╴"
+			res += children[c].dump(p2)
+		end
+		res += prefix + "└╴"
+		res += children.last.dump(prefix + "  ")
+		return res
+	end
+end
+
 # A transition in a LR automaton
 class LRTransition
 	# The origin state
