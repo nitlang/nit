@@ -630,6 +630,9 @@ class LRAutomaton
 					res.add "\t\t\t{i2}\n"
 				end
 			end
+			var engine = new LREngine
+			engine.start(s)
+			res.add "\tPOSSIBLE EXIT {engine.find_exit}\n"
 			res.add "\tTRANSITIONS {s.outs.length}\n"
 			for t in s.outs do
 				res.add "\t\t{t.elem} |-> s{t.to.number}\n"
@@ -1089,10 +1092,25 @@ class LRState
 	# Is the state LR0?
 	fun is_lr0: Bool do return reduces.length <= 1 and shifts.is_empty or reduces.is_empty
 
+	# The item that reduces the most
+	# Is used by `find_exit`
+	fun exit_item: Item
+	do
+		var exit_candidate = core.first
+		for i in core do
+			if i.alt.prod.accept then return i
+			if i.pos > exit_candidate.pos then
+				exit_candidate = i
+			else if i.pos == exit_candidate.pos and i.alt.elems.length < exit_candidate.alt.elems.length then
+				exit_candidate = i
+			end
+		end
+		return exit_candidate
+	end
+
 	# Compute guards and conflicts
 	fun analysis
 	do
-
 		# Collect action and conflicts
 		for i in items do
 			var n = i.next
@@ -1125,9 +1143,35 @@ class LRState
 		var removed_reduces = new Array[Token]
 		for t, a in guarded_reduce do
 			if a.length > 1 then
+				print "---"
 				print "REDUCE/REDUCE Conflict on state {self} for token {t}:"
-				for i in a do print "\treduce: {i}"
+				print "A possible past: {prefix}"
 				conflicting_items.add_all a
+				var worst_exit = null
+				for i in a do
+					var engine = new LREngine
+					engine.start(self)
+					engine.reduce(i.alt)
+					var exit = engine.find_exit
+					if worst_exit == null or exit.length > worst_exit.length then worst_exit = exit
+				end
+				var amb = 0
+				for i in a do
+					var engine = new LREngine
+					engine.start(self)
+					engine.reduce(i.alt)
+					for e in worst_exit.as(not null) do
+						if not engine.try_shift(e) then break
+					end
+					print "REDUCE on item: {i}"
+					var exit = engine.find_exit
+					print "A possible future: {exit}"
+					print engine.tree.dump
+					if exit == worst_exit then amb += 1
+				end
+				if amb > 1 then
+					print "AMBIGUITY detected: same elements, different trees"
+				end
 			end
 			if guarded_shift.has_key(t) then
 				var ri = a.first
@@ -1158,17 +1202,46 @@ class LRState
 					end
 				end
 				if confs.is_empty then
+					print "---"
 					print "Automatic Dangling on state {self} for token {t}:"
 					print "\treduce: {ri}"
 					for r in ress do print r
 					removed_reduces.add t
 				else
+					print "---"
 					print "SHIFT/REDUCE Conflict on state {self} for token {t}:"
-					print "\treduce: {ri}"
-					for i in guarded_shift[t] do print "\tshift:  {i}"
+					print "A possible past: {prefix}"
 					removed_reduces.add t
 					conflicting_items.add_all a
 					conflicting_items.add_all guarded_shift[t]
+
+					var worst_exit = null
+					for i in guarded_shift[t] do
+						print "SHIFT on item: {i}"
+						var engine = new LREngine
+						engine.start(self)
+						for e in i.future do engine.shift(e)
+						var exit = engine.find_exit
+						print "A possible future: {exit}"
+						print engine.tree.dump
+						if worst_exit == null or exit.length < worst_exit.length then
+							worst_exit = exit
+						end
+					end
+					var engine = new LREngine
+					engine.start(self)
+					engine.reduce(ri.alt)
+					for e in worst_exit.as(not null) do
+						if not engine.try_shift(e) then break
+					end
+					var reduce_exit = engine.find_exit
+					print "REDUCE on item: {ri}"
+					var exit = engine.find_exit
+					print "A possible future: {exit}"
+					print engine.tree.dump
+					if exit == worst_exit then
+						print "AMBIGUITY detected: same elements, different trees"
+					end
 				end
 			end
 		end
@@ -1313,6 +1386,16 @@ class LREngine
 	end
 
 	fun tree: CSTNode do return node_stack.last
+
+	fun find_exit: Array[Element]
+	do
+		while state != null do
+			var item = state.exit_item
+			for e in item.future do shift(e)
+			reduce(item.alt)
+		end
+		return future
+	end
 end
 
 # A CST node of the LREngine
@@ -1399,6 +1482,15 @@ class Item
 	fun avance: Item
 	do
 		var res = new Item(alt, pos+1)
+		return res
+	end
+
+	fun future: Array[Element]
+	do
+		var res = new Array[Element]
+		for i in [pos .. alt.elems.length[ do
+			res.add alt.elems[i]
+		end
 		return res
 	end
 end
