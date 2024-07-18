@@ -764,11 +764,11 @@ private class Generator
 
 		add "class Parser_{name}"
 		add "\tsuper Parser"
-		add "\tredef fun start_state do return state_{states.first.cname}"
+		add "\tredef fun start_state do return state_{states.first.number}"
 		add "end"
 		
 		for s in states do
-			add "private fun state_{s.cname}: LRState{s.cname} do return once new LRState{s.cname}"
+			add "private fun state_{s.number}: LRState{s.number} do return once new LRState{s.number}"
 		end
 		for p in gram.prods do
 			add "private fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
@@ -784,7 +784,7 @@ private class Generator
 			if not s.need_guard then continue
 			add "\t# guarded action for state {s.name}"
 			add "\t# {s.shifts.length} shift(s) and {s.reduces.length} reduce(s)"
-			add "\tprivate fun action_s{s.cname}(parser: Parser) do"
+			add "\tprivate fun action_s{s.number}(parser: Parser) do"
 			if s.reduces.length != 1 then
 				add "\t\tparser.parse_error"
 			else
@@ -804,14 +804,14 @@ private class Generator
 			add "\tsuper NToken"
 			for s in t.shifts do
 				if not s.need_guard then continue
-				add "\tredef fun action_s{s.cname}(parser) do"
+				add "\tredef fun action_s{s.number}(parser) do"
 				gen_shift_to_nit(s, t)
 				add "\tend"
 			end
 			for s in t.reduces do
 				if not s.need_guard then continue
 				if s.reduces.length <= 1 then continue
-				add "\tredef fun action_s{s.cname}(parser) do"
+				add "\tredef fun action_s{s.number}(parser) do"
 				add "\t\treduce_{s.guarded_reduce[t].first.alt.cname}(parser)"
 				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
 				add "\tend"
@@ -823,7 +823,7 @@ private class Generator
 		add "redef class LRGoto"
 		for s in states do
 			if s.gotos.length <= 1 then continue
-			add "\tprivate fun goto_s{s.cname}(parser: Parser) do abort"
+			add "\tprivate fun goto_s{s.number}(parser: Parser) do abort"
 		end
 		add "end"
 
@@ -832,7 +832,7 @@ private class Generator
 			add "\tsuper LRGoto"
 			for s in p.gotos do
 				if s.gotos.length <= 1 then continue
-				add "\tredef fun goto_s{s.cname}(parser) do"
+				add "\tredef fun goto_s{s.number}(parser) do"
 				gen_goto_to_nit(s, p)
 				add "\tend"
 			end
@@ -888,7 +888,7 @@ private class Generator
 
 		for s in states do
 			add "# State {s.name}"
-			add "private class LRState{s.cname}"
+			add "private class LRState{s.number}"
 			add "\tsuper LRState"
 
 			add "\tredef fun to_s do return \"{s.name.escape_to_nit}\""
@@ -907,7 +907,7 @@ private class Generator
 
 			add "\tredef fun action(parser) do"
 			if s.need_guard then
-				add "\t\tparser.peek_token.action_s{s.cname}(parser)"
+				add "\t\tparser.peek_token.action_s{s.number}(parser)"
 			else if s.reduces.length == 1 then
 				add "\t\treduce_{s.reduces.first.cname}(parser)"
 				#gen_reduce_to_nit(s.reduces.first)
@@ -919,7 +919,7 @@ private class Generator
 			if not s.gotos.is_empty then
 				add "\tredef fun goto(parser, goto) do"
 				if s.gotos.length > 1 then
-					add "\t\tgoto.goto_s{s.cname}(parser)"
+					add "\t\tgoto.goto_s{s.number}(parser)"
 				else
 					gen_goto_to_nit(s, s.gotos.first)
 				end
@@ -935,14 +935,14 @@ private class Generator
 	fun gen_shift_to_nit(s: LRState, t: Token)
 	do
 		var dest = s.trans(t)
-		add "\t\tparser.shift(state_{dest.cname})"
+		add "\t\tparser.shift(state_{dest.number})"
 
 	end
 
 	fun gen_goto_to_nit(s: LRState, p: Production)
 	do
 		var dest = s.trans(p)
-		add "\t\tparser.push(state_{dest.cname})"
+		add "\t\tparser.push(state_{dest.number})"
 	end
 
 	fun gen_reduce_to_nit(alt: Alternative)
@@ -1012,8 +1012,6 @@ class LRState
 	# Name of the automaton (short part from the start)
 	var name: String
 
-	# Mangled name
-	var cname: String is lazy do return name.to_cmangle
 
 	# Number
 	var number = -1
