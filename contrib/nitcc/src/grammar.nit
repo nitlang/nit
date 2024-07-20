@@ -1092,22 +1092,6 @@ class LRState
 	# Is the state LR0?
 	fun is_lr0: Bool do return reduces.length <= 1 and shifts.is_empty or reduces.is_empty
 
-	# The item that reduces the most
-	# Is used by `find_exit`
-	fun exit_item: Item
-	do
-		var exit_candidate = core.first
-		for i in core do
-			if i.alt.prod.accept then return i
-			if i.pos > exit_candidate.pos then
-				exit_candidate = i
-			else if i.pos == exit_candidate.pos and i.alt.elems.length < exit_candidate.alt.elems.length then
-				exit_candidate = i
-			end
-		end
-		return exit_candidate
-	end
-
 	# Compute guards and conflicts
 	fun analysis
 	do
@@ -1389,8 +1373,17 @@ class LREngine
 
 	fun find_exit: Array[Element]
 	do
-		while state != null do
-			var item = state.exit_item
+		var set = new HashSet[LRState]
+		loop
+			var state = self.state
+			if state == null then break
+			if set.has(state) then
+				# We are looping, just abort
+				break
+			end
+			set.add(state)
+			# Heuristic, the first item is an accepting one or something that exit without looping
+			var item = state.core.first
 			for e in item.future do shift(e)
 			reduce(item.alt)
 		end
