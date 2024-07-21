@@ -1,0 +1,5 @@
+Grammar lg;
+Parser
+Ignored #10, #32;
+e = e '<' e | e '>' e | n | '<' e '>' ;
+n = '0' ;

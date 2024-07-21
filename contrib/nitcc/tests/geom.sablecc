@@ -1,0 +1,8 @@
+Grammar geom;
+Parser
+Ignored #10, #32;
+forme =
+	'triangle' point point point |
+	'circle' point point ;
+point = num 'x' num | num '@' num | 'centre' forme;
+num = '0';

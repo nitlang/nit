@@ -43,6 +43,10 @@ class Gram
 				if a == last then res.append(" ;\n") else res.append(" |\n")
 			end
 			if p.is_nullable then res.append "\t// is nullable\n"
+			if p.sample_alternative != null then
+				res.append "\t// sample: {p.sample_to_s}\n"
+			end
+
 			if not p.firsts.is_empty then
 				res.append "\t// firsts:\n"
 				for x in p.firsts do res.append "\t//   {x}\n"
@@ -133,7 +137,7 @@ class Gram
 
 		analyse
 
-		var first = new LRState("Start")
+		var first = new LRState
 		first.number = 0
 		for i in start.start_state do first.add(i)
 
@@ -149,7 +153,10 @@ class Gram
 
 			#print state
 			automaton.states.add(state)
-			state.analysis
+			# Extends the core
+			for i in state.items.to_a do
+				state.extends(i)
+			end
 
 			var nexts = new HashMap[Element, LRState]
 			for i in state.items do
@@ -158,13 +165,10 @@ class Gram
 				if nexts.has_key(e) then
 					nexts[e].add(i.avance)
 				else
-					var name
-					if state == automaton.states.first then
-						name = e.to_s
-					else
-						name = "{state.name} {e}"
-					end
-					var next = new LRState(name)
+					var next = new LRState
+					next.prev = state
+					next.prefix.add_all(state.prefix)
+					next.prefix.add(e)
 					nexts[e] = next
 					next.add(i.avance)
 				end
@@ -178,6 +182,10 @@ class Gram
 				var new_state = true
 				for n in seen do
 					if n == next then
+						if next.prefix.length < n.prefix.length then
+							n.prefix = next.prefix
+							n.prev = next.prev
+						end
 						next = n
 						new_state = false
 						break
@@ -198,7 +206,41 @@ class Gram
 				next.ins.add t
 			end
 		end
+		for state in automaton.states do
+			state.analysis
+		end
 		return automaton
+	end
+
+	fun compute_sample_length
+	do
+		loop
+			var changed = false
+			for p in prods do
+				for a in p.alts do
+					if a.phony then continue
+					var sample_length = 0
+					for e in a.elems do
+						if e isa Token then
+							sample_length += 1
+						else if e isa Production then
+							var e_len = e.sample_length
+							if e_len == null then continue label alts
+							sample_length += e_len
+						else
+							abort
+						end
+					end
+					var e_len = p.sample_length
+					if e_len == null or e_len > sample_length then
+						p.sample_length = sample_length
+						p.sample_alternative = a
+						changed = true
+					end
+				end label alts
+			end
+			if not changed then break
+		end
 	end
 
 	# Compute `nullables`, `firsts` and `afters` of productions
@@ -230,6 +272,8 @@ class Gram
 			end
 			if not changed then break
 		end
+
+		compute_sample_length
 
 		loop
 			var changed = false
@@ -345,6 +389,24 @@ class Production
 
 	# Is the production nullable
 	var is_nullable = false
+
+	# The lenght (in tokens) of the smallest sample
+	var sample_length: nullable Int = null
+
+	# The allternative used as the smallest sample
+	var sample_alternative: nullable Alternative = null
+
+	redef fun sample_to_s: String
+	do
+		var alt = sample_alternative.as(not null)
+		var res = new Buffer
+		for e in alt.elems do
+			if not res.is_empty then res.add ' '
+			res.append(e.sample_to_s)
+		end
+		return res.to_s
+	end
+
 
 	# The first tokens of the production
 	var firsts = new HashSet[Item]
@@ -498,6 +560,9 @@ abstract class Element
 	var name: String
 	redef fun to_s do return name
 
+	# An example of a string
+	fun sample_to_s: String is abstract
+
 	private var acname_cache: nullable String = null
 
 	# The mangled name of the element
@@ -524,6 +589,11 @@ class Token
 	var shifts = new ArraySet[LRState]
 	# States of the LR automaton that reduce on self in the lookahead(1)
 	var reduces = new ArraySet[LRState]
+
+	redef fun sample_to_s
+	do
+		return to_s
+	end
 end
 
 #
@@ -542,7 +612,7 @@ class LRAutomaton
 		var res = new Array[String]
 		res.add "* LRAutomaton: {states.length} states\n"
 		for s in states do
-			res.add "s{s.number} {s.name}\n"
+			res.add "STATE {s}\n"
 			res.add "\tCORE\n"
 			for i in s.core do
 				res.add "\t\t{i}\n"
@@ -560,6 +630,9 @@ class LRAutomaton
 					res.add "\t\t\t{i2}\n"
 				end
 			end
+			var engine = new LREngine
+			engine.start(s)
+			res.add "\tPOSSIBLE EXIT {engine.find_exit}\n"
 			res.add "\tTRANSITIONS {s.outs.length}\n"
 			for t in s.outs do
 				res.add "\t\t{t.elem} |-> s{t.to.number}\n"
@@ -631,7 +704,7 @@ class LRAutomaton
 		f.write("node[shape=Mrecord,height=0];\n")
 
 		for s in states do
-			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
+			f.write "s{s.number} [label=\"{s.to_s.escape_to_dot}|"
 			for i in s.core do
 				f.write "{i.to_s.escape_to_dot}\\l"
 			end
@@ -695,11 +768,11 @@ private class Generator
 
 		add "class Parser_{name}"
 		add "\tsuper Parser"
-		add "\tredef fun start_state do return state_{states.first.cname}"
+		add "\tredef fun start_state do return state_{states.first.number}"
 		add "end"
 		
 		for s in states do
-			add "private fun state_{s.cname}: LRState{s.cname} do return once new LRState{s.cname}"
+			add "private fun state_{s.number}: LRState{s.number} do return once new LRState{s.number}"
 		end
 		for p in gram.prods do
 			add "private fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
@@ -713,9 +786,9 @@ private class Generator
 		add "redef class NToken"
 		for s in states do
 			if not s.need_guard then continue
-			add "\t# guarded action for state {s.name}"
+			add "\t# guarded action for state {s}"
 			add "\t# {s.shifts.length} shift(s) and {s.reduces.length} reduce(s)"
-			add "\tprivate fun action_s{s.cname}(parser: Parser) do"
+			add "\tprivate fun action_s{s.number}(parser: Parser) do"
 			if s.reduces.length != 1 then
 				add "\t\tparser.parse_error"
 			else
@@ -735,14 +808,14 @@ private class Generator
 			add "\tsuper NToken"
 			for s in t.shifts do
 				if not s.need_guard then continue
-				add "\tredef fun action_s{s.cname}(parser) do"
+				add "\tredef fun action_s{s.number}(parser) do"
 				gen_shift_to_nit(s, t)
 				add "\tend"
 			end
 			for s in t.reduces do
 				if not s.need_guard then continue
 				if s.reduces.length <= 1 then continue
-				add "\tredef fun action_s{s.cname}(parser) do"
+				add "\tredef fun action_s{s.number}(parser) do"
 				add "\t\treduce_{s.guarded_reduce[t].first.alt.cname}(parser)"
 				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
 				add "\tend"
@@ -754,7 +827,7 @@ private class Generator
 		add "redef class LRGoto"
 		for s in states do
 			if s.gotos.length <= 1 then continue
-			add "\tprivate fun goto_s{s.cname}(parser: Parser) do abort"
+			add "\tprivate fun goto_s{s.number}(parser: Parser) do abort"
 		end
 		add "end"
 
@@ -763,7 +836,7 @@ private class Generator
 			add "\tsuper LRGoto"
 			for s in p.gotos do
 				if s.gotos.length <= 1 then continue
-				add "\tredef fun goto_s{s.cname}(parser) do"
+				add "\tredef fun goto_s{s.number}(parser) do"
 				gen_goto_to_nit(s, p)
 				add "\tend"
 			end
@@ -818,11 +891,11 @@ private class Generator
 		end
 
 		for s in states do
-			add "# State {s.name}"
-			add "private class LRState{s.cname}"
+			add "# State {s}"
+			add "private class LRState{s.number}"
 			add "\tsuper LRState"
 
-			add "\tredef fun to_s do return \"{s.name.escape_to_nit}\""
+			add "\tredef fun to_s do return \"{s.to_s.escape_to_nit}\""
 			
 			var err = new Array[String]
 			for t in s.outs do
@@ -838,7 +911,7 @@ private class Generator
 
 			add "\tredef fun action(parser) do"
 			if s.need_guard then
-				add "\t\tparser.peek_token.action_s{s.cname}(parser)"
+				add "\t\tparser.peek_token.action_s{s.number}(parser)"
 			else if s.reduces.length == 1 then
 				add "\t\treduce_{s.reduces.first.cname}(parser)"
 				#gen_reduce_to_nit(s.reduces.first)
@@ -850,7 +923,7 @@ private class Generator
 			if not s.gotos.is_empty then
 				add "\tredef fun goto(parser, goto) do"
 				if s.gotos.length > 1 then
-					add "\t\tgoto.goto_s{s.cname}(parser)"
+					add "\t\tgoto.goto_s{s.number}(parser)"
 				else
 					gen_goto_to_nit(s, s.gotos.first)
 				end
@@ -866,14 +939,14 @@ private class Generator
 	fun gen_shift_to_nit(s: LRState, t: Token)
 	do
 		var dest = s.trans(t)
-		add "\t\tparser.shift(state_{dest.cname})"
+		add "\t\tparser.shift(state_{dest.number})"
 
 	end
 
 	fun gen_goto_to_nit(s: LRState, p: Production)
 	do
 		var dest = s.trans(p)
-		add "\t\tparser.push(state_{dest.cname})"
+		add "\t\tparser.push(state_{dest.number})"
 	end
 
 	fun gen_reduce_to_nit(alt: Alternative)
@@ -940,11 +1013,13 @@ end
 
 # A state in a LR automaton
 class LRState
-	# Name of the automaton (short part from the start)
-	var name: String
+	# Shortest prefix to go to this state
+	# Is empty for the start state
+	var prefix = new Array[Element]
 
-	# Mangled name
-	var cname: String is lazy do return name.to_cmangle
+	# The previous node according to the prefix
+	# Is null for the start state
+	var prev: nullable LRState = null
 
 	# Number
 	var number = -1
@@ -971,7 +1046,7 @@ class LRState
 	redef fun ==(o) do return o isa LRState and core == o.core
 	redef fun hash do return items.length
 
-	redef fun to_s do return items.join(" ; ")
+	redef fun to_s do return "{number} {prefix.join(" ")}"
 
 	# Add and item in the core
 	fun add(i: Item): Bool
@@ -1020,11 +1095,6 @@ class LRState
 	# Compute guards and conflicts
 	fun analysis
 	do
-		# Extends the core
-		for i in items.to_a do
-			extends(i)
-		end
-
 		# Collect action and conflicts
 		for i in items do
 			var n = i.next
@@ -1057,9 +1127,35 @@ class LRState
 		var removed_reduces = new Array[Token]
 		for t, a in guarded_reduce do
 			if a.length > 1 then
-				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
-				for i in a do print "\treduce: {i}"
+				print "---"
+				print "REDUCE/REDUCE Conflict on state {self} for token {t}:"
+				print "A possible past: {prefix}"
 				conflicting_items.add_all a
+				var worst_exit = null
+				for i in a do
+					var engine = new LREngine
+					engine.start(self)
+					engine.reduce(i.alt)
+					var exit = engine.find_exit
+					if worst_exit == null or exit.length > worst_exit.length then worst_exit = exit
+				end
+				var amb = 0
+				for i in a do
+					var engine = new LREngine
+					engine.start(self)
+					engine.reduce(i.alt)
+					for e in worst_exit.as(not null) do
+						if not engine.try_shift(e) then break
+					end
+					print "REDUCE on item: {i}"
+					var exit = engine.find_exit
+					print "A possible future: {exit}"
+					print engine.tree.dump
+					if exit == worst_exit then amb += 1
+				end
+				if amb > 1 then
+					print "AMBIGUITY detected: same elements, different trees"
+				end
 			end
 			if guarded_shift.has_key(t) then
 				var ri = a.first
@@ -1090,17 +1186,46 @@ class LRState
 					end
 				end
 				if confs.is_empty then
-					print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
+					print "---"
+					print "Automatic Dangling on state {self} for token {t}:"
 					print "\treduce: {ri}"
 					for r in ress do print r
 					removed_reduces.add t
 				else
-					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
-					print "\treduce: {ri}"
-					for i in guarded_shift[t] do print "\tshift:  {i}"
+					print "---"
+					print "SHIFT/REDUCE Conflict on state {self} for token {t}:"
+					print "A possible past: {prefix}"
 					removed_reduces.add t
 					conflicting_items.add_all a
 					conflicting_items.add_all guarded_shift[t]
+
+					var worst_exit = null
+					for i in guarded_shift[t] do
+						print "SHIFT on item: {i}"
+						var engine = new LREngine
+						engine.start(self)
+						for e in i.future do engine.shift(e)
+						var exit = engine.find_exit
+						print "A possible future: {exit}"
+						print engine.tree.dump
+						if worst_exit == null or exit.length < worst_exit.length then
+							worst_exit = exit
+						end
+					end
+					var engine = new LREngine
+					engine.start(self)
+					engine.reduce(ri.alt)
+					for e in worst_exit.as(not null) do
+						if not engine.try_shift(e) then break
+					end
+					var reduce_exit = engine.find_exit
+					print "REDUCE on item: {ri}"
+					var exit = engine.find_exit
+					print "A possible future: {exit}"
+					print engine.tree.dump
+					if exit == worst_exit then
+						print "AMBIGUITY detected: same elements, different trees"
+					end
 				end
 			end
 		end
@@ -1132,6 +1257,157 @@ class LRState
 				todo.add(y)
 			end
 		end
+		return res
+	end
+end
+
+# Execution engine simulator on a LR automaton.
+# It has a stack of LR states and AST nodes.
+class LREngine
+	# The stack of stale, starts with start state
+	var state_stack = new Array[nullable LRState]
+
+	# A stack of AST node, reduced production and shifted token are pushed onto
+	var node_stack = new Array[CSTNode]
+
+	# The sequence of elements shifted for the first state
+	var past = new Array[Element]
+
+	# The sequence of elements shifted since the first state
+	var future = new Array[Element]
+
+	# The current state (top of the stack)
+	fun state: nullable LRState do return state_stack.last
+
+	# Initialize the engine on a given `state`.
+	# A consistent `past` is created to reach `state`.
+	# Subsequent shifts will be added to the `future`.
+	fun start(state: LRState)
+	do
+		var start = state
+		loop
+			var prev = start.prev
+			if prev == null then break
+			start = prev
+		end
+		state_stack.add(start)
+		for e in state.prefix do shift(e)
+		assert self.state == state
+
+		var tmp = future
+		future = past
+		past = tmp
+	end
+
+	# Perform a shift on `e` for the current `state` and add it to `future`.
+	# Both tokens and productions can be shifted.
+	# If the shift is impossible, the current state become null,
+	fun shift(e: Element)
+	do
+		state_stack.add state.trans(e)
+		future.add(e)
+		node_stack.add(new CSTNode(e))
+	end
+
+	# Perform a reduction on an alternative `a` on the current state.
+	fun reduce(a: Alternative)
+	do
+		assert can_reduce(a)
+		var len = a.elems.length
+		for i in [0..len[ do state_stack.pop
+		var node = new CSTNode(a.prod)
+		for i in [0..len[ do node.children.unshift(node_stack.pop)
+		node_stack.add(node)
+
+		# TODO something smart when accepting
+		if a.prod.accept then
+			state_stack.add null
+			return
+		end
+
+		state_stack.add state.trans(a.prod)
+	end
+
+	# Return true if the elements in the stack are compatible with the reduction.
+	fun can_reduce(alternative: Alternative): Bool
+	do
+		var idx = node_stack.length - alternative.elems.length
+		if idx < 0 then return false
+		for i in [0..alternative.elems.length[ do
+			if alternative.elems[i] != node_stack[idx+i].element then return false
+		end
+		return true
+	end
+
+	# Try to shift on the current state.
+	# If not doable, try to reduce something, then shift.
+	# Return true is a shift was done.
+	fun try_shift(e: Element): Bool
+	do
+		var s = state.trans(e)
+		if s == null then
+			if not try_reduce then
+				return false
+			end
+			return try_shift(e)
+		end
+		shift(e)
+		return true
+	end
+
+	# Try to reduce something on the current state.
+	fun try_reduce: Bool
+	do
+		for i in state.core do
+			# Filter out items that are not reduction
+			if i.next != null then continue
+			if can_reduce(i.alt) then
+				reduce(i.alt)
+				return true
+			end
+		end
+		return false
+	end
+
+	fun tree: CSTNode do return node_stack.last
+
+	fun find_exit: Array[Element]
+	do
+		var set = new HashSet[LRState]
+		loop
+			var state = self.state
+			if state == null then break
+			if set.has(state) then
+				# We are looping, just abort
+				break
+			end
+			set.add(state)
+			# Heuristic, the first item is an accepting one or something that exit without looping
+			var item = state.core.first
+			for e in item.future do shift(e)
+			reduce(item.alt)
+		end
+		return future
+	end
+end
+
+# A CST node of the LREngine
+class CSTNode
+	var element: Element
+	var children = new Array[CSTNode]
+
+	fun dump(prefix: nullable String): String
+	do
+		if prefix == null then prefix = ""
+		var res = element.to_s + "\n"
+		if children.length == 0 then return res
+		var p2 = prefix + "│ "
+		for c in [0..children.length-1[ do
+			res += prefix + "├╴"
+			res += children[c].dump(p2)
+		end
+		res += prefix + "└╴"
+		res += children.last.dump(prefix + "  ")
 		return res
 	end
 end
@@ -1199,6 +1475,15 @@ class Item
 	fun avance: Item
 	do
 		var res = new Item(alt, pos+1)
+		return res
+	end
+
+	fun future: Array[Element]
+	do
+		var res = new Array[Element]
+		for i in [pos .. alt.elems.length[ do
+			res.add alt.elems[i]
+		end
 		return res
 	end
 end

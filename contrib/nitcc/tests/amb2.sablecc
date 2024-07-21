@@ -1,0 +1,6 @@
+Grammar amb;
+Parser
+Ignored #10, #32;
+e = '-' a | b '+' | '0';
+a = e ;
+b = e ;
