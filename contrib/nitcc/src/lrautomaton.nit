@@ -774,7 +774,7 @@ class LRState
 				end
 				if confs.is_empty then
 					print "---"
-					print "Automatic Dangling on state {self} for token {t}:"
+					print "Automatic Dangling SHIFT/REDUCE on state {self} for token {t}:"
 					print "\treduce: {ri}"
 					for r in ress do print r
 					removed_reduces.add t

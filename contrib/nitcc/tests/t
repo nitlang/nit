@@ -110,7 +110,7 @@ do
 			fi
 		fi
 
-		grep -i "error" "out/$bn.nitcc.log" > "out/$res"
+		grep -i 'error\|shift\|reduce' "out/$bn.nitcc.log" > "out/$res"
 		name="$a"
                 differ $res || err=1
 
