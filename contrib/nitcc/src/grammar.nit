@@ -128,8 +128,8 @@ class Gram
 	# The starting production in the augmented grammar
 	var start: nullable Production = null
 
-	# Compute a LR automaton
-	fun lr0: LRAutomaton
+	# Extends the grammar and compute information on productions
+	fun prepare_for_automaton
 	do
 		var start = new Production("_start")
 		self.start = start
@@ -140,10 +140,6 @@ class Gram
 		prods.add(start)
 
 		analyse
-
-		var automaton = new LRAutomaton(self)
-		automaton.build
-		return automaton
 	end
 
 	fun compute_sample_length
@@ -813,6 +809,38 @@ class LRAutomaton
 			f.write("\n")
 		end
 		f.close
+	end
+end
+
+class LR1Automaton
+	super LRAutomaton
+
+	redef fun same_state_item(i1, i2)
+	do
+		return i1 == i2 and i1.after == i2.after
+	end
+end
+
+class LR0Automaton
+	super LRAutomaton
+end
+
+class LALR1Automaton
+	super LRAutomaton
+	redef fun merge_state(old_state, new_state)
+	do
+		var changed = super
+		# Merge the nexts of the items
+		for i1 in new_state.items do
+			for i2 in old_state.items do
+				if i1 == i2 then
+					if i2.add_after(i1.after) then
+						changed = true
+					end
+				end
+			end
+		end
+		return changed
 	end
 end
 

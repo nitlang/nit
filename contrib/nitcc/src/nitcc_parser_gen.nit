@@ -195,7 +195,9 @@ p_pri.new_alt0("priority_left").phony = true
 p_pri.new_alt0("priority_right").phony = true
 p_pri.new_alt0("priority_unary").phony = true
 
-var a = g.lr0
+g.prepare_for_automaton
+var a = new LALR1Automaton(g)
+a.build
 
 print "LR automaton: {a.states.length} states (see nitcc0.lr.dot)"
 a.to_dot("nitcc0.lr.dot")
