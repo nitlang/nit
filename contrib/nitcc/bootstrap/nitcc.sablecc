@@ -1,0 +1,122 @@
+// The grammar of nitcc (subset of sablecc4)
+Grammar nitcc;
+
+Lexer
+
+// Identifier, used for production, expressions, alternatives, etc.
+id = ('a'..'z')('a'..'z'|'0'..'9'|'_')*;
+
+// A printable character (inside strings)
+ch = ' ' ...;
+
+// Literal strings
+str = '\'' (ch-'\\'-'\''|'\\'ch)* '\'';
+
+// A char by decimal ascii
+ch_dec = '#' ('0'..'9')+ ;
+
+// A char by hexadecimal ascii
+ch_hex = '#' ('x'|'X') ('0'..'9'|'a'..'z'|'A'..'Z')+ ;
+
+// A single-line comment
+comment = '//' ch* '\n'?;
+
+any = '\t' ...;
+not_star = any - '*';
+not_star_not_slash = not_star - '/';
+
+ccomment = '/*' not_star* ('*' (not_star_not_slash not_star*)?)* '*/';
+
+unknown_keyword = 'A'..'Z'('A'..'Z'|'a'..'z'|'0'..'9'|'_')*;
+
+// Igndored stufs
+blank = '\r' | '\n' | '\t' | ' ' | comment | ccomment;
+
+Parser
+
+Ignored blank;
+Rejected unknown_keyword;
+
+grammar = 'Grammar' id ';' lexer_part? parser_part? tree_part?;
+
+lexer_part = 'Lexer' expr*;
+
+expr = id '=' re ';';
+
+// No priority (yet) so just decompose
+re =
+	{alter:} re '|' re1 |
+	re1 ;
+
+re1 {-> re} =
+	{minus:} re1 '-' re2 |
+	{except:} re1 'Except' re2 |
+	{and:} re1 'And' re2 |
+	re2 ;
+
+re2 {-> re} =
+	{conc:} re2 re3 |
+	re3 ;
+
+re3 {-> re} =
+	{ques:} re3 '?' |
+	{star:} re3 '*' |
+	{plus:} re3 '+' |
+	{shortest:} 'Shortest' '(' re ')' |
+	{longest:} 'Longest' '(' re ')' |
+	{prefixes:} 'Prefixes' '(' re ')' |
+	{id:} id |
+	{par:} '(' re ')' |
+	{class:} text '.' '.' text |
+	{openclass:} text '.' '.' '.' |
+	{any:} 'Any' |
+	{end:} 'End' |
+	{text:} text ;
+
+text {-> re} =
+	{str:} str |
+	{ch_dec:} ch_dec |
+	{ch_hex:} ch_hex ;
+
+parser_part = 'Parser' ign? rej? prod*;
+
+ign = 'Ignored' elem_list ';' ;
+
+rej = 'Rejected' elem_list ';' ;
+
+prod = id ptrans? '=' alts priority* ';';
+
+ptrans = '{' '->' id '}';
+atrans = '{' '->' '}';
+
+alts =
+	{more:} alts '|' alt |
+	{one:} alt ;
+
+alt = altid? nelem* atrans?;
+
+altid = '{' id ':' '}' | '{' id '}';
+
+nelem = elem | elemid elem;
+
+elemid = '[' id ':' ']' | '[' id ']' ':';
+
+elem_list =
+	{more:} elem_list ',' elem |
+	{one:} elem ;
+
+elem =
+	{id:} id |
+	{str:} text |
+	{star:} elem '*' |
+	{ques:} elem '?' |
+	{plus:} elem '+' |
+	{par:} '(' elem+ ')' |
+	{empty:} 'Empty' ;
+
+priority =
+	{left:} 'Left' alts |
+	{right:} 'Right' alts |
+	{unary:} 'Unary' alts ;
+
+tree_part = 'Tree' prod*;

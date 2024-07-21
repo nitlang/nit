@@ -2,14 +2,9 @@ NITC=../../../bin/nitc
 
 all: nitcc calc minilang blob
 
-nitcc_parser_gen: nitcc_parser_gen.nit
-	@echo "*** Compile the nitcc bootstrap parser generator -- level 0"
-	${NITC} nitcc_parser_gen.nit -v
-
-nitcc0: nitcc.nit nitcc_parser_gen
+nitcc0:
 	@echo "*** Compile the primitive nitcc --- bootstrap level 0"
-	./nitcc_parser_gen
-	${NITC} nitcc.nit -v -o nitcc0
+	${NITC} ../bootstrap/nitcc.nit -v -o nitcc0
 
 nitcc1: nitcc0 nitcc.nit nitcc.sablecc
 	@echo "*** Compile the intermediate nitcc --- bootstrap level 1"
