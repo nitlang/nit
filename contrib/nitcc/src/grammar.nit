@@ -400,7 +400,7 @@ class Alternative
 	var elems: Array[Element]
 
 	# The first item of the alternative
-	var first_item = new Item(self, 0)
+	fun first_item: Item do return new Item(self, 0)
 
 	# The name of the elements
 	var elems_names = new Array[nullable String]
@@ -552,11 +552,13 @@ class LRAutomaton
 		states.add first
 
 		while not todo.is_empty do
+			# In LALR, we can "recompute" a state to propagate new lookaheads
+			# This is equivalent of analysing a new LR(1) state, except that in LALR we reanalyse an existing one that was updated.
 			var state = todo.shift
 
 			# Extends the core
 			for i in state.items.to_a do
-				state.extends(i)
+				extends_state(state, i)
 			end
 
 			# Compute a new proto-state for each outgoing transitions
@@ -585,12 +587,9 @@ class LRAutomaton
 				# Look for an existing LR0 state in the automaton
 				var new_state = true
 				for n in states do
-					if n.same_lr0(next) then
-						# Update to a shorter prefix if possible
-						if next.prefix.length < n.prefix.length then
-							n.prefix = next.prefix
-							n.prev = next.prev
-						end
+					if same_state(n, next) then
+						var changed = merge_state(n, next)
+						if changed then todo.add(n)
 						next = n
 						new_state = false
 						break
@@ -618,6 +617,54 @@ class LRAutomaton
 		end
 		for state in states do
 			state.analysis
+		end
+	end
+
+	# Says if the two state should be merged into one
+	fun same_state(s1, s2: LRState): Bool
+	do
+		if s1.core.length != s2.core.length then return false
+		var count = 0
+		for i1 in s1.core do
+			for i2 in s2.core do
+				if same_state_item(i1, i2) then
+					count += 1
+					break
+				end
+			end
+		end
+		return count == s1.core.length
+	end
+
+	# Used by `same_state` to compare two items
+	fun same_state_item(i1, i2: Item): Bool
+	do
+		return i1 == i2
+	end
+
+	# Merge information of new_stat into old_state.
+	# new_state will be discarded.
+	# Return `true` if `old_state` need to be processed again (LALR only)
+	fun merge_state(old_state, new_state: LRState): Bool
+	do
+		# Update to a shorter prefix if possible
+		if new_state.prefix.length < old_state.prefix.length then
+			new_state.prefix = old_state.prefix
+			new_state.prev = old_state.prev
+		end
+
+		return false
+	end
+
+	# Recursively extends item outside the core
+	fun extends_state(state: LRState, i: Item)
+	do
+		var e = i.next
+		if e == null then return
+		if not e isa Production then return
+		for i2 in e.start_state do
+			i2.add_after i.lookahead_of_production
+			if state.add_item(i2) then extends_state(state, i2)
 		end
 	end
 
@@ -1058,48 +1105,35 @@ class LRState
 		return null
 	end
 
-	fun same_lr0(o: LRState): Bool
-	do
-		if core.length != o.core.length then return false
-		var count = 0
-		for i1 in core do
-			for i2 in o.core do
-				if i1 == i2 then
-					count += 1
-					break
-				end
-			end
-		end
-		return count == core.length
-	end
-
 	redef fun to_s do return "{number} {prefix.join(" ")}"
 
 	# Add and item in the core
+	# If the item already exists, merge the after
 	fun add_item(i: Item): Bool
 	do
-		if items.has(i) then return false
+		if items.has(i) then
+			for i2 in items do
+				if i2 != i then continue
+				return i2.add_after(i.after)
+			end
+			return false
+		end
 
 		items.add(i)
 		if i.pos > 0 or i.alt.prod.accept then core.add(i)
 		return true
 	end
 
-	# Recursively extends item outside the core
-	fun extends(i: Item)
-	do
-		var e = i.next
-		if e == null then return
-		if not e isa Production then return
-		for i2 in e.start_state do
-			if add_item(i2) then extends(i2)
-		end
-	end
-
-	# SLR lookahead
+	# Lookahead after the reduction of i
 	fun lookahead(i: Item): Set[Item]
 	do
-		return i.alt.prod.afters
+		var res = i.after
+		if res.is_empty then
+			# no after, it means we are in SLR mode
+			# So return the global afters of the production
+			return i.alt.prod.afters
+		end
+		return res
 	end
 
 	# Set of all reductions
@@ -1455,6 +1489,8 @@ class Item
 	var alt: Alternative
 	# The dot index (0 means before the first element)
 	var pos: Int
+	# The lookahead at the end of the item
+	var after = new ArraySet[Item]
 
 	redef fun ==(o) do return o isa Item and alt == o.alt and pos == o.pos
 	redef fun hash do return alt.hash + pos
@@ -1462,14 +1498,31 @@ class Item
 	redef fun to_s
 	do
 		var b = new FlatBuffer
-		b.append("{alt.prod.name}::{alt.name}=")
+		b.append("{alt.prod.name}→")
 		for i in [0..alt.elems.length[
 		do
-			if pos == i then b.append(".") else b.append(" ")
+			if pos == i then b.append("·") else b.append(" ")
 			b.append(alt.elems[i].to_s)
 		end
-		if pos == alt.elems.length then b.append(".")
+		if pos == alt.elems.length then b.append("·")
+		if not after.is_empty then
+			b.append(", ")
+			var toks = new ArraySet[Token]
+			for a in after do toks.add(a.next.as(Token))
+			b.append(toks.join("/"))
+		end
 		return b.to_s
+	end
+
+	fun add_after(items: Collection[Item]): Bool
+	do
+		var res = false
+		for i in items do
+			if after.has(i) then continue
+			after.add i
+			res = true
+		end
+		return res
 	end
 
 	# The element that follows the dot, null if the dot is at the end
@@ -1479,29 +1532,44 @@ class Item
 		return alt.elems[pos]
 	end
 
-	# SLR lookahead
-	fun lookahead: Set[Token]
+	# LALR and LR1 lookahead. Return what follows the next production
+	fun lookahead_of_production: Set[Item]
 	do
-		var res = new HashSet[Token]
-		var p = pos + 1
+		assert next isa Production
+		var res = new HashSet[Item]
+		var item = self
+		var p = pos
 		while p < alt.elems.length do
-			var e = alt.elems[p]
-			if e isa Token then
-				res.add(e)
+			p = p + 1
+
+			if p == alt.elems.length then
+				# We are at the end
+				res.add_all(after)
 				break
-			else if e isa Production then
-				#res.add_all(e.firsts)
-				if not e.is_nullable then break
 			end
-			p += 1
+
+			var next = alt.elems[p]
+			if next isa Token then
+				item = new Item(alt, p)
+				res.add(item)
+				break
+			else if next isa Production then
+				res.add_all(next.firsts)
+				if not next.is_nullable then break
+			else
+				abort # impossible
+			end
 		end
+		#print "lookahead {self} -> {res}"
 		return res
 	end
 
 	# The item that advanced once
 	fun avance: Item
 	do
+		assert pos < alt.elems.length
 		var res = new Item(alt, pos+1)
+		res.add_after after
 		return res
 	end
 
