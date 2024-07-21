@@ -125,10 +125,14 @@ class Gram
 		end
 	end
 
+	# The starting production in the augmented grammar
+	var start: nullable Production = null
+
 	# Compute a LR automaton
 	fun lr0: LRAutomaton
 	do
 		var start = new Production("_start")
+		self.start = start
 		start.accept = true
 		var eof = new Token("Eof")
 		tokens.add(eof)
@@ -137,78 +141,8 @@ class Gram
 
 		analyse
 
-		var first = new LRState
-		first.number = 0
-		for i in start.start_state do first.add(i)
-
 		var automaton = new LRAutomaton(self)
-
-		var todo = new List[LRState]
-		todo.add first
-		var seen = new HashSet[LRState]
-		seen.add first
-
-		while not todo.is_empty do
-			var state = todo.shift
-
-			#print state
-			automaton.states.add(state)
-			# Extends the core
-			for i in state.items.to_a do
-				state.extends(i)
-			end
-
-			var nexts = new HashMap[Element, LRState]
-			for i in state.items do
-				var e = i.next
-				if e == null then continue
-				if nexts.has_key(e) then
-					nexts[e].add(i.avance)
-				else
-					var next = new LRState
-					next.prev = state
-					next.prefix.add_all(state.prefix)
-					next.prefix.add(e)
-					nexts[e] = next
-					next.add(i.avance)
-				end
-			end
-
-			for e, next in nexts do
-
-				#print "#states: {seen.length}"
-
-				# Look for an existing LR0 state in the automaton
-				var new_state = true
-				for n in seen do
-					if n == next then
-						if next.prefix.length < n.prefix.length then
-							n.prefix = next.prefix
-							n.prev = next.prev
-						end
-						next = n
-						new_state = false
-						break
-					end
-				end
-
-				# If not, add it to the pool and the todo-list
-				if new_state then
-					next.number = seen.length
-					assert not seen.has(next)
-					seen.add(next)
-					todo.add(next)
-				end
-
-				# Add the transition
-				var t = new LRTransition(state, next, e)
-				state.outs.add t
-				next.ins.add t
-			end
-		end
-		for state in automaton.states do
-			state.analysis
-		end
+		automaton.build
 		return automaton
 	end
 
@@ -605,6 +539,87 @@ class LRAutomaton
 
 	# The set of states
 	var states = new Array[LRState]
+
+	fun build
+	do
+		var start = grammar.start
+
+		var first = new LRState
+		first.number = 0
+		for i in start.start_state do first.add_item(i)
+		var todo = new List[LRState]
+		todo.add first
+		states.add first
+
+		while not todo.is_empty do
+			var state = todo.shift
+
+			# Extends the core
+			for i in state.items.to_a do
+				state.extends(i)
+			end
+
+			# Compute a new proto-state for each outgoing transitions
+			var nexts = new HashMap[Element, LRState]
+			for i in state.items do
+				var e = i.next
+				if e == null then continue
+				if nexts.has_key(e) then
+					nexts[e].add_item(i.avance)
+				else
+					var next = new LRState
+					next.prev = state
+					next.prefix.add_all(state.prefix)
+					next.prefix.add(e)
+					nexts[e] = next
+					next.add_item(i.avance)
+				end
+			end
+
+			# Process the protostate
+			# Either it already exists and we connect to it (and update it in LALR)
+			# Or its a new state, we will add it to the todo list.
+			for e, next in nexts do
+				#print "#states: {states.length}"
+
+				# Look for an existing LR0 state in the automaton
+				var new_state = true
+				for n in states do
+					if n.same_lr0(next) then
+						# Update to a shorter prefix if possible
+						if next.prefix.length < n.prefix.length then
+							n.prefix = next.prefix
+							n.prev = next.prev
+						end
+						next = n
+						new_state = false
+						break
+					end
+				end
+
+				# If not, add it to the pool and the todo-list
+				if new_state then
+					next.number = states.length
+					assert not states.has(next)
+					states.add(next)
+					todo.add(next)
+				end
+
+				# Add the transition if needed
+				var n = state.trans(e)
+				if n == null then
+					var t = new LRTransition(state, next, e)
+					state.outs.add t
+					next.ins.add t
+				else
+					assert n == next
+				end
+			end
+		end
+		for state in states do
+			state.analysis
+		end
+	end
 
 	# Dump of the automaton
 	fun pretty: String
@@ -1043,13 +1058,25 @@ class LRState
 		return null
 	end
 
-	redef fun ==(o) do return o isa LRState and core == o.core
-	redef fun hash do return items.length
+	fun same_lr0(o: LRState): Bool
+	do
+		if core.length != o.core.length then return false
+		var count = 0
+		for i1 in core do
+			for i2 in o.core do
+				if i1 == i2 then
+					count += 1
+					break
+				end
+			end
+		end
+		return count == core.length
+	end
 
 	redef fun to_s do return "{number} {prefix.join(" ")}"
 
 	# Add and item in the core
-	fun add(i: Item): Bool
+	fun add_item(i: Item): Bool
 	do
 		if items.has(i) then return false
 
@@ -1065,7 +1092,7 @@ class LRState
 		if e == null then return
 		if not e isa Production then return
 		for i2 in e.start_state do
-			if add(i2) then extends(i2)
+			if add_item(i2) then extends(i2)
 		end
 	end
 
