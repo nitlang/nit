@@ -1,0 +1,4 @@
+Grammar amb;
+Parser
+Ignored #10, #32;
+s = 'hello' | 'hello' ;

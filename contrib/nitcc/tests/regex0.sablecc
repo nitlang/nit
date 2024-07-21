@@ -1,0 +1,5 @@
+Grammar regex;
+Parser
+Ignored #10, #32;
+e = a | e '|' e | e e | e '*' ;
+a = 'a' ;

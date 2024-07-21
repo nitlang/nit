@@ -1,0 +1,9 @@
+Grammar dangling;
+Parser
+Ignored #10, #32;
+es = e*;
+e
+	= 'a' e 'end'
+	| 'a' e
+	| 'id'
+	;

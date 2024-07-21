@@ -1,0 +1,6 @@
+Grammar amb;
+Parser
+Ignored #10, #32;
+s = a | a 'x' ;
+a = b | b 'x' ;
+b = 'c' ;

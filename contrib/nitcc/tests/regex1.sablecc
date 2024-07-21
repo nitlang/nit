@@ -1,0 +1,13 @@
+Grammar regex;
+Parser
+Ignored #10, #32;
+e
+	= a
+Unary
+	e '*'
+Left
+	e e
+Left
+	e '|' e
+	;
+a = 'a' ;

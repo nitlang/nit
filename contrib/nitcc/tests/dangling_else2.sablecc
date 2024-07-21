@@ -1,0 +1,14 @@
+Grammar dangling;
+Parser
+Ignored #10, #32;
+ss = s*;
+
+s
+	= 'a'
+	| 'i' se 'e' s
+	| 'i' s
+	;
+se
+	= 'a'
+	| 'i' se 'e' se
+	;

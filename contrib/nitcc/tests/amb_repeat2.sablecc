@@ -1,0 +1,6 @@
+Grammar amb;
+Parser
+Ignored #10, #32;
+s = a | Empty ;
+a = b | Empty ;
+b = 'c' ;
