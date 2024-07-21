@@ -29,7 +29,7 @@
 #
 module nitcc_parser_gen
 
-import grammar
+import lrautomaton
 
 var g = new Gram
 var p_gr = new Production("grammar")

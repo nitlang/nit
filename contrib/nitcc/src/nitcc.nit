@@ -16,6 +16,7 @@
 module nitcc
 
 import nitcc_semantic
+import lrautomaton
 
 # Load the grammar file
 
