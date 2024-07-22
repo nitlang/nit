@@ -381,7 +381,7 @@ redef class Generator
 		add "end"
 
 		for t in gram.tokens do
-			add "redef class {t.cname}"
+			add "redef class {t.acname}"
 			for s in t.shifts do
 				if not s.need_guard then continue
 				add "\tredef fun action_s{s.number}(parser) do"

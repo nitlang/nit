@@ -377,9 +377,9 @@ class Gram
 
 		for t in tokens do
 			if t.name == "Eof" then
-				g.add "redef class {t.cname}"
+				g.add "redef class {t.acname}"
 			else
-				g.add "class {t.cname}"
+				g.add "class {t.acname}"
 				g.add "\tsuper NToken"
 			end
 			g.add "\tredef fun node_name do return \"{t.name.escape_to_nit}\""
