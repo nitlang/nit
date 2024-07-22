@@ -288,6 +288,84 @@ class Gram
 		return res
 	end
 
+        # Pool of elements that are modified with + (reuse them!)
+        var plusizes = new HashMap[Element, Production]
+
+        # Create a + version of an element
+        #
+        # ```
+        # foo = x bar+ y | z ;
+        # ```
+        #
+        # becomes
+        #
+        # ```
+        # foo = x abs0 y | z ;
+        # abs0 = {one:} bar | {more:} abs0 bar ;
+        # ```
+        fun plusize(e: Element): Production
+        do
+                if plusizes.has_key(e) then return plusizes[e]
+                var name = "{e}+"
+                var prod = new Production(name)
+                prod.acname = "Nodes[{e.acname}]"
+                prods.add(prod)
+                var alt1 = prod.new_alt("{name}_one", e)
+                alt1.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+                var alt2 = prod.new_alt("{name}_more", prod, e)
+                alt2.codes = [new CodePop, new CodePop, new CodeAdd: Code]
+                plusizes[e] = prod
+                return prod
+        end
+
+        # Pool of elements that are modified with ? (reuse them!)
+        var quesizes = new HashMap[Element, Production]
+
+        # Create a ? version of an element
+        #
+        # ```
+        # foo = x bar? y | z ;
+        # ```
+        #
+        # becomes
+        #
+        # ```
+        # foo = x abs0 y | z ;
+        # abs0 = {one:} bar | {none} Empty ;
+        # ```
+        fun quesize(e: Element): Production
+        do
+                if quesizes.has_key(e) then return quesizes[e]
+                var name = "{e}?"
+                var prod = new Production(name)
+                prod.acname = "nullable {e.acname}"
+                prods.add(prod)
+                var a1 = prod.new_alt("{name}_one", e)
+                a1.codes = [new CodePop]
+                var a0 = prod.new_alt0("{name}_none")
+                a0.codes = [new CodeNull]
+                quesizes[e] = prod
+                return prod
+        end
+
+        # Pool for anoymous grouped production (reuse them!)
+        var groupizes = new HashMap[Array[Element], Production]
+
+        # Create an anonymous production that groups some elements.
+        # Note: an anonymous production is always returned, even if `es` is empty or single.
+        fun groupize(es: Array[Element]): Production
+        do
+                if groupizes.has_key(es) then return groupizes[es]
+                var name = "_group{groupizes.length}"
+                var prod = new Production(name)
+                prods.add(prod)
+                var a1 = prod.new_alt2("{name}_single", es)
+                groupizes[es] = prod
+                return prod
+        end
+
+
+
 	# Generate the nodes classes
 	fun gen_to_nit(filepath: String, name: String)
 	do
