@@ -1,6 +1,7 @@
 *.dot
 *_parser.nit
 *_lexer.nit
+*_nodes.nit
 *_test_parser
 *.out
 tests/alt
