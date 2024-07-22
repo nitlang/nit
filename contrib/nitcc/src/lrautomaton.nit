@@ -440,11 +440,9 @@ redef class Generator
 			add "\tredef fun action(parser) do"
 			if s.need_guard then
 				add "\t\tparser.peek_token.action_s{s.number}(parser)"
-			else if s.reduces.length == 1 then
+			else
 				add "\t\treduce_{s.reduces.first.cname}(parser)"
 				#gen_reduce_to_nit(s.reduces.first)
-			else
-				abort
 			end
 			add "\tend"
 
@@ -613,8 +611,11 @@ class LRState
 	# Shifts guarded by tokens
 	var guarded_shift = new HashMap[Token, Set[Item]]
 
-	# Does the state need a guard to perform an action?
-	fun need_guard: Bool do return not shifts.is_empty or reduces.length > 1
+	# Does the state need a guard that look at (or consume) the next token to perform an action?
+	# The only `false` case is a state with a single reduce action, it can be performed without checking the token.
+	# A shift always consume the token.
+	# Empty state with no valid future, must consume the token to produces a syntax error
+	fun need_guard: Bool do return not (shifts.is_empty and reduces.length == 1)
 
 	# Is the state LR0?
 	fun is_lr0: Bool do return reduces.length <= 1 and shifts.is_empty or reduces.is_empty
@@ -650,6 +651,12 @@ class LRState
 				abort
 			end
 		end
+		if shifts.is_empty and reduces.is_empty then
+			print "---"
+			print "Empty state {self} without any reduce or shift"
+			print "The possible past: {prefix} has no valid future"
+		end
+
 		# Token to remove as reduction guard to solve S/R conflicts
 		var removed_reduces = new Array[Token]
 		for t, a in guarded_reduce do
