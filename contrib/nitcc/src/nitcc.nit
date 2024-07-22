@@ -16,6 +16,7 @@
 module nitcc
 
 import nitcc_semantic
+import lrautomaton
 
 # Load the grammar file
 
@@ -69,7 +70,9 @@ end
 
 # Generate the LR automaton
 
-var lr = gram.lr0
+gram.prepare_for_automaton
+var lr = new LALR1Automaton(gram)
+lr.build
 
 var conflitcs = new ArraySet[Production]
 for s in lr.states do
@@ -78,13 +81,6 @@ end
 
 if not conflitcs.is_empty then
 	print "Error: there is conflicts"
-end
-
-if false then loop
-if conflitcs.is_empty then break
-print "Inline {conflitcs.join(" ")}"
-gram.inline(conflitcs)
-lr=gram.lr0
 end
 
 # Output concrete grammar and LR automaton

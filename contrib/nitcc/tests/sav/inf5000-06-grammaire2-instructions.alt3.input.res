@@ -1,18 +1,32 @@
-T_Id@1,1:x
-TAnonymous@1,3:=
-T_Id@1,5:y
-TAnonymous@1,6:;
-TAnonymous@2,1:while
-TAnonymous@2,7:(
-T_Id@2,8:z
-TAnonymous@2,9:)
-TAnonymous@2,11:{
-TAnonymous@2,13:print
-T_Id@2,19:t
-TAnonymous@2,20:;
-T_Id@2,22:k
-TAnonymous@2,23:=
-T_Id@2,24:u
-TAnonymous@2,25:;
-TAnonymous@2,27:}
-TEnd@3,1:
+Start
+  prog
+    Nodes[Nstmt]
+      stmt_assign
+        id@(1:1-1:2)='x'
+        '='@(1:3-1:4)
+        expr
+          id@(1:5-1:6)='y'
+        ';'@(1:6-1:7)
+      stmt_while
+        'while'@(2:1-2:6)
+        '('@(2:7-2:8)
+        expr
+          id@(2:8-2:9)='z'
+        ')'@(2:9-2:10)
+        '{'@(2:11-2:12)
+        Nodes[Nstmt]
+          stmt_print
+            'print'@(2:13-2:18)
+            '('@(2:18-2:19)
+            expr
+              id@(2:19-2:20)='t'
+            ')'@(2:20-2:21)
+            ';'@(2:21-2:22)
+          stmt_assign
+            id@(2:23-2:24)='k'
+            '='@(2:24-2:25)
+            expr
+              id@(2:25-2:26)='u'
+            ';'@(2:26-2:27)
+        '}'@(2:28-2:29)
+  Eof@(3:1-3:1)=''

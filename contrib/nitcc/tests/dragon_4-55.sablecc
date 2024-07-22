@@ -1,0 +1,5 @@
+Grammar dragon;
+Parser
+Ignored #10, #32;
+s = c c ;
+c = 'c' c | 'd' ;

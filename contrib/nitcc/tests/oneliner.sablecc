@@ -1,0 +1,34 @@
+Grammar oneliner;
+Lexer
+eol = #10 | #13 ;
+
+Parser
+Ignored #32;
+
+prog
+	= stmts
+	;
+stmt
+	= if_block stmt_or_end
+	| if_block stmt_else stmt_or_end
+	| 'id'
+	;
+if_block
+	= 'if' n? stmt no 'then'
+	;
+stmt_or_end
+	= stmt 'end'?
+	| n stmts no 'end'
+	| no 'end'
+	;
+stmt_else
+	= stmt 'else'
+	| n stmts no 'else'
+	| 'else'
+	;
+stmts
+	= stmts n stmt
+	| stmt
+	;
+no	= n?;
+n	= eol+;
