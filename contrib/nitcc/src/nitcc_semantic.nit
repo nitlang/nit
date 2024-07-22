@@ -297,7 +297,7 @@ redef class Nprod
 			# Create a new production for the first priority class
 			# The main production will be used for the last priority class
 			var spe = prod
-			prod = new Production(name + "$0")
+			prod = new Production(name + "0")
 			prod.spe = spe
 			v.gram.prods.add(prod)
 		end
@@ -361,7 +361,7 @@ redef class Npriority
 			prod = spe
 		else
 			v.pricpt -= 1
-			prod = new Production(spe.name + "${v.pricpt}")
+			prod = new Production(spe.name + "{v.pricpt}")
 			prod.spe = spe
 			v.gram.prods.add(prod.as(not null))
 		end
@@ -631,6 +631,7 @@ redef class Nelem_str
 			assert elem != null
 		else
 			elem = new Token(name)
+			elem.cname = "{v.v1.gram.tokens.length}t"
 			elem.text = text
 			v.v1.gram.tokens.add(elem)
 			v.v1.names[name] = self

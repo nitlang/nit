@@ -306,13 +306,14 @@ class Gram
         fun plusize(e: Element): Production
         do
                 if plusizes.has_key(e) then return plusizes[e]
-                var name = "{e}+"
-                var prod = new Production(name)
+		var cname = "_plus{plusizes.length}"
+		var prod = new Production("{e}+")
+		prod.cname = cname
                 prod.acname = "Nodes[{e.acname}]"
                 prods.add(prod)
-                var alt1 = prod.new_alt("{name}_one", e)
+		var alt1 = prod.new_alt("{cname}_one", e)
                 alt1.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
-                var alt2 = prod.new_alt("{name}_more", prod, e)
+		var alt2 = prod.new_alt("{cname}_more", prod, e)
                 alt2.codes = [new CodePop, new CodePop, new CodeAdd: Code]
                 plusizes[e] = prod
                 return prod
@@ -336,13 +337,14 @@ class Gram
         fun quesize(e: Element): Production
         do
                 if quesizes.has_key(e) then return quesizes[e]
-                var name = "{e}?"
-                var prod = new Production(name)
+                var cname = "_opt{quesizes.length}"
+                var prod = new Production("{e}?")
+                prod.cname = cname
                 prod.acname = "nullable {e.acname}"
                 prods.add(prod)
-                var a1 = prod.new_alt("{name}_one", e)
+                var a1 = prod.new_alt("{cname}_one", e)
                 a1.codes = [new CodePop]
-                var a0 = prod.new_alt0("{name}_none")
+                var a0 = prod.new_alt0("{cname}_none")
                 a0.codes = [new CodeNull]
                 quesizes[e] = prod
                 return prod
@@ -356,15 +358,15 @@ class Gram
         fun groupize(es: Array[Element]): Production
         do
                 if groupizes.has_key(es) then return groupizes[es]
-                var name = "_group{groupizes.length}"
-                var prod = new Production(name)
+                var cname = "_group{groupizes.length}"
+		var prod = new Production("({es.join(" ")})")
+		prod.altone = true
+		prod.cname = cname
                 prods.add(prod)
-                var a1 = prod.new_alt2("{name}_single", es)
+                var a1 = prod.new_alt2(cname, es)
                 groupizes[es] = prod
                 return prod
         end
-
-
 
 	# Generate the nodes classes
 	fun gen_to_nit(filepath: String, name: String)
@@ -549,9 +551,9 @@ class Alternative
 
 	redef fun to_s do return "{prod.name}::{name}={elems.join(" ")}"
 	
-	# A mangled name
+	# The class name of the alternative
 	fun cname: String do
-		return "N{name.to_cmangle}"
+		return "N{name}"
 	end
 
 	# The code for the reduction
@@ -633,13 +635,18 @@ abstract class Element
 	private var acname_cache: nullable String = null
 
 	# The mangled name of the element
-	fun cname: String do return "N{name.to_cmangle}"
+	var cname: String is noinit, writable
+
+	init
+	do
+		cname = name
+	end
 
 	# The name of the class in the AST
 	fun acname: String do
 		var res = acname_cache
 		if res == null then
-			res = "N{to_s.to_cmangle}"
+			res = "N{cname}"
 			acname_cache = res
 		end
 		return res
