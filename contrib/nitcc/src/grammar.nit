@@ -391,6 +391,7 @@ class Gram
 		for p in ps do
 			if p.spe == null and not p.altone then
 				if p.name.has_suffix("?") or p.name.has_suffix("+") then continue
+				g.add "# Production {p}"
 				g.add "class {p.acname}"
 				g.add "\tsuper NProd"
 				g.add "\tredef fun node_name do return \"{p.name.escape_to_nit}\""
@@ -401,6 +402,7 @@ class Gram
 			als.add_all(p.ast_alts)
 			for a in als do
 				if a.trans then continue
+				g.add "# Alternative {a}"
 				g.add "class {a.cname}"
 				if p.altone then
 					g.add "\tsuper NProd"
@@ -410,6 +412,7 @@ class Gram
 				g.add "\tredef fun node_name do return \"{a.name.escape_to_nit}\""
 				var initarg = new Array[String]
 				for i in [0..a.elems.length[ do
+					g.add "\t# Children {i}: {a.elems[i]}"
 					g.add "\tvar n_{a.elemname(i)}: {a.elems[i].acname}"
 					initarg.add("n_{a.elemname(i)}: {a.elems[i].acname}")
 				end
