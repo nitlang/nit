@@ -1,0 +1,21 @@
+exampleWithNumber: x
+  "This method illustrates the ""complete"" syntax."
+  <syntaxOn: #postcard>
+
+  | y |
+
+  true & false not & (nil isNil)
+    ifFalse: [ self perform: #add: with: x ].
+
+  y := thisContext stack size + super size.
+
+  byteArray := #[ 2 2r100 8r20 16rFF ].
+
+  { -42 . #($a #a 'a' 1 1.0) }
+    do: [ :each |
+      | var |
+      Transcript
+        show: each class name;
+        show: each printString;
+        show: ' ' ].
+  ^ x < y
