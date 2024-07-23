@@ -52,15 +52,7 @@ if not node isa NProd then
 	abort
 end
 
-assert node isa NStart
-
-var name
-var ng = node.n_0.n_grammar_part
-if ng != null then
-	name = ng.n_id.text
-else
-	name = fi.basename.split(".").first
-end
+var name = node.children.first.as(Ngrammar).children[1].as(Nid).text
 
 print "Grammar {name} (see {name}.gram.dot))"
 node.to_dot("{name}.gram.dot")

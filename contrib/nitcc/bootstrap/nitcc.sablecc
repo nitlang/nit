@@ -37,9 +37,7 @@ Parser
 Ignored blank;
 Rejected unknown_keyword;
 
-grammar = grammar_part? lexer_part? parser_part? tree_part?;
-
-grammar_part = 'Grammar' id ';' ;
+grammar = 'Grammar' id ';' lexer_part? parser_part? tree_part?;
 
 lexer_part = 'Lexer' expr*;
 

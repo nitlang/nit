@@ -1,0 +1,119 @@
+Grammar smalltalk;
+
+Lexer
+
+id = letter (letter|digit)* ;
+letter = 'a'..'z' | 'A'..'Z' ;
+digit = '0'..'9' ;
+symbol = '#'(id|':')+ ;
+string = quote (Any - quote | quote quote)* quote ;
+quote = '\'' ;
+comment = '"' (Any - '"' | '""')* '"' ;
+char = '$' Any ;
+
+binopb = binsym+ ;
+binsym = '+' | '-' | '*' | '/' | '\\' | '>' | '<' | '=' | ',' | '@' | '!' | '%' | '^' | '&' | '|' | '?';
+
+kwop = id ':' ;
+
+num =
+	digit+ ('.' digit+)? (('e'|'E') ('+'|'-')? digit+)? |
+	digit+ 'r' (letter|digit)+ ;
+
+blank = #9 | #10 | #13 | #32;
+
+Parser
+Ignored blank, comment;
+
+method
+	= pattern pragma* temps? exprs?
+	;
+
+pattern
+	= id
+	| binop id
+	| (kwop id)+
+	;
+
+binop
+	= binopb | '<' | '>' | '|' | '-';
+
+pragma
+	= '<' pragma_message '>'
+	;
+
+pragma_message
+	= id
+	| binop expr6
+	| (kwop expr6)+
+	;
+
+temps
+	= '|' id* '|'
+	;
+
+exprs
+	= expr_list '.'?
+	;
+
+expr_list
+	= expr_list '.' expr
+	| expr
+	;
+
+expr
+	= id ':=' expr1
+	| '^' expr1
+	| expr1
+	;
+
+expr1
+	= expr2 (';' message)+
+	| expr2
+	;
+
+message
+	= id
+	| binop expr4
+	| (kwop expr3)+
+	;
+
+expr2
+	= expr3 (kwop expr3)+
+	| expr3
+	;
+
+expr3
+	= expr3 binop expr4
+	| expr4
+	;
+
+expr4
+	= expr4 id
+	| expr5
+	;
+
+expr5
+	= expr6
+	| '(' expr ')'
+	| '[' blockargs? temps? exprs? ']'
+	| '{' exprs? '}'
+	| '#(' expr6* ')'
+	| '#[' expr6* ']'
+	;
+
+expr6
+	= id
+	| '-'? num
+	| char
+	| symbol
+	| string
+	;
+
+blockargs
+	= blockarg '|'
+	;
+
+blockarg
+	= ':' id
+	;

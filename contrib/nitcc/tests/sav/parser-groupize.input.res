@@ -10,42 +10,42 @@ Start
                   s_1
                     s_5
                     's'@(1:1-1:2)
-                    _group1_single
+                    _group1
                       'a'@(1:2-1:3)
                   's'@(2:1-2:2)
-                  _group0_single
+                  _group0
                     'a'@(2:2-2:3)
                     'b'@(2:3-2:4)
                 's'@(3:1-3:2)
-                _group2_single
+                _group2
                   'a'@(3:2-3:3)
                   'c'@(3:3-3:4)
               's'@(4:1-4:2)
             's'@(5:1-5:2)
             Nodes[N_group3]
-              _group3_single
+              _group3
                 'a'@(5:2-5:3)
                 'd'@(5:3-5:4)
           's'@(6:1-6:2)
           Nodes[N_group3]
-            _group3_single
+            _group3
               'a'@(6:2-6:3)
               'd'@(6:3-6:4)
-            _group3_single
+            _group3
               'a'@(6:4-6:5)
               'd'@(6:5-6:6)
         't'@(7:1-7:2)
       't'@(8:1-8:2)
       Nodes[N_group4]
-        _group4_single
+        _group4
           'a'@(8:2-8:3)
           'e'@(8:3-8:4)
     't'@(9:1-9:2)
     Nodes[N_group4]
-      _group4_single
+      _group4
         'a'@(9:2-9:3)
         'e'@(9:3-9:4)
-      _group4_single
+      _group4
         'a'@(9:4-9:5)
         'e'@(9:5-9:6)
   Eof@(10:1-10:1)=''
