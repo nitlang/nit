@@ -370,12 +370,7 @@ redef class Generator
 			add "\t# guarded action for state {s}"
 			add "\t# {s.shifts.length} shift(s) and {s.reduces.length} reduce(s)"
 			add "\tprivate fun action_s{s.number}(parser: Parser) do"
-			if s.reduces.length != 1 then
 				add "\t\tparser.parse_error"
-			else
-				add "\t\treduce_{s.reduces.first.cname}(parser)"
-				#gen_reduce_to_nit(s.reduces.first)
-			end
 			add "\tend"
 		end
 		add "end"
@@ -390,7 +385,6 @@ redef class Generator
 			end
 			for s in t.reduces do
 				if not s.need_guard then continue
-				if s.reduces.length <= 1 then continue
 				add "\tredef fun action_s{s.number}(parser) do"
 				add "\t\treduce_{s.guarded_reduce[t].first.alt.cname}(parser)"
 				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
