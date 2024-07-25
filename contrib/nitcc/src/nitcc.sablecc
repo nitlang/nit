@@ -80,10 +80,10 @@ text {-> re} =
 	{ch_dec:} ch_dec |
 	{ch_hex:} ch_hex ;
 
-parser_part = 'Parser' ign? rej? prod*;
+parser_part = 'Parser' ign? occasional? rej? prod*;
 
 ign = 'Ignored' elem_list ';' ;
-
+occasional = 'Occasional' elem_list ';' ;
 rej = 'Rejected' elem_list ';' ;
 
 prod = id ptrans? '=' alts priority* ';';

@@ -395,6 +395,11 @@ redef class Generator
 				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
 				add "\tend"
 			end
+			if t.occasional then
+				add "\tredef fun action_default(parser) do"
+				add "\t\tparser.get_token"
+				add "\tend"
+			end
 			add "end"
 		end
 
