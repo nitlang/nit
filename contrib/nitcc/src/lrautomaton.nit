@@ -365,12 +365,17 @@ redef class Generator
 		end
 
 		add "redef class NToken"
+		add "\t# Default action on any state"
+		add "\tprivate fun action_default(parser: Parser) do"
+		add "\t\tparser.parse_error"
+		add "\tend"
+
 		for s in states do
 			if not s.need_guard then continue
 			add "\t# guarded action for state {s}"
 			add "\t# {s.shifts.length} shift(s) and {s.reduces.length} reduce(s)"
 			add "\tprivate fun action_s{s.number}(parser: Parser) do"
-				add "\t\tparser.parse_error"
+			add "\t\taction_default(parser)"
 			add "\tend"
 		end
 		add "end"
