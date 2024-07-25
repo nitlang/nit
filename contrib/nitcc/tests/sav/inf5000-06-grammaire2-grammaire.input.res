@@ -92,19 +92,17 @@ Nodes[Node]
       ';'@(4:27-4:28)
   id@(5:1-5:6)='atoms'
   '='@(5:7-5:8)
-  alts_many
-    alts_one
-      alt_0
-        altid@(5:9-5:16)='{many:}'
-        atoms_many
-          atoms_many
-            atoms_none
-            atom_id
-              id@(5:17-5:22)='atoms'
-          atom_id
-            id@(5:23-5:27)='atom'
-    '|'@(5:28-5:29)
+  alts_one
     alt_0
-      altid@(5:30-5:37)='{none:}'
-      atoms_none
+      altid@(5:9-5:16)='{many:}'
+      atoms_many
+        atoms_many
+          atoms_none
+          atom_id
+            id@(5:17-5:22)='atoms'
+        atom_id
+          id@(5:23-5:27)='atom'
+  '|'@(5:28-5:29)
+  altid@(5:30-5:37)='{none:}'
+  atoms_none
   NLexerError@(5:38-5:38)='E'

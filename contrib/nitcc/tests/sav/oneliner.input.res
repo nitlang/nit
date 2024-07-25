@@ -72,7 +72,6 @@ Nodes[Node]
             stmt_2
               'id'@(4:23-4:25)
             'end'@(4:26-4:29)
-  n
-    Nodes[Neol]
-      eol@(4:29-5:1)='\n'
+  Nodes[Neol]
+    eol@(4:29-5:1)='\n'
   Eof@(5:1-5:1)=''
