@@ -1,0 +1,4 @@
+Parser
+Ignored #10, #32;
+s = a ;
+a = 'x' s | 'y' s 'z';

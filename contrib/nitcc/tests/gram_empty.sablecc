@@ -1,0 +1,3 @@
+Parser
+Ignored #10, #32;
+s = s 'x' ;

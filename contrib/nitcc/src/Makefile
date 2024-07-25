@@ -18,9 +18,9 @@ nitcc: nitcc1 nitcc.nit nitcc.sablecc
 
 check: examples tests
 tests:
-	cd ../tests && ./run
+	$(MAKE) -C ../tests
 examples:
-	$(MAKE) -C ../example
+	$(MAKE) -C ../examples
 
 clean:
 	rm -r \
