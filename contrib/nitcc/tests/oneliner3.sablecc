@@ -1,0 +1,21 @@
+Grammar oneliner;
+Lexer
+n	= #10;
+Parser
+Ignored #32;
+Occasional n;
+
+prog
+	= stmts
+	;
+expr	= 'if' expr 'then' expr
+	| 'if' expr 'then' eol stmts 'end'
+	| 'id'
+	;
+
+stmts
+	= stmts expr eol
+	| expr eol
+	;
+
+eol	= n | ';';

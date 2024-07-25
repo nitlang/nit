@@ -365,17 +365,17 @@ redef class Generator
 		end
 
 		add "redef class NToken"
+		add "\t# Default action on any state"
+		add "\tprivate fun action_default(parser: Parser) do"
+		add "\t\tparser.parse_error"
+		add "\tend"
+
 		for s in states do
 			if not s.need_guard then continue
 			add "\t# guarded action for state {s}"
 			add "\t# {s.shifts.length} shift(s) and {s.reduces.length} reduce(s)"
 			add "\tprivate fun action_s{s.number}(parser: Parser) do"
-			if s.reduces.length != 1 then
-				add "\t\tparser.parse_error"
-			else
-				add "\t\treduce_{s.reduces.first.cname}(parser)"
-				#gen_reduce_to_nit(s.reduces.first)
-			end
+			add "\t\taction_default(parser)"
 			add "\tend"
 		end
 		add "end"
@@ -390,10 +390,14 @@ redef class Generator
 			end
 			for s in t.reduces do
 				if not s.need_guard then continue
-				if s.reduces.length <= 1 then continue
 				add "\tredef fun action_s{s.number}(parser) do"
 				add "\t\treduce_{s.guarded_reduce[t].first.alt.cname}(parser)"
 				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
+				add "\tend"
+			end
+			if t.occasional then
+				add "\tredef fun action_default(parser) do"
+				add "\t\tparser.get_token"
 				add "\tend"
 			end
 			add "end"

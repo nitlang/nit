@@ -663,6 +663,9 @@ class Token
 	do
 		return to_s
 	end
+
+	# Unexpected occurences of this token do not cause a syntax error but are ignored.
+	var occasional = false is writable
 end
 
 # A alternative with a cursor (dot) before an element

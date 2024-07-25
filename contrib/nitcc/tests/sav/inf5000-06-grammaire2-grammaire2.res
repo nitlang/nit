@@ -1,1 +1,1 @@
-11:20-11:29 Syntax Error: Unexpected unknown_keyword 'Separator'; is acceptable instead: elem, text
+11:20-11:29 Syntax Error: Unexpected unknown_keyword 'Separator'; is acceptable instead: '*', '?', '+'

@@ -116,6 +116,9 @@ private class CheckNameVisitor
 	# Known ignored tokens
 	var ignoreds = new Array[Element]
 
+	# Known occasional tokens
+	var occasionals = new Array[Element]
+
 	# Known rejected tokens
 	var rejecteds = new Array[Element]
 
@@ -237,6 +240,25 @@ redef class Nign
 				# The token was build and registered during the visit
 				# So, unregister them, the big Ignored token will be build later
 				v.v1.gram.tokens.remove(e)
+			else
+				abort
+			end
+		end
+	end
+end
+
+redef class Noccasional
+	redef fun accept_check_name_visitor(v) do
+		# Add elements to the ignored list
+		v.elems = v.occasionals
+		super
+		for e in v.elems do
+			if e isa Production then
+				print "Error: cannot ignore {e}, it is a production"
+				exit(1)
+				abort
+			else if e isa Token then
+				e.occasional = true
 			else
 				abort
 			end
