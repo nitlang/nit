@@ -1,0 +1,6 @@
+Parser
+Ignored #10, #32;
+Occasional 'b';
+s = s e | e;
+e = 'a' 'a' | b ;
+b = 'b' ;
