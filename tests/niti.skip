@@ -47,3 +47,4 @@ repeating_key_xor_solve
 nitpm
 nitdoc
 test_astbuilder
+test_astprinter
