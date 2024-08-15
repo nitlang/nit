@@ -10,3 +10,4 @@ test_loader
 get_mclasses
 ^nit
 test_astbuilder
+test_astprinter
