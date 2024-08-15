@@ -364,7 +364,6 @@ private class TypeVisitor
 		# `null` only accepts some methods of object.
 		if recvtype isa MNullType and not mproperty.is_null_safe then
 			self.error(node, "Error: method `{mproperty.name}` called on `null`.")
-			return null
 		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
 			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
 		end
@@ -378,7 +377,6 @@ private class TypeVisitor
 
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
 			self.modelbuilder.error(node, "Error: method `{mproperty.name}` is protected and can only accessed by `self`.")
-			return null
 		end
 
 		var info = mproperty.deprecation
