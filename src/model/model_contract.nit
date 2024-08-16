@@ -45,6 +45,13 @@ class MEnsure
 	redef fun is_already_applied(mfacet: MFacet): Bool do return mfacet.has_applied_ensure
 end
 
+# An invariant contract representation
+class MInvariant
+	super BottomMContract
+
+	redef fun is_already_applied(mfacet: MFacet): Bool do return mfacet.has_applied_invariant
+end
+
 # A facet contract representation
 # This class is created to keep the information of which method is a contract facet
 class MFacet
@@ -55,14 +62,33 @@ class MFacet
 
 	# Is there an `ensure` contract applied?
 	var has_applied_ensure: Bool = false
+
+	# Is there an `invariant` contract applied?
+	var has_applied_invariant: Bool = false
+end
+
+redef class MClass
+
+	# The `MInvariant` contract if any
+	var minvariant: nullable MInvariant = null
+
+	# Is there an invariant contract?
+	private fun has_invariant: Bool
+	do
+		return self.minvariant != null
+	end
 end
 
 redef class MMethod
 
-	# The contract facet of the method
-	# is representing the method with a contract
+	# The entry point of the method with the contract verification
+	# Depending of the context, this method can verify expect/ensure or both.
 	# This method calls contracts (expect, ensure) and the method
 	var mcontract_facet: nullable MFacet = null
+
+	# The entry point of the method with the invariant and contracts verification
+	# This method calls the `mcontract_facet` and invariant contract
+	var minvariant_facet: nullable MFacet = null
 
 	# The `MExpect` contract if any
 	var mexpect: nullable MExpect = null
@@ -116,5 +142,21 @@ redef class MMethod
 	fun has_contract_facet: Bool
 	do
 		return self.mcontract_facet != null
+	end
+
+	# Build `invariant_facet` if is not exist and return it
+	private fun build_invariant_facet: MFacet
+	do
+		var m_minvariant_facet = self.minvariant_facet
+		# build a new `MFacet` contract
+		if m_minvariant_facet == null then m_minvariant_facet = new MFacet(intro_mclassdef, "_invariant_{name}", intro_mclassdef.location, public_visibility)
+		self.minvariant_facet = m_minvariant_facet
+		return m_minvariant_facet
+	end
+
+	# Is there an invariant facet?
+	fun has_invariant_facet: Bool
+	do
+		return self.minvariant_facet != null
 	end
 end

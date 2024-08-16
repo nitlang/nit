@@ -548,6 +548,9 @@ Option used to disable the contracts(ensures, expects) usage.
 ### `--full-contract`
 Option used to enables contracts (ensures, expects) on all classes. Warning this is an expensive option at runtime.
 
+### `--in-out-invariant`
+Option used to enable `invariant` verification on entry and exit of a method. By default, invariants are only checked on exit. Note, that the contracts are not checked on a `self` call.
+
 # ENVIRONMENT VARIABLES
 
 ### `NIT_DIR`
