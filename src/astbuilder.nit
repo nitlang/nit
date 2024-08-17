@@ -24,12 +24,11 @@ intrude import modelize_property
 
 # General factory to build semantic nodes in the AST of expressions
 class ASTBuilder
-	# The module used as reference for the building
-	# It is used to gather types and other stuff
-	var mmodule: MModule
+	super TypeContext
 
-	# The anchor used for some mechanism relying on types
-	var anchor: nullable MClassType
+	redef var mmodule: MModule
+
+	redef var anchor: nullable MClassType
 
 	# Check mmodule to avoid a new instantiation of ASTBuilder
 	fun check_mmodule(mmodule: MModule)
