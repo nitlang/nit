@@ -322,14 +322,8 @@ private class TypeVisitor
 	# If you just know the mproperty use the `build_callsite_by_property` method to display error if no `mpropdef` is found in the context
 	fun build_callsite_by_name(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
-		var unsafe_type = self.anchor_to(recvtype)
-
-		#debug("recv: {recvtype} (aka {unsafe_type})")
-		if recvtype isa MNullType then
-			var objclass = get_mclass(node, "Object")
-			if objclass == null then return null # Forward error
-			unsafe_type = objclass.mclass_type
-		end
+		var builder = (new CallSiteBuilder(node.hot_location, recvtype, self)).recv_is_self(recv_is_self)
+		var unsafe_type = builder.base_type
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if name == "new" and mproperty == null then
@@ -359,25 +353,33 @@ private class TypeVisitor
 
 		assert mproperty isa MMethod
 
-		return build_callsite_by_property(node, recvtype, mproperty, recv_is_self)
+		var callsite = builder.by_property(mproperty)
+		if callsite == null then return null
+		return check_callsite(node, builder)
 	end
 
 	# The `build_callsite_by_property` finds the mpropdefs to call by the `MMethod`.
 	# If the mpropdef is found in the context it builds a new `Callsite`.
 	fun build_callsite_by_property(node: ANode, recvtype: MType, mproperty: MMethod, recv_is_self: Bool): nullable CallSite
 	do
-		var unsafe_type = self.anchor_to(recvtype)
+		var builder = (new CallSiteBuilder(node.hot_location, recvtype, self)).recv_is_self(recv_is_self)
+		var callsite = builder.by_property(mproperty)
+		if callsite == null then return null
+		return check_callsite(node, builder)
+	end
 
-		if recvtype isa MNullType then
-			var objclass = get_mclass(node, "Object")
-			if objclass == null then return null # Forward error
-			unsafe_type = objclass.mclass_type
-		end
+	fun check_callsite(node: ANode, builder: CallSiteBuilder): nullable CallSite
+	do
+		var recvtype = builder.recv
+		var callsite = builder.callsite
+		var mproperty = callsite.mproperty
+		var recv_is_self = callsite.recv_is_self
+
 		# `null` only accepts some methods of object.
 		if recvtype isa MNullType and not mproperty.is_null_safe then
 			self.error(node, "Error: method `{mproperty.name}` called on `null`.")
-			return null
-		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
+			return callsite
+		else if builder.base_type isa MNullableType and not mproperty.is_null_safe then
 			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
 		end
 
@@ -390,7 +392,7 @@ private class TypeVisitor
 
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility and not modelbuilder.toolcontext.opt_ignore_visibility.value then
 			self.modelbuilder.error(node, "Error: method `{mproperty.name}` is protected and can only accessed by `self`.")
-			return null
+			return callsite
 		end
 
 		var info = mproperty.deprecation
@@ -403,43 +405,21 @@ private class TypeVisitor
 			end
 		end
 
-		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
-		var mpropdef
-		if propdefs.length == 0 then
-			self.modelbuilder.error(node, "Type Error: no definition found for property `{mproperty.name}` in `{unsafe_type}`.")
-			abort
-			#return null
-		else if propdefs.length == 1 then
-			mpropdef = propdefs.first
-		else
-			display_warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{unsafe_type}`: {propdefs.join(" ")}")
-			mpropdef = mproperty.intro
+		if builder.mpropdefs.length == 0 then
+			self.modelbuilder.error(node, "Type Error: no definition found for property `{mproperty.name}` in `{builder.base_type}`.")
+			#abort
+		else if builder.mpropdefs.length > 1 then
+			display_warning(node, "property-conflict", "Warning: conflicting property definitions for property `{mproperty.name}` in `{builder.base_type}`: {builder.mpropdefs.join(" ")}")
 		end
 
-		return build_callsite_by_propdef(node, recvtype, mpropdef, recv_is_self)
+		return callsite
 	end
 
 	# The `build_callsite_by_propdef` builds the callsite directly with the `mprodef` passed in argument.
 	fun build_callsite_by_propdef(node: ANode, recvtype: MType, mpropdef: MMethodDef, recv_is_self: Bool): nullable CallSite
 	do
-		var msignature = mpropdef.msignature
-		if msignature == null then return null # skip error
-		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
-
-		var erasure_cast = false
-		var rettype = mpropdef.msignature.return_mtype
-		if not recv_is_self and rettype != null then
-			rettype = rettype.undecorate
-			if rettype isa MParameterType then
-				var erased_rettype = msignature.return_mtype
-				assert erased_rettype != null
-				#node.debug("Erasure cast: Really a {rettype} but unsafely a {erased_rettype}")
-				erasure_cast = true
-			end
-		end
-
-		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mpropdef.mproperty, mpropdef, msignature, erasure_cast)
-		return callsite
+		var builder = new CallSiteBuilder(node.hot_location, recvtype, self)
+		return builder.recv_is_self(recv_is_self).by_propdef(mpropdef)
 	end
 
 	fun try_build_callsite_by_name(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
@@ -835,6 +815,99 @@ class CallSite
 
 	redef fun mdoc_or_fallback do return mproperty.intro.mdoc
 end
+
+# Helper class to build a callsite object with a fluent API
+class CallSiteBuilder
+	var location: Location
+	var recv:  MType
+	var context: TypeContext
+
+	var callsite = new CallSite.intern
+
+	var mpropdefs: Collection[MMethodDef] is noinit
+
+	# Base type to do the lookup. is fully resolved
+	var base_type: MType is noinit
+
+	init
+	do
+		if recv isa MNullType then
+			# We will lookup from Object if `null` is given
+			base_type = context.mmodule.object_type
+		else
+			base_type = context.anchor_to(recv)
+		end
+
+		callsite.location = location
+		callsite.recv = recv
+		callsite.mmodule = context.mmodule
+		callsite.anchor = context.anchor
+		callsite.recv_is_self = false
+		callsite.erasure_cast = false
+	end
+
+	fun recv_is_self(b: Bool): CallSiteBuilder
+	do
+		callsite.recv_is_self = b
+		return self
+	end
+
+	fun by_name(name: String): nullable CallSite
+	do
+		return null
+
+	end
+
+	fun lookup_mproperty(mproperty: MMethod): Collection[MMethodDef]
+	do
+		callsite.mproperty = mproperty
+		mpropdefs = mproperty.lookup_definitions(context.mmodule, base_type)
+		return mpropdefs
+	end
+
+	fun by_property(mproperty: MMethod): nullable CallSite
+	do
+		lookup_mproperty(mproperty)
+
+		var mpropdef
+		if mpropdefs.length == 0 then
+			return null
+		else if mpropdefs.length == 1 then
+			mpropdef = mpropdefs.first
+		else
+			mpropdef = mproperty.intro
+		end
+
+		return by_propdef(mpropdef)
+	end
+
+	# The `build_callsite_by_propdef` builds the callsite directly with the `mprodef` passed in argument.
+	fun by_propdef(mpropdef: MMethodDef): nullable CallSite
+	do
+		var msignature = mpropdef.msignature
+		if msignature == null then return null # skip error
+		msignature = context.resolve_for(msignature, callsite.recv, callsite.recv_is_self).as(MSignature)
+
+		var erasure_cast = false
+		var rettype = mpropdef.msignature.return_mtype
+		if not callsite.recv_is_self and rettype != null then
+			rettype = rettype.undecorate
+			if rettype isa MParameterType then
+				var erased_rettype = msignature.return_mtype
+				assert erased_rettype != null
+				#node.debug("Erasure cast: Really a {rettype} but unsafely a {erased_rettype}")
+				erasure_cast = true
+			end
+		end
+
+		callsite.mproperty = mpropdef.mproperty
+		callsite.mpropdef = mpropdef
+		callsite.msignature = msignature
+		callsite.erasure_cast = erasure_cast
+		return callsite
+	end
+end
+
 
 redef class Variable
 	# The declared type of the variable
