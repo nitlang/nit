@@ -969,7 +969,7 @@ end
 
 redef class MClassDef
 	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AStdClassdef do
-		if astbuilder == null then astbuilder = new ASTBuilder(mmodule)
+		if astbuilder == null then astbuilder = new ASTBuilder(mmodule, bound_mtype)
 		var n_propdefs = new Array[APropdef]
 		for mpropdef in self.mpropdefs do
 			n_propdefs.add(mpropdef.create_ast_representation(astbuilder))
@@ -983,7 +983,7 @@ end
 
 redef class MAttributeDef
 	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AAttrPropdef do
-		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule)
+		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule, mclassdef.bound_mtype)
 		var ntype = null
 		if self.static_mtype != null then ntype = static_mtype.create_ast_representation(astbuilder)
 		return astbuilder.make_attribute("_" + self.name, ntype, self.visibility.create_ast_representation(astbuilder), null, null, self, null, null)
@@ -992,7 +992,7 @@ end
 
 redef class MMethodDef
 	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AMethPropdef do
-		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule)
+		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule, mclassdef.bound_mtype)
 		var tk_redef = null
 		if self.mproperty.intro != self then tk_redef = new TKwredef
 		var  n_signature = if self.msignature == null then new ASignature else self.msignature.create_ast_representation(astbuilder)
