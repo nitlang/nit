@@ -31,16 +31,45 @@ private class TypingPhase
 	redef fun process_npropdef(npropdef) do npropdef.do_typing(toolcontext.modelbuilder)
 end
 
+# Helper class to solve localized type operation
+interface TypeContext
+	# The module of the analysis
+	# Used to correctly query the model
+	fun mmodule: MModule is abstract
+
+	# A fully resolved static type of the current receiver
+	# Mainly used for type tests and type resolutions as it's the best approximation of self
+	fun anchor: nullable MClassType is abstract
+
+	fun anchor_to(mtype: MType): MType
+	do
+		return mtype.anchor_to(mmodule, anchor)
+	end
+
+	fun is_subtype(sub, sup: MType): Bool
+	do
+		return sub.is_subtype(mmodule, anchor, sup)
+	end
+
+	fun resolve_for(mtype, subtype: MType, for_self: Bool): MType
+	do
+		#print "resolve_for {mtype} sub={subtype} forself={for_self} mmodule={mmodule} anchor={anchor}"
+		var res = mtype.resolve_for(subtype, anchor, mmodule, not for_self)
+		return res
+	end
+end
+
 private class TypeVisitor
+	super TypeContext
 	var modelbuilder:  ModelBuilder
 
 	# The module of the analysis
 	# Used to correctly query the model
-	var mmodule: MModule is noinit
+	redef var mmodule: MModule is noinit
 
 	# The static type of the receiver
 	# Mainly used for type tests and type resolutions
-	var anchor: MClassType is noinit
+	redef var anchor: MClassType is noinit
 
 	# The analyzed mclassdef
 	var mclassdef: MClassDef is noinit
@@ -80,23 +109,6 @@ private class TypeVisitor
 	fun display_warning(node: ANode, tag: String, message: String)
 	do
 		if not mpropdef.is_fictive then self.modelbuilder.warning(node, tag, message)
-	end
-
-	fun anchor_to(mtype: MType): MType
-	do
-		return mtype.anchor_to(mmodule, anchor)
-	end
-
-	fun is_subtype(sub, sup: MType): Bool
-	do
-		return sub.is_subtype(mmodule, anchor, sup)
-	end
-
-	fun resolve_for(mtype, subtype: MType, for_self: Bool): MType
-	do
-		#print "resolve_for {mtype} sub={subtype} forself={for_self} mmodule={mmodule} anchor={anchor}"
-		var res = mtype.resolve_for(subtype, anchor, mmodule, not for_self)
-		return res
 	end
 
 	# Check that `sub` is a subtype of `sup`.
