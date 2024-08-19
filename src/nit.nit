@@ -50,7 +50,6 @@ var mmodules: Array[MModule]
 
 if opt_eval.value then
 	var amodule = toolcontext.parse_module(progname)
-	toolcontext.check_errors
 
 	var parent = null
 	if opt_loop.value then
@@ -62,13 +61,14 @@ if opt_eval.value then
 	end
 
 	modelbuilder.load_rt_module(parent, amodule, "-")
+	toolcontext.check_errors
 
 	mmodules = [amodule.mmodule.as(not null)]
 else if progname == "-" then
 	var content = stdin.read_all
 	var amodule = toolcontext.parse_module(content)
-	toolcontext.check_errors
 	modelbuilder.load_rt_module(null, amodule, "-")
+	toolcontext.check_errors
 	mmodules = [amodule.mmodule.as(not null)]
 else
 	mmodules = modelbuilder.parse([progname])
