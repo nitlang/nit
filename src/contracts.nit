@@ -70,7 +70,9 @@ redef class AModule
 	# Entry point to generate the entire contract infrastructure.
 	# Once this method is called we must call the `do_weaving_contracts` method (see it for more information).
 	fun do_contracts(toolcontext: ToolContext) do
-		var ast_builder = new ASTBuilder(mmodule.as(not null))
+		var mmodule = self.mmodule
+		if mmodule == null then return # Skip errir
+		var ast_builder = new ASTBuilder(mmodule)
 		#
 		var contract_visitor = new ContractsVisitor(toolcontext, toolcontext.modelbuilder.identified_modules.first, self, ast_builder)
 		contract_visitor.enter_visit(self)

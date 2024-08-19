@@ -68,6 +68,7 @@ private class HeaderDependancyPhase
 	redef fun process_nmodule(nmodule)
 	do
 		var mmodule = nmodule.mmodule
+		if mmodule == null then return # Skip error
 		mmodule.compute_header_dependencies(self)
 	end
 end
