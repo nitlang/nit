@@ -26,6 +26,11 @@ abstract class ANode
 	# However, manual instantiated nodes may need more care.
 	var location: Location is writable, noinit
 
+	fun has_location: Bool
+	do
+		return isset self._location
+	end
+
 	# The location of the important part of the node (identifier or whatever)
 	fun hot_location: Location do return location
 
@@ -235,7 +240,11 @@ class ASTDump
 
 	redef fun display(n)
 	do
-		return "{n.class_name} {n.dump_info(self)} @{n.location}"
+		if n.has_location then
+			return "{n.class_name} {n.dump_info(self)} @{n.location}"
+		else
+			return "{n.class_name} {n.dump_info(self)}"
+		end
 	end
 
 	# `s` as yellow
@@ -382,7 +391,13 @@ abstract class Token
 
 	redef fun is_structural do return true
 
-	redef fun dump_info(v) do return " {text.escape_to_c}"
+	redef fun dump_info(v) do
+		if has_location then
+			return " {text.escape_to_c}"
+		else
+			return ""
+		end
+	end
 
 	# Loose tokens that precede `self`.
 	#
