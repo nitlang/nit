@@ -75,9 +75,6 @@ private class ExplainAssertVisitor
 	# Type of `String` (the generated code does not work without a `String`)
 	var string_mtype: MType
 
-	# Tool to modify the AST
-	var builder = new ASTBuilder(mmodule) is lazy
-
 	redef fun visit(node)
 	do
 		# Recursively visit all sub-nodes

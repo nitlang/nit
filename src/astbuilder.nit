@@ -24,12 +24,11 @@ intrude import modelize_property
 
 # General factory to build semantic nodes in the AST of expressions
 class ASTBuilder
-	# The module used as reference for the building
-	# It is used to gather types and other stuff
-	var mmodule: MModule
+	super TypeContext
 
-	# The anchor used for some mechanism relying on types
-	var anchor: nullable MClassType
+	redef var mmodule: MModule
+
+	redef var anchor: nullable MClassType
 
 	# Check mmodule to avoid a new instantiation of ASTBuilder
 	fun check_mmodule(mmodule: MModule)
@@ -203,11 +202,11 @@ class ASTBuilder
 
 	# Build a callsite to call the `mproperty` in the current method `caller_method`.
 	# `is_self_call` indicate if the method caller is a property of `self`
-	fun create_callsite(modelbuilder: ModelBuilder, caller_property: APropdef, mproperty: MMethod, is_self_call: Bool): CallSite
+	fun create_callsite(mproperty: MMethod, is_self_call: Bool): CallSite
 	do
-		# FIXME It's not the better solution to call `TypeVisitor` here to build a model entity, but some make need to have a callsite
-		var type_visitor = new TypeVisitor(modelbuilder, caller_property.mpropdef.as(not null))
-		var callsite = type_visitor.build_callsite_by_property(caller_property, mproperty.intro_mclassdef.bound_mtype, mproperty, is_self_call)
+		var recv = mproperty.intro_mclassdef.bound_mtype
+		var builder = new CallSiteBuilder(mmodule.model.no_location, recv, self)
+		var callsite = builder.recv_is_self(is_self_call).by_property(mproperty)
 		assert callsite != null
 		return callsite
 	end
@@ -970,7 +969,7 @@ end
 
 redef class MClassDef
 	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AStdClassdef do
-		if astbuilder == null then astbuilder = new ASTBuilder(mmodule)
+		if astbuilder == null then astbuilder = new ASTBuilder(mmodule, bound_mtype)
 		var n_propdefs = new Array[APropdef]
 		for mpropdef in self.mpropdefs do
 			n_propdefs.add(mpropdef.create_ast_representation(astbuilder))
@@ -984,7 +983,7 @@ end
 
 redef class MAttributeDef
 	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AAttrPropdef do
-		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule)
+		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule, mclassdef.bound_mtype)
 		var ntype = null
 		if self.static_mtype != null then ntype = static_mtype.create_ast_representation(astbuilder)
 		return astbuilder.make_attribute("_" + self.name, ntype, self.visibility.create_ast_representation(astbuilder), null, null, self, null, null)
@@ -993,7 +992,7 @@ end
 
 redef class MMethodDef
 	redef fun create_ast_representation(astbuilder: nullable ASTBuilder): AMethPropdef do
-		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule)
+		if astbuilder == null then astbuilder = new ASTBuilder(mclassdef.mmodule, mclassdef.bound_mtype)
 		var tk_redef = null
 		if self.mproperty.intro != self then tk_redef = new TKwredef
 		var  n_signature = if self.msignature == null then new ASignature else self.msignature.create_ast_representation(astbuilder)

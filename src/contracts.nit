@@ -244,12 +244,12 @@ private class ContractsVisitor
 	private fun encapsulated_contract_call(visited_method: AMethPropdef, call_to_contracts: Array[ACallExpr]): AIfExpr
 	do
 		var sys_property = toolcontext.modelbuilder.model.get_mproperties_by_name("sys").first.as(MMethod)
-		var callsite_sys = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, sys_property, true)
+		var callsite_sys = ast_builder.create_callsite(sys_property, true)
 
 		var incontract_attribute = get_incontract
 
-		var callsite_get_incontract = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, incontract_attribute.getter.as(MMethod), false)
-		var callsite_set_incontract = ast_builder.create_callsite(toolcontext.modelbuilder, visited_method, incontract_attribute.setter.as(MMethod), false)
+		var callsite_get_incontract = ast_builder.create_callsite(incontract_attribute.getter.as(MMethod), false)
+		var callsite_set_incontract = ast_builder.create_callsite(incontract_attribute.setter.as(MMethod), false)
 
 		var n_condition = ast_builder.make_not(ast_builder.make_call(ast_builder.make_call(new ASelfExpr, callsite_sys, null), callsite_get_incontract, null))
 
@@ -302,7 +302,7 @@ private class CallSiteVisitor
 			facet = contract_facet
 		end
 
-		return ast_builder.create_callsite(toolcontext.modelbuilder, visited_propdef, facet, callsite.recv_is_self)
+		return ast_builder.create_callsite(facet, callsite.recv_is_self)
 	end
 end
 
@@ -486,7 +486,7 @@ redef class MExpect
 
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var callsite = v.ast_builder.create_callsite(self, true)
 		var args = n_mpropdef.n_signature.make_parameter_read(v.ast_builder)
 		var n_callexpect = v.ast_builder.make_call(new ASelfExpr, callsite,args)
 		# Creation of the new instruction block with the call to expect condition
@@ -578,7 +578,7 @@ redef class MEnsure
 
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var callsite = v.ast_builder.create_callsite(self, true)
 		var n_self = new ASelfExpr
 		# argument to call the contract method
 		var args = n_mpropdef.n_signature.make_parameter_read(v.ast_builder)
@@ -613,7 +613,7 @@ redef class MInvariant
 
 	redef fun adapt_method_to_contract(v: ContractsVisitor, mfacet: MFacet, n_mpropdef: AMethPropdef)
 	do
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_mpropdef, self, true)
+		var callsite = v.ast_builder.create_callsite(self, true)
 		var n_self = new ASelfExpr
 		# build the call to the contract method
 		var n_call = v.ast_builder.make_call(n_self, callsite, null)
@@ -880,7 +880,7 @@ redef class MMethod
 		var args: Array[AExpr]
 		args = n_contractdef.n_signature.make_parameter_read(v.ast_builder)
 
-		var callsite = v.ast_builder.create_callsite(v.toolcontext.modelbuilder, n_contractdef, called, true)
+		var callsite = v.ast_builder.create_callsite(called, true)
 		var n_call = v.ast_builder.make_call(new ASelfExpr, callsite, args)
 
 		if self.intro.msignature.return_mtype == null then
