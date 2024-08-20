@@ -160,6 +160,9 @@ class Lexer
 		var accept_pos = -1
 		var accept_line = -1
 
+		var cr = _cr
+		var line = _line
+		var pos = _pos
 		loop
 			if sp >= string_len then
 				dfa_state = -1
@@ -177,9 +180,6 @@ class Lexer
 				if c >= 256 then c = 255
 				sp += 1
 
-				var cr = _cr
-				var line = _line
-				var pos = _pos
 				if c == 10 then
 					if cr then
 						cr = false
@@ -228,10 +228,10 @@ class Lexer
 					if dfa_state > -2 then break
 				end
 
-				_cr = cr
-				_line = line
-				_pos = pos
 			end
+			_cr = cr
+			_line = line
+			_pos = pos
 
 			if dfa_state >= 0 then
 				var tok = lexer_accept(dfa_state)
