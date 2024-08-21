@@ -119,6 +119,19 @@ class NaiveInterpreter
 		return sub.is_subtype(self.mainmodule, current_receiver_class, sup)
 	end
 
+	var anchor_to_cache = new HashMap2[MType, MClassType, MType]
+
+	# Cached anchor resolution in the context of the mainmodule
+	fun anchor_to(mtype: MType, anchor: MClassType): MType
+	do
+		if not mtype.need_anchor then return mtype
+		var res = anchor_to_cache[mtype, anchor]
+		if res != null then return res
+		res = mtype.anchor_to(self.mainmodule, anchor)
+		anchor_to_cache[mtype, anchor] = res
+		return res
+	end
+
 	# Get a primitive method in the context of the main module
 	fun force_get_primitive_method(name: String, recv: MType): MMethod
 	do
@@ -519,7 +532,7 @@ class NaiveInterpreter
 			end
 			if param.is_vararg and args[i].vararg_decl > 0 then
 				var vararg = exprs.sub(j, args[i].vararg_decl)
-				var elttype = param.mtype.anchor_to(self.mainmodule, recv.mtype.as(MClassType))
+				var elttype = anchor_to(param.mtype, recv.mtype.as(MClassType))
 				var arg = self.array_instance(vararg, elttype)
 				res.add(arg)
 				continue
@@ -588,7 +601,7 @@ class NaiveInterpreter
 			# get the parameter type
 			var mtype = mp.mtype
 			var anchor = args.first.mtype.as(MClassType)
-			var amtype = mtype.anchor_to(self.mainmodule, anchor)
+			var amtype = anchor_to(mtype, anchor)
 			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, amtype) then
 				node.fatal(self, "Cast failed. Expected `{mtype}`, got `{args[i+1].mtype}`")
 			end
@@ -691,7 +704,7 @@ class NaiveInterpreter
 	# This function determines the correct type according to the receiver of the current propdef (self).
 	fun unanchor_type(mtype: MType): MType
 	do
-		return mtype.anchor_to(self.mainmodule, current_receiver_class)
+		return anchor_to(mtype, current_receiver_class)
 	end
 
 	# Placebo instance used to mark internal error result when `null` already have a meaning.
@@ -1589,7 +1602,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return
 		var mtype = self.mtype.as(not null)
-		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
+		mtype = v.anchor_to(mtype, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
 		end
