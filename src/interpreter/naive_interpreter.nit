@@ -473,15 +473,15 @@ class NaiveInterpreter
 	# Retrieve the value of the variable in the current frame
 	fun read_variable(v: Variable): Instance
 	do
-		var f = frames.first.as(InterpreterFrame)
-		return f.map[v]
+		var f = frames.first
+		return f.read_variable(v, self)
 	end
 
 	# Assign the value of the variable in the current frame
 	fun write_variable(v: Variable, value: Instance)
 	do
-		var f = frames.first.as(InterpreterFrame)
-		f.map[v] = value
+		var f = frames.first
+		f.write_variable(v, self, value)
 	end
 
 	# Store known methods, used to trace methods as they are reached
@@ -887,14 +887,40 @@ abstract class Frame
 	var arguments: Array[Instance]
 	# Indicate if the expression has an array comprehension form
 	var comprehension: nullable Array[Instance] = null
+	# Read access of a variable
+	fun read_variable(variable: Variable, v: NaiveInterpreter): Instance is abstract
+	# Write access of a variable
+	fun write_variable(variable: Variable, v: NaiveInterpreter, value: Instance) is abstract
 end
 
 # Implementation of a Frame with a Hashmap to store local variables
 class InterpreterFrame
 	super Frame
 
-	# Mapping between a variable and the current value
-	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	# Mapping between a variable index and the current value
+	var vars = new Array[Instance]
+
+	redef fun read_variable(variable, v)
+	do
+		return vars[variable.index]
+	end
+
+	redef fun write_variable(variable, v, value)
+	do
+		var index = variable.index
+		if index == -1 then
+			variable.index = vars.length
+			vars.add(value)
+		else
+			while vars.length < index do vars.add(v.null_instance) # use null as place-holder to fill the array of missing variables
+			vars[index] = value
+		end
+	end
+end
+
+redef class Variable
+	# Position/numbering of the local variable in the frame.
+	var index: Int = -1
 end
 
 redef class ANode
