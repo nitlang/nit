@@ -454,6 +454,7 @@ private class TypeVisitor
 
 		# Associate each parameter to a position in the arguments
 		var map = new SignatureMap
+		var straight = args.length == msignature.arity
 
 		# Special case for the isolated last argument
 		# TODO: reify this method characteristics (where? the param, the signature, the method?)
@@ -483,6 +484,7 @@ private class TypeVisitor
 				return null
 			end
 			map.map[idx] = i
+			if idx != i then straight = false
 			e.mtype = self.visit_expr_subtype(e.n_expr, param.mtype)
 		end
 
@@ -509,6 +511,7 @@ private class TypeVisitor
 			end
 			var arg = args[j]
 			map.map[i] = j
+			if i != j then straight = false
 			j += 1
 
 			if i == vararg_rank then
@@ -536,6 +539,7 @@ private class TypeVisitor
 
 		# Third, check varargs
 		if vararg_rank >= 0 then
+			straight = false
 			var paramtype = msignature.mparameters[vararg_rank].mtype
 			var first = args[vararg_rank]
 			if vararg_decl == 0 then
@@ -548,6 +552,7 @@ private class TypeVisitor
 			end
 		end
 
+		map.straight = straight
 		return map
 	end
 
@@ -761,6 +766,9 @@ end
 class SignatureMap
 	# Associate a parameter to an argument
 	var map = new ArrayMap[Int, Int]
+
+	# Is trivially the ith parameter associated to the ith argument?
+	var straight = true
 end
 
 # A specific method call site with its associated informations.

@@ -513,7 +513,7 @@ class NaiveInterpreter
 
 		if msignature.arity == 0 then return res
 
-		if map == null then
+		if map == null or map.straight then
 			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
 			if aexprs_to_instances(args, res) == null then return null
 			return res
