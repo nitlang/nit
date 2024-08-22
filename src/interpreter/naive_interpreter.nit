@@ -2313,6 +2313,9 @@ redef class AOnceExpr
 end
 
 redef class ASendExpr
+	# We assume the node will not change, so we can cache the raw arguments array once and for all
+	private var raw_arguments_cache: Array[AExpr] = self.raw_arguments is lazy
+
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr)
@@ -2323,7 +2326,7 @@ redef class ASendExpr
 			return recv
 		end
 
-		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
+		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments_cache)
 		if args == null then return null
 		var res = v.callsite(callsite, args)
 		return res
