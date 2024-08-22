@@ -487,20 +487,18 @@ class NaiveInterpreter
 	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
-	# Consumes an iterator of expressions and tries to map each element to
-	# its corresponding Instance.
+	# Collect `expr` of each AExpr in order and append the instance to the result.
 	#
 	# If any AExprs doesn't resolve to an Instance, then it returns null.
-	# Otherwise return an array of instances
-	fun aexprs_to_instances(aexprs: Iterator[AExpr]): nullable Array[Instance]
+	# Otherwise return the array of instances
+	fun aexprs_to_instances(aexprs: Collection[AExpr], result: Array[Instance]): nullable Array[Instance]
 	do
-		var accumulator = new Array[Instance]
 		for aexpr in aexprs do
 			var instance = expr(aexpr)
 			if instance == null then return null
-			accumulator.push(instance)
+			result.push(instance)
 		end
-		return accumulator
+		return result
 	end
 
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
@@ -510,22 +508,20 @@ class NaiveInterpreter
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: Instance, args: SequenceRead[AExpr]): nullable Array[Instance]
 	do
 		var msignature = mpropdef.msignature.as(not null)
-		var res = new Array[Instance]
+		var res = new Array[Instance].with_capacity(msignature.arity+1)
 		res.add(recv)
 
 		if msignature.arity == 0 then return res
 
 		if map == null then
 			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
-			var rest_args = aexprs_to_instances(args.iterator)
-			if rest_args == null then return null
-			res.append(rest_args)
+			if aexprs_to_instances(args, res) == null then return null
 			return res
 		end
 
 		# Eval in order of arguments, not parameters
-		var exprs = aexprs_to_instances(args.iterator)
-		if exprs == null then return null
+		var exprs = new Array[Instance].with_capacity(args.length)
+		if aexprs_to_instances(args, exprs) == null then return null
 
 		# Fill `res` with the result of the evaluation according to the mapping
 		for i in [0..msignature.arity[ do
