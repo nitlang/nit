@@ -113,6 +113,11 @@ class NaiveInterpreter
 		end
 	end
 
+	fun clear_caches
+	do
+		anchor_to_cache.clear
+	end
+
 	# Subtype test in the context of the mainmodule
 	fun is_subtype(sub, sup: MType): Bool
 	do
