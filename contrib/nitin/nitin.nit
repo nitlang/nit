@@ -145,20 +145,19 @@ redef class AMethPropdef
 		if injected_variables == null then return super
 
 		# Inject main variables in the frame
-		assert f isa InterpreterFrame
 		for variable, i in injected_variables do
-			f.map[variable] = i
+			f.write_variable(variable, v, i)
 		end
 
 		var res = super
 
 		# Update the values of the variables
 		for variable in injected_variables.keys do
-			injected_variables[variable] = f.map[variable]
+			injected_variables[variable] = f.read_variable(variable, v)
 		end
 		# Retrieve the values of the new main variables
 		for variable in new_variables.as(not null) do
-			injected_variables[variable] = f.map[variable]
+			injected_variables[variable] = f.read_variable(variable, v)
 		end
 
 		return res
