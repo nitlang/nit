@@ -256,6 +256,7 @@ loop
 	# Run the main if the AST contains a main
 	if main_method != null then
 		do
+			interpreter.clear_caches
 			interpreter.catch_count += 1
 			interpreter.send(mainprop, [mainobj])
 		catch
