@@ -1,4 +1,4 @@
-/src/parser/parser.nit      -diff
+/src/parser/parser_sablecc.nit      -diff
 /src/parser/parser_prod.nit -diff
 /src/parser/lexer.nit       -diff
 /src/parser/tables_nit.c    -diff
