@@ -116,6 +116,7 @@ class NaiveInterpreter
 	fun clear_caches
 	do
 		anchor_to_cache.clear
+		lookup_first_definition_cache.clear
 	end
 
 	# Subtype test in the context of the mainmodule
@@ -645,8 +646,21 @@ class NaiveInterpreter
 		var mtype = recv.mtype
 		var ret = send_commons(mproperty, args, mtype)
 		if ret != null then return ret
-		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
+		var propdef = lookup_first_definition(mtype, mproperty)
 		return self.call(propdef, args)
+	end
+
+	private var lookup_first_definition_cache = new HashMap2[MType, MMethod, MMethodDef]
+
+	# Cached version of lookup_first_definition for the main module
+	fun lookup_first_definition(mtype: MType, mproperty: MMethod): MMethodDef
+	do
+		if mproperty.mpropdefs.length == 1 then return mproperty.mpropdefs.first
+		var res = lookup_first_definition_cache[mtype, mproperty]
+		if res != null then return res
+		res = mproperty.lookup_first_definition(self.mainmodule, mtype)
+		lookup_first_definition_cache[mtype, mproperty] = res
+		return res
 	end
 
 	# Read the attribute `mproperty` of an instance `recv` and return its value.
