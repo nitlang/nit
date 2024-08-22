@@ -523,6 +523,7 @@ private class TypeVisitor
 				var paramtype = param.mtype
 				self.visit_expr_subtype(arg, paramtype)
 			else
+				straight = false
 				check_one_vararg(arg, param)
 			end
 		end
