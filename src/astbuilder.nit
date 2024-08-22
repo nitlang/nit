@@ -42,6 +42,12 @@ class ASTBuilder
 		return new AIntegerExpr.make(value, mmodule.int_type)
 	end
 
+	# Make a self expression
+	fun make_self: ASelfExpr
+	do
+		return new ASelfExpr
+	end
+
 	# Make a new instantiation
 	fun make_new(callsite: CallSite, args: nullable Array[AExpr]): ANewExpr
 	do

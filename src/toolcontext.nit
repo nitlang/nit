@@ -416,6 +416,8 @@ class ToolContext
 		opt_stub_man.hidden = true
 		opt_bash_completion.hidden = true
 		opt_set_dummy_tool.hidden = true
+
+		nit_dir = locate_nit_dir
 	end
 
 	# Name, usage and synopsis of the tool.
@@ -503,6 +505,10 @@ The Nit language documentation and the source code of its tools and libraries ma
 		end
 
 		nit_dir = locate_nit_dir
+		if nit_dir == null then
+			fatal_error(null, "Fatal Error: cannot locate a valid base Nit directory. It is quite unexpected. Try to set the environment variable `NIT_DIR` or to use the `--nit-dir` option.")
+			abort
+		end
 
 		if option_context.rest.is_empty and not accept_no_arguments then
 			print tooldescription
@@ -577,7 +583,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 	#
 	# The result is returned without being assigned to `nit_dir`.
 	# This function is automatically called by `process_options`
-	fun locate_nit_dir: String
+	fun locate_nit_dir: nullable String
 	do
 		# the option has precedence
 		var res = opt_nit_dir.value
@@ -617,8 +623,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 			if check_nit_dir(res) then return res.simplify_path
 		end
 
-		fatal_error(null, "Fatal Error: cannot locate a valid base Nit directory. It is quite unexpected. Try to set the environment variable `NIT_DIR` or to use the `--nit-dir` option.")
-		abort
+		return null
 	end
 
 	private fun check_nit_dir(res: String): Bool

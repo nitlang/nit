@@ -48,3 +48,5 @@ nitpm
 nitdoc
 test_astbuilder
 test_astprinter
+module_fictive
+module_injected
