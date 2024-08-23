@@ -117,6 +117,7 @@ class NaiveInterpreter
 	do
 		anchor_to_cache.clear
 		lookup_first_definition_cache.clear
+		collect_attr_propdef_cache.clear
 	end
 
 	# Subtype test in the context of the mainmodule
