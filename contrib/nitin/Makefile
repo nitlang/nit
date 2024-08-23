@@ -25,8 +25,9 @@ bin/nitin: $(shell $(NITLS) -M nitin.nit)
 	$(NITC) --semi-global nitin.nit -m readline -o bin/nitin
 
 .PHONY: check
-check:
+check: all
 	$(NITUNIT) .
+	./tests.sh
 
 .PHONY: doc
 doc:
