@@ -113,10 +113,30 @@ class NaiveInterpreter
 		end
 	end
 
+	fun clear_caches
+	do
+		anchor_to_cache.clear
+		lookup_first_definition_cache.clear
+		collect_attr_propdef_cache.clear
+	end
+
 	# Subtype test in the context of the mainmodule
 	fun is_subtype(sub, sup: MType): Bool
 	do
 		return sub.is_subtype(self.mainmodule, current_receiver_class, sup)
+	end
+
+	var anchor_to_cache = new HashMap2[MType, MClassType, MType]
+
+	# Cached anchor resolution in the context of the mainmodule
+	fun anchor_to(mtype: MType, anchor: MClassType): MType
+	do
+		if not mtype.need_anchor then return mtype
+		var res = anchor_to_cache[mtype, anchor]
+		if res != null then return res
+		res = mtype.anchor_to(self.mainmodule, anchor)
+		anchor_to_cache[mtype, anchor] = res
+		return res
 	end
 
 	# Get a primitive method in the context of the main module
@@ -454,34 +474,32 @@ class NaiveInterpreter
 	# Retrieve the value of the variable in the current frame
 	fun read_variable(v: Variable): Instance
 	do
-		var f = frames.first.as(InterpreterFrame)
-		return f.map[v]
+		var f = frames.first
+		return f.read_variable(v, self)
 	end
 
 	# Assign the value of the variable in the current frame
 	fun write_variable(v: Variable, value: Instance)
 	do
-		var f = frames.first.as(InterpreterFrame)
-		f.map[v] = value
+		var f = frames.first
+		f.write_variable(v, self, value)
 	end
 
 	# Store known methods, used to trace methods as they are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
-	# Consumes an iterator of expressions and tries to map each element to
-	# its corresponding Instance.
+	# Collect `expr` of each AExpr in order and append the instance to the result.
 	#
 	# If any AExprs doesn't resolve to an Instance, then it returns null.
-	# Otherwise return an array of instances
-	fun aexprs_to_instances(aexprs: Iterator[AExpr]): nullable Array[Instance]
+	# Otherwise return the array of instances
+	fun aexprs_to_instances(aexprs: Collection[AExpr], result: Array[Instance]): nullable Array[Instance]
 	do
-		var accumulator = new Array[Instance]
 		for aexpr in aexprs do
 			var instance = expr(aexpr)
 			if instance == null then return null
-			accumulator.push(instance)
+			result.push(instance)
 		end
-		return accumulator
+		return result
 	end
 
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
@@ -491,22 +509,20 @@ class NaiveInterpreter
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: Instance, args: SequenceRead[AExpr]): nullable Array[Instance]
 	do
 		var msignature = mpropdef.msignature.as(not null)
-		var res = new Array[Instance]
+		var res = new Array[Instance].with_capacity(msignature.arity+1)
 		res.add(recv)
 
 		if msignature.arity == 0 then return res
 
-		if map == null then
+		if map == null or map.straight then
 			assert args.length == msignature.arity else debug("Expected {msignature.arity} args, got {args.length}")
-			var rest_args = aexprs_to_instances(args.iterator)
-			if rest_args == null then return null
-			res.append(rest_args)
+			if aexprs_to_instances(args, res) == null then return null
 			return res
 		end
 
 		# Eval in order of arguments, not parameters
-		var exprs = aexprs_to_instances(args.iterator)
-		if exprs == null then return null
+		var exprs = new Array[Instance].with_capacity(args.length)
+		if aexprs_to_instances(args, exprs) == null then return null
 
 		# Fill `res` with the result of the evaluation according to the mapping
 		for i in [0..msignature.arity[ do
@@ -519,7 +535,7 @@ class NaiveInterpreter
 			end
 			if param.is_vararg and args[i].vararg_decl > 0 then
 				var vararg = exprs.sub(j, args[i].vararg_decl)
-				var elttype = param.mtype.anchor_to(self.mainmodule, recv.mtype.as(MClassType))
+				var elttype = anchor_to(param.mtype, recv.mtype.as(MClassType))
 				var arg = self.array_instance(vararg, elttype)
 				res.add(arg)
 				continue
@@ -588,7 +604,7 @@ class NaiveInterpreter
 			# get the parameter type
 			var mtype = mp.mtype
 			var anchor = args.first.mtype.as(MClassType)
-			var amtype = mtype.anchor_to(self.mainmodule, anchor)
+			var amtype = anchor_to(mtype, anchor)
 			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, amtype) then
 				node.fatal(self, "Cast failed. Expected `{mtype}`, got `{args[i+1].mtype}`")
 			end
@@ -627,8 +643,21 @@ class NaiveInterpreter
 		var mtype = recv.mtype
 		var ret = send_commons(mproperty, args, mtype)
 		if ret != null then return ret
-		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
+		var propdef = lookup_first_definition(mtype, mproperty)
 		return self.call(propdef, args)
+	end
+
+	private var lookup_first_definition_cache = new HashMap2[MType, MMethod, MMethodDef]
+
+	# Cached version of lookup_first_definition for the main module
+	fun lookup_first_definition(mtype: MType, mproperty: MMethod): MMethodDef
+	do
+		if mproperty.mpropdefs.length == 1 then return mproperty.mpropdefs.first
+		var res = lookup_first_definition_cache[mtype, mproperty]
+		if res != null then return res
+		res = mproperty.lookup_first_definition(self.mainmodule, mtype)
+		lookup_first_definition_cache[mtype, mproperty] = res
+		return res
 	end
 
 	# Read the attribute `mproperty` of an instance `recv` and return its value.
@@ -691,7 +720,7 @@ class NaiveInterpreter
 	# This function determines the correct type according to the receiver of the current propdef (self).
 	fun unanchor_type(mtype: MType): MType
 	do
-		return mtype.anchor_to(self.mainmodule, current_receiver_class)
+		return anchor_to(mtype, current_receiver_class)
 	end
 
 	# Placebo instance used to mark internal error result when `null` already have a meaning.
@@ -823,7 +852,12 @@ class PrimitiveInstance[E]
 		return self.val.is_same_instance(o.val)
 	end
 
-	redef fun to_s do return "{mtype}#{val.object_id}({val or else "null"})"
+	redef fun to_s
+	do
+		var val = self.val
+		if val == null then return "{mtype}#null"
+		return "{mtype}#{val.object_id}({val})"
+	end
 
 	redef fun to_i do return val.as(Int)
 
@@ -854,14 +888,40 @@ abstract class Frame
 	var arguments: Array[Instance]
 	# Indicate if the expression has an array comprehension form
 	var comprehension: nullable Array[Instance] = null
+	# Read access of a variable
+	fun read_variable(variable: Variable, v: NaiveInterpreter): Instance is abstract
+	# Write access of a variable
+	fun write_variable(variable: Variable, v: NaiveInterpreter, value: Instance) is abstract
 end
 
 # Implementation of a Frame with a Hashmap to store local variables
 class InterpreterFrame
 	super Frame
 
-	# Mapping between a variable and the current value
-	var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	# Mapping between a variable index and the current value
+	var vars = new Array[Instance]
+
+	redef fun read_variable(variable, v)
+	do
+		return vars[variable.index]
+	end
+
+	redef fun write_variable(variable, v, value)
+	do
+		var index = variable.index
+		if index == -1 then
+			variable.index = vars.length
+			vars.add(value)
+		else
+			while vars.length < index do vars.add(v.null_instance) # use null as place-holder to fill the array of missing variables
+			vars[index] = value
+		end
+	end
+end
+
+redef class Variable
+	# Position/numbering of the local variable in the frame.
+	var index: Int = -1
 end
 
 redef class ANode
@@ -1589,7 +1649,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return
 		var mtype = self.mtype.as(not null)
-		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
+		mtype = v.anchor_to(mtype, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
 		end
@@ -2276,6 +2336,9 @@ redef class AOnceExpr
 end
 
 redef class ASendExpr
+	# We assume the node will not change, so we can cache the raw arguments array once and for all
+	private var raw_arguments_cache: Array[AExpr] = self.raw_arguments is lazy
+
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr)
@@ -2286,7 +2349,7 @@ redef class ASendExpr
 			return recv
 		end
 
-		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
+		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments_cache)
 		if args == null then return null
 		var res = v.callsite(callsite, args)
 		return res
