@@ -1,0 +1,70 @@
+
+* tests/attribute_initialization.nit
+-->class A
+...var hello = "Hello"
+...end
+-->var a1 = new A
+-->print a1.hello
+Hello
+-->redef class A
+...var world = "World"
+...end
+-->var a2 = new A
+-->print a2.hello
+Hello
+-->print a2.world
+World
+-->print a1.world
+12,7--14: Runtime error: Uninitialized attribute _world
+	print [0;31ma1.world[0m
+	      ^
+,---- Stack trace -- - -  -
+| input-8$Sys$main (12,7--14)
+`------------------- - -  -
+-->a1.world = "Monde"
+-->print a1.world
+Monde
+-->
+* tests/hello.nit
+-->print "Hello, World!"
+Hello, World!
+-->
+* tests/importation.nit
+-->var h = "Hello, world!"
+-->import base64
+-->print h.encode_base64
+SGVsbG8sIHdvcmxkIQ==
+-->
+* tests/refinement.nit
+-->var i = 42
+-->redef class Int
+...fun foo: Int do return self + 1
+...end
+-->print(i.foo)
+43
+-->
+* tests/specialization_refinement.nit
+-->class A
+...end
+-->class B
+...end
+-->var b: Object = new B
+-->print b isa A
+false
+-->redef class B
+...super A
+...end
+-->print b isa A
+true
+-->
+* tests/variables.nit
+-->var i = 42
+-->print(i)
+42
+-->i += 1
+-->print(i)
+43
+-->i += 1
+-->print(i)
+44
+-->
