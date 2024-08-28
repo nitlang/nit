@@ -411,7 +411,7 @@ redef class Generator
 		add "end"
 
 		for p in gram.prods do
-			add "class Goto_{p.cname}"
+			add "private class Goto_{p.cname}"
 			add "\tsuper LRGoto"
 			for s in p.gotos do
 				if s.gotos.length <= 1 then continue
