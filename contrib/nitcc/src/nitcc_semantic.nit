@@ -59,12 +59,12 @@ class CollectNameVisitor
 		v2.enter_visit(n)
 
 		# Inline all the `?`
-		gram.inline(v2.gram.quesizes.values)
+		for p in v2.gram.quesizes.values do gram.inline_prod(p)
 		# Inline all the prods suffixed by '_inline' #TODO use a real keyword
 		for p in gram.prods do
 			if not p.name.has_suffix("_inline") then continue
 			print "inline {p}"
-			gram.inline([p])
+			gram.inline_prod(p)
 		end
 
 		# Build the NFA automaton

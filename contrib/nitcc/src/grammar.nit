@@ -59,70 +59,100 @@ class Gram
 		return res.to_s
 	end
 
-	# Inline (ie. remove from the concrete grammar) some production
-	# REQUIRE: no circular production in `prods`
-	fun inline(prods: Collection[Production])
+	# Check that prod does not depends on itself (no circular dependency).
+	fun can_inline(prod: Production): Bool
 	do
-		for p in self.prods do
-			for a in p.alts.to_a do
-				if a.phony then continue
-				var to_inline = false
-				for e in a.elems do
-					if e isa Production and prods.has(e) then to_inline = true
+		for a in prod.alts.to_a do
+			for e in a.elems do
+				if prod == e then
+					return false
 				end
-				if not to_inline then continue
-
-				if a.codes == null then a.make_codes
-
-				var a0 = new Alternative(p, a.name, new Array[Element])
-				a0.trans = true
-				a0.codes = new Array[Code]
-				var pool = [a0]
-				var pool2 = new Array[Alternative]
-				for e in a.elems do
-					if not e isa Production or not prods.has(e) then
-						for x in pool do
-							x.elems.add(e)
-							x.codes.add(new CodePop)
-						end
-						continue
-					end
-					if p == e then
-						print "Circular inlining on {p} :: {a}"
-						abort
-					end
-					pool2.clear
-					for a2 in e.alts do
-						if a.phony then continue
-						if a2.codes == null then a2.make_codes
-						for x in pool do
-							var name = a.name + "_" + pool2.length.to_s
-							var na = new Alternative(p, name, new Array[Element])
-							na.trans = true
-							pool2.add(na)
-							na.elems.add_all(x.elems)
-							na.elems.add_all(a2.elems)
-							na.codes = new Array[Code]
-							na.codes.add_all(x.codes.as(not null))
-							na.codes.add_all(a2.codes.as(not null))
-						end
-					end
-					var tmp = pool
-					pool = pool2
-					pool2 = tmp
-				end
-				for x in pool do
-					x.codes.add(a.codes.last)
-				end
-				p.ast_alts.add(a)
-				p.alts.remove(a)
-				p.alts.add_all(pool)
 			end
 		end
-		for p in prods do
-			self.prods.remove(p)
-			self.ast_prods.add(p)
+		return true
+	end
+
+	# Inline `p = A | B` into `{a:} C . p D` produces 2 new alternatives `{a1:} C A D` and `{a2:} C B D`
+	# Note that A, B, C and D can contain p and will not be modified.
+	# Note also that `old_alt` will be removed form the CST.
+	fun inline_element(old_alt: Alternative, pos: Int)
+	do
+		var production = old_alt.elems[pos] # The production to inline
+		assert production isa Production
+		var old_prod = old_alt.prod # It's production
+		if old_alt.codes == null then old_alt.make_codes
+
+		for alt in production.alts do
+			# For each alternative of the production to inline, create a new altednative based on the old one
+			var name = old_alt.name + "_i" + old_prod.alts.length.to_s
+			var new_alt = new Alternative(old_prod, name, new Array[Element])
+			new_alt.trans = true
+			old_prod.alts.add(new_alt)
+			# All the element are the same, except the production replaced by the selected alternative
+			for i in [0..old_alt.elems.length[ do
+				if i == pos then
+					new_alt.elems.add_all(alt.elems)
+				else
+					var e = old_alt.elems[i]
+					new_alt.elems.add(e)
+				end
+			end
+			# Codes should also be updated
+			# code in the old alternative might be shifted to correspond to the new position of the existing element
+			# code getting the must be replaced by the whole code of the inlined alternative, also shifted by the right amount
+			if alt.codes == null then alt.make_codes
+			new_alt.codes = new Array[Code]
+			for code in old_alt.codes.as(not null) do
+				if code isa CodeGet then
+					if code.pos == pos then
+						for code2 in alt.codes.as(not null) do
+							new_alt.codes.add(code2.shift(pos))
+						end
+					else if code.pos >= pos then
+						# some elements are added but one (the inlined production) is removed
+						new_alt.codes.add(code.shift(alt.elems.length - 1))
+					else
+						new_alt.codes.add(code)
+					end
+				else
+					new_alt.codes.add(code)
+				end
+			end
+			#print "old «{old_alt}» {old_alt.codes or else "?"}"
+			#print "inl «{alt}» {alt.codes or else "?"}"
+			#print "new «{new_alt}» {new_alt.codes or else "?"}"
 		end
+		if not old_alt.trans then
+			old_prod.ast_alts.add(old_alt)
+		end
+		old_prod.alts.remove(old_alt)
+	end
+
+	# Inline all occurrences of a production and delete it from the CST.
+	# Require `can_inline(prod)`
+	fun inline_prod(prod: Production)
+	do
+		var changed = true
+		while changed do
+			changed = false
+			for p in self.prods do
+				for a in p.alts.to_a do
+					for i in [0..a.elems.length[ do
+						var e = a.elems[i]
+						if e != prod then continue
+						if p == prod then
+							print "circular"
+							abort
+						end
+						inline_element(a, i)
+						changed = true
+						break
+					end
+				end
+			end
+		end
+		self.prods.remove(prod)
+		self.ast_prods.add(prod)
 	end
 
 	# The starting production in the augmented grammar
@@ -583,6 +613,8 @@ end
 # A step in the construction of the AST.
 # Used to model transformations
 interface Code
+	# self or a CodeGet increased by `d`. Is used by inlining.
+	fun shift(d: Int): Code do return self
 end
 
 # Get a element from the stack
@@ -595,6 +627,7 @@ class CodeGet
 	super Code
 	var pos: Int
 	redef fun to_s do return "get{pos}"
+	redef fun shift(d) do return new CodeGet(pos+d)
 end
 
 # Allocate a new AST node for an alternative using the correct number of popped elements
