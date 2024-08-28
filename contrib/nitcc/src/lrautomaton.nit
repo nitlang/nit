@@ -381,7 +381,7 @@ redef class Generator
 		add "end"
 
 		for t in gram.tokens do
-			add "redef class {t.acname}"
+			add "redef class {t.ast_type.to_nit}"
 			for s in t.shifts do
 				if not s.need_guard then continue
 				add "\tredef fun action_s{s.number}(parser) do"
@@ -484,7 +484,7 @@ redef class Generator
 		add "\t\t# REDUCE {alt}"
 		var i = alt.elems.length - 1
 		for e in alt.elems.to_a.reversed do
-			add "\t\tvar n{i} = parser.pop.as({e.acname})"
+			add "\t\tvar n{i} = parser.pop.as({e.ast_type.to_nit})"
 			i -= 1
 		end
 
@@ -520,7 +520,7 @@ redef class Generator
 				st.add("p{cpt}")
 			else if c isa CodeNewNodes then
 				cpt += 1
-				add "\t\tvar p{cpt} = new {c.alt.prod.acname}"
+				add "\t\tvar p{cpt} = new {c.alt.prod.ast_type.to_nit}"
 				st.add("p{cpt}")
 			else if c isa CodeAdd then
 				var a1 = st.pop
