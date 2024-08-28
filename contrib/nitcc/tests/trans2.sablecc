@@ -1,0 +1,8 @@
+Grammar trans;
+
+Parser
+
+s = s b | b;
+a = ;
+b {-> a} = 'x' | c {->};
+c {-> a} = 'y';
