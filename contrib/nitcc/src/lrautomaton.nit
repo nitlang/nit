@@ -411,7 +411,7 @@ redef class Generator
 		add "end"
 
 		for p in gram.prods do
-			add "class Goto_{p.cname}"
+			add "private class Goto_{p.cname}"
 			add "\tsuper LRGoto"
 			for s in p.gotos do
 				if s.gotos.length <= 1 then continue
@@ -493,9 +493,8 @@ redef class Generator
 		i = 0
 		var st = new Array[String]
 		for c in alt.codes.as(not null) do
-			if c isa CodePop then
-				st.add "n{i}"
-				i += 1
+			if c isa CodeGet then
+				st.add "n{c.pos}"
 			else if c isa CodeNull then
 				st.add "null"
 			else if c isa CodeNew then
@@ -527,9 +526,15 @@ redef class Generator
 				var a1 = st.pop
 				var a0 = st.last
 				add "\t\t{a0}.children.add({a1})"
+			else
+				abort
 			end
 		end
-		assert st.length == 1
+		assert st.length == 1 else
+			print alt
+			print st
+			print alt.codes or else "?"
+		end
 		add "\t\tvar prod = {st.first}"
 
 		add "\t\tparser.node_stack.push prod"

@@ -59,12 +59,12 @@ class CollectNameVisitor
 		v2.enter_visit(n)
 
 		# Inline all the `?`
-		gram.inline(v2.gram.quesizes.values)
+		for p in v2.gram.quesizes.values do gram.inline_prod(p)
 		# Inline all the prods suffixed by '_inline' #TODO use a real keyword
 		for p in gram.prods do
 			if not p.name.has_suffix("_inline") then continue
 			print "inline {p}"
-			gram.inline([p])
+			gram.inline_prod(p)
 		end
 
 		# Build the NFA automaton
@@ -401,7 +401,7 @@ redef class Npriority
 		# Inject a new alternative that goes to the next less priority class
 		var alt = prod.new_alt2(prod.name + "_" + prod.alts.length.to_s, [next.as(not null)])
 		alt.trans = true
-		alt.codes = [new CodePop]
+		alt.codes = [new CodeGet(0)]
 
 		v.pri = null
 		v.prod = old
@@ -503,7 +503,7 @@ redef class Nalt
 		self.alt = alt
 		if v.trans then
 			alt.trans = true
-			alt.codes = [new CodePop]
+			alt.codes = [new CodeGet(0)]
 		end
 	end
 end

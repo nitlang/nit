@@ -1,0 +1,6 @@
+Grammar trans_inline;
+
+Parser
+
+p = 'a' 'b' q_inline 'c' q_inline 'd';
+q_inline = 'x' 'y' | 'z' ;
