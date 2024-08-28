@@ -474,6 +474,19 @@ class Production
 	# Is self the accept production
 	var accept = false
 
+	# Is self present as a distinct AST class
+	fun is_ast: Bool do return parent_production == self
+
+	# The production AST where non transformed alternative are attached to.
+	# If no such production exists, return null
+	fun parent_production: nullable Production
+	do
+		var res = ast_type.element
+		if not res isa Production then return null # it is a token
+		if ast_type.is_plain then return res
+		return null # is is nullable and/or array
+	end
+
 	# Is self transformed to a other production for the AST
 	# FIXME: cleanup AST
 	var spe: nullable Production = null is writable
@@ -548,6 +561,64 @@ class Production
 		for a in alts do
 			if a.phony then continue
 			res.add a.first_item
+		end
+		return res
+	end
+end
+
+# static types of AST elements (AST productions and tokens)
+class ASTType
+	var element: Element
+	var is_nullable: Bool = false
+	var is_array: Bool = false
+
+	fun is_plain: Bool
+	do
+		return not is_nullable and not is_array
+	end
+
+	redef fun to_s
+	do
+		var res = element.name
+		if is_nullable then
+			if is_array then
+				return "{res}*"
+			else
+				return "{res}?"
+			end
+		else
+			if is_array then
+				return "{res}+"
+			else
+				return res
+			end
+		end
+	end
+
+	fun as_nullable: ASTType
+	do
+		if is_nullable then return self
+		var res = new ASTType(element)
+		res.is_nullable = true
+		res.is_array = is_array
+		return res
+	end
+	fun as_array: ASTType
+	do
+		if is_array then return self
+		var res = new ASTType(element)
+		res.is_nullable = is_nullable
+		res.is_array = true
+		return res
+	end
+	fun to_nit: String
+	do
+		var res = "N" + element.cname
+		if is_array then
+			res = "Nodes[{res}]"
+		end
+		if is_nullable then
+			res = "nullable {res}"
 		end
 		return res
 	end
@@ -663,6 +734,8 @@ abstract class Element
 	# The name of the element
 	var name: String
 	redef fun to_s do return name
+
+	var ast_type: ASTType = new ASTType(self) is writable
 
 	# An example of a string
 	fun sample_to_s: String is abstract
