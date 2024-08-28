@@ -342,9 +342,11 @@ class Gram
                 prod.acname = "Nodes[{e.acname}]"
                 prods.add(prod)
 		var alt1 = prod.new_alt("{cname}_one", e)
+		alt1.trans = true
                 alt1.codes = [new CodeNewNodes(alt1), new CodeGet(0), new CodeAdd: Code]
 		var alt2 = prod.new_alt("{cname}_more", prod, e)
                 alt2.codes = [new CodeGet(0), new CodeGet(1), new CodeAdd: Code]
+		alt2.trans = true
                 plusizes[e] = prod
                 return prod
         end
@@ -373,9 +375,11 @@ class Gram
                 prod.acname = "nullable {e.acname}"
                 prods.add(prod)
                 var a1 = prod.new_alt("{cname}_one", e)
+		a1.trans = true
                 a1.codes = [new CodeGet(0)]
                 var a0 = prod.new_alt0("{cname}_none")
                 a0.codes = [new CodeNull]
+		a0.trans = true
                 quesizes[e] = prod
                 return prod
         end
