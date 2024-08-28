@@ -401,7 +401,7 @@ redef class Npriority
 		# Inject a new alternative that goes to the next less priority class
 		var alt = prod.new_alt2(prod.name + "_" + prod.alts.length.to_s, [next.as(not null)])
 		alt.trans = true
-		alt.codes = [new CodePop]
+		alt.codes = [new CodeGet(0)]
 
 		v.pri = null
 		v.prod = old
@@ -503,7 +503,7 @@ redef class Nalt
 		self.alt = alt
 		if v.trans then
 			alt.trans = true
-			alt.codes = [new CodePop]
+			alt.codes = [new CodeGet(0)]
 		end
 	end
 end

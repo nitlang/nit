@@ -312,9 +312,9 @@ class Gram
                 prod.acname = "Nodes[{e.acname}]"
                 prods.add(prod)
 		var alt1 = prod.new_alt("{cname}_one", e)
-                alt1.codes = [new CodeNewNodes(alt1), new CodePop, new CodeAdd: Code]
+                alt1.codes = [new CodeNewNodes(alt1), new CodeGet(0), new CodeAdd: Code]
 		var alt2 = prod.new_alt("{cname}_more", prod, e)
-                alt2.codes = [new CodePop, new CodePop, new CodeAdd: Code]
+                alt2.codes = [new CodeGet(0), new CodeGet(1), new CodeAdd: Code]
                 plusizes[e] = prod
                 return prod
         end
@@ -343,7 +343,7 @@ class Gram
                 prod.acname = "nullable {e.acname}"
                 prods.add(prod)
                 var a1 = prod.new_alt("{cname}_one", e)
-                a1.codes = [new CodePop]
+                a1.codes = [new CodeGet(0)]
                 var a0 = prod.new_alt0("{cname}_none")
                 a0.codes = [new CodeNull]
                 quesizes[e] = prod
@@ -571,8 +571,10 @@ class Alternative
 		if codes != null then return
 		var codes = new Array[Code]
 		self.codes = codes
+		var i = 0
 		for e in elems do
-			codes.add(new CodePop)
+			codes.add(new CodeGet(i))
+			i += 1
 		end
 		codes.add(new CodeNew(self))
 	end
@@ -587,6 +589,12 @@ end
 class CodePop
 	super Code
 	redef fun to_s do return "pop"
+end
+
+class CodeGet
+	super Code
+	var pos: Int
+	redef fun to_s do return "get{pos}"
 end
 
 # Allocate a new AST node for an alternative using the correct number of popped elements
