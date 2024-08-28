@@ -320,7 +320,7 @@ redef class Nprod
 			# The main production will be used for the last priority class
 			var spe = prod
 			prod = new Production(name + "0")
-			prod.spe = spe
+			prod.ast_type = spe.ast_type
 			v.gram.prods.add(prod)
 		end
 		self.sub_prod = prod
@@ -343,8 +343,9 @@ redef class Nptrans
 
 		var node = v.v1.names[name]
 		if node isa Nprod then
-			v.prod.spe = node.prod.as(not null)
-			if v.prod.spe.spe != null then
+			var p = node.prod.as(not null)
+			v.prod.ast_type = p.ast_type
+			if not p.is_ast then
 				print "Cannot transform into {name}, {name} is already transformed."
 				exit(1)
 				abort
@@ -370,6 +371,8 @@ redef class Npriority
 	# The associated production
 	var prod: nullable Production
 
+	fun main_prod: nullable Production do return prod.parent_production
+
 	# The production in the with the next less priority class.
 	# `null` if there is no priority or if the first priority class.
 	var next: nullable Production
@@ -377,14 +380,14 @@ redef class Npriority
 	redef fun accept_collect_prod(v) do
 		var old = v.prod
 		assert old != null
-		var spe = old.spe
+		var spe = old.parent_production
 		assert spe != null
 		if is_last then
 			prod = spe
 		else
 			v.pricpt -= 1
 			prod = new Production(spe.name + "{v.pricpt}")
-			prod.spe = spe
+			prod.ast_type = spe.ast_type
 			v.gram.prods.add(prod.as(not null))
 		end
 		next = old
@@ -413,7 +416,7 @@ end
 
 redef class Npriority_left
 	redef fun check_priority(v) do
-		var p = prod.spe or else prod
+		var p = main_prod
 		assert p != null
 		if v.elems.length < 2 or v.elems.first != p or v.elems.last != p then
 			print("Error: in a Left priority class, left and right must be the production")
@@ -426,7 +429,7 @@ end
 
 redef class Npriority_right
 	redef fun check_priority(v) do
-		var p = prod.spe or else prod
+		var p = main_prod
 		assert p != null
 		if v.elems.length < 2 or v.elems.first != p or v.elems.last != p then
 			print("Error: in a Right priority class, left and right must be the production")
@@ -439,7 +442,7 @@ end
 
 redef class Npriority_unary
 	redef fun check_priority(v) do
-		var p = prod.spe or else prod
+		var p = main_prod
 		assert p != null
 		if v.elems.length < 2 or (v.elems.first != p and v.elems.last != p) then
 			print("Error: in a Unary priority class, left or right must be the production")
@@ -473,13 +476,12 @@ redef class Nalt
 		if pri != null then pri.check_priority(v)
 
 		var prod = v.prod.as(not null)
-		var prodabs = prod.spe
-		if prodabs == null then prodabs = prod
+		var prodabs = prod.parent_production
 		var name = v.altname
 		if name == null then
 			if v.trans then
 				name = prod.name + "_" + prod.alts.length.to_s
-			else if prod.spe == null and prod.alts.is_empty and pri == null then
+			else if prod.is_ast and prod.alts.is_empty and pri == null then
 				name = prod.name
 				prod.altone = true
 			else
@@ -515,7 +517,7 @@ redef class Naltid
 		var name = id.text
 		v.altname = name
 		var prod = v.prod.as(not null)
-		var prodabs = prod.spe
+		var prodabs = prod.parent_production
 		if prodabs == null then prodabs = prod
 		for x in prodabs.alts do
 			if x.short_name == name then

@@ -29,8 +29,8 @@ class Gram
 	do
 		var res = new FlatBuffer
 		for p in prods do
-			if p.spe != null then
-				res.append("{p.name} \{-> {p.spe.name}\}=\n")
+			if not p.is_ast then
+				res.append("{p.name} \{-> {p.ast_type}\}=\n")
 			else
 				res.append("{p.name} =\n")
 			end
@@ -492,9 +492,6 @@ class Production
 		return null # is is nullable and/or array
 	end
 
-	# Is self transformed to a other production for the AST
-	# FIXME: cleanup AST
-	var spe: nullable Production = null is writable
 
 	# Is self contains only a single alternative (then no need for a abstract production class in the AST)
 	# FIXME cleanup AST
