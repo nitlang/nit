@@ -34,6 +34,26 @@ class CollectNameVisitor
 	# Symbol table to associate things (prods and exprs) with their name
 	var names = new HashMap[String, Node]
 
+	fun get_element(name: String): nullable Element
+	do
+		if not names.has_key(name) then return null
+		var node = names[name]
+		if node isa Nprod then
+			return node.prod.as(not null)
+		else if node isa Nexpr then
+			var elem = node.token
+			if elem == null then
+				elem = new Token(name)
+				elem.nexpr = node
+				gram.tokens.add(elem)
+				node.token = elem
+			end
+			return elem
+		else
+			abort
+		end
+	end
+
 	# The associated grammar object
 	# Read the result of the visit here
 	var gram = new Gram
@@ -618,27 +638,12 @@ redef class Nelem_id
 	redef fun accept_check_name_visitor(v) do
 		var id = children.first.as(Nid)
 		var name = id.text
-		if not v.v1.names.has_key(name) then
+		var elem = v.v1.get_element(name)
+		if elem == null then
 			print "{id.position.to_s} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
-		var node = v.v1.names[name]
-		var elem: nullable Element
-		if node isa Nprod then
-			elem = node.prod
-		else if node isa Nexpr then
-			elem = node.token
-			if elem == null then
-				elem = new Token(name)
-				elem.nexpr = node
-				v.v1.gram.tokens.add(elem)
-				node.token = elem
-			end
-		else
-			abort
-		end
-		assert elem != null
 		set_elem(v, id.position, elem)
 		if v.elemname == null then v.elemname = name
 	end
