@@ -361,20 +361,8 @@ redef class Nptrans
 		var id = children[2].as(Nid)
 		var name = id.text
 
-		var node = v.v1.names[name]
-		if node isa Nprod then
-			var p = node.prod.as(not null)
-			v.prod.ast_type = p.ast_type
-			if not p.is_ast then
-				print "Cannot transform into {name}, {name} is already transformed."
-				exit(1)
-				abort
-			end
-		else if node isa Nexpr then
-			print "Cannot transform into {name}, {name} is a token."
-		else
-			abort
-		end
+		var elem = v.v1.get_element(name)
+		v.prod.ast_type = elem.ast_type
 	end
 end
 
