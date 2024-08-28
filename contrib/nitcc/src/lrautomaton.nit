@@ -493,10 +493,7 @@ redef class Generator
 		i = 0
 		var st = new Array[String]
 		for c in alt.codes.as(not null) do
-			if c isa CodePop then
-				st.add "n{i}"
-				i += 1
-			else if c isa CodeGet then
+			if c isa CodeGet then
 				st.add "n{c.pos}"
 			else if c isa CodeNull then
 				st.add "null"

@@ -617,12 +617,6 @@ interface Code
 	fun shift(d: Int): Code do return self
 end
 
-# Get a element from the stack
-class CodePop
-	super Code
-	redef fun to_s do return "pop"
-end
-
 class CodeGet
 	super Code
 	var pos: Int
