@@ -1,0 +1,6 @@
+Lexer
+a = 'a';
+
+Parser
+p = q;
+q {-> a} = a {->};

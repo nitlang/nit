@@ -1091,7 +1091,7 @@ private class DFAGenerator
 						add("\t\tvar t = new MyNToken\n")
 						add("\t\tt.text = position.extract(source)\n")
 					else
-						add("\t\tvar t = new {token.acname}\n")
+						add("\t\tvar t = new {token.ast_type.to_nit}\n")
 						var ttext = token.text
 						if ttext == null then
 							add("\t\tt.text = position.extract(source)\n")

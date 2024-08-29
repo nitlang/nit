@@ -29,8 +29,8 @@ class Gram
 	do
 		var res = new FlatBuffer
 		for p in prods do
-			if p.spe != null then
-				res.append("{p.name} \{-> {p.spe.name}\}=\n")
+			if not p.is_ast then
+				res.append("{p.name} \{-> {p.ast_type}\}=\n")
 			else
 				res.append("{p.name} =\n")
 			end
@@ -339,12 +339,14 @@ class Gram
 		var cname = "_plus{plusizes.length}"
 		var prod = new Production("{e}+")
 		prod.cname = cname
-                prod.acname = "Nodes[{e.acname}]"
+		prod.ast_type = e.ast_type.as_array
                 prods.add(prod)
 		var alt1 = prod.new_alt("{cname}_one", e)
+		alt1.trans = true
                 alt1.codes = [new CodeNewNodes(alt1), new CodeGet(0), new CodeAdd: Code]
 		var alt2 = prod.new_alt("{cname}_more", prod, e)
                 alt2.codes = [new CodeGet(0), new CodeGet(1), new CodeAdd: Code]
+		alt2.trans = true
                 plusizes[e] = prod
                 return prod
         end
@@ -370,12 +372,14 @@ class Gram
                 var cname = "_opt{quesizes.length}"
                 var prod = new Production("{e}?")
                 prod.cname = cname
-                prod.acname = "nullable {e.acname}"
+		prod.ast_type = e.ast_type.as_nullable
                 prods.add(prod)
                 var a1 = prod.new_alt("{cname}_one", e)
+		a1.trans = true
                 a1.codes = [new CodeGet(0)]
                 var a0 = prod.new_alt0("{cname}_none")
                 a0.codes = [new CodeNull]
+		a0.trans = true
                 quesizes[e] = prod
                 return prod
         end
@@ -409,9 +413,9 @@ class Gram
 
 		for t in tokens do
 			if t.name == "Eof" then
-				g.add "redef class {t.acname}"
+				g.add "redef class NEof"
 			else
-				g.add "class {t.acname}"
+				g.add "class {t.ast_type.to_nit}"
 				g.add "\tsuper NToken"
 			end
 			g.add "\tredef fun node_name do return \"{t.name.escape_to_nit}\""
@@ -421,10 +425,9 @@ class Gram
 		var ps = prods.to_a
 		ps.add_all(ast_prods)
 		for p in ps do
-			if p.spe == null and not p.altone then
-				if p.name.has_suffix("?") or p.name.has_suffix("+") then continue
+			if p.is_ast and not p.altone then
 				g.add "# Production {p}"
-				g.add "class {p.acname}"
+				g.add "class {p.ast_type.to_nit}"
 				g.add "\tsuper NProd"
 				g.add "\tredef fun node_name do return \"{p.name.escape_to_nit}\""
 				g.add "end"
@@ -439,14 +442,16 @@ class Gram
 				if p.altone then
 					g.add "\tsuper NProd"
 				else
-					g.add "\tsuper {p.acname}"
+					g.add "\tsuper {p.ast_type.to_nit}"
 				end
 				g.add "\tredef fun node_name do return \"{a.name.escape_to_nit}\""
 				var initarg = new Array[String]
 				for i in [0..a.elems.length[ do
 					g.add "\t# Children {i}: {a.elems[i]}"
-					g.add "\tvar n_{a.elemname(i)}: {a.elems[i].acname}"
-					initarg.add("n_{a.elemname(i)}: {a.elems[i].acname}")
+					var t = a.elems[i].ast_type.to_nit
+					var n = a.elemname(i)
+					g.add "\tvar n_{n}: {t}"
+					initarg.add("n_{n}: {t}")
 				end
 				g.add "\tredef fun number_of_children do return {a.elems.length}"
 				g.add "\tredef fun child(i) do"
@@ -474,20 +479,23 @@ class Production
 	# Is self the accept production
 	var accept = false
 
-	# Is self transformed to a other production for the AST
-	# FIXME: cleanup AST
-	var spe: nullable Production = null is writable
+	# Is self present as a distinct AST class
+	fun is_ast: Bool do return parent_production == self
+
+	# The production AST where non transformed alternative are attached to.
+	# If no such production exists, return null
+	fun parent_production: nullable Production
+	do
+		var res = ast_type.element
+		if not res isa Production then return null # it is a token
+		if ast_type.is_plain then return res
+		return null # is is nullable and/or array
+	end
+
 
 	# Is self contains only a single alternative (then no need for a abstract production class in the AST)
 	# FIXME cleanup AST
 	var altone = false is writable
-
-	# The cname of the class in the AST
-	# FIXME: cleanup AST
-	redef fun acname do
-		if spe != null then return spe.acname
-		return super
-	end
 
 	# Is the production nullable
 	var is_nullable = false
@@ -548,6 +556,64 @@ class Production
 		for a in alts do
 			if a.phony then continue
 			res.add a.first_item
+		end
+		return res
+	end
+end
+
+# static types of AST elements (AST productions and tokens)
+class ASTType
+	var element: Element
+	var is_nullable: Bool = false
+	var is_array: Bool = false
+
+	fun is_plain: Bool
+	do
+		return not is_nullable and not is_array
+	end
+
+	redef fun to_s
+	do
+		var res = element.name
+		if is_nullable then
+			if is_array then
+				return "{res}*"
+			else
+				return "{res}?"
+			end
+		else
+			if is_array then
+				return "{res}+"
+			else
+				return res
+			end
+		end
+	end
+
+	fun as_nullable: ASTType
+	do
+		if is_nullable then return self
+		var res = new ASTType(element)
+		res.is_nullable = true
+		res.is_array = is_array
+		return res
+	end
+	fun as_array: ASTType
+	do
+		if is_array then return self
+		var res = new ASTType(element)
+		res.is_nullable = is_nullable
+		res.is_array = true
+		return res
+	end
+	fun to_nit: String
+	do
+		var res = "N" + element.cname
+		if is_array then
+			res = "Nodes[{res}]"
+		end
+		if is_nullable then
+			res = "nullable {res}"
 		end
 		return res
 	end
@@ -664,10 +730,10 @@ abstract class Element
 	var name: String
 	redef fun to_s do return name
 
+	var ast_type: ASTType = new ASTType(self) is writable
+
 	# An example of a string
 	fun sample_to_s: String is abstract
-
-	private var acname_cache: nullable String = null
 
 	# The mangled name of the element
 	var cname: String is noinit, writable
@@ -676,19 +742,6 @@ abstract class Element
 	do
 		cname = name
 	end
-
-	# The name of the class in the AST
-	fun acname: String do
-		var res = acname_cache
-		if res == null then
-			res = "N{cname}"
-			acname_cache = res
-		end
-		return res
-	end
-
-	# The name of the class in the AST
-	fun acname=(s: String) do acname_cache = s
 end
 
 # A terminal element
