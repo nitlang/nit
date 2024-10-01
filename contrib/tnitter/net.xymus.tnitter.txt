@@ -1,7 +1,7 @@
 Categories:Nit,Internet
 License:Apache2
 Web Site:http://tnitter.xymus.net/
-Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/contrib/tnitter
+Source Code:https://github.com/nitlang/nit.git/tree/HEAD:/contrib/tnitter
 Issue Tracker:https://github.com/nitlang/nit/issues
 
 Summary:Minimal client for the Tnitter open source micro-blogging platform

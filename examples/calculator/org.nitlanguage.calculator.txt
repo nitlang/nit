@@ -1,7 +1,7 @@
 Categories:Nit
 License:Apache2
 Web Site:http://nitlanguage.org
-Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/examples/calculator
+Source Code:https://github.com/nitlang/nit.git/tree/HEAD:/examples/calculator
 Issue Tracker:https://github.com/nitlang/nit/issues
 
 Summary:A Basic Calculator

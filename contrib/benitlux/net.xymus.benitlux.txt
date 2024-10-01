@@ -1,7 +1,7 @@
 Categories:Nit,Internet
 License:Apache2
 Web Site:http://xymus.net/benitlux
-Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/contrib/benitlux
+Source Code:https://github.com/nitlang/nit.git/tree/HEAD:/contrib/benitlux
 Issue Tracker:https://github.com/nitlang/nit/issues
 
 Summary:Mobile client for the Benitlux social network
