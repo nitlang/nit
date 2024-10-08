@@ -6,7 +6,7 @@ _jwrapper_ automates wrapping Java classes so they can be accessed from Nit code
 _jwrapper_ reuse Nit types of already wrapped Java classes by searching in the `lib/java` and `lib/android` folders in the Nit repository. It won't wrap a class that are already is those folders.
 
 # Installation
-_jwrapper_ is designed to be installed from the `contrib` directory of Nit repository. (http://www.nitlanguage.org)
+_jwrapper_ is designed to be installed from the `contrib` directory of Nit repository. (https://nitlanguage.org)
 
 To initiate installation process, use `make` in the `contrib/jwrapper` directory.
 

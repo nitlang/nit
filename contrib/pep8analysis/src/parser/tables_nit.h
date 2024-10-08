@@ -1,6 +1,6 @@
 #ifndef TABLE_NIT_H
 #define TABLE_NIT_H
-/* This file is part of NIT ( http://www.nitlanguage.org ).
+/* This file is part of NIT ( https://nitlanguage.org ).
  *
  * This file is free software, which comes along with NIT.  This software is
  * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;

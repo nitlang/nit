@@ -2,7 +2,7 @@
 " Language:	Nit
 " Maintainer:	Jean Privat <jean@pryen.org>
 
-" This file is part of NIT ( http://www.nitlanguage.org ).
+" This file is part of NIT ( https://nitlanguage.org ).
 "
 " Copyright 2009 Jean Privat <jean@pryen.org>
 "

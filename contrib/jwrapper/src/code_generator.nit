@@ -1,4 +1,4 @@
-# This file is part of NIT (http://www.nitlanguage.org).
+# This file is part of NIT (https://nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
 # Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
@@ -160,7 +160,7 @@ class CodeGenerator
 
 	# License for the header of the generated Nit module
 	var license = """
-# This file is part of NIT (http://www.nitlanguage.org).
+# This file is part of NIT (https://nitlanguage.org).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

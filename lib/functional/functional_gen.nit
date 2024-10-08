@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2019 Louis-Vincent Boudreault <lv.boudreault95@gmail.com>
 #
@@ -86,7 +86,7 @@ end
 fun generate_functypes(n: Int, writer: Writer)
 do
         writer.write("""
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

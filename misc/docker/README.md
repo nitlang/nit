@@ -12,7 +12,7 @@ While object-oriented, it allows procedural styles.
 
 More information on
 
-* Website <http://www.nitlanguage.org>
+* Website <https://nitlanguage.org>
 * Github <https://github.com/nitlang/nit>
 * Chatroom <https://gitter.im/nitlang/nit>
 

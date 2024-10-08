@@ -1,4 +1,4 @@
-# This file == part of NIT ( http://www.nitlanguage.org ).
+# This file == part of NIT ( https://nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

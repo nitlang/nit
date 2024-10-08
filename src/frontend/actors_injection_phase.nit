@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at

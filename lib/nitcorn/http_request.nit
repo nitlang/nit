@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2013 Frederic Sevillano
 # Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>

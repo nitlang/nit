@@ -1,7 +1,7 @@
 #ifndef NIT_COMMON_H
 #define NIT_COMMON_H
 
-/* This file is part of NIT ( http://www.nitlanguage.org ).
+/* This file is part of NIT ( https://nitlanguage.org ).
  *
  * Copyright 2006-2009 Jean Privat <jean@pryen.org>
  *

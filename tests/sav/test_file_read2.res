@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #
@@ -29,7 +29,7 @@ printn("|")
 printn(f.read_all)
 
 ---
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #
@@ -59,7 +59,7 @@ printn(f.read(10))
 printn("|")
 printn(f.read_all)
 ---
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #
@@ -89,7 +89,7 @@ printn(f.read(10))
 printn("|")
 printn(f.read_all)
 ---
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #
@@ -120,7 +120,7 @@ printn("|")
 printn(f.read_all)
 
 ---
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #
@@ -150,7 +150,7 @@ printn(f.read(10))
 printn("|")
 printn(f.read_all)
 ---
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #

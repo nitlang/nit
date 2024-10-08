@@ -1,4 +1,4 @@
-Read token at ./error_syntax.nit:1,1--2,0 text='# This file is part of NIT ( http://www.nitlanguage.org ).
+Read token at ./error_syntax.nit:1,1--2,0 text='# This file is part of NIT ( https://nitlanguage.org ).
 '
 Read token at ./error_syntax.nit:2,1--3,0 text='#
 '
