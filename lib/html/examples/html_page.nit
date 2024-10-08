@@ -88,7 +88,7 @@ class NitHomepage
 					add("h1").text("# Getting Started")
 					add("p").text("Get Nit from its Git repository:")
 
-					add_html("<pre><code>$ git clone http://nitlanguage.org/nit.git</code></pre>")
+					add_html("<pre><code>$ git clone https://github.com/nitlang/nit.git</code></pre>")
 					add("p").text("Build the compiler (may be long):")
 					add_html("<pre><code>$ cd nit\n")
 					add_html("$ make</code></pre>")

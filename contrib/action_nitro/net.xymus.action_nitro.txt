@@ -1,7 +1,7 @@
 Categories:Nit,Games
 License:Apache2
 Web Site:http://nitlanguage.org
-Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/contrib/action_nitro
+Source Code:https://github.com/nitlang/nit.git/tree/HEAD:/contrib/action_nitro
 Issue Tracker:https://github.com/nitlang/nit/issues
 
 Summary:Jump from plate to plane to reach the ISS and defeat the bad guys
