@@ -86,6 +86,6 @@ The best way to ask the team for advice, submit bugs or request features, is thr
 
 Information, contacts and help:
 
-* Website <http://www.nitlanguage.org>
+* Website <https://nitlanguage.org>
 * Issues <https://github.com/nitlang/nit/issues>
 * Chatroom <https://gitter.im/nitlang/nit>

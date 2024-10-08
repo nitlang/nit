@@ -1,6 +1,6 @@
 #!/usr/bin/env nit
 
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #

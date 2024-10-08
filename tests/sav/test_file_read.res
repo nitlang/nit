@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #
@@ -27,7 +27,7 @@ f.reopen
 printn(f.read(10))
 printn("|")
 printn(f.read_all)
-# This fil|e is part of NIT ( http://www.nitlanguage.org ).
+# This fil|e is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 #

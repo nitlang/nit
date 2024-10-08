@@ -1,4 +1,4 @@
-# this file is part of NIT ( http://www.nitlanguage.org ).
+# this file is part of NIT ( https://nitlanguage.org ).
 #
 # Copyright 2014 Romain Chanoir <romain.chanoir@viacesi.fr>
 #

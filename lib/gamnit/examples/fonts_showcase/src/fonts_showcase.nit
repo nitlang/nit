@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the Do What The Fuck You Want To

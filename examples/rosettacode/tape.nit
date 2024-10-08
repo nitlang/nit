@@ -1,6 +1,6 @@
 #!/usr/bin/env nit
 #
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 # This program is public domain
 
 # Task: Create_a_file_on_magnetic_tape

@@ -1,6 +1,6 @@
 #!/usr/bin/env nit
 #
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( https://nitlanguage.org ).
 # This program is public domain
 
 # Simple Rosetta-code task : Parsing a S-Expression
