@@ -159,7 +159,7 @@ private class IOSToolchain
 		if not dir.file_exists then dir.mkdir
 
 		# Create a PBX project file
-		var pbx = new PbxprojectTemplate(project_name)
+		var pbx = new PbxprojectTemplate(project_name, app_project.namespace)
 
 		## Register all source files
 		for file in cfiles do pbx.add_file new PbxFile(file)

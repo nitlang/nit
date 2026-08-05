@@ -149,6 +149,9 @@ class PbxprojectTemplate
 	# Name of the project
 	var name: String
 
+	# PRODUCT_BUNDLE_IDENTIFIER, must match `CFBundleIdentifier` of the `Info.plist`
+	var bundle_identifier: String
+
 	# OTHER_CFLAGS
 	var cflags = "" is writable
 
@@ -432,6 +435,7 @@ class PbxprojectTemplate
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
+				PRODUCT_BUNDLE_IDENTIFIER = "{{{bundle_identifier}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -443,6 +447,7 @@ class PbxprojectTemplate
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
+				PRODUCT_BUNDLE_IDENTIFIER = "{{{bundle_identifier}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
