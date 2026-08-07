@@ -43,16 +43,15 @@ RUN dpkg --add-architecture i386 \
 		# TODO neo4j emscripten test_glsl_validation
 	&& rm -rf /var/lib/apt/lists/*
 
-# Install android sdk/ndk
+# Install android SDK and NDK.
 RUN mkdir -p /opt \
 	&& cd /opt \
-	# Android SDK
-	&& curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -o android-sdk-linux.zip \
-	&& unzip android-sdk-linux.zip -d android-sdk-linux \
-	&& rm android-sdk-linux.zip \
+	&& curl -fL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip \
+	&& unzip cmdline-tools.zip \
+	&& rm cmdline-tools.zip \
 	&& chmod -R a+X /opt \
-	&& yes | android-sdk-linux/tools/bin/sdkmanager --licenses \
-	&& android-sdk-linux/tools/bin/sdkmanager "build-tools;27.0.0" "cmake;3.6.4111459" ndk-bundle platform-tools tools
+	&& yes | cmdline-tools/bin/sdkmanager --sdk_root=/opt/android-sdk-linux --licenses \
+	&& cmdline-tools/bin/sdkmanager --sdk_root=/opt/android-sdk-linux "platforms;android-33" "build-tools;30.0.3" "cmake;3.22.1" "ndk;25.2.9519653" platform-tools
 
 # Download gradlew and bdwgc for Android
 RUN /nit/share/android-gradlew/gradlew \
