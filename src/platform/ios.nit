@@ -172,8 +172,8 @@ private class IOSToolchain
 			var bdwgc_dir = bdwgc_dir
 			assert bdwgc_dir != null
 
-			pbx.cflags = "-I '{bdwgc_dir}/include/' -I '{bdwgc_dir}/libatomic_ops/src' -fno-strict-aliasing " +
-			"-DWITH_LIBGC -DNO_EXECUTE_PERMISSION -DALL_INTERIOR_POINTERS -DGC_NO_THREADS_DISCOVERY -DNO_DYLD_BIND_FULLY_IMAGE " +
+			pbx.cflags = "-I {bdwgc_dir}/include/ -fno-strict-aliasing " +
+			"-DGC_BUILTIN_ATOMIC -DWITH_LIBGC -DNO_EXECUTE_PERMISSION -DALL_INTERIOR_POINTERS -DGC_NO_THREADS_DISCOVERY -DNO_DYLD_BIND_FULLY_IMAGE " +
 			"-DGC_DISABLE_INCREMENTAL -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DGC_GCJ_SUPPORT -DJAVA_FINALIZATION "
 
 			var gc_file = new PbxFile("{bdwgc_dir}/extra/gc.c")

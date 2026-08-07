@@ -298,7 +298,7 @@ set(lib_build_DIR ../libgc/outputs)
 file(MAKE_DIRECTORY ${lib_build_DIR})
 
 ## Config
-add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA")
+add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA -DGC_BUILTIN_ATOMIC")
 set(enable_threads TRUE)
 set(CMAKE_USE_PTHREADS_INIT TRUE)
 
@@ -328,7 +328,7 @@ target_include_directories(nit_app PRIVATE ${ANDROID_NDK}/sources/android/native
 
 # Link!
 
-target_link_libraries(nit_app gc-lib
+target_link_libraries(nit_app gc
 	{{{target_link_libraries.join("\n\t")}}})
 """
 		cmakelists.write_to_file "{android_app_main}/cpp/CMakeLists.txt"
