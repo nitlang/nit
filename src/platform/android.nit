@@ -95,7 +95,7 @@ class AndroidToolchain
 		var app_version = project.version
 
 		var app_min_api = project.min_api
-		if app_min_api == null then app_min_api = 10
+		if app_min_api == null then app_min_api = 23
 
 		var app_target_api = project.target_api
 		if app_target_api == null then app_target_api = app_min_api
