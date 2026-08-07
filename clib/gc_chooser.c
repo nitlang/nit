@@ -28,6 +28,17 @@ enum gc_option { gc_opt_large, gc_opt_malloc, gc_opt_boehm } gc_option;
 	#include <gc.h>
 #endif
 
+#if defined(WITH_LIBGC) && defined(__APPLE__)
+#include <TargetConditionals.h>
+#if TARGET_OS_IPHONE
+static int GC_CALLBACK nit_ios_has_static_roots(const char *dlpi_name,
+		void *section_start, size_t section_size) {
+	if (dlpi_name == NULL) return 1; /* unknown origin: keep it to be safe */
+	return strstr(dlpi_name, ".app/") != NULL;
+}
+#endif
+#endif
+
 void *nit_raw_alloc(size_t s0)
 {
 	switch (gc_option) {
@@ -116,7 +127,13 @@ void initialize_gc_option(void) {
 	/* Initialize GC (if needed) */
 	switch(gc_option) {
 #ifdef WITH_LIBGC
-		case gc_opt_boehm: GC_INIT(); break;
+		case gc_opt_boehm:
+#if defined(__APPLE__) && TARGET_OS_IPHONE
+			/* Must be set before GC_INIT(), which registers the dyld roots. */
+			GC_register_has_static_roots_callback(nit_ios_has_static_roots);
+#endif
+			GC_INIT();
+			break;
 #endif
 		default: break; /* Nothing */
 	}
