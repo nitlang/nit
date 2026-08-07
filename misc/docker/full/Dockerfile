@@ -32,6 +32,7 @@ RUN dpkg --add-architecture i386 \
 		cmake \
 		default-jdk \
 		file \
+		glslang-tools \
 		inkscape \
 		libopenmpi-dev \
 		unzip \
@@ -40,7 +41,7 @@ RUN dpkg --add-architecture i386 \
 		libc6:i386 \
 		libstdc++6:i386 \
 		zlib1g:i386 \
-		# TODO neo4j emscripten test_glsl_validation
+		# TODO neo4j emscripten
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install android SDK and NDK.
@@ -56,14 +57,6 @@ RUN mkdir -p /opt \
 # Download gradlew and bdwgc for Android
 RUN /nit/share/android-gradlew/gradlew \
 	&& /nit/share/android-bdwgc/setup.sh
-
-# Install OpenGL validator
-RUN git clone https://github.com/KhronosGroup/glslang.git \
-	&& mkdir -p glslang/build \
-	&& cd glslang/build \
-	&& cmake .. \
-	&& make \
-	&& make
 
 # Setup environment variables
 ENV ANDROID_HOME=/opt/android-sdk-linux/
