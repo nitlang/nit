@@ -152,6 +152,9 @@ class AndroidToolchain
 		# TODO make configurable client-side
 		var compile_sdk_version = app_target_api
 
+		# Prefer the NDK version installed by `misc/docker/full/Dockerfile`.
+		var ndk_version = "25.2.9519653"
+
 		var local_build_gradle = """
 apply plugin: 'com.android.application'
 
@@ -160,6 +163,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion {{{compile_sdk_version}}}
     buildToolsVersion "{{{build_tools_version}}}"
+    ndkVersion "{{{ndk_version}}}"
 
     defaultConfig {
         applicationId "{{{app_package}}}"
@@ -170,11 +174,6 @@ android {
         versionName "{{{app_version}}}"
         ndk {
             abiFilters 'armeabi-v7a', 'x86'
-        }
-        externalNativeBuild {
-            cmake {
-                arguments "-DANDROID_TOOLCHAIN=gcc"
-            }
         }
     }
 
@@ -212,17 +211,17 @@ dependencies {
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 """

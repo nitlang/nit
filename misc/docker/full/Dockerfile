@@ -45,6 +45,7 @@ RUN dpkg --add-architecture i386 \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install android SDK and NDK.
+# Note: keep the NDK version in sync with the compiler's ndk_version string.
 RUN mkdir -p /opt \
 	&& cd /opt \
 	&& curl -fL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip \
