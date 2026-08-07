@@ -16,13 +16,12 @@
 # Fetch libgc/bdwgc
 
 # cd to the installation path
-cd "`dirname "${BASH_SOURCE[0]}"`"
+cd "`dirname "$0"`" || exit 1
 
-# Download or redownload
-rm -rf bdwgc
-git clone --depth=1 -b android https://github.com/xymus/bdwgc.git || exit 1
-
-# Setup libatomic_ops too
-cd bdwgc || exit 1
-git submodule init || exit 1
-git submodule update || exit 1
+# Download upstream bdwgc at a pinned release, unless it is already present.
+BDWGC_VERSION=v8.2.12
+if [ -d bdwgc ]; then
+	: # Already present, skip the clone
+else
+	git clone --depth 1 -b "$BDWGC_VERSION" https://github.com/bdwgc/bdwgc.git || exit 1
+fi
