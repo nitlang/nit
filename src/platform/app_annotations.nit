@@ -36,13 +36,9 @@ class AppProject
 	var version = "0.1"
 
 	# Numerical version code of the application
-	var version_code: Int is lazy do
-
-		# Get the date and time (down to the minute) as string
-		var gmtime = new Tm.gmtime
-		var local_time_s = gmtime.strftime("%y%m%d%H%M")
-		return local_time_s.to_i
-	end
+	#
+	# Needs to fit within the 32 bits expected by Android.
+	var version_code: Int is lazy do return get_time / 60
 
 	# Extra folders where to find platform specific resource files
 	var files = new Array[String]
