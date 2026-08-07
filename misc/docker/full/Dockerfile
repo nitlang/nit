@@ -10,8 +10,7 @@ RUN dpkg --add-architecture i386 \
 		# Packages needed for lib/
 		libegl1-mesa-dev \
 		libevent-dev \
-		libgles1-mesa-dev \
-		libgles2-mesa-dev \
+		libgles-dev \
 		libgtk-3-dev \
 		libgmp-dev \
 		libncurses5-dev \
