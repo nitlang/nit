@@ -1,7 +1,7 @@
 # This is a basic install of Nit on a debian base.
 
 FROM debian:bookworm
-MAINTAINER Jean Privat <jean@pryen.org>
+LABEL maintainer="Jean Privat <jean@pryen.org>"
 
 # Install dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -31,6 +31,6 @@ RUN git clone https://github.com/nitlang/nit.git /nit \
 	&& ccache -C \
 	&& rm -rf .git
 
-ENV NIT_DIR /nit
-ENV PATH $NIT_DIR/bin:$PATH
+ENV NIT_DIR=/nit
+ENV PATH=$NIT_DIR/bin:$PATH
 WORKDIR $NIT_DIR

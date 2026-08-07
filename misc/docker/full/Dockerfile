@@ -2,7 +2,7 @@
 # Full because most dependencies are installed so that most tests can be run
 
 FROM nitlang/nit:latest
-MAINTAINER Jean Privat <jean@pryen.org>
+LABEL maintainer="Jean Privat <jean@pryen.org>"
 
 # Dependencies for more libs and tests
 RUN dpkg --add-architecture i386 \
