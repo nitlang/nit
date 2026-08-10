@@ -2,7 +2,7 @@
 # Full because most dependencies are installed so that most tests can be run
 
 FROM nitlang/nit:latest
-MAINTAINER Jean Privat <jean@pryen.org>
+LABEL maintainer="Jean Privat <jean@pryen.org>"
 
 # Dependencies for more libs and tests
 RUN dpkg --add-architecture i386 \
@@ -10,8 +10,7 @@ RUN dpkg --add-architecture i386 \
 		# Packages needed for lib/
 		libegl1-mesa-dev \
 		libevent-dev \
-		libgles1-mesa-dev \
-		libgles2-mesa-dev \
+		libgles-dev \
 		libgtk-3-dev \
 		libgmp-dev \
 		libncurses5-dev \
@@ -33,6 +32,7 @@ RUN dpkg --add-architecture i386 \
 		cmake \
 		default-jdk \
 		file \
+		glslang-tools \
 		inkscape \
 		libopenmpi-dev \
 		unzip \
@@ -41,31 +41,22 @@ RUN dpkg --add-architecture i386 \
 		libc6:i386 \
 		libstdc++6:i386 \
 		zlib1g:i386 \
-		# TODO neo4j emscripten test_glsl_validation
+		# TODO neo4j emscripten
 	&& rm -rf /var/lib/apt/lists/*
 
-# Install android sdk/ndk
+# Install android SDK and NDK.
 RUN mkdir -p /opt \
 	&& cd /opt \
-	# Android SDK
-	&& curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -o android-sdk-linux.zip \
-	&& unzip android-sdk-linux.zip -d android-sdk-linux \
-	&& rm android-sdk-linux.zip \
+	&& curl -fL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip \
+	&& unzip cmdline-tools.zip \
+	&& rm cmdline-tools.zip \
 	&& chmod -R a+X /opt \
-	&& yes | android-sdk-linux/tools/bin/sdkmanager --licenses \
-	&& android-sdk-linux/tools/bin/sdkmanager "build-tools;27.0.0" "cmake;3.6.4111459" ndk-bundle platform-tools tools
+	&& yes | cmdline-tools/bin/sdkmanager --sdk_root=/opt/android-sdk-linux --licenses \
+	&& cmdline-tools/bin/sdkmanager --sdk_root=/opt/android-sdk-linux "platforms;android-33" "build-tools;30.0.3" "cmake;3.22.1" "ndk;25.2.9519653" platform-tools
 
 # Download gradlew and bdwgc for Android
 RUN /nit/share/android-gradlew/gradlew \
 	&& /nit/share/android-bdwgc/setup.sh
-
-# Install OpenGL validator
-RUN git clone https://github.com/KhronosGroup/glslang.git \
-	&& mkdir -p glslang/build \
-	&& cd glslang/build \
-	&& cmake .. \
-	&& make \
-	&& make
 
 # Setup environment variables
 ENV ANDROID_HOME=/opt/android-sdk-linux/
