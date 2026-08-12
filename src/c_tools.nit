@@ -109,6 +109,10 @@ class ExternFile
 	# Filename relative to the nit-compile folder
 	var filename: String
 
+	# Identifier of the compilation context, used to prevent collisions
+	# between the builds of two parallel jobs
+	var build_context_id: String is writable, noinit
+
 	# The name of the target in the Makefile
 	# Usually the produced .o file
 	fun makefile_rule_name: String is abstract
