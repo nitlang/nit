@@ -537,7 +537,8 @@ endif
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
 			makefile.write("{o}: {f.filename}\n")
-			makefile.write("\t{f.makefile_rule_content}\n\n")
+			for line in f.makefile_rule_content do makefile.write("\t{line}\n")
+			makefile.write("\n")
 			dep_rules.add(f.makefile_rule_name)
 
 			if f.compiles_to_o_file then ofiles.add(o)

@@ -181,7 +181,7 @@ class ExternCppFile
 	var mmodule: MModule
 
 	redef fun makefile_rule_name do return "{filename}.o"
-	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename} -o {filename}.o"
+	redef fun makefile_rule_content do return ["$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename} -o {filename}.o"]
 	redef fun compiles_to_o_file do return true
 end
 
