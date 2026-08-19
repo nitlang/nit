@@ -95,7 +95,7 @@ class AndroidToolchain
 		var app_version = project.version
 
 		var app_min_api = project.min_api
-		if app_min_api == null then app_min_api = 10
+		if app_min_api == null then app_min_api = 23
 
 		var app_target_api = project.target_api
 		if app_target_api == null then app_target_api = app_min_api
@@ -152,6 +152,9 @@ class AndroidToolchain
 		# TODO make configurable client-side
 		var compile_sdk_version = app_target_api
 
+		# Prefer the NDK version installed by `misc/docker/full/Dockerfile`.
+		var ndk_version = "25.2.9519653"
+
 		var local_build_gradle = """
 apply plugin: 'com.android.application'
 
@@ -160,6 +163,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion {{{compile_sdk_version}}}
     buildToolsVersion "{{{build_tools_version}}}"
+    ndkVersion "{{{ndk_version}}}"
 
     defaultConfig {
         applicationId "{{{app_package}}}"
@@ -170,11 +174,6 @@ android {
         versionName "{{{app_version}}}"
         ndk {
             abiFilters 'armeabi-v7a', 'x86'
-        }
-        externalNativeBuild {
-            cmake {
-                arguments "-DANDROID_TOOLCHAIN=gcc"
-            }
         }
     }
 
@@ -212,17 +211,17 @@ dependencies {
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 """
@@ -299,7 +298,7 @@ set(lib_build_DIR ../libgc/outputs)
 file(MAKE_DIRECTORY ${lib_build_DIR})
 
 ## Config
-add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA")
+add_definitions("-DALL_INTERIOR_POINTERS -DGC_THREADS -DUSE_MMAP -DUSE_MUNMAP -DJAVA_FINALIZATION -DNO_EXECUTE_PERMISSION -DGC_DONT_REGISTER_MAIN_STATIC_DATA -DGC_BUILTIN_ATOMIC")
 set(enable_threads TRUE)
 set(CMAKE_USE_PTHREADS_INIT TRUE)
 
@@ -329,7 +328,7 @@ target_include_directories(nit_app PRIVATE ${ANDROID_NDK}/sources/android/native
 
 # Link!
 
-target_link_libraries(nit_app gc-lib
+target_link_libraries(nit_app gc
 	{{{target_link_libraries.join("\n\t")}}})
 """
 		cmakelists.write_to_file "{android_app_main}/cpp/CMakeLists.txt"

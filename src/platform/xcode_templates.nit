@@ -149,6 +149,9 @@ class PbxprojectTemplate
 	# Name of the project
 	var name: String
 
+	# PRODUCT_BUNDLE_IDENTIFIER, must match `CFBundleIdentifier` of the `Info.plist`
+	var bundle_identifier: String
+
 	# OTHER_CFLAGS
 	var cflags = "" is writable
 
@@ -391,7 +394,7 @@ class PbxprojectTemplate
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -417,7 +420,7 @@ class PbxprojectTemplate
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -432,6 +435,7 @@ class PbxprojectTemplate
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
+				PRODUCT_BUNDLE_IDENTIFIER = "{{{bundle_identifier}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -443,6 +447,7 @@ class PbxprojectTemplate
 				INFOPLIST_FILE = {{{name}}}/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "{{{cflags.escape_to_c}}}";
+				PRODUCT_BUNDLE_IDENTIFIER = "{{{bundle_identifier}}}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

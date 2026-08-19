@@ -15,7 +15,12 @@
 # limitations under the License.
 
 # Triggers compilation for the android platform
-module platform is platform "android"
+module platform is
+	platform "android"
+
+	# Require Android 6.0 for bdwgc which has known issues before API 23
+	android_api_min 23
+end
 
 import java
 import app
