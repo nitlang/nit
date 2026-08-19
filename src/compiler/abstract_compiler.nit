@@ -236,7 +236,7 @@ class MakefileToolchain
 		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
 		if cc_opt_with_libgc != "" then gc_chooser.pkgconfigs.add "bdw-gc"
 		compiler.extern_bodies.add(gc_chooser)
-		var clib = toolcontext.nit_dir / "clib"
+		var clib = toolcontext.nit_dir.as(not null) / "clib"
 		compiler.files_to_copy.add "{clib}/gc_chooser.c"
 		compiler.files_to_copy.add "{clib}/gc_chooser.h"
 
@@ -253,6 +253,12 @@ class MakefileToolchain
 		# FFI
 		for m in compiler.mainmodule.in_importation.greaters do
 			compiler.finalize_ffi_for_module(m)
+		end
+
+		# Prevent collision in the build files of two different parallel jobs
+		# by assigning them a somewhat unique identifier
+		for f in compiler.extern_bodies do
+			f.build_context_id = compiler.realmainmodule.c_name
 		end
 
 		# Copy original .[ch] files to compile_dir
@@ -537,7 +543,8 @@ endif
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
 			makefile.write("{o}: {f.filename}\n")
-			makefile.write("\t{f.makefile_rule_content}\n\n")
+			for line in f.makefile_rule_content do makefile.write("\t{line}\n")
+			makefile.write("\n")
 			dep_rules.add(f.makefile_rule_name)
 
 			if f.compiles_to_o_file then ofiles.add(o)

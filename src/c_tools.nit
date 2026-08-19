@@ -109,13 +109,18 @@ class ExternFile
 	# Filename relative to the nit-compile folder
 	var filename: String
 
+	# Identifier of the compilation context, used to prevent collisions
+	# between the builds of two parallel jobs
+	var build_context_id: String is writable, noinit
+
 	# The name of the target in the Makefile
 	# Usually the produced .o file
 	fun makefile_rule_name: String is abstract
 
-	# The content of the rule in the make
-	# Usually the one-line shell command after the tabulation
-	fun makefile_rule_content: String is abstract
+	# The lines of the rule in the make
+	#
+	# The shell commands after the tabulation.
+	fun makefile_rule_content: Array[String] is abstract
 
 	fun compiles_to_o_file: Bool do return false
 
@@ -150,7 +155,7 @@ class ExternCFile
 		if not pkgconfigs.is_empty then
 			pkg = "`pkg-config --cflags {pkgconfigs.join(" ")}`"
 		end
-		return "$(CC) $(CFLAGS) -Wall -Wno-unused-function {self.cflags} {pkg} -c -o {o} {ff}"
+		return ["$(CC) $(CFLAGS) -Wall -Wno-unused-function {self.cflags} {pkg} -c -o {o} {ff}"]
 	end
 
 	redef fun compiles_to_o_file do return true

@@ -429,7 +429,15 @@ class JavaFile
 	fun full_name: String do return filename.basename(".java")
 
 	redef fun makefile_rule_name do return full_name.replace(".", "/") + ".class"
-	redef fun makefile_rule_content do return "javac {filename} -d ."
+
+	# Compile to a directory limited to this build then atomically move the
+	# result into place, so concurrent builds of the same class (eg. shared
+	# support classes like `nit.app.NitObject`) never load a partial file.
+	redef fun makefile_rule_content do return [
+		"mkdir -p ffi_java_{build_context_id}",
+		"javac -implicit:none {filename} -d ffi_java_{build_context_id}",
+		"mv -f ffi_java_{build_context_id}/{makefile_rule_name} {makefile_rule_name}"]
+
 	redef fun add_to_jar do return true
 end
 
