@@ -192,21 +192,21 @@ class JSONStringParser
 			pos += 1
 			return parse_json_object
 		else if c == 'f' then
-			if pos + 4 >= srclen then make_parse_error("Error: bad JSON entity")
+			if pos + 4 >= srclen then return make_parse_error("Error: bad JSON entity")
 			if src[pos + 1] == 'a' and src[pos + 2] == 'l' and src[pos + 3] == 's' and src[pos + 4] == 'e' then
 				pos += 5
 				return false
 			end
 			return make_parse_error("Error: bad JSON entity")
 		else if c == 't' then
-			if pos + 3 >= srclen then make_parse_error("Error: bad JSON entity")
+			if pos + 3 >= srclen then return make_parse_error("Error: bad JSON entity")
 			if src[pos + 1] == 'r' and src[pos + 2] == 'u' and src[pos + 3] == 'e' then
 				pos += 4
 				return true
 			end
 			return make_parse_error("Error: bad JSON entity")
 		else if c == 'n' then
-			if pos + 3 >= srclen then make_parse_error("Error: bad JSON entity")
+			if pos + 3 >= srclen then return make_parse_error("Error: bad JSON entity")
 			if src[pos + 1] == 'u' and src[pos + 2] == 'l' and src[pos + 3] == 'l' then
 				pos += 4
 				return null
@@ -391,7 +391,7 @@ class JSONStringParser
 				p += 1
 				for i in [0 .. 4[ do
 					cp <<= 4
-					if p >= ln then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if p >= ln then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 					c = src[p]
 					if c >= '0' and c <= '9' then
 						cp += c.code_point - '0'.code_point
@@ -400,23 +400,23 @@ class JSONStringParser
 					else if c >= 'A' and c <= 'F' then
 						cp += c.code_point - 'A'.code_point + 10
 					else
-						make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+						return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 					end
 					p += 1
 				end
 				c = cp.code_point
 				if cp >= 0xD800 and cp <= 0xDBFF then
-					if p >= ln then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if p >= ln then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 					c = src[p]
-					if c != '\\' then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if c != '\\' then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 					p += 1
 					c = src[p]
-					if c != 'u' then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if c != 'u' then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 					var locp = 0
 					p += 1
 					for i in [0 .. 4[ do
 						locp <<= 4
-						if p > ln then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+						if p > ln then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 						c = src[p]
 						if c >= '0' and c <= '9' then
 							locp += c.code_point - '0'.code_point
@@ -425,7 +425,7 @@ class JSONStringParser
 						else if c >= 'A' and c <= 'F' then
 							locp += c.code_point - 'A'.code_point + 10
 						else
-							make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+							return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
 						end
 						p += 1
 					end
