@@ -90,14 +90,15 @@ redef class Text
 		return res.to_s
 	end
 
-	# Parse `self` as JSON.
+	# Parse `self` from JSON to an object.
 	#
-	# If `self` is not a valid JSON document or contains an unsupported escape
+	# This feature accepts partial JSON entities, not just full JSON objects.
+	# If `self` is not a valid JSON entity or contains an unsupported escape
 	# sequence, return a `JSONParseError`.
 	#
 	# Example with `JsonObject`:
 	#
-	#     var obj = "\{\"foo\": \{\"bar\": true, \"goo\": [1, 2, 3]\}\}".parse_json
+	#     var obj = """{"foo": {"bar": true, "goo": [1, 2, 3]}}""".parse_json
 	#     assert obj isa JsonObject
 	#     assert obj["foo"] isa JsonObject
 	#     assert obj["foo"].as(JsonObject)["bar"] == true
@@ -116,11 +117,17 @@ redef class Text
 	#     assert str isa String
 	#     assert str == "foo, bar, baz"
 	#
-	# Example of a syntax error:
+	# Example of a syntax error on an invalid key:
 	#
-	#     var error = "\{foo: \"bar\"\}".parse_json
-	#     assert error isa JsonParseError
-	#     assert error.to_s == "Bad key format Error: bad JSON entity"
+	#     var key_error = "\{42: \"bar\"\}".parse_json
+	#     assert key_error isa JsonParseError
+	#     assert key_error.to_s == "line 1, position 4: expected string as JSON key, got '42'"
+	#
+	# Example of a syntax error on a truncated string:
+	#
+	#     var truncated_error = "\{\"key\": \"trucat".parse_json
+	#     assert truncated_error isa JsonParseError
+	#     assert truncated_error.to_s == "line 1, position 9: truncated JSON string, after 't'"
 	fun parse_json: nullable Serializable do return (new JSONStringParser(self.to_s)).parse_entity
 end
 
