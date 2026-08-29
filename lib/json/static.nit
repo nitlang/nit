@@ -218,7 +218,7 @@ class JSONStringParser
 	end
 
 	# Parses a JSON Array
-	fun parse_json_array: Serializable do
+	protected fun parse_json_array: Serializable do
 		var max = len
 		if pos >= max then return make_parse_error("Incomplete JSON array")
 		var arr = new JsonArray
@@ -283,7 +283,7 @@ class JSONStringParser
 	end
 
 	# Parses an Int or Float
-	fun parse_json_number: Serializable do
+	protected fun parse_json_number: Serializable do
 		var max = len
 		var p = pos
 		var c = src[p]
@@ -357,7 +357,7 @@ class JSONStringParser
 	private var parse_str_buf = new FlatBuffer
 
 	# Parses and returns a Nit string from a JSON String
-	fun parse_json_string: Serializable do
+	protected fun parse_json_string: Serializable do
 		var src = src
 		var ln = src.length
 		var p = pos
@@ -454,7 +454,7 @@ class JSONStringParser
 	end
 
 	# Ignores any character until a JSON separator is encountered
-	fun ignore_until_separator do
+	protected fun ignore_until_separator do
 		var max = len
 		while pos < max do
 			if not src[pos].is_json_separator then return
