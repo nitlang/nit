@@ -125,9 +125,14 @@ redef class Text
 	#
 	# Example of a syntax error on a truncated string:
 	#
-	#     var truncated_error = "\{\"key\": \"trucat".parse_json
-	#     assert truncated_error isa JsonParseError
-	#     assert truncated_error.to_s == "line 1, position 9: truncated JSON string, after 't'"
+	#     assert """{"key": "trucate""".parse_json.to_s ==
+	#         "line 1, position 9: truncated JSON string, after 'e'"
+	#     assert """{"key": tru""".parse_json.to_s ==
+	#         "line 1, position 9: truncated 'true' keyword"
+	#     assert """{"key":""".parse_json.to_s ==
+	#         "line 1, position 8: reached end of input string"
+	#     assert """{"ke""".parse_json.to_s ==
+	#         "line 1, position 2: expected string as JSON key, got parsing error 'truncated JSON string, after 'e''"
 	fun parse_json: nullable Serializable do return (new JSONStringParser(self.to_s)).parse_entity
 end
 
@@ -180,7 +185,7 @@ class JSONStringParser
 	fun parse_entity: nullable Serializable do
 		var srclen = len
 		ignore_whitespaces
-		if pos >= srclen then return make_parse_error("Empty JSON")
+		if pos >= srclen then return make_parse_error("reached end of input string")
 		var c = src[pos]
 		if c == '[' then
 			pos += 1
@@ -192,50 +197,50 @@ class JSONStringParser
 			pos += 1
 			return parse_json_object
 		else if c == 'f' then
-			if pos + 4 >= srclen then return make_parse_error("Error: bad JSON entity")
+			if pos + 4 >= srclen then return make_parse_error("truncated 'false' keyword")
 			if src[pos + 1] == 'a' and src[pos + 2] == 'l' and src[pos + 3] == 's' and src[pos + 4] == 'e' then
 				pos += 5
 				return false
 			end
-			return make_parse_error("Error: bad JSON entity")
+			return make_parse_error("expected 'false', got '{src.substring(pos, 5)}'")
 		else if c == 't' then
-			if pos + 3 >= srclen then return make_parse_error("Error: bad JSON entity")
+			if pos + 3 >= srclen then return make_parse_error("truncated 'true' keyword")
 			if src[pos + 1] == 'r' and src[pos + 2] == 'u' and src[pos + 3] == 'e' then
 				pos += 4
 				return true
 			end
-			return make_parse_error("Error: bad JSON entity")
+			return make_parse_error("expected 'true', got '{src.substring(pos, 4)}'")
 		else if c == 'n' then
-			if pos + 3 >= srclen then return make_parse_error("Error: bad JSON entity")
+			if pos + 3 >= srclen then return make_parse_error("truncated 'null' keyword")
 			if src[pos + 1] == 'u' and src[pos + 2] == 'l' and src[pos + 3] == 'l' then
 				pos += 4
 				return null
 			end
-			return make_parse_error("Error: bad JSON entity")
+			return make_parse_error("expected 'null', got '{src.substring(pos, 4)}'")
 		end
-		if not c.is_json_num_start then return make_parse_error("Bad JSON character")
+		if not c.is_json_num_start then return make_parse_error("expected start of JSON number, got '{c}'")
 		return parse_json_number
 	end
 
 	# Parses a JSON Array
 	protected fun parse_json_array: Serializable do
 		var max = len
-		if pos >= max then return make_parse_error("Incomplete JSON array")
+		if pos >= max then return make_parse_error("JSON array truncated")
 		var arr = new JsonArray
 		var c = src[pos]
 		while not c == ']' do
 			ignore_whitespaces
-			if pos >= max then return make_parse_error("Incomplete JSON array")
+			if pos >= max then return make_parse_error("JSON array truncated")
 			if src[pos] == ']' then break
 			var ent = parse_entity
 			#print "Parsed an entity {ent} for a JSON array"
 			if ent isa JsonParseError then return ent
 			arr.add ent
 			ignore_whitespaces
-			if pos >= max then return make_parse_error("Incomplete JSON array")
+			if pos >= max then return make_parse_error("JSON array truncated")
 			c = src[pos]
 			if c == ']' then break
-			if c != ',' then return make_parse_error("Bad array separator {c}")
+			if c != ',' then return make_parse_error("expected JSON array separator ',' or ']', got '{c}'")
 			pos += 1
 		end
 		pos += 1
@@ -245,30 +250,32 @@ class JSONStringParser
 	# Parses a JSON Object
 	fun parse_json_object: Serializable do
 		var max = len
-		if pos >= max then return make_parse_error("Incomplete JSON object")
+		if pos >= max then return make_parse_error("truncated JSON object")
 		var obj = new JsonObject
 		var c = src[pos]
 		while not c == '}' do
 			ignore_whitespaces
-			if pos >= max then return make_parse_error("Malformed JSON object")
+			if pos >= max then return make_parse_error("truncated JSON object")
 			if src[pos] == '}' then break
 			var key = parse_entity
 			#print "Parsed key {key} for JSON object"
-			if not key isa String then return make_parse_error("Bad key format {key or else "null"}")
+			if key isa JsonParseError then return make_parse_error("expected string as JSON key, got parsing error '{key.message}'")
+			if not key isa String then return make_parse_error("expected string as JSON key, got '{key or else "null"}'")
 			ignore_whitespaces
-			if pos >= max then return make_parse_error("Incomplete JSON object")
-			if not src[pos] == ':' then return make_parse_error("Bad key/value separator {src[pos]}")
+			if pos >= max then return make_parse_error("truncated JSON object")
+			if not src[pos] == ':' then return make_parse_error("expected JSON key/value separator ':', got '{src[pos]}'")
 			pos += 1
 			ignore_whitespaces
 			var value = parse_entity
 			#print "Parsed value {value} for JSON object"
+			# Pass this error directly, don't nest it. It could be many objects deep.
 			if value isa JsonParseError then return value
 			obj[key] = value
 			ignore_whitespaces
-			if pos >= max then return make_parse_error("Incomplete JSON object")
+			if pos >= max then return make_parse_error("truncated JSON object")
 			c = src[pos]
 			if c == '}' then break
-			if c != ',' then return make_parse_error("Bad object separator {src[pos]}")
+			if c != ',' then return make_parse_error("expected JSON separator ',', got '{c}'")
 			pos += 1
 		end
 		pos += 1
@@ -291,7 +298,7 @@ class JSONStringParser
 		if c == '-' then
 			is_neg = true
 			p += 1
-			if p >= max then return make_parse_error("Bad JSON number")
+			if p >= max then return make_parse_error("truncated JSON number after '{c}'")
 			c = src[p]
 		end
 		var val = 0
@@ -304,7 +311,7 @@ class JSONStringParser
 		end
 		if c == '.' then
 			p += 1
-			if p >= max then return make_parse_error("Bad JSON number")
+			if p >= max then return make_parse_error("truncated JSON number after '{c}'")
 			c = src[p]
 			var fl = val.to_f
 			var frac = 0.1
@@ -318,7 +325,7 @@ class JSONStringParser
 			if c == 'e' or c == 'E' then
 				p += 1
 				var exp = 0
-				if p >= max then return make_parse_error("Malformed JSON number")
+				if p >= max then return make_parse_error("truncated JSON number after '{c}'")
 				c = src[p]
 				while c.is_numeric do
 					exp *= 10
@@ -329,14 +336,14 @@ class JSONStringParser
 				end
 				fl *= (10 ** exp).to_f
 			end
-			if p < max and not c.is_json_separator then return make_parse_error("Malformed JSON number")
+			if p < max and not c.is_json_separator then return make_parse_error("expected JSON number or separator character, got '{c}'")
 			pos = p
 			if is_neg then return -fl
 			return fl
 		end
 		if c == 'e' or c == 'E' then
 			p += 1
-			if p >= max then return make_parse_error("Bad JSON number")
+			if p >= max then return make_parse_error("truncated JSON number after '{c}'")
 			var exp = src[p].to_i
 			c = src[p]
 			while c.is_numeric do
@@ -348,7 +355,7 @@ class JSONStringParser
 			end
 			val *= (10 ** exp)
 		end
-		if p < max and not src[p].is_json_separator then return make_parse_error("Malformed JSON number")
+		if p < max and not src[p].is_json_separator then return make_parse_error("truncated JSON number")
 		pos = p
 		if is_neg then return -val
 		return val
@@ -362,20 +369,20 @@ class JSONStringParser
 		var ln = src.length
 		var p = pos
 		p += 1
-		if p > ln then return make_parse_error("Malformed JSON String")
+		if p > ln then return make_parse_error("truncated JSON string")
 		var c = src[p]
 		var ret = parse_str_buf
 		var chunk_st = p
 		while c != '"' do
 			if c != '\\' then
 				p += 1
-				if p >= ln then return make_parse_error("Malformed JSON string")
+				if p >= ln then return make_parse_error("truncated JSON string, after '{c}'")
 				c = src[p]
 				continue
 			end
 			ret.append_substring_impl(src, chunk_st, p - chunk_st)
 			p += 1
-			if p >= ln then return make_parse_error("Malformed Escape sequence in JSON string")
+			if p >= ln then return make_parse_error("truncated escape sequence in JSON string")
 			c = src[p]
 			if c == 'r' then
 				ret.add '\r'
@@ -391,7 +398,7 @@ class JSONStringParser
 				p += 1
 				for i in [0 .. 4[ do
 					cp <<= 4
-					if p >= ln then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if p >= ln then return make_parse_error("truncated \uXXXX Escape sequence in JSON string")
 					c = src[p]
 					if c >= '0' and c <= '9' then
 						cp += c.code_point - '0'.code_point
@@ -400,23 +407,23 @@ class JSONStringParser
 					else if c >= 'A' and c <= 'F' then
 						cp += c.code_point - 'A'.code_point + 10
 					else
-						return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+						return make_parse_error("truncated \uXXXX Escape sequence in JSON string")
 					end
 					p += 1
 				end
 				c = cp.code_point
 				if cp >= 0xD800 and cp <= 0xDBFF then
-					if p >= ln then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if p >= ln then return make_parse_error("truncated \uXXXX JSON escape sequence")
 					c = src[p]
-					if c != '\\' then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if c != '\\' then return make_parse_error("expected '\' in \uXXXX JSON escape sequence, got '{c}'")
 					p += 1
 					c = src[p]
-					if c != 'u' then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					if c != 'u' then return make_parse_error("expected 'u' in \uXXXX JSON escape sequence, got '{c}'")
 					var locp = 0
 					p += 1
 					for i in [0 .. 4[ do
 						locp <<= 4
-						if p > ln then return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+						if p > ln then return make_parse_error("truncated \uXXXX JSON escape sequence")
 						c = src[p]
 						if c >= '0' and c <= '9' then
 							locp += c.code_point - '0'.code_point
@@ -425,7 +432,7 @@ class JSONStringParser
 						else if c >= 'A' and c <= 'F' then
 							locp += c.code_point - 'A'.code_point + 10
 						else
-							return make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+							return make_parse_error("expected hexadecimal digit in \uXXXX JSON escape, got '{c}'")
 						end
 						p += 1
 					end
