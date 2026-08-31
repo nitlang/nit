@@ -459,14 +459,6 @@ class JSONStringParser
 		ret.clear
 		return rets
 	end
-
-	# Ignores any character until a JSON separator is encountered
-	protected fun ignore_until_separator do
-		var max = len
-		while pos < max do
-			if not src[pos].is_json_separator then return
-		end
-	end
 end
 
 # A map that can be translated into a JSON object.
