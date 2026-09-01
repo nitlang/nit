@@ -211,10 +211,10 @@ class CurlHTTPRequest
 
 		if data != null then
 			var postdatas = data.to_url_encoded(self.curl)
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
+			err = self.curl.native.easy_setopt(new CURLOption.copypostfields, postdatas)
 			if not err.is_ok then return err
 		else if body != null then
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, body)
+			err = self.curl.native.easy_setopt(new CURLOption.copypostfields, body)
 			if not err.is_ok then return err
 		end
 		return new CURLCode.ok
