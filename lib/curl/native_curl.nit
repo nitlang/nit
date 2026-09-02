@@ -584,12 +584,14 @@ extern class CURLOption `{ CURLoption `}
 	# Issue a HTTP POS request.
 	new post `{ return CURLOPT_POST; `}
 
-	# Send a POST with this data.
+	# Send a POST with this data, which must remain valid until the transfer completes.
 	new postfields `{ return CURLOPT_POSTFIELDS; `}
+
+	# Send a POST with a copy of this data.
+	new copypostfields `{ return CURLOPT_COPYPOSTFIELDS; `}
 
 #	new	`{ return CURLOPT_POSTFIELDSIZE; `}
 #	new	`{ return CURLOPT_POSTFIELDSIZE_LARGE; `}
-#	new	`{ return CURLOPT_COPYPOSTFIELDS; `}
 #	new	`{ return CURLOPT_HTTPPOST; `}
 #	new	`{ return CURLOPT_REFERER; `}
 

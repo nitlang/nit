@@ -120,7 +120,7 @@ class JsonPOST
 
 		if self.json_data != null then
 			var postdatas = self.json_data.to_json
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
+			err = self.curl.native.easy_setopt(new CURLOption.copypostfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 		return null
@@ -155,7 +155,7 @@ class JsonPUT
 
 		if self.json_data != null then
 			var postdatas = self.json_data.to_json
-			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
+			err = self.curl.native.easy_setopt(new CURLOption.copypostfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 		return null
