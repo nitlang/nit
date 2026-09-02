@@ -20,4 +20,13 @@ class JsonParseError
 
 	# Location of the error in source
 	var location: nullable Location = null
+
+	redef fun to_s do
+		var loc = location
+		if loc != null then
+			return "{loc}: {super}"
+		else
+			return super
+		end
+	end
 end

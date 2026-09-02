@@ -26,6 +26,6 @@
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: not valid json
-# Errors: 'Error: bad JSON entity'
+# Errors: 'line 1, position 1: expected 'null', got 'not ''
 # Nit: null
 
