@@ -126,7 +126,7 @@ end
 
 # A regular expression pattern
 #
-# Used as a `Pattern` on intances of `Text` to call `has`, `search_all`, `replace`, etc.
+# Used as a `Pattern` on instances of `Text` to call `has`, `search_all`, `replace`, etc.
 #
 # Example:
 #
@@ -155,7 +155,7 @@ class Regex
 
 	# Optimize `self` for `String::has` and `is_in`, but do not support searches
 	#
-	# If `true`, `self` cannont be used with `String::search_all`, `String::replace`
+	# If `true`, `self` cannot be used with `String::search_all`, `String::replace`
 	# or `String::split`.
 	var optimize_has = false is writable
 
@@ -202,7 +202,9 @@ class Regex
 	# should call it to check for errors.
 	#
 	#     assert "ab".to_re.compile == null
-	#     assert "[ab".to_re.compile.message.has_prefix("Unmatched [")
+	#
+	#     # Errors on "Unmatched [" or "brackets ([ ]) not balanced".
+	#     assert "[ab".to_re.compile.message.has("[")
 	fun compile: nullable Error
 	do
 		var cflags = 0
