@@ -18,6 +18,7 @@
 module nitls
 
 import modelbuilder
+import loader_header_only
 import ordered_tree
 import console
 
