@@ -207,6 +207,15 @@ if opt_source.value then
 	end
 end
 
+if opt_make.value then
+	# The modules that could not be parsed didn't result in a mmodule that
+	# could be listed above. List them here from the collected errors.
+	for error in mb.parse_errors do
+		var file = error.location.file
+		if file != null then print file.filename.escape_to_mk
+	end
+end
+
 if opt_package.value then
 	var mpackages = new Array[MPackage]
 	for m in mmodules do
