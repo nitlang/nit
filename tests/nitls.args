@@ -10,3 +10,5 @@ test_prog/game/excluded.nit test_prog/game/excluded_dir/more.nit -t --no-color
 -M nitls_header_annotations.nit
 -M nitls_header_visibility.nit
 -M nitls_header_redef.nit
+-M error_mod_unk.nit --no-color
+-M nitls_error_header.nit
