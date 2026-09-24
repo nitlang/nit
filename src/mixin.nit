@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Loading and additional module refinements at link-time.
+# Loading of additional modules at link-time.
 #
 # Used to factorize some code used by the engines.
 module mixin
@@ -22,13 +22,11 @@ import modelbuilder
 redef class ToolContext
 	# --mixin
 	var opt_mixins = new OptionArray("Additional module to mix-in", "-m", "--mixin")
-	# --define
-	var opt_defines = new OptionArray("Define a specific property", "-D", "--define")
 
 	redef init
 	do
 		super
-		option_context.add_option(opt_mixins, opt_defines)
+		option_context.add_option(opt_mixins)
 	end
 
 	redef fun make_main_module(mmodules)
@@ -38,76 +36,6 @@ redef class ToolContext
 			mmodules.add_all modelbuilder.parse(opt_mixins.value)
 			modelbuilder.run_phases
 		end
-
-		var mainmodule = super
-
-		var defines = opt_defines.value
-		if not defines.is_empty then
-			var location = mainmodule.location
-			var model = mainmodule.model
-
-			# Create a fictive module if needed
-			if mainmodule == mmodules.first then
-				mainmodule = new MModule(model, null, mainmodule.name + "-d", location)
-				mainmodule.set_imported_mmodules(mmodules)
-				mainmodule.is_fictive = true
-				mainmodule.first_real_mmodule = mmodules.first
-			end
-
-			var recv = mainmodule.sys_type
-			assert recv != null
-			var mclassdef = new MClassDef(mainmodule, recv, location)
-			mclassdef.add_in_hierarchy
-
-			for define in defines do
-				var spl = define.split_once_on('=')
-				var name = spl.first
-				var val = null
-				if spl.length > 1 then val = spl[1]
-				var prop = mainmodule.try_get_primitive_method(name, recv.mclass)
-				if prop == null then
-					error(null, "Error: --define: no top-level function `{name}`.")
-					continue
-				end
-				var ret = prop.intro.msignature.return_mtype
-				var v
-				if ret == null then
-					error(null, "Error: --define: method `{prop}` is not a function.")
-					continue
-				else if ret.to_s == "Bool" then
-					if val == null or val == "true" then
-						v = true
-					else if val == "false" then
-						v = false
-					else
-						error(null, "Error: --define: method `{prop}` needs a Bool.")
-						continue
-					end
-				else if ret.to_s == "Int" then
-					if val != null and val.is_numeric then
-						v = val.to_i
-					else
-						error(null, "Error: --define: method `{prop}` needs a Int.")
-						continue
-					end
-				else if ret.to_s == "String" then
-					if val != null then
-						v = val
-					else
-						error(null, "Error: --define: method `{prop}` needs a String.")
-						continue
-					end
-				else
-					error(null, "Error: --define: method `{prop}` returns an unsupported type `{ret}`.")
-					continue
-				end
-				var pd = new MMethodDef(mclassdef, prop, location)
-				pd.msignature = prop.intro.msignature
-				pd.constant_value = v
-			end
-			check_errors
-		end
-
-		return mainmodule
+		return super
 	end
 end

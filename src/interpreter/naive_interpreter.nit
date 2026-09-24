@@ -21,6 +21,7 @@ import literal
 import semantize
 private import parser::tables
 import mixin
+import define
 private import model::serialize_model
 private import frontend::explain_assert_api
 
