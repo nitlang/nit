@@ -7,7 +7,7 @@ neo
 gtk
 nitcorn
 ffi_objc
-mpi
+\<mpi
 emscipten
 nodejs
 nitunit

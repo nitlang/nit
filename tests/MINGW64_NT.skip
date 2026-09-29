@@ -4,7 +4,7 @@ hello_cocoa
 hello_ios
 test_platform_ios
 test_platform_android
-mpi
+\<mpi
 emscripten
 neo_doxygen
 neo4j

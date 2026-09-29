@@ -2,7 +2,7 @@ android
 java
 jvm
 neo
-mpi
+\<mpi
 emscripten
 ui_test
 readline
