@@ -411,7 +411,7 @@ need_skip()
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
-	if test -n "GITLAB_CI" && echo "$1" | grep -f "gitlab_ci.skip" >/dev/null 2>&1; then
+	if test -n "$GITLAB_CI" && echo "$1" | grep -f "gitlab_ci.skip" >/dev/null 2>&1; then
 		echo "=> $2: [skip gitlab ci]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
