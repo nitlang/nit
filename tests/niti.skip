@@ -1,4 +1,3 @@
-shoot_logic
 \<nit_args1\>
 \<nit_args3\>
 \<nit_args4\>
@@ -16,7 +15,6 @@ nitin
 \<nitc_args8\>
 nitpick_args1
 nitunit_args
-test_docdown_args
 pep8analysis
 emscripten
 nitserial_args
@@ -35,7 +33,6 @@ input
 first_letter_last_letter
 fibonacci_word
 shootout_nsieve
-test_ropebuffer
 ui_test
 test_text_stat
 nitsaf_args
