@@ -152,9 +152,10 @@ class HttpRequestParser
 			for line in lines do if not line.trim.is_empty then
 				var parts = line.split_once_on('=')
 				if parts.length > 1 then
+					var key = parts[0].replace('+', " ").from_percent_encoding
 					var decoded = parts[1].replace('+', " ").from_percent_encoding
-					http_request.post_args[parts[0]] = decoded
-					http_request.all_args[parts[0]] = decoded
+					http_request.post_args[key] = decoded
+					http_request.all_args[key] = decoded
 				end
 			end
 		end
