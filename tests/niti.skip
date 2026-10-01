@@ -13,6 +13,9 @@ nitin
 \<nitc_args5\>
 \<nitc_args6\>
 \<nitc_args8\>
+\<nitc_args10\>
+\<nitc_args11\>
+\<nitc_args12\>
 nitpick_args1
 nitunit_args
 pep8analysis
