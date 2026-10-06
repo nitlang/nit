@@ -629,6 +629,21 @@ private class TypeVisitor
 	# Some loops had been visited during the visit
 	var has_loop = false
 
+	# Visit `nbody`, the body of `npropdef`
+	fun visit_body(npropdef: APropdef, nbody: nullable AExpr)
+	do
+		if nbody != null then
+			loop
+				dirty = false
+				visit_stmt(nbody)
+				if not has_loop or not dirty then break
+			end
+		end
+
+		var post_visitor = new PostTypingVisitor(self)
+		post_visitor.enter_visit(npropdef)
+	end
+
 	fun set_variable(node: AExpr, variable: Variable, mtype: nullable MType)
 	do
 		var flow = node.after_flow_context
@@ -1014,14 +1029,7 @@ redef class AMethPropdef
 		var nblock = self.n_block
 		if nblock == null then return
 
-		loop
-			v.dirty = false
-			v.visit_stmt(nblock)
-			if not v.has_loop or not v.dirty then break
-		end
-
-		var post_visitor = new PostTypingVisitor(v)
-		post_visitor.enter_visit(self)
+		v.visit_body(self, nblock)
 
 		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
@@ -1069,12 +1077,11 @@ redef class AAttrPropdef
 			v.visit_expr_subtype(nexpr, mtype)
 		end
 		var nblock = self.n_block
-		if nblock != null then
-			v.visit_stmt(nblock)
-			if not nblock.after_flow_context.is_unreachable then
-				# We reach the end of the init without having a return, it is bad
-				v.error(self, "Error: reached end of block; expected `return`.")
-			end
+		v.visit_body(self, nblock)
+
+		if nblock != null and not nblock.after_flow_context.is_unreachable then
+			# We reach the end of the init without having a return, it is bad
+			v.error(self, "Error: reached end of block; expected `return`.")
 		end
 	end
 end
@@ -1131,18 +1138,6 @@ redef class AExpr
 			res += v.yellow("(.as({ict}))")
 		end
 		return res
-	end
-
-	# Type the expression as if located in `visited_mpropdef`
-	# `TypeVisitor` and `PostTypingVisitor` will be used to do the typing, see them for more information.
-	#
-	# `visited_mpropdef`: Correspond to the evaluation context in which the expression is located.
-	fun do_typing(modelbuilder: ModelBuilder, visited_mpropdef: MPropDef)
-	do
-		var type_visitor = new TypeVisitor(modelbuilder, visited_mpropdef)
-		type_visitor.visit_stmt(self)
-		var post_visitor = new PostTypingVisitor(type_visitor)
-		post_visitor.enter_visit(self)
 	end
 end
 
