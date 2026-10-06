@@ -2,7 +2,6 @@ example_exec_ls
 leapfrog_curses
 simple_file_server
 websocket_server
-converter
 show_basedir
 langannot
 loops_infinite
@@ -10,4 +9,3 @@ read_entire_file
 letter_frequency
 threadpool_example
 chameneosredux
-actors_
