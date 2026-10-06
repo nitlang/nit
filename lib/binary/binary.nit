@@ -42,7 +42,12 @@ module binary
 
 in "C" `{
 	#include <inttypes.h>
-	#include <endian.h>
+
+	#ifdef __APPLE__
+		#include <sys/endian.h>
+	#else
+		#include <endian.h>
+	#endif
 
 	// Android compatibility
 	#ifndef be32toh

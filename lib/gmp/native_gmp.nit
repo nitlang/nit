@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Low-level GMP features
-module native_gmp is ldflags("-lgmp")
+module native_gmp is pkgconfig("gmp")
 
 in "C header" `{
     #include <gmp.h>

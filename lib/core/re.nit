@@ -86,6 +86,15 @@ private fun flag_icase: Int `{ return REG_ICASE; `}
 private fun flag_nosub: Int `{ return REG_NOSUB; `}
 private fun flag_newline: Int `{ return REG_NEWLINE; `}
 
+# Flag activating the enhanced features on macOS, 0 on other platforms
+private fun flag_enhanced: Int `{
+#ifdef REG_ENHANCED
+	return REG_ENHANCED;
+#else
+	return 0;
+#endif
+`}
+
 # Flags for `NativeRegex::regexec`
 
 private fun flag_notbol: Int `{ return REG_NOTBOL; `}
@@ -126,7 +135,7 @@ end
 
 # A regular expression pattern
 #
-# Used as a `Pattern` on intances of `Text` to call `has`, `search_all`, `replace`, etc.
+# Used as a `Pattern` on instances of `Text` to call `has`, `search_all`, `replace`, etc.
 #
 # Example:
 #
@@ -135,6 +144,13 @@ end
 #     assert "aabbbbaaaaba".has(re)
 #     assert "aabbbbaaaaba".replace(re, "+") == "a+aa+"
 #     assert "aabbbbaaaaba".split(re) == ["a", "aa", ""]
+#
+# The shortcuts `\s`, `\S`, `\w` and `\W` are supported on all platforms:
+#
+#     assert "ab, \ncd".replace("\\s".to_re, "_") == "ab,__cd"
+#     assert "ab, \ncd".replace("\\S".to_re, "_") == "___ \n__"
+#     assert "ab, \ncd".replace("\\w".to_re, "_") == "__, \n__"
+#     assert "ab, \ncd".replace("\\W".to_re, "_") == "ab___cd"
 class Regex
 	super Finalizable
 	super Pattern
@@ -150,12 +166,19 @@ class Regex
 	# character to be used as literal.
 	var extended = true is writable
 
+	# Activate the enhanced features of the regex library of macOS (the default)
+	#
+	# It is needed on macOS to support the shortcuts `\s`, `\S`, `\w` and `\W`.
+	# If `false` on macOS, only the POSIX syntax is accepted.
+	# This has no effect on other platforms, the GNU libc always accepts these shortcuts.
+	var enhanced = true is writable
+
 	# Ignore case when matching letters
 	var ignore_case = false is writable
 
 	# Optimize `self` for `String::has` and `is_in`, but do not support searches
 	#
-	# If `true`, `self` cannont be used with `String::search_all`, `String::replace`
+	# If `true`, `self` cannot be used with `String::search_all`, `String::replace`
 	# or `String::split`.
 	var optimize_has = false is writable
 
@@ -202,11 +225,14 @@ class Regex
 	# should call it to check for errors.
 	#
 	#     assert "ab".to_re.compile == null
-	#     assert "[ab".to_re.compile.message.has_prefix("Unmatched [")
+	#
+	#     # Errors on "Unmatched [" or "brackets ([ ]) not balanced".
+	#     assert "[ab".to_re.compile.message.has("[")
 	fun compile: nullable Error
 	do
 		var cflags = 0
 		if extended then cflags |= flag_extended
+		if enhanced then cflags |= flag_enhanced
 		if ignore_case then cflags |= flag_icase
 		if optimize_has then cflags |= flag_nosub
 		if newline then cflags |= flag_newline
