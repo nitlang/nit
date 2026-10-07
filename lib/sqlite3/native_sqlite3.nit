@@ -127,6 +127,31 @@ extern class NativeStatement `{sqlite3_stmt*`}
 		return sqlite3_column_count(self);
 	`}
 
+	# Number of `?` parameters in this statement
+	fun bind_parameter_count: Int `{ return sqlite3_bind_parameter_count(self); `}
+
+	# Bind an integer to the parameter `i`, counting from 1
+	fun bind_int(i, value: Int): Sqlite3Code `{ return sqlite3_bind_int64(self, i, value); `}
+
+	# Bind a float to the parameter `i`, counting from 1
+	fun bind_double(i: Int, value: Float): Sqlite3Code `{ return sqlite3_bind_double(self, i, value); `}
+
+	# Bind a copy of the text `value` to the parameter `i`, counting from 1
+	fun bind_text(i: Int, value: CString): Sqlite3Code `{
+		return sqlite3_bind_text(self, i, value, -1, SQLITE_TRANSIENT);
+	`}
+
+	# Bind a copy of `value`, of `length` bytes, to the parameter `i`, counting from 1
+	fun bind_blob(i: Int, value: Pointer, length: Int): Sqlite3Code `{
+		return sqlite3_bind_blob(self, i, value, length, SQLITE_TRANSIENT);
+	`}
+
+	# Bind null to the parameter `i`, counting from 1
+	fun bind_null(i: Int): Sqlite3Code `{ return sqlite3_bind_null(self, i); `}
+
+	# Reset all parameters to null
+	fun clear_bindings: Sqlite3Code `{ return sqlite3_clear_bindings(self); `}
+
 	# Reset this statement to its original state, to be reexecuted
 	fun reset: Sqlite3Code `{ return sqlite3_reset(self); `}
 

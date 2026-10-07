@@ -16,6 +16,19 @@
 
 # Services to manipulate a Sqlite3 database
 #
+# ~~~
+# var db = new Sqlite3DB.open(":memory:")
+#
+# assert db.create_table("users (name TEXT, age INTEGER)")
+# assert db.insert_with("INTO users VALUES (?, ?)", "Bob", 42)
+#
+# for row in db.select_with("age FROM users WHERE name = ?", "Bob") do
+#     assert row[0].to_i == 42
+# end
+#
+# db.close
+# ~~~
+#
 # For more information, refer to the documentation of http://www.sqlite.org/docs.html
 module sqlite3
 
@@ -65,6 +78,28 @@ class Sqlite3DB
 		return stmt
 	end
 
+	# Prepare a statement from `sql`, binding `values` to `?` placeholders
+	#
+	# Returns the `Statement` or `null` on error.
+	#
+	# ~~~
+	# var db = new Sqlite3DB.open(":memory:")
+	# var stmt = db.prepare_with("SELECT ? + ?", 1, 2)
+	# assert stmt != null
+	# for row in stmt do assert row[0].to_i == 3
+	# db.close
+	# ~~~
+	fun prepare_with(sql: Text, values: nullable Sqlite3Data...): nullable Statement
+	do
+		var stmt = prepare(sql)
+		if stmt == null then return null
+		if not stmt.bind_all(values) then
+			stmt.close
+			return null
+		end
+		return stmt
+	end
+
 	# Execute the `sql` statement and return `true` on success
 	fun execute(sql: Text): Bool
 	do
@@ -72,25 +107,70 @@ class Sqlite3DB
 		return err.is_ok
 	end
 
-	# Create a table on the DB with a statement beginning with "CREATE TABLE ", followed by `rest`
+	# Execute `sql` binding `values` to `?` placeholders
+	#
+	# Returns whether the statement succeeded.
+	#
+	# ~~~
+	# var db = new Sqlite3DB.open(":memory:")
+	# assert db.create_table("users (name TEXT)")
+	# assert db.execute_with("INSERT INTO users VALUES (?)", "Bob")
+	# assert not db.execute_with("INSERT INTO users VALUES (?, ?)", "Bob")
+	# db.close
+	# ~~~
+	fun execute_with(sql: Text, values: nullable Sqlite3Data...): Bool
+	do
+		var stmt = prepare_with(sql, values...)
+		if stmt == null then return false
+
+		var err = stmt.native_statement.step
+		stmt.close
+		return err.is_done or err.is_row
+	end
+
+	# Create a table with a statement beginning with "CREATE TABLE ", followed by `rest`
 	#
 	# This method does not escape special characters.
 	fun create_table(rest: Text): Bool do return execute("CREATE TABLE " + rest)
 
-	# Insert in the DB with a statement beginning with "INSERT ", followed by `rest`
+	# Insert using a statement beginning with "INSERT ", followed by `rest`
 	#
-	# This method does not escape special characters.
+	# This method does not escape special characters, see `insert_with`.
 	fun insert(rest: Text): Bool do return execute("INSERT " + rest)
 
-	# Replace in the DB with a statement beginning with "REPLACE", followed by `rest`
+	# Insert with "INSERT " followed by `rest`, binding `values` to `?` placeholders
 	#
-	# This method does not escape special characters.
+	# Returns whether the statement succeeded.
+	fun insert_with(rest: Text, values: nullable Sqlite3Data...): Bool
+	do
+		return execute_with("INSERT " + rest, values...)
+	end
+
+	# Replace using a statement beginning with "REPLACE ", followed by `rest`
+	#
+	# This method does not escape special characters, see `replace_with`.
 	fun replace(rest: Text): Bool do return execute("REPLACE " + rest)
 
-	# Select from the DB with a statement beginning with "SELECT ", followed by `rest`
+	# Replace with "REPLACE " followed by `rest`, binding `values` to `?` placeholders
 	#
-	# This method does not escape special characters.
+	# Returns whether the statement succeeded.
+	fun replace_with(rest: Text, values: nullable Sqlite3Data...): Bool
+	do
+		return execute_with("REPLACE " + rest, values...)
+	end
+
+	# Select with a statement beginning with "SELECT ", followed by `rest`
+	#
+	# This method does not escape special characters, see `select_with`.
 	fun select(rest: Text): nullable Statement do return prepare("SELECT " + rest)
+
+	# Select with "SELECT " followed by `rest`, binding `values` to `?` placeholders
+	#
+	# Returns the `Statement` or `null` on error.
+	fun select_with(rest: Text, values: nullable Sqlite3Data...): nullable Statement
+	do
+		return prepare_with("SELECT " + rest, values...)
+	end
 
 	# TODO add more prefix here as needed
 
@@ -140,6 +220,60 @@ class Statement
 
 		is_open = false
 		native_statement.finalize
+	end
+
+	# Bind `value` to the parameter at `index`, counting from 1
+	#
+	# Returns whether the binding succeeded.
+	#
+	# ~~~
+	# var db = new Sqlite3DB.open(":memory:")
+	# var stmt = db.prepare("SELECT ?, ?, ?, ?")
+	# assert stmt != null
+	# assert stmt.bind(1, 1)
+	# assert stmt.bind(2, 2.5)
+	# assert stmt.bind(3, "three")
+	# assert stmt.bind(4, null)
+	# assert not stmt.bind(5, 5)
+	# for row in stmt do
+	#     assert row[0].value == 1
+	#     assert row[1].value == 2.5
+	#     assert row[2].value == "three"
+	#     assert row[3].value == null
+	# end
+	# db.close
+	# ~~~
+	fun bind(index: Int, value: nullable Sqlite3Data): Bool
+	do
+		assert is_open else print_error "Error: bind on a closed statement"
+
+		if value == null then return native_statement.bind_null(index).is_ok
+
+		return value.bind_to(self, index)
+	end
+
+	# Bind individual `values` to the parameters
+	#
+	# Returns whether all the bindings succeeded.
+	fun bind_all(values: SequenceRead[nullable Sqlite3Data]): Bool
+	do
+		assert is_open else print_error "Error: bind_all on a closed statement"
+
+		var len_match = values.length == native_statement.bind_parameter_count
+		if not len_match then return false
+
+		for i in [0 .. values.length[ do
+			if not bind(i + 1, values[i]) then return false
+		end
+
+		return true
+	end
+
+	# Reset all parameters to null
+	fun clear_bindings
+	do
+		assert is_open else print_error "Error: clear_bindings on a closed statement"
+		native_statement.clear_bindings
 	end
 
 	# Reset this statement and return a `StatementIterator` to iterate over the result
@@ -312,13 +446,36 @@ class StatementIterator
 end
 
 # A data type supported by Sqlite3
-interface Sqlite3Data end
+interface Sqlite3Data
+	private fun bind_to(statement: Statement, index: Int): Bool is abstract
+end
 
-redef universal Int super Sqlite3Data end
+redef universal Int
+	super Sqlite3Data
 
-redef universal Float super Sqlite3Data end
+	redef fun bind_to(statement, index)
+	do
+		return statement.native_statement.bind_int(index, self).is_ok
+	end
+end
 
-redef class String super Sqlite3Data end
+redef universal Float
+	super Sqlite3Data
+
+	redef fun bind_to(statement, index)
+	do
+		return statement.native_statement.bind_double(index, self).is_ok
+	end
+end
+
+redef class String
+	super Sqlite3Data
+
+	redef fun bind_to(statement, index)
+	do
+		return statement.native_statement.bind_text(index, to_cstring).is_ok
+	end
+end
 
 redef class Text
 
@@ -358,4 +515,9 @@ class Blob
 
 	# Size of the blob
 	var length: Int
+
+	redef fun bind_to(statement, index)
+	do
+		return statement.native_statement.bind_blob(index, pointer, length).is_ok
+	end
 end
