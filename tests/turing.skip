@@ -3,11 +3,11 @@ _linux
 android
 gles
 curl
-neo
+test_neo
 gtk
 nitcorn
 ffi_objc
-mpi
+\<mpi
 emscipten
 nodejs
 nitunit

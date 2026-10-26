@@ -1040,11 +1040,12 @@ private class CustomizedRuntimeFunction
 		if not o isa CustomizedRuntimeFunction then return false
 		if self.mmethoddef != o.mmethoddef then return false
 		if self.recv != o.recv then return false
+		if self.c_name != o.c_name then return false
 		return true
 	end
 
 	# used in the compiler work-list
-	redef fun hash do return self.mmethoddef.hash + self.recv.hash
+	redef fun hash do return self.mmethoddef.hash + self.recv.hash + self.c_name.hash
 
 	redef fun to_s
 	do
@@ -1166,14 +1167,9 @@ class CustomizedThunkFunction
         super ThunkFunction
         super CustomizedRuntimeFunction
 
-        redef fun c_name
+        redef fun build_c_name
         do
                 return "THUNK_" + super
-        end
-
-        redef fun hash
-        do
-                return super + c_name.hash
         end
 
         redef fun resolve_receiver(v)

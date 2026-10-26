@@ -88,8 +88,8 @@ private class GLSLValidationPhase
 
 		shader.write_to_file path
 
-		# Execute the validator
-		var proc_validator = new ProcessReader("glslangValidator", path)
+		# Execute the validator, `-C` reports all errors instead of stopping at the first
+		var proc_validator = new ProcessReader("glslangValidator", "-C", path)
 		proc_validator.wait
 		var lines = proc_validator.read_all.split('\n')
 		proc_validator.close

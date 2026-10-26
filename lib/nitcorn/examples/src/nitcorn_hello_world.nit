@@ -58,25 +58,39 @@ class ParamAction
 	do
 		var response = new HttpResponse(200)
 		var name = http_request.param("name")
+		var body
 		if name == null then
-			response.body = "No name..."
+			body = "No name..."
 		else
-			response.body = "Hello {name}"
+			body = "Hello {name}"
 		end
+
+		# Echo the arguments of a POST request
+		for key, value in http_request.post_args do body += "\n{key} = {value}"
+
+		response.body = body
 		return response
 	end
 end
 
 
-var vh = new VirtualHost("localhost:8080")
+# Run the hello world Web server on `interfac`
+#
+# Serve files other than the dynamic pages from the local directory `www_root`.
+fun hello_world_server(interfac, www_root: String)
+do
+	var vh = new VirtualHost(interfac)
 
-# Serve index.html with our custom handler
-vh.routes.add new Route("/index.html", new StaticAction)
-vh.routes.add new Route("/hello/:name", new ParamAction)
+	# Serve index.html with our custom handler
+	vh.routes.add new Route("/index.html", new StaticAction)
+	vh.routes.add new Route("/hello/:name", new ParamAction)
 
-# Serve everything else with a standard `FileServer` with a root at "www/hello_world/"
-vh.routes.add new Route(null, new FileServer("www/hello_world/"))
+	# Serve everything else with a standard `FileServer` with a root at `www_root`
+	vh.routes.add new Route(null, new FileServer(www_root))
 
-var factory = new HttpFactory.and_libevent
-factory.config.virtual_hosts.add vh
-factory.run
+	var factory = new HttpFactory.and_libevent
+	factory.config.virtual_hosts.add vh
+	factory.run
+end
+
+hello_world_server("localhost:8080", "www/hello_world/")
