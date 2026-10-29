@@ -32,7 +32,7 @@ redef class Lexer
 	# Normal token stream up to the imports, then return EOF
 	#
 	# Look ahead for a definition or block opening as a way to detect that
-	# we're done with imports. The look ahead allows to skip over blank tokens
+	# we're done with imports. The look ahead allows to skip over loose tokens
 	# and keywords before the definition markers like visibility and `redef`.
 	redef fun get_token
 	do
@@ -54,11 +54,11 @@ redef class Lexer
 	# Is `t` the first token of the body? Looking ahead as needed
 	private fun is_body_start(t: Token): Bool
 	do
-		if not t.is_prefix then return t.starts_body
+		if not t.is_definition_prefix then return t.starts_body
 
 		var n = scan_significant
 		ahead.add n
-		while n.is_blank or n.is_prefix do
+		while n.can_be_loose or n.is_definition_prefix do
 			n = scan_significant
 			ahead.add n
 		end
@@ -75,41 +75,7 @@ redef class Lexer
 end
 
 redef class Token
-	private fun is_blank: Bool do return false
-	private fun is_prefix: Bool do return false
 	private fun starts_body: Bool do return false
-end
-
-# Blanks
-
-redef class TEol
-	redef fun is_blank do return true
-end
-
-redef class TComment
-	redef fun is_blank do return true
-end
-
-# Prefixes
-
-redef class TKwpublic
-	redef fun is_prefix do return true
-end
-
-redef class TKwprotected
-	redef fun is_prefix do return true
-end
-
-redef class TKwprivate
-	redef fun is_prefix do return true
-end
-
-redef class TKwintrude
-	redef fun is_prefix do return true
-end
-
-redef class TKwredef
-	redef fun is_prefix do return true
 end
 
 # Definitions

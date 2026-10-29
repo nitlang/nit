@@ -389,6 +389,18 @@ abstract class Token
 	# See `blank_before` to get the whitespace that separate tokens.
 	var is_loose = false
 
+	# Can `self` be discarded by the parser and become `is_loose`?
+	#
+	# True for end of lines (`TEol`) and comments (`TComment`).
+	#
+	# For example, a comment acting as documentation is attached to a definition
+	# and not marked `is_loose`, while an unattached comment is loose. In both
+	# cases, we consider the token kind to be potentially loose before parsing.
+	fun can_be_loose: Bool do return false
+
+	# Is `self` a `redef` or visibility keyword that may precede a definition?
+	fun is_definition_prefix: Bool do return false
+
 	redef fun is_structural do return true
 
 	redef fun dump_info(v) do
@@ -498,6 +510,7 @@ end
 # Token of end of line (basically `\n`)
 class TEol
 	super Token
+	redef fun can_be_loose do return true
 	redef fun to_s
 	do
 		return "end of line"
@@ -508,6 +521,7 @@ end
 # Starts with the `#` and contains the final end-of-line (if any)
 class TComment
 	super Token
+	redef fun can_be_loose do return true
 end
 
 # A token associated with a keyword
@@ -582,6 +596,7 @@ end
 # The keyword `redef`
 class TKwredef
 	super TokenKeyword
+	redef fun is_definition_prefix do return true
 end
 
 # The keyword `is`
@@ -612,21 +627,25 @@ end
 # The keyword `public`
 class TKwpublic
 	super TokenKeyword
+	redef fun is_definition_prefix do return true
 end
 
 # The keyword `protected`
 class TKwprotected
 	super TokenKeyword
+	redef fun is_definition_prefix do return true
 end
 
 # The keyword `private`
 class TKwprivate
 	super TokenKeyword
+	redef fun is_definition_prefix do return true
 end
 
 # The keyword `intrude`
 class TKwintrude
 	super TokenKeyword
+	redef fun is_definition_prefix do return true
 end
 
 # The keyword `if`
