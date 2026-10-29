@@ -670,6 +670,9 @@ redef class ModelBuilder
 		return path.realpath
 	end
 
+	# Errors of the lexer or parser that prevented a module from loading
+	var parse_errors = new Array[AError]
+
 	# Try to load a module AST using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
 	#
@@ -702,6 +705,7 @@ redef class ModelBuilder
 			var neof = tree.n_eof
 			assert neof isa AError
 			error(neof, neof.message)
+			parse_errors.add neof
 			return null
 		end
 
