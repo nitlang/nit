@@ -36,7 +36,7 @@ redef class CommandParser
 			error.print_message(no_color)
 			print ""
 		end
-		if cmd == null then return
+		if cmd == null or error isa CmdError then return
 		cmd.execute(no_color)
 	end
 end
