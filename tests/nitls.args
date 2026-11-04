@@ -12,3 +12,8 @@ test_prog/game/excluded.nit test_prog/game/excluded_dir/more.nit -t --no-color
 -M nitls_header_redef.nit
 -M error_mod_unk.nit --no-color
 -M nitls_error_header.nit
+-M base_module_conditional.nit
+-M base_module_conditional_client.nit
+-M base_module_conditional.nit module_2.nit
+-M base_module_conditional.nit -m module_2.nit
+-M base_module_conditional.nit module_0.nit -m module_2.nit
