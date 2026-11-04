@@ -23,6 +23,7 @@ import platform
 import c_tools
 private import annotation
 import mixin
+import define
 import counter
 import pkgconfig
 private import explain_assert_api

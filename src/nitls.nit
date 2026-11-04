@@ -18,6 +18,7 @@
 module nitls
 
 import modelbuilder
+import mixin
 import loader_header_only
 import ordered_tree
 import console
@@ -154,9 +155,10 @@ if sum == 0 then
 end
 
 var mmodules = mb.scan_full(files)
+var mixins = mb.scan_full(tc.opt_mixins.value)
 
 # Load modules to get more informations
-for mmodule in mmodules do
+for mmodule in mmodules + mixins do
 	if not opt_paths.value or opt_depends.value then
 		var ast = mmodule.parse(mb)
 		if ast != null and opt_depends.value then
@@ -167,6 +169,9 @@ end
 #tc.check_errors
 
 if opt_depends.value then
+	# Apply the conditional importations
+	for mmodule in mmodules do mb.combine_main_module([mmodule] + mixins)
+
 	# Extends the list of module with the loaded ones
 	mmodules = mb.parsed_modules.to_a
 end
