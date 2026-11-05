@@ -1,3 +1,5 @@
 base_simple3.nit -c A --no-color
 base_simple3.nit -c foo --no-color
 base_simple3.nit -c "defs: base_simple3::base_simple3" --no-color
+base_simple3.nit -c "lin: NotAnEntity" --no-color
+nitx_annotation_args.nit -I ../lib/core -c "call: nitx_annotation_args::A::foo" --no-color

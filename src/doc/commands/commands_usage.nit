@@ -199,7 +199,9 @@ private class MPropertyCallVisitor
 	do
 		node.visit_all(self)
 		if not node isa ASendExpr then return
-		calls.add node.callsite.as(not null).mproperty
+		var callsite = node.callsite
+		if callsite == null then return
+		calls.add callsite.mproperty
 	end
 end
 
