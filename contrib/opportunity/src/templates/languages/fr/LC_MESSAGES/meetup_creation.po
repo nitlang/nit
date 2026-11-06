@@ -1,3 +1,8 @@
+msgid ""
+msgstr ""
+"Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
 #: templates::meetup_creation 52--109:129, templates::meetup_creation 125--24:44
 msgid "Another opportunity"
 msgstr "Une autre opportunité"

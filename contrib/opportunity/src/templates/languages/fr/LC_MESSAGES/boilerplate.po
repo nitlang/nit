@@ -1,3 +1,8 @@
+msgid ""
+msgstr ""
+"Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
 msgid "Opportunity - The meetup planner"
 msgstr "Opportunité - L'organisateur d'événements"
 

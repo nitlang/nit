@@ -57,7 +57,7 @@ class OpportunityDB
 
 	# Find a `People` by its id, or `null` if it could not be found
 	fun find_people_by_id(id: Int): nullable People do
-		var req = select("* from people where id={id};")
+		var req = select_with("* FROM people WHERE id = ?", id)
 		for i in req do
 			return new People.from_db(i[0].to_i, i[1].to_s, i[2].to_s)
 		end
@@ -66,7 +66,7 @@ class OpportunityDB
 
 	# Find a `Meetup` by its id or `null` if it could not be found
 	fun find_meetup_by_id(id: String): nullable Meetup do
-		var req = select("* FROM meetups where id={id.to_sql_string};")
+		var req = select_with("* FROM meetups WHERE id = ?", id)
 		for i in req do
 			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s, i[4].to_i)
 		end
@@ -75,7 +75,7 @@ class OpportunityDB
 
 	# Find an `Answer` by its `id` or `null` if it could not be found
 	fun find_answer_by_id(id: Int): nullable Answer do
-		var req = select("* FROM answers WHERE id={id};")
+		var req = select_with("* FROM answers WHERE id = ?", id)
 		for i in req do
 			return new Answer.from_db(i[0].to_i, i[2].to_s)
 		end
@@ -105,7 +105,7 @@ class OpportunityDB
 	#
 	# Returns true if sucessful, false otherwise
 	fun remove_people_by_id(id: Int): Bool do
-		var rq = execute("DELETE FROM people WHERE id = {id};")
+		var rq = execute_with("DELETE FROM people WHERE id = ?", id)
 		if not rq then
 			print_error "Opportunity error deleting people {id}"
 			print_error error or else "Unknown error"
@@ -154,7 +154,7 @@ class People
 	# NOTE: If `self` does not exist in the Database, no answers will be fetched
 	fun load_answers(db: OpportunityDB, meetup: Meetup) do
 		self.answers = new HashMap[Answer, Int]
-		var req = db.select("answers.id, answers.name, part_answers.value FROM part_answers, answers WHERE part_answers.id_part={id} AND answers.id=part_answers.id_ans AND answers.meetup_id={meetup.id.html_escape.to_sql_string} GROUP BY answers.id;")
+		var req = db.select_with("answers.id, answers.name, part_answers.value FROM part_answers, answers WHERE part_answers.id_part = ? AND answers.id = part_answers.id_ans AND answers.meetup_id = ? GROUP BY answers.id", id, meetup.id)
 		for i in req do
 			var ans = new Answer.from_db(i[0].to_i, i[1].to_s)
 			answers[ans] = i[2].to_i
@@ -165,14 +165,14 @@ class People
 
 	redef fun commit(db) do
 		if id == -1 then
-			if not db.execute("INSERT INTO people (name,surname) VALUES ({name.html_escape.to_sql_string}, {surname.html_escape.to_sql_string});") then
+			if not db.execute_with("INSERT INTO people (name, surname) VALUES (?, ?)", name.html_escape, surname.html_escape) then
 				print_error "Opportunity error while adding people {self}"
 				print_error db.error or else "Unknown error"
 				return false
 			end
 			id = db.last_insert_rowid
 		else
-			if not db.execute("UPDATE people SET name={name.html_escape.to_sql_string}, surname={surname.html_escape.to_sql_string} WHERE ID={id};") then
+			if not db.execute_with("UPDATE people SET name = ?, surname = ? WHERE id = ?", name.html_escape, surname.html_escape, id) then
 				print_error "Opportunity error while updating people {self}"
 				print_error db.error or else "Unknown error"
 				return false
@@ -181,16 +181,16 @@ class People
 		for i,j in answers do
 			if i.id == -1 then i.commit(db)
 			var val = j
-			var s = db.select("* FROM part_answers WHERE id_part={id} AND id_ans={i.id}")
+			var s = db.select_with("* FROM part_answers WHERE id_part = ? AND id_ans = ?", id, i.id)
 			if s != null and s.iterator.is_ok then
-				if not db.execute("UPDATE part_answers SET value={j} WHERE id_part={id} AND id_ans={i.id};") then
+				if not db.execute_with("UPDATE part_answers SET value = ? WHERE id_part = ? AND id_ans = ?", j, id, i.id) then
 					print_error "Opportunity error while updating part_answers {id}|{i.id} = {j}"
 					print_error db.error or else "Unknown error"
 					return false
 				end
 				continue
 			end
-			if not db.execute("INSERT INTO part_answers(id_part, id_ans, value) VALUES ({id},{i.id},{val});") then
+			if not db.execute_with("INSERT INTO part_answers (id_part, id_ans, value) VALUES (?, ?, ?)", id, i.id, val) then
 				print_error "Opportunity error while adding part_answers {id}|{i.id}|{j}"
 				print_error db.error or else "Unknown error"
 				return false
@@ -226,7 +226,7 @@ class Meetup
 		if id == "" then
 			return new Array[Answer]
 		end
-		var res = db.select("id, name FROM answers WHERE meetup_id={id.to_sql_string}")
+		var res = db.select_with("id, name FROM answers WHERE meetup_id = ?", id)
 		var ans = new Array[Answer]
 		for i in res do
 			ans.add new Answer.from_db(i[0].to_i, i[1].to_s)
@@ -236,7 +236,7 @@ class Meetup
 
 	# Gets the list of the participants of a `Meetup`
 	fun participants(db: OpportunityDB): Array[People] do
-		var resp = db.select("people.* FROM people, meetups, answers, part_answers WHERE meetups.id={id.to_sql_string} AND answers.meetup_id={id.to_sql_string} AND part_answers.id_ans=answers.id AND people.id=part_answers.id_part GROUP BY people.id;")
+		var resp = db.select_with("people.* FROM people, meetups, answers, part_answers WHERE meetups.id = ? AND answers.meetup_id = ? AND part_answers.id_ans = answers.id AND people.id = part_answers.id_part GROUP BY people.id", id, id)
 		var arr = new Array[People]
 		for i in resp do
 			arr.add (new People.from_db(i[0].to_i, i[1].to_s, i[2].to_s))
@@ -248,7 +248,7 @@ class Meetup
 		if id == "" then
 			var time = get_time
 			var tmpid = (name + date + place + time.to_s).sha1.hexdigest
-			if not db.execute("INSERT INTO meetups (id, name, date, place, answer_mode) VALUES({tmpid.to_sql_string}, {name.html_escape.to_sql_string}, {date.html_escape.to_sql_string}, {place.html_escape.to_sql_string}, {answer_mode});") then
+			if not db.execute_with("INSERT INTO meetups (id, name, date, place, answer_mode) VALUES (?, ?, ?, ?, ?)", tmpid, name.html_escape, date.html_escape, place.html_escape, answer_mode) then
 				print_error "Opportunity error recording entry Meetup {self}"
 				print_error db.error or else "Unknown error"
 				return false
@@ -256,7 +256,7 @@ class Meetup
 			id = tmpid
 			return true
 		else
-			return db.execute("UPDATE meetups SET name={name.html_escape.to_sql_string}, date={date.html_escape.to_sql_string}, place={place.html_escape.to_sql_string}, answer_mode={answer_mode} WHERE ID={id.to_sql_string};")
+			return db.execute_with("UPDATE meetups SET name = ?, date = ?, place = ?, answer_mode = ? WHERE id = ?", name.html_escape, date.html_escape, place.html_escape, answer_mode, id)
 		end
 	end
 
@@ -290,7 +290,7 @@ class Answer
 	# REQUIRE: is loaded in database
 	fun load_meetup(db: OpportunityDB): Meetup do
 		assert id != -1
-		var res = db.select("meetups.* FROM meetups, answers WHERE answers.id={id} AND answers.meetup_id=meetups.id;")
+		var res = db.select_with("meetups.* FROM meetups, answers WHERE answers.id = ? AND answers.meetup_id = meetups.id", id)
 		for i in res do
 			return new Meetup.from_db(i[0].to_s, i[1].to_s, i[2].to_s, i[3].to_s, i[4].to_i)
 		end
@@ -302,7 +302,7 @@ class Answer
 	fun count(db: OpportunityDB): Int do
 		if id == -1 then return -1
 		var count = 0
-		var res = db.select("part_answers.value FROM part_answers WHERE part_answers.id_ans={id};")
+		var res = db.select_with("part_answers.value FROM part_answers WHERE part_answers.id_ans = ?", id)
 		if meetup == null then meetup = load_meetup(db)
 		for i in res do
 			if meetup.answer_mode == 0 then
@@ -318,7 +318,7 @@ class Answer
 	fun score(db: OpportunityDB): Int do
 		if id == -1 then return -1
 		var score = 0
-		var res = db.select("part_answers.value FROM part_answers WHERE part_answers.id_ans={id};")
+		var res = db.select_with("part_answers.value FROM part_answers WHERE part_answers.id_ans = ?", id)
 		for i in res do
 			score += i[0].to_i
 		end
@@ -335,14 +335,14 @@ class Answer
 			end
 		end
 		if id == -1 then
-			if not db.execute("INSERT INTO answers (name, meetup_id) VALUES({name.html_escape.to_sql_string}, {m.id.to_sql_string});") then
+			if not db.execute_with("INSERT INTO answers (name, meetup_id) VALUES (?, ?)", name.html_escape, m.id) then
 				print_error "Opportunity error creating {self} in database"
 				print_error db.error or else "Unknown error"
 				return false
 			end
 			id = db.last_insert_rowid
 		else
-			if not db.execute("UPDATE answers SET name=({name.html_escape.to_sql_string}) WHERE meetup_id={m.id.to_sql_string};") then
+			if not db.execute_with("UPDATE answers SET name = ? WHERE meetup_id = ?", name.html_escape, m.id) then
 				print_error "Opportunity error updating {self} in database"
 				print_error db.error or else "Unknown error"
 				return false
